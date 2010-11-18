@@ -96,8 +96,25 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
       return null;
     }
     if (value instanceof CharSequence) {
-      String name = this.stringUtil.fromCamlCase(value.toString(), '_').toUpperCase(Locale.US);
-      return Enum.valueOf(targetClass, name);
+      String name = value.toString();
+      Enum[] constants = targetClass.getEnumConstants();
+      for (Enum e : constants) {
+        if (name.equals(e.name())) {
+          return e;
+        }
+      }
+      String normalizedName = name.replace('-', '_').toUpperCase(Locale.US);
+      for (Enum e : constants) {
+        if (normalizedName.equals(e.name())) {
+          return e;
+        }
+      }
+      normalizedName = this.stringUtil.fromCamlCase(name, '_').toUpperCase(Locale.US);
+      for (Enum e : constants) {
+        if (normalizedName.equals(e.name())) {
+          return e;
+        }
+      }
     } else if (value instanceof Enum<?>) {
       String name = ((Enum<?>) value).name();
       return Enum.valueOf(targetClass, name);

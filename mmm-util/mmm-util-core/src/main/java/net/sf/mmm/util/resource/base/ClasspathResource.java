@@ -4,6 +4,7 @@
 package net.sf.mmm.util.resource.base;
 
 import java.net.URL;
+import java.util.Date;
 
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -207,6 +208,14 @@ public class ClasspathResource extends AbstractDataResource {
       throw new ResourceNotAvailableException(this.path);
     }
     return this.url;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Date getLastModificationDate() {
+
+    return null;
   }
 
   /**

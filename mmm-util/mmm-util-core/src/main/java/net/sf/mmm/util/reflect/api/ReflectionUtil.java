@@ -12,6 +12,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
@@ -67,13 +68,13 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * 
    * @param type is the string representation of the requested type.
    * @return the requested type.
-   * @throws ClassNotFoundException if a class could NOT be found (e.g. in
+   * @throws TypeNotFoundException if a class could NOT be found (e.g. in
    *         <code>java.util.Map&lt;java.long.String&gt;</code> - what should be
    *         <code>lang</code> instead of <code>long</code>).
-   * @throws IllegalArgumentException if the given <code>type</code> could NOT
-   *         be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
+   * @throws NlsIllegalArgumentException if the given <code>type</code> could
+   *         NOT be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
    */
-  Type toType(String type) throws ClassNotFoundException, IllegalArgumentException;
+  Type toType(String type) throws TypeNotFoundException, NlsIllegalArgumentException;
 
   /**
    * This method is the analogy to {@link Class#forName(String)} for creating a
@@ -82,14 +83,14 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param type is the string representation of the requested type.
    * @param resolver is used to resolve classes.
    * @return the requested type.
-   * @throws ClassNotFoundException if a class could NOT be found (e.g. in
+   * @throws TypeNotFoundException if a class could NOT be found (e.g. in
    *         <code>java.util.Map&lt;java.long.String&gt;</code> - what should be
    *         <code>lang</code> instead of <code>long</code>).
-   * @throws IllegalArgumentException if the given <code>type</code> could NOT
-   *         be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
+   * @throws NlsIllegalArgumentException if the given <code>type</code> could
+   *         NOT be parsed (e.g. <code>java.util.Map&lt;&lt;String&gt;</code>).
    */
-  Type toType(String type, ClassResolver resolver) throws ClassNotFoundException,
-      IllegalArgumentException;
+  Type toType(String type, ClassResolver resolver) throws TypeNotFoundException,
+      NlsIllegalArgumentException;
 
   /**
    * This method gets the string representation of a {@link Type}. Instead of
@@ -358,9 +359,9 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @param qualifiedClassNames is a collection containing the
    *        {@link Class#getName() qualified names} of the classes to load.
    * @return a {@link Set} with all loaded classes.
-   * @throws ClassNotFoundException if one of the classes could NOT be loaded.
+   * @throws TypeNotFoundException if one of the classes could NOT be loaded.
    */
-  Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) throws ClassNotFoundException;
+  Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) throws TypeNotFoundException;
 
   /**
    * This method loads the classes given as {@link Collection} of
@@ -375,10 +376,10 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return a {@link Set} with all loaded classes that are
    *         {@link Filter#accept(Object) accepted} by the given
    *         <code>filter</code>.
-   * @throws ClassNotFoundException if one of the classes could NOT be loaded.
+   * @throws TypeNotFoundException if one of the classes could NOT be loaded.
    */
   Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames, Filter<? super Class<?>> filter)
-      throws ClassNotFoundException;
+      throws TypeNotFoundException;
 
   /**
    * This method loads the classes given as {@link Collection} of names by
@@ -395,10 +396,10 @@ public interface ReflectionUtil extends GenericTypeFactory {
    * @return a {@link Set} with all loaded classes that are
    *         {@link Filter#accept(Object) accepted} by the given
    *         <code>filter</code>.
-   * @throws ClassNotFoundException if one of the classes could NOT be loaded.
+   * @throws TypeNotFoundException if one of the classes could NOT be loaded.
    */
   Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
-      Filter<? super Class<?>> filter) throws ClassNotFoundException;
+      Filter<? super Class<?>> filter) throws TypeNotFoundException;
 
   /**
    * This method finds all resources that are located in the package identified

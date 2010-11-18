@@ -7,6 +7,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.value.api.GenericValueConverter;
 
 /**
  * This is the interface for a factory of generic {@link MutableGenericContext
@@ -46,5 +47,23 @@ public interface GenericContextFactory {
    */
   @SuppressWarnings("rawtypes")
   MutableGenericContext createContext(MapFactory<? extends Map> mapFactory);
+
+  /**
+   * This method creates a new instance of a {@link MutableGenericContext} using
+   * the given {@link MapFactory}.
+   * 
+   * @param mapFactory is the factory used to create maps for the underlying
+   *        context.
+   * @param valueConverter is the {@link GenericValueConverter} used for
+   *        {@link GenericValueConverter#convertValue(Object, Object, Class, Object)
+   *        converting} variables if
+   *        {@link GenericContext#getVariable(String, Class) requested} for a
+   *        different type.
+   * @return the new context.
+   * @since 2.0.0
+   */
+  @SuppressWarnings("rawtypes")
+  MutableGenericContext createContext(MapFactory<? extends Map> mapFactory,
+      GenericValueConverter<Object> valueConverter);
 
 }

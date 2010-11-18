@@ -15,13 +15,13 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
 import net.sf.mmm.util.process.api.ProcessUtil;
+
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link ProcessUtilImpl}.
@@ -77,7 +77,7 @@ public class ProcessUtilTest {
     } catch (TimeoutException e) {
       // expected
       long delay = System.currentTimeMillis() - start;
-      assertTrue(delay >= 100);
+      assertTrue("Delay was " + delay, delay >= 100);
       // test should also work under load so we do NOT check upper bound...
       // assertTrue(delay < 200);
     }

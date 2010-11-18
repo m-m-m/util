@@ -206,6 +206,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_ANNOTATION_NOT_FOR_TARGET = "The given annotation "
       + "\"{annotation}\" can NOT annotate the target \"{1}\"!";
 
+  /** @see net.sf.mmm.util.reflect.api.TypeNotFoundException */
+  public static final String ERR_CLASS_NOT_FOUND = "The type \"{type}\" could NOT be found!";
+
   /** @see net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl#create(Class) */
   public static final String ERR_INCREASE_EXCEEDS_MAX_GROWTH = "Can not increase "
       + "size of array or list by \"{size}\", because limit is \"{max}\"!";

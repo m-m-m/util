@@ -2101,6 +2101,8 @@ public interface UnicodeUtil {
 
   char REVERSED_SEMICOLON = 0x0204F;
 
+  char SWUNG_DASH = 0x02053;
+
   char QUADRUPLE_PRIME = 0x02057;
 
   char MEDIUM_MATHEMATICAL_SPACE = 0x0205F;
@@ -3899,11 +3901,53 @@ public interface UnicodeUtil {
    * This method determines an ASCII-representation for the given character if
    * available.
    * 
-   * @param character is the special character.
+   * @param character is the character to convert.
    * @return a sequence of ASCII-characters that represent the given character
    *         or <code>null</code> if the character is already ASCII or there is
    *         no ASCII-representation available.
    */
   String normalize2Ascii(char character);
+
+  /**
+   * This method determines if the given character is a dash.
+   * 
+   * @see #HYPHEN_MINUS
+   * @see #EN_DASH
+   * @see #EM_DASH
+   * @see #FIGURE_DASH
+   * @see #HORIZONTAL_BAR
+   * @see #SWUNG_DASH
+   * 
+   * @param character is the character to check.
+   * @return <code>true</code> if <code>character</code> is a dash.
+   */
+  boolean isDash(char character);
+
+  /**
+   * This method determines if the given character is a hyphen. A hyphen is a
+   * character used to separate syllables in words or to join words.
+   * 
+   * @see net.sf.mmm.util.text.api.Hyphenator
+   * 
+   * @see #HYPHEN_MINUS
+   * @see #HYPHEN
+   * @see #HYPHEN_BULLET
+   * @see #HYPHENATION_POINT
+   * 
+   * @param character is the character to check.
+   * @return <code>true</code> if <code>character</code> is a dash.
+   */
+  boolean isHyphen(char character);
+
+  /**
+   * This method determines if the given character is a minus-sign.
+   * 
+   * @see #HYPHEN_MINUS
+   * @see #MINUS_SIGN
+   * 
+   * @param character is the character to check.
+   * @return <code>true</code> if <code>character</code> is a dash.
+   */
+  boolean isMinus(char character);
 
 }

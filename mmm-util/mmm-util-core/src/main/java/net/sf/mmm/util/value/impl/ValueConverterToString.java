@@ -5,6 +5,7 @@ package net.sf.mmm.util.value.impl;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -131,10 +132,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
       return getIso8601Util().formatDateTime((Calendar) value);
     } else if (value instanceof Enum<?>) {
       String name = ((Enum<?>) value).name();
-      if (name.length() > 1) {
-        name = name.charAt(0) + name.substring(1).toLowerCase();
-      }
-      return this.stringUtil.toCamlCase(name, '_');
+      return name.replace('_', '-').toLowerCase(Locale.US);
     }
     return value.toString();
   }

@@ -4,7 +4,9 @@
 package net.sf.mmm.util.resource.api;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
+import java.util.Date;
 
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
@@ -122,6 +124,20 @@ public interface DataResource {
   InputStream openStream() throws ResourceNotAvailableException, RuntimeIoException;
 
   /**
+   * This method opens an output-stream in order to write data to the resource.
+   * 
+   * @return the {@link OutputStream} to write to the resource.
+   * @throws ResourceNotAvailableException if this resource is NOT
+   *         {@link #isAvailable() available}.
+   * @throws ResourceNotWritableException if the resource is NOT writable (e.g.
+   *         read-only).
+   * @throws RuntimeIoException if an input/output error occurred.
+   * @since 2.0.0
+   */
+  OutputStream openOutputStream() throws ResourceNotAvailableException,
+      ResourceNotWritableException, RuntimeIoException;
+
+  /**
    * This method creates a new {@link DataResource} pointing to the given
    * <code>resourcePath</code> based on this resource.<br>
    * E.g. if this resource points to the file "/etc/init.d/rc" and
@@ -137,5 +153,29 @@ public interface DataResource {
    *         <code>resourcePath</code> leads to an undefined or illegal URI.
    */
   DataResource navigate(String resourcePath) throws ResourceUriUndefinedException;
+
+  /**
+   * This method gets the last modification date of the {@link DataResource} if
+   * {@link #isAvailable() available} and supported.
+   * 
+   * @return the last modification {@link Date} or <code>null</code> if not
+   *         available or supported.
+   * @since 2.0.0
+   */
+  Date getLastModificationDate();
+
+  /**
+   * This method determines if this resource has been been modified since the
+   * given <code>data</code>.
+   * 
+   * @param date is the {@link Date} to check for.
+   * @return <code>true</code> if the resource has been modified after the given
+   *         <code>date</code>, <code>false</code> if it has NOT been modified
+   *         after the given <code>date</code> and <code>null</code> if this can
+   *         NOT be determined (resource not {@link #isAvailable() available} or
+   *         operation NOT supported by this resource).
+   * @since 2.0.0
+   */
+  Boolean isModifiedSince(Date date);
 
 }

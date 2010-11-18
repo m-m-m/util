@@ -4,11 +4,11 @@
 package net.sf.mmm.util.resource.base;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
+import java.util.Date;
 
 import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
-import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 
 /**
  * This is an abstract implementation of the {@link DataResource} interface that
@@ -53,7 +53,7 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   /**
    * {@inheritDoc}
    */
-  public long getSize() throws ResourceNotAvailableException {
+  public long getSize() {
 
     return getDelegate().getSize();
   }
@@ -61,7 +61,7 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   /**
    * {@inheritDoc}
    */
-  public URL getUrl() throws ResourceNotAvailableException {
+  public URL getUrl() {
 
     return getDelegate().getUrl();
   }
@@ -93,7 +93,7 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   /**
    * {@inheritDoc}
    */
-  public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
+  public DataResource navigate(String relativePath) {
 
     return getDelegate().navigate(relativePath);
   }
@@ -104,6 +104,30 @@ public abstract class AbstractDataResourceProxy implements DataResource {
   public InputStream openStream() {
 
     return getDelegate().openStream();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public OutputStream openOutputStream() {
+
+    return getDelegate().openOutputStream();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Boolean isModifiedSince(Date date) {
+
+    return getDelegate().isModifiedSince(date);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Date getLastModificationDate() {
+
+    return getDelegate().getLastModificationDate();
   }
 
   /**

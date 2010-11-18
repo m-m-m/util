@@ -6,6 +6,7 @@ package net.sf.mmm.util.resource.base;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
@@ -90,6 +91,14 @@ public class UrlResource extends AbstractDataResource {
     }
     this.url = url;
     this.fileUtil = fileUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Date getLastModificationDate() {
+
+    return null;
   }
 
   /**

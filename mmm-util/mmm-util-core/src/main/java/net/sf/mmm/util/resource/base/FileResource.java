@@ -165,16 +165,11 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
-  public Boolean isModifiedSince(Date date) {
+  public Date getLastModificationDate() {
 
     long lastModified = this.file.lastModified();
     if (lastModified != 0) {
-      Date modificationDate = new Date(lastModified);
-      if (modificationDate.after(date)) {
-        return Boolean.TRUE;
-      } else {
-        return Boolean.FALSE;
-      }
+      return new Date(lastModified);
     }
     return null;
   }

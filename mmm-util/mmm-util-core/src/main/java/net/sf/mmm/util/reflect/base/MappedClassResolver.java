@@ -8,6 +8,7 @@ import java.util.Map;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 
 /**
  * This is an implementation of the {@link ClassResolver} interface that uses an
@@ -70,13 +71,17 @@ public class MappedClassResolver implements ClassResolver {
   /**
    * {@inheritDoc}
    */
-  public Class<?> resolveClass(String name) throws ClassNotFoundException {
+  public Class<?> resolveClass(String name) {
 
-    Class<?> result = this.name2classMap.get(name);
-    if (result == null) {
-      result = Class.forName(name);
+    try {
+      Class<?> result = this.name2classMap.get(name);
+      if (result == null) {
+        result = Class.forName(name);
+      }
+      return result;
+    } catch (ClassNotFoundException e) {
+      throw new TypeNotFoundException(e, name);
     }
-    return result;
   }
 
 }

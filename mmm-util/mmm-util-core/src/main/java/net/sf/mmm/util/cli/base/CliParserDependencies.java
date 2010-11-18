@@ -4,6 +4,7 @@
 package net.sf.mmm.util.cli.base;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -21,6 +22,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@ComponentSpecification
 public interface CliParserDependencies {
 
   /**

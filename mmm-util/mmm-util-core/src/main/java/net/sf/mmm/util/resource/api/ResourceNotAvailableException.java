@@ -20,24 +20,22 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param absolutePath is the absolute path of the resource that could NOT be
-   *        found.
+   * @param resourceUri is the URI of the resource that could NOT be found.
    */
-  public ResourceNotAvailableException(String absolutePath) {
+  public ResourceNotAvailableException(String resourceUri) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_NOT_AVAILABLE, toMap(KEY_RESOURCE, absolutePath));
+    super(NlsBundleUtilCore.ERR_RESOURCE_NOT_AVAILABLE, toMap(KEY_RESOURCE, resourceUri));
   }
 
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param absolutePath is the absolute path of the resource that could NOT be
-   *        found.
+   * @param resourceUri is the URI of the resource that could NOT be found.
    */
-  public ResourceNotAvailableException(Throwable nested, String absolutePath) {
+  public ResourceNotAvailableException(Throwable nested, String resourceUri) {
 
-    super(nested, NlsBundleUtilCore.ERR_RESOURCE_NOT_AVAILABLE, toMap(KEY_RESOURCE, absolutePath));
+    super(nested, NlsBundleUtilCore.ERR_RESOURCE_NOT_AVAILABLE, toMap(KEY_RESOURCE, resourceUri));
   }
 
 }

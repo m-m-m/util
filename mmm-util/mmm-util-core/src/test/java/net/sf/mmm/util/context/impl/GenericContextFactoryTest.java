@@ -3,15 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.context.impl;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.value.api.ValueNotSetException;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the test-case for {@link GenericContextFactory}.
@@ -76,6 +76,21 @@ public class GenericContextFactoryTest {
     Assert.assertTrue(context.getVariableNames().contains(keyBar));
     Assert.assertSame(valueFoo, context.removeVariable(keyFoo));
     Assert.assertFalse(context.hasVariable(keyFoo));
+  }
+
+  /**
+   * Test of a {@link MutableGenericContext} with conversion of values.
+   */
+  @Test
+  public void testConversion() {
+
+    GenericContextFactory factory = getFactory();
+    MutableGenericContext context = factory.createContext();
+    String key = "foo";
+    Integer value = Integer.valueOf(12345);
+    context.setVariable(key, value);
+    Assert.assertEquals(value, context.getVariable(key, Integer.class));
+    Assert.assertEquals(value.intValue(), context.getVariable(key, int.class).intValue());
   }
 
   /**

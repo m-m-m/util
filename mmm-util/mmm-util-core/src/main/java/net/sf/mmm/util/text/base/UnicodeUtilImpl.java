@@ -123,6 +123,57 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public boolean isDash(char character) {
+
+    if (character == HYPHEN_MINUS) {
+      return true;
+    } else if (character == EN_DASH) {
+      return true;
+    } else if (character == EM_DASH) {
+      return true;
+    } else if (character == FIGURE_DASH) {
+      return true;
+    } else if (character == SWUNG_DASH) {
+      return true;
+    } else if (character == HORIZONTAL_BAR) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isHyphen(char character) {
+
+    if (character == HYPHEN_MINUS) {
+      return true;
+    } else if (character == HYPHEN) {
+      return true;
+    } else if (character == HYPHEN_BULLET) {
+      return true;
+    } else if (character == HYPHENATION_POINT) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isMinus(char character) {
+
+    if (character == HYPHEN_MINUS) {
+      return true;
+    } else if (character == MINUS_SIGN) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * This method gets the singleton instance of this {@link UnicodeUtilImpl}.<br>
    * This design is the best compromise between easy access (via this
    * indirection you have direct, static access to all offered functionality)

@@ -74,7 +74,9 @@ public interface GenericContext {
 
   /**
    * This method gets the variable associated with the given
-   * <code>variableName</code>.
+   * <code>variableName</code> as the given <code>type</code>. If the
+   * <code>type</code> does NOT match the actual type of the variable it may
+   * automatically be converted as possible.
    * 
    * @param <T> the generic type of the variable.
    * @param variableName is the name of the requested variable.

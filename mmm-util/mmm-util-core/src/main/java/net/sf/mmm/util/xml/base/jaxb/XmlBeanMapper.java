@@ -21,6 +21,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -47,8 +48,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
   /** @see #loadXml(InputStream, Object) */
   private final Class<T> xmlBeanClass;
 
-  /** @see #getBrowsableResourceFactory() */
-  private BrowsableResourceFactory browsableResourceFactory;
+  /** @see #getResourceFactory() */
+  private BrowsableResourceFactory resourceFactory;
 
   /**
    * The constructor.
@@ -70,9 +71,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
   /**
    * @return the browsableResourceFactory
    */
-  protected DataResourceFactory getBrowsableResourceFactory() {
+  protected DataResourceFactory getResourceFactory() {
 
-    return this.browsableResourceFactory;
+    return this.resourceFactory;
   }
 
   /**
@@ -80,10 +81,10 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
    *        set.
    */
   @Inject
-  public void setBrowsableResourceFactory(BrowsableResourceFactory browsableResourceFactory) {
+  public void setResourceFactory(BrowsableResourceFactory browsableResourceFactory) {
 
     getInitializationState().requireNotInitilized();
-    this.browsableResourceFactory = browsableResourceFactory;
+    this.resourceFactory = browsableResourceFactory;
   }
 
   /**
@@ -93,10 +94,10 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.browsableResourceFactory == null) {
+    if (this.resourceFactory == null) {
       BrowsableResourceFactoryImpl resourceFactoryImpl = new BrowsableResourceFactoryImpl();
       resourceFactoryImpl.initialize();
-      this.browsableResourceFactory = resourceFactoryImpl;
+      this.resourceFactory = resourceFactoryImpl;
     }
   }
 
@@ -139,6 +140,18 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
   }
 
   /**
+   * This method is invoked after the <code>jaxbBean</code> has been loaded and
+   * before it is saved. It does nothing by default but can be overridden to
+   * implement custom validation logic.
+   * 
+   * @param jaxbBean is the JAXB bean to validate.
+   */
+  protected void validate(T jaxbBean) {
+
+    NlsNullPointerException.checkNotNull(this.xmlBeanClass, jaxbBean);
+  }
+
+  /**
    * This method loads the JAXB-bean as XML from the given
    * <code>inputStream</code>.
    * 
@@ -152,7 +165,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
 
     try {
       Object unmarshalledObject = getOrCreateUnmarshaller().unmarshal(inputStream);
-      return this.xmlBeanClass.cast(unmarshalledObject);
+      T jaxbBean = this.xmlBeanClass.cast(unmarshalledObject);
+      validate(jaxbBean);
+      return jaxbBean;
     } catch (JAXBException e) {
       throw new XmlInvalidException(e, source);
     }
@@ -168,7 +183,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
    */
   public T loadXml(String locationUrl) {
 
-    DataResource resource = this.browsableResourceFactory.createDataResource(locationUrl);
+    DataResource resource = this.resourceFactory.createDataResource(locationUrl);
     return loadXml(resource);
   }
 
@@ -226,11 +241,29 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
    * <code>outputStream</code>.
    * 
    * @param jaxbBean is the JAXB-bean to save as XML.
+   * @param resource is the {@link DataResource} where to
+   *        {@link DataResource#openOutputStream() write} to.
+   */
+  public void saveXml(T jaxbBean, DataResource resource) {
+
+    OutputStream outputStream = resource.openOutputStream();
+    saveXml(jaxbBean, outputStream);
+  }
+
+  /**
+   * This method saves the given <code>jaxbBean</code> as XML to the given
+   * <code>outputStream</code>.<br/>
+   * <b>ATTENTION:</b><br>
+   * The caller of this method has to {@link OutputStream#close() close} the
+   * <code>outputStream</code>.
+   * 
+   * @param jaxbBean is the JAXB-bean to save as XML.
    * @param outputStream is the {@link OutputStream} where to write the XML to.
    */
   public void saveXml(T jaxbBean, OutputStream outputStream) {
 
     try {
+      validate(jaxbBean);
       getOrCreateMarshaller().marshal(jaxbBean, outputStream);
     } catch (MarshalException e) {
       throw new XmlInvalidException(e, jaxbBean);
@@ -249,7 +282,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
    */
   public void saveXml(T jaxbBean, String locationUrl) {
 
-    BrowsableResource resource = this.browsableResourceFactory.createBrowsableResource(locationUrl);
+    BrowsableResource resource = this.resourceFactory.createBrowsableResource(locationUrl);
     OutputStream outputStream = resource.openOutputStream();
     try {
       saveXml(jaxbBean, outputStream);

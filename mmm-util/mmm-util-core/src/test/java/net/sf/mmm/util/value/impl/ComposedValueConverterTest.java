@@ -138,12 +138,14 @@ public class ComposedValueConverterTest {
     // convert to enum
     String valueString = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT, valueSource,
         String.class);
-    String someEnumConstant = "SomeEnumConstant";
+    String someEnumConstant = "some-enum-constant";
     Assert.assertEquals(someEnumConstant, valueString);
     TestEnum value;
     value = converter.convertValue(someEnumConstant, valueSource, TestEnum.class);
     Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
     value = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT.name(), valueSource, TestEnum.class);
+    Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
+    value = converter.convertValue("SomeEnumConstant", valueSource, TestEnum.class);
     Assert.assertSame(TestEnum.SOME_ENUM_CONSTANT, value);
   }
 

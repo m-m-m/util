@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
-import java.io.OutputStream;
-import java.util.Date;
-
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
@@ -68,27 +65,5 @@ public interface BrowsableResource extends DataResource {
    *         otherwise.
    */
   boolean isFolder();
-
-  /**
-   * This method determines if this resource has been been modified since the
-   * given <code>data</code>.
-   * 
-   * @param date is the {@link Date} to check for.
-   * @return <code>true</code> if the resource has been modified after the given
-   *         <code>date</code>, <code>false</code> if it has NOT been modified
-   *         after the given <code>date</code> and <code>null</code> if this can
-   *         NOT be determined (resource not {@link #isAvailable() available} or
-   *         operation NOT supported by this resource).
-   */
-  Boolean isModifiedSince(Date date);
-
-  /**
-   * This method opens an output-stream in order to write data to the resource.
-   * 
-   * @return the {@link OutputStream} to write to the resource.
-   * @throws ResourceNotWritableException if the resource is NOT writable (e.g.
-   *         read-only).
-   */
-  OutputStream openOutputStream() throws ResourceNotWritableException;
 
 }

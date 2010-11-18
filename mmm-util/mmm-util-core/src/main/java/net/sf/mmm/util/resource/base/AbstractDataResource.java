@@ -5,11 +5,14 @@ package net.sf.mmm.util.resource.base;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
+import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
  * This is the abstract base implementation of the {@link DataResource}
@@ -93,6 +96,27 @@ public abstract class AbstractDataResource implements DataResource {
   public boolean isAvailable() {
 
     return isData();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Boolean isModifiedSince(Date date) {
+
+    Date lastModified = getLastModificationDate();
+    if (lastModified != null) {
+      return Boolean.valueOf(lastModified.after(date));
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public OutputStream openOutputStream() throws ResourceNotAvailableException,
+      ResourceNotWritableException, RuntimeIoException {
+
+    throw new ResourceNotWritableException(getUri());
   }
 
   /**

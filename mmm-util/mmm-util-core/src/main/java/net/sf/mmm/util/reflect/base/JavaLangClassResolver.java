@@ -15,6 +15,9 @@ package net.sf.mmm.util.reflect.base;
  */
 public class JavaLangClassResolver extends MappedClassResolver {
 
+  /** The singleton instance. */
+  public static final JavaLangClassResolver INSTANCE = new JavaLangClassResolver();
+
   /**
    * The constructor.
    */

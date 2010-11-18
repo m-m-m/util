@@ -51,11 +51,9 @@ public class NlsNullPointerException extends NlsRuntimeException {
    * Here is an example:
    * 
    * <pre>
-   * public void myMethod(MySpecificBusinessObject businessObject, String myName) {
+   * public void myMethod(MySpecificBusinessObject businessObject, String someParameter) {
    *   {@link NlsNullPointerException}.checkNotNull(MySpecificBusinessObject.class, businessObject);
-   *   if (myName == null) {
-   *     throw new {@link NlsNullPointerException}("myName");
-   *   }
+   *   {@link NlsNullPointerException}.checkNotNull("someParameter", someParameter);
    *   doTheWork();
    * }
    * </pre>
@@ -73,6 +71,37 @@ public class NlsNullPointerException extends NlsRuntimeException {
 
     if (object == null) {
       throw new NlsNullPointerException(type.getSimpleName());
+    }
+  }
+
+  /**
+   * This method checks if the given <code>object</code> is <code>null</code>.<br>
+   * Look at the following example:
+   * 
+   * <pre>
+   * {@link NlsNullPointerException}.checkNotNull("someParameter", someParameter);
+   * </pre>
+   * 
+   * This is equivalent to this code:
+   * 
+   * <pre>
+   * if (someParameter == null) {
+   *   throw new {@link NlsNullPointerException}("someParameter");
+   * }
+   * </pre>
+   * 
+   * 
+   * @param objectName is the (argument-)name of the given <code>object</code>.
+   * @param object is the object that is checked and should NOT be
+   *        <code>null</code>.
+   * @throws NlsNullPointerException if the given <code>object</code> is
+   *         <code>null</code>.
+   * @since 2.0.0
+   */
+  public static void checkNotNull(String objectName, Object object) throws NlsNullPointerException {
+
+    if (object == null) {
+      throw new NlsNullPointerException(objectName);
     }
   }
 

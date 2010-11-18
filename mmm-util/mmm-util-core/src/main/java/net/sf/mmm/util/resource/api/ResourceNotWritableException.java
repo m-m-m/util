@@ -7,8 +7,9 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This exception is thrown if a resource should be written that is read-only or
- * NOT writable for any other reason.
+ * This exception is thrown if a resource should be
+ * {@link DataResource#openOutputStream() written} that is read-only or NOT
+ * writable for any other reason.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -21,24 +22,22 @@ public class ResourceNotWritableException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param absolutePath is the absolute path of the resource that could NOT be
-   *        found.
+   * @param resourceUri is the URI of the resource that could NOT be written.
    */
-  public ResourceNotWritableException(String absolutePath) {
+  public ResourceNotWritableException(String resourceUri) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_NOT_WRITABLE, toMap(KEY_RESOURCE, absolutePath));
+    super(NlsBundleUtilCore.ERR_RESOURCE_NOT_WRITABLE, toMap(KEY_RESOURCE, resourceUri));
   }
 
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param absolutePath is the absolute path of the resource that could NOT be
-   *        found.
+   * @param resourceUri is the URI of the resource that could NOT be written.
    */
-  public ResourceNotWritableException(Throwable nested, String absolutePath) {
+  public ResourceNotWritableException(Throwable nested, String resourceUri) {
 
-    super(nested, NlsBundleUtilCore.ERR_RESOURCE_NOT_WRITABLE, toMap(KEY_RESOURCE, absolutePath));
+    super(nested, NlsBundleUtilCore.ERR_RESOURCE_NOT_WRITABLE, toMap(KEY_RESOURCE, resourceUri));
   }
 
 }

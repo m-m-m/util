@@ -277,7 +277,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Type toType(String type) throws ClassNotFoundException, IllegalArgumentException {
+  public Type toType(String type) {
 
     return toType(type, ClassResolver.CLASS_FOR_NAME_RESOLVER);
   }
@@ -285,8 +285,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Type toType(String type, ClassResolver resolver) throws ClassNotFoundException,
-      IllegalArgumentException {
+  public Type toType(String type, ClassResolver resolver) {
 
     try {
       CharSequenceScanner parser = new CharSequenceScanner(type);
@@ -312,10 +311,8 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
    *        {@link java.lang.reflect.ParameterizedType#getOwnerType()
    *        owner-type} or <code>null</code>.
    * @return the parsed type.
-   * @throws ClassNotFoundException if a class could NOT be resolved.
    */
-  private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner)
-      throws ClassNotFoundException {
+  private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner) {
 
     parser.skipWhile(' ');
     Type result;
@@ -898,8 +895,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames)
-      throws ClassNotFoundException {
+  public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
         ConstantFilter.getInstance(true));
@@ -909,7 +905,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
    * {@inheritDoc}
    */
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames,
-      Filter<? super Class<?>> filter) throws ClassNotFoundException {
+      Filter<? super Class<?>> filter) {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
   }
@@ -918,7 +914,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
    * {@inheritDoc}
    */
   public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
-      Filter<? super Class<?>> filter) throws ClassNotFoundException {
+      Filter<? super Class<?>> filter) {
 
     Set<Class<?>> classesSet = new HashSet<Class<?>>();
     for (String className : classNames) {
