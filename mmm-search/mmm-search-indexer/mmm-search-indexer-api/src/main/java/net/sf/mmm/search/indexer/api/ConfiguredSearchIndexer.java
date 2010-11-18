@@ -4,9 +4,9 @@
 package net.sf.mmm.search.indexer.api;
 
 import net.sf.mmm.search.indexer.api.config.ConfiguredSearchIndexerOptions;
-import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
-import net.sf.mmm.search.indexer.api.state.SearchIndexerState;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerStateHolder;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
@@ -27,12 +27,13 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 public interface ConfiguredSearchIndexer {
 
   /**
-   * This method reads the {@link SearchIndexerConfiguration} from the given
-   * <code>configurationLocation</code> and performs the
-   * {@link #index(SearchIndexerConfiguration) indexing}.
+   * This method reads the
+   * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration}
+   * from the given <code>configurationLocation</code> and performs the
+   * {@link #index(SearchIndexerConfigurationHolder) indexing}.
    * 
-   * @see #index(SearchIndexerConfiguration)
-   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader#readConfiguration(String)
+   * @see #index(SearchIndexerConfigurationHolder)
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader#loadConfiguration(String)
    * 
    * @param configurationLocation is the location where the configuration data
    *        shall be read from. This is typically a path into the filesystem.
@@ -40,13 +41,15 @@ public interface ConfiguredSearchIndexer {
   void index(String configurationLocation);
 
   /**
-   * This method reads the {@link SearchIndexerConfiguration} from the given
-   * <code>configurationLocation</code> and performs the
-   * {@link #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions)
+   * This method reads the
+   * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration}
+   * from the given <code>configurationLocation</code> and performs the
+   * {@link #index(SearchIndexerConfigurationHolder, ConfiguredSearchIndexerOptions)
    * indexing}.
    * 
-   * @see #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions)
-   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader#readConfiguration(String)
+   * @see #index(SearchIndexerConfigurationHolder,
+   *      ConfiguredSearchIndexerOptions)
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader#loadConfiguration(String)
    * 
    * @param configurationLocation is the location where the configuration data
    *        shall be read from. This is typically a path into the filesystem.
@@ -56,44 +59,44 @@ public interface ConfiguredSearchIndexer {
 
   /**
    * This method performs the indexing of all
-   * {@link SearchIndexerConfiguration#getSources() sources} given by
-   * <code>configuration</code>.
+   * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration#getSources()
+   * sources} given by <code>configuration</code>.
    * 
    * @see SearchIndexerSource#getLocations()
    * 
-   * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
-   *        add to the index.
+   * @param configurationHolder is the {@link SearchIndexerConfigurationHolder}.
    */
-  void index(SearchIndexerConfiguration configuration);
+  void index(SearchIndexerConfigurationHolder configurationHolder);
 
   /**
    * This method performs the indexing for the given <code>configuration</code>
    * and <code>options</code>.
    * 
-   * @see #index(SearchIndexerConfiguration)
+   * @see #index(SearchIndexerConfigurationHolder)
    * @see ConfiguredSearchIndexerOptions#getSourceIds()
    * 
-   * @param configuration is the {@link SearchIndexerConfiguration} to crawl and
-   *        add to the index.
+   * @param configurationHolder is the {@link SearchIndexerConfigurationHolder}.
    * @param options are the {@link ConfiguredSearchIndexerOptions}.
    */
-  void index(SearchIndexerConfiguration configuration, ConfiguredSearchIndexerOptions options);
+  void index(SearchIndexerConfigurationHolder configurationHolder,
+      ConfiguredSearchIndexerOptions options);
 
   /**
    * This method performs the indexing for the given {@link SearchIndexerSource
    * source}.
    * 
-   * @param source is the {@link SearchIndexerConfiguration#getSource(String)
+   * @param source is the
+   *        {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration#getSource(String)
    *        source} to index.
    * @param options are the {@link ConfiguredSearchIndexerOptions}.
-   * @param state is the {@link SearchIndexerState}.
+   * @param stateHolder is the {@link SearchIndexerStateHolder}.
    * @param searchIndexer is the {@link SearchIndexer} used for modifying the
    *        index.
    * 
    * @see SearchIndexerSource#getLocations()
    */
   void index(SearchIndexerSource source, ConfiguredSearchIndexerOptions options,
-      SearchIndexerState state, SearchIndexer searchIndexer);
+      SearchIndexerStateHolder stateHolder, SearchIndexer searchIndexer);
 
   // /**
   // * This method indexes the given {@link SearchIndexDataLocation

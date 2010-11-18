@@ -10,13 +10,19 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.api.config.SearchIndexConfiguration;
+import net.sf.mmm.search.base.SearchDependencies;
+import net.sf.mmm.search.base.SearchDependenciesImpl;
+import net.sf.mmm.search.engine.impl.lucene.LuceneFieldManager;
+import net.sf.mmm.search.engine.impl.lucene.LuceneFieldManagerFactory;
+import net.sf.mmm.search.engine.impl.lucene.LuceneFieldManagerFactoryImpl;
 import net.sf.mmm.search.engine.impl.lucene.LuceneSearchEngineBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexerBuilder;
 import net.sf.mmm.util.io.api.RuntimeIoException;
@@ -49,6 +55,12 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
 
   /** @see #setLuceneSearchEngineBuilder(LuceneSearchEngineBuilder) */
   private LuceneSearchEngineBuilder luceneSearchEngineBuilder;
+
+  /** @see #setFiedManagerFactory(LuceneFieldManagerFactory) */
+  private LuceneFieldManagerFactory fiedManagerFactory;
+
+  /** @see #setSearchDependencies(SearchDependencies) */
+  private SearchDependencies searchDependencies;
 
   /**
    * The constructor.
@@ -106,6 +118,26 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
   }
 
   /**
+   * @param fiedManagerFactory is the fiedManagerFactory to set
+   */
+  @Inject
+  public void setFiedManagerFactory(LuceneFieldManagerFactory fiedManagerFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.fiedManagerFactory = fiedManagerFactory;
+  }
+
+  /**
+   * @param searchDependencies is the searchDependencies to set
+   */
+  @Inject
+  public void setSearchDependencies(SearchDependencies searchDependencies) {
+
+    getInitializationState().requireNotInitilized();
+    this.searchDependencies = searchDependencies;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -131,18 +163,33 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
       searchEngineBuilder.initialize();
       this.luceneSearchEngineBuilder = searchEngineBuilder;
     }
+    if (this.fiedManagerFactory == null) {
+      LuceneFieldManagerFactoryImpl impl = new LuceneFieldManagerFactoryImpl();
+      impl.setAnalyzer(this.analyzer);
+      impl.initialize();
+      this.fiedManagerFactory = impl;
+    }
+    if (this.searchDependencies == null) {
+      SearchDependenciesImpl impl = new SearchDependenciesImpl();
+      impl.initialize();
+      this.searchDependencies = impl;
+    }
   }
 
   /**
    * {@inheritDoc}
    */
-  public SearchIndexer createIndexer(SearchIndexConfiguration configuration,
+  public SearchIndexer createIndexer(SearchIndexerConfigurationHolder configurationHolder,
       SearchIndexerOptions options) throws SearchException {
 
-    NlsNullPointerException.checkNotNull(SearchIndexConfiguration.class, configuration);
+    NlsNullPointerException.checkNotNull(SearchIndexerConfigurationHolder.class,
+        configurationHolder);
     NlsNullPointerException.checkNotNull(SearchIndexerOptions.class, options);
+    SearchIndexerConfiguration configuration = configurationHolder.getBean();
+    NlsNullPointerException.checkNotNull(SearchIndexerConfiguration.class, configuration);
     try {
-      Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration);
+      Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration
+          .getSearchIndex());
       IndexWriter indexWriter;
       MaxFieldLength maxFieldLength = MaxFieldLength.UNLIMITED;
       if (options.isOverwriteIndex()) {
@@ -150,7 +197,10 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
       } else {
         indexWriter = new IndexWriter(directory, this.analyzer, maxFieldLength);
       }
-      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder);
+      LuceneFieldManager fieldManager = this.fiedManagerFactory
+          .createFieldManager(configurationHolder);
+      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder, fieldManager,
+          this.searchDependencies);
     } catch (IOException e) {
       throw new RuntimeIoException(e);
     }

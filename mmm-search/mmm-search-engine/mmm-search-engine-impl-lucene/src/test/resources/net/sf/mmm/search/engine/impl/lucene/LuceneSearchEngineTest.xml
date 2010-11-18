@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<search>
+  <!-- core configuration of the search-engine -->
+  <search-index location="src/test/resources/net/sf/mmm/search/engine/impl/lucene/index"/>
+  <!-- configuration of sources for view (webapp) -->
+  <sources>
+    <source id="mmm" name="Multi-Media-Manager"/>
+  </sources>
+</search>

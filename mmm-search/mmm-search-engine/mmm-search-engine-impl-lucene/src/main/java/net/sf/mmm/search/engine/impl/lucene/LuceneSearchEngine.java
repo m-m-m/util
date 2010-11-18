@@ -6,7 +6,7 @@ package net.sf.mmm.search.engine.impl.lucene;
 import java.io.IOException;
 
 import net.sf.mmm.search.api.SearchEntry;
-import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.base.SearchDependencies;
 import net.sf.mmm.search.base.SearchEntryIdInvalidException;
 import net.sf.mmm.search.base.SearchEntryIdMissingException;
 import net.sf.mmm.search.engine.api.SearchHit;
@@ -14,22 +14,22 @@ import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.engine.base.AbstractSearchEngine;
-import net.sf.mmm.search.engine.base.SearchEngineRefresher;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
 import net.sf.mmm.search.engine.base.SearchHitImpl;
 import net.sf.mmm.search.engine.base.SearchResultPageImpl;
 import net.sf.mmm.search.impl.lucene.LuceneSearchEntry;
+import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.search.Collector;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.Scorer;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.highlight.Formatter;
@@ -52,6 +52,12 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /** @see #getHighlightFormatter() */
   private final Formatter highlightFormatter;
 
+  /** @see #getFieldManager() */
+  private final LuceneFieldManager fieldManager;
+
+  /** @see #getSearchDependencies() */
+  private final SearchDependencies searchDependencies;
+
   /** The {@link IndexReader} used for the {@link #searcher}. */
   private IndexReader indexReader;
 
@@ -65,14 +71,26 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * @param analyzer is the {@link Analyzer} to use.
    * @param queryBuilder is the {@link SearchQueryBuilder} query builder.
    * @param highlightFormatter is the {@link Formatter} for highlighting.
-   * @param searchEngineRefresher is the {@link SearchEngineRefresher}.
+   * @param fieldManager is the {@link LuceneFieldManager}.
+   * @param searchDependencies are the {@link SearchDependencies}.
+   * @param periodicRefresher is the {@link PeriodicRefresher}.
    */
   public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
       SearchQueryBuilder queryBuilder, Formatter highlightFormatter,
-      SearchEngineRefresher searchEngineRefresher) {
+      LuceneFieldManager fieldManager, SearchDependencies searchDependencies,
+      PeriodicRefresher periodicRefresher) {
 
-    super(searchEngineRefresher);
+    super(periodicRefresher);
+    NlsNullPointerException.checkNotNull(IndexReader.class, indexReader);
+    NlsNullPointerException.checkNotNull(Analyzer.class, analyzer);
+    NlsNullPointerException.checkNotNull(SearchQueryBuilder.class, queryBuilder);
+    NlsNullPointerException.checkNotNull(Formatter.class, highlightFormatter);
+    NlsNullPointerException.checkNotNull(LuceneFieldManager.class, fieldManager);
+    NlsNullPointerException.checkNotNull(SearchDependencies.class, searchDependencies);
+    // searchEngineRefresher is allowed to be null
     this.indexReader = indexReader;
+    this.fieldManager = fieldManager;
+    this.searchDependencies = searchDependencies;
     this.searcher = new IndexSearcher(this.indexReader);
     this.analyzer = analyzer;
     this.queryBuilder = queryBuilder;
@@ -86,11 +104,35 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * @param analyzer is the {@link Analyzer} to use.
    * @param queryBuilder is the {@link SearchQueryBuilder} query builder.
    * @param highlightFormatter is the {@link Formatter} for highlighting.
+   * @param fieldManager is the {@link LuceneFieldManager}.
+   * @param searchDependencies are the {@link SearchDependencies}.
    */
   public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
-      SearchQueryBuilder queryBuilder, Formatter highlightFormatter) {
+      SearchQueryBuilder queryBuilder, Formatter highlightFormatter,
+      LuceneFieldManager fieldManager, SearchDependencies searchDependencies) {
 
-    this(indexReader, analyzer, queryBuilder, highlightFormatter, null);
+    this(indexReader, analyzer, queryBuilder, highlightFormatter, fieldManager, searchDependencies,
+        null);
+  }
+
+  /**
+   * This method gets the {@link SearchDependencies}.
+   * 
+   * @return the {@link SearchDependencies}.
+   */
+  protected SearchDependencies getSearchDependencies() {
+
+    return this.searchDependencies;
+  }
+
+  /**
+   * This method gets the {@link LuceneFieldManager}.
+   * 
+   * @return the {@link LuceneFieldManager}.
+   */
+  protected LuceneFieldManager getFieldManager() {
+
+    return this.fieldManager;
   }
 
   /**
@@ -152,13 +194,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   protected SearchHit createSearchHit(int documentId, double score,
       SearchHighlighter searchHighlighter) {
 
-    try {
-      Document document = this.searcher.doc(documentId);
-      SearchEntry searchEntry = new LuceneSearchEntry(document);
-      return new SearchHitImpl(searchEntry, Integer.toString(documentId), score, searchHighlighter);
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
-    }
+    SearchEntry searchEntry = getEntry(documentId);
+    return new SearchHitImpl(searchEntry, Integer.toString(documentId), score, searchHighlighter);
   }
 
   /**
@@ -173,7 +210,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * {@inheritDoc}
    */
   public SearchResultPage search(SearchQuery query, int hitsPerPage, int pageIndex,
-      int totalHitCount) throws SearchException {
+      int totalHitCount) {
 
     try {
       Query luceneQuery = getLuceneQuery(query);
@@ -182,19 +219,23 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       // do the actual search...
       TopDocs topDocs = this.searcher.search(luceneQuery, requiredHitCount);
       int pageHitCount = topDocs.scoreDocs.length - start;
+      float maxScore = topDocs.getMaxScore();
+      if ((maxScore == Float.NaN) || (maxScore <= 0)) {
+        maxScore = 1;
+      }
       SearchHit[] hits;
       if (pageHitCount > 0) {
         hits = new SearchHit[pageHitCount];
         SearchHighlighter searchHighlighter = createSearchHighlighter(luceneQuery);
         for (int i = 0; i < hits.length; i++) {
           ScoreDoc scoreDoc = topDocs.scoreDocs[start + i];
-          hits[i] = createSearchHit(scoreDoc.doc, scoreDoc.score, searchHighlighter);
+          hits[i] = createSearchHit(scoreDoc.doc, (scoreDoc.score / maxScore), searchHighlighter);
         }
       } else {
         hits = SearchHit.NO_HITS;
       }
       SearchResultPage page = new SearchResultPageImpl(query.toString(), topDocs.totalHits,
-          hitsPerPage, 0, hits);
+          hitsPerPage, pageIndex, hits);
       return page;
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
@@ -204,17 +245,44 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
-  public SearchEntry getEntry(String id) throws SearchException {
+  public int count(String field, String value) {
 
     try {
-      int docId = Integer.valueOf(id).intValue();
-      Document doc = this.searcher.doc(docId);
-      if (doc == null) {
-        throw new SearchEntryIdMissingException(id);
-      }
-      return new LuceneSearchEntry(doc);
+      Term term = this.fieldManager.createTerm(field, value);
+      return this.searcher.docFreq(term);
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchEntry getEntry(String entryId) {
+
+    try {
+      return getEntry(Integer.parseInt(entryId));
     } catch (NumberFormatException e) {
-      throw new SearchEntryIdInvalidException(e, id);
+      throw new SearchEntryIdInvalidException(e, entryId);
+    }
+  }
+
+  /**
+   * @see #getEntry(String)
+   * 
+   * @param documentId is the technical ID of the lucene {@link Document}
+   *        representing the hit.
+   * @return the document as {@link SearchEntry}.
+   */
+  public SearchEntry getEntry(int documentId) {
+
+    try {
+      Document doc = this.searcher.doc(documentId);
+      if (doc == null) {
+        throw new SearchEntryIdMissingException(Integer.toString(documentId));
+      }
+      return new LuceneSearchEntry(doc, this.fieldManager.getConfigurationHolder()
+          .getBean().getFields(), this.searchDependencies);
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
@@ -238,6 +306,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
           oldReader.close();
         }
       }
+      this.fieldManager.refresh();
+      this.queryBuilder.refresh();
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
@@ -256,145 +326,6 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
-  }
-
-  /**
-   * This inner class is used to collect the {@link #getHits() hits} and to
-   * determine the {@link #getTotalHitCount() total hit count}.
-   */
-  protected class HitCollector extends Collector {
-
-    /** The actual lucene {@link Query}. */
-    private final Query luceneQuery;
-
-    /** @see #getHits() */
-    private final SearchHit[] hits;
-
-    /** The current index in {@link #hits} where to add new hits. */
-    private int hitCount;
-
-    /** The score of the current hit. */
-    private double currentScore;
-
-    /** The lazy initialized {@link SearchHighlighter}. */
-    private SearchHighlighter highlighter;
-
-    /** The total number of hits. */
-    private int totalHitCount;
-
-    /** @see #setNextReader(IndexReader, int) */
-    private int documentIdBase;
-
-    /**
-     * The constructor.
-     * 
-     * @param pageHitCount is the number of {@link #getHits() hits} to collect.
-     *        All other hits are ignored.
-     * @param luceneQuery is the {@link Query} used when searching for the hits
-     *        to collect.
-     */
-    public HitCollector(int pageHitCount, Query luceneQuery) {
-
-      this(pageHitCount, luceneQuery, 0);
-    }
-
-    /**
-     * The constructor.
-     * 
-     * @param pageHitCount is the number of {@link #getHits() hits} to collect.
-     *        All other hits are ignored.
-     * @param luceneQuery is the {@link Query} used when searching for the hits
-     *        to collect.
-     * @param pageIndex is the {@link SearchResultPage#getPageIndex() index} of
-     *        the {@link SearchResultPage page} for which the hits are
-     *        collected.
-     */
-    public HitCollector(int pageHitCount, Query luceneQuery, int pageIndex) {
-
-      super();
-      this.luceneQuery = luceneQuery;
-      this.hits = new SearchHit[pageHitCount];
-      this.hitCount = -(pageIndex * pageHitCount);
-      this.totalHitCount = 0;
-      this.highlighter = null;
-    }
-
-    /**
-     * This method gets the collected hits for the {@link SearchResultPage}.
-     * 
-     * @return the hits
-     */
-    public SearchHit[] getHits() {
-
-      if (this.hitCount == this.hits.length) {
-        return this.hits;
-      } else {
-        SearchHit[] result = new SearchHit[this.hitCount];
-        System.arraycopy(this.hits, 0, result, 0, this.hitCount);
-        return result;
-      }
-    }
-
-    /**
-     * @return the totalHitCount
-     */
-    public int getTotalHitCount() {
-
-      return this.totalHitCount;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setScorer(Scorer scorer) throws IOException {
-
-      if ((this.hitCount >= 0) && (this.hitCount < this.hits.length)) {
-        this.currentScore = scorer.score();
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void collect(int documentId) throws IOException {
-
-      if (this.hitCount < this.hits.length) {
-        if (this.hitCount >= 0) {
-          Document document = LuceneSearchEngine.this.searcher
-              .doc(this.documentIdBase + documentId);
-          SearchEntry searchEntry = new LuceneSearchEntry(document);
-          if (this.highlighter == null) {
-            this.highlighter = new LuceneSearchHighlighter(LuceneSearchEngine.this.analyzer,
-                LuceneSearchEngine.this.highlightFormatter, this.luceneQuery);
-          }
-          this.hits[this.hitCount] = new SearchHitImpl(searchEntry, Integer.toString(documentId),
-              this.currentScore, this.highlighter);
-        }
-        this.hitCount++;
-      }
-      this.totalHitCount++;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setNextReader(IndexReader reader, int docBase) {
-
-      this.documentIdBase = docBase;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean acceptsDocsOutOfOrder() {
-
-      return false;
-    }
-
   }
 
 }

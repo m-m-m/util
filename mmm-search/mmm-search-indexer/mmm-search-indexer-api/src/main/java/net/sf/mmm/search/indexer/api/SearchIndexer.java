@@ -23,10 +23,8 @@ public interface SearchIndexer extends Flushable, Closeable {
 
   /**
    * This method creates a new and empty entry for the search-index. After the
-   * entry is
-   * {@link MutableSearchEntry#setProperty(String, String, MutableSearchEntry.Mode)
-   * filled} with data, use {@link #add(MutableSearchEntry)} to add it to the
-   * search index.
+   * entry is {@link MutableSearchEntry#setField(String, Object) filled} with
+   * data, use {@link #add(MutableSearchEntry)} to add it to the search index.
    * 
    * @return a new and empty search-index entry.
    */
@@ -42,10 +40,12 @@ public interface SearchIndexer extends Flushable, Closeable {
 
   /**
    * This method updates the given <code>entry</code> in the search-index. This
-   * method assumes that the property
-   * {@link net.sf.mmm.search.api.SearchEntry#PROPERTY_UID} (prior) or
-   * {@link net.sf.mmm.search.api.SearchEntry#PROPERTY_URI} (fallback) is used
-   * as unique identifier for entries.
+   * method will use the property
+   * {@link net.sf.mmm.search.api.SearchEntry#FIELD_CUSTOM_ID} to identify a
+   * potentially existing <code>entry</code> to update. Otherwise it will use a
+   * combination of {@link net.sf.mmm.search.api.SearchEntry#FIELD_URI} and
+   * {@link net.sf.mmm.search.api.SearchEntry#FIELD_SOURCE} as identifier (what
+   * is NOT a very strong ID as the URI can change).
    * 
    * @param entry is the entry to update.
    * @return the number of entries that have been replaced. This should
@@ -53,8 +53,8 @@ public interface SearchIndexer extends Flushable, Closeable {
    *         <code>0</code> none was replaced and the given <code>entry</code>
    *         has only been {@link #add(MutableSearchEntry) added}. A value
    *         greater than <code>1</code> indicates that multiple entries have
-   *         been replaced that all have the same <code>uri</code> or
-   *         <code>id</code> what indicates a mistake of your index(er).
+   *         been replaced that all have the same identifier what indicates a
+   *         mistake of your index or the indexer.
    * @throws SearchException if the operation failed.
    */
   int update(MutableSearchEntry entry) throws SearchException;
@@ -62,12 +62,17 @@ public interface SearchIndexer extends Flushable, Closeable {
   /**
    * This method removes an {@link #add(MutableSearchEntry) existing} entry
    * identified by the given
-   * <code>{@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() id}</code>
-   * from the search-index.
+   * <code>{@link net.sf.mmm.search.engine.api.SearchHit#getId() id}</code> from
+   * the search-index.<br/>
+   * <b>ATTENTION:</b><br>
+   * If you are using lucene as implementation according to some questionable
+   * design of lucene this method has to close the IndexWriter and create an
+   * IndexReader to perform the delete. If you invoke an other method after that
+   * the same has to be done reverse. This can cause really bad performance.
    * 
    * @param entryId is the
-   *        {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() ID} of
-   *        the entry to remove.
+   *        {@link net.sf.mmm.search.engine.api.SearchHit#getId() ID} of the
+   *        entry to remove.
    * @return <code>true</code> if the entry existed and has been removed from
    *         the index, <code>false</code> if NO entry exists for the given
    *         <code>id</code>.
@@ -95,8 +100,9 @@ public interface SearchIndexer extends Flushable, Closeable {
    * 
    * @see #update(MutableSearchEntry)
    * 
-   * @param uid is the {@link MutableSearchEntry#setUid(String) UID} of an entry
-   *        previously {@link #add(MutableSearchEntry) added} to the index.
+   * @param cid is the {@link MutableSearchEntry#getCustomId() custom-ID} of an
+   *        entry previously {@link #add(MutableSearchEntry) added} to the
+   *        index.
    * @return the number of entries that have been removed. This should typically
    *         be <code>1</code> if one entry exists with the given
    *         <code>uid</code> or <code>0</code> if no such entry exists. A value
@@ -107,7 +113,7 @@ public interface SearchIndexer extends Flushable, Closeable {
    *         implementation.
    * @throws SearchException if the operation failed.
    */
-  int removeByUid(String uid) throws SearchException;
+  int removeByCustumId(String cid) throws SearchException;
 
   /**
    * This method removes an {@link #add(MutableSearchEntry) existing} entry
@@ -141,19 +147,21 @@ public interface SearchIndexer extends Flushable, Closeable {
    * <b>ATTENTION:</b><br>
    * Please use this method with care.
    * 
-   * @param property is the property where the <code>value</code> is expected to
-   *        occur. Therefore the property has to be
-   *        {@link MutableSearchEntry.Mode#NOT_TOKENIZED}.
+   * @param field is the name of the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) field}
+   *        where the <code>value</code> is expected to occur. Therefore the
+   *        field should NOT to be of the
+   *        {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getType()
+   *        type} {@link net.sf.mmm.search.api.config.SearchFieldType#TEXT}.
    * @param value is the
-   *        {@link MutableSearchEntry#setProperty(String, String, MutableSearchEntry.Mode)
-   *        value} of an entry previously {@link #add(MutableSearchEntry) added}
-   *        to the index.
+   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) value} of
+   *        the field.
    * @return the number of entries that have been removed or <code>-1</code> if
    *         the number is unknown because this is not supported by the
    *         implementation.
    * @throws SearchException if the operation failed.
    */
-  int remove(String property, String value) throws SearchException;
+  int remove(String field, String value) throws SearchException;
 
   /**
    * This method flushes the search index what ensures that all changes are

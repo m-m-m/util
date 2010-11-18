@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.api.config;
 
-import java.util.List;
-
 import net.sf.mmm.search.api.config.SearchConfiguration;
 
 /**
@@ -19,32 +17,11 @@ import net.sf.mmm.search.api.config.SearchConfiguration;
 public interface SearchEngineConfiguration extends SearchConfiguration {
 
   /**
-   * This method gets the {@link SearchEntryType} with the given
-   * {@link SearchEntryType#getId() ID}.
+   * This method gets the {@link SearchEntryTypeContainer}. It will be used for
+   * the view to filter for {@link SearchEntryType}s.
    * 
-   * @param id is the {@link SearchEntryType#getId() ID} of the requested
-   *        {@link SearchEntryType}.
-   * @return the {@link SearchEntryType} for the given <code>id</code>. If no
-   *         such {@link SearchEntryType} exists the {@link SearchEntryType}
-   *         with {@link SearchEntryType#getId() ID}
-   *         {@link SearchEntryType#ID_DEFAULT} is returned. This has to be
-   *         defined in a legal configuration.
+   * @return the {@link SearchEntryTypeContainer}.
    */
-  SearchEntryType getEntryType(String id);
-
-  /**
-   * This method gets the {@link List} of all {@link SearchEntryType}s.
-   * 
-   * @return all configured {@link SearchEntryType}s.
-   */
-  List<? extends SearchEntryType> getEntryTypes();
-
-  /**
-   * This method gets the options for the
-   * {@link net.sf.mmm.search.engine.api.SearchEngine}.
-   * 
-   * @return the {@link SearchEngineProperties}.
-   */
-  SearchEngineProperties getSearchProperties();
+  SearchEntryTypeContainer getEntryTypes();
 
 }

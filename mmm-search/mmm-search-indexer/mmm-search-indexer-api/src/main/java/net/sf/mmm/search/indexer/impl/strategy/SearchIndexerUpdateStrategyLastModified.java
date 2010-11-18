@@ -96,7 +96,8 @@ public class SearchIndexerUpdateStrategyLastModified extends AbstractCrawlingDel
     SearchIndexer indexer = arguments.getIndexer();
     SearchEngine searchEngine = indexer.getSearchEngine();
     String sourceId = arguments.getSource().getId();
-    SearchQuery query = searchEngine.getQueryBuilder().createTermQuery(SearchEntry.PROPERTY_SOURCE,
+    // would be a lot easier via termDocs(new Term("source", sourceId));
+    SearchQuery query = searchEngine.getQueryBuilder().createWordQuery(SearchEntry.FIELD_SOURCE,
         sourceId);
     int hitsPerPage = Integer.MAX_VALUE;
     // get all hits... (TODO: use paging...?)
@@ -104,14 +105,18 @@ public class SearchIndexerUpdateStrategyLastModified extends AbstractCrawlingDel
     CountingEntryUpdateVisitorCollector visitor = (CountingEntryUpdateVisitorCollector) arguments
         .getContext().getVariable(CONTEXT_VARIABLE_ENTRY_UPDATE_VISITOR);
     Set<String> entryUriSet = visitor.getEntryUriSet();
-    for (int i = 0; i < page.getPageHitCount(); i++) {
+    int hitCount = page.getPageHitCount();
+    for (int i = 0; i < hitCount; i++) {
       SearchHit hit = page.getPageHit(i);
       String uri = hit.getUri();
       if (!entryUriSet.contains(uri)) {
+        // getIndexerDependencies().getResourceSearchIndexer().index(indexer,
+        // null, ChangeType.REMOVE, arguments.getlocation, visitor);
+        visitor.visitIndexedEntryUri(uri, ChangeType.REMOVE);
+        getLogger().debug("Removing " + uri);
         indexer.remove(hit);
       }
     }
 
   }
-
 }

@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>Search</servlet-name>
-    <servlet-class>net.sf.mmm.search.view.GenericSearchServlet</servlet-class>
+    <servlet-class>net.sf.mmm.search.view.base.GenericSearchServlet</servlet-class>
     <init-param>
       <!-- the path to the configuration file -->
       <param-name>config-file</param-name>

@@ -29,8 +29,10 @@ public interface SearchHit extends SearchEntry {
   SearchHit[] NO_HITS = new SearchHit[0];
 
   /**
-   * This method gets the ID of the entry in the search index represented by
-   * this hit.
+   * This method gets the ID of this hit in the search index. It can be used to
+   * {@link SearchEngine#getEntry(String) retrieve} the entry again. It is
+   * explicitly unspecified and may vary in implementations if this is the same
+   * as {@link #getId()}.
    * 
    * @return the ID of this hit.
    */

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
+import net.sf.mmm.util.lang.base.attribute.AbstractAttributeReadId;
 
 /**
  * This is the implementation of {@link SearchEntryType} as JAXB-ready
@@ -18,7 +19,7 @@ import net.sf.mmm.search.engine.api.config.SearchEntryType;
  * @since 1.0.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchEntryTypeBean implements SearchEntryType {
+public class SearchEntryTypeBean extends AbstractAttributeReadId<String> implements SearchEntryType {
 
   /** @see #getIcon() */
   @XmlAttribute(name = "icon")
@@ -39,6 +40,21 @@ public class SearchEntryTypeBean implements SearchEntryType {
   public SearchEntryTypeBean() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param id is the {@link #getId() ID}.
+   * @param title is the {@link #getTitle() title}.
+   * @param icon is the {@link #getIcon() icon}.
+   */
+  public SearchEntryTypeBean(String id, String title, String icon) {
+
+    super();
+    this.icon = icon;
+    this.title = title;
+    this.id = id;
   }
 
   /**
@@ -83,6 +99,14 @@ public class SearchEntryTypeBean implements SearchEntryType {
   public String getTitle() {
 
     return this.title;
+  }
+
+  /**
+   * @param title is the title to set
+   */
+  public void setTitle(String title) {
+
+    this.title = title;
   }
 
   /**

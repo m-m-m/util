@@ -17,6 +17,9 @@ import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.SystemInformation;
+import net.sf.mmm.util.lang.api.SystemUtil;
+import net.sf.mmm.util.lang.base.SystemUtilImpl;
 
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.NIOFSDirectory;
@@ -32,8 +35,14 @@ import org.apache.lucene.store.SimpleFSDirectory;
 @Named
 public class LuceneDirectoryBuilderImpl extends AbstractComponent implements LuceneDirectoryBuilder {
 
+  /** The suffix for the lucene directory. */
+  private static final String PATH_SUFFIX_LUCENE = "/lucene";
+
   /** @see #setFileUtil(FileUtil) */
   private FileUtil fileUtil;
+
+  /** @see #setSystemUtil(SystemUtil) */
+  private SystemUtil systemUtil;
 
   /**
    * The constructor.
@@ -54,6 +63,16 @@ public class LuceneDirectoryBuilderImpl extends AbstractComponent implements Luc
   }
 
   /**
+   * @param systemUtil is the systemUtil to set
+   */
+  @Inject
+  public void setSystemUtil(SystemUtil systemUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.systemUtil = systemUtil;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -63,6 +82,9 @@ public class LuceneDirectoryBuilderImpl extends AbstractComponent implements Luc
     if (this.fileUtil == null) {
       this.fileUtil = FileUtilImpl.getInstance();
     }
+    if (this.systemUtil == null) {
+      this.systemUtil = SystemUtilImpl.getInstance();
+    }
   }
 
   /**
@@ -70,7 +92,7 @@ public class LuceneDirectoryBuilderImpl extends AbstractComponent implements Luc
    */
   public Directory createDirectory(SearchIndexConfiguration configuration) {
 
-    return createDirectory(configuration.getLocation());
+    return createDirectory(configuration.getLocation() + PATH_SUFFIX_LUCENE);
   }
 
   /**
@@ -84,7 +106,8 @@ public class LuceneDirectoryBuilderImpl extends AbstractComponent implements Luc
       location = location.substring(7);
     }
     File path = new File(location);
-    boolean windows = true; // System.getProperty("os");
+    boolean windows = SystemInformation.SYSTEM_TYPE_WINDOWS.equals(this.systemUtil
+        .getSystemInformation().getSystemType());
     try {
       if (windows) {
         return new SimpleFSDirectory(path);

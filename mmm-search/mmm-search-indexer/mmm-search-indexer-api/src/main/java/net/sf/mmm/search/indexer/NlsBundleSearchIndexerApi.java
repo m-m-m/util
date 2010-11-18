@@ -41,6 +41,10 @@ public class NlsBundleSearchIndexerApi extends AbstractResourceBundle {
   public static final String MSG_SEARCH_INDEXER_MAIN_MODE_USAGE_DEFAULT = "Perform "
       + "search-indexing according to the configuration.";
 
+  /** @see net.sf.mmm.search.indexer.base.SearchEntryIdImmutableException */
+  public static final String ERR_ID_IMMUTABLE = "The ID of a search-entry is "
+      + "immutable and can not be modified!";
+
   /**
    * The constructor.
    */

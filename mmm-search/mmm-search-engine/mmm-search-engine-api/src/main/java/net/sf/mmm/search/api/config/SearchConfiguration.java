@@ -15,7 +15,7 @@ import java.util.List;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface SearchConfiguration {
+public abstract interface SearchConfiguration {
 
   /** The default location of the configuration for the search. */
   String DEFAULT_CONFIGURATION_URL = "file://~/.mmm/search.xml";
@@ -44,5 +44,19 @@ public interface SearchConfiguration {
    *         configured for the given <code>id</code>.
    */
   SearchSource getSource(String id);
+
+  /**
+   * This method gets the general purpose {@link SearchProperties}.
+   * 
+   * @return the {@link SearchProperties}.
+   */
+  SearchProperties getProperties();
+
+  /**
+   * This method gets the {@link SearchFields}.
+   * 
+   * @return the {@link SearchFields}.
+   */
+  SearchFields getFields();
 
 }

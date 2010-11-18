@@ -10,7 +10,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 /**
  * This is the interface for the configuration of a
  * {@link net.sf.mmm.search.api.SearchEntry#getType() type} of a
- * {@link net.sf.mmm.search.api.SearchEntry}.
+ * {@link net.sf.mmm.search.api.SearchEntry}. It represents a content-type for
+ * the view.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -19,17 +20,11 @@ public interface SearchEntryType extends AttributeReadId<String>, AttributeReadT
 
   /**
    * The {@link #getId() ID} of the {@link SearchEntryType} that represents any
-   * type. In a search it can be used as wildcard to match all types.
+   * type. In a search it can be used as wildcard to match all types. For the
+   * view this {@link SearchEntryType} also defines the default
+   * {@link #getIcon() icon} used as fallback for unknown types.
    */
   String ID_ANY = SearchSource.ID_ANY;
-
-  /**
-   * The {@link #getId() ID} of the {@link SearchEntryType} that is the default
-   * used as fallback for unknown types.
-   * 
-   * @see SearchEngineConfiguration#getEntryType(String)
-   */
-  String ID_DEFAULT = "default";
 
   /**
    * {@inheritDoc}
@@ -50,11 +45,13 @@ public interface SearchEntryType extends AttributeReadId<String>, AttributeReadT
   String getTitle();
 
   /**
-   * This method gets the name (path relative to icon folder) of the icon
+   * This method gets the name (path relative to icon folder) or URL of the icon
    * representing this {@link SearchEntryType}.
    * 
    * @return the name of the icon representing the file-type or a default icon
-   *         if no according icon could be found.
+   *         if no according icon could be found. May be <code>null</code> for
+   *         {@link net.sf.mmm.search.view.api.SearchEntryTypeView combined}
+   *         types.
    */
   String getIcon();
 

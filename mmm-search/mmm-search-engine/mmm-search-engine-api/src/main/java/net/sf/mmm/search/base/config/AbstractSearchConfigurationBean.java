@@ -3,12 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base.config;
 
+import java.util.Properties;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
+import net.sf.mmm.util.xml.base.jaxb.XmlAdapterProperties;
 
 /**
  * This is the abstract base-implementation of {@link SearchConfiguration} as
@@ -31,6 +35,20 @@ public abstract class AbstractSearchConfigurationBean implements SearchConfigura
   /** @see #getSearchIndex() */
   @XmlElement(name = "search-index")
   private SearchIndexConfigurationBean searchIndex;
+
+  /** @see #getProperties() */
+  // JAXB does not allow us to omit an element and directly embed
+  // SearchPropertiesBean, so we have to do a workaround here...
+  @XmlElement(name = "properties")
+  @XmlJavaTypeAdapter(value = XmlAdapterProperties.class)
+  private Properties rawProperties;
+
+  /** @see #getProperties() */
+  private transient SearchPropertiesBean properties;
+
+  /** @see #getFields() */
+  @XmlElement(name = "fields")
+  private SearchFieldsBean fields;
 
   /**
    * The constructor.
@@ -55,4 +73,57 @@ public abstract class AbstractSearchConfigurationBean implements SearchConfigura
 
     this.searchIndex = searchIndex;
   }
+
+  /**
+   * This method gets the raw {@link Properties}.
+   * 
+   * @return the {@link Properties}.
+   */
+  protected Properties getRawProperties() {
+
+    if (this.rawProperties == null) {
+      this.rawProperties = new Properties();
+    }
+    return this.rawProperties;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchPropertiesBean getProperties() {
+
+    if (this.properties == null) {
+      this.properties = new SearchPropertiesBean(getRawProperties());
+    }
+    return this.properties;
+  }
+
+  /**
+   * @param searchProperties is the searchProperties to set
+   */
+  public void setProperties(SearchPropertiesBean searchProperties) {
+
+    this.properties = searchProperties;
+    this.rawProperties = searchProperties.getProperties();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchFieldsBean getFields() {
+
+    if (this.fields == null) {
+      this.fields = new SearchFieldsBean();
+    }
+    return this.fields;
+  }
+
+  /**
+   * @param fields is the fields to set
+   */
+  public void setFields(SearchFieldsBean fields) {
+
+    this.fields = fields;
+  }
+
 }

@@ -8,7 +8,7 @@ import net.sf.mmm.search.api.SearchException;
 
 /**
  * This is the exception thrown if a
- * {@link net.sf.mmm.search.api.SearchEntry#getProperty(String) property value}
+ * {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) property value}
  * is invalid.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

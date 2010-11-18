@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api;
 
-import java.io.Reader;
-
 import net.sf.mmm.search.api.SearchEntry;
 
 /**
@@ -15,81 +13,38 @@ import net.sf.mmm.search.api.SearchEntry;
 public interface MutableSearchEntry extends SearchEntry {
 
   /**
-   * This enum contains the available modes for indexing and storing properties.
-   * 
-   * @see MutableSearchEntry#setProperty(String, String, Mode)
-   */
-  public enum Mode {
-
-    /**
-     * Indicates that the property will be tokenized and stored in the index.
-     * This is the default.
-     */
-    TEXT,
-
-    /**
-     * Indicates that the property will NOT be tokenized so it can be searched
-     * as it is. This is useful for technical properties such as
-     * {@link #PROPERTY_UID} or {@link #PROPERTY_URI}.
-     */
-    NOT_TOKENIZED,
-
-    /**
-     * Indicates that the property will NOT be indexed but only stored. Such
-     * property is hidden for the searcher but can be retrieved from the result.
-     */
-    NOT_INDEXED,
-
-    /**
-     * Indicates that the property will only be tokenized but NOT be stored in
-     * the index. Entries can still be found but the property can NOT be
-     * {@link SearchEntry#getProperty(String) retrieved} from the
-     * {@link net.sf.mmm.search.engine.api.SearchHit hit}. This option allows to
-     * reduce the size of the search-index but also disables
-     * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()
-     * highlighting} if used for {@link #PROPERTY_TEXT}.
-     */
-    NOT_STORED,
-  }
-
-  /**
-   * This method sets the property with the given <code>name</code> to the given
-   * <code>value</code>.
-   * 
-   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}
-   *        .
-   * @param value is the value of the property to set.
-   * @param mode determines how the property is indexed and stored.
-   */
-  void setProperty(String name, String value, Mode mode);
-
-  /**
-   * This method sets the property with the given <code>name</code> to the
-   * content of the given <code>reader</code>.<br>
-   * Use this method if you want to set a property to a very long text with a
-   * low memory consumption. The property mode will be {@link Mode#NOT_STORED}.
-   * If this feature is NOT supported by the implementation, the content of the
-   * reader is read as String into memory until a configurable maximum is
-   * reached.<br>
+   * This method sets the field with the given <code>name</code> to the given
+   * <code>value</code>.<br/>
+   * It is forbidden to change the value of {@link #FIELD_ID} and doing so will
+   * cause an exception.<br/>
+   * For the supported types see
+   * {@link net.sf.mmm.search.api.config.SearchFieldType}. Additionally
+   * {@link java.io.Reader} can be used to index large texts.<br/>
    * <b>ATTENTION:</b><br>
-   * The <code>valueReader</code> may be read only when the entry is
-   * {@link SearchIndexer#add(MutableSearchEntry) written} to the index. When
-   * you use this method please ensure that the reader stays open until the
-   * entry is {@link SearchIndexer#add(MutableSearchEntry) written} and that you
-   * {@link Reader#close() close} the reader if your did NOT write it.
+   * A <code>value</code> of the type {@link java.io.Reader} should only be used
+   * when indexing really large texts. In this case the
+   * {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getMode()
+   * mode} has to be
+   * {@link net.sf.mmm.search.api.config.SearchFieldMode#SEARCHABLE} and
+   * {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getType()
+   * type} has to be {@link net.sf.mmm.search.api.config.SearchFieldType#TEXT}
+   * (NOT {@link java.io.Reader}). Further the {@link java.io.Reader} will only
+   * be {@link java.io.Reader#close() closed} when the
+   * {@link MutableSearchEntry} has been
+   * {@link SearchIndexer#add(MutableSearchEntry) added} or
+   * {@link SearchIndexer#update(MutableSearchEntry) updated}. If you never
+   * write the {@link MutableSearchEntry} to the index for some reason, you are
+   * responsible for closing the reader.
    * 
-   * @see #setProperty(String, String, Mode)
-   * 
-   * @param name is the name of the property. E.g. {@link #PROPERTY_TEXT "text"}
-   *        .
-   * @param valueReader is a reader to the value of the property to set.
+   * @param name is the name of the field. E.g. {@link #FIELD_TEXT}.
+   * @param value is the value of the field to set.
    */
-  void setProperty(String name, Reader valueReader);
+  void setField(String name, Object value);
 
   /**
-   * This method sets the {@link #PROPERTY_URI URI}.
+   * This method sets the {@link #FIELD_URI URI}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * @see #getUri()
    * 
    * @param uri is the URI to set.
@@ -97,19 +52,19 @@ public interface MutableSearchEntry extends SearchEntry {
   void setUri(String uri);
 
   /**
-   * This method sets the {@link #PROPERTY_UID UID}.
+   * This method sets the {@link #FIELD_CUSTOM_ID UID}.
    * 
-   * @see #setProperty(String, String, Mode)
-   * @see #getUid()
+   * @see #setField(String, Object)
+   * @see #getCustomId()
    * 
-   * @param uid is the UID to set.
+   * @param cid is the UID to set.
    */
-  void setUid(String uid);
+  void setCustomId(Object cid);
 
   /**
-   * This method sets the {@link #PROPERTY_TITLE title}.
+   * This method sets the {@link #FIELD_TITLE title}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * @see #getTitle()
    * 
    * @param title is the title to set.
@@ -117,36 +72,36 @@ public interface MutableSearchEntry extends SearchEntry {
   void setTitle(String title);
 
   /**
-   * This method sets the {@link #PROPERTY_TEXT text}.
+   * This method sets the {@link #FIELD_TEXT text}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * 
    * @param text is the text to set.
    */
   void setText(String text);
 
   /**
-   * This method sets the {@link #PROPERTY_KEYWORDS keywords}.
+   * This method sets the {@link #FIELD_KEYWORDS keywords}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * 
    * @param keywords are the keywords to set.
    */
   void setKeywords(String keywords);
 
   /**
-   * This method sets the {@link #PROPERTY_AUTHOR author}.
+   * This method sets the {@link #FIELD_CREATOR creator}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * 
    * @param author is the author to set.
    */
-  void setAuthor(String author);
+  void setCreator(String author);
 
   /**
-   * This method sets the {@link #PROPERTY_TYPE type}.
+   * This method sets the {@link #FIELD_TYPE type}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * @see #getType()
    * 
    * @param type is the type to set.
@@ -154,9 +109,9 @@ public interface MutableSearchEntry extends SearchEntry {
   void setType(String type);
 
   /**
-   * This method sets the {@link #PROPERTY_SOURCE source}.
+   * This method sets the {@link #FIELD_SOURCE source}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * @see #getSource()
    * 
    * @param source is the source to set.
@@ -164,9 +119,9 @@ public interface MutableSearchEntry extends SearchEntry {
   void setSource(String source);
 
   /**
-   * This method sets the {@link #PROPERTY_SIZE size}.
+   * This method sets the {@link #FIELD_SIZE size}.
    * 
-   * @see #setProperty(String, String, Mode)
+   * @see #setField(String, Object)
    * @see #getSource()
    * 
    * @param size is the size to set.

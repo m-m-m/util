@@ -9,15 +9,19 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.search.api.config.SearchConfiguration;
+import net.sf.mmm.search.api.config.SearchConfigurationHolder;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
+import net.sf.mmm.search.api.config.SearchProperties;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
-import net.sf.mmm.search.engine.api.config.SearchEngineProperties;
+import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
+import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.search.engine.base.AbstractSearchEngineBuilder;
-import net.sf.mmm.search.engine.base.SearchEngineRefresher;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
+import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -40,17 +44,20 @@ import org.apache.lucene.store.Directory;
 @Named
 public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
 
-  /** @see #setAnalyzer(Analyzer) */
+  /** @see #getAnalyzer() */
   private Analyzer analyzer;
 
   /** @see #setLuceneAnalyzer(LuceneAnalyzer) */
   private LuceneAnalyzer luceneAnalyzer;
 
-  /** @see #setLuceneDirectoryBuilder(LuceneDirectoryBuilder) */
+  /** @see #getLuceneDirectoryBuilder() */
   private LuceneDirectoryBuilder luceneDirectoryBuilder;
 
-  /** @see #setHighlightFormatter(Formatter) */
+  /** @see #getHighlightFormatter() */
   private Formatter highlightFormatter;
+
+  /** @see #getFieldManagerFactory() */
+  private LuceneFieldManagerFactory fieldManagerFactory;
 
   /**
    * The constructor.
@@ -109,6 +116,14 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   }
 
   /**
+   * @return the highlightFormatter
+   */
+  protected Formatter getHighlightFormatter() {
+
+    return this.highlightFormatter;
+  }
+
+  /**
    * @param highlightFormatter is the highlightFormatter to set
    */
   @Inject
@@ -119,11 +134,23 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   }
 
   /**
-   * @return the highlightFormatter
+   * This method gets the {@link LuceneFieldManagerFactory}.
+   * 
+   * @return the {@link LuceneFieldManagerFactory}.
    */
-  protected Formatter getHighlightFormatter() {
+  protected LuceneFieldManagerFactory getFieldManagerFactory() {
 
-    return this.highlightFormatter;
+    return this.fieldManagerFactory;
+  }
+
+  /**
+   * @param fieldManagerFactory is the fieldManagerFactory to set
+   */
+  @Inject
+  public void setFieldManagerFactory(LuceneFieldManagerFactory fieldManagerFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.fieldManagerFactory = fieldManagerFactory;
   }
 
   /**
@@ -141,12 +168,12 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
       }
       this.analyzer = this.luceneAnalyzer.getAnalyzer();
     }
-    if (getSearchQueryBuilder() == null) {
-      LuceneSearchQueryBuilder luceneSearchQueryBuilder = new LuceneSearchQueryBuilder();
-      luceneSearchQueryBuilder.setLuceneAnalyzer(this.luceneAnalyzer);
-      luceneSearchQueryBuilder.setAnalyzer(this.analyzer);
-      luceneSearchQueryBuilder.initialize();
-      setSearchQueryBuilder(luceneSearchQueryBuilder);
+    if (getSearchQueryBuilderFactory() == null) {
+      LuceneSearchQueryBuilderFactory factory = new LuceneSearchQueryBuilderFactory();
+      factory.setLuceneAnalyzer(this.luceneAnalyzer);
+      factory.setAnalyzer(this.analyzer);
+      factory.initialize();
+      setSearchQueryBuilderFactory(factory);
     }
     if (this.highlightFormatter == null) {
       this.highlightFormatter = new HighlightFormatter();
@@ -156,28 +183,35 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
       directoryBuilderImpl.initialize();
       this.luceneDirectoryBuilder = directoryBuilderImpl;
     }
+    if (this.fieldManagerFactory == null) {
+      LuceneFieldManagerFactoryImpl impl = new LuceneFieldManagerFactoryImpl();
+      impl.setAnalyzer(this.analyzer);
+      impl.initialize();
+      this.fieldManagerFactory = impl;
+    }
   }
 
   /**
    * {@inheritDoc}
    */
-  public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration,
-      SearchEngineProperties properties) {
+  public ManagedSearchEngine createSearchEngine(SearchEngineConfigurationHolder configurationHolder) {
 
-    NlsNullPointerException.checkNotNull(SearchIndexConfiguration.class, configuration);
-    NlsNullPointerException.checkNotNull(SearchEngineProperties.class, properties);
+    NlsNullPointerException
+        .checkNotNull(SearchEngineConfigurationHolder.class, configurationHolder);
+    SearchEngineConfiguration configuration = configurationHolder.getBean();
+    SearchProperties properties = configuration.getProperties();
+    NlsNullPointerException.checkNotNull(SearchProperties.class, properties);
+    SearchIndexConfiguration indexConfiguration = configuration.getSearchIndex();
+    NlsNullPointerException.checkNotNull(SearchIndexConfiguration.class, indexConfiguration);
     try {
-      Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration);
-      SearchEngineRefresher searchEngineRefresher = null;
-      String autoRefresh = properties.getProperty(SearchEngineProperties.KEY_AUTO_REFRESH);
-      if ((autoRefresh == null) || (StringUtil.TRUE.equals(autoRefresh))) {
-        searchEngineRefresher = getSearchEngineRefresher();
+      Directory directory = this.luceneDirectoryBuilder.createDirectory(indexConfiguration);
+      PeriodicRefresher periodicRefresher = null;
+      String autoRefresh = properties.getProperty(SearchProperties.KEY_AUTO_REFRESH);
+      if (StringUtil.TRUE.equals(autoRefresh)) {
+        periodicRefresher = getPeriodicRefresher();
       }
       IndexReader indexReader = IndexReader.open(directory, true);
-      LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer,
-          getSearchQueryBuilder(), this.highlightFormatter, searchEngineRefresher);
-      engine.initialize();
-      return engine;
+      return createSearchEngine(indexReader, configurationHolder, periodicRefresher);
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
@@ -188,12 +222,21 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
    * {@link IndexReader}.
    * 
    * @param indexReader is the {@link IndexReader}.
+   * @param configurationHolder is the {@link SearchConfigurationHolder}.
+   * @param refresher is the {@link PeriodicRefresher} or <code>null</code> to
+   *        disable auto-refresh.
    * @return the {@link ManagedSearchEngine}.
    */
-  public ManagedSearchEngine createSearchEngine(IndexReader indexReader) {
+  public ManagedSearchEngine createSearchEngine(IndexReader indexReader,
+      SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder,
+      PeriodicRefresher refresher) {
 
+    LuceneFieldManager fieldManager = this.fieldManagerFactory
+        .createFieldManager(configurationHolder);
     LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer,
-        getSearchQueryBuilder(), this.highlightFormatter);
+        getSearchQueryBuilderFactory().createQueryBuilder(configurationHolder),
+        this.highlightFormatter, fieldManager, getSearchDependencies(), refresher);
+    engine.initialize();
     return engine;
   }
 

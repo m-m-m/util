@@ -3,12 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
-import java.util.Properties;
-
 import net.sf.mmm.search.indexer.api.ResourceSearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.transformer.api.Transformer;
@@ -74,14 +73,14 @@ public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComp
    * <code>properties</code>. It will also {@link String#trim() trim} the
    * properties value.
    * 
-   * @param properties is where to get the property from.
+   * @param context is where to get the property from.
    * @param key is the name of the requested property.
    * @return the trimmed property or <code>null</code> if the property is NOT
    *         set or its trimmed value is the empty string.
    */
-  protected String getProperty(Properties properties, String key) {
+  protected String getStringProperty(GenericContext context, String key) {
 
-    String value = properties.getProperty(key);
+    String value = context.getVariable(key, String.class);
     if (value != null) {
       value = value.trim();
       if (value.length() == 0) {

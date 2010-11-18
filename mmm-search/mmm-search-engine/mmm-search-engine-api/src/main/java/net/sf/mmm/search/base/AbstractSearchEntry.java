@@ -4,6 +4,7 @@
 package net.sf.mmm.search.base;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 
 /**
  * This is the abstract base implementation of the {@link SearchEntry}
@@ -11,7 +12,7 @@ import net.sf.mmm.search.api.SearchEntry;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchEntry implements SearchEntry {
+public abstract class AbstractSearchEntry extends AbstractLoggableObject implements SearchEntry {
 
   /**
    * The constructor.
@@ -26,7 +27,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    */
   public String getTitle() {
 
-    return getProperty(PROPERTY_TITLE);
+    return getFieldAsString(FIELD_TITLE);
   }
 
   /**
@@ -34,15 +35,23 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    */
   public String getUri() {
 
-    return getProperty(PROPERTY_URI);
+    return getFieldAsString(FIELD_URI);
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getUid() {
+  public String getId() {
 
-    return getProperty(PROPERTY_UID);
+    return getFieldAsString(FIELD_ID);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getCustomId() {
+
+    return getFieldAsString(FIELD_CUSTOM_ID);
   }
 
   /**
@@ -50,7 +59,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    */
   public String getText() {
 
-    return getProperty(PROPERTY_TEXT);
+    return getFieldAsString(FIELD_TEXT);
   }
 
   /**
@@ -58,15 +67,15 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    */
   public String getType() {
 
-    return getProperty(PROPERTY_TYPE);
+    return getFieldAsString(FIELD_TYPE);
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getAuthor() {
+  public String getCreator() {
 
-    return getProperty(PROPERTY_AUTHOR);
+    return getFieldAsString(FIELD_CREATOR);
   }
 
   /**
@@ -74,7 +83,7 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    */
   public String getSource() {
 
-    return getProperty(PROPERTY_SOURCE);
+    return getFieldAsString(FIELD_SOURCE);
   }
 
   /**
@@ -82,16 +91,67 @@ public abstract class AbstractSearchEntry implements SearchEntry {
    */
   public Long getSize() {
 
-    Long size = null;
-    String sizeString = getProperty(PROPERTY_SIZE);
-    if (sizeString != null) {
-      try {
-        size = Long.valueOf(sizeString);
-      } catch (NumberFormatException e) {
-        // ignore...
+    return getField(FIELD_SIZE, Long.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getFieldAsString(String name) {
+
+    return getField(name, String.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+
+    Object cid = getCustomId();
+    if (cid == null) {
+      Object id = getId();
+      if (id == null) {
+        return 0;
+      } else {
+        return id.hashCode();
+      }
+    } else {
+      return cid.hashCode();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object object) {
+
+    if (object == null) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    if (getClass() == object.getClass()) {
+      // CID has higher priority as it will also work for transient entries
+      Object myCid = getCustomId();
+      if (myCid == null) {
+        Object myId = getId();
+        if (myId != null) {
+          Object otherId = ((SearchEntry) object).getId();
+          if (myId.equals(otherId)) {
+            return true;
+          }
+        }
+      } else {
+        Object otherCid = ((SearchEntry) object).getCustomId();
+        if (myCid.equals(otherCid)) {
+          return true;
+        }
       }
     }
-    return size;
+    return false;
   }
 
   /**
@@ -100,17 +160,25 @@ public abstract class AbstractSearchEntry implements SearchEntry {
   @Override
   public String toString() {
 
-    String id = getUid();
-    if (id == null) {
-      id = getUri();
-      if (id == null) {
-        id = getTitle();
-        if (id == null) {
-          id = "undefined";
-        }
+    StringBuilder sb = new StringBuilder();
+    String uri = getUri();
+    if (uri != null) {
+      sb.append(uri);
+      String title = getTitle();
+      if (title != null) {
+        sb.append(title);
       }
     }
-    return id;
+    String cid = getCustomId();
+    if (cid != null) {
+      sb.append('[');
+      sb.append(cid);
+      sb.append(']');
+    }
+    if (sb.length() == 0) {
+      sb.append('-');
+    }
+    return sb.toString();
   }
 
 }

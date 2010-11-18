@@ -4,6 +4,7 @@
 package net.sf.mmm.search.engine.base;
 
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 
 /**
@@ -17,18 +18,18 @@ import net.sf.mmm.util.component.base.AbstractLoggableObject;
 public abstract class AbstractSearchEngine extends AbstractLoggableObject implements
     ManagedSearchEngine {
 
-  /** The {@link SearchEngineRefresher}. */
-  private final SearchEngineRefresher searchEngineRefresher;
+  /** The {@link PeriodicRefresher}. */
+  private final PeriodicRefresher periodicRefresher;
 
   /**
    * The constructor.
    * 
-   * @param searchEngineRefresher is the {@link SearchEngineRefresher}.
+   * @param periodicRefresher is the {@link PeriodicRefresher}.
    */
-  public AbstractSearchEngine(SearchEngineRefresher searchEngineRefresher) {
+  public AbstractSearchEngine(PeriodicRefresher periodicRefresher) {
 
     super();
-    this.searchEngineRefresher = searchEngineRefresher;
+    this.periodicRefresher = periodicRefresher;
   }
 
   /**
@@ -37,8 +38,8 @@ public abstract class AbstractSearchEngine extends AbstractLoggableObject implem
    */
   public void initialize() {
 
-    if (this.searchEngineRefresher != null) {
-      this.searchEngineRefresher.addSearchEngine(this);
+    if (this.periodicRefresher != null) {
+      this.periodicRefresher.addRefreshable(this);
     }
   }
 
@@ -47,8 +48,8 @@ public abstract class AbstractSearchEngine extends AbstractLoggableObject implem
    */
   public void close() {
 
-    if (this.searchEngineRefresher != null) {
-      this.searchEngineRefresher.removeSearchEngine(this);
+    if (this.periodicRefresher != null) {
+      this.periodicRefresher.removeRefreshable(this);
     }
   }
 

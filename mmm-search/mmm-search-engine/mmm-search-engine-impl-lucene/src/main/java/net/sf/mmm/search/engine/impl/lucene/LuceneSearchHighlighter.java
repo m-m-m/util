@@ -61,7 +61,7 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
         // result = this.highlighter.getBestFragment(this.analyzer,
         // SearchProperties.PROPERTY_TEXT, text);
 
-        TokenStream tokenStream = this.analyzer.tokenStream(SearchEntry.PROPERTY_TEXT,
+        TokenStream tokenStream = this.analyzer.tokenStream(SearchEntry.FIELD_TEXT,
             new StringReader(text));
         result = this.highlighter.getBestFragments(tokenStream, text, 3,
             SearchHit.HIGHLIGHT_CUT_TEXT);

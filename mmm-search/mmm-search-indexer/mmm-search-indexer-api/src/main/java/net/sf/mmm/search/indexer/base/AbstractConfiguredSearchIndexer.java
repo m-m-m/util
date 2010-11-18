@@ -7,29 +7,30 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
 import net.sf.mmm.search.indexer.api.config.ConfiguredSearchIndexerOptions;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
-import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.search.indexer.api.state.SearchIndexerSourceState;
-import net.sf.mmm.search.indexer.api.state.SearchIndexerState;
-import net.sf.mmm.search.indexer.api.state.SearchIndexerStateManager;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerStateHolder;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerStateLoader;
 import net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy;
 import net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategyManager;
 import net.sf.mmm.search.indexer.base.config.ConfiguredSearchIndexerOptionsBean;
-import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationReaderImpl;
-import net.sf.mmm.search.indexer.base.state.SearchIndexerStateManagerImpl;
+import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationLoaderImpl;
+import net.sf.mmm.search.indexer.base.state.SearchIndexerStateLoaderImpl;
 import net.sf.mmm.search.indexer.base.strategy.UpdateStrategyArgumentsBean;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.context.impl.GenericContextFactoryImpl;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -43,11 +44,11 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
   /** @see #getSearchIndexerManager() */
   private SearchIndexerBuilder searchIndexerManager;
 
-  /** @see #getSearchIndexerConfigurationReader() */
-  private SearchIndexerConfigurationReader searchIndexerConfigurationReader;
+  /** @see #getSearchIndexerConfigurationLoader() */
+  private SearchIndexerConfigurationLoader searchIndexerConfigurationLoader;
 
-  /** @see #getSearchIndexerStateManager() */
-  private SearchIndexerStateManager searchIndexerStateManager;
+  /** @see #getSearchIndexerStateLoader() */
+  private SearchIndexerStateLoader searchIndexerStateLoader;
 
   /** @see #getSearchIndexerUpdateStrategyManager() */
   private SearchIndexerUpdateStrategyManager searchIndexerUpdateStrategyManager;
@@ -83,39 +84,39 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
   /**
    * @return the searchIndexerConfigurationReader
    */
-  protected SearchIndexerConfigurationReader getSearchIndexerConfigurationReader() {
+  protected SearchIndexerConfigurationLoader getSearchIndexerConfigurationLoader() {
 
-    return this.searchIndexerConfigurationReader;
+    return this.searchIndexerConfigurationLoader;
   }
 
   /**
-   * @param searchIndexerConfigurationReader is the
+   * @param searchIndexerConfigurationLoader is the
    *        searchIndexerConfigurationReader to set
    */
   @Inject
-  public void setSearchIndexerConfigurationReader(
-      SearchIndexerConfigurationReader searchIndexerConfigurationReader) {
+  public void setSearchIndexerConfigurationLoader(
+      SearchIndexerConfigurationLoader searchIndexerConfigurationLoader) {
 
     getInitializationState().requireNotInitilized();
-    this.searchIndexerConfigurationReader = searchIndexerConfigurationReader;
+    this.searchIndexerConfigurationLoader = searchIndexerConfigurationLoader;
   }
 
   /**
    * @return the searchIndexStateManager
    */
-  protected SearchIndexerStateManager getSearchIndexerStateManager() {
+  protected SearchIndexerStateLoader getSearchIndexerStateLoader() {
 
-    return this.searchIndexerStateManager;
+    return this.searchIndexerStateLoader;
   }
 
   /**
-   * @param searchIndexerStateManager is the searchIndexStateManager to set
+   * @param searchIndexerStateLoader is the searchIndexStateManager to set
    */
   @Inject
-  public void setSearchIndexerStateManager(SearchIndexerStateManager searchIndexerStateManager) {
+  public void setSearchIndexerStateLoader(SearchIndexerStateLoader searchIndexerStateLoader) {
 
     getInitializationState().requireNotInitilized();
-    this.searchIndexerStateManager = searchIndexerStateManager;
+    this.searchIndexerStateLoader = searchIndexerStateLoader;
   }
 
   /**
@@ -171,15 +172,15 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
     if (this.searchIndexerManager == null) {
       throw new ResourceMissingException("searchIndexerManager");
     }
-    if (this.searchIndexerConfigurationReader == null) {
-      SearchIndexerConfigurationReaderImpl readerImpl = new SearchIndexerConfigurationReaderImpl();
+    if (this.searchIndexerConfigurationLoader == null) {
+      SearchIndexerConfigurationLoaderImpl readerImpl = new SearchIndexerConfigurationLoaderImpl();
       readerImpl.initialize();
-      this.searchIndexerConfigurationReader = readerImpl;
+      this.searchIndexerConfigurationLoader = readerImpl;
     }
-    if (this.searchIndexerStateManager == null) {
-      SearchIndexerStateManagerImpl impl = new SearchIndexerStateManagerImpl();
+    if (this.searchIndexerStateLoader == null) {
+      SearchIndexerStateLoaderImpl impl = new SearchIndexerStateLoaderImpl();
       impl.initialize();
-      this.searchIndexerStateManager = impl;
+      this.searchIndexerStateLoader = impl;
     }
     if (this.genericContextFactory == null) {
       GenericContextFactoryImpl impl = new GenericContextFactoryImpl();
@@ -230,7 +231,7 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
    * {@inheritDoc}
    */
   public void index(SearchIndexerSource source, ConfiguredSearchIndexerOptions options,
-      SearchIndexerState state, SearchIndexer searchIndexer) {
+      SearchIndexerStateHolder stateHolder, SearchIndexer searchIndexer) {
 
     if (source.getLocations().isEmpty()) {
       if (!source.getId().equals(SearchSource.ID_ANY)) {
@@ -243,7 +244,7 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
 
     getLogger().debug("Indexing source '" + source.getId() + "' ...");
     String sourceId = source.getId();
-    SearchIndexerSourceState sourceState = state.getSourceState(sourceId);
+    SearchIndexerSourceState sourceState = stateHolder.getBean().getSourceState(sourceId);
     if (sourceState == null) {
       throw new ObjectNotFoundException(SearchIndexerSourceState.class.getSimpleName(), sourceId);
     }
@@ -265,7 +266,7 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
 
     // complete indexing...
     searchIndexer.flush();
-    this.searchIndexerStateManager.save(state);
+    stateHolder.flush();
     getLogger().debug("Indexed source '" + source.getId() + "' ...");
   }
 
@@ -282,29 +283,33 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
    */
   public void index(String configurationLocation, ConfiguredSearchIndexerOptions options) {
 
-    SearchIndexerConfiguration configuration = this.searchIndexerConfigurationReader
-        .readConfiguration(configurationLocation);
-    index(configuration, options);
+    SearchIndexerConfigurationHolder configurationHolder = this.searchIndexerConfigurationLoader
+        .loadConfiguration(configurationLocation);
+    index(configurationHolder, options);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void index(SearchIndexerConfiguration configuration) {
+  public void index(SearchIndexerConfigurationHolder configurationHolder) {
 
-    index(configuration, new ConfiguredSearchIndexerOptionsBean());
+    index(configurationHolder, new ConfiguredSearchIndexerOptionsBean());
   }
 
   /**
    * {@inheritDoc}
    */
-  public void index(SearchIndexerConfiguration configuration, ConfiguredSearchIndexerOptions options) {
+  public void index(SearchIndexerConfigurationHolder configurationHolder,
+      ConfiguredSearchIndexerOptions options) {
 
-    this.searchIndexerConfigurationReader.validateConfiguration(configuration);
-    SearchIndexerState state = this.searchIndexerStateManager.load(configuration);
-    SearchIndexConfiguration searchIndexConfiguration = configuration.getSearchIndex();
+    NlsNullPointerException.checkNotNull(SearchIndexerConfigurationHolder.class,
+        configurationHolder);
+    SearchIndexerConfiguration configuration = configurationHolder.getBean();
+    NlsNullPointerException.checkNotNull(SearchIndexerConfiguration.class, configuration);
+    this.searchIndexerConfigurationLoader.validateConfiguration(configuration);
+    SearchIndexerStateHolder state = this.searchIndexerStateLoader.load(configuration);
     List<String> sourceIds = options.getSourceIds();
-    SearchIndexer searchIndexer = this.searchIndexerManager.createIndexer(searchIndexConfiguration,
+    SearchIndexer searchIndexer = this.searchIndexerManager.createIndexer(configurationHolder,
         options);
     getLogger().debug("Start to index...");
     try {

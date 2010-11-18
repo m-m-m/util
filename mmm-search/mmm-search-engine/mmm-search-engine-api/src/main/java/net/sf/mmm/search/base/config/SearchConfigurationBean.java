@@ -75,4 +75,5 @@ public class SearchConfigurationBean extends AbstractSearchConfigurationBean {
     }
     return this.sourceMap;
   }
+
 }

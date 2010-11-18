@@ -118,7 +118,7 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
       if ((arguments.getSourceState().getIndexingDate() != null)
           && (arguments.getOptions().isOverwriteIndex())) {
         getLogger().debug("Removing all search-entries for source: " + sourceId);
-        int removeCount = arguments.getIndexer().remove(SearchEntry.PROPERTY_SOURCE, sourceId);
+        int removeCount = arguments.getIndexer().remove(SearchEntry.FIELD_SOURCE, sourceId);
         getLogger().debug("Removed " + removeCount + " entries/entry.");
       }
     }

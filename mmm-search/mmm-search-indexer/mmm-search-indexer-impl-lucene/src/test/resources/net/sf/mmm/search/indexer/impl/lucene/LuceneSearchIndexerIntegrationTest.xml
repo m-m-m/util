@@ -8,7 +8,7 @@
     <source id="twiki" title="Wiki" url-prefix="http://foo.bar/twiki/bin/view/" />
     <source id="svn" title="Subversion" update-strategy="last-modified" url-prefix="http://foo.bar/svn/trunk/">
       <locations>
-        <location absolute-uris="false" encoding="UTF-8" filter="svn-filter" location-uri="src/main/java" source="svn" uri-transformer="wiki-transformer" />
+        <location absolute-uris="false" filter="svn-filter" location-uri="src/main/java" source="svn" uri-transformer="wiki-transformer" />
       </locations>
     </source>
   </sources>

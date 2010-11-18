@@ -6,7 +6,8 @@ package net.sf.mmm.search.indexer.base.config;
 import java.util.List;
 
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
-import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationReader;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.test.TestResourceHelper;
@@ -22,28 +23,29 @@ import org.junit.Test;
 public class SearchIndexerConfigurationReaderTest {
 
   /**
-   * This method gets the {@link SearchIndexerConfigurationReader} to test.
+   * This method gets the {@link SearchIndexerConfigurationLoader} to test.
    * 
-   * @return the {@link SearchIndexerConfigurationReader} to test.
+   * @return the {@link SearchIndexerConfigurationLoader} to test.
    */
-  protected SearchIndexerConfigurationReader getConfigurationReader() {
+  protected SearchIndexerConfigurationLoader getConfigurationReader() {
 
-    SearchIndexerConfigurationReaderImpl impl = new SearchIndexerConfigurationReaderImpl();
+    SearchIndexerConfigurationLoaderImpl impl = new SearchIndexerConfigurationLoaderImpl();
     impl.initialize();
     return impl;
   }
 
   /**
-   * Tests {@link SearchIndexerConfigurationReader#readConfiguration(String)}.
+   * Tests {@link SearchIndexerConfigurationLoader#loadConfiguration(String)}.
    */
   @Test
   public void testRead() {
 
-    SearchIndexerConfigurationReader reader = getConfigurationReader();
+    SearchIndexerConfigurationLoader reader = getConfigurationReader();
 
     String resourceUri = TestResourceHelper.getTestPath(SearchIndexerConfigurationReaderTest.class,
         ".xml");
-    SearchIndexerConfiguration configuration = reader.readConfiguration(resourceUri);
+    SearchIndexerConfigurationHolder configurationHolder = reader.loadConfiguration(resourceUri);
+    SearchIndexerConfiguration configuration = configurationHolder.getBean();
     Assert.assertNotNull(configuration);
     reader.validateConfiguration(configuration);
     Assert.assertEquals("~/search-index", configuration.getSearchIndex().getLocation());

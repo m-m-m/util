@@ -87,16 +87,32 @@ public interface SearchEngine {
       throws SearchException;
 
   /**
-   * This method gets a {@link SearchEntry entry} by its technical
-   * {@link SearchHit#getEntryId() ID}. <br>
-   * This method may be useful for getting details of a {@link SearchHit hit} in
-   * a new request (without rerunning the whole search).
+   * This method counts the number of {@link SearchEntry}s where the given
+   * <code>field</code> has the given <code>value</code>. This can be useful for
+   * counting the {@link SearchEntry}s of a particular
+   * {@link SearchEntry#getSource() source} or {@link SearchEntry#getType()
+   * type}. You could also do a search to figure this out but this method is
+   * supposed to be much faster.
    * 
-   * @param id is the {@link SearchHit#getEntryId() ID} of the requested entry.
+   * @param field is the name of the {@link SearchEntry#getField(String) field}.
+   * @param value is the potential {@link SearchEntry#getField(String) value} to
+   *        match.
+   * @return the number of matching {@link SearchEntry}s.
+   */
+  int count(String field, String value);
+
+  /**
+   * This method gets a {@link SearchEntry entry} by its technical
+   * {@link SearchHit#getEntryId() entry-ID}. <br>
+   * This method may be useful for getting details of a {@link SearchHit hit} in
+   * a new request (without rerunning the search).
+   * 
+   * @param entryId is the {@link SearchHit#getEntryId() ID} of the requested
+   *        entry.
    * @return the entry with the given <code>id</code> or <code>null</code> if no
    *         such entry is available.
    * @throws SearchException if the operation failed for technical reasons.
    */
-  SearchEntry getEntry(String id) throws SearchException;
+  SearchEntry getEntry(String entryId) throws SearchException;
 
 }

@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
-import java.io.Reader;
-
-import net.sf.mmm.search.base.AbstractSearchEntry;
+import net.sf.mmm.search.api.config.SearchFields;
+import net.sf.mmm.search.base.BasicSearchEntry;
+import net.sf.mmm.search.base.SearchDependencies;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 
 /**
@@ -14,33 +14,26 @@ import net.sf.mmm.search.indexer.api.MutableSearchEntry;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry implements
+public abstract class AbstractMutableSearchEntry extends BasicSearchEntry implements
     MutableSearchEntry {
 
   /**
    * The constructor.
-   */
-  public AbstractMutableSearchEntry() {
-
-    super();
-  }
-
-  /**
-   * {@inheritDoc}
    * 
-   * This is a default implementation of this feature used as fallback. Please
-   * override this method if the underlying search-engine supports it.
+   * @param searchFields are the {@link SearchFields}.
+   * @param searchDependencies are the {@link SearchDependencies}.
    */
-  public void setProperty(String name, Reader valueReader) {
+  public AbstractMutableSearchEntry(SearchFields searchFields, SearchDependencies searchDependencies) {
 
+    super(searchFields, searchDependencies);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void setAuthor(String author) {
+  public void setCreator(String author) {
 
-    setProperty(PROPERTY_AUTHOR, author, Mode.TEXT);
+    setField(FIELD_CREATOR, author);
   }
 
   /**
@@ -48,7 +41,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setKeywords(String keywords) {
 
-    setProperty(PROPERTY_KEYWORDS, keywords, Mode.TEXT);
+    setField(FIELD_KEYWORDS, keywords);
   }
 
   /**
@@ -56,7 +49,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setText(String text) {
 
-    setProperty(PROPERTY_TEXT, text, Mode.TEXT);
+    setField(FIELD_TEXT, text);
   }
 
   /**
@@ -64,7 +57,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setTitle(String title) {
 
-    setProperty(PROPERTY_TITLE, title, Mode.TEXT);
+    setField(FIELD_TITLE, title);
   }
 
   /**
@@ -72,7 +65,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setType(String type) {
 
-    setProperty(PROPERTY_TYPE, type, Mode.NOT_TOKENIZED);
+    setField(FIELD_TYPE, type);
   }
 
   /**
@@ -80,15 +73,15 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setSource(String source) {
 
-    setProperty(PROPERTY_SOURCE, source, Mode.NOT_TOKENIZED);
+    setField(FIELD_SOURCE, source);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void setUid(String uid) {
+  public void setCustomId(Object cid) {
 
-    setProperty(PROPERTY_UID, uid, Mode.NOT_TOKENIZED);
+    setField(FIELD_CUSTOM_ID, cid);
   }
 
   /**
@@ -96,7 +89,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setUri(String uri) {
 
-    setProperty(PROPERTY_URI, uri, Mode.NOT_TOKENIZED);
+    setField(FIELD_URI, uri);
   }
 
   /**
@@ -104,7 +97,7 @@ public abstract class AbstractMutableSearchEntry extends AbstractSearchEntry imp
    */
   public void setSize(long size) {
 
-    setProperty(PROPERTY_SIZE, Long.toString(size), Mode.NOT_TOKENIZED);
+    setField(FIELD_SIZE, Long.valueOf(size));
   }
 
 }

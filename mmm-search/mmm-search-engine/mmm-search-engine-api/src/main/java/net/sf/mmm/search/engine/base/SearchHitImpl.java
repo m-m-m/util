@@ -19,7 +19,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /** the actual entry this hit delegates to */
   private final SearchEntry entry;
 
-  /** @see #getEntryId() */
+  /** @see #getId() */
   private final String entryId;
 
   /** @see #getScore() */
@@ -32,18 +32,19 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
    * The constructor.
    * 
    * @param searchEntry is the actual entry this hit delegates to.
-   * @param id is the {@link #getEntryId() entry ID}.
+   * @param entryId is the {@link #getEntryId() entry-ID}.
    * @param hitScore is the {@link #getScore() score} of the hit.
    * @param searchHighlighter is the highlighter used for
    *        {@link #getHighlightedText() highlighting}.
    */
-  public SearchHitImpl(SearchEntry searchEntry, String id, double hitScore,
+  public SearchHitImpl(SearchEntry searchEntry, String entryId, double hitScore,
       SearchHighlighter searchHighlighter) {
 
     super();
     this.entry = searchEntry;
-    this.entryId = id;
-    this.score = hitScore;
+    this.entryId = entryId;
+    // lucene can produce scores that are higher than 1, this makes no sense...
+    this.score = StrictMath.min(hitScore, 1);
     this.highlighter = searchHighlighter;
   }
 
@@ -82,17 +83,34 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
-  public String getProperty(String name) {
+  @Override
+  public String getFieldAsString(String name) {
 
-    return this.entry.getProperty(name);
+    return this.entry.getFieldAsString(name);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Iterator<String> getPropertyNames() {
+  public Object getField(String name) {
 
-    return this.entry.getPropertyNames();
+    return this.entry.getField(name);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <T> T getField(String name, Class<T> type) {
+
+    return this.entry.getField(name, type);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Iterator<String> getFieldNames() {
+
+    return this.entry.getFieldNames();
   }
 
 }

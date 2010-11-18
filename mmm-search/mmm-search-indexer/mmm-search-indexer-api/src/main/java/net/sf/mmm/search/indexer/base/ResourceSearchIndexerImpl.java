@@ -6,7 +6,6 @@ package net.sf.mmm.search.indexer.base;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,12 +13,14 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserService;
+import net.sf.mmm.content.parser.base.ContentParserOptionsBean;
 import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.indexer.api.EntryUpdateVisitor;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
+import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
@@ -141,30 +142,35 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
     String extension = this.fileUtil.getExtension(filename);
     MutableSearchEntry entry = indexer.createEntry();
     entry.setUri(uri);
+    if (sourceId != null) {
+      entry.setSource(sourceId);
+    }
     long fileSize = resource.getSize();
     entry.setSize(fileSize);
-    ContentParser parser = null;
-    if (extension != null) {
-      entry.setType(extension);
-      parser = this.parserService.getParser(extension);
-    }
-    if (parser == null) {
-      parser = this.parserService.getGenericParser();
-    }
+    ContentParser parser = this.parserService.getParser(extension);
     if (parser != null) {
+      if (parser.getPrimaryKeys().contains(extension)) {
+        // normalize the extension (e.g. "htm" -> "html")
+        extension = parser.getExtension();
+      }
       try {
         InputStream inputStream = resource.openStream();
         try {
-          Properties properties = parser.parse(inputStream, fileSize, location.getEncoding());
-          String title = getProperty(properties, ContentParser.PROPERTY_KEY_TITLE);
+          ContentParserOptionsBean options = new ContentParserOptionsBean();
+          String encoding = location.getEncoding();
+          if (encoding != null) {
+            options.setEncoding(encoding);
+          }
+          GenericContext context = parser.parse(inputStream, fileSize, options);
+          String title = getStringProperty(context, ContentParser.VARIABLE_NAME_TITLE);
           if (title != null) {
             entry.setTitle(title);
           }
-          String author = getProperty(properties, ContentParser.PROPERTY_KEY_AUTHOR);
-          if (author != null) {
-            entry.setAuthor(author);
+          String creator = getStringProperty(context, ContentParser.VARIABLE_NAME_CREATOR);
+          if (creator != null) {
+            entry.setCreator(creator);
           }
-          String text = getProperty(properties, ContentParser.PROPERTY_KEY_TEXT);
+          String text = getStringProperty(context, ContentParser.VARIABLE_NAME_TEXT);
           if (text != null) {
             entry.setText(text);
           }
@@ -180,11 +186,12 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
         getLogger().error("Failed to open resource " + resource.getUri(), e);
       }
     }
+    entry.setType(extension);
+
     if (changeType == ChangeType.UPDATE) {
       indexer.update(entry);
     } else {
       indexer.add(entry);
     }
   }
-
 }

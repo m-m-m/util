@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.api.config.SearchSource;
+import net.sf.mmm.util.lang.base.attribute.AbstractAttributeReadId;
 
 /**
  * This is the implementation of {@link SearchSource} as JAXB-ready Java-Bean.
@@ -17,9 +17,8 @@ import net.sf.mmm.search.api.config.SearchSource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlRootElement(name = "source")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchSourceBean implements SearchSource {
+public class SearchSourceBean extends AbstractAttributeReadId<String> implements SearchSource {
 
   /** @see #getId() */
   @XmlID
@@ -33,10 +32,6 @@ public class SearchSourceBean implements SearchSource {
   /** @see #getUrlPrefix() */
   @XmlAttribute(name = "url-prefix")
   private String urlPrefix;
-
-  // /** @see #getUpdateStrategy() */
-  // @XmlAttribute(name = "update-strategy")
-  // private String updateStrategy;
 
   /**
    * The constructor.
@@ -94,22 +89,22 @@ public class SearchSourceBean implements SearchSource {
     this.urlPrefix = urlPrefix;
   }
 
-  // /**
-  // * {@inheritDoc}
-  // */
-  // public String getUpdateStrategy() {
-  //
-  // return this.updateStrategy;
-  // }
-  //
-  // /**
-  // * This method sets the {@link #getUpdateStrategy() update-strategy}.
-  // *
-  // * @param updateStrategy is the new value to set.
-  // */
-  // public void setUpdateStrategy(String updateStrategy) {
-  //
-  // this.updateStrategy = updateStrategy;
-  // }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(SearchSource.class.getSimpleName());
+    sb.append(':');
+    sb.append(this.id);
+    if (this.title != null) {
+      sb.append('[');
+      sb.append(this.title);
+      sb.append(']');
+    }
+    return sb.toString();
+  }
 
 }

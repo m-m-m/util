@@ -35,7 +35,7 @@ public interface SearchIndexerState {
   /**
    * This method gets the {@link Date} when the index had been updated last
    * time. It will be set the the current {@link Date} every time this state is
-   * {@link SearchIndexerStateManager#save(SearchIndexerState) saved}.
+   * {@link SearchIndexerStateHolder#flush() saved}.
    * 
    * @return the last indexing date or <code>null</code> if the index did NOT
    *         exist before.

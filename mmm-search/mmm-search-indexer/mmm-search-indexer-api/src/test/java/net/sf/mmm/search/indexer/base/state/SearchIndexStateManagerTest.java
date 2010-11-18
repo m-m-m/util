@@ -13,7 +13,8 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.state.SearchIndexerDataLocationState;
 import net.sf.mmm.search.indexer.api.state.SearchIndexerSourceState;
 import net.sf.mmm.search.indexer.api.state.SearchIndexerState;
-import net.sf.mmm.search.indexer.api.state.SearchIndexerStateManager;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerStateHolder;
+import net.sf.mmm.search.indexer.api.state.SearchIndexerStateLoader;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationBean;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerDataLocationBean;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerSourceBean;
@@ -25,7 +26,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link SearchIndexerStateManagerImpl}.
+ * This is the test-case for {@link SearchIndexerStateLoaderImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -48,11 +49,11 @@ public class SearchIndexStateManagerTest {
   protected static final String LOCATION_XVCS = "xvcs://hyper/repository";
 
   /**
-   * @return the {@link SearchIndexerStateManager} to test.
+   * @return the {@link SearchIndexerStateLoader} to test.
    */
-  protected SearchIndexerStateManager getSearchIndexerStateManager() {
+  protected SearchIndexerStateLoader getSearchIndexerStateLoader() {
 
-    SearchIndexerStateManagerImpl stateManager = new SearchIndexerStateManagerImpl();
+    SearchIndexerStateLoaderImpl stateManager = new SearchIndexerStateLoaderImpl();
     stateManager.initialize();
     return stateManager;
   }
@@ -138,21 +139,21 @@ public class SearchIndexStateManagerTest {
   }
 
   /**
-   * Tests {@link SearchIndexerStateManager#load(SearchIndexerConfiguration)}
+   * Tests {@link SearchIndexerStateLoader#load(SearchIndexerConfiguration)}
    */
   @Test
   public void testLoadNotExists() {
 
     SearchIndexerConfiguration indexerConfiguration = createIndexerConfiguration("file://target/non-existent-folder");
 
-    SearchIndexerStateManager stateManager = getSearchIndexerStateManager();
-    SearchIndexerState state = stateManager.load(indexerConfiguration);
+    SearchIndexerStateLoader stateManager = getSearchIndexerStateLoader();
+    SearchIndexerState state = stateManager.load(indexerConfiguration).getBean();
     Assert.assertNotNull(state);
     checkEmptyState(state);
   }
 
   /**
-   * Tests {@link SearchIndexerStateManager#load(SearchIndexerConfiguration)}
+   * Tests {@link SearchIndexerStateLoader#load(SearchIndexerConfiguration)}
    */
   @Test
   public void testLoadExists() {
@@ -161,8 +162,9 @@ public class SearchIndexStateManagerTest {
         SearchIndexStateManagerTest.class.getPackage(), "");
     SearchIndexerConfiguration indexerConfiguration = createIndexerConfiguration(location);
 
-    SearchIndexerStateManager stateManager = getSearchIndexerStateManager();
-    SearchIndexerState state = stateManager.load(indexerConfiguration);
+    SearchIndexerStateLoader stateManager = getSearchIndexerStateLoader();
+    SearchIndexerStateHolder stateHolder = stateManager.load(indexerConfiguration);
+    SearchIndexerState state = stateHolder.getBean();
     Assert.assertNotNull(state);
 
     // check empty sources are created
@@ -200,7 +202,7 @@ public class SearchIndexStateManagerTest {
   }
 
   /**
-   * Tests {@link SearchIndexerStateManager#save(SearchIndexerState)}.
+   * Tests {@link SearchIndexerStateHolder#flush()}.
    */
   @Test
   public void testSave() {
@@ -216,8 +218,9 @@ public class SearchIndexStateManagerTest {
 
     // load not existent state
 
-    SearchIndexerStateManager stateManager = getSearchIndexerStateManager();
-    SearchIndexerState state = stateManager.load(indexerConfiguration);
+    SearchIndexerStateLoader stateManager = getSearchIndexerStateLoader();
+    SearchIndexerStateHolder stateHolder = stateManager.load(indexerConfiguration);
+    SearchIndexerState state = stateHolder.getBean();
     Assert.assertNotNull(state);
     checkEmptyState(state);
 
@@ -234,10 +237,11 @@ public class SearchIndexStateManagerTest {
     // leave music revision null
 
     // save state
-    stateManager.save(state);
+    stateHolder.flush();
 
     // load state again...
-    SearchIndexerState state2 = stateManager.load(indexerConfiguration);
+    SearchIndexerStateHolder stateHolder2 = stateManager.load(indexerConfiguration);
+    SearchIndexerState state2 = stateHolder2.getBean();
     Assert.assertNotNull(state2);
     Assert.assertNotSame(state, state2);
     SearchIndexerSourceState sourceStateFoo2 = state2.getSourceState(SOURCE_FOO);

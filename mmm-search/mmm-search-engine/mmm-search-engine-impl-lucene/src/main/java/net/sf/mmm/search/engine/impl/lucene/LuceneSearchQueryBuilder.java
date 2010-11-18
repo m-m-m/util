@@ -3,38 +3,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.impl.lucene;
 
-import java.io.IOException;
-import java.io.StringReader;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.api.config.SearchFieldConfiguration;
 import net.sf.mmm.search.base.SearchParseException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder;
-import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
-import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
-import net.sf.mmm.search.impl.lucene.LuceneVersion;
-import net.sf.mmm.search.impl.lucene.LuceneVersionImpl;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.StringUtil;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.tokenattributes.TermAttribute;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.MatchAllDocsQuery;
-import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
+import org.apache.lucene.util.Version;
 
 /**
  * This is the implementation of the
@@ -43,34 +32,53 @@ import org.apache.lucene.search.WildcardQuery;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@Singleton
-@Named
 public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
+
+  /**
+   * The name of the
+   * {@link net.sf.mmm.search.api.config.SearchProperties#getProperty(String)
+   * property} for {@link LuceneSearchQueryBuilder#isIgnoreLeadingWildcards()}.
+   */
+  public static final String PROPERTY_IGNORE_LEADING_WILDCARDS = "net.sf.mmm."
+      + "search.engine.impl.lucene.LuceneSearchQueryBuilder.ignoreLeadingWildcards";
+
+  /** The pattern to normalize wildcards. */
+  private static final Pattern PATTERN_NORMALIZE_ASTERISK = Pattern.compile("([*][*?]+|[*?]+[*])");
+
+  /** The pattern to normalize wildcards. */
+  private static final Pattern PATTERN_NORMALIZE_QUESTIONMARK = Pattern.compile("[?]+");
 
   /** @see #createNullQuery() */
   public static final LuceneSearchQuery NULL_QUERY = new LuceneSearchQuery(new MatchAllDocsQuery());
 
-  /** the analyzer to use */
-  private Analyzer analyzer;
+  /** The analyzer to use. */
+  private final Analyzer analyzer;
 
-  /** The {@link LuceneAnalyzer}. */
-  private LuceneAnalyzer luceneAnalyzer;
-
-  /** The {@link LuceneVersion}. */
-  private LuceneVersion luceneVersion;
+  /** The {@link Version} of lucene. */
+  private final Version luceneVersion;
 
   /**
-   * <code>true</code> if leading wildcards ('*' or '?') are ignored,
-   * <code>false</code> otherwise.
+   * @see #isIgnoreLeadingWildcards()
    */
-  private boolean ignoreLeadingWildcard;
+  private Boolean ignoreLeadingWildcard;
+
+  /** The {@link LuceneFieldManager}. */
+  private final LuceneFieldManager fieldManager;
 
   /**
    * The constructor.
+   * 
+   * @param analyzer is the {@link Analyzer}.
+   * @param version is the {@link Version} of lucene.
+   * @param fieldManager is the {@link LuceneFieldManager}.
    */
-  public LuceneSearchQueryBuilder() {
+  public LuceneSearchQueryBuilder(Analyzer analyzer, Version version,
+      LuceneFieldManager fieldManager) {
 
     super();
+    this.analyzer = analyzer;
+    this.luceneVersion = version;
+    this.fieldManager = fieldManager;
   }
 
   /**
@@ -83,21 +91,31 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
    * @return <code>true</code> if leading wildcards ('*' or '?') are ignored,
    *         <code>false</code> otherwise.
    */
-  public boolean isIgnoreLeadingWildcards() {
+  protected boolean isIgnoreLeadingWildcards() {
 
-    return this.ignoreLeadingWildcard;
-  }
-
-  /**
-   * This method sets the {@link #isIgnoreLeadingWildcards()
-   * ignoreLeadingWildcard} flag. The default is <code>false</code>.
-   * 
-   * @param ignoreLeadingWildcard is the ignoreLeadingWildcard to set
-   */
-  public void setIgnoreLeadingWildcard(boolean ignoreLeadingWildcard) {
-
-    getInitializationState().requireNotInitilized();
-    this.ignoreLeadingWildcard = ignoreLeadingWildcard;
+    Boolean result = this.ignoreLeadingWildcard;
+    if (result == null) {
+      boolean ignore;
+      String wildcardProperty = this.fieldManager.getConfigurationHolder().getBean()
+          .getProperties().getProperty(PROPERTY_IGNORE_LEADING_WILDCARDS);
+      if (StringUtil.TRUE.equals(wildcardProperty)) {
+        ignore = true;
+      } else {
+        if (!StringUtil.FALSE.equals(wildcardProperty)) {
+          String message = "Leading wildcards are enabled in searches. "
+              + "This can cause performance problems and may allow "
+              + "denial-of-service-attacks. Please explicitly set the property '"
+              + PROPERTY_IGNORE_LEADING_WILDCARDS
+              + "' in your search-configuration to 'true' to disable or 'false' "
+              + "to prevent this warning !";
+          getLogger().warn(message);
+        }
+        ignore = false;
+        result = Boolean.valueOf(ignore);
+        this.ignoreLeadingWildcard = result;
+      }
+    }
+    return result.booleanValue();
   }
 
   /**
@@ -106,48 +124,6 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   protected Analyzer getAnalyzer() {
 
     return this.analyzer;
-  }
-
-  /**
-   * @param analyzer is the analyzer to set
-   */
-  public void setAnalyzer(Analyzer analyzer) {
-
-    getInitializationState().requireNotInitilized();
-    this.analyzer = analyzer;
-  }
-
-  /**
-   * @param luceneAnalyzer is the luceneAnalyzer to set
-   */
-  @Inject
-  public void setLuceneAnalyzer(LuceneAnalyzer luceneAnalyzer) {
-
-    getInitializationState().requireNotInitilized();
-    this.luceneAnalyzer = luceneAnalyzer;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-    if (this.luceneVersion == null) {
-      LuceneVersionImpl luceneVersionImpl = new LuceneVersionImpl();
-      luceneVersionImpl.initialize();
-      this.luceneVersion = luceneVersionImpl;
-    }
-    if (this.analyzer == null) {
-      if (this.luceneAnalyzer == null) {
-        LuceneAnalyzerImpl luceneAnalyzerImpl = new LuceneAnalyzerImpl();
-        luceneAnalyzerImpl.setLuceneVersion(this.luceneVersion);
-        luceneAnalyzerImpl.initialize();
-        this.luceneAnalyzer = luceneAnalyzerImpl;
-      }
-      this.analyzer = this.luceneAnalyzer.getAnalyzer();
-    }
   }
 
   /**
@@ -170,73 +146,70 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   /**
    * {@inheritDoc}
    */
-  public SearchQuery createPhraseQuery(String property, String phrase) {
+  public SearchQuery createPhraseQuery(String field, String phrase) {
 
-    try {
-      TokenStream tokenStream = this.analyzer.tokenStream(property, new StringReader(phrase));
-      PhraseQuery luceneQuery = new PhraseQuery();
-      TermAttribute termAttribute = tokenStream.getAttribute(TermAttribute.class);
-      while (tokenStream.incrementToken()) {
-        luceneQuery.add(new Term(property, termAttribute.term()));
-      }
-      // tokenStream.end();
-      // tokenStream.close();
-      return new LuceneSearchQuery(luceneQuery);
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
-    }
+    Query luceneQuery = this.fieldManager.createPhraseQuery(field, phrase);
+    return new LuceneSearchQuery(luceneQuery);
   }
 
   /**
    * {@inheritDoc}
    */
-  public SearchQuery createTermQuery(String property, String term) {
+  public SearchQuery createRangeQuery(String field, String minimum, String maximum,
+      boolean minimumInclusive, boolean maximumInclusive) {
 
-    StringBuffer buffer = new StringBuffer(term.length());
-    char[] chars = term.toCharArray();
-    boolean hasPattern = false;
-    boolean isPrefixQuery = true;
-    int index = 0;
-    while (index < chars.length) {
-      char c = chars[index++];
-      // skip duplicate '*'
-      while ((c == '*') && (index < chars.length) && (chars[index] == '*')) {
-        index++;
+    Query luceneQuery = this.fieldManager.createRangeQuery(field, minimum, maximum,
+        minimumInclusive, maximumInclusive);
+    return new LuceneSearchQuery(luceneQuery);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchQuery createWordQuery(String field, String word) {
+
+    SearchFieldConfiguration fieldConfiguration = this.fieldManager.getConfigurationHolder()
+        .getBean().getFields().getFieldConfiguration(field);
+    boolean isString = true;
+    if (fieldConfiguration != null) {
+      isString = (fieldConfiguration.getType().getFieldClass() == String.class);
+    }
+    Query luceneQuery = null;
+    if (isString) {
+      String normalizedWord = word;
+      normalizedWord = PATTERN_NORMALIZE_QUESTIONMARK.matcher(normalizedWord).replaceAll("?");
+      normalizedWord = PATTERN_NORMALIZE_ASTERISK.matcher(normalizedWord).replaceAll("*");
+      String prefixWord = normalizedWord;
+      boolean prefix = false;
+      boolean wildcard = false;
+      if (prefixWord.endsWith("*")) {
+        prefix = true;
+        prefixWord = prefixWord.substring(0, prefixWord.length() - 1);
       }
-      if ((c == '*') || (c == '?')) {
-        if ((!this.ignoreLeadingWildcard) || (buffer.length() > 0)) {
-          hasPattern = true;
-          if (index < chars.length) {
-            isPrefixQuery = false;
-            buffer.append(c);
-          } else if (!isPrefixQuery) {
-            buffer.append(c);
+      if (prefixWord.contains("*") || prefixWord.contains("?")) {
+        wildcard = true;
+        prefix = false;
+      }
+      if (wildcard && isIgnoreLeadingWildcards()) {
+        if (normalizedWord.startsWith("*") || normalizedWord.startsWith("?")) {
+          normalizedWord = normalizedWord.substring(1);
+          if (!normalizedWord.contains("*") && !normalizedWord.contains("?")) {
+            wildcard = false;
           }
         }
-      } else {
-        buffer.append(Character.toLowerCase(c));
+      }
+      if (prefix) {
+        normalizedWord = prefixWord;
+      }
+      if (prefix) {
+        luceneQuery = new PrefixQuery(new Term(field, normalizedWord));
+      } else if (wildcard) {
+        luceneQuery = new WildcardQuery(new Term(field, normalizedWord));
       }
     }
-    String queryString = buffer.toString();
-    Query luceneQuery;
-    if (!hasPattern || isPrefixQuery) {
-      try {
-        TokenStream tokenStream = this.analyzer.tokenStream(property, new StringReader(term));
-        TermAttribute termAttribute = tokenStream.getAttribute(TermAttribute.class);
-        if (tokenStream.incrementToken()) {
-          if (hasPattern) {
-            luceneQuery = new PrefixQuery(new Term(property, termAttribute.term()));
-          } else {
-            luceneQuery = new TermQuery(new Term(property, termAttribute.term()));
-          }
-        } else {
-          luceneQuery = new MatchAllDocsQuery();
-        }
-      } catch (IOException e) {
-        throw new RuntimeIoException(e, IoMode.READ);
-      }
-    } else {
-      luceneQuery = new WildcardQuery(new Term(property, queryString));
+    if (luceneQuery == null) {
+      Term term = this.fieldManager.createTerm(field, word);
+      luceneQuery = new TermQuery(term);
     }
     return new LuceneSearchQuery(luceneQuery);
   }
@@ -249,13 +222,21 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
     try {
       // according to javadoc the parser is NOT thread safe so we create an
       // instance per use...
-      QueryParser parser = new QueryParser(this.luceneVersion.getLuceneVersion(),
-          SearchEntry.PROPERTY_TEXT, this.analyzer);
+      QueryParser parser = new QueryParser(this.luceneVersion, SearchEntry.FIELD_TEXT,
+          this.analyzer);
       Query luceneQuery = parser.parse(query);
       return new LuceneSearchQuery(luceneQuery);
     } catch (ParseException e) {
       throw new SearchParseException(e, query);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void refresh() {
+
+    this.ignoreLeadingWildcard = null;
   }
 
 }

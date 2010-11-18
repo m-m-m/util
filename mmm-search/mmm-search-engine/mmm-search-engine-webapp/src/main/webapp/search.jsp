@@ -2,17 +2,23 @@
  $Id$
  Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  http://www.apache.org/licenses/LICENSE-2.0
- --%><%@ page import="net.sf.mmm.search.engine.api.config.SearchEntryType"
+ --%><%@ page import="net.sf.mmm.util.xml.api.XmlUtil"
 %><%@ page import="net.sf.mmm.search.api.config.SearchSource"
-%><%@ page import="net.sf.mmm.util.xml.base.XmlUtilImpl"
+%><%@ page import="net.sf.mmm.search.engine.api.config.SearchEntryType"
 %><%@ page import="net.sf.mmm.search.engine.api.SearchResultPage"
 %><%@ page import="net.sf.mmm.search.engine.api.SearchHit"
 %><%@ page import="net.sf.mmm.search.engine.api.config.SearchEngineConfiguration"
-%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewLogic"
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewRequestParameters"
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewContextAccess"
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewContext"%><%
   // get parameters as attributes (already validated and prepared by the servlet)
-  SearchViewContext searchContext = SearchViewContext.get(request);
+  SearchViewContext searchContext = SearchViewContextAccess.getContext(request);
   SearchResultPage searchPage = searchContext.getResultPage();
-  SearchEngineConfiguration conf = searchContext.getConfiguration();
+  SearchViewRequestParameters parameters = searchContext.getRequestParameters();
+  SearchViewLogic logic = searchContext.getLogic();
+  SearchEngineConfiguration configuration = logic.getConfiguration();
+  XmlUtil xmlUtil = logic.getXmlUtil();
 %><html>
 <head>
   <title>Search</title>
@@ -55,7 +61,7 @@ function updateExpert() {
   setDivVisible('searchadvanced', document.search.expert.checked);
 }
 function showPage(pageNum) {
-  document.search.<%= SearchViewContext.PARAM_PAGE %>.value = pageNum;
+  document.search.<%= SearchViewRequestParameters.PARAMETER_PAGE %>.value = pageNum;
   document.search.submit();
 }
   </script>
@@ -68,28 +74,25 @@ function showPage(pageNum) {
   if (paramExpert.length() > 0) {
     expertSelected = " checked=\"true\"";
   }
-  String htmlQuery = XmlUtilImpl.getInstance().escapeXml(searchContext.getQuery(), true);
+  String htmlQuery = xmlUtil.escapeXml(parameters.getQuery(), true);
 %>
 <body onload="updateExpert()">
-<div id="body">
-<a name="top"></a>
-<div id="logo">
-  <img src="images/logo.png" alt="Logo"/>
-</div>
+<%@include file="jinc/header.jinc" %>
 <div id="searchhead">
   <form method="get" action="search" name="search" target="_self">
     Query: 
-    <input type="text" size="60" maxlength="2048" name="<%= SearchViewContext.PARAM_QUERY %>" value="<%= htmlQuery %>"/>
-    <input type="hidden" name="<%= SearchViewContext.PARAM_PAGE %>" value="<%= searchContext.getPageNumber() %>"/>  
+    <input type="text" size="60" maxlength="2048" name="<%= SearchViewRequestParameters.PARAMETER_QUERY %>" value="<%= htmlQuery %>"/>
+    <input type="hidden" name="<%= SearchViewRequestParameters.PARAMETER_PAGE %>" value="<%= parameters.getPageNumber() %>"/>  
+    <input type="hidden" name="<%= SearchViewRequestParameters.PARAMETER_TOTAL_HIT_COUNT %>" value="<%= parameters.getTotalHitCount() %>"/>  
     <input type="submit" value="Search" onclick="showPage(0)"/>
     <input type="checkbox" name="expert" <%= expertSelected %> onclick="updateExpert()"/>Advanced
     <div id="searchadvanced">
       Source: 
-      <select name="<%= SearchViewContext.PARAM_SOURCE %>" size="1"><%
-  for (SearchSource source: conf.getSources()) {
+      <select name="<%= SearchViewRequestParameters.PARAMETER_SOURCE %>" size="1"><%
+  for (SearchSource source: configuration.getSources()) {
     String sourceKey = source.getId();
     String sourceSelected = "";
-    if (sourceKey.equals(searchContext.getSource())) {
+    if (sourceKey.equals(parameters.getSource())) {
       sourceSelected = "selected=\"true\"";
     }
         %>
@@ -98,11 +101,11 @@ function showPage(pageNum) {
 %>
       </select>
       Filetype:
-      <select name="<%= SearchViewContext.PARAM_TYPE %>" size="1"><%
-  for (SearchEntryType type: conf.getEntryTypes()) {
+      <select name="<%= SearchViewRequestParameters.PARAMETER_TYPE %>" size="1"><%
+  for (SearchEntryType type: logic.getEntryTypeViews()) {
     String typeKey = type.getId();
     String typeSelected = "";
-    if (typeKey.equals(searchContext.getType())) {
+    if (typeKey.equals(parameters.getType())) {
       typeSelected = " selected=\"true\"";
     }
 %>
@@ -110,7 +113,7 @@ function showPage(pageNum) {
   }
 %>
       </select>
-      Author: <input type="text" maxlength="512" name="<%= SearchViewContext.PARAM_AUTHOR %>" value="<%= XmlUtilImpl.getInstance().escapeXml(searchContext.getAuthor(), true) %>"/><br/>
+      Creator: <input type="text" maxlength="512" name="<%= SearchViewRequestParameters.PARAMETER_CREATOR %>" value="<%= xmlUtil.escapeXml(parameters.getCreator(), true) %>"/><br/>
     </div>
   </form>
 </div>
@@ -145,7 +148,7 @@ No hits where found for your query.<br/>
 <br/>
 Suggestions:
 <ul>
-<li>Ensure that all terms are spelled corretly.</li>
+<li>Ensure that all terms are spelled correctly.</li>
 <li>Try other search terms.</li>
 </ul>
 </div>
@@ -166,7 +169,7 @@ Sorry, no hits.
 Result <strong><%= hitStart %></strong> to <strong><%= hitEnd %></strong> 
 of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
 <strong><%= htmlQuery %></strong>.<br/>
-<a href="#bottom"><img src="images/icons/arrow-bottom-on.gif" alt="End of page"/></a>
+<a href="#bottom"><img src="images/arrows/arrow-bottom-on.gif" alt="End of page"/></a>
 <%@include file="jinc/search-paging.jinc" %>
 </div>
       <%
@@ -174,10 +177,13 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
       int hitCount = searchPage.getPageHitCount();
       for (int hitIndex = 0; hitIndex < hitCount; hitIndex++) {
         SearchHit hit = searchPage.getPageHit(hitIndex);
-        // TODO: error handling, source can be null
-        String baseUrl = conf.getSource(hit.getSource()).getUrlPrefix();
+        SearchSource source = configuration.getSource(hit.getSource());
+        String baseUrl = "";
+        if (source != null) {
+          baseUrl = source.getUrlPrefix();
+        }
         String url = baseUrl + hit.getUri();
-        String title = SearchViewContext.getEntryTitle(hit);
+        String title = logic.getDisplayTitle(hit);
         String styleClass;
         if ((hitIndex % 2) == 0) {
           styleClass = "even";
@@ -186,8 +192,8 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
         }
         %>
 <div id="hit" class="<%= styleClass %>">
-<a href="details?id=<%= hit.getEntryId() %>"><img src="images/stars<%= hit.getScore(5) %>.gif"/></a> 
-<a href="<%= url %>"><img src="images/icons/<%= conf.getEntryType(hit.getType()).getIcon() %>"/> <%= title %></a><br/>
+<a href="details?id=<%= hit.getEntryId() %>"><img src="images/ranking/stars<%= hit.getScore(5) %>.gif"/></a> 
+<a href="<%= url %>"><img src="images/filetypes/<%= logic.getEntryType(hit.getType()).getIcon() %>"/> <%= title %></a><br/>
 <%= hit.getHighlightedText() %><br/>
 <a href="<%= url %>"><span class="url"><%= url %></span></a>
 </div>
@@ -195,7 +201,7 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
       }
       %>
 <div id="hitlistbottom">
-<a name="bottom"></a><a href="#top"><img src="images/icons/arrow-top-on.gif" alt="Top of page"/></a> <%@include file="jinc/search-paging.jinc" %>
+<a name="bottom"></a><a href="#top"><img src="images/arrows/arrow-top-on.gif" alt="Top of page"/></a> <%@include file="jinc/search-paging.jinc" %>
 </div>
       <%
     }
@@ -203,9 +209,6 @@ of <strong><%= searchPage.getTotalHitCount() %></strong> for your search
     <%
   }
 %>
-</div>
-<div id="footer">
-&copy; The m-m-m Team
-</div>
+<%@include file="jinc/footer.jinc" %>
 </body>
 </html>

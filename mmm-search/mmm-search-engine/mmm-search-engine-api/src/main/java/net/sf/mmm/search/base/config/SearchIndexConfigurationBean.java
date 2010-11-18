@@ -6,7 +6,6 @@ package net.sf.mmm.search.base.config;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 
@@ -17,7 +16,6 @@ import net.sf.mmm.search.api.config.SearchIndexConfiguration;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@XmlRootElement(name = "search-index")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchIndexConfigurationBean implements SearchIndexConfiguration {
 

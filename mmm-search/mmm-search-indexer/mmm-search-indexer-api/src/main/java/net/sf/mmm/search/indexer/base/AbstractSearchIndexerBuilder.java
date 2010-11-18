@@ -4,11 +4,13 @@
 package net.sf.mmm.search.indexer.base;
 
 import net.sf.mmm.search.api.SearchException;
-import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.base.config.SearchIndexConfigurationBean;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
+import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationBean;
+import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationHolderImpl;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerOptionsBean;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
@@ -36,18 +38,22 @@ public abstract class AbstractSearchIndexerBuilder extends AbstractLoggableCompo
   public final SearchIndexer createIndexer(String dataSource, SearchIndexerOptions options)
       throws SearchException {
 
-    SearchIndexConfigurationBean configuration = new SearchIndexConfigurationBean();
-    configuration.setLocation(dataSource);
-    return createIndexer(configuration, options);
+    SearchIndexConfigurationBean indexConfiguration = new SearchIndexConfigurationBean();
+    indexConfiguration.setLocation(dataSource);
+    SearchIndexerConfigurationBean configuration = new SearchIndexerConfigurationBean();
+    configuration.setSearchIndex(indexConfiguration);
+    SearchIndexerConfigurationHolder configurationHolder = new SearchIndexerConfigurationHolderImpl(
+        configuration, null, null);
+    return createIndexer(configurationHolder, options);
   }
 
   /**
    * {@inheritDoc}
    */
-  public SearchIndexer createIndexer(SearchIndexConfiguration searchIndexConfiguration)
+  public SearchIndexer createIndexer(SearchIndexerConfigurationHolder configurationHolder)
       throws SearchException {
 
-    return createIndexer(searchIndexConfiguration, new SearchIndexerOptionsBean());
+    return createIndexer(configurationHolder, new SearchIndexerOptionsBean());
   }
 
 }

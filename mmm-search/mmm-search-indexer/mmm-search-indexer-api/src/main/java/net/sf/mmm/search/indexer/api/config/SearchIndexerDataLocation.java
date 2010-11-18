@@ -147,10 +147,12 @@ public interface SearchIndexerDataLocation {
   /**
    * This method gets the default encoding used for resources where no encoding
    * is available. If the encoding is specified (e.g. via content formats as XML
-   * or HTML) or autodetected (e.g. Unicode) that specific encoding is used -
-   * otherwise the default encoding returned by this method is used.
+   * or HTML) or auto detected (e.g. Unicode) that specific encoding is used -
+   * otherwise the default encoding returned by this method is used. Therefore
+   * you should typically not choose an UTF encoding.
    * 
-   * @return the encoding used as fallback.
+   * @return the encoding used as fallback or <code>null</code> to use
+   *         system-default.
    */
   String getEncoding();
 

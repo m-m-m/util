@@ -41,6 +41,19 @@ public class SearchException extends NlsRuntimeException {
    *        is used for
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
    *        internationalization} and should be in English language.
+   */
+  public SearchException(String internationalizedMessage) {
+
+    super(internationalizedMessage);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
    * @param arguments are the
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
    *        arguments} to be

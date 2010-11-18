@@ -3,13 +3,21 @@
  Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  http://www.apache.org/licenses/LICENSE-2.0
  --%><%@ page import="java.util.Iterator"
-%><%@ page import="net.sf.mmm.util.xml.base.XmlUtilImpl"
+%><%@ page import="net.sf.mmm.util.xml.api.XmlUtil"
 %><%@ page import="net.sf.mmm.search.api.SearchEntry"
+%><%@ page import="net.sf.mmm.search.api.config.SearchSource"
+%><%@ page import="net.sf.mmm.search.api.config.SearchFieldConfiguration"
 %><%@ page import="net.sf.mmm.search.engine.api.config.SearchEngineConfiguration"
-%><%@ page import="net.sf.mmm.search.view.SearchViewContext"%><%// get parameters as attributes (already validated and prepared by the servlet)
-  SearchViewContext searchContext = SearchViewContext.get(request);
-  SearchEngineConfiguration conf = searchContext.getConfiguration();
-  SearchEntry entry = searchContext.getEntry();%><html>
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewLogic"
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewContextAccess"
+%><%@ page import="net.sf.mmm.search.view.api.SearchViewContext"%><%
+  // get parameters as attributes (already validated and prepared by the servlet)
+  SearchViewContext searchContext = SearchViewContextAccess.getContext(request);
+  SearchViewLogic logic = searchContext.getLogic();
+  SearchEngineConfiguration configuration = searchContext.getLogic().getConfiguration();
+  SearchEntry entry = searchContext.getEntry();
+  XmlUtil xmlUtil = logic.getXmlUtil();
+%><html>
 <head>
   <title>Details for your search-result</title>
   <meta name="description" content="Details for your search-result"/>
@@ -17,11 +25,7 @@
   <link rel="stylesheet" href="css/site.css" type="text/css"/>
 </head>
 <body>
-<div id="body">
-<a name="top"></a>
-<div id="logo">
-  <img src="images/logo" alt="Logo"/>
-</div>
+<%@include file="jinc/header.jinc" %>
 <div id="searchhead">
   Back to the <a href="search">search</a>.
 </div>
@@ -53,8 +57,13 @@ error.printStackTrace(new java.io.PrintWriter(out));
 An error has occurred while getting the details of your search-result.
 </div><%
   } else {
-    String url = conf.getSource(entry.getSource()).getUrlPrefix() + entry.getUri();
-    String title = SearchViewContext.getEntryTitle(entry);
+    SearchSource source = configuration.getSource(entry.getSource());
+    String urlPrefix = "";
+    if (source != null) {
+      urlPrefix = source.getUrlPrefix();
+    }
+    String url = urlPrefix + entry.getUri();
+    String title = logic.getDisplayTitle(entry);
 %>
 <div id="hitlisttop">
 Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
@@ -68,16 +77,21 @@ Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
     </tr>
   </thead>
   <tbody><%
-    Iterator<String> fieldIterator = entry.getPropertyNames();
+    Iterator<String> fieldIterator = entry.getFieldNames();
     int flipFlop = 0;
     while (fieldIterator.hasNext()) {
       String name = fieldIterator.next();
-      if (!name.equals(SearchEntry.PROPERTY_TEXT)) {
+      if (!name.equals(SearchEntry.FIELD_TEXT)) {
+        SearchFieldConfiguration fieldConfiguration = configuration.getFields().getFieldConfiguration(name);
+        boolean hidden = false;
+        if (fieldConfiguration != null) {
+          hidden = fieldConfiguration.isHidden();
+        }
         String styleClass = (flipFlop == 0) ? "even" : "odd";
 %>
     <tr class="<%= styleClass%>">
       <td><%=name%></td>
-      <td><%=XmlUtilImpl.getInstance().escapeXml(entry.getProperty(name), false)%></td>
+      <td><%=xmlUtil.escapeXml(entry.getFieldAsString(name), false)%></td>
     </tr><%
         flipFlop = (flipFlop + 1) % 2;
       }
@@ -85,8 +99,8 @@ Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
     String styleClass = (flipFlop == 0) ? "even" : "odd";
 %>
     <tr class="<%= styleClass%>">
-      <td><%=SearchEntry.PROPERTY_TEXT%></td>
-      <td><pre><%=XmlUtilImpl.getInstance().escapeXml(entry.getProperty(SearchEntry.PROPERTY_TEXT), false)%></pre></td>
+      <td><%=SearchEntry.FIELD_TEXT%></td>
+      <td><pre><%=xmlUtil.escapeXml(entry.getFieldAsString(SearchEntry.FIELD_TEXT), false)%></pre></td>
     </tr>
   </tbody>
 </table>
@@ -97,9 +111,6 @@ Details for <a href="<%= url%>"><strong><%= title %></strong></a>.
     <%
   }
 %>
-</div>
-<div id="footer">
-&copy;2007 The m-m-m Team
-</div>
+<%@include file="jinc/footer.jinc" %>
 </body>
 </html>

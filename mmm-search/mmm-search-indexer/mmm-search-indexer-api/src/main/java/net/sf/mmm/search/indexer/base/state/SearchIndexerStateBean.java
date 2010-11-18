@@ -41,9 +41,6 @@ public class SearchIndexerStateBean implements SearchIndexerState {
   /** @see #getSourceStateMap() */
   private transient Map<String, SearchIndexerSourceStateBean> sourceStateMap;
 
-  /** @see #getConfigurationLocation() */
-  private transient String configurationLocation;
-
   /**
    * The constructor.
    */
@@ -120,25 +117,6 @@ public class SearchIndexerStateBean implements SearchIndexerState {
       getSourceStateMap().put(source, sourceStatus);
     }
     return sourceStatus;
-  }
-
-  /**
-   * This method gets the location URI where the configuration for this bean is
-   * stored. This is a transient attribute dynamically added after loading.
-   * 
-   * @return the configurationLocation
-   */
-  public String getConfigurationLocation() {
-
-    return this.configurationLocation;
-  }
-
-  /**
-   * @param configurationLocation is the location to set
-   */
-  public void setConfigurationLocation(String configurationLocation) {
-
-    this.configurationLocation = configurationLocation;
   }
 
   /**

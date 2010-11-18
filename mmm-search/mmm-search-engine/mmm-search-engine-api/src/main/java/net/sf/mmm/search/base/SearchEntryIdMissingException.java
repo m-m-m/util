@@ -9,7 +9,7 @@ import net.sf.mmm.search.api.SearchException;
 /**
  * This is the exception thrown from
  * {@link net.sf.mmm.search.engine.api.SearchEngine#getEntry(String)} if the
- * given {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() entry ID}
+ * given {@link net.sf.mmm.search.engine.api.SearchHit#getId() entry ID}
  * does NOT exist in the index.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

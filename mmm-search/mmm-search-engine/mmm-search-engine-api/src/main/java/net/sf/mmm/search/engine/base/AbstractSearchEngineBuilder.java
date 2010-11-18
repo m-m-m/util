@@ -3,17 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.base;
 
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-import net.sf.mmm.search.api.config.SearchIndexConfiguration;
-import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.search.base.SearchDependencies;
+import net.sf.mmm.search.base.SearchDependenciesImpl;
 import net.sf.mmm.search.engine.api.SearchEngineBuilder;
-import net.sf.mmm.search.engine.api.SearchQueryBuilder;
-import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
-import net.sf.mmm.search.engine.base.config.SearchEnginePropertiesBean;
+import net.sf.mmm.search.engine.api.SearchQueryBuilderFactory;
+import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.component.impl.PeriodicRefresherImpl;
 
 /**
  * This is the abstract base-implementation of the {@link SearchEngineBuilder}
@@ -25,11 +23,14 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 public abstract class AbstractSearchEngineBuilder extends AbstractLoggableComponent implements
     SearchEngineBuilder {
 
-  /** @see #getSearchQueryBuilder() */
-  private SearchQueryBuilder searchQueryBuilder;
+  /** @see #getSearchQueryBuilderFactory() */
+  private SearchQueryBuilderFactory searchQueryBuilderFactory;
 
-  /** @see #getSearchEngineRefresher() */
-  private SearchEngineRefresher searchEngineRefresher;
+  /** @see #getPeriodicRefresher() */
+  private PeriodicRefresher periodicRefresher;
+
+  /** @see #getSearchDependencies() */
+  private SearchDependencies searchDependencies;
 
   /**
    * The constructor.
@@ -46,73 +47,83 @@ public abstract class AbstractSearchEngineBuilder extends AbstractLoggableCompon
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.searchEngineRefresher == null) {
-      SearchEngineRefresherImpl refresherImpl = new SearchEngineRefresherImpl();
-      refresherImpl.initialize();
-      this.searchEngineRefresher = refresherImpl;
+    if (this.periodicRefresher == null) {
+      PeriodicRefresherImpl impl = new PeriodicRefresherImpl();
+      impl.initialize();
+      this.periodicRefresher = impl;
+    }
+    if (this.searchDependencies == null) {
+      SearchDependenciesImpl impl = new SearchDependenciesImpl();
+      impl.initialize();
+      this.searchDependencies = impl;
     }
   }
 
   /**
    * @return the searchQueryBuilder
    */
-  protected SearchQueryBuilder getSearchQueryBuilder() {
+  protected SearchQueryBuilderFactory getSearchQueryBuilderFactory() {
 
-    return this.searchQueryBuilder;
+    return this.searchQueryBuilderFactory;
   }
 
   /**
-   * @param searchQueryBuilder is the {@link SearchQueryBuilder} to set.
+   * @param searchQueryBuilderFactory is the {@link SearchQueryBuilderFactory}
+   *        to set.
    */
   @Inject
-  public void setSearchQueryBuilder(SearchQueryBuilder searchQueryBuilder) {
+  public void setSearchQueryBuilderFactory(SearchQueryBuilderFactory searchQueryBuilderFactory) {
 
-    this.searchQueryBuilder = searchQueryBuilder;
+    getInitializationState().requireNotInitilized();
+    this.searchQueryBuilderFactory = searchQueryBuilderFactory;
   }
 
   /**
    * @return the searchEngineRefresher
    */
-  protected SearchEngineRefresher getSearchEngineRefresher() {
+  protected PeriodicRefresher getPeriodicRefresher() {
 
-    return this.searchEngineRefresher;
+    return this.periodicRefresher;
   }
 
   /**
-   * @param searchEngineRefresher is the searchEngineRefresher to set
+   * @param periodicRefresher is the searchEngineRefresher to set
    */
   @Inject
-  public void setSearchEngineRefresher(SearchEngineRefresher searchEngineRefresher) {
+  public void setPeriodicRefresher(PeriodicRefresher periodicRefresher) {
 
-    this.searchEngineRefresher = searchEngineRefresher;
+    this.periodicRefresher = periodicRefresher;
   }
 
   /**
-   * This method is called when this component shall be destroyed.
+   * This method gets the {@link SearchDependencies}.
+   * 
+   * @return the {@link SearchDependencies}.
    */
-  @PreDestroy
-  public void dispose() {
+  protected SearchDependencies getSearchDependencies() {
 
-    if (this.searchEngineRefresher != null) {
-      this.searchEngineRefresher.close();
-    }
+    return this.searchDependencies;
   }
 
   /**
-   * {@inheritDoc}
+   * @param searchDependencies is the searchDependencies to set
    */
-  public ManagedSearchEngine createSearchEngine(SearchEngineConfiguration configuration) {
+  @Inject
+  public void setSearchDependencies(SearchDependencies searchDependencies) {
 
-    NlsNullPointerException.checkNotNull(SearchEngineConfiguration.class, configuration);
-    return createSearchEngine(configuration.getSearchIndex(), configuration.getSearchProperties());
+    getInitializationState().requireNotInitilized();
+    this.searchDependencies = searchDependencies;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration configuration) {
-
-    return createSearchEngine(configuration, new SearchEnginePropertiesBean());
-  }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public ManagedSearchEngine createSearchEngine(SearchIndexConfiguration
+  // configuration) {
+  //
+  // SearchEngineConfigurationBean conf = new SearchEngineConfigurationBean();
+  // conf.setSearchIndex((SearchIndexConfigurationBean) configuration);
+  // return createSearchEngine(conf);
+  // }
 
 }

@@ -4,14 +4,22 @@
 package net.sf.mmm.search.indexer.impl.lucene;
 
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import net.sf.mmm.search.base.SearchDependencies;
+import net.sf.mmm.search.engine.impl.lucene.LuceneFieldManager;
 import net.sf.mmm.search.impl.lucene.LuceneFieldNameIterator;
 import net.sf.mmm.search.indexer.base.AbstractMutableSearchEntry;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.search.indexer.base.SearchEntryIdImmutableException;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
+import org.apache.lucene.document.Fieldable;
+import org.apache.lucene.document.NumericField;
 
 /**
  * This is the implementation of the
@@ -22,18 +30,28 @@ import org.apache.lucene.document.Field;
  */
 public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
 
-  /** the lucene document that represents the actual entry */
+  /** The lucene document that represents the actual entry. */
   private final Document document;
+
+  /** The {@link LuceneFieldManager}. */
+  private final LuceneFieldManager fieldManager;
+
+  /** @see #dispose() */
+  private List<Reader> readers;
 
   /**
    * The constructor.
    * 
-   * @param entry is the lucene document that represents the actual entry.
+   * @param document is the lucene document that represents the actual entry.
+   * @param fieldManager is the {@link LuceneFieldManager}.
+   * @param searchDependencies are the {@link SearchDependencies}.
    */
-  public LuceneMutableSearchEntry(Document entry) {
+  public LuceneMutableSearchEntry(Document document, LuceneFieldManager fieldManager,
+      SearchDependencies searchDependencies) {
 
-    super();
-    this.document = entry;
+    super(fieldManager.getConfigurationHolder().getBean().getFields(), searchDependencies);
+    this.fieldManager = fieldManager;
+    this.document = document;
   }
 
   /**
@@ -57,27 +75,20 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
   /**
    * {@inheritDoc}
    */
-  public void setProperty(String name, String value, Mode mode) {
+  public void setField(String name, Object value) {
 
-    Field.Store store = Field.Store.YES;
-    Field.Index index = Field.Index.ANALYZED;
-    switch (mode) {
-      case TEXT:
-        // default
-        break;
-      case NOT_INDEXED:
-        index = Field.Index.NO;
-        break;
-      case NOT_STORED:
-        store = Field.Store.NO;
-        break;
-      case NOT_TOKENIZED:
-        index = Field.Index.NOT_ANALYZED;
-        break;
-      default :
-        throw new IllegalCaseException(Mode.class, mode);
+    NlsNullPointerException.checkNotNull("name", name);
+    NlsNullPointerException.checkNotNull("value", value);
+    if (FIELD_ID.equals(name)) {
+      throw new SearchEntryIdImmutableException();
     }
-    Field field = new Field(name, value, store, index);
+    if (value instanceof Reader) {
+      if (this.readers == null) {
+        this.readers = new ArrayList<Reader>();
+      }
+      this.readers.add((Reader) value);
+    }
+    Fieldable field = this.fieldManager.createField(name, value);
     this.document.add(field);
   }
 
@@ -85,26 +96,44 @@ public class LuceneMutableSearchEntry extends AbstractMutableSearchEntry {
    * {@inheritDoc}
    */
   @Override
-  public void setProperty(String name, Reader valueReader) {
+  protected Object getFieldRaw(String name) {
 
-    Field field = new Field(name, valueReader);
-    this.document.add(field);
+    Fieldable fieldable = this.document.getFieldable(name);
+    if (fieldable == null) {
+      return null;
+    }
+    if (fieldable instanceof NumericField) {
+      return ((NumericField) fieldable).getNumericValue();
+    }
+    return fieldable.stringValue();
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getProperty(String name) {
-
-    return this.document.get(name);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Iterator<String> getPropertyNames() {
+  public Iterator<String> getFieldNames() {
 
     return new LuceneFieldNameIterator(this.document);
+  }
+
+  /**
+   * This method is called to dispose this entry.
+   */
+  public void dispose() {
+
+    if (this.readers != null) {
+      Exception exception = null;
+      for (Reader reader : this.readers) {
+        try {
+          reader.close();
+        } catch (Exception e) {
+          exception = e;
+        }
+      }
+      if (exception != null) {
+        throw new RuntimeIoException(exception, IoMode.CLOSE);
+      }
+    }
   }
 
 }

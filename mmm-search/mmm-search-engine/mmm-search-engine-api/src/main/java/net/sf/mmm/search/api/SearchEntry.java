@@ -5,153 +5,204 @@ package net.sf.mmm.search.api;
 
 import java.util.Iterator;
 
+import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
+
 /**
- * This interface represents an entry of the search-index. It is either used for
- * indexing (net.sf.mmm.search.indexer.api.SearchIndexer) or
+ * This interface represents an entry of the search-index. A {@link SearchEntry}
+ * represents a single content (file, web-page, etc.) and consists of
+ * {@link #getFieldAsString(String) fields} with the according metadata. It is
+ * either used for indexing (net.sf.mmm.search.indexer.api.SearchIndexer) or
  * {@link net.sf.mmm.search.engine.api.SearchEngine retrieval}.
  * 
+ * @see net.sf.mmm.search.api.config.SearchFields
  * @see net.sf.mmm.search.engine.api.SearchHit
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface SearchEntry {
+public interface SearchEntry extends AttributeReadId<String> {
 
   /**
-   * The name of the "title" property. The title should always be present.
+   * The name of the "id" field. The UID (Unique Identifier) is a field that
+   * identifies the content uniquely.<br/>
+   * It is strongly suggested for the implementation but NOT strictly guaranteed
+   * that the ID remains the same if a {@link SearchEntry} is updated in the
+   * index. The format of the ID is unspecified and end-users should never make
+   * any assumptions or interpretation of its value.
+   * 
+   * @see #getId()
    */
-  String PROPERTY_TITLE = "title";
+  String FIELD_ID = "id";
 
   /**
-   * The name of the "uri" property. The URI (Unified Resource Identifier)
+   * The name of the "title" field. The title should always be present.
+   */
+  String FIELD_TITLE = "title";
+
+  /**
+   * The name of the {@value} field. The URI (Unified Resource Identifier)
    * identifies the original content and allows to link to it. Typically this is
    * not an entire URL but a path relative to the
    * {@link net.sf.mmm.search.api.config.SearchSource#getUrlPrefix URL-prefix}
    * of the according {@link #getSource() source}.<br>
    * <b>NOTE:</b><br>
-   * This property should typically be present. Only if the content has a
-   * technical UID, the {@link #PROPERTY_UID} can be used for linking the
-   * content and the URI might NOT be set then. However it is best practice to
-   * set the URI anyways (to the URL-suffix containing the UID for linking the
-   * content).
+   * This field should typically be present. Only if the content has a technical
+   * UID, the {@link #FIELD_CUSTOM_ID} can be used for linking the content and
+   * the URI might NOT be set then. However it is best practice to set the URI
+   * anyways (to the URL-suffix containing the UID for linking the content).
    * 
    * @see #getUri()
    */
-  String PROPERTY_URI = "uri";
+  String FIELD_URI = "uri";
 
   /**
-   * The name of the "uid" property. The UID (Unique Identifier) is an optional
-   * property that identifies the content uniquely. Unlike the
-   * {@link net.sf.mmm.search.engine.api.SearchHit#getEntryId() entry ID} that
-   * is the technical ID of the {@link SearchEntry} assigned by the underlying
-   * search-engine, this is an optional custom ID given by the user of this API.
-   * While the URI of a content may change (e.g. if the content is renamed or
-   * moved) the UID has to stay untouched and identifies the content for its
-   * complete lifetime.
+   * The name of the {@value} field. The custom Identifier (CID) is an optional
+   * field that identifies the content uniquely. Unlike the {@link #getId() ID}
+   * this is an optional custom ID given by the user of this API. It can be in
+   * any arbitrary format. While the URI of a content may change (e.g. if the
+   * content is renamed or moved) the UID has to stay untouched and identifies
+   * the content for its complete lifetime.
    * 
-   * 
-   * @see #getUid()
+   * @see #getCustomId()
    */
-  String PROPERTY_UID = "uid";
+  String FIELD_CUSTOM_ID = "cid";
 
   /**
-   * The name of the "text" property. This is the default property to search on.
-   * All textual information about the content should be stored in this
-   * property.
+   * The name of the {@value} field. This is the default field to search on. All
+   * textual information about the content should be stored in this field.
    * 
    * @see #getText()
    */
-  String PROPERTY_TEXT = "text";
+  String FIELD_TEXT = "text";
 
   /**
-   * The name of the "keywords" property. This is an optional property that may
-   * hold specific keywords (aka tags) that classify the content.
+   * The name of the {@value} field. This is an optional field that may hold
+   * specific keywords (also called tags) that classify the content.
    */
-  String PROPERTY_KEYWORDS = "keywords";
+  String FIELD_KEYWORDS = "keywords";
 
   /**
-   * The name of the "size" property. This is an optional property that may hold
-   * the size (aka content-length) of the content. This should be an integer
-   * representing the size in bytes.
+   * The name of the {@value} field. This is an optional field that may hold the
+   * size (also called content-length) of the content. This should be a
+   * {@link Long} value representing the size in bytes.
    * 
    * @see #getSize()
    */
-  String PROPERTY_SIZE = "size";
+  String FIELD_SIZE = "size";
 
   /**
-   * The name of the "author" property. This is an optional property that may
-   * hold the author (aka artist) of the content.
+   * The name of the {@value} field. This is an optional field that may hold the
+   * author (aka artist) of the content.
    * 
-   * @see #getAuthor()
+   * @see #getCreator()
    */
-  String PROPERTY_AUTHOR = "author";
+  String FIELD_CREATOR = "creator";
 
   /**
-   * The name of the "type" property. This is an optional property that
-   * classifies the type (aka format or content-type) of the content. As values
-   * typically either mime-types or file-extensions are used (but NOT mixed).
+   * The name of the "type" field. This is an optional field that classifies the
+   * type (aka format or content-type) of the content. As values typically
+   * either mime-types or file-extensions are used (but NOT mixed).
    * 
    * @see #getType()
    */
-  String PROPERTY_TYPE = "type";
+  String FIELD_TYPE = "type";
 
   /**
-   * The name of the "lang" property. This is an optional property that
-   * specifies the language of the content.
+   * The name of the "lang" field. This is an optional field that specifies the
+   * language of the content.
    */
-  String PROPERTY_LANGUAGE = "lang";
+  String FIELD_LANGUAGE = "lang";
 
   /**
-   * The name of the "source" property. This property specifies the
+   * The name of the "source" field. This field specifies the
    * {@link net.sf.mmm.search.api.config.SearchSource#getId() source} of the
    * content. It is not strictly required but should always be present in a
-   * regular setup. If it is NOT present, the property {@link #PROPERTY_URI URI}
-   * has to contain the complete URL to the content.
+   * regular setup. If it is NOT present, the field {@link #FIELD_URI URI} has
+   * to contain the complete URL to the content.
    * 
    * @see #getSource()
    * @see net.sf.mmm.search.api.config.SearchSource
    */
-  String PROPERTY_SOURCE = "source";
+  String FIELD_SOURCE = "source";
 
   /**
-   * This method is a generic accessor for additional properties of this
-   * {@link SearchEntry entry}.
+   * This method is a generic accessor for fields of this {@link SearchEntry
+   * entry}. For the predefine fields (see <code>FIELD_*</code> constants like
+   * {@link #FIELD_TEXT}) there are specific getter methods like
+   * {@link #getText()}.
    * 
-   * @param name is the name of the requested property.
-   * @return the value of the requested property or <code>null</code> if no
-   *         property exists for the given <code>name</code>.
+   * @see #getField(String, Class)
+   * 
+   * @param name is the
+   *        {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getName()
+   *        name} of the requested field.
+   * @return the value of the field in its original
+   *         {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getType()
+   *         type}.
    */
-  String getProperty(String name);
+  Object getField(String name);
 
   /**
-   * This method gets the names of all {@link #getProperty(String) properties}
+   * This method is a shortcut for
+   * <code>{@link #getField(String, Class) getField}(name, String.class)</code>.
+   * 
+   * @param name is the
+   *        {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getName()
+   *        name} of the requested field.
+   * @return the value of the requested field or <code>null</code> if no field
+   *         exists for the given <code>name</code>.
+   */
+  String getFieldAsString(String name);
+
+  /**
+   * This method is a generic accessor for fields of this {@link SearchEntry
+   * entry} with a specific <code>type</code>.<br/>
+   * The type {@link String} will always work. Other types have to be compatible
+   * to the
+   * {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getType()
+   * field type} (or a {@link RuntimeException} will be thrown).
+   * 
+   * @param <T> is the generic type expected for the requested field-value (see
+   *        parameter <code>type</code>).
+   * 
+   * @param name is the
+   *        {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getName()
+   *        name} of the requested field.
+   * @param type is the type of the requested field.
+   * @return the value of the requested field or <code>null</code> if no field
+   *         exists for the given <code>name</code>.
+   */
+  <T> T getField(String name, Class<T> type);
+
+  /**
+   * This method gets the names of all {@link #getFieldAsString(String) fields}
    * that are defined (NOT <code>null</code>).
    * 
-   * @return a read-only iterator of the property names.
+   * @return a read-only iterator of the field names.
    */
-  Iterator<String> getPropertyNames();
+  Iterator<String> getFieldNames();
 
   /**
-   * This method gets the value of the {@link #PROPERTY_URI}.
+   * This method gets the value of the {@link #FIELD_URI}.
    * 
-   * @see #PROPERTY_URI
+   * @see #FIELD_URI
    * 
    * @return the URI of this entry.
    */
   String getUri();
 
   /**
-   * This method gets the value of the {@link #PROPERTY_UID source property}.
+   * This method gets the value of the {@link #FIELD_CUSTOM_ID custom-ID field}.
    * 
-   * @see #PROPERTY_UID
+   * @see #FIELD_CUSTOM_ID
    * 
    * @return the UID of this entry or <code>null</code> if NOT available.
    */
-  String getUid();
+  String getCustomId();
 
   /**
-   * This method gets the value of the {@link #PROPERTY_TITLE title property}.
+   * This method gets the value of the {@link #FIELD_TITLE title field}.
    * 
-   * @see #PROPERTY_TITLE
+   * @see #FIELD_TITLE
    * 
    * @return the title of this entry.
    */
@@ -160,34 +211,34 @@ public interface SearchEntry {
   /**
    * This method gets the author of this entry.
    * 
-   * @see #PROPERTY_AUTHOR
+   * @see #FIELD_CREATOR
    * 
    * @return the author of this entry or <code>null</code> if NOT available.
    */
-  String getAuthor();
+  String getCreator();
 
   /**
-   * This method gets the value of the {@link #PROPERTY_SOURCE text property}.
+   * This method gets the value of the {@link #FIELD_SOURCE text field}.
    * 
-   * @see #PROPERTY_TEXT
+   * @see #FIELD_TEXT
    * 
    * @return the text of this entry.
    */
   String getText();
 
   /**
-   * This method gets the value of the {@link #PROPERTY_TYPE type property}.
+   * This method gets the value of the {@link #FIELD_TYPE type field}.
    * 
-   * @see #PROPERTY_TYPE
+   * @see #FIELD_TYPE
    * 
    * @return the type of this entry or <code>null</code> if NOT available.
    */
   String getType();
 
   /**
-   * This method gets the value of the {@link #PROPERTY_SOURCE source property}.
+   * This method gets the value of the {@link #FIELD_SOURCE source field}.
    * 
-   * @see #PROPERTY_SOURCE
+   * @see #FIELD_SOURCE
    * 
    * @return the source of this entry or <code>null</code> if NOT available.
    */
@@ -196,10 +247,20 @@ public interface SearchEntry {
   /**
    * This method gets the size of the content.
    * 
-   * @see #PROPERTY_SIZE
+   * @see #FIELD_SIZE
    * 
    * @return the size of this entry or <code>null</code> if NOT available.
    */
   Long getSize();
+
+  /**
+   * {@inheritDoc}
+   * 
+   * @see #FIELD_ID
+   * 
+   * @return the ID of this entry or <code>null</code> if the entry is transient
+   *         and has not yet been added to the search-index (made persistent).
+   */
+  String getId();
 
 }
