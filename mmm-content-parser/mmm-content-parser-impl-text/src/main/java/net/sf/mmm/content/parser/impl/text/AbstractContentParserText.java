@@ -5,15 +5,15 @@ package net.sf.mmm.content.parser.impl.text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.base.AbstractContentParser;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.EncodingUtilImpl;
 import net.sf.mmm.util.xml.api.XmlUtil;
@@ -27,8 +27,11 @@ import net.sf.mmm.util.xml.base.XmlUtilImpl;
  */
 public abstract class AbstractContentParserText extends AbstractContentParser {
 
-  /** @see #getDefaultCapacity() */
-  private int defaultCapacity;
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE = "text/plain";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION = "txt";
 
   /** @see #getEncodingUtil() */
   private EncodingUtil encodingUtil;
@@ -42,34 +45,6 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
   public AbstractContentParserText() {
 
     super();
-    this.defaultCapacity = 1024;
-  }
-
-  /**
-   * @see #setDefaultCapacity(int)
-   * 
-   * @return the defaultBufferSize.
-   */
-  public int getDefaultCapacity() {
-
-    return this.defaultCapacity;
-  }
-
-  /**
-   * If content is {@link #parse(InputStream, long) parsed} the capacity of the
-   * used {@link StringBuilder} is set to
-   * <code>{@link #getMaximumBufferSize() maximumBufferSize}/2</code> limited to
-   * the <code>filesize</code>. If the <code>filesize</code> is undefined, this
-   * value is used as limit.<br>
-   * Since textual files are typically quite small, you should NOT use a too
-   * large value here. The default is <code>1024</code>.
-   * 
-   * @param newBufferSize the defaultBufferSize to set.
-   */
-  public void setDefaultCapacity(int newBufferSize) {
-
-    getInitializationState().requireNotInitilized();
-    this.defaultCapacity = newBufferSize;
   }
 
   /**
@@ -157,23 +132,23 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
    * <code>pattern</code> that produces the property in the given
    * <code>{@link Matcher#group(int) group}</code>.
    * 
-   * @param properties are the properties with the collected metadata.
+   * @param context are the properties with the collected metadata.
    * @param line is a single line read from the text.
    * @param pattern is the regular expression pattern.
    * @param propertyName is the name of the property to extract.
    * @param group is the {@link Matcher#group(int) group} number of the property
    *        in the <code>pattern</code>.
    */
-  protected void parseProperty(Properties properties, String line, Pattern pattern,
+  protected void parseProperty(MutableGenericContext context, String line, Pattern pattern,
       String propertyName, int group) {
 
-    String value = properties.getProperty(propertyName);
+    String value = context.getVariable(propertyName, String.class);
     if (value == null) {
       value = parseProperty(line, pattern, group);
       if (value != null) {
         StringBuilder buffer = new StringBuilder(value.length());
         this.xmlUtil.extractPlainText(value, buffer, null);
-        properties.setProperty(propertyName, buffer.toString());
+        context.setVariable(propertyName, buffer.toString());
       }
     }
   }
@@ -182,38 +157,26 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
-      throws Exception {
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options,
+      MutableGenericContext context) throws Exception {
 
-    int maxBufferSize = getMaximumBufferSize();
-    int maxChars = maxBufferSize / 2;
-    int capacity = maxChars;
+    int maxBufferSize = options.getMaximumBufferSize();
+    int capacity = maxBufferSize;
     if (filesize > 0) {
-      if (filesize < capacity) {
+      if (filesize < maxBufferSize) {
         capacity = (int) filesize + 2;
       }
     } else {
-      if (capacity > this.defaultCapacity) {
-        capacity = this.defaultCapacity;
+      int defaultCapacity = 2048;
+      if (capacity > defaultCapacity) {
+        capacity = 2048;
       }
     }
-    StringBuilder textBuffer = new StringBuilder(capacity);
-    int bufferLength = 4096;
-    if (bufferLength > maxBufferSize) {
-      bufferLength = maxBufferSize;
-    }
-    if ((bufferLength > filesize) && (filesize > 0)) {
-      bufferLength = (int) filesize;
-    }
-    Reader reader;
-    if (encoding == null) {
-      reader = getEncodingUtil().createUtfDetectionReader(inputStream, null);
-    } else {
-      reader = new InputStreamReader(inputStream, encoding);
-    }
+    StringBuilder textBuffer = new StringBuilder(capacity / 2);
+    Reader reader = getEncodingUtil().createUtfDetectionReader(inputStream, options.getEncoding());
     BufferedReader bufferedReader = new BufferedReader(reader);
-    parse(bufferedReader, properties, textBuffer);
-    properties.setProperty(PROPERTY_KEY_TEXT, textBuffer.toString());
+    parse(bufferedReader, options, context, textBuffer);
+    context.setVariable(VARIABLE_NAME_TEXT, textBuffer.toString());
   }
 
   /**
@@ -222,15 +185,16 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
    * metadata can directly be set in the given <code>properties</code>.
    * 
    * @param bufferedReader is where to read the content from.
-   * @param properties is where the metadata is collected.
+   * @param options are the {@link ContentParserOptions}.
+   * @param context is where the metadata is collected.
    * @param textBuffer is the buffer where the textual content should be
    *        appended to.
    * @throws Exception if something goes wrong.
    */
-  public void parse(BufferedReader bufferedReader, Properties properties, StringBuilder textBuffer)
-      throws Exception {
+  public void parse(BufferedReader bufferedReader, ContentParserOptions options,
+      MutableGenericContext context, StringBuilder textBuffer) throws Exception {
 
-    int maxChars = getMaximumBufferSize() / 2;
+    int maxChars = options.getMaximumBufferSize() / 2;
     int charCount = 0;
     String line = bufferedReader.readLine();
     while (line != null) {
@@ -253,11 +217,27 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
    * This method may be overridden to parse additional metadata from the
    * content.
    * 
-   * @param properties are the properties with the collected metadata.
+   * @param context are the properties with the collected metadata.
    * @param line is a single line read from the text.
    */
-  protected void parseLine(Properties properties, String line) {
+  protected void parseLine(MutableGenericContext context, String line) {
 
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getExtension() {
+
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
 }

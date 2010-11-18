@@ -4,13 +4,14 @@
 package net.sf.mmm.content.parser.impl.poi;
 
 import java.io.InputStream;
-import java.util.Properties;
+
+import net.sf.mmm.content.parser.api.ContentParserOptions;
+import net.sf.mmm.content.parser.base.AbstractContentParser;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 
 import org.apache.poi.hpsf.PropertySetFactory;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
-import net.sf.mmm.content.parser.base.AbstractContentParser;
 
 /**
  * This is the abstract base implementation of the
@@ -42,25 +43,25 @@ public abstract class AbstractContentParserPoi extends AbstractContentParser {
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
-      throws Exception {
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options,
+      MutableGenericContext context) throws Exception {
 
     POIFSFileSystem poiFs = new POIFSFileSystem(inputStream);
     SummaryInformation summaryInfo = (SummaryInformation) PropertySetFactory.create(poiFs
         .createDocumentInputStream(SummaryInformation.DEFAULT_STREAM_NAME));
     String title = summaryInfo.getTitle();
     if (title != null) {
-      properties.setProperty(PROPERTY_KEY_TITLE, title);
+      context.setVariable(VARIABLE_NAME_TITLE, title);
     }
     String author = summaryInfo.getAuthor();
     if (author != null) {
-      properties.setProperty(PROPERTY_KEY_AUTHOR, author);
+      context.setVariable(VARIABLE_NAME_CREATOR, author);
     }
     String keywords = summaryInfo.getKeywords();
     if (keywords != null) {
-      properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);
+      context.setVariable(VARIABLE_NAME_KEYWORDS, keywords);
     }
-    properties.setProperty(PROPERTY_KEY_TEXT, extractText(poiFs, filesize));
+    context.setVariable(VARIABLE_NAME_TEXT, extractText(poiFs, filesize, options));
   }
 
   /**
@@ -71,9 +72,11 @@ public abstract class AbstractContentParserPoi extends AbstractContentParser {
    * @param filesize is the size (content-length) of the content to parse in
    *        bytes or <code>0</code> if NOT available (unknown). If available,
    *        the parser may use this value for optimized allocations.
+   * @param options are the {@link ContentParserOptions}.
    * @return the plain text extracted from the content.
    * @throws Exception if something goes wrong.
    */
-  protected abstract String extractText(POIFSFileSystem poiFs, long filesize) throws Exception;
+  protected abstract String extractText(POIFSFileSystem poiFs, long filesize,
+      ContentParserOptions options) throws Exception;
 
 }

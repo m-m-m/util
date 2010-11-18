@@ -4,23 +4,40 @@
 package net.sf.mmm.content.parser.base;
 
 import java.io.InputStream;
-import java.util.Properties;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.inject.Inject;
 
 import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.context.api.GenericContext;
+import net.sf.mmm.util.context.api.GenericContextFactory;
+import net.sf.mmm.util.context.api.MutableGenericContext;
+import net.sf.mmm.util.context.impl.GenericContextFactoryImpl;
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
- * This is the abstract base implementation of a {@link ContentParser} that
- * supports the {@link LimitBufferSize} feature.
+ * This is the abstract base implementation of a {@link ContentParser}. It
+ * handles the delegation methods, the creation of the
+ * {@link MutableGenericContext} and the safe {@link InputStream#close()
+ * closing} of the {@link InputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentParser extends AbstractLoggableComponent implements ContentParser,
-    LimitBufferSize {
+public abstract class AbstractContentParser extends AbstractLoggableComponent implements
+    ContentParser {
 
-  /** @see #getMaximumBufferSize() */
-  private int maximumBufferSize;
+  /** @see #setGenericContextFactory(GenericContextFactory) */
+  private GenericContextFactory genericContextFactory;
+
+  /** @see #getPrimaryKeys() */
+  private final Set<String> primaryKeys;
+
+  /** @see #getSecondaryKeys() */
+  private final Set<String> secondaryKeys;
 
   /**
    * The constructor.
@@ -28,35 +45,83 @@ public abstract class AbstractContentParser extends AbstractLoggableComponent im
   public AbstractContentParser() {
 
     super();
-    this.maximumBufferSize = DEFAULT_MAX_BUFFER_SIZE;
+    Set<String> primarySet = new HashSet<String>();
+    String extension = getExtension();
+    if (extension != null) {
+      primarySet.add(extension);
+    }
+    String mimetype = getMimetype();
+    if (mimetype != null) {
+      primarySet.add(mimetype);
+    }
+    String[] alternativeKeys = getAlternativeKeyArray();
+    if (alternativeKeys != null) {
+      for (String key : alternativeKeys) {
+        primarySet.add(key);
+      }
+    }
+    this.primaryKeys = Collections.unmodifiableSet(primarySet);
+    Set<String> secondarySet = new HashSet<String>();
+    this.secondaryKeys = Collections.unmodifiableSet(secondarySet);
   }
 
   /**
-   * This method gets the primary keys used to
-   * {@link net.sf.mmm.content.parser.api.ContentParserService#getParser(String)
-   * register} this {@link ContentParser}.
-   * 
-   * @return the primary keys (extensions and mimetypes) of this
-   *         {@link ContentParser}.
+   * @param genericContextFactory is the genericContextFactory to set
    */
-  public abstract String[] getRegistryKeysPrimary();
+  @Inject
+  public void setGenericContextFactory(GenericContextFactory genericContextFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.genericContextFactory = genericContextFactory;
+  }
 
   /**
-   * This method gets the secondary keys used to
-   * {@link net.sf.mmm.content.parser.api.ContentParserService#getParser(String)
-   * register} this {@link ContentParser}. If an other (more specific)
-   * {@link ContentParser} defines such key as {@link #getRegistryKeysPrimary()
-   * primary}, that {@link ContentParser} is chosen first. Otherwise this
-   * implementation will be used.
-   * 
-   * @see net.sf.mmm.content.parser.api.ContentParserService#getParser(String)
-   * 
-   * @see ContentParserRegistrar#addParser(ContentParser, String...)
-   * 
-   * @return the alias keys (extensions and mimetypes) of this
-   *         {@link ContentParser}.
+   * {@inheritDoc}
    */
-  public String[] getRegistryKeysSecondary() {
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.genericContextFactory == null) {
+      GenericContextFactoryImpl impl = new GenericContextFactoryImpl();
+      impl.initialize();
+      this.genericContextFactory = impl;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final Set<String> getPrimaryKeys() {
+
+    return this.primaryKeys;
+  }
+
+  /**
+   * This method gets the alternative {@link #getPrimaryKeys() primary keys} in
+   * addition to {@link #getExtension() extension} and {@link #getMimetype()
+   * mimetype}.
+   * 
+   * @see #getPrimaryKeys()
+   * 
+   * @return an array with the alternative keys.
+   */
+  public String[] getAlternativeKeyArray() {
+
+    return StringUtil.EMPTY_STRING_ARRAY;
+  }
+
+  /**
+   * This method gets the {@link #getSecondaryKeys() secondary keys} as array.
+   * This is just a convenience to make it easier for the implementors of
+   * individual parsers not to deal with creating a {@link Set} and make it
+   * unmodifiable.
+   * 
+   * @see #getPrimaryKeys()
+   * 
+   * @return an array with the alternative keys.
+   */
+  public String[] getSecondaryKeyArray() {
 
     return StringUtil.EMPTY_STRING_ARRAY;
   }
@@ -64,40 +129,32 @@ public abstract class AbstractContentParser extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
-  public int getMaximumBufferSize() {
+  public final Set<String> getSecondaryKeys() {
 
-    return this.maximumBufferSize;
+    return this.secondaryKeys;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void setMaximumBufferSize(int maxBytes) {
+  public final GenericContext parse(InputStream inputStream, long filesize) throws Exception {
 
-    this.maximumBufferSize = maxBytes;
+    return parse(inputStream, filesize, new ContentParserOptionsBean());
   }
 
   /**
    * {@inheritDoc}
    */
-  public final Properties parse(InputStream inputStream, long filesize) throws Exception {
-
-    return parse(inputStream, filesize, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public final Properties parse(InputStream inputStream, long filesize, String encoding)
+  public GenericContext parse(InputStream inputStream, long filesize, ContentParserOptions options)
       throws Exception {
 
-    Properties properties = new Properties();
+    MutableGenericContext context = this.genericContextFactory.createContext();
     try {
-      parse(inputStream, filesize, encoding, properties);
+      parse(inputStream, filesize, options, context);
     } finally {
       inputStream.close();
     }
-    return properties;
+    return context;
   }
 
   /**
@@ -107,13 +164,13 @@ public abstract class AbstractContentParser extends AbstractLoggableComponent im
    * @param filesize is the size (content-length) of the content to parse in
    *        bytes or <code>0</code> if NOT available (unknown). If available,
    *        the parser may use this value for optimized allocations.
-   * @param encoding is the explicit encoding to use for text files or
-   *        <code>null</code> to use smart guess.
-   * @param properties are the properties where the extracted (meta-)data from
-   *        the parsed <code>inputStream</code> will be added to.
+   * @param options are the {@link ContentParserOptions}.
+   * @param context is the {@link MutableGenericContext} where the extracted
+   *        metadata from the parsed <code>inputStream</code> will be
+   *        {@link MutableGenericContext#setVariable(String, Object) added} to.
    * @throws Exception if the operation fails for arbitrary reasons.
    */
-  protected abstract void parse(InputStream inputStream, long filesize, String encoding,
-      Properties properties) throws Exception;
+  protected abstract void parse(InputStream inputStream, long filesize,
+      ContentParserOptions options, MutableGenericContext context) throws Exception;
 
 }

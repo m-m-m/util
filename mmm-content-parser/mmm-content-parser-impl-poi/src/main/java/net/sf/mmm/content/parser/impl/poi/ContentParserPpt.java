@@ -8,14 +8,16 @@ import java.io.UnsupportedEncodingException;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
+
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.LittleEndian;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.content.parser.api.ContentParser} interface for PPT
- * documents (content with the mimetype "application/vnd.ms-powerpoint").
+ * {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary
+ * MS-Powerpoint documents.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -149,10 +151,26 @@ public class ContentParserPpt extends AbstractContentParserPoi {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { "pot" };
   }
 
   /**
@@ -259,7 +277,8 @@ public class ContentParserPpt extends AbstractContentParserPoi {
    * {@inheritDoc}
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
+  protected String extractText(POIFSFileSystem poiFs, long filesize, ContentParserOptions options)
+      throws Exception {
 
     // PowerPointExtractor pptExtractor = new PowerPointExtractor(poiFs);
     // return pptExtractor.getText();
@@ -267,8 +286,9 @@ public class ContentParserPpt extends AbstractContentParserPoi {
     DocumentInputStream docStream = poiFs.createDocumentInputStream(POIFS_POWERPOINT_DOC);
 
     int length = docStream.available();
-    if (getMaximumBufferSize() < length) {
-      length = getMaximumBufferSize();
+    int maximumBufferSize = options.getMaximumBufferSize();
+    if (maximumBufferSize < length) {
+      length = maximumBufferSize;
     }
     int capacity = length / 10;
     StringBuffer textBuffer = new StringBuffer(capacity);

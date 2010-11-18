@@ -4,8 +4,9 @@
 package net.sf.mmm.content.parser.impl.text;
 
 import java.io.BufferedReader;
-import java.util.Properties;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.xml.api.ParserState;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
@@ -39,15 +40,15 @@ public abstract class AbstractContentParserTextMarkupAware extends AbstractConte
    * {@inheritDoc}
    */
   @Override
-  public void parse(BufferedReader bufferedReader, Properties properties, StringBuilder textBuffer)
-      throws Exception {
+  public void parse(BufferedReader bufferedReader, ContentParserOptions options,
+      MutableGenericContext context, StringBuilder textBuffer) throws Exception {
 
-    long maxChars = getMaximumBufferSize() / 2;
+    long maxChars = options.getMaximumBufferSize() / 2;
     ParserState parserState = null;
     XmlUtil xmlUtil = getXmlUtil();
     String line = bufferedReader.readLine();
     while (line != null) {
-      parseLine(properties, line);
+      parseLine(context, line);
       parserState = xmlUtil.extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;

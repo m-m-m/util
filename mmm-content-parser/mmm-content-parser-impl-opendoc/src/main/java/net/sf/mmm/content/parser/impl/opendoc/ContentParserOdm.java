@@ -9,8 +9,7 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for content of
- * the open-document text-master format (content with the mimetypes
- * "application/vnd.oasis.opendocument.text-master").
+ * the open-document text-master format.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -35,10 +34,17 @@ public class ContentParserOdm extends AbstractContentParserOpenDoc {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
 }

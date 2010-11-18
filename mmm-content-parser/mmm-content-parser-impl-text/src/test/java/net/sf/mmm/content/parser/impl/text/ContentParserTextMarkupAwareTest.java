@@ -4,9 +4,9 @@
 package net.sf.mmm.content.parser.impl.text;
 
 import java.io.InputStream;
-import java.util.Properties;
 
 import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
@@ -21,7 +21,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ContentParserTextMarkupAwareTest {
 
-  protected Properties parse(ContentParser parser, String resourceName, long filesize)
+  protected GenericContext parse(ContentParser parser, String resourceName, long filesize)
       throws Exception {
 
     DataResource testResource = new ClasspathResource(ContentParserTextMarkupAwareTest.class,
@@ -36,8 +36,8 @@ public class ContentParserTextMarkupAwareTest {
 
   public void checkParser(ContentParser parser, long filesize) throws Exception {
 
-    Properties properties = parse(parser, "test.txt", filesize);
-    String text = properties.getProperty(ContentParser.PROPERTY_KEY_TEXT);
+    GenericContext properties = parse(parser, "test.txt", filesize);
+    String text = properties.getVariable(ContentParser.VARIABLE_NAME_TEXT, String.class);
     Assert.assertTrue(text.contains("Hello World!"));
     Assert.assertFalse(text.contains("foo"));
   }

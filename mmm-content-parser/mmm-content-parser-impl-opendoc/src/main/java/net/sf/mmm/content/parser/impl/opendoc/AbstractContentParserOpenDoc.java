@@ -4,14 +4,15 @@
 package net.sf.mmm.content.parser.impl.opendoc;
 
 import java.io.InputStream;
-import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.base.AbstractContentParser;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 
 /**
  * This is the abstract base-implementation of a
@@ -41,7 +42,7 @@ public abstract class AbstractContentParserOpenDoc extends AbstractContentParser
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options, MutableGenericContext context)
       throws Exception {
 
     ZipInputStream zipInputStream = new ZipInputStream(inputStream);

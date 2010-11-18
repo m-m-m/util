@@ -4,10 +4,9 @@
 package net.sf.mmm.content.parser.impl.poi;
 
 import java.io.InputStream;
-import java.util.Properties;
 
 import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.content.parser.impl.poi.AbstractContentParserPoi;
+import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
@@ -20,7 +19,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 @SuppressWarnings("all")
 public abstract class AbstractContentParserPoiTest {
 
-  protected Properties parse(ContentParser parser, String resourceName, long filesize)
+  protected GenericContext parse(ContentParser parser, String resourceName, long filesize)
       throws Exception {
 
     DataResource testResource = new ClasspathResource(AbstractContentParserPoiTest.class,

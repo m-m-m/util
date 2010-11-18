@@ -25,13 +25,17 @@ public interface ContentParserService {
    * This method gets the {@link ContentParser parser} for the given
    * <code>key</code>.
    * 
+   * @see ContentParser#getPrimaryKeys()
+   * @see ContentParser#getSecondaryKeys()
+   * 
    * @param key is the key identifying the requested parser. You can use the
-   *        extension of the filename excluding the dot (e.g. "txt", "xml",
-   *        "html", "pdf", etc.) or the mimetype (e.g. "text/plain", "text/xml",
-   *        "text/html", "application/pdf", etc.).
+   *        {@link ContentParser#getExtension() extension} or the
+   *        {@link ContentParser#getMimetype() mimetype} of the content you want
+   *        to parse.
    * @return the {@link ContentParser parser} for the given <code>key</code> or
-   *         <code>null</code> if no such parser is available (see
-   *         {@link #getGenericParser()}).
+   *         the {@link #getGenericParser() generic parser} if no specific
+   *         parser is available (check {@link ContentParser#getExtension()} for
+   *         <code>null</code> to figure out).
    */
   ContentParser getParser(String key);
 

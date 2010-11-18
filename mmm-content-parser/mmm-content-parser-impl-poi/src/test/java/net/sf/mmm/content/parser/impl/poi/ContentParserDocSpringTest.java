@@ -7,7 +7,7 @@ import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
- * This is the test-case for {@link ContentParserPpt} configured using spring.
+ * This is the test-case for {@link ContentParserDoc} configured using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

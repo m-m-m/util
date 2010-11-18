@@ -9,8 +9,7 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for content of
- * the open-document spreadsheet format (content with the mimetypes
- * "application/vnd.oasis.opendocument.spreadsheet").
+ * the open-document spreadsheet format.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,6 +23,12 @@ public class ContentParserOds extends AbstractContentParserOpenDoc {
   /** The default extension. */
   public static final String KEY_EXTENSION = "ods";
 
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE_TEMPLATE = "application/vnd.oasis.opendocument.spreadsheet-template";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION_TEMPLATE = "ots";
+
   /**
    * The constructor.
    */
@@ -35,10 +40,26 @@ public class ContentParserOds extends AbstractContentParserOpenDoc {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { KEY_EXTENSION_TEMPLATE, KEY_MIMETYPE_TEMPLATE };
   }
 
 }

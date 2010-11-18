@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.Properties;
 import java.util.regex.Pattern;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.impl.text.AbstractContentParserTextMarkupAware;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,8 +27,8 @@ import org.w3c.tidy.Tidy;
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for HTML
  * documents (content with the mimetype "text/html").<br/>
  * It uses JTidy for HTML-parsing but falls back to raw parsing for files that
- * are {@link #getMaximumBufferSize() large} or have unpredictable size to avoid
- * memory problems.
+ * are {@link ContentParserOptions#getMaximumBufferSize() large} or have
+ * unpredictable size to avoid memory problems.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -36,9 +37,11 @@ import org.w3c.tidy.Tidy;
 public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
 
   /** The mimetype. */
+  @SuppressWarnings("hiding")
   public static final String KEY_MIMETYPE = "text/html";
 
   /** The default extension. */
+  @SuppressWarnings("hiding")
   public static final String KEY_EXTENSION = "html";
 
   /** the head tag */
@@ -82,18 +85,36 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeysSecondary() {
+  public String getMimetype() {
 
-    return new String[] { "htm", "php", "jsp", "hta" };
+    return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { "htm" };
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getSecondaryKeyArray() {
+
+    return new String[] { "php", "jsp", "hta" };
   }
 
   /**
@@ -105,10 +126,11 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
    * @param filesize is the size (content-length) of the content to parse in
    *        bytes or <code>0</code> if NOT available (unknown). If available,
    *        the parser may use this value for optimized allocations.
-   * @param properties are the {@link Properties} where metadata can be added.
+   * @param context is the {@link MutableGenericContext} where metadata can be
+   *        added.
    * @throws Exception on error.
    */
-  protected void parseJtidy(InputStream inputStream, long filesize, Properties properties)
+  protected void parseJtidy(InputStream inputStream, long filesize, MutableGenericContext context)
       throws Exception {
 
     Tidy tidy = new Tidy();
@@ -130,10 +152,10 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
           } else if (tagName.equals(TAG_META)) {
             String metaName = childElement.getAttribute(ATR_META_NAME);
             if (metaName.equalsIgnoreCase("keywords")) {
-              properties.setProperty(PROPERTY_KEY_KEYWORDS,
+              context.setVariable(VARIABLE_NAME_KEYWORDS,
                   childElement.getAttribute(ATR_META_CONTENT));
             } else if (metaName.equalsIgnoreCase("author")) {
-              properties.setProperty(PROPERTY_KEY_AUTHOR,
+              context.setVariable(VARIABLE_NAME_CREATOR,
                   childElement.getAttribute(ATR_META_CONTENT));
             }
           }
@@ -141,12 +163,12 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
       }
     }
     if (title != null) {
-      properties.setProperty(PROPERTY_KEY_TITLE, title);
+      context.setVariable(VARIABLE_NAME_TITLE, title);
     }
     // read body data...
     Element bodyElement = getFirstChildElement(htmlElement, TAG_BODY);
     if (bodyElement != null) {
-      properties.setProperty(PROPERTY_KEY_TEXT, getTextContent(bodyElement));
+      context.setVariable(VARIABLE_NAME_TEXT, getTextContent(bodyElement));
     }
   }
 
@@ -154,13 +176,13 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
-      throws Exception {
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options,
+      MutableGenericContext context) throws Exception {
 
-    if ((filesize > 0) && (filesize < getMaximumBufferSize())) {
-      parseJtidy(inputStream, filesize, properties);
+    if ((filesize > 0) && (filesize < options.getMaximumBufferSize())) {
+      parseJtidy(inputStream, filesize, context);
     } else {
-      super.parse(inputStream, filesize, encoding, properties);
+      super.parse(inputStream, filesize, options, context);
     }
   }
 
@@ -168,11 +190,11 @@ public class ContentParserHtml extends AbstractContentParserTextMarkupAware {
    * {@inheritDoc}
    */
   @Override
-  protected void parseLine(Properties properties, String line) {
+  protected void parseLine(MutableGenericContext context, String line) {
 
-    parseProperty(properties, line, TITLE_PATTERN, PROPERTY_KEY_TITLE, 1);
-    parseProperty(properties, line, AUTHOR_PATTERN, PROPERTY_KEY_AUTHOR, 1);
-    parseProperty(properties, line, KEYWORDS_PATTERN, PROPERTY_KEY_KEYWORDS, 1);
+    parseProperty(context, line, TITLE_PATTERN, VARIABLE_NAME_TITLE, 1);
+    parseProperty(context, line, AUTHOR_PATTERN, VARIABLE_NAME_CREATOR, 1);
+    parseProperty(context, line, KEYWORDS_PATTERN, VARIABLE_NAME_KEYWORDS, 1);
   }
 
   /**

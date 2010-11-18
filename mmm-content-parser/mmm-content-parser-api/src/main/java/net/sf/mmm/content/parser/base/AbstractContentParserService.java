@@ -6,6 +6,7 @@ package net.sf.mmm.content.parser.base;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -15,6 +16,7 @@ import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link ContentParserService}
@@ -23,22 +25,26 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractContentParserService extends AbstractLoggableComponent implements
-    ContentParserService, LimitBufferSize {
-
-  /** @see #getGenericParser() */
-  private ContentParserGeneric genericParser;
+    ContentParserService {
 
   /** @see #setContentParsers(List) */
   private List<AbstractContentParser> contentParsers;
 
-  /** @see #getParser(String) */
+  /** @see #getGenericParser() */
+  private ContentParser genericParser;
+
+  /**
+   * @see #getParser(String)
+   * @see ContentParser#getExtension()
+   * @see ContentParser#getMimetype()
+   */
   private final Map<String, ContentParser> primaryKey2parserMap;
 
-  /** @see #doInitialize() */
+  /**
+   * @see #getParser(String)
+   * @see AbstractContentParser#getPrimaryKeys()
+   */
   private Map<String, ContentParser> secondaryKey2parserMap;
-
-  /** @see #getMaximumBufferSize() */
-  private int maximumBufferSize;
 
   /**
    * The constructor.
@@ -48,8 +54,6 @@ public abstract class AbstractContentParserService extends AbstractLoggableCompo
     super();
     this.primaryKey2parserMap = new HashMap<String, ContentParser>();
     this.secondaryKey2parserMap = new HashMap<String, ContentParser>();
-    this.maximumBufferSize = DEFAULT_MAX_BUFFER_SIZE;
-    this.genericParser = null;
     this.contentParsers = null;
   }
 
@@ -60,18 +64,26 @@ public abstract class AbstractContentParserService extends AbstractLoggableCompo
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.genericParser == null) {
-      throw new ResourceMissingException("genericParser");
-    }
     if (this.contentParsers == null) {
       throw new ResourceMissingException("contentParsers");
     }
     for (AbstractContentParser parser : this.contentParsers) {
-      parser.setMaximumBufferSize(this.maximumBufferSize);
-      if (!(parser instanceof ContentParserGeneric)) {
-        String[] primaryKeys = parser.getRegistryKeysPrimary();
-        if ((primaryKeys == null) || (primaryKeys.length == 0)) {
-          throw new NlsIllegalArgumentException(parser.getClass().getName());
+      String extension = parser.getExtension();
+      String mimetype = parser.getMimetype();
+      if (extension == null) {
+        if (mimetype != null) {
+          getLogger().warn("Illegal generic parser - both extension and mimetype must be null!");
+        }
+        if (this.genericParser == null) {
+          this.genericParser = parser;
+        } else {
+          getLogger().warn("Multiple generic parsers injected!");
+        }
+      } else {
+        Set<String> primaryKeys = parser.getPrimaryKeys();
+        if (primaryKeys == null) {
+          throw new NlsNullPointerException(ContentParser.class.getSimpleName() + "[" + extension
+              + "].primaryKeys");
         }
         for (String key : primaryKeys) {
           ContentParser old = this.primaryKey2parserMap.put(key, parser);
@@ -79,16 +91,25 @@ public abstract class AbstractContentParserService extends AbstractLoggableCompo
             throw new DuplicateObjectException(parser, key);
           }
         }
-        String[] secondaryKeys = parser.getRegistryKeysSecondary();
-        if (secondaryKeys != null) {
-          for (String key : secondaryKeys) {
-            ContentParser old = this.secondaryKey2parserMap.put(key, parser);
-            if (old != null) {
-              throw new DuplicateObjectException(parser, key);
-            }
+        assert primaryKeys.contains(extension);
+        if (mimetype == null) {
+          getLogger().debug("No mimetype defined for parser with extension " + extension);
+        } else {
+          assert primaryKeys.contains(mimetype);
+        }
+      }
+      Set<String> secondaryKeys = parser.getSecondaryKeys();
+      if (secondaryKeys != null) {
+        for (String key : secondaryKeys) {
+          ContentParser old = this.secondaryKey2parserMap.put(key, parser);
+          if (old != null) {
+            throw new DuplicateObjectException(parser, key);
           }
         }
       }
+    }
+    if (this.genericParser == null) {
+      throw new ResourceMissingException("genericParser");
     }
 
   }
@@ -96,36 +117,9 @@ public abstract class AbstractContentParserService extends AbstractLoggableCompo
   /**
    * {@inheritDoc}
    */
-  public int getMaximumBufferSize() {
-
-    return this.maximumBufferSize;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setMaximumBufferSize(int maxBytes) {
-
-    getInitializationState().requireNotInitilized();
-    this.maximumBufferSize = maxBytes;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public ContentParserGeneric getGenericParser() {
+  public ContentParser getGenericParser() {
 
     return this.genericParser;
-  }
-
-  /**
-   * @param genericParser is the generic Parser to set.
-   */
-  @Inject
-  public void setGenericParser(ContentParserGeneric genericParser) {
-
-    getInitializationState().requireNotInitilized();
-    this.genericParser = genericParser;
   }
 
   /**
@@ -146,6 +140,9 @@ public abstract class AbstractContentParserService extends AbstractLoggableCompo
     ContentParser parser = this.primaryKey2parserMap.get(key);
     if (parser == null) {
       parser = this.secondaryKey2parserMap.get(key);
+      if (parser == null) {
+        parser = this.genericParser;
+      }
     }
     return parser;
   }
@@ -165,14 +162,11 @@ public abstract class AbstractContentParserService extends AbstractLoggableCompo
     // can NOT do: getInitializationState().requireNotInitilized();
     if (keys.length == 0) {
       // TODO NLS
-      throw new NlsIllegalArgumentException("At least one extension is required!");
+      throw new NlsIllegalArgumentException("keys.length (0)");
     }
     for (int i = 0; i < keys.length; i++) {
       if (this.primaryKey2parserMap.containsKey(keys[i])) {
         throw new DuplicateObjectException(parser, keys[i]);
-      }
-      if (parser instanceof LimitBufferSize) {
-        ((LimitBufferSize) parser).setMaximumBufferSize(this.maximumBufferSize);
       }
       this.primaryKey2parserMap.put(keys[i], parser);
     }

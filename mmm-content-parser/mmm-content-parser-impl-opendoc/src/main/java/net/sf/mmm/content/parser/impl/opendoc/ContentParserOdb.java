@@ -9,8 +9,7 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for content of
- * the open-document database format (content with the mimetypes
- * "application/vnd.oasis.opendocument.database").
+ * the open-document database format.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -35,10 +34,26 @@ public class ContentParserOdb extends AbstractContentParserOpenDoc {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { "application/vnd.oasis.opendocument.base", "application/vnd.sun.xml.base" };
   }
 
 }

@@ -15,8 +15,7 @@
   <description>This module provides parsers for MS office documents using apache POI.</description>
 
   <properties>
-    <org.apache.poi.version>3.7-beta3</org.apache.poi.version>
-    <!-- <org.apache.poi.version>3.6</org.apache.poi.version>  -->
+    <org.apache.poi.version>3.7</org.apache.poi.version>
   </properties>
   
   <dependencies>
@@ -41,6 +40,12 @@
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-scratchpad</artifactId>
+      <version>${org.apache.poi.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
       <version>${org.apache.poi.version}</version>
       <scope>compile</scope>
     </dependency>

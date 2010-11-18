@@ -9,24 +9,30 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for content of
- * the open-document text-web (HTML Document Template) format.
+ * the open-document presentation-template format.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Singleton
 @Named
-public class ContentParserOth extends AbstractContentParserOpenDoc {
+public class ContentParserOdp extends AbstractContentParserOpenDoc {
 
   /** The mimetype. */
-  public static final String KEY_MIMETYPE = "application/vnd.oasis.opendocument.text-web";
+  public static final String KEY_MIMETYPE = "application/vnd.oasis.opendocument.presentation";
 
   /** The default extension. */
-  public static final String KEY_EXTENSION = "oth";
+  public static final String KEY_EXTENSION = "odp";
+
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE_TEMPLATE = "application/vnd.oasis.opendocument.presentation-template";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION_TEMPLATE = "otp";
 
   /**
    * The constructor.
    */
-  public ContentParserOth() {
+  public ContentParserOdp() {
 
     super();
   }
@@ -45,6 +51,15 @@ public class ContentParserOth extends AbstractContentParserOpenDoc {
   public String getMimetype() {
 
     return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { KEY_EXTENSION_TEMPLATE, KEY_MIMETYPE_TEMPLATE };
   }
 
 }

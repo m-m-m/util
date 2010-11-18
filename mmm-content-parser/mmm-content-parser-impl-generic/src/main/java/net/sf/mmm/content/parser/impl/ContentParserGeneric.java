@@ -4,12 +4,13 @@
 package net.sf.mmm.content.parser.impl;
 
 import java.io.InputStream;
-import java.util.Properties;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.base.AbstractContentParserGeneric;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 
 /**
  * This is the implementation of the
@@ -20,12 +21,12 @@ import net.sf.mmm.content.parser.base.AbstractContentParserGeneric;
  */
 @Named
 @Singleton
-public class ContentParserGenericImpl extends AbstractContentParserGeneric {
+public class ContentParserGeneric extends AbstractContentParserGeneric {
 
   /**
    * The constructor.
    */
-  public ContentParserGenericImpl() {
+  public ContentParserGeneric() {
 
     super();
   }
@@ -34,11 +35,11 @@ public class ContentParserGenericImpl extends AbstractContentParserGeneric {
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
-      throws Exception {
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options,
+      MutableGenericContext context) throws Exception {
 
     // TODO: re-implement GNU command "strings"...
-    properties.setProperty(PROPERTY_KEY_TEXT, "");
+    context.setVariable(VARIABLE_NAME_TEXT, "");
   }
 
 }

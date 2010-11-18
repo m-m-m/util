@@ -15,17 +15,17 @@ import net.sf.mmm.content.parser.impl.opendoc.ContentParserOdf;
 import net.sf.mmm.content.parser.impl.opendoc.ContentParserOdg;
 import net.sf.mmm.content.parser.impl.opendoc.ContentParserOdi;
 import net.sf.mmm.content.parser.impl.opendoc.ContentParserOdm;
+import net.sf.mmm.content.parser.impl.opendoc.ContentParserOdp;
 import net.sf.mmm.content.parser.impl.opendoc.ContentParserOds;
 import net.sf.mmm.content.parser.impl.opendoc.ContentParserOdt;
-import net.sf.mmm.content.parser.impl.opendoc.ContentParserOtg;
 import net.sf.mmm.content.parser.impl.opendoc.ContentParserOth;
-import net.sf.mmm.content.parser.impl.opendoc.ContentParserOtp;
-import net.sf.mmm.content.parser.impl.opendoc.ContentParserOts;
-import net.sf.mmm.content.parser.impl.opendoc.ContentParserOtt;
 import net.sf.mmm.content.parser.impl.pdf.ContentParserPdf;
 import net.sf.mmm.content.parser.impl.poi.ContentParserDoc;
+import net.sf.mmm.content.parser.impl.poi.ContentParserDocx;
 import net.sf.mmm.content.parser.impl.poi.ContentParserPpt;
+import net.sf.mmm.content.parser.impl.poi.ContentParserPptx;
 import net.sf.mmm.content.parser.impl.poi.ContentParserXls;
+import net.sf.mmm.content.parser.impl.poi.ContentParserXlsx;
 import net.sf.mmm.content.parser.impl.text.ContentParserTextMarkupAware;
 import net.sf.mmm.content.parser.impl.xml.ContentParserXml;
 
@@ -52,16 +52,18 @@ public class ContentParserServiceImplHardwired extends ContentParserServiceImpl 
   @Override
   protected void doInitialize() {
 
-    if (getGenericParser() == null) {
-      setGenericParser(new ContentParserGenericImpl());
-    }
     List<AbstractContentParser> parserList = new ArrayList<AbstractContentParser>();
 
+    parserList.add(new ContentParserGeneric());
     parserList.add(new ContentParserPdf());
     parserList.add(new ContentParserHtml());
+
     parserList.add(new ContentParserDoc());
     parserList.add(new ContentParserXls());
     parserList.add(new ContentParserPpt());
+    parserList.add(new ContentParserDocx());
+    parserList.add(new ContentParserXlsx());
+    parserList.add(new ContentParserPptx());
 
     parserList.add(new ContentParserOdb());
     parserList.add(new ContentParserOdc());
@@ -69,13 +71,10 @@ public class ContentParserServiceImplHardwired extends ContentParserServiceImpl 
     parserList.add(new ContentParserOdg());
     parserList.add(new ContentParserOdi());
     parserList.add(new ContentParserOdm());
+    parserList.add(new ContentParserOdp());
     parserList.add(new ContentParserOds());
     parserList.add(new ContentParserOdt());
-    parserList.add(new ContentParserOtg());
     parserList.add(new ContentParserOth());
-    parserList.add(new ContentParserOtp());
-    parserList.add(new ContentParserOts());
-    parserList.add(new ContentParserOtt());
 
     parserList.add(new ContentParserXml());
     parserList.add(new ContentParserTextMarkupAware());

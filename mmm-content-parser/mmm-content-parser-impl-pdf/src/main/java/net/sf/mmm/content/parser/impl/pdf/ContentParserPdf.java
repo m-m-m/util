@@ -4,12 +4,13 @@
 package net.sf.mmm.content.parser.impl.pdf;
 
 import java.io.InputStream;
-import java.util.Properties;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.base.AbstractContentParser;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 
 import org.pdfbox.pdfparser.PDFParser;
 import org.pdfbox.pdmodel.PDDocument;
@@ -44,18 +45,25 @@ public class ContentParserPdf extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
-      throws Exception {
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options,
+      MutableGenericContext context) throws Exception {
 
     PDFParser parser = new PDFParser(inputStream);
     parser.parse();
@@ -68,20 +76,20 @@ public class ContentParserPdf extends AbstractContentParser {
       PDDocumentInformation info = pdfDoc.getDocumentInformation();
       String title = info.getTitle();
       if (title != null) {
-        properties.setProperty(PROPERTY_KEY_TITLE, title);
+        context.setVariable(VARIABLE_NAME_TITLE, title);
       }
       String keywords = info.getKeywords();
       if (keywords != null) {
-        properties.setProperty(PROPERTY_KEY_KEYWORDS, keywords);
+        context.setVariable(VARIABLE_NAME_KEYWORDS, keywords);
       }
       String author = info.getAuthor();
       if (author != null) {
-        properties.setProperty(PROPERTY_KEY_AUTHOR, author);
+        context.setVariable(VARIABLE_NAME_CREATOR, author);
       }
 
-      if (filesize < getMaximumBufferSize()) {
+      if (filesize < options.getMaximumBufferSize()) {
         PDFTextStripper stripper = new PDFTextStripper();
-        properties.setProperty(PROPERTY_KEY_TEXT, stripper.getText(pdfDoc));
+        context.setVariable(VARIABLE_NAME_TEXT, stripper.getText(pdfDoc));
       }
     } finally {
       pdfDoc.close();

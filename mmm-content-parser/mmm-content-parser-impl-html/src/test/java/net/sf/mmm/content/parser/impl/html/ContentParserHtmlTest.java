@@ -4,9 +4,9 @@
 package net.sf.mmm.content.parser.impl.html;
 
 import java.io.InputStream;
-import java.util.Properties;
 
 import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
@@ -22,7 +22,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ContentParserHtmlTest {
 
-  protected Properties parse(ContentParser parser, String resourceName, long filesize)
+  protected GenericContext parse(ContentParser parser, String resourceName, long filesize)
       throws Exception {
 
     DataResource testResource = new ClasspathResource(ContentParserHtmlTest.class, resourceName,
@@ -37,14 +37,14 @@ public class ContentParserHtmlTest {
 
   public void checkParser(ContentParser parser, long filesize) throws Exception {
 
-    Properties properties = parse(parser, "test.html", filesize);
-    String title = properties.getProperty(ContentParser.PROPERTY_KEY_TITLE);
+    GenericContext properties = parse(parser, "test.html", filesize);
+    String title = properties.getVariable(ContentParser.VARIABLE_NAME_TITLE, String.class);
     Assert.assertEquals("This is the title!", title);
-    String author = properties.getProperty(ContentParser.PROPERTY_KEY_AUTHOR);
+    String author = properties.getVariable(ContentParser.VARIABLE_NAME_CREATOR, String.class);
     Assert.assertEquals("Jörg Hohwiller", author);
-    String keywords = properties.getProperty(ContentParser.PROPERTY_KEY_KEYWORDS);
+    String keywords = properties.getVariable(ContentParser.VARIABLE_NAME_KEYWORDS, String.class);
     Assert.assertEquals("Some keywords, and others", keywords);
-    String text = properties.getProperty(ContentParser.PROPERTY_KEY_TEXT);
+    String text = properties.getVariable(ContentParser.VARIABLE_NAME_TEXT, String.class);
     Assert.assertTrue(text.contains("Body title"));
     Assert.assertTrue(text.contains("Hello World!"));
   }

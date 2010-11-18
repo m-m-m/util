@@ -6,13 +6,15 @@ package net.sf.mmm.content.parser.impl.poi;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
+
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.content.parser.api.ContentParser} interface for MS-Word
- * documents (content with the mimetype "application/msword").
+ * {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary
+ * MS-Word documents.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,17 +39,24 @@ public class ContentParserDoc extends AbstractContentParserPoi {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeysSecondary() {
+  public String[] getAlternativeKeyArray() {
 
     return new String[] { "dot" };
   }
@@ -56,7 +65,8 @@ public class ContentParserDoc extends AbstractContentParserPoi {
    * {@inheritDoc}
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
+  protected String extractText(POIFSFileSystem poiFs, long filesize, ContentParserOptions options)
+      throws Exception {
 
     // DocumentEntry documentEntry = (DocumentEntry)
     // poiFs.getRoot().getEntry(POIFS_WORD_DOC);

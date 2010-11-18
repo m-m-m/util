@@ -7,13 +7,14 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
-import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.base.AbstractContentParser;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.xml.api.ParserState;
 import net.sf.mmm.util.xml.api.XmlUtil;
 import net.sf.mmm.util.xml.base.XmlUtilImpl;
@@ -83,22 +84,48 @@ public class ContentParserXml extends AbstractContentParser {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void parse(InputStream inputStream, long filesize, String encoding, Properties properties)
-      throws Exception {
+  public String[] getAlternativeKeyArray() {
 
-    int maxChars = getMaximumBufferSize() / 2;
+    return new String[] { "application/xml" };
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getSecondaryKeyArray() {
+
+    return new String[] { "xsl", "text/xslt", "text/xslt+xml" };
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void parse(InputStream inputStream, long filesize, ContentParserOptions options,
+      MutableGenericContext context) throws Exception {
+
+    int maxChars = options.getMaximumBufferSize() / 2;
     StringBuilder textBuffer = new StringBuilder(maxChars);
     Charset defaultCharset;
+    String encoding = options.getEncoding();
     if (encoding == null) {
       defaultCharset = Charset.defaultCharset();
     } else {
@@ -106,8 +133,8 @@ public class ContentParserXml extends AbstractContentParser {
     }
     Reader reader = XmlUtilImpl.getInstance().createXmlReader(inputStream, defaultCharset);
     BufferedReader bufferedReader = new BufferedReader(reader);
-    parse(bufferedReader, properties, textBuffer);
-    properties.setProperty(PROPERTY_KEY_TEXT, textBuffer.toString());
+    parse(bufferedReader, options, context, textBuffer);
+    context.setVariable(VARIABLE_NAME_TEXT, textBuffer.toString());
   }
 
   /**
@@ -116,15 +143,16 @@ public class ContentParserXml extends AbstractContentParser {
    * metadata can directly be set in the given <code>properties</code>.
    * 
    * @param bufferedReader is where to read the content from.
-   * @param properties is where the metadata is collected.
+   * @param options are the {@link ContentParserOptions}.
+   * @param context is where the metadata is collected.
    * @param textBuffer is the buffer where the textual content should be
    *        appended to.
    * @throws Exception if something goes wrong.
    */
-  public void parse(BufferedReader bufferedReader, Properties properties, StringBuilder textBuffer)
-      throws Exception {
+  public void parse(BufferedReader bufferedReader, ContentParserOptions options,
+      MutableGenericContext context, StringBuilder textBuffer) throws Exception {
 
-    long maxChars = getMaximumBufferSize() / 2;
+    long maxChars = options.getMaximumBufferSize() / 2;
     ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {

@@ -9,8 +9,7 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for content of
- * the open-document chart format (content with the mimetypes
- * "application/vnd.oasis.opendocument.chart").
+ * the open-document chart format.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,6 +23,12 @@ public class ContentParserOdc extends AbstractContentParserOpenDoc {
   /** The default extension. */
   public static final String KEY_EXTENSION = "odc";
 
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE_TEMPLATE = "application/vnd.oasis.opendocument.chart-template";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION_TEMPLATE = "otc";
+
   /**
    * The constructor.
    */
@@ -35,10 +40,26 @@ public class ContentParserOdc extends AbstractContentParserOpenDoc {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { KEY_EXTENSION_TEMPLATE, KEY_MIMETYPE_TEMPLATE };
   }
 
 }

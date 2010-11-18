@@ -5,10 +5,8 @@ package net.sf.mmm.content.parser.impl.poi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Properties;
-
 import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.util.context.api.GenericContext;
 
 import org.junit.Test;
 
@@ -22,14 +20,14 @@ public class ContentParserXlsTest extends AbstractContentParserPoiTest {
 
   public void checkParser(ContentParser parser, long filesize) throws Exception {
 
-    Properties properties = parse(parser, "test.xls", filesize);
-    String title = properties.getProperty(ContentParser.PROPERTY_KEY_TITLE);
+    GenericContext properties = parse(parser, "test.xls", filesize);
+    String title = properties.getVariable(ContentParser.VARIABLE_NAME_TITLE, String.class);
     assertEquals("Title of Spreadsheet", title);
-    String author = properties.getProperty(ContentParser.PROPERTY_KEY_AUTHOR);
+    String author = properties.getVariable(ContentParser.VARIABLE_NAME_CREATOR, String.class);
     assertEquals("J\u00F6rg Hohwiller", author);
-    String keywords = properties.getProperty(ContentParser.PROPERTY_KEY_KEYWORDS);
+    String keywords = properties.getVariable(ContentParser.VARIABLE_NAME_KEYWORDS, String.class);
     assertEquals("some keywords", keywords);
-    String text = properties.getProperty(ContentParser.PROPERTY_KEY_TEXT);
+    String text = properties.getVariable(ContentParser.VARIABLE_NAME_TEXT, String.class);
     // System.out.println(text);
 
     // Header and Footer Infos are NOT extracted...

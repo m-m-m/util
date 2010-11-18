@@ -31,19 +31,19 @@ public class ContentParserTextMarkupAware extends AbstractContentParserTextMarku
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeysPrimary() {
+  public String[] getAlternativeKeyArray() {
 
-    return new String[] { "txt", "text/plain" };
+    return new String[] { "asc" };
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String[] getRegistryKeysSecondary() {
+  public String[] getSecondaryKeyArray() {
 
-    return new String[] { "jinc", "asp", "java", "cpp", "c", "h", "c++", "js", "css", "asc", "apt",
-        "csv", "sql", "bat", "sh", "net", "pl", "py" };
+    return new String[] { "jinc", "asp", "java", "cpp", "c", "h", "c++", "js", "css", "apt", "csv",
+        "sql", "bat", "sh", "net", "pl", "py" };
   }
 
 }

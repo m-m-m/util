@@ -9,8 +9,7 @@ import javax.inject.Singleton;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for content of
- * the open-document image format (content with the mimetypes
- * "application/vnd.oasis.opendocument.image").
+ * the open-document image format.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -24,6 +23,12 @@ public class ContentParserOdi extends AbstractContentParserOpenDoc {
   /** The default extension. */
   public static final String KEY_EXTENSION = "odi";
 
+  /** The mimetype. */
+  public static final String KEY_MIMETYPE_TEMPLATE = "application/vnd.oasis.opendocument.image-template";
+
+  /** The default extension. */
+  public static final String KEY_EXTENSION_TEMPLATE = "oti";
+
   /**
    * The constructor.
    */
@@ -35,10 +40,26 @@ public class ContentParserOdi extends AbstractContentParserOpenDoc {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getAlternativeKeyArray() {
+
+    return new String[] { KEY_EXTENSION_TEMPLATE, KEY_MIMETYPE_TEMPLATE };
   }
 
 }

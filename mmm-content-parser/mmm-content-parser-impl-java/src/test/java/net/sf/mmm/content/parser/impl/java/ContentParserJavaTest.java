@@ -8,14 +8,12 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Properties;
 
 import junit.framework.TestCase;
+import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.util.context.api.GenericContext;
 
 import org.junit.Test;
-
-import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.content.parser.impl.java.ContentParserJava;
 
 /**
  * This is the {@link TestCase} for {@link ContentParserJava}.
@@ -26,14 +24,14 @@ import net.sf.mmm.content.parser.impl.java.ContentParserJava;
 @SuppressWarnings("all")
 public class ContentParserJavaTest {
 
-  private Properties parse(ContentParser parser, String basePath, Class clazz) throws Exception {
+  private GenericContext parse(ContentParser parser, String basePath, Class clazz) throws Exception {
 
     String classPath = clazz.getName().replace('.', '/');
     File sourceFile = new File(basePath + "/" + classPath + ".java");
     InputStream inputStream = new FileInputStream(sourceFile);
     try {
-      Properties metadata = parser.parse(inputStream, sourceFile.length());
-      assertEquals(clazz.getName(), metadata.getProperty(ContentParser.PROPERTY_KEY_TITLE));
+      GenericContext metadata = parser.parse(inputStream, sourceFile.length());
+      assertEquals(clazz.getName(), metadata.getVariable(ContentParser.VARIABLE_NAME_TITLE));
       return metadata;
     } finally {
       inputStream.close();
@@ -45,11 +43,11 @@ public class ContentParserJavaTest {
 
     ContentParserJava parser = new ContentParserJava();
     parser.initialize();
-    Properties metadata = parse(parser, "src/test/java/", ContentParserJavaTest.class);
-    assertEquals("Jörg Hohwiller, Nobody Else", metadata
-        .getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
+    GenericContext metadata = parse(parser, "src/test/java/", ContentParserJavaTest.class);
+    assertEquals("Jörg Hohwiller, Nobody Else",
+        metadata.getVariable(ContentParser.VARIABLE_NAME_CREATOR));
     metadata = parse(parser, "src/main/java/", ContentParserJava.class);
-    assertEquals("Joerg Hohwiller", metadata.getProperty(ContentParser.PROPERTY_KEY_AUTHOR));
+    assertEquals("Joerg Hohwiller", metadata.getVariable(ContentParser.VARIABLE_NAME_CREATOR));
   }
 
 }

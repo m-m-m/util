@@ -18,27 +18,12 @@ import javax.inject.Singleton;
 // @Named
 public class ContentParserText extends AbstractContentParserText {
 
-  /** The mimetype. */
-  public static final String KEY_MIMETYPE = "text/plain";
-
-  /** The default extension. */
-  public static final String KEY_EXTENSION = "txt";
-
   /**
    * The constructor.
    */
   public ContentParserText() {
 
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String[] getRegistryKeysPrimary() {
-
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
   }
 
 }

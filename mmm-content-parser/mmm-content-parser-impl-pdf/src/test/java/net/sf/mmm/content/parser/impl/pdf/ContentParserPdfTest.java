@@ -4,9 +4,9 @@
 package net.sf.mmm.content.parser.impl.pdf;
 
 import java.io.InputStream;
-import java.util.Properties;
 
 import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
@@ -21,7 +21,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ContentParserPdfTest {
 
-  protected Properties parse(ContentParser parser, String resourceName, long filesize)
+  protected GenericContext parse(ContentParser parser, String resourceName, long filesize)
       throws Exception {
 
     DataResource testResource = new ClasspathResource(ContentParserPdfTest.class, resourceName,
@@ -36,12 +36,12 @@ public class ContentParserPdfTest {
 
   public void checkParser(ContentParser parser, long filesize) throws Exception {
 
-    Properties properties = parse(parser, "test.pdf", filesize);
-    String title = properties.getProperty(ContentParser.PROPERTY_KEY_TITLE);
+    GenericContext properties = parse(parser, "test.pdf", filesize);
+    String title = properties.getVariable(ContentParser.VARIABLE_NAME_TITLE, String.class);
     Assert.assertEquals("test", title);
-    String author = properties.getProperty(ContentParser.PROPERTY_KEY_AUTHOR);
+    String author = properties.getVariable(ContentParser.VARIABLE_NAME_CREATOR, String.class);
     Assert.assertEquals("hohwille", author);
-    String text = properties.getProperty(ContentParser.PROPERTY_KEY_TEXT);
+    String text = properties.getVariable(ContentParser.VARIABLE_NAME_TEXT, String.class);
     Assert.assertTrue(text.contains("Title"));
     Assert.assertTrue(text.contains("Header"));
     Assert.assertTrue(text.contains("Footer"));

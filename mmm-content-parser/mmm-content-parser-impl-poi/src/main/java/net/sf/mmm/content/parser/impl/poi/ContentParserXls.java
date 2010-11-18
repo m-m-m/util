@@ -10,6 +10,8 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
+
 import org.apache.poi.hssf.eventusermodel.HSSFEventFactory;
 import org.apache.poi.hssf.eventusermodel.HSSFListener;
 import org.apache.poi.hssf.eventusermodel.HSSFRequest;
@@ -25,8 +27,8 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.content.parser.api.ContentParser} interface for MS-Excel
- * documents (content with the mimetype "application/vnd.ms-excel").
+ * {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary
+ * MS-Excel documents.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -51,19 +53,36 @@ public class ContentParserXls extends AbstractContentParserPoi {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs, long filesize) throws Exception {
+  public String[] getAlternativeKeyArray() {
 
-    int maxBufferSize = getMaximumBufferSize();
+    return new String[] { "xlt", "application/excel", "application/msexcel" };
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String extractText(POIFSFileSystem poiFs, long filesize, ContentParserOptions options)
+      throws Exception {
+
+    int maxBufferSize = options.getMaximumBufferSize();
     int maxCharSize = maxBufferSize / 2;
     InputStream documentInputStream = poiFs.createDocumentInputStream(POIFS_EXCEL_DOC);
     // actually there seems no smart guess for the initial capacity of

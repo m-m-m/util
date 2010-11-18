@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.parser.impl.java;
 
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +10,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.content.parser.impl.text.AbstractContentParserTextMarkupAware;
+import net.sf.mmm.util.context.api.MutableGenericContext;
 
 /**
  * This is the implementation of the
@@ -54,43 +54,50 @@ public class ContentParserJava extends AbstractContentParserTextMarkupAware {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String[] getRegistryKeysPrimary() {
+  public String getExtension() {
 
-    return new String[] { KEY_EXTENSION, KEY_MIMETYPE };
+    return KEY_EXTENSION;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getMimetype() {
+
+    return KEY_MIMETYPE;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void parseLine(Properties properties, String line) {
+  protected void parseLine(MutableGenericContext context, String line) {
 
-    String title = properties.getProperty(PROPERTY_KEY_TITLE);
+    String title = context.getVariable(VARIABLE_NAME_TITLE, String.class);
     if (title == null) {
       Matcher m = PACKAGE_PATTERN.matcher(line);
       if (m.matches()) {
         title = m.group(1) + PACKAGE_SEPARATOR;
-        properties.setProperty(PROPERTY_KEY_TITLE, title);
+        context.setVariable(VARIABLE_NAME_TITLE, title);
       }
     }
     if ((title != null) && (title.endsWith(PACKAGE_SEPARATOR))) {
       Matcher m = CLASS_PATTERN.matcher(line);
       if (m.matches()) {
         title = title + m.group(2);
-        properties.setProperty(PROPERTY_KEY_TITLE, title);
+        context.setVariable(VARIABLE_NAME_TITLE, title);
       }
       // author tag can only appear before class name was detected...
 
       String author = parseProperty(line, AUTHOR_PATTERN, 2);
       if (author != null) {
-        String authorProperty = properties.getProperty(PROPERTY_KEY_AUTHOR);
+        String authorProperty = context.getVariable(VARIABLE_NAME_CREATOR, String.class);
         if (authorProperty == null) {
           authorProperty = author;
         } else {
           authorProperty = authorProperty + ", " + author;
         }
-        properties.setProperty(PROPERTY_KEY_AUTHOR, authorProperty);
+        context.setVariable(VARIABLE_NAME_CREATOR, authorProperty);
       }
     }
   }
