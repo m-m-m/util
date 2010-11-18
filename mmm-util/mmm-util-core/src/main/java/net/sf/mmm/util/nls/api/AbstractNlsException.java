@@ -41,13 +41,13 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is the internationalized message describing
-   *        the problem briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
    */
-  public AbstractNlsException(NlsMessage internationalizedMessage) {
+  public AbstractNlsException(NlsMessage message) {
 
     super();
-    this.nlsMessage = internationalizedMessage;
+    this.nlsMessage = message;
     this.uuid = createUuid();
   }
 
@@ -55,13 +55,13 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is the internationalized message describing
-   *        the problem briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
    */
-  public AbstractNlsException(Throwable nested, NlsMessage internationalizedMessage) {
+  public AbstractNlsException(Throwable nested, NlsMessage message) {
 
     super(nested);
-    this.nlsMessage = internationalizedMessage;
+    this.nlsMessage = message;
     if ((nested != null) && (nested instanceof NlsThrowable)) {
       this.uuid = ((NlsThrowable) nested).getUuid();
     } else {

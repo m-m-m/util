@@ -39,27 +39,27 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage the internationalized message describing
-   *        the problem briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
    */
-  public AbstractNlsRuntimeException(NlsMessage internationalizedMessage) {
+  public AbstractNlsRuntimeException(NlsMessage message) {
 
     super();
-    this.nlsMessage = internationalizedMessage;
+    this.nlsMessage = message;
     this.uuid = createUuid();
   }
 
   /**
    * The constructor.
    * 
-   * @param nested is the throwable that caused this exception.
-   * @param internationalizedMessage the internationalized message describing
-   *        the problem briefly.
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
    */
-  public AbstractNlsRuntimeException(Throwable nested, NlsMessage internationalizedMessage) {
+  public AbstractNlsRuntimeException(Throwable nested, NlsMessage message) {
 
     super(nested);
-    this.nlsMessage = internationalizedMessage;
+    this.nlsMessage = message;
     if ((nested != null) && (nested instanceof NlsThrowable)) {
       this.uuid = ((NlsThrowable) nested).getUuid();
     } else {

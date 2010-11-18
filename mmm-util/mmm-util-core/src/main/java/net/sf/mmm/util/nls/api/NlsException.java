@@ -95,6 +95,29 @@ public abstract class NlsException extends AbstractNlsException {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
+   */
+  public NlsException(NlsMessage message) {
+
+    super(message);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
+   */
+  public NlsException(Throwable nested, NlsMessage message) {
+
+    super(nested, message);
+  }
+
+  /**
    * This method adds the given arguments to the given {@link Map}.
    * 
    * @param map is the {@link Map} to use or <code>null</code> to create a new
