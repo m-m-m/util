@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.api.config;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 
@@ -21,7 +21,7 @@ public interface SearchIndexerConfiguration extends SearchConfiguration {
   /**
    * {@inheritDoc}
    */
-  List<? extends SearchIndexerSource> getSources();
+  Collection<? extends SearchIndexerSource> getSources();
 
   /**
    * {@inheritDoc}

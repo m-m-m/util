@@ -5,5 +5,5 @@
  --%>
 <a name="top"></a>
 <div id="logo">
-  <img src="images/logo.png" alt="Logo"/>
+  <a href="http://m-m-m.sourceforge.net"><img src="images/logo.png" alt="Logo"/></a>
 </div>

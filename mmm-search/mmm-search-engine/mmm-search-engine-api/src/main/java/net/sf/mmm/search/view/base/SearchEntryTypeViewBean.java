@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * This is the implementation of the {@link SearchEntryTypeView} interface as
  * java bean.
  * 
- * @see #combine(SearchEntryType)
+ * @see #combine(SearchEntryType, int)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -32,6 +32,12 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
 
   /** @see #getCombinedIds() */
   private final Set<String> combinedIds;
+
+  /** The original {@link #getTitle() title} from {@link SearchEntryType}. */
+  private String originalTitle;
+
+  /** The number of occurrences in search-index. */
+  private int count;
 
   /**
    * The constructor.
@@ -45,41 +51,46 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   /**
    * This method combines the given <code>type</code> with this object.
    * Therefore the {@link SearchEntryType#getTitle() title} of all
-   * {@link #combine(SearchEntryType) combined} types has to be equal.
+   * {@link #combine(SearchEntryType, int) combined} types has to be equal.
    * 
    * @param type is the {@link SearchEntryType} to combine.
+   * @param typeCount is the
+   *        {@link net.sf.mmm.search.engine.api.SearchEngine#count(String, String)
+   *        count} for the given <code>type</code>.
    */
-  public void combine(SearchEntryType type) {
+  public void combine(SearchEntryType type, int typeCount) {
 
     NlsNullPointerException.checkNotNull(SearchEntryType.class, type);
     if (type instanceof SearchEntryTypeView) {
       // internal error in code
       throw new NlsIllegalStateException();
     }
-    String title = getTitle();
     String typeTitle = type.getTitle();
-    if (title == null) {
-      setTitle(typeTitle);
-    } else if (!title.equals(typeTitle)) {
+    if (this.originalTitle == null) {
+      this.originalTitle = typeTitle;
+    } else if (!this.originalTitle.equals(typeTitle)) {
       throw new NlsIllegalStateException();
     }
     String typeIcon = type.getIcon();
     String id = getId();
+    String typeId = type.getId();
     if (typeIcon != null) {
       if (id == null) {
-        setId(type.getId());
+        setId(typeId);
         setIcon(typeIcon);
       } else {
         if (!typeIcon.equals(getIcon())) {
           // throw new NlsIllegalStateException();
           LOGGER.warn("Mismatching icons for " + SearchEntryType.class.getSimpleName()
-              + " with title '" + title + "' (" + typeIcon + " != " + getIcon() + ")");
+              + " with title '" + this.originalTitle + "' (" + typeIcon + " != " + getIcon() + ")");
         }
       }
     }
-    if (!ID_ANY.equals(id)) {
-      this.combinedIds.add(id);
+    this.count = this.count + typeCount;
+    if (!ID_ANY.equals(typeId)) {
+      this.combinedIds.add(typeId);
     }
+    setTitle(this.originalTitle + " (" + this.count + ")");
   }
 
   /**

@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.search.base.config.AbstractSearchConfigurationBean;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
+import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
 
@@ -68,7 +69,7 @@ public class SearchIndexerConfigurationBean extends AbstractSearchConfigurationB
   /**
    * @return the sources
    */
-  public List<SearchIndexerSourceBean> getSources() {
+  public Collection<? extends SearchIndexerSource> getSources() {
 
     return this.sources;
   }

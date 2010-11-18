@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.api.config;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * This is the interface for the configuration of the entire search (e.g. for
@@ -28,11 +28,11 @@ public abstract interface SearchConfiguration {
   SearchIndexConfiguration getSearchIndex();
 
   /**
-   * This method gets the {@link List} of {@link SearchSource sources}.
+   * This method gets the {@link Collection} of {@link SearchSource sources}.
    * 
    * @return the {@link SearchSource}s.
    */
-  List<? extends SearchSource> getSources();
+  Collection<? extends SearchSource> getSources();
 
   /**
    * This method gets the {@link SearchSource} with the given

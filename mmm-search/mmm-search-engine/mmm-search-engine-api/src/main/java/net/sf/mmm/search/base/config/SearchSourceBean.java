@@ -42,6 +42,19 @@ public class SearchSourceBean extends AbstractAttributeReadId<String> implements
   }
 
   /**
+   * The copy constructor.
+   * 
+   * @param template is the {@link SearchSource} to copy.
+   */
+  public SearchSourceBean(SearchSource template) {
+
+    super();
+    this.id = template.getId();
+    this.title = template.getTitle();
+    this.urlPrefix = template.getUrlPrefix();
+  }
+
+  /**
    * {@inheritDoc}
    */
   public String getId() {

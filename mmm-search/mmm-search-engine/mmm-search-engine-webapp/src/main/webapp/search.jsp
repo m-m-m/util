@@ -89,7 +89,7 @@ function showPage(pageNum) {
     <div id="searchadvanced">
       Source: 
       <select name="<%= SearchViewRequestParameters.PARAMETER_SOURCE %>" size="1"><%
-  for (SearchSource source: configuration.getSources()) {
+  for (SearchSource source: logic.getSourceViews()) {
     String sourceKey = source.getId();
     String sourceSelected = "";
     if (sourceKey.equals(parameters.getSource())) {
@@ -114,6 +114,7 @@ function showPage(pageNum) {
 %>
       </select>
       Creator: <input type="text" maxlength="512" name="<%= SearchViewRequestParameters.PARAMETER_CREATOR %>" value="<%= xmlUtil.escapeXml(parameters.getCreator(), true) %>"/><br/>
+      Latest Refresh: <%= logic.getLastRefreshDate() %>
     </div>
   </form>
 </div>

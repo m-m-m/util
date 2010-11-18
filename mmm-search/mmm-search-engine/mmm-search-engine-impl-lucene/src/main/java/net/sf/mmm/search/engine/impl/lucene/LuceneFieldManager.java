@@ -117,6 +117,6 @@ public interface LuceneFieldManager extends Refreshable {
    * 
    * {@inheritDoc}
    */
-  void refresh();
+  boolean refresh();
 
 }

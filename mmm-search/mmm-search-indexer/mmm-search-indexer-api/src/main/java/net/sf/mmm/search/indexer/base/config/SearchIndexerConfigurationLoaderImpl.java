@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base.config;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Named;
@@ -67,7 +68,7 @@ public class SearchIndexerConfigurationLoaderImpl extends
       throws SearchException {
 
     NlsNullPointerException.checkNotNull(SearchIndexerConfiguration.class, configuration);
-    List<? extends SearchIndexerSource> sourceList = configuration.getSources();
+    Collection<? extends SearchIndexerSource> sourceList = configuration.getSources();
     if (sourceList == null) {
       throw new NlsNullPointerException("sources");
     }

@@ -5,11 +5,15 @@ package net.sf.mmm.search.view.base;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -19,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchConfiguration;
+import net.sf.mmm.search.api.config.SearchSource;
+import net.sf.mmm.search.base.config.SearchSourceBean;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngineBuilder;
@@ -36,6 +42,9 @@ import net.sf.mmm.search.view.api.SearchViewConfiguration;
 import net.sf.mmm.search.view.api.SearchViewLogic;
 import net.sf.mmm.search.view.api.SearchViewRequestParameters;
 import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.component.api.PeriodicRefresher;
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
 import org.slf4j.Logger;
@@ -87,11 +96,20 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /** @see #getXmlUtil() */
   private XmlUtil xmlUtil;
 
+  /** @see #getIso8601Util() */
+  private Iso8601Util iso8601Util;
+
   /** @see #getEntryTypeViews() */
-  private List<? extends SearchEntryTypeView> entryTypeViews;
+  private Collection<? extends SearchEntryTypeView> entryTypeViews;
 
   /** @see #updateEntryTypeViews() */
   private Map<String, SearchEntryTypeViewBean> id2viewMap;
+
+  /** @see #getSourceViews() */
+  private Collection<SearchSource> sourceViews;
+
+  /** @see #getLastRefreshDate() */
+  private String lastRefreshDate;
 
   /**
    * The constructor.
@@ -139,6 +157,22 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  public Iso8601Util getIso8601Util() {
+
+    return this.iso8601Util;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getLastRefreshDate() {
+
+    return this.lastRefreshDate;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public String getSearchPath() {
 
     return this.searchPath;
@@ -163,9 +197,17 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
-  public List<? extends SearchEntryTypeView> getEntryTypeViews() {
+  public Collection<? extends SearchEntryTypeView> getEntryTypeViews() {
 
     return this.entryTypeViews;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Collection<SearchSource> getSourceViews() {
+
+    return this.sourceViews;
   }
 
   /**
@@ -231,14 +273,28 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
           SearchConfiguration.DEFAULT_CONFIGURATION_URL);
       IocContainer container = getIocContainer();
       this.xmlUtil = container.getComponent(XmlUtil.class);
+      this.iso8601Util = container.getComponent(Iso8601Util.class);
       this.configurationReader = container.getComponent(SearchEngineConfigurationLoader.class);
       this.configurationHolder = this.configurationReader.loadConfiguration(this.configurationUri);
       this.searchEngine = container.getComponent(SearchEngineBuilder.class).createSearchEngine(
           this.configurationHolder);
       updateEntryTypeViews();
+      updateSourceViews();
+      update();
+      container.getComponent(PeriodicRefresher.class).addRefreshable(this);
     } catch (Exception e) {
-      throw new ServletException("Initialization failed!", e);
+      throw new NlsIllegalStateException(e);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void destroy() {
+
+    super.destroy();
+    getIocContainer().dispose();
   }
 
   /**
@@ -329,7 +385,14 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
             Collection<String> combinedIds = typeView.getCombinedIds();
             if ((combinedIds != null) && (combinedIds.size() > 0)) {
               if (combinedIds.size() == 1) {
-                appendFieldQuery(mainQuery, SearchEntry.FIELD_TYPE, combinedIds.iterator().next());
+                String id = "";
+                Iterator<String> iterator = combinedIds.iterator();
+                if (iterator.hasNext()) {
+                  id = iterator.next();
+                } else {
+                  getLogger().debug("combineIds iterator is broken!");
+                }
+                appendFieldQuery(mainQuery, SearchEntry.FIELD_TYPE, id);
               } else {
                 ComplexSearchQuery typesQuery = queryBuilder.createComplexQuery();
                 for (String typeId : combinedIds) {
@@ -342,7 +405,6 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
             }
           }
         }
-        appendFieldQuery(mainQuery, SearchEntry.FIELD_SOURCE, type);
         int querySize = mainQuery.getSubQueryCount();
         if (querySize > 0) {
           if ((query == null) || (querySize > 1)) {
@@ -370,7 +432,9 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
     doDispatch(request, response, exception);
     if (this.logger.isDebugEnabled()) {
       long delay = System.currentTimeMillis() - time;
-      this.logger.debug("Request for '" + servletPath + "' took " + delay + " ms.");
+      if (delay > 10) {
+        this.logger.debug("Request for '" + servletPath + "' took " + delay + " ms.");
+      }
     }
   }
 
@@ -379,7 +443,51 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
    * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s.
    * For this view these {@link SearchEntryType}s are reduced to those types
    * that actually exist in the search-index. Then they are
-   * {@link SearchEntryTypeViewBean#combine(SearchEntryType) combined} and
+   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, int) combined} and
+   * finally sorted according to the {@link SearchEntryType#getTitle() title}.<br/>
+   * This way the view can present the proper titles of the types and the search
+   * can filter even on combined types.
+   */
+  private void updateSourceViews() {
+
+    NavigableMap<String, SearchSource> sourceViewMap = new TreeMap<String, SearchSource>();
+    for (SearchSource source : this.configurationHolder.getBean().getSources()) {
+      SearchSourceBean view = new SearchSourceBean(source);
+      String sourceId = view.getId();
+      boolean add;
+      int count;
+      if (SearchSource.ID_ANY.equals(sourceId)) {
+        count = this.searchEngine.getTotalEntryCount();
+        add = true;
+      } else {
+        count = this.searchEngine.count(SearchEntry.FIELD_SOURCE, sourceId);
+        add = (count > 0);
+      }
+      if (add) {
+        view.setTitle(view.getTitle() + " (" + count + ")");
+        sourceViewMap.put(sourceId, view);
+      }
+    }
+    this.sourceViews = sourceViewMap.values();
+  }
+
+  /**
+   * This method updates the internal state and views.
+   */
+  private void update() {
+
+    updateEntryTypeViews();
+    updateSourceViews();
+    this.lastRefreshDate = this.iso8601Util.formatDateTime(Calendar.getInstance(), true, true,
+        false);
+  }
+
+  /**
+   * This method updates the {@link #getEntryTypeViews() entry type views}.<br/>
+   * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s.
+   * For this view these {@link SearchEntryType}s are reduced to those types
+   * that actually exist in the search-index. Then they are
+   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, int) combined} and
    * finally sorted according to the {@link SearchEntryType#getTitle() title}.<br/>
    * This way the view can present the proper titles of the types and the search
    * can filter even on combined types.
@@ -403,7 +511,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
             view = new SearchEntryTypeViewBean();
             title2viewMap.put(title, view);
           }
-          view.combine(type);
+          view.combine(type, count);
         }
       }
     }
@@ -414,7 +522,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
     if (anyType == null) {
       anyType = SearchEntryTypeDefaults.getEntryTypeAny();
     }
-    anyView.combine(anyType);
+    anyView.combine(anyType, this.searchEngine.getTotalEntryCount());
     List<SearchEntryTypeViewBean> viewList = new ArrayList<SearchEntryTypeViewBean>();
     viewList.add(anyView);
     for (String title : titles) {
@@ -430,10 +538,13 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
-  public synchronized void refresh() {
+  public synchronized boolean refresh() {
 
-    this.searchEngine.refresh();
-    updateEntryTypeViews();
+    boolean updated = this.searchEngine.refresh();
+    if (updated) {
+      update();
+    }
+    return updated;
   }
 
   /**

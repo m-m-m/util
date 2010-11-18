@@ -292,7 +292,9 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
         if (location.getFilter().accept(childUri)) {
           indexRecursive(arguments, location, child, visitedResources, entryUpdateVisitor);
         } else {
-          getLogger().debug("Filtered " + childUri);
+          if (getLogger().isTraceEnabled()) {
+            getLogger().trace("Filtered " + childUri);
+          }
         }
       }
     }

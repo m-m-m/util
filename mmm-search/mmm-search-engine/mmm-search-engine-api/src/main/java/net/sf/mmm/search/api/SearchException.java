@@ -5,6 +5,7 @@ package net.sf.mmm.search.api;
 
 import java.util.Map;
 
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -83,6 +84,29 @@ public class SearchException extends NlsRuntimeException {
       Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
+   */
+  public SearchException(NlsMessage message) {
+
+    super(message);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
+   */
+  public SearchException(Throwable nested, NlsMessage message) {
+
+    super(nested, message);
   }
 
 }

@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.search.indexer.api.config;
+package net.sf.mmm.search.indexer.api;
 
 /**
  * This is the interface for the additional options for the
@@ -9,7 +9,7 @@ package net.sf.mmm.search.indexer.api.config;
  * 
  * @see net.sf.mmm.search.indexer.api.SearchIndexerBuilder#createIndexer(String,
  *      SearchIndexerOptions)
- * @see net.sf.mmm.search.indexer.base.config.SearchIndexerOptionsBean
+ * @see net.sf.mmm.search.indexer.base.SearchIndexerOptionsBean
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

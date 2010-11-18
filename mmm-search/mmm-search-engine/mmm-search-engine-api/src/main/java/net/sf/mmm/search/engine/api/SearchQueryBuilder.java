@@ -9,7 +9,7 @@ import net.sf.mmm.util.component.api.Refreshable;
 /**
  * This is the interface used to build {@link SearchQuery search-queries}.<br>
  * You can either specify the query as string and
- * {@link #parseStandardQuery(String, boolean) parse} it or
+ * {@link #parseStandardQuery(String, SearchQueryBuilderOptions) parse} it or
  * {@link #createComplexQuery() create} your query constructively.<br>
  * Here is an example:<br>
  * 
@@ -40,26 +40,27 @@ import net.sf.mmm.util.component.api.Refreshable;
  */
 public interface SearchQueryBuilder extends Refreshable {
 
-  /**
-   * This method parses the given <code>query</code> string in the native query
-   * language of the underlying implementation. This allows to use
-   * power-features that are not available otherwise via this API. For an
-   * implementation independent query language use
-   * {@link #parseStandardQuery(String, boolean)} instead.
-   * 
-   * @param query is the query to parse as string.
-   * @return the parsed query.
-   * @throws SearchException if the given <code>query</code> string is illegal
-   *         and can NOT be parsed. Implementations should be tolerant and try
-   *         to avoid this situation.
-   */
-  SearchQuery parseNativeQuery(String query) throws SearchException;
+  // /**
+  // * This method parses the given <code>query</code> string in the native
+  // query
+  // * language of the underlying implementation. This allows to use
+  // * power-features that are not available otherwise via this API. For an
+  // * implementation independent query language use
+  // * {@link #parseStandardQuery(String, boolean)} instead.
+  // *
+  // * @param query is the query to parse as string.
+  // * @return the parsed query.
+  // * @throws SearchException if the given <code>query</code> string is illegal
+  // * and can NOT be parsed. Implementations should be tolerant and try
+  // * to avoid this situation.
+  // */
+  // SearchQuery parseNativeQuery(String query) throws SearchException;
 
   /**
    * This method parses the given <code>query</code> string in the standard
    * query language of this specification.<br>
    * 
-   * @see #parseStandardQuery(String, boolean)
+   * @see #parseStandardQuery(String, SearchQueryBuilderOptions)
    * 
    * @param query is the query to parse as string.
    * @return the parsed query.
@@ -79,28 +80,27 @@ public interface SearchQueryBuilder extends Refreshable {
    * &lt;WHITESPACES> = (&lt;WHITESPACE>)+
    * &lt;START_CHAR> = ^(&lt;WHITESPACE>|'+'|'-'|'('|')'|'"'|'\'')
    * &lt;CHAR> = (&lt;START_CHAR>|'+'|'-')
-   * &lt;WORD> = &lt;START_CHAR> (&lt;CHAR>)*
-   * &lt;PHRASE> = '"' (^('"'))* '"'
-   * &lt;MATCH> = (&lt;PHRASE> | &lt;WORD>)
+   * &lt;{@link #createWordQuery(String, String) WORD}> = &lt;START_CHAR> (&lt;CHAR>)*
+   * &lt;{@link #createPhraseQuery(String, String) PHRASE}> = '"' (^('"'))* '"'
+   * &lt;TO> = ("TO" | "to" | "-")
+   * &lt;MIN> = &lt;WORD>
+   * &lt;MAX> = &lt;WORD>
+   * &lt;{@link #createRangeQuery(String, String, String, boolean, boolean) RANGE}> = ('{' | '[') &lt;MIN> ' ' &lt;TO> ' ' &lt;MAX> (']' | '}')
+   * &lt;MATCH> = (&lt;PHRASE> | &lt;WORD> | &lt;RANGE>)
    * &lt;FIELD> = ('a'-'z'|'A'-'Z')+
    * &lt;CLAUSE> = ['+'|'-'] [&lt;FIELD> ':'] ( &lt;MATCH> | '(' &lt;QUERY> ')' )
-   * &lt;QUERY> = &lt;CLAUSE> | &lt;CLAUSE> (&lt;WHITESPACES> &lt;QUERY>)* ) 
+   * &lt;{@link #createComplexQuery() QUERY}> = &lt;CLAUSE> | &lt;CLAUSE> (&lt;WHITESPACES> &lt;QUERY>)* ) 
    * </pre>
    * 
-   * @see #parseNativeQuery(String)
-   * 
    * @param query is the query to parse as string.
-   * @param requireTerms - if <code>true</code> regular terms of the query are
-   *        required ("foo bar" -> "+foo +bar"), <code>false</code> otherwise
-   *        ("foo bar" -> "foo OR bar"). In other words the call with
-   *        <code>query</code> and <code>true</code> is the same as the call
-   *        with <code>"+(" + query + ")"</code> and <code>false</code>.
+   * @param options are the {@link SearchQueryBuilderOptions}.
    * @return the parsed query.
    * @throws SearchException if the given <code>query</code> string is illegal
    *         and can NOT be parsed. Implementations should be tolerant and try
    *         to avoid this situation.
    */
-  SearchQuery parseStandardQuery(String query, boolean requireTerms) throws SearchException;
+  SearchQuery parseStandardQuery(String query, SearchQueryBuilderOptions options)
+      throws SearchException;
 
   /**
    * This method creates a new {@link SearchQuery query} for the given
@@ -158,6 +158,6 @@ public interface SearchQueryBuilder extends Refreshable {
   /**
    * {@inheritDoc}
    */
-  void refresh();
+  boolean refresh();
 
 }

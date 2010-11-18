@@ -15,8 +15,7 @@ public interface SearchQuery {
    * 
    * This method gets a string representation of this query.
    * 
-   * @see SearchQueryBuilder#parseNativeQuery(String)
-   * @see SearchQueryBuilder#parseStandardQuery(String, boolean)
+   * @see SearchQueryBuilder#parseStandardQuery(String, SearchQueryBuilderOptions)
    */
   String toString();
 

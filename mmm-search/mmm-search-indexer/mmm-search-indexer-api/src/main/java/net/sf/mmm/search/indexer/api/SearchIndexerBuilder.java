@@ -5,7 +5,6 @@ package net.sf.mmm.search.indexer.api;
 
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
-import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
@@ -31,7 +30,7 @@ public interface SearchIndexerBuilder {
    *        is persisted. This is typically the absolute path to the index in
    *        the local filesystem.
    * @param options are the
-   *        {@link net.sf.mmm.search.indexer.api.config.SearchIndexerOptions}.
+   *        {@link net.sf.mmm.search.indexer.api.SearchIndexerOptions}.
    * @return the create indexer.
    * @throws SearchException if the operation failed.
    */
@@ -69,7 +68,7 @@ public interface SearchIndexerBuilder {
    * 
    * @param configurationHolder is the {@link SearchIndexerConfigurationHolder}.
    * @param options are the
-   *        {@link net.sf.mmm.search.indexer.api.config.SearchIndexerOptions}.
+   *        {@link net.sf.mmm.search.indexer.api.SearchIndexerOptions}.
    * @return the create indexer.
    * @throws SearchException if the operation failed.
    */

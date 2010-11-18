@@ -9,7 +9,27 @@
   // get parameters as attributes (already prepared by the servlet)
   SearchViewContext searchContext = SearchViewContextAccess.getContext(request);
   SearchViewLogic logic = searchContext.getLogic();
-  logic.refresh();
-  // TODO: does not work
-  response.sendRedirect(((SearchViewConfiguration) logic).getSearchPath());
+  boolean refreshed = logic.refresh();
+%><html>
+<head>
+  <title>Search</title>
+  <meta name="description" content="Search result page"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="css/site.css" type="text/css"/>
+  </script>
+</head>
+<body>
+<%@include file="jinc/header.jinc" %>
+<div id="searchhead"><%
+  if (refreshed) {
 %>
+The search engine has been refreshed successfully.
+<%
+  } else {
+%>
+No changes since the last refresh.
+<%    
+  }
+%>
+</div>
+</body>  

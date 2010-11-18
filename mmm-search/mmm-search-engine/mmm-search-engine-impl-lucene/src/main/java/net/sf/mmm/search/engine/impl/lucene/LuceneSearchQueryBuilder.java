@@ -234,9 +234,10 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   /**
    * {@inheritDoc}
    */
-  public void refresh() {
+  public boolean refresh() {
 
     this.ignoreLeadingWildcard = null;
+    return true;
   }
 
 }

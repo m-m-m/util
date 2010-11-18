@@ -258,6 +258,18 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  public int getTotalEntryCount() {
+
+    try {
+      return this.searcher.maxDoc();
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public SearchEntry getEntry(String entryId) {
 
     try {
@@ -281,8 +293,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       if (doc == null) {
         throw new SearchEntryIdMissingException(Integer.toString(documentId));
       }
-      return new LuceneSearchEntry(doc, this.fieldManager.getConfigurationHolder()
-          .getBean().getFields(), this.searchDependencies);
+      return new LuceneSearchEntry(doc, this.fieldManager.getConfigurationHolder().getBean()
+          .getFields(), this.searchDependencies);
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
@@ -291,9 +303,10 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
-  public synchronized void refresh() {
+  public synchronized boolean refresh() {
 
     try {
+      boolean updated = this.fieldManager.refresh();
       IndexReader oldReader = this.indexReader;
       this.indexReader = this.indexReader.reopen();
       if (this.indexReader != oldReader) {
@@ -305,9 +318,10 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
         } finally {
           oldReader.close();
         }
+        updated = true;
       }
-      this.fieldManager.refresh();
       this.queryBuilder.refresh();
+      return updated;
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }

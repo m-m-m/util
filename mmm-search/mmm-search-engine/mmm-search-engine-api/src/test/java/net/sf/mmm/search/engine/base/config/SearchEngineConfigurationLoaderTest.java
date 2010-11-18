@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.base.config;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchFieldConfiguration;
@@ -60,6 +60,26 @@ public class SearchEngineConfigurationLoaderTest {
   }
 
   /**
+   * Checks the specified {@link SearchEntryType}.
+   * 
+   * @param configuration is the {@link SearchEngineConfiguration}.
+   * @param id - see {@link SearchSource#getId()}.
+   * @param title - see {@link SearchSource#getTitle()}.
+   * @param urlPrefix - see {@link SearchSource#getUrlPrefix()}.
+   * @return the {@link SearchSource}.
+   */
+  protected SearchSource checkSource(SearchEngineConfiguration configuration, String id,
+      String title, String urlPrefix) {
+
+    SearchSource source = configuration.getSource(id);
+    Assert.assertNotNull(source);
+    Assert.assertEquals(id, source.getId());
+    Assert.assertEquals(title, source.getTitle());
+    Assert.assertEquals(urlPrefix, source.getUrlPrefix());
+    return source;
+  }
+
+  /**
    * Test of {@link SearchEngineConfigurationLoader#loadConfiguration(String)}.
    */
   @Test
@@ -81,27 +101,11 @@ public class SearchEngineConfigurationLoaderTest {
     Assert.assertSame(anyType, types.getEntryType("UNDEFINED-TYPE"));
 
     // sources
-    List<? extends SearchSource> sources = configuration.getSources();
+    Collection<? extends SearchSource> sources = configuration.getSources();
     Assert.assertEquals(3, sources.size());
-    SearchSource source;
-
-    source = configuration.getSource(SearchSource.ID_ANY);
-    Assert.assertNotNull(source);
-    Assert.assertNull(source.getUrlPrefix());
-    Assert.assertEquals("All", source.getTitle());
-    Assert.assertEquals(source, sources.get(0));
-
-    source = configuration.getSource("twiki");
-    Assert.assertNotNull(source);
-    Assert.assertEquals("http://foo.bar/twiki/bin/view/", source.getUrlPrefix());
-    Assert.assertEquals("Wiki", source.getTitle());
-    Assert.assertEquals(source, sources.get(1));
-
-    source = configuration.getSource("svn");
-    Assert.assertNotNull(source);
-    Assert.assertEquals("http://foo.bar/svn/trunk/", source.getUrlPrefix());
-    Assert.assertEquals("Subversion", source.getTitle());
-    Assert.assertEquals(source, sources.get(2));
+    checkSource(configuration, SearchSource.ID_ANY, "All", null);
+    checkSource(configuration, "twiki", "Wiki", "http://foo.bar/twiki/bin/view/");
+    checkSource(configuration, "svn", "Subversion", "http://foo.bar/svn/trunk/");
 
     Assert.assertNull(configuration.getSource("UNDEFINED"));
 

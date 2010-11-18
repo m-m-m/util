@@ -102,6 +102,14 @@ public interface SearchEngine {
   int count(String field, String value);
 
   /**
+   * This method gets the total number of {@link SearchEntry}s in the
+   * search-index.
+   * 
+   * @return the total number of {@link SearchEntry}s.
+   */
+  int getTotalEntryCount();
+
+  /**
    * This method gets a {@link SearchEntry entry} by its technical
    * {@link SearchHit#getEntryId() entry-ID}. <br>
    * This method may be useful for getting details of a {@link SearchHit hit} in

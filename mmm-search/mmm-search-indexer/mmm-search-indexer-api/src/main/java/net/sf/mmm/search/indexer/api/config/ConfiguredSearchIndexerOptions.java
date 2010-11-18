@@ -5,6 +5,8 @@ package net.sf.mmm.search.indexer.api.config;
 
 import java.util.List;
 
+import net.sf.mmm.search.indexer.api.SearchIndexerOptions;
+
 /**
  * This is the interface for the additional options to use for the
  * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer}.

@@ -7,11 +7,10 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.config.SearchIndexConfigurationBean;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
+import net.sf.mmm.search.indexer.api.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
-import net.sf.mmm.search.indexer.api.config.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationBean;
 import net.sf.mmm.search.indexer.base.config.SearchIndexerConfigurationHolderImpl;
-import net.sf.mmm.search.indexer.base.config.SearchIndexerOptionsBean;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**

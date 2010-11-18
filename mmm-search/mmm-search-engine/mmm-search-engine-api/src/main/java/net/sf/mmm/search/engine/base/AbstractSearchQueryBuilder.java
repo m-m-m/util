@@ -11,6 +11,7 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
+import net.sf.mmm.search.engine.api.SearchQueryBuilderOptions;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
@@ -74,16 +75,14 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
    */
   public SearchQuery parseStandardQuery(String query) throws SearchException {
 
-    return parseStandardQuery(query, false);
+    return parseStandardQuery(query, new SearchQueryBuilderOptionsBean());
   }
 
   /**
-   * @see #parseStandardQuery(String, boolean)
+   * @see #parseStandardQuery(String, SearchQueryBuilderOptions)
    * 
    * @param parser is the scanner of the query-string.
-   * @param requireTerms is <code>true</code> if terms should be
-   *        {@link ComplexSearchQuery#addRequiredQuery(SearchQuery) required} by
-   *        default, or <code>false</code> for optional terms by default.
+   * @param options are the {@link SearchQueryBuilderOptions}.
    * @param defaultProperty is the property to use as default for unqualified
    *        search-terms.
    * @param depth is the depth of the query expression (number of open
@@ -91,8 +90,8 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
    * @return the parsed query or <code>null</code> if this a call with a depth
    *         greater than <code>0</code> and the parsed query segment was void.
    */
-  private SearchQuery parseStandardQuery(CharSequenceScanner parser, boolean requireTerms,
-      String defaultProperty, int depth) {
+  private SearchQuery parseStandardQuery(CharSequenceScanner parser,
+      SearchQueryBuilderOptions options, String defaultProperty, int depth) {
 
     ComplexSearchQuery complexQuery = createComplexQuery();
     SearchQuery subQuery = null;
@@ -110,18 +109,19 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
           break;
         }
       }
-      subQuery = parseStandardClause(parser, defaultProperty, depth);
+      subQuery = parseStandardClause(parser, defaultProperty, depth, options);
       if (subQuery != null) {
         if (conjunction == '+') {
           complexQuery.addRequiredQuery(subQuery);
         } else if (conjunction == '-') {
           complexQuery.addExcludingQuery(subQuery);
-        } else if (requireTerms && (depth == 0)) {
+        } else if (options.isRequireTerms() && (depth == 0)) {
           complexQuery.addRequiredQuery(subQuery);
         } else {
           complexQuery.addOptionalQuery(subQuery);
         }
       }
+      // TODO if no closing ) we should call errorHandler
       if (parser.hasNext()) {
         if (parser.peek() == ')') {
           if (depth > 0) {
@@ -154,10 +154,12 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
    *        search-terms.
    * @param depth is the depth of the query expression (number of open
    *        parenthesis).
+   * @param options are the {@link SearchQueryBuilderOptions}.
    * @return the parsed query or <code>null</code> if the parsed query segment
    *         was void.
    */
-  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultField, int depth) {
+  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultField,
+      int depth, SearchQueryBuilderOptions options) {
 
     char c;
     String fieldName = defaultField;
@@ -179,7 +181,12 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
         // phrase query
         parser.next();
         String phrase = parser.readUntil(c, true);
-        return createPhraseQuery(fieldName, phrase);
+        try {
+          return createPhraseQuery(fieldName, phrase);
+        } catch (RuntimeException e) {
+          options.getErrorHandler().handleException(parser.getOriginalString(), start,
+              parser.getCurrentIndex(), e);
+        }
       } else if ((c == '[') || (c == '{')) {
         parser.next();
         // range query
@@ -199,17 +206,21 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
               if (parser.hasNext()) {
                 c = parser.next();
                 boolean maximumInclusive = (c == ']');
-                return createRangeQuery(fieldName, minimum, maximum, minimumInclusive,
-                    maximumInclusive);
+                try {
+                  return createRangeQuery(fieldName, minimum, maximum, minimumInclusive,
+                      maximumInclusive);
+                } catch (RuntimeException e) {
+                  options.getErrorHandler().handleException(parser.getOriginalString(), start,
+                      parser.getCurrentIndex(), e);
+                }
               }
             }
           }
         }
-        // TODO: ErrorHandler
       } else if (c == '(') {
         // sub-query
         parser.next();
-        return parseStandardQuery(parser, false, fieldName, depth + 1);
+        return parseStandardQuery(parser, options, fieldName, depth + 1);
       }
     }
     while (parser.hasNext()) {
@@ -222,18 +233,22 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
     int end = parser.getCurrentIndex();
     if (end > start) {
       String term = parser.substring(start, end);
-      return createWordQuery(fieldName, term);
-    } else {
-      return null;
+      try {
+        return createWordQuery(fieldName, term);
+      } catch (RuntimeException e) {
+        options.getErrorHandler().handleException(parser.getOriginalString(), start,
+            parser.getCurrentIndex(), e);
+      }
     }
+    return null;
   }
 
   /**
    * {@inheritDoc}
    */
-  public SearchQuery parseStandardQuery(String query, boolean requireTerms) {
+  public SearchQuery parseStandardQuery(String query, SearchQueryBuilderOptions options) {
 
     CharSequenceScanner parser = new CharSequenceScanner(query);
-    return parseStandardQuery(parser, requireTerms, SearchEntry.FIELD_TEXT, 0);
+    return parseStandardQuery(parser, options, SearchEntry.FIELD_TEXT, 0);
   }
 }

@@ -23,8 +23,10 @@ public interface ManagedSearchEngine extends SearchEngine, Closeable, Refreshabl
    * creation or the last call of {@link #refresh()}.<br>
    * This can be an expensive operation and should NOT be called per search
    * request.
+   * 
+   * {@inheritDoc}
    */
-  void refresh();
+  boolean refresh();
 
   /**
    * This method disposes the search-engine. This method needs to be called when

@@ -375,9 +375,10 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
-  public void refresh() {
+  public boolean refresh() {
 
     this.precisionStep = null;
+    return this.configurationHolder.refresh();
   }
 
 }

@@ -3,12 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.base.config;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+
+import net.sf.mmm.search.api.config.SearchSource;
 
 /**
  * This is the implementation of
@@ -39,7 +42,7 @@ public class SearchConfigurationBean extends AbstractSearchConfigurationBean {
   /**
    * @return the sources
    */
-  public List<SearchSourceBean> getSources() {
+  public Collection<? extends SearchSource> getSources() {
 
     return this.sources;
   }

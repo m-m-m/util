@@ -3,13 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view.api;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.search.api.SearchEntry;
+import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.util.component.api.Refreshable;
+import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
 /**
@@ -24,17 +26,28 @@ public interface SearchViewLogic extends Refreshable {
    * This method gets the {@link SearchEngineConfiguration}.
    * 
    * @see #getEntryTypeViews()
+   * @see #getEntryType(String)
+   * @see #getSourceViews()
    * 
    * @return the {@link SearchEngineConfiguration}.
    */
   SearchEngineConfiguration getConfiguration();
 
   /**
-   * This method gets the list of {@link SearchEntryTypeView}s.
+   * This method gets the list of {@link SearchEntryTypeView}s sorted by
+   * {@link SearchEntryType#getTitle() title}.
    * 
    * @return the {@link SearchEntryTypeView}s.
    */
-  List<? extends SearchEntryTypeView> getEntryTypeViews();
+  Collection<? extends SearchEntryType> getEntryTypeViews();
+
+  /**
+   * This method gets the list of views on the {@link SearchSource}s sorted by
+   * {@link SearchSource#getTitle() title}.
+   * 
+   * @return the sources.
+   */
+  Collection<SearchSource> getSourceViews();
 
   /**
    * This method gets the {@link SearchEntryTypeView} or {@link SearchEntryType}
@@ -63,13 +76,30 @@ public interface SearchViewLogic extends Refreshable {
   XmlUtil getXmlUtil();
 
   /**
-   * This method reloads the {@link #getConfiguration() configuration} on the
-   * fly.<br/>
+   * This method gets the {@link Iso8601Util} that can be used to format and
+   * parse dates.
+   * 
+   * @return the {@link Iso8601Util}.
+   */
+  Iso8601Util getIso8601Util();
+
+  /**
+   * This method gets the date of the last refresh as String.
+   * 
+   * @return the last refresh date.
+   */
+  String getLastRefreshDate();
+
+  /**
+   * This method reloads the {@link #getConfiguration() configuration} and the
+   * {@link net.sf.mmm.search.engine.api.SearchEngine} on the fly.<br/>
    * <b>ATTENTION:</b><br>
    * The search-engine will not be rebuild on reload so configuration-changes
    * only reflect the view and NOT the {@link #getSearchEngine() search-engine}.
+   * 
+   * {@inheritDoc}
    */
-  void refresh();
+  boolean refresh();
 
   /**
    * This method get the display-title from the given <code>searchEntry</code>.
