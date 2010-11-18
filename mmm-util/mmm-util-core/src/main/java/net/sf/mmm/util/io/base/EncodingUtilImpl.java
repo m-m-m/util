@@ -599,9 +599,9 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
       } else {
         // prevent modifying parameters
         int off = offset;
-        int len = length;
+        int lengthRest = length;
         // start detection
-        while (len > 0) {
+        while (lengthRest > 0) {
           if (this.asciiBytesAvailable == 0) {
             // here we either need to detect the encoding or determine some
             // number of next bytes that are ensured to be ASCII...
@@ -617,7 +617,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
                   this.encoding = this.detectionProcessor.getLowByteEncoding();
                   if (this.encoding == null) {
                     // seems to be ASCII until some byte, but not enough
-                    // lookahead to determined encoding after that byte -> empty
+                    // lookahead to determine encoding after that byte -> empty
                     // ASCII bytes from buffer and refill via loop.
                     this.asciiBytesAvailable = lookahead - nonAsciiOffset - 1;
                   }
@@ -640,26 +640,27 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
             this.asciiProcessor.charBuffer = buffer;
             this.asciiProcessor.charOffset = off;
             int asciiCount = this.asciiBytesAvailable;
-            if (asciiCount > len) {
-              asciiCount = len;
+            if (asciiCount > lengthRest) {
+              asciiCount = lengthRest;
             }
             int asciiRead = (int) this.inputStream.process(this.asciiProcessor, asciiCount);
             if (asciiRead == 0) {
               break;
             }
             this.asciiBytesAvailable = this.asciiBytesAvailable - asciiRead;
-            len = len - asciiRead;
+            lengthRest = lengthRest - asciiRead;
             off = off + asciiRead;
           } else {
             if (getLogger().isTraceEnabled()) {
               getLogger().trace("detected encoding '" + this.encoding + "'");
             }
             this.reader = new InputStreamReader(this.inputStream, this.encoding);
-            return this.reader.read(buffer, off, len);
+            return this.reader.read(buffer, off, lengthRest);
           }
         }
-        bytesRead = length - len;
+        bytesRead = length - lengthRest;
         if (bytesRead == 0) {
+          assert (this.eos);
           return -1;
         }
       }

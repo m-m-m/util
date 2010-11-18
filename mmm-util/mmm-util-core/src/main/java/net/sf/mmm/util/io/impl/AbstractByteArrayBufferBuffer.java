@@ -252,8 +252,8 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
       if (processor != null) {
         consumed = processor.process(this.currentBufferBytes, this.currentBufferIndex, len);
         if ((consumed < 0) || (consumed > len)) {
-          throw new ValueOutOfRangeException(Integer.valueOf(consumed), Integer.valueOf(0), Integer
-              .valueOf(len), processor);
+          throw new ValueOutOfRangeException(Integer.valueOf(consumed), Integer.valueOf(0),
+              Integer.valueOf(len), processor);
         }
       }
       this.currentBufferIndex = this.currentBufferIndex + consumed;
@@ -279,9 +279,9 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
    */
   protected void sync(AbstractByteArrayBufferBuffer master) {
 
+    this.buffersEndIndex = master.buffersEndIndex;
     int bufferDist = master.bufferStepCount - this.bufferStepCount;
     if (bufferDist > 0) {
-      this.buffersEndIndex = master.buffersEndIndex;
       this.buffersIndex = master.buffersIndex;
       this.bufferStepCount = master.bufferStepCount;
       ByteArrayBuffer buffer = this.buffers[this.buffersIndex];
@@ -331,7 +331,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
           buffer.setCurrentIndex(0);
           buffer.setMaximumIndex(bytes - 1);
         } else {
-          // TODO bytes can still be 0 - not eos!
+          assert (bytes == -1);
           return true;
         }
       }

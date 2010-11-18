@@ -6,6 +6,7 @@ package net.sf.mmm.util.io.base;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -21,13 +22,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 
-import org.junit.Test;
-
 import net.sf.mmm.util.file.base.DirectoryFilter;
 import net.sf.mmm.util.file.base.PlainFileFilter;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link EncodingUtilImpl}.
@@ -113,6 +114,19 @@ public class EncodingUtilTest {
     stringWriter = new StringWriter();
     StreamUtilImpl.getInstance().transfer(reader, stringWriter, false);
     String dataString = stringWriter.toString();
+    assertEquals(expectedData, dataString);
+
+    // test using BufferedReader (to complete realistic scenarios)
+    in = new ByteArrayInputStream(data);
+    reader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
+    stringWriter = new StringWriter();
+    BufferedReader br = new BufferedReader(reader);
+    String line = br.readLine();
+    while (line != null) {
+      stringWriter.append(line);
+      line = br.readLine();
+    }
+    dataString = stringWriter.toString();
     assertEquals(expectedData, dataString);
   }
 
