@@ -31,6 +31,6 @@ public abstract interface JaxbBeanHolder<T> extends Refreshable {
    * 
    * {@inheritDoc}
    */
-  void refresh();
+  boolean refresh();
 
 }

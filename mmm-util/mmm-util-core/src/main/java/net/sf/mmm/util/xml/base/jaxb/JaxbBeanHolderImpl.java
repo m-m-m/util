@@ -122,7 +122,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
   /**
    * {@inheritDoc}
    */
-  public synchronized void refresh() {
+  public synchronized boolean refresh() {
 
     // Date modificationDate = jaxbBean.getModificationDate();
     if (this.beanMapper != null) {
@@ -138,7 +138,9 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
         this.bean = this.beanMapper.loadXml(this.dataResource);
         this.modificationDate = this.dataResource.getLastModificationDate();
       }
+      return reload;
     }
+    return false;
   }
 
 }

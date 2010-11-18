@@ -20,7 +20,11 @@ public interface Refreshable {
    * method may be expensive and should only be invoked as needed. The
    * implementation of this method should be thread-safe if the object itself is
    * to be used by separate consumers at all.
+   * 
+   * @return <code>true</code> if something has changed, <code>false</code>
+   *         otherwise. If the implementation can not determine the change it
+   *         should return <code>true</code>.
    */
-  void refresh();
+  boolean refresh();
 
 }
