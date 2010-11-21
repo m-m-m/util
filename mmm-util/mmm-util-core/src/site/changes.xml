@@ -6,9 +6,17 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
-    <release version="2.0.0" date="2010-09-26" description="subsequent release">
-      <action dev="hohwille" type="add">
+    <release version="2.0.0" date="2010-09-26" description="Major release with CLI and JSR 330">
+      <action dev="hohwille" type="update">
         <![CDATA[
+        Migrated to JSR 330. Replaced any <code>@Resource</code> with <code>@Inject</code>. 
+        Added <code>@Named</code> to component implementations.
+        <code>net.sf.mmm.util.component.base.ComponentSpecification</code>: added and annotated all according interfaces.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added hyphenation support.<br/>
         <code>net.sf.mmm.util.text.api.Hyphenation</code>: added.
         <code>net.sf.mmm.util.text.api.Hyphenator</code>: added.
         <code>net.sf.mmm.util.text.api.HyphenatorBuilder</code>: added.
@@ -26,6 +34,7 @@
       </action>
       <action dev="hohwille" type="add">
         <![CDATA[
+        Added string hashing.<br/>
         <code>net.sf.mmm.util.text.api.StringHasher</code>: added.
         <code>net.sf.mmm.util.text.base.AbstractStringHasher</code>: added.
         <code>net.sf.mmm.util.text.base.FastStringHasher</code>: added.
@@ -34,6 +43,7 @@
       </action>
       <action dev="hohwille" type="add">
         <![CDATA[
+        Added line wraping.<br/>
         <code>net.sf.mmm.util.text.api.LineWrapper</code>: added.
         <code>net.sf.mmm.util.text.api.TextColumn</code>: added.
         <code>net.sf.mmm.util.text.api.TextTableInfo</code>: added.
@@ -43,9 +53,59 @@
       </action>
       <action dev="hohwille" type="add">
         <![CDATA[
+        Added unicode helpers.<br/>
         <code>net.sf.mmm.util.text.api.DiacriticalMark</code>: added.
         <code>net.sf.mmm.util.text.api.UnicodeUtil</code>: added.
         <code>net.sf.mmm.util.text.base.UnicodeUtilImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Improved value converter.<br/>
+        <code>net.sf.mmm.util.value.impl.AbstractValueConverterToContainer</code>: added.
+        <code>net.sf.mmm.util.value.impl.ValueConverterToFile</code>: added.
+        <code>net.sf.mmm.util.value.impl.ValueConverterToMap</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added IoC abstraction.<br/>
+        <code>net.sf.mmm.util.component.api.IocContainer</code>: added.
+        <code>net.sf.mmm.util.component.impl.SpringContainer</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added refresh support.<br/>
+        <code>net.sf.mmm.util.component.api.Refreshable</code>: added.
+        <code>net.sf.mmm.util.component.api.PeriodicRefresher</code>: added.
+        <code>net.sf.mmm.util.component.impl.PeriodicRefresherImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Further JAXB support.<br/>
+        <code>net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolder</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolderImpl</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.Property</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.PropertyList</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlAdapterEnum</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlAdapterInfixPattern</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlAdapterProperties</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        <code>net.sf.mmm.util.file.base.FileUtilImpl</code>: fixed normalizePath(String).
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Differentiate components and other classes.<br/>
+        <code>net.sf.mmm.util.component.base.AbstractLoggable</code>: removed.
+        <code>net.sf.mmm.util.component.base.AbstractLoggableComponent</code>: added.
+        <code>net.sf.mmm.util.component.base.AbstractLoggableObject</code>: added.
         ]]>
       </action>
       <action dev="hohwille" type="add">
@@ -58,21 +118,9 @@
         <code>net.sf.mmm.util.reflect.api.Manifest</code>: removed and replaced with existing <code>java.util.jar.Manifest</code>.
         ]]>
       </action>
-      <action dev="hohwille" type="add">
-        <![CDATA[
-        <code>net.sf.mmm.util.value.impl.AbstractValueConverterToContainer</code>: added.
-        <code>net.sf.mmm.util.value.impl.ValueConverterToFile</code>: added.
-        <code>net.sf.mmm.util.value.impl.ValueConverterToMap</code>: added.
-        ]]>
-      </action>
       <action dev="hohwille" type="update">
         <![CDATA[
         <code>net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessor</code>: extracted code to AbstractPojoPropertyAccessorBase.
-        ]]>
-      </action>
-      <action dev="hohwille" type="update">
-        <![CDATA[
-        Migrated to JSR 330. Replaced any <code>@Resource</code> with <code>@Inject</code>.
         ]]>
       </action>
       <action dev="hohwille" type="removed">
@@ -100,16 +148,6 @@
       <action dev="hohwille" type="fix">
         <![CDATA[
         <code>net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator</code>: conversion for functions, collections and maps now working.
-        ]]>
-      </action>
-      <action dev="hohwille" type="add">
-        <![CDATA[
-        Hyphenation added.
-        ]]>
-      </action>
-      <action dev="hohwille" type="add">
-        <![CDATA[
-        Line wrapping added.
         ]]>
       </action>
     </release>
