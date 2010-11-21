@@ -97,7 +97,14 @@
       </action>
       <action dev="hohwille" type="fix">
         <![CDATA[
-        <code>net.sf.mmm.util.file.base.FileUtilImpl</code>: fixed normalizePath(String).
+        Fixed bug in path normalization.<br/>
+        <code>net.sf.mmm.util.file.base.FileUtilImpl</code>: fixed normalizePath() method.
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        Fixed bug in stream-detection (used by EncodingDetectionReader).<br/>
+        <code>net.sf.mmm.util.io.impl.AbstractByteArrayBufferBuffer</code>: fixed sync() method.
         ]]>
       </action>
       <action dev="hohwille" type="update">
