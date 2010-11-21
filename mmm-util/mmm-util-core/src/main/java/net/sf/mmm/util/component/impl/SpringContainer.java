@@ -15,6 +15,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * This is the implementation of the {@link IocContainer} using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 2.0.0
  */
 public class SpringContainer implements IocContainer {
 

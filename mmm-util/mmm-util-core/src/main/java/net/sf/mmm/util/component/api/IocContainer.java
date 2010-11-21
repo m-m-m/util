@@ -10,6 +10,7 @@ package net.sf.mmm.util.component.api;
  * project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 2.0.0
  */
 public interface IocContainer {
 
