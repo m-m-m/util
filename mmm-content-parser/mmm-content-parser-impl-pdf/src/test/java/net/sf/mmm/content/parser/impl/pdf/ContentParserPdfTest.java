@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.util.context.api.GenericContext;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
@@ -47,7 +48,8 @@ public class ContentParserPdfTest {
     Assert.assertTrue(text.contains("Footer"));
     Assert.assertTrue(text.contains("Footnote"));
     Assert.assertTrue(text.contains("Hello world, this is a test."));
-    Assert.assertTrue(text.contains("Kommentar [jh1]: This is a \r\ncomment."));
+    Assert.assertTrue(text.contains("Kommentar [jh1]: This is a " + StringUtil.LINE_SEPARATOR
+        + "comment."));
   }
 
   protected ContentParser getContentParser() {
