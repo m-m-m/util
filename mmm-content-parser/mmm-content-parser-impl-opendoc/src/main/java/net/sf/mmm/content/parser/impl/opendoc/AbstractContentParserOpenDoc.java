@@ -88,6 +88,7 @@ public abstract class AbstractContentParserOpenDoc extends AbstractContentParser
         }
       }
     } while (type != XMLStreamConstants.END_DOCUMENT);
+    streamReader.close();
   }
 
   /**
@@ -123,6 +124,7 @@ public abstract class AbstractContentParserOpenDoc extends AbstractContentParser
         }
       }
     } while (type != XMLStreamConstants.END_DOCUMENT);
+    streamReader.close();
     context.setVariable(VARIABLE_NAME_TEXT, buffer.toString());
   }
 
