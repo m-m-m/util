@@ -15,7 +15,7 @@ import javax.swing.JSlider;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
@@ -243,12 +243,12 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
    */
   public void listModelChanged(UIListModelEvent event) {
 
-    ChangeEventType type = event.getType();
+    ChangeType type = event.getType();
     int startIndex = event.getStartIndex();
     int endIndex;
-    if ((type == ChangeEventType.REMOVE) || (type == ChangeEventType.UPDATE)) {
+    if ((type == ChangeType.REMOVE) || (type == ChangeType.UPDATE)) {
       endIndex = event.getEndIndex();
-    } else if (type == ChangeEventType.ADD) {
+    } else if (type == ChangeType.ADD) {
       endIndex = this.model.getElementCount() - 1;
     } else {
       // this is an error

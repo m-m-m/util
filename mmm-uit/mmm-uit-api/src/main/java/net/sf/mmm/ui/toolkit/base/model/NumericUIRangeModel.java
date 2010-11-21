@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.model;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRange;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is an implementation of the
@@ -81,9 +81,9 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
       int newSize = max - this.minimum;
       UIListModelEvent changeEvent;
       if (max > this.maximum) {
-        changeEvent = new UIListModelEvent(ChangeEventType.ADD, oldSize, newSize - 1);
+        changeEvent = new UIListModelEvent(ChangeType.ADD, oldSize, newSize - 1);
       } else {
-        changeEvent = new UIListModelEvent(ChangeEventType.REMOVE, newSize, oldSize - 1);
+        changeEvent = new UIListModelEvent(ChangeType.REMOVE, newSize, oldSize - 1);
       }
       this.maximum = max;
       fireChangeEvent(changeEvent);
@@ -105,9 +105,9 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
       }
       UIListModelEvent changeEvent;
       if (min > this.minimum) {
-        changeEvent = new UIListModelEvent(ChangeEventType.ADD, 0, (min - this.minimum) - 1);
+        changeEvent = new UIListModelEvent(ChangeType.ADD, 0, (min - this.minimum) - 1);
       } else {
-        changeEvent = new UIListModelEvent(ChangeEventType.REMOVE, 0, (this.minimum - min) - 1);
+        changeEvent = new UIListModelEvent(ChangeType.REMOVE, 0, (this.minimum - min) - 1);
       }
       this.minimum = min;
       fireChangeEvent(changeEvent);

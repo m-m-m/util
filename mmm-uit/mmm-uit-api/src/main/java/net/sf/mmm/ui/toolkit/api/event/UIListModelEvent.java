@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.event;
 
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class represents the event sent by the list model to its listeners to
@@ -26,7 +26,7 @@ public final class UIListModelEvent extends UIModelEvent {
    * @param startItemIndex is the index of the first item that has changed.
    * @param endItemIndex is the index of the last item that has changed.
    */
-  public UIListModelEvent(ChangeEventType eventType, int startItemIndex, int endItemIndex) {
+  public UIListModelEvent(ChangeType eventType, int startItemIndex, int endItemIndex) {
 
     super(eventType);
     this.startIndex = startItemIndex;
@@ -39,7 +39,7 @@ public final class UIListModelEvent extends UIModelEvent {
    * @param eventType is the type for the new event.
    * @param itemIndex is the index of the according item.
    */
-  public UIListModelEvent(ChangeEventType eventType, int itemIndex) {
+  public UIListModelEvent(ChangeType eventType, int itemIndex) {
 
     super(eventType);
     this.startIndex = itemIndex;

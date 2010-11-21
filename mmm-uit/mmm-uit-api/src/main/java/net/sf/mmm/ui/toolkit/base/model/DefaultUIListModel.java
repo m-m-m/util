@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the default implementation of the
@@ -53,7 +53,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   public void addElement(E element) {
 
     this.elements.add(element);
-    fireChangeEvent(new UIListModelEvent(ChangeEventType.ADD, this.elements.size() - 1));
+    fireChangeEvent(new UIListModelEvent(ChangeType.ADD, this.elements.size() - 1));
   }
 
   /**
@@ -62,7 +62,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   public void setElement(E newItem, int index) {
 
     this.elements.set(index, newItem);
-    fireChangeEvent(new UIListModelEvent(ChangeEventType.UPDATE, index));
+    fireChangeEvent(new UIListModelEvent(ChangeType.UPDATE, index));
   }
 
   /**
@@ -71,7 +71,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   public void addElement(E item, int index) {
 
     this.elements.add(index, item);
-    fireChangeEvent(new UIListModelEvent(ChangeEventType.ADD, index));
+    fireChangeEvent(new UIListModelEvent(ChangeType.ADD, index));
   }
 
   /**
@@ -80,7 +80,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   public void removeElement(int index) {
 
     this.elements.remove(index);
-    fireChangeEvent(new UIListModelEvent(ChangeEventType.REMOVE, index));
+    fireChangeEvent(new UIListModelEvent(ChangeType.REMOVE, index));
   }
 
   /**
@@ -105,7 +105,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
     int count = this.elements.size();
     if (count > 0) {
       this.elements.clear();
-      fireChangeEvent(new UIListModelEvent(ChangeEventType.REMOVE, 0, count - 1));
+      fireChangeEvent(new UIListModelEvent(ChangeType.REMOVE, 0, count - 1));
     }
   }
 

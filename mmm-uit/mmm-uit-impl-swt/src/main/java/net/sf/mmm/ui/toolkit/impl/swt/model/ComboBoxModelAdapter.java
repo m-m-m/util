@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
@@ -106,14 +106,14 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
       int start = this.event.getStartIndex();
       int end = this.event.getEndIndex();
       Combo combo = this.syncAccess.getSwtObject();
-      if (this.event.getType() == ChangeEventType.ADD) {
+      if (this.event.getType() == ChangeType.ADD) {
         for (int i = start; i <= end; i++) {
           combo.add(this.model.getElementAsString(i), i);
         }
-      } else if (this.event.getType() == ChangeEventType.REMOVE) {
+      } else if (this.event.getType() == ChangeType.REMOVE) {
         // for (int i = start; i <= end; i++) { combo.remove(i); }
         combo.remove(start, end);
-      } else if (this.event.getType() == ChangeEventType.UPDATE) {
+      } else if (this.event.getType() == ChangeType.UPDATE) {
         for (int i = start; i <= end; i++) {
           combo.setItem(i, this.model.getElementAsString(i));
         }

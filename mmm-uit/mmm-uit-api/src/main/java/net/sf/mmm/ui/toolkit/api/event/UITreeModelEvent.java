@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.event;
 
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class represents the event sent by the
@@ -27,7 +27,7 @@ public class UITreeModelEvent<N> extends UIModelEvent {
    * @param eventType is the type for the new event.
    * @param node is the node that changed.
    */
-  public UITreeModelEvent(ChangeEventType eventType, N node) {
+  public UITreeModelEvent(ChangeType eventType, N node) {
 
     super(eventType);
     this.treeNode = node;

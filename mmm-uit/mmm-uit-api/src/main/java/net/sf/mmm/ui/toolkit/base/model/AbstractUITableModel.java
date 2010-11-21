@@ -9,7 +9,7 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the abstract base implementation of the
@@ -69,7 +69,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * @param type is the type change.
    * @param rowIndex is the index of the row that has changed.
    */
-  protected void fireRowChangeEvent(ChangeEventType type, int rowIndex) {
+  protected void fireRowChangeEvent(ChangeType type, int rowIndex) {
 
     fireChangeEvent(new UITableModelEvent(type, rowIndex, rowIndex, -1));
   }
@@ -82,7 +82,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * @param rowStartIndex is the index of the first row that has changed.
    * @param rowEndIndex is the index of the last row that has changed.
    */
-  protected void fireRowChangeEvent(ChangeEventType type, int rowStartIndex, int rowEndIndex) {
+  protected void fireRowChangeEvent(ChangeType type, int rowStartIndex, int rowEndIndex) {
 
     fireChangeEvent(new UITableModelEvent(type, rowStartIndex, rowEndIndex, -1));
   }
@@ -94,7 +94,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * @param type is the type change.
    * @param columnIndex is the index of the column that has changed.
    */
-  protected void fireColumnChangeEvent(ChangeEventType type, int columnIndex) {
+  protected void fireColumnChangeEvent(ChangeType type, int columnIndex) {
 
     fireChangeEvent(new UITableModelEvent(type, 0, getRowCount() - 1, columnIndex));
   }
@@ -108,7 +108,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
    * @param rowEndIndex is the index of the last row that has changed.
    * @param columnIndex is the index of the column that has changed.
    */
-  protected void fireChangeEvent(ChangeEventType type, int rowStartIndex, int rowEndIndex, int columnIndex) {
+  protected void fireChangeEvent(ChangeType type, int rowStartIndex, int rowEndIndex, int columnIndex) {
 
     fireChangeEvent(new UITableModelEvent(type, rowStartIndex, rowEndIndex, columnIndex));
   }

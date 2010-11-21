@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
@@ -87,7 +87,7 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
       Slider slider = this.syncAccess.getSwtObject();
       slider.setMaximum(this.model.getElementCount());
     } else {
-      if (this.event.getType() != ChangeEventType.UPDATE) {
+      if (this.event.getType() != ChangeType.UPDATE) {
         Slider slider = this.syncAccess.getSwtObject();
         slider.setMaximum(this.model.getElementCount());
       }

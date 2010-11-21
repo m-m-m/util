@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.demo;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * TODO This type ...
@@ -100,7 +100,7 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
   public void setCellValue(int rowIndex, int columnIndex, String value) {
 
     this.cells[rowIndex][columnIndex] = value;
-    fireChangeEvent(ChangeEventType.UPDATE, rowIndex, rowIndex, columnIndex);
+    fireChangeEvent(ChangeType.UPDATE, rowIndex, rowIndex, columnIndex);
   }
 
   /**
@@ -109,7 +109,7 @@ public class UISimpleTableModel extends AbstractUITableModel<String> implements
   public void setColumnName(int columnIndex, String name) {
 
     this.columnNames[columnIndex] = name;
-    fireChangeEvent(ChangeEventType.UPDATE, -1, 0, columnIndex);
+    fireChangeEvent(ChangeType.UPDATE, -1, 0, columnIndex);
   }
 
   /**

@@ -12,7 +12,7 @@ import javax.swing.tree.TreePath;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to a
@@ -207,11 +207,11 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
 
     // TreePath treePath = getTreePath(event);
     // only treeStructureChanged and treeNodeRemoved are handled by swing!
-    if (event.getType() == ChangeEventType.ADD) {
+    if (event.getType() == ChangeType.ADD) {
       fireAddEvent(event);
-    } else if (event.getType() == ChangeEventType.REMOVE) {
+    } else if (event.getType() == ChangeType.REMOVE) {
       fireRemoveEvent(event);
-    } else if (event.getType() == ChangeEventType.UPDATE) {
+    } else if (event.getType() == ChangeType.UPDATE) {
       fireUpdateEvent(event);
     }
   }

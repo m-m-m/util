@@ -9,7 +9,7 @@ import java.util.Vector;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the abstract base implementation of the
@@ -75,7 +75,7 @@ public abstract class AbstractUIListModel<E> implements UIListModel<E> {
    * @param startIndex is the index of the first item that has changed.
    * @param endIndex is the index of the last item that has changed.
    */
-  protected void fireChangeEvent(ChangeEventType type, int startIndex, int endIndex) {
+  protected void fireChangeEvent(ChangeType type, int startIndex, int endIndex) {
 
     fireChangeEvent(new UIListModelEvent(type, startIndex, endIndex));
   }

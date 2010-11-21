@@ -9,7 +9,7 @@ import java.util.Vector;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.util.event.api.ChangeEventType;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the abstract base implementation of the
@@ -74,7 +74,7 @@ public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
    * @param type is the type change.
    * @param node is the node that changed.
    */
-  protected void fireChangeEvent(ChangeEventType type, N node) {
+  protected void fireChangeEvent(ChangeType type, N node) {
 
     fireChangeEvent(new UITreeModelEvent<N>(type, node));
   }
