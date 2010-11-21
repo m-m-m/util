@@ -18,6 +18,9 @@
   <logger name="net.sf.mmm">
     <level value="debug"/>
   </logger>
+  <logger name="org.apache.pdfbox">
+    <level value="info"/>
+  </logger>
 
   <root>
     <level value="debug"/>
