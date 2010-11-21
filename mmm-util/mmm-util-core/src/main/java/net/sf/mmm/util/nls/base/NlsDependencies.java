@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.base;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
+import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
 
 /**
  * This interface bundles the dependencies for the native language support
@@ -28,6 +29,13 @@ public interface NlsDependencies {
    * @return the {@link NlsArgumentFormatter}.
    */
   NlsArgumentFormatter getArgumentFormatter();
+
+  /**
+   * This method gets the {@link NlsMessageFormatterFactory}.
+   * 
+   * @return the {@link NlsMessageFormatterFactory}.
+   */
+  NlsMessageFormatterFactory getMessageFormatterFactory();
 
   /**
    * This method gets the {@link Iso8601Util}.

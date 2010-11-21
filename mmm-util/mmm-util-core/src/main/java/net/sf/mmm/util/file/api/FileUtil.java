@@ -67,11 +67,60 @@ public interface FileUtil {
   File getTemporaryDirectory();
 
   /**
-   * This method normalizes a given <code>path</code>. In most cases the given
-   * <code>path</code> will simply be returned. Anyhow Java is NOT able to
-   * resolve paths like "~/foo" that work properly in bash-scripts. Therefore
-   * this method resolves the path in such situations (e.g. to
-   * "/home/login/foo") and returns a physical path.
+   * This method normalizes a given <code>path</code>. It will resolve ".." and
+   * "." segments, normalize backslashes and remove duplicated slashes. Further
+   * it can resolve "~" at the beginning of the path (like in bash-scripts,
+   * etc.). Therefore this method resolves the path in such situations (e.g. to
+   * "/home/login/foo") and returns a physical path.<br/>
+   * Here are some examples assuming that <code>separator</code> is '/'
+   * (backslashes are NOT escaped):
+   * <table border="1">
+   * <tr>
+   * <th><code>path</code></th>
+   * <th><code>normalizePath(path)</code></th>
+   * </tr>
+   * <tr>
+   * <td><code>"folder/subfolder//../.\some.file"</code></td>
+   * <td><code>"folder/some.file"</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>"../.\some.file"</code></td>
+   * <td><code>"../some.file"</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>"http://www.host.com/foo/bar/./test/.././.."</code></td>
+   * <td><code>"http://www.host.com/foo"</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>"\\unc.host\printers\pr3761"</code></td>
+   * <td><code>"\\unc.host\printers\pr3761"</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>"~/documents/index.html"</code></td>
+   * <td><code>{@link #getUserHomeDirectory()} + "/documents/index.html"</code></td>
+   * </tr>
+   * <tr>
+   * <td><code>"~root/subfolder/../folder/.//index.html"</code></td>
+   * <td><code>"/root/folder/index.html"</code></td>
+   * </tr>
+   * </table>
+   * <b>ATTENTION:</b><br>
+   * Normalizing home-directories of other users (e.g. "~user/") makes various
+   * assumptions and is NOT guaranteed to be correct in any case.
+   * 
+   * @param path is the path to resolve.
+   * @param separator is the character to use as {@link File#separatorChar file
+   *        separator}.
+   * @return the resolved path.
+   */
+  String normalizePath(String path, char separator);
+
+  /**
+   * This method is a shortcut for
+   * <code>{@link #normalizePath(String, char) normalizePath}(path, 
+   * {@link File#separatorChar})</code>.
+   * 
+   * @see #normalizePath(String, char)
    * 
    * @param path is the path to resolve.
    * @return the resolved path.

@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.junit.Test;
-
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link FileUtilImpl}.
@@ -31,6 +31,9 @@ public class FileUtilTest {
     return FileUtilImpl.getInstance();
   }
 
+  /**
+   * Tests {@link FileUtil#getExtension(String)}.
+   */
   @Test
   public void testExtension() {
 
@@ -40,30 +43,54 @@ public class FileUtilTest {
     assertEquals("gz", util.getExtension("archive.tar.gz"));
   }
 
+  /**
+   * Tests {@link FileUtil#normalizePath(String)}.
+   */
   @Test
   public void testNormalizePath() {
 
     FileUtil util = getFileUtil();
-    assertEquals(File.separator, util.normalizePath("////.//"));
-    assertEquals(File.separator, util.normalizePath("/foo/../bar/.."));
-    assertEquals(File.separator + "foo", util.normalizePath("/foo/bar/../bar/.."));
-    assertEquals(File.separator + "foo", util.normalizePath("/foo\\bar/..\\bar/.."));
-    assertEquals(File.separator + "foo", util.normalizePath("/foo\\//.\\./bar/..\\bar/.."));
-    assertEquals("foo" + File.separator + "bar", util.normalizePath("foo\\//.\\./bar/."));
-    assertEquals(System.getProperty("user.home"), util.normalizePath("~"));
-    assertEquals(System.getProperty("user.home") + File.separator, util.normalizePath("~/"));
-    assertEquals(System.getProperty("user.home"), util.normalizePath("~/foo/./.."));
-    String homeDir = System.getProperty("user.home");
+    assertEquals("/", util.normalizePath("/\\///.//", '/'));
+    assertEquals("/", util.normalizePath("/foo/../bar/..", '/'));
+    assertEquals("/foo", util.normalizePath("/foo/bar/../bar/..", '/'));
+    assertEquals("/foo", util.normalizePath("/foo\\bar/..\\bar/..", '/'));
+    assertEquals("/foo", util.normalizePath("/foo\\//.\\./bar/..\\bar/..", '/'));
+    assertEquals("foo/bar", util.normalizePath("foo\\//.\\./bar/.", '/'));
+    String homeDir = System.getProperty("user.home").replace('\\', '/');
+    assertEquals(homeDir, util.normalizePath("~", '/'));
+    assertEquals(homeDir + "/", util.normalizePath("~/", '/'));
+    assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
+    assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
+    assertEquals("/root/.ssh/authorized_keys",
+        util.normalizePath("~root/.ssh/authorized_keys", '/'));
     if ("/root".equals(homeDir)) {
       homeDir = "/home/nobody";
     }
-    assertEquals(util.normalizePath(homeDir + "/../someuser"), util.normalizePath("~someuser"));
+    assertEquals(util.normalizePath(homeDir + "/../someuser", '/'),
+        util.normalizePath("~someuser", '/'));
     String uncPath = "\\\\10.0.0.1\\share";
-    assertEquals(uncPath, util.normalizePath(uncPath));
-    assertEquals("http://www.host.com/foo/bar", util
-        .normalizePath("http://www.host.com/foo/bar/./test/../."));
+    assertEquals(uncPath, util.normalizePath(uncPath, '/'));
+    assertEquals("http://www.host.com/foo",
+        util.normalizePath("http://www.host.com/foo/bar/./test/.././.."));
+    assertEquals("../../bar/some", util.normalizePath("../..\\foo/../bar\\.\\some", '/'));
   }
 
+  /**
+   * Tests special cases of {@link FileUtil#normalizePath(String)}.
+   */
+  @Test
+  public void testNormalizePathSpeical() {
+
+    FileUtilImpl impl = new FileUtilImpl();
+    impl.setUserLogin("root");
+    impl.setUserHomeDirectoryPath("/my/root/dir");
+    impl.initialize();
+    FileUtil util = impl;
+  }
+
+  /**
+   * Tests {@link FileUtil#getBasename(String)}.
+   */
   @Test
   public void testBasename() {
 
@@ -93,6 +120,9 @@ public class FileUtilTest {
     assertEquals("bar", util.getBasename("http://foo.org/bar"));
   }
 
+  /**
+   * Tests {@link FileUtil#getDirname(String)}.
+   */
   @Test
   public void testDirname() {
 
@@ -130,6 +160,9 @@ public class FileUtilTest {
     assertEquals("The second test", copyProperties.get("Message2"));
   }
 
+  /**
+   * Tests {@link FileUtil#copyFile(File, File)}.
+   */
   @Test
   public void testCopyFile() throws IOException {
 
@@ -141,6 +174,9 @@ public class FileUtilTest {
     copyFile.delete();
   }
 
+  /**
+   * Tests {@link FileUtil#copyFile(File, File)}.
+   */
   @Test
   public void testDirectoryTree() throws IOException {
 

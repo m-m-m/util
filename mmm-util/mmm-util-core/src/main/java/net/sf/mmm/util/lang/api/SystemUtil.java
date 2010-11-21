@@ -24,25 +24,25 @@ public interface SystemUtil {
    * The name of the {@link System#getProperty(String) system-property} for
    * {@link SystemInformation#getSystemName()}.
    */
-  String SYSTEM_PROPERTY_OS_NAME = "os.name";
+  String PROPERTY_OS_NAME = "os.name";
 
   /**
    * The name of the {@link System#getProperty(String) system-property} for
    * {@link SystemInformation#getSystemArchitecture()}.
    */
-  String SYSTEM_PROPERTY_OS_ARCHITECTURE = "os.arch";
+  String PROPERTY_OS_ARCHITECTURE = "os.arch";
 
   /**
    * The name of the {@link System#getProperty(String) system-property} for
    * {@link SystemInformation#getSystemVersion()}.
    */
-  String SYSTEM_PROPERTY_OS_VERSION = "os.version";
+  String PROPERTY_OS_VERSION = "os.version";
 
   /**
    * The name of the {@link System#getProperty(String) system-property} for the
    * name of the JVM.
    */
-  String SYSTEM_PROPERTY_JAVA_VM_NAME = "java.vm.name";
+  String PROPERTY_JAVA_VM_NAME = "java.vm.name";
 
   /**
    * This method gets the {@link SystemInformation} for the operating system

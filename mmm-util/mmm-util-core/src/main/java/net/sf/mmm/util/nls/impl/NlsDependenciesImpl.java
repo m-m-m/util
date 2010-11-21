@@ -12,6 +12,7 @@ import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
+import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
 import net.sf.mmm.util.nls.base.NlsArgumentFormatter;
 import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
@@ -31,6 +32,9 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
 
   /** @see #getArgumentFormatter() */
   private NlsArgumentFormatter argumentFormatter;
+
+  /** @see #getMessageFormatterFactory() */
+  private NlsMessageFormatterFactory messageFormatterFactory;
 
   /** @see #getIso8601Util() */
   private Iso8601Util iso8601Util;
@@ -82,6 +86,24 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   /**
    * {@inheritDoc}
    */
+  public NlsMessageFormatterFactory getMessageFormatterFactory() {
+
+    return this.messageFormatterFactory;
+  }
+
+  /**
+   * @param messageFormatterFactory is the messageFormatterFactory to set
+   */
+  @Inject
+  public void setMessageFormatterFactory(NlsMessageFormatterFactory messageFormatterFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.messageFormatterFactory = messageFormatterFactory;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Iso8601Util getIso8601Util() {
 
     return this.iso8601Util;
@@ -114,6 +136,12 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
       NlsArgumentFormatterImpl impl = new NlsArgumentFormatterImpl();
       impl.initialize();
       this.argumentFormatter = impl;
+    }
+    if (this.messageFormatterFactory == null) {
+      NlsMessageFormatterFactoryImpl impl = new NlsMessageFormatterFactoryImpl();
+      impl.setDependencies(this);
+      impl.initialize();
+      this.messageFormatterFactory = impl;
     }
   }
 

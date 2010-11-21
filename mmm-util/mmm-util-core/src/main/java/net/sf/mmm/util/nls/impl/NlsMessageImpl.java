@@ -226,7 +226,8 @@ public class NlsMessageImpl implements NlsMessage {
       } else {
         boolean success = false;
         if (nlsTemplate != null) {
-          success = nlsTemplate.translate(locale, this.arguments, buffer, resolver);
+          success = nlsTemplate.translate(locale, this.arguments, buffer, resolver,
+              this.nlsDependencies);
         }
         if (!success) {
           // This does not make sense:

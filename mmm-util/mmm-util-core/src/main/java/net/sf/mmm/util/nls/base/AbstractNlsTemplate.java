@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -18,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsTemplate implements NlsTemplate {
+public abstract class AbstractNlsTemplate extends AbstractLoggableObject implements NlsTemplate {
 
   /**
    * The constructor.
@@ -39,21 +40,26 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
    *        {@link NlsMessageFormatter#format(Void, Locale, Map, NlsTemplateResolver)}
    *        . Anyhow it allows the implementation to do smart caching of the
    *        parsed formatter in association with the locale.
+   * @param nlsDependencies are the {@link NlsDependencies}.
    * @return the formatter instance.
    */
-  protected abstract NlsMessageFormatter createFormatter(String messageTemplate, Locale locale);
+  protected NlsMessageFormatter createFormatter(String messageTemplate, Locale locale,
+      NlsDependencies nlsDependencies) {
+
+    return nlsDependencies.getMessageFormatterFactory().create(messageTemplate);
+  }
 
   /**
    * {@inheritDoc}
    */
   public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer,
-      NlsTemplateResolver resolver) throws IOException {
+      NlsTemplateResolver resolver, NlsDependencies nlsDependencies) throws IOException {
 
     String translation = translate(locale);
     if (translation == null) {
       return false;
     } else {
-      NlsMessageFormatter formatter = createFormatter(translation, locale);
+      NlsMessageFormatter formatter = createFormatter(translation, locale, nlsDependencies);
       formatter.format(null, locale, arguments, resolver, buffer);
       return true;
     }

@@ -49,6 +49,9 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 @Named
 public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil {
 
+  /** The typical home directory of the user "root" under Unix/Linux. */
+  private static final String HOME_ROOT = "/root";
+
   /**
    * The prefix of an UNC (Uniform Naming Convention) path (e.g.
    * <code>\\10.0.0.1\share</code>).
@@ -72,6 +75,9 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /** @see #getUserHomeDirectory() */
   private File userHomeDirectory;
+
+  /** @see #getUserLogin() */
+  private String userLogin;
 
   /** @see #setTemporaryDirectoryPath(String) */
   private String temporaryDirectoryPath;
@@ -137,6 +143,9 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
     if (this.userHomeDirectory == null) {
       this.userHomeDirectory = new File(this.userHomeDirectoryPath);
     }
+    if (this.userLogin == null) {
+      this.userLogin = System.getProperty("user.name");
+    }
   }
 
   /**
@@ -179,11 +188,9 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
    * @param userHome is the home directory of the user.
    * @throws AlreadyInitializedException if the value has already been set.
    */
-  protected void setUserHomeDirectoryPath(String userHome) throws AlreadyInitializedException {
+  public void setUserHomeDirectoryPath(String userHome) throws AlreadyInitializedException {
 
-    if (this.userHomeDirectoryPath != null) {
-      throw new AlreadyInitializedException();
-    }
+    getInitializationState().requireNotInitilized();
     this.userHomeDirectoryPath = userHome;
   }
 
@@ -201,18 +208,43 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
    * @param tmpDir the tmpDir to set
    * @throws AlreadyInitializedException if the value has already been set.
    */
-  protected void setTemporaryDirectoryPath(String tmpDir) throws AlreadyInitializedException {
+  public void setTemporaryDirectoryPath(String tmpDir) throws AlreadyInitializedException {
 
-    if (this.temporaryDirectoryPath != null) {
-      throw new AlreadyInitializedException();
-    }
+    getInitializationState().requireNotInitilized();
     this.temporaryDirectoryPath = tmpDir;
+  }
+
+  /**
+   * This method gets the {@link String}.
+   * 
+   * @return the {@link String}.
+   */
+  public String getUserLogin() {
+
+    return this.userLogin;
+  }
+
+  /**
+   * @param userLogin is the userLogin to set
+   */
+  public void setUserLogin(String userLogin) {
+
+    getInitializationState().requireNotInitilized();
+    this.userLogin = userLogin;
   }
 
   /**
    * {@inheritDoc}
    */
   public String normalizePath(String path) {
+
+    return normalizePath(path, File.separatorChar);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String normalizePath(String path, char separator) {
 
     if (path == null) {
       throw new NlsNullPointerException("path");
@@ -224,39 +256,88 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
     if (path.startsWith(UNC_PATH_PREFIX)) {
       return path;
     }
-    char systemSlash = File.separatorChar;
+    // char systemSlash = File.separatorChar;
     Matcher matcher = URL_SCHEMA_PATTERN.matcher(path);
     if (matcher.matches()) {
-      String urlPath = normalizePath(matcher.group(2).toCharArray(), '/');
+      String urlPath = normalizePath(matcher.group(2), '/');
       return matcher.group(1) + urlPath;
     }
-    char wrongSlash;
-    if (systemSlash == '/') {
-      wrongSlash = '\\';
-    } else {
-      wrongSlash = '/';
-    }
-    char[] chars = path.toCharArray();
-    getStringUtil().replace(chars, wrongSlash, systemSlash);
-    return normalizePath(chars, systemSlash);
+    return normalizePathInternal(path, separator);
   }
 
   /**
    * This method handles {@link #normalizePath(String)} internally.
    * 
-   * @param chars is the path as char[].
-   * @param systemSlash is the slash of the OS (or the context of the path).
+   * @param path is the path.
+   * @param slash is the character used to to separate folders.
    * @return the resolved path.
    */
-  private String normalizePath(char[] chars, char systemSlash) {
+  private String normalizePathInternal(String path, char slash) {
 
-    StringBuilder buffer = new StringBuilder(chars.length + 4);
-    CharSequenceScanner scanner = new CharSequenceScanner(chars);
-    boolean appendSlash = false;
-    char c = scanner.next();
+    if (path.length() == 0) {
+      return path;
+    }
+    String pathWithHome;
+    if (path.startsWith("~")) {
+      StringBuilder sb = new StringBuilder(this.userHomeDirectoryPath.length() + path.length());
+      int slashIndex = path.indexOf(slash, 1);
+      String user;
+      if (slashIndex > 0) {
+        user = path.substring(1, slashIndex);
+      } else {
+        user = path.substring(1);
+      }
+      if (user.length() == 0) {
+        sb.append(this.userHomeDirectoryPath);
+      } else {
+        // ~<user> can not be resolved properly
+        // we would need to do OS-specific assumptions and look into
+        // /etc/passwd or whatever what might fail by missing read permissions
+        // This is just a hack that might work in most cases:
+        // we use the user.home dir get the dirname and append the user
+        if ("root".equals(user)) {
+          if ("root".equals(this.userLogin)) {
+            sb.append(this.userHomeDirectoryPath);
+          } else {
+            sb.append(HOME_ROOT);
+          }
+        } else {
+          if (HOME_ROOT.equals(this.userHomeDirectoryPath)) {
+            sb.append("/home");
+          } else {
+            sb.append(this.userHomeDirectoryPath);
+            sb.append(slash);
+            sb.append(PATH_SEGMENT_PARENT);
+          }
+          sb.append(slash);
+          sb.append(user);
+          sb.append(slash);
+        }
+      }
+      if (slashIndex > 0) {
+        sb.append(path.substring(slashIndex));
+      }
+      pathWithHome = sb.toString();
+    } else {
+      pathWithHome = path;
+    }
+    char wrongSlash;
+    if (slash == '/') {
+      wrongSlash = '\\';
+    } else {
+      wrongSlash = '/';
+    }
+    pathWithHome = pathWithHome.replace(wrongSlash, slash);
+    StringBuilder buffer = new StringBuilder(pathWithHome.length());
+    CharSequenceScanner scanner = new CharSequenceScanner(pathWithHome);
+    int segmentStart = 0;
+    List<String> segments = new ArrayList<String>();
+    boolean absolutePath = false;
+    char c = scanner.peek();
     if (c == '~') {
-      appendSlash = true;
-      String user = scanner.readUntil(systemSlash, true);
+      scanner.next();
+      absolutePath = true;
+      String user = scanner.readUntil(slash, true);
       if (user.length() == 0) {
         buffer.append(this.userHomeDirectoryPath);
       } else {
@@ -266,24 +347,33 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
         // This is just a hack that might work in most cases:
         // we use the user.home dir get the dirname and append the user
         String homeDir;
-        if ("/root".equals(this.userHomeDirectoryPath)) {
+        if (HOME_ROOT.equals(this.userHomeDirectoryPath)) {
           homeDir = "/home";
         } else {
           homeDir = getDirname(this.userHomeDirectoryPath);
         }
         buffer.append(homeDir);
-        buffer.append(systemSlash);
+        buffer.append(slash);
         buffer.append(user);
+        buffer.append(slash);
       }
-    } else {
-      buffer.append(c);
+    } else if (c == slash) {
+      scanner.next();
+      buffer.append(slash);
+      absolutePath = true;
     }
-    List<String> segments = new ArrayList<String>();
+    if (absolutePath) {
+      segmentStart = -1;
+    }
     while (scanner.hasNext()) {
-      String segment = scanner.readUntil(systemSlash, true);
+      String segment = scanner.readUntil(slash, true);
       int segmentLength = segment.length();
       if (PATH_SEGMENT_PARENT.equals(segment)) {
-        if (!segments.isEmpty()) {
+        int size = segments.size();
+        if (size == segmentStart) {
+          segmentStart++;
+          segments.add(segment);
+        } else if (size > 0) {
           segments.remove(segments.size() - 1);
         }
       } else if ((segmentLength > 0) && !(PATH_SEGMENT_CURRENT.equals(segment))) {
@@ -291,18 +381,22 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
         segments.add(segment);
       }
     }
+    boolean appendSlash = false;
     for (String segment : segments) {
       if (appendSlash) {
-        buffer.append(systemSlash);
+        buffer.append(slash);
       } else {
         appendSlash = true;
       }
       buffer.append(segment);
     }
-    if (chars[chars.length - 1] == systemSlash) {
-      char last = buffer.charAt(buffer.length() - 1);
-      if (last != systemSlash) {
-        buffer.append(systemSlash);
+    if (path.endsWith(Character.toString(slash))) {
+      int index = buffer.length() - 1;
+      if (index > 0) {
+        char last = buffer.charAt(index);
+        if (last != slash) {
+          buffer.append(slash);
+        }
       }
     }
     return buffer.toString();

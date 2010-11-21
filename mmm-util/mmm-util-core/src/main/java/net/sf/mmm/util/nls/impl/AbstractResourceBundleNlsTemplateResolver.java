@@ -6,6 +6,7 @@ package net.sf.mmm.util.nls.impl;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
+import net.sf.mmm.util.nls.base.NlsTemplateImpl;
 
 /**
  * This is an abstract base implementation of the
@@ -62,7 +63,7 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
     String key = resourceBundle.getKey(internationalizedMessage);
     if (key != null) {
       String name = resourceBundle.getClass().getName();
-      return new NlsTemplateImpl(name, key, getNlsDependencies());
+      return new NlsTemplateImpl(name, key);
     }
     return null;
   }

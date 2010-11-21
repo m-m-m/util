@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 
 import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.impl.DefaultCliParserBuilder;
+import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.AppendableWriter;
@@ -43,9 +44,12 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /**
    * The {@link #run(CliModeObject) exit-code} if an unexpected
-   * {@link Exception error} ocurred.
+   * {@link Exception error} occurred.
    */
   protected static final int EXIT_CODE_UNEXPECTED = -1;
+
+  /** @see #getOutputSettings() */
+  private final CliOutputSettings outputSettings;
 
   /** @see #getStandardOutput() */
   private PrintWriter standardOutput;
@@ -53,8 +57,11 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   /** @see #getStandardError() */
   private PrintWriter standardError;
 
-  /** @see #getOutputSettings() */
-  private final CliOutputSettings outputSettings;
+  /** @see #getParserBuilder() */
+  private CliParserBuilder parserBuilder;
+
+  /** @see #getStreamUtil() */
+  private StreamUtil streamUtil;
 
   /** Option to show the {@link #printHelp(CliParser) usage}. */
   @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //
@@ -94,11 +101,11 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    */
   protected int handleError(Exception exception, CliParser parser) {
 
-    // TODO: NLS
     int exitCode;
     AppendableWriter writer = new AppendableWriter(this.standardError);
     PrintWriter printStream = new PrintWriter(writer);
     if (exception instanceof CliException) {
+      // TODO: NLS
       printStream.println("Error: " + exception.getMessage());
       printStream.println();
       printStream.flush();
@@ -114,17 +121,44 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
+   * This method gets the {@link IocContainer} used to manage components with
+   * their implementation. It should be created and initialized on the first
+   * call of this method.<br/>
+   * This default implementation simply returns <code>null</code> to avoid
+   * dependencies on a {@link IocContainer} implementation. Override this method
+   * to use proper component management.
+   * 
+   * @see net.sf.mmm.util.component.impl.SpringContainer
+   * 
+   * @return the {@link IocContainer}.
+   */
+  protected IocContainer getIocContainer() {
+
+    return null;
+  }
+
+  /**
    * This method gets the {@link CliParserBuilder} used to
    * {@link CliParserBuilder#build(Object) build} the {@link CliParser}.<br>
-   * Override to extend with custom functionality.
+   * To extend with custom functionality you should use an
+   * {@link #getIocContainer() IoC container} in advance to overriding this
+   * method.
    * 
    * @return the {@link CliParserBuilder}.
    */
   protected CliParserBuilder getParserBuilder() {
 
-    DefaultCliParserBuilder parserBuilder = new DefaultCliParserBuilder();
-    parserBuilder.initialize();
-    return parserBuilder;
+    if (this.parserBuilder == null) {
+      IocContainer container = getIocContainer();
+      if (container == null) {
+        DefaultCliParserBuilder impl = new DefaultCliParserBuilder();
+        impl.initialize();
+        this.parserBuilder = impl;
+      } else {
+        this.parserBuilder = container.getComponent(CliParserBuilder.class);
+      }
+    }
+    return this.parserBuilder;
   }
 
   /**
@@ -132,9 +166,17 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    * 
    * @return the {@link StreamUtil} to use.
    */
-  public StreamUtil getStreamUtil() {
+  protected StreamUtil getStreamUtil() {
 
-    return StreamUtilImpl.getInstance();
+    if (this.streamUtil == null) {
+      IocContainer container = getIocContainer();
+      if (container == null) {
+        this.streamUtil = StreamUtilImpl.getInstance();
+      } else {
+        this.streamUtil = container.getComponent(StreamUtil.class);
+      }
+    }
+    return this.streamUtil;
   }
 
   /**
@@ -224,8 +266,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    */
   public int run(String... args) {
 
-    CliParserBuilder parserBuilder = getParserBuilder();
-    CliParser parser = parserBuilder.build(this);
+    CliParser parser = getParserBuilder().build(this);
     try {
       CliModeObject mode = parser.parseParameters(args);
       if (this.help) {

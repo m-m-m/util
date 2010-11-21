@@ -37,9 +37,9 @@ public class SystemInformationImpl implements SystemInformation {
   public SystemInformationImpl() {
 
     super();
-    this.systemName = System.getProperty(SystemUtil.SYSTEM_PROPERTY_OS_NAME);
-    this.systemVersion = System.getProperty(SystemUtil.SYSTEM_PROPERTY_OS_VERSION);
-    this.systemArchitecture = System.getProperty(SystemUtil.SYSTEM_PROPERTY_OS_ARCHITECTURE);
+    this.systemName = System.getProperty(SystemUtil.PROPERTY_OS_NAME);
+    this.systemVersion = System.getProperty(SystemUtil.PROPERTY_OS_VERSION);
+    this.systemArchitecture = System.getProperty(SystemUtil.PROPERTY_OS_ARCHITECTURE);
     this.systemType = detectSystemType(this.systemName, true);
     this.limitedDevice = detectLimitedDevice(this.systemName, this.systemArchitecture, true);
   }
@@ -142,7 +142,7 @@ public class SystemInformationImpl implements SystemInformation {
       return true;
     }
     if (currentSystem) {
-      String vmName = System.getProperty(SystemUtil.SYSTEM_PROPERTY_JAVA_VM_NAME).toLowerCase(
+      String vmName = System.getProperty(SystemUtil.PROPERTY_JAVA_VM_NAME).toLowerCase(
           Locale.US);
       if (vmName.contains("dalvik")) {
         return true;

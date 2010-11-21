@@ -116,6 +116,14 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
+  public void printStackTrace(Locale locale, Appendable buffer) {
+
+    printStackTrace(this, locale, null, buffer);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     printStackTrace(this, locale, resolver, buffer);

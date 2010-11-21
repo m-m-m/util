@@ -94,7 +94,7 @@ public interface SystemInformation {
    * <li>OS/390</li>
    * </ul>
    * 
-   * @see SystemUtil#SYSTEM_PROPERTY_OS_NAME
+   * @see SystemUtil#PROPERTY_OS_NAME
    * 
    * @return the OS name.
    */
@@ -119,7 +119,7 @@ public interface SystemInformation {
    * <li>PA-RISC</li>
    * </ul>
    * 
-   * @see SystemUtil#SYSTEM_PROPERTY_OS_NAME
+   * @see SystemUtil#PROPERTY_OS_NAME
    * 
    * @return the OS name.
    */
@@ -129,7 +129,7 @@ public interface SystemInformation {
    * This method gets the version of the operating system running this java
    * virtual machine in lower-case.
    * 
-   * @see SystemUtil#SYSTEM_PROPERTY_OS_VERSION
+   * @see SystemUtil#PROPERTY_OS_VERSION
    * 
    * @return the OS name.
    */

@@ -92,6 +92,17 @@ public interface NlsThrowable extends NlsObject {
    * This method prints the stack trace with localized exception message(s).
    * 
    * @param locale is the locale to translate to.
+   * @param buffer is where to write the stack trace to.
+   * @throws IllegalStateException if the given <code>buffer</code> produced an
+   *         {@link java.io.IOException}.
+   * @since 2.0.0
+   */
+  void printStackTrace(Locale locale, Appendable buffer) throws IllegalStateException;
+
+  /**
+   * This method prints the stack trace with localized exception message(s).
+   * 
+   * @param locale is the locale to translate to.
    * @param resolver translates the original message.
    * @param buffer is where to write the stack trace to.
    * @throws IllegalStateException if the given <code>buffer</code> produced an

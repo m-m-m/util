@@ -17,11 +17,10 @@ import java.util.TimeZone;
 
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
-import net.sf.mmm.util.nls.base.NlsDependencies;
-import net.sf.mmm.util.nls.impl.FormattedNlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceNoElseConditionException;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceOnlyElseConditionException;
@@ -74,7 +73,7 @@ public class NlsMessageTest {
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
         if (internationalizedMessage.equals(msg)) {
-          return new GermanTemplate(msgDe, getNlsDependencies());
+          return new GermanTemplate(msgDe);
         }
         return null;
       }
@@ -111,11 +110,11 @@ public class NlsMessageTest {
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
         if (internationalizedMessage.equals(integer)) {
-          return new GermanTemplate(integerDe, getNlsDependencies());
+          return new GermanTemplate(integerDe);
         } else if (internationalizedMessage.equals(real)) {
-          return new GermanTemplate(realDe, getNlsDependencies());
+          return new GermanTemplate(realDe);
         } else if (internationalizedMessage.equals(err)) {
-          return new GermanTemplate(errDe, getNlsDependencies());
+          return new GermanTemplate(errDe);
         }
         return null;
       }
@@ -376,13 +375,13 @@ public class NlsMessageTest {
   /**
    * A very stupid and insane template implementation for testing.
    */
-  private static class GermanTemplate extends FormattedNlsTemplate {
+  private static class GermanTemplate extends AbstractNlsTemplate {
 
     private final String msgDe;
 
-    public GermanTemplate(String msgDe, NlsDependencies nlsDependencies) {
+    public GermanTemplate(String msgDe) {
 
-      super(nlsDependencies);
+      super();
       this.msgDe = msgDe;
     }
 

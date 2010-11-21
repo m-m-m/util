@@ -265,6 +265,8 @@ public interface NlsMessageFactory {
    * This method creates a new instance of {@link NlsMessage} from the given
    * arguments.
    * 
+   * @see #create(NlsTemplate, Map)
+   * 
    * @param template is the {@link NlsTemplate} for the
    *        {@link NlsMessage#getInternationalizedMessage() raw message}.
    * @return the new {@link NlsMessage} instance.
