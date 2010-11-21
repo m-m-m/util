@@ -42,6 +42,7 @@ public class GenericSearchServlet extends AbstractSearchServlet {
 
     // will be called by init-method, so no concurrency problem...
     if (this.container == null) {
+      getLogger().info("Starting spring...");
       String componentPackages = getServletConfig().getInitParameter(PARAM_COMPONENT_PACKAGES);
       if (componentPackages == null) {
         this.container = new SpringContainer();
@@ -49,6 +50,7 @@ public class GenericSearchServlet extends AbstractSearchServlet {
         String[] packages = componentPackages.split(",");
         this.container = new SpringContainer(packages);
       }
+      getLogger().info("Spring started...");
     }
     return this.container;
   }
