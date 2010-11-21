@@ -31,6 +31,16 @@ public class RuntimeIoException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
+   * @param mode is the {@link IoMode}.
+   */
+  public RuntimeIoException(IoMode mode) {
+
+    super(getMessage(mode));
+  }
+
+  /**
+   * The constructor.
+   * 
    * @param nested is the {@link #getCause() cause} of this exception. This
    *        should be an {@link java.io.IOException}. However it may also be an
    *        {@link java.io.IOError}.

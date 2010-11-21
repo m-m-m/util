@@ -142,6 +142,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.io.api.RuntimeIoException */
   public static final String ERR_IO_COPY = "An unexpetected error has occured while copying data!";
 
+  /** @see net.sf.mmm.util.io.api.StreamClosedException */
+  public static final String ERR_STREAM_CLOSED = "The stream is already closed!";
+
   /** @see net.sf.mmm.util.file.api.FileAlreadyExistsException */
   public static final String ERR_FILE_ALREADY_EXISTS = "The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" already exists!";
 
