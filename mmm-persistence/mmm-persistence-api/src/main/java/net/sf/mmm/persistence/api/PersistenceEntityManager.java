@@ -3,16 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
-import net.sf.mmm.persistence.api.search.PersistenceSearcher;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the interface for a manager of a {@link #getEntityClass() specific
  * type} of {@link PersistenceEntity}. In other contexts this is often called a
  * DAO (Data Access Object). It is responsible for {@link #load(Object) loading}
- * , {@link #save(PersistenceEntity) saving} and {@link PersistenceSearcher
- * searching} all {@link PersistenceEntity entities} of the
- * {@link #getEntityClass() according type}.<br>
+ * , {@link #save(PersistenceEntity) saving} and
+ * {@link net.sf.mmm.persistence.api.search.PersistenceSearcher searching} all
+ * {@link PersistenceEntity entities} of the {@link #getEntityClass() according
+ * type}.<br>
  * For each (non-abstract) implementation of {@link PersistenceEntity} there
  * should exists one instance of this interface. Typically when you create a
  * custom {@link PersistenceEntity entity} you will also create a custom

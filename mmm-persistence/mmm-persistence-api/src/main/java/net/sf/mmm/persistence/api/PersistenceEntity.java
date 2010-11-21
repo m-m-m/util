@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
-import java.math.BigInteger;
 
 /**
  * This is the interface for a persistent entity, which is a object that is
@@ -41,7 +40,7 @@ public interface PersistenceEntity {
    * <ul>
    * <li>{@link Long}</li>
    * <li>{@link String}</li>
-   * <li>{@link BigInteger}</li>
+   * <li>{@link java.math.BigInteger}</li>
    * <li>{@link Integer}</li>
    * </ul>
    * However if your object is identified by something else or your ID has a
