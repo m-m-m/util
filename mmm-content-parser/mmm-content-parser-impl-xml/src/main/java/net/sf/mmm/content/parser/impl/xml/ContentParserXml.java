@@ -156,11 +156,15 @@ public class ContentParserXml extends AbstractContentParser {
     ParserState parserState = null;
     String line = bufferedReader.readLine();
     while (line != null) {
+      int len = textBuffer.length();
+      line = line.trim();
       parserState = this.xmlUtil.extractPlainText(line, textBuffer, parserState);
       if (textBuffer.length() > maxChars) {
         break;
       }
-      textBuffer.append('\n');
+      if (textBuffer.length() > len) {
+        textBuffer.append('\n');
+      }
       line = bufferedReader.readLine();
     }
   }
