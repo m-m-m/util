@@ -164,18 +164,23 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
     int capacity = maxBufferSize;
     if (filesize > 0) {
       if (filesize < maxBufferSize) {
-        capacity = (int) filesize + 2;
+        capacity = (int) filesize;
       }
     } else {
-      int defaultCapacity = 2048;
+      int defaultCapacity = 128;
       if (capacity > defaultCapacity) {
-        capacity = 2048;
+        capacity = defaultCapacity;
       }
     }
-    StringBuilder textBuffer = new StringBuilder(capacity / 2);
+    int charCapacity = capacity / 2;
+    StringBuilder textBuffer = new StringBuilder(charCapacity);
     Reader reader = getEncodingUtil().createUtfDetectionReader(inputStream, options.getEncoding());
     BufferedReader bufferedReader = new BufferedReader(reader);
     parse(bufferedReader, options, context, textBuffer);
+    if ((filesize > 0) && (textBuffer.length() < charCapacity)) {
+      getLogger().debug(
+          "Wrong capacity: " + charCapacity + " text-length only: " + textBuffer.length());
+    }
     context.setVariable(VARIABLE_NAME_TEXT, textBuffer.toString());
   }
 

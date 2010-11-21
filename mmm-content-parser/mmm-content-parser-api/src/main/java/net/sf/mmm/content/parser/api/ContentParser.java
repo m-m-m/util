@@ -57,6 +57,14 @@ public interface ContentParser {
   String VARIABLE_NAME_CREATOR = "creator";
 
   /**
+   * This is the name of the {@link GenericContext#getVariable(String, Class)
+   * variable} with the <code>language</code> of the content from the
+   * {@link #parse(InputStream, long) parsed} {@link GenericContext}.<br>
+   * It has the type {@link String} and is optional (may be <code>null</code>).
+   */
+  String VARIABLE_NAME_LANGUAGE = "language";
+
+  /**
    * This method parses the document given as <code>inputStream</code> and
    * extracts {@link #VARIABLE_NAME_TEXT text} and metadata returned as
    * {@link GenericContext}.
