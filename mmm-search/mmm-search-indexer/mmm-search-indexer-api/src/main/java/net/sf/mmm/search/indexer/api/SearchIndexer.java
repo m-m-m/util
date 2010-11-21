@@ -72,18 +72,18 @@ public interface SearchIndexer extends Flushable, Closeable {
    * 
    * @param entryId is the
    *        {@link net.sf.mmm.search.engine.api.SearchHit#getId() ID} of the
-   *        entry to remove.
+   *        entry to remove (NOT <code>null</code>).
    * @return <code>true</code> if the entry existed and has been removed from
    *         the index, <code>false</code> if NO entry exists for the given
    *         <code>id</code>.
    * @throws SearchException if the operation failed.
    */
-  boolean removeById(String entryId) throws SearchException;
+  boolean removeById(Long entryId) throws SearchException;
 
   /**
    * This method removes an {@link #add(MutableSearchEntry) existing} entry
    * identified by the given <code>hit</code>. In most cases this method will
-   * delegate to {@link #removeById(String)}. However the implementation can
+   * delegate to {@link #removeById(Long)}. However the implementation can
    * decide what is the best way to do it.
    * 
    * @param hit is the {@link SearchHit} to remove.
@@ -148,20 +148,20 @@ public interface SearchIndexer extends Flushable, Closeable {
    * Please use this method with care.
    * 
    * @param field is the name of the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) field}
-   *        where the <code>value</code> is expected to occur. Therefore the
-   *        field should NOT to be of the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
+   *        field} where the <code>value</code> is expected to occur. Therefore
+   *        the field should NOT to be of the
    *        {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getType()
    *        type} {@link net.sf.mmm.search.api.config.SearchFieldType#TEXT}.
    * @param value is the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) value} of
-   *        the field.
+   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
+   *        value} of the field.
    * @return the number of entries that have been removed or <code>-1</code> if
    *         the number is unknown because this is not supported by the
    *         implementation.
    * @throws SearchException if the operation failed.
    */
-  int remove(String field, String value) throws SearchException;
+  int remove(String field, Object value) throws SearchException;
 
   /**
    * This method flushes the search index what ensures that all changes are

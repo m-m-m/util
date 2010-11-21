@@ -99,7 +99,7 @@ public interface SearchEngine {
    *        match.
    * @return the number of matching {@link SearchEntry}s.
    */
-  int count(String field, String value);
+  long count(String field, String value);
 
   /**
    * This method gets the total number of {@link SearchEntry}s in the
@@ -107,7 +107,7 @@ public interface SearchEngine {
    * 
    * @return the total number of {@link SearchEntry}s.
    */
-  int getTotalEntryCount();
+  long getTotalEntryCount();
 
   /**
    * This method gets a {@link SearchEntry entry} by its technical

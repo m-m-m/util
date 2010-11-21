@@ -36,9 +36,10 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
   public static final String ERR_PROPERTY_VALUE_INVALID = "The value \"{value}\" "
       + "is invalid for property \"{property}\"!";
 
-  /**
-   * @see net.sf.mmm.search.base.SearchParseException
-   */
-  public static final String ERR_PARSE = "Failed to parse the query \"{query}\"!";
+  /** @see net.sf.mmm.search.engine.base.SearchQueryParseException */
+  public static final String ERR_QUERY_PARSE = "Failed to parse the query!";
+
+  /** @see net.sf.mmm.search.engine.base.SearchQueryParseException */
+  public static final String ERR_QUERY_PARSE_WITH_QUERY = "Failed to parse the query \"{query}\"!";
 
 }

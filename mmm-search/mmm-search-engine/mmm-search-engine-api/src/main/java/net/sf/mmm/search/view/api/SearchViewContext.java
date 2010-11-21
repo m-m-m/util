@@ -5,6 +5,7 @@ package net.sf.mmm.search.view.api;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.SearchResultPage;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is the major interface to access all relevant attributes and components
@@ -39,7 +40,7 @@ public interface SearchViewContext {
    * 
    * @return the {@link Exception} or <code>null</code> in case of success.
    */
-  Exception getException();
+  NlsRuntimeException getException();
 
   /**
    * This method gets the {@link SearchResultPage}.

@@ -2,15 +2,16 @@
  $Id$
  Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  http://www.apache.org/licenses/LICENSE-2.0
- --%><%@ page import="java.util.Iterator"
-%><%@ page import="net.sf.mmm.util.xml.api.XmlUtil"
-%><%@ page import="net.sf.mmm.search.api.SearchEntry"
-%><%@ page import="net.sf.mmm.search.api.config.SearchSource"
-%><%@ page import="net.sf.mmm.search.api.config.SearchFieldConfiguration"
-%><%@ page import="net.sf.mmm.search.engine.api.config.SearchEngineConfiguration"
-%><%@ page import="net.sf.mmm.search.view.api.SearchViewLogic"
-%><%@ page import="net.sf.mmm.search.view.api.SearchViewContextAccess"
-%><%@ page import="net.sf.mmm.search.view.api.SearchViewContext"%><%
+ --%><%@page import="java.util.Iterator"
+%><%@page import="net.sf.mmm.util.nls.api.NlsRuntimeException"
+%><%@page import="net.sf.mmm.util.xml.api.XmlUtil"
+%><%@page import="net.sf.mmm.search.api.SearchEntry"
+%><%@page import="net.sf.mmm.search.api.config.SearchSource"
+%><%@page import="net.sf.mmm.search.api.config.SearchFieldConfiguration"
+%><%@page import="net.sf.mmm.search.engine.api.config.SearchEngineConfiguration"
+%><%@page import="net.sf.mmm.search.view.api.SearchViewLogic"
+%><%@page import="net.sf.mmm.search.view.api.SearchViewContextAccess"
+%><%@page import="net.sf.mmm.search.view.api.SearchViewContext"%><%
   // get parameters as attributes (already validated and prepared by the servlet)
   SearchViewContext searchContext = SearchViewContextAccess.getContext(request);
   SearchViewLogic logic = searchContext.getLogic();
@@ -38,7 +39,7 @@ An error has occurred while getting the details of your search-result.
 <div id="hit">
 Error while getting the details:<br/>
 <br/><%
-    Exception error = searchContext.getException();
+    NlsRuntimeException error = searchContext.getException();
     if (error == null) {
 %>
 The parameter for the search-result is missing. Maybe this page was not called

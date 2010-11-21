@@ -4,7 +4,8 @@
 package net.sf.mmm.search.engine.base;
 
 import net.sf.mmm.search.engine.api.SearchQueryErrorHandler;
-import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsObject;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is an implementation of {@link SearchQueryErrorHandler} that throws an
@@ -26,19 +27,13 @@ public class SearchQueryErrorHandlerFail implements SearchQueryErrorHandler {
   /**
    * {@inheritDoc}
    */
-  public void handleException(String query, int start, int end, RuntimeException exception)
+  public void handleError(String query, int start, int end, NlsObject message)
       throws RuntimeException {
 
-    throw exception;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void handleErrorMessage(String query, int start, int end, NlsMessage message)
-      throws RuntimeException {
-
-    throw new SearchQueryParserException(message);
+    if (message instanceof NlsRuntimeException) {
+      throw (NlsRuntimeException) message;
+    }
+    throw new SearchQueryParseException(message.toNlsMessage());
   }
 
 }

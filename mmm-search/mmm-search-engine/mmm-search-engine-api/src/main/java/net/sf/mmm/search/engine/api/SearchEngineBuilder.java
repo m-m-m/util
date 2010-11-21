@@ -20,6 +20,8 @@ public interface SearchEngineBuilder {
    * This method creates a {@link ManagedSearchEngine} for the given
    * <code>configuration</code>.
    * 
+   * @see net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader
+   * 
    * @param configurationHolder is the {@link SearchEngineConfigurationHolder}.
    * @return the created {@link ManagedSearchEngine}.
    */

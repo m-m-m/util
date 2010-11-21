@@ -19,6 +19,11 @@ public interface SearchIndexerConfigurationLoader extends SearchConfigurationLoa
   /**
    * {@inheritDoc}
    */
+  SearchIndexerConfigurationHolder loadConfiguration();
+
+  /**
+   * {@inheritDoc}
+   */
   SearchIndexerConfigurationHolder loadConfiguration(String locationUrl);
 
   /**

@@ -5,10 +5,7 @@ package net.sf.mmm.search.engine.impl.lucene;
 
 import java.util.regex.Pattern;
 
-import net.sf.mmm.search.api.SearchEntry;
-import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.api.config.SearchFieldConfiguration;
-import net.sf.mmm.search.base.SearchParseException;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilder;
@@ -16,8 +13,6 @@ import net.sf.mmm.util.lang.api.StringUtil;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
@@ -127,6 +122,16 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
+   * This method gets the {@link Version}.
+   * 
+   * @return the {@link Version}.
+   */
+  protected Version getLuceneVersion() {
+
+    return this.luceneVersion;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -214,22 +219,23 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
     return new LuceneSearchQuery(luceneQuery);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public SearchQuery parseNativeQuery(String query) throws SearchException {
-
-    try {
-      // according to javadoc the parser is NOT thread safe so we create an
-      // instance per use...
-      QueryParser parser = new QueryParser(this.luceneVersion, SearchEntry.FIELD_TEXT,
-          this.analyzer);
-      Query luceneQuery = parser.parse(query);
-      return new LuceneSearchQuery(luceneQuery);
-    } catch (ParseException e) {
-      throw new SearchParseException(e, query);
-    }
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public SearchQuery parseNativeQuery(String query) throws SearchException {
+  //
+  // try {
+  // // according to javadoc the parser is NOT thread safe so we create an
+  // // instance per use...
+  // QueryParser parser = new QueryParser(this.luceneVersion,
+  // SearchEntry.FIELD_TEXT,
+  // this.analyzer);
+  // Query luceneQuery = parser.parse(query);
+  // return new LuceneSearchQuery(luceneQuery);
+  // } catch (ParseException e) {
+  // throw new SearchQueryParseException(e, query);
+  // }
+  // }
 
   /**
    * {@inheritDoc}

@@ -6,6 +6,7 @@ package net.sf.mmm.search.engine.base.config;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -29,6 +30,14 @@ public class SearchEngineConfigurationLoaderImpl extends
   public SearchEngineConfigurationLoaderImpl() {
 
     super(SearchEngineConfigurationBean.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchEngineConfigurationHolder loadConfiguration() {
+
+    return loadConfiguration(SearchConfiguration.DEFAULT_CONFIGURATION_URL);
   }
 
   /**

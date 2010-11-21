@@ -19,15 +19,16 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface SearchEntry extends AttributeReadId<String> {
+public interface SearchEntry extends AttributeReadId<Long> {
 
   /**
    * The name of the "id" field. The UID (Unique Identifier) is a field that
    * identifies the content uniquely.<br/>
    * It is strongly suggested for the implementation but NOT strictly guaranteed
    * that the ID remains the same if a {@link SearchEntry} is updated in the
-   * index. The format of the ID is unspecified and end-users should never make
-   * any assumptions or interpretation of its value.
+   * index. The ID is a {@link Long} value. End-users should never make any
+   * assumptions or interpretation of its value as this is totally
+   * implementation specific.
    * 
    * @see #getId()
    */
@@ -197,7 +198,7 @@ public interface SearchEntry extends AttributeReadId<String> {
    * 
    * @return the UID of this entry or <code>null</code> if NOT available.
    */
-  String getCustomId();
+  Object getCustomId();
 
   /**
    * This method gets the value of the {@link #FIELD_TITLE title field}.
@@ -261,6 +262,6 @@ public interface SearchEntry extends AttributeReadId<String> {
    * @return the ID of this entry or <code>null</code> if the entry is transient
    *         and has not yet been added to the search-index (made persistent).
    */
-  String getId();
+  Long getId();
 
 }

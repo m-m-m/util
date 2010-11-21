@@ -64,12 +64,11 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the {@link IocContainer} used to manage components with
-   * their implementation. The {@link IocContainer} will be created and
-   * initialized on the first call of this method.
+   * An {@link IocContainer} is required. Override this method to provide it.
    * 
-   * @return the {@link IocContainer}.
+   * {@inheritDoc}
    */
+  @Override
   protected abstract IocContainer getIocContainer();
 
   /**

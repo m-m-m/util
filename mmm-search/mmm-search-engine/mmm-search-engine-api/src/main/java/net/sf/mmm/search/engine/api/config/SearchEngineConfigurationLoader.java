@@ -17,6 +17,11 @@ public interface SearchEngineConfigurationLoader extends SearchConfigurationLoad
   /**
    * {@inheritDoc}
    */
+  SearchEngineConfigurationHolder loadConfiguration();
+
+  /**
+   * {@inheritDoc}
+   */
   SearchEngineConfigurationHolder loadConfiguration(String locationUrl);
 
 }

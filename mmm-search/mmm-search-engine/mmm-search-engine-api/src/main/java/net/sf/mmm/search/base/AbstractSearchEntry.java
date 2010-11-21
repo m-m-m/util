@@ -41,17 +41,17 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
-  public String getId() {
+  public Long getId() {
 
-    return getFieldAsString(FIELD_ID);
+    return getField(FIELD_ID, Long.class);
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getCustomId() {
+  public Object getCustomId() {
 
-    return getFieldAsString(FIELD_CUSTOM_ID);
+    return getField(FIELD_CUSTOM_ID);
   }
 
   /**
@@ -169,7 +169,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
         sb.append(title);
       }
     }
-    String cid = getCustomId();
+    Object cid = getCustomId();
     if (cid != null) {
       sb.append('[');
       sb.append(cid);

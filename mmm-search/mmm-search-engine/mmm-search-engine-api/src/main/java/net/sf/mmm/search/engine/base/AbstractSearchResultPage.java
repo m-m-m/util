@@ -3,6 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.engine.base;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 
 /**
@@ -135,6 +139,61 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
       result = this.pageCount - 1;
     }
     return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Iterator<SearchHit> iterator() {
+
+    return new HitIterator();
+  }
+
+  /**
+   * This inner class is used to iterate the hits.
+   */
+  private class HitIterator implements Iterator<SearchHit> {
+
+    /** The current hit index. */
+    private int hitIndex;
+
+    /**
+     * The constructor.
+     */
+    public HitIterator() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean hasNext() {
+
+      return (this.hitIndex < getPageHitCount());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SearchHit next() {
+
+      if (!hasNext()) {
+        throw new NoSuchElementException();
+      }
+      SearchHit result = getPageHit(this.hitIndex);
+      this.hitIndex++;
+      return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void remove() {
+
+      throw new UnsupportedOperationException();
+    }
+
   }
 
 }

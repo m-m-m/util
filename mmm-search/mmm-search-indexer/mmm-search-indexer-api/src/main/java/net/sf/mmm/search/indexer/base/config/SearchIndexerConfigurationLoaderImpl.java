@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.SearchException;
+import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
@@ -39,6 +40,14 @@ public class SearchIndexerConfigurationLoaderImpl extends
   public SearchIndexerConfigurationLoaderImpl() {
 
     super(SearchIndexerConfigurationBean.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchIndexerConfigurationHolder loadConfiguration() {
+
+    return loadConfiguration(SearchConfiguration.DEFAULT_CONFIGURATION_URL);
   }
 
   /**

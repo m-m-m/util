@@ -10,6 +10,7 @@ import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.view.api.SearchViewContext;
 import net.sf.mmm.search.view.api.SearchViewLogic;
 import net.sf.mmm.search.view.api.SearchViewRequestParameters;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This class contains represents the context of a search-request.
@@ -31,13 +32,13 @@ public class SearchViewContextBean implements SearchViewContext {
   private SearchEntry entry;
 
   /** @see #getException() */
-  private Exception exception;
+  private NlsRuntimeException exception;
 
   /**
    * The constructor.<br>
    * It will fill all parameters except for
    * {@link #setResultPage(SearchResultPage) result-page} and
-   * {@link #setException(Exception) exception}.<br>
+   * {@link #setException(NlsRuntimeException) exception}.<br>
    * ATTENTION: This constructor will automatically
    * {@link ServletRequest#setAttribute(String, Object) set}
    * {@link SearchViewContextBean itself} (this) as attribute of the given
@@ -105,7 +106,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
-  public Exception getException() {
+  public NlsRuntimeException getException() {
 
     return this.exception;
   }
@@ -113,7 +114,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * @param newException the exception to set
    */
-  public void setException(Exception newException) {
+  public void setException(NlsRuntimeException newException) {
 
     this.exception = newException;
   }

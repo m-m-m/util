@@ -2,9 +2,24 @@
 <!-- $Id$ -->
 <search>
   <!-- core configuration of the search-engine -->
-  <search-index location="src/test/resources/net/sf/mmm/search/engine/impl/lucene/index"/>
+  <search-index location="../../mmm-search-engine/mmm-search-engine-impl-lucene/src/test/resources/net/sf/mmm/search/engine/impl/lucene/index"/>
   <!-- configuration of sources for view (webapp) -->
   <sources>
-    <source id="mmm" name="Multi-Media-Manager"/>
+    <source id="mmm-util-core" name="Multi-Media-Manager util-core">
+      <locations>
+        <location absolute-uris="false" location-uri="../../../mmm-util/mmm-util-core/src/main/java" filter="default" />
+      </locations>
+    </source>
   </sources>
+  <filters>
+    <filter-chain default-result="true" id="default">
+      <rule include="false" pattern="/\.svn$"/>
+      <rule include="false" pattern="/\.git$"/>
+      <rule include="false" pattern="/\.bzr$"/>
+      <rule include="false" pattern="/\.hg$"/>
+    </filter-chain>
+  </filters>
+  <fields>
+    <field name="text" mode="searchable"/>
+  </fields>  
 </search>

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PreDestroy;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.search.indexer.api.EntryUpdateVisitor;
 import net.sf.mmm.search.indexer.api.ResourceSearchIndexer;
@@ -47,6 +49,8 @@ import org.codehaus.plexus.embed.Embedder;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named
 public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStrategy {
 
   /** @see #getScmManager() */

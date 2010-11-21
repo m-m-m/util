@@ -15,6 +15,7 @@ import net.sf.mmm.search.engine.api.SearchQueryBuilderOptions;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
@@ -175,70 +176,64 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
         parser.setCurrentIndex(start);
       }
     }
-    if (parser.hasNext()) {
-      c = parser.peek();
-      if ((c == '"') || (c == '\'')) {
-        // phrase query
-        parser.next();
-        String phrase = parser.readUntil(c, true);
-        try {
+    try {
+      if (parser.hasNext()) {
+        c = parser.peek();
+        if ((c == '"') || (c == '\'')) {
+          // phrase query
+          parser.next();
+          String phrase = parser.readUntil(c, true);
           return createPhraseQuery(fieldName, phrase);
-        } catch (RuntimeException e) {
-          options.getErrorHandler().handleException(parser.getOriginalString(), start,
-              parser.getCurrentIndex(), e);
-        }
-      } else if ((c == '[') || (c == '{')) {
-        parser.next();
-        // range query
-        // [123 - 789]
-        // [mona-lisa TO peter-pan}
-        // {0.24618 , 0.999}
-        // [2010-09-02T23:59:59Z - 2010-09-04T22:35:00Z]
-        boolean minimumInclusive = (c == '[');
-        String minimum = parser.readUntil(' ', false);
-        if (minimum != null) {
-          parser.skipWhile(' ');
-          String to = parser.readUntil(' ', false);
-          if (to != null) {
+        } else if ((c == '[') || (c == '{')) {
+          parser.next();
+          // range query
+          // [123 - 789]
+          // [mona-lisa TO peter-pan}
+          // {0.24618 , 0.999}
+          // [2010-09-02T23:59:59Z - 2010-09-04T22:35:00Z]
+          boolean minimumInclusive = (c == '[');
+          String minimum = parser.readUntil(' ', false);
+          if (minimum != null) {
             parser.skipWhile(' ');
-            if (RANGE_QUERY_SEPARATOR_SET.contains(to)) {
-              String maximum = parser.readWhile(CHAR_FILTER_ACCEPT_UNTIL_END_OF_RANGE);
-              if (parser.hasNext()) {
-                c = parser.next();
-                boolean maximumInclusive = (c == ']');
-                try {
+            String to = parser.readUntil(' ', false);
+            if (to != null) {
+              parser.skipWhile(' ');
+              if (RANGE_QUERY_SEPARATOR_SET.contains(to)) {
+                String maximum = parser.readWhile(CHAR_FILTER_ACCEPT_UNTIL_END_OF_RANGE);
+                if (parser.hasNext()) {
+                  c = parser.next();
+                  boolean maximumInclusive = (c == ']');
                   return createRangeQuery(fieldName, minimum, maximum, minimumInclusive,
                       maximumInclusive);
-                } catch (RuntimeException e) {
-                  options.getErrorHandler().handleException(parser.getOriginalString(), start,
-                      parser.getCurrentIndex(), e);
                 }
               }
             }
           }
+        } else if (c == '(') {
+          // sub-query
+          parser.next();
+          return parseStandardQuery(parser, options, fieldName, depth + 1);
         }
-      } else if (c == '(') {
-        // sub-query
-        parser.next();
-        return parseStandardQuery(parser, options, fieldName, depth + 1);
       }
-    }
-    while (parser.hasNext()) {
-      c = parser.next();
-      if ((c == ')') || (c == ' ') || (c == '"') || (c == '\'')) {
-        parser.stepBack();
-        break;
+      while (parser.hasNext()) {
+        c = parser.next();
+        if ((c == ')') || (c == ' ') || (c == '"') || (c == '\'')) {
+          parser.stepBack();
+          break;
+        }
       }
-    }
-    int end = parser.getCurrentIndex();
-    if (end > start) {
-      String term = parser.substring(start, end);
-      try {
+      int end = parser.getCurrentIndex();
+      if (end > start) {
+        String term = parser.substring(start, end);
         return createWordQuery(fieldName, term);
-      } catch (RuntimeException e) {
-        options.getErrorHandler().handleException(parser.getOriginalString(), start,
-            parser.getCurrentIndex(), e);
       }
+    } catch (NlsRuntimeException e) {
+      options.getErrorHandler().handleError(parser.getOriginalString(), start,
+          parser.getCurrentIndex(), e);
+    } catch (RuntimeException e) {
+      SearchQueryParseException ex = new SearchQueryParseException(e);
+      options.getErrorHandler().handleError(parser.getOriginalString(), start,
+          parser.getCurrentIndex(), ex);
     }
     return null;
   }

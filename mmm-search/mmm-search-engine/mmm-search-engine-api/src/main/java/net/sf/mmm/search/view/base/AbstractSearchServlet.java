@@ -45,6 +45,7 @@ import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
 import org.slf4j.Logger;
@@ -425,8 +426,11 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
           searchContext.setResultPage(result);
         }
       }
-    } catch (Exception e) {
+    } catch (NlsRuntimeException e) {
       searchContext.setException(e);
+      exception = true;
+    } catch (RuntimeException e) {
+      searchContext.setException(new NlsIllegalStateException(e));
       exception = true;
     }
     doDispatch(request, response, exception);
@@ -443,7 +447,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
    * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s.
    * For this view these {@link SearchEntryType}s are reduced to those types
    * that actually exist in the search-index. Then they are
-   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, int) combined} and
+   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and
    * finally sorted according to the {@link SearchEntryType#getTitle() title}.<br/>
    * This way the view can present the proper titles of the types and the search
    * can filter even on combined types.
@@ -455,7 +459,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
       SearchSourceBean view = new SearchSourceBean(source);
       String sourceId = view.getId();
       boolean add;
-      int count;
+      long count;
       if (SearchSource.ID_ANY.equals(sourceId)) {
         count = this.searchEngine.getTotalEntryCount();
         add = true;
@@ -487,7 +491,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
    * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s.
    * For this view these {@link SearchEntryType}s are reduced to those types
    * that actually exist in the search-index. Then they are
-   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, int) combined} and
+   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and
    * finally sorted according to the {@link SearchEntryType#getTitle() title}.<br/>
    * This way the view can present the proper titles of the types and the search
    * can filter even on combined types.
@@ -503,7 +507,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
       if (SearchEntryType.ID_ANY.equals(id)) {
         anyType = type;
       } else {
-        int count = this.searchEngine.count(SearchEntry.FIELD_TYPE, id);
+        long count = this.searchEngine.count(SearchEntry.FIELD_TYPE, id);
         if (count > 0) {
           String title = type.getTitle();
           SearchEntryTypeViewBean view = title2viewMap.get(title);

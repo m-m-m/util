@@ -245,7 +245,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
-  public int count(String field, String value) {
+  public long count(String field, String value) {
 
     try {
       Term term = this.fieldManager.createTerm(field, value);
@@ -258,7 +258,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
-  public int getTotalEntryCount() {
+  public long getTotalEntryCount() {
 
     try {
       return this.searcher.maxDoc();

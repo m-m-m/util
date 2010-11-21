@@ -28,7 +28,7 @@ public interface ResourceSearchIndexer {
    *        {@link ChangeType#UPDATE update} it should be
    *        {@link SearchIndexer#update(MutableSearchEntry) updated} and in case
    *        of {@link ChangeType#REMOVE remove} it should be
-   *        {@link SearchIndexer#remove(String, String) removed}. The
+   *        {@link SearchIndexer#remove(String, Object) removed}. The
    *        <code>changeType</code> can also be <code>null</code> to indicate
    *        that the <code>resource</code> was already indexed and remains
    *        untouched as it is not modified.
@@ -49,7 +49,7 @@ public interface ResourceSearchIndexer {
    *        {@link ChangeType#UPDATE update} it should be
    *        {@link SearchIndexer#update(MutableSearchEntry) updated} and in case
    *        of {@link ChangeType#REMOVE remove} it should be
-   *        {@link SearchIndexer#remove(String, String) removed}. The
+   *        {@link SearchIndexer#remove(String, Object) removed}. The
    *        <code>changeType</code> can also be <code>null</code> to indicate
    *        that the <code>resource</code> was already indexed and remains
    *        untouched as it is not modified.

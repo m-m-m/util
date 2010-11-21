@@ -112,7 +112,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
     NlsNullPointerException.checkNotNull(MutableSearchEntry.class, entry);
     this.addCounter++;
-    String id = Long.toString(this.sessionId | this.addCounter);
+    Long id = Long.valueOf(this.sessionId | this.addCounter);
     add(entry, id);
   }
 
@@ -120,26 +120,14 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * {@inheritDoc}
    */
   @Override
-  protected void add(MutableSearchEntry entry, String id) throws SearchException {
-
-    add(entry, Long.parseLong(id));
-  }
-
-  /**
-   * @see #add(MutableSearchEntry)
-   * 
-   * @param entry is the {@link MutableSearchEntry} to add.
-   * @param id is the {@link MutableSearchEntry#getId() ID} for the
-   *        <code>entry</code>.
-   */
-  protected void add(MutableSearchEntry entry, long id) {
+  protected void add(MutableSearchEntry entry, Long id) throws SearchException {
 
     LuceneMutableSearchEntry luceneEntry = (LuceneMutableSearchEntry) entry;
     try {
       Document luceneDocument = luceneEntry.getLuceneDocument();
       NumericField idField = new NumericField(SearchEntry.FIELD_ID,
           NumericUtils.PRECISION_STEP_DEFAULT, Store.YES, true);
-      idField.setLongValue(id);
+      idField.setLongValue(id.longValue());
       luceneDocument.add(idField);
       getIndexWriter().addDocument(luceneDocument);
     } catch (IOException e) {
@@ -230,12 +218,15 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
-  public int remove(String field, String value) throws SearchException {
+  public int remove(String field, Object value) throws SearchException {
 
-    if ((value == null) || (value.length() == 0)) {
-      throw new SearchPropertyValueInvalidException(field, value);
+    if (value == null) {
+      throw new SearchPropertyValueInvalidException(field, "null");
     }
     Term term = this.fieldManager.createTerm(field, value);
+    if (term.text().length() == 0) {
+      throw new SearchPropertyValueInvalidException(field, value.toString());
+    }
     return remove(term);
   }
 

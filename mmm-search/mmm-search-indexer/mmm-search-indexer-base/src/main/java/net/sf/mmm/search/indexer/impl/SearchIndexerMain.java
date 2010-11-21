@@ -54,10 +54,10 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
    * {@inheritDoc}
    */
   @Override
-  protected IocContainer getIocContainer() {
+  public IocContainer getIocContainer() {
 
     if (this.container == null) {
-      getLogger().debug("Starting spring context...");
+      getLogger().info("Starting spring context...");
       ConfigurableApplicationContext springContext;
       if (this.springConfig == null) {
         springContext = new AnnotationConfigApplicationContext(this.springPackages);
@@ -65,7 +65,7 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
         springContext = new ClassPathXmlApplicationContext(this.springConfig);
       }
       this.container = new SpringContainer(springContext);
-      getLogger().debug("Spring context started...");
+      getLogger().info("Spring context started...");
     }
     return this.container;
   }

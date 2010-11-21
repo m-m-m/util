@@ -16,6 +16,14 @@ import net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolder;
 public abstract interface SearchConfigurationLoader {
 
   /**
+   * This method reads the configuration from
+   * {@link SearchConfiguration#DEFAULT_CONFIGURATION_URL}.
+   * 
+   * @return the {@link JaxbBeanHolder}.
+   */
+  JaxbBeanHolder<? extends SearchConfiguration> loadConfiguration();
+
+  /**
    * This method reads the configuration from the given <code>location</code>.
    * The configuration data is parsed according to its format (typically XML)
    * and returned as {@link JaxbBeanHolder}.

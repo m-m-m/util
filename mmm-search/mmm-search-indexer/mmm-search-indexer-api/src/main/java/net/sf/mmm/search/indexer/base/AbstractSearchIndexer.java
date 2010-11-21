@@ -37,7 +37,7 @@ public abstract class AbstractSearchIndexer extends AbstractLoggableObject imple
    * @param id is the {@link MutableSearchEntry#getId() ID} for the
    *        <code>entry</code>.
    */
-  protected abstract void add(MutableSearchEntry entry, String id);
+  protected abstract void add(MutableSearchEntry entry, Long id);
 
   /**
    * {@inheritDoc}
@@ -46,8 +46,8 @@ public abstract class AbstractSearchIndexer extends AbstractLoggableObject imple
 
     NlsNullPointerException.checkNotNull(MutableSearchEntry.class, entry);
     int removeCount;
-    String id = null;
-    String cid = entry.getCustomId();
+    Long id = null;
+    Object cid = entry.getCustomId();
     String uri = null;
     String source = null;
     if (cid == null) {
@@ -94,8 +94,9 @@ public abstract class AbstractSearchIndexer extends AbstractLoggableObject imple
   /**
    * {@inheritDoc}
    */
-  public boolean removeById(String id) throws SearchException {
+  public boolean removeById(Long id) throws SearchException {
 
+    NlsNullPointerException.checkNotNull("id", id);
     int count = remove(SearchEntry.FIELD_ID, id);
     if (count > 1) {
       getLogger().warn("Removed " + count + " entries with ID: " + id);
@@ -154,15 +155,16 @@ public abstract class AbstractSearchIndexer extends AbstractLoggableObject imple
    *        <code>null</code> if any source should match.
    * @return the {@link SearchResultPage} for the specified query.
    */
-  protected SearchResultPage search(String id, String cid, String uri, String source) {
+  protected SearchResultPage search(Long id, Object cid, String uri, String source) {
 
     SearchQueryBuilder queryBuilder = getSearchEngine().getQueryBuilder();
     ComplexSearchQuery query = queryBuilder.createComplexQuery();
     if (id != null) {
-      query.addRequiredQuery(queryBuilder.createWordQuery(SearchEntry.FIELD_ID, id));
+      query.addRequiredQuery(queryBuilder.createWordQuery(SearchEntry.FIELD_ID, id.toString()));
     }
     if (cid != null) {
-      query.addRequiredQuery(queryBuilder.createWordQuery(SearchEntry.FIELD_CUSTOM_ID, cid));
+      query.addRequiredQuery(queryBuilder.createWordQuery(SearchEntry.FIELD_CUSTOM_ID,
+          cid.toString()));
     }
     if (uri != null) {
       query.addRequiredQuery(queryBuilder.createWordQuery(SearchEntry.FIELD_URI, uri));

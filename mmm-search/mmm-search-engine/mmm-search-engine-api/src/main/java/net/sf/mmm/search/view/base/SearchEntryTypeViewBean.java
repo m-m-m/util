@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * This is the implementation of the {@link SearchEntryTypeView} interface as
  * java bean.
  * 
- * @see #combine(SearchEntryType, int)
+ * @see #combine(SearchEntryType, long)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -37,7 +37,7 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   private String originalTitle;
 
   /** The number of occurrences in search-index. */
-  private int count;
+  private long count;
 
   /**
    * The constructor.
@@ -51,14 +51,14 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   /**
    * This method combines the given <code>type</code> with this object.
    * Therefore the {@link SearchEntryType#getTitle() title} of all
-   * {@link #combine(SearchEntryType, int) combined} types has to be equal.
+   * {@link #combine(SearchEntryType, long) combined} types has to be equal.
    * 
    * @param type is the {@link SearchEntryType} to combine.
    * @param typeCount is the
    *        {@link net.sf.mmm.search.engine.api.SearchEngine#count(String, String)
    *        count} for the given <code>type</code>.
    */
-  public void combine(SearchEntryType type, int typeCount) {
+  public void combine(SearchEntryType type, long typeCount) {
 
     NlsNullPointerException.checkNotNull(SearchEntryType.class, type);
     if (type instanceof SearchEntryTypeView) {

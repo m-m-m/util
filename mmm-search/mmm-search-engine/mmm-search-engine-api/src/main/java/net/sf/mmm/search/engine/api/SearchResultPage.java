@@ -21,7 +21,7 @@ package net.sf.mmm.search.engine.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface SearchResultPage {
+public interface SearchResultPage extends Iterable<SearchHit> {
 
   /**
    * The default number of {@link #getHitsPerPage() hits per page}.

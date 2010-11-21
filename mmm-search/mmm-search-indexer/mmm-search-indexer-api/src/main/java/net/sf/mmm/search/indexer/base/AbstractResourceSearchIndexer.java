@@ -9,6 +9,7 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.event.api.ChangeType;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.transformer.api.Transformer;
 
@@ -51,15 +52,21 @@ public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComp
         if (uri.startsWith("/") || uri.startsWith("\\")) {
           uri = uri.substring(1);
         }
-        String baseUri = location.getBaseUri();
-        if (baseUri == null) {
-          baseUri = "";
+      } else {
+        int index = uri.indexOf(locationUri);
+        if (index <= 0) {
+          throw new NlsIllegalStateException();
         }
-        if ((baseUri.length() > 0) && !baseUri.endsWith("/") && !baseUri.endsWith("\\")) {
-          baseUri = baseUri + "/";
-        }
-        uri = baseUri + uri;
+        uri = uri.substring(index + locationUri.length() + 1);
       }
+      String baseUri = location.getBaseUri();
+      if (baseUri == null) {
+        baseUri = "";
+      }
+      if ((baseUri.length() > 0) && !baseUri.endsWith("/") && !baseUri.endsWith("\\")) {
+        baseUri = baseUri + "/";
+      }
+      uri = baseUri + uri;
     }
     Transformer<String> uriTransformer = location.getUriTransformer();
     if (uriTransformer != null) {
