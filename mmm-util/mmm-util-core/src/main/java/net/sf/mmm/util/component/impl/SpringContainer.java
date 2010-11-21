@@ -12,7 +12,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * This is the implementation of the {@link IocContainer} using spring.
+ * This is the implementation of the {@link IocContainer} using spring.<br/>
+ * <b>ATTENTION:</b><br>
+ * Please check your dependencies as <code>spring</code> is an optional
+ * dependency in <code>mmm-util-core</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
