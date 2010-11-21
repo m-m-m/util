@@ -226,8 +226,8 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   private void addVirtualAccessor(AbstractPojoPropertyDescriptor propertyDescriptor,
       PojoPropertyAccessor accessor) {
 
-    if (getLogger().isDebugEnabled()) {
-      getLogger().debug("adding virtual accessor: " + accessor);
+    if (getLogger().isTraceEnabled()) {
+      getLogger().trace("adding virtual accessor: " + accessor);
     }
     propertyDescriptor.putAccessor(accessor);
   }
