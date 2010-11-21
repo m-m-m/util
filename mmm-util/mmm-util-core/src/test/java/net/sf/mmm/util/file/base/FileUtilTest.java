@@ -61,6 +61,7 @@ public class FileUtilTest {
     assertEquals(homeDir + "/", util.normalizePath("~/", '/'));
     assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
     assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
+    assertEquals(homeDir + "/.mmm/search.xml", util.normalizePath("~/.mmm/search.xml", '/'));
     assertEquals("/root/.ssh/authorized_keys",
         util.normalizePath("~root/.ssh/authorized_keys", '/'));
     if ("/root".equals(homeDir)) {
@@ -83,9 +84,11 @@ public class FileUtilTest {
 
     FileUtilImpl impl = new FileUtilImpl();
     impl.setUserLogin("root");
-    impl.setUserHomeDirectoryPath("/my/root/dir");
+    String rootHome = "/my/root/dir";
+    impl.setUserHomeDirectoryPath(rootHome);
     impl.initialize();
     FileUtil util = impl;
+    assertEquals(rootHome, util.normalizePath("~root", '/'));
   }
 
   /**

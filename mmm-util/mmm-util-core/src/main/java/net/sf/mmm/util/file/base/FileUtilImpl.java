@@ -134,12 +134,14 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
     if (this.temporaryDirectoryPath == null) {
       this.temporaryDirectoryPath = System.getProperty(PROPERTY_TMP_DIR);
     }
+    this.temporaryDirectoryPath = this.temporaryDirectoryPath.replace('\\', '/');
     if (this.temporaryDirectory == null) {
       this.temporaryDirectory = new File(this.temporaryDirectoryPath);
     }
     if (this.userHomeDirectoryPath == null) {
       this.userHomeDirectoryPath = System.getProperty(PROPERTY_USER_HOME);
     }
+    this.userHomeDirectoryPath = this.userHomeDirectoryPath.replace('\\', '/');
     if (this.userHomeDirectory == null) {
       this.userHomeDirectory = new File(this.userHomeDirectoryPath);
     }
@@ -277,15 +279,23 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
     if (path.length() == 0) {
       return path;
     }
-    String pathWithHome;
+    char wrongSlash;
+    if (slash == '/') {
+      wrongSlash = '\\';
+    } else {
+      wrongSlash = '/';
+    }
+    String pathWithHome = path.replace(wrongSlash, slash);
     if (path.startsWith("~")) {
       StringBuilder sb = new StringBuilder(this.userHomeDirectoryPath.length() + path.length());
-      int slashIndex = path.indexOf(slash, 1);
+      int slashIndex = pathWithHome.indexOf(slash, 1);
       String user;
-      if (slashIndex > 0) {
-        user = path.substring(1, slashIndex);
+      if (slashIndex > 1) {
+        user = pathWithHome.substring(1, slashIndex);
+      } else if (slashIndex < 0) {
+        user = pathWithHome.substring(1);
       } else {
-        user = path.substring(1);
+        user = "";
       }
       if (user.length() == 0) {
         sb.append(this.userHomeDirectoryPath);
@@ -315,49 +325,17 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
         }
       }
       if (slashIndex > 0) {
-        sb.append(path.substring(slashIndex));
+        sb.append(pathWithHome.substring(slashIndex));
       }
       pathWithHome = sb.toString();
-    } else {
-      pathWithHome = path;
     }
-    char wrongSlash;
-    if (slash == '/') {
-      wrongSlash = '\\';
-    } else {
-      wrongSlash = '/';
-    }
-    pathWithHome = pathWithHome.replace(wrongSlash, slash);
     StringBuilder buffer = new StringBuilder(pathWithHome.length());
     CharSequenceScanner scanner = new CharSequenceScanner(pathWithHome);
     int segmentStart = 0;
     List<String> segments = new ArrayList<String>();
     boolean absolutePath = false;
     char c = scanner.peek();
-    if (c == '~') {
-      scanner.next();
-      absolutePath = true;
-      String user = scanner.readUntil(slash, true);
-      if (user.length() == 0) {
-        buffer.append(this.userHomeDirectoryPath);
-      } else {
-        // ~<user> can not be resolved properly
-        // we would need to do OS-specific assumptions and look into
-        // /etc/passwd or whatever what might fail by missing read permissions
-        // This is just a hack that might work in most cases:
-        // we use the user.home dir get the dirname and append the user
-        String homeDir;
-        if (HOME_ROOT.equals(this.userHomeDirectoryPath)) {
-          homeDir = "/home";
-        } else {
-          homeDir = getDirname(this.userHomeDirectoryPath);
-        }
-        buffer.append(homeDir);
-        buffer.append(slash);
-        buffer.append(user);
-        buffer.append(slash);
-      }
-    } else if (c == slash) {
+    if (c == slash) {
       scanner.next();
       buffer.append(slash);
       absolutePath = true;
