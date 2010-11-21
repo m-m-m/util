@@ -95,6 +95,15 @@
         <code>net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper</code>: added.
         ]]>
       </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added SystemUtil.<br/>
+        <code>net.sf.mmm.util.lang.api.SystemInformation</code>: added.
+        <code>net.sf.mmm.util.lang.api.SystemUtil</code>: added.
+        <code>net.sf.mmm.util.lang.base.SystemInformationImpl</code>: added.
+        <code>net.sf.mmm.util.lang.base.SystemUtilImpl</code>: added.
+        ]]>
+      </action>
       <action dev="hohwille" type="fix">
         <![CDATA[
         Fixed bug in path normalization.<br/>
@@ -105,6 +114,11 @@
         <![CDATA[
         Fixed bug in stream-detection (used by EncodingDetectionReader).<br/>
         <code>net.sf.mmm.util.io.impl.AbstractByteArrayBufferBuffer</code>: fixed sync() method.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Improved NLS to support automatic resolving via <code>META-INF/net.sf.mmm/nls-bundles</code>.
         ]]>
       </action>
       <action dev="hohwille" type="update">
