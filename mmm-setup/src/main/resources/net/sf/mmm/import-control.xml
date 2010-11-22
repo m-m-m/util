@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import-control pkg="net.sf.mmm">
+  <subpackage name="api">
+    <disallow pkg="net\.sf\.mmm\..*\.(impl)" regex="true"/>
+  </subpackage> 
+</import-control>
+

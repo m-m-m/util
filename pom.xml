@@ -246,30 +246,6 @@
            </additionalConfig>
          </configuration>
       </plugin>      
-      <!-- make checkstyle settings available -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mmm-setup</artifactId>
-            <version>SNAPSHOT</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <!-- make findbugs settings available -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mmm-setup</artifactId>
-            <version>SNAPSHOT</version>
-          </dependency>
-        </dependencies>
-      </plugin>
       <plugin> 
         <groupId>org.codehaus.mojo</groupId> 
         <artifactId>dashboard-maven-plugin</artifactId> 
@@ -299,18 +275,15 @@
         <artifactId>maven-site-plugin</artifactId> 
       	<configuration>
           <reportPlugins>
-          	<!--
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
               </plugin>
-              -->
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
               </plugin>
               <!-- Waiting for update! -->
-              <!--
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -318,7 +291,6 @@
                   <configLocation>net/sf/mmm/checkstyle.xml</configLocation>
                 </configuration>
               </plugin>
-              -->
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -437,6 +409,13 @@
           </reportPlugins>
       		
       	</configuration>
+        <dependencies>
+          <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mmm-setup</artifactId>
+            <version>SNAPSHOT</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
     <!-- http://jira.codehaus.org/browse/MNG-4253 -->
@@ -517,14 +496,15 @@
   </scm>
   <distributionManagement>
     <repository>
-      <id>mmm-releases</id>
+      <id>sonatype-nexus-staging</id>
       <name>MMM Staging Repository</name>
-      <url>http://oss.sonatype.org/content/repositories/sourceforge-releases</url>
+      <!--<url>http://oss.sonatype.org/content/repositories/sourceforge-releases</url>-->
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <snapshotRepository>
-      <id>mmm-snapshots</id>
+      <id>sonatype-nexus-snapshots</id>
       <name>MMM Snapshot Repository</name>
-      <url>http://oss.sonatype.org/content/repositories/sourceforge-snapshots</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
     </snapshotRepository>
     <site>
       <id>m-m-m.sf.net</id>
