@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>mmm-search</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>search</name>
+  <description>This project provides full-text search indexing and retrieval.</description>
+
+  <modules>
+    <module>mmm-search-engine</module>
+    <module>mmm-search-indexer</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
