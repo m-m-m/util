@@ -7,19 +7,19 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-indexer-base</artifactId>
   <name>search-indexer-base</name>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <description>This project provides the base-implementation for an search-indexer using a provided search-technology.</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-indexer-api</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-service</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
