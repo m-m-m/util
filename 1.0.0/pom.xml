@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-content-parser</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>content-parser</name>
+  <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
+  
+  <modules>
+    <module>mmm-content-parser-api</module>
+    <module>mmm-content-parser-impl-xml</module>
+    <module>mmm-content-parser-impl-html</module>
+    <module>mmm-content-parser-impl-pdf</module>
+    <module>mmm-content-parser-impl-poi</module>
+    <module>mmm-content-parser-impl-opendoc</module>
+    <module>mmm-content-parser-impl-generic</module>
+    <module>mmm-content-parser-impl-text</module>
+    <module>mmm-content-parser-impl-java</module>
+    <module>mmm-content-parser-service</module>
+  </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>    
+</project>

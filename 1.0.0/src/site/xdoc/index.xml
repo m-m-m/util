@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>Search-Parser</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About MMM Search::Parser">
+      This project provides parsers for various file-formats that extract plain-text 
+      and metadata from an <code>InputStream</code>.<br/>
+      The API was designed with the following goals in mind:
+      <ul>
+        <li>simplicty</li>
+        <li>low memory consumption</li>
+        <li>no dependecy on specific technologies</li>
+      </ul>
+      The design of the <a href="mmm-search-parser-api/index.html">API</a> allows 
+      that the parser can be used in any project and not only for search-engines.
+      The <a href="mmm-search-parser-service/index.html">parser-service</a> combines
+      all available parsers to a solution that can be used out-of-the-box.
+    </section>
+  </body>
+</document>
