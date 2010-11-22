@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-cd `dirname "${0}"`
-cd mmm-setup/src/scripts/linux/
-setup-all.sh

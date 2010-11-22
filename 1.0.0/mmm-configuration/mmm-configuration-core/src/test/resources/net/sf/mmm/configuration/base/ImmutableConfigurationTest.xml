@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<root xmlns:cfg="http://m-m-m.sf.net/namespaces/configuration" cfg:addDefaults="false">
-  <child attribute="42"/>
-</root>
