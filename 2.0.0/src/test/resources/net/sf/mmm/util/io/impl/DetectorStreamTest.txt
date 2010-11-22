@@ -1,0 +1,5 @@
+Hello World, this is a test...
+It has some chars, words and lines.
+
+Especially this strange sequence:
+some xx is contained in fooxxbar and axxbxxcxxxxd.
