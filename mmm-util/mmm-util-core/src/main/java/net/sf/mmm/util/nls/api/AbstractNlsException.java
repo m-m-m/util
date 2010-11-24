@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -118,7 +119,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    */
   public void printStackTrace(Locale locale, Appendable buffer) {
 
-    printStackTrace(this, locale, null, buffer);
+    printStackTrace(locale, null, buffer);
   }
 
   /**
@@ -179,7 +180,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           }
         }
       }
-    } catch (Exception e) {
+    } catch (IOException e) {
       throw new IllegalStateException(e);
     }
   }

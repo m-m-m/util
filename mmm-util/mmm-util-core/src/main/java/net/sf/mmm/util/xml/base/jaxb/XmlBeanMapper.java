@@ -30,6 +30,8 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
+import com.sun.xml.bind.IDResolver;
+
 /**
  * This class is a little helper for the simple but common use of JAXB where you
  * simply want to {@link #loadXml(InputStream, Object) read} or
@@ -125,7 +127,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
   protected Unmarshaller getOrCreateUnmarshaller() {
 
     try {
-      return this.jaxbContext.createUnmarshaller();
+      Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
+      unmarshaller.setProperty(IDResolver.class.getName(), new ValidatingIdResolver());
+      return unmarshaller;
     } catch (JAXBException e) {
       throw new NlsIllegalStateException(e);
     }

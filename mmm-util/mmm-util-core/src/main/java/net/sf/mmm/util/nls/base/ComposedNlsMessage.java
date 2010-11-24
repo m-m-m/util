@@ -1,0 +1,104 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.nls.base;
+
+import java.io.IOException;
+import java.util.Locale;
+
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsObject;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+
+/**
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} for
+ * composing other objects or messages.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 2.0.1
+ */
+public class ComposedNlsMessage extends AbstractNlsMessage {
+
+  /** @see #getArgument(int) */
+  private Object[] arguments;
+
+  /**
+   * The constructor.
+   * 
+   * @param arguments are the {@link #getArgument(int) arguments}.
+   */
+  public ComposedNlsMessage(Object[] arguments) {
+
+    super();
+    assert (arguments != null);
+    this.arguments = arguments;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Object getArgument(int index) {
+
+    if (index >= this.arguments.length) {
+      return null;
+    }
+    return this.arguments[index];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getArgumentCount() {
+
+    return this.arguments.length;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getInternationalizedMessage() {
+
+    return "";
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Object getArgument(String key) {
+
+    try {
+      int index = Integer.parseInt(key);
+      return getArgument(index);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
+      throws RuntimeIoException {
+
+    try {
+      for (Object message : this.arguments) {
+        if (message == null) {
+          buffer.append("null");
+        } else if (message instanceof NlsObject) {
+          NlsObject nlsObject = (NlsObject) message;
+          nlsObject.toNlsMessage().getLocalizedMessage(locale, resolver, buffer);
+        } else {
+          buffer.append(message.toString());
+        }
+        buffer.append(StringUtil.LINE_SEPARATOR);
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
+  }
+
+}

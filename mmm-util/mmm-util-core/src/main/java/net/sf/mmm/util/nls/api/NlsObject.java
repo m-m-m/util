@@ -93,6 +93,13 @@ public interface NlsObject {
   String KEY_LOCATION = "location";
 
   /**
+   * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
+   * 
+   * @since 2.0.1
+   */
+  String KEY_ERROR = "error";
+
+  /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.
    * 

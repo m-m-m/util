@@ -180,6 +180,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.nls.api.NlsIllegalStateException */
   public static final String ERR_ILLEGAL_STATE = "Illegal state!";
 
+  /** @see net.sf.mmm.util.nls.api.ComposedException */
+  public static final String ERR_COMPOSED = "The following errors have occurred!\n{error}";
+
   /** @see net.sf.mmm.util.nls.api.IllegalCaseException */
   public static final String ERR_ILLEGAL_CASE = "The case \"{case}\" is NOT covered!";
 

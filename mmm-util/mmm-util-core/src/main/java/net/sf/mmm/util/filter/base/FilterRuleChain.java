@@ -170,4 +170,17 @@ public class FilterRuleChain<V> implements Filter<V> {
     return this.id;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    int len = 0;
+    if (this.rules != null) {
+      len = this.rules.length;
+    }
+    return FilterRuleChain.class.getSimpleName() + "[" + this.id + "][" + len + "]";
+  }
+
 }

@@ -124,7 +124,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    */
   public void printStackTrace(Locale locale, Appendable buffer) {
 
-    AbstractNlsException.printStackTrace(this, locale, null, buffer);
+    printStackTrace(locale, null, buffer);
   }
 
   /**
