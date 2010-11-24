@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-indexer-base</artifactId>
   <name>search-indexer-base</name>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <description>This project provides the base-implementation for an search-indexer using a provided search-technology.</description>
   <dependencies>
     <dependency>
@@ -27,6 +27,12 @@
       <artifactId>spring-context</artifactId>
       <version>3.0.3.RELEASE</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.5.6</version>
+      <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
