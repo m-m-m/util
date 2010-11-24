@@ -8,7 +8,7 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>mmm-search-engine-api</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>search-engine-api</name>
   <description>This project provides the API and base implementation of the search-engine.</description>

@@ -38,6 +38,9 @@ public class SearchEngineConfigurationBean extends SearchConfigurationBean imple
    */
   public SearchEntryTypeContainer getEntryTypes() {
 
+    if (this.entryTypes == null) {
+      this.entryTypes = new SearchEntryTypeContainerBean();
+    }
     return this.entryTypes;
   }
 
