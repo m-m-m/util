@@ -7,6 +7,24 @@
   </properties>
   <body>
     <section name="Project History">
+      <subsection name="2010-11-22">
+        Released <code>mmm-util-core</code> in version <code>2.0.0</code> and 
+        <code>mmm-search</code> as well as <code>mmm-content-parser</code> in 
+        version <code>1.0.0</code>.
+      </subsection>
+      <subsection name="2010-01-07">
+        Released <code>mmm-util-core</code> in version <code>1.1.1</code>.
+      </subsection>
+      <subsection name="2009-11-12">
+        File <a href="https://issues.sonatype.org/browse/OSSRH-133">OSSRH-133</a> to perform sync
+        to maven central via nexus.
+      </subsection>
+      <subsection name="2009-10-11">
+        Released <code>mmm-util-core</code> in version <code>1.1.0</code>.
+      </subsection>
+      <subsection name="2009-01-21">
+        Released <code>mmm-util-core</code> in version <code>1.0.2</code>.
+      </subsection>
       <subsection name="2008-06-16">
         <a href="http://jira.codehaus.org/browse/MAVENUPLOAD-1902">MAVENUPLOAD-1902</a> was completed so the 
         mmm-repository is now synced to the central maven repository 
