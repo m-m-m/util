@@ -199,7 +199,7 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
       entryUriSet = new HashSet<String>();
       arguments.getContext().setVariable(CONTEXT_VARIABLE_RESOURCE_URI_SET, entryUriSet);
     }
-    indexRecursive(arguments, location, resource, entryUriSet, entryUpdateVisitor);
+    indexRecursive(arguments, location, resource, entryUriSet, entryUpdateVisitor, resource);
   }
 
   /**
@@ -261,16 +261,20 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
    * 
    * @param arguments are the {@link UpdateStrategyArguments}.
    * @param location is the {@link SearchIndexerDataLocation}.
-   * @param resource is the directory to index recursively.
+   * @param resource is the {@link BrowsableResource resource} (directory) to
+   *        index recursively.
    * @param visitedResources is the {@link Set} with the
    *        {@link net.sf.mmm.util.resource.api.DataResource#getUri() URIs} of
    *        the {@link BrowsableResource resources} that have already been
    *        crawled.
    * @param entryUpdateVisitor is the {@link EntryUpdateVisitor}.
+   * @param locationResource is the {@link BrowsableResource resource} for
+   *        {@link SearchIndexerDataLocation#getLocationUri()} of the given
+   *        <code>location</code>.
    */
   public void indexRecursive(UpdateStrategyArguments arguments, SearchIndexerDataLocation location,
       BrowsableResource resource, Set<String> visitedResources,
-      EntryUpdateVisitor entryUpdateVisitor) {
+      EntryUpdateVisitor entryUpdateVisitor, BrowsableResource locationResource) {
 
     String uri = resource.getUri();
     if (!visitedResources.contains(uri)) {
@@ -285,12 +289,13 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
         ResourceSearchIndexer resourceSearchIndexer = getIndexerDependencies()
             .getResourceSearchIndexer();
         resourceSearchIndexer.index(arguments.getIndexer(), resource, changeType, location,
-            entryUpdateVisitor);
+            entryUpdateVisitor, locationResource);
       }
       for (BrowsableResource child : resource.getChildResources()) {
         String childUri = child.getUri().replace('\\', '/');
         if (location.getFilter().accept(childUri)) {
-          indexRecursive(arguments, location, child, visitedResources, entryUpdateVisitor);
+          indexRecursive(arguments, location, child, visitedResources, entryUpdateVisitor,
+              locationResource);
         } else {
           if (getLogger().isTraceEnabled()) {
             getLogger().trace("Filtered " + childUri);

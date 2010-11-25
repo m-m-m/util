@@ -3,14 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base;
 
+import javax.inject.Inject;
+
+import net.sf.mmm.search.indexer.api.EntryUpdateVisitor;
 import net.sf.mmm.search.indexer.api.ResourceSearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.event.api.ChangeType;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.api.DataResourceFactory;
+import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
@@ -23,6 +27,9 @@ import net.sf.mmm.util.transformer.api.Transformer;
 public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComponent implements
     ResourceSearchIndexer {
 
+  /** @see #setResourceFactory(DataResourceFactory) */
+  private DataResourceFactory resourceFactory;
+
   /**
    * The constructor.
    */
@@ -32,41 +39,65 @@ public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComp
   }
 
   /**
+   * @param resourceFactory is the resourceFactory to set
+   */
+  @Inject
+  public void setResourceFactory(DataResourceFactory resourceFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.resourceFactory = resourceFactory;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.resourceFactory == null) {
+      BrowsableResourceFactoryImpl impl = new BrowsableResourceFactoryImpl();
+      impl.initialize();
+      this.resourceFactory = impl;
+    }
+  }
+
+  /**
    * This method determines the
    * {@link net.sf.mmm.search.api.SearchEntry#getUri() entry URI} for the given
    * <code>resourceUri</code>.
    * 
-   * @param resourceUri is the normalized {@link DataResource#getUri()
-   *        resource-URI}.
-   * @param location is the {@link SearchIndexerDataLocation}.
+   * @param resource is the {@link DataResource} for which the
+   *        {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} is requested.
+   * @param location is the {@link SearchIndexerDataLocation} used to check
+   *        {@link SearchIndexerDataLocation#isAbsoluteUris()}.
+   * @param locationResource is the {@link DataResource} for
+   *        {@link SearchIndexerDataLocation#getLocationUri()}.
    * @return the {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} for the
-   *         entry to index.
+   *         <code>resource</code> to index.
    */
-  protected String getEntryUri(String resourceUri, SearchIndexerDataLocation location) {
+  protected String getEntryUri(DataResource resource, SearchIndexerDataLocation location,
+      DataResource locationResource) {
 
-    String uri = resourceUri;
+    String uri = resource.getUri();
     if (!location.isAbsoluteUris()) {
-      String locationUri = location.getLocationUri().replace('\\', '/');
+      String locationUri = locationResource.getUri();
       if (uri.startsWith(locationUri)) {
         uri = uri.substring(locationUri.length());
         if (uri.startsWith("/") || uri.startsWith("\\")) {
           uri = uri.substring(1);
         }
-      } else {
-        int index = uri.indexOf(locationUri);
-        if (index <= 0) {
-          throw new NlsIllegalStateException();
+        String baseUri = location.getBaseUri();
+        if (baseUri == null) {
+          baseUri = "";
         }
-        uri = uri.substring(index + locationUri.length() + 1);
+        if ((baseUri.length() > 0) && !baseUri.endsWith("/") && !baseUri.endsWith("\\")) {
+          baseUri = baseUri + "/";
+        }
+        uri = baseUri + uri;
+      } else {
+        // this may happen if we crawl the web and a link goes to an other site
       }
-      String baseUri = location.getBaseUri();
-      if (baseUri == null) {
-        baseUri = "";
-      }
-      if ((baseUri.length() > 0) && !baseUri.endsWith("/") && !baseUri.endsWith("\\")) {
-        baseUri = baseUri + "/";
-      }
-      uri = baseUri + uri;
     }
     Transformer<String> uriTransformer = location.getUriTransformer();
     if (uriTransformer != null) {
@@ -104,5 +135,16 @@ public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComp
       SearchIndexerDataLocation location) {
 
     index(indexer, resource, changeType, location, EntryUpdateVisitorDummy.INSTANCE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
+      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor) {
+
+    DataResource locationFolder = this.resourceFactory
+        .createDataResource(location.getLocationUri());
+    index(indexer, resource, changeType, location, uriVisitor, locationFolder);
   }
 }

@@ -109,42 +109,29 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
   /**
    * {@inheritDoc}
    */
-  public void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
-      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor) {
+  public MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource,
+      String resourceUri) {
 
-    String resourceUri = resource.getUri().replace('\\', '/');
-    String uri = getEntryUri(resourceUri, location);
-    uriVisitor.visitIndexedEntryUri(uri, changeType);
-    if (changeType == null) {
-      return;
-    }
-    String sourceId = null;
-    SearchSource source = location.getSource();
-    if (source != null) {
-      sourceId = source.getId();
-    }
+    return createEntry(indexer, resource, resourceUri, null);
+  }
 
-    switch (changeType) {
-      case REMOVE:
-        getLogger().debug("Removing " + resourceUri);
-        indexer.removeByUri(uri, sourceId);
-        return;
-      case ADD:
-        getLogger().debug("Adding " + resourceUri);
-        break;
-      case UPDATE:
-        getLogger().debug("Updating " + resourceUri);
-        break;
-      default :
-        throw new IllegalCaseException(ChangeType.class, changeType);
-    }
+  /**
+   * @see #createEntry(SearchIndexer, DataResource, String)
+   * 
+   * @param indexer is the {@link SearchIndexer} used for indexing.
+   * @param resource is the {@link DataResource} to index.
+   * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the
+   *        {@link MutableSearchEntry entry}.
+   * @param encoding is the encoding or <code>null</code> for auto-detection.
+   * @return the created {@link MutableSearchEntry}.
+   */
+  protected MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource,
+      String resourceUri, String encoding) {
+
     String filename = resource.getName();
     String extension = this.fileUtil.getExtension(filename);
     MutableSearchEntry entry = indexer.createEntry();
-    entry.setUri(uri);
-    if (sourceId != null) {
-      entry.setSource(sourceId);
-    }
+    entry.setUri(resourceUri);
     long fileSize = resource.getSize();
     entry.setSize(fileSize);
     ContentParser parser = this.parserService.getParser(extension);
@@ -157,7 +144,6 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
         InputStream inputStream = resource.openStream();
         try {
           ContentParserOptionsBean options = new ContentParserOptionsBean();
-          String encoding = location.getEncoding();
           if (encoding != null) {
             options.setEncoding(encoding);
           }
@@ -187,7 +173,44 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
       }
     }
     entry.setType(extension);
+    return entry;
+  }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
+      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor,
+      DataResource locationResource) {
+
+    String uri = getEntryUri(resource, location, locationResource);
+    uriVisitor.visitIndexedEntryUri(uri, changeType);
+    if (changeType == null) {
+      return;
+    }
+    String sourceId = null;
+    SearchSource source = location.getSource();
+    if (source != null) {
+      sourceId = source.getId();
+    }
+    switch (changeType) {
+      case REMOVE:
+        getLogger().debug("Removing " + resource.getUri());
+        indexer.removeByUri(uri, sourceId);
+        return;
+      case ADD:
+        getLogger().debug("Adding " + resource.getUri());
+        break;
+      case UPDATE:
+        getLogger().debug("Updating " + resource.getUri());
+        break;
+      default :
+        throw new IllegalCaseException(ChangeType.class, changeType);
+    }
+    MutableSearchEntry entry = createEntry(indexer, resource, uri, location.getEncoding());
+    if (sourceId != null) {
+      entry.setSource(sourceId);
+    }
     if (changeType == ChangeType.UPDATE) {
       indexer.update(entry);
     } else {

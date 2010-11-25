@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-engine-webapp</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>search-engine-webapp</name>
   <description>This project a demo webapplication using lucene as search-engine.</description>
@@ -32,7 +32,7 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.5.6</version>
       <scope>compile</scope>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
