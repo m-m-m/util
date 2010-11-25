@@ -15,7 +15,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * This class is a context for {@link ValidatingIdResolver}. JAXB is a little
+ * This class is a context for {@link InternalValidatingIdResolver}. JAXB is a little
  * strange: It is using a {@link Callable} for resolving
  * {@link javax.xml.bind.annotation.XmlIDREF} but {@link Callable#call()
  * evaluates} it immediately instead of storing it until the initial processing

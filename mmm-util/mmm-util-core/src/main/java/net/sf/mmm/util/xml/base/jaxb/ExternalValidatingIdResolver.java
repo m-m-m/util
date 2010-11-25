@@ -9,20 +9,22 @@ import javax.xml.bind.ValidationEventHandler;
 
 import org.xml.sax.SAXException;
 
-import com.sun.xml.internal.bind.IDResolver;
+import com.sun.xml.bind.IDResolver;
 
 /**
  * This is an implementation of {@link IDResolver} validating that no IDs are
  * duplicated or missing (IDRef is pointing to an undefined ID).<br/>
  * <b>ATTENTION:</b><br>
- * This class only works for the default implementation of JAXB included in the
- * JDK. You have to ensure that <code>jaxb-impl</code> (com.sun.xml.bind) is NOT
- * on your classpath!
+ * This class only works if <code>jaxb-impl</code> (com.sun.xml.bind) is on your
+ * classpath!
+ * 
+ * @see InternalValidatingIdResolver
+ * @see XmlBeanMapper#getOrCreateUnmarshaller()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
  */
-public class ValidatingIdResolver extends IDResolver {
+public class ExternalValidatingIdResolver extends IDResolver {
 
   /** The {@link IdResolverContext}. */
   private IdResolverContext context;
@@ -30,7 +32,7 @@ public class ValidatingIdResolver extends IDResolver {
   /**
    * The constructor.
    */
-  public ValidatingIdResolver() {
+  public ExternalValidatingIdResolver() {
 
     super();
   }

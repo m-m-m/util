@@ -39,9 +39,16 @@ import com.sun.xml.internal.bind.IDResolver;
  * {@link #saveXml(Object, OutputStream) write} the XML for a single JAXB
  * annotated java bean.<br/>
  * <b>ATTENTION:</b><br>
- * This class uses {@link ValidatingIdResolver} that only works for the default
- * implementation of JAXB included in the JDK. You have to ensure that
- * <code>jaxb-impl</code> (com.sun.xml.bind) is NOT on your classpath!
+ * This class uses an <code>IDValidator</code> to validate duplicate or
+ * unresolved {@link javax.xml.bind.annotation.XmlID}s on
+ * {@link #getOrCreateUnmarshaller() un-marshaling}. This is unfortunately not
+ * the default for JAXB and also NOT part of the JAXB-API. So this feature
+ * depends on the actual JAXB implementation you are using. We support the
+ * default implementation build into the JRE (com.sun.internal.xml.bind).
+ * However if <code>jaxb-impl</code> (com.sun.xml.bind) is NOT on your classpath
+ * it will replace the default implementation. For this reason we also support
+ * <code>jaxb-impl</code> as fallback. Other implementations are NOT supported
+ * (everything should work but ID-validation is turned off then).
  * 
  * @param <T> is the generic type of the JAXB bean.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -134,11 +141,17 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
     try {
       Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
       try {
-        unmarshaller.setProperty(IDResolver.class.getName(), new ValidatingIdResolver());
+        unmarshaller.setProperty(IDResolver.class.getName(), new InternalValidatingIdResolver());
       } catch (PropertyException e) {
-        getLogger().error(
-            "ID-validation will not work! Please ensure that you do NOT have "
-                + "'jaxb-impl*.jar' (com.sun.xml.bind) on your classpath!", e);
+        try {
+          getLogger().debug(
+              "No default JAXB implementation found - trying jaxb-impl (com.sun.xml.bind).");
+          unmarshaller.setProperty("com.sun.xml.bind.IDResolver",
+              new ExternalValidatingIdResolver());
+        } catch (Exception e2) {
+          getLogger().error("ID-validation will not work! Please check your JAXB implementation!",
+              e2);
+        }
       }
       return unmarshaller;
     } catch (JAXBException e) {
