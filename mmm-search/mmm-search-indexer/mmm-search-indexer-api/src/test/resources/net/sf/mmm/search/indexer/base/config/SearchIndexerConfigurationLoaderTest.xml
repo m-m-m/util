@@ -11,11 +11,11 @@
     </source>
   </sources>
   <filters>
-    <filter-chain default-result="true" id="my-filter">
+    <filter-chain id="my-filter" default-result="true">
       <rule include="true" pattern="^/doc/.*" />
       <rule include="false" pattern=".*(?i)\.pdf$" />
     </filter-chain>
-    <filter-chain default-result="true" id="extended-filter" parent="my-filter">
+    <filter-chain id="extended-filter" default-result="true" parent="my-filter">
       <rule include="true" pattern="^/data/.*" />
       <rule include="false" pattern=".*(?i)\.(xml|xsl)$" />
     </filter-chain>

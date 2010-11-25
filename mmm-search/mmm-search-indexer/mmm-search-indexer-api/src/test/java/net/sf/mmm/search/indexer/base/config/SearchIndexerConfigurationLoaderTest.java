@@ -10,17 +10,20 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
+import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.test.TestResourceHelper;
+import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for
+ * This is the test-case for {@link SearchIndexerConfigurationLoader}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SearchIndexerConfigurationReaderTest {
+public class SearchIndexerConfigurationLoaderTest {
 
   /**
    * This method gets the {@link SearchIndexerConfigurationLoader} to test.
@@ -42,7 +45,7 @@ public class SearchIndexerConfigurationReaderTest {
 
     SearchIndexerConfigurationLoader reader = getConfigurationReader();
 
-    String resourceUri = TestResourceHelper.getTestPath(SearchIndexerConfigurationReaderTest.class,
+    String resourceUri = TestResourceHelper.getTestPath(SearchIndexerConfigurationLoaderTest.class,
         ".xml");
     SearchIndexerConfigurationHolder configurationHolder = reader.loadConfiguration(resourceUri);
     SearchIndexerConfiguration configuration = configurationHolder.getBean();
@@ -60,10 +63,40 @@ public class SearchIndexerConfigurationReaderTest {
     Assert.assertEquals("SVN", location.getSource().getId());
     Assert.assertEquals("svn", location.getUpdateStrategyVariant());
     Assert.assertEquals("UTF-8", location.getEncoding());
+    Filter<String> filter = location.getFilter();
+    Assert.assertNotNull(filter);
+    Assert.assertFalse(filter.accept("foo.XML"));
+    Assert.assertFalse(filter.accept("a/b/c.xsl"));
+    Assert.assertTrue(filter.accept("/data/c.xsl"));
+    Assert.assertTrue(filter.accept("/doc/c.xsl"));
+    Assert.assertFalse(filter.accept("/data/c.pdf"));
 
     // wiki source
     SearchIndexerSource sourceWiki = configuration.getSource("wiki");
     Assert.assertEquals("TWiki", sourceWiki.getTitle());
     Assert.assertEquals(0, sourceWiki.getLocations().size());
   }
+
+  /**
+   * Tests {@link SearchIndexerConfigurationLoader#loadConfiguration(String)}.
+   */
+  @Test
+  public void testReadInvalidIds() {
+
+    SearchIndexerConfigurationLoader reader = getConfigurationReader();
+
+    String resourceUri = TestResourceHelper.getTestPath(SearchIndexerConfigurationLoaderTest.class,
+        "-invalid-ids.xml");
+    try {
+      SearchIndexerConfigurationHolder configurationHolder = reader.loadConfiguration(resourceUri);
+      configurationHolder.getBean();
+      ExceptionHelper.failExceptionExpected();
+    } catch (NlsRuntimeException e) {
+      String message = e.getMessage();
+      Assert.assertTrue(message.contains("my-filter"));
+      Assert.assertTrue(message.contains("my-missing-filter"));
+      Assert.assertTrue(message.contains("wrong-parent-id"));
+    }
+  }
+
 }
