@@ -15,6 +15,7 @@
   <description>infrastructure for tests in the project</description>
   
   <dependencies>
+    <!--
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -26,6 +27,7 @@
       <artifactId>javax.inject</artifactId>
       <version>1</version>
     </dependency>
+    -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
@@ -33,12 +35,14 @@
       <scope>compile</scope>
     </dependency>
     <!-- XJC for schema generation in IDE -->
+    <!--
     <dependency>
       <groupId>com.sun.xml.bind</groupId>
       <artifactId>jaxb-xjc</artifactId>
       <version>2.1.6</version>
       <scope>compile</scope>
     </dependency>
+    -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

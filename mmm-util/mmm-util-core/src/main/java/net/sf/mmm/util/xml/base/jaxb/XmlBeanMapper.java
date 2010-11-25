@@ -15,6 +15,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.MarshalException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -30,13 +31,17 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
-import com.sun.xml.bind.IDResolver;
+import com.sun.xml.internal.bind.IDResolver;
 
 /**
  * This class is a little helper for the simple but common use of JAXB where you
  * simply want to {@link #loadXml(InputStream, Object) read} or
  * {@link #saveXml(Object, OutputStream) write} the XML for a single JAXB
- * annotated java bean.
+ * annotated java bean.<br/>
+ * <b>ATTENTION:</b><br>
+ * This class uses {@link ValidatingIdResolver} that only works for the default
+ * implementation of JAXB included in the JDK. You have to ensure that
+ * <code>jaxb-impl</code> (com.sun.xml.bind) is NOT on your classpath!
  * 
  * @param <T> is the generic type of the JAXB bean.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -128,7 +133,13 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
 
     try {
       Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
-      unmarshaller.setProperty(IDResolver.class.getName(), new ValidatingIdResolver());
+      try {
+        unmarshaller.setProperty(IDResolver.class.getName(), new ValidatingIdResolver());
+      } catch (PropertyException e) {
+        getLogger().error(
+            "ID-validation will not work! Please ensure that you do NOT have "
+                + "'jaxb-impl*.jar' (com.sun.xml.bind) on your classpath!", e);
+      }
       return unmarshaller;
     } catch (JAXBException e) {
       throw new NlsIllegalStateException(e);
