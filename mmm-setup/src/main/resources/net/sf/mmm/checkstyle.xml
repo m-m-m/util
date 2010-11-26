@@ -124,11 +124,13 @@
       <property name="format" value="^[A-Z_]*$"/>
     </module>
     <module name="AvoidStaticImport"/>
+    <!--
     <module name="ImportControl">
       <property name="severity" value="ignore"/>
       <property name="file" value="net/sf/mmm/import-control.xml"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
+    -->
     <module name="JavaNCSS">
       <property name="methodMaximum" value="100"/>
     </module>

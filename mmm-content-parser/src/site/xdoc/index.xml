@@ -17,9 +17,9 @@
         <li>no dependecy on specific technologies</li>
       </ul>
       The design of the <a href="mmm-search-parser-api/index.html">API</a> allows 
-      that the parser can be used in any project and not only for search-engines.
-      The <a href="mmm-search-parser-service/index.html">parser-service</a> combines
-      all available parsers to a solution that can be used out-of-the-box.
+      that the parser can be used in any project.
+      This project is similar to <a href="http://tika.apache.org/">Apache Tika</a>.
+      We started about the same time and did not know of each other for a long while.
     </section>
   </body>
 </document>

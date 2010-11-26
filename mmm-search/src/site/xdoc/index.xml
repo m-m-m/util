@@ -8,20 +8,30 @@
 
   <body>
     <section name="About MMM::Search">
-      Most applications have a need for an integrated full-text search
+      Most applications have the need for an integrated full-text search
       to increase usability. For the java world there is an excelent 
       solution called <a href="http://lucene.apache.org">lucene</a>.
       The only problem is that lucene is a little low level and leaves 
       you with some typical problems like indexing binary file-formats.<br/>
       This project is a solution for the gap:
       <ul>
-        <li><a href="mmm-search-parser/index.html">mmm-search-parser</a> 
-        provides a pluggable set of parsers for multiple file-formats 
-        with low memory consumption. The parsers are independent from the 
-        search technology and can also be used for other scenarios.</li>
+        <li><a href="mmm-search-indexer/index.html">mmm-search-indexer</a> 
+        provides an indexer that recursively indexes locations. It supports
+        incremental indexing and can be configured to your needs via some XML
+        configuration file.</li>
         <li><a href="mmm-search-engine/index.html">mmm-search-engine</a>
-        provides API and implementation for a consistent search&#38;indexing
+        provides API and implementation for a consistent search
         solution that abstracts from lucene.</li>
+      </ul>
+      This project is a little similar to <a href="http://lucene.apache.org/solr/">Apache Solr</a>.
+      However this project has quite a different approach. The key benefits of this solution are:
+      <ul>
+        <li>incremental indexing support</li>
+        <li>automatic unicode detection</li>
+        <li>central definition of schema</li>
+        <li>central and flexible configuration</li>
+        <li>clean API</li>
+        <li>excellent Javadocs</li>
       </ul>
     </section>
   </body>

@@ -15,13 +15,13 @@
   <description>infrastructure for tests in the project</description>
   
   <dependencies>
-    <!--
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>3.0.3.RELEASE</version>
       <scope>compile</scope>
     </dependency>
+    <!--
     <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
