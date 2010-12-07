@@ -18,7 +18,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-engine-impl-lucene</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.6</version>
+      <version>1.6.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
