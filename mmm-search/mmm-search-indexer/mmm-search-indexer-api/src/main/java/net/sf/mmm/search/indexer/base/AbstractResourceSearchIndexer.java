@@ -99,6 +99,7 @@ public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComp
         // this may happen if we crawl the web and a link goes to an other site
       }
     }
+    uri = uri.replace('\\', '/');
     Transformer<String> uriTransformer = location.getUriTransformer();
     if (uriTransformer != null) {
       uri = uriTransformer.transform(uri);
