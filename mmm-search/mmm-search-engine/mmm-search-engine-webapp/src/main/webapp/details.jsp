@@ -56,8 +56,7 @@ Error while getting the details:<br/>
     NlsRuntimeException error = searchContext.getException();
     if (error == null) {
 %>
-The parameter for the search-result is missing. Maybe this page was not called
-from the <a href="search">search-page</a>.<%
+<%= localizer.localize(locale, NlsBundleSearchApi.MSG_ERROR_NO_RESULT, nlsArguments)%><%
     } else {
 %>
 <pre><%
