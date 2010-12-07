@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!-- $Id$ -->
 <project>
   <modelVersion>4.0.0</modelVersion>
@@ -9,7 +9,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-content-parser-impl-pdf</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
   <name>content-parser-impl-pdf</name>
   <description>Content parser for files of the mimetype "application/pdf".</description>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-api</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

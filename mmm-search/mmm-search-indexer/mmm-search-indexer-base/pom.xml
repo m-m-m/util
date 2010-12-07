@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <parent>
     <artifactId>mmm-search-indexer</artifactId>
     <groupId>net.sf.m-m-m</groupId>
@@ -7,19 +8,19 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-indexer-base</artifactId>
   <name>search-indexer-base</name>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <description>This project provides the base-implementation for an search-indexer using a provided search-technology.</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-indexer-api</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-service</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

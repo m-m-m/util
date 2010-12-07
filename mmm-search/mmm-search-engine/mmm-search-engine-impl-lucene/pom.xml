@@ -8,7 +8,7 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>mmm-search-engine-impl-lucene</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
   <name>search-engine-impl-lucene</name>
   <description>This project provides an implementation of the search-engine using apache lucene as underlying search-technology.</description>
@@ -21,7 +21,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-engine-api</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
