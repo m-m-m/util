@@ -61,4 +61,13 @@ public interface ConfiguredSearchIndexerOptions extends SearchIndexerOptions {
    */
   List<String> getSourceIds();
 
+  /**
+   * This method gets the non-UTF encoding.
+   * 
+   * @see net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration#getNonUtfEncoding()
+   * 
+   * @return the non-UTF encoding.
+   */
+  String getNonUtfEncoding();
+
 }

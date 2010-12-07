@@ -189,44 +189,6 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
     }
   }
 
-  // /**
-  // * {@inheritDoc}
-  // */
-  // public void index(SearchIndexDataLocation location, SearchIndexState state,
-  // SearchIndexer searchIndexer) {
-  //
-  // index(searchIndexer, state, location);
-  // }
-
-  // /**
-  // * This method indexes the given {@link SearchIndexDataLocation
-  // location}.<br/>
-  // * <b>NOTE:</b><br>
-  // * Unlike
-  // * {@link #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions,
-  // SearchIndexState, SearchIndexer, SearchSource)}
-  // * this method will NOT delete search-entries from the index in advance.
-  // *
-  // * @param searchIndexer is the {@link SearchIndexer} used for modifying the
-  // * index.
-  // * @param state is the {@link SearchIndexState}.
-  // * @param forceFullIndexing - <code>true</code> if the <code>location</code>
-  // * should be entirely indexed again from scratch, <code>false</code> if
-  // * delta-indexing should be enabled so a potentially existing index is
-  // * updated incremental.
-  // * @param location is the {@link SearchIndexDataLocation} to crawl and add
-  // to
-  // * the index.
-  // * @param entryUriSet is the {@link Set} with the
-  // * {@link net.sf.mmm.search.api.SearchEntry#getUri() URIs} of all
-  // * {@link net.sf.mmm.search.api.SearchEntry entries} that have been
-  // * indexed or remain untouched in delta-indexing.
-  // */
-  // protected abstract void index(SearchIndexer searchIndexer, SearchIndexState
-  // state,
-  // boolean forceFullIndexing, SearchIndexDataLocation location, Set<String>
-  // entryUriSet);
-
   /**
    * {@inheritDoc}
    */
@@ -311,6 +273,12 @@ public abstract class AbstractConfiguredSearchIndexer extends AbstractLoggableCo
     List<String> sourceIds = options.getSourceIds();
     SearchIndexer searchIndexer = this.searchIndexerManager.createIndexer(configurationHolder,
         options);
+    if (options.getNonUtfEncoding() == null) {
+      String nonUtfEncoding = configuration.getNonUtfEncoding();
+      if (nonUtfEncoding != null) {
+        ((ConfiguredSearchIndexerOptionsBean) options).setNonUtfEncoding(nonUtfEncoding);
+      }
+    }
     getLogger().debug("Start to index...");
     try {
       if (sourceIds == null) {

@@ -289,7 +289,7 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
         ResourceSearchIndexer resourceSearchIndexer = getIndexerDependencies()
             .getResourceSearchIndexer();
         resourceSearchIndexer.index(arguments.getIndexer(), resource, changeType, location,
-            entryUpdateVisitor, locationResource);
+            entryUpdateVisitor, locationResource, arguments.getOptions().getNonUtfEncoding());
       }
       for (BrowsableResource child : resource.getChildResources()) {
         String childUri = child.getUri().replace('\\', '/');
@@ -304,5 +304,4 @@ public abstract class AbstractSearchIndexerUpdateStrategy extends AbstractLoggab
       }
     }
   }
-
 }

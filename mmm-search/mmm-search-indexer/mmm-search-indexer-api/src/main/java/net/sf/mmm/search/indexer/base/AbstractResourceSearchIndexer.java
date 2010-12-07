@@ -148,4 +148,13 @@ public abstract class AbstractResourceSearchIndexer extends AbstractLoggableComp
         .createDataResource(location.getLocationUri());
     index(indexer, resource, changeType, location, uriVisitor, locationFolder);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
+      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor, DataResource locationFolder) {
+
+    index(indexer, resource, changeType, location, uriVisitor, locationFolder, null);
+  }
 }

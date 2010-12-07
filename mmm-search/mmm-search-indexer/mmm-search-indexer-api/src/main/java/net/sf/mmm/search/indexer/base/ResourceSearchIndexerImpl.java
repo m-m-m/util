@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.content.parser.api.ContentParser;
+import net.sf.mmm.content.parser.api.ContentParserOptions;
 import net.sf.mmm.content.parser.api.ContentParserService;
 import net.sf.mmm.content.parser.base.ContentParserOptionsBean;
 import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
@@ -112,7 +113,8 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
   public MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource,
       String resourceUri) {
 
-    return createEntry(indexer, resource, resourceUri, null);
+    ContentParserOptions options = new ContentParserOptionsBean();
+    return createEntry(indexer, resource, resourceUri, options);
   }
 
   /**
@@ -122,11 +124,11 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
    * @param resource is the {@link DataResource} to index.
    * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the
    *        {@link MutableSearchEntry entry}.
-   * @param encoding is the encoding or <code>null</code> for auto-detection.
+   * @param options are the {@link ContentParserOptionsBean options}.
    * @return the created {@link MutableSearchEntry}.
    */
   protected MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource,
-      String resourceUri, String encoding) {
+      String resourceUri, ContentParserOptions options) {
 
     String filename = resource.getName();
     String extension = this.fileUtil.getExtension(filename);
@@ -143,10 +145,6 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
       try {
         InputStream inputStream = resource.openStream();
         try {
-          ContentParserOptionsBean options = new ContentParserOptionsBean();
-          if (encoding != null) {
-            options.setEncoding(encoding);
-          }
           GenericContext context = parser.parse(inputStream, fileSize, options);
           String title = getStringProperty(context, ContentParser.VARIABLE_NAME_TITLE);
           if (title != null) {
@@ -181,7 +179,7 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
    */
   public void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
       SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor,
-      DataResource locationResource) {
+      DataResource locationResource, String nonUtfEncoding) {
 
     String uri = getEntryUri(resource, location, locationResource);
     uriVisitor.visitIndexedEntryUri(uri, changeType);
@@ -207,7 +205,18 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
       default :
         throw new IllegalCaseException(ChangeType.class, changeType);
     }
-    MutableSearchEntry entry = createEntry(indexer, resource, uri, location.getEncoding());
+    ContentParserOptionsBean options = new ContentParserOptionsBean();
+    String encoding = location.getEncoding();
+    if (encoding == null) {
+      if (nonUtfEncoding != null) {
+        options.setEncoding(nonUtfEncoding);
+      }
+      options.setDisableUtfDetection(false);
+    } else {
+      options.setEncoding(encoding);
+      options.setDisableUtfDetection(true);
+    }
+    MutableSearchEntry entry = createEntry(indexer, resource, uri, options);
     if (sourceId != null) {
       entry.setSource(sourceId);
     }

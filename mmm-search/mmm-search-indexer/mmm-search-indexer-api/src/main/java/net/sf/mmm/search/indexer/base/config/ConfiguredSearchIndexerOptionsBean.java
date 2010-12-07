@@ -25,6 +25,9 @@ public class ConfiguredSearchIndexerOptionsBean implements ConfiguredSearchIndex
   /** @see #getSourceIds() */
   private List<String> sourceIds;
 
+  /** @see #getNonUtfEncoding() */
+  private String nonUtfEncoding;
+
   /**
    * The constructor.
    */
@@ -102,6 +105,22 @@ public class ConfiguredSearchIndexerOptionsBean implements ConfiguredSearchIndex
   public void setSourceIds(List<String> sourceIds) {
 
     this.sourceIds = sourceIds;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getNonUtfEncoding() {
+
+    return this.nonUtfEncoding;
+  }
+
+  /**
+   * @param nonUtfEncoding is the nonUtfEncoding to set
+   */
+  public void setNonUtfEncoding(String nonUtfEncoding) {
+
+    this.nonUtfEncoding = nonUtfEncoding;
   }
 
 }
