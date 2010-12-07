@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view.api;
 
+
 /**
  * This interface contains the servlet-specific configuration of the view.
  * 
@@ -48,6 +49,16 @@ public interface SearchViewConfiguration {
   String PARAMETER_ERROR_PATH = "error-path";
 
   /**
+   * The name of the
+   * {@link javax.servlet.ServletConfig#getInitParameter(String)
+   * servlet-parameter} for the {@link #getBundleName() bundle-name}.
+   */
+  String PARAMETER_BUNDLE_NAME = "bundle-name";
+
+  /** The default for {@link #getBundleName()}. */
+  String DEFAULT_BUNDLE_NAME = "net.sf.mmm.search.view.NlsBundleSearchView";
+
+  /**
    * The {@link javax.servlet.http.HttpServletRequest#getServletPath()
    * servlet-path} for the view of the actual search (enter query and show
    * results).
@@ -78,5 +89,17 @@ public interface SearchViewConfiguration {
    * @return the error view.
    */
   String getErrorPath();
+
+  /**
+   * This method gets the qualified name of the {@link java.util.ResourceBundle}
+   * used if texts for the UI from the
+   * {@link net.sf.mmm.search.api.config.SearchConfiguration configuration} are
+   * specified in the from <code>{&lt;KEY&gt;}</code>.
+   * 
+   * @see net.sf.mmm.util.nls.base.NlsTemplateImpl#getName()
+   * 
+   * @return the bundle-name.
+   */
+  String getBundleName();
 
 }

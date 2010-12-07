@@ -5,13 +5,13 @@
  --%><%
 if (currentPage > 1) {
   %>
-<a href="javascript:showPage(0)"><img src="images/arrows/arrow-first-on.gif" alt="first"/></a>
-<a href="javascript:showPage(<%= currentPage - 2 %>)"><img src="images/arrows/arrow-previous-on.gif" alt="previous"/></a>
-  <%    
+<a href="javascript:showPage(0)"><img src="images/arrows/arrow-first-on.gif" alt="<%= first%>" title="<%= first%>"/></a>
+<a href="javascript:showPage(<%= currentPage - 2 %>)"><img src="images/arrows/arrow-previous-on.gif" alt="<%= previous%>" title="<%= previous%>"/></a>
+  <%
 } else {
   %>
-<img src="images/arrows/arrow-first-off.gif" alt="first"/>
-<img src="images/arrows/arrow-previous-off.gif" alt="previous"/>
+<img src="images/arrows/arrow-first-off.gif" alt="<%= first%>" title="<%= first%>"/>
+<img src="images/arrows/arrow-previous-off.gif" alt="<%= previous%>" title="<%= previous%>"/>
   <%
 }
 
@@ -24,13 +24,13 @@ for (int pageIndex = pagingStart; pageIndex <= pagingEnd; pageIndex++) {
 }
 if (currentPage < maxPage) {
   %>
-<a href="javascript:showPage(<%= currentPage %>)"><img src="images/arrows/arrow-next-on.gif" alt="next"/></a>
-<a href="javascript:showPage(<%= maxPage - 1 %>)"><img src="images/arrows/arrow-last-on.gif" alt="last"/></a>
-  <%  
+<a href="javascript:showPage(<%= currentPage %>)"><img src="images/arrows/arrow-next-on.gif" alt="<%= next%>" title="<%= next%>"/></a>
+<a href="javascript:showPage(<%= maxPage - 1 %>)"><img src="images/arrows/arrow-last-on.gif" alt="<%= last%>" title="<%= last%>"/></a>
+  <%
 } else {
   %>
-<img src="images/arrows/arrow-next-off.gif" alt="next"/>
-<img src="images/arrows/arrow-last-off.gif" alt="last"/>
+<img src="images/arrows/arrow-next-off.gif" alt="<%= next%>" title="<%= next%>"/>
+<img src="images/arrows/arrow-last-off.gif" alt="<%= last%>" title="<%= last%>"/>
   <%
 }
 %>

@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.NavigableMap;
 import java.util.TreeMap;
 
 import javax.servlet.ServletConfig;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
-import net.sf.mmm.search.base.config.SearchSourceBean;
 import net.sf.mmm.search.engine.api.ComplexSearchQuery;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngineBuilder;
@@ -45,7 +43,11 @@ import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.nls.api.NlsLocalizer;
+import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.base.NlsCachingLocalizer;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
 import org.slf4j.Logger;
@@ -107,10 +109,16 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   private Map<String, SearchEntryTypeViewBean> id2viewMap;
 
   /** @see #getSourceViews() */
-  private Collection<SearchSource> sourceViews;
+  private Collection<SearchSourceViewBean> sourceViews;
 
   /** @see #getLastRefreshDate() */
   private String lastRefreshDate;
+
+  /** @see #getNlsLocalizer() */
+  private NlsLocalizer nlsLocalizer;
+
+  /** @see #getBundleName() */
+  private String bundleName;
 
   /**
    * The constructor.
@@ -206,9 +214,25 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
-  public Collection<SearchSource> getSourceViews() {
+  public Collection<SearchSourceViewBean> getSourceViews() {
 
     return this.sourceViews;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public NlsLocalizer getNlsLocalizer() {
+
+    return this.nlsLocalizer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getBundleName() {
+
+    return this.bundleName;
   }
 
   /**
@@ -279,6 +303,10 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
       this.configurationHolder = this.configurationReader.loadConfiguration(this.configurationUri);
       this.searchEngine = container.getComponent(SearchEngineBuilder.class).createSearchEngine(
           this.configurationHolder);
+      NlsMessageFactory messageFactory = container.getComponent(NlsMessageFactory.class);
+      NlsTemplateResolver templateResolver = container.getComponent(NlsTemplateResolver.class);
+      this.bundleName = getParameter(config, PARAMETER_BUNDLE_NAME, DEFAULT_BUNDLE_NAME);
+      this.nlsLocalizer = new NlsCachingLocalizer(this.bundleName, messageFactory, templateResolver);
       updateEntryTypeViews();
       updateSourceViews();
       update();
@@ -354,7 +382,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html");
 
-    SearchViewContextBean searchContext = new SearchViewContextBean(request, this);
+    SearchViewContextBean searchContext = new SearchViewContextBean(request, this, this);
     SearchViewRequestParameters requestParameters = searchContext.getRequestParameters();
 
     String servletPath = request.getServletPath(); // .substring(1);
@@ -454,9 +482,9 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
    */
   private void updateSourceViews() {
 
-    NavigableMap<String, SearchSource> sourceViewMap = new TreeMap<String, SearchSource>();
+    Map<String, SearchSourceViewBean> sourceViewMap = new TreeMap<String, SearchSourceViewBean>();
     for (SearchSource source : this.configurationHolder.getBean().getSources()) {
-      SearchSourceBean view = new SearchSourceBean(source);
+      SearchSourceViewBean view = new SearchSourceViewBean(source);
       String sourceId = view.getId();
       boolean add;
       long count;
@@ -468,7 +496,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
         add = (count > 0);
       }
       if (add) {
-        view.setTitle(view.getTitle() + " (" + count + ")");
+        view.setEntryCount(count);
         sourceViewMap.put(sourceId, view);
       }
     }
@@ -562,6 +590,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
       filename = "-";
     } else {
       int lastSlash = uri.lastIndexOf('/');
+      // if lastSlash is -1, we will get the full uri, no bug...
       filename = uri.substring(lastSlash + 1);
     }
     String title = searchEntry.getTitle();
@@ -570,7 +599,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
     } else {
       StringBuffer buffer = new StringBuffer(filename);
       buffer.append(" (");
-      buffer.append(title);
+      buffer.append(this.xmlUtil.escapeXml(title, false));
       buffer.append(')');
       return buffer.toString();
     }

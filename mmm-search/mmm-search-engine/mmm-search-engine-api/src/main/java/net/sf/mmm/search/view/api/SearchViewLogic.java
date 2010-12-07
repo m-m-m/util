@@ -6,12 +6,12 @@ package net.sf.mmm.search.view.api;
 import java.util.Collection;
 
 import net.sf.mmm.search.api.SearchEntry;
-import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.util.component.api.Refreshable;
 import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.nls.api.NlsLocalizer;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
 /**
@@ -39,15 +39,15 @@ public interface SearchViewLogic extends Refreshable {
    * 
    * @return the {@link SearchEntryTypeView}s.
    */
-  Collection<? extends SearchEntryType> getEntryTypeViews();
+  Collection<? extends SearchEntryTypeView> getEntryTypeViews();
 
   /**
-   * This method gets the list of views on the {@link SearchSource}s sorted by
-   * {@link SearchSource#getTitle() title}.
+   * This method gets the list of views on the {@link SearchSourceView}s sorted
+   * by {@link SearchSourceView#getTitle() title}.
    * 
    * @return the sources.
    */
-  Collection<SearchSource> getSourceViews();
+  Collection<? extends SearchSourceView> getSourceViews();
 
   /**
    * This method gets the {@link SearchEntryTypeView} or {@link SearchEntryType}
@@ -82,6 +82,13 @@ public interface SearchViewLogic extends Refreshable {
    * @return the {@link Iso8601Util}.
    */
   Iso8601Util getIso8601Util();
+
+  /**
+   * This method gets the {@link NlsLocalizer} used for localization of the UI.
+   * 
+   * @return the {@link NlsLocalizer}.
+   */
+  NlsLocalizer getNlsLocalizer();
 
   /**
    * This method gets the date of the last refresh as String.

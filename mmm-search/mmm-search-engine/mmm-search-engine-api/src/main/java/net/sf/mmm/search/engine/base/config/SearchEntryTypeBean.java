@@ -6,7 +6,6 @@ package net.sf.mmm.search.engine.base.config;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
 
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.util.lang.base.attribute.AbstractAttributeReadId;
@@ -30,7 +29,6 @@ public class SearchEntryTypeBean extends AbstractAttributeReadId<String> impleme
   private String title;
 
   /** @see #getId() */
-  @XmlID
   @XmlAttribute(name = "id")
   private String id;
 

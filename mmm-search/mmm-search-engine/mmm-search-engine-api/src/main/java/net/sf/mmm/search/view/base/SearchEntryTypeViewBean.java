@@ -33,11 +33,8 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   /** @see #getCombinedIds() */
   private final Set<String> combinedIds;
 
-  /** The original {@link #getTitle() title} from {@link SearchEntryType}. */
-  private String originalTitle;
-
-  /** The number of occurrences in search-index. */
-  private long count;
+  /** @see #getEntryCount() */
+  private long entryCount;
 
   /**
    * The constructor.
@@ -66,9 +63,10 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
       throw new NlsIllegalStateException();
     }
     String typeTitle = type.getTitle();
-    if (this.originalTitle == null) {
-      this.originalTitle = typeTitle;
-    } else if (!this.originalTitle.equals(typeTitle)) {
+    String title = getTitle();
+    if (title == null) {
+      setTitle(typeTitle);
+    } else if (!title.equals(typeTitle)) {
       throw new NlsIllegalStateException();
     }
     String typeIcon = type.getIcon();
@@ -82,15 +80,14 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
         if (!typeIcon.equals(getIcon())) {
           // throw new NlsIllegalStateException();
           LOGGER.warn("Mismatching icons for " + SearchEntryType.class.getSimpleName()
-              + " with title '" + this.originalTitle + "' (" + typeIcon + " != " + getIcon() + ")");
+              + " with title '" + title + "' (" + typeIcon + " != " + getIcon() + ")");
         }
       }
     }
-    this.count = this.count + typeCount;
+    this.entryCount = this.entryCount + typeCount;
     if (!ID_ANY.equals(typeId)) {
       this.combinedIds.add(typeId);
     }
-    setTitle(this.originalTitle + " (" + this.count + ")");
   }
 
   /**
@@ -99,6 +96,14 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   public Collection<String> getCombinedIds() {
 
     return this.combinedIds;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public long getEntryCount() {
+
+    return this.entryCount;
   }
 
 }

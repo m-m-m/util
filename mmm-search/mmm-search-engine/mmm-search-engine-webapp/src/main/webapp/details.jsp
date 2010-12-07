@@ -2,7 +2,13 @@
  $Id$
  Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  http://www.apache.org/licenses/LICENSE-2.0
- --%><%@page import="java.util.Iterator"
+ --%><%@page import="net.sf.mmm.search.NlsBundleSearchApi"
+%><%@page import="java.util.Iterator"
+%><%@page import="java.util.Locale"
+%><%@page import="java.util.Map"
+%><%@page import="java.util.HashMap"
+%><%@page import="net.sf.mmm.util.nls.api.NlsLocalizer"
+%><%@page import="net.sf.mmm.util.nls.api.NlsObject"
 %><%@page import="net.sf.mmm.util.nls.api.NlsRuntimeException"
 %><%@page import="net.sf.mmm.util.xml.api.XmlUtil"
 %><%@page import="net.sf.mmm.search.api.SearchEntry"
@@ -18,6 +24,14 @@
   SearchEngineConfiguration configuration = searchContext.getLogic().getConfiguration();
   SearchEntry entry = searchContext.getEntry();
   XmlUtil xmlUtil = logic.getXmlUtil();
+  Locale locale = request.getLocale();
+  NlsLocalizer localizer = logic.getNlsLocalizer();
+  Map<String, Object> nlsArguments = new HashMap<String, Object>();
+  String searchPath = searchContext.getViewConfiguration().getSearchPath();
+  if (searchPath.startsWith("/")) {
+    searchPath = searchPath.substring(1);
+  }
+  nlsArguments.put(NlsObject.KEY_URI, searchPath);
 %><html>
 <head>
   <title>Details for your search-result</title>
@@ -28,13 +42,13 @@
 <body>
 <%@include file="jinc/header.jinc" %>
 <div id="searchhead">
-  Back to the <a href="search">search</a>.
+  <%= localizer.localize(locale, NlsBundleSearchApi.MSG_BACK_TO_SEARCH, nlsArguments)%>
 </div>
 <%
   if (entry == null) {
 %>
 <div id="hitlisttop">
-An error has occurred while getting the details of your search-result.
+<%= localizer.localize(locale, NlsBundleSearchApi.MSG_ERROR)%>
 </div>
 <div id="hit">
 Error while getting the details:<br/>
@@ -46,16 +60,15 @@ The parameter for the search-result is missing. Maybe this page was not called
 from the <a href="search">search-page</a>.<%
     } else {
 %>
-<pre>
-<%
-error.printStackTrace(new java.io.PrintWriter(out));
+<pre><%
+  error.printStackTrace(request.getLocale(), new java.io.PrintWriter(out));
 %>
 </pre><%
     }
 %>
 </div>
 <div id="hitlistbottom">
-An error has occurred while getting the details of your search-result.
+<%= localizer.localize(locale, NlsBundleSearchApi.MSG_ERROR)%>
 </div><%
   } else {
     SearchSource source = configuration.getSource(entry.getSource());
@@ -65,21 +78,27 @@ An error has occurred while getting the details of your search-result.
     }
     String url = urlPrefix + entry.getUri();
     String title = logic.getDisplayTitle(entry);
+    nlsArguments.put(NlsObject.KEY_URI, url);
+    nlsArguments.put(NlsObject.KEY_TITLE, title);
+    String detailsMessage = localizer.localize(locale, NlsBundleSearchApi.MSG_HIT_DETAILS, nlsArguments);
+    String field = localizer.localize(locale, NlsBundleSearchApi.INF_FIELD);
+    String value = localizer.localize(locale, NlsBundleSearchApi.INF_VALUE);
 %>
 <div id="hitlisttop">
-Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
+<%= detailsMessage%>
 </div>
 <div id="hit">
 <table>
   <thead>
     <tr>
-      <th>Field</th>
-      <th>Value</th>
+      <th><%= field%></th>
+      <th><%= value%></th>
     </tr>
   </thead>
   <tbody><%
     Iterator<String> fieldIterator = entry.getFieldNames();
     int flipFlop = 0;
+    // loop over all fields, but display text as last...
     while (fieldIterator.hasNext()) {
       String name = fieldIterator.next();
       if (!name.equals(SearchEntry.FIELD_TEXT)) {
@@ -91,7 +110,7 @@ Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
         String styleClass = (flipFlop == 0) ? "even" : "odd";
 %>
     <tr class="<%= styleClass%>">
-      <td><%=name%></td>
+      <td><%=localizer.localize(locale, name)%></td>
       <td><%=xmlUtil.escapeXml(entry.getFieldAsString(name), false)%></td>
     </tr><%
         flipFlop = (flipFlop + 1) % 2;
@@ -100,14 +119,14 @@ Details for <a href="<%= url%>"><strong><%=title%></strong></a>.
     String styleClass = (flipFlop == 0) ? "even" : "odd";
 %>
     <tr class="<%= styleClass%>">
-      <td><%=SearchEntry.FIELD_TEXT%></td>
+      <td><%=localizer.localize(locale, SearchEntry.FIELD_TEXT)%></td>
       <td><pre><%=xmlUtil.escapeXml(entry.getFieldAsString(SearchEntry.FIELD_TEXT), false)%></pre></td>
     </tr>
   </tbody>
 </table>
 </div>
 <div id="hitlistbottom">
-Details for <a href="<%= url%>"><strong><%= title %></strong></a>.
+<%= detailsMessage%>
 </div>
     <%
   }

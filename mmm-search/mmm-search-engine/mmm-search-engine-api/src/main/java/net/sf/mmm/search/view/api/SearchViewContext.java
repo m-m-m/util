@@ -29,6 +29,13 @@ public interface SearchViewContext {
   SearchViewRequestParameters getRequestParameters();
 
   /**
+   * This method gets the {@link SearchViewConfiguration}.
+   * 
+   * @return the {@link SearchViewConfiguration}.
+   */
+  SearchViewConfiguration getViewConfiguration();
+
+  /**
    * This method gets the {@link SearchViewLogic}.
    * 
    * @return the {@link SearchViewLogic}.

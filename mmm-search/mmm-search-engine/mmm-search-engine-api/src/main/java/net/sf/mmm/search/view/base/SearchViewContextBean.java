@@ -7,6 +7,7 @@ import javax.servlet.ServletRequest;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.SearchResultPage;
+import net.sf.mmm.search.view.api.SearchViewConfiguration;
 import net.sf.mmm.search.view.api.SearchViewContext;
 import net.sf.mmm.search.view.api.SearchViewLogic;
 import net.sf.mmm.search.view.api.SearchViewRequestParameters;
@@ -23,7 +24,7 @@ public class SearchViewContextBean implements SearchViewContext {
   private final SearchViewRequestParameters requestParameters;
 
   /** @see #getLogic() */
-  private final SearchViewLogic dependencies;
+  private final SearchViewLogic logic;
 
   /** @see #getResultPage() */
   private SearchResultPage resultPage;
@@ -33,6 +34,9 @@ public class SearchViewContextBean implements SearchViewContext {
 
   /** @see #getException() */
   private NlsRuntimeException exception;
+
+  /** @see #getViewConfiguration() */
+  private SearchViewConfiguration viewConfiguration;
 
   /**
    * The constructor.<br>
@@ -45,12 +49,15 @@ public class SearchViewContextBean implements SearchViewContext {
    * <code>request</code>.
    * 
    * @param request is the servlet request.
-   * @param dependencies are the {@link SearchViewLogic}.
+   * @param logic is the {@link SearchViewLogic}.
+   * @param viewConfiguration is the {@link SearchViewConfiguration}.
    */
-  public SearchViewContextBean(ServletRequest request, SearchViewLogic dependencies) {
+  public SearchViewContextBean(ServletRequest request, SearchViewLogic logic,
+      SearchViewConfiguration viewConfiguration) {
 
     super();
-    this.dependencies = dependencies;
+    this.logic = logic;
+    this.viewConfiguration = viewConfiguration;
     this.requestParameters = new SearchViewRequestParametersBean(request);
     request.setAttribute(KEY, this);
   }
@@ -68,7 +75,15 @@ public class SearchViewContextBean implements SearchViewContext {
    */
   public SearchViewLogic getLogic() {
 
-    return this.dependencies;
+    return this.logic;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SearchViewConfiguration getViewConfiguration() {
+
+    return this.viewConfiguration;
   }
 
   /**

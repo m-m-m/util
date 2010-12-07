@@ -36,4 +36,14 @@ public interface SearchEntryTypeView extends SearchEntryType {
    */
   Collection<String> getCombinedIds();
 
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.search.engine.api.SearchEngine#count(String, String)
+   * entry-count} for this {@link SearchEntryTypeView}.
+   * 
+   * @return the number of search-entries available for this
+   *         {@link SearchEntryTypeView}.
+   */
+  long getEntryCount();
+
 }
