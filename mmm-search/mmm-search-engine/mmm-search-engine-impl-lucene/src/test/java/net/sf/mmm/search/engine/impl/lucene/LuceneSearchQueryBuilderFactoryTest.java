@@ -19,6 +19,7 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
@@ -279,6 +280,10 @@ public class LuceneSearchQueryBuilderFactoryTest {
     Assert.assertEquals("thing", getLuceneQuery(subClauses.get(1).getQuery(), TermQuery.class)
         .getTerm().text());
     Assert.assertSame(Occur.SHOULD, subClauses.get(1).getOccur());
+
+    query = queryBuilder.parseStandardQuery("()");
+    MatchAllDocsQuery allDocsQuery = getLuceneQuery(query, MatchAllDocsQuery.class);
+    Assert.assertNotNull(allDocsQuery);
   }
 
 }

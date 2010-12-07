@@ -125,8 +125,8 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
       // TODO if no closing ) we should call errorHandler
       if (parser.hasNext()) {
         if (parser.peek() == ')') {
+          parser.next();
           if (depth > 0) {
-            parser.next();
             todo = false;
           }
         }
