@@ -41,15 +41,29 @@ public interface ContentParserOptions {
   /**
    * This method gets the encoding used as fallback, if it can NOT be derived or
    * detected automatically. Parsers for formats that make encoding explicit
-   * (e.g. XML) will completely ignore this parameter. Even for textual formats
-   * heuristics will be used to detect unicode (UTF*) but for other non-ASCII
-   * texts this value will be relevant. So you may want to use something like
-   * {@link net.sf.mmm.util.io.api.EncodingUtil#ENCODING_ISO_8859_15}.<br/>
-   * The default is
-   * {@link net.sf.mmm.util.io.api.EncodingUtil#SYSTEM_DEFAULT_ENCODING}.
+   * (e.g. XML) will completely ignore this parameter. For textual formats
+   * heuristics will be used to detect unicode (UTF*) if
+   * {@link #isDisableUtfDetection() not disabled}. By default
+   * {@link #isDisableUtfDetection() UTF detection is enabled} and the encoding
+   * is The default is
+   * {@link net.sf.mmm.util.io.api.EncodingUtil#SYSTEM_DEFAULT_ENCODING} but
+   * replaced by
+   * {@link net.sf.mmm.util.io.api.EncodingUtil#ENCODING_ISO_8859_15} if
+   * UTF-based.
    * 
    * @return the fallback encoding.
    */
   String getEncoding();
+
+  /**
+   * This method determines if the automatic detection of UTF-encodings
+   * (unicode) shall be disabled. If this is disabled, textual files are read
+   * using the configured {@link #getEncoding() encoding}. Otherwise it will be
+   * treaded as fallback if textual files do not seem to be unicode (UTF).
+   * 
+   * @return <code>true</code> if unicode detection shall be disabled,
+   *         <code>false</code> if enabled (default).
+   */
+  boolean isDisableUtfDetection();
 
 }

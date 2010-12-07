@@ -23,6 +23,9 @@ public class ContentParserOptionsBean implements ContentParserOptions {
   /** @see #getEncoding() */
   private String encoding;
 
+  /** @see #isDisableUtfDetection() */
+  private boolean disableUtfDetection;
+
   /**
    * The constructor.
    */
@@ -34,6 +37,7 @@ public class ContentParserOptionsBean implements ContentParserOptions {
     if (this.encoding.toLowerCase(Locale.US).startsWith("utf")) {
       this.encoding = EncodingUtil.ENCODING_ISO_8859_15;
     }
+    this.disableUtfDetection = false;
   }
 
   /**
@@ -66,6 +70,22 @@ public class ContentParserOptionsBean implements ContentParserOptions {
   public void setEncoding(String encoding) {
 
     this.encoding = encoding;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isDisableUtfDetection() {
+
+    return this.disableUtfDetection;
+  }
+
+  /**
+   * @param disableUnicodeDetection is the disableUnicodeDetection to set
+   */
+  public void setDisableUtfDetection(boolean disableUnicodeDetection) {
+
+    this.disableUtfDetection = disableUnicodeDetection;
   }
 
 }
