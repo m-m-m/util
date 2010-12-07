@@ -8,7 +8,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-indexer-api</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>search-indexer-api</name>
   <description>This project provides the API of an indexer using the provided search-engine.</description>
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-engine-api</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

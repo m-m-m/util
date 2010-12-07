@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-engine-webapp</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>search-engine-webapp</name>
   <description>This project a demo webapplication using lucene as search-engine.</description>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-engine-impl-lucene</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
