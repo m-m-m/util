@@ -30,7 +30,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-impl-xml</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -49,7 +49,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-impl-java</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
