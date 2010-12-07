@@ -92,6 +92,15 @@ public interface NlsObject {
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   String KEY_LOCATION = "location";
 
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_QUERY = "query";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_URI = "uri";
+
+  /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
+  String KEY_TITLE = "title";
+
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
    * 
