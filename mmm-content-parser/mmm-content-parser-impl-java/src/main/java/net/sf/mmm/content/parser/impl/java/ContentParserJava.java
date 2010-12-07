@@ -24,9 +24,11 @@ import net.sf.mmm.util.context.api.MutableGenericContext;
 public class ContentParserJava extends AbstractContentParserTextMarkupAware {
 
   /** The mimetype. */
+  @SuppressWarnings("hiding")
   public static final String KEY_MIMETYPE = "text/java-source";
 
   /** The default extension. */
+  @SuppressWarnings("hiding")
   public static final String KEY_EXTENSION = "java";
 
   /** the string used to separate package names */
@@ -54,6 +56,7 @@ public class ContentParserJava extends AbstractContentParserTextMarkupAware {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getExtension() {
 
     return KEY_EXTENSION;
@@ -62,6 +65,7 @@ public class ContentParserJava extends AbstractContentParserTextMarkupAware {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getMimetype() {
 
     return KEY_MIMETYPE;
