@@ -1,0 +1,28 @@
+Hello World! This is a plain ASCII text
+exclamation mark:!
+question mark:?
+quote:"
+single quote:'
+dollar:$
+percent:%
+ampersand:&
+slash:/
+backslash:\
+opening brace:(
+closing brace:)
+opening curly brace:{
+closing curly brace:}
+opening angled brace:[
+closing angled brace:]
+equals:=
+at:@
+less:<
+greater:>
+hash:#
+asterisk:*
+tilde:~
+roof:^
+underscore:_
+plus:+
+hyphen:-
+pipe:|

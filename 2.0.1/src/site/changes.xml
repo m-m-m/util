@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>mmm-util-core</title>
+    <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
+  </properties>
+  <body>
+    <release version="2.0.0" date="2010-09-26" description="Major release with CLI and JSR 330">
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Migrated to JSR 330. Replaced any <code>@Resource</code> with <code>@Inject</code>. 
+        Added <code>@Named</code> to component implementations.
+        <code>net.sf.mmm.util.component.base.ComponentSpecification</code>: added and annotated all according interfaces.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added hyphenation support.<br/>
+        <code>net.sf.mmm.util.text.api.Hyphenation</code>: added.
+        <code>net.sf.mmm.util.text.api.Hyphenator</code>: added.
+        <code>net.sf.mmm.util.text.api.HyphenatorBuilder</code>: added.
+        <code>net.sf.mmm.util.text.base.AbstractHyphenatorBuilder</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationImpl</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationPattern</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationPatternPosition</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenatorBuilderImpl</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenatorImpl</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        <code>net.sf.mmm.util.text.base.HyphenationState</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Added string hashing.<br/>
+        <code>net.sf.mmm.util.text.api.StringHasher</code>: added.
+        <code>net.sf.mmm.util.text.base.AbstractStringHasher</code>: added.
+        <code>net.sf.mmm.util.text.base.FastStringHasher</code>: added.
+        <code>net.sf.mmm.util.text.base.SimpleStringHasher</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Added line wraping.<br/>
+        <code>net.sf.mmm.util.text.api.LineWrapper</code>: added.
+        <code>net.sf.mmm.util.text.api.TextColumn</code>: added.
+        <code>net.sf.mmm.util.text.api.TextTableInfo</code>: added.
+        <code>net.sf.mmm.util.text.base.AbstractLineWrapper</code>: added.
+        <code>net.sf.mmm.util.text.base.DefaultLineWrapper</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Added unicode helpers.<br/>
+        <code>net.sf.mmm.util.text.api.DiacriticalMark</code>: added.
+        <code>net.sf.mmm.util.text.api.UnicodeUtil</code>: added.
+        <code>net.sf.mmm.util.text.base.UnicodeUtilImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Improved value converter.<br/>
+        <code>net.sf.mmm.util.value.impl.AbstractValueConverterToContainer</code>: added.
+        <code>net.sf.mmm.util.value.impl.ValueConverterToFile</code>: added.
+        <code>net.sf.mmm.util.value.impl.ValueConverterToMap</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added IoC abstraction.<br/>
+        <code>net.sf.mmm.util.component.api.IocContainer</code>: added.
+        <code>net.sf.mmm.util.component.impl.SpringContainer</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added refresh support.<br/>
+        <code>net.sf.mmm.util.component.api.Refreshable</code>: added.
+        <code>net.sf.mmm.util.component.api.PeriodicRefresher</code>: added.
+        <code>net.sf.mmm.util.component.impl.PeriodicRefresherImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Further JAXB support.<br/>
+        <code>net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolder</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolderImpl</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.Property</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.PropertyList</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlAdapterEnum</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlAdapterInfixPattern</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlAdapterProperties</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">        
+        <![CDATA[
+        Added SystemUtil.<br/>
+        <code>net.sf.mmm.util.lang.api.SystemInformation</code>: added.
+        <code>net.sf.mmm.util.lang.api.SystemUtil</code>: added.
+        <code>net.sf.mmm.util.lang.base.SystemInformationImpl</code>: added.
+        <code>net.sf.mmm.util.lang.base.SystemUtilImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        Fixed bug in path normalization.<br/>
+        <code>net.sf.mmm.util.file.base.FileUtilImpl</code>: fixed normalizePath() method.
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        Fixed bug in stream-detection (used by EncodingDetectionReader).<br/>
+        <code>net.sf.mmm.util.io.impl.AbstractByteArrayBufferBuffer</code>: fixed sync() method.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Improved NLS to support automatic resolving via <code>META-INF/net.sf.mmm/nls-bundles</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Differentiate components and other classes.<br/>
+        <code>net.sf.mmm.util.component.base.AbstractLoggable</code>: removed.
+        <code>net.sf.mmm.util.component.base.AbstractLoggableComponent</code>: added.
+        <code>net.sf.mmm.util.component.base.AbstractLoggableObject</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.reflect.base.ManifestLoader</code>: added methods <code>loadManifest(...)</code> and <code>getValue(...)</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="removed">
+        <![CDATA[
+        <code>net.sf.mmm.util.reflect.api.Manifest</code>: removed and replaced with existing <code>java.util.jar.Manifest</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessor</code>: extracted code to AbstractPojoPropertyAccessorBase.
+        ]]>
+      </action>
+      <action dev="hohwille" type="removed">
+        <![CDATA[
+        <code>net.sf.mmm.util.SpringConfigsUtilCore</code>: removed as obsolete with JSR 330.
+        <code>net/sf/mmm/util/**/beans-*.xml</code>: removed as obsolete with JSR 330.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction</code>: added (for easy JSR 330 plugin).
+        <code>net.sf.mmm.util.pojo.path.impl.function.PojoPathNamedFunctionToString</code>: added (as useful example).
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.cli</code>: added (now excellent CLI support offered).
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>: migrated to CLI, now API is slightly changed (not because old API could not be realized with CLI).
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator</code>: conversion for functions, collections and maps now working.
+        ]]>
+      </action>
+    </release>
+    <release version="1.1.0" date="2009-01-07" description="subsequent release">
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.SpringConfigsUtilCore</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.collection.base.AbstractSimpleMap</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.filter.api.CharFilter.IDENTIFIER_FILTER</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.filter.api.CharFilter</code>: added IDENTIFIER_FILTER.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.filter.base.FilterRuleChain</code>: now with JAXB support.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsParseException</code>: added.<br/>
+    	  <code>net.sf.mmm.util.value.api.ValueParseException</code>: deprecated.<br/>
+    	  <code>net.sf.mmm.util.value.api.ValueParseGenericException</code>: deprecated.
+    	  ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsMessage</code>: Javadoc improved.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsMessageFactory</code>: added <code>create(...)</code> methods for 4 key/value pairs added.<br/>
+        <code>net.sf.mmm.util.nls.base.AbstractNlsMessageFactory</code>: added <code>create(...)</code> methods implementation.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.impl.NlsMessageFormatterImpl</code>: added justification support.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.text.api.Justification</code>: added.<br/>
+        <code>net.sf.mmm.util.text.api.JustificationBuilder</code>: added.<br/>
+        <code>net.sf.mmm.util.text.base.JustificationImpl</code>: added.<br/>
+        <code>net.sf.mmm.util.text.base.JustificationBuilderImpl</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.api.NlsRuntimeException</code>: moved KEY constants to <code>net.sf.mmm.util.nls.api.NlsThrowable</code>.<br/>
+        ]]>
+      </action>
+      <action dev="hohwille" type="fix">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>: NLS of help fixed.<br/>
+        <code>net.sf.mmm.util.nls.base.NlsBundleSynchronizer</code>:NLS of help fixed.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder</code>: added <code>pojo2Map</code> method.<br/>
+        <code>net.sf.mmm.util.pojo.descriptor.base.PojoMap</code>: added.<br/>
+        <code>net.sf.mmm.util.pojo.path.api.PojoPathNavigator</code>: added <code>pojo2Map</code> methods.<br/>
+        <code>net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator</code>: added <code>pojo2Map</code> methods implementation.
+        ]]>
+      </action>
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        <code>net.sf.mmm.util.xml.base.NodeIterator</code>: now implements <code>Iterator</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.NlsBundleUtilCore</code>: new messages added.
+        ]]>
+      </action>
+    </release>
+    <release version="1.1.0" date="2009-09-26" description="subsequent release">
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.context</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>ConcurrentMapFactory</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add" issue="3">
+        <![CDATA[
+        Merged <code>mmm-util-pojo</code> into <code>mmm-util-core</code>.<br/>
+        <code>net.sf.mmm.util.pojo</code>: added.]]>
+      </action>
+      <action dev="hohwille" type="add" issue="1">
+        <![CDATA[
+        <code>net.sf.mmm.util.io</code>: completed stream-detector-framework.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add" issue="2">
+        <![CDATA[
+        <code>net.sf.mmm.util.nls</code>: added suppored for map-keys in NlsMessage rather than index.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.file.api.FileUtil</code>: added support for URLs and UNC-paths in <code>normalizePath(String)</code>.]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.reflect.api.ReflectionUtil</code>: added <code>findResourceNames(*)</code> methods.
+        ]]>
+      </action>
+    </release>
+    <release version="1.0.2" date="2009-01-21" description="subsequent release">
+    	
+    </release>
+    <release version="1.0.1" date="2008-02-10" description="subsequent release">
+      <action dev="hohwille" type="update">
+        <![CDATA[
+        Refactored package structure to general scheme <code>net.sf.mmm.util.*.(api|base|impl)</code>.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.file</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.event</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        <code>net.sf.mmm.util.lang.api.StringUtil</code>: added <code>replace(char[], char, char)</code> method.
+        ]]>
+      </action>
+    </release>
+    <release version="1.0.0" date="2008-01-19" description="initial release">
+      <action dev="hohwille" type="add">
+        Everything is new in the initial release.
+      </action>
+    </release>
+  </body>
+</document>

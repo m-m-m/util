@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- Id: $ -->
+<chain default="true">
+  
+  <!-- 1. rule says that all strings that start (^) with "/doc/" will be accepted -->
+  <include pattern="^/doc/"/>
+  <!-- 2. rule says that all strings that end ($) with ".pdf" ignoring the case  
+  of the characters will be rejected -->
+  <exclude pattern="(?i)\.pdf$"/>
+  
+  <!-- 3. rule says that all string that start with "/data/" will be accepted -->
+  <include pattern="^/data/"/>
+  <!-- 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring 
+  the case (?i) of the characters will be rejected: -->
+  <exclude pattern="(?i)\.(xml|xsl)$"/>
+  <!-- 5. rule says that everything else is accepted -->
+  <include pattern=".*"/>
+</chain>
