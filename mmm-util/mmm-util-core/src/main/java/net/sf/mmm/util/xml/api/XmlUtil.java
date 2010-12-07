@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.api;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
 import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the interface for a collection of utility functions that help to deal
@@ -126,9 +126,10 @@ public interface XmlUtil {
    *        be escaped, else if <code>false</code> quotations are untouched. Set
    *        this to <code>true</code> if you are writing the value of an
    *        attribute.
-   * @throws IOException if the <code>writer</code> produced an I/O error.
+   * @throws RuntimeIoException if the <code>writer</code> produced an I/O
+   *         error.
    */
-  void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException;
+  void escapeXml(String string, Writer writer, boolean escapeQuotations) throws RuntimeIoException;
 
   /**
    * This method creates a {@link Reader} from the given
@@ -140,10 +141,10 @@ public interface XmlUtil {
    *        content of an XML document.
    * @return a reader on the given <code>inputStream</code> that takes respect
    *         on the encoding specified in the (potential) XML header.
-   * @throws IOException if an I/O error occurred when trying to read the XML
-   *         header.
+   * @throws RuntimeIoException if an I/O error occurred when trying to read the
+   *         XML header.
    */
-  Reader createXmlReader(InputStream inputStream) throws IOException;
+  Reader createXmlReader(InputStream inputStream) throws RuntimeIoException;
 
   /**
    * This method creates a {@link Reader} from the given
@@ -157,10 +158,10 @@ public interface XmlUtil {
    *        specified via an XML header.
    * @return a reader on the given <code>inputStream</code> that takes respect
    *         on the encoding specified in the (potential) XML header.
-   * @throws IOException if an I/O error occurred when trying to read the XML
-   *         header.
+   * @throws RuntimeIoException if an I/O error occurred when trying to read the
+   *         XML header.
    */
-  Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws IOException;
+  Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws RuntimeIoException;
 
   /**
    * This method resolves an HTML entity given by <code>entityName</code>.

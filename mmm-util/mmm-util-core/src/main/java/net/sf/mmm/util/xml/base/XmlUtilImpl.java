@@ -17,7 +17,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 import net.sf.mmm.util.xml.api.ParserState;
 import net.sf.mmm.util.xml.api.XmlUtil;
@@ -342,7 +343,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
-  public Reader createXmlReader(InputStream inputStream) throws IOException {
+  public Reader createXmlReader(InputStream inputStream) {
 
     return createXmlReader(inputStream, Charset.defaultCharset());
   }
@@ -350,10 +351,14 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
-  public Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws IOException {
+  public Reader createXmlReader(InputStream inputStream, Charset defaultCharset) {
 
-    XmlInputStream streamAdapter = new XmlInputStream(inputStream, defaultCharset);
-    return new InputStreamReader(streamAdapter, streamAdapter.getCharset());
+    try {
+      XmlInputStream streamAdapter = new XmlInputStream(inputStream, defaultCharset);
+      return new InputStreamReader(streamAdapter, streamAdapter.getCharset());
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
+    }
   }
 
   /**
@@ -361,42 +366,49 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
    */
   public String escapeXml(String string, boolean escapeQuotations) {
 
-    try {
-      StringWriter writer = new StringWriter(string.length() + 8);
-      escapeXml(string, writer, escapeQuotations);
-      return writer.toString();
-    } catch (IOException e) {
-      throw new NlsIllegalStateException(e);
+    if (string == null) {
+      return null;
     }
+    StringWriter writer = new StringWriter(string.length() + 8);
+    escapeXml(string, writer, escapeQuotations);
+    return writer.toString();
   }
 
   /**
    * {@inheritDoc}
    */
-  public void escapeXml(String string, Writer writer, boolean escapeQuotations) throws IOException {
+  public void escapeXml(String string, Writer writer, boolean escapeQuotations) {
 
-    // TODO: make more efficient
-    char[] chars = string.toCharArray();
-    for (char c : chars) {
-      if (c >= 128) {
-        writer.append("&#");
-        writer.append(Integer.toString(c));
-        writer.append(";");
-      } else if (c == '&') {
-        writer.append("&amp;");
-      } else if (c == '<') {
-        writer.append("&lt;");
-      } else if (c == '>') {
-        writer.append("&gt;");
-      } else if (escapeQuotations && (c == '\'')) {
-        // writer.append("&apos;");
-        writer.append("&#39;");
-      } else if (escapeQuotations && (c == '"')) {
-        writer.append("&quot;");
-      } else {
-        // TODO: make more efficient
-        writer.append(c);
+    try {
+      if (string == null) {
+        writer.append("null");
+        return;
       }
+      // TODO: make more efficient
+      char[] chars = string.toCharArray();
+      for (char c : chars) {
+        if (c >= 128) {
+          writer.append("&#");
+          writer.append(Integer.toString(c));
+          writer.append(";");
+        } else if (c == '&') {
+          writer.append("&amp;");
+        } else if (c == '<') {
+          writer.append("&lt;");
+        } else if (c == '>') {
+          writer.append("&gt;");
+        } else if (escapeQuotations && (c == '\'')) {
+          // writer.append("&apos;");
+          writer.append("&#39;");
+        } else if (escapeQuotations && (c == '"')) {
+          writer.append("&quot;");
+        } else {
+          // TODO: make more efficient
+          writer.append(c);
+        }
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
     }
   }
 
