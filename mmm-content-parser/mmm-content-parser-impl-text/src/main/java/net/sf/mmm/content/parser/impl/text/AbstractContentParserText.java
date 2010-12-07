@@ -5,6 +5,7 @@ package net.sf.mmm.content.parser.impl.text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -174,7 +175,12 @@ public abstract class AbstractContentParserText extends AbstractContentParser {
     }
     int charCapacity = capacity / 2;
     StringBuilder textBuffer = new StringBuilder(charCapacity);
-    Reader reader = getEncodingUtil().createUtfDetectionReader(inputStream, options.getEncoding());
+    Reader reader;
+    if (options.isDisableUtfDetection()) {
+      reader = new InputStreamReader(inputStream, options.getEncoding());
+    } else {
+      reader = getEncodingUtil().createUtfDetectionReader(inputStream, options.getEncoding());
+    }
     BufferedReader bufferedReader = new BufferedReader(reader);
     parse(bufferedReader, options, context, textBuffer);
     if ((filesize > 0) && (textBuffer.length() < charCapacity)) {
