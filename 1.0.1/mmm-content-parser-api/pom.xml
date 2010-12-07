@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-content-parser</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-content-parser-api</artifactId>
+  <version>1.0.1</version>
+  <packaging>jar</packaging>
+  <name>content-parser-api</name>
+  <description>This is the API of the search parsers.</description>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-core</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+  </dependencies>
+</project>
