@@ -27,12 +27,6 @@ public class SearchException extends NlsRuntimeException {
    * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
    * argument} {@value}.
    */
-  protected static final String KEY_QUERY = "query";
-
-  /**
-   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   * argument} {@value}.
-   */
   protected static final String KEY_ENTRY = "entry";
 
   /**

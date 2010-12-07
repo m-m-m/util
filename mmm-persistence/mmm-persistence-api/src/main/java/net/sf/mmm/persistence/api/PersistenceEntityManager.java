@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -30,6 +31,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification(plugin = true)
 public interface PersistenceEntityManager<ENTITY extends PersistenceEntity> {
 
   /**

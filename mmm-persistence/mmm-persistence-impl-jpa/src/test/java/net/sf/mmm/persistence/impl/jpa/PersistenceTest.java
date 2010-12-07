@@ -5,13 +5,13 @@ package net.sf.mmm.persistence.impl.jpa;
 
 import java.util.concurrent.Callable;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
 import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.transaction.api.TransactionExecutor;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * This is the test-case for the persistence.
@@ -21,19 +21,16 @@ import net.sf.mmm.util.component.impl.SpringContainerPool;
 @SuppressWarnings("all")
 public class PersistenceTest {
 
-  /** The classpath to the spring application context XML configuration. */
-  private static final String SPRING_XML = "net/sf/mmm/persistence/impl/jpa/beans-test-persistence-jpa.xml";
-
   protected PersistenceManager getPersistenceManager() {
 
-    return SpringContainerPool.getContainer(SPRING_XML).getComponent(PersistenceManager.class);
+    return SpringContainerPool.getInstance().getComponent(PersistenceManager.class);
   }
 
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getContainer(SPRING_XML)
-        .getComponent(TransactionExecutor.class);
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance().getComponent(
+        TransactionExecutor.class);
 
     DummyFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyFooEntity>() {
 

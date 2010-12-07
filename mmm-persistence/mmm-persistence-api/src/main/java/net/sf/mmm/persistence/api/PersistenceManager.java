@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -23,6 +24,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification
 public interface PersistenceManager {
 
   /**
@@ -84,9 +86,9 @@ public interface PersistenceManager {
    * real {@link PersistenceEntityManager#getEntityClass() class defining the
    * entity}.<br>
    * E.g. if the underlying implementation may create a dynamic proxy that
-   * extends the entity-class and <code>entity.{@link #getClass()}</code> will return the {@link Class} of
-   * the proxy instead. In such case this method will return the real
-   * entity-class adapted by the proxy.
+   * extends the entity-class and <code>entity.{@link #getClass()}</code> will
+   * return the {@link Class} of the proxy instead. In such case this method
+   * will return the real entity-class adapted by the proxy.
    * 
    * @param entity is the {@link PersistenceEntity} for which the class is
    *        requested.
