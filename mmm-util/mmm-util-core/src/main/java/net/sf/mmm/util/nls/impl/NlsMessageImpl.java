@@ -87,9 +87,9 @@ public class NlsMessageImpl extends BasicNlsMessage {
           text = nlsTemplate.translate(locale);
         }
         if (text == null) {
-          if (locale != LOCALE_ROOT) {
-            buffer.append(LOCALIZATION_FAILURE_PREFIX);
-          }
+          // if (locale != LOCALE_ROOT) {
+          // buffer.append(LOCALIZATION_FAILURE_PREFIX);
+          // }
           text = message;
         }
         buffer.append(text);
