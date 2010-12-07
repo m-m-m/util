@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<search>
+  <search-index location="~/search-index" />
+  <sources>
+    <source id="wiki" title="TWiki" update-strategy="none" url-prefix="http://foo.org/twiki/" />
+    <source id="SVN" title="Subversion" update-strategy="vcs" url-prefix="http://foo.org/svn/trunk">
+      <locations>
+        <location absolute-uris="false" encoding="UTF-8" filter="extended-filter" location-uri="file:///data/repository" update-strategy-variant="svn"
+          uri-transformer="wiki-transformer" />
+      </locations>
+    </source>
+  </sources>
+  <filters>
+    <filter-chain id="my-filter" default-result="true">
+      <rule include="true" pattern="^/doc/.*" />
+      <rule include="false" pattern=".*(?i)\.pdf$" />
+    </filter-chain>
+    <filter-chain id="extended-filter" default-result="true" parent="my-filter">
+      <rule include="true" pattern="^/data/.*" />
+      <rule include="false" pattern=".*(?i)\.(xml|xsl)$" />
+    </filter-chain>
+  </filters>
+  <uri-rewriters>
+    <transformer-chain id="wiki-transformer">
+      <regex pattern=".txt$" replace-all="false" replacement="" stop-on-match="false" />
+      <regex pattern="/\.foo/" replace-all="false" replacement="" stop-on-match="true" />
+    </transformer-chain>
+  </uri-rewriters>
+</search>

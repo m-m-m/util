@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-search</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-search-indexer</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>search-indexer</name>
+  <description>This project provides an indexer using the provided search-engine.</description>
+  
+  <modules>
+    <module>mmm-search-indexer-api</module>
+    <module>mmm-search-indexer-base</module>
+    <module>mmm-search-indexer-impl-lucene</module>
+  </modules>
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<search>
+  <search-index location="target/search-index" />
+  <!-- configuration of sources -->
+  <sources>
+    <source id="" title="All" />
+    <source id="test-resources" title="Test" update-strategy="vcs" url-prefix="http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/mmm-search/mmm-search-indexer/mmm-search-indexer-impl-lucene">
+      <locations>
+        <location absolute-uris="false" update-strategy-variant="svn" filter="svn-filter" location-uri="src/test/resources"/>
+      </locations>
+    </source>
+    <source id="test-java" title="Main" update-strategy="last-modified" url-prefix="http://m-m-m.svn.sourceforge.net/svnroot/m-m-m/trunk/mmm-search/mmm-search-indexer/mmm-search-indexer-impl-lucene">
+      <locations>
+        <location absolute-uris="false" filter="svn-filter" location-uri="src/test/java"/>
+      </locations>
+    </source>
+  </sources>
+  <filters>
+    <filter-chain default-result="true" id="svn-filter">
+      <rule include="false" pattern="/\.svn$"/>
+    </filter-chain>
+  </filters>
+  <properties>
+    <property key="magic-word">androgynous</property>
+  </properties>
+</search>

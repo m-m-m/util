@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <parent>
+    <artifactId>mmm-search-indexer</artifactId>
+    <groupId>net.sf.m-m-m</groupId>
+    <version>1.0.0</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>mmm-search-indexer-impl-lucene</artifactId>
+  <name>search-indexer-impl-lucene</name>
+  <version>1.0.1</version>
+  <description>This project provides an indexer using apache lucene as underlying search-technology.</description>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-search-indexer-base</artifactId>
+      <version>1.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-search-engine-impl-lucene</artifactId>
+      <version>1.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-search</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-search-engine</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>search-engine</name>
+  <description>This project provides the engine used for full-text search indexing and retrieval.</description>
+  
+  <modules>
+    <module>mmm-search-engine-api</module>
+    <module>mmm-search-engine-impl-lucene</module>
+    <module>mmm-search-engine-webapp</module>
+  </modules>
+</project>
