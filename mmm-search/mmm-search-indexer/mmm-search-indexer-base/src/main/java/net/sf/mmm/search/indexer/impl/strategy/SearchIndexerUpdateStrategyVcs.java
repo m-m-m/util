@@ -198,10 +198,10 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
       vcsType = detectVcsType(locationDirectory);
     }
     try {
-      ScmRepository scmRepository = this.scmManager.makeProviderScmRepository(vcsType,
+      ScmRepository vcsRepository = this.scmManager.makeProviderScmRepository(vcsType,
           locationDirectory);
       ScmFileSet fileSet = new ScmFileSet(locationDirectory);
-      UpdateScmResult result = this.scmManager.update(scmRepository, fileSet);
+      UpdateScmResult result = this.scmManager.update(vcsRepository, fileSet);
       List<ScmFile> updatedFiles = result.getUpdatedFiles();
       for (ScmFile changedFile : updatedFiles) {
         String path = changedFile.getPath();
@@ -242,5 +242,4 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
       throw new NlsIllegalStateException(e);
     }
   }
-
 }
