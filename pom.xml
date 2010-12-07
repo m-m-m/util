@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <name>mmm</name>
   <description>The Multi-Media-Manager (MMM) is a generic plattform and a enterprise content management system (ECMS) build on top.</description>
-  <url>http://m-m-m.sourceforge.net</url>
+  <url>http://m-m-m.sourceforge.net/maven</url>
   <inceptionYear>2001</inceptionYear>
   
   <dependencies>
