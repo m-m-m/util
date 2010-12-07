@@ -59,7 +59,12 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
    */
   public String getText() {
 
-    return getFieldAsString(FIELD_TEXT);
+    String text = getFieldAsString(FIELD_TEXT);
+    if (text == null) {
+      // lucene will nuke empty texts...
+      text = "";
+    }
+    return text;
   }
 
   /**
