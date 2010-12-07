@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,6 +19,7 @@ import net.sf.mmm.search.base.config.AbstractSearchConfigurationBean;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
+import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
 
 /**
@@ -50,10 +52,9 @@ public class SearchIndexerConfigurationBean extends AbstractSearchConfigurationB
   @XmlElement(name = "transformer-chain")
   private List<StringTransformerChain> transformers;
 
-  // /** @see #getLocations() */
-  // @XmlElementWrapper(name = "locations")
-  // @XmlElement(name = "location")
-  // private List<SearchIndexerDataLocationBean> locations;
+  /** @see #getNonUtfEncoding() */
+  @XmlAttribute(name = "non-utf-encoding")
+  private String nonUtfEncoding;
 
   /**
    * The constructor.
@@ -103,22 +104,6 @@ public class SearchIndexerConfigurationBean extends AbstractSearchConfigurationB
     return this.sourceMap;
   }
 
-  // /**
-  // * {@inheritDoc}
-  // */
-  // public List<SearchIndexerDataLocationBean> getLocations() {
-  //
-  // return this.locations;
-  // }
-  //
-  // /**
-  // * @param locations is the {@link List} of locations to set
-  // */
-  // public void setLocations(List<SearchIndexerDataLocationBean> locations) {
-  //
-  // this.locations = locations;
-  // }
-
   /**
    * @return the transformers
    */
@@ -133,6 +118,25 @@ public class SearchIndexerConfigurationBean extends AbstractSearchConfigurationB
   public void setTransformers(List<StringTransformerChain> transformers) {
 
     this.transformers = transformers;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getNonUtfEncoding() {
+
+    if (this.nonUtfEncoding == null) {
+      return EncodingUtil.ENCODING_ISO_8859_15;
+    }
+    return this.nonUtfEncoding;
+  }
+
+  /**
+   * @param nonUtfEncoding is the nonUtfEncoding to set
+   */
+  public void setNonUtfEncoding(String nonUtfEncoding) {
+
+    this.nonUtfEncoding = nonUtfEncoding;
   }
 
   /**

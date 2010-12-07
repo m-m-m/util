@@ -28,4 +28,18 @@ public interface SearchIndexerConfiguration extends SearchConfiguration {
    */
   SearchIndexerSource getSource(String id);
 
+  /**
+   * If you are indexing {@link SearchIndexerDataLocation locations} that
+   * contain textual content with different encodings you can enable automatic
+   * unicode detection by omitting the
+   * {@link SearchIndexerDataLocation#getEncoding()}. In this case if a file has
+   * an unspecified encoding, unicode encodings will be detected automatically.
+   * Otherwise this non unicode decoding is used as fallback. If not explicitly
+   * set, {@link net.sf.mmm.util.io.api.EncodingUtil#ENCODING_ISO_8859_15} is
+   * used.
+   * 
+   * @return the non-unicode encoding.
+   */
+  String getNonUtfEncoding();
+
 }
