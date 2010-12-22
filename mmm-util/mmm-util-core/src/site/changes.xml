@@ -6,7 +6,32 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
-    <release version="2.0.0" date="2010-09-26" description="Major release with CLI and JSR 330">
+    <release version="2.0.1" date="2010-12-07" description="Minor update with JAXB ID-validation and improved NLS">
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Added smart ID-validation for JAXB support.
+        <code>net.sf.mmm.util.xml.base.jaxb.InternalValidatingIdResolver</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.ExternalValidatingIdResolver</code>: added.
+        <code>net.sf.mmm.util.xml.base.jaxb.IdResolverContext</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Added support for easier usage of NLS.
+        <code>net.sf.mmm.util.nls.api.NlsLocalizer</code>: added.
+        <code>net.sf.mmm.util.nls.base.NlsCachingLocalizer</code>: added.
+        ]]>
+      </action>
+      <action dev="hohwille" type="add">
+        <![CDATA[
+        Added support for composed NlsMessage.
+        <code>net.sf.mmm.util.nls.base.AbstractNlsMessage</code>: added.
+        <code>net.sf.mmm.util.nls.base.BasicNlsMessage</code>: added.
+        <code>net.sf.mmm.util.nls.base.ComposedNlsMessage</code>: added.
+        ]]>
+      </action>
+    </release>
+    <release version="2.0.0" date="2010-11-22" description="Major release with CLI and JSR 330">
       <action dev="hohwille" type="update">
         <![CDATA[
         Migrated to JSR 330. Replaced any <code>@Resource</code> with <code>@Inject</code>. 
