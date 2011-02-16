@@ -12,23 +12,24 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.ListModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using Swing as the
  * UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
+public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
 
   /** the swing scroll pane */
   private JScrollPane scrollPanel;
@@ -45,7 +46,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIListImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public UIListImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.list = new JList();
@@ -89,7 +90,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     if (this.modelAdapter == null) {
       return null;
@@ -101,7 +102,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();

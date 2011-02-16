@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
-import net.sf.mmm.ui.toolkit.api.widget.UIWidget;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -11,12 +11,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIWidget} interface using SWT as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget} interface using SWT as the
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIWidget extends AbstractUIComponent implements UIWidget {
+public abstract class AbstractUIWidget extends AbstractUIComponent implements UiWidget {
 
   /**
    * The constructor.

@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMinimized;
  * This is the interface for a frame.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UIFrame extends UIWindow, UiWriteMaximized, UiWriteMinimized {
 

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.menu;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
@@ -40,7 +40,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
    * {@inheritDoc}
    */
   @Override
-  protected UIMenu createMenu(String name) {
+  protected UiMenu createMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
     return new UIMenuImpl((UIFactorySwt) getFactory(), this, subMenu, name);

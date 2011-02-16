@@ -9,7 +9,7 @@ import java.util.EventListener;
  * This is the interface of a list model listener. Such a listener gets notified
  * about any change of list items from the list model.
  * 
- * @see net.sf.mmm.ui.toolkit.api.model.UIListModel
+ * @see net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

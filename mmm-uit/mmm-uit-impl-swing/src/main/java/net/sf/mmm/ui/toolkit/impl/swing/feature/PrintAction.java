@@ -13,7 +13,7 @@ import java.awt.print.PrinterJob;
 import javax.swing.JComponent;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
@@ -28,6 +28,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
  * for SWING.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class PrintAction extends AbstractAction implements UIActionListener, Printable {
 
@@ -60,7 +61,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   /**
    * {@inheritDoc}
    */
-  public void invoke(UINodeRenamed source, ActionType action) {
+  public void invoke(UiNode source, ActionType action) {
 
     if (action == ActionType.SELECT) {
       PrinterJob job = PrinterJob.getPrinterJob();

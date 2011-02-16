@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UISpinBox;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
@@ -14,20 +14,20 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMySpinnerAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UISpinBox} interface using SWT as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox} interface using SWT as the
  * UI toolkit.
  * 
  * @param <E> is the templated type of the list-elements.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
+public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
 
   /** the native SWT widget */
   private final SyncMySpinnerAccess syncAccess;
 
   /** the model */
-  private UIListModel<E> model;
+  private UiListMvcModel<E> model;
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param listModel is the model for the elements to select.
    */
-  public UISpinBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UIListModel<E> listModel) {
+  public UISpinBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UiListMvcModel<E> listModel) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncMySpinnerAccess(uiFactory, SWT.NONE, listModel);
@@ -66,7 +66,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }
@@ -113,7 +113,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.syncAccess.setModel(newModel);
     this.model = newModel;

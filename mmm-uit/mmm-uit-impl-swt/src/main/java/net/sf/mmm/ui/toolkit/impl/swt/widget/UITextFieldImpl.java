@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.widget.UITextField;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
@@ -13,12 +13,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTextAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITextField} interface using SWT as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField} interface using SWT as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
+public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
 
   /** the synchron access to the text-field */
   private final SyncTextAccess syncAccess;

@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
  * {@link net.sf.mmm.ui.toolkit.api.feature.Action} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SimpleAction extends AbstractAction {
 

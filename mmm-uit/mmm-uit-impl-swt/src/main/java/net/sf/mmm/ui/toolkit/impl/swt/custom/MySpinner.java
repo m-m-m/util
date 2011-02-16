@@ -16,12 +16,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 
 /**
  * This class is a custom implementation of an SWT spinner (spin-box).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class MySpinner extends Composite implements UiWriteSelectionIndex, UIListModelListener,
     UiWriteEditable {
@@ -39,7 +40,7 @@ public class MySpinner extends Composite implements UiWriteSelectionIndex, UILis
   private int selection;
 
   /** the model of the elements for this spinner */
-  private UIListModel<?> model;
+  private UiListMvcModel<?> model;
 
   /**
    * The constructor.
@@ -48,7 +49,7 @@ public class MySpinner extends Composite implements UiWriteSelectionIndex, UILis
    * @param style is the style of this widget.
    * @param listModel is the model for the elements of this spinner.
    */
-  public MySpinner(Composite parent, int style, UIListModel<?> listModel) {
+  public MySpinner(Composite parent, int style, UiListMvcModel<?> listModel) {
 
     super(parent, style);
     this.textField = new Text(this, style | SWT.SINGLE | SWT.BORDER);
@@ -101,7 +102,7 @@ public class MySpinner extends Composite implements UiWriteSelectionIndex, UILis
    * 
    * @param newModel
    */
-  public void setModel(UIListModel<?> newModel) {
+  public void setModel(UiListMvcModel<?> newModel) {
 
     this.model.removeListener(this);
     this.model = newModel;

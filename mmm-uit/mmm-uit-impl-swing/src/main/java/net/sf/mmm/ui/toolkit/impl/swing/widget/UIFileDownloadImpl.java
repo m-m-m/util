@@ -11,20 +11,21 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIFileDownload} interface using Swing
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using Swing
  * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownload {
+public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownload {
 
   /**
    * This inner class implements the listener that handles the button selection.
@@ -63,7 +64,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param fileAccess gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, FileAccess fileAccess) {
+  public UIFileDownloadImpl(UIFactorySwing uiFactory, UiNode parentObject, FileAccess fileAccess) {
 
     super(uiFactory, parentObject);
     this.access = fileAccess;

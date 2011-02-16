@@ -7,8 +7,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
 
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -16,12 +16,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncScrolledCompositeAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel} interface using SWT
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel} interface using SWT
  * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPanel {
+public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPanel {
 
   /** the synchron access to the scrolled composite */
   private final SyncScrolledCompositeAccess syncAccess;
@@ -46,7 +46,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
   /**
    * {@inheritDoc}
    */
-  public void setComponent(UIComposite child) {
+  public void setComponent(UiComposite child) {
 
     if (this.childComponent != null) {
       this.childComponent.setParent(null);

@@ -4,24 +4,25 @@
 package net.sf.mmm.ui.toolkit.base.composite;
 
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.Alignment;
-import net.sf.mmm.ui.toolkit.api.composite.Filling;
-import net.sf.mmm.ui.toolkit.api.composite.Insets;
-import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.Alignment;
+import net.sf.mmm.ui.toolkit.api.view.composite.Filling;
+import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
+import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 
 /**
  * This is the abstract base implementation of a manager for the layout of a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel panel}.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel panel}.<br>
  * The implementation assumes that for each panel an own layout-manager is
  * created and is therefore not thread-safe.
  * 
- * @see net.sf.mmm.ui.toolkit.api.composite.UISlicePanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
+ * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
  *      LayoutConstraints)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractLayoutManager {
 
@@ -100,7 +101,7 @@ public abstract class AbstractLayoutManager {
 
   /**
    * This method calculates the size of a
-   * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel panel}.
+   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel panel}.
    * 
    * @return the calculated size for the panel.
    */

@@ -8,18 +8,19 @@ import java.util.Vector;
 
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface.
  * 
  * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUITreeModel<N> implements UITreeModel<N> {
+public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
 
   /** the listeners of the model */
   private List<UITreeModelListener<N>> listeners;

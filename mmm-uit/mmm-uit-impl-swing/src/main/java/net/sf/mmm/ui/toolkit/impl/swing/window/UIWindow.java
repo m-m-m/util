@@ -9,7 +9,7 @@ import java.awt.Frame;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
@@ -22,6 +22,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class UIWindow extends UIWindowImpl {
 
@@ -32,10 +33,10 @@ public abstract class UIWindow extends UIWindowImpl {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindow(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
+  public UIWindow(AbstractUIFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

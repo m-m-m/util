@@ -13,6 +13,7 @@ import org.eclipse.swt.SWT;
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIFrameImpl extends UIWindowImpl implements UIFrame {
 
@@ -26,7 +27,7 @@ public class UIFrameImpl extends UIWindowImpl implements UIFrame {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parent is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} of this
+   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} of this
    *        object (may be <code>null</code>).
    * @param resizeable - if <code>true</code> the frame will be
    *        {@link #isResizeable() resizeable}.

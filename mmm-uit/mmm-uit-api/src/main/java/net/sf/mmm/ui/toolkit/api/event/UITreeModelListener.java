@@ -7,11 +7,11 @@ import java.util.EventListener;
 
 /**
  * This is the interface of a tree model listener. Such a listener gets notified
- * about any change of {@link net.sf.mmm.ui.toolkit.api.widget.UITree tree}
- * {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel#getChildNode(Object, int) nodes}
- * from the {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel tree-model}.
+ * about any change of {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTree tree}
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel#getChildNode(Object, int) nodes}
+ * from the {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel tree-model}.
  * 
- * @see net.sf.mmm.ui.toolkit.api.model.UITreeModel
+ * @see net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel
  * 
  * @param <N> is the templated type of the tree nodes.
  * 
@@ -21,7 +21,7 @@ public interface UITreeModelListener<N> extends EventListener {
 
   /**
    * This method is called by the
-   * {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel tree-model} if it
+   * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel tree-model} if it
    * changed (nodes have been updated, inserted or removed).
    * 
    * @param event notifies about the change.

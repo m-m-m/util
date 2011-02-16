@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.window;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
@@ -18,11 +18,12 @@ import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
  * This is the base implementation of the UIWindow interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUIWindow extends AbstractUINode implements UIWindow {
 
   /** the composite content of this window */
-  private UIComposite composite;
+  private UiComposite composite;
 
   /** the menu bar of this window */
   private AbstractUIMenuBar menuBar;
@@ -34,10 +35,10 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public AbstractUIWindow(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIWindow(AbstractUIFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }
@@ -83,7 +84,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   /**
    * {@inheritDoc}
    */
-  public UIComposite getComposite() {
+  public UiComposite getComposite() {
 
     return this.composite;
   }
@@ -93,11 +94,11 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * and the new composite. The method should be called from the setComposite
    * method implementation.
    * 
-   * @see UIWindow#setComposite(UIComposite)
+   * @see UIWindow#setComposite(UiComposite)
    * 
    * @param newComposite is the composite to register.
    */
-  public void registerComposite(UIComposite newComposite) {
+  public void registerComposite(UiComposite newComposite) {
 
     if (this.composite != null) {
       // The current composite is replaced by a new one. Set the parent of
@@ -112,7 +113,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
   /**
    * {@inheritDoc}
    */
-  public synchronized UIMenuBar getMenuBar() {
+  public synchronized UiMenuBar getMenuBar() {
 
     if (this.menuBar == null) {
       synchronized (this) {

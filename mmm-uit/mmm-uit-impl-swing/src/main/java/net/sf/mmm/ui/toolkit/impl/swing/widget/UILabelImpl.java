@@ -6,20 +6,21 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UILabel} interface using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel} interface using Swing as the
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UILabelImpl extends AbstractUIWidget implements UILabel {
+public class UILabelImpl extends AbstractUIWidget implements UiLabel {
 
   /** the actual Swing label */
   private final JLabel label;
@@ -33,7 +34,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
    * @param uiFactory
    * @param parentObject
    */
-  public UILabelImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public UILabelImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.label = new JLabel();

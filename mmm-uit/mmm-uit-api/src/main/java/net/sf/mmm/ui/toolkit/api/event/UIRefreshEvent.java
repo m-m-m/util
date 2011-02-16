@@ -14,6 +14,7 @@ import net.sf.mmm.util.event.api.Event;
  * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#refresh(UIRefreshEvent)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIRefreshEvent implements Event {
 

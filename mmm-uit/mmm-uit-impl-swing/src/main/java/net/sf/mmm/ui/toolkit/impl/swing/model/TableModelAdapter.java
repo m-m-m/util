@@ -7,12 +7,12 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiMutableTableMvcModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITableModel} to a
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel} to a
  * swing {@link javax.swing.table.TableModel}.
  * 
  * @param <C> is the templated type of the objects in the table cells.
@@ -25,14 +25,14 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   private static final long serialVersionUID = -7846849727632188732L;
 
   /** the model to adapt */
-  private final UITableModel<C> model;
+  private final UiTableMvcModel<C> model;
 
   /**
    * The constructor.
    * 
    * @param tableModel is the model to adapt.
    */
-  public TableModelAdapter(UITableModel<C> tableModel) {
+  public TableModelAdapter(UiTableMvcModel<C> tableModel) {
 
     super();
     this.model = tableModel;
@@ -44,7 +44,7 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
    * 
    * @return the model.
    */
-  public UITableModel<C> getModel() {
+  public UiTableMvcModel<C> getModel() {
 
     return this.model;
   }
@@ -140,8 +140,8 @@ public class TableModelAdapter<C> extends AbstractTableModel implements UITableM
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 
-    if ((this.model != null) && (this.model instanceof UIMutableTableModel)) {
-      UIMutableTableModel mutableModel = (UIMutableTableModel) this.model;
+    if ((this.model != null) && (this.model instanceof UiMutableTableMvcModel)) {
+      UiMutableTableMvcModel mutableModel = (UiMutableTableMvcModel) this.model;
       mutableModel.setCellValue(rowIndex, columnIndex, aValue);
     }
   }

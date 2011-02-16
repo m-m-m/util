@@ -14,16 +14,17 @@ import javax.swing.JSlider;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to a
  * swing {@link javax.swing.JSlider}. It is the controller of the MVC.
  * 
  * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SlideBarModelAdapter<E> implements UIListModelListener {
 
@@ -195,7 +196,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
   private final JSlider slideBar;
 
   /** */
-  private UIListModel<E> model;
+  private UiListMvcModel<E> model;
 
   /** */
   private final DynamicLabelTable lableTable;
@@ -206,7 +207,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
    * @param slider
    * @param miniModel
    */
-  public SlideBarModelAdapter(JSlider slider, UIListModel<E> miniModel) {
+  public SlideBarModelAdapter(JSlider slider, UiListMvcModel<E> miniModel) {
 
     super();
     this.slideBar = slider;
@@ -266,7 +267,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
    * 
    * @return the model.
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }
@@ -276,7 +277,7 @@ public class SlideBarModelAdapter<E> implements UIListModelListener {
    * 
    * @param newModel is the new model to set.
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.model.removeListener(this);
     this.lableTable.cache.clear();

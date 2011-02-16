@@ -9,6 +9,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * can be (un)minimized.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWriteMinimized extends UiReadMinimized {
 

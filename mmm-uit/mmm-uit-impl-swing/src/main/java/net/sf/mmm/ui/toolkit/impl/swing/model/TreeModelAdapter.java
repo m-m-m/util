@@ -11,21 +11,22 @@ import javax.swing.tree.TreePath;
 
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to a
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel} to a
  * Swing {@link javax.swing.tree.TreeModel}.
  * 
  * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
 
   /** the original tree model */
-  private final UITreeModel model;
+  private final UiTreeMvcModel model;
 
   /**
    * the list of all registered tree model listeners (
@@ -39,7 +40,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    * @param treeModel is the tree model to adapt.
    */
   @SuppressWarnings("unchecked")
-  public TreeModelAdapter(UITreeModel<N> treeModel) {
+  public TreeModelAdapter(UiTreeMvcModel<N> treeModel) {
 
     super();
     this.model = treeModel;
@@ -222,7 +223,7 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    * @return the model.
    */
   @SuppressWarnings("unchecked")
-  public UITreeModel<N> getModel() {
+  public UiTreeMvcModel<N> getModel() {
 
     return this.model;
   }

@@ -4,16 +4,17 @@ import org.eclipse.swt.widgets.Combo;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to
  * a {@link org.eclipse.swt.widgets.Combo}. It is the controller of the MVC
  * pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
 
@@ -21,7 +22,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
   private final SyncComboAccess syncAccess;
 
   /** the list model */
-  private UIListModel<?> model;
+  private UiListMvcModel<?> model;
 
   /** the event to handle */
   private UIListModelEvent event;
@@ -32,7 +33,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
    * @param comboAccess is the access to the SWT combo-box widget.
    * @param listModel is the model defining the elements to select.
    */
-  public ComboBoxModelAdapter(SyncComboAccess comboAccess, UIListModel<?> listModel) {
+  public ComboBoxModelAdapter(SyncComboAccess comboAccess, UiListMvcModel<?> listModel) {
 
     this.syncAccess = comboAccess;
     this.model = listModel;
@@ -53,7 +54,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
    * 
    * @return the actual list-model.
    */
-  public UIListModel<?> getModel() {
+  public UiListMvcModel<?> getModel() {
 
     return this.model;
   }
@@ -65,7 +66,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
    * 
    * @param newModel is the new list-model.
    */
-  public synchronized void setModel(UIListModel<?> newModel) {
+  public synchronized void setModel(UiListMvcModel<?> newModel) {
 
     this.model.removeListener(this);
     this.syncAccess.removeAll();

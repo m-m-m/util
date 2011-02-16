@@ -8,18 +8,19 @@ import java.util.Vector;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface.
  * 
  * @param <E> is the templated type of the elements in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUIListModel<E> implements UIListModel<E> {
+public abstract class AbstractUIListModel<E> implements UiListMvcModel<E> {
 
   /** the listeners of the model */
   private List<UIListModelListener> listeners;

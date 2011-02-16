@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.window;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
@@ -16,8 +16,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * This is the abstract interface for a window of the UIFactory.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public interface UIWindow extends UINodeRenamed, UiWriteDisposed, UiWriteSize,
+public interface UIWindow extends UiNode, UiWriteDisposed, UiWriteSize,
     AttributeWriteTitle<String>, UiWritePosition, UiWriteVisible {
 
   /**
@@ -85,7 +86,7 @@ public interface UIWindow extends UINodeRenamed, UiWriteDisposed, UiWriteSize,
    * @return the menu bar. This method will never return <code>null</code> but
    *         create an empty menu-bar on the first call.
    */
-  UIMenuBar getMenuBar();
+  UiMenuBar getMenuBar();
 
   /**
    * This method gets the composite that is used to display the content of this
@@ -94,7 +95,7 @@ public interface UIWindow extends UINodeRenamed, UiWriteDisposed, UiWriteSize,
    * @return the composite content of this window or <code>null</code> if the
    *         composite has not been set.
    */
-  UIComposite getComposite();
+  UiComposite getComposite();
 
   /**
    * This method sets the composite that is used to display the content of this
@@ -102,6 +103,6 @@ public interface UIWindow extends UINodeRenamed, UiWriteDisposed, UiWriteSize,
    * 
    * @param newComposite is the new composite for this window.
    */
-  void setComposite(UIComposite newComposite);
+  void setComposite(UiComposite newComposite);
 
 }

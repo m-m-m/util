@@ -9,11 +9,12 @@ import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface that contains a
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface that contains a
  * range of numeric (integer) values.<br>
  * This model should NOT be used for a regular list or combo-box widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
     UiWriteIntegerRange {

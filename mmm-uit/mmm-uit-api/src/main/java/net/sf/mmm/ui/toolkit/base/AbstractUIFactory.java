@@ -14,23 +14,23 @@ import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
-import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
-import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
-import net.sf.mmm.ui.toolkit.api.widget.UITable;
-import net.sf.mmm.ui.toolkit.api.widget.UITextField;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
@@ -39,6 +39,7 @@ import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
  * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUIFactory implements UIFactoryRenamed {
 
@@ -158,7 +159,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
    * This method refreshes all
    * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow windows} created by this
    * factory. The refresh of a window recursively refreshes all
-   * {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed nodes} contained in the window.
+   * {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in the window.
    * This way all visible GUI elements are refreshed.
    * 
    * @param event is the event with details about the refresh.
@@ -211,7 +212,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UILabel createLabel() {
+  public UiLabel createLabel() {
 
     return createLabel("");
   }
@@ -219,7 +220,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UITextField createTextField() {
+  public UiTextField createTextField() {
 
     return createTextField(true);
   }
@@ -227,7 +228,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(String text) {
+  public UiButton createButton(String text) {
 
     return createButton(text, ButtonStyle.DEFAULT);
   }
@@ -235,7 +236,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(String text, ButtonStyle style) {
+  public UiButton createButton(String text, ButtonStyle style) {
 
     return createButton(text, null, style);
   }
@@ -243,7 +244,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(UiImage icon, ButtonStyle style) {
+  public UiButton createButton(UiImage icon, ButtonStyle style) {
 
     return createButton(null, icon, style);
   }
@@ -251,9 +252,9 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(Action action) {
+  public UiButton createButton(Action action) {
 
-    UIButton button = createButton(action.getName(), action.getButtonStyle());
+    UiButton button = createButton(action.getName(), action.getButtonStyle());
     button.addActionListener(action.getActionListener());
     UiImage icon = action.getIcon();
     if (icon != null) {
@@ -269,7 +270,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UISlicePanel createPanel(Orientation orientation) {
+  public UiSlicePanel createPanel(Orientation orientation) {
 
     return createPanel(orientation, null);
   }
@@ -277,7 +278,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public <C extends UiElement> UIDecoratedComponent<UILabel, C> createLabeledComponent(
+  public <C extends UiElement> UiDecoratedComponent<UiLabel, C> createLabeledComponent(
       String label, C component) {
 
     return createDecoratedComponent(createLabel(label), component);
@@ -286,10 +287,10 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
+  public UiDecoratedComponent<UiLabel, UiSlicePanel> createLabeledComponents(String label,
       UiElement... components) {
 
-    UISlicePanel panel = createPanel(Orientation.HORIZONTAL);
+    UiSlicePanel panel = createPanel(Orientation.HORIZONTAL);
     for (UiElement component : components) {
       panel.addComponent(component);
     }
@@ -311,7 +312,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public <E> UISlideBar<E> createSlideBar(UIListModel<E> model) {
+  public <E> UiSlideBar<E> createSlideBar(UiListMvcModel<E> model) {
 
     return createSlideBar(model, Orientation.HORIZONTAL);
   }
@@ -319,7 +320,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public <E> UIList<E> createList(UIListModel<E> model) {
+  public <E> UiList<E> createList(UiListMvcModel<E> model) {
 
     return createList(model, false);
   }
@@ -327,7 +328,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public <E> UIComboBox<E> createComboBox(UIListModel<E> model) {
+  public <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model) {
 
     return createComboBox(model, false);
   }
@@ -335,7 +336,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIProgressBar createProgressBar() {
+  public UiProgressBar createProgressBar() {
 
     return createProgressBar(Orientation.HORIZONTAL);
   }
@@ -343,7 +344,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIScrollPanel createScrollPanel() {
+  public UiScrollPanel createScrollPanel() {
 
     return createScrollPanel(null);
   }
@@ -351,7 +352,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UITable<?> createTable() {
+  public UiTable<?> createTable() {
 
     return createTable(false);
   }
@@ -359,7 +360,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UITable<?> createTable(boolean multiSelection) {
+  public UiTable<?> createTable(boolean multiSelection) {
 
     return createTable(multiSelection, null);
   }
@@ -367,7 +368,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UITree<?> createTree() {
+  public UiTree<?> createTree() {
 
     return createTree(false);
   }
@@ -375,7 +376,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UITree<?> createTree(boolean multiSelection) {
+  public UiTree<?> createTree(boolean multiSelection) {
 
     return createTree(multiSelection, null);
   }

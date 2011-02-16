@@ -6,24 +6,25 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JSlider;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SlideBarModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UISlideBar} interface using Swing as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar} interface using Swing as
  * the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E> {
+public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E> {
 
   /** the native swing widget */
   private final JSlider slideBar;
@@ -40,8 +41,8 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
    * @param model is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, Orientation orientation,
-      UIListModel<E> model) {
+  public UISlideBarImpl(UIFactorySwing uiFactory, UiNode parentObject, Orientation orientation,
+      UiListMvcModel<E> model) {
 
     super(uiFactory, parentObject);
     int style;
@@ -118,7 +119,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -126,7 +127,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.modelAdapter.setModel(newModel);
   }

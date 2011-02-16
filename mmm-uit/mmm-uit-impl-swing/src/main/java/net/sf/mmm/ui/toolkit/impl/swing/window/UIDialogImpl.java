@@ -9,8 +9,8 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -21,6 +21,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIDialogImpl extends UIWindow implements UIDialog {
 
@@ -34,7 +35,7 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param jDialog is the swing dialog to wrap.
    */
-  public UIDialogImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, JDialog jDialog) {
+  public UIDialogImpl(UIFactorySwing uiFactory, UiNode parentObject, JDialog jDialog) {
 
     super(uiFactory, parentObject);
     this.dialog = jDialog;
@@ -96,7 +97,7 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
   /**
    * {@inheritDoc}
    */
-  public void setComposite(UIComposite newComposite) {
+  public void setComposite(UiComposite newComposite) {
 
     JComponent jComponent = ((AbstractUIComponent) newComposite).getSwingComponent();
     this.dialog.setContentPane(jComponent);

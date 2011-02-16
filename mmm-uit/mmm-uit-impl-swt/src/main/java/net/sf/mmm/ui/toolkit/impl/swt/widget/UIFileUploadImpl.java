@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Listener;
 
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileUpload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -21,12 +21,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncFileDialogAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIFileUpload} interface using SWT as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload} interface using SWT as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
+public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
 
   /**
    * This inner class implements the listener that handles the button selection.

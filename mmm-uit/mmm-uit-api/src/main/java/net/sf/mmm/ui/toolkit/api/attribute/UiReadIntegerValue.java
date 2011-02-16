@@ -7,6 +7,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * This interface gives read access to an integer {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiReadIntegerValue {
 

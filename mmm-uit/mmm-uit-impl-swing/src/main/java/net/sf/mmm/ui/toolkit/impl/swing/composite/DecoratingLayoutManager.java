@@ -8,15 +8,16 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager2;
 
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractDecoratingLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Size;
 
 /**
  * This is the layout-manager that organizes the layout for
- * {@link UIDecoratedComponent decorated components}.
+ * {@link UiDecoratedComponent decorated components}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements LayoutManager2 {
 
@@ -25,7 +26,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    * 
    * @param decoratedComponent is the decorated component to layout.
    */
-  public DecoratingLayoutManager(UIDecoratedComponent<?, ?> decoratedComponent) {
+  public DecoratingLayoutManager(UiDecoratedComponent<?, ?> decoratedComponent) {
 
     super(decoratedComponent);
   }

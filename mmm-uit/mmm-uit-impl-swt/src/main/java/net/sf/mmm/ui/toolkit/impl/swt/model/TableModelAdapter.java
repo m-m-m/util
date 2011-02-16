@@ -14,12 +14,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITableModel}
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel}
  * to an {@link org.eclipse.swt.widgets.Table}. It is the controler of the MVC
  * pattern.
  * 
@@ -33,7 +33,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
   private final SyncTableAccess syncAccess;
 
   /** the current table model */
-  private UITableModel<C> model;
+  private UiTableMvcModel<C> model;
 
   /** the table columns */
   private final List<TableColumn> columns;
@@ -66,7 +66,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
    * 
    * @return the model or <code>null</code> if not set.
    */
-  public UITableModel<C> getModel() {
+  public UiTableMvcModel<C> getModel() {
 
     return this.model;
   }
@@ -76,7 +76,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
    * 
    * @param newModel is the model to set.
    */
-  public void setModel(UITableModel<C> newModel) {
+  public void setModel(UiTableMvcModel<C> newModel) {
 
     if (this.model != null) {
       this.model.removeListener(this);

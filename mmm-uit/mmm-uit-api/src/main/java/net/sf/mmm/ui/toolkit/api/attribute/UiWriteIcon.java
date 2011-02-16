@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.api.UiImage;
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWriteIcon extends UiReadIcon {
 

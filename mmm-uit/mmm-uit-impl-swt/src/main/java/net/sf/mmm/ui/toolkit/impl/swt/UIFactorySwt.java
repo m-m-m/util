@@ -13,32 +13,32 @@ import org.eclipse.swt.widgets.Shell;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
-import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileUpload;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
-import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISpinBox;
-import net.sf.mmm.ui.toolkit.api.widget.UITable;
-import net.sf.mmm.ui.toolkit.api.widget.UITextField;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
-import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
@@ -70,6 +70,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.window.UIWorkbenchImpl;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIFactorySwt extends AbstractUIFactory {
 
@@ -87,7 +88,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    * 
    * This constructor may be used for testing if an instance is required for the
    * default display without using the
-   * {@link net.sf.mmm.ui.toolkit.api.UIServiceRenamed UIService}.
+   * {@link net.sf.mmm.ui.toolkit.api.UiService UIService}.
    */
   public UIFactorySwt() {
 
@@ -150,9 +151,9 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(String text, UiImage icon, ButtonStyle style) {
+  public UiButton createButton(String text, UiImage icon, ButtonStyle style) {
 
-    UIButton button = new UIButtonImpl(this, null, style);
+    UiButton button = new UIButtonImpl(this, null, style);
     button.setText(text);
     if (icon != null) {
       button.setIcon(icon);
@@ -163,16 +164,16 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UISlicePanel createPanel(Orientation orientation, String borderTitle) {
+  public UiSlicePanel createPanel(Orientation orientation, String borderTitle) {
 
-    UISlicePanel panel = new UISlicePanelImpl(this, null, borderTitle, orientation);
+    UiSlicePanel panel = new UISlicePanelImpl(this, null, borderTitle, orientation);
     return panel;
   }
 
   /**
    * {@inheritDoc}
    */
-  public <D extends UiElement, C extends UiElement> UIDecoratedComponent<D, C> createDecoratedComponent(
+  public <D extends UiElement, C extends UiElement> UiDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component) {
 
     UIDecoratedComponentImpl<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this,
@@ -185,9 +186,9 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIScrollPanel createScrollPanel(UIComposite child) {
+  public UiScrollPanel createScrollPanel(UiComposite child) {
 
-    UIScrollPanel panel = new UIScrollPanelImpl(this, null);
+    UiScrollPanel panel = new UIScrollPanelImpl(this, null);
     if (child != null) {
       panel.setComponent(child);
     }
@@ -197,25 +198,25 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UISplitPanel createSplitPanel(Orientation orientation) {
+  public UiSplitPanel createSplitPanel(Orientation orientation) {
 
-    UISplitPanel splitPanel = new UISplitPanelImpl(this, null, null, orientation);
+    UiSplitPanel splitPanel = new UISplitPanelImpl(this, null, null, orientation);
     return splitPanel;
   }
 
   /**
    * {@inheritDoc}
    */
-  public <E> UIList<E> createList(UIListModel<E> model, boolean multiSelection) {
+  public <E> UiList<E> createList(UiListMvcModel<E> model, boolean multiSelection) {
 
-    UIList<E> list = new UIListImpl<E>(this, null, multiSelection, model);
+    UiList<E> list = new UIListImpl<E>(this, null, multiSelection, model);
     return list;
   }
 
   /**
    * {@inheritDoc}
    */
-  public <N> UITree<N> createTree(boolean multiSelection, UITreeModel<N> model) {
+  public <N> UiTree<N> createTree(boolean multiSelection, UiTreeMvcModel<N> model) {
 
     UITreeImpl<N> tree = new UITreeImpl<N>(this, null, multiSelection);
     if (model != null) {
@@ -227,7 +228,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <C> UITable<C> createTable(boolean multiSelection, UITableModel<C> model) {
+  public <C> UiTable<C> createTable(boolean multiSelection, UiTableMvcModel<C> model) {
 
     UITableImpl<C> table = new UITableImpl<C>(this, null, multiSelection);
     if (model != null) {
@@ -247,9 +248,9 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UILabel createLabel(String text) {
+  public UiLabel createLabel(String text) {
 
-    UILabel label = new UILabelImpl(this, null);
+    UiLabel label = new UILabelImpl(this, null);
     label.setText(text);
     return label;
   }
@@ -257,7 +258,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UITextField createTextField(boolean editable) {
+  public UiTextField createTextField(boolean editable) {
 
     UITextFieldImpl textField = new UITextFieldImpl(this, null);
     textField.setEditable(editable);
@@ -267,7 +268,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <E> UISpinBox<E> createSpinBox(UIListModel<E> model) {
+  public <E> UiSpinBox<E> createSpinBox(UiListMvcModel<E> model) {
 
     return new UISpinBoxImpl<E>(this, null, model);
   }
@@ -275,7 +276,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIFileDownload createFileDownload(FileAccess access) {
+  public UiFileDownload createFileDownload(FileAccess access) {
 
     return new UIFileDownloadImpl(this, null, access);
   }
@@ -283,7 +284,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIFileUpload createFileUpload() {
+  public UiFileUpload createFileUpload() {
 
     return new UIFileUploadImpl(this, null);
   }
@@ -299,7 +300,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <E> UIComboBox<E> createComboBox(UIListModel<E> model, boolean editableFlag) {
+  public <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model, boolean editableFlag) {
 
     return new UIComboBoxImpl<E>(this, null, editableFlag, model);
   }
@@ -307,7 +308,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UITabbedPanel createTabbedPanel() {
+  public UiTabbedPanel createTabbedPanel() {
 
     return new UITabbedPanelImpl(this, null);
   }
@@ -315,7 +316,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <E> UISlideBar<E> createSlideBar(UIListModel<E> model, Orientation orientation) {
+  public <E> UiSlideBar<E> createSlideBar(UiListMvcModel<E> model, Orientation orientation) {
 
     // TODO
     return new UISlideBarImpl<E>(this, null, orientation, model);
@@ -324,7 +325,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIProgressBar createProgressBar(Orientation orientation) {
+  public UiProgressBar createProgressBar(Orientation orientation) {
 
     return new UIProgressBarImpl(this, null, orientation, false);
   }

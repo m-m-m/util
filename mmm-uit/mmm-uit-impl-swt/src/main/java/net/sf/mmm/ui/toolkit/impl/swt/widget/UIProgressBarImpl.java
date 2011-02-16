@@ -5,20 +5,20 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncProgressBarAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIProgressBar} interface using SWT as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar} interface using SWT as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar {
+public class UIProgressBarImpl extends AbstractUIWidget implements UiProgressBar {
 
   /** the native SWT widget */
   private final SyncProgressBarAccess syncAccess;

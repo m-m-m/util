@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
 
 /**
  * This is the implementation of a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite} interface for the
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} interface for the
  * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow#getComposite() content} of a
  * {@link net.sf.mmm.ui.toolkit.api.window.UIWorkbench}.
  * 

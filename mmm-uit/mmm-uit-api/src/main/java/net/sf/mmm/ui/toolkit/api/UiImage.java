@@ -15,6 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
  * with the preferred size but may be changed to scale the image.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiImage extends UiObject, UiWriteSize, UiReadPreferredSize {
 

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
@@ -23,6 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncShellAccess;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class UIWindowImpl extends AbstractUIWindow {
 
@@ -45,7 +46,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parent is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} of this
+   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} of this
    *        object (may be <code>null</code>).
    * @param defaultStyle is the default style used for the SWT shell.
    * @param modal - if <code>true</code> all windows of the application are
@@ -302,7 +303,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
   /**
    * {@inheritDoc}
    */
-  public void setComposite(final UIComposite newComposite) {
+  public void setComposite(final UiComposite newComposite) {
 
     registerComposite(newComposite);
     /*

@@ -13,6 +13,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
  * {@link UiObject#getType()} method.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiObject extends UiReadId {
 
@@ -56,20 +57,10 @@ public interface UiObject extends UiReadId {
    * This method determines if this component is a widget.
    * 
    * @return <code>true</code> if this component is a
-   *         {@link net.sf.mmm.ui.toolkit.api.widget.UIWidget widget},
+   *         {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget widget},
    *         <code>false</code> otherwise.
    */
   boolean isWidget();
-
-  /**
-   * This method set the identifier of this object. Use this method to give the
-   * object a meaningful identifier after creation.
-   * 
-   * @see #getId()
-   * 
-   * @param newId is the new identifier for the object.
-   */
-  void setId(String newId);
 
   /**
    * This method gets the optional style of this object. It is used to associate

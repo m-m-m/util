@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
@@ -22,11 +22,12 @@ import net.sf.mmm.ui.toolkit.base.AbstractUINode;
  * This is the base implementation of the UIMenu interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
+public abstract class AbstractUIMenu extends AbstractUINode implements UiMenu {
 
   /** the menu entries */
-  private final List<UIMenuItem> items;
+  private final List<UiMenuItem> items;
 
   /**
    * The constructor.
@@ -34,10 +35,10 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    * @param uiFactory is the UIFactory instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMenu(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIMenu(AbstractUIFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
-    this.items = new ArrayList<UIMenuItem>();
+    this.items = new ArrayList<UiMenuItem>();
   }
 
   /**
@@ -59,7 +60,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * {@inheritDoc}
    */
-  public Iterator<UIMenuItem> getItems() {
+  public Iterator<UiMenuItem> getItems() {
 
     return this.items.iterator();
   }
@@ -67,7 +68,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * {@inheritDoc}
    */
-  public UIMenuItem addItem(String name, UIActionListener action) {
+  public UiMenuItem addItem(String name, UIActionListener action) {
 
     return addItem(name, action, ButtonStyle.DEFAULT);
   }
@@ -75,7 +76,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * {@inheritDoc}
    */
-  public UIMenuItem addItem(String name, ButtonStyle style) {
+  public UiMenuItem addItem(String name, ButtonStyle style) {
 
     return addItem(name, null, style);
   }
@@ -83,9 +84,9 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * {@inheritDoc}
    */
-  public UIMenuItem addItem(Action action) {
+  public UiMenuItem addItem(Action action) {
 
-    UIMenuItem item = addItem(action.getName(), action.getActionListener(), action.getButtonStyle());
+    UiMenuItem item = addItem(action.getName(), action.getActionListener(), action.getButtonStyle());
     UiImage icon = action.getIcon();
     if (icon != null) {
       // item.setIcon(icon);
@@ -101,9 +102,9 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * {@inheritDoc}
    */
-  public UIMenuItem addItem(String name, UIActionListener action, ButtonStyle style) {
+  public UiMenuItem addItem(String name, UIActionListener action, ButtonStyle style) {
 
-    UIMenuItem menuItem = createMenuItem(name, style);
+    UiMenuItem menuItem = createMenuItem(name, style);
     this.items.add(menuItem);
     if (action != null) {
       menuItem.addActionListener(action);
@@ -114,21 +115,21 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * This method creates a new menu item.
    * 
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addItem(java.lang.String,
+   * @see net.sf.mmm.ui.toolkit.api.view.menu.UiMenu#addItem(java.lang.String,
    *      net.sf.mmm.ui.toolkit.api.event.UIActionListener)
    * 
    * @param name is the name of the menu item.
    * @param style is the style defining how the item is visualized and behaves.
    * @return the created menu item.
    */
-  protected abstract UIMenuItem createMenuItem(String name, ButtonStyle style);
+  protected abstract UiMenuItem createMenuItem(String name, ButtonStyle style);
 
   /**
    * {@inheritDoc}
    */
-  public UIMenu addSubMenu(String name) {
+  public UiMenu addSubMenu(String name) {
 
-    UIMenu menu = createSubMenu(name);
+    UiMenu menu = createSubMenu(name);
     this.items.add(menu);
     return menu;
   }
@@ -136,12 +137,12 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   /**
    * This method creates a new sub menu.
    * 
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenu#addSubMenu(java.lang.String)
+   * @see net.sf.mmm.ui.toolkit.api.view.menu.UiMenu#addSubMenu(java.lang.String)
    * 
    * @param name is the name of the sub-menu.
    * @return the created sub-menu.
    */
-  protected abstract UIMenu createSubMenu(String name);
+  protected abstract UiMenu createSubMenu(String name);
 
   /**
    * {@inheritDoc}
@@ -174,7 +175,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   public void refresh(UIRefreshEvent event) {
 
     super.refresh(event);
-    for (UIMenuItem menuItem : this.items) {
+    for (UiMenuItem menuItem : this.items) {
       ((AbstractUINode) menuItem).refresh(event);
     }
   }

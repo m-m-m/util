@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UIPictureImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -15,12 +15,13 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIButton} interface using SWT as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} interface using SWT as the
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIButtonImpl extends AbstractUIWidget implements UIButton {
+public class UIButtonImpl extends AbstractUIWidget implements UiButton {
 
   /** the style of the button */
   private final ButtonStyle style;

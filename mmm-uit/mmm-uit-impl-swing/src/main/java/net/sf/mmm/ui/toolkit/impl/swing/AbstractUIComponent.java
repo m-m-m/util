@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
 
@@ -19,6 +19,7 @@ import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUIComponent extends UIAwtNode implements UiElement {
 
@@ -33,7 +34,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UiElement
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIComponent(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIComponent(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.disposed = false;
@@ -69,7 +70,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UiElement
    */
   public void removeFromParent() {
 
-    UINodeRenamed parent = getParent();
+    UiNode parent = getParent();
     if (parent != null) {
       setParent(null);
       // throw new IllegalArgumentException("Currently unsupported!");

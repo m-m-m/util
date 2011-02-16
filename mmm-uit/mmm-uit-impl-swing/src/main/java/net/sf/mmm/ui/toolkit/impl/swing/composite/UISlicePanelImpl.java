@@ -12,25 +12,26 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel} interface using
  * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
+public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
 
   /** the swing panel */
   private final JPanel panel;
@@ -51,7 +52,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param orientation is the orientation for the layout of the panel.
    */
-  public UISlicePanelImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, Orientation orientation) {
+  public UISlicePanelImpl(UIFactorySwing uiFactory, UiNode parentObject, Orientation orientation) {
 
     super(uiFactory, parentObject);
     this.layout = new LayoutManager(uiFactory);
@@ -142,7 +143,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().add((JRadioButton) swingComponent);
     }
-    if (c.getType() == UIDecoratedComponent.TYPE) {
+    if (c.getType() == UiDecoratedComponent.TYPE) {
       UIDecoratedComponentImpl decoratedComponent = (UIDecoratedComponentImpl) component;
       getSizer().add(decoratedComponent);
       decoratedComponent.setDecoratorSizer(getSizer());
@@ -210,7 +211,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   private static final class DecoratorSizer implements UiReadSize {
 
     /** the list of sizes to build maximum of */
-    private final List<UIDecoratedComponent> sizeList;
+    private final List<UiDecoratedComponent> sizeList;
 
     /**
      * The constructor.
@@ -218,28 +219,28 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
     public DecoratorSizer() {
 
       super();
-      this.sizeList = new ArrayList<UIDecoratedComponent>();
+      this.sizeList = new ArrayList<UiDecoratedComponent>();
     }
 
     /**
      * This method adds the given
-     * {@link UIDecoratedComponent decorated component} to the size-list. The
+     * {@link UiDecoratedComponent decorated component} to the size-list. The
      * maximum width/height will be determined over all sized in the list.
      * 
      * @param size is the size to add.
      */
-    public void add(UIDecoratedComponent size) {
+    public void add(UiDecoratedComponent size) {
 
       this.sizeList.add(size);
     }
 
     /**
      * This method removes the given
-     * {@link UIDecoratedComponent decorated component} from the size-list.
+     * {@link UiDecoratedComponent decorated component} from the size-list.
      * 
      * @param size is the size to remove.
      */
-    public void remove(UIDecoratedComponent size) {
+    public void remove(UiDecoratedComponent size) {
 
       this.sizeList.remove(size);
     }

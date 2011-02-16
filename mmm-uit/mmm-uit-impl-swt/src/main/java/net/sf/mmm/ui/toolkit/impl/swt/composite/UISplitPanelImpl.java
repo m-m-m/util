@@ -4,8 +4,8 @@
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
@@ -17,12 +17,13 @@ import org.eclipse.swt.layout.FillLayout;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISplitPanel} interface using SWT
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel} interface using SWT
  * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPanel {
+public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPanel {
 
   /** the synchronous access to the sash-form */
   private final SyncSashFormAccess syncAccess;

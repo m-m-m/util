@@ -5,13 +5,14 @@ package net.sf.mmm.ui.toolkit.base.feature;
 
 import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 
 /**
  * This is the abstract base implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.feature.Action} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractAction implements Action {
 

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt;
 import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
@@ -18,6 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUIComponent extends UISwtNode implements UiElement {
 
@@ -74,7 +75,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UiElement
    * {@inheritDoc}
    */
   @Override
-  public void setParent(UINodeRenamed newParent) {
+  public void setParent(UiNode newParent) {
 
     if (newParent == null) {
       System.out.println("AbstractUIComponent: This should be kicked out!");
@@ -105,7 +106,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UiElement
    */
   public void removeFromParent() {
 
-    UINodeRenamed parent = getParent();
+    UiNode parent = getParent();
     if (parent != null) {
       setParent(null);
       throw new IllegalArgumentException("Currently unsupported!");

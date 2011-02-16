@@ -9,21 +9,22 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionValue;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to a
  * swing {@link javax.swing.SpinnerModel}.
  * 
  * @param <E> is the templated type of the list-elements.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UiWriteSelectionIndex,
     UiWriteSelectionValue<E>, UIListModelListener {
 
   /** the model to adapt */
-  private UIListModel<E> model;
+  private UiListMvcModel<E> model;
 
   /** the current selection index */
   private int index;
@@ -33,7 +34,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UiWr
    * 
    * @param listModel is the model to adapt.
    */
-  public SpinnerModelAdapter(UIListModel<E> listModel) {
+  public SpinnerModelAdapter(UiListMvcModel<E> listModel) {
 
     super();
     this.model = listModel;
@@ -45,7 +46,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UiWr
    * 
    * @return the model.
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }
@@ -55,7 +56,7 @@ public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UiWr
    * 
    * @param newModel is the new model to set.
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.index = 0;
     if (this.model != null) {

@@ -7,16 +7,17 @@ import javax.swing.AbstractListModel;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to a
  * swing {@link javax.swing.ListModel}.
  * 
  * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ListModelAdapter<E> extends AbstractListModel implements UIListModelListener {
 
@@ -24,14 +25,14 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
   private static final long serialVersionUID = -6062581165914420738L;
 
   /** the original list model */
-  protected final UIListModel<E> model;
+  protected final UiListMvcModel<E> model;
 
   /**
    * The constructor.
    * 
    * @param listModel is the list model to adapt to swing.
    */
-  public ListModelAdapter(UIListModel<E> listModel) {
+  public ListModelAdapter(UiListMvcModel<E> listModel) {
 
     super();
     this.model = listModel;
@@ -74,7 +75,7 @@ public class ListModelAdapter<E> extends AbstractListModel implements UIListMode
    * 
    * @return the actual list-model.
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.feature;
 
 import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 
 /**
  * This is the callback interface for an action that can be invoked by a widget
@@ -16,6 +16,7 @@ import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
  * GUI.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface Action {
 

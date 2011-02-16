@@ -15,12 +15,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
  * maximum width/height out of
  * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize preferred-size}
  * objects. This is supposed to be used as
- * {@link net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints#size size} in
- * {@linkplain net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints} to emulate
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints#size size} in
+ * {@linkplain net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints} to emulate
  * a grid layout.<br>
  * TODO: nobody can understand this crappy explanation
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class MaximumSizer implements UiReadSize {
 

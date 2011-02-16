@@ -9,17 +9,18 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed} interface for AWT/Swing
+ * {@link net.sf.mmm.ui.toolkit.api.UiNode} interface for AWT/Swing
  * implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class UIAwtNode extends AbstractUINode {
 
@@ -29,7 +30,7 @@ public abstract class UIAwtNode extends AbstractUINode {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIAwtNode(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
+  public UIAwtNode(AbstractUIFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

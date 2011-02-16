@@ -5,27 +5,27 @@ package net.sf.mmm.ui.toolkit.demo;
 
 import java.io.File;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
-import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
-import net.sf.mmm.ui.toolkit.api.widget.UITextField;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
@@ -37,6 +37,7 @@ import net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel;
  * This is a test runner that tests the various UIFactorySwing implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 @SuppressWarnings("all")
 public class UITestRunner {
@@ -51,24 +52,24 @@ public class UITestRunner {
     System.out.println(factory);
     System.out.println(factory.getDisplay());
     final UIFrame frame = factory.createFrame("TestFrame");
-    UIMenu fileMenu = frame.getMenuBar().addMenu("File");
+    UiMenu fileMenu = frame.getMenuBar().addMenu("File");
     fileMenu.addItem("Load", new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         frame.showMessage("You selected load", "Hi", MessageType.INFO);
       }
 
     });
     fileMenu.addSeparator();
-    UIMenu subMenu = fileMenu.addSubMenu("Submenu");
+    UiMenu subMenu = fileMenu.addSubMenu("Submenu");
     subMenu.addItem("Test", new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         if (action == ActionType.SELECT) {
           if (!frame.showQuestion("Did you mean to do that?", "Test")) {
-            ((UIMenuItem) source).setSelected(false);
+            ((UiMenuItem) source).setSelected(false);
           }
         }
       }
@@ -92,27 +93,27 @@ public class UITestRunner {
      * tree.setEnabled(false); splitPanel.setBottomOrRightComponent(tree); //
      * splitPanel.setEnabled(false); splitPanel.setDividerPosition(0.5);
      */
-    UIScrollPanel scroll = factory.createScrollPanel();
+    UiScrollPanel scroll = factory.createScrollPanel();
 
-    UISlicePanel panel = factory.createPanel(Orientation.VERTICAL);
+    UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
 
-    UIButton button = factory.createButton("Test");
+    UiButton button = factory.createButton("Test");
     panel.addComponent(button);
     button = factory.createButton("Test2");
     panel.addComponent(button);
-    UITextField text = factory.createTextField();
+    UiTextField text = factory.createTextField();
     panel.addComponent(text);
-    UILabel label = factory.createLabel("Label");
+    UiLabel label = factory.createLabel("Label");
     panel.addComponent(label);
-    UISlideBar slider = factory.createSlideBar(new NumericUIRangeModel(0, 100));
+    UiSlideBar slider = factory.createSlideBar(new NumericUIRangeModel(0, 100));
     panel.addComponent(slider);
     FileAccess access = new SimpleFileAccess(new File("/etc/fstab"));
-    UIFileDownload download = factory.createFileDownload(access);
+    UiFileDownload download = factory.createFileDownload(access);
     panel.addComponent(download);
 
     scroll.setComponent(panel);
 
-    UITabbedPanel tabPanel = factory.createTabbedPanel();
+    UiTabbedPanel tabPanel = factory.createTabbedPanel();
     tabPanel.addComponent(scroll, "Scroll");
     frame.setComposite(tabPanel);
 
@@ -120,8 +121,8 @@ public class UITestRunner {
     listModel.addElement("Hi");
     listModel.addElement("this");
     listModel.addElement("is");
-    UIComboBox comboBox = factory.createComboBox(listModel);
-    UIList list = factory.createList(listModel);
+    UiComboBox comboBox = factory.createComboBox(listModel);
+    UiList list = factory.createList(listModel);
     panel.addComponent(comboBox);
     panel.addComponent(list);
     listModel.addElement("a");

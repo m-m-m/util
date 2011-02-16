@@ -11,6 +11,7 @@ import java.util.Locale;
  * object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWriteLocale extends UiReadLocale {
 

@@ -13,6 +13,7 @@ import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
  * This is the abstract base implementation of the UIDisplay interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDisplay {
 

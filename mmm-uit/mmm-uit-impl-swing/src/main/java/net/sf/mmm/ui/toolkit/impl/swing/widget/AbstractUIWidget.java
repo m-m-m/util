@@ -3,20 +3,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.widget;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.widget.UIWidget;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIWidget} interface using Swing as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget} interface using Swing as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUIWidget extends AbstractUIComponent implements UIWidget {
+public abstract class AbstractUIWidget extends AbstractUIComponent implements UiWidget {
 
   /**
    * The constructor.
@@ -24,7 +25,7 @@ public abstract class AbstractUIWidget extends AbstractUIComponent implements UI
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIWidget(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIWidget(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }
@@ -42,9 +43,9 @@ public abstract class AbstractUIWidget extends AbstractUIComponent implements UI
    * {@inheritDoc}
    */
   @Override
-  public UIComposite getParent() {
+  public UiComposite getParent() {
 
-    return (UIComposite) super.getParent();
+    return (UiComposite) super.getParent();
   }
 
 }

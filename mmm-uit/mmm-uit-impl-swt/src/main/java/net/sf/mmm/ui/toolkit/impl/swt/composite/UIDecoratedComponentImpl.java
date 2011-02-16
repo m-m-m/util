@@ -6,10 +6,10 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent} interface
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent} interface
  * using Swing as the UI toolkit.
  * 
  * @param <D> is the templated type of the
@@ -27,9 +27,10 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
  *        {@link #getComponent() main component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> extends
-    AbstractUIComposite implements UIDecoratedComponent<D, C> {
+    AbstractUIComposite implements UiDecoratedComponent<D, C> {
 
   /** the synchron access to the {@link org.eclipse.swt.widgets.Composite} */
   private final SyncCompositeAccess syncAccess;
@@ -74,9 +75,9 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
   public Orientation getOrientation() {
 
     Orientation orientation = Orientation.HORIZONTAL;
-    UINodeRenamed parent = getParent();
-    if ((parent != null) && (parent instanceof UIComposite)) {
-      orientation = ((UIComposite) parent).getOrientation().getMirrored();
+    UiNode parent = getParent();
+    if ((parent != null) && (parent instanceof UiComposite)) {
+      orientation = ((UiComposite) parent).getOrientation().getMirrored();
     }
     return orientation;
   }

@@ -10,21 +10,22 @@ import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIButton} interface using Swing as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} interface using Swing as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIButtonImpl extends AbstractUIWidget implements UIButton {
+public class UIButtonImpl extends AbstractUIWidget implements UiButton {
 
   /** the insets of the button */
   // private static final Insets BUTTON_INSETS = new Insets(4, 4, 4, 4);
@@ -44,7 +45,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param buttonStyle determines the style of the button.
    */
-  public UIButtonImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, ButtonStyle buttonStyle) {
+  public UIButtonImpl(UIFactorySwing uiFactory, UiNode parentObject, ButtonStyle buttonStyle) {
 
     super(uiFactory, parentObject);
     AbstractButton b;

@@ -15,18 +15,19 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTreeAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UITreeModel} to
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel} to
  * an {@link org.eclipse.swt.widgets.Tree swt-tree}. It is the controler of the
  * MVC pattern.
  * 
  * @param <N> is the templated type of the tree nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Runnable {
 
@@ -34,7 +35,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
   private final SyncTreeAccess syncAccess;
 
   /** the tree model */
-  private UITreeModel<N> model;
+  private UiTreeMvcModel<N> model;
 
   /** the node map */
   private final Map<N, TreeItem> node2itemMap;
@@ -65,7 +66,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
    * 
    * @return the actual model.
    */
-  public UITreeModel<N> getModel() {
+  public UiTreeMvcModel<N> getModel() {
 
     return this.model;
   }
@@ -77,7 +78,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
    * 
    * @param newModel is the new model.
    */
-  public void setModel(UITreeModel<N> newModel) {
+  public void setModel(UiTreeMvcModel<N> newModel) {
 
     if (this.model != null) {
       this.model.removeListener(this);

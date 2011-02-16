@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import java.lang.reflect.Array;
 
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.TreeModelAdapter;
@@ -16,7 +16,7 @@ import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITree} interface using SWT as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTree} interface using SWT as the UI
  * toolkit.
  * 
  * @param <N> is the templated type of the tree-nodes that can be
@@ -24,7 +24,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
+public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
 
   /** the unwrapped swt tree */
   private final SyncTreeAccess syncAccess;
@@ -84,7 +84,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public UITreeModel<N> getModel() {
+  public UiTreeMvcModel<N> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -93,7 +93,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public void setModel(UITreeModel<N> newModel) {
+  public void setModel(UiTreeMvcModel<N> newModel) {
 
     this.modelAdapter.setModel(newModel);
   }

@@ -9,6 +9,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * that define a integer value range.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWriteIntegerRange extends UiReadIntegerRange {
 

@@ -3,15 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 
 /**
  * This interface gives {@link UiReadOrientation#getOrientation() read} and
  * {@link #setOrientation(Orientation) write} access to the
- * {@link net.sf.mmm.ui.toolkit.api.composite.Orientation} of an
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.Orientation} of an
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWriteOrientation extends UiReadOrientation {
 

@@ -14,10 +14,10 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
 
@@ -28,8 +28,9 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
  * @param <N> is the templated type of the tree-nodes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
+public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
 
   /** the swing scroll pane */
   private final JScrollPane scrollPanel;
@@ -46,7 +47,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UITreeImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public UITreeImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.tree = new JTree();
@@ -69,7 +70,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public UITreeModel<N> getModel() {
+  public UiTreeMvcModel<N> getModel() {
 
     if (this.modelAdapter == null) {
       return null;
@@ -82,7 +83,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UITree<N> {
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public void setModel(UITreeModel<N> newModel) {
+  public void setModel(UiTreeMvcModel<N> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();

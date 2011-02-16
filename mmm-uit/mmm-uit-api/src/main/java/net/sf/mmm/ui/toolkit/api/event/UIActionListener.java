@@ -5,13 +5,14 @@ package net.sf.mmm.ui.toolkit.api.event;
 
 import java.util.EventListener;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 
 /**
  * This class represents an action that is invoked on an interaction of the user
  * in the UIFactory (e.g. hitting a button).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UIActionListener extends EventListener {
 
@@ -21,6 +22,6 @@ public interface UIActionListener extends EventListener {
    * @param source is the component that invoked the action.
    * @param action is the action that has been invoked.
    */
-  void invoke(UINodeRenamed source, ActionType action);
+  void invoke(UiNode source, ActionType action);
 
 }

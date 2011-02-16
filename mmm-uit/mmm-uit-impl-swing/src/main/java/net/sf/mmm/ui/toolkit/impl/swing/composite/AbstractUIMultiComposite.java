@@ -7,15 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This is the abstract base implementation of a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite} that can contain any
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that can contain any
  * number of components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
 
@@ -28,7 +29,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMultiComposite(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIMultiComposite(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.components = new ArrayList<UiElement>();
@@ -51,7 +52,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#addComponent(UiElement)
+   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#addComponent(UiElement)
    * 
    * @param component is the component to add.
    */
@@ -73,7 +74,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.composite.UIPanel#removeComponent(int)
+   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#removeComponent(int)
    * 
    * @param index is the position of the component to remove.
    * @return the removed component.

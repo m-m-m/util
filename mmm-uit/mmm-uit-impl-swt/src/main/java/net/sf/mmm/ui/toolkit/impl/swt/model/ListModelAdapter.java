@@ -4,18 +4,19 @@ import org.eclipse.swt.widgets.List;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncListAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to
  * a {@link org.eclipse.swt.widgets.List}. It is the controler of the MVC
  * pattern.
  * 
  * @param <E> is the templated type of the elements that can be selected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class ListModelAdapter<E> implements UIListModelListener, Runnable {
 
@@ -23,7 +24,7 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
   private final SyncListAccess syncAccess;
 
   /** the list model */
-  private UIListModel<E> model;
+  private UiListMvcModel<E> model;
 
   /** the curent event to handle */
   private UIListModelEvent event;
@@ -34,7 +35,7 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
    * @param listAccess is the synchron access to the SWT list.
    * @param listModel is the model to adapt.
    */
-  public ListModelAdapter(SyncListAccess listAccess, UIListModel<E> listModel) {
+  public ListModelAdapter(SyncListAccess listAccess, UiListMvcModel<E> listModel) {
 
     this.syncAccess = listAccess;
     this.model = listModel;
@@ -54,7 +55,7 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
    * 
    * @return the actual list-model.
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }
@@ -66,7 +67,7 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
    * 
    * @param newModel is the new list-model.
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.model.removeListener(this);
     this.syncAccess.removeAll();

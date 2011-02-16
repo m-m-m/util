@@ -7,18 +7,19 @@ import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel} interface using
  * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel {
+public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel {
 
   /** the native swing component */
   private final JTabbedPane panel;

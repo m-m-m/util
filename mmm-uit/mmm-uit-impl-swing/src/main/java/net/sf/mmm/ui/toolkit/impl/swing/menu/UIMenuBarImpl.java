@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -42,7 +42,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
   /**
    * {@inheritDoc}
    */
-  protected UIMenu createMenu(String name) {
+  protected UiMenu createMenu(String name) {
 
     JMenu menu = new JMenu(name);
     this.menuBar.add(menu);

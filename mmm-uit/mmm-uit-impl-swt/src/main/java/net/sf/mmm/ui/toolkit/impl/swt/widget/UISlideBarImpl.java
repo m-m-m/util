@@ -5,9 +5,9 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.SlideBarModelAdapter;
@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UISlideBar} interface using SWT as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar} interface using SWT as
  * the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E> {
+public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E> {
 
   /** the synchron access to the slider */
   private final SyncSliderAccess syncAccess;
@@ -35,7 +35,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
   private final Orientation orientation;
 
   /** the model of the slider */
-  private UIListModel<E> model;
+  private UiListMvcModel<E> model;
 
   /**
    * The constructor.
@@ -47,7 +47,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
   public UISlideBarImpl(UIFactorySwt uiFactory, UISwtNode parentObject,
-      Orientation sliderOrientation, UIListModel<E> sliderModel) {
+      Orientation sliderOrientation, UiListMvcModel<E> sliderModel) {
 
     super(uiFactory, parentObject);
     this.orientation = sliderOrientation;
@@ -123,7 +123,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }
@@ -131,7 +131,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.modelAdapter.setModel(newModel);
     this.model = newModel;

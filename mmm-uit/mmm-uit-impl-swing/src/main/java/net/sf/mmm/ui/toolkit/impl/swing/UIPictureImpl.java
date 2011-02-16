@@ -14,6 +14,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
  * interface using Swing as the underlying implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIPictureImpl extends AbstractUIPicture {
 

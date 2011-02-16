@@ -6,9 +6,9 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -16,12 +16,13 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel} interface using SWT
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel} interface using SWT
  * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
+public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
 
   /** the synchronous access to the {@link org.eclipse.swt.widgets.Composite} */
   private final SyncCompositeAccess syncAccess;

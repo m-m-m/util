@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIMutableTableModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiMutableTableMvcModel;
 import net.sf.mmm.ui.toolkit.base.model.AbstractUITableModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
@@ -12,9 +12,10 @@ import net.sf.mmm.util.event.api.ChangeType;
  * TODO This type ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UISimpleTableModel extends AbstractUITableModel<String> implements
-    UIMutableTableModel<String> {
+    UiMutableTableMvcModel<String> {
 
   /** */
   private final String[][] cells;

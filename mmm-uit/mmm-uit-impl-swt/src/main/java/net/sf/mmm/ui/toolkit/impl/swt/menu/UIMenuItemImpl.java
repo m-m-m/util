@@ -6,20 +6,20 @@ package net.sf.mmm.ui.toolkit.impl.swt.menu;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MenuItem;
 
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuItemAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenuItem} interface using SWT as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem} interface using SWT as the
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIMenuItemImpl extends UISwtNode implements UIMenuItem {
+public class UIMenuItemImpl extends UISwtNode implements UiMenuItem {
 
   /** the SWT menu item */
   private final MenuItem menuItem;

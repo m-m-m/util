@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.ComboBoxModelAdapter;
@@ -14,15 +14,16 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIComboBox} interface using SWT as
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox} interface using SWT as
  * the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E> {
+public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E> {
 
   /** the synchron access to the combo */
   private final SyncComboAccess syncAccess;
@@ -31,7 +32,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   private final ComboBoxModelAdapter modelAdapter;
 
   /** the model */
-  private UIListModel<E> model;
+  private UiListMvcModel<E> model;
 
   /**
    * The constructor.
@@ -43,7 +44,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
    * @param listModel is the model defining the the selectable elements.
    */
   public UIComboBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean editableFlag,
-      UIListModel<E> listModel) {
+      UiListMvcModel<E> listModel) {
 
     super(uiFactory, parentObject);
     int style = SWT.DEFAULT;
@@ -85,7 +86,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.model;
   }
@@ -109,7 +110,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.modelAdapter.setModel(newModel);
     this.model = newModel;

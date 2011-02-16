@@ -10,23 +10,24 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.ComboBoxModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using Swing as the
  * UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E> {
+public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E> {
 
   /** the swing combo-box */
   private final JComboBox comboBox;
@@ -40,7 +41,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIComboBoxImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public UIComboBoxImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.comboBox = new JComboBox();
@@ -59,7 +60,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -67,7 +68,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();

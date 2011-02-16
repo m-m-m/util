@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
@@ -17,11 +17,12 @@ import net.sf.mmm.ui.toolkit.base.AbstractUINode;
  * This is the base implementation of the UIMenuBar interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenuBar {
+public abstract class AbstractUIMenuBar extends AbstractUINode implements UiMenuBar {
 
   /** maps the name of a menu (String) to a menu (UIMenu) */
-  private Map<String, UIMenu> menuTable;
+  private Map<String, UiMenu> menuTable;
 
   /**
    * The constructor.
@@ -29,19 +30,19 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
    * @param uiFactory is the UIFactory instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMenuBar(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIMenuBar(AbstractUIFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
-    this.menuTable = new HashMap<String, UIMenu>();
+    this.menuTable = new HashMap<String, UiMenu>();
   }
 
   /**
    * {@inheritDoc}
    */
-  public UIMenu addMenu(String name) {
+  public UiMenu addMenu(String name) {
 
     synchronized (this.menuTable) {
-      UIMenu menu = this.menuTable.get(name);
+      UiMenu menu = this.menuTable.get(name);
       if (menu == null) {
         // the menu does not already exist and is created here...
         menu = createMenu(name);
@@ -54,17 +55,17 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   /**
    * This method creates a menu in this menu bar.
    * 
-   * @see net.sf.mmm.ui.toolkit.api.menu.UIMenuBar#addMenu(java.lang.String)
+   * @see net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar#addMenu(java.lang.String)
    * 
    * @param name is the name of the menu.
    * @return the created menu.
    */
-  protected abstract UIMenu createMenu(String name);
+  protected abstract UiMenu createMenu(String name);
 
   /**
    * {@inheritDoc}
    */
-  public UIMenu getMenu(String name) {
+  public UiMenu getMenu(String name) {
 
     return this.menuTable.get(name);
   }
@@ -88,7 +89,7 @@ public abstract class AbstractUIMenuBar extends AbstractUINode implements UIMenu
   /**
    * {@inheritDoc}
    */
-  public Iterator<UIMenu> getMenus() {
+  public Iterator<UiMenu> getMenus() {
 
     return this.menuTable.values().iterator();
   }

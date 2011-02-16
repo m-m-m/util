@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
@@ -23,6 +23,7 @@ import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class UIWindowImpl extends AbstractUIWindow {
 
@@ -33,10 +34,10 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindowImpl(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
+  public UIWindowImpl(AbstractUIFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

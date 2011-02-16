@@ -12,6 +12,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
 

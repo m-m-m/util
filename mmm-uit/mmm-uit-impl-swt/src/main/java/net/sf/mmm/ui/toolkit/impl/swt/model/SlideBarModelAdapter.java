@@ -7,16 +7,17 @@ import org.eclipse.swt.widgets.Slider;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to
+ * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to
  * a {@link org.eclipse.swt.widgets.Slider}. It is the controler of the MVC
  * pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class SlideBarModelAdapter implements UIListModelListener, Runnable {
 
@@ -24,7 +25,7 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
   private final SyncSliderAccess syncAccess;
 
   /** the list model to adapt */
-  private UIListModel model;
+  private UiListMvcModel model;
 
   /** the current event to handle */
   private UIListModelEvent event;
@@ -44,7 +45,7 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
    * 
    * @param newModel
    */
-  public void setModel(UIListModel newModel) {
+  public void setModel(UiListMvcModel newModel) {
 
     if (this.model != null) {
       this.model.removeListener(this);

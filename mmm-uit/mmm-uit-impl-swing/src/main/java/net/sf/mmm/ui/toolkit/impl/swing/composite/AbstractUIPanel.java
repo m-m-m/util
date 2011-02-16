@@ -4,18 +4,19 @@
 package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
- * This class is an abstract base implementation of the {@link UIPanel}
+ * This class is an abstract base implementation of the {@link UiPanel}
  * interface using swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUIPanel extends AbstractUIMultiComposite implements UIPanel {
+public abstract class AbstractUIPanel extends AbstractUIMultiComposite implements UiPanel {
 
   /**
    * The constructor.
@@ -23,7 +24,7 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIPanel(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public AbstractUIPanel(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

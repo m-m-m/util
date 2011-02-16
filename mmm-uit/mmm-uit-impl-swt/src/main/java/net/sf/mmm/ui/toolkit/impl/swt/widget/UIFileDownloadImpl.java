@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -20,12 +20,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncFileDialogAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIFileDownload} interface using SWT
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using SWT
  * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownload {
+public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownload {
 
   /**
    * This inner class implements the listener that handles the button selection.

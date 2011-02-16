@@ -9,11 +9,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -22,6 +22,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIMenuImpl extends AbstractUIMenu {
 
@@ -38,7 +39,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param jMenu is the swing menu to wrap.
    */
-  public UIMenuImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, JMenu jMenu) {
+  public UIMenuImpl(UIFactorySwing uiFactory, UiNode parentObject, JMenu jMenu) {
 
     super(uiFactory, parentObject);
     this.menu = jMenu;
@@ -72,7 +73,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * {@inheritDoc}
    */
-  protected UIMenuItem createMenuItem(String name, ButtonStyle style) {
+  protected UiMenuItem createMenuItem(String name, ButtonStyle style) {
 
     UIMenuItemImpl item = new UIMenuItemImpl((UIFactorySwing) getFactory(), this, name, style);
     if (style == ButtonStyle.RADIO) {
@@ -85,7 +86,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * {@inheritDoc}
    */
-  protected UIMenu createSubMenu(String name) {
+  protected UiMenu createSubMenu(String name) {
 
     JMenu subMenu = new JMenu(name);
     this.menu.add(subMenu);

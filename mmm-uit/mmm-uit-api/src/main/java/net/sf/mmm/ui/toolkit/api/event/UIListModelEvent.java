@@ -10,6 +10,7 @@ import net.sf.mmm.util.event.api.ChangeType;
  * notify about changes of the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public final class UIListModelEvent extends UIModelEvent {
 

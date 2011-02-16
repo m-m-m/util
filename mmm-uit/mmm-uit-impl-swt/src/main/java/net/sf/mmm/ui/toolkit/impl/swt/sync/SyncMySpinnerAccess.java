@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.custom.MySpinner;
 
@@ -34,7 +34,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   private static final String OPERATION_SET_EDITABLE = "setEditable";
 
   /**
-   * operation to set the {@link MySpinner#setModel(UIListModel) model} of the
+   * operation to set the {@link MySpinner#setModel(UiListMvcModel) model} of the
    * spinner.
    */
   private static final String OPERATION_SET_MODEL = "setModel";
@@ -43,7 +43,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   private MySpinner spinner;
 
   /** the model */
-  private UIListModel model;
+  private UiListMvcModel model;
 
   /** the editable flag */
   private boolean editable;
@@ -60,7 +60,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    *        composite.
    * @param listModel is the list model containing the elements of the spinner.
    */
-  public SyncMySpinnerAccess(UIFactorySwt uiFactory, int swtStyle, UIListModel listModel) {
+  public SyncMySpinnerAccess(UIFactorySwt uiFactory, int swtStyle, UiListMvcModel listModel) {
 
     super(uiFactory, swtStyle);
     this.spinner = null;
@@ -113,7 +113,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    * 
    * @param listModel is the model to set.
    */
-  public void setModel(UIListModel listModel) {
+  public void setModel(UiListMvcModel listModel) {
 
     assert (checkReady());
     this.model = listModel;

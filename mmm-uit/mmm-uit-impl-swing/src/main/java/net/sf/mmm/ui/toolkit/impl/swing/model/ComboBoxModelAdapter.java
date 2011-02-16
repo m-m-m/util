@@ -5,10 +5,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 
 import javax.swing.MutableComboBoxModel;
 
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
+ * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} to a
  * swing {@link javax.swing.ComboBoxModel}.
  * 
  * @param <E> is the templated type of the elements that can be selected.
@@ -28,7 +28,7 @@ public class ComboBoxModelAdapter<E> extends ListModelAdapter<E> implements Muta
    * 
    * @param listModel
    */
-  public ComboBoxModelAdapter(UIListModel<E> listModel) {
+  public ComboBoxModelAdapter(UiListMvcModel<E> listModel) {
 
     super(listModel);
   }

@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -22,6 +22,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIFrameImpl extends UIWindow implements UIFrame {
 
@@ -35,7 +36,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parent is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} of this
+   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} of this
    *        object (may be <code>null</code>).
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
@@ -153,7 +154,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   /**
    * {@inheritDoc}
    */
-  public void setComposite(UIComposite newComposite) {
+  public void setComposite(UiComposite newComposite) {
 
     JComponent jComponent = ((AbstractUIComponent) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);

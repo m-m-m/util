@@ -12,6 +12,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  * This is a test runner that tests the various UIFactorySwing implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UITestRunner2 {
 

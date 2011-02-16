@@ -10,6 +10,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @see net.sf.mmm.ui.toolkit.api.window.UIWindow
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiReadMaximized {
 

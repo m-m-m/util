@@ -8,23 +8,17 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * visible (shown) or invisible (hidden).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public interface UiWriteVisible {
+public interface UiWriteVisible extends UiReadVisible {
 
   /**
    * This method shows or hides this object.
    * 
    * @param visible is the new visiblilty status of this object. If
-   *        <code>true</code>, the object will be shown (and raised), if
-   *        false the object will be hidden (iconified).
+   *        <code>true</code>, the object will be shown (and raised), if false
+   *        the object will be hidden (iconified).
    */
   void setVisible(boolean visible);
-
-  /**
-   * This method checks if this object is visible.
-   * 
-   * @return <code>true</code> iff this object is visible
-   */
-  boolean isVisible();
 
 }

@@ -12,23 +12,24 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableColumnModel;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
-import net.sf.mmm.ui.toolkit.api.widget.UITable;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.TableModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITable} interface using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTable} interface using Swing as the
  * UI toolkit.
  * 
  * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
+public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
 
   /** the native Swing table */
   private final JTable table;
@@ -45,7 +46,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UITableImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
+  public UITableImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.table = new JTable();
@@ -76,7 +77,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   /**
    * {@inheritDoc}
    */
-  public UITableModel<C> getModel() {
+  public UiTableMvcModel<C> getModel() {
 
     if (this.modelAdapter == null) {
       return null;
@@ -88,7 +89,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   /**
    * {@inheritDoc}
    */
-  public void setModel(UITableModel<C> newModel) {
+  public void setModel(UiTableMvcModel<C> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();

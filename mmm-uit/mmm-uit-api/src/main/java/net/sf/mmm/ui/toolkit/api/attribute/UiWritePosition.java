@@ -7,6 +7,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * This is the interface for an object of the UI framework that has a position.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWritePosition extends UiReadPosition {
 

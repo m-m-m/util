@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -17,12 +17,12 @@ import org.eclipse.swt.layout.FillLayout;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite} interface using SWT
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} interface using SWT
  * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIComposite extends AbstractUIComponent implements UIComposite {
+public abstract class AbstractUIComposite extends AbstractUIComponent implements UiComposite {
 
   /** gives access to the {@link org.eclipse.swt.widgets.Group} */
   private final SyncGroupAccess syncGroupAccess;

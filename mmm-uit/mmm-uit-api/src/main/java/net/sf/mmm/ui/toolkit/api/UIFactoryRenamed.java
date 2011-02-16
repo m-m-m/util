@@ -8,33 +8,33 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
-import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
-import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileUpload;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
-import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISpinBox;
-import net.sf.mmm.ui.toolkit.api.widget.UITable;
-import net.sf.mmm.ui.toolkit.api.widget.UITextField;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
-import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 
@@ -43,6 +43,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  * the UI.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UIFactoryRenamed extends UiWriteDisposed {
 
@@ -108,7 +109,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
   /**
    * This method sets the
    * {@link #getDesignOrientation() designed script-orientation}. You should
-   * set this value at the beginning before creating {@link UINodeRenamed UI nodes}
+   * set this value at the beginning before creating {@link UiNode UI nodes}
    * with this factory.
    * 
    * @param orientation is the script-orientation of the designer.
@@ -158,7 +159,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param text is the text that explains the action triggered by the button.
    * @return the created button.
    */
-  UIButton createButton(String text);
+  UiButton createButton(String text);
 
   /**
    * This method creates a new button. According to the style this can be a
@@ -169,7 +170,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param style is the style of the button.
    * @return the created button.
    */
-  UIButton createButton(UiImage icon, ButtonStyle style);
+  UiButton createButton(UiImage icon, ButtonStyle style);
 
   /**
    * This method creates a new button. According to the style this can be a
@@ -182,7 +183,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param style is the style of the button.
    * @return the created button.
    */
-  UIButton createButton(String text, UiImage icon, ButtonStyle style);
+  UiButton createButton(String text, UiImage icon, ButtonStyle style);
 
   /**
    * This method creates a new button.
@@ -190,7 +191,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param action is the action to be represented as button.
    * @return the created button.
    */
-  UIButton createButton(Action action);
+  UiButton createButton(Action action);
 
   /**
    * This method creates a new button. According to the style this can be a
@@ -201,7 +202,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param style is the style of the button.
    * @return the created button.
    */
-  UIButton createButton(String text, ButtonStyle style);
+  UiButton createButton(String text, ButtonStyle style);
 
   /**
    * This method creates a new panel without a border.
@@ -209,23 +210,23 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param orientation is the orientation of the child-components in the panel.
    * @return the created panel.
    */
-  UISlicePanel createPanel(Orientation orientation);
+  UiSlicePanel createPanel(Orientation orientation);
 
   /**
-   * This method creates a new {@link UISlicePanel panel} with a border.
+   * This method creates a new {@link UiSlicePanel panel} with a border.
    * 
    * @param orientation is the orientation of the child-components in the panel.
    * @param borderTitle is the label of the panels border.
    * @return the created panel.
    */
-  UISlicePanel createPanel(Orientation orientation, String borderTitle);
+  UiSlicePanel createPanel(Orientation orientation, String borderTitle);
 
   /**
-   * This method creates a {@link UIDecoratedComponent decorated component} that
+   * This method creates a {@link UiDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * <code>decorator</code>. The result can be easily
-   * {@link UISlicePanel#addComponent(UiElement) added} to a
-   * {@link UISlicePanel panel}.
+   * {@link UiSlicePanel#addComponent(UiElement) added} to a
+   * {@link UiSlicePanel panel}.
    * 
    * @param <D> is the templated type of the <code>decorator</code>.
    * @param <C> is the templated type of the <code>component</code>.
@@ -234,15 +235,15 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param component is the main component.
    * @return the decorated component.
    */
-  <D extends UiElement, C extends UiElement> UIDecoratedComponent<D, C> createDecoratedComponent(
+  <D extends UiElement, C extends UiElement> UiDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component);
 
   /**
-   * This method creates a {@link UIDecoratedComponent decorated component} that
+   * This method creates a {@link UiDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
-   * {@link UILabel label}. The result can be easily
-   * {@link UISlicePanel#addComponent(UiElement) added} to a
-   * {@link UISlicePanel panel}.
+   * {@link UiLabel label}. The result can be easily
+   * {@link UiSlicePanel#addComponent(UiElement) added} to a
+   * {@link UiSlicePanel panel}.
    * 
    * @param <C> is the templated type of the <code>component</code>.
    * 
@@ -250,23 +251,23 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param component is the component.
    * @return the labeled component.
    */
-  <C extends UiElement> UIDecoratedComponent<UILabel, C> createLabeledComponent(String label,
+  <C extends UiElement> UiDecoratedComponent<UiLabel, C> createLabeledComponent(String label,
       C component);
 
   /**
-   * This method creates a {@link UIDecoratedComponent decorated component} that
+   * This method creates a {@link UiDecoratedComponent decorated component} that
    * puts the given <code>components</code> into a
-   * {@link Orientation#HORIZONTAL horizontal} {@link UISlicePanel panel} and
-   * bundles it together with a {@link UILabel label}. The result can be easily
-   * {@link UISlicePanel#addComponent(UiElement) added} to a
-   * {@link UISlicePanel panel}.
+   * {@link Orientation#HORIZONTAL horizontal} {@link UiSlicePanel panel} and
+   * bundles it together with a {@link UiLabel label}. The result can be easily
+   * {@link UiSlicePanel#addComponent(UiElement) added} to a
+   * {@link UiSlicePanel panel}.
    * 
    * @param label is the label text.
    * @param components are the components (should be at least two to make
    *        sense).
    * @return the labeled component.
    */
-  UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
+  UiDecoratedComponent<UiLabel, UiSlicePanel> createLabeledComponents(String label,
       UiElement... components);
 
   /**
@@ -274,7 +275,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * 
    * @return the created scroll-panel.
    */
-  UIScrollPanel createScrollPanel();
+  UiScrollPanel createScrollPanel();
 
   /**
    * This method creates a new scroll-panel with the given child inside.
@@ -282,7 +283,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param child is the child contained in the scroll-panel.
    * @return the created scroll-panel.
    */
-  UIScrollPanel createScrollPanel(UIComposite child);
+  UiScrollPanel createScrollPanel(UiComposite child);
 
   /**
    * This method creates a new split panel.
@@ -291,14 +292,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * 
    * @return the created split panel.
    */
-  UISplitPanel createSplitPanel(Orientation orientation);
+  UiSplitPanel createSplitPanel(Orientation orientation);
 
   /**
    * This method creates a new tabbed panel.
    * 
    * @return the created tabbed panel.
    */
-  UITabbedPanel createTabbedPanel();
+  UiTabbedPanel createTabbedPanel();
 
   /**
    * This method creates a list with single-selection.
@@ -308,7 +309,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param model is the model defining the the selectable elements.
    * @return the created list.
    */
-  <E> UIList<E> createList(UIListModel<E> model);
+  <E> UiList<E> createList(UiListMvcModel<E> model);
 
   /**
    * This method creates a list.
@@ -317,10 +318,10 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param multiSelection is the value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelectionFlag#isMultiSelection() multi-selection-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelection#isMultiSelection() multi-selection-flag}.
    * @return the created list.
    */
-  <E> UIList<E> createList(UIListModel<E> model, boolean multiSelection);
+  <E> UiList<E> createList(UiListMvcModel<E> model, boolean multiSelection);
 
   /**
    * This method creates a combo-box that is NOT editable.
@@ -330,7 +331,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param model is the model defining the the selectable elements.
    * @return the created combo-box.
    */
-  <E> UIComboBox<E> createComboBox(UIListModel<E> model);
+  <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model);
 
   /**
    * This method creates a combo-box.
@@ -342,14 +343,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable-flag}.
    * @return the created combo-box.
    */
-  <E> UIComboBox<E> createComboBox(UIListModel<E> model, boolean editable);
+  <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model, boolean editable);
 
   /**
    * This method creates a tree. It will have single-selection mode.
    * 
    * @return the created tree.
    */
-  UITree<?> createTree();
+  UiTree<?> createTree();
 
   /**
    * This method creates a tree.
@@ -358,7 +359,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        items of the tree, else only one.
    * @return the created tree.
    */
-  UITree<?> createTree(boolean multiSelection);
+  UiTree<?> createTree(boolean multiSelection);
 
   /**
    * This method creates a tree.
@@ -369,14 +370,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param model is the model defining the content of the tree.
    * @return the created tree.
    */
-  <N> UITree<N> createTree(boolean multiSelection, UITreeModel<N> model);
+  <N> UiTree<N> createTree(boolean multiSelection, UiTreeMvcModel<N> model);
 
   /**
    * This method creates a table. It will have single-selection mode.
    * 
    * @return the created table.
    */
-  UITable<?> createTable();
+  UiTable<?> createTable();
 
   /**
    * This method creates a table.
@@ -385,7 +386,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        items/cells of the table, else only one.
    * @return the created table.
    */
-  UITable<?> createTable(boolean multiSelection);
+  UiTable<?> createTable(boolean multiSelection);
 
   /**
    * This method creates a table.
@@ -397,7 +398,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param model is the model defining the content of the table.
    * @return the created table.
    */
-  <C> UITable<C> createTable(boolean multiSelection, UITableModel<C> model);
+  <C> UiTable<C> createTable(boolean multiSelection, UiTableMvcModel<C> model);
 
   /**
    * This method creates a new label. The label is initially empty (has no
@@ -405,31 +406,31 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * 
    * @return the created label.
    */
-  UILabel createLabel();
+  UiLabel createLabel();
 
   /**
    * This method creates a new label.
    * 
-   * @param text is the initial {@link UILabel#getText() label-text}.
+   * @param text is the initial {@link UiLabel#getText() label-text}.
    * @return the created label.
    */
-  UILabel createLabel(String text);
+  UiLabel createLabel(String text);
 
   /**
    * This method creates a new text-field.
    * 
    * @return the created text-field.
    */
-  UITextField createTextField();
+  UiTextField createTextField();
 
   /**
    * This method creates a new text-field.
    * 
-   * @param editable is the {@link UITextField#isEditable() editable flag} of
+   * @param editable is the {@link UiTextField#isEditable() editable flag} of
    *        the text field.
    * @return the created text-field.
    */
-  UITextField createTextField(boolean editable);
+  UiTextField createTextField(boolean editable);
 
   /**
    * This method creates a new spin-box.
@@ -438,7 +439,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param model is the model defining the the selectable elements.
    * @return the created spin-box.
    */
-  <E> UISpinBox<E> createSpinBox(UIListModel<E> model);
+  <E> UiSpinBox<E> createSpinBox(UiListMvcModel<E> model);
 
   /**
    * This method creates a new horizontal slide-bar.
@@ -450,7 +451,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        regular slide-bar.
    * @return the created slide-bar.
    */
-  <E> UISlideBar<E> createSlideBar(UIListModel<E> model);
+  <E> UiSlideBar<E> createSlideBar(UiListMvcModel<E> model);
 
   /**
    * This method creates a new slide-bar.
@@ -463,14 +464,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param orientation defines the axis along which the slide-bar is oriented.
    * @return the created slide-bar.
    */
-  <E> UISlideBar<E> createSlideBar(UIListModel<E> model, Orientation orientation);
+  <E> UiSlideBar<E> createSlideBar(UiListMvcModel<E> model, Orientation orientation);
 
   /**
    * This method creates a new progress-bar.
    * 
    * @return the new progress-bar.
    */
-  UIProgressBar createProgressBar();
+  UiProgressBar createProgressBar();
 
   /**
    * This method creates a new progress-bar.
@@ -479,7 +480,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        oriented.
    * @return the new progress-bar.
    */
-  UIProgressBar createProgressBar(Orientation orientation);
+  UiProgressBar createProgressBar(Orientation orientation);
 
   /**
    * This method creates a date editor.
@@ -494,14 +495,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param access gives access to the file that can be downloaded.
    * @return the new file-download.
    */
-  UIFileDownload createFileDownload(FileAccess access);
+  UiFileDownload createFileDownload(FileAccess access);
 
   /**
    * This method create a new file-upload.
    * 
    * @return the new file-upload.
    */
-  UIFileUpload createFileUpload();
+  UiFileUpload createFileUpload();
 
   /**
    * This method creates a picture.

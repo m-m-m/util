@@ -7,15 +7,16 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractDecoratingLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Size;
 
 /**
  * This is the layout-manager that organizes the layout for
- * {@link UIDecoratedComponent decorated components}.
+ * {@link UiDecoratedComponent decorated components}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class DecoratingLayoutManager extends Layout {
 
@@ -27,7 +28,7 @@ public class DecoratingLayoutManager extends Layout {
    * 
    * @param decoratedComponent is the decorated component to layout.
    */
-  public DecoratingLayoutManager(UIDecoratedComponent decoratedComponent) {
+  public DecoratingLayoutManager(UiDecoratedComponent decoratedComponent) {
 
     super();
     this.delegate = new Manager(decoratedComponent);
@@ -61,7 +62,7 @@ public class DecoratingLayoutManager extends Layout {
      * 
      * @param decoratedComponent is the decorated component to layout.
      */
-    public Manager(UIDecoratedComponent decoratedComponent) {
+    public Manager(UiDecoratedComponent decoratedComponent) {
 
       super(decoratedComponent);
     }

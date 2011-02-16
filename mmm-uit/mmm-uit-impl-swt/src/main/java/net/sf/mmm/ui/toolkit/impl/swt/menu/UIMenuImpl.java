@@ -7,20 +7,21 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.menu.UIMenu} interface using SWT as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenu} interface using SWT as the UI
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIMenuImpl extends AbstractUIMenu {
 
@@ -36,7 +37,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * @param text is the {@link MenuItem#setText(java.lang.String) text} of the
    *        menu.
    */
-  public UIMenuImpl(UIFactorySwt uiFactory, UINodeRenamed parentObject, Menu swtMenu, String text) {
+  public UIMenuImpl(UIFactorySwt uiFactory, UiNode parentObject, Menu swtMenu, String text) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.CASCADE, swtMenu, text);
@@ -56,7 +57,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * {@inheritDoc}
    */
   @Override
-  protected UIMenuItem createMenuItem(String name, ButtonStyle style) {
+  protected UiMenuItem createMenuItem(String name, ButtonStyle style) {
 
     MenuItem menuItem = this.syncAccess.createMenuItem(name, style);
     return new UIMenuItemImpl((UIFactorySwt) getFactory(), this, name, style, menuItem);
@@ -66,7 +67,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * {@inheritDoc}
    */
   @Override
-  protected UIMenu createSubMenu(String name) {
+  protected UiMenu createSubMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
     return new UIMenuImpl((UIFactorySwt) getFactory(), this, subMenu, name);

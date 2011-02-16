@@ -4,13 +4,13 @@
 package net.sf.mmm.ui.toolkit.base.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This inner class is the layout-manager that organizes the layout for this
- * {@link UIDecoratedComponent} implementation.
+ * {@link UiDecoratedComponent} implementation.
  */
 public abstract class AbstractDecoratingLayoutManager {
 
@@ -21,7 +21,7 @@ public abstract class AbstractDecoratingLayoutManager {
   private static final int DOUBLE_INDENT = 2 * INDENT;
 
   /** the decorated-component to layout */
-  private final UIDecoratedComponent<?, ?> decoratedComponent;
+  private final UiDecoratedComponent<?, ?> decoratedComponent;
 
   /** the sizer for the decorators */
   private UiReadSize sizer;
@@ -31,7 +31,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * 
    * @param decoratedComp TODO
    */
-  public AbstractDecoratingLayoutManager(UIDecoratedComponent<?, ?> decoratedComp) {
+  public AbstractDecoratingLayoutManager(UiDecoratedComponent<?, ?> decoratedComp) {
 
     super();
     this.decoratedComponent = decoratedComp;
@@ -39,7 +39,7 @@ public abstract class AbstractDecoratingLayoutManager {
 
   /**
    * This method sets the sizer used to override the size of the
-   * {@link UIDecoratedComponent#getDecorator() decorator}.
+   * {@link UiDecoratedComponent#getDecorator() decorator}.
    * 
    * @param sizer is the sizer to use or <code>null</code> to disable.
    */
@@ -52,7 +52,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * This method does the actual layout.
    * 
    * @param parentSize is the size of the
-   *        {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite composite} to
+   *        {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite composite} to
    *        layout.
    */
   protected void doLayout(Size parentSize) {

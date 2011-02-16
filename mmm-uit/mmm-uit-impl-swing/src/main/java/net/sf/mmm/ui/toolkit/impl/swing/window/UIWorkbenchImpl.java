@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.window;
 
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -15,6 +15,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.composite.UIDesktopPanel;
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
 
@@ -63,7 +64,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
   /**
    * {@inheritDoc}
    */
-  public void setComposite(UIComposite newComposite) {
+  public void setComposite(UiComposite newComposite) {
 
     // TODO...
     throw new IllegalArgumentException("This method is not applicable for " + UIWorkbenchImpl.class);

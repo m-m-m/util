@@ -10,34 +10,34 @@ import java.net.URL;
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.composite.Alignment;
-import net.sf.mmm.ui.toolkit.api.composite.Filling;
-import net.sf.mmm.ui.toolkit.api.composite.Insets;
-import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
-import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
-import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
-import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
-import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
-import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
-import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
-import net.sf.mmm.ui.toolkit.api.widget.UISpinBox;
-import net.sf.mmm.ui.toolkit.api.widget.UITable;
-import net.sf.mmm.ui.toolkit.api.widget.UITree;
-import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
+import net.sf.mmm.ui.toolkit.api.view.composite.Alignment;
+import net.sf.mmm.ui.toolkit.api.view.composite.Filling;
+import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
+import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 import net.sf.mmm.ui.toolkit.base.feature.MaximumSizer;
@@ -51,6 +51,7 @@ import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeNode;
  * TODO This type ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 @SuppressWarnings("all")
 public class UIDemoBuilder {
@@ -63,9 +64,9 @@ public class UIDemoBuilder {
     super();
   }
 
-  public static UITabbedPanel createTabbedPanel(UIFactoryRenamed factory) {
+  public static UiTabbedPanel createTabbedPanel(UIFactoryRenamed factory) {
 
-    UITabbedPanel tabbedPanel = factory.createTabbedPanel();
+    UiTabbedPanel tabbedPanel = factory.createTabbedPanel();
     tabbedPanel.addComponent(createLayoutPanel(factory), "layout");
     tabbedPanel.addComponent(createSplitPanel(factory), "split");
     tabbedPanel.addComponent(createEditorPanel(factory), "editor", 1);
@@ -74,12 +75,12 @@ public class UIDemoBuilder {
     return tabbedPanel;
   }
 
-  public static void addEditorProperty(UISlicePanel editorPanel, String labelText,
+  public static void addEditorProperty(UiSlicePanel editorPanel, String labelText,
       UiElement component, MaximumSizer sizer) {
 
     UIFactoryRenamed factory = editorPanel.getFactory();
-    UISlicePanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
-    UILabel label = factory.createLabel(labelText);
+    UiSlicePanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
+    UiLabel label = factory.createLabel(labelText);
     sizer.add(label);
     fieldEditorPanel.addComponent(label, new LayoutConstraints(Alignment.LEFT, Filling.NONE, 0,
         Insets.SMALL_SPACE_HORIZONTAL, sizer));
@@ -90,29 +91,29 @@ public class UIDemoBuilder {
 
   }
 
-  public static UIComposite createEditorPanel(final UIFactoryRenamed factory) {
+  public static UiComposite createEditorPanel(final UIFactoryRenamed factory) {
 
-    final UISlicePanel editorPanel = factory.createPanel(Orientation.VERTICAL);
+    final UiSlicePanel editorPanel = factory.createPanel(Orientation.VERTICAL);
     final MaximumSizer sizer = new MaximumSizer(true, false);
     addEditorProperty(editorPanel, "Name:", factory.createTextField(), sizer);
     addEditorProperty(editorPanel, "Quality-Ranking:", factory.createTextField(), sizer);
     NumericUIRangeModel sbModel = new NumericUIRangeModel();
     sbModel.setMaximumValue(50);
     sbModel.setMinimumValue(-10);
-    UISpinBox<Integer> spinBox = factory.createSpinBox(sbModel);
+    UiSpinBox<Integer> spinBox = factory.createSpinBox(sbModel);
     spinBox.setEditable(true);
     addEditorProperty(editorPanel, "Port:", spinBox, sizer);
     final NumericUIRangeModel maxSlideModel = new NumericUIRangeModel(2, 100);
-    final UISlideBar maxSlideBar = factory.createSlideBar(maxSlideModel);
+    final UiSlideBar maxSlideBar = factory.createSlideBar(maxSlideModel);
     final NumericUIRangeModel slideModel = new NumericUIRangeModel(0, 7);
-    final UISlideBar slideBar = factory.createSlideBar(slideModel);
-    final UIProgressBar progressBar = factory.createProgressBar();
+    final UiSlideBar slideBar = factory.createSlideBar(slideModel);
+    final UiProgressBar progressBar = factory.createProgressBar();
     maxSlideBar.addActionListener(new UIActionListener() {
 
       /**
        * {@inheritDoc}
        */
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         int index = maxSlideBar.getSelectedIndex();
         Integer maxSelection = maxSlideModel.getElement(index);
@@ -125,7 +126,7 @@ public class UIDemoBuilder {
       /**
        * {@inheritDoc}
        */
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         progressBar.setProgress(slideBar.getSelectedIndex());
       }
@@ -138,7 +139,7 @@ public class UIDemoBuilder {
 
     // TODO: this is a stupid and unix specific example!
     SimpleFileAccess access = new SimpleFileAccess(new File("/etc/mtab"));
-    UIFileDownload download = factory.createFileDownload(access);
+    UiFileDownload download = factory.createFileDownload(access);
     addEditorProperty(editorPanel, "BLOB:", download, sizer);
 
     UiImage icon = null;
@@ -154,16 +155,16 @@ public class UIDemoBuilder {
     UIDateEditor dateEditor = factory.createDateEditor();
     addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
 
-    UIButton imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
+    UiButton imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
     addEditorProperty(editorPanel, "IconButton:", imageButton, sizer);
     imageButton.addActionListener(new UIActionListener() {
 
       /**
        * {@inheritDoc}
        */
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
-        UIButton testButton = factory.createButton("Test");
+        UiButton testButton = factory.createButton("Test");
         addEditorProperty(editorPanel, "Extra long special greedy Label:", testButton, sizer);
       }
     });
@@ -172,24 +173,24 @@ public class UIDemoBuilder {
     return factory.createScrollPanel(editorPanel);
   }
 
-  public static UISplitPanel createSplitPanel(UIFactoryRenamed factory) {
+  public static UiSplitPanel createSplitPanel(UIFactoryRenamed factory) {
 
-    UISplitPanel splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
+    UiSplitPanel splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
     splitPanel.setTopOrLeftComponent(createTreePanel(factory));
     splitPanel.setBottomOrRightComponent(createListPanel(factory, createDemoListModel()));
     return splitPanel;
   }
 
-  public static UISlicePanel createLayoutPanel(final UIFactoryRenamed factory) {
+  public static UiSlicePanel createLayoutPanel(final UIFactoryRenamed factory) {
 
-    final UISlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
+    final UiSlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
     panel.addComponent(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
     panel.addComponent(UIDemoBuilder.createTreePanel(factory));
     panel.addComponent(UIDemoBuilder.createRadioPanel(factory));
-    UIButton button = factory.createButton("Flip");
+    UiButton button = factory.createButton("Flip");
     button.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         // panel.setOrientation(panel.getOrientation().getMirrored());
         ScriptOrientation so;
@@ -205,11 +206,11 @@ public class UIDemoBuilder {
     return panel;
   }
 
-  public static UISlicePanel createTablePanel(UIFactoryRenamed factory) {
+  public static UiSlicePanel createTablePanel(UIFactoryRenamed factory) {
 
-    final UISlicePanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
+    final UiSlicePanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
 
-    final UITable table = factory.createTable();
+    final UiTable table = factory.createTable();
     UISimpleTableModel model = new UISimpleTableModel(10, 5);
     model.initColumnNames();
     model.initCells();
@@ -230,24 +231,24 @@ public class UIDemoBuilder {
     return listModel;
   }
 
-  public static UISlicePanel createListPanel(UIFactoryRenamed factory,
+  public static UiSlicePanel createListPanel(UIFactoryRenamed factory,
       final DefaultUIListModel<String> listModel) {
 
-    final UISlicePanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
+    final UiSlicePanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
 
-    final UIComboBox<String> combo = factory.createComboBox(listModel);
+    final UiComboBox<String> combo = factory.createComboBox(listModel);
     listPanel.addComponent(combo, new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL, 0.0));
 
-    final UIList<String> list = factory.createList(listModel);
+    final UiList<String> list = factory.createList(listModel);
     listPanel.addComponent(list);
     listModel.addElement("!");
 
-    final UISlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
-    final UIButton addButton = factory.createButton("add");
+    final UiButton addButton = factory.createButton("add");
     addButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         String text = combo.getText();
         int index = list.getSelectedIndex();
@@ -257,10 +258,10 @@ public class UIDemoBuilder {
         listModel.addElement(text, index);
       }
     });
-    final UIButton removeButton = factory.createButton("remove");
+    final UiButton removeButton = factory.createButton("remove");
     removeButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         int index = list.getSelectedIndex();
         if (index != -1) {
@@ -280,12 +281,12 @@ public class UIDemoBuilder {
 
   public static void createMenus(final UIWindow frame) {
 
-    UIMenuBar menubar = frame.getMenuBar();
+    UiMenuBar menubar = frame.getMenuBar();
     // file menu
-    UIMenu fileMenu = menubar.addMenu("File");
+    UiMenu fileMenu = menubar.addMenu("File");
     UIActionListener loadAction = new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         frame.showMessage("You selected load", "Hi", MessageType.INFO);
       }
@@ -293,13 +294,13 @@ public class UIDemoBuilder {
     };
     fileMenu.addItem("Load", loadAction);
     fileMenu.addSeparator();
-    UIMenu subMenu = fileMenu.addSubMenu("Submenu");
+    UiMenu subMenu = fileMenu.addSubMenu("Submenu");
     UIActionListener checkAction = new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         if (action == ActionType.SELECT) {
-          UIMenuItem item = (UIMenuItem) source;
+          UiMenuItem item = (UiMenuItem) source;
           boolean selection = item.isSelected();
           String state = "uncheck";
           if (selection) {
@@ -317,13 +318,13 @@ public class UIDemoBuilder {
     fileMenu.addItem(frame.getFactory().createPrintAction(frame.getComposite(), "Print map"));
 
     // radio menu
-    UIMenu radioMenu = menubar.addMenu("Radio");
-    final UIMenuItem[] colors = new UIMenuItem[] { radioMenu.addItem("blue", ButtonStyle.RADIO),
+    UiMenu radioMenu = menubar.addMenu("Radio");
+    final UiMenuItem[] colors = new UiMenuItem[] { radioMenu.addItem("blue", ButtonStyle.RADIO),
         radioMenu.addItem("green", ButtonStyle.RADIO), radioMenu.addItem("red", ButtonStyle.RADIO) };
     radioMenu.addSeparator();
     UIActionListener colorAction = new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         String color = "none";
         for (int i = 0; i < colors.length; i++) {
@@ -338,11 +339,11 @@ public class UIDemoBuilder {
 
   }
 
-  public static UISlicePanel createTreePanel(UIFactoryRenamed factory) {
+  public static UiSlicePanel createTreePanel(UIFactoryRenamed factory) {
 
-    final UISlicePanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
+    final UiSlicePanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
 
-    final UITree tree = factory.createTree(false);
+    final UiTree tree = factory.createTree(false);
     final DefaultUITreeModel<String> treeModel = new DefaultUITreeModel<String>("root");
     DefaultUITreeNode<String> child1 = treeModel.getRoot().createChildNode("child");
     child1.createChildNode("sub-child");
@@ -350,12 +351,12 @@ public class UIDemoBuilder {
     tree.setModel(treeModel);
     treePanel.addComponent(tree);
 
-    final UISlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
-    final UIButton addButton = factory.createButton("add");
+    final UiButton addButton = factory.createButton("add");
     addButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
         if (selection != null) {
@@ -364,10 +365,10 @@ public class UIDemoBuilder {
         }
       }
     });
-    final UIButton removeButton = factory.createButton("remove");
+    final UiButton removeButton = factory.createButton("remove");
     removeButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
         if (selection != null) {
@@ -386,37 +387,37 @@ public class UIDemoBuilder {
     return treePanel;
   }
 
-  public static UISlicePanel createModelPanel(UIFactoryRenamed factory) {
+  public static UiSlicePanel createModelPanel(UIFactoryRenamed factory) {
 
-    final UISlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL,
+    final UiSlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL,
         "Model-View-Controller");
     final DefaultUIListModel<String> listModel = createDemoListModel();
 
     // add combo-box
-    final UIComboBox<String> combo = factory.createComboBox(listModel, true);
-    final UISlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
-    final UIButton addButton = factory.createButton("add");
-    final UIButton removeButton = factory.createButton("remove");
+    final UiComboBox<String> combo = factory.createComboBox(listModel, true);
+    final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UiButton addButton = factory.createButton("add");
+    final UiButton removeButton = factory.createButton("remove");
     buttonPanel.addComponent(addButton, LayoutConstraints.FIXED_HORIZONTAL);
     buttonPanel.addComponent(removeButton, LayoutConstraints.FIXED_HORIZONTAL);
     buttonPanel.addComponent(combo);
     modelPanel.addComponent(buttonPanel, LayoutConstraints.FIXED_HORIZONTAL);
 
     // spin-box
-    UISpinBox<String> spinBox = factory.createSpinBox(listModel);
+    UiSpinBox<String> spinBox = factory.createSpinBox(listModel);
     modelPanel.addComponent(spinBox, LayoutConstraints.FIXED_HORIZONTAL);
 
     // slide-bar
-    UISlideBar slideBar = factory.createSlideBar(listModel);
+    UiSlideBar slideBar = factory.createSlideBar(listModel);
     modelPanel.addComponent(slideBar, LayoutConstraints.FIXED_HORIZONTAL);
 
     // add list
-    final UIList<String> list = factory.createList(listModel);
+    final UiList<String> list = factory.createList(listModel);
     modelPanel.addComponent(list);
 
     addButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         String text = combo.getText();
         int index = list.getSelectedIndex();
@@ -428,7 +429,7 @@ public class UIDemoBuilder {
     });
     removeButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINodeRenamed source, ActionType action) {
+      public void invoke(UiNode source, ActionType action) {
 
         int index = list.getSelectedIndex();
         if (index != -1) {
@@ -440,12 +441,12 @@ public class UIDemoBuilder {
     return modelPanel;
   }
 
-  public static UISlicePanel createRadioPanel(UIFactoryRenamed factory) {
+  public static UiSlicePanel createRadioPanel(UIFactoryRenamed factory) {
 
-    UISlicePanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
-    UIButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
+    UiSlicePanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
+    UiButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
     radioPanel.addComponent(rb1);
-    UIButton rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);
+    UiButton rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);
     radioPanel.addComponent(rb2);
     return radioPanel;
   }

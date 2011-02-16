@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
-import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.widget.UIList;
+import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.ListModelAdapter;
@@ -14,7 +14,7 @@ import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIList} interface using SWT as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using SWT as the UI
  * toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
@@ -22,7 +22,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
+public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
 
   /** the model adapter */
   private final ListModelAdapter<E> modelAdapter;
@@ -40,7 +40,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
    * @param model is the model.
    */
   public UIListImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean multiSelection,
-      UIListModel<E> model) {
+      UiListMvcModel<E> model) {
 
     super(uiFactory, parentObject);
     int style = SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL;
@@ -91,7 +91,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   /**
    * {@inheritDoc}
    */
-  public UIListModel<E> getModel() {
+  public UiListMvcModel<E> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -99,7 +99,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
   /**
    * {@inheritDoc}
    */
-  public void setModel(UIListModel<E> newModel) {
+  public void setModel(UiListMvcModel<E> newModel) {
 
     this.modelAdapter.setModel(newModel);
   }

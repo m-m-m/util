@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
-import net.sf.mmm.ui.toolkit.api.widget.UITable;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.TableModelAdapter;
@@ -14,14 +14,14 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.UITable} interface using SWT as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTable} interface using SWT as the
  * UI toolkit.
  * 
  * @param <C> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
+public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
 
   /** the sync access to the native SWT table */
   private final SyncTableAccess syncAccess;
@@ -73,7 +73,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   /**
    * {@inheritDoc}
    */
-  public UITableModel<C> getModel() {
+  public UiTableMvcModel<C> getModel() {
 
     return this.modelAdapter.getModel();
   }
@@ -81,7 +81,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
   /**
    * {@inheritDoc}
    */
-  public void setModel(UITableModel<C> newModel) {
+  public void setModel(UiTableMvcModel<C> newModel) {
 
     this.modelAdapter.setModel(newModel);
   }

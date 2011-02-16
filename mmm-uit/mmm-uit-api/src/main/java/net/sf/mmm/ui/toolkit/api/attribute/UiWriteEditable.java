@@ -4,21 +4,15 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This is the interface for an
- * {@link net.sf.mmm.ui.toolkit.api.UiObject object} of the UI framework that
- * can be editable or uneditable. Editable means that the end-user can edit the
- * data of the object (e.g. the text of a text-input field).
+ * This is the interface for an {@link net.sf.mmm.ui.toolkit.api.UiObject
+ * object} of the UI toolkit that allows editing but this behavior can be
+ * enabled or disabled. Editable means that the end-user can edit the data of
+ * the object (e.g. the text of a text-input field).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public interface UiWriteEditable {
-
-  /**
-   * This method gets the editable status.
-   * 
-   * @return <code>true</code> if this object is editable.
-   */
-  boolean isEditable();
+public interface UiWriteEditable extends UiReadEditable {
 
   /**
    * This method set the editable status.

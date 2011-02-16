@@ -10,6 +10,7 @@ import java.util.Locale;
  * {@link java.util.Locale} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiReadLocale {
 

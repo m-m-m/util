@@ -11,11 +11,12 @@ import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the default implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.UIMutableListModel} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiMutableListMvcModel} interface.
  * 
  * @param <E> is the templated type of the elements in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
 

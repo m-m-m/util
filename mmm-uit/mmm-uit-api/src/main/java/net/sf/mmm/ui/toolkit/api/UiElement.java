@@ -12,12 +12,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTooltip;
 
 /**
  * This is the interface for a UI component. Such object is either a
- * {@link net.sf.mmm.ui.toolkit.api.widget.UIWidget widget} or a
- * {@link net.sf.mmm.ui.toolkit.api.composite.UIComposite composite}
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget widget} or a
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite composite}
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public interface UiElement extends UINodeRenamed, UiWriteTooltip, UiWriteEnabled, UiWriteSize,
+public interface UiElement extends UiNode, UiWriteTooltip, UiWriteEnabled, UiWriteSize,
     UiReadPreferredSize, UiWritePosition, UiWriteDisposed {
 
   // get/set cursor type

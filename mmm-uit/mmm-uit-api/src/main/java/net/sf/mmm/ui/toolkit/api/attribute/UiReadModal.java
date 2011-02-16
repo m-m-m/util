@@ -10,6 +10,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @see net.sf.mmm.ui.toolkit.api.window.UIDialog
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiReadModal {
 

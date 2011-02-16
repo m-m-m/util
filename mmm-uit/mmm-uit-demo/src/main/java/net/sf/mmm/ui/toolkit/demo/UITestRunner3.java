@@ -4,13 +4,13 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
-import net.sf.mmm.ui.toolkit.api.widget.UIButton;
-import net.sf.mmm.ui.toolkit.api.widget.UILabel;
-import net.sf.mmm.ui.toolkit.api.widget.UITextField;
+import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 
@@ -18,6 +18,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  * This is a test runner that tests the various UIFactorySwing implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class UITestRunner3 {
 
@@ -34,13 +35,13 @@ public class UITestRunner3 {
     workbench.setSize(800, 1024);
     workbench.setVisible(true);
     final UIFrame frame = workbench.createFrame("TestFrame", true);
-    UISlicePanel panel = factory.createPanel(Orientation.VERTICAL);
-    UIButton button = factory.createButton("Button");
-    UIDecoratedComponent<UILabel, UIButton> labeledButton = factory.createLabeledComponent(
+    UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
+    UiButton button = factory.createButton("Button");
+    UiDecoratedComponent<UiLabel, UiButton> labeledButton = factory.createLabeledComponent(
         "Label:", button);
     panel.addComponent(labeledButton, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    UITextField text = factory.createTextField();
-    UIDecoratedComponent<UILabel, UITextField> labeledText = factory.createLabeledComponent(
+    UiTextField text = factory.createTextField();
+    UiDecoratedComponent<UiLabel, UiTextField> labeledText = factory.createLabeledComponent(
         "Label2:", text);
     panel.addComponent(labeledText, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     frame.setComposite(panel);

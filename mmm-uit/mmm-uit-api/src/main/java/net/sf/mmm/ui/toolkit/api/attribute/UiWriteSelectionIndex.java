@@ -8,13 +8,14 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * {@link #getSelectedIndex() selection-index} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWriteSelectionIndex extends UiReadSelectionIndex {
 
   /**
    * This method set the selection to the item at the given index.
    * 
-   * @see net.sf.mmm.ui.toolkit.api.model.UIListModel#getElement(int)
+   * @see net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel#getElement(int)
    * 
    * @param newIndex is the index of the item to select.
    */

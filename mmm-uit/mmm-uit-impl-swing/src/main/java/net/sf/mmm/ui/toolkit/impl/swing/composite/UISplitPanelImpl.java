@@ -7,20 +7,21 @@ import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.composite.UISplitPanel} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel} interface using
  * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPanel {
+public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPanel {
 
   /** the swing split pane */
   private JSplitPane splitPanel;

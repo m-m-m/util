@@ -7,19 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
-import net.sf.mmm.ui.toolkit.api.model.UITableModel;
+import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface.
  * 
  * @param <E> is the templated type of the objects in the table cells.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUITableModel<E> implements UITableModel<E> {
+public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
 
   /** the listeners of the model */
   private final List<UITableModelListener> listeners;
@@ -115,7 +116,7 @@ public abstract class AbstractUITableModel<E> implements UITableModel<E> {
 
   /**
    * This method sends the given event to all
-   * {@link UITableModel#addListener(UITableModelListener) registered}
+   * {@link UiTableMvcModel#addListener(UITableModelListener) registered}
    * {@link UITableModelListener listeners} of this model.
    * 
    * @param event is the event to send.

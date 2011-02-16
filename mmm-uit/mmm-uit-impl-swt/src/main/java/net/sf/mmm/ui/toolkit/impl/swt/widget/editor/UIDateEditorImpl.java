@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.eclipse.swt.SWT;
-import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
+
+import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
@@ -16,7 +17,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.widget.AbstractUIWidget;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor} interface using
  * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
