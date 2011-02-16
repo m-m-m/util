@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.UINode;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
@@ -49,7 +49,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * 
    * @return read-access to the size of the desktop.
    */
-  protected UIReadSize getDesktopSize() {
+  protected UiReadSize getDesktopSize() {
 
     return getFactory().getDisplay();
   }
@@ -59,7 +59,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    */
   public void centerWindow() {
 
-    UIReadSize desktop = getDesktopSize();
+    UiReadSize desktop = getDesktopSize();
     int xDiff = desktop.getWidth() - getWidth();
     int yDiff = desktop.getHeight() - getHeight();
     if (xDiff < 0) {

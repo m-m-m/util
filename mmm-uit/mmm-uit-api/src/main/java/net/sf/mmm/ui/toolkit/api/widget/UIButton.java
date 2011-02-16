@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteIcon;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteIcon;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionFlag;
 
 /**
  * This is the interface for a button.<br>
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionFlag;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIButton extends UIWidget, UILabel, UIWriteSelectionFlag, UIWriteIcon {
+public interface UIButton extends UIWidget, UILabel, UiWriteSelectionFlag, UiWriteIcon {
 
   /** the type of this object */
   String TYPE = "Button";

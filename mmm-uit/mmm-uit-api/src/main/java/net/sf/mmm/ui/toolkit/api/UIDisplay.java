@@ -5,14 +5,14 @@ package net.sf.mmm.ui.toolkit.api;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This is the interface for the display where the UI objects are shown.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIDisplay extends UIObject, UIReadSize {
+public interface UIDisplay extends UIObject, UiReadSize {
 
   /** the type of this object */
   String TYPE = "Display";

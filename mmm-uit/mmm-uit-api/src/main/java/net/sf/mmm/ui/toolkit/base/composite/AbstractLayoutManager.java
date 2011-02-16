@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.composite.Filling;
 import net.sf.mmm.ui.toolkit.api.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 
 /**
@@ -356,7 +356,7 @@ public abstract class AbstractLayoutManager {
    * @param componentSize is the size of the component. It will be manipulated
    *        as necessary.
    */
-  public static void overrideSize(UIReadSize constraintsSize, Size componentSize) {
+  public static void overrideSize(UiReadSize constraintsSize, Size componentSize) {
 
     int w = constraintsSize.getWidth();
     if (w > 0) {

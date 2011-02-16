@@ -13,13 +13,13 @@ import javax.swing.JRadioButton;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -207,7 +207,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * This inner class is a sizer used to adjust the decorators.
    */
-  private static final class DecoratorSizer implements UIReadSize {
+  private static final class DecoratorSizer implements UiReadSize {
 
     /** the list of sizes to build maximum of */
     private final List<UIDecoratedComponent> sizeList;
@@ -252,7 +252,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
       int height = 0;
       int count = this.sizeList.size();
       for (int i = 0; i < count; i++) {
-        UIReadPreferredSize size = this.sizeList.get(i).getDecorator();
+        UiReadPreferredSize size = this.sizeList.get(i).getDecorator();
         if (size != null) {
           int currentHeight = size.getPreferredHeight();
           if (currentHeight > height) {
@@ -271,7 +271,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
       int width = 0;
       int count = this.sizeList.size();
       for (int i = 0; i < count; i++) {
-        UIReadPreferredSize size = this.sizeList.get(i).getDecorator();
+        UiReadPreferredSize size = this.sizeList.get(i).getDecorator();
         if (size != null) {
           int currentWidth = size.getPreferredWidth();
           if (currentWidth > width) {

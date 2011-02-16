@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteEditable;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
 
 /**
  * This is the interface for a combo-box UI. A combo-box is used to display
@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * scrollable or contains a "virtual" item at the end that opens another menu
  * containing more of the elements. <br>
  * If the combo-box is
- * {@link net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable() editable},
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable},
  * the user can additionally enter free text instead of selecting one of the
  * given items. Please note that the user can enter text, that does not
  * correspond to an item in the model. Therefore you need to call
@@ -27,7 +27,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIComboBox<E> extends UIListWidget<E>, UIWriteEditable, UIWriteText {
+public interface UIComboBox<E> extends UIListWidget<E>, UiWriteEditable, UiWriteText {
 
   /** the type of this object */
   String TYPE = "ComboBox";

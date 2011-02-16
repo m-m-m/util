@@ -4,31 +4,31 @@
 package net.sf.mmm.ui.toolkit.api.composite;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
 
 /**
  * This is the interface for a split panel. Such component is a special
  * composite that is split eigther horizontal or vertical. Therefore two
  * components can be added to this split panel. They appear eigther side-by-side
  * (if the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation() orientation}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation() orientation}
  * is {@link net.sf.mmm.ui.toolkit.api.composite.Orientation#HORIZONTAL}) or
  * top-to-bottom (if the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation() orientation}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation() orientation}
  * is {@link net.sf.mmm.ui.toolkit.api.composite.Orientation#VERTICAL}).<br>
  * The two components are separated by a split-bar that is orthogonal to the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation() orientation}.
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation() orientation}.
  * The user can change the position of the split-bar (increasing the size of the
  * one component and decreasing the size of the other) along the axis of the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadOrientation#getOrientation() orientation}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation() orientation}
  * if the split-panel is
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadEnabled#isEnabled() enabled}.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadEnabled#isEnabled() enabled}.<br>
  * It is undefined what will happen if you make the split panel visible before
  * you set the two components in the splitted slots of this panel.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UISplitPanel extends UIComposite, UIWriteOrientation {
+public interface UISplitPanel extends UIComposite, UiWriteOrientation {
 
   /** the type of this object */
   String TYPE = "SplitPanel";

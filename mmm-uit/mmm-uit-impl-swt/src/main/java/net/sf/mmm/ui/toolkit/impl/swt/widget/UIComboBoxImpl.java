@@ -39,7 +39,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UIComboBox<E>
    * @param uiFactory is the UIFactorySwt instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param editableFlag is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable() editable-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable-flag}.
    * @param listModel is the model defining the the selectable elements.
    */
   public UIComboBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean editableFlag,

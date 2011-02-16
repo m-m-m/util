@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.composite;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
 
 /**
  * This is the interface for a slice-panel. A panel is a composite UI component
@@ -32,7 +32,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteOrientation;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UISlicePanel extends UIPanel, UIWriteOrientation {
+public interface UISlicePanel extends UIPanel, UiWriteOrientation {
 
   /** the type of this object */
   String TYPE = "Panel";

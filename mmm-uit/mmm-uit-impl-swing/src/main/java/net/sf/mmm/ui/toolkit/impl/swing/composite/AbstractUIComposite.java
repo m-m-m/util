@@ -7,10 +7,10 @@ import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteBorderTitle;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteBorderTitle;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractUIComposite extends AbstractUIComponent implements UIComposite,
-    UIWriteBorderTitle {
+    UiWriteBorderTitle {
 
   /** the titled border of this composite */
   private TitledBorder border;

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 
 /**
  * This is the interface for a slide-bar. It is an interactive widget used to
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadOrientation;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UISlideBar<E> extends UIListWidget<E>, UIReadOrientation {
+public interface UISlideBar<E> extends UIListWidget<E>, UiReadOrientation {
 
   /** the type of this object */
   String TYPE = "SlideBar";

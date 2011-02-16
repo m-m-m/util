@@ -11,8 +11,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -298,7 +298,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    * {@inheritDoc}
    */
   @Override
-  protected UIReadSize getDesktopSize() {
+  protected UiReadSize getDesktopSize() {
 
     return this.workbench.getDesktopPanel();
   }

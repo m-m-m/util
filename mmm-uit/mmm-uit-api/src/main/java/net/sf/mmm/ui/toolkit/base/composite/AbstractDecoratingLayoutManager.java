@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.base.composite;
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This inner class is the layout-manager that organizes the layout for this
@@ -24,7 +24,7 @@ public abstract class AbstractDecoratingLayoutManager {
   private final UIDecoratedComponent<?, ?> decoratedComponent;
 
   /** the sizer for the decorators */
-  private UIReadSize sizer;
+  private UiReadSize sizer;
 
   /**
    * The constructor.
@@ -43,7 +43,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * 
    * @param sizer is the sizer to use or <code>null</code> to disable.
    */
-  public void setSizer(UIReadSize sizer) {
+  public void setSizer(UiReadSize sizer) {
 
     this.sizer = sizer;
   }

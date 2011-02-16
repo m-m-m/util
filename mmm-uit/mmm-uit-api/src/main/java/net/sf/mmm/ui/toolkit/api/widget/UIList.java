@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelectionFlag;
 
 /**
  * This is the interface for a list UI. A list is used to display items in a
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIList<E> extends UIListWidget<E>, UIReadMultiSelectionFlag {
+public interface UIList<E> extends UIListWidget<E>, UiReadMultiSelectionFlag {
 
   /** the type of this object */
   String TYPE = "List";

@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.widget;
 
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelectionFlag;
 
 /**
  * This is the interface for a tree. A tree is a widget used to display a
@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITree<N> extends UIWidget, UIReadMultiSelectionFlag {
+public interface UITree<N> extends UIWidget, UiReadMultiSelectionFlag {
 
   /** the type of this object */
   String TYPE = "Tree";
@@ -47,7 +47,7 @@ public interface UITree<N> extends UIWidget, UIReadMultiSelectionFlag {
   /**
    * This method gets all selected nodes.
    * 
-   * @see UIReadMultiSelectionFlag#isMultiSelection()
+   * @see UiReadMultiSelectionFlag#isMultiSelection()
    * 
    * @return an array containing all selected nodes. The array will have a
    *         <code>length</code> of zero if no node is selected.

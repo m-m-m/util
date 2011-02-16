@@ -5,11 +5,11 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 
 import javax.swing.AbstractSpinnerModel;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionValue;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
 
 /**
  * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.UIListModel} to a
@@ -19,8 +19,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UIWriteSelectionIndex,
-    UIWriteSelectionValue<E>, UIListModelListener {
+public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UiWriteSelectionIndex,
+    UiWriteSelectionValue<E>, UIListModelListener {
 
   /** the model to adapt */
   private UIListModel<E> model;

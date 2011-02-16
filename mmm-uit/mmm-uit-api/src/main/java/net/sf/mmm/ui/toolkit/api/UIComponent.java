@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.state.UIWritePosition;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSize;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTooltip;
 
 /**
  * This is the interface for a UI component. Such object is eigther a
@@ -17,8 +17,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteTooltip;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIComponent extends UINode, UIWriteTooltip, UIWriteEnabled, UIWriteSize,
-    UIReadPreferredSize, UIWritePosition, UIWriteDisposed {
+public interface UIComponent extends UINode, UiWriteTooltip, UiWriteEnabled, UiWriteSize,
+    UiReadPreferredSize, UiWritePosition, UiWriteDisposed {
 
   // get/set cursor type
 

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.window;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadModal;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadModal;
 
 /**
  * This is the interface for a dialog. A dialog is a window that is not visible
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadModal;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIDialog extends UIWindow, UIReadModal {
+public interface UIDialog extends UIWindow, UiReadModal {
 
   /** the type of this object */
   String TYPE = "Dialog";

@@ -4,15 +4,15 @@
 package net.sf.mmm.ui.toolkit.api.composite;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.state.UIReadBorderTitle;
-import net.sf.mmm.ui.toolkit.api.state.UIReadOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadBorderTitle;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 
 /**
  * This is the interface of a UI component that contains other UI components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIComposite extends UIComponent, UIReadBorderTitle, UIReadOrientation {
+public interface UIComposite extends UIComponent, UiReadBorderTitle, UiReadOrientation {
 
   /**
    * This method gets the number of sub-components in this composite component.

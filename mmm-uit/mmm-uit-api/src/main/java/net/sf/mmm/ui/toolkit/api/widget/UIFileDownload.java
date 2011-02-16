@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
 
 /**
  * This is the interface for a widget that allows the user to download a
@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * application. The widget requires
  * {@link net.sf.mmm.ui.toolkit.api.feature.FileAccess access} to the
  * download-file on construction.<br>
- * The {@link net.sf.mmm.ui.toolkit.api.state.UIReadText#getText() label-text}
+ * The {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadText#getText() label-text}
  * is shown to the user and can be clicked (button, link, ...) to start the
  * download (examples are "save", "download foo.xml", etc.). The label-text will
  * be initialized with the
@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIFileDownload extends UIWidget, UIWriteText {
+public interface UIFileDownload extends UIWidget, UiWriteText {
 
   /** the type of this object */
   String TYPE = "FileDownload";

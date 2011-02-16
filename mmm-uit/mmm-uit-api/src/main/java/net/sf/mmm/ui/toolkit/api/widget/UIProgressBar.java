@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 
 /**
  * This is the interface for a progress-bar. It is a widget used to display
@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadOrientation;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIProgressBar extends UIWidget, UIReadOrientation {
+public interface UIProgressBar extends UIWidget, UiReadOrientation {
 
   /** the type of this object */
   String TYPE = "ProgressBar";

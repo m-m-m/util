@@ -3,15 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteIcon;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteIcon;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
 
 /**
  * This is the interface for a label.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UILabel extends UIWidget, UIWriteText, UIWriteIcon {
+public interface UILabel extends UIWidget, UiWriteText, UiWriteIcon {
 
   /** the type of this object */
   String TYPE = "Label";

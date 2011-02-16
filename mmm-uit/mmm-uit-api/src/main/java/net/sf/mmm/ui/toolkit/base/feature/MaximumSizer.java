@@ -6,14 +6,14 @@ package net.sf.mmm.ui.toolkit.base.feature;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This is an implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize} interface that builds the
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize} interface that builds the
  * maximum width/height out of
- * {@link net.sf.mmm.ui.toolkit.api.state.UIReadPreferredSize preferred-size}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize preferred-size}
  * objects. This is supposed to be used as
  * {@link net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints#size size} in
  * {@linkplain net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints} to emulate
@@ -22,10 +22,10 @@ import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class MaximumSizer implements UIReadSize {
+public class MaximumSizer implements UiReadSize {
 
   /** the list of sizes to build maximum of */
-  private final List<UIReadPreferredSize> sizeList;
+  private final List<UiReadPreferredSize> sizeList;
 
   /** if <code>true</code> the width will be override */
   private final boolean overrideWidth;
@@ -43,30 +43,30 @@ public class MaximumSizer implements UIReadSize {
   public MaximumSizer(boolean widthOverride, boolean heightOverride) {
 
     super();
-    this.sizeList = new ArrayList<UIReadPreferredSize>();
+    this.sizeList = new ArrayList<UiReadPreferredSize>();
     this.overrideHeight = heightOverride;
     this.overrideWidth = widthOverride;
   }
 
   /**
-   * This method adds the given {@link UIReadPreferredSize size} to the
+   * This method adds the given {@link UiReadPreferredSize size} to the
    * size-list. The maximum width/height will be determined over all sized in
    * the list.
    * 
    * @param size is the size to add.
    */
-  public void add(UIReadPreferredSize size) {
+  public void add(UiReadPreferredSize size) {
 
     this.sizeList.add(size);
   }
 
   /**
-   * This method removes the given {@link UIReadPreferredSize size} from the
+   * This method removes the given {@link UiReadPreferredSize size} from the
    * size-list.
    * 
    * @param size is the size to remove.
    */
-  public void remove(UIReadPreferredSize size) {
+  public void remove(UiReadPreferredSize size) {
 
     this.sizeList.remove(size);
   }
@@ -80,7 +80,7 @@ public class MaximumSizer implements UIReadSize {
     if (this.overrideWidth) {
       int count = this.sizeList.size();
       for (int i = 0; i < count; i++) {
-        UIReadPreferredSize size = this.sizeList.get(i);
+        UiReadPreferredSize size = this.sizeList.get(i);
         int currentWidth = size.getPreferredWidth();
         if (currentWidth > width) {
           width = currentWidth;
@@ -99,7 +99,7 @@ public class MaximumSizer implements UIReadSize {
     if (this.overrideHeight) {
       int count = this.sizeList.size();
       for (int i = 0; i < count; i++) {
-        UIReadPreferredSize size = this.sizeList.get(i);
+        UiReadPreferredSize size = this.sizeList.get(i);
         int currentHeight = size.getPreferredHeight();
         if (currentHeight > height) {
           height = currentHeight;

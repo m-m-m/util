@@ -4,8 +4,8 @@
 package net.sf.mmm.ui.toolkit.api.widget;
 
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionValue;
 
 /**
  * This is the abstract interface for a UI list widget. Such a widget presents a
@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIListWidget<E> extends UIWidget, UIWriteSelectionIndex, UIWriteSelectionValue<E> {
+public interface UIListWidget<E> extends UIWidget, UiWriteSelectionIndex, UiWriteSelectionValue<E> {
 
   /**
    * This method gets the model of this list.

@@ -21,7 +21,7 @@ public interface Action {
 
   /**
    * This method gets the display name of the action. This is used as
-   * {@link net.sf.mmm.ui.toolkit.api.state.UIWriteText#setText(String) text}
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteText#setText(String) text}
    * for the widget that visualizes this action.
    * 
    * @return the name of this action.

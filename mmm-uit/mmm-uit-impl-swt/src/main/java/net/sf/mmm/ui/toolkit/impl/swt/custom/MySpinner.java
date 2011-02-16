@@ -12,19 +12,19 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteEditable;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
 
 /**
  * This class is a custom implementation of an SWT spinner (spin-box).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class MySpinner extends Composite implements UIWriteSelectionIndex, UIListModelListener,
-    UIWriteEditable {
+public class MySpinner extends Composite implements UiWriteSelectionIndex, UIListModelListener,
+    UiWriteEditable {
 
   /** the width of the inc/dec buttons */
   private static final int FIXED_WIDTH = 15;

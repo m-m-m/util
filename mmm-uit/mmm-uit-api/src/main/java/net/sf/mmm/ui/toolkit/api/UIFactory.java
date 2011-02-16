@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.api.model.UITreeModel;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteDisposed;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.widget.UIButton;
 import net.sf.mmm.ui.toolkit.api.widget.UIComboBox;
@@ -44,7 +44,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIFactory extends UIWriteDisposed {
+public interface UIFactory extends UiWriteDisposed {
 
   /**
    * This method gets the locale currently applied to this factory. The locale
@@ -135,7 +135,7 @@ public interface UIFactory extends UIWriteDisposed {
    * 
    * @param title is the title for the frame to create.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link net.sf.mmm.ui.toolkit.api.state.UIWriteSize#isResizeable() resizeable}
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizeable() resizeable}
    * @return the created frame.
    */
   UIFrame createFrame(String title, boolean resizeable);
@@ -317,7 +317,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param multiSelection is the value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.state.UIReadMultiSelectionFlag#isMultiSelection() multi-selection-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelectionFlag#isMultiSelection() multi-selection-flag}.
    * @return the created list.
    */
   <E> UIList<E> createList(UIListModel<E> model, boolean multiSelection);
@@ -339,7 +339,7 @@ public interface UIFactory extends UIWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param editable is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.state.UIWriteEditable#isEditable() editable-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable-flag}.
    * @return the created combo-box.
    */
   <E> UIComboBox<E> createComboBox(UIListModel<E> model, boolean editable);

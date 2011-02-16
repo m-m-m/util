@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.widget.editor;
 
 import java.util.Date;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteLocale;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteLocale;
 import net.sf.mmm.ui.toolkit.api.widget.UIWidget;
 
 /**
@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UIWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIDateEditor extends UIWidget, UIWriteLocale {
+public interface UIDateEditor extends UIWidget, UiWriteLocale {
 
   /** the type of this object */
   String TYPE = "DateEditor";

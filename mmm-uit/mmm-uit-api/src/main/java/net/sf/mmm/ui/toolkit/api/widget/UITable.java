@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.widget;
 
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
 
 /**
  * This is the interface for a table.
@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UITable<C> extends UIWidget, UIWriteSelectionIndex {
+public interface UITable<C> extends UIWidget, UiWriteSelectionIndex {
 
   /** the type of this object */
   String TYPE = "Table";

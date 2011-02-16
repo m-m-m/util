@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteEditable;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionIndex;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionValue;
 
 /**
  * This is the interface for a spin-box. It is an iteractive widget used to
@@ -22,8 +22,8 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteSelectionValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UISpinBox<E> extends UIListWidget<E>, UIWriteSelectionIndex,
-    UIWriteSelectionValue<E>, UIWriteEditable {
+public interface UISpinBox<E> extends UIListWidget<E>, UiWriteSelectionIndex,
+    UiWriteSelectionValue<E>, UiWriteEditable {
 
   /** the type of this object */
   String TYPE = "SpinBox";

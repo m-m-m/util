@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.base.model;
 
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteIntegerRange;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteIntegerRange;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
@@ -16,7 +16,7 @@ import net.sf.mmm.util.event.api.ChangeType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
-    UIWriteIntegerRange {
+    UiWriteIntegerRange {
 
   /** @see #getMinimumValue() */
   private int minimum;

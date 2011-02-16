@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.widget;
 
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
 
 /**
  * This is the interface for a widget that allows the user to choose a file for
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.state.UIWriteText;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIFileUpload extends UIWidget, UIWriteText {
+public interface UIFileUpload extends UIWidget, UiWriteText {
 
   /** the type of this object */
   String TYPE = "FileUpload";

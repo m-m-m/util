@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This class is a container for the layout constraints of a
@@ -17,7 +17,7 @@ public class LayoutConstraints {
   /**
    * This inner class is a dummy that does not override the size.
    */
-  private static class DummySize implements UIReadSize {
+  private static class DummySize implements UiReadSize {
 
     /**
      * {@inheritDoc}
@@ -38,7 +38,7 @@ public class LayoutConstraints {
   }
 
   /** the dummy for no size override */
-  private static final UIReadSize NO_SIZE = new DummySize();
+  private static final UiReadSize NO_SIZE = new DummySize();
 
   /**
    * The default layout constraints:<br>
@@ -152,7 +152,7 @@ public class LayoutConstraints {
    * The weight is a value in the range of [0,1] (0<=weight<=1). Typical
    * values are -1, 0 and 1.<br>
    * If 0, the component will be sized as preferred by the component's
-   * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}.<br>
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}.<br>
    * If the weight is positive, the component will be scaled according to the
    * avaliable size and in proportion to the weight. The width (if
    * {@link Orientation#HORIZONTAL horizontal} layout) or height (if
@@ -160,7 +160,7 @@ public class LayoutConstraints {
    * weight (absolute) and the size available for this panel. <br>
    * If the weight is negative, the behaviour is like <code>-weight</code>,
    * but only the space for the component is sized and the component itself is
-   * sized as its {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}. The
+   * sized as its {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}. The
    * alignment is used to place the component inside the sized space.
    */
   public final double weight;
@@ -172,12 +172,12 @@ public class LayoutConstraints {
 
   /**
    * The size used to override default size. If
-   * {@link UIReadSize#getWidth() width} or
-   * {@link UIReadSize#getHeight() height} is greater than <code>0</code>, it
+   * {@link UiReadSize#getWidth() width} or
+   * {@link UiReadSize#getHeight() height} is greater than <code>0</code>, it
    * overrides the size-value of the associated
    * {@link net.sf.mmm.ui.toolkit.api.UIComponent component}.
    */
-  public final UIReadSize size;
+  public final UiReadSize size;
 
   /**
    * The constructor.<br>
@@ -260,7 +260,7 @@ public class LayoutConstraints {
    * @param overrideSize is the {@link #size}.
    */
   public LayoutConstraints(Alignment align, Filling fill, double w, Insets border,
-      UIReadSize overrideSize) {
+      UiReadSize overrideSize) {
 
     super();
     this.alignment = align;

@@ -3,15 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.window;
 
-import net.sf.mmm.ui.toolkit.api.state.UIWriteMaximized;
-import net.sf.mmm.ui.toolkit.api.state.UIWriteMinimized;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMaximized;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMinimized;
 
 /**
  * This is the interface for a frame.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIFrame extends UIWindow, UIWriteMaximized, UIWriteMinimized {
+public interface UIFrame extends UIWindow, UiWriteMaximized, UiWriteMinimized {
 
   /** the type of this object */
   String TYPE = "Frame";

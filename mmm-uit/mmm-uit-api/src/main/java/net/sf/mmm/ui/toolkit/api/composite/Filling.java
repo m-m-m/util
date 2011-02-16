@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.api.composite;
 /**
  * This enum contains the available values for the filling of a
  * {@link net.sf.mmm.ui.toolkit.api.UIComponent component}. The filling
- * determines if the {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size} of
+ * determines if the {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size} of
  * the {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will be expanded
  * horizontally and/or vertically if there is more space available.
  * 
@@ -16,7 +16,7 @@ public enum Filling {
 
   /**
    * The {@link net.sf.mmm.ui.toolkit.api.UIComponent component} will keep its
-   * {@link net.sf.mmm.ui.toolkit.api.state.UIReadSize size}.
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}.
    */
   NONE,
 

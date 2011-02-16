@@ -8,10 +8,10 @@ import javax.swing.JPanel;
 
 import net.sf.mmm.ui.toolkit.api.UIComponent;
 import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -136,7 +136,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
    * 
    * @param sizer is the sizer to use or <code>null</code> to disable.
    */
-  public void setDecoratorSizer(UIReadSize sizer) {
+  public void setDecoratorSizer(UiReadSize sizer) {
 
     this.layoutManager.setSizer(sizer);
   }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.composite;
 
-import net.sf.mmm.ui.toolkit.api.state.UIReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This class is a simple container for the size of a
@@ -34,10 +34,10 @@ public class Size {
   /**
    * The constructor.
    * 
-   * @param size is a {@link UIReadSize sized-object} that will be converted to
+   * @param size is a {@link UiReadSize sized-object} that will be converted to
    *        a {@link Size}.
    */
-  public Size(UIReadSize size) {
+  public Size(UiReadSize size) {
 
     this(size.getWidth(), size.getHeight());
   }
