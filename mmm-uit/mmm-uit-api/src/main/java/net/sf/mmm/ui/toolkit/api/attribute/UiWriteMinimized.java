@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This is the interface for an
- * {@link net.sf.mmm.ui.toolkit.api.UIObject object} of the UI framework that
+ * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object} of the UI framework that
  * can be (un)minimized.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

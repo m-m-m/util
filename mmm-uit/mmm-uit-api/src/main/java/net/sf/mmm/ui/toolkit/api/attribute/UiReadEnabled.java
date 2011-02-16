@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This interface gives read access to the enabled-flag of an
- * {@link net.sf.mmm.ui.toolkit.api.UIObject object}.
+ * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

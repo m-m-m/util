@@ -30,7 +30,7 @@ public interface Action {
 
   /**
    * This method gets the id of this action. It is used as
-   * {@link net.sf.mmm.ui.toolkit.api.UIObject#getId() object-id} for the widget
+   * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getId() object-id} for the widget
    * that visualizes this action.
    * 
    * @return the id of this action or <code>null</code> if the default id of

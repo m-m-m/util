@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIPicture extends UIObject, UiWriteSize, UiReadPreferredSize {
+public interface UIPicture extends UIObjectRenamed, UiWriteSize, UiReadPreferredSize {
 
   /** the type of this object */
   String TYPE = "Picture";

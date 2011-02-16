@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.composite.Orientation;
  * This interface gives {@link UiReadOrientation#getOrientation() read} and
  * {@link #setOrientation(Orientation) write} access to the
  * {@link net.sf.mmm.ui.toolkit.api.composite.Orientation} of an
- * {@link net.sf.mmm.ui.toolkit.api.UIObject object}.
+ * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

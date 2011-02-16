@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIDisplay extends UIObject, UiReadSize {
+public interface UIDisplay extends UIObjectRenamed, UiReadSize {
 
   /** the type of this object */
   String TYPE = "Display";

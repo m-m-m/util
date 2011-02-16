@@ -3,16 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
+
 /**
  * This is the interface for a UI object. Any object other than the UI factory
  * and the UI service should extend/implement this interface. <br>
  * An instance of this interface may be casted to a sub-interface of this API
  * (net.sf.mmm.ui.api.*) according to the result of the
- * {@link UIObject#getType()}method.
+ * {@link UIObjectRenamed#getType()} method.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIObject {
+public interface UIObjectRenamed extends UiReadId {
 
   /**
    * This method gets the UI factory that created this component.
@@ -58,15 +60,6 @@ public interface UIObject {
    *         <code>false</code> otherwise.
    */
   boolean isWidget();
-
-  /**
-   * This method gets the optional identifier of this object. It is used to
-   * identify the object and should therefore be unique.
-   * 
-   * @return the ID of this object or <code>null</code> if NOT
-   *         {@link #setId(String) set}.
-   */
-  String getId();
 
   /**
    * This method set the identifier of this object. Use this method to give the

@@ -40,7 +40,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
    *        instance.
    * @param parentObject is the workbench that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
@@ -59,7 +59,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
    *        instance.
    * @param parentObject is the
    *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that

@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.api.UIPicture;
 /**
  * This interface gives read access to the
  * {@link net.sf.mmm.ui.toolkit.api.UIPicture icon} of an
- * {@link net.sf.mmm.ui.toolkit.api.UIObject object}.
+ * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

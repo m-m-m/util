@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWindow;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UINode extends UIObject {
+public interface UINode extends UIObjectRenamed {
 
   /**
    * This method gets the parent component.

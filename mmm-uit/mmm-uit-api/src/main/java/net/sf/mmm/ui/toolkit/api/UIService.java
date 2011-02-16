@@ -9,7 +9,7 @@ import java.util.Collection;
  * This is the interface for the service that provides the UI toolkit. <br>
  * Please take notice that it is illegal to cast any interface of the UI toolkit
  * to an implementing class. The only casts allowed are described in the
- * {@link net.sf.mmm.ui.toolkit.api.UIObject UIObject} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed UIObject} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

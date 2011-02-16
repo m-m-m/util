@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This interface gives read access to the {@link #isMaximized() maximized}
- * state of an {@link net.sf.mmm.ui.toolkit.api.UIObject object}.
+ * state of an {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object}.
  * 
  * @see net.sf.mmm.ui.toolkit.api.window.UIWindow
  * 

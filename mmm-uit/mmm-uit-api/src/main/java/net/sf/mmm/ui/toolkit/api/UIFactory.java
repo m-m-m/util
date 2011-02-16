@@ -80,7 +80,7 @@ public interface UIFactory extends UiWriteDisposed {
   /**
    * This method sets the users script-orientation. You should set this value at
    * the beginning before creating your GUI with this factory. If you set this
-   * option at a later time, all existing {@link UIObject GUI-Objects} created
+   * option at a later time, all existing {@link UIObjectRenamed GUI-Objects} created
    * by this factory will be refreshed. Depending on the implementation of this
    * toolkit this may be an expensive operation, needs to dispose and rebuild
    * all GUI elements and can cause the loss of data entered by the user.

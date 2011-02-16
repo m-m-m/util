@@ -32,7 +32,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObject#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
    *        instance.
    * @param parent is the
    *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} of this
