@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadBorderTitle;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 
@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIComposite extends UIComponent, UiReadBorderTitle, UiReadOrientation {
+public interface UIComposite extends UiElement, UiReadBorderTitle, UiReadOrientation {
 
   /**
    * This method gets the number of sub-components in this composite component.
@@ -27,6 +27,6 @@ public interface UIComposite extends UIComponent, UiReadBorderTitle, UiReadOrien
    * @param index is the position of the requested sub-component.
    * @return the component at the given index.
    */
-  UIComponent getComponent(int index);
+  UiElement getComponent(int index);
 
 }

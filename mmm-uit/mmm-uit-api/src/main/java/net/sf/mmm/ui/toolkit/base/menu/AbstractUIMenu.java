@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
@@ -34,7 +34,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
    * @param uiFactory is the UIFactory instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMenu(AbstractUIFactory uiFactory, UINode parentObject) {
+  public AbstractUIMenu(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.items = new ArrayList<UIMenuItem>();
@@ -86,7 +86,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UIMenu {
   public UIMenuItem addItem(Action action) {
 
     UIMenuItem item = addItem(action.getName(), action.getActionListener(), action.getButtonStyle());
-    UIPicture icon = action.getIcon();
+    UiImage icon = action.getIcon();
     if (icon != null) {
       // item.setIcon(icon);
     }

@@ -9,8 +9,8 @@ import org.eclipse.swt.printing.Printer;
 import org.eclipse.swt.printing.PrinterData;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactory#createPrintAction(UIComponent) print-action}
+ * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#createPrintAction(UiElement) print-action}
  * for SWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -54,7 +54,7 @@ public class PrintAction extends AbstractAction implements UIActionListener {
   /**
    * {@inheritDoc}
    */
-  public void invoke(UINode source, ActionType action) {
+  public void invoke(UINodeRenamed source, ActionType action) {
 
     if (action == ActionType.SELECT) {
       Shell shell = this.component.getSyncAccess().getSwtObject().getShell();

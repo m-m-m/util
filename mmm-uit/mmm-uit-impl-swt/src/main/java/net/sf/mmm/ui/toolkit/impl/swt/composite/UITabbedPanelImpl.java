@@ -9,7 +9,7 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -47,7 +47,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component) {
+  public void addComponent(UiElement component) {
 
     addComponent(component, "Tab " + (getComponentCount() + 1));
   }
@@ -55,7 +55,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, String title) {
+  public void addComponent(UiElement component, String title) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     c.setParent(this);
@@ -73,7 +73,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, String title, int position) {
+  public void addComponent(UiElement component, String title, int position) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     c.setParent(this);

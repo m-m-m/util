@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JProgressBar;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.widget.UIProgressBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -31,7 +31,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UIProgressBar
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param orientation
    */
-  public UIProgressBarImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {
+  public UIProgressBarImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, Orientation orientation) {
 
     super(uiFactory, parentObject);
     this.progressBar = new MyProgressBar(orientation);

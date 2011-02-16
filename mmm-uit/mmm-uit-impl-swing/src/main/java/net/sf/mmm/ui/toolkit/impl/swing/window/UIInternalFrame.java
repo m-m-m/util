@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
@@ -28,7 +28,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
+public class UIInternalFrame extends UIWindow implements UIFrame, UiElement {
 
   /** the frame */
   private final JInternalFrame frame;
@@ -40,7 +40,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the workbench that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
@@ -59,10 +59,10 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UIComponent {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
    *        created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be

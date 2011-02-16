@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
 import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
 
@@ -20,7 +20,7 @@ public class UITestRunner2 {
    * 
    * @param factory is the actual factory implementation to use.
    */
-  private static void runTest(UIFactory factory) {
+  private static void runTest(UIFactoryRenamed factory) {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());

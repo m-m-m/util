@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
@@ -35,7 +35,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIScrollPanelImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UIScrollPanelImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.scrollPanel = new JScrollPane();
@@ -77,7 +77,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UIScrollPa
   /**
    * {@inheritDoc}
    */
-  public UIComponent getComponent(int index) {
+  public UiElement getComponent(int index) {
 
     if (index == 0) {
       return this.childComponent;

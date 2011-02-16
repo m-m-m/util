@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
@@ -34,7 +34,7 @@ public class UIDialogImpl extends UIWindow implements UIDialog {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param jDialog is the swing dialog to wrap.
    */
-  public UIDialogImpl(UIFactorySwing uiFactory, UINode parentObject, JDialog jDialog) {
+  public UIDialogImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, JDialog jDialog) {
 
     super(uiFactory, parentObject);
     this.dialog = jDialog;

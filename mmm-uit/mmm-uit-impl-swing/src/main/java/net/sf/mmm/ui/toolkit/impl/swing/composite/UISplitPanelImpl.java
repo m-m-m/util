@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 import javax.swing.JComponent;
 import javax.swing.JSplitPane;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
@@ -94,7 +94,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public void setTopOrLeftComponent(UIComponent component) {
+  public void setTopOrLeftComponent(UiElement component) {
 
     AbstractUIComponent newComponent = (AbstractUIComponent) component;
     if (newComponent.getParent() != null) {
@@ -112,7 +112,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public void setBottomOrRightComponent(UIComponent component) {
+  public void setBottomOrRightComponent(UiElement component) {
 
     AbstractUIComponent newComponent = (AbstractUIComponent) component;
     if (newComponent.getParent() != null) {
@@ -147,7 +147,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public UIComponent getTopOrLeftComponent() {
+  public UiElement getTopOrLeftComponent() {
 
     return this.componentTopOrLeft;
   }
@@ -155,7 +155,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public UIComponent getBottomOrRightComponent() {
+  public UiElement getBottomOrRightComponent() {
 
     return this.componentBottomOrRight;
   }
@@ -163,7 +163,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public UIComponent getComponent(int index) {
+  public UiElement getComponent(int index) {
 
     if (index == 0) {
       return getTopOrLeftComponent();

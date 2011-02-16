@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This is the interface for an
- * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object} of the UI framework that
+ * {@link net.sf.mmm.ui.toolkit.api.UiObject object} of the UI framework that
  * can be editable or uneditable. Editable means that the end-user can edit the
  * data of the object (e.g. the text of a text-input field).
  * 

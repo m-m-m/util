@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
@@ -27,7 +27,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDecoratedComponentImpl<D extends UIComponent, C extends UIComponent> extends
+public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> extends
     AbstractUIComposite implements UIDecoratedComponent<D, C> {
 
   /** @see #getSwingComponent() */
@@ -48,7 +48,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.layoutManager = new DecoratingLayoutManager(this);
@@ -73,7 +73,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   public Orientation getOrientation() {
 
     Orientation orientation = Orientation.HORIZONTAL;
-    UINode parent = getParent();
+    UINodeRenamed parent = getParent();
     if ((parent != null) && (parent instanceof UIComposite)) {
       orientation = ((UIComposite) parent).getOrientation().getMirrored();
     }
@@ -99,7 +99,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   /**
    * {@inheritDoc}
    */
-  public UIComponent getComponent(int index) {
+  public UiElement getComponent(int index) {
 
     if (index == 0) {
       return getDecorator();

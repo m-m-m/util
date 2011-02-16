@@ -11,8 +11,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
@@ -51,7 +51,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param orientation is the orientation for the layout of the panel.
    */
-  public UISlicePanelImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation) {
+  public UISlicePanelImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, Orientation orientation) {
 
     super(uiFactory, parentObject);
     this.layout = new LayoutManager(uiFactory);
@@ -125,7 +125,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component) {
+  public void addComponent(UiElement component) {
 
     addComponent(component, LayoutConstraints.DEFAULT);
   }
@@ -133,7 +133,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, LayoutConstraints constraints) {
+  public void addComponent(UiElement component, LayoutConstraints constraints) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     // synchronized (this) {
@@ -159,7 +159,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, LayoutConstraints constraints, int position) {
+  public void addComponent(UiElement component, LayoutConstraints constraints, int position) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     // synchronized (this) {

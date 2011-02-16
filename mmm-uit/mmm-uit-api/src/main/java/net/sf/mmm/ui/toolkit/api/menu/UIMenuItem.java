@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.menu;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadText;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionFlag;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIMenuItem extends UINode, UiWriteSelectionFlag, UiReadText {
+public interface UIMenuItem extends UINodeRenamed, UiWriteSelectionFlag, UiReadText {
 
   /** the type of this object */
   String TYPE = "MenuItem";

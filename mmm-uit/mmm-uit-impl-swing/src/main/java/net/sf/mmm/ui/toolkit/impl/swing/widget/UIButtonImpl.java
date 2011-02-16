@@ -10,8 +10,8 @@ import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.widget.UIButton;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -44,7 +44,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param buttonStyle determines the style of the button.
    */
-  public UIButtonImpl(UIFactorySwing uiFactory, UINode parentObject, ButtonStyle buttonStyle) {
+  public UIButtonImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, ButtonStyle buttonStyle) {
 
     super(uiFactory, parentObject);
     AbstractButton b;
@@ -139,7 +139,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UIPicture newIcon) {
+  public void setIcon(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {
@@ -152,7 +152,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /**
    * {@inheritDoc}
    */
-  public UIPicture getIcon() {
+  public UiImage getIcon() {
 
     return this.icon;
   }

@@ -32,10 +32,10 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parent is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} of this
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} of this
    *        object (may be <code>null</code>).
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be

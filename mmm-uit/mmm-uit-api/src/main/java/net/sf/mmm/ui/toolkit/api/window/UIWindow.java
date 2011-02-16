@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.window;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
@@ -17,7 +17,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIWindow extends UINode, UiWriteDisposed, UiWriteSize,
+public interface UIWindow extends UINodeRenamed, UiWriteDisposed, UiWriteSize,
     AttributeWriteTitle<String>, UiWritePosition, UiWriteVisible {
 
   /**

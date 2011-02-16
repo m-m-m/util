@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.UIPicture}
+ * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.UiImage}
  * interface using Swing as the underlying implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

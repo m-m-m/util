@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
@@ -28,7 +28,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDecoratedComponentImpl<D extends UIComponent, C extends UIComponent> extends
+public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> extends
     AbstractUIComposite implements UIDecoratedComponent<D, C> {
 
   /** the synchron access to the {@link org.eclipse.swt.widgets.Composite} */
@@ -74,7 +74,7 @@ public class UIDecoratedComponentImpl<D extends UIComponent, C extends UICompone
   public Orientation getOrientation() {
 
     Orientation orientation = Orientation.HORIZONTAL;
-    UINode parent = getParent();
+    UINodeRenamed parent = getParent();
     if ((parent != null) && (parent instanceof UIComposite)) {
       orientation = ((UIComposite) parent).getOrientation().getMirrored();
     }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
 
 /**
@@ -39,7 +39,7 @@ public interface UISplitPanel extends UIComposite, UiWriteOrientation {
    * 
    * @param component is the component to add.
    */
-  void setTopOrLeftComponent(UIComponent component);
+  void setTopOrLeftComponent(UiElement component);
 
   /**
    * This method gets the component placed to the top (horizontal orientation)
@@ -48,7 +48,7 @@ public interface UISplitPanel extends UIComposite, UiWriteOrientation {
    * @return the top or left component or <code>null</code> if the component
    *         has not been set.
    */
-  UIComponent getTopOrLeftComponent();
+  UiElement getTopOrLeftComponent();
 
   /**
    * This method sets the component placed to the bottom (horizontal
@@ -56,7 +56,7 @@ public interface UISplitPanel extends UIComposite, UiWriteOrientation {
    * 
    * @param component is the component to add.
    */
-  void setBottomOrRightComponent(UIComponent component);
+  void setBottomOrRightComponent(UiElement component);
 
   /**
    * This method gets the component placed to the bottom (horizontal
@@ -65,7 +65,7 @@ public interface UISplitPanel extends UIComposite, UiWriteOrientation {
    * @return the bottom or right component or <code>null</code> if the
    *         component has not been set.
    */
-  UIComponent getBottomOrRightComponent();
+  UiElement getBottomOrRightComponent();
 
   /**
    * This method sets the position of the divider used to split the panel.

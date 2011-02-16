@@ -3,17 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIPicture} interface.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.UiImage} interface.<br>
  * Set initial {@link #setSize(int, int) site} in constructor of the
  * implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIPicture extends AbstractUIObject implements UIPicture {
+public abstract class AbstractUIPicture extends AbstractUIObject implements UiImage {
 
   /** the current width (may scale) */
   private int width;

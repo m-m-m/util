@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.net.URL;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UIFactory;
-import net.sf.mmm.ui.toolkit.api.UINode;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.composite.Alignment;
 import net.sf.mmm.ui.toolkit.api.composite.Filling;
 import net.sf.mmm.ui.toolkit.api.composite.Insets;
@@ -63,7 +63,7 @@ public class UIDemoBuilder {
     super();
   }
 
-  public static UITabbedPanel createTabbedPanel(UIFactory factory) {
+  public static UITabbedPanel createTabbedPanel(UIFactoryRenamed factory) {
 
     UITabbedPanel tabbedPanel = factory.createTabbedPanel();
     tabbedPanel.addComponent(createLayoutPanel(factory), "layout");
@@ -75,9 +75,9 @@ public class UIDemoBuilder {
   }
 
   public static void addEditorProperty(UISlicePanel editorPanel, String labelText,
-      UIComponent component, MaximumSizer sizer) {
+      UiElement component, MaximumSizer sizer) {
 
-    UIFactory factory = editorPanel.getFactory();
+    UIFactoryRenamed factory = editorPanel.getFactory();
     UISlicePanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
     UILabel label = factory.createLabel(labelText);
     sizer.add(label);
@@ -90,7 +90,7 @@ public class UIDemoBuilder {
 
   }
 
-  public static UIComposite createEditorPanel(final UIFactory factory) {
+  public static UIComposite createEditorPanel(final UIFactoryRenamed factory) {
 
     final UISlicePanel editorPanel = factory.createPanel(Orientation.VERTICAL);
     final MaximumSizer sizer = new MaximumSizer(true, false);
@@ -112,7 +112,7 @@ public class UIDemoBuilder {
       /**
        * {@inheritDoc}
        */
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         int index = maxSlideBar.getSelectedIndex();
         Integer maxSelection = maxSlideModel.getElement(index);
@@ -125,7 +125,7 @@ public class UIDemoBuilder {
       /**
        * {@inheritDoc}
        */
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         progressBar.setProgress(slideBar.getSelectedIndex());
       }
@@ -141,7 +141,7 @@ public class UIDemoBuilder {
     UIFileDownload download = factory.createFileDownload(access);
     addEditorProperty(editorPanel, "BLOB:", download, sizer);
 
-    UIPicture icon = null;
+    UiImage icon = null;
     try {
       // TODO add icon as resource and load it this way!
       String iconPath = UIDemoBuilder.class.getPackage().getName().replace('.', '/') + "/icon.png";
@@ -161,7 +161,7 @@ public class UIDemoBuilder {
       /**
        * {@inheritDoc}
        */
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         UIButton testButton = factory.createButton("Test");
         addEditorProperty(editorPanel, "Extra long special greedy Label:", testButton, sizer);
@@ -172,7 +172,7 @@ public class UIDemoBuilder {
     return factory.createScrollPanel(editorPanel);
   }
 
-  public static UISplitPanel createSplitPanel(UIFactory factory) {
+  public static UISplitPanel createSplitPanel(UIFactoryRenamed factory) {
 
     UISplitPanel splitPanel = factory.createSplitPanel(Orientation.HORIZONTAL);
     splitPanel.setTopOrLeftComponent(createTreePanel(factory));
@@ -180,7 +180,7 @@ public class UIDemoBuilder {
     return splitPanel;
   }
 
-  public static UISlicePanel createLayoutPanel(final UIFactory factory) {
+  public static UISlicePanel createLayoutPanel(final UIFactoryRenamed factory) {
 
     final UISlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
     panel.addComponent(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
@@ -189,7 +189,7 @@ public class UIDemoBuilder {
     UIButton button = factory.createButton("Flip");
     button.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         // panel.setOrientation(panel.getOrientation().getMirrored());
         ScriptOrientation so;
@@ -205,7 +205,7 @@ public class UIDemoBuilder {
     return panel;
   }
 
-  public static UISlicePanel createTablePanel(UIFactory factory) {
+  public static UISlicePanel createTablePanel(UIFactoryRenamed factory) {
 
     final UISlicePanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
 
@@ -230,7 +230,7 @@ public class UIDemoBuilder {
     return listModel;
   }
 
-  public static UISlicePanel createListPanel(UIFactory factory,
+  public static UISlicePanel createListPanel(UIFactoryRenamed factory,
       final DefaultUIListModel<String> listModel) {
 
     final UISlicePanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
@@ -247,7 +247,7 @@ public class UIDemoBuilder {
     final UIButton addButton = factory.createButton("add");
     addButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         String text = combo.getText();
         int index = list.getSelectedIndex();
@@ -260,7 +260,7 @@ public class UIDemoBuilder {
     final UIButton removeButton = factory.createButton("remove");
     removeButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         int index = list.getSelectedIndex();
         if (index != -1) {
@@ -285,7 +285,7 @@ public class UIDemoBuilder {
     UIMenu fileMenu = menubar.addMenu("File");
     UIActionListener loadAction = new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         frame.showMessage("You selected load", "Hi", MessageType.INFO);
       }
@@ -296,7 +296,7 @@ public class UIDemoBuilder {
     UIMenu subMenu = fileMenu.addSubMenu("Submenu");
     UIActionListener checkAction = new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         if (action == ActionType.SELECT) {
           UIMenuItem item = (UIMenuItem) source;
@@ -323,7 +323,7 @@ public class UIDemoBuilder {
     radioMenu.addSeparator();
     UIActionListener colorAction = new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         String color = "none";
         for (int i = 0; i < colors.length; i++) {
@@ -338,7 +338,7 @@ public class UIDemoBuilder {
 
   }
 
-  public static UISlicePanel createTreePanel(UIFactory factory) {
+  public static UISlicePanel createTreePanel(UIFactoryRenamed factory) {
 
     final UISlicePanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
 
@@ -355,7 +355,7 @@ public class UIDemoBuilder {
     final UIButton addButton = factory.createButton("add");
     addButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
         if (selection != null) {
@@ -367,7 +367,7 @@ public class UIDemoBuilder {
     final UIButton removeButton = factory.createButton("remove");
     removeButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
         if (selection != null) {
@@ -386,7 +386,7 @@ public class UIDemoBuilder {
     return treePanel;
   }
 
-  public static UISlicePanel createModelPanel(UIFactory factory) {
+  public static UISlicePanel createModelPanel(UIFactoryRenamed factory) {
 
     final UISlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL,
         "Model-View-Controller");
@@ -416,7 +416,7 @@ public class UIDemoBuilder {
 
     addButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         String text = combo.getText();
         int index = list.getSelectedIndex();
@@ -428,7 +428,7 @@ public class UIDemoBuilder {
     });
     removeButton.addActionListener(new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         int index = list.getSelectedIndex();
         if (index != -1) {
@@ -440,7 +440,7 @@ public class UIDemoBuilder {
     return modelPanel;
   }
 
-  public static UISlicePanel createRadioPanel(UIFactory factory) {
+  public static UISlicePanel createRadioPanel(UIFactoryRenamed factory) {
 
     UISlicePanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
     UIButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);

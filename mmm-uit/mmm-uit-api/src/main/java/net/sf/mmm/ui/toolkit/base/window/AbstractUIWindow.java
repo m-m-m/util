@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.window;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuBar;
@@ -31,13 +31,13 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public AbstractUIWindow(AbstractUIFactory uiFactory, UINode parentObject) {
+  public AbstractUIWindow(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
   }

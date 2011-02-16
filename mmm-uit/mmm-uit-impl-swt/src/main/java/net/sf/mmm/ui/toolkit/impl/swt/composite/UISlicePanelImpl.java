@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
@@ -51,7 +51,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component) {
+  public void addComponent(UiElement component) {
 
     addComponent(component, LayoutConstraints.DEFAULT);
   }
@@ -59,7 +59,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, LayoutConstraints constraints) {
+  public void addComponent(UiElement component, LayoutConstraints constraints) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
@@ -71,7 +71,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UISlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, LayoutConstraints constraints, int position) {
+  public void addComponent(UiElement component, LayoutConstraints constraints, int position) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);

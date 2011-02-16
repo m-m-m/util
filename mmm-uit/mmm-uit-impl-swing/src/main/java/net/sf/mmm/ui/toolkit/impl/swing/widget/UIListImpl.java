@@ -12,7 +12,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.api.widget.UIList;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -45,7 +45,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UIList<E> {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIListImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UIListImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.list = new JList();

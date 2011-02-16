@@ -8,9 +8,9 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
@@ -80,7 +80,7 @@ public class UIFactorySwing extends AbstractUIFactory {
    * 
    * This constructor may be used for testing if an instance is required for the
    * default display without using the
-   * {@link net.sf.mmm.ui.toolkit.api.UIService UIService}.
+   * {@link net.sf.mmm.ui.toolkit.api.UIServiceRenamed UIService}.
    */
   public UIFactorySwing() {
 
@@ -113,7 +113,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactory#getDisplay()
+   * @see net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getDisplay()
    * 
    * @return the AWT display.
    */
@@ -135,7 +135,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(String text, UIPicture icon, ButtonStyle style) {
+  public UIButton createButton(String text, UiImage icon, ButtonStyle style) {
 
     UIButton button = new UIButtonImpl(this, null, style);
     button.setText(text);
@@ -158,7 +158,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
+  public <D extends UiElement, C extends UiElement> UIDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component) {
 
     UIDecoratedComponent<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this, null);
@@ -276,7 +276,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIPicture createPicture(URL imageUrl) {
+  public UiImage createPicture(URL imageUrl) {
 
     return new UIPictureImpl(this, imageUrl);
   }
@@ -326,7 +326,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UIComponent component, String actionName, String jobName) {
+  public Action createPrintAction(UiElement component, String actionName, String jobName) {
 
     return new PrintAction((AbstractUIComponent) component, actionName, jobName);
   }

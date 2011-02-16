@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.menu;
 
 import java.util.Iterator;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 
 /**
  * This is the interface for a menu-bar. It represents a bar of pull down
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.UINode;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIMenuBar extends UINode {
+public interface UIMenuBar extends UINodeRenamed {
 
   /** the type of this object */
   String TYPE = "Menubar";

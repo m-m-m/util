@@ -12,8 +12,8 @@ import java.awt.print.PrinterJob;
 
 import javax.swing.JComponent;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactory#createPrintAction(UIComponent) print-action}
+ * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#createPrintAction(UiElement) print-action}
  * for SWING.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -60,7 +60,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   /**
    * {@inheritDoc}
    */
-  public void invoke(UINode source, ActionType action) {
+  public void invoke(UINodeRenamed source, ActionType action) {
 
     if (action == ActionType.SELECT) {
       PrinterJob job = PrinterJob.getPrinterJob();

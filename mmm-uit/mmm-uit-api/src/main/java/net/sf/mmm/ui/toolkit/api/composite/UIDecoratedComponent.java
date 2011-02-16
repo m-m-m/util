@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 
 /**
  * This is the interface for a simple {@link UIComposite composite} containing
- * two {@link UIComponent components}. The
+ * two {@link UiElement components}. The
  * {@link #getDecorator() first component} will be layed out with a
  * {@link Filling#NONE fixed} size on the top/left, the
  * {@link #getComponent() other component} will be {@link Filling#BOTH scaled}
@@ -21,7 +21,7 @@ import net.sf.mmm.ui.toolkit.api.UIComponent;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIDecoratedComponent<D extends UIComponent, C extends UIComponent> extends
+public interface UIDecoratedComponent<D extends UiElement, C extends UiElement> extends
     UIComposite {
 
   /** the type of this object */

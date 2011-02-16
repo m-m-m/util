@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UISplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
@@ -134,7 +134,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public void setTopOrLeftComponent(UIComponent component) {
+  public void setTopOrLeftComponent(UiElement component) {
 
     if (this.componentTopOrLeft != null) {
       // TODO
@@ -148,7 +148,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UISplitPane
   /**
    * {@inheritDoc}
    */
-  public void setBottomOrRightComponent(UIComponent component) {
+  public void setBottomOrRightComponent(UiElement component) {
 
     if (this.componentBottomOrRight != null) {
       // TODO

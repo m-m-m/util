@@ -12,7 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableColumnModel;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.model.UITableModel;
 import net.sf.mmm.ui.toolkit.api.widget.UITable;
@@ -45,7 +45,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UITable<C> {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UITableImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UITableImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.table = new JTable();

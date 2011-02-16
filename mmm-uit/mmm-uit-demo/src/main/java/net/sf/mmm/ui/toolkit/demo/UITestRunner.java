@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.demo;
 
 import java.io.File;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
-import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
 import net.sf.mmm.ui.toolkit.api.composite.UIScrollPanel;
@@ -46,7 +46,7 @@ public class UITestRunner {
    * 
    * @param factory is the actual factory implementation to use.
    */
-  private static void runTest(UIFactory factory) {
+  private static void runTest(UIFactoryRenamed factory) {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
@@ -54,7 +54,7 @@ public class UITestRunner {
     UIMenu fileMenu = frame.getMenuBar().addMenu("File");
     fileMenu.addItem("Load", new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         frame.showMessage("You selected load", "Hi", MessageType.INFO);
       }
@@ -64,7 +64,7 @@ public class UITestRunner {
     UIMenu subMenu = fileMenu.addSubMenu("Submenu");
     subMenu.addItem("Test", new UIActionListener() {
 
-      public void invoke(UINode source, ActionType action) {
+      public void invoke(UINodeRenamed source, ActionType action) {
 
         if (action == ActionType.SELECT) {
           if (!frame.showQuestion("Did you mean to do that?", "Test")) {

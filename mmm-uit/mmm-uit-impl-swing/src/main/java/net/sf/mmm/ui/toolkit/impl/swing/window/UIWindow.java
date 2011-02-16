@@ -9,7 +9,7 @@ import java.awt.Frame;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
 import net.sf.mmm.ui.toolkit.api.window.UIFrame;
@@ -29,13 +29,13 @@ public abstract class UIWindow extends UIWindowImpl {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindow(AbstractUIFactory uiFactory, UINode parentObject) {
+  public UIWindow(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
   }

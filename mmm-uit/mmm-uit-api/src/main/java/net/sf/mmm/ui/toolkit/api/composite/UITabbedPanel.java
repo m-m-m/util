@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 
 /**
  * This is the interface for a tabbed panel. Such component is a composite that
@@ -24,7 +24,7 @@ public interface UITabbedPanel extends UIPanel {
    *        be created by the same factory.
    * @param title is the title that will be displayed in the tab.
    */
-  void addComponent(UIComponent component, String title);
+  void addComponent(UiElement component, String title);
 
   /**
    * This method adds the given component as new tab on the ride of all existing
@@ -36,6 +36,6 @@ public interface UITabbedPanel extends UIPanel {
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void addComponent(UIComponent component, String title, int position);
+  void addComponent(UiElement component, String title, int position);
 
 }

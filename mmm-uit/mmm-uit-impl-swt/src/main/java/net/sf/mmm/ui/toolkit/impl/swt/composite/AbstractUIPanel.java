@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -69,7 +69,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UIP
   /**
    * {@inheritDoc}
    */
-  public boolean removeComponent(UIComponent component) {
+  public boolean removeComponent(UiElement component) {
 
     // return this.components.remove(component);
     int index = this.components.indexOf(component);
@@ -85,7 +85,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UIP
    * {@inheritDoc}
    */
   @Override
-  public void setParent(UINode newParent) {
+  public void setParent(UINodeRenamed newParent) {
 
     super.setParent(newParent);
   }

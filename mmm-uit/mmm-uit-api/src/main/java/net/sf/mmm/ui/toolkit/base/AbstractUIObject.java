@@ -3,16 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
-import net.sf.mmm.ui.toolkit.api.UIObjectRenamed;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiObject;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.UiObject} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIObject implements UIObjectRenamed {
+public abstract class AbstractUIObject implements UiObject {
 
   /** @see #getFactory() */
   private AbstractUIFactory factory;
@@ -27,7 +27,7 @@ public abstract class AbstractUIObject implements UIObjectRenamed {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    */
   public AbstractUIObject(AbstractUIFactory uiFactory) {

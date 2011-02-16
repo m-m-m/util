@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.feature;
 
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 
 /**
@@ -35,7 +35,7 @@ public class SimpleAction extends AbstractAction {
    * @param displayName is the {@link #getName() name}.
    * @param displayIcon is the {@link #getIcon() icon}.
    */
-  public SimpleAction(UIActionListener actionListener, String displayName, UIPicture displayIcon) {
+  public SimpleAction(UIActionListener actionListener, String displayName, UiImage displayIcon) {
 
     super(displayName);
     this.listener = actionListener;

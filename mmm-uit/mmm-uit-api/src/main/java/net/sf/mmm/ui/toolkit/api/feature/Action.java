@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.feature;
 
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 
@@ -30,7 +30,7 @@ public interface Action {
 
   /**
    * This method gets the id of this action. It is used as
-   * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getId() object-id} for the widget
+   * {@link net.sf.mmm.ui.toolkit.api.UiObject#getId() object-id} for the widget
    * that visualizes this action.
    * 
    * @return the id of this action or <code>null</code> if the default id of
@@ -51,7 +51,7 @@ public interface Action {
    * @return the icon for this action or <code>null</code> if no icon is
    *         associated.
    */
-  UIPicture getIcon();
+  UiImage getIcon();
 
   /**
    * This method gets the listener that will be called if this action is

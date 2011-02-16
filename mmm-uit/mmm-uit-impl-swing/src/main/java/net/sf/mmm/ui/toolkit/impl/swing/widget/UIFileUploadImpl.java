@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
 import net.sf.mmm.ui.toolkit.api.widget.UIFileUpload;
@@ -64,7 +64,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UIFileUpload {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UIFileUploadImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UIFileUploadImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.access = null;

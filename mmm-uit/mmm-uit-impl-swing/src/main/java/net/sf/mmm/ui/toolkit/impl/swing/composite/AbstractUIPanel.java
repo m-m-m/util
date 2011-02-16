@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.UIPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -23,7 +23,7 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIPanel(UIFactorySwing uiFactory, UINode parentObject) {
+  public AbstractUIPanel(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
   }
@@ -41,7 +41,7 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
   /**
    * {@inheritDoc}
    */
-  public boolean removeComponent(UIComponent component) {
+  public boolean removeComponent(UiElement component) {
 
     // return this.components.remove(component);
     int index = indexOfComponent(component);

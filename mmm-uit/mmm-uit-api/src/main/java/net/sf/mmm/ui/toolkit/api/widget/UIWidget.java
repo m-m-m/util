@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 
 /**
@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIWidget extends UIComponent {
+public interface UIWidget extends UiElement {
 
   /**
    * {@inheritDoc}

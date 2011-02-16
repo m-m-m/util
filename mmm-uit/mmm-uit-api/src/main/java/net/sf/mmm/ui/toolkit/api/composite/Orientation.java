@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.composite;
 
 /**
  * This enum contains the available values for the orientation of a
- * {@link net.sf.mmm.ui.toolkit.api.UIComponent component}.
+ * {@link net.sf.mmm.ui.toolkit.api.UiElement component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
@@ -26,7 +26,7 @@ public class UITestRunner3 {
    * 
    * @param factory is the actual factory implementation to use.
    */
-  private static void runTest(UIFactory factory) {
+  private static void runTest(UIFactoryRenamed factory) {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());

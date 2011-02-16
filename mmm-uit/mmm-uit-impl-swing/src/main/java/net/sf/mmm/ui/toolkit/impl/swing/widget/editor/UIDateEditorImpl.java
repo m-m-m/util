@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 
 import com.toedter.calendar.JDateChooser;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.widget.AbstractUIWidget;
@@ -33,7 +33,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
    * @param uiFactory
    * @param parentObject
    */
-  public UIDateEditorImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UIDateEditorImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.dateChooser = new JDateChooser();

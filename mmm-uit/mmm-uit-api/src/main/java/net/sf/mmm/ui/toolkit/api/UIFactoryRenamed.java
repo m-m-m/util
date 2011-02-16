@@ -44,7 +44,7 @@ import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIFactory extends UiWriteDisposed {
+public interface UIFactoryRenamed extends UiWriteDisposed {
 
   /**
    * This method gets the locale currently applied to this factory. The locale
@@ -80,7 +80,7 @@ public interface UIFactory extends UiWriteDisposed {
   /**
    * This method sets the users script-orientation. You should set this value at
    * the beginning before creating your GUI with this factory. If you set this
-   * option at a later time, all existing {@link UIObjectRenamed GUI-Objects} created
+   * option at a later time, all existing {@link UiObject GUI-Objects} created
    * by this factory will be refreshed. Depending on the implementation of this
    * toolkit this may be an expensive operation, needs to dispose and rebuild
    * all GUI elements and can cause the loss of data entered by the user.
@@ -108,7 +108,7 @@ public interface UIFactory extends UiWriteDisposed {
   /**
    * This method sets the
    * {@link #getDesignOrientation() designed script-orientation}. You should
-   * set this value at the beginning before creating {@link UINode UI nodes}
+   * set this value at the beginning before creating {@link UINodeRenamed UI nodes}
    * with this factory.
    * 
    * @param orientation is the script-orientation of the designer.
@@ -169,7 +169,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @param style is the style of the button.
    * @return the created button.
    */
-  UIButton createButton(UIPicture icon, ButtonStyle style);
+  UIButton createButton(UiImage icon, ButtonStyle style);
 
   /**
    * This method creates a new button. According to the style this can be a
@@ -182,7 +182,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @param style is the style of the button.
    * @return the created button.
    */
-  UIButton createButton(String text, UIPicture icon, ButtonStyle style);
+  UIButton createButton(String text, UiImage icon, ButtonStyle style);
 
   /**
    * This method creates a new button.
@@ -224,7 +224,7 @@ public interface UIFactory extends UiWriteDisposed {
    * This method creates a {@link UIDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * <code>decorator</code>. The result can be easily
-   * {@link UISlicePanel#addComponent(UIComponent) added} to a
+   * {@link UISlicePanel#addComponent(UiElement) added} to a
    * {@link UISlicePanel panel}.
    * 
    * @param <D> is the templated type of the <code>decorator</code>.
@@ -234,14 +234,14 @@ public interface UIFactory extends UiWriteDisposed {
    * @param component is the main component.
    * @return the decorated component.
    */
-  <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
+  <D extends UiElement, C extends UiElement> UIDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component);
 
   /**
    * This method creates a {@link UIDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * {@link UILabel label}. The result can be easily
-   * {@link UISlicePanel#addComponent(UIComponent) added} to a
+   * {@link UISlicePanel#addComponent(UiElement) added} to a
    * {@link UISlicePanel panel}.
    * 
    * @param <C> is the templated type of the <code>component</code>.
@@ -250,7 +250,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @param component is the component.
    * @return the labeled component.
    */
-  <C extends UIComponent> UIDecoratedComponent<UILabel, C> createLabeledComponent(String label,
+  <C extends UiElement> UIDecoratedComponent<UILabel, C> createLabeledComponent(String label,
       C component);
 
   /**
@@ -258,7 +258,7 @@ public interface UIFactory extends UiWriteDisposed {
    * puts the given <code>components</code> into a
    * {@link Orientation#HORIZONTAL horizontal} {@link UISlicePanel panel} and
    * bundles it together with a {@link UILabel label}. The result can be easily
-   * {@link UISlicePanel#addComponent(UIComponent) added} to a
+   * {@link UISlicePanel#addComponent(UiElement) added} to a
    * {@link UISlicePanel panel}.
    * 
    * @param label is the label text.
@@ -267,7 +267,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @return the labeled component.
    */
   UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
-      UIComponent... components);
+      UiElement... components);
 
   /**
    * This method creates a new scroll-panel.
@@ -511,7 +511,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @throws IOException on I/O error opening or reading data from the given
    *         URL.
    */
-  UIPicture createPicture(URL imageUrl) throws IOException;
+  UiImage createPicture(URL imageUrl) throws IOException;
 
   /**
    * This method creates a picture.
@@ -521,7 +521,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @throws IOException on I/O error opening or reading data from the given
    *         file.
    */
-  UIPicture createPicture(File imageFile) throws IOException;
+  UiImage createPicture(File imageFile) throws IOException;
 
   /**
    * This method creates an action that prints the given component if its
@@ -530,7 +530,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @param component is the component that is to be printed.
    * @return the according action.
    */
-  Action createPrintAction(UIComponent component);
+  Action createPrintAction(UiElement component);
 
   /**
    * This method creates an action that prints the given component if its
@@ -540,7 +540,7 @@ public interface UIFactory extends UiWriteDisposed {
    * @param actionName is the {@link Action#getName() name} of the print action.
    * @return the according action.
    */
-  Action createPrintAction(UIComponent component, String actionName);
+  Action createPrintAction(UiElement component, String actionName);
 
   /**
    * This method creates an action that prints the given component if its
@@ -551,6 +551,6 @@ public interface UIFactory extends UiWriteDisposed {
    * @param jobName is the name of the print job.
    * @return the according action.
    */
-  Action createPrintAction(UIComponent component, String actionName, String jobName);
+  Action createPrintAction(UiElement component, String actionName, String jobName);
 
 }

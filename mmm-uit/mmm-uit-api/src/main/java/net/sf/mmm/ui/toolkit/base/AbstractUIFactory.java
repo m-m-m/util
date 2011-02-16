@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UIFactory;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.composite.UISlicePanel;
@@ -36,11 +36,11 @@ import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactory} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIFactory implements UIFactory {
+public abstract class AbstractUIFactory implements UIFactoryRenamed {
 
   /** the disposed flag */
   private boolean disposed;
@@ -158,7 +158,7 @@ public abstract class AbstractUIFactory implements UIFactory {
    * This method refreshes all
    * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow windows} created by this
    * factory. The refresh of a window recursively refreshes all
-   * {@link net.sf.mmm.ui.toolkit.api.UINode nodes} contained in the window.
+   * {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed nodes} contained in the window.
    * This way all visible GUI elements are refreshed.
    * 
    * @param event is the event with details about the refresh.
@@ -243,7 +243,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(UIPicture icon, ButtonStyle style) {
+  public UIButton createButton(UiImage icon, ButtonStyle style) {
 
     return createButton(null, icon, style);
   }
@@ -255,7 +255,7 @@ public abstract class AbstractUIFactory implements UIFactory {
 
     UIButton button = createButton(action.getName(), action.getButtonStyle());
     button.addActionListener(action.getActionListener());
-    UIPicture icon = action.getIcon();
+    UiImage icon = action.getIcon();
     if (icon != null) {
       button.setIcon(icon);
     }
@@ -277,7 +277,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public <C extends UIComponent> UIDecoratedComponent<UILabel, C> createLabeledComponent(
+  public <C extends UiElement> UIDecoratedComponent<UILabel, C> createLabeledComponent(
       String label, C component) {
 
     return createDecoratedComponent(createLabel(label), component);
@@ -287,10 +287,10 @@ public abstract class AbstractUIFactory implements UIFactory {
    * {@inheritDoc}
    */
   public UIDecoratedComponent<UILabel, UISlicePanel> createLabeledComponents(String label,
-      UIComponent... components) {
+      UiElement... components) {
 
     UISlicePanel panel = createPanel(Orientation.HORIZONTAL);
-    for (UIComponent component : components) {
+    for (UiElement component : components) {
       panel.addComponent(component);
     }
     return createLabeledComponent(label, panel);
@@ -299,7 +299,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIPicture createPicture(File imageFile) throws IOException {
+  public UiImage createPicture(File imageFile) throws IOException {
 
     try {
       return createPicture(imageFile.toURI().toURL());
@@ -383,7 +383,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UIComponent component) {
+  public Action createPrintAction(UiElement component) {
 
     // TODO: i18n
     return createPrintAction(component, "Print");
@@ -392,7 +392,7 @@ public abstract class AbstractUIFactory implements UIFactory {
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UIComponent component, String actionName) {
+  public Action createPrintAction(UiElement component, String actionName) {
 
     if (component == null) {
       throw new IllegalArgumentException("Component must NOT be null!");

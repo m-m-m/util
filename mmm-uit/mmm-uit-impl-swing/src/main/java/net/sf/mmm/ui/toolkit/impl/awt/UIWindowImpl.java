@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.window.UIDialog;
@@ -30,13 +30,13 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindowImpl(AbstractUIFactory uiFactory, UINode parentObject) {
+  public UIWindowImpl(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
   }

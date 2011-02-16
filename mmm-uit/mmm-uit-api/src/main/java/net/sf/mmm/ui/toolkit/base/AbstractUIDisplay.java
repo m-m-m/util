@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 
 import net.sf.mmm.ui.toolkit.api.UIDevice;
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
-import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 
 /**
  * This is the abstract base implementation of the UIDisplay interface.

@@ -42,10 +42,10 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parent is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} of this
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} of this
    *        object (may be <code>null</code>).
    * @param defaultStyle is the default style used for the SWT shell.
    * @param modal - if <code>true</code> all windows of the application are

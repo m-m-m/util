@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
  * This is the abstract base implementation for all SWT
- * {@link net.sf.mmm.ui.toolkit.api.UINode ui-nodes}.
+ * {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed ui-nodes}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

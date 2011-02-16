@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
 import net.sf.mmm.ui.toolkit.api.widget.UIFileDownload;
 import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
@@ -63,7 +63,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UIFileDownlo
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param fileAccess gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UIFactorySwing uiFactory, UINode parentObject, FileAccess fileAccess) {
+  public UIFileDownloadImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, FileAccess fileAccess) {
 
     super(uiFactory, parentObject);
     this.access = fileAccess;

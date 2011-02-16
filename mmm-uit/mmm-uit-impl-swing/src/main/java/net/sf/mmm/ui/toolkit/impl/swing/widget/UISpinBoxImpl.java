@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JSpinner;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.api.widget.UISpinBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -37,7 +37,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UISpinBox<E> {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param model is the model for this spin-box.
    */
-  public UISpinBoxImpl(UIFactorySwing uiFactory, UINode parentObject, UIListModel<E> model) {
+  public UISpinBoxImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, UIListModel<E> model) {
 
     super(uiFactory, parentObject);
     this.modelAdapter = new SpinnerModelAdapter<E>(model);

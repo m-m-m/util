@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This interface gives read access to the position of an
- * {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed object}.
+ * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

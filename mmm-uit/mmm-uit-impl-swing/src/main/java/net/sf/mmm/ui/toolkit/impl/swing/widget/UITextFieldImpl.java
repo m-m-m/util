@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.widget.UITextField;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -28,7 +28,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UITextField {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UITextFieldImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UITextFieldImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.textField = new JTextField();

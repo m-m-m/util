@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.widget.UILabel;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UIPictureImpl;
@@ -86,7 +86,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UIPicture newIcon) {
+  public void setIcon(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {

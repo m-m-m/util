@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
 
 /**
@@ -44,7 +44,7 @@ public interface UISlicePanel extends UIPanel, UiWriteOrientation {
    * If the panel has vertical layout, the component will appear at the bottom.
    * It will use {@link LayoutConstraints#DEFAULT} as constraints.
    */
-  void addComponent(UIComponent component);
+  void addComponent(UiElement component);
 
   /**
    * This method adds the given component to the end of the panels component
@@ -57,7 +57,7 @@ public interface UISlicePanel extends UIPanel, UiWriteOrientation {
    * @param constraints are the constraints that define the layout of the
    *        component in this panel.
    */
-  void addComponent(UIComponent component, LayoutConstraints constraints);
+  void addComponent(UiElement component, LayoutConstraints constraints);
 
   /**
    * This method adds the given component at the given position.
@@ -69,6 +69,6 @@ public interface UISlicePanel extends UIPanel, UiWriteOrientation {
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void addComponent(UIComponent component, LayoutConstraints constraints, int position);
+  void addComponent(UiElement component, LayoutConstraints constraints, int position);
 
 }

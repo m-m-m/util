@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
@@ -60,8 +60,8 @@ public abstract class AbstractDecoratingLayoutManager {
     if ((parentSize.width < 0) || (parentSize.height < 0)) {
       return;
     }
-    UIComponent decorator = this.decoratedComponent.getDecorator();
-    UIComponent component = this.decoratedComponent.getComponent();
+    UiElement decorator = this.decoratedComponent.getDecorator();
+    UiElement component = this.decoratedComponent.getComponent();
     int width = 0;
     int height = 0;
     if (decorator != null) {
@@ -120,7 +120,7 @@ public abstract class AbstractDecoratingLayoutManager {
   protected Size calculateSize() {
 
     Size size = null;
-    UIComponent decorator = this.decoratedComponent.getDecorator();
+    UiElement decorator = this.decoratedComponent.getDecorator();
     if (decorator != null) {
       size = new Size();
       size.width = decorator.getPreferredWidth();
@@ -142,7 +142,7 @@ public abstract class AbstractDecoratingLayoutManager {
         }
       }
     }
-    UIComponent component = this.decoratedComponent.getComponent();
+    UiElement component = this.decoratedComponent.getComponent();
     if (component != null) {
       int width = component.getPreferredWidth();
       int height = component.getPreferredHeight();

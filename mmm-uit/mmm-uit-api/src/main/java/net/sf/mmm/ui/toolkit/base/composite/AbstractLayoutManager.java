@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.Alignment;
 import net.sf.mmm.ui.toolkit.api.composite.Filling;
 import net.sf.mmm.ui.toolkit.api.composite.Insets;
@@ -93,7 +93,7 @@ public abstract class AbstractLayoutManager {
    * 
    * @return the factory
    */
-  public UIFactory getFactory() {
+  public UIFactoryRenamed getFactory() {
 
     return this.factory;
   }
@@ -140,7 +140,7 @@ public abstract class AbstractLayoutManager {
    * This method determines if the layout orientation is horizontal or vertical.
    * 
    * @see #getOrientation()
-   * @see UIFactory#getScriptOrientation()
+   * @see UIFactoryRenamed#getScriptOrientation()
    * @see net.sf.mmm.ui.toolkit.api.ScriptOrientation#isHorizontal()
    * 
    * @return <code>true</code> if the layout is horizontal, <code>false</code>

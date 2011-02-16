@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
@@ -14,12 +14,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIComponent} interface using SWT as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.UiElement} interface using SWT as the UI
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIComponent extends UISwtNode implements UIComponent {
+public abstract class AbstractUIComponent extends UISwtNode implements UiElement {
 
   /**
    * The constructor.
@@ -74,7 +74,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
    * {@inheritDoc}
    */
   @Override
-  public void setParent(UINode newParent) {
+  public void setParent(UINodeRenamed newParent) {
 
     if (newParent == null) {
       System.out.println("AbstractUIComponent: This should be kicked out!");
@@ -105,7 +105,7 @@ public abstract class AbstractUIComponent extends UISwtNode implements UICompone
    */
   public void removeFromParent() {
 
-    UINode parent = getParent();
+    UINodeRenamed parent = getParent();
     if (parent != null) {
       setParent(null);
       throw new IllegalArgumentException("Currently unsupported!");

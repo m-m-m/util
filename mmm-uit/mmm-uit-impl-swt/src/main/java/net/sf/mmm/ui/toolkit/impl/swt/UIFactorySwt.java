@@ -11,8 +11,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.composite.UIComposite;
 import net.sf.mmm.ui.toolkit.api.composite.UIDecoratedComponent;
@@ -87,7 +87,7 @@ public class UIFactorySwt extends AbstractUIFactory {
    * 
    * This constructor may be used for testing if an instance is required for the
    * default display without using the
-   * {@link net.sf.mmm.ui.toolkit.api.UIService UIService}.
+   * {@link net.sf.mmm.ui.toolkit.api.UIServiceRenamed UIService}.
    */
   public UIFactorySwt() {
 
@@ -150,7 +150,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIButton createButton(String text, UIPicture icon, ButtonStyle style) {
+  public UIButton createButton(String text, UiImage icon, ButtonStyle style) {
 
     UIButton button = new UIButtonImpl(this, null, style);
     button.setText(text);
@@ -172,7 +172,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <D extends UIComponent, C extends UIComponent> UIDecoratedComponent<D, C> createDecoratedComponent(
+  public <D extends UiElement, C extends UiElement> UIDecoratedComponent<D, C> createDecoratedComponent(
       D decorator, C component) {
 
     UIDecoratedComponentImpl<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this,
@@ -291,7 +291,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIPicture createPicture(URL imageUrl) throws IOException {
+  public UiImage createPicture(URL imageUrl) throws IOException {
 
     return new UIPictureImpl(this, imageUrl);
   }
@@ -342,7 +342,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UIComponent component, String actionName, String jobName) {
+  public Action createPrintAction(UiElement component, String actionName, String jobName) {
 
     return new PrintAction((AbstractUIComponent) component, actionName, jobName);
   }

@@ -8,19 +8,19 @@ import java.awt.ComponentOrientation;
 import javax.swing.JComponent;
 
 import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.UIComponent;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIComponent} interface using Swing as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.UiElement} interface using Swing as the UI
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIComponent extends UIAwtNode implements UIComponent {
+public abstract class AbstractUIComponent extends UIAwtNode implements UiElement {
 
   /** the disposed flag */
   private boolean disposed;
@@ -33,7 +33,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIComponent(UIFactorySwing uiFactory, UINode parentObject) {
+  public AbstractUIComponent(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.disposed = false;
@@ -69,7 +69,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UICompone
    */
   public void removeFromParent() {
 
-    UINode parent = getParent();
+    UINodeRenamed parent = getParent();
     if (parent != null) {
       setParent(null);
       // throw new IllegalArgumentException("Currently unsupported!");

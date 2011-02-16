@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JSlider;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.UIListModel;
 import net.sf.mmm.ui.toolkit.api.widget.UISlideBar;
@@ -40,7 +40,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UISlideBar<E>
    * @param model is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UIFactorySwing uiFactory, UINode parentObject, Orientation orientation,
+  public UISlideBarImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, Orientation orientation,
       UIListModel<E> model) {
 
     super(uiFactory, parentObject);

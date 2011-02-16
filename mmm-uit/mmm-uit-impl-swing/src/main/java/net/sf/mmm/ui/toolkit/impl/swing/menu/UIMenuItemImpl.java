@@ -9,7 +9,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
@@ -39,7 +39,7 @@ public class UIMenuItemImpl extends UIAwtNode implements UIMenuItem {
    * @param itemStyle is the style defining how the item is visualized and
    *        behaves.
    */
-  public UIMenuItemImpl(UIFactorySwing uiFactory, UINode parentObject, String name,
+  public UIMenuItemImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, String name,
       ButtonStyle itemStyle) {
 
     super(uiFactory, parentObject);

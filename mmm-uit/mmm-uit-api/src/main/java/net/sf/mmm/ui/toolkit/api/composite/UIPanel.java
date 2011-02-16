@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 
 /**
  * This is the abstract interface for a panel. A panel is a {@link UIComposite}
- * that can dynamically aggregate multiple other {@link UIComponent}s. <br>
+ * that can dynamically aggregate multiple other {@link UiElement}s. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -20,7 +20,7 @@ public interface UIPanel extends UIComposite {
    * @param component is the component to add. The given component instance must
    *        be created by the same factory.
    */
-  void addComponent(UIComponent component);
+  void addComponent(UiElement component);
 
   /**
    * This method removes the given <code>component</code> from this panel.
@@ -32,7 +32,7 @@ public interface UIPanel extends UIComposite {
    *         remove, <code>false</code> otherwise (it was NOT in the panels
    *         component list).
    */
-  boolean removeComponent(UIComponent component);
+  boolean removeComponent(UiElement component);
 
   /**
    * This method removes the component at the given index from this panel.
@@ -42,6 +42,6 @@ public interface UIPanel extends UIComposite {
    * @param index is the position of the component to remove.
    * @return the component that has been removed.
    */
-  UIComponent removeComponent(int index);
+  UiElement removeComponent(int index);
 
 }

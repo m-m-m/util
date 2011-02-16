@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
@@ -36,7 +36,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * @param text is the {@link MenuItem#setText(java.lang.String) text} of the
    *        menu.
    */
-  public UIMenuImpl(UIFactorySwt uiFactory, UINode parentObject, Menu swtMenu, String text) {
+  public UIMenuImpl(UIFactorySwt uiFactory, UINodeRenamed parentObject, Menu swtMenu, String text) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.CASCADE, swtMenu, text);

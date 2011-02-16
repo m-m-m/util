@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This class is a container for the layout constraints of a
- * {@link net.sf.mmm.ui.toolkit.api.UIComponent} inside a
+ * {@link net.sf.mmm.ui.toolkit.api.UiElement} inside a
  * {@link net.sf.mmm.ui.toolkit.api.composite.UISlicePanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -175,7 +175,7 @@ public class LayoutConstraints {
    * {@link UiReadSize#getWidth() width} or
    * {@link UiReadSize#getHeight() height} is greater than <code>0</code>, it
    * overrides the size-value of the associated
-   * {@link net.sf.mmm.ui.toolkit.api.UIComponent component}.
+   * {@link net.sf.mmm.ui.toolkit.api.UiElement component}.
    */
   public final UiReadSize size;
 

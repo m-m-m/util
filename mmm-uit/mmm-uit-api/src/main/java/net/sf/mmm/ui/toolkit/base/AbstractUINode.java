@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UIFactory;
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
@@ -16,14 +16,14 @@ import net.sf.mmm.ui.toolkit.api.window.UIWindow;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UINode} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUINode extends AbstractUIObject implements UINode {
+public abstract class AbstractUINode extends AbstractUIObject implements UINodeRenamed {
 
   /** the parent object */
-  private UINode parent;
+  private UINodeRenamed parent;
 
   /**
    * the registered listeners (or <code>null</code> if no listener is
@@ -35,13 +35,13 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * The constructor.
    * 
    * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIObjectRenamed#getFactory() factory}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UINode#getParent() parent} that
+   *        {@link net.sf.mmm.ui.toolkit.api.UINodeRenamed#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public AbstractUINode(AbstractUIFactory uiFactory, UINode parentObject) {
+  public AbstractUINode(AbstractUIFactory uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory);
     this.parent = parentObject;
@@ -50,7 +50,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
   /**
    * {@inheritDoc}
    */
-  public UINode getParent() {
+  public UINodeRenamed getParent() {
 
     return this.parent;
   }
@@ -63,7 +63,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * 
    * @param newParent is the new parent of this object.
    */
-  public void setParent(UINode newParent) {
+  public void setParent(UINodeRenamed newParent) {
 
     this.parent = newParent;
   }
@@ -76,7 +76,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UINode 
    * @param childObject is the UI object whos parent is to be set.
    * @param parentObject is the parent UI object to set.
    */
-  protected void setParent(AbstractUINode childObject, UINode parentObject) {
+  protected void setParent(AbstractUINode childObject, UINodeRenamed parentObject) {
 
     /*
      * UINode oldParent = childObject.getParent(); if (oldParent != null) { if

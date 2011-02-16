@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.feature;
 
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.feature.Action;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 
@@ -25,7 +25,7 @@ public abstract class AbstractAction implements Action {
   private ButtonStyle buttonStyle;
 
   /** the {@link #getIcon() icon} */
-  private UIPicture icon;
+  private UiImage icon;
 
   /**
    * The constructor.
@@ -111,7 +111,7 @@ public abstract class AbstractAction implements Action {
    * 
    * @param newIcon is the new icon to set.
    */
-  public void setIcon(UIPicture newIcon) {
+  public void setIcon(UiImage newIcon) {
 
     this.icon = newIcon;
   }
@@ -119,7 +119,7 @@ public abstract class AbstractAction implements Action {
   /**
    * {@inheritDoc}
    */
-  public UIPicture getIcon() {
+  public UiImage getIcon() {
 
     return this.icon;
   }

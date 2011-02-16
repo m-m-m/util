@@ -9,7 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenu;
 import net.sf.mmm.ui.toolkit.api.menu.UIMenuItem;
@@ -38,7 +38,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param jMenu is the swing menu to wrap.
    */
-  public UIMenuImpl(UIFactorySwing uiFactory, UINode parentObject, JMenu jMenu) {
+  public UIMenuImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject, JMenu jMenu) {
 
     super(uiFactory, parentObject);
     this.menu = jMenu;

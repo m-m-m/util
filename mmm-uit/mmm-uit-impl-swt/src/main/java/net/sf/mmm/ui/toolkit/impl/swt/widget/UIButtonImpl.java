@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.widget.UIButton;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -116,7 +116,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UIButton {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UIPicture newIcon) {
+  public void setIcon(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
-import net.sf.mmm.ui.toolkit.api.UIComponent;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.composite.UITabbedPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -48,7 +48,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component) {
+  public void addComponent(UiElement component) {
 
     addComponent(component, "Tab " + (getComponentCount() + 1));
   }
@@ -56,7 +56,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, String title) {
+  public void addComponent(UiElement component, String title) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.add(title, c.getSwingComponent());
@@ -67,7 +67,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UITabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UIComponent component, String title, int position) {
+  public void addComponent(UiElement component, String title, int position) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.insertTab(title, null, c.getSwingComponent(), null, position);

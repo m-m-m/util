@@ -10,18 +10,18 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
  * and the UI service should extend/implement this interface. <br>
  * An instance of this interface may be casted to a sub-interface of this API
  * (net.sf.mmm.ui.api.*) according to the result of the
- * {@link UIObjectRenamed#getType()} method.
+ * {@link UiObject#getType()} method.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface UIObjectRenamed extends UiReadId {
+public interface UiObject extends UiReadId {
 
   /**
    * This method gets the UI factory that created this component.
    * 
    * @return the ui instance.
    */
-  UIFactory getFactory();
+  UIFactoryRenamed getFactory();
 
   /**
    * This method returns the type of the component. This must be a TYPE constant

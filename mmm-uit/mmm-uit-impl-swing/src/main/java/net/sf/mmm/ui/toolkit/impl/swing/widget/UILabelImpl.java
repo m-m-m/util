@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import net.sf.mmm.ui.toolkit.api.UINode;
-import net.sf.mmm.ui.toolkit.api.UIPicture;
+import net.sf.mmm.ui.toolkit.api.UINodeRenamed;
+import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.widget.UILabel;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
@@ -33,7 +33,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
    * @param uiFactory
    * @param parentObject
    */
-  public UILabelImpl(UIFactorySwing uiFactory, UINode parentObject) {
+  public UILabelImpl(UIFactorySwing uiFactory, UINodeRenamed parentObject) {
 
     super(uiFactory, parentObject);
     this.label = new JLabel();
@@ -76,7 +76,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UIPicture newIcon) {
+  public void setIcon(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {
@@ -89,7 +89,7 @@ public class UILabelImpl extends AbstractUIWidget implements UILabel {
   /**
    * {@inheritDoc}
    */
-  public UIPicture getIcon() {
+  public UiImage getIcon() {
 
     return this.icon;
   }
