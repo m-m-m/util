@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
@@ -61,7 +61,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.label.setText(text);
   }
@@ -69,7 +69,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.label.getText();
   }
@@ -77,7 +77,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UiImage newIcon) {
+  public void setImage(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {
@@ -90,7 +90,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public UiImage getIcon() {
+  public UiImage getImage() {
 
     return this.icon;
   }

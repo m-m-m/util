@@ -43,7 +43,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
   /**
    * {@inheritDoc}
    */
-  public int getComponentCount() {
+  public int getChildCount() {
 
     return this.components.size();
   }
@@ -52,7 +52,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
    * {@inheritDoc}
    */
   @Override
-  public AbstractUIComponent getComponent(int index) {
+  public AbstractUIComponent getChild(int index) {
 
     return this.components.get(index);
   }
@@ -60,7 +60,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent removeComponent(int index) {
+  public AbstractUIComponent removeChild(int index) {
 
     AbstractUIComponent component = this.components.remove(index);
     component.setParent(null);
@@ -70,12 +70,12 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
   /**
    * {@inheritDoc}
    */
-  public boolean removeComponent(UiElement component) {
+  public boolean removeChild(UiElement component) {
 
     // return this.components.remove(component);
     int index = this.components.indexOf(component);
     if (index >= 0) {
-      removeComponent(index);
+      removeChild(index);
       return true;
     } else {
       return false;

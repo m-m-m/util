@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JProgressBar;
 
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 
 /**
  * This class extends the JProgressBar with the feature of a centered text

@@ -13,8 +13,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel} interface using
- * Swing as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel} interface
+ * using Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -28,7 +28,8 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel 
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public UITabbedPanelImpl(UIFactorySwing uiFactory, AbstractUIComponent parentObject) {
 
@@ -49,15 +50,15 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component) {
+  public void addChild(UiElement component) {
 
-    addComponent(component, "Tab " + (getComponentCount() + 1));
+    addChild(component, "Tab " + (getChildCount() + 1));
   }
 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component, String title) {
+  public void addChild(UiElement component, String title) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.add(title, c.getSwingComponent());
@@ -68,7 +69,7 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component, String title, int position) {
+  public void insertChild(UiElement component, String title, int position) {
 
     AbstractUIComponent c = (AbstractUIComponent) component;
     this.panel.insertTab(title, null, c.getSwingComponent(), null, position);
@@ -79,9 +80,10 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel 
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent removeComponent(int position) {
+  @Override
+  public AbstractUIComponent removeChild(int position) {
 
-    AbstractUIComponent c = super.removeComponent(position);
+    AbstractUIComponent c = super.removeChild(position);
     this.panel.remove(position);
     return c;
   }
@@ -92,6 +94,14 @@ public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel 
   public String getType() {
 
     return TYPE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void insertChild(UiElement component, int index) {
+
+    throw new IllegalStateException();
   }
 
 }

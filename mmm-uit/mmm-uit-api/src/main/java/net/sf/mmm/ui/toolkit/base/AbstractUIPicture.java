@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiImage} interface.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage} interface.<br>
  * Set initial {@link #setSize(int, int) site} in constructor of the
  * implementation.
  * 

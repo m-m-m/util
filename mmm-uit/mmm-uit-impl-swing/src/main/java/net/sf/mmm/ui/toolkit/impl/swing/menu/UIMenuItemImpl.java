@@ -36,7 +36,7 @@ public class UIMenuItemImpl extends UIAwtNode implements UiMenuItem {
    * 
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
-   * @param name is the {@link #getText() name} of the menu item.
+   * @param name is the {@link #getValue() name} of the menu item.
    * @param itemStyle is the style defining how the item is visualized and
    *        behaves.
    */
@@ -87,7 +87,7 @@ public class UIMenuItemImpl extends UIAwtNode implements UiMenuItem {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.item.getText();
   }

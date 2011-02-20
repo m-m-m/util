@@ -6,13 +6,12 @@ package net.sf.mmm.ui.toolkit.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
-import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 
 /**
  * This is the abstract base implementation of the
@@ -58,8 +57,8 @@ public abstract class AbstractUINode extends AbstractUIObject implements UiNode 
 
   /**
    * This method sets the parent of this UI object. This is neccessary if an
-   * object was constructed by this factory (parent is <code>null</code>) and
-   * is then added to a UI composite (or whenever it moves from one composite to
+   * object was constructed by this factory (parent is <code>null</code>) and is
+   * then added to a UI composite (or whenever it moves from one composite to
    * another).
    * 
    * @param newParent is the new parent of this object.
@@ -90,20 +89,20 @@ public abstract class AbstractUINode extends AbstractUIObject implements UiNode 
   /**
    * {@inheritDoc}
    */
-  public UIFrame getParentFrame() {
+  public UiFrame getParentFrame() {
 
-    if (getType() == UIFrame.TYPE) {
+    if (getType() == UiFrame.TYPE) {
       if (getParent() == null) {
         return null;
       } else {
         // the only legal parent of frame is another frame.
-        return ((UIFrame) getParent());
+        return ((UiFrame) getParent());
       }
     } else {
       if (getParent() == null) {
         return null;
-      } else if (getParent().getType() == UIFrame.TYPE) {
-        return ((UIFrame) getParent());
+      } else if (getParent().getType() == UiFrame.TYPE) {
+        return ((UiFrame) getParent());
       } else {
         return getParent().getParentFrame();
       }
@@ -113,19 +112,19 @@ public abstract class AbstractUINode extends AbstractUIObject implements UiNode 
   /**
    * {@inheritDoc}
    */
-  public UIWindow getParentWindow() {
+  public UiWindow getParentWindow() {
 
     if (isWindow()) {
       if (getParent() == null) {
         return null;
       } else {
-        return ((UIWindow) getParent());
+        return ((UiWindow) getParent());
       }
     } else {
       if (getParent() == null) {
         return null;
       } else if (getParent().isWindow()) {
-        return ((UIWindow) getParent());
+        return ((UiWindow) getParent());
       } else {
         return getParent().getParentWindow();
       }
@@ -207,7 +206,7 @@ public abstract class AbstractUINode extends AbstractUIObject implements UiNode 
    */
   public void refresh(UIRefreshEvent event) {
 
-  // do nothing by default...
+    // do nothing by default...
   }
 
 }

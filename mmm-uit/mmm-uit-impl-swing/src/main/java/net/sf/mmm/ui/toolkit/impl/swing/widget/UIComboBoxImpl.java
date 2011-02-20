@@ -121,7 +121,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return (String) this.comboBox.getSelectedItem();
   }
@@ -129,7 +129,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.comboBox.setSelectedItem(text);
   }

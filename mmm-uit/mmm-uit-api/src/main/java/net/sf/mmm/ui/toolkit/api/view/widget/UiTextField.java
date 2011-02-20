@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 
 /**
  * This is the interface of a text-field.
@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiTextField extends UiWidget, UiWriteText, UiWriteEditable {
+public interface UiTextField extends UiWidget, UiWriteValue<String>, UiWriteEditable {
 
   /** the type of this object */
   String TYPE = "Textfield";

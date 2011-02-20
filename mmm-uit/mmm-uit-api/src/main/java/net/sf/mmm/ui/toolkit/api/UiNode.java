@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
-import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 
 /**
  * This is the abstract interface for a node of the UI. A node is a UI object
@@ -29,14 +29,14 @@ public interface UiNode extends UiObject, UiWriteId {
    * 
    * @return the parent frame or <code>null</code> if this is a root frame.
    */
-  UIFrame getParentFrame();
+  UiFrame getParentFrame();
 
   /**
    * This method gets the parent window of this component.
    * 
    * @return the parent window or <code>null</code> if this is a root frame.
    */
-  UIWindow getParentWindow();
+  UiWindow getParentWindow();
 
   /**
    * This method adds an action listener to this component. The listener will be

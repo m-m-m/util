@@ -10,11 +10,11 @@ import java.awt.Window;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.window.UIDialog;
+import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
+import net.sf.mmm.ui.toolkit.api.window.UiDialog;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
@@ -213,7 +213,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    */
   public boolean isResizeable() {
 
-    if (getType() == UIDialog.TYPE) {
+    if (getType() == UiDialog.TYPE) {
       return ((Dialog) getAwtWindow()).isResizable();
     } else {
       return ((Frame) getAwtWindow()).isResizable();

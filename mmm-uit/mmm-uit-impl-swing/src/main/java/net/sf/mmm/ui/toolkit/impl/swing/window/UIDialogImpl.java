@@ -11,7 +11,7 @@ import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.window.UIDialog;
+import net.sf.mmm.ui.toolkit.api.window.UiDialog;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIDialogImpl extends UIWindow implements UIDialog {
+public class UIDialogImpl extends UIWindow implements UiDialog {
 
   /** the swing dialog */
   private final JDialog dialog;

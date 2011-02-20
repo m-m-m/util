@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMinimized;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UIFrame extends UIWindow, UiWriteMaximized, UiWriteMinimized {
+public interface UiFrame extends UiWindow, UiWriteMaximized, UiWriteMinimized {
 
   /** the type of this object */
   String TYPE = "Frame";
@@ -25,6 +25,6 @@ public interface UIFrame extends UIWindow, UiWriteMaximized, UiWriteMinimized {
    *        user.
    * @return the created frame.
    */
-  UIFrame createFrame(String title, boolean resizeable);
+  UiFrame createFrame(String title, boolean resizeable);
 
 }

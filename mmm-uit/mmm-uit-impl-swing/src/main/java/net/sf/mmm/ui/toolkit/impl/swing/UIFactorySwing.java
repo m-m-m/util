@@ -10,13 +10,12 @@ import java.net.URL;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
-import net.sf.mmm.ui.toolkit.api.UiImage;
-import net.sf.mmm.ui.toolkit.api.feature.Action;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiAction;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
@@ -24,10 +23,12 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -36,9 +37,8 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
-import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDeviceImpl;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDisplayImpl;
@@ -126,7 +126,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIFrame createFrame(String title, boolean resizeable) {
+  public UiFrame createFrame(String title, boolean resizeable) {
 
     UIFrameImpl frame = new UIFrameImpl(this, null, title, resizeable);
     addWindow(frame);
@@ -139,9 +139,9 @@ public class UIFactorySwing extends AbstractUIFactory {
   public UiButton createButton(String text, UiImage icon, ButtonStyle style) {
 
     UiButton button = new UIButtonImpl(this, null, style);
-    button.setText(text);
+    button.setValue(text);
     if (icon != null) {
-      button.setIcon(icon);
+      button.setImage(icon);
     }
     return button;
   }
@@ -236,7 +236,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   public UiLabel createLabel(String text) {
 
     UiLabel label = new UILabelImpl(this, null);
-    label.setText(text);
+    label.setValue(text);
     return label;
   }
 
@@ -261,7 +261,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UiFileDownload createFileDownload(FileAccess access) {
+  public UiFileDownload createFileDownload(UiFileAccess access) {
 
     return new UIFileDownloadImpl(this, null, access);
   }
@@ -317,7 +317,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIWorkbench createWorkbench(String title) {
+  public UiWorkbench createWorkbench(String title) {
 
     UIWorkbenchImpl workbench = new UIWorkbenchImpl(this, title, true);
     addWindow(workbench);
@@ -327,7 +327,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UiElement component, String actionName, String jobName) {
+  public UiAction createPrintUiAction(UiElement component, String actionName, String jobName) {
 
     return new PrintAction((AbstractUIComponent) component, actionName, jobName);
   }
@@ -335,7 +335,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UIDateEditor createDateEditor() {
+  public UiDateBox createDateEditor() {
 
     return new UIDateEditorImpl(this, null);
   }

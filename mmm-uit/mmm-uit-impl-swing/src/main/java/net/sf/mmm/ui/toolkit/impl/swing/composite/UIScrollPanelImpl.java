@@ -70,7 +70,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
-  public int getComponentCount() {
+  public int getChildCount() {
 
     return 1;
   }
@@ -78,7 +78,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
-  public UiElement getComponent(int index) {
+  public UiElement getChild(int index) {
 
     if (index == 0) {
       return this.childComponent;

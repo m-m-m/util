@@ -12,15 +12,15 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using Swing
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using
+ * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -37,19 +37,19 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
      */
     public void actionPerformed(ActionEvent e) {
 
-      UIFileDownloadImpl.this.fileChooser.setDialogTitle(getText());
+      UIFileDownloadImpl.this.fileChooser.setDialogTitle(getValue());
       int selection = UIFileDownloadImpl.this.fileChooser
           .showSaveDialog(UIFileDownloadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
-        FileAccessUtil.save(UIFileDownloadImpl.this.access, UIFileDownloadImpl.this.fileChooser
-            .getSelectedFile(), getParentWindow());
+        FileAccessUtil.save(UIFileDownloadImpl.this.access,
+            UIFileDownloadImpl.this.fileChooser.getSelectedFile(), getParentWindow());
       }
     }
 
   }
 
   /** the access to the downloadable data */
-  private final FileAccess access;
+  private final UiFileAccess access;
 
   /** the widget used to present the download */
   private final JButton button;
@@ -61,13 +61,14 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
-   * @param fileAccess gives access to the data that is offered for download.
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
+   * @param uiFileAccess gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UIFactorySwing uiFactory, UiNode parentObject, FileAccess fileAccess) {
+  public UIFileDownloadImpl(UIFactorySwing uiFactory, UiNode parentObject, UiFileAccess uiFileAccess) {
 
     super(uiFactory, parentObject);
-    this.access = fileAccess;
+    this.access = uiFileAccess;
     this.fileChooser = new JFileChooser();
     this.fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
     // this.fileChooser.setMultiSelectionEnabled(false);
@@ -81,8 +82,8 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.button;
   }
@@ -90,7 +91,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.button.setText(text);
   }
@@ -98,7 +99,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.button.getText();
   }

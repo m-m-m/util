@@ -11,20 +11,20 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame} interface using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.window.UiFrame} interface using Swing as the
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFrameImpl extends UIWindow implements UIFrame {
+public class UIFrameImpl extends UIWindow implements UiFrame {
 
   /** the swing frame */
   private final JFrame frame;
@@ -144,7 +144,7 @@ public class UIFrameImpl extends UIWindow implements UIFrame {
   /**
    * {@inheritDoc}
    */
-  public UIFrame createFrame(String title, boolean resizeable) {
+  public UiFrame createFrame(String title, boolean resizeable) {
 
     UIFrameImpl newFrame = new UIFrameImpl((UIFactorySwing) getFactory(), this, title, resizeable);
     getFactory().addWindow(newFrame);

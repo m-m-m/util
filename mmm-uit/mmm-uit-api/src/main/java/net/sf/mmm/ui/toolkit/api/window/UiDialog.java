@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadModal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UIDialog extends UIWindow, UiReadModal {
+public interface UiDialog extends UiWindow, UiReadModal {
 
   /** the type of this object */
   String TYPE = "Dialog";

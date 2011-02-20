@@ -4,15 +4,15 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
-import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
 
 /**
  * This is a test runner that tests the various UIFactorySwing implementations.
@@ -31,10 +31,10 @@ public class UITestRunner3 {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
-    final UIWorkbench workbench = factory.createWorkbench("Workbench");
+    final UiWorkbench workbench = factory.createWorkbench("Workbench");
     workbench.setSize(800, 1024);
     workbench.setVisible(true);
-    final UIFrame frame = workbench.createFrame("TestFrame", true);
+    final UiFrame frame = workbench.createFrame("TestFrame", true);
     UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
     UiButton button = factory.createButton("Button");
     UiDecoratedComponent<UiLabel, UiButton> labeledButton = factory.createLabeledComponent(

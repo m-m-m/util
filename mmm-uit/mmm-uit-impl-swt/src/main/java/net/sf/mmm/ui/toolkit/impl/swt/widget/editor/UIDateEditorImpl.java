@@ -8,7 +8,7 @@ import java.util.Locale;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
@@ -17,12 +17,12 @@ import net.sf.mmm.ui.toolkit.impl.swt.widget.AbstractUIWidget;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox} interface using
  * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
+public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
 
   /** */
   private final SyncCompositeAccess syncAccess;
@@ -51,7 +51,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   /**
    * {@inheritDoc}
    */
-  public void setDate(Date newDate) {
+  public void setValue(Date newDate) {
 
   // TODO Auto-generated method stub
 
@@ -60,7 +60,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   /**
    * {@inheritDoc}
    */
-  public Date getDate() {
+  public Date getValue() {
 
     // TODO Auto-generated method stub
     return null;

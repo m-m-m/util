@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UIPictureImpl;
@@ -63,7 +63,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.syncAccess.setText(text);
   }
@@ -71,7 +71,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.syncAccess.getText();
   }
@@ -79,7 +79,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public UIPictureImpl getIcon() {
+  public UIPictureImpl getImage() {
 
     return this.icon;
   }
@@ -87,7 +87,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UiImage newIcon) {
+  public void setImage(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {

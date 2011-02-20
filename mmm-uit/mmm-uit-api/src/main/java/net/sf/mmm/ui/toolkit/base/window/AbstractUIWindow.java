@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIWindow extends AbstractUINode implements UIWindow {
+public abstract class AbstractUIWindow extends AbstractUINode implements UiWindow {
 
   /** the composite content of this window */
   private UiComposite composite;
@@ -94,7 +94,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * and the new composite. The method should be called from the setComposite
    * method implementation.
    * 
-   * @see UIWindow#setComposite(UiComposite)
+   * @see UiWindow#setComposite(UiComposite)
    * 
    * @param newComposite is the composite to register.
    */
@@ -129,7 +129,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UIWindo
    * This method is called from the getMenuBar() method if the menu bar is
    * <code>null</code>. The method must create an empty menu bar.
    * 
-   * @see UIWindow#getMenuBar()
+   * @see UiWindow#getMenuBar()
    * 
    * @return the created menu bar.
    */

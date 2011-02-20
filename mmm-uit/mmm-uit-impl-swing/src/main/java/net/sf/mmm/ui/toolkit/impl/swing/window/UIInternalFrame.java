@@ -13,23 +13,23 @@ import javax.swing.JMenuBar;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of an internal
- * {@link net.sf.mmm.ui.toolkit.api.window.UIFrame frame} using Swing as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.window.UiFrame frame} using Swing as the UI
  * toolkit.
  * 
- * @see net.sf.mmm.ui.toolkit.api.window.UIWorkbench#createFrame(String,
+ * @see net.sf.mmm.ui.toolkit.api.window.UiWorkbench#createFrame(String,
  *      boolean)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIInternalFrame extends UIWindow implements UIFrame, UiElement {
+public class UIInternalFrame extends UIWindow implements UiFrame, UiElement {
 
   /** the frame */
   private final JInternalFrame frame;
@@ -94,7 +94,7 @@ public class UIInternalFrame extends UIWindow implements UIFrame, UiElement {
   /**
    * {@inheritDoc}
    */
-  public UIFrame createFrame(String title, boolean resizeable) {
+  public UiFrame createFrame(String title, boolean resizeable) {
 
     UIInternalFrame internalFrame = new UIInternalFrame((UIFactorySwing) getFactory(), this, title,
         resizeable);

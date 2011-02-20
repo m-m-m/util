@@ -8,16 +8,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.feature.FileAccess} interface. It gives
+ * {@link net.sf.mmm.ui.toolkit.api.feature.UiFileAccess} interface. It gives
  * read-access to a given file in the filesystem.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SimpleFileAccess implements FileAccess {
+public class SimpleFileAccess implements UiFileAccess {
 
   /** the actuall file */
   private final File file;

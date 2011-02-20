@@ -11,19 +11,19 @@ import javax.swing.JComponent;
 import com.toedter.calendar.JDateChooser;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.widget.AbstractUIWidget;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox} interface using
  * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
+public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
 
   /** the date chooser */
   private final JDateChooser dateChooser;
@@ -52,7 +52,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   /**
    * {@inheritDoc}
    */
-  public void setDate(Date newDate) {
+  public void setValue(Date newDate) {
 
     this.dateChooser.setDate(newDate);
   }
@@ -60,7 +60,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UIDateEditor {
   /**
    * {@inheritDoc}
    */
-  public Date getDate() {
+  public Date getValue() {
 
     return this.dateChooser.getDate();
   }

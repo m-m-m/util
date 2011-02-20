@@ -4,9 +4,14 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read access to the enabled-flag of an
- * {@link net.sf.mmm.ui.toolkit.api.UiObject object}. Such object allows
- * interactive behavior can be enabled or disabled.
+ * This interface gives read access to the {@link #isEnabled() enabled-flag} of
+ * an {@link net.sf.mmm.ui.toolkit.api.UiObject}. Such object allows interactive
+ * behavior that can be enabled or disabled. If an object is disabled, the user
+ * can NOT interact with the object. This is typically visualized by greying out
+ * the object.
+ * 
+ * @see UiReadEditable
+ * @see UiWriteEnabled
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

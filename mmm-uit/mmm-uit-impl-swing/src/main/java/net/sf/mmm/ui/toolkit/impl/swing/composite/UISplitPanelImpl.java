@@ -8,7 +8,7 @@ import javax.swing.JSplitPane;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -164,7 +164,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
   /**
    * {@inheritDoc}
    */
-  public UiElement getComponent(int index) {
+  public UiElement getChild(int index) {
 
     if (index == 0) {
       return getTopOrLeftComponent();
@@ -178,7 +178,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
   /**
    * {@inheritDoc}
    */
-  public int getComponentCount() {
+  public int getChildCount() {
 
     return 2;
   }

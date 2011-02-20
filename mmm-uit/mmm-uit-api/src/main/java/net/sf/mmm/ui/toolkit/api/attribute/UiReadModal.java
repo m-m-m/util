@@ -7,7 +7,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * This interface gives read access to the {@link #isModal() modal} state of an
  * object.
  * 
- * @see net.sf.mmm.ui.toolkit.api.window.UIDialog
+ * @see net.sf.mmm.ui.toolkit.api.window.UiDialog
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -8,13 +8,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 
-import net.sf.mmm.ui.toolkit.api.feature.Action;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiAction;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
@@ -22,10 +23,12 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -34,9 +37,8 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
-import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
 
 /**
  * This is the interface for the UI factory. It is used to create the parts of
@@ -129,7 +131,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param title is the title for the frame to create.
    * @return the created frame.
    */
-  UIFrame createFrame(String title);
+  UiFrame createFrame(String title);
 
   /**
    * This method creates a new frame.
@@ -139,7 +141,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizeable() resizeable}
    * @return the created frame.
    */
-  UIFrame createFrame(String title, boolean resizeable);
+  UiFrame createFrame(String title, boolean resizeable);
 
   /**
    * This method creates a new workbench. This feature may not be supported
@@ -149,7 +151,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param title is the title of the workbench to create.
    * @return the created workbench.
    */
-  UIWorkbench createWorkbench(String title);
+  UiWorkbench createWorkbench(String title);
 
   /**
    * This method creates a new regular button.
@@ -188,10 +190,10 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
   /**
    * This method creates a new button.
    * 
-   * @param action is the action to be represented as button.
+   * @param uiAction is the action to be represented as button.
    * @return the created button.
    */
-  UiButton createButton(Action action);
+  UiButton createButton(UiAction uiAction);
 
   /**
    * This method creates a new button. According to the style this can be a
@@ -225,7 +227,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * This method creates a {@link UiDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * <code>decorator</code>. The result can be easily
-   * {@link UiSlicePanel#addComponent(UiElement) added} to a
+   * {@link UiSlicePanel#addChild(UiElement) added} to a
    * {@link UiSlicePanel panel}.
    * 
    * @param <D> is the templated type of the <code>decorator</code>.
@@ -242,7 +244,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * This method creates a {@link UiDecoratedComponent decorated component} that
    * bundles the given <code>component</code> together with a
    * {@link UiLabel label}. The result can be easily
-   * {@link UiSlicePanel#addComponent(UiElement) added} to a
+   * {@link UiSlicePanel#addChild(UiElement) added} to a
    * {@link UiSlicePanel panel}.
    * 
    * @param <C> is the templated type of the <code>component</code>.
@@ -259,7 +261,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * puts the given <code>components</code> into a
    * {@link Orientation#HORIZONTAL horizontal} {@link UiSlicePanel panel} and
    * bundles it together with a {@link UiLabel label}. The result can be easily
-   * {@link UiSlicePanel#addComponent(UiElement) added} to a
+   * {@link UiSlicePanel#addChild(UiElement) added} to a
    * {@link UiSlicePanel panel}.
    * 
    * @param label is the label text.
@@ -411,7 +413,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
   /**
    * This method creates a new label.
    * 
-   * @param text is the initial {@link UiLabel#getText() label-text}.
+   * @param text is the initial {@link UiLabel#getValue() label-text}.
    * @return the created label.
    */
   UiLabel createLabel(String text);
@@ -487,7 +489,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * 
    * @return the new date-editor.
    */
-  UIDateEditor createDateEditor();
+  UiDateBox createDateEditor();
 
   /**
    * This method creates a new file-download.
@@ -495,7 +497,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param access gives access to the file that can be downloaded.
    * @return the new file-download.
    */
-  UiFileDownload createFileDownload(FileAccess access);
+  UiFileDownload createFileDownload(UiFileAccess access);
 
   /**
    * This method create a new file-upload.
@@ -526,32 +528,32 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
 
   /**
    * This method creates an action that prints the given component if its
-   * {@link Action#getActionListener() listener} is invoked.
+   * {@link UiAction#getActionListener() listener} is invoked.
    * 
    * @param component is the component that is to be printed.
    * @return the according action.
    */
-  Action createPrintAction(UiElement component);
+  UiAction createPrintUiAction(UiElement component);
 
   /**
    * This method creates an action that prints the given component if its
-   * {@link Action#getActionListener() listener} is invoked.
+   * {@link UiAction#getActionListener() listener} is invoked.
    * 
    * @param component is the component that is to be printed.
-   * @param actionName is the {@link Action#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print action.
    * @return the according action.
    */
-  Action createPrintAction(UiElement component, String actionName);
+  UiAction createPrintUiAction(UiElement component, String actionName);
 
   /**
    * This method creates an action that prints the given component if its
-   * {@link Action#getActionListener() listener} is invoked.
+   * {@link UiAction#getActionListener() listener} is invoked.
    * 
    * @param component is the component that is to be printed.
-   * @param actionName is the {@link Action#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print action.
    * @param jobName is the name of the print job.
    * @return the according action.
    */
-  Action createPrintAction(UiElement component, String actionName, String jobName);
+  UiAction createPrintUiAction(UiElement component, String actionName, String jobName);
 
 }

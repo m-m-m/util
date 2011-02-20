@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
@@ -86,7 +86,7 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
    * {@inheritDoc}
    */
   @Override
-  public AbstractUIComponent getComponent(int index) {
+  public AbstractUIComponent getChild(int index) {
 
     if (index == 0) {
       return (AbstractUIComponent) getDecorator();
@@ -150,7 +150,7 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
   /**
    * {@inheritDoc}
    */
-  public int getComponentCount() {
+  public int getChildCount() {
 
     return 2;
   }

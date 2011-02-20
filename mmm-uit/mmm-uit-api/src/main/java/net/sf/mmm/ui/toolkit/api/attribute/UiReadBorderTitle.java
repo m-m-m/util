@@ -4,12 +4,14 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read access to the
- * {@link #getBorderTitle() border-title} of an object.
+ * This interface gives read access to the {@link #getBorderTitle()
+ * border-title} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated - create UiBorderPanel using UiReadText
  */
+@Deprecated
 public interface UiReadBorderTitle {
 
   /**

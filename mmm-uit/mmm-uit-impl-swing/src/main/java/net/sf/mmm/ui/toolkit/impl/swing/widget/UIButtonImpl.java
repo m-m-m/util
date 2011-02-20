@@ -11,9 +11,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
 
@@ -82,7 +82,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.button.setText(text);
   }
@@ -90,7 +90,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.button.getText();
   }
@@ -140,7 +140,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UiImage newIcon) {
+  public void setImage(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {
@@ -153,7 +153,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public UiImage getIcon() {
+  public UiImage getImage() {
 
     return this.icon;
   }

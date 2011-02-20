@@ -16,7 +16,7 @@ public interface UiReadLocale {
 
   /**
    * This method gets the locale set for this object. It is used for language or
-   * reginal specific settings.
+   * regional specific settings.
    * 
    * @return the current locale.
    */

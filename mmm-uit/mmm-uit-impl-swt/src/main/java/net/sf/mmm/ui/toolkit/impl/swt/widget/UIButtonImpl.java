@@ -5,9 +5,9 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UIPictureImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
@@ -51,7 +51,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.syncAccess.getText();
   }
@@ -59,7 +59,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.syncAccess.setText(text);
   }
@@ -109,7 +109,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public UIPictureImpl getIcon() {
+  public UIPictureImpl getImage() {
 
     return this.icon;
   }
@@ -117,7 +117,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public void setIcon(UiImage newIcon) {
+  public void setImage(UiImage newIcon) {
 
     this.icon = (UIPictureImpl) newIcon;
     if (this.icon == null) {

@@ -12,7 +12,7 @@ import org.eclipse.swt.graphics.ImageData;
 import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.UiImage}
+ * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage}
  * interface using SWT as the underlying implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -3,23 +3,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 
 /**
  * This interface gives read access to the
- * {@link net.sf.mmm.ui.toolkit.api.UiImage icon} of an
- * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage icon} of an
+ * {@link net.sf.mmm.ui.toolkit.api.UiObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiReadIcon {
+public interface UiReadImage {
 
   /**
-   * This method gets the icon of this object.
+   * This method gets the image of this object.
    * 
    * @return the icon of this object or <code>null</code>, if no icon is set.
    */
-  UiImage getIcon();
+  UiImage getImage();
 
 }

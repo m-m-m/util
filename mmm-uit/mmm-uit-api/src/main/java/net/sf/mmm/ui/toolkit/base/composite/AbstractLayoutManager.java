@@ -4,11 +4,11 @@
 package net.sf.mmm.ui.toolkit.base.composite;
 
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.view.composite.Alignment;
-import net.sf.mmm.ui.toolkit.api.view.composite.Filling;
+import net.sf.mmm.ui.toolkit.api.types.Alignment;
+import net.sf.mmm.ui.toolkit.api.types.Filling;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 
@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
  * The implementation assumes that for each panel an own layout-manager is
  * created and is therefore not thread-safe.
  * 
- * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addComponent(net.sf.mmm.ui.toolkit.api.UIComponent,
+ * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addChild(net.sf.mmm.ui.toolkit.api.UIComponent,
  *      LayoutConstraints)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -142,7 +142,7 @@ public abstract class AbstractLayoutManager {
    * 
    * @see #getOrientation()
    * @see UIFactoryRenamed#getScriptOrientation()
-   * @see net.sf.mmm.ui.toolkit.api.ScriptOrientation#isHorizontal()
+   * @see net.sf.mmm.ui.toolkit.api.types.ScriptOrientation#isHorizontal()
    * 
    * @return <code>true</code> if the layout is horizontal, <code>false</code>
    *         if vertical.

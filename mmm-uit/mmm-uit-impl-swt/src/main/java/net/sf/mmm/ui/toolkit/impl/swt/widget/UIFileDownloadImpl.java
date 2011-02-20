@@ -9,7 +9,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -38,10 +38,10 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
     public void handleEvent(Event event) {
 
       UIFileDownloadImpl.this.syncDialgAccess.setParentAccess(UIFileDownloadImpl.this.syncAccess);
-      UIFileDownloadImpl.this.syncDialgAccess.setText(getText());
+      UIFileDownloadImpl.this.syncDialgAccess.setText(getValue());
       String file = UIFileDownloadImpl.this.syncDialgAccess.open();
       if (file != null) {
-        FileAccessUtil.save(UIFileDownloadImpl.this.fileAccess, new File(file), getParentWindow());
+        FileAccessUtil.save(UIFileDownloadImpl.this.uiFileAccess, new File(file), getParentWindow());
       }
     }
 
@@ -54,7 +54,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   private final SyncFileDialogAccess syncDialgAccess;
 
   /** the access to the downloadable data */
-  private final FileAccess fileAccess;
+  private final UiFileAccess uiFileAccess;
 
   /**
    * The constructor.
@@ -63,15 +63,15 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param access gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UIFactorySwt uiFactory, UISwtNode parentObject, FileAccess access) {
+  public UIFileDownloadImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UiFileAccess access) {
 
     super(uiFactory, parentObject);
-    this.fileAccess = access;
+    this.uiFileAccess = access;
     this.syncAccess = new SyncButtonAccess(uiFactory, SWT.DEFAULT);
     this.syncAccess.setText("Save");
     this.syncAccess.addListener(SWT.Selection, new SelectionListener());
     this.syncDialgAccess = new SyncFileDialogAccess(uiFactory, SWT.SAVE);
-    this.syncDialgAccess.setFilename(this.fileAccess.getFilename());
+    this.syncDialgAccess.setFilename(this.uiFileAccess.getFilename());
     // this.fileChooser = new FileDialog(getSwtParentShell(), SWT.SAVE);
     // this.fileChooser.setFileName(this.access.getFilename());
   }
@@ -96,7 +96,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.syncAccess.setText(text);
   }
@@ -104,7 +104,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.syncAccess.getText();
   }

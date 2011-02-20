@@ -32,7 +32,7 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent removeComponent(int index) {
+  public AbstractUIComponent removeChild(int index) {
 
     AbstractUIComponent component = (AbstractUIComponent) doRemoveComponent(index);
     component.removeFromParent();
@@ -42,12 +42,12 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
   /**
    * {@inheritDoc}
    */
-  public boolean removeComponent(UiElement component) {
+  public boolean removeChild(UiElement component) {
 
     // return this.components.remove(component);
     int index = indexOfComponent(component);
     if (index >= 0) {
-      removeComponent(index);
+      removeChild(index);
       return true;
     } else {
       return false;

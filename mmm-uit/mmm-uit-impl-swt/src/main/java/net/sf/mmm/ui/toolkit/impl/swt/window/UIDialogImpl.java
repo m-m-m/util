@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.window;
 
-import net.sf.mmm.ui.toolkit.api.window.UIDialog;
+import net.sf.mmm.ui.toolkit.api.window.UiDialog;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 import org.eclipse.swt.SWT;
@@ -14,7 +14,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDialogImpl extends UIWindowImpl implements UIDialog {
+public class UIDialogImpl extends UIWindowImpl implements UiDialog {
 
   /** the default style for the native SWT shell */
   private static final int DEFAULT_STYLE = SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.TITLE;

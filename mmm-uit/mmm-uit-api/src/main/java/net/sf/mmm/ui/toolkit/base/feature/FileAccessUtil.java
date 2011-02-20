@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 
 /**
  * This class contains utility methods for dealing with
- * {@link net.sf.mmm.ui.toolkit.api.feature.FileAccess}.
+ * {@link net.sf.mmm.ui.toolkit.api.feature.UiFileAccess}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -31,7 +31,7 @@ public final class FileAccessUtil {
   }
 
   /**
-   * This method saves the data given as {@link FileAccess access} to the
+   * This method saves the data given as {@link UiFileAccess access} to the
    * specified file. It will perform question dialogs before overwriting
    * existing files or creating additional folders. If will show info dialogs if
    * a problem arises.
@@ -42,7 +42,7 @@ public final class FileAccessUtil {
    * @return <code>true</code> if the data has been saved successfully,
    *         <code>false</code> otherwise.
    */
-  public static boolean save(FileAccess access, File target, UIWindow parentWindow) {
+  public static boolean save(UiFileAccess access, File target, UiWindow parentWindow) {
 
     if (target.exists()) {
       if (target.isFile()) {

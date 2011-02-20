@@ -9,8 +9,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Rectangle;

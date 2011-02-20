@@ -3,23 +3,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 
 /**
  * This interface gives read and write access to the
- * {@link net.sf.mmm.ui.toolkit.api.UiImage icon} of an
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage icon} of an
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWriteIcon extends UiReadIcon {
+public interface UiWriteImage extends UiReadImage {
 
   /**
-   * This method sets the icon of this object.
+   * This method sets the image of this object.
    * 
    * @param icon is the new icon for this object.
    */
-  void setIcon(UiImage icon);
+  void setImage(UiImage icon);
 
 }

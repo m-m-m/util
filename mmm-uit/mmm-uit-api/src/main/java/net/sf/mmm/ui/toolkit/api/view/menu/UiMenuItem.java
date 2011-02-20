@@ -1,10 +1,10 @@
-/* $Id$
+/* $Id: UIMenuItem.java 954 2011-02-16 21:45:29Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.menu;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadValue;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelected;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiMenuItem extends UiNode, UiWriteSelected, UiReadText {
+public interface UiMenuItem extends UiNode, UiWriteSelected, UiReadValue<String> {
 
   /** the type of this object */
   String TYPE = "MenuItem";

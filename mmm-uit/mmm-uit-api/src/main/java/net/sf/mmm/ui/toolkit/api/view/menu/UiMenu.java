@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIMenu.java 304 2007-06-13 23:58:29Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.menu;
@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.api.view.menu;
 import java.util.Iterator;
 
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.feature.Action;
+import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 
 /**
@@ -78,10 +78,10 @@ public interface UiMenu extends UiMenuItem {
   /**
    * This method creates and adds a new item to this menu.
    * 
-   * @param action is the action to be represented as button.
+   * @param uiAction is the action to be represented as button.
    * @return the created menu item.
    */
-  UiMenuItem addItem(Action action);
+  UiMenuItem addItem(UiAction uiAction);
 
   /**
    * This method creates and adds a new submenu to this menu.

@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -38,7 +38,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
      */
     public void actionPerformed(ActionEvent e) {
 
-      UIFileUploadImpl.this.fileChooser.setDialogTitle(getText());
+      UIFileUploadImpl.this.fileChooser.setDialogTitle(getValue());
       int selection = UIFileUploadImpl.this.fileChooser
           .showOpenDialog(UIFileUploadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
@@ -51,7 +51,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   }
 
   /** the access to the uploaded data */
-  private FileAccess access;
+  private UiFileAccess access;
 
   /** the widget used to present the download */
   private final JButton button;
@@ -89,7 +89,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public FileAccess getSelection() {
+  public UiFileAccess getSelection() {
 
     return this.access;
   }
@@ -105,7 +105,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.button.getText();
   }
@@ -113,7 +113,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.button.setText(text);
   }

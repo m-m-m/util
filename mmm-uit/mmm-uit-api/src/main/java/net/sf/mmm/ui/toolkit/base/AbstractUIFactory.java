@@ -10,20 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.feature.Action;
+import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -31,7 +31,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
 /**
@@ -157,7 +157,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
 
   /**
    * This method refreshes all
-   * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow windows} created by this
+   * {@link net.sf.mmm.ui.toolkit.api.window.UiWindow windows} created by this
    * factory. The refresh of a window recursively refreshes all
    * {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in the window.
    * This way all visible GUI elements are refreshed.
@@ -204,7 +204,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UIFrame createFrame(String title) {
+  public UiFrame createFrame(String title) {
 
     return createFrame(title, true);
   }
@@ -252,15 +252,15 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UiButton createButton(Action action) {
+  public UiButton createButton(UiAction uiAction) {
 
-    UiButton button = createButton(action.getName(), action.getButtonStyle());
-    button.addActionListener(action.getActionListener());
-    UiImage icon = action.getIcon();
+    UiButton button = createButton(uiAction.getName(), uiAction.getButtonStyle());
+    button.addActionListener(uiAction.getActionListener());
+    UiImage icon = uiAction.getIcon();
     if (icon != null) {
-      button.setIcon(icon);
+      button.setImage(icon);
     }
-    String id = action.getId();
+    String id = uiAction.getId();
     if (id != null) {
       button.setId(id);
     }
@@ -292,7 +292,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
 
     UiSlicePanel panel = createPanel(Orientation.HORIZONTAL);
     for (UiElement component : components) {
-      panel.addComponent(component);
+      panel.addChild(component);
     }
     return createLabeledComponent(label, panel);
   }
@@ -384,21 +384,21 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UiElement component) {
+  public UiAction createPrintUiAction(UiElement component) {
 
     // TODO: i18n
-    return createPrintAction(component, "Print");
+    return createPrintUiAction(component, "Print");
   }
 
   /**
    * {@inheritDoc}
    */
-  public Action createPrintAction(UiElement component, String actionName) {
+  public UiAction createPrintUiAction(UiElement component, String actionName) {
 
     if (component == null) {
       throw new IllegalArgumentException("Component must NOT be null!");
     }
-    return createPrintAction(component, actionName, actionName + " " + component.getId());
+    return createPrintUiAction(component, actionName, actionName + " " + component.getId());
   }
 
   /**

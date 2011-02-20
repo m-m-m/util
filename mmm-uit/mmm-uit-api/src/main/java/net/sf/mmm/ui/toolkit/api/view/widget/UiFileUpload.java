@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 
 /**
  * This is the interface for a widget that allows the user to choose a file for
@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFileUpload extends UiWidget, UiWriteText {
+public interface UiFileUpload extends UiWidget, UiWriteValue<String> {
 
   /** the type of this object */
   String TYPE = "FileUpload";
@@ -25,6 +25,6 @@ public interface UiFileUpload extends UiWidget, UiWriteText {
    * 
    * @return access to the upload-file.
    */
-  FileAccess getSelection();
+  UiFileAccess getSelection();
 
 }

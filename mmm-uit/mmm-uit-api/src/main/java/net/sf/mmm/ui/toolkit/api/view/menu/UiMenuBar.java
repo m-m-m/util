@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIMenuBar.java 954 2011-02-16 21:45:29Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.menu;
@@ -10,8 +10,8 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 /**
  * This is the interface for a menu-bar. It represents a bar of pull down
  * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenu menus} of a
- * {@link net.sf.mmm.ui.toolkit.api.window.UIWindow window}.<br>
- * Use {@link net.sf.mmm.ui.toolkit.api.window.UIWindow#getMenuBar()} to
+ * {@link net.sf.mmm.ui.toolkit.api.window.UiWindow window}.<br>
+ * Use {@link net.sf.mmm.ui.toolkit.api.window.UiWindow#getMenuBar()} to
  * "create" a menu-bar.
  * 
  * TODO: Is the menu bar no widget? or at least an element?

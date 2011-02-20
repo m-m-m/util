@@ -4,6 +4,7 @@
 package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyle;
 
 /**
  * This is the interface for a UI object. Any object other than the UI factory
@@ -15,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiObject extends UiReadId {
+public interface UiObject extends UiReadId, UiReadStyle {
 
   /**
    * This method gets the UI factory that created this component.
@@ -48,7 +49,7 @@ public interface UiObject extends UiReadId {
    * This method determines if this component is a window.
    * 
    * @return <code>true</code> if this component is a
-   *         {@link net.sf.mmm.ui.toolkit.api.window.UIWindow window},
+   *         {@link net.sf.mmm.ui.toolkit.api.window.UiWindow window},
    *         <code>false</code> otherwise.
    */
   boolean isWindow();

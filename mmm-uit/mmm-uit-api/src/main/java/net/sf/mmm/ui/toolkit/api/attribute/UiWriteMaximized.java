@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * {@link #setMaximized(boolean) write} access to the maximized state of an
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
- * @see net.sf.mmm.ui.toolkit.api.window.UIWindow
+ * @see net.sf.mmm.ui.toolkit.api.window.UiWindow
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

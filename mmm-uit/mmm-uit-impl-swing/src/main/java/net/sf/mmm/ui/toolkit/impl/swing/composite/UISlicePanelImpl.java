@@ -16,8 +16,8 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
@@ -49,7 +49,8 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param orientation is the orientation for the layout of the panel.
    */
   public UISlicePanelImpl(UIFactorySwing uiFactory, UiNode parentObject, Orientation orientation) {
@@ -110,11 +111,12 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent removeComponent(int index) {
+  @Override
+  public AbstractUIComponent removeChild(int index) {
 
     // synchronized (this) {
     this.panel.remove(index);
-    AbstractUIComponent component = (AbstractUIComponent) super.removeComponent(index);
+    AbstractUIComponent component = super.removeChild(index);
     JComponent swingComponent = component.getSwingComponent();
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().remove((JRadioButton) swingComponent);
@@ -126,9 +128,17 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component) {
+  public void addChild(UiElement component) {
 
     addComponent(component, LayoutConstraints.DEFAULT);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void insertChild(UiElement component, int index) {
+
+    addComponent(component, LayoutConstraints.DEFAULT, index);
   }
 
   /**
@@ -223,9 +233,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
     }
 
     /**
-     * This method adds the given
-     * {@link UiDecoratedComponent decorated component} to the size-list. The
-     * maximum width/height will be determined over all sized in the list.
+     * This method adds the given {@link UiDecoratedComponent decorated
+     * component} to the size-list. The maximum width/height will be determined
+     * over all sized in the list.
      * 
      * @param size is the size to add.
      */
@@ -235,8 +245,8 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
     }
 
     /**
-     * This method removes the given
-     * {@link UiDecoratedComponent decorated component} from the size-list.
+     * This method removes the given {@link UiDecoratedComponent decorated
+     * component} from the size-list.
      * 
      * @param size is the size to remove.
      */

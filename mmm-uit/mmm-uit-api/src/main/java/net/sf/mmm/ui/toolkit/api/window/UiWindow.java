@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UIWindow extends UiNode, UiWriteDisposed, UiWriteSize,
+public interface UiWindow extends UiNode, UiWriteDisposed, UiWriteSize,
     AttributeWriteTitle<String>, UiWritePosition, UiWriteVisible {
 
   /**
@@ -31,7 +31,7 @@ public interface UIWindow extends UiNode, UiWriteDisposed, UiWriteSize,
    *        user.
    * @return the created dialog.
    */
-  UIDialog createDialog(String title, boolean modal, boolean resizeable);
+  UiDialog createDialog(String title, boolean modal, boolean resizeable);
 
   /**
    * This method shows a message to the user. This is done by opening a dialog

@@ -1,8 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.api;
+package net.sf.mmm.ui.toolkit.api.view.widget;
 
+import net.sf.mmm.ui.toolkit.api.UiObject;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 

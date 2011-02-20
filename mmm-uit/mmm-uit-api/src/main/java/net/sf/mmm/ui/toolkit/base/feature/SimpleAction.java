@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.feature;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 
 /**
  * This is a simple implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.feature.Action} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.feature.UiAction} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

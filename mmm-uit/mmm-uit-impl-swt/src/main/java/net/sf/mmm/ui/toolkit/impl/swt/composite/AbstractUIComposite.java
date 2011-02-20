@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -89,7 +89,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   /**
    * {@inheritDoc}
    */
-  public abstract AbstractUIComponent getComponent(int index);
+  public abstract AbstractUIComponent getChild(int index);
 
   /**
    * {@inheritDoc}
@@ -109,9 +109,9 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    */
   protected void createChildren() {
 
-    int count = getComponentCount();
+    int count = getChildCount();
     for (int i = 0; i < count; i++) {
-      AbstractUIComponent child = getComponent(i);
+      AbstractUIComponent child = getChild(i);
       if (child != null) {
         child.create();
       }
@@ -150,9 +150,9 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   public void refresh(UIRefreshEvent event) {
 
     super.refresh(event);
-    int componentCount = getComponentCount();
+    int componentCount = getChildCount();
     for (int i = 0; i < componentCount; i++) {
-      AbstractUIComponent component = getComponent(i);
+      AbstractUIComponent component = getChild(i);
       component.refresh(event);
     }
   }

@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.feature;
 
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 
 /**
  * This is the callback interface for an action that can be invoked by a widget
@@ -18,11 +18,11 @@ import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface Action {
+public interface UiAction {
 
   /**
    * This method gets the display name of the action. This is used as
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteText#setText(String) text}
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue#setValue(String) text}
    * for the widget that visualizes this action.
    * 
    * @return the name of this action.

@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 
 /**
  * This is the interface for a combo-box UI. A combo-box is used to display
@@ -15,11 +15,11 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
  * scrollable or contains a "virtual" item at the end that opens another menu
  * containing more of the elements. <br>
  * If the combo-box is
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable},
- * the user can additionally enter free text instead of selecting one of the
- * given items. Please note that the user can enter text, that does not
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable()
+ * editable}, the user can additionally enter free text instead of selecting one
+ * of the given items. Please note that the user can enter text, that does not
  * correspond to an item in the model. Therefore you need to call
- * {@link #getText()} instead of {@link #getSelectedValue()} to retrieve the
+ * {@link #getValue()} instead of {@link #getSelectedValue()} to retrieve the
  * user selection if the combo is editable.
  * 
  * @param <E> is the templated type of the elements that can be selected with
@@ -28,7 +28,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteText;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiComboBox<E> extends UiListWidget<E>, UiWriteEditable, UiWriteText {
+public interface UiComboBox<E> extends UiListWidget<E>, UiWriteEditable, UiWriteValue<String> {
 
   /** the type of this object */
   String TYPE = "ComboBox";

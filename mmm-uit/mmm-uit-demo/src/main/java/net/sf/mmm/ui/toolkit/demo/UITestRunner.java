@@ -9,8 +9,8 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
@@ -27,7 +27,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel;
@@ -51,7 +51,7 @@ public class UITestRunner {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
-    final UIFrame frame = factory.createFrame("TestFrame");
+    final UiFrame frame = factory.createFrame("TestFrame");
     UiMenu fileMenu = frame.getMenuBar().addMenu("File");
     fileMenu.addItem("Load", new UIActionListener() {
 
@@ -98,23 +98,23 @@ public class UITestRunner {
     UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
 
     UiButton button = factory.createButton("Test");
-    panel.addComponent(button);
+    panel.addChild(button);
     button = factory.createButton("Test2");
-    panel.addComponent(button);
+    panel.addChild(button);
     UiTextField text = factory.createTextField();
-    panel.addComponent(text);
+    panel.addChild(text);
     UiLabel label = factory.createLabel("Label");
-    panel.addComponent(label);
+    panel.addChild(label);
     UiSlideBar slider = factory.createSlideBar(new NumericUIRangeModel(0, 100));
-    panel.addComponent(slider);
-    FileAccess access = new SimpleFileAccess(new File("/etc/fstab"));
+    panel.addChild(slider);
+    UiFileAccess access = new SimpleFileAccess(new File("/etc/fstab"));
     UiFileDownload download = factory.createFileDownload(access);
-    panel.addComponent(download);
+    panel.addChild(download);
 
     scroll.setComponent(panel);
 
     UiTabbedPanel tabPanel = factory.createTabbedPanel();
-    tabPanel.addComponent(scroll, "Scroll");
+    tabPanel.addChild(scroll, "Scroll");
     frame.setComposite(tabPanel);
 
     final DefaultUIListModel<String> listModel = new DefaultUIListModel<String>();
@@ -123,8 +123,8 @@ public class UITestRunner {
     listModel.addElement("is");
     UiComboBox comboBox = factory.createComboBox(listModel);
     UiList list = factory.createList(listModel);
-    panel.addComponent(comboBox);
-    panel.addComponent(list);
+    panel.addChild(comboBox);
+    panel.addChild(list);
     listModel.addElement("a");
     listModel.addElement("test");
 

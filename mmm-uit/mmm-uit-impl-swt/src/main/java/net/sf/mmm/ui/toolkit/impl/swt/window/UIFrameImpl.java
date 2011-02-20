@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.window;
 
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 
 import org.eclipse.swt.SWT;
@@ -15,7 +15,7 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFrameImpl extends UIWindowImpl implements UIFrame {
+public class UIFrameImpl extends UIWindowImpl implements UiFrame {
 
   /** the default style for the native SWT shell */
   private static final int DEFAULT_STYLE = SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.MAX | SWT.TITLE;

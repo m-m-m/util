@@ -96,7 +96,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.menu.getName();
   }

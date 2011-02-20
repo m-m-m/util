@@ -9,7 +9,7 @@ import javax.swing.border.TitledBorder;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteBorderTitle;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
@@ -55,8 +55,8 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   public void setEnabled(boolean enabled) {
 
     super.setEnabled(enabled);
-    for (int i = 0; i < getComponentCount(); i++) {
-      getComponent(i).setEnabled(enabled);
+    for (int i = 0; i < getChildCount(); i++) {
+      getChild(i).setEnabled(enabled);
     }
   }
 
@@ -118,9 +118,9 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
     if (event.isOrientationModified()) {
       setBorderJustification();
     }
-    int count = getComponentCount();
+    int count = getChildCount();
     for (int componentIndex = 0; componentIndex < count; componentIndex++) {
-      ((AbstractUINode) getComponent(componentIndex)).refresh(event);
+      ((AbstractUINode) getChild(componentIndex)).refresh(event);
     }
   }
 }

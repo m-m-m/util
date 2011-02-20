@@ -7,18 +7,17 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.view.composite.Alignment;
-import net.sf.mmm.ui.toolkit.api.view.composite.Filling;
+import net.sf.mmm.ui.toolkit.api.types.Alignment;
+import net.sf.mmm.ui.toolkit.api.types.Filling;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
@@ -27,9 +26,11 @@ import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -37,9 +38,8 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.view.widget.editor.UIDateEditor;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.MaximumSizer;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
@@ -67,11 +67,11 @@ public class UIDemoBuilder {
   public static UiTabbedPanel createTabbedPanel(UIFactoryRenamed factory) {
 
     UiTabbedPanel tabbedPanel = factory.createTabbedPanel();
-    tabbedPanel.addComponent(createLayoutPanel(factory), "layout");
-    tabbedPanel.addComponent(createSplitPanel(factory), "split");
-    tabbedPanel.addComponent(createEditorPanel(factory), "editor", 1);
-    tabbedPanel.addComponent(createTablePanel(factory), "table");
-    tabbedPanel.addComponent(createModelPanel(factory), "model");
+    tabbedPanel.addChild(createLayoutPanel(factory), "layout");
+    tabbedPanel.addChild(createSplitPanel(factory), "split");
+    tabbedPanel.insertChild(createEditorPanel(factory), "editor", 1);
+    tabbedPanel.addChild(createTablePanel(factory), "table");
+    tabbedPanel.addChild(createModelPanel(factory), "model");
     return tabbedPanel;
   }
 
@@ -152,7 +152,7 @@ public class UIDemoBuilder {
       e.printStackTrace();
     }
 
-    UIDateEditor dateEditor = factory.createDateEditor();
+    UiDateBox dateEditor = factory.createDateEditor();
     addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
 
     UiButton imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
@@ -184,9 +184,9 @@ public class UIDemoBuilder {
   public static UiSlicePanel createLayoutPanel(final UIFactoryRenamed factory) {
 
     final UiSlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
-    panel.addComponent(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
-    panel.addComponent(UIDemoBuilder.createTreePanel(factory));
-    panel.addComponent(UIDemoBuilder.createRadioPanel(factory));
+    panel.addChild(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
+    panel.addChild(UIDemoBuilder.createTreePanel(factory));
+    panel.addChild(UIDemoBuilder.createRadioPanel(factory));
     UiButton button = factory.createButton("Flip");
     button.addActionListener(new UIActionListener() {
 
@@ -215,7 +215,7 @@ public class UIDemoBuilder {
     model.initColumnNames();
     model.initCells();
     table.setModel(model);
-    tablePanel.addComponent(table);
+    tablePanel.addChild(table);
 
     return tablePanel;
   }
@@ -240,7 +240,7 @@ public class UIDemoBuilder {
     listPanel.addComponent(combo, new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL, 0.0));
 
     final UiList<String> list = factory.createList(listModel);
-    listPanel.addComponent(list);
+    listPanel.addChild(list);
     listModel.addElement("!");
 
     final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
@@ -250,7 +250,7 @@ public class UIDemoBuilder {
 
       public void invoke(UiNode source, ActionType action) {
 
-        String text = combo.getText();
+        String text = combo.getValue();
         int index = list.getSelectedIndex();
         if (index == -1) {
           index = 0;
@@ -270,8 +270,8 @@ public class UIDemoBuilder {
       }
     });
 
-    buttonPanel.addComponent(addButton);
-    buttonPanel.addComponent(removeButton);
+    buttonPanel.addChild(addButton);
+    buttonPanel.addChild(removeButton);
 
     listPanel.addComponent(buttonPanel, LayoutConstraints.FIXED_NONE);
 
@@ -279,7 +279,7 @@ public class UIDemoBuilder {
 
   }
 
-  public static void createMenus(final UIWindow frame) {
+  public static void createMenus(final UiWindow frame) {
 
     UiMenuBar menubar = frame.getMenuBar();
     // file menu
@@ -315,7 +315,7 @@ public class UIDemoBuilder {
     };
     subMenu.addItem("check", checkAction, ButtonStyle.CHECK);
     fileMenu.addSeparator();
-    fileMenu.addItem(frame.getFactory().createPrintAction(frame.getComposite(), "Print map"));
+    fileMenu.addItem(frame.getFactory().createPrintUiAction(frame.getComposite(), "Print map"));
 
     // radio menu
     UiMenu radioMenu = menubar.addMenu("Radio");
@@ -329,7 +329,7 @@ public class UIDemoBuilder {
         String color = "none";
         for (int i = 0; i < colors.length; i++) {
           if (colors[i].isSelected()) {
-            color = colors[i].getText();
+            color = colors[i].getValue();
           }
         }
         frame.showMessage("You have chosen the color: " + color, "Color", MessageType.INFO);
@@ -349,7 +349,7 @@ public class UIDemoBuilder {
     child1.createChildNode("sub-child");
     treeModel.getRoot().createChildNode("child2");
     tree.setModel(treeModel);
-    treePanel.addComponent(tree);
+    treePanel.addChild(tree);
 
     final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
@@ -400,7 +400,7 @@ public class UIDemoBuilder {
     final UiButton removeButton = factory.createButton("remove");
     buttonPanel.addComponent(addButton, LayoutConstraints.FIXED_HORIZONTAL);
     buttonPanel.addComponent(removeButton, LayoutConstraints.FIXED_HORIZONTAL);
-    buttonPanel.addComponent(combo);
+    buttonPanel.addChild(combo);
     modelPanel.addComponent(buttonPanel, LayoutConstraints.FIXED_HORIZONTAL);
 
     // spin-box
@@ -413,13 +413,13 @@ public class UIDemoBuilder {
 
     // add list
     final UiList<String> list = factory.createList(listModel);
-    modelPanel.addComponent(list);
+    modelPanel.addChild(list);
 
     addButton.addActionListener(new UIActionListener() {
 
       public void invoke(UiNode source, ActionType action) {
 
-        String text = combo.getText();
+        String text = combo.getValue();
         int index = list.getSelectedIndex();
         if (index < 0) {
           index = 0;
@@ -445,9 +445,9 @@ public class UIDemoBuilder {
 
     UiSlicePanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
     UiButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
-    radioPanel.addComponent(rb1);
+    radioPanel.addChild(rb1);
     UiButton rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);
-    radioPanel.addComponent(rb2);
+    radioPanel.addChild(rb2);
     return radioPanel;
   }
 

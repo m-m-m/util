@@ -16,15 +16,15 @@ import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.feature.Action;
+import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIWindow;
+import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#createPrintAction(UiElement) print-action}
+ * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#createPrintUiAction(UiElement) print-action}
  * for SWING.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -39,7 +39,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
    * The constructor.
    * 
    * @param printComponent is the component to be printed by this action.
-   * @param actionName is the {@link Action#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print action.
    * @param jobName is the name of the print job.
    */
   public PrintAction(AbstractUIComponent printComponent, String actionName, String jobName) {
@@ -73,7 +73,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
         try {
           job.print();
         } catch (PrinterException e) {
-          UIWindow window = this.component.getParentWindow();
+          UiWindow window = this.component.getParentWindow();
           if (window != null) {
             window.showMessage("Printing failed!", "Error", MessageType.ERROR, e);
           } else {

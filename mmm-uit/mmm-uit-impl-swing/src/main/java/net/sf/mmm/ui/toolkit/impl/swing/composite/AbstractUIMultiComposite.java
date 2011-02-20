@@ -38,7 +38,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * {@inheritDoc}
    */
-  public int getComponentCount() {
+  public int getChildCount() {
 
     return this.components.size();
   }
@@ -46,13 +46,13 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * {@inheritDoc}
    */
-  public UiElement getComponent(int index) {
+  public UiElement getChild(int index) {
 
     return this.components.get(index);
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#addComponent(UiElement)
+   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#addChild(UiElement)
    * 
    * @param component is the component to add.
    */
@@ -74,7 +74,7 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#removeComponent(int)
+   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#removeChild(int)
    * 
    * @param index is the position of the component to remove.
    * @return the removed component.

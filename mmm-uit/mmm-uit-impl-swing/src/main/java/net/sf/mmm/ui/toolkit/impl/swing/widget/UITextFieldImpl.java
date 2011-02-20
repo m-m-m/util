@@ -55,7 +55,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.textField.setText(text);
   }
@@ -63,7 +63,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.textField.getText();
   }

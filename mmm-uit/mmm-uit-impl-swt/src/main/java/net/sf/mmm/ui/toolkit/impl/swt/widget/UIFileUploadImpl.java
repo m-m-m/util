@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.feature.FileAccess;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -39,7 +39,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
     public void handleEvent(Event event) {
 
       UIFileUploadImpl.this.syncDialgAccess.setParentAccess(UIFileUploadImpl.this.syncAccess);
-      UIFileUploadImpl.this.syncDialgAccess.setText(getText());
+      UIFileUploadImpl.this.syncDialgAccess.setText(getValue());
       String file = UIFileUploadImpl.this.syncDialgAccess.open();
       if (file != null) {
         File uploadFile = new File(file);
@@ -57,7 +57,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   private final SyncFileDialogAccess syncDialgAccess;
 
   /** the access to the downloadable data */
-  private FileAccess access;
+  private UiFileAccess access;
 
   /**
    * The constructor.
@@ -88,7 +88,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public FileAccess getSelection() {
+  public UiFileAccess getSelection() {
 
     return this.access;
   }
@@ -104,7 +104,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.syncAccess.setText(text);
   }
@@ -112,7 +112,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.syncAccess.getText();
   }

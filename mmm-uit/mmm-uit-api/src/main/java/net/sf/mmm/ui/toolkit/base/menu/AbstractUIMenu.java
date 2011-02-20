@@ -8,13 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.UiImage;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.feature.Action;
+import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
@@ -84,14 +84,14 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UiMenu {
   /**
    * {@inheritDoc}
    */
-  public UiMenuItem addItem(Action action) {
+  public UiMenuItem addItem(UiAction uiAction) {
 
-    UiMenuItem item = addItem(action.getName(), action.getActionListener(), action.getButtonStyle());
-    UiImage icon = action.getIcon();
+    UiMenuItem item = addItem(uiAction.getName(), uiAction.getActionListener(), uiAction.getButtonStyle());
+    UiImage icon = uiAction.getIcon();
     if (icon != null) {
       // item.setIcon(icon);
     }
-    String id = action.getId();
+    String id = uiAction.getId();
     if (id != null) {
       item.setId(id);
     }

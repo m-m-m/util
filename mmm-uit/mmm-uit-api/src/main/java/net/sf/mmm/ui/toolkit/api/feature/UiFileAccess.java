@@ -11,7 +11,7 @@ import java.io.InputStream;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface FileAccess {
+public interface UiFileAccess {
 
   /**
    * This method gets an input stream used to read the data.

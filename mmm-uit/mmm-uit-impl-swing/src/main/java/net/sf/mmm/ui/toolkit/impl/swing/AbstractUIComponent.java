@@ -7,10 +7,10 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JComponent;
 
-import net.sf.mmm.ui.toolkit.api.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
 
 /**

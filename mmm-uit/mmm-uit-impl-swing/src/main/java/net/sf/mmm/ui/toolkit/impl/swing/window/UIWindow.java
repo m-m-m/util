@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UIDialog;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiDialog;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -70,10 +70,10 @@ public abstract class UIWindow extends UIWindowImpl {
   /**
    * {@inheritDoc}
    */
-  public UIDialog createDialog(String title, boolean modal, boolean resizeable) {
+  public UiDialog createDialog(String title, boolean modal, boolean resizeable) {
 
     JDialog jDialog = null;
-    if (getType() == UIFrame.TYPE) {
+    if (getType() == UiFrame.TYPE) {
       jDialog = new JDialog((Frame) getAwtWindow());
     } else {
       jDialog = new JDialog((Dialog) getAwtWindow());

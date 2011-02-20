@@ -35,7 +35,7 @@ public class UIMenuItemImpl extends UISwtNode implements UiMenuItem {
    * 
    * @param uiFactory is the UIFactorySwt instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
-   * @param text is the {@link #getText() text} of the menu item.
+   * @param text is the {@link #getValue() text} of the menu item.
    * @param itemStyle is the style defining how the item is visualized and
    *        behaves.
    * @param item is the actual SWT menu-item.
@@ -73,7 +73,7 @@ public class UIMenuItemImpl extends UISwtNode implements UiMenuItem {
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.syncAccess.getText();
   }

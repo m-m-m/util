@@ -135,7 +135,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public String getText() {
+  public String getValue() {
 
     return this.syncAccess.getText();
   }
@@ -143,7 +143,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
   /**
    * {@inheritDoc}
    */
-  public void setText(String text) {
+  public void setValue(String text) {
 
     this.syncAccess.setText(text);
   }

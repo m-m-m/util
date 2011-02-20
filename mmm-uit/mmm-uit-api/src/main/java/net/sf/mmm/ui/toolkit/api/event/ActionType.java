@@ -7,34 +7,71 @@ package net.sf.mmm.ui.toolkit.api.event;
  * This enum contains the available action event types.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public enum ActionType {
 
-  /** the action if something is selected */
+  /**
+   * The action if something is selected.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiReadSelected
+   */
   SELECT,
 
-  /** the action if something is deselected */
+  /**
+   * The action if something is de-selected.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiReadSelected
+   */
   DESELECT,
 
-  /** the action if something is hidden */
+  /**
+   * The action if something is hidden.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiReadVisible
+   */
   HIDE,
 
-  /** the action if something is shown */
+  /**
+   * The action if something is shown.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiReadVisible
+   */
   SHOW,
 
-  /** the action if something is activated */
+  /**
+   * The action if something is activated.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiRead
+   */
   ACTIVATE,
 
-  /** the action if something is deactivated */
+  /**
+   * The action if something is de-activated.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiRead
+   */
   DEACTIVATE,
 
-  /** the action if a window is iconified */
+  /**
+   * The action if a window is iconified.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiRead
+   */
   ICONIFY,
 
-  /** the action if a window is deiconified */
+  /**
+   * The action if a window is de-iconified.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiRead
+   */
   DEICONIFY,
 
-  /** the action if a window is disposed */
+  /**
+   * The action if a window is disposed.
+   * 
+   * @see net.sf.mmm.ui.toolkit.api.attribute.UiReadDisposed
+   */
   DISPOSE;
 
 }

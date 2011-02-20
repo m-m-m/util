@@ -4,20 +4,20 @@
 package net.sf.mmm.ui.toolkit.impl.swing.window;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.window.UIFrame;
-import net.sf.mmm.ui.toolkit.api.window.UIWorkbench;
+import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UIDesktopPanel;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.window.UIWorkbench} interface using Swing as
+ * {@link net.sf.mmm.ui.toolkit.api.window.UiWorkbench} interface using Swing as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
+public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
 
   /** the workbench pane */
   private final UIDesktopPanel workbench;
@@ -48,7 +48,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
    */
   public String getType() {
 
-    return UIWorkbench.TYPE;
+    return UiWorkbench.TYPE;
   }
 
   /**
@@ -73,7 +73,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UIWorkbench {
   /**
    * {@inheritDoc}
    */
-  public UIFrame createFrame(String title, boolean resizeable) {
+  public UiFrame createFrame(String title, boolean resizeable) {
 
     UIInternalFrame internalFrame = new UIInternalFrame((UIFactorySwing) getFactory(), this, title,
         resizeable);

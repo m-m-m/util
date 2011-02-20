@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.Orientation;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
@@ -221,7 +221,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
    * {@inheritDoc}
    */
   @Override
-  public AbstractUIComponent getComponent(int index) {
+  public AbstractUIComponent getChild(int index) {
 
     if (index == 0) {
       return getTopOrLeftComponent();
@@ -235,7 +235,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
   /**
    * {@inheritDoc}
    */
-  public int getComponentCount() {
+  public int getChildCount() {
 
     return 2;
   }
