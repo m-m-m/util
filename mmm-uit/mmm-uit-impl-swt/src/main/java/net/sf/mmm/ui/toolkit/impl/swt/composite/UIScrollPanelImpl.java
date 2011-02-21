@@ -3,21 +3,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.widgets.Control;
-
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncScrolledCompositeAccess;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Control;
+
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel} interface using SWT
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel} interface
+ * using SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -33,7 +33,8 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public UIScrollPanelImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
 
@@ -46,7 +47,7 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
-  public void setComponent(UiComposite child) {
+  public void setComponent(UiElement child) {
 
     if (this.childComponent != null) {
       this.childComponent.setParent(null);
@@ -87,7 +88,14 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
-  @Override
+  public UiElement getChild() {
+
+    return this.childComponent;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public AbstractUIComponent getChild(int index) {
 
     if (index == 0) {

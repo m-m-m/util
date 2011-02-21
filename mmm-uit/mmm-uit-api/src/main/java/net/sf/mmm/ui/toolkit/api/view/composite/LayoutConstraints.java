@@ -4,6 +4,9 @@
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.types.Alignment;
+import net.sf.mmm.ui.toolkit.api.types.Filling;
+import net.sf.mmm.ui.toolkit.api.types.Orientation;
 
 /**
  * This class is a container for the layout constraints of a
@@ -150,8 +153,8 @@ public class LayoutConstraints {
   public final Filling filling;
 
   /**
-   * The weight is a value in the range of [0,1] (0<=weight<=1). Typical
-   * values are -1, 0 and 1.<br>
+   * The weight is a value in the range of [0,1] (0<=weight<=1). Typical values
+   * are -1, 0 and 1.<br>
    * If 0, the component will be sized as preferred by the component's
    * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}.<br>
    * If the weight is positive, the component will be scaled according to the
@@ -159,9 +162,9 @@ public class LayoutConstraints {
    * {@link Orientation#HORIZONTAL horizontal} layout) or height (if
    * {@link Orientation#VERTICAL vertical} layout) proportional to the given
    * weight (absolute) and the size available for this panel. <br>
-   * If the weight is negative, the behaviour is like <code>-weight</code>,
-   * but only the space for the component is sized and the component itself is
-   * sized as its {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}. The
+   * If the weight is negative, the behaviour is like <code>-weight</code>, but
+   * only the space for the component is sized and the component itself is sized
+   * as its {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}. The
    * alignment is used to place the component inside the sized space.
    */
   public final double weight;
@@ -172,10 +175,9 @@ public class LayoutConstraints {
   public final Insets insets;
 
   /**
-   * The size used to override default size. If
-   * {@link UiReadSize#getWidth() width} or
-   * {@link UiReadSize#getHeight() height} is greater than <code>0</code>, it
-   * overrides the size-value of the associated
+   * The size used to override default size. If {@link UiReadSize#getWidth()
+   * width} or {@link UiReadSize#getHeight() height} is greater than
+   * <code>0</code>, it overrides the size-value of the associated
    * {@link net.sf.mmm.ui.toolkit.api.UiElement component}.
    */
   public final UiReadSize size;

@@ -8,24 +8,22 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
@@ -39,12 +37,11 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDeviceImpl;
 import net.sf.mmm.ui.toolkit.impl.awt.UIDisplayImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UIDecoratedComponentImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UISlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UIScrollPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.composite.UISlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UISplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.composite.UITabbedPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.feature.PrintAction;
@@ -71,7 +68,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFactorySwing extends AbstractUIFactory {
+public class UIFactorySwing extends AbstractUiFactory {
 
   /** the default display */
   private UIDisplayImpl display;
@@ -114,7 +111,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getDisplay()
+   * @see net.sf.mmm.ui.toolkit.api.UiFactory#getDisplay()
    * 
    * @return the AWT display.
    */
@@ -159,21 +156,9 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <D extends UiElement, C extends UiElement> UiDecoratedComponent<D, C> createDecoratedComponent(
-      D decorator, C component) {
+  public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
-    UiDecoratedComponent<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this, null);
-    decoratedComponent.setDecorator(decorator);
-    decoratedComponent.setComponent(component);
-    return decoratedComponent;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiScrollPanel createScrollPanel(UiComposite child) {
-
-    UiScrollPanel scrollPanel = new UIScrollPanelImpl(this, null);
+    UiScrollPanel<UiElement> scrollPanel = new UIScrollPanelImpl(this, null);
     scrollPanel.setComponent(child);
     return scrollPanel;
   }
@@ -285,7 +270,7 @@ public class UIFactorySwing extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UiTabbedPanel createTabbedPanel() {
+  public UiTabPanel createTabbedPanel() {
 
     return new UITabbedPanelImpl(this, null);
   }
@@ -329,7 +314,7 @@ public class UIFactorySwing extends AbstractUIFactory {
    */
   public UiAction createPrintUiAction(UiElement component, String actionName, String jobName) {
 
-    return new PrintAction((AbstractUIComponent) component, actionName, jobName);
+    return new PrintAction((AbstractUiElement) component, actionName, jobName);
   }
 
   /**

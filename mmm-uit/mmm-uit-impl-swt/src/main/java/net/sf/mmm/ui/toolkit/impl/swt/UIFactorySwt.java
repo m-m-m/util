@@ -6,11 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swt;
 import java.io.IOException;
 import java.net.URL;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Monitor;
-import org.eclipse.swt.widgets.Shell;
-
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -18,16 +13,14 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
@@ -41,10 +34,9 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.UIDecoratedComponentImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.UISlicePanelImpl;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.UIScrollPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.composite.UISlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.UISplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.UITabbedPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.feature.PrintAction;
@@ -65,6 +57,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.widget.editor.UIDateEditorImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.window.UIFrameImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.window.UIWorkbenchImpl;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Monitor;
+import org.eclipse.swt.widgets.Shell;
+
 /**
  * This class is the implementation of the UIFactory interface using SWT as the
  * UI toolkit.
@@ -72,7 +69,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.window.UIWorkbenchImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFactorySwt extends AbstractUIFactory {
+public class UIFactorySwt extends AbstractUiFactory {
 
   /** the display */
   private UIDisplayImpl display;
@@ -173,22 +170,10 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public <D extends UiElement, C extends UiElement> UiDecoratedComponent<D, C> createDecoratedComponent(
-      D decorator, C component) {
+  @SuppressWarnings("unchecked")
+  public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
-    UIDecoratedComponentImpl<D, C> decoratedComponent = new UIDecoratedComponentImpl<D, C>(this,
-        null, null);
-    decoratedComponent.setDecorator(decorator);
-    decoratedComponent.setComponent(component);
-    return decoratedComponent;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiScrollPanel createScrollPanel(UiComposite child) {
-
-    UiScrollPanel panel = new UIScrollPanelImpl(this, null);
+    UiScrollPanel<UiElement> panel = new UIScrollPanelImpl(this, null);
     if (child != null) {
       panel.setComponent(child);
     }
@@ -308,7 +293,7 @@ public class UIFactorySwt extends AbstractUIFactory {
   /**
    * {@inheritDoc}
    */
-  public UiTabbedPanel createTabbedPanel() {
+  public UiTabPanel createTabbedPanel() {
 
     return new UITabbedPanelImpl(this, null);
   }
@@ -427,14 +412,14 @@ public class UIFactorySwt extends AbstractUIFactory {
   }
 
   /**
-   * This method gets the given <code>baseStyle</code> adjusted with the
-   * global settings of the factory.
+   * This method gets the given <code>baseStyle</code> adjusted with the global
+   * settings of the factory.
    * 
    * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.ScriptOrientation)
    * 
    * @param baseStyle is the basic style.
-   * @return the given <code>baseStyle</code> with additional options from
-   *         this factory.
+   * @return the given <code>baseStyle</code> with additional options from this
+   *         factory.
    */
   public int adjustStyle(int baseStyle) {
 

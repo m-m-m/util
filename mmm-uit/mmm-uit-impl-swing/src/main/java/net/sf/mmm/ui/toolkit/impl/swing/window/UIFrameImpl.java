@@ -12,7 +12,7 @@ import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
@@ -156,7 +156,7 @@ public class UIFrameImpl extends UIWindow implements UiFrame {
    */
   public void setComposite(UiComposite newComposite) {
 
-    JComponent jComponent = ((AbstractUIComponent) newComposite).getSwingComponent();
+    JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);
     registerComposite(newComposite);
   }

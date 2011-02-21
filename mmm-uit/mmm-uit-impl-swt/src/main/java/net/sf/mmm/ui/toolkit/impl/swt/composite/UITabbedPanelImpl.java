@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTabFolderAccess;
@@ -18,13 +18,13 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel} interface
- * using SWT as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel} interface using
+ * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabbedPanel {
+public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabPanel<AbstractUIComponent> {
 
   /** the synchronous access to the {@link org.eclipse.swt.widgets.TabFolder} */
   private final SyncTabFolderAccess syncAccess;

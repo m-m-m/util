@@ -4,18 +4,20 @@
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 
 /**
  * This is the interface for a tabbed panel. Such component is a composite that
  * contains a number of components that can be switched via a tab-header.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiTabbedPanel extends UiPanel {
+public interface UiTabPanel<E extends UiElement> extends UiMultiComposite<E>, UiReadOrientation {
 
   /** the type of this object */
-  String TYPE = "TabbedPanel";
+  String TYPE = "TabPanel";
 
   /**
    * This method adds the given component as new tab on the ride of all existing
@@ -25,7 +27,7 @@ public interface UiTabbedPanel extends UiPanel {
    *        be created by the same factory.
    * @param title is the title that will be displayed in the tab.
    */
-  void addComponent(UiElement component, String title);
+  void addChild(UiElement component, String title);
 
   /**
    * This method adds the given component as new tab on the ride of all existing
@@ -37,6 +39,6 @@ public interface UiTabbedPanel extends UiPanel {
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void addComponent(UiElement component, String title, int position);
+  void insertChild(UiElement component, String title, int position);
 
 }

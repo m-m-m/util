@@ -23,7 +23,7 @@ public interface UiObject extends UiReadId, UiReadStyle {
    * 
    * @return the ui instance.
    */
-  UIFactoryRenamed getFactory();
+  UiFactory getFactory();
 
   /**
    * This method returns the type of the component. This must be a TYPE constant

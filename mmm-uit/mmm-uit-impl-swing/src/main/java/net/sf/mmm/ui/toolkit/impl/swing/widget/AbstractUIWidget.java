@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.widget;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIWidget extends AbstractUIComponent implements UiWidget {
+public abstract class AbstractUIWidget extends AbstractUiElement implements UiWidget {
 
   /**
    * The constructor.

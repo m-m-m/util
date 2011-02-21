@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -36,7 +36,7 @@ public abstract class UIWindow extends UIWindowImpl {
    *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindow(AbstractUIFactory uiFactory, UiNode parentObject) {
+  public UIWindow(AbstractUiFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

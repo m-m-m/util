@@ -9,15 +9,14 @@ import javax.swing.JScrollPane;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel} interface using
- * Swing as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel} interface
+ * using Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -28,13 +27,14 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   private final JScrollPane scrollPanel;
 
   /** the child component */
-  private AbstractUIComponent childComponent;
+  private AbstractUiElement childComponent;
 
   /**
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public UIScrollPanelImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
@@ -56,12 +56,12 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
-  public void setComponent(UiComposite child) {
+  public void setComponent(UiElement child) {
 
     if (this.childComponent != null) {
       setParent(this.childComponent, null);
     }
-    this.childComponent = (AbstractUIComponent) child;
+    this.childComponent = (AbstractUiElement) child;
     if (this.childComponent != null) {
       this.scrollPanel.setViewportView(this.childComponent.getSwingComponent());
     }
@@ -73,6 +73,14 @@ public class UIScrollPanelImpl extends AbstractUIComposite implements UiScrollPa
   public int getChildCount() {
 
     return 1;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public UiElement getChild() {
+
+    return this.childComponent;
   }
 
   /**

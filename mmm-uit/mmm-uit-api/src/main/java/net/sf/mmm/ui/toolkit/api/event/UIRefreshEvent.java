@@ -7,7 +7,7 @@ import net.sf.mmm.util.event.api.Event;
 
 /**
  * This is the event send internally from the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed factory} to all
+ * {@link net.sf.mmm.ui.toolkit.api.UiFactory factory} to all
  * {@link net.sf.mmm.ui.toolkit.base.AbstractUINode UI-elements} in order to
  * cause a refresh.
  * 
@@ -45,10 +45,10 @@ public class UIRefreshEvent implements Event {
    * The constructor.
    * 
    * @param orientationModified if <code>true</code> the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getScriptOrientation() orientation}
+   *        {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation() orientation}
    *        has been modified.
    * @param localeModified if <code>true</code> the
-   *        {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getLocale() locale} has
+   *        {@link net.sf.mmm.ui.toolkit.api.UiFactory#getLocale() locale} has
    *        been modified.
    */
   public UIRefreshEvent(boolean orientationModified, boolean localeModified) {
@@ -60,11 +60,11 @@ public class UIRefreshEvent implements Event {
 
   /**
    * This method determines if the
-   * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getScriptOrientation() orientation}
+   * {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation() orientation}
    * has been modified since the last refresh-event was send.
    * 
    * @return <code>true</code> if the
-   *         {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getScriptOrientation() orientation}
+   *         {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation() orientation}
    *         has been modified, <code>false</code> otherwise.
    */
   public boolean isOrientationModified() {
@@ -74,11 +74,11 @@ public class UIRefreshEvent implements Event {
 
   /**
    * This method determines if the
-   * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getLocale() locale} has been
+   * {@link net.sf.mmm.ui.toolkit.api.UiFactory#getLocale() locale} has been
    * modified since the last refresh-event was send.
    * 
    * @return <code>true</code> if the
-   *         {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#getLocale() locale} has
+   *         {@link net.sf.mmm.ui.toolkit.api.UiFactory#getLocale() locale} has
    *         been modified, <code>false</code> otherwise.
    */
   public boolean isLocaleModified() {

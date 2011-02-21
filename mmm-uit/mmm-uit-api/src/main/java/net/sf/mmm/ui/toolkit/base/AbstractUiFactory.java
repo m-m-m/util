@@ -11,13 +11,12 @@ import java.util.List;
 import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
@@ -36,12 +35,12 @@ import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.UiFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIFactory implements UIFactoryRenamed {
+public abstract class AbstractUiFactory implements UiFactory {
 
   /** the disposed flag */
   private boolean disposed;
@@ -61,7 +60,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * The constructor.
    */
-  public AbstractUIFactory() {
+  public AbstractUiFactory() {
 
     super();
     // TODO: do we need a thread-safe implementation here?
@@ -132,8 +131,8 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
    * @see #getScriptOrientation()
    * @see #getDesignOrientation()
    * 
-   * @return <code>true</code> for inverse orientation, <code>false</code>
-   *         for designed orientation.
+   * @return <code>true</code> for inverse orientation, <code>false</code> for
+   *         designed orientation.
    */
   public boolean isFlipVertical() {
 
@@ -147,8 +146,8 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
    * @see #getScriptOrientation()
    * @see #getDesignOrientation()
    * 
-   * @return <code>true</code> for inverse orientation, <code>false</code>
-   *         for designed orientation.
+   * @return <code>true</code> for inverse orientation, <code>false</code> for
+   *         designed orientation.
    */
   public boolean isFlipHorizontal() {
 
@@ -156,11 +155,10 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   }
 
   /**
-   * This method refreshes all
-   * {@link net.sf.mmm.ui.toolkit.api.window.UiWindow windows} created by this
-   * factory. The refresh of a window recursively refreshes all
-   * {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in the window.
-   * This way all visible GUI elements are refreshed.
+   * This method refreshes all {@link net.sf.mmm.ui.toolkit.api.window.UiWindow
+   * windows} created by this factory. The refresh of a window recursively
+   * refreshes all {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in
+   * the window. This way all visible GUI elements are refreshed.
    * 
    * @param event is the event with details about the refresh.
    */
@@ -176,8 +174,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   }
 
   /**
-   * This method adds (registers) the given <code>window</code> to this
-   * factory.
+   * This method adds (registers) the given <code>window</code> to this factory.
    * 
    * @param window is the window to add.
    */
@@ -189,8 +186,8 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   }
 
   /**
-   * This method removes (de-registers) the given <code>window</code> from
-   * this factory.
+   * This method removes (de-registers) the given <code>window</code> from this
+   * factory.
    * 
    * @param window is the window to remove.
    */
@@ -270,31 +267,9 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UiSlicePanel createPanel(Orientation orientation) {
+  public UiSlicePanel<UiElement> createPanel(Orientation orientation) {
 
     return createPanel(orientation, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public <C extends UiElement> UiDecoratedComponent<UiLabel, C> createLabeledComponent(
-      String label, C component) {
-
-    return createDecoratedComponent(createLabel(label), component);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiDecoratedComponent<UiLabel, UiSlicePanel> createLabeledComponents(String label,
-      UiElement... components) {
-
-    UiSlicePanel panel = createPanel(Orientation.HORIZONTAL);
-    for (UiElement component : components) {
-      panel.addChild(component);
-    }
-    return createLabeledComponent(label, panel);
   }
 
   /**
@@ -344,7 +319,7 @@ public abstract class AbstractUIFactory implements UIFactoryRenamed {
   /**
    * {@inheritDoc}
    */
-  public UiScrollPanel createScrollPanel() {
+  public UiScrollPanel<UiElement> createScrollPanel() {
 
     return createScrollPanel(null);
   }

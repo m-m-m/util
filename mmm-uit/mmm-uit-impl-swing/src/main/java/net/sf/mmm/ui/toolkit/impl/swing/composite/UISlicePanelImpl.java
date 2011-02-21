@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -31,7 +31,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
+public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<UiElement> {
 
   /** the swing panel */
   private final JPanel panel;
@@ -112,11 +112,11 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
    * {@inheritDoc}
    */
   @Override
-  public AbstractUIComponent removeChild(int index) {
+  public AbstractUiElement removeChild(int index) {
 
     // synchronized (this) {
     this.panel.remove(index);
-    AbstractUIComponent component = super.removeChild(index);
+    AbstractUiElement component = super.removeChild(index);
     JComponent swingComponent = component.getSwingComponent();
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().remove((JRadioButton) swingComponent);
@@ -130,7 +130,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
    */
   public void addChild(UiElement component) {
 
-    addComponent(component, LayoutConstraints.DEFAULT);
+    addChild(component, LayoutConstraints.DEFAULT);
   }
 
   /**
@@ -138,15 +138,15 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
    */
   public void insertChild(UiElement component, int index) {
 
-    addComponent(component, LayoutConstraints.DEFAULT, index);
+    insertChild(component, LayoutConstraints.DEFAULT, index);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component, LayoutConstraints constraints) {
+  public void addChild(UiElement component, LayoutConstraints constraints) {
 
-    AbstractUIComponent c = (AbstractUIComponent) component;
+    AbstractUiElement c = (AbstractUiElement) component;
     // synchronized (this) {
     JComponent swingComponent = c.getSwingComponent();
     this.panel.add(swingComponent, constraints);
@@ -170,9 +170,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component, LayoutConstraints constraints, int position) {
+  public void insertChild(UiElement component, LayoutConstraints constraints, int position) {
 
-    AbstractUIComponent c = (AbstractUIComponent) component;
+    AbstractUiElement c = (AbstractUiElement) component;
     // synchronized (this) {
     JComponent swingComponent = c.getSwingComponent();
     this.panel.add(swingComponent, constraints, position);

@@ -8,24 +8,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
@@ -47,7 +45,7 @@ import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UIFactoryRenamed extends UiWriteDisposed {
+public interface UiFactory extends UiWriteDisposed {
 
   /**
    * This method gets the locale currently applied to this factory. The locale
@@ -109,10 +107,9 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
   ScriptOrientation getDesignOrientation();
 
   /**
-   * This method sets the
-   * {@link #getDesignOrientation() designed script-orientation}. You should
-   * set this value at the beginning before creating {@link UiNode UI nodes}
-   * with this factory.
+   * This method sets the {@link #getDesignOrientation() designed
+   * script-orientation}. You should set this value at the beginning before
+   * creating {@link UiNode UI nodes} with this factory.
    * 
    * @param orientation is the script-orientation of the designer.
    */
@@ -138,7 +135,8 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * 
    * @param title is the title for the frame to create.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizeable() resizeable}
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizeable()
+   *        resizeable}
    * @return the created frame.
    */
   UiFrame createFrame(String title, boolean resizeable);
@@ -212,7 +210,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param orientation is the orientation of the child-components in the panel.
    * @return the created panel.
    */
-  UiSlicePanel createPanel(Orientation orientation);
+  UiSlicePanel<UiElement> createPanel(Orientation orientation);
 
   /**
    * This method creates a new {@link UiSlicePanel panel} with a border.
@@ -221,63 +219,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param borderTitle is the label of the panels border.
    * @return the created panel.
    */
-  UiSlicePanel createPanel(Orientation orientation, String borderTitle);
-
-  /**
-   * This method creates a {@link UiDecoratedComponent decorated component} that
-   * bundles the given <code>component</code> together with a
-   * <code>decorator</code>. The result can be easily
-   * {@link UiSlicePanel#addChild(UiElement) added} to a
-   * {@link UiSlicePanel panel}.
-   * 
-   * @param <D> is the templated type of the <code>decorator</code>.
-   * @param <C> is the templated type of the <code>component</code>.
-   * 
-   * @param decorator is the decorating component.
-   * @param component is the main component.
-   * @return the decorated component.
-   */
-  <D extends UiElement, C extends UiElement> UiDecoratedComponent<D, C> createDecoratedComponent(
-      D decorator, C component);
-
-  /**
-   * This method creates a {@link UiDecoratedComponent decorated component} that
-   * bundles the given <code>component</code> together with a
-   * {@link UiLabel label}. The result can be easily
-   * {@link UiSlicePanel#addChild(UiElement) added} to a
-   * {@link UiSlicePanel panel}.
-   * 
-   * @param <C> is the templated type of the <code>component</code>.
-   * 
-   * @param label is the label text.
-   * @param component is the component.
-   * @return the labeled component.
-   */
-  <C extends UiElement> UiDecoratedComponent<UiLabel, C> createLabeledComponent(String label,
-      C component);
-
-  /**
-   * This method creates a {@link UiDecoratedComponent decorated component} that
-   * puts the given <code>components</code> into a
-   * {@link Orientation#HORIZONTAL horizontal} {@link UiSlicePanel panel} and
-   * bundles it together with a {@link UiLabel label}. The result can be easily
-   * {@link UiSlicePanel#addChild(UiElement) added} to a
-   * {@link UiSlicePanel panel}.
-   * 
-   * @param label is the label text.
-   * @param components are the components (should be at least two to make
-   *        sense).
-   * @return the labeled component.
-   */
-  UiDecoratedComponent<UiLabel, UiSlicePanel> createLabeledComponents(String label,
-      UiElement... components);
+  UiSlicePanel<UiElement> createPanel(Orientation orientation, String borderTitle);
 
   /**
    * This method creates a new scroll-panel.
    * 
    * @return the created scroll-panel.
    */
-  UiScrollPanel createScrollPanel();
+  UiScrollPanel<UiElement> createScrollPanel();
 
   /**
    * This method creates a new scroll-panel with the given child inside.
@@ -285,7 +234,7 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * @param child is the child contained in the scroll-panel.
    * @return the created scroll-panel.
    */
-  UiScrollPanel createScrollPanel(UiComposite child);
+  UiScrollPanel<UiElement> createScrollPanel(UiElement child);
 
   /**
    * This method creates a new split panel.
@@ -294,14 +243,14 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * 
    * @return the created split panel.
    */
-  UiSplitPanel createSplitPanel(Orientation orientation);
+  UiSplitPanel<UiElement> createSplitPanel(Orientation orientation);
 
   /**
-   * This method creates a new tabbed panel.
+   * This method creates a new {@link UiTabPanel}.
    * 
-   * @return the created tabbed panel.
+   * @return the created {@link UiTabPanel}.
    */
-  UiTabbedPanel createTabbedPanel();
+  UiTabPanel<UiElement> createTabbedPanel();
 
   /**
    * This method creates a list with single-selection.
@@ -320,7 +269,8 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param multiSelection is the value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelection#isMultiSelection() multi-selection-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelection#isMultiSelection()
+   *        multi-selection-flag}.
    * @return the created list.
    */
   <E> UiList<E> createList(UiListMvcModel<E> model, boolean multiSelection);
@@ -342,7 +292,8 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param editable is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable()
+   *        editable-flag}.
    * @return the created combo-box.
    */
   <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model, boolean editable);
@@ -540,7 +491,8 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * {@link UiAction#getActionListener() listener} is invoked.
    * 
    * @param component is the component that is to be printed.
-   * @param actionName is the {@link UiAction#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print
+   *        action.
    * @return the according action.
    */
   UiAction createPrintUiAction(UiElement component, String actionName);
@@ -550,7 +502,8 @@ public interface UIFactoryRenamed extends UiWriteDisposed {
    * {@link UiAction#getActionListener() listener} is invoked.
    * 
    * @param component is the component that is to be printed.
-   * @param actionName is the {@link UiAction#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print
+   *        action.
    * @param jobName is the name of the print job.
    * @return the according action.
    */

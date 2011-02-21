@@ -12,27 +12,28 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This is the abstract base implementation of a
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that can contain any
- * number of components.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that can contain
+ * any number of components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
+public abstract class AbstractUIMultiComposite<E extends UiElement> extends AbstractUIComposite<E> {
 
   /** the component list. */
-  private final List<UiElement> components;
+  private final List<E> components;
 
   /**
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public AbstractUIMultiComposite(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
-    this.components = new ArrayList<UiElement>();
+    this.components = new ArrayList<E>();
   }
 
   /**
@@ -46,17 +47,17 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
   /**
    * {@inheritDoc}
    */
-  public UiElement getChild(int index) {
+  public E getChild(int index) {
 
     return this.components.get(index);
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#addChild(UiElement)
+   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel#addChild(UiElement)
    * 
    * @param component is the component to add.
    */
-  public void doAddComponent(UiElement component) {
+  public void doAddComponent(E component) {
 
     this.components.add(component);
   }
@@ -68,13 +69,13 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
    * @param index is the position where to add the component.
    * @param component is the component to add.
    */
-  public void doAddComponent(int index, UiElement component) {
+  public void doAddComponent(int index, E component) {
 
     this.components.add(index, component);
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiPanel#removeChild(int)
+   * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel#removeChild(int)
    * 
    * @param index is the position of the component to remove.
    * @return the removed component.
@@ -88,8 +89,8 @@ public abstract class AbstractUIMultiComposite extends AbstractUIComposite {
    * @see List#indexOf(Object)
    * 
    * @param component is the component to lookup.
-   * @return the index of the given <code>component</code> or <code>-1</code>
-   *         if NOT found.
+   * @return the index of the given <code>component</code> or <code>-1</code> if
+   *         NOT found.
    */
   protected int indexOfComponent(UiElement component) {
 

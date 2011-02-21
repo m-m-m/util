@@ -9,7 +9,6 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncGroupAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSashFormAccess;
 
 import org.eclipse.swt.SWT;
@@ -17,13 +16,14 @@ import org.eclipse.swt.layout.FillLayout;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel} interface using SWT
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel} interface using
+ * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPanel {
+public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> implements
+    UiSplitPanel<AbstractUIComponent> {
 
   /** the synchronous access to the sash-form */
   private final SyncSashFormAccess syncAccess;
@@ -44,7 +44,8 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param borderTitle is the title of the border or <code>null</code> for NO
    *        border.
    * @param orientation is the orientation of the two child-components in this
@@ -220,7 +221,6 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
   /**
    * {@inheritDoc}
    */
-  @Override
   public AbstractUIComponent getChild(int index) {
 
     if (index == 0) {

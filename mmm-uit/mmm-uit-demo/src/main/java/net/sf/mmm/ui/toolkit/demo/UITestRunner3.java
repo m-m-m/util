@@ -3,14 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
 
@@ -27,7 +22,7 @@ public class UITestRunner3 {
    * 
    * @param factory is the actual factory implementation to use.
    */
-  private static void runTest(UIFactoryRenamed factory) {
+  private static void runTest(UiFactory factory) {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
@@ -36,14 +31,16 @@ public class UITestRunner3 {
     workbench.setVisible(true);
     final UiFrame frame = workbench.createFrame("TestFrame", true);
     UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
-    UiButton button = factory.createButton("Button");
-    UiDecoratedComponent<UiLabel, UiButton> labeledButton = factory.createLabeledComponent(
-        "Label:", button);
-    panel.addComponent(labeledButton, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
-    UiTextField text = factory.createTextField();
-    UiDecoratedComponent<UiLabel, UiTextField> labeledText = factory.createLabeledComponent(
-        "Label2:", text);
-    panel.addComponent(labeledText, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    // UiButton button = factory.createButton("Button");
+    // UiDecoratedComponent<UiLabel, UiButton> labeledButton =
+    // factory.createLabeledComponent(
+    // "Label:", button);
+    // panel.addChild(labeledButton, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    // UiTextField text = factory.createTextField();
+    // UiDecoratedComponent<UiLabel, UiTextField> labeledText =
+    // factory.createLabeledComponent(
+    // "Label2:", text);
+    // panel.addChild(labeledText, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
     frame.setComposite(panel);
     UIDemoBuilder.createMenus(frame);
     frame.setSize(500, 300);

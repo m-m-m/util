@@ -12,7 +12,7 @@ import javax.swing.JMenuBar;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.window.UiDialog;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
@@ -99,7 +99,7 @@ public class UIDialogImpl extends UIWindow implements UiDialog {
    */
   public void setComposite(UiComposite newComposite) {
 
-    JComponent jComponent = ((AbstractUIComponent) newComposite).getSwingComponent();
+    JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.dialog.setContentPane(jComponent);
     registerComposite(newComposite);
   }

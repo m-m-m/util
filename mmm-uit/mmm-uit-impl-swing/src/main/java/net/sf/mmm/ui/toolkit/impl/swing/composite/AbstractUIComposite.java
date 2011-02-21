@@ -6,13 +6,13 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteBorderTitle;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -23,8 +23,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIComposite extends AbstractUIComponent implements UiComposite,
-    UiWriteBorderTitle {
+public abstract class AbstractUIComposite<E extends UiElement> extends AbstractUiElement implements
+    UiComposite<E> {
 
   /** the titled border of this composite */
   private TitledBorder border;
@@ -33,7 +33,8 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public AbstractUIComposite(UIFactorySwing uiFactory, UiNode parentObject) {
 
@@ -52,6 +53,7 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setEnabled(boolean enabled) {
 
     super.setEnabled(enabled);

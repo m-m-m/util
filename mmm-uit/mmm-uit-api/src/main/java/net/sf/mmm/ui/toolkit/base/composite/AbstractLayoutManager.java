@@ -3,14 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.composite;
 
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.types.Alignment;
 import net.sf.mmm.ui.toolkit.api.types.Filling;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 
 /**
  * This is the abstract base implementation of a manager for the layout of a
@@ -33,7 +33,7 @@ public abstract class AbstractLayoutManager {
   protected Orientation layoutOrientation;
 
   /** @see #getFactory() */
-  private AbstractUIFactory factory;
+  private AbstractUiFactory factory;
 
   /**
    * The layout constraints of the components. For a given array position the
@@ -76,7 +76,7 @@ public abstract class AbstractLayoutManager {
    * 
    * @param factory is the owning UI-factory.
    */
-  public AbstractLayoutManager(AbstractUIFactory factory) {
+  public AbstractLayoutManager(AbstractUiFactory factory) {
 
     super();
     this.factory = factory;
@@ -94,7 +94,7 @@ public abstract class AbstractLayoutManager {
    * 
    * @return the factory
    */
-  public UIFactoryRenamed getFactory() {
+  public UiFactory getFactory() {
 
     return this.factory;
   }
@@ -141,7 +141,7 @@ public abstract class AbstractLayoutManager {
    * This method determines if the layout orientation is horizontal or vertical.
    * 
    * @see #getOrientation()
-   * @see UIFactoryRenamed#getScriptOrientation()
+   * @see UiFactory#getScriptOrientation()
    * @see net.sf.mmm.ui.toolkit.api.types.ScriptOrientation#isHorizontal()
    * 
    * @return <code>true</code> if the layout is horizontal, <code>false</code>

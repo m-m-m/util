@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#createPrintUiAction(UiElement) print-action}
+ * {@link net.sf.mmm.ui.toolkit.api.UiFactory#createPrintUiAction(UiElement) print-action}
  * for SWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

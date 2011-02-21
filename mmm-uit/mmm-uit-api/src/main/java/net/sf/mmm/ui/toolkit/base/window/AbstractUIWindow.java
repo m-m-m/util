@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UiWindow;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
 
@@ -38,7 +38,7 @@ public abstract class AbstractUIWindow extends AbstractUINode implements UiWindo
    *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public AbstractUIWindow(AbstractUIFactory uiFactory, UiNode parentObject) {
+  public AbstractUIWindow(AbstractUiFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

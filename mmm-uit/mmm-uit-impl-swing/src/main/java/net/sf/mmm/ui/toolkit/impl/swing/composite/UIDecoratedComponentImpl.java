@@ -6,30 +6,29 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent} interface
- * using Swing as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent}
+ * interface using Swing as the UI toolkit.
  * 
- * @param <D> is the templated type of the
- *        {@link #getDecorator() decorating component}.
- * @param <C> is the templated type of the
- *        {@link #getComponent() main component}.
+ * @param <D> is the templated type of the {@link #getDecorator() decorating
+ *        component}.
+ * @param <C> is the templated type of the {@link #getComponent() main
+ *        component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> extends
-    AbstractUIComposite implements UiDecoratedComponent<D, C> {
+public class UIDecoratedComponentImpl<E extends AbstractUiElement, D extends E, C extends E>
+    extends AbstractUIComposite<E> implements UiDecoratedComponent<E, D, C> {
 
   /** @see #getSwingComponent() */
   private final JPanel panel;
@@ -47,7 +46,8 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
@@ -75,8 +75,8 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
 
     Orientation orientation = Orientation.HORIZONTAL;
     UiNode parent = getParent();
-    if ((parent != null) && (parent instanceof UiComposite)) {
-      orientation = ((UiComposite) parent).getOrientation().getMirrored();
+    if ((parent != null) && (parent instanceof UiReadOrientation)) {
+      orientation = ((UiReadOrientation) parent).getOrientation().getMirrored();
     }
     return orientation;
   }
@@ -100,7 +100,7 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
   /**
    * {@inheritDoc}
    */
-  public UiElement getChild(int index) {
+  public E getChild(int index) {
 
     if (index == 0) {
       return getDecorator();
@@ -116,9 +116,9 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
    */
   public void setDecorator(D newDecorator) {
 
-    AbstractUIComponent abstractComponent = (AbstractUIComponent) newDecorator;
+    AbstractUiElement abstractComponent = newDecorator;
     if (this.decorator != null) {
-      AbstractUIComponent oldComponent = (AbstractUIComponent) this.decorator;
+      AbstractUiElement oldComponent = this.decorator;
       // setParent(oldComponent, null);
       // this.panel.remove(oldComponent.getSwingComponent());
       oldComponent.removeFromParent();
@@ -147,9 +147,9 @@ public class UIDecoratedComponentImpl<D extends UiElement, C extends UiElement> 
    */
   public void setComponent(C newComponent) {
 
-    AbstractUIComponent abstractComponent = (AbstractUIComponent) newComponent;
+    AbstractUiElement abstractComponent = newComponent;
     if (this.component != null) {
-      AbstractUIComponent oldComponent = (AbstractUIComponent) this.component;
+      AbstractUiElement oldComponent = this.component;
       setParent(oldComponent, null);
       this.panel.remove(oldComponent.getSwingComponent());
     }

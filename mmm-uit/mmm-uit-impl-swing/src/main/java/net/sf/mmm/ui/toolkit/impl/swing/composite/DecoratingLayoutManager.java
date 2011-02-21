@@ -26,7 +26,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    * 
    * @param decoratedComponent is the decorated component to layout.
    */
-  public DecoratingLayoutManager(UiDecoratedComponent<?, ?> decoratedComponent) {
+  public DecoratingLayoutManager(UiDecoratedComponent<?, ?, ?> decoratedComponent) {
 
     super(decoratedComponent);
   }
@@ -53,7 +53,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    */
   public void addLayoutComponent(Component comp, Object constraints) {
 
-  // nothing to do...
+    // nothing to do...
   }
 
   /**
@@ -61,7 +61,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    */
   public void addLayoutComponent(String name, Component comp) {
 
-  // nothing to do...
+    // nothing to do...
   }
 
   /**
@@ -69,7 +69,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    */
   public void invalidateLayout(Container target) {
 
-  // nothing to do...
+    // nothing to do...
   }
 
   /**
@@ -77,7 +77,7 @@ class DecoratingLayoutManager extends AbstractDecoratingLayoutManager implements
    */
   public void removeLayoutComponent(Component comp) {
 
-  // nothing to do...
+    // nothing to do...
   }
 
   /**

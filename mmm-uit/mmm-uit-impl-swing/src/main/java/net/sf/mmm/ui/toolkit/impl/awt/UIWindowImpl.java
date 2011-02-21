@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.window.UiDialog;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
 
 /**
@@ -37,7 +37,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindowImpl(AbstractUIFactory uiFactory, UiNode parentObject) {
+  public UIWindowImpl(AbstractUiFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

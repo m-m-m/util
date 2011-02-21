@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.UiObject;
 
 /**
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.UiObject;
 public abstract class AbstractUIObject implements UiObject {
 
   /** @see #getFactory() */
-  private AbstractUIFactory factory;
+  private AbstractUiFactory factory;
 
   /** @see #getId() */
   private String id;
@@ -31,7 +31,7 @@ public abstract class AbstractUIObject implements UiObject {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    */
-  public AbstractUIObject(AbstractUIFactory uiFactory) {
+  public AbstractUIObject(AbstractUiFactory uiFactory) {
 
     super();
     this.factory = uiFactory;
@@ -40,7 +40,7 @@ public abstract class AbstractUIObject implements UiObject {
   /**
    * {@inheritDoc}
    */
-  public AbstractUIFactory getFactory() {
+  public AbstractUiFactory getFactory() {
 
     return this.factory;
   }

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.demo;
 import java.io.File;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiTabbedPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
@@ -47,7 +47,7 @@ public class UITestRunner {
    * 
    * @param factory is the actual factory implementation to use.
    */
-  private static void runTest(UIFactoryRenamed factory) {
+  private static void runTest(UiFactory factory) {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
@@ -113,7 +113,7 @@ public class UITestRunner {
 
     scroll.setComponent(panel);
 
-    UiTabbedPanel tabPanel = factory.createTabbedPanel();
+    UiTabPanel tabPanel = factory.createTabbedPanel();
     tabPanel.addChild(scroll, "Scroll");
     frame.setComposite(tabPanel);
 

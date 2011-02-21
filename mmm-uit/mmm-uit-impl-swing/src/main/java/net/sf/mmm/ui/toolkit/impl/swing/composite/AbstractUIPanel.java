@@ -5,24 +5,27 @@ package net.sf.mmm.ui.toolkit.impl.swing.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiMultiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
- * This class is an abstract base implementation of the {@link UiPanel}
+ * This class is an abstract base implementation of the {@link UiSimplePanel}
  * interface using swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIPanel extends AbstractUIMultiComposite implements UiPanel {
+public abstract class AbstractUIPanel extends AbstractUIMultiComposite<UiElement> implements
+    UiMultiComposite<UiElement> {
 
   /**
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public AbstractUIPanel(UIFactorySwing uiFactory, UiNode parentObject) {
 
@@ -32,9 +35,9 @@ public abstract class AbstractUIPanel extends AbstractUIMultiComposite implement
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent removeChild(int index) {
+  public AbstractUiElement removeChild(int index) {
 
-    AbstractUIComponent component = (AbstractUIComponent) doRemoveComponent(index);
+    AbstractUiElement component = (AbstractUiElement) doRemoveComponent(index);
     component.removeFromParent();
     return component;
   }

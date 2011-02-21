@@ -6,22 +6,23 @@ package net.sf.mmm.ui.toolkit.impl.swt.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiMultiComposite;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 
 /**
- * This class is an abstract base implementation of the {@link UiPanel}
+ * This class is an abstract base implementation of the {@link UiSimplePanel}
  * interface using SWT as the UI toolkit. It is used for composites that have a
  * list of multiple child-components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIPanel extends AbstractUIComposite implements UiPanel {
+public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUIComponent> implements
+    UiMultiComposite<AbstractUIComponent> {
 
   /** the component list */
   protected final List<AbstractUIComponent> components;
@@ -30,7 +31,8 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param borderTitle is the title of the border or <code>null</code> for NO
    *        border.
    */
@@ -51,7 +53,6 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
   /**
    * {@inheritDoc}
    */
-  @Override
   public AbstractUIComponent getChild(int index) {
 
     return this.components.get(index);
@@ -70,7 +71,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite implements UiP
   /**
    * {@inheritDoc}
    */
-  public boolean removeChild(UiElement component) {
+  public boolean removeChild(AbstractUIComponent component) {
 
     // return this.components.remove(component);
     int index = this.components.indexOf(component);

@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -27,10 +27,10 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
   private JSplitPane splitPanel;
 
   /** the component top or left */
-  private AbstractUIComponent componentTopOrLeft;
+  private AbstractUiElement componentTopOrLeft;
 
   /** the component bottom or right */
-  private AbstractUIComponent componentBottomOrRight;
+  private AbstractUiElement componentBottomOrRight;
 
   /** @see #getOrientation() */
   private Orientation orientation;
@@ -46,7 +46,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
    * @param orientation is the orientation of the two child-components in this
    *        split-panel.
    */
-  public UISplitPanelImpl(UIFactorySwing uiFactory, AbstractUIComponent parentObject,
+  public UISplitPanelImpl(UIFactorySwing uiFactory, AbstractUiElement parentObject,
       Orientation orientation) {
 
     super(uiFactory, parentObject);
@@ -97,7 +97,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
    */
   public void setTopOrLeftComponent(UiElement component) {
 
-    AbstractUIComponent newComponent = (AbstractUIComponent) component;
+    AbstractUiElement newComponent = (AbstractUiElement) component;
     if (newComponent.getParent() != null) {
       newComponent.removeFromParent();
     }
@@ -115,7 +115,7 @@ public class UISplitPanelImpl extends AbstractUIComposite implements UiSplitPane
    */
   public void setBottomOrRightComponent(UiElement component) {
 
-    AbstractUIComponent newComponent = (AbstractUIComponent) component;
+    AbstractUiElement newComponent = (AbstractUiElement) component;
     if (newComponent.getParent() != null) {
       newComponent.removeFromParent();
     }

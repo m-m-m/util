@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
@@ -22,7 +21,7 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
+public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<AbstractUIComponent> {
 
   /** the synchronous access to the {@link org.eclipse.swt.widgets.Composite} */
   private final SyncCompositeAccess syncAccess;
@@ -53,17 +52,17 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addChild(UiElement component) {
+  public void addChild(AbstractUIComponent component) {
 
-    addComponent(component, LayoutConstraints.DEFAULT);
+    addChild(component, LayoutConstraints.DEFAULT);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component, LayoutConstraints constraints) {
+  public void addChild(AbstractUIComponent component, LayoutConstraints constraints) {
 
-    AbstractUIComponent c = (AbstractUIComponent) component;
+    AbstractUIComponent c = component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
     c.getSyncAccess().setLayoutData(constraints);
     c.setParent(this);
@@ -73,9 +72,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void addComponent(UiElement component, LayoutConstraints constraints, int position) {
+  public void insertChild(AbstractUIComponent component, LayoutConstraints constraints, int position) {
 
-    AbstractUIComponent c = (AbstractUIComponent) component;
+    AbstractUIComponent c = component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
     c.getSyncAccess().setLayoutData(constraints);
     c.setParent(this);
@@ -120,7 +119,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel {
   /**
    * {@inheritDoc}
    */
-  public void insertChild(UiElement component, int index) {
+  public void insertChild(AbstractUIComponent component, int index) {
 
     throw new IllegalStateException();
   }

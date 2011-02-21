@@ -31,9 +31,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @since 1.0.0
+ * @deprecated - use dedicated panels instead.
  */
-public interface UiSlicePanel extends UiPanel, UiWriteOrientation {
+@Deprecated
+public interface UiSlicePanel<E extends UiElement> extends UiExtendableComposite<E>,
+    UiWriteOrientation {
 
   /** the type of this object */
   String TYPE = "Panel";
@@ -45,7 +49,7 @@ public interface UiSlicePanel extends UiPanel, UiWriteOrientation {
    * If the panel has vertical layout, the component will appear at the bottom.
    * It will use {@link LayoutConstraints#DEFAULT} as constraints.
    */
-  void addComponent(UiElement component);
+  void addChild(E component);
 
   /**
    * This method adds the given component to the end of the panels component
@@ -58,7 +62,7 @@ public interface UiSlicePanel extends UiPanel, UiWriteOrientation {
    * @param constraints are the constraints that define the layout of the
    *        component in this panel.
    */
-  void addComponent(UiElement component, LayoutConstraints constraints);
+  void addChild(E component, LayoutConstraints constraints);
 
   /**
    * This method adds the given component at the given position.
@@ -70,6 +74,6 @@ public interface UiSlicePanel extends UiPanel, UiWriteOrientation {
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void addComponent(UiElement component, LayoutConstraints constraints, int position);
+  void insertChild(E component, LayoutConstraints constraints, int position);
 
 }

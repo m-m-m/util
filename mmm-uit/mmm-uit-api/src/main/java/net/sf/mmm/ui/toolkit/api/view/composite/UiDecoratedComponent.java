@@ -4,13 +4,15 @@
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 
 /**
  * This is the interface for a simple {@link UiComposite composite} containing
  * two {@link UiElement components}. The {@link #getDecorator() first component}
- * will be layouted with a {@link Filling#NONE fixed} size on the top/left, the
- * {@link #getComponent() other component} will be {@link Filling#BOTH scaled}
- * and located at the bottom/right.<br>
+ * will be layouted with a {@link net.sf.mmm.ui.toolkit.api.types.Filling#NONE
+ * fixed} size on the top/left, the {@link #getComponent() other component} will
+ * be {@link net.sf.mmm.ui.toolkit.api.types.Filling#BOTH scaled} and located at
+ * the bottom/right.<br>
  * The intention of this composite is to simplify the layout management.
  * 
  * @param <D> is the templated type of the {@link #getDecorator() decorating
@@ -20,8 +22,11 @@ import net.sf.mmm.ui.toolkit.api.UiElement;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated - nonsense, remove!
  */
-public interface UiDecoratedComponent<D extends UiElement, C extends UiElement> extends UiComposite {
+@Deprecated
+public interface UiDecoratedComponent<E extends UiElement, D extends E, C extends E> extends
+    UiComposite<E>, UiReadOrientation {
 
   /** the type of this object */
   String TYPE = "DecoratedComponent";
@@ -29,7 +34,8 @@ public interface UiDecoratedComponent<D extends UiElement, C extends UiElement> 
   /**
    * This method gets the decorating component (e.g. a
    * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel label}) that is layed
-   * out with a {@link Filling#NONE fixed} size on the top/left.
+   * out with a {@link net.sf.mmm.ui.toolkit.api.types.Filling#NONE fixed} size
+   * on the top/left.
    * 
    * @return the decorating component.
    */
@@ -38,7 +44,8 @@ public interface UiDecoratedComponent<D extends UiElement, C extends UiElement> 
   /**
    * This method gets the main component (e.g. a
    * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField text-field} that
-   * will be {@link Filling#BOTH scaled} and located at the bottom/right.
+   * will be {@link net.sf.mmm.ui.toolkit.api.types.Filling#BOTH scaled} and
+   * located at the bottom/right.
    * 
    * @return the main component.
    */

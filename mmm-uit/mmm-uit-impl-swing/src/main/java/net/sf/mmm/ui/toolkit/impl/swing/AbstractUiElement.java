@@ -21,7 +21,7 @@ import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIComponent extends UIAwtNode implements UiElement {
+public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
 
   /** the disposed flag */
   private boolean disposed;
@@ -34,7 +34,7 @@ public abstract class AbstractUIComponent extends UIAwtNode implements UiElement
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIComponent(UIFactorySwing uiFactory, UiNode parentObject) {
+  public AbstractUiElement(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.disposed = false;

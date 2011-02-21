@@ -23,7 +23,7 @@ public interface UiService {
    * 
    * @return the default factory.
    */
-  UIFactoryRenamed getFactory();
+  UiFactory getFactory();
 
   /**
    * This method gets all available display objects.

@@ -20,11 +20,11 @@ import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.window.MessageType;
 import net.sf.mmm.ui.toolkit.api.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UIFactoryRenamed#createPrintUiAction(UiElement) print-action}
+ * {@link net.sf.mmm.ui.toolkit.api.UiFactory#createPrintUiAction(UiElement) print-action}
  * for SWING.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -33,7 +33,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.AbstractUIComponent;
 public class PrintAction extends AbstractAction implements UIActionListener, Printable {
 
   /** the component to be printed */
-  private final AbstractUIComponent component;
+  private final AbstractUiElement component;
 
   /**
    * The constructor.
@@ -42,7 +42,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
    * @param actionName is the {@link UiAction#getName() name} of the print action.
    * @param jobName is the name of the print job.
    */
-  public PrintAction(AbstractUIComponent printComponent, String actionName, String jobName) {
+  public PrintAction(AbstractUiElement printComponent, String actionName, String jobName) {
 
     super(actionName);
     setId(jobName);

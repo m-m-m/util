@@ -13,7 +13,7 @@ import java.util.Map;
 
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Rectangle;
 import net.sf.mmm.ui.toolkit.base.composite.Size;
@@ -40,7 +40,7 @@ public class LayoutManager extends AbstractLayoutManager implements LayoutManage
    * 
    * @param factory is the owning factory.
    */
-  public LayoutManager(AbstractUIFactory factory) {
+  public LayoutManager(AbstractUiFactory factory) {
 
     super(factory);
     this.component2constraintMap = new HashMap<Component, LayoutConstraints>();

@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 
 import net.sf.mmm.ui.toolkit.api.UIDevice;
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 
 /**
  * This is the abstract base implementation of the UIDisplay interface.
@@ -26,7 +26,7 @@ public abstract class AbstractUIDisplay extends AbstractUIObject implements UIDi
    * @param uiFactory is the UI factory instance.
    * @param uiDevice is the device the display belongs to.
    */
-  public AbstractUIDisplay(AbstractUIFactory uiFactory, UIDevice uiDevice) {
+  public AbstractUIDisplay(AbstractUiFactory uiFactory, UIDevice uiDevice) {
 
     super(uiFactory);
     this.device = uiDevice;

@@ -17,12 +17,13 @@ import org.eclipse.swt.layout.FillLayout;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} interface using SWT
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} interface using
+ * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIComposite extends AbstractUIComponent implements UiComposite {
+public abstract class AbstractUIComposite<E extends AbstractUIComponent> extends
+    AbstractUIComponent implements UiComposite<E> {
 
   /** gives access to the {@link org.eclipse.swt.widgets.Group} */
   private final SyncGroupAccess syncGroupAccess;
@@ -31,7 +32,8 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param borderTitle is the title of the border or <code>null</code> for NO
    *        border.
    */
@@ -89,11 +91,6 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
   /**
    * {@inheritDoc}
    */
-  public abstract AbstractUIComponent getChild(int index);
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void create() {
 
@@ -130,13 +127,12 @@ public abstract class AbstractUIComposite extends AbstractUIComponent implements
 
   /**
    * This method determines if an SWT child will automatically be attached to
-   * this the {@link #getActiveSyncAccess() composite}. Override this method
-   * and return <code>false</code> if you need special behaviour to build the
-   * SWT tree.
+   * this the {@link #getActiveSyncAccess() composite}. Override this method and
+   * return <code>false</code> if you need special behaviour to build the SWT
+   * tree.
    * 
    * @return <code>true</code> if children should be attached automatically,
-   *         <code>false</code> if your implementation needs special
-   *         behaviour.
+   *         <code>false</code> if your implementation needs special behaviour.
    */
   public boolean isAttachToActiveAccess() {
 

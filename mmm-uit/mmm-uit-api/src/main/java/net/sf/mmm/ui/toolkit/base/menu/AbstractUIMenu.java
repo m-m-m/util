@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUINode;
 
 /**
@@ -35,7 +35,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UiMenu {
    * @param uiFactory is the UIFactory instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIMenu(AbstractUIFactory uiFactory, UiNode parentObject) {
+  public AbstractUIMenu(AbstractUiFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
     this.items = new ArrayList<UiMenuItem>();

@@ -19,6 +19,8 @@
     <module>mmm-uit-api</module>
     <module>mmm-uit-impl-swt</module>
     <module>mmm-uit-impl-swing</module>
+    <module>mmm-uit-impl-gwt</module>
+    <module>mmm-uit-impl-smartgwt</module>
     <module>mmm-uit-demo</module>
   </modules>
 </project>

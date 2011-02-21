@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Layout;
 
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.base.AbstractUIFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
 import net.sf.mmm.ui.toolkit.base.composite.Rectangle;
 import net.sf.mmm.ui.toolkit.base.composite.Size;
@@ -33,7 +33,7 @@ public class LayoutManager extends Layout {
    * 
    * @param factory is the owning factory.
    */
-  public LayoutManager(AbstractUIFactory factory) {
+  public LayoutManager(AbstractUiFactory factory) {
 
     super();
     this.delegate = new Manager(factory);
@@ -90,7 +90,7 @@ public class LayoutManager extends Layout {
      * 
      * @param factory is the owning factory.
      */
-    public Manager(AbstractUIFactory factory) {
+    public Manager(AbstractUiFactory factory) {
 
       super(factory);
       this.panel = null;

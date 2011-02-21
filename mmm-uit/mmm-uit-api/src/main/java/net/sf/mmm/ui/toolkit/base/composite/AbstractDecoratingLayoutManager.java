@@ -4,9 +4,9 @@
 package net.sf.mmm.ui.toolkit.base.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This inner class is the layout-manager that organizes the layout for this
@@ -21,7 +21,7 @@ public abstract class AbstractDecoratingLayoutManager {
   private static final int DOUBLE_INDENT = 2 * INDENT;
 
   /** the decorated-component to layout */
-  private final UiDecoratedComponent<?, ?> decoratedComponent;
+  private final UiDecoratedComponent<?, ?, ?> decoratedComponent;
 
   /** the sizer for the decorators */
   private UiReadSize sizer;
@@ -31,7 +31,7 @@ public abstract class AbstractDecoratingLayoutManager {
    * 
    * @param decoratedComp TODO
    */
-  public AbstractDecoratingLayoutManager(UiDecoratedComponent<?, ?> decoratedComp) {
+  public AbstractDecoratingLayoutManager(UiDecoratedComponent<?, ?, ?> decoratedComp) {
 
     super();
     this.decoratedComponent = decoratedComp;
@@ -52,8 +52,8 @@ public abstract class AbstractDecoratingLayoutManager {
    * This method does the actual layout.
    * 
    * @param parentSize is the size of the
-   *        {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite composite} to
-   *        layout.
+   *        {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite
+   *        composite} to layout.
    */
   protected void doLayout(Size parentSize) {
 

@@ -3,10 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
-import net.sf.mmm.ui.toolkit.api.UIFactoryRenamed;
-import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
 
 /**
  * This is a test runner that tests the various UIFactorySwing implementations.
@@ -21,17 +19,17 @@ public class UITestRunner2 {
    * 
    * @param factory is the actual factory implementation to use.
    */
-  private static void runTest(UIFactoryRenamed factory) {
+  private static void runTest(UiFactory factory) {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
-    factory.setScriptOrientation(ScriptOrientation.RIGHT_TO_LEFT);
+    // factory.setScriptOrientation(ScriptOrientation.RIGHT_TO_LEFT);
     /*
      * final UIWorkbench workbench = factory.createWorkbench("Workbench");
      * workbench.setMaximized(true); workbench.setVisible(true); final UIFrame
      * frame = workbench.createFrame("TestFrame", true);
      */
-    final UiFrame frame = factory.createFrame("TestFrame", true);
+    final UiFrame frame = factory.createFrame("MyApplication", true);
     frame.setComposite(UIDemoBuilder.createTabbedPanel(factory));
     UIDemoBuilder.createMenus(frame);
     frame.setSize(600, 500);

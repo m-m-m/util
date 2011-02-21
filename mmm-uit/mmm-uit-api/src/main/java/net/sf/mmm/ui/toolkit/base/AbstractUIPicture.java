@@ -27,7 +27,7 @@ public abstract class AbstractUIPicture extends AbstractUIObject implements UiIm
    * 
    * @param uiFactory
    */
-  public AbstractUIPicture(AbstractUIFactory uiFactory) {
+  public AbstractUIPicture(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
   }
