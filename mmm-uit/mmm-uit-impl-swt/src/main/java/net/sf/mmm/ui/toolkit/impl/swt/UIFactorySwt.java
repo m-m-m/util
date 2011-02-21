@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
-import java.io.IOException;
-import java.net.URL;
-
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -277,7 +274,7 @@ public class UIFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiImage createPicture(URL imageUrl) throws IOException {
+  public UiImage createImage(String imageUrl) {
 
     return new UIPictureImpl(this, imageUrl);
   }

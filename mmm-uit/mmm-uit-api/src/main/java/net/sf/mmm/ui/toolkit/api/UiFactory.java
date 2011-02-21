@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
@@ -462,20 +459,8 @@ public interface UiFactory extends UiWriteDisposed {
    * 
    * @param imageUrl is the URL pointing to the according image data.
    * @return the picture object for the image at the given URL.
-   * @throws IOException on I/O error opening or reading data from the given
-   *         URL.
    */
-  UiImage createPicture(URL imageUrl) throws IOException;
-
-  /**
-   * This method creates a picture.
-   * 
-   * @param imageFile is the image file.
-   * @return the picture object for the image in the given file.
-   * @throws IOException on I/O error opening or reading data from the given
-   *         file.
-   */
-  UiImage createPicture(File imageFile) throws IOException;
+  UiImage createImage(String imageUrl);
 
   /**
    * This method creates an action that prints the given component if its

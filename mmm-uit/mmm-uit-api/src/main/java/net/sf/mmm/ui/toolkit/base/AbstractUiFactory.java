@@ -1,11 +1,8 @@
-/* $Id$
+/* $Id: AbstractUIFactory.java 956 2011-02-20 17:40:50Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -270,18 +267,6 @@ public abstract class AbstractUiFactory implements UiFactory {
   public UiSlicePanel<UiElement> createPanel(Orientation orientation) {
 
     return createPanel(orientation, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiImage createPicture(File imageFile) throws IOException {
-
-    try {
-      return createPicture(imageFile.toURI().toURL());
-    } catch (MalformedURLException e) {
-      throw new IllegalArgumentException(e);
-    }
   }
 
   /**

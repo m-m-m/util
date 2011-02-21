@@ -3,25 +3,22 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
-import java.io.File;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
-import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
 import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncFileDialogAccess;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using SWT
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using
+ * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -41,7 +38,10 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
       UIFileDownloadImpl.this.syncDialgAccess.setText(getValue());
       String file = UIFileDownloadImpl.this.syncDialgAccess.open();
       if (file != null) {
-        FileAccessUtil.save(UIFileDownloadImpl.this.uiFileAccess, new File(file), getParentWindow());
+        // TODO
+
+        // FileAccessUtil.save(UIFileDownloadImpl.this.uiFileAccess, new
+        // File(file), getParentWindow());
       }
     }
 
@@ -60,7 +60,8 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param access gives access to the data that is offered for download.
    */
   public UIFileDownloadImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UiFileAccess access) {

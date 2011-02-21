@@ -14,7 +14,6 @@ import javax.swing.JFileChooser;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
-import net.sf.mmm.ui.toolkit.base.feature.FileAccessUtil;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -41,8 +40,11 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
       int selection = UIFileDownloadImpl.this.fileChooser
           .showSaveDialog(UIFileDownloadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
-        FileAccessUtil.save(UIFileDownloadImpl.this.access,
-            UIFileDownloadImpl.this.fileChooser.getSelectedFile(), getParentWindow());
+        // TODO
+
+        // FileAccessUtil.save(UIFileDownloadImpl.this.access,
+        // UIFileDownloadImpl.this.fileChooser.getSelectedFile(),
+        // getParentWindow());
       }
     }
 

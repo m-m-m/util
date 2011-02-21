@@ -3,15 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing;
 
-import java.net.URL;
-
 import javax.swing.ImageIcon;
 
 import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage}
- * interface using Swing as the underlying implementation.
+ * This is the implementation of the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage} interface using Swing
+ * as the underlying implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -27,7 +26,7 @@ public class UIPictureImpl extends AbstractUIPicture {
    * @param uiFactory is the UIFactorySwing instance.
    * @param imageUrl is the URL to the image data.
    */
-  public UIPictureImpl(UIFactorySwing uiFactory, URL imageUrl) {
+  public UIPictureImpl(UIFactorySwing uiFactory, String imageUrl) {
 
     super(uiFactory);
     this.picture = new ImageIcon(imageUrl);

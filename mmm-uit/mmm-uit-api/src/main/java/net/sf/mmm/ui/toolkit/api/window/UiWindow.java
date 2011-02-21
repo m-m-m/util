@@ -4,12 +4,12 @@
 package net.sf.mmm.ui.toolkit.api.window;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
 
 /**

@@ -3,17 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
-import java.io.IOException;
-import java.net.URL;
+import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 
-import net.sf.mmm.ui.toolkit.base.AbstractUIPicture;
-
 /**
- * This is the implementation of the {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage}
- * interface using SWT as the underlying implementation.
+ * This is the implementation of the
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiImage} interface using SWT as
+ * the underlying implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -31,13 +29,11 @@ public class UIPictureImpl extends AbstractUIPicture {
    * 
    * @param uiFactory is the UIFactorySwt instance.
    * @param imageUrl is the URL to the image data.
-   * @throws IOException on I/O error opening or reading data from the given
-   *         URL.
    */
-  public UIPictureImpl(UIFactorySwt uiFactory, URL imageUrl) throws IOException {
+  public UIPictureImpl(UIFactorySwt uiFactory, String imageUrl) {
 
     super(uiFactory);
-    this.data = new ImageData(imageUrl.openStream());
+    this.data = new ImageData(imageUrl);
     this.image = new Image(uiFactory.getDisplay().getSwtDisplay(), this.data);
   }
 

@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swing;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.net.URL;
 
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
 import net.sf.mmm.ui.toolkit.api.UiElement;
@@ -262,7 +261,7 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiImage createPicture(URL imageUrl) {
+  public UiImage createImage(String imageUrl) {
 
     return new UIPictureImpl(this, imageUrl);
   }

@@ -4,11 +4,9 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
-import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
@@ -157,14 +155,9 @@ public class UIDemoBuilder {
     addEditorProperty(editorPanel, "BLOB:", download, sizer);
 
     UiImage icon = null;
-    try {
-      // TODO add icon as resource and load it this way!
-      String iconPath = UIDemoBuilder.class.getPackage().getName().replace('.', '/') + "/icon.png";
-      URL iconUrl = Thread.currentThread().getContextClassLoader().getResource(iconPath);
-      icon = factory.createPicture(iconUrl);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    // TODO add icon as resource and load it this way!
+    String iconPath = UIDemoBuilder.class.getPackage().getName().replace('.', '/') + "/icon.png";
+    icon = factory.createImage("src/main/resources/" + iconPath);
 
     UiDateBox dateEditor = factory.createDateEditor();
     addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
