@@ -7,8 +7,8 @@ import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMySpinnerAccess;
 
@@ -36,7 +36,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param listModel is the model for the elements to select.
    */
-  public UISpinBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UiListMvcModel<E> listModel) {
+  public UISpinBoxImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, UiListMvcModel<E> listModel) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncMySpinnerAccess(uiFactory, SWT.NONE, listModel);

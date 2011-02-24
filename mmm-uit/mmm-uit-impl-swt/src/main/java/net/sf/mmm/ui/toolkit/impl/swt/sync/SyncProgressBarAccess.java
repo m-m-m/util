@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.ProgressBar;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -56,7 +56,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        progress-bar.
    */
-  public SyncProgressBarAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncProgressBarAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.progressBar = null;

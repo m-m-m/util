@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.FileDialog;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -49,7 +49,7 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        widget.
    */
-  public SyncFileDialogAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncFileDialogAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.fileDialog = null;

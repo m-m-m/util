@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -43,7 +43,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        sash-form.
    */
-  public SyncSashFormAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncSashFormAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     this(uiFactory, swtStyle, null);
   }
@@ -57,7 +57,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
    *        sash-form.
    * @param swtSashForm is the widget to access.
    */
-  public SyncSashFormAccess(UIFactorySwt uiFactory, int swtStyle, SashForm swtSashForm) {
+  public SyncSashFormAccess(UiFactorySwt uiFactory, int swtStyle, SashForm swtSashForm) {
 
     super(uiFactory, swtStyle);
     this.sashForm = swtSashForm;

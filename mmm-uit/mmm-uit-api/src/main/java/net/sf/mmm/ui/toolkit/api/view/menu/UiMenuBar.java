@@ -10,8 +10,8 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 /**
  * This is the interface for a menu-bar. It represents a bar of pull down
  * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenu menus} of a
- * {@link net.sf.mmm.ui.toolkit.api.window.UiWindow window}.<br>
- * Use {@link net.sf.mmm.ui.toolkit.api.window.UiWindow#getMenuBar()} to
+ * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow window}.<br>
+ * Use {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow#getMenuBar()} to
  * "create" a menu-bar.
  * 
  * TODO: Is the menu bar no widget? or at least an element?

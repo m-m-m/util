@@ -4,10 +4,10 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 
 /**
  * This is a test runner that tests the various UIFactorySwing implementations.

@@ -7,7 +7,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -53,7 +53,7 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
    * @param swtStyle is the
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
    */
-  public SyncScrolledCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncScrolledCompositeAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     this(uiFactory, swtStyle, null);
   }
@@ -67,7 +67,7 @@ public class SyncScrolledCompositeAccess extends AbstractSyncCompositeAccess {
    *        composite.
    * @param swtScrolledComposite is the scrolled composite to access.
    */
-  public SyncScrolledCompositeAccess(UIFactorySwt uiFactory, int swtStyle,
+  public SyncScrolledCompositeAccess(UiFactorySwt uiFactory, int swtStyle,
       ScrolledComposite swtScrolledComposite) {
 
     super(uiFactory, swtStyle);

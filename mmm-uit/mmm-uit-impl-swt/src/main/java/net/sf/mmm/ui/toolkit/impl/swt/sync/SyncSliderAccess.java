@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Slider;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -59,7 +59,7 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        slider.
    */
-  public SyncSliderAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncSliderAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.slider = null;

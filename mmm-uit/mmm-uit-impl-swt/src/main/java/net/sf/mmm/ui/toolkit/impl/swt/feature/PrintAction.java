@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 
 /**
  * This is the implementation of the
@@ -28,7 +28,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
 public class PrintAction extends AbstractAction implements UIActionListener {
 
   /** the component to be printed */
-  private final AbstractUIComponent component;
+  private final AbstractUiElement component;
 
   /**
    * The constructor.
@@ -37,7 +37,7 @@ public class PrintAction extends AbstractAction implements UIActionListener {
    * @param actionName is the {@link UiAction#getName() name} of the print action.
    * @param jobName is the name of the print job.
    */
-  public PrintAction(AbstractUIComponent printComponent, String actionName, String jobName) {
+  public PrintAction(AbstractUiElement printComponent, String actionName, String jobName) {
 
     super(actionName);
     setId(jobName);

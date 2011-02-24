@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
-import net.sf.mmm.ui.toolkit.base.composite.AbstractDecoratingLayoutManager;
-import net.sf.mmm.ui.toolkit.base.composite.Size;
+import net.sf.mmm.ui.toolkit.base.view.composite.AbstractDecoratingLayoutManager;
+import net.sf.mmm.ui.toolkit.base.view.composite.Size;
 
 /**
  * This is the layout-manager that organizes the layout for

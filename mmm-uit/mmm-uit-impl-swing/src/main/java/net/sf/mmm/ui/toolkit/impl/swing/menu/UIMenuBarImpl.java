@@ -11,7 +11,7 @@ import javax.swing.JMenuBar;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
-import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
+import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -32,7 +32,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param jMenuBar is the swing menu bar to wrap.
    */
-  public UIMenuBarImpl(UIFactorySwing uiFactory, AbstractUIWindow parentObject, JMenuBar jMenuBar) {
+  public UIMenuBarImpl(UIFactorySwing uiFactory, AbstractUiWindow parentObject, JMenuBar jMenuBar) {
 
     super(uiFactory, parentObject);
     this.menuBar = jMenuBar;

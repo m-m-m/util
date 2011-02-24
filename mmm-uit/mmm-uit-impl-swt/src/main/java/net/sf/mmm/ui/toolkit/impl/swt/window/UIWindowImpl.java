@@ -11,10 +11,10 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
+import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
+import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
 import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.menu.UIMenuBarImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncShellAccess;
 
@@ -25,10 +25,10 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncShellAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UIWindowImpl extends AbstractUIWindow {
+public abstract class UIWindowImpl extends AbstractUiWindow {
 
   /** the ui factory */
-  private final UIFactorySwt factory;
+  private final UiFactorySwt factory;
 
   /** the SWT shell (window) */
   private Shell shell;
@@ -54,7 +54,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizeable() resizeable}.
    */
-  public UIWindowImpl(final UIFactorySwt uiFactory, final UIWindowImpl parent, int defaultStyle,
+  public UIWindowImpl(final UiFactorySwt uiFactory, final UIWindowImpl parent, int defaultStyle,
       boolean modal, boolean resizeable) {
 
     super(uiFactory, parent);
@@ -89,7 +89,7 @@ public abstract class UIWindowImpl extends AbstractUIWindow {
    * {@inheritDoc}
    */
   @Override
-  public UIFactorySwt getFactory() {
+  public UiFactorySwt getFactory() {
 
     return this.factory;
   }

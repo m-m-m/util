@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Widget;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT
@@ -39,7 +39,7 @@ public abstract class AbstractSyncCompositeAccess extends AbstractSyncControlAcc
    * @param uiFactory is used to do the synchronization.
    * @param swtStyle is the {@link Widget#getStyle() style} of the composite.
    */
-  public AbstractSyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncCompositeAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
   }

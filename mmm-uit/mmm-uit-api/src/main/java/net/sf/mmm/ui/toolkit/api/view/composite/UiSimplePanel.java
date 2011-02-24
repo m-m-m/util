@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
  * that can dynamically aggregate multiple other {@link UiElement}s. According
  * to the {@link #getOrientation() orientation} the {@link #getChild(int)
  * children} are placed
- * {@link net.sf.mmm.ui.toolkit.api.types.Orientation#HORIZONTAL} or
- * {@link net.sf.mmm.ui.toolkit.api.types.Orientation#VERTICAL}.<br>
+ * {@link net.sf.mmm.ui.toolkit.api.common.Orientation#HORIZONTAL} or
+ * {@link net.sf.mmm.ui.toolkit.api.common.Orientation#VERTICAL}.<br>
  * 
  * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  *        This should actually be bound to {@link UiElement}. However as we

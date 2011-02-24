@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Composite;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -25,7 +25,7 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
    * @param swtStyle is the
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
    */
-  public SyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncCompositeAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     this(uiFactory, swtStyle, null);
   }
@@ -39,7 +39,7 @@ public class SyncCompositeAccess extends AbstractSyncCompositeAccess {
    *        composite.
    * @param swtComposite is the composite to access.
    */
-  public SyncCompositeAccess(UIFactorySwt uiFactory, int swtStyle, Composite swtComposite) {
+  public SyncCompositeAccess(UiFactorySwt uiFactory, int swtStyle, Composite swtComposite) {
 
     super(uiFactory, swtStyle);
     this.composite = swtComposite;

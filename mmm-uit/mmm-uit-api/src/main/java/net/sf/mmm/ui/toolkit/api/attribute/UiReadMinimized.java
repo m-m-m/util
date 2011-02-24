@@ -7,7 +7,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * This interface gives read access to the {@link #isMinimized() minimized}
  * state of an {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
- * @see net.sf.mmm.ui.toolkit.api.window.UiWindow
+ * @see net.sf.mmm.ui.toolkit.api.view.window.UiWindow
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

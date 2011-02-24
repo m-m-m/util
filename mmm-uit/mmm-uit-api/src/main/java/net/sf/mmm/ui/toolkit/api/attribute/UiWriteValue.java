@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This interface gives read and write access to the text of an
- * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
+ * {@link net.sf.mmm.ui.toolkit.api.UiObject}.
  * 
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

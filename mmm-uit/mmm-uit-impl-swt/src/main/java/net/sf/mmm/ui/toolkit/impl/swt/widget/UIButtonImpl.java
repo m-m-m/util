@@ -8,9 +8,9 @@ import org.eclipse.swt.SWT;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UIPictureImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiImageImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
 
 /**
@@ -30,7 +30,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   private final SyncButtonAccess syncAccess;
 
   /** the icon */
-  private UIPictureImpl icon;
+  private UiImageImpl icon;
 
   /**
    * The constructor.
@@ -39,11 +39,11 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param buttonStyle determines the style of the button.
    */
-  public UIButtonImpl(UIFactorySwt uiFactory, UISwtNode parentObject, ButtonStyle buttonStyle) {
+  public UIButtonImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, ButtonStyle buttonStyle) {
 
     super(uiFactory, parentObject);
     this.style = buttonStyle;
-    int swtStyle = UIFactorySwt.convertButtonStyle(buttonStyle);
+    int swtStyle = UiFactorySwt.convertButtonStyle(buttonStyle);
     this.syncAccess = new SyncButtonAccess(uiFactory, swtStyle);
     this.icon = null;
   }
@@ -109,7 +109,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * {@inheritDoc}
    */
-  public UIPictureImpl getImage() {
+  public UiImageImpl getImage() {
 
     return this.icon;
   }
@@ -119,7 +119,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public void setImage(UiImage newIcon) {
 
-    this.icon = (UIPictureImpl) newIcon;
+    this.icon = (UiImageImpl) newIcon;
     if (this.icon == null) {
       this.syncAccess.setImage(null);
     } else {

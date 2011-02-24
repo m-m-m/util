@@ -6,13 +6,13 @@ package net.sf.mmm.ui.toolkit.api;
 import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
@@ -32,8 +32,8 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 
 /**
  * This is the interface for the UI factory. It is used to create the parts of
@@ -51,7 +51,7 @@ public interface UiFactory extends UiWriteDisposed {
    * 
    * @return the locale of this factory.
    */
-  Locale getLocale();
+  // Locale getLocale();
 
   /**
    * This method sets the locale of this factory. This will cause a
@@ -63,7 +63,7 @@ public interface UiFactory extends UiWriteDisposed {
    * 
    * @param locale is the locale to set.
    */
-  void setLocale(Locale locale);
+  // void setLocale(Locale locale);
 
   /**
    * This method gets the orientation of the users script. This is taken into
@@ -457,10 +457,10 @@ public interface UiFactory extends UiWriteDisposed {
   /**
    * This method creates a picture.
    * 
-   * @param imageUrl is the URL pointing to the according image data.
+   * @param fileAccess is the URL pointing to the according image data.
    * @return the picture object for the image at the given URL.
    */
-  UiImage createImage(String imageUrl);
+  UiImage createImage(UiFileAccess fileAccess);
 
   /**
    * This method creates an action that prints the given component if its

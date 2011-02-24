@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuItemAccess;
 
 /**
@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuItemAccess;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIMenuItemImpl extends UISwtNode implements UiMenuItem {
+public class UIMenuItemImpl extends UiSwtNode implements UiMenuItem {
 
   /** the SWT menu item */
   private final MenuItem menuItem;
@@ -40,11 +40,11 @@ public class UIMenuItemImpl extends UISwtNode implements UiMenuItem {
    *        behaves.
    * @param item is the actual SWT menu-item.
    */
-  public UIMenuItemImpl(UIFactorySwt uiFactory, UIMenuImpl parentObject, String text,
+  public UIMenuItemImpl(UiFactorySwt uiFactory, UIMenuImpl parentObject, String text,
       ButtonStyle itemStyle, MenuItem item) {
 
     super(uiFactory, parentObject);
-    int swtStyle = UIFactorySwt.convertButtonStyleForMenuItem(itemStyle);
+    int swtStyle = UiFactorySwt.convertButtonStyleForMenuItem(itemStyle);
     this.syncAccess = new SyncMenuItemAccess(uiFactory, swtStyle, item, text);
     this.style = itemStyle;
     this.menuItem = item;

@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.window;
 
-import net.sf.mmm.ui.toolkit.api.window.UiDialog;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 import org.eclipse.swt.SWT;
 
@@ -32,7 +32,7 @@ public class UIDialogImpl extends UIWindowImpl implements UiDialog {
    * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizeable() resizeable}.
    */
-  public UIDialogImpl(UIFactorySwt uiFactory, UIWindowImpl parentObject, boolean modal,
+  public UIDialogImpl(UiFactorySwt uiFactory, UIWindowImpl parentObject, boolean modal,
       boolean resizeable) {
 
     super(uiFactory, parentObject, DEFAULT_STYLE, modal, resizeable);

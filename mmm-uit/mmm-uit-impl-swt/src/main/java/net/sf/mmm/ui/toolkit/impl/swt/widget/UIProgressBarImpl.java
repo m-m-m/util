@@ -5,10 +5,10 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncProgressBarAccess;
 
 /**
@@ -32,7 +32,7 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UiProgressBar
    * @param indeterminate if <code>true</code> the progress-bar will be
    *        {@link #isIndeterminate() indeterminate}.
    */
-  public UIProgressBarImpl(UIFactorySwt uiFactory, UISwtNode parentObject, Orientation orientation,
+  public UIProgressBarImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, Orientation orientation,
       boolean indeterminate) {
 
     super(uiFactory, parentObject);

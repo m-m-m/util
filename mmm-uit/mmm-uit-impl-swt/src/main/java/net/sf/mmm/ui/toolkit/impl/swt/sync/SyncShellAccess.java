@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on SWT
@@ -81,7 +81,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    *        sash-form.
    * @param swtShell is the {@link Shell} to access synchronous.
    */
-  public SyncShellAccess(UIFactorySwt uiFactory, int swtStyle, Shell swtShell) {
+  public SyncShellAccess(UiFactorySwt uiFactory, int swtStyle, Shell swtShell) {
 
     super(uiFactory, swtStyle);
     this.shell = swtShell;

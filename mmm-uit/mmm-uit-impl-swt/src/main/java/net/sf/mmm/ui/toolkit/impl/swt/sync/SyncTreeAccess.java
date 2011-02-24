@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -44,7 +44,7 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
    * @param uiFactory is used to do the synchronization.
    * @param swtStyle is the {@link Widget#getStyle() style} of the tree.
    */
-  public SyncTreeAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncTreeAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.tree = null;

@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTextAccess;
 
@@ -29,7 +29,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
    * @param uiFactory is the UIFactorySwt instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UITextFieldImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
+  public UITextFieldImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
     super(uiFactory, parentObject);
     int style = SWT.DEFAULT;

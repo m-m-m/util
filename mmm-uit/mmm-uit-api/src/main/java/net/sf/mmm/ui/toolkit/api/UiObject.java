@@ -7,8 +7,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyle;
 
 /**
- * This is the interface for a UI object. Any object other than the UI factory
- * and the UI service should extend/implement this interface. <br>
+ * This is the abstract interface for a UI object. A UI object is any object of
+ * the user interface within this UI toolkit. <br>
  * An instance of this interface may be casted to a sub-interface of this API
  * (net.sf.mmm.ui.api.*) according to the result of the
  * {@link UiObject#getType()} method.
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiObject extends UiReadId, UiReadStyle {
+public abstract interface UiObject extends UiReadId, UiReadStyle {
 
   /**
    * This method gets the UI factory that created this component.
@@ -49,7 +49,7 @@ public interface UiObject extends UiReadId, UiReadStyle {
    * This method determines if this component is a window.
    * 
    * @return <code>true</code> if this component is a
-   *         {@link net.sf.mmm.ui.toolkit.api.window.UiWindow window},
+   *         {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow window},
    *         <code>false</code> otherwise.
    */
   boolean isWindow();

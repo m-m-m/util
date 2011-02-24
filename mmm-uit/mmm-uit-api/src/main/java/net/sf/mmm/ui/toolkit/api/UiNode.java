@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.api.window.UiWindow;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 
 /**
  * This is the abstract interface for a node of the UI. A node is a UI object

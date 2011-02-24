@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT
@@ -53,7 +53,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        widget.
    */
-  public AbstractSyncObjectAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncObjectAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super();
     this.display = uiFactory.getDisplay();

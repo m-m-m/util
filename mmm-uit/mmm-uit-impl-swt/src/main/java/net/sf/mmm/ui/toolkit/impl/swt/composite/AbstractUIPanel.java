@@ -9,9 +9,9 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiMultiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 
 /**
  * This class is an abstract base implementation of the {@link UiSimplePanel}
@@ -21,11 +21,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUIComponent> implements
-    UiMultiComposite<AbstractUIComponent> {
+public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUiElement> implements
+    UiMultiComposite<AbstractUiElement> {
 
   /** the component list */
-  protected final List<AbstractUIComponent> components;
+  protected final List<AbstractUiElement> components;
 
   /**
    * The constructor.
@@ -36,10 +36,10 @@ public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUIComp
    * @param borderTitle is the title of the border or <code>null</code> for NO
    *        border.
    */
-  public AbstractUIPanel(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle) {
+  public AbstractUIPanel(UiFactorySwt uiFactory, UiSwtNode parentObject, String borderTitle) {
 
     super(uiFactory, parentObject, borderTitle);
-    this.components = new ArrayList<AbstractUIComponent>();
+    this.components = new ArrayList<AbstractUiElement>();
   }
 
   /**
@@ -53,7 +53,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUIComp
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent getChild(int index) {
+  public AbstractUiElement getChild(int index) {
 
     return this.components.get(index);
   }
@@ -61,9 +61,9 @@ public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUIComp
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent removeChild(int index) {
+  public AbstractUiElement removeChild(int index) {
 
-    AbstractUIComponent component = this.components.remove(index);
+    AbstractUiElement component = this.components.remove(index);
     component.setParent(null);
     return component;
   }
@@ -71,7 +71,7 @@ public abstract class AbstractUIPanel extends AbstractUIComposite<AbstractUIComp
   /**
    * {@inheritDoc}
    */
-  public boolean removeChild(AbstractUIComponent component) {
+  public boolean removeChild(AbstractUiElement component) {
 
     // return this.components.remove(component);
     int index = this.components.indexOf(component);

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -63,7 +63,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        button.
    */
-  public SyncButtonAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncButtonAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.button = null;

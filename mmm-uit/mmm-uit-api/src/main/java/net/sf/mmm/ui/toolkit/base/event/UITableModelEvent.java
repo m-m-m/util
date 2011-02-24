@@ -4,23 +4,20 @@
 package net.sf.mmm.ui.toolkit.base.event;
 
 import net.sf.mmm.ui.toolkit.api.event.UIModelEvent;
-import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class represents the event sent by the
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel table-model} to its
- * {@link net.sf.mmm.ui.toolkit.api.event.UITableModelListener listeners} in
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel table-model} to
+ * its {@link net.sf.mmm.ui.toolkit.api.event.UITableModelListener listeners} in
  * order to notify about changes of the
  * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTable table}.<br>
- * Be aware that only
- * {@link net.sf.mmm.util.event.api.ChangeType#UPDATE update} events may apply
- * to incomplete columns (single column but
+ * Be aware that only {@link net.sf.mmm.util.event.api.ChangeType#UPDATE update}
+ * events may apply to incomplete columns (single column but
  * {@link #getRowStartIndex() row-start} is not <code>0</code> or
  * {@link #getRowEndIndex() row-end} is not
  * <code>{@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel#getRowCount() rowCount} -
- * 1</code>).
- * Other events must apply to complete column(s) or row(s).
+ * 1</code>). Other events must apply to complete column(s) or row(s).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -57,10 +54,10 @@ public class UITableModelEvent extends UIModelEvent {
    * 
    * @see net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel#getRowCount()
    * 
-   * @return the start index of the rows that changed or <code>-1</code> if
-   *         one or multiple
-   *         {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel#getColumnName(int) column-name}(s)
-   *         changed.
+   * @return the start index of the rows that changed or <code>-1</code> if one
+   *         or multiple
+   *         {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel#getColumnName(int)
+   *         column-name}(s) changed.
    */
   public int getRowStartIndex() {
 

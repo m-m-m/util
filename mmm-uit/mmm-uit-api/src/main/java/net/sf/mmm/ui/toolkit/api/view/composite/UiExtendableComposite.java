@@ -9,8 +9,7 @@ import net.sf.mmm.ui.toolkit.api.UiElement;
  * This is the abstract interface for a panel. A panel is a {@link UiComposite}
  * that can dynamically aggregate multiple other {@link UiElement}s. <br>
  * 
- * @param <E> is the generic type of the {@link #addChild(UiElement)
- *        child-elements}.
+ * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

@@ -3,17 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
-import java.io.File;
-
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.Alignment;
+import net.sf.mmm.ui.toolkit.api.common.Filling;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.types.Alignment;
-import net.sf.mmm.ui.toolkit.api.types.Filling;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
@@ -36,10 +34,10 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UiWindow;
+import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.feature.MaximumSizer;
-import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
+import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeNode;
@@ -150,14 +148,14 @@ public class UIDemoBuilder {
     addEditorProperty(editorPanel, "Progress:", progressBar, sizer);
 
     // TODO: this is a stupid and unix specific example!
-    SimpleFileAccess access = new SimpleFileAccess(new File("/etc/mtab"));
+    UiFileAccessSimple access = new UiFileAccessSimple("/etc/mtab");
     UiFileDownload download = factory.createFileDownload(access);
     addEditorProperty(editorPanel, "BLOB:", download, sizer);
 
     UiImage icon = null;
     // TODO add icon as resource and load it this way!
     String iconPath = UIDemoBuilder.class.getPackage().getName().replace('.', '/') + "/icon.png";
-    icon = factory.createImage("src/main/resources/" + iconPath);
+    icon = factory.createImage(new UiFileAccessSimple("src/main/resources/" + iconPath));
 
     UiDateBox dateEditor = factory.createDateEditor();
     addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
@@ -286,7 +284,7 @@ public class UIDemoBuilder {
 
   }
 
-  public static void createMenus(final UiWindow frame) {
+  public static void createMenus(final UiFrame frame) {
 
     UiMenuBar menubar = frame.getMenuBar();
     // file menu

@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -43,7 +43,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    * @param swtStyle is the
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    */
-  public SyncTabItemAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncTabItemAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     this(uiFactory, swtStyle, -1);
   }
@@ -56,7 +56,7 @@ public class SyncTabItemAccess extends AbstractSyncItemAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    * @param index is the index position of the item to add.
    */
-  public SyncTabItemAccess(UIFactorySwt uiFactory, int swtStyle, int index) {
+  public SyncTabItemAccess(UiFactorySwt uiFactory, int swtStyle, int index) {
 
     super(uiFactory, swtStyle);
     this.tabItem = null;

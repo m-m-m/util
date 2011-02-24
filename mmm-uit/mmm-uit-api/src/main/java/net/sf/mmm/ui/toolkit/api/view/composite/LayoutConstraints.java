@@ -4,9 +4,9 @@
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.api.types.Alignment;
-import net.sf.mmm.ui.toolkit.api.types.Filling;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Alignment;
+import net.sf.mmm.ui.toolkit.api.common.Filling;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 
 /**
  * This class is a container for the layout constraints of a

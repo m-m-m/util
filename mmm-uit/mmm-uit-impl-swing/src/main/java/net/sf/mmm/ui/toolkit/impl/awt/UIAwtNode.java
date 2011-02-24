@@ -12,7 +12,7 @@ import javax.swing.event.ChangeListener;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.AbstractUINode;
+import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
 
 /**
  * This is the abstract base implementation of the
@@ -22,7 +22,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUINode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UIAwtNode extends AbstractUINode {
+public abstract class UIAwtNode extends AbstractUiNode {
 
   /**
    * The constructor.

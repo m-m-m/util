@@ -15,13 +15,13 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
-import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
+import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload} interface using Swing
- * as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload} interface using
+ * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -43,7 +43,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
           .showOpenDialog(UIFileUploadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
         File uploadFile = UIFileUploadImpl.this.fileChooser.getSelectedFile();
-        UIFileUploadImpl.this.access = new SimpleFileAccess(uploadFile);
+        UIFileUploadImpl.this.access = new UiFileAccessSimple(uploadFile.getAbsolutePath());
         invoke(ActionType.SELECT);
       }
     }
@@ -63,7 +63,8 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public UIFileUploadImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 

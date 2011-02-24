@@ -7,8 +7,8 @@ import javax.swing.JComponent;
 import javax.swing.JSlider;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SlideBarModelAdapter;

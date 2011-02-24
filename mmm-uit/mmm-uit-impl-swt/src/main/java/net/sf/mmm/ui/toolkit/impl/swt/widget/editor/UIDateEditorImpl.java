@@ -9,8 +9,8 @@ import java.util.Locale;
 import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.widget.AbstractUIWidget;
@@ -33,7 +33,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
    * @param uiFactory
    * @param parentObject
    */
-  public UIDateEditorImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
+  public UIDateEditorImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.DEFAULT);

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.Group;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -35,7 +35,7 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        group.
    */
-  public SyncGroupAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncGroupAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     this(uiFactory, swtStyle, null);
   }
@@ -49,7 +49,7 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
    *        group.
    * @param swtGroup is the group to access.
    */
-  public SyncGroupAccess(UIFactorySwt uiFactory, int swtStyle, Group swtGroup) {
+  public SyncGroupAccess(UiFactorySwt uiFactory, int swtStyle, Group swtGroup) {
 
     super(uiFactory, swtStyle);
     this.group = swtGroup;

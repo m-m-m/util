@@ -5,15 +5,14 @@ package net.sf.mmm.ui.toolkit.base;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
-import net.sf.mmm.ui.toolkit.api.types.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
@@ -27,8 +26,8 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.base.window.AbstractUIWindow;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
 
 /**
  * This is the abstract base implementation of the
@@ -43,7 +42,7 @@ public abstract class AbstractUiFactory implements UiFactory {
   private boolean disposed;
 
   /** @see #getLocale() */
-  private Locale locale;
+  // private Locale locale;
 
   /** @see #getScriptOrientation() */
   private ScriptOrientation scriptOrientation;
@@ -52,7 +51,7 @@ public abstract class AbstractUiFactory implements UiFactory {
   private ScriptOrientation designOrientation;
 
   /** The list of all windows that have been created by this factory */
-  private List<AbstractUIWindow> windows;
+  private List<AbstractUiWindow> windows;
 
   /**
    * The constructor.
@@ -61,9 +60,9 @@ public abstract class AbstractUiFactory implements UiFactory {
 
     super();
     // TODO: do we need a thread-safe implementation here?
-    this.windows = new ArrayList<AbstractUIWindow>();
+    this.windows = new ArrayList<AbstractUiWindow>();
     this.disposed = false;
-    this.locale = Locale.getDefault();
+    // this.locale = Locale.getDefault();
     // TODO: set from default locale!
     this.scriptOrientation = ScriptOrientation.LEFT_TO_RIGHT;
     this.designOrientation = ScriptOrientation.LEFT_TO_RIGHT;
@@ -72,19 +71,19 @@ public abstract class AbstractUiFactory implements UiFactory {
   /**
    * {@inheritDoc}
    */
-  public Locale getLocale() {
-
-    return this.locale;
-  }
+  // public Locale getLocale() {
+  //
+  // return this.locale;
+  // }
 
   /**
    * {@inheritDoc}
    */
-  public void setLocale(Locale locale) {
-
-    this.locale = locale;
-    // TODO: update script-orientation from resource-bundle
-  }
+  // public void setLocale(Locale locale) {
+  //
+  // this.locale = locale;
+  // // TODO: update script-orientation from resource-bundle
+  // }
 
   /**
    * {@inheritDoc}
@@ -152,20 +151,21 @@ public abstract class AbstractUiFactory implements UiFactory {
   }
 
   /**
-   * This method refreshes all {@link net.sf.mmm.ui.toolkit.api.window.UiWindow
-   * windows} created by this factory. The refresh of a window recursively
-   * refreshes all {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in
-   * the window. This way all visible GUI elements are refreshed.
+   * This method refreshes all
+   * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow windows} created by
+   * this factory. The refresh of a window recursively refreshes all
+   * {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in the window.
+   * This way all visible GUI elements are refreshed.
    * 
    * @param event is the event with details about the refresh.
    */
   public void refresh(UIRefreshEvent event) {
 
-    AbstractUIWindow[] currentWindows;
+    AbstractUiWindow[] currentWindows;
     synchronized (this.windows) {
-      currentWindows = this.windows.toArray(new AbstractUIWindow[this.windows.size()]);
+      currentWindows = this.windows.toArray(new AbstractUiWindow[this.windows.size()]);
     }
-    for (AbstractUIWindow window : currentWindows) {
+    for (AbstractUiWindow window : currentWindows) {
       window.refresh(event);
     }
   }
@@ -175,7 +175,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    * 
    * @param window is the window to add.
    */
-  public void addWindow(AbstractUIWindow window) {
+  public void addWindow(AbstractUiWindow window) {
 
     synchronized (this.windows) {
       this.windows.add(window);
@@ -188,7 +188,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    * 
    * @param window is the window to remove.
    */
-  public void removeWindow(AbstractUIWindow window) {
+  public void removeWindow(AbstractUiWindow window) {
 
     synchronized (this.windows) {
       this.windows.remove(window);

@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncFileDialogAccess;
@@ -64,7 +64,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
    *        ).
    * @param access gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UIFactorySwt uiFactory, UISwtNode parentObject, UiFileAccess access) {
+  public UIFileDownloadImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, UiFileAccess access) {
 
     super(uiFactory, parentObject);
     this.uiFileAccess = access;
@@ -72,7 +72,8 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
     this.syncAccess.setText("Save");
     this.syncAccess.addListener(SWT.Selection, new SelectionListener());
     this.syncDialgAccess = new SyncFileDialogAccess(uiFactory, SWT.SAVE);
-    this.syncDialgAccess.setFilename(this.uiFileAccess.getFilename());
+    // TODO: filename
+    this.syncDialgAccess.setFilename(this.uiFileAccess.getUrl());
     // this.fileChooser = new FileDialog(getSwtParentShell(), SWT.SAVE);
     // this.fileChooser.setFileName(this.access.getFilename());
   }

@@ -13,10 +13,10 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
  * appear either side-by-side (if the
  * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()
  * orientation} is
- * {@link net.sf.mmm.ui.toolkit.api.types.Orientation#HORIZONTAL}) or
+ * {@link net.sf.mmm.ui.toolkit.api.common.Orientation#HORIZONTAL}) or
  * top-to-bottom (if the
  * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()
- * orientation} is {@link net.sf.mmm.ui.toolkit.api.types.Orientation#VERTICAL}
+ * orientation} is {@link net.sf.mmm.ui.toolkit.api.common.Orientation#VERTICAL}
  * ).<br/>
  * The two components are separated by a split-bar that is orthogonal to the
  * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()

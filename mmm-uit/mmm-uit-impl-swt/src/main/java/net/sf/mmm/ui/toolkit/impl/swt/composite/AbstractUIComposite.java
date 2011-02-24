@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncGroupAccess;
 
@@ -22,8 +22,8 @@ import org.eclipse.swt.layout.FillLayout;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIComposite<E extends AbstractUIComponent> extends
-    AbstractUIComponent implements UiComposite<E> {
+public abstract class AbstractUIComposite<E extends AbstractUiElement> extends AbstractUiElement
+    implements UiComposite<E> {
 
   /** gives access to the {@link org.eclipse.swt.widgets.Group} */
   private final SyncGroupAccess syncGroupAccess;
@@ -37,7 +37,7 @@ public abstract class AbstractUIComposite<E extends AbstractUIComponent> extends
    * @param borderTitle is the title of the border or <code>null</code> for NO
    *        border.
    */
-  public AbstractUIComposite(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle) {
+  public AbstractUIComposite(UiFactorySwt uiFactory, UiSwtNode parentObject, String borderTitle) {
 
     super(uiFactory, parentObject);
     if (borderTitle == null) {
@@ -108,7 +108,7 @@ public abstract class AbstractUIComposite<E extends AbstractUIComponent> extends
 
     int count = getChildCount();
     for (int i = 0; i < count; i++) {
-      AbstractUIComponent child = getChild(i);
+      AbstractUiElement child = getChild(i);
       if (child != null) {
         child.create();
       }
@@ -148,7 +148,7 @@ public abstract class AbstractUIComposite<E extends AbstractUIComponent> extends
     super.refresh(event);
     int componentCount = getChildCount();
     for (int i = 0; i < componentCount; i++) {
-      AbstractUIComponent component = getChild(i);
+      AbstractUiElement component = getChild(i);
       component.refresh(event);
     }
   }

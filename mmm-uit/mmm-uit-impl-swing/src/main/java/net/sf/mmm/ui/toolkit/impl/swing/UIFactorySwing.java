@@ -9,12 +9,12 @@ import java.awt.GraphicsEnvironment;
 
 import net.sf.mmm.ui.toolkit.api.UIDisplay;
 import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
@@ -34,16 +34,16 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.impl.awt.UIDeviceImpl;
-import net.sf.mmm.ui.toolkit.impl.awt.UIDisplayImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UIScrollPanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UISlicePanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UISplitPanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.composite.UITabbedPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.awt.UiDeviceImpl;
+import net.sf.mmm.ui.toolkit.impl.awt.UiDisplayImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.feature.PrintAction;
+import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UIScrollPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UISlicePanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UISplitPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UITabbedPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.widget.UIButtonImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.widget.UIComboBoxImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.widget.UIFileDownloadImpl;
@@ -70,7 +70,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
 public class UIFactorySwing extends AbstractUiFactory {
 
   /** the default display */
-  private UIDisplayImpl display;
+  private UiDisplayImpl display;
 
   /**
    * The dummy constructor.
@@ -84,8 +84,8 @@ public class UIFactorySwing extends AbstractUiFactory {
     super();
     GraphicsDevice defaultDevice = GraphicsEnvironment.getLocalGraphicsEnvironment()
         .getDefaultScreenDevice();
-    UIDeviceImpl uiDevice = new UIDeviceImpl(defaultDevice);
-    this.display = new UIDisplayImpl(this, uiDevice, defaultDevice.getDefaultConfiguration());
+    UiDeviceImpl uiDevice = new UiDeviceImpl(defaultDevice);
+    this.display = new UiDisplayImpl(this, uiDevice, defaultDevice.getDefaultConfiguration());
   }
 
   /**
@@ -95,10 +95,10 @@ public class UIFactorySwing extends AbstractUiFactory {
    * @param graphicConfiguration is the graphics configuration for the display
    *        to represent.
    */
-  public UIFactorySwing(UIDeviceImpl uiDevice, GraphicsConfiguration graphicConfiguration) {
+  public UIFactorySwing(UiDeviceImpl uiDevice, GraphicsConfiguration graphicConfiguration) {
 
     super();
-    this.display = new UIDisplayImpl(this, uiDevice, graphicConfiguration);
+    this.display = new UiDisplayImpl(this, uiDevice, graphicConfiguration);
   }
 
   /**
@@ -261,9 +261,9 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiImage createImage(String imageUrl) {
+  public UiImage createImage(UiFileAccess fileAccess) {
 
-    return new UIPictureImpl(this, imageUrl);
+    return new UiImageImpl(this, fileAccess);
   }
 
   /**

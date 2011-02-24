@@ -7,9 +7,9 @@ import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UIPictureImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiImageImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncLabelAccess;
 
@@ -27,7 +27,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   private final SyncLabelAccess syncAccess;
 
   /** the icon */
-  private UIPictureImpl icon;
+  private UiImageImpl icon;
 
   /**
    * The constructor.
@@ -35,7 +35,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
    * @param uiFactory is the UIFactorySwt instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public UILabelImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
+  public UILabelImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
     super(uiFactory, parentObject);
     int style = SWT.SHADOW_NONE | SWT.LEFT;
@@ -79,7 +79,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public UIPictureImpl getImage() {
+  public UiImageImpl getImage() {
 
     return this.icon;
   }
@@ -89,7 +89,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
    */
   public void setImage(UiImage newIcon) {
 
-    this.icon = (UIPictureImpl) newIcon;
+    this.icon = (UiImageImpl) newIcon;
     if (this.icon == null) {
       this.syncAccess.setImage(null);
     } else {

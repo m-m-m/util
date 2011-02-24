@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
 
 /**
@@ -37,7 +37,7 @@ public class UIMenuImpl extends AbstractUIMenu {
    * @param text is the {@link MenuItem#setText(java.lang.String) text} of the
    *        menu.
    */
-  public UIMenuImpl(UIFactorySwt uiFactory, UiNode parentObject, Menu swtMenu, String text) {
+  public UIMenuImpl(UiFactorySwt uiFactory, UiNode parentObject, Menu swtMenu, String text) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.CASCADE, swtMenu, text);
@@ -60,7 +60,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   protected UiMenuItem createMenuItem(String name, ButtonStyle style) {
 
     MenuItem menuItem = this.syncAccess.createMenuItem(name, style);
-    return new UIMenuItemImpl((UIFactorySwt) getFactory(), this, name, style, menuItem);
+    return new UIMenuItemImpl((UiFactorySwt) getFactory(), this, name, style, menuItem);
   }
 
   /**
@@ -70,7 +70,7 @@ public class UIMenuImpl extends AbstractUIMenu {
   protected UiMenu createSubMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
-    return new UIMenuImpl((UIFactorySwt) getFactory(), this, subMenu, name);
+    return new UIMenuImpl((UiFactorySwt) getFactory(), this, subMenu, name);
   }
 
   /**

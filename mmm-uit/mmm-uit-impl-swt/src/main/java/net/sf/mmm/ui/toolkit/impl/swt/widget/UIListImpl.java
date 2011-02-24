@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.ListModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncListAccess;
 
@@ -39,7 +39,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    *        multiple, else ony one.
    * @param model is the model.
    */
-  public UIListImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean multiSelection,
+  public UIListImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean multiSelection,
       UiListMvcModel<E> model) {
 
     super(uiFactory, parentObject);

@@ -7,8 +7,8 @@ import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.TableModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
 
@@ -37,7 +37,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
    * @param multiSelection - if <code>true</code> the user can select
    *        multiple, else ony one.
    */
-  public UITableImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean multiSelection) {
+  public UITableImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean multiSelection) {
 
     super(uiFactory, parentObject);
     int style;

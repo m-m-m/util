@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import org.eclipse.swt.widgets.MenuItem;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -54,7 +54,7 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
    * @param swtMenuItem is the menu-item to access.
    * @param itemText is the text of the <code>swtMenuItem</code>.
    */
-  public SyncMenuItemAccess(UIFactorySwt uiFactory, int swtStyle, MenuItem swtMenuItem,
+  public SyncMenuItemAccess(UiFactorySwt uiFactory, int swtStyle, MenuItem swtMenuItem,
       String itemText) {
 
     super(uiFactory, swtStyle);

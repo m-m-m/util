@@ -3,9 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.feature;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * This is the interface to access a file (or any arbitrary data).
  * 
@@ -14,22 +11,12 @@ import java.io.InputStream;
 public interface UiFileAccess {
 
   /**
-   * This method gets an input stream used to read the data.
+   * This method gets the href of the identified file. This can be an absolute
+   * URL but may also be a path relative to the base URL of the application.
    * 
-   * @return a new input stream to the data. The stream should be
-   *         {@link InputStream#close() closed} after usage.
-   * @throws IOException if the file (data-source) could not be opened for
-   *         reading.
+   * @return the URL or href.
    */
-  InputStream getFile() throws IOException;
-
-  /**
-   * This method gets the name of the data-file.
-   * 
-   * @return the name of the data-file. This does NOT include a path (only
-   *         basename).
-   */
-  String getFilename();
+  String getUrl();
 
   /**
    * This method gets the size of the data in bytes or <code>-1</code> if the

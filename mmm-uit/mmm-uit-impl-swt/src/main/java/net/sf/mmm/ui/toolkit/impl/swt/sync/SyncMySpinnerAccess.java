@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.custom.MySpinner;
 
 /**
@@ -60,7 +60,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    *        composite.
    * @param listModel is the list model containing the elements of the spinner.
    */
-  public SyncMySpinnerAccess(UIFactorySwt uiFactory, int swtStyle, UiListMvcModel listModel) {
+  public SyncMySpinnerAccess(UiFactorySwt uiFactory, int swtStyle, UiListMvcModel listModel) {
 
     super(uiFactory, swtStyle);
     this.spinner = null;

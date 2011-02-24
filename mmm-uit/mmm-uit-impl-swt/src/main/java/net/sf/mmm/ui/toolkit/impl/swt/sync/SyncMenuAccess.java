@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -67,7 +67,7 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
    * @param swtMenu is the menu to access.
    * @param menuText is the text of the menu.
    */
-  public SyncMenuAccess(UIFactorySwt uiFactory, int swtStyle, Menu swtMenu, String menuText) {
+  public SyncMenuAccess(UiFactorySwt uiFactory, int swtStyle, Menu swtMenu, String menuText) {
 
     super(uiFactory, swtStyle);
     this.menu = swtMenu;
@@ -90,7 +90,7 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
       subMenuItem.setText(this.itemText);
       subMenuItem.setMenu(this.subMenu);
     } else if (operation == OPERATION_CREATE_MENU_ITEM) {
-      int swtStyle = UIFactorySwt.convertButtonStyleForMenuItem(this.buttonStyle);
+      int swtStyle = UiFactorySwt.convertButtonStyleForMenuItem(this.buttonStyle);
       this.menuItem = new MenuItem(this.menu, swtStyle);
       this.menuItem.setText(this.itemText);
     } else if (operation == OPERATION_ADD_SEPARATOR) {

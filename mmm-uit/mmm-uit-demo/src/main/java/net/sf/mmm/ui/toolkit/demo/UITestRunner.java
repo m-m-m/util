@@ -3,17 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
-import java.io.File;
-
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
+import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
@@ -25,12 +22,10 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
-import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
+import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
-import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel;
 import net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel;
 
 /**
@@ -83,14 +78,14 @@ public class UITestRunner {
      * listModel.addElement("is"); UIComboBox comboBox =
      * factory.createComboBox(listModel); UIList list =
      * factory.createList(listModel); listModel.addElement("a");
-     * listModel.addElement("test");
-     *  // list.setEnabled(false); splitPanel.setTopOrLeftComponent(comboBox);
+     * listModel.addElement("test"); // list.setEnabled(false);
+     * splitPanel.setTopOrLeftComponent(comboBox);
      */
     /*
      * UITree tree = factory.createTree(false); DefaultUITreeModel<String>
      * treeModel = new DefaultUITreeModel<String>("root");
-     * treeModel.getRoot().createChildNode("child1"); tree.setModel(treeModel); //
-     * tree.setEnabled(false); splitPanel.setBottomOrRightComponent(tree); //
+     * treeModel.getRoot().createChildNode("child1"); tree.setModel(treeModel);
+     * // tree.setEnabled(false); splitPanel.setBottomOrRightComponent(tree); //
      * splitPanel.setEnabled(false); splitPanel.setDividerPosition(0.5);
      */
     UiScrollPanel scroll = factory.createScrollPanel();
@@ -107,7 +102,7 @@ public class UITestRunner {
     panel.addChild(label);
     UiSlideBar slider = factory.createSlideBar(new NumericUIRangeModel(0, 100));
     panel.addChild(slider);
-    UiFileAccess access = new SimpleFileAccess(new File("/etc/fstab"));
+    UiFileAccess access = new UiFileAccessSimple("/etc/fstab");
     UiFileDownload download = factory.createFileDownload(access);
     panel.addChild(download);
 
@@ -154,7 +149,7 @@ public class UITestRunner {
   public static void main(String[] args) {
 
     // runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
-    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
+    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt());
   }
 
 }

@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Menu;
 
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
 
@@ -30,7 +30,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
    * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param swtMenuBar is the SWT menu bar to wrap.
    */
-  public UIMenuBarImpl(UIFactorySwt uiFactory, UIWindowImpl parentObject, Menu swtMenuBar) {
+  public UIMenuBarImpl(UiFactorySwt uiFactory, UIWindowImpl parentObject, Menu swtMenuBar) {
 
     super(uiFactory, parentObject);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.BAR, swtMenuBar, null);
@@ -43,7 +43,7 @@ public class UIMenuBarImpl extends AbstractUIMenuBar {
   protected UiMenu createMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
-    return new UIMenuImpl((UIFactorySwt) getFactory(), this, subMenu, name);
+    return new UIMenuImpl((UiFactorySwt) getFactory(), this, subMenu, name);
   }
 
 }

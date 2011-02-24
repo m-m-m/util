@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JProgressBar;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.custom.MyProgressBar;

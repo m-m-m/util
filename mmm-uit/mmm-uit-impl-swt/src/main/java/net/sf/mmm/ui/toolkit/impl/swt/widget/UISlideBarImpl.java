@@ -5,11 +5,11 @@ package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import org.eclipse.swt.SWT;
 
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.SlideBarModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
 
@@ -46,13 +46,13 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
    * @param sliderModel is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UIFactorySwt uiFactory, UISwtNode parentObject,
+  public UISlideBarImpl(UiFactorySwt uiFactory, UiSwtNode parentObject,
       Orientation sliderOrientation, UiListMvcModel<E> sliderModel) {
 
     super(uiFactory, parentObject);
     this.orientation = sliderOrientation;
     this.model = sliderModel;
-    int style = UIFactorySwt.convertOrientation(sliderOrientation);
+    int style = UiFactorySwt.convertOrientation(sliderOrientation);
     this.syncAccess = new SyncSliderAccess(uiFactory, style);
     this.syncAccess.setMaximum(this.model.getElementCount());
     this.modelAdapter = new SlideBarModelAdapter(this.syncAccess);

@@ -4,6 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadScrollbarVisibility;
 
 /**
  * This is the interface for a
@@ -19,7 +20,8 @@ import net.sf.mmm.ui.toolkit.api.UiElement;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiScrollPanel<E extends UiElement> extends UiComposite<E> {
+public interface UiScrollPanel<E extends UiElement> extends UiComposite<E>,
+    UiReadScrollbarVisibility {
 
   /** the type of this object */
   String TYPE = "ScrollPanel";

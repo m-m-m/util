@@ -10,11 +10,11 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UiDialog;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
+import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.impl.awt.UIWindowImpl;
+import net.sf.mmm.ui.toolkit.impl.awt.AbstractUiWindowAwt;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UIWindow extends UIWindowImpl {
+public abstract class UIWindow extends AbstractUiWindowAwt {
 
   /**
    * The constructor.

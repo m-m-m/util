@@ -4,10 +4,10 @@
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSashFormAccess;
 
@@ -22,8 +22,8 @@ import org.eclipse.swt.layout.FillLayout;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> implements
-    UiSplitPanel<AbstractUIComponent> {
+public class UISplitPanelImpl extends AbstractUIComposite<AbstractUiElement> implements
+    UiSplitPanel<AbstractUiElement> {
 
   /** the synchronous access to the sash-form */
   private final SyncSashFormAccess syncAccess;
@@ -35,10 +35,10 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
   private final SyncCompositeAccess syncBottomRight;
 
   /** the component top or left */
-  private AbstractUIComponent componentTopOrLeft;
+  private AbstractUiElement componentTopOrLeft;
 
   /** the component bottom or right */
-  private AbstractUIComponent componentBottomOrRight;
+  private AbstractUiElement componentBottomOrRight;
 
   /**
    * The constructor.
@@ -51,7 +51,7 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
    * @param orientation is the orientation of the two child-components in this
    *        split-pane.
    */
-  public UISplitPanelImpl(UIFactorySwt uiFactory, AbstractUIComponent parentObject,
+  public UISplitPanelImpl(UiFactorySwt uiFactory, AbstractUiElement parentObject,
       String borderTitle, Orientation orientation) {
 
     super(uiFactory, parentObject, borderTitle);
@@ -141,7 +141,7 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
     if (this.componentTopOrLeft != null) {
       // TODO
     }
-    this.componentTopOrLeft = (AbstractUIComponent) component;
+    this.componentTopOrLeft = (AbstractUiElement) component;
     this.componentTopOrLeft.getSyncAccess().setParentAccess(this.syncTopLeft);
     this.componentTopOrLeft.setParent(this);
 
@@ -155,7 +155,7 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
     if (this.componentBottomOrRight != null) {
       // TODO
     }
-    this.componentBottomOrRight = (AbstractUIComponent) component;
+    this.componentBottomOrRight = (AbstractUiElement) component;
     this.componentBottomOrRight.getSyncAccess().setParentAccess(this.syncBottomRight);
     this.componentBottomOrRight.setParent(this);
   }
@@ -187,7 +187,7 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent getTopOrLeftComponent() {
+  public AbstractUiElement getTopOrLeftComponent() {
 
     return this.componentTopOrLeft;
   }
@@ -195,7 +195,7 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent getBottomOrRightComponent() {
+  public AbstractUiElement getBottomOrRightComponent() {
 
     return this.componentBottomOrRight;
   }
@@ -221,7 +221,7 @@ public class UISplitPanelImpl extends AbstractUIComposite<AbstractUIComponent> i
   /**
    * {@inheritDoc}
    */
-  public AbstractUIComponent getChild(int index) {
+  public AbstractUiElement getChild(int index) {
 
     if (index == 0) {
       return getTopOrLeftComponent();

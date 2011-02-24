@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT
@@ -161,7 +161,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        control.
    */
-  public AbstractSyncControlAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncControlAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.parentAccess = null;

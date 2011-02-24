@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -46,7 +46,7 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        label.
    */
-  public SyncLabelAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public SyncLabelAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.label = null;

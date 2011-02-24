@@ -7,8 +7,8 @@ import org.eclipse.swt.SWT;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.model.ComboBoxModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
 
@@ -43,7 +43,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable-flag}.
    * @param listModel is the model defining the the selectable elements.
    */
-  public UIComboBoxImpl(UIFactorySwt uiFactory, UISwtNode parentObject, boolean editableFlag,
+  public UIComboBoxImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean editableFlag,
       UiListMvcModel<E> listModel) {
 
     super(uiFactory, parentObject);

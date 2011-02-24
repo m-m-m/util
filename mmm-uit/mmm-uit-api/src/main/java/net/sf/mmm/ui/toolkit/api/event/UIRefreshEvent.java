@@ -3,20 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.event;
 
-import net.sf.mmm.util.event.api.Event;
-
 /**
  * This is the event send internally from the
  * {@link net.sf.mmm.ui.toolkit.api.UiFactory factory} to all
- * {@link net.sf.mmm.ui.toolkit.base.AbstractUINode UI-elements} in order to
+ * {@link net.sf.mmm.ui.toolkit.base.AbstractUiNode UI-elements} in order to
  * cause a refresh.
  * 
- * @see net.sf.mmm.ui.toolkit.base.AbstractUINode#refresh(UIRefreshEvent)
+ * @see net.sf.mmm.ui.toolkit.base.AbstractUiNode#refresh(UIRefreshEvent)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIRefreshEvent implements Event {
+public class UIRefreshEvent {
 
   /** the event for a regular refresh */
   public static final UIRefreshEvent DEFAULT = new UIRefreshEvent();
@@ -45,8 +43,8 @@ public class UIRefreshEvent implements Event {
    * The constructor.
    * 
    * @param orientationModified if <code>true</code> the
-   *        {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation() orientation}
-   *        has been modified.
+   *        {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation()
+   *        orientation} has been modified.
    * @param localeModified if <code>true</code> the
    *        {@link net.sf.mmm.ui.toolkit.api.UiFactory#getLocale() locale} has
    *        been modified.
@@ -60,12 +58,12 @@ public class UIRefreshEvent implements Event {
 
   /**
    * This method determines if the
-   * {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation() orientation}
-   * has been modified since the last refresh-event was send.
+   * {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation()
+   * orientation} has been modified since the last refresh-event was send.
    * 
    * @return <code>true</code> if the
-   *         {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation() orientation}
-   *         has been modified, <code>false</code> otherwise.
+   *         {@link net.sf.mmm.ui.toolkit.api.UiFactory#getScriptOrientation()
+   *         orientation} has been modified, <code>false</code> otherwise.
    */
   public boolean isOrientationModified() {
 

@@ -17,8 +17,8 @@ import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
-import net.sf.mmm.ui.toolkit.api.window.MessageType;
-import net.sf.mmm.ui.toolkit.api.window.UiWindow;
+import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 

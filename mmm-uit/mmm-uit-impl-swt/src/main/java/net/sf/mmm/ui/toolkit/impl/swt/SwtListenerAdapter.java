@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt;
 
 import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.base.AbstractUINode;
+import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Listener;
 public class SwtListenerAdapter implements Listener {
 
   /** the component that triggers the event */
-  private AbstractUINode object;
+  private AbstractUiNode object;
 
   /**
    * The constructor.
@@ -26,7 +26,7 @@ public class SwtListenerAdapter implements Listener {
    * @param uiObject is the UI object that registers this listener and will send
    *        the events to registered listeners.
    */
-  public SwtListenerAdapter(AbstractUINode uiObject) {
+  public SwtListenerAdapter(AbstractUiNode uiObject) {
 
     super();
     this.object = uiObject;

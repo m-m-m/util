@@ -9,9 +9,9 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 /**
  * This is the interface for a simple {@link UiComposite composite} containing
  * two {@link UiElement components}. The {@link #getDecorator() first component}
- * will be layouted with a {@link net.sf.mmm.ui.toolkit.api.types.Filling#NONE
+ * will be layouted with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE
  * fixed} size on the top/left, the {@link #getComponent() other component} will
- * be {@link net.sf.mmm.ui.toolkit.api.types.Filling#BOTH scaled} and located at
+ * be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and located at
  * the bottom/right.<br>
  * The intention of this composite is to simplify the layout management.
  * 
@@ -34,7 +34,7 @@ public interface UiDecoratedComponent<E extends UiElement, D extends E, C extend
   /**
    * This method gets the decorating component (e.g. a
    * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel label}) that is layed
-   * out with a {@link net.sf.mmm.ui.toolkit.api.types.Filling#NONE fixed} size
+   * out with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE fixed} size
    * on the top/left.
    * 
    * @return the decorating component.
@@ -44,7 +44,7 @@ public interface UiDecoratedComponent<E extends UiElement, D extends E, C extend
   /**
    * This method gets the main component (e.g. a
    * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField text-field} that
-   * will be {@link net.sf.mmm.ui.toolkit.api.types.Filling#BOTH scaled} and
+   * will be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and
    * located at the bottom/right.
    * 
    * @return the main component.

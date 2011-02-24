@@ -11,14 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.window.UiFrame} interface using Swing as the
+ * {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame} interface using Swing as the
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

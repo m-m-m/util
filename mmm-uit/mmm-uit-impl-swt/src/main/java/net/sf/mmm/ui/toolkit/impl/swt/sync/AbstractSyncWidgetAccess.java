@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Widget;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT
@@ -35,7 +35,7 @@ public abstract class AbstractSyncWidgetAccess extends AbstractSyncObjectAccess 
    * @param uiFactory is used to do the synchronization.
    * @param swtStyle is the {@link Widget#getStyle() style} of the widget.
    */
-  public AbstractSyncWidgetAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncWidgetAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.eventType = 0;

@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.composite;
 
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncCompositeAccess;
 
 import org.eclipse.swt.SWT;
@@ -21,7 +21,7 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<AbstractUIComponent> {
+public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<AbstractUiElement> {
 
   /** the synchronous access to the {@link org.eclipse.swt.widgets.Composite} */
   private final SyncCompositeAccess syncAccess;
@@ -39,7 +39,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<Ab
    *        border.
    * @param orientation is the orientation for the layout of the panel.
    */
-  public UISlicePanelImpl(UIFactorySwt uiFactory, UISwtNode parentObject, String borderTitle,
+  public UISlicePanelImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, String borderTitle,
       Orientation orientation) {
 
     super(uiFactory, parentObject, borderTitle);
@@ -52,7 +52,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void addChild(AbstractUIComponent component) {
+  public void addChild(AbstractUiElement component) {
 
     addChild(component, LayoutConstraints.DEFAULT);
   }
@@ -60,9 +60,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void addChild(AbstractUIComponent component, LayoutConstraints constraints) {
+  public void addChild(AbstractUiElement component, LayoutConstraints constraints) {
 
-    AbstractUIComponent c = component;
+    AbstractUiElement c = component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
     c.getSyncAccess().setLayoutData(constraints);
     c.setParent(this);
@@ -72,9 +72,9 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void insertChild(AbstractUIComponent component, LayoutConstraints constraints, int position) {
+  public void insertChild(AbstractUiElement component, LayoutConstraints constraints, int position) {
 
-    AbstractUIComponent c = component;
+    AbstractUiElement c = component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
     c.getSyncAccess().setLayoutData(constraints);
     c.setParent(this);
@@ -119,7 +119,7 @@ public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void insertChild(AbstractUIComponent component, int index) {
+  public void insertChild(AbstractUiElement component, int index) {
 
     throw new IllegalStateException();
   }

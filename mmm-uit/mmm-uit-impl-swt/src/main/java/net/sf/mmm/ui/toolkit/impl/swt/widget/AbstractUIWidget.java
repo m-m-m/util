@@ -4,9 +4,9 @@
 package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUIComponent;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
 
 /**
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractUIWidget extends AbstractUIComponent implements UiWidget {
+public abstract class AbstractUIWidget extends AbstractUiElement implements UiWidget {
 
   /**
    * The constructor.
@@ -24,7 +24,7 @@ public abstract class AbstractUIWidget extends AbstractUIComponent implements Ui
    * @param uiFactory is the UIFactorySwt instance.
    * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUIWidget(UIFactorySwt uiFactory, UISwtNode parentObject) {
+  public AbstractUIWidget(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
     super(uiFactory, parentObject);
   }

@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Item;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT
@@ -42,7 +42,7 @@ public abstract class AbstractSyncItemAccess extends AbstractSyncWidgetAccess {
    * @param swtStyle is the
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the item.
    */
-  public AbstractSyncItemAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncItemAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.text = null;

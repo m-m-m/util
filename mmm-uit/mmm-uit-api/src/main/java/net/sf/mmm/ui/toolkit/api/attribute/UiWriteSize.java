@@ -23,8 +23,8 @@ public interface UiWriteSize extends UiReadSize {
    * This method determines if this object is resizeable.
    * 
    * @return <code>true</code> if the object can be resized by the user.
-   *         <code>false</code> if the {@link #setSize(int, int)} method has
-   *         no effect.
+   *         <code>false</code> if the {@link #setSize(int, int)} method has no
+   *         effect.
    */
   boolean isResizeable();
 

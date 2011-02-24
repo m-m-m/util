@@ -74,10 +74,11 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
     this.fileChooser = new JFileChooser();
     this.fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
     // this.fileChooser.setMultiSelectionEnabled(false);
-    this.fileChooser.setSelectedFile(new File(this.access.getFilename()));
+    this.fileChooser.setSelectedFile(new File(this.access.getUrl()));
     // TODO: i18n
     this.button = new JButton("Save");
-    this.button.setToolTipText("Save " + this.access.getFilename());
+    // TODO: should only be filename
+    this.button.setToolTipText("Save " + this.access.getUrl());
     this.button.addActionListener(new Listener());
   }
 

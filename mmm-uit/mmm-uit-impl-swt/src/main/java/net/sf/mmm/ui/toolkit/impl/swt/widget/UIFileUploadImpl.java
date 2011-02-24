@@ -3,26 +3,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.widget;
 
-import java.io.File;
+import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
+import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncFileDialogAccess;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
-import net.sf.mmm.ui.toolkit.base.feature.SimpleFileAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UISwtNode;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncButtonAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncFileDialogAccess;
-
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload} interface using
+ * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -42,8 +40,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
       UIFileUploadImpl.this.syncDialgAccess.setText(getValue());
       String file = UIFileUploadImpl.this.syncDialgAccess.open();
       if (file != null) {
-        File uploadFile = new File(file);
-        UIFileUploadImpl.this.access = new SimpleFileAccess(uploadFile);
+        UIFileUploadImpl.this.access = new UiFileAccessSimple(file);
         invoke(ActionType.SELECT);
       }
     }
@@ -63,9 +60,10 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
-  public UIFileUploadImpl(UIFactorySwt uiFactory, UISwtNode parentObject) {
+  public UIFileUploadImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
     super(uiFactory, parentObject);
     this.access = null;

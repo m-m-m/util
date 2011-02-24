@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 
 /**
  * This is a test runner that tests the various UIFactorySwing implementations.
@@ -52,7 +52,7 @@ public class UITestRunner2 {
   public static void main(String[] args) {
 
     runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
-    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
+    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt());
   }
 
 }

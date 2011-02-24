@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
+import net.sf.mmm.ui.toolkit.api.UiElement;
+
 /**
  * This is the interface for a
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that represents
@@ -10,15 +12,22 @@ package net.sf.mmm.ui.toolkit.api.view.composite;
  * and M columns. For flexible organization of the grid it is organized as a
  * list of {@link UiGridRow}s. This makes inserting or removing rows easy.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiGrid<E extends UiGridRow> extends UiExtendableComposite<E> {
+public interface UiGrid<E extends UiGridRow<? extends UiElement>> extends UiExtendableComposite<E> {
 
   /**
-   * This method creates a new {@link UiGridRow}.
+   * This method creates a new {@link UiGridRow}. The number of columns in this
+   * {@link UiGrid} will be preallocated for the new row. The cells will be
+   * empty and the row is not connected with this {@link UiGrid} and therefore
+   * not displayed to the user, yet.<br/>
+   * You can fill the cells and then
+   * {@link #insertChild(net.sf.mmm.ui.toolkit.api.UiElement, int) insert} or
+   * {@link #addChild(net.sf.mmm.ui.toolkit.api.UiElement) append} the new row.
    * 
-   * @return
+   * @return the new {@link UiGridRow}.
    */
   E createRow();
 

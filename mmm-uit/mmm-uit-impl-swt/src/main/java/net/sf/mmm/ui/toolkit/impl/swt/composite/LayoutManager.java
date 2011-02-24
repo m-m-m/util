@@ -9,12 +9,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 
-import net.sf.mmm.ui.toolkit.api.types.Orientation;
+import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.composite.AbstractLayoutManager;
-import net.sf.mmm.ui.toolkit.base.composite.Rectangle;
-import net.sf.mmm.ui.toolkit.base.composite.Size;
+import net.sf.mmm.ui.toolkit.base.view.composite.AbstractLayoutManager;
+import net.sf.mmm.ui.toolkit.base.view.composite.Rectangle;
+import net.sf.mmm.ui.toolkit.base.view.composite.Size;
 
 /**
  * This is the layout-manager that organizes the layout of SWT panels.

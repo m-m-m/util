@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.sync;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -36,7 +36,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
    *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
    *        widget.
    */
-  public AbstractSyncDialogAccess(UIFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncDialogAccess(UiFactorySwt uiFactory, int swtStyle) {
 
     super(uiFactory, swtStyle);
     this.text = null;

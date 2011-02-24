@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.AbstractUINode;
+import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
 
 /**
  * This is the base implementation of the UIMenu interface.
@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUINode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIMenu extends AbstractUINode implements UiMenu {
+public abstract class AbstractUIMenu extends AbstractUiNode implements UiMenu {
 
   /** the menu entries */
   private final List<UiMenuItem> items;
@@ -176,7 +176,7 @@ public abstract class AbstractUIMenu extends AbstractUINode implements UiMenu {
 
     super.refresh(event);
     for (UiMenuItem menuItem : this.items) {
-      ((AbstractUINode) menuItem).refresh(event);
+      ((AbstractUiNode) menuItem).refresh(event);
     }
   }
 

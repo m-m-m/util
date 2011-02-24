@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.UIPictureImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.UiImageImpl;
 
 /**
  * This class is the implementation of the
@@ -36,7 +36,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   private final ButtonStyle style;
 
   /** the icon */
-  private UIPictureImpl icon;
+  private UiImageImpl icon;
 
   /**
    * The constructor.
@@ -142,7 +142,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public void setImage(UiImage newIcon) {
 
-    this.icon = (UIPictureImpl) newIcon;
+    this.icon = (UiImageImpl) newIcon;
     if (this.icon == null) {
       this.button.setIcon(null);
     } else {

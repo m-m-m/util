@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.window;
 
-import net.sf.mmm.ui.toolkit.api.window.UiFrame;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 import org.eclipse.swt.SWT;
 
@@ -32,7 +32,7 @@ public class UIFrameImpl extends UIWindowImpl implements UiFrame {
    * @param resizeable - if <code>true</code> the frame will be
    *        {@link #isResizeable() resizeable}.
    */
-  public UIFrameImpl(UIFactorySwt uiFactory, UIFrameImpl parent, boolean resizeable) {
+  public UIFrameImpl(UiFactorySwt uiFactory, UIFrameImpl parent, boolean resizeable) {
 
     super(uiFactory, parent, DEFAULT_STYLE, false, resizeable);
   }

@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.window;
 
-import net.sf.mmm.ui.toolkit.api.window.UiWorkbench;
-import net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the interface of the
- * {@link net.sf.mmm.ui.toolkit.api.window.UiWorkbench} interface using SWT as
+ * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench} interface using SWT as
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -23,7 +23,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    */
-  public UIWorkbenchImpl(UIFactorySwt uiFactory) {
+  public UIWorkbenchImpl(UiFactorySwt uiFactory) {
 
     super(uiFactory, null, true);
   }
