@@ -6,6 +6,11 @@
     <author email="hohwille@users.sourceforge.net">Joerg Hohwiller</author>
   </properties>
   <body>
+    <release version="2.0.2" date="2011-03-xx" description="Minor update with improved NLS">
+      <action dev="hohwille" type="add" issue="13">
+        Support for any ResourceBundle (properties) for root bundles not only AbstractResourceBundle.
+      </action>
+    </release>
     <release version="2.0.1" date="2010-12-07" description="Minor update with JAXB ID-validation and improved NLS">
       <action dev="hohwille" type="add">
         <![CDATA[
