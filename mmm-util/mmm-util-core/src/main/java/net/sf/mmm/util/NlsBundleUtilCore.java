@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 
 /**
@@ -261,6 +262,9 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.cli.api.CliParserExcepiton */
   public static final String ERR_CLI_PARSER = "The class \"{type}\" is invalid as command-line interface state-object!";
 
+  /** @see net.sf.mmm.util.nls.api.ReadOnlyException */
+  public static final String ERR_READ_ONLY = "Failed to modify \"{object}\" as it is read-only!";
+
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
   public static final String INF_MAIN_MODE_HELP = "help";
 
@@ -318,10 +322,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
       + "date pattern for writing synchronization date to property-files (Default is \"{default}\").";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
-  public static final String MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS = "The bundle-class "
-      + "for which the property-files should be created or update. It has to be "
-      + "the fully qualified name of a subclass of AbstractResourceBundle"
-      + ". For all given locales the according property-file is created or updated.";
+  public static final String MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS = "The explicit "
+      + "list of bundle-classes for which the property-files should be created or updated. "
+      + "It has to be the fully qualified name of a subclass of AbstractResourceBundle. "
+      + "For all given locales the according property-file is created or updated. "
+      + "If this option is omitted the bundle-classes are resolved from all instances of "
+      + NlsTemplateResolver.CLASSPATH_NLS_BUNDLE + " on your classpath.";
 
   /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
   public static final String MSG_CLI_USAGE = "Usage: {mainClass} {option}";

@@ -109,6 +109,13 @@ public interface NlsObject {
   String KEY_ERROR = "error";
 
   /**
+   * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
+   * 
+   * @since 2.0.2
+   */
+  String KEY_USER = "user";
+
+  /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.
    * 

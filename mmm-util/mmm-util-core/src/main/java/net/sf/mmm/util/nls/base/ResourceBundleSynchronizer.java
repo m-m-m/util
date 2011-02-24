@@ -14,7 +14,9 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -25,8 +27,9 @@ import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliOption;
-import net.sf.mmm.util.io.api.StreamUtil;
-import net.sf.mmm.util.io.base.StreamUtilImpl;
+import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
+import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 
 /**
  * This class can be used to create and update the localized bundles
@@ -92,13 +95,13 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   required = true, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
 
-  /** @see #getBundleClass() */
+  /** @see #getBundleClasses() */
   @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", //
-  required = true, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
-  private Class<? extends ResourceBundle> bundleClass;
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
+  private List<Class<? extends ResourceBundle>> bundleClasses;
 
-  /** @see #getStreamUtil() */
-  private StreamUtil streamUtil;
+  /** @see #getResourceBundleFinder() */
+  private NlsResourceBundleLocator resourceBundleFinder;
 
   /**
    * The constructor.
@@ -237,43 +240,61 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * 
    * @return the bundle-class.
    */
-  public Class<? extends ResourceBundle> getBundleClass() {
+  public List<Class<? extends ResourceBundle>> getBundleClasses() {
 
-    return this.bundleClass;
+    return this.bundleClasses;
   }
 
   /**
-   * This method sets the {@link #getBundleClass() bundle-class}.
+   * This method sets the {@link #getBundleClasses() bundle-class}.
    * 
    * @param bundleClass is the bundle-class to set
+   * @deprecated use {@link #setBundleClasses(List)}
    */
+  @Deprecated
   public void setBundleClass(Class<? extends ResourceBundle> bundleClass) {
 
-    this.bundleClass = bundleClass;
+    List<Class<? extends ResourceBundle>> list = new ArrayList<Class<? extends ResourceBundle>>();
+    list.add(bundleClass);
+    setBundleClasses(list);
   }
 
   /**
-   * This method gets the {@link StreamUtilImpl} instance to use.
+   * This method sets the {@link #getBundleClasses() bundle-classes}.
    * 
-   * @return the {@link StreamUtilImpl}.
+   * @param bundleClasses is the {@link List} of bundle-classes to set
    */
-  @Override
-  public StreamUtil getStreamUtil() {
+  public void setBundleClasses(List<Class<? extends ResourceBundle>> bundleClasses) {
 
-    if (this.streamUtil == null) {
-      this.streamUtil = StreamUtilImpl.getInstance();
+    this.bundleClasses = bundleClasses;
+  }
+
+  /**
+   * This method gets the {@link NlsResourceBundleLocator}.
+   * 
+   * @return the {@link NlsResourceBundleLocator}.
+   */
+  public NlsResourceBundleLocator getResourceBundleFinder() {
+
+    if (this.resourceBundleFinder == null) {
+      IocContainer container = getIocContainer();
+      if (container == null) {
+        NlsResourceBundleLocatorImpl impl = new NlsResourceBundleLocatorImpl();
+        impl.initialize();
+        this.resourceBundleFinder = impl;
+      } else {
+        this.resourceBundleFinder = container.getComponent(NlsResourceBundleLocator.class);
+      }
     }
-    return this.streamUtil;
+    return this.resourceBundleFinder;
   }
 
   /**
-   * This method sets the {@link #getStreamUtil() StreamUtil}.
-   * 
-   * @param streamUtil is the {@link StreamUtilImpl} instance to use.
+   * @param resourceBundleFinder is the resourceBundleFinder to set
    */
-  public void setStreamUtil(StreamUtil streamUtil) {
+  public void setResourceBundleFinder(NlsResourceBundleLocator resourceBundleFinder) {
 
-    this.streamUtil = streamUtil;
+    this.resourceBundleFinder = resourceBundleFinder;
   }
 
   /**
@@ -383,8 +404,17 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   protected int run(CliModeObject mode) throws Exception {
 
     if (CliMode.ID_DEFAULT.equals(mode.getId())) {
-      ResourceBundle bundle = this.bundleClass.newInstance();
-      synchronize(bundle);
+      if (this.bundleClasses == null) {
+        List<ResourceBundle> bundleList = getResourceBundleFinder().findBundles();
+        for (ResourceBundle bundle : bundleList) {
+          synchronize(bundle);
+        }
+      } else {
+        for (Class<? extends ResourceBundle> bundleClass : this.bundleClasses) {
+          ResourceBundle bundle = bundleClass.newInstance();
+          synchronize(bundle);
+        }
+      }
       return EXIT_CODE_OK;
     } else {
       return super.run(mode);
