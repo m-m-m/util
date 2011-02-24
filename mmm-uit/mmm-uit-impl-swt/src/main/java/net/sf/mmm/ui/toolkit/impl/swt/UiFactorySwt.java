@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIFactorySwt.java 958 2011-02-21 23:18:25Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;

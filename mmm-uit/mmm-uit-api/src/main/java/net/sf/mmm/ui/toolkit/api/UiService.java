@@ -30,6 +30,6 @@ public interface UiService {
    * 
    * @return the list of all available display objects.
    */
-  Collection<UIDisplay> getDisplays();
+  Collection<UiDisplay> getDisplays();
 
 }

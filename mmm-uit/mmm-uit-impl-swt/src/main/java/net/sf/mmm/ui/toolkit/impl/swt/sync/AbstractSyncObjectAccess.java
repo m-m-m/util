@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.sync;
 
-import net.sf.mmm.ui.toolkit.api.UIDisplay;
+import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
@@ -34,7 +34,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   private static final String OPERATION_IS_DISPOSED = "isDisposed";
 
   /** the ui display */
-  private final UIDisplay display;
+  private final UiDisplay display;
 
   /** the operation to perform in {@link #run()} */
   private String op;
@@ -282,7 +282,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * 
    * @return the display.
    */
-  public UIDisplay getDisplay() {
+  public UiDisplay getDisplay() {
 
     return this.display;
   }

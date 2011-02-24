@@ -1,11 +1,11 @@
-/* $Id$
+/* $Id: AbstractUIDisplay.java 957 2011-02-21 22:18:03Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.ui.toolkit.api.UIDisplay;
+import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.api.UiDevice;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.UiDevice;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiDisplay extends AbstractUiObject implements UIDisplay {
+public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDisplay {
 
   /** the UI device this display belongs to */
   private UiDevice device;

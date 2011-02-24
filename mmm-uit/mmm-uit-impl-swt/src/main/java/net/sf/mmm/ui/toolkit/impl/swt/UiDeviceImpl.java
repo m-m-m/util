@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIDeviceImpl.java 304 2007-06-13 23:58:29Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;

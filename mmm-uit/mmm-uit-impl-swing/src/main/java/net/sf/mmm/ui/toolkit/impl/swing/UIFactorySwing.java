@@ -7,7 +7,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
-import net.sf.mmm.ui.toolkit.api.UIDisplay;
+import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
@@ -104,7 +104,7 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UIDisplay getDisplay() {
+  public UiDisplay getDisplay() {
 
     return this.display;
   }

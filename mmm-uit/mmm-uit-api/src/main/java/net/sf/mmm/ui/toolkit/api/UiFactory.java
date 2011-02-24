@@ -117,7 +117,7 @@ public interface UiFactory extends UiWriteDisposed {
    * 
    * @return the default display.
    */
-  UIDisplay getDisplay();
+  UiDisplay getDisplay();
 
   /**
    * This method creates a new resizeable frame.
