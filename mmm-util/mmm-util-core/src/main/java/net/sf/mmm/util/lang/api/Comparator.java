@@ -186,7 +186,7 @@ public enum Comparator implements Datatype<String> {
     // if (Number.class.isAssignableFrom(otherType)) {
     // return Double.valueOf((String) value);
     // } else if (Date.class.isAssignableFrom(otherType)) {
-    //        
+    //
     // }
     // }
     return object;

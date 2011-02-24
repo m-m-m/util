@@ -7,8 +7,10 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This is the interface for a {@link PojoPropertyAccessor property-accessor}
- * that allows to {@link #invoke(Object, Object, Object) write} (modify) a
- * property.
+ * that allows to {@link #invoke(Object, Object, Object) access} a property
+ * supplying a two arguments.
+ * 
+ * @see PojoPropertyAccessorTwoArgMode#SET_MAPPED
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

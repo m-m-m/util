@@ -33,14 +33,14 @@ public abstract class AbstractPojoPropertyAccessorBase extends AbstractPojoPrope
    * @param propertyType is the {@link #getPropertyType() generic type} of the
    *        property.
    * @param descriptor is the descriptor this accessor is intended for.
-   * @param configuration are the {@link PojoDescriptorDependencies} to use.
+   * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    */
   public AbstractPojoPropertyAccessorBase(String propertyName, Type propertyType,
-      PojoDescriptor<?> descriptor, PojoDescriptorDependencies configuration) {
+      PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     super();
     this.name = propertyName;
-    ReflectionUtil util = configuration.getReflectionUtil();
+    ReflectionUtil util = dependencies.getReflectionUtil();
     this.propertyType = util.createGenericType(propertyType, descriptor.getPojoType());
   }
 

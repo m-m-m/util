@@ -18,9 +18,6 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -1483011818509137119L;
 
-  /** Key for the NLS message. */
-  private static final String KEY_URI = "uri";
-
   /**
    * The constructor.
    * 

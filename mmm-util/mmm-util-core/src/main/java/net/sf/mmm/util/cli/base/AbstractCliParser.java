@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliArgumentMissingException;
+import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliException;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
@@ -34,6 +35,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
@@ -406,6 +408,20 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
           if (!option.getSetter().getPropertyClass().equals(boolean.class)) {
             parameters.append(" ");
             parameters.append(cliOption.operand());
+            if (option.isArrayMapOrCollection()) {
+              CliContainerStyle containerStyle = option.getContainerStyle(this.cliState
+                  .getCliStyle());
+              switch (containerStyle) {
+                case COMMA_SEPARATED:
+                  parameters.append(",...");
+                  break;
+                case MULTIPLE_OCCURRENCE:
+                  parameters.append("*");
+                  break;
+                default :
+                  throw new IllegalCaseException(CliContainerStyle.class, containerStyle);
+              }
+            }
           }
           if (!cliOption.required()) {
             parameters.append("]");

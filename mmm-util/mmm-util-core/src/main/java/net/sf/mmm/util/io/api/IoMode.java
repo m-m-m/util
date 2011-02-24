@@ -24,6 +24,9 @@ public enum IoMode {
   FLUSH,
 
   /** Indicates that data is copied. */
-  COPY
+  COPY,
+
+  /** Indicates that a handle is opened. */
+  OPEN,
 
 }
