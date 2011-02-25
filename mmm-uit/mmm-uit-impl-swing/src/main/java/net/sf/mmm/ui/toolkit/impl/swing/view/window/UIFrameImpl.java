@@ -4,12 +4,12 @@
 package net.sf.mmm.ui.toolkit.impl.swing.view.window;
 
 import java.awt.Frame;
-import java.awt.Window;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
@@ -18,13 +18,13 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame} interface using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame} interface using Swing
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFrameImpl extends UIWindow implements UiFrame {
+public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
 
   /** the swing frame */
   private final JFrame frame;
@@ -35,12 +35,11 @@ public class UIFrameImpl extends UIWindow implements UiFrame {
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parent is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} of this
-   *        object (may be <code>null</code>).
+   * @param parent is the {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent()
+   *        parent} of this object (may be <code>null</code>).
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizeable() resizeable}.
+   *        {@link #isResizable() resizeable}.
    */
   public UIFrameImpl(UIFactorySwing uiFactory, UIFrameImpl parent, String title, boolean resizeable) {
 
@@ -55,7 +54,8 @@ public class UIFrameImpl extends UIWindow implements UiFrame {
   /**
    * {@inheritDoc}
    */
-  protected Window getAwtWindow() {
+  @Override
+  protected JFrame getNativeWindow() {
 
     return this.frame;
   }
@@ -87,6 +87,7 @@ public class UIFrameImpl extends UIWindow implements UiFrame {
   /**
    * {@inheritDoc}
    */
+  @Override
   protected UIMenuBarImpl createMenuBar() {
 
     JMenuBar menuBar = this.frame.getJMenuBar();
@@ -154,7 +155,7 @@ public class UIFrameImpl extends UIWindow implements UiFrame {
   /**
    * {@inheritDoc}
    */
-  public void setComposite(UiComposite newComposite) {
+  public void setComposite(UiComposite<? extends UiElement> newComposite) {
 
     JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);

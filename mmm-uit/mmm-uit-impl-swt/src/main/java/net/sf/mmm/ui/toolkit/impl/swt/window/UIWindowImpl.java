@@ -36,7 +36,7 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
   /** to access the {@link org.eclipse.swt.widgets.Shell} properties */
   private final SyncShellAccess syncAccess;
 
-  /** the {@link #isResizeable() resizeable-status} */
+  /** the {@link #isResizable() resizeable-status} */
   private final boolean resizeableFlag;
 
   /**
@@ -52,7 +52,7 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
    * @param modal - if <code>true</code> all windows of the application are
    *        blocked until this window is closed.
    * @param resizeable - if <code>true</code> the window will be
-   *        {@link #isResizeable() resizeable}.
+   *        {@link #isResizable() resizeable}.
    */
   public UIWindowImpl(final UiFactorySwt uiFactory, final UIWindowImpl parent, int defaultStyle,
       boolean modal, boolean resizeable) {
@@ -295,7 +295,7 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
-  public boolean isResizeable() {
+  public boolean isResizable() {
 
     return this.resizeableFlag;
   }

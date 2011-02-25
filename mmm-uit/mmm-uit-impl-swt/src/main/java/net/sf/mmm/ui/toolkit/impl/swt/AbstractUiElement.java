@@ -191,7 +191,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
   /**
    * {@inheritDoc}
    */
-  public boolean isResizeable() {
+  public boolean isResizable() {
 
     // TODO
     return true;
@@ -202,7 +202,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
    */
   public void setSize(int width, int height) {
 
-    if (isResizeable()) {
+    if (isResizable()) {
 
       getSyncAccess().setSize(width, height);
     }

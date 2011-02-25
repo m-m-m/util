@@ -73,15 +73,15 @@ public class UIFactorySwing extends AbstractUiFactory {
   private UiDisplayImpl display;
 
   /**
-   * The dummy constructor.
-   * 
-   * This constructor may be used for testing if an instance is required for the
-   * default display without using the
+   * The default constructor. Intended for direct usage without
    * {@link net.sf.mmm.ui.toolkit.api.UiService UIService}.
+   * 
+   * @param title is the title of this factory. Should be the name of the actual
+   *        application creating the UI.
    */
-  public UIFactorySwing() {
+  public UIFactorySwing(String title) {
 
-    super();
+    super(title);
     GraphicsDevice defaultDevice = GraphicsEnvironment.getLocalGraphicsEnvironment()
         .getDefaultScreenDevice();
     UiDeviceImpl uiDevice = new UiDeviceImpl(defaultDevice);
@@ -91,13 +91,16 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * The constructor.
    * 
+   * @param title is the title of this factory. Should be the name of the actual
+   *        application creating the UI.
    * @param uiDevice is the device the display of this factory belongs to.
    * @param graphicConfiguration is the graphics configuration for the display
    *        to represent.
    */
-  public UIFactorySwing(UiDeviceImpl uiDevice, GraphicsConfiguration graphicConfiguration) {
+  public UIFactorySwing(String title, UiDeviceImpl uiDevice,
+      GraphicsConfiguration graphicConfiguration) {
 
-    super();
+    super(title);
     this.display = new UiDisplayImpl(this, uiDevice, graphicConfiguration);
   }
 
@@ -301,7 +304,8 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiWorkbench createWorkbench(String title) {
+  @Override
+  protected UiWorkbench createWorkbench(String title) {
 
     UIWorkbenchImpl workbench = new UIWorkbenchImpl(this, title, true);
     addWindow(workbench);

@@ -53,7 +53,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * {@inheritDoc}
    */
-  public boolean isResizeable() {
+  public boolean isResizable() {
 
     return true;
   }

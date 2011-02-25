@@ -3,13 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.common;
 
-import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
-
 /**
  * This enum contains the available types for message dialogs.
  * 
- * @see net.sf.mmm.ui.toolkit.api.view.window.UiWindow#showMessage(String, String,
- *      MessageType)
+ * @see net.sf.mmm.ui.toolkit.api.view.window.UiWindow#showMessage(String,
+ *      String, MessageType)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

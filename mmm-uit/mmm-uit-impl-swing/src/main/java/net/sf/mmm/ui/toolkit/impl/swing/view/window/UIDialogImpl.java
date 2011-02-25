@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIDialogImpl extends UIWindow implements UiDialog {
+public class UIDialogImpl extends AbstractUiWindowImpl implements UiDialog {
 
   /** the swing dialog */
   private final JDialog dialog;
@@ -44,7 +44,7 @@ public class UIDialogImpl extends UIWindow implements UiDialog {
   /**
    * {@inheritDoc}
    */
-  protected Window getAwtWindow() {
+  protected Window getNativeWindow() {
 
     return this.dialog;
   }

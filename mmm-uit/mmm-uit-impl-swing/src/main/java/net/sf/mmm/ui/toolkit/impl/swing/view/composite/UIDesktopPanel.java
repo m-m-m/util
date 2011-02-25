@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIInternalFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIWorkbenchImpl;
@@ -14,22 +13,13 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIWorkbenchImpl;
 /**
  * This is the implementation of a
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} interface for
- * the {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow#getComposite() content}
- * of a {@link net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench}.
+ * the {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow#getComposite()
+ * content} of a {@link net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench}.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIDesktopPanel<E extends UiElement> extends AbstractUiMultiComposite<UiElement> // should
-// be
-// <E>,
-// but
-// bug
-// in
-// eclipse
-// compiler!
-{
+public class UIDesktopPanel extends AbstractUiMultiComposite<UIInternalFrame> {
 
   /** the workbench pane */
   private final JDesktopPane workbench;

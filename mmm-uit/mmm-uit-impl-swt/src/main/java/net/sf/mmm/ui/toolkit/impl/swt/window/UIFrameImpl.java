@@ -30,7 +30,7 @@ public class UIFrameImpl extends UIWindowImpl implements UiFrame {
    *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} of this
    *        object (may be <code>null</code>).
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizeable() resizeable}.
+   *        {@link #isResizable() resizeable}.
    */
   public UIFrameImpl(UiFactorySwt uiFactory, UIFrameImpl parent, boolean resizeable) {
 

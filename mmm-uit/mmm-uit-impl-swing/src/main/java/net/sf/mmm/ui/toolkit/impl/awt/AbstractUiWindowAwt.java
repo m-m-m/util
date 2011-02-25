@@ -47,7 +47,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    * 
    * @return the unwrapped window object.
    */
-  protected abstract Window getAwtWindow();
+  protected abstract Window getNativeWindow();
 
   /**
    * {@inheritDoc}
@@ -114,7 +114,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
       }
 
     };
-    getAwtWindow().addWindowListener(listener);
+    getNativeWindow().addWindowListener(listener);
     return true;
   }
 
@@ -123,7 +123,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public boolean isVisible() {
 
-    return getAwtWindow().isVisible();
+    return getNativeWindow().isVisible();
   }
 
   /**
@@ -131,7 +131,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public void setVisible(boolean visible) {
 
-    getAwtWindow().setVisible(visible);
+    getNativeWindow().setVisible(visible);
   }
 
   /**
@@ -139,7 +139,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public void pack() {
 
-    getAwtWindow().pack();
+    getNativeWindow().pack();
   }
 
   /**
@@ -147,7 +147,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public void setPosition(int x, int y) {
 
-    getAwtWindow().setLocation(x, y);
+    getNativeWindow().setLocation(x, y);
   }
 
   /**
@@ -155,7 +155,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public void setSize(int width, int height) {
 
-    getAwtWindow().setSize(width, height);
+    getNativeWindow().setSize(width, height);
   }
 
   /**
@@ -163,7 +163,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public int getX() {
 
-    return getAwtWindow().getX();
+    return getNativeWindow().getX();
   }
 
   /**
@@ -171,7 +171,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public int getY() {
 
-    return getAwtWindow().getY();
+    return getNativeWindow().getY();
   }
 
   /**
@@ -179,7 +179,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public int getWidth() {
 
-    return getAwtWindow().getWidth();
+    return getNativeWindow().getWidth();
   }
 
   /**
@@ -187,7 +187,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    */
   public int getHeight() {
 
-    return getAwtWindow().getHeight();
+    return getNativeWindow().getHeight();
   }
 
   /**
@@ -196,7 +196,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
   public void dispose() {
 
     super.dispose();
-    getAwtWindow().dispose();
+    getNativeWindow().dispose();
   }
 
   /**
@@ -205,18 +205,18 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
   public boolean isDisposed() {
 
     // TODO this is not correct in all situations, is it?
-    return getAwtWindow().isDisplayable();
+    return getNativeWindow().isDisplayable();
   }
 
   /**
    * {@inheritDoc}
    */
-  public boolean isResizeable() {
+  public boolean isResizable() {
 
     if (getType() == UiDialog.TYPE) {
-      return ((Dialog) getAwtWindow()).isResizable();
+      return ((Dialog) getNativeWindow()).isResizable();
     } else {
-      return ((Frame) getAwtWindow()).isResizable();
+      return ((Frame) getNativeWindow()).isResizable();
     }
   }
 
@@ -229,9 +229,9 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
     super.refresh(event);
     ScriptOrientation orientation = getFactory().getScriptOrientation();
     if (orientation.isLeftToRight()) {
-      getAwtWindow().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+      getNativeWindow().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     } else {
-      getAwtWindow().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+      getNativeWindow().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     }
   }
 

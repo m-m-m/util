@@ -5,7 +5,9 @@ package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 
@@ -26,12 +28,18 @@ public class UITestRunner3 {
 
     System.out.println(factory);
     System.out.println(factory.getDisplay());
-    final UiWorkbench workbench = factory.createWorkbench("Workbench");
+    final UiWorkbench workbench = factory.getOrCreateWorkbench();
+    UIDemoBuilder.createMenus(workbench);
     workbench.setSize(800, 1024);
     workbench.setVisible(true);
+    UiSlicePanel panel2 = factory.createPanel(Orientation.VERTICAL);
+    UiButton button2 = factory.createButton("Button");
+    panel2.addChild(factory.createLabel("Text"), LayoutConstraints.FIXED_HORIZONTAL);
+    panel2.addChild(button2, LayoutConstraints.FIXED_NONE);
+    workbench.setComposite(panel2);
     final UiFrame frame = workbench.createFrame("TestFrame", true);
     UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
-    // UiButton button = factory.createButton("Button");
+    UiButton button = factory.createButton("Button");
     // UiDecoratedComponent<UiLabel, UiButton> labeledButton =
     // factory.createLabeledComponent(
     // "Label:", button);
@@ -41,6 +49,7 @@ public class UITestRunner3 {
     // factory.createLabeledComponent(
     // "Label2:", text);
     // panel.addChild(labeledText, LayoutConstraints.FIXED_HORIZONTAL_INSETS);
+    panel.addChild(button);
     frame.setComposite(panel);
     UIDemoBuilder.createMenus(frame);
     frame.setSize(500, 300);
@@ -61,8 +70,9 @@ public class UITestRunner3 {
    */
   public static void main(String[] args) {
 
-    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
-    // runTest(new net.sf.mmm.ui.toolkit.impl.swt.UIFactorySwt());
+    String title = UITestRunner3.class.getSimpleName();
+    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing(title));
+    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt(title));
   }
 
 }

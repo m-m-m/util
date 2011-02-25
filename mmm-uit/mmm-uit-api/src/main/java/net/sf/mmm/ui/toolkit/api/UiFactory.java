@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
-import java.util.Locale;
-
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
@@ -36,8 +34,11 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 
 /**
- * This is the interface for the UI factory. It is used to create the parts of
- * the UI.
+ * This is the interface for the user interface (UI) factory. It is used to
+ * create {@link UiObject} to build the user interface. An application should
+ * create only one instance of {@link UiFactory}.
+ * 
+ * @see UiService
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -83,7 +84,7 @@ public interface UiFactory extends UiWriteDisposed {
    * toolkit this may be an expensive operation, needs to dispose and rebuild
    * all GUI elements and can cause the loss of data entered by the user.
    * 
-   * @see #setLocale(Locale)
+   * @see #setLocale(java.util.Locale)
    * 
    * @param scriptOrientation is the orientation to set.
    */
@@ -120,7 +121,21 @@ public interface UiFactory extends UiWriteDisposed {
   UiDisplay getDisplay();
 
   /**
-   * This method creates a new resizeable frame.
+   * This method gets the {@link UiWorkbench} for this {@link UiFactory}
+   * instance. That {@link UiWorkbench} represents the main-window of the
+   * application. On the first call of this method the {@link UiWorkbench} will
+   * be created.
+   * 
+   * @return the {@link UiWorkbench}.
+   */
+  UiWorkbench getOrCreateWorkbench();
+
+  /**
+   * This method creates a new resizable frame.<br/>
+   * <b>ATTENTION:</b><br>
+   * For writing portable user-interfaces prefer to use
+   * {@link #getOrCreateWorkbench()} and then do
+   * {@link UiWorkbench#createFrame(String, boolean)}.
    * 
    * @param title is the title for the frame to create.
    * @return the created frame.
@@ -128,25 +143,19 @@ public interface UiFactory extends UiWriteDisposed {
   UiFrame createFrame(String title);
 
   /**
-   * This method creates a new frame.
+   * This method creates a new frame.<br/>
+   * <b>ATTENTION:</b><br>
+   * For writing portable user-interfaces prefer to use
+   * {@link #getOrCreateWorkbench()} and then do
+   * {@link UiWorkbench#createFrame(String, boolean)}.
    * 
    * @param title is the title for the frame to create.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizeable()
-   *        resizeable}
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizable()
+   *        resizable}
    * @return the created frame.
    */
   UiFrame createFrame(String title, boolean resizeable);
-
-  /**
-   * This method creates a new workbench. This feature may not be supported
-   * properly by all implementations. Especially only one workbench should be
-   * created. Multiple calls to this method may return the same object.
-   * 
-   * @param title is the title of the workbench to create.
-   * @return the created workbench.
-   */
-  UiWorkbench createWorkbench(String title);
 
   /**
    * This method creates a new regular button.

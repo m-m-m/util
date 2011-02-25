@@ -154,7 +154,7 @@ public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
   /**
    * {@inheritDoc}
    */
-  public boolean isResizeable() {
+  public boolean isResizable() {
 
     // TODO:
     return true;
@@ -165,7 +165,7 @@ public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
    */
   public void setSize(int width, int height) {
 
-    if (isResizeable()) {
+    if (isResizable()) {
       getSwingComponent().setSize(width, height);
       // this.size.height = height;
       // this.size.width = width;

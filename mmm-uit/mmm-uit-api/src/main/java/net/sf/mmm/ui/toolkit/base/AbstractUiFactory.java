@@ -27,6 +27,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
 
 /**
@@ -37,6 +38,13 @@ import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
  * @since 1.0.0
  */
 public abstract class AbstractUiFactory implements UiFactory {
+
+  /**
+   * The title of the application.
+   * 
+   * @see #getOrCreateWorkbench()
+   */
+  private String title;
 
   /** the disposed flag */
   private boolean disposed;
@@ -50,15 +58,22 @@ public abstract class AbstractUiFactory implements UiFactory {
   /** @see #getScriptOrientation() */
   private ScriptOrientation designOrientation;
 
+  /** @see #getOrCreateWorkbench() */
+  private UiWorkbench workbench;
+
   /** The list of all windows that have been created by this factory */
   private List<AbstractUiWindow> windows;
 
   /**
    * The constructor.
+   * 
+   * @param title is the title of this factory. Should be the name of the actual
+   *        application creating the UI.
    */
-  public AbstractUiFactory() {
+  public AbstractUiFactory(String title) {
 
     super();
+    this.title = title;
     // TODO: do we need a thread-safe implementation here?
     this.windows = new ArrayList<AbstractUiWindow>();
     this.disposed = false;
@@ -161,6 +176,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    */
   public void refresh(UIRefreshEvent event) {
 
+    // use concurrent list via list factory?
     AbstractUiWindow[] currentWindows;
     synchronized (this.windows) {
       currentWindows = this.windows.toArray(new AbstractUiWindow[this.windows.size()]);
@@ -169,6 +185,32 @@ public abstract class AbstractUiFactory implements UiFactory {
       window.refresh(event);
     }
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public UiWorkbench getOrCreateWorkbench() {
+
+    if (this.workbench == null) {
+      synchronized (this) {
+        if (this.workbench == null) {
+          this.workbench = createWorkbench(this.title);
+        }
+      }
+    }
+    return this.workbench;
+  }
+
+  /**
+   * This method creates a new {@link UiWorkbench}.
+   * 
+   * @see #getOrCreateWorkbench()
+   * 
+   * @param workbenchTitle is the {@link UiWorkbench#getTitle() title}.
+   * 
+   * @return the {@link UiWorkbench}.
+   */
+  protected abstract UiWorkbench createWorkbench(String workbenchTitle);
 
   /**
    * This method adds (registers) the given <code>window</code> to this factory.

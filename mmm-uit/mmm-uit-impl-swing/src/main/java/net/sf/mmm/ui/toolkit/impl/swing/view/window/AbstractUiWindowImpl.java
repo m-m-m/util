@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UIWindow extends AbstractUiWindowAwt {
+public abstract class AbstractUiWindowImpl extends AbstractUiWindowAwt {
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public abstract class UIWindow extends AbstractUiWindowAwt {
    *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
    *        created this object. It may be <code>null</code>.
    */
-  public UIWindow(AbstractUiFactory uiFactory, UiNode parentObject) {
+  public AbstractUiWindowImpl(AbstractUiFactory uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }
@@ -54,7 +54,7 @@ public abstract class UIWindow extends AbstractUiWindowAwt {
     } else if (messageType == MessageType.INFO) {
       type = JOptionPane.INFORMATION_MESSAGE;
     }
-    JOptionPane.showMessageDialog(getAwtWindow(), message, title, type);
+    JOptionPane.showMessageDialog(getNativeWindow(), message, title, type);
   }
 
   /**
@@ -62,7 +62,7 @@ public abstract class UIWindow extends AbstractUiWindowAwt {
    */
   public boolean showQuestion(String question, String title) {
 
-    int result = JOptionPane.showConfirmDialog(getAwtWindow(), question, title,
+    int result = JOptionPane.showConfirmDialog(getNativeWindow(), question, title,
         JOptionPane.YES_NO_OPTION);
     return (result == JOptionPane.YES_OPTION);
   }
@@ -74,9 +74,9 @@ public abstract class UIWindow extends AbstractUiWindowAwt {
 
     JDialog jDialog = null;
     if (getType() == UiFrame.TYPE) {
-      jDialog = new JDialog((Frame) getAwtWindow());
+      jDialog = new JDialog((Frame) getNativeWindow());
     } else {
-      jDialog = new JDialog((Dialog) getAwtWindow());
+      jDialog = new JDialog((Dialog) getNativeWindow());
     }
     jDialog.setModal(modal);
     jDialog.setResizable(resizeable);

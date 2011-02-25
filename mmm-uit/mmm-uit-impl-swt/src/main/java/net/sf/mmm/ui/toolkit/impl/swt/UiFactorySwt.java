@@ -83,10 +83,13 @@ public class UiFactorySwt extends AbstractUiFactory {
    * This constructor may be used for testing if an instance is required for the
    * default display without using the
    * {@link net.sf.mmm.ui.toolkit.api.UiService UIService}.
+   * 
+   * @param title is the title of this factory. Should be the name of the actual
+   *        application creating the UI.
    */
-  public UiFactorySwt() {
+  public UiFactorySwt(String title) {
 
-    super();
+    super(title);
     this.worker = new SwtWorkerThread();
     this.worker.start();
     this.swtDisplay = this.worker.getDisplay();
@@ -97,23 +100,27 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * The constructor.
    * 
+   * @param title is the title of this factory. Should be the name of the actual
+   *        application creating the UI.
    * @param swtDisplay is the display to use.
    */
-  public UiFactorySwt(Display swtDisplay) {
+  public UiFactorySwt(String title, Display swtDisplay) {
 
-    this(swtDisplay, new UiDeviceImpl(swtDisplay.getPrimaryMonitor()));
+    this(title, swtDisplay, new UiDeviceImpl(swtDisplay.getPrimaryMonitor()));
   }
 
   /**
    * The constructor.
    * 
+   * @param title is the title of this factory. Should be the name of the actual
+   *        application creating the UI.
    * @param swtDisplay is the display to use.
    * @param uiDevice is the graphics device the display of this factory belongs
    *        to.
    */
-  public UiFactorySwt(Display swtDisplay, UiDeviceImpl uiDevice) {
+  public UiFactorySwt(String title, Display swtDisplay, UiDeviceImpl uiDevice) {
 
-    super();
+    super(title);
     this.swtDisplay = swtDisplay;
     this.display = new UiDisplayImpl(this, uiDevice, this.swtDisplay);
   }
@@ -315,6 +322,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiWorkbench createWorkbench(String title) {
 
     UIWorkbenchImpl workbench = new UIWorkbenchImpl(this);

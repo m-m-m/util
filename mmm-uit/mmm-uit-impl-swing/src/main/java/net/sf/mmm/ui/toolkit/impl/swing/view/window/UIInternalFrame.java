@@ -29,7 +29,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIInternalFrame extends UIWindow implements UiFrame, UiElement {
+public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, UiElement {
 
   /** the frame */
   private final JInternalFrame frame;
@@ -46,7 +46,7 @@ public class UIInternalFrame extends UIWindow implements UiFrame, UiElement {
    * @param parentObject is the workbench that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizeable() resizeable}.
+   *        {@link #isResizable() resizeable}.
    */
   public UIInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
       boolean resizeable) {
@@ -67,7 +67,7 @@ public class UIInternalFrame extends UIWindow implements UiFrame, UiElement {
    *        created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizeable() resizeable}.
+   *        {@link #isResizable() resizeable}.
    */
   public UIInternalFrame(UIFactorySwing uiFactory, UIInternalFrame parentObject, String title,
       boolean resizeable) {
@@ -156,7 +156,7 @@ public class UIInternalFrame extends UIWindow implements UiFrame, UiElement {
   /**
    * {@inheritDoc}
    */
-  public boolean isResizeable() {
+  public boolean isResizable() {
 
     return this.frame.isResizable();
   }
@@ -280,9 +280,9 @@ public class UIInternalFrame extends UIWindow implements UiFrame, UiElement {
    * {@inheritDoc}
    */
   @Override
-  protected Window getAwtWindow() {
+  protected Window getNativeWindow() {
 
-    return ((UIWorkbenchImpl) getParent()).getAwtWindow();
+    return ((UIWorkbenchImpl) getParent()).getNativeWindow();
   }
 
   /**

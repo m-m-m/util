@@ -51,8 +51,9 @@ public class UITestRunner2 {
    */
   public static void main(String[] args) {
 
-    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing());
-    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt());
+    String title = UITestRunner2.class.getSimpleName();
+    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing(title));
+    runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt(title));
   }
 
 }

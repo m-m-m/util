@@ -30,7 +30,7 @@ public class UIDialogImpl extends UIWindowImpl implements UiDialog {
    * @param modal - if <code>true</code> all windows of the application are
    *        blocked until the dialog is closed.
    * @param resizeable - if <code>true</code> the window will be
-   *        {@link #isResizeable() resizeable}.
+   *        {@link #isResizable() resizeable}.
    */
   public UIDialogImpl(UiFactorySwt uiFactory, UIWindowImpl parentObject, boolean modal,
       boolean resizeable) {
