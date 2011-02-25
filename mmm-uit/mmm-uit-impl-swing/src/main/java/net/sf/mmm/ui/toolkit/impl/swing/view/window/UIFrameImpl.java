@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swing.window;
+package net.sf.mmm.ui.toolkit.impl.swing.view.window;
 
 import java.awt.Frame;
 import java.awt.Window;
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.menu.UIMenuBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of the

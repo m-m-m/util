@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swing.window;
+package net.sf.mmm.ui.toolkit.impl.swing.view.window;
 
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -10,7 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
+import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;

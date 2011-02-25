@@ -10,8 +10,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
+import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.window.MessageType;
 import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
 import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;

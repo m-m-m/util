@@ -8,8 +8,8 @@ import javax.swing.JDesktopPane;
 
 import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.window.UIInternalFrame;
-import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIInternalFrame;
+import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIWorkbenchImpl;
 
 /**
  * This is the implementation of a

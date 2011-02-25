@@ -8,7 +8,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMinimized;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 
 /**
- * This is the interface for a frame.
+ * This is the interface for a frame. A frame is a non
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadModal#isModal() modal}
+ * window. Unlike a {@link UiDialog} it typically exists for a major purpose
+ * rather than just a temporary interaction. A frame can exist standalone and
+ * will then appear in something like a task-bar. Otherwise it exists as
+ * embedded {@link #createFrame(String, boolean) child frame} of the
+ * {@link UiWorkbench}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

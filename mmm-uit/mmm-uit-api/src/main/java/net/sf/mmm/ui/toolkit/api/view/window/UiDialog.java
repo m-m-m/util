@@ -6,11 +6,10 @@ package net.sf.mmm.ui.toolkit.api.view.window;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadModal;
 
 /**
- * This is the interface for a dialog. A dialog is a window that is not visible
- * in the taskbar. It usually has the top focus of the application and may be
- * modal what means that all other windows of the application are blocked until
- * the dialog is closed. A dialog is created from a frame that will be his
- * parent.
+ * This is the interface for a dialog. A dialog is a {@link UiWindow} that is
+ * not visible in the task-bar. It usually has the top focus of the application
+ * and may be {@link #isModal() modal}. A dialog is created from a frame that
+ * will be his parent.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

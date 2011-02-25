@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTitle;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 
 /**
@@ -18,7 +19,7 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWindow extends UiNode, UiWriteDisposed, UiWriteSize, UiWriteTitle,
+public abstract interface UiWindow extends UiNode, UiWriteDisposed, UiWriteSize, UiWriteTitle,
     UiWritePosition, UiWriteVisible {
 
   /**

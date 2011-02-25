@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swing.widget;
+package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,21 +12,19 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
 import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
-import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload} interface using
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload} interface using
  * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
+public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownload {
 
   /**
    * This inner class implements the listener that handles the button selection.
@@ -38,20 +36,22 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
      */
     public void actionPerformed(ActionEvent e) {
 
-      UIFileUploadImpl.this.fileChooser.setDialogTitle(getValue());
-      int selection = UIFileUploadImpl.this.fileChooser
-          .showOpenDialog(UIFileUploadImpl.this.button);
+      UIFileDownloadImpl.this.fileChooser.setDialogTitle(getValue());
+      int selection = UIFileDownloadImpl.this.fileChooser
+          .showSaveDialog(UIFileDownloadImpl.this.button);
       if (selection == JFileChooser.APPROVE_OPTION) {
-        File uploadFile = UIFileUploadImpl.this.fileChooser.getSelectedFile();
-        UIFileUploadImpl.this.access = new UiFileAccessSimple(uploadFile.getAbsolutePath());
-        invoke(ActionType.SELECT);
+        // TODO
+
+        // FileAccessUtil.save(UIFileDownloadImpl.this.access,
+        // UIFileDownloadImpl.this.fileChooser.getSelectedFile(),
+        // getParentWindow());
       }
     }
 
   }
 
-  /** the access to the uploaded data */
-  private UiFileAccess access;
+  /** the access to the downloadable data */
+  private final UiFileAccess access;
 
   /** the widget used to present the download */
   private final JButton button;
@@ -65,24 +65,28 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
    * @param uiFactory is the UIFactorySwing instance.
    * @param parentObject is the parent of this object (may be <code>null</code>
    *        ).
+   * @param uiFileAccess gives access to the data that is offered for download.
    */
-  public UIFileUploadImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UIFileDownloadImpl(UIFactorySwing uiFactory, UiNode parentObject, UiFileAccess uiFileAccess) {
 
     super(uiFactory, parentObject);
-    this.access = null;
+    this.access = uiFileAccess;
     this.fileChooser = new JFileChooser();
-    this.fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+    this.fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+    // this.fileChooser.setMultiSelectionEnabled(false);
+    this.fileChooser.setSelectedFile(new File(this.access.getUrl()));
     // TODO: i18n
-    this.button = new JButton("Upload");
-    // this.button.setToolTipText("Upload " + this.access.getFilename());
+    this.button = new JButton("Save");
+    // TODO: should only be filename
+    this.button.setToolTipText("Save " + this.access.getUrl());
     this.button.addActionListener(new Listener());
   }
 
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.button;
   }
@@ -90,17 +94,9 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public UiFileAccess getSelection() {
+  public void setValue(String text) {
 
-    return this.access;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getType() {
-
-    return TYPE;
+    this.button.setText(text);
   }
 
   /**
@@ -114,9 +110,9 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public void setValue(String text) {
+  public String getType() {
 
-    this.button.setText(text);
+    return TYPE;
   }
 
 }

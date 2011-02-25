@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swing.widget.editor;
+package net.sf.mmm.ui.toolkit.impl.swing.view.widget.editor;
 
 import java.util.Date;
 import java.util.Locale;
@@ -13,7 +13,7 @@ import com.toedter.calendar.JDateChooser;
 import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.AbstractUIWidget;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.AbstractUIWidget;
 
 /**
  * This class is the implementation of the

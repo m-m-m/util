@@ -44,21 +44,21 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UIScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UISlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UISplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UITabbedPanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UIButtonImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UIComboBoxImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UIFileDownloadImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UIFileUploadImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UILabelImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UIListImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UIProgressBarImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UISlideBarImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UISpinBoxImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UITableImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UITextFieldImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.UITreeImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.widget.editor.UIDateEditorImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.window.UIFrameImpl;
-import net.sf.mmm.ui.toolkit.impl.swing.window.UIWorkbenchImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIButtonImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIComboBoxImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIFileDownloadImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIFileUploadImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UILabelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIListImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIProgressBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UISlideBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UISpinBoxImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UITableImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UITextFieldImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UITreeImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.widget.editor.UIDateEditorImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIFrameImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIWorkbenchImpl;
 
 /**
  * This class is the implementation of the UIFactory interface using Swing as
