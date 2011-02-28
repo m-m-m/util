@@ -5,9 +5,9 @@ package net.sf.mmm.ui.toolkit.api.view.menu;
 
 import java.util.Iterator;
 
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 
 /**
  * This is the interface for a menu.<br>
@@ -44,19 +44,19 @@ public interface UiMenu extends UiMenuItem {
    * This method creates and adds a new {@link ButtonStyle#DEFAULT regular} item
    * to this menu.
    * 
-   * @see #addItem(String, UIActionListener, ButtonStyle)
+   * @see #addItem(String, UiEventListener, ButtonStyle)
    * 
    * @param name is the name of the item to add.
    * @param action is the action invoked by the item (may be <code>null</code>
    *        for a separator).
    * @return the created menu item.
    */
-  UiMenuItem addItem(String name, UIActionListener action);
+  UiMenuItem addItem(String name, UiEventListener action);
 
   /**
    * This method creates and adds a new item to this menu.
    * 
-   * @see #addItem(String, UIActionListener, ButtonStyle)
+   * @see #addItem(String, UiEventListener, ButtonStyle)
    * 
    * @param name is the name of the item to add.
    * @param style is the style defining how the item is visualized and behaves.
@@ -73,7 +73,7 @@ public interface UiMenu extends UiMenuItem {
    * @param style is the style defining how the item is visualized and behaves.
    * @return the created menu item.
    */
-  UiMenuItem addItem(String name, UIActionListener action, ButtonStyle style);
+  UiMenuItem addItem(String name, UiEventListener action, ButtonStyle style);
 
   /**
    * This method creates and adds a new item to this menu.

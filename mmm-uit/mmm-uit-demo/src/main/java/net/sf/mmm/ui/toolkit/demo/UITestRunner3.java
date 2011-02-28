@@ -4,8 +4,8 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
+import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;

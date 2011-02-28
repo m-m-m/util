@@ -11,8 +11,8 @@ import java.awt.LayoutManager2;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.composite.AbstractLayoutManager;
 import net.sf.mmm.ui.toolkit.base.view.composite.Rectangle;

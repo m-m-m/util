@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.feature;
 
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
 
 /**
  * This is a simple implementation of the
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 public class SimpleAction extends AbstractAction {
 
   /** the {@link #getActionListener() listener} */
-  private UIActionListener listener;
+  private UiEventListener listener;
 
   /**
    * The constructor.
@@ -24,7 +24,7 @@ public class SimpleAction extends AbstractAction {
    * @param actionListener is the {@link #getActionListener() listener}.
    * @param displayName is the {@link #getName() name}.
    */
-  public SimpleAction(UIActionListener actionListener, String displayName) {
+  public SimpleAction(UiEventListener actionListener, String displayName) {
 
     this(actionListener, displayName, null);
   }
@@ -36,7 +36,7 @@ public class SimpleAction extends AbstractAction {
    * @param displayName is the {@link #getName() name}.
    * @param displayIcon is the {@link #getIcon() icon}.
    */
-  public SimpleAction(UIActionListener actionListener, String displayName, UiImage displayIcon) {
+  public SimpleAction(UiEventListener actionListener, String displayName, UiImage displayIcon) {
 
     super(displayName);
     this.listener = actionListener;
@@ -47,7 +47,7 @@ public class SimpleAction extends AbstractAction {
    * 
    * @param newListener is the new listener to set.
    */
-  public void setActionListener(UIActionListener newListener) {
+  public void setActionListener(UiEventListener newListener) {
 
     this.listener = newListener;
   }
@@ -55,7 +55,7 @@ public class SimpleAction extends AbstractAction {
   /**
    * {@inheritDoc}
    */
-  public UIActionListener getActionListener() {
+  public UiEventListener getActionListener() {
 
     return this.listener;
   }

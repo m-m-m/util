@@ -6,9 +6,9 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiElement} interface using Swing as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using Swing as the UI
  * toolkit.
  * 
  * @param <E> is the generic type of the {@link #getChild(int) children}.

@@ -7,13 +7,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu;
+import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenu;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuAccess;
 
 /**
  * This class is the implementation of the
@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIMenuImpl extends AbstractUIMenu {
+public class UIMenuImpl extends AbstractUiMenu {
 
   /** the synchronous access to the menu */
   private final SyncMenuAccess syncAccess;

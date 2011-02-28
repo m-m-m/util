@@ -10,8 +10,8 @@ import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
-import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
-import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
+import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenuBar;
+import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIMenuBarImpl extends AbstractUIMenuBar {
+public class UIMenuBarImpl extends AbstractUiMenuBar {
 
   /** the swing menu bar */
   private JMenuBar menuBar;

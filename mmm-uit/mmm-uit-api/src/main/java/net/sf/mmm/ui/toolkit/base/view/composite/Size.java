@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 
 /**
  * This class is a simple container for the size of a
- * {@link net.sf.mmm.ui.toolkit.api.UiElement component}.
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

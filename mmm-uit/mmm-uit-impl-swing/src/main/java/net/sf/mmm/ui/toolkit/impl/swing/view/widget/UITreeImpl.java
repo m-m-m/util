@@ -14,9 +14,10 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
@@ -30,7 +31,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
+public class UITreeImpl<N> extends AbstractUiWidget implements UiTree<N> {
 
   /** the swing scroll pane */
   private final JScrollPane scrollPanel;
@@ -45,9 +46,10 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
-  public UITreeImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UITreeImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
 
     super(uiFactory, parentObject);
     this.tree = new JTree();
@@ -110,6 +112,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public JComponent getSwingComponent() {
 
     return this.scrollPanel;
@@ -118,6 +121,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
+  @Override
   protected JComponent getActiveSwingComponent() {
 
     return this.tree;
@@ -171,7 +175,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
 
       public void valueChanged(TreeSelectionEvent e) {
 
-        invoke(ActionType.SELECT);
+        fireEvent(UiEventType.CLICK);
       }
     });
     return true;

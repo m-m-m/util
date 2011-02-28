@@ -6,10 +6,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;

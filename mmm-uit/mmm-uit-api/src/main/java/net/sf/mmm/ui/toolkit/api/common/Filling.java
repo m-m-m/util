@@ -6,9 +6,9 @@ package net.sf.mmm.ui.toolkit.api.common;
 
 /**
  * This enum contains the available values for the filling of a
- * {@link net.sf.mmm.ui.toolkit.api.UiElement component}. The filling determines
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}. The filling determines
  * if the {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size} of the
- * {@link net.sf.mmm.ui.toolkit.api.UiElement component} will be expanded
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement component} will be expanded
  * horizontally and/or vertically if there is more space available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -17,25 +17,25 @@ package net.sf.mmm.ui.toolkit.api.common;
 public enum Filling {
 
   /**
-   * The {@link net.sf.mmm.ui.toolkit.api.UiElement element} will keep its
+   * The {@link net.sf.mmm.ui.toolkit.api.view.UiElement element} will keep its
    * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}.
    */
   NONE,
 
   /**
-   * The width of the {@link net.sf.mmm.ui.toolkit.api.UiElement component} will
+   * The width of the {@link net.sf.mmm.ui.toolkit.api.view.UiElement component} will
    * be expanded while the height is kept.
    */
   HORIZONTAL,
 
   /**
-   * The height of the {@link net.sf.mmm.ui.toolkit.api.UiElement component}
+   * The height of the {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}
    * will be expanded while the width is kept.
    */
   VERTICAL,
 
   /**
-   * Both width and height of the {@link net.sf.mmm.ui.toolkit.api.UiElement
+   * Both width and height of the {@link net.sf.mmm.ui.toolkit.api.view.UiElement
    * component} will be expanded.
    */
   BOTH;

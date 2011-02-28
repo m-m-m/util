@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.api.common;
 
 /**
  * This enum contains the available values for alignment of a
- * {@link net.sf.mmm.ui.toolkit.api.UiElement component}.
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

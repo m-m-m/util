@@ -9,11 +9,11 @@ import org.eclipse.swt.printing.Printer;
 import org.eclipse.swt.printing.PrinterData;
 import org.eclipse.swt.widgets.Shell;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 
@@ -25,7 +25,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PrintAction extends AbstractAction implements UIActionListener {
+public class PrintAction extends AbstractAction implements UiEventListener {
 
   /** the component to be printed */
   private final AbstractUiElement component;
@@ -47,7 +47,7 @@ public class PrintAction extends AbstractAction implements UIActionListener {
   /**
    * {@inheritDoc}
    */
-  public UIActionListener getActionListener() {
+  public UiEventListener getActionListener() {
 
     return this;
   }
@@ -55,9 +55,9 @@ public class PrintAction extends AbstractAction implements UIActionListener {
   /**
    * {@inheritDoc}
    */
-  public void invoke(UiNode source, ActionType action) {
+  public void onEvent(UiNode source, UiEventType action) {
 
-    if (action == ActionType.SELECT) {
+    if (action == UiEventType.CLICK) {
       Shell shell = this.component.getSyncAccess().getSwtObject().getShell();
       PrintDialog printDialog = new PrintDialog(shell);
       PrinterData printerData = printDialog.open();

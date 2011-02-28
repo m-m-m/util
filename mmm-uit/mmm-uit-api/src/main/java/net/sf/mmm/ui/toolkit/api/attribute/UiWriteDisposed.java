@@ -12,8 +12,9 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public interface UiWriteDisposed extends UiReadDisposed {
 
   /**
-   * This method disposes this object. The resources of the object are
-   * deallocated and the object can not be used or displayed anymore.
+   * This method disposes this object. It will be removed from the UI. The
+   * resources of the object are deallocated and the object can not be used or
+   * displayed anymore.
    */
   void dispose();
 

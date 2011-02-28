@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiMultiComposite;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;

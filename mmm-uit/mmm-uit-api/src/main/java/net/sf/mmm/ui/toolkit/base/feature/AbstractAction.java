@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.feature;
 
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
 
 /**
  * This is the abstract base implementation of the

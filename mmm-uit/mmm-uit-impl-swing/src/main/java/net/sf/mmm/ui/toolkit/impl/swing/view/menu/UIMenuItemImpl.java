@@ -9,11 +9,11 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
+import net.sf.mmm.ui.toolkit.impl.awt.AbstractUiNodeAwt;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIMenuItemImpl extends UIAwtNode implements UiMenuItem {
+public class UIMenuItemImpl extends AbstractUiNodeAwt implements UiMenuItem {
 
   /** the swing menu item */
   private final JMenuItem item;

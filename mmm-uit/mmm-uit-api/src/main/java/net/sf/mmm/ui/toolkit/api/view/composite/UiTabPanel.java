@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
  * This is the interface for a tabbed panel. Such component is a composite that

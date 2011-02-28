@@ -6,19 +6,19 @@ package net.sf.mmm.ui.toolkit.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -28,7 +28,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
-import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
+import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 
 /**
  * This is the abstract base implementation of the
@@ -169,8 +169,8 @@ public abstract class AbstractUiFactory implements UiFactory {
    * This method refreshes all
    * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow windows} created by
    * this factory. The refresh of a window recursively refreshes all
-   * {@link net.sf.mmm.ui.toolkit.api.UiNode nodes} contained in the window.
-   * This way all visible GUI elements are refreshed.
+   * {@link net.sf.mmm.ui.toolkit.api.view.UiNode nodes} contained in the
+   * window. This way all visible GUI elements are refreshed.
    * 
    * @param event is the event with details about the refresh.
    */
@@ -291,7 +291,7 @@ public abstract class AbstractUiFactory implements UiFactory {
   public UiButton createButton(UiAction uiAction) {
 
     UiButton button = createButton(uiAction.getName(), uiAction.getButtonStyle());
-    button.addActionListener(uiAction.getActionListener());
+    button.addListener(uiAction.getActionListener());
     UiImage icon = uiAction.getIcon();
     if (icon != null) {
       button.setImage(icon);
@@ -417,6 +417,19 @@ public abstract class AbstractUiFactory implements UiFactory {
   public boolean isDisposed() {
 
     return this.disposed;
+  }
+
+  /**
+   * This method is invoked if an
+   * {@link net.sf.mmm.ui.toolkit.api.event.UiEventListener} caused an error.
+   * This default implementation does nothing. Override this method to change
+   * this (log the exception, throw it or whatever).
+   * 
+   * @param error is the error to handle.
+   */
+  protected void handleEventError(RuntimeException error) {
+
+    // do nothing ...
   }
 
 }

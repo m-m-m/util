@@ -10,13 +10,13 @@ import java.awt.Window;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.window.AbstractUiWindow;
+import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 
 /**
  * This class is the implementation of the UIWindow interface using AWT as the
@@ -33,11 +33,10 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
-   *        created this object. It may be <code>null</code>.
+   * @param parentObject is the {@link #getParent() parent} that created this
+   *        object. It may be <code>null</code>.
    */
-  public AbstractUiWindowAwt(AbstractUiFactory uiFactory, UiNode parentObject) {
+  public AbstractUiWindowAwt(AbstractUiFactory uiFactory, UiWindow parentObject) {
 
     super(uiFactory, parentObject);
   }
@@ -62,7 +61,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowActivated(WindowEvent e) {
 
-        invoke(ActionType.ACTIVATE);
+        fireEvent(UiEventType.ACTIVATE);
       }
 
       /**
@@ -70,7 +69,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowClosed(WindowEvent e) {
 
-        invoke(ActionType.HIDE);
+        fireEvent(UiEventType.HIDE);
       }
 
       /**
@@ -78,7 +77,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowClosing(WindowEvent e) {
 
-      // currently ignored...
+        // currently ignored...
       }
 
       /**
@@ -86,7 +85,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowDeactivated(WindowEvent e) {
 
-        invoke(ActionType.DEACTIVATE);
+        fireEvent(UiEventType.DEACTIVATE);
       }
 
       /**
@@ -94,7 +93,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowDeiconified(WindowEvent e) {
 
-        invoke(ActionType.DEICONIFY);
+        fireEvent(UiEventType.DEICONIFY);
       }
 
       /**
@@ -102,7 +101,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowIconified(WindowEvent e) {
 
-        invoke(ActionType.DEACTIVATE);
+        fireEvent(UiEventType.DEACTIVATE);
       }
 
       /**
@@ -110,7 +109,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
        */
       public void windowOpened(WindowEvent e) {
 
-        invoke(ActionType.SHOW);
+        fireEvent(UiEventType.SHOW);
       }
 
     };
@@ -193,6 +192,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void dispose() {
 
     super.dispose();

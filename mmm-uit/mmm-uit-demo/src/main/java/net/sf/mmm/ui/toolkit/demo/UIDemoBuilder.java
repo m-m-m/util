@@ -3,18 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.demo;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.common.Alignment;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.Filling;
+import net.sf.mmm.ui.toolkit.api.common.Insets;
+import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
-import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
@@ -22,12 +24,10 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -118,12 +118,12 @@ public class UIDemoBuilder {
     final NumericUIRangeModel slideModel = new NumericUIRangeModel(0, 7);
     final UiSlideBar slideBar = factory.createSlideBar(slideModel);
     final UiProgressBar progressBar = factory.createProgressBar();
-    maxSlideBar.addActionListener(new UIActionListener() {
+    maxSlideBar.addListener(new UiEventListener() {
 
       /**
        * {@inheritDoc}
        */
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         int index = maxSlideBar.getSelectedIndex();
         Integer maxSelection = maxSlideModel.getElement(index);
@@ -131,12 +131,12 @@ public class UIDemoBuilder {
       }
 
     });
-    slideBar.addActionListener(new UIActionListener() {
+    slideBar.addListener(new UiEventListener() {
 
       /**
        * {@inheritDoc}
        */
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         progressBar.setProgress(slideBar.getSelectedIndex());
       }
@@ -162,12 +162,12 @@ public class UIDemoBuilder {
 
     UiButton imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
     addEditorProperty(editorPanel, "IconButton:", imageButton, sizer);
-    imageButton.addActionListener(new UIActionListener() {
+    imageButton.addListener(new UiEventListener() {
 
       /**
        * {@inheritDoc}
        */
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         UiButton testButton = factory.createButton("Test");
         addEditorProperty(editorPanel, "Extra long special greedy Label:", testButton, sizer);
@@ -193,9 +193,9 @@ public class UIDemoBuilder {
     panel.addChild(UIDemoBuilder.createTreePanel(factory));
     panel.addChild(UIDemoBuilder.createRadioPanel(factory));
     UiButton button = factory.createButton("Flip");
-    button.addActionListener(new UIActionListener() {
+    button.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         // panel.setOrientation(panel.getOrientation().getMirrored());
         ScriptOrientation so;
@@ -251,9 +251,9 @@ public class UIDemoBuilder {
     final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
     final UiButton addButton = factory.createButton("add");
-    addButton.addActionListener(new UIActionListener() {
+    addButton.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         String text = combo.getValue();
         int index = list.getSelectedIndex();
@@ -264,9 +264,9 @@ public class UIDemoBuilder {
       }
     });
     final UiButton removeButton = factory.createButton("remove");
-    removeButton.addActionListener(new UIActionListener() {
+    removeButton.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         int index = list.getSelectedIndex();
         if (index != -1) {
@@ -289,9 +289,9 @@ public class UIDemoBuilder {
     UiMenuBar menubar = frame.getMenuBar();
     // file menu
     UiMenu fileMenu = menubar.addMenu("File");
-    UIActionListener loadAction = new UIActionListener() {
+    UiEventListener loadAction = new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         frame.showMessage("You selected load", "Hi", MessageType.INFO);
       }
@@ -300,11 +300,11 @@ public class UIDemoBuilder {
     fileMenu.addItem("Load", loadAction);
     fileMenu.addSeparator();
     UiMenu subMenu = fileMenu.addSubMenu("Submenu");
-    UIActionListener checkAction = new UIActionListener() {
+    UiEventListener checkAction = new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
-        if (action == ActionType.SELECT) {
+        if (action == UiEventType.CLICK) {
           UiMenuItem item = (UiMenuItem) source;
           boolean selection = item.isSelected();
           String state = "uncheck";
@@ -328,9 +328,9 @@ public class UIDemoBuilder {
     menubar.addMenu("Product");
 
     // Admin menu
-    UIActionListener dummy = new UIActionListener() {
+    UiEventListener dummy = new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
       }
     };
@@ -349,9 +349,9 @@ public class UIDemoBuilder {
     final UiMenuItem[] colors = new UiMenuItem[] { radioMenu.addItem("blue", ButtonStyle.RADIO),
         radioMenu.addItem("green", ButtonStyle.RADIO), radioMenu.addItem("red", ButtonStyle.RADIO) };
     radioMenu.addSeparator();
-    UIActionListener colorAction = new UIActionListener() {
+    UiEventListener colorAction = new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         String color = "none";
         for (int i = 0; i < colors.length; i++) {
@@ -381,9 +381,9 @@ public class UIDemoBuilder {
     final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
 
     final UiButton addButton = factory.createButton("add");
-    addButton.addActionListener(new UIActionListener() {
+    addButton.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
         if (selection != null) {
@@ -393,9 +393,9 @@ public class UIDemoBuilder {
       }
     });
     final UiButton removeButton = factory.createButton("remove");
-    removeButton.addActionListener(new UIActionListener() {
+    removeButton.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         DefaultUITreeNode<String> selection = (DefaultUITreeNode<String>) tree.getSelection();
         if (selection != null) {
@@ -442,9 +442,9 @@ public class UIDemoBuilder {
     final UiList<String> list = factory.createList(listModel);
     modelPanel.addChild(list);
 
-    addButton.addActionListener(new UIActionListener() {
+    addButton.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         String text = combo.getValue();
         int index = list.getSelectedIndex();
@@ -454,9 +454,9 @@ public class UIDemoBuilder {
         listModel.addElement(text, index);
       }
     });
-    removeButton.addActionListener(new UIActionListener() {
+    removeButton.addListener(new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         int index = list.getSelectedIndex();
         if (index != -1) {

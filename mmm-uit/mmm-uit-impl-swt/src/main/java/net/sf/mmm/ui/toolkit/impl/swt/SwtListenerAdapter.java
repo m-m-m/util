@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
 
 import org.eclipse.swt.SWT;
@@ -39,28 +39,28 @@ public class SwtListenerAdapter implements Listener {
 
     switch (event.type) {
       case SWT.Selection:
-        this.object.invoke(ActionType.SELECT);
+        this.object.fireEvent(UiEventType.CLICK);
         break;
       case SWT.Hide:
-        this.object.invoke(ActionType.HIDE);
+        this.object.fireEvent(UiEventType.HIDE);
         break;
       case SWT.Show:
-        this.object.invoke(ActionType.SHOW);
+        this.object.fireEvent(UiEventType.SHOW);
         break;
       case SWT.Iconify:
-        this.object.invoke(ActionType.ICONIFY);
+        this.object.fireEvent(UiEventType.ICONIFY);
         break;
       case SWT.Deiconify:
-        this.object.invoke(ActionType.DEICONIFY);
+        this.object.fireEvent(UiEventType.DEICONIFY);
         break;
       case SWT.Activate:
-        this.object.invoke(ActionType.ACTIVATE);
+        this.object.fireEvent(UiEventType.ACTIVATE);
         break;
       case SWT.Deactivate:
-        this.object.invoke(ActionType.DEACTIVATE);
+        this.object.fireEvent(UiEventType.DEACTIVATE);
         break;
       case SWT.Dispose:
-        this.object.invoke(ActionType.DISPOSE);
+        this.object.fireEvent(UiEventType.DISPOSE);
         break;
       default :
         return;

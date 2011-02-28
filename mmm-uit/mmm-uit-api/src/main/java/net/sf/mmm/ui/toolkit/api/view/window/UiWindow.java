@@ -3,14 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTitle;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 
 /**
@@ -97,5 +97,10 @@ public abstract interface UiWindow extends UiNode, UiWriteDisposed, UiWriteSize,
    * @param newComposite is the new composite for this window.
    */
   void setComposite(UiComposite<? extends UiElement> newComposite);
+
+  /**
+   * {@inheritDoc}
+   */
+  UiWindow getParent();
 
 }

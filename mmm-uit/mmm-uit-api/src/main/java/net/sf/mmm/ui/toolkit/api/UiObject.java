@@ -46,33 +46,6 @@ public abstract interface UiObject extends UiReadId, UiReadStyle {
   String getType();
 
   /**
-   * This method determines if this component is a window.
-   * 
-   * @return <code>true</code> if this component is a
-   *         {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow window},
-   *         <code>false</code> otherwise.
-   */
-  boolean isWindow();
-
-  /**
-   * This method determines if this component is a widget.
-   * 
-   * @return <code>true</code> if this component is a
-   *         {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget widget},
-   *         <code>false</code> otherwise.
-   */
-  boolean isWidget();
-
-  /**
-   * This method gets the optional style of this object. It is used to associate
-   * additional information (e.g. CSS styles) with the object. Multiple objects
-   * may have the same style and therefore .
-   * 
-   * @return the style of this object.
-   */
-  String getStyle();
-
-  /**
    * This method sets the style of this object. The style is a custom string
    * defined by the end-user that can be associated with a specific appearance
    * settings (colors, borders, fonts, etc.).

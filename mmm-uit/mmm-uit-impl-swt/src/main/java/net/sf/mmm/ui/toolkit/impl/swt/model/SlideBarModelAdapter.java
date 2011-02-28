@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Slider;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncSliderAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncSliderAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**

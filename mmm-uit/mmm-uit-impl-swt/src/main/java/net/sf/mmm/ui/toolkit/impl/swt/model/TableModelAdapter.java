@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.TableItem;
 import net.sf.mmm.ui.toolkit.api.event.UITableModelListener;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTableAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTableAccess;
 
 /**
  * This class adapts from {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel}

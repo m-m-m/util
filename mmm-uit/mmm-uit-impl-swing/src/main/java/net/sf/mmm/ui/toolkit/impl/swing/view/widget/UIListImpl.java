@@ -12,16 +12,17 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.ListModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using Swing as
+ * the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -29,7 +30,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.ListModelAdapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
+public class UIListImpl<E> extends AbstractUiWidget implements UiList<E> {
 
   /** the swing scroll pane */
   private JScrollPane scrollPanel;
@@ -44,9 +45,10 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
-  public UIListImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UIListImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
 
     super(uiFactory, parentObject);
     this.list = new JList();
@@ -139,6 +141,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public JComponent getSwingComponent() {
 
     return this.scrollPanel;
@@ -147,6 +150,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   protected JComponent getActiveSwingComponent() {
 
     return this.list;

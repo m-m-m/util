@@ -4,18 +4,18 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
@@ -48,9 +48,9 @@ public class UITestRunner {
     System.out.println(factory.getDisplay());
     final UiFrame frame = factory.createFrame("TestFrame");
     UiMenu fileMenu = frame.getMenuBar().addMenu("File");
-    fileMenu.addItem("Load", new UIActionListener() {
+    fileMenu.addItem("Load", new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
         frame.showMessage("You selected load", "Hi", MessageType.INFO);
       }
@@ -58,11 +58,11 @@ public class UITestRunner {
     });
     fileMenu.addSeparator();
     UiMenu subMenu = fileMenu.addSubMenu("Submenu");
-    subMenu.addItem("Test", new UIActionListener() {
+    subMenu.addItem("Test", new UiEventListener() {
 
-      public void invoke(UiNode source, ActionType action) {
+      public void onEvent(UiNode source, UiEventType action) {
 
-        if (action == ActionType.SELECT) {
+        if (action == UiEventType.CLICK) {
           if (!frame.showQuestion("Did you mean to do that?", "Test")) {
             ((UiMenuItem) source).setSelected(false);
           }

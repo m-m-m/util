@@ -6,21 +6,22 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.UiImageImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel} interface using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel} interface using Swing
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UILabelImpl extends AbstractUIWidget implements UiLabel {
+public class UILabelImpl extends AbstractUiWidget implements UiLabel {
 
   /** the actual Swing label */
   private final JLabel label;
@@ -34,7 +35,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
    * @param uiFactory
    * @param parentObject
    */
-  public UILabelImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UILabelImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
 
     super(uiFactory, parentObject);
     this.label = new JLabel();

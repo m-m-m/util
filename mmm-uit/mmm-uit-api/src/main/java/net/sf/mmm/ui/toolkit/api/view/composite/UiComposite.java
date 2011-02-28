@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
  * This is the interface of a UI component that contains other UI components.

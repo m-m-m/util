@@ -11,9 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -26,7 +27,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
+public class UIFileUploadImpl extends AbstractUiWidget implements UiFileUpload {
 
   /**
    * This inner class implements the listener that handles the button selection.
@@ -44,7 +45,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
       if (selection == JFileChooser.APPROVE_OPTION) {
         File uploadFile = UIFileUploadImpl.this.fileChooser.getSelectedFile();
         UIFileUploadImpl.this.access = new UiFileAccessSimple(uploadFile.getAbsolutePath());
-        invoke(ActionType.SELECT);
+        fireEvent(UiEventType.CLICK);
       }
     }
 
@@ -66,7 +67,7 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
    * @param parentObject is the parent of this object (may be <code>null</code>
    *        ).
    */
-  public UIFileUploadImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UIFileUploadImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
 
     super(uiFactory, parentObject);
     this.access = null;

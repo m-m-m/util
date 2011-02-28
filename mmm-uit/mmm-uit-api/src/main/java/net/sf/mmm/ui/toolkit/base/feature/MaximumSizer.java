@@ -15,8 +15,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
  * maximum width/height out of
  * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize preferred-size}
  * objects. This is supposed to be used as
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints#size size} in
- * {@linkplain net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints} to emulate
+ * {@link net.sf.mmm.ui.toolkit.api.common.LayoutConstraints#size size} in
+ * {@linkplain net.sf.mmm.ui.toolkit.api.common.LayoutConstraints} to emulate
  * a grid layout.<br>
  * TODO: nobody can understand this crappy explanation
  * 

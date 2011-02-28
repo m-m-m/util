@@ -42,4 +42,9 @@ public interface UiFrame extends UiWindow, UiWriteMaximized, UiWriteMinimized {
    */
   UiFrame createFrame(String title, boolean resizeable);
 
+  /**
+   * {@inheritDoc}
+   */
+  UiFrame getParent();
+
 }

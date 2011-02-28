@@ -7,21 +7,21 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JComponent;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.impl.awt.UIAwtNode;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.impl.awt.AbstractUiNodeAwt;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiElement} interface using Swing as the UI
- * toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using Swing as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
+public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiElement {
 
   /** the disposed flag */
   private boolean disposed;
@@ -32,7 +32,8 @@ public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
   public AbstractUiElement(UIFactorySwing uiFactory, UiNode parentObject) {
 
@@ -55,8 +56,8 @@ public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
    * setTooltipText(). It can be overridden if the implemented component is
    * build out of multiple swing components and the top ancestor is not the
    * active component (e.g. a {@link javax.swing.JTree} is the active component
-   * and a {@link javax.swing.JScrollPane} is the
-   * {@link #getSwingComponent() top-ancestor}).
+   * and a {@link javax.swing.JScrollPane} is the {@link #getSwingComponent()
+   * top-ancestor}).
    * 
    * @return the active unwrapped swing component.
    */
@@ -122,22 +123,6 @@ public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
   /**
    * {@inheritDoc}
    */
-  public int getX() {
-
-    return getSwingComponent().getX();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getY() {
-
-    return getSwingComponent().getY();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public int getHeight() {
 
     return getSwingComponent().getHeight();
@@ -171,14 +156,6 @@ public abstract class AbstractUiElement extends UIAwtNode implements UiElement {
       // this.size.width = width;
       // getSwingComponent().setMinimumSize(this.size);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setPosition(int x, int y) {
-
-    getSwingComponent().setLocation(x, y);
   }
 
   /**

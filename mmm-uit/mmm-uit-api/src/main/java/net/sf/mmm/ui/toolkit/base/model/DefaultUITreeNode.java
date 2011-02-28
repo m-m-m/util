@@ -6,11 +6,11 @@ import java.util.Vector;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This inner class is the implementation of the {@link UITreeNodeIF} interface.
+ * This inner class is the implementation of the {@link UiTreeNode} interface.
  * 
  * @param <T> is the templated type of the user data in the tree nodes.
  */
-public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
+public class DefaultUITreeNode<T> implements UiTreeNode<T> {
 
   /** the owning tree-model */
   private final DefaultUITreeModel<T> model;
@@ -22,7 +22,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   private T data;
 
   /** the children of this node */
-  private List<UITreeNodeIF<T>> children;
+  private List<UiTreeNode<T>> children;
 
   /**
    * The constructor.
@@ -37,14 +37,14 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
     super();
     this.model = treeModel;
     this.parent = parentNode;
-    this.children = new Vector<UITreeNodeIF<T>>();
+    this.children = new Vector<UiTreeNode<T>>();
     this.data = nodeData;
   }
 
   /**
    * {@inheritDoc}
    */
-  public UITreeNodeIF<T> getParentNode() {
+  public UiTreeNode<T> getParentNode() {
 
     return this.parent;
   }
@@ -52,7 +52,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   /**
    * {@inheritDoc}
    */
-  public UITreeNodeIF<T> getChildNode(int index) {
+  public UiTreeNode<T> getChildNode(int index) {
 
     return this.children.get(index);
   }
@@ -68,7 +68,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   /**
    * {@inheritDoc}
    */
-  public int getIndexOfChildNode(UITreeNodeIF childNode) {
+  public int getIndexOfChildNode(UiTreeNode childNode) {
 
     return this.children.indexOf(childNode);
   }
@@ -84,7 +84,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
   /**
    * This method gets the data of this node.
    * 
-   * @see net.sf.mmm.ui.toolkit.base.model.UITreeNodeIF#getData()
+   * @see net.sf.mmm.ui.toolkit.base.model.UiTreeNode#getData()
    * 
    * @param newData is the new node data.
    */
@@ -98,7 +98,7 @@ public class DefaultUITreeNode<T> implements UITreeNodeIF<T> {
    * This method creates a child node of this node.
    * 
    * @param childData is the data object of this node. See
-   *        {@link UITreeNodeIF#getData()}.
+   *        {@link UiTreeNode#getData()}.
    * @return the created node.
    */
   public DefaultUITreeNode<T> createChildNode(T childData) {

@@ -6,16 +6,16 @@ package net.sf.mmm.ui.toolkit.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 
 /**
  * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiNode} interface.
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -29,7 +29,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
    * the registered listeners (or <code>null</code> if no listener is
    * registered)
    */
-  private List<UIActionListener> listeners;
+  private List<UiEventListener> listeners;
 
   /**
    * The constructor.
@@ -37,9 +37,8 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
-   *        created this object. It may be <code>null</code>.
+   * @param parentObject is the {@link #getParent() parent} of this object. It
+   *        may be <code>null</code>.
    */
   public AbstractUiNode(AbstractUiFactory uiFactory, UiNode parentObject) {
 
@@ -92,12 +91,8 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
   public UiFrame getParentFrame() {
 
     if (getType() == UiFrame.TYPE) {
-      if (getParent() == null) {
-        return null;
-      } else {
-        // the only legal parent of frame is another frame.
-        return ((UiFrame) getParent());
-      }
+      // the only legal parent of frame is another frame (or null).
+      return ((UiFrame) getParent());
     } else {
       if (getParent() == null) {
         return null;
@@ -114,16 +109,12 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
    */
   public UiWindow getParentWindow() {
 
-    if (isWindow()) {
-      if (getParent() == null) {
-        return null;
-      } else {
-        return ((UiWindow) getParent());
-      }
+    if (this instanceof UiWindow) {
+      return ((UiWindow) getParent());
     } else {
       if (getParent() == null) {
         return null;
-      } else if (getParent().isWindow()) {
+      } else if (getParent() instanceof UiWindow) {
         return ((UiWindow) getParent());
       } else {
         return getParent().getParentWindow();
@@ -134,14 +125,14 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
   /**
    * {@inheritDoc}
    */
-  public void addActionListener(UIActionListener listener) {
+  public void addListener(UiEventListener listener) {
 
     synchronized (this) {
       if (this.listeners == null) {
         if (!doInitializeListener()) {
           return;
         }
-        this.listeners = new ArrayList<UIActionListener>();
+        this.listeners = new ArrayList<UiEventListener>();
       }
       this.listeners.add(listener);
     }
@@ -166,14 +157,15 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
    * 
    * @param action is the action that is invoked.
    */
-  public void invoke(ActionType action) {
+  public void fireEvent(UiEventType action) {
 
     if (this.listeners != null) {
+      // TODO: concurrency problem if a listener is added during loop
       for (int i = 0; i < this.listeners.size(); i++) {
         try {
-          this.listeners.get(i).invoke(this, action);
-        } catch (Throwable t) {
-          t.printStackTrace();
+          this.listeners.get(i).onEvent(this, action);
+        } catch (RuntimeException t) {
+          getFactory().handleEventError(t);
         }
       }
     }
@@ -182,7 +174,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
   /**
    * {@inheritDoc}
    */
-  public void removeActionListener(UIActionListener listener) {
+  public void removeListener(UiEventListener listener) {
 
     synchronized (this) {
       if (this.listeners != null) {

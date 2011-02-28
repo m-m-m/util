@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**

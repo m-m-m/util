@@ -3,30 +3,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.menu;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadButtonStyle;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadValue;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelected;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 
 /**
  * This is the interface for a menu-item.<br>
  * Use
- * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenu#addItem(String, net.sf.mmm.ui.toolkit.api.event.UIActionListener, ButtonStyle)}
+ * {@link UiMenu#addItem(String, net.sf.mmm.ui.toolkit.api.event.UIActionListener, net.sf.mmm.ui.toolkit.api.common.ButtonStyle)}
  * to create a menu-item.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiMenuItem extends UiNode, UiWriteSelected, UiReadValue<String> {
+public interface UiMenuItem extends UiNode, UiWriteSelected, UiReadButtonStyle, UiReadValue<String> {
 
   /** the type of this object */
   String TYPE = "MenuItem";
-
-  /**
-   * This method gets the style of this item.
-   * 
-   * @return the items style.
-   */
-  ButtonStyle getButtonStyle();
 
 }

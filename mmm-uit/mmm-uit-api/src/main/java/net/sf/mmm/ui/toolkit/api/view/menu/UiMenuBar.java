@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.view.menu;
 
 import java.util.Iterator;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 
 /**
  * This is the interface for a menu-bar. It represents a bar of pull down

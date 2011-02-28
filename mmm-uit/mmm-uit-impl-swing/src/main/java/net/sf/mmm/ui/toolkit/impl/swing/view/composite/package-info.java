@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the swing implementation for composite elements of the UI toolkit.
- * <a name="documentation"/><h2>UIT View Composite Impl Swing</h2>
+ * <a name="documentation"/><h2>UIT Impl Swing - View Composite</h2>
  * Contains the implementation of the 
  * {@link net.sf.mmm.ui.toolkit.api.view.composite Composite API} using swing.
  */

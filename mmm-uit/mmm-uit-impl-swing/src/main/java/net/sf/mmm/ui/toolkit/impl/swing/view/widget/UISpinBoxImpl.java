@@ -6,16 +6,17 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import javax.swing.JComponent;
 import javax.swing.JSpinner;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SpinnerModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox} interface using Swing
+ * as the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -23,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.SpinnerModelAdapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
+public class UISpinBoxImpl<E> extends AbstractUiWidget implements UiSpinBox<E> {
 
   /** the native Swing widget */
   private final JSpinner spinBox;
@@ -35,10 +36,12 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param model is the model for this spin-box.
    */
-  public UISpinBoxImpl(UIFactorySwing uiFactory, UiNode parentObject, UiListMvcModel<E> model) {
+  public UISpinBoxImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject,
+      UiListMvcModel<E> model) {
 
     super(uiFactory, parentObject);
     this.modelAdapter = new SpinnerModelAdapter<E>(model);

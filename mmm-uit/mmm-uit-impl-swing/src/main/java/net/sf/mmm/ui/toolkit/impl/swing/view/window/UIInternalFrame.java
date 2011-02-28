@@ -10,8 +10,8 @@ import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
@@ -20,8 +20,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
 
 /**
  * This class is the implementation of an internal
- * {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame frame} using Swing as the UI
- * toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame frame} using Swing as
+ * the UI toolkit.
  * 
  * @see net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench#createFrame(String,
  *      boolean)
@@ -33,6 +33,9 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
 
   /** the frame */
   private final JInternalFrame frame;
+
+  /** @see #getMenuBar() */
+  private UIMenuBarImpl menuBar;
 
   /** the workbench */
   private final UIWorkbenchImpl workbench;
@@ -46,7 +49,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    * @param parentObject is the workbench that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizable() resizeable}.
+   *        {@link #isResizable() resizable}.
    */
   public UIInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
       boolean resizeable) {
@@ -63,11 +66,11 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    * @param parentObject is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent() parent} that
-   *        created this frame.
+   *        {@link net.sf.mmm.ui.toolkit.api.view.UiNode#getParent() parent}
+   *        that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizable() resizeable}.
+   *        {@link #isResizable() resizable}.
    */
   public UIInternalFrame(UIFactorySwing uiFactory, UIInternalFrame parentObject, String title,
       boolean resizeable) {
@@ -75,20 +78,6 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
     super(uiFactory, parentObject);
     this.frame = new JInternalFrame();
     this.workbench = parentObject.workbench;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected UIMenuBarImpl createMenuBar() {
-
-    JMenuBar menuBar = this.frame.getJMenuBar();
-    if (menuBar == null) {
-      menuBar = new JMenuBar();
-      this.frame.setJMenuBar(menuBar);
-    }
-    return new UIMenuBarImpl((UIFactorySwing) getFactory(), this, menuBar);
   }
 
   /**
@@ -156,6 +145,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isResizable() {
 
     return this.frame.isResizable();
@@ -164,6 +154,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSize(int width, int height) {
 
     this.frame.setSize(width, height);
@@ -172,6 +163,27 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  public UIMenuBarImpl getMenuBar() {
+
+    if (this.menuBar == null) {
+      synchronized (this) {
+        if (this.menuBar == null) {
+          JMenuBar jMenuBar = this.frame.getJMenuBar();
+          if (jMenuBar == null) {
+            jMenuBar = new JMenuBar();
+            this.frame.setJMenuBar(jMenuBar);
+          }
+          this.menuBar = new UIMenuBarImpl((UIFactorySwing) getFactory(), this, jMenuBar);
+        }
+      }
+    }
+    return this.menuBar;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setPosition(int x, int y) {
 
     this.frame.setLocation(x, y);
@@ -196,6 +208,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeight() {
 
     return this.frame.getHeight();
@@ -204,6 +217,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidth() {
 
     return this.frame.getWidth();
@@ -212,6 +226,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public void dispose() {
 
     getFactory().removeWindow(this);
@@ -221,6 +236,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     return this.frame.isDisplayable();
@@ -229,6 +245,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getX() {
 
     return this.frame.getX();
@@ -237,6 +254,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getY() {
 
     return this.frame.getY();
@@ -245,6 +263,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public void pack() {
 
     this.frame.pack();
@@ -253,7 +272,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
-  public void setComposite(UiComposite newComposite) {
+  public void setComposite(UiComposite<? extends UiElement> newComposite) {
 
     JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);
@@ -263,6 +282,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isVisible() {
 
     return this.frame.isVisible();
@@ -271,6 +291,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setVisible(boolean visible) {
 
     this.frame.setVisible(visible);
@@ -350,6 +371,15 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   public int getPreferredWidth() {
 
     return (int) this.frame.getPreferredSize().getWidth();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiFrame getParent() {
+
+    return (UiFrame) super.getParent();
   }
 
 }

@@ -10,7 +10,7 @@ package net.sf.mmm.ui.toolkit.base.model;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> {
+public class DefaultUITreeModel<T> extends AbstractUITreeModel<UiTreeNode<T>> {
 
   /** the root node of the tree */
   private DefaultUITreeNode<T> rootNode;
@@ -50,7 +50,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> 
   /**
    * {@inheritDoc}
    */
-  public UITreeNodeIF<T> getRootNode() {
+  public UiTreeNode<T> getRootNode() {
 
     return this.rootNode;
   }
@@ -58,7 +58,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> 
   /**
    * {@inheritDoc}
    */
-  public int getChildCount(UITreeNodeIF<T> node) {
+  public int getChildCount(UiTreeNode<T> node) {
 
     return node.getChildNodeCount();
   }
@@ -66,7 +66,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> 
   /**
    * {@inheritDoc}
    */
-  public UITreeNodeIF<T> getChildNode(UITreeNodeIF<T> node, int index) {
+  public UiTreeNode<T> getChildNode(UiTreeNode<T> node, int index) {
 
     return node.getChildNode(index);
   }
@@ -74,7 +74,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UITreeNodeIF<T>> 
   /**
    * {@inheritDoc}
    */
-  public UITreeNodeIF<T> getParent(UITreeNodeIF<T> node) {
+  public UiTreeNode<T> getParent(UiTreeNode<T> node) {
 
     return node.getParentNode();
   }

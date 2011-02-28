@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyle;
 
 /**
- * This is the model of a {@link net.sf.mmm.ui.toolkit.api.UiElement}.
+ * This is the model of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

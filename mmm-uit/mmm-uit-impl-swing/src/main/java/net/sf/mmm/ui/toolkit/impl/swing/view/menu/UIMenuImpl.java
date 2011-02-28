@@ -9,12 +9,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenu;
+import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenu;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIMenuImpl extends AbstractUIMenu {
+public class UIMenuImpl extends AbstractUiMenu {
 
   /** the swing menu */
   private final JMenu menu;

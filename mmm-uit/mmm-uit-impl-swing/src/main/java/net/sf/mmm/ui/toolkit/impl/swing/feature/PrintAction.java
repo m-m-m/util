@@ -12,12 +12,12 @@ import java.awt.print.PrinterJob;
 
 import javax.swing.JComponent;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.event.ActionType;
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
@@ -30,7 +30,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PrintAction extends AbstractAction implements UIActionListener, Printable {
+public class PrintAction extends AbstractAction implements UiEventListener, Printable {
 
   /** the component to be printed */
   private final AbstractUiElement component;
@@ -53,7 +53,7 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   /**
    * {@inheritDoc}
    */
-  public UIActionListener getActionListener() {
+  public UiEventListener getActionListener() {
 
     return this;
   }
@@ -61,9 +61,9 @@ public class PrintAction extends AbstractAction implements UIActionListener, Pri
   /**
    * {@inheritDoc}
    */
-  public void invoke(UiNode source, ActionType action) {
+  public void onEvent(UiNode source, UiEventType action) {
 
-    if (action == ActionType.SELECT) {
+    if (action == UiEventType.CLICK) {
       PrinterJob job = PrinterJob.getPrinterJob();
       job.setJobName(getId());
       job.setPrintable(this);

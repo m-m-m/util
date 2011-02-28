@@ -3,18 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.AbstractUIComposite;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncCompositeAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.AbstractSyncControlAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.AbstractUiComposite;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncCompositeAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIWindowImpl;
 
 import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiElement} interface using SWT as the UI
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using SWT as the UI
  * toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -84,9 +84,9 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
     } else {
       AbstractSyncCompositeAccess parentAccess;
       boolean autoAttach = true;
-      if (newParent instanceof AbstractUIComposite) {
+      if (newParent instanceof AbstractUiComposite) {
         @SuppressWarnings("unchecked")
-        AbstractUIComposite<? extends UiElement> parentComposite = (AbstractUIComposite<? extends UiElement>) newParent;
+        AbstractUiComposite<? extends UiElement> parentComposite = (AbstractUiComposite<? extends UiElement>) newParent;
         parentAccess = parentComposite.getActiveSyncAccess();
         autoAttach = parentComposite.isAttachToActiveAccess();
       } else {

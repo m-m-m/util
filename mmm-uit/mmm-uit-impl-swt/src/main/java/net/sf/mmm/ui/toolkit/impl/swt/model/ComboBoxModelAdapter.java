@@ -5,7 +5,7 @@ import org.eclipse.swt.widgets.Combo;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncComboAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncComboAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**

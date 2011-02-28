@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 
 /**
@@ -82,7 +82,7 @@ public abstract class AbstractDecoratingLayoutManager {
             y = (componentHeigth - height) >> 1;
           }
         }
-        decorator.setPosition(INDENT, y);
+        // decorator.setPosition(INDENT, y);
       } else {
         int x = 0;
         if (component != null) {
@@ -91,21 +91,21 @@ public abstract class AbstractDecoratingLayoutManager {
             x = (componentWidth - width) >> 1;
           }
         }
-        decorator.setPosition(x, INDENT);
+        // decorator.setPosition(x, INDENT);
       }
       decorator.setSize(width, height);
     }
 
     if (component != null) {
       if (decorator == null) {
-        component.setPosition(0, 0);
+        // component.setPosition(0, 0);
         component.setSize(parentSize.width, parentSize.height);
       } else {
         if (this.decoratedComponent.getOrientation() == Orientation.HORIZONTAL) {
-          component.setPosition(width + DOUBLE_INDENT, 0);
+          // component.setPosition(width + DOUBLE_INDENT, 0);
           component.setSize(parentSize.width - width - DOUBLE_INDENT, parentSize.height);
         } else {
-          component.setPosition(0, height + DOUBLE_INDENT);
+          // component.setPosition(0, height + DOUBLE_INDENT);
           component.setSize(parentSize.width, parentSize.height - height - DOUBLE_INDENT);
         }
       }

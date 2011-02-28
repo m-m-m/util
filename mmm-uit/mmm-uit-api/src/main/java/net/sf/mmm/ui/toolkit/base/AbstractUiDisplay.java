@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.base;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.api.UiDevice;
+import net.sf.mmm.ui.toolkit.api.UiDisplay;
 
 /**
  * This is the abstract base implementation of the UIDisplay interface.
@@ -86,7 +86,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
    * This method handles the {@link #invokeSynchron(Runnable)} if called from
    * another thread.
    * 
-   * @param task
+   * @param task is the task to invoke.
    */
   protected abstract void doInvokeSynchron(Runnable task);
 

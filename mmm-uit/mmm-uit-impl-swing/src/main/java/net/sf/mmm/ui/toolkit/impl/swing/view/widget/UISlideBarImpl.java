@@ -6,17 +6,18 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import javax.swing.JComponent;
 import javax.swing.JSlider;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SlideBarModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar} interface using Swing as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar} interface using
+ * Swing as the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -24,7 +25,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.SlideBarModelAdapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E> {
+public class UISlideBarImpl<E> extends AbstractUiWidget implements UiSlideBar<E> {
 
   /** the native swing widget */
   private final JSlider slideBar;
@@ -36,13 +37,14 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    * @param orientation is the orientation of the slide-bar.
    * @param model is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UIFactorySwing uiFactory, UiNode parentObject, Orientation orientation,
-      UiListMvcModel<E> model) {
+  public UISlideBarImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject,
+      Orientation orientation, UiListMvcModel<E> model) {
 
     super(uiFactory, parentObject);
     int style;

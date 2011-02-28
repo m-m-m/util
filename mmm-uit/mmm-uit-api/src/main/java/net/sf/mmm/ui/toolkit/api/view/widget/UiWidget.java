@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 
 /**
@@ -20,6 +20,6 @@ public interface UiWidget extends UiElement {
    * 
    * The parent of a widget must be a {@link UiComposite composite}.
    */
-  UiComposite getParent();
+  UiComposite<? extends UiElement> getParent();
 
 }

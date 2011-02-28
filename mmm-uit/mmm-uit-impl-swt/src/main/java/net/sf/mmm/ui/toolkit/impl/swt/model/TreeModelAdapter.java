@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UITreeModelListener;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncTreeAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTreeAccess;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**

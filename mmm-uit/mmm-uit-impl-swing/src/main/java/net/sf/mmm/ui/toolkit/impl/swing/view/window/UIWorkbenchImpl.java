@@ -10,6 +10,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
@@ -76,7 +77,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
    * {@inheritDoc}
    */
   @Override
-  public void setComposite(UiComposite newComposite) {
+  public void setComposite(UiComposite<? extends UiElement> newComposite) {
 
     if (this.contentPane == null) {
       this.contentPane = new JPanel(new GridLayout(1, 1));

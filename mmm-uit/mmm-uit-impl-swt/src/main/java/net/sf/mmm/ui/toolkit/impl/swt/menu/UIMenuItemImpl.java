@@ -6,11 +6,11 @@ package net.sf.mmm.ui.toolkit.impl.swt.menu;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MenuItem;
 
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuItemAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuItemAccess;
 
 /**
  * This class is the implementation of the

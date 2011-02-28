@@ -4,11 +4,11 @@
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.view.composite.Insets;
-import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.Alignment;
 import net.sf.mmm.ui.toolkit.api.common.Filling;
+import net.sf.mmm.ui.toolkit.api.common.Insets;
+import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 

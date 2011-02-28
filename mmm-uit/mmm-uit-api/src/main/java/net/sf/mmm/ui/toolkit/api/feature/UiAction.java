@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.feature;
 
-import net.sf.mmm.ui.toolkit.api.event.UIActionListener;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
 
 /**
  * This is the callback interface for an action that can be invoked by a widget
@@ -60,6 +60,6 @@ public interface UiAction {
    * 
    * @return the listener for this action.
    */
-  UIActionListener getActionListener();
+  UiEventListener getActionListener();
 
 }

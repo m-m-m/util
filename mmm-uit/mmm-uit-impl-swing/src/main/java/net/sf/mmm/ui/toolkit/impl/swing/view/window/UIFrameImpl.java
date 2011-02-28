@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
@@ -29,17 +29,20 @@ public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
   /** the swing frame */
   private final JFrame frame;
 
+  /** @see #getMenuBar() */
+  private UIMenuBarImpl menuBar;
+
   /**
    * The constructor.
    * 
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parent is the {@link net.sf.mmm.ui.toolkit.api.UiNode#getParent()
-   *        parent} of this object (may be <code>null</code>).
+   * @param parent is the {@link #getParent() parent} of this object (may be
+   *        <code>null</code>).
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizable() resizeable}.
+   *        {@link #isResizable() resizable}.
    */
   public UIFrameImpl(UIFactorySwing uiFactory, UIFrameImpl parent, String title, boolean resizeable) {
 
@@ -87,15 +90,21 @@ public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
   /**
    * {@inheritDoc}
    */
-  @Override
-  protected UIMenuBarImpl createMenuBar() {
+  public UIMenuBarImpl getMenuBar() {
 
-    JMenuBar menuBar = this.frame.getJMenuBar();
-    if (menuBar == null) {
-      menuBar = new JMenuBar();
-      this.frame.setJMenuBar(menuBar);
+    if (this.menuBar == null) {
+      synchronized (this) {
+        if (this.menuBar == null) {
+          JMenuBar jMenuBar = this.frame.getJMenuBar();
+          if (jMenuBar == null) {
+            jMenuBar = new JMenuBar();
+            this.frame.setJMenuBar(jMenuBar);
+          }
+          this.menuBar = new UIMenuBarImpl((UIFactorySwing) getFactory(), this, jMenuBar);
+        }
+      }
     }
-    return new UIMenuBarImpl((UIFactorySwing) getFactory(), this, menuBar);
+    return this.menuBar;
   }
 
   /**
@@ -160,6 +169,15 @@ public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
     JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);
     registerComposite(newComposite);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiFrame getParent() {
+
+    return (UiFrame) super.getParent();
   }
 
 }

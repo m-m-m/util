@@ -7,10 +7,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
-import net.sf.mmm.ui.toolkit.base.menu.AbstractUIMenuBar;
+import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenuBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SyncMenuAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIWindowImpl;
 
 /**
  * This class is the implementation of the UIMenuBar interface using SWT as the
@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.window.UIWindowImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIMenuBarImpl extends AbstractUIMenuBar {
+public class UIMenuBarImpl extends AbstractUiMenuBar {
 
   /** the synchronous access */
   private final SyncMenuAccess syncAccess;

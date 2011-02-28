@@ -3,24 +3,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
@@ -32,27 +32,28 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.UIScrollPanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.UISlicePanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.UISplitPanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.composite.UITabbedPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.feature.PrintAction;
-import net.sf.mmm.ui.toolkit.impl.swt.sync.SwtWorkerThread;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UIButtonImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UIComboBoxImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UIFileDownloadImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UIFileUploadImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UILabelImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UIListImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UIProgressBarImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UISlideBarImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UISpinBoxImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UITableImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UITextFieldImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.UITreeImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.widget.editor.UIDateEditorImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.window.UIFrameImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.window.UIWorkbenchImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiScrollPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSlicePanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSplitPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiTabbedPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SwtWorkerThread;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIButtonImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIComboBoxImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIDateEditorImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIFileDownloadImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIFileUploadImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UILabelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIListImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UIProgressBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UISlideBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UISpinBoxImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITableImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITextFieldImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITreeImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIFrameImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIWorkbenchImpl;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -167,7 +168,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiSlicePanel createPanel(Orientation orientation, String borderTitle) {
 
-    UiSlicePanel panel = new UISlicePanelImpl(this, null, borderTitle, orientation);
+    UiSlicePanel panel = new UiSlicePanelImpl(this, null, borderTitle, orientation);
     return panel;
   }
 
@@ -177,7 +178,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   @SuppressWarnings("unchecked")
   public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
-    UiScrollPanel panel = new UIScrollPanelImpl(this, null);
+    UiScrollPanel panel = new UiScrollPanelImpl(this, null);
     if (child != null) {
       panel.setComponent(child);
     }
@@ -189,7 +190,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiSplitPanel createSplitPanel(Orientation orientation) {
 
-    UiSplitPanel splitPanel = new UISplitPanelImpl(this, null, null, orientation);
+    UiSplitPanel splitPanel = new UiSplitPanelImpl(this, null, null, orientation);
     return splitPanel;
   }
 
@@ -299,7 +300,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiTabPanel createTabbedPanel() {
 
-    return new UITabbedPanelImpl(this, null);
+    return new UiTabbedPanelImpl(this, null);
   }
 
   /**

@@ -11,13 +11,13 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.composite.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;

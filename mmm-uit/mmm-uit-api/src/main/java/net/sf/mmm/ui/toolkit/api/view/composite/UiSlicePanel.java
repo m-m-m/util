@@ -3,8 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
+import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
  * This is the interface for a slice-panel. A panel is a composite UI component

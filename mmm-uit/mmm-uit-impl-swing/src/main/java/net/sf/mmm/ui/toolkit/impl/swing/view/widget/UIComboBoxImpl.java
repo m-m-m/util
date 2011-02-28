@@ -10,16 +10,17 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
-import net.sf.mmm.ui.toolkit.api.UiNode;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.ComboBoxModelAdapter;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using Swing as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using Swing as
+ * the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -27,7 +28,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.model.ComboBoxModelAdapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E> {
+public class UIComboBoxImpl<E> extends AbstractUiWidget implements UiComboBox<E> {
 
   /** the swing combo-box */
   private final JComboBox comboBox;
@@ -39,9 +40,10 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param parentObject is the parent of this object (may be <code>null</code>
+   *        ).
    */
-  public UIComboBoxImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UIComboBoxImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
 
     super(uiFactory, parentObject);
     this.comboBox = new JComboBox();

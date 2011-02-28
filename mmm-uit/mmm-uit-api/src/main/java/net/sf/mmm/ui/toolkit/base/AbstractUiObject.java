@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
-import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.UiObject;
 
 /**
@@ -51,16 +50,6 @@ public abstract class AbstractUiObject implements UiObject {
    * Override this method if you implement a window object.
    */
   public boolean isWindow() {
-
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * Override this method if you implement a widget object.
-   */
-  public boolean isWidget() {
 
     return false;
   }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
  * This is the interface for a
@@ -24,8 +24,8 @@ public interface UiGrid<E extends UiGridRow<? extends UiElement>> extends UiExte
    * empty and the row is not connected with this {@link UiGrid} and therefore
    * not displayed to the user, yet.<br/>
    * You can fill the cells and then
-   * {@link #insertChild(net.sf.mmm.ui.toolkit.api.UiElement, int) insert} or
-   * {@link #addChild(net.sf.mmm.ui.toolkit.api.UiElement) append} the new row.
+   * {@link #insertChild(net.sf.mmm.ui.toolkit.api.view.UiElement, int) insert} or
+   * {@link #addChild(net.sf.mmm.ui.toolkit.api.view.UiElement) append} the new row.
    * 
    * @return the new {@link UiGridRow}.
    */

@@ -4,6 +4,7 @@
 package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
@@ -11,17 +12,18 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
-import net.sf.mmm.ui.toolkit.api.view.widget.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
