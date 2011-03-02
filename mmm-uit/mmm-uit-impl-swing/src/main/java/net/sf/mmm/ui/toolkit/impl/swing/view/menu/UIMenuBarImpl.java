@@ -34,7 +34,7 @@ public class UIMenuBarImpl extends AbstractUiMenuBar {
    */
   public UIMenuBarImpl(UIFactorySwing uiFactory, AbstractUiWindow parentObject, JMenuBar jMenuBar) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.menuBar = jMenuBar;
     updateOrientation();
   }
@@ -46,7 +46,7 @@ public class UIMenuBarImpl extends AbstractUiMenuBar {
 
     JMenu menu = new JMenu(name);
     this.menuBar.add(menu);
-    return new UIMenuImpl((UIFactorySwing) getFactory(), this, menu);
+    return new UIMenuImpl((UIFactorySwing) getFactory(), menu);
   }
 
   /**

@@ -8,15 +8,15 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
 
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UIDesktopPanel;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
@@ -28,8 +28,13 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UIDesktopPanel;
  */
 public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
 
+  /** the default layer used to add internal frames */
+  private static final Integer DEFAULT_LAYER = new Integer(1);
+
   /** the workbench pane */
-  private final UIDesktopPanel workbench;
+  private final JDesktopPane workbench;
+
+  // private final List<UiInternalFrame> frameList;
 
   /** @see #setComposite(UiComposite) */
   private JPanel contentPane;
@@ -50,8 +55,8 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
     // UIManager.put("swing.boldMetal", Boolean.FALSE);
     // JFrame.setDefaultLookAndFeelDecorated(true);
     // Toolkit.getDefaultToolkit().setDynamicLayout(true);
-    this.workbench = new UIDesktopPanel(uiFactory, this);
-    super.setComposite(this.workbench);
+    this.workbench = new JDesktopPane();
+    getNativeWindow().setContentPane(this.workbench);
   }
 
   /**
@@ -68,7 +73,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
    * 
    * @return the desktop panel.
    */
-  public UIDesktopPanel getDesktopPanel() {
+  public JDesktopPane getDesktopPanel() {
 
     return this.workbench;
   }
@@ -82,9 +87,8 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
     if (this.contentPane == null) {
       this.contentPane = new JPanel(new GridLayout(1, 1));
       this.contentPane.setSize(getWidth(), getHeight());
-      JComponent swingComponent = this.workbench.getSwingComponent();
-      swingComponent.add(this.contentPane);
-      swingComponent.addComponentListener(new ResizeListener());
+      this.workbench.add(this.contentPane);
+      this.workbench.addComponentListener(new ResizeListener());
     } else if (this.contentPane.getComponentCount() > 0) {
       this.contentPane.removeAll();
     }
@@ -101,9 +105,9 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
   @Override
   public UiFrame createFrame(String title, boolean resizeable) {
 
-    UIInternalFrame internalFrame = new UIInternalFrame((UIFactorySwing) getFactory(), this, title,
+    UiInternalFrame internalFrame = new UiInternalFrame((UIFactorySwing) getFactory(), this, title,
         resizeable);
-    this.workbench.add(internalFrame);
+    this.workbench.add(internalFrame.getSwingInternalFrame(), DEFAULT_LAYER);
     getFactory().addWindow(internalFrame);
     return internalFrame;
   }

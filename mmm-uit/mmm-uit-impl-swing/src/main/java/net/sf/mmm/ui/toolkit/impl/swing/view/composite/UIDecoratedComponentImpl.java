@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
@@ -46,12 +46,10 @@ public class UIDecoratedComponentImpl<E extends AbstractUiElement, D extends E, 
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
    */
-  public UIDecoratedComponentImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UIDecoratedComponentImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.layoutManager = new DecoratingLayoutManager(this);
     this.panel = new JPanel(this.layoutManager);
     this.component = null;

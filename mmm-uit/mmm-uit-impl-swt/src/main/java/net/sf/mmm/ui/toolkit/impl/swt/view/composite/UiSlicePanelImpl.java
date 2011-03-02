@@ -6,9 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
 
 import org.eclipse.swt.SWT;
@@ -18,10 +17,12 @@ import org.eclipse.swt.SWT;
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel} interface using
  * SWT as the UI toolkit.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<AbstractUiElement> {
+public class UiSlicePanelImpl<E extends AbstractUiElement> extends AbstractUiMultiComposite<E>
+    implements UiSlicePanel<E> {
 
   /** @see #getSyncAccess() */
   private final SyncCompositeAccess syncAccess;
@@ -33,16 +34,11 @@ public class UiSlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ab
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
-   * @param borderTitle is the title of the border or <code>null</code> for NO
-   *        border.
    * @param orientation is the orientation for the layout of the panel.
    */
-  public UiSlicePanelImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, String borderTitle,
-      Orientation orientation) {
+  public UiSlicePanelImpl(UiFactorySwt uiFactory, Orientation orientation) {
 
-    super(uiFactory, parentObject, borderTitle);
+    super(uiFactory);
     this.layoutManager = new LayoutManager(uiFactory);
     this.layoutManager.setOrientation(orientation);
     this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.NORMAL);
@@ -52,7 +48,8 @@ public class UiSlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void addChild(AbstractUiElement component) {
+  @Override
+  public void addChild(E component) {
 
     addChild(component, LayoutConstraints.DEFAULT);
   }
@@ -60,25 +57,23 @@ public class UiSlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void addChild(AbstractUiElement component, LayoutConstraints constraints) {
+  public void addChild(E child, LayoutConstraints constraints) {
 
-    AbstractUiElement c = component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
-    c.getSyncAccess().setLayoutData(constraints);
-    c.setParent(this);
-    this.components.add(c);
+    child.getSyncAccess().setLayoutData(constraints);
+    child.setParent(this);
+    super.addChild(child);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void insertChild(AbstractUiElement component, LayoutConstraints constraints, int position) {
+  public void insertChild(E child, LayoutConstraints constraints, int position) {
 
-    AbstractUiElement c = component;
     // c.getSyncAccess().setParentAccess(this.syncAccess);
-    c.getSyncAccess().setLayoutData(constraints);
-    c.setParent(this);
-    this.components.add(position, c);
+    child.getSyncAccess().setLayoutData(constraints);
+    child.setParent(this);
+    super.insertChild(child, position);
   }
 
   /**
@@ -118,7 +113,7 @@ public class UiSlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ab
   /**
    * {@inheritDoc}
    */
-  public void insertChild(AbstractUiElement component, int index) {
+  public void insertChild(E component, int index) {
 
     throw new IllegalStateException();
   }

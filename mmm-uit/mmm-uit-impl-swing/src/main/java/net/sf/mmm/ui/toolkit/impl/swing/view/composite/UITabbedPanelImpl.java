@@ -7,20 +7,21 @@ import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel} interface using
  * Swing as the UI toolkit.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UITabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<UiElement> {
+public class UITabbedPanelImpl<E extends AbstractUiElement> extends AbstractUiMultiComposite<E>
+    implements UiTabPanel<E> {
 
   /** the native swing component */
   private final JTabbedPane panel;
@@ -28,13 +29,11 @@ public class UITabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<UiE
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UITabbedPanelImpl(UIFactorySwing uiFactory, AbstractUiElement parentObject) {
+  public UITabbedPanelImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.panel = new JTabbedPane();
     initialize();
   }
@@ -51,23 +50,19 @@ public class UITabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<UiE
   /**
    * {@inheritDoc}
    */
-  public void addChild(UiElement component, String title) {
+  public void addChild(E component, String title) {
 
-    AbstractUiElement c = (AbstractUiElement) component;
-    this.panel.add(title, c.getSwingComponent());
-    setParent(c, this);
-    doAddComponent(component);
+    this.panel.add(title, component.getSwingComponent());
+    doAddChild(component);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void insertChild(UiElement component, String title, int position) {
+  public void insertChild(E component, String title, int position) {
 
-    AbstractUiElement c = (AbstractUiElement) component;
-    this.panel.insertTab(title, null, c.getSwingComponent(), null, position);
-    setParent(c, this);
-    doAddComponent(position, component);
+    this.panel.insertTab(title, null, component.getSwingComponent(), null, position);
+    doInsertChild(component, position);
   }
 
   /**

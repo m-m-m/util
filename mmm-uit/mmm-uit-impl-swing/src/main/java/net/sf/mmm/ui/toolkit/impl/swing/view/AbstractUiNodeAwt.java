@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.awt;
+package net.sf.mmm.ui.toolkit.impl.swing.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +10,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
@@ -27,13 +26,11 @@ public abstract class AbstractUiNodeAwt extends AbstractUiNode {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiNodeAwt(AbstractUiFactory uiFactory, UiNode parentObject) {
+  public AbstractUiNodeAwt(AbstractUiFactory uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**

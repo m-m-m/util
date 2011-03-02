@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This is the implementation of the

@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.api.common.Filling;
 import net.sf.mmm.ui.toolkit.api.common.Insets;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 
 /**
@@ -18,7 +19,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
  * The implementation assumes that for each panel an own layout-manager is
  * created and is therefore not thread-safe.
  * 
- * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addChild(net.sf.mmm.ui.toolkit.api.UIComponent,
+ * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addChild(UiElement,
  *      LayoutConstraints)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

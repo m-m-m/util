@@ -9,8 +9,8 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTabFolderAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTabItemAccess;
 
@@ -25,7 +25,8 @@ import org.eclipse.swt.widgets.Control;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiTabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<AbstractUiElement> {
+public class UiTabbedPanelImpl<E extends AbstractUiElement> extends AbstractUiMultiComposite<E>
+    implements UiTabPanel<E> {
 
   /** @see #getSyncAccess() */
   private final SyncTabFolderAccess syncAccess;
@@ -42,7 +43,7 @@ public class UiTabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<Abs
    */
   public UiTabbedPanelImpl(UiFactorySwt uiFactory, AbstractUiElement parentObject) {
 
-    super(uiFactory, parentObject, null);
+    super(uiFactory);
     this.syncAccess = new SyncTabFolderAccess(uiFactory, SWT.DEFAULT);
     this.tabItems = new ArrayList<SyncTabItemAccess>();
   }
@@ -59,37 +60,35 @@ public class UiTabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<Abs
   /**
    * {@inheritDoc}
    */
-  public void addChild(UiElement component, String title) {
+  public void addChild(E child, String title) {
 
-    AbstractUiElement c = (AbstractUiElement) component;
-    c.setParent(this);
+    child.setParent(this);
     SyncTabItemAccess itemAccess = new SyncTabItemAccess(getFactory(), SWT.NONE);
     itemAccess.setText(title);
     itemAccess.setParentAccess(this.syncAccess);
-    Control control = c.getSyncAccess().getSwtObject();
+    Control control = child.getSyncAccess().getSwtObject();
     if (control != null) {
       itemAccess.setControl(control);
     }
     this.tabItems.add(itemAccess);
-    this.components.add(c);
+    addChild(child);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void insertChild(UiElement component, String title, int position) {
+  public void insertChild(E child, String title, int index) {
 
-    AbstractUiElement c = (AbstractUiElement) component;
-    c.setParent(this);
-    SyncTabItemAccess itemAccess = new SyncTabItemAccess(getFactory(), SWT.NONE, position);
+    child.setParent(this);
+    SyncTabItemAccess itemAccess = new SyncTabItemAccess(getFactory(), SWT.NONE, index);
     itemAccess.setText(title);
     itemAccess.setParentAccess(this.syncAccess);
-    Control control = c.getSyncAccess().getSwtObject();
+    Control control = child.getSyncAccess().getSwtObject();
     if (control != null) {
       itemAccess.setControl(control);
     }
-    this.tabItems.add(position, itemAccess);
-    this.components.add(position, c);
+    this.tabItems.add(index, itemAccess);
+    insertChild(child, index);
   }
 
   /**
@@ -121,8 +120,8 @@ public class UiTabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<Abs
     super.createChildren();
     int len = this.tabItems.size();
     for (int i = 0; i < len; i++) {
-      AbstractUiElement component = this.components.get(i);
-      Control control = component.getSyncAccess().getSwtObject();
+      AbstractUiElement child = getChild(i);
+      Control control = child.getSyncAccess().getSwtObject();
       SyncTabItemAccess itemAccess = this.tabItems.get(i);
       itemAccess.setControl(control);
       itemAccess.create();

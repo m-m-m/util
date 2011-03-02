@@ -39,13 +39,10 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parentObject is the {@link #getParent() parent} of this object. It
-   *        may be <code>null</code>.
    */
-  public AbstractUiNode(AbstractUiFactory uiFactory, UiNode parentObject) {
+  public AbstractUiNode(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
-    this.parent = parentObject;
   }
 
   /**

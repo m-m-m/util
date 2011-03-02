@@ -14,8 +14,6 @@ import javax.swing.table.DefaultTableColumnModel;
 
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.TableModelAdapter;
@@ -45,12 +43,10 @@ public class UITableImpl<C> extends AbstractUiWidget implements UiTable<C> {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
    */
-  public UITableImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public UITableImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.table = new JTable();
     this.table.setShowGrid(true);
     this.table.setColumnModel(new DefaultTableColumnModel());

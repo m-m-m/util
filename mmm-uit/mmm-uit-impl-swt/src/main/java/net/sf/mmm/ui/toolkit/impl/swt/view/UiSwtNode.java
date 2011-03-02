@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view;
 
-import org.eclipse.swt.widgets.Listener;
-
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Listener;
 
 /**
  * This is the abstract base implementation for all SWT
@@ -24,12 +24,11 @@ public abstract class UiSwtNode extends AbstractUiNode {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UiSwtNode(UiFactorySwt uiFactory, AbstractUiNode parentObject) {
+  public UiSwtNode(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.factory = uiFactory;
   }
 

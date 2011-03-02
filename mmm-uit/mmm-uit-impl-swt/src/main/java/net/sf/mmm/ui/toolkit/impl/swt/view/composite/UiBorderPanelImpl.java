@@ -4,9 +4,8 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncGroupAccess;
 
 import org.eclipse.swt.SWT;
@@ -30,13 +29,11 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UiBorderPanelImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public UiBorderPanelImpl(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.syncAccess = new SyncGroupAccess(uiFactory, SWT.NONE);
     this.syncAccess.setLayout(new FillLayout());
     // this.syncGroupAccess.setText(borderTitle);

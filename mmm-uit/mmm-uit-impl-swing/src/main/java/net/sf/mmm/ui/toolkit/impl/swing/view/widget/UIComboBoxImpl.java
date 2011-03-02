@@ -11,8 +11,6 @@ import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.ComboBoxModelAdapter;
@@ -39,13 +37,11 @@ public class UIComboBoxImpl<E> extends AbstractUiWidget implements UiComboBox<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UIComboBoxImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public UIComboBoxImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.comboBox = new JComboBox();
     this.modelAdapter = null;
   }

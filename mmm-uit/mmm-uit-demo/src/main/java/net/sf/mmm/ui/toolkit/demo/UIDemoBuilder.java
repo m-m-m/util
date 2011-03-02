@@ -12,8 +12,8 @@ import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
-import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
@@ -160,7 +160,8 @@ public class UIDemoBuilder {
     UiDateBox dateEditor = factory.createDateEditor();
     addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
 
-    UiButton imageButton = factory.createButton("Icon", icon, ButtonStyle.DEFAULT);
+    UiButton imageButton = factory.createButton("Icon", ButtonStyle.DEFAULT);
+    imageButton.setImage(icon);
     addEditorProperty(editorPanel, "IconButton:", imageButton, sizer);
     imageButton.addListener(new UiEventListener() {
 

@@ -16,8 +16,6 @@ import javax.swing.tree.TreeSelectionModel;
 
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.TreeModelAdapter;
@@ -45,13 +43,11 @@ public class UITreeImpl<N> extends AbstractUiWidget implements UiTree<N> {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UITreeImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public UITreeImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.tree = new JTree();
     this.tree.setExpandsSelectedPaths(true);
     this.tree.setShowsRootHandles(true);
@@ -71,7 +67,6 @@ public class UITreeImpl<N> extends AbstractUiWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public UiTreeMvcModel<N> getModel() {
 
     if (this.modelAdapter == null) {
@@ -84,13 +79,12 @@ public class UITreeImpl<N> extends AbstractUiWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public void setModel(UiTreeMvcModel<N> newModel) {
 
     if (this.modelAdapter != null) {
       this.modelAdapter.dispose();
     }
-    this.modelAdapter = new TreeModelAdapter(newModel);
+    this.modelAdapter = new TreeModelAdapter<N>(newModel);
     this.tree.setModel(this.modelAdapter);
   }
 
@@ -139,6 +133,7 @@ public class UITreeImpl<N> extends AbstractUiWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public N getSelection() {
 
     TreePath selection = this.tree.getSelectionPath();
@@ -151,6 +146,7 @@ public class UITreeImpl<N> extends AbstractUiWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public N[] getSelections() {
 
     TreePath[] selections = this.tree.getSelectionPaths();

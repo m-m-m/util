@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenu;
@@ -32,14 +31,13 @@ public class UIMenuImpl extends AbstractUiMenu {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param swtMenu is the SWT menu to wrap.
    * @param text is the {@link MenuItem#setText(java.lang.String) text} of the
    *        menu.
    */
-  public UIMenuImpl(UiFactorySwt uiFactory, UiNode parentObject, Menu swtMenu, String text) {
+  public UIMenuImpl(UiFactorySwt uiFactory, Menu swtMenu, String text) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.CASCADE, swtMenu, text);
   }
 
@@ -70,7 +68,7 @@ public class UIMenuImpl extends AbstractUiMenu {
   protected UiMenu createSubMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
-    return new UIMenuImpl((UiFactorySwt) getFactory(), this, subMenu, name);
+    return new UIMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
   }
 
   /**

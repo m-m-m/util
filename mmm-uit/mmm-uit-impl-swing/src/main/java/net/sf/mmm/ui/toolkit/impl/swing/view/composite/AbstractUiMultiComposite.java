@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiMultiComposite;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This is the abstract base implementation of a
@@ -19,7 +20,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiMultiComposite<E extends UiElement> extends AbstractUiComposite<E> {
+public abstract class AbstractUiMultiComposite<E extends AbstractUiElement> extends
+    AbstractUiComposite<E> implements UiMultiComposite<E> {
 
   /** the component list. */
   private final List<E> components;
@@ -27,13 +29,11 @@ public abstract class AbstractUiMultiComposite<E extends UiElement> extends Abst
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiMultiComposite(UIFactorySwing uiFactory, UiNode parentObject) {
+  public AbstractUiMultiComposite(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.components = new ArrayList<E>();
   }
 
@@ -56,23 +56,25 @@ public abstract class AbstractUiMultiComposite<E extends UiElement> extends Abst
   /**
    * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel#addChild(UiElement)
    * 
-   * @param component is the component to add.
+   * @param child is the component to add.
    */
-  public void doAddComponent(E component) {
+  protected void doAddChild(E child) {
 
-    this.components.add(component);
+    this.components.add(child);
+    setParent(child, this);
   }
 
   /**
    * This method adds (inserts) the <code>component</code> at the given
    * <code>index</code>.
    * 
-   * @param index is the position where to add the component.
    * @param component is the component to add.
+   * @param index is the position where to add the component.
    */
-  public void doAddComponent(int index, E component) {
+  protected void doInsertChild(E component, int index) {
 
     this.components.add(index, component);
+    setParent(component, this);
   }
 
   /**
@@ -81,7 +83,7 @@ public abstract class AbstractUiMultiComposite<E extends UiElement> extends Abst
    * @param index is the position of the component to remove.
    * @return the removed component.
    */
-  protected UiElement doRemoveComponent(int index) {
+  protected E doRemoveChild(int index) {
 
     return this.components.remove(index);
   }
@@ -96,6 +98,31 @@ public abstract class AbstractUiMultiComposite<E extends UiElement> extends Abst
   protected int indexOfComponent(UiElement component) {
 
     return this.components.indexOf(component);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public AbstractUiElement removeChild(int index) {
+
+    AbstractUiElement component = doRemoveChild(index);
+    component.removeFromParent();
+    return component;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean removeChild(E component) {
+
+    // return this.components.remove(component);
+    int index = indexOfComponent(component);
+    if (index >= 0) {
+      removeChild(index);
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

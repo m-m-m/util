@@ -7,8 +7,6 @@ import javax.swing.JComponent;
 import javax.swing.JSpinner;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SpinnerModelAdapter;
@@ -35,15 +33,12 @@ public class UISpinBoxImpl<E> extends AbstractUiWidget implements UiSpinBox<E> {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param model is the model for this spin-box.
    */
-  public UISpinBoxImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject,
-      UiListMvcModel<E> model) {
+  public UISpinBoxImpl(UIFactorySwing uiFactory, UiListMvcModel<E> model) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.modelAdapter = new SpinnerModelAdapter<E>(model);
     this.spinBox = new JSpinner(this.modelAdapter);
 

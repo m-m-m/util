@@ -9,10 +9,9 @@ import javax.swing.ScrollPaneConstants;
 
 import net.sf.mmm.ui.toolkit.api.common.ScrollbarVisibility;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
@@ -39,13 +38,11 @@ public class UIScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UIScrollPanelImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UIScrollPanelImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.scrollPanel = new JScrollPane();
     this.horizontalScrollbarVisibility = ScrollbarVisibility.DYNAMIC;
     this.verticalScrollbarVisibility = ScrollbarVisibility.DYNAMIC;

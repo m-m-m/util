@@ -12,7 +12,6 @@ import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
@@ -33,11 +32,10 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
    * The constructor.
    * 
    * @param uiFactory is the UIFactory instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
    */
-  public AbstractUiMenu(AbstractUiFactory uiFactory, UiNode parentObject) {
+  public AbstractUiMenu(AbstractUiFactory uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.items = new ArrayList<UiMenuItem>();
   }
 

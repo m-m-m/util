@@ -43,7 +43,7 @@ public class UIMenuItemImpl extends UiSwtNode implements UiMenuItem {
   public UIMenuItemImpl(UiFactorySwt uiFactory, UIMenuImpl parentObject, String text,
       ButtonStyle itemStyle, MenuItem item) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int swtStyle = UiFactorySwt.convertButtonStyleForMenuItem(itemStyle);
     this.syncAccess = new SyncMenuItemAccess(uiFactory, swtStyle, item, text);
     this.style = itemStyle;

@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSingleComposite;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This is the abstract base implementation of a
@@ -26,13 +25,11 @@ public abstract class AbstractUiSingleComposite<E extends AbstractUiElement> ext
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiSingleComposite(UIFactorySwing uiFactory, UiNode parentObject) {
+  public AbstractUiSingleComposite(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**

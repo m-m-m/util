@@ -32,7 +32,7 @@ public class UIMenuBarImpl extends AbstractUiMenuBar {
    */
   public UIMenuBarImpl(UiFactorySwt uiFactory, UIWindowImpl parentObject, Menu swtMenuBar) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.BAR, swtMenuBar, null);
   }
 
@@ -43,7 +43,7 @@ public class UIMenuBarImpl extends AbstractUiMenuBar {
   protected UiMenu createMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
-    return new UIMenuImpl((UiFactorySwt) getFactory(), this, subMenu, name);
+    return new UIMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
   }
 
 }

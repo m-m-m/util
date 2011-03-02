@@ -23,7 +23,7 @@ public abstract class AbstractUiNodeGwt extends AbstractUiNode {
    */
   public AbstractUiNodeGwt(AbstractUiFactory uiFactory, UiNode parentObject) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
 }

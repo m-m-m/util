@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 public interface UiScrollPanel<E extends UiElement> extends UiSingleComposite<E>,
     UiReadScrollbarVisibility {
 
-  /** the type of this object */
+  /** @see #getType() */
   String TYPE = "ScrollPanel";
 
 }

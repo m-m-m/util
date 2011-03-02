@@ -13,8 +13,6 @@ import javax.swing.JFileChooser;
 
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -63,13 +61,11 @@ public class UIFileUploadImpl extends AbstractUiWidget implements UiFileUpload {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UIFileUploadImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public UIFileUploadImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.access = null;
     this.fileChooser = new JFileChooser();
     this.fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
@@ -82,8 +78,8 @@ public class UIFileUploadImpl extends AbstractUiWidget implements UiFileUpload {
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.button;
   }

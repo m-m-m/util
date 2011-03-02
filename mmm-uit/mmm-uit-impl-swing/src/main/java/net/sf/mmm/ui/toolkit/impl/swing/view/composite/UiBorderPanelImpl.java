@@ -10,10 +10,9 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This is the implementation of the {@link UiBorderPanel} using swing.
@@ -35,12 +34,10 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
    */
-  public UiBorderPanelImpl(UIFactorySwing uiFactory, UiNode parentObject) {
+  public UiBorderPanelImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.panel = new JPanel(new GridLayout(1, 1));
     this.border = BorderFactory.createTitledBorder("");
     setBorderJustification();

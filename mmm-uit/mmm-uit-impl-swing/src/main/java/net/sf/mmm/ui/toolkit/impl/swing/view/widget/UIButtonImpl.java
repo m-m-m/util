@@ -11,9 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
@@ -42,15 +40,12 @@ public class UIButtonImpl extends AbstractUiWidget implements UiButton {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param buttonStyle determines the style of the button.
    */
-  public UIButtonImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject,
-      ButtonStyle buttonStyle) {
+  public UIButtonImpl(UIFactorySwing uiFactory, ButtonStyle buttonStyle) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     AbstractButton b;
     this.style = buttonStyle;
     switch (this.style) {

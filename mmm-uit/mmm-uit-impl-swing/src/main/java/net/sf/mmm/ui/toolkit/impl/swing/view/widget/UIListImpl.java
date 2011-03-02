@@ -50,7 +50,7 @@ public class UIListImpl<E> extends AbstractUiWidget implements UiList<E> {
    */
   public UIListImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.list = new JList();
     this.scrollPanel = new JScrollPane(this.list);
     this.scrollPanel.setMinimumSize(new Dimension(40, 40));

@@ -12,7 +12,9 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
@@ -33,7 +35,9 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.impl.swt.feature.PrintAction;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiBorderPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSplitPanelImpl;
@@ -67,6 +71,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class UiFactorySwt extends AbstractUiFactory {
 
   /** the display */
@@ -153,13 +158,10 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiButton createButton(String text, UiImage icon, ButtonStyle style) {
+  public UiButton createButton(String text, ButtonStyle style) {
 
     UiButton button = new UIButtonImpl(this, null, style);
     button.setValue(text);
-    if (icon != null) {
-      button.setImage(icon);
-    }
     return button;
   }
 
@@ -168,7 +170,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiSlicePanel createPanel(Orientation orientation, String borderTitle) {
 
-    UiSlicePanel panel = new UiSlicePanelImpl(this, null, borderTitle, orientation);
+    UiSlicePanel panel = new UiSlicePanelImpl(this, orientation);
     return panel;
   }
 
@@ -178,7 +180,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   @SuppressWarnings("unchecked")
   public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
-    UiScrollPanel panel = new UiScrollPanelImpl(this, null);
+    UiScrollPanel panel = new UiScrollPanelImpl(this);
     if (child != null) {
       panel.setChild(child);
     }
@@ -190,7 +192,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiSplitPanel createSplitPanel(Orientation orientation) {
 
-    UiSplitPanel splitPanel = new UiSplitPanelImpl(this, null, null, orientation);
+    UiSplitPanel splitPanel = new UiSplitPanelImpl(this, orientation);
     return splitPanel;
   }
 
@@ -434,6 +436,25 @@ public class UiFactorySwt extends AbstractUiFactory {
     } else {
       return baseStyle | SWT.RIGHT_TO_LEFT;
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title) {
+
+    UiBorderPanelImpl panel = new UiBorderPanelImpl(this);
+    panel.setTitle(title);
+    return panel;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E extends UiElement> UiSimplePanel<E> createSimplePanel(Orientation orientation) {
+
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

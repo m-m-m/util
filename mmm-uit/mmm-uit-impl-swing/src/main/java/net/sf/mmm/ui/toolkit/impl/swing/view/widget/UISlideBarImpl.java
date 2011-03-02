@@ -5,11 +5,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 
 import javax.swing.JComponent;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SlideBarModelAdapter;
@@ -36,22 +35,19 @@ public class UISlideBarImpl<E> extends AbstractUiWidget implements UiSlideBar<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param orientation is the orientation of the slide-bar.
    * @param model is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject,
-      Orientation orientation, UiListMvcModel<E> model) {
+  public UISlideBarImpl(UIFactorySwing uiFactory, Orientation orientation, UiListMvcModel<E> model) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style;
     if (orientation == Orientation.HORIZONTAL) {
-      style = JSlider.HORIZONTAL;
+      style = SwingConstants.HORIZONTAL;
     } else {
-      style = JSlider.VERTICAL;
+      style = SwingConstants.VERTICAL;
     }
     this.slideBar = new JSlider(style, 0, 100, 0);
     // this.slideBar.setExtent(5);
@@ -95,7 +91,7 @@ public class UISlideBarImpl<E> extends AbstractUiWidget implements UiSlideBar<E>
    */
   public Orientation getOrientation() {
 
-    if (this.slideBar.getOrientation() == JSlider.HORIZONTAL) {
+    if (this.slideBar.getOrientation() == SwingConstants.HORIZONTAL) {
       return Orientation.HORIZONTAL;
     } else {
       return Orientation.VERTICAL;

@@ -16,12 +16,10 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiDecoratedComponent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
@@ -31,7 +29,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<UiElement> {
+public class UISlicePanelImpl<E extends AbstractUiElement> extends AbstractUiMultiComposite<E>
+    implements UiSlicePanel<E> {
 
   /** the swing panel */
   private final JPanel panel;
@@ -48,14 +47,12 @@ public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ui
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param orientation is the orientation for the layout of the panel.
    */
-  public UISlicePanelImpl(UIFactorySwing uiFactory, UiNode parentObject, Orientation orientation) {
+  public UISlicePanelImpl(UIFactorySwing uiFactory, Orientation orientation) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.layout = new LayoutManager(uiFactory);
     this.layout.setOrientation(orientation);
     this.panel = new JPanel(this.layout);
@@ -128,7 +125,7 @@ public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ui
   /**
    * {@inheritDoc}
    */
-  public void addChild(UiElement component) {
+  public void addChild(E component) {
 
     addChild(component, LayoutConstraints.DEFAULT);
   }
@@ -136,7 +133,7 @@ public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ui
   /**
    * {@inheritDoc}
    */
-  public void insertChild(UiElement component, int index) {
+  public void insertChild(E component, int index) {
 
     insertChild(component, LayoutConstraints.DEFAULT, index);
   }
@@ -144,22 +141,20 @@ public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ui
   /**
    * {@inheritDoc}
    */
-  public void addChild(UiElement component, LayoutConstraints constraints) {
+  public void addChild(E component, LayoutConstraints constraints) {
 
-    AbstractUiElement c = (AbstractUiElement) component;
     // synchronized (this) {
-    JComponent swingComponent = c.getSwingComponent();
+    JComponent swingComponent = component.getSwingComponent();
     this.panel.add(swingComponent, constraints);
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().add((JRadioButton) swingComponent);
     }
-    if (c.getType() == UiDecoratedComponent.TYPE) {
+    if (component.getType() == UiDecoratedComponent.TYPE) {
       UIDecoratedComponentImpl decoratedComponent = (UIDecoratedComponentImpl) component;
       getSizer().add(decoratedComponent);
       decoratedComponent.setDecoratorSizer(getSizer());
     }
-    doAddComponent(c);
-    setParent(c, this);
+    doAddChild(component);
     // }
     // this.panel.updateUI();
     if (this.panel.isVisible()) {
@@ -170,17 +165,15 @@ public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<Ui
   /**
    * {@inheritDoc}
    */
-  public void insertChild(UiElement component, LayoutConstraints constraints, int position) {
+  public void insertChild(E component, LayoutConstraints constraints, int position) {
 
-    AbstractUiElement c = (AbstractUiElement) component;
     // synchronized (this) {
-    JComponent swingComponent = c.getSwingComponent();
+    JComponent swingComponent = component.getSwingComponent();
     this.panel.add(swingComponent, constraints, position);
     if (swingComponent instanceof JRadioButton) {
       getButtonGroup().add((JRadioButton) swingComponent);
     }
-    doAddComponent(position, c);
-    setParent(c, this);
+    insertChild(component, position);
     // }
     this.panel.updateUI();
   }

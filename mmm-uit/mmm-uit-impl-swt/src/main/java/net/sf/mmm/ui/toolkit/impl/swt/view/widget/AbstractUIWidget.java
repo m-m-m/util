@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.AbstractUiComposite;
 
@@ -28,7 +28,7 @@ public abstract class AbstractUIWidget extends AbstractUiElement implements UiWi
    */
   public AbstractUIWidget(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**

@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
@@ -22,13 +22,11 @@ public abstract class AbstractUiWidget extends AbstractUiElement implements UiWi
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiWidget(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public AbstractUiWidget(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**

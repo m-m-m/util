@@ -3,15 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 
-import javax.swing.border.TitledBorder;
-
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
@@ -22,23 +18,17 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiComposite<E extends UiElement> extends AbstractUiElement implements
-    UiComposite<E> {
-
-  /** the titled border of this composite */
-  private TitledBorder border;
+public abstract class AbstractUiComposite<E extends AbstractUiElement> extends AbstractUiElement
+    implements UiComposite<E> {
 
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiComposite(UIFactorySwing uiFactory, UiNode parentObject) {
+  public AbstractUiComposite(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
-    this.border = null;
+    super(uiFactory);
   }
 
   /**

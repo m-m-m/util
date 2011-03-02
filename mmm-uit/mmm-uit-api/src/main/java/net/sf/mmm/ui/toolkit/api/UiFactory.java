@@ -15,7 +15,9 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
@@ -152,12 +154,12 @@ public interface UiFactory extends UiWriteDisposed {
    * {@link UiWorkbench#createFrame(String, boolean)}.
    * 
    * @param title is the title for the frame to create.
-   * @param resizeable - if <code>true</code> the frame will be
+   * @param resizable - if <code>true</code> the frame will be
    *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizable()
    *        resizable}
    * @return the created frame.
    */
-  UiFrame createFrame(String title, boolean resizeable);
+  UiFrame createFrame(String title, boolean resizable);
 
   /**
    * This method creates a new regular button.
@@ -173,44 +175,52 @@ public interface UiFactory extends UiWriteDisposed {
    * This method creates a new button. According to the style this can be a
    * radio-, toggle-, check- or a regular button.
    * 
-   * @param icon is the picture symbolizing the action triggered by the button.
-   *        It will be shown inside the button.
-   * @param style is the style of the button.
-   * @return the created button.
-   */
-  UiButton createButton(UiImage icon, ButtonStyle style);
-
-  /**
-   * This method creates a new button. According to the style this can be a
-   * radio-, toggle-, check- or a regular button.
-   * 
-   * @param text is the text that explains the action triggered by the button.
-   *        It will be shown inside the button.
-   * @param icon is the picture symbolizing the action triggered by the button.
-   *        It will be shown inside the button.
-   * @param style is the style of the button.
-   * @return the created button.
-   */
-  UiButton createButton(String text, UiImage icon, ButtonStyle style);
-
-  /**
-   * This method creates a new button.
-   * 
-   * @param uiAction is the action to be represented as button.
-   * @return the created button.
-   */
-  UiButton createButton(UiAction uiAction);
-
-  /**
-   * This method creates a new button. According to the style this can be a
-   * radio-, toggle-, check- or a regular button.
-   * 
    * @param text is the text that explains the action triggered by the button.
    *        It will be shown inside the button.
    * @param style is the style of the button.
    * @return the created button.
    */
   UiButton createButton(String text, ButtonStyle style);
+
+  /**
+   * This method creates a new {@link UiBorderPanel} with the given
+   * <code>title</code>.
+   * 
+   * @param <E> is the generic type of the {@link UiBorderPanel#getChild() child
+   *        element}.
+   * 
+   * @param title is the {@link UiBorderPanel#getTitle() border-title}.
+   * @return the new {@link UiBorderPanel}.
+   */
+  <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title);
+
+  /**
+   * This method creates a new {@link UiBorderPanel} with the given
+   * <code>title</code>.
+   * 
+   * @param <E> is the generic type of the {@link UiBorderPanel#getChild() child
+   *        element}.
+   * 
+   * @param title is the {@link UiBorderPanel#getTitle() border-title}.
+   * @param child is the {@link UiBorderPanel#getChild() child element}
+   *        displayed within the border.
+   * @return the new {@link UiBorderPanel}.
+   */
+  <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title, E child);
+
+  /**
+   * This method creates a new {@link UiSimplePanel} with the given
+   * <code>orientation</code>.
+   * 
+   * @param <E> is the generic type of the {@link UiSimplePanel#getChild(int)
+   *        child elements}.
+   * 
+   * @param orientation is the {@link UiSimplePanel#getOrientation()
+   *        orientation} of the {@link UiSimplePanel#getChild(int) child
+   *        elements}.
+   * @return the new {@link UiBorderPanel}.
+   */
+  <E extends UiElement> UiSimplePanel<E> createSimplePanel(Orientation orientation);
 
   /**
    * This method creates a new panel without a border.
@@ -360,14 +370,6 @@ public interface UiFactory extends UiWriteDisposed {
    * @return the created table.
    */
   <C> UiTable<C> createTable(boolean multiSelection, UiTableMvcModel<C> model);
-
-  /**
-   * This method creates a new label. The label is initially empty (has no
-   * text).
-   * 
-   * @return the created label.
-   */
-  UiLabel createLabel();
 
   /**
    * This method creates a new label.

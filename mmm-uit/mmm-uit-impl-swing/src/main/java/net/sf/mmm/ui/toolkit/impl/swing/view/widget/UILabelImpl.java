@@ -6,9 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
@@ -32,12 +30,11 @@ public class UILabelImpl extends AbstractUiWidget implements UiLabel {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   * @param parentObject
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UILabelImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public UILabelImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.label = new JLabel();
     this.icon = null;
   }
@@ -45,8 +42,8 @@ public class UILabelImpl extends AbstractUiWidget implements UiLabel {
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.label;
   }

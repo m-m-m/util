@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
@@ -44,7 +44,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    * 
    * @see #getOrCreateWorkbench()
    */
-  private String title;
+  private String applicationTitle;
 
   /** the disposed flag */
   private boolean disposed;
@@ -73,7 +73,7 @@ public abstract class AbstractUiFactory implements UiFactory {
   public AbstractUiFactory(String title) {
 
     super();
-    this.title = title;
+    this.applicationTitle = title;
     // TODO: do we need a thread-safe implementation here?
     this.windows = new ArrayList<AbstractUiWindow>();
     this.disposed = false;
@@ -194,7 +194,7 @@ public abstract class AbstractUiFactory implements UiFactory {
     if (this.workbench == null) {
       synchronized (this) {
         if (this.workbench == null) {
-          this.workbench = createWorkbench(this.title);
+          this.workbench = createWorkbench(this.applicationTitle);
         }
       }
     }
@@ -272,35 +272,11 @@ public abstract class AbstractUiFactory implements UiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiButton createButton(String text, ButtonStyle style) {
+  public <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title, E child) {
 
-    return createButton(text, null, style);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiButton createButton(UiImage icon, ButtonStyle style) {
-
-    return createButton(null, icon, style);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiButton createButton(UiAction uiAction) {
-
-    UiButton button = createButton(uiAction.getName(), uiAction.getButtonStyle());
-    button.addListener(uiAction.getActionListener());
-    UiImage icon = uiAction.getIcon();
-    if (icon != null) {
-      button.setImage(icon);
-    }
-    String id = uiAction.getId();
-    if (id != null) {
-      button.setId(id);
-    }
-    return button;
+    UiBorderPanel<E> panel = createBorderPanel(title);
+    panel.setChild(child);
+    return panel;
   }
 
   /**

@@ -13,8 +13,8 @@ import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
-import net.sf.mmm.ui.toolkit.impl.awt.AbstractUiNodeAwt;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiNodeAwt;
 
 /**
  * This class is the implementation of the UIMenuItem interface using Swing as
@@ -43,7 +43,7 @@ public class UIMenuItemImpl extends AbstractUiNodeAwt implements UiMenuItem {
   public UIMenuItemImpl(UIFactorySwing uiFactory, UiNode parentObject, String name,
       ButtonStyle itemStyle) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.style = itemStyle;
     switch (this.style) {
       case DEFAULT:

@@ -27,7 +27,7 @@ public interface UiTabPanel<E extends UiElement> extends UiMultiComposite<E>, Ui
    *        be created by the same factory.
    * @param title is the title that will be displayed in the tab.
    */
-  void addChild(UiElement component, String title);
+  void addChild(E component, String title);
 
   /**
    * This method adds the given component as new tab on the ride of all existing
@@ -39,6 +39,6 @@ public interface UiTabPanel<E extends UiElement> extends UiMultiComposite<E>, Ui
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void insertChild(UiElement component, String title, int position);
+  void insertChild(E component, String title, int position);
 
 }

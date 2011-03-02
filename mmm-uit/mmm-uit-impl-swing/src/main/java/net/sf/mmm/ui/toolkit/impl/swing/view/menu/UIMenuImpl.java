@@ -11,7 +11,6 @@ import javax.swing.JSeparator;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenu;
@@ -36,12 +35,11 @@ public class UIMenuImpl extends AbstractUiMenu {
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
    * @param jMenu is the swing menu to wrap.
    */
-  public UIMenuImpl(UIFactorySwing uiFactory, UiNode parentObject, JMenu jMenu) {
+  public UIMenuImpl(UIFactorySwing uiFactory, JMenu jMenu) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.menu = jMenu;
     this.buttonGroup = null;
     updateOrientation();
@@ -90,7 +88,7 @@ public class UIMenuImpl extends AbstractUiMenu {
 
     JMenu subMenu = new JMenu(name);
     this.menu.add(subMenu);
-    return new UIMenuImpl((UIFactorySwing) getFactory(), this, subMenu);
+    return new UIMenuImpl((UIFactorySwing) getFactory(), subMenu);
   }
 
   /**

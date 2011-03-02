@@ -5,10 +5,9 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 
 import javax.swing.JComponent;
 import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.custom.MyProgressBar;
@@ -29,23 +28,20 @@ public class UIProgressBarImpl extends AbstractUiWidget implements UiProgressBar
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
-   * @param orientation
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param orientation is the {@link #getOrientation() orientation}.
    */
-  public UIProgressBarImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject,
-      Orientation orientation) {
+  public UIProgressBarImpl(UIFactorySwing uiFactory, Orientation orientation) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.progressBar = new MyProgressBar(orientation);
   }
 
   /**
    * {@inheritDoc}
    */
-  public @Override
-  JComponent getSwingComponent() {
+  @Override
+  public JComponent getSwingComponent() {
 
     return this.progressBar;
   }
@@ -79,7 +75,7 @@ public class UIProgressBarImpl extends AbstractUiWidget implements UiProgressBar
    */
   public Orientation getOrientation() {
 
-    if (this.progressBar.getOrientation() == JProgressBar.HORIZONTAL) {
+    if (this.progressBar.getOrientation() == SwingConstants.HORIZONTAL) {
       return Orientation.HORIZONTAL;
     } else {
       return Orientation.VERTICAL;

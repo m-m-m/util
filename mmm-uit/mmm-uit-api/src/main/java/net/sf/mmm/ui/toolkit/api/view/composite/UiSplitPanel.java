@@ -45,7 +45,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * 
    * @param component is the component to add.
    */
-  void setTopOrLeftComponent(UiElement component);
+  void setTopOrLeftComponent(E component);
 
   /**
    * This method gets the component placed to the top (horizontal orientation)
@@ -54,7 +54,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * @return the top or left component or <code>null</code> if the component has
    *         not been set.
    */
-  UiElement getTopOrLeftComponent();
+  E getTopOrLeftComponent();
 
   /**
    * This method sets the component placed to the bottom (horizontal
@@ -62,7 +62,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * 
    * @param component is the component to add.
    */
-  void setBottomOrRightComponent(UiElement component);
+  void setBottomOrRightComponent(E component);
 
   /**
    * This method gets the component placed to the bottom (horizontal
@@ -71,7 +71,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * @return the bottom or right component or <code>null</code> if the component
    *         has not been set.
    */
-  UiElement getBottomOrRightComponent();
+  E getBottomOrRightComponent();
 
   /**
    * This method sets the position of the divider used to split the panel.

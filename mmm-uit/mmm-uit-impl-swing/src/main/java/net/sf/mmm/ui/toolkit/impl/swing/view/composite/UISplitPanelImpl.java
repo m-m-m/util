@@ -8,30 +8,30 @@ import javax.swing.JSplitPane;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 
 /**
  * This class is the implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel} interface using
  * Swing as the UI toolkit.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
-    UiSplitPanel<UiElement> {
+public class UISplitPanelImpl<E extends AbstractUiElement> extends AbstractUiComposite<E> implements
+    UiSplitPanel<E> {
 
   /** the swing split pane */
   private JSplitPane splitPanel;
 
   /** the component top or left */
-  private AbstractUiElement componentTopOrLeft;
+  private E componentTopOrLeft;
 
   /** the component bottom or right */
-  private AbstractUiElement componentBottomOrRight;
+  private E componentBottomOrRight;
 
   /** @see #getOrientation() */
   private Orientation orientation;
@@ -51,7 +51,7 @@ public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
   public UISplitPanelImpl(UIFactorySwing uiFactory, AbstractUiElement parentObject,
       Orientation orientation) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.splitPanel = new JSplitPane();
     this.componentTopOrLeft = null;
     this.componentBottomOrRight = null;
@@ -97,16 +97,15 @@ public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
   /**
    * {@inheritDoc}
    */
-  public void setTopOrLeftComponent(UiElement component) {
+  public void setTopOrLeftComponent(E component) {
 
-    AbstractUiElement newComponent = (AbstractUiElement) component;
-    if (newComponent.getParent() != null) {
-      newComponent.removeFromParent();
+    if (component.getParent() != null) {
+      component.removeFromParent();
     }
     if (this.componentTopOrLeft != null) {
       setParent(this.componentTopOrLeft, null);
     }
-    this.componentTopOrLeft = newComponent;
+    this.componentTopOrLeft = component;
     JComponent jComponent = this.componentTopOrLeft.getSwingComponent();
     this.splitPanel.setTopComponent(jComponent);
     setParent(this.componentTopOrLeft, this);
@@ -115,16 +114,15 @@ public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
   /**
    * {@inheritDoc}
    */
-  public void setBottomOrRightComponent(UiElement component) {
+  public void setBottomOrRightComponent(E component) {
 
-    AbstractUiElement newComponent = (AbstractUiElement) component;
-    if (newComponent.getParent() != null) {
-      newComponent.removeFromParent();
+    if (component.getParent() != null) {
+      component.removeFromParent();
     }
     if (this.componentBottomOrRight != null) {
       setParent(this.componentBottomOrRight, null);
     }
-    this.componentBottomOrRight = newComponent;
+    this.componentBottomOrRight = component;
     JComponent jComponent = this.componentBottomOrRight.getSwingComponent();
     this.splitPanel.setBottomComponent(jComponent);
     setParent(this.componentBottomOrRight, this);
@@ -150,7 +148,7 @@ public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
   /**
    * {@inheritDoc}
    */
-  public UiElement getTopOrLeftComponent() {
+  public E getTopOrLeftComponent() {
 
     return this.componentTopOrLeft;
   }
@@ -158,7 +156,7 @@ public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
   /**
    * {@inheritDoc}
    */
-  public UiElement getBottomOrRightComponent() {
+  public E getBottomOrRightComponent() {
 
     return this.componentBottomOrRight;
   }
@@ -166,7 +164,7 @@ public class UISplitPanelImpl extends AbstractUiComposite<UiElement> implements
   /**
    * {@inheritDoc}
    */
-  public UiElement getChild(int index) {
+  public E getChild(int index) {
 
     if (index == 0) {
       return getTopOrLeftComponent();

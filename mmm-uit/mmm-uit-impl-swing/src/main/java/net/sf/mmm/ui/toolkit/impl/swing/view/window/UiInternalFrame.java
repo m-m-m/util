@@ -14,8 +14,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
-import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
 
 /**
@@ -29,7 +29,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, UiElement {
+public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, UiElement {
 
   /** the frame */
   private final JInternalFrame frame;
@@ -48,14 +48,14 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    *        instance.
    * @param parentObject is the workbench that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
-   * @param resizeable - if <code>true</code> the frame will be
+   * @param resizable - if <code>true</code> the frame will be
    *        {@link #isResizable() resizable}.
    */
-  public UIInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
-      boolean resizeable) {
+  public UiInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
+      boolean resizable) {
 
     super(uiFactory, parentObject);
-    this.frame = new JInternalFrame(title, resizeable, true, resizeable, true);
+    this.frame = new JInternalFrame(title, resizable, true, resizable, true);
     this.workbench = parentObject;
   }
 
@@ -69,11 +69,11 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    *        {@link net.sf.mmm.ui.toolkit.api.view.UiNode#getParent() parent}
    *        that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
-   * @param resizeable - if <code>true</code> the frame will be
+   * @param resizable - if <code>true</code> the frame will be
    *        {@link #isResizable() resizable}.
    */
-  public UIInternalFrame(UIFactorySwing uiFactory, UIInternalFrame parentObject, String title,
-      boolean resizeable) {
+  public UiInternalFrame(UIFactorySwing uiFactory, UiInternalFrame parentObject, String title,
+      boolean resizable) {
 
     super(uiFactory, parentObject);
     this.frame = new JInternalFrame();
@@ -85,7 +85,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    */
   public UiFrame createFrame(String title, boolean resizeable) {
 
-    UIInternalFrame internalFrame = new UIInternalFrame((UIFactorySwing) getFactory(), this, title,
+    UiInternalFrame internalFrame = new UiInternalFrame((UIFactorySwing) getFactory(), this, title,
         resizeable);
     return internalFrame;
   }
@@ -322,7 +322,7 @@ public class UIInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   @Override
   protected UiReadSize getDesktopSize() {
 
-    return this.workbench.getDesktopPanel();
+    return this.workbench;
   }
 
   /**

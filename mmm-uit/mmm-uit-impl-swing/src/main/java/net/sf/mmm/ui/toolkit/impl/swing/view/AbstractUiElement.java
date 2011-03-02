@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swing;
+package net.sf.mmm.ui.toolkit.impl.swing.view;
 
 import java.awt.ComponentOrientation;
 
@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
-import net.sf.mmm.ui.toolkit.impl.awt.AbstractUiNodeAwt;
+import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**
  * This class is the implementation of the
@@ -31,15 +31,12 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiElement(UIFactorySwing uiFactory, UiNode parentObject) {
+  public AbstractUiElement(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.disposed = false;
-    // this.size = new Dimension();
   }
 
   /**

@@ -32,7 +32,7 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
    */
   public AbstractUiWindow(AbstractUiFactory uiFactory, UiWindow parentObject) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**

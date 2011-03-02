@@ -4,9 +4,8 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSingleComposite;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 
 /**
  * This is the abstract base implementation of {@link UiSingleComposite}.
@@ -24,13 +23,11 @@ public abstract class AbstractUiSingleComposite<E extends AbstractUiElement> ext
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code> ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiSingleComposite(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public AbstractUiSingleComposite(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**

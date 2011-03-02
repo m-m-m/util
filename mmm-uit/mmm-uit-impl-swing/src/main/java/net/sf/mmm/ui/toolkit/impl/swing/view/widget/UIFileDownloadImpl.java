@@ -12,8 +12,6 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -63,15 +61,12 @@ public class UIFileDownloadImpl extends AbstractUiWidget implements UiFileDownlo
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param uiFileAccess gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UIFactorySwing uiFactory,
-      UiComposite<? extends UiElement> parentObject, UiFileAccess uiFileAccess) {
+  public UIFileDownloadImpl(UIFactorySwing uiFactory, UiFileAccess uiFileAccess) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.access = uiFileAccess;
     this.fileChooser = new JFileChooser();
     this.fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);

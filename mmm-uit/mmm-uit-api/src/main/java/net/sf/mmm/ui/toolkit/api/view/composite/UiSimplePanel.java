@@ -25,4 +25,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 public interface UiSimplePanel<E extends UiElement> extends UiExtendableComposite<E>,
     UiReadOrientation {
 
+  /** @see #getType() */
+  String TYPE = "SimplePanel";
+
 }

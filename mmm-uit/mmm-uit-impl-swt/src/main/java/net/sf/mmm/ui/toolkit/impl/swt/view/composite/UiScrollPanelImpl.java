@@ -5,9 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.common.ScrollbarVisibility;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncScrolledCompositeAccess;
 
 import org.eclipse.swt.SWT;
@@ -38,13 +37,11 @@ public class UiScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UiScrollPanelImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public UiScrollPanelImpl(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style = SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER;
     this.syncAccess = new SyncScrolledCompositeAccess(uiFactory, style);
   }

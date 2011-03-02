@@ -8,8 +8,6 @@ import java.util.Locale;
 
 import javax.swing.JComponent;
 
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
@@ -31,12 +29,11 @@ public class UIDateEditorImpl extends AbstractUiWidget implements UiDateBox {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   * @param parentObject
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UIDateEditorImpl(UIFactorySwing uiFactory, UiComposite<? extends UiElement> parentObject) {
+  public UIDateEditorImpl(UIFactorySwing uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.dateChooser = new JDateChooser();
   }
 

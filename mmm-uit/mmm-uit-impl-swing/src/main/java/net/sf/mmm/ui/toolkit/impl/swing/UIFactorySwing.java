@@ -17,7 +17,9 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
@@ -40,11 +42,14 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.impl.awt.UiDeviceImpl;
 import net.sf.mmm.ui.toolkit.impl.awt.UiDisplayImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.feature.PrintAction;
+import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UIScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UISlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UISplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UITabbedPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UiBorderPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.composite.UiSimplePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIButtonImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIComboBoxImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UIDateEditorImpl;
@@ -68,6 +73,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIWorkbenchImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class UIFactorySwing extends AbstractUiFactory {
 
   /** the default display */
@@ -136,14 +142,27 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiButton createButton(String text, UiImage icon, ButtonStyle style) {
+  public UiButton createButton(String text, ButtonStyle style) {
 
-    UiButton button = new UIButtonImpl(this, null, style);
+    UiButton button = new UIButtonImpl(this, style);
     button.setValue(text);
-    if (icon != null) {
-      button.setImage(icon);
-    }
     return button;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title) {
+
+    return new UiBorderPanelImpl(this);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E extends UiElement> UiSimplePanel<E> createSimplePanel(Orientation orientation) {
+
+    return new UiSimplePanelImpl(this, orientation);
   }
 
   /**
@@ -151,7 +170,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiSlicePanel createPanel(Orientation orientation, String text) {
 
-    UISlicePanelImpl panel = new UISlicePanelImpl(this, null, orientation);
+    UISlicePanelImpl panel = new UISlicePanelImpl(this, orientation);
     return panel;
   }
 
@@ -160,7 +179,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
-    UiScrollPanel<UiElement> scrollPanel = new UIScrollPanelImpl(this, null);
+    UiScrollPanel<UiElement> scrollPanel = new UIScrollPanelImpl(this);
     scrollPanel.setChild(child);
     return scrollPanel;
   }
@@ -183,7 +202,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model, boolean editableFlag) {
 
-    UiComboBox<E> comboBox = new UIComboBoxImpl<E>(this, null);
+    UiComboBox<E> comboBox = new UIComboBoxImpl<E>(this);
     comboBox.setEditable(editableFlag);
     if (model != null) {
       comboBox.setModel(model);
@@ -196,7 +215,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public <N> UiTree<N> createTree(boolean multiSelection, UiTreeMvcModel<N> model) {
 
-    UITreeImpl<N> tree = new UITreeImpl<N>(this, null);
+    UITreeImpl<N> tree = new UITreeImpl<N>(this);
     tree.setMultiSelection(multiSelection);
     if (model != null) {
       tree.setModel(model);
@@ -209,7 +228,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public <C> UiTable<C> createTable(boolean multiSelection, UiTableMvcModel<C> model) {
 
-    UITableImpl<C> table = new UITableImpl<C>(this, null);
+    UITableImpl<C> table = new UITableImpl<C>(this);
     // table.setMultiSelection(multiSelection);
     if (model != null) {
       table.setModel(model);
@@ -222,7 +241,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiLabel createLabel(String text) {
 
-    UiLabel label = new UILabelImpl(this, null);
+    UiLabel label = new UILabelImpl(this);
     label.setValue(text);
     return label;
   }
@@ -232,7 +251,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiTextField createTextField(boolean editable) {
 
-    UITextFieldImpl textField = new UITextFieldImpl(this, null);
+    UITextFieldImpl textField = new UITextFieldImpl(this);
     textField.setEditable(editable);
     return textField;
   }
@@ -242,7 +261,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public <E> UiSpinBox<E> createSpinBox(UiListMvcModel<E> model) {
 
-    return new UISpinBoxImpl<E>(this, null, model);
+    return new UISpinBoxImpl<E>(this, model);
   }
 
   /**
@@ -250,7 +269,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiFileDownload createFileDownload(UiFileAccess access) {
 
-    return new UIFileDownloadImpl(this, null, access);
+    return new UIFileDownloadImpl(this, access);
   }
 
   /**
@@ -258,7 +277,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiFileUpload createFileUpload() {
 
-    return new UIFileUploadImpl(this, null);
+    return new UIFileUploadImpl(this);
   }
 
   /**
@@ -274,7 +293,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiTabPanel createTabbedPanel() {
 
-    return new UITabbedPanelImpl(this, null);
+    return new UITabbedPanelImpl(this);
   }
 
   /**
@@ -290,7 +309,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public <E> UiSlideBar<E> createSlideBar(UiListMvcModel<E> model, Orientation orientation) {
 
-    return new UISlideBarImpl<E>(this, null, orientation, model);
+    return new UISlideBarImpl<E>(this, orientation, model);
   }
 
   /**
@@ -298,7 +317,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiProgressBar createProgressBar(Orientation orientation) {
 
-    return new UIProgressBarImpl(this, null, orientation);
+    return new UIProgressBarImpl(this, orientation);
   }
 
   /**
@@ -325,7 +344,7 @@ public class UIFactorySwing extends AbstractUiFactory {
    */
   public UiDateBox createDateEditor() {
 
-    return new UIDateEditorImpl(this, null);
+    return new UIDateEditorImpl(this);
   }
 
 }

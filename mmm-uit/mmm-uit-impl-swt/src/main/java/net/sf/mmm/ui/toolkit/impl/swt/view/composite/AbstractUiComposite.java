@@ -5,9 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncCompositeAccess;
 
 /**
@@ -25,13 +24,11 @@ public abstract class AbstractUiComposite<E extends AbstractUiElement> extends A
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the {@link #getParent() parent} of this object (may
-   *        be <code>null</code> ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiComposite(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public AbstractUiComposite(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
   }
 
   /**
