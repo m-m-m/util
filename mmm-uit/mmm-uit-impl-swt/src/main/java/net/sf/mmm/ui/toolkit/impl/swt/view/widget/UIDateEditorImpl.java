@@ -6,18 +6,17 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 import java.util.Date;
 import java.util.Locale;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
 
+import org.eclipse.swt.SWT;
+
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox} interface using
- * SWT as the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox} interface using SWT
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -29,12 +28,11 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   * @param parentObject
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UIDateEditorImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public UIDateEditorImpl(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.DEFAULT);
   }
 
@@ -52,7 +50,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
    */
   public void setValue(Date newDate) {
 
-  // TODO Auto-generated method stub
+    // TODO Auto-generated method stub
 
   }
 
@@ -87,7 +85,7 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
    */
   public void setLocale(Locale newLocale) {
 
-  // TODO Auto-generated method stub
+    // TODO Auto-generated method stub
 
   }
 

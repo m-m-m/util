@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileDownload;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncButtonAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncFileDialogAccess;
@@ -59,14 +58,12 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param access gives access to the data that is offered for download.
    */
-  public UIFileDownloadImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, UiFileAccess access) {
+  public UIFileDownloadImpl(UiFactorySwt uiFactory, UiFileAccess access) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.uiFileAccess = access;
     this.syncAccess = new SyncButtonAccess(uiFactory, SWT.DEFAULT);
     this.syncAccess.setText("Save");

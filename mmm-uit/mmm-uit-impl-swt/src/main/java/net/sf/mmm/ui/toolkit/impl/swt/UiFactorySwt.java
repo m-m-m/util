@@ -160,7 +160,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiButton createButton(String text, ButtonStyle style) {
 
-    UiButton button = new UIButtonImpl(this, null, style);
+    UiButton button = new UIButtonImpl(this, style);
     button.setValue(text);
     return button;
   }
@@ -201,7 +201,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public <E> UiList<E> createList(UiListMvcModel<E> model, boolean multiSelection) {
 
-    UiList<E> list = new UIListImpl<E>(this, null, multiSelection, model);
+    UiList<E> list = new UIListImpl<E>(this, multiSelection, model);
     return list;
   }
 
@@ -210,7 +210,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public <N> UiTree<N> createTree(boolean multiSelection, UiTreeMvcModel<N> model) {
 
-    UITreeImpl<N> tree = new UITreeImpl<N>(this, null, multiSelection);
+    UITreeImpl<N> tree = new UITreeImpl<N>(this, multiSelection);
     if (model != null) {
       tree.setModel(model);
     }
@@ -222,7 +222,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public <C> UiTable<C> createTable(boolean multiSelection, UiTableMvcModel<C> model) {
 
-    UITableImpl<C> table = new UITableImpl<C>(this, null, multiSelection);
+    UITableImpl<C> table = new UITableImpl<C>(this, multiSelection);
     if (model != null) {
       table.setModel(model);
     }
@@ -242,7 +242,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiLabel createLabel(String text) {
 
-    UiLabel label = new UILabelImpl(this, null);
+    UiLabel label = new UILabelImpl(this);
     label.setValue(text);
     return label;
   }
@@ -252,7 +252,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiTextField createTextField(boolean editable) {
 
-    UITextFieldImpl textField = new UITextFieldImpl(this, null);
+    UITextFieldImpl textField = new UITextFieldImpl(this);
     textField.setEditable(editable);
     return textField;
   }
@@ -262,7 +262,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public <E> UiSpinBox<E> createSpinBox(UiListMvcModel<E> model) {
 
-    return new UISpinBoxImpl<E>(this, null, model);
+    return new UISpinBoxImpl<E>(this, model);
   }
 
   /**
@@ -270,7 +270,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiFileDownload createFileDownload(UiFileAccess access) {
 
-    return new UIFileDownloadImpl(this, null, access);
+    return new UIFileDownloadImpl(this, access);
   }
 
   /**
@@ -278,7 +278,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiFileUpload createFileUpload() {
 
-    return new UIFileUploadImpl(this, null);
+    return new UIFileUploadImpl(this);
   }
 
   /**
@@ -294,7 +294,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model, boolean editableFlag) {
 
-    return new UIComboBoxImpl<E>(this, null, editableFlag, model);
+    return new UIComboBoxImpl<E>(this, editableFlag, model);
   }
 
   /**
@@ -311,7 +311,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   public <E> UiSlideBar<E> createSlideBar(UiListMvcModel<E> model, Orientation orientation) {
 
     // TODO
-    return new UISlideBarImpl<E>(this, null, orientation, model);
+    return new UISlideBarImpl<E>(this, orientation, model);
   }
 
   /**
@@ -319,7 +319,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiProgressBar createProgressBar(Orientation orientation) {
 
-    return new UIProgressBarImpl(this, null, orientation, false);
+    return new UIProgressBarImpl(this, orientation, false);
   }
 
   /**
@@ -346,7 +346,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiDateBox createDateEditor() {
 
-    return new UIDateEditorImpl(this, null);
+    return new UIDateEditorImpl(this);
   }
 
   /**

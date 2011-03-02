@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swt.menu;
+package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;

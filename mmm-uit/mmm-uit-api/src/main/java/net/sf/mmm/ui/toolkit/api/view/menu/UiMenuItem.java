@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiNode;
 /**
  * This is the interface for a menu-item.<br>
  * Use
- * {@link UiMenu#addItem(String, net.sf.mmm.ui.toolkit.api.event.UIActionListener, net.sf.mmm.ui.toolkit.api.common.ButtonStyle)}
+ * {@link UiMenu#addItem(String, net.sf.mmm.ui.toolkit.api.event.UiEventListener, net.sf.mmm.ui.toolkit.api.common.ButtonStyle)}
  * to create a menu-item.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

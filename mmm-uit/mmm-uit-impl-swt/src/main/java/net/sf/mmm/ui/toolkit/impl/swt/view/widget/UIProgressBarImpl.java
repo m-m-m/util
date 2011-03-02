@@ -3,18 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncProgressBarAccess;
+
+import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar} interface using
+ * SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,16 +25,14 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UiProgressBar
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param orientation is the orientation of the progress-bar.
    * @param indeterminate if <code>true</code> the progress-bar will be
    *        {@link #isIndeterminate() indeterminate}.
    */
-  public UIProgressBarImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, Orientation orientation,
-      boolean indeterminate) {
+  public UIProgressBarImpl(UiFactorySwt uiFactory, Orientation orientation, boolean indeterminate) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style;
     if (orientation == Orientation.HORIZONTAL) {
       style = SWT.HORIZONTAL;

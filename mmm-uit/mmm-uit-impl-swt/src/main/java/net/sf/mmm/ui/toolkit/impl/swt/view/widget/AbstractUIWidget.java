@@ -7,7 +7,6 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.AbstractUiComposite;
 
 /**
@@ -22,11 +21,9 @@ public abstract class AbstractUIWidget extends AbstractUiElement implements UiWi
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUIWidget(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public AbstractUIWidget(UiFactorySwt uiFactory) {
 
     super(uiFactory);
   }

@@ -3,19 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.model.ComboBoxModelAdapter;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncComboAccess;
+
+import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox} interface using SWT
+ * as the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -37,16 +36,15 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param editableFlag is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable() editable-flag}.
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable()
+   *        editable-flag}.
    * @param listModel is the model defining the the selectable elements.
    */
-  public UIComboBoxImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean editableFlag,
-      UiListMvcModel<E> listModel) {
+  public UIComboBoxImpl(UiFactorySwt uiFactory, boolean editableFlag, UiListMvcModel<E> listModel) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style = SWT.DEFAULT;
     if (editableFlag) {
       style = style ^ SWT.READ_ONLY;
@@ -129,7 +127,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    */
   public void setEditable(boolean editableFlag) {
 
-  // not supported - maybe throw away comboBox and create new-one?
+    // not supported - maybe throw away comboBox and create new-one?
   }
 
   /**

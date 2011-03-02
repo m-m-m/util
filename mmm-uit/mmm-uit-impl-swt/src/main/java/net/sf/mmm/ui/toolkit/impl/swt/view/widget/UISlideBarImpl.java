@@ -3,20 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.model.SlideBarModelAdapter;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncSliderAccess;
+
+import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar} interface using SWT
+ * as the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -40,16 +39,15 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param sliderOrientation is the orientation of the slide-bar.
    * @param sliderModel is the list model containing the data. See
    *        {@link net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel}.
    */
-  public UISlideBarImpl(UiFactorySwt uiFactory, UiSwtNode parentObject,
-      Orientation sliderOrientation, UiListMvcModel<E> sliderModel) {
+  public UISlideBarImpl(UiFactorySwt uiFactory, Orientation sliderOrientation,
+      UiListMvcModel<E> sliderModel) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.orientation = sliderOrientation;
     this.model = sliderModel;
     int style = UiFactorySwt.convertOrientation(sliderOrientation);

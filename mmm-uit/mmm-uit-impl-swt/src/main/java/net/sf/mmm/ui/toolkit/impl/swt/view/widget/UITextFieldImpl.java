@@ -3,18 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTextAccess;
 
+import org.eclipse.swt.SWT;
+
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField} interface using SWT
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,12 +25,11 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UITextFieldImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public UITextFieldImpl(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style = SWT.DEFAULT;
     this.syncAccess = new SyncTextAccess(uiFactory, style);
   }

@@ -7,15 +7,14 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.model.ListModelAdapter;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncListAccess;
 
 import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using SWT as the UI
- * toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiList} interface using SWT as
+ * the UI toolkit.
  * 
  * @param <E> is the templated type of the elements that can be selected with
  *        this widget.
@@ -33,16 +32,14 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
-   * @param multiSelection - if <code>true</code> the user can select
-   *        multiple, else ony one.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param multiSelection - if <code>true</code> the user can select multiple,
+   *        else ony one.
    * @param model is the model.
    */
-  public UIListImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean multiSelection,
-      UiListMvcModel<E> model) {
+  public UIListImpl(UiFactorySwt uiFactory, boolean multiSelection, UiListMvcModel<E> model) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style = SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL;
     if (multiSelection) {
       style |= SWT.MULTI;

@@ -3,20 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncButtonAccess;
+
+import org.eclipse.swt.SWT;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} interface using SWT as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} interface using SWT as
+ * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -35,13 +34,12 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param buttonStyle determines the style of the button.
    */
-  public UIButtonImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, ButtonStyle buttonStyle) {
+  public UIButtonImpl(UiFactorySwt uiFactory, ButtonStyle buttonStyle) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.style = buttonStyle;
     int swtStyle = UiFactorySwt.convertButtonStyle(buttonStyle);
     this.syncAccess = new SyncButtonAccess(uiFactory, swtStyle);

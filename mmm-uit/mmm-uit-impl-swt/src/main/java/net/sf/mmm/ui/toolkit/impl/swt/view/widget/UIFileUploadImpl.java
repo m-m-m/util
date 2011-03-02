@@ -8,7 +8,6 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiFileUpload;
 import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncButtonAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncFileDialogAccess;
@@ -59,13 +58,11 @@ public class UIFileUploadImpl extends AbstractUIWidget implements UiFileUpload {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UIFileUploadImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public UIFileUploadImpl(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.access = null;
     this.syncAccess = new SyncButtonAccess(uiFactory, SWT.DEFAULT);
     // TODO i18n

@@ -3,20 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncLabelAccess;
 
+import org.eclipse.swt.SWT;
+
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel} interface using SWT as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel} interface using SWT as
+ * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -32,12 +31,11 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UILabelImpl(UiFactorySwt uiFactory, UiSwtNode parentObject) {
+  public UILabelImpl(UiFactorySwt uiFactory) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style = SWT.SHADOW_NONE | SWT.LEFT;
     this.syncAccess = new SyncLabelAccess(uiFactory, style);
     this.icon = null;

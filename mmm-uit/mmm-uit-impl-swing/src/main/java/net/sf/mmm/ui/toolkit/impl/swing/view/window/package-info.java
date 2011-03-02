@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the swing implementation for windows of the UI toolkit.
- * <a name="documentation"/><h2>UIT View Window Impl Swing</h2>
+ * <a name="documentation"/><h2>UIT Impl Swing - View Window</h2>
  * Contains the implementation of the 
  * {@link net.sf.mmm.ui.toolkit.api.view.window Window API} using swing.
  */

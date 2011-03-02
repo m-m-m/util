@@ -3,19 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMySpinnerAccess;
 
+import org.eclipse.swt.SWT;
+
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox} interface using SWT as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox} interface using SWT
+ * as the UI toolkit.
  * 
  * @param <E> is the templated type of the list-elements.
  * 
@@ -32,13 +31,12 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param listModel is the model for the elements to select.
    */
-  public UISpinBoxImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, UiListMvcModel<E> listModel) {
+  public UISpinBoxImpl(UiFactorySwt uiFactory, UiListMvcModel<E> listModel) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     this.syncAccess = new SyncMySpinnerAccess(uiFactory, SWT.NONE, listModel);
     this.model = listModel;
     // this.spinBox.setMinimum(this.model.getMinWidthimumValue());

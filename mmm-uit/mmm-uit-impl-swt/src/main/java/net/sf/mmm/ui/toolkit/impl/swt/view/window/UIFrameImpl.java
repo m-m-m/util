@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.window;
 
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.menu.UIMenuBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.menu.UIMenuBarImpl;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;

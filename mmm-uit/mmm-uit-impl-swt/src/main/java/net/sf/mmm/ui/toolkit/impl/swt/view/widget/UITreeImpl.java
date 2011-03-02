@@ -9,15 +9,14 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.model.TreeModelAdapter;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTreeAccess;
 
 import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTree} interface using SWT as the UI
- * toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTree} interface using SWT as
+ * the UI toolkit.
  * 
  * @param <N> is the templated type of the tree-nodes that can be
  *        {@link #getSelection() selected} with this widget.
@@ -35,14 +34,13 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
-   * @param multiSelection - if <code>true</code> the user can select
-   *        multiple, else ony one.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param multiSelection - if <code>true</code> the user can select multiple,
+   *        else ony one.
    */
-  public UITreeImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean multiSelection) {
+  public UITreeImpl(UiFactorySwt uiFactory, boolean multiSelection) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style = SWT.BORDER;
     if (multiSelection) {
       style |= SWT.MULTI;

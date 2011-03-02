@@ -3,19 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import org.eclipse.swt.SWT;
-
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.model.TableModelAdapter;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTableAccess;
+
+import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTable} interface using SWT as the
- * UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTable} interface using SWT as
+ * the UI toolkit.
  * 
  * @param <C> is the templated type of the objects in the table cells.
  * 
@@ -32,14 +31,13 @@ public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>).
-   * @param multiSelection - if <code>true</code> the user can select
-   *        multiple, else ony one.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param multiSelection - if <code>true</code> the user can select multiple,
+   *        else ony one.
    */
-  public UITableImpl(UiFactorySwt uiFactory, UiSwtNode parentObject, boolean multiSelection) {
+  public UITableImpl(UiFactorySwt uiFactory, boolean multiSelection) {
 
-    super(uiFactory, parentObject);
+    super(uiFactory);
     int style;
     if (multiSelection) {
       style = SWT.MULTI | SWT.FULL_SELECTION;
