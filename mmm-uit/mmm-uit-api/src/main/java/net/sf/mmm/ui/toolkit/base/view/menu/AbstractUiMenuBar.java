@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
 /**
  * This is the base implementation of the UIMenuBar interface.

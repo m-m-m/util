@@ -180,7 +180,7 @@ public class UiFactorySwt extends AbstractUiFactory {
 
     UiScrollPanel panel = new UiScrollPanelImpl(this, null);
     if (child != null) {
-      panel.setComponent(child);
+      panel.setChild(child);
     }
     return panel;
   }

@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt;
 
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.AbstractUiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
@@ -14,8 +15,8 @@ import org.eclipse.swt.SWT;
 
 /**
  * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using SWT as the UI
- * toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using SWT as the
+ * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

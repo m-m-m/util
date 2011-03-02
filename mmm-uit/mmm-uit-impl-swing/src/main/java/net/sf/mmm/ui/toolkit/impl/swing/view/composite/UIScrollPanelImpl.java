@@ -9,7 +9,6 @@ import javax.swing.ScrollPaneConstants;
 
 import net.sf.mmm.ui.toolkit.api.common.ScrollbarVisibility;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.AbstractUiElement;
@@ -21,16 +20,15 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel} interface
  * using Swing as the UI toolkit.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIScrollPanelImpl extends AbstractUiComposite implements UiScrollPanel {
+public class UIScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSingleComposite<E>
+    implements UiScrollPanel<E> {
 
   /** the scroll-panel or <code>null</code> if this is a regular panel */
   private final JScrollPane scrollPanel;
-
-  /** the child component */
-  private AbstractUiElement childComponent;
 
   /** @see #getHorizontalScrollbarVisibility() */
   private ScrollbarVisibility horizontalScrollbarVisibility;
@@ -42,8 +40,8 @@ public class UIScrollPanelImpl extends AbstractUiComposite implements UiScrollPa
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwing instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param parentObject is the {@link #getParent() parent} of this object (may
+   *        be <code>null</code>).
    */
   public UIScrollPanelImpl(UIFactorySwing uiFactory, UiNode parentObject) {
 
@@ -55,7 +53,6 @@ public class UIScrollPanelImpl extends AbstractUiComposite implements UiScrollPa
         this.horizontalScrollbarVisibility, true));
     this.scrollPanel.setVerticalScrollBarPolicy(convertScrollbarVisibility(
         this.verticalScrollbarVisibility, false));
-    this.childComponent = null;
     initialize();
   }
 
@@ -107,14 +104,12 @@ public class UIScrollPanelImpl extends AbstractUiComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
-  public void setComponent(UiElement child) {
+  @Override
+  public void setChild(E child) {
 
-    if (this.childComponent != null) {
-      setParent(this.childComponent, null);
-    }
-    this.childComponent = (AbstractUiElement) child;
-    if (this.childComponent != null) {
-      this.scrollPanel.setViewportView(this.childComponent.getSwingComponent());
+    super.setChild(child);
+    if (child != null) {
+      this.scrollPanel.setViewportView(child.getSwingComponent());
     }
   }
 
@@ -137,28 +132,10 @@ public class UIScrollPanelImpl extends AbstractUiComposite implements UiScrollPa
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getChildCount() {
 
     return 1;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiElement getChild() {
-
-    return this.childComponent;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiElement getChild(int index) {
-
-    if (index == 0) {
-      return this.childComponent;
-    }
-    throw new ArrayIndexOutOfBoundsException(index);
   }
 
   /**

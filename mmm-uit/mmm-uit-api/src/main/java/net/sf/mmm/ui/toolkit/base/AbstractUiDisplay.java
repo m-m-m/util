@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.UiDevice;
 import net.sf.mmm.ui.toolkit.api.UiDisplay;
 
 /**
- * This is the abstract base implementation of the UIDisplay interface.
+ * This is the abstract base implementation of the {@link UiDisplay} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

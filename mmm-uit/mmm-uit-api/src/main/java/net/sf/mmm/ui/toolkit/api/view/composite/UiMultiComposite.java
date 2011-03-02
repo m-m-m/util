@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiMultiComposite<E extends UiElement> extends UiComposite<E> {
+public abstract interface UiMultiComposite<E extends UiElement> extends UiComposite<E> {
 
   /**
    * This method removes the given <code>component</code> from this panel. <br>

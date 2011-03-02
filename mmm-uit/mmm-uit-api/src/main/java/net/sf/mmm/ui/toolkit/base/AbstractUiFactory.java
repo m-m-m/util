@@ -397,10 +397,13 @@ public abstract class AbstractUiFactory implements UiFactory {
    */
   public UiAction createPrintUiAction(UiElement component, String actionName) {
 
+    String jobName = actionName;
     if (component == null) {
-      throw new IllegalArgumentException("Component must NOT be null!");
+      // throw new IllegalArgumentException("Component must NOT be null!");
+    } else {
+      jobName = actionName + " " + component.getId();
     }
-    return createPrintUiAction(component, actionName, actionName + " " + component.getId());
+    return createPrintUiAction(component, actionName, jobName);
   }
 
   /**
@@ -427,7 +430,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    * 
    * @param error is the error to handle.
    */
-  protected void handleEventError(RuntimeException error) {
+  public void handleEventError(RuntimeException error) {
 
     // do nothing ...
   }

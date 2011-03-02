@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt;
 
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
-import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;

@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
 /**
  * This is the base implementation of the UIWindow interface.

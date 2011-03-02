@@ -1,11 +1,13 @@
 /* $Id: UISwtNode.java 955 2011-02-16 23:10:16Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.swt;
+package net.sf.mmm.ui.toolkit.impl.swt.view;
 
 import org.eclipse.swt.widgets.Listener;
 
-import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base implementation for all SWT

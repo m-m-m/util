@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.gwt.view;
 
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
 /**
  * TODO: this class ...

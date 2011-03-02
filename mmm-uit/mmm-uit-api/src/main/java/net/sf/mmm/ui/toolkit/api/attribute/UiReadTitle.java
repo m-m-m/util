@@ -13,7 +13,12 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public interface UiReadTitle {
 
   /**
-   * This method gets the title of this object.
+   * This method gets the title of this object. The detailed meaning of the
+   * title depends on the type of object. E.g. a
+   * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow} will have the title
+   * in the top-level bar, while a
+   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel} will have
+   * the title on the top of the panel within the borderline.
    * 
    * @return the title.
    */

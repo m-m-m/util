@@ -106,7 +106,7 @@ public class UITestRunner {
     UiFileDownload download = factory.createFileDownload(access);
     panel.addChild(download);
 
-    scroll.setComponent(panel);
+    scroll.setChild(panel);
 
     UiTabPanel tabPanel = factory.createTabbedPanel();
     tabPanel.addChild(scroll, "Scroll");

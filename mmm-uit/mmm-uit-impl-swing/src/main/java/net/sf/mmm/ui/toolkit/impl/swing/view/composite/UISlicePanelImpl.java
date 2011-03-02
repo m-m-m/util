@@ -31,7 +31,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UISlicePanelImpl extends AbstractUIPanel implements UiSlicePanel<UiElement> {
+public class UISlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<UiElement> {
 
   /** the swing panel */
   private final JPanel panel;

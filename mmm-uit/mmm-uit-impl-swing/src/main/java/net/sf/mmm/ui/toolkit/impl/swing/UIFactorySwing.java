@@ -152,7 +152,6 @@ public class UIFactorySwing extends AbstractUiFactory {
   public UiSlicePanel createPanel(Orientation orientation, String text) {
 
     UISlicePanelImpl panel = new UISlicePanelImpl(this, null, orientation);
-    panel.setBorderTitle(text);
     return panel;
   }
 
@@ -162,7 +161,7 @@ public class UIFactorySwing extends AbstractUiFactory {
   public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
     UiScrollPanel<UiElement> scrollPanel = new UIScrollPanelImpl(this, null);
-    scrollPanel.setComponent(child);
+    scrollPanel.setChild(child);
     return scrollPanel;
   }
 

@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Control;
  */
 public class UiTabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<AbstractUiElement> {
 
-  /** the synchronous access to the {@link org.eclipse.swt.widgets.TabFolder} */
+  /** @see #getSyncAccess() */
   private final SyncTabFolderAccess syncAccess;
 
   /** the list of the tab-items */

@@ -25,7 +25,7 @@ import org.eclipse.swt.layout.FillLayout;
 public class UiSplitPanelImpl extends AbstractUiComposite<AbstractUiElement> implements
     UiSplitPanel<AbstractUiElement> {
 
-  /** the synchronous access to the sash-form */
+  /** @see #getSyncAccess() */
   private final SyncSashFormAccess syncAccess;
 
   /** the synchronous access to the top or left composite */
@@ -54,7 +54,7 @@ public class UiSplitPanelImpl extends AbstractUiComposite<AbstractUiElement> imp
   public UiSplitPanelImpl(UiFactorySwt uiFactory, AbstractUiElement parentObject,
       String borderTitle, Orientation orientation) {
 
-    super(uiFactory, parentObject, borderTitle);
+    super(uiFactory, parentObject);
     int style;
     if (orientation == Orientation.HORIZONTAL) {
       style = SWT.HORIZONTAL;

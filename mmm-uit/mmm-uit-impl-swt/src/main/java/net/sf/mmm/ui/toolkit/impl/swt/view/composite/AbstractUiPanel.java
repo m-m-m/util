@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiMultiComposite;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 
 /**
  * This class is an abstract base implementation of the {@link UiSimplePanel}
@@ -38,7 +38,7 @@ public abstract class AbstractUiPanel extends AbstractUiComposite<AbstractUiElem
    */
   public AbstractUiPanel(UiFactorySwt uiFactory, UiSwtNode parentObject, String borderTitle) {
 
-    super(uiFactory, parentObject, borderTitle);
+    super(uiFactory, parentObject);
     this.components = new ArrayList<AbstractUiElement>();
   }
 

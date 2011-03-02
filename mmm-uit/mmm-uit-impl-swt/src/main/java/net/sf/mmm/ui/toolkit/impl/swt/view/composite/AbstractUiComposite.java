@@ -7,12 +7,8 @@ import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncCompositeAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncGroupAccess;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 
 /**
  * This class is the implementation of the
@@ -26,40 +22,16 @@ import org.eclipse.swt.layout.FillLayout;
 public abstract class AbstractUiComposite<E extends AbstractUiElement> extends AbstractUiElement
     implements UiComposite<E> {
 
-  /** gives access to the {@link org.eclipse.swt.widgets.Group} */
-  private final SyncGroupAccess syncGroupAccess;
-
   /**
    * The constructor.
    * 
    * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
-   * @param borderTitle is the title of the border or <code>null</code> for NO
-   *        border.
+   * @param parentObject is the {@link #getParent() parent} of this object (may
+   *        be <code>null</code> ).
    */
-  public AbstractUiComposite(UiFactorySwt uiFactory, UiSwtNode parentObject, String borderTitle) {
+  public AbstractUiComposite(UiFactorySwt uiFactory, UiSwtNode parentObject) {
 
     super(uiFactory, parentObject);
-    if (borderTitle == null) {
-      this.syncGroupAccess = null;
-    } else {
-      this.syncGroupAccess = new SyncGroupAccess(uiFactory, SWT.NONE);
-      this.syncGroupAccess.setLayout(new FillLayout());
-      this.syncGroupAccess.setText(borderTitle);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getBorderTitle() {
-
-    if (this.syncGroupAccess == null) {
-      return null;
-    } else {
-      return this.syncGroupAccess.getText();
-    }
   }
 
   /**
@@ -68,11 +40,7 @@ public abstract class AbstractUiComposite<E extends AbstractUiElement> extends A
   @Override
   public AbstractSyncCompositeAccess getSyncAccess() {
 
-    if (this.syncGroupAccess == null) {
-      return getActiveSyncAccess();
-    } else {
-      return this.syncGroupAccess;
-    }
+    return getActiveSyncAccess();
   }
 
   /**
@@ -87,9 +55,6 @@ public abstract class AbstractUiComposite<E extends AbstractUiElement> extends A
   @Override
   public void create() {
 
-    if (this.syncGroupAccess != null) {
-      getActiveSyncAccess().setParentAccess(this.syncGroupAccess);
-    }
     super.create();
     createChildren();
   }
@@ -120,12 +85,12 @@ public abstract class AbstractUiComposite<E extends AbstractUiElement> extends A
 
   /**
    * This method determines if an SWT child will automatically be attached to
-   * this the {@link #getActiveSyncAccess() composite}. Override this method and
-   * return <code>false</code> if you need special behaviour to build the SWT
+   * this {@link #getActiveSyncAccess() composite}. Override this method and
+   * return <code>false</code> if you need special behavior to build the SWT
    * tree.
    * 
    * @return <code>true</code> if children should be attached automatically,
-   *         <code>false</code> if your implementation needs special behaviour.
+   *         <code>false</code> if your implementation needs special behavior.
    */
   public boolean isAttachToActiveAccess() {
 

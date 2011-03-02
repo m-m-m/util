@@ -15,6 +15,8 @@ public interface UiWriteTitle extends UiReadTitle {
   /**
    * This method sets the title of this object.
    * 
+   * @see #getTitle()
+   * 
    * @param title is the new title.
    */
   void setTitle(String title);

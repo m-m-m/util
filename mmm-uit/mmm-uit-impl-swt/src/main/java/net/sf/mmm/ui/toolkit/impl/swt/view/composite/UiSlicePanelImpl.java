@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.impl.swt.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
 
 import org.eclipse.swt.SWT;
@@ -23,7 +23,7 @@ import org.eclipse.swt.SWT;
  */
 public class UiSlicePanelImpl extends AbstractUiPanel implements UiSlicePanel<AbstractUiElement> {
 
-  /** the synchronous access to the {@link org.eclipse.swt.widgets.Composite} */
+  /** @see #getSyncAccess() */
   private final SyncCompositeAccess syncAccess;
 
   /** the layout manager for the panel */

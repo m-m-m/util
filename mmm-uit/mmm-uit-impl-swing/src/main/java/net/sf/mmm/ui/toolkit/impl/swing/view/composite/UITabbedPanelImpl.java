@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UITabbedPanelImpl extends AbstractUIPanel implements UiTabPanel<UiElement> {
+public class UITabbedPanelImpl extends AbstractUiPanel implements UiTabPanel<UiElement> {
 
   /** the native swing component */
   private final JTabbedPane panel;

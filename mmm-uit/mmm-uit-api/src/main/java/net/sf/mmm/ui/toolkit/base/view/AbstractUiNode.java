@@ -1,7 +1,7 @@
 /* $Id: AbstractUINode.java 957 2011-02-21 22:18:03Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.base;
+package net.sf.mmm.ui.toolkit.base.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
+import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
+import net.sf.mmm.ui.toolkit.base.AbstractUiObject;
 
 /**
  * This is the abstract base implementation of the
@@ -55,12 +57,13 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
   }
 
   /**
-   * This method sets the parent of this UI object. This is neccessary if an
+   * This method sets the parent of this UI object. This is necessary if an
    * object was constructed by this factory (parent is <code>null</code>) and is
    * then added to a UI composite (or whenever it moves from one composite to
    * another).
    * 
-   * @param newParent is the new parent of this object.
+   * @param newParent is the new parent of this object. It may be
+   *        <code>null</code> to remove the object from the UI tree.
    */
   public void setParent(UiNode newParent) {
 

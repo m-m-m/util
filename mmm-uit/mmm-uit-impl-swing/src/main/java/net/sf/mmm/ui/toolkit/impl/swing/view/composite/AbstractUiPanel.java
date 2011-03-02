@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIPanel extends AbstractUiMultiComposite<UiElement> implements
+public abstract class AbstractUiPanel extends AbstractUiMultiComposite<UiElement> implements
     UiMultiComposite<UiElement> {
 
   /**
@@ -26,7 +26,7 @@ public abstract class AbstractUIPanel extends AbstractUiMultiComposite<UiElement
    * @param parentObject is the parent of this object (may be <code>null</code>
    *        ).
    */
-  public AbstractUIPanel(UIFactorySwing uiFactory, UiNode parentObject) {
+  public AbstractUiPanel(UIFactorySwing uiFactory, UiNode parentObject) {
 
     super(uiFactory, parentObject);
   }

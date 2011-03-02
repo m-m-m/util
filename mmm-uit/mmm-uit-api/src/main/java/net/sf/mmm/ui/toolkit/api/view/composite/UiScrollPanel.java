@@ -20,25 +20,10 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiScrollPanel<E extends UiElement> extends UiComposite<E>,
+public interface UiScrollPanel<E extends UiElement> extends UiSingleComposite<E>,
     UiReadScrollbarVisibility {
 
   /** the type of this object */
   String TYPE = "ScrollPanel";
-
-  /**
-   * This method gets the child of this scroll panel. This is a convenience
-   * method for <code>getChild(0)</code>.
-   * 
-   * @return the single child or <code>null</code> if not set.
-   */
-  UiElement getChild();
-
-  /**
-   * This method sets the child viewed inside this scroll-panel.
-   * 
-   * @param child is the new contained child composite.
-   */
-  void setComponent(UiElement child);
 
 }
