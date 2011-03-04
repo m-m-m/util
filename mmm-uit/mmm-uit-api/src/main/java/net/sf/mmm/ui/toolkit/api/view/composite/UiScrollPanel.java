@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadScrollbarVisibility;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadScrollbarPolicy;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
@@ -21,7 +21,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @since 1.0.0
  */
 public interface UiScrollPanel<E extends UiElement> extends UiSingleComposite<E>,
-    UiReadScrollbarVisibility {
+    UiReadScrollbarPolicy {
 
   /** @see #getType() */
   String TYPE = "ScrollPanel";

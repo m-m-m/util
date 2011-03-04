@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import net.sf.mmm.ui.toolkit.api.common.ScrollbarVisibility;
+import net.sf.mmm.ui.toolkit.api.common.ScrollbarPolicy;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
@@ -29,11 +29,11 @@ public class UIScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /** the scroll-panel or <code>null</code> if this is a regular panel */
   private final JScrollPane scrollPanel;
 
-  /** @see #getHorizontalScrollbarVisibility() */
-  private ScrollbarVisibility horizontalScrollbarVisibility;
+  /** @see #getHorizontalScrollbarPolicy() */
+  private ScrollbarPolicy horizontalScrollbarPolicy;
 
-  /** @see #getVerticalScrollbarVisibility() */
-  private ScrollbarVisibility verticalScrollbarVisibility;
+  /** @see #getVerticalScrollbarPolicy() */
+  private ScrollbarPolicy verticalScrollbarPolicy;
 
   /**
    * The constructor.
@@ -44,28 +44,28 @@ public class UIScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
 
     super(uiFactory);
     this.scrollPanel = new JScrollPane();
-    this.horizontalScrollbarVisibility = ScrollbarVisibility.DYNAMIC;
-    this.verticalScrollbarVisibility = ScrollbarVisibility.DYNAMIC;
-    this.scrollPanel.setHorizontalScrollBarPolicy(convertScrollbarVisibility(
-        this.horizontalScrollbarVisibility, true));
-    this.scrollPanel.setVerticalScrollBarPolicy(convertScrollbarVisibility(
-        this.verticalScrollbarVisibility, false));
+    this.horizontalScrollbarPolicy = ScrollbarPolicy.DYNAMIC;
+    this.verticalScrollbarPolicy = ScrollbarPolicy.DYNAMIC;
+    this.scrollPanel.setHorizontalScrollBarPolicy(convertScrollbarPolicy(
+        this.horizontalScrollbarPolicy, true));
+    this.scrollPanel.setVerticalScrollBarPolicy(convertScrollbarPolicy(
+        this.verticalScrollbarPolicy, false));
     initialize();
   }
 
   /**
-   * This method converts the given {@link ScrollbarVisibility} to one of the
+   * This method converts the given {@link ScrollbarPolicy} to one of the
    * swing {@link ScrollPaneConstants}.
    * 
-   * @param scrollbarVisibility is the {@link ScrollbarVisibility}.
+   * @param scrollbarPolicy is the {@link ScrollbarPolicy}.
    * @param horizontal - <code>true</code> for horizontal scrollbar,
    *        <code>false</code> for vertical scrollbar.
    * @return the integer constant.
    */
-  private static int convertScrollbarVisibility(ScrollbarVisibility scrollbarVisibility,
+  private static int convertScrollbarPolicy(ScrollbarPolicy scrollbarPolicy,
       boolean horizontal) {
 
-    switch (scrollbarVisibility) {
+    switch (scrollbarPolicy) {
       case ALWAYS:
         if (horizontal) {
           return ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS;
@@ -85,7 +85,7 @@ public class UIScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
           return ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
         }
       default :
-        throw new IllegalCaseException(ScrollbarVisibility.class, scrollbarVisibility);
+        throw new IllegalCaseException(ScrollbarPolicy.class, scrollbarPolicy);
     }
   }
 
@@ -113,17 +113,17 @@ public class UIScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /**
    * {@inheritDoc}
    */
-  public ScrollbarVisibility getHorizontalScrollbarVisibility() {
+  public ScrollbarPolicy getHorizontalScrollbarPolicy() {
 
-    return this.horizontalScrollbarVisibility;
+    return this.horizontalScrollbarPolicy;
   }
 
   /**
    * {@inheritDoc}
    */
-  public ScrollbarVisibility getVerticalScrollbarVisibility() {
+  public ScrollbarPolicy getVerticalScrollbarPolicy() {
 
-    return this.verticalScrollbarVisibility;
+    return this.verticalScrollbarPolicy;
   }
 
   /**

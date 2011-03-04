@@ -3,13 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadPosition;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.AbstractUiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIWindowImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.AbstractUiWindowSwt;
 
 import org.eclipse.swt.SWT;
 
@@ -21,7 +22,7 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
+public abstract class AbstractUiElement extends UiSwtNode implements UiElement, UiReadPosition {
 
   /**
    * The constructor.
@@ -43,7 +44,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
   /**
    * This method gets synchronous access on the control that represents the
    * active part of this component. This method is used by methods such as
-   * {@link #setEnabled(boolean)} and {@link #setTooltipText(String)}. It can be
+   * {@link #setEnabled(boolean)} and {@link #setTooltip(String)}. It can be
    * overridden if the implemented component is build out of multiple SWT
    * controls and the top ancestor is not the active control (e.g. composite may
    * have an SWT group as top ancestor that represents a titled border).
@@ -58,7 +59,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
   /**
    * {@inheritDoc}
    */
-  public String getTooltipText() {
+  public String getTooltip() {
 
     return getActiveSyncAccess().getTooltip();
   }
@@ -66,7 +67,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
   /**
    * {@inheritDoc}
    */
-  public void setTooltipText(String tooltip) {
+  public void setTooltip(String tooltip) {
 
     getActiveSyncAccess().setTooltip(tooltip);
   }
@@ -89,7 +90,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
         parentAccess = parentComposite.getActiveSyncAccess();
         autoAttach = parentComposite.isAttachToActiveAccess();
       } else {
-        parentAccess = ((UIWindowImpl) newParent).getSyncAccess();
+        parentAccess = ((AbstractUiWindowSwt) newParent).getSyncAccess();
       }
       if (autoAttach) {
         getSyncAccess().setParentAccess(parentAccess);
@@ -153,6 +154,15 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement {
   public boolean isEnabled() {
 
     return getActiveSyncAccess().isEnabled();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doSetVisible(boolean visible) {
+
+    getSyncAccess().setVisible(visible);
   }
 
   /**

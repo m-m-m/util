@@ -8,8 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
+import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
@@ -84,7 +84,8 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
    */
   public UiMenuItem addItem(UiAction uiAction) {
 
-    UiMenuItem item = addItem(uiAction.getName(), uiAction.getActionListener(), uiAction.getButtonStyle());
+    UiMenuItem item = addItem(uiAction.getName(), uiAction.getActionListener(),
+        uiAction.getButtonStyle());
     UiImage icon = uiAction.getIcon();
     if (icon != null) {
       // item.setIcon(icon);
@@ -163,7 +164,7 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
    */
   public void setSelected(boolean selected) {
 
-  // nothing to do here
+    // nothing to do here
   }
 
   /**

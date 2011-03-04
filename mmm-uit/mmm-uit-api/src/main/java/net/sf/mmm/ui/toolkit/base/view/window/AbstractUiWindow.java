@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.base.view.window;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
+import net.sf.mmm.ui.toolkit.api.common.Visibility;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
@@ -45,6 +46,16 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
   protected UiReadSize getDesktopSize() {
 
     return getFactory().getDisplay();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Visibility getVisibility() {
+
+    // no inheritance by default
+    return doGetVisibility();
   }
 
   /**

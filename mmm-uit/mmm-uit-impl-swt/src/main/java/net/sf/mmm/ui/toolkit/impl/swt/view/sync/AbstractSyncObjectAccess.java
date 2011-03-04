@@ -7,8 +7,15 @@ import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
- * This is the abstract base class used for synchronous access on a SWT
- * {@link org.eclipse.swt.widgets.Widget}.
+ * This is the abstract base class used for synchronous access on a SWT object
+ * (e.g. a {@link org.eclipse.swt.widgets.Widget}). SWT is designed in a way
+ * that enforces a strict programming-model. This includes a specific threading
+ * with an event-queue based main loop. Further it requires top-down UI
+ * composition as every node of the UI can only be created after its parent. All
+ * these aspects are unsuitable for an abstraction layer that also allows to run
+ * the same code as a web-application. The idea of this framework is to free the
+ * user of such constraints and make it easier to write cross-technology
+ * user-interfaces.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -16,8 +23,9 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
 
   /**
    * operation to
-   * {@link org.eclipse.swt.widgets.Widget#Widget(org.eclipse.swt.widgets.Widget, int) create}
-   * the object. This operation will be implemented in the according sub-class.
+   * {@link org.eclipse.swt.widgets.Widget#Widget(org.eclipse.swt.widgets.Widget, int)
+   * create} the object. This operation will be implemented in the according
+   * sub-class.
    */
   private static final String OPERATION_CREATE = "create";
 
@@ -49,9 +57,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        widget.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the widget.
    */
   public AbstractSyncObjectAccess(UiFactorySwt uiFactory, int swtStyle) {
 
@@ -204,8 +211,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Widget#getStyle() style} of this widget.
+   * This method gets the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   * style} of this widget.
    * 
    * @return the style of the widget.
    */
@@ -215,8 +222,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method checks if the given <code>styleMask</code> is contained in
-   * the {@link #getStyle() style} of the widget.<br>
+   * This method checks if the given <code>styleMask</code> is contained in the
+   * {@link #getStyle() style} of the widget.<br>
    * E.g. use the following to check if the HORIZONTAL flag is set.
    * 
    * <pre>
@@ -224,8 +231,8 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * </pre>
    * 
    * @param styleMask is the style mask to check.
-   * @return <code>true</code> if all bits in the given styleMask are set in
-   *         the {@link #getStyle() style}, <code>false</code> otherwise.
+   * @return <code>true</code> if all bits in the given styleMask are set in the
+   *         {@link #getStyle() style}, <code>false</code> otherwise.
    */
   public boolean hasStyle(int styleMask) {
 

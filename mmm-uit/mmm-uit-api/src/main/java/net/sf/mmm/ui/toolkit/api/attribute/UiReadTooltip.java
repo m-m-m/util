@@ -13,9 +13,9 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public interface UiReadTooltip {
 
   /**
-   * This method gets the tooltip of this object. It is a brief explanation that
-   * explains this object. If the user remains on the object with the (mouse)
-   * pointer this tooltip is displayed.
+   * This method gets the tooltip of this object. It is a brief description that
+   * explains this object. If the user remains on the object (e.g. with the
+   * mouse pointer) this tooltip is displayed as hover.
    * 
    * @return the text of this object.
    */

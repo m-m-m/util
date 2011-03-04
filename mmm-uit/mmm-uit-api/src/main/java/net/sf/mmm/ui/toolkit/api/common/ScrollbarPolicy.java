@@ -3,17 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.common;
 
-
 /**
  * This enum contains the available values for the scrolling. This is the
  * behavior of a scrollbar.
  * 
+ * @see net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel
  * @see javax.swing.ScrollPaneConstants
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum ScrollbarVisibility {
+public enum ScrollbarPolicy {
 
   /**
    * Scrollbar and scrolling is disabled.

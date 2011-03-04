@@ -39,6 +39,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiBorderPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiScrollPanelImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSimplePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiTabbedPanelImpl;
@@ -453,8 +454,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public <E extends UiElement> UiSimplePanel<E> createSimplePanel(Orientation orientation) {
 
-    // TODO Auto-generated method stub
-    return null;
+    return new UiSimplePanelImpl(this, orientation);
   }
 
 }

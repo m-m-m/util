@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Menu;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFrameImpl extends UIWindowImpl implements UiFrame {
+public class UIFrameImpl extends AbstractUiWindowSwt implements UiFrame {
 
   /** the default style for the native SWT shell */
   private static final int DEFAULT_STYLE = SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.MAX | SWT.TITLE;

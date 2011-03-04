@@ -11,6 +11,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.common.Visibility;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
@@ -283,16 +284,26 @@ public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    * {@inheritDoc}
    */
   @Override
-  public boolean isVisible() {
+  public Visibility getVisibility() {
 
-    return this.frame.isVisible();
+    Visibility visibility = doGetVisibility();
+    if (visibility.isVisible()) {
+      // the parent should be the UiWorkbench...
+      UiFrame parent = getParent();
+      if (parent != null) {
+        if (!parent.getVisibility().isVisible()) {
+          return Visibility.BLOCKED;
+        }
+      }
+    }
+    return visibility;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void doSetVisible(boolean visible) {
 
     this.frame.setVisible(visible);
   }
@@ -344,7 +355,7 @@ public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
-  public String getTooltipText() {
+  public String getTooltip() {
 
     return this.frame.getToolTipText();
   }
@@ -352,7 +363,7 @@ public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
-  public void setTooltipText(String tooltip) {
+  public void setTooltip(String tooltip) {
 
     this.frame.setToolTipText(tooltip);
   }

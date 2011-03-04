@@ -14,7 +14,6 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.impl.awt.AbstractUiWindowAwt;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 
 /**

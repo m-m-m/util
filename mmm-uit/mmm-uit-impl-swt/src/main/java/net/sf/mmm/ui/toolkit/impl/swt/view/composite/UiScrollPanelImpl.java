@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.common.ScrollbarVisibility;
+import net.sf.mmm.ui.toolkit.api.common.ScrollbarPolicy;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
@@ -28,11 +28,11 @@ public class UiScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /** @see #getSyncAccess() */
   private final SyncScrolledCompositeAccess syncAccess;
 
-  /** @see #getHorizontalScrollbarVisibility() */
-  private ScrollbarVisibility horizontalScrollbarVisibility;
+  /** @see #getHorizontalScrollbarPolicy() */
+  private ScrollbarPolicy horizontalScrollbarPolicy;
 
-  /** @see #getVerticalScrollbarVisibility() */
-  private ScrollbarVisibility verticalScrollbarVisibility;
+  /** @see #getVerticalScrollbarPolicy() */
+  private ScrollbarPolicy verticalScrollbarPolicy;
 
   /**
    * The constructor.
@@ -49,17 +49,17 @@ public class UiScrollPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /**
    * {@inheritDoc}
    */
-  public ScrollbarVisibility getHorizontalScrollbarVisibility() {
+  public ScrollbarPolicy getHorizontalScrollbarPolicy() {
 
-    return this.horizontalScrollbarVisibility;
+    return this.horizontalScrollbarPolicy;
   }
 
   /**
    * {@inheritDoc}
    */
-  public ScrollbarVisibility getVerticalScrollbarVisibility() {
+  public ScrollbarPolicy getVerticalScrollbarPolicy() {
 
-    return this.verticalScrollbarVisibility;
+    return this.verticalScrollbarPolicy;
   }
 
   /**

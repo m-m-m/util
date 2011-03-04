@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read access to the {@link #getValue() text} of an
+ * This interface gives read access to the {@link #getValue() value} of an
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @param <V> is the generic type of the {@link #getValue() value}.

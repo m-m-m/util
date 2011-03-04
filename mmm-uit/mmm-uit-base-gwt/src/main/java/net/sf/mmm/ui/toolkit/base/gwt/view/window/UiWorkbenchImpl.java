@@ -199,18 +199,10 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
   /**
    * {@inheritDoc}
    */
-  public void setVisible(boolean visible) {
+  @Override
+  protected void doSetVisible(boolean visible) {
 
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isVisible() {
-
-    return (!this.minimized);
+    super.doSetVisible(visible);
   }
 
   /**
@@ -250,6 +242,7 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
           storeWindow();
         } else {
           this.minimized = false;
+          setVisible(true);
         }
         setPosition(0, 0);
         setSize(JavaScriptUtil.getWidthOfScreen(), JavaScriptUtil.getHeightOfScreen());
@@ -285,6 +278,7 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
         // stupid hack, but there seems no other way...
         JavaScriptUtil.setSizeOfBrowserWindow(0, 0);
         setPosition(0, 3000);
+        setVisible(false);
       } else {
         restoreWindow();
       }

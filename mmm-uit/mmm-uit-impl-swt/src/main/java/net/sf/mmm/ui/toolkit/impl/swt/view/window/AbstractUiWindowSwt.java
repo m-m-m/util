@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UIWindowImpl extends AbstractUiWindow {
+public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
 
   /** @see #getFactory() */
   private final UiFactorySwt factory;
@@ -52,7 +52,7 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
    * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizable() resizeable}.
    */
-  public UIWindowImpl(final UiFactorySwt uiFactory, final UIWindowImpl parent, int defaultStyle,
+  public AbstractUiWindowSwt(final UiFactorySwt uiFactory, final AbstractUiWindowSwt parent, int defaultStyle,
       boolean modal, boolean resizeable) {
 
     super(uiFactory, parent);
@@ -72,12 +72,12 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
       public void run() {
 
         if (parent == null) {
-          UIWindowImpl.this.shell = new Shell(uiFactory.getDisplay().getSwtDisplay(), style);
+          AbstractUiWindowSwt.this.shell = new Shell(uiFactory.getDisplay().getSwtDisplay(), style);
         } else {
-          UIWindowImpl.this.shell = new Shell(parent.getSwtWindow(), style);
+          AbstractUiWindowSwt.this.shell = new Shell(parent.getSwtWindow(), style);
         }
         // TODO remove this?
-        UIWindowImpl.this.shell.setLayout(new FillLayout());
+        AbstractUiWindowSwt.this.shell.setLayout(new FillLayout());
       };
     });
     this.syncAccess = new SyncShellAccess(uiFactory, style, this.shell);
@@ -128,15 +128,8 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
-  public boolean isVisible() {
-
-    return this.syncAccess.isVisible();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setVisible(boolean visibleFlag) {
+  @Override
+  public void doSetVisible(boolean visibleFlag) {
 
     this.syncAccess.setVisible(visibleFlag);
   }
@@ -250,7 +243,7 @@ public abstract class UIWindowImpl extends AbstractUiWindow {
 
       public void run() {
 
-        MessageBox messageBox = new MessageBox(UIWindowImpl.this.shell, swtStyle);
+        MessageBox messageBox = new MessageBox(AbstractUiWindowSwt.this.shell, swtStyle);
         messageBox.setText(title);
         messageBox.setMessage(message);
         messageBox.open();

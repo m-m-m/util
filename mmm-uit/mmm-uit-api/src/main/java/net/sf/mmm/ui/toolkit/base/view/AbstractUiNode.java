@@ -6,6 +6,8 @@ package net.sf.mmm.ui.toolkit.base.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.common.Visibility;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
@@ -14,6 +16,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUiObject;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is the abstract base implementation of the
@@ -22,10 +25,13 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiNode extends AbstractUiObject implements UiNode {
+public abstract class AbstractUiNode extends AbstractUiObject implements UiNode, UiWriteVisible {
 
   /** the parent object */
   private UiNode parent;
+
+  /** @see #getVisibility() */
+  private Visibility visibility;
 
   /**
    * the registered listeners (or <code>null</code> if no listener is
@@ -43,6 +49,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
   public AbstractUiNode(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
+    this.visibility = Visibility.VISIBLE;
   }
 
   /**
@@ -51,6 +58,86 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode 
   public UiNode getParent() {
 
     return this.parent;
+  }
+
+  /**
+   * This method gets the raw internal {@link Visibility} without influence from
+   * the {@link #getParent() parent}.
+   * 
+   * @return the raw {@link Visibility}.
+   */
+  protected Visibility doGetVisibility() {
+
+    return this.visibility;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Visibility getVisibility() {
+
+    if (this.visibility.isVisible()) {
+      if (this.parent != null) {
+        if (!this.parent.getVisibility().isVisible()) {
+          return Visibility.BLOCKED;
+        }
+      }
+    }
+    return this.visibility;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final boolean isVisible() {
+
+    return getVisibility().isVisible();
+  }
+
+  /**
+   * This method shows or hides the underlying UI object according to the given
+   * <code>visible</code> flag. It is invoked from {@link #setVisible(boolean)}
+   * if the local visible-flag of this object changed.<br/>
+   * This default implementation throws a {@link UnsupportedOperationException}.
+   * You need to override this in subclasses that implement
+   * {@link UiWriteVisible}.
+   * 
+   * @param visible - <code>true</code> if the object shall be shown,
+   *        <code>false</code> if it shall be hidden.
+   */
+  protected void doSetVisible(boolean visible) {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final void setVisible(boolean visible) {
+
+    switch (this.visibility) {
+      case VISIBLE:
+        if (!visible) {
+          doSetVisible(visible);
+          this.visibility = Visibility.HIDDEN;
+        }
+        break;
+      case HIDDEN:
+        if (visible) {
+          if (!getVisibility().isVisible()) {
+            doSetVisible(visible);
+          }
+          this.visibility = Visibility.VISIBLE;
+        }
+        break;
+      case BLOCKED:
+        if (!visible) {
+          this.visibility = Visibility.HIDDEN;
+        }
+        break;
+      default :
+        throw new IllegalCaseException(Visibility.class, this.visibility);
+    }
   }
 
   /**

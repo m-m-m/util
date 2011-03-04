@@ -4,8 +4,8 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read and write access to the title of an
- * {@link net.sf.mmm.ui.toolkit.api.UiObject}.
+ * This interface gives read and write access to the {@link #getTitle() title}
+ * of an {@link net.sf.mmm.ui.toolkit.api.UiObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

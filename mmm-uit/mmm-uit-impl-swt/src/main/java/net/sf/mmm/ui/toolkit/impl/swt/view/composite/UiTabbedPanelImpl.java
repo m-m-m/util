@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Control;
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel} interface using
  * SWT as the UI toolkit.
  * 
+ * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -71,7 +72,7 @@ public class UiTabbedPanelImpl<E extends AbstractUiElement> extends AbstractUiMu
       itemAccess.setControl(control);
     }
     this.tabItems.add(itemAccess);
-    addChild(child);
+    doAddChild(child);
   }
 
   /**

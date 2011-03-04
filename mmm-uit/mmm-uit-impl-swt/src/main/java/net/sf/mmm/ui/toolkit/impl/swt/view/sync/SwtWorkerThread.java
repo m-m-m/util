@@ -60,7 +60,11 @@ public class SwtWorkerThread extends Thread {
   }
 
   /**
-   * This method gets the display of this worker.
+   * This method gets the display of this worker. It waits until the
+   * {@link Display} is available.<br/>
+   * <b>ATTENTION:</b><br>
+   * Only call this method after the {@link SwtWorkerThread} is {@link #run()
+   * running}.
    * 
    * @return the display
    */
@@ -70,6 +74,7 @@ public class SwtWorkerThread extends Thread {
       try {
         Thread.sleep(100);
       } catch (InterruptedException e) {
+        // ignore
       }
     }
     return this.display;

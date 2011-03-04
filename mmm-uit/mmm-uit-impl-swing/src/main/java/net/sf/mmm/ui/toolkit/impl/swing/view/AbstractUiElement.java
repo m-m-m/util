@@ -23,11 +23,9 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
  */
 public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiElement {
 
-  /** the disposed flag */
+  /** @see #isDisposed() */
   private boolean disposed;
 
-  /** the (minimum) size */
-  // private final Dimension size;
   /**
    * The constructor.
    * 
@@ -78,7 +76,7 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   /**
    * {@inheritDoc}
    */
-  public String getTooltipText() {
+  public String getTooltip() {
 
     return getActiveSwingComponent().getToolTipText();
   }
@@ -86,7 +84,7 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   /**
    * {@inheritDoc}
    */
-  public void setTooltipText(String tooltip) {
+  public void setTooltip(String tooltip) {
 
     getActiveSwingComponent().setToolTipText(tooltip);
   }
@@ -105,6 +103,15 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   public boolean isEnabled() {
 
     return getActiveSwingComponent().isEnabled();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void doSetVisible(boolean visible) {
+
+    getSwingComponent().setVisible(visible);
   }
 
   /**

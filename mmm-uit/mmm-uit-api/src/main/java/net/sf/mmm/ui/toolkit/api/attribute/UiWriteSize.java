@@ -4,7 +4,8 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This is the interface for an object of the UI framework that can be sized.
+ * This interface gives read and {@link #isResizable() potential} write access
+ * to the {@link #setSize(int, int) size} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -14,8 +15,11 @@ public interface UiWriteSize extends UiReadSize {
   /**
    * This method sets the size of this object.
    * 
-   * @param width is the new width of the object.
-   * @param height is the new height of the object.
+   * @see #getWidth()
+   * @see #getHeight()
+   * 
+   * @param width is the new {@link #getWidth() width} of the object.
+   * @param height is the new {@link #getHeight() height} of the object.
    */
   void setSize(int width, int height);
 

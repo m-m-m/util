@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
  * This is the interface of a {@link UiComposite} that represents a row of a
- * {@link UiGrid}.
+ * {@link UiGridPanel}.
  * 
  * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -17,7 +17,7 @@ public interface UiGridRow<E extends UiElement> extends UiExtendableComposite<E>
 
   /**
    * This method sets the given <code>child</code> as cell in this row at the
-   * specified <code>column</code>. A {@link UiGrid} is created
+   * specified <code>column</code>. A {@link UiGridPanel} is created
    * 
    * @param child is the {@link UiElement} to add.
    * @param column is the index of the column where to add the given

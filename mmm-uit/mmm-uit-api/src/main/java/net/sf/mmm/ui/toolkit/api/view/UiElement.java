@@ -8,6 +8,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTooltip;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
 
 /**
  * This is the interface for a UI component. Such object is either a
@@ -17,7 +18,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTooltip;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiElement extends UiNode, UiWriteTooltip, UiWriteEnabled, UiWriteSize,
-    UiReadPreferredSize, UiWriteDisposed {
+public interface UiElement extends UiNode, UiWriteVisible, UiWriteTooltip, UiWriteEnabled,
+    UiWriteSize, UiReadPreferredSize, UiWriteDisposed {
 
 }

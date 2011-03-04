@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.awt;
+package net.sf.mmm.ui.toolkit.impl.swing.view.window;
 
 import java.awt.ComponentOrientation;
 import java.awt.Dialog;
@@ -120,15 +120,8 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
-  public boolean isVisible() {
-
-    return getNativeWindow().isVisible();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setVisible(boolean visible) {
+  @Override
+  public void doSetVisible(boolean visible) {
 
     getNativeWindow().setVisible(visible);
   }

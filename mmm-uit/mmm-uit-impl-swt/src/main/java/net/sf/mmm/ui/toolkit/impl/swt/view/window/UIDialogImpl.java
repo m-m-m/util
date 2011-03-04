@@ -14,7 +14,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDialogImpl extends UIWindowImpl implements UiDialog {
+public class UIDialogImpl extends AbstractUiWindowSwt implements UiDialog {
 
   /** the default style for the native SWT shell */
   private static final int DEFAULT_STYLE = SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.TITLE;
@@ -32,7 +32,7 @@ public class UIDialogImpl extends UIWindowImpl implements UiDialog {
    * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizable() resizeable}.
    */
-  public UIDialogImpl(UiFactorySwt uiFactory, UIWindowImpl parentObject, boolean modal,
+  public UIDialogImpl(UiFactorySwt uiFactory, AbstractUiWindowSwt parentObject, boolean modal,
       boolean resizeable) {
 
     super(uiFactory, parentObject, DEFAULT_STYLE, modal, resizeable);

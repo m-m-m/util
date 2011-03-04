@@ -83,7 +83,7 @@ public abstract class AbstractUiMultiComposite<E extends AbstractUiElement> exte
    * 
    * @param child is the child element to add.
    */
-  protected void addChild(E child) {
+  protected void doAddChild(E child) {
 
     this.children.add(child);
     setParent(child, this);
@@ -97,7 +97,7 @@ public abstract class AbstractUiMultiComposite<E extends AbstractUiElement> exte
    * @param index is the {@link #getChild(int) child-index} where to insert the
    *        <code>child</code>.
    */
-  protected void insertChild(E child, int index) {
+  protected void doInsertChild(E child, int index) {
 
     this.children.add(index, child);
     setParent(child, this);
