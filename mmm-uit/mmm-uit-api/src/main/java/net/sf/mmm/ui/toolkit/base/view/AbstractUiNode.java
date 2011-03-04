@@ -4,7 +4,9 @@
 package net.sf.mmm.ui.toolkit.base.view;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
 import net.sf.mmm.ui.toolkit.api.common.Visibility;
@@ -32,6 +34,9 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
 
   /** @see #getVisibility() */
   private Visibility visibility;
+
+  /** @see #getStyles() */
+  private Set<String> stylesSet;
 
   /**
    * the registered listeners (or <code>null</code> if no listener is
@@ -286,6 +291,111 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   public void refresh(UIRefreshEvent event) {
 
     // do nothing by default...
+  }
+
+  /**
+   * This method gets the {@link #getStyles() styles} as {@link Set}.
+   * 
+   * @return the {@link #getStyles() styles} as {@link Set}.
+   */
+  protected Set<String> getStylesSet() {
+
+    return this.stylesSet;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setStyles(String styles) {
+
+    if (this.stylesSet != null) {
+      this.stylesSet.clear();
+    }
+    if ((styles == null) || (styles.length() == 0)) {
+      return;
+    }
+    String[] strings = styles.split(" ");
+    if (strings.length == 1) {
+      doSetStyles(strings[0]);
+    } else if (strings.length > 1) {
+      if (this.stylesSet == null) {
+        this.stylesSet = new HashSet<String>();
+      }
+      for (String style : strings) {
+        if (!style.isEmpty()) {
+          this.stylesSet.add(style);
+        }
+      }
+      StringBuilder sb = new StringBuilder(styles.length());
+      for (String style : this.stylesSet) {
+        if (sb.length() > 0) {
+          sb.append(' ');
+        }
+        sb.append(style);
+      }
+      doSetStyles(sb.toString());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void addStyle(String style) {
+
+    if (style.isEmpty()) {
+      return;
+    }
+    if (style.contains(" ")) {
+      throw new IllegalArgumentException();
+    }
+    String currentStyles = getStyles();
+    if (this.stylesSet == null) {
+      if (currentStyles.isEmpty()) {
+        doSetStyles(style);
+      } else if (!currentStyles.equals(style)) {
+        this.stylesSet = new HashSet<String>();
+        this.stylesSet.add(currentStyles);
+        this.stylesSet.add(style);
+        doSetStyles(currentStyles + " " + style);
+      }
+    } else {
+      boolean added = this.stylesSet.add(style);
+      if (added) {
+        doSetStyles(currentStyles + " " + style);
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void removeStyle(String style) {
+
+    if (style.isEmpty()) {
+      return;
+    }
+    if (style.contains(" ")) {
+      throw new IllegalArgumentException();
+    }
+    String currentStyles = getStyles();
+    if (this.stylesSet == null) {
+      if (currentStyles.equals(style)) {
+        doSetStyles("");
+      }
+    } else {
+      boolean removed = this.stylesSet.remove(style);
+      if (removed) {
+        StringBuilder sb = new StringBuilder(currentStyles.length() - style.length() - 1);
+        for (String s : this.stylesSet) {
+          if (sb.length() > 0) {
+            sb.append(' ');
+          }
+          sb.append(s);
+        }
+        doSetStyles(sb.toString());
+      }
+    }
+
   }
 
 }

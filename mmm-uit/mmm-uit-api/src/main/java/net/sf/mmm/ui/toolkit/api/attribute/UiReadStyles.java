@@ -4,13 +4,13 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read access to the {@link #getStyle() style(s)} of an
+ * This interface gives read access to the {@link #getStyles() style(s)} of an
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiReadStyle {
+public interface UiReadStyles {
 
   /**
    * This method gets the style(s) of this object. The style defines aspects for
@@ -22,6 +22,6 @@ public interface UiReadStyle {
    * @return the style of this object. May also be a list of styles separated by
    *         whitespaces. Will be the empty string if NOT set.
    */
-  String getStyle();
+  String getStyles();
 
 }

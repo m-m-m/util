@@ -22,7 +22,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIMenuImpl extends AbstractUiMenu {
+public class UiMenuImpl extends AbstractUiMenu {
 
   /** the synchronous access to the menu */
   private final SyncMenuAccess syncAccess;
@@ -35,7 +35,7 @@ public class UIMenuImpl extends AbstractUiMenu {
    * @param text is the {@link MenuItem#setText(java.lang.String) text} of the
    *        menu.
    */
-  public UIMenuImpl(UiFactorySwt uiFactory, Menu swtMenu, String text) {
+  public UiMenuImpl(UiFactorySwt uiFactory, Menu swtMenu, String text) {
 
     super(uiFactory);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.CASCADE, swtMenu, text);
@@ -58,7 +58,7 @@ public class UIMenuImpl extends AbstractUiMenu {
   protected UiMenuItem createMenuItem(String name, ButtonStyle style) {
 
     MenuItem menuItem = this.syncAccess.createMenuItem(name, style);
-    return new UIMenuItemImpl((UiFactorySwt) getFactory(), this, name, style, menuItem);
+    return new UiMenuItemImpl((UiFactorySwt) getFactory(), this, name, style, menuItem);
   }
 
   /**
@@ -68,7 +68,7 @@ public class UIMenuImpl extends AbstractUiMenu {
   protected UiMenu createSubMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
-    return new UIMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
+    return new UiMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
   }
 
   /**

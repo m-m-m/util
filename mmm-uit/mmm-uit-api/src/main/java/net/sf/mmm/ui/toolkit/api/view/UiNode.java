@@ -6,6 +6,7 @@ package net.sf.mmm.ui.toolkit.api.view;
 import net.sf.mmm.ui.toolkit.api.UiObject;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadVisible;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteStyles;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
@@ -18,7 +19,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiNode extends UiObject, UiWriteId, UiReadVisible {
+public interface UiNode extends UiObject, UiWriteId, UiWriteStyles, UiReadVisible {
 
   /**
    * This method gets the parent component.

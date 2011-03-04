@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.window;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
-import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.event.SwtListenerAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncShellAccess;
 
 import org.eclipse.swt.SWT;
@@ -52,8 +52,8 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
    * @param resizeable - if <code>true</code> the window will be
    *        {@link #isResizable() resizeable}.
    */
-  public AbstractUiWindowSwt(final UiFactorySwt uiFactory, final AbstractUiWindowSwt parent, int defaultStyle,
-      boolean modal, boolean resizeable) {
+  public AbstractUiWindowSwt(final UiFactorySwt uiFactory, final AbstractUiWindowSwt parent,
+      int defaultStyle, boolean modal, boolean resizeable) {
 
     super(uiFactory, parent);
     this.factory = uiFactory;
@@ -78,7 +78,7 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
         }
         // TODO remove this?
         AbstractUiWindowSwt.this.shell.setLayout(new FillLayout());
-      };
+      }
     });
     this.syncAccess = new SyncShellAccess(uiFactory, style, this.shell);
   }
@@ -266,9 +266,9 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
-  public UIDialogImpl createDialog(String title, boolean modal, boolean resizeable) {
+  public UiDialogImpl createDialog(String title, boolean modal, boolean resizeable) {
 
-    UIDialogImpl dialog = new UIDialogImpl(getFactory(), this, modal, resizeable);
+    UiDialogImpl dialog = new UiDialogImpl(getFactory(), this, modal, resizeable);
     dialog.setTitle(title);
     getFactory().addWindow(dialog);
     return dialog;

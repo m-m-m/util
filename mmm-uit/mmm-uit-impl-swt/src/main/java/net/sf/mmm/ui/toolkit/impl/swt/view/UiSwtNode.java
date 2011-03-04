@@ -4,8 +4,8 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view;
 
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
-import net.sf.mmm.ui.toolkit.impl.swt.SwtListenerAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.event.SwtListenerAdapter;
 
 import org.eclipse.swt.widgets.Listener;
 
@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Listener;
  */
 public abstract class UiSwtNode extends AbstractUiNode {
 
-  /** the ui factory */
+  /** @see #getFactory() */
   private final UiFactorySwt factory;
 
   /**

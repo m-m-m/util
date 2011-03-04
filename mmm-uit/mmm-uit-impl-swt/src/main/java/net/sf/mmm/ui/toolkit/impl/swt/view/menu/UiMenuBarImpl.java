@@ -17,8 +17,9 @@ import org.eclipse.swt.widgets.Menu;
  * UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIMenuBarImpl extends AbstractUiMenuBar {
+public class UiMenuBarImpl extends AbstractUiMenuBar {
 
   /** the synchronous access */
   private final SyncMenuAccess syncAccess;
@@ -31,7 +32,7 @@ public class UIMenuBarImpl extends AbstractUiMenuBar {
    *        ).
    * @param swtMenuBar is the SWT menu bar to wrap.
    */
-  public UIMenuBarImpl(UiFactorySwt uiFactory, AbstractUiWindowSwt parentObject, Menu swtMenuBar) {
+  public UiMenuBarImpl(UiFactorySwt uiFactory, AbstractUiWindowSwt parentObject, Menu swtMenuBar) {
 
     super(uiFactory);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.BAR, swtMenuBar, null);
@@ -44,7 +45,7 @@ public class UIMenuBarImpl extends AbstractUiMenuBar {
   protected UiMenu createMenu(String name) {
 
     Menu subMenu = this.syncAccess.createSubMenu(name);
-    return new UIMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
+    return new UiMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
   }
 
 }

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.window;
 
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.menu.UIMenuBarImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.menu.UiMenuBarImpl;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
@@ -17,13 +17,13 @@ import org.eclipse.swt.widgets.Menu;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFrameImpl extends AbstractUiWindowSwt implements UiFrame {
+public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
 
   /** the default style for the native SWT shell */
   private static final int DEFAULT_STYLE = SWT.BORDER | SWT.CLOSE | SWT.MIN | SWT.MAX | SWT.TITLE;
 
   /** @see #getMenuBar() */
-  private UIMenuBarImpl menuBar;
+  private UiMenuBarImpl menuBar;
 
   /**
    * The constructor.
@@ -37,7 +37,7 @@ public class UIFrameImpl extends AbstractUiWindowSwt implements UiFrame {
    * @param resizeable - if <code>true</code> the frame will be
    *        {@link #isResizable() resizeable}.
    */
-  public UIFrameImpl(UiFactorySwt uiFactory, UIFrameImpl parent, boolean resizeable) {
+  public UiFrameImpl(UiFactorySwt uiFactory, UiFrameImpl parent, boolean resizeable) {
 
     super(uiFactory, parent, DEFAULT_STYLE, false, resizeable);
   }
@@ -88,9 +88,9 @@ public class UIFrameImpl extends AbstractUiWindowSwt implements UiFrame {
   /**
    * {@inheritDoc}
    */
-  public UIFrameImpl createFrame(String title, boolean resizeable) {
+  public UiFrameImpl createFrame(String title, boolean resizeable) {
 
-    UIFrameImpl frame = new UIFrameImpl(getFactory(), this, resizeable);
+    UiFrameImpl frame = new UiFrameImpl(getFactory(), this, resizeable);
     frame.setTitle(title);
     getFactory().addWindow(frame);
     return frame;
@@ -108,13 +108,13 @@ public class UIFrameImpl extends AbstractUiWindowSwt implements UiFrame {
   /**
    * {@inheritDoc}
    */
-  public UIMenuBarImpl getMenuBar() {
+  public UiMenuBarImpl getMenuBar() {
 
     if (this.menuBar == null) {
       synchronized (this) {
         if (this.menuBar == null) {
           Menu menu = getSyncAccess().createMenuBar();
-          this.menuBar = new UIMenuBarImpl(getFactory(), this, menu);
+          this.menuBar = new UiMenuBarImpl(getFactory(), this, menu);
         }
       }
     }

@@ -57,8 +57,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UISpinBoxImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITableImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITextFieldImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITreeImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIFrameImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.view.window.UIWorkbenchImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiFrameImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiWorkbenchImpl;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -150,7 +150,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    */
   public UiFrame createFrame(String title, boolean resizeable) {
 
-    UIFrameImpl frame = new UIFrameImpl(this, null, resizeable);
+    UiFrameImpl frame = new UiFrameImpl(this, null, resizeable);
     frame.setTitle(title);
     addWindow(frame);
     return frame;
@@ -329,7 +329,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   @Override
   public UiWorkbench createWorkbench(String title) {
 
-    UIWorkbenchImpl workbench = new UIWorkbenchImpl(this);
+    UiWorkbenchImpl workbench = new UiWorkbenchImpl(this);
     workbench.setTitle(title);
     return workbench;
   }

@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyle;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyles;
 
 /**
  * This is the abstract interface for a UI object. A UI object is any object of
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiObject extends UiReadId, UiReadStyle {
+public abstract interface UiObject extends UiReadId, UiReadStyles {
 
   /**
    * This method gets the UI factory that created this component.
@@ -44,14 +44,5 @@ public abstract interface UiObject extends UiReadId, UiReadStyle {
    * @return the type of this component.
    */
   String getType();
-
-  /**
-   * This method sets the style of this object. The style is a custom string
-   * defined by the end-user that can be associated with a specific appearance
-   * settings (colors, borders, fonts, etc.).
-   * 
-   * @param style is the style to set.
-   */
-  void setStyle(String style);
 
 }

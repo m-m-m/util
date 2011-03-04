@@ -78,15 +78,6 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
   /**
    * {@inheritDoc}
    */
-  @Override
-  public boolean isWindow() {
-
-    return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public UiComposite<? extends UiElement> getComposite() {
 
     return this.composite;

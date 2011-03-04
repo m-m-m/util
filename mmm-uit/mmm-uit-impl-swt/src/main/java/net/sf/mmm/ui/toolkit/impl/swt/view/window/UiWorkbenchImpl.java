@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
+public class UiWorkbenchImpl extends UiFrameImpl implements UiWorkbench {
 
   /**
    * The constructor.
@@ -23,7 +23,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
    */
-  public UIWorkbenchImpl(UiFactorySwt uiFactory) {
+  public UiWorkbenchImpl(UiFactorySwt uiFactory) {
 
     super(uiFactory, null, true);
   }
@@ -41,7 +41,7 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
    * {@inheritDoc}
    */
   @Override
-  public UIFrameImpl createFrame(String title, boolean resizeable) {
+  public UiFrameImpl createFrame(String title, boolean resizeable) {
 
     // TODO
     return super.createFrame(title, resizeable);

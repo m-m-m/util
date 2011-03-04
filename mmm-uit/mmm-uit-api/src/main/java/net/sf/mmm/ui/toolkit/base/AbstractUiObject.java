@@ -20,7 +20,7 @@ public abstract class AbstractUiObject implements UiObject {
   /** @see #getId() */
   private String id;
 
-  /** @see #getStyle() */
+  /** @see #getStyles() */
   private String style;
 
   /**
@@ -34,6 +34,7 @@ public abstract class AbstractUiObject implements UiObject {
 
     super();
     this.factory = uiFactory;
+    this.style = "";
   }
 
   /**
@@ -42,16 +43,6 @@ public abstract class AbstractUiObject implements UiObject {
   public AbstractUiFactory getFactory() {
 
     return this.factory;
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * Override this method if you implement a window object.
-   */
-  public boolean isWindow() {
-
-    return false;
   }
 
   /**
@@ -73,17 +64,19 @@ public abstract class AbstractUiObject implements UiObject {
   /**
    * {@inheritDoc}
    */
-  public String getStyle() {
+  public String getStyles() {
 
     return this.style;
   }
 
   /**
-   * {@inheritDoc}
+   * This method sets the {@link #getStyles() styles} internally.
+   * 
+   * @param styles are the new styles to set.
    */
-  public void setStyle(String style) {
+  protected void doSetStyles(String styles) {
 
-    this.style = style;
+    this.style = styles;
   }
 
 }

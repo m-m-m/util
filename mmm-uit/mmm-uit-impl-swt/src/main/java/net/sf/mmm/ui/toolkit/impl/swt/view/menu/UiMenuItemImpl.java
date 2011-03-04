@@ -18,8 +18,9 @@ import org.eclipse.swt.widgets.MenuItem;
  * the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public class UIMenuItemImpl extends UiSwtNode implements UiMenuItem {
+public class UiMenuItemImpl extends UiSwtNode implements UiMenuItem {
 
   /** the SWT menu item */
   private final MenuItem menuItem;
@@ -41,7 +42,7 @@ public class UIMenuItemImpl extends UiSwtNode implements UiMenuItem {
    *        behaves.
    * @param item is the actual SWT menu-item.
    */
-  public UIMenuItemImpl(UiFactorySwt uiFactory, UIMenuImpl parentObject, String text,
+  public UiMenuItemImpl(UiFactorySwt uiFactory, UiMenuImpl parentObject, String text,
       ButtonStyle itemStyle, MenuItem item) {
 
     super(uiFactory);
