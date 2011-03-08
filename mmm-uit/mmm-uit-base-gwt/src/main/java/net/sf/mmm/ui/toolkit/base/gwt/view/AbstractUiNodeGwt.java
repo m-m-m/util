@@ -3,12 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.gwt.view;
 
-import net.sf.mmm.ui.toolkit.api.view.UiNode;
-import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
+import net.sf.mmm.ui.toolkit.base.gwt.AbstractUiFactoryGwt;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
+import com.google.gwt.user.client.ui.Widget;
+
 /**
- * TODO: this class ...
+ * This is the abstract base implementation of
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} using GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -18,12 +20,58 @@ public abstract class AbstractUiNodeGwt extends AbstractUiNode {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   * @param parentObject
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public AbstractUiNodeGwt(AbstractUiFactory uiFactory, UiNode parentObject) {
+  public AbstractUiNodeGwt(AbstractUiFactoryGwt uiFactory) {
 
     super(uiFactory);
+  }
+
+  /**
+   * This method gets the native GWT {@link Widget} of this node.
+   * 
+   * @return the {@link Widget}.
+   */
+  protected abstract Widget getNativeUiObject();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setStyles(String styles) {
+
+    super.setStyles(styles);
+    getNativeUiObject().setStyleName(styles);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addStyle(String style) {
+
+    super.addStyle(style);
+    getNativeUiObject().setStyleName(style, true);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void removeStyle(String style) {
+
+    super.removeStyle(style);
+    getNativeUiObject().setStyleName(style, false);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected boolean doInitializeListener() {
+
+    // TODO: add handler adapter here...
+    return super.doInitializeListener();
   }
 
 }

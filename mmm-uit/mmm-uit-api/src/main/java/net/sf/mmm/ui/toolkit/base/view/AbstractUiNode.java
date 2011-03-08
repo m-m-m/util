@@ -8,8 +8,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
-import net.sf.mmm.ui.toolkit.api.common.Visibility;
+import net.sf.mmm.ui.toolkit.api.common.EnabledState;
+import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
@@ -27,13 +29,20 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiNode extends AbstractUiObject implements UiNode, UiWriteVisible {
+public abstract class AbstractUiNode extends AbstractUiObject implements UiNode, UiWriteVisible,
+    UiWriteEnabled {
 
   /** the parent object */
   private UiNode parent;
 
-  /** @see #getVisibility() */
-  private Visibility visibility;
+  /** @see #getVisibleState() */
+  private VisibleState visibleState;
+
+  /** @see #getEnabledState() */
+  private EnabledState enabledState;
+
+  /** @see #isDisposed() */
+  private boolean disposed;
 
   /** @see #getStyles() */
   private Set<String> stylesSet;
@@ -47,14 +56,13 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   /**
    * The constructor.
    * 
-   * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
-   *        instance.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
   public AbstractUiNode(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
-    this.visibility = Visibility.VISIBLE;
+    this.visibleState = VisibleState.VISIBLE;
+    this.enabledState = EnabledState.ENABLED;
   }
 
   /**
@@ -66,29 +74,65 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   }
 
   /**
-   * This method gets the raw internal {@link Visibility} without influence from
-   * the {@link #getParent() parent}.
-   * 
-   * @return the raw {@link Visibility}.
+   * {@inheritDoc}
    */
-  protected Visibility doGetVisibility() {
+  public void dispose() {
 
-    return this.visibility;
+    if (!this.disposed) {
+      setParent(null);
+      this.disposed = true;
+    }
   }
 
   /**
    * {@inheritDoc}
    */
-  public Visibility getVisibility() {
+  public boolean isDisposed() {
 
-    if (this.visibility.isVisible()) {
-      if (this.parent != null) {
-        if (!this.parent.getVisibility().isVisible()) {
-          return Visibility.BLOCKED;
+    return this.disposed;
+  }
+
+  /**
+   * This method gets the raw internal {@link VisibleState} without influence
+   * from the {@link #getParent() parent}.
+   * 
+   * @return the raw {@link VisibleState}.
+   */
+  protected VisibleState doGetVisibleState() {
+
+    return this.visibleState;
+  }
+
+  /**
+   * This method allows to determines if this object has been made invisible. It
+   * always returns <code>false</code> by default. You can override it in
+   * {@link UiNode} implementations that can be made invisible by the user, e.g.
+   * a {@link UiWindow} that can be closed.
+   * 
+   * @return <code>true</code> if invisible and visibility can be influenced by
+   *         the user, <code>false</code> otherwise.
+   */
+  protected boolean doIsInvisible() {
+
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public VisibleState getVisibleState() {
+
+    if (this.visibleState.isVisible()) {
+      if (doIsInvisible()) {
+        // this object has been made invisible by the user in the meantime...
+        this.visibleState = VisibleState.HIDDEN;
+      } else if (this.parent != null) {
+        if (!this.parent.getVisibleState().isVisible()) {
+          return VisibleState.BLOCKED;
         }
       }
     }
-    return this.visibility;
+    return this.visibleState;
   }
 
   /**
@@ -96,7 +140,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   public final boolean isVisible() {
 
-    return getVisibility().isVisible();
+    return getVisibleState().isVisible();
   }
 
   /**
@@ -120,29 +164,120 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   public final void setVisible(boolean visible) {
 
-    switch (this.visibility) {
+    switch (this.visibleState) {
       case VISIBLE:
         if (!visible) {
           doSetVisible(visible);
-          this.visibility = Visibility.HIDDEN;
+          this.visibleState = VisibleState.HIDDEN;
+        } else if (doIsInvisible()) {
+          doSetVisible(visible);
         }
         break;
       case HIDDEN:
         if (visible) {
-          if (!getVisibility().isVisible()) {
+          if (!getVisibleState().isVisible()) {
             doSetVisible(visible);
           }
-          this.visibility = Visibility.VISIBLE;
+          this.visibleState = VisibleState.VISIBLE;
         }
         break;
       case BLOCKED:
         if (!visible) {
-          this.visibility = Visibility.HIDDEN;
+          this.visibleState = VisibleState.HIDDEN;
         }
         break;
       default :
-        throw new IllegalCaseException(Visibility.class, this.visibility);
+        throw new IllegalCaseException(VisibleState.class, this.visibleState);
     }
+  }
+
+  /**
+   * This method enables or disables the underlying UI object according to the
+   * given <code>enabled</code> flag. It is invoked from
+   * {@link #setEnabled(boolean)} if the local enabled-flag of this object
+   * changed.<br/>
+   * This default implementation throws a {@link UnsupportedOperationException}.
+   * You need to override this in subclasses that implement
+   * {@link UiWriteEnabled}.
+   * 
+   * @param enabled - <code>true</code> if the object shall be enabled,
+   *        <code>false</code> if it shall be disabled.
+   */
+  protected void doSetEnabled(boolean enabled) {
+
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final void setEnabled(boolean enabled) {
+
+    switch (this.enabledState) {
+      case ENABLED:
+        if (!enabled) {
+          doSetEnabled(false);
+          this.enabledState = EnabledState.DISABLED;
+        }
+        break;
+      case DISABLED:
+        if (enabled) {
+          if ((this.parent != null) && (!this.parent.isEnabled())) {
+            this.enabledState = EnabledState.BLOCKED;
+          } else {
+            doSetEnabled(true);
+            this.enabledState = EnabledState.ENABLED;
+          }
+        }
+        break;
+      case BLOCKED:
+        if (!enabled) {
+          this.enabledState = EnabledState.DISABLED;
+        }
+        break;
+      default :
+        throw new IllegalCaseException(EnabledState.class, this.enabledState);
+    }
+  }
+
+  /**
+   * This method updates the {@link #getEnabledState() enabled-state} after the
+   * {@link #getParent() parent} has changed it. This should be invoked for all
+   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite#getChild(int)
+   * children} of a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite}
+   * in {@link #doSetEnabled(boolean)}.
+   */
+  public void updateEnabledFromParent() {
+
+    if (this.parent != null) {
+      if (this.parent.isEnabled()) {
+        if (this.enabledState == EnabledState.BLOCKED) {
+          doSetEnabled(true);
+          this.enabledState = EnabledState.ENABLED;
+        }
+      } else {
+        if (this.enabledState == EnabledState.ENABLED) {
+          doSetEnabled(false);
+          this.enabledState = EnabledState.BLOCKED;
+        }
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public EnabledState getEnabledState() {
+
+    return this.enabledState;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public final boolean isEnabled() {
+
+    return getEnabledState().isEnabled();
   }
 
   /**
@@ -156,25 +291,10 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   public void setParent(UiNode newParent) {
 
+    if (this.disposed) {
+      throw new IllegalStateException("Object is disposed!");
+    }
     this.parent = newParent;
-  }
-
-  /**
-   * This method sets the parent of the given <code>chhildObject</code> to the
-   * given <code>parentObject</code>. The method only exists for visibility
-   * reasons (so the <code>setParent</code> method can be protected).
-   * 
-   * @param childObject is the UI object whos parent is to be set.
-   * @param parentObject is the parent UI object to set.
-   */
-  protected void setParent(AbstractUiNode childObject, UiNode parentObject) {
-
-    /*
-     * UINode oldParent = childObject.getParent(); if (oldParent != null) { if
-     * (oldParent.isComposite()) { ((UIComposite)
-     * oldParent).removeComponent(childObject); } }
-     */
-    childObject.setParent(parentObject);
   }
 
   /**

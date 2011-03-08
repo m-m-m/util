@@ -24,7 +24,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
+public class UIFrameImpl extends AbstractUiWindowAwt implements UiFrame {
 
   /** the swing frame */
   private final JFrame frame;
@@ -58,7 +58,7 @@ public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
    * {@inheritDoc}
    */
   @Override
-  protected JFrame getNativeWindow() {
+  public JFrame getNativeWindow() {
 
     return this.frame;
   }
@@ -168,7 +168,7 @@ public class UIFrameImpl extends AbstractUiWindowImpl implements UiFrame {
 
     JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);
-    registerComposite(newComposite);
+    doSetComposite(newComposite);
   }
 
   /**

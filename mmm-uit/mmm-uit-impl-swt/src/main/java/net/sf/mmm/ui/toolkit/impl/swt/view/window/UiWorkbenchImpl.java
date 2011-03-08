@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIWorkbenchImpl.java 971 2011-02-28 21:55:00Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.window;
@@ -41,10 +41,10 @@ public class UiWorkbenchImpl extends UiFrameImpl implements UiWorkbench {
    * {@inheritDoc}
    */
   @Override
-  public UiFrameImpl createFrame(String title, boolean resizeable) {
+  public UiFrameImpl createFrame(String title, boolean resizable) {
 
     // TODO
-    return super.createFrame(title, resizeable);
+    return super.createFrame(title, resizable);
   }
 
 }

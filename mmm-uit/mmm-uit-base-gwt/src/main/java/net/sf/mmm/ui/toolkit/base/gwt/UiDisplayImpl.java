@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.base.gwt;
 
 import net.sf.mmm.ui.toolkit.api.UiDevice;
 import net.sf.mmm.ui.toolkit.base.AbstractUiDisplay;
-import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 
 /**
  * TODO: this class ...
@@ -18,10 +17,10 @@ public class UiDisplayImpl extends AbstractUiDisplay {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   * @param uiDevice
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param uiDevice is the {@link #getDevice() device} instance.
    */
-  public UiDisplayImpl(AbstractUiFactory uiFactory, UiDevice uiDevice) {
+  public UiDisplayImpl(AbstractUiFactoryGwt uiFactory, UiDevice uiDevice) {
 
     super(uiFactory, uiDevice);
   }

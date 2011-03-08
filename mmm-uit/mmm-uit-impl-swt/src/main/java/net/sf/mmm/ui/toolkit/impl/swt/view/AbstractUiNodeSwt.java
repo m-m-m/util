@@ -10,13 +10,13 @@ import net.sf.mmm.ui.toolkit.impl.swt.event.SwtListenerAdapter;
 import org.eclipse.swt.widgets.Listener;
 
 /**
- * This is the abstract base implementation for all SWT
- * {@link net.sf.mmm.ui.toolkit.api.view.UiNode ui-nodes}.
+ * This is the abstract base implementation for
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} using SWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiSwtNode extends AbstractUiNode {
+public abstract class AbstractUiNodeSwt extends AbstractUiNode {
 
   /** @see #getFactory() */
   private final UiFactorySwt factory;
@@ -26,7 +26,7 @@ public abstract class UiSwtNode extends AbstractUiNode {
    * 
    * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UiSwtNode(UiFactorySwt uiFactory) {
+  public AbstractUiNodeSwt(UiFactorySwt uiFactory) {
 
     super(uiFactory);
     this.factory = uiFactory;

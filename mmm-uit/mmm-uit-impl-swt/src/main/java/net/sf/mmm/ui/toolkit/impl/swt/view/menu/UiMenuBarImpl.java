@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIMenuBarImpl.java 978 2011-03-04 20:27:53Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
@@ -7,7 +7,6 @@ import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenuBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuAccess;
-import net.sf.mmm.ui.toolkit.impl.swt.view.window.AbstractUiWindowSwt;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
@@ -27,12 +26,10 @@ public class UiMenuBarImpl extends AbstractUiMenuBar {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
-   * @param swtMenuBar is the SWT menu bar to wrap.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param swtMenuBar is the SWT {@link Menu} to wrap.
    */
-  public UiMenuBarImpl(UiFactorySwt uiFactory, AbstractUiWindowSwt parentObject, Menu swtMenuBar) {
+  public UiMenuBarImpl(UiFactorySwt uiFactory, Menu swtMenuBar) {
 
     super(uiFactory);
     this.syncAccess = new SyncMenuAccess(uiFactory, SWT.BAR, swtMenuBar, null);

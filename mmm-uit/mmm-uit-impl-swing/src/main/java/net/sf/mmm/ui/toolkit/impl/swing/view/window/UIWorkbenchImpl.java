@@ -103,10 +103,10 @@ public class UIWorkbenchImpl extends UIFrameImpl implements UiWorkbench {
    * {@inheritDoc}
    */
   @Override
-  public UiFrame createFrame(String title, boolean resizeable) {
+  public UiFrame createFrame(String title, boolean resizable) {
 
     UiInternalFrame internalFrame = new UiInternalFrame((UIFactorySwing) getFactory(), this, title,
-        resizeable);
+        resizable);
     this.workbench.add(internalFrame.getSwingInternalFrame(), DEFAULT_LAYER);
     getFactory().addWindow(internalFrame);
     return internalFrame;

@@ -197,24 +197,6 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void setEnabled(boolean enabled) {
-
-    this.syncAccess.setEnabled(enabled);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isEnabled() {
-
-    return this.syncAccess.isEnabled();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public E getChild(int index) {
 
     if (index == 0) {

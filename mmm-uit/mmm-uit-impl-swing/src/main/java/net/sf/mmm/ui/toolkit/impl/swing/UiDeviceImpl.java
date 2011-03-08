@@ -1,15 +1,14 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.awt;
+package net.sf.mmm.ui.toolkit.impl.swing;
 
 import java.awt.GraphicsDevice;
 
 import net.sf.mmm.ui.toolkit.api.UiDevice;
 
 /**
- * This class is the implementation of the UIDevice interface using AWT as the
- * UI toolkit.
+ * This class is the implementation of {@link UiDevice} using AWT/Swing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

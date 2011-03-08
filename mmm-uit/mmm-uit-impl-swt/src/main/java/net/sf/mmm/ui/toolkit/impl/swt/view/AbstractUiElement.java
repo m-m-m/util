@@ -22,7 +22,8 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiElement extends UiSwtNode implements UiElement, UiReadPosition {
+public abstract class AbstractUiElement extends AbstractUiNodeSwt implements UiElement,
+    UiReadPosition {
 
   /**
    * The constructor.
@@ -143,17 +144,10 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement, 
   /**
    * {@inheritDoc}
    */
-  public void setEnabled(boolean enabled) {
+  @Override
+  public void doSetEnabled(boolean enabled) {
 
     getActiveSyncAccess().setEnabled(enabled);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isEnabled() {
-
-    return getActiveSyncAccess().isEnabled();
   }
 
   /**
@@ -244,6 +238,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement, 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void dispose() {
 
     getSyncAccess().dispose();
@@ -256,6 +251,7 @@ public abstract class AbstractUiElement extends UiSwtNode implements UiElement, 
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     return getSyncAccess().isDisposed();

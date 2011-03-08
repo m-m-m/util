@@ -22,7 +22,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIDialogImpl extends AbstractUiWindowImpl implements UiDialog {
+public class UIDialogImpl extends AbstractUiWindowAwt implements UiDialog {
 
   /** the swing dialog */
   private final JDialog dialog;
@@ -45,7 +45,7 @@ public class UIDialogImpl extends AbstractUiWindowImpl implements UiDialog {
    * {@inheritDoc}
    */
   @Override
-  protected Window getNativeWindow() {
+  public Window getNativeWindow() {
 
     return this.dialog;
   }
@@ -89,7 +89,7 @@ public class UIDialogImpl extends AbstractUiWindowImpl implements UiDialog {
 
     JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.dialog.setContentPane(jComponent);
-    registerComposite(newComposite);
+    doSetComposite(newComposite);
   }
 
 }

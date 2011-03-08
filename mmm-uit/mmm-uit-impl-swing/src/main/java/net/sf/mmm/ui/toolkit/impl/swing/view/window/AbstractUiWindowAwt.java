@@ -46,7 +46,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    * 
    * @return the unwrapped window object.
    */
-  protected abstract Window getNativeWindow();
+  public abstract Window getNativeWindow();
 
   /**
    * {@inheritDoc}
@@ -121,9 +121,18 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
    * {@inheritDoc}
    */
   @Override
-  public void doSetVisible(boolean visible) {
+  protected void doSetVisible(boolean visible) {
 
     getNativeWindow().setVisible(visible);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected boolean doIsInvisible() {
+
+    return !getNativeWindow().isVisible();
   }
 
   /**
@@ -195,6 +204,7 @@ public abstract class AbstractUiWindowAwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     // TODO this is not correct in all situations, is it?

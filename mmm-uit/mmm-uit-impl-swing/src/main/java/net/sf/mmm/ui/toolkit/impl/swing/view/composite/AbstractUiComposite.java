@@ -35,11 +35,12 @@ public abstract class AbstractUiComposite<E extends AbstractUiElement> extends A
    * {@inheritDoc}
    */
   @Override
-  public void setEnabled(boolean enabled) {
+  public void doSetEnabled(boolean enabled) {
 
-    super.setEnabled(enabled);
+    super.doSetEnabled(enabled);
     for (int i = 0; i < getChildCount(); i++) {
-      getChild(i).setEnabled(enabled);
+      AbstractUiElement child = getChild(i);
+      child.updateEnabledFromParent();
     }
   }
 

@@ -13,7 +13,7 @@ package net.sf.mmm.ui.toolkit.api.common;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum Visibility {
+public enum VisibleState {
 
   /**
    * The object is visible in the UI. The use may still not see it if the window
@@ -36,8 +36,8 @@ public enum Visibility {
   BLOCKED;
 
   /**
-   * This method determines if an object with this {@link Visibility} status is
-   * actually displayed in the UI.
+   * This method determines if an object with this {@link VisibleState} status
+   * is actually displayed in the UI.
    * 
    * @return <code>true</code> if visible to the user, <code>false</code>
    *         otherwise.

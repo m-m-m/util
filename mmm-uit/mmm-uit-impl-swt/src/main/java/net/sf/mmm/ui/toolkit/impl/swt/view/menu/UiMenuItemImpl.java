@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIMenuItemImpl.java 978 2011-03-04 20:27:53Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.UiSwtNode;
+import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiNodeSwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuItemAccess;
 
 import org.eclipse.swt.SWT;
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.MenuItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiMenuItemImpl extends UiSwtNode implements UiMenuItem {
+public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
 
   /** the SWT menu item */
   private final MenuItem menuItem;
@@ -34,16 +34,14 @@ public class UiMenuItemImpl extends UiSwtNode implements UiMenuItem {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param parentObject is the parent of this object (may be <code>null</code>
-   *        ).
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param text is the {@link #getValue() text} of the menu item.
    * @param itemStyle is the style defining how the item is visualized and
    *        behaves.
    * @param item is the actual SWT menu-item.
    */
-  public UiMenuItemImpl(UiFactorySwt uiFactory, UiMenuImpl parentObject, String text,
-      ButtonStyle itemStyle, MenuItem item) {
+  public UiMenuItemImpl(UiFactorySwt uiFactory, String text, ButtonStyle itemStyle,
+      MenuItem item) {
 
     super(uiFactory);
     int swtStyle = UiFactorySwt.convertButtonStyleForMenuItem(itemStyle);

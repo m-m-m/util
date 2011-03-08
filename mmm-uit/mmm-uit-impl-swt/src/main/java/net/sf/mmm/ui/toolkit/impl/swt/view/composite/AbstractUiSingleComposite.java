@@ -69,7 +69,7 @@ public abstract class AbstractUiSingleComposite<E extends AbstractUiElement> ext
   public void setChild(E child) {
 
     if (this.child == null) {
-      setParent(child, null);
+      child.setParent(null);
     }
     this.child = child;
   }

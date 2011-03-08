@@ -61,20 +61,20 @@ public abstract class AbstractUiMultiComposite<E extends AbstractUiElement> exte
   protected void doAddChild(E child) {
 
     this.components.add(child);
-    setParent(child, this);
+    child.setParent(this);
   }
 
   /**
-   * This method adds (inserts) the <code>component</code> at the given
+   * This method adds (inserts) the <code>child</code> at the given
    * <code>index</code>.
    * 
-   * @param component is the component to add.
-   * @param index is the position where to add the component.
+   * @param child is the child element to add.
+   * @param index is the position where to insert the child.
    */
-  protected void doInsertChild(E component, int index) {
+  protected void doInsertChild(E child, int index) {
 
-    this.components.add(index, component);
-    setParent(component, this);
+    this.components.add(index, child);
+    child.setParent(this);
   }
 
   /**

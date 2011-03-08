@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: UIFrameImpl.java 978 2011-03-04 20:27:53Z hohwille $
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.window;
@@ -34,12 +34,12 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
    * @param parent is the
    *        {@link net.sf.mmm.ui.toolkit.api.view.UiNode#getParent() parent} of
    *        this object (may be <code>null</code>).
-   * @param resizeable - if <code>true</code> the frame will be
-   *        {@link #isResizable() resizeable}.
+   * @param resizable - if <code>true</code> the frame will be
+   *        {@link #isResizable() resizable}.
    */
-  public UiFrameImpl(UiFactorySwt uiFactory, UiFrameImpl parent, boolean resizeable) {
+  public UiFrameImpl(UiFactorySwt uiFactory, UiFrameImpl parent, boolean resizable) {
 
-    super(uiFactory, parent, DEFAULT_STYLE, false, resizeable);
+    super(uiFactory, parent, DEFAULT_STYLE, false, resizable);
   }
 
   /**
@@ -88,12 +88,9 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
   /**
    * {@inheritDoc}
    */
-  public UiFrameImpl createFrame(String title, boolean resizeable) {
+  public UiFrameImpl createFrame(String title, boolean resizable) {
 
-    UiFrameImpl frame = new UiFrameImpl(getFactory(), this, resizeable);
-    frame.setTitle(title);
-    getFactory().addWindow(frame);
-    return frame;
+    return getFactory().createFrame(this, title, resizable);
   }
 
   /**
@@ -114,7 +111,7 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
       synchronized (this) {
         if (this.menuBar == null) {
           Menu menu = getSyncAccess().createMenuBar();
-          this.menuBar = new UiMenuBarImpl(getFactory(), this, menu);
+          this.menuBar = new UiMenuBarImpl(getFactory(), menu);
         }
       }
     }

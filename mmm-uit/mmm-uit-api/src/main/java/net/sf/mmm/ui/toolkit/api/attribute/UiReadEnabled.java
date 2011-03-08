@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
+import net.sf.mmm.ui.toolkit.api.common.EnabledState;
+
 /**
  * This interface gives read access to the {@link #isEnabled() enabled-flag} of
  * an {@link net.sf.mmm.ui.toolkit.api.UiObject}. Such object allows interactive
@@ -19,8 +21,20 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public interface UiReadEnabled {
 
   /**
-   * This method determines if this object is enabled. If it is disabled (NOT
-   * enabled), the user can NOT interact with the object.
+   * This method gets the {@link EnabledState} of this object.
+   * 
+   * @see #isEnabled()
+   * 
+   * @return the {@link EnabledState}.
+   */
+  EnabledState getEnabledState();
+
+  /**
+   * This method determines if this object is enabled. If it is NOT enabled, the
+   * user can NOT interact with the object. This method is a shortcut for:<br/>
+   * <code>{@link #getEnabledState()}.isEnabled()</code>
+   * 
+   * @see #getEnabledState()
    * 
    * @return <code>true</code> if this object is enabled, <code>false</code> if
    *         this object is disabled.

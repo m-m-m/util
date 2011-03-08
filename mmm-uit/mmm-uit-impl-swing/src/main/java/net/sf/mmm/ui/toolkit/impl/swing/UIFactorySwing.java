@@ -7,8 +7,12 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -36,11 +40,11 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.impl.awt.UiDeviceImpl;
-import net.sf.mmm.ui.toolkit.impl.awt.UiDisplayImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.feature.PrintAction;
 import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
@@ -63,6 +67,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UISpinBoxImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UITableImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UITextFieldImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.widget.UITreeImpl;
+import net.sf.mmm.ui.toolkit.impl.swing.view.window.AbstractUiWindowAwt;
+import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIDialogImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIFrameImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UIWorkbenchImpl;
 
@@ -137,6 +143,66 @@ public class UIFactorySwing extends AbstractUiFactory {
     UIFrameImpl frame = new UIFrameImpl(this, null, title, resizeable);
     addWindow(frame);
     return frame;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiFrame createFrame(UiFrame parent, String title, boolean resizable) {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean showQuestion(UiWindow parent, String question, String title) {
+
+    int result = JOptionPane.showConfirmDialog(((AbstractUiWindowAwt) parent).getNativeWindow(),
+        question, title, JOptionPane.YES_NO_OPTION);
+    return (result == JOptionPane.YES_OPTION);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void showMessage(UiWindow parent, String message, String title, MessageType messageType,
+      Throwable throwable) {
+
+    int type = JOptionPane.PLAIN_MESSAGE;
+    if (messageType == MessageType.ERROR) {
+      type = JOptionPane.ERROR_MESSAGE;
+    } else if (messageType == MessageType.WARNING) {
+      type = JOptionPane.WARNING_MESSAGE;
+    } else if (messageType == MessageType.INFO) {
+      type = JOptionPane.INFORMATION_MESSAGE;
+    }
+    String msg = message;
+    if (throwable != null) {
+      // TODO: temporary hack
+      msg = msg + "\n" + throwable.getMessage();
+    }
+    JOptionPane.showMessageDialog(((AbstractUiWindowAwt) parent).getNativeWindow(), msg, title,
+        type);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiDialog createDialog(UiWindow parent, String title, boolean modal, boolean resizeable) {
+
+    JDialog jDialog = new JDialog(((AbstractUiWindowAwt) parent).getNativeWindow());
+    jDialog.setModal(modal);
+    jDialog.setResizable(resizeable);
+    UIDialogImpl dialog = new UIDialogImpl(this, parent, jDialog);
+    dialog.setTitle(title);
+    addWindow(dialog);
+    return dialog;
   }
 
   /**
@@ -249,10 +315,9 @@ public class UIFactorySwing extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiTextField createTextField(boolean editable) {
+  public UiTextField createTextField() {
 
     UITextFieldImpl textField = new UITextFieldImpl(this);
-    textField.setEditable(editable);
     return textField;
   }
 

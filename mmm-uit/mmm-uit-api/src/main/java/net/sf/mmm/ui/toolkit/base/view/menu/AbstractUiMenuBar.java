@@ -26,7 +26,7 @@ public abstract class AbstractUiMenuBar extends AbstractUiNode implements UiMenu
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactory instance.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
   public AbstractUiMenuBar(AbstractUiFactory uiFactory) {
 

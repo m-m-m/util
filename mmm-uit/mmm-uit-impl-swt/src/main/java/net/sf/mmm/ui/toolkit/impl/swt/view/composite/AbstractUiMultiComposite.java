@@ -86,7 +86,7 @@ public abstract class AbstractUiMultiComposite<E extends AbstractUiElement> exte
   protected void doAddChild(E child) {
 
     this.children.add(child);
-    setParent(child, this);
+    child.setParent(this);
   }
 
   /**
@@ -100,7 +100,7 @@ public abstract class AbstractUiMultiComposite<E extends AbstractUiElement> exte
   protected void doInsertChild(E child, int index) {
 
     this.children.add(index, child);
-    setParent(child, this);
+    child.setParent(this);
   }
 
   /**

@@ -3,16 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.gwt.view.window;
 
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.view.UiElement;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
-import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
+import net.sf.mmm.ui.toolkit.base.gwt.AbstractUiFactoryGwt;
 import net.sf.mmm.ui.toolkit.base.gwt.JavaScriptUtil;
 import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenuBar;
-import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 
 import com.google.gwt.user.client.Window;
 
@@ -22,7 +17,7 @@ import com.google.gwt.user.client.Window;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
+public abstract class AbstractUiWorkbenchGwt extends AbstractUiWindowGwt implements UiWorkbench {
 
   /** @see #isMaximized() */
   private boolean maximized;
@@ -42,66 +37,17 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
   /** @see #restoreWindow() */
   private int restoreHeight;
 
+  /** @see #getMenuBar() */
+  private AbstractUiMenuBar menuBar;
+
   /**
    * The constructor.
    * 
    * @param uiFactory is the {@link #getFactory() factory} instance.
    */
-  public UiWorkbenchImpl(AbstractUiFactory uiFactory) {
+  public AbstractUiWorkbenchGwt(AbstractUiFactoryGwt uiFactory) {
 
     super(uiFactory, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiFrame createFrame(String title, boolean resizeable) {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiDialog createDialog(String title, boolean modal, boolean resizeable) {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void showMessage(String message, String title, MessageType messageType) {
-
-    // TODO
-    Window.alert(message);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean showQuestion(String question, String title) {
-
-    return Window.confirm(question);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void pack() {
-
-    // we do nothing here...
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setComposite(UiComposite<? extends UiElement> newComposite) {
-
-    // TODO Auto-generated method stub
-
   }
 
   /**
@@ -110,14 +56,6 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
   public String getType() {
 
     return TYPE;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isDisposed() {
-
-    return false;
   }
 
   /**
@@ -202,6 +140,7 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
   @Override
   protected void doSetVisible(boolean visible) {
 
+    // TODO
     super.doSetVisible(visible);
   }
 
@@ -299,9 +238,20 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
    */
   public AbstractUiMenuBar getMenuBar() {
 
-    // TODO Auto-generated method stub
-    return null;
+    if (this.menuBar == null) {
+      this.menuBar = createMenuBar();
+    }
+    return this.menuBar;
   }
+
+  /**
+   * This method creates the
+   * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar}. It is invoked from
+   * {@link #getMenuBar()} on the first call.
+   * 
+   * @return the new {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar}.
+   */
+  protected abstract AbstractUiMenuBar createMenuBar();
 
   /**
    * {@inheritDoc}
@@ -310,6 +260,14 @@ public class UiWorkbenchImpl extends AbstractUiWindow implements UiWorkbench {
   public UiFrame getParent() {
 
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public UiFrame createFrame(String title, boolean resizable) {
+
+    return getFactory().createFrame(this, title, resizable);
   }
 
 }

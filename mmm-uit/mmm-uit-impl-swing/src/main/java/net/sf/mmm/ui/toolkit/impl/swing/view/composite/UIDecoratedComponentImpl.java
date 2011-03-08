@@ -146,9 +146,8 @@ public class UIDecoratedComponentImpl<E extends AbstractUiElement, D extends E, 
 
     AbstractUiElement abstractComponent = newComponent;
     if (this.component != null) {
-      AbstractUiElement oldComponent = this.component;
-      setParent(oldComponent, null);
-      this.panel.remove(oldComponent.getSwingComponent());
+      this.component.setParent(null);
+      this.panel.remove(this.component.getSwingComponent());
     }
     this.component = newComponent;
     if (abstractComponent.getParent() != null) {

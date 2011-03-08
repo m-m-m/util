@@ -103,12 +103,12 @@ public class UISplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
       component.removeFromParent();
     }
     if (this.componentTopOrLeft != null) {
-      setParent(this.componentTopOrLeft, null);
+      this.componentTopOrLeft.setParent(null);
     }
     this.componentTopOrLeft = component;
     JComponent jComponent = this.componentTopOrLeft.getSwingComponent();
     this.splitPanel.setTopComponent(jComponent);
-    setParent(this.componentTopOrLeft, this);
+    this.componentTopOrLeft.setParent(this);
   }
 
   /**
@@ -120,12 +120,12 @@ public class UISplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
       component.removeFromParent();
     }
     if (this.componentBottomOrRight != null) {
-      setParent(this.componentBottomOrRight, null);
+      this.componentBottomOrRight.setParent(null);
     }
     this.componentBottomOrRight = component;
     JComponent jComponent = this.componentBottomOrRight.getSwingComponent();
     this.splitPanel.setBottomComponent(jComponent);
-    setParent(this.componentBottomOrRight, this);
+    this.componentBottomOrRight.setParent(this);
   }
 
   /**

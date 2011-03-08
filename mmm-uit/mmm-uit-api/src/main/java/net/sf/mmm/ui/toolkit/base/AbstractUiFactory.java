@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
@@ -19,14 +20,14 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
-import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 
@@ -248,22 +249,6 @@ public abstract class AbstractUiFactory implements UiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiLabel createLabel() {
-
-    return createLabel("");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiTextField createTextField() {
-
-    return createTextField(true);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public UiButton createButton(String text) {
 
     return createButton(text, ButtonStyle.DEFAULT);
@@ -411,4 +396,60 @@ public abstract class AbstractUiFactory implements UiFactory {
     // do nothing ...
   }
 
+  /**
+   * @see UiFrame#createFrame(String, boolean)
+   * 
+   * @param parent is the actual {@link UiFrame} where
+   *        {@link UiFrame#createFrame(String, boolean)} was invoked.
+   * @param title is the title the new frame will have.
+   * @param resizable - if <code>true</code> the frame can be resized by the
+   *        user.
+   * @return the created frame.
+   */
+  public abstract UiFrame createFrame(UiFrame parent, String title, boolean resizable);
+
+  /**
+   * @see UiWindow#createDialog(String, boolean, boolean)
+   * 
+   * @param parent is the actual {@link UiWindow} where
+   *        {@link UiWindow#createDialog(String, boolean, boolean)} was invoked.
+   * @param title is the {@link UiDialog#getTitle() title} of the dialog.
+   * @param modal - if <code>true</code> all windows of the application are
+   *        blocked while the dialog is visible.
+   * @param resizeable - if <code>true</code> the dialog can be resized by the
+   *        user.
+   * @return the created dialog.
+   */
+  public abstract UiDialog createDialog(UiWindow parent, String title, boolean modal,
+      boolean resizeable);
+
+  /**
+   * @see UiWindow#showMessage(String, String, MessageType, Throwable)
+   * 
+   * @param parent is the actual {@link UiWindow} where
+   *        {@link UiWindow#showMessage(String, String, MessageType, Throwable)}
+   *        was invoked.
+   * @param message is the complete and detailed message to show.
+   * @param title is a short title.
+   * @param messageType classifies the type of the message to show (according
+   *        icon).
+   * @param throwable is the cause of the actual message. Maybe
+   *        <code>null</code> here (if invoked via
+   *        {@link UiWindow#showMessage(String, String, MessageType)}).
+   */
+  public abstract void showMessage(UiWindow parent, String message, String title,
+      MessageType messageType, Throwable throwable);
+
+  /**
+   * @see UiWindow#showQuestion(String, String)
+   * 
+   * @param parent is the actual {@link UiWindow} where
+   *        {@link UiWindow#showQuestion(String, String)} was invoked.
+   * @param question is the complete question to ask including all details the
+   *        user should know to be able to answer the question easily.
+   * @param title is a short title.
+   * @return <code>true</code> if the question is answered with yes,
+   *         <code>false</code> otherwise.
+   */
+  public abstract boolean showQuestion(UiWindow parent, String question, String title);
 }

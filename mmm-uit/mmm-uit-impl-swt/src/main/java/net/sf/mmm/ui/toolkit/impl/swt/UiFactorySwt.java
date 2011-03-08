@@ -4,6 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -31,7 +32,9 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.impl.swt.feature.PrintAction;
@@ -57,11 +60,14 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UISpinBoxImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITableImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITextFieldImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.widget.UITreeImpl;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.AbstractUiWindowSwt;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiDialogImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiFrameImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiWorkbenchImpl;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
@@ -159,6 +165,82 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
+  public UiFrameImpl createFrame(UiFrame parent, String title, boolean resizable) {
+
+    UiFrameImpl frame = new UiFrameImpl(this, (UiFrameImpl) parent, resizable);
+    frame.setTitle(title);
+    addWindow(frame);
+    return frame;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiDialog createDialog(UiWindow parent, String title, boolean modal, boolean resizeable) {
+
+    UiDialogImpl dialog = new UiDialogImpl(this, (AbstractUiWindowSwt) parent, modal, resizeable);
+    dialog.setTitle(title);
+    addWindow(dialog);
+    return dialog;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void showMessage(final UiWindow parent, String message, final String title,
+      MessageType messageType, Throwable throwable) {
+
+    int style = SWT.ICON_INFORMATION;
+    if (messageType == MessageType.ERROR) {
+      style = SWT.ICON_ERROR;
+    } else if (messageType == MessageType.WARNING) {
+      style = SWT.ICON_WARNING;
+    } else if (messageType == MessageType.INFO) {
+      style = SWT.ICON_INFORMATION;
+    }
+    style |= SWT.OK;
+    final int swtStyle = style;
+    final String msg;
+    if (throwable != null) {
+      // TODO: hack for the moment...
+      msg = message + "\n" + throwable.getMessage();
+    } else {
+      msg = message;
+    }
+    getDisplay().invokeSynchron(new Runnable() {
+
+      public void run() {
+
+        MessageBox messageBox = new MessageBox(((AbstractUiWindowSwt) parent).getSwtWindow(),
+            swtStyle);
+        messageBox.setText(title);
+        messageBox.setMessage(msg);
+        messageBox.open();
+      }
+    });
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean showQuestion(UiWindow parent, String question, String title) {
+
+    MessageBox messageBox = new MessageBox(((AbstractUiWindowSwt) parent).getSwtWindow(),
+        SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+    messageBox.setText(title);
+    messageBox.setMessage(question);
+    int result = messageBox.open();
+    return (result == SWT.YES);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public UiButton createButton(String text, ButtonStyle style) {
 
     UiButton button = new UIButtonImpl(this, style);
@@ -178,7 +260,6 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
 
     UiScrollPanel panel = new UiScrollPanelImpl(this);
@@ -251,10 +332,9 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiTextField createTextField(boolean editable) {
+  public UiTextField createTextField() {
 
     UITextFieldImpl textField = new UITextFieldImpl(this);
-    textField.setEditable(editable);
     return textField;
   }
 
@@ -424,7 +504,7 @@ public class UiFactorySwt extends AbstractUiFactory {
    * This method gets the given <code>baseStyle</code> adjusted with the global
    * settings of the factory.
    * 
-   * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.ScriptOrientation)
+   * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.common.ScriptOrientation)
    * 
    * @param baseStyle is the basic style.
    * @return the given <code>baseStyle</code> with additional options from this

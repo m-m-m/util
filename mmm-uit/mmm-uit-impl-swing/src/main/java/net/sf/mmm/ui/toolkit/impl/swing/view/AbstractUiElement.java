@@ -92,17 +92,10 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   /**
    * {@inheritDoc}
    */
-  public void setEnabled(boolean enabled) {
+  @Override
+  protected void doSetEnabled(boolean enabled) {
 
     getActiveSwingComponent().setEnabled(enabled);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isEnabled() {
-
-    return getActiveSwingComponent().isEnabled();
   }
 
   /**
@@ -165,6 +158,7 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void dispose() {
 
     this.disposed = true;
@@ -173,6 +167,7 @@ public abstract class AbstractUiElement extends AbstractUiNodeAwt implements UiE
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     return this.disposed;

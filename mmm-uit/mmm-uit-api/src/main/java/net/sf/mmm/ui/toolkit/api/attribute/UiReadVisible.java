@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
-import net.sf.mmm.ui.toolkit.api.common.Visibility;
+import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 
 /**
- * This interface gives read access to the {@link #getVisibility() visibility}
+ * This interface gives read access to the {@link #getVisibleState() visibility}
  * of an {@link net.sf.mmm.ui.toolkit.api.UiObject object}. Such object can be
  * displayed to or hidden from the UI.
  * 
@@ -16,22 +16,22 @@ import net.sf.mmm.ui.toolkit.api.common.Visibility;
 public interface UiReadVisible {
 
   /**
-   * This method gets the {@link Visibility} of this object.
+   * This method gets the {@link VisibleState} of this object.
    * 
-   * @see Visibility#isVisible()
+   * @see VisibleState#isVisible()
    * 
-   * @return the {@link Visibility} status.
+   * @return the {@link VisibleState}.
    */
-  Visibility getVisibility();
+  VisibleState getVisibleState();
 
   /**
    * This method determines if this object is displayed to the user. It is a
    * shortcut for:<br/>
-   * <code>{@link #getVisibility()}.isVisible()</code>
+   * <code>{@link #getVisibleState()}.isVisible()</code>
    * 
-   * @see #getVisibility()
+   * @see #getVisibleState()
    * 
-   * @return the value of {@link Visibility#isVisible()}.
+   * @return the value of {@link VisibleState#isVisible()}.
    */
   boolean isVisible();
 

@@ -11,7 +11,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.api.common.Visibility;
+import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
@@ -30,7 +30,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, UiElement {
+public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiElement {
 
   /** the frame */
   private final JInternalFrame frame;
@@ -277,33 +277,33 @@ public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
 
     JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
     this.frame.setContentPane(jComponent);
-    registerComposite(newComposite);
+    doSetComposite(newComposite);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Visibility getVisibility() {
+  public VisibleState getVisibleState() {
 
-    Visibility visibility = doGetVisibility();
-    if (visibility.isVisible()) {
+    VisibleState visibleState = doGetVisibleState();
+    if (visibleState.isVisible()) {
       // the parent should be the UiWorkbench...
       UiFrame parent = getParent();
       if (parent != null) {
-        if (!parent.getVisibility().isVisible()) {
-          return Visibility.BLOCKED;
+        if (!parent.getVisibleState().isVisible()) {
+          return VisibleState.BLOCKED;
         }
       }
     }
-    return visibility;
+    return visibleState;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void doSetVisible(boolean visible) {
+  protected void doSetVisible(boolean visible) {
 
     this.frame.setVisible(visible);
   }
@@ -312,9 +312,23 @@ public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
    * {@inheritDoc}
    */
   @Override
-  protected Window getNativeWindow() {
+  protected boolean doIsInvisible() {
 
-    return ((UIWorkbenchImpl) getParent()).getNativeWindow();
+    return !this.frame.isVisible();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Window getNativeWindow() {
+
+    UIWorkbenchImpl parent = (UIWorkbenchImpl) getParent();
+    if (parent == null) {
+      // should actually never happen...
+      return null;
+    }
+    return parent.getNativeWindow();
   }
 
   /**
@@ -339,15 +353,8 @@ public class UiInternalFrame extends AbstractUiWindowImpl implements UiFrame, Ui
   /**
    * {@inheritDoc}
    */
-  public boolean isEnabled() {
-
-    return this.frame.isEnabled();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setEnabled(boolean enabled) {
+  @Override
+  protected void doSetEnabled(boolean enabled) {
 
     this.frame.setEnabled(enabled);
   }

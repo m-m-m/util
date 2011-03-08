@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTitle;
@@ -19,15 +18,15 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWindow extends UiNode, UiWriteDisposed, UiWriteSize, UiWriteTitle,
-    UiWritePosition, UiWriteVisible {
+public abstract interface UiWindow extends UiNode, UiWriteSize, UiWriteTitle, UiWritePosition,
+    UiWriteVisible {
 
   /**
-   * This method creates a dialog as child of this window.
+   * This method creates a new {@link UiDialog} as child of this window.
    * 
-   * @param title is the title of the dialog.
+   * @param title is the {@link UiDialog#getTitle() title} of the dialog.
    * @param modal - if <code>true</code> all windows of the application are
-   *        blocked until the dialog is closed.
+   *        blocked while the dialog is visible.
    * @param resizeable - if <code>true</code> the dialog can be resized by the
    *        user.
    * @return the created dialog.

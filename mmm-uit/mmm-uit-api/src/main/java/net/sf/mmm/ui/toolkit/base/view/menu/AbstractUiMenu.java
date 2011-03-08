@@ -20,6 +20,8 @@ import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 /**
  * This is the base implementation of the UIMenu interface.
  * 
+ * @param <N> is the generic type of the {@link #getNativeUiObject() native UI
+ *        object}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,7 +33,7 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactory instance.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
    */
   public AbstractUiMenu(AbstractUiFactory uiFactory) {
 

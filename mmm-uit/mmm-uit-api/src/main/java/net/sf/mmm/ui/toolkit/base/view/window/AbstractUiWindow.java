@@ -5,10 +5,10 @@ package net.sf.mmm.ui.toolkit.base.view.window;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.common.Visibility;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
@@ -34,6 +34,7 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
   public AbstractUiWindow(AbstractUiFactory uiFactory, UiWindow parentObject) {
 
     super(uiFactory);
+    setParent(parentObject);
   }
 
   /**
@@ -48,15 +49,23 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
     return getFactory().getDisplay();
   }
 
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public VisibleState getVisibleState() {
+  //
+  // // no inheritance by default
+  // return doGetVisibleState();
+  // }
+
   /**
+   * This method is declared abstract as it has to be overridden.
+   * 
    * {@inheritDoc}
    */
   @Override
-  public Visibility getVisibility() {
-
-    // no inheritance by default
-    return doGetVisibility();
-  }
+  protected abstract boolean doIsInvisible();
 
   /**
    * {@inheritDoc}
@@ -85,23 +94,38 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
 
   /**
    * This method registers the new composite and changes the parent of the old
-   * and the new composite. The method should be called from the setComposite
-   * method implementation.
+   * and the new composite. The method should be called from the
+   * {@link #setComposite(UiComposite)} method implementation.
    * 
    * @see UiWindow#setComposite(UiComposite)
    * 
    * @param newComposite is the composite to register.
    */
-  public void registerComposite(UiComposite<? extends UiElement> newComposite) {
+  protected void doSetComposite(UiComposite<? extends UiElement> newComposite) {
 
     if (this.composite != null) {
       // The current composite is replaced by a new one. Set the parent of
       // the old (current) one to null.
-      setParent((AbstractUiNode) this.composite, null);
+      ((AbstractUiNode) this.composite).setParent(null);
     }
     this.composite = newComposite;
     ((AbstractUiNode) newComposite).setParent(this);
-    // setParent((AbstractUINode) newComposite, this);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public UiDialog createDialog(String title, boolean modal, boolean resizeable) {
+
+    return getFactory().createDialog(this, title, modal, resizeable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void showMessage(String message, String title, MessageType messageType) {
+
+    getFactory().showMessage(this, message, title, messageType, null);
   }
 
   /**
@@ -109,8 +133,15 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
    */
   public void showMessage(String message, String title, MessageType messageType, Throwable throwable) {
 
-    // TODO Hack for the moment...
-    showMessage(message + "\n" + throwable.getMessage(), title, messageType);
+    getFactory().showMessage(this, message, title, messageType, throwable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean showQuestion(String question, String title) {
+
+    return getFactory().showQuestion(this, question, title);
   }
 
   /**
@@ -128,6 +159,7 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
   /**
    * {@inheritDoc}
    */
+  @Override
   public void dispose() {
 
     getFactory().removeWindow(this);

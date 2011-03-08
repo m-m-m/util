@@ -387,15 +387,6 @@ public interface UiFactory extends UiWriteDisposed {
   UiTextField createTextField();
 
   /**
-   * This method creates a new text-field.
-   * 
-   * @param editable is the {@link UiTextField#isEditable() editable flag} of
-   *        the text field.
-   * @return the created text-field.
-   */
-  UiTextField createTextField(boolean editable);
-
-  /**
    * This method creates a new spin-box.
    * 
    * @param <E> is the templated type of the list elements.

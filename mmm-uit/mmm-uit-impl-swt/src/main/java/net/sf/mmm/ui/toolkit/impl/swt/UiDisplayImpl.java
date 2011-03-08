@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
+import net.sf.mmm.ui.toolkit.base.AbstractUiDisplay;
+
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
-
-import net.sf.mmm.ui.toolkit.base.AbstractUiDisplay;
 
 /**
  * This class is the implementation of the UIDisplay interface using AWT as the
@@ -59,9 +59,9 @@ public class UiDisplayImpl extends AbstractUiDisplay {
   /**
    * The constructor.
    * 
-   * @param uiFactory is the UIFactorySwt instance.
-   * @param uiDevice is the device the display belongs to.
-   * @param swtDisplay is the SWT display to wrap.
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param uiDevice is the {@link #getDevice() device} instance.
+   * @param swtDisplay is the SWT {@link Display} to adapt.
    */
   public UiDisplayImpl(UiFactorySwt uiFactory, UiDeviceImpl uiDevice, Display swtDisplay) {
 

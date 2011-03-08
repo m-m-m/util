@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read and write access to the {@link #getVisibility()
+ * This interface gives read and write access to the {@link #getVisibleState()
  * visibility} of an {@link net.sf.mmm.ui.toolkit.api.UiObject}.
  * 
  * @see #setVisible(boolean)
@@ -17,7 +17,7 @@ public interface UiWriteVisible extends UiReadVisible {
   /**
    * This method shows or hides this object.
    * 
-   * @see #getVisibility()
+   * @see #getVisibleState()
    * 
    * @param visible is the new visibility status of this object. If
    *        <code>true</code>, the object will be shown (and raised), if false

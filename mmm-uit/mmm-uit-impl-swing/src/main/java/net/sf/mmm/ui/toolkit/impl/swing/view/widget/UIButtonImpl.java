@@ -15,6 +15,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This class is the implementation of the
@@ -26,8 +27,6 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.UiImageImpl;
  */
 public class UIButtonImpl extends AbstractUiWidget implements UiButton {
 
-  /** the insets of the button */
-  // private static final Insets BUTTON_INSETS = new Insets(4, 4, 4, 4);
   /** the actual Swing button */
   private final AbstractButton button;
 
@@ -62,7 +61,7 @@ public class UIButtonImpl extends AbstractUiWidget implements UiButton {
         b = new JToggleButton();
         break;
       default :
-        throw new IllegalArgumentException("Unknown style: " + this.style);
+        throw new IllegalCaseException(ButtonStyle.class, this.style);
     }
     this.button = b;
     // this.button.setMargin(BUTTON_INSETS);

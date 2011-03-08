@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.window;
 
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
@@ -13,7 +13,6 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncShellAccess;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -35,7 +34,7 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   private final SyncShellAccess syncAccess;
 
   /** @see #isResizable() */
-  private final boolean resizeableFlag;
+  private final boolean resizableFlag;
 
   /**
    * The constructor.
@@ -49,17 +48,17 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
    * @param defaultStyle is the default style used for the SWT shell.
    * @param modal - if <code>true</code> all windows of the application are
    *        blocked until this window is closed.
-   * @param resizeable - if <code>true</code> the window will be
-   *        {@link #isResizable() resizeable}.
+   * @param resizable - if <code>true</code> the window will be
+   *        {@link #isResizable() resizable}.
    */
   public AbstractUiWindowSwt(final UiFactorySwt uiFactory, final AbstractUiWindowSwt parent,
-      int defaultStyle, boolean modal, boolean resizeable) {
+      int defaultStyle, boolean modal, boolean resizable) {
 
     super(uiFactory, parent);
     this.factory = uiFactory;
-    this.resizeableFlag = resizeable;
+    this.resizableFlag = resizable;
     int styleModifiers = 0;
-    if (this.resizeableFlag) {
+    if (this.resizableFlag) {
       styleModifiers |= SWT.RESIZE;
     }
     if (modal) {
@@ -129,9 +128,18 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
    * {@inheritDoc}
    */
   @Override
-  public void doSetVisible(boolean visibleFlag) {
+  protected void doSetVisible(boolean visibleFlag) {
 
     this.syncAccess.setVisible(visibleFlag);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected boolean doIsInvisible() {
+
+    return !this.syncAccess.isVisible();
   }
 
   /**
@@ -219,6 +227,7 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     return this.syncAccess.isDisposed();
@@ -227,67 +236,17 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
-  public void showMessage(final String message, final String title, MessageType messageType) {
-
-    int style = SWT.ICON_INFORMATION;
-    if (messageType == MessageType.ERROR) {
-      style = SWT.ICON_ERROR;
-    } else if (messageType == MessageType.WARNING) {
-      style = SWT.ICON_WARNING;
-    } else if (messageType == MessageType.INFO) {
-      style = SWT.ICON_INFORMATION;
-    }
-    style |= SWT.OK;
-    final int swtStyle = style;
-    getFactory().getDisplay().invokeSynchron(new Runnable() {
-
-      public void run() {
-
-        MessageBox messageBox = new MessageBox(AbstractUiWindowSwt.this.shell, swtStyle);
-        messageBox.setText(title);
-        messageBox.setMessage(message);
-        messageBox.open();
-      }
-    });
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean showQuestion(String question, String title) {
-
-    MessageBox messageBox = new MessageBox(this.shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-    messageBox.setText(title);
-    messageBox.setMessage(question);
-    int result = messageBox.open();
-    return (result == SWT.YES);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiDialogImpl createDialog(String title, boolean modal, boolean resizeable) {
-
-    UiDialogImpl dialog = new UiDialogImpl(getFactory(), this, modal, resizeable);
-    dialog.setTitle(title);
-    getFactory().addWindow(dialog);
-    return dialog;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public boolean isResizable() {
 
-    return this.resizeableFlag;
+    return this.resizableFlag;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void setComposite(final UiComposite newComposite) {
+  public void setComposite(UiComposite<? extends UiElement> newComposite) {
 
-    registerComposite(newComposite);
+    doSetComposite(newComposite);
     /*
      * final Control c = ((AbstractUIComposite)
      * newComposite).getSyncAccess().getWidget();
