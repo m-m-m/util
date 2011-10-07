@@ -4,11 +4,13 @@
 package net.sf.mmm.transaction.impl.spring;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import net.sf.mmm.transaction.api.TransactionSettings;
 import net.sf.mmm.transaction.base.AbstractTransactionExecutor;
 
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
@@ -19,6 +21,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Named
 public class SpringTransactionExecutor extends AbstractTransactionExecutor {
 
   /** @see #getPlatformTransactionManager() */
@@ -76,14 +79,15 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
     public SpringTransactionAdapter(TransactionSettings settings) {
 
       super();
-      this.transactionDefinition = new DefaultTransactionDefinition();
+      this.transactionDefinition = new DefaultTransactionDefinition(
+          TransactionDefinition.PROPAGATION_REQUIRED);
+
       if (settings.getIsolationLevel() != null) {
         this.transactionDefinition.setIsolationLevel(settings.getIsolationLevel().getJdbcCode());
       }
       if (settings.getTimeout() != null) {
         this.transactionDefinition.setTimeout(settings.getTimeout().intValue());
       }
-      start();
     }
 
     /**
@@ -92,7 +96,9 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
     @Override
     protected TransactionStatus createNewTransaction() {
 
-      return getPlatformTransactionManager().getTransaction(this.transactionDefinition);
+      TransactionStatus tx = getPlatformTransactionManager().getTransaction(
+          this.transactionDefinition);
+      return tx;
     }
 
     /**

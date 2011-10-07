@@ -49,7 +49,6 @@ public class JtaTransactionExecutor extends AbstractTransactionExecutor {
     public JtaTransactionAdapter() {
 
       super();
-      start();
     }
 
     /**
