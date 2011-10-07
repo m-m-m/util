@@ -61,6 +61,8 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
 
     if (!entity.isPersistent()) {
       getEntityManager().persist(entity);
+    } else {
+      getEntityManager().persist(entity);
     }
   }
 

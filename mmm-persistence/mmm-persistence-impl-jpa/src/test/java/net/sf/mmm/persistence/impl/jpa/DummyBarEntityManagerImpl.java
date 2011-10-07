@@ -3,13 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
+import javax.inject.Named;
+
 /**
  * This is the implementation of the {@link DummyBarEntityManager} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DummyBarEntityManagerImpl extends JpaPersistenceEntityManager<DummyBarEntity> implements
-    DummyBarEntityManager {
+@Named
+public class DummyBarEntityManagerImpl extends JpaPersistenceEntityManager<DummyBarEntity>
+    implements DummyBarEntityManager {
 
   /**
    * {@inheritDoc}

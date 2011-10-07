@@ -4,7 +4,7 @@
 package net.sf.mmm.persistence.api;
 
 /**
- * This is the interface for a {@link PersistenceEntity} that is
+ * This is the interface for a {@link PersistenceEntity} that is (potentially)
  * revision-controlled.
  * 
  * @see RevisionedPersistenceEntityManager

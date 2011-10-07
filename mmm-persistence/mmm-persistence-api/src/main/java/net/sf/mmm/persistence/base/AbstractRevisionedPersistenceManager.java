@@ -32,6 +32,7 @@ public abstract class AbstractRevisionedPersistenceManager extends AbstractPersi
   public <ENTITY extends RevisionedPersistenceEntity> RevisionedPersistenceEntityManager<ENTITY> getRevisionedManager(
       Class<ENTITY> entityClass) throws ObjectNotFoundException {
 
+    // TODO: handle class cast exception and produce more appropriate error.
     return (RevisionedPersistenceEntityManager<ENTITY>) getManager(entityClass);
   }
 

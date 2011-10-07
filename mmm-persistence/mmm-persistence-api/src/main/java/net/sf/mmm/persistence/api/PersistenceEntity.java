@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
+import java.util.Date;
 
 /**
  * This is the interface for a persistent entity, which is a object that is
@@ -85,5 +86,14 @@ public interface PersistenceEntity {
    * @return the current modification-counter.
    */
   int getModificationCounter();
+
+  /**
+   * This method gets the current timestamp with the date and time when this
+   * entity was written to the database.
+   * 
+   * @return the modification timestamp or <code>null</code> if this entity is
+   *         NOT {@link #isPersistent() persistent}.
+   */
+  Date getModificationTimestamp();
 
 }

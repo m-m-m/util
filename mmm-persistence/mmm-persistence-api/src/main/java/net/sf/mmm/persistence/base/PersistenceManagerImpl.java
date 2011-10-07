@@ -6,6 +6,7 @@ package net.sf.mmm.persistence.base;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
 
@@ -15,6 +16,7 @@ import net.sf.mmm.persistence.api.PersistenceEntityManager;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Named
 public class PersistenceManagerImpl extends AbstractPersistenceManager {
 
   /**

@@ -14,7 +14,7 @@ import net.sf.mmm.persistence.api.PersistenceEntity;
  * the {@link javax.persistence JPA} (Java Persistence API).<br>
  * We can NOT extend
  * {@link net.sf.mmm.persistence.base.AbstractPersistenceEntity} because JPA
- * forces superclasses to be annotated and prevents from overriding annotated
+ * forces super-classes to be annotated and prevents from overriding annotated
  * features such as {@link Transient}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -23,7 +23,6 @@ import net.sf.mmm.persistence.api.PersistenceEntity;
 public abstract class JpaPersistenceEntity implements PersistenceEntity {
 
   /** @see #getModificationCounter() */
-  @Version
   private int modificationCounter;
 
   /**
@@ -37,6 +36,7 @@ public abstract class JpaPersistenceEntity implements PersistenceEntity {
   /**
    * {@inheritDoc}
    */
+  @Version
   public int getModificationCounter() {
 
     return this.modificationCounter;
@@ -45,7 +45,7 @@ public abstract class JpaPersistenceEntity implements PersistenceEntity {
   /**
    * @param modificationCounter is the modificationCounter to set
    */
-  public void setModificationCounter(int modificationCounter) {
+  protected void setModificationCounter(int modificationCounter) {
 
     this.modificationCounter = modificationCounter;
   }

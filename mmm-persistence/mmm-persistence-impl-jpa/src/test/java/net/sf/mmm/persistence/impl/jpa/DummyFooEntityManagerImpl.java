@@ -3,13 +3,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
+import javax.inject.Named;
+
 /**
  * This is the implementation of the {@link DummyFooEntityManager} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class DummyFooEntityManagerImpl extends JpaPersistenceEntityManager<DummyFooEntity> implements
-    DummyFooEntityManager {
+@Named
+public class DummyFooEntityManagerImpl extends JpaPersistenceEntityManager<DummyFooEntity>
+    implements DummyFooEntityManager {
 
   /**
    * {@inheritDoc}

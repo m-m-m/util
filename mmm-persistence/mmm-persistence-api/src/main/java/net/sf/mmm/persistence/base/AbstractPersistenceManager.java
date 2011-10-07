@@ -50,7 +50,6 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <ENTITY extends PersistenceEntity> PersistenceEntityManager<ENTITY> getManager(
       Class<ENTITY> entityType) {
 
@@ -74,7 +73,7 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public void save(PersistenceEntity entity) {
 
     Class<? extends PersistenceEntity> entityClass = getEntityClass(entity);

@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api;
 
+import java.util.Map;
+
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -22,12 +25,25 @@ public abstract class PersistenceException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internationalizedMessage</code> after nationalization.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
    */
-  public PersistenceException(String internationalizedMessage, Object... arguments) {
+  public PersistenceException(NlsMessage message) {
+
+    super(message);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for {@link NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
+   *        to be {@link NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
+   */
+  public PersistenceException(String internationalizedMessage, Map<String, Object> arguments) {
 
     super(internationalizedMessage, arguments);
   }
@@ -35,16 +51,55 @@ public abstract class PersistenceException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for {@link NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   */
+  public PersistenceException(String internationalizedMessage) {
+
+    super(internationalizedMessage);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem
+   *        briefly.
+   */
+  public PersistenceException(Throwable nested, NlsMessage message) {
+
+    super(nested, message);
+  }
+
+  /**
+   * The constructor.
+   * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internationalizedMessage</code> after nationalization.
+   *        is used for {@link NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
+   *        to be {@link NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
   public PersistenceException(Throwable nested, String internationalizedMessage,
-      Object... arguments) {
+      Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param internationalizedMessage is a short description of the problem. It
+   *        is used for {@link NlsMessage#getInternationalizedMessage()
+   *        internationalization} and should be in English language.
+   */
+  public PersistenceException(Throwable nested, String internationalizedMessage) {
+
+    super(nested, internationalizedMessage);
   }
 
 }

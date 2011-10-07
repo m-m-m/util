@@ -5,8 +5,6 @@ package net.sf.mmm.persistence.api.search;
 
 import java.util.Iterator;
 
-import net.sf.mmm.persistence.api.PersistenceEntity;
-
 /**
  * This is the interface for the result of a
  * {@link PersistenceSearcher#search(PersistenceSearchQuery)}.<br>
@@ -20,8 +18,8 @@ import net.sf.mmm.persistence.api.PersistenceEntity;
  * </pre>
  * 
  * @param <HIT> is the type of the individual items contained in this result. It
- *        is NOT bound to {@link PersistenceEntity} to allow using dedicated
- *        transport objects.
+ *        is NOT bound to {@link net.sf.mmm.persistence.api.PersistenceEntity}
+ *        to allow using dedicated transport objects.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

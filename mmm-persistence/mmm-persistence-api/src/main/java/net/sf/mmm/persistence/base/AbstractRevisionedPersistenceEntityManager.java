@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.base;
 
-import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntityManager;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
@@ -33,16 +32,21 @@ public abstract class AbstractRevisionedPersistenceEntityManager<ENTITY extends 
   }
 
   /**
-   * This method gets a historic revision of the {@link PersistenceEntity} with
-   * the given <code>id</code>.
+   * This method gets a historic revision of the
+   * {@link net.sf.mmm.persistence.api.PersistenceEntity} with the given
+   * <code>id</code>.
    * 
-   * @param id is the {@link PersistenceEntity#getId() ID} of the requested
-   *        {@link PersistenceEntity entity}.
+   * @param id is the
+   *        {@link net.sf.mmm.persistence.api.PersistenceEntity#getId() ID} of
+   *        the requested {@link net.sf.mmm.persistence.api.PersistenceEntity
+   *        entity}.
    * @param revision is the {@link RevisionedPersistenceEntity#getRevision()
    *        revision}
-   * @return the requested {@link PersistenceEntity entity}.
-   * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
-   *         entity} could NOT be found.
+   * @return the requested {@link net.sf.mmm.persistence.api.PersistenceEntity
+   *         entity}.
+   * @throws ObjectNotFoundException if the requested
+   *         {@link net.sf.mmm.persistence.api.PersistenceEntity entity} could
+   *         NOT be found.
    */
   protected abstract ENTITY loadRevision(Object id, Number revision) throws ObjectNotFoundException;
 

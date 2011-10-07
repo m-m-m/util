@@ -8,7 +8,9 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the interface for a {@link PersistenceManager} with the ability of
- * revision-control.
+ * revision-control (auditing), e.g. provided by hibernate-envers.
+ * 
+ * @see RevisionedPersistenceEntity
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

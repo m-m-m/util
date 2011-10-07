@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api.search;
 
-import net.sf.mmm.persistence.api.PersistenceEntityManager;
-
 /**
  * This is the interface for a searcher that can be offered by a
- * {@link PersistenceEntityManager}.
+ * {@link net.sf.mmm.persistence.api.PersistenceEntityManager}.
  * 
  * @param <QUERY> is the type of the {@link PersistenceSearchQuery}.
  * @param <HIT>
