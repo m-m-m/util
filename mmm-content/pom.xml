@@ -19,6 +19,7 @@
   </dependencies>
   
   <modules>
+    <module>mmm-content-api</module>
     <module>mmm-content-core</module>
     <module>mmm-content-entities</module>
     <module>mmm-content-repository</module>

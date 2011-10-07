@@ -17,14 +17,8 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-value-validator</artifactId>
-      <version>0.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-pojo</artifactId>
-      <version>1.0.0</version>
+      <artifactId>mmm-util-core</artifactId>
+      <version>2.0.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
