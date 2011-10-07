@@ -3,7 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.mmm.util.component.api.IocContainer;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * This is just an ugly static pool used to simplify testing. It might cause
@@ -15,6 +20,9 @@ public final class SpringContainerPool {
 
   /** @see #getInstance() */
   private static SpringContainer instance;
+
+  /** @see #getInstance(String) */
+  private static Map<String, SpringContainer> xml2containerMap;
 
   /**
    * The constructor.
@@ -46,6 +54,43 @@ public final class SpringContainerPool {
     if (instance != null) {
       instance.dispose();
       instance = null;
+    }
+  }
+
+  /**
+   * This method gets the {@link IocContainer} for the given
+   * <code>xmlClasspath</code>.
+   * 
+   * @param xmlClasspath is the classpath to the XML configuration.
+   * @return the requested container.
+   */
+  public static IocContainer getInstance(String xmlClasspath) {
+
+    if (xml2containerMap == null) {
+      xml2containerMap = new HashMap<String, SpringContainer>();
+    }
+    SpringContainer container = xml2containerMap.get(xmlClasspath);
+    if (container == null) {
+      container = new SpringContainer(new ClassPathXmlApplicationContext(xmlClasspath));
+      xml2containerMap.put(xmlClasspath, container);
+    }
+    return container;
+  }
+
+  /**
+   * This method disposes the {@link #getInstance(String) instance} identified
+   * by the given <code>xmlClasspath</code> (if it exists).
+   * 
+   * @param xmlClasspath is the classpath to the XML configuration.
+   */
+  public static void dispose(String xmlClasspath) {
+
+    if (xml2containerMap != null) {
+      SpringContainer container = xml2containerMap.get(xmlClasspath);
+      if (container != null) {
+        xml2containerMap.remove(xmlClasspath);
+        container.dispose();
+      }
     }
   }
 

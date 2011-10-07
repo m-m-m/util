@@ -172,6 +172,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   /** @see net.sf.mmm.util.nls.api.DuplicateObjectException */
   public static final String ERR_DUPLICATE_OBJECT_WITH_KEY = "Duplicate object \"{object}\" for key \"{key}\"!";
 
+  /** @see net.sf.mmm.util.nls.api.DuplicateObjectException */
+  public static final String ERR_DUPLICATE_OBJECT_WITH_KEY_AND_EXISTING = "Duplicate "
+      + "object \"{object}\" for key \"{key}\" - already mapped to \"{existing}\"!";
+
   /** @see net.sf.mmm.util.nls.api.ObjectNotFoundException */
   public static final String ERR_OBJECT_NOT_FOUND = "Could NOT find object \"{object}\"!";
 

@@ -149,7 +149,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
     } else {
       result = map;
     }
-    Object duplicate = map.put(key, value);
+    Object duplicate = result.put(key, value);
     assert (duplicate == null);
     return result;
   }

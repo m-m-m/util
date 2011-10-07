@@ -201,7 +201,7 @@ public enum Comparator implements Datatype<String> {
    * @return the result of the {@link Comparator} applied to the given
    *         arguments.
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @SuppressWarnings({ "unchecked" })
   private boolean evalComparable(Comparable arg1, Comparable arg2) {
 
     Class<?> type1 = arg1.getClass();
