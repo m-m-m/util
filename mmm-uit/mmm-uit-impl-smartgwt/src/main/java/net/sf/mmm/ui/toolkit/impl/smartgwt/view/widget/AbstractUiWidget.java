@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.smartgwt.view.widget;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiWidget;
-import net.sf.mmm.ui.toolkit.base.gwt.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.gwt.view.AbstractUiElementGwt;
 import net.sf.mmm.ui.toolkit.impl.smartgwt.UiFactorySmartGwt;
 
 import com.smartgwt.client.widgets.StatefulCanvas;
@@ -17,7 +17,7 @@ import com.smartgwt.client.widgets.StatefulCanvas;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidget extends AbstractUiElement implements UiWidget {
+public abstract class AbstractUiWidget extends AbstractUiElementGwt implements UiWidget {
 
   /**
    * The constructor.

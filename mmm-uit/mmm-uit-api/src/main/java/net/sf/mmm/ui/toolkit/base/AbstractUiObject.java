@@ -21,8 +21,8 @@ public abstract class AbstractUiObject implements UiObject, UiWriteId {
   /** @see #getId() */
   private String id;
 
-  /** @see #getStyles() */
-  private String style;
+  /** @see #getId() */
+  private static int idCounter;
 
   /**
    * The constructor.
@@ -33,7 +33,6 @@ public abstract class AbstractUiObject implements UiObject, UiWriteId {
 
     super();
     this.factory = uiFactory;
-    this.style = "";
   }
 
   /**
@@ -49,6 +48,9 @@ public abstract class AbstractUiObject implements UiObject, UiWriteId {
    */
   public String getId() {
 
+    if (this.id == null) {
+      this.id = "id" + idCounter++;
+    }
     return this.id;
   }
 
@@ -58,24 +60,6 @@ public abstract class AbstractUiObject implements UiObject, UiWriteId {
   public void setId(String newId) {
 
     this.id = newId;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getStyles() {
-
-    return this.style;
-  }
-
-  /**
-   * This method sets the {@link #getStyles() styles} internally.
-   * 
-   * @param styles are the new styles to set.
-   */
-  protected void doSetStyles(String styles) {
-
-    this.style = styles;
   }
 
 }

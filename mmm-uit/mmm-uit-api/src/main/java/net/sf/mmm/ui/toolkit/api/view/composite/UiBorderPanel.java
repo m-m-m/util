@@ -13,11 +13,12 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite composite} that
  * is surrounded by a {@link #setTitle(String) titled} border.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiBorderPanel<E extends UiElement> extends UiSingleComposite<E>, UiWriteTitle {
+public interface UiBorderPanel<CHILD extends UiElement> extends UiSingleComposite<CHILD>,
+    UiWriteTitle {
 
   /** the type of this object */
   String TYPE = "BorderPanel";

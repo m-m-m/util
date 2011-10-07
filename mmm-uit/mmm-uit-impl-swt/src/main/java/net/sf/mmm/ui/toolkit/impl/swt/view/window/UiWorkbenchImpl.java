@@ -3,13 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.window;
 
+import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the interface of the
- * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench} interface using SWT as
- * the UI toolkit.
+ * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench} interface using SWT
+ * as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -41,7 +42,7 @@ public class UiWorkbenchImpl extends UiFrameImpl implements UiWorkbench {
    * {@inheritDoc}
    */
   @Override
-  public UiFrameImpl createFrame(String title, boolean resizable) {
+  public UiFrame createFrame(String title, boolean resizable) {
 
     // TODO
     return super.createFrame(title, resizable);

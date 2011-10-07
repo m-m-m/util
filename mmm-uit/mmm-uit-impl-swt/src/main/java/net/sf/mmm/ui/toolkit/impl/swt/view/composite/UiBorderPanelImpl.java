@@ -4,27 +4,30 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncGroupAccess;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Widget;
 
 /**
  * This class is the implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel} interface
  * using SWT as the UI toolkit.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int)
+ *        child-elements}.
  * @since 1.0.0
  */
-public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSingleComposite<E>
-    implements UiBorderPanel<E> {
+public class UiBorderPanelImpl<CHILD extends AbstractUiElement<? extends Widget>> extends
+    AbstractUiSingleCompositeSwt<Group, CHILD> implements UiBorderPanel<CHILD> {
 
-  /** @see #getSyncAccess() */
-  private final SyncGroupAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncGroupAccess adapter;
 
   /**
    * The constructor.
@@ -34,8 +37,8 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   public UiBorderPanelImpl(UiFactorySwt uiFactory) {
 
     super(uiFactory);
-    this.syncAccess = new SyncGroupAccess(uiFactory, SWT.NONE);
-    this.syncAccess.setLayout(new FillLayout());
+    this.adapter = new SyncGroupAccess(uiFactory, this, SWT.NONE);
+    this.adapter.setLayout(new FillLayout());
     // this.syncGroupAccess.setText(borderTitle);
   }
 
@@ -44,7 +47,7 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
    */
   public String getTitle() {
 
-    return this.syncAccess.getText();
+    return this.adapter.getText();
   }
 
   /**
@@ -52,24 +55,7 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
    */
   public void setTitle(String title) {
 
-    this.syncAccess.setText(title);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setChild(E child) {
-
-    super.setChild(child);
-    if (child != null) {
-      child.setParent(this);
-      // Control childControl = child.getSyncAccess().getSwtObject();
-      // if (childControl != null) {
-      // this.syncAccess.setContent(childControl);
-      // update();
-      // }
-    }
+    this.adapter.setText(title);
   }
 
   /**
@@ -84,8 +70,8 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
    * {@inheritDoc}
    */
   @Override
-  public SyncGroupAccess getActiveSyncAccess() {
+  public SyncGroupAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 }

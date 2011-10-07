@@ -60,7 +60,7 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
    */
   public void initialize() {
 
-    if (this.syncAccess.getSwtObject() != null) {
+    if (this.syncAccess.getDelegate() != null) {
       this.event = null;
       this.syncAccess.getDisplay().invokeSynchron(this);
       this.model.addListener(this);
@@ -85,11 +85,11 @@ public class SlideBarModelAdapter implements UIListModelListener, Runnable {
 
     if (this.event == null) {
       // initialize
-      Slider slider = this.syncAccess.getSwtObject();
+      Slider slider = this.syncAccess.getDelegate();
       slider.setMaximum(this.model.getElementCount());
     } else {
       if (this.event.getType() != ChangeType.UPDATE) {
-        Slider slider = this.syncAccess.getSwtObject();
+        Slider slider = this.syncAccess.getDelegate();
         slider.setMaximum(this.model.getElementCount());
       }
     }

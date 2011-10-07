@@ -4,9 +4,7 @@
 package net.sf.mmm.ui.toolkit.base.view;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
@@ -27,10 +25,11 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type for the {@link #getAdapter() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiNode extends AbstractUiObject implements UiNode, UiWriteVisible,
-    UiWriteEnabled {
+public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implements UiNode,
+    UiWriteVisible, UiWriteEnabled {
 
   /** the parent object */
   private UiNode parent;
@@ -43,9 +42,6 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
 
   /** @see #isDisposed() */
   private boolean disposed;
-
-  /** @see #getStyles() */
-  private Set<String> stylesSet;
 
   /**
    * the registered listeners (or <code>null</code> if no listener is
@@ -66,6 +62,26 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   }
 
   /**
+   * This method gets the native UI object.
+   * 
+   * @return the native UI object.
+   */
+  public abstract UiNodeAdapter<DELEGATE> getAdapter();
+
+  /**
+   * This method gets the native UI object.
+   * 
+   * @see #getAdapter()
+   * @see UiNodeAdapter#getDelegate()
+   * 
+   * @return the native UI object.
+   */
+  protected DELEGATE getDelegate() {
+
+    return getAdapter().getDelegate();
+  }
+
+  /**
    * {@inheritDoc}
    */
   public UiNode getParent() {
@@ -80,6 +96,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
 
     if (!this.disposed) {
       setParent(null);
+      getAdapter().dispose();
       this.disposed = true;
     }
   }
@@ -104,26 +121,12 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   }
 
   /**
-   * This method allows to determines if this object has been made invisible. It
-   * always returns <code>false</code> by default. You can override it in
-   * {@link UiNode} implementations that can be made invisible by the user, e.g.
-   * a {@link UiWindow} that can be closed.
-   * 
-   * @return <code>true</code> if invisible and visibility can be influenced by
-   *         the user, <code>false</code> otherwise.
-   */
-  protected boolean doIsInvisible() {
-
-    return false;
-  }
-
-  /**
    * {@inheritDoc}
    */
   public VisibleState getVisibleState() {
 
     if (this.visibleState.isVisible()) {
-      if (doIsInvisible()) {
+      if (!getAdapter().isVisible()) {
         // this object has been made invisible by the user in the meantime...
         this.visibleState = VisibleState.HIDDEN;
       } else if (this.parent != null) {
@@ -156,7 +159,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   protected void doSetVisible(boolean visible) {
 
-    throw new UnsupportedOperationException();
+    getAdapter().setVisible(visible);
   }
 
   /**
@@ -169,7 +172,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
         if (!visible) {
           doSetVisible(visible);
           this.visibleState = VisibleState.HIDDEN;
-        } else if (doIsInvisible()) {
+        } else if (!getAdapter().isVisible()) {
           doSetVisible(visible);
         }
         break;
@@ -195,17 +198,14 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    * This method enables or disables the underlying UI object according to the
    * given <code>enabled</code> flag. It is invoked from
    * {@link #setEnabled(boolean)} if the local enabled-flag of this object
-   * changed.<br/>
-   * This default implementation throws a {@link UnsupportedOperationException}.
-   * You need to override this in subclasses that implement
-   * {@link UiWriteEnabled}.
+   * changed.
    * 
    * @param enabled - <code>true</code> if the object shall be enabled,
    *        <code>false</code> if it shall be disabled.
    */
   protected void doSetEnabled(boolean enabled) {
 
-    throw new UnsupportedOperationException();
+    getAdapter().setEnabled(enabled);
   }
 
   /**
@@ -216,7 +216,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
     switch (this.enabledState) {
       case ENABLED:
         if (!enabled) {
-          doSetEnabled(false);
+          getAdapter().setEnabled(false);
           this.enabledState = EnabledState.DISABLED;
         }
         break;
@@ -225,7 +225,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
           if ((this.parent != null) && (!this.parent.isEnabled())) {
             this.enabledState = EnabledState.BLOCKED;
           } else {
-            doSetEnabled(true);
+            getAdapter().setEnabled(true);
             this.enabledState = EnabledState.ENABLED;
           }
         }
@@ -295,6 +295,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
       throw new IllegalStateException("Object is disposed!");
     }
     this.parent = newParent;
+    getAdapter().setParent(newParent);
   }
 
   /**
@@ -365,11 +366,9 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   }
 
   /**
-   * This method invokes an action by notifying all registered listeners.
-   * 
-   * @param action is the action that is invoked.
+   * {@inheritDoc}
    */
-  public void fireEvent(UiEventType action) {
+  public void sendEvent(UiEventType action) {
 
     if (this.listeners != null) {
       // TODO: concurrency problem if a listener is added during loop
@@ -414,13 +413,19 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
   }
 
   /**
-   * This method gets the {@link #getStyles() styles} as {@link Set}.
-   * 
-   * @return the {@link #getStyles() styles} as {@link Set}.
+   * {@inheritDoc}
    */
-  protected Set<String> getStylesSet() {
+  public String getStyles() {
 
-    return this.stylesSet;
+    return getAdapter().getStyles();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean hasStyle(String style) {
+
+    return getAdapter().hasStyle(style);
   }
 
   /**
@@ -428,33 +433,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   public void setStyles(String styles) {
 
-    if (this.stylesSet != null) {
-      this.stylesSet.clear();
-    }
-    if ((styles == null) || (styles.length() == 0)) {
-      return;
-    }
-    String[] strings = styles.split(" ");
-    if (strings.length == 1) {
-      doSetStyles(strings[0]);
-    } else if (strings.length > 1) {
-      if (this.stylesSet == null) {
-        this.stylesSet = new HashSet<String>();
-      }
-      for (String style : strings) {
-        if (!style.isEmpty()) {
-          this.stylesSet.add(style);
-        }
-      }
-      StringBuilder sb = new StringBuilder(styles.length());
-      for (String style : this.stylesSet) {
-        if (sb.length() > 0) {
-          sb.append(' ');
-        }
-        sb.append(style);
-      }
-      doSetStyles(sb.toString());
-    }
+    getAdapter().setStyles(styles);
   }
 
   /**
@@ -462,28 +441,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   public void addStyle(String style) {
 
-    if (style.isEmpty()) {
-      return;
-    }
-    if (style.contains(" ")) {
-      throw new IllegalArgumentException();
-    }
-    String currentStyles = getStyles();
-    if (this.stylesSet == null) {
-      if (currentStyles.isEmpty()) {
-        doSetStyles(style);
-      } else if (!currentStyles.equals(style)) {
-        this.stylesSet = new HashSet<String>();
-        this.stylesSet.add(currentStyles);
-        this.stylesSet.add(style);
-        doSetStyles(currentStyles + " " + style);
-      }
-    } else {
-      boolean added = this.stylesSet.add(style);
-      if (added) {
-        doSetStyles(currentStyles + " " + style);
-      }
-    }
+    getAdapter().addStyle(style);
   }
 
   /**
@@ -491,31 +449,7 @@ public abstract class AbstractUiNode extends AbstractUiObject implements UiNode,
    */
   public void removeStyle(String style) {
 
-    if (style.isEmpty()) {
-      return;
-    }
-    if (style.contains(" ")) {
-      throw new IllegalArgumentException();
-    }
-    String currentStyles = getStyles();
-    if (this.stylesSet == null) {
-      if (currentStyles.equals(style)) {
-        doSetStyles("");
-      }
-    } else {
-      boolean removed = this.stylesSet.remove(style);
-      if (removed) {
-        StringBuilder sb = new StringBuilder(currentStyles.length() - style.length() - 1);
-        for (String s : this.stylesSet) {
-          if (sb.length() > 0) {
-            sb.append(' ');
-          }
-          sb.append(s);
-        }
-        doSetStyles(sb.toString());
-      }
-    }
-
+    getAdapter().removeStyle(style);
   }
 
 }

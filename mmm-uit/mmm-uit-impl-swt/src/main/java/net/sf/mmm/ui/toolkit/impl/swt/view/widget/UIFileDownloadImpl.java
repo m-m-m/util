@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncButtonAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncFileDialogAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -21,7 +22,7 @@ import org.eclipse.swt.widgets.Listener;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownload {
+public class UIFileDownloadImpl extends AbstractUiWidgetSwt<Button> implements UiFileDownload {
 
   /**
    * This inner class implements the listener that handles the button selection.
@@ -65,10 +66,10 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
 
     super(uiFactory);
     this.uiFileAccess = access;
-    this.syncAccess = new SyncButtonAccess(uiFactory, SWT.DEFAULT);
+    this.syncAccess = new SyncButtonAccess(uiFactory, this, SWT.DEFAULT);
     this.syncAccess.setText("Save");
     this.syncAccess.addListener(SWT.Selection, new SelectionListener());
-    this.syncDialgAccess = new SyncFileDialogAccess(uiFactory, SWT.SAVE);
+    this.syncDialgAccess = new SyncFileDialogAccess(uiFactory, this, SWT.SAVE);
     // TODO: filename
     this.syncDialgAccess.setFilename(this.uiFileAccess.getUrl());
     // this.fileChooser = new FileDialog(getSwtParentShell(), SWT.SAVE);
@@ -79,7 +80,7 @@ public class UIFileDownloadImpl extends AbstractUIWidget implements UiFileDownlo
    * {@inheritDoc}
    */
   @Override
-  public AbstractSyncControlAccess getSyncAccess() {
+  public AbstractSyncControlAccess<Button> getAdapter() {
 
     return this.syncAccess;
   }

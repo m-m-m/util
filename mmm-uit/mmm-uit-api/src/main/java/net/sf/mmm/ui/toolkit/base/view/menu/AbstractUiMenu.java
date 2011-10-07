@@ -15,20 +15,19 @@ import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
-import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
 /**
  * This is the base implementation of the UIMenu interface.
  * 
- * @param <N> is the generic type of the {@link #getNativeUiObject() native UI
- *        object}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
+public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGATE> implements
+    UiMenu {
 
   /** the menu entries */
-  private final List<UiMenuItem> items;
+  private final List<AbstractUiMenuItem<?>> items;
 
   /**
    * The constructor.
@@ -38,15 +37,16 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
   public AbstractUiMenu(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
-    this.items = new ArrayList<UiMenuItem>();
+    this.items = new ArrayList<AbstractUiMenuItem<?>>();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
-    return TYPE;
+    return UiMenu.TYPE;
   }
 
   /**
@@ -60,7 +60,7 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
   /**
    * {@inheritDoc}
    */
-  public Iterator<UiMenuItem> getItems() {
+  public Iterator<? extends UiMenuItem> getItems() {
 
     return this.items.iterator();
   }
@@ -105,7 +105,7 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
    */
   public UiMenuItem addItem(String name, UiEventListener action, ButtonStyle style) {
 
-    UiMenuItem menuItem = createMenuItem(name, style);
+    AbstractUiMenuItem<?> menuItem = createMenuItem(name, style);
     this.items.add(menuItem);
     if (action != null) {
       menuItem.addListener(action);
@@ -123,14 +123,14 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
    * @param style is the style defining how the item is visualized and behaves.
    * @return the created menu item.
    */
-  protected abstract UiMenuItem createMenuItem(String name, ButtonStyle style);
+  protected abstract AbstractUiMenuItem<?> createMenuItem(String name, ButtonStyle style);
 
   /**
    * {@inheritDoc}
    */
   public UiMenu addSubMenu(String name) {
 
-    UiMenu menu = createSubMenu(name);
+    AbstractUiMenu<?> menu = createSubMenu(name);
     this.items.add(menu);
     return menu;
   }
@@ -143,7 +143,7 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
    * @param name is the name of the sub-menu.
    * @return the created sub-menu.
    */
-  protected abstract UiMenu createSubMenu(String name);
+  protected abstract AbstractUiMenu<DELEGATE> createSubMenu(String name);
 
   /**
    * {@inheritDoc}
@@ -176,8 +176,8 @@ public abstract class AbstractUiMenu extends AbstractUiNode implements UiMenu {
   public void refresh(UIRefreshEvent event) {
 
     super.refresh(event);
-    for (UiMenuItem menuItem : this.items) {
-      ((AbstractUiNode) menuItem).refresh(event);
+    for (AbstractUiMenuItem<?> menuItem : this.items) {
+      menuItem.refresh(event);
     }
   }
 

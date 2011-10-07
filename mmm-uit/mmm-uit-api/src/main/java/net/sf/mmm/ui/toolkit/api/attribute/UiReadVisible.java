@@ -16,15 +16,6 @@ import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 public interface UiReadVisible {
 
   /**
-   * This method gets the {@link VisibleState} of this object.
-   * 
-   * @see VisibleState#isVisible()
-   * 
-   * @return the {@link VisibleState}.
-   */
-  VisibleState getVisibleState();
-
-  /**
    * This method determines if this object is displayed to the user. It is a
    * shortcut for:<br/>
    * <code>{@link #getVisibleState()}.isVisible()</code>

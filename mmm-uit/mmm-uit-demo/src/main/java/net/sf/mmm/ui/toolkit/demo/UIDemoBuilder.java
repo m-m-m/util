@@ -4,11 +4,7 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.common.Alignment;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.common.Filling;
-import net.sf.mmm.ui.toolkit.api.common.Insets;
-import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
@@ -18,7 +14,9 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridRow;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
@@ -36,7 +34,6 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
-import net.sf.mmm.ui.toolkit.base.feature.MaximumSizer;
 import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUITreeModel;
@@ -63,19 +60,19 @@ public class UIDemoBuilder {
   public static UiTabPanel createTabbedPanel(UiFactory factory) {
 
     UiTabPanel tabbedPanel = factory.createTabbedPanel();
-    UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
-    final MaximumSizer sizer = new MaximumSizer(true, false);
-    addEditorProperty(panel, "First name:", factory.createTextField(), sizer);
-    addEditorProperty(panel, "Last name:", factory.createTextField(), sizer);
-    addEditorProperty(panel, "Login:", factory.createTextField(), sizer);
-    addEditorProperty(panel, "Phone:", factory.createTextField(), sizer);
-    addEditorProperty(panel, "Room:", factory.createTextField(), sizer);
-    UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
-    LayoutConstraints constraints = new LayoutConstraints(Alignment.CENTER, Filling.NONE, 0,
-        Insets.SMALL_SPACE_HORIZONTAL);
-    buttonPanel.addChild(factory.createButton("Create"), constraints);
-    buttonPanel.addChild(factory.createButton("Cancel"), constraints);
-    panel.addChild(buttonPanel, LayoutConstraints.FIXED_HORIZONTAL);
+    UiGridPanel panel = factory.createGridPanel();
+    addEditorProperty(panel, "First name:", factory.createTextField());
+    addEditorProperty(panel, "Last name:", factory.createTextField());
+    addEditorProperty(panel, "Login:", factory.createTextField());
+    addEditorProperty(panel, "Phone:", factory.createTextField());
+    addEditorProperty(panel, "Room:", factory.createTextField());
+    UiSimplePanel buttonPanel = factory.createSimplePanel(Orientation.HORIZONTAL);
+    buttonPanel.addChild(factory.createButton("Create"));
+    buttonPanel.addChild(factory.createButton("Cancel"));
+    UiGridRow buttonRow = panel.createRow();
+    buttonRow.addChild(buttonPanel);
+    buttonRow.getCellInfo(0).setColumnSpan(2);
+    panel.addChild(buttonRow);
     tabbedPanel.addChild(panel, "home");
     tabbedPanel.addChild(createLayoutPanel(factory), "search");
     tabbedPanel.addChild(createSplitPanel(factory), "view");
@@ -85,34 +82,37 @@ public class UIDemoBuilder {
     return tabbedPanel;
   }
 
-  public static void addEditorProperty(UiSlicePanel editorPanel, String labelText,
-      UiElement component, MaximumSizer sizer) {
+  public static void addEditorProperty(UiGridPanel editorPanel, String labelText,
+      UiElement component) {
 
     UiFactory factory = editorPanel.getFactory();
-    UiSlicePanel fieldEditorPanel = factory.createPanel(Orientation.HORIZONTAL);
+    UiGridRow row = editorPanel.createRow();
     UiLabel label = factory.createLabel(labelText);
-    sizer.add(label);
-    fieldEditorPanel.addChild(label, new LayoutConstraints(Alignment.LEFT, Filling.NONE, 0,
-        Insets.SMALL_SPACE_HORIZONTAL, sizer));
-    fieldEditorPanel.addChild(component,
-        new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL));
-    editorPanel.addChild(fieldEditorPanel, new LayoutConstraints(Alignment.CENTER,
-        Filling.HORIZONTAL));
+    row.addChild(label);
+    row.addChild(component);
+    editorPanel.addChild(row);
+    // fieldEditorPanel.addChild(label, new LayoutConstraints(Alignment.LEFT,
+    // Filling.NONE, 0,
+    // Insets.SMALL_SPACE_HORIZONTAL, sizer));
+    // fieldEditorPanel.addChild(component,
+    // new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL));
+    // editorPanel.addChild(fieldEditorPanel, new
+    // LayoutConstraints(Alignment.CENTER,
+    // Filling.HORIZONTAL));
 
   }
 
   public static UiComposite createEditorPanel(final UiFactory factory) {
 
-    final UiSlicePanel editorPanel = factory.createPanel(Orientation.VERTICAL);
-    final MaximumSizer sizer = new MaximumSizer(true, false);
-    addEditorProperty(editorPanel, "Name:", factory.createTextField(), sizer);
-    addEditorProperty(editorPanel, "Quality-Ranking:", factory.createTextField(), sizer);
+    final UiGridPanel editorPanel = factory.createGridPanel();
+    addEditorProperty(editorPanel, "Name:", factory.createTextField());
+    addEditorProperty(editorPanel, "Quality-Ranking:", factory.createTextField());
     NumericUIRangeModel sbModel = new NumericUIRangeModel();
     sbModel.setMaximumValue(50);
     sbModel.setMinimumValue(-10);
     UiSpinBox<Integer> spinBox = factory.createSpinBox(sbModel);
     spinBox.setEditable(true);
-    addEditorProperty(editorPanel, "Port:", spinBox, sizer);
+    addEditorProperty(editorPanel, "Port:", spinBox);
     final NumericUIRangeModel maxSlideModel = new NumericUIRangeModel(2, 100);
     final UiSlideBar maxSlideBar = factory.createSlideBar(maxSlideModel);
     final NumericUIRangeModel slideModel = new NumericUIRangeModel(0, 7);
@@ -142,15 +142,15 @@ public class UIDemoBuilder {
       }
 
     });
-    addEditorProperty(editorPanel, "Maximum:", maxSlideBar, sizer);
-    addEditorProperty(editorPanel, "Ranking:", slideBar, sizer);
+    addEditorProperty(editorPanel, "Maximum:", maxSlideBar);
+    addEditorProperty(editorPanel, "Ranking:", slideBar);
     progressBar.setProgress(70);
-    addEditorProperty(editorPanel, "Progress:", progressBar, sizer);
+    addEditorProperty(editorPanel, "Progress:", progressBar);
 
     // TODO: this is a stupid and unix specific example!
     UiFileAccessSimple access = new UiFileAccessSimple("/etc/mtab");
     UiFileDownload download = factory.createFileDownload(access);
-    addEditorProperty(editorPanel, "BLOB:", download, sizer);
+    addEditorProperty(editorPanel, "BLOB:", download);
 
     UiImage icon = null;
     // TODO add icon as resource and load it this way!
@@ -158,11 +158,11 @@ public class UIDemoBuilder {
     icon = factory.createImage(new UiFileAccessSimple("src/main/resources/" + iconPath));
 
     UiDateBox dateEditor = factory.createDateEditor();
-    addEditorProperty(editorPanel, "Date:", dateEditor, sizer);
+    addEditorProperty(editorPanel, "Date:", dateEditor);
 
     UiButton imageButton = factory.createButton("Icon", ButtonStyle.DEFAULT);
     imageButton.setImage(icon);
-    addEditorProperty(editorPanel, "IconButton:", imageButton, sizer);
+    addEditorProperty(editorPanel, "IconButton:", imageButton);
     imageButton.addListener(new UiEventListener() {
 
       /**
@@ -171,7 +171,7 @@ public class UIDemoBuilder {
       public void onEvent(UiNode source, UiEventType action) {
 
         UiButton testButton = factory.createButton("Test");
-        addEditorProperty(editorPanel, "Extra long special greedy Label:", testButton, sizer);
+        addEditorProperty(editorPanel, "Extra long special greedy Label:", testButton);
       }
     });
 
@@ -187,9 +187,11 @@ public class UIDemoBuilder {
     return splitPanel;
   }
 
-  public static UiSlicePanel createLayoutPanel(final UiFactory factory) {
+  public static UiSimplePanel createLayoutPanel(final UiFactory factory) {
 
-    final UiSlicePanel panel = factory.createPanel(Orientation.HORIZONTAL, "Panel");
+    // final UiSlicePanel panel = factory.createPanel(Orientation.HORIZONTAL,
+    // "Panel");
+    UiSimplePanel panel = factory.createSimplePanel(Orientation.HORIZONTAL);
     panel.addChild(UIDemoBuilder.createListPanel(factory, createDemoListModel()));
     panel.addChild(UIDemoBuilder.createTreePanel(factory));
     panel.addChild(UIDemoBuilder.createRadioPanel(factory));
@@ -208,13 +210,13 @@ public class UIDemoBuilder {
         factory.setScriptOrientation(so);
       }
     });
-    panel.addChild(button, new LayoutConstraints(Alignment.TOP_RIGHT, Filling.NONE, 1));
+    panel.addChild(button);
     return panel;
   }
 
-  public static UiSlicePanel createTablePanel(UiFactory factory) {
+  public static UiSimplePanel createTablePanel(UiFactory factory) {
 
-    final UiSlicePanel tablePanel = factory.createPanel(Orientation.VERTICAL, "Table");
+    final UiSimplePanel tablePanel = factory.createSimplePanel(Orientation.VERTICAL);
 
     final UiTable table = factory.createTable();
     UISimpleTableModel model = new UISimpleTableModel(10, 5);
@@ -237,19 +239,19 @@ public class UIDemoBuilder {
     return listModel;
   }
 
-  public static UiSlicePanel createListPanel(UiFactory factory,
+  public static UiSimplePanel createListPanel(UiFactory factory,
       final DefaultUIListModel<String> listModel) {
 
-    final UiSlicePanel listPanel = factory.createPanel(Orientation.VERTICAL, "List");
+    final UiSimplePanel listPanel = factory.createSimplePanel(Orientation.VERTICAL);
 
     final UiComboBox<String> combo = factory.createComboBox(listModel);
-    listPanel.addChild(combo, new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL, 0.0));
+    listPanel.addChild(combo);
 
     final UiList<String> list = factory.createList(listModel);
     listPanel.addChild(list);
     listModel.addElement("!");
 
-    final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UiSimplePanel buttonPanel = factory.createSimplePanel(Orientation.HORIZONTAL);
 
     final UiButton addButton = factory.createButton("add");
     addButton.addListener(new UiEventListener() {
@@ -279,7 +281,7 @@ public class UIDemoBuilder {
     buttonPanel.addChild(addButton);
     buttonPanel.addChild(removeButton);
 
-    listPanel.addChild(buttonPanel, LayoutConstraints.FIXED_NONE);
+    listPanel.addChild(buttonPanel);
 
     return listPanel;
 
@@ -367,9 +369,9 @@ public class UIDemoBuilder {
 
   }
 
-  public static UiSlicePanel createTreePanel(UiFactory factory) {
+  public static UiSimplePanel createTreePanel(UiFactory factory) {
 
-    final UiSlicePanel treePanel = factory.createPanel(Orientation.VERTICAL, "Tree");
+    final UiSimplePanel treePanel = factory.createSimplePanel(Orientation.VERTICAL);
 
     final UiTree tree = factory.createTree(false);
     final DefaultUITreeModel<String> treeModel = new DefaultUITreeModel<String>("root");
@@ -379,7 +381,7 @@ public class UIDemoBuilder {
     tree.setModel(treeModel);
     treePanel.addChild(tree);
 
-    final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UiSimplePanel buttonPanel = factory.createSimplePanel(Orientation.HORIZONTAL);
 
     final UiButton addButton = factory.createButton("add");
     addButton.addListener(new UiEventListener() {
@@ -405,39 +407,36 @@ public class UIDemoBuilder {
       }
     });
 
-    LayoutConstraints buttonConstraints = new LayoutConstraints(Alignment.CENTER, Filling.VERTICAL,
-        0, new Insets(4, 0, 4, 2));
-    buttonPanel.addChild(addButton, buttonConstraints);
-    buttonPanel.addChild(removeButton, buttonConstraints);
+    buttonPanel.addChild(addButton);
+    buttonPanel.addChild(removeButton);
 
-    treePanel.addChild(buttonPanel, LayoutConstraints.FIXED_NONE);
+    treePanel.addChild(buttonPanel);
 
     return treePanel;
   }
 
-  public static UiSlicePanel createModelPanel(UiFactory factory) {
+  public static UiSimplePanel createModelPanel(UiFactory factory) {
 
-    final UiSlicePanel modelPanel = factory.createPanel(Orientation.VERTICAL,
-        "Model-View-Controller");
+    final UiSimplePanel modelPanel = factory.createSimplePanel(Orientation.VERTICAL);
     final DefaultUIListModel<String> listModel = createDemoListModel();
 
     // add combo-box
     final UiComboBox<String> combo = factory.createComboBox(listModel, true);
-    final UiSlicePanel buttonPanel = factory.createPanel(Orientation.HORIZONTAL);
+    final UiSimplePanel buttonPanel = factory.createSimplePanel(Orientation.HORIZONTAL);
     final UiButton addButton = factory.createButton("add");
     final UiButton removeButton = factory.createButton("remove");
-    buttonPanel.addChild(addButton, LayoutConstraints.FIXED_HORIZONTAL);
-    buttonPanel.addChild(removeButton, LayoutConstraints.FIXED_HORIZONTAL);
+    buttonPanel.addChild(addButton);
+    buttonPanel.addChild(removeButton);
     buttonPanel.addChild(combo);
-    modelPanel.addChild(buttonPanel, LayoutConstraints.FIXED_HORIZONTAL);
+    modelPanel.addChild(buttonPanel);
 
     // spin-box
     UiSpinBox<String> spinBox = factory.createSpinBox(listModel);
-    modelPanel.addChild(spinBox, LayoutConstraints.FIXED_HORIZONTAL);
+    modelPanel.addChild(spinBox);
 
     // slide-bar
     UiSlideBar slideBar = factory.createSlideBar(listModel);
-    modelPanel.addChild(slideBar, LayoutConstraints.FIXED_HORIZONTAL);
+    modelPanel.addChild(slideBar);
 
     // add list
     final UiList<String> list = factory.createList(listModel);
@@ -469,9 +468,9 @@ public class UIDemoBuilder {
     return modelPanel;
   }
 
-  public static UiSlicePanel createRadioPanel(UiFactory factory) {
+  public static UiSimplePanel createRadioPanel(UiFactory factory) {
 
-    UiSlicePanel radioPanel = factory.createPanel(Orientation.VERTICAL, "Radios");
+    UiSimplePanel radioPanel = factory.createSimplePanel(Orientation.VERTICAL);
     UiButton rb1 = factory.createButton("selection 1", ButtonStyle.RADIO);
     radioPanel.addChild(rb1);
     UiButton rb2 = factory.createButton("selection 2", ButtonStyle.RADIO);

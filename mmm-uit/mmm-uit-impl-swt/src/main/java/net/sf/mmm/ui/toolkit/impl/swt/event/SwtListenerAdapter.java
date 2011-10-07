@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Listener;
 public class SwtListenerAdapter implements Listener {
 
   /** the component that triggers the event */
-  private AbstractUiNode object;
+  private AbstractUiNode<?> object;
 
   /**
    * The constructor.
@@ -26,7 +26,7 @@ public class SwtListenerAdapter implements Listener {
    * @param uiObject is the UI object that registers this listener and will send
    *        the events to registered listeners.
    */
-  public SwtListenerAdapter(AbstractUiNode uiObject) {
+  public SwtListenerAdapter(AbstractUiNode<?> uiObject) {
 
     super();
     this.object = uiObject;
@@ -39,28 +39,28 @@ public class SwtListenerAdapter implements Listener {
 
     switch (event.type) {
       case SWT.Selection:
-        this.object.fireEvent(UiEventType.CLICK);
+        this.object.sendEvent(UiEventType.CLICK);
         break;
       case SWT.Hide:
-        this.object.fireEvent(UiEventType.HIDE);
+        this.object.sendEvent(UiEventType.HIDE);
         break;
       case SWT.Show:
-        this.object.fireEvent(UiEventType.SHOW);
+        this.object.sendEvent(UiEventType.SHOW);
         break;
       case SWT.Iconify:
-        this.object.fireEvent(UiEventType.ICONIFY);
+        this.object.sendEvent(UiEventType.ICONIFY);
         break;
       case SWT.Deiconify:
-        this.object.fireEvent(UiEventType.DEICONIFY);
+        this.object.sendEvent(UiEventType.DEICONIFY);
         break;
       case SWT.Activate:
-        this.object.fireEvent(UiEventType.ACTIVATE);
+        this.object.sendEvent(UiEventType.ACTIVATE);
         break;
       case SWT.Deactivate:
-        this.object.fireEvent(UiEventType.DEACTIVATE);
+        this.object.sendEvent(UiEventType.DEACTIVATE);
         break;
       case SWT.Dispose:
-        this.object.fireEvent(UiEventType.DISPOSE);
+        this.object.sendEvent(UiEventType.DISPOSE);
         break;
       default :
         return;

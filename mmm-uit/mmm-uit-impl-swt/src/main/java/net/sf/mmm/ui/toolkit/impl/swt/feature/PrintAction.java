@@ -3,24 +3,26 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.feature;
 
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.printing.PrintDialog;
-import org.eclipse.swt.printing.Printer;
-import org.eclipse.swt.printing.PrinterData;
-import org.eclipse.swt.widgets.Shell;
-
-import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
-import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
+
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.printing.PrintDialog;
+import org.eclipse.swt.printing.Printer;
+import org.eclipse.swt.printing.PrinterData;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiFactory#createPrintUiAction(UiElement) print-action}
- * for SWT.
+ * {@link net.sf.mmm.ui.toolkit.api.UiFactory#createPrintUiAction(UiElement)
+ * print-action} for SWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -34,7 +36,8 @@ public class PrintAction extends AbstractAction implements UiEventListener {
    * The constructor.
    * 
    * @param printComponent is the component to be printed by this action.
-   * @param actionName is the {@link UiAction#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print
+   *        action.
    * @param jobName is the name of the print job.
    */
   public PrintAction(AbstractUiElement printComponent, String actionName, String jobName) {
@@ -58,7 +61,8 @@ public class PrintAction extends AbstractAction implements UiEventListener {
   public void onEvent(UiNode source, UiEventType action) {
 
     if (action == UiEventType.CLICK) {
-      Shell shell = this.component.getSyncAccess().getSwtObject().getShell();
+      Shell shell = ((AbstractSyncControlAccess<? extends Control>) this.component.getAdapter())
+          .getDelegate().getShell();
       PrintDialog printDialog = new PrintDialog(shell);
       PrinterData printerData = printDialog.open();
       if (printerData != null) {

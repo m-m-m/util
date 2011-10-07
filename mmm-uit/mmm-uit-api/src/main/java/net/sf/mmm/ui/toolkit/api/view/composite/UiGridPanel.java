@@ -12,12 +12,15 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * For flexible organization of the grid it is organized as a list of
  * {@link UiGridRow}s. This makes inserting or removing rows easy.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiGridPanel<E extends UiGridRow<? extends UiElement>> extends
-    UiExtendableComposite<E> {
+public interface UiGridPanel<CHILD extends UiGridRow<? extends UiElement>> extends
+    UiExtendableComposite<CHILD> {
+
+  /** @see #getType() */
+  String TYPE = "GridPanel";
 
   /**
    * This method creates a new {@link UiGridRow}. The number of columns in this
@@ -31,6 +34,6 @@ public interface UiGridPanel<E extends UiGridRow<? extends UiElement>> extends
    * 
    * @return the new {@link UiGridRow}.
    */
-  E createRow();
+  CHILD createRow();
 
 }

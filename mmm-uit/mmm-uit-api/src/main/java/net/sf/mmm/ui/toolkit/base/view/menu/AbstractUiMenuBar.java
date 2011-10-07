@@ -13,12 +13,13 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 
 /**
- * This is the base implementation of the UIMenuBar interface.
+ * This is the abstract base implementation of {@link UiMenuBar}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiMenuBar extends AbstractUiNode implements UiMenuBar {
+public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGATE> implements
+    UiMenuBar {
 
   /** maps the name of a menu (String) to a menu (UIMenu) */
   private Map<String, UiMenu> menuTable;

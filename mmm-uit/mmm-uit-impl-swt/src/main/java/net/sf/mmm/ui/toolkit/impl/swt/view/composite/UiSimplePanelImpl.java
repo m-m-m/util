@@ -5,26 +5,29 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is the implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel} interface
  * using SWT as the UI toolkit.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
+ * @param <CHILD> is the generic type of the {@link #getChild(int)
+ *        child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMultiComposite<E>
-    implements UiSimplePanel<E> {
+public class UiSimplePanelImpl<CHILD extends AbstractUiElement<? extends Control>> extends
+    AbstractUiMultiCompositeSwt<Composite, CHILD> implements UiSimplePanel<CHILD> {
 
-  /** @see #getSyncAccess() */
+  /** @see #getAdapter() */
   private final SyncCompositeAccess syncAccess;
 
   /** @see #getOrientation() */
@@ -39,7 +42,7 @@ public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMu
   public UiSimplePanelImpl(UiFactorySwt uiFactory, Orientation orientation) {
 
     super(uiFactory);
-    this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.NORMAL);
+    this.syncAccess = new SyncCompositeAccess(uiFactory, this, SWT.NORMAL);
     RowLayout rowLayout = new RowLayout();
     rowLayout.wrap = false;
     rowLayout.pack = false;
@@ -56,7 +59,7 @@ public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMu
   /**
    * {@inheritDoc}
    */
-  public void addChild(E child) {
+  public void addChild(CHILD child) {
 
     // c.getSyncAccess().setParentAccess(this.syncAccess);
     child.setParent(this);
@@ -66,7 +69,7 @@ public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMu
   /**
    * {@inheritDoc}
    */
-  public void insertChild(E child, int position) {
+  public void insertChild(CHILD child, int position) {
 
     // c.getSyncAccess().setParentAccess(this.syncAccess);
     // child.getSyncAccess().setLayoutData(constraints);
@@ -86,7 +89,7 @@ public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMu
    * {@inheritDoc}
    */
   @Override
-  public SyncCompositeAccess getActiveSyncAccess() {
+  public SyncCompositeAccess getAdapter() {
 
     return this.syncAccess;
   }

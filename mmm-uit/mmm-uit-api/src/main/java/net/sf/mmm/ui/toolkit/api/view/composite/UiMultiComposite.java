@@ -9,11 +9,11 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * This is the abstract interface for a panel. A panel is a {@link UiComposite}
  * that can dynamically aggregate multiple other {@link UiElement}s. <br>
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiMultiComposite<E extends UiElement> extends UiComposite<E> {
+public abstract interface UiMultiComposite<CHILD extends UiElement> extends UiComposite<CHILD> {
 
   /**
    * This method removes the given <code>component</code> from this panel. <br>
@@ -24,7 +24,7 @@ public abstract interface UiMultiComposite<E extends UiElement> extends UiCompos
    *         <code>false</code> otherwise (it was NOT in the panels component
    *         list).
    */
-  boolean removeChild(E component);
+  boolean removeChild(CHILD component);
 
   /**
    * This method removes the component at the given index from this panel.
@@ -34,6 +34,6 @@ public abstract interface UiMultiComposite<E extends UiElement> extends UiCompos
    * @param index is the position of the component to remove.
    * @return the component that has been removed.
    */
-  UiElement removeChild(int index);
+  CHILD removeChild(int index);
 
 }

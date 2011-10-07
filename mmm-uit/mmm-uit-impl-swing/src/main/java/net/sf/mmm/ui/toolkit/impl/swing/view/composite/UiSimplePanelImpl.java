@@ -8,24 +8,21 @@ import javax.swing.JPanel;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
-import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
 
 /**
  * This class is the implementation of {@link UiSimplePanel} using swing.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMultiComposite<E>
-    implements UiSimplePanel<E> {
+public class UiSimplePanelImpl<CHILD extends AbstractUiElement<? extends JComponent>> extends
+    AbstractUiMultiCompositeSwing<JPanel, CHILD> implements UiSimplePanel<CHILD> {
 
   /** @see #getOrientation() */
   private Orientation orientation;
-
-  /** @see #getSwingComponent() */
-  private final JPanel panel;
 
   /**
    * The constructor.
@@ -33,40 +30,34 @@ public class UiSimplePanelImpl<E extends AbstractUiElement> extends AbstractUiMu
    * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param orientation is the {@link #getOrientation() orientation}.
    */
-  public UiSimplePanelImpl(UIFactorySwing uiFactory, Orientation orientation) {
+  public UiSimplePanelImpl(UiFactorySwing uiFactory, Orientation orientation) {
 
-    super(uiFactory);
+    super(uiFactory, new JPanel());
+    // TODO: layout manager!
     this.orientation = orientation;
-    this.panel = new JPanel();
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
-  public JComponent getSwingComponent() {
+  public void addChild(CHILD component) {
 
-    return this.panel;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void addChild(E component) {
-
-    this.panel.add(component.getSwingComponent());
+    JPanel delegate = getDelegate();
+    JComponent toplevelDelegate = (JComponent) component.getAdapter().getToplevelDelegate();
+    delegate.add(toplevelDelegate);
     doAddChild(component);
-    this.panel.updateUI();
+    delegate.updateUI();
   }
 
   /**
    * {@inheritDoc}
    */
-  public void insertChild(E component, int index) {
+  public void insertChild(CHILD component, int index) {
 
-    this.panel.add(component.getSwingComponent(), index);
+    JPanel delegate = getDelegate();
+    delegate.add(component.getAdapter().getDelegate(), index);
     doInsertChild(component, index);
-    this.panel.updateUI();
+    delegate.updateUI();
   }
 
   /**

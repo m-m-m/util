@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncButtonAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
 
 /**
  * This is the implementation of the
@@ -20,13 +21,13 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIButtonImpl extends AbstractUIWidget implements UiButton {
+public class UIButtonImpl extends AbstractUiWidgetSwt<Button> implements UiButton {
 
-  /** the style of the button */
-  private final ButtonStyle style;
+  /** @see #getButtonStyle() */
+  private final ButtonStyle buttonStyle;
 
-  /** the synchronous access to the button */
-  private final SyncButtonAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncButtonAccess adapter;
 
   /** the icon */
   private UiImageImpl icon;
@@ -40,9 +41,9 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   public UIButtonImpl(UiFactorySwt uiFactory, ButtonStyle buttonStyle) {
 
     super(uiFactory);
-    this.style = buttonStyle;
+    this.buttonStyle = buttonStyle;
     int swtStyle = UiFactorySwt.convertButtonStyle(buttonStyle);
-    this.syncAccess = new SyncButtonAccess(uiFactory, swtStyle);
+    this.adapter = new SyncButtonAccess(uiFactory, this, swtStyle);
     this.icon = null;
   }
 
@@ -51,7 +52,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public String getValue() {
 
-    return this.syncAccess.getText();
+    return this.adapter.getText();
   }
 
   /**
@@ -59,7 +60,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public void setValue(String text) {
 
-    this.syncAccess.setText(text);
+    this.adapter.setText(text);
   }
 
   /**
@@ -76,7 +77,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
   @Override
   protected boolean doInitializeListener() {
 
-    this.syncAccess.addListener(SWT.Selection, createSwtListener());
+    this.adapter.addListener(SWT.Selection, getAdapter());
     return true;
   }
 
@@ -85,7 +86,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public ButtonStyle getButtonStyle() {
 
-    return this.style;
+    return this.buttonStyle;
   }
 
   /**
@@ -93,7 +94,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public boolean isSelected() {
 
-    return this.syncAccess.isSelected();
+    return this.adapter.isSelected();
   }
 
   /**
@@ -101,7 +102,7 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    */
   public void setSelected(boolean selected) {
 
-    this.syncAccess.setSelected(selected);
+    this.adapter.setSelected(selected);
   }
 
   /**
@@ -119,9 +120,9 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
 
     this.icon = (UiImageImpl) newIcon;
     if (this.icon == null) {
-      this.syncAccess.setImage(null);
+      this.adapter.setImage(null);
     } else {
-      this.syncAccess.setImage(this.icon.getSwtImage());
+      this.adapter.setImage(this.icon.getSwtImage());
     }
   }
 
@@ -129,9 +130,9 @@ public class UIButtonImpl extends AbstractUIWidget implements UiButton {
    * {@inheritDoc}
    */
   @Override
-  public SyncButtonAccess getSyncAccess() {
+  public SyncButtonAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
 }

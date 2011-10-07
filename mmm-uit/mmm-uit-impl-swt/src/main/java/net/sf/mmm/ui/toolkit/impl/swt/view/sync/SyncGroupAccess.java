@@ -3,9 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.Group;
-
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Group;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,11 +15,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncGroupAccess extends AbstractSyncCompositeAccess {
+public class SyncGroupAccess extends AbstractSyncCompositeAccess<Group> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Group#setText(String) text} of the group.
+   * operation to set the {@link org.eclipse.swt.widgets.Group#setText(String)
+   * text} of the group.
    */
   protected static final String OPERATION_SET_TEXT = "setText";
 
@@ -31,27 +33,29 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        group.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the group.
    */
-  public SyncGroupAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncGroupAccess(UiFactorySwt uiFactory, UiBorderPanel<? extends UiElement> node,
+      int swtStyle) {
 
-    this(uiFactory, swtStyle, null);
+    this(uiFactory, node, swtStyle, null);
   }
 
   /**
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        group.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the group.
    * @param swtGroup is the group to access.
    */
-  public SyncGroupAccess(UiFactorySwt uiFactory, int swtStyle, Group swtGroup) {
+  public SyncGroupAccess(UiFactorySwt uiFactory, UiBorderPanel<? extends UiElement> node,
+      int swtStyle, Group swtGroup) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.group = swtGroup;
     this.text = null;
   }
@@ -59,8 +63,7 @@ public class SyncGroupAccess extends AbstractSyncCompositeAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Group getSwtObject() {
+  public Group getDelegate() {
 
     return this.group;
   }

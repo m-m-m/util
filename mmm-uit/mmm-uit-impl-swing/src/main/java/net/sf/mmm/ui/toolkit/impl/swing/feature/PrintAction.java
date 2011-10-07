@@ -13,19 +13,19 @@ import java.awt.print.PrinterJob;
 import javax.swing.JComponent;
 
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.feature.AbstractAction;
-import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiFactory#createPrintUiAction(UiElement) print-action}
- * for SWING.
+ * {@link net.sf.mmm.ui.toolkit.api.UiFactory#createPrintUiAction(UiElement)
+ * print-action} for SWING.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -33,16 +33,17 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
 public class PrintAction extends AbstractAction implements UiEventListener, Printable {
 
   /** the component to be printed */
-  private final AbstractUiElement component;
+  private final AbstractUiElement<JComponent> component;
 
   /**
    * The constructor.
    * 
    * @param printComponent is the component to be printed by this action.
-   * @param actionName is the {@link UiAction#getName() name} of the print action.
+   * @param actionName is the {@link UiAction#getName() name} of the print
+   *        action.
    * @param jobName is the name of the print job.
    */
-  public PrintAction(AbstractUiElement printComponent, String actionName, String jobName) {
+  public PrintAction(AbstractUiElement<JComponent> printComponent, String actionName, String jobName) {
 
     super(actionName);
     setId(jobName);
@@ -93,7 +94,7 @@ public class PrintAction extends AbstractAction implements UiEventListener, Prin
       return NO_SUCH_PAGE;
     } else {
       ((Graphics2D) graphics).translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-      JComponent c = this.component.getSwingComponent();
+      JComponent c = this.component.getAdapter().getDelegate();
       boolean doubleBuffered = c.isDoubleBuffered();
       if (doubleBuffered) {
         c.setDoubleBuffered(false);

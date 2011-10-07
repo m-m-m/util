@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.widgets.Composite;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
+public class SyncSashFormAccess extends AbstractSyncCompositeAccess<SashForm> {
 
   /**
    * operation to set the {@link SashForm#setWeights(int[]) weight} of the
@@ -39,27 +39,28 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        sash-form.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the sash-form.
    */
-  public SyncSashFormAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncSashFormAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle) {
 
-    this(uiFactory, swtStyle, null);
+    this(uiFactory, node, swtStyle, null);
   }
 
   /**
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        sash-form.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the sash-form.
    * @param swtSashForm is the widget to access.
    */
-  public SyncSashFormAccess(UiFactorySwt uiFactory, int swtStyle, SashForm swtSashForm) {
+  public SyncSashFormAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle,
+      SashForm swtSashForm) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.sashForm = swtSashForm;
     this.weights = new int[2];
   }
@@ -67,8 +68,7 @@ public class SyncSashFormAccess extends AbstractSyncCompositeAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Composite getSwtObject() {
+  public SashForm getDelegate() {
 
     return this.sashForm;
   }

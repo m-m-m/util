@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * two {@link UiElement components}. The {@link #getDecorator() first component}
  * will be layouted with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE
  * fixed} size on the top/left, the {@link #getComponent() other component} will
- * be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and located at
- * the bottom/right.<br>
+ * be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and located
+ * at the bottom/right.<br>
  * The intention of this composite is to simplify the layout management.
  * 
  * @param <D> is the templated type of the {@link #getDecorator() decorating
@@ -21,12 +21,13 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  *        component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  * @deprecated - nonsense, remove!
  */
 @Deprecated
-public interface UiDecoratedComponent<E extends UiElement, D extends E, C extends E> extends
-    UiComposite<E>, UiReadOrientation {
+public interface UiDecoratedComponent<CHILD extends UiElement, D extends CHILD, C extends CHILD>
+    extends UiComposite<CHILD>, UiReadOrientation {
 
   /** the type of this object */
   String TYPE = "DecoratedComponent";

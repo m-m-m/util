@@ -12,30 +12,36 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiDialog;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
+import net.sf.mmm.ui.toolkit.base.view.composite.AbstractUiComposite;
 
 /**
  * This is the base implementation of the UIWindow interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type for the {@link #getAdapter() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindow {
+public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE> implements
+    UiWindow {
 
   /** the composite content of this window */
-  private UiComposite<? extends UiElement> composite;
+  private AbstractUiComposite<?, ? extends UiElement> composite;
 
   /**
    * The constructor.
    * 
    * @param uiFactory is the {@link #getFactory() factory} instance.
-   * @param parentObject is the {@link #getParent() parent} of this object. It
-   *        may be <code>null</code>.
    */
-  public AbstractUiWindow(AbstractUiFactory uiFactory, UiWindow parentObject) {
+  public AbstractUiWindow(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
-    setParent(parentObject);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public abstract UiWindowAdapter<DELEGATE> getAdapter();
 
   /**
    * This method gets access to read the size of the desktop.<br>
@@ -48,24 +54,6 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
 
     return getFactory().getDisplay();
   }
-
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // public VisibleState getVisibleState() {
-  //
-  // // no inheritance by default
-  // return doGetVisibleState();
-  // }
-
-  /**
-   * This method is declared abstract as it has to be overridden.
-   * 
-   * {@inheritDoc}
-   */
-  @Override
-  protected abstract boolean doIsInvisible();
 
   /**
    * {@inheritDoc}
@@ -87,7 +75,7 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
   /**
    * {@inheritDoc}
    */
-  public UiComposite<? extends UiElement> getComposite() {
+  public AbstractUiComposite<?, ? extends UiElement> getComposite() {
 
     return this.composite;
   }
@@ -101,15 +89,88 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
    * 
    * @param newComposite is the composite to register.
    */
+  @SuppressWarnings("unchecked")
   protected void doSetComposite(UiComposite<? extends UiElement> newComposite) {
 
     if (this.composite != null) {
       // The current composite is replaced by a new one. Set the parent of
       // the old (current) one to null.
-      ((AbstractUiNode) this.composite).setParent(null);
+      this.composite.setParent(null);
     }
-    this.composite = newComposite;
-    ((AbstractUiNode) newComposite).setParent(this);
+    this.composite = ((AbstractUiComposite<?, ? extends UiElement>) newComposite);
+    this.composite.setParent(this);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setTitle(String title) {
+
+    getAdapter().setTitle(title);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setSize(int width, int height) {
+
+    getAdapter().setSize(width, height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isResizable() {
+
+    return getAdapter().isResizable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setPosition(int x, int y) {
+
+    getAdapter().setPosition(x, y);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getWidth() {
+
+    return getAdapter().getWidth();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getHeight() {
+
+    return getAdapter().getHeight();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getTitle() {
+
+    return getAdapter().getTitle();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getX() {
+
+    return getAdapter().getX();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getY() {
+
+    return getAdapter().getY();
   }
 
   /**
@@ -152,7 +213,7 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
 
     super.refresh(event);
     if (this.composite != null) {
-      ((AbstractUiNode) this.composite).refresh(event);
+      this.composite.refresh(event);
     }
   }
 
@@ -162,7 +223,16 @@ public abstract class AbstractUiWindow extends AbstractUiNode implements UiWindo
   @Override
   public void dispose() {
 
+    super.dispose();
     getFactory().removeWindow(this);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void pack() {
+
+    getAdapter().pack();
   }
 
   /**

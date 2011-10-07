@@ -52,7 +52,7 @@ public class UITestRunner2 {
   public static void main(String[] args) {
 
     String title = UITestRunner2.class.getSimpleName();
-    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing(title));
+    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing(title));
     runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt(title));
   }
 

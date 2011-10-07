@@ -3,10 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -14,32 +15,31 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncButtonAccess extends AbstractSyncControlAccess {
+public class SyncButtonAccess extends AbstractSyncControlAccess<Button> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the button.
+   * operation to set the {@link org.eclipse.swt.widgets.Button#setText(String)
+   * text} of the button.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Button#setSelection(boolean) selection-status}
-   * of the button.
+   * {@link org.eclipse.swt.widgets.Button#setSelection(boolean)
+   * selection-status} of the button.
    */
   private static final String OPERATION_SET_SELECTED = "setSelected";
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Button#getSelection() selection-status} of
-   * the button.
+   * operation to get the {@link org.eclipse.swt.widgets.Button#getSelection()
+   * selection-status} of the button.
    */
   private static final String OPERATION_IS_SELECTED = "getSelected";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Button#setImage(org.eclipse.swt.graphics.Image) image}
-   * of the button.
+   * {@link org.eclipse.swt.widgets.Button#setImage(org.eclipse.swt.graphics.Image)
+   * image} of the button.
    */
   private static final String OPERATION_SET_IMAGE = "setImage";
 
@@ -59,13 +59,13 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        button.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the button.
    */
-  public SyncButtonAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncButtonAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.button = null;
     this.text = null;
     this.image = null;
@@ -75,8 +75,7 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Button getSwtObject() {
+  public Button getDelegate() {
 
     return this.button;
   }
@@ -131,8 +130,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Button#setText(String) text} of the button.
+   * This method sets the {@link org.eclipse.swt.widgets.Button#setText(String)
+   * text} of the button.
    * 
    * @param buttonText is the text to set.
    */
@@ -144,9 +143,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Button#getSelection() selection-status} of
-   * the button.
+   * This method gets the {@link org.eclipse.swt.widgets.Button#getSelection()
+   * selection-status} of the button.
    * 
    * @return the selection-status.
    */
@@ -159,8 +157,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Button#setSelection(boolean) selection-status}
-   * of the button.
+   * {@link org.eclipse.swt.widgets.Button#setSelection(boolean)
+   * selection-status} of the button.
    * 
    * @param selection is the selection-status to set.
    */
@@ -173,8 +171,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
 
   /**
    * This method set the
-   * {@link org.eclipse.swt.widgets.Button#setImage(org.eclipse.swt.graphics.Image) image}
-   * of the button.
+   * {@link org.eclipse.swt.widgets.Button#setImage(org.eclipse.swt.graphics.Image)
+   * image} of the button.
    * 
    * @param icon is the image to set.
    */
@@ -186,8 +184,8 @@ public class SyncButtonAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Button#getImage() image} of the button.
+   * This method gets the {@link org.eclipse.swt.widgets.Button#getImage()
+   * image} of the button.
    * 
    * @return the image of the button or <code>null</code> if no image is set.
    */

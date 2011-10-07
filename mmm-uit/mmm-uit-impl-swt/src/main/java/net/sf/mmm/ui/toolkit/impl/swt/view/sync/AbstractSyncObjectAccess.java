@@ -4,7 +4,14 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
 import net.sf.mmm.ui.toolkit.api.UiDisplay;
+import net.sf.mmm.ui.toolkit.api.event.UiEventType;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiNodeAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT object
@@ -18,8 +25,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * user-interfaces.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
+ * @since 1.0.0
  */
-public abstract class AbstractSyncObjectAccess implements Runnable {
+public abstract class AbstractSyncObjectAccess<DELEGATE> extends AbstractUiNodeAdapter<DELEGATE>
+    implements Runnable, Listener {
 
   /**
    * operation to
@@ -57,12 +67,13 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
+   * @param node is the owning {@link #getNode() node}.
    * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
    *        style} of the widget.
    */
-  public AbstractSyncObjectAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncObjectAccess(UiFactorySwt uiFactory, UiNode node, int swtStyle) {
 
-    super();
+    super(node);
     this.display = uiFactory.getDisplay();
     this.op = null;
     this.disposed = false;
@@ -70,18 +81,11 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method gets the widget to access synchronous.
-   * 
-   * @return the widget.
-   */
-  public abstract Object getSwtObject();
-
-  /**
    * {@inheritDoc}
    */
   public final void run() {
 
-    Object widget = getSwtObject();
+    Object widget = getDelegate();
     if (widget == null) {
       if (this.op == OPERATION_CREATE) {
         doCreateSynchron();
@@ -155,15 +159,15 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   }
 
   /**
-   * This method creates the actual widget. The {@link #getSwtObject() widget}
+   * This method creates the actual widget. The {@link #getDelegate() widget}
    * should not yet exist and the parent must be available.
    */
   protected void create() {
 
     assert (checkReady());
-    assert (getSwtObject() == null);
+    assert (getDelegate() == null);
     invoke(OPERATION_CREATE);
-    assert (getSwtObject() != null);
+    assert (getDelegate() != null);
   }
 
   /**
@@ -183,6 +187,7 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
    * 
    * @return <code>true</code> if the widget is disposed.
    */
+  @Override
   public boolean isDisposed() {
 
     if (!this.disposed) {
@@ -292,6 +297,58 @@ public abstract class AbstractSyncObjectAccess implements Runnable {
   public UiDisplay getDisplay() {
 
     return this.display;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getId() {
+
+    // not supported by SWT
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setId(String newId) {
+
+    // not supported by SWT
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void handleEvent(Event event) {
+
+    switch (event.type) {
+      case SWT.Selection:
+        getNode().sendEvent(UiEventType.CLICK);
+        break;
+      case SWT.Hide:
+        getNode().sendEvent(UiEventType.HIDE);
+        break;
+      case SWT.Show:
+        getNode().sendEvent(UiEventType.SHOW);
+        break;
+      case SWT.Iconify:
+        getNode().sendEvent(UiEventType.ICONIFY);
+        break;
+      case SWT.Deiconify:
+        getNode().sendEvent(UiEventType.DEICONIFY);
+        break;
+      case SWT.Activate:
+        getNode().sendEvent(UiEventType.ACTIVATE);
+        break;
+      case SWT.Deactivate:
+        getNode().sendEvent(UiEventType.DEACTIVATE);
+        break;
+      case SWT.Dispose:
+        getNode().sendEvent(UiEventType.DISPOSE);
+        break;
+      default :
+        return;
+    }
   }
 
 }

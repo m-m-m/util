@@ -30,11 +30,12 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * It is undefined what will happen if you make the split panel visible before
  * you set the two components in the splitted slots of this panel.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiReadOrientation {
+public interface UiSplitPanel<CHILD extends UiElement> extends UiComposite<CHILD>,
+    UiReadOrientation {
 
   /** the type of this object */
   String TYPE = "SplitPanel";
@@ -45,7 +46,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * 
    * @param component is the component to add.
    */
-  void setTopOrLeftComponent(E component);
+  void setTopOrLeftComponent(CHILD component);
 
   /**
    * This method gets the component placed to the top (horizontal orientation)
@@ -54,7 +55,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * @return the top or left component or <code>null</code> if the component has
    *         not been set.
    */
-  E getTopOrLeftComponent();
+  CHILD getTopOrLeftComponent();
 
   /**
    * This method sets the component placed to the bottom (horizontal
@@ -62,7 +63,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * 
    * @param component is the component to add.
    */
-  void setBottomOrRightComponent(E component);
+  void setBottomOrRightComponent(CHILD component);
 
   /**
    * This method gets the component placed to the bottom (horizontal
@@ -71,7 +72,7 @@ public interface UiSplitPanel<E extends UiElement> extends UiComposite<E>, UiRea
    * @return the bottom or right component or <code>null</code> if the component
    *         has not been set.
    */
-  E getBottomOrRightComponent();
+  CHILD getBottomOrRightComponent();
 
   /**
    * This method sets the position of the divider used to split the panel.

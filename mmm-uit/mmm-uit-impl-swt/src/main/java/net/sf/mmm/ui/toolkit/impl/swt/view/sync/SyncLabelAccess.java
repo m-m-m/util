@@ -3,10 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -14,18 +15,18 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncLabelAccess extends AbstractSyncControlAccess {
+public class SyncLabelAccess extends AbstractSyncControlAccess<Label> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Label#setText(String) text} of the label.
+   * operation to set the {@link org.eclipse.swt.widgets.Label#setText(String)
+   * text} of the label.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Label#setImage(org.eclipse.swt.graphics.Image) image}
-   * of the label.
+   * {@link org.eclipse.swt.widgets.Label#setImage(org.eclipse.swt.graphics.Image)
+   * image} of the label.
    */
   private static final String OPERATION_SET_IMAGE = "setImage";
 
@@ -42,13 +43,13 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        label.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the label.
    */
-  public SyncLabelAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncLabelAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.label = null;
     this.text = null;
     this.image = null;
@@ -57,8 +58,7 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Label getSwtObject() {
+  public Label getDelegate() {
 
     return this.label;
   }
@@ -106,8 +106,8 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Label#setText(String) text} of the label.
+   * This method sets the {@link org.eclipse.swt.widgets.Label#setText(String)
+   * text} of the label.
    * 
    * @param buttonText is the text to set.
    */
@@ -120,8 +120,8 @@ public class SyncLabelAccess extends AbstractSyncControlAccess {
 
   /**
    * This method set the
-   * {@link org.eclipse.swt.widgets.Label#setImage(org.eclipse.swt.graphics.Image) image}
-   * of the label.
+   * {@link org.eclipse.swt.widgets.Label#setImage(org.eclipse.swt.graphics.Image)
+   * image} of the label.
    * 
    * @param icon is the image to set.
    */

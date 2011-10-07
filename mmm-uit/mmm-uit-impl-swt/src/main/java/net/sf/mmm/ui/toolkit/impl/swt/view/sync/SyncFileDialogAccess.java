@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.FileDialog;
-
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.FileDialog;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
+public class SyncFileDialogAccess extends AbstractSyncDialogAccess<FileDialog> {
 
   /**
    * operation to {@link org.eclipse.swt.widgets.FileDialog#open() open} the
@@ -23,8 +24,8 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.FileDialog#setFileName(java.lang.String) filename}
-   * of the dialog.
+   * {@link org.eclipse.swt.widgets.FileDialog#setFileName(java.lang.String)
+   * filename} of the dialog.
    */
   private static final String OPERATION_SET_FILENAME = "setFileName";
 
@@ -45,13 +46,13 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        widget.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the widget.
    */
-  public SyncFileDialogAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncFileDialogAccess(UiFactorySwt uiFactory, UiNode node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.fileDialog = null;
     this.filename = null;
   }
@@ -86,8 +87,7 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public FileDialog getSwtObject() {
+  public FileDialog getDelegate() {
 
     return this.fileDialog;
   }
@@ -107,8 +107,8 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.FileDialog#setFileName(java.lang.String) filename}
-   * of the dialog.
+   * {@link org.eclipse.swt.widgets.FileDialog#setFileName(java.lang.String)
+   * filename} of the dialog.
    * 
    * @param name is the name of the selected file.
    */
@@ -131,6 +131,16 @@ public class SyncFileDialogAccess extends AbstractSyncDialogAccess {
     assert (checkReady());
     invoke(OPERATION_GET_FILENAME);
     return this.filename;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setVisible(boolean visible) {
+
+    if (visible) {
+      open();
+    }
   }
 
 }

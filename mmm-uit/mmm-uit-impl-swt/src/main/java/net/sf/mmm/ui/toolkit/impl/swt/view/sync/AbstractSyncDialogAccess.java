@@ -3,22 +3,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Dialog}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
+ * @since 1.0.0
  */
-public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess {
+public abstract class AbstractSyncDialogAccess<DELEGATE extends Dialog> extends
+    AbstractSyncObjectAccess<Dialog> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the dialog.
+   * operation to set the {@link org.eclipse.swt.widgets.Dialog#setText(String)
+   * text} of the dialog.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
@@ -26,19 +31,19 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   private String text;
 
   /** the synchronous access to the parent */
-  private AbstractSyncControlAccess parentAccess;
+  private AbstractSyncControlAccess<? extends Control> parentAccess;
 
   /**
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        widget.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the widget.
    */
-  public AbstractSyncDialogAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncDialogAccess(UiFactorySwt uiFactory, UiNode node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.text = null;
   }
 
@@ -52,23 +57,23 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
     if (this.parentAccess == null) {
       return null;
     } else {
-      return this.parentAccess.getSwtObject().getShell();
+      return this.parentAccess.getDelegate().getShell();
     }
   }
 
   /**
    * This method sets the parent sync-access of the dialog. If the parent
-   * {@link AbstractSyncControlAccess#getSwtObject() exists}, it will be set as
+   * {@link AbstractSyncControlAccess#getDelegate() exists}, it will be set as
    * parent of the dialog. Else if the control does NOT yet exist, the parent
    * will be set on {@link #create() creation}.
    * 
    * @param newParentAccess is the synchronous access to the new parent
    */
-  public void setParentAccess(AbstractSyncControlAccess newParentAccess) {
+  public void setParentAccess(AbstractSyncControlAccess<? extends Control> newParentAccess) {
 
-    if (getSwtObject() == null) {
+    if (getDelegate() == null) {
       this.parentAccess = newParentAccess;
-      if (this.parentAccess.getSwtObject() != null) {
+      if (this.parentAccess.getDelegate() != null) {
         assert (checkReady());
         create();
       }
@@ -81,16 +86,10 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
    * {@inheritDoc}
    */
   @Override
-  public abstract Dialog getSwtObject();
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected void performSynchron(String operation) {
 
     if (operation == OPERATION_SET_TEXT) {
-      getSwtObject().setText(this.text);
+      getDelegate().setText(this.text);
     } else {
       super.performSynchron(operation);
     }
@@ -103,7 +102,7 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   protected void createSynchron() {
 
     if (this.text != null) {
-      getSwtObject().setText(this.text);
+      getDelegate().setText(this.text);
     }
   }
 
@@ -119,8 +118,8 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Dialog#setText(String) text} of the dialog.
+   * This method sets the {@link org.eclipse.swt.widgets.Dialog#setText(String)
+   * text} of the dialog.
    * 
    * @param dialogText is the text to set.
    */
@@ -129,6 +128,22 @@ public abstract class AbstractSyncDialogAccess extends AbstractSyncObjectAccess 
     assert (checkReady());
     this.text = dialogText;
     invoke(OPERATION_SET_TEXT);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Dialog getToplevelDelegate() {
+
+    return getDelegate();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isEnabled() {
+
+    return true;
   }
 
 }

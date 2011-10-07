@@ -10,7 +10,7 @@
   <artifactId>mmm-uit-impl-smartgwt</artifactId>
   <version>0.9.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>uit-impl-swt</name>
+  <name>uit-impl-smartgwt</name>
   <description>Implementation of the UI-Toolkit API using SmartGWT as the native toolkit</description>
 
   <dependencies>

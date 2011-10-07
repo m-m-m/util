@@ -93,7 +93,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
    */
   public void initialize() {
 
-    if (this.syncAccess.getSwtObject() != null) {
+    if (this.syncAccess.getDelegate() != null) {
       this.event = null;
       this.syncAccess.getDisplay().invokeSynchron(this);
     }
@@ -116,7 +116,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
 
     TableItem item = (TableItem) swtEvent.item;
     int columnCount = this.model.getColumnCount();
-    int row = this.syncAccess.getSwtObject().indexOf(item);
+    int row = this.syncAccess.getDelegate().indexOf(item);
     if (this.rows.size() <= row) {
       // list is to small, need to be increased
       // List does not support setSize as Vector did, so we have to fake this
@@ -153,7 +153,7 @@ public class TableModelAdapter<C> implements UITableModelListener, Listener, Run
       // initialize
       int columnCount = this.model.getColumnCount();
       int rowCount = this.model.getRowCount();
-      Table table = this.syncAccess.getSwtObject();
+      Table table = this.syncAccess.getDelegate();
       table.setItemCount(rowCount);
       for (int i = 0; i < columnCount; i++) {
         TableColumn tableColumn = new TableColumn(table, SWT.LEFT);

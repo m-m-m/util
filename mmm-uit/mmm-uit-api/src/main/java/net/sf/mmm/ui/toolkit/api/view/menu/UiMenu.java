@@ -33,7 +33,7 @@ public interface UiMenu extends UiMenuItem {
    * 
    * @return an iterator of the items in this menu.
    */
-  Iterator<UiMenuItem> getItems();
+  Iterator<? extends UiMenuItem> getItems();
 
   /**
    * This method adds a separator to this menu.

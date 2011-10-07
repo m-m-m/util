@@ -4,7 +4,6 @@
 package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyles;
 
 /**
  * This is the abstract interface for a UI object. A UI object is any object of
@@ -16,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyles;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiObject extends UiReadId, UiReadStyles {
+public abstract interface UiObject extends UiReadId {
 
   /**
    * This method gets the UI factory that created this component.

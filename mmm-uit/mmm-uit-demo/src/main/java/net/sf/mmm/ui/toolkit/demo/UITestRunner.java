@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
@@ -90,7 +90,7 @@ public class UITestRunner {
      */
     UiScrollPanel scroll = factory.createScrollPanel();
 
-    UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
+    UiSimplePanel panel = factory.createSimplePanel(Orientation.VERTICAL);
 
     UiButton button = factory.createButton("Test");
     panel.addChild(button);

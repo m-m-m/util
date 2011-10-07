@@ -14,15 +14,11 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * {@link net.sf.mmm.ui.toolkit.api.common.Orientation#HORIZONTAL} or
  * {@link net.sf.mmm.ui.toolkit.api.common.Orientation#VERTICAL}.<br>
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
- *        This should actually be bound to {@link UiElement}. However as we
- *        finally need an implementation of {@link UiElement} java forces us to
- *        leave the generic type variable here. This is solved by casting in the
- *        {@link net.sf.mmm.ui.toolkit.api.UiFactory}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiSimplePanel<E extends UiElement> extends UiExtendableComposite<E>,
+public interface UiSimplePanel<CHILD extends UiElement> extends UiExtendableComposite<CHILD>,
     UiReadOrientation {
 
   /** @see #getType() */

@@ -10,10 +10,10 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * in the user-interface but acts as a logical group of {@link UiElement}s. This
  * allows to
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiVirtualComposite<E extends UiElement> extends UiExtendableComposite<E> {
+public interface UiVirtualComposite<CHILD extends UiElement> extends UiExtendableComposite<CHILD> {
 
 }

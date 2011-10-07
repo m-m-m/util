@@ -3,21 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swing.view.window;
 
-import java.awt.Window;
+import java.awt.Container;
 import java.beans.PropertyVetoException;
 
-import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
-import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
-import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
+import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UiMenuBarImpl;
 
 /**
  * This class is the implementation of an internal
@@ -30,16 +29,16 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.menu.UIMenuBarImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiElement {
+public class UiInternalFrame extends AbstractUiWindow<JInternalFrame> implements UiFrame {
 
-  /** the frame */
-  private final JInternalFrame frame;
+  /** @see #getAdapter() */
+  private final UiWindowAdapterSwingInternalFrame adapter;
 
   /** @see #getMenuBar() */
-  private UIMenuBarImpl menuBar;
+  private UiMenuBarImpl menuBar;
 
   /** the workbench */
-  private final UIWorkbenchImpl workbench;
+  private final UiWorkbenchImpl workbench;
 
   /**
    * The constructor.
@@ -47,17 +46,28 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parentObject is the workbench that created this frame.
+   * @param parent is the workbench that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizable - if <code>true</code> the frame will be
    *        {@link #isResizable() resizable}.
    */
-  public UiInternalFrame(UIFactorySwing uiFactory, UIWorkbenchImpl parentObject, String title,
+  public UiInternalFrame(UiFactorySwing uiFactory, UiWorkbenchImpl parent, String title,
       boolean resizable) {
 
-    super(uiFactory, parentObject);
-    this.frame = new JInternalFrame(title, resizable, true, resizable, true);
-    this.workbench = parentObject;
+    super(uiFactory);
+    JInternalFrame frame = new JInternalFrame(title, resizable, true, resizable, true);
+    this.adapter = new UiWindowAdapterSwingInternalFrame(this, frame);
+    this.workbench = parent;
+    setParent(parent);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiFrame getParent() {
+
+    return (UiFrame) super.getParent();
   }
 
   /**
@@ -66,19 +76,40 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    * @param uiFactory is the
    *        {@link net.sf.mmm.ui.toolkit.api.UiObject#getFactory() factory}
    *        instance.
-   * @param parentObject is the
+   * @param parent is the
    *        {@link net.sf.mmm.ui.toolkit.api.view.UiNode#getParent() parent}
    *        that created this frame.
    * @param title is the {@link #getTitle() title} of the frame.
    * @param resizable - if <code>true</code> the frame will be
    *        {@link #isResizable() resizable}.
    */
-  public UiInternalFrame(UIFactorySwing uiFactory, UiInternalFrame parentObject, String title,
+  public UiInternalFrame(UiFactorySwing uiFactory, UiInternalFrame parent, String title,
       boolean resizable) {
 
-    super(uiFactory, parentObject);
-    this.frame = new JInternalFrame();
-    this.workbench = parentObject.workbench;
+    super(uiFactory);
+    JInternalFrame frame = new JInternalFrame();
+    this.adapter = new UiWindowAdapterSwingInternalFrame(this, frame);
+    this.workbench = parent.workbench;
+    setParent(parent);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWindowAdapterSwingInternalFrame getAdapter() {
+
+    return this.adapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected boolean doInitializeListener() {
+
+    getDelegate().addInternalFrameListener(getAdapter());
+    return super.doInitializeListener();
   }
 
   /**
@@ -86,7 +117,7 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    */
   public UiFrame createFrame(String title, boolean resizeable) {
 
-    UiInternalFrame internalFrame = new UiInternalFrame((UIFactorySwing) getFactory(), this, title,
+    UiInternalFrame internalFrame = new UiInternalFrame((UiFactorySwing) getFactory(), this, title,
         resizeable);
     return internalFrame;
   }
@@ -96,7 +127,7 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    */
   public boolean isMaximized() {
 
-    return this.frame.isMaximum();
+    return getDelegate().isMaximum();
   }
 
   /**
@@ -104,9 +135,10 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    */
   public void setMaximized(boolean maximize) {
 
-    if (this.frame.isMaximizable()) {
+    JInternalFrame delegate = getDelegate();
+    if (delegate.isMaximizable()) {
       try {
-        this.frame.setMaximum(maximize);
+        delegate.setMaximum(maximize);
       } catch (PropertyVetoException e) {
         // ignore this...
       }
@@ -118,9 +150,10 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    */
   public void setMinimized(boolean minimize) {
 
-    if (this.frame.isIconifiable()) {
+    JInternalFrame delegate = getDelegate();
+    if (delegate.isIconifiable()) {
       try {
-        this.frame.setIcon(minimize);
+        delegate.setIcon(minimize);
       } catch (PropertyVetoException e) {
         // ignore this...
       }
@@ -132,7 +165,7 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
    */
   public boolean isMinimized() {
 
-    return this.frame.isIcon();
+    return getDelegate().isIcon();
   }
 
   /**
@@ -146,35 +179,18 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
   /**
    * {@inheritDoc}
    */
-  @Override
-  public boolean isResizable() {
-
-    return this.frame.isResizable();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(int width, int height) {
-
-    this.frame.setSize(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UIMenuBarImpl getMenuBar() {
+  public UiMenuBarImpl getMenuBar() {
 
     if (this.menuBar == null) {
       synchronized (this) {
         if (this.menuBar == null) {
-          JMenuBar jMenuBar = this.frame.getJMenuBar();
+          JInternalFrame delegate = getDelegate();
+          JMenuBar jMenuBar = delegate.getJMenuBar();
           if (jMenuBar == null) {
             jMenuBar = new JMenuBar();
-            this.frame.setJMenuBar(jMenuBar);
+            delegate.setJMenuBar(jMenuBar);
           }
-          this.menuBar = new UIMenuBarImpl((UIFactorySwing) getFactory(), this, jMenuBar);
+          this.menuBar = new UiMenuBarImpl((UiFactorySwing) getFactory(), jMenuBar);
         }
       }
     }
@@ -184,162 +200,29 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void setPosition(int x, int y) {
-
-    this.frame.setLocation(x, y);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getTitle() {
-
-    return this.frame.getTitle();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setTitle(String newTitle) {
-
-    this.frame.setTitle(newTitle);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getHeight() {
-
-    return this.frame.getHeight();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getWidth() {
-
-    return this.frame.getWidth();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void dispose() {
-
-    getFactory().removeWindow(this);
-    this.frame.dispose();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isDisposed() {
-
-    return this.frame.isDisplayable();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getX() {
-
-    return this.frame.getX();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getY() {
-
-    return this.frame.getY();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void pack() {
-
-    this.frame.pack();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @SuppressWarnings("rawtypes")
   public void setComposite(UiComposite<? extends UiElement> newComposite) {
 
-    JComponent jComponent = ((AbstractUiElement) newComposite).getSwingComponent();
-    this.frame.setContentPane(jComponent);
+    Container topDelegate = (Container) ((AbstractUiElement) newComposite).getAdapter()
+        .getToplevelDelegate();
+    getDelegate().setContentPane(topDelegate);
     doSetComposite(newComposite);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public VisibleState getVisibleState() {
-
-    VisibleState visibleState = doGetVisibleState();
-    if (visibleState.isVisible()) {
-      // the parent should be the UiWorkbench...
-      UiFrame parent = getParent();
-      if (parent != null) {
-        if (!parent.getVisibleState().isVisible()) {
-          return VisibleState.BLOCKED;
-        }
-      }
-    }
-    return visibleState;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetVisible(boolean visible) {
-
-    this.frame.setVisible(visible);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected boolean doIsInvisible() {
-
-    return !this.frame.isVisible();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Window getNativeWindow() {
-
-    UIWorkbenchImpl parent = (UIWorkbenchImpl) getParent();
-    if (parent == null) {
-      // should actually never happen...
-      return null;
-    }
-    return parent.getNativeWindow();
-  }
-
-  /**
-   * This method gets the native swing object.
-   * 
-   * @return the swing internal frame.
-   */
-  public JInternalFrame getSwingInternalFrame() {
-
-    return this.frame;
-  }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public Window getDelegate() {
+  //
+  // UIWorkbenchImpl parent = (UIWorkbenchImpl) getParent();
+  // if (parent == null) {
+  // // should actually never happen...
+  // return null;
+  // }
+  // return parent.getDelegate();
+  // }
 
   /**
    * {@inheritDoc}
@@ -348,56 +231,6 @@ public class UiInternalFrame extends AbstractUiWindowAwt implements UiFrame, UiE
   protected UiReadSize getDesktopSize() {
 
     return this.workbench;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetEnabled(boolean enabled) {
-
-    this.frame.setEnabled(enabled);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getTooltip() {
-
-    return this.frame.getToolTipText();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setTooltip(String tooltip) {
-
-    this.frame.setToolTipText(tooltip);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getPreferredHeight() {
-
-    return (int) this.frame.getPreferredSize().getHeight();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getPreferredWidth() {
-
-    return (int) this.frame.getPreferredSize().getWidth();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiFrame getParent() {
-
-    return (UiFrame) super.getParent();
   }
 
 }

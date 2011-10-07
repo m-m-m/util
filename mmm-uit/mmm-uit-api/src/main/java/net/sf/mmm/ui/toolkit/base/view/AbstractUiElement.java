@@ -7,13 +7,14 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 
 /**
- * This is the abstract base implementation of
- * {@link net.sf.mmm.ui.toolkit.api.view.UiElement}.
+ * This is the abstract base implementation of {@link UiElement}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type for the {@link #getAdapter() adapter}.
  * @since 1.0.0
  */
-public abstract class AbstractUiElement extends AbstractUiNode implements UiElement {
+public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGATE> implements
+    UiElement {
 
   /** @see #getTooltip() */
   private String tooltip;
@@ -26,17 +27,23 @@ public abstract class AbstractUiElement extends AbstractUiNode implements UiElem
   public AbstractUiElement(AbstractUiFactory uiFactory) {
 
     super(uiFactory);
+    this.tooltip = "";
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public abstract UiElementAdapter<DELEGATE> getAdapter();
 
   /**
    * {@inheritDoc}
    */
   public void setTooltip(String tooltip) {
 
+    getAdapter().setTooltip(tooltip);
     this.tooltip = tooltip;
   }
-
-  protected abstract void doSetTooltip(String tooltip);
 
   /**
    * {@inheritDoc}
@@ -49,19 +56,33 @@ public abstract class AbstractUiElement extends AbstractUiNode implements UiElem
   /**
    * {@inheritDoc}
    */
-  public int getPreferredWidth() {
+  public boolean isResizable() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return true;
   }
 
   /**
    * {@inheritDoc}
    */
-  public int getPreferredHeight() {
+  public int getWidth() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return getAdapter().getWidth();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getHeight() {
+
+    return getAdapter().getHeight();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setSize(int width, int height) {
+
+    getAdapter().setSize(width, height);
   }
 
 }

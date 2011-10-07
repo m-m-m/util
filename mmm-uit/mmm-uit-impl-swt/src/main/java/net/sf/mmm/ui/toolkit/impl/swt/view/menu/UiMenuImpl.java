@@ -4,8 +4,6 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.menu.UiMenu;
-import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenu;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuAccess;
@@ -22,10 +20,10 @@ import org.eclipse.swt.widgets.MenuItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiMenuImpl extends AbstractUiMenu {
+public class UiMenuImpl extends AbstractUiMenu<Menu> {
 
-  /** the synchronous access to the menu */
-  private final SyncMenuAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncMenuAccess adapter;
 
   /**
    * The constructor.
@@ -38,26 +36,25 @@ public class UiMenuImpl extends AbstractUiMenu {
   public UiMenuImpl(UiFactorySwt uiFactory, Menu swtMenu, String text) {
 
     super(uiFactory);
-    this.syncAccess = new SyncMenuAccess(uiFactory, SWT.CASCADE, swtMenu, text);
-  }
-
-  /**
-   * This method gets synchron access on the SWT menu.
-   * 
-   * @return the synchron access.
-   */
-  public SyncMenuAccess getSyncAccess() {
-
-    return this.syncAccess;
+    this.adapter = new SyncMenuAccess(uiFactory, this, SWT.CASCADE, swtMenu, text);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected UiMenuItem createMenuItem(String name, ButtonStyle style) {
+  public SyncMenuAccess getAdapter() {
 
-    MenuItem menuItem = this.syncAccess.createMenuItem(name, style);
+    return this.adapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected UiMenuItemImpl createMenuItem(String name, ButtonStyle style) {
+
+    MenuItem menuItem = this.adapter.createMenuItem(name, style);
     return new UiMenuItemImpl((UiFactorySwt) getFactory(), name, style, menuItem);
   }
 
@@ -65,9 +62,9 @@ public class UiMenuImpl extends AbstractUiMenu {
    * {@inheritDoc}
    */
   @Override
-  protected UiMenu createSubMenu(String name) {
+  protected UiMenuImpl createSubMenu(String name) {
 
-    Menu subMenu = this.syncAccess.createSubMenu(name);
+    Menu subMenu = this.adapter.createSubMenu(name);
     return new UiMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
   }
 
@@ -76,7 +73,7 @@ public class UiMenuImpl extends AbstractUiMenu {
    */
   public String getValue() {
 
-    return this.syncAccess.getText();
+    return this.adapter.getText();
   }
 
   /**
@@ -84,7 +81,7 @@ public class UiMenuImpl extends AbstractUiMenu {
    */
   public void addSeparator() {
 
-    this.syncAccess.addSeparator();
+    this.adapter.addSeparator();
   }
 
 }

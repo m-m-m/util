@@ -91,6 +91,7 @@ public class SwtWorkerThread extends Thread {
       try {
         Thread.sleep(100);
       } catch (InterruptedException e) {
+        // ignore
       }
     }
     return this.monitor;
@@ -109,6 +110,7 @@ public class SwtWorkerThread extends Thread {
       try {
         Thread.sleep(100);
       } catch (InterruptedException e) {
+        // ignore
       }
     }
     return this.dummyParent;

@@ -3,12 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-
-import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -16,7 +17,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncMenuAccess extends AbstractSyncWidgetAccess {
+public class SyncMenuAccess extends AbstractSyncWidgetAccess<Menu> {
 
   /**
    * operation to create a {@link org.eclipse.swt.widgets.Menu sub-menu}
@@ -62,14 +63,16 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the menu.
    * @param swtMenu is the menu to access.
    * @param menuText is the text of the menu.
    */
-  public SyncMenuAccess(UiFactorySwt uiFactory, int swtStyle, Menu swtMenu, String menuText) {
+  public SyncMenuAccess(UiFactorySwt uiFactory, UiNode node, int swtStyle, Menu swtMenu,
+      String menuText) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.menu = swtMenu;
     this.text = menuText;
     this.buttonStyle = null;
@@ -97,6 +100,10 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
       new MenuItem(this.menu, SWT.SEPARATOR);
     } else if (operation == OPERATION_SET_TEXT) {
       this.menu.getParentItem().setText(this.text);
+    } else if (operation == OPERATION_SET_ENABLED) {
+      this.menu.setEnabled(isEnabled());
+    } else if (operation == OPERATION_SET_VISIBLE) {
+      this.menu.setVisible(isVisible());
     } else {
       super.performSynchron(operation);
     }
@@ -105,8 +112,7 @@ public class SyncMenuAccess extends AbstractSyncWidgetAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Menu getSwtObject() {
+  public Menu getDelegate() {
 
     return this.menu;
   }

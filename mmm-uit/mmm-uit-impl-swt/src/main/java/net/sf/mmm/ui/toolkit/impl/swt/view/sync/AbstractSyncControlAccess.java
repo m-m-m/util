@@ -3,128 +3,120 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.UiElementAdapter;
+import net.sf.mmm.ui.toolkit.base.view.composite.AbstractUiComposite;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.ui.toolkit.impl.swt.view.window.AbstractUiWindowSwt;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This is the abstract base class used for synchronous access on a SWT
  * {@link org.eclipse.swt.widgets.Control}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
+ * @since 1.0.0
  */
-public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess {
+public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extends
+    AbstractSyncWidgetAccess<DELEGATE> implements UiElementAdapter<DELEGATE> {
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setParent(org.eclipse.swt.widgets.Composite) parent}
+   * {@link org.eclipse.swt.widgets.Control#setParent(org.eclipse.swt.widgets.Composite)
+   * parent}
    */
-  private static final String OPERATION_SET_PARENT = "setParent";
+  protected static final String OPERATION_SET_PARENT = "setParent";
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Control#getBounds() bounds}
+   * operation to get the {@link org.eclipse.swt.widgets.Control#getSize()
+   * bounds}
    */
-  private static final String OPERATION_GET_BOUNDS = "getBounds";
+  protected static final String OPERATION_GET_SIZE = "getSize";
 
   /**
    * operation to set the
    * {@link org.eclipse.swt.widgets.Control#setSize(int, int) size}
    */
-  private static final String OPERATION_SET_SIZE = "setSize";
+  protected static final String OPERATION_SET_SIZE = "setSize";
+
+  /**
+   * operation to get the {@link org.eclipse.swt.widgets.Control#getLocation()
+   * location}
+   */
+  protected static final String OPERATION_GET_LOCATION = "getLocation";
 
   /**
    * operation to set the
    * {@link org.eclipse.swt.widgets.Control#setLocation(int, int) location}
    */
-  private static final String OPERATION_SET_LOCATION = "setLocation";
+  protected static final String OPERATION_SET_LOCATION = "setLocation";
 
   /**
    * operation to set the
    * {@link org.eclipse.swt.widgets.Control#setToolTipText(String) tooltip-text}
    */
-  private static final String OPERATION_SET_TOOLTIP = "setTooltip";
+  protected static final String OPERATION_SET_TOOLTIP = "setTooltip";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#getEnabled() "enabled-flag"}
+   * operation to get the {@link org.eclipse.swt.widgets.Control#isVisible()
+   * "visible-flag"}
    */
-  private static final String OPERATION_SET_ENABLED = "setEnabled";
-
-  /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setVisible(boolean) "visible-flag"}
-   */
-  private static final String OPERATION_SET_VISIBLE = "setVisible";
-
-  /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Control#isVisible() "visible-flag"}
-   */
-  private static final String OPERATION_IS_VISIBLE = "isVisible";
+  protected static final String OPERATION_IS_VISIBLE = "isVisible";
 
   /**
    * operation to {@link org.eclipse.swt.widgets.Control#pack() pack} the
    * control.
    */
-  private static final String OPERATION_PACK = "pack";
+  protected static final String OPERATION_PACK = "pack";
 
   /**
-   * operation to
-   * {@link org.eclipse.swt.widgets.Control#computeSize(int, int) "compute size"}
-   * of the control.
+   * operation to {@link org.eclipse.swt.widgets.Control#computeSize(int, int)
+   * "compute size"} of the control.
    */
-  private static final String OPERATION_COMPUTE_SIZE = "computeSize";
+  protected static final String OPERATION_COMPUTE_SIZE = "computeSize";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font) font}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font)
+   * font} of the control.
    */
-  private static final String OPERATION_SET_FONT = "setFont";
+  protected static final String OPERATION_SET_FONT = "setFont";
 
   /**
    * operation to set the
    * {@link org.eclipse.swt.widgets.Control#setLayoutData(Object) "layout data"}
    * of the control.
    */
-  private static final String OPERATION_SET_LAYOUT_DATA = "setLayoutData";
+  protected static final String OPERATION_SET_LAYOUT_DATA = "setLayoutData";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color) foreground-color}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color)
+   * foreground-color} of the control.
    */
-  private static final String OPERATION_SET_FOREGROUND = "setForeground";
+  protected static final String OPERATION_SET_FOREGROUND = "setForeground";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color) background-color}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color)
+   * background-color} of the control.
    */
-  private static final String OPERATION_SET_BACKGROUND = "setBackground";
-
-  /** the bounds to get */
-  private Rectangle bounds;
+  protected static final String OPERATION_SET_BACKGROUND = "setBackground";
 
   /** the size to set */
   private Point size;
 
   /** the location to set */
   private Point location;
-
-  /** @see #isEnabled() */
-  private boolean enabled;
-
-  /** @see #isVisible() */
-  private boolean visible;
 
   /** @see #getTooltip() */
   private String tooltip;
@@ -142,7 +134,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   private Object layoutData;
 
   /** @see #getParentAccess() */
-  private AbstractSyncCompositeAccess parentAccess;
+  private AbstractSyncCompositeAccess<? extends Composite> parentAccess;
 
   /** the font of this control */
   private Font font;
@@ -157,21 +149,18 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        control.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the control.
    */
-  public AbstractSyncControlAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public AbstractSyncControlAccess(UiFactorySwt uiFactory, UiNode node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.parentAccess = null;
-    this.bounds = new Rectangle(0, 0, 0, 0);
     this.size = null;
     this.location = null;
     this.tooltip = null;
     this.computedSize = null;
-    this.enabled = true;
-    this.visible = true;
     this.wHint = 0;
     this.hHint = 0;
     this.layoutData = null;
@@ -184,45 +173,42 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * {@inheritDoc}
    */
   @Override
-  public abstract Control getSwtObject();
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected void performSynchron(String operation) {
 
-    if (operation == OPERATION_GET_BOUNDS) {
-      this.bounds = getSwtObject().getBounds();
-    } else if (operation == OPERATION_SET_LOCATION) {
-      getSwtObject().setLocation(this.location);
+    if (operation == OPERATION_GET_SIZE) {
+      this.size = getDelegate().getSize();
     } else if (operation == OPERATION_SET_SIZE) {
-      getSwtObject().setSize(this.size);
+      getDelegate().setSize(this.size);
+    } else if (operation == OPERATION_SET_LOCATION) {
+      getDelegate().setLocation(this.location);
+    } else if (operation == OPERATION_GET_LOCATION) {
+      this.location = getDelegate().getLocation();
     } else if (operation == OPERATION_SET_ENABLED) {
-      getSwtObject().setEnabled(this.enabled);
+      getDelegate().setEnabled(super.isEnabled());
     } else if (operation == OPERATION_SET_TOOLTIP) {
-      getSwtObject().setToolTipText(this.tooltip);
+      getDelegate().setToolTipText(this.tooltip);
     } else if (operation == OPERATION_SET_VISIBLE) {
-      getSwtObject().setVisible(this.visible);
-      if (this.visible && (getSwtObject().getClass() == Shell.class)) {
-        ((Shell) getSwtObject()).forceActive();
+      boolean visible = doIsVisible();
+      getDelegate().setVisible(visible);
+      if (visible && (getDelegate().getClass() == Shell.class)) {
+        ((Shell) getDelegate()).forceActive();
       }
     } else if (operation == OPERATION_IS_VISIBLE) {
-      this.visible = getSwtObject().isVisible();
+      doSetVisible(getDelegate().isVisible());
     } else if (operation == OPERATION_PACK) {
-      getSwtObject().pack();
+      getDelegate().pack();
     } else if (operation == OPERATION_COMPUTE_SIZE) {
-      this.computedSize = getSwtObject().computeSize(this.wHint, this.hHint);
+      this.computedSize = getDelegate().computeSize(this.wHint, this.hHint);
     } else if (operation == OPERATION_SET_LAYOUT_DATA) {
-      getSwtObject().setLayoutData(this.layoutData);
+      getDelegate().setLayoutData(this.layoutData);
     } else if (operation == OPERATION_SET_PARENT) {
-      getSwtObject().setParent(getParent());
+      getDelegate().setParent(getParent());
     } else if (operation == OPERATION_SET_FONT) {
-      getSwtObject().setFont(this.font);
+      getDelegate().setFont(this.font);
     } else if (operation == OPERATION_SET_FOREGROUND) {
-      getSwtObject().setForeground(this.foreground);
+      getDelegate().setForeground(this.foreground);
     } else if (operation == OPERATION_SET_BACKGROUND) {
-      getSwtObject().setBackground(this.background);
+      getDelegate().setBackground(this.background);
     } else {
       super.performSynchron(operation);
     }
@@ -235,10 +221,10 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   protected void doCreateSynchron() {
 
     if (this.parentAccess != null) {
-      if (this.parentAccess.getSwtObject() == null) {
+      if (this.parentAccess.getDelegate() == null) {
         this.parentAccess.doCreateSynchron();
       }
-      if (this.parentAccess.getSwtObject() != null) {
+      if (this.parentAccess.getDelegate() != null) {
         super.doCreateSynchron();
       } else {
         new Exception("Warning: parent (" + this.parentAccess.getClass() + ") is empty!")
@@ -255,7 +241,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   @Override
   protected void createSynchron() {
 
-    Control c = getSwtObject();
+    Control c = getDelegate();
     if (this.layoutData != null) {
       c.setLayoutData(this.layoutData);
     }
@@ -283,22 +269,12 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
     if (this.location != null) {
       c.setLocation(this.location);
     }
-    if (!this.enabled) {
-      c.setEnabled(this.enabled);
+    if (!isEnabled()) {
+      c.setEnabled(false);
     }
-    // TODO: pack & visible
+    c.setVisible(isVisible());
+    // TODO: pack
     super.createSynchron();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void handleDisposed() {
-
-    super.handleDisposed();
-    this.visible = false;
-    this.enabled = false;
   }
 
   /**
@@ -313,33 +289,33 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
     if (this.parentAccess == null) {
       return null;
     }
-    return this.parentAccess.getSwtObject();
+    return this.parentAccess.getDelegate();
   }
 
   /**
-   * This method gets the synchronous access to the
-   * {@link Control#getParent() parent} of this control.
+   * This method gets the synchronous access to the {@link Control#getParent()
+   * parent} of this control.
    * 
    * @return the synchronous access to the parent.
    */
-  public AbstractSyncCompositeAccess getParentAccess() {
+  public AbstractSyncCompositeAccess<? extends Composite> getParentAccess() {
 
     return this.parentAccess;
   }
 
   /**
    * This method sets the parent sync-access of this control. If the parent
-   * {@link AbstractSyncCompositeAccess#getSwtObject() exists}, it will be set
-   * as parent of this control. Else if the control does NOT yet exist, the
-   * parent will be set on {@link #create() creation}.
+   * {@link AbstractSyncCompositeAccess#getDelegate() exists}, it will be set as
+   * parent of this control. Else if the control does NOT yet exist, the parent
+   * will be set on {@link #create() creation}.
    * 
    * @param newParentAccess is the synchronous access to the new parent
    */
-  public void setParentAccess(AbstractSyncCompositeAccess newParentAccess) {
+  public void setParentAccess(AbstractSyncCompositeAccess<? extends Composite> newParentAccess) {
 
     this.parentAccess = newParentAccess;
-    if (this.parentAccess.getSwtObject() != null) {
-      if (getSwtObject() != null) {
+    if (this.parentAccess.getDelegate() != null) {
+      if (getDelegate() != null) {
         assert (checkReady());
         invoke(OPERATION_SET_PARENT);
       }
@@ -349,14 +325,14 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   /**
    * This method determines if the control can be created.
    * 
-   * @return <code>true</code> if there is an ancestor that is already
-   *         created, <code>false</code> otherwise.
+   * @return <code>true</code> if there is an ancestor that is already created,
+   *         <code>false</code> otherwise.
    */
   protected boolean canCreate() {
 
     if (this.parentAccess == null) {
       return false;
-    } else if (this.parentAccess.getSwtObject() != null) {
+    } else if (this.parentAccess.getDelegate() != null) {
       return true;
     } else {
       return this.parentAccess.canCreate();
@@ -378,26 +354,21 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method gets the {@link Control#getBounds() bounds} of the control.
+   * This method gets the {@link Point}.
    * 
-   * @return the bounds of the control.
+   * @return the {@link Point}.
    */
-  public Rectangle getBounds() {
+  public Point getSize() {
 
-    assert (checkReady());
-    invoke(OPERATION_GET_BOUNDS);
-    return this.bounds;
+    invoke(OPERATION_GET_SIZE);
+    return this.size;
   }
 
   /**
-   * This method sets the {@link Control#setSize(int, int) size} of the control.
-   * 
-   * @param width is the width to set.
-   * @param height is the height to set.
+   * {@inheritDoc}
    */
   public void setSize(int width, int height) {
 
-    assert (checkReady());
     if (this.size == null) {
       this.size = new Point(width, height);
     } else {
@@ -420,13 +391,43 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public boolean isResizable() {
+
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getHeight() {
+
+    return getSize().y;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getWidth() {
+
+    return getSize().x;
+  }
+
+  public Point getPosition() {
+
+    invoke(OPERATION_GET_LOCATION);
+    return this.location;
+  }
+
+  /**
    * This method sets the {@link Control#setLocation(int, int) location} of the
    * control.
    * 
    * @param x is the x-coordinate to set.
    * @param y is the y-coordinate to set.
    */
-  public void setLocation(int x, int y) {
+  public void setPosition(int x, int y) {
 
     assert (checkReady());
     if (this.location == null) {
@@ -439,38 +440,7 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method sets the {@link Control#getEnabled() "enabled-flag"} of the
-   * control.
-   * 
-   * @param enabledFlag is the new status of the enabled flag.
-   */
-  public void setEnabled(boolean enabledFlag) {
-
-    if (this.enabled != enabledFlag) {
-      assert (checkReady());
-      this.enabled = enabledFlag;
-      invoke(OPERATION_SET_ENABLED);
-    }
-  }
-
-  /**
-   * This method gets the {@link Control#getEnabled() "enabled-flag"} of the
-   * control.
-   * 
-   * @return the enabled flag.
-   */
-  public boolean isEnabled() {
-
-    // enabled-flag can NOT be modified externally (e.g. by
-    // user-interaction).
-    return this.enabled;
-  }
-
-  /**
-   * This method sets the {@link Control#setToolTipText(String) tooltip-text} of
-   * the control.
-   * 
-   * @param tooltipText is the new tooltip text to set.
+   * {@inheritDoc}
    */
   public void setTooltip(String tooltipText) {
 
@@ -480,42 +450,12 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
   }
 
   /**
-   * This method gets the {@link Control#getToolTipText() tooltip-text} of the
-   * control.
-   * 
-   * @return the tooltip text.
+   * {@inheritDoc}
    */
   public String getTooltip() {
 
     // tooltip can NOT be modified externally (e.g. by user-interaction).
     return this.tooltip;
-  }
-
-  /**
-   * This method sets the {@link Control#setVisible(boolean) visible-flag} of
-   * the control.
-   * 
-   * @param isVisible is the visible flag to set.
-   */
-  public void setVisible(boolean isVisible) {
-
-    assert (checkReady());
-    this.visible = isVisible;
-    invoke(OPERATION_SET_VISIBLE);
-  }
-
-  /**
-   * This method gets the visible flag as set by {@link #setVisible(boolean)}.
-   * This is NOT the same as the {@link Control#isVisible() visible-flag} of the
-   * control.
-   * 
-   * @return the visible-flag.
-   */
-  public boolean isVisible() {
-
-    assert (checkReady());
-    invoke(OPERATION_IS_VISIBLE);
-    return this.visible;
   }
 
   /**
@@ -543,7 +483,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
    * This method {@link Control#computeSize(int, int) computes} the size of the
    * control.
    * 
-   * @param widthHint the suggested width or {@link org.eclipse.swt.SWT#DEFAULT}.
+   * @param widthHint the suggested width or {@link org.eclipse.swt.SWT#DEFAULT}
+   *        .
    * @param heightHint the suggested height or
    *        {@link org.eclipse.swt.SWT#DEFAULT}.
    * @return the computed size.
@@ -585,8 +526,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font) font}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font)
+   * font} of the control.
    * 
    * @param newFont is the new font to set.
    */
@@ -612,8 +553,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color) foreground-color}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color)
+   * foreground-color} of the control.
    * 
    * @param foregroundColor is the foreground-color to set.
    */
@@ -639,8 +580,8 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color) background-color}
-   * of the control.
+   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color)
+   * background-color} of the control.
    * 
    * @param backgroundColor is the background-color to set.
    */
@@ -649,6 +590,49 @@ public abstract class AbstractSyncControlAccess extends AbstractSyncWidgetAccess
     assert (checkReady());
     this.background = backgroundColor;
     invoke(OPERATION_SET_BACKGROUND);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setParent(UiNode newParent) {
+
+    if (newParent == null) {
+      System.out.println("AbstractUiElement: This should be kicked out!");
+      // getSwtControl().setParent(getFactory().getDummyParent());
+    } else {
+      AbstractSyncCompositeAccess<?> parentAccess2;
+      boolean autoAttach = true;
+      if (newParent instanceof AbstractUiComposite<?, ?>) {
+        AbstractUiComposite<?, ?> parentComposite = (AbstractUiComposite<?, ?>) newParent;
+        parentAccess2 = (AbstractSyncCompositeAccess<?>) parentComposite.getAdapter();
+        autoAttach = true; // parentComposite.isAttachToActiveAccess();
+      } else {
+        parentAccess2 = ((AbstractUiWindowSwt) newParent).getAdapter();
+      }
+      if (autoAttach) {
+        setParentAccess(parentAccess2);
+      }
+      if ((getDelegate() == null) && (parentAccess2.getDelegate() != null)) {
+        create();
+      }
+    }
+    super.setParent(newParent);
+    update();
+  }
+
+  /**
+   * 
+   */
+  public void update() {
+
+    UiNode parent = getNode().getParent();
+    if (parent instanceof AbstractUiElement<?>) {
+      AbstractUiElement<?> p = (AbstractUiElement<?>) parent;
+      ((AbstractSyncControlAccess<?>) p.getAdapter()).update();
+    }
+    // nothing to do so far
   }
 
 }

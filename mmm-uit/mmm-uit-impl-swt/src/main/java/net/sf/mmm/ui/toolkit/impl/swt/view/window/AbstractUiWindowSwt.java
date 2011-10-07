@@ -7,11 +7,9 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.event.SwtListenerAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncShellAccess;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Shell;
 
@@ -22,19 +20,13 @@ import org.eclipse.swt.widgets.Shell;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
-
-  /** @see #getFactory() */
-  private final UiFactorySwt factory;
+public abstract class AbstractUiWindowSwt extends AbstractUiWindow<Shell> {
 
   /** the SWT shell (window) */
   private Shell shell;
 
-  /** to access the {@link org.eclipse.swt.widgets.Shell} properties */
-  private final SyncShellAccess syncAccess;
-
-  /** @see #isResizable() */
-  private final boolean resizableFlag;
+  /** @see #getAdapter() */
+  private final SyncShellAccess adapter;
 
   /**
    * The constructor.
@@ -54,11 +46,9 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   public AbstractUiWindowSwt(final UiFactorySwt uiFactory, final AbstractUiWindowSwt parent,
       int defaultStyle, boolean modal, boolean resizable) {
 
-    super(uiFactory, parent);
-    this.factory = uiFactory;
-    this.resizableFlag = resizable;
+    super(uiFactory);
     int styleModifiers = 0;
-    if (this.resizableFlag) {
+    if (resizable) {
       styleModifiers |= SWT.RESIZE;
     }
     if (modal) {
@@ -79,7 +69,7 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
         AbstractUiWindowSwt.this.shell.setLayout(new FillLayout());
       }
     });
-    this.syncAccess = new SyncShellAccess(uiFactory, style, this.shell);
+    this.adapter = new SyncShellAccess(uiFactory, this, style, this.shell);
   }
 
   /**
@@ -88,7 +78,7 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   @Override
   public UiFactorySwt getFactory() {
 
-    return this.factory;
+    return (UiFactorySwt) super.getFactory();
   }
 
   /**
@@ -107,138 +97,10 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   @Override
   protected boolean doInitializeListener() {
 
-    SwtListenerAdapter listenerAdaptor = new SwtListenerAdapter(this);
     // TODO
-    this.shell.addListener(SWT.Show, listenerAdaptor);
-    this.shell.addListener(SWT.Hide, listenerAdaptor);
+    this.shell.addListener(SWT.Show, getAdapter());
+    this.shell.addListener(SWT.Hide, getAdapter());
     return true;
-  }
-
-  /**
-   * This method gets the current bounds of the shell.
-   * 
-   * @return the bounds.
-   */
-  protected Rectangle getBounds() {
-
-    return this.syncAccess.getBounds();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetVisible(boolean visibleFlag) {
-
-    this.syncAccess.setVisible(visibleFlag);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected boolean doIsInvisible() {
-
-    return !this.syncAccess.isVisible();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void pack() {
-
-    this.syncAccess.pack();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getTitle() {
-
-    return this.syncAccess.getTitle();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setTitle(String newTitle) {
-
-    this.syncAccess.setTitel(newTitle);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setPosition(int x, int y) {
-
-    this.syncAccess.setLocation(x, y);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setSize(final int width, final int height) {
-
-    this.syncAccess.setSize(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getX() {
-
-    return getBounds().x;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getY() {
-
-    return getBounds().y;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getWidth() {
-
-    return getBounds().width;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public int getHeight() {
-
-    return getBounds().height;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void dispose() {
-
-    super.dispose();
-    this.syncAccess.dispose();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isDisposed() {
-
-    return this.syncAccess.isDisposed();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isResizable() {
-
-    return this.resizableFlag;
   }
 
   /**
@@ -259,13 +121,12 @@ public abstract class AbstractUiWindowSwt extends AbstractUiWindow {
   }
 
   /**
-   * This method gets synchron access on the SWT window (shell).
-   * 
-   * @return sync access to the sell.
+   * {@inheritDoc}
    */
-  public SyncShellAccess getSyncAccess() {
+  @Override
+  public SyncShellAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
 }

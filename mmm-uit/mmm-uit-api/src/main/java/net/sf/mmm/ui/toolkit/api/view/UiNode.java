@@ -5,11 +5,13 @@ package net.sf.mmm.ui.toolkit.api.view;
 
 import net.sf.mmm.ui.toolkit.api.UiObject;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadEnabled;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadEnabledState;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadVisible;
+import net.sf.mmm.ui.toolkit.api.attribute.UiReadVisibleState;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteStyles;
-import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
+import net.sf.mmm.ui.toolkit.api.event.UiEventSender;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 
@@ -21,8 +23,8 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiNode extends UiObject, UiWriteId, UiWriteStyles, UiReadVisible, UiReadEnabled,
-    UiWriteDisposed {
+public interface UiNode extends UiObject, UiWriteId, UiWriteStyles, UiReadVisible,
+    UiReadVisibleState, UiReadEnabled, UiReadEnabledState, UiWriteDisposed, UiEventSender {
 
   /**
    * This method gets the parent component.
@@ -44,21 +46,6 @@ public interface UiNode extends UiObject, UiWriteId, UiWriteStyles, UiReadVisibl
    * @return the parent window or <code>null</code> if this is a root frame.
    */
   UiWindow getParentWindow();
-
-  /**
-   * This method adds an action listener to this component. The listener will be
-   * notified of changes of this component.
-   * 
-   * @param listener is the listener to add.
-   */
-  void addListener(UiEventListener listener);
-
-  /**
-   * This method removes an action listener from this component.
-   * 
-   * @param listener is the listener to remove.
-   */
-  void removeListener(UiEventListener listener);
 
   /**
    * This method refreshes this node. If not explicitly specified in the

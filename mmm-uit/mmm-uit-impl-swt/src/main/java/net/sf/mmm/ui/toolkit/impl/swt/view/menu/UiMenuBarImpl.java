@@ -18,10 +18,10 @@ import org.eclipse.swt.widgets.Menu;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiMenuBarImpl extends AbstractUiMenuBar {
+public class UiMenuBarImpl extends AbstractUiMenuBar<Menu> {
 
-  /** the synchronous access */
-  private final SyncMenuAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncMenuAccess adapter;
 
   /**
    * The constructor.
@@ -32,7 +32,16 @@ public class UiMenuBarImpl extends AbstractUiMenuBar {
   public UiMenuBarImpl(UiFactorySwt uiFactory, Menu swtMenuBar) {
 
     super(uiFactory);
-    this.syncAccess = new SyncMenuAccess(uiFactory, SWT.BAR, swtMenuBar, null);
+    this.adapter = new SyncMenuAccess(uiFactory, this, SWT.BAR, swtMenuBar, null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public SyncMenuAccess getAdapter() {
+
+    return this.adapter;
   }
 
   /**
@@ -41,7 +50,7 @@ public class UiMenuBarImpl extends AbstractUiMenuBar {
   @Override
   protected UiMenu createMenu(String name) {
 
-    Menu subMenu = this.syncAccess.createSubMenu(name);
+    Menu subMenu = this.adapter.createSubMenu(name);
     return new UiMenuImpl((UiFactorySwt) getFactory(), subMenu, name);
   }
 

@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.ProgressBar;
-
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.ProgressBar;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncProgressBarAccess extends AbstractSyncControlAccess {
+public class SyncProgressBarAccess extends AbstractSyncControlAccess<ProgressBar> {
 
   /**
    * operation to set the
@@ -52,13 +53,13 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        progress-bar.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the progress-bar.
    */
-  public SyncProgressBarAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncProgressBarAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.progressBar = null;
     this.selection = 0;
     this.minimum = 0;
@@ -68,8 +69,7 @@ public class SyncProgressBarAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public ProgressBar getSwtObject() {
+  public ProgressBar getDelegate() {
 
     return this.progressBar;
   }

@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.Table;
-
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTable;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Table;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,12 +14,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncTableAccess extends AbstractSyncControlAccess {
+public class SyncTableAccess extends AbstractSyncControlAccess<Table> {
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Table#getSelection() selection} of the
-   * table.
+   * operation to get the {@link org.eclipse.swt.widgets.Table#getSelection()
+   * selection} of the table.
    */
   private static final String OPERATION_GET_SELECTION = "getSelection";
 
@@ -45,13 +45,13 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        table.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the table.
    */
-  public SyncTableAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncTableAccess(UiFactorySwt uiFactory, UiTable<?> node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.table = null;
     this.selection = 0;
   }
@@ -59,8 +59,7 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Table getSwtObject() {
+  public Table getDelegate() {
 
     return this.table;
   }
@@ -95,9 +94,8 @@ public class SyncTableAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Table#getSelection() selection} of the
-   * table.
+   * This method gets the {@link org.eclipse.swt.widgets.Table#getSelection()
+   * selection} of the table.
    * 
    * @return the selection.
    */

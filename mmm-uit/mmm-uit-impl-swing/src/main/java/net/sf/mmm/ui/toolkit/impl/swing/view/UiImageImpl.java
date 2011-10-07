@@ -7,12 +7,11 @@ import javax.swing.ImageIcon;
 
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiImage;
-import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
+import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.UiImage} interface using Swing as the
- * underlying implementation.
+ * {@link net.sf.mmm.ui.toolkit.api.view.UiImage} interface using Swing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -20,7 +19,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
 public class UiImageImpl extends AbstractUiImage {
 
   /** the wrapped picture */
-  private final ImageIcon picture;
+  private final ImageIcon image;
 
   /**
    * The constructor.
@@ -28,19 +27,10 @@ public class UiImageImpl extends AbstractUiImage {
    * @param uiFactory is the UIFactorySwing instance.
    * @param imageUrl is the URL to the image data.
    */
-  public UiImageImpl(UIFactorySwing uiFactory, UiFileAccess imageUrl) {
+  public UiImageImpl(UiFactorySwing uiFactory, UiFileAccess imageUrl) {
 
     super(uiFactory);
-    this.picture = new ImageIcon(imageUrl.getUrl());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getType() {
-
-    return TYPE;
+    this.image = new ImageIcon(imageUrl.getUrl());
   }
 
   /**
@@ -48,7 +38,7 @@ public class UiImageImpl extends AbstractUiImage {
    */
   public int getPreferredWidth() {
 
-    return this.picture.getIconWidth();
+    return this.image.getIconWidth();
   }
 
   /**
@@ -56,7 +46,7 @@ public class UiImageImpl extends AbstractUiImage {
    */
   public int getPreferredHeight() {
 
-    return this.picture.getIconHeight();
+    return this.image.getIconHeight();
   }
 
   /**
@@ -66,7 +56,7 @@ public class UiImageImpl extends AbstractUiImage {
    */
   public ImageIcon getSwingIcon() {
 
-    return this.picture;
+    return this.image;
   }
 
 }

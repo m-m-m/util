@@ -4,9 +4,8 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
+import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenuItem;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiNodeSwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMenuItemAccess;
 
 import org.eclipse.swt.SWT;
@@ -20,16 +19,16 @@ import org.eclipse.swt.widgets.MenuItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
+public class UiMenuItemImpl extends AbstractUiMenuItem<MenuItem> {
 
   /** the SWT menu item */
   private final MenuItem menuItem;
 
-  /** the synchronous access to the menu-item */
-  private final SyncMenuItemAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncMenuItemAccess adapter;
 
-  /** the style */
-  private final ButtonStyle style;
+  /** @see #getButtonStyle() */
+  private final ButtonStyle buttonStyle;
 
   /**
    * The constructor.
@@ -40,13 +39,12 @@ public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
    *        behaves.
    * @param item is the actual SWT menu-item.
    */
-  public UiMenuItemImpl(UiFactorySwt uiFactory, String text, ButtonStyle itemStyle,
-      MenuItem item) {
+  public UiMenuItemImpl(UiFactorySwt uiFactory, String text, ButtonStyle itemStyle, MenuItem item) {
 
     super(uiFactory);
     int swtStyle = UiFactorySwt.convertButtonStyleForMenuItem(itemStyle);
-    this.syncAccess = new SyncMenuItemAccess(uiFactory, swtStyle, item, text);
-    this.style = itemStyle;
+    this.adapter = new SyncMenuItemAccess(uiFactory, this, swtStyle, item, text);
+    this.buttonStyle = itemStyle;
     this.menuItem = item;
   }
 
@@ -64,9 +62,18 @@ public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
    * {@inheritDoc}
    */
   @Override
+  public SyncMenuItemAccess getAdapter() {
+
+    return this.adapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected boolean doInitializeListener() {
 
-    this.syncAccess.addListener(SWT.Selection, createSwtListener());
+    this.adapter.addListener(SWT.Selection, getAdapter());
     return true;
   }
 
@@ -75,15 +82,7 @@ public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
    */
   public String getValue() {
 
-    return this.syncAccess.getText();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getType() {
-
-    return TYPE;
+    return this.adapter.getText();
   }
 
   /**
@@ -91,7 +90,7 @@ public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
    */
   public ButtonStyle getButtonStyle() {
 
-    return this.style;
+    return this.buttonStyle;
   }
 
   /**
@@ -99,7 +98,7 @@ public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
    */
   public boolean isSelected() {
 
-    return this.syncAccess.isSelected();
+    return this.adapter.isSelected();
   }
 
   /**
@@ -107,7 +106,7 @@ public class UiMenuItemImpl extends AbstractUiNodeSwt implements UiMenuItem {
    */
   public void setSelected(boolean selected) {
 
-    this.syncAccess.setSelected(selected);
+    this.adapter.setSelected(selected);
   }
 
 }

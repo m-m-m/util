@@ -14,10 +14,10 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public interface UiReadValue<V> {
 
   /**
-   * This method gets the text of this object. This can be the text of a label,
-   * button, a border title, the value of some text
+   * This method gets the value of this object. This can be the text of a label
+   * or button, as well as the date of a date-picker.
    * 
-   * @return the text of this object.
+   * @return the value of this object.
    */
   V getValue();
 

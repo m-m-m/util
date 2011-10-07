@@ -11,21 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
-import net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing;
-import net.sf.mmm.ui.toolkit.impl.swing.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
 
 /**
  * This is the implementation of the {@link UiBorderPanel} using swing.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSingleComposite<E>
-    implements UiBorderPanel<E> {
-
-  /** @see #getSwingComponent() */
-  private final JPanel panel;
+public class UiBorderPanelImpl<CHILD extends AbstractUiElement<? extends JComponent>> extends
+    AbstractUiSingleCompositeSwing<JPanel, CHILD> implements UiBorderPanel<CHILD> {
 
   /** @see #getTitle() */
   private final TitledBorder border;
@@ -35,14 +32,12 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
    * 
    * @param uiFactory is the UIFactorySwing instance.
    */
-  public UiBorderPanelImpl(UIFactorySwing uiFactory) {
+  public UiBorderPanelImpl(UiFactorySwing uiFactory) {
 
-    super(uiFactory);
-    this.panel = new JPanel(new GridLayout(1, 1));
+    super(uiFactory, new JPanel(new GridLayout(1, 1)));
     this.border = BorderFactory.createTitledBorder("");
     setBorderJustification();
-    this.panel.setBorder(this.border);
-    initialize();
+    getDelegate().setBorder(this.border);
   }
 
   /**
@@ -69,15 +64,6 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
   /**
    * {@inheritDoc}
    */
-  @Override
-  public JComponent getSwingComponent() {
-
-    return this.panel;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public String getTitle() {
 
     return this.border.getTitle();
@@ -95,11 +81,12 @@ public class UiBorderPanelImpl<E extends AbstractUiElement> extends AbstractUiSi
    * {@inheritDoc}
    */
   @Override
-  public void setChild(E child) {
+  public void setChild(CHILD child) {
 
     super.setChild(child);
-    this.panel.removeAll();
-    this.panel.add(child.getSwingComponent());
+    JPanel delegate = getDelegate();
+    delegate.removeAll();
+    delegate.add(child.getAdapter().getDelegate());
   }
 
 }

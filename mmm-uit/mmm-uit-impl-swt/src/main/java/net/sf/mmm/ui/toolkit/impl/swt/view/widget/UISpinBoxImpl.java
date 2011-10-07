@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
+import net.sf.mmm.ui.toolkit.impl.swt.custom.MySpinner;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncMySpinnerAccess;
 
 import org.eclipse.swt.SWT;
@@ -20,7 +20,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
+public class UISpinBoxImpl<E> extends AbstractUiWidgetSwt<MySpinner> implements UiSpinBox<E> {
 
   /** the native SWT widget */
   private final SyncMySpinnerAccess syncAccess;
@@ -37,7 +37,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
   public UISpinBoxImpl(UiFactorySwt uiFactory, UiListMvcModel<E> listModel) {
 
     super(uiFactory);
-    this.syncAccess = new SyncMySpinnerAccess(uiFactory, SWT.NONE, listModel);
+    this.syncAccess = new SyncMySpinnerAccess(uiFactory, this, SWT.NONE, listModel);
     this.model = listModel;
     // this.spinBox.setMinimum(this.model.getMinWidthimumValue());
     // this.spinBox.setMaximum(this.model.getMaximumValue());
@@ -48,7 +48,7 @@ public class UISpinBoxImpl<E> extends AbstractUIWidget implements UiSpinBox<E> {
    * {@inheritDoc}
    */
   @Override
-  public AbstractSyncControlAccess getSyncAccess() {
+  public SyncMySpinnerAccess getAdapter() {
 
     return this.syncAccess;
   }

@@ -10,11 +10,12 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * This is the interface for a tabbed panel. Such component is a composite that
  * contains a number of components that can be switched via a tab-header.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiTabPanel<E extends UiElement> extends UiMultiComposite<E>, UiReadOrientation {
+public interface UiTabPanel<CHILD extends UiElement> extends UiMultiComposite<CHILD>,
+    UiReadOrientation {
 
   /** the type of this object */
   String TYPE = "TabPanel";
@@ -27,7 +28,7 @@ public interface UiTabPanel<E extends UiElement> extends UiMultiComposite<E>, Ui
    *        be created by the same factory.
    * @param title is the title that will be displayed in the tab.
    */
-  void addChild(E component, String title);
+  void addChild(CHILD component, String title);
 
   /**
    * This method adds the given component as new tab on the ride of all existing
@@ -39,6 +40,6 @@ public interface UiTabPanel<E extends UiElement> extends UiMultiComposite<E>, Ui
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void insertChild(E component, String title, int position);
+  void insertChild(CHILD component, String title, int position);
 
 }

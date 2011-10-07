@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.model.TableModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTableAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Table;
 
 /**
  * This class is the implementation of the
@@ -20,10 +21,10 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
+public class UITableImpl<C> extends AbstractUiWidgetSwt<Table> implements UiTable<C> {
 
-  /** the sync access to the native SWT table */
-  private final SyncTableAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncTableAccess adapter;
 
   /** the model adapter */
   private final TableModelAdapter<C> modelAdapter;
@@ -45,26 +46,25 @@ public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
       style = SWT.SINGLE;
     }
     style |= SWT.VIRTUAL;
-    this.syncAccess = new SyncTableAccess(uiFactory, style);
-    this.modelAdapter = new TableModelAdapter<C>(this.syncAccess);
+    this.adapter = new SyncTableAccess(uiFactory, this, style);
+    this.modelAdapter = new TableModelAdapter<C>(this.adapter);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SyncTableAccess getSyncAccess() {
+  public SyncTableAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
   public void create() {
 
-    super.create();
+    // super.create();
     this.modelAdapter.initialize();
   }
 
@@ -97,7 +97,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
    */
   public int getSelectedIndex() {
 
-    return this.syncAccess.getSelection();
+    return this.adapter.getSelection();
   }
 
   /**
@@ -105,7 +105,7 @@ public class UITableImpl<C> extends AbstractUIWidget implements UiTable<C> {
    */
   public void setSelectedIndex(int newIndex) {
 
-    this.syncAccess.setSelection(newIndex);
+    this.adapter.setSelection(newIndex);
   }
 
 }

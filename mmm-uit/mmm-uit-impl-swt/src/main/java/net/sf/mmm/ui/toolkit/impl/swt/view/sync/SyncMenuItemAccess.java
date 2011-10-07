@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.MenuItem;
-
+import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuItem;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.MenuItem;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
+public class SyncMenuItemAccess extends AbstractSyncWidgetAccess<MenuItem> {
 
   /**
    * operation to set the
@@ -24,8 +25,8 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.MenuItem#setSelection(boolean) selection-status}
-   * of the menu-item.
+   * {@link org.eclipse.swt.widgets.MenuItem#setSelection(boolean)
+   * selection-status} of the menu-item.
    */
   protected static final String OPERATION_SET_SELECTED = "setSelected";
 
@@ -45,19 +46,23 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
   /** the selection-status of the menu-item */
   private boolean selected;
 
+  /** @see #isEnabled() */
+  private boolean enabled;
+
   /**
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the menu.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the menu.
    * @param swtMenuItem is the menu-item to access.
    * @param itemText is the text of the <code>swtMenuItem</code>.
    */
-  public SyncMenuItemAccess(UiFactorySwt uiFactory, int swtStyle, MenuItem swtMenuItem,
-      String itemText) {
+  public SyncMenuItemAccess(UiFactorySwt uiFactory, UiMenuItem node, int swtStyle,
+      MenuItem swtMenuItem, String itemText) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.menuItem = swtMenuItem;
     this.selected = false;
     this.text = itemText;
@@ -75,6 +80,8 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
       this.menuItem.setSelection(this.selected);
     } else if (operation == OPERATION_IS_SELECTED) {
       this.selected = this.menuItem.getSelection();
+    } else if (operation == OPERATION_SET_ENABLED) {
+      this.menuItem.setEnabled(this.enabled);
     } else {
       super.performSynchron(operation);
     }
@@ -83,8 +90,7 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public MenuItem getSwtObject() {
+  public MenuItem getDelegate() {
 
     return this.menuItem;
   }
@@ -128,8 +134,8 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.MenuItem#setSelection(boolean) selection-status}
-   * of the menu-item.
+   * {@link org.eclipse.swt.widgets.MenuItem#setSelection(boolean)
+   * selection-status} of the menu-item.
    * 
    * @param selection is the selection-status to set.
    */
@@ -138,6 +144,25 @@ public class SyncMenuItemAccess extends AbstractSyncWidgetAccess {
     assert (checkReady());
     this.selected = selection;
     invoke(OPERATION_SET_SELECTED);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isEnabled() {
+
+    return this.enabled;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEnabled(boolean enabled) {
+
+    assert (checkReady());
+    this.enabled = enabled;
+    invoke(OPERATION_SET_ENABLED);
   }
 
 }

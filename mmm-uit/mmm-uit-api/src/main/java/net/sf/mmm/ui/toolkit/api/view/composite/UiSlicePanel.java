@@ -32,12 +32,12 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  * @deprecated - use dedicated panels instead.
  */
 @Deprecated
-public interface UiSlicePanel<E extends UiElement> extends UiExtendableComposite<E>,
+public interface UiSlicePanel<CHILD extends UiElement> extends UiExtendableComposite<CHILD>,
     UiWriteOrientation {
 
   /** the type of this object */
@@ -50,7 +50,7 @@ public interface UiSlicePanel<E extends UiElement> extends UiExtendableComposite
    * If the panel has vertical layout, the component will appear at the bottom.
    * It will use {@link LayoutConstraints#DEFAULT} as constraints.
    */
-  void addChild(E component);
+  void addChild(CHILD component);
 
   /**
    * This method adds the given component to the end of the panels component
@@ -63,7 +63,7 @@ public interface UiSlicePanel<E extends UiElement> extends UiExtendableComposite
    * @param constraints are the constraints that define the layout of the
    *        component in this panel.
    */
-  void addChild(E component, LayoutConstraints constraints);
+  void addChild(CHILD component, LayoutConstraints constraints);
 
   /**
    * This method adds the given component at the given position.
@@ -75,6 +75,6 @@ public interface UiSlicePanel<E extends UiElement> extends UiExtendableComposite
    * @param position is the index position where the given component will be
    *        inserted.
    */
-  void insertChild(E component, LayoutConstraints constraints, int position);
+  void insertChild(CHILD component, LayoutConstraints constraints, int position);
 
 }

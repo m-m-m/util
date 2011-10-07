@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.Combo;
-
+import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Combo;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,71 +14,69 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncComboAccess extends AbstractSyncControlAccess {
+public class SyncComboAccess extends AbstractSyncControlAccess<Combo> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Combo#setText(String) text} of the combo.
+   * operation to set the {@link org.eclipse.swt.widgets.Combo#setText(String)
+   * text} of the {@link Combo}.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
   /**
    * operation to get the {@link org.eclipse.swt.widgets.Combo#getText() text}
-   * of the combo.
+   * of the {@link Combo}.
    */
   private static final String OPERATION_GET_TEXT = "getText";
 
   /**
    * operation to set the
    * {@link org.eclipse.swt.widgets.Combo#setTextLimit(int) text-limit} of the
-   * combo.
+   * {@link Combo}.
    */
   private static final String OPERATION_SET_TEXT_LIMIT = "setTextLimit";
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Combo#getSelection() selection} of the
-   * combo.
+   * operation to get the {@link org.eclipse.swt.widgets.Combo#getSelection()
+   * selection} of the {@link Combo}.
    */
   private static final String OPERATION_GET_SELECTION = "getSelection";
 
   /**
    * operation to {@link org.eclipse.swt.widgets.Combo#removeAll() "remove all"}
-   * items of the combo.
+   * items of the {@link Combo}.
    */
   private static final String OPERATION_REMOVE_ALL = "removeAll";
 
   /**
-   * operation to
-   * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) add} an item to
-   * the combo.
+   * operation to {@link org.eclipse.swt.widgets.Combo#add(java.lang.String)
+   * add} an item to the {@link Combo}.
    */
   private static final String OPERATION_ADD = "add";
 
   /**
    * operation to
    * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String, int) add} an
-   * item at a given index to the combo.
+   * item at a given index to the {@link Combo}.
    */
   private static final String OPERATION_ADD_AT = "addAt";
 
   /**
    * operation to {@link org.eclipse.swt.widgets.Combo#remove(int) remove} the
-   * item at a given index from the combo.
+   * item at a given index from the {@link Combo}.
    */
   private static final String OPERATION_REMOVE_AT = "removeAt";
 
   /**
    * operation to
    * {@link org.eclipse.swt.widgets.Combo#setItem(int, java.lang.String) set}
-   * the item at a given index in the combo.
+   * the item at a given index in the {@link Combo}.
    */
   private static final String OPERATION_SET_ITEM = "setItem";
 
-  /** the combo to access */
+  /** @see #getDelegate() */
   private Combo combo;
 
-  /** the text of this combo */
+  /** @see #getText() */
   private String text;
 
   /** the selection value */
@@ -96,13 +95,13 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        combo.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the {@link Combo}.
    */
-  public SyncComboAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncComboAccess(UiFactorySwt uiFactory, UiComboBox<?> node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.combo = null;
     this.selection = 0;
     this.textLimit = Combo.LIMIT;
@@ -114,8 +113,7 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Combo getSwtObject() {
+  public Combo getDelegate() {
 
     return this.combo;
   }
@@ -164,9 +162,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Combo#getSelection() selection} of the
-   * combo.
+   * This method gets the {@link org.eclipse.swt.widgets.Combo#getSelection()
+   * selection} of the combo.
    * 
    * @return the selection.
    */
@@ -178,9 +175,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Combo#getTextLimit() text-limit} of the
-   * combo.
+   * This method gets the {@link org.eclipse.swt.widgets.Combo#getTextLimit()
+   * text-limit} of the combo.
    * 
    * @return the maximum character count for the combo.
    */
@@ -204,9 +200,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method
-   * {@link org.eclipse.swt.widgets.Combo#add(java.lang.String) adds} an item to
-   * the combo at the end of the item-list.
+   * This method {@link org.eclipse.swt.widgets.Combo#add(java.lang.String)
+   * adds} an item to the combo at the end of the item-list.
    * 
    * @param itemText is the display text of the item.
    */
@@ -286,8 +281,8 @@ public class SyncComboAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Combo#setText(String) text} of the combo.
+   * This method sets the {@link org.eclipse.swt.widgets.Combo#setText(String)
+   * text} of the combo.
    * 
    * @param newText is the new text to set.
    */

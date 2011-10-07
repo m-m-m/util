@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.model.SlideBarModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncSliderAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Slider;
 
 /**
  * This class is the implementation of the
@@ -22,10 +23,10 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E> {
+public class UISlideBarImpl<E> extends AbstractUiWidgetSwt<Slider> implements UiSlideBar<E> {
 
-  /** the synchron access to the slider */
-  private final SyncSliderAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncSliderAccess adapter;
 
   /** the model adapter */
   private final SlideBarModelAdapter modelAdapter;
@@ -51,9 +52,9 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
     this.orientation = sliderOrientation;
     this.model = sliderModel;
     int style = UiFactorySwt.convertOrientation(sliderOrientation);
-    this.syncAccess = new SyncSliderAccess(uiFactory, style);
-    this.syncAccess.setMaximum(this.model.getElementCount());
-    this.modelAdapter = new SlideBarModelAdapter(this.syncAccess);
+    this.adapter = new SyncSliderAccess(uiFactory, this, style);
+    this.adapter.setMaximum(this.model.getElementCount());
+    this.modelAdapter = new SlideBarModelAdapter(this.adapter);
     this.modelAdapter.setModel(this.model);
   }
 
@@ -61,18 +62,17 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
    * {@inheritDoc}
    */
   @Override
-  public SyncSliderAccess getSyncAccess() {
+  public SyncSliderAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
   public void create() {
 
-    super.create();
+    // super.create();
     this.modelAdapter.initialize();
   }
 
@@ -82,7 +82,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
   @Override
   protected boolean doInitializeListener() {
 
-    this.syncAccess.addListener(SWT.Selection, createSwtListener());
+    this.adapter.addListener(SWT.Selection, getAdapter());
     return true;
   }
 
@@ -107,7 +107,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
    */
   public int getSelectedIndex() {
 
-    return this.syncAccess.getSelection();
+    return this.adapter.getSelection();
   }
 
   /**
@@ -115,7 +115,7 @@ public class UISlideBarImpl<E> extends AbstractUIWidget implements UiSlideBar<E>
    */
   public void setSelectedIndex(int newIndex) {
 
-    this.syncAccess.setSelection(newIndex);
+    this.adapter.setSelection(newIndex);
   }
 
   /**

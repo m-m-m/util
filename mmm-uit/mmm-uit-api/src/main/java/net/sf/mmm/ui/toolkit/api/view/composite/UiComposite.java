@@ -8,11 +8,11 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 /**
  * This is the interface of a UI component that contains other UI components.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiComposite<E extends UiElement> extends UiElement {
+public interface UiComposite<CHILD extends UiElement> extends UiElement {
 
   /**
    * This method gets the number of sub-components in this composite component.
@@ -29,6 +29,6 @@ public interface UiComposite<E extends UiElement> extends UiElement {
    * @throws IndexOutOfBoundsException if the given index is not in the range
    *         from <code>0</code> to <code>{@link #getChildCount()} - 1</code>.
    */
-  E getChild(int index) throws IndexOutOfBoundsException;
+  CHILD getChild(int index) throws IndexOutOfBoundsException;
 
 }

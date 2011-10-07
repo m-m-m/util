@@ -48,7 +48,7 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
   public boolean isMaximized() {
 
     // return getSwtWindow().getMaximized();
-    return getSyncAccess().getMaximized();
+    return getAdapter().getMaximized();
   }
 
   /**
@@ -57,7 +57,7 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
   public void setMaximized(boolean maximize) {
 
     // getSwtWindow().setMaximized(maximize);
-    getSyncAccess().setMaximized(maximize);
+    getAdapter().setMaximized(maximize);
   }
 
   /**
@@ -74,7 +74,7 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
   public void setMinimized(boolean minimize) {
 
     // getSwtWindow().setMinimized(minimize);
-    getSyncAccess().setMinimized(minimize);
+    getAdapter().setMinimized(minimize);
   }
 
   /**
@@ -82,13 +82,13 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
    */
   public boolean isMinimized() {
 
-    return getSyncAccess().getMinimized();
+    return getAdapter().getMinimized();
   }
 
   /**
    * {@inheritDoc}
    */
-  public UiFrameImpl createFrame(String title, boolean resizable) {
+  public UiFrame createFrame(String title, boolean resizable) {
 
     return getFactory().createFrame(this, title, resizable);
   }
@@ -110,7 +110,7 @@ public class UiFrameImpl extends AbstractUiWindowSwt implements UiFrame {
     if (this.menuBar == null) {
       synchronized (this) {
         if (this.menuBar == null) {
-          Menu menu = getSyncAccess().createMenuBar();
+          Menu menu = getAdapter().createMenuBar();
           this.menuBar = new UiMenuBarImpl(getFactory(), menu);
         }
       }

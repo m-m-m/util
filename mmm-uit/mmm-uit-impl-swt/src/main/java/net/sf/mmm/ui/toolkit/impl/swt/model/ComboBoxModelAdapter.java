@@ -80,7 +80,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
    */
   public void initialize() {
 
-    if (this.syncAccess.getSwtObject() != null) {
+    if (this.syncAccess.getDelegate() != null) {
       this.event = null;
       this.syncAccess.getDisplay().invokeSynchron(this);
       this.model.addListener(this);
@@ -96,7 +96,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
 
     if (this.event == null) {
       // initialize
-      Combo combo = this.syncAccess.getSwtObject();
+      Combo combo = this.syncAccess.getDelegate();
       synchronized (this.model) {
         int count = this.model.getElementCount();
         for (int i = 0; i < count; i++) {
@@ -106,7 +106,7 @@ public class ComboBoxModelAdapter implements UIListModelListener, Runnable {
     } else {
       int start = this.event.getStartIndex();
       int end = this.event.getEndIndex();
-      Combo combo = this.syncAccess.getSwtObject();
+      Combo combo = this.syncAccess.getDelegate();
       if (this.event.getType() == ChangeType.ADD) {
         for (int i = start; i <= end; i++) {
           combo.add(this.model.getElementAsString(i), i);

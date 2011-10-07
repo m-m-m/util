@@ -14,10 +14,12 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public interface UiWriteValue<V> extends UiReadValue<V> {
 
   /**
-   * This method sets the text of this object.
+   * This method sets the value of this object.
    * 
-   * @param text is the new text for this object.
+   * @see #getValue()
+   * 
+   * @param value is the new value for this object.
    */
-  void setValue(V text);
+  void setValue(V value);
 
 }

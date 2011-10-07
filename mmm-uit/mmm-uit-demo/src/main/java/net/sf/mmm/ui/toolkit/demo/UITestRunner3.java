@@ -4,9 +4,8 @@
 package net.sf.mmm.ui.toolkit.demo;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
@@ -32,13 +31,13 @@ public class UITestRunner3 {
     UIDemoBuilder.createMenus(workbench);
     workbench.setSize(800, 1024);
     workbench.setVisible(true);
-    UiSlicePanel panel2 = factory.createPanel(Orientation.VERTICAL);
+    UiSimplePanel panel2 = factory.createSimplePanel(Orientation.VERTICAL);
     UiButton button2 = factory.createButton("Button");
-    panel2.addChild(factory.createLabel("Text"), LayoutConstraints.FIXED_HORIZONTAL);
-    panel2.addChild(button2, LayoutConstraints.FIXED_NONE);
+    panel2.addChild(factory.createLabel("Text"));
+    panel2.addChild(button2);
     workbench.setComposite(panel2);
     final UiFrame frame = workbench.createFrame("TestFrame", true);
-    UiSlicePanel panel = factory.createPanel(Orientation.VERTICAL);
+    UiSimplePanel panel = factory.createSimplePanel(Orientation.VERTICAL);
     UiButton button = factory.createButton("Button");
     // UiDecoratedComponent<UiLabel, UiButton> labeledButton =
     // factory.createLabeledComponent(
@@ -71,7 +70,7 @@ public class UITestRunner3 {
   public static void main(String[] args) {
 
     String title = UITestRunner3.class.getSimpleName();
-    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UIFactorySwing(title));
+    runTest(new net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing(title));
     runTest(new net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt(title));
   }
 

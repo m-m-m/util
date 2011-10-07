@@ -8,6 +8,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.gwt.AbstractUiFactoryGwt;
 import net.sf.mmm.ui.toolkit.base.gwt.JavaScriptUtil;
 import net.sf.mmm.ui.toolkit.base.view.menu.AbstractUiMenuBar;
+import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 
 import com.google.gwt.user.client.Window;
 
@@ -17,7 +18,7 @@ import com.google.gwt.user.client.Window;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWorkbenchGwt extends AbstractUiWindowGwt implements UiWorkbench {
+public abstract class AbstractUiWorkbenchGwt extends AbstractUiWindow implements UiWorkbench {
 
   /** @see #isMaximized() */
   private boolean maximized;
@@ -47,7 +48,7 @@ public abstract class AbstractUiWorkbenchGwt extends AbstractUiWindowGwt impleme
    */
   public AbstractUiWorkbenchGwt(AbstractUiFactoryGwt uiFactory) {
 
-    super(uiFactory, null);
+    super(uiFactory);
   }
 
   /**

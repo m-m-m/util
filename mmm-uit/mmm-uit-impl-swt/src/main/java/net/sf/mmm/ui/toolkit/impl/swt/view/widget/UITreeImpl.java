@@ -12,6 +12,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.model.TreeModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTreeAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Tree;
 
 /**
  * This class is the implementation of the
@@ -23,7 +24,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
+public class UITreeImpl<N> extends AbstractUiWidgetSwt<Tree> implements UiTree<N> {
 
   /** the unwrapped swt tree */
   private final SyncTreeAccess syncAccess;
@@ -47,7 +48,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
     } else {
       style |= SWT.SINGLE;
     }
-    this.syncAccess = new SyncTreeAccess(uiFactory, style);
+    this.syncAccess = new SyncTreeAccess(uiFactory, this, style);
     this.modelAdapter = new TreeModelAdapter<N>(this.syncAccess);
   }
 
@@ -55,7 +56,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
    * {@inheritDoc}
    */
   @Override
-  public SyncTreeAccess getSyncAccess() {
+  public SyncTreeAccess getAdapter() {
 
     return this.syncAccess;
   }
@@ -63,10 +64,9 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
-  @Override
   public void create() {
 
-    super.create();
+    // super.create();
     this.modelAdapter.initialize();
   }
 
@@ -81,7 +81,6 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public UiTreeMvcModel<N> getModel() {
 
     return this.modelAdapter.getModel();
@@ -90,7 +89,6 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public void setModel(UiTreeMvcModel<N> newModel) {
 
     this.modelAdapter.setModel(newModel);
@@ -107,6 +105,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public N getSelection() {
 
     Object[] selection = this.syncAccess.getSelection();
@@ -119,6 +118,7 @@ public class UITreeImpl<N> extends AbstractUIWidget implements UiTree<N> {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public N[] getSelections() {
 
     Object[] selection = this.syncAccess.getSelection();

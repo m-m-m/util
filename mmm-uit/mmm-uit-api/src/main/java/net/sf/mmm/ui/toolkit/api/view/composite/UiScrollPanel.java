@@ -16,11 +16,11 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * width/height available for this panel.<br>
  * The implementation should only show the scrollbars as needed.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiScrollPanel<E extends UiElement> extends UiSingleComposite<E>,
+public interface UiScrollPanel<CHILD extends UiElement> extends UiSingleComposite<CHILD>,
     UiReadScrollbarPolicy {
 
   /** @see #getType() */

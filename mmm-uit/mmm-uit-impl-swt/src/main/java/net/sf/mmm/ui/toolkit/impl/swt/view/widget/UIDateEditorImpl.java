@@ -8,10 +8,10 @@ import java.util.Locale;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.UiDateBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
 
 /**
  * This is the implementation of the
@@ -20,10 +20,10 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
+public class UIDateEditorImpl extends AbstractUiWidgetSwt<Composite> implements UiDateBox {
 
-  /** */
-  private final SyncCompositeAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncCompositeAccess adapter;
 
   /**
    * The constructor.
@@ -33,16 +33,16 @@ public class UIDateEditorImpl extends AbstractUIWidget implements UiDateBox {
   public UIDateEditorImpl(UiFactorySwt uiFactory) {
 
     super(uiFactory);
-    this.syncAccess = new SyncCompositeAccess(uiFactory, SWT.DEFAULT);
+    this.adapter = new SyncCompositeAccess(uiFactory, this, SWT.DEFAULT);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public AbstractSyncControlAccess getSyncAccess() {
+  public SyncCompositeAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
   /**

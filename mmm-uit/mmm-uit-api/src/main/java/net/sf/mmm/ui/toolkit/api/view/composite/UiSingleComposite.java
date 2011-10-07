@@ -9,11 +9,11 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * This is the abstract interface for a {@link UiComposite} that contains a
  * single {@link #getChild() child}.<br>
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public abstract interface UiSingleComposite<E extends UiElement> extends UiComposite<E> {
+public abstract interface UiSingleComposite<CHILD extends UiElement> extends UiComposite<CHILD> {
 
   /**
    * This method will return <code>0</code> if {@link #getChild()} will return
@@ -28,7 +28,7 @@ public abstract interface UiSingleComposite<E extends UiElement> extends UiCompo
    * 
    * @return the single child or <code>null</code> if not set.
    */
-  E getChild();
+  CHILD getChild();
 
   /**
    * This method sets the single {@link #getChild() child}. The current
@@ -37,6 +37,6 @@ public abstract interface UiSingleComposite<E extends UiElement> extends UiCompo
    * 
    * @param child is the child to set.
    */
-  void setChild(E child);
+  void setChild(CHILD child);
 
 }

@@ -3,11 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
+import net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on SWT
@@ -15,7 +17,8 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncShellAccess extends AbstractSyncCompositeAccess {
+public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implements
+    UiWindowAdapter<Shell> {
 
   /**
    * operation to create and set the
@@ -76,14 +79,14 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        sash-form.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the sash-form.
    * @param swtShell is the {@link Shell} to access synchronous.
    */
-  public SyncShellAccess(UiFactorySwt uiFactory, int swtStyle, Shell swtShell) {
+  public SyncShellAccess(UiFactorySwt uiFactory, UiWindow node, int swtStyle, Shell swtShell) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.shell = swtShell;
     this.menuBar = null;
     this.maximized = false;
@@ -94,8 +97,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Shell getSwtObject() {
+  public Shell getDelegate() {
 
     return this.shell;
   }
@@ -142,25 +144,16 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method set the
-   * {@link org.eclipse.swt.widgets.Decorations#setText(String) title} of the
-   * decorations.
-   * 
-   * @param newTitel is the new title to set.
+   * {@inheritDoc}
    */
-  public void setTitel(String newTitel) {
+  public void setTitle(String newTitle) {
 
-    assert (checkReady());
-    this.title = newTitel;
+    this.title = newTitle;
     invoke(OPERATION_SET_TITLE);
   }
 
   /**
-   * This method get the
-   * {@link org.eclipse.swt.widgets.Decorations#getText() title} of the
-   * decorations.
-   * 
-   * @return the title.
+   * {@inheritDoc}
    */
   public String getTitle() {
 
@@ -170,14 +163,13 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean) maximized-state}
-   * of the decorations.
+   * {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean)
+   * maximized-state} of the decorations.
    * 
    * @param doMaximize is the new maximized-state to set.
    */
   public void setMaximized(boolean doMaximize) {
 
-    assert (checkReady());
     this.maximized = doMaximize;
     invoke(OPERATION_SET_MAXIMIZED);
   }
@@ -191,21 +183,19 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    */
   public boolean getMaximized() {
 
-    assert (checkReady());
     invoke(OPERATION_GET_MAXIMIZED);
     return this.maximized;
   }
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean) minimized-state}
-   * of the decorations.
+   * {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean)
+   * minimized-state} of the decorations.
    * 
    * @param doMinimize is the new minimized-state to set.
    */
   public void setMinimized(boolean doMinimize) {
 
-    assert (checkReady());
     this.minimized = doMinimize;
     invoke(OPERATION_SET_MINIMIZED);
   }
@@ -219,9 +209,33 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess {
    */
   public boolean getMinimized() {
 
-    assert (checkReady());
     invoke(OPERATION_GET_MINIMIZED);
     return this.minimized;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getX() {
+
+    return getPosition().x;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getY() {
+
+    return getPosition().y;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isResizable() {
+
+    return ((getStyle() & SWT.RESIZE) == SWT.RESIZE);
   }
 
 }

@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.model.ListModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncListAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.List;
 
 /**
  * This class is the implementation of the
@@ -21,13 +22,13 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
+public class UIListImpl<E> extends AbstractUiWidgetSwt<List> implements UiList<E> {
 
   /** the model adapter */
   private final ListModelAdapter<E> modelAdapter;
 
-  /** the sync access to the SWT list */
-  private final SyncListAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncListAccess adapter;
 
   /**
    * The constructor.
@@ -46,8 +47,8 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
     } else {
       style |= SWT.SINGLE;
     }
-    this.syncAccess = new SyncListAccess(uiFactory, style);
-    this.modelAdapter = new ListModelAdapter<E>(this.syncAccess, model);
+    this.adapter = new SyncListAccess(uiFactory, this, style);
+    this.modelAdapter = new ListModelAdapter<E>(this.adapter, model);
   }
 
   /**
@@ -62,18 +63,17 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    * {@inheritDoc}
    */
   @Override
-  public SyncListAccess getSyncAccess() {
+  public SyncListAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
   /**
    * {@inheritDoc}
    */
-  @Override
   public void create() {
 
-    super.create();
+    // super.create();
     this.modelAdapter.initialize();
   }
 
@@ -82,7 +82,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    */
   public boolean isMultiSelection() {
 
-    return this.syncAccess.hasStyle(SWT.MULTI);
+    return this.adapter.hasStyle(SWT.MULTI);
   }
 
   /**
@@ -106,7 +106,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    */
   public int getSelectedIndex() {
 
-    return this.syncAccess.getSelection();
+    return this.adapter.getSelection();
   }
 
   /**
@@ -114,7 +114,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    */
   public void setSelectedIndex(int newIndex) {
 
-    this.syncAccess.setSelection(newIndex);
+    this.adapter.setSelection(newIndex);
   }
 
   /**
@@ -122,7 +122,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    */
   public int[] getSelectedIndices() {
 
-    return this.syncAccess.getSelections();
+    return this.adapter.getSelections();
   }
 
   /**
@@ -132,7 +132,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
 
     int index = this.modelAdapter.getModel().getIndexOf(newValue);
     if (index != -1) {
-      this.syncAccess.setSelection(index);
+      this.adapter.setSelection(index);
     }
   }
 
@@ -141,7 +141,7 @@ public class UIListImpl<E> extends AbstractUIWidget implements UiList<E> {
    */
   public E getSelectedValue() {
 
-    int index = this.syncAccess.getSelection();
+    int index = this.adapter.getSelection();
     if (index == -1) {
       return null;
     }

@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadPreferredSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTooltip;
@@ -18,6 +17,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
  * @since 1.0.0
  */
 public interface UiElement extends UiNode, UiWriteVisible, UiWriteTooltip, UiWriteEnabled,
-    UiWriteSize, UiReadPreferredSize {
+    UiWriteSize {
 
 }

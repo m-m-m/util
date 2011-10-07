@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.swt.widgets.Widget;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -15,14 +15,14 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncTreeAccess extends AbstractSyncControlAccess {
+public class SyncTreeAccess extends AbstractSyncControlAccess<Tree> {
 
   /** the empty selection */
   private static final Object[] EMPTY_SELECTION = new Object[0];
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Tree#getSelection() selection} of the tree.
+   * operation to get the {@link org.eclipse.swt.widgets.Tree#getSelection()
+   * selection} of the tree.
    */
   private static final String OPERATION_GET_SELECTION = "getSelection";
 
@@ -42,11 +42,13 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the {@link Widget#getStyle() style} of the tree.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the tree.
    */
-  public SyncTreeAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncTreeAccess(UiFactorySwt uiFactory, UiTree<?> node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.tree = null;
     this.selection = EMPTY_SELECTION;
   }
@@ -54,8 +56,7 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Tree getSwtObject() {
+  public Tree getDelegate() {
 
     return this.tree;
   }
@@ -94,8 +95,8 @@ public class SyncTreeAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Tree#getSelection() selection} of the tree.
+   * This method gets the {@link org.eclipse.swt.widgets.Tree#getSelection()
+   * selection} of the tree.
    * 
    * @return the selection.
    */

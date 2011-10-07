@@ -95,7 +95,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
    */
   public synchronized void initialize() {
 
-    if (this.syncAccess.getSwtObject() != null) {
+    if (this.syncAccess.getDelegate() != null) {
       this.event = null;
       this.syncAccess.getDisplay().invokeSynchron(this);
     }
@@ -113,7 +113,7 @@ public class TreeModelAdapter<N> implements UITreeModelListener<N>, Listener, Ru
     TreeItem item = this.node2itemMap.get(userNode);
     if (item == null) {
       if (parentItem == null) {
-        item = new TreeItem(this.syncAccess.getSwtObject(), SWT.NONE);
+        item = new TreeItem(this.syncAccess.getDelegate(), SWT.NONE);
       } else {
         item = new TreeItem(parentItem, SWT.NONE);
       }

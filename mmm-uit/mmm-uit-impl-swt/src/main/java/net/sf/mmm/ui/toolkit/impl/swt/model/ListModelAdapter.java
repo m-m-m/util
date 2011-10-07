@@ -98,7 +98,7 @@ public class ListModelAdapter<E> implements UIListModelListener, Runnable {
    */
   public void run() {
 
-    List list = this.syncAccess.getSwtObject();
+    List list = this.syncAccess.getDelegate();
     int start = this.event.getStartIndex();
     int end = this.event.getEndIndex();
     // TODO synchonization!!!

@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.List;
-
+import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.List;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,12 +14,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncListAccess extends AbstractSyncControlAccess {
+public class SyncListAccess extends AbstractSyncControlAccess<List> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.List#setSelection(int) selection} of the
-   * list.
+   * operation to set the {@link org.eclipse.swt.widgets.List#setSelection(int)
+   * selection} of the list.
    */
   private static final String OPERATION_SET_SELECTION = "setSelection";
 
@@ -64,13 +64,13 @@ public class SyncListAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        control.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the control.
    */
-  public SyncListAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncListAccess(UiFactorySwt uiFactory, UiList<?> node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.list = null;
     this.selection = -1;
     this.selectionList = new int[0];
@@ -111,8 +111,7 @@ public class SyncListAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public List getSwtObject() {
+  public List getDelegate() {
 
     return this.list;
   }

@@ -5,27 +5,31 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.base.view.composite.AbstractUiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
+import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncSashFormAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is the implementation of the
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel} interface using
  * SWT as the UI toolkit.
  * 
- * @param <E> is the generic type of the {@link #getChild(int) child-elements}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiComposite<E> implements
-    UiSplitPanel<E> {
+public class UiSplitPanelImpl<CHILD extends AbstractUiElement<? extends Control>> extends
+    AbstractUiComposite<SashForm, CHILD> implements UiSplitPanel<CHILD> {
 
-  /** @see #getSyncAccess() */
+  /** @see #getAdapter() */
   private final SyncSashFormAccess syncAccess;
 
   /** the synchronous access to the top or left composite */
@@ -35,10 +39,10 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   private final SyncCompositeAccess syncBottomRight;
 
   /** the component top or left */
-  private E componentTopOrLeft;
+  private CHILD componentTopOrLeft;
 
   /** the component bottom or right */
-  private E componentBottomOrRight;
+  private CHILD componentBottomOrRight;
 
   /**
    * The constructor.
@@ -58,11 +62,11 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
     }
     style |= SWT.BORDER;
     // style |= SWT.LEFT_TO_RIGHT;
-    this.syncAccess = new SyncSashFormAccess(uiFactory, style);
-    this.syncTopLeft = new SyncCompositeAccess(uiFactory, SWT.NONE);
+    this.syncAccess = new SyncSashFormAccess(uiFactory, this, style);
+    this.syncTopLeft = new SyncCompositeAccess(uiFactory, this, SWT.NONE);
     this.syncTopLeft.setLayout(new FillLayout());
     this.syncTopLeft.setParentAccess(this.syncAccess);
-    this.syncBottomRight = new SyncCompositeAccess(uiFactory, SWT.NONE);
+    this.syncBottomRight = new SyncCompositeAccess(uiFactory, this, SWT.NONE);
     this.syncBottomRight.setLayout(new FillLayout());
     this.syncBottomRight.setParentAccess(this.syncAccess);
     /*
@@ -86,19 +90,18 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  @Override
   protected void createChildren() {
 
     this.syncTopLeft.create();
     this.syncBottomRight.create();
-    super.createChildren();
+    // super.createChildren();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SyncSashFormAccess getActiveSyncAccess() {
+  public SyncSashFormAccess getAdapter() {
 
     return this.syncAccess;
   }
@@ -130,13 +133,14 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  public void setTopOrLeftComponent(E component) {
+  public void setTopOrLeftComponent(CHILD component) {
 
     if (this.componentTopOrLeft != null) {
       // TODO
     }
     this.componentTopOrLeft = component;
-    this.componentTopOrLeft.getSyncAccess().setParentAccess(this.syncTopLeft);
+    ((AbstractSyncControlAccess<? extends Control>) this.componentTopOrLeft.getAdapter())
+        .setParentAccess(this.syncTopLeft);
     this.componentTopOrLeft.setParent(this);
 
   }
@@ -144,13 +148,14 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  public void setBottomOrRightComponent(E component) {
+  public void setBottomOrRightComponent(CHILD component) {
 
     if (this.componentBottomOrRight != null) {
       // TODO
     }
     this.componentBottomOrRight = component;
-    this.componentBottomOrRight.getSyncAccess().setParentAccess(this.syncBottomRight);
+    ((AbstractSyncControlAccess<? extends Control>) this.componentBottomOrRight.getAdapter())
+        .setParentAccess(this.syncBottomRight);
     this.componentBottomOrRight.setParent(this);
   }
 
@@ -181,7 +186,7 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  public E getTopOrLeftComponent() {
+  public CHILD getTopOrLeftComponent() {
 
     return this.componentTopOrLeft;
   }
@@ -189,7 +194,7 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  public E getBottomOrRightComponent() {
+  public CHILD getBottomOrRightComponent() {
 
     return this.componentBottomOrRight;
   }
@@ -197,7 +202,7 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  public E getChild(int index) {
+  public CHILD getChild(int index) {
 
     if (index == 0) {
       return getTopOrLeftComponent();
@@ -219,7 +224,6 @@ public class UiSplitPanelImpl<E extends AbstractUiElement> extends AbstractUiCom
   /**
    * {@inheritDoc}
    */
-  @Override
   public boolean isAttachToActiveAccess() {
 
     return false;

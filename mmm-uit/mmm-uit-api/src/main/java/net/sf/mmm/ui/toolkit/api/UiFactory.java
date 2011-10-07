@@ -16,9 +16,10 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridRow;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
@@ -186,89 +187,87 @@ public interface UiFactory extends UiWriteDisposed {
    * This method creates a new {@link UiBorderPanel} with the given
    * <code>title</code>.
    * 
-   * @param <E> is the generic type of the {@link UiBorderPanel#getChild() child
-   *        element}.
+   * @param <CHILD> is the generic type of the {@link UiBorderPanel#getChild()
+   *        child element}.
    * 
    * @param title is the {@link UiBorderPanel#getTitle() border-title}.
    * @return the new {@link UiBorderPanel}.
    */
-  <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title);
+  <CHILD extends UiElement> UiBorderPanel<CHILD> createBorderPanel(String title);
 
   /**
    * This method creates a new {@link UiBorderPanel} with the given
    * <code>title</code>.
    * 
-   * @param <E> is the generic type of the {@link UiBorderPanel#getChild() child
-   *        element}.
+   * @param <CHILD> is the generic type of the {@link UiBorderPanel#getChild()
+   *        child element}.
    * 
    * @param title is the {@link UiBorderPanel#getTitle() border-title}.
    * @param child is the {@link UiBorderPanel#getChild() child element}
    *        displayed within the border.
    * @return the new {@link UiBorderPanel}.
    */
-  <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title, E child);
+  <CHILD extends UiElement> UiBorderPanel<CHILD> createBorderPanel(String title, CHILD child);
 
   /**
    * This method creates a new {@link UiSimplePanel} with the given
    * <code>orientation</code>.
    * 
-   * @param <E> is the generic type of the {@link UiSimplePanel#getChild(int)
-   *        child elements}.
-   * 
+   * @param <CHILD> is the generic type of the
+   *        {@link UiSimplePanel#getChild(int) child elements}.
    * @param orientation is the {@link UiSimplePanel#getOrientation()
    *        orientation} of the {@link UiSimplePanel#getChild(int) child
    *        elements}.
    * @return the new {@link UiBorderPanel}.
    */
-  <E extends UiElement> UiSimplePanel<E> createSimplePanel(Orientation orientation);
+  <CHILD extends UiElement> UiSimplePanel<CHILD> createSimplePanel(Orientation orientation);
 
   /**
-   * This method creates a new panel without a border.
+   * This method creates a new {@link UiGridPanel} with the given number of
+   * columns.
    * 
-   * @param orientation is the orientation of the child-components in the panel.
-   * @return the created panel.
+   * @return the new {@link UiBorderPanel}.
    */
-  UiSlicePanel<UiElement> createPanel(Orientation orientation);
-
-  /**
-   * This method creates a new {@link UiSlicePanel panel} with a border.
-   * 
-   * @param orientation is the orientation of the child-components in the panel.
-   * @param borderTitle is the label of the panels border.
-   * @return the created panel.
-   */
-  UiSlicePanel<UiElement> createPanel(Orientation orientation, String borderTitle);
+  UiGridPanel<? extends UiGridRow<? extends UiElement>> createGridPanel();
 
   /**
    * This method creates a new scroll-panel.
    * 
+   * @param <CHILD> is the generic type of the
+   *        {@link UiSimplePanel#getChild(int) child elements}.
    * @return the created scroll-panel.
    */
-  UiScrollPanel<UiElement> createScrollPanel();
+  <CHILD extends UiElement> UiScrollPanel<CHILD> createScrollPanel();
 
   /**
    * This method creates a new scroll-panel with the given child inside.
    * 
+   * @param <CHILD> is the generic type of the
+   *        {@link UiSimplePanel#getChild(int) child elements}.
    * @param child is the child contained in the scroll-panel.
    * @return the created scroll-panel.
    */
-  UiScrollPanel<UiElement> createScrollPanel(UiElement child);
+  <CHILD extends UiElement> UiScrollPanel<CHILD> createScrollPanel(CHILD child);
 
   /**
    * This method creates a new split panel.
    * 
+   * @param <CHILD> is the generic type of the
+   *        {@link UiSimplePanel#getChild(int) child elements}.
    * @param orientation is the orientation of the child-components in the panel.
    * 
    * @return the created split panel.
    */
-  UiSplitPanel<UiElement> createSplitPanel(Orientation orientation);
+  <CHILD extends UiElement> UiSplitPanel<CHILD> createSplitPanel(Orientation orientation);
 
   /**
    * This method creates a new {@link UiTabPanel}.
    * 
+   * @param <CHILD> is the generic type of the
+   *        {@link UiSimplePanel#getChild(int) child elements}.
    * @return the created {@link UiTabPanel}.
    */
-  UiTabPanel<UiElement> createTabbedPanel();
+  <CHILD extends UiElement> UiTabPanel<CHILD> createTabbedPanel();
 
   /**
    * This method creates a list with single-selection.

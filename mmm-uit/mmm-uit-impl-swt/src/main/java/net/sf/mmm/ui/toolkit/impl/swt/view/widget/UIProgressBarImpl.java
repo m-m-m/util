@@ -9,6 +9,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncProgressBarAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.ProgressBar;
 
 /**
  * This class is the implementation of the
@@ -17,7 +18,7 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UIProgressBarImpl extends AbstractUIWidget implements UiProgressBar {
+public class UIProgressBarImpl extends AbstractUiWidgetSwt<ProgressBar> implements UiProgressBar {
 
   /** the native SWT widget */
   private final SyncProgressBarAccess syncAccess;
@@ -42,14 +43,14 @@ public class UIProgressBarImpl extends AbstractUIWidget implements UiProgressBar
     if (indeterminate) {
       style |= SWT.INDETERMINATE;
     }
-    this.syncAccess = new SyncProgressBarAccess(uiFactory, style);
+    this.syncAccess = new SyncProgressBarAccess(uiFactory, this, style);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SyncProgressBarAccess getSyncAccess() {
+  public SyncProgressBarAccess getAdapter() {
 
     return this.syncAccess;
   }

@@ -16,7 +16,6 @@ import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
@@ -37,13 +36,12 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
+import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.feature.PrintAction;
-import net.sf.mmm.ui.toolkit.impl.swt.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiBorderPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiScrollPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSimplePanelImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSlicePanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiSplitPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.composite.UiTabbedPanelImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SwtWorkerThread;
@@ -251,16 +249,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiSlicePanel createPanel(Orientation orientation, String borderTitle) {
-
-    UiSlicePanel panel = new UiSlicePanelImpl(this, orientation);
-    return panel;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiScrollPanel<UiElement> createScrollPanel(UiElement child) {
+  public <CHILD extends UiElement> UiScrollPanel<CHILD> createScrollPanel(CHILD child) {
 
     UiScrollPanel panel = new UiScrollPanelImpl(this);
     if (child != null) {
@@ -272,7 +261,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiSplitPanel createSplitPanel(Orientation orientation) {
+  public <CHILD extends UiElement> UiSplitPanel<CHILD> createSplitPanel(Orientation orientation) {
 
     UiSplitPanel splitPanel = new UiSplitPanelImpl(this, orientation);
     return splitPanel;
@@ -381,9 +370,9 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiTabPanel createTabbedPanel() {
+  public <CHILD extends UiElement> UiTabPanel<CHILD> createTabbedPanel() {
 
-    return new UiTabbedPanelImpl(this, null);
+    return new UiTabbedPanelImpl(this);
   }
 
   /**
@@ -522,7 +511,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public <E extends UiElement> UiBorderPanel<E> createBorderPanel(String title) {
+  public <CHILD extends UiElement> UiBorderPanel<CHILD> createBorderPanel(String title) {
 
     UiBorderPanelImpl panel = new UiBorderPanelImpl(this);
     panel.setTitle(title);
@@ -532,7 +521,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * {@inheritDoc}
    */
-  public <E extends UiElement> UiSimplePanel<E> createSimplePanel(Orientation orientation) {
+  public <CHILD extends UiElement> UiSimplePanel<CHILD> createSimplePanel(Orientation orientation) {
 
     return new UiSimplePanelImpl(this, orientation);
   }

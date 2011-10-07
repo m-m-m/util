@@ -17,7 +17,6 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiComboBox;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiList;
@@ -63,7 +62,7 @@ public abstract class AbstractUiFactory implements UiFactory {
   private UiWorkbench workbench;
 
   /** The list of all windows that have been created by this factory */
-  private List<AbstractUiWindow> windows;
+  private List<AbstractUiWindow<?>> windows;
 
   /**
    * The constructor.
@@ -76,7 +75,7 @@ public abstract class AbstractUiFactory implements UiFactory {
     super();
     this.applicationTitle = title;
     // TODO: do we need a thread-safe implementation here?
-    this.windows = new ArrayList<AbstractUiWindow>();
+    this.windows = new ArrayList<AbstractUiWindow<?>>();
     this.disposed = false;
     // this.locale = Locale.getDefault();
     // TODO: set from default locale!
@@ -178,11 +177,11 @@ public abstract class AbstractUiFactory implements UiFactory {
   public void refresh(UIRefreshEvent event) {
 
     // use concurrent list via list factory?
-    AbstractUiWindow[] currentWindows;
+    AbstractUiWindow<?>[] currentWindows;
     synchronized (this.windows) {
       currentWindows = this.windows.toArray(new AbstractUiWindow[this.windows.size()]);
     }
-    for (AbstractUiWindow window : currentWindows) {
+    for (AbstractUiWindow<?> window : currentWindows) {
       window.refresh(event);
     }
   }
@@ -218,7 +217,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    * 
    * @param window is the window to add.
    */
-  public void addWindow(AbstractUiWindow window) {
+  public void addWindow(AbstractUiWindow<?> window) {
 
     synchronized (this.windows) {
       this.windows.add(window);
@@ -231,7 +230,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    * 
    * @param window is the window to remove.
    */
-  public void removeWindow(AbstractUiWindow window) {
+  public void removeWindow(AbstractUiWindow<?> window) {
 
     synchronized (this.windows) {
       this.windows.remove(window);
@@ -262,14 +261,6 @@ public abstract class AbstractUiFactory implements UiFactory {
     UiBorderPanel<E> panel = createBorderPanel(title);
     panel.setChild(child);
     return panel;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public UiSlicePanel<UiElement> createPanel(Orientation orientation) {
-
-    return createPanel(orientation, null);
   }
 
   /**
@@ -307,7 +298,7 @@ public abstract class AbstractUiFactory implements UiFactory {
   /**
    * {@inheritDoc}
    */
-  public UiScrollPanel<UiElement> createScrollPanel() {
+  public <CHILD extends UiElement> UiScrollPanel<CHILD> createScrollPanel() {
 
     return createScrollPanel(null);
   }

@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.Slider;
-
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Slider;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncSliderAccess extends AbstractSyncControlAccess {
+public class SyncSliderAccess extends AbstractSyncControlAccess<Slider> {
 
   /**
    * operation to set the
@@ -23,16 +24,14 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
   private static final String OPERATION_SET_SELECTION = "setSelection";
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Slider#getSelection() selection} of the
-   * slider.
+   * operation to get the {@link org.eclipse.swt.widgets.Slider#getSelection()
+   * selection} of the slider.
    */
   private static final String OPERATION_GET_SELECTION = "getSelection";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Slider#setMaximum(int) maximum} of the
-   * slider.
+   * operation to set the {@link org.eclipse.swt.widgets.Slider#setMaximum(int)
+   * maximum} of the slider.
    */
   private static final String OPERATION_SET_MAXIMUM = "setMaximum";
 
@@ -55,13 +54,13 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        slider.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the slider.
    */
-  public SyncSliderAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncSliderAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.slider = null;
     this.selection = 0;
     this.minimum = 0;
@@ -72,8 +71,7 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Slider getSwtObject() {
+  public Slider getDelegate() {
 
     return this.slider;
   }
@@ -113,9 +111,8 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Slider#getSelection() selection} of the
-   * slider.
+   * This method gets the {@link org.eclipse.swt.widgets.Slider#getSelection()
+   * selection} of the slider.
    * 
    * @return the selection.
    */
@@ -141,9 +138,8 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Slider#setMaximum(int) maximum} of the
-   * slider.
+   * This method sets the {@link org.eclipse.swt.widgets.Slider#setMaximum(int)
+   * maximum} of the slider.
    * 
    * @param newMaximum is the maximum to set.
    */
@@ -155,8 +151,8 @@ public class SyncSliderAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Slider#getMaximum() maximum} of the slider.
+   * This method gets the {@link org.eclipse.swt.widgets.Slider#getMaximum()
+   * maximum} of the slider.
    * 
    * @return the maximum.
    */

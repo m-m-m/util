@@ -3,12 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
+import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-
-import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -16,7 +18,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
+public class SyncTabFolderAccess extends AbstractSyncCompositeAccess<TabFolder> {
 
   /**
    * operation to set the {@link TabFolder#setSelection(int) selection-index} of
@@ -32,8 +34,8 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
 
   /**
    * operation to create a
-   * {@link TabItem#TabItem(org.eclipse.swt.widgets.TabFolder, int, int) tab-item}
-   * in the tab-folder.
+   * {@link TabItem#TabItem(org.eclipse.swt.widgets.TabFolder, int, int)
+   * tab-item} in the tab-folder.
    */
   private static final String OPERATION_CREATE_TAB_ITEM = "createTabItem";
 
@@ -59,27 +61,29 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        tab-folder.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the tab-folder.
    */
-  public SyncTabFolderAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncTabFolderAccess(UiFactorySwt uiFactory, UiComposite<? extends UiElement> node,
+      int swtStyle) {
 
-    this(uiFactory, swtStyle, null);
+    this(uiFactory, node, swtStyle, null);
   }
 
   /**
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        tab-folder.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the tab-folder.
    * @param swtTabFolder is the widget to access.
    */
-  public SyncTabFolderAccess(UiFactorySwt uiFactory, int swtStyle, TabFolder swtTabFolder) {
+  public SyncTabFolderAccess(UiFactorySwt uiFactory, UiComposite<? extends UiElement> node,
+      int swtStyle, TabFolder swtTabFolder) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.tabFolder = swtTabFolder;
     this.selectionIndex = 0;
     this.tabItem = null;
@@ -91,8 +95,7 @@ public class SyncTabFolderAccess extends AbstractSyncCompositeAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public TabFolder getSwtObject() {
+  public TabFolder getDelegate() {
 
     return this.tabFolder;
   }

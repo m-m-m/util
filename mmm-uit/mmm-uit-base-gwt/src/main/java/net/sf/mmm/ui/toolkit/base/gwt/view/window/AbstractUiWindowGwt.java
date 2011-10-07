@@ -9,8 +9,6 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.base.gwt.AbstractUiFactoryGwt;
 import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
 
-import com.google.gwt.user.client.Window;
-
 /**
  * This is the abstract base implementation of {@link UiWindow} using GWT as
  * underlying UI technology.
@@ -23,21 +21,13 @@ public abstract class AbstractUiWindowGwt extends AbstractUiWindow {
   /**
    * The constructor.
    * 
-   * @param uiFactory
-   * @param parentObject
+   * @param uiFactory is the {@link #getFactory() factory} instance.
+   * @param parentObject is the {@link #getParent() parent} of this object. It
+   *        may be <code>null</code>.
    */
   public AbstractUiWindowGwt(AbstractUiFactoryGwt uiFactory, UiWindow parentObject) {
 
-    super(uiFactory, parentObject);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean showQuestion(String question, String title) {
-
-    return Window.confirm(question);
+    super(uiFactory);
   }
 
   /**
@@ -60,6 +50,7 @@ public abstract class AbstractUiWindowGwt extends AbstractUiWindow {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     return false;

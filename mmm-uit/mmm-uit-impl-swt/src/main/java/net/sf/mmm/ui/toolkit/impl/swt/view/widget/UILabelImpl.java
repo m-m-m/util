@@ -7,10 +7,10 @@ import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiLabel;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.UiImageImpl;
-import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncLabelAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
 
 /**
  * This class is the implementation of the
@@ -20,13 +20,13 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UILabelImpl extends AbstractUIWidget implements UiLabel {
+public class UILabelImpl extends AbstractUiWidgetSwt<Label> implements UiLabel {
 
-  /** the synchron access to the label */
+  /** @see #getAdapter() */
   private final SyncLabelAccess syncAccess;
 
-  /** the icon */
-  private UiImageImpl icon;
+  /** @see #getImage() */
+  private UiImageImpl image;
 
   /**
    * The constructor.
@@ -37,8 +37,8 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
 
     super(uiFactory);
     int style = SWT.SHADOW_NONE | SWT.LEFT;
-    this.syncAccess = new SyncLabelAccess(uiFactory, style);
-    this.icon = null;
+    this.syncAccess = new SyncLabelAccess(uiFactory, this, style);
+    this.image = null;
   }
 
   /**
@@ -53,7 +53,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
    * {@inheritDoc}
    */
   @Override
-  public AbstractSyncControlAccess getSyncAccess() {
+  public SyncLabelAccess getAdapter() {
 
     return this.syncAccess;
   }
@@ -79,7 +79,7 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
    */
   public UiImageImpl getImage() {
 
-    return this.icon;
+    return this.image;
   }
 
   /**
@@ -87,11 +87,11 @@ public class UILabelImpl extends AbstractUIWidget implements UiLabel {
    */
   public void setImage(UiImage newIcon) {
 
-    this.icon = (UiImageImpl) newIcon;
-    if (this.icon == null) {
+    this.image = (UiImageImpl) newIcon;
+    if (this.image == null) {
       this.syncAccess.setImage(null);
     } else {
-      this.syncAccess.setImage(this.icon.getSwtImage());
+      this.syncAccess.setImage(this.image.getSwtImage());
     }
   }
 

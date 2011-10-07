@@ -10,6 +10,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.model.ComboBoxModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncComboAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Combo;
 
 /**
  * This class is the implementation of the
@@ -22,10 +23,10 @@ import org.eclipse.swt.SWT;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E> {
+public class UIComboBoxImpl<E> extends AbstractUiWidgetSwt<Combo> implements UiComboBox<E> {
 
-  /** the synchron access to the combo */
-  private final SyncComboAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncComboAccess adapter;
 
   /** the listener */
   private final ComboBoxModelAdapter modelAdapter;
@@ -49,18 +50,18 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
     if (editableFlag) {
       style = style ^ SWT.READ_ONLY;
     }
-    this.syncAccess = new SyncComboAccess(uiFactory, style);
+    this.adapter = new SyncComboAccess(uiFactory, this, style);
     this.model = listModel;
-    this.modelAdapter = new ComboBoxModelAdapter(this.syncAccess, this.model);
+    this.modelAdapter = new ComboBoxModelAdapter(this.adapter, this.model);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SyncComboAccess getSyncAccess() {
+  public SyncComboAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
   /**
@@ -74,10 +75,9 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
   /**
    * {@inheritDoc}
    */
-  @Override
   public void create() {
 
-    super.create();
+    // super.create();
     this.modelAdapter.initialize();
   }
 
@@ -94,7 +94,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    */
   public int getSelectedIndex() {
 
-    return this.syncAccess.getSelection();
+    return this.adapter.getSelection();
   }
 
   /**
@@ -102,7 +102,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    */
   public void setSelectedIndex(int newIndex) {
 
-    this.syncAccess.setText(this.modelAdapter.getModel().getElementAsString(newIndex));
+    this.adapter.setText(this.modelAdapter.getModel().getElementAsString(newIndex));
   }
 
   /**
@@ -119,7 +119,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    */
   public boolean isEditable() {
 
-    return this.syncAccess.hasStyle(SWT.READ_ONLY);
+    return this.adapter.hasStyle(SWT.READ_ONLY);
   }
 
   /**
@@ -135,7 +135,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    */
   public String getValue() {
 
-    return this.syncAccess.getText();
+    return this.adapter.getText();
   }
 
   /**
@@ -143,7 +143,7 @@ public class UIComboBoxImpl<E> extends AbstractUIWidget implements UiComboBox<E>
    */
   public void setValue(String text) {
 
-    this.syncAccess.setText(text);
+    this.adapter.setText(text);
   }
 
   /**

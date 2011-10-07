@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
-import org.eclipse.swt.widgets.Text;
-
+import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+
+import org.eclipse.swt.widgets.Text;
 
 /**
  * This class is used for synchronous access on a SWT
@@ -13,11 +14,11 @@ import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncTextAccess extends AbstractSyncControlAccess {
+public class SyncTextAccess extends AbstractSyncControlAccess<Text> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Text#setText(String) text} of the text.
+   * operation to set the {@link org.eclipse.swt.widgets.Text#setText(String)
+   * text} of the text.
    */
   private static final String OPERATION_SET_TEXT = "setText";
 
@@ -35,16 +36,14 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   private static final String OPERATION_SET_EDITABLE = "setEditable";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Text#setTextLimit(int) text-limit} of the
-   * text.
+   * operation to set the {@link org.eclipse.swt.widgets.Text#setTextLimit(int)
+   * text-limit} of the text.
    */
   private static final String OPERATION_SET_TEXT_LIMIT = "setTextLimit";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Text#setEchoChar(char) echo-char} of the
-   * text.
+   * operation to set the {@link org.eclipse.swt.widgets.Text#setEchoChar(char)
+   * echo-char} of the text.
    */
   private static final String OPERATION_SET_ECHO_CHAR = "setEchoChar";
 
@@ -67,12 +66,13 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the text.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the text.
    */
-  public SyncTextAccess(UiFactorySwt uiFactory, int swtStyle) {
+  public SyncTextAccess(UiFactorySwt uiFactory, UiElement node, int swtStyle) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.textField = null;
     this.text = "";
     this.editable = true;
@@ -83,8 +83,7 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Text getSwtObject() {
+  public Text getDelegate() {
 
     return this.textField;
   }
@@ -140,8 +139,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Text#setText(String) text} of the text.
+   * This method sets the {@link org.eclipse.swt.widgets.Text#setText(String)
+   * text} of the text.
    * 
    * @param buttonText is the text to set.
    */
@@ -153,9 +152,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Text#getEditable() editable-status} of the
-   * text.
+   * This method gets the {@link org.eclipse.swt.widgets.Text#getEditable()
+   * editable-status} of the text.
    * 
    * @return the selection-status.
    */
@@ -179,8 +177,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Text#getTextLimit() text-limit} of the text.
+   * This method gets the {@link org.eclipse.swt.widgets.Text#getTextLimit()
+   * text-limit} of the text.
    * 
    * @return the maximum character count for the text.
    */
@@ -190,9 +188,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Text#setTextLimit(int) text-limit} of the
-   * text.
+   * This method sets the {@link org.eclipse.swt.widgets.Text#setTextLimit(int)
+   * text-limit} of the text.
    * 
    * @param limit is the maximum character count for the text.
    */
@@ -204,9 +201,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Text#getEchoChar() echo-character} of the
-   * text.
+   * This method gets the {@link org.eclipse.swt.widgets.Text#getEchoChar()
+   * echo-character} of the text.
    * 
    * @return the echo character or '\0' for normal echoing.
    */
@@ -216,9 +212,8 @@ public class SyncTextAccess extends AbstractSyncControlAccess {
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Text#setEchoChar(char) echo-character} of
-   * the text.
+   * This method sets the {@link org.eclipse.swt.widgets.Text#setEchoChar(char)
+   * echo-character} of the text.
    * 
    * @param echoCharacter is the echo character or '\0' for normal echoing.
    */

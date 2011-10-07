@@ -5,10 +5,10 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
-import net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncControlAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTextAccess;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * This class is the implementation of the
@@ -17,10 +17,10 @@ import org.eclipse.swt.SWT;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
+public class UITextFieldImpl extends AbstractUiWidgetSwt<Text> implements UiTextField {
 
-  /** the synchron access to the text-field */
-  private final SyncTextAccess syncAccess;
+  /** @see #getAdapter() */
+  private final SyncTextAccess adapter;
 
   /**
    * The constructor.
@@ -31,16 +31,16 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
 
     super(uiFactory);
     int style = SWT.DEFAULT;
-    this.syncAccess = new SyncTextAccess(uiFactory, style);
+    this.adapter = new SyncTextAccess(uiFactory, this, style);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public AbstractSyncControlAccess getSyncAccess() {
+  public SyncTextAccess getAdapter() {
 
-    return this.syncAccess;
+    return this.adapter;
   }
 
   /**
@@ -56,7 +56,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
    */
   public void setValue(String text) {
 
-    this.syncAccess.setText(text);
+    this.adapter.setText(text);
   }
 
   /**
@@ -64,7 +64,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
    */
   public String getValue() {
 
-    return this.syncAccess.getText();
+    return this.adapter.getText();
   }
 
   /**
@@ -72,7 +72,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
    */
   public boolean isEditable() {
 
-    return this.syncAccess.isEditable();
+    return this.adapter.isEditable();
   }
 
   /**
@@ -80,7 +80,7 @@ public class UITextFieldImpl extends AbstractUIWidget implements UiTextField {
    */
   public void setEditable(boolean editableFlag) {
 
-    this.syncAccess.setEditable(editableFlag);
+    this.adapter.setEditable(editableFlag);
   }
 
 }

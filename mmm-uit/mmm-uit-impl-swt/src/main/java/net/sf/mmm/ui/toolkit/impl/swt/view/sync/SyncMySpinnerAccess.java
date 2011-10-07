@@ -4,6 +4,7 @@
 package net.sf.mmm.ui.toolkit.impl.swt.view.sync;
 
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
+import net.sf.mmm.ui.toolkit.api.view.widget.UiSpinBox;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.custom.MySpinner;
 
@@ -13,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.custom.MySpinner;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
+public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess<MySpinner> {
 
   /**
    * operation to get the {@link MySpinner#getSelectedIndex() selection-index}
@@ -22,8 +23,8 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   private static final String OPERATION_GET_SELECTED_INDEX = "getSelectedIndex";
 
   /**
-   * operation to set the
-   * {@link MySpinner#setSelectedIndex(int) selection-index} of the spinner.
+   * operation to set the {@link MySpinner#setSelectedIndex(int)
+   * selection-index} of the spinner.
    */
   private static final String OPERATION_SET_SELECTED_INDEX = "setSelectedIndex";
 
@@ -34,8 +35,8 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   private static final String OPERATION_SET_EDITABLE = "setEditable";
 
   /**
-   * operation to set the {@link MySpinner#setModel(UiListMvcModel) model} of the
-   * spinner.
+   * operation to set the {@link MySpinner#setModel(UiListMvcModel) model} of
+   * the spinner.
    */
   private static final String OPERATION_SET_MODEL = "setModel";
 
@@ -43,7 +44,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   private MySpinner spinner;
 
   /** the model */
-  private UiListMvcModel model;
+  private UiListMvcModel<?> model;
 
   /** the editable flag */
   private boolean editable;
@@ -55,14 +56,15 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    * The constructor.
    * 
    * @param uiFactory is used to do the synchronization.
-   * @param swtStyle is the
-   *        {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the
-   *        composite.
+   * @param node is the owning {@link #getNode() node}.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
+   *        style} of the composite.
    * @param listModel is the list model containing the elements of the spinner.
    */
-  public SyncMySpinnerAccess(UiFactorySwt uiFactory, int swtStyle, UiListMvcModel listModel) {
+  public SyncMySpinnerAccess(UiFactorySwt uiFactory, UiSpinBox<?> node, int swtStyle,
+      UiListMvcModel<?> listModel) {
 
-    super(uiFactory, swtStyle);
+    super(uiFactory, node, swtStyle);
     this.spinner = null;
     this.model = listModel;
     this.editable = false;
@@ -102,8 +104,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public MySpinner getSwtObject() {
+  public MySpinner getDelegate() {
 
     return this.spinner;
   }
@@ -113,7 +114,7 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
    * 
    * @param listModel is the model to set.
    */
-  public void setModel(UiListMvcModel listModel) {
+  public void setModel(UiListMvcModel<?> listModel) {
 
     assert (checkReady());
     this.model = listModel;
@@ -158,8 +159,8 @@ public class SyncMySpinnerAccess extends AbstractSyncCompositeAccess {
   }
 
   /**
-   * This method sets the
-   * {@link MySpinner#setSelectedIndex(int) selection-index} of the spinner.
+   * This method sets the {@link MySpinner#setSelectedIndex(int)
+   * selection-index} of the spinner.
    * 
    * @param selectedIndex is the index of the item to select.
    */
