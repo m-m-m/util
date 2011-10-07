@@ -27,16 +27,18 @@
   </dependencies>
   
   <modules>
-    <!-- <module>mmm-content</module> -->
+    <module>mmm-content</module>
     <!-- <module>mmm-gui</module> -->
     <module>mmm-util</module>
     <module>mmm-l10n</module>
     <module>mmm-search</module>
     <module>mmm-content-parser</module>
     <module>mmm-transaction</module>
-    <!--<module>mmm-persistence</module>-->
+    <module>mmm-persistence</module>
     <module>mmm-upnp</module>
-    <!--<module>mmm-uit</module>-->
+    <module>mmm-uit</module>
+    <!-- only local -->
+    <module>mmm-ui</module>
     <module>mmm-setup</module>
     <module>mmm-test</module>
   </modules>
