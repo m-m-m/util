@@ -34,9 +34,9 @@ public class PersistenceManagerImpl extends AbstractPersistenceManager {
    *        {@link PersistenceEntityManager} to register.
    */
   @Inject
-  public void setManagers(List<PersistenceEntityManager<?>> managerList) {
+  public void setManagers(List<PersistenceEntityManager<?, ?>> managerList) {
 
-    for (PersistenceEntityManager<?> entityManager : managerList) {
+    for (PersistenceEntityManager<?, ?> entityManager : managerList) {
       addManager(entityManager);
     }
   }

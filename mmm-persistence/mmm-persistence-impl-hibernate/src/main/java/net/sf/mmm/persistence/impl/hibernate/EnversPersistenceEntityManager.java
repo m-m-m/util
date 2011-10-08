@@ -6,28 +6,31 @@ package net.sf.mmm.persistence.impl.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.envers.AuditReader;
-import org.hibernate.envers.AuditReaderFactory;
-
-import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.api.RevisionMetadata;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntityManager;
 import net.sf.mmm.persistence.impl.jpa.JpaPersistenceEntityManager;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+
 /**
  * This is the abstract base-implementation of a
  * {@link net.sf.mmm.persistence.api.RevisionedPersistenceEntityManager} using
  * {@link org.hibernate.envers Hibernate-Envers} to manage the revision-control.
  * 
+ * @param <ID> is the type of the
+ *        {@link net.sf.mmm.persistence.api.PersistenceEntity#getId() primary
+ *        key} of the managed
+ *        {@link net.sf.mmm.persistence.api.PersistenceEntity}.
  * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class EnversPersistenceEntityManager<ENTITY extends EnversPersistenceEntity>
-    extends JpaPersistenceEntityManager<ENTITY> implements
-    RevisionedPersistenceEntityManager<ENTITY> {
+public abstract class EnversPersistenceEntityManager<ID, ENTITY extends EnversPersistenceEntity<ID>>
+    extends JpaPersistenceEntityManager<ID, ENTITY> implements
+    RevisionedPersistenceEntityManager<ID, ENTITY> {
 
   /** @see #getAuditReader() */
   private AuditReader auditReader;
@@ -72,7 +75,7 @@ public abstract class EnversPersistenceEntityManager<ENTITY extends EnversPersis
   /**
    * {@inheritDoc}
    */
-  public ENTITY load(Object id, Number revision) throws ObjectNotFoundException {
+  public ENTITY load(ID id, Number revision) throws ObjectNotFoundException {
 
     if (revision == RevisionedPersistenceEntity.LATEST_REVISION) {
       return load(id);
@@ -82,16 +85,21 @@ public abstract class EnversPersistenceEntityManager<ENTITY extends EnversPersis
   }
 
   /**
-   * This method gets a historic revision of the {@link PersistenceEntity} with
-   * the given <code>id</code>.
+   * This method gets a historic revision of the
+   * {@link net.sf.mmm.persistence.api.PersistenceEntity} with the given
+   * <code>id</code>.
    * 
-   * @param id is the {@link PersistenceEntity#getId() ID} of the requested
-   *        {@link PersistenceEntity entity}.
+   * @param id is the
+   *        {@link net.sf.mmm.persistence.api.PersistenceEntity#getId() ID} of
+   *        the requested {@link net.sf.mmm.persistence.api.PersistenceEntity
+   *        entity}.
    * @param revision is the {@link RevisionedPersistenceEntity#getRevision()
    *        revision}
-   * @return the requested {@link PersistenceEntity entity}.
-   * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
-   *         entity} could NOT be found.
+   * @return the requested {@link net.sf.mmm.persistence.api.PersistenceEntity
+   *         entity}.
+   * @throws ObjectNotFoundException if the requested
+   *         {@link net.sf.mmm.persistence.api.PersistenceEntity entity} could
+   *         NOT be found.
    */
   protected ENTITY loadRevision(Object id, Number revision) throws ObjectNotFoundException {
 

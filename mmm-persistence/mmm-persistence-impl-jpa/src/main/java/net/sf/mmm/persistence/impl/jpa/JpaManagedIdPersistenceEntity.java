@@ -3,19 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import net.sf.mmm.persistence.api.PersistenceEntity;
-
 /**
- * This is the abstract base-implementation of a {@link PersistenceEntity} using
- * the {@link javax.persistence JPA} (Java Persistence API).
+ * This is the abstract base-implementation of a
+ * {@link net.sf.mmm.persistence.api.PersistenceEntity} using the
+ * {@link javax.persistence JPA} (Java Persistence API).
+ * 
+ * @param <ID> is the type of the {@link #getId() primary key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaManagedIdPersistenceEntity extends JpaPersistenceEntity {
+public abstract class JpaManagedIdPersistenceEntity<ID> extends JpaPersistenceEntity<ID> {
 
   /** @see #isPersistent() */
   private transient boolean persistent;
@@ -42,15 +42,9 @@ public abstract class JpaManagedIdPersistenceEntity extends JpaPersistenceEntity
    * {@link #isPersistent() transient}.<br>
    * <b>ATTENTION:</b><br>
    */
-  public void setPersistent() {
+  protected void setPersistent() {
 
     this.persistent = true;
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Id
-  public abstract Object getId();
 
 }

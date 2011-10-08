@@ -29,20 +29,21 @@ public abstract class AbstractRevisionedPersistenceManager extends AbstractPersi
   /**
    * {@inheritDoc}
    */
-  public <ENTITY extends RevisionedPersistenceEntity> RevisionedPersistenceEntityManager<ENTITY> getRevisionedManager(
+  public <ID, ENTITY extends RevisionedPersistenceEntity<ID>> RevisionedPersistenceEntityManager<ID, ENTITY> getRevisionedManager(
       Class<ENTITY> entityClass) throws ObjectNotFoundException {
 
     // TODO: handle class cast exception and produce more appropriate error.
-    return (RevisionedPersistenceEntityManager<ENTITY>) getManager(entityClass);
+    return (RevisionedPersistenceEntityManager<ID, ENTITY>) getManager(entityClass);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <ENTITY extends RevisionedPersistenceEntity> ENTITY load(Class<ENTITY> entityClass,
-      Object id, Number revision) throws ObjectNotFoundException, NlsUnsupportedOperationException {
+  public <ID, ENTITY extends RevisionedPersistenceEntity<ID>> ENTITY load(
+      Class<ENTITY> entityClass, ID id, Number revision) throws ObjectNotFoundException,
+      NlsUnsupportedOperationException {
 
-    RevisionedPersistenceEntityManager<ENTITY> manager = getRevisionedManager(entityClass);
+    RevisionedPersistenceEntityManager<ID, ENTITY> manager = getRevisionedManager(entityClass);
     return manager.load(id, revision);
   }
 

@@ -6,24 +6,25 @@ package net.sf.mmm.persistence.impl.hibernate;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
-import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
 import net.sf.mmm.persistence.impl.jpa.JpaPersistenceEntity;
 
 /**
- * This is the abstract base-implementation of a {@link PersistenceEntity} using
- * using {@link org.hibernate.envers Hibernate-Envers} to manage the
- * revision-control.<br>
+ * This is the abstract base-implementation of a
+ * {@link net.sf.mmm.persistence.api.PersistenceEntity} using using
+ * {@link org.hibernate.envers Hibernate-Envers} to manage the revision-control.<br>
  * <b>ATTENTION:</b><br>
  * Your {@link RevisionedPersistenceEntity} implementations should NOT only
  * subclass this class but also need to be annotated with
  * {@link org.hibernate.envers.Audited}.
  * 
+ * @param <ID> is the type of the {@link #getId() primary key}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class EnversPersistenceEntity extends JpaPersistenceEntity implements
-    RevisionedPersistenceEntity {
+public abstract class EnversPersistenceEntity<ID> extends JpaPersistenceEntity<ID> implements
+    RevisionedPersistenceEntity<ID> {
 
   /** @see #getRevision() */
   private Number revision;

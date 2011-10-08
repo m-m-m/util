@@ -27,12 +27,14 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * @see PersistenceEntity
  * @see PersistenceManager
  * 
+ * @param <ID> is the type of the {@link PersistenceEntity#getId() primary key}
+ *        of the managed {@link PersistenceEntity}.
  * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @ComponentSpecification(plugin = true)
-public interface PersistenceEntityManager<ENTITY extends PersistenceEntity> {
+public interface PersistenceEntityManager<ID, ENTITY extends PersistenceEntity<ID>> {
 
   /**
    * This method gets the class reflecting the {@link PersistenceEntity} managed
@@ -46,15 +48,30 @@ public interface PersistenceEntityManager<ENTITY extends PersistenceEntity> {
    * This method loads the {@link PersistenceEntity} with the given
    * <code>id</code> from the persistent store.
    * 
+   * @see javax.persistence.EntityManager#find(Class, Object)
+   * 
    * @param id is the {@link PersistenceEntity#getId() primary key} of the
    *        requested {@link PersistenceEntity entity}.
-   * @return the requested {@link PersistenceEntity entity} or <code>null</code>
-   *         if no {@link PersistenceEntity} of the type
-   *         {@link #getEntityClass() ENTITY} exists with the given ID.
+   * @return the requested {@link PersistenceEntity entity}.
    * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
-   *         entity} could NOT be found.
+   *         entity} could NOT be found. Unlike the JPA we throw this exception
+   *         instead of returning <code>null</code> as this is typically an
+   *         exceptional situation and it is better to have a precise exception
+   *         than a NPE.
    */
-  ENTITY load(Object id) throws ObjectNotFoundException;
+  ENTITY load(ID id) throws ObjectNotFoundException;
+
+  /**
+   * This method creates a lazy reference proxy of the {@link PersistenceEntity}
+   * with the given <code>id</code> from the persistent store.
+   * 
+   * @see javax.persistence.EntityManager#getReference(Class, Object)
+   * 
+   * @param id is the {@link PersistenceEntity#getId() primary key} of the
+   *        requested {@link PersistenceEntity entity}.
+   * @return the requested {@link PersistenceEntity entity}.
+   */
+  ENTITY getReference(ID id);
 
   /**
    * This method saves the given <code>entity</code> in the persistent store. If

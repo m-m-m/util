@@ -11,6 +11,8 @@ import net.sf.mmm.persistence.api.PersistenceEntityManager;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DummyFooEntityManager extends PersistenceEntityManager<DummyFooEntity> {
+public interface DummyFooEntityManager extends PersistenceEntityManager<Integer, DummyFooEntity> {
+
+  //
 
 }

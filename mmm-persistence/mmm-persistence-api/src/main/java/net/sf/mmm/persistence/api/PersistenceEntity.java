@@ -29,9 +29,11 @@ import java.util.Date;
  * {@link #getClass()} may return a subclass of your entity that you never
  * created (see {@link PersistenceManager#getEntityClass(PersistenceEntity)}).
  * 
+ * @param <ID> is the type of the {@link #getId() primary key}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PersistenceEntity {
+public interface PersistenceEntity<ID> {
 
   /**
    * This method gets the unique identifier (primary key) of this entity.<br>

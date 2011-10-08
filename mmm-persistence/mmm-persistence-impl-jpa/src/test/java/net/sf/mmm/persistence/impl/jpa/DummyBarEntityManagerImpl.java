@@ -11,7 +11,7 @@ import javax.inject.Named;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class DummyBarEntityManagerImpl extends JpaPersistenceEntityManager<DummyBarEntity>
+public class DummyBarEntityManagerImpl extends JpaPersistenceEntityManager<Integer, DummyBarEntity>
     implements DummyBarEntityManager {
 
   /**

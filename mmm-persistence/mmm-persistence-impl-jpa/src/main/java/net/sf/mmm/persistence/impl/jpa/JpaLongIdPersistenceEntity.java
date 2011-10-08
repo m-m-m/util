@@ -14,7 +14,7 @@ import javax.persistence.MappedSuperclass;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaLongIdPersistenceEntity extends JpaPersistenceEntity {
+public abstract class JpaLongIdPersistenceEntity extends JpaPersistenceEntity<Long> {
 
   /** @see #getId() */
   private Long id;
@@ -45,7 +45,7 @@ public abstract class JpaLongIdPersistenceEntity extends JpaPersistenceEntity {
    * 
    * @param id is the ID to set.
    */
-  public void setId(Long id) {
+  protected void setId(Long id) {
 
     this.id = id;
   }

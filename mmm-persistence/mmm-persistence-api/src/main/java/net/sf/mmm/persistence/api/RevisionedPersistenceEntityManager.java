@@ -14,12 +14,13 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @see RevisionedPersistenceEntity
  * 
+ * @param <ID> is the type of the {@link #getId() primary key}.
  * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPersistenceEntity>
-    extends PersistenceEntityManager<ENTITY> {
+public interface RevisionedPersistenceEntityManager<ID, ENTITY extends RevisionedPersistenceEntity<ID>>
+    extends PersistenceEntityManager<ID, ENTITY> {
 
   /**
    * This method will get the {@link List} of historic
@@ -65,7 +66,7 @@ public interface RevisionedPersistenceEntityManager<ENTITY extends RevisionedPer
    * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
    *         entity} could NOT be found.
    */
-  ENTITY load(Object id, Number revision) throws ObjectNotFoundException;
+  ENTITY load(ID id, Number revision) throws ObjectNotFoundException;
 
   /**
    * This method creates a new {@link RevisionedPersistenceEntity#getRevision()

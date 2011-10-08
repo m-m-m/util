@@ -15,12 +15,14 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * {@link net.sf.mmm.persistence.api.PersistenceEntityManager} using the
  * {@link javax.persistence JPA} (Java Persistence API).
  * 
+ * @param <ID> is the type of the {@link PersistenceEntity#getId() primary key}
+ *        of the managed {@link PersistenceEntity}.
  * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEntity> extends
-    AbstractPersistenceEntityManager<ENTITY> {
+public abstract class JpaPersistenceEntityManager<ID, ENTITY extends PersistenceEntity<ID>> extends
+    AbstractPersistenceEntityManager<ID, ENTITY> {
 
   /** @see #getEntityManager() */
   private EntityManager entityManager;
@@ -49,9 +51,21 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
   /**
    * {@inheritDoc}
    */
-  public ENTITY load(Object id) throws ObjectNotFoundException {
+  public ENTITY load(ID id) throws ObjectNotFoundException {
 
-    return getEntityManager().find(getEntityClass(), id);
+    ENTITY entity = getEntityManager().find(getEntityClass(), id);
+    if (entity == null) {
+      throw new ObjectNotFoundException(getEntityClass(), id);
+    }
+    return entity;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ENTITY getReference(ID id) {
+
+    return getEntityManager().getReference(getEntityClass(), id);
   }
 
   /**
@@ -61,8 +75,9 @@ public abstract class JpaPersistenceEntityManager<ENTITY extends PersistenceEnti
 
     if (!entity.isPersistent()) {
       getEntityManager().persist(entity);
-    } else {
-      getEntityManager().persist(entity);
+      if (entity instanceof JpaManagedIdPersistenceEntity) {
+        ((JpaManagedIdPersistenceEntity<?>) entity).setPersistent();
+      }
     }
   }
 

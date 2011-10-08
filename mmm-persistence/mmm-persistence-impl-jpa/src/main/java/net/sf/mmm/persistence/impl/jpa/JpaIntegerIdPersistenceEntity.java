@@ -14,7 +14,7 @@ import javax.persistence.MappedSuperclass;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaIntegerIdPersistenceEntity extends JpaPersistenceEntity {
+public abstract class JpaIntegerIdPersistenceEntity extends JpaPersistenceEntity<Integer> {
 
   /** @see #getId() */
   private Integer id;
@@ -45,7 +45,7 @@ public abstract class JpaIntegerIdPersistenceEntity extends JpaPersistenceEntity
    * 
    * @param id is the ID to set.
    */
-  public void setId(Integer id) {
+  protected void setId(Integer id) {
 
     this.id = id;
   }

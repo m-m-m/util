@@ -22,6 +22,8 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    * <code>entityClass</code>.
    * 
    * @param <ENTITY> is the generic entity-type.
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
    * @param entityClass is the type of the {@link PersistenceEntity} for which
    *        the according {@link PersistenceEntityManager} is requested.
    * @return the {@link PersistenceEntityManager} responsible for the given
@@ -29,7 +31,7 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    * @throws ObjectNotFoundException if the requested
    *         {@link PersistenceEntityManager manager} could NOT be found.
    */
-  <ENTITY extends RevisionedPersistenceEntity> RevisionedPersistenceEntityManager<ENTITY> getRevisionedManager(
+  <ID, ENTITY extends RevisionedPersistenceEntity<ID>> RevisionedPersistenceEntityManager<ID, ENTITY> getRevisionedManager(
       Class<ENTITY> entityClass) throws ObjectNotFoundException;
 
   /**
@@ -41,6 +43,8 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    * @see RevisionedPersistenceEntityManager#load(Object, Number)
    * 
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
    * @param entityClass is the class reflecting the type of the requested
    *        entity.
    * @param id is the {@link PersistenceEntity#getId() primary key} of the
@@ -57,7 +61,7 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    *         <code>entityClass</code> reflects a {@link PersistenceEntity} that
    *         is NOT revision-controlled.
    */
-  <ENTITY extends RevisionedPersistenceEntity> ENTITY load(Class<ENTITY> entityClass, Object id,
-      Number revision) throws ObjectNotFoundException, NlsUnsupportedOperationException;
+  <ID, ENTITY extends RevisionedPersistenceEntity<ID>> ENTITY load(Class<ENTITY> entityClass,
+      ID id, Number revision) throws ObjectNotFoundException, NlsUnsupportedOperationException;
 
 }

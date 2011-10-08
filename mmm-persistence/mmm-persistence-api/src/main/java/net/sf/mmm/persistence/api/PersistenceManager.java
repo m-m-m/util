@@ -33,6 +33,8 @@ public interface PersistenceManager {
    * <code>entityClass</code>.
    * 
    * @param <ENTITY> is the generic entity-type.
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
    * @param entityClass is the type of the {@link PersistenceEntity} for which
    *        the according {@link PersistenceEntityManager} is requested.
    * @return the {@link PersistenceEntityManager} responsible for the given
@@ -40,7 +42,7 @@ public interface PersistenceManager {
    * @throws ObjectNotFoundException if the requested
    *         {@link PersistenceEntityManager manager} could NOT be found.
    */
-  <ENTITY extends PersistenceEntity> PersistenceEntityManager<ENTITY> getManager(
+  <ID, ENTITY extends PersistenceEntity<ID>> PersistenceEntityManager<ID, ENTITY> getManager(
       Class<ENTITY> entityClass) throws ObjectNotFoundException;
 
   /**
@@ -50,6 +52,8 @@ public interface PersistenceManager {
    * @see PersistenceEntityManager#load(Object)
    * 
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
    * @param entityClass is the class reflecting the type of the requested
    *        entity.
    * @param id is the {@link PersistenceEntity#getId() primary key} of the
@@ -58,7 +62,28 @@ public interface PersistenceManager {
    * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
    *         entity} could NOT be found.
    */
-  <ENTITY extends PersistenceEntity> ENTITY load(Class<ENTITY> entityClass, Object id)
+  <ID, ENTITY extends PersistenceEntity<ID>> ENTITY load(Class<ENTITY> entityClass, ID id)
+      throws ObjectNotFoundException;
+
+  /**
+   * This method creates a lazy reference proxy of the {@link PersistenceEntity}
+   * with the given <code>entityClass</code> and <code>id</code> from the
+   * persistent store.
+   * 
+   * @see PersistenceEntityManager#getReference(Object)
+   * 
+   * @param <ENTITY> is the generic type of the <code>entityClass</code>.
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
+   * @param entityClass is the class reflecting the type of the requested
+   *        entity.
+   * @param id is the {@link PersistenceEntity#getId() primary key} of the
+   *        requested entity.
+   * @return the requested entity.
+   * @throws ObjectNotFoundException if the requested {@link PersistenceEntity
+   *         entity} could NOT be found.
+   */
+  <ID, ENTITY extends PersistenceEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass, ID id)
       throws ObjectNotFoundException;
 
   /**
@@ -68,7 +93,7 @@ public interface PersistenceManager {
    * 
    * @param entity is the entity to save.
    */
-  void save(PersistenceEntity entity);
+  void save(PersistenceEntity<?> entity);
 
   /**
    * This method deletes the given <code>entity</code>.<br>
@@ -77,7 +102,7 @@ public interface PersistenceManager {
    * 
    * @param entity is the entity to delete.
    */
-  void delete(PersistenceEntity entity);
+  void delete(PersistenceEntity<?> entity);
 
   /**
    * This method gets the {@link Class} reflecting the given
@@ -94,6 +119,6 @@ public interface PersistenceManager {
    *        requested.
    * @return the {@link Class} reflecting the given <code>entity</code>.
    */
-  Class<? extends PersistenceEntity> getEntityClass(PersistenceEntity entity);
+  Class<? extends PersistenceEntity<?>> getEntityClass(PersistenceEntity<?> entity);
 
 }

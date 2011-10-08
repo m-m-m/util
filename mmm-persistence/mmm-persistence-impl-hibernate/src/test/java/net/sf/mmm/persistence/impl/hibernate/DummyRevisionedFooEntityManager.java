@@ -3,14 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.hibernate;
 
-
 /**
  * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DummyRevisionedFooEntityManager extends
-    EnversPersistenceEntityManager<DummyRevisionedFooEntity> {
+    EnversPersistenceEntityManager<Long, DummyRevisionedFooEntity> {
 
   /**
    * The constructor.

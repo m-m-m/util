@@ -7,14 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.envers.Audited;
+
 /**
  * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-// @Audited
-public class DummyRevisionedFooEntity extends EnversPersistenceEntity {
+@Audited
+public class DummyRevisionedFooEntity extends EnversPersistenceEntity<Long> {
 
   /** @see #getId() */
   private Long id;

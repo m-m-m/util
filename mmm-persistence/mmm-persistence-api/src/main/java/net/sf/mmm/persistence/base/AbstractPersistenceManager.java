@@ -22,7 +22,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public abstract class AbstractPersistenceManager implements PersistenceManager {
 
   /** @see #getManager(Class) */
-  private final Map<Class<?>, PersistenceEntityManager<?>> class2managerMap;
+  private final Map<Class<?>, PersistenceEntityManager<?, ?>> class2managerMap;
 
   /**
    * The constructor.
@@ -30,7 +30,7 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   public AbstractPersistenceManager() {
 
     super();
-    this.class2managerMap = new HashMap<Class<?>, PersistenceEntityManager<?>>();
+    this.class2managerMap = new HashMap<Class<?>, PersistenceEntityManager<?, ?>>();
   }
 
   /**
@@ -38,7 +38,7 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
    * 
    * @param entityManager is the {@link PersistenceEntityManager} to register.
    */
-  protected void addManager(PersistenceEntityManager<?> entityManager) {
+  protected void addManager(PersistenceEntityManager<?, ?> entityManager) {
 
     Class<?> entityClass = entityManager.getEntityClass();
     if (this.class2managerMap.containsKey(entityClass)) {
@@ -50,10 +50,10 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   /**
    * {@inheritDoc}
    */
-  public <ENTITY extends PersistenceEntity> PersistenceEntityManager<ENTITY> getManager(
+  public <ID, ENTITY extends PersistenceEntity<ID>> PersistenceEntityManager<ID, ENTITY> getManager(
       Class<ENTITY> entityType) {
 
-    PersistenceEntityManager<ENTITY> manager = (PersistenceEntityManager<ENTITY>) this.class2managerMap
+    PersistenceEntityManager<ID, ENTITY> manager = (PersistenceEntityManager<ID, ENTITY>) this.class2managerMap
         .get(entityType);
     if (manager == null) {
       throw new ObjectNotFoundException(PersistenceEntityManager.class.getSimpleName(), entityType);
@@ -64,10 +64,20 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   /**
    * {@inheritDoc}
    */
-  public <ENTITY extends PersistenceEntity> ENTITY load(Class<ENTITY> entityClass, Object id) {
+  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY load(Class<ENTITY> entityClass, ID id) {
 
-    PersistenceEntityManager<ENTITY> manager = getManager(entityClass);
+    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
     return manager.load(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass,
+      ID id) throws ObjectNotFoundException {
+
+    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    return manager.getReference(id);
   }
 
   /**
@@ -95,7 +105,7 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   /**
    * {@inheritDoc}
    */
-  public Class<? extends PersistenceEntity> getEntityClass(PersistenceEntity entity) {
+  public Class<? extends PersistenceEntity<?>> getEntityClass(PersistenceEntity<?> entity) {
 
     // this is a very simple way - it might be wrong...
     Class<?> entityClass = entity.getClass();
@@ -105,7 +115,7 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
         throw new NlsIllegalStateException();
       }
     }
-    return entity.getClass();
+    return (Class<? extends PersistenceEntity<?>>) entity.getClass();
   }
 
 }

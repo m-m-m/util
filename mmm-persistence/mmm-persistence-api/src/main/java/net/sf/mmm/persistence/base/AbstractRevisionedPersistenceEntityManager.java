@@ -11,18 +11,19 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * This is the abstract base implementation of the
  * {@link RevisionedPersistenceEntityManager} interface.
  * 
+ * @param <ID> is the type of the {@link #getId() primary key}.
  * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractRevisionedPersistenceEntityManager<ENTITY extends RevisionedPersistenceEntity>
-    extends AbstractPersistenceEntityManager<ENTITY> implements
-    RevisionedPersistenceEntityManager<ENTITY> {
+public abstract class AbstractRevisionedPersistenceEntityManager<ID, ENTITY extends RevisionedPersistenceEntity<ID>>
+    extends AbstractPersistenceEntityManager<ID, ENTITY> implements
+    RevisionedPersistenceEntityManager<ID, ENTITY> {
 
   /**
    * {@inheritDoc}
    */
-  public ENTITY load(Object id, Number revision) throws ObjectNotFoundException {
+  public ENTITY load(ID id, Number revision) throws ObjectNotFoundException {
 
     if (revision == RevisionedPersistenceEntity.LATEST_REVISION) {
       return load(id);

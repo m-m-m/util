@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaStringIdPersistenceEntity extends JpaManagedIdPersistenceEntity {
+public abstract class JpaStringIdPersistenceEntity extends JpaManagedIdPersistenceEntity<String> {
 
   /** @see #getId() */
   private String id;
@@ -29,7 +29,6 @@ public abstract class JpaStringIdPersistenceEntity extends JpaManagedIdPersisten
   /**
    * {@inheritDoc}
    */
-  @Override
   @Id
   public String getId() {
 

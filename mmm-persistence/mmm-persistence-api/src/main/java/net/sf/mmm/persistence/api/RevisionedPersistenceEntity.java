@@ -9,9 +9,11 @@ package net.sf.mmm.persistence.api;
  * 
  * @see RevisionedPersistenceEntityManager
  * 
+ * @param <ID> is the type of the {@link #getId() primary key}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface RevisionedPersistenceEntity extends PersistenceEntity {
+public interface RevisionedPersistenceEntity<ID> extends PersistenceEntity<ID> {
 
   /**
    * The {@link PersistenceEntityManager#load(Object) latest}
