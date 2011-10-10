@@ -5,19 +5,18 @@ package net.sf.mmm.content.reflection.api.access;
 
 import java.util.List;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 
 /**
- * This interface gives read access to the content-model.
+ * This interface gives read access to the content-model (reflection).
  * 
- * @param <CLASS> is the generic type for the bound of
- *        {@link ContentClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentModelReadAccess<CLASS> extends ContentClassReadAccessById<CLASS>,
-    ContentClassReadAccessByName<CLASS>, ContentClassReadAccessByInstance<CLASS>,
-    ContentFieldReadAccessById<CLASS>, ContentFieldReadAccessByName<CLASS> {
+public interface ContentReflectionReadAccess extends ContentClassReadAccessById,
+    ContentClassReadAccessByTitle, ContentClassReadAccessByInstance, ContentFieldReadAccessById,
+    ContentFieldReadAccessByName {
 
   /**
    * This method gets the root content class that reflects the
@@ -25,13 +24,13 @@ public interface ContentModelReadAccess<CLASS> extends ContentClassReadAccessByI
    * 
    * @return the root class.
    */
-  ContentClass<CLASS> getRootContentClass();
+  ContentClass<? extends ContentObject> getRootContentClass();
 
   /**
    * This method gets the list of all registered content classes.
    * 
    * @return the immutable list of all content classes.
    */
-  List<? extends ContentClass<? extends CLASS>> getContentClasses();
+  List<? extends ContentClass<? extends ContentObject>> getContentClasses();
 
 }

@@ -18,7 +18,7 @@ import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
-import net.sf.mmm.content.reflection.api.ContentModelException;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.base.statically.AbstractContentReflectionObject;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
@@ -31,8 +31,8 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentClass<CLASS> extends AbstractContentReflectionObject<CLASS>
-    implements ContentClass<CLASS> {
+public abstract class AbstractContentClass<CLASS extends ContentObject> extends
+    AbstractContentReflectionObject<CLASS> implements ContentClass<CLASS> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -8444545908272830489L;
@@ -69,18 +69,17 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
    */
   public AbstractContentClass() {
 
-    this(null, null);
+    this(null);
   }
 
   /**
    * The constructor.
    * 
    * @param name is the {@link #getTitle() name}.
-   * @param id is the {@link #getContentId() ID}.
    */
-  public AbstractContentClass(String name, ContentId id) {
+  public AbstractContentClass(String name) {
 
-    super(name, id);
+    super(name);
     this.subClasses = new ArrayList<AbstractContentClass<? extends CLASS>>();
     this.subClassesView = Collections.unmodifiableList(this.subClasses);
     this.declaredFields = new HashMap<String, AbstractContentField<CLASS, ?>>();
@@ -89,9 +88,17 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
     if (this.superClass != null) {
       if (this.superClass.getContentModifiers().isFinal()) {
         // TODO: NLS
-        throw new ContentModelException("Can NOT extend final class!");
+        throw new ContentReflectionException("Can NOT extend final class!");
       }
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public AbstractContentClass<? extends ContentObject> getParent() {
+
+    return getSuperClass();
   }
 
   /**
@@ -115,8 +122,7 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
   /**
    * {@inheritDoc}
    */
-  @Override
-  public List<AbstractContentClass<? extends CLASS>> getChildren() {
+  public List<? extends ContentClass<? extends ContentObject>> getChildren() {
 
     return getSubClasses();
   }
@@ -203,7 +209,6 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
    * 
    * @return the "implementation".
    */
-  @ContentFieldAnnotation(id = 33)
   public Class<CLASS> getJavaClass() {
 
     return this.javaClass;
@@ -223,7 +228,7 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
   /**
    * {@inheritDoc}
    */
-  public boolean isClass() {
+  public boolean isContentClass() {
 
     return true;
   }
@@ -260,21 +265,21 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
    * sub-class} of this class.
    * 
    * @param subClass is the sub-class to add.
-   * @throws ContentModelException if the operation fails.
+   * @throws ContentReflectionException if the operation fails.
    */
-  public void addSubClass(AbstractContentClass subClass) throws ContentModelException {
+  public void addSubClass(AbstractContentClass subClass) throws ContentReflectionException {
 
     if (subClass.getSuperClass() != this) {
       // TODO: NLS
-      throw new ContentModelException("Sub-Class must have this class as super-class!");
+      throw new ContentReflectionException("Sub-Class must have this class as super-class!");
     }
     if (subClass.getContentModifiers().isSystem() && !getContentModifiers().isSystem()) {
       // TODO: NLS
-      throw new ContentModelException("System-class can NOT extend user-class!");
+      throw new ContentReflectionException("System-class can NOT extend user-class!");
     }
     if (getContentModifiers().isFinal()) {
       // TODO: NLS
-      throw new ContentModelException("Can NOT extend final class!");
+      throw new ContentReflectionException("Can NOT extend final class!");
     }
     // idem-potent operation
     if (!this.subClasses.contains(subClass)) {
@@ -286,12 +291,12 @@ public abstract class AbstractContentClass<CLASS> extends AbstractContentReflect
    * This method adds the given <code>field</code> to this class.
    * 
    * @param field is the field to add.
-   * @throws ContentModelException if the field could NOT be added.
+   * @throws ContentReflectionException if the field could NOT be added.
    */
-  public void addField(AbstractContentField field) throws ContentModelException {
+  public void addField(AbstractContentField field) throws ContentReflectionException {
 
     if (field.getDeclaringClass() != this) {
-      throw new ContentModelException("Can NOT add field if NOT declared by this class!");
+      throw new ContentReflectionException("Can NOT add field if NOT declared by this class!");
     }
     ContentField duplicate = this.declaredFields.get(field.getTitle());
     if (duplicate != field) {

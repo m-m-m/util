@@ -4,14 +4,14 @@
 package net.sf.mmm.content.reflection.api;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.reflection.api.access.ContentModelWriteAccess;
+import net.sf.mmm.content.reflection.api.access.ContentReflectionWriteAccess;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
 
 /**
- * This interface extends the {@link ContentModelService} interface with methods
- * to edit the content model.<br>
+ * This interface extends the {@link ContentReflectionService} interface with
+ * methods to edit the content-model (reflection).<br>
  * <b>ATTENTION:</b><br>
  * Please note that an {@link #isEditable() editable} content-model requires
  * that the persistent-stores of the content also support this feature. So take
@@ -21,8 +21,8 @@ import net.sf.mmm.util.event.api.EventSource;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface MutableContentModelService extends ContentModelService,
-    ContentModelWriteAccess<ContentObject> {
+public interface MutableContentReflectionService extends ContentReflectionService,
+    ContentReflectionWriteAccess {
 
   /**
    * This method determines if this service provides a content-model that is
@@ -36,7 +36,7 @@ public interface MutableContentModelService extends ContentModelService,
    * This method gets the event registrar where listeners can be registered so
    * they receive events about changes of the content model. <br>
    * 
-   * @see ContentModelWriteAccess
+   * @see ContentReflectionWriteAccess
    * 
    *      Instead of extending the {@link EventSource} interface an instance of
    *      the interface is returned by this method. This gives more flexibility
@@ -46,6 +46,6 @@ public interface MutableContentModelService extends ContentModelService,
    * 
    * @return the event registrar.
    */
-  EventSource<ContentModelEvent<ContentObject>, EventListener<ContentModelEvent<ContentObject>>> getEventRegistrar();
+  EventSource<ContentReflectionEvent<ContentObject>, EventListener<ContentReflectionEvent<ContentObject>>> getEventRegistrar();
 
 }

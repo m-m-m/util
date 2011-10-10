@@ -17,31 +17,32 @@ import javax.annotation.Resource;
 import net.sf.mmm.content.api.ContentModelSystemModifyException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.datatype.api.ContentId;
-import net.sf.mmm.content.datatype.api.MutableMetaData;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.content.reflection.api.ContentModelEvent;
-import net.sf.mmm.content.reflection.api.ContentModelException;
-import net.sf.mmm.content.reflection.api.ContentModelNotEditableException;
 import net.sf.mmm.content.reflection.api.ContentModifiers;
+import net.sf.mmm.content.reflection.api.ContentReflectionEvent;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
+import net.sf.mmm.content.reflection.api.ContentReflectionNotEditableException;
 import net.sf.mmm.content.reflection.api.ContentReflectionObject;
-import net.sf.mmm.content.reflection.api.MutableContentModelService;
+import net.sf.mmm.content.reflection.api.MutableContentReflectionService;
 import net.sf.mmm.content.reflection.base.statically.AbstractContentReflectionObject;
+import net.sf.mmm.content.trash.MutableMetaData;
+import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.base.MappedClassResolver;
 
 /**
  * This an the abstract base implementation of the
- * {@link net.sf.mmm.content.reflection.api.ContentModelService ContentModelService}
- * interface.
+ * {@link net.sf.mmm.content.reflection.api.ContentReflectionService
+ * ContentModelService} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractMutableContentModelService extends AbstractContentModelService
-    implements MutableContentModelService, ClassResolver {
+    implements MutableContentReflectionService, ClassResolver {
 
   /** @see #getClassResolver() */
   private ClassResolver classResolver;
@@ -158,7 +159,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
   /**
    * {@inheritDoc}
    */
-  public Class resolveClass(String name) throws ClassNotFoundException {
+  public Class resolveClass(String name) {
 
     Class result;
     ContentClass contentClass = getContentClass(name);
@@ -175,13 +176,13 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
   /**
    * This method verifies that this model is {@link #isEditable() editable}.
    * 
-   * @throws ContentModelNotEditableException if this model is NOT
+   * @throws ContentReflectionNotEditableException if this model is NOT
    *         {@link #isEditable() editable}.
    */
-  protected void requireEditableModel() throws ContentModelNotEditableException {
+  protected void requireEditableModel() throws ContentReflectionNotEditableException {
 
     if (!isEditable()) {
-      throw new ContentModelNotEditableException();
+      throw new ContentReflectionNotEditableException();
     }
   }
 
@@ -189,7 +190,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
    * {@inheritDoc}
    */
   public AbstractContentClass createContentClass(ContentClass superClass, String name,
-      ContentClassModifiers modifiers) throws ContentModelException {
+      ContentClassModifiers modifiers) throws ContentReflectionException {
 
     requireEditableModel();
     assert (superClass == getContentClass(superClass.getContentId()));
@@ -208,7 +209,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
    * {@inheritDoc}
    */
   public ContentField createContentField(ContentClass declaringClass, String name, Type type,
-      ContentFieldModifiers modifiers) throws ContentModelException {
+      ContentFieldModifiers modifiers) throws ContentReflectionException {
 
     requireEditableModel();
     assert (declaringClass == getContentClass(declaringClass.getContentId()));
@@ -226,7 +227,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
    * {@inheritDoc}
    */
   public void setDeleted(ContentReflectionObject classOrField, boolean newDeletedFlag)
-      throws ContentModelException {
+      throws ContentReflectionException {
 
     requireEditableModel();
     if (classOrField.getContentModifiers().isSystem()) {
@@ -235,10 +236,10 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
     // TODO: persist
     AbstractContentReflectionObject reflectionObject = (AbstractContentReflectionObject) classOrField;
     reflectionObject.setDeletedFlag(newDeletedFlag);
-    if (classOrField.isClass()) {
-      fireEvent(new ContentModelEvent((ContentClass) classOrField, ChangeEventType.UPDATE));
+    if (classOrField.isContentClass()) {
+      fireEvent(new ContentReflectionEvent((ContentClass) classOrField, ChangeType.UPDATE));
     } else {
-      fireEvent(new ContentModelEvent((ContentField) classOrField, ChangeEventType.UPDATE));
+      fireEvent(new ContentReflectionEvent((ContentField) classOrField, ChangeType.UPDATE));
     }
   }
 

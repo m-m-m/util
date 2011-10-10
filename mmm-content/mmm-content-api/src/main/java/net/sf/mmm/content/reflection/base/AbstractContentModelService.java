@@ -16,27 +16,26 @@ import net.sf.mmm.content.api.ContentIdManager;
 import net.sf.mmm.content.api.ContentModelSystemModifyException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.base.AbstractContentObject;
-import net.sf.mmm.content.base.AbstractContentObject.AbstractContentObjectModifier;
 import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.content.reflection.api.ContentModelEvent;
-import net.sf.mmm.content.reflection.api.ContentModelException;
-import net.sf.mmm.content.reflection.api.ContentModelService;
+import net.sf.mmm.content.reflection.api.ContentReflectionEvent;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
+import net.sf.mmm.content.reflection.api.ContentReflectionService;
 import net.sf.mmm.content.reflection.api.access.ContentClassReadAccessByInstance;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
 import net.sf.mmm.util.event.base.AbstractSynchronizedEventSource;
 
 /**
- * This is the abstract base implementation of the {@link ContentModelService}
- * interface.
+ * This is the abstract base implementation of the
+ * {@link ContentReflectionService} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentModelService implements ContentModelService {
+public abstract class AbstractContentModelService implements ContentReflectionService {
 
   /** @see #getContentClass(String) */
   private final Map<String, AbstractContentClass> name2class;
@@ -48,7 +47,7 @@ public abstract class AbstractContentModelService implements ContentModelService
   private final Map<Class, AbstractContentClass> class2class;
 
   /** @see #getContentClasses() */
-  private final List<AbstractContentClass> classes;
+  private final List<AbstractContentClass<? extends ContentObject>> classes;
 
   /** @see #getContentClasses() */
   private final List<AbstractContentClass<? extends ContentObject>> classesView;
@@ -75,7 +74,7 @@ public abstract class AbstractContentModelService implements ContentModelService
     this.name2class = new HashMap<String, AbstractContentClass>();
     this.id2class = new HashMap<ContentId, AbstractContentClass>();
     this.class2class = new HashMap<Class, AbstractContentClass>();
-    this.classes = new ArrayList<AbstractContentClass>();
+    this.classes = new ArrayList<AbstractContentClass<? extends ContentObject>>();
     this.classesView = Collections.unmodifiableList(this.classes);
     this.id2field = new HashMap<ContentId, AbstractContentField>();
     // AbstractContentObject.setClassAccess(this);
@@ -102,7 +101,7 @@ public abstract class AbstractContentModelService implements ContentModelService
   /**
    * {@inheritDoc}
    */
-  public EventSource<ContentModelEvent, EventListener<ContentModelEvent>> getEventRegistrar() {
+  public EventSource<ContentReflectionEvent, EventListener<ContentReflectionEvent>> getEventRegistrar() {
 
     return this.eventSource;
   }
@@ -118,7 +117,7 @@ public abstract class AbstractContentModelService implements ContentModelService
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass getContentClass(ContentId id) {
+  public AbstractContentClass<? extends ContentObject> getContentClass(ContentId id) {
 
     return this.id2class.get(id);
   }
@@ -181,12 +180,13 @@ public abstract class AbstractContentModelService implements ContentModelService
 
   /**
    * This method registers the given <code>contentClass</code> to this service.<br>
-   * It does NOT {@link #fireEvent(ContentModelEvent) fire} the according event.
+   * It does NOT {@link #fireEvent(ContentReflectionEvent) fire} the according
+   * event.
    * 
    * @param contentClass is the class to add.
-   * @throws ContentModelException if the class is already registered.
+   * @throws ContentReflectionException if the class is already registered.
    */
-  protected void addClass(AbstractContentClass contentClass) throws ContentModelException {
+  protected void addClass(AbstractContentClass contentClass) throws ContentReflectionException {
 
     ContentId id = contentClass.getContentId();
     AbstractContentClass duplicate = this.id2class.get(id);
@@ -221,10 +221,11 @@ public abstract class AbstractContentModelService implements ContentModelService
    * registered} recursively.
    * 
    * @param contentClass is the class to add.
-   * @throws ContentModelException if the class or one of its sub-classes could
-   *         NOT be registered.
+   * @throws ContentReflectionException if the class or one of its sub-classes
+   *         could NOT be registered.
    */
-  protected void addClassRecursive(AbstractContentClass contentClass) throws ContentModelException {
+  protected void addClassRecursive(AbstractContentClass contentClass)
+      throws ContentReflectionException {
 
     addClass(contentClass);
     for (AbstractContentClass subClass : contentClass.getSubClasses()) {
@@ -236,10 +237,10 @@ public abstract class AbstractContentModelService implements ContentModelService
    * This method registers the <code>contentField</code> to this service.
    * 
    * @param contentField is the field to add.
-   * @throws ContentModelException if a field with the same ID is already
+   * @throws ContentReflectionException if a field with the same ID is already
    *         registered.
    */
-  protected void addField(AbstractContentField contentField) throws ContentModelException {
+  protected void addField(AbstractContentField contentField) throws ContentReflectionException {
 
     ContentId id = contentField.getContentId();
     if (this.id2field.containsKey(id)) {
@@ -254,10 +255,10 @@ public abstract class AbstractContentModelService implements ContentModelService
    * Use this feature with extreme care.
    * 
    * @param contentClass is the class to remove.
-   * @throws ContentModelException if the operation fails (e.g. the class is
-   *         required by the system).
+   * @throws ContentReflectionException if the operation fails (e.g. the class
+   *         is required by the system).
    */
-  protected void removeClass(AbstractContentClass contentClass) throws ContentModelException {
+  protected void removeClass(AbstractContentClass contentClass) throws ContentReflectionException {
 
     if (contentClass.getContentModifiers().isSystem()) {
       throw new ContentModelSystemModifyException(contentClass);
@@ -276,10 +277,10 @@ public abstract class AbstractContentModelService implements ContentModelService
    * Use this feature with extreme care.
    * 
    * @param contentField is the field to remove.
-   * @throws ContentModelException if the operation fails (e.g. the field is
-   *         required by the system).
+   * @throws ContentReflectionException if the operation fails (e.g. the field
+   *         is required by the system).
    */
-  protected void removeField(AbstractContentField contentField) throws ContentModelException {
+  protected void removeField(AbstractContentField contentField) throws ContentReflectionException {
 
     if (contentField.getContentModifiers().isSystem()) {
       throw new ContentModelSystemModifyException(contentField);
@@ -287,11 +288,11 @@ public abstract class AbstractContentModelService implements ContentModelService
   }
 
   /**
-   * @see ContentModelEventSource#fireEvent(ContentModelEvent)
+   * @see ContentModelEventSource#fireEvent(ContentReflectionEvent)
    * 
    * @param event is the event to send.
    */
-  protected void fireEvent(ContentModelEvent event) {
+  protected void fireEvent(ContentReflectionEvent event) {
 
     this.eventSource.fireEvent(event);
   }
@@ -331,7 +332,7 @@ public abstract class AbstractContentModelService implements ContentModelService
       // TODO: verification
       superClass.addSubClass(contentClass);
       addClass(contentClass);
-      fireEvent(new ContentModelEvent(contentClass, ChangeEventType.ADD));
+      fireEvent(new ContentReflectionEvent(contentClass, ChangeEventType.ADD));
     } else {
       ContentClassModifiers existingModifiers = existingClass.getContentModifiers();
       boolean modified = false;
@@ -348,7 +349,8 @@ public abstract class AbstractContentModelService implements ContentModelService
       if (!existingModifiers.equals(contentClass.getContentModifiers())) {
         if (existingModifiers.isSystem()) {
           // TODO: NLS
-          throw new ContentModelException("Changing modifiers of system class is NOT permitted!");
+          throw new ContentReflectionException(
+              "Changing modifiers of system class is NOT permitted!");
         }
         // TODO:
         throw new ContentModelFeatureUnsupportedException(
@@ -361,7 +363,7 @@ public abstract class AbstractContentModelService implements ContentModelService
         syncClassRecursive(subClass, contentClass);
       }
       if (modified) {
-        fireEvent(new ContentModelEvent(contentClass, ChangeEventType.UPDATE));
+        fireEvent(new ContentReflectionEvent(contentClass, ChangeEventType.UPDATE));
       }
     }
 
@@ -398,14 +400,15 @@ public abstract class AbstractContentModelService implements ContentModelService
   /**
    * @see AbstractContentModelService#getEventRegistrar()
    */
-  private static class ContentModelEventSource extends
-      AbstractSynchronizedEventSource<ContentModelEvent, EventListener<ContentModelEvent>> {
+  private static class ContentModelEventSource
+      extends
+      AbstractSynchronizedEventSource<ContentReflectionEvent, EventListener<ContentReflectionEvent>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void fireEvent(ContentModelEvent event) {
+    public void fireEvent(ContentReflectionEvent event) {
 
       super.fireEvent(event);
     }

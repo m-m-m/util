@@ -43,13 +43,4 @@ public interface MutableBlob extends Blob {
    */
   void writeData(InputStream inputStream, boolean append) throws RuntimeIoException;
 
-  /**
-   * This method gets the revision counter of this {@link Blob}. It is initially
-   * <code>0</code> when the {@link Blob} is logically created and gets
-   * increased on each {@link #getWriteAccess(boolean) write access}.
-   * 
-   * @return the revision number.
-   */
-  int getRevision();
-
 }

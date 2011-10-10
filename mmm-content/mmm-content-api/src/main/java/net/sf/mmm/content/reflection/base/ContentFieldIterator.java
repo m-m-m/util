@@ -5,6 +5,7 @@ package net.sf.mmm.content.reflection.base;
 
 import java.util.Iterator;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
@@ -12,12 +13,12 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
  * fields defined by the class and the fields inherited from the sub-classes.
  * 
  * @param <CLASS> is the generic type of the reflected
- *        {@link net.sf.mmm.content.reflection.api.ContentClass#getJavaClass() class}
- *        .
+ *        {@link net.sf.mmm.content.reflection.api.ContentClass#getJavaClass()
+ *        class} .
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentFieldIterator<CLASS> extends
+public class ContentFieldIterator<CLASS extends ContentObject> extends
     AbstractIterator<AbstractContentField<? super CLASS, ?>> {
 
   /** the current class */
@@ -30,8 +31,8 @@ public class ContentFieldIterator<CLASS> extends
    * The constructor.
    * 
    * @param contentClass is the class of that all
-   *        {@link net.sf.mmm.content.reflection.api.ContentField fields} are to be
-   *        iterated.
+   *        {@link net.sf.mmm.content.reflection.api.ContentField fields} are to
+   *        be iterated.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public ContentFieldIterator(AbstractContentClass<CLASS> contentClass) {

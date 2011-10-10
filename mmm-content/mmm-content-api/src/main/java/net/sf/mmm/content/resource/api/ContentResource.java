@@ -73,25 +73,6 @@ public abstract interface ContentResource extends ContentObject {
   String getPath();
 
   /**
-   * This method gets the proxy-target of this object. If the proxy-target is
-   * NOT <code>null</code>, this object is a proxy on another instance of the
-   * same {@link net.sf.mmm.content.reflection.api.ContentClass type}. Then all
-   * unset {@link net.sf.mmm.content.reflection.api.ContentField fields} are
-   * "inherited" from the {@link #getProxyTarget() proxy-target}. This rule
-   * applies before fields are inherited from the {@link #getParent() parent}
-   * and does NOT apply for {@link #getId() ID} and {@link #getTitle() name}. A
-   * proxy that has no field set acts like a link in a Unix filesystem.<br>
-   * <b>INFORMATION:</b><br>
-   * The returned object needs to have the same
-   * {@link net.sf.mmm.content.reflection.api.ContentClass type} as this
-   * instance.
-   * 
-   * @return the proxy-target or <code>null</code> if this is a regular
-   *         content-object.
-   */
-  ContentResource getProxyTarget();
-
-  /**
    * This method gets the {@link List} containing all direct children of this
    * object. If this object is NOT a {@link #isFolder() folder} the result will
    * always be an {@link List#isEmpty() empty} {@link List}.<br>

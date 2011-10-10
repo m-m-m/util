@@ -3,18 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.reflection.api.access;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentField;
 
 /**
  * This interface allows to {@link #getContentField(String) get} a
  * {@link ContentField} by its {@link ContentField#getTitle() name}.
  * 
- * @param <CLASS> is the generic type for the bound of
- *        {@link ContentField#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentFieldReadAccessByName<CLASS> {
+public interface ContentFieldReadAccessByName {
 
   /**
    * This method gets the {@link ContentField} for the given <code>id</code>.
@@ -24,6 +23,6 @@ public interface ContentFieldReadAccessByName<CLASS> {
    * @return the content field for the given ID or <code>null</code> if it does
    *         NOT exist.
    */
-  ContentField<? extends CLASS, ?> getContentField(String name);
+  ContentField<? extends ContentObject, ?> getContentField(String name);
 
 }

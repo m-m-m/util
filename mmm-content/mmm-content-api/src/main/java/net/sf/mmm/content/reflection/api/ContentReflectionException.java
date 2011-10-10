@@ -9,12 +9,12 @@ import net.sf.mmm.content.api.ContentException;
 
 /**
  * This exception is thrown if something went wrong with the
- * {@link ContentModelService content-model}.
+ * {@link ContentReflectionService content-model}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentModelException extends ContentException {
+public class ContentReflectionException extends ContentException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3544669568611071536L;
@@ -30,7 +30,7 @@ public class ContentModelException extends ContentException {
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
    *        arguments}.
    */
-  public ContentModelException(String internationalizedMessage, Map<String, Object> arguments) {
+  public ContentReflectionException(String internationalizedMessage, Map<String, Object> arguments) {
 
     super(internationalizedMessage, arguments);
   }
@@ -47,7 +47,7 @@ public class ContentModelException extends ContentException {
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
    *        arguments}.
    */
-  public ContentModelException(Throwable nested, String internationalizedMessage,
+  public ContentReflectionException(Throwable nested, String internationalizedMessage,
       Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
@@ -61,7 +61,7 @@ public class ContentModelException extends ContentException {
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
    *        internationalization} and should be in English language.
    */
-  public ContentModelException(String internationalizedMessage) {
+  public ContentReflectionException(String internationalizedMessage) {
 
     super(internationalizedMessage);
   }
@@ -75,7 +75,7 @@ public class ContentModelException extends ContentException {
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
    *        internationalization} and should be in English language.
    */
-  public ContentModelException(Throwable nested, String internationalizedMessage) {
+  public ContentReflectionException(Throwable nested, String internationalizedMessage) {
 
     super(nested, internationalizedMessage);
   }

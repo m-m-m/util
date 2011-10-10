@@ -4,12 +4,12 @@
 package net.sf.mmm.content.reflection.api;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.reflection.api.access.ContentModelReadAccess;
+import net.sf.mmm.content.reflection.api.access.ContentReflectionReadAccess;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface for a service that provides access to the
- * content-model. <br>
+ * This is the interface for a service that provides access to the content-model
+ * (reflection). <br>
  * The content model is used to reflect the different types of
  * {@link net.sf.mmm.content.api.ContentObject content-object}s (also called
  * entities). It is used for generic access to the content (UI for rendering
@@ -26,7 +26,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface ContentModelService extends ContentModelReadAccess<ContentObject> {
+public interface ContentReflectionService extends ContentReflectionReadAccess {
 
   /** The location of the content-model. */
   String XML_MODEL_LOCATION = "net/sf/mmm/content/model/ContentModel.xml";

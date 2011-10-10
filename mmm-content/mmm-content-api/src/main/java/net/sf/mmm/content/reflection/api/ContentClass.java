@@ -9,6 +9,7 @@ import java.util.List;
 import net.sf.mmm.content.api.ContentClassAnnotation;
 import net.sf.mmm.content.api.ContentFieldAnnotation;
 import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.api.ContentSelectionTree;
 
 /**
  * This is the interface for the type of an entity. It reflects the structure of
@@ -19,8 +20,8 @@ import net.sf.mmm.content.api.ContentObject;
  * A content-class may be used to render a generic UI editor, synchronize the
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 
- * @see ContentObject
- * @see ContentModelService#getContentClass(ContentObject)
+ * @see net.sf.mmm.content.api.ContentObject
+ * @see ContentReflectionService#getContentClass(net.sf.mmm.content.api.ContentObject)
  * 
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
@@ -28,11 +29,12 @@ import net.sf.mmm.content.api.ContentObject;
  * @since 1.0.0
  */
 @ContentClassAnnotation(id = ContentClass.CLASS_ID, name = ContentClass.CLASS_NAME, isFinal = true)
-public interface ContentClass<CLASS> extends ContentReflectionObject<CLASS> {
+public interface ContentClass<CLASS extends ContentObject> extends ContentReflectionObject<CLASS>,
+    ContentSelectionTree<ContentClass<? extends ContentObject>> {
 
   /**
-   * The {@link ContentObject#getTitle() name} of the {@link ContentClass}
-   * reflecting this type.
+   * The {@link net.sf.mmm.content.api.ContentObject#getTitle() name} of the
+   * {@link ContentClass} reflecting this type.
    */
   String CLASS_NAME = "ContentClass";
 
@@ -55,26 +57,26 @@ public interface ContentClass<CLASS> extends ContentReflectionObject<CLASS> {
   String XML_TAG_CLASS = "Class";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getSuperClass() superClass} for generic access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getSuperClass() superClass} for generic access.
    */
   String FIELD_NAME_SUPER_CLASS = "superClass";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getSubClasses() subClasses} for generic access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getSubClasses() subClasses} for generic access.
    */
   String FIELD_NAME_SUB_CLASSES = "subClasses";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getFields() fields} for generic access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getFields() fields} for generic access.
    */
   String FIELD_NAME_FIELDS = "fields";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getDeclaredFields() declaredFields} for generic access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getDeclaredFields() declaredFields} for generic access.
    */
   String FIELD_NAME_DECLARED_FIELDS = "declaredFields";
 
@@ -83,27 +85,26 @@ public interface ContentClass<CLASS> extends ContentReflectionObject<CLASS> {
    */
   String XML_TAG_CONTENT_MODEL = "content-model";
 
-  /**
-   * {@inheritDoc}
-   * 
-   * @return the {@link #getSuperClass() super-class} or the folder
-   *         {@link ContentObject#getChildren() containing} the root-class.
-   */
-  @ContentFieldAnnotation(id = 25)
-  ContentObject getParent();
-
-  /**
-   * {@inheritDoc}
-   * 
-   * @return the {@link #getSubClasses() sub-classes}.
-   */
-  List<? extends ContentClass<? extends CLASS>> getChildren();
+  // /**
+  // * {@inheritDoc}
+  // *
+  // * @return the {@link #getSuperClass() super-class} or the folder
+  // * {@link ContentObject#getChildren() containing} the root-class.
+  // */
+  // ContentClass<? extends ContentClass> getParent();
+  //
+  // /**
+  // * {@inheritDoc}
+  // *
+  // * @return the {@link #getSubClasses() sub-classes}.
+  // */
+  // List<ContentClass<? extends ContentClass>> getChildren();
 
   /**
    * This method gets an iterator of all fields declared by this class. This
    * does NOT include fields inherited from the {@link #getSuperClass()
    * super-class} except they are overridden by this class. An inherited field
-   * can be overridden (if supported by the {@link ContentModelService
+   * can be overridden (if supported by the {@link ContentReflectionService
    * content-model}) in order to declare it more specific. Then the type of the
    * field is a subtype of the field that is overridden or the validator is more
    * restrictive.<br>
@@ -118,7 +119,7 @@ public interface ContentClass<CLASS> extends ContentReflectionObject<CLASS> {
    * {@link ContentField#getInitiallyDefiningClass() initially defined} or
    * overridden in this class.<br>
    * An inherited field can be overridden (if supported by the
-   * {@link ContentModelService content-model}) in order to declare it more
+   * {@link ContentReflectionService content-model}) in order to declare it more
    * specific (typically the {@link ContentField#getFieldType() field-type} is
    * specialized). Such field can be identified via
    * {@link ContentField#getInitiallyDefiningClass()}.
@@ -156,13 +157,13 @@ public interface ContentClass<CLASS> extends ContentReflectionObject<CLASS> {
 
   /**
    * This method gets the super-class of this class. Like in java this class
-   * inherits everything from its super-classes.<br>
-   * This method is similar to {@link #getParent()} but will return
-   * <code>null</code> for the root-class ({@link ContentClass} reflecting
-   * {@link ContentObject}).
+   * inherits from its super-classes.<br>
+   * This method exists only for expressiveness - it does the same as
+   * {@link #getParent()}.
    * 
    * @return the super-class that is extended by this class or <code>null</code>
-   *         if this is the root-class.
+   *         if this is the root-class ({@link ContentClass} reflecting
+   *         {@link net.sf.mmm.content.api.ContentObject}).
    */
   @ContentFieldAnnotation(id = 25, isReadOnly = true)
   ContentClass<? super CLASS> getSuperClass();
@@ -211,9 +212,10 @@ public interface ContentClass<CLASS> extends ContentReflectionObject<CLASS> {
   // boolean isFolderClass();
 
   /**
-   * This method determines if the {@link ContentObject}s of this
-   * {@link ContentClass} are revision-controlled. Fur such entity historical
-   * {@link ContentObject#getRevision() revisions} can be stored in the history. <br>
+   * This method determines if the {@link net.sf.mmm.content.api.ContentObject}s
+   * of this {@link ContentClass} are revision-controlled. Fur such entity
+   * historical {@link net.sf.mmm.content.api.ContentObject#getRevision()
+   * revisions} can be stored in the history. <br>
    * If an entity that is NOT under revision-control is modified, every except
    * the current state is lost.
    * 

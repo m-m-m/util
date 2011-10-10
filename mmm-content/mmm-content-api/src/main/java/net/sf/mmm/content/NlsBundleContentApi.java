@@ -75,7 +75,7 @@ public class NlsBundleContentApi extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.reflection.base.ContentModifiersIllegalException */
   public static final String ERR_MODIFIERS_USER_UNEXTENDABLE = "Only system-classes can be un-extendable without being final!";
 
-  /** @see net.sf.mmm.content.reflection.api.ContentModelNotEditableException */
+  /** @see net.sf.mmm.content.reflection.api.ContentReflectionNotEditableException */
   public static final String ERR_MODEL_NOT_EDITABLE = "Failed to modify the content-model because it is NOT editable!";
 
   /** exception message if user tried to delete a class or field that is system. */

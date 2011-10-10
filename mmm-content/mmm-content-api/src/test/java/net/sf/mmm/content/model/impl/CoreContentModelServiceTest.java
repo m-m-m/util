@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentField;
-import net.sf.mmm.content.reflection.api.ContentModelService;
+import net.sf.mmm.content.reflection.api.ContentReflectionService;
 import net.sf.mmm.content.reflection.impl.CoreContentModelService;
 
 import org.junit.Ignore;
@@ -25,7 +25,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CoreContentModelServiceTest {
 
-  public void checkClass(ContentModelService modelService, ContentClass contentClass) {
+  public void checkClass(ContentReflectionService modelService, ContentClass contentClass) {
 
     assertNotNull(contentClass);
     assertSame(contentClass, modelService.getContentClass(contentClass.getTitle()));

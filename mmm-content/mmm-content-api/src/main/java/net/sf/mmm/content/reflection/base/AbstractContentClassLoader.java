@@ -10,9 +10,9 @@ import net.sf.mmm.content.api.ContentIdManager;
 import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassLoader;
-import net.sf.mmm.content.reflection.api.MutableContentModelService;
+import net.sf.mmm.content.reflection.api.MutableContentReflectionService;
 import net.sf.mmm.content.reflection.api.access.ContentClassReadAccessById;
-import net.sf.mmm.content.reflection.api.access.ContentClassReadAccessByName;
+import net.sf.mmm.content.reflection.api.access.ContentClassReadAccessByTitle;
 import net.sf.mmm.content.reflection.api.access.ContentFieldReadAccessById;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
@@ -26,7 +26,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentClassLoader<CLASS> implements ContentClassLoader<CLASS> {
+public abstract class AbstractContentClassLoader implements ContentClassLoader {
 
   /** @see #getContentModelService() */
   private final AbstractMutableContentModelService contentModelService;
@@ -77,7 +77,7 @@ public abstract class AbstractContentClassLoader<CLASS> implements ContentClassL
    * This inner class is the context used to cache results during class-loading.
    */
   public static class Context implements ContentFieldReadAccessById, ContentClassReadAccessById,
-      ContentClassReadAccessByName {
+      ContentClassReadAccessByTitle {
 
     /** @see #getContentClass(String) */
     private final Map<String, AbstractContentClass> name2classMap;

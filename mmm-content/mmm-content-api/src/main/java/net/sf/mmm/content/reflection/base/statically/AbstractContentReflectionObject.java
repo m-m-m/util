@@ -5,7 +5,7 @@ package net.sf.mmm.content.reflection.base.statically;
 
 import net.sf.mmm.content.api.ContentFieldAnnotation;
 import net.sf.mmm.content.base.AbstractContentObject;
-import net.sf.mmm.content.datatype.api.ContentId;
+import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentReflectionObject;
 
 /**
@@ -37,18 +37,18 @@ public abstract class AbstractContentReflectionObject<CLASS> extends AbstractCon
   /**
    * The constructor.
    * 
-   * @param name is the {@link #getTitle() name}.
-   * @param id is the {@link #getContentId() ID}.
+   * @param title is the {@link #getTitle() title}.
    */
-  public AbstractContentReflectionObject(String name, ContentId id) {
+  public AbstractContentReflectionObject(String title) {
 
-    super(name, id);
+    super(title);
   }
 
   /**
    * {@inheritDoc}
    */
-  public abstract AbstractContentReflectionObject<CLASS> getParent();
+  // public abstract AbstractContentReflectionObject<? extends ContentObject>
+  // getParent();
 
   /**
    * {@inheritDoc}
@@ -82,7 +82,7 @@ public abstract class AbstractContentReflectionObject<CLASS> extends AbstractCon
     if (this.deletedFlag) {
       return true;
     } else {
-      AbstractContentObject parent = getParent();
+      ContentClass<?> parent = getParent();
       if (parent == null) {
         return false;
       } else {

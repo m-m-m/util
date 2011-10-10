@@ -3,23 +3,22 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.reflection.api.access;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.content.reflection.api.ContentModelException;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.api.ContentReflectionObject;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This interface gives write access to the content model.
+ * This interface gives write access to the content-model (reflection).
  * 
- * @param <CLASS> is the generic type for the bound of
- *        {@link ContentClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentModelWriteAccess<CLASS> {
+public interface ContentReflectionWriteAccess {
 
   /**
    * This method creates a sub-class of the given class.
@@ -31,8 +30,8 @@ public interface ContentModelWriteAccess<CLASS> {
    * @param modifiers are the {@link ContentClass#getContentModifiers()
    *        modifiers} for the class to create.
    * @return the created class.
-   * @throws ContentModelException if the class could not be created. This can
-   *         have one of the following reasons:
+   * @throws ContentReflectionException if the class could not be created. This
+   *         can have one of the following reasons:
    *         <ul>
    *         <li>the given <code>superClass</code> is final</li>
    *         <li>the given <code>id</code> already identifies another class</li>
@@ -40,8 +39,9 @@ public interface ContentModelWriteAccess<CLASS> {
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
-  ContentClass<? extends CLASS> createContentClass(ContentClass<CLASS> superClass, String name,
-      ContentClassModifiers modifiers) throws ContentModelException;
+  ContentClass<? extends ContentObject> createContentClass(
+      ContentClass<? extends ContentObject> superClass, String name, ContentClassModifiers modifiers)
+      throws ContentReflectionException;
 
   /**
    * This method creates a field in the given class with the specified name.
@@ -59,16 +59,16 @@ public interface ContentModelWriteAccess<CLASS> {
    * @param modifiers are the {@link ContentField#getContentModifiers()
    *        modifiers} for the field to create.
    * @return the created field.
-   * @throws ContentModelException if the field could not be created. This can
-   *         have one of the following reasons:
+   * @throws ContentReflectionException if the field could not be created. This
+   *         can have one of the following reasons:
    *         <ul>
    *         <li>the given class is a system class</li>
    *         <li>the given class already declares a field with the given name</li>
    *         </ul>
    */
-  <FIELD> ContentField<CLASS, FIELD> createContentField(ContentClass<CLASS> declaringClass,
-      String name, GenericType<FIELD> type, ContentFieldModifiers modifiers)
-      throws ContentModelException;
+  <FIELD> ContentField<? extends ContentObject, FIELD> createContentField(
+      ContentClass<? extends ContentObject> declaringClass, String name, GenericType<FIELD> type,
+      ContentFieldModifiers modifiers) throws ContentReflectionException;
 
   /**
    * This method creates a {@link FieldModifiersImpl#isTransient() transient}
@@ -106,13 +106,13 @@ public interface ContentModelWriteAccess<CLASS> {
    * @param classOrField is the class or field to mark as deleted.
    * @param newDeletedFlag - if <code>true</code> the class will be marked as
    *        deleted, else it will be undeleted.
-   * @throws ContentModelException if the deleted flag could not be modified.
-   *         This can have one of the following reasons:
+   * @throws ContentReflectionException if the deleted flag could not be
+   *         modified. This can have one of the following reasons:
    *         <ul>
    *         <li>the given class or field has the system flag set</li>
    *         </ul>
    */
-  void setDeleted(ContentReflectionObject<CLASS> classOrField, boolean newDeletedFlag)
-      throws ContentModelException;
+  void setDeleted(ContentReflectionObject<? extends ContentObject> classOrField,
+      boolean newDeletedFlag) throws ContentReflectionException;
 
 }

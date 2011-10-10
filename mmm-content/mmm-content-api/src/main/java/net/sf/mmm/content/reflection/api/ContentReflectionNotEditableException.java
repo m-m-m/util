@@ -6,16 +6,16 @@ package net.sf.mmm.content.reflection.api;
 import net.sf.mmm.content.NlsBundleContentApi;
 
 /**
- * This exception is thrown if the {@link MutableContentModelService
+ * This exception is thrown if the {@link MutableContentReflectionService
  * content-model} was modified by the user without being
- * {@link MutableContentModelService#isEditable() editable}.
+ * {@link MutableContentReflectionService#isEditable() editable}.
  * 
- * @see net.sf.mmm.content.reflection.api.access.ContentModelWriteAccess
+ * @see net.sf.mmm.content.reflection.api.access.ContentReflectionWriteAccess
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class ContentModelNotEditableException extends ContentModelException {
+public final class ContentReflectionNotEditableException extends ContentReflectionException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 6915074246211424540L;
@@ -23,7 +23,7 @@ public final class ContentModelNotEditableException extends ContentModelExceptio
   /**
    * The constructor.
    */
-  public ContentModelNotEditableException() {
+  public ContentReflectionNotEditableException() {
 
     super(NlsBundleContentApi.ERR_MODEL_NOT_EDITABLE);
   }

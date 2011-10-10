@@ -1,13 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.datatype.base;
+package net.sf.mmm.content.trash;
 
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.mmm.content.datatype.api.Link;
-import net.sf.mmm.content.datatype.api.LinkList;
 import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.filter.api.Filter;
 

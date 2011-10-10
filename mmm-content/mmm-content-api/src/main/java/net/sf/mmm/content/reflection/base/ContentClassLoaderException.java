@@ -5,7 +5,7 @@ package net.sf.mmm.content.reflection.base;
 
 import net.sf.mmm.content.NlsBundleContentApi;
 import net.sf.mmm.content.reflection.api.ContentClassLoader;
-import net.sf.mmm.content.reflection.api.ContentModelException;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
 
 /**
  * This exception is thrown by the {@link ContentClassLoader} if something went
@@ -14,7 +14,7 @@ import net.sf.mmm.content.reflection.api.ContentModelException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentClassLoaderException extends ContentModelException {
+public class ContentClassLoaderException extends ContentReflectionException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8680994381092858484L;

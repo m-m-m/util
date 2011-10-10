@@ -9,7 +9,7 @@
  * {@link net.sf.mmm.content.reflection.api.ContentClass} represents a particular 
  * content-type and gives generic access to {@link net.sf.mmm.content.api.ContentObject 
  * instances} of this type. The main entry point to get started is the component 
- * {@link net.sf.mmm.content.reflection.api.ContentModelService}.
+ * {@link net.sf.mmm.content.reflection.api.ContentReflectionService}.
  */
 package net.sf.mmm.content.reflection.api;
 

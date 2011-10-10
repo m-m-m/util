@@ -1,13 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.datatype.impl;
+package net.sf.mmm.content.trash;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.datatype.base.AbstractLink;
 
 /**
- * This is the implementation of {@link net.sf.mmm.content.datatype.api.Link}.
+ * This is the implementation of {@link net.sf.mmm.content.trash.Link}.
  * 
  * @param <CLASS> is the type of the linked object. See
  *        {@link net.sf.mmm.content.reflection.api.ContentClass#getJavaClass()}.

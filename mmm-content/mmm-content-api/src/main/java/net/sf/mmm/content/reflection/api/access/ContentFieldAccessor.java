@@ -4,6 +4,7 @@
 package net.sf.mmm.content.reflection.api.access;
 
 import net.sf.mmm.content.api.ContentException;
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.ReadOnlyException;
 
@@ -23,7 +24,7 @@ import net.sf.mmm.util.nls.api.ReadOnlyException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentFieldAccessor<CLASS, FIELD> {
+public interface ContentFieldAccessor<CLASS extends ContentObject, FIELD> {
 
   /**
    * This method gets the value of the field from the given <code>object</code>.

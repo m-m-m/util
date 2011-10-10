@@ -1,17 +1,16 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.datatype.base;
+package net.sf.mmm.content.trash;
 
 import java.util.Collections;
 import java.util.List;
 
-import net.sf.mmm.content.datatype.api.Link;
 
 /**
- * This is an implementation of {@link net.sf.mmm.content.datatype.api.LinkList}
+ * This is an implementation of {@link net.sf.mmm.content.trash.LinkList}
  * that is immutable. This is useful to create an unmodifiable view on a
- * {@link net.sf.mmm.content.datatype.api.MutableLinkList}.
+ * {@link net.sf.mmm.content.trash.MutableLinkList}.
  * 
  * @param <CLASS> is the type of the linked object. See
  *        {@link net.sf.mmm.content.reflection.api.ContentClass#getJavaClass()}.
@@ -26,7 +25,7 @@ public class ImmutableLinkList<CLASS> extends AbstractLinkList<CLASS> {
   /**
    * The constructor.
    * 
-   * @param linkList is the {@link net.sf.mmm.content.datatype.api.LinkList} to
+   * @param linkList is the {@link net.sf.mmm.content.trash.LinkList} to
    *        adapt.
    */
   public ImmutableLinkList(AbstractLinkList<CLASS> linkList) {

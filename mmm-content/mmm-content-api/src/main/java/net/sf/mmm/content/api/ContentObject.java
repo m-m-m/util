@@ -5,7 +5,6 @@ package net.sf.mmm.content.api;
 
 import java.io.Serializable;
 
-import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 
@@ -59,16 +58,15 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * A sub-type of this interface has to follow specific rules in order to be an
  * <em>entity-type</em> that will have an according
  * {@link net.sf.mmm.content.reflection.api.ContentClass}. For more details see
- * {@link net.sf.mmm.content.base.AbstractContentObject
- * AbstractContentObject}.
+ * {@link net.sf.mmm.content.base.AbstractContentObject AbstractContentObject}.
  * 
- * @see ContentId
+ * @see net.sf.mmm.content.datatype.api.ContentId
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME, isExtendable = false)
-public abstract interface ContentObject extends RevisionedPersistenceEntity,
+@ContentClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME)
+public abstract interface ContentObject extends RevisionedPersistenceEntity<Long>,
     AttributeReadTitle<String>, Serializable {
 
   /**
@@ -100,48 +98,19 @@ public abstract interface ContentObject extends RevisionedPersistenceEntity,
   /**
    * {@inheritDoc}
    */
-  @ContentFieldAnnotation(id = 0, isFinal = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_OBJECT_ID, isFinal = true)
   Long getId();
 
   /**
-   * This method gets the ID of the type (
-   * {@link net.sf.mmm.content.reflection.api.ContentClass}) of this object.
-   * 
-   * @see ContentId#getClassId()
-   * 
-   * @return the class ID.
-   */
-  @ContentFieldAnnotation(id = 1, isStatic = true, isFinal = true)
-  int getContentClassId();
-
-  /**
-   * This method gets the title of this content-object. For objects of
+   * This method gets the title (name) of this content-object. For objects of
    * particular {@link net.sf.mmm.content.reflection.api.ContentClass types}
    * (e.g. {@link net.sf.mmm.content.reflection.api.ContentClass} or
-   * {@link net.sf.mmm.content.reflection.api.ContentField}) title has to be
+   * {@link net.sf.mmm.content.reflection.api.ContentField}) the title has to be
    * unique. <br>
    * 
    * @return the title of this object.
    */
-  @ContentFieldAnnotation(id = 2, name = FIELD_NAME_TITLE, isFinal = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_OBJECT_TITLE, name = FIELD_NAME_TITLE, isFinal = true)
   String getTitle();
-
-  /**
-   * This method gets the unique ID of this content-object.
-   * 
-   * @return the unique ID or <code>null</code> if the entity has been
-   *         instantiated directly and NOT yet been persisted in the
-   *         content-repository.
-   */
-  @ContentFieldAnnotation(id = 8, isTransient = true, isFinal = true, isReadOnly = true)
-  ContentId getContentId();
-
-  // /**
-  // * This method gets the history of this specific resource revision
-  // (version).
-  // *
-  // * @return the history of this resource revision.
-  // */
-  // RevisionHistory getRevisionHistory();
 
 }

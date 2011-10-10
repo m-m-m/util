@@ -40,7 +40,7 @@ public interface ContentClassModifiers extends ContentModifiers {
 
   /**
    * This method determines if the class can be
-   * {@link net.sf.mmm.content.reflection.api.access.ContentModelWriteAccess#createContentClass(ContentClass, String, ContentClassModifiers)
+   * {@link net.sf.mmm.content.reflection.api.access.ContentReflectionWriteAccess#createContentClass(ContentClass, String, ContentClassModifiers)
    * extended} by the user.<br>
    * A {@link ContentModifiers#isFinal() final} class is NOT extendable. In
    * advance a {@link ContentModifiers#isSystem() system} class that is NOT

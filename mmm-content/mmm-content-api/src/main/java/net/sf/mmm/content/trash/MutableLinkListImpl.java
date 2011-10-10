@@ -1,14 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.datatype.impl;
+package net.sf.mmm.content.trash;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.mmm.content.datatype.api.Link;
-import net.sf.mmm.content.datatype.api.MutableLinkList;
-import net.sf.mmm.content.datatype.base.AbstractLinkList;
 
 /**
  * This is the default implementation of the {@link MutableLinkList} interface.

@@ -1,11 +1,10 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.datatype.impl;
+package net.sf.mmm.content.trash;
 
 import java.util.Map;
 
-import net.sf.mmm.content.datatype.api.MutableMetaData;
 
 /**
  * This is a simple implementation of the {@link MutableMetaData} interface.

@@ -25,8 +25,8 @@ import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.content.reflection.api.ContentModelException;
-import net.sf.mmm.content.reflection.api.ContentModelService;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
+import net.sf.mmm.content.reflection.api.ContentReflectionService;
 import net.sf.mmm.content.reflection.api.access.ContentFieldAccessor;
 import net.sf.mmm.content.reflection.base.statically.ContentFieldAccessorPojo;
 import net.sf.mmm.util.filter.api.Filter;
@@ -109,7 +109,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
     this.entityFilter = new AnnotationFilter(ContentClassAnnotation.class);
     this.factory = XMLInputFactory.newInstance();
     this.classResolver = ClassResolver.CLASS_FOR_NAME_RESOLVER;
-    this.configurationResource = new ClasspathResource(ContentModelService.XML_MODEL_LOCATION);
+    this.configurationResource = new ClasspathResource(ContentReflectionService.XML_MODEL_LOCATION);
   }
 
   /**
@@ -180,7 +180,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         XMLStreamReader xmlReader = this.factory.createXMLStreamReader(in);
         int eventType = xmlReader.nextTag();
         assert (eventType == XMLStreamConstants.START_ELEMENT);
-        assert (ContentModelService.XML_TAG_ROOT.equals(xmlReader.getLocalName()));
+        assert (ContentReflectionService.XML_TAG_ROOT.equals(xmlReader.getLocalName()));
         eventType = xmlReader.nextTag();
         while (eventType == XMLStreamConstants.START_ELEMENT) {
           parseConfiguration(xmlReader, context);
@@ -232,7 +232,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass loadClasses() throws IOException, ContentModelException {
+  public AbstractContentClass loadClasses() throws IOException, ContentReflectionException {
 
     Context context = new Context();
     parseConfiguration(context);
@@ -264,7 +264,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         .getAnnotation(ContentClassAnnotation.class);
     if (contentClassAnnotation == null) {
       // TODO: NLS
-      throw new ContentModelException("Illegal entity class: missing "
+      throw new ContentReflectionException("Illegal entity class: missing "
           + ContentClassAnnotation.class.getName());
     }
     // id
@@ -323,7 +323,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           superClass = superClass.getSuperclass();
           if (superClass == null) {
             // error in class hierarchy
-            throw new ContentModelException("Entity \"{0}\" does NOT inherit from \"{1}\"!",
+            throw new ContentReflectionException("Entity \"{0}\" does NOT inherit from \"{1}\"!",
                 javaClass.getName(), this.rootEntity.getName());
           }
         }
@@ -409,7 +409,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
           contentClass.addField(contentField);
         }
       } catch (Exception e) {
-        throw new ContentModelException(e, "Error loading field '" + accessor.getName()
+        throw new ContentReflectionException(e, "Error loading field '" + accessor.getName()
             + "' of class " + contentClass);
       }
     }

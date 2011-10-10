@@ -12,7 +12,7 @@ import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
-import net.sf.mmm.content.reflection.api.ContentModelException;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.base.AbstractMutableContentModelService;
 import net.sf.mmm.content.repository.api.ContentObjectWrongTypeException;
 import net.sf.mmm.content.repository.api.ContentRepository;
@@ -155,7 +155,7 @@ public abstract class AbstractContentRepository extends AbstractContentResourceM
     try {
       object = contentClass.getJavaClass().newInstance();
     } catch (Exception e) {
-      throw new ContentModelException(e, "Failed to create instance of class \"{0}\"!",
+      throw new ContentReflectionException(e, "Failed to create instance of class \"{0}\"!",
           contentClass);
     }
     return object;

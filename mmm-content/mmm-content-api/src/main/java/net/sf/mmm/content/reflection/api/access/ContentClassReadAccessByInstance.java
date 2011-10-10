@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.reflection.api.access;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
@@ -11,12 +12,10 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * {@link ContentClass} for a given {@link net.sf.mmm.content.api.ContentObject
  * instance}.
  * 
- * @param <CLASS> is the generic type for the bound of
- *        {@link ContentClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentClassReadAccessByInstance<CLASS> {
+public interface ContentClassReadAccessByInstance {
 
   /**
    * This method gets the {@link ContentClass} for the given
@@ -32,6 +31,7 @@ public interface ContentClassReadAccessByInstance<CLASS> {
    * @throws ObjectNotFoundException if the given <code>contentObject</code> is
    *         unknown by the content-model.
    */
-  <C extends CLASS> ContentClass<C> getContentClass(C contentObject) throws ObjectNotFoundException;
+  <C extends ContentObject> ContentClass<C> getContentClass(C contentObject)
+      throws ObjectNotFoundException;
 
 }

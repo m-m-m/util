@@ -55,6 +55,14 @@ public class ImmutableBlob implements Blob {
   /**
    * {@inheritDoc}
    */
+  public int getRevision() {
+
+    return this.delegate.getRevision();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Blob getValue() {
 
     return this;

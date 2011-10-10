@@ -10,8 +10,8 @@ import javax.annotation.PostConstruct;
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClassLoader;
-import net.sf.mmm.content.reflection.api.ContentModelEvent;
-import net.sf.mmm.content.reflection.api.ContentModelException;
+import net.sf.mmm.content.reflection.api.ContentReflectionEvent;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.base.AbstractContentClass;
 import net.sf.mmm.content.reflection.base.AbstractContentField;
 import net.sf.mmm.content.reflection.base.AbstractMutableContentModelService;
@@ -21,7 +21,7 @@ import net.sf.mmm.content.reflection.impl.statically.ContentFieldImpl;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.content.reflection.api.ContentModelService} interface that
+ * {@link net.sf.mmm.content.reflection.api.ContentReflectionService} interface that
  * assumes that {@link ContentId}s are used as well as specific implementations
  * for class and field.
  * 
@@ -113,13 +113,13 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
     AbstractContentClass classClass = getContentClass(getIdManager().getClassClassId());
     if (classClass == null) {
       // TODO:
-      throw new ContentModelException("Missing class for ContentClass!");
+      throw new ContentReflectionException("Missing class for ContentClass!");
     }
     // ContentClassImpl.setContentClass(classClass);
     AbstractContentClass fieldClass = getContentClass(getIdManager().getFieldClassId());
     if (fieldClass == null) {
       // TODO:
-      throw new ContentModelException("Missing class for ContentField!");
+      throw new ContentReflectionException("Missing class for ContentField!");
     }
     // ContentFieldImpl.setContentClass(fieldClass);
   }
@@ -135,7 +135,7 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
   public void reaload() throws IOException, ContentException {
 
     loadClasses();
-    fireEvent(new ContentModelEvent(getRootContentClass(), ChangeEventType.UPDATE));
+    fireEvent(new ContentReflectionEvent(getRootContentClass(), ChangeEventType.UPDATE));
   }
 
   /**

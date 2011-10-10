@@ -49,4 +49,13 @@ public interface Blob extends Datatype<Blob> {
    */
   void streamData(OutputStream outStream) throws RuntimeIoException;
 
+  /**
+   * This method gets the revision counter of this {@link Blob}. It is initially
+   * <code>0</code> when the {@link Blob} is logically created and gets
+   * increased on each {@link MutableBlob modification}.
+   * 
+   * @return the revision number.
+   */
+  int getRevision();
+
 }

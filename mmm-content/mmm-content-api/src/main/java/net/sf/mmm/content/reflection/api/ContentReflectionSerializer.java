@@ -11,14 +11,14 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 /**
  * This is the interface for a component that can
  * {@link #save(ContentClass, OutputStream) serialize} and
- * {@link #load(InputStream) de-serialize} the content-model. A typical
- * implementation will use XML as representation.
+ * {@link #load(InputStream) de-serialize} the content-model (reflection). A
+ * typical implementation will use XML as representation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface ContentModelSerializer {
+public interface ContentReflectionSerializer {
 
   /**
    * This method loads the content-model from the given {@link InputStream}.

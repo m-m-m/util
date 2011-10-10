@@ -6,7 +6,7 @@ package net.sf.mmm.content.repository.api;
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.datatype.api.ContentId;
-import net.sf.mmm.content.reflection.api.ContentModelService;
+import net.sf.mmm.content.reflection.api.ContentReflectionService;
 import net.sf.mmm.content.repository.api.access.ContentObjectReadAccess;
 import net.sf.mmm.content.resource.api.ContentResource;
 
@@ -21,12 +21,12 @@ import net.sf.mmm.content.resource.api.ContentResource;
 public interface ContentRepository extends ContentObjectReadAccess, ContentObjectWriteAccess {
 
   /**
-   * This method gets the {@link ContentModelService} that allows to reflect the
+   * This method gets the {@link ContentReflectionService} that allows to reflect the
    * entities managed by this {@link ContentRepository}.
    * 
    * @return the content-model-service.
    */
-  ContentModelService getContentModel();
+  ContentReflectionService getContentModel();
 
   /**
    * This method gets the root-folder of the repository.

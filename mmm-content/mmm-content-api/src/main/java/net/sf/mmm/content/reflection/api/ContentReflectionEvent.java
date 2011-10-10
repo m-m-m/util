@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.reflection.api;
 
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.util.event.api.ChangeEvent;
 import net.sf.mmm.util.event.api.ChangeType;
 
@@ -16,7 +17,7 @@ import net.sf.mmm.util.event.api.ChangeType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class ContentModelEvent<CLASS> implements ChangeEvent {
+public final class ContentReflectionEvent<CLASS extends ContentObject> implements ChangeEvent {
 
   /** the type of the event */
   private final ChangeType type;
@@ -34,7 +35,7 @@ public final class ContentModelEvent<CLASS> implements ChangeEvent {
    * @param changedClass is the class that has been added, removed, or updated.
    * @param changeType is the type of event.
    */
-  public ContentModelEvent(ContentClass<CLASS> changedClass, ChangeType changeType) {
+  public ContentReflectionEvent(ContentClass<CLASS> changedClass, ChangeType changeType) {
 
     super();
     this.type = changeType;
@@ -50,12 +51,12 @@ public final class ContentModelEvent<CLASS> implements ChangeEvent {
    * @param changeType is the type of event (add/remove/update). Use only the
    *        static constant fields (TYPE_*)!
    */
-  public ContentModelEvent(ContentField<CLASS, ?> changedField, ChangeType changeType) {
+  public ContentReflectionEvent(ContentField<CLASS, ?> changedField, ChangeType changeType) {
 
     super();
     this.type = changeType;
     this.contentField = changedField;
-    this.contentClass = (ContentClass<CLASS>) this.contentField.getDeclaringClass();
+    this.contentClass = this.contentField.getDeclaringClass();
   }
 
   /**

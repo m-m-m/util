@@ -7,11 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 
 import net.sf.mmm.content.api.ContentFieldAnnotation;
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.datatype.api.ContentId;
 
 /**
  * This is the implementation of the abstract entity {@link ContentObject}.
@@ -27,9 +25,6 @@ public abstract class AbstractContentObject implements ContentObject {
 
   /** @see #getId() */
   private Long id;
-
-  /** @see #getContentId() */
-  private ContentId contentId;
 
   /** @see #getTitle() */
   private String title;
@@ -51,52 +46,20 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * The constructor.
    * 
-   * @param name is the {@link #getTitle() name}.
+   * @param title is the {@link #getTitle() title}.
    */
-  public AbstractContentObject(String name) {
+  public AbstractContentObject(String title) {
 
     super();
-    if (name != null) {
-      setName(name);
+    if (title != null) {
+      setTitle(title);
     }
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getTitle() name}.
-   * @param contentId is the {@link #getContentId() ID}.
-   */
-  public AbstractContentObject(String name, ContentId contentId) {
-
-    this(name);
-    setContentId(contentId);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Transient
-  public final ContentId getContentId() {
-
-    return this.contentId;
   }
 
   /**
    * {@inheritDoc}
    */
   public abstract int getContentClassId();
-
-  /**
-   * @param contentId is the contentId to set
-   */
-  protected void setContentId(ContentId contentId) {
-
-    this.contentId = contentId;
-    if (this.id == null) {
-      this.id = Long.valueOf(contentId.getObjectId());
-    }
-  }
 
   /**
    * {@inheritDoc}
@@ -130,11 +93,11 @@ public abstract class AbstractContentObject implements ContentObject {
    * <b>ATTENTION:</b><br>
    * This method should only be used internally. Especially this method can NOT
    * be used to rename this entity. Therefore you have to use the
-   * content-repository.
+   * {@link net.sf.mmm.content.repository.api.ContentRepository}.
    * 
    * @param name the name to set
    */
-  protected void setName(String name) {
+  protected void setTitle(String name) {
 
     this.title = name;
   }
@@ -176,12 +139,17 @@ public abstract class AbstractContentObject implements ContentObject {
   @Override
   public final int hashCode() {
 
-    if (this.contentId == null) {
+    int hash = 0;
+    if (this.id == null) {
       // ATTENTION: if the ID is set the hash-code changes...
-      return super.hashCode();
+      hash = super.hashCode();
     } else {
-      return ~this.contentId.hashCode();
+      hash = this.id.hashCode() << 4;
+      hash = hash + this.revision.intValue();
+      hash = hash << 4;
+      hash = hash + getContentClassId();
     }
+    return hash;
   }
 
   /**
@@ -194,8 +162,11 @@ public abstract class AbstractContentObject implements ContentObject {
       return true;
     }
     if ((other != null) && (other instanceof AbstractContentObject)) {
-      if (this.contentId != null) {
-        return this.contentId.equals(((ContentObject) other).getContentId());
+      if (this.id != null) {
+        AbstractContentObject contentObject = (AbstractContentObject) other;
+        if (getContentClassId() == contentObject.getContentClassId()) {
+          return (this.id.equals(contentObject.getId()));
+        }
       }
     }
     return false;
@@ -213,16 +184,16 @@ public abstract class AbstractContentObject implements ContentObject {
       objectName = "-";
     }
     int idLength = 0;
-    if (this.contentId != null) {
-      idLength = 10;
+    if (this.id != null) {
+      idLength = 8;
     }
     StringBuffer buffer = new StringBuffer(className.length() + objectName.length() + idLength);
     buffer.append(className);
     buffer.append(':');
     buffer.append(objectName);
-    if (this.contentId != null) {
+    if (this.id != null) {
       buffer.append(" [");
-      buffer.append(this.contentId);
+      buffer.append(this.id);
       buffer.append(']');
     }
     return buffer.toString();

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.reflection.base;
 
-import net.sf.mmm.content.reflection.api.ContentModelException;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
 
 /**
  * This is the exception thrown if some
@@ -13,7 +13,7 @@ import net.sf.mmm.content.reflection.api.ContentModelException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentModifiersIllegalException extends ContentModelException {
+public class ContentModifiersIllegalException extends ContentReflectionException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -9096716721784689821L;

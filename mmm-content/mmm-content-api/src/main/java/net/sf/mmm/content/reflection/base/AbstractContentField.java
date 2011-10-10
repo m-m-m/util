@@ -3,10 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.content.reflection.base;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.content.datatype.api.ContentId;
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
@@ -25,14 +24,14 @@ import net.sf.mmm.util.value.api.ValueValidator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentField<CLASS, FIELD> extends
+public abstract class AbstractContentField<CLASS extends ContentObject, FIELD> extends
     AbstractContentReflectionObject<CLASS> implements ContentField<CLASS, FIELD> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8457521410109028533L;
 
   /** @see #getDeclaringClass() */
-  private AbstractContentClass<? super CLASS> declaringClass;
+  private AbstractContentClass<CLASS> declaringClass;
 
   /** @see #getFieldType() */
   private GenericType<FIELD> fieldType;
@@ -55,37 +54,26 @@ public abstract class AbstractContentField<CLASS, FIELD> extends
   }
 
   /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getTitle() name}.
-   * @param id is the {@link #getContentId() ID}.
-   */
-  public AbstractContentField(String name, ContentId id) {
-
-    super(name, id);
-  }
-
-  /**
    * {@inheritDoc}
    */
-  @Override
   public abstract AbstractContentClass getParent();
 
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public List<? extends AbstractContentField> getChildren() {
+  //
+  // List<AbstractContentField<?, ?>> fields = new
+  // ArrayList<AbstractContentField<?, ?>>();
+  // collectSubFieldsRecursive(getDeclaringClass(), fields);
+  // return fields;
+  // }
+
   /**
    * {@inheritDoc}
    */
-  @Override
-  public List<? extends AbstractContentField> getChildren() {
-
-    List<AbstractContentField<?, ?>> fields = new ArrayList<AbstractContentField<?, ?>>();
-    collectSubFieldsRecursive(getDeclaringClass(), fields);
-    return fields;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public AbstractContentField getChild(String childName) {
 
     if (getTitle().equals(childName)) {
@@ -134,7 +122,7 @@ public abstract class AbstractContentField<CLASS, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isClass() {
+  public boolean isContentClass() {
 
     return false;
   }
@@ -142,7 +130,10 @@ public abstract class AbstractContentField<CLASS, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass<? super CLASS> getDeclaringClass() {
+  /**
+   * {@inheritDoc}
+   */
+  public AbstractContentClass<CLASS> getDeclaringClass() {
 
     return this.declaringClass;
   }
@@ -150,7 +141,7 @@ public abstract class AbstractContentField<CLASS, FIELD> extends
   /**
    * @param declaringClass the declaringClass to set
    */
-  protected void setDeclaringClass(AbstractContentClass<? super CLASS> declaringClass) {
+  protected void setDeclaringClass(AbstractContentClass<CLASS> declaringClass) {
 
     this.declaringClass = declaringClass;
   }

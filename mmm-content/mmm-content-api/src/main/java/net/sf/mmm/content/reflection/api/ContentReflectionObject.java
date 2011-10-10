@@ -5,6 +5,8 @@ package net.sf.mmm.content.reflection.api;
 
 import net.sf.mmm.content.api.ContentClassAnnotation;
 import net.sf.mmm.content.api.ContentFieldAnnotation;
+import net.sf.mmm.content.api.ContentFieldIds;
+import net.sf.mmm.content.api.ContentNode;
 import net.sf.mmm.content.api.ContentObject;
 
 /**
@@ -16,21 +18,41 @@ import net.sf.mmm.content.api.ContentObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentReflectionObject.CLASS_ID, name = ContentReflectionObject.CLASS_NAME, isExtendable = false)
-public abstract interface ContentReflectionObject<CLASS> extends ContentObject {
+@ContentClassAnnotation(id = ContentReflectionObject.CLASS_ID, name = ContentReflectionObject.CLASS_NAME)
+public abstract interface ContentReflectionObject<CLASS> extends
+    ContentNode<ContentClass<? extends ContentObject>> {
 
   /**
-   * The deleted-flag is inherited so {@link ContentObject#isDeleted()} will
-   * return <code>true</code> if a {@link #getParent() parent object} is marked
-   * as deleted.<br>
+   * The {@link net.sf.mmm.content.api.ContentObject#getTitle() name} of the
+   * {@link ContentClass} reflecting this type.
+   */
+  String CLASS_NAME = "ContentReflectionObject";
+
+  /**
+   * The {@link net.sf.mmm.content.datatype.api.ContentId#getClassId() class-ID}
+   * of the {@link ContentClass} reflecting this type.
+   */
+  short CLASS_ID = 10;
+
+  /**
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getContentModifiers() modifiers} for generic access.
+   */
+  String FIELD_NAME_MODIFIERS = "contentModifiers";
+
+  /**
+   * The deleted-flag is inherited so
+   * {@link net.sf.mmm.content.api.ContentObject#isDeleted()} will return
+   * <code>true</code> if a {@link #getParent() parent object} is marked as
+   * deleted.<br>
    * This method gets the deleted flag of this object. The method does not
    * inherit the flag.
    * 
-   * @see ContentObject#isDeleted()
+   * @see net.sf.mmm.content.api.ContentObject#isDeleted()
    * 
    * @return the deleted flag.
    */
-  @ContentFieldAnnotation(id = 6, isFinal = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_DELETEDFLAG, isFinal = true)
   boolean getDeletedFlag();
 
   /**
@@ -48,26 +70,8 @@ public abstract interface ContentReflectionObject<CLASS> extends ContentObject {
    * 
    * @return <code>true</code> if this object is marked as deleted.
    */
-  @ContentFieldAnnotation(id = 7, isTransient = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_DELETED, isTransient = true)
   boolean isDeleted();
-
-  /**
-   * The {@link ContentObject#getTitle() name} of the {@link ContentClass}
-   * reflecting this type.
-   */
-  String CLASS_NAME = "ContentReflectionObject";
-
-  /**
-   * The {@link net.sf.mmm.content.datatype.api.ContentId#getClassId() class-ID}
-   * of the {@link ContentClass} reflecting this type.
-   */
-  short CLASS_ID = 1;
-
-  /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
-   * field} {@link #getContentModifiers() modifiers} for generic access.
-   */
-  String FIELD_NAME_MODIFIERS = "contentModifiers";
 
   /**
    * This method gets the java-class of the reflected object. The &lt;CLASS&gt;
@@ -88,7 +92,7 @@ public abstract interface ContentReflectionObject<CLASS> extends ContentObject {
    * 
    * @return the java-class.
    */
-  @ContentFieldAnnotation(id = 20, isFinal = true, isReadOnly = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_JAVACLASS, isFinal = true, isReadOnly = true)
   Class<CLASS> getJavaClass();
 
   /**
@@ -100,7 +104,7 @@ public abstract interface ContentReflectionObject<CLASS> extends ContentObject {
    * 
    * @return the objects modifiers.
    */
-  @ContentFieldAnnotation(id = 21, isFinal = true, isReadOnly = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_CONTENTMODIFIERS, isFinal = true, isReadOnly = true)
   ContentModifiers getContentModifiers();
 
   /**
@@ -111,7 +115,7 @@ public abstract interface ContentReflectionObject<CLASS> extends ContentObject {
    * @return <code>true</code> if this is a {@link ContentClass content-class},
    *         <code>false</code> if this is a {@link ContentField content-field}.
    */
-  @ContentFieldAnnotation(id = 22, isStatic = true, isFinal = true, isReadOnly = true)
-  boolean isClass();
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_CONTENTCLASS, isStatic = true, isFinal = true, isReadOnly = true)
+  boolean isContentClass();
 
 }

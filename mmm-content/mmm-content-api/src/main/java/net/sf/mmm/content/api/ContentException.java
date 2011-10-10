@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * This is the abstract base exception of all failures related to
  * {@link ContentObject content}.
  * 
- * @see net.sf.mmm.content.reflection.api.ContentModelException
+ * @see net.sf.mmm.content.reflection.api.ContentReflectionException
  * @see net.sf.mmm.content.security.api.SecurityException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

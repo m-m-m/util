@@ -5,6 +5,8 @@ package net.sf.mmm.content.reflection.api;
 
 import java.util.List;
 
+import net.sf.mmm.content.api.ContentObject;
+import net.sf.mmm.content.api.ContentSelectionTreeList;
 import net.sf.mmm.content.reflection.api.access.ContentFieldAccessor;
 import net.sf.mmm.util.reflect.api.GenericType;
 
@@ -26,8 +28,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentField<CLASS, FIELD> extends ContentReflectionObject<CLASS>,
-    ContentFieldAccessor<CLASS, FIELD> {
+public interface ContentField<CLASS extends ContentObject, FIELD> extends
+    ContentReflectionObject<CLASS>, ContentFieldAccessor<CLASS, FIELD>,
+    ContentSelectionTreeList<ContentClass<? extends ContentObject>> {
 
   /**
    * The {@link net.sf.mmm.content.api.ContentObject#getTitle() name} of the
@@ -48,21 +51,21 @@ public interface ContentField<CLASS, FIELD> extends ContentReflectionObject<CLAS
   String XML_ATR_FIELD_TYPE = "type";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getFieldType() fieldType} for generic access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getFieldType() fieldType} for generic access.
    */
   String FIELD_NAME_FIELD_TYPE = "fieldType";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getDeclaringClass() declaringClass} for generic access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getDeclaringClass() declaringClass} for generic access.
    */
   String FIELD_NAME_DECLARING_CLASS = "declaringClass";
 
   /**
-   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField field}
-   * {@link #getInitiallyDefiningClass() initiallyDefiningClass} for generic
-   * access.
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getInitiallyDefiningClass() initiallyDefiningClass} for
+   * generic access.
    */
   String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
 
@@ -71,7 +74,7 @@ public interface ContentField<CLASS, FIELD> extends ContentReflectionObject<CLAS
    * 
    * @return the {@link #getDeclaringClass() declaring-class}.
    */
-  ContentClass<CLASS> getParent();
+  ContentClass<? extends ContentObject> getParent();
 
   /**
    * A {@link ContentField} is a leaf and never has children.
@@ -85,14 +88,17 @@ public interface ContentField<CLASS, FIELD> extends ContentReflectionObject<CLAS
    * mean that the field is {@link #getInitiallyDefiningClass() initially
    * defined} by that class. It can also be that the declaring class inherits
    * the field from a {@link ContentClass#getSuperClass() super-class} but
-   * overrides it (if supported by the {@link ContentModelService content-model}
-   * ) in order to declare it more specific meaning that the type of the field
-   * is a sub-type of the field that is overridden or the validator is more
-   * restrictive.<br>
+   * overrides it (if supported by the {@link ContentReflectionService
+   * content-model} ) in order to declare it more specific meaning that the type
+   * of the field is a sub-type of the field that is overridden or the validator
+   * is more restrictive.<br>
+   * 
+   * This method will return the same result as {@link #getParent()} but is a
+   * more explicit and stronger typed.
    * 
    * @return the class that declares this field.
    */
-  ContentClass<? super CLASS> getDeclaringClass();
+  ContentClass<CLASS> getDeclaringClass();
 
   /**
    * This method gets the content-class that initially defined by this field.

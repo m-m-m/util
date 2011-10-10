@@ -17,8 +17,8 @@ import net.sf.mmm.content.reflection.api.ContentClassLoader;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.content.reflection.api.ContentModelException;
-import net.sf.mmm.content.reflection.api.ContentModelService;
+import net.sf.mmm.content.reflection.api.ContentReflectionException;
+import net.sf.mmm.content.reflection.api.ContentReflectionService;
 import net.sf.mmm.content.reflection.api.ContentModifiers;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.value.api.ValueException;
@@ -51,7 +51,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
       throws XMLStreamException {
 
     String tagName = xmlReader.getLocalName();
-    if (ContentModelService.XML_TAG_CLASS.equals(tagName)) {
+    if (ContentReflectionService.XML_TAG_CLASS.equals(tagName)) {
       loadClassRecursive(xmlReader, context);
     }
     super.parseConfiguration(xmlReader, context);
@@ -76,7 +76,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
       return getReflectionUtil().toType(typeSpecification, classResolver);
     } catch (Exception e) {
       // TODO: NLS
-      throw new ContentModelException(e, "Illegal Type '" + typeSpecification + "'!", e);
+      throw new ContentReflectionException(e, "Illegal Type '" + typeSpecification + "'!", e);
     }
   }
 
@@ -138,7 +138,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    * <li>The {@link ContentObject#getContentClass() content-class} of the
    * de-serialized classes and fields is NOT set by this method so it may be
    * <code>null</code> if NOT initialized via the
-   * {@link net.sf.mmm.content.reflection.api.ContentModelService model-service}.</li>
+   * {@link net.sf.mmm.content.reflection.api.ContentReflectionService model-service}.</li>
    * </ul>
    * 
    * @param xmlReader is where to read the XML from.
@@ -193,12 +193,12 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
         Class oldClass = contentClass.getJavaClass();
         if ((oldClass != null) && (!oldClass.equals(javaClass))) {
           // TODO:
-          throw new ContentModelException("Java-class mismatch for content-class " + name);
+          throw new ContentReflectionException("Java-class mismatch for content-class " + name);
         }
         contentClass.setJavaClass(javaClass);
       } catch (ClassNotFoundException e) {
         // TODO: NLS
-        throw new ContentModelException(e, "Java class NOT found for content-class " + name);
+        throw new ContentReflectionException(e, "Java class NOT found for content-class " + name);
       }
     }
 
