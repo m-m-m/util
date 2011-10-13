@@ -9,17 +9,15 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>mmm-content</artifactId>
+  <artifactId>mmm-data</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>content</name>
-  <description>The content repository of mmm's enterprise content management system (ECMS).</description>
+  <description>The data tier of mmm's enterprise content management system (ECMS).</description>
   
   <modules>
     <module>mmm-data-api</module>
-    <module>mmm-content-base</module>
-    <module>mmm-content-core</module>
-    <module>mmm-content-entities</module>
+    <module>mmm-data-impl-persistence</module>
     <module>mmm-content-repository</module>
   </modules>
   
