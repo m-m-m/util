@@ -12,7 +12,7 @@
   <inceptionYear>2001</inceptionYear>
   
   <modules>
-    <module>mmm-content</module>
+    <module>mmm-data</module>
     <!-- <module>mmm-gui</module> -->
     <module>mmm-util</module>
     <module>mmm-l10n</module>
