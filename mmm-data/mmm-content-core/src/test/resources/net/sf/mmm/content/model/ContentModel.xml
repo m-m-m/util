@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!-- $Id$ -->
-<content-model>
-  <!-- <entities package="net.sf.mmm.content.model.impl"/> -->
-  <entities package="net.sf.mmm.content.model"/>
-  <!-- Actually this should NOT be here - it is a workaround for eclipse -->
-  <entities package="net.sf.mmm.content.entities"/>
-</content-model>

@@ -8,16 +8,16 @@
     <version>1.0.0</version>
   </parent>
 
-  <artifactId>mmm-content-base</artifactId>
+  <artifactId>mmm-data-impl-persistence</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>content-base</name>
-  <description>Base implementation of the Content API.</description>
+  <description>Implementation of the Data API based on mmm-persistence/JPA/Hibernate.</description>
   
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-content-api</artifactId>
+      <artifactId>mmm-data-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

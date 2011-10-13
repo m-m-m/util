@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-content</artifactId>
+    <artifactId>mmm-data</artifactId>
     <version>1.0.0</version>
   </parent>
 
-  <artifactId>mmm-content-api</artifactId>
+  <artifactId>mmm-data-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>content-api</name>

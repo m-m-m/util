@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<!-- $Id$ -->
-<Class id="10" name="ContentResource" abstract="true" javaClass="net.sf.mmm.content.model.api.ContentResource">
-  <Field id="33" name="path" type="String" final="true" read-only="true"/>
-</Class>
