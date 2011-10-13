@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.model.base;
+package net.sf.mmm.data.model.base;
 
 import junit.framework.TestCase;
 import net.sf.mmm.data.reflection.api.ContentFieldModifiers;
