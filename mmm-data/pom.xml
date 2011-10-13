@@ -16,7 +16,7 @@
   <description>The content repository of mmm's enterprise content management system (ECMS).</description>
   
   <modules>
-    <module>mmm-content-api</module>
+    <module>mmm-data-api</module>
     <module>mmm-content-base</module>
     <module>mmm-content-core</module>
     <module>mmm-content-entities</module>
