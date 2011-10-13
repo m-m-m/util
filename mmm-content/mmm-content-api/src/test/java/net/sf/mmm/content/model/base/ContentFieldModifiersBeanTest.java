@@ -23,7 +23,8 @@ public class ContentFieldModifiersBeanTest {
   private void checkModifiers(ContentFieldModifiers modifiers) {
 
     ContentFieldModifiers instance = ContentFieldModifiersBean.getInstance(modifiers.isSystem(),
-        modifiers.isFinal(), modifiers.isReadOnly(), modifiers.isStatic(), modifiers.isTransient());
+        modifiers.isFinal(), modifiers.isReadOnly(), modifiers.isStatic(), modifiers.isTransient(),
+        modifiers.isInheritedFromParent());
     Assert.assertSame(modifiers, instance);
   }
 
@@ -77,17 +78,21 @@ public class ContentFieldModifiersBeanTest {
             boolean isStatic = toBoolean(stat);
             for (int trans = 0; trans < 2; trans++) {
               boolean isTransient = toBoolean(trans);
-              try {
-                ContentFieldModifiers modifiers = ContentFieldModifiersBean.getInstance(isSystem,
-                    isFinal, isReadOnly, isStatic, isTransient);
-                Assert.assertEquals(isSystem, modifiers.isSystem());
-                Assert.assertEquals(isFinal, modifiers.isFinal());
-                Assert.assertEquals(isReadOnly, modifiers.isReadOnly());
-                Assert.assertEquals(isStatic, modifiers.isStatic());
-                Assert.assertEquals(isTransient, modifiers.isTransient());
-              } catch (ContentModifiersIllegalException e) {
-                // ignore
-                illegalModifiers++;
+              for (int inherit = 0; inherit < 2; inherit++) {
+                boolean isInherited = toBoolean(inherit);
+                try {
+                  ContentFieldModifiers modifiers = ContentFieldModifiersBean.getInstance(isSystem,
+                      isFinal, isReadOnly, isStatic, isTransient, isInherited);
+                  Assert.assertEquals(isSystem, modifiers.isSystem());
+                  Assert.assertEquals(isFinal, modifiers.isFinal());
+                  Assert.assertEquals(isReadOnly, modifiers.isReadOnly());
+                  Assert.assertEquals(isStatic, modifiers.isStatic());
+                  Assert.assertEquals(isTransient, modifiers.isTransient());
+                  Assert.assertEquals(isInherited, modifiers.isInheritedFromParent());
+                } catch (ContentModifiersIllegalException e) {
+                  // ignore
+                  illegalModifiers++;
+                }
               }
             }
           }

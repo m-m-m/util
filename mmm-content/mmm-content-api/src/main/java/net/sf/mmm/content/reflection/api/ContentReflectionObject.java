@@ -18,7 +18,7 @@ import net.sf.mmm.content.api.ContentObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentReflectionObject.CLASS_ID, name = ContentReflectionObject.CLASS_NAME)
+@ContentClassAnnotation(id = ContentReflectionObject.CLASS_ID, title = ContentReflectionObject.CLASS_NAME)
 public abstract interface ContentReflectionObject<CLASS> extends
     ContentNode<ContentClass<? extends ContentObject>> {
 
@@ -41,6 +41,12 @@ public abstract interface ContentReflectionObject<CLASS> extends
   String FIELD_NAME_MODIFIERS = "contentModifiers";
 
   /**
+   * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
+   * field} {@link #getDeletedFlag() deletedFlag} for generic access.
+   */
+  String FIELD_NAME_DELETEDFLAG = "deletedFlag";
+
+  /**
    * The deleted-flag is inherited so
    * {@link net.sf.mmm.content.api.ContentObject#isDeleted()} will return
    * <code>true</code> if a {@link #getParent() parent object} is marked as
@@ -52,7 +58,7 @@ public abstract interface ContentReflectionObject<CLASS> extends
    * 
    * @return the deleted flag.
    */
-  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_DELETEDFLAG, isFinal = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_REFLECTIONOBJECT_DELETEDFLAG, title = FIELD_NAME_DELETEDFLAG, isFinal = true)
   boolean getDeletedFlag();
 
   /**

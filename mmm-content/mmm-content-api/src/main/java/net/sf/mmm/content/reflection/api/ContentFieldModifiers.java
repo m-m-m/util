@@ -24,22 +24,28 @@ public interface ContentFieldModifiers extends ContentModifiers {
   /**
    * the name of the root tag.
    */
-  String XML_TAG_ROOT = "fieldModifiers";
+  String XML_TAG_ROOT = "FieldModifiers";
 
   /**
    * the attribute for the {@link #isStatic() static-flag}.
    */
-  String XML_ATR_ROOT_STATIC = "static";
+  String XML_ATR_STATIC = "static";
 
   /**
    * the attribute for the {@link #isReadOnly() read-only flag}.
    */
-  String XML_ATR_ROOT_READ_ONLY = "read-only";
+  String XML_ATR_READ_ONLY = "read-only";
 
   /**
    * the attribute for the {@link #isTransient() transient-flag}.
    */
-  String XML_ATR_ROOT_TRANSIENT = "transient";
+  String XML_ATR_TRANSIENT = "transient";
+
+  /**
+   * The attribute for the {@link #isInheritedFromParent()
+   * inherited-from-parent} flag.
+   */
+  String XML_ATR_INHERITED_FROM_PARENT = "inherited-from-parent";
 
   /**
    * This method determines if the field is read-only. A read-only field can NOT
@@ -102,9 +108,10 @@ public interface ContentFieldModifiers extends ContentModifiers {
    * of the same type ({@link ContentClass}) (<code>O.parent</code> instanceof
    * <code>C</code>).<br/>
    * <b>ATTENTION:</b><br>
-   * In a statically typed {@link net.sf.mmm.content.reflection.api content-model}
-   * this feature has to be manually implemented in the getter method. In a
-   * dynamically typed model the feature will be available automatically.
+   * In a statically typed {@link net.sf.mmm.content.reflection.api
+   * content-model} this feature has to be manually implemented in the getter
+   * method. In a dynamically typed model the feature will be available
+   * automatically.
    * 
    * @return <code>true</code> if inherited from parent, <code>false</code>
    *         otherwise.

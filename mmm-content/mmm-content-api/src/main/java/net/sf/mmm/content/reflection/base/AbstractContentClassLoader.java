@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.content.api.ContentIdManager;
-import net.sf.mmm.content.datatype.api.ContentId;
+import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassLoader;
-import net.sf.mmm.content.reflection.api.MutableContentReflectionService;
 import net.sf.mmm.content.reflection.api.access.ContentClassReadAccessById;
 import net.sf.mmm.content.reflection.api.access.ContentClassReadAccessByTitle;
 import net.sf.mmm.content.reflection.api.access.ContentFieldReadAccessById;
@@ -53,11 +52,21 @@ public abstract class AbstractContentClassLoader implements ContentClassLoader {
     return this.contentModelService;
   }
 
+  /**
+   * This method gets the {@link ClassResolver} to use.
+   * 
+   * @return the {@link ClassResolver}.
+   */
   protected ClassResolver getClassResolver() {
 
     return this.contentModelService;
   }
 
+  /**
+   * This method gets the {@link ContentIdManager}.
+   * 
+   * @return the {@link ContentIdManager}.
+   */
   protected ContentIdManager getIdManager() {
 
     return this.contentModelService.getIdManager();
@@ -76,17 +85,18 @@ public abstract class AbstractContentClassLoader implements ContentClassLoader {
   /**
    * This inner class is the context used to cache results during class-loading.
    */
+  @SuppressWarnings("rawtypes")
   public static class Context implements ContentFieldReadAccessById, ContentClassReadAccessById,
       ContentClassReadAccessByTitle {
 
     /** @see #getContentClass(String) */
     private final Map<String, AbstractContentClass> name2classMap;
 
-    /** @see #getContentClass(ContentId) */
-    private final Map<ContentId, AbstractContentClass> id2classMap;
+    /** @see #getContentClass(long) */
+    private final Map<Long, AbstractContentClass> id2classMap;
 
-    /** @see #getContentField(ContentId) */
-    private final Map<ContentId, AbstractContentField> id2fieldMap;
+    /** @see #getContentField(long) */
+    private final Map<Long, AbstractContentField> id2fieldMap;
 
     /**
      * The constructor.
@@ -95,14 +105,14 @@ public abstract class AbstractContentClassLoader implements ContentClassLoader {
 
       super();
       this.name2classMap = new HashMap<String, AbstractContentClass>();
-      this.id2classMap = new HashMap<ContentId, AbstractContentClass>();
-      this.id2fieldMap = new HashMap<ContentId, AbstractContentField>();
+      this.id2classMap = new HashMap<Long, AbstractContentClass>();
+      this.id2fieldMap = new HashMap<Long, AbstractContentField>();
     }
 
     /**
      * {@inheritDoc}
      */
-    public AbstractContentClass getContentClass(String name) {
+    public AbstractContentClass<? extends ContentObject> getContentClass(String name) {
 
       return this.name2classMap.get(name);
     }
@@ -110,31 +120,31 @@ public abstract class AbstractContentClassLoader implements ContentClassLoader {
     /**
      * {@inheritDoc}
      */
-    public AbstractContentClass getContentClass(ContentId id) {
+    public AbstractContentClass<? extends ContentObject> getContentClass(long id) {
 
-      return this.id2classMap.get(id);
+      return this.id2classMap.get(Long.valueOf(id));
     }
 
     /**
      * {@inheritDoc}
      */
-    public AbstractContentClass getContentClass(ContentId id, String name) {
+    public AbstractContentClass<? extends ContentObject> getContentClass(long id, String name) {
 
-      AbstractContentClass idClass = getContentClass(id);
-      AbstractContentClass nameClass = getContentClass(name);
+      AbstractContentClass<? extends ContentObject> idClass = getContentClass(id);
+      AbstractContentClass<? extends ContentObject> nameClass = getContentClass(name);
       if (idClass == nameClass) {
         return idClass;
       } else {
-        throw new DuplicateObjectException(ContentClass.class.getName(), id);
+        throw new DuplicateObjectException(ContentClass.class.getName(), Long.valueOf(id));
       }
     }
 
     /**
      * {@inheritDoc}
      */
-    public AbstractContentField getContentField(ContentId id) {
+    public AbstractContentField<? extends ContentObject, ?> getContentField(long id) {
 
-      return this.id2fieldMap.get(id);
+      return this.id2fieldMap.get(Long.valueOf(id));
     }
 
     /**
@@ -151,10 +161,9 @@ public abstract class AbstractContentClassLoader implements ContentClassLoader {
       if (old != null) {
         throw new DuplicateObjectException(ContentClass.class.getName(), contentClass.getTitle());
       }
-      old = this.id2classMap.put(contentClass.getContentId(), contentClass);
+      old = this.id2classMap.put(contentClass.getId(), contentClass);
       if (old != null) {
-        throw new DuplicateObjectException(ContentClass.class.getName(),
-            contentClass.getContentId());
+        throw new DuplicateObjectException(ContentClass.class.getName(), contentClass.getId());
       }
     }
 

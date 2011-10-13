@@ -27,7 +27,6 @@ import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.api.ContentReflectionNotEditableException;
 import net.sf.mmm.content.reflection.api.ContentReflectionObject;
 import net.sf.mmm.content.reflection.api.MutableContentReflectionService;
-import net.sf.mmm.content.reflection.base.statically.AbstractContentReflectionObject;
 import net.sf.mmm.content.trash.MutableMetaData;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.reflect.api.ClassResolver;

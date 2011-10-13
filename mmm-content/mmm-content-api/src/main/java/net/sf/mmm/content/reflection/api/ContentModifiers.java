@@ -20,12 +20,12 @@ public abstract interface ContentModifiers extends Serializable {
   /**
    * the attribute for the {@link #isSystem() system-flag}.
    */
-  String XML_ATR_MODIFIERS_SYSTEM = "system";
+  String XML_ATR_SYSTEM = "system";
 
   /**
    * the attribute for the {@link #isFinal() final-flag}.
    */
-  String XML_ATR_MODIFIERS_FINAL = "final";
+  String XML_ATR_FINAL = "final";
 
   /**
    * This method determines if the class or field is required by the system in

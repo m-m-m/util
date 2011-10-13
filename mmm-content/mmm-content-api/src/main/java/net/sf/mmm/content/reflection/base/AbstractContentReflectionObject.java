@@ -1,9 +1,8 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.reflection.base.statically;
+package net.sf.mmm.content.reflection.base;
 
-import net.sf.mmm.content.api.ContentFieldAnnotation;
 import net.sf.mmm.content.base.AbstractContentObject;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentReflectionObject;
@@ -47,12 +46,6 @@ public abstract class AbstractContentReflectionObject<CLASS> extends AbstractCon
   /**
    * {@inheritDoc}
    */
-  // public abstract AbstractContentReflectionObject<? extends ContentObject>
-  // getParent();
-
-  /**
-   * {@inheritDoc}
-   */
   public final boolean getDeletedFlag() {
 
     return this.deletedFlag;
@@ -73,9 +66,10 @@ public abstract class AbstractContentReflectionObject<CLASS> extends AbstractCon
    * 
    * <b>ATTENTION:</b><br>
    * This field/method is logically
-   * {@link ContentFieldAnnotation#isInheritedFromParent() inherited} but NOT
-   * annotated with <code>isInherited = true</code>. This feature is
-   * programmatically implemented since it is required at a very low level.
+   * {@link net.sf.mmm.content.api.ContentFieldAnnotation#isInheritedFromParent()
+   * inherited} but NOT annotated with <code>isInherited = true</code>. This
+   * feature is programmatically implemented since it is required at a very low
+   * level.
    */
   public boolean isDeleted() {
 

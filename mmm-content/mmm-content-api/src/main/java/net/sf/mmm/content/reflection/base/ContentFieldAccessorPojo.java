@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.content.reflection.base.statically;
+package net.sf.mmm.content.reflection.base;
 
 import net.sf.mmm.content.api.ContentException;
 import net.sf.mmm.content.reflection.api.access.ContentFieldAccessor;

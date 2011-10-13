@@ -52,7 +52,7 @@ import net.sf.mmm.content.resource.api.ContentResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = 23, name = "ContentDocument")
+@ContentClassAnnotation(id = 23, title = "ContentDocument")
 public abstract class AbstractContentDocument extends AbstractContentResource implements
     ContentDocument {
 

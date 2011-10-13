@@ -17,7 +17,7 @@ import net.sf.mmm.content.resource.api.ContentResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentResource.CLASS_ID, name = ContentResource.CLASS_NAME, isExtendable = true, revisionControl = RevisionControl.YES)
+@ContentClassAnnotation(id = ContentResource.CLASS_ID, title = ContentResource.CLASS_NAME, isExtendable = true, revisionControl = RevisionControl.YES)
 public abstract class AbstractContentResource extends AbstractContentObject implements
     ContentResource {
 

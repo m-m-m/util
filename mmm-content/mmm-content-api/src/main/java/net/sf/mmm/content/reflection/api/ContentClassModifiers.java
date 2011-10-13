@@ -17,17 +17,17 @@ public interface ContentClassModifiers extends ContentModifiers {
   /**
    * the name of the root tag.
    */
-  String XML_TAG_ROOT = "class-modifiers";
+  String XML_TAG_ROOT = "ClassModifiers";
 
   /**
    * the attribute for the {@link #isAbstract() abstract-flag}.
    */
-  String XML_ATR_MODIFIERS_ABSTRACT = "abstract";
+  String XML_ATR_ABSTRACT = "abstract";
 
   /**
    * the attribute for the {@link #isExtendable() extendable-flag}.
    */
-  String XML_ATR_MODIFIERS_EXTENDABLE = "extendable";
+  String XML_ATR_EXTENDABLE = "extendable";
 
   /**
    * This method determines if the class is abstract and no

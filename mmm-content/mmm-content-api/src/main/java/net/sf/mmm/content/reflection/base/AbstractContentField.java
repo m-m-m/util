@@ -10,7 +10,6 @@ import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
 import net.sf.mmm.content.reflection.api.access.ContentFieldAccessor;
-import net.sf.mmm.content.reflection.base.statically.AbstractContentReflectionObject;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueValidator;
 

@@ -17,7 +17,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-indexer-impl-lucene</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -52,7 +52,7 @@
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
                   <artifactId>mmm-search-engine-webapp</artifactId>
-                  <version>1.0.1-SNAPSHOT</version>
+                  <version>1.0.1</version>
                   <type>war</type>
                   <overWrite>true</overWrite>
                   <outputDirectory>${project.build.outputDirectory}/mmm-search-engine/webapps</outputDirectory>

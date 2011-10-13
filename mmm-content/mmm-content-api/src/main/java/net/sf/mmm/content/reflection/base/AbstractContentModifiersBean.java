@@ -22,11 +22,11 @@ public abstract class AbstractContentModifiersBean implements ContentModifiers {
   private static final long serialVersionUID = 3521732876191875621L;
 
   /** @see #isSystem() */
-  @XmlAttribute(name = XML_ATR_MODIFIERS_SYSTEM)
+  @XmlAttribute(name = XML_ATR_SYSTEM)
   private boolean systemFlag;
 
   /** @see #isFinal() */
-  @XmlAttribute(name = XML_ATR_MODIFIERS_FINAL)
+  @XmlAttribute(name = XML_ATR_FINAL)
   private boolean finalFlag;
 
   /**

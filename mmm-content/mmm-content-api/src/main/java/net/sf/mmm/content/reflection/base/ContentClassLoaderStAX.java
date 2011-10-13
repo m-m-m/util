@@ -9,7 +9,6 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.content.api.ContentIdManager;
 import net.sf.mmm.content.api.ContentObject;
 import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
@@ -17,9 +16,9 @@ import net.sf.mmm.content.reflection.api.ContentClassLoader;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
+import net.sf.mmm.content.reflection.api.ContentModifiers;
 import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.api.ContentReflectionService;
-import net.sf.mmm.content.reflection.api.ContentModifiers;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.value.api.ValueException;
 
@@ -72,12 +71,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    */
   protected Type parseFieldType(String typeSpecification, ClassResolver classResolver) {
 
-    try {
-      return getReflectionUtil().toType(typeSpecification, classResolver);
-    } catch (Exception e) {
-      // TODO: NLS
-      throw new ContentReflectionException(e, "Illegal Type '" + typeSpecification + "'!", e);
-    }
+    return getReflectionUtil().toType(typeSpecification, classResolver);
   }
 
   /**
@@ -86,20 +80,9 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    * @param xmlReader is where to read the XML from.
    * @return the ID of the class or field.
    */
-  protected ContentId parseId(XMLStreamReader xmlReader) {
+  protected Long parseId(XMLStreamReader xmlReader) {
 
-    boolean isClass = ContentClass.XML_TAG_CLASS.equals(xmlReader.getLocalName());
-    // parse ID
-    int id = getStaxUtil().parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_ID,
-        Integer.class).intValue();
-    ContentId uid;
-    ContentIdManager idManager = getContentModelService().getIdManager();
-    if (isClass) {
-      uid = idManager.getClassId(id);
-    } else {
-      uid = idManager.getFieldId(id);
-    }
-    return uid;
+    return getStaxUtil().parseAttribute(xmlReader, null, ContentObject.FIELD_NAME_ID, Long.class);
   }
 
   /**
@@ -138,7 +121,8 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    * <li>The {@link ContentObject#getContentClass() content-class} of the
    * de-serialized classes and fields is NOT set by this method so it may be
    * <code>null</code> if NOT initialized via the
-   * {@link net.sf.mmm.content.reflection.api.ContentReflectionService model-service}.</li>
+   * {@link net.sf.mmm.content.reflection.api.ContentReflectionService
+   * model-service}.</li>
    * </ul>
    * 
    * @param xmlReader is where to read the XML from.
@@ -159,18 +143,17 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
     boolean isSystem = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentModifiers.XML_ATR_MODIFIERS_SYSTEM, Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentModifiers.XML_ATR_MODIFIERS_FINAL, Boolean.class, Boolean.FALSE).booleanValue();
+        ContentModifiers.XML_ATR_SYSTEM, Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null, ContentModifiers.XML_ATR_FINAL,
+        Boolean.class, Boolean.FALSE).booleanValue();
     boolean isAbstract = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentClassModifiers.XML_ATR_MODIFIERS_ABSTRACT, Boolean.class, Boolean.FALSE)
-        .booleanValue();
+        ContentClassModifiers.XML_ATR_ABSTRACT, Boolean.class, Boolean.FALSE).booleanValue();
     // default value for extendable is...
     boolean isExtendable = !(isFinal || (isSystem && isAbstract));
     // configured value is therefore...
     isExtendable = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentClassModifiers.XML_ATR_MODIFIERS_EXTENDABLE, Boolean.class,
-        Boolean.valueOf(isExtendable)).booleanValue();
+        ContentClassModifiers.XML_ATR_EXTENDABLE, Boolean.class, Boolean.valueOf(isExtendable))
+        .booleanValue();
     ContentClassModifiers modifiers = ContentClassModifiersBean.getInstance(isSystem, isFinal,
         isAbstract, isExtendable);
 
@@ -257,21 +240,24 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
 
     assert (xmlReader.isStartElement());
     assert (ContentField.XML_TAG_FIELD.equals(xmlReader.getLocalName()));
-    ContentId id = parseId(xmlReader);
+    Long id = parseId(xmlReader);
     String name = parseName(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
-    boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentModifiers.XML_ATR_MODIFIERS_FINAL, Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null, ContentModifiers.XML_ATR_FINAL,
+        Boolean.class, Boolean.FALSE).booleanValue();
     boolean isReadOnly = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentFieldModifiers.XML_ATR_ROOT_READ_ONLY, Boolean.class, Boolean.FALSE).booleanValue();
+        ContentFieldModifiers.XML_ATR_READ_ONLY, Boolean.class, Boolean.FALSE).booleanValue();
     boolean isStatic = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentFieldModifiers.XML_ATR_ROOT_STATIC, Boolean.class, Boolean.FALSE).booleanValue();
+        ContentFieldModifiers.XML_ATR_STATIC, Boolean.class, Boolean.FALSE).booleanValue();
     boolean isSystem = declaringClass.getContentModifiers().isSystem();
     boolean isTransient = getStaxUtil().parseAttribute(xmlReader, null,
-        ContentFieldModifiers.XML_ATR_ROOT_TRANSIENT, Boolean.class, Boolean.FALSE).booleanValue();
+        ContentFieldModifiers.XML_ATR_TRANSIENT, Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isInheritedFromParent = getStaxUtil().parseAttribute(xmlReader, null,
+        ContentFieldModifiers.XML_ATR_INHERITED_FROM_PARENT, Boolean.class, Boolean.FALSE)
+        .booleanValue();
     ContentFieldModifiers modifiers = ContentFieldModifiersBean.getInstance(isSystem, isFinal,
-        isReadOnly, isStatic, isTransient);
+        isReadOnly, isStatic, isTransient, isInheritedFromParent);
     // parse type
     String typeSpecification = getStaxUtil().parseAttribute(xmlReader, null,
         ContentField.XML_ATR_FIELD_TYPE, String.class);

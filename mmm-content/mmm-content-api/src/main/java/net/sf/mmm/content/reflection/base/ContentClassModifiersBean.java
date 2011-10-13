@@ -95,11 +95,11 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       false, false, true);
 
   /** @see #isAbstract() */
-  @XmlAttribute(name = XML_ATR_MODIFIERS_ABSTRACT)
+  @XmlAttribute(name = XML_ATR_ABSTRACT)
   private boolean abstractFlag;
 
   /** @see #isExtendable() */
-  @XmlAttribute(name = XML_ATR_MODIFIERS_EXTENDABLE)
+  @XmlAttribute(name = XML_ATR_EXTENDABLE)
   private boolean extendableFlag;
 
   /**

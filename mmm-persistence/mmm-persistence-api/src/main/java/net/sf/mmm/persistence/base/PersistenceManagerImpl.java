@@ -17,7 +17,7 @@ import net.sf.mmm.persistence.api.PersistenceEntityManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class PersistenceManagerImpl extends AbstractPersistenceManager {
+public class PersistenceManagerImpl extends AbstractRevisionedPersistenceManager {
 
   /**
    * The constructor.

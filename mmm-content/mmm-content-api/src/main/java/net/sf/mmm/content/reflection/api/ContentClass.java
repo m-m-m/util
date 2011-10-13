@@ -28,7 +28,7 @@ import net.sf.mmm.content.api.ContentSelectionTree;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentClass.CLASS_ID, name = ContentClass.CLASS_NAME, isFinal = true)
+@ContentClassAnnotation(id = ContentClass.CLASS_ID, title = ContentClass.CLASS_NAME, isFinal = true)
 public interface ContentClass<CLASS extends ContentObject> extends ContentReflectionObject<CLASS>,
     ContentSelectionTree<ContentClass<? extends ContentObject>> {
 

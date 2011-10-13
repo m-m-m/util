@@ -16,7 +16,7 @@ import net.sf.mmm.content.datatype.api.ContentId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentFolder.CLASS_ID, name = ContentFolder.CLASS_NAME)
+@ContentClassAnnotation(id = ContentFolder.CLASS_ID, title = ContentFolder.CLASS_NAME)
 public final class ContentFolderImpl extends AbstractContentResource implements ContentFolder {
 
   /** UID for serialization. */

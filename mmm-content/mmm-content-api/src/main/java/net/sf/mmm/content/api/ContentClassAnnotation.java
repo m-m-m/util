@@ -28,19 +28,23 @@ public @interface ContentClassAnnotation {
 
   /**
    * The {@link net.sf.mmm.content.datatype.api.ContentId#getObjectId() id} of
-   * the {@link net.sf.mmm.content.reflection.api.ContentClass}.
+   * the {@link net.sf.mmm.content.reflection.api.ContentClass}. If omitted the
+   * ID will be generated automatically. If an update is performed and the
+   * {@link #title() title} has NOT changed then the existing ID will be
+   * reassigned. However, for statically typed content classes it is suggested
+   * to supply fixed IDs to prevent problems on renaming.
    * 
    * @see net.sf.mmm.content.reflection.api.ContentClass#CLASS_ID_MINIMUM_CUSTOM
    */
-  int id();
+  int id() default -1;
 
   /**
-   * The {@link net.sf.mmm.content.reflection.api.ContentClass#getTitle() name}
+   * The {@link net.sf.mmm.content.reflection.api.ContentClass#getTitle() title}
    * of the {@link net.sf.mmm.content.reflection.api.ContentClass} reflecting
    * the entity. If omitted the {@link Class#getSimpleName() simple-name} of the
    * annotated class is used.
    */
-  String name() default "";
+  String title() default "";
 
   /**
    * The

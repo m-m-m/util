@@ -29,7 +29,7 @@ public class CoreContentModelServiceTest {
 
     assertNotNull(contentClass);
     assertSame(contentClass, modelService.getContentClass(contentClass.getTitle()));
-    assertSame(contentClass, modelService.getContentClass(contentClass.getContentId()));
+    assertSame(contentClass, modelService.getContentClass(contentClass.getId()));
   }
 
   @Test

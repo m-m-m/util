@@ -16,7 +16,7 @@ import net.sf.mmm.content.reflection.base.AbstractContentField;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentField.CLASS_ID, name = ContentField.CLASS_NAME)
+@ContentClassAnnotation(id = ContentField.CLASS_ID, title = ContentField.CLASS_NAME)
 public final class ContentFieldImpl extends AbstractContentField {
 
   /** UID for serialization. */

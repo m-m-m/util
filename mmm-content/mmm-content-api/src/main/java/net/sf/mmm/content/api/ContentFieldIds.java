@@ -81,6 +81,12 @@ public interface ContentFieldIds {
    * {@link net.sf.mmm.content.reflection.api.ContentReflectionObject#isContentClass()}
    * .
    */
-  int ID_REFLECTIONOBJECT_CONTENTCLASS = 0;
+  int ID_REFLECTIONOBJECT_CONTENTCLASS = 104;
+
+  /**
+   * {@link net.sf.mmm.content.reflection.api.ContentField#getId() Field ID} for
+   * {@link net.sf.mmm.content.entity.api.ContentResource#getPath()}.
+   */
+  int ID_RESOURCE_PATH = 0;
 
 }

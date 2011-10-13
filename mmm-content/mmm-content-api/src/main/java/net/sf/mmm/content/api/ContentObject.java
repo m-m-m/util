@@ -65,16 +65,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentObject.CLASS_ID, name = ContentObject.CLASS_NAME)
+@ContentClassAnnotation(id = ContentObject.CLASS_ID, title = ContentObject.CLASS_NAME)
 public abstract interface ContentObject extends RevisionedPersistenceEntity<Long>,
     AttributeReadTitle<String>, Serializable {
-
-  /**
-   * The {@link ContentObject#getTitle() name} of the
-   * {@link net.sf.mmm.content.reflection.api.ContentClass} reflecting this
-   * type.
-   */
-  String CLASS_NAME = "ContentObject";
 
   /**
    * The {@link net.sf.mmm.content.datatype.api.ContentId#getClassId() class-ID}
@@ -82,6 +75,13 @@ public abstract interface ContentObject extends RevisionedPersistenceEntity<Long
    * this type.
    */
   int CLASS_ID = 0;
+
+  /**
+   * The {@link ContentObject#getTitle() name} of the
+   * {@link net.sf.mmm.content.reflection.api.ContentClass} reflecting this
+   * type.
+   */
+  String CLASS_NAME = "ContentObject";
 
   /**
    * The name of the {@link net.sf.mmm.content.reflection.api.ContentField
@@ -110,7 +110,7 @@ public abstract interface ContentObject extends RevisionedPersistenceEntity<Long
    * 
    * @return the title of this object.
    */
-  @ContentFieldAnnotation(id = ContentFieldIds.ID_OBJECT_TITLE, name = FIELD_NAME_TITLE, isFinal = true)
+  @ContentFieldAnnotation(id = ContentFieldIds.ID_OBJECT_TITLE, title = FIELD_NAME_TITLE, isFinal = true)
   String getTitle();
 
 }

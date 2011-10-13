@@ -28,7 +28,6 @@ import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
 import net.sf.mmm.content.reflection.api.ContentReflectionException;
 import net.sf.mmm.content.reflection.api.ContentReflectionService;
 import net.sf.mmm.content.reflection.api.access.ContentFieldAccessor;
-import net.sf.mmm.content.reflection.base.statically.ContentFieldAccessorPojo;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
@@ -37,8 +36,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AnnotationFilter;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
@@ -236,13 +235,12 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
 
     Context context = new Context();
     parseConfiguration(context);
-    ContentId rootClassId = getContentModelService().getIdManager().getRootClassId();
-    AbstractContentClass rootClass = context.getContentClass(rootClassId);
+    AbstractContentClass<? extends ContentObject> rootClass = context
+        .getContentClass(ContentObject.CLASS_ID);
     if (rootClass == null) {
       // TODO: NLS + Details/Explain
       throw new IllegalArgumentException("Root-class NOT found!");
     }
-
     loadFieldsRecursive(rootClass);
 
     return rootClass;
@@ -271,7 +269,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
     ContentId classId = getContentModelService().getIdManager().getClassId(
         contentClassAnnotation.id());
     // name
-    String name = contentClassAnnotation.name();
+    String name = contentClassAnnotation.title();
     if ((name == null) || (name.length() == 0)) {
       name = javaClass.getSimpleName();
     }
@@ -306,7 +304,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         throw new DuplicateClassException(classId);
       }
       if (contentClass.getJavaClass() == null) {
-        contentClass.setJavaClass((Class<? extends ContentObject>) javaClass);
+        contentClass.setJavaClass(javaClass);
       }
       if (contentClass.getSuperClass() != null) {
         // this can only happen if the class was created outside (in a subclass)
@@ -380,7 +378,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         if (declareField) {
           ContentId fieldId = getContentModelService().getIdManager().getFieldId(
               contentFieldAnnotation.id());
-          String name = contentFieldAnnotation.name();
+          String name = contentFieldAnnotation.title();
           if ((name == null) || (name.length() == 0)) {
             name = accessor.getName();
           }

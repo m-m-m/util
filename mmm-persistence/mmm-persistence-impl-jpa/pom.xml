@@ -22,60 +22,24 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>javax.persistence</artifactId>
+      <version>2.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>3.0.6.RELEASE</version>
-      <scope>compile</scope>
+      <scope>test</scope>
     </dependency>
-    <!-- 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>3.0.6.RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-agent</artifactId>
-      <version>3.0.6.RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
-    -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
       <version>4.0.0.CR4</version>
       <scope>test</scope>
-    </dependency>    
-    <!-- 3.4.0.GA has broken POM, we need to fix slf4j -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.5.6</version>
-      <scope>test</scope>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.6</version>
-      <scope>test</scope>
-    </dependency>    
-    -->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.3.160</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- 
-    <dependency>
-      <groupId>c3p0</groupId>
-      <artifactId>c3p0</artifactId>
-      <version>0.9.1.2</version>    
-      <scope>test</scope>
-    </dependency>
-     -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-transaction-impl-spring</artifactId>

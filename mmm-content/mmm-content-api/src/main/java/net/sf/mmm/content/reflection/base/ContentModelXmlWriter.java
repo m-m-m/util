@@ -7,7 +7,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
@@ -36,28 +35,21 @@ public class ContentModelXmlWriter {
    * This method writes the general XML attributes of the given
    * <code>contentObject</code> to the <code>xmlWriter</code>.
    * 
-   * @param contentObject is the object to write.
+   * @param contentClassOrField is the object to write.
    * @param xmlWriter is where to write the XML to. The writer will NOT be
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  private void writeObject(ContentReflectionObject contentObject, XMLStreamWriter xmlWriter)
-      throws XMLStreamException {
+  private void writeReflectionObject(ContentReflectionObject<? extends ContentObject> contentClassOrField,
+      XMLStreamWriter xmlWriter) throws XMLStreamException {
 
-    ContentId id = contentObject.getContentId();
+    Long id = contentClassOrField.getId();
     if (id != null) {
-      String idString;
-      if (id instanceof ContentId) {
-        ContentId contentId = id;
-        idString = Integer.toString(contentId.getObjectId());
-      } else {
-        idString = id.toString();
-      }
-      xmlWriter.writeAttribute(ContentObject.FIELD_NAME_ID, idString);
+      xmlWriter.writeAttribute(ContentObject.FIELD_NAME_ID, id.toString());
     }
-    xmlWriter.writeAttribute(ContentObject.FIELD_NAME_TITLE, contentObject.getTitle());
-    if (contentObject.getDeletedFlag()) {
-      xmlWriter.writeAttribute(ContentObject.FIELD_NAME_DELETED, StringUtil.TRUE);
+    xmlWriter.writeAttribute(ContentObject.FIELD_NAME_TITLE, contentClassOrField.getTitle());
+    if (contentClassOrField.getDeletedFlag()) {
+      xmlWriter.writeAttribute(ContentReflectionObject.FIELD_NAME_DELETEDFLAG, StringUtil.TRUE);
     }
   }
 
@@ -70,12 +62,11 @@ public class ContentModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeField(ContentField contentField, XMLStreamWriter xmlWriter)
-      throws XMLStreamException {
+  public void writeField(ContentField<? extends ContentObject, ?> contentField,
+      XMLStreamWriter xmlWriter) throws XMLStreamException {
 
     xmlWriter.writeStartElement(ContentField.CLASS_NAME);
-    writeObject(contentField, xmlWriter);
-    // TODO:
+    writeReflectionObject(contentField, xmlWriter);
     String type = contentField.getFieldType().toString();
     xmlWriter.writeAttribute(ContentField.FIELD_NAME_FIELD_TYPE, type);
     ContentFieldModifiers modifiers = contentField.getContentModifiers();
@@ -83,18 +74,17 @@ public class ContentModelXmlWriter {
     // xmlWriter.writeAttribute(Modifiers.XML_ATR_ROOT_SYSTEM, StringUtil.TRUE);
     // }
     if (modifiers.isFinal()) {
-      xmlWriter.writeAttribute(ContentModifiers.XML_ATR_MODIFIERS_FINAL, StringUtil.TRUE);
+      xmlWriter.writeAttribute(ContentModifiers.XML_ATR_FINAL, StringUtil.TRUE);
     }
     if (modifiers.isReadOnly()) {
-      xmlWriter.writeAttribute(ContentFieldModifiers.XML_ATR_ROOT_READ_ONLY, StringUtil.TRUE);
+      xmlWriter.writeAttribute(ContentFieldModifiers.XML_ATR_READ_ONLY, StringUtil.TRUE);
     }
     if (!modifiers.isStatic()) {
-      xmlWriter.writeAttribute(ContentFieldModifiers.XML_ATR_ROOT_STATIC, StringUtil.FALSE);
+      xmlWriter.writeAttribute(ContentFieldModifiers.XML_ATR_STATIC, StringUtil.FALSE);
     }
     if (!modifiers.isTransient()) {
-      xmlWriter.writeAttribute(ContentFieldModifiers.XML_ATR_ROOT_TRANSIENT, StringUtil.FALSE);
+      xmlWriter.writeAttribute(ContentFieldModifiers.XML_ATR_TRANSIENT, StringUtil.FALSE);
     }
-
     xmlWriter.writeEndElement();
   }
 
@@ -109,29 +99,29 @@ public class ContentModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeClass(ContentClass contentClass, XMLStreamWriter xmlWriter)
-      throws XMLStreamException {
+  public void writeClass(ContentClass<? extends ContentObject> contentClass,
+      XMLStreamWriter xmlWriter) throws XMLStreamException {
 
     xmlWriter.writeStartElement(ContentClass.CLASS_NAME);
-    writeObject(contentClass, xmlWriter);
+    writeReflectionObject(contentClass, xmlWriter);
     ContentClassModifiers modifiers = contentClass.getContentModifiers();
     if (modifiers.isSystem()) {
-      xmlWriter.writeAttribute(ContentModifiers.XML_ATR_MODIFIERS_SYSTEM, StringUtil.TRUE);
+      xmlWriter.writeAttribute(ContentModifiers.XML_ATR_SYSTEM, StringUtil.TRUE);
+      if (modifiers.isExtendable() && !modifiers.isFinal()) {
+        xmlWriter.writeAttribute(ContentClassModifiers.XML_ATR_EXTENDABLE,
+            StringUtil.TRUE);
+      }
     }
     if (modifiers.isFinal()) {
-      xmlWriter.writeAttribute(ContentModifiers.XML_ATR_MODIFIERS_FINAL, StringUtil.TRUE);
+      xmlWriter.writeAttribute(ContentModifiers.XML_ATR_FINAL, StringUtil.TRUE);
     }
     if (modifiers.isAbstract()) {
-      xmlWriter.writeAttribute(ContentClassModifiers.XML_ATR_MODIFIERS_ABSTRACT, StringUtil.TRUE);
+      xmlWriter.writeAttribute(ContentClassModifiers.XML_ATR_ABSTRACT, StringUtil.TRUE);
     }
-    if (!modifiers.isExtendable() && !modifiers.isFinal()) {
-      xmlWriter
-          .writeAttribute(ContentClassModifiers.XML_ATR_MODIFIERS_EXTENDABLE, StringUtil.FALSE);
-    }
-    for (ContentField field : contentClass.getDeclaredFields()) {
+    for (ContentField<? extends ContentObject, ?> field : contentClass.getDeclaredFields()) {
       writeField(field, xmlWriter);
     }
-    for (ContentClass subClass : contentClass.getSubClasses()) {
+    for (ContentClass<? extends ContentObject> subClass : contentClass.getSubClasses()) {
       writeClass(subClass, xmlWriter);
     }
     xmlWriter.writeEndElement();
@@ -146,7 +136,7 @@ public class ContentModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeModel(ContentClass rootClass, XMLStreamWriter xmlWriter)
+  public void writeModel(ContentClass<? extends ContentObject> rootClass, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
     xmlWriter.writeStartElement(ContentClass.XML_TAG_CONTENT_MODEL);

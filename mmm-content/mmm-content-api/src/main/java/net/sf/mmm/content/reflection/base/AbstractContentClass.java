@@ -12,14 +12,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.mmm.content.api.ContentFieldAnnotation;
 import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.datatype.api.ContentId;
 import net.sf.mmm.content.reflection.api.ContentClass;
 import net.sf.mmm.content.reflection.api.ContentClassModifiers;
 import net.sf.mmm.content.reflection.api.ContentField;
 import net.sf.mmm.content.reflection.api.ContentReflectionException;
-import net.sf.mmm.content.reflection.base.statically.AbstractContentReflectionObject;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**

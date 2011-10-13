@@ -28,8 +28,12 @@ public @interface ContentFieldAnnotation {
 
   /**
    * The {@link net.sf.mmm.content.api.ContentObject#getId() id} of the field.
+   * If omitted the ID will be generated automatically. If an update is
+   * performed and the {@link #title() title} has NOT changed then the existing
+   * ID will be reassigned. However, for statically typed content classes it is
+   * suggested to supply fixed IDs to prevent problems on renaming.
    */
-  int id();
+  int id() default -1;
 
   /**
    * The {@link net.sf.mmm.content.reflection.api.ContentField#getTitle() name}
@@ -37,7 +41,7 @@ public @interface ContentFieldAnnotation {
    * used (e.g. <code>fooBar</code> if the annotated method is named
    * <code>getFooBar()</code>).
    */
-  String name() default "";
+  String title() default "";
 
   /**
    * The

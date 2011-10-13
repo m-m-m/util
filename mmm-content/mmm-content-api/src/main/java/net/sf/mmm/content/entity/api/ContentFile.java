@@ -13,14 +13,14 @@ import net.sf.mmm.content.datatype.api.Blob;
  * @since 1.0.0
  */
 @ContentClassAnnotation(id = ContentFile.CLASS_ID, isFinal = true)
-public interface ContentFile extends ContentEntity {
+public interface ContentFile extends ContentResource {
 
   /**
    * The {@link net.sf.mmm.content.datatype.api.ContentId#getClassId() class-ID}
    * of the {@link net.sf.mmm.content.reflection.api.ContentClass} reflecting
    * this type.
    */
-  int CLASS_ID = 10;
+  int CLASS_ID = 13;
 
   /**
    * This method gets the mimetype of this file.

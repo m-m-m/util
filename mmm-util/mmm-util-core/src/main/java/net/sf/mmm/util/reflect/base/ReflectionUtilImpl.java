@@ -292,7 +292,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
       Type result = toType(parser, resolver, null);
       parser.skipWhile(' ');
       if (parser.hasNext()) {
-        throw new IllegalArgumentException("Not terminated!");
+        throw new NlsIllegalArgumentException(parser.read(Integer.MAX_VALUE));
       }
       return result;
     } catch (RuntimeException e) {

@@ -4,6 +4,7 @@
 package net.sf.mmm.persistence.impl.jpa;
 
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 /**
  * This is the abstract base-implementation of a
@@ -32,6 +33,7 @@ public abstract class JpaManagedIdPersistenceEntity<ID> extends JpaPersistenceEn
    * {@inheritDoc}
    */
   @Override
+  @Transient
   public boolean isPersistent() {
 
     return this.persistent;

@@ -20,16 +20,18 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class PersistenceTest {
 
+  private static final String SPRING_XML = "/net/sf/mmm/persistence/impl/jpa/beans-test-persistence-jpa.xml";
+
   protected PersistenceManager getPersistenceManager() {
 
-    return SpringContainerPool.getInstance().getComponent(PersistenceManager.class);
+    return SpringContainerPool.getInstance(SPRING_XML).getComponent(PersistenceManager.class);
   }
 
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance().getComponent(
-        TransactionExecutor.class);
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
+        .getComponent(TransactionExecutor.class);
 
     DummyFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyFooEntity>() {
 
@@ -40,6 +42,14 @@ public class PersistenceTest {
     });
     final Integer fooId = foo.getId();
     final Integer barId = foo.getBar().getId();
+    System.out.println("--------------------------------------------------------");
+    System.out.println(fooId);
+    System.out.println(barId);
+    System.out.println("--------------------------------------------------------");
+    SpringContainerPool.dispose(SPRING_XML);
+    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(
+        TransactionExecutor.class);
+
     transactionExecutor.doInTransaction(new Callable<Void>() {
 
       public Void call() throws Exception {
@@ -78,6 +88,7 @@ public class PersistenceTest {
         .getManager(DummyBarEntity.class);
     barManager.save(bar2);
     foo.setBar(bar2);
+    fooManager.save(foo);
   }
 
   protected void readAgainAndDelete(Integer fooId, Integer barId) {

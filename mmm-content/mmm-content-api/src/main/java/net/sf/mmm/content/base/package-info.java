@@ -4,8 +4,7 @@
 /**
  * Provides the base implementation of the content API.
  * <a name="documentation"/><h2>Content Base</h2> 
- * This package contains the base implementation of the 
- * {@link net.sf.mmm.content.api content API}.
+ * This package contains the base implementation of the {@link net.sf.mmm.content.api content API}.
  */
 package net.sf.mmm.content.base;
 

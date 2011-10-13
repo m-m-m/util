@@ -8,11 +8,11 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-l10n-de</artifactId>
+  <artifactId>mmm-l10n-en-GB</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>l10n-de</name>
-  <description>Localization for Germany (de_DE).</description>
+  <description>Localization for English (en_GB).</description>
   <dependencies>
   </dependencies>  
 </project>

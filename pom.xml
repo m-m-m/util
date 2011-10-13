@@ -11,21 +11,6 @@
   <url>http://m-m-m.sourceforge.net/maven</url>
   <inceptionYear>2001</inceptionYear>
   
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>xmlunit</groupId>
-      <artifactId>xmlunit</artifactId>
-      <version>1.0</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  
   <modules>
     <module>mmm-content</module>
     <!-- <module>mmm-gui</module> -->
@@ -38,7 +23,7 @@
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
     <!-- only local -->
-    <module>mmm-ui</module>
+    <!-- <module>mmm-ui</module> -->
     <module>mmm-setup</module>
     <module>mmm-test</module>
   </modules>

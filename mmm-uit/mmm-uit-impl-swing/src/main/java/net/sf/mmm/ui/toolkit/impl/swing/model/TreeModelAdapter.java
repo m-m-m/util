@@ -15,8 +15,9 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class adapts a {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel} to a
- * Swing {@link javax.swing.tree.TreeModel}.
+ * This class adapts a
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel} to a Swing
+ * {@link javax.swing.tree.TreeModel}.
  * 
  * @param <N> is the templated type of the tree nodes.
  * 
@@ -29,8 +30,8 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   private final UiTreeMvcModel model;
 
   /**
-   * the list of all registered tree model listeners (
-   * {@link TreeModelListener TreeModelListener}objects)
+   * the list of all registered tree model listeners ( {@link TreeModelListener
+   * TreeModelListener}objects)
    */
   private final List<TreeModelListener> listeners;
 
@@ -39,7 +40,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    * 
    * @param treeModel is the tree model to adapt.
    */
-  @SuppressWarnings("unchecked")
   public TreeModelAdapter(UiTreeMvcModel<N> treeModel) {
 
     super();
@@ -51,7 +51,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public Object getRoot() {
 
     return this.model.getRootNode();
@@ -60,7 +59,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public Object getChild(Object parent, int index) {
 
     return this.model.getChildNode(parent, index);
@@ -69,7 +67,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public int getChildCount(Object parent) {
 
     return this.model.getChildCount(parent);
@@ -78,7 +75,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public boolean isLeaf(Object node) {
 
     return (this.model.getChildCount(node) == 0);
@@ -89,13 +85,12 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    */
   public void valueForPathChanged(TreePath path, Object newValue) {
 
-  // we do not support editors, yet
+    // we do not support editors, yet
   }
 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public int getIndexOfChild(Object parent, Object child) {
 
     for (int i = 0; i < this.model.getChildCount(parent); i++) {
@@ -144,7 +139,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    * 
    * @param event is the event to fire.
    */
-  @SuppressWarnings("unchecked")
   private void fireAddEvent(UITreeModelEvent<N> event) {
 
     Object parentNode = this.model.getParent(event.getTreeNode());
@@ -163,7 +157,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    * 
    * @param event is the event to fire.
    */
-  @SuppressWarnings("unchecked")
   private void fireRemoveEvent(UITreeModelEvent<N> event) {
 
     Object parentNode = this.model.getParent(event.getTreeNode());
@@ -222,7 +215,6 @@ public class TreeModelAdapter<N> implements TreeModel, UITreeModelListener<N> {
    * 
    * @return the model.
    */
-  @SuppressWarnings("unchecked")
   public UiTreeMvcModel<N> getModel() {
 
     return this.model;

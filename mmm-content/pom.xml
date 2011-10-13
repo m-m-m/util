@@ -15,13 +15,20 @@
   <name>content</name>
   <description>The content repository of mmm's enterprise content management system (ECMS).</description>
   
-  <dependencies>
-  </dependencies>
-  
   <modules>
     <module>mmm-content-api</module>
+    <module>mmm-content-base</module>
     <module>mmm-content-core</module>
     <module>mmm-content-entities</module>
     <module>mmm-content-repository</module>
   </modules>
+  
+  <dependencies>
+  	<dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
