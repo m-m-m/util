@@ -4,7 +4,7 @@
 /**
  * Provides the API for searches (queries) as part of the persistence layer.
  * <a name="documentation"/><h2>Persistence Search API</h2> 
- * This package contains the API advanced searching via the persistence layer.<br/>
+ * This package contains the API for advanced searching via the persistence layer.<br/>
  * For advanced searches a {@link net.sf.mmm.persistence.api.PersistenceEntityManager DAO}
  * shall provide uniform support. This API suggests that the DAO offers a specific
  * implementation of {@link net.sf.mmm.persistence.api.search.PersistenceSearcher} 

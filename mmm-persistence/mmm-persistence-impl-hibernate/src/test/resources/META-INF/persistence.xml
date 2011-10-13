@@ -1,0 +1,27 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+  version="1.0">
+
+  <persistence-unit name="m-m-m" transaction-type="RESOURCE_LOCAL">
+    <!-- transaction-type="JTA"> -->
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
+    <!-- <jta-data-source>java:/DataSource</jta-data-source> -->
+    <!-- <mapping-file>META_INF/orm.xml</mapping-file> -->
+    <!-- <jar-file>persistence.jar</jar-file> -->
+    <!-- <class>Entity1</class> -->
+    <properties>
+      <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/> -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.ejb.event.post-insert" value="org.hibernate.envers.event.EnversPostInsertEventListenerImpl"/>
+      <property name="hibernate.ejb.event.post-update" value="org.hibernate.envers.event.EnversPostUpdateEventListenerImpl"/>
+      <property name="hibernate.ejb.event.post-delete" value="org.hibernate.envers.event.EnversPostDeleteEventListenerImpl"/>
+      <property name="hibernate.ejb.event.pre-collection-update" value="org.hibernate.envers.event.EnversPreCollectionRemoveEventListenerImpl"/>
+      <property name="hibernate.ejb.event.pre-collection-remove" value="org.hibernate.envers.event.EnversPreCollectionUpdateEventListenerImpl"/>
+      <property name="hibernate.ejb.event.post-collection-recreate" value="org.hibernate.envers.event.EnversPostCollectionRecreateEventListenerImpl"/>
+      <property name="org.hibernate.envers.versionsTableSuffix" value="_V"/>
+      <!-- <property name="org.hibernate.envers.revisionFieldName" value="ver_rev"/> -->
+    </properties>
+  </persistence-unit>
+</persistence>
