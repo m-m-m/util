@@ -4,9 +4,9 @@
 package net.sf.mmm.content.model.base;
 
 import junit.framework.TestCase;
-import net.sf.mmm.content.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.content.reflection.base.ContentFieldModifiersBean;
-import net.sf.mmm.content.reflection.base.ContentModifiersIllegalException;
+import net.sf.mmm.data.reflection.api.ContentFieldModifiers;
+import net.sf.mmm.data.reflection.base.ContentFieldModifiersBean;
+import net.sf.mmm.data.reflection.base.ContentModifiersIllegalException;
 
 import org.junit.Assert;
 import org.junit.Test;

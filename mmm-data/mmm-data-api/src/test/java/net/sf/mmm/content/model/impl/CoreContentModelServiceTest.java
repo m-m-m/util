@@ -7,11 +7,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import net.sf.mmm.content.api.ContentObject;
-import net.sf.mmm.content.reflection.api.ContentClass;
-import net.sf.mmm.content.reflection.api.ContentField;
-import net.sf.mmm.content.reflection.api.ContentReflectionService;
-import net.sf.mmm.content.reflection.impl.CoreContentModelService;
+import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.reflection.api.ContentClass;
+import net.sf.mmm.data.reflection.api.ContentField;
+import net.sf.mmm.data.reflection.api.ContentReflectionService;
+import net.sf.mmm.data.reflection.impl.CoreContentModelService;
 
 import org.junit.Ignore;
 import org.junit.Test;
