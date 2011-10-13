@@ -4,9 +4,9 @@
 package net.sf.mmm.data.model.base;
 
 import junit.framework.TestCase;
-import net.sf.mmm.data.reflection.api.ContentFieldModifiers;
-import net.sf.mmm.data.reflection.base.ContentFieldModifiersBean;
-import net.sf.mmm.data.reflection.base.ContentModifiersIllegalException;
+import net.sf.mmm.data.api.reflection.DataFieldModifiers;
+import net.sf.mmm.data.base.reflection.ContentFieldModifiersBean;
+import net.sf.mmm.data.base.reflection.ContentModifiersIllegalException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,9 +20,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ContentFieldModifiersBeanTest {
 
-  private void checkModifiers(ContentFieldModifiers modifiers) {
+  private void checkModifiers(DataFieldModifiers modifiers) {
 
-    ContentFieldModifiers instance = ContentFieldModifiersBean.getInstance(modifiers.isSystem(),
+    DataFieldModifiers instance = ContentFieldModifiersBean.getInstance(modifiers.isSystem(),
         modifiers.isFinal(), modifiers.isReadOnly(), modifiers.isStatic(), modifiers.isTransient(),
         modifiers.isInheritedFromParent());
     Assert.assertSame(modifiers, instance);
@@ -81,7 +81,7 @@ public class ContentFieldModifiersBeanTest {
               for (int inherit = 0; inherit < 2; inherit++) {
                 boolean isInherited = toBoolean(inherit);
                 try {
-                  ContentFieldModifiers modifiers = ContentFieldModifiersBean.getInstance(isSystem,
+                  DataFieldModifiers modifiers = ContentFieldModifiersBean.getInstance(isSystem,
                       isFinal, isReadOnly, isStatic, isTransient, isInherited);
                   Assert.assertEquals(isSystem, modifiers.isSystem());
                   Assert.assertEquals(isFinal, modifiers.isFinal());

@@ -7,22 +7,22 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
-import net.sf.mmm.data.api.ContentException;
-import net.sf.mmm.data.datatype.api.ContentId;
-import net.sf.mmm.data.reflection.api.ContentClassLoader;
-import net.sf.mmm.data.reflection.api.ContentReflectionEvent;
-import net.sf.mmm.data.reflection.api.ContentReflectionException;
-import net.sf.mmm.data.reflection.base.AbstractContentClass;
-import net.sf.mmm.data.reflection.base.AbstractContentField;
-import net.sf.mmm.data.reflection.base.AbstractMutableContentModelService;
-import net.sf.mmm.data.reflection.base.ContentClassLoaderStAX;
+import net.sf.mmm.data.api.DataException;
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClassLoader;
+import net.sf.mmm.data.api.reflection.DataReflectionEvent;
+import net.sf.mmm.data.api.reflection.DataReflectionException;
+import net.sf.mmm.data.base.reflection.AbstractContentClass;
+import net.sf.mmm.data.base.reflection.AbstractContentField;
+import net.sf.mmm.data.base.reflection.AbstractMutableContentModelService;
+import net.sf.mmm.data.base.reflection.ContentClassLoaderStAX;
 import net.sf.mmm.data.reflection.impl.statically.ContentClassImpl;
 import net.sf.mmm.data.reflection.impl.statically.ContentFieldImpl;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.data.reflection.api.ContentReflectionService} interface that
- * assumes that {@link ContentId}s are used as well as specific implementations
+ * {@link net.sf.mmm.data.api.reflection.ContentReflectionService} interface that
+ * assumes that {@link DataId}s are used as well as specific implementations
  * for class and field.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -31,7 +31,7 @@ import net.sf.mmm.data.reflection.impl.statically.ContentFieldImpl;
 public class CoreContentModelService extends AbstractMutableContentModelService {
 
   /** @see #getClassLoader() */
-  private ContentClassLoader classLoader;
+  private DataClassLoader classLoader;
 
   /** @see #isEditable() */
   private boolean editable;
@@ -66,7 +66,7 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
   /**
    * @return the classLoader
    */
-  public ContentClassLoader getClassLoader() {
+  public DataClassLoader getClassLoader() {
 
     return this.classLoader;
   }
@@ -74,7 +74,7 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
   /**
    * @param classLoader the classLoader to set
    */
-  public void setClassLoader(ContentClassLoader classLoader) {
+  public void setClassLoader(DataClassLoader classLoader) {
 
     this.classLoader = classLoader;
   }
@@ -103,9 +103,9 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
    * This method loads the content-model.
    * 
    * @throws IOException if an I/O error was caused by the class-loader.
-   * @throws ContentException if the content-model is invalid.
+   * @throws DataException if the content-model is invalid.
    */
-  protected void loadClasses() throws IOException, ContentException {
+  protected void loadClasses() throws IOException, DataException {
 
     AbstractContentClass rootClass = this.classLoader.loadClasses();
     setRootClass(rootClass);
@@ -113,13 +113,13 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
     AbstractContentClass classClass = getContentClass(getIdManager().getClassClassId());
     if (classClass == null) {
       // TODO:
-      throw new ContentReflectionException("Missing class for ContentClass!");
+      throw new DataReflectionException("Missing class for ContentClass!");
     }
     // ContentClassImpl.setContentClass(classClass);
     AbstractContentClass fieldClass = getContentClass(getIdManager().getFieldClassId());
     if (fieldClass == null) {
       // TODO:
-      throw new ContentReflectionException("Missing class for ContentField!");
+      throw new DataReflectionException("Missing class for ContentField!");
     }
     // ContentFieldImpl.setContentClass(fieldClass);
   }
@@ -130,18 +130,18 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
    * changes.
    * 
    * @throws IOException if an I/O error was caused by the class-loader.
-   * @throws ContentException if the content-model is invalid.
+   * @throws DataException if the content-model is invalid.
    */
-  public void reaload() throws IOException, ContentException {
+  public void reaload() throws IOException, DataException {
 
     loadClasses();
-    fireEvent(new ContentReflectionEvent(getRootContentClass(), ChangeEventType.UPDATE));
+    fireEvent(new DataReflectionEvent(getRootContentClass(), ChangeEventType.UPDATE));
   }
 
   /**
    * {@inheritDoc}
    */
-  public AbstractContentClass createNewClass(ContentId id, String name) {
+  public AbstractContentClass createNewClass(DataId id, String name) {
 
     AbstractContentClass contentClass = new ContentClassImpl(name, id);
     setContentObjectId(contentClass, id);
@@ -151,7 +151,7 @@ public class CoreContentModelService extends AbstractMutableContentModelService 
   /**
    * {@inheritDoc}
    */
-  public AbstractContentField createNewField(ContentId id, String name) {
+  public AbstractContentField createNewField(DataId id, String name) {
 
     AbstractContentField contentField = new ContentFieldImpl(name, id);
     setContentObjectId(contentField, id);

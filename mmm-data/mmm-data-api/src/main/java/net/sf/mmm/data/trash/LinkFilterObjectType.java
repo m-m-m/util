@@ -3,18 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.trash;
 
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
  * TODO: this class ...
  * 
  * @param <CLASS> is the type of the linked object. See
- *        {@link net.sf.mmm.data.reflection.api.ContentClass#getJavaClass()}.
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class LinkFilterObjectType<CLASS extends ContentObject> implements Filter<Link<CLASS>> {
+public class LinkFilterObjectType<CLASS extends DataObject> implements Filter<Link<CLASS>> {
 
   /** @see #accept(Link) */
   private final int classId;
@@ -22,7 +22,7 @@ public class LinkFilterObjectType<CLASS extends ContentObject> implements Filter
   /**
    * The constructor.
    * 
-   * @param classId is the {@link ContentObject#getContentId()}.
+   * @param classId is the {@link DataObject#getContentId()}.
    */
   public LinkFilterObjectType(int classId) {
 

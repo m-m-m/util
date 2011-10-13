@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource.base;
 
-import net.sf.mmm.data.api.ContentClassAnnotation;
-import net.sf.mmm.data.reflection.api.ContentClass;
-import net.sf.mmm.data.reflection.api.ContentField;
+import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataField;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.resource.api.ContentDocument;
 import net.sf.mmm.data.resource.api.ContentResource;
 
@@ -14,35 +14,35 @@ import net.sf.mmm.data.resource.api.ContentResource;
  * extend this class to define a new custom entity.<br>
  * <b>ATTENTION:</b><br>
  * Please follow these rules when designing your custom entity (so it can be
- * mapped to an according {@link net.sf.mmm.data.reflection.api.ContentClass
+ * mapped to an according {@link net.sf.mmm.data.api.reflection.DataClass
  * ContentClass}:
  * <ul>
  * <li>Extend {@link AbstractContentDocument} directly or indirectly.</li>
  * <li>Declare a public non-arg constructor.</li>
  * <li>The class modifiers <code>abstract</code> and <code>final</code> are
  * mapped directly.</li>
- * <li>The {@link ContentClass} is marked as
- * {@link ContentClass#getDeletedFlag() deleted} if the according class is
+ * <li>The {@link DataClass} is marked as
+ * {@link DataClass#getDeletedFlag() deleted} if the according class is
  * annotated as {@link Deprecated} (as annotation and NOT via javadoc!).</li>
- * <li>The name of the {@link net.sf.mmm.data.reflection.api.ContentClass
+ * <li>The name of the {@link net.sf.mmm.data.api.reflection.DataClass
  * ContentClass} can be defined by declaring a {@link String} constant (static
  * and final field) named <code>CLASS_NAME</code>. If NOT declared by the
  * entity-class, the {@link Class#getSimpleName() simple name} of the class will
  * be used.</li>
- * <li>The {@link net.sf.mmm.data.datatype.api.ContentId#getObjectId()
- * class-id} of the {@link net.sf.mmm.data.reflection.api.ContentClass
+ * <li>The {@link net.sf.mmm.data.api.datatype.DataId#getObjectId()
+ * class-id} of the {@link net.sf.mmm.data.api.reflection.DataClass
  * ContentClass} has to be defined by declaring an <code>int</code> constant
  * (static and final field) named <code>CLASS_ID</code>.</li>
  * <li>Public getters indicate a
- * {@link net.sf.mmm.data.reflection.api.ContentField field}.</li>
+ * {@link net.sf.mmm.data.api.reflection.DataField field}.</li>
  * <li>The modifiers <code>final</code> and <code>static</code> from the getter
  * will be mapped directly.</li>
  * <li>If there is no public getter, the field will be
  * {@link net.sf.mmm.content.model.api.FieldModifiers#isReadOnly() read-only}.</li>
  * <li>If there is no getter at all, the field will be
  * {@link net.sf.mmm.content.model.api.FieldModifiers#isTransient() transient}.</li>
- * <li>The {@link ContentField} is marked as
- * {@link ContentClass#getDeletedFlag() deleted} if the according class is
+ * <li>The {@link DataField} is marked as
+ * {@link DataClass#getDeletedFlag() deleted} if the according class is
  * annotated as {@link Deprecated} (as annotation and NOT via javadoc!).</li>
  * </ul>
  * For specific mapping settings parts of <code>javax.persistence</code>
@@ -52,7 +52,7 @@ import net.sf.mmm.data.resource.api.ContentResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = 23, title = "ContentDocument")
+@DataClassAnnotation(id = 23, title = "ContentDocument")
 public abstract class AbstractContentDocument extends AbstractContentResource implements
     ContentDocument {
 

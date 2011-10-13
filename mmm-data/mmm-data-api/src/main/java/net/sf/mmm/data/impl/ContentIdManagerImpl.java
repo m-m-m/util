@@ -6,18 +6,18 @@ package net.sf.mmm.data.impl;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.AbstractContentIdManager;
-import net.sf.mmm.data.datatype.api.ContentId;
-import net.sf.mmm.data.datatype.impl.ContentClassId;
-import net.sf.mmm.data.datatype.impl.ContentFieldId;
-import net.sf.mmm.data.datatype.impl.ContentObjectGenericId;
-import net.sf.mmm.data.datatype.impl.ContentObjectId;
-import net.sf.mmm.data.reflection.api.ContentClass;
-import net.sf.mmm.data.reflection.api.ContentField;
+import net.sf.mmm.data.impl.datatype.ContentClassId;
+import net.sf.mmm.data.impl.datatype.ContentFieldId;
+import net.sf.mmm.data.impl.datatype.ContentObjectGenericId;
+import net.sf.mmm.data.impl.datatype.ContentObjectId;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.data.api.ContentIdManager} interface.
+ * {@link net.sf.mmm.data.api.DataIdManager} interface.
  * 
  * TODO: Move to implementation module?
  * 
@@ -41,7 +41,7 @@ public class ContentIdManagerImpl extends AbstractContentIdManager {
    * {@inheritDoc}
    */
   @Override
-  public ContentId getClassClassId() {
+  public DataId getClassClassId() {
 
     return ContentClassId.CLASS;
   }
@@ -50,7 +50,7 @@ public class ContentIdManagerImpl extends AbstractContentIdManager {
    * {@inheritDoc}
    */
   @Override
-  public ContentId getFieldClassId() {
+  public DataId getFieldClassId() {
 
     return ContentClassId.FIELD;
   }
@@ -59,7 +59,7 @@ public class ContentIdManagerImpl extends AbstractContentIdManager {
    * {@inheritDoc}
    */
   @Override
-  public ContentId getRootClassId() {
+  public DataId getRootClassId() {
 
     return ContentClassId.ROOT;
   }
@@ -68,7 +68,7 @@ public class ContentIdManagerImpl extends AbstractContentIdManager {
    * {@inheritDoc}
    */
   @Override
-  public ContentId getClassId(int classId) {
+  public DataId getClassId(int classId) {
 
     return ContentClassId.valueOf(classId);
   }
@@ -77,7 +77,7 @@ public class ContentIdManagerImpl extends AbstractContentIdManager {
    * {@inheritDoc}
    */
   @Override
-  public ContentId getFieldId(int fieldId) {
+  public DataId getFieldId(int fieldId) {
 
     return ContentFieldId.valueOf(fieldId);
   }
@@ -85,11 +85,11 @@ public class ContentIdManagerImpl extends AbstractContentIdManager {
   /**
    * {@inheritDoc}
    */
-  public ContentId getId(long objectId, int classId, int revision, int storeId) {
+  public DataId getId(long objectId, int classId, int revision, int storeId) {
 
-    if (classId == ContentClass.CLASS_ID) {
+    if (classId == DataClass.CLASS_ID) {
       return ContentClassId.valueOf((int) objectId);
-    } else if (classId == ContentField.CLASS_ID) {
+    } else if (classId == DataField.CLASS_ID) {
       return ContentFieldId.valueOf((int) objectId);
     } else if ((storeId == 0) && (revision == 0)) {
       return new ContentObjectId(objectId, classId);

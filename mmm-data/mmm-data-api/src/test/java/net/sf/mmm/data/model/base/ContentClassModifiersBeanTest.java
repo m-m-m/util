@@ -4,9 +4,9 @@
 package net.sf.mmm.data.model.base;
 
 import junit.framework.TestCase;
-import net.sf.mmm.data.reflection.api.ContentClassModifiers;
-import net.sf.mmm.data.reflection.base.ContentClassModifiersBean;
-import net.sf.mmm.data.reflection.base.ContentModifiersIllegalException;
+import net.sf.mmm.data.api.reflection.DataClassModifiers;
+import net.sf.mmm.data.base.reflection.ContentClassModifiersBean;
+import net.sf.mmm.data.base.reflection.ContentModifiersIllegalException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,10 +20,10 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ContentClassModifiersBeanTest {
 
-  private void checkModifiers(ContentClassModifiers modifiers) {
+  private void checkModifiers(DataClassModifiers modifiers) {
 
     boolean extendable = modifiers.isExtendable();
-    ContentClassModifiers instance = ContentClassModifiersBean.getInstance(modifiers.isSystem(),
+    DataClassModifiers instance = ContentClassModifiersBean.getInstance(modifiers.isSystem(),
         modifiers.isFinal(), modifiers.isAbstract(), extendable);
     Assert.assertSame(modifiers, instance);
   }
@@ -65,7 +65,7 @@ public class ContentClassModifiersBeanTest {
           for (int ext = 0; ext < 2; ext++) {
             boolean isExtendable = toBoolean(ext);
             try {
-              ContentClassModifiers modifiers = ContentClassModifiersBean.getInstance(isSystem,
+              DataClassModifiers modifiers = ContentClassModifiersBean.getInstance(isSystem,
                   isFinal, isAbstract, isExtendable);
               Assert.assertEquals(isSystem, modifiers.isSystem());
               Assert.assertEquals(isFinal, modifiers.isFinal());

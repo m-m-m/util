@@ -8,7 +8,7 @@ package net.sf.mmm.data.trash;
  * This is the interface for a {@link LinkList} that can be modified.
  * 
  * @param <CLASS> is the type of the linked object. See
- *        {@link net.sf.mmm.data.reflection.api.ContentClass#getJavaClass()}.
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

@@ -8,17 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import net.sf.mmm.data.api.ContentFieldAnnotation;
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 
 /**
- * This is the implementation of the abstract entity {@link ContentObject}.
+ * This is the implementation of the abstract entity {@link DataObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @MappedSuperclass
-public abstract class AbstractContentObject implements ContentObject {
+public abstract class AbstractContentObject implements DataObject {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8616371370522165168L;
@@ -93,7 +93,7 @@ public abstract class AbstractContentObject implements ContentObject {
    * <b>ATTENTION:</b><br>
    * This method should only be used internally. Especially this method can NOT
    * be used to rename this entity. Therefore you have to use the
-   * {@link net.sf.mmm.data.repository.api.ContentRepository}.
+   * {@link net.sf.mmm.data.api.repository.ContentRepository}.
    * 
    * @param name the name to set
    */
@@ -108,7 +108,7 @@ public abstract class AbstractContentObject implements ContentObject {
    * 
    * @return the modificationCount is the modification counter.
    */
-  @ContentFieldAnnotation(id = 11)
+  @DataFieldAnnotation(id = 11)
   public int getModificationCount() {
 
     return this.modificationCount;
@@ -127,7 +127,7 @@ public abstract class AbstractContentObject implements ContentObject {
   /**
    * {@inheritDoc}
    */
-  @ContentFieldAnnotation(id = 12)
+  @DataFieldAnnotation(id = 12)
   public Integer getRevision() {
 
     return this.revision;

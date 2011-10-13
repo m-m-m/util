@@ -3,21 +3,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base;
 
-import net.sf.mmm.data.api.ContentIdManager;
-import net.sf.mmm.data.api.ContentObject;
-import net.sf.mmm.data.datatype.api.ContentId;
-import net.sf.mmm.data.reflection.api.ContentClass;
-import net.sf.mmm.data.reflection.api.ContentField;
+import net.sf.mmm.data.api.DataIdManager;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
- * This is the abstract base implementation of the {@link ContentIdManager}
+ * This is the abstract base implementation of the {@link DataIdManager}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentIdManager implements ContentIdManager {
+public abstract class AbstractContentIdManager implements DataIdManager {
 
   /**
    * The constructor.
@@ -30,47 +30,47 @@ public abstract class AbstractContentIdManager implements ContentIdManager {
   /**
    * {@inheritDoc}
    */
-  public ContentId getRootClassId() {
+  public DataId getRootClassId() {
 
-    return getClassId(ContentObject.CLASS_ID);
+    return getClassId(DataObject.CLASS_ID);
   }
 
   /**
    * {@inheritDoc}
    */
-  public ContentId getClassClassId() {
+  public DataId getClassClassId() {
 
-    return getClassId(ContentClass.CLASS_ID);
+    return getClassId(DataClass.CLASS_ID);
   }
 
   /**
    * {@inheritDoc}
    */
-  public ContentId getFieldClassId() {
+  public DataId getFieldClassId() {
 
-    return getClassId(ContentField.CLASS_ID);
+    return getClassId(DataField.CLASS_ID);
   }
 
   /**
    * {@inheritDoc}
    */
-  public ContentId getClassId(int classId) {
+  public DataId getClassId(int classId) {
 
-    return getId(classId, ContentClass.CLASS_ID);
+    return getId(classId, DataClass.CLASS_ID);
   }
 
   /**
    * {@inheritDoc}
    */
-  public ContentId getFieldId(int fieldId) {
+  public DataId getFieldId(int fieldId) {
 
-    return getId(fieldId, ContentField.CLASS_ID);
+    return getId(fieldId, DataField.CLASS_ID);
   }
 
   /**
    * {@inheritDoc}
    */
-  public ContentId getId(String idAsString) {
+  public DataId getId(String idAsString) {
 
     long resourceId = 0;
     int classId = 0;
@@ -82,7 +82,7 @@ public abstract class AbstractContentIdManager implements ContentIdManager {
     int tokenCount = 0;
     for (int i = 0; i <= end; i++) {
       char c = idAsString.charAt(i);
-      if ((c == ContentId.SEPARATOR_CHAR) || (i == end)) {
+      if ((c == DataId.SEPARATOR_CHAR) || (i == end)) {
         int tokenEnd = i;
         if (i == end) {
           tokenEnd++;
@@ -90,22 +90,22 @@ public abstract class AbstractContentIdManager implements ContentIdManager {
         String token = idAsString.substring(tokenStart, tokenEnd);
         try {
           if (tokenCount == 0) {
-            resourceId = Long.parseLong(token, ContentId.RADIX);
+            resourceId = Long.parseLong(token, DataId.RADIX);
           } else if (tokenCount == 1) {
-            classId = Integer.parseInt(token, ContentId.RADIX);
+            classId = Integer.parseInt(token, DataId.RADIX);
           } else if (tokenCount == 2) {
-            revision = Integer.parseInt(token, ContentId.RADIX);
+            revision = Integer.parseInt(token, DataId.RADIX);
           } else if (tokenCount == 3) {
-            storeId = Integer.parseInt(token, ContentId.RADIX);
+            storeId = Integer.parseInt(token, DataId.RADIX);
           }
         } catch (NumberFormatException e) {
-          throw new NlsParseException(e, idAsString, ContentId.class);
+          throw new NlsParseException(e, idAsString, DataId.class);
         }
         tokenCount++;
       }
     }
     if ((tokenCount < 2) || (tokenCount > 4)) {
-      throw new NlsParseException(idAsString, ContentId.class);
+      throw new NlsParseException(idAsString, DataId.class);
     }
     return getId(resourceId, classId, revision, storeId);
   }
@@ -113,7 +113,7 @@ public abstract class AbstractContentIdManager implements ContentIdManager {
   /**
    * {@inheritDoc}
    */
-  public ContentId getId(long objectId, int classId) {
+  public DataId getId(long objectId, int classId) {
 
     return getId(objectId, classId, 0, 0);
   }
@@ -121,7 +121,7 @@ public abstract class AbstractContentIdManager implements ContentIdManager {
   /**
    * {@inheritDoc}
    */
-  public ContentId getId(long objectId, int classId, int revision) {
+  public DataId getId(long objectId, int classId, int revision) {
 
     return getId(objectId, classId, revision, 0);
   }

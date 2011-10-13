@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource.api;
 
-import net.sf.mmm.data.datatype.api.MutableBlob;
+import net.sf.mmm.data.api.datatype.MutableBlob;
 
 /**
  * This is the interface for a resource that contains raw data. It is like a
@@ -15,13 +15,13 @@ import net.sf.mmm.data.datatype.api.MutableBlob;
 public interface ContentFile extends ContentResource {
 
   /**
-   * The name of the {@link net.sf.mmm.data.reflection.api.ContentClass}
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataClass}
    * reflecting {@link ContentFolder}.
    */
   String CLASS_NAME = "ContentFile";
 
   /**
-   * The ID of the {@link net.sf.mmm.data.reflection.api.ContentClass} reflecting
+   * The ID of the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
    * this type.
    */
   short CLASS_ID = 22;

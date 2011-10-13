@@ -3,20 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.reflection.impl.statically;
 
-import net.sf.mmm.data.api.ContentClassAnnotation;
-import net.sf.mmm.data.datatype.api.ContentId;
-import net.sf.mmm.data.reflection.api.ContentField;
-import net.sf.mmm.data.reflection.base.AbstractContentClass;
-import net.sf.mmm.data.reflection.base.AbstractContentField;
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataField;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.data.base.reflection.AbstractContentClass;
+import net.sf.mmm.data.base.reflection.AbstractContentField;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.data.reflection.api.ContentField} interface.
+ * {@link net.sf.mmm.data.api.reflection.DataField} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentField.CLASS_ID, title = ContentField.CLASS_NAME)
+@DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_NAME)
 public final class ContentFieldImpl extends AbstractContentField {
 
   /** UID for serialization. */
@@ -36,7 +36,7 @@ public final class ContentFieldImpl extends AbstractContentField {
    * @param name is the {@link #getTitle() name}.
    * @param id is the {@link #getContentId() id}.
    */
-  public ContentFieldImpl(String name, ContentId id) {
+  public ContentFieldImpl(String name, DataId id) {
 
     super(name, id);
   }

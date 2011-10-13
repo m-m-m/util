@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.security.api;
 
-import net.sf.mmm.data.api.ContentObject;
-import net.sf.mmm.data.reflection.api.ContentClass;
-import net.sf.mmm.data.reflection.api.ContentField;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataField;
 
 /**
  * This is the interface for a rule that determines if an {@link ContentAction
@@ -18,11 +18,11 @@ public interface ContentRule extends ContentSecurityObject {
 
   ContentGroup getParent();
 
-  ContentObject getFolder();
+  DataObject getFolder();
 
   boolean isInheritChildren();
 
-  ContentClass getAllowedClass();
+  DataClass getAllowedClass();
 
   boolean isInheritSubClasses();
 
@@ -31,7 +31,7 @@ public interface ContentRule extends ContentSecurityObject {
    * 
    * @return
    */
-  ContentField getAllowedField();
+  DataField getAllowedField();
 
   /**
    * 

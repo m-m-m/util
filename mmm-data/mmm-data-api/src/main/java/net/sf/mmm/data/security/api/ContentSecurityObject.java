@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.security.api;
 
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
 
 /**
  * This is the abstract interface for a security object. This is any object
@@ -12,6 +12,6 @@ import net.sf.mmm.data.api.ContentObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface ContentSecurityObject extends ContentObject {
+public abstract interface ContentSecurityObject extends DataObject {
 
 }

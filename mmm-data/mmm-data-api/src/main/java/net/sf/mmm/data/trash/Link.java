@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.trash;
 
-import net.sf.mmm.data.datatype.api.ContentId;
+import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.util.lang.api.Datatype;
 
 /**
@@ -15,7 +15,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @see #getClassifier()
  * 
  * @param <CLASS> is the type of the linked object. See
- *        {@link net.sf.mmm.data.reflection.api.ContentClass#getJavaClass()}.
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -32,11 +32,11 @@ public interface Link<CLASS> extends Datatype<CLASS> {
    * This method gets the object (entity) this link is pointing to.<br/>
    * It may be a proxy-object that is lazy loaded if specific methods are
    * called. If {@literal <CLASS>} is bound to
-   * {@link net.sf.mmm.data.api.ContentObject} it is safe to get the
-   * {@link net.sf.mmm.data.api.ContentObject#getContentId() content ID}
+   * {@link net.sf.mmm.data.api.DataObject} it is safe to get the
+   * {@link net.sf.mmm.data.api.DataObject#getContentId() content ID}
    * without retrieving the actual object from the repository. This way you can
    * filter {@link Link}s according to their
-   * {@link net.sf.mmm.data.datatype.api.ContentId#getClassId() type}
+   * {@link net.sf.mmm.data.api.datatype.DataId#getClassId() type}
    * extremely fast (@see
    * {@link LinkList#getLinks(net.sf.mmm.util.filter.api.Filter)}).
    * 

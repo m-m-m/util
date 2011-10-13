@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.security.api;
 
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
 
 /**
  * This is the interface for an action. Such object represents an operation that
- * can be performed on a {@link ContentObject}.
+ * can be performed on a {@link DataObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -16,51 +16,51 @@ public interface ContentAction extends ContentSecurityObject {
 
   /**
    * The {@link #getTitle() name} of the action required to read a
-   * {@link ContentObject} or more precise a
-   * {@link net.sf.mmm.data.reflection.api.ContentField field} of it.
+   * {@link DataObject} or more precise a
+   * {@link net.sf.mmm.data.api.reflection.DataField field} of it.
    */
   String ACTION_READ = "read";
 
   /**
    * The {@link #getTitle() name} of the action required to write a
-   * {@link ContentObject} or more precise a
-   * {@link net.sf.mmm.data.reflection.api.ContentField field} of it.
+   * {@link DataObject} or more precise a
+   * {@link net.sf.mmm.data.api.reflection.DataField field} of it.
    */
   String ACTION_WRITE = "write";
 
   /**
    * The {@link #getTitle() name} of the action required to create a
-   * {@link ContentObject}.
+   * {@link DataObject}.
    */
   String ACTION_CREATE = "create";
 
   /**
    * The {@link #getTitle() name} of the action required to {@link #isDeleted()
-   * delete} a {@link ContentObject}.
+   * delete} a {@link DataObject}.
    */
   String ACTION_DELETE = "delete";
 
   /**
    * The {@link #getTitle() name} of the action required to {@link #getLock()
-   * lock} a {@link ContentObject}.
+   * lock} a {@link DataObject}.
    */
   String ACTION_LOCK = "lock";
 
   /**
    * The {@link #getTitle() name} of the action required to rename a
-   * {@link ContentObject}.
+   * {@link DataObject}.
    */
   String ACTION_RENAME = "rename";
 
   /**
    * The {@link #getTitle() name} of the action required to copy a
-   * {@link ContentObject}.
+   * {@link DataObject}.
    */
   String ACTION_COPY = "copy";
 
   /**
    * The {@link #getTitle() name} of the action required to move a
-   * {@link ContentObject}.
+   * {@link DataObject}.
    */
   String ACTION_MOVE = "move";
 

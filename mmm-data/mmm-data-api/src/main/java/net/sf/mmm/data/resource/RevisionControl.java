@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource;
 
-import net.sf.mmm.data.api.ContentClassAnnotation;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
  * This enum contains the available types that configure the
- * {@link ContentClassAnnotation#revisionControl() revision-control}.
+ * {@link DataClassAnnotation#revisionControl() revision-control}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

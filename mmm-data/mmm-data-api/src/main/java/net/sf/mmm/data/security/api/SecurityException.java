@@ -5,16 +5,16 @@ package net.sf.mmm.data.security.api;
 
 import java.util.Map;
 
-import net.sf.mmm.data.api.ContentException;
+import net.sf.mmm.data.api.DataException;
 
 /**
- * This exception is used if a {@link net.sf.mmm.data.api.ContentObject
+ * This exception is used if a {@link net.sf.mmm.data.api.DataObject
  * content-object} was accessed violating a security constraint.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SecurityException extends ContentException {
+public class SecurityException extends DataException {
 
   /** uid for serialization */
   private static final long serialVersionUID = 3257285846510940725L;

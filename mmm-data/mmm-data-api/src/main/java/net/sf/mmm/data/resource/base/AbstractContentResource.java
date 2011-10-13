@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource.base;
 
-import net.sf.mmm.data.api.ContentClassAnnotation;
-import net.sf.mmm.data.api.ContentFieldAnnotation;
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.base.AbstractContentObject;
-import net.sf.mmm.data.datatype.api.ContentId;
 import net.sf.mmm.data.resource.RevisionControl;
 import net.sf.mmm.data.resource.api.ContentResource;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.data.resource.api.ContentResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentResource.CLASS_ID, title = ContentResource.CLASS_NAME, isExtendable = true, revisionControl = RevisionControl.YES)
+@DataClassAnnotation(id = ContentResource.CLASS_ID, title = ContentResource.CLASS_NAME, isExtendable = true, revisionControl = RevisionControl.YES)
 public abstract class AbstractContentResource extends AbstractContentObject implements
     ContentResource {
 
@@ -57,7 +57,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
    * @param parent is the {@link #getParent() parent}.
    * @param id is the {@link #getContentId() ID}.
    */
-  public AbstractContentResource(String name, AbstractContentResource parent, ContentId id) {
+  public AbstractContentResource(String name, AbstractContentResource parent, DataId id) {
 
     super(name, id);
     setParent(parent);
@@ -83,7 +83,7 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
   /**
    * {@inheritDoc}
    */
-  @ContentFieldAnnotation(id = 56)
+  @DataFieldAnnotation(id = 56)
   public final AbstractContentResource getProxyTarget() {
 
     return this.proxyTarget;
@@ -115,11 +115,11 @@ public abstract class AbstractContentResource extends AbstractContentObject impl
       AbstractContentObjectModifier {
 
     /**
-     * Sets the <code>{@link ContentObject#getParent() parent}</code> of the
+     * Sets the <code>{@link DataObject#getParent() parent}</code> of the
      * given <code>resource</code>.
      * 
      * @param resource is the resource to modify.
-     * @param parent is the {@link ContentObject#getParent() parent} to set.
+     * @param parent is the {@link DataObject#getParent() parent} to set.
      */
     protected void setContentResourceParent(AbstractContentResource resource,
         AbstractContentResource parent) {

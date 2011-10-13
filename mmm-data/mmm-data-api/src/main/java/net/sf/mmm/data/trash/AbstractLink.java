@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * This is the abstract base implementation of the {@link Link} interface.
  * 
  * @param <CLASS> is the type of the linked object. See
- *        {@link net.sf.mmm.data.reflection.api.ContentClass#getJavaClass()}.
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

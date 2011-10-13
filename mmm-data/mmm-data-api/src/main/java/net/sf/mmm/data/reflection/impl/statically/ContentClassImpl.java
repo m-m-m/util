@@ -3,20 +3,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.reflection.impl.statically;
 
-import net.sf.mmm.data.api.ContentClassAnnotation;
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.base.AbstractContentObject;
-import net.sf.mmm.data.datatype.api.ContentId;
-import net.sf.mmm.data.reflection.api.ContentClass;
-import net.sf.mmm.data.reflection.base.AbstractContentClass;
+import net.sf.mmm.data.base.reflection.AbstractContentClass;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.data.reflection.api.ContentClass} interface.
+ * {@link net.sf.mmm.data.api.reflection.DataClass} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentClass.CLASS_ID, title = ContentClass.CLASS_NAME)
+@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_NAME)
 public final class ContentClassImpl extends AbstractContentClass {
 
   /** UID for serialization. */
@@ -36,7 +36,7 @@ public final class ContentClassImpl extends AbstractContentClass {
    * @param name is the {@link #getTitle() name}.
    * @param id is the {@link #getContentId() ID}.
    */
-  public ContentClassImpl(String name, ContentId id) {
+  public ContentClassImpl(String name, DataId id) {
 
     super(name, id);
   }

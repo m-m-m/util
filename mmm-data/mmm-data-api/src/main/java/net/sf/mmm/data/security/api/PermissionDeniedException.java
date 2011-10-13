@@ -8,7 +8,7 @@ import net.sf.mmm.data.NlsBundleDataApi;
 /**
  * This exception is thrown if a {@link ContentUser} tried to perform an
  * {@link ContentAction action} on an
- * {@link net.sf.mmm.data.api.ContentObject ContentObject} without having the
+ * {@link net.sf.mmm.data.api.DataObject ContentObject} without having the
  * appropriate {@link ContentRule permissions}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource.impl;
 
-import net.sf.mmm.data.api.ContentClassAnnotation;
-import net.sf.mmm.data.api.ContentFieldAnnotation;
-import net.sf.mmm.data.datatype.api.ContentId;
+import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.resource.api.ContentFolder;
 import net.sf.mmm.data.resource.base.AbstractContentResource;
 
@@ -16,7 +16,7 @@ import net.sf.mmm.data.resource.base.AbstractContentResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ContentClassAnnotation(id = ContentFolder.CLASS_ID, title = ContentFolder.CLASS_NAME)
+@DataClassAnnotation(id = ContentFolder.CLASS_ID, title = ContentFolder.CLASS_NAME)
 public final class ContentFolderImpl extends AbstractContentResource implements ContentFolder {
 
   /** UID for serialization. */
@@ -37,7 +37,7 @@ public final class ContentFolderImpl extends AbstractContentResource implements 
    * @param parent is the {@link #getParent() parent}.
    * @param id is the {@link #getContentId() ID}.
    */
-  public ContentFolderImpl(String name, ContentFolderImpl parent, ContentId id) {
+  public ContentFolderImpl(String name, ContentFolderImpl parent, DataId id) {
 
     super(name, parent, id);
   }
@@ -57,7 +57,7 @@ public final class ContentFolderImpl extends AbstractContentResource implements 
    * {@inheritDoc}
    */
   @Override
-  @ContentFieldAnnotation(id = 70)
+  @DataFieldAnnotation(id = 70)
   public ContentFolderImpl getParent() {
 
     return (ContentFolderImpl) super.getParent();

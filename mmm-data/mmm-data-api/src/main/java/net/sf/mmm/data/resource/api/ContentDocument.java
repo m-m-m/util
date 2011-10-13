@@ -22,13 +22,13 @@ package net.sf.mmm.data.resource.api;
 public abstract interface ContentDocument extends ContentResource {
 
   /**
-   * The name of the {@link net.sf.mmm.data.reflection.api.ContentClass}
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataClass}
    * reflecting {@link ContentFolder}.
    */
   String CLASS_NAME = "ContentDocument";
 
   /**
-   * The ID of the {@link net.sf.mmm.data.reflection.api.ContentClass} reflecting
+   * The ID of the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
    * this type.
    */
   short CLASS_ID = 23;

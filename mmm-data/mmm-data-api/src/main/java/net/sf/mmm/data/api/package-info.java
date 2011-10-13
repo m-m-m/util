@@ -5,7 +5,7 @@
  * Provides the general API for accessing content from the repository.
  * <a name="documentation"/><h2>Content API</h2> 
  * This package contains the general API of the content. Content in this context 
- * is identified by instances of {@link net.sf.mmm.data.api.ContentObject}.
+ * is identified by instances of {@link net.sf.mmm.data.api.DataObject}.
  */
 package net.sf.mmm.data.api;
 

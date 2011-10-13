@@ -5,14 +5,14 @@ package net.sf.mmm.data.resource.api;
 
 import java.util.List;
 
-import net.sf.mmm.data.api.ContentFieldAnnotation;
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 
 /**
  * This is the interface for a resource of the content repository. A resource is
- * a {@link net.sf.mmm.data.api.ContentObject content-object} that is
+ * a {@link net.sf.mmm.data.api.DataObject content-object} that is
  * typically
- * {@link net.sf.mmm.data.reflection.api.ContentClass#isRevisionControlled()
+ * {@link net.sf.mmm.data.api.reflection.DataClass#isRevisionControlled()
  * revision-controlled}. <br>
  * The following resources that must always be present:
  * <ul>
@@ -22,7 +22,7 @@ import net.sf.mmm.data.api.ContentObject;
  * Additional resource-types may be customized and derive from
  * {@link ContentResource}. Generic components of the project (including
  * plugins) need to access additional fields of a custom resource-type via the
- * content-model (see {@link net.sf.mmm.data.reflection.api.ContentField}).
+ * content-model (see {@link net.sf.mmm.data.api.reflection.DataField}).
  * Depending on the implementation of the persistence these resource-types may
  * NOT have a specific java implementation or it is NOT used. Custom
  * implementations are free to bypass this API and directly work on the specific
@@ -32,16 +32,16 @@ import net.sf.mmm.data.api.ContentObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface ContentResource extends ContentObject {
+public abstract interface ContentResource extends DataObject {
 
   /**
-   * The name of the {@link net.sf.mmm.data.reflection.api.ContentClass}
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataClass}
    * reflecting this type.
    */
   String CLASS_NAME = "ContentResource";
 
   /**
-   * The ID of the {@link net.sf.mmm.data.reflection.api.ContentClass}
+   * The ID of the {@link net.sf.mmm.data.api.reflection.DataClass}
    * reflecting this type.
    */
   short CLASS_ID = 20;
@@ -55,12 +55,12 @@ public abstract interface ContentResource extends ContentObject {
    * This method gets the parent of this object. This will typically be the
    * {@link #isFolder() folder} containing the object.
    * 
-   * @return the parent or <code>null</code> if the {@link ContentObject} has no
+   * @return the parent or <code>null</code> if the {@link DataObject} has no
    *         parent. The root
    *         {@link net.sf.mmm.data.resource.api.ContentFolder folder} is
    *         indicated by returning <code>null</code> as parent.
    */
-  @ContentFieldAnnotation(id = 4)
+  @DataFieldAnnotation(id = 4)
   ContentResource getParent();
 
   /**
@@ -69,14 +69,14 @@ public abstract interface ContentResource extends ContentObject {
    * 
    * @return the path of the resource.
    */
-  @ContentFieldAnnotation(id = 3, isTransient = true, isFinal = true)
+  @DataFieldAnnotation(id = 3, isTransient = true, isFinal = true)
   String getPath();
 
   /**
    * This method gets the {@link List} containing all direct children of this
    * object. If this object is NOT a {@link #isFolder() folder} the result will
    * always be an {@link List#isEmpty() empty} {@link List}.<br>
-   * Typically the direct children are the {@link ContentObject}s that have this
+   * Typically the direct children are the {@link DataObject}s that have this
    * object as {@link #getParent() parent}.<br>
    * <b>ATTENTION:</b><br>
    * For some specific entities this method may return children that do NOT have
@@ -87,8 +87,8 @@ public abstract interface ContentResource extends ContentObject {
    * 
    * @return the child resources.
    */
-  @ContentFieldAnnotation(id = 5, inverseRelationFieldId = 4)
-  List<? extends ContentObject> getChildren();
+  @DataFieldAnnotation(id = 5, inverseRelationFieldId = 4)
+  List<? extends DataObject> getChildren();
 
   // /**
   // * This method gets the version-information of this object (this revision).

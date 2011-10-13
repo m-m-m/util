@@ -3,17 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.trash;
 
-import net.sf.mmm.data.api.ContentObject;
+import net.sf.mmm.data.api.DataObject;
 
 /**
  * This is the implementation of {@link net.sf.mmm.data.trash.Link}.
  * 
  * @param <CLASS> is the type of the linked object. See
- *        {@link net.sf.mmm.data.reflection.api.ContentClass#getJavaClass()}.
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class LinkImpl<CLASS extends ContentObject> extends AbstractLink<CLASS> {
+public class LinkImpl<CLASS extends DataObject> extends AbstractLink<CLASS> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3818102518986171086L;

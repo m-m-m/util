@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource.impl;
 
-import net.sf.mmm.data.datatype.api.MutableBlob;
+import net.sf.mmm.data.api.datatype.MutableBlob;
 import net.sf.mmm.data.resource.api.ContentFile;
 import net.sf.mmm.data.resource.base.AbstractContentDocument;
 
