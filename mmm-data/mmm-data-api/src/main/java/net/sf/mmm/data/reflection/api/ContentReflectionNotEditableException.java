@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.reflection.api;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 
 /**
  * This exception is thrown if the {@link MutableContentReflectionService
@@ -25,7 +25,7 @@ public final class ContentReflectionNotEditableException extends ContentReflecti
    */
   public ContentReflectionNotEditableException() {
 
-    super(NlsBundleContentApi.ERR_MODEL_NOT_EDITABLE);
+    super(NlsBundleDataApi.ERR_MODEL_NOT_EDITABLE);
   }
 
 }

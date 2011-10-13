@@ -11,12 +11,12 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsBundleContentApi extends AbstractResourceBundle {
+public class NlsBundleDataApi extends AbstractResourceBundle {
 
   /**
    * The constructor.
    */
-  public NlsBundleContentApi() {
+  public NlsBundleDataApi() {
 
     super();
   }

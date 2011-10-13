@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 
 /**
  * This is the exception thrown if a cast failed in the context of
@@ -39,7 +39,7 @@ public class ContentCastException extends ContentException {
    */
   public ContentCastException(String source, String destination) {
 
-    super(NlsBundleContentApi.ERR_CAST, toMap(KEY_SOURCE, source, KEY_TARGET_TYPE, destination));
+    super(NlsBundleDataApi.ERR_CAST, toMap(KEY_SOURCE, source, KEY_TARGET_TYPE, destination));
   }
 
   /**
@@ -63,7 +63,7 @@ public class ContentCastException extends ContentException {
    */
   public ContentCastException(String source, String destination, Throwable nested) {
 
-    super(nested, NlsBundleContentApi.ERR_CAST, toMap(KEY_SOURCE, source, KEY_TARGET_TYPE,
+    super(nested, NlsBundleDataApi.ERR_CAST, toMap(KEY_SOURCE, source, KEY_TARGET_TYPE,
         destination));
   }
 

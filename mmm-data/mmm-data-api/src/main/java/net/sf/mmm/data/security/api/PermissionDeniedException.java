@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.security.api;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 
 /**
  * This exception is thrown if a {@link ContentUser} tried to perform an
@@ -29,7 +29,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(String subject, String operation, String object) {
 
-    super(NlsBundleContentApi.ERR_PERMISSION_DENIED, toMap(KEY_USER, subject, KEY_OPERATION,
+    super(NlsBundleDataApi.ERR_PERMISSION_DENIED, toMap(KEY_USER, subject, KEY_OPERATION,
         operation, KEY_OBJECT, object));
   }
 }

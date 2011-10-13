@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.reflection.base;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 import net.sf.mmm.data.reflection.api.ContentFieldModifiers;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
@@ -282,11 +282,11 @@ public class ContentFieldModifiersBean extends AbstractContentModifiersBean impl
     if (isTransient) {
       if (!isReadOnly) {
         throw new ContentModifiersIllegalException(
-            NlsBundleContentApi.ERR_MODIFIERS_TRANSIENT_MUTABLE);
+            NlsBundleDataApi.ERR_MODIFIERS_TRANSIENT_MUTABLE);
       }
       if (isStatic) {
         throw new ContentModifiersIllegalException(
-            NlsBundleContentApi.ERR_MODIFIERS_TRANSIENT_STATIC);
+            NlsBundleDataApi.ERR_MODIFIERS_TRANSIENT_STATIC);
       }
     }
   }

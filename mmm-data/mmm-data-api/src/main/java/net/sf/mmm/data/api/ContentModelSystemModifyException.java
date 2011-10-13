@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 import net.sf.mmm.data.reflection.api.ContentReflectionException;
 
 /**
@@ -30,6 +30,6 @@ public class ContentModelSystemModifyException extends ContentReflectionExceptio
    */
   public ContentModelSystemModifyException(ContentObject systemObject) {
 
-    super(NlsBundleContentApi.ERR_MODIFY_SYSTEM, toMap(KEY_OBJECT, systemObject));
+    super(NlsBundleDataApi.ERR_MODIFY_SYSTEM, toMap(KEY_OBJECT, systemObject));
   }
 }

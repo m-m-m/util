@@ -5,7 +5,7 @@ package net.sf.mmm.data.reflection.base;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 import net.sf.mmm.data.reflection.api.ContentClassModifiers;
 
 /**
@@ -190,14 +190,14 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       boolean isExtendable) throws ContentModifiersIllegalException {
 
     if (isFinal && isExtendable) {
-      throw new ContentModifiersIllegalException(NlsBundleContentApi.ERR_MODIFIERS_FINAL_EXTENDABLE);
+      throw new ContentModifiersIllegalException(NlsBundleDataApi.ERR_MODIFIERS_FINAL_EXTENDABLE);
     }
     if (!isExtendable && !isFinal && !isSystem) {
       throw new ContentModifiersIllegalException(
-          NlsBundleContentApi.ERR_MODIFIERS_USER_UNEXTENDABLE);
+          NlsBundleDataApi.ERR_MODIFIERS_USER_UNEXTENDABLE);
     }
     if (isAbstract && isFinal) {
-      throw new ContentModifiersIllegalException(NlsBundleContentApi.ERR_MODIFIERS_ABSTRACT_FINAL);
+      throw new ContentModifiersIllegalException(NlsBundleDataApi.ERR_MODIFIERS_ABSTRACT_FINAL);
     }
   }
 

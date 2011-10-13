@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.reflection.base;
 
-import net.sf.mmm.data.NlsBundleContentApi;
+import net.sf.mmm.data.NlsBundleDataApi;
 import net.sf.mmm.data.reflection.api.ContentClassLoader;
 import net.sf.mmm.data.reflection.api.ContentReflectionException;
 
@@ -27,7 +27,7 @@ public class ContentClassLoaderException extends ContentReflectionException {
    */
   public ContentClassLoaderException(Throwable nested, String context) {
 
-    super(nested, NlsBundleContentApi.ERR_LOAD_CLASS, context);
+    super(nested, NlsBundleDataApi.ERR_LOAD_CLASS, context);
   }
 
 }
