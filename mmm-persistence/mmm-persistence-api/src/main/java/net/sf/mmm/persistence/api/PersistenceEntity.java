@@ -57,7 +57,7 @@ public interface PersistenceEntity<ID> {
    * @return the ID of this entity. It may be <code>null</code> if the object is
    *         {@link #isPersistent() transient}.
    */
-  Object getId();
+  ID getId();
 
   /**
    * This method determines if this entity is <em>persistent</em>. A

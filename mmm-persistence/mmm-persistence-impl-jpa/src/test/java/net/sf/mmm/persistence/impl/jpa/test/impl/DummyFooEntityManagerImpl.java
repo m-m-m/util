@@ -6,7 +6,9 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 import javax.inject.Named;
 
 import net.sf.mmm.persistence.impl.jpa.JpaPersistenceEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;
 
 /**
  * This is the implementation of the {@link DummyFooEntityManager} interface.
@@ -14,8 +16,26 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class DummyFooEntityManagerImpl extends JpaPersistenceEntityManager<Integer, DummyFooEntityImpl>
+public class DummyFooEntityManagerImpl extends JpaPersistenceEntityManager<Integer, DummyFooEntity>
     implements DummyFooEntityManager {
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Class<DummyFooEntityView> getEntityClassReadOnly() {
+
+    return DummyFooEntityView.class;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Class<DummyFooEntity> getEntityClassReadWrite() {
+
+    return DummyFooEntity.class;
+  }
 
   /**
    * {@inheritDoc}

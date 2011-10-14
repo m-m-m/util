@@ -8,7 +8,10 @@ import java.util.concurrent.Callable;
 import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityView;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyFooEntityImpl;
 import net.sf.mmm.transaction.api.TransactionExecutor;
@@ -38,15 +41,18 @@ public class PersistenceTest {
     TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
         .getComponent(TransactionExecutor.class);
 
-    DummyFooEntityImpl foo = transactionExecutor.doInTransaction(new Callable<DummyFooEntityImpl>() {
+    DummyFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyFooEntity>() {
 
-      public DummyFooEntityImpl call() throws Exception {
+      public DummyFooEntity call() throws Exception {
 
         return createAndSave();
       }
     });
+    // TODO: Bug in eclipse generic compiler?
+    // remove casts and see...
     final Integer fooId = foo.getId();
     final Integer barId = foo.getBar().getId();
+
     System.out.println("--------------------------------------------------------");
     System.out.println(fooId);
     System.out.println(barId);
@@ -80,17 +86,17 @@ public class PersistenceTest {
     Assert.assertNotNull(fooId);
     PersistenceManager persistenceManager = getPersistenceManager();
     DummyFooEntityManager fooManager = (DummyFooEntityManager) persistenceManager
-        .getManager(DummyFooEntityImpl.class);
-    DummyFooEntityImpl foo = fooManager.load(fooId);
+        .getManager(DummyFooEntity.class);
+    DummyFooEntity foo = fooManager.load(fooId);
     Assert.assertEquals(42, foo.getNumber());
     DummyBarEntity bar = foo.getBar();
     Assert.assertNotNull(bar);
     Assert.assertEquals("value42", bar.getValue());
     foo.setNumber(24);
-    DummyBarEntityImpl bar2 = new DummyBarEntityImpl();
-    bar2.setValue("24value");
     DummyBarEntityManager barManager = (DummyBarEntityManager) persistenceManager
-        .getManager(DummyBarEntityImpl.class);
+        .getManager(DummyBarEntity.class);
+    DummyBarEntity bar2 = barManager.create();
+    bar2.setValue("24value");
     barManager.save(bar2);
     foo.setBar(bar2);
     fooManager.save(foo);
@@ -101,14 +107,14 @@ public class PersistenceTest {
     Assert.assertNotNull(fooId);
     PersistenceManager persistenceManager = getPersistenceManager();
     DummyFooEntityManager fooManager = (DummyFooEntityManager) persistenceManager
-        .getManager(DummyFooEntityImpl.class);
-    DummyFooEntityImpl foo = fooManager.load(fooId);
+        .getManager(DummyFooEntity.class);
+    DummyFooEntity foo = fooManager.load(fooId);
     Assert.assertEquals(24, foo.getNumber());
     DummyBarEntity bar2 = foo.getBar();
     Assert.assertNotNull(bar2);
     Assert.assertEquals("24value", bar2.getValue());
     DummyBarEntityManager barManager = (DummyBarEntityManager) persistenceManager
-        .getManager(DummyBarEntityImpl.class);
+        .getManager(DummyBarEntity.class);
     Assert.assertNotNull(barId);
     DummyBarEntity bar = barManager.load(barId);
     Assert.assertEquals("value42", bar.getValue());
@@ -116,26 +122,28 @@ public class PersistenceTest {
     fooManager.delete(foo);
   }
 
-  protected DummyFooEntityImpl createAndSave() {
+  protected DummyFooEntity createAndSave() {
 
     PersistenceManager persistenceManager = getPersistenceManager();
     DummyFooEntityManager fooManager = (DummyFooEntityManager) persistenceManager
-        .getManager(DummyFooEntityImpl.class);
-    Class<? super DummyFooEntityImpl> entityClassReadOnly = fooManager.getEntityClassReadOnly();
+        .getManager(DummyFooEntity.class);
+    Assert.assertSame(DummyFooEntity.class, fooManager.getEntityClassReadWrite());
+    Assert.assertSame(DummyFooEntityView.class, fooManager.getEntityClassReadOnly());
     Assert.assertSame(DummyFooEntityImpl.class, fooManager.getEntityClassImplementation());
     Assert.assertTrue(fooManager instanceof DummyFooEntityManager);
     DummyBarEntityManager barManager = (DummyBarEntityManager) persistenceManager
-        .getManager(DummyBarEntityImpl.class);
+        .getManager(DummyBarEntity.class);
+    Assert.assertSame(DummyBarEntityView.class, barManager.getEntityClassReadOnly());
+    Assert.assertSame(DummyBarEntity.class, barManager.getEntityClassReadWrite());
     Assert.assertSame(DummyBarEntityImpl.class, barManager.getEntityClassImplementation());
     Assert.assertTrue(barManager instanceof DummyBarEntityManager);
-    DummyBarEntityImpl bar = new DummyBarEntityImpl();
+    DummyBarEntity bar = barManager.create();
     bar.setValue("value42");
     barManager.save(bar);
-    DummyFooEntityImpl foo = new DummyFooEntityImpl();
+    DummyFooEntity foo = fooManager.create();
     foo.setNumber(42);
     foo.setBar(bar);
     fooManager.save(foo);
     return foo;
   }
-
 }

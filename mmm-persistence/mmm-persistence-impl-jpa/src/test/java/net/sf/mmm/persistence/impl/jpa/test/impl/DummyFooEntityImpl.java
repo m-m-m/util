@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import net.sf.mmm.persistence.impl.jpa.JpaIntegerIdPersistenceEntity;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 
 /**
  * This is a simple entity for testing.
@@ -14,7 +16,7 @@ import net.sf.mmm.persistence.impl.jpa.JpaIntegerIdPersistenceEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyFooEntityImpl extends JpaIntegerIdPersistenceEntity {
+public class DummyFooEntityImpl extends JpaIntegerIdPersistenceEntity implements DummyFooEntity {
 
   /** @see #getNumber() */
   private int number;
@@ -58,9 +60,9 @@ public class DummyFooEntityImpl extends JpaIntegerIdPersistenceEntity {
   /**
    * @param bar is the bar to set
    */
-  public void setBar(DummyBarEntityImpl bar) {
+  public void setBar(DummyBarEntity bar) {
 
-    this.bar = bar;
+    this.bar = (DummyBarEntityImpl) bar;
   }
 
 }

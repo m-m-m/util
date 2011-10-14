@@ -12,7 +12,7 @@ import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DummyBarEntityManager extends PersistenceEntityManager<Integer, DummyBarEntityImpl> {
+public interface DummyBarEntityManager extends PersistenceEntityManager<Integer, DummyBarEntity> {
 
   //
 

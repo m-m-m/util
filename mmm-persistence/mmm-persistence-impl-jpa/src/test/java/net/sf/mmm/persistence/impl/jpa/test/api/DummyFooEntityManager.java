@@ -4,15 +4,14 @@
 package net.sf.mmm.persistence.impl.jpa.test.api;
 
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
-import net.sf.mmm.persistence.impl.jpa.test.impl.DummyFooEntityImpl;
 
 /**
  * This is the interface for the {@link PersistenceEntityManager} responsible
- * for the entity {@link DummyFooEntityImpl}.
+ * for the entity {@link DummyFooEntity}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DummyFooEntityManager extends PersistenceEntityManager<Integer, DummyFooEntityImpl> {
+public interface DummyFooEntityManager extends PersistenceEntityManager<Integer, DummyFooEntity> {
 
   //
 
