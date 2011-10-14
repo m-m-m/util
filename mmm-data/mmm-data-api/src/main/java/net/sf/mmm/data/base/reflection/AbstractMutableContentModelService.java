@@ -34,7 +34,7 @@ import net.sf.mmm.util.reflect.base.MappedClassResolver;
 
 /**
  * This an the abstract base implementation of the
- * {@link net.sf.mmm.data.api.reflection.ContentReflectionService
+ * {@link net.sf.mmm.data.api.reflection.DataReflectionService
  * ContentModelService} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

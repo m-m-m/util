@@ -23,10 +23,10 @@ import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
-import net.sf.mmm.data.api.reflection.ContentReflectionService;
+import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
-import net.sf.mmm.data.api.reflection.access.ContentFieldAccessor;
+import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.data.base.AbstractContentObject;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -108,7 +108,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
     this.entityFilter = new AnnotationFilter(DataClassAnnotation.class);
     this.factory = XMLInputFactory.newInstance();
     this.classResolver = ClassResolver.CLASS_FOR_NAME_RESOLVER;
-    this.configurationResource = new ClasspathResource(ContentReflectionService.XML_MODEL_LOCATION);
+    this.configurationResource = new ClasspathResource(DataReflectionService.XML_MODEL_LOCATION);
   }
 
   /**
@@ -179,7 +179,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
         XMLStreamReader xmlReader = this.factory.createXMLStreamReader(in);
         int eventType = xmlReader.nextTag();
         assert (eventType == XMLStreamConstants.START_ELEMENT);
-        assert (ContentReflectionService.XML_TAG_ROOT.equals(xmlReader.getLocalName()));
+        assert (DataReflectionService.XML_TAG_ROOT.equals(xmlReader.getLocalName()));
         eventType = xmlReader.nextTag();
         while (eventType == XMLStreamConstants.START_ELEMENT) {
           parseConfiguration(xmlReader, context);
@@ -425,7 +425,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
    *        methods of the field.
    * @return the field accessor.
    */
-  protected ContentFieldAccessor getFieldAccessor(PojoPropertyDescriptor methodPropertyDescriptor) {
+  protected DataFieldAccessor getFieldAccessor(PojoPropertyDescriptor methodPropertyDescriptor) {
 
     Method getter = (Method) methodPropertyDescriptor.getAccessor(
         PojoPropertyAccessorNonArgMode.GET).getAccessibleObject();

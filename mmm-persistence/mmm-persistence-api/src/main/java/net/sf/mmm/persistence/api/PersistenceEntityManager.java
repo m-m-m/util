@@ -5,15 +5,17 @@ package net.sf.mmm.persistence.api;
 
 import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
- * This is the interface for a manager of a {@link #getEntityClass() specific
- * type} of {@link PersistenceEntity}. In other contexts this is often called a
- * DAO (Data Access Object). It is responsible for {@link #load(Object) loading}
- * , {@link #save(PersistenceEntity) saving} and
+ * This is the interface for a manager of a
+ * {@link #getEntityClassImplementation() specific type} of
+ * {@link PersistenceEntity}. In other contexts this is often called a DAO (Data
+ * Access Object). It is responsible for {@link #load(Object) loading} ,
+ * {@link #save(PersistenceEntity) saving} and
  * {@link net.sf.mmm.persistence.api.search.PersistenceSearcher searching} all
- * {@link PersistenceEntity entities} of the {@link #getEntityClass() according
- * type}.<br>
+ * {@link PersistenceEntity entities} of the
+ * {@link #getEntityClassImplementation() according type}.<br>
  * For each (non-abstract) implementation of {@link PersistenceEntity} there
  * should exists one instance of this interface. Typically when you create a
  * custom {@link PersistenceEntity entity} you will also create a custom
@@ -29,7 +31,8 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @param <ID> is the type of the {@link PersistenceEntity#getId() primary key}
  *        of the managed {@link PersistenceEntity}.
- * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the
+ *        managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,12 +40,47 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public interface PersistenceEntityManager<ID, ENTITY extends PersistenceEntity<ID>> {
 
   /**
-   * This method gets the class reflecting the {@link PersistenceEntity} managed
-   * by this {@link PersistenceEntityManager}.
+   * This method creates a new, empty, and transient instance of the
+   * {@link #getEntityClassImplementation() managed} entity. The default
+   * implementation is {@link Class#newInstance()}, however more specific
+   * implementations are possible. This allows to use interfaces for entities
+   * and use the persistence layer as API without knowing the implementation.
+   * However you are still free to ignore this method and work with the POJO
+   * approach.
+   * 
+   * @return the new instance.
+   * @throws ReflectionException is the instantiation failed.
+   */
+  ENTITY create() throws ReflectionException;
+
+  /**
+   * This method gets the implementation class reflecting the
+   * {@link PersistenceEntity} managed by this {@link PersistenceEntityManager}.
    * 
    * @return the according entity-class.
    */
-  Class<ENTITY> getEntityClass();
+  Class<? extends ENTITY> getEntityClassImplementation();
+
+  /**
+   * This method gets the {@link #getEntityClassImplementation() entity-class}
+   * with the view for reading the entity. This may be the same as
+   * {@link #getEntityClassImplementation()} but can also be an interface with
+   * the getters of the entity.
+   * 
+   * @return the according entity-class.
+   */
+  Class<? super ENTITY> getEntityClassReadOnly();
+
+  /**
+   * This method gets the {@link #getEntityClassImplementation() entity-class}
+   * with the view for reading and writing the entity. This may be the same as
+   * {@link #getEntityClassImplementation()} but can also be an interface with
+   * the getters and setters (typically extending
+   * {@link #getEntityClassReadOnly()}) of the entity.
+   * 
+   * @return the according entity-class.
+   */
+  Class<ENTITY> getEntityClassReadWrite();
 
   /**
    * This method loads the {@link PersistenceEntity} with the given

@@ -4,7 +4,7 @@
 package net.sf.mmm.data.base.reflection;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.reflection.access.ContentFieldAccessor;
+import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.ReadOnlyException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
@@ -19,7 +19,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentFieldAccessorPojo<CLASS, FIELD> implements ContentFieldAccessor<CLASS, FIELD> {
+public class ContentFieldAccessorPojo<CLASS, FIELD> implements DataFieldAccessor<CLASS, FIELD> {
 
   /** The type of the content-field to access. */
   private final Class<FIELD> fieldClass;

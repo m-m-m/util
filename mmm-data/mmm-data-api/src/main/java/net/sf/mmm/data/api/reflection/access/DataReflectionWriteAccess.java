@@ -18,7 +18,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentReflectionWriteAccess {
+public interface DataReflectionWriteAccess {
 
   /**
    * This method creates a sub-class of the given class.

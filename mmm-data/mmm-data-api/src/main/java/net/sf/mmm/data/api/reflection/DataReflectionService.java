@@ -4,7 +4,7 @@
 package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.reflection.access.ContentReflectionReadAccess;
+import net.sf.mmm.data.api.reflection.access.DataReflectionReadAccess;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
@@ -26,7 +26,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface ContentReflectionService extends ContentReflectionReadAccess {
+public interface DataReflectionService extends DataReflectionReadAccess {
 
   /** The location of the content-model. */
   String XML_MODEL_LOCATION = "net/sf/mmm/content/model/ContentModel.xml";

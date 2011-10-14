@@ -40,7 +40,7 @@ public interface DataClassModifiers extends DataModifiers {
 
   /**
    * This method determines if the class can be
-   * {@link net.sf.mmm.data.api.reflection.access.ContentReflectionWriteAccess#createContentClass(DataClass, String, ContentClassModifiers)
+   * {@link net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess#createContentClass(DataClass, String, ContentClassModifiers)
    * extended} by the user.<br>
    * A {@link DataModifiers#isFinal() final} class is NOT extendable. In
    * advance a {@link DataModifiers#isSystem() system} class that is NOT

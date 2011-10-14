@@ -25,7 +25,7 @@ public class DummyRevisionedFooEntityManager extends
   /**
    * {@inheritDoc}
    */
-  public Class<DummyRevisionedFooEntity> getEntityClass() {
+  public Class<DummyRevisionedFooEntity> getEntityClassImplementation() {
 
     return DummyRevisionedFooEntity.class;
   }

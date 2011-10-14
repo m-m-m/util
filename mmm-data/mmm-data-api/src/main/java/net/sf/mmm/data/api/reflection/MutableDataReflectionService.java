@@ -4,13 +4,13 @@
 package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.reflection.access.ContentReflectionWriteAccess;
+import net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
 
 /**
- * This interface extends the {@link ContentReflectionService} interface with
+ * This interface extends the {@link DataReflectionService} interface with
  * methods to edit the content-model (reflection).<br>
  * <b>ATTENTION:</b><br>
  * Please note that an {@link #isEditable() editable} content-model requires
@@ -21,8 +21,8 @@ import net.sf.mmm.util.event.api.EventSource;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface MutableDataReflectionService extends ContentReflectionService,
-    ContentReflectionWriteAccess {
+public interface MutableDataReflectionService extends DataReflectionService,
+    DataReflectionWriteAccess {
 
   /**
    * This method determines if this service provides a content-model that is
@@ -36,7 +36,7 @@ public interface MutableDataReflectionService extends ContentReflectionService,
    * This method gets the event registrar where listeners can be registered so
    * they receive events about changes of the content model. <br>
    * 
-   * @see ContentReflectionWriteAccess
+   * @see DataReflectionWriteAccess
    * 
    *      Instead of extending the {@link EventSource} interface an instance of
    *      the interface is returned by this method. This gives more flexibility

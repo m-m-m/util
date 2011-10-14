@@ -6,27 +6,27 @@ package net.sf.mmm.data.api.repository;
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
-import net.sf.mmm.data.api.reflection.ContentReflectionService;
+import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.repository.access.ContentObjectReadAccess;
 import net.sf.mmm.data.resource.api.ContentResource;
 
 /**
- * This is the interface for the {@link ContentRepository}, the central
+ * This is the interface for the {@link DataRepository}, the central
  * component of the system. It allows to read and write {@link DataObject}s
  * and acts as persistence layer.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentRepository extends ContentObjectReadAccess, ContentObjectWriteAccess {
+public interface DataRepository extends ContentObjectReadAccess, DataObjectWriteAccess {
 
   /**
-   * This method gets the {@link ContentReflectionService} that allows to reflect the
-   * entities managed by this {@link ContentRepository}.
+   * This method gets the {@link DataReflectionService} that allows to reflect the
+   * entities managed by this {@link DataRepository}.
    * 
    * @return the content-model-service.
    */
-  ContentReflectionService getContentModel();
+  DataReflectionService getContentModel();
 
   /**
    * This method gets the root-folder of the repository.
@@ -55,7 +55,7 @@ public interface ContentRepository extends ContentObjectReadAccess, ContentObjec
   /**
    * This method gets the raw instance of the given <code>entity</code>.<br>
    * An {@link DataObject entity} retrieved from this
-   * {@link ContentRepository repository} (e.g. via
+   * {@link DataRepository repository} (e.g. via
    * <code>{@link #get(DataId)}</code>) will be "manipulated" to add support
    * for {@link ContentResource#getProxyTarget() proxying} and
    * {@link DataObject#getParent() inheritance}. Therefore this method
@@ -63,7 +63,7 @@ public interface ContentRepository extends ContentObjectReadAccess, ContentObjec
    * the editor GUI.
    * 
    * @param <E> is the generic type of the entity.
-   * @param entity is an entity retrieved from this {@link ContentRepository
+   * @param entity is an entity retrieved from this {@link DataRepository
    *        repository} (e.g. via <code>{@link #get(DataId)}</code>).
    * @return the raw object with the original data.
    * @throws DataException if the operation fails.

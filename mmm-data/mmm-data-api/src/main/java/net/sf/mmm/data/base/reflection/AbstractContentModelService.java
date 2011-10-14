@@ -20,9 +20,9 @@ import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataReflectionEvent;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
-import net.sf.mmm.data.api.reflection.ContentReflectionService;
+import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.reflection.DataSystemModifyException;
-import net.sf.mmm.data.api.reflection.access.ContentClassReadAccessByInstance;
+import net.sf.mmm.data.api.reflection.access.DataClassReadAccessByInstance;
 import net.sf.mmm.data.base.AbstractContentObject;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
@@ -30,12 +30,12 @@ import net.sf.mmm.util.event.base.AbstractSynchronizedEventSource;
 
 /**
  * This is the abstract base implementation of the
- * {@link ContentReflectionService} interface.
+ * {@link DataReflectionService} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentModelService implements ContentReflectionService {
+public abstract class AbstractContentModelService implements DataReflectionService {
 
   /** @see #getContentClass(String) */
   private final Map<String, AbstractContentClass> name2class;

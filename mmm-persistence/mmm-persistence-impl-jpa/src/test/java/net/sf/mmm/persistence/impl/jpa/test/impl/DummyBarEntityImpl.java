@@ -1,12 +1,15 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.persistence.impl.jpa;
+package net.sf.mmm.persistence.impl.jpa.test.impl;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Version;
+
+import net.sf.mmm.persistence.impl.jpa.JpaIntegerIdPersistenceEntity;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 
 /**
  * This is a simple entity for testing.
@@ -14,7 +17,7 @@ import javax.persistence.Version;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyBarEntity extends JpaIntegerIdPersistenceEntity {
+public class DummyBarEntityImpl extends JpaIntegerIdPersistenceEntity implements DummyBarEntity {
 
   private Date timestamp;
 
@@ -24,7 +27,7 @@ public class DummyBarEntity extends JpaIntegerIdPersistenceEntity {
   /**
    * The constructor.
    */
-  public DummyBarEntity() {
+  public DummyBarEntityImpl() {
 
     super();
   }

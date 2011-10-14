@@ -18,7 +18,7 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
 
   /**
    * This method gets the individual {@link RevisionedPersistenceEntityManager}
-   * {@link PersistenceEntityManager#getEntityClass() responsible} for the given
+   * {@link PersistenceEntityManager#getEntityClassImplementation() responsible} for the given
    * <code>entityClass</code>.
    * 
    * @param <ENTITY> is the generic entity-type.

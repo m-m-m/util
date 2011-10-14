@@ -10,12 +10,12 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 /**
  * This is the interface for a {@link PersistenceEntityManager} with the ability
  * of revision-control. It organizes a revision-history (journal) of the
- * {@link #getEntityClass() managed entities}.
+ * {@link #getEntityClassImplementation() managed entities}.
  * 
  * @see RevisionedPersistenceEntity
  * 
  * @param <ID> is the type of the {@link #getId() primary key}.
- * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -39,7 +39,7 @@ public interface RevisionedPersistenceEntityManager<ID, ENTITY extends Revisione
   /**
    * This method will get the {@link List} of {@link RevisionMetadata} from the
    * {@link RevisionedPersistenceEntity#getRevision() revision}-history of the
-   * {@link #getEntityClass() entity} with the given <code>id</code>.
+   * {@link #getEntityClassImplementation() entity} with the given <code>id</code>.
    * 
    * @param id is the {@link PersistenceEntity#getId() primary key} of the
    *        entity for which the history-metadata is requested.

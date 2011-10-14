@@ -19,7 +19,7 @@ import net.sf.mmm.data.api.DataSelectionTree;
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 
  * @see net.sf.mmm.data.api.DataObject
- * @see ContentReflectionService#getContentClass(net.sf.mmm.data.api.DataObject)
+ * @see DataReflectionService#getContentClass(net.sf.mmm.data.api.DataObject)
  * 
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
@@ -102,7 +102,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * This method gets an iterator of all fields declared by this class. This
    * does NOT include fields inherited from the {@link #getSuperClass()
    * super-class} except they are overridden by this class. An inherited field
-   * can be overridden (if supported by the {@link ContentReflectionService
+   * can be overridden (if supported by the {@link DataReflectionService
    * content-model}) in order to declare it more specific. Then the type of the
    * field is a subtype of the field that is overridden or the validator is more
    * restrictive.<br>
@@ -117,7 +117,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * {@link DataField#getInitiallyDefiningClass() initially defined} or
    * overridden in this class.<br>
    * An inherited field can be overridden (if supported by the
-   * {@link ContentReflectionService content-model}) in order to declare it more
+   * {@link DataReflectionService content-model}) in order to declare it more
    * specific (typically the {@link DataField#getFieldType() field-type} is
    * specialized). Such field can be identified via
    * {@link DataField#getInitiallyDefiningClass()}.

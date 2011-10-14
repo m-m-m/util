@@ -14,9 +14,9 @@ import net.sf.mmm.data.api.reflection.DataClass;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentReflectionReadAccess extends ContentClassReadAccessById,
-    ContentClassReadAccessByTitle, ContentClassReadAccessByInstance, ContentFieldReadAccessById,
-    ContentFieldReadAccessByName {
+public interface DataReflectionReadAccess extends DataClassReadAccessById,
+    DataClassReadAccessByTitle, DataClassReadAccessByInstance, DataFieldReadAccessById,
+    DataFieldReadAccessByName {
 
   /**
    * This method gets the root content class that reflects the

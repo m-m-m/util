@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * typically only one single instance of this interface active.<br>
  * The {@link PersistenceManager} acts as delegation to the
  * {@link PersistenceEntityManager}
- * {@link PersistenceEntityManager#getEntityClass() responsible} for the
+ * {@link PersistenceEntityManager#getEntityClassImplementation() responsible} for the
  * according {@link PersistenceEntity} in the invoked methods. This guarantees
  * that individual custom logic is also invoked in case of generic access.<br>
  * <b>NOTE:</b><br>
@@ -29,7 +29,7 @@ public interface PersistenceManager {
 
   /**
    * This method gets the individual {@link PersistenceEntityManager}
-   * {@link PersistenceEntityManager#getEntityClass() responsible} for the given
+   * {@link PersistenceEntityManager#getEntityClassImplementation() responsible} for the given
    * <code>entityClass</code>.
    * 
    * @param <ENTITY> is the generic entity-type.
@@ -72,9 +72,9 @@ public interface PersistenceManager {
    * 
    * @see PersistenceEntityManager#getReference(Object)
    * 
-   * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
    *        key}.
+   * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param entityClass is the class reflecting the type of the requested
    *        entity.
    * @param id is the {@link PersistenceEntity#getId() primary key} of the
@@ -85,6 +85,21 @@ public interface PersistenceManager {
    */
   <ID, ENTITY extends PersistenceEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass, ID id)
       throws ObjectNotFoundException;
+
+  /**
+   * This method creates a new and transient instance for the given
+   * <code>entityClass</code>.<br>
+   * 
+   * @see PersistenceEntityManager#create()
+   * 
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
+   * @param <ENTITY> is the generic type of the <code>entityClass</code>.
+   * @param entityClass is the {@link Class} reflecting the entity to create.
+   *        This may also be the interface of the entity.
+   * @return the new instance.
+   */
+  <ID, ENTITY extends PersistenceEntity<ID>> ENTITY create(Class<ENTITY> entityClass);
 
   /**
    * This method saves the given <code>entity</code>.<br>
@@ -108,7 +123,7 @@ public interface PersistenceManager {
    * This method gets the {@link Class} reflecting the given
    * <code>{@link PersistenceEntity entity}</code>. Unlike
    * <code>entity.{@link #getClass()}</code> this method will always return the
-   * real {@link PersistenceEntityManager#getEntityClass() class defining the
+   * real {@link PersistenceEntityManager#getEntityClassImplementation() class defining the
    * entity}.<br>
    * E.g. if the underlying implementation may create a dynamic proxy that
    * extends the entity-class and <code>entity.{@link #getClass()}</code> will

@@ -9,7 +9,7 @@ import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
-import net.sf.mmm.data.api.reflection.access.ContentFieldAccessor;
+import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueValidator;
 
@@ -42,7 +42,7 @@ public abstract class AbstractContentField<CLASS extends DataObject, FIELD> exte
   private ValueValidator constraint;
 
   /** @see #getAccessor() */
-  private ContentFieldAccessor accessor;
+  private DataFieldAccessor accessor;
 
   /**
    * The constructor.
@@ -261,7 +261,7 @@ public abstract class AbstractContentField<CLASS extends DataObject, FIELD> exte
   /**
    * {@inheritDoc}
    */
-  public ContentFieldAccessor getAccessor() {
+  public DataFieldAccessor getAccessor() {
 
     return this.accessor;
   }
@@ -269,7 +269,7 @@ public abstract class AbstractContentField<CLASS extends DataObject, FIELD> exte
   /**
    * @param accessor the accessor to set
    */
-  protected void setAccessor(ContentFieldAccessor accessor) {
+  protected void setAccessor(DataFieldAccessor accessor) {
 
     this.accessor = accessor;
   }

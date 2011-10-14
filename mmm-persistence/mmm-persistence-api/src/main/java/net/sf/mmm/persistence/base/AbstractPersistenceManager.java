@@ -40,7 +40,20 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
    */
   protected void addManager(PersistenceEntityManager<?, ?> entityManager) {
 
-    Class<?> entityClass = entityManager.getEntityClass();
+    Class<?> entityClass = entityManager.getEntityClassImplementation();
+    registerManager(entityClass, entityManager);
+    Class<?> entityClassReadOnly = entityManager.getEntityClassReadOnly();
+    if (entityClass != entityClassReadOnly) {
+      registerManager(entityClassReadOnly, entityManager);
+    }
+    Class<?> entityClassReadWrite = entityManager.getEntityClassReadWrite();
+    if ((entityClass != entityClassReadWrite) && (entityClassReadOnly != entityClassReadWrite)) {
+      registerManager(entityClassReadWrite, entityManager);
+    }
+  }
+
+  private void registerManager(Class<?> entityClass, PersistenceEntityManager<?, ?> entityManager) {
+
     if (this.class2managerMap.containsKey(entityClass)) {
       throw new DuplicateObjectException(entityManager, entityClass);
     }
@@ -78,6 +91,15 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
 
     PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
     return manager.getReference(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY create(Class<ENTITY> entityClass) {
+
+    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    return manager.create();
   }
 
   /**

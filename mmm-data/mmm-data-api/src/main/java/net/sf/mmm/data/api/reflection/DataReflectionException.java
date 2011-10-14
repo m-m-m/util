@@ -9,7 +9,7 @@ import net.sf.mmm.data.api.DataException;
 
 /**
  * This exception is thrown if something went wrong with the
- * {@link ContentReflectionService content-model}.
+ * {@link DataReflectionService content-model}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

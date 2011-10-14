@@ -13,7 +13,7 @@ import net.sf.mmm.data.api.reflection.DataField;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentFieldReadAccessByName {
+public interface DataFieldReadAccessByName {
 
   /**
    * This method gets the {@link DataField} for the given <code>id</code>.

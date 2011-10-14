@@ -24,7 +24,7 @@ import net.sf.mmm.util.nls.api.ReadOnlyException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentFieldAccessor<CLASS extends DataObject, FIELD> {
+public interface DataFieldAccessor<CLASS extends DataObject, FIELD> {
 
   /**
    * This method gets the value of the field from the given <code>object</code>.

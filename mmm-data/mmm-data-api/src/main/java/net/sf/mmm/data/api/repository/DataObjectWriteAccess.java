@@ -5,6 +5,7 @@ package net.sf.mmm.data.api.repository;
 
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.resource.api.ContentResource;
 
@@ -14,7 +15,7 @@ import net.sf.mmm.data.resource.api.ContentResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentObjectWriteAccess {
+public interface DataObjectWriteAccess {
 
   /**
    * This method stores the given object so its state is made persistent.
@@ -31,16 +32,18 @@ public interface ContentObjectWriteAccess {
    * <code>{@link DataObject#getTitle() name}</code> and
    * <code>{@link DataObject#getParent() parent}</code>.
    * 
-   * @param contentClass is the type of the resource to create.
+   * @param <CLASS> is the generic type of the {@link DataEntity} to create.
+   * 
+   * @param contentClass is the type of the {@link DataEntity} to create.
    * @param name is the {@link DataObject#getTitle() name} of the resource to
    *        create.
-   * @param parent is the {@link DataObject#getParent() parent} of the
-   *        resource to create.
+   * @param parent is the {@link DataObject#getParent() parent} of the resource
+   *        to create.
    * @return the created resource.
    * @throws DataException if the operation fails.
    */
-  DataObject create(DataClass contentClass, String name, ContentResource parent)
-      throws DataException;
+  <CLASS extends DataEntity> CLASS create(DataClass<CLASS> contentClass, String name,
+      ContentResource parent) throws DataException;
 
   /**
    * This method creates a new version of the current resource.
@@ -53,11 +56,11 @@ public interface ContentObjectWriteAccess {
    *         <ul>
    *         <li>the given resource is a closed version (not a current
    *         resource).</li>
-   *         <li>the entity type is NOT
-   *         {@link DataClass#isRevisionControlled() revision-controlled}.</li>
+   *         <li>the entity type is NOT {@link DataClass#isRevisionControlled()
+   *         revision-controlled}.</li>
    *         <li>the resource is locked by another user</li>
    *         </ul>
    */
-  <E extends ContentResource> E createVersion(E resource) throws DataException;
+  <E extends DataEntity> E createVersion(E resource) throws DataException;
 
 }

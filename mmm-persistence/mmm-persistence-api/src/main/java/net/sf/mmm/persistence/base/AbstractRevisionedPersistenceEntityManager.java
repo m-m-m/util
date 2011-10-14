@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * {@link RevisionedPersistenceEntityManager} interface.
  * 
  * @param <ID> is the type of the {@link #getId() primary key}.
- * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

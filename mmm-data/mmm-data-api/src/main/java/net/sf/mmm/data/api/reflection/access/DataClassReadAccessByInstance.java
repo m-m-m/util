@@ -15,7 +15,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentClassReadAccessByInstance {
+public interface DataClassReadAccessByInstance {
 
   /**
    * This method gets the {@link DataClass} for the given

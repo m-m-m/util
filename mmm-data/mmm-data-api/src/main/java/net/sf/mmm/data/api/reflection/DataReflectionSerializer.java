@@ -18,7 +18,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface ContentReflectionSerializer {
+public interface DataReflectionSerializer {
 
   /**
    * This method loads the content-model from the given {@link InputStream}.

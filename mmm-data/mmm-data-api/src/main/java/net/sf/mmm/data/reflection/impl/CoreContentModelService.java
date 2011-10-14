@@ -21,7 +21,7 @@ import net.sf.mmm.data.reflection.impl.statically.ContentFieldImpl;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.data.api.reflection.ContentReflectionService} interface that
+ * {@link net.sf.mmm.data.api.reflection.DataReflectionService} interface that
  * assumes that {@link DataId}s are used as well as specific implementations
  * for class and field.
  * 

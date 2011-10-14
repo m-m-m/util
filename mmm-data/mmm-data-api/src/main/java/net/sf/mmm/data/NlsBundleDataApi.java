@@ -96,7 +96,7 @@ public class NlsBundleDataApi extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.repository.api.ContentObjectNotExistsException */
   public static final String ERR_OBJECT_NOT_EXISTS_FOR_PATH = "No content-object exists for the requested path \"{0}\"!";
 
-  /** @see net.sf.mmm.data.api.repository.ContentObjectWrongTypeException */
+  /** @see net.sf.mmm.data.api.repository.DataObjectWrongTypeException */
   public static final String ERR_OBJECT_WRONG_TYPE = "The content-object \"{0}\" has the type \"{1}\" that is incompatible with the requested type \"{2}\"!";
 
 }

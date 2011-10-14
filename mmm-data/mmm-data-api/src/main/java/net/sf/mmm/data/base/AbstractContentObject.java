@@ -93,7 +93,7 @@ public abstract class AbstractContentObject implements DataObject {
    * <b>ATTENTION:</b><br>
    * This method should only be used internally. Especially this method can NOT
    * be used to rename this entity. Therefore you have to use the
-   * {@link net.sf.mmm.data.api.repository.ContentRepository}.
+   * {@link net.sf.mmm.data.api.repository.DataRepository}.
    * 
    * @param name the name to set
    */

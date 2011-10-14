@@ -13,7 +13,7 @@ import net.sf.mmm.data.api.reflection.DataClass;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentClassReadAccessByTitle {
+public interface DataClassReadAccessByTitle {
 
   /**
    * This method gets the content class for the given name.

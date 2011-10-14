@@ -18,7 +18,7 @@ import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataModifiers;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
-import net.sf.mmm.data.api.reflection.ContentReflectionService;
+import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.value.api.ValueException;
 
@@ -50,7 +50,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
       throws XMLStreamException {
 
     String tagName = xmlReader.getLocalName();
-    if (ContentReflectionService.XML_TAG_CLASS.equals(tagName)) {
+    if (DataReflectionService.XML_TAG_CLASS.equals(tagName)) {
       loadClassRecursive(xmlReader, context);
     }
     super.parseConfiguration(xmlReader, context);
@@ -121,7 +121,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
    * <li>The {@link DataObject#getContentClass() content-class} of the
    * de-serialized classes and fields is NOT set by this method so it may be
    * <code>null</code> if NOT initialized via the
-   * {@link net.sf.mmm.data.api.reflection.ContentReflectionService
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionService
    * model-service}.</li>
    * </ul>
    * 

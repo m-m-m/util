@@ -7,13 +7,14 @@ import java.util.StringTokenizer;
 
 import javax.annotation.Resource;
 
+import net.sf.mmm.data.api.DataCastException;
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
-import net.sf.mmm.data.api.repository.ContentObjectWrongTypeException;
-import net.sf.mmm.data.api.repository.ContentRepository;
+import net.sf.mmm.data.api.repository.DataObjectWrongTypeException;
+import net.sf.mmm.data.api.repository.DataRepository;
 import net.sf.mmm.data.base.AbstractContentObject;
 import net.sf.mmm.data.base.reflection.AbstractMutableContentModelService;
 import net.sf.mmm.data.resource.api.ContentResource;
@@ -21,14 +22,14 @@ import net.sf.mmm.data.resource.base.AbstractContentResource;
 import net.sf.mmm.data.resource.base.AbstractContentResource.AbstractContentResourceModifier;
 
 /**
- * This is the abstract base implementation of the {@link ContentRepository}
+ * This is the abstract base implementation of the {@link DataRepository}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractContentRepository extends AbstractContentResourceModifier implements
-    ContentRepository {
+    DataRepository {
 
   /** @see #getContentModel() */
   private AbstractMutableContentModelService contentModel;
@@ -70,25 +71,24 @@ public abstract class AbstractContentRepository extends AbstractContentResourceM
    * @param object is the object to cast.
    * @param entityClass is the expected type of the given <code>object</code>.
    * @return the given <code>object</code> casted to <code>entityClass</code>.
-   * @throws ContentObjectWrongTypeException if the cast failed because the
-   *         given <code>object</code> is NOT compatible with the given
+   * @throws DataCastException if the cast failed because the given
+   *         <code>object</code> is NOT compatible with the given
    *         <code>entityClass</code>.
    */
   protected <E extends DataObject> E cast(DataObject object, Class<E> entityClass)
-      throws ContentObjectWrongTypeException {
+      throws DataCastException {
 
     try {
       return entityClass.cast(object);
     } catch (ClassCastException e) {
-      throw new ContentObjectWrongTypeException(e, object, entityClass.toString());
+      throw new DataObjectWrongTypeException(e, object, entityClass.toString());
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public <E extends DataObject> E get(DataId id, Class<E> entityClass)
-      throws DataException {
+  public <E extends DataObject> E get(DataId id, Class<E> entityClass) throws DataException {
 
     return cast(get(id), entityClass);
   }

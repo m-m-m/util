@@ -10,7 +10,7 @@ import net.sf.mmm.data.NlsBundleDataApi;
  * content-model} was modified by the user without being
  * {@link MutableDataReflectionService#isEditable() editable}.
  * 
- * @see net.sf.mmm.data.api.reflection.access.ContentReflectionWriteAccess
+ * @see net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

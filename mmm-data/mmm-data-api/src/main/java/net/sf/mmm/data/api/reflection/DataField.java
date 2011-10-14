@@ -7,7 +7,7 @@ import java.util.List;
 
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.DataSelectionTreeList;
-import net.sf.mmm.data.api.reflection.access.ContentFieldAccessor;
+import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -29,7 +29,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @since 1.0.0
  */
 public interface DataField<CLASS extends DataObject, FIELD> extends
-    DataReflectionObject<CLASS>, ContentFieldAccessor<CLASS, FIELD>,
+    DataReflectionObject<CLASS>, DataFieldAccessor<CLASS, FIELD>,
     DataSelectionTreeList<DataClass<? extends DataObject>> {
 
   /**
@@ -88,7 +88,7 @@ public interface DataField<CLASS extends DataObject, FIELD> extends
    * mean that the field is {@link #getInitiallyDefiningClass() initially
    * defined} by that class. It can also be that the declaring class inherits
    * the field from a {@link DataClass#getSuperClass() super-class} but
-   * overrides it (if supported by the {@link ContentReflectionService
+   * overrides it (if supported by the {@link DataReflectionService
    * content-model} ) in order to declare it more specific meaning that the type
    * of the field is a sub-type of the field that is overridden or the validator
    * is more restrictive.<br>

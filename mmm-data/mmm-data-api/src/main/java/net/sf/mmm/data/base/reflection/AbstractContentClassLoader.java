@@ -10,9 +10,9 @@ import net.sf.mmm.data.api.DataIdManager;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassLoader;
-import net.sf.mmm.data.api.reflection.access.ContentClassReadAccessById;
-import net.sf.mmm.data.api.reflection.access.ContentClassReadAccessByTitle;
-import net.sf.mmm.data.api.reflection.access.ContentFieldReadAccessById;
+import net.sf.mmm.data.api.reflection.access.DataClassReadAccessById;
+import net.sf.mmm.data.api.reflection.access.DataClassReadAccessByTitle;
+import net.sf.mmm.data.api.reflection.access.DataFieldReadAccessById;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -86,8 +86,8 @@ public abstract class AbstractContentClassLoader implements DataClassLoader {
    * This inner class is the context used to cache results during class-loading.
    */
   @SuppressWarnings("rawtypes")
-  public static class Context implements ContentFieldReadAccessById, ContentClassReadAccessById,
-      ContentClassReadAccessByTitle {
+  public static class Context implements DataFieldReadAccessById, DataClassReadAccessById,
+      DataClassReadAccessByTitle {
 
     /** @see #getContentClass(String) */
     private final Map<String, AbstractContentClass> name2classMap;

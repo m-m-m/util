@@ -8,7 +8,7 @@ import java.util.Map;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link ReflectionException} is thrown if an operation using
+ * A {@link ReflectionException} is thrown if an operation based on
  * {@link java.lang.reflect reflection} failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

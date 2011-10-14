@@ -24,7 +24,7 @@ import org.hibernate.envers.AuditReaderFactory;
  *        {@link net.sf.mmm.persistence.api.PersistenceEntity#getId() primary
  *        key} of the managed
  *        {@link net.sf.mmm.persistence.api.PersistenceEntity}.
- * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -103,7 +103,7 @@ public abstract class EnversPersistenceEntityManager<ID, ENTITY extends EnversPe
    */
   protected ENTITY loadRevision(Object id, Number revision) throws ObjectNotFoundException {
 
-    ENTITY entity = getAuditReader().find(getEntityClass(), id, revision);
+    ENTITY entity = getAuditReader().find(getEntityClassImplementation(), id, revision);
     entity.setRevision(revision);
     return entity;
   }
@@ -122,7 +122,7 @@ public abstract class EnversPersistenceEntityManager<ID, ENTITY extends EnversPe
    */
   public List<Number> getRevisionHistory(ENTITY entity) {
 
-    return getAuditReader().getRevisions(getEntityClass(), entity.getId());
+    return getAuditReader().getRevisions(getEntityClassImplementation(), entity.getId());
   }
 
   /**
@@ -130,7 +130,7 @@ public abstract class EnversPersistenceEntityManager<ID, ENTITY extends EnversPe
    */
   public List<RevisionMetadata> getRevisionHistoryMetadata(Object id) {
 
-    List<Number> revisionList = getAuditReader().getRevisions(getEntityClass(), id);
+    List<Number> revisionList = getAuditReader().getRevisions(getEntityClassImplementation(), id);
     List<RevisionMetadata> result = new ArrayList<RevisionMetadata>();
     for (Number revision : revisionList) {
       result.add(new LazyRevisionMetadata(getAuditReader(), revision));
