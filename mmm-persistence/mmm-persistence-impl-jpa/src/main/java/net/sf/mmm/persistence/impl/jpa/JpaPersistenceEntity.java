@@ -26,6 +26,8 @@ import net.sf.mmm.persistence.api.PersistenceEntity;
 @MappedSuperclass
 public abstract class JpaPersistenceEntity<ID> implements PersistenceEntity<ID> {
 
+  // extends AbstractPersistenceEntity<ID>
+
   /** @see #getModificationCounter() */
   private int modificationCounter;
 
@@ -80,7 +82,7 @@ public abstract class JpaPersistenceEntity<ID> implements PersistenceEntity<ID> 
   @Transient
   public boolean isPersistent() {
 
-    return (getId() != null);
+    return (getModificationTimestamp() != null);
   }
 
 }

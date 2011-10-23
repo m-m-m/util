@@ -17,7 +17,8 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @param <ID> is the type of the {@link PersistenceEntity#getId() primary key}
  *        of the managed {@link PersistenceEntity}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the
+ *        managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -75,9 +76,6 @@ public abstract class JpaPersistenceEntityManager<ID, ENTITY extends Persistence
 
     if (!entity.isPersistent()) {
       getEntityManager().persist(entity);
-      if (entity instanceof JpaManagedIdPersistenceEntity) {
-        ((JpaManagedIdPersistenceEntity<?>) entity).setPersistent();
-      }
     }
   }
 

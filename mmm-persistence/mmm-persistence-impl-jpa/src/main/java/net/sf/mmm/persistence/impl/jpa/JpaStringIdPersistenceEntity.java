@@ -7,13 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * This class extends {@link JpaPersistenceEntity} with a managed
- * {@link #getId() ID} of the type {@link String}.
+ * This class extends {@link JpaPersistenceEntity} with a {@link #getId() ID} of
+ * the type {@link String}. The {@link #getId() ID} will NOT be
+ * {@link javax.persistence.GeneratedValue generated}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaStringIdPersistenceEntity extends JpaManagedIdPersistenceEntity<String> {
+public abstract class JpaStringIdPersistenceEntity extends JpaPersistenceEntity<String> {
 
   /** @see #getId() */
   private String id;
