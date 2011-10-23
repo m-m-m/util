@@ -256,6 +256,7 @@ public class CharSequenceScanner implements CharStreamScanner {
    * @return a string with the given number of characters or all available
    *         characters if less than <code>count</code>. Will be the empty
    *         string if no character is {@link #hasNext() available} at all.
+   * @since 2.0.2
    */
   public String peek(int count) {
 

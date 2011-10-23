@@ -185,6 +185,7 @@ public interface CharStreamScanner {
    *        ignored during comparison.
    * @throws NlsParseException if the <code>expected</code> string was NOT
    *         found.
+   * @since 2.0.2
    */
   void require(String expected, boolean ignoreCase) throws NlsParseException;
 
@@ -197,6 +198,7 @@ public interface CharStreamScanner {
    * @param expected is the expected character.
    * @throws NlsParseException if the <code>expected</code> character was NOT
    *         found.
+   * @since 2.0.2
    */
   void require(char expected) throws NlsParseException;
 
