@@ -31,12 +31,4 @@ public abstract class AbstractPersistenceEntity<ID> implements PersistenceEntity
     return (getId() != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public int getModificationCounter() {
-
-    return 0;
-  }
-
 }

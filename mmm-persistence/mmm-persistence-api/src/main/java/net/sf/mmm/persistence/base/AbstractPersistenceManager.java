@@ -37,8 +37,14 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
    * This method registers the given <code>entityManager</code>.
    * 
    * @param entityManager is the {@link PersistenceEntityManager} to register.
+   * @throws DuplicateObjectException if a manager is already registered for the
+   *         same entity-class (
+   *         {@link PersistenceEntityManager#getEntityClassImplementation()},
+   *         {@link PersistenceEntityManager#getEntityClassReadWrite()}, or
+   *         {@link PersistenceEntityManager#getEntityClassReadOnly()}).
    */
-  protected void addManager(PersistenceEntityManager<?, ?> entityManager) {
+  protected void addManager(PersistenceEntityManager<?, ?> entityManager)
+      throws DuplicateObjectException {
 
     Class<?> entityClass = entityManager.getEntityClassImplementation();
     registerManager(entityClass, entityManager);
@@ -52,7 +58,18 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
     }
   }
 
-  private void registerManager(Class<?> entityClass, PersistenceEntityManager<?, ?> entityManager) {
+  /**
+   * This method registers the given <code>entityManager</code> for the given
+   * <code>entityClass</code>.
+   * 
+   * @param entityClass is the {@link Class} used as key to associate the
+   *        <code>entityManager</code> with.
+   * @param entityManager is the {@link PersistenceEntityManager} to register.
+   * @throws DuplicateObjectException if a manager is already registered for the
+   *         same <code>entityClass</code>.
+   */
+  private void registerManager(Class<?> entityClass, PersistenceEntityManager<?, ?> entityManager)
+      throws DuplicateObjectException {
 
     if (this.class2managerMap.containsKey(entityClass)) {
       throw new DuplicateObjectException(entityManager, entityClass);

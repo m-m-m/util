@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
  * This is the default implementation of the
@@ -32,9 +33,14 @@ public class PersistenceManagerImpl extends AbstractRevisionedPersistenceManager
    * 
    * @param managerList is the {@link List} of all
    *        {@link PersistenceEntityManager} to register.
+   * @throws DuplicateObjectException if two managers use the same entity-class
+   *         ( {@link PersistenceEntityManager#getEntityClassImplementation()},
+   *         {@link PersistenceEntityManager#getEntityClassReadWrite()}, or
+   *         {@link PersistenceEntityManager#getEntityClassReadOnly()}).
    */
   @Inject
-  public void setManagers(List<PersistenceEntityManager<?, ?>> managerList) {
+  public void setManagers(List<PersistenceEntityManager<?, ?>> managerList)
+      throws DuplicateObjectException {
 
     for (PersistenceEntityManager<?, ?> entityManager : managerList) {
       addManager(entityManager);
