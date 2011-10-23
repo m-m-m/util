@@ -198,3 +198,5 @@ hibernate
 envers
 selectable
 programmatically
+versioned
+localizable
