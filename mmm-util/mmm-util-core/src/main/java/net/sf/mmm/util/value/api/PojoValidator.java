@@ -17,4 +17,6 @@ package net.sf.mmm.util.value.api;
  */
 public interface PojoValidator extends ValueValidator<Object> {
 
+  // nothing to add - just the generic is bound.
+
 }

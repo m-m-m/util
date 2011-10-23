@@ -136,7 +136,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @SuppressWarnings("rawtypes")
   public Object convert(Object value, Object valueSource, GenericType<? extends Object> targetType) {
 
     if (value == null) {
@@ -473,7 +473,6 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      *         {@link Class#isInstance(Object) instance} of the given
      *         <code>targetType</code>.
      */
-    @SuppressWarnings("unchecked")
     protected TARGET convertRecursive(Object value, Object valueSource,
         GenericType<? extends TARGET> genericTargetType, Class<?> sourceClass) {
 

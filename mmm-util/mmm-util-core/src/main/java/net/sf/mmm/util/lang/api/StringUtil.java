@@ -26,6 +26,9 @@ public interface StringUtil {
   /** a string representing the boolean value <code>false</code> */
   String FALSE = String.valueOf(false);
 
+  /** a string representing the undefined value <code>null</code>. */
+  String NULL = "null";
+
   /**
    * The platform-specific line-separator string. Should be one of
    * {@link #LINE_SEPARATOR_LF}, {@link #LINE_SEPARATOR_CRLF},
@@ -195,6 +198,7 @@ public interface StringUtil {
    * <li><code>padNumber(5, 3)</code> will return <code>"005"</code></li>
    * <li><code>padNumber(25, 3)</code> will return <code>"025"</code></li>
    * <li><code>padNumber(100, 3)</code> will return <code>"100"</code></li>
+   * <li><code>padNumber(1234, 3)</code> will return <code>"1234"</code></li>
    * </ul>
    * 
    * @param number is the positive number to format.

@@ -15,4 +15,6 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface StringValueConverter extends GenericValueConverter<String> {
 
+  // nothing to add, just the generic is bound.
+
 }

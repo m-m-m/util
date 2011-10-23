@@ -112,7 +112,6 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <TARGET> TARGET convertValue(Object value, Object valueSource, Class<TARGET> targetClass,
       Type targetType) throws ValueNotSetException, WrongValueTypeException {
 

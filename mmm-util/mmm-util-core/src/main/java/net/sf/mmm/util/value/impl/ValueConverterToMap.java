@@ -46,7 +46,6 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   protected void convertContainerEntry(Object element, int index, Map container,
       Object valueSource, GenericType<? extends Map> targetType, Object originalValue) {

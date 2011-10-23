@@ -45,7 +45,6 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   protected void convertContainerEntry(Object element, int index, Collection container,
       Object valueSource, GenericType<? extends Collection> targetType, Object value) {

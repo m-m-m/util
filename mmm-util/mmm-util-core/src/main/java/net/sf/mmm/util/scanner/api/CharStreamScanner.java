@@ -4,6 +4,7 @@
 package net.sf.mmm.util.scanner.api;
 
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
  * This is the interface for a scanner that can be used to parse a stream or
@@ -93,7 +94,8 @@ public interface CharStreamScanner {
    * so, scan them yourself before and negate the result as needed.
    * 
    * @param maxDigits is the maximum number of digits that will be read. The
-   *        value has to be positive (greater than zero).
+   *        value has to be positive (greater than zero). Use <code>19</code> or
+   *        higher to be able to read any long number.
    * @return the parsed number.
    * @throws NumberFormatException if the current {@link #getCurrentIndex()
    *         current position} does NOT point to a number.
@@ -165,6 +167,38 @@ public interface CharStreamScanner {
    *         <code>expected</code>, <code>false</code> otherwise.
    */
   boolean expect(char expected);
+
+  /**
+   * This method verifies that the <code>expected</code> string gets consumed
+   * from this scanner with respect to <code>ignoreCase</code>. Otherwise an
+   * exception is thrown indicating the problem.<br>
+   * This method behaves functionally equivalent to the following code:
+   * 
+   * <pre>
+   * if (!scanner.{@link #expectStrict(String, boolean) expectStrict}(expected, ignoreCase)) {
+   *   throw new {@link NlsParseException}(scanner.read(expected.length), expected);
+   * }
+   * </pre>
+   * 
+   * @param expected is the expected string.
+   * @param ignoreCase - if <code>true</code> the case of the characters is
+   *        ignored during comparison.
+   * @throws NlsParseException if the <code>expected</code> string was NOT
+   *         found.
+   */
+  void require(String expected, boolean ignoreCase) throws NlsParseException;
+
+  /**
+   * This method verifies that the {@link #next() current character} is equal to
+   * the given <code>expected</code> character.<br>
+   * If the current character was as expected, the parser points to the next
+   * character. Otherwise an exception is thrown indicating the problem.
+   * 
+   * @param expected is the expected character.
+   * @throws NlsParseException if the <code>expected</code> character was NOT
+   *         found.
+   */
+  void require(char expected) throws NlsParseException;
 
   /**
    * This method skips all {@link #next() next characters} until the given

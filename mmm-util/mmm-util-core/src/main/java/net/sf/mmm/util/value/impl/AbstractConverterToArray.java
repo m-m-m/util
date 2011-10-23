@@ -123,7 +123,6 @@ public abstract class AbstractConverterToArray<ARRAY> extends
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   protected ARRAY createContainer(GenericType<? extends ARRAY> targetType, int length) {
 

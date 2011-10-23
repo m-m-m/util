@@ -121,4 +121,6 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 public interface ComposedValueConverter extends ValueConverter<Object, Object>,
     GenericValueConverter<Object> {
 
+  // nothing to add
+
 }

@@ -20,8 +20,8 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent implements
-    GenericValueConverter<SOURCE> {
+public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent
+    implements GenericValueConverter<SOURCE> {
 
   /**
    * The constructor.
@@ -82,7 +82,6 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource,
       TARGET minimum, TARGET maximum) throws ValueNotSetException, WrongValueTypeException,
       ValueOutOfRangeException {

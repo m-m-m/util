@@ -6,10 +6,9 @@ package net.sf.mmm.util.lang.base;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import net.sf.mmm.util.lang.api.StringUtil;
 
 import org.junit.Test;
-
-import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
  * This is the test-case for {@link StringUtilImpl}.
@@ -55,8 +54,17 @@ public class StringUtilTest {
     assertEquals("foo-bar", getStringUtil().fromCamlCase("FooBar", '-'));
     assertEquals("foo_bar", getStringUtil().fromCamlCase("FOO_BAR", '*'));
     assertEquals("some.word.mix", getStringUtil().fromCamlCase("someWordMix", '.'));
-    assertEquals("abbreviations_like_xmlshould_not_be_capitalized", getStringUtil().fromCamlCase(
-        "AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));
+    assertEquals("abbreviations_like_xmlshould_not_be_capitalized",
+        getStringUtil().fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));
+  }
+
+  @Test
+  public void testPadNumber() {
+
+    assertEquals("005", getStringUtil().padNumber(5, 3));
+    assertEquals("025", getStringUtil().padNumber(25, 3));
+    assertEquals("100", getStringUtil().padNumber(100, 3));
+    assertEquals("1234", getStringUtil().padNumber(1234, 3));
   }
 
   @Test

@@ -249,11 +249,11 @@ public class StringUtilImpl implements StringUtil {
     if (leadingZeros > 0) {
       int capacity = result.length() + leadingZeros;
       StringBuilder buffer = new StringBuilder(capacity);
-      buffer.append(result);
       while (leadingZeros > 0) {
         buffer.append('0');
         leadingZeros--;
       }
+      buffer.append(result);
       result = buffer.toString();
     }
     return result;

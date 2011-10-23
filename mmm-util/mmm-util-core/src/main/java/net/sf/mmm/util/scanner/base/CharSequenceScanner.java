@@ -6,6 +6,8 @@ package net.sf.mmm.util.scanner.base;
 import java.util.Locale;
 
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
@@ -238,6 +240,31 @@ public class CharSequenceScanner implements CharStreamScanner {
   public char peek() {
 
     return this.chars[this.pos];
+  }
+
+  /**
+   * This method peeks the number of {@link #peek() next characters} given by
+   * <code>count</code> and returns them as string. If there are less characters
+   * {@link #hasNext() available} the returned string will be shorter than
+   * <code>count</code> and only contain the available characters. Unlike
+   * {@link #read(int)} this method does NOT consume the characters and will
+   * therefore NOT change the state of this scanner.
+   * 
+   * @param count is the number of characters to peek. You may use
+   *        {@link Integer#MAX_VALUE} to peek until the end of data if the
+   *        data-size is suitable.
+   * @return a string with the given number of characters or all available
+   *         characters if less than <code>count</code>. Will be the empty
+   *         string if no character is {@link #hasNext() available} at all.
+   */
+  public String peek(int count) {
+
+    int len = this.endIndex - this.pos;
+    if (len > count) {
+      len = count;
+    }
+    String result = new String(this.chars, this.pos, len);
+    return result;
   }
 
   /**
@@ -495,7 +522,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   public long readLong(int maxDigits) throws NumberFormatException {
 
     if (maxDigits <= 0) {
-      throw new IllegalArgumentException();
+      throw new NlsIllegalArgumentException(Integer.toString(maxDigits), "maxDigits");
     }
     int index = this.pos;
     int end = this.pos + maxDigits;
@@ -510,6 +537,9 @@ public class CharSequenceScanner implements CharStreamScanner {
       this.pos++;
     }
     int len = this.pos - index;
+    if (len < 1) {
+      throw new NlsParseException(getTail(), "[0-9]+", Number.class);
+    }
     String number = new String(this.chars, index, len);
     return Long.parseLong(number);
   }
@@ -641,6 +671,69 @@ public class CharSequenceScanner implements CharStreamScanner {
       }
     }
     return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void require(char expected) throws NlsParseException {
+
+    String value = "";
+    if (this.pos < this.endIndex) {
+      if (this.chars[this.pos] == expected) {
+        this.pos++;
+        return;
+      }
+      value = Character.toString(this.chars[this.pos]);
+    }
+    throw new NlsParseException(value, Character.toString(expected), Character.class,
+        getOriginalString());
+  }
+
+  /**
+   * This method gets the tail of this scanner without changing the state.
+   * 
+   * @return the tail of this scanner.
+   */
+  protected String getTail() {
+
+    String tail = "";
+    if (this.pos < this.endIndex) {
+      tail = new String(this.chars, this.pos, this.endIndex - this.pos + 1);
+    }
+    return tail;
+  }
+
+  /**
+   * This method gets the tail of this scanner limited (truncated) to the given
+   * <code>maximum</code> number of characters without changing the state.
+   * 
+   * @param maximum is the maximum number of characters to return from the
+   *        {@link #getTail() tail}.
+   * @return the tail of this scanner.
+   */
+  protected String getTail(int maximum) {
+
+    String tail = "";
+    if (this.pos < this.endIndex) {
+      int count = this.endIndex - this.pos + 1;
+      if (count > maximum) {
+        count = maximum;
+      }
+      tail = new String(this.chars, this.pos, count);
+    }
+    return tail;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void require(String expected, boolean ignoreCase) throws NlsParseException {
+
+    if (!expectStrict(expected, ignoreCase)) {
+      throw new NlsParseException(getTail(expected.length()), expected, String.class,
+          getOriginalString());
+    }
   }
 
   /**
