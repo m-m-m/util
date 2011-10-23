@@ -14,7 +14,7 @@ package net.sf.mmm.data.api.reflection;
  * {@link #isFinal() final} field is NOT a constant and can be modified if it is
  * NOT {@link #isReadOnly() read-only}.
  * 
- * @see net.sf.mmm.data.api.reflection.DataField#getContentModifiers()
+ * @see net.sf.mmm.data.api.reflection.DataField#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

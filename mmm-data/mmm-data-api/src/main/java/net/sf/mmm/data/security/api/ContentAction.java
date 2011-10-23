@@ -4,6 +4,7 @@
 package net.sf.mmm.data.security.api;
 
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.entity.security.DataSecurityObject;
 
 /**
  * This is the interface for an action. Such object represents an operation that
@@ -12,7 +13,7 @@ import net.sf.mmm.data.api.DataObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentAction extends ContentSecurityObject {
+public interface ContentAction extends DataSecurityObject {
 
   /**
    * The {@link #getTitle() name} of the action required to read a

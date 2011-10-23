@@ -7,7 +7,7 @@ package net.sf.mmm.data.api.reflection;
  * This is the interface for the modifiers of a
  * {@link net.sf.mmm.data.api.reflection.DataClass content-class}.
  * 
- * @see net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+ * @see net.sf.mmm.data.api.reflection.DataClass#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

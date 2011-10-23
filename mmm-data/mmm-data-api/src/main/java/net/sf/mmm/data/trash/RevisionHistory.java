@@ -5,7 +5,7 @@ package net.sf.mmm.data.trash;
 
 import java.util.Date;
 
-import net.sf.mmm.data.security.api.ContentUser;
+import net.sf.mmm.data.api.entity.security.DataUser;
 
 /**
  * This is the interface for the history of a specific ContentResource.
@@ -50,5 +50,5 @@ public interface RevisionHistory {
    *         <code>null</code> if the actions was not (yet) performed on this
    *         revision.
    */
-  ContentUser getSubject(String action);
+  DataUser getSubject(String action);
 }

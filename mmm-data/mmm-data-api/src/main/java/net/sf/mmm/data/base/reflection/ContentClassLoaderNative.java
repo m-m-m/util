@@ -383,7 +383,7 @@ public class ContentClassLoaderNative extends AbstractContentClassLoader {
             name = accessor.getName();
           }
           int modifiers = accessor.getModifiers();
-          boolean isSystem = contentClass.getContentModifiers().isSystem();
+          boolean isSystem = contentClass.getModifiers().isSystem();
           boolean isFinal = Modifier.isFinal(modifiers);
           boolean isStatic = Modifier.isStatic(modifiers) || contentFieldAnnotation.isStatic();
           boolean isTransient = contentFieldAnnotation.isTransient();

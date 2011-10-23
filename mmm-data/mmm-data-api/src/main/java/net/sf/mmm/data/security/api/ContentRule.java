@@ -4,6 +4,8 @@
 package net.sf.mmm.data.security.api;
 
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.entity.security.ContentGroup;
+import net.sf.mmm.data.api.entity.security.DataSecurityObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 
@@ -14,7 +16,7 @@ import net.sf.mmm.data.api.reflection.DataField;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface ContentRule extends ContentSecurityObject {
+public interface ContentRule extends DataSecurityObject {
 
   ContentGroup getParent();
 

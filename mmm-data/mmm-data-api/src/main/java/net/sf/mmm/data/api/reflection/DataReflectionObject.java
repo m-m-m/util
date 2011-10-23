@@ -26,32 +26,31 @@ public abstract interface DataReflectionObject<CLASS> extends
   String CLASS_NAME = "ContentReflectionObject";
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * of the {@link DataClass} reflecting this type.
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
+   * the {@link DataClass} reflecting this type.
    */
   short CLASS_ID = 10;
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getContentModifiers() modifiers} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getModifiers() modifiers} for generic access.
    */
   String FIELD_NAME_MODIFIERS = "contentModifiers";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getDeletedFlag() deletedFlag} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getDeletedFlag() deletedFlag} for generic access.
    */
   String FIELD_NAME_DELETEDFLAG = "deletedFlag";
 
   /**
-   * The deleted-flag is inherited so
-   * {@link net.sf.mmm.data.api.DataObject#isDeleted()} will return
+   * The deleted-flag is inherited so {@link #isDeleted()} will return
    * <code>true</code> if a {@link #getParent() parent object} is marked as
    * deleted.<br>
    * This method gets the deleted flag of this object. The method does not
    * inherit the flag.
    * 
-   * @see net.sf.mmm.data.api.DataObject#isDeleted()
+   * @see #isDeleted()
    * 
    * @return the deleted flag.
    */
@@ -64,8 +63,8 @@ public abstract interface DataReflectionObject<CLASS> extends
    * A deleted object can NOT be modified. No instances or sub-classes can be
    * created of a deleted class. Deleted fields are NOT visible in the editor.
    * If an object is deleted it can either be undeleted or destroyed (if a
-   * {@link net.sf.mmm.data.api.reflection.DataClass} is destroyed then
-   * all instances will be removed from the persistence store).<br>
+   * {@link net.sf.mmm.data.api.reflection.DataClass} is destroyed then all
+   * instances will be removed from the persistence store).<br>
    * Like deprecation a deletion is inherited from the {@link #getParent()
    * parent}.
    * 
@@ -78,12 +77,11 @@ public abstract interface DataReflectionObject<CLASS> extends
 
   /**
    * This method gets the java-class of the reflected object. The &lt;CLASS&gt;
-   * will typically be a subclass of
-   * {@link net.sf.mmm.data.api.DataObject} or at least
-   * {@link net.sf.mmm.persistence.api.PersistenceEntity}. However for ultimate
-   * flexibility and freedom the type is not bound in its generic declaration.
-   * This allows to use this API even with third-party entities that do not
-   * implement such interfaces.<br/>
+   * will typically be a subclass of {@link net.sf.mmm.data.api.DataObject} or
+   * at least {@link net.sf.mmm.persistence.api.PersistenceEntity}. However for
+   * ultimate flexibility and freedom the type is not bound in its generic
+   * declaration. This allows to use this API even with third-party entities
+   * that do not implement such interfaces.<br/>
    * <b>ATTENTION:</b><br>
    * This API allows to reflect both a statically typed as well as a dynamic
    * content-model or even mixed forms. While in statically typed models every
@@ -102,13 +100,13 @@ public abstract interface DataReflectionObject<CLASS> extends
    * This method gets the modifiers of this object. The modifiers are a set of
    * flags.
    * 
-   * @see DataClass#getContentModifiers()
-   * @see DataField#getContentModifiers()
+   * @see DataClass#getModifiers()
+   * @see DataField#getModifiers()
    * 
    * @return the objects modifiers.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_CONTENTMODIFIERS, isFinal = true, isReadOnly = true)
-  DataModifiers getContentModifiers();
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_MODIFIERS, isFinal = true, isReadOnly = true)
+  DataModifiers getModifiers();
 
   /**
    * This method determines if this is a {@link DataClass content-class} or a

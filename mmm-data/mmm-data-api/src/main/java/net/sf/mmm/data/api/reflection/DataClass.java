@@ -37,17 +37,17 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   String CLASS_NAME = "ContentClass";
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * of the {@link DataClass} reflecting this type.
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
+   * the {@link DataClass} reflecting this type.
    */
   short CLASS_ID = 2;
 
   /**
-   * The first {@link net.sf.mmm.data.api.datatype.DataId#getClassId()
-   * class-ID} that can be used for custom classes. All
-   * {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * lower than this are reserved for {@link DataClassModifiers#isSystem()
-   * system} classes.
+   * The first {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
+   * that can be used for custom classes. All
+   * {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} lower
+   * than this are reserved for {@link DataClassModifiers#isSystem() system}
+   * classes.
    */
   int CLASS_ID_MINIMUM_CUSTOM = 4096;
 
@@ -55,26 +55,20 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   String XML_TAG_CLASS = "Class";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getSuperClass() superClass} for generic access.
-   */
-  String FIELD_NAME_SUPER_CLASS = "superClass";
-
-  /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getSubClasses() subClasses} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getSubClasses() subClasses} for generic access.
    */
   String FIELD_NAME_SUB_CLASSES = "subClasses";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getFields() fields} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getFields() fields} for generic access.
    */
   String FIELD_NAME_FIELDS = "fields";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getDeclaredFields() declaredFields} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getDeclaredFields() declaredFields} for generic access.
    */
   String FIELD_NAME_DECLARED_FIELDS = "declaredFields";
 
@@ -83,20 +77,18 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    */
   String XML_TAG_CONTENT_MODEL = "content-model";
 
-  // /**
-  // * {@inheritDoc}
-  // *
-  // * @return the {@link #getSuperClass() super-class} or the folder
-  // * {@link ContentObject#getChildren() containing} the root-class.
-  // */
-  // ContentClass<? extends ContentClass> getParent();
-  //
-  // /**
-  // * {@inheritDoc}
-  // *
-  // * @return the {@link #getSubClasses() sub-classes}.
-  // */
-  // List<ContentClass<? extends ContentClass>> getChildren();
+  /**
+   * This method gets the super-class of this class. Like in java this class
+   * inherits from its super-classes.<br>
+   * This method exists only for expressiveness - it does the same as
+   * {@link #getParent()}.
+   * 
+   * @return the super-class that is extended by this class or <code>null</code>
+   *         if this is the root-class ({@link DataClass} reflecting
+   *         {@link net.sf.mmm.data.api.DataObject}).
+   */
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUPERCLASS, isReadOnly = true)
+  DataClass<? super CLASS> getSuperClass();
 
   /**
    * This method gets an iterator of all fields declared by this class. This
@@ -109,6 +101,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * 
    * @return a (read-only) collection of all declared fields.
    */
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_DECLAREDFIELDS, isReadOnly = true)
   Collection<? extends DataField<CLASS, ?>> getDeclaredFields();
 
   /**
@@ -131,17 +124,6 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   DataField<CLASS, ?> getDeclaredField(String name);
 
   /**
-   * This method gets the field with the given {@link DataField#getTitle()
-   * name}. A field is either {@link #getDeclaredFields() declared} in this
-   * class or inherited from a {@link #getSuperClass() super-class}.
-   * 
-   * @param name is the name of the requested field of this class.
-   * @return the field with the given name or <code>null</code> if no such field
-   *         exists for this class.
-   */
-  DataField<? super CLASS, ?> getField(String name);
-
-  /**
    * This method gets all fields defined in this class or inherited by the
    * super-class(es). An inherited field can be identified via
    * {@link DataField#getDeclaringClass()}.<br>
@@ -151,32 +133,33 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * 
    * @return a (read-only) collection of fields of this class.
    */
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_FIELDS, isReadOnly = true, isTransient = true)
   Collection<? extends DataField<? super CLASS, ?>> getFields();
 
   /**
-   * This method gets the super-class of this class. Like in java this class
-   * inherits from its super-classes.<br>
-   * This method exists only for expressiveness - it does the same as
-   * {@link #getParent()}.
+   * This method gets the field with the given {@link DataField#getTitle() name}
+   * . A field is either {@link #getDeclaredFields() declared} in this class or
+   * inherited from a {@link #getSuperClass() super-class}.
    * 
-   * @return the super-class that is extended by this class or <code>null</code>
-   *         if this is the root-class ({@link DataClass} reflecting
-   *         {@link net.sf.mmm.data.api.DataObject}).
+   * @param name is the name of the requested field of this class.
+   * @return the field with the given name or <code>null</code> if no such field
+   *         exists for this class.
    */
-  @DataFieldAnnotation(id = 25, isReadOnly = true)
-  DataClass<? super CLASS> getSuperClass();
+  DataField<? super CLASS, ?> getField(String name);
 
   /**
    * This method gets the list of all sub-classes.
    * 
    * @return an un-modifiable list of all sub-class.
    */
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUBCLASSES, isReadOnly = true, inverseRelationFieldId = DataFieldIds.ID_CLASS_SUPERCLASS)
   List<? extends DataClass<? extends CLASS>> getSubClasses();
 
   /**
    * {@inheritDoc}
    */
-  DataClassModifiers getContentModifiers();
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_MODIFIERS, isReadOnly = true)
+  DataClassModifiers getModifiers();
 
   /**
    * This method determines is this class is a super class of the given class. <br>
@@ -198,6 +181,17 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    */
   boolean isSubClassOf(DataClass<?> contentClass);
 
+  /**
+   * This method gets the namespace of this class. A namespace groups a set of
+   * {@link DataClass}es like a package in java. This is used for version
+   * controlling the schema (DDL) of classes within the same namespace. If a
+   * newer version is detected an automatic migration can be performed.
+   * 
+   * @return the namespace.
+   */
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_NAMESPACE, isReadOnly = true)
+  String getNamespace();
+
   // /**
   // * This method determines if the {@link ContentObject entity} represented by
   // * this {@link ContentClass} is a {@link ContentObject#isFolder() folder}.
@@ -209,19 +203,18 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   // */
   // boolean isFolderClass();
 
-  /**
-   * This method determines if the {@link net.sf.mmm.data.api.DataObject}s
-   * of this {@link DataClass} are revision-controlled. Fur such entity
-   * historical {@link net.sf.mmm.data.api.DataObject#getRevision()
-   * revisions} can be stored in the history. <br>
-   * If an entity that is NOT under revision-control is modified, every except
-   * the current state is lost.
-   * 
-   * @see net.sf.mmm.data.api.reflection.DataClassAnnotation#revisionControl()
-   * 
-   * @return <code>true</code> if this type is revisioned, <code>false</code>
-   *         otherwise.
-   */
-  boolean isRevisionControlled();
+  // /**
+  // * This method determines if the {@link net.sf.mmm.data.api.DataObject}s of
+  // * this {@link DataClass} are revision-controlled. Fur such entity
+  // historical
+  // * {@link net.sf.mmm.data.api.DataObject#getRevision() revisions} can be
+  // * stored in the history. <br>
+  // * If an entity that is NOT under revision-control is modified, every except
+  // * the current state is lost.
+  // *
+  // * @return <code>true</code> if this type is revisioned, <code>false</code>
+  // * otherwise.
+  // */
+  // boolean isRevisionControlled();
 
 }

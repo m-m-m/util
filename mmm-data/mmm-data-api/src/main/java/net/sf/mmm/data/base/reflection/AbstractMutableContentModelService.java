@@ -229,7 +229,7 @@ public abstract class AbstractMutableContentModelService extends AbstractContent
       throws DataReflectionException {
 
     requireEditableModel();
-    if (classOrField.getContentModifiers().isSystem()) {
+    if (classOrField.getModifiers().isSystem()) {
       throw new DataSystemModifyException(classOrField);
     }
     // TODO: persist

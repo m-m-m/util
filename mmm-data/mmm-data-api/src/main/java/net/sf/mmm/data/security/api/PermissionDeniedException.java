@@ -4,9 +4,10 @@
 package net.sf.mmm.data.security.api;
 
 import net.sf.mmm.data.NlsBundleDataApi;
+import net.sf.mmm.data.api.entity.security.DataUser;
 
 /**
- * This exception is thrown if a {@link ContentUser} tried to perform an
+ * This exception is thrown if a {@link DataUser} tried to perform an
  * {@link ContentAction action} on an
  * {@link net.sf.mmm.data.api.DataObject ContentObject} without having the
  * appropriate {@link ContentRule permissions}.<br>

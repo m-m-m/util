@@ -12,7 +12,7 @@ import net.sf.mmm.data.api.reflection.DataClassModifiers;
  * This is the base implementation of the {@link DataClassModifiers}
  * interface.
  * 
- * @see net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+ * @see net.sf.mmm.data.api.reflection.DataClass#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -24,7 +24,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
   private static final long serialVersionUID = 2603625618112910413L;
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a {@link #isSystem() system}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class}.
    */
@@ -32,7 +32,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       false, true);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a {@link #isSystem() system}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is NOT
    * {@link #isExtendable() extendable}.
@@ -41,7 +41,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       true, false, false, false);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a
    * {@link net.sf.mmm.data.api.reflection.DataModifiers#isSystem() system}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is
@@ -51,7 +51,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       true, false, false);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a
    * {@link net.sf.mmm.data.api.reflection.DataModifiers#isSystem() system}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is
@@ -61,7 +61,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       true, false, true, true);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a
    * {@link net.sf.mmm.data.api.reflection.DataModifiers#isSystem() system}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is
@@ -71,7 +71,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       true, false, true, false);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a {@link #isFinal() final}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class}.
    */
@@ -79,7 +79,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       false, false);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a {@link #isAbstract() abstract}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class}.
    */
@@ -87,7 +87,7 @@ public class ContentClassModifiersBean extends AbstractContentModifiersBean impl
       false, true, true);
 
   /**
-   * the {@link net.sf.mmm.data.api.reflection.DataClass#getContentModifiers()
+   * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a "normal" {@link net.sf.mmm.data.api.reflection.DataClass
    * content-class}.
    */

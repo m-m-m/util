@@ -37,7 +37,7 @@ public abstract class AbstractContentClass<CLASS extends DataObject> extends
   /** the super-class of this class */
   private AbstractContentClass<? super CLASS> superClass;
 
-  /** @see #getContentModifiers() */
+  /** @see #getModifiers() */
   private DataClassModifiers modifiers;
 
   /** @see #getJavaClass() */
@@ -83,7 +83,7 @@ public abstract class AbstractContentClass<CLASS extends DataObject> extends
     this.declaredFieldsView = Collections.unmodifiableCollection(this.declaredFields.values());
     this.fieldsView = new FieldsCollection();
     if (this.superClass != null) {
-      if (this.superClass.getContentModifiers().isFinal()) {
+      if (this.superClass.getModifiers().isFinal()) {
         // TODO: NLS
         throw new DataReflectionException("Can NOT extend final class!");
       }
@@ -179,7 +179,7 @@ public abstract class AbstractContentClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public DataClassModifiers getContentModifiers() {
+  public DataClassModifiers getModifiers() {
 
     return this.modifiers;
   }
@@ -270,11 +270,11 @@ public abstract class AbstractContentClass<CLASS extends DataObject> extends
       // TODO: NLS
       throw new DataReflectionException("Sub-Class must have this class as super-class!");
     }
-    if (subClass.getContentModifiers().isSystem() && !getContentModifiers().isSystem()) {
+    if (subClass.getModifiers().isSystem() && !getModifiers().isSystem()) {
       // TODO: NLS
       throw new DataReflectionException("System-class can NOT extend user-class!");
     }
-    if (getContentModifiers().isFinal()) {
+    if (getModifiers().isFinal()) {
       // TODO: NLS
       throw new DataReflectionException("Can NOT extend final class!");
     }

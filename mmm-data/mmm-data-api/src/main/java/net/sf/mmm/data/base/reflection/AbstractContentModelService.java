@@ -260,7 +260,7 @@ public abstract class AbstractContentModelService implements DataReflectionServi
    */
   protected void removeClass(AbstractContentClass contentClass) throws DataReflectionException {
 
-    if (contentClass.getContentModifiers().isSystem()) {
+    if (contentClass.getModifiers().isSystem()) {
       throw new DataSystemModifyException(contentClass);
     }
     AbstractContentClass old = this.id2class.remove(contentClass.getContentId());
@@ -282,7 +282,7 @@ public abstract class AbstractContentModelService implements DataReflectionServi
    */
   protected void removeField(AbstractContentField contentField) throws DataReflectionException {
 
-    if (contentField.getContentModifiers().isSystem()) {
+    if (contentField.getModifiers().isSystem()) {
       throw new DataSystemModifyException(contentField);
     }
   }
@@ -334,7 +334,7 @@ public abstract class AbstractContentModelService implements DataReflectionServi
       addClass(contentClass);
       fireEvent(new DataReflectionEvent(contentClass, ChangeEventType.ADD));
     } else {
-      DataClassModifiers existingModifiers = existingClass.getContentModifiers();
+      DataClassModifiers existingModifiers = existingClass.getModifiers();
       boolean modified = false;
       if (!existingClass.getTitle().equals(contentClass.getTitle())) {
         // Class has been renamed!
@@ -346,7 +346,7 @@ public abstract class AbstractContentModelService implements DataReflectionServi
         throw new ContentModelFeatureUnsupportedException(
             "Changing the java-class of a content-class is currently NOT supported!");
       }
-      if (!existingModifiers.equals(contentClass.getContentModifiers())) {
+      if (!existingModifiers.equals(contentClass.getModifiers())) {
         if (existingModifiers.isSystem()) {
           // TODO: NLS
           throw new DataReflectionException(

@@ -99,9 +99,9 @@ public abstract class AbstractCachedContentRepository extends AbstractContentRep
     long oid = id.getObjectId();
     if (oid < SmartId.OID_MINIMUM_RESOURCE) {
       if (oid == SmartId.OID_CLASS) {
-        result = getContentModel().getContentClass(id);
+        result = getReflectionService().getContentClass(id);
       } else if (oid == SmartId.OID_FIELD) {
-        result = getContentModel().getContentField(id);
+        result = getReflectionService().getContentField(id);
       } else {
         // TODO: illegal ID
         throw new ContentObjectNotExistsException(id);
@@ -116,9 +116,9 @@ public abstract class AbstractCachedContentRepository extends AbstractContentRep
         // resource
         AbstractContentResource resource = null;
         if (id.getRevision() == 0) {
-          resource = this.latestResourceCache.get(id);
+          resource = this.latestResourceCache.getById(id);
         } else {
-          resource = this.closedResourceCache.get(id);
+          resource = this.closedResourceCache.getById(id);
         }
       }
     }
@@ -128,7 +128,7 @@ public abstract class AbstractCachedContentRepository extends AbstractContentRep
   /**
    * {@inheritDoc}
    */
-  public DataObject get(DataId id) throws DataException {
+  public DataObject getById(DataId id) throws DataException {
 
     SmartId smartId = (SmartId) id;
     DataObject result = getFromCache(smartId);

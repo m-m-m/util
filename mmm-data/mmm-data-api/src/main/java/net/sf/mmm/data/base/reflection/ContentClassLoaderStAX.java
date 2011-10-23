@@ -250,7 +250,7 @@ public class ContentClassLoaderStAX extends ContentClassLoaderNative {
         DataFieldModifiers.XML_ATR_READ_ONLY, Boolean.class, Boolean.FALSE).booleanValue();
     boolean isStatic = getStaxUtil().parseAttribute(xmlReader, null,
         DataFieldModifiers.XML_ATR_STATIC, Boolean.class, Boolean.FALSE).booleanValue();
-    boolean isSystem = declaringClass.getContentModifiers().isSystem();
+    boolean isSystem = declaringClass.getModifiers().isSystem();
     boolean isTransient = getStaxUtil().parseAttribute(xmlReader, null,
         DataFieldModifiers.XML_ATR_TRANSIENT, Boolean.class, Boolean.FALSE).booleanValue();
     boolean isInheritedFromParent = getStaxUtil().parseAttribute(xmlReader, null,

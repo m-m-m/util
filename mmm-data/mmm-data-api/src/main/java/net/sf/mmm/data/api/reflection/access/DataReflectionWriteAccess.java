@@ -27,7 +27,7 @@ public interface DataReflectionWriteAccess {
    *        of the class to create.
    * @param name is the {@link net.sf.mmm.data.api.DataObject#getTitle()
    *        name} of the class to create.
-   * @param modifiers are the {@link DataClass#getContentModifiers()
+   * @param modifiers are the {@link DataClass#getModifiers()
    *        modifiers} for the class to create.
    * @return the created class.
    * @throws DataReflectionException if the class could not be created. This
@@ -56,7 +56,7 @@ public interface DataReflectionWriteAccess {
    *        that can be stored in the created field. Use
    *        {@link net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(java.lang.reflect.Type, Class)}
    *        to create an instance of {@link GenericType}.
-   * @param modifiers are the {@link DataField#getContentModifiers()
+   * @param modifiers are the {@link DataField#getModifiers()
    *        modifiers} for the field to create.
    * @return the created field.
    * @throws DataReflectionException if the field could not be created. This

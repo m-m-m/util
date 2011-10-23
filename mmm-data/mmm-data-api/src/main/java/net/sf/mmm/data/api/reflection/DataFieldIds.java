@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-
 /**
  * This type is a simple collection of constants for the
  * {@link net.sf.mmm.data.api.reflection.DataField#getId() field IDs}.
@@ -71,10 +70,10 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getContentModifiers()}
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getModifiers()}
    * .
    */
-  int ID_REFLECTIONOBJECT_CONTENTMODIFIERS = 103;
+  int ID_REFLECTIONOBJECT_MODIFIERS = 103;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
@@ -85,8 +84,40 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getSuperClass()}.
+   */
+  int ID_CLASS_SUPERCLASS = 120;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getDeclaredFields()}.
+   */
+  int ID_CLASS_DECLAREDFIELDS = 121;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getFields()}.
+   */
+  int ID_CLASS_FIELDS = 122;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getSubClasses()}.
+   */
+  int ID_CLASS_SUBCLASSES = 123;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()}.
+   */
+  int ID_CLASS_MODIFIERS = 126;
+
+  int ID_CLASS_NAMESPACE = 0;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.entity.resource.DataResource#getPath()}.
    */
-  int ID_RESOURCE_PATH = 0;
+  int ID_RESOURCE_PATH = 200;
 
 }

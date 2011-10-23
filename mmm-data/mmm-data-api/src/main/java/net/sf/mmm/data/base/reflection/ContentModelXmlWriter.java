@@ -104,7 +104,7 @@ public class ContentModelXmlWriter {
 
     xmlWriter.writeStartElement(DataClass.CLASS_NAME);
     writeReflectionObject(contentClass, xmlWriter);
-    DataClassModifiers modifiers = contentClass.getContentModifiers();
+    DataClassModifiers modifiers = contentClass.getModifiers();
     if (modifiers.isSystem()) {
       xmlWriter.writeAttribute(DataModifiers.XML_ATR_SYSTEM, StringUtil.TRUE);
       if (modifiers.isExtendable() && !modifiers.isFinal()) {

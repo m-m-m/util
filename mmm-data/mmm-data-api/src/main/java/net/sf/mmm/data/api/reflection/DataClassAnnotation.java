@@ -63,6 +63,16 @@ public @interface DataClassAnnotation {
    */
   boolean isFinal() default false;
 
+  /**
+   * The {@link net.sf.mmm.data.api.reflection.DataClass#getNamespace()
+   * namespace} of the {@link net.sf.mmm.data.api.reflection.DataClass}
+   * reflecting the entity. If omitted the namespace will be inherited
+   * recursively from the
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getSuperClass()
+   * super-class}.
+   */
+  String namespace() default "";
+
   // /**
   // * the {@link RevisionControl} that determines if the annotated entity-type
   // * should be

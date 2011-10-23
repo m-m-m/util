@@ -31,7 +31,7 @@ import net.sf.mmm.data.resource.base.AbstractContentResource.AbstractContentReso
 public abstract class AbstractContentRepository extends AbstractContentResourceModifier implements
     DataRepository {
 
-  /** @see #getContentModel() */
+  /** @see #getReflectionService() */
   private AbstractMutableContentModelService contentModel;
 
   /** @see #getRootFolder() */
@@ -59,7 +59,7 @@ public abstract class AbstractContentRepository extends AbstractContentResourceM
   public void setRootFolder(AbstractContentObject rootFolder) {
 
     this.rootFolder = rootFolder;
-    setContentObjectClassAccess(this.rootFolder, getContentModel());
+    setContentObjectClassAccess(this.rootFolder, getReflectionService());
 
   }
 
@@ -88,29 +88,29 @@ public abstract class AbstractContentRepository extends AbstractContentResourceM
   /**
    * {@inheritDoc}
    */
-  public <E extends DataObject> E get(DataId id, Class<E> entityClass) throws DataException {
+  public <E extends DataObject> E getById(DataId id, Class<E> entityClass) throws DataException {
 
-    return cast(get(id), entityClass);
+    return cast(getById(id), entityClass);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <E extends DataObject> E get(String path, Class<E> entityClass) throws DataException {
+  public <E extends DataObject> E getByPath(String path, Class<E> entityClass) throws DataException {
 
-    return cast(get(path), entityClass);
+    return cast(getByPath(path), entityClass);
   }
 
   /**
    * {@inheritDoc}
    */
-  public AbstractMutableContentModelService getContentModel() {
+  public AbstractMutableContentModelService getReflectionService() {
 
     return this.contentModel;
   }
 
   /**
-   * @param contentModel the {@link #getContentModel() content-model} to set.
+   * @param contentModel the {@link #getReflectionService() content-model} to set.
    */
   @Resource
   public void setContentModel(AbstractMutableContentModelService contentModel) {
@@ -131,7 +131,7 @@ public abstract class AbstractContentRepository extends AbstractContentResourceM
   /**
    * {@inheritDoc}
    */
-  public DataObject get(String path) throws DataException {
+  public DataObject getByPath(String path) throws DataException {
 
     AbstractContentObject object = getRootFolder();
     // use smart query on persistent store (recursive SQL)?

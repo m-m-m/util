@@ -153,7 +153,7 @@ public interface DataField<CLASS extends DataObject, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  DataFieldModifiers getContentModifiers();
+  DataFieldModifiers getModifiers();
 
   // TODO: JSR 303
   // /**

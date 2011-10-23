@@ -35,7 +35,7 @@ public abstract class AbstractContentField<CLASS extends DataObject, FIELD> exte
   /** @see #getFieldType() */
   private GenericType<FIELD> fieldType;
 
-  /** @see #getContentModifiers() */
+  /** @see #getModifiers() */
   private DataFieldModifiers modifiers;
 
   /** @see #getConstraint() */
@@ -207,13 +207,13 @@ public abstract class AbstractContentField<CLASS extends DataObject, FIELD> exte
   /**
    * {@inheritDoc}
    */
-  public DataFieldModifiers getContentModifiers() {
+  public DataFieldModifiers getModifiers() {
 
     return this.modifiers;
   }
 
   /**
-   * This method sets the {@link #getContentModifiers() modifiers}.
+   * This method sets the {@link #getModifiers() modifiers}.
    * 
    * @param modifiers the modifiers to set
    */

@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.ReadOnlyException;
  * read} or {@link #setFieldValue(Object, Object) write} a
  * {@link net.sf.mmm.data.api.reflection.DataField field} of a
  * {@link net.sf.mmm.data.api.DataObject content-object}. According to the
- * {@link net.sf.mmm.data.api.reflection.DataField#getContentModifiers()
+ * {@link net.sf.mmm.data.api.reflection.DataField#getModifiers()
  * modifiers} the field may be
  * {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly()
  * read-only}. Then the write access will NOT be allowed and therefore fail.
