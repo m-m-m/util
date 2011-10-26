@@ -11,12 +11,19 @@ package net.sf.mmm.persistence.impl.jpa.test.api;
  */
 public interface DummyFooEntity extends DummyFooEntityView {
 
-  public abstract void setBar(DummyBarEntity bar);
+  /**
+   * @param bar the {@link DummyBarEntity} to set.
+   */
+  void setBar(DummyBarEntity bar);
 
-  public abstract void setNumber(int number);
+  /**
+   * @param number the number to set.
+   */
+  void setNumber(int number);
 
-  public abstract DummyBarEntity getBar();
-
-  public abstract int getNumber();
+  /**
+   * {@inheritDoc}
+   */
+  DummyBarEntity getBar();
 
 }

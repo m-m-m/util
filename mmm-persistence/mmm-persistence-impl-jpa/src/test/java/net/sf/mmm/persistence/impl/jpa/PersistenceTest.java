@@ -21,7 +21,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for the persistence.
+ * This is the test-case for the persistence. It performs a full integration
+ * test using hibernate as OR mapper and an embedded database.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

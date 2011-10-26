@@ -19,7 +19,7 @@ import net.sf.mmm.data.api.DataSelectionTree;
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 
  * @see net.sf.mmm.data.api.DataObject
- * @see DataReflectionService#getContentClass(net.sf.mmm.data.api.DataObject)
+ * @see DataReflectionService#getDataClass(net.sf.mmm.data.api.DataObject)
  * 
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
@@ -182,15 +182,12 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   boolean isSubClassOf(DataClass<?> contentClass);
 
   /**
-   * This method gets the namespace of this class. A namespace groups a set of
-   * {@link DataClass}es like a package in java. This is used for version
-   * controlling the schema (DDL) of classes within the same namespace. If a
-   * newer version is detected an automatic migration can be performed.
+   * This method gets the {@link DataClassGroupVersion} of this class.
    * 
-   * @return the namespace.
+   * @return the {@link DataClassGroupVersion}.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_NAMESPACE, isReadOnly = true)
-  String getNamespace();
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_GROUPVERSION, isReadOnly = true)
+  DataClassGroupVersion getGroupVersion();
 
   // /**
   // * This method determines if the {@link ContentObject entity} represented by

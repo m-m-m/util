@@ -112,11 +112,15 @@ public interface DataFieldIds {
    */
   int ID_CLASS_MODIFIERS = 126;
 
-  int ID_CLASS_NAMESPACE = 0;
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getGroupVersion()}.
+   */
+  int ID_CLASS_GROUPVERSION = 127;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.entity.resource.DataResource#getPath()}.
+   * {@link net.sf.mmm.data.api.entity.resource.DataEntityResource#getPath()}.
    */
   int ID_RESOURCE_PATH = 200;
 

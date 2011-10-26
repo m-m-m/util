@@ -50,7 +50,7 @@ public interface DataFieldModifiers extends DataModifiers {
   /**
    * This method determines if the field is read-only. A read-only field can NOT
    * be written (at least NOT via
-   * {@link DataField#setFieldValue(Object, Object)}).
+   * {@link DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)}).
    * 
    * @return <code>true</code> if the field is immutable, <code>false</code>
    *         otherwise.
@@ -78,9 +78,9 @@ public interface DataFieldModifiers extends DataModifiers {
    * described {@link DataFieldModifiers here}.<br>
    * From all instances of the {@link DataClass content-class} declaring the
    * field, the value of the field can be
-   * {@link net.sf.mmm.data.api.reflection.DataField#getFieldValue(Object)
+   * {@link net.sf.mmm.data.api.reflection.DataField#getFieldValue(net.sf.mmm.data.api.DataObject)
    * read} and (if not {@link #isReadOnly() read-only} be
-   * {@link net.sf.mmm.data.api.reflection.DataField#setFieldValue(Object, Object)
+   * {@link net.sf.mmm.data.api.reflection.DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)
    * written} while the instance can be <code>null</code>.<br>
    * A {@link #isStatic() static} field can NOT be {@link #isTransient()
    * transient}. It can be persisted without relevant costs. If the according
@@ -93,25 +93,23 @@ public interface DataFieldModifiers extends DataModifiers {
   boolean isStatic();
 
   /**
-   * This method determines if the {@link DataField} will inherit a value
-   * from {@link net.sf.mmm.data.api.DataObject#getParent() parent} if not
-   * set.<br/>
-   * If a {@link net.sf.mmm.data.api.DataObject} <code>O</code> is an
-   * instance of some {@link DataClass} <code>C</code> that has a
-   * {@link DataField} <code>f</code> where this modifier is
-   * <code>true</code> and the internal value of that that field (
-   * <code>O.f</code>) is not set (has a value of <code>null</code>) then the
-   * value will be recursively inherited from the
-   * {@link net.sf.mmm.data.api.DataObject#getParent() parent} (
+   * This method determines if the {@link DataField} will inherit a value from
+   * {@link net.sf.mmm.data.api.DataNode#getParent() parent} if not set.<br/>
+   * If a {@link net.sf.mmm.data.api.DataObject} <code>O</code> is an instance
+   * of some {@link DataClass} <code>C</code> that has a {@link DataField}
+   * <code>f</code> where this modifier is <code>true</code> and the internal
+   * value of that that field ( <code>O.f</code>) is not set (has a value of
+   * <code>null</code>) then the value will be recursively inherited from the
+   * {@link net.sf.mmm.data.api.DataNode#getParent() parent} (
    * <code>O.parent.f</code>). Therefore the
-   * {@link net.sf.mmm.data.api.DataObject#getParent() parent} needs to be
-   * of the same type ({@link DataClass}) (<code>O.parent</code> instanceof
-   * <code>C</code>).<br/>
+   * {@link net.sf.mmm.data.api.DataNode#getParent() parent} needs to be of the
+   * same type ({@link DataClass}) (<code>O.parent</code> instanceof
+   * <code>C</code>) and this flag only makes sense for objects of the type
+   * {@link net.sf.mmm.data.api.DataSelectionTree}.<br/>
    * <b>ATTENTION:</b><br>
-   * In a statically typed {@link net.sf.mmm.data.api.reflection
-   * content-model} this feature has to be manually implemented in the getter
-   * method. In a dynamically typed model the feature will be available
-   * automatically.
+   * In a statically typed {@link net.sf.mmm.data.api.reflection content-model}
+   * this feature is provided by a dynamic proxy and will NOT be available for
+   * objects created manually with <code>new</code>.
    * 
    * @return <code>true</code> if inherited from parent, <code>false</code>
    *         otherwise.

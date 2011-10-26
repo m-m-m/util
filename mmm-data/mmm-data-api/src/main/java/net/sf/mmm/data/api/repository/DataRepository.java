@@ -5,7 +5,7 @@ package net.sf.mmm.data.api.repository;
 
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.entity.resource.DataFolder;
-import net.sf.mmm.data.api.entity.resource.DataResource;
+import net.sf.mmm.data.api.entity.resource.DataEntityResource;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.repository.access.DataObjectReadAccess;
 
@@ -30,11 +30,11 @@ public interface DataRepository extends DataObjectReadAccess {
   /**
    * This method gets the root-folder of the repository.
    * 
-   * @see DataResource#getParent()
+   * @see DataEntityResource#getParent()
    * 
    * @return the root-folder.
    */
-  DataResource getRootFolder();
+  DataEntityResource getRootFolder();
 
   // /**
   // * This method gets the raw instance of the given <code>entity</code>.<br>
@@ -56,10 +56,10 @@ public interface DataRepository extends DataObjectReadAccess {
   /**
    * This method renames the given <code>contentObject</code>.
    * 
-   * @param resource is the {@link DataResource} to rename.
+   * @param resource is the {@link DataEntityResource} to rename.
    * @param newTitle is the new
    *        {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
-   *        {@link DataResource}.
+   *        {@link DataEntityResource}.
    * @throws DataException if the operation failed. This can have one of the
    *         following reasons:
    *         <ul>
@@ -68,30 +68,30 @@ public interface DataRepository extends DataObjectReadAccess {
    *         a {@link net.sf.mmm.data.api.reflection.DataClass} and the
    *         underlying {@link DataReflectionService} does NOT support
    *         renaming).</li>
-   *         <li>the {@link DataResource#getParent() parent} of the
+   *         <li>the {@link DataEntityResource#getParent() parent} of the
    *         <code>entity</code> already has a
-   *         {@link DataResource#getChildren() child}
+   *         {@link DataEntityResource#getChildren() child}
    *         {@link net.sf.mmm.data.api.DataObject#getTitle() titled}
    *         <code>newTitle</code>.</li>
    *         </ul>
    */
-  void rename(DataResource resource, String newTitle) throws DataException;
+  void rename(DataEntityResource resource, String newTitle) throws DataException;
 
   /**
    * This method moves the given <code>resource</code> to the new
-   * {@link DataResource#getParent() parent} given by <code>newParent</code>.
+   * {@link DataEntityResource#getParent() parent} given by <code>newParent</code>.
    * 
-   * @param resource is the {@link DataResource} to move.
-   * @param newParent is the new {@link DataResource#getParent() parent} where
+   * @param resource is the {@link DataEntityResource} to move.
+   * @param newParent is the new {@link DataEntityResource#getParent() parent} where
    *        to move the <code>resource</code> to.
    * @throws DataException if the operation fails. This can have one of the
    *         following reasons:
    *         <ul>
    *         <li>the {@link DataFolder} <code>newParent</code> already has a
-   *         {@link DataResource#getChildren() child} with the same
+   *         {@link DataEntityResource#getChildren() child} with the same
    *         {@link net.sf.mmm.data.api.DataObject#getTitle() title}.</li>
    *         </ul>
    */
-  void move(DataResource resource, DataFolder newParent) throws DataException;
+  void move(DataEntityResource resource, DataFolder newParent) throws DataException;
 
 }

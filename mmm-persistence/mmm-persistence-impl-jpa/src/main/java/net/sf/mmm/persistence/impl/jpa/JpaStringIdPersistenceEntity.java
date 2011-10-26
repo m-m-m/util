@@ -16,9 +16,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class JpaStringIdPersistenceEntity extends JpaPersistenceEntity<String> {
 
-  /** @see #getId() */
-  private String id;
-
   /**
    * The constructor.
    */
@@ -30,10 +27,11 @@ public abstract class JpaStringIdPersistenceEntity extends JpaPersistenceEntity<
   /**
    * {@inheritDoc}
    */
+  @Override
   @Id
   public String getId() {
 
-    return this.id;
+    return super.getId();
   }
 
   /**
@@ -44,9 +42,10 @@ public abstract class JpaStringIdPersistenceEntity extends JpaPersistenceEntity<
    * 
    * @param id is the ID to set.
    */
+  @Override
   public void setId(String id) {
 
-    this.id = id;
+    super.setId(id);
   }
 
 }

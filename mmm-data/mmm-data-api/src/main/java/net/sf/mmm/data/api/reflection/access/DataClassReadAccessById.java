@@ -4,11 +4,12 @@
 package net.sf.mmm.data.api.reflection.access;
 
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 
 /**
- * This interface allows to {@link #getContentClass(long) get} a
- * {@link DataClass} by its {@link DataClass#getContentId() ID}.
+ * This interface allows to {@link #getDataClass(long) get} a {@link DataClass}
+ * by its {@link DataClass#getId() ID}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -22,10 +23,25 @@ public interface DataClassReadAccessById {
    * @see net.sf.mmm.data.api.datatype.DataId#getContentClassId()
    * @see net.sf.mmm.data.api.DataIdManager#getClassId(int)
    * 
-   * @param id is the unique ID of the requested class.
+   * @param id is the {@link DataClass#getId() unique ID} of the requested
+   *        class.
    * @return the content class for the given ID or <code>null</code> if it does
    *         NOT exist.
    */
-  DataClass<? extends DataObject> getContentClass(long id);
+  DataClass<? extends DataObject> getDataClass(long id);
+
+  /**
+   * This method gets the {@link DataClass} for the given <code>id</code>.
+   * 
+   * @see DataClass#getId()
+   * @see net.sf.mmm.data.api.datatype.DataId#getContentClassId()
+   * @see net.sf.mmm.data.api.DataIdManager#getClassId(int)
+   * 
+   * @param id is the {@link DataReflectionReadAccess#getDataId(DataObject)
+   *        unique ID} of the requested class.
+   * @return the content class for the given ID or <code>null</code> if it does
+   *         NOT exist.
+   */
+  DataClass<? extends DataObject> getDataClass(DataId id);
 
 }

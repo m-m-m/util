@@ -13,6 +13,9 @@ import net.sf.mmm.persistence.api.PersistenceEntity;
  */
 public interface DummyBarEntityView extends PersistenceEntity<Integer> {
 
-  public abstract String getValue();
+  /**
+   * @return the value or <code>null</code>.
+   */
+  String getValue();
 
 }

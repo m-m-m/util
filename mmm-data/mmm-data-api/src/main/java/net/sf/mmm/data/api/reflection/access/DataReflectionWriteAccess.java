@@ -39,7 +39,7 @@ public interface DataReflectionWriteAccess {
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
-  DataClass<? extends DataObject> createContentClass(
+  DataClass<? extends DataObject> createDataClass(
       DataClass<? extends DataObject> superClass, String name, DataClassModifiers modifiers)
       throws DataReflectionException;
 
@@ -66,7 +66,7 @@ public interface DataReflectionWriteAccess {
    *         <li>the given class already declares a field with the given name</li>
    *         </ul>
    */
-  <FIELD> DataField<? extends DataObject, FIELD> createContentField(
+  <FIELD> DataField<? extends DataObject, FIELD> createDataField(
       DataClass<? extends DataObject> declaringClass, String name, GenericType<FIELD> type,
       DataFieldModifiers modifiers) throws DataReflectionException;
 

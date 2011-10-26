@@ -5,6 +5,8 @@ package net.sf.mmm.persistence.impl.jpa;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -34,12 +36,39 @@ public abstract class JpaPersistenceEntity<ID> implements PersistenceEntity<ID> 
   /** @see #getModificationTimestamp() */
   private Date modificationTimestamp;
 
+  /** @see #getId() */
+  private ID id;
+
   /**
    * The constructor.
    */
   public JpaPersistenceEntity() {
 
     super();
+  }
+
+  /**
+   * <b>ATTENTION:</b><br/>
+   * If your ID is not {@link GeneratedValue generated}, you need to override
+   * this method. In this case you can also override {@link #setId(Object)} to
+   * change the visibility to public.<br/>
+   * <br/>
+   * 
+   * {@inheritDoc}
+   */
+  @Id
+  @GeneratedValue
+  public ID getId() {
+
+    return this.id;
+  }
+
+  /**
+   * @param id is the id to set
+   */
+  protected void setId(ID id) {
+
+    this.id = id;
   }
 
   /**

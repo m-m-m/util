@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * {@link DataObject content}.
  * 
  * @see net.sf.mmm.data.api.reflection.DataReflectionException
- * @see net.sf.mmm.data.security.api.SecurityException
+ * @see net.sf.mmm.util.security.api.SecurityException
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

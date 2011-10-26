@@ -20,6 +20,7 @@
     <module>mmm-content-parser</module>
     <module>mmm-transaction</module>
     <module>mmm-persistence</module>
+    <module>mmm-security</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
     <!-- only local -->

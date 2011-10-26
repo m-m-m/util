@@ -21,9 +21,6 @@ public class NlsBundleDataApi extends AbstractResourceBundle {
     super();
   }
 
-  /** @see net.sf.mmm.data.security.api.PermissionDeniedException */
-  public static final String ERR_PERMISSION_DENIED = "Permission denied for \"{user}\" performing \"{operation}\" on \"{object}\"!";
-
   /** @see net.sf.mmm.content.model.api.ContentFieldNotExistsException */
   public static final String ERR_NO_SUCH_FIELD = "The class \"{1}\" does not own a field with the name \"{0}\"!";
 
@@ -33,7 +30,7 @@ public class NlsBundleDataApi extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.model.api.ContentClassNotExistsException */
   public static final String ERR_NO_SUCH_CLASS_ID = "The content-class with ID \"{0}\" was NOT found!";
 
-  /** @see net.sf.mmm.data.base.reflection.ContentClassLoaderException */
+  /** @see net.sf.mmm.data.base.reflection.DataClassLoaderException */
   public static final String ERR_LOAD_CLASS = "Failed to load class(es) (\"{0}\")!";
 
   /**
@@ -60,19 +57,19 @@ public class NlsBundleDataApi extends AbstractResourceBundle {
   /** @see net.sf.mmm.content.model.base.DuplicateFieldException */
   public static final String ERR_DUPLICATE_FIELD_ID = "The field with the ID \"{0}\" already exists!";
 
-  /** @see net.sf.mmm.data.base.reflection.ContentModifiersIllegalException */
+  /** @see net.sf.mmm.data.base.reflection.DataModifiersIllegalException */
   public static final String ERR_MODIFIERS_TRANSIENT_MUTABLE = "A transient field has to be read-only!";
 
-  /** @see net.sf.mmm.data.base.reflection.ContentModifiersIllegalException */
+  /** @see net.sf.mmm.data.base.reflection.DataModifiersIllegalException */
   public static final String ERR_MODIFIERS_TRANSIENT_STATIC = "A transient field can NOT be static!";
 
-  /** @see net.sf.mmm.data.base.reflection.ContentModifiersIllegalException */
+  /** @see net.sf.mmm.data.base.reflection.DataModifiersIllegalException */
   public static final String ERR_MODIFIERS_ABSTRACT_FINAL = "An abstract class can NOT be final!";
 
-  /** @see net.sf.mmm.data.base.reflection.ContentModifiersIllegalException */
+  /** @see net.sf.mmm.data.base.reflection.DataModifiersIllegalException */
   public static final String ERR_MODIFIERS_FINAL_EXTENDABLE = "A final class can NOT be extendable!";
 
-  /** @see net.sf.mmm.data.base.reflection.ContentModifiersIllegalException */
+  /** @see net.sf.mmm.data.base.reflection.DataModifiersIllegalException */
   public static final String ERR_MODIFIERS_USER_UNEXTENDABLE = "Only system-classes can be un-extendable without being final!";
 
   /** @see net.sf.mmm.data.api.reflection.DataReflectionNotEditableException */
@@ -83,9 +80,6 @@ public class NlsBundleDataApi extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.data.api.reflection.DataSystemModifyException */
   public static final String ERR_MODIFY_SYSTEM = "Can NOT modify \"{0}\" because it is required by the system!";
-
-  /** @see net.sf.mmm.data.api.DataCastException */
-  public static final String ERR_CAST = "Can NOT cast from \"{source}\" to \"{target}\"!";
 
   /** @see net.sf.mmm.content.api.LockNotOwnerExecption */
   public static final String ERR_LOCK_NOT_OWNER = "User \"{1}\" can NOT modify lock of user \"{0}\" on object \"{2}\"!";

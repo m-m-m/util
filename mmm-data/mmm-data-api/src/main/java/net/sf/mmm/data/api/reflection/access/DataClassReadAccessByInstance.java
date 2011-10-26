@@ -8,9 +8,9 @@ import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * This interface allows to {@link #getContentClass(Object) get} a
- * {@link DataClass} for a given {@link net.sf.mmm.data.api.DataObject
- * instance}.
+ * This interface allows to {@link #getDataClass(DataClass) get} a
+ * {@link DataClass} for a given {@link net.sf.mmm.data.api.DataObject instance}
+ * .
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -31,7 +31,6 @@ public interface DataClassReadAccessByInstance {
    * @throws ObjectNotFoundException if the given <code>contentObject</code> is
    *         unknown by the content-model.
    */
-  <C extends DataObject> DataClass<C> getContentClass(C contentObject)
-      throws ObjectNotFoundException;
+  <C extends DataObject> DataClass<C> getDataClass(C contentObject) throws ObjectNotFoundException;
 
 }

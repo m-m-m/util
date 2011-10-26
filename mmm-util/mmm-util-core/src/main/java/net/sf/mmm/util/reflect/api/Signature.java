@@ -12,6 +12,8 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * "method signature"}. It is a container for a {@link java.lang.Class} array
  * and can be used as {@link java.util.Map#get(java.lang.Object) hash-key}.
  * 
+ * @see #isApplicable(Signature)
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */

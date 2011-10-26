@@ -431,4 +431,13 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_POJO_PATH_CONVERSION = "Can NOT convert from \"{type}\""
       + " to \"{targetType}\" for pojo-path \"{path}\"!";
 
+  /** @see net.sf.mmm.util.reflect.api.CastFailedException */
+  public static final String ERR_CAST = "Can NOT cast \"{object}\" from \"{source}\" to \"{target}\"!";
+
+  /** @see net.sf.mmm.util.security.api.PermissionDeniedException */
+  public static final String ERR_PERMISSION_DENIED_ON_OBJECT = "Permission denied for \"{user}\" performing \"{operation}\" on \"{object}\"!";
+
+  /** @see net.sf.mmm.util.security.api.PermissionDeniedException */
+  public static final String ERR_PERMISSION_DENIED = "Permission denied for \"{user}\" performing \"{operation}\"!";
+
 }

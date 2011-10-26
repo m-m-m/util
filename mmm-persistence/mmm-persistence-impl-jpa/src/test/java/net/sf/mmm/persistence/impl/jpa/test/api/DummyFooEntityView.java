@@ -13,8 +13,14 @@ import net.sf.mmm.persistence.api.PersistenceEntity;
  */
 public interface DummyFooEntityView extends PersistenceEntity<Integer> {
 
-  public abstract DummyBarEntityView getBar();
+  /**
+   * @return the {@link DummyBarEntity} or <code>null</code>.
+   */
+  DummyBarEntityView getBar();
 
-  public abstract int getNumber();
+  /**
+   * @return the number.
+   */
+  int getNumber();
 
 }

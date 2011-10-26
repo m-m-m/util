@@ -8,7 +8,7 @@ import net.sf.mmm.data.api.reflection.DataField;
 
 /**
  * This interface allows to {@link #getContentField(long) get} a
- * {@link DataField} by its {@link DataField#getContentId() ID}.
+ * {@link DataField} by its {@link DataField#getId() ID}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

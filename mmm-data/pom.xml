@@ -17,6 +17,7 @@
   
   <modules>
     <module>mmm-data-api</module>
+    <module>mmm-data-base</module>
     <module>mmm-data-impl-persistence</module>
   </modules>
   

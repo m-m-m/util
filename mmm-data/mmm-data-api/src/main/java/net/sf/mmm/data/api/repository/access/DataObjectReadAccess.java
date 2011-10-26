@@ -6,7 +6,7 @@ package net.sf.mmm.data.api.repository.access;
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
-import net.sf.mmm.data.api.entity.resource.DataResource;
+import net.sf.mmm.data.api.entity.resource.DataEntityResource;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -32,8 +32,9 @@ public interface DataObjectReadAccess {
   <E extends DataObject> E getById(DataId id, Class<E> entityClass) throws DataException;
 
   /**
-   * This method gets the {@link DataObject} {@link DataObject#getContentId()
-   * with} the given <code>id</code>.
+   * This method gets the {@link DataObject} with the given <code>id</code>.
+   * 
+   * @see net.sf.mmm.data.api.reflection.DataReflectionService#getDataId(DataObject)
    * 
    * @param id is the {@link DataId} of the requested {@link DataObject}.
    * @return the object with the given identifier.
@@ -43,11 +44,11 @@ public interface DataObjectReadAccess {
   DataObject getById(DataId id) throws ObjectNotFoundException;
 
   /**
-   * This method gets the {@link DataResource} with the given
-   * <code>{@link DataResource#getPath() path}</code>.
+   * This method gets the {@link DataEntityResource} with the given
+   * <code>{@link DataEntityResource#getPath() path}</code>.
    * 
-   * @param path is the {@link DataResource#getPath() path} of the requested
-   *        object.
+   * @param path is the {@link DataEntityResource#getPath() path} of the
+   *        requested object.
    * @return the object with the given <code>path</code>.
    * @throws DataException if the operation failed. This can have one of the
    *         following reasons:
@@ -56,7 +57,7 @@ public interface DataObjectReadAccess {
    *         <li>no resource exists for the given <code>path</code>.</li>
    *         </ul>
    */
-  DataResource getByPath(String path) throws DataException;
+  DataEntityResource getByPath(String path) throws DataException;
 
   /**
    * This method gets the {@link DataObject} with the given <code>path</code> .
@@ -64,8 +65,8 @@ public interface DataObjectReadAccess {
    * @see #getByPath(String)
    * 
    * @param <E> is the generic entity type of the requested object.
-   * @param path is the {@link DataObject#getPath() path} of the requested
-   *        object.
+   * @param path is the {@link DataEntityResource#getPath() path} of the
+   *        requested object.
    * @param entityClass is the java-class reflecting the type of the requested
    *        entity.
    * @return the object with the given <code>path</code>.
@@ -76,6 +77,7 @@ public interface DataObjectReadAccess {
    *         <li>no resource exists for the given <code>path</code>.</li>
    *         </ul>
    */
-  <E extends DataResource> E getByPath(String path, Class<E> entityClass) throws DataException;
+  <E extends DataEntityResource> E getByPath(String path, Class<E> entityClass)
+      throws DataException;
 
 }

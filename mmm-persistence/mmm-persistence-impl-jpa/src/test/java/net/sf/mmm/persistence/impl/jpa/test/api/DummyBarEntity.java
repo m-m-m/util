@@ -11,6 +11,9 @@ package net.sf.mmm.persistence.impl.jpa.test.api;
  */
 public interface DummyBarEntity extends DummyBarEntityView {
 
-  public abstract void setValue(String bar);
+  /**
+   * @param value is the value to set.
+   */
+  void setValue(String value);
 
 }

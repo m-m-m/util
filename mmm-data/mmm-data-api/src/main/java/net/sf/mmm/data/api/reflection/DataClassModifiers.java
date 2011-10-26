@@ -31,8 +31,8 @@ public interface DataClassModifiers extends DataModifiers {
 
   /**
    * This method determines if the class is abstract and no
-   * {@link net.sf.mmm.data.api.DataObject instance} can be created
-   * directly from this class.
+   * {@link net.sf.mmm.data.api.DataObject instance} can be created directly
+   * from this class.
    * 
    * @return <code>true</code> if the class is abstract.
    */
@@ -40,16 +40,16 @@ public interface DataClassModifiers extends DataModifiers {
 
   /**
    * This method determines if the class can be
-   * {@link net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess#createContentClass(DataClass, String, ContentClassModifiers)
+   * {@link net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess#createDataClass(DataClass, String, DataClassModifiers)
    * extended} by the user.<br>
-   * A {@link DataModifiers#isFinal() final} class is NOT extendable. In
-   * advance a {@link DataModifiers#isSystem() system} class that is NOT
+   * A {@link DataModifiers#isFinal() final} class is NOT extendable. In advance
+   * a {@link DataModifiers#isSystem() system} class that is NOT
    * {@link DataModifiers#isFinal() final} can have
    * {@link DataClass#getSubClasses() sub-classes} but may NOT be extendable.
    * These {@link DataClass#getSubClasses() sub-classes} will also be
-   * {@link DataModifiers#isSystem() system} classes. In that case this
-   * method returns <code>false</code> even though {@link #isFinal()} will
-   * return <code>false</code>.
+   * {@link DataModifiers#isSystem() system} classes. In that case this method
+   * returns <code>false</code> even though {@link #isFinal()} will return
+   * <code>false</code>.
    * 
    * @return <code>true</code> if the class can be extended by the user,
    *         <code>false</code> otherwise.

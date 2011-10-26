@@ -46,9 +46,9 @@ public abstract interface DataModifiers extends Serializable {
    * final} {@link java.lang.reflect.Field fields} in the java language
    * specification. In the world of <code>mmm-content</code>, a
    * {@link #isFinal() final} {@link DataField field} can be
-   * {@link DataField#setFieldValue(Object, Object) modified} any number of
-   * times as long as it is NOT {@link DataFieldModifiers#isReadOnly()
-   * read-only}.
+   * {@link DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)
+   * modified} any number of times as long as it is NOT
+   * {@link DataFieldModifiers#isReadOnly() read-only}.
    * 
    * @see DataField
    * 

@@ -6,7 +6,7 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-import net.sf.mmm.persistence.impl.jpa.JpaIntegerIdPersistenceEntity;
+import net.sf.mmm.persistence.impl.jpa.JpaPersistenceEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 
@@ -16,7 +16,7 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyFooEntityImpl extends JpaIntegerIdPersistenceEntity implements DummyFooEntity {
+public class DummyFooEntityImpl extends JpaPersistenceEntity<Integer> implements DummyFooEntity {
 
   /** @see #getNumber() */
   private int number;

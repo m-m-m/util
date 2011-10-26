@@ -7,7 +7,7 @@ import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 
 /**
- * This interface allows to {@link #getContentClass(String) get} a
+ * This interface allows to {@link #getDataClass(String) get} a
  * {@link DataClass} by its {@link DataClass#getTitle() name}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -23,6 +23,6 @@ public interface DataClassReadAccessByTitle {
    * @return the {@link DataClass} for the given name or <code>null</code> if
    *         no such class exist.
    */
-  DataClass<? extends DataObject> getContentClass(String title);
+  DataClass<? extends DataObject> getDataClass(String title);
 
 }
