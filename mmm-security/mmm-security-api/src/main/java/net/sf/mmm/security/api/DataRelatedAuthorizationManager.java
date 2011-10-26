@@ -20,7 +20,7 @@ import java.security.Principal;
  * @param <OBJECT> is the generic type of the object to perform the operation
  *        on.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 1.0.0
  */
 public interface DataRelatedAuthorizationManager<USER extends Principal, OPERATION, OBJECT> extends
     AuthorizationManager<USER, OPERATION> {
