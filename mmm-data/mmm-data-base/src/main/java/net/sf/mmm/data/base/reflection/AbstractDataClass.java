@@ -20,8 +20,7 @@ import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
- * This is the abstract base implementation of the {@link DataClass}
- * interface.
+ * This is the abstract base implementation of the {@link DataClass} interface.
  * 
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
@@ -56,10 +55,10 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   private final Collection<AbstractDataField<CLASS, ?>> declaredFieldsView;
 
   /** @see #getDeclaredFields() */
-  private final Collection<AbstractDataField<? super CLASS, ?>> fieldsView;
+  private final Collection<AbstractDataField<? extends DataObject, ?>> fieldsView;
 
-  /** @see #isRevisionControlled() */
-  private boolean revisionControlled;
+  // /** @see #isRevisionControlled() */
+  // private boolean revisionControlled;
 
   /**
    * The constructor.
@@ -111,7 +110,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * 
    * @param superClass the super-class to set.
    */
-  protected void setSuperClass(AbstractDataClass superClass) {
+  protected void setSuperClass(AbstractDataClass<? super CLASS> superClass) {
 
     this.superClass = superClass;
   }
@@ -124,21 +123,21 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
     return getSubClasses();
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isRevisionControlled() {
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public boolean isRevisionControlled() {
+  //
+  // return this.revisionControlled;
+  // }
 
-    return this.revisionControlled;
-  }
-
-  /**
-   * @param revisionControlled the revisionControlled to set
-   */
-  public void setRevisionControlled(boolean revisionControlled) {
-
-    this.revisionControlled = revisionControlled;
-  }
+  // /**
+  // * @param revisionControlled the revisionControlled to set
+  // */
+  // public void setRevisionControlled(boolean revisionControlled) {
+  //
+  // this.revisionControlled = revisionControlled;
+  // }
 
   /**
    * {@inheritDoc}
@@ -171,7 +170,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public Collection<AbstractDataField<? super CLASS, ?>> getFields() {
+  public Collection<AbstractDataField<? extends DataObject, ?>> getFields() {
 
     return this.fieldsView;
   }
@@ -233,7 +232,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isSubClassOf(DataClass contentClass) {
+  public boolean isSubClassOf(DataClass<? extends DataObject> contentClass) {
 
     if (this.superClass == null) {
       // root-class can NOT be a sub-class
@@ -250,7 +249,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isSuperClassOf(DataClass contentClass) {
+  public boolean isSuperClassOf(DataClass<? extends DataObject> contentClass) {
 
     return contentClass.isSubClassOf(this);
   }
@@ -264,7 +263,8 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * @param subClass is the sub-class to add.
    * @throws DataReflectionException if the operation fails.
    */
-  public void addSubClass(AbstractDataClass subClass) throws DataReflectionException {
+  public void addSubClass(AbstractDataClass<? extends CLASS> subClass)
+      throws DataReflectionException {
 
     if (subClass.getSuperClass() != this) {
       // TODO: NLS
@@ -290,12 +290,12 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * @param field is the field to add.
    * @throws DataReflectionException if the field could NOT be added.
    */
-  public void addField(AbstractDataField field) throws DataReflectionException {
+  public void addField(AbstractDataField<CLASS, ?> field) throws DataReflectionException {
 
     if (field.getDeclaringClass() != this) {
       throw new DataReflectionException("Can NOT add field if NOT declared by this class!");
     }
-    DataField duplicate = this.declaredFields.get(field.getTitle());
+    DataField<CLASS, ?> duplicate = this.declaredFields.get(field.getTitle());
     if (duplicate != field) {
       this.declaredFields.put(field.getTitle(), field);
     } else {
@@ -306,7 +306,8 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * @see DataClass#getFields()
    */
-  private class FieldsCollection extends AbstractCollection<AbstractDataField<? super CLASS, ?>> {
+  private class FieldsCollection extends
+      AbstractCollection<AbstractDataField<? extends DataObject, ?>> {
 
     /**
      * {@inheritDoc}
@@ -336,7 +337,8 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
      * {@inheritDoc}
      */
     @Override
-    public Iterator<AbstractDataField<? super CLASS, ?>> iterator() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public Iterator<AbstractDataField<? extends DataObject, ?>> iterator() {
 
       return new DataFieldIterator(AbstractDataClass.this);
     }
@@ -345,11 +347,12 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean contains(Object o) {
 
       if (o instanceof DataField) {
-        DataField field = (DataField) o;
-        DataClass declaringClass = field.getDeclaringClass();
+        DataField<? extends DataObject, ?> field = (DataField<? extends DataObject, ?>) o;
+        DataClass<? extends DataObject> declaringClass = field.getDeclaringClass();
         if ((declaringClass == AbstractDataClass.this)
             || (declaringClass.isSuperClassOf(AbstractDataClass.this))) {
           return true;
@@ -371,7 +374,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
      * {@inheritDoc}
      */
     @Override
-    public boolean add(AbstractDataField e) {
+    public boolean add(AbstractDataField<? extends DataObject, ?> e) {
 
       throw new UnsupportedOperationException();
     }
@@ -379,7 +382,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
     /**
      * {@inheritDoc}
      */
-    public boolean addAll(Collection<? extends AbstractDataField<? super CLASS, ?>> c) {
+    public boolean addAll(Collection<? extends AbstractDataField<? extends DataObject, ?>> c) {
 
       throw new UnsupportedOperationException();
     }

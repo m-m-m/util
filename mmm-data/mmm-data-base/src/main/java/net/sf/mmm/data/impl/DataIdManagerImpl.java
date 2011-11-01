@@ -10,10 +10,10 @@ import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.AbstractDataIdManager;
-import net.sf.mmm.data.impl.datatype.ContentClassId;
-import net.sf.mmm.data.impl.datatype.ContentFieldId;
-import net.sf.mmm.data.impl.datatype.ContentObjectGenericId;
-import net.sf.mmm.data.impl.datatype.ContentObjectId;
+import net.sf.mmm.data.impl.datatype.DataClassId;
+import net.sf.mmm.data.impl.datatype.DataFieldId;
+import net.sf.mmm.data.impl.datatype.DataObjectGenericId;
+import net.sf.mmm.data.impl.datatype.DataObjectId;
 
 /**
  * This is the implementation of the
@@ -43,7 +43,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   @Override
   public DataId getClassClassId() {
 
-    return ContentClassId.CLASS;
+    return DataClassId.CLASS;
   }
 
   /**
@@ -52,7 +52,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   @Override
   public DataId getFieldClassId() {
 
-    return ContentClassId.FIELD;
+    return DataClassId.FIELD;
   }
 
   /**
@@ -61,7 +61,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   @Override
   public DataId getRootClassId() {
 
-    return ContentClassId.ROOT;
+    return DataClassId.ROOT;
   }
 
   /**
@@ -70,7 +70,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   @Override
   public DataId getClassId(int classId) {
 
-    return ContentClassId.valueOf(classId);
+    return DataClassId.valueOf(classId);
   }
 
   /**
@@ -79,7 +79,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   @Override
   public DataId getFieldId(int fieldId) {
 
-    return ContentFieldId.valueOf(fieldId);
+    return DataFieldId.valueOf(fieldId);
   }
 
   /**
@@ -88,13 +88,13 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   public DataId getId(long objectId, int classId, int revision, int storeId) {
 
     if (classId == DataClass.CLASS_ID) {
-      return ContentClassId.valueOf((int) objectId);
+      return DataClassId.valueOf((int) objectId);
     } else if (classId == DataField.CLASS_ID) {
-      return ContentFieldId.valueOf((int) objectId);
+      return DataFieldId.valueOf((int) objectId);
     } else if ((storeId == 0) && (revision == 0)) {
-      return new ContentObjectId(objectId, classId);
+      return new DataObjectId(objectId, classId);
     } else {
-      return new ContentObjectGenericId(objectId, classId, revision, storeId);
+      return new DataObjectGenericId(objectId, classId, revision, storeId);
     }
   }
 

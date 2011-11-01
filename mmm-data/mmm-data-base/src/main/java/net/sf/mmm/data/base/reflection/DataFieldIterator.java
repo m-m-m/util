@@ -9,12 +9,13 @@ import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
- * This class is an enumeration for the fields of a class. It will enumerate the
- * fields defined by the class and the fields inherited from the sub-classes.
+ * This class is an {@link Iterator} for the fields of a class. It will
+ * enumerate the fields defined by the class and the fields inherited from the
+ * sub-classes.
  * 
  * @param <CLASS> is the generic type of the reflected
- *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()
- *        class} .
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass() class}
+ *        .
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,8 +32,8 @@ public class DataFieldIterator<CLASS extends DataObject> extends
    * The constructor.
    * 
    * @param contentClass is the class of that all
-   *        {@link net.sf.mmm.data.api.reflection.DataField fields} are to
-   *        be iterated.
+   *        {@link net.sf.mmm.data.api.reflection.DataField fields} are to be
+   *        iterated.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public DataFieldIterator(AbstractDataClass<CLASS> contentClass) {

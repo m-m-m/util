@@ -97,7 +97,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /** @see #getDataClass(long) */
     private final Map<Long, AbstractDataClass> id2classMap;
 
-    /** @see #getContentField(long) */
+    /** @see #getDataField(long) */
     private final Map<Long, AbstractDataField> id2fieldMap;
 
     /**
@@ -157,7 +157,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
-    public AbstractDataField<? extends DataObject, ?> getContentField(long id) {
+    public AbstractDataField<? extends DataObject, ?> getDataField(long id) {
 
       return this.id2fieldMap.get(Long.valueOf(id));
     }

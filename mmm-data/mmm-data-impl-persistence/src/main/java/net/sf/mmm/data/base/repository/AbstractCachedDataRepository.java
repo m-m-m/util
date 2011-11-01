@@ -101,14 +101,14 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
       if (oid == SmartId.OID_CLASS) {
         result = getReflectionService().getDataClass(id);
       } else if (oid == SmartId.OID_FIELD) {
-        result = getReflectionService().getContentField(id);
+        result = getReflectionService().getDataField(id);
       } else {
         // TODO: illegal ID
         throw new ContentObjectNotExistsException(id);
       }
     } else {
       // resource
-      int cid = id.getContentClassId();
+      int cid = id.getDataClassId();
       if (cid < ContentResource.CLASS_ID) {
         // internal entity
         // TODO: should this be handled different at all?

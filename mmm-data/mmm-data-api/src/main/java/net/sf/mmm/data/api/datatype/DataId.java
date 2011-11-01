@@ -15,14 +15,12 @@ import net.sf.mmm.util.lang.api.Datatype;
  * {@link net.sf.mmm.data.api.reflection.DataClass} (type).</li>
  * <li>{@link #getClassId() class-id} - is the id of the
  * {@link net.sf.mmm.data.api.reflection.DataClass} that reflects the
- * {@link net.sf.mmm.data.api.DataObject} identified by this
- * {@link DataId}.</li>
+ * {@link net.sf.mmm.data.api.DataObject} identified by this {@link DataId}.</li>
  * <li>{@link #getRevision() revision} - a
- * {@link net.sf.mmm.data.api.DataObject}
- * {@link net.sf.mmm.data.api.reflection.DataClass#isRevisionControlled() can}
- * have multiple {@link net.sf.mmm.data.api.reflection.DataClass#getRevision()
- * revisions} (as history). An {@link DataId} uniquely identifies the
- * specific {@link #getRevision() revision}.</li>
+ * {@link net.sf.mmm.data.api.DataObject} can have multiple
+ * {@link net.sf.mmm.data.api.reflection.DataClass#getRevision() revisions} (as
+ * history of changes). A {@link DataId} uniquely identifies the specific
+ * {@link #getRevision() revision}.</li>
  * <li>{@link #getStoreId() store-id} - if multiple back-ends are used to store
  * objects this identifies the actual store. In that case two totally different
  * objects may share the same {@link #getObjectId() object-id}. Unique
@@ -30,16 +28,14 @@ import net.sf.mmm.util.lang.api.Datatype;
  * {@link #getStoreId() store-id}. However in smaller systems only one store is
  * used.</li>
  * </ul>
- * If the identified object is a
- * {@link net.sf.mmm.data.resource.api.ContentResource} this ID points to the
- * exact revision in the history of that resource.<br>
+ * If the identified object is revision controlled this ID points to the exact
+ * revision in the history of that resource.<br>
  * Since the {@link #getRevision() revision} and {@link #getClassId() class} of
- * a {@link net.sf.mmm.data.api.DataObject content-object} does not
- * change, their primary keys are stored in this ID implementation. This allows
- * to determine the content-class and revision of the resource without any cost
- * (e.g. DB lookup). Especially a {@link net.sf.mmm.data.api.DataObject}
- * -instance may be created as dynamic proxy from the ID using lazy loading.<br>
- * 
+ * a {@link net.sf.mmm.data.api.DataObject} does not change, their primary keys
+ * are stored in this ID implementation. This allows to determine the data-class
+ * and revision of the resource without any cost (e.g. DB lookup). Especially a
+ * {@link net.sf.mmm.data.api.DataObject} -instance may be created as dynamic
+ * proxy from the ID using lazy loading.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -152,15 +148,15 @@ public interface DataId extends Datatype<DataId> {
    * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting the identified
    * object.
    * 
-   * @see net.sf.mmm.data.api.DataObject#getContentClassId()
-   * @see #getContentClassId()
+   * @see net.sf.mmm.data.api.reflection.DataReflectionService#getDataId(net.sf.mmm.data.api.DataObject)
+   * @see #getDataClassId()
    * 
    * @see net.sf.mmm.data.api.reflection.DataClass#CLASS_ID
    * @see net.sf.mmm.data.api.reflection.DataField#CLASS_ID
    * 
    * @return the classId.
    */
-  int getClassId();
+  long getClassId();
 
   /**
    * This method gets the revision number of the specific version associated
@@ -193,7 +189,7 @@ public interface DataId extends Datatype<DataId> {
    * 
    * @return the ID of the associated content-class.
    */
-  DataId getContentClassId();
+  DataId getDataClassId();
 
   /**
    * The string representation of the smart ID needs to be in the following

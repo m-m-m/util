@@ -5,6 +5,7 @@ package net.sf.mmm.data.api.reflection.access;
 
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This interface allows to {@link #getDataClass(String) get} a
@@ -20,9 +21,10 @@ public interface DataClassReadAccessByTitle {
    * 
    * @param title is the {@link DataClass#getTitle() title} of the requested
    *        class.
-   * @return the {@link DataClass} for the given name or <code>null</code> if
-   *         no such class exist.
+   * @return the {@link DataClass} for the given name.
+   * @throws ObjectNotFoundException if the requested {@link DataClass} does NOT
+   *         exist.
    */
-  DataClass<? extends DataObject> getDataClass(String title);
+  DataClass<? extends DataObject> getDataClass(String title) throws ObjectNotFoundException;
 
 }

@@ -134,7 +134,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @return a (read-only) collection of fields of this class.
    */
   @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_FIELDS, isReadOnly = true, isTransient = true)
-  Collection<? extends DataField<? super CLASS, ?>> getFields();
+  Collection<? extends DataField<? extends DataObject, ?>> getFields();
 
   /**
    * This method gets the field with the given {@link DataField#getTitle() name}
@@ -168,7 +168,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @return <code>true</code> if this class is a super-class of the given
    *         class.
    */
-  boolean isSuperClassOf(DataClass<?> contentClass);
+  boolean isSuperClassOf(DataClass<? extends DataObject> contentClass);
 
   /**
    * This is the opposite of the method
@@ -179,7 +179,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @param contentClass is the class to compare with.
    * @return <code>true</code> if this class is a sub-class of the given class.
    */
-  boolean isSubClassOf(DataClass<?> contentClass);
+  boolean isSubClassOf(DataClass<? extends DataObject> contentClass);
 
   /**
    * This method gets the {@link DataClassGroupVersion} of this class.

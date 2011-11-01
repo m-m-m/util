@@ -12,7 +12,7 @@ package net.sf.mmm.data.impl.datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentObjectGenericId extends ContentObjectId {
+public class DataObjectGenericId extends DataObjectId {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 1553359087706129686L;
@@ -34,7 +34,7 @@ public class ContentObjectGenericId extends ContentObjectId {
    * @param classId is the {@link #getClassId() class-ID}.
    * @param revision is the is the {@link #getRevision() revision}.
    */
-  public ContentObjectGenericId(long objectId, int classId, int revision) {
+  public DataObjectGenericId(long objectId, int classId, int revision) {
 
     this(objectId, classId, revision, 0);
   }
@@ -51,7 +51,7 @@ public class ContentObjectGenericId extends ContentObjectId {
    * @param revision is the is the {@link #getRevision() revision}.
    * @param storeId is the {@link #getStoreId() store-ID}.
    */
-  public ContentObjectGenericId(long objectId, int classId, int revision, int storeId) {
+  public DataObjectGenericId(long objectId, int classId, int revision, int storeId) {
 
     super(objectId, classId);
     this.revision = revision;

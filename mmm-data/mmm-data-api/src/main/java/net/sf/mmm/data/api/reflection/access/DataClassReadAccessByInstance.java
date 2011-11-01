@@ -19,18 +19,18 @@ public interface DataClassReadAccessByInstance {
 
   /**
    * This method gets the {@link DataClass} for the given
-   * <code>contentObject</code>.
+   * <code>dataObject</code>.
    * 
-   * @param <C> is the generic type of the given <code>contentObject</code>.
+   * @param <O> is the generic type of the given <code>dataObject</code>.
    * 
    * @see DataClass#getJavaClass()
    * 
-   * @param contentObject is the instance for which the {@link DataClass} is
+   * @param dataObject is the instance for which the {@link DataClass} is
    *        requested.
-   * @return the {@link DataClass} for the given <code>contentObject</code>.
-   * @throws ObjectNotFoundException if the given <code>contentObject</code> is
-   *         unknown by the content-model.
+   * @return the {@link DataClass} for the given <code>dataObject</code>.
+   * @throws ObjectNotFoundException if the given <code>dataObject</code> is
+   *         unknown.
    */
-  <C extends DataObject> DataClass<C> getDataClass(C contentObject) throws ObjectNotFoundException;
+  <O extends DataObject> DataClass<O> getDataClass(O dataObject) throws ObjectNotFoundException;
 
 }

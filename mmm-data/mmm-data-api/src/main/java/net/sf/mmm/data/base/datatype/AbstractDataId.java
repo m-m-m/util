@@ -11,7 +11,7 @@ import net.sf.mmm.data.api.datatype.DataId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractContentId implements DataId {
+public abstract class AbstractDataId implements DataId {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3656414714052544118L;
@@ -24,7 +24,7 @@ public abstract class AbstractContentId implements DataId {
    * 
    * @param objectId is the {@link #getObjectId() object-ID}.
    */
-  public AbstractContentId(long objectId) {
+  public AbstractDataId(long objectId) {
 
     super();
     this.objectId = objectId;
@@ -58,10 +58,10 @@ public abstract class AbstractContentId implements DataId {
     if (obj == null) {
       return false;
     }
-    if (!(obj instanceof AbstractContentId)) {
+    if (!(obj instanceof AbstractDataId)) {
       return false;
     }
-    AbstractContentId id = (AbstractContentId) obj;
+    AbstractDataId id = (AbstractDataId) obj;
     if (this.objectId != id.objectId) {
       return false;
     }
@@ -86,7 +86,8 @@ public abstract class AbstractContentId implements DataId {
 
     int hash = (int) this.objectId;
     hash = (hash << 8);
-    hash = hash ^ getClassId();
+    int classId = (int) getClassId();
+    hash = hash ^ classId;
     hash = hash + getRevision() + getStoreId();
     return hash;
   }
@@ -108,7 +109,7 @@ public abstract class AbstractContentId implements DataId {
     StringBuilder sb = new StringBuilder();
     sb.append(Long.toString(this.objectId, RADIX));
     sb.append('.');
-    sb.append(Integer.toString(getClassId(), RADIX));
+    sb.append(Long.toString(getClassId(), RADIX));
     int revision = getRevision();
     if (revision != 0) {
       sb.append('.');

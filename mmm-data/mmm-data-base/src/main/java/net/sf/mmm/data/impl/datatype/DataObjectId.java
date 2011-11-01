@@ -6,7 +6,7 @@ package net.sf.mmm.data.impl.datatype;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
-import net.sf.mmm.data.base.datatype.AbstractContentId;
+import net.sf.mmm.data.base.datatype.AbstractDataId;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentObjectId extends AbstractContentId {
+public class DataObjectId extends AbstractDataId {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2124272902771327589L;
@@ -36,7 +36,7 @@ public class ContentObjectId extends AbstractContentId {
    * @param objectId is the {@link #getObjectId() object-id}.
    * @param classId is the {@link #getClassId() class-id}.
    */
-  public ContentObjectId(long objectId, int classId) {
+  public DataObjectId(long objectId, int classId) {
 
     super(objectId);
     if ((classId == DataClass.CLASS_ID) || (classId == DataField.CLASS_ID)) {
@@ -48,7 +48,7 @@ public class ContentObjectId extends AbstractContentId {
   /**
    * {@inheritDoc}
    */
-  public int getClassId() {
+  public long getClassId() {
 
     return this.classId;
   }
@@ -56,9 +56,9 @@ public class ContentObjectId extends AbstractContentId {
   /**
    * {@inheritDoc}
    */
-  public DataId getContentClassId() {
+  public DataId getDataClassId() {
 
-    return ContentClassId.valueOf(this.classId);
+    return DataClassId.valueOf(this.classId);
   }
 
   /**

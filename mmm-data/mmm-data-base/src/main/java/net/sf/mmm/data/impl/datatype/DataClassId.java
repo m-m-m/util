@@ -8,7 +8,7 @@ import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionObject;
-import net.sf.mmm.data.base.datatype.AbstractContentId;
+import net.sf.mmm.data.base.datatype.AbstractDataId;
 
 /**
  * This is the implementation of the {@link DataId} interface for the ID of a
@@ -17,7 +17,7 @@ import net.sf.mmm.data.base.datatype.AbstractContentId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class ContentClassId extends AbstractContentId {
+public final class DataClassId extends AbstractDataId {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -7638229489656133262L;
@@ -26,13 +26,13 @@ public final class ContentClassId extends AbstractContentId {
   private static final int POOL_SIZE = 256;
 
   /** @see #valueOf(int) */
-  private static final ContentClassId[] POOL = new ContentClassId[POOL_SIZE];
+  private static final DataClassId[] POOL = new DataClassId[POOL_SIZE];
 
   /**
    * the id of the root {@link net.sf.mmm.data.api.reflection.DataClass
    * ContentClass} (the class that all other classes are derived from).
    */
-  public static final ContentClassId ROOT = valueOf(DataObject.CLASS_ID);
+  public static final DataClassId ROOT = valueOf(DataObject.CLASS_ID);
 
   /**
    * the id of the {@link net.sf.mmm.data.api.reflection.DataClass
@@ -40,20 +40,20 @@ public final class ContentClassId extends AbstractContentId {
    * {@link net.sf.mmm.data.api.reflection.DataReflectionObject
    * content-reflection-object}.
    */
-  public static final ContentClassId REFELCTION = valueOf(DataReflectionObject.CLASS_ID);
+  public static final DataClassId REFELCTION = valueOf(DataReflectionObject.CLASS_ID);
 
   /**
    * the id of the {@link net.sf.mmm.data.api.reflection.DataClass
    * content-class} that reflects itself (Like {@link Class} in java).
    */
-  public static final ContentClassId CLASS = valueOf(DataClass.CLASS_ID);
+  public static final DataClassId CLASS = valueOf(DataClass.CLASS_ID);
 
   /**
    * the id of the {@link net.sf.mmm.data.api.reflection.DataClass
    * content-class} that reflects
    * {@link net.sf.mmm.data.api.reflection.DataField content-field}.
    */
-  public static final ContentClassId FIELD = valueOf(DataField.CLASS_ID);
+  public static final DataClassId FIELD = valueOf(DataField.CLASS_ID);
 
   /**
    * The constructor.
@@ -65,7 +65,7 @@ public final class ContentClassId extends AbstractContentId {
    * @param objectId is the {@link #getObjectId() object-ID} identifying the
    *        {@link DataClass}.
    */
-  public ContentClassId(int objectId) {
+  public DataClassId(int objectId) {
 
     super(objectId);
   }
@@ -73,7 +73,7 @@ public final class ContentClassId extends AbstractContentId {
   /**
    * {@inheritDoc}
    */
-  public DataId getContentClassId() {
+  public DataId getDataClassId() {
 
     return CLASS;
   }
@@ -81,7 +81,7 @@ public final class ContentClassId extends AbstractContentId {
   /**
    * {@inheritDoc}
    */
-  public int getClassId() {
+  public long getClassId() {
 
     return DataClass.CLASS_ID;
   }
@@ -103,26 +103,26 @@ public final class ContentClassId extends AbstractContentId {
   }
 
   /**
-   * This method gets the {@link ContentClassId} instance for the given
+   * This method gets the {@link DataClassId} instance for the given
    * <code>classUid</code>. A pool is used to store the ID instances for the
    * first N <code>class-IDs</code>. For those this method will always return
    * the same instance.
    * 
    * @param classUid is the {@link #getObjectId() object-ID} of the requested
-   *        {@link ContentClassId} instance.
-   * @return the requested {@link ContentClassId} instance.
+   *        {@link DataClassId} instance.
+   * @return the requested {@link DataClassId} instance.
    */
-  public static ContentClassId valueOf(int classUid) {
+  public static DataClassId valueOf(int classUid) {
 
-    ContentClassId id;
+    DataClassId id;
     if (classUid < POOL_SIZE) {
       id = POOL[classUid];
       if (id == null) {
-        id = new ContentClassId(classUid);
+        id = new DataClassId(classUid);
         POOL[classUid] = id;
       }
     } else {
-      id = new ContentClassId(classUid);
+      id = new DataClassId(classUid);
     }
     return id;
   }
