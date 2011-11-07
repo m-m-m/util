@@ -13,20 +13,16 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
  * enumerate the fields defined by the class and the fields inherited from the
  * sub-classes.
  * 
- * @param <CLASS> is the generic type of the reflected
- *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass() class}
- *        .
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldIterator<CLASS extends DataObject> extends
-    AbstractIterator<AbstractDataField<? super CLASS, ?>> {
+public class DataFieldIterator extends AbstractIterator<AbstractDataField<? extends DataObject, ?>> {
 
   /** the current class */
-  private AbstractDataClass<? super CLASS> currentClass;
+  private AbstractDataClass<? extends DataObject> currentClass;
 
   /** the current own field enumeration */
-  private Iterator<AbstractDataField<? super CLASS, ?>> currentIt;
+  private Iterator<AbstractDataField<? extends DataObject, ?>> currentIt;
 
   /**
    * The constructor.
@@ -36,7 +32,7 @@ public class DataFieldIterator<CLASS extends DataObject> extends
    *        iterated.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public DataFieldIterator(AbstractDataClass<CLASS> contentClass) {
+  public DataFieldIterator(AbstractDataClass<? extends DataObject> contentClass) {
 
     super();
     this.currentClass = contentClass;
@@ -51,10 +47,10 @@ public class DataFieldIterator<CLASS extends DataObject> extends
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  protected AbstractDataField<? super CLASS, ?> findNext() {
+  protected AbstractDataField<? extends DataObject, ?> findNext() {
 
     while (this.currentIt.hasNext()) {
-      AbstractDataField<? super CLASS, ?> field = this.currentIt.next();
+      AbstractDataField<? extends DataObject, ?> field = this.currentIt.next();
       if (field.getSuperField() == null) {
         return field;
       }

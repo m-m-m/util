@@ -46,6 +46,6 @@ public interface MutableDataReflectionService extends DataReflectionService,
    * 
    * @return the event registrar.
    */
-  EventSource<DataReflectionEvent<DataObject>, EventListener<DataReflectionEvent<DataObject>>> getEventRegistrar();
+  EventSource<DataReflectionEvent<? extends DataObject>, EventListener<DataReflectionEvent<? extends DataObject>>> getEventSource();
 
 }

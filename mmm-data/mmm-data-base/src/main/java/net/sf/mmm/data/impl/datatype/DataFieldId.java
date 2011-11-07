@@ -6,6 +6,7 @@ package net.sf.mmm.data.impl.datatype;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.datatype.AbstractDataId;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the implementation of the {@link DataId} interface for the ID of a
@@ -22,20 +23,28 @@ public final class DataFieldId extends AbstractDataId {
   /** @see #POOL */
   private static final int POOL_SIZE = 256;
 
-  /** @see #valueOf(int) */
+  /** @see #valueOf(long) */
   private static final DataFieldId[] POOL = new DataFieldId[POOL_SIZE];
+
+  /** The minimum {@link #getObjectId() ID} for {@link DataFieldId}. */
+  private static final Long ID_MINIMUM_VALUE = Long.valueOf(0);
+
+  /** The maximum {@link #getObjectId() ID} for {@link DataFieldId}. */
+  private static final Long ID_MAXIMUM_VALUE = Long.valueOf(Integer.MAX_VALUE);
+
+  /** The source in case of an exception. */
+  private static final String VALUE_SOURCE = "value ID";
 
   /**
    * The constructor.
    * 
    * <b>ATTENTION:</b><br>
-   * Please use {@link net.sf.mmm.data.api.DataIdManager} to create
-   * instances.
+   * Please use {@link net.sf.mmm.data.api.DataIdManager} to create instances.
    * 
    * @param objectId is the {@link #getObjectId() object-ID} identifying the
    *        {@link DataField}.
    */
-  public DataFieldId(int objectId) {
+  public DataFieldId(long objectId) {
 
     super(objectId);
   }
@@ -82,14 +91,18 @@ public final class DataFieldId extends AbstractDataId {
    *        {@link DataFieldId} instance.
    * @return the requested {@link DataClassId} instance.
    */
-  public static DataFieldId valueOf(int fieldUid) {
+  public static DataFieldId valueOf(long fieldUid) {
 
     DataFieldId id;
+    ValueOutOfRangeException.checkRange(Long.valueOf(fieldUid), ID_MINIMUM_VALUE, ID_MAXIMUM_VALUE,
+        VALUE_SOURCE);
+    // actually the uid should always be int...
     if (fieldUid < POOL_SIZE) {
-      id = POOL[fieldUid];
+      int uidInt = (int) fieldUid;
+      id = POOL[uidInt];
       if (id == null) {
         id = new DataFieldId(fieldUid);
-        POOL[fieldUid] = id;
+        POOL[uidInt] = id;
       }
     } else {
       id = new DataFieldId(fieldUid);

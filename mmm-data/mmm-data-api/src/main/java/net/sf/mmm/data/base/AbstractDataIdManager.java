@@ -54,7 +54,7 @@ public abstract class AbstractDataIdManager implements DataIdManager {
   /**
    * {@inheritDoc}
    */
-  public DataId getClassId(int classId) {
+  public DataId getClassId(long classId) {
 
     return getId(classId, DataClass.CLASS_ID);
   }
@@ -62,7 +62,7 @@ public abstract class AbstractDataIdManager implements DataIdManager {
   /**
    * {@inheritDoc}
    */
-  public DataId getFieldId(int fieldId) {
+  public DataId getFieldId(long fieldId) {
 
     return getId(fieldId, DataField.CLASS_ID);
   }
@@ -113,7 +113,7 @@ public abstract class AbstractDataIdManager implements DataIdManager {
   /**
    * {@inheritDoc}
    */
-  public DataId getId(long objectId, int classId) {
+  public DataId getId(long objectId, long classId) {
 
     return getId(objectId, classId, 0, 0);
   }
@@ -121,7 +121,7 @@ public abstract class AbstractDataIdManager implements DataIdManager {
   /**
    * {@inheritDoc}
    */
-  public DataId getId(long objectId, int classId, int revision) {
+  public DataId getId(long objectId, long classId, int revision) {
 
     return getId(objectId, classId, revision, 0);
   }

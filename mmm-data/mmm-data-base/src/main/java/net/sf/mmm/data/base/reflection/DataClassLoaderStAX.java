@@ -10,21 +10,22 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
-import net.sf.mmm.data.api.reflection.DataClassLoader;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataModifiers;
-import net.sf.mmm.data.api.reflection.DataReflectionException;
+import net.sf.mmm.data.api.reflection.DataReflectionObject;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
+import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This is an implementation of the {@link DataClassLoader} interface that
- * allows to load (de-serialize) {@link DataClass}es from XML using StAX.
+ * This is an implementation of the
+ * {@link net.sf.mmm.data.api.reflection.DataClassLoader} interface that allows
+ * to load (de-serialize) {@link DataClass}es from XML using StAX.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -34,10 +35,10 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
   /**
    * The constructor.
    * 
-   * @param contentModelService is the {@link #getContentModelService()
+   * @param contentModelService is the {@link #getDataReflectionService()
    *        content-model service}.
    */
-  public DataClassLoaderStAX(AbstractMutableDataModelService contentModelService) {
+  public DataClassLoaderStAX(AbstractMutableDataReflectionService contentModelService) {
 
     super(contentModelService);
   }
@@ -58,7 +59,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
 
   protected Class getContentJavaClass(String name) {
 
-    return getContentModelService().getName2JavaClassMap().get(name);
+    return getDataReflectionService().getTitle2JavaClassMap().get(name);
   }
 
   /**
@@ -69,9 +70,10 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @param classResolver is the resolver used to resolve the classes.
    * @return the parsed type.
    */
-  protected Type parseFieldType(String typeSpecification, ClassResolver classResolver) {
+  protected GenericType<?> parseFieldType(String typeSpecification, ClassResolver classResolver) {
 
-    return getReflectionUtil().toType(typeSpecification, classResolver);
+    Type type = getReflectionUtil().toType(typeSpecification, classResolver);
+    return getReflectionUtil().createGenericType(type);
   }
 
   /**
@@ -92,23 +94,22 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @param xmlReader is where to read the XML from.
    * @return the name of the class or field.
    */
-  protected String parseName(XMLStreamReader xmlReader) {
+  protected String parseTitle(XMLStreamReader xmlReader) {
 
-    return getStaxUtil().parseAttribute(xmlReader, null, DataObject.FIELD_NAME_TITLE,
-        String.class);
+    return getStaxUtil().parseAttribute(xmlReader, null, DataObject.FIELD_NAME_TITLE, String.class);
   }
 
   /**
-   * This method reads the {@link DataObject#isDeleted() deleted flag} from
-   * the given <code>xmlReader</code>.
+   * This method reads the {@link DataObject#isDeleted() deleted flag} from the
+   * given <code>xmlReader</code>.
    * 
    * @param xmlReader is where to read the XML from.
    * @return the deleted-flag of the class or field.
    */
   protected boolean parseDeletedFlag(XMLStreamReader xmlReader) {
 
-    return getStaxUtil().parseAttribute(xmlReader, null, DataObject.FIELD_NAME_DELETED,
-        Boolean.class, Boolean.FALSE).booleanValue();
+    return getStaxUtil().parseAttribute(xmlReader, null,
+        DataReflectionObject.FIELD_NAME_DELETEDFLAG, Boolean.class, Boolean.FALSE).booleanValue();
   }
 
   /**
@@ -118,10 +119,9 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * <li>The order of the elements in the XML is important to this method. Field
    * elements have to occur after Class elements on the same level in the XML
    * tree.</li>
-   * <li>The {@link DataObject#getContentClass() content-class} of the
-   * de-serialized classes and fields is NOT set by this method so it may be
-   * <code>null</code> if NOT initialized via the
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionService
+   * <li>The {@link DataClass} of the de-serialized classes and fields is NOT
+   * set by this method so it may be <code>null</code> if NOT initialized via
+   * the {@link net.sf.mmm.data.api.reflection.DataReflectionService
    * model-service}.</li>
    * </ul>
    * 
@@ -132,18 +132,19 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @throws ValueException if a value is missing or invalid.
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
-  public AbstractDataClass loadClassRecursive(XMLStreamReader xmlReader, Context context)
-      throws ValueException, XMLStreamException {
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public AbstractDataClass<? extends DataObject> loadClassRecursive(XMLStreamReader xmlReader,
+      Context context) throws ValueException, XMLStreamException {
 
     assert (xmlReader.isStartElement());
     assert (DataClass.XML_TAG_CLASS.equals(xmlReader.getLocalName()));
     // parse class attributes...
-    DataId id = parseId(xmlReader);
-    String name = parseName(xmlReader);
+    Long id = parseId(xmlReader);
+    String title = parseTitle(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
-    boolean isSystem = getStaxUtil().parseAttribute(xmlReader, null,
-        DataModifiers.XML_ATR_SYSTEM, Boolean.class, Boolean.FALSE).booleanValue();
+    boolean isSystem = getStaxUtil().parseAttribute(xmlReader, null, DataModifiers.XML_ATR_SYSTEM,
+        Boolean.class, Boolean.FALSE).booleanValue();
     boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null, DataModifiers.XML_ATR_FINAL,
         Boolean.class, Boolean.FALSE).booleanValue();
     boolean isAbstract = getStaxUtil().parseAttribute(xmlReader, null,
@@ -157,32 +158,27 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
     DataClassModifiers modifiers = DataClassModifiersBean.getInstance(isSystem, isFinal,
         isAbstract, isExtendable);
 
-    AbstractDataClass contentClass = context.getDataClass(id);
-    if (contentClass == null) {
-      contentClass = getContentReflectionFactory().createNewClass(id, name, null, modifiers, null,
+    AbstractDataClass<? extends DataObject> dataClass = context.getDataClass(id.longValue());
+    if (dataClass == null) {
+      dataClass = getDataReflectionService().createDataClass(id, title, null, modifiers, null,
           deleted);
     } else {
-      if (!name.equals(contentClass.getTitle())) {
-        // TODO:
-        throw new DuplicateClassException(id);
+      if (!title.equals(dataClass.getTitle())) {
+        throw new ObjectMismatchException(title, dataClass.getTitle(), dataClass,
+            DataObject.FIELD_NAME_TITLE);
       }
       // TODO ...
     }
 
     String javaClassName = xmlReader.getAttributeValue(null, "javaClass");
     if (javaClassName != null) {
-      try {
-        Class javaClass = getClassResolver().resolveClass(javaClassName);
-        Class oldClass = contentClass.getJavaClass();
-        if ((oldClass != null) && (!oldClass.equals(javaClass))) {
-          // TODO:
-          throw new DataReflectionException("Java-class mismatch for content-class " + name);
-        }
-        contentClass.setJavaClass(javaClass);
-      } catch (ClassNotFoundException e) {
-        // TODO: NLS
-        throw new DataReflectionException(e, "Java class NOT found for content-class " + name);
+      Class javaClass = getClassResolver().resolveClass(javaClassName);
+      Class<?> oldClass = dataClass.getJavaClass();
+      if ((oldClass != null) && (!oldClass.equals(javaClass))) {
+        throw new ObjectMismatchException(javaClass, oldClass, dataClass,
+            DataClass.FIELD_NAME_JAVA_CLASS);
       }
+      dataClass.setJavaClass(javaClass);
     }
 
     // parse XML-child elements
@@ -191,18 +187,18 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
       String tagName = xmlReader.getLocalName();
       if (DataClass.XML_TAG_CLASS.equals(tagName)) {
         AbstractDataClass subClass = loadClassRecursive(xmlReader, context);
-        subClass.setSuperClass(contentClass);
-        contentClass.addSubClass(subClass);
+        subClass.setSuperClass(dataClass);
+        dataClass.addSubClass(subClass);
       } else if (DataField.XML_TAG_FIELD.equals(tagName)) {
         // field
-        AbstractDataField contentField = loadField(xmlReader, contentClass);
-        contentClass.addField(contentField);
+        AbstractDataField contentField = loadField(xmlReader, dataClass);
+        dataClass.addField(contentField);
       } else {
-        parseClassChildElement(xmlReader, contentClass);
+        parseClassChildElement(xmlReader, dataClass);
       }
       xmlEvent = xmlReader.nextTag();
     }
-    return contentClass;
+    return dataClass;
   }
 
   /**
@@ -214,19 +210,18 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @param superClass is the class that owns the unknown child-element.
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
-  protected void parseClassChildElement(XMLStreamReader xmlReader, AbstractDataClass superClass)
-      throws XMLStreamException {
+  protected void parseClassChildElement(XMLStreamReader xmlReader,
+      AbstractDataClass<? extends DataObject> superClass) throws XMLStreamException {
 
     getStaxUtil().skipOpenElement(xmlReader);
   }
 
   /**
-   * This method reads a {@link DataField} from the given
-   * <code>xmlReader</code>.<br>
+   * This method reads a {@link DataField} from the given <code>xmlReader</code>
+   * .<br>
    * <b>ATTENTION:</b><br>
-   * The {@link DataObject#getContentClass() content-class} of the
-   * de-serialized field is NOT set by this method so it may be
-   * <code>null</code> if NOT initialized.
+   * The {@link DataClass} of the de-serialized field is NOT set by this method
+   * so it may be <code>null</code> if NOT initialized.
    * 
    * @param xmlReader is where to read the XML from.
    * @param declaringClass is the class declaring this field.
@@ -235,13 +230,14 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @throws ValueException if a value is missing or invalid.
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
-  public AbstractDataField loadField(XMLStreamReader xmlReader,
-      AbstractDataClass declaringClass) throws ValueException, XMLStreamException {
+  public AbstractDataField<? extends DataObject, ?> loadField(XMLStreamReader xmlReader,
+      AbstractDataClass<? extends DataObject> declaringClass) throws ValueException,
+      XMLStreamException {
 
     assert (xmlReader.isStartElement());
     assert (DataField.XML_TAG_FIELD.equals(xmlReader.getLocalName()));
     Long id = parseId(xmlReader);
-    String name = parseName(xmlReader);
+    String name = parseTitle(xmlReader);
     boolean deleted = parseDeletedFlag(xmlReader);
     // parse modifier
     boolean isFinal = getStaxUtil().parseAttribute(xmlReader, null, DataModifiers.XML_ATR_FINAL,
@@ -261,11 +257,10 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
     // parse type
     String typeSpecification = getStaxUtil().parseAttribute(xmlReader, null,
         DataField.XML_ATR_FIELD_TYPE, String.class);
-    Type fieldType = null;
+    GenericType<?> fieldType = parseFieldType(typeSpecification, getClassResolver());
     // fieldType = parseFieldType(typeSpecification, getClassResolver());
-    AbstractDataField contentField = getContentReflectionFactory().createNewField(id, name,
-        declaringClass, fieldType, modifiers, deleted);
-    contentField.setFieldTypeSpecification(typeSpecification);
+    AbstractDataField<? extends DataObject, ?> contentField = getDataReflectionService()
+        .createDataField(id, name, declaringClass, fieldType, modifiers, deleted);
     // AbstractContentField contentField =
     // getContentModelService().createOrUpdateField(id, name,
     // declaringClass, modifiers, fieldType, typeSpecification, deleted);
@@ -280,16 +275,19 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * 
    * TODO: javadoc
    * 
-   * @param contentClass
+   * @param dataClass
+   * @param resolver
    */
-  protected void initializeModel(AbstractDataClass contentClass, ClassResolver resolver) {
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  protected void initializeModel(AbstractDataClass<? extends DataObject> dataClass,
+      ClassResolver resolver) {
 
-    for (AbstractDataField contentField : contentClass.getDeclaredFields()) {
+    for (AbstractDataField contentField : dataClass.getDeclaredFields()) {
       String typeSpecification = contentField.getFieldTypeSpecification();
-      Type type = parseFieldType(typeSpecification, resolver);
-      contentField.setFieldTypeAndClass(type);
+      GenericType<?> type = parseFieldType(typeSpecification, resolver);
+      contentField.setFieldType(type);
     }
-    for (AbstractDataClass subClass : contentClass.getSubClasses()) {
+    for (AbstractDataClass<? extends DataObject> subClass : dataClass.getSubClasses()) {
       initializeModel(subClass, resolver);
     }
   }

@@ -68,7 +68,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
    * {@inheritDoc}
    */
   @Override
-  public DataId getClassId(int classId) {
+  public DataId getClassId(long classId) {
 
     return DataClassId.valueOf(classId);
   }
@@ -77,7 +77,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
    * {@inheritDoc}
    */
   @Override
-  public DataId getFieldId(int fieldId) {
+  public DataId getFieldId(long fieldId) {
 
     return DataFieldId.valueOf(fieldId);
   }
@@ -85,7 +85,7 @@ public class DataIdManagerImpl extends AbstractDataIdManager {
   /**
    * {@inheritDoc}
    */
-  public DataId getId(long objectId, int classId, int revision, int storeId) {
+  public DataId getId(long objectId, long classId, int revision, int storeId) {
 
     if (classId == DataClass.CLASS_ID) {
       return DataClassId.valueOf((int) objectId);

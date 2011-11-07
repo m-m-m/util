@@ -10,10 +10,10 @@ import net.sf.mmm.data.base.datatype.AbstractDataId;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This is the implementation of the {@link DataId} interface for the ID of
- * the latest version of a {@link net.sf.mmm.data.api.DataObject
- * ContentObject} that is no {@link net.sf.mmm.data.api.reflection.DataClass}
- * or {@link net.sf.mmm.data.api.reflection.DataField}.
+ * This is the implementation of the {@link DataId} interface for the ID of the
+ * latest version of a {@link net.sf.mmm.data.api.DataObject ContentObject} that
+ * is no {@link net.sf.mmm.data.api.reflection.DataClass} or
+ * {@link net.sf.mmm.data.api.reflection.DataField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -24,23 +24,22 @@ public class DataObjectId extends AbstractDataId {
   private static final long serialVersionUID = -2124272902771327589L;
 
   /** @see #getClassId() */
-  private final int classId;
+  private final long classId;
 
   /**
    * The constructor.
    * 
    * <b>ATTENTION:</b><br>
-   * Please use {@link net.sf.mmm.data.api.DataIdManager} to create
-   * instances.
+   * Please use {@link net.sf.mmm.data.api.DataIdManager} to create instances.
    * 
    * @param objectId is the {@link #getObjectId() object-id}.
    * @param classId is the {@link #getClassId() class-id}.
    */
-  public DataObjectId(long objectId, int classId) {
+  public DataObjectId(long objectId, long classId) {
 
     super(objectId);
     if ((classId == DataClass.CLASS_ID) || (classId == DataField.CLASS_ID)) {
-      throw new NlsIllegalArgumentException(Integer.valueOf(classId), "class-ID");
+      throw new NlsIllegalArgumentException(Long.valueOf(classId), "class ID");
     }
     this.classId = classId;
   }

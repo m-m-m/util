@@ -9,7 +9,9 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * A {@link DataClassGroupVersion} groups a set of {@link DataClass}es like a
  * package in java. This is used for version controlling the schema (DDL) of
  * classes within the same namespace. If a newer version is detected an
- * automatic migration can be performed.
+ * automatic migration can be performed.<br/>
+ * Additionally a plugin can check if the version is greater or equal to an
+ * expected version.
  * 
  * @see DataClass#getGroupVersion()
  * 
@@ -32,6 +34,6 @@ public interface DataClassGroupVersion {
    * 
    * @return the {@link VersionIdentifier}.
    */
-  VersionIdentifier getVersion();
+  VersionIdentifier getGroupVersion();
 
 }

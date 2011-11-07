@@ -59,8 +59,7 @@ public interface DataFieldModifiers extends DataModifiers {
 
   /**
    * This method determines if the field is transient. A transient field is not
-   * stored by the persistence but its value is dynamically calculated by a
-   * given expression term.<br>
+   * stored by the persistence but its value is dynamically calculated.<br>
    * A transient field is always {@link #isReadOnly() read-only} and never
    * {@link #isStatic() static}.
    * 
@@ -81,7 +80,7 @@ public interface DataFieldModifiers extends DataModifiers {
    * {@link net.sf.mmm.data.api.reflection.DataField#getFieldValue(net.sf.mmm.data.api.DataObject)
    * read} and (if not {@link #isReadOnly() read-only} be
    * {@link net.sf.mmm.data.api.reflection.DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)
-   * written} while the instance can be <code>null</code>.<br>
+   * written}) while the instance can be <code>null</code>.<br>
    * A {@link #isStatic() static} field can NOT be {@link #isTransient()
    * transient}. It can be persisted without relevant costs. If the according
    * field should be {@link #isTransient() transient} it can be declared NOT

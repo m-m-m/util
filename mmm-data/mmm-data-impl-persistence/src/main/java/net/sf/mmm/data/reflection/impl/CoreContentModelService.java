@@ -14,10 +14,10 @@ import net.sf.mmm.data.api.reflection.DataReflectionEvent;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.base.reflection.AbstractDataClass;
 import net.sf.mmm.data.base.reflection.AbstractDataField;
-import net.sf.mmm.data.base.reflection.AbstractMutableDataModelService;
+import net.sf.mmm.data.base.reflection.AbstractMutableDataReflectionService;
 import net.sf.mmm.data.base.reflection.DataClassLoaderStAX;
-import net.sf.mmm.data.reflection.impl.statically.ContentClassImpl;
-import net.sf.mmm.data.reflection.impl.statically.ContentFieldImpl;
+import net.sf.mmm.data.impl.reflection.DataClassImpl;
+import net.sf.mmm.data.impl.reflection.DataFieldImpl;
 
 /**
  * This is an abstract base implementation of the
@@ -28,7 +28,7 @@ import net.sf.mmm.data.reflection.impl.statically.ContentFieldImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class CoreContentModelService extends AbstractMutableDataModelService {
+public class CoreContentModelService extends AbstractMutableDataReflectionService {
 
   /** @see #getClassLoader() */
   private DataClassLoader classLoader;
@@ -143,7 +143,7 @@ public class CoreContentModelService extends AbstractMutableDataModelService {
    */
   public AbstractDataClass createNewClass(DataId id, String name) {
 
-    AbstractDataClass contentClass = new ContentClassImpl(name, id);
+    AbstractDataClass contentClass = new DataClassImpl(name, id);
     setContentObjectId(contentClass, id);
     return contentClass;
   }
@@ -153,7 +153,7 @@ public class CoreContentModelService extends AbstractMutableDataModelService {
    */
   public AbstractDataField createNewField(DataId id, String name) {
 
-    AbstractDataField contentField = new ContentFieldImpl(name, id);
+    AbstractDataField contentField = new DataFieldImpl(name, id);
     setContentObjectId(contentField, id);
     return contentField;
   }

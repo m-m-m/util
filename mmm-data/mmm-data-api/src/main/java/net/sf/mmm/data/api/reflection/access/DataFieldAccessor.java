@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection.access;
 
-import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.security.api.SecurityException;
 import net.sf.mmm.util.nls.api.ReadOnlyException;
+import net.sf.mmm.util.reflect.api.CastFailedException;
 
 /**
  * This is the interface for an accessor used to
@@ -32,9 +32,13 @@ public interface DataFieldAccessor<CLASS extends DataObject, FIELD> {
    * 
    * @param object is where to read the field value from.
    * @return the value of the field. May be <code>null</code>.
-   * @throws DataException if the operation fails.
+   * @throws CastFailedException if the given <code>value</code> is not
+   *         compatible with the
+   *         {@link net.sf.mmm.data.api.reflection.DataField#getFieldType()
+   *         type} of the field.
+   * @throws SecurityException is the access failed for security reasons.
    */
-  FIELD getFieldValue(CLASS object) throws DataException;
+  FIELD getFieldValue(CLASS object) throws CastFailedException, SecurityException;
 
   /**
    * This method sets the field in the <code>object</code> to the given
@@ -50,29 +54,13 @@ public interface DataFieldAccessor<CLASS extends DataObject, FIELD> {
    * @throws ReadOnlyException if the field is
    *         {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly()
    *         read-only}.
-   * @throws NlsClassCastException if the given <code>value</code> is not
+   * @throws CastFailedException if the given <code>value</code> is not
    *         compatible with the
    *         {@link net.sf.mmm.data.api.reflection.DataField#getFieldType()
    *         type} of the field.
+   * @throws SecurityException is the access failed for security reasons.
    */
-  // * @throws ContentException if the operation failed. This can have one of
-  // the
-  // * following reasons:
-  // * <ul>
-  // * <li>the object does not have a
-  // * {@link net.sf.mmm.content.model.api.ContentField field} with the
-  // * given
-  // * <code>{@link net.sf.mmm.content.model.api.ContentField#getName()
-  // fieldName}</code>
-  // * . See
-  // * {@link net.sf.mmm.content.model.api.ContentFieldNotExistsException
-  // * FieldNotExistsException}</li>
-  // * <li>If {@link net.sf.mmm.content.security.api.ContentUser you} do
-  // * NOT have {@link net.sf.mmm.content.security.api.ContentRule
-  // * permission} to do so. See
-  // * {@link net.sf.mmm.content.security.api.PermissionDeniedException
-  // * PermissionDeniedException}.</li>
-  // * </ul>
-  void setFieldValue(CLASS object, FIELD value) throws ReadOnlyException, NlsClassCastException;
+  void setFieldValue(CLASS object, FIELD value) throws ReadOnlyException, CastFailedException,
+      SecurityException;
 
 }

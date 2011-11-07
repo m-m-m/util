@@ -9,6 +9,7 @@ import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionObject;
 import net.sf.mmm.data.base.datatype.AbstractDataId;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the implementation of the {@link DataId} interface for the ID of a
@@ -25,8 +26,17 @@ public final class DataClassId extends AbstractDataId {
   /** @see #POOL */
   private static final int POOL_SIZE = 256;
 
-  /** @see #valueOf(int) */
+  /** @see #valueOf(long) */
   private static final DataClassId[] POOL = new DataClassId[POOL_SIZE];
+
+  /** The minimum {@link #getObjectId() ID} for {@link DataClassId}. */
+  private static final Long ID_MINIMUM_VALUE = Long.valueOf(0);
+
+  /** The maximum {@link #getObjectId() ID} for {@link DataClassId}. */
+  private static final Long ID_MAXIMUM_VALUE = Long.valueOf(Integer.MAX_VALUE);
+
+  /** The source in case of an exception. */
+  private static final String VALUE_SOURCE = "class ID";
 
   /**
    * the id of the root {@link net.sf.mmm.data.api.reflection.DataClass
@@ -59,13 +69,12 @@ public final class DataClassId extends AbstractDataId {
    * The constructor.
    * 
    * <b>ATTENTION:</b><br>
-   * Please use {@link net.sf.mmm.data.api.DataIdManager} to create
-   * instances.
+   * Please use {@link net.sf.mmm.data.api.DataIdManager} to create instances.
    * 
    * @param objectId is the {@link #getObjectId() object-ID} identifying the
    *        {@link DataClass}.
    */
-  public DataClassId(int objectId) {
+  public DataClassId(long objectId) {
 
     super(objectId);
   }
@@ -112,14 +121,17 @@ public final class DataClassId extends AbstractDataId {
    *        {@link DataClassId} instance.
    * @return the requested {@link DataClassId} instance.
    */
-  public static DataClassId valueOf(int classUid) {
+  public static DataClassId valueOf(long classUid) {
 
     DataClassId id;
+    ValueOutOfRangeException.checkRange(Long.valueOf(classUid), ID_MINIMUM_VALUE, ID_MAXIMUM_VALUE,
+        VALUE_SOURCE);
     if (classUid < POOL_SIZE) {
-      id = POOL[classUid];
+      int uidInt = (int) classUid;
+      id = POOL[uidInt];
       if (id == null) {
         id = new DataClassId(classUid);
-        POOL[classUid] = id;
+        POOL[uidInt] = id;
       }
     } else {
       id = new DataClassId(classUid);

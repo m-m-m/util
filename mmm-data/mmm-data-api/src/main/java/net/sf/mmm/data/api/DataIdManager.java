@@ -50,7 +50,7 @@ public interface DataIdManager {
    * @param classId is the ID of the requested class-ID.
    * @return the requested ID.
    */
-  DataId getClassId(int classId);
+  DataId getClassId(long classId);
 
   /**
    * This method gets the {@link DataId} for a
@@ -60,7 +60,7 @@ public interface DataIdManager {
    * @param fieldId is the ID of the requested field-ID.
    * @return the requested ID.
    */
-  DataId getFieldId(int fieldId);
+  DataId getFieldId(long fieldId);
 
   /**
    * This method parses the given String <code>idAsString</code> as a
@@ -80,7 +80,7 @@ public interface DataIdManager {
    * @param classId is the {@link DataId#getObjectId() class-ID}.
    * @return the requested ID.
    */
-  DataId getId(long objectId, int classId);
+  DataId getId(long objectId, long classId);
 
   /**
    * This method gets the {@link DataId} with the given parameters.
@@ -90,7 +90,7 @@ public interface DataIdManager {
    * @param revision is the {@link DataId#getRevision() revision}.
    * @return the requested ID.
    */
-  DataId getId(long objectId, int classId, int revision);
+  DataId getId(long objectId, long classId, int revision);
 
   /**
    * This method gets the {@link DataId} with the given parameters.
@@ -101,7 +101,7 @@ public interface DataIdManager {
    * @param storeId is the {@link DataId#getStoreId() store-ID}.
    * @return the requested ID.
    */
-  DataId getId(long objectId, int classId, int revision, int storeId);
+  DataId getId(long objectId, long classId, int revision, int storeId);
 
   // /**
   // * This method creates a new, unique {@link ContentId ID} for an

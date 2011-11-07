@@ -34,13 +34,29 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   }
 
   /**
-   * The constructor.
-   * 
-   * @param title is the {@link #getTitle() title}.
+   * {@inheritDoc}
    */
-  public AbstractDataReflectionObject(String title) {
+  public boolean isCacheable() {
 
-    super(title);
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setId(Long id) {
+
+    super.setId(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setTitle(String title) {
+
+    super.setTitle(title);
   }
 
   /**

@@ -3,11 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.reflection;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -19,24 +17,29 @@ import javax.xml.stream.XMLStreamReader;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
+import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
-import net.sf.mmm.data.api.reflection.DataClassAnnotation;
-import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.data.base.AbstractDataObject;
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderImpl;
 import net.sf.mmm.util.reflect.api.ClassResolver;
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AnnotationFilter;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -45,8 +48,8 @@ import net.sf.mmm.util.xml.api.StaxUtil;
 import net.sf.mmm.util.xml.base.StaxUtilImpl;
 
 /**
- * This is an extension of {@link DataClassLoaderStAX} that also allows to
- * load {@link DataClass}es from the native Java implementations of entities.
+ * This is an extension of {@link DataClassLoaderStAX} that also allows to load
+ * {@link DataClass}es from the native Java implementations of entities.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -91,16 +94,17 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   /** @see #setClassResolver(ClassResolver) */
   private ClassResolver classResolver;
 
+  /** @see #getStaxUtil() */
   private StaxUtil staxUtil;
 
   /**
    * The constructor.
    * 
-   * @param contentModelService
+   * @param dataReflectionService
    */
-  public DataClassLoaderNative(AbstractMutableDataModelService contentModelService) {
+  public DataClassLoaderNative(AbstractMutableDataReflectionService dataReflectionService) {
 
-    super(contentModelService);
+    super(dataReflectionService);
     PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
     builder.initialize();
     this.methodDescriptorBuilder = builder;
@@ -211,13 +215,13 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
       String tagName = xmlReader.getLocalName();
       if (XML_TAG_ENTITY.equals(tagName)) {
         String className = xmlReader.getAttributeValue(null, XML_ATR_ENTITY_CLASS);
-        Class<?> entityClass = this.classResolver.resolveClass(className);
+        Class entityClass = this.classResolver.resolveClass(className);
         loadClassRecursive(entityClass, context);
       } else if (XML_TAG_ENTITIES.equals(tagName)) {
         String packageName = xmlReader.getAttributeValue(null, XML_ATR_ENTITIES_PACKAGE);
         Set<String> classNames = reflectionUtil.findClassNames(packageName, true);
         Set<Class<?>> entityClasses = reflectionUtil.loadClasses(classNames, this.entityFilter);
-        for (Class<?> entityClass : entityClasses) {
+        for (Class entityClass : entityClasses) {
           loadClassRecursive(entityClass, context);
         }
       }
@@ -231,12 +235,11 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass loadClasses() throws IOException, DataReflectionException {
+  public AbstractDataClass loadClasses() {
 
     Context context = new Context();
     parseConfiguration(context);
-    AbstractDataClass<? extends DataObject> rootClass = context
-        .getDataClass(DataObject.CLASS_ID);
+    AbstractDataClass<? extends DataObject> rootClass = context.getDataClass(DataObject.CLASS_ID);
     if (rootClass == null) {
       // TODO: NLS + Details/Explain
       throw new IllegalArgumentException("Root-class NOT found!");
@@ -247,35 +250,43 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   }
 
   /**
-   * This method "loads" the {@link DataClass} of the entity represented by
-   * the given <code>javaClass</code>. It will recursively create the
-   * super-classes accordingly.
+   * This method "loads" the {@link DataClass} of the entity represented by the
+   * given <code>javaClass</code>. It will recursively create the super-classes
+   * accordingly.
    * 
+   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()}.
    * @param javaClass is the entity to load.
-   * @param context is where the {@link DataClass}es are added that have
-   *        already been created.
+   * @param context is where the {@link DataClass}es are added that have already
+   *        been created.
    * @return the {@link DataClass} for the given <code>javaClass</code>.
    */
-  public AbstractDataClass loadClassRecursive(Class<?> javaClass, Context context) {
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public <CLASS extends DataObject> AbstractDataClass<CLASS> loadClassRecursive(
+      Class<CLASS> javaClass, Context context) {
 
-    DataClassAnnotation contentClassAnnotation = javaClass
-        .getAnnotation(DataClassAnnotation.class);
+    DataClassAnnotation contentClassAnnotation = javaClass.getAnnotation(DataClassAnnotation.class);
     if (contentClassAnnotation == null) {
       // TODO: NLS
       throw new DataReflectionException("Illegal entity class: missing "
           + DataClassAnnotation.class.getName());
     }
     // id
-    DataId classId = getContentModelService().getIdManager().getClassId(
-        contentClassAnnotation.id());
+    Long classId = Long.valueOf(contentClassAnnotation.id());
     // name
     String name = contentClassAnnotation.title();
     if ((name == null) || (name.length() == 0)) {
       name = javaClass.getSimpleName();
     }
     boolean createSuperClass = true;
-    AbstractDataClass contentClass = context.getDataClass(name);
-    if (contentClass == null) {
+    AbstractDataClass<CLASS> dataClass;
+    AbstractDataClass<? extends DataObject> existingClass;
+    if (classId.longValue() == DataId.OBJECT_ID_ILLEGAL) {
+      existingClass = context.getDataClass(name);
+      classId = null;
+    } else {
+      existingClass = context.getDataClass(classId.longValue());
+    }
+    if (existingClass == null) {
       // the class has NOT yet been loaded - create it
       int modifiers = javaClass.getModifiers();
       boolean isSystem = false;
@@ -290,47 +301,52 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
       DataClassModifiers contentClassModifiers = DataClassModifiersBean.getInstance(isSystem,
           isFinal, isAbstract, isExtendable);
       boolean deleted = javaClass.isAnnotationPresent(Deprecated.class);
-      Class<? extends DataObject> entityClass = (Class<? extends DataObject>) javaClass;
-      contentClass = getContentReflectionFactory().createNewClass(classId, name, null,
-          contentClassModifiers, entityClass, deleted);
-      context.put(contentClass);
+      dataClass = getDataReflectionService().createDataClass(classId, name, null,
+          contentClassModifiers, javaClass, deleted);
+      context.put(dataClass);
     } else {
       // the class has already been loaded: check!
-      if (!contentClass.getContentId().equals(classId)) {
-        throw new DuplicateClassException(classId);
+      if (classId != null) {
+        if (!classId.equals(existingClass.getId())) {
+          throw new ObjectMismatchException(classId, existingClass.getId(), existingClass,
+              DataObject.FIELD_NAME_ID);
+        }
       }
-      Class<?> type = contentClass.getJavaClass();
+      Class<? extends DataObject> type = existingClass.getJavaClass();
       if ((type != null) && (javaClass != type)) {
-        throw new DuplicateClassException(classId);
+        throw new ObjectMismatchException(javaClass, type, existingClass,
+            DataClass.FIELD_NAME_JAVA_CLASS);
       }
-      if (contentClass.getJavaClass() == null) {
-        contentClass.setJavaClass(javaClass);
+      dataClass = (AbstractDataClass<CLASS>) existingClass;
+      if (dataClass.getJavaClass() == null) {
+        dataClass.setJavaClass(javaClass);
       }
-      if (contentClass.getSuperClass() != null) {
+      if (dataClass.getSuperClass() != null) {
         // this can only happen if the class was created outside (in a subclass)
         createSuperClass = false;
       }
+      // TODO
     }
 
     if (createSuperClass) {
       // root-class ?
       if (!this.rootEntity.equals(javaClass)) {
         // find super-class that is entity
-        Class<?> superClass = javaClass.getSuperclass();
+        Class superClass = javaClass.getSuperclass();
         while (!superClass.isAnnotationPresent(DataClassAnnotation.class)) {
           superClass = superClass.getSuperclass();
           if (superClass == null) {
             // error in class hierarchy
-            throw new DataReflectionException("Entity \"{0}\" does NOT inherit from \"{1}\"!",
-                javaClass.getName(), this.rootEntity.getName());
+            throw new ObjectMismatchException(Object.class, this.rootEntity, javaClass,
+                "superClass");
           }
         }
         AbstractDataClass superContentClass = loadClassRecursive(superClass, context);
-        contentClass.setSuperClass(superContentClass);
-        superContentClass.addSubClass(contentClass);
+        dataClass.setSuperClass(superContentClass);
+        superContentClass.addSubClass(dataClass);
       }
     }
-    return contentClass;
+    return dataClass;
   }
 
   /**
@@ -341,10 +357,10 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
    * 
    * @param contentClass is the class for which the fields should be loaded.
    */
-  protected void loadFieldsRecursive(AbstractDataClass contentClass) {
+  protected void loadFieldsRecursive(AbstractDataClass<? extends DataObject> contentClass) {
 
     Class<? extends DataObject> type = contentClass.getJavaClass();
-    AbstractDataClass superClass = contentClass.getSuperClass();
+    AbstractDataClass<? extends DataObject> superClass = contentClass.getSuperClass();
     PojoDescriptor<? extends DataObject> methodPojoDescriptor;
     if (type == null) {
       throw new IllegalStateException("TODO");
@@ -376,32 +392,41 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
           }
         }
         if (declareField) {
-          DataId fieldId = getContentModelService().getIdManager().getFieldId(
-              contentFieldAnnotation.id());
+          long fieldId = contentFieldAnnotation.id();
           String name = contentFieldAnnotation.title();
           if ((name == null) || (name.length() == 0)) {
             name = accessor.getName();
           }
+          if (fieldId == DataId.OBJECT_ID_ILLEGAL) {
+
+          } else {
+
+          }
           int modifiers = accessor.getModifiers();
           boolean isSystem = contentClass.getModifiers().isSystem();
+          if (isSystem && fieldId >= DataId.OBJECT_ID_MINIMUM_CUSTOM) {
+            // TODO
+            throw new NlsIllegalArgumentException("");
+          }
           boolean isFinal = Modifier.isFinal(modifiers);
           boolean isStatic = Modifier.isStatic(modifiers) || contentFieldAnnotation.isStatic();
           boolean isTransient = contentFieldAnnotation.isTransient();
+          boolean isInherited = contentFieldAnnotation.isInheritedFromParent();
           boolean isReadOnly = true;
           PojoPropertyAccessor writeAccessor = methodPropertyDescriptor
               .getAccessor(PojoPropertyAccessorOneArgMode.SET);
           if ((writeAccessor != null) && (Modifier.isPublic(writeAccessor.getModifiers()))) {
             isReadOnly = contentFieldAnnotation.isReadOnly();
           }
-          DataFieldModifiers contentFieldModifiers = DataFieldModifiersBean.getInstance(
-              isSystem, isFinal, isReadOnly, isStatic, isTransient);
+          DataFieldModifiers contentFieldModifiers = DataFieldModifiersBean.getInstance(isSystem,
+              isFinal, isReadOnly, isStatic, isTransient, isInherited);
           boolean isDeleted = accessor.getAccessibleObject().isAnnotationPresent(Deprecated.class);
-          Type fieldType = accessor.getPropertyType().getType();
-          Class<?> fieldClass = accessor.getPropertyClass();
-          if (fieldClass.isPrimitive()) {
-            fieldType = getReflectionUtil().getNonPrimitiveType(fieldClass);
-          }
-          AbstractDataField contentField = getContentReflectionFactory().createNewField(fieldId,
+          GenericType<?> fieldType = accessor.getPropertyType();
+          // Class<?> fieldClass = accessor.getPropertyClass();
+          // if (fieldClass.isPrimitive()) {
+          // fieldType = getReflectionUtil().getNonPrimitiveType(fieldClass);
+          // }
+          AbstractDataField contentField = getDataReflectionService().createDataField(fieldId,
               name, contentClass, fieldType, contentFieldModifiers, isDeleted);
           contentField.setAccessor(getFieldAccessor(methodPropertyDescriptor));
           contentClass.addField(contentField);
@@ -418,24 +443,22 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   }
 
   /**
-   * This method gets (creates) the {@link DataField#getAccessor() accessor}
-   * for the field given by <code>methodPropertyDescriptor</code>.
+   * This method gets (creates) the {@link DataField#getAccessor() accessor} for
+   * the field given by <code>methodPropertyDescriptor</code>.
    * 
    * @param methodPropertyDescriptor is the descriptor holding the accessor
    *        methods of the field.
    * @return the field accessor.
    */
-  protected DataFieldAccessor getFieldAccessor(PojoPropertyDescriptor methodPropertyDescriptor) {
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  protected DataFieldAccessor<? extends DataObject, ?> getFieldAccessor(
+      PojoPropertyDescriptor methodPropertyDescriptor) {
 
-    Method getter = (Method) methodPropertyDescriptor.getAccessor(
-        PojoPropertyAccessorNonArgMode.GET).getAccessibleObject();
-    Method setter = null;
-    PojoPropertyAccessor writeAccessor = methodPropertyDescriptor
+    PojoPropertyAccessorNonArg getter = methodPropertyDescriptor
+        .getAccessor(PojoPropertyAccessorNonArgMode.GET);
+    PojoPropertyAccessorOneArg setter = methodPropertyDescriptor
         .getAccessor(PojoPropertyAccessorOneArgMode.SET);
-    if (writeAccessor != null) {
-      setter = (Method) writeAccessor.getAccessibleObject();
-    }
-    return new DataFieldAccessorPojo(getter, setter);
+    return new DataFieldAccessorPojo(getter.getPropertyClass(), getter, setter);
   }
 
 }

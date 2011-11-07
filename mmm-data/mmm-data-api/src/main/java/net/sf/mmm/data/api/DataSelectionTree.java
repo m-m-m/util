@@ -26,9 +26,8 @@ public abstract interface DataSelectionTree<NODE extends DataSelectionTree<NODE>
     DataSelection, TreeNode<NODE>, DataNode<NODE> {
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * of the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
-   * this type.
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
+   * the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
    */
   int CLASS_ID = 5;
 
@@ -49,8 +48,9 @@ public abstract interface DataSelectionTree<NODE extends DataSelectionTree<NODE>
   List<? extends NODE> getChildren();
 
   /**
-   * This method determines if this node is abstract. An abstract node can not
-   * be selected in regular situations.
+   * This method determines if this node is <em>abstract</em>. An abstract node
+   * can not be selected in regular situations. As a recommendation abstract
+   * nodes should have children.
    * 
    * @return <code>true</code> if abstract, <code>false</code> otherwise.
    */

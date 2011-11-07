@@ -176,6 +176,18 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_DUPLICATE_OBJECT_WITH_KEY_AND_EXISTING = "Duplicate "
       + "object \"{object}\" for key \"{key}\" - already mapped to \"{existing}\"!";
 
+  /** @see net.sf.mmm.util.nls.api.ObjectMismatchException */
+  public static final String ERR_OBJECT_MISMATCH = "Mismatch detected: "
+      + "found \"{object}\", but expected \"{expected}\"!";
+
+  /** @see net.sf.mmm.util.nls.api.ObjectMismatchException */
+  public static final String ERR_OBJECT_MISMATCH_WITH_CONTAINER = "Mismatch in "
+      + "\"{container}\" detected: found \"{object}\", but expected \"{expected}\"!";
+
+  /** @see net.sf.mmm.util.nls.api.ObjectMismatchException */
+  public static final String ERR_OBJECT_MISMATCH_WITH_CONTAINER_AND_PROPERTY = "Mismatch in "
+      + "\"{container}\" for \"{property}\" detected: found \"{object}\", but expected \"{expected}\"!";
+
   /** @see net.sf.mmm.util.nls.api.ObjectNotFoundException */
   public static final String ERR_OBJECT_NOT_FOUND = "Could NOT find object \"{object}\"!";
 
@@ -433,11 +445,5 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
 
   /** @see net.sf.mmm.util.reflect.api.CastFailedException */
   public static final String ERR_CAST = "Can NOT cast \"{object}\" from \"{source}\" to \"{target}\"!";
-
-  /** @see net.sf.mmm.util.security.api.PermissionDeniedException */
-  public static final String ERR_PERMISSION_DENIED_ON_OBJECT = "Permission denied for \"{user}\" performing \"{operation}\" on \"{object}\"!";
-
-  /** @see net.sf.mmm.util.security.api.PermissionDeniedException */
-  public static final String ERR_PERMISSION_DENIED = "Permission denied for \"{user}\" performing \"{operation}\"!";
 
 }

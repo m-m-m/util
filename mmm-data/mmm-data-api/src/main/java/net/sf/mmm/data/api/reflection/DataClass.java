@@ -34,7 +34,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
    * {@link DataClass} reflecting this type.
    */
-  String CLASS_NAME = "ContentClass";
+  String CLASS_NAME = "DataClass";
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
@@ -73,6 +73,12 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   String FIELD_NAME_DECLARED_FIELDS = "declaredFields";
 
   /**
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getJavaClass() javaClass} for generic access.
+   */
+  String FIELD_NAME_JAVA_CLASS = "javaClass";
+
+  /**
    * the attribute for the {@link #getTitle() name}.
    */
   String XML_TAG_CONTENT_MODEL = "content-model";
@@ -88,7 +94,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    *         {@link net.sf.mmm.data.api.DataObject}).
    */
   @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUPERCLASS, isReadOnly = true)
-  DataClass<? super CLASS> getSuperClass();
+  DataClass<? extends DataObject> getSuperClass();
 
   /**
    * This method gets an iterator of all fields declared by this class. This
@@ -145,7 +151,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @return the field with the given name or <code>null</code> if no such field
    *         exists for this class.
    */
-  DataField<? super CLASS, ?> getField(String name);
+  DataField<? extends DataObject, ?> getField(String name);
 
   /**
    * This method gets the list of all sub-classes.

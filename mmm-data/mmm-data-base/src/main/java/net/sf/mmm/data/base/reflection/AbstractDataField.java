@@ -3,21 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.reflection;
 
-import java.util.List;
-
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
+import net.sf.mmm.util.nls.api.ReadOnlyException;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
- * This is the abstract base implementation of the {@link DataField}
- * interface.
+ * This is the abstract base implementation of the {@link DataField} interface.
  * 
- * @param <FIELD> is the generic type of the value reflected by this field.
+ * @param <FIELD> is the generic type of the {@link #getFieldValue(DataObject)
+ *        value} reflected by this field.
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -38,11 +36,11 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   /** @see #getModifiers() */
   private DataFieldModifiers modifiers;
 
-  /** @see #getConstraint() */
-  private ValueValidator constraint;
+  // /** @see #getConstraint() */
+  // private ValueValidator<FIELD> constraint;
 
   /** @see #getAccessor() */
-  private DataFieldAccessor accessor;
+  private DataFieldAccessor<CLASS, FIELD> accessor;
 
   /**
    * The constructor.
@@ -55,7 +53,27 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  public abstract AbstractDataClass getParent();
+  @Override
+  public long getDataClassId() {
+
+    return DataField.CLASS_ID;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Class<CLASS> getJavaClass() {
+
+    return this.declaringClass.getJavaClass();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public AbstractDataClass<CLASS> getParent() {
+
+    return this.declaringClass;
+  }
 
   //
   // /**
@@ -70,58 +88,65 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   // return fields;
   // }
 
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public AbstractDataField<? extends DataObject, ?> getChild(String
+  // childName) {
+  //
+  // if (getTitle().equals(childName)) {
+  // return findSubFieldRecursive(this.declaringClass);
+  // }
+  // return null;
+  // }
+
+  // /**
+  // * @see #getChildren()
+  // *
+  // * @param contentClass is the current content-class.
+  // * @param fields is the list where the fields are added.
+  // */
+  // private void collectSubFieldsRecursive(AbstractDataClass<?> contentClass,
+  // List<AbstractDataField<?, ?>> fields) {
+  //
+  // for (AbstractDataClass<?> subClass : contentClass.getSubClasses()) {
+  // AbstractDataField<?, ?> declaredField =
+  // subClass.getDeclaredField(getTitle());
+  // if (declaredField != null) {
+  // fields.add(declaredField);
+  // }
+  // collectSubFieldsRecursive(subClass, fields);
+  // }
+  // }
+
+  // /**
+  // * @see #getChild(String)
+  // *
+  // * @param contentClass is the current content-class.
+  // * @return the content-field with the given name or <code>null</code> if NOT
+  // * found.
+  // */
+  // private AbstractDataField<? extends DataObject, ?> findSubFieldRecursive(
+  // AbstractDataClass<? extends DataObject> contentClass) {
+  //
+  // for (AbstractDataClass<? extends DataObject> subClass :
+  // contentClass.getSubClasses()) {
+  // AbstractDataField<? extends DataObject, ?> field =
+  // subClass.getDeclaredField(getTitle());
+  // if (field == null) {
+  // field = findSubFieldRecursive(subClass);
+  // }
+  // if (field != null) {
+  // return field;
+  // }
+  // }
+  // return null;
+  // }
+
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField getChild(String childName) {
-
-    if (getTitle().equals(childName)) {
-      return findSubFieldRecursive(this.declaringClass);
-    }
-    return null;
-  }
-
-  /**
-   * @see #getChildren()
-   * 
-   * @param contentClass is the current content-class.
-   * @param fields is the list where the fields are added.
-   */
-  private void collectSubFieldsRecursive(AbstractDataClass<?> contentClass,
-      List<AbstractDataField<?, ?>> fields) {
-
-    for (AbstractDataClass<?> subClass : contentClass.getSubClasses()) {
-      AbstractDataField<?, ?> declaredField = subClass.getDeclaredField(getTitle());
-      if (declaredField != null) {
-        fields.add(declaredField);
-      }
-      collectSubFieldsRecursive(subClass, fields);
-    }
-  }
-
-  /**
-   * @see #getChild(String)
-   * 
-   * @param contentClass is the current content-class.
-   * @return the content-field with the given name or <code>null</code> if NOT
-   *         found.
-   */
-  private AbstractDataField<?, ?> findSubFieldRecursive(AbstractDataClass<?> contentClass) {
-
-    for (AbstractDataClass<?> subClass : contentClass.getSubClasses()) {
-      AbstractDataField<?, ?> declaredField = subClass.getDeclaredField(getTitle());
-      if (declaredField != null) {
-        return declaredField;
-      }
-      findSubFieldRecursive(subClass);
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isContentClass() {
+  public boolean isDataClass() {
 
     return false;
   }
@@ -148,10 +173,10 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  public DataClass getInitiallyDefiningClass() {
+  public DataClass<? extends DataObject> getInitiallyDefiningClass() {
 
-    DataClass definingClass = this.declaringClass;
-    DataClass superClass = definingClass.getSuperClass();
+    DataClass<? extends DataObject> definingClass = this.declaringClass;
+    DataClass<? extends DataObject> superClass = definingClass.getSuperClass();
     while (superClass != null) {
       if (superClass.getField(getTitle()) != null) {
         definingClass = superClass;
@@ -178,31 +203,22 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public Class<?> getFieldClass() {
-
-    return this.fieldType.getRetrievalClass();
-  }
-
-  /**
-   * This method sets the fields {@link #getFieldType() type} and
-   * {@link #getFieldClass() class}.
+   * This method sets the fields {@link #getFieldType() type}.
    * 
    * @param type is the fields type.
    */
-  protected void setFieldTypeAndClass(GenericType<FIELD> type) {
+  protected void setFieldType(GenericType<FIELD> type) {
 
     this.fieldType = type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public ValueValidator getConstraint() {
-
-    return this.constraint;
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // public ValueValidator getConstraint() {
+  //
+  // return this.constraint;
+  // }
 
   /**
    * {@inheritDoc}
@@ -225,18 +241,18 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField getSuperField() {
+  @SuppressWarnings("unchecked")
+  public AbstractDataField<? extends DataObject, ? super FIELD> getSuperField() {
 
-    AbstractDataField superField = null;
-    // ATTENTION: if class-access is NOT set, this can cause infinity-loop!
-    AbstractDataClass superClass = getDeclaringClass().getSuperClass();
+    AbstractDataField<? extends DataObject, ?> superField = null;
+    AbstractDataClass<? extends DataObject> superClass = getDeclaringClass().getSuperClass();
     if (superClass != null) {
       superField = superClass.getField(getTitle());
       if (superField == this) {
         superField = null;
       }
     }
-    return superField;
+    return (AbstractDataField<? extends DataObject, ? super FIELD>) superField;
   }
 
   /**
@@ -250,7 +266,7 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
     } else if (getDeclaringClass().isDeleted()) {
       return true;
     } else {
-      DataField superField = getSuperField();
+      DataField<? extends DataObject, ?> superField = getSuperField();
       if (superField != null) {
         return superField.isDeleted();
       }
@@ -261,7 +277,30 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   /**
    * {@inheritDoc}
    */
-  public DataFieldAccessor getAccessor() {
+  public FIELD getFieldValue(CLASS object) {
+
+    // TODO: security?
+    return this.accessor.getFieldValue(object);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setFieldValue(CLASS object, FIELD value) {
+
+    if (this.modifiers.isReadOnly()) {
+      throw new ReadOnlyException(this.declaringClass.getTitle() + "." + getTitle());
+    }
+    // TODO: security?
+    this.accessor.setFieldValue(object, value);
+  }
+
+  /**
+   * This method gets the {@link DataFieldAccessor} this field delegates to.
+   * 
+   * @return the {@link DataFieldAccessor}.
+   */
+  public DataFieldAccessor<CLASS, FIELD> getAccessor() {
 
     return this.accessor;
   }
@@ -269,7 +308,7 @@ public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends
   /**
    * @param accessor the accessor to set
    */
-  protected void setAccessor(DataFieldAccessor accessor) {
+  protected void setAccessor(DataFieldAccessor<CLASS, FIELD> accessor) {
 
     this.accessor = accessor;
   }

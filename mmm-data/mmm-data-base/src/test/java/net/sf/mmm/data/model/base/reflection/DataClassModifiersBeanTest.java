@@ -1,12 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.model.base;
+package net.sf.mmm.data.model.base.reflection;
 
 import junit.framework.TestCase;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalException;
 import net.sf.mmm.data.base.reflection.DataClassModifiersBean;
-import net.sf.mmm.data.base.reflection.DataModifiersIllegalException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,13 +18,12 @@ import org.junit.Test;
  * @since 1.0.0
  */
 @SuppressWarnings("all")
-public class ContentClassModifiersBeanTest {
+public class DataClassModifiersBeanTest {
 
   private void checkModifiers(DataClassModifiers modifiers) {
 
-    boolean extendable = modifiers.isExtendable();
     DataClassModifiers instance = DataClassModifiersBean.getInstance(modifiers.isSystem(),
-        modifiers.isFinal(), modifiers.isAbstract(), extendable);
+        modifiers.isFinal(), modifiers.isAbstract(), modifiers.isExtendable());
     Assert.assertSame(modifiers, instance);
   }
 
@@ -65,8 +64,8 @@ public class ContentClassModifiersBeanTest {
           for (int ext = 0; ext < 2; ext++) {
             boolean isExtendable = toBoolean(ext);
             try {
-              DataClassModifiers modifiers = DataClassModifiersBean.getInstance(isSystem,
-                  isFinal, isAbstract, isExtendable);
+              DataClassModifiers modifiers = DataClassModifiersBean.getInstance(isSystem, isFinal,
+                  isAbstract, isExtendable);
               Assert.assertEquals(isSystem, modifiers.isSystem());
               Assert.assertEquals(isFinal, modifiers.isFinal());
               Assert.assertEquals(isAbstract, modifiers.isAbstract());

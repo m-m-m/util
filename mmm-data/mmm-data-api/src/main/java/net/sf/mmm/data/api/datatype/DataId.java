@@ -49,81 +49,17 @@ public interface DataId extends Datatype<DataId> {
   int RADIX = 32;
 
   /**
-   * the first {@link #getObjectId() object-ID} that can be used for a resource.
-   * All object-IDs lower than this are reserved for objects that use the
-   * {@link #getClassId() class-ID} as primary key.
+   * An illegal value for the {@link #getObjectId() object-id}. This is reserved
+   * for undefined values.
    */
-  long OID_MINIMUM_RESOURCE = 16;
+  long OBJECT_ID_ILLEGAL = -1;
 
   /**
-   * the first {@link #getObjectId() object-id} that can be used for custom
-   * resources. All object-IDs lower than this are reserved for system resources
-   * (e.g. root-folder, etc.).
+   * The minimum {@link #getObjectId() object-id} that can be used for custom
+   * {@link net.sf.mmm.data.api.entity.DataEntity entities}. All object-IDs
+   * lower than this are reserved for system objects (e.g. root-folder, etc.).
    */
-  long OID_MINIMUM_CUSTOM = 4096;
-
-  /**
-   * the id number of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} of a content-principal.
-   */
-  int CLASS_ID_PRINCIPAL = 7;
-
-  /**
-   * the id number of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} of a content-user.
-   */
-  int CLASS_ID_USER = 8;
-
-  /**
-   * the id number of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} of a content-group.
-   */
-  int CLASS_ID_GROUP = 9;
-
-  /**
-   * the id number of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} of a content-group.
-   */
-  int CLASS_ID_ACTION = 10;
-
-  /**
-   * the id number of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} of a content-group.
-   */
-  int CLASS_ID_PERMISSION = 11;
-
-  /**
-   * the first {@link #getObjectId() object-id} that can be used for custom
-   * fields. All field-IDs lower than this are reserved for system fields.
-   */
-  int FIELD_ID_MINIMUM_CUSTOM = 4096;
-
-  /** The id of the root-folder. */
-  long FOLDER_ID_ROOT = 2;
-
-  /** the id of the reflection-folder. */
-  long FOLDER_ID_REFLECTION = 3;
-
-  /** The id of the classes-folder. */
-  long FOLDER_ID_CLASSES = 4;
-
-  /** The id of the fields-folder. */
-  long FOLDER_ID_FIELDS = 5;
-
-  /** The id of the principals-folder. */
-  long FOLDER_ID_PRINCIPALS = 6;
-
-  /** The id of the users-folder. */
-  long FOLDER_ID_USERS = 7;
-
-  /** The id of the groups-folder. */
-  long FOLDER_ID_GROUPS = 8;
-
-  /** The id of the IDs-folder. */
-  long FOLDER_ID_IDS = 9;
-
-  /** The id of the resources-folder. */
-  long FOLDER_ID_RESOURCES = 10;
+  long OBJECT_ID_MINIMUM_CUSTOM = 4096;
 
   /** The delimiter used in the string representations of an id. */
   char SEPARATOR_CHAR = '.';

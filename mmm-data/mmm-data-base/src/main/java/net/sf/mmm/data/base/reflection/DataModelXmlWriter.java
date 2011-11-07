@@ -40,8 +40,9 @@ public class DataModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  private void writeReflectionObject(DataReflectionObject<? extends DataObject> contentClassOrField,
-      XMLStreamWriter xmlWriter) throws XMLStreamException {
+  private void writeReflectionObject(
+      DataReflectionObject<? extends DataObject> contentClassOrField, XMLStreamWriter xmlWriter)
+      throws XMLStreamException {
 
     Long id = contentClassOrField.getId();
     if (id != null) {
@@ -62,14 +63,14 @@ public class DataModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeField(DataField<? extends DataObject, ?> contentField,
-      XMLStreamWriter xmlWriter) throws XMLStreamException {
+  public void writeField(DataField<? extends DataObject, ?> contentField, XMLStreamWriter xmlWriter)
+      throws XMLStreamException {
 
     xmlWriter.writeStartElement(DataField.CLASS_NAME);
     writeReflectionObject(contentField, xmlWriter);
     String type = contentField.getFieldType().toString();
     xmlWriter.writeAttribute(DataField.FIELD_NAME_FIELD_TYPE, type);
-    DataFieldModifiers modifiers = contentField.getContentModifiers();
+    DataFieldModifiers modifiers = contentField.getModifiers();
     // if (modifiers.isSystem()) {
     // xmlWriter.writeAttribute(Modifiers.XML_ATR_ROOT_SYSTEM, StringUtil.TRUE);
     // }
@@ -99,8 +100,8 @@ public class DataModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeClass(DataClass<? extends DataObject> contentClass,
-      XMLStreamWriter xmlWriter) throws XMLStreamException {
+  public void writeClass(DataClass<? extends DataObject> contentClass, XMLStreamWriter xmlWriter)
+      throws XMLStreamException {
 
     xmlWriter.writeStartElement(DataClass.CLASS_NAME);
     writeReflectionObject(contentClass, xmlWriter);
@@ -108,8 +109,7 @@ public class DataModelXmlWriter {
     if (modifiers.isSystem()) {
       xmlWriter.writeAttribute(DataModifiers.XML_ATR_SYSTEM, StringUtil.TRUE);
       if (modifiers.isExtendable() && !modifiers.isFinal()) {
-        xmlWriter.writeAttribute(DataClassModifiers.XML_ATR_EXTENDABLE,
-            StringUtil.TRUE);
+        xmlWriter.writeAttribute(DataClassModifiers.XML_ATR_EXTENDABLE, StringUtil.TRUE);
       }
     }
     if (modifiers.isFinal()) {

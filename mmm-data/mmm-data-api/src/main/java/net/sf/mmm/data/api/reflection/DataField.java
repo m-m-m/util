@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import java.util.List;
-
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.DataSelectionTreeList;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
@@ -28,9 +26,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataField<CLASS extends DataObject, FIELD> extends
-    DataReflectionObject<CLASS>, DataFieldAccessor<CLASS, FIELD>,
-    DataSelectionTreeList<DataClass<? extends DataObject>> {
+public interface DataField<CLASS extends DataObject, FIELD> extends DataReflectionObject<CLASS>,
+    DataFieldAccessor<CLASS, FIELD>, DataSelectionTreeList<DataClass<? extends DataObject>> {
 
   /**
    * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
@@ -39,8 +36,8 @@ public interface DataField<CLASS extends DataObject, FIELD> extends
   String CLASS_NAME = "ContentField";
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * of the {@link DataClass} reflecting this type.
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
+   * the {@link DataClass} reflecting this type.
    */
   short CLASS_ID = 3;
 
@@ -51,21 +48,21 @@ public interface DataField<CLASS extends DataObject, FIELD> extends
   String XML_ATR_FIELD_TYPE = "type";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getFieldType() fieldType} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getFieldType() fieldType} for generic access.
    */
   String FIELD_NAME_FIELD_TYPE = "fieldType";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getDeclaringClass() declaringClass} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getDeclaringClass() declaringClass} for generic access.
    */
   String FIELD_NAME_DECLARING_CLASS = "declaringClass";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField
-   * field} {@link #getInitiallyDefiningClass() initiallyDefiningClass} for
-   * generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getInitiallyDefiningClass() initiallyDefiningClass} for generic
+   * access.
    */
   String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
 
@@ -75,13 +72,6 @@ public interface DataField<CLASS extends DataObject, FIELD> extends
    * @return the {@link #getDeclaringClass() declaring-class}.
    */
   DataClass<? extends DataObject> getParent();
-
-  /**
-   * A {@link DataField} is a leaf and never has children.
-   * 
-   * @return <code>false</code>.
-   */
-  boolean isFolder();
 
   /**
    * This method gets the content-class that declares this field. This does NOT
@@ -108,27 +98,27 @@ public interface DataField<CLASS extends DataObject, FIELD> extends
    * 
    * @return the class that initially defines this field.
    */
-  DataClass<? super CLASS> getInitiallyDefiningClass();
+  DataClass<? extends DataObject> getInitiallyDefiningClass();
 
-  /**
-   * This method gets the direct sub-fields of this field. The sub-fields are
-   * the {@link DataField fields} that have this field as
-   * {@link #getSuperField() super-field}.
-   * 
-   * @return the sub-fields of this field.
-   */
-  List<? extends DataField<? extends CLASS, ? extends FIELD>> getSubFields();
+  // /**
+  // * This method gets the direct sub-fields of this field. The sub-fields are
+  // * the {@link DataField fields} that have this field as
+  // * {@link #getSuperField() super-field}.
+  // *
+  // * @return the sub-fields of this field.
+  // */
+  // List<? extends DataField<? extends CLASS, ? extends FIELD>> getSubFields();
 
   /**
    * This method gets the super-field of this field if this field is extended. A
-   * non-{@link DataFieldModifiers#isFinal() final} field defined in a class
-   * can be extended in a sub-class. The extended field may have a more specific
+   * non-{@link DataFieldModifiers#isFinal() final} field defined in a class can
+   * be extended in a sub-class. The extended field may have a more specific
    * type.
    * 
    * @return the field extended by this field or <code>null</code> if the field
    *         is NOT inherited.
    */
-  DataField<? super CLASS, ? super FIELD> getSuperField();
+  DataField<? extends DataObject, ? super FIELD> getSuperField();
 
   /**
    * This method gets the specification of the fields type. This is the most

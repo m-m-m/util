@@ -5,6 +5,7 @@ package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.api.DataNode;
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataSelection;
 
 /**
  * This is the interface for an object reflecting the content model. It can be
@@ -17,7 +18,7 @@ import net.sf.mmm.data.api.DataObject;
  */
 @DataClassAnnotation(id = DataReflectionObject.CLASS_ID, title = DataReflectionObject.CLASS_NAME)
 public abstract interface DataReflectionObject<CLASS> extends
-    DataNode<DataClass<? extends DataObject>> {
+    DataNode<DataClass<? extends DataObject>>, DataSelection {
 
   /**
    * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
@@ -116,7 +117,7 @@ public abstract interface DataReflectionObject<CLASS> extends
    * @return <code>true</code> if this is a {@link DataClass content-class},
    *         <code>false</code> if this is a {@link DataField content-field}.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_CONTENTCLASS, isStatic = true, isFinal = true, isReadOnly = true)
-  boolean isContentClass();
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DATACLASS, isStatic = true, isFinal = true, isReadOnly = true)
+  boolean isDataClass();
 
 }

@@ -16,6 +16,9 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 @DataClassAnnotation(id = DataFile.CLASS_ID, isFinal = true)
 public interface DataFolder extends DataEntityResource {
 
+  /** The id of the root-folder. */
+  long FOLDER_ID_ROOT = 2;
+
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.

@@ -4,14 +4,17 @@
 package net.sf.mmm.data.base.reflection;
 
 import net.sf.mmm.data.api.DataException;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ReadOnlyException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
- * TODO: this class ...
+ * This is the implementation of the {@link DataFieldAccessor} using java
+ * reflection.
  * 
  * @param <CLASS> is the generic type for the bound of
  *        {@link net.sf.mmm.data.api.reflection.DataField#getJavaClass()}.
@@ -19,15 +22,16 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldAccessorPojo<CLASS, FIELD> implements DataFieldAccessor<CLASS, FIELD> {
+public class DataFieldAccessorPojo<CLASS extends DataObject, FIELD> implements
+    DataFieldAccessor<CLASS, FIELD> {
 
   /** The type of the content-field to access. */
   private final Class<FIELD> fieldClass;
 
-  /** @see #getFieldValue(Object) */
+  /** @see #getFieldValue(DataObject) */
   private final PojoPropertyAccessorNonArg getter;
 
-  /** @see #setFieldValue(Object, Object) */
+  /** @see #setFieldValue(DataObject, Object) */
   private final PojoPropertyAccessorOneArg setter;
 
   /**
@@ -82,7 +86,6 @@ public class DataFieldAccessorPojo<CLASS, FIELD> implements DataFieldAccessor<CL
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public FIELD getFieldValue(CLASS object) throws DataException {
 
     return (FIELD) this.getter.invoke(object);
@@ -93,8 +96,9 @@ public class DataFieldAccessorPojo<CLASS, FIELD> implements DataFieldAccessor<CL
    */
   public void setFieldValue(CLASS object, FIELD value) throws DataException {
 
+    NlsNullPointerException.checkNotNull(DataObject.class, object);
     if (this.setter == null) {
-      throw new ReadOnlyException("" + object + "." + this.getter.getName());
+      throw new ReadOnlyException(object.getClass().getSimpleName() + "." + this.getter.getName());
     }
     this.setter.invoke(object, value);
   }

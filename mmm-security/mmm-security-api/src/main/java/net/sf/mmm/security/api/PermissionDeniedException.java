@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.security.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.security.NlsBundleSecurity;
 
 /**
  * This exception is thrown if a <em>subject</em> (see e.g.
@@ -27,7 +27,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(Throwable nested, Object subject, Object operation) {
 
-    super(nested, NlsBundleUtilCore.ERR_PERMISSION_DENIED, toMap(KEY_USER, subject, KEY_OPERATION,
+    super(nested, NlsBundleSecurity.ERR_PERMISSION_DENIED, toMap(KEY_USER, subject, KEY_OPERATION,
         operation));
   }
 
@@ -39,7 +39,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(Object subject, Object operation) {
 
-    super(NlsBundleUtilCore.ERR_PERMISSION_DENIED, toMap(KEY_USER, subject, KEY_OPERATION,
+    super(NlsBundleSecurity.ERR_PERMISSION_DENIED, toMap(KEY_USER, subject, KEY_OPERATION,
         operation));
   }
 
@@ -54,7 +54,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(Throwable nested, Object subject, Object operation, Object object) {
 
-    super(nested, NlsBundleUtilCore.ERR_PERMISSION_DENIED_ON_OBJECT, toMap(KEY_USER, subject,
+    super(nested, NlsBundleSecurity.ERR_PERMISSION_DENIED_ON_OBJECT, toMap(KEY_USER, subject,
         KEY_OPERATION, operation, KEY_OBJECT, object));
   }
 
@@ -68,7 +68,7 @@ public class PermissionDeniedException extends SecurityException {
    */
   public PermissionDeniedException(Object subject, Object operation, Object object) {
 
-    super(NlsBundleUtilCore.ERR_PERMISSION_DENIED_ON_OBJECT, toMap(KEY_USER, subject,
+    super(NlsBundleSecurity.ERR_PERMISSION_DENIED_ON_OBJECT, toMap(KEY_USER, subject,
         KEY_OPERATION, operation, KEY_OBJECT, object));
   }
 }

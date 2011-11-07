@@ -34,7 +34,7 @@ public class DataObjectGenericId extends DataObjectId {
    * @param classId is the {@link #getClassId() class-ID}.
    * @param revision is the is the {@link #getRevision() revision}.
    */
-  public DataObjectGenericId(long objectId, int classId, int revision) {
+  public DataObjectGenericId(long objectId, long classId, int revision) {
 
     this(objectId, classId, revision, 0);
   }
@@ -51,7 +51,7 @@ public class DataObjectGenericId extends DataObjectId {
    * @param revision is the is the {@link #getRevision() revision}.
    * @param storeId is the {@link #getStoreId() store-ID}.
    */
-  public DataObjectGenericId(long objectId, int classId, int revision, int storeId) {
+  public DataObjectGenericId(long objectId, long classId, int revision, int storeId) {
 
     super(objectId, classId);
     this.revision = revision;

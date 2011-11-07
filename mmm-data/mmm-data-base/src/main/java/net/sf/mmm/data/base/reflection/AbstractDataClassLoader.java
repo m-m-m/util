@@ -6,16 +6,17 @@ package net.sf.mmm.data.base.reflection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.data.api.DataIdManager;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassLoader;
+import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.access.DataClassReadAccessById;
 import net.sf.mmm.data.api.reflection.access.DataClassReadAccessByTitle;
 import net.sf.mmm.data.api.reflection.access.DataFieldReadAccessById;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
@@ -29,19 +30,19 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  */
 public abstract class AbstractDataClassLoader implements DataClassLoader {
 
-  /** @see #getContentModelService() */
-  private final AbstractMutableDataModelService contentModelService;
+  /** @see #getDataReflectionService() */
+  private final AbstractMutableDataReflectionService dataReflectionService;
 
   /**
    * The constructor.
    * 
-   * @param contentModelService is the {@link #getContentModelService()
+   * @param contentModelService is the {@link #getDataReflectionService()
    *        content-model service}.
    */
-  public AbstractDataClassLoader(AbstractMutableDataModelService contentModelService) {
+  public AbstractDataClassLoader(AbstractMutableDataReflectionService contentModelService) {
 
     super();
-    this.contentModelService = contentModelService;
+    this.dataReflectionService = contentModelService;
   }
 
   /**
@@ -49,9 +50,9 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
    * 
    * @return the content-model service.
    */
-  protected AbstractMutableDataModelService getContentModelService() {
+  protected AbstractMutableDataReflectionService getDataReflectionService() {
 
-    return this.contentModelService;
+    return this.dataReflectionService;
   }
 
   /**
@@ -61,17 +62,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
    */
   protected ClassResolver getClassResolver() {
 
-    return this.contentModelService;
-  }
-
-  /**
-   * This method gets the {@link DataIdManager}.
-   * 
-   * @return the {@link DataIdManager}.
-   */
-  protected DataIdManager getIdManager() {
-
-    return this.contentModelService.getIdManager();
+    return this.dataReflectionService;
   }
 
   /**
@@ -130,6 +121,15 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
+    public DataField<? extends DataObject, ?> getDataField(DataId id)
+        throws ObjectNotFoundException {
+
+      return getDataField(id.getObjectId());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public DataClass<? extends DataObject> getDataClass(DataId id) {
 
       NlsNullPointerException.checkNotNull(DataId.class, id);
@@ -137,20 +137,6 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
         return getDataClass(id.getObjectId());
       } else {
         return getDataClass(id.getClassId());
-      }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public AbstractDataClass<? extends DataObject> getContentClass(long id, String name) {
-
-      AbstractDataClass<? extends DataObject> idClass = getDataClass(id);
-      AbstractDataClass<? extends DataObject> nameClass = getDataClass(name);
-      if (idClass == nameClass) {
-        return idClass;
-      } else {
-        throw new DuplicateObjectException(DataClass.class.getName(), Long.valueOf(id));
       }
     }
 

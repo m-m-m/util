@@ -27,7 +27,10 @@ public abstract interface DataEntity extends DataObject {
    * {@link #getProxyTarget() proxy-target} is NOT <code>null</code>, this
    * object is a proxy on another instance of the same
    * {@link net.sf.mmm.data.api.reflection.DataClass type}. This method returns
-   * the unwrapped instance where the proxy feature is switched off.
+   * the unwrapped instance where the proxy feature is switched off.<br/>
+   * This is e.g. useful to implement an editor where the end-user can see which
+   * {@link net.sf.mmm.data.api.reflection.DataField fields} are actually set in
+   * the proxy object itself.
    * 
    * @return the proxy-source of this entity or the instance itself (
    *         <code>this</code>) if this is already the unwrapped instance.
@@ -42,9 +45,11 @@ public abstract interface DataEntity extends DataObject {
    * from the {@link #getProxyTarget() proxy-target}. This rule does NOT apply
    * for {@link #getId() ID}, {@link #getModificationCounter() modification
    * counter}, {@link #getModificationTimestamp() modification timestamp},
-   * {@link #getRevision() revision}, {@link #getId() id}, and
-   * {@link #getProxyTarget() proxy target}. A proxy that has no field set acts
-   * like a link in a Unix filesystem.<br>
+   * {@link #getRevision() revision}, {@link #getProxySource() proxy source},
+   * and {@link #getProxyTarget() proxy target}. Further, only getters are
+   * delegated to the {@link #getProxyTarget() proxy target}, whereas setters
+   * act on the {@link #getProxySource() proxy source}. A proxy that has no
+   * field set acts like a link in a Unix filesystem.<br>
    * <b>INFORMATION:</b><br>
    * The returned object needs to have the same
    * {@link net.sf.mmm.data.api.reflection.DataClass type} as this instance.

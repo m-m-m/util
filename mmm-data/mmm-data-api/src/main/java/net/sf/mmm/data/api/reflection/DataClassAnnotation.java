@@ -9,6 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.mmm.data.api.datatype.DataId;
+
 /**
  * This annotation is used to mark a java {@link Class type} as a particular
  * {@link net.sf.mmm.data.api.DataObject}. Therefore an according
@@ -27,16 +29,16 @@ import java.lang.annotation.Target;
 public @interface DataClassAnnotation {
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getObjectId() id} of the
+   * The {@link DataClass#getId() ID} of the
    * {@link net.sf.mmm.data.api.reflection.DataClass}. If omitted the ID will be
    * generated automatically. If an update is performed and the {@link #title()
    * title} has NOT changed then the existing ID will be reassigned. However,
-   * for statically typed content classes it is suggested to supply fixed IDs to
+   * for statically typed data classes it is suggested to supply fixed IDs to
    * prevent problems on renaming.
    * 
    * @see net.sf.mmm.data.api.reflection.DataClass#CLASS_ID_MINIMUM_CUSTOM
    */
-  int id() default -1;
+  long id() default DataId.OBJECT_ID_ILLEGAL;
 
   /**
    * The {@link net.sf.mmm.data.api.reflection.DataClass#getTitle() title} of

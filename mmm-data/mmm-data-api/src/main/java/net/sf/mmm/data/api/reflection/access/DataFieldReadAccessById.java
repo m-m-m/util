@@ -21,7 +21,7 @@ public interface DataFieldReadAccessById {
    * This method gets the {@link DataField} for the given <code>id</code>.
    * 
    * @see DataField#getId()
-   * @see net.sf.mmm.data.api.DataIdManager#getFieldId(int)
+   * @see net.sf.mmm.data.api.DataIdManager#getFieldId(long)
    * 
    * @param id is the unique ID of the requested {@link DataField}.
    * @return the content field for the given <code>id</code>.
@@ -34,7 +34,7 @@ public interface DataFieldReadAccessById {
    * This method gets the {@link DataField} for the given <code>id</code>.
    * 
    * @see DataField#getId()
-   * @see net.sf.mmm.data.api.DataIdManager#getFieldId(int)
+   * @see net.sf.mmm.data.api.DataIdManager#getFieldId(long)
    * 
    * @param id is the unique {@link DataId} of the requested {@link DataField}.
    * @return the content field for the given <code>id</code>.

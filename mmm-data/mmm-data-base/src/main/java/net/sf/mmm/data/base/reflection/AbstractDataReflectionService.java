@@ -3,17 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.reflection;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.inject.Inject;
-
-import net.sf.mmm.data.api.DataIdManager;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
@@ -24,7 +19,6 @@ import net.sf.mmm.data.api.reflection.DataReflectionEvent;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.reflection.DataSystemModifyException;
-import net.sf.mmm.data.api.reflection.access.DataClassReadAccessByInstance;
 import net.sf.mmm.data.base.AbstractDataObject;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.event.api.EventListener;
@@ -34,6 +28,7 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the abstract base implementation of the {@link DataReflectionService}
@@ -47,10 +42,10 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   /** @see #getDataClass(String) */
   private final Map<String, AbstractDataClass<? extends DataObject>> name2class;
 
-  /** @see #getContentClass(DataId) */
+  /** @see #getDataClass(long) */
   private final Map<Long, AbstractDataClass<? extends DataObject>> id2class;
 
-  /** @see #getContentClass(Class) */
+  /** @see #getDataClass(Class) */
   private final Map<Class<? extends DataObject>, AbstractDataClass<? extends DataObject>> class2class;
 
   /** @see #getDataClasses() */
@@ -59,16 +54,13 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   /** @see #getDataClasses() */
   private final List<AbstractDataClass<? extends DataObject>> classesView;
 
-  /** @see #getField(DataId) */
+  /** @see #getDataField(long) */
   private final Map<Long, AbstractDataField<? extends DataObject, ?>> id2field;
 
   /** @see #getRootDataClass() */
   private AbstractDataClass<? extends DataObject> rootClass;
 
-  /** @see #getIdManager() */
-  private DataIdManager idManager;
-
-  /** @see #getEventRegistrar() */
+  /** @see #getEventSource() */
   private final ContentModelEventSource eventSource;
 
   /**
@@ -89,26 +81,10 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   }
 
   /**
-   * {@inheritDoc}
+   * @see net.sf.mmm.data.api.reflection.MutableDataReflectionService#getEventSource()
+   * @return the {@link EventSource}.
    */
-  public DataIdManager getIdManager() {
-
-    return this.idManager;
-  }
-
-  /**
-   * @param idManager the idManager to set
-   */
-  @Inject
-  public void setIdManager(DataIdManager idManager) {
-
-    this.idManager = idManager;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public EventSource<DataReflectionEvent, EventListener<DataReflectionEvent>> getEventRegistrar() {
+  public EventSource<DataReflectionEvent<? extends DataObject>, EventListener<DataReflectionEvent<? extends DataObject>>> getEventSource() {
 
     return this.eventSource;
   }
@@ -140,7 +116,7 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
 
     AbstractDataClass<? extends DataObject> dataClass = this.id2class.get(Long.valueOf(id));
     if (dataClass == null) {
-      throw new ObjectNotFoundException(DataClass.class, id);
+      throw new ObjectNotFoundException(DataClass.class, Long.valueOf(id));
     }
     return dataClass;
   }
@@ -283,7 +259,7 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
    * <b>WARNING:</b><br>
    * Use this feature with extreme care.
    * 
-   * @param contentClass is the class to remove.
+   * @param dataClass is the class to remove.
    * @throws DataReflectionException if the operation fails (e.g. the class is
    *         required by the system).
    */
@@ -328,7 +304,7 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
    * 
    * @param event is the event to send.
    */
-  protected void fireEvent(DataReflectionEvent event) {
+  protected void fireEvent(DataReflectionEvent<? extends DataObject> event) {
 
     this.eventSource.fireEvent(event);
   }
@@ -336,53 +312,60 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   /**
    * This method synchronizes the given field that has been added or modified.
    * 
-   * @param contentClass
-   * @param field
+   * @param <CLASS> is the generic type of the {@link DataClass#getJavaClass()}.
+   * @param dataClass is the {@link DataField#getDeclaringClass() declaring
+   *        class}.
+   * @param dataField is the {@link DataField} to synchronize.
    */
-  protected void syncField(AbstractDataClass contentClass, AbstractDataField field) {
+  protected <CLASS extends DataObject> void syncField(AbstractDataClass<CLASS> dataClass,
+      AbstractDataField<CLASS, ?> dataField) {
 
-    Long id = field.getId();
-    AbstractDataField existingField = this.id2field.get(id);
+    Long id = dataField.getId();
+    AbstractDataField<? extends DataObject, ?> existingField = this.id2field.get(id);
     if (existingField == null) {
-      contentClass.addField(field);
-      addField(field);
+      dataClass.addField(dataField);
+      addField(dataField);
     } else {
       // TODO: remove existingField from contentClass and add new field
     }
   }
 
   /**
-   * TODO: javadoc
+   * This method synchronizes the given class that has been added or modified.
    * 
-   * @param contentClass
-   * @param superClass
+   * @param <SUPERCLASS> is the generic type of {@link DataClass#getJavaClass()}
+   *        for the given <code>superClass</code>.
+   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()} for
+   *        the given <code>dataClass</code>.
+   * @param dataClass is the {@link DataClass} that has changed.
+   * @param superClass is the {@link DataClass#getSuperClass() super class}.
    */
-  protected void syncClassRecursive(AbstractDataClass<? extends DataObject> contentClass,
-      AbstractDataClass superClass) {
+  protected <SUPERCLASS extends DataObject, CLASS extends SUPERCLASS> void syncClassRecursive(
+      AbstractDataClass<CLASS> dataClass, AbstractDataClass<SUPERCLASS> superClass) {
 
-    Long id = contentClass.getId();
-    AbstractDataClass existingClass = this.id2class.get(id);
+    Long id = dataClass.getId();
+    AbstractDataClass<? extends DataObject> existingClass = this.id2class.get(id);
     if (existingClass == null) {
       // new content class
 
       // TODO: verification
-      superClass.addSubClass(contentClass);
-      addClass(contentClass);
-      fireEvent(new DataReflectionEvent(contentClass, ChangeType.ADD));
+      superClass.addSubClass(dataClass);
+      addClass(dataClass);
+      fireEvent(new DataReflectionEvent<CLASS>(dataClass, ChangeType.ADD));
     } else {
       DataClassModifiers existingModifiers = existingClass.getModifiers();
       boolean modified = false;
-      if (!existingClass.getTitle().equals(contentClass.getTitle())) {
+      if (!existingClass.getTitle().equals(dataClass.getTitle())) {
         // TODO I18N
         throw new UnsupportedOperationException(
             "Changing the name of a content-class is currently NOT supported!");
       }
-      if (existingClass.getJavaClass() != contentClass.getJavaClass()) {
+      if (existingClass.getJavaClass() != dataClass.getJavaClass()) {
         // TODO I18N
         throw new UnsupportedOperationException(
             "Changing the java-class of a content-class is currently NOT supported!");
       }
-      if (!existingModifiers.equals(contentClass.getModifiers())) {
+      if (!existingModifiers.equals(dataClass.getModifiers())) {
         if (existingModifiers.isSystem()) {
           // TODO: NLS
           throw new DataReflectionException("Changing modifiers of system class is NOT permitted!");
@@ -391,26 +374,50 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
         throw new UnsupportedOperationException(
             "Changing the modifiers of a content-class is currently NOT supported!");
       }
-      for (AbstractDataField<? extends DataObject, ?> field : contentClass.getDeclaredFields()) {
-        syncField(contentClass, field);
+      for (AbstractDataField<CLASS, ?> field : dataClass.getDeclaredFields()) {
+        syncField(dataClass, field);
       }
-      for (AbstractDataClass subClass : contentClass.getSubClasses()) {
-        syncClassRecursive(subClass, contentClass);
+      for (AbstractDataClass<? extends CLASS> subClass : dataClass.getSubClasses()) {
+        syncClassRecursive(subClass, dataClass);
       }
       if (modified) {
-        fireEvent(new DataReflectionEvent(contentClass, ChangeType.UPDATE));
+        fireEvent(new DataReflectionEvent<CLASS>(dataClass, ChangeType.UPDATE));
       }
     }
 
   }
 
   /**
-   * {@inheritDoc}
+   * This method creates a new instance of {@link AbstractDataClass}.
+   * 
+   * @return the new, uninitialized instance.
    */
-  public AbstractDataClass createNewClass(DataId id, String name, AbstractDataClass superClass,
-      DataClassModifiers modifiers, Class<? extends DataObject> javaClass, boolean deleted) {
+  protected abstract AbstractDataClass<? extends DataObject> createDataClass();
 
-    AbstractDataClass newClass = createNewClass(id, name);
+  /**
+   * This method instantiates a {@link DataClass}.
+   * 
+   * @param <CLASS> is the generic type of the <code>javaClass</code>.
+   * @param id is the unique {@link DataClass#getId() ID} of the new class. May
+   *        be <code>null</code>.
+   * @param title is the {@link DataClass#getTitle() title} of the new class.
+   * @param superClass is the {@link DataClass#getSuperClass() super class} of
+   *        the new class.
+   * @param modifiers are the {@link DataClass#getModifiers() modifiers} of the
+   *        new class.
+   * @param javaClass is the {@link DataClass#getJavaClass() java class} of the
+   *        new class.
+   * @param deleted is the {@link DataClass#isDeleted() deleted flag} of the new
+   *        class.
+   * @return the created class.
+   */
+  @SuppressWarnings("unchecked")
+  public <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass(Long id, String title,
+      AbstractDataClass<? extends DataObject> superClass, DataClassModifiers modifiers,
+      Class<CLASS> javaClass, boolean deleted) {
+
+    AbstractDataClass<CLASS> newClass = (AbstractDataClass<CLASS>) createDataClass();
+    newClass.setId(id);
     newClass.setSuperClass(superClass);
     newClass.setModifiers(modifiers);
     newClass.setJavaClass(javaClass);
@@ -419,29 +426,57 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   }
 
   /**
-   * {@inheritDoc}
+   * This method creates a new instance of {@link AbstractDataField}.
+   * 
+   * @return the new, uninitialized instance.
    */
-  public AbstractDataField createNewField(DataId id, String name, DataClass declaringClass,
-      Type type, DataFieldModifiers modifiers, boolean deleted) {
+  protected abstract AbstractDataField<? extends DataObject, ?> createDataField();
 
-    AbstractDataField newField = createNewField(id, name);
-    newField.setDeclaringClass((AbstractDataClass) declaringClass);
-    newField.setFieldTypeAndClass(type);
+  /**
+   * This method creates a new {@link DataField}.
+   * 
+   * @param <CLASS> is the generic type of the <code>javaClass</code>.
+   * @param <FIELD> is the generic type of the <code>fieldType</code>.
+   * @param id is the unique {@link DataField#getId() ID} of the new field. May
+   *        be <code>null</code>.
+   * @param title is the {@link DataField#getTitle() title} of the new field.
+   * @param declaringClass is the {@link DataClass}
+   *        {@link DataField#getDeclaringClass() declaring} the new field.
+   * @param fieldType is the {@link DataField#getFieldType()} of the new field.
+   * @param modifiers are the {@link DataField#getModifiers() modifiers} of the
+   *        new field.
+   * @param isDeleted is the {@link DataField#getDeletedFlag() deleted flag}.
+   * @return the new {@link DataField}.
+   */
+  @SuppressWarnings("unchecked")
+  public <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField(Long id,
+      String title, DataClass<CLASS> declaringClass, GenericType<FIELD> fieldType,
+      DataFieldModifiers modifiers, boolean isDeleted) {
+
+    AbstractDataField<CLASS, FIELD> newField = (AbstractDataField<CLASS, FIELD>) createDataField();
+    if (id != null) {
+      newField.setId(id);
+    }
+    newField.setTitle(title);
+    newField.setDeclaringClass((AbstractDataClass<CLASS>) declaringClass);
+    newField.setFieldType(fieldType);
     newField.setModifiers(modifiers);
+    newField.setDeletedFlag(isDeleted);
     return newField;
   }
 
   /**
-   * @see AbstractDataReflectionService#getEventRegistrar()
+   * @see AbstractDataReflectionService#getEventSource()
    */
-  private static class ContentModelEventSource extends
-      AbstractSynchronizedEventSource<DataReflectionEvent, EventListener<DataReflectionEvent>> {
+  private static class ContentModelEventSource
+      extends
+      AbstractSynchronizedEventSource<DataReflectionEvent<? extends DataObject>, EventListener<DataReflectionEvent<? extends DataObject>>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void fireEvent(DataReflectionEvent event) {
+    public void fireEvent(DataReflectionEvent<? extends DataObject> event) {
 
       super.fireEvent(event);
     }

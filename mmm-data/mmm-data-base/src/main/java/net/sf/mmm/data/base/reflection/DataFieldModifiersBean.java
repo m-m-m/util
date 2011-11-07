@@ -3,70 +3,70 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.reflection;
 
-import net.sf.mmm.data.NlsBundleDataApi;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalException;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalTransientMutableException;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalTransientStaticException;
 
 /**
- * This is the base implementation of the {@link DataFieldModifiers}
- * interface.
+ * This is the base implementation of the {@link DataFieldModifiers} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
+public final class DataFieldModifiersBean extends AbstractDataModifiersBean implements
     DataFieldModifiers {
 
-  /** uid for serialization */
+  /** UID for serialization */
   private static final long serialVersionUID = -7486568372216293843L;
 
   /** the modifier of a "normal" field */
-  public static final DataFieldModifiersBean NORMAL = new DataFieldModifiersBean(false,
-      false, false, false, false, false);
-
-  /** the modifier of a read-only field */
-  public static final DataFieldModifiersBean READ_ONLY = new DataFieldModifiersBean(false,
-      false, true, false, false, false);
-
-  /** the modifier of a final field */
-  public static final DataFieldModifiersBean FINAL = new DataFieldModifiersBean(false, true,
+  public static final DataFieldModifiersBean NORMAL = new DataFieldModifiersBean(false, false,
       false, false, false, false);
 
+  /** the modifier of a read-only field */
+  public static final DataFieldModifiersBean READ_ONLY = new DataFieldModifiersBean(false, false,
+      true, false, false, false);
+
+  /** the modifier of a final field */
+  public static final DataFieldModifiersBean FINAL = new DataFieldModifiersBean(false, true, false,
+      false, false, false);
+
   /** the modifier of a final and read-only field */
-  public static final DataFieldModifiersBean FINAL_READONLY = new DataFieldModifiersBean(
-      false, true, true, false, false, false);
+  public static final DataFieldModifiersBean FINAL_READONLY = new DataFieldModifiersBean(false,
+      true, true, false, false, false);
 
   /** the modifier of a static field */
-  public static final DataFieldModifiersBean STATIC = new DataFieldModifiersBean(false,
-      false, false, true, false, false);
+  public static final DataFieldModifiersBean STATIC = new DataFieldModifiersBean(false, false,
+      false, true, false, false);
 
   /** the modifier of a static and final field */
-  public static final DataFieldModifiersBean STATIC_FINAL = new DataFieldModifiersBean(false,
-      true, false, true, false, false);
+  public static final DataFieldModifiersBean STATIC_FINAL = new DataFieldModifiersBean(false, true,
+      false, true, false, false);
 
   /** the modifier of a static and immutable field */
-  public static final DataFieldModifiersBean STATIC_READONLY = new DataFieldModifiersBean(
-      false, false, true, true, false, false);
+  public static final DataFieldModifiersBean STATIC_READONLY = new DataFieldModifiersBean(false,
+      false, true, true, false, false);
 
   /** the modifier of a static, final and read-only field */
   public static final DataFieldModifiersBean STATIC_FINAL_READONLY = new DataFieldModifiersBean(
       false, true, true, true, false, false);
 
   /** the modifier of a transient (and read-only) field */
-  public static final DataFieldModifiersBean TRANSIENT = new DataFieldModifiersBean(false,
-      false, true, false, true, false);
+  public static final DataFieldModifiersBean TRANSIENT = new DataFieldModifiersBean(false, false,
+      true, false, true, false);
 
   /** the modifier of a transient field */
-  public static final DataFieldModifiersBean FINAL_TRANSIENT = new DataFieldModifiersBean(
-      false, true, true, false, true, false);
+  public static final DataFieldModifiersBean FINAL_TRANSIENT = new DataFieldModifiersBean(false,
+      true, true, false, true, false);
 
   /** the modifier of a system-field */
   public static final DataFieldModifiersBean SYSTEM = new DataFieldModifiersBean(true, false,
       false, false, false, false);
 
   /** the modifier of a final system-field */
-  public static final DataFieldModifiersBean SYSTEM_FINAL = new DataFieldModifiersBean(true,
-      true, false, false, false, false);
+  public static final DataFieldModifiersBean SYSTEM_FINAL = new DataFieldModifiersBean(true, true,
+      false, false, false, false);
 
   /** the modifier of a final and read-only system-field */
   public static final DataFieldModifiersBean SYSTEM_FINAL_READONLY = new DataFieldModifiersBean(
@@ -77,16 +77,16 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
       false, false, true, false, false);
 
   /** the modifier of a static and final system-field */
-  public static final DataFieldModifiersBean SYSTEM_STATIC_FINAL = new DataFieldModifiersBean(
-      true, true, false, true, false, false);
+  public static final DataFieldModifiersBean SYSTEM_STATIC_FINAL = new DataFieldModifiersBean(true,
+      true, false, true, false, false);
 
   /** the modifier of a static, final and read-only system-field */
   public static final DataFieldModifiersBean SYSTEM_STATIC_FINAL_READONLY = new DataFieldModifiersBean(
       true, true, true, true, false, false);
 
   /** the modifier of a transient system-field */
-  public static final DataFieldModifiersBean SYSTEM_TRANSIENT = new DataFieldModifiersBean(
-      true, false, true, false, true, false);
+  public static final DataFieldModifiersBean SYSTEM_TRANSIENT = new DataFieldModifiersBean(true,
+      false, true, false, true, false);
 
   /** the modifier of a final, transient system-field */
   public static final DataFieldModifiersBean SYSTEM_FINAL_TRANSIENT = new DataFieldModifiersBean(
@@ -97,8 +97,90 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
       true, false, true, true, false, false);
 
   /** the modifier of a read-only system-field */
-  public static final DataFieldModifiersBean SYSTEM_READONLY = new DataFieldModifiersBean(
-      true, false, true, false, false, false);
+  public static final DataFieldModifiersBean SYSTEM_READONLY = new DataFieldModifiersBean(true,
+      false, true, false, false, false);
+
+  // --------------------
+
+  /** the modifier of a "normal" field */
+  public static final DataFieldModifiersBean INHERITED = new DataFieldModifiersBean(false, false,
+      false, false, false, true);
+
+  /** the modifier of a read-only field */
+  public static final DataFieldModifiersBean INHERITED_READ_ONLY = new DataFieldModifiersBean(
+      false, false, true, false, false, true);
+
+  /** the modifier of a final field */
+  public static final DataFieldModifiersBean INHERITED_FINAL = new DataFieldModifiersBean(false,
+      true, false, false, false, true);
+
+  /** the modifier of a final and read-only field */
+  public static final DataFieldModifiersBean INHERITED_FINAL_READONLY = new DataFieldModifiersBean(
+      false, true, true, false, false, true);
+
+  /** the modifier of a static field */
+  public static final DataFieldModifiersBean INHERITED_STATIC = new DataFieldModifiersBean(false,
+      false, false, true, false, true);
+
+  /** the modifier of a static and final field */
+  public static final DataFieldModifiersBean INHERITED_STATIC_FINAL = new DataFieldModifiersBean(
+      false, true, false, true, false, true);
+
+  /** the modifier of a static and immutable field */
+  public static final DataFieldModifiersBean INHERITED_STATIC_READONLY = new DataFieldModifiersBean(
+      false, false, true, true, false, true);
+
+  /** the modifier of a static, final and read-only field */
+  public static final DataFieldModifiersBean INHERITED_STATIC_FINAL_READONLY = new DataFieldModifiersBean(
+      false, true, true, true, false, true);
+
+  /** the modifier of a transient (and read-only) field */
+  public static final DataFieldModifiersBean INHERITED_TRANSIENT = new DataFieldModifiersBean(
+      false, false, true, false, true, true);
+
+  /** the modifier of a transient field */
+  public static final DataFieldModifiersBean INHERITED_FINAL_TRANSIENT = new DataFieldModifiersBean(
+      false, true, true, false, true, true);
+
+  /** the modifier of a system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM = new DataFieldModifiersBean(true,
+      false, false, false, false, true);
+
+  /** the modifier of a final system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_FINAL = new DataFieldModifiersBean(
+      true, true, false, false, false, true);
+
+  /** the modifier of a final and read-only system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_FINAL_READONLY = new DataFieldModifiersBean(
+      true, true, true, false, false, true);
+
+  /** the modifier of a static system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_STATIC = new DataFieldModifiersBean(
+      true, false, false, true, false, true);
+
+  /** the modifier of a static and final system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_STATIC_FINAL = new DataFieldModifiersBean(
+      true, true, false, true, false, true);
+
+  /** the modifier of a static, final and read-only system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_STATIC_FINAL_READONLY = new DataFieldModifiersBean(
+      true, true, true, true, false, true);
+
+  /** the modifier of a transient system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_TRANSIENT = new DataFieldModifiersBean(
+      true, false, true, false, true, true);
+
+  /** the modifier of a final, transient system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_FINAL_TRANSIENT = new DataFieldModifiersBean(
+      true, true, true, false, true, true);
+
+  /** the modifier of a static and read-only system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_STATIC_READONLY = new DataFieldModifiersBean(
+      true, false, true, true, false, true);
+
+  /** the modifier of a read-only system-field */
+  public static final DataFieldModifiersBean INHERITED_SYSTEM_READONLY = new DataFieldModifiersBean(
+      true, false, true, false, false, true);
 
   /** @see #isReadOnly() */
   private final boolean readOnlyFlag;
@@ -115,9 +197,6 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
   /**
    * The constructor.
    * 
-   * @see AbstractDataModifiersBean#AbstractContentModifiersBean(boolean,
-   *      boolean)
-   * 
    * @param isSystem is the value for {@link #isSystem()}.
    * @param isFinal is the value for {@link #isFinal()}.
    * @param isReadOnly is the value for {@link #isReadOnly()}.
@@ -126,7 +205,7 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
    * @param isInheritedFromParent is the value for
    *        {@link #isInheritedFromParent()}.
    */
-  public DataFieldModifiersBean(boolean isSystem, boolean isFinal, boolean isReadOnly,
+  private DataFieldModifiersBean(boolean isSystem, boolean isFinal, boolean isReadOnly,
       boolean isStatic, boolean isTransient, boolean isInheritedFromParent) {
 
     super(isSystem, isFinal);
@@ -135,32 +214,6 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
     this.staticFlag = isStatic;
     this.transientFlag = isTransient;
     this.inheritedFromParentFlag = isInheritedFromParent;
-  }
-
-  /**
-   * The copy constructor.
-   * 
-   * @param modifiers is the modifiers object to copy.
-   */
-  public DataFieldModifiersBean(DataFieldModifiers modifiers) {
-
-    this(modifiers.isSystem(), modifiers.isFinal(), modifiers.isReadOnly(), modifiers.isStatic(),
-        modifiers.isTransient(), modifiers.isInheritedFromParent());
-  }
-
-  /**
-   * This method gets the constant representation of this
-   * {@link DataFieldModifiers} instance.
-   * 
-   * @see String#intern()
-   * @see #getInstance(boolean, boolean, boolean, boolean, boolean, boolean)
-   * 
-   * @return the according singleton {@link DataFieldModifiers} instance.
-   */
-  public DataFieldModifiers intern() {
-
-    return getInstance(isSystem(), isFinal(), this.readOnlyFlag, this.staticFlag,
-        this.transientFlag, this.inheritedFromParentFlag);
   }
 
   /**
@@ -180,8 +233,7 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
 
     validate(isSystem, isFinal, isReadOnly, isStatic, isTransient, isInheritedFromParent);
     if (isInheritedFromParent) {
-      // TODO
-      throw new NlsUnsupportedOperationException();
+      return getInstanceInherited(isSystem, isFinal, isReadOnly, isStatic, isTransient);
     } else {
       if (isSystem) {
         if (isTransient) {
@@ -264,6 +316,98 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
   }
 
   /**
+   * @see #getInstance(boolean, boolean, boolean, boolean, boolean, boolean)
+   * 
+   * @param isSystem is the value for {@link #isSystem()}.
+   * @param isFinal is the value for {@link #isFinal()}.
+   * @param isReadOnly is the value for {@link #isReadOnly()}.
+   * @param isStatic is the value for {@link #isStatic()}.
+   * @param isTransient is the value for {@link #isTransient()}.
+   * @return the requested modifiers.
+   */
+  private static DataFieldModifiers getInstanceInherited(boolean isSystem, boolean isFinal,
+      boolean isReadOnly, boolean isStatic, boolean isTransient) {
+
+    if (isSystem) {
+      if (isTransient) {
+        if (isFinal) {
+          return INHERITED_SYSTEM_FINAL_TRANSIENT;
+        } else {
+          return INHERITED_SYSTEM_TRANSIENT;
+        }
+      } else {
+        if (isFinal) {
+          if (isReadOnly) {
+            if (isStatic) {
+              return INHERITED_SYSTEM_STATIC_FINAL_READONLY;
+            } else {
+              return INHERITED_SYSTEM_FINAL_READONLY;
+            }
+          } else {
+            if (isStatic) {
+              return INHERITED_SYSTEM_STATIC_FINAL;
+            } else {
+              return INHERITED_SYSTEM_FINAL;
+            }
+          }
+        } else {
+          if (isReadOnly) {
+            if (isStatic) {
+              return INHERITED_SYSTEM_STATIC_READONLY;
+            } else {
+              return INHERITED_SYSTEM_READONLY;
+            }
+          } else {
+            if (isStatic) {
+              return INHERITED_SYSTEM_STATIC;
+            } else {
+              return INHERITED_SYSTEM;
+            }
+          }
+        }
+      }
+    } else {
+      if (isTransient) {
+        if (isFinal) {
+          return INHERITED_FINAL_TRANSIENT;
+        } else {
+          return INHERITED_TRANSIENT;
+        }
+      } else {
+        if (isFinal) {
+          if (isReadOnly) {
+            if (isStatic) {
+              return INHERITED_STATIC_FINAL_READONLY;
+            } else {
+              return INHERITED_FINAL_READONLY;
+            }
+          } else {
+            if (isStatic) {
+              return INHERITED_STATIC_FINAL;
+            } else {
+              return INHERITED_FINAL;
+            }
+          }
+        } else {
+          if (isReadOnly) {
+            if (isStatic) {
+              return INHERITED_STATIC_READONLY;
+            } else {
+              return INHERITED_READ_ONLY;
+            }
+          } else {
+            if (isStatic) {
+              return INHERITED_STATIC;
+            } else {
+              return INHERITED;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
    * This method validates the consistency of the modifier flags.
    * 
    * @param isSystem is the value for {@link #isSystem()}.
@@ -281,12 +425,10 @@ public class DataFieldModifiersBean extends AbstractDataModifiersBean implements
 
     if (isTransient) {
       if (!isReadOnly) {
-        throw new DataModifiersIllegalException(
-            NlsBundleDataApi.ERR_MODIFIERS_TRANSIENT_MUTABLE);
+        throw new DataModifiersIllegalTransientMutableException();
       }
       if (isStatic) {
-        throw new DataModifiersIllegalException(
-            NlsBundleDataApi.ERR_MODIFIERS_TRANSIENT_STATIC);
+        throw new DataModifiersIllegalTransientStaticException();
       }
     }
   }

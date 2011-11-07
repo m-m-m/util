@@ -22,7 +22,7 @@ public interface DataClassReadAccessById {
    * 
    * @see DataClass#getId()
    * @see net.sf.mmm.data.api.datatype.DataId#getDataClassId()
-   * @see net.sf.mmm.data.api.DataIdManager#getClassId(int)
+   * @see net.sf.mmm.data.api.DataIdManager#getClassId(long)
    * 
    * @param id is the {@link DataClass#getId() unique ID} of the requested
    *        class.
@@ -37,7 +37,7 @@ public interface DataClassReadAccessById {
    * 
    * @see DataClass#getId()
    * @see net.sf.mmm.data.api.datatype.DataId#getDataClassId()
-   * @see net.sf.mmm.data.api.DataIdManager#getClassId(int)
+   * @see net.sf.mmm.data.api.DataIdManager#getClassId(long)
    * 
    * @param id is the {@link DataReflectionReadAccess#getDataId(DataObject)
    *        unique ID} of the requested class.
@@ -46,5 +46,7 @@ public interface DataClassReadAccessById {
    *         exist.
    */
   DataClass<? extends DataObject> getDataClass(DataId id) throws ObjectNotFoundException;
+
+  // DataClass<? extends DataObject> getDataClass(long id, String name) {
 
 }

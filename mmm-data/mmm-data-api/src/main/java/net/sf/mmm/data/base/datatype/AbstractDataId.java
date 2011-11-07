@@ -4,6 +4,7 @@
 package net.sf.mmm.data.base.datatype;
 
 import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is the abstract base implementation of the {@link DataId} interface.
@@ -27,6 +28,9 @@ public abstract class AbstractDataId implements DataId {
   public AbstractDataId(long objectId) {
 
     super();
+    if (objectId == OBJECT_ID_ILLEGAL) {
+      throw new NlsIllegalArgumentException(Long.valueOf(objectId), "ID");
+    }
     this.objectId = objectId;
   }
 

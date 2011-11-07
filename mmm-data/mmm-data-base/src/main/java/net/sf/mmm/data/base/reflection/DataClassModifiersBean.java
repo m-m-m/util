@@ -5,19 +5,21 @@ package net.sf.mmm.data.base.reflection;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import net.sf.mmm.data.NlsBundleDataApi;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalAbstractFinalException;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalException;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalFinalExtendableException;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalNotSystemUnextendableException;
 
 /**
- * This is the base implementation of the {@link DataClassModifiers}
- * interface.
+ * This is the base implementation of the {@link DataClassModifiers} interface.
  * 
  * @see net.sf.mmm.data.api.reflection.DataClass#getModifiers()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataClassModifiersBean extends AbstractDataModifiersBean implements
+public final class DataClassModifiersBean extends AbstractDataModifiersBean implements
     DataClassModifiers {
 
   /** UID for serialization. */
@@ -37,8 +39,8 @@ public class DataClassModifiersBean extends AbstractDataModifiersBean implements
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is NOT
    * {@link #isExtendable() extendable}.
    */
-  public static final DataClassModifiersBean SYSTEM_UNEXTENDABLE = new DataClassModifiersBean(
-      true, false, false, false);
+  public static final DataClassModifiersBean SYSTEM_UNEXTENDABLE = new DataClassModifiersBean(true,
+      false, false, false);
 
   /**
    * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
@@ -47,8 +49,8 @@ public class DataClassModifiersBean extends AbstractDataModifiersBean implements
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is
    * {@link #isFinal() final}.
    */
-  public static final DataClassModifiersBean SYSTEM_FINAL = new DataClassModifiersBean(true,
-      true, false, false);
+  public static final DataClassModifiersBean SYSTEM_FINAL = new DataClassModifiersBean(true, true,
+      false, false);
 
   /**
    * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
@@ -57,8 +59,8 @@ public class DataClassModifiersBean extends AbstractDataModifiersBean implements
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class} that is
    * {@link #isAbstract() abstract}.
    */
-  public static final DataClassModifiersBean SYSTEM_ABSTRACT = new DataClassModifiersBean(
-      true, false, true, true);
+  public static final DataClassModifiersBean SYSTEM_ABSTRACT = new DataClassModifiersBean(true,
+      false, true, true);
 
   /**
    * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
@@ -75,24 +77,24 @@ public class DataClassModifiersBean extends AbstractDataModifiersBean implements
    * modifiers} for a {@link #isFinal() final}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class}.
    */
-  public static final DataClassModifiersBean FINAL = new DataClassModifiersBean(false, true,
-      false, false);
+  public static final DataClassModifiersBean FINAL = new DataClassModifiersBean(false, true, false,
+      false);
 
   /**
    * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a {@link #isAbstract() abstract}
    * {@link net.sf.mmm.data.api.reflection.DataClass content-class}.
    */
-  public static final DataClassModifiersBean ABSTRACT = new DataClassModifiersBean(false,
-      false, true, true);
+  public static final DataClassModifiersBean ABSTRACT = new DataClassModifiersBean(false, false,
+      true, true);
 
   /**
    * the {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()
    * modifiers} for a "normal" {@link net.sf.mmm.data.api.reflection.DataClass
    * content-class}.
    */
-  public static final DataClassModifiersBean NORMAL = new DataClassModifiersBean(false,
-      false, false, true);
+  public static final DataClassModifiersBean NORMAL = new DataClassModifiersBean(false, false,
+      false, true);
 
   /** @see #isAbstract() */
   @XmlAttribute(name = XML_ATR_ABSTRACT)
@@ -105,36 +107,18 @@ public class DataClassModifiersBean extends AbstractDataModifiersBean implements
   /**
    * The constructor.
    * 
-   * @see AbstractDataModifiersBean#AbstractContentModifiersBean(boolean,
-   *      boolean)
-   * 
    * @param isSystem is the {@link #isSystem() system-flag}.
    * @param isFinal is the {@link #isFinal() final-flag}.
    * @param isAbstract is the {@link #isAbstract() abstract-flag}.
    * @param isExtendable is the {@link #isExtendable() extendable-flag}.
    */
-  public DataClassModifiersBean(boolean isSystem, boolean isFinal, boolean isAbstract,
+  private DataClassModifiersBean(boolean isSystem, boolean isFinal, boolean isAbstract,
       boolean isExtendable) {
 
     super(isSystem, isFinal);
     validate(isSystem, isFinal, isAbstract, isExtendable);
     this.abstractFlag = isAbstract;
     this.extendableFlag = isExtendable;
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param modifiers is the modifiers object to copy.
-   */
-  public DataClassModifiersBean(DataClassModifiersBean modifiers) {
-
-    super(modifiers);
-    // if this really fails we have an evil attack here...
-    validate(modifiers.isSystem(), modifiers.isFinal(), modifiers.isAbstract(),
-        modifiers.isExtendable());
-    this.abstractFlag = modifiers.isAbstract();
-    this.extendableFlag = modifiers.isExtendable();
   }
 
   /**
@@ -190,14 +174,13 @@ public class DataClassModifiersBean extends AbstractDataModifiersBean implements
       boolean isExtendable) throws DataModifiersIllegalException {
 
     if (isFinal && isExtendable) {
-      throw new DataModifiersIllegalException(NlsBundleDataApi.ERR_MODIFIERS_FINAL_EXTENDABLE);
+      throw new DataModifiersIllegalFinalExtendableException();
     }
     if (!isExtendable && !isFinal && !isSystem) {
-      throw new DataModifiersIllegalException(
-          NlsBundleDataApi.ERR_MODIFIERS_USER_UNEXTENDABLE);
+      throw new DataModifiersIllegalNotSystemUnextendableException();
     }
     if (isAbstract && isFinal) {
-      throw new DataModifiersIllegalException(NlsBundleDataApi.ERR_MODIFIERS_ABSTRACT_FINAL);
+      throw new DataModifiersIllegalAbstractFinalException();
     }
   }
 

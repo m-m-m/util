@@ -75,10 +75,10 @@ public abstract interface DataObject extends RevisionedPersistenceEntity<Long>,
   int CLASS_ID = 0;
 
   /**
-   * The {@link DataObject#getTitle() name} of the
+   * The {@link DataObject#getTitle() title} of the
    * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
    */
-  String CLASS_NAME = "ContentObject";
+  String CLASS_NAME = "DataObject";
 
   /**
    * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}

@@ -9,6 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.mmm.data.api.datatype.DataId;
+
 /**
  * This annotation is used to mark a
  * {@link java.lang.reflect.Modifier#isPublic(int) public} getter
@@ -30,10 +32,10 @@ public @interface DataFieldAnnotation {
    * The {@link net.sf.mmm.data.api.DataObject#getId() id} of the field. If
    * omitted the ID will be generated automatically. If an update is performed
    * and the {@link #title() title} has NOT changed then the existing ID will be
-   * reassigned. However, for statically typed content classes it is suggested
-   * to supply fixed IDs to prevent problems on renaming.
+   * reassigned. However, for statically typed data classes it is suggested to
+   * supply fixed IDs to prevent problems on renaming.
    */
-  int id() default -1;
+  long id() default DataId.OBJECT_ID_ILLEGAL;
 
   /**
    * The {@link net.sf.mmm.data.api.reflection.DataField#getTitle() name} of the

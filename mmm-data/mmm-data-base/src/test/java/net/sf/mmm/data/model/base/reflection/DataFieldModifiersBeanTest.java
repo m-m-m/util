@@ -1,12 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.model.base;
+package net.sf.mmm.data.model.base.reflection;
 
 import junit.framework.TestCase;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
+import net.sf.mmm.data.api.reflection.DataModifiersIllegalException;
 import net.sf.mmm.data.base.reflection.DataFieldModifiersBean;
-import net.sf.mmm.data.base.reflection.DataModifiersIllegalException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.junit.Test;
  * @since 1.0.0
  */
 @SuppressWarnings("all")
-public class ContentFieldModifiersBeanTest {
+public class DataFieldModifiersBeanTest {
 
   private void checkModifiers(DataFieldModifiers modifiers) {
 
@@ -99,6 +99,6 @@ public class ContentFieldModifiersBeanTest {
         }
       }
     }
-    Assert.assertEquals(12, illegalModifiers);
+    Assert.assertEquals(24, illegalModifiers);
   }
 }

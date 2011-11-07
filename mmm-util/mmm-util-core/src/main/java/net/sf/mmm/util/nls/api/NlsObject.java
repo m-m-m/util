@@ -123,6 +123,20 @@ public interface NlsObject {
   String KEY_EXISTING = "existing";
 
   /**
+   * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
+   * 
+   * @since 2.0.2
+   */
+  String KEY_EXPECTED = "expected";
+
+  /**
+   * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
+   * 
+   * @since 2.0.2
+   */
+  String KEY_CONTAINER = "container";
+
+  /**
    * This method is the equivalent to {@link Object#toString()} with native
    * language support.
    * 

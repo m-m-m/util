@@ -77,10 +77,10 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#isContentClass()}
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#isDataClass()}
    * .
    */
-  int ID_REFLECTIONOBJECT_CONTENTCLASS = 104;
+  int ID_REFLECTIONOBJECT_DATACLASS = 104;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for

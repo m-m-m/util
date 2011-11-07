@@ -9,7 +9,7 @@ import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This class represents an event that is sent to notify about changes of the
- * content model. A change informs about a class or field that has beend added,
+ * content model. A change informs about a class or field that has been added,
  * removed or updated.
  * 
  * @param <CLASS> is the generic type for the bound of

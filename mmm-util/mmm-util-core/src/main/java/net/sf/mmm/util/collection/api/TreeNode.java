@@ -10,7 +10,7 @@ import java.util.List;
  * <em>root-node</em> which is its only {@link TreeNode node} in the tree that
  * has no {@link #getParent() parent}.
  * 
- * @param <PARENT> is the generic type for self-references. Each sub-type of this
+ * @param <NODE> is the generic type for self-references. Each sub-type of this
  *        interface should specialize this type to itself. End-users should
  *        simply use an unbound wildcard (<code>{@link TreeNode}&lt;?&gt;</code>
  *        ).
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public interface TreeNode<PARENT extends TreeNode<PARENT>> {
+public interface TreeNode<NODE extends TreeNode<NODE>> {
 
   /**
    * This method gets the parent of this {@link TreeNode}.
@@ -26,7 +26,7 @@ public interface TreeNode<PARENT extends TreeNode<PARENT>> {
    * @return the parent {@link TreeNode} or <code>null</code> if this is the
    *         root- {@link TreeNode}.
    */
-  PARENT getParent();
+  NODE getParent();
 
   /**
    * This method gets the {@link List} containing all children of this
@@ -38,7 +38,7 @@ public interface TreeNode<PARENT extends TreeNode<PARENT>> {
    * @return the {@link List} containing all children of this {@link TreeNode}.
    * 
    */
-  List<? extends PARENT> getChildren();
+  List<? extends NODE> getChildren();
 
   /**
    * This method determines if this {@link TreeNode} is a descendant of the
@@ -51,7 +51,7 @@ public interface TreeNode<PARENT extends TreeNode<PARENT>> {
    * @return <code>true</code> if this {@link TreeNode} is an descendant of the
    *         given <code>node</code>.
    */
-  boolean isDescendant(TreeNode<?> node);
+  boolean isDescendant(NODE node);
 
   /**
    * This method determines if this {@link TreeNode} is an ancestor of the given
@@ -64,6 +64,6 @@ public interface TreeNode<PARENT extends TreeNode<PARENT>> {
    * @return <code>true</code> if this {@link TreeNode} is an ancestor of the
    *         given <code>node</code>.
    */
-  boolean isAncestor(TreeNode<?> node);
+  boolean isAncestor(NODE node);
 
 }

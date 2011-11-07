@@ -7,7 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.persistence.impl.jpa.JpaRevisionedPersistenceEntity;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 
 /**
  * This is the implementation of the abstract entity {@link DataObject}.
@@ -16,6 +18,8 @@ import net.sf.mmm.persistence.impl.jpa.JpaRevisionedPersistenceEntity;
  * @since 1.0.0
  */
 @MappedSuperclass
+@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_NAME, //
+groupId = DataClassGroupRoot.GROUP_ID, groupVersion = DataClassGroupRoot.GROUP_VERSION)
 public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<Long> implements
     DataObject {
 
@@ -47,6 +51,41 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   }
 
   /**
+   * This method allows to implement custom logic to provide read access to
+   * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically
+   * typed {@link net.sf.mmm.data.api.reflection.DataClass classes}.
+   * 
+   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#getFieldValue(DataObject)
+   * 
+   * @param field is the
+   *        {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of
+   *        the requested {@link net.sf.mmm.data.api.reflection.DataField}.
+   * @return the value of the requested field.
+   */
+  protected Object getFieldValue(String field) {
+
+    throw new PojoPropertyNotFoundException(getClass(), field);
+  }
+
+  /**
+   * This method allows to implement custom logic to provide write access to
+   * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically
+   * typed {@link net.sf.mmm.data.api.reflection.DataClass classes}.
+   * 
+   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#setFieldValue(DataObject,
+   *      Object)
+   * 
+   * @param field is the
+   *        {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of
+   *        the requested {@link net.sf.mmm.data.api.reflection.DataField}.
+   * @param value is the value of the field to set.
+   */
+  protected void setFieldValue(String field, Object value) {
+
+    throw new PojoPropertyNotFoundException(getClass(), field);
+  }
+
+  /**
    * This method gets the
    * {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class ID}
    * identifying the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
@@ -55,7 +94,7 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
    * @return the {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class
    *         ID}.
    */
-  public abstract int getDataClassId();
+  public abstract long getDataClassId();
 
   /**
    * {@inheritDoc}
@@ -67,17 +106,17 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   }
 
   /**
-   * This method sets the {@link #getTitle() name} of this object.<br>
+   * This method sets the {@link #getTitle() title} of this object.<br>
    * <b>ATTENTION:</b><br>
    * This method should only be used internally. Especially this method can NOT
    * be used to rename this entity. Therefore you have to use the
    * {@link net.sf.mmm.data.api.repository.DataRepository}.
    * 
-   * @param name the name to set
+   * @param title the title to set.
    */
-  protected void setTitle(String name) {
+  protected void setTitle(String title) {
 
-    this.title = name;
+    this.title = title;
   }
 
   /**

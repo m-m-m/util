@@ -11,4 +11,6 @@ package net.sf.mmm.util.event.api;
  */
 public interface Event {
 
+  // just a tagging interface.
+
 }

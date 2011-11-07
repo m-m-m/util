@@ -15,7 +15,7 @@ import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.api.repository.DataObjectWrongTypeException;
 import net.sf.mmm.data.api.repository.DataRepository;
 import net.sf.mmm.data.base.AbstractDataObject;
-import net.sf.mmm.data.base.reflection.AbstractMutableDataModelService;
+import net.sf.mmm.data.base.reflection.AbstractMutableDataReflectionService;
 import net.sf.mmm.data.resource.api.ContentResource;
 import net.sf.mmm.data.resource.base.AbstractDataResource;
 import net.sf.mmm.data.resource.base.AbstractDataResource.AbstractDataResourceModifier;
@@ -32,7 +32,7 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
     DataRepository {
 
   /** @see #getReflectionService() */
-  private AbstractMutableDataModelService contentModel;
+  private AbstractMutableDataReflectionService contentModel;
 
   /** @see #getRootFolder() */
   private AbstractDataObject rootFolder;
@@ -104,7 +104,7 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
   /**
    * {@inheritDoc}
    */
-  public AbstractMutableDataModelService getReflectionService() {
+  public AbstractMutableDataReflectionService getReflectionService() {
 
     return this.contentModel;
   }
@@ -113,7 +113,7 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
    * @param contentModel the {@link #getReflectionService() content-model} to set.
    */
   @Resource
-  public void setContentModel(AbstractMutableDataModelService contentModel) {
+  public void setContentModel(AbstractMutableDataReflectionService contentModel) {
 
     this.contentModel = contentModel;
   }
