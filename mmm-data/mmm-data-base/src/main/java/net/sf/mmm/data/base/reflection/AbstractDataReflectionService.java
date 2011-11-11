@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.mmm.data.api.DataIdManager;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
@@ -20,13 +21,14 @@ import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.reflection.DataSystemModifyException;
 import net.sf.mmm.data.base.AbstractDataObject;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
 import net.sf.mmm.util.event.base.AbstractSynchronizedEventSource;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.GenericType;
 
@@ -37,7 +39,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataReflectionService implements DataReflectionService {
+public abstract class AbstractDataReflectionService extends AbstractLoggableComponent implements
+    DataReflectionService {
 
   /** @see #getDataClass(String) */
   private final Map<String, AbstractDataClass<? extends DataObject>> name2class;
@@ -63,6 +66,9 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   /** @see #getEventSource() */
   private final ContentModelEventSource eventSource;
 
+  /** @see #getDataIdManager() */
+  private DataIdManager dataIdManager;
+
   /**
    * The constructor.
    */
@@ -78,6 +84,43 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
     this.id2field = new HashMap<Long, AbstractDataField<? extends DataObject, ?>>();
     // AbstractContentObject.setClassAccess(this);
     this.eventSource = new ContentModelEventSource();
+  }
+
+  /**
+   * @return the dataIdManager
+   */
+  public DataIdManager getDataIdManager() {
+
+    return this.dataIdManager;
+  }
+
+  /**
+   * @param dataIdManager is the dataIdManager to set
+   */
+  public void setDataIdManager(DataIdManager dataIdManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.dataIdManager = dataIdManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public DataId getDataId(DataObject dataObject) {
+
+    NlsNullPointerException.checkNotNull(DataObject.class, dataObject);
+    Long objectId = dataObject.getId();
+    if (objectId == null) {
+      return null;
+    }
+    AbstractDataObject abstractDataObject = (AbstractDataObject) dataObject;
+    long classId = abstractDataObject.getDataClassId();
+    Number revision = dataObject.getRevision();
+    if (revision == null) {
+      return getDataIdManager().getId(objectId.longValue(), classId);
+    } else {
+      return getDataIdManager().getId(objectId.longValue(), classId, revision.intValue());
+    }
   }
 
   /**
@@ -148,10 +191,23 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
 
     NlsNullPointerException.checkNotNull(DataId.class, id);
     if (id.getClassId() != DataField.CLASS_ID) {
-      // TODO: dedicated exception
-      throw new NlsIllegalArgumentException(id);
+      throw new ObjectMismatchException(Long.valueOf(id.getClassId()),
+          Long.valueOf(DataField.CLASS_ID), id);
     }
-    return this.id2field.get(Long.valueOf(id.getObjectId()));
+    return getDataField(id.getObjectId());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public AbstractDataField<? extends DataObject, ?> getDataField(long id)
+      throws ObjectNotFoundException {
+
+    AbstractDataField<? extends DataObject, ?> field = this.id2field.get(Long.valueOf(id));
+    if (field == null) {
+      throw new ObjectNotFoundException(DataField.class, Long.valueOf(id));
+    }
+    return field;
   }
 
   /**
@@ -223,15 +279,15 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
    * sub-classes} are also {@link #addClassRecursive(AbstractDataClass)
    * registered} recursively.
    * 
-   * @param contentClass is the class to add.
+   * @param dataClass is the class to add.
    * @throws DataReflectionException if the class or one of its sub-classes
    *         could NOT be registered.
    */
-  protected void addClassRecursive(AbstractDataClass<? extends DataObject> contentClass)
+  protected void addClassRecursive(AbstractDataClass<? extends DataObject> dataClass)
       throws DataReflectionException {
 
-    addClass(contentClass);
-    for (AbstractDataClass<? extends DataObject> subClass : contentClass.getSubClasses()) {
+    addClass(dataClass);
+    for (AbstractDataClass<? extends DataObject> subClass : dataClass.getSubClasses()) {
       addClassRecursive(subClass);
     }
   }
@@ -323,7 +379,7 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
     Long id = dataField.getId();
     AbstractDataField<? extends DataObject, ?> existingField = this.id2field.get(id);
     if (existingField == null) {
-      dataClass.addField(dataField);
+      dataClass.addDeclaredField(dataField);
       addField(dataField);
     } else {
       // TODO: remove existingField from contentClass and add new field
@@ -390,9 +446,10 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   /**
    * This method creates a new instance of {@link AbstractDataClass}.
    * 
+   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()}.
    * @return the new, uninitialized instance.
    */
-  protected abstract AbstractDataClass<? extends DataObject> createDataClass();
+  protected abstract <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass();
 
   /**
    * This method instantiates a {@link DataClass}.
@@ -411,12 +468,11 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
    *        class.
    * @return the created class.
    */
-  @SuppressWarnings("unchecked")
   public <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass(Long id, String title,
       AbstractDataClass<? extends DataObject> superClass, DataClassModifiers modifiers,
       Class<CLASS> javaClass, boolean deleted) {
 
-    AbstractDataClass<CLASS> newClass = (AbstractDataClass<CLASS>) createDataClass();
+    AbstractDataClass<CLASS> newClass = createDataClass();
     newClass.setId(id);
     newClass.setSuperClass(superClass);
     newClass.setModifiers(modifiers);
@@ -428,15 +484,17 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
   /**
    * This method creates a new instance of {@link AbstractDataField}.
    * 
+   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()}.
+   * @param <FIELD> is the generic type of {@link DataField#getFieldType()}.
    * @return the new, uninitialized instance.
    */
-  protected abstract AbstractDataField<? extends DataObject, ?> createDataField();
+  protected abstract <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField();
 
   /**
    * This method creates a new {@link DataField}.
    * 
-   * @param <CLASS> is the generic type of the <code>javaClass</code>.
-   * @param <FIELD> is the generic type of the <code>fieldType</code>.
+   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()}.
+   * @param <FIELD> is the generic type of {@link DataField#getFieldType()}.
    * @param id is the unique {@link DataField#getId() ID} of the new field. May
    *        be <code>null</code>.
    * @param title is the {@link DataField#getTitle() title} of the new field.
@@ -448,12 +506,11 @@ public abstract class AbstractDataReflectionService implements DataReflectionSer
    * @param isDeleted is the {@link DataField#getDeletedFlag() deleted flag}.
    * @return the new {@link DataField}.
    */
-  @SuppressWarnings("unchecked")
   public <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField(Long id,
       String title, DataClass<CLASS> declaringClass, GenericType<FIELD> fieldType,
       DataFieldModifiers modifiers, boolean isDeleted) {
 
-    AbstractDataField<CLASS, FIELD> newField = (AbstractDataField<CLASS, FIELD>) createDataField();
+    AbstractDataField<CLASS, FIELD> newField = createDataField();
     if (id != null) {
       newField.setId(id);
     }

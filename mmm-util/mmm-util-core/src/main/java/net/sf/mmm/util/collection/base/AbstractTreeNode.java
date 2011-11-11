@@ -156,7 +156,7 @@ public abstract class AbstractTreeNode<NODE extends AbstractTreeNode<NODE>> impl
   /**
    * {@inheritDoc}
    */
-  public boolean isAncestor(TreeNode<?> node) {
+  public boolean isAncestor(NODE node) {
 
     if (node == null) {
       throw new NlsNullPointerException("node");
@@ -174,12 +174,12 @@ public abstract class AbstractTreeNode<NODE extends AbstractTreeNode<NODE>> impl
   /**
    * {@inheritDoc}
    */
-  public boolean isDescendant(TreeNode<?> node) {
+  public boolean isDescendant(NODE node) {
 
     if (node == null) {
       throw new NlsNullPointerException("node");
     }
-    return node.isAncestor(this);
+    return node.isAncestor((NODE) this);
   }
 
 }

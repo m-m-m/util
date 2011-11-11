@@ -52,7 +52,7 @@ public abstract class AbstractPersistenceEntityManager<ID, ENTITY extends Persis
   /**
    * @return the pojoFactory
    */
-  public PojoFactory getPojoFactory() {
+  protected PojoFactory getPojoFactory() {
 
     return this.pojoFactory;
   }

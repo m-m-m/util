@@ -4,6 +4,8 @@
 package net.sf.mmm.data.impl.reflection;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
@@ -23,6 +25,7 @@ import net.sf.mmm.data.base.reflection.AbstractDataField;
  * @since 1.0.0
  */
 @Entity
+@Table(name = "DATA_FIELD")
 @DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_NAME)
 public final class DataFieldImpl<CLASS extends DataObject, FIELD> extends
     AbstractDataField<CLASS, FIELD> {
@@ -36,6 +39,16 @@ public final class DataFieldImpl<CLASS extends DataObject, FIELD> extends
   public DataFieldImpl() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @ManyToOne
+  public DataClassImpl getDeclaringClass() {
+
+    return (DataClassImpl) super.getDeclaringClass();
   }
 
 }

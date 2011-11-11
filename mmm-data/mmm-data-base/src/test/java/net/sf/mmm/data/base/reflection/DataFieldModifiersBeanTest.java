@@ -1,12 +1,11 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.model.base.reflection;
+package net.sf.mmm.data.base.reflection;
 
 import junit.framework.TestCase;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataModifiersIllegalException;
-import net.sf.mmm.data.base.reflection.DataFieldModifiersBean;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -81,7 +80,7 @@ public class DataFieldModifiersBeanTest {
               for (int inherit = 0; inherit < 2; inherit++) {
                 boolean isInherited = toBoolean(inherit);
                 try {
-                  DataFieldModifiers modifiers = DataFieldModifiersBean.getInstance(isSystem,
+                  DataFieldModifiersBean modifiers = DataFieldModifiersBean.getInstance(isSystem,
                       isFinal, isReadOnly, isStatic, isTransient, isInherited);
                   Assert.assertEquals(isSystem, modifiers.isSystem());
                   Assert.assertEquals(isFinal, modifiers.isFinal());
@@ -89,6 +88,8 @@ public class DataFieldModifiersBeanTest {
                   Assert.assertEquals(isStatic, modifiers.isStatic());
                   Assert.assertEquals(isTransient, modifiers.isTransient());
                   Assert.assertEquals(isInherited, modifiers.isInheritedFromParent());
+                  Assert.assertSame(modifiers,
+                      DataFieldModifiersBean.getInstance(modifiers.getValue()));
                 } catch (DataModifiersIllegalException e) {
                   // ignore
                   illegalModifiers++;

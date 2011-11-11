@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.base.AbstractPersistenceEntityManager;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -34,6 +35,18 @@ public abstract class JpaPersistenceEntityManager<ID, ENTITY extends Persistence
   public JpaPersistenceEntityManager() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.entityManager == null) {
+      throw new ResourceMissingException("entityManager");
+    }
   }
 
   /**

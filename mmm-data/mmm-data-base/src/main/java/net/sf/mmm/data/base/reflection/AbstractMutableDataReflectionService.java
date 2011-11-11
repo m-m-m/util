@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import net.sf.mmm.data.api.DataObject;
@@ -90,13 +89,10 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
-   * 
-   * @throws Exception if an exception was caused during initialization.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() throws Exception {
+  @Override
+  public void doInitialize() {
 
     if (this.title2JavaClassMap == null) {
       Map<String, Class<? extends DataObject>> name2javaClass = new HashMap<String, Class<? extends DataObject>>();

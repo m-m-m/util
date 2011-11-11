@@ -5,9 +5,8 @@ package net.sf.mmm.data.reflection.impl;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-
 import net.sf.mmm.data.api.DataException;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClassLoader;
 import net.sf.mmm.data.api.reflection.DataReflectionEvent;
@@ -16,19 +15,21 @@ import net.sf.mmm.data.base.reflection.AbstractDataClass;
 import net.sf.mmm.data.base.reflection.AbstractDataField;
 import net.sf.mmm.data.base.reflection.AbstractMutableDataReflectionService;
 import net.sf.mmm.data.base.reflection.DataClassLoaderStAX;
+import net.sf.mmm.data.impl.DataIdManagerImpl;
 import net.sf.mmm.data.impl.reflection.DataClassImpl;
 import net.sf.mmm.data.impl.reflection.DataFieldImpl;
+import net.sf.mmm.util.event.api.ChangeType;
 
 /**
  * This is an abstract base implementation of the
  * {@link net.sf.mmm.data.api.reflection.DataReflectionService} interface that
- * assumes that {@link DataId}s are used as well as specific implementations
- * for class and field.
+ * assumes that {@link DataId}s are used as well as specific implementations for
+ * class and field.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class CoreContentModelService extends AbstractMutableDataReflectionService {
+public class CoreDataReflectionService extends AbstractMutableDataReflectionService {
 
   /** @see #getClassLoader() */
   private DataClassLoader classLoader;
@@ -39,7 +40,7 @@ public class CoreContentModelService extends AbstractMutableDataReflectionServic
   /**
    * The constructor.
    */
-  public CoreContentModelService() {
+  public CoreDataReflectionService() {
 
     super();
     this.editable = false;
@@ -80,18 +81,16 @@ public class CoreContentModelService extends AbstractMutableDataReflectionServic
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
-   * 
-   * @throws Exception if an I/O error was caused by the class-loader.
+   * {@inheritDoc}
    */
   @Override
-  @PostConstruct
-  public void initialize() throws Exception {
+  public void doInitialize() {
 
     super.initialize();
-    if (getIdManager() == null) {
-      setIdManager(new StaticSmartIdManager());
+    if (getDataIdManager() == null) {
+      DataIdManagerImpl idManager = new DataIdManagerImpl();
+      idManager.initialize();
+      setDataIdManager(idManager);
     }
     if (this.classLoader == null) {
       this.classLoader = new DataClassLoaderStAX(this);
@@ -101,22 +100,21 @@ public class CoreContentModelService extends AbstractMutableDataReflectionServic
 
   /**
    * This method loads the content-model.
-   * 
-   * @throws IOException if an I/O error was caused by the class-loader.
-   * @throws DataException if the content-model is invalid.
    */
-  protected void loadClasses() throws IOException, DataException {
+  protected void loadClasses() {
 
-    AbstractDataClass rootClass = this.classLoader.loadClasses();
+    AbstractDataClass<? extends DataObject> rootClass = this.classLoader.loadClasses();
     setRootClass(rootClass);
     addClassRecursive(rootClass);
-    AbstractDataClass classClass = getDataClass(getIdManager().getClassClassId());
+    AbstractDataClass<? extends DataObject> classClass = getDataClass(getIdManager()
+        .getClassClassId());
     if (classClass == null) {
       // TODO:
       throw new DataReflectionException("Missing class for ContentClass!");
     }
     // ContentClassImpl.setContentClass(classClass);
-    AbstractDataClass fieldClass = getDataClass(getIdManager().getFieldClassId());
+    AbstractDataClass<? extends DataObject> fieldClass = getDataClass(getIdManager()
+        .getFieldClassId());
     if (fieldClass == null) {
       // TODO:
       throw new DataReflectionException("Missing class for ContentField!");
@@ -135,27 +133,25 @@ public class CoreContentModelService extends AbstractMutableDataReflectionServic
   public void reaload() throws IOException, DataException {
 
     loadClasses();
-    fireEvent(new DataReflectionEvent(getRootDataClass(), ChangeEventType.UPDATE));
+    fireEvent(new DataReflectionEvent(getRootDataClass(), ChangeType.UPDATE));
   }
 
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass createNewClass(DataId id, String name) {
+  @Override
+  protected <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass() {
 
-    AbstractDataClass contentClass = new DataClassImpl(name, id);
-    setContentObjectId(contentClass, id);
-    return contentClass;
+    return new DataClassImpl<CLASS>();
   }
 
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField createNewField(DataId id, String name) {
+  @Override
+  protected <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField() {
 
-    AbstractDataField contentField = new DataFieldImpl(name, id);
-    setContentObjectId(contentField, id);
-    return contentField;
+    return new DataFieldImpl<CLASS, FIELD>();
   }
 
 }

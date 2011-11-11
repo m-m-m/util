@@ -5,6 +5,7 @@ package net.sf.mmm.data.base;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
@@ -94,6 +95,7 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
    * @return the {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class
    *         ID}.
    */
+  @Transient
   public abstract long getDataClassId();
 
   /**

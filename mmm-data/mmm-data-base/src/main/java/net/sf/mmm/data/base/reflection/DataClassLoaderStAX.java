@@ -57,11 +57,6 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
     super.parseConfiguration(xmlReader, context);
   }
 
-  protected Class getContentJavaClass(String name) {
-
-    return getDataReflectionService().getTitle2JavaClassMap().get(name);
-  }
-
   /**
    * This method parses the type given by <code>typeString</code>.
    * 
@@ -100,8 +95,8 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
   }
 
   /**
-   * This method reads the {@link DataObject#isDeleted() deleted flag} from the
-   * given <code>xmlReader</code>.
+   * This method reads the {@link DataReflectionObject#getDeletedFlag() deleted
+   * flag} from the given <code>xmlReader</code>.
    * 
    * @param xmlReader is where to read the XML from.
    * @return the deleted-flag of the class or field.
@@ -192,7 +187,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
       } else if (DataField.XML_TAG_FIELD.equals(tagName)) {
         // field
         AbstractDataField contentField = loadField(xmlReader, dataClass);
-        dataClass.addField(contentField);
+        dataClass.addDeclaredField(contentField);
       } else {
         parseClassChildElement(xmlReader, dataClass);
       }

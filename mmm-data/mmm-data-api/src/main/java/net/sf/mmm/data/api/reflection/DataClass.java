@@ -123,11 +123,11 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * 
    * @see #getField(String)
    * 
-   * @param name is the name of the requested field of this class.
+   * @param title is the name of the requested field of this class.
    * @return the field with the given name or <code>null</code> if no such field
    *         is declared by this class.
    */
-  DataField<CLASS, ?> getDeclaredField(String name);
+  DataField<CLASS, ?> getDeclaredField(String title);
 
   /**
    * This method gets all fields defined in this class or inherited by the
@@ -143,15 +143,15 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
   Collection<? extends DataField<? extends DataObject, ?>> getFields();
 
   /**
-   * This method gets the field with the given {@link DataField#getTitle() name}
-   * . A field is either {@link #getDeclaredFields() declared} in this class or
-   * inherited from a {@link #getSuperClass() super-class}.
+   * This method gets the field with the given {@link DataField#getTitle()
+   * title}. A field is either {@link #getDeclaredFields() declared} in this
+   * class or inherited from a {@link #getSuperClass() super-class}.
    * 
-   * @param name is the name of the requested field of this class.
+   * @param title is the name of the requested field of this class.
    * @return the field with the given name or <code>null</code> if no such field
    *         exists for this class.
    */
-  DataField<? extends DataObject, ?> getField(String name);
+  DataField<? extends DataObject, ?> getField(String title);
 
   /**
    * This method gets the list of all sub-classes.

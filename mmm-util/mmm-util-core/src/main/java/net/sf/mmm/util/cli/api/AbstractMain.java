@@ -256,6 +256,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    */
   protected void validate(CliModeObject mode) throws RuntimeException {
 
+    // nothing by default, override to extend
   }
 
   /**

@@ -62,6 +62,12 @@
       <version>0.9.1.2</version>    
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb-j5</artifactId>
+      <version>2.2.4</version>
+      <scope>compile</scope>
+    </dependency>
     
   </dependencies>
 </project>

@@ -49,6 +49,7 @@ public abstract class AbstractComponent {
    */
   protected void doInitialize() {
 
+    // nothing by default, override to extend
   }
 
   /**
@@ -63,6 +64,7 @@ public abstract class AbstractComponent {
    */
   protected void doInitialized() {
 
+    // nothing by default, override to extend
   }
 
   /**

@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.reflection;
 
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataReflectionObject;
 import net.sf.mmm.data.base.AbstractDataObject;
@@ -16,6 +19,7 @@ import net.sf.mmm.data.base.AbstractDataObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@MappedSuperclass
 public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataObject implements
     DataReflectionObject<CLASS> {
 
@@ -36,6 +40,7 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   /**
    * {@inheritDoc}
    */
+  @Transient
   public boolean isCacheable() {
 
     return true;
@@ -62,7 +67,7 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   /**
    * {@inheritDoc}
    */
-  public final boolean getDeletedFlag() {
+  public boolean getDeletedFlag() {
 
     return this.deletedFlag;
   }
@@ -87,6 +92,7 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
    * feature is programmatically implemented since it is required at a very low
    * level.
    */
+  @Transient
   public boolean isDeleted() {
 
     if (this.deletedFlag) {

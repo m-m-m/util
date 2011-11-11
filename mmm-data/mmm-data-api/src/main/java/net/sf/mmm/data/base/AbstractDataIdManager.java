@@ -8,6 +8,7 @@ import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
@@ -17,7 +18,8 @@ import net.sf.mmm.util.nls.api.NlsParseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataIdManager implements DataIdManager {
+public abstract class AbstractDataIdManager extends AbstractLoggableComponent implements
+    DataIdManager {
 
   /**
    * The constructor.

@@ -39,7 +39,9 @@ public interface DataReflectionReadAccess extends DataClassReadAccessById,
    * 
    * @param dataObject is the {@link DataObject} for which the {@link DataId} is
    *        requested.
-   * @return the {@link DataId} of the given <code>dataObject</code>.
+   * @return the {@link DataId} of the given <code>dataObject</code> or
+   *         <code>null</code> if the {@link DataObject#getId() object ID} is
+   *         <code>null</code>.
    */
   DataId getDataId(DataObject dataObject);
 

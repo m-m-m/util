@@ -17,6 +17,9 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  */
 public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 681216451154445513L;
+
   /** @see #hashCode() */
   private transient int hash;
 
@@ -425,14 +428,30 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String toString() {
+  public String getTitle() {
+
+    return getValue();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getValue() {
 
     if (this.stringRepresentation == null) {
       return super.toString();
     } else {
       return this.stringRepresentation;
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return getTitle();
   }
 
 }

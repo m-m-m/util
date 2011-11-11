@@ -9,8 +9,8 @@ import net.sf.mmm.data.security.api.PermissionType;
 
 /**
  * This is the interface for a permission that determines if an
- * {@link DataSecurityOperation operation} is permitted or NOT. A rule has NO
- * {@link #getTitle() name}.
+ * {@link DataSecurityOperation operation} is permitted or NOT. A permissions
+ * has NO {@link #getTitle() name}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

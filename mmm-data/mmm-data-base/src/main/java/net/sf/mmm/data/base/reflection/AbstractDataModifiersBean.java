@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import net.sf.mmm.data.api.reflection.DataModifiers;
+import net.sf.mmm.util.lang.api.Datatype;
 
 /**
  * This is the base implementation of the {@link DataModifiers} interface.
@@ -16,10 +17,16 @@ import net.sf.mmm.data.api.reflection.DataModifiers;
  * @since 1.0.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class AbstractDataModifiersBean implements DataModifiers {
+public abstract class AbstractDataModifiersBean implements DataModifiers, Datatype<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3521732876191875621L;
+
+  /** The character representing the {@link #isSystem() system flag}. */
+  protected static final char CHARACTER_SYSTEM = 'Y';
+
+  /** The character representing the {@link #isFinal() final flag}. */
+  protected static final char CHARACTER_FINAL = 'F';
 
   /** @see #isSystem() */
   @XmlAttribute(name = XML_ATR_SYSTEM)
@@ -74,6 +81,23 @@ public abstract class AbstractDataModifiersBean implements DataModifiers {
   public boolean isFinal() {
 
     return this.finalFlag;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getTitle() {
+
+    return getValue();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return getTitle();
   }
 
 }

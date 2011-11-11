@@ -26,6 +26,9 @@ import net.sf.mmm.util.version.base.AbstractVersionIdentifier;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class VersionIdentifierImpl extends AbstractVersionIdentifier {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = -8419817492498401813L;
+
   /** @see #getVersionSegment(int) */
   @XmlElementWrapper(name = "version-number")
   @XmlElement(name = "segment")

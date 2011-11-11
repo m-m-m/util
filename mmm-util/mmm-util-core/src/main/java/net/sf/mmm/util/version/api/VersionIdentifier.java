@@ -5,6 +5,8 @@ package net.sf.mmm.util.version.api;
 
 import java.util.Date;
 
+import net.sf.mmm.util.lang.api.Datatype;
+
 /**
  * A {@link VersionIdentifier} is a version identifying a particular state of an
  * object under version control. Such object can be an atomic asset like a
@@ -14,7 +16,7 @@ import java.util.Date;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
-public interface VersionIdentifier extends Comparable<VersionIdentifier> {
+public interface VersionIdentifier extends Comparable<VersionIdentifier>, Datatype<String> {
 
   /** The default indicator for a snapshot version. */
   String SNAPSHOT = "SNAPSHOT";

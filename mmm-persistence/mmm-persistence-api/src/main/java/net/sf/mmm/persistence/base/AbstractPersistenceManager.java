@@ -9,8 +9,8 @@ import java.util.Map;
 import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.api.PersistenceEntityManager;
 import net.sf.mmm.persistence.api.PersistenceManager;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -19,7 +19,8 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractPersistenceManager implements PersistenceManager {
+public abstract class AbstractPersistenceManager extends AbstractLoggableComponent implements
+    PersistenceManager {
 
   /** @see #getManager(Class) */
   private final Map<Class<?>, PersistenceEntityManager<?, ?>> class2managerMap;
@@ -46,6 +47,7 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
   protected void addManager(PersistenceEntityManager<?, ?> entityManager)
       throws DuplicateObjectException {
 
+    getInitializationState().requireNotInitilized();
     Class<?> entityClass = entityManager.getEntityClassImplementation();
     registerManager(entityClass, entityManager);
     Class<?> entityClassReadOnly = entityManager.getEntityClassReadOnly();
@@ -75,6 +77,14 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
       throw new DuplicateObjectException(entityManager, entityClass);
     }
     this.class2managerMap.put(entityClass, entityManager);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean hasManager(Class<? extends PersistenceEntity<?>> entityClass) {
+
+    return this.class2managerMap.containsKey(entityClass);
   }
 
   /**
@@ -151,10 +161,10 @@ public abstract class AbstractPersistenceManager implements PersistenceManager {
     if (!this.class2managerMap.containsKey(entityClass)) {
       entityClass = entityClass.getSuperclass();
       if (!this.class2managerMap.containsKey(entityClass)) {
-        throw new NlsIllegalStateException();
+        throw new ObjectNotFoundException(PersistenceEntityManager.class.getSimpleName(),
+            entity.getClass());
       }
     }
     return (Class<? extends PersistenceEntity<?>>) entity.getClass();
   }
-
 }

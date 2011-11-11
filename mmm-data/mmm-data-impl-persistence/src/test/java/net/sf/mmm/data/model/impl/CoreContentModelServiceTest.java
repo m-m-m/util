@@ -11,13 +11,13 @@ import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
-import net.sf.mmm.data.reflection.impl.CoreContentModelService;
+import net.sf.mmm.data.reflection.impl.CoreDataReflectionService;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link CoreContentModelService}.
+ * This is the test-case for {@link CoreDataReflectionService}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -36,7 +36,7 @@ public class CoreContentModelServiceTest {
   @Ignore
   public void testModelService() throws Exception {
 
-    CoreContentModelService modelService = new CoreContentModelService();
+    CoreDataReflectionService modelService = new CoreDataReflectionService();
     modelService.initialize();
 
     DataClass rootClass = modelService.getRootDataClass();

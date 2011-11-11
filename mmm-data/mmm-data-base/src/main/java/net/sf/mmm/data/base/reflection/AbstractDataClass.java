@@ -4,7 +4,6 @@
 package net.sf.mmm.data.base.reflection;
 
 import java.util.AbstractCollection;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,6 +18,7 @@ import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link DataClass} interface.
@@ -46,12 +46,6 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /** @see #getGroupVersion() */
   private DataClassGroupVersion groupVersion;
 
-  /** the list of direct sub-classes */
-  private final List<AbstractDataClass<? extends CLASS>> subClasses;
-
-  /** @see #getSubClasses() */
-  private final List<AbstractDataClass<? extends CLASS>> subClassesView;
-
   /** @see #getDeclaredFields() (map of content-fields by name) */
   private final Map<String, AbstractDataField<CLASS, ?>> declaredFields;
 
@@ -70,8 +64,6 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   public AbstractDataClass() {
 
     super();
-    this.subClasses = new ArrayList<AbstractDataClass<? extends CLASS>>();
-    this.subClassesView = Collections.unmodifiableList(this.subClasses);
     this.declaredFields = new HashMap<String, AbstractDataField<CLASS, ?>>();
     this.declaredFieldsView = Collections.unmodifiableCollection(this.declaredFields.values());
     this.fieldsView = new FieldsCollection();
@@ -120,6 +112,11 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
     return getSubClasses();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public abstract List<? extends AbstractDataClass<? extends CLASS>> getSubClasses();
+
   // /**
   // * {@inheritDoc}
   // */
@@ -163,9 +160,9 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField<CLASS, ?> getDeclaredField(String name) {
+  public AbstractDataField<CLASS, ?> getDeclaredField(String title) {
 
-    return this.declaredFields.get(name);
+    return this.declaredFields.get(title);
   }
 
   /**
@@ -202,14 +199,6 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   protected void setModifiers(DataClassModifiers modifiers) {
 
     this.modifiers = modifiers;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public List<AbstractDataClass<? extends CLASS>> getSubClasses() {
-
-    return this.subClassesView;
   }
 
   /**
@@ -300,26 +289,8 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * @param subClass is the sub-class to add.
    * @throws DataReflectionException if the operation fails.
    */
-  public void addSubClass(AbstractDataClass<? extends CLASS> subClass)
-      throws DataReflectionException {
-
-    if (subClass.getSuperClass() != this) {
-      // TODO: NLS
-      throw new DataReflectionException("Sub-Class must have this class as super-class!");
-    }
-    if (subClass.getModifiers().isSystem() && !getModifiers().isSystem()) {
-      // TODO: NLS
-      throw new DataReflectionException("System-class can NOT extend user-class!");
-    }
-    if (getModifiers().isFinal()) {
-      // TODO: NLS
-      throw new DataReflectionException("Can NOT extend final class!");
-    }
-    // idem-potent operation
-    if (!this.subClasses.contains(subClass)) {
-      this.subClasses.add(subClass);
-    }
-  }
+  protected abstract void addSubClass(AbstractDataClass<? extends CLASS> subClass)
+      throws DataReflectionException;
 
   /**
    * This method adds the given <code>field</code> to this class.
@@ -327,15 +298,17 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * @param field is the field to add.
    * @throws DataReflectionException if the field could NOT be added.
    */
-  public void addField(AbstractDataField<CLASS, ?> field) throws DataReflectionException {
+  protected void addDeclaredField(AbstractDataField<CLASS, ?> field) throws DataReflectionException {
 
+    NlsNullPointerException.checkNotNull(DataField.class, field);
     if (field.getDeclaringClass() != this) {
+      // TODO: I18N
       throw new DataReflectionException("Can NOT add field if NOT declared by this class!");
     }
     DataField<CLASS, ?> duplicate = this.declaredFields.get(field.getTitle());
-    if (duplicate != field) {
+    if (duplicate == null) {
       this.declaredFields.put(field.getTitle(), field);
-    } else {
+    } else if (!field.equals(duplicate)) {
       throw new DuplicateObjectException(field.getTitle());
     }
   }
@@ -418,6 +391,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean addAll(Collection<? extends AbstractDataField<? extends DataObject, ?>> c) {
 
       throw new UnsupportedOperationException();

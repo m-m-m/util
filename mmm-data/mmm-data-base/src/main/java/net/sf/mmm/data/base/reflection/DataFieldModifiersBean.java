@@ -7,6 +7,8 @@ import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.api.reflection.DataModifiersIllegalException;
 import net.sf.mmm.data.api.reflection.DataModifiersIllegalTransientMutableException;
 import net.sf.mmm.data.api.reflection.DataModifiersIllegalTransientStaticException;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is the base implementation of the {@link DataFieldModifiers} interface.
@@ -19,6 +21,21 @@ public final class DataFieldModifiersBean extends AbstractDataModifiersBean impl
 
   /** UID for serialization */
   private static final long serialVersionUID = -7486568372216293843L;
+
+  /** The character representing the {@link #isStatic() static flag}. */
+  protected static final char CHARACTER_STATIC = 'S';
+
+  /** The character representing the {@link #isTransient() transient flag}. */
+  protected static final char CHARACTER_TRANSIENT = 'T';
+
+  /** The character representing the {@link #isReadOnly() read-only flag}. */
+  protected static final char CHARACTER_READ_ONLY = 'R';
+
+  /**
+   * The character representing the {@link #isInheritedFromParent()
+   * inherited-from-parent flag}.
+   */
+  protected static final char CHARACTER_INHERITED_FROM_PARENT = 'I';
 
   /** the modifier of a "normal" field */
   public static final DataFieldModifiersBean NORMAL = new DataFieldModifiersBean(false, false,
@@ -219,6 +236,69 @@ public final class DataFieldModifiersBean extends AbstractDataModifiersBean impl
   /**
    * This method gets the modifiers.
    * 
+   * @param stringValue is the {@link #getValue() string value} representing the
+   *        {@link DataFieldModifiers}.
+   * @return the requested modifiers.
+   */
+  public static DataFieldModifiersBean getInstance(String stringValue) {
+
+    boolean isSystem = false;
+    boolean isFinal = false;
+    boolean isReadOnly = false;
+    boolean isStatic = false;
+    boolean isTransient = false;
+    boolean isInheritedFromParent = false;
+    int index = stringValue.length() - 1;
+    while (index >= 0) {
+      char c = stringValue.charAt(index--);
+      switch (c) {
+        case CHARACTER_STATIC:
+          if (isStatic) {
+            throw new DuplicateObjectException(stringValue, Character.valueOf(CHARACTER_STATIC));
+          }
+          isStatic = true;
+          break;
+        case CHARACTER_TRANSIENT:
+          if (isTransient) {
+            throw new DuplicateObjectException(stringValue, Character.valueOf(CHARACTER_TRANSIENT));
+          }
+          isTransient = true;
+          break;
+        case CHARACTER_READ_ONLY:
+          if (isReadOnly) {
+            throw new DuplicateObjectException(stringValue, Character.valueOf(CHARACTER_READ_ONLY));
+          }
+          isReadOnly = true;
+          break;
+        case CHARACTER_INHERITED_FROM_PARENT:
+          if (isInheritedFromParent) {
+            throw new DuplicateObjectException(stringValue,
+                Character.valueOf(CHARACTER_INHERITED_FROM_PARENT));
+          }
+          isInheritedFromParent = true;
+          break;
+        case CHARACTER_FINAL:
+          if (isFinal) {
+            throw new DuplicateObjectException(stringValue, Character.valueOf(CHARACTER_FINAL));
+          }
+          isFinal = true;
+          break;
+        case CHARACTER_SYSTEM:
+          if (isSystem) {
+            throw new DuplicateObjectException(stringValue, Character.valueOf(CHARACTER_SYSTEM));
+          }
+          isSystem = true;
+          break;
+        default :
+          throw new IllegalCaseException(Character.toString(c));
+      }
+    }
+    return getInstance(isSystem, isFinal, isReadOnly, isStatic, isTransient, isInheritedFromParent);
+  }
+
+  /**
+   * This method gets the modifiers.
+   * 
    * @param isSystem is the value for {@link #isSystem()}.
    * @param isFinal is the value for {@link #isFinal()}.
    * @param isReadOnly is the value for {@link #isReadOnly()}.
@@ -228,7 +308,7 @@ public final class DataFieldModifiersBean extends AbstractDataModifiersBean impl
    *        {@link #isInheritedFromParent()}.
    * @return the requested modifiers.
    */
-  public static DataFieldModifiers getInstance(boolean isSystem, boolean isFinal,
+  public static DataFieldModifiersBean getInstance(boolean isSystem, boolean isFinal,
       boolean isReadOnly, boolean isStatic, boolean isTransient, boolean isInheritedFromParent) {
 
     validate(isSystem, isFinal, isReadOnly, isStatic, isTransient, isInheritedFromParent);
@@ -325,7 +405,7 @@ public final class DataFieldModifiersBean extends AbstractDataModifiersBean impl
    * @param isTransient is the value for {@link #isTransient()}.
    * @return the requested modifiers.
    */
-  private static DataFieldModifiers getInstanceInherited(boolean isSystem, boolean isFinal,
+  private static DataFieldModifiersBean getInstanceInherited(boolean isSystem, boolean isFinal,
       boolean isReadOnly, boolean isStatic, boolean isTransient) {
 
     if (isSystem) {
@@ -471,10 +551,37 @@ public final class DataFieldModifiersBean extends AbstractDataModifiersBean impl
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String toString() {
+  public String getValue() {
 
-    StringBuffer result = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
+    if (this.staticFlag) {
+      buffer.append(CHARACTER_STATIC);
+    }
+    if (isFinal()) {
+      buffer.append(CHARACTER_FINAL);
+    }
+    if (this.transientFlag) {
+      buffer.append(CHARACTER_TRANSIENT);
+    }
+    if (this.readOnlyFlag) {
+      buffer.append(CHARACTER_READ_ONLY);
+    }
+    if (this.inheritedFromParentFlag) {
+      buffer.append(CHARACTER_INHERITED_FROM_PARENT);
+    }
+    if (isSystem()) {
+      buffer.append(CHARACTER_SYSTEM);
+    }
+    return buffer.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTitle() {
+
+    StringBuilder result = new StringBuilder();
     if (isSystem()) {
       result.append("system");
     }
@@ -501,6 +608,12 @@ public final class DataFieldModifiersBean extends AbstractDataModifiersBean impl
         result.append('-');
       }
       result.append("transient");
+    }
+    if (isInheritedFromParent()) {
+      if (result.length() > 0) {
+        result.append('-');
+      }
+      result.append("inherited");
     }
 
     return result.toString();

@@ -429,7 +429,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
           AbstractDataField contentField = getDataReflectionService().createDataField(fieldId,
               name, contentClass, fieldType, contentFieldModifiers, isDeleted);
           contentField.setAccessor(getFieldAccessor(methodPropertyDescriptor));
-          contentClass.addField(contentField);
+          contentClass.addDeclaredField(contentField);
         }
       } catch (Exception e) {
         throw new DataReflectionException(e, "Error loading field '" + accessor.getName()
@@ -443,20 +443,20 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   }
 
   /**
-   * This method gets (creates) the {@link DataField#getAccessor() accessor} for
-   * the field given by <code>methodPropertyDescriptor</code>.
+   * This method gets (creates) the {@link DataFieldAccessor} for the field
+   * given by <code>methodPropertyDescriptor</code>.
    * 
-   * @param methodPropertyDescriptor is the descriptor holding the accessor
-   *        methods of the field.
+   * @param propertyDescriptor is the {@link PojoPropertyDescriptor} of the
+   *        field.
    * @return the field accessor.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected DataFieldAccessor<? extends DataObject, ?> getFieldAccessor(
-      PojoPropertyDescriptor methodPropertyDescriptor) {
+      PojoPropertyDescriptor propertyDescriptor) {
 
-    PojoPropertyAccessorNonArg getter = methodPropertyDescriptor
+    PojoPropertyAccessorNonArg getter = propertyDescriptor
         .getAccessor(PojoPropertyAccessorNonArgMode.GET);
-    PojoPropertyAccessorOneArg setter = methodPropertyDescriptor
+    PojoPropertyAccessorOneArg setter = propertyDescriptor
         .getAccessor(PojoPropertyAccessorOneArgMode.SET);
     return new DataFieldAccessorPojo(getter.getPropertyClass(), getter, setter);
   }
