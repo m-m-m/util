@@ -105,18 +105,19 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @SuppressWarnings({ "rawtypes", "unchecked", "null" })
   protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context,
       PojoPathState state) {
 
     CachingPojoPath parentPath = currentPath.getParent();
     PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPath.getPojoType());
+    boolean getType = state.isGetType();
     PojoPropertyAccessorNonArg getter = descriptor.getAccessor(currentPath.getSegment(),
-        PojoPropertyAccessorNonArgMode.GET, !state.isGetType());
+        PojoPropertyAccessorNonArgMode.GET, !getType);
     GenericType pojoType;
     Class pojoClass;
     if (getter == null) {
-      if (state.isGetType()) {
+      if (getType) {
         if (state.getMode() == PojoPathMode.FAIL_IF_NULL) {
           throw new PojoPathUnsafeException(parentPath.getPojoType(), currentPath.getSegment());
         } else {
@@ -133,7 +134,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     currentPath.setPojoType(pojoType);
     currentPath.setPojoClass(pojoClass);
     Object result = null;
-    if (!state.isGetType()) {
+    if (!getType) {
       Object parentPojo = parentPath.getPojo();
       result = getter.invoke(parentPojo);
       if ((result == null) && (state.getMode() == PojoPathMode.CREATE_IF_NULL)) {

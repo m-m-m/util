@@ -14,4 +14,6 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface ByteArrayPool extends Pool<byte[]> {
 
+  // nothing to add, just bound generic
+
 }

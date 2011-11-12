@@ -14,4 +14,6 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface CharArrayPool extends Pool<char[]> {
 
+  // nothing to add, just bound generic
+
 }

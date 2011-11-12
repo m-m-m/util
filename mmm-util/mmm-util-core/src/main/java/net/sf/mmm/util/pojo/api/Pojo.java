@@ -34,4 +34,6 @@ package net.sf.mmm.util.pojo.api;
  */
 public abstract interface Pojo {
 
+  // nothing to do here, just for documentation
+
 }

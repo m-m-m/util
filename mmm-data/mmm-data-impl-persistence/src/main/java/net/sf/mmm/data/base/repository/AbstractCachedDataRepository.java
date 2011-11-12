@@ -10,9 +10,12 @@ import javax.annotation.PostConstruct;
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.AbstractDataObject;
 import net.sf.mmm.data.resource.api.ContentResource;
 import net.sf.mmm.data.resource.base.AbstractDataResource;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * TODO: this class ...
@@ -23,10 +26,10 @@ import net.sf.mmm.data.resource.base.AbstractDataResource;
 public abstract class AbstractCachedDataRepository extends AbstractDataRepository {
 
   /** The cache for the latest resources. */
-  private Map<SmartId, AbstractDataResource> latestResourceCache;
+  private Map<DataId, AbstractDataResource> latestResourceCache;
 
   /** The cache for the closed revisions of resources. */
-  private Map<SmartId, AbstractDataResource> closedResourceCache;
+  private Map<DataId, AbstractDataResource> closedResourceCache;
 
   /** @see #getLatestResourceCacheSize() */
   private int latestResourceCacheSize;
@@ -93,22 +96,22 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
 
   }
 
-  protected AbstractDataObject getFromCache(SmartId id) throws DataException {
+  protected AbstractDataObject getFromCache(DataId id) throws DataException {
 
     AbstractDataObject result = null;
     long oid = id.getObjectId();
-    if (oid < SmartId.OID_MINIMUM_RESOURCE) {
-      if (oid == SmartId.OID_CLASS) {
+    if (oid < DataId.OBJECT_ID_MINIMUM_CUSTOM) {
+      if (oid == DataClass.CLASS_ID) {
         result = getReflectionService().getDataClass(id);
-      } else if (oid == SmartId.OID_FIELD) {
+      } else if (oid == DataField.CLASS_ID) {
         result = getReflectionService().getDataField(id);
       } else {
         // TODO: illegal ID
-        throw new ContentObjectNotExistsException(id);
+        throw new ObjectNotFoundException(DataObject.class, id);
       }
     } else {
       // resource
-      int cid = id.getDataClassId();
+      long cid = id.getClassId();
       if (cid < ContentResource.CLASS_ID) {
         // internal entity
         // TODO: should this be handled different at all?
@@ -116,9 +119,9 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
         // resource
         AbstractDataResource resource = null;
         if (id.getRevision() == 0) {
-          resource = this.latestResourceCache.getById(id);
+          resource = this.latestResourceCache.get(id);
         } else {
-          resource = this.closedResourceCache.getById(id);
+          resource = this.closedResourceCache.get(id);
         }
       }
     }
@@ -130,16 +133,15 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
    */
   public DataObject getById(DataId id) throws DataException {
 
-    SmartId smartId = (SmartId) id;
-    DataObject result = getFromCache(smartId);
+    DataObject result = getFromCache(id);
     // TODO: read object from persistent store...
     if (result == null) {
-      throw new ContentObjectNotExistsException(id);
+      throw new ObjectNotFoundException(DataObject.class, id);
     }
     return result;
   }
 
-  protected abstract AbstractDataResource readResource(SmartId id) throws DataException;
+  protected abstract AbstractDataResource readResource(DataId id) throws DataException;
 
   /**
    * {@inheritDoc}

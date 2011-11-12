@@ -92,6 +92,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    * @param tableInfo is the {@link TextTableInfo} containing the available
    *        {@link TextTableInfo#getWidth() width}.
    */
+  @SuppressWarnings("null")
   protected void autoAdjustWidthOfColumns(ColumnState[] columnStates, TextTableInfo tableInfo) {
 
     int tableWidth = tableInfo.getWidth();
@@ -1179,7 +1180,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    * @see DefaultLineWrapper#autoAdjustWidthOfColumns(ColumnState[],
    *      TextTableInfo)
    */
-  private static final class AutoAdjustInfo implements Comparable<AutoAdjustInfo> {
+  protected static final class AutoAdjustInfo implements Comparable<AutoAdjustInfo> {
 
     /** The {@link ColumnState}. */
     private final ColumnState columnState;
@@ -1189,6 +1190,14 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
 
     /** The maximum length of a single unwrapped line. */
     private int lineLengthMax;
+
+    /**
+     * @return the number of lines.
+     */
+    public int getLineCount() {
+
+      return this.lineCount;
+    }
 
     /**
      * The constructor.

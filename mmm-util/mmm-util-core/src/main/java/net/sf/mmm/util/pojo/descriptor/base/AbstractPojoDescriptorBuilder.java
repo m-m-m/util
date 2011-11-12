@@ -40,7 +40,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
    * @param mapFactory the factory used to create the
    *        {@link #getDescriptor(Class) descriptor-cache}.
    */
-  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @SuppressWarnings({ "rawtypes" })
   public AbstractPojoDescriptorBuilder(MapFactory mapFactory) {
 
     super();
@@ -76,7 +76,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
     PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoType);

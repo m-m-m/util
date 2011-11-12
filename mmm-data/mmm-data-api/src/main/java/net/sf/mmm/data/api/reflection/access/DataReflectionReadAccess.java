@@ -16,8 +16,8 @@ import net.sf.mmm.data.api.reflection.DataClass;
  * @since 1.0.0
  */
 public interface DataReflectionReadAccess extends DataClassReadAccessById,
-    DataClassReadAccessByTitle, DataClassReadAccessByInstance, DataFieldReadAccessById,
-    DataFieldReadAccessByTitle, DataClassReadAccessByJavaClass {
+    DataClassReadAccessByTitle, DataClassReadAccessByInstance, DataClassReadAccessByJavaClass,
+    DataFieldReadAccessById {
 
   /**
    * This method gets the root {@link DataClass} that reflects the

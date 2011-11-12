@@ -168,7 +168,6 @@ public class FilterRuleChainPlainParser {
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
    */
-  @SuppressWarnings("unchecked")
   public FilterRuleChain<String> parse(BufferedReader reader, boolean defaultResult)
       throws IOException {
 

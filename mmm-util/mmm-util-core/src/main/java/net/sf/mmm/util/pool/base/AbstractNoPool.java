@@ -38,6 +38,7 @@ public abstract class AbstractNoPool<E> implements Pool<E> {
    */
   public void release(E element) {
 
+    // do nothing by default
   }
 
 }

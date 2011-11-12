@@ -42,7 +42,6 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(
       PojoPropertyAccessorMode<ACCESSOR> mode) {
 

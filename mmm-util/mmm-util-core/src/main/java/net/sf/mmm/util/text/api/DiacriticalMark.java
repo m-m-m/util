@@ -246,7 +246,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * Two dots on top (trema, diaeresis, or umlaut). E.g. in '&auml;'.
+   * Two small dots placed on top of Latin vowels, called trema, diaeresis, or
+   * umlaut. If your environment supports unicode, you can see it here: &#168;
    */
   DIAERESIS(UnicodeUtil.DIAERESIS, UnicodeUtil.COMBINING_DIAERESIS, "diaeresis") {
 
@@ -312,8 +313,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A mark attached at the top right of the letters o and u in the Vietnamese
-   * alphabet (overdot).
+   * A small dot placed to the top of some Latin letters used in some European
+   * languages and Vietnamese. If your environment supports unicode, you can see
+   * it here: &#729;
    */
   DOT_ABOVE(UnicodeUtil.DOT_ABOVE, UnicodeUtil.COMBINING_DOT_ABOVE, "dot above") {
 
@@ -350,9 +352,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * TODO
-   * 
-   * @param warning
+   * A small dot placed to the bottom of some Latin letters used in some
+   * European languages and Vietnamese. If your environment supports unicode,
+   * you can see it here: &#803;&#32;
    */
   DOT_BELOW(UnicodeUtil.DOT_BELOW, UnicodeUtil.COMBINING_DOT_BELOW, "dot below") {
 
@@ -390,9 +392,7 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   /**
    * Like {@link #GRAVE} but doubled. If your environment supports unicode, you
-   * can see it here: TODO
-   * 
-   * @param warning
+   * can see it here: &#783;&#32;.
    */
   DOUBLE_GRAVE(UnicodeUtil.DOUBLE_GRAVE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_GRAVE_ACCENT,
       "double grave accent") {
@@ -454,7 +454,8 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   /**
    * A little question mark without the dot, that is placed on top of Vietnamese
-   * letters. &#x3D2; &#x253;
+   * letters. If your environment supports unicode, you can see it here: &#x3D2;
+   * &#x253;
    */
   HOOK_ABOVE(UnicodeUtil.HOOK_ABOVE, UnicodeUtil.COMBINING_HOOK_ABOVE, "hook above") {
 
@@ -499,11 +500,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A ... that is placed on top of Vietnamese vowels.
-   * 
-   * TODO
-   * 
-   * @param warning
+   * A mark similar to a comma (,) that is placed to the top right of Vietnamese
+   * vowels. If your environment supports unicode, you can see it here:
+   * &#795;&#32;
    */
   HORN_ABOVE(UnicodeUtil.HORN, UnicodeUtil.COMBINING_HORN, "horn") {
 
@@ -522,11 +521,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A ...
-   * 
-   * TODO
-   * 
-   * @param warning
+   * A long horizontal stroke placed on top of letters. If your environment
+   * supports unicode, you can see it here: &#175;
    */
   MACRON(UnicodeUtil.MACRON, UnicodeUtil.COMBINING_MACRON, "macron") {
 
@@ -585,11 +581,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A ...
-   * 
-   * TODO
-   * 
-   * @param warning
+   * A little hook placed to the bottom right of Latin vowels. If your
+   * environment supports unicode, you can see it here: &#731;
    */
   OGONEK(UnicodeUtil.OGONEK, UnicodeUtil.COMBINING_OGONEK, "ogonek") {
 
@@ -618,11 +611,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A ...
-   * 
-   * TODO
-   * 
-   * @param warning
+   * A small ring placed to the top of some Latin letters. If your environment
+   * supports unicode, you can see it here: &#730;
    */
   RING_ABOVE(UnicodeUtil.RING_ABOVE, UnicodeUtil.COMBINING_RING_ABOVE, "ring above") {
 
@@ -660,7 +650,10 @@ public enum DiacriticalMark implements Datatype<Character> {
   // }
   // },
 
-  /** ~ on top. */
+  /**
+   * A small tilde (~) placed on top of some letters. If your environment
+   * supports unicode, you can see it here: &#126;
+   */
   TILDE(UnicodeUtil.TILDE, UnicodeUtil.COMBINING_TILDE, "tilde") {
 
     /**
@@ -754,7 +747,12 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * @return the separateCharacter
+   * This method gets the separate character for this {@link DiacriticalMark}.
+   * It represents the mark itself.
+   * 
+   * @see #getCombiningCharacter()
+   * 
+   * @return the separate character.
    */
   public char getSeparateCharacter() {
 
@@ -763,8 +761,8 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   /**
    * This method gets the combining character for this {@link DiacriticalMark}.
-   * It represents the mark itself but is TODO. Therefore unicode allows to
-   * express '&auml;' as two TODO.
+   * Unlike the {@link #getSeparateCharacter() separate character} this
+   * character gets combined with the following character to a single glyph.
    * 
    * @return the combining character.
    */

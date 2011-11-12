@@ -103,17 +103,18 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    */
   protected void loadClasses() {
 
-    AbstractDataClass<? extends DataObject> rootClass = this.classLoader.loadClasses();
+    AbstractDataClass<? extends DataObject> rootClass = (AbstractDataClass<? extends DataObject>) this.classLoader
+        .loadClasses();
     setRootClass(rootClass);
     addClassRecursive(rootClass);
-    AbstractDataClass<? extends DataObject> classClass = getDataClass(getIdManager()
+    AbstractDataClass<? extends DataObject> classClass = getDataClass(getDataIdManager()
         .getClassClassId());
     if (classClass == null) {
       // TODO:
       throw new DataReflectionException("Missing class for ContentClass!");
     }
     // ContentClassImpl.setContentClass(classClass);
-    AbstractDataClass<? extends DataObject> fieldClass = getDataClass(getIdManager()
+    AbstractDataClass<? extends DataObject> fieldClass = getDataClass(getDataIdManager()
         .getFieldClassId());
     if (fieldClass == null) {
       // TODO:

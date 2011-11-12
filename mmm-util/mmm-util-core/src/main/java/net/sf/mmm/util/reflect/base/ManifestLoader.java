@@ -34,11 +34,12 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 public class ManifestLoader {
 
   /**
-   * The {@link Attributes.Name Name} of the source of the {@link Manifest}.
-   * This is a property that is NOT intended to be defined in the manifest file
-   * itself but is set dynamically as {@link Manifest#getMainAttributes()
-   * main-property} to the source of the manifest (e.g. the name of the
-   * JAR-file) if loaded via {@link ManifestLoader}.
+   * The {@link java.util.jar.Attributes.Name} of the source of the
+   * {@link Manifest}. This is a property that is NOT intended to be defined in
+   * the manifest file itself but is set dynamically as
+   * {@link Manifest#getMainAttributes() main-property} to the source of the
+   * manifest (e.g. the name of the JAR-file) if loaded via
+   * {@link ManifestLoader}.
    */
   public static final Attributes.Name MANIFEST_SOURCE = new Attributes.Name("Manifest-Source");
 
@@ -188,7 +189,8 @@ public class ManifestLoader {
    * 
    * @param manifest is the {@link Manifest} where to get the attribute-value
    *        from.
-   * @param name is the {@link Attributes.Name Name} of the requested attribute.
+   * @param name is the {@link java.util.jar.Attributes.Name} of the requested
+   *        attribute.
    * @return the requested value or <code>null</code> if NOT available.
    * @since 2.0.0
    */

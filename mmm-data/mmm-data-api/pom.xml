@@ -11,7 +11,7 @@
   <artifactId>mmm-data-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-api</name>
+  <name>data-api</name>
   <description>API of the ECMS of mmm.</description>
   
   <dependencies>

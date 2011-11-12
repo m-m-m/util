@@ -4,22 +4,20 @@
 package net.sf.mmm.data.resource.base;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.base.AbstractDataObject;
-import net.sf.mmm.data.resource.RevisionControl;
 import net.sf.mmm.data.resource.api.ContentResource;
+import net.sf.mmm.util.resource.api.DataResource;
 
 /**
- * This is the implementation of the abstract entity {@link ContentResource}.
+ * This is the implementation of the abstract entity {@link DataResource}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = ContentResource.CLASS_ID, title = ContentResource.CLASS_NAME, isExtendable = true, revisionControl = RevisionControl.YES)
-public abstract class AbstractDataResource extends AbstractDataObject implements
-    ContentResource {
+@DataClassAnnotation(id = ContentResource.CLASS_ID, title = ContentResource.CLASS_NAME, isExtendable = true)
+public abstract class AbstractDataResource extends AbstractDataObject implements DataResource {
 
   /** TODO: javadoc. */
   private static final long serialVersionUID = 1983465184282662205L;
@@ -51,22 +49,8 @@ public abstract class AbstractDataResource extends AbstractDataObject implements
   }
 
   /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getTitle() name}.
-   * @param parent is the {@link #getParent() parent}.
-   * @param id is the {@link #getContentId() ID}.
-   */
-  public AbstractDataResource(String name, AbstractDataResource parent, DataId id) {
-
-    super(name, id);
-    setParent(parent);
-  }
-
-  /**
    * {@inheritDoc}
    */
-  @Override
   public AbstractDataResource getParent() {
 
     return this.parent;
@@ -111,12 +95,11 @@ public abstract class AbstractDataResource extends AbstractDataObject implements
     return this;
   }
 
-  public static abstract class AbstractDataResourceModifier extends
-      AbstractContentObjectModifier {
+  public static abstract class AbstractDataResourceModifier {
 
     /**
-     * Sets the <code>{@link DataObject#getParent() parent}</code> of the
-     * given <code>resource</code>.
+     * Sets the <code>{@link DataObject#getParent() parent}</code> of the given
+     * <code>resource</code>.
      * 
      * @param resource is the resource to modify.
      * @param parent is the {@link DataObject#getParent() parent} to set.
@@ -124,6 +107,7 @@ public abstract class AbstractDataResource extends AbstractDataObject implements
     protected void setContentResourceParent(AbstractDataResource resource,
         AbstractDataResource parent) {
 
+      resource.setParent(parent);
     }
   }
 

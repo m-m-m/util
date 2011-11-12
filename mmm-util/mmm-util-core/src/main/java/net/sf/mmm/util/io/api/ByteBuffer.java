@@ -10,4 +10,6 @@ package net.sf.mmm.util.io.api;
  * @since 1.1.0
  */
 public interface ByteBuffer extends ByteIterator, ByteProvider {
+
+  // nothing to add, just a combination
 }

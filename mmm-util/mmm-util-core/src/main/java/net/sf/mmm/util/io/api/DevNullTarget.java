@@ -32,6 +32,7 @@ public final class DevNullTarget extends OutputStream {
   @Override
   public void write(int b) {
 
+    // nothing to do
   }
 
   /**
@@ -40,6 +41,7 @@ public final class DevNullTarget extends OutputStream {
   @Override
   public void write(byte[] b, int off, int len) {
 
+    // nothing to do
   }
 
   /**
@@ -48,7 +50,7 @@ public final class DevNullTarget extends OutputStream {
   @Override
   public void close() {
 
-  // do nothing...
+    // do nothing...
   }
 
 }

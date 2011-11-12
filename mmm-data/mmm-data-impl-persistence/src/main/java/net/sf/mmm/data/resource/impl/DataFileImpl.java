@@ -4,6 +4,7 @@
 package net.sf.mmm.data.resource.impl;
 
 import net.sf.mmm.data.api.datatype.MutableBlob;
+import net.sf.mmm.data.api.entity.resource.DataFile;
 import net.sf.mmm.data.resource.api.ContentFile;
 import net.sf.mmm.data.resource.base.AbstractDataDocument;
 
@@ -27,6 +28,15 @@ public final class DataFileImpl extends AbstractDataDocument implements ContentF
   public DataFileImpl() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getDataClassId() {
+
+    return DataFile.CLASS_ID;
   }
 
   /**

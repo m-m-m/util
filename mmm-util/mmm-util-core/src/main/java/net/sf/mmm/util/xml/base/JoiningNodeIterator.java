@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
+import net.sf.mmm.util.xml.api.XmlCompareMode;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import net.sf.mmm.util.xml.api.XmlCompareMode;
 
 /**
  * This class is used to {@link java.util.Iterator#next() iterate} the
@@ -41,6 +41,7 @@ class JoiningNodeIterator extends NodeIterator {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("null")
   @Override
   protected Node findNext() {
 

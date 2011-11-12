@@ -59,7 +59,6 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
       buffer.append(argument.getKey());
       buffer.append(NlsArgumentParser.END_EXPRESSION);
     } else {
-      @SuppressWarnings("unchecked")
       NlsFormatter<Object> formatter = (NlsFormatter<Object>) argument.getFormatter();
       Justification justification = argument.getJustification();
       if (justification == null) {

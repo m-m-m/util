@@ -31,6 +31,7 @@ public final class NoPojoPathRecognizer implements PojoPathRecognizer {
    */
   public void recognize(Object pojo, PojoPath currentPath) {
 
+    // nothing to do
   }
 
 }

@@ -15,4 +15,5 @@ package net.sf.mmm.util.io.api;
  */
 public interface ProcessableByteArrayBuffer extends ByteBuffer, ByteProcessable {
 
+  // nothing to add, just a combination
 }

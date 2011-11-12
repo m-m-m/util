@@ -11,7 +11,7 @@
   <artifactId>mmm-l10n</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>localization</name>
+  <name>l10n</name>
   <description>localization (l10n) contains the texts and configuraitons for various locales (languages and contries).</description>
   <modules>
     <!--<module>mmm-l10n-ar</module>

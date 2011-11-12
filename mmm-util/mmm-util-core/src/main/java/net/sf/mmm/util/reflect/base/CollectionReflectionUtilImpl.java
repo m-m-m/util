@@ -262,7 +262,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @SuppressWarnings({ "rawtypes", "unchecked", "null" })
   public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver,
       int maximumGrowth) throws NlsIllegalArgumentException {
 

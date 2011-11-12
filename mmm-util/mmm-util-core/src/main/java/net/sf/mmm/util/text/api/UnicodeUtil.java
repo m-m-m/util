@@ -249,6 +249,10 @@ public interface UnicodeUtil {
 
   char RIGHT_CURLY_BRACKET = 0x0007D;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
+   * for {@link DiacriticalMark#TILDE}.
+   */
   char TILDE = 0x007E;
 
   char DELETE = 0x0007F;
@@ -306,6 +310,10 @@ public interface UnicodeUtil {
 
   char REGISTERED_SIGN = 0x000AE;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
+   * for {@link DiacriticalMark#MACRON}.
+   */
   char MACRON = 0x000AF;
 
   char DEGREE_SIGN = 0x000B0;
@@ -1431,12 +1439,28 @@ public interface UnicodeUtil {
 
   char MODIFIER_LETTER_MINUS_SIGN = 0x02D7;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
+   * for {@link DiacriticalMark#BREVE}.
+   */
   char BREVE = 0x02D8;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
+   * for {@link DiacriticalMark#DOT_ABOVE}.
+   */
   char DOT_ABOVE = 0x02D9;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
+   * for {@link DiacriticalMark#RING_ABOVE}.
+   */
   char RING_ABOVE = 0x02DA;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
+   * for {@link DiacriticalMark#OGONEK}.
+   */
   char OGONEK = 0x02DB;
 
   char SMALL_TILDE = 0x02DC;
@@ -3893,8 +3917,18 @@ public interface UnicodeUtil {
 
   char HOOK_ABOVE = '\0';
 
+  /**
+   * As it seems, unicode only specifies the combining double grave accent.
+   * 
+   * @see DiacriticalMark#DOUBLE_GRAVE
+   */
   char DOUBLE_GRAVE_ACCENT = '\0';
 
+  /**
+   * As it seems, unicode only specifies the combining horn.
+   * 
+   * @see DiacriticalMark#HORN_ABOVE
+   */
   char HORN = '\0';
 
   /**

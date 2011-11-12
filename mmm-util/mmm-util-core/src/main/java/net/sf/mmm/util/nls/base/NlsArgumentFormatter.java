@@ -21,4 +21,6 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
 @ComponentSpecification
 public interface NlsArgumentFormatter extends NlsFormatter<NlsArgument> {
 
+  // nothing to add, just bound generic
+
 }

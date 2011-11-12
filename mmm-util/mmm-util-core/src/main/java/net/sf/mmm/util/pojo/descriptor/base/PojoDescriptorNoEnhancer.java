@@ -28,6 +28,7 @@ public final class PojoDescriptorNoEnhancer implements PojoDescriptorEnhancer {
    */
   public void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor) {
 
+    // nothing to do.
   }
 
 }

@@ -55,7 +55,6 @@ public final class ConstantFilter<V> implements Filter<V> {
    *        accept all objects, <code>false</code> to reject all objects.
    * @return the requested filter.
    */
-  @SuppressWarnings("unchecked")
   public static <V> Filter<V> getInstance(boolean accept) {
 
     if (accept) {

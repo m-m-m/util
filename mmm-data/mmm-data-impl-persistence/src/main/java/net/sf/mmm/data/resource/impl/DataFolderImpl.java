@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.resource.impl;
 
-import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.entity.resource.DataFolder;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.resource.api.ContentFolder;
@@ -31,15 +31,12 @@ public final class DataFolderImpl extends AbstractDataResource implements Conten
   }
 
   /**
-   * The constructor.
-   * 
-   * @param name is the {@link #getTitle() name}.
-   * @param parent is the {@link #getParent() parent}.
-   * @param id is the {@link #getContentId() ID}.
+   * {@inheritDoc}
    */
-  public DataFolderImpl(String name, DataFolderImpl parent, DataId id) {
+  @Override
+  public long getDataClassId() {
 
-    super(name, parent, id);
+    return DataFolder.CLASS_ID;
   }
 
   /**

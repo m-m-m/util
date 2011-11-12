@@ -71,7 +71,6 @@ public class InternalValidatingIdResolver extends IDResolver {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("rawtypes")
   public Callable<?> resolve(String id, Class targetType) throws SAXException {
 
     return this.context.get(id, targetType);

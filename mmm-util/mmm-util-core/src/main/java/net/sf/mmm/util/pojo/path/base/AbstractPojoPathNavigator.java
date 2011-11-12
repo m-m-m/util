@@ -84,8 +84,9 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    * This method gets the optional {@link PojoPathFunctionManager} for
    * {@link PojoPathFunction}s that are global for this
    * {@link PojoPathNavigator} instance.<br>
-   * <b>ATTENTION:</b><br> {@link PojoPathFunction}s provided by this
-   * {@link PojoPathFunctionManager} need to be stateless / thread-safe.
+   * <b>ATTENTION:</b><br>
+   * {@link PojoPathFunction}s provided by this {@link PojoPathFunctionManager}
+   * need to be stateless / thread-safe.
    * 
    * @return the {@link PojoPathFunctionManager} or <code>null</code> if NOT
    *         available.
@@ -1164,7 +1165,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
      *        <code>null</code> values.
      * @param pojoPath is the {@link #getPojoPath() pojo-path}.
      */
-    @SuppressWarnings("unchecked")
     protected PojoPathState(CachingPojoPath rootPath, PojoPathMode mode, String pojoPath) {
 
       this(rootPath, mode, pojoPath, Collections.EMPTY_MAP);
