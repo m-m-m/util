@@ -8,9 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.inject.Inject;
@@ -54,7 +56,12 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
       CharFilter.ASCII_LETTER_FILTER, new ListCharFilter(true, '$', '(', ')', '{', '}'));
 
   /** A {@link CharFilter} that accepts common separators. */
-  private static final CharFilter SEPARATOR_FILTER = new ListCharFilter(true, '.', '-', '_', '#');
+  private static final CharFilter SEPARATOR_FILTER = new ListCharFilter(true, '.', '-', '_', '#',
+      ',');
+
+  /** A {@link CharFilter} that accepts all but separators and digits. */
+  private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR,
+      SEPARATOR_FILTER, CharFilter.LATIN_DIGIT_FILTER);
 
   /** @see #getInstance() */
   private static VersionIdentifierUtil instance;
@@ -67,6 +74,9 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
 
   /** @see #getPhaseMap() */
   private Map<String, DevelopmentPhase> phaseMap;
+
+  /** @see #getPhasePrefixSet() */
+  private Set<String> phasePrefixSet;
 
   /** @see #getDefaultFormatter() */
   private VersionIdentifierFormatter defaultFormatter;
@@ -153,6 +163,23 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
   }
 
   /**
+   * @return the {@link Set} containing the prefix of the {@link Map#keySet()
+   *         keys} before the first hyphen.
+   */
+  protected Set<String> getPhasePrefixSet() {
+
+    return this.phasePrefixSet;
+  }
+
+  /**
+   * @param phasePrefixSet is the phasePrefixSet to set
+   */
+  public void setPhasePrefixSet(Set<String> phasePrefixSet) {
+
+    this.phasePrefixSet = phasePrefixSet;
+  }
+
+  /**
    * @param phaseMappingTable is the phaseMappingTable to set
    */
   public void setPhaseMap(Map<String, DevelopmentPhase> phaseMappingTable) {
@@ -196,6 +223,15 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
     }
     if (this.phaseMap == null) {
       this.phaseMap = createDefaultPhaseMap();
+    }
+    if (this.phasePrefixSet == null) {
+      this.phasePrefixSet = new HashSet<String>();
+      for (String key : this.phaseMap.keySet()) {
+        int index = key.indexOf('-');
+        if (index > 0) {
+          this.phasePrefixSet.add(key.substring(0, index));
+        }
+      }
     }
   }
 
@@ -265,7 +301,6 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
     String phaseAlias = null;
     Integer phaseNumber = null;
     boolean snapshot = false;
-    boolean segmentsStarted = false;
     boolean segmentsCompleted = false;
     while (scanner.hasNext()) {
       scanner.skipWhile(SEPARATOR_FILTER);
@@ -276,10 +311,8 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
               VersionIdentifier.SNAPSHOT), versionString, VersionIdentifier.class);
         }
         snapshot = true;
-        scanner.skipWhile(SEPARATOR_FILTER);
-      }
-      // revision
-      if (scanner.expectStrict("rev", true)) {
+      } else if (scanner.expectStrict("rev", true)) {
+        // revision
         if (revision != null) {
           throw new NlsParseException(new DuplicateObjectException(revision, "revision"),
               versionString, VersionIdentifier.class);
@@ -288,7 +321,6 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
         scanner.expectStrict("ision", true);
         scanner.expect('-');
         revision = Long.valueOf(scanner.readLong(19));
-        scanner.skipWhile(SEPARATOR_FILTER);
       }
       // number
       String numberString = scanner.readWhile(CharFilter.LATIN_DIGIT_FILTER);
@@ -310,25 +342,67 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
               int end = isoMatcher.end();
               buffer.setLength(end);
               if (timestamp != null) {
-                throw new NlsParseException(new DuplicateObjectException(buffer, "revision"),
+                throw new NlsParseException(new DuplicateObjectException(buffer, "timestamp"),
                     versionString, VersionIdentifier.class);
               }
               timestamp = this.iso8601Util.parseDate(buffer.toString());
               scanner.read(end - numberString.length());
-              scanner.skipWhile(SEPARATOR_FILTER);
             } else {
               // support other date formats?
+              throw new NlsParseException(new NlsParseException(dateString, Date.class),
+                  versionString, VersionIdentifier.class);
             }
           }
         }
         if (timestamp == null) {
-          // TODO version segments...
+          // version segment...
+          if (segmentsCompleted) {
+            throw new NlsParseException(versionString, VersionIdentifier.class);
+          }
+          Integer segment = Integer.valueOf(numberString);
+          versionSegmentList.add(segment);
         }
-        if (!segmentsCompleted) {
-          // version segment?
-          int number = Integer.parseInt(numberString);
-          char next = scanner.forcePeek();
-          // if (next )
+      } else {
+        String phaseOrLabel = scanner.readWhile(LETTER_FILTER);
+        if (phaseOrLabel.length() > 0) {
+          String phaseLowerCase = phaseOrLabel.toLowerCase(Locale.US);
+          DevelopmentPhase currentPhase = this.phaseMap.get(phaseLowerCase);
+          if (this.phasePrefixSet.contains(phaseLowerCase)) {
+            if (scanner.forcePeek() == '-') {
+              String prefix = phaseLowerCase + '-';
+              for (String key : this.phaseMap.keySet()) {
+                if (key.startsWith(prefix)) {
+                  String rest = key.substring(phaseLowerCase.length());
+                  if (scanner.expectStrict(rest, true)) {
+                    currentPhase = this.phaseMap.get(key);
+                    phaseOrLabel = key;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          if (currentPhase == null) {
+            if (label != null) {
+              throw new NlsParseException(
+                  new DuplicateObjectException(phaseOrLabel, "label", label), versionString,
+                  VersionIdentifier.class);
+            }
+            label = phaseOrLabel;
+          } else {
+            if (phase != null) {
+              throw new NlsParseException(new DuplicateObjectException(currentPhase,
+                  DevelopmentPhase.class, phase), versionString, VersionIdentifier.class);
+            }
+            phase = currentPhase;
+            phaseAlias = phaseOrLabel;
+            scanner.expect('-');
+            String phaseNumberString = scanner.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+            if (phaseNumberString.length() > 0) {
+              // if (phaseNumber != null) {...}
+              phaseNumber = Integer.valueOf(phaseNumberString);
+            }
+          }
         }
       }
     }

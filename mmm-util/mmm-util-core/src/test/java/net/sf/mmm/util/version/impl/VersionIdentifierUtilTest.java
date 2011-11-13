@@ -5,11 +5,11 @@ package net.sf.mmm.util.version.impl;
 
 import java.text.SimpleDateFormat;
 
+import junit.framework.Assert;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.api.VersionIdentifierUtil;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -54,7 +54,6 @@ public class VersionIdentifierUtilTest {
   @Test
   public void testParse() throws Exception {
 
-    VersionIdentifierUtil versionIdentifierUtil = getVersionIdentifierUtil();
     VersionIdentifier version;
 
     version = parseVersion("1");
@@ -153,6 +152,19 @@ public class VersionIdentifierUtilTest {
     Assert.assertEquals(Long.valueOf(654321), version.getRevision());
     Assert.assertEquals(new SimpleDateFormat("yyyyMMdd-HHmmss zzz").parse("19991231-235959 UTC"),
         version.getTimestamp());
+
+    version = parseVersion("1.0-release-candidate-5");
+    Assert.assertNotNull(version);
+    Assert.assertEquals(2, version.getVersionSegmentCount());
+    Assert.assertEquals(1, version.getVersionMajorSegment());
+    Assert.assertEquals(0, version.getVersionMinorSegment());
+    Assert.assertEquals(DevelopmentPhase.RELEASE_CANDIDATE, version.getPhase());
+    Assert.assertEquals("release-candidate", version.getPhaseAlias());
+    Assert.assertEquals(Integer.valueOf(5), version.getPhaseNumber());
+    Assert.assertFalse(version.isSnapshot());
+    Assert.assertNull(version.getLabel());
+    Assert.assertNull(version.getRevision());
+    Assert.assertNull(version.getTimestamp());
   }
 
   /**
@@ -163,12 +175,11 @@ public class VersionIdentifierUtilTest {
   @Test
   public void testCompareTo() {
 
-    VersionIdentifierUtil versionIdentifierUtil = getVersionIdentifierUtil();
     VersionIdentifier version;
     VersionIdentifier otherVersion;
 
-    version = versionIdentifierUtil.createVersionIdentifier("1");
-    version = versionIdentifierUtil.createVersionIdentifier("1");
-
+    version = parseVersion("1");
+    otherVersion = parseVersion("1.0");
+    Assert.assertEquals(0, version.compareTo(otherVersion));
   }
 }
