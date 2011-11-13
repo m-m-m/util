@@ -37,10 +37,10 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.api.VersionIdentifierFormatter;
-import net.sf.mmm.util.version.api.VersionIdentifierUtil;
+import net.sf.mmm.util.version.api.VersionUtil;
 
 /**
- * This is the abstract base-implementation of the {@link VersionIdentifierUtil}
+ * This is the abstract base-implementation of the {@link VersionUtil}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -48,8 +48,8 @@ import net.sf.mmm.util.version.api.VersionIdentifierUtil;
  */
 @Singleton
 @Named
-public class VersionIdentifierUtilImpl extends AbstractLoggableComponent implements
-    VersionIdentifierUtil {
+public class VersionUtilImpl extends AbstractLoggableComponent implements
+    VersionUtil {
 
   /** A {@link CharFilter} that accepts all but ASCII letters. */
   private static final CharFilter INFIX_FILTER = new ConjunctionCharFilter(Conjunction.NOR,
@@ -64,7 +64,7 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
       SEPARATOR_FILTER, CharFilter.LATIN_DIGIT_FILTER);
 
   /** @see #getInstance() */
-  private static VersionIdentifierUtil instance;
+  private static VersionUtil instance;
 
   /** @see #getStringUtil() */
   private StringUtil stringUtil;
@@ -84,14 +84,14 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
   /**
    * The constructor.
    */
-  public VersionIdentifierUtilImpl() {
+  public VersionUtilImpl() {
 
     super();
   }
 
   /**
    * This method gets the singleton instance of this
-   * {@link VersionIdentifierUtilImpl}.<br>
+   * {@link VersionUtilImpl}.<br>
    * This design is the best compromise between easy access (via this
    * indirection you have direct, static access to all offered functionality)
    * and IoC-style design which allows extension and customization.<br>
@@ -104,12 +104,12 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
    * 
    * @return the singleton instance.
    */
-  public static VersionIdentifierUtil getInstance() {
+  public static VersionUtil getInstance() {
 
     if (instance == null) {
-      synchronized (VersionIdentifierUtil.class) {
+      synchronized (VersionUtil.class) {
         if (instance == null) {
-          VersionIdentifierUtilImpl impl = new VersionIdentifierUtilImpl();
+          VersionUtilImpl impl = new VersionUtilImpl();
           impl.initialize();
           instance = impl;
         }
@@ -562,7 +562,7 @@ public class VersionIdentifierUtilImpl extends AbstractLoggableComponent impleme
 
   /**
    * This inner class holds the status used to determine if a
-   * {@link VersionIdentifierUtilImpl#createFormatter(String, boolean)
+   * {@link VersionUtilImpl#createFormatter(String, boolean)
    * formatPattern} is {@link #isStrict() strict}.
    */
   protected static class FormatPatternStatus {

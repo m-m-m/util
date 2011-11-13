@@ -8,29 +8,29 @@ import java.text.SimpleDateFormat;
 import junit.framework.Assert;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
-import net.sf.mmm.util.version.api.VersionIdentifierUtil;
+import net.sf.mmm.util.version.api.VersionUtil;
 
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link VersionIdentifierUtilImpl}.
+ * This is the test-case for {@link VersionUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class VersionIdentifierUtilTest {
+public class VersionUtilTest {
 
   /**
-   * This method gets the {@link VersionIdentifierUtil} instance.
+   * This method gets the {@link VersionUtil} instance.
    * 
-   * @return the {@link VersionIdentifierUtil} instance.
+   * @return the {@link VersionUtil} instance.
    */
-  public VersionIdentifierUtil getVersionIdentifierUtil() {
+  public VersionUtil getVersionIdentifierUtil() {
 
-    return VersionIdentifierUtilImpl.getInstance();
+    return VersionUtilImpl.getInstance();
   }
 
   /**
-   * This method {@link VersionIdentifierUtil#createVersionIdentifier(String)
+   * This method {@link VersionUtil#createVersionIdentifier(String)
    * parses} a {@link VersionIdentifier} given by <code>versionString</code>. It
    * also does some sanity checks.
    * 
@@ -46,7 +46,7 @@ public class VersionIdentifierUtilTest {
 
   /**
    * This method tests the
-   * {@link VersionIdentifierUtil#createVersionIdentifier(String) parsing} of
+   * {@link VersionUtil#createVersionIdentifier(String) parsing} of
    * {@link VersionIdentifier}s from {@link String}s.
    * 
    * @throws Exception if something goes wrong.
@@ -169,7 +169,7 @@ public class VersionIdentifierUtilTest {
 
   /**
    * This method tests the
-   * {@link VersionIdentifierUtil#createVersionIdentifier(String) parsing} of
+   * {@link VersionUtil#createVersionIdentifier(String) parsing} of
    * {@link VersionIdentifier}s from {@link String}s.
    */
   @Test

@@ -7,14 +7,15 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
- * This is the interface used to {@link #createVersionIdentifier(String) build}
- * {@link VersionIdentifier} instances from a {@link String} representation.
+ * This is the interface for a collection of utility functions that help to deal
+ * with versions. E.g. you can {@link #createVersionIdentifier(String) parse} a
+ * a version {@link String} to a {@link VersionIdentifier}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
 @ComponentSpecification
-public interface VersionIdentifierUtil {
+public interface VersionUtil {
 
   /**
    * This method parses the given <code>versionString</code> and builds an
