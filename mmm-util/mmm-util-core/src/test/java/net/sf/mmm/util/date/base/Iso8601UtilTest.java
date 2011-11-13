@@ -84,6 +84,20 @@ public class Iso8601UtilTest {
   }
 
   @Test
+  public void testBasicFormat() {
+
+    Calendar calendar = getIso8601Util().parseCalendar("19991231T235959Z");
+    Assert.assertEquals(1999, calendar.get(Calendar.YEAR));
+    Assert.assertEquals(Calendar.DECEMBER, calendar.get(Calendar.MONTH));
+    Assert.assertEquals(31, calendar.get(Calendar.DAY_OF_MONTH));
+    Assert.assertEquals(23, calendar.get(Calendar.HOUR_OF_DAY));
+    Assert.assertEquals(59, calendar.get(Calendar.MINUTE));
+    Assert.assertEquals(59, calendar.get(Calendar.SECOND));
+    Assert.assertEquals(0, calendar.get(Calendar.MILLISECOND));
+    Assert.assertEquals(TimeZone.getTimeZone("UTC"), calendar.getTimeZone());
+  }
+
+  @Test
   public void testExtendedFormat() {
 
     checkCombined("1999-12-31T23:59:59+01:00");

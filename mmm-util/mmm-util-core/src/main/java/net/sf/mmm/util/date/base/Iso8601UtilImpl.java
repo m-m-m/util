@@ -15,6 +15,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
@@ -339,7 +340,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   private int[] parseTime(CharSequenceScanner scanner) {
 
     int hour = read2Digits(scanner);
-    boolean colon = scanner.skipOver(":", false);
+    boolean colon = scanner.expect(':');
     int minute = read2Digits(scanner);
     int second = 0;
     if (minute == -1) {
@@ -347,7 +348,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
         minute = 0;
       }
     } else {
-      colon = scanner.skipOver(":", false);
+      colon = scanner.expect(':');
       second = read2Digits(scanner);
       if ((second == -1) && (!colon)) {
         second = 0;
@@ -390,7 +391,8 @@ public final class Iso8601UtilImpl implements Iso8601Util {
     } else if (c == 0) {
       calendar.set(year, month - 1, day);
     } else {
-      throw new IllegalArgumentException("Illegal date-format \"" + scanner.toString() + "\"!");
+      throw new NlsParseException(scanner.toString(), PATTERN_STRING_TIME, "time",
+          scanner.toString());
     }
     calendar.set(Calendar.MILLISECOND, 0);
   }
@@ -441,40 +443,42 @@ public final class Iso8601UtilImpl implements Iso8601Util {
    */
   public void parseCalendar(String date, Calendar calendar) {
 
-    CharSequenceScanner parser = new CharSequenceScanner(date);
+    CharSequenceScanner scanner = new CharSequenceScanner(date);
     int year = 0;
     int month = -1;
     int day = -1;
     // proceed date
     try {
-      String yearString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-      char c = parser.forceNext();
-      if (c == '-') {
-        year = Integer.parseInt(yearString);
-        String monthString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-        if (monthString.length() == 2) {
-          month = Integer.parseInt(monthString);
-          c = parser.forceNext();
-          if (c == '-') {
-            String dayString = parser.readWhile(CharFilter.LATIN_DIGIT_FILTER);
-            if (dayString.length() == 2) {
-              day = Integer.parseInt(dayString);
-            }
-          }
-        }
-      } else if (yearString.length() == 8) {
+      String yearString = scanner.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+      if (yearString.length() == 8) {
         // "yyyyMMdd".length() == 8
         year = Integer.parseInt(yearString.substring(0, 4));
         month = Integer.parseInt(yearString.substring(4, 6));
         day = Integer.parseInt(yearString.substring(6, 8));
+      } else {
+        char c = scanner.forceNext();
+        if (c == '-') {
+          year = Integer.parseInt(yearString);
+          String monthString = scanner.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+          if (monthString.length() == 2) {
+            month = Integer.parseInt(monthString);
+            c = scanner.forceNext();
+            if (c == '-') {
+              String dayString = scanner.readWhile(CharFilter.LATIN_DIGIT_FILTER);
+              if (dayString.length() == 2) {
+                day = Integer.parseInt(dayString);
+              }
+            }
+          }
+        }
       }
       if (((month < 1) || (month > MAX_MONTH)) || ((day < 1) || (day > MAX_DAY_OF_MONTH))) {
         throw new IllegalDateFormatException(date);
       }
       // proceed time (and timezone)
-      parseTime(parser, calendar, year, month, day);
-    } catch (IllegalArgumentException e) {
-      throw new IllegalDateFormatException(date);
+      parseTime(scanner, calendar, year, month, day);
+    } catch (Exception e) {
+      throw new IllegalDateFormatException(date, e);
     }
   }
 
