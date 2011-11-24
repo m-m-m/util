@@ -28,14 +28,28 @@ public interface Blob extends Datatype<Blob> {
   long getSize();
 
   /**
-   * This method gets read access to the data of this BLOB.
+   * This method gets read access to the data of this {@link Blob}.
    * 
    * @see MutableBlob#streamData(OutputStream)
    * 
-   * @return the BLOB data as input stream.
+   * @return the {@link Blob} data as input stream.
    * @throws RuntimeIoException if the BLOB could not be opened for reading.
    */
   InputStream getReadAccess() throws RuntimeIoException;
+
+  /**
+   * This method gets read access to the data of this {@link Blob}.
+   * 
+   * @see MutableBlob#streamData(OutputStream)
+   * 
+   * @param offset is the index of the first byte to retrieve from the
+   *        {@link Blob}.
+   * @return the {@link Blob} data as input stream.
+   * @throws RuntimeIoException if the BLOB could not be opened for reading or
+   *         if the <code>offset</code> is negative or greater than
+   *         {@link #getSize()}.
+   */
+  InputStream getReadAccess(long offset) throws RuntimeIoException;
 
   /**
    * This method writes the data of this BLOB to the given output stream. The
@@ -48,6 +62,20 @@ public interface Blob extends Datatype<Blob> {
    * @throws RuntimeIoException if the streaming fails.
    */
   void streamData(OutputStream outStream) throws RuntimeIoException;
+
+  /**
+   * This method writes the data of this BLOB to the given output stream. The
+   * given output stream will NOT be closed.<br/>
+   * <b>ATTENTION:</b><br>
+   * This is a blocking operation. According to the size of the {@link Blob}
+   * this may block the current thread for some time.
+   * 
+   * @param outStream is the stream where to write the data to.
+   * @param offset is the index of the first byte to retrieve from the
+   *        {@link Blob}.
+   * @throws RuntimeIoException if the streaming fails.
+   */
+  void streamData(OutputStream outStream, long offset) throws RuntimeIoException;
 
   /**
    * This method gets the revision counter of this {@link Blob}. It is initially

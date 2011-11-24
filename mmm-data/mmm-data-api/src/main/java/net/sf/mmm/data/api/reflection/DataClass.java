@@ -26,21 +26,21 @@ import net.sf.mmm.data.api.DataSelectionTree;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_NAME, isFinal = true)
+@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_TITLE, isFinal = true)
 public interface DataClass<CLASS extends DataObject> extends DataReflectionObject<CLASS>,
     DataSelectionTree<DataClass<? extends DataObject>> {
-
-  /**
-   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
-   * {@link DataClass} reflecting this type.
-   */
-  String CLASS_NAME = "DataClass";
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link DataClass} reflecting this type.
    */
   short CLASS_ID = 2;
+
+  /**
+   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
+   * {@link DataClass} reflecting this type.
+   */
+  String CLASS_TITLE = "DataClass";
 
   /**
    * The first {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}

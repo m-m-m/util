@@ -20,5 +20,6 @@
     <module>mmm-util-xml</module>
     <module>mmm-util-contenttype</module>
     <module>mmm-util-metakeys</module>
+    <module>mmm-util-datatype</module>
   </modules>
 </project>

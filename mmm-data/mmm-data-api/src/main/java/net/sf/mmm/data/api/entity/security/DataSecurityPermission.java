@@ -5,7 +5,6 @@ package net.sf.mmm.data.api.entity.security;
 
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
-import net.sf.mmm.data.security.api.PermissionType;
 
 /**
  * This is the interface for a permission that determines if an
@@ -37,12 +36,5 @@ public interface DataSecurityPermission extends DataSecurityObject {
    * @return
    */
   DataSecurityOperation getAction();
-
-  /**
-   * This method gets the type of permission.
-   * 
-   * @return the permission type.
-   */
-  PermissionType getType();
 
 }

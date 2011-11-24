@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import net.sf.mmm.data.api.reflection.DataModifiers;
-import net.sf.mmm.util.lang.api.Datatype;
 
 /**
  * This is the base implementation of the {@link DataModifiers} interface.
@@ -17,7 +16,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @since 1.0.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class AbstractDataModifiersBean implements DataModifiers, Datatype<String> {
+public abstract class AbstractDataModifiersBean implements DataModifiers {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3521732876191875621L;

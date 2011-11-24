@@ -4,12 +4,8 @@
 package net.sf.mmm.persistence.impl.hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 import net.sf.mmm.persistence.impl.jpa.JpaRevisionedPersistenceEntity;
-
-import org.hibernate.envers.Audited;
 
 /**
  * TODO: this class ...
@@ -17,11 +13,8 @@ import org.hibernate.envers.Audited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-@Audited
+// @Audited
 public class DummyRevisionedFooEntity extends JpaRevisionedPersistenceEntity<Long> {
-
-  /** @see #getId() */
-  private Long id;
 
   /** @see #getValue() */
   private String value;
@@ -32,29 +25,6 @@ public class DummyRevisionedFooEntity extends JpaRevisionedPersistenceEntity<Lon
   public DummyRevisionedFooEntity() {
 
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Id
-  @GeneratedValue
-  public Long getId() {
-
-    return this.id;
-  }
-
-  /**
-   * This method sets the {@link #getId() primary key}.<br>
-   * <b>ATTENTION:</b><br>
-   * This method is only intended for internal usage. It should NOT be set
-   * manually outside this persistence-layer.
-   * 
-   * @param id is the ID to set.
-   */
-  public void setId(Long id) {
-
-    this.id = id;
   }
 
   /**

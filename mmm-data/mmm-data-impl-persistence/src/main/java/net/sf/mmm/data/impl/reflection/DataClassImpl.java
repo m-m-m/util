@@ -21,7 +21,8 @@ import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.base.reflection.AbstractDataClass;
 import net.sf.mmm.data.base.reflection.AbstractDataField;
-import net.sf.mmm.data.base.reflection.DataClassGroupVersionImpl;
+
+import org.hibernate.annotations.Type;
 
 /**
  * This is the implementation of the
@@ -34,7 +35,7 @@ import net.sf.mmm.data.base.reflection.DataClassGroupVersionImpl;
  */
 @Entity
 @Table(name = "DATA_CLASS")
-@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_NAME)
+@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_TITLE)
 public final class DataClassImpl<CLASS extends DataObject> extends AbstractDataClass<CLASS> {
 
   /** UID for serialization. */
@@ -182,6 +183,7 @@ public final class DataClassImpl<CLASS extends DataObject> extends AbstractDataC
    * {@inheritDoc}
    */
   @Override
+  @Type(type = "net.sf.mmm.data.impl.datatype.usertype.DataClassModifiersUserType")
   public DataClassModifiers getModifiers() {
 
     return super.getModifiers();

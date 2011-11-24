@@ -9,6 +9,7 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldIds;
 import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 
 /**
@@ -64,7 +65,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_NAME)
+@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_TITLE, isExtendable = BooleanEnum.FALSE)
 public abstract interface DataObject extends RevisionedPersistenceEntity<Long>,
     AttributeReadTitle<String>, Serializable {
 
@@ -78,7 +79,7 @@ public abstract interface DataObject extends RevisionedPersistenceEntity<Long>,
    * The {@link DataObject#getTitle() title} of the
    * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
    */
-  String CLASS_NAME = "DataObject";
+  String CLASS_TITLE = "DataObject";
 
   /**
    * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
@@ -91,6 +92,12 @@ public abstract interface DataObject extends RevisionedPersistenceEntity<Long>,
    * {@link #getTitle() name} for generic access.
    */
   String FIELD_NAME_TITLE = "title";
+
+  /**
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
+   * {@link #getDeletedFlag() deletedFlag} for generic access.
+   */
+  String FIELD_NAME_DELETEDFLAG = "deletedFlag";
 
   /**
    * {@inheritDoc}
@@ -109,5 +116,37 @@ public abstract interface DataObject extends RevisionedPersistenceEntity<Long>,
    */
   @DataFieldAnnotation(id = DataFieldIds.ID_OBJECT_TITLE, title = FIELD_NAME_TITLE, isFinal = true)
   String getTitle();
+
+  /**
+   * The deleted-flag of a {@link DataNode} is inherited so {@link #isDeleted()}
+   * will return <code>true</code> if a {@link DataNode#getParent() parent
+   * object} is marked as deleted.<br>
+   * This method gets the deleted flag of this object. The method does not
+   * inherit the flag.
+   * 
+   * @see #isDeleted()
+   * 
+   * @return the deleted flag.
+   */
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DELETEDFLAG, title = FIELD_NAME_DELETEDFLAG, isFinal = true)
+  boolean getDeletedFlag();
+
+  /**
+   * This method determines if this content-object is marked as deleted. The
+   * deleted status is similar to {@link Deprecated deprecation} in java.<br>
+   * Further, a deleted object can NOT be modified. No instances or sub-classes
+   * can be created of a deleted class. Deleted fields are hidden by default in
+   * the UI. If an object is deleted it can either be undeleted or destroyed (if
+   * a {@link net.sf.mmm.data.api.reflection.DataClass} is destroyed then all
+   * instances will be removed from the persistence store).<br>
+   * Like deprecation a deletion is inherited from the
+   * {@link DataNode#getParent() parent}.
+   * 
+   * @see #getDeletedFlag()
+   * 
+   * @return <code>true</code> if this object is marked as deleted.
+   */
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DELETED, isTransient = true)
+  boolean isDeleted();
 
 }

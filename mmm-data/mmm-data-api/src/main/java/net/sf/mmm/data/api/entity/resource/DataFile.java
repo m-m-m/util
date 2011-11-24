@@ -24,11 +24,17 @@ public interface DataFile extends DataEntityResource {
   int CLASS_ID = 13;
 
   /**
+   * The {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
+   * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
+   */
+  String CLASS_TITLE = "DataFile";
+
+  /**
    * This method gets the mimetype of this file.
    * 
    * @return the mimetype or <code>null</code> if undefined.
    */
-  String getMimetype();
+  String getFiletype();
 
   /**
    * This method gets the {@link Blob} representing the actual file content.

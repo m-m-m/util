@@ -6,6 +6,7 @@ package net.sf.mmm.persistence.impl.jpa;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
@@ -57,7 +58,7 @@ public abstract class JpaPersistenceEntity<ID> implements PersistenceEntity<ID> 
    * {@inheritDoc}
    */
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   public ID getId() {
 
     return this.id;

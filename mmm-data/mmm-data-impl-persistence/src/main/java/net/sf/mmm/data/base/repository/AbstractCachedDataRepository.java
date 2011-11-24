@@ -5,16 +5,14 @@ package net.sf.mmm.data.base.repository;
 
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.AbstractDataObject;
+import net.sf.mmm.data.base.entity.resource.AbstractDataEntityResource;
 import net.sf.mmm.data.resource.api.ContentResource;
-import net.sf.mmm.data.resource.base.AbstractDataResource;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -26,10 +24,10 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public abstract class AbstractCachedDataRepository extends AbstractDataRepository {
 
   /** The cache for the latest resources. */
-  private Map<DataId, AbstractDataResource> latestResourceCache;
+  private Map<DataId, AbstractDataEntityResource> latestResourceCache;
 
   /** The cache for the closed revisions of resources. */
-  private Map<DataId, AbstractDataResource> closedResourceCache;
+  private Map<DataId, AbstractDataEntityResource> closedResourceCache;
 
   /** @see #getLatestResourceCacheSize() */
   private int latestResourceCacheSize;
@@ -80,12 +78,12 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
+   * {@inheritDoc}
    */
-  @PostConstruct
-  public void initialize() {
+  @Override
+  public void doInitialize() {
 
+    super.doInitialize();
     // TODO: use LRU / LFU Cache
     // this.latestResourceCache = new java.util.WeakHashMap<SmartId,
     // AbstractContentResource>(
@@ -117,7 +115,7 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
         // TODO: should this be handled different at all?
       } else {
         // resource
-        AbstractDataResource resource = null;
+        AbstractDataEntityResource resource = null;
         if (id.getRevision() == 0) {
           resource = this.latestResourceCache.get(id);
         } else {
@@ -141,7 +139,7 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
     return result;
   }
 
-  protected abstract AbstractDataResource readResource(DataId id) throws DataException;
+  protected abstract AbstractDataEntityResource readResource(DataId id) throws DataException;
 
   /**
    * {@inheritDoc}

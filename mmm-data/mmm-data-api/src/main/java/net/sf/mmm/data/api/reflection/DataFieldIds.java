@@ -38,13 +38,13 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionTree#getChildren()}.
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTree#getChildren()}.
    */
   int ID_SELECTIONTREE_CHILDREN = 41;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionTree#isAbstract()}.
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTree#isAbstract()}.
    */
   int ID_SELECTIONTREE_ABSTRACT = 42;
 

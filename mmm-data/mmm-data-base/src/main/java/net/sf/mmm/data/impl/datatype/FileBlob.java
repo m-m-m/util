@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.mmm.data.base.datatype.AbstractBlob;
+import net.sf.mmm.data.base.datatype.AbstractMutableBlob;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.api.StreamUtil;
@@ -22,7 +22,7 @@ import net.sf.mmm.util.io.api.StreamUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class FileBlob extends AbstractBlob {
+public class FileBlob extends AbstractMutableBlob {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 5975990166524924465L;

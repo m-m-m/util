@@ -55,6 +55,14 @@ public class ImmutableBlob implements Blob {
   /**
    * {@inheritDoc}
    */
+  public InputStream getReadAccess(long offset) throws RuntimeIoException {
+
+    return this.delegate.getReadAccess(offset);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public int getRevision() {
 
     return this.delegate.getRevision();
@@ -73,7 +81,7 @@ public class ImmutableBlob implements Blob {
    */
   public String getTitle() {
 
-    return toString();
+    return ImmutableBlob.class.getSimpleName() + ":" + this.delegate;
   }
 
   /**
@@ -87,10 +95,18 @@ public class ImmutableBlob implements Blob {
   /**
    * {@inheritDoc}
    */
-  @Override
-  public String toString() {
+  public void streamData(OutputStream outStream, long offset) throws RuntimeIoException {
 
-    return ImmutableBlob.class.getSimpleName() + ":" + this.delegate;
+    this.delegate.streamData(outStream, offset);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final String toString() {
+
+    return getTitle();
   }
 
 }

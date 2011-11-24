@@ -38,8 +38,8 @@ public class ObjectMismatchException extends NlsRuntimeException {
    */
   public ObjectMismatchException(Object object, Object expected, Object container) {
 
-    super(NlsBundleUtilCore.ERR_OBJECT_MISMATCH, toMap(KEY_OBJECT, object, KEY_EXPECTED, expected,
-        KEY_CONTAINER, container));
+    super(NlsBundleUtilCore.ERR_OBJECT_MISMATCH_WITH_CONTAINER, toMap(KEY_OBJECT, object,
+        KEY_EXPECTED, expected, KEY_CONTAINER, container));
   }
 
   /**
@@ -54,7 +54,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
    */
   public ObjectMismatchException(Object object, Object expected, Object container, Object property) {
 
-    super(NlsBundleUtilCore.ERR_OBJECT_MISMATCH, addToMap(
+    super(NlsBundleUtilCore.ERR_OBJECT_MISMATCH_WITH_CONTAINER_AND_PROPERTY, addToMap(
         toMap(KEY_OBJECT, object, KEY_EXPECTED, expected, KEY_CONTAINER, container), KEY_PROPERTY,
         property));
   }

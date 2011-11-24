@@ -104,7 +104,7 @@ public interface DataFieldModifiers extends DataModifiers {
    * {@link net.sf.mmm.data.api.DataNode#getParent() parent} needs to be of the
    * same type ({@link DataClass}) (<code>O.parent</code> instanceof
    * <code>C</code>) and this flag only makes sense for objects of the type
-   * {@link net.sf.mmm.data.api.DataSelectionTree}.<br/>
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTree}.<br/>
    * <b>ATTENTION:</b><br>
    * In a statically typed {@link net.sf.mmm.data.api.reflection content-model}
    * this feature is provided by a dynamic proxy and will NOT be available for

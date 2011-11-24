@@ -11,7 +11,7 @@ import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
-import net.sf.mmm.data.reflection.impl.CoreDataReflectionService;
+import net.sf.mmm.data.impl.reflection.CoreDataReflectionService;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -41,13 +41,13 @@ public class CoreContentModelServiceTest {
 
     DataClass rootClass = modelService.getRootDataClass();
     checkClass(modelService, rootClass);
-    assertEquals(DataObject.CLASS_NAME, rootClass.getTitle());
+    assertEquals(DataObject.CLASS_TITLE, rootClass.getTitle());
     assertNotNull(rootClass.getJavaClass());
     assertTrue(DataObject.class.isAssignableFrom(rootClass.getJavaClass()));
 
     DataClass classClass = modelService.getDataClass(rootClass);
     checkClass(modelService, classClass);
-    assertEquals(DataClass.CLASS_NAME, classClass.getTitle());
+    assertEquals(DataClass.CLASS_TITLE, classClass.getTitle());
     assertNotNull(classClass.getJavaClass());
     assertTrue(DataClass.class.isAssignableFrom(classClass.getJavaClass()));
     assertTrue(rootClass.isSuperClassOf(classClass));
@@ -60,7 +60,7 @@ public class CoreContentModelServiceTest {
 
     DataClass fieldClass = modelService.getDataClass(idField);
     checkClass(modelService, fieldClass);
-    assertEquals(DataField.CLASS_NAME, fieldClass.getTitle());
+    assertEquals(DataField.CLASS_TITLE, fieldClass.getTitle());
     assertNotNull(fieldClass.getJavaClass());
     assertTrue(DataField.class.isAssignableFrom(fieldClass.getJavaClass()));
     assertTrue(rootClass.isSuperClassOf(fieldClass));

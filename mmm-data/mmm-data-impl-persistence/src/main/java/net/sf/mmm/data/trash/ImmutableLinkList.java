@@ -6,9 +6,12 @@ package net.sf.mmm.data.trash;
 import java.util.Collections;
 import java.util.List;
 
+import net.sf.mmm.data.api.datatype.Link;
+import net.sf.mmm.data.base.AbstractLinkList;
+
 
 /**
- * This is an implementation of {@link net.sf.mmm.data.trash.LinkList}
+ * This is an implementation of {@link net.sf.mmm.data.api.LinkList}
  * that is immutable. This is useful to create an unmodifiable view on a
  * {@link net.sf.mmm.data.trash.MutableLinkList}.
  * 
@@ -25,7 +28,7 @@ public class ImmutableLinkList<CLASS> extends AbstractLinkList<CLASS> {
   /**
    * The constructor.
    * 
-   * @param linkList is the {@link net.sf.mmm.data.trash.LinkList} to
+   * @param linkList is the {@link net.sf.mmm.data.api.LinkList} to
    *        adapt.
    */
   public ImmutableLinkList(AbstractLinkList<CLASS> linkList) {

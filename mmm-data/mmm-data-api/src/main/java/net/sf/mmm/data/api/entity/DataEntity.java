@@ -13,7 +13,7 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataEntity.CLASS_ID)
+@DataClassAnnotation(id = DataEntity.CLASS_ID, title = DataEntity.CLASS_TITLE)
 public abstract interface DataEntity extends DataObject {
 
   /**
@@ -21,6 +21,12 @@ public abstract interface DataEntity extends DataObject {
    * the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
    */
   int CLASS_ID = 10;
+
+  /**
+   * The {@link DataObject#getTitle() title} of the
+   * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
+   */
+  String CLASS_TITLE = "DataEntity";
 
   /**
    * This method gets the proxy-source of this object. If the

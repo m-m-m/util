@@ -19,7 +19,7 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
  * @since 1.0.0
  */
 @MappedSuperclass
-@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_NAME, //
+@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_TITLE, //
 groupId = DataClassGroupRoot.GROUP_ID, groupVersion = DataClassGroupRoot.GROUP_VERSION)
 public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<Long> implements
     DataObject {
@@ -29,6 +29,9 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
 
   /** @see #getTitle() */
   private String title;
+
+  /** @see #getDeletedFlag() */
+  private boolean deletedFlag;
 
   /**
    * The constructor.
@@ -119,6 +122,60 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   protected void setTitle(String title) {
 
     this.title = title;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean getDeletedFlag() {
+
+    return this.deletedFlag;
+  }
+
+  /**
+   * This method sets the {@link #isDeleted() deleted} flag.
+   * 
+   * @param deleted - if <code>true</code> the object will be marked as deleted.
+   */
+  public void setDeletedFlag(boolean deleted) {
+
+    this.deletedFlag = deleted;
+  }
+
+  /**
+   * TODO
+   * 
+   * @return
+   */
+  @Transient
+  protected DataObject getParent() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   * 
+   * <b>ATTENTION:</b><br>
+   * This field/method is logically
+   * {@link net.sf.mmm.data.api.reflection.DataFieldAnnotation#isInheritedFromParent()
+   * inherited} but NOT annotated with <code>isInherited = true</code>. This
+   * feature is programmatically implemented since it is required at a very low
+   * level.
+   */
+  @Transient
+  public boolean isDeleted() {
+
+    if (this.deletedFlag) {
+      return true;
+    } else {
+      DataObject parent = getParent();
+      if (parent == null) {
+        return false;
+      } else {
+        return parent.isDeleted();
+      }
+    }
   }
 
   /**

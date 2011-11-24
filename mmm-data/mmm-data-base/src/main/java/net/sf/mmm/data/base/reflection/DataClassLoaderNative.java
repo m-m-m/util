@@ -235,7 +235,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass loadClasses() {
+  public AbstractDataClass<? extends DataObject> loadClasses() {
 
     Context context = new Context();
     parseConfiguration(context);
@@ -292,11 +292,12 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
       boolean isSystem = false;
       boolean isFinal = Modifier.isFinal(modifiers);
       boolean isAbstract = Modifier.isAbstract(modifiers);
-      boolean isExtendable;
+      boolean isExtendable = !isFinal;
       if (isSystem) {
-        isExtendable = contentClassAnnotation.isExtendable();
-      } else {
-        isExtendable = !isFinal;
+        Boolean extendable = contentClassAnnotation.isExtendable().getValue();
+        if (extendable != null) {
+          isExtendable = extendable.booleanValue();
+        }
       }
       DataClassModifiers contentClassModifiers = DataClassModifiersBean.getInstance(isSystem,
           isFinal, isAbstract, isExtendable);

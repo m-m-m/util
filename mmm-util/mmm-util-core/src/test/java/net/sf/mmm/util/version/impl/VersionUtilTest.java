@@ -24,7 +24,7 @@ public class VersionUtilTest {
    * 
    * @return the {@link VersionUtil} instance.
    */
-  public VersionUtil getVersionIdentifierUtil() {
+  public VersionUtil getVersionUtil() {
 
     return VersionUtilImpl.getInstance();
   }
@@ -39,7 +39,7 @@ public class VersionUtilTest {
    */
   protected VersionIdentifier parseVersion(String versionString) {
 
-    VersionIdentifier result = getVersionIdentifierUtil().createVersionIdentifier(versionString);
+    VersionIdentifier result = getVersionUtil().createVersionIdentifier(versionString);
 
     return result;
   }

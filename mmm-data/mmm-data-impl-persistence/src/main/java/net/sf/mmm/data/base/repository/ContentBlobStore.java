@@ -3,8 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.repository;
 
+import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.datatype.MutableBlob;
-import net.sf.mmm.data.resource.api.ContentFile;
+import net.sf.mmm.data.api.entity.resource.DataFile;
 
 /**
  * TODO: this class ...
@@ -14,10 +15,10 @@ import net.sf.mmm.data.resource.api.ContentFile;
  */
 public interface ContentBlobStore {
 
-  MutableBlob createBlob(SmartId id, ContentFile file);
+  MutableBlob createBlob(DataId id, DataFile file);
 
-  MutableBlob createBlob(SmartId id, int blobRevision);
+  MutableBlob createBlob(DataId id, int blobRevision);
 
-  void destoryBlob(SmartId id, int blobRevision);
+  void destoryBlob(DataId id, int blobRevision);
 
 }

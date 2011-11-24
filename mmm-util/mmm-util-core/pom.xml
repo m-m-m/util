@@ -175,7 +175,7 @@
       <artifactId>mmm-test</artifactId>
       <version>SNAPSHOT</version>
       <scope>test</scope>
-    </dependency>        
+    </dependency>
   </dependencies>
   
   <reporting>

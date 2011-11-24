@@ -3,11 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.resource;
 
-import net.sf.mmm.data.api.DataSelectionTree;
+import net.sf.mmm.data.api.DataNode;
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldIds;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 
 /**
  * This is the interface for a <em>resource</em>. A resource is a
@@ -19,14 +20,20 @@ import net.sf.mmm.data.api.reflection.DataFieldIds;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataEntityResource.CLASS_ID)
-public interface DataEntityResource extends DataEntity, DataSelectionTree<DataEntityResource> {
+@DataClassAnnotation(id = DataEntityResource.CLASS_ID, title = DataEntityResource.CLASS_TITLE, isExtendable = BooleanEnum.FALSE)
+public interface DataEntityResource extends DataEntity, DataNode<DataFolder> {
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
    */
   int CLASS_ID = 11;
+
+  /**
+   * The {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
+   * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
+   */
+  String CLASS_TITLE = "DataEntityResource";
 
   /**
    * the separator used for the {@link #getPath() path}

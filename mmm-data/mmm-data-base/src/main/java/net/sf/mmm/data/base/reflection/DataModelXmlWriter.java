@@ -66,7 +66,7 @@ public class DataModelXmlWriter {
   public void writeField(DataField<? extends DataObject, ?> contentField, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
-    xmlWriter.writeStartElement(DataField.CLASS_NAME);
+    xmlWriter.writeStartElement(DataField.CLASS_TITLE);
     writeReflectionObject(contentField, xmlWriter);
     String type = contentField.getFieldType().toString();
     xmlWriter.writeAttribute(DataField.FIELD_NAME_FIELD_TYPE, type);
@@ -103,7 +103,7 @@ public class DataModelXmlWriter {
   public void writeClass(DataClass<? extends DataObject> contentClass, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
-    xmlWriter.writeStartElement(DataClass.CLASS_NAME);
+    xmlWriter.writeStartElement(DataClass.CLASS_TITLE);
     writeReflectionObject(contentClass, xmlWriter);
     DataClassModifiers modifiers = contentClass.getModifiers();
     if (modifiers.isSystem()) {

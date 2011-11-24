@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
@@ -81,6 +83,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
+  @Transient
   public AbstractDataClass<? extends DataObject> getParent() {
 
     return getSuperClass();

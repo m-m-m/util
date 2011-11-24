@@ -10,7 +10,10 @@ import javax.persistence.Table;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataField;
+import net.sf.mmm.data.api.reflection.DataFieldModifiers;
 import net.sf.mmm.data.base.reflection.AbstractDataField;
+
+import org.hibernate.annotations.Type;
 
 /**
  * This is the implementation of the
@@ -26,7 +29,7 @@ import net.sf.mmm.data.base.reflection.AbstractDataField;
  */
 @Entity
 @Table(name = "DATA_FIELD")
-@DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_NAME)
+@DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_TITLE)
 public final class DataFieldImpl<CLASS extends DataObject, FIELD> extends
     AbstractDataField<CLASS, FIELD> {
 
@@ -39,6 +42,16 @@ public final class DataFieldImpl<CLASS extends DataObject, FIELD> extends
   public DataFieldImpl() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @Type(type = "net.sf.mmm.data.impl.datatype.usertype.DataFieldModifiersUserType")
+  public DataFieldModifiers getModifiers() {
+
+    return super.getModifiers();
   }
 
   /**

@@ -139,7 +139,11 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
 
     if (returnedClass().isEnum()) {
       for (T enumValue : returnedClass().getEnumConstants()) {
-        if (enumValue.getValue().equals(value)) {
+        if (value == null) {
+          if (enumValue.getValue() == null) {
+            return enumValue;
+          }
+        } else if (value.equals(enumValue.getValue())) {
           return enumValue;
         }
       }

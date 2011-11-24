@@ -114,10 +114,10 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
    */
   protected void initializeJavaClassMap(Map<String, Class<? extends DataObject>> name2javaClass) {
 
-    name2javaClass.put(DataObject.CLASS_NAME, DataObject.class);
-    name2javaClass.put(DataReflectionObject.CLASS_NAME, DataReflectionObject.class);
-    name2javaClass.put(DataClass.CLASS_NAME, DataClass.class);
-    name2javaClass.put(DataField.CLASS_NAME, DataField.class);
+    name2javaClass.put(DataObject.CLASS_TITLE, DataObject.class);
+    name2javaClass.put(DataReflectionObject.CLASS_TITLE, DataReflectionObject.class);
+    name2javaClass.put(DataClass.CLASS_TITLE, DataClass.class);
+    name2javaClass.put(DataField.CLASS_TITLE, DataField.class);
   }
 
   /**

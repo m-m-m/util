@@ -6,6 +6,7 @@ package net.sf.mmm.data.api;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldIds;
+import net.sf.mmm.util.collection.api.Node;
 
 /**
  * This is the interface for a {@link DataObject} that has a
@@ -17,12 +18,11 @@ import net.sf.mmm.data.api.reflection.DataFieldIds;
  * @since 1.0.0
  */
 @DataClassAnnotation(id = DataNode.CLASS_ID)
-public abstract interface DataNode<NODE extends DataObject> extends DataObject {
+public abstract interface DataNode<NODE extends DataObject> extends DataObject, Node<NODE> {
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * of the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
-   * this type.
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
+   * the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
    */
   int CLASS_ID = 2;
 

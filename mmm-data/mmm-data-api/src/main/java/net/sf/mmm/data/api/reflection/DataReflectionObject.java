@@ -16,15 +16,9 @@ import net.sf.mmm.data.api.DataSelection;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataReflectionObject.CLASS_ID, title = DataReflectionObject.CLASS_NAME)
+@DataClassAnnotation(id = DataReflectionObject.CLASS_ID, title = DataReflectionObject.CLASS_TITLE)
 public abstract interface DataReflectionObject<CLASS> extends
     DataNode<DataClass<? extends DataObject>>, DataSelection {
-
-  /**
-   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
-   * {@link DataClass} reflecting this type.
-   */
-  String CLASS_NAME = "ContentReflectionObject";
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
@@ -33,48 +27,16 @@ public abstract interface DataReflectionObject<CLASS> extends
   short CLASS_ID = 10;
 
   /**
+   * The {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
+   * {@link DataClass} reflecting this type.
+   */
+  String CLASS_TITLE = "DataReflectionObject";
+
+  /**
    * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
    * {@link #getModifiers() modifiers} for generic access.
    */
   String FIELD_NAME_MODIFIERS = "contentModifiers";
-
-  /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
-   * {@link #getDeletedFlag() deletedFlag} for generic access.
-   */
-  String FIELD_NAME_DELETEDFLAG = "deletedFlag";
-
-  /**
-   * The deleted-flag is inherited so {@link #isDeleted()} will return
-   * <code>true</code> if a {@link #getParent() parent object} is marked as
-   * deleted.<br>
-   * This method gets the deleted flag of this object. The method does not
-   * inherit the flag.
-   * 
-   * @see #isDeleted()
-   * 
-   * @return the deleted flag.
-   */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DELETEDFLAG, title = FIELD_NAME_DELETEDFLAG, isFinal = true)
-  boolean getDeletedFlag();
-
-  /**
-   * This method determines if this content-object is marked as deleted. The
-   * deleted status is like {@link Deprecated deprecation} in java.<br>
-   * A deleted object can NOT be modified. No instances or sub-classes can be
-   * created of a deleted class. Deleted fields are NOT visible in the editor.
-   * If an object is deleted it can either be undeleted or destroyed (if a
-   * {@link net.sf.mmm.data.api.reflection.DataClass} is destroyed then all
-   * instances will be removed from the persistence store).<br>
-   * Like deprecation a deletion is inherited from the {@link #getParent()
-   * parent}.
-   * 
-   * @see #getDeletedFlag()
-   * 
-   * @return <code>true</code> if this object is marked as deleted.
-   */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DELETED, isTransient = true)
-  boolean isDeleted();
 
   /**
    * This method gets the java-class of the reflected object. The &lt;CLASS&gt;

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import java.io.Serializable;
+import net.sf.mmm.util.lang.api.Datatype;
 
 /**
  * This is the interface for the modifiers of a
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface DataModifiers extends Serializable {
+public abstract interface DataModifiers extends Datatype<String> {
 
   /**
    * the attribute for the {@link #isSystem() system-flag}.

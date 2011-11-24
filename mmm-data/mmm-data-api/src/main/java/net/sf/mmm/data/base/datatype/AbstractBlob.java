@@ -8,19 +8,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import net.sf.mmm.data.api.datatype.Blob;
-import net.sf.mmm.data.api.datatype.MutableBlob;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.api.StreamUtil;
 
 /**
- * This is the abstract base implementation of the {@link MutableBlob}
- * interface.
+ * This is the abstract base implementation of the {@link Blob} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractBlob implements MutableBlob {
+public abstract class AbstractBlob implements Blob {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 5684175543293788598L;
@@ -40,25 +38,30 @@ public abstract class AbstractBlob implements MutableBlob {
   }
 
   /**
+   * @return the streamUtil
+   */
+  protected StreamUtil getStreamUtil() {
+
+    return this.streamUtil;
+  }
+
+  /**
    * {@inheritDoc}
    */
-  public void writeData(InputStream inputStream, boolean append) {
+  public void streamData(OutputStream outStream) {
 
+    streamData(outStream, 0);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void streamData(OutputStream outStream, long offset) throws RuntimeIoException {
+
+    InputStream inputStream = getReadAccess(offset);
     try {
-      OutputStream outputStream = null;
-      try {
-        outputStream = getWriteAccess(append);
-        // long bytesWritten =
-        this.streamUtil.transfer(inputStream, outputStream, false);
-      } finally {
-        try {
-          inputStream.close();
-        } finally {
-          if (outputStream != null) {
-            outputStream.close();
-          }
-        }
-      }
+      // copy from input stream to ouput
+      this.streamUtil.transfer(inputStream, outStream, true);
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.COPY);
     }
@@ -67,14 +70,14 @@ public abstract class AbstractBlob implements MutableBlob {
   /**
    * {@inheritDoc}
    */
-  public void streamData(OutputStream outStream) {
+  public InputStream getReadAccess(long offset) throws RuntimeIoException {
 
-    InputStream inputStream = getReadAccess();
     try {
-      // copy from input stream to ouput
-      this.streamUtil.transfer(inputStream, outStream, true);
+      InputStream inputStream = getReadAccess();
+      inputStream.skip(offset);
+      return inputStream;
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.COPY);
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 

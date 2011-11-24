@@ -10,6 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 
 /**
  * This annotation is used to mark a java {@link Class type} as a particular
@@ -51,11 +52,11 @@ public @interface DataClassAnnotation {
   /**
    * The
    * {@link net.sf.mmm.data.api.reflection.DataClassModifiers#isExtendable()
-   * extendable} flag of a
+   * extendable} flag. May only be set for
    * {@link net.sf.mmm.data.api.reflection.DataClassModifiers#isSystem()
-   * system-class}. Ignored in all other cases.
+   * system-class} otherwise set to the negation of {@link #isFinal() final}.
    */
-  boolean isExtendable() default false;
+  BooleanEnum isExtendable() default BooleanEnum.NULL;
 
   /**
    * The {@link net.sf.mmm.data.api.reflection.DataClassModifiers#isFinal()

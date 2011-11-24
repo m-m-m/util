@@ -6,6 +6,7 @@ package net.sf.mmm.data.base.reflection;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataReflectionObject;
 import net.sf.mmm.data.base.AbstractDataObject;
@@ -26,9 +27,6 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   /** UID for serialization. */
   private static final long serialVersionUID = 1971525692050639234L;
 
-  /** @see #getDeletedFlag() */
-  private boolean deletedFlag;
-
   /**
    * The constructor.
    */
@@ -36,6 +34,13 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
 
     super();
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @Transient
+  public abstract DataClass<? extends DataObject> getParent();
 
   /**
    * {@inheritDoc}
@@ -62,49 +67,6 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   protected void setTitle(String title) {
 
     super.setTitle(title);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean getDeletedFlag() {
-
-    return this.deletedFlag;
-  }
-
-  /**
-   * This method sets the {@link #isDeleted() deleted} flag.
-   * 
-   * @param deleted - if <code>true</code> the object will be marked as deleted.
-   */
-  protected void setDeletedFlag(boolean deleted) {
-
-    this.deletedFlag = deleted;
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * <b>ATTENTION:</b><br>
-   * This field/method is logically
-   * {@link net.sf.mmm.data.api.reflection.DataFieldAnnotation#isInheritedFromParent()
-   * inherited} but NOT annotated with <code>isInherited = true</code>. This
-   * feature is programmatically implemented since it is required at a very low
-   * level.
-   */
-  @Transient
-  public boolean isDeleted() {
-
-    if (this.deletedFlag) {
-      return true;
-    } else {
-      DataClass<?> parent = getParent();
-      if (parent == null) {
-        return false;
-      } else {
-        return parent.isDeleted();
-      }
-    }
   }
 
 }

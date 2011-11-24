@@ -10,16 +10,20 @@ import javax.annotation.Resource;
 import net.sf.mmm.data.api.DataException;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.entity.resource.DataEntityResource;
+import net.sf.mmm.data.api.entity.resource.DataFolder;
 import net.sf.mmm.data.api.reflection.DataClass;
-import net.sf.mmm.data.api.reflection.DataReflectionException;
-import net.sf.mmm.data.api.repository.DataObjectWrongTypeException;
 import net.sf.mmm.data.api.repository.DataRepository;
 import net.sf.mmm.data.base.AbstractDataObject;
+import net.sf.mmm.data.base.entity.resource.AbstractDataFolder;
 import net.sf.mmm.data.base.reflection.AbstractMutableDataReflectionService;
 import net.sf.mmm.data.resource.api.ContentResource;
-import net.sf.mmm.data.resource.base.AbstractDataResource;
-import net.sf.mmm.data.resource.base.AbstractDataResource.AbstractDataResourceModifier;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.CastFailedException;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the abstract base implementation of the {@link DataRepository}
@@ -28,14 +32,14 @@ import net.sf.mmm.util.reflect.api.CastFailedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataRepository extends AbstractDataResourceModifier implements
+public abstract class AbstractDataRepository extends AbstractLoggableComponent implements
     DataRepository {
 
   /** @see #getReflectionService() */
   private AbstractMutableDataReflectionService contentModel;
 
   /** @see #getRootFolder() */
-  private AbstractDataObject rootFolder;
+  private AbstractDataFolder rootFolder;
 
   /**
    * The constructor.
@@ -48,7 +52,7 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
   /**
    * {@inheritDoc}
    */
-  public AbstractDataObject getRootFolder() {
+  public AbstractDataFolder getRootFolder() {
 
     return this.rootFolder;
   }
@@ -56,11 +60,9 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
   /**
    * @param rootFolder the {@link #getRootFolder() rootFolder} to set.
    */
-  public void setRootFolder(AbstractDataObject rootFolder) {
+  public void setRootFolder(AbstractDataFolder rootFolder) {
 
     this.rootFolder = rootFolder;
-    setContentObjectClassAccess(this.rootFolder, getReflectionService());
-
   }
 
   /**
@@ -81,7 +83,7 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
     try {
       return entityClass.cast(object);
     } catch (ClassCastException e) {
-      throw new DataObjectWrongTypeException(e, object, entityClass.toString());
+      throw new CastFailedException(e, object, object.getClass(), entityClass);
     }
   }
 
@@ -96,7 +98,8 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
   /**
    * {@inheritDoc}
    */
-  public <E extends DataObject> E getByPath(String path, Class<E> entityClass) throws DataException {
+  public <E extends DataEntityResource> E getByPath(String path, Class<E> entityClass)
+      throws DataException {
 
     return cast(getByPath(path), entityClass);
   }
@@ -110,7 +113,8 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
   }
 
   /**
-   * @param contentModel the {@link #getReflectionService() content-model} to set.
+   * @param contentModel the {@link #getReflectionService() content-model} to
+   *        set.
    */
   @Resource
   public void setContentModel(AbstractMutableDataReflectionService contentModel) {
@@ -121,42 +125,38 @@ public abstract class AbstractDataRepository extends AbstractDataResourceModifie
   /**
    * {@inheritDoc}
    */
-  public <E extends ContentResource> E getRawObject(E entity) throws DataException {
+  public DataEntityResource getByPath(String path) throws DataException {
 
-    AbstractDataResource object = (AbstractDataResource) entity;
-    object = object.getRawObject();
-    return (E) object;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public DataObject getByPath(String path) throws DataException {
-
-    AbstractDataObject object = getRootFolder();
+    DataFolder folder = getRootFolder();
     // use smart query on persistent store (recursive SQL)?
     // TODO: create Parser for Path
-    StringTokenizer st = new StringTokenizer(path, DataObject.PATH_SEPARATOR);
+    DataEntityResource child = folder;
+    StringTokenizer st = new StringTokenizer(path, DataEntityResource.PATH_SEPARATOR);
     while (st.hasMoreTokens()) {
       String segment = st.nextToken();
-      object = object.getChild(segment);
-      if (object == null) {
-        // TODO: lookup in DB?
+      child = folder.getChild(segment);
+      if (child == null) {
         // TODO: return null instead?
-        throw new ContentObjectNotExistsException(path);
+        throw new ObjectNotFoundException(DataEntityResource.class, path);
+      } else if (child instanceof DataFolder) {
+        folder = (DataFolder) child;
+      } else if (st.hasMoreElements()) {
+        throw new ObjectMismatchException(child, DataFolder.class, path);
       }
     }
-    return object;
+    return child;
   }
 
-  protected DataObject createInstance(DataClass contentClass) throws DataException {
+  protected DataObject createInstance(DataClass<? extends DataObject> dataClass)
+      throws DataException {
 
     DataObject object;
     try {
-      object = contentClass.getJavaClass().newInstance();
-    } catch (Exception e) {
-      throw new DataReflectionException(e, "Failed to create instance of class \"{0}\"!",
-          contentClass);
+      object = dataClass.getJavaClass().newInstance();
+    } catch (InstantiationException e) {
+      throw new InstantiationFailedException(e, dataClass.getJavaClass());
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, dataClass.getJavaClass());
     }
     return object;
   }

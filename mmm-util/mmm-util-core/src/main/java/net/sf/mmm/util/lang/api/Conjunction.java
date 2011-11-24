@@ -6,8 +6,8 @@ package net.sf.mmm.util.lang.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A conjunction represents a function that maps a list of boolean arguments to
- * one boolean result.
+ * A {@link Conjunction} represents a function that maps a list of boolean
+ * arguments to one boolean result.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

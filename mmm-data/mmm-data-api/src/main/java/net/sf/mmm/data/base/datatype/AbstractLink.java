@@ -1,0 +1,85 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.data.base.datatype;
+
+import net.sf.mmm.data.api.datatype.Link;
+import net.sf.mmm.data.api.entity.DataEntity;
+
+/**
+ * This is the abstract base implementation of the {@link Link} interface.
+ * 
+ * @param <CLASS> is the type of the linked object. See
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
+ */
+public abstract class AbstractLink<CLASS extends DataEntity> implements Link<CLASS> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 8830581540069493211L;
+
+  /** @see #getClassifier() */
+  private String classifier;
+
+  /**
+   * The constructor.
+   */
+  public AbstractLink() {
+
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public CLASS getValue() {
+
+    return getTarget();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getClassifier() {
+
+    return this.classifier;
+  }
+
+  /**
+   * @param classifier is the classifier to set
+   */
+  protected void setClassifier(String classifier) {
+
+    this.classifier = classifier;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getTitle() {
+
+    StringBuilder buffer = new StringBuilder();
+    buffer.append("link");
+    if (this.classifier != null) {
+      buffer.append('<');
+      buffer.append(this.classifier);
+      buffer.append('>');
+    }
+    buffer.append(": ");
+    buffer.append(getTarget().getId());
+    return buffer.toString();
+  }
+
+  /**
+   * NOTE: Override {@link #getTitle()} instead of this method.<br/>
+   * 
+   * {@inheritDoc}
+   */
+  @Override
+  public final String toString() {
+
+    return getTitle();
+  }
+
+}

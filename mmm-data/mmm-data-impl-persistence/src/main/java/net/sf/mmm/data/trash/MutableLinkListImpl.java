@@ -6,6 +6,9 @@ package net.sf.mmm.data.trash;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.sf.mmm.data.api.datatype.Link;
+import net.sf.mmm.data.base.AbstractLinkList;
+
 
 /**
  * This is the default implementation of the {@link MutableLinkList} interface.

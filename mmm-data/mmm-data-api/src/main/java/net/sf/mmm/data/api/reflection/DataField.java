@@ -30,16 +30,16 @@ public interface DataField<CLASS extends DataObject, FIELD> extends DataReflecti
     DataFieldAccessor<CLASS, FIELD>, DataSelectionTreeList<DataClass<? extends DataObject>> {
 
   /**
-   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
-   * {@link DataClass} reflecting this type.
-   */
-  String CLASS_NAME = "ContentField";
-
-  /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link DataClass} reflecting this type.
    */
   short CLASS_ID = 3;
+
+  /**
+   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
+   * {@link DataClass} reflecting this type.
+   */
+  String CLASS_TITLE = "DataField";
 
   /** the xml tag for a {@link DataField}. */
   String XML_TAG_FIELD = "Field";

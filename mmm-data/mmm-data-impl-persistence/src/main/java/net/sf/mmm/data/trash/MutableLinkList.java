@@ -3,6 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.trash;
 
+import net.sf.mmm.data.api.LinkList;
+import net.sf.mmm.data.api.datatype.Link;
+
 
 /**
  * This is the interface for a {@link LinkList} that can be modified.

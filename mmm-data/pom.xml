@@ -19,6 +19,9 @@
     <module>mmm-data-api</module>
     <module>mmm-data-base</module>
     <module>mmm-data-impl-persistence</module>
+    <module>mmm-data-entity-pim-api</module>
+    <module>mmm-data-entity-audio-api</module>
+    <module>mmm-data-entity-video-api</module>
   </modules>
   
   <dependencies>

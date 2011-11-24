@@ -20,7 +20,6 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
 import net.sf.mmm.util.reflect.api.Signature;
 
 import org.hibernate.envers.AuditReader;
-import org.hibernate.envers.AuditReaderFactory;
 
 /**
  * This is the abstract base-implementation of a
@@ -85,7 +84,7 @@ public abstract class EnversPersistenceEntityManager<ID, ENTITY extends Revision
 
     super.doInitialize();
     if (this.auditReader == null) {
-      this.auditReader = AuditReaderFactory.get(getEntityManager());
+      // this.auditReader = AuditReaderFactory.get(getEntityManager());
     }
     Method fallback = null;
     if (this.setRevisionMethod == null) {
