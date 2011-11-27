@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.impl.datatype;
+package net.sf.mmm.data.impl.link;
 
 import java.util.Date;
 
@@ -12,20 +12,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.entity.DataEntity;
-import net.sf.mmm.data.base.datatype.AbstractLink;
 import net.sf.mmm.data.base.entity.AbstractDataEntity;
+import net.sf.mmm.data.base.link.AbstractLink;
 import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is the implementation of {@link net.sf.mmm.data.api.datatype.Link}.
+ * This is the implementation of {@link net.sf.mmm.data.api.link.Link}.
  * 
+ * @param <TARGET> is the type of the linked {@link #getTarget() target entity}.
+ *        See {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Entity(name = "DataEntiyLink")
-public class LinkImpl extends AbstractLink<AbstractDataEntity> implements PersistenceEntity<Long> {
+public class LinkImpl<TARGET extends AbstractDataEntity> extends AbstractLink<TARGET> implements
+    PersistenceEntity<Long> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3818102518986171086L;
@@ -33,11 +35,17 @@ public class LinkImpl extends AbstractLink<AbstractDataEntity> implements Persis
   /** @see #getId() */
   private Long id;
 
+  /** @see #getFieldId() */
+  private long fieldId;
+
+  /** @see #getSortIndex() */
+  private int sortIndex;
+
   /** @see #getSource() */
   private AbstractDataEntity source;
 
   /** @see #getTarget() */
-  private AbstractDataEntity target;
+  private TARGET target;
 
   /**
    * The constructor.
@@ -51,14 +59,17 @@ public class LinkImpl extends AbstractLink<AbstractDataEntity> implements Persis
    * The constructor.
    * 
    * @param source is the {@link #getSource() linking entity}.
+   * @param fieldId is the {@link #getFieldId() field ID}.
    * @param target is the {@link #getTarget() linked entity}.
    * @param classifier is the {@link #getClassifier() classifier}. May be
    *        <code>null</code>.
    */
-  public LinkImpl(AbstractDataEntity source, AbstractDataEntity target, String classifier) {
+  public LinkImpl(AbstractDataEntity source, long fieldId, TARGET target, String classifier) {
 
     super();
-    NlsNullPointerException.checkNotNull(DataEntity.class, target);
+    NlsNullPointerException.checkNotNull("sourceEntity", source);
+    NlsNullPointerException.checkNotNull("targetEntity", target);
+    this.fieldId = fieldId;
     this.target = target;
     setClassifier(classifier);
   }
@@ -79,6 +90,43 @@ public class LinkImpl extends AbstractLink<AbstractDataEntity> implements Persis
   protected void setId(Long id) {
 
     this.id = id;
+  }
+
+  /**
+   * This method gets the
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() ID} of the
+   * {@link net.sf.mmm.data.api.reflection.DataField} containing this link
+   * (typically in a {@link net.sf.mmm.data.api.link.LinkList}).
+   * 
+   * @return the field ID.
+   */
+  public long getFieldId() {
+
+    return this.fieldId;
+  }
+
+  /**
+   * @param fieldId is the fieldId to set
+   */
+  protected void setFieldId(long fieldId) {
+
+    this.fieldId = fieldId;
+  }
+
+  /**
+   * @return the sortIndex
+   */
+  public int getSortIndex() {
+
+    return this.sortIndex;
+  }
+
+  /**
+   * @param sortIndex is the sortIndex to set
+   */
+  protected void setSortIndex(int sortIndex) {
+
+    this.sortIndex = sortIndex;
   }
 
   /**
@@ -121,7 +169,7 @@ public class LinkImpl extends AbstractLink<AbstractDataEntity> implements Persis
   /**
    * @param source is the source to set
    */
-  public void setSource(AbstractDataEntity source) {
+  protected void setSource(AbstractDataEntity source) {
 
     this.source = source;
   }
@@ -129,9 +177,9 @@ public class LinkImpl extends AbstractLink<AbstractDataEntity> implements Persis
   /**
    * {@inheritDoc}
    */
-  @ManyToOne(optional = false)
+  @ManyToOne(optional = false, targetEntity = AbstractDataEntity.class)
   @PrimaryKeyJoinColumn(name = "Target_ID")
-  public AbstractDataEntity getTarget() {
+  public TARGET getTarget() {
 
     return this.target;
   }
@@ -139,7 +187,7 @@ public class LinkImpl extends AbstractLink<AbstractDataEntity> implements Persis
   /**
    * @param target is the target to set
    */
-  protected void setTarget(AbstractDataEntity target) {
+  protected void setTarget(TARGET target) {
 
     this.target = target;
   }

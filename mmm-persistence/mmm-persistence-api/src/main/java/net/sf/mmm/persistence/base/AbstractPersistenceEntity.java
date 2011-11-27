@@ -28,7 +28,7 @@ public abstract class AbstractPersistenceEntity<ID> implements PersistenceEntity
    */
   public boolean isPersistent() {
 
-    return (getId() != null);
+    return (getModificationTimestamp() != null);
   }
 
 }

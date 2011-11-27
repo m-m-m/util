@@ -4,7 +4,7 @@
 package net.sf.mmm.data.trash;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.datatype.Link;
+import net.sf.mmm.data.api.link.Link;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**

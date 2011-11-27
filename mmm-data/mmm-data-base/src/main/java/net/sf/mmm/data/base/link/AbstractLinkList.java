@@ -1,26 +1,27 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.base;
+package net.sf.mmm.data.base.link;
 
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.mmm.data.api.LinkList;
-import net.sf.mmm.data.api.datatype.Link;
 import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.link.Link;
+import net.sf.mmm.data.api.link.LinkList;
 import net.sf.mmm.util.collection.base.FilteredIterator;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
  * This is the abstract base implementation of the {@link LinkList} interface.
  * 
- * @param <CLASS> is the type of the linked object. See
+ * @param <TARGET> is the type of the linked {@link Link#getTarget() target
+ *        entity}. See
  *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractLinkList<CLASS extends DataEntity> implements LinkList<CLASS> {
+public abstract class AbstractLinkList<TARGET extends DataEntity> implements LinkList<TARGET> {
 
   /**
    * The constructor.
@@ -35,7 +36,7 @@ public abstract class AbstractLinkList<CLASS extends DataEntity> implements Link
    * 
    * @return the {@link List} of {@link Link}s.
    */
-  protected abstract List<Link<CLASS>> getLinkList();
+  protected abstract List<Link<TARGET>> getLinkList();
 
   /**
    * {@inheritDoc}
@@ -48,7 +49,7 @@ public abstract class AbstractLinkList<CLASS extends DataEntity> implements Link
   /**
    * {@inheritDoc}
    */
-  public Link<CLASS> getLink(int index) {
+  public Link<TARGET> getLink(int index) {
 
     return getLinkList().get(index);
   }
@@ -56,7 +57,7 @@ public abstract class AbstractLinkList<CLASS extends DataEntity> implements Link
   /**
    * {@inheritDoc}
    */
-  public Iterator<Link<CLASS>> iterator() {
+  public Iterator<Link<TARGET>> iterator() {
 
     return getLinks();
   }
@@ -64,7 +65,7 @@ public abstract class AbstractLinkList<CLASS extends DataEntity> implements Link
   /**
    * {@inheritDoc}
    */
-  public Iterator<Link<CLASS>> getLinks() {
+  public Iterator<Link<TARGET>> getLinks() {
 
     return getLinkList().iterator();
   }
@@ -72,9 +73,10 @@ public abstract class AbstractLinkList<CLASS extends DataEntity> implements Link
   /**
    * {@inheritDoc}
    */
-  public Iterator<Link<CLASS>> getLinks(Filter<Link<CLASS>> filter) {
+  public Iterator<Link<TARGET>> getLinks(Filter<Link<TARGET>> filter) {
 
-    return new FilteredIterator<Link<CLASS>>(getLinks(), filter);
+    Iterator<Link<TARGET>> iterator = getLinks();
+    return new FilteredIterator<Link<TARGET>>(iterator, filter);
   }
 
 }

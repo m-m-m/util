@@ -3,13 +3,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.base.AbstractDataObject;
+import net.sf.mmm.data.impl.link.LinkImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -29,12 +34,32 @@ public abstract class AbstractDataEntity extends AbstractDataObject implements D
   /** @see #getProxyTarget() */
   private AbstractDataEntity proxyTarget;
 
+  /** @see #getAllLinkList() */
+  private List<LinkImpl<AbstractDataEntity>> allLinkList;
+
   /**
    * The constructor.
    */
   public AbstractDataEntity() {
 
     super();
+  }
+
+  /**
+   * @return the allLinkList
+   */
+  @OneToMany(mappedBy = "Source_ID", orphanRemoval = true, cascade = CascadeType.ALL)
+  public List<LinkImpl<AbstractDataEntity>> getAllLinkList() {
+
+    return this.allLinkList;
+  }
+
+  /**
+   * @param allLinkList is the allLinkList to set
+   */
+  public void setAllLinkList(List<LinkImpl<AbstractDataEntity>> allLinkList) {
+
+    this.allLinkList = allLinkList;
   }
 
   /**

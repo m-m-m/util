@@ -5,8 +5,9 @@ package net.sf.mmm.data.api.entity.pim.contact;
 
 import java.util.List;
 
-import net.sf.mmm.data.api.LinkList;
 import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.link.Link;
+import net.sf.mmm.data.api.link.LinkList;
 
 /**
  * This is the interface for a {@link DataEntity} that represents a contact.
@@ -19,6 +20,18 @@ import net.sf.mmm.data.api.entity.DataEntity;
 public interface DataContact extends DataEntity {
 
   /**
+   * The {@link Link#getClassifier() classifier} of {@link #getRelatedPersons()
+   * related person} that is a spouse (husband or wife) or girl-/boy-friend.
+   */
+  String RELATED_PERSON_CLASSIFIER_PARTNER = "partner";
+
+  /**
+   * The {@link Link#getClassifier() classifier} of {@link #getRelatedPersons()
+   * related person} that is a spouse (husband or wife) or girl-/boy-friend.
+   */
+  String RELATED_PERSON_CLASSIFIER_RELATIVE = "relative";
+
+  /**
    * This method gets the {@link DataPerson person} associated with this
    * contact.
    * 
@@ -26,6 +39,11 @@ public interface DataContact extends DataEntity {
    */
   DataPerson getPerson();
 
+  /**
+   * This method gets the list of related persons.
+   * 
+   * @return
+   */
   LinkList<DataPerson> getRelatedPersons();
 
   LinkList<DataEmailAddress> getEmailAddresses();

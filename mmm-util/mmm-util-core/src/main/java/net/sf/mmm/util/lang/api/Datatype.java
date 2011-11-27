@@ -18,6 +18,13 @@ import java.io.Serializable;
  * {@link Integer}, {@link Double} and {@link java.util.Date}. They should
  * always be accepted and supported as datatypes (even though they do NOT
  * implement this interface).<br/>
+ * Even if a datatype is technically nothing but a {@link String} or a
+ * {@link Number} but logically something special it is worth to define it as a
+ * dedicated datatype class already for the purpose of having a central javadoc
+ * to explain it. On the other side avoid to introduce technical datatypes like
+ * <code>String32</code> for a {@link String} with a maximum length of 32
+ * characters as this is not adding value in the sense of a real
+ * {@link Datatype}.<br/>
  * A datatype needs proper implementations of {@link #equals(Object)} and
  * {@link #hashCode()}. It should probably also be {@link Comparable}.<br/>
  * If a datatype is <em>mutable</em> this should be documented with an according

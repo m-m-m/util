@@ -106,11 +106,12 @@ public abstract interface DataObject extends RevisionedPersistenceEntity<Long>,
   Long getId();
 
   /**
-   * This method gets the title (name) of this content-object. For objects of
-   * particular {@link net.sf.mmm.data.api.reflection.DataClass types} (e.g.
-   * {@link net.sf.mmm.data.api.reflection.DataClass} or
-   * {@link net.sf.mmm.data.api.reflection.DataField}) the title has to be
-   * unique. <br>
+   * This method gets the title (name) of this object. For objects of particular
+   * {@link net.sf.mmm.data.api.reflection.DataClass types} the title has to be
+   * unique either globally (e.g. for
+   * {@link net.sf.mmm.data.api.reflection.DataClass}) or within a set of
+   * siblings (e.g.
+   * {@link net.sf.mmm.data.api.entity.resource.DataEntityResource}).<br>
    * 
    * @return the title of this object.
    */

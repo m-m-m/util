@@ -4,6 +4,8 @@
 package net.sf.mmm.data.api.entity.pim.contact;
 
 import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.entity.pim.DataCountry;
+import net.sf.mmm.util.datatype.api.address.PostalCode;
 
 /**
  * This is the interface for a {@link net.sf.mmm.data.api.entity.DataEntity}
@@ -22,7 +24,7 @@ public interface DataAddress extends DataEntity {
    * 
    * @return the country or <code>null</code> if not defined.
    */
-  String getCountry();
+  DataCountry getCountry();
 
   // TODO Datatype?
   /**
@@ -67,19 +69,10 @@ public interface DataAddress extends DataEntity {
 
   // TODO Datatype?
   /**
-   * This method gets the postal code (also called zip code). This is an
-   * identifier of a region, city, or even a district within a
-   * {@link #getCountry() country}. Different {@link #getCountry() countries}
-   * have different systems for their postal codes. Some are numeric some are
-   * alphanumeric. In any case the postal codes aim to optimize the logistics of
-   * mail delivery and typically allow sorting mail for different regions. In
-   * most cases the {@link #getCity() city} can be determined from
-   * {@link #getCountry() country} and {@link #getPostalCode() postal code}.
-   * Please also note that some countries (e.g. Panama) do not have the concept
-   * of postal codes.
+   * This method gets the {@link PostalCode}.
    * 
-   * @return the postal code or <code>null</code> if not defined.
+   * @return the {@link PostalCode} or <code>null</code> if not defined.
    */
-  String getPostalCode();
+  PostalCode getPostalCode();
 
 }
