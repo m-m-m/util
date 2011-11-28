@@ -87,8 +87,9 @@ public abstract class EnversPersistenceEntityManager<ID, ENTITY extends Revision
       // this.auditReader = AuditReaderFactory.get(getEntityManager());
     }
     Method fallback = null;
-    if (this.setRevisionMethod == null) {
-      Method[] methods = getEntityClassImplementation().getMethods();
+    Class<?> entityClass = getEntityClassImplementation();
+    while ((this.setRevisionMethod == null) && (entityClass != Object.class)) {
+      Method[] methods = entityClass.getDeclaredMethods();
       for (Method method : methods) {
         if (SET_REVISION_METHOD_NAME.equals(method.getName())) {
           Class<?>[] parameterTypes = method.getParameterTypes();
@@ -103,13 +104,13 @@ public abstract class EnversPersistenceEntityManager<ID, ENTITY extends Revision
           }
         }
       }
+      entityClass = entityClass.getSuperclass();
     }
     if (this.setRevisionMethod == null) {
       this.setRevisionMethod = fallback;
     }
     if (this.setRevisionMethod == null) {
-      throw new RevisionedPersistenceEntityWithoutRevisionSetterException(
-          getEntityClassImplementation());
+      throw new RevisionedPersistenceEntityWithoutRevisionSetterException(entityClass);
     } else {
       if (!Modifier.isPublic(this.setRevisionMethod.getModifiers())) {
         this.setRevisionMethod.setAccessible(true);
