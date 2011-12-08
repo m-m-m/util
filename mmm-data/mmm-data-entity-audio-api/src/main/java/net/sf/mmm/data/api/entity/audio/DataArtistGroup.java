@@ -3,9 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.audio;
 
-import java.util.List;
-
 import net.sf.mmm.data.api.entity.pim.contact.DataPerson;
+import net.sf.mmm.data.api.link.MutableLinkList;
 
 /**
  * TODO: this class ...
@@ -13,8 +12,11 @@ import net.sf.mmm.data.api.entity.pim.contact.DataPerson;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataArtistGroup extends DataArtist {
+public interface DataArtistGroup extends DataArtistGroupView {
 
-  List<DataPerson> getArtists();
+  /**
+   * {@inheritDoc}
+   */
+  MutableLinkList<DataPerson> getArtists();
 
 }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.util.event.api.ChangeEvent;
 import net.sf.mmm.util.event.api.ChangeType;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.util.event.api.ChangeType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class DataReflectionEvent<CLASS extends DataObject> implements ChangeEvent {
+public final class DataReflectionEvent<CLASS extends DataObjectView> implements ChangeEvent {
 
   /** the type of the event */
   private final ChangeType type;

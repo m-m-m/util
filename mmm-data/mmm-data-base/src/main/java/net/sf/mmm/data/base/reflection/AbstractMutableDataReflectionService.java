@@ -12,7 +12,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
@@ -45,7 +45,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   private ClassResolver classResolver;
 
   /** @see #getTitle2JavaClassMap() */
-  private Map<String, Class<? extends DataObject>> title2JavaClassMap;
+  private Map<String, Class<? extends DataObjectView>> title2JavaClassMap;
 
   /**
    * The constructor.
@@ -75,7 +75,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   /**
    * @return the title2JavaClassMap
    */
-  public Map<String, Class<? extends DataObject>> getTitle2JavaClassMap() {
+  public Map<String, Class<? extends DataObjectView>> getTitle2JavaClassMap() {
 
     return this.title2JavaClassMap;
   }
@@ -83,7 +83,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   /**
    * @param title2JavaClassMap the title2JavaClassMap to set
    */
-  public void setTitle2JavaClassMap(Map<String, Class<? extends DataObject>> title2JavaClassMap) {
+  public void setTitle2JavaClassMap(Map<String, Class<? extends DataObjectView>> title2JavaClassMap) {
 
     this.title2JavaClassMap = title2JavaClassMap;
   }
@@ -95,7 +95,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   public void doInitialize() {
 
     if (this.title2JavaClassMap == null) {
-      Map<String, Class<? extends DataObject>> name2javaClass = new HashMap<String, Class<? extends DataObject>>();
+      Map<String, Class<? extends DataObjectView>> name2javaClass = new HashMap<String, Class<? extends DataObjectView>>();
       initializeJavaClassMap(name2javaClass);
       this.title2JavaClassMap = name2javaClass;
     }
@@ -112,9 +112,9 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
    * 
    * @param name2javaClass is the map to initialize.
    */
-  protected void initializeJavaClassMap(Map<String, Class<? extends DataObject>> name2javaClass) {
+  protected void initializeJavaClassMap(Map<String, Class<? extends DataObjectView>> name2javaClass) {
 
-    name2javaClass.put(DataObject.CLASS_TITLE, DataObject.class);
+    name2javaClass.put(DataObjectView.CLASS_TITLE, DataObjectView.class);
     name2javaClass.put(DataReflectionObject.CLASS_TITLE, DataReflectionObject.class);
     name2javaClass.put(DataClass.CLASS_TITLE, DataClass.class);
     name2javaClass.put(DataField.CLASS_TITLE, DataField.class);
@@ -157,7 +157,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   public Class<?> resolveClass(String name) {
 
     Class<?> result;
-    DataClass<? extends DataObject> dataClass = getDataClass(name);
+    DataClass<? extends DataObjectView> dataClass = getDataClass(name);
     if (dataClass == null) {
       result = this.classResolver.resolveClass(name);
     } else {
@@ -183,7 +183,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   /**
    * {@inheritDoc}
    */
-  public <CLASS extends DataObject> AbstractDataClass<? extends CLASS> createDataClass(
+  public <CLASS extends DataObjectView> AbstractDataClass<? extends CLASS> createDataClass(
       DataClass<CLASS> superClass, String title, DataClassModifiers modifiers)
       throws DataReflectionException {
 
@@ -206,7 +206,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
   /**
    * {@inheritDoc}
    */
-  public <CLASS extends DataObject, FIELD> DataField<CLASS, FIELD> createDataField(
+  public <CLASS extends DataObjectView, FIELD> DataField<CLASS, FIELD> createDataField(
       DataClass<CLASS> declaringClass, String title, GenericType<FIELD> type,
       DataFieldModifiers modifiers) throws DataReflectionException {
 
@@ -230,7 +230,7 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
    * {@inheritDoc}
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public void setDeleted(DataReflectionObject<? extends DataObject> classOrField,
+  public void setDeleted(DataReflectionObject<? extends DataObjectView> classOrField,
       boolean newDeletedFlag) throws DataReflectionException {
 
     requireEditableModel();
@@ -238,13 +238,13 @@ public abstract class AbstractMutableDataReflectionService extends AbstractDataR
       throw new DataSystemModifyException(classOrField);
     }
     // TODO: persist
-    AbstractDataReflectionObject<? extends DataObject> reflectionObject = (AbstractDataReflectionObject<? extends DataObject>) classOrField;
+    AbstractDataReflectionObject<? extends DataObjectView> reflectionObject = (AbstractDataReflectionObject<? extends DataObjectView>) classOrField;
     reflectionObject.setDeletedFlag(newDeletedFlag);
     if (classOrField.isDataClass()) {
-      fireEvent(new DataReflectionEvent((DataClass<? extends DataObject>) classOrField,
+      fireEvent(new DataReflectionEvent((DataClass<? extends DataObjectView>) classOrField,
           ChangeType.UPDATE));
     } else {
-      fireEvent(new DataReflectionEvent((DataField<? extends DataObject, ?>) classOrField,
+      fireEvent(new DataReflectionEvent((DataField<? extends DataObjectView, ?>) classOrField,
           ChangeType.UPDATE));
     }
   }

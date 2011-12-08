@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.event.api.EventListener;
@@ -46,6 +46,6 @@ public interface MutableDataReflectionService extends DataReflectionService,
    * 
    * @return the event registrar.
    */
-  EventSource<DataReflectionEvent<? extends DataObject>, EventListener<DataReflectionEvent<? extends DataObject>>> getEventSource();
+  EventSource<DataReflectionEvent<? extends DataObjectView>, EventListener<DataReflectionEvent<? extends DataObjectView>>> getEventSource();
 
 }

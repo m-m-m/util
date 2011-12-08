@@ -8,18 +8,19 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.persistence.impl.jpa.JpaRevisionedPersistenceEntity;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 
 /**
- * This is the implementation of the abstract entity {@link DataObject}.
+ * This is the implementation of the abstract entity {@link DataObjectView}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @MappedSuperclass
-@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_TITLE, //
+@DataClassAnnotation(id = DataObjectView.CLASS_ID, title = DataObjectView.CLASS_TITLE, //
 groupId = DataClassGroupRoot.GROUP_ID, groupVersion = DataClassGroupRoot.GROUP_VERSION)
 public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<Long> implements
     DataObject {
@@ -59,7 +60,7 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
    * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically
    * typed {@link net.sf.mmm.data.api.reflection.DataClass classes}.
    * 
-   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#getFieldValue(DataObject)
+   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#getFieldValue(DataObjectView)
    * 
    * @param field is the
    *        {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of
@@ -76,7 +77,7 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
    * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically
    * typed {@link net.sf.mmm.data.api.reflection.DataClass classes}.
    * 
-   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#setFieldValue(DataObject,
+   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#setFieldValue(DataObjectView,
    *      Object)
    * 
    * @param field is the
@@ -90,18 +91,6 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   }
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class ID}
-   * identifying the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
-   * this object.
-   * 
-   * @return the {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class
-   *         ID}.
-   */
-  @Transient
-  public abstract long getDataClassId();
-
-  /**
    * {@inheritDoc}
    */
   @Column(nullable = true)
@@ -111,15 +100,9 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   }
 
   /**
-   * This method sets the {@link #getTitle() title} of this object.<br>
-   * <b>ATTENTION:</b><br>
-   * This method should only be used internally. Especially this method can NOT
-   * be used to rename this entity. Therefore you have to use the
-   * {@link net.sf.mmm.data.api.repository.DataRepository}.
-   * 
-   * @param title the title to set.
+   * {@inheritDoc}
    */
-  protected void setTitle(String title) {
+  public void setTitle(String title) {
 
     this.title = title;
   }
@@ -133,9 +116,7 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   }
 
   /**
-   * This method sets the {@link #isDeleted() deleted} flag.
-   * 
-   * @param deleted - if <code>true</code> the object will be marked as deleted.
+   * {@inheritDoc}
    */
   public void setDeletedFlag(boolean deleted) {
 
@@ -143,12 +124,12 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
   }
 
   /**
-   * TODO
+   * This method gets the parent of this object.
    * 
-   * @return
+   * @return the parent or <code>null</code> if it has no parent.
    */
   @Transient
-  protected DataObject getParent() {
+  protected DataObjectView getParent() {
 
     return null;
   }
@@ -169,7 +150,7 @@ public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<
     if (this.deletedFlag) {
       return true;
     } else {
-      DataObject parent = getParent();
+      DataObjectView parent = getParent();
       if (parent == null) {
         return false;
       } else {

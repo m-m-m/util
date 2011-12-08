@@ -5,7 +5,7 @@ package net.sf.mmm.data.api.reflection.access;
 
 import java.util.List;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 
@@ -21,28 +21,28 @@ public interface DataReflectionReadAccess extends DataClassReadAccessById,
 
   /**
    * This method gets the root {@link DataClass} that reflects the
-   * {@link net.sf.mmm.data.api.DataObject content-object}.
+   * {@link net.sf.mmm.data.api.DataObjectView content-object}.
    * 
    * @return the root class.
    */
-  DataClass<? extends DataObject> getRootDataClass();
+  DataClass<? extends DataObjectView> getRootDataClass();
 
   /**
    * This method gets the list of all registered {@link DataClass} objects.
    * 
    * @return the immutable list of all classes.
    */
-  List<? extends DataClass<? extends DataObject>> getDataClasses();
+  List<? extends DataClass<? extends DataObjectView>> getDataClasses();
 
   /**
    * This method gets the {@link DataId} for the given <code>dataObject</code>.
    * 
-   * @param dataObject is the {@link DataObject} for which the {@link DataId} is
+   * @param dataObject is the {@link DataObjectView} for which the {@link DataId} is
    *        requested.
    * @return the {@link DataId} of the given <code>dataObject</code> or
-   *         <code>null</code> if the {@link DataObject#getId() object ID} is
+   *         <code>null</code> if the {@link DataObjectView#getId() object ID} is
    *         <code>null</code>.
    */
-  DataId getDataId(DataObject dataObject);
+  DataId getDataId(DataObjectView dataObject);
 
 }

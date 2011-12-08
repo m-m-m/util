@@ -9,7 +9,7 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -79,11 +79,11 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    */
   protected Long parseId(XMLStreamReader xmlReader) {
 
-    return getStaxUtil().parseAttribute(xmlReader, null, DataObject.FIELD_NAME_ID, Long.class);
+    return getStaxUtil().parseAttribute(xmlReader, null, DataObjectView.FIELD_NAME_ID, Long.class);
   }
 
   /**
-   * This method reads the {@link DataObject#getTitle() name} from the given
+   * This method reads the {@link DataObjectView#getTitle() name} from the given
    * <code>xmlReader</code>.
    * 
    * @param xmlReader is where to read the XML from.
@@ -91,7 +91,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    */
   protected String parseTitle(XMLStreamReader xmlReader) {
 
-    return getStaxUtil().parseAttribute(xmlReader, null, DataObject.FIELD_NAME_TITLE, String.class);
+    return getStaxUtil().parseAttribute(xmlReader, null, DataObjectView.FIELD_NAME_TITLE, String.class);
   }
 
   /**
@@ -128,7 +128,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public AbstractDataClass<? extends DataObject> loadClassRecursive(XMLStreamReader xmlReader,
+  public AbstractDataClass<? extends DataObjectView> loadClassRecursive(XMLStreamReader xmlReader,
       Context context) throws ValueException, XMLStreamException {
 
     assert (xmlReader.isStartElement());
@@ -153,14 +153,14 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
     DataClassModifiers modifiers = DataClassModifiersBean.getInstance(isSystem, isFinal,
         isAbstract, isExtendable);
 
-    AbstractDataClass<? extends DataObject> dataClass = context.getDataClass(id.longValue());
+    AbstractDataClass<? extends DataObjectView> dataClass = context.getDataClass(id.longValue());
     if (dataClass == null) {
       dataClass = getDataReflectionService().createDataClass(id, title, null, modifiers, null,
           deleted);
     } else {
       if (!title.equals(dataClass.getTitle())) {
         throw new ObjectMismatchException(title, dataClass.getTitle(), dataClass,
-            DataObject.FIELD_NAME_TITLE);
+            DataObjectView.FIELD_NAME_TITLE);
       }
       // TODO ...
     }
@@ -206,7 +206,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
   protected void parseClassChildElement(XMLStreamReader xmlReader,
-      AbstractDataClass<? extends DataObject> superClass) throws XMLStreamException {
+      AbstractDataClass<? extends DataObjectView> superClass) throws XMLStreamException {
 
     getStaxUtil().skipOpenElement(xmlReader);
   }
@@ -225,8 +225,8 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @throws ValueException if a value is missing or invalid.
    * @throws XMLStreamException if the <code>xmlReader</code> caused an error.
    */
-  public AbstractDataField<? extends DataObject, ?> loadField(XMLStreamReader xmlReader,
-      AbstractDataClass<? extends DataObject> declaringClass) throws ValueException,
+  public AbstractDataField<? extends DataObjectView, ?> loadField(XMLStreamReader xmlReader,
+      AbstractDataClass<? extends DataObjectView> declaringClass) throws ValueException,
       XMLStreamException {
 
     assert (xmlReader.isStartElement());
@@ -254,7 +254,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
         DataField.XML_ATR_FIELD_TYPE, String.class);
     GenericType<?> fieldType = parseFieldType(typeSpecification, getClassResolver());
     // fieldType = parseFieldType(typeSpecification, getClassResolver());
-    AbstractDataField<? extends DataObject, ?> contentField = getDataReflectionService()
+    AbstractDataField<? extends DataObjectView, ?> contentField = getDataReflectionService()
         .createDataField(id, name, declaringClass, fieldType, modifiers, deleted);
     // AbstractContentField contentField =
     // getContentModelService().createOrUpdateField(id, name,
@@ -274,7 +274,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
    * @param resolver
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  protected void initializeModel(AbstractDataClass<? extends DataObject> dataClass,
+  protected void initializeModel(AbstractDataClass<? extends DataObjectView> dataClass,
       ClassResolver resolver) {
 
     for (AbstractDataField contentField : dataClass.getDeclaredFields()) {
@@ -282,7 +282,7 @@ public class DataClassLoaderStAX extends DataClassLoaderNative {
       GenericType<?> type = parseFieldType(typeSpecification, resolver);
       contentField.setFieldType(type);
     }
-    for (AbstractDataClass<? extends DataObject> subClass : dataClass.getSubClasses()) {
+    for (AbstractDataClass<? extends DataObjectView> subClass : dataClass.getSubClasses()) {
       initializeModel(subClass, resolver);
     }
   }

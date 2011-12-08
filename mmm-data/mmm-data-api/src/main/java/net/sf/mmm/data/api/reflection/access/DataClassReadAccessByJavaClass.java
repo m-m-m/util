@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection.access;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
@@ -35,7 +35,7 @@ public interface DataClassReadAccessByJavaClass {
    * @throws ObjectNotFoundException if the given <code>javaClass</code> is
    *         unknown.
    */
-  <CLASS extends DataObject> DataClass<CLASS> getDataClass(Class<CLASS> javaClass)
+  <CLASS extends DataObjectView> DataClass<CLASS> getDataClass(Class<CLASS> javaClass)
       throws ObjectNotFoundException;
 
 }

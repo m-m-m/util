@@ -7,26 +7,30 @@ import net.sf.mmm.util.lang.api.Datatype;
 
 /**
  * This is the interface for an ID that uniquely identifies a
- * {@link net.sf.mmm.data.api.DataObject} in a content-repository.<br/>
+ * {@link net.sf.mmm.data.api.DataObject} in a
+ * {@link net.sf.mmm.data.api.repository.DataRepository}.<br/>
  * It is build out of four parts:
  * <ul>
- * <li>{@link #getObjectId() object-id} - unique ID of a
+ * <li>{@link #getObjectId() object-id} -
+ * {@link net.sf.mmm.data.api.DataObject#getId() unique ID} of a
  * {@link net.sf.mmm.data.api.DataObject} of a particular
  * {@link net.sf.mmm.data.api.reflection.DataClass} (type).</li>
- * <li>{@link #getClassId() class-id} - is the id of the
+ * <li>{@link #getClassId() class-id} - is the
+ * {@link net.sf.mmm.data.api.reflection.DataClass#getId() id} of the
  * {@link net.sf.mmm.data.api.reflection.DataClass} that reflects the
  * {@link net.sf.mmm.data.api.DataObject} identified by this {@link DataId}.</li>
  * <li>{@link #getRevision() revision} - a
  * {@link net.sf.mmm.data.api.DataObject} can have multiple
- * {@link net.sf.mmm.data.api.reflection.DataClass#getRevision() revisions} (as
- * history of changes). A {@link DataId} uniquely identifies the specific
+ * {@link net.sf.mmm.data.api.DataObject#getRevision() revisions} (as history of
+ * changes). A {@link DataId} uniquely identifies the specific
  * {@link #getRevision() revision}.</li>
  * <li>{@link #getStoreId() store-id} - if multiple back-ends are used to store
  * objects this identifies the actual store. In that case two totally different
  * objects may share the same {@link #getObjectId() object-id}. Unique
  * identification is only possible in combination with this
- * {@link #getStoreId() store-id}. However in smaller systems only one store is
- * used.</li>
+ * {@link #getStoreId() store-id}. However, this may only be used in large and
+ * complex systems. Typically only one store is used that has the store-id
+ * <code>0</code>.</li>
  * </ul>
  * If the identified object is revision controlled this ID points to the exact
  * revision in the history of that resource.<br>
@@ -34,7 +38,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * a {@link net.sf.mmm.data.api.DataObject} does not change, their primary keys
  * are stored in this ID implementation. This allows to determine the data-class
  * and revision of the resource without any cost (e.g. DB lookup). Especially a
- * {@link net.sf.mmm.data.api.DataObject} -instance may be created as dynamic
+ * {@link net.sf.mmm.data.api.DataObject}-instance may be created as dynamic
  * proxy from the ID using lazy loading.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -56,10 +60,16 @@ public interface DataId extends Datatype<DataId> {
 
   /**
    * The minimum {@link #getObjectId() object-id} that can be used for custom
-   * {@link net.sf.mmm.data.api.entity.DataEntity entities}. All object-IDs
-   * lower than this are reserved for system objects (e.g. root-folder, etc.).
+   * {@link net.sf.mmm.data.api.entity.DataEntityView entities},
+   * {@link net.sf.mmm.data.api.reflection.DataClass classes}, or
+   * {@link net.sf.mmm.data.api.reflection.DataField fields}. All object-IDs
+   * lower than this are reserved for system objects (e.g. build-in classes and
+   * fields, root-folder, etc.).<br/>
+   * <b>NOTE:</b><br/>
+   * If you want to create a reusable and distributed extension for mmm please
+   * get in contact with us and we can try to find a reserved ID space.
    */
-  long OBJECT_ID_MINIMUM_CUSTOM = 4096;
+  long OBJECT_ID_MINIMUM_CUSTOM = 1048576;
 
   /** The delimiter used in the string representations of an id. */
   char SEPARATOR_CHAR = '.';
@@ -69,11 +79,11 @@ public interface DataId extends Datatype<DataId> {
 
   /**
    * This method gets the object-id, which is the
-   * {@link net.sf.mmm.data.api.DataObject#getId() unique identifier} of a
+   * {@link net.sf.mmm.data.api.DataObjectView#getId() unique identifier} of a
    * {@link net.sf.mmm.data.api.DataObject} for a particular
    * {@link net.sf.mmm.data.api.reflection.DataClass}.
    * 
-   * @see net.sf.mmm.data.api.DataObject#getId()
+   * @see net.sf.mmm.data.api.DataObjectView#getId()
    * 
    * @return the object-id.
    */
@@ -84,7 +94,7 @@ public interface DataId extends Datatype<DataId> {
    * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting the identified
    * object.
    * 
-   * @see net.sf.mmm.data.api.reflection.DataReflectionService#getDataId(net.sf.mmm.data.api.DataObject)
+   * @see net.sf.mmm.data.api.reflection.DataReflectionService#getDataId(net.sf.mmm.data.api.DataObjectView)
    * @see #getDataClassId()
    * 
    * @see net.sf.mmm.data.api.reflection.DataClass#CLASS_ID
@@ -101,8 +111,8 @@ public interface DataId extends Datatype<DataId> {
    * Further a revision of <code>0</code> always points to the latest revision
    * of an object.
    * 
-   * @see net.sf.mmm.data.api.DataObject#getRevision()
-   * @see net.sf.mmm.data.api.DataObject#LATEST_REVISION
+   * @see net.sf.mmm.data.api.DataObjectView#getRevision()
+   * @see net.sf.mmm.data.api.DataObjectView#LATEST_REVISION
    * 
    * @return the revision.
    */

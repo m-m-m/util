@@ -6,7 +6,7 @@ package net.sf.mmm.data.impl.reflection;
 import java.io.IOException;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClassLoader;
 import net.sf.mmm.data.api.reflection.DataReflectionEvent;
@@ -101,18 +101,18 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    */
   protected void loadClasses() {
 
-    AbstractDataClass<? extends DataObject> rootClass = (AbstractDataClass<? extends DataObject>) this.classLoader
+    AbstractDataClass<? extends DataObjectView> rootClass = (AbstractDataClass<? extends DataObjectView>) this.classLoader
         .loadClasses();
     setRootClass(rootClass);
     addClassRecursive(rootClass);
-    AbstractDataClass<? extends DataObject> classClass = getDataClass(getDataIdManager()
+    AbstractDataClass<? extends DataObjectView> classClass = getDataClass(getDataIdManager()
         .getClassClassId());
     if (classClass == null) {
       // TODO:
       throw new DataReflectionException("Missing class for ContentClass!");
     }
     // ContentClassImpl.setContentClass(classClass);
-    AbstractDataClass<? extends DataObject> fieldClass = getDataClass(getDataIdManager()
+    AbstractDataClass<? extends DataObjectView> fieldClass = getDataClass(getDataIdManager()
         .getFieldClassId());
     if (fieldClass == null) {
       // TODO:
@@ -139,7 +139,7 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    * {@inheritDoc}
    */
   @Override
-  protected <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass() {
+  protected <CLASS extends DataObjectView> AbstractDataClass<CLASS> createDataClass() {
 
     return new DataClassImpl<CLASS>();
   }
@@ -148,7 +148,7 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    * {@inheritDoc}
    */
   @Override
-  protected <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField() {
+  protected <CLASS extends DataObjectView, FIELD> AbstractDataField<CLASS, FIELD> createDataField() {
 
     return new DataFieldImpl<CLASS, FIELD>();
   }

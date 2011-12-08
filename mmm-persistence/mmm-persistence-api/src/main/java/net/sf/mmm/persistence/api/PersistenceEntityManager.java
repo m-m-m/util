@@ -100,6 +100,19 @@ public interface PersistenceEntityManager<ID, ENTITY extends PersistenceEntity<I
   ENTITY load(ID id) throws ObjectNotFoundException;
 
   /**
+   * This method loads the {@link PersistenceEntity} with the given
+   * <code>id</code> from the persistent store.
+   * 
+   * @see javax.persistence.EntityManager#find(Class, Object)
+   * 
+   * @param id is the {@link PersistenceEntity#getId() primary key} of the
+   *        requested {@link PersistenceEntity entity}.
+   * @return the requested {@link PersistenceEntity entity} or <code>null</code>
+   *         if it does NOT exist in persistent store.
+   */
+  ENTITY loadIfExists(ID id);
+
+  /**
    * This method creates a lazy reference proxy of the {@link PersistenceEntity}
    * with the given <code>id</code> from the persistent store.
    * 

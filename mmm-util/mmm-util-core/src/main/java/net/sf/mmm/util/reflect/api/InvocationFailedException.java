@@ -9,10 +9,11 @@ import java.lang.reflect.InvocationTargetException;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * An {@link InvocationFailedException} is thrown if a {@link java.lang.reflect
- * reflective} invocation of an {@link AccessibleObject} failed. Unlike
- * {@link InvocationTargetException} this is a {@link RuntimeException} and has
- * {@link net.sf.mmm.util.nls.api.NlsThrowable native-language-support}.
+ * An {@link InvocationFailedException} is thrown if an invocation failed.
+ * Typically invocation means a {@link java.lang.reflect reflective} call of an
+ * {@link AccessibleObject}. Unlike {@link InvocationTargetException} this is a
+ * {@link RuntimeException} and has {@link net.sf.mmm.util.nls.api.NlsThrowable
+ * native-language-support}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -30,6 +31,16 @@ public class InvocationFailedException extends ReflectionException {
   public InvocationFailedException(InvocationTargetException nested) {
 
     super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   */
+  public InvocationFailedException(Exception nested) {
+
+    super(nested, NlsBundleUtilCore.ERR_INVOCATION_FAILED);
   }
 
   /**

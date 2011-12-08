@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection.access;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
@@ -25,6 +25,6 @@ public interface DataFieldReadAccessByTitle {
    * @throws ObjectNotFoundException if the requested {@link DataField} does NOT
    *         exist.
    */
-  DataField<? extends DataObject, ?> getDataField(String title) throws ObjectNotFoundException;
+  DataField<? extends DataObjectView, ?> getDataField(String title) throws ObjectNotFoundException;
 
 }

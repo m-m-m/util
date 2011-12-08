@@ -243,10 +243,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_INSTANTIATION_FAILED = "Failed to create an instance of \"{type}\"!";
 
   /** @see net.sf.mmm.util.reflect.api.InvocationFailedException */
-  public static final String ERR_INVOCATION_FAILED = "Reflective invocation failed!";
+  public static final String ERR_INVOCATION_FAILED = "Invocation failed!";
 
   /** @see net.sf.mmm.util.reflect.api.InvocationFailedException */
-  public static final String ERR_INVOCATION_FAILED_ON = "Reflective invocation of \"{accessible}\" on \"{object}\" failed!";
+  public static final String ERR_INVOCATION_FAILED_ON = "Invocation of \"{accessible}\" failed on \"{object}\"!";
 
   /** @see net.sf.mmm.util.reflect.api.AccessFailedException */
   public static final String ERR_ACCESS_FAILED = "Reflective access for \"{accessible}\" failed!";

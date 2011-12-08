@@ -6,7 +6,7 @@ package net.sf.mmm.data.base.reflection;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataReflectionObject;
 import net.sf.mmm.data.base.AbstractDataObject;
@@ -40,7 +40,7 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
    */
   @Override
   @Transient
-  public abstract DataClass<? extends DataObject> getParent();
+  public abstract DataClass<? extends DataObjectView> getParent();
 
   /**
    * {@inheritDoc}
@@ -58,15 +58,6 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   protected void setId(Long id) {
 
     super.setId(id);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void setTitle(String title) {
-
-    super.setTitle(title);
   }
 
 }

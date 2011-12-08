@@ -4,7 +4,7 @@
 package net.sf.mmm.data.base.reflection;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -22,16 +22,16 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldAccessorPojo<CLASS extends DataObject, FIELD> implements
+public class DataFieldAccessorPojo<CLASS extends DataObjectView, FIELD> implements
     DataFieldAccessor<CLASS, FIELD> {
 
   /** The type of the content-field to access. */
   private final Class<FIELD> fieldClass;
 
-  /** @see #getFieldValue(DataObject) */
+  /** @see #getFieldValue(DataObjectView) */
   private final PojoPropertyAccessorNonArg getter;
 
-  /** @see #setFieldValue(DataObject, Object) */
+  /** @see #setFieldValue(DataObjectView, Object) */
   private final PojoPropertyAccessorOneArg setter;
 
   /**
@@ -96,7 +96,7 @@ public class DataFieldAccessorPojo<CLASS extends DataObject, FIELD> implements
    */
   public void setFieldValue(CLASS object, FIELD value) throws DataException {
 
-    NlsNullPointerException.checkNotNull(DataObject.class, object);
+    NlsNullPointerException.checkNotNull(DataObjectView.class, object);
     if (this.setter == null) {
       throw new ReadOnlyException(object.getClass().getSimpleName() + "." + this.getter.getName());
     }

@@ -14,11 +14,11 @@ import net.sf.mmm.util.lang.api.BooleanEnum;
 
 /**
  * This annotation is used to mark a java {@link Class type} as a particular
- * {@link net.sf.mmm.data.api.DataObject}. Therefore an according
+ * {@link net.sf.mmm.data.api.DataObjectView}. Therefore an according
  * {@link net.sf.mmm.data.api.reflection.DataClass} is created that is
  * configured via this annotation.<br>
  * 
- * @see net.sf.mmm.data.api.DataObject
+ * @see net.sf.mmm.data.api.DataObjectView
  * @see net.sf.mmm.data.api.reflection.DataClass
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -60,11 +60,10 @@ public @interface DataClassAnnotation {
 
   /**
    * The {@link net.sf.mmm.data.api.reflection.DataClassModifiers#isFinal()
-   * final} flag of a {@link net.sf.mmm.data.api.reflection.DataClass}
-   * identified by an java interface. Ignored if the annotated type is no
-   * interface.
+   * final} flag of a {@link net.sf.mmm.data.api.reflection.DataClass}. Will be
+   * derived from the class implementation if not set explicitly.
    */
-  boolean isFinal() default false;
+  BooleanEnum isFinal() default BooleanEnum.NULL;
 
   /**
    * The {@link DataClassGroupVersion#getGroupId() group ID} of the

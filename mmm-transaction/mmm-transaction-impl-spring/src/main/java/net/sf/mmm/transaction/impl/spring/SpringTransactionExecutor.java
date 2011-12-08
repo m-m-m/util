@@ -17,7 +17,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.transaction.api.TransactionExecutor} interface using
- * {@link PlatformTransactionManager spring-tx}.
+ * {@link PlatformTransactionManager spring-transaction}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -116,7 +116,13 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
     @Override
     protected void doRollback() {
 
-      getPlatformTransactionManager().rollback(getActiveTransaction());
+      TransactionStatus transaction = getActiveTransaction();
+      if (transaction.isCompleted()) {
+        getLogger().error(
+            "Internal error in spring transaction: transaction completed but commit failed!");
+      } else {
+        getPlatformTransactionManager().rollback(transaction);
+      }
     }
 
   }

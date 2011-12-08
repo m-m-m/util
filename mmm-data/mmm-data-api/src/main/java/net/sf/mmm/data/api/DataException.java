@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is the abstract base exception of all failures related to
- * {@link DataObject content}.
+ * {@link DataObject}.
  * 
  * @see net.sf.mmm.data.api.reflection.DataReflectionException
  * 

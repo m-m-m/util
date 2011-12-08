@@ -31,7 +31,7 @@ public interface DataClassModifiers extends DataModifiers {
 
   /**
    * This method determines if the class is abstract and no
-   * {@link net.sf.mmm.data.api.DataObject instance} can be created directly
+   * {@link net.sf.mmm.data.api.DataObjectView instance} can be created directly
    * from this class.
    * 
    * @return <code>true</code> if the class is abstract.

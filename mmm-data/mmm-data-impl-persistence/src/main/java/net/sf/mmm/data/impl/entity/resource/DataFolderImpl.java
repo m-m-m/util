@@ -3,24 +3,37 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.entity.resource;
 
-import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import net.sf.mmm.data.api.entity.resource.DataEntityResource;
+import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
 import net.sf.mmm.data.api.entity.resource.DataFolder;
+import net.sf.mmm.data.api.entity.resource.DataFolderView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
-import net.sf.mmm.data.base.entity.resource.AbstractDataFolder;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link DataFolderView}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Entity(name = DataFolder.CLASS_TITLE)
-@DataClassAnnotation(id = DataFolder.CLASS_ID)
-public class DataFolderImpl extends AbstractDataFolder {
+@Entity(name = DataFolderView.CLASS_TITLE)
+@DataClassAnnotation(id = DataFolderView.CLASS_ID)
+@DiscriminatorValue("" + DataFolderView.CLASS_ID)
+public class DataFolderImpl extends AbstractDataEntityResource implements DataFolder {
 
   /** UID for serialization. */
-  private static final long serialVersionUID = -2071512131636950676L;
+  private static final long serialVersionUID = -9049737538380209022L;
+
+  /** @see #getChildren() */
+  private List<AbstractDataEntityResource> children;
 
   /**
    * The constructor.
@@ -28,6 +41,91 @@ public class DataFolderImpl extends AbstractDataFolder {
   public DataFolderImpl() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @Transient
+  protected long getStaticDataClassId() {
+
+    return DataFolderView.CLASS_ID;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public DataEntityResource getChild(String title) {
+
+    for (DataEntityResource child : getChildren()) {
+      if (child.getTitle().equals(title)) {
+        return child;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @OneToMany(mappedBy = "parent")
+  public List<AbstractDataEntityResource> getChildren() {
+
+    if (this.children == null) {
+      this.children = new ArrayList<AbstractDataEntityResource>();
+    }
+    return this.children;
+  }
+
+  /**
+   * @param children is the children to set
+   */
+  protected void setChildren(List<AbstractDataEntityResource> children) {
+
+    this.children = children;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public boolean isAbstract() {
+
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public boolean isCacheable() {
+
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isDescendant(DataEntityResourceView node) {
+
+    DataFolderImpl parent = getParent();
+    if (parent == null) {
+      return false;
+    } else if (this == null) {
+      return true;
+    } else {
+      return parent.isDescendant(node);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isAncestor(DataFolderView node) {
+
+    NlsNullPointerException.checkNotNull(DataEntityResourceView.class, node);
+    return node.isDescendant(this);
   }
 
 }

@@ -5,7 +5,12 @@ package net.sf.mmm.data.api.reflection;
 
 /**
  * This type is a simple collection of constants for the
- * {@link net.sf.mmm.data.api.reflection.DataField#getId() field IDs}.
+ * {@link net.sf.mmm.data.api.reflection.DataField#getId() field IDs}. The
+ * centralization of these IDs helps to establish their uniqueness. If you want
+ * to extend the data model of mmm, you should define your own type (class or
+ * interface) for this purpose that may extend this interface. Please be aware
+ * that custom IDs for for end users have to be greater or equal to
+ * {@link net.sf.mmm.data.api.datatype.DataId#OBJECT_ID_MINIMUM_CUSTOM}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -14,114 +19,131 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObject#getId()}.
+   * {@link net.sf.mmm.data.api.DataObjectView#getId()}.
    */
-  int ID_OBJECT_ID = 0;
+  long ID_OBJECT_ID = 0;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObject#getTitle()}.
+   * {@link net.sf.mmm.data.api.DataObjectView#getDataClassId()}.
    */
-  int ID_OBJECT_TITLE = 6;
+  long ID_OBJECT_DATA_CLASS_ID = 1;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataNode#getParent()}.
+   * {@link net.sf.mmm.data.api.DataObjectView#getTitle()}.
    */
-  int ID_NODE_PARENT = 20;
+  long ID_OBJECT_TITLE = 6;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelection#isCacheable()}.
+   * {@link net.sf.mmm.data.api.DataObjectView#isDeleted()}.
    */
-  int ID_SELECTION_CACHEABLE = 30;
+  long ID_OBJECT_DELETED = 7;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionGenericTree#getChildren()}.
+   * {@link net.sf.mmm.data.api.DataObjectView#getDeletedFlag()}.
    */
-  int ID_SELECTIONTREE_CHILDREN = 41;
+  long ID_OBJECT_DELETED_FLAG = 8;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionGenericTree#isAbstract()}.
+   * {@link net.sf.mmm.data.api.DataNodeView#getParent()}.
    */
-  int ID_SELECTIONTREE_ABSTRACT = 42;
+  long ID_NODE_PARENT = 20;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getDeletedFlag()}
-   * .
+   * {@link net.sf.mmm.data.api.DataSelectionView#isCacheable()}.
    */
-  int ID_REFLECTIONOBJECT_DELETEDFLAG = 100;
+  long ID_SELECTION_CACHEABLE = 30;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#isDeleted()} .
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#getChildren()}.
    */
-  int ID_REFLECTIONOBJECT_DELETED = 101;
+  long ID_SELECTIONTREE_CHILDREN = 41;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#isAbstract()}.
+   */
+  long ID_SELECTIONTREE_ABSTRACT = 42;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getJavaClass()}
    * .
    */
-  int ID_REFLECTIONOBJECT_JAVACLASS = 102;
+  long ID_REFLECTIONOBJECT_JAVACLASS = 102;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getModifiers()}
    * .
    */
-  int ID_REFLECTIONOBJECT_MODIFIERS = 103;
+  long ID_REFLECTIONOBJECT_MODIFIERS = 103;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#isDataClass()}
-   * .
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#isDataClass()} .
    */
-  int ID_REFLECTIONOBJECT_DATACLASS = 104;
+  long ID_REFLECTIONOBJECT_DATACLASS = 104;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataClass#getSuperClass()}.
    */
-  int ID_CLASS_SUPERCLASS = 120;
+  long ID_CLASS_SUPERCLASS = 120;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataClass#getDeclaredFields()}.
    */
-  int ID_CLASS_DECLAREDFIELDS = 121;
+  long ID_CLASS_DECLAREDFIELDS = 121;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataClass#getFields()}.
    */
-  int ID_CLASS_FIELDS = 122;
+  long ID_CLASS_FIELDS = 122;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataClass#getSubClasses()}.
    */
-  int ID_CLASS_SUBCLASSES = 123;
+  long ID_CLASS_SUBCLASSES = 123;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataClass#getModifiers()}.
    */
-  int ID_CLASS_MODIFIERS = 126;
+  long ID_CLASS_MODIFIERS = 126;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.reflection.DataClass#getGroupVersion()}.
    */
-  int ID_CLASS_GROUPVERSION = 127;
+  long ID_CLASS_GROUPVERSION = 127;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.entity.resource.DataEntityResource#getPath()}.
+   * {@link net.sf.mmm.data.api.entity.resource.DataEntityResourceView#getPath()}
+   * .
    */
-  int ID_RESOURCE_PATH = 200;
+  long ID_RESOURCE_PATH = 200;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * <code>DataContact.getContactInfos()</code>.
+   */
+  long ID_CONTACT_CONTACT_INFOS = 400;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
+   * <code>DataContact.getRelatedContacts()</code>.
+   */
+  long ID_CONTACT_RELATED_CONTACTS = 401;
 
 }

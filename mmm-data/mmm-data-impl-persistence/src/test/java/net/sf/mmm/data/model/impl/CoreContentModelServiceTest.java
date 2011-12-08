@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionService;
@@ -41,9 +41,9 @@ public class CoreContentModelServiceTest {
 
     DataClass rootClass = modelService.getRootDataClass();
     checkClass(modelService, rootClass);
-    assertEquals(DataObject.CLASS_TITLE, rootClass.getTitle());
+    assertEquals(DataObjectView.CLASS_TITLE, rootClass.getTitle());
     assertNotNull(rootClass.getJavaClass());
-    assertTrue(DataObject.class.isAssignableFrom(rootClass.getJavaClass()));
+    assertTrue(DataObjectView.class.isAssignableFrom(rootClass.getJavaClass()));
 
     DataClass classClass = modelService.getDataClass(rootClass);
     checkClass(modelService, classClass);
@@ -53,9 +53,9 @@ public class CoreContentModelServiceTest {
     assertTrue(rootClass.isSuperClassOf(classClass));
     assertTrue(classClass.isSubClassOf(rootClass));
 
-    DataField idField = rootClass.getField(DataObject.FIELD_NAME_ID);
+    DataField idField = rootClass.getField(DataObjectView.FIELD_NAME_ID);
     assertNotNull(idField);
-    assertEquals(DataObject.FIELD_NAME_ID, idField.getTitle());
+    assertEquals(DataObjectView.FIELD_NAME_ID, idField.getTitle());
     assertSame(rootClass, idField.getDeclaringClass());
 
     DataClass fieldClass = modelService.getDataClass(idField);

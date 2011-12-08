@@ -46,7 +46,7 @@ public abstract interface DataModifiers extends Datatype<String> {
    * final} {@link java.lang.reflect.Field fields} in the java language
    * specification. In the world of <code>mmm-content</code>, a
    * {@link #isFinal() final} {@link DataField field} can be
-   * {@link DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)
+   * {@link DataField#setFieldValue(net.sf.mmm.data.api.DataObjectView, Object)
    * modified} any number of times as long as it is NOT
    * {@link DataFieldModifiers#isReadOnly() read-only}.
    * 

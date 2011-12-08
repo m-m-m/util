@@ -5,7 +5,7 @@ package net.sf.mmm.data.api.link;
 
 import java.util.Iterator;
 
-import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.entity.DataEntityView;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
@@ -17,7 +17,7 @@ import net.sf.mmm.util.filter.api.Filter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface LinkList<TARGET extends DataEntity> extends Iterable<Link<TARGET>> {
+public interface LinkList<TARGET extends DataEntityView> extends Iterable<Link<TARGET>> {
 
   /**
    * This method gets the number of links in this list.
@@ -27,6 +27,14 @@ public interface LinkList<TARGET extends DataEntity> extends Iterable<Link<TARGE
    * @return the number of links in this list.
    */
   int getLinkCount();
+
+  /**
+   * The same as {@link #getLinkCount()} for compatibility with
+   * {@link java.util.List}.
+   * 
+   * @return the number of links in this list.
+   */
+  int size();
 
   /**
    * This method gets the link of this list located at the given position.
@@ -55,5 +63,36 @@ public interface LinkList<TARGET extends DataEntity> extends Iterable<Link<TARGE
    * @return an iterator of all links.
    */
   Iterator<Link<TARGET>> getLinks(Filter<Link<TARGET>> filter);
+
+  /**
+   * This method gets the the first {@link Link} in this {@link LinkList} that
+   * assuming the {@link LinkList} would be ordered by
+   * {@link Link#getClassifier() classifiers} according to the given
+   * <code>classifierPriority</code>. So e.g. if the {@link LinkList} contains
+   * at least one {@link Link} {@link String#equals(Object) matching} first
+   * {@link Link#getClassifier() classifier} given by
+   * <code>classifierPriority</code> then the first of these {@link Link}s is
+   * returned. Otherwise the same applies for the second entry out of
+   * <code>classifierPriority</code> and so forth till the end. If none of the
+   * {@link Link#getClassifier() classifiers} given by
+   * <code>classifierPriority</code> matches, the result depends on
+   * <code>acceptUnspecifiedClassifier</code>.
+   * 
+   * @param acceptUnspecifiedClassifier - if <code>true</code> and none of the
+   *        {@link Link#getClassifier() classifiers} given by
+   *        <code>classifierPriority</code> matches, the first {@link Link} of
+   *        this {@link LinkList} is returned (if present). Otherwise the result
+   *        is <code>null</code>.
+   * @param classifierPriority is an array of the {@link Link#getClassifier()
+   *        classifiers} for the requested {@link Link} ordered by priority.
+   * @return the first {@link Link} in this {@link LinkList} that has the
+   *         highest priority according to <code>classifierPriority</code>. If
+   *         no such {@link Link} exists and
+   *         <code>acceptUnspecifiedClassifier</code> is <code>true</code> and
+   *         this {@link LinkList} is not {@link #size() empty}, the first
+   *         {@link Link} is returned. Otherwise the result is <code>null</code>
+   *         (e.g. if empty).
+   */
+  Link<TARGET> getFirstLink(boolean acceptUnspecifiedClassifier, String... classifierPriority);
 
 }

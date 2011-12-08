@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is the implementation of the {@link DataId} interface for the ID of the
- * latest version of a {@link net.sf.mmm.data.api.DataObject ContentObject} that
+ * latest version of a {@link net.sf.mmm.data.api.DataObjectView ContentObject} that
  * is no {@link net.sf.mmm.data.api.reflection.DataClass} or
  * {@link net.sf.mmm.data.api.reflection.DataField}.
  * 

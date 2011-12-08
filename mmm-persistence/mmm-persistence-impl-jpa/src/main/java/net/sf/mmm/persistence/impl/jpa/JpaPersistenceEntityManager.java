@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.persistence.base.AbstractPersistenceEntityManager;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -67,11 +68,20 @@ public abstract class JpaPersistenceEntityManager<ID, ENTITY extends Persistence
    */
   public ENTITY load(ID id) throws ObjectNotFoundException {
 
-    ENTITY entity = getEntityManager().find(getEntityClassImplementation(), id);
+    ENTITY entity = loadIfExists(id);
     if (entity == null) {
       throw new ObjectNotFoundException(getEntityClassImplementation(), id);
     }
     return entity;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public ENTITY loadIfExists(ID id) throws ObjectNotFoundException {
+
+    NlsNullPointerException.checkNotNull("id", id);
+    return getEntityManager().find(getEntityClassImplementation(), id);
   }
 
   /**

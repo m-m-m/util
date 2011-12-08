@@ -7,7 +7,7 @@
  * This package contains specific {@link net.sf.mmm.util.lang.api.Datatype datatypes} 
  * offered for {@link net.sf.mmm.data.api.DataObject} and related objects of 
  * the data API. Complex datatypes have an interface as API while this is 
- * omitted for trivial datatypes.
+ * omitted for regular datatypes.
  */
 package net.sf.mmm.data.api.datatype;
 

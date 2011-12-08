@@ -6,7 +6,7 @@ package net.sf.mmm.data.api.datatype;
 /**
  * This is the interface for the checksum(s) of files.
  * 
- * @see net.sf.mmm.data.api.entity.resource.DataFile#getChecksum()
+ * @see net.sf.mmm.data.api.entity.resource.DataFileView#getChecksum()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

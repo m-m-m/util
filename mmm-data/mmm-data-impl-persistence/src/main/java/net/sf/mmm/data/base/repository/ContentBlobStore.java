@@ -5,7 +5,7 @@ package net.sf.mmm.data.base.repository;
 
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.datatype.MutableBlob;
-import net.sf.mmm.data.api.entity.resource.DataFile;
+import net.sf.mmm.data.api.entity.resource.DataFileView;
 
 /**
  * TODO: this class ...
@@ -15,7 +15,7 @@ import net.sf.mmm.data.api.entity.resource.DataFile;
  */
 public interface ContentBlobStore {
 
-  MutableBlob createBlob(DataId id, DataFile file);
+  MutableBlob createBlob(DataId id, DataFileView file);
 
   MutableBlob createBlob(DataId id, int blobRevision);
 

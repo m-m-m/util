@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.datatype;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -42,7 +42,7 @@ public final class DataClassId extends AbstractDataId {
    * the id of the root {@link net.sf.mmm.data.api.reflection.DataClass
    * ContentClass} (the class that all other classes are derived from).
    */
-  public static final DataClassId ROOT = valueOf(DataObject.CLASS_ID);
+  public static final DataClassId ROOT = valueOf(DataObjectView.CLASS_ID);
 
   /**
    * the id of the {@link net.sf.mmm.data.api.reflection.DataClass

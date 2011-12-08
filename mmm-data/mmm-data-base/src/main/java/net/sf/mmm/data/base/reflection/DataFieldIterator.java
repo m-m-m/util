@@ -5,7 +5,7 @@ package net.sf.mmm.data.base.reflection;
 
 import java.util.Iterator;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
@@ -16,13 +16,13 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldIterator extends AbstractIterator<AbstractDataField<? extends DataObject, ?>> {
+public class DataFieldIterator extends AbstractIterator<AbstractDataField<? extends DataObjectView, ?>> {
 
   /** the current class */
-  private AbstractDataClass<? extends DataObject> currentClass;
+  private AbstractDataClass<? extends DataObjectView> currentClass;
 
   /** the current own field enumeration */
-  private Iterator<AbstractDataField<? extends DataObject, ?>> currentIt;
+  private Iterator<AbstractDataField<? extends DataObjectView, ?>> currentIt;
 
   /**
    * The constructor.
@@ -32,7 +32,7 @@ public class DataFieldIterator extends AbstractIterator<AbstractDataField<? exte
    *        iterated.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public DataFieldIterator(AbstractDataClass<? extends DataObject> contentClass) {
+  public DataFieldIterator(AbstractDataClass<? extends DataObjectView> contentClass) {
 
     super();
     this.currentClass = contentClass;
@@ -47,10 +47,10 @@ public class DataFieldIterator extends AbstractIterator<AbstractDataField<? exte
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  protected AbstractDataField<? extends DataObject, ?> findNext() {
+  protected AbstractDataField<? extends DataObjectView, ?> findNext() {
 
     while (this.currentIt.hasNext()) {
-      AbstractDataField<? extends DataObject, ?> field = this.currentIt.next();
+      AbstractDataField<? extends DataObjectView, ?> field = this.currentIt.next();
       if (field.getSuperField() == null) {
         return field;
       }

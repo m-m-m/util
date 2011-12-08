@@ -6,33 +6,30 @@ package net.sf.mmm.data.api.entity.pim.calendar;
 import java.util.Date;
 
 import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.entity.DataEntityView;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
- * This is the interface for a {@link DataEntity} that represents an event. An
- * event is something that happens at a {@link #getInitialStartDate() specific
- * point in time}, e.g. a birthday or an {@link DataAppointment appointment}.
+ * This is the interface for a mutable {@link DataEventView event}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataEvent extends DataEntity {
+@DataClassAnnotation(id = DataEntityView.CLASS_ID, title = DataEventView.CLASS_TITLE)
+public interface DataEvent extends DataEventView, DataEntity {
 
   /**
-   * This method gets the start date when this event will initially take place.
+   * This method sets the {@link #getInitialStartDate() initial start date}.
    * 
-   * @see #getNextStartDate()
-   * 
-   * @return the initial start date.
+   * @param initialStartDate is the initial start date to set.
    */
-  Date getInitialStartDate();
+  void setInitialStartDate(Date initialStartDate);
 
   /**
-   * This method gets the start date of the next occurrence of this event.
+   * This method sets the {@link #getDescription() description}.
    * 
-   * @return the next start date.
+   * @param description is the description to set.
    */
-  Date getNextStartDate();
-
-  String getDescription();
+  void setDescription(String description);
 
 }

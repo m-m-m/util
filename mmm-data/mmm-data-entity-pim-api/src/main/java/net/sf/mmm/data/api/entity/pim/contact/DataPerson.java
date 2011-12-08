@@ -6,86 +6,65 @@ package net.sf.mmm.data.api.entity.pim.contact;
 import java.util.Date;
 
 import net.sf.mmm.data.api.entity.DataEntity;
-import net.sf.mmm.util.datatype.api.Gender;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.util.datatype.api.person.Gender;
 
 /**
- * This is the interface for a {@link DataEntity} that represents a natural
- * person.
+ * This is the interface for a mutable {@link DataPersonView person}.
  * 
- * @see DataContact
- * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataPerson extends DataEntity {
+@DataClassAnnotation(id = DataPersonView.CLASS_ID, title = DataPersonView.CLASS_TITLE)
+public interface DataPerson extends DataPersonView, DataEntity {
 
   /**
-   * This method gets the {@link Gender} of the person.
+   * This method sets the {@link #getGender() gender}.
    * 
-   * @return the {@link Gender} or <code>null</code> if undefined (unknown).
+   * @param gender is the {@link Gender} to set.
    */
-  Gender getGender();
+  void setGender(Gender gender);
 
   /**
-   * This method gets the first name of the person. This can also be a double
-   * name like "Jean-Pascal".
+   * This method sets the {@link #getFirstName() first name}.
    * 
-   * @return the first name or <code>null</code> if undefined (unknown).
+   * @param firstName is the first name to set.
    */
-  String getFirstName();
+  void setFirstName(String firstName);
 
   /**
-   * This method gets the middle name(s) of the person. This can also be a list
-   * of additional names.
+   * This method sets the {@link #getMiddleName() middle name(s)}.
    * 
-   * @return the middle name(s) or <code>null</code> if undefined (unknown).
+   * @param middleName is the middle name(s) to set.
    */
-  String getMiddleName();
+  void setMiddleName(String middleName);
 
   /**
-   * This method gets the last name (also called surname or family name) of the
-   * person. This is typically the most important and official part of the name
-   * in order to identify or speak to the person.
+   * This method sets the {@link #getLastName() last name}.
    * 
-   * @return the last name or <code>null</code> if undefined (unknown).
+   * @param lastName is the last name to set.
    */
-  String getLastName();
+  void setLastName(String lastName);
 
   /**
-   * This method gets the optional name prefix. This is typically an academic,
-   * professional, social, or different title.
+   * This method sets the {@link #getNamePrefix() name prefix}.
    * 
-   * @return the name prefix or <code>null</code> if undefined (unknown).
+   * @param namePrefix is the name prefix to set.
    */
-  String getNamePrefix();
+  void setNamePrefix(String namePrefix);
 
   /**
-   * This method gets the optional name suffix. This is typically some official
-   * title. E.g. various emperors had Roman numbers (e.g. "XIV" for 14) as
-   * suffix to their name. Another example is the suffix "SJ" for the catholic
-   * order "societas jesu".
+   * This method gets the {@link #getNameSuffix() name suffix}.
    * 
-   * @return the name suffix or <code>null</code> if undefined (unknown).
+   * @param nameSuffix is the name suffix to set.
    */
-  String getNameSuffix();
+  void setNameSuffix(String nameSuffix);
 
   /**
-   * <b>ATTENTION:</b><br/>
-   * This method is inherited from {@link net.sf.mmm.data.api.DataObject}. In
-   * the context of a person, you might expect something like a "doctor" as
-   * title what is addressed by {@link #getNamePrefix()}. Instead this method
-   * will return a formatted string combining various fields of the person.<br/>
+   * This method sets the {@link #getDateOfBirth() birthday}.
    * 
-   * {@inheritDoc}
+   * @param dateOfBirth is the {@link Date} of the birth to set.
    */
-  String getTitle();
-
-  /**
-   * This method gets the birthday of the person.
-   * 
-   * @return the {@link Date} of the birth or <code>null</code> if undefined
-   *         (unknown).
-   */
-  Date getDateOfBirth();
+  void setDateOfBirth(Date dateOfBirth);
 
 }

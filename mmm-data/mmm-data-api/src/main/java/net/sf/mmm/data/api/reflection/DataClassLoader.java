@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
@@ -31,6 +31,6 @@ public interface DataClassLoader {
    * @throws DataReflectionException if the configured model is illegal in
    *         any way.
    */
-  DataClass<? extends DataObject> loadClasses() throws DataReflectionException;
+  DataClass<? extends DataObjectView> loadClasses() throws DataReflectionException;
 
 }

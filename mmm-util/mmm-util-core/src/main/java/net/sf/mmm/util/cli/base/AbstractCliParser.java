@@ -121,6 +121,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   protected void checkOptionName(String name, CliOptionContainer optionContainer) {
 
+    // nothing by default, override to specialize
   }
 
   /**

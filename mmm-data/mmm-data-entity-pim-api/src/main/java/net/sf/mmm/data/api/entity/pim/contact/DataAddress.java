@@ -5,74 +5,63 @@ package net.sf.mmm.data.api.entity.pim.contact;
 
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.api.entity.pim.DataCountry;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 
 /**
- * This is the interface for a {@link net.sf.mmm.data.api.entity.DataEntity}
- * that represents an address.
- * 
- * @see DataContact
+ * This is the interface for a mutable {@link DataAddressView address}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataAddress extends DataEntity {
+@DataClassAnnotation(id = DataAddressView.CLASS_ID, title = DataAddressView.CLASS_TITLE)
+public interface DataAddress extends DataAddressView, DataEntity {
 
-  // TODO: Datatype/Entity ?
   /**
-   * This method gets the country where the address is located.
+   * This method sets the {@link #getCity() city}.
    * 
-   * @return the country or <code>null</code> if not defined.
+   * @param city is the new city to set.
+   */
+  void setCity(String city);
+
+  /**
+   * {@inheritDoc}
    */
   DataCountry getCountry();
 
-  // TODO Datatype?
   /**
-   * This method gets the country or province where the address is located.
-   * Depending on the {@link #getCountry() country} this property is mandatory
-   * for a valid address or not. E.g. in the USA the state is important to
-   * identify an address while e.g. in Germany it is optional.
+   * This method sets the {@link #getCountry() country}.
    * 
-   * @return the state/province or <code>null</code> if not defined.
+   * @param country is the country to set.
    */
-  String getState();
-
-  // TODO Datatype?
-  /**
-   * This method gets the city (or village) the address is located in. This is a
-   * very important information. However, it may be possible to derive the city
-   * from the {@link #getPostalCode() postal code}.
-   * 
-   * @return the city or <code>null</code> if not defined.
-   */
-  String getCity();
+  void setCountry(DataCountry country);
 
   /**
-   * This method gets the street the address is located in. This is excluding
-   * the {@link #getHouseNumber() house number}.
+   * This method sets the {@link #getHouseNumber() house number}.
    * 
-   * @return the street.
+   * @param houseNumber is the house number to set.
    */
-  String getStreet();
+  void setHouseNumber(String houseNumber);
 
-  // TODO Datatype?
   /**
-   * This method gets the house number of the address in the
-   * {@link #getStreet() street}. Please note that the house number can be
-   * alphanumeric (e.g. "12 abc"). In most locations the house number starts
-   * with a digit. However, in some locations the house number starts with a
-   * letter (e.g. "N123") or is a name and no number at all.
+   * This method sets the {@link #getPostalCode() postal code}.
    * 
-   * @return the house number or <code>null</code> if not defined.
+   * @param postalCode is the postal code to set.
    */
-  String getHouseNumber();
+  void setPostalCode(PostalCode postalCode);
 
-  // TODO Datatype?
   /**
-   * This method gets the {@link PostalCode}.
+   * This method sets the {@link #getState() state/province}.
    * 
-   * @return the {@link PostalCode} or <code>null</code> if not defined.
+   * @param state is the state/province to set.
    */
-  PostalCode getPostalCode();
+  void setState(String state);
+
+  /**
+   * This method sets the {@link #getStreet() street}.
+   * 
+   * @param street is the street to set.
+   */
+  void setStreet(String street);
 
 }

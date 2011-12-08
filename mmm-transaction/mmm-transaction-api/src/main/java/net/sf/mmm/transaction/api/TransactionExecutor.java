@@ -5,6 +5,7 @@ package net.sf.mmm.transaction.api;
 
 import java.util.concurrent.Callable;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.event.api.EventSource;
 
 /**
@@ -16,6 +17,7 @@ import net.sf.mmm.util.event.api.EventSource;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@ComponentSpecification
 public interface TransactionExecutor extends
     EventSource<TransactionEvent, TransactionEventListener> {
 

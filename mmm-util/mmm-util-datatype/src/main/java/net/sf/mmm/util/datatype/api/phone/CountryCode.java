@@ -3,14 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.phone;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This class is a {@link Datatype} that represents the country code for a phone
- * number. The country code is the prefix of the phone number that identifies
- * the country where the phone is located.<br/>
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the
+ * country code for a phone number. The country code is the prefix of the phone
+ * number that identifies the country where the phone is located.<br/>
  * If formatted as string the country code is typically prefixed by "+". This
  * stands for the actual {@link InternationalCallPrefix}.<br/>
  * <b>ATTENTION:</b><br/>
@@ -27,13 +27,13 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class CountryCode implements Datatype<Integer> {
+public final class CountryCode extends AbstractSimpleDatatype<Integer> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 6052425985912842711L;
 
-  /** @see #getCountryCode() */
-  private final int countyCode;
+  /** The maximum {@link #getValue() value}. */
+  private static final int MAX_VALUE = 9999;
 
   /**
    * The constructor.
@@ -42,10 +42,9 @@ public final class CountryCode implements Datatype<Integer> {
    */
   public CountryCode(int countryCode) {
 
-    super();
+    super(Integer.valueOf(countryCode));
     ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0),
-        Integer.valueOf(9999), "country code");
-    this.countyCode = countryCode;
+        Integer.valueOf(MAX_VALUE), "country code");
   }
 
   /**
@@ -72,6 +71,8 @@ public final class CountryCode implements Datatype<Integer> {
       normalized = normalized.substring(1);
     } else if (normalized.startsWith(InternationalCallPrefix.PREFIX_00)) {
       normalized = normalized.substring(2);
+    } else if (normalized.startsWith(InternationalCallPrefix.PREFIX_011)) {
+      normalized = normalized.substring(3);
     }
     if (normalized.startsWith("0")) {
       throw new NlsParseException(countryCode, CountryCode.class);
@@ -92,54 +93,16 @@ public final class CountryCode implements Datatype<Integer> {
    */
   public int getCountryCode() {
 
-    return this.countyCode;
+    return getValue().intValue();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean equals(Object obj) {
-
-    if ((obj == null) || (obj.getClass() != CountryCode.class)) {
-      return false;
-    }
-    CountryCode other = (CountryCode) obj;
-    return (this.countyCode == other.countyCode);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int hashCode() {
-
-    return this.countyCode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Integer getValue() {
-
-    return Integer.valueOf(this.countyCode);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public String getTitle() {
 
-    return InternationalCallPrefix.PREFIX_PLUS + this.countyCode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    return getTitle();
+    return InternationalCallPrefix.PREFIX_PLUS + getValue();
   }
 
 }

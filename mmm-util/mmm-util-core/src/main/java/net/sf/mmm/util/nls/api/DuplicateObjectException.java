@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import java.util.Map;
+
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
@@ -55,6 +57,31 @@ public class DuplicateObjectException extends NlsRuntimeException {
 
     super(NlsBundleUtilCore.ERR_DUPLICATE_OBJECT_WITH_KEY_AND_EXISTING, toMap(KEY_OBJECT, object,
         KEY_KEY, key, KEY_EXISTING, existing));
+  }
+
+  /**
+   * This method {@link Map#put(Object, Object) puts} the given
+   * <code>value</code> into the given <code>map</code> using the given
+   * <code>key</code>.
+   * 
+   * @param <KEY> is the generic type of the <code>key</code>.
+   * @param <VALUE> is the generic type of the <code>value</code>.
+   * @param map is the {@link Map}.
+   * @param key is the {@link Map#get(Object) key}.
+   * @param value is the value to {@link Map#put(Object, Object) put}.
+   * @throws DuplicateObjectException if the given <code>map</code> already
+   *         contains a value for the given <code>key</code> that is NOT equal
+   *         to the given <code>value</code>.
+   * @since 2.0.2
+   */
+  public static <KEY, VALUE> void put(Map<KEY, VALUE> map, KEY key, VALUE value)
+      throws DuplicateObjectException {
+
+    VALUE old = map.get(key);
+    if ((old != null) && (!old.equals(value))) {
+      throw new DuplicateObjectException(value, key, old);
+    }
+    map.put(key, value);
   }
 
 }

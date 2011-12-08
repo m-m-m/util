@@ -13,4 +13,6 @@ import net.sf.mmm.util.event.api.EventListener;
  */
 public interface TransactionEventListener extends EventListener<TransactionEvent> {
 
+  // nothing to add, just bound generic
+
 }

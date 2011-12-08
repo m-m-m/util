@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.link;
 
-import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.entity.DataEntityView;
 import net.sf.mmm.data.api.link.Link;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.data.api.link.Link;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractLink<TARGET extends DataEntity> implements Link<TARGET> {
+public abstract class AbstractLink<TARGET extends DataEntityView> implements Link<TARGET> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8830581540069493211L;

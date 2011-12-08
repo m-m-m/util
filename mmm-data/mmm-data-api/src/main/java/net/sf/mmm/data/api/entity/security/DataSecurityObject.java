@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.security;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
  * @since 1.0.0
  */
 @DataClassAnnotation(id = DataSecurityObject.CLASS_ID)
-public abstract interface DataSecurityObject extends DataObject {
+public abstract interface DataSecurityObject extends DataObjectView {
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of

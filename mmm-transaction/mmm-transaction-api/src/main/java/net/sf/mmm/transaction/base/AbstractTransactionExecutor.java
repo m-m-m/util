@@ -14,6 +14,7 @@ import net.sf.mmm.transaction.api.TransactionEventType;
 import net.sf.mmm.transaction.api.TransactionExecutor;
 import net.sf.mmm.transaction.api.TransactionSettings;
 import net.sf.mmm.util.event.base.AbstractEventSource;
+import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
  * This is the abstract base implementation of the {@link TransactionExecutor}
@@ -101,20 +102,22 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
-  public <RESULT> RESULT doInTransaction(Callable<RESULT> callable, TransactionSettings settings)
-      throws Exception {
+  public <RESULT> RESULT doInTransaction(final Callable<RESULT> callable,
+      TransactionSettings settings) throws Exception {
 
-    AbstractTransactionAdapter<?> transactionAdapter = openTransactionAdapter(settings);
-    transactionAdapter.start();
-    try {
-      RESULT result = callable.call();
-      if (transactionAdapter.isActive()) {
-        transactionAdapter.commit();
+    TransactionCallable<RESULT> transactionCallable = new TransactionCallable<RESULT>() {
+
+      public RESULT call(TransactionAdapter transactionContext) {
+
+        try {
+          return callable.call();
+        } catch (Exception e) {
+          throw new InvocationFailedException(e);
+        }
       }
-      return result;
-    } finally {
-      transactionAdapter.stop();
-    }
+
+    };
+    return doInTransaction(transactionCallable, settings);
   }
 
   /**
@@ -140,8 +143,20 @@ public abstract class AbstractTransactionExecutor extends
         transactionAdapter.commit();
       }
       return result;
-    } finally {
-      transactionAdapter.stop();
+    } catch (RuntimeException e) {
+      try {
+        transactionAdapter.stop();
+      } catch (Exception e2) {
+        getLogger().error("Error whilst stop/rollback of transaction in exceptional state.", e2);
+      }
+      throw e;
+    } catch (Error e) {
+      try {
+        transactionAdapter.stop();
+      } catch (Exception e2) {
+        getLogger().error("Error whilst stop/rollback of transaction in exceptional state.", e2);
+      }
+      throw e;
     }
   }
 
@@ -206,7 +221,7 @@ public abstract class AbstractTransactionExecutor extends
      * @throws TransactionNotActiveException if there is no {@link #isActive()
      *         active} transaction.
      */
-    protected TRANSACTION getActiveTransaction() {
+    protected TRANSACTION getActiveTransaction() throws TransactionNotActiveException {
 
       if (this.activeTransaction == null) {
         throw new TransactionNotActiveException();

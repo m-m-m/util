@@ -14,8 +14,11 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @see RevisionedPersistenceEntity
  * 
- * @param <ID> is the type of the {@link #getId() primary key}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
+ * @param <ID> is the type of the
+ *        {@link net.sf.mmm.persistence.api.PersistenceEntity#getId() primary
+ *        key}.
+ * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the
+ *        managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -39,7 +42,8 @@ public interface RevisionedPersistenceEntityManager<ID, ENTITY extends Revisione
   /**
    * This method will get the {@link List} of {@link RevisionMetadata} from the
    * {@link RevisionedPersistenceEntity#getRevision() revision}-history of the
-   * {@link #getEntityClassImplementation() entity} with the given <code>id</code>.
+   * {@link #getEntityClassImplementation() entity} with the given
+   * <code>id</code>.
    * 
    * @param id is the {@link PersistenceEntity#getId() primary key} of the
    *        entity for which the history-metadata is requested.

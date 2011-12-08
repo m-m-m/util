@@ -145,7 +145,7 @@ public class CliState extends CliClassContainer {
       boolean addAfter = cliArgument.addAfter();
       String nextTo = cliArgument.addCloseTo();
       if (CliArgument.ID_FIRST.equals(nextTo)) {
-        if (startHead == null) {
+        if ((startHead == null) || (startTail == null)) {
           startHead = node;
           startTail = node;
         } else {
@@ -159,7 +159,7 @@ public class CliState extends CliClassContainer {
         }
         argumentContainer.setState(InitializationState.INITIALIZED);
       } else if (CliArgument.ID_LAST.equals(nextTo)) {
-        if (endTail == null) {
+        if ((endTail == null) || (endHead == null)) {
           endTail = node;
           endHead = node;
         } else {

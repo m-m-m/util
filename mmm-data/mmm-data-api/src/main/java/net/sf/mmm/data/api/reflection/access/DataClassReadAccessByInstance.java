@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection.access;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This interface allows to {@link #getDataClass(DataClass) get} a
- * {@link DataClass} for a given {@link net.sf.mmm.data.api.DataObject instance}
+ * {@link DataClass} for a given {@link net.sf.mmm.data.api.DataObjectView instance}
  * .
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -31,6 +31,6 @@ public interface DataClassReadAccessByInstance {
    * @throws ObjectNotFoundException if the given <code>dataObject</code> is
    *         unknown.
    */
-  <O extends DataObject> DataClass<O> getDataClass(O dataObject) throws ObjectNotFoundException;
+  <O extends DataObjectView> DataClass<O> getDataClass(O dataObject) throws ObjectNotFoundException;
 
 }

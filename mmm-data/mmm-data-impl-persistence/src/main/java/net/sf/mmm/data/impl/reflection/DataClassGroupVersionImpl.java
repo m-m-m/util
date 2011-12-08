@@ -3,9 +3,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.reflection;
 
-import javax.persistence.Embeddable;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
+import net.sf.mmm.persistence.api.PersistenceEntity;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 import org.hibernate.annotations.Type;
@@ -16,11 +21,11 @@ import org.hibernate.annotations.Type;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Embeddable
-public class DataClassGroupVersionImpl implements DataClassGroupVersion {
+@Entity(name = "DataClassGroupVersion")
+public class DataClassGroupVersionImpl implements DataClassGroupVersion, PersistenceEntity<String> {
 
-  /** @see #getGroupId() */
-  private String groupId;
+  /** @see #getId() */
+  private String id;
 
   /** @see #getGroupVersion() */
   private VersionIdentifier groupVersion;
@@ -42,16 +47,34 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion {
   public DataClassGroupVersionImpl(String groupId, VersionIdentifier groupVersion) {
 
     super();
-    this.groupId = groupId;
+    setId(groupId);
     this.groupVersion = groupVersion;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Id
+  public String getId() {
+
+    return this.id;
+  }
+
+  /**
+   * @param id is the id to set
+   */
+  public void setId(String id) {
+
+    this.id = id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
   public String getGroupId() {
 
-    return this.groupId;
+    return getId();
   }
 
   /**
@@ -59,7 +82,7 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion {
    */
   protected void setGroupId(String groupId) {
 
-    this.groupId = groupId;
+    setId(groupId);
   }
 
   /**
@@ -77,6 +100,34 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion {
   protected void setGroupVersion(VersionIdentifier groupVersion) {
 
     this.groupVersion = groupVersion;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public int getModificationCounter() {
+
+    return 0;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public Date getModificationTimestamp() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public boolean isPersistent() {
+
+    // how to implement this?
+    return false;
   }
 
 }

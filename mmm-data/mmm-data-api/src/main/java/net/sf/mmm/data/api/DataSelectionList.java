@@ -6,20 +6,15 @@ package net.sf.mmm.data.api;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
- * This is the interface for a {@link DataSelection selection} that is chosen
- * from a flat list.
+ * This is the interface of a mutable {@link DataSelectionListView
+ * selection-list}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataSelectionList.CLASS_ID)
-public abstract interface DataSelectionList extends DataSelection {
+@DataClassAnnotation(id = DataSelectionListView.CLASS_ID, title = DataSelectionListView.CLASS_TITLE)
+public interface DataSelectionList extends DataSelectionListView {
 
-  /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID}
-   * of the {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
-   * this type.
-   */
-  int CLASS_ID = 4;
+  // nothing to add.
 
 }

@@ -4,10 +4,10 @@
 package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.NlsBundleDataApi;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 
 /**
- * This exception is thrown if a {@link DataObject} could NOT be modified
+ * This exception is thrown if a {@link DataObjectView} could NOT be modified
  * because it is
  * {@link net.sf.mmm.data.api.reflection.DataModifiers#isSystem() required by
  * the system}.
@@ -23,12 +23,12 @@ public class DataSystemModifyException extends DataReflectionException {
   /**
    * The constructor.
    * 
-   * @param systemObject is the {@link DataObject} that could NOT be modified
+   * @param systemObject is the {@link DataObjectView} that could NOT be modified
    *        because it is a
    *        {@link net.sf.mmm.data.api.reflection.DataModifiers#isSystem()
    *        system}-object.
    */
-  public DataSystemModifyException(DataObject systemObject) {
+  public DataSystemModifyException(DataObjectView systemObject) {
 
     super(NlsBundleDataApi.ERR_MODIFY_SYSTEM, toMap(KEY_OBJECT, systemObject));
   }

@@ -5,17 +5,29 @@ package net.sf.mmm.data.api.entity.pim.calendar;
 
 import java.util.Date;
 
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
- * TODO: this class ...
+ * This is the interface for a mutable {@link DataAppointmentView appointment}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataAppointment extends DataEvent {
+@DataClassAnnotation(id = DataAppointmentView.CLASS_ID, title = DataAppointmentView.CLASS_TITLE)
+public interface DataAppointment extends DataAppointmentView, DataEvent {
 
-  String getLocation();
+  /**
+   * This method sets the {@link #getLocation() location}.
+   * 
+   * @param location is the location to set.
+   */
+  void setLocation(String location);
 
-  Date getEndDate();
+  /**
+   * This method sets the {@link #getInitialEndDate() initial end date}.
+   * 
+   * @param initialEndDate is the initial end date to set.
+   */
+  void setInitialEndDate(Date initialEndDate);
 
 }

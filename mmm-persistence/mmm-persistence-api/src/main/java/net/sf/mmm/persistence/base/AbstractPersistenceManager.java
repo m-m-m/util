@@ -113,6 +113,16 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
+  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY loadIfExists(Class<ENTITY> entityClass,
+      ID id) {
+
+    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    return manager.loadIfExists(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass,
       ID id) throws ObjectNotFoundException {
 

@@ -58,7 +58,6 @@ public class SpringContainer implements IocContainer {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass) {
 
     COMPONENT_API component = null;

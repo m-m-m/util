@@ -13,7 +13,7 @@ import java.util.Map;
 
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
@@ -30,14 +30,14 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataClass<CLASS extends DataObject> extends
+public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
     AbstractDataReflectionObject<CLASS> implements DataClass<CLASS> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -8444545908272830489L;
 
   /** the super-class of this class */
-  private AbstractDataClass<? extends DataObject> superClass;
+  private AbstractDataClass<? extends DataObjectView> superClass;
 
   /** @see #getModifiers() */
   private DataClassModifiers modifiers;
@@ -55,7 +55,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   private final Collection<AbstractDataField<CLASS, ?>> declaredFieldsView;
 
   /** @see #getDeclaredFields() */
-  private final Collection<AbstractDataField<? extends DataObject, ?>> fieldsView;
+  private final Collection<AbstractDataField<? extends DataObjectView, ?>> fieldsView;
 
   // /** @see #isRevisionControlled() */
   // private boolean revisionControlled;
@@ -74,7 +74,6 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  @Override
   public long getDataClassId() {
 
     return DataClass.CLASS_ID;
@@ -84,7 +83,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * {@inheritDoc}
    */
   @Transient
-  public AbstractDataClass<? extends DataObject> getParent() {
+  public AbstractDataClass<? extends DataObjectView> getParent() {
 
     return getSuperClass();
   }
@@ -92,7 +91,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObject> getSuperClass() {
+  public AbstractDataClass<? extends DataObjectView> getSuperClass() {
 
     return this.superClass;
   }
@@ -102,7 +101,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * 
    * @param superClass the super-class to set.
    */
-  protected void setSuperClass(AbstractDataClass<? extends DataObject> superClass) {
+  protected void setSuperClass(AbstractDataClass<? extends DataObjectView> superClass) {
 
     this.superClass = superClass;
   }
@@ -110,7 +109,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public List<? extends DataClass<? extends DataObject>> getChildren() {
+  public List<? extends DataClass<? extends DataObjectView>> getChildren() {
 
     return getSubClasses();
   }
@@ -171,9 +170,9 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField<? extends DataObject, ?> getField(String title) {
+  public AbstractDataField<? extends DataObjectView, ?> getField(String title) {
 
-    AbstractDataField<? extends DataObject, ?> field = this.declaredFields.get(title);
+    AbstractDataField<? extends DataObjectView, ?> field = this.declaredFields.get(title);
     if ((field == null) && (this.superClass != null)) {
       field = this.superClass.getField(title);
     }
@@ -183,7 +182,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public Collection<AbstractDataField<? extends DataObject, ?>> getFields() {
+  public Collection<AbstractDataField<? extends DataObjectView, ?>> getFields() {
 
     return this.fieldsView;
   }
@@ -245,7 +244,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isSubClassOf(DataClass<? extends DataObject> dataClass) {
+  public boolean isSubClassOf(DataClass<? extends DataObjectView> dataClass) {
 
     if (this.superClass == null) {
       // root-class can NOT be a sub-class
@@ -262,7 +261,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isSuperClassOf(DataClass<? extends DataObject> dataClass) {
+  public boolean isSuperClassOf(DataClass<? extends DataObjectView> dataClass) {
 
     return dataClass.isSubClassOf(this);
   }
@@ -270,7 +269,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isAncestor(DataClass<? extends DataObject> dataClass) {
+  public boolean isAncestor(DataClass<? extends DataObjectView> dataClass) {
 
     return isSuperClassOf(dataClass);
   }
@@ -278,7 +277,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isDescendant(DataClass<? extends DataObject> dataClass) {
+  public boolean isDescendant(DataClass<? extends DataObjectView> dataClass) {
 
     return isSubClassOf(dataClass);
   }
@@ -320,7 +319,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
    * @see DataClass#getFields()
    */
   private class FieldsCollection extends
-      AbstractCollection<AbstractDataField<? extends DataObject, ?>> {
+      AbstractCollection<AbstractDataField<? extends DataObjectView, ?>> {
 
     /**
      * {@inheritDoc}
@@ -350,7 +349,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
      * {@inheritDoc}
      */
     @Override
-    public Iterator<AbstractDataField<? extends DataObject, ?>> iterator() {
+    public Iterator<AbstractDataField<? extends DataObjectView, ?>> iterator() {
 
       return new DataFieldIterator(AbstractDataClass.this);
     }
@@ -363,8 +362,8 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
     public boolean contains(Object o) {
 
       if (o instanceof DataField) {
-        DataField<? extends DataObject, ?> field = (DataField<? extends DataObject, ?>) o;
-        DataClass<? extends DataObject> declaringClass = field.getDeclaringClass();
+        DataField<? extends DataObjectView, ?> field = (DataField<? extends DataObjectView, ?>) o;
+        DataClass<? extends DataObjectView> declaringClass = field.getDeclaringClass();
         if ((declaringClass == AbstractDataClass.this)
             || (declaringClass.isSuperClassOf(AbstractDataClass.this))) {
           return true;
@@ -386,7 +385,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
      * {@inheritDoc}
      */
     @Override
-    public boolean add(AbstractDataField<? extends DataObject, ?> e) {
+    public boolean add(AbstractDataField<? extends DataObjectView, ?> e) {
 
       throw new UnsupportedOperationException();
     }
@@ -395,7 +394,7 @@ public abstract class AbstractDataClass<CLASS extends DataObject> extends
      * {@inheritDoc}
      */
     @Override
-    public boolean addAll(Collection<? extends AbstractDataField<? extends DataObject, ?>> c) {
+    public boolean addAll(Collection<? extends AbstractDataField<? extends DataObjectView, ?>> c) {
 
       throw new UnsupportedOperationException();
     }

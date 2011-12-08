@@ -3,71 +3,34 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.pim.contact;
 
-import java.util.List;
-
 import net.sf.mmm.data.api.entity.DataEntity;
-import net.sf.mmm.data.api.link.Link;
-import net.sf.mmm.data.api.link.LinkList;
+import net.sf.mmm.data.api.link.MutableLinkList;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
- * This is the interface for a {@link DataEntity} that represents a contact.
- * Such object combines all important information to get or stay in contact with
- * a {@link #getPerson() person}.
+ * This is the interface for a mutable {@link DataContactView contact}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataContact extends DataEntity {
+@DataClassAnnotation(id = DataContactView.CLASS_ID, title = DataContactView.CLASS_TITLE)
+public interface DataContact extends DataContactView, DataEntity {
 
   /**
-   * The {@link Link#getClassifier() classifier} of {@link #getRelatedPersons()
-   * related person} that is a spouse (husband or wife) or girl-/boy-friend.
-   */
-  String RELATED_PERSON_CLASSIFIER_PARTNER = "partner";
-
-  /**
-   * The {@link Link#getClassifier() classifier} of {@link #getRelatedPersons()
-   * related person} that is a spouse (husband or wife) or girl-/boy-friend.
-   */
-  String RELATED_PERSON_CLASSIFIER_RELATIVE = "relative";
-
-  /**
-   * This method gets the {@link DataPerson person} associated with this
-   * contact.
+   * This method sets the {@link #getPerson() person}.
    * 
-   * @return the person.
+   * @param person is the {@link DataPerson} to set.
    */
-  DataPerson getPerson();
+  void setPerson(DataPerson person);
 
   /**
-   * This method gets the list of related persons.
-   * 
-   * @return
+   * {@inheritDoc}
    */
-  LinkList<DataPerson> getRelatedPersons();
-
-  LinkList<DataEmailAddress> getEmailAddresses();
+  MutableLinkList<DataContact> getRelatedContacts();
 
   /**
-   * This method gets the default {@link DataAddress} out of the
-   * {@link #getAddresses() addresses}.
-   * 
-   * @return the default address or <code>null</code> if undefined (list of
-   *         {@link #getAddresses() addresses} is empty).
+   * {@inheritDoc}
    */
-  DataAddress getDefaultAddress();
-
-  /**
-   * This method gets the list of {@link DataAddress addresses} associated with
-   * this contact. Each {@link DataAddress address} is
-   * {@link net.sf.mmm.data.api.entity.DataEntityClassified#getClassifier()
-   * classified}. It is best practice NOT to have two addresses with the same
-   * {@link net.sf.mmm.data.api.entity.DataEntityClassified#getClassifier()
-   * classifier}.
-   * 
-   * @return the {@link List} of {@link DataAddress addresses}. Initially empty
-   *         but NOT <code>null</code>.
-   */
-  LinkList<DataAddress> getAddresses();
+  MutableLinkList<DataContactInfo> getContactInfos();
 
 }

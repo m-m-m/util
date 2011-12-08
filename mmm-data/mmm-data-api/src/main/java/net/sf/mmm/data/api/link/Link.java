@@ -3,12 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.link;
 
-import net.sf.mmm.data.api.datatype.DataId;
-import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.entity.DataEntityView;
 import net.sf.mmm.util.lang.api.Datatype;
 
 /**
- * This is the interface for a link pointing from one {@link DataEntity} to
+ * This is the interface for a link pointing from one {@link DataEntityView} to
  * {@link #getTarget() another}. A link is an immutable object - it can not be
  * modified.
  * 
@@ -20,13 +19,13 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface Link<TARGET extends DataEntity> extends Datatype<TARGET> {
+public interface Link<TARGET extends DataEntityView> extends Datatype<TARGET> {
 
   /**
-   * This method gets the {@link DataEntity} this link is pointing to.<br/>
+   * This method gets the {@link DataEntityView} this link is pointing to.<br/>
    * It may be a proxy-object that is lazy loaded if specific methods are
    * called. It is safe to get the
-   * {@link net.sf.mmm.data.api.DataObject#getId() ID} without retrieving the
+   * {@link net.sf.mmm.data.api.DataObjectView#getId() ID} without retrieving the
    * actual entity from the repository. This way you can filter {@link Link}s
    * according to their {@link net.sf.mmm.data.api.datatype.DataId#getClassId()
    * type} extremely fast (see
@@ -40,7 +39,7 @@ public interface Link<TARGET extends DataEntity> extends Datatype<TARGET> {
   /**
    * This method gets the classification of the link. The classifier should be
    * named in meaning of a has-relation from the source to {@link #getTarget()
-   * target} {@link net.sf.mmm.data.api.entity.DataEntity entity}. So e.g. if a
+   * target} {@link net.sf.mmm.data.api.entity.DataEntityView entity}. So e.g. if a
    * person has a link to another person classified with "parent" this should be
    * understood in the sense that the linking person <b><em>has</em></b> the
    * linked person as parent (father or mother).

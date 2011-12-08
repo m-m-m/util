@@ -15,14 +15,12 @@ import java.util.Date;
  * <ul>
  * <li>A {@link PersistenceEntity} is identified by a {@link #getId() primary
  * key}.</li>
- * <li>If a {@link #getModificationCounter() modification-counter} is used, it
- * should be of the type <code>int</code> (and no {@link java.sql.Timestamp}).</li>
  * </ul>
  * <b>ATTENTION:</b><br>
  * An entity (instance of this interface) can NOT be considered as a regular
  * Java-object. It is better to think of an entity as a direct view into the
  * persistent store. Therefore you should never make modifications (e.g. invoke
- * setters) that are NOT intended to be persisted.<br>
+ * setters or sort list properties) that are NOT intended to be persisted.<br>
  * Further the underlying persistence-code may create dynamic proxies for your
  * entity. Therefore you should NOT declare methods (getters and setters) as
  * <code>final</code> except you exactly know what you are doing. Additionally

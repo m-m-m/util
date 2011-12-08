@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.DataSelectionTreeList;
+import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataSelectionTreeListView;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -26,17 +27,19 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataField<CLASS extends DataObject, FIELD> extends DataReflectionObject<CLASS>,
-    DataFieldAccessor<CLASS, FIELD>, DataSelectionTreeList<DataClass<? extends DataObject>> {
+@DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_TITLE, isFinal = BooleanEnum.TRUE)
+public interface DataField<CLASS extends DataObjectView, FIELD> extends
+    DataReflectionObject<CLASS>, DataFieldAccessor<CLASS, FIELD>,
+    DataSelectionTreeListView<DataClass<? extends DataObjectView>> {
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link DataClass} reflecting this type.
    */
-  short CLASS_ID = 3;
+  long CLASS_ID = DataClassIds.ID_FIELD;
 
   /**
-   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
+   * The {@link net.sf.mmm.data.api.DataObjectView#getTitle() name} of the
    * {@link DataClass} reflecting this type.
    */
   String CLASS_TITLE = "DataField";
@@ -71,7 +74,7 @@ public interface DataField<CLASS extends DataObject, FIELD> extends DataReflecti
    * 
    * @return the {@link #getDeclaringClass() declaring-class}.
    */
-  DataClass<? extends DataObject> getParent();
+  DataClass<? extends DataObjectView> getParent();
 
   /**
    * This method gets the content-class that declares this field. This does NOT
@@ -98,7 +101,7 @@ public interface DataField<CLASS extends DataObject, FIELD> extends DataReflecti
    * 
    * @return the class that initially defines this field.
    */
-  DataClass<? extends DataObject> getInitiallyDefiningClass();
+  DataClass<? extends DataObjectView> getInitiallyDefiningClass();
 
   // /**
   // * This method gets the direct sub-fields of this field. The sub-fields are
@@ -118,7 +121,7 @@ public interface DataField<CLASS extends DataObject, FIELD> extends DataReflecti
    * @return the field extended by this field or <code>null</code> if the field
    *         is NOT inherited.
    */
-  DataField<? extends DataObject, ? super FIELD> getSuperField();
+  DataField<? extends DataObjectView, ? super FIELD> getSuperField();
 
   /**
    * This method gets the specification of the fields type. This is the most

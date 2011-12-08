@@ -47,11 +47,11 @@ public abstract class JpaRevisionedPersistenceEntity<ID> extends JpaPersistenceE
   }
 
   /**
-   * TODO: reduce visibility to protected - currently prevented by hibernate bug
+   * This method sets the {@link #getRevision() revision}.
    * 
    * @param revision is the revision to set
    */
-  public void setRevision(Number revision) {
+  protected void setRevision(Number revision) {
 
     this.revision = revision;
   }

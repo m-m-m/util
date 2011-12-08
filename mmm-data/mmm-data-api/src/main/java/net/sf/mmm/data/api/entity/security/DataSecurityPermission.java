@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.security;
 
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 
@@ -16,24 +17,45 @@ import net.sf.mmm.data.api.reflection.DataField;
  */
 public interface DataSecurityPermission extends DataSecurityObject {
 
+  /**
+   * TODO: javadoc.
+   * 
+   * @return TODO
+   */
   DataSecuityGroup getParent();
 
+  /**
+   * TODO: javadoc.
+   * 
+   * @return TODO
+   */
   boolean isInheritChildren();
 
-  DataClass getAllowedClass();
+  /**
+   * TODO: javadoc.
+   * 
+   * @return TODO
+   */
+  DataClass<? extends DataObjectView> getAllowedClass();
 
+  /**
+   * TODO: javadoc.
+   * 
+   * @return TODO
+   */
   boolean isInheritSubClasses();
 
   /**
-   * This method gets the field
+   * TODO: javadoc.
    * 
-   * @return
+   * @return TODO
    */
-  DataField getAllowedField();
+  DataField<? extends DataObjectView, ?> getAllowedField();
 
   /**
+   * TODO: javadoc.
    * 
-   * @return
+   * @return TODO
    */
   DataSecurityOperation getAction();
 

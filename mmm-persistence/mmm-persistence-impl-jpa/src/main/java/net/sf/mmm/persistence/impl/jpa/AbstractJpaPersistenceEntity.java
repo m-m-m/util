@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
+import java.util.Date;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,6 +68,24 @@ public abstract class AbstractJpaPersistenceEntity<ID> extends AbstractPersisten
   public boolean isPersistent() {
 
     return super.isPersistent();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public int getModificationCounter() {
+
+    return 0;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public Date getModificationTimestamp() {
+
+    return null;
   }
 
 }

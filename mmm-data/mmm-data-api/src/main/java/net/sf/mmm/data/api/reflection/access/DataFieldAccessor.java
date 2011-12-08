@@ -3,17 +3,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection.access;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.security.api.SecurityException;
 import net.sf.mmm.util.nls.api.ReadOnlyException;
 import net.sf.mmm.util.reflect.api.CastFailedException;
 
 /**
  * This is the interface for an accessor used to
- * {@link #getFieldValue(DataObject) read} or
- * {@link #setFieldValue(DataObject, Object) write} a
+ * {@link #getFieldValue(DataObjectView) read} or
+ * {@link #setFieldValue(DataObjectView, Object) write} a
  * {@link net.sf.mmm.data.api.reflection.DataField field} of a
- * {@link net.sf.mmm.data.api.DataObject content-object}. According to the
+ * {@link net.sf.mmm.data.api.DataObjectView content-object}. According to the
  * {@link net.sf.mmm.data.api.reflection.DataField#getModifiers() modifiers} the
  * field may be
  * {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly()
@@ -25,7 +25,7 @@ import net.sf.mmm.util.reflect.api.CastFailedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataFieldAccessor<CLASS extends DataObject, FIELD> {
+public interface DataFieldAccessor<CLASS extends DataObjectView, FIELD> {
 
   /**
    * This method gets the value of the field from the given <code>object</code>.

@@ -80,6 +80,23 @@ public interface PersistenceManager {
       throws ObjectNotFoundException;
 
   /**
+   * This method loads the {@link PersistenceEntity} with the given
+   * <code>entityClass</code> and <code>id</code> from the persistent store.
+   * 
+   * @see PersistenceEntityManager#loadIfExists(Object)
+   * 
+   * @param <ENTITY> is the generic type of the <code>entityClass</code>.
+   * @param <ID> is the type of the {@link PersistenceEntity#getId() primary
+   *        key}.
+   * @param entityClass is the class reflecting the type of the requested
+   *        entity.
+   * @param id is the {@link PersistenceEntity#getId() primary key} of the
+   *        requested entity.
+   * @return the requested entity or <code>null</code> if it does NOT exist.
+   */
+  <ID, ENTITY extends PersistenceEntity<ID>> ENTITY loadIfExists(Class<ENTITY> entityClass, ID id);
+
+  /**
    * This method creates a lazy reference proxy of the {@link PersistenceEntity}
    * with the given <code>entityClass</code> and <code>id</code> from the
    * persistent store.

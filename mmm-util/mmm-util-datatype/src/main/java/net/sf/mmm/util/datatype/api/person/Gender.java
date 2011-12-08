@@ -60,4 +60,22 @@ public enum Gender implements Datatype<String> {
     return this.title;
   }
 
+  /**
+   * This method gets the {@link Gender} for the given <code>value</code>.
+   * 
+   * @param value is the {@link #getValue() value} of the requested
+   *        {@link Gender}.
+   * @return the requested {@link Gender} or <code>null</code> if no such
+   *         {@link Gender} exists.
+   */
+  public static Gender fromValue(String value) {
+
+    for (Gender gender : values()) {
+      if (gender.value.equals(value)) {
+        return gender;
+      }
+    }
+    return null;
+  }
+
 }

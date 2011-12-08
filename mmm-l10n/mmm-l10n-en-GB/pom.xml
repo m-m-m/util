@@ -11,7 +11,7 @@
   <artifactId>mmm-l10n-en-GB</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>l10n-de</name>
+  <name>l10n-en-GB</name>
   <description>Localization for English (en_GB).</description>
   <dependencies>
   </dependencies>  

@@ -1,0 +1,27 @@
+/* $Id$
+ * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.data.api.entity.audio;
+
+import net.sf.mmm.data.api.DataSelectionTreeView;
+import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+
+/**
+ * This is the interface for a {@link net.sf.mmm.data.api.entity.DataEntityView}
+ * that represents the genre of an audio track.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
+ */
+@DataClassAnnotation()
+public interface DataAudioGenreView extends DataSelectionTreeView<DataAudioGenreView> {
+
+  /**
+   * This method gets the ID of the best matching CDDB genre.
+   * 
+   * @return the best matching CDDB genre ID or <code>0</code> if no CDDB genre
+   *         can be associated (e.g. for the genre root node).
+   */
+  int getCddbGenreId();
+
+}

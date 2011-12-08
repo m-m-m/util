@@ -5,6 +5,17 @@
   <persistence-unit name="m-m-m" transaction-type="RESOURCE_LOCAL">
     <!-- transaction-type="JTA"> -->
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- JPA sucks completely -->    
+    <!-- 
+    <class>net.sf.mmm.data.base.entity.AbstractDataEntity</class>
+    <class>net.sf.mmm.data.impl.reflection.DataClassImpl</class>
+    <class>net.sf.mmm.data.impl.reflection.DataFieldImpl</class>
+    <class>net.sf.mmm.data.impl.entity.resource.DataFileImpl</class>
+    <class>net.sf.mmm.data.impl.entity.resource.DataFolderImpl</class>
+    <class>net.sf.mmm.data.impl.link.LinkImpl</class>
+    <class>net.sf.mmm.data.impl.reflection.DataClassGroupVersionImpl</class>
+     -->
+    
     <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
     <!-- <jta-data-source>java:/DataSource</jta-data-source> -->
     <!-- <mapping-file>META_INF/orm.xml</mapping-file> -->

@@ -5,9 +5,9 @@
  * Provides the API of data entities resources.
  * <a name="documentation"/><h2>Data Entity Resource API</h2> 
  * This package contains the API of a
- * {@link net.sf.mmm.data.api.entity.resource.DataEntityResource} and its 
- * sub-types {@link net.sf.mmm.data.api.entity.resource.DataFolder} and 
- * {@link net.sf.mmm.data.api.entity.resource.DataFile}.
+ * {@link net.sf.mmm.data.api.entity.resource.DataEntityResourceView} and its 
+ * sub-types {@link net.sf.mmm.data.api.entity.resource.DataFolderView} and 
+ * {@link net.sf.mmm.data.api.entity.resource.DataFileView}.
  */
 package net.sf.mmm.data.api.entity.resource;
 

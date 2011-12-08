@@ -3,15 +3,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.phone;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This class is a {@link Datatype} that represents the area code for a phone
- * number. The area code is the part of the phone number that follows after the
- * {@link CountryCode} and identifies the area (typically the major city) that
- * is to be called.<br/>
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the
+ * area code for a phone number. The area code is the part of the phone number
+ * that follows after the {@link CountryCode} and identifies the area (typically
+ * the major city) that is to be called.<br/>
  * <b>ATTENTION:</b><br/>
  * There are countries like Singapore that do not have the concept of area
  * codes.
@@ -19,13 +19,10 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class AreaCode implements Datatype<Integer> {
+public final class AreaCode extends AbstractSimpleDatatype<Integer> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -4095519482392043680L;
-
-  /** @see #getAreaCode() */
-  private final int areaCode;
 
   /**
    * The constructor.
@@ -34,10 +31,9 @@ public final class AreaCode implements Datatype<Integer> {
    */
   public AreaCode(int areaCode) {
 
-    super();
+    super(Integer.valueOf(areaCode));
     ValueOutOfRangeException.checkRange(Integer.valueOf(areaCode), Integer.valueOf(0),
         Integer.valueOf(99999999), "area code");
-    this.areaCode = areaCode;
   }
 
   /**
@@ -87,54 +83,7 @@ public final class AreaCode implements Datatype<Integer> {
    */
   public int getAreaCode() {
 
-    return this.areaCode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean equals(Object obj) {
-
-    if ((obj == null) || (obj.getClass() != AreaCode.class)) {
-      return false;
-    }
-    AreaCode other = (AreaCode) obj;
-    return (this.areaCode == other.areaCode);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int hashCode() {
-
-    return this.areaCode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Integer getValue() {
-
-    return Integer.valueOf(this.areaCode);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getTitle() {
-
-    return Integer.toString(this.areaCode);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    return getTitle();
+    return getValue().intValue();
   }
 
 }

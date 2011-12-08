@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.video;
 
-import net.sf.mmm.data.api.entity.DataEntityWithFile;
+import net.sf.mmm.data.api.entity.DataEntityWithFileView;
 
 /**
  * TODO: this class ...
@@ -11,6 +11,6 @@ import net.sf.mmm.data.api.entity.DataEntityWithFile;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataVideo extends DataEntityWithFile {
+public interface DataVideo extends DataEntityWithFileView {
 
 }

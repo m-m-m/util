@@ -53,6 +53,26 @@ public enum BooleanEnum implements Datatype<Boolean> {
   }
 
   /**
+   * This method determines if this instance is {@link #TRUE}.
+   * 
+   * @return <code>true</code> if {@link #TRUE}, <code>false</code> otherwise.
+   */
+  public boolean isTrue() {
+
+    return (this == TRUE);
+  }
+
+  /**
+   * This method determines if this instance is {@link #FALSE}.
+   * 
+   * @return <code>true</code> if {@link #FALSE}, <code>false</code> otherwise.
+   */
+  public boolean isFalse() {
+
+    return (this == FALSE);
+  }
+
+  /**
    * {@inheritDoc}
    */
   public String getTitle() {

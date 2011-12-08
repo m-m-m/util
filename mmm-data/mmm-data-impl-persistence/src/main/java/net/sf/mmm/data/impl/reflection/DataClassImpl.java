@@ -8,13 +8,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
@@ -36,7 +38,8 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "DATA_CLASS")
 @DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_TITLE)
-public final class DataClassImpl<CLASS extends DataObject> extends AbstractDataClass<CLASS> {
+@DiscriminatorValue("" + DataClass.CLASS_ID)
+public final class DataClassImpl<CLASS extends DataObjectView> extends AbstractDataClass<CLASS> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -6926223109885122995L;
@@ -71,7 +74,7 @@ public final class DataClassImpl<CLASS extends DataObject> extends AbstractDataC
   /**
    * @return the declaredFieldCollection
    */
-  @OneToMany(mappedBy = "declaringClass")
+  @OneToMany(mappedBy = "declaringClass", cascade = CascadeType.ALL)
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public Collection<DataFieldImpl> getDeclaredFieldCollection() {
 
@@ -165,15 +168,16 @@ public final class DataClassImpl<CLASS extends DataObject> extends AbstractDataC
    */
   @Override
   @ManyToOne()
-  public DataClassImpl<? extends DataObject> getSuperClass() {
+  public DataClassImpl<? extends DataObjectView> getSuperClass() {
 
-    return (DataClassImpl<? extends DataObject>) super.getSuperClass();
+    return (DataClassImpl<? extends DataObjectView>) super.getSuperClass();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
+  @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
   public DataClassGroupVersionImpl getGroupVersion() {
 
     return (DataClassGroupVersionImpl) super.getGroupVersion();

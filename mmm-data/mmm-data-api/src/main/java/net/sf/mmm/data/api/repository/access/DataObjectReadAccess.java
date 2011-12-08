@@ -4,9 +4,9 @@
 package net.sf.mmm.data.api.repository.access;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
-import net.sf.mmm.data.api.entity.resource.DataEntityResource;
+import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public interface DataObjectReadAccess {
 
   /**
-   * This method gets the {@link DataObject} with the given <code>id</code>.
+   * This method gets the {@link DataObjectView} with the given <code>id</code>.
    * 
    * @see #getById(DataId)
    * 
@@ -29,25 +29,25 @@ public interface DataObjectReadAccess {
    * @return the object with the given identifier.
    * @throws DataException if no object exists with the given ID.
    */
-  <E extends DataObject> E getById(DataId id, Class<E> entityClass) throws DataException;
+  <E extends DataObjectView> E getById(DataId id, Class<E> entityClass) throws DataException;
 
   /**
-   * This method gets the {@link DataObject} with the given <code>id</code>.
+   * This method gets the {@link DataObjectView} with the given <code>id</code>.
    * 
-   * @see net.sf.mmm.data.api.reflection.DataReflectionService#getDataId(DataObject)
+   * @see net.sf.mmm.data.api.reflection.DataReflectionService#getDataId(DataObjectView)
    * 
-   * @param id is the {@link DataId} of the requested {@link DataObject}.
+   * @param id is the {@link DataId} of the requested {@link DataObjectView}.
    * @return the object with the given identifier.
    * @throws ObjectNotFoundException if no object exists with the given
    *         <code>id</code>.
    */
-  DataObject getById(DataId id) throws ObjectNotFoundException;
+  DataObjectView getById(DataId id) throws ObjectNotFoundException;
 
   /**
-   * This method gets the {@link DataEntityResource} with the given
-   * <code>{@link DataEntityResource#getPath() path}</code>.
+   * This method gets the {@link DataEntityResourceView} with the given
+   * <code>{@link DataEntityResourceView#getPath() path}</code>.
    * 
-   * @param path is the {@link DataEntityResource#getPath() path} of the
+   * @param path is the {@link DataEntityResourceView#getPath() path} of the
    *        requested object.
    * @return the object with the given <code>path</code>.
    * @throws DataException if the operation failed. This can have one of the
@@ -57,15 +57,15 @@ public interface DataObjectReadAccess {
    *         <li>no resource exists for the given <code>path</code>.</li>
    *         </ul>
    */
-  DataEntityResource getByPath(String path) throws DataException;
+  DataEntityResourceView getByPath(String path) throws DataException;
 
   /**
-   * This method gets the {@link DataObject} with the given <code>path</code> .
+   * This method gets the {@link DataObjectView} with the given <code>path</code> .
    * 
    * @see #getByPath(String)
    * 
    * @param <E> is the generic entity type of the requested object.
-   * @param path is the {@link DataEntityResource#getPath() path} of the
+   * @param path is the {@link DataEntityResourceView#getPath() path} of the
    *        requested object.
    * @param entityClass is the java-class reflecting the type of the requested
    *        entity.
@@ -77,7 +77,7 @@ public interface DataObjectReadAccess {
    *         <li>no resource exists for the given <code>path</code>.</li>
    *         </ul>
    */
-  <E extends DataEntityResource> E getByPath(String path, Class<E> entityClass)
+  <E extends DataEntityResourceView> E getByPath(String path, Class<E> entityClass)
       throws DataException;
 
 }

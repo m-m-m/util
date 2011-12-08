@@ -50,7 +50,8 @@ public interface DataFieldModifiers extends DataModifiers {
   /**
    * This method determines if the field is read-only. A read-only field can NOT
    * be written (at least NOT via
-   * {@link DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)}).
+   * {@link DataField#setFieldValue(net.sf.mmm.data.api.DataObjectView, Object)}
+   * ).
    * 
    * @return <code>true</code> if the field is immutable, <code>false</code>
    *         otherwise.
@@ -69,22 +70,24 @@ public interface DataFieldModifiers extends DataModifiers {
   boolean isTransient();
 
   /**
-   * This method determines if the field is static. A static field is a field of
-   * the {@link DataClass content-class} instead of the
-   * {@link net.sf.mmm.data.api.DataObject instance}.<br>
+   * This method determines if the field is <em>static</em>. A static field is a
+   * field of the {@link DataClass} instead of the
+   * {@link net.sf.mmm.data.api.DataObjectView instance}.<br>
    * Be aware that a {@link #isStatic() static} and {@link #isFinal() final}
    * field can be modified if it is NOT {@link #isReadOnly() read-only} as
    * described {@link DataFieldModifiers here}.<br>
-   * From all instances of the {@link DataClass content-class} declaring the
-   * field, the value of the field can be
-   * {@link net.sf.mmm.data.api.reflection.DataField#getFieldValue(net.sf.mmm.data.api.DataObject)
+   * From all instances of the {@link DataClass} declaring the field, the value
+   * of the field can be
+   * {@link net.sf.mmm.data.api.reflection.DataField#getFieldValue(net.sf.mmm.data.api.DataObjectView)
    * read} and (if not {@link #isReadOnly() read-only} be
-   * {@link net.sf.mmm.data.api.reflection.DataField#setFieldValue(net.sf.mmm.data.api.DataObject, Object)
-   * written}) while the instance can be <code>null</code>.<br>
+   * {@link net.sf.mmm.data.api.reflection.DataField#setFieldValue(net.sf.mmm.data.api.DataObjectView, Object)
+   * written}) while the instance may be <code>null</code>.<br>
    * A {@link #isStatic() static} field can NOT be {@link #isTransient()
    * transient}. It can be persisted without relevant costs. If the according
    * field should be {@link #isTransient() transient} it can be declared NOT
-   * {@link #isStatic() static}.
+   * {@link #isStatic() static}. If implemented via JPA the getter will be
+   * annotated with {@literal @Transient} while the field is still NOT
+   * {@link #isTransient() transient} in the manner of <code>mmm</code>.
    * 
    * @return <code>true</code> if this field is static, <code>false</code>
    *         otherwise.
@@ -93,18 +96,18 @@ public interface DataFieldModifiers extends DataModifiers {
 
   /**
    * This method determines if the {@link DataField} will inherit a value from
-   * {@link net.sf.mmm.data.api.DataNode#getParent() parent} if not set.<br/>
-   * If a {@link net.sf.mmm.data.api.DataObject} <code>O</code> is an instance
-   * of some {@link DataClass} <code>C</code> that has a {@link DataField}
-   * <code>f</code> where this modifier is <code>true</code> and the internal
-   * value of that that field ( <code>O.f</code>) is not set (has a value of
-   * <code>null</code>) then the value will be recursively inherited from the
-   * {@link net.sf.mmm.data.api.DataNode#getParent() parent} (
-   * <code>O.parent.f</code>). Therefore the
-   * {@link net.sf.mmm.data.api.DataNode#getParent() parent} needs to be of the
-   * same type ({@link DataClass}) (<code>O.parent</code> instanceof
+   * {@link net.sf.mmm.data.api.DataNodeView#getParent() parent} if not set.<br/>
+   * If a {@link net.sf.mmm.data.api.DataObjectView} <code>O</code> is an
+   * instance of some {@link DataClass} <code>C</code> that has a
+   * {@link DataField} <code>f</code> where this modifier is <code>true</code>
+   * and the internal value of that that field ( <code>O.f</code>) is not set
+   * (has a value of <code>null</code>) then the value will be recursively
+   * inherited from the {@link net.sf.mmm.data.api.DataNodeView#getParent()
+   * parent} ( <code>O.parent.f</code>). Therefore the
+   * {@link net.sf.mmm.data.api.DataNodeView#getParent() parent} needs to be of
+   * the same type ({@link DataClass}) (<code>O.parent</code> instanceof
    * <code>C</code>) and this flag only makes sense for objects of the type
-   * {@link net.sf.mmm.data.api.DataSelectionGenericTree}.<br/>
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView}.<br/>
    * <b>ATTENTION:</b><br>
    * In a statically typed {@link net.sf.mmm.data.api.reflection content-model}
    * this feature is provided by a dynamic proxy and will NOT be available for

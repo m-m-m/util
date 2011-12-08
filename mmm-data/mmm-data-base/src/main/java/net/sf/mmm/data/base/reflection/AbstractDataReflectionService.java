@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.data.api.DataIdManager;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
@@ -43,25 +43,25 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
     DataReflectionService {
 
   /** @see #getDataClass(String) */
-  private final Map<String, AbstractDataClass<? extends DataObject>> name2class;
+  private final Map<String, AbstractDataClass<? extends DataObjectView>> name2class;
 
   /** @see #getDataClass(long) */
-  private final Map<Long, AbstractDataClass<? extends DataObject>> id2class;
+  private final Map<Long, AbstractDataClass<? extends DataObjectView>> id2class;
 
   /** @see #getDataClass(Class) */
-  private final Map<Class<? extends DataObject>, AbstractDataClass<? extends DataObject>> class2class;
+  private final Map<Class<? extends DataObjectView>, AbstractDataClass<? extends DataObjectView>> class2class;
 
   /** @see #getDataClasses() */
-  private final List<AbstractDataClass<? extends DataObject>> classes;
+  private final List<AbstractDataClass<? extends DataObjectView>> classes;
 
   /** @see #getDataClasses() */
-  private final List<AbstractDataClass<? extends DataObject>> classesView;
+  private final List<AbstractDataClass<? extends DataObjectView>> classesView;
 
   /** @see #getDataField(long) */
-  private final Map<Long, AbstractDataField<? extends DataObject, ?>> id2field;
+  private final Map<Long, AbstractDataField<? extends DataObjectView, ?>> id2field;
 
   /** @see #getRootDataClass() */
-  private AbstractDataClass<? extends DataObject> rootClass;
+  private AbstractDataClass<? extends DataObjectView> rootClass;
 
   /** @see #getEventSource() */
   private final ContentModelEventSource eventSource;
@@ -76,12 +76,12 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
 
     super();
     // TODO: use concurrent map?
-    this.name2class = new HashMap<String, AbstractDataClass<? extends DataObject>>();
-    this.id2class = new HashMap<Long, AbstractDataClass<? extends DataObject>>();
-    this.class2class = new HashMap<Class<? extends DataObject>, AbstractDataClass<? extends DataObject>>();
-    this.classes = new ArrayList<AbstractDataClass<? extends DataObject>>();
+    this.name2class = new HashMap<String, AbstractDataClass<? extends DataObjectView>>();
+    this.id2class = new HashMap<Long, AbstractDataClass<? extends DataObjectView>>();
+    this.class2class = new HashMap<Class<? extends DataObjectView>, AbstractDataClass<? extends DataObjectView>>();
+    this.classes = new ArrayList<AbstractDataClass<? extends DataObjectView>>();
     this.classesView = Collections.unmodifiableList(this.classes);
-    this.id2field = new HashMap<Long, AbstractDataField<? extends DataObject, ?>>();
+    this.id2field = new HashMap<Long, AbstractDataField<? extends DataObjectView, ?>>();
     // AbstractContentObject.setClassAccess(this);
     this.eventSource = new ContentModelEventSource();
   }
@@ -106,9 +106,9 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public DataId getDataId(DataObject dataObject) {
+  public DataId getDataId(DataObjectView dataObject) {
 
-    NlsNullPointerException.checkNotNull(DataObject.class, dataObject);
+    NlsNullPointerException.checkNotNull(DataObjectView.class, dataObject);
     Long objectId = dataObject.getId();
     if (objectId == null) {
       return null;
@@ -127,7 +127,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @see net.sf.mmm.data.api.reflection.MutableDataReflectionService#getEventSource()
    * @return the {@link EventSource}.
    */
-  public EventSource<DataReflectionEvent<? extends DataObject>, EventListener<DataReflectionEvent<? extends DataObject>>> getEventSource() {
+  public EventSource<DataReflectionEvent<? extends DataObjectView>, EventListener<DataReflectionEvent<? extends DataObjectView>>> getEventSource() {
 
     return this.eventSource;
   }
@@ -135,9 +135,9 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObject> getDataClass(String title) {
+  public AbstractDataClass<? extends DataObjectView> getDataClass(String title) {
 
-    AbstractDataClass<? extends DataObject> dataClass = this.name2class.get(title);
+    AbstractDataClass<? extends DataObjectView> dataClass = this.name2class.get(title);
     if (dataClass == null) {
       throw new ObjectNotFoundException(DataClass.class, title);
     }
@@ -147,7 +147,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObject> getDataClass(DataId id) {
+  public AbstractDataClass<? extends DataObjectView> getDataClass(DataId id) {
 
     return getDataClass(id.getObjectId());
   }
@@ -155,9 +155,9 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObject> getDataClass(long id) {
+  public AbstractDataClass<? extends DataObjectView> getDataClass(long id) {
 
-    AbstractDataClass<? extends DataObject> dataClass = this.id2class.get(Long.valueOf(id));
+    AbstractDataClass<? extends DataObjectView> dataClass = this.id2class.get(Long.valueOf(id));
     if (dataClass == null) {
       throw new ObjectNotFoundException(DataClass.class, Long.valueOf(id));
     }
@@ -168,9 +168,9 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public <O extends DataObject> AbstractDataClass<O> getDataClass(O dataObject) {
+  public <O extends DataObjectView> AbstractDataClass<O> getDataClass(O dataObject) {
 
-    NlsNullPointerException.checkNotNull(DataObject.class, dataObject);
+    NlsNullPointerException.checkNotNull(DataObjectView.class, dataObject);
     AbstractDataObject abstractDataObject = (AbstractDataObject) dataObject;
     return (AbstractDataClass<O>) getDataClass(abstractDataObject.getDataClassId());
   }
@@ -178,7 +178,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public <CLASS extends DataObject> AbstractDataClass<CLASS> getDataClass(Class<CLASS> javaClass)
+  public <CLASS extends DataObjectView> AbstractDataClass<CLASS> getDataClass(Class<CLASS> javaClass)
       throws ObjectNotFoundException {
 
     return (AbstractDataClass<CLASS>) this.class2class.get(javaClass);
@@ -187,7 +187,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField<? extends DataObject, ?> getDataField(DataId id) {
+  public AbstractDataField<? extends DataObjectView, ?> getDataField(DataId id) {
 
     NlsNullPointerException.checkNotNull(DataId.class, id);
     if (id.getClassId() != DataField.CLASS_ID) {
@@ -200,10 +200,10 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField<? extends DataObject, ?> getDataField(long id)
+  public AbstractDataField<? extends DataObjectView, ?> getDataField(long id)
       throws ObjectNotFoundException {
 
-    AbstractDataField<? extends DataObject, ?> field = this.id2field.get(Long.valueOf(id));
+    AbstractDataField<? extends DataObjectView, ?> field = this.id2field.get(Long.valueOf(id));
     if (field == null) {
       throw new ObjectNotFoundException(DataField.class, Long.valueOf(id));
     }
@@ -213,7 +213,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public List<AbstractDataClass<? extends DataObject>> getDataClasses() {
+  public List<AbstractDataClass<? extends DataObjectView>> getDataClasses() {
 
     return this.classesView;
   }
@@ -221,7 +221,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObject> getRootDataClass() {
+  public AbstractDataClass<? extends DataObjectView> getRootDataClass() {
 
     return this.rootClass;
   }
@@ -231,7 +231,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * 
    * @param rootClass is the root-class to set.
    */
-  protected void setRootClass(AbstractDataClass<? extends DataObject> rootClass) {
+  protected void setRootClass(AbstractDataClass<? extends DataObjectView> rootClass) {
 
     this.rootClass = rootClass;
   }
@@ -244,11 +244,11 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param contentClass is the class to add.
    * @throws DataReflectionException if the class is already registered.
    */
-  protected void addClass(AbstractDataClass<? extends DataObject> contentClass)
+  protected void addClass(AbstractDataClass<? extends DataObjectView> contentClass)
       throws DataReflectionException {
 
     Long id = contentClass.getId();
-    AbstractDataClass<? extends DataObject> duplicate = this.id2class.get(id);
+    AbstractDataClass<? extends DataObjectView> duplicate = this.id2class.get(id);
     if (duplicate != null) {
       throw new DuplicateObjectException(contentClass, duplicate);
     }
@@ -257,14 +257,14 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
     if (duplicate != null) {
       throw new DuplicateObjectException(contentClass, name, duplicate);
     }
-    for (AbstractDataField<? extends DataObject, ?> field : contentClass.getDeclaredFields()) {
+    for (AbstractDataField<? extends DataObjectView, ?> field : contentClass.getDeclaredFields()) {
       if (!this.id2field.containsKey(field.getId())) {
         addField(field);
       }
     }
     this.name2class.put(name, contentClass);
     this.id2class.put(id, contentClass);
-    Class<? extends DataObject> javaClass = contentClass.getJavaClass();
+    Class<? extends DataObjectView> javaClass = contentClass.getJavaClass();
     if (!this.class2class.containsKey(javaClass)) {
       this.class2class.put(javaClass, contentClass);
     }
@@ -283,11 +283,11 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @throws DataReflectionException if the class or one of its sub-classes
    *         could NOT be registered.
    */
-  protected void addClassRecursive(AbstractDataClass<? extends DataObject> dataClass)
+  protected void addClassRecursive(AbstractDataClass<? extends DataObjectView> dataClass)
       throws DataReflectionException {
 
     addClass(dataClass);
-    for (AbstractDataClass<? extends DataObject> subClass : dataClass.getSubClasses()) {
+    for (AbstractDataClass<? extends DataObjectView> subClass : dataClass.getSubClasses()) {
       addClassRecursive(subClass);
     }
   }
@@ -299,11 +299,11 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @throws DataReflectionException if a field with the same ID is already
    *         registered.
    */
-  protected void addField(AbstractDataField<? extends DataObject, ?> contentField)
+  protected void addField(AbstractDataField<? extends DataObjectView, ?> contentField)
       throws DataReflectionException {
 
     Long id = contentField.getId();
-    AbstractDataField<? extends DataObject, ?> duplicate = this.id2field.get(id);
+    AbstractDataField<? extends DataObjectView, ?> duplicate = this.id2field.get(id);
     if (duplicate == null) {
       throw new DuplicateObjectException(contentField, id, duplicate);
     }
@@ -319,13 +319,13 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @throws DataReflectionException if the operation fails (e.g. the class is
    *         required by the system).
    */
-  protected void removeClass(AbstractDataClass<? extends DataObject> dataClass)
+  protected void removeClass(AbstractDataClass<? extends DataObjectView> dataClass)
       throws DataReflectionException {
 
     if (dataClass.getModifiers().isSystem()) {
       throw new DataSystemModifyException(dataClass);
     }
-    AbstractDataClass<? extends DataObject> old = this.id2class.remove(dataClass.getId());
+    AbstractDataClass<? extends DataObjectView> old = this.id2class.remove(dataClass.getId());
     assert (old == dataClass);
     old = this.name2class.remove(dataClass.getTitle());
     assert (old == dataClass);
@@ -346,7 +346,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @throws DataReflectionException if the operation fails (e.g. the field is
    *         required by the system).
    */
-  protected void removeField(AbstractDataField<? extends DataObject, ?> contentField)
+  protected void removeField(AbstractDataField<? extends DataObjectView, ?> contentField)
       throws DataReflectionException {
 
     if (contentField.getModifiers().isSystem()) {
@@ -360,7 +360,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * 
    * @param event is the event to send.
    */
-  protected void fireEvent(DataReflectionEvent<? extends DataObject> event) {
+  protected void fireEvent(DataReflectionEvent<? extends DataObjectView> event) {
 
     this.eventSource.fireEvent(event);
   }
@@ -373,11 +373,11 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    *        class}.
    * @param dataField is the {@link DataField} to synchronize.
    */
-  protected <CLASS extends DataObject> void syncField(AbstractDataClass<CLASS> dataClass,
+  protected <CLASS extends DataObjectView> void syncField(AbstractDataClass<CLASS> dataClass,
       AbstractDataField<CLASS, ?> dataField) {
 
     Long id = dataField.getId();
-    AbstractDataField<? extends DataObject, ?> existingField = this.id2field.get(id);
+    AbstractDataField<? extends DataObjectView, ?> existingField = this.id2field.get(id);
     if (existingField == null) {
       dataClass.addDeclaredField(dataField);
       addField(dataField);
@@ -396,11 +396,11 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param dataClass is the {@link DataClass} that has changed.
    * @param superClass is the {@link DataClass#getSuperClass() super class}.
    */
-  protected <SUPERCLASS extends DataObject, CLASS extends SUPERCLASS> void syncClassRecursive(
+  protected <SUPERCLASS extends DataObjectView, CLASS extends SUPERCLASS> void syncClassRecursive(
       AbstractDataClass<CLASS> dataClass, AbstractDataClass<SUPERCLASS> superClass) {
 
     Long id = dataClass.getId();
-    AbstractDataClass<? extends DataObject> existingClass = this.id2class.get(id);
+    AbstractDataClass<? extends DataObjectView> existingClass = this.id2class.get(id);
     if (existingClass == null) {
       // new content class
 
@@ -449,7 +449,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()}.
    * @return the new, uninitialized instance.
    */
-  protected abstract <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass();
+  protected abstract <CLASS extends DataObjectView> AbstractDataClass<CLASS> createDataClass();
 
   /**
    * This method instantiates a {@link DataClass}.
@@ -468,8 +468,8 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    *        class.
    * @return the created class.
    */
-  public <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass(Long id, String title,
-      AbstractDataClass<? extends DataObject> superClass, DataClassModifiers modifiers,
+  public <CLASS extends DataObjectView> AbstractDataClass<CLASS> createDataClass(Long id, String title,
+      AbstractDataClass<? extends DataObjectView> superClass, DataClassModifiers modifiers,
       Class<CLASS> javaClass, boolean deleted) {
 
     AbstractDataClass<CLASS> newClass = createDataClass();
@@ -488,7 +488,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param <FIELD> is the generic type of {@link DataField#getFieldType()}.
    * @return the new, uninitialized instance.
    */
-  protected abstract <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField();
+  protected abstract <CLASS extends DataObjectView, FIELD> AbstractDataField<CLASS, FIELD> createDataField();
 
   /**
    * This method creates a new {@link DataField}.
@@ -506,7 +506,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param isDeleted is the {@link DataField#getDeletedFlag() deleted flag}.
    * @return the new {@link DataField}.
    */
-  public <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField(Long id,
+  public <CLASS extends DataObjectView, FIELD> AbstractDataField<CLASS, FIELD> createDataField(Long id,
       String title, DataClass<CLASS> declaringClass, GenericType<FIELD> fieldType,
       DataFieldModifiers modifiers, boolean isDeleted) {
 
@@ -527,13 +527,13 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    */
   private static class ContentModelEventSource
       extends
-      AbstractSynchronizedEventSource<DataReflectionEvent<? extends DataObject>, EventListener<DataReflectionEvent<? extends DataObject>>> {
+      AbstractSynchronizedEventSource<DataReflectionEvent<? extends DataObjectView>, EventListener<DataReflectionEvent<? extends DataObjectView>>> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void fireEvent(DataReflectionEvent<? extends DataObject> event) {
+    public void fireEvent(DataReflectionEvent<? extends DataObjectView> event) {
 
       super.fireEvent(event);
     }

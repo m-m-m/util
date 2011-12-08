@@ -14,7 +14,7 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
@@ -27,6 +27,7 @@ import net.sf.mmm.data.api.reflection.DataReflectionService;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.data.base.AbstractDataObject;
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -77,7 +78,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   private PojoDescriptorBuilder methodDescriptorBuilder;
 
   /** @see #getRootEntity() */
-  private Class<? extends DataObject> rootEntity;
+  private Class<? extends DataObjectView> rootEntity;
 
   /**
    * A filter that only accepts types that are annotated as
@@ -157,7 +158,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   /**
    * @return the rootEntity
    */
-  public Class<? extends DataObject> getRootEntity() {
+  public Class<? extends DataObjectView> getRootEntity() {
 
     return this.rootEntity;
   }
@@ -165,7 +166,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   /**
    * @param rootEntity the rootEntity to set
    */
-  public void setRootEntity(Class<? extends DataObject> rootEntity) {
+  public void setRootEntity(Class<? extends DataObjectView> rootEntity) {
 
     this.rootEntity = rootEntity;
   }
@@ -235,11 +236,12 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObject> loadClasses() {
+  public AbstractDataClass<? extends DataObjectView> loadClasses() {
 
     Context context = new Context();
     parseConfiguration(context);
-    AbstractDataClass<? extends DataObject> rootClass = context.getDataClass(DataObject.CLASS_ID);
+    AbstractDataClass<? extends DataObjectView> rootClass = context
+        .getDataClass(DataObjectView.CLASS_ID);
     if (rootClass == null) {
       // TODO: NLS + Details/Explain
       throw new IllegalArgumentException("Root-class NOT found!");
@@ -261,7 +263,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
    * @return the {@link DataClass} for the given <code>javaClass</code>.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public <CLASS extends DataObject> AbstractDataClass<CLASS> loadClassRecursive(
+  public <CLASS extends DataObjectView> AbstractDataClass<CLASS> loadClassRecursive(
       Class<CLASS> javaClass, Context context) {
 
     DataClassAnnotation contentClassAnnotation = javaClass.getAnnotation(DataClassAnnotation.class);
@@ -279,7 +281,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
     }
     boolean createSuperClass = true;
     AbstractDataClass<CLASS> dataClass;
-    AbstractDataClass<? extends DataObject> existingClass;
+    AbstractDataClass<? extends DataObjectView> existingClass;
     if (classId.longValue() == DataId.OBJECT_ID_ILLEGAL) {
       existingClass = context.getDataClass(name);
       classId = null;
@@ -310,10 +312,10 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
       if (classId != null) {
         if (!classId.equals(existingClass.getId())) {
           throw new ObjectMismatchException(classId, existingClass.getId(), existingClass,
-              DataObject.FIELD_NAME_ID);
+              DataObjectView.FIELD_NAME_ID);
         }
       }
-      Class<? extends DataObject> type = existingClass.getJavaClass();
+      Class<? extends DataObjectView> type = existingClass.getJavaClass();
       if ((type != null) && (javaClass != type)) {
         throw new ObjectMismatchException(javaClass, type, existingClass,
             DataClass.FIELD_NAME_JAVA_CLASS);
@@ -358,11 +360,11 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
    * 
    * @param contentClass is the class for which the fields should be loaded.
    */
-  protected void loadFieldsRecursive(AbstractDataClass<? extends DataObject> contentClass) {
+  protected void loadFieldsRecursive(AbstractDataClass<? extends DataObjectView> contentClass) {
 
-    Class<? extends DataObject> type = contentClass.getJavaClass();
-    AbstractDataClass<? extends DataObject> superClass = contentClass.getSuperClass();
-    PojoDescriptor<? extends DataObject> methodPojoDescriptor;
+    Class<? extends DataObjectView> type = contentClass.getJavaClass();
+    AbstractDataClass<? extends DataObjectView> superClass = contentClass.getSuperClass();
+    PojoDescriptor<? extends DataObjectView> methodPojoDescriptor;
     if (type == null) {
       throw new IllegalStateException("TODO");
     }
@@ -385,7 +387,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
             declareField = false;
           } else if (superClass != null) {
             Class<?> declaringClass = accessor.getDeclaringClass();
-            Class<? extends DataObject> superType = superClass.getJavaClass();
+            Class<? extends DataObjectView> superType = superClass.getJavaClass();
             if (!superType.isAssignableFrom(declaringClass) || (superType.equals(declaringClass))) {
               // getter inherited from super entity: ignore
               declareField = false;
@@ -410,14 +412,37 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
             throw new NlsIllegalArgumentException("");
           }
           boolean isFinal = Modifier.isFinal(modifiers);
-          boolean isStatic = Modifier.isStatic(modifiers) || contentFieldAnnotation.isStatic();
-          boolean isTransient = contentFieldAnnotation.isTransient();
+
+          boolean isStatic = Modifier.isStatic(modifiers);
+          switch (contentFieldAnnotation.isStatic()) {
+            case TRUE:
+              isStatic = true;
+              break;
+            case FALSE:
+              if (isStatic) {
+                throw new NlsIllegalArgumentException("TODO: static field (" + name
+                    + ") has to be static!");
+              }
+              break;
+            default :
+              // nothing to do for NULL
+          }
+          boolean isTransient = contentFieldAnnotation.isTransient().isTrue();
           boolean isInherited = contentFieldAnnotation.isInheritedFromParent();
           boolean isReadOnly = true;
           PojoPropertyAccessor writeAccessor = methodPropertyDescriptor
               .getAccessor(PojoPropertyAccessorOneArgMode.SET);
           if ((writeAccessor != null) && (Modifier.isPublic(writeAccessor.getModifiers()))) {
-            isReadOnly = contentFieldAnnotation.isReadOnly();
+            isReadOnly = false;
+          }
+          if (contentFieldAnnotation.isReadOnly() != BooleanEnum.NULL) {
+            if (contentFieldAnnotation.isReadOnly().isTrue()) {
+              isReadOnly = true;
+            } else {
+              if (!isReadOnly) {
+
+              }
+            }
           }
           DataFieldModifiers contentFieldModifiers = DataFieldModifiersBean.getInstance(isSystem,
               isFinal, isReadOnly, isStatic, isTransient, isInherited);
@@ -452,7 +477,7 @@ public class DataClassLoaderNative extends AbstractDataClassLoader {
    * @return the field accessor.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  protected DataFieldAccessor<? extends DataObject, ?> getFieldAccessor(
+  protected DataFieldAccessor<? extends DataObjectView, ?> getFieldAccessor(
       PojoPropertyDescriptor propertyDescriptor) {
 
     PojoPropertyAccessorNonArg getter = propertyDescriptor

@@ -6,38 +6,39 @@ package net.sf.mmm.data.api.reflection;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.DataSelectionTree;
+import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataSelectionTreeView;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 
 /**
  * This is the interface for the type of an entity. It reflects the structure of
- * the {@link net.sf.mmm.data.api.DataObject content-object} types in an
+ * the {@link net.sf.mmm.data.api.DataObjectView content-object} types in an
  * object-oriented way. <br>
  * A content-class is the analogy to a {@link java.lang.Class} that reflects a
  * {@link java.lang.Object}. <br>
  * A content-class may be used to render a generic UI editor, synchronize the
  * schema of the persistence store (e.g. a DB), etc. <br>
  * 
- * @see net.sf.mmm.data.api.DataObject
- * @see DataReflectionService#getDataClass(net.sf.mmm.data.api.DataObject)
+ * @see net.sf.mmm.data.api.DataObjectView
+ * @see DataReflectionService#getDataClass(net.sf.mmm.data.api.DataObjectView)
  * 
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_TITLE, isFinal = true)
-public interface DataClass<CLASS extends DataObject> extends DataReflectionObject<CLASS>,
-    DataSelectionTree<DataClass<? extends DataObject>> {
+@DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_TITLE, isFinal = BooleanEnum.TRUE)
+public interface DataClass<CLASS extends DataObjectView> extends DataReflectionObject<CLASS>,
+    DataSelectionTreeView<DataClass<? extends DataObjectView>> {
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link DataClass} reflecting this type.
    */
-  short CLASS_ID = 2;
+  long CLASS_ID = DataClassIds.ID_CLASS;
 
   /**
-   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the
+   * The {@link net.sf.mmm.data.api.DataObjectView#getTitle() name} of the
    * {@link DataClass} reflecting this type.
    */
   String CLASS_TITLE = "DataClass";
@@ -91,10 +92,10 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * 
    * @return the super-class that is extended by this class or <code>null</code>
    *         if this is the root-class ({@link DataClass} reflecting
-   *         {@link net.sf.mmm.data.api.DataObject}).
+   *         {@link net.sf.mmm.data.api.DataObjectView}).
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUPERCLASS, isReadOnly = true)
-  DataClass<? extends DataObject> getSuperClass();
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUPERCLASS, isReadOnly = BooleanEnum.TRUE)
+  DataClass<? extends DataObjectView> getSuperClass();
 
   /**
    * This method gets an iterator of all fields declared by this class. This
@@ -107,7 +108,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * 
    * @return a (read-only) collection of all declared fields.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_DECLAREDFIELDS, isReadOnly = true)
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_DECLAREDFIELDS, isReadOnly = BooleanEnum.TRUE)
   Collection<? extends DataField<CLASS, ?>> getDeclaredFields();
 
   /**
@@ -139,8 +140,8 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * 
    * @return a (read-only) collection of fields of this class.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_FIELDS, isReadOnly = true, isTransient = true)
-  Collection<? extends DataField<? extends DataObject, ?>> getFields();
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_FIELDS, isReadOnly = BooleanEnum.TRUE, isTransient = BooleanEnum.TRUE)
+  Collection<? extends DataField<? extends DataObjectView, ?>> getFields();
 
   /**
    * This method gets the field with the given {@link DataField#getTitle()
@@ -151,20 +152,20 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @return the field with the given name or <code>null</code> if no such field
    *         exists for this class.
    */
-  DataField<? extends DataObject, ?> getField(String title);
+  DataField<? extends DataObjectView, ?> getField(String title);
 
   /**
    * This method gets the list of all sub-classes.
    * 
    * @return an un-modifiable list of all sub-class.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUBCLASSES, isReadOnly = true, inverseRelationFieldId = DataFieldIds.ID_CLASS_SUPERCLASS)
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_SUBCLASSES, isReadOnly = BooleanEnum.TRUE, inverseRelationFieldId = DataFieldIds.ID_CLASS_SUPERCLASS)
   List<? extends DataClass<? extends CLASS>> getSubClasses();
 
   /**
    * {@inheritDoc}
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_MODIFIERS, isReadOnly = true)
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_MODIFIERS, isReadOnly = BooleanEnum.TRUE)
   DataClassModifiers getModifiers();
 
   /**
@@ -174,7 +175,7 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @return <code>true</code> if this class is a super-class of the given
    *         class.
    */
-  boolean isSuperClassOf(DataClass<? extends DataObject> contentClass);
+  boolean isSuperClassOf(DataClass<? extends DataObjectView> contentClass);
 
   /**
    * This is the opposite of the method
@@ -185,14 +186,14 @@ public interface DataClass<CLASS extends DataObject> extends DataReflectionObjec
    * @param contentClass is the class to compare with.
    * @return <code>true</code> if this class is a sub-class of the given class.
    */
-  boolean isSubClassOf(DataClass<? extends DataObject> contentClass);
+  boolean isSubClassOf(DataClass<? extends DataObjectView> contentClass);
 
   /**
    * This method gets the {@link DataClassGroupVersion} of this class.
    * 
    * @return the {@link DataClassGroupVersion}.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_GROUPVERSION, isReadOnly = true)
+  @DataFieldAnnotation(id = DataFieldIds.ID_CLASS_GROUPVERSION, isReadOnly = BooleanEnum.TRUE)
   DataClassGroupVersion getGroupVersion();
 
   // /**

@@ -6,7 +6,7 @@ package net.sf.mmm.data.base.reflection;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -41,14 +41,14 @@ public class DataModelXmlWriter {
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
   private void writeReflectionObject(
-      DataReflectionObject<? extends DataObject> contentClassOrField, XMLStreamWriter xmlWriter)
+      DataReflectionObject<? extends DataObjectView> contentClassOrField, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
     Long id = contentClassOrField.getId();
     if (id != null) {
-      xmlWriter.writeAttribute(DataObject.FIELD_NAME_ID, id.toString());
+      xmlWriter.writeAttribute(DataObjectView.FIELD_NAME_ID, id.toString());
     }
-    xmlWriter.writeAttribute(DataObject.FIELD_NAME_TITLE, contentClassOrField.getTitle());
+    xmlWriter.writeAttribute(DataObjectView.FIELD_NAME_TITLE, contentClassOrField.getTitle());
     if (contentClassOrField.getDeletedFlag()) {
       xmlWriter.writeAttribute(DataReflectionObject.FIELD_NAME_DELETEDFLAG, StringUtil.TRUE);
     }
@@ -63,7 +63,7 @@ public class DataModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeField(DataField<? extends DataObject, ?> contentField, XMLStreamWriter xmlWriter)
+  public void writeField(DataField<? extends DataObjectView, ?> contentField, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
     xmlWriter.writeStartElement(DataField.CLASS_TITLE);
@@ -100,7 +100,7 @@ public class DataModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeClass(DataClass<? extends DataObject> contentClass, XMLStreamWriter xmlWriter)
+  public void writeClass(DataClass<? extends DataObjectView> contentClass, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
     xmlWriter.writeStartElement(DataClass.CLASS_TITLE);
@@ -118,10 +118,10 @@ public class DataModelXmlWriter {
     if (modifiers.isAbstract()) {
       xmlWriter.writeAttribute(DataClassModifiers.XML_ATR_ABSTRACT, StringUtil.TRUE);
     }
-    for (DataField<? extends DataObject, ?> field : contentClass.getDeclaredFields()) {
+    for (DataField<? extends DataObjectView, ?> field : contentClass.getDeclaredFields()) {
       writeField(field, xmlWriter);
     }
-    for (DataClass<? extends DataObject> subClass : contentClass.getSubClasses()) {
+    for (DataClass<? extends DataObjectView> subClass : contentClass.getSubClasses()) {
       writeClass(subClass, xmlWriter);
     }
     xmlWriter.writeEndElement();
@@ -136,7 +136,7 @@ public class DataModelXmlWriter {
    *        {@link XMLStreamWriter#close() closed}.
    * @throws XMLStreamException if the <code>xmlWriter</code> caused an error.
    */
-  public void writeModel(DataClass<? extends DataObject> rootClass, XMLStreamWriter xmlWriter)
+  public void writeModel(DataClass<? extends DataObjectView> rootClass, XMLStreamWriter xmlWriter)
       throws XMLStreamException {
 
     xmlWriter.writeStartElement(DataClass.XML_TAG_CONTENT_MODEL);

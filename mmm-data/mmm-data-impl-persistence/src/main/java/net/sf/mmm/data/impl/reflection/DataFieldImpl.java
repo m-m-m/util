@@ -3,11 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.reflection;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
@@ -19,7 +20,7 @@ import org.hibernate.annotations.Type;
  * This is the implementation of the
  * {@link net.sf.mmm.data.api.reflection.DataField} interface.
  * 
- * @param <FIELD> is the generic type of the {@link #getFieldValue(DataObject)
+ * @param <FIELD> is the generic type of the {@link #getFieldValue(DataObjectView)
  *        value} reflected by this field.
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
@@ -30,7 +31,8 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "DATA_FIELD")
 @DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_TITLE)
-public final class DataFieldImpl<CLASS extends DataObject, FIELD> extends
+@DiscriminatorValue("" + DataField.CLASS_ID)
+public final class DataFieldImpl<CLASS extends DataObjectView, FIELD> extends
     AbstractDataField<CLASS, FIELD> {
 
   /** UID for serialization. */

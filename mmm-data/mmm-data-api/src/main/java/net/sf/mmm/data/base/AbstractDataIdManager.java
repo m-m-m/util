@@ -4,7 +4,7 @@
 package net.sf.mmm.data.base;
 
 import net.sf.mmm.data.api.DataIdManager;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -34,7 +34,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
    */
   public DataId getRootClassId() {
 
-    return getClassId(DataObject.CLASS_ID);
+    return getClassId(DataObjectView.CLASS_ID);
   }
 
   /**

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.link;
 
-import net.sf.mmm.data.api.entity.DataEntity;
+import net.sf.mmm.data.api.entity.DataEntityView;
 
 /**
  * This is the interface for a {@link LinkList} that can be modified.
@@ -13,7 +13,7 @@ import net.sf.mmm.data.api.entity.DataEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface MutableLinkList<CLASS extends DataEntity> extends LinkList<CLASS> {
+public interface MutableLinkList<CLASS extends DataEntityView> extends LinkList<CLASS> {
 
   /**
    * This method adds a new link to this {@link LinkList}.

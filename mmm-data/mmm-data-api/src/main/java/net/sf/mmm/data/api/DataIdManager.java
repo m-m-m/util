@@ -17,8 +17,8 @@ public interface DataIdManager {
 
   /**
    * This method gets the {@link DataId} of the
-   * {@link net.sf.mmm.data.api.reflection.DataClass ContentClass} reflecting
-   * {@link net.sf.mmm.data.api.DataObject ContentObject}.
+   * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting
+   * {@link net.sf.mmm.data.api.DataObject}.
    * 
    * @return the ID of the root class.
    */
@@ -64,8 +64,7 @@ public interface DataIdManager {
 
   /**
    * This method parses the given String <code>idAsString</code> as a
-   * {@link DataId}. It is the inverse operation of
-   * {@link DataId#toString()}.
+   * {@link DataId}. It is the inverse operation of {@link DataId#toString()}.
    * 
    * @param idAsString is the {@link #toString() string representation} of a
    *        {@link DataId}.

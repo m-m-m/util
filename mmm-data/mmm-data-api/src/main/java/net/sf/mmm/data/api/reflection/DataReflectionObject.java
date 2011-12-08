@@ -3,9 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import net.sf.mmm.data.api.DataNode;
-import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.DataSelection;
+import net.sf.mmm.data.api.DataNodeView;
+import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataSelectionView;
+import net.sf.mmm.util.lang.api.BooleanEnum;
 
 /**
  * This is the interface for an object reflecting the content model. It can be
@@ -16,18 +17,18 @@ import net.sf.mmm.data.api.DataSelection;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataReflectionObject.CLASS_ID, title = DataReflectionObject.CLASS_TITLE)
+@DataClassAnnotation(id = DataReflectionObject.CLASS_ID, title = DataReflectionObject.CLASS_TITLE, isExtendable = BooleanEnum.FALSE)
 public abstract interface DataReflectionObject<CLASS> extends
-    DataNode<DataClass<? extends DataObject>>, DataSelection {
+    DataNodeView<DataClass<? extends DataObjectView>>, DataSelectionView {
 
   /**
    * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
    * the {@link DataClass} reflecting this type.
    */
-  short CLASS_ID = 10;
+  long CLASS_ID = DataClassIds.ID_REFLECTIONOBJECT;
 
   /**
-   * The {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
+   * The {@link net.sf.mmm.data.api.DataObjectView#getTitle() title} of the
    * {@link DataClass} reflecting this type.
    */
   String CLASS_TITLE = "DataReflectionObject";
@@ -40,9 +41,9 @@ public abstract interface DataReflectionObject<CLASS> extends
 
   /**
    * This method gets the java-class of the reflected object. The &lt;CLASS&gt;
-   * will typically be a subclass of {@link net.sf.mmm.data.api.DataObject} or
-   * at least {@link net.sf.mmm.persistence.api.PersistenceEntity}. However for
-   * ultimate flexibility and freedom the type is not bound in its generic
+   * will typically be a subclass of {@link net.sf.mmm.data.api.DataObjectView}
+   * or at least {@link net.sf.mmm.persistence.api.PersistenceEntity}. However
+   * for ultimate flexibility and freedom the type is not bound in its generic
    * declaration. This allows to use this API even with third-party entities
    * that do not implement such interfaces.<br/>
    * <b>ATTENTION:</b><br>
@@ -56,7 +57,7 @@ public abstract interface DataReflectionObject<CLASS> extends
    * 
    * @return the java-class.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_JAVACLASS, isFinal = true, isReadOnly = true)
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_JAVACLASS, isFinal = BooleanEnum.TRUE, isReadOnly = BooleanEnum.TRUE)
   Class<CLASS> getJavaClass();
 
   /**
@@ -68,7 +69,7 @@ public abstract interface DataReflectionObject<CLASS> extends
    * 
    * @return the objects modifiers.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_MODIFIERS, isFinal = true, isReadOnly = true)
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_MODIFIERS, isReadOnly = BooleanEnum.TRUE)
   DataModifiers getModifiers();
 
   /**
@@ -79,7 +80,7 @@ public abstract interface DataReflectionObject<CLASS> extends
    * @return <code>true</code> if this is a {@link DataClass content-class},
    *         <code>false</code> if this is a {@link DataField content-field}.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DATACLASS, isStatic = true, isFinal = true, isReadOnly = true)
+  @DataFieldAnnotation(id = DataFieldIds.ID_REFLECTIONOBJECT_DATACLASS, isStatic = BooleanEnum.TRUE, isFinal = BooleanEnum.TRUE, isReadOnly = BooleanEnum.TRUE)
   boolean isDataClass();
 
 }

@@ -12,7 +12,7 @@ import net.sf.mmm.data.api.repository.access.DataObjectReadAccess;
 /**
  * This is the interface for the {@link DataRepository}, the central component
  * of the system. It allows to read and write
- * {@link net.sf.mmm.data.api.DataObject}s and acts as persistence layer.
+ * {@link net.sf.mmm.data.api.DataObjectView}s and acts as persistence layer.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -36,29 +36,12 @@ public interface DataRepository extends DataObjectReadAccess {
    */
   DataFolder getRootFolder();
 
-  // /**
-  // * This method gets the raw instance of the given <code>entity</code>.<br>
-  // * An {@link DataObject entity} retrieved from this {@link DataRepository
-  // * repository} (e.g. via <code>{@link #get(DataId)}</code>) will be
-  // * "manipulated" to add support for {@link ContentResource#getProxyTarget()
-  // * proxying} and {@link DataObject#getParent() inheritance}. Therefore this
-  // * method returns the original object without manipulations. This is needed
-  // * e.g. for the editor GUI.
-  // *
-  // * @param <E> is the generic type of the entity.
-  // * @param entity is an entity retrieved from this {@link DataRepository
-  // * repository} (e.g. via <code>{@link #get(DataId)}</code>).
-  // * @return the raw object with the original data.
-  // * @throws DataException if the operation fails.
-  // */
-  // <E extends ContentResource> E getRawObject(E entity) throws DataException;
-
   /**
    * This method renames the given <code>contentObject</code>.
    * 
    * @param resource is the {@link DataEntityResource} to rename.
    * @param newTitle is the new
-   *        {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
+   *        {@link net.sf.mmm.data.api.DataObjectView#getTitle() title} of the
    *        {@link DataEntityResource}.
    * @throws DataException if the operation failed. This can have one of the
    *         following reasons:
@@ -70,7 +53,7 @@ public interface DataRepository extends DataObjectReadAccess {
    *         renaming).</li>
    *         <li>the {@link DataEntityResource#getParent() parent} of the
    *         <code>entity</code> already has a {@link DataFolder#getChildren()
-   *         child} {@link net.sf.mmm.data.api.DataObject#getTitle() titled}
+   *         child} {@link net.sf.mmm.data.api.DataObjectView#getTitle() titled}
    *         <code>newTitle</code>.</li>
    *         </ul>
    */
@@ -89,7 +72,7 @@ public interface DataRepository extends DataObjectReadAccess {
    *         <ul>
    *         <li>the {@link DataFolder} <code>newParent</code> already has a
    *         {@link DataFolder#getChildren() child} with the same
-   *         {@link net.sf.mmm.data.api.DataObject#getTitle() title}.</li>
+   *         {@link net.sf.mmm.data.api.DataObjectView#getTitle() title}.</li>
    *         </ul>
    */
   void move(DataEntityResource resource, DataFolder newParent) throws DataException;
@@ -103,14 +86,14 @@ public interface DataRepository extends DataObjectReadAccess {
    * @param newParent is the new {@link DataEntityResource#getParent() parent}
    *        where to move the <code>resource</code> to.
    * @param newTitle is the new
-   *        {@link net.sf.mmm.data.api.DataObject#getTitle() title} of the
+   *        {@link net.sf.mmm.data.api.DataObjectView#getTitle() title} of the
    *        {@link DataEntityResource}.
    * @throws DataException if the operation fails. This can have one of the
    *         following reasons:
    *         <ul>
    *         <li>the {@link DataFolder} <code>newParent</code> already has a
    *         {@link DataFolder#getChildren() child} with the same
-   *         {@link net.sf.mmm.data.api.DataObject#getTitle() title}.</li>
+   *         {@link net.sf.mmm.data.api.DataObjectView#getTitle() title}.</li>
    *         </ul>
    */
   void move(DataEntityResource resource, DataFolder newParent, String newTitle)

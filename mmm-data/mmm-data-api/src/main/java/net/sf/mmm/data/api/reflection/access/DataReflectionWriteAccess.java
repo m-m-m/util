@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection.access;
 
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -27,7 +27,7 @@ public interface DataReflectionWriteAccess {
    *        {@link DataClass#getJavaClass() java class}.
    * @param superClass is the {@link DataClass#getSuperClass() super-class} of
    *        the class to create.
-   * @param title is the {@link net.sf.mmm.data.api.DataObject#getTitle() title}
+   * @param title is the {@link net.sf.mmm.data.api.DataObjectView#getTitle() title}
    *        of the class to create.
    * @param modifiers are the {@link DataClass#getModifiers() modifiers} for the
    *        class to create.
@@ -41,7 +41,7 @@ public interface DataReflectionWriteAccess {
    *         <li>both abstract and final flag are set</li>
    *         </ul>
    */
-  <CLASS extends DataObject> DataClass<? extends CLASS> createDataClass(
+  <CLASS extends DataObjectView> DataClass<? extends CLASS> createDataClass(
       DataClass<CLASS> superClass, String title, DataClassModifiers modifiers)
       throws DataReflectionException;
 
@@ -53,7 +53,7 @@ public interface DataReflectionWriteAccess {
    * 
    * @param declaringClass is the {@link DataField#getDeclaringClass() class}
    *        where the new field will be added.
-   * @param title is the {@link net.sf.mmm.data.api.DataObject#getTitle() title}
+   * @param title is the {@link net.sf.mmm.data.api.DataObjectView#getTitle() title}
    *        of the field to create.
    * @param type is the {@link DataField#getFieldType() type} of the values that
    *        can be stored in the created field. Use
@@ -69,7 +69,7 @@ public interface DataReflectionWriteAccess {
    *         <li>the given class already declares a field with the given name</li>
    *         </ul>
    */
-  <CLASS extends DataObject, FIELD> DataField<CLASS, FIELD> createDataField(
+  <CLASS extends DataObjectView, FIELD> DataField<CLASS, FIELD> createDataField(
       DataClass<CLASS> declaringClass, String title, GenericType<FIELD> type,
       DataFieldModifiers modifiers) throws DataReflectionException;
 
@@ -115,7 +115,7 @@ public interface DataReflectionWriteAccess {
    *         <li>the given class or field has the system flag set</li>
    *         </ul>
    */
-  void setDeleted(DataReflectionObject<? extends DataObject> classOrField, boolean newDeletedFlag)
+  void setDeleted(DataReflectionObject<? extends DataObjectView> classOrField, boolean newDeletedFlag)
       throws DataReflectionException;
 
 }

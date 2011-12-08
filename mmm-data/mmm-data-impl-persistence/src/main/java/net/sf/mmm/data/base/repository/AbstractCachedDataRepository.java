@@ -6,13 +6,14 @@ package net.sf.mmm.data.base.repository;
 import java.util.Map;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.datatype.DataId;
+import net.sf.mmm.data.api.entity.resource.DataEntityResource;
+import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.AbstractDataObject;
-import net.sf.mmm.data.base.entity.resource.AbstractDataEntityResource;
-import net.sf.mmm.data.resource.api.ContentResource;
+import net.sf.mmm.data.impl.entity.resource.AbstractDataEntityResource;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -105,12 +106,12 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
         result = getReflectionService().getDataField(id);
       } else {
         // TODO: illegal ID
-        throw new ObjectNotFoundException(DataObject.class, id);
+        throw new ObjectNotFoundException(DataObjectView.class, id);
       }
     } else {
       // resource
       long cid = id.getClassId();
-      if (cid < ContentResource.CLASS_ID) {
+      if (cid < DataEntityResourceView.CLASS_ID) {
         // internal entity
         // TODO: should this be handled different at all?
       } else {
@@ -129,12 +130,12 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
   /**
    * {@inheritDoc}
    */
-  public DataObject getById(DataId id) throws DataException {
+  public DataObjectView getById(DataId id) throws DataException {
 
-    DataObject result = getFromCache(id);
+    DataObjectView result = getFromCache(id);
     // TODO: read object from persistent store...
     if (result == null) {
-      throw new ObjectNotFoundException(DataObject.class, id);
+      throw new ObjectNotFoundException(DataObjectView.class, id);
     }
     return result;
   }
@@ -144,7 +145,7 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
   /**
    * {@inheritDoc}
    */
-  public void move(ContentResource entity, ContentResource newParent) throws DataException {
+  public void move(DataEntityResource entity, DataEntityResource newParent) throws DataException {
 
     // TODO Auto-generated method stub
 
@@ -153,7 +154,7 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
   /**
    * {@inheritDoc}
    */
-  public void rename(DataObject entity, String newName) throws DataException {
+  public void rename(DataObjectView entity, String newName) throws DataException {
 
     // TODO Auto-generated method stub
 

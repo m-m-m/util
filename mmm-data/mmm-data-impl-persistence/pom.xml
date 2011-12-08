@@ -33,5 +33,19 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
+    <!-- TODO: move to separate impl modules later -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-data-entity-audio-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- TODO: move to separate impl modules later -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-data-entity-video-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>

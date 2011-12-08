@@ -5,7 +5,6 @@ package net.sf.mmm.transaction.impl.jta;
 
 import javax.transaction.Transaction;
 
-import net.sf.mmm.transaction.api.TransactionAdapter;
 import net.sf.mmm.transaction.api.TransactionSettings;
 import net.sf.mmm.transaction.base.AbstractTransactionExecutor;
 import net.sf.mmm.transaction.base.TransactionCommitException;
@@ -38,8 +37,8 @@ public class JtaTransactionExecutor extends AbstractTransactionExecutor {
   }
 
   /**
-   * This is the implementation of the {@link TransactionAdapter} interface
-   * using JTA.
+   * This is the implementation of the
+   * {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using JTA.
    */
   private class JtaTransactionAdapter extends AbstractTransactionAdapter<Transaction> {
 
