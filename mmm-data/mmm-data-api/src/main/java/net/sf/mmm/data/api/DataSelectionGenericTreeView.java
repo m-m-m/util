@@ -10,7 +10,6 @@ import net.sf.mmm.data.api.reflection.DataClassIds;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldIds;
 import net.sf.mmm.util.collection.api.GenericTreeNode;
-import net.sf.mmm.util.lang.api.BooleanEnum;
 
 /**
  * This is the interface for a {@link DataSelectionView} that represents a tree.
@@ -54,15 +53,5 @@ public abstract interface DataSelectionGenericTreeView<CHILD extends DataNodeVie
    */
   @DataFieldAnnotation(id = DataFieldIds.ID_SELECTIONTREE_CHILDREN)
   List<? extends CHILD> getChildren();
-
-  /**
-   * This method determines if this node is <em>abstract</em>. An abstract node
-   * can not be selected in regular situations. As a recommendation abstract
-   * nodes should have children.
-   * 
-   * @return <code>true</code> if abstract, <code>false</code> otherwise.
-   */
-  @DataFieldAnnotation(id = DataFieldIds.ID_SELECTIONTREE_ABSTRACT, isStatic = BooleanEnum.TRUE, isFinal = BooleanEnum.TRUE)
-  boolean isAbstract();
 
 }

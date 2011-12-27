@@ -3,17 +3,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.audio;
 
-import net.sf.mmm.data.api.entity.pim.contact.DataPersonView;
-import net.sf.mmm.data.api.link.LinkList;
+import net.sf.mmm.data.api.entity.pim.contact.DataPerson;
+import net.sf.mmm.data.api.link.MutableLinkList;
 
 /**
- * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataArtistGroupView extends DataArtistView {
+public interface DataArtist extends DataArtistView {
 
-  LinkList<? extends DataPersonView> getArtists();
+  /**
+   * {@inheritDoc}
+   */
+  MutableLinkList<DataPerson> getMembers();
 
 }

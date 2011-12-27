@@ -33,7 +33,7 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   private static final long serialVersionUID = -9049737538380209022L;
 
   /** @see #getChildren() */
-  private List<AbstractDataEntityResource> children;
+  private List<DataEntityResource> children;
 
   /**
    * The constructor.
@@ -69,11 +69,11 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * {@inheritDoc}
    */
-  @OneToMany(mappedBy = "parent")
-  public List<AbstractDataEntityResource> getChildren() {
+  @OneToMany(mappedBy = "parent", targetEntity = AbstractDataEntityResource.class)
+  public List<DataEntityResource> getChildren() {
 
     if (this.children == null) {
-      this.children = new ArrayList<AbstractDataEntityResource>();
+      this.children = new ArrayList<DataEntityResource>();
     }
     return this.children;
   }
@@ -81,7 +81,7 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * @param children is the children to set
    */
-  protected void setChildren(List<AbstractDataEntityResource> children) {
+  protected void setChildren(List<DataEntityResource> children) {
 
     this.children = children;
   }
@@ -90,9 +90,18 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
    * {@inheritDoc}
    */
   @Transient
-  public boolean isAbstract() {
+  public boolean isSelectable() {
 
     return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setSelectable(boolean isAbstract) {
+
+    // TODO Auto-generated method stub
+
   }
 
   /**

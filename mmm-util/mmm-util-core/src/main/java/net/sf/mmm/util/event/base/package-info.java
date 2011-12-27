@@ -4,7 +4,7 @@
 /**
  * Contains the abstract base-implementation of the 
  * {@link net.sf.mmm.util.event.api event-handling API}.
- * <a name="documentation"/><h2>Event-Util Basis</h2>
+ * <a name="documentation"/><h2>Event-Util Base</h2>
  * If you want to implement a class that produces {@link net.sf.mmm.util.event.api.Event events} 
  * and wants to
  * {@link net.sf.mmm.util.event.base.AbstractEventSource#fireEvent(net.sf.mmm.util.event.api.Event) send} 

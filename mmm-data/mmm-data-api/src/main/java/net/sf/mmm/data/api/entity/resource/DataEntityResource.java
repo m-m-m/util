@@ -16,11 +16,8 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
  */
 @DataClassAnnotation(id = DataEntityResourceView.CLASS_ID, title = DataEntityResourceView.CLASS_TITLE)
 public interface DataEntityResource extends DataEntityResourceView, DataEntity,
-    DataNode<DataFolderView> {
+    DataNode<DataFolderView, DataFolder> {
 
-  /**
-   * {@inheritDoc}
-   */
-  DataFolder getParent();
+  // nothing to add
 
 }

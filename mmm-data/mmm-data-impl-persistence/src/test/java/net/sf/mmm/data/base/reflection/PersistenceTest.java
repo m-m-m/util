@@ -6,7 +6,7 @@ package net.sf.mmm.data.base.reflection;
 import java.util.concurrent.Callable;
 
 import net.sf.mmm.data.api.DataObjectView;
-import net.sf.mmm.data.api.entity.pim.DataCountry;
+import net.sf.mmm.data.api.entity.pim.address.DataCountry;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfo;
 import net.sf.mmm.data.api.link.Link;
 import net.sf.mmm.data.api.link.MutableLinkList;

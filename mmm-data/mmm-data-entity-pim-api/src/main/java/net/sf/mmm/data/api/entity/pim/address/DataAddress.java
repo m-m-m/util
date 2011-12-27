@@ -1,10 +1,9 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.api.entity.pim.contact;
+package net.sf.mmm.data.api.entity.pim.address;
 
 import net.sf.mmm.data.api.entity.DataEntity;
-import net.sf.mmm.data.api.entity.pim.DataCountry;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 

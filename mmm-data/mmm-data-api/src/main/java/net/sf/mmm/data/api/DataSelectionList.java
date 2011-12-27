@@ -13,7 +13,7 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
  * @since 1.0.0
  */
 @DataClassAnnotation(id = DataSelectionListView.CLASS_ID, title = DataSelectionListView.CLASS_TITLE)
-public interface DataSelectionList extends DataSelectionListView {
+public interface DataSelectionList extends DataSelectionListView, DataSelection {
 
   // nothing to add.
 

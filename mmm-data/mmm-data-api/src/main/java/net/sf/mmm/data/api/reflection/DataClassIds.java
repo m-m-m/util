@@ -77,6 +77,8 @@ public interface DataClassIds {
    */
   long ID_SELECTIONGENERICTREE = 5;
 
+  // --- PIM ---
+
   /**
    * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
    * <code>DataCity</code>.
@@ -130,5 +132,19 @@ public interface DataClassIds {
    * <code>DataContact</code>.
    */
   long ID_PERSON = 111;
+
+  // --- Audio ---
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
+   * <code>DataAudio</code>.
+   */
+  long ID_AUDIO = 200;
+
+  /**
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
+   * <code>DataAudioGenre</code>.
+   */
+  long ID_AUDIOGENRE = 201;
 
 }

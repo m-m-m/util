@@ -14,6 +14,12 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 @DataClassAnnotation(id = DataSelectionView.CLASS_ID, title = DataSelectionView.CLASS_TITLE)
 public interface DataSelection extends DataSelectionView, DataObject {
 
-  // nothing to add
+  /**
+   * This method sets the {@link #isSelectable() selectable} flag.
+   * 
+   * @param selectable - <code>true</code> if this instance should be
+   *        {@link #isSelectable() selectable}, <code>false</code> otherwise.
+   */
+  void setSelectable(boolean selectable);
 
 }

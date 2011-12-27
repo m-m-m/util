@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
+import net.sf.mmm.data.api.reflection.DataClassCachingStrategy;
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -47,6 +48,9 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
 
   /** @see #getGroupVersion() */
   private DataClassGroupVersion groupVersion;
+
+  /** @see #getCachingStrategy() */
+  private DataClassCachingStrategy cachingStrategy;
 
   /** @see #getDeclaredFields() (map of content-fields by name) */
   private final Map<String, AbstractDataField<CLASS, ?>> declaredFields;
@@ -154,6 +158,22 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  public DataClassCachingStrategy getCachingStrategy() {
+
+    return this.cachingStrategy;
+  }
+
+  /**
+   * @param cachingStrategy is the cachingStrategy to set
+   */
+  protected void setCachingStrategy(DataClassCachingStrategy cachingStrategy) {
+
+    this.cachingStrategy = cachingStrategy;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public Collection<AbstractDataField<CLASS, ?>> getDeclaredFields() {
 
     return this.declaredFieldsView;
@@ -236,7 +256,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isAbstract() {
+  public boolean isSelectable() {
 
     return this.modifiers.isAbstract();
   }

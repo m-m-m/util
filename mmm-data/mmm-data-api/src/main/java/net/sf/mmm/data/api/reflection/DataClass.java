@@ -169,6 +169,14 @@ public interface DataClass<CLASS extends DataObjectView> extends DataReflectionO
   DataClassModifiers getModifiers();
 
   /**
+   * This method determines the {@link DataClassCachingStrategy} for this
+   * {@link DataClass}.
+   * 
+   * @return the {@link DataClassCachingStrategy}.
+   */
+  DataClassCachingStrategy getCachingStrategy();
+
+  /**
    * This method determines is this class is a super class of the given class. <br>
    * 
    * @param contentClass is the class to compare with.

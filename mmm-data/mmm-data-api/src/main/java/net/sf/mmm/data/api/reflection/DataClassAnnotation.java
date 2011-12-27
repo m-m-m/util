@@ -88,6 +88,12 @@ public @interface DataClassAnnotation {
    */
   String groupVersion() default "";
 
+  /**
+   * The {@link DataClassCachingStrategy} to use for caching instances of this
+   * class.
+   */
+  DataClassCachingStrategy cachingStrategy() default DataClassCachingStrategy.DEFAULT;
+
   // /**
   // * the {@link RevisionControl} that determines if the annotated entity-type
   // * should be
@@ -97,10 +103,4 @@ public @interface DataClassAnnotation {
   // */
   // RevisionControl revisionControl() default RevisionControl.INHERIT;
 
-  /**
-   * TODO: is this part of the model or configuration of the GUI?
-   * 
-   * @return the selection type of the entity.
-   */
-  // EntitySelection selection() default EntitySelection.DEFAULT;
 }

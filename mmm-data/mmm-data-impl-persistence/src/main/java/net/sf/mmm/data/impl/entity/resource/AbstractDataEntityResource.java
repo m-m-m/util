@@ -54,7 +54,7 @@ public abstract class AbstractDataEntityResource extends AbstractDataEntity impl
   /**
    * @param parent the parent to set
    */
-  protected void setParent(DataFolder parent) {
+  public void setParent(DataFolder parent) {
 
     this.parent = (DataFolderImpl) parent;
   }

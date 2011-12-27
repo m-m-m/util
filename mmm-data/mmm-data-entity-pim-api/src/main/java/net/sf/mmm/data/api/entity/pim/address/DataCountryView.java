@@ -1,11 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.data.api.entity.pim;
+package net.sf.mmm.data.api.entity.pim.address;
 
 import net.sf.mmm.data.api.DataSelectionListView;
 import net.sf.mmm.data.api.entity.DataEntityView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.data.api.reflection.DataClassCachingStrategy;
 import net.sf.mmm.data.api.reflection.DataClassIds;
 import net.sf.mmm.util.datatype.api.address.Iso2CountryCode;
 import net.sf.mmm.util.datatype.api.phone.CountryCode;
@@ -20,7 +21,8 @@ import net.sf.mmm.util.lang.api.BooleanEnum;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataCountryView.CLASS_ID, title = DataCountryView.CLASS_TITLE, isFinal = BooleanEnum.TRUE)
+@DataClassAnnotation(id = DataCountryView.CLASS_ID, title = DataCountryView.CLASS_TITLE, //
+isFinal = BooleanEnum.TRUE, cachingStrategy = DataClassCachingStrategy.FULLY_IMUTABLE)
 public interface DataCountryView extends DataEntityView, DataSelectionListView {
 
   /**

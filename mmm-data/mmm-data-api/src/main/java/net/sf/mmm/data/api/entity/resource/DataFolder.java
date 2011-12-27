@@ -3,8 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.resource;
 
-import java.util.List;
-
+import net.sf.mmm.data.api.DataSelectionGenericTree;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 
 /**
@@ -17,16 +16,15 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
  * @since 1.0.0
  */
 @DataClassAnnotation(id = DataFileView.CLASS_ID, title = DataFileView.CLASS_TITLE)
-public interface DataFolder extends DataFolderView, DataEntityResource {
+public interface DataFolder
+    extends
+    DataFolderView,
+    DataEntityResource,
+    DataSelectionGenericTree<DataEntityResourceView, DataEntityResource, DataFolderView, DataFolder> {
 
   /**
    * {@inheritDoc}
    */
   DataEntityResource getChild(String title);
-
-  /**
-   * {@inheritDoc}
-   */
-  List<? extends DataEntityResource> getChildren();
 
 }

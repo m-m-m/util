@@ -55,21 +55,15 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionView#isCacheable()}.
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#isSelectable()}.
    */
-  long ID_SELECTION_CACHEABLE = 30;
+  long ID_SELECTION_SELECTABLE = 42;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
    * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#getChildren()}.
    */
   long ID_SELECTIONTREE_CHILDREN = 41;
-
-  /**
-   * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#isAbstract()}.
-   */
-  long ID_SELECTIONTREE_ABSTRACT = 42;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for

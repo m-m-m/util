@@ -9,7 +9,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-import net.sf.mmm.data.api.entity.pim.contact.DataAddress;
+import net.sf.mmm.data.api.entity.pim.address.DataAddress;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfo;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfoView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;

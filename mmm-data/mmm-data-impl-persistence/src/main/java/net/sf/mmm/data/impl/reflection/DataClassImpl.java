@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.data.api.reflection.DataClassCachingStrategy;
 import net.sf.mmm.data.api.reflection.DataClassModifiers;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.data.base.reflection.AbstractDataClass;
@@ -181,6 +182,16 @@ public final class DataClassImpl<CLASS extends DataObjectView> extends AbstractD
   public DataClassGroupVersionImpl getGroupVersion() {
 
     return (DataClassGroupVersionImpl) super.getGroupVersion();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @Type(type = "net.sf.mmm.data.impl.datatype.usertype.DataClassCachingStrategyUserType")
+  public DataClassCachingStrategy getCachingStrategy() {
+
+    return super.getCachingStrategy();
   }
 
   /**

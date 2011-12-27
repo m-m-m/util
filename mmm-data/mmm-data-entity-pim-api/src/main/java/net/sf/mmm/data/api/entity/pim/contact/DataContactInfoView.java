@@ -6,6 +6,7 @@ package net.sf.mmm.data.api.entity.pim.contact;
 import javax.mail.internet.InternetAddress;
 
 import net.sf.mmm.data.api.entity.DataEntityView;
+import net.sf.mmm.data.api.entity.pim.address.DataAddressView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassIds;
 import net.sf.mmm.util.datatype.api.phone.PhoneNumber;

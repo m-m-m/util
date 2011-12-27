@@ -7,8 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.entity.pim.DataCountry;
-import net.sf.mmm.data.api.entity.pim.DataCountryView;
+import net.sf.mmm.data.api.entity.pim.address.DataCountry;
+import net.sf.mmm.data.api.entity.pim.address.DataCountryView;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.util.datatype.api.address.Iso2CountryCode;
 import net.sf.mmm.util.datatype.api.phone.CountryCode;
@@ -36,6 +36,9 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
 
   /** @see #getIsoCode() */
   private Iso2CountryCode isoCode;
+
+  /** @see #isSelectable() */
+  private boolean selectable;
 
   /**
    * The constructor.
@@ -74,10 +77,17 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
-  @Transient
-  public boolean isCacheable() {
+  public boolean isSelectable() {
 
-    return true;
+    return this.selectable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setSelectable(boolean selectable) {
+
+    this.selectable = selectable;
   }
 
   /**

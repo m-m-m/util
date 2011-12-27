@@ -37,14 +37,19 @@ public abstract interface DataSelectionView extends DataObjectView {
   String CLASS_TITLE = "DataSelection";
 
   /**
-   * This method determines if the entire selection options of the concrete
-   * implementing type should be cached by the system in main memory. This
-   * option has to be be static for a concrete type.
+   * This method determines if this instance is <em>selectable</em>. Selectable
+   * simply means it is a valid selection the user can choose. Otherwise this
+   * instances can not be chosen as valid choice in regular selections. This is
+   * especially helpful for instances that represent a node of a
+   * {@link DataSelectionGenericTree selection tree} that is not selectable (in
+   * this case called an abstract node) and only one of its children can be
+   * selected. In case of {@link DataSelectionList selection lists} instances
+   * that are NOT selectable, may be disabled or even entirely omitted in the UI
+   * when doing a selection (e.g. as dropdown/combobox).
    * 
-   * @return <code>true</code> if the selections shall be cached,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if selectable, <code>false</code> otherwise.
    */
-  @DataFieldAnnotation(id = DataFieldIds.ID_SELECTION_CACHEABLE, isStatic = BooleanEnum.TRUE, isFinal = BooleanEnum.TRUE)
-  boolean isCacheable();
+  @DataFieldAnnotation(id = DataFieldIds.ID_SELECTION_SELECTABLE, isStatic = BooleanEnum.TRUE, isFinal = BooleanEnum.TRUE)
+  boolean isSelectable();
 
 }

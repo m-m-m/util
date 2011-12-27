@@ -7,6 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
@@ -20,8 +21,8 @@ import org.hibernate.annotations.Type;
  * This is the implementation of the
  * {@link net.sf.mmm.data.api.reflection.DataField} interface.
  * 
- * @param <FIELD> is the generic type of the {@link #getFieldValue(DataObjectView)
- *        value} reflected by this field.
+ * @param <FIELD> is the generic type of the
+ *        {@link #getFieldValue(DataObjectView) value} reflected by this field.
  * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
  *        class}.
  * 
@@ -64,6 +65,15 @@ public final class DataFieldImpl<CLASS extends DataObjectView, FIELD> extends
   public DataClassImpl getDeclaringClass() {
 
     return (DataClassImpl) super.getDeclaringClass();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Transient
+  public boolean isSelectable() {
+
+    return true;
   }
 
 }

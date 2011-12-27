@@ -6,9 +6,9 @@ package net.sf.mmm.data.impl.entity.pim.contact;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.entity.pim.DataCountry;
-import net.sf.mmm.data.api.entity.pim.contact.DataAddress;
-import net.sf.mmm.data.api.entity.pim.contact.DataAddressView;
+import net.sf.mmm.data.api.entity.pim.address.DataAddress;
+import net.sf.mmm.data.api.entity.pim.address.DataAddressView;
+import net.sf.mmm.data.api.entity.pim.address.DataCountry;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.data.impl.entity.pim.DataCountryImpl;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
