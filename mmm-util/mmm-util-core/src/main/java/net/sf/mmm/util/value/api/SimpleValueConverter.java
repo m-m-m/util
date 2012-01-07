@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-
 /**
  * This is the interface for a converter that
  * {@link #convert(Object, Object, Class) converts} a value of the type
@@ -37,7 +36,7 @@ public interface SimpleValueConverter<SOURCE, TARGET> {
    *         <code>value</code> is illegal for the given
    *         <code>targetClass</code>).
    */
-  TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass)
+  <T extends TARGET> T convert(SOURCE value, Object valueSource, Class<T> targetClass)
       throws ValueException;
 
 }

@@ -64,12 +64,12 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
    * {@inheritDoc}
    */
   @Override
-  protected Collection createContainer(GenericType<? extends Collection> targetType, int length) {
+  protected <T extends Collection> T createContainer(GenericType<T> targetType, int length) {
 
     CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil()
         .getCollectionFactoryManager();
-    return collectionFactoryManager.getCollectionFactory(targetType.getRetrievalClass()).create(
-        length);
+    Class<T> collectionType = targetType.getRetrievalClass();
+    return (T) collectionFactoryManager.getCollectionFactory(collectionType).create(length);
   }
 
 }

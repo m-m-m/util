@@ -18,8 +18,8 @@ import net.sf.mmm.util.value.api.ValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent
-    implements ValueConverter<SOURCE, TARGET> {
+public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends
+    AbstractLoggableComponent implements ValueConverter<SOURCE, TARGET> {
 
   /**
    * The constructor.
@@ -32,8 +32,8 @@ public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends Abstr
   /**
    * {@inheritDoc}
    */
-  public final TARGET convert(SOURCE value, Object valueSource,
-      GenericType<? extends TARGET> targetType) {
+  public final <T extends TARGET> T convert(SOURCE value, Object valueSource,
+      GenericType<T> targetType) {
 
     return convert(value, valueSource, targetType.getRetrievalClass());
   }

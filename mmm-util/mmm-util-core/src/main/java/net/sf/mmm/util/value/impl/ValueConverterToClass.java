@@ -51,8 +51,8 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
   /**
    * {@inheritDoc}
    */
-  public Class convert(CharSequence value, Object valueSource,
-      GenericType<? extends Class> targetType) throws ValueException {
+  public <T extends Class> T convert(CharSequence value, Object valueSource,
+      GenericType<T> targetType) throws ValueException {
 
     if (value == null) {
       return null;
@@ -66,7 +66,7 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
           throw new ClassCastException(superClass.getName());
         }
       }
-      return result;
+      return (T) result;
     } catch (ClassNotFoundException e) {
       throw new NlsParseException(e, value, targetType, valueSource);
     }

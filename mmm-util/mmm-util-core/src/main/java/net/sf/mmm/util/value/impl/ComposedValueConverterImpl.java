@@ -137,7 +137,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * {@inheritDoc}
    */
   @SuppressWarnings("rawtypes")
-  public Object convert(Object value, Object valueSource, GenericType<? extends Object> targetType) {
+  public <T> T convert(Object value, Object valueSource, GenericType<T> targetType) {
 
     if (value == null) {
       return null;
@@ -154,7 +154,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
           "starting conversion of '" + value + "' from '" + valueClassName + "' to '" + targetType
               + "'");
     }
-    Class<? extends Object> targetClass = targetType.getRetrievalClass();
+    Class<?> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
       // generic collections or maps might need converting of their items...
       boolean conversionRequired = false;
@@ -200,7 +200,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       }
       if (!conversionRequired) {
         getLogger().trace("Value is already an instance of expected type.");
-        return value;
+        return (T) value;
       }
     }
     TargetClass2ConverterMap converterMap;
@@ -213,7 +213,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
         targetClass = getReflectionUtil().getNonPrimitiveType(targetClass);
       }
     }
-    return convertRecursive(value, valueSource, targetType, targetClass, null, converterMap);
+    return (T) convertRecursive(value, valueSource, targetType, targetClass, null, converterMap);
   }
 
   /**
@@ -436,7 +436,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * {@inheritDoc}
      */
-    public TARGET convert(Object value, Object valueSource, Class<? extends TARGET> targetClass)
+    public <T extends TARGET> T convert(Object value, Object valueSource, Class<T> targetClass)
         throws ValueException {
 
       return convert(value, valueSource, getReflectionUtil().createGenericType(targetClass));
@@ -445,8 +445,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * {@inheritDoc}
      */
-    public TARGET convert(Object value, Object valueSource,
-        GenericType<? extends TARGET> genericTargetType) {
+    public <T extends TARGET> T convert(Object value, Object valueSource,
+        GenericType<T> genericTargetType) {
 
       if (value == null) {
         return null;
@@ -458,6 +458,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      * This method performs the {@link #convert(Object, Object, GenericType)
      * conversion} recursive.
      * 
+     * @param <T> is the generic type of <code>genericTargetType</code>.
      * @param value is the value to convert.
      * @param valueSource describes the source of the value. This may be the
      *        filename where the value was read from, an XPath where the value
@@ -473,8 +474,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      *         {@link Class#isInstance(Object) instance} of the given
      *         <code>targetType</code>.
      */
-    protected TARGET convertRecursive(Object value, Object valueSource,
-        GenericType<? extends TARGET> genericTargetType, Class<?> sourceClass) {
+    protected <T extends TARGET> T convertRecursive(Object value, Object valueSource,
+        GenericType<T> genericTargetType, Class<?> sourceClass) {
 
       boolean traceEnabled = getLogger().isTraceEnabled();
       Class<?> currentClass = sourceClass;
@@ -491,7 +492,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
                   "trying converter for source-type '" + currentClass + "': "
                       + converter.getClass().getSimpleName());
             }
-            TARGET result = converter.convert(value, valueSource, genericTargetType);
+            T result = converter.convert(value, valueSource, genericTargetType);
             if (result != null) {
               if (traceEnabled) {
                 getLogger().trace(
@@ -503,7 +504,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
         }
         for (Class<?> superInterface : currentClass.getInterfaces()) {
           if (isAccepted(superInterface)) {
-            TARGET result = convertRecursive(value, valueSource, genericTargetType, superInterface);
+            T result = convertRecursive(value, valueSource, genericTargetType, superInterface);
             if (result != null) {
               return result;
             }

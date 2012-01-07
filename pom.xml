@@ -230,6 +230,7 @@
     <filter name="NonSrcDirs" enabled="true"/>
     <filter name="FilesFromPackage" enabled="true">
         <filter-data value="src/test/java"/>
+        <filter-data value="src/test/resources"/>
     </filter>
 </fileset-config>
 ]]></content>

@@ -119,22 +119,25 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
   /**
    * {@inheritDoc}
    */
-  public String convert(Object value, Object valueSource, Class<? extends String> targetClass) {
+  public <T extends String> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {
       return null;
     }
+    String result;
     if (value instanceof Class<?>) {
-      return ((Class<?>) value).getName();
+      result = ((Class<?>) value).getName();
     } else if (value instanceof Date) {
-      return getIso8601Util().formatDateTime((Date) value);
+      result = getIso8601Util().formatDateTime((Date) value);
     } else if (value instanceof Calendar) {
-      return getIso8601Util().formatDateTime((Calendar) value);
+      result = getIso8601Util().formatDateTime((Calendar) value);
     } else if (value instanceof Enum<?>) {
       String name = ((Enum<?>) value).name();
-      return name.replace('_', '-').toLowerCase(Locale.US);
+      result = name.replace('_', '-').toLowerCase(Locale.US);
+    } else {
+      result = value.toString();
     }
-    return value.toString();
+    return (T) result;
   }
 
 }

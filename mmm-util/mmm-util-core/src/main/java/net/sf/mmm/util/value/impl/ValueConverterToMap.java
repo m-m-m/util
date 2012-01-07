@@ -85,11 +85,12 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
    * {@inheritDoc}
    */
   @Override
-  protected Map createContainer(GenericType<? extends Map> targetType, int length) {
+  protected <T extends Map> T createContainer(GenericType<T> targetType, int length) {
 
     CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil()
         .getCollectionFactoryManager();
-    return collectionFactoryManager.getMapFactory(targetType.getRetrievalClass()).create(length);
+    Class<T> mapType = targetType.getRetrievalClass();
+    return (T) collectionFactoryManager.getMapFactory(mapType).create(length);
   }
 
 }

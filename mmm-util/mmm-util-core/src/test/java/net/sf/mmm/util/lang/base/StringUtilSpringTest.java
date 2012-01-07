@@ -5,6 +5,7 @@ package net.sf.mmm.util.lang.base;
 
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.value.impl.ValueConverterToNumber;
 
 import org.junit.AfterClass;
 
@@ -22,6 +23,15 @@ public class StringUtilSpringTest extends StringUtilTest {
   public StringUtil getStringUtil() {
 
     return SpringContainerPool.getInstance().getComponent(StringUtil.class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ValueConverterToNumber getValueConverterToNumber() {
+
+    return SpringContainerPool.getInstance().getComponent(ValueConverterToNumber.class);
   }
 
   /**

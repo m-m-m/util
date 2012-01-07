@@ -14,6 +14,7 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.util.filter.base.FilterRuleChain;
 import net.sf.mmm.util.transformer.base.StringTransformerChain;
+import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
 
 /**
  * This is the implementation of {@link SearchIndexerDataLocation} as JAXB-ready
@@ -24,7 +25,7 @@ import net.sf.mmm.util.transformer.base.StringTransformerChain;
  */
 @XmlRootElement(name = "location")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchIndexerDataLocationBean implements SearchIndexerDataLocation {
+public class SearchIndexerDataLocationBean implements SearchIndexerDataLocation, JaxbObject {
 
   /** @see #getLocationUri() */
   @XmlAttribute(name = "location-uri")
@@ -204,11 +205,7 @@ public class SearchIndexerDataLocationBean implements SearchIndexerDataLocation 
   }
 
   /**
-   * This method is automatically invoked by JAXB after unmarshalling this bean.
-   * It allows to link the parent object.
-   * 
-   * @param unmarshaller is the {@link Unmarshaller}.
-   * @param parent is the java-object representing the parent node in XML.
+   * {@inheritDoc}
    */
   public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 

@@ -15,16 +15,13 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
  * This is the abstract base implementation of the {@link ContentTypeManager}
  * interface.
  * 
- * @param <TYPE> is the generic type of the {@link ContentType} implementation
- *        to manage.
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentTypeManager<TYPE extends ContentType<?>> extends
-    AbstractLoggableComponent implements ContentTypeManager {
+public abstract class AbstractContentTypeManager extends AbstractLoggableComponent implements
+    ContentTypeManager {
 
   /** @see #getContentType(String) */
-  private final Map<String, TYPE> id2contentTypeMap;
+  private final Map<String, ContentType> id2contentTypeMap;
 
   /**
    * The constructor.
@@ -32,13 +29,13 @@ public abstract class AbstractContentTypeManager<TYPE extends ContentType<?>> ex
   public AbstractContentTypeManager() {
 
     super();
-    this.id2contentTypeMap = new HashMap<String, TYPE>();
+    this.id2contentTypeMap = new HashMap<String, ContentType>();
   }
 
   /**
    * {@inheritDoc}
    */
-  public TYPE getContentType(String id) {
+  public ContentType getContentType(String id) {
 
     return this.id2contentTypeMap.get(id);
   }
@@ -53,7 +50,7 @@ public abstract class AbstractContentTypeManager<TYPE extends ContentType<?>> ex
    * @throws DuplicateObjectException if a {@link ContentType} with the same
    *         {@link ContentType#getId() ID} has already been registered.
    */
-  protected void addContentType(TYPE contentType) throws DuplicateObjectException {
+  protected void addContentType(ContentType contentType) throws DuplicateObjectException {
 
     String id = contentType.getId();
     if (this.id2contentTypeMap.containsKey(id)) {

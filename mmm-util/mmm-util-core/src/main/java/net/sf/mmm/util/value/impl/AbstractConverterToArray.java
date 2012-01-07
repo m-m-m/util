@@ -124,9 +124,9 @@ public abstract class AbstractConverterToArray<ARRAY> extends
    * {@inheritDoc}
    */
   @Override
-  protected ARRAY createContainer(GenericType<? extends ARRAY> targetType, int length) {
+  protected <T extends ARRAY> T createContainer(GenericType<T> targetType, int length) {
 
-    return (ARRAY) Array.newInstance(targetType.getComponentType().getAssignmentClass(), length);
+    return (T) Array.newInstance(targetType.getComponentType().getAssignmentClass(), length);
   }
 
 }

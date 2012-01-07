@@ -92,7 +92,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
    * {@inheritDoc}
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public Object convert(Object value, Object valueSource, GenericType<? extends Object> targetType)
+  public <T> T convert(Object value, Object valueSource, GenericType<T> targetType)
       throws ValueException {
 
     if (value == null) {
@@ -122,7 +122,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
         }
       }
     }
-    return result;
+    return (T) result;
   }
 
   /**

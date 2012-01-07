@@ -308,10 +308,10 @@ public class CliClassContainer {
     /**
      * {@inheritDoc}
      */
-    public String convert(CliModeContainer value, Object valueSource,
-        Class<? extends String> targetClass) throws ValueException {
+    public <T extends String> T convert(CliModeContainer value, Object valueSource,
+        Class<T> targetClass) throws ValueException {
 
-      return value.getId();
+      return (T) value.getId();
     }
   }
 

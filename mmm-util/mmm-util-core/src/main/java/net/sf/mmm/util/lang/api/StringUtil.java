@@ -3,9 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.value.api.ValueConverter;
 
 /**
  * This is the interface for a collection of utility functions that help with
@@ -404,5 +407,227 @@ public interface StringUtil {
    *         <code>false</code> otherwise.
    */
   boolean isSubstring(char[] string, String substring, int offset);
+
+  /**
+   * This method formats the elements given by <code>collection</code> to a
+   * string where each value is formatted to its {@link Object#toString() string
+   * representation} and separated by <code>separator</code>.<br/>
+   * Examples:
+   * <table border="1">
+   * <tr>
+   * <th>collection</th>
+   * <th>separator</th>
+   * <th>{@link StringSyntax#getEscape() syntax.escape}</th>
+   * <th>{@link StringSyntax#getQuoteStart() syntax.quoteStart}</th>
+   * <th>{@link StringSyntax#getQuoteEnd() syntax.quoteEnd}</th>
+   * <th>{@link #toSeparatedString(Collection, String, StringSyntax)}</th>
+   * </tr>
+   * <tr>
+   * <td>
+   * <code>{"abc;", "a,b,c", Integer.valueOf(123), Character.valueOf('\'')}</code>
+   * </td>
+   * <td><code>","</code></td>
+   * <td><code>'\\'</code></td>
+   * <td><code>'\0'</code></td>
+   * <td><code>'\0'</code></td>
+   * <td><code>"abc;,a\\,b\\,c,123,'"</code></td>
+   * </tr>
+   * <tr>
+   * <td>
+   * <code>{"abc;", "a,b,c", Integer.valueOf(123), Character.valueOf('\'')}</code>
+   * </td>
+   * <td><code>","</code></td>
+   * <td><code>'\\'</code></td>
+   * <td><code>'\''</code></td>
+   * <td><code>'\''</code></td>
+   * <td><code>"'abc;','a,b,c','123','\\''"</code></td>
+   * </tr>
+   * <tr>
+   * <td>
+   * <code>{"abc;", "a,b,c", Integer.valueOf(123), Character.valueOf('\'')}</code>
+   * </td>
+   * <td><code>"; "</code></td>
+   * <td><code>'\\'</code></td>
+   * <td><code>'['</code></td>
+   * <td><code>']'</code></td>
+   * <td><code>"[abc;]; [a,b,c]; [123]; [']"</code></td>
+   * </tr>
+   * </table>
+   * Please note that {@link Collection}s with heterogeneous elements can NOT be
+   * converted back from {@link String}.
+   * 
+   * @param collection is the {@link Collection} with the elements to format as
+   *        separated string. May be {@link Collection#isEmpty() empty}.
+   * @param separator is the {@link String} used to separate elements. It is
+   *        appended after each but the last element. Typically this should be a
+   *        specific character that may be followed by a whitespace. Common
+   *        separators are comma (,) or semicolon (;) often also followed by a
+   *        whitespace (<code>", "</code>).
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @return the formatted string.
+   * @since 2.0.2
+   */
+  String toSeparatedString(Collection<?> collection, String separator, StringSyntax syntax);
+
+  /**
+   * This method is like
+   * {@link #toSeparatedString(Collection, String, StringSyntax)} but allows to
+   * specify an explicit {@link Formatter} to use instead of
+   * {@link Object#toString()}.
+   * 
+   * @param <E> is the generic type of the elements in the collection.
+   * 
+   * @param collection is the {@link Collection} with the elements to format as
+   *        separated string. May be {@link Collection#isEmpty() empty}.
+   * @param separator is the {@link String} used to separate elements. It is
+   *        appended after each but the last element. Typically this should be a
+   *        specific character that may be followed by a whitespace. Common
+   *        separators are comma (,) or semicolon (;) often also followed by a
+   *        whitespace (<code>", "</code>).
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @param formatter is the {@link Formatter} to use.
+   * @return the formatted string.
+   * @since 2.0.2
+   */
+  <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
+      Formatter<E> formatter);
+
+  /**
+   * This method is like
+   * {@link #toSeparatedString(Collection, String, StringSyntax)} but allows to
+   * specify an explicit {@link Formatter} to use instead of
+   * {@link Object#toString()}.
+   * 
+   * @param <E> is the generic type of the elements in the collection.
+   * 
+   * @param collection is the {@link Collection} with the elements to format as
+   *        separated string. May be {@link Collection#isEmpty() empty}.
+   * @param separator is the {@link String} used to separate elements. It is
+   *        appended after each but the last element. Typically this should be a
+   *        specific character that may be followed by a whitespace. Common
+   *        separators are comma (,) or semicolon (;) often also followed by a
+   *        whitespace (<code>", "</code>).
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @param formatter is the {@link Formatter} to use.
+   * @param buffer is where the separated string is
+   *        {@link Appendable#append(CharSequence) appended} to.
+   * @since 2.0.2
+   */
+  <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
+      Formatter<E> formatter, Appendable buffer);
+
+  /**
+   * This method is like
+   * {@link #fromSeparatedString(CharSequence, String, StringSyntax, Collection, ValueConverter)}
+   * but expects elements of the type {@link String} that do not need additional
+   * custom conversion.
+   * 
+   * @param separatedString is the separated {@link String} of elements to add
+   *        to the collection.
+   * @param separator is the {@link String} used to separate the individual
+   *        elements in <code>separatedString</code>. There should be no
+   *        <code>separator</code> after the last element in
+   *        <code>separatedString</code>.
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @return the {@link List} of elements from <code>separatedString</code>.
+   * @since 2.0.2
+   */
+  List<String> fromSeparatedString(CharSequence separatedString, String separator,
+      StringSyntax syntax);
+
+  /**
+   * This method is like
+   * {@link #fromSeparatedString(CharSequence, String, StringSyntax, Collection, ValueConverter)}
+   * but expects elements of the type {@link String} that do not need additional
+   * custom conversion.
+   * 
+   * @param separatedString is the separated {@link String} of elements to add
+   *        to the collection.
+   * @param separator is the {@link String} used to separate the individual
+   *        elements in <code>separatedString</code>. There should be no
+   *        <code>separator</code> after the last element in
+   *        <code>separatedString</code>.
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @param collection is where to add the elements to. This should be initially
+   *        empty.
+   * @since 2.0.2
+   */
+  void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
+      Collection<String> collection);
+
+  /**
+   * This method parses the given <code>separatedString</code> that contains
+   * elements separated with <code>separator</code> and the given
+   * <code>syntax</code> and {@link Collection#add(Object) adds} these elements
+   * to the given <code>collection</code>.<br/>
+   * This is the inverse operation of
+   * {@link #toSeparatedString(Collection, String, StringSyntax, Formatter)}.
+   * 
+   * @param <E> is the generic type of the elements in the collection.
+   * 
+   * @param separatedString is the separated {@link String} of elements to add
+   *        to the collection.
+   * @param separator is the {@link String} used to separate the individual
+   *        elements in <code>separatedString</code>. There should be no
+   *        <code>separator</code> after the last element in
+   *        <code>separatedString</code>.
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @param collection is where to add the elements to. This should be initially
+   *        empty.
+   * @param converter is used to parse the given elements from {@link String} to
+   *        their actual type ({@literal <E>}).
+   * @since 2.0.2
+   */
+  <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
+      Collection<E> collection, ValueConverter<String, E> converter);
+
+  /**
+   * This method parses the given <code>separatedString</code> that contains
+   * elements separated with <code>separator</code> and the given
+   * <code>syntax</code> and {@link Collection#add(Object) adds} these elements
+   * to the given <code>collection</code>.<br/>
+   * This is the inverse operation of
+   * {@link #toSeparatedString(Collection, String, StringSyntax, Formatter)}.
+   * 
+   * @param <E> is the generic type of the elements in the collection.
+   * 
+   * @param separatedString is the separated {@link String} of elements to add
+   *        to the collection.
+   * @param separator is the {@link String} used to separate the individual
+   *        elements in <code>separatedString</code>. There should be no
+   *        <code>separator</code> after the last element in
+   *        <code>separatedString</code>.
+   * @param syntax is the {@link StringSyntax} defining
+   *        {@link StringSyntax#getEscape() escape} as well as
+   *        {@link StringSyntax#getQuoteStart() start} and
+   *        {@link StringSyntax#getQuoteEnd() end} of elements.
+   * @param collection is where to add the elements to. This should be initially
+   *        empty.
+   * @param converter is used to parse the given elements from {@link String} to
+   *        their actual type ({@literal <E>}).
+   * @param type is the {@link Class} reflecting the elements to add to
+   *        <code>collection</code>.
+   * @since 2.0.2
+   */
+  <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
+      Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type);
 
 }

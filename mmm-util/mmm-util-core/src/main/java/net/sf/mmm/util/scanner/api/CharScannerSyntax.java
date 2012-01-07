@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.api;
 
+import net.sf.mmm.util.lang.api.StringSyntax;
+
 /**
  * This is the interface used to define the syntax to scan characters.
  * 
@@ -11,68 +13,23 @@ package net.sf.mmm.util.scanner.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface CharScannerSyntax {
+public interface CharScannerSyntax extends StringSyntax {
 
   /**
-   * This method gets the character used as escape. The escape itself is omitted
-   * in the decoded output while the next character is taken as is without any
-   * special interpretation. This allows to encode special characters like a
+   * {@inheritDoc}
+   * 
+   * This allows to encode special characters like a
    * {@link CharStreamScanner#readUntil(char, boolean, CharScannerSyntax)
    * stop-character}, {@link #getQuoteStart() quote-start},
    * {@link #getAltQuoteStart() alt-quote-start}, as well as the
    * {@link #getEscape() escape} itself.<br>
-   * A very common example for an escape character is the backslash (
-   * <code>\</code>).<br>
-   * Here are some examples:
-   * <table border="1">
-   * <tr>
-   * <th>{@link #getEscape() escape}</th>
-   * <th>input</th>
-   * <th>output</th>
-   * </tr>
-   * <tr>
-   * <td>\</td>
-   * <td>a\b\\c</td>
-   * <td>ab\c</td>
-   * </tr>
-   * <tr>
-   * <td>~</td>
-   * <td>a~b~~~c</td>
-   * <td>ab~c</td>
-   * </tr>
-   * </table>
-   * <br>
    * <b>ATTENTION:</b><br>
    * The {@link #getEscape() escape} is disabled within {@link #getQuoteStart()
    * quotations}.
    * 
    * @see #getEntityStart()
-   * 
-   * @return the escape character or <code>0</code> (<code>'\0'</code>) for no
-   *         escaping.
    */
   char getEscape();
-
-  /**
-   * This method gets the character used to start a quotation that should be
-   * terminated by a {@link #getQuoteEnd() quote-end} character. The text inside
-   * the quote is taken as is (without the quote characters).<br>
-   * Common examples for quote characters are the single quotes (<code>'</code>) and
-   * double quotes (<code>"</code>).
-   * 
-   * @return the character used to start a quotation or <code>0</code> (
-   *         <code>'\0'</code>) to disable.
-   */
-  char getQuoteStart();
-
-  /**
-   * This method gets the character used to end a quotation.
-   * 
-   * @see #getQuoteStart()
-   * 
-   * @return the character used to end a quotation.
-   */
-  char getQuoteEnd();
 
   /**
    * This method gets the character used to escape the {@link #getQuoteEnd()
@@ -118,7 +75,7 @@ public interface CharScannerSyntax {
    * </table>
    * 
    * @return the character used to escape the {@link #getQuoteEnd() quote-end}
-   *         character or <code>0</code> (<code>'\0'</code>) to disable.
+   *         character or <code>'\0'</code> to disable.
    */
   char getQuoteEscape();
 
@@ -190,9 +147,9 @@ public interface CharScannerSyntax {
    * </tr>
    * </table>
    * </code><br>
-   * Please note that for <code>'''a'</code> the complete sequence is treated as quote if
-   * {@link #isQuoteEscapeLazy() quote-escape-lazy} is <code>false</code> and
-   * otherwise just the trailing <code>'a'</code>.
+   * Please note that for <code>'''a'</code> the complete sequence is treated as
+   * quote if {@link #isQuoteEscapeLazy() quote-escape-lazy} is
+   * <code>false</code> and otherwise just the trailing <code>'a'</code>.
    * 
    * @return <code>true</code> if quote-escaping is lazy, <code>false</code>
    *         otherwise.
@@ -208,7 +165,7 @@ public interface CharScannerSyntax {
    * @see #getQuoteStart()
    * 
    * @return the alternative character used to start a quotation or
-   *         <code>0</code> (<code>'\0'</code>) to disable.
+   *         <code>'\0'</code> to disable.
    */
   char getAltQuoteStart();
 
@@ -229,7 +186,7 @@ public interface CharScannerSyntax {
    * @see #getQuoteEscape()
    * 
    * @return the character used to escape the {@link #getQuoteEnd() quote-end}
-   *         character or <code>0</code> (<code>'\0'</code>) to disable.
+   *         character or <code>'\0'</code> to disable.
    */
   char getAltQuoteEscape();
 
@@ -253,8 +210,8 @@ public interface CharScannerSyntax {
    * entity-start} and {@link #getEntityEnd() entity-end}. It will be decoded by
    * {@link #resolveEntity(String)}.
    * 
-   * @return the character used to start an entity or <code>0</code> (
-   *         <code>'\0'</code>) to disable.
+   * @return the character used to start an entity or <code>'\0'</code> to
+   *         disable.
    */
   char getEntityStart();
 
@@ -267,16 +224,16 @@ public interface CharScannerSyntax {
    */
   char getEntityEnd();
 
-/**
+  /**
    * This method resolves the given <code>entity</code>.<br>
    * E.g. if {@link #getEntityStart() entity-start} is <code>'&'</code> and
    * {@link #getEntityEnd()} is ';' then if the string <code>"&lt;"</code> is
    * scanned, this method is called with <code>"lt"</code> as
-   * <code>entity</code> argument and may return <code>"<"</code>.
+   * <code>entity</code> argument and may return <code>"&lt;"</code>.
    * 
    * @param entity is the entity string that was found surrounded by
-   *        {@link #getEntityStart() entity-start} and
-   *        {@link #getEntityEnd() entity-end} excluding these characters.
+   *        {@link #getEntityStart() entity-start} and {@link #getEntityEnd()
+   *        entity-end} excluding these characters.
    * @return the decoded entity.
    */
   String resolveEntity(String entity);

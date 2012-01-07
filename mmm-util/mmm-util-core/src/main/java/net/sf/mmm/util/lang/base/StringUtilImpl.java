@@ -3,12 +3,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.Formatter;
+import net.sf.mmm.util.lang.api.StringSyntax;
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
+import net.sf.mmm.util.value.api.ValueConverter;
+import net.sf.mmm.util.value.base.ValueConverterIdentity;
 
 /**
  * This is the implementation of the {@link StringUtil} interface.
@@ -325,5 +340,176 @@ public class StringUtilImpl implements StringUtil {
       buffer.append(lower);
     }
     return buffer.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public String toSeparatedString(Collection<?> collection, String separator, StringSyntax syntax) {
+
+    Formatter formatter = FormatterToString.getInstance();
+    return toSeparatedString(collection, separator, syntax, formatter);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E> String toSeparatedString(Collection<E> collection, String separator,
+      StringSyntax syntax, Formatter<E> formatter) {
+
+    StringBuilder buffer = new StringBuilder();
+    toSeparatedString(collection, separator, syntax, formatter, buffer);
+    return buffer.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E> void toSeparatedString(Collection<E> collection, String separator,
+      StringSyntax syntax, Formatter<E> formatter, Appendable buffer) {
+
+    NlsNullPointerException.checkNotNull("separator", separator);
+    if (separator.length() == 0) {
+      throw new NlsIllegalArgumentException(separator, "separator");
+    }
+    try {
+      char escape = syntax.getEscape();
+      char start = syntax.getQuoteStart();
+      char end = syntax.getQuoteEnd();
+      char separatorChar = separator.charAt(0);
+      String occurrence = null;
+      String replacement = null;
+      if (escape != '\0') {
+        if (end != '\0') {
+          occurrence = Character.toString(end);
+        } else {
+          occurrence = Character.toString(separatorChar);
+        }
+        replacement = escape + occurrence;
+      }
+
+      boolean notStart = false;
+      for (E element : collection) {
+        if (notStart) {
+          buffer.append(separator);
+        }
+        notStart = true;
+        if (start != '\0') {
+          buffer.append(start);
+        }
+        if (escape == '\0') {
+          formatter.format(element, buffer);
+        } else {
+          String elementString = formatter.format(element);
+          elementString = elementString.replace(occurrence, replacement);
+          buffer.append(elementString);
+        }
+        if (end != '\0') {
+          buffer.append(end);
+        }
+      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<String> fromSeparatedString(CharSequence separatedString, String separator,
+      StringSyntax syntax) {
+
+    List<String> result = new ArrayList<String>();
+    fromSeparatedString(separatedString, separator, syntax, result);
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void fromSeparatedString(CharSequence separatedString, String separator,
+      StringSyntax syntax, Collection<String> collection) {
+
+    ValueConverterIdentity<String> identityConverter = new ValueConverterIdentity<String>(
+        String.class);
+    fromSeparatedString(separatedString, separator, syntax, collection, identityConverter);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E> void fromSeparatedString(CharSequence separatedString, String separator,
+      StringSyntax syntax, Collection<E> collection, ValueConverter<String, E> converter) {
+
+    fromSeparatedString(separatedString, separator, syntax, collection, converter,
+        converter.getTargetType());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public <E> void fromSeparatedString(CharSequence separatedString, String separator,
+      StringSyntax syntax, Collection<E> collection,
+      ValueConverter<? super String, ? super E> converter, Class<E> type) {
+
+    NlsNullPointerException.checkNotNull("separator", separator);
+    if (separator.length() == 0) {
+      throw new NlsIllegalArgumentException(separator, "separator");
+    }
+    if (separatedString == null) {
+      return;
+    }
+    CharSequenceScanner scanner = new CharSequenceScanner(separatedString);
+    char escape = syntax.getEscape();
+    char start = syntax.getQuoteStart();
+    char end = syntax.getQuoteEnd();
+    char separatorChar = separator.charAt(0);
+    SimpleCharScannerSyntax scannerSyntax = new SimpleCharScannerSyntax();
+    scannerSyntax.setEscape(escape);
+    while (scanner.hasNext()) {
+      if (start != '\0') {
+        scanner.require(start);
+      }
+      String elementString;
+      if (end == '\0') {
+        elementString = scanner.readUntil(separatorChar, true, scannerSyntax);
+        scanner.stepBack();
+        if (scanner.peek() == separatorChar) {
+          scanner.require(separator, false);
+        } else {
+          scanner.next();
+          assert !scanner.hasNext();
+        }
+      } else {
+        elementString = scanner.readUntil(end, false, scannerSyntax);
+        if (scanner.hasNext()) {
+          scanner.require(separator, false);
+        }
+      }
+      if (elementString == null) {
+        StringBuilder format = new StringBuilder();
+        if (start != '\0') {
+          format.append('\'');
+          format.append(start);
+          format.append('\'');
+        }
+        format.append(" <value> ");
+        if (end != '\0') {
+          format.append('\'');
+          format.append(end);
+          format.append('\'');
+        }
+        String value = format.toString();
+        format.append(" ['");
+        format.append(separator);
+        format.append("' ");
+        format.append(value);
+        format.append("]*");
+        throw new NlsParseException(separatedString, format, collection.getClass());
+      }
+      E element = (E) converter.convert(elementString, separatedString, type);
+      collection.add(element);
+    }
   }
 }

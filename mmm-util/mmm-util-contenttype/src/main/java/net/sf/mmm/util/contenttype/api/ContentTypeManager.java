@@ -18,7 +18,7 @@ public interface ContentTypeManager {
    * 
    * @return the root {@link ContentType}.
    */
-  ContentType<?> getRootType();
+  ContentType getRootType();
 
   /**
    * This method gets the {@link ContentType} for the given
@@ -29,7 +29,7 @@ public interface ContentTypeManager {
    * @return the requested {@link ContentType} or <code>null</code> if none
    *         exists for the given <code>id</code>.
    */
-  ContentType<?> getContentType(String id);
+  ContentType getContentType(String id);
 
   /**
    * This method gets the {@link ContentType#getTechnicalParent() technical
@@ -38,6 +38,6 @@ public interface ContentTypeManager {
    * 
    * @return the technical root {@link ContentType}.
    */
-  ContentType<?> getTechnicalRootType();
+  ContentType getTechnicalRootType();
 
 }

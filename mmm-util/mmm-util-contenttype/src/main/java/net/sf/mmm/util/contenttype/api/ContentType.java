@@ -13,14 +13,9 @@ import net.sf.mmm.util.collection.api.TreeNode;
  * fine-grained (there can be multiple {@link ContentType}s for a single
  * mimetype) and well structured in a {@link TreeNode hierarchy-tree}.
  * 
- * @param <NODE> is the generic type for self-references. Each sub-type of this
- *        interface should specialize this type to itself. End-users should
- *        simply use an unbound wildcard (
- *        <code>{@link ContentType}&lt;?&gt;</code>).
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface ContentType<NODE extends ContentType<NODE>> extends TreeNode<NODE> {
+public interface ContentType extends TreeNode<ContentType> {
 
   /**
    * This method gets the technical name of this {@link ContentType}. For
@@ -67,17 +62,6 @@ public interface ContentType<NODE extends ContentType<NODE>> extends TreeNode<NO
   String getMimetype();
 
   /**
-   * This method gets the property for the given <code>key</code>.
-   * 
-   * @see java.util.Properties#get(Object)
-   * 
-   * @param key is the key for the requested property.
-   * @return the property value for the given key or <code>null</code> if the
-   *         property is NOT defined.
-   */
-  String getProperty(String key);
-
-  /**
    * This method determines if the current {@link ContentType} is abstract. If
    * concrete data has an exact {@link ContentType} that {@link ContentType}
    * should NOT be abstract.<br>
@@ -114,7 +98,7 @@ public interface ContentType<NODE extends ContentType<NODE>> extends TreeNode<NO
    *         {@link ContentTypeManager#getTechnicalRootType() technical root
    *         node}.
    */
-  NODE getTechnicalParent();
+  ContentType getTechnicalParent();
 
   /**
    * This method determines if this {@link ContentType} is an ancestor of the
@@ -122,12 +106,12 @@ public interface ContentType<NODE extends ContentType<NODE>> extends TreeNode<NO
    * {@link ContentType} is the direct or indirect {@link #getTechnicalParent()
    * technical parent} of the given <code>technicalType</code>.
    * 
-   * @see TreeNode#isAncestor(TreeNode)
+   * @see TreeNode#isAncestor(net.sf.mmm.util.collection.api.GenericTreeNode)
    * 
    * @param technicalType is the {@link ContentType} to check.
    * @return <code>true</code> if this {@link ContentType} is a technical
    *         ancestor of the given <code>technicalType</code>.
    */
-  boolean isTechnicalAncestor(ContentType<?> technicalType);
+  boolean isTechnicalAncestor(ContentType technicalType);
 
 }

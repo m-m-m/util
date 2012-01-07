@@ -5,58 +5,77 @@ package net.sf.mmm.util.contenttype.base;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
+
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.util.collection.base.AbstractTreeNode;
 import net.sf.mmm.util.contenttype.api.ContentType;
+import net.sf.mmm.util.contenttype.base.format.ContainerSequence;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
 
 /**
  * This is the abstract base implementation of the {@link ContentType}
  * interface.
  * 
- * @param <NODE> is the generic type for self-references. Each sub-type of this
- *        class should specialize this type to itself.
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>> extends
-    AbstractTreeNode<NODE> implements ContentType<NODE> {
+@XmlRootElement(name = "content-type")
+@XmlAccessorType(XmlAccessType.NONE)
+public class ContentTypeBean extends AbstractTreeNode<ContentType> implements ContentType,
+    JaxbObject {
+
+  /** @see #getId() */
+  @XmlID
+  @XmlAttribute(name = "id")
+  private String id;
 
   /** @see #addExtension(String) */
+  @XmlElementWrapper(name = "extensions")
+  @XmlElement(name = "extension")
   private final Set<String> mutableExtensions;
 
   /** @see #getExtensions() */
-  private final Collection<String> extensions;
+  private final transient Collection<String> extensions;
 
   /** @see #getTechnicalParent() */
-  private NODE technicalParent;
-
-  /** @see #getProperty(String) */
-  private Map<String, String> properties;
+  @XmlIDREF
+  private ContentTypeBean technicalParent;
 
   /** @see #getDefaultExtension() */
   private String defaultExtension;
 
-  /** @see #getId() */
-  private String id;
-
   /** @see #getTitle() */
+  @XmlAttribute(name = "title")
   private String title;
 
   /** @see #getMimetype() */
+  @XmlAttribute(name = "mimetype")
   private String mimetype;
 
   /** @see #isAbstract() */
+  @XmlAttribute(name = "abstract")
   private boolean isAbstract;
+
+  /** @see #getFormat() */
+  @XmlElement(name = "format")
+  private ContainerSequence format;
 
   /**
    * The constructor.
    */
-  public AbstractContentType() {
+  public ContentTypeBean() {
 
     this(null);
   }
@@ -66,7 +85,7 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
    * 
    * @param parent is the {@link #getParent() parent node}.
    */
-  public AbstractContentType(NODE parent) {
+  public ContentTypeBean(ContentType parent) {
 
     super(parent);
     this.mutableExtensions = new HashSet<String>();
@@ -76,7 +95,7 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
   /**
    * {@inheritDoc}
    */
-  public NODE getTechnicalParent() {
+  public ContentTypeBean getTechnicalParent() {
 
     return this.technicalParent;
   }
@@ -88,7 +107,7 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
    * @param technicalParent is the {@link #getTechnicalParent() technical
    *        parent} to set.
    */
-  protected void setTechnicalParent(NODE technicalParent) {
+  protected void setTechnicalParent(ContentTypeBean technicalParent) {
 
     this.technicalParent = technicalParent;
   }
@@ -96,12 +115,12 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
   /**
    * {@inheritDoc}
    */
-  public boolean isTechnicalAncestor(ContentType<?> technicalType) {
+  public boolean isTechnicalAncestor(ContentType technicalType) {
 
     if (technicalType == null) {
       throw new NlsNullPointerException("node");
     }
-    ContentType<?> ancestor = technicalType.getTechnicalParent();
+    ContentType ancestor = technicalType.getTechnicalParent();
     while (ancestor != null) {
       if (ancestor == this) {
         return true;
@@ -162,7 +181,7 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
   /**
    * @param id is the id to set
    */
-  protected void setId(String id) {
+  public void setId(String id) {
 
     this.id = id;
   }
@@ -181,49 +200,6 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
   protected void setMimetype(String mimetype) {
 
     this.mimetype = mimetype;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getProperty(String key) {
-
-    String value = null;
-    if (this.properties != null) {
-      this.properties.get(key);
-    }
-    if (value == null) {
-      // TODO: should all properties be inherited?
-      NODE parent = getParent();
-      if (parent != null) {
-        value = parent.getProperty(key);
-      }
-    }
-    return value;
-  }
-
-  /**
-   * This method sets the {@link #getProperty(String) property} for the given
-   * <code>key</code> to the given <code>value</code>.
-   * 
-   * @see Map#put(Object, Object)
-   * 
-   * @param key is the key for the property to set.
-   * @param value is the value of the property to set.
-   * @return the old value of the property for the given <code>key</code> that
-   *         has been replaced by <code>value</code> or <code>null</code> if the
-   *         property was NOT set before.
-   */
-  protected String setProperty(String key, String value) {
-
-    if (this.properties == null) {
-      this.properties = new HashMap<String, String>();
-    }
-    if (value == null) {
-      return this.properties.remove(key);
-    } else {
-      return this.properties.put(key, value);
-    }
   }
 
   /**
@@ -249,11 +225,51 @@ public abstract class AbstractContentType<NODE extends AbstractContentType<NODE>
   /**
    * This method sets the {@link #isAbstract() abstract} flag.
    * 
-   * @param isAbstract is the new {@link #isAbstract() abstract} flag.
+   * @param abstractFlag is the new {@link #isAbstract() abstract} flag.
    */
-  protected void setAbstract(boolean isAbstract) {
+  protected void setAbstract(boolean abstractFlag) {
 
-    this.isAbstract = isAbstract;
+    this.isAbstract = abstractFlag;
+  }
+
+  /**
+   * This method gets the {@link ContainerSequence} representing the actual
+   * format of the {@link ContentType}.
+   * 
+   * @return the format.
+   */
+  public ContainerSequence getFormat() {
+
+    return this.format;
+  }
+
+  /**
+   * @param format is the {@link #getFormat() format} to set.
+   */
+  protected void setFormat(ContainerSequence format) {
+
+    this.format = format;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+
+    if (parent instanceof ContentType) {
+      setParent((ContentType) parent);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @XmlElementWrapper(name = "children")
+  @XmlElement(name = "content-type", type = ContentTypeBean.class)
+  protected List<ContentType> getMutableChildList() {
+
+    return super.getMutableChildList();
   }
 
 }

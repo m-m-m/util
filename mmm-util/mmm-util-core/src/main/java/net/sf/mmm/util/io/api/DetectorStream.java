@@ -24,7 +24,7 @@ import java.util.Map;
  * until the detection is {@link #isDone() done}).<br>
  * A {@link DetectorStream} is typically used to get the actual wrapper stream,
  * read/write the stream data and then {@link #getMetadata() get the metadata}.
- * After this, the object is useless and can be eaten up by the garbage
+ * After this, the object is useless and can be disposed by the garbage
  * collector.
  * 
  * @see DetectorStreamProvider

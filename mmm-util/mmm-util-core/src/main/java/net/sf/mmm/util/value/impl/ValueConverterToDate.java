@@ -90,20 +90,19 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
   /**
    * {@inheritDoc}
    */
-  public Date convert(Object value, Object valueSource, Class<? extends Date> targetClass) {
+  public <T extends Date> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if ((value == null) || (targetClass != Date.class)) {
       return null;
     }
+    Date result = null;
     if (value instanceof Calendar) {
-      return ((Calendar) value).getTime();
+      result = ((Calendar) value).getTime();
+    } else if (value instanceof String) {
+      result = getIso8601Util().parseDate((String) value);
+    } else if (value instanceof Long) {
+      result = new Date(((Long) value).longValue());
     }
-    if (value instanceof String) {
-      return getIso8601Util().parseDate((String) value);
-    }
-    if (value instanceof Long) {
-      return new Date(((Long) value).longValue());
-    }
-    return null;
+    return (T) result;
   }
 }

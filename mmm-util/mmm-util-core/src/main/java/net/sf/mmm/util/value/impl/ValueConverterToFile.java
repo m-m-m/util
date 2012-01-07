@@ -90,13 +90,13 @@ public class ValueConverterToFile extends AbstractSimpleValueConverter<CharSeque
   /**
    * {@inheritDoc}
    */
-  public File convert(CharSequence value, Object valueSource, Class<? extends File> targetClass) {
+  public <T extends File> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {
       return null;
     }
     String filename = this.fileUtil.normalizePath(value.toString());
-    return new File(filename);
+    return (T) new File(filename);
   }
 
 }

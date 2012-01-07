@@ -60,7 +60,7 @@ public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOU
    * 
    * @see #convert(Object, Object, GenericType)
    */
-  TARGET convert(SOURCE value, Object valueSource, Class<? extends TARGET> targetClass)
+  <T extends TARGET> T convert(SOURCE value, Object valueSource, Class<T> targetClass)
       throws ValueException;
 
   /**
@@ -86,7 +86,7 @@ public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOU
    *         <code>value</code> is illegal for the given
    *         <code>targetClass</code>).
    */
-  TARGET convert(SOURCE value, Object valueSource, GenericType<? extends TARGET> targetType)
+  <T extends TARGET> T convert(SOURCE value, Object valueSource, GenericType<T> targetType)
       throws ValueException;
 
 }

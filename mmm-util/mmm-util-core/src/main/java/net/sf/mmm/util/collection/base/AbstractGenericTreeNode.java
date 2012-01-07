@@ -22,11 +22,11 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
-public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT extends AbstractGenericTreeNode<CHILD, PARENT>>
+public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT extends GenericTreeNode<CHILD, PARENT>>
     implements GenericTreeNode<CHILD, PARENT> {
 
   /** @see #getChildren() */
-  private final List<CHILD> mutableChildList;
+  private final transient List<CHILD> mutableChildList;
 
   /** @see #getChildren() */
   private final List<CHILD> children;
@@ -104,6 +104,14 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   public List<CHILD> getChildren() {
 
     return this.children;
+  }
+
+  /**
+   * @return the mutableChildList
+   */
+  protected List<CHILD> getMutableChildList() {
+
+    return this.mutableChildList;
   }
 
   /**

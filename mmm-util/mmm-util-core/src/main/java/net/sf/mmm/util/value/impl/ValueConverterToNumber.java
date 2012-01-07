@@ -107,30 +107,31 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
   /**
    * {@inheritDoc}
    */
-  public Number convert(Object value, Object valueSource, Class<? extends Number> targetClass) {
+  public <T extends Number> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {
       return null;
     }
     NumberType<? extends Number> numberType = getMathUtil().getNumberType(targetClass);
+    Number result = null;
     if (numberType != null) {
       if (value instanceof Number) {
-        return numberType.valueOf((Number) value, isFailIfUnprecise());
+        result = numberType.valueOf((Number) value, isFailIfUnprecise());
       } else if (value instanceof CharSequence) {
-        return numberType.valueOf(value.toString());
+        result = numberType.valueOf(value.toString());
       } else if (value instanceof Date) {
         if (targetClass == Long.class) {
           Date date = (Date) value;
-          return Long.valueOf(date.getTime());
+          result = Long.valueOf(date.getTime());
         }
       } else if (value instanceof Calendar) {
         if (targetClass == Long.class) {
           Calendar calendar = (Calendar) value;
-          return Long.valueOf(calendar.getTimeInMillis());
+          result = Long.valueOf(calendar.getTimeInMillis());
         }
       }
     }
-    return null;
+    return (T) result;
   }
 
 }

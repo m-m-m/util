@@ -15,7 +15,7 @@ import net.sf.mmm.util.collection.api.TreeNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public abstract class AbstractTreeNode<NODE extends AbstractTreeNode<NODE>> extends
+public abstract class AbstractTreeNode<NODE extends TreeNode<NODE>> extends
     AbstractGenericTreeNode<NODE, NODE> implements TreeNode<NODE> {
 
   /**

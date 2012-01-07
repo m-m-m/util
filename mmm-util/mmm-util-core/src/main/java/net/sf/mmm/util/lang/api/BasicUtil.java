@@ -144,7 +144,7 @@ public interface BasicUtil {
    * @param charIterator2 is the second {@link CharIterator}.
    * @return <code>true</code> if both {@link CharIterator}s produced the same
    *         {@link CharIterator#next() next} chars until both ended at the same
-   *         time.
+   *         time, <code>false</code> otherwise.
    */
   boolean compare(CharIterator charIterator1, CharIterator charIterator2);
 

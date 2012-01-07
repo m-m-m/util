@@ -86,13 +86,13 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
   /**
    * {@inheritDoc}
    */
-  public Boolean convert(Object value, Object valueSource, Class<? extends Boolean> targetClass) {
+  public <T extends Boolean> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {
       return null;
     }
     String valueAsString = value.toString();
-    return this.stringUtil.parseBoolean(valueAsString);
+    return (T) this.stringUtil.parseBoolean(valueAsString);
   }
 
 }

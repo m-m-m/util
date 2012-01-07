@@ -3,7 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.contenttype.impl;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import net.sf.mmm.util.contenttype.api.ContentType;
 import net.sf.mmm.util.contenttype.base.AbstractContentTypeManager;
+import net.sf.mmm.util.contenttype.base.ContentTypeLoader;
 
 /**
  * This is the implementation of the
@@ -11,13 +16,15 @@ import net.sf.mmm.util.contenttype.base.AbstractContentTypeManager;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class ContentTypeManagerImpl extends AbstractContentTypeManager<ContentTypeImpl> {
+@Singleton
+@Named
+public class ContentTypeManagerImpl extends AbstractContentTypeManager {
 
   /** @see #getRootType() */
-  private ContentTypeImpl rootType;
+  private ContentType rootType;
 
   /** @see #getTechnicalRootType() */
-  private ContentTypeImpl technicalRootType;
+  private ContentType technicalRootType;
 
   /**
    * The constructor.
@@ -35,14 +42,17 @@ public class ContentTypeManagerImpl extends AbstractContentTypeManager<ContentTy
 
     super.doInitialize();
 
-    this.rootType = null;
     this.technicalRootType = null;
+
+    ContentTypeLoader loader = new ContentTypeLoader();
+    loader.initialize();
+    this.rootType = loader.loadXml("net/sf/mmm/util/contenttype/root.xml");
   }
 
   /**
    * {@inheritDoc}
    */
-  public ContentTypeImpl getRootType() {
+  public ContentType getRootType() {
 
     return this.rootType;
   }
@@ -50,7 +60,7 @@ public class ContentTypeManagerImpl extends AbstractContentTypeManager<ContentTy
   /**
    * {@inheritDoc}
    */
-  public ContentTypeImpl getTechnicalRootType() {
+  public ContentType getTechnicalRootType() {
 
     return this.technicalRootType;
   }

@@ -395,10 +395,10 @@ public class ComposedValueConverterTest {
       return Integer.class;
     }
 
-    public Integer convert(Object value, Object valueSource, Class<? extends Integer> targetClass) {
+    public <T extends Integer> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
       if ((value != null) && (value instanceof String)) {
-        return MAGIC;
+        return (T) MAGIC;
       }
       return null;
     }
@@ -445,10 +445,10 @@ public class ComposedValueConverterTest {
     /**
      * {@inheritDoc}
      */
-    public Object convert(Foo value, Object valueSource, Class<? extends Object> targetClass) {
+    public <T> T convert(Foo value, Object valueSource, Class<T> targetClass) {
 
       if ((value != null) && (Integer.class.equals(targetClass))) {
-        return MAGIC;
+        return (T) MAGIC;
       }
       return null;
     }

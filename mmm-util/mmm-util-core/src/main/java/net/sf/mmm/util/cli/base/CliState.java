@@ -500,10 +500,10 @@ public class CliState extends CliClassContainer {
     /**
      * {@inheritDoc}
      */
-    public String convert(CliArgumentContainer value, Object valueSource,
-        Class<? extends String> targetClass) throws ValueException {
+    public <T extends String> T convert(CliArgumentContainer value, Object valueSource,
+        Class<T> targetClass) throws ValueException {
 
-      return value.getId();
+      return (T) value.getId();
     }
   }
 

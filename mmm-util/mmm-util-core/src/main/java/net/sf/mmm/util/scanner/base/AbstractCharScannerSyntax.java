@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.base;
 
+import net.sf.mmm.util.lang.base.StringSyntaxBean;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 
 /**
@@ -18,16 +19,8 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
-
-  /** @see #getEscape() */
-  private char escape;
-
-  /** @see #getQuoteStart() */
-  private char quoteStart;
-
-  /** @see #getQuoteEnd() */
-  private char quoteEnd;
+public abstract class AbstractCharScannerSyntax extends StringSyntaxBean implements
+    CharScannerSyntax {
 
   /** @see #getQuoteEscape() */
   private char quoteEscape;
@@ -59,67 +52,6 @@ public abstract class AbstractCharScannerSyntax implements CharScannerSyntax {
   public AbstractCharScannerSyntax() {
 
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public char getEscape() {
-
-    return this.escape;
-  }
-
-  /**
-   * @param escape is the {@link #getEscape() escape} character to set.
-   */
-  public void setEscape(char escape) {
-
-    this.escape = escape;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public char getQuoteStart() {
-
-    return this.quoteStart;
-  }
-
-  /**
-   * @param quoteStart is the {@link #getQuoteStart() quote-start} character to
-   *        set.
-   */
-  public void setQuoteStart(char quoteStart) {
-
-    this.quoteStart = quoteStart;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public char getQuoteEnd() {
-
-    return this.quoteEnd;
-  }
-
-  /**
-   * @param quoteEnd is the {@link #getQuoteEnd() quote-end} character to set.
-   */
-  public void setQuoteEnd(char quoteEnd) {
-
-    this.quoteEnd = quoteEnd;
-  }
-
-  /**
-   * This method sets both the {@link #getQuoteStart() quote-start} and
-   * {@link #getQuoteEnd() quote-end} character.
-   * 
-   * @param quote the quote character to set.
-   */
-  public void setQuote(char quote) {
-
-    this.quoteStart = quote;
-    this.quoteEnd = quote;
   }
 
   /**

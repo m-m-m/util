@@ -90,7 +90,7 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
   /**
    * {@inheritDoc}
    */
-  public Enum convert(Object value, Object valueSource, Class<? extends Enum> targetClass) {
+  public <T extends Enum> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {
       return null;
@@ -100,24 +100,24 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
       Enum[] constants = targetClass.getEnumConstants();
       for (Enum e : constants) {
         if (name.equals(e.name())) {
-          return e;
+          return (T) e;
         }
       }
       String normalizedName = name.replace('-', '_').toUpperCase(Locale.US);
       for (Enum e : constants) {
         if (normalizedName.equals(e.name())) {
-          return e;
+          return (T) e;
         }
       }
       normalizedName = this.stringUtil.fromCamlCase(name, '_').toUpperCase(Locale.US);
       for (Enum e : constants) {
         if (normalizedName.equals(e.name())) {
-          return e;
+          return (T) e;
         }
       }
     } else if (value instanceof Enum<?>) {
       String name = ((Enum<?>) value).name();
-      return Enum.valueOf(targetClass, name);
+      return (T) Enum.valueOf(targetClass, name);
     }
     return null;
   }

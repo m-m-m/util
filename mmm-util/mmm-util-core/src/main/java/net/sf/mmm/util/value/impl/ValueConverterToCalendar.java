@@ -89,22 +89,21 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
   /**
    * {@inheritDoc}
    */
-  public Calendar convert(Object value, Object valueSource, Class<? extends Calendar> targetClass) {
+  public <T extends Calendar> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if ((value == null) || (targetClass != Calendar.class)) {
       return null;
     }
+    Calendar calendar = null;
     if (value instanceof Date) {
-      Calendar calendar = Calendar.getInstance();
+      calendar = Calendar.getInstance();
       calendar.setTime((Date) value);
-      return calendar;
     } else if (value instanceof String) {
-      return getIso8601Util().parseCalendar((String) value);
+      calendar = getIso8601Util().parseCalendar((String) value);
     } else if (value instanceof Long) {
-      Calendar calendar = Calendar.getInstance();
+      calendar = Calendar.getInstance();
       calendar.setTimeInMillis(((Long) value).longValue());
-      return calendar;
     }
-    return null;
+    return (T) calendar;
   }
 }

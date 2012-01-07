@@ -136,13 +136,12 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
   /**
    * {@inheritDoc}
    */
-  public CONTAINER convert(Object value, Object valueSource,
-      GenericType<? extends CONTAINER> targetType) {
+  public <T extends CONTAINER> T convert(Object value, Object valueSource, GenericType<T> targetType) {
 
     if (value == null) {
       return null;
     }
-    CONTAINER result = null;
+    T result = null;
     Class<?> valueClass = value.getClass();
     if (valueClass.isArray()) {
       result = convertFromArray(value, valueSource, targetType);
@@ -165,11 +164,11 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    *        to.
    * @return the converted container.
    */
-  protected CONTAINER convertFromCollection(Collection collectionValue, Object valueSource,
-      GenericType<? extends CONTAINER> targetType) {
+  protected <T extends CONTAINER> T convertFromCollection(Collection collectionValue,
+      Object valueSource, GenericType<T> targetType) {
 
     int size = collectionValue.size();
-    CONTAINER container = createContainer(targetType, size);
+    T container = createContainer(targetType, size);
     int i = 0;
     for (Object element : collectionValue) {
       convertContainerEntry(element, i, container, valueSource, targetType, collectionValue);
@@ -189,8 +188,8 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    *        to.
    * @return the converted container.
    */
-  protected CONTAINER convertFromString(String stringValue, Object valueSource,
-      GenericType<? extends CONTAINER> targetType) {
+  protected <T extends CONTAINER> T convertFromString(String stringValue, Object valueSource,
+      GenericType<T> targetType) {
 
     List<String> stringList = new ArrayList<String>();
     StringTokenizer tokenizer = new StringTokenizer(stringValue, ELEMENT_ESCAPE_START,
@@ -199,7 +198,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
       stringList.add(element);
     }
     int size = stringList.size();
-    CONTAINER container = createContainer(targetType, size);
+    T container = createContainer(targetType, size);
     for (int i = 0; i < size; i++) {
       convertContainerEntry(stringList.get(i), i, container, valueSource, targetType, stringValue);
     }
@@ -217,11 +216,11 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    *        to.
    * @return the converted container.
    */
-  protected CONTAINER convertFromArray(Object arrayValue, Object valueSource,
-      GenericType<? extends CONTAINER> targetType) {
+  protected <T extends CONTAINER> T convertFromArray(Object arrayValue, Object valueSource,
+      GenericType<T> targetType) {
 
     int len = Array.getLength(arrayValue);
-    CONTAINER container = createContainer(targetType, len);
+    T container = createContainer(targetType, len);
     for (int i = 0; i < len; i++) {
       Object element = Array.get(arrayValue, i);
       convertContainerEntry(element, i, container, valueSource, targetType, arrayValue);
@@ -266,7 +265,6 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * @param length is the length (or capacity) of the container to create.
    * @return the container instance.
    */
-  protected abstract CONTAINER createContainer(GenericType<? extends CONTAINER> targetType,
-      int length);
+  protected abstract <T extends CONTAINER> T createContainer(GenericType<T> targetType, int length);
 
 }
