@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-types>
+  <content-type id="JPG" title="jpeg" mimetype="image/jpeg" parent="GRAPHICS">
+    <extensions>
+      <extension>.jpg</extension>
+      <extension>.jpeg</extension>
+      <extension>.jfif</extension>
+      <extension>.jpe</extension>
+    </extensions>
+    <format>
+      <constant hex="FF-D8-FF"/>
+      <any/>
+      <eos/>
+    </format>
+  </content-type>
+  <content-type id="JPEG2000" title="jpeg2000" parent="GRAPHICS">
+    <extensions>
+      <extension>.jp2</extension>
+    </extensions>
+    <format>
+      <constant hex="00-00-00-0C-6A-50-20-20-0D-0A"/>
+      <any/>
+      <eos/>
+    </format>
+  </content-type>
+</content-types>

@@ -42,14 +42,76 @@ public final class ExceptionHelper {
    */
   public static void assertCause(Throwable catched, Class<? extends Throwable> expectedType) {
 
+    if (!isCause(catched, expectedType)) {
+      Assert.fail(expectedType.getName() + " expected!");
+    }
+  }
+
+  /**
+   * This method checks if a catched exception or one of its
+   * {@link Throwable#getCause() causes} is an {@link Class#isInstance(Object)
+   * instance of} the given <code>expectedType</code>.
+   * 
+   * @param catched is the {@link Throwable} that has been catched.
+   * @param expectedType is the {@link Class} of the {@link Throwable} that is
+   *        expected.
+   * @return <code>true</code> if the given <code>catched</code> or one of its
+   *         {@link Throwable#getCause() causes} is an
+   *         {@link Class#isInstance(Object) instance of} the given
+   *         <code>expectedType</code>.
+   */
+  public static boolean isCause(Throwable catched, Class<? extends Throwable> expectedType) {
+
     Throwable t = catched;
     while (!expectedType.isInstance(t)) {
       Throwable cause = t.getCause();
       if ((cause == null) || (cause == t)) {
-        Assert.fail(expectedType.getName() + " expected!");
+        return false;
       }
       t = cause;
     }
+    return true;
+  }
+
+  /**
+   * This method should be invoked in catch-block of tests that catched a given
+   * exception and expect that this exception or one of its
+   * {@link Throwable#getCause() causes} is the same as the given
+   * <code>expectedCause</code>.
+   * 
+   * @param catched is the {@link Throwable} that has been catched.
+   * @param expectedCause is the {@link Throwable} that is expected as .
+   */
+  public static void assertCause(Throwable catched, Throwable expectedCause) {
+
+    if (!isCause(catched, expectedCause)) {
+      Assert.fail(expectedCause + " expected!");
+    }
+  }
+
+  /**
+   * This method should be invoked in catch-block of tests that catched a given
+   * exception and expect that this exception or one of its
+   * {@link Throwable#getCause() causes} is the same as the given
+   * <code>expectedCause</code>.
+   * 
+   * @param catched is the {@link Throwable} that has been catched.
+   * @param expectedCause is the {@link Throwable} that is expected as .
+   * @return <code>true</code> if the given <code>expectedCause</code> is the
+   *         same as <code>catched</code> or one of its
+   *         {@link Throwable#getCause() causes}.
+   */
+  public static boolean isCause(Throwable catched, Throwable expectedCause) {
+
+    Throwable t = catched;
+    while (expectedCause != t) {
+      Throwable cause = t.getCause();
+      if ((cause == null) || (cause == t)) {
+        return false;
+      }
+      t = cause;
+    }
+    return true;
   }
 
 }

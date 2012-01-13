@@ -107,6 +107,7 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public <T extends Number> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {

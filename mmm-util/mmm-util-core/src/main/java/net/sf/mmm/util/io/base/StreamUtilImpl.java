@@ -3,6 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.base;
 
+import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -196,7 +197,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public String read(Reader reader) throws IOException {
+  public String read(Reader reader) throws RuntimeIoException {
 
     StringWriter writer = new StringWriter();
     transfer(reader, writer, false);
@@ -206,7 +207,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws IOException {
+  public long transfer(Reader reader, Writer writer, boolean keepWriterOpen)
+      throws RuntimeIoException {
 
     ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, null);
     long bytes = transferrer.transfer();
@@ -217,18 +219,43 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    * {@inheritDoc}
    */
   public long transfer(FileInputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
-      throws IOException {
+      throws RuntimeIoException {
 
     FileChannel inChannel = inStream.getChannel();
     WritableByteChannel outChannel = Channels.newChannel(outStream);
+    RuntimeIoException t = null;
     try {
       return inChannel.transferTo(0, inChannel.size(), outChannel);
+    } catch (Exception e) {
+      t = new RuntimeIoException(e, IoMode.COPY);
+      throw t;
     } finally {
-      // close(inStream);
-      close(inChannel);
+      boolean doThrow = (t == null);
+      try {
+        inChannel.close();
+      } catch (Exception e) {
+        RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+        if (t != null) {
+          t.addSuppressed(ex);
+        } else {
+          t = ex;
+        }
+      }
       if (!keepOutStreamOpen) {
         // close(outStream);
-        close(outChannel);
+        try {
+          outChannel.close();
+        } catch (Exception e) {
+          RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+          if (t != null) {
+            t.addSuppressed(ex);
+          } else {
+            t = ex;
+          }
+        }
+      }
+      if ((t != null) && doThrow) {
+        throw t;
       }
     }
   }
@@ -237,18 +264,43 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    * {@inheritDoc}
    */
   public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen,
-      long size) throws IOException {
+      long size) throws RuntimeIoException {
 
     ReadableByteChannel inChannel = Channels.newChannel(inStream);
     FileChannel outChannel = outStream.getChannel();
+    RuntimeIoException t = null;
     try {
       return outChannel.transferFrom(inChannel, 0, size);
+    } catch (Exception e) {
+      t = new RuntimeIoException(e, IoMode.COPY);
+      throw t;
     } finally {
-      // close (inStream);
-      close(inChannel);
+      boolean doThrow = (t == null);
+      try {
+        inChannel.close();
+      } catch (Exception e) {
+        RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+        if (t != null) {
+          t.addSuppressed(ex);
+        } else {
+          t = ex;
+        }
+      }
       if (!keepOutStreamOpen) {
         // close(outStream);
-        close(outChannel);
+        try {
+          outChannel.close();
+        } catch (Exception e) {
+          RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+          if (t != null) {
+            t.addSuppressed(ex);
+          } else {
+            t = ex;
+          }
+        }
+      }
+      if ((t != null) && doThrow) {
+        throw t;
       }
     }
   }
@@ -257,7 +309,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    * {@inheritDoc}
    */
   public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
-      throws IOException {
+      throws RuntimeIoException {
 
     StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen,
         null);
@@ -310,28 +362,54 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public Properties loadProperties(InputStream inStream) throws IOException {
+  public Properties loadProperties(InputStream inStream) throws RuntimeIoException {
 
+    RuntimeIoException t = null;
     try {
       Properties properties = new Properties();
       properties.load(inStream);
       return properties;
+    } catch (Exception e) {
+      t = new RuntimeIoException(e, IoMode.READ);
+      throw t;
     } finally {
-      close(inStream);
+      try {
+        inStream.close();
+      } catch (Exception suppressed) {
+        RuntimeIoException ex = new RuntimeIoException(suppressed, IoMode.CLOSE);
+        if (t != null) {
+          t.addSuppressed(ex);
+        } else {
+          throw ex;
+        }
+      }
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public Properties loadProperties(Reader reader) throws IOException {
+  public Properties loadProperties(Reader reader) throws RuntimeIoException {
 
+    RuntimeIoException t = null;
     try {
       Properties properties = new Properties();
       properties.load(reader);
       return properties;
+    } catch (Exception e) {
+      t = new RuntimeIoException(e, IoMode.READ);
+      throw t;
     } finally {
-      close(reader);
+      try {
+        reader.close();
+      } catch (Exception suppressed) {
+        RuntimeIoException ex = new RuntimeIoException(suppressed, IoMode.CLOSE);
+        if (t != null) {
+          t.addSuppressed(ex);
+        } else {
+          throw ex;
+        }
+      }
     }
   }
 
@@ -431,14 +509,14 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   protected static class AsyncTransferrerImpl extends FutureTask<Long> implements AsyncTransferrer {
 
     /** the actual task. */
-    private final BaseTransferrer transferrer;
+    private final BaseTransferrer<?> transferrer;
 
     /**
      * The constructor.
      * 
      * @param transferrer is the actual transferrer task.
      */
-    public AsyncTransferrerImpl(BaseTransferrer transferrer) {
+    public AsyncTransferrerImpl(BaseTransferrer<?> transferrer) {
 
       super(transferrer);
       this.transferrer = transferrer;
@@ -511,30 +589,124 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * This is an abstract implementation of the {@link AsyncTransferrer}
    * interface, that implements {@link Runnable} defining the main flow.
+   * 
+   * @param <BUFFER> is the generic type of the buffers provided by
+   *        {@link BaseTransferrer#getPool()}.
    */
-  protected abstract class BaseTransferrer extends AbstractAsyncTransferrer {
+  protected abstract class BaseTransferrer<BUFFER> extends AbstractAsyncTransferrer {
 
     /** The callback or <code>null</code>. */
     private final TransferCallback callback;
 
     /**
+     * <code>true</code> if {@link #getDestination() destination} should be
+     * closed.
+     */
+    private final boolean keepDestinationOpen;
+
+    /**
      * The constructor.
      * 
      * @param callback is the callback or <code>null</code>.
+     * @param keepDestinationOpen <code>true</code> if the
+     *        {@link #getDestination() destination} should be closed,
+     *        <code>false</code> otherwise.
      */
-    public BaseTransferrer(TransferCallback callback) {
+    public BaseTransferrer(TransferCallback callback, boolean keepDestinationOpen) {
 
       super();
       this.callback = callback;
+      this.keepDestinationOpen = keepDestinationOpen;
     }
+
+    /**
+     * This method gets the source to transfer.
+     * 
+     * @return the source (e.g. {@link InputStream} or {@link Reader}).
+     */
+    protected abstract Closeable getSource();
+
+    /**
+     * This method gets the destination to transfer to.
+     * 
+     * @return the destination (e.g. {@link OutputStream} or {@link Writer}).
+     */
+    protected abstract Closeable getDestination();
+
+    /**
+     * This method gets the {@link Pool} to retrieve buffers.
+     * 
+     * @return the {@link Pool}.
+     */
+    protected abstract Pool<BUFFER> getPool();
+
+    /**
+     * This method performs the actual transfer.
+     * 
+     * @param buffer is the buffer used for the transfer.
+     * @return the number of bytes that have been transferred.
+     * @throws IOException if the transfer failed.
+     */
+    protected abstract long transfer(BUFFER buffer) throws IOException;
 
     /**
      * This method performs the actual transfer.
      * 
      * @return the number of bytes that have been transferred.
-     * @throws IOException if the transfer failed.
+     * @throws RuntimeIoException if the transfer failed.
      */
-    protected abstract long transfer() throws IOException;
+    protected long transfer() throws RuntimeIoException {
+
+      BUFFER buffer = getPool().borrow();
+      RuntimeIoException t = null;
+      try {
+        return transfer(buffer);
+      } catch (Exception e) {
+        t = new RuntimeIoException(e, IoMode.COPY);
+        throw t;
+      } finally {
+        boolean doThrow = (t == null);
+        try {
+          getSource().close();
+        } catch (Exception e) {
+          RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+          if (t != null) {
+            t.addSuppressed(ex);
+          } else {
+            t = ex;
+          }
+        }
+        if (!this.keepDestinationOpen) {
+          try {
+            getDestination().close();
+          } catch (Exception e) {
+            RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+            if (t != null) {
+              t.addSuppressed(ex);
+            } else {
+              t = ex;
+            }
+          }
+        }
+        RuntimeException rte = null;
+        try {
+          getPool().release(buffer);
+        } catch (RuntimeException e) {
+          rte = e;
+        } finally {
+          if (rte != null) {
+            if (t == null) {
+              throw rte;
+            } else {
+              t.addSuppressed(rte);
+            }
+          }
+          if ((t != null) && doThrow) {
+            throw t;
+          }
+        }
+      }
+    }
 
     /**
      * {@inheritDoc}
@@ -566,16 +738,13 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    * This inner class is used to transfer an {@link InputStream} to an
    * {@link OutputStream}.
    */
-  protected class StreamTransferrer extends BaseTransferrer {
+  protected class StreamTransferrer extends BaseTransferrer<byte[]> {
 
     /** The source to read from (to copy). */
     private final InputStream source;
 
     /** The destination to write to. */
     private final OutputStream destination;
-
-    /** <code>true</code> if {@link #destination} should be closed. */
-    private final boolean keepDestinationOpen;
 
     /**
      * The constructor.
@@ -591,57 +760,68 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     public StreamTransferrer(InputStream source, OutputStream destination,
         boolean keepDestinationOpen, TransferCallback callback) {
 
-      super(callback);
+      super(callback, keepDestinationOpen);
       this.source = source;
       this.destination = destination;
-      this.keepDestinationOpen = keepDestinationOpen;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public long transfer() throws IOException {
+    protected InputStream getSource() {
 
-      byte[] buffer = getByteArrayPool().borrow();
-      try {
-        long bytesTransferred = 0;
-        int count = this.source.read(buffer);
-        while ((count > 0) && !isStopped()) {
-          this.destination.write(buffer, 0, count);
-          bytesTransferred += count;
-          count = this.source.read(buffer);
-        }
-        if (count == -1) {
-          setCompleted();
-        }
-        return bytesTransferred;
-      } finally {
-        try {
-          getByteArrayPool().release(buffer);
-        } finally {
-          close(this.source);
-          if (!this.keepDestinationOpen) {
-            close(this.destination);
-          }
-        }
+      return this.source;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected OutputStream getDestination() {
+
+      return this.destination;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Pool<byte[]> getPool() {
+
+      return getByteArrayPool();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long transfer(byte[] buffer) throws IOException {
+
+      long bytesTransferred = 0;
+      int count = this.source.read(buffer);
+      while ((count > 0) && !isStopped()) {
+        this.destination.write(buffer, 0, count);
+        bytesTransferred += count;
+        count = this.source.read(buffer);
       }
+      if (count == -1) {
+        setCompleted();
+      }
+      return bytesTransferred;
     }
   }
 
   /**
    * This inner class is used to transfer a {@link Reader} to a {@link Writer}.
    */
-  protected class ReaderTransferrer extends BaseTransferrer {
+  protected class ReaderTransferrer extends BaseTransferrer<char[]> {
 
     /** The source to read from (to copy). */
     private final Reader source;
 
     /** The destination to write to. */
     private final Writer destination;
-
-    /** <code>true</code> if {@link #destination} should be closed. */
-    private final boolean keepDestinationOpen;
 
     /**
      * The constructor.
@@ -657,41 +837,55 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen,
         TransferCallback callback) {
 
-      super(callback);
+      super(callback, keepDestinationOpen);
       this.source = source;
       this.destination = destination;
-      this.keepDestinationOpen = keepDestinationOpen;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public long transfer() throws IOException {
+    protected Reader getSource() {
 
-      char[] buffer = getCharArrayPool().borrow();
-      try {
-        long bytesTransferred = 0;
-        int count = this.source.read(buffer);
-        while ((count > 0) && !isStopped()) {
-          this.destination.write(buffer, 0, count);
-          bytesTransferred += count;
-          count = this.source.read(buffer);
-        }
-        if (count == -1) {
-          setCompleted();
-        }
-        return bytesTransferred;
-      } finally {
-        try {
-          getCharArrayPool().release(buffer);
-        } finally {
-          close(this.source);
-          if (!this.keepDestinationOpen) {
-            close(this.destination);
-          }
-        }
+      return this.source;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Writer getDestination() {
+
+      return this.destination;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Pool<char[]> getPool() {
+
+      return getCharArrayPool();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long transfer(char[] buffer) throws IOException {
+
+      long bytesTransferred = 0;
+      int count = this.source.read(buffer);
+      while ((count > 0) && !isStopped()) {
+        this.destination.write(buffer, 0, count);
+        bytesTransferred += count;
+        count = this.source.read(buffer);
       }
+      if (count == -1) {
+        setCompleted();
+      }
+      return bytesTransferred;
     }
   }
 

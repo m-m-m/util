@@ -157,6 +157,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * This method performs the {@link #convert(Object, Object, GenericType)
    * conversion} for {@link Collection} values.
    * 
+   * @param <T> is the generic type of <code>targetType</code>.
    * @param collectionValue is the {@link Collection} value to convert.
    * @param valueSource describes the source of the value or <code>null</code>
    *        if NOT available.
@@ -181,6 +182,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * This method performs the {@link #convert(Object, Object, GenericType)
    * conversion} for {@link String} values.
    * 
+   * @param <T> is the generic type of <code>targetType</code>.
    * @param stringValue is the {@link String} value to convert.
    * @param valueSource describes the source of the value or <code>null</code>
    *        if NOT available.
@@ -209,6 +211,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * This method performs the {@link #convert(Object, Object, GenericType)
    * conversion} for array values.
    * 
+   * @param <T> is the generic type of <code>targetType</code>.
    * @param arrayValue is the array value to convert.
    * @param valueSource describes the source of the value or <code>null</code>
    *        if NOT available.
@@ -261,6 +264,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * This method creates the according container for the given
    * <code>containerType</code>.
    * 
+   * @param <T> is the generic type of <code>targetType</code>.
    * @param targetType is the {@link GenericType} of the container.
    * @param length is the length (or capacity) of the container to create.
    * @return the container instance.

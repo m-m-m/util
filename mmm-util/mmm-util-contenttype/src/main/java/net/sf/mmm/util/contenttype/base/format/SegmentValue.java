@@ -18,19 +18,40 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class SegmentValue extends SegmentVariableLength {
 
+  /** The XML tag name for this object. */
+  public static final String XML_TAG = "value";
+
   /** @see #getKey() */
   @XmlAttribute(name = "key", required = false)
   private String key;
+
+  /**
+   * The constructor.
+   */
+  public SegmentValue() {
+
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getTagName() {
+
+    return XML_TAG;
+  }
 
   /**
    * This method gets the key to associate this value in the
    * {@link net.sf.mmm.util.io.api.DetectorStream#getMetadata() detected
    * metadata}. <br/>
    * The key may also be <code>null</code> to indicate a variable key depending
-   * on the streamed data. This {@link Segment} has to be preceded by a
-   * {@link SegmentKey} that is used a key.
+   * on the streamed data. Then the last {@link SegmentKey} that matched before
+   * is used to determine the key. If there is no such {@link SegmentKey} the
+   * format specification is invalid.
    * 
-   * @return the key
+   * @return the key or <code>null</code>.
    */
   public String getKey() {
 

@@ -7,14 +7,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * This class represents a {@link Segment} that can have a
- * {@link #getMaximumLength() variable length}.
+ * {@link #getMaximumLength() variable length}.<br/>
+ * By default the length is unbound ([0, {@link Long#MAX_VALUE}]). If only the
+ * "length" attribute is specified in XML, then both {@link #getMinimumLength()}
+ * and {@link #getMaximumLength()} will return that value. If additionally the
+ * "maxLength" attribute is specified, then {@link #getMinimumLength()} will
+ * return the value of "length" and {@link #getMaximumLength()} will return the
+ * value of "maxLength".
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class SegmentVariableLength extends Segment {
 
-  /** @see #getLength() */
+  /** @see #getMinimumLength() */
   @XmlAttribute(name = "length", required = true)
   private long length;
 
@@ -31,27 +37,49 @@ public abstract class SegmentVariableLength extends Segment {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param length - see {@link #getMinimumLength()}.
+   * @param maximumLength - see {@link #getMaximumLength()}.
+   */
+  public SegmentVariableLength(long length, long maximumLength) {
+
+    super();
+    this.length = length;
+    this.maximumLength = maximumLength;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
-  public long getLength() {
+  public long getMinimumLength() {
 
     return this.length;
   }
 
   /**
-   * This method gets the maximum length of this {@link Segment}. By default
-   * this method returns the same as {@link #getLength()}. However, it can also
-   * return a greater value if the length is variable.
-   * 
-   * @return the maximum length.
+   * {@inheritDoc}
    */
+  @Override
   public long getMaximumLength() {
 
     if (this.maximumLength == 0) {
-      return this.length;
+      if (this.length == 0) {
+        return Long.MAX_VALUE;
+      } else {
+        return this.length;
+      }
     }
     return this.maximumLength;
+  }
+
+  /**
+   * @param maximumLength is the maximumLength to set
+   */
+  public void setMaximumLength(long maximumLength) {
+
+    this.maximumLength = maximumLength;
   }
 
 }

@@ -5,6 +5,8 @@ package net.sf.mmm.util.nls.api;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -35,6 +37,9 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
 
   /** @see #getUuid() */
   private final UUID uuid;
+
+  /** @see #getSuppressed() */
+  private List<Throwable> suppressedList;
 
   /**
    * The constructor.
@@ -168,6 +173,37 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void addSuppressed(Throwable suppressed) {
+
+    // only available since Java 1.7
+    // super.addSuppressed(suppressed);
+    if ((suppressed == null) || (suppressed == this)) {
+      // prevent non-sense...
+      return;
+    }
+    if (this.suppressedList == null) {
+      this.suppressedList = new ArrayList<Throwable>();
+    }
+    this.suppressedList.add(suppressed);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Throwable[] getSuppressed() {
+
+    // only available since Java 1.7
+    // return super.getSuppressed();
+    if (this.suppressedList == null) {
+      return AbstractNlsException.EMPTY_THROWABLE_ARRAY;
+    } else {
+      return this.suppressedList.toArray(new Throwable[this.suppressedList.size()]);
+    }
   }
 
 }

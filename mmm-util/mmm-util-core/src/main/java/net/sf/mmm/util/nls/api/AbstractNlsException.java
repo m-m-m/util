@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -33,11 +35,17 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** UID for serialization. */
   private static final long serialVersionUID = -9077132842682462106L;
 
+  /** @see #getSuppressed() */
+  protected static final Throwable[] EMPTY_THROWABLE_ARRAY = new Throwable[0];
+
   /** the internationalized message */
   private final NlsMessage nlsMessage;
 
   /** @see #getUuid() */
   private final UUID uuid;
+
+  /** @see #getSuppressed() */
+  private List<Throwable> suppressedList;
 
   /**
    * The constructor.
@@ -158,30 +166,50 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           buffer.append(trace[i].toString());
           buffer.append(StringUtil.LINE_SEPARATOR);
         }
+        for (Throwable suppressed : throwable.getSuppressed()) {
+          buffer.append("Suppressed: ");
+          buffer.append(StringUtil.LINE_SEPARATOR);
+          printStackTraceNested(suppressed, locale, resolver, buffer);
+        }
 
         Throwable nested = throwable.getCause();
         if (nested != null) {
           buffer.append("Caused by: ");
           buffer.append(StringUtil.LINE_SEPARATOR);
-          if (nested instanceof NlsThrowable) {
-            ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
-          } else {
-            if (buffer instanceof PrintStream) {
-              nested.printStackTrace((PrintStream) buffer);
-            } else if (buffer instanceof PrintWriter) {
-              nested.printStackTrace((PrintWriter) buffer);
-            } else {
-              StringWriter writer = new StringWriter();
-              PrintWriter printWriter = new PrintWriter(writer);
-              nested.printStackTrace(printWriter);
-              printWriter.flush();
-              buffer.append(writer.toString());
-            }
-          }
+          printStackTraceNested(nested, locale, resolver, buffer);
         }
       }
     } catch (IOException e) {
       throw new IllegalStateException(e);
+    }
+  }
+
+  /**
+   * @see NlsThrowable#printStackTrace(Locale, NlsTemplateResolver, Appendable)
+   * 
+   * @param nested is the throwable to print.
+   * @param locale is the locale to translate to.
+   * @param resolver translates the original message.
+   * @param buffer is where to write the stack trace to.
+   * @throws IOException if caused by <code>buffer</code>.
+   */
+  private static void printStackTraceNested(Throwable nested, Locale locale,
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+
+    if (nested instanceof NlsThrowable) {
+      ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
+    } else {
+      if (buffer instanceof PrintStream) {
+        nested.printStackTrace((PrintStream) buffer);
+      } else if (buffer instanceof PrintWriter) {
+        nested.printStackTrace((PrintWriter) buffer);
+      } else {
+        StringWriter writer = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(writer);
+        nested.printStackTrace(printWriter);
+        printWriter.flush();
+        buffer.append(writer.toString());
+      }
     }
   }
 
@@ -228,4 +256,34 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
     return getNlsMessage();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void addSuppressed(Throwable suppressed) {
+
+    // only available since Java 1.7
+    // super.addSuppressed(suppressed);
+    if ((suppressed == null) || (suppressed == this)) {
+      // prevent non-sense...
+      return;
+    }
+    if (this.suppressedList == null) {
+      this.suppressedList = new ArrayList<Throwable>();
+    }
+    this.suppressedList.add(suppressed);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Throwable[] getSuppressed() {
+
+    // only available since Java 1.7
+    // return super.getSuppressed();
+    if (this.suppressedList == null) {
+      return EMPTY_THROWABLE_ARRAY;
+    } else {
+      return this.suppressedList.toArray(new Throwable[this.suppressedList.size()]);
+    }
+  }
 }

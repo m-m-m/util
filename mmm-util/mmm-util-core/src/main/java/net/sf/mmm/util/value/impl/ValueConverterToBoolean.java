@@ -86,6 +86,7 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("all")
   public <T extends Boolean> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {

@@ -119,6 +119,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("all")
   public <T extends String> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {

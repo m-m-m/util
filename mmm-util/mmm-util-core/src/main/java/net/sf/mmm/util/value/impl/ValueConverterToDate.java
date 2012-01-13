@@ -90,6 +90,7 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public <T extends Date> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if ((value == null) || (targetClass != Date.class)) {

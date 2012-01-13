@@ -51,6 +51,7 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("all")
   public <T extends Class> T convert(CharSequence value, Object valueSource,
       GenericType<T> targetType) throws ValueException {
 

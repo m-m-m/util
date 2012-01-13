@@ -90,6 +90,7 @@ public class ValueConverterToFile extends AbstractSimpleValueConverter<CharSeque
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   public <T extends File> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {

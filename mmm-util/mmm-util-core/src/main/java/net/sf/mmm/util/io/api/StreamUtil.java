@@ -5,7 +5,6 @@ package net.sf.mmm.util.io.api;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -46,9 +45,9 @@ public interface StreamUtil {
    * @param reader is where to read the content from. It will be
    *        {@link Reader#close() closed} at the end.
    * @return the content of the given <code>reader</code>.
-   * @throws IOException if an error occurred with an I/O error.
+   * @throws RuntimeIoException if an error occurred with an I/O error.
    */
-  String read(Reader reader) throws IOException;
+  String read(Reader reader) throws RuntimeIoException;
 
   /**
    * This method transfers the contents of the given <code>reader</code> to the
@@ -64,10 +63,10 @@ public interface StreamUtil {
    *        <code>false</code>, the <code>writer</code> will be
    *        {@link Reader#close() closed}.
    * @return the number of bytes that have been transferred.
-   * @throws IOException if the operation failed. Closing is guaranteed even in
-   *         exception state.
+   * @throws RuntimeIoException if the operation failed. Closing is guaranteed
+   *         even in exception state.
    */
-  long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws IOException;
+  long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws RuntimeIoException;
 
   /**
    * This method transfers the contents of the given <code>inStream</code> to
@@ -84,11 +83,11 @@ public interface StreamUtil {
    *        can be appended. Else if <code>false</code>, the
    *        <code>outStream</code> will be {@link OutputStream#close() closed}.
    * @return the number of bytes that have been transferred.
-   * @throws IOException if the operation failed. Closing is guaranteed even in
-   *         exception state.
+   * @throws RuntimeIoException if the operation failed. Closing is guaranteed
+   *         even in exception state.
    */
   long transfer(FileInputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
-      throws IOException;
+      throws RuntimeIoException;
 
   /**
    * This method transfers the contents of the given <code>inStream</code> to
@@ -106,11 +105,11 @@ public interface StreamUtil {
    *        <code>outStream</code> will be {@link OutputStream#close() closed}.
    * @param size is the number of bytes to transfer.
    * @return the number of bytes that have been transferred.
-   * @throws IOException if the operation failed. Closing is guaranteed even in
-   *         exception state.
+   * @throws RuntimeIoException if the operation failed. Closing is guaranteed
+   *         even in exception state.
    */
   long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen,
-      long size) throws IOException;
+      long size) throws RuntimeIoException;
 
   /**
    * This method transfers the contents of the given <code>inStream</code> to
@@ -126,11 +125,11 @@ public interface StreamUtil {
    *        can be appended. Else if <code>false</code>, the
    *        <code>outStream</code> will be {@link OutputStream#close() closed}.
    * @return the number of bytes that have been transferred.
-   * @throws IOException if the operation failed. Closing is guaranteed even in
-   *         exception state.
+   * @throws RuntimeIoException if the operation failed. Closing is guaranteed
+   *         even in exception state.
    */
   long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
-      throws IOException;
+      throws RuntimeIoException;
 
   /**
    * This method transfers the contents of the given <code>inStream</code> to
@@ -217,10 +216,10 @@ public interface StreamUtil {
    * 
    * @param inStream is the {@link InputStream} to the properties data.
    * @return the properties read from the given <code>inStream</code>.
-   * @throws IOException if the operation failed. Closing is guaranteed even in
-   *         exception state.
+   * @throws RuntimeIoException if the operation failed. Closing is guaranteed
+   *         even in exception state.
    */
-  Properties loadProperties(InputStream inStream) throws IOException;
+  Properties loadProperties(InputStream inStream) throws RuntimeIoException;
 
   /**
    * This method loads the {@link Properties} from the given <code>reader</code>
@@ -230,10 +229,10 @@ public interface StreamUtil {
    * 
    * @param reader is the {@link Reader} to the properties data.
    * @return the properties read from the given <code>reader</code>.
-   * @throws IOException if the operation failed. Closing is guaranteed even in
-   *         exception state.
+   * @throws RuntimeIoException if the operation failed. Closing is guaranteed
+   *         even in exception state.
    */
-  Properties loadProperties(Reader reader) throws IOException;
+  Properties loadProperties(Reader reader) throws RuntimeIoException;
 
   /**
    * This method converts the given {@link Appendable} to a {@link Writer}.

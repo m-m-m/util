@@ -8,6 +8,7 @@ import java.util.Date;
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.api.entity.DataEntityView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.util.date.api.Recurrence;
 
 /**
  * This is the interface for a mutable {@link DataEventView event}.
@@ -31,5 +32,10 @@ public interface DataEvent extends DataEventView, DataEntity {
    * @param description is the description to set.
    */
   void setDescription(String description);
+
+  /**
+   * @param recurrence is the {@link #getRecurrence() recurrence} to set.
+   */
+  void setRecurrence(Recurrence recurrence);
 
 }

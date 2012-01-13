@@ -622,7 +622,8 @@ public interface StringUtil {
    * @param collection is where to add the elements to. This should be initially
    *        empty.
    * @param converter is used to parse the given elements from {@link String} to
-   *        their actual type ({@literal <E>}).
+   *        their actual type ({@literal <E>}). May be the
+   *        {@link net.sf.mmm.util.value.api.GenericValueConverter}.
    * @param type is the {@link Class} reflecting the elements to add to
    *        <code>collection</code>.
    * @since 2.0.2

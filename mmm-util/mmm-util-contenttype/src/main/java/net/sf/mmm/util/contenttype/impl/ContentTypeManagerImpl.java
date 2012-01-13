@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.contenttype.api.ContentType;
 import net.sf.mmm.util.contenttype.base.AbstractContentTypeManager;
-import net.sf.mmm.util.contenttype.base.ContentTypeLoader;
+import net.sf.mmm.util.contenttype.base.ContentTypeListLoader;
 
 /**
  * This is the implementation of the
@@ -44,9 +44,26 @@ public class ContentTypeManagerImpl extends AbstractContentTypeManager {
 
     this.technicalRootType = null;
 
-    ContentTypeLoader loader = new ContentTypeLoader();
+    ContentTypeListLoader loader = new ContentTypeListLoader();
     loader.initialize();
-    this.rootType = loader.loadXml("net/sf/mmm/util/contenttype/root.xml");
+    this.rootType = loader.loadXml("classpath:net/sf/mmm/util/contenttype/contenttypes.xml")
+        .getRoot();
+    addContentTypeRecursively(this.rootType);
+  }
+
+  /**
+   * This method walks down the tree of {@link ContentType}s recursively and
+   * {@link #addContentType(ContentType) adds} them to this manager.
+   * 
+   * @param contentType is the {@link ContentType} to register recursively (via
+   *        its {@link ContentType#getChildren() children}).
+   */
+  private void addContentTypeRecursively(ContentType contentType) {
+
+    addContentType(contentType);
+    for (ContentType child : contentType.getChildren()) {
+      addContentTypeRecursively(child);
+    }
   }
 
   /**

@@ -308,6 +308,7 @@ public class CliClassContainer {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("all")
     public <T extends String> T convert(CliModeContainer value, Object valueSource,
         Class<T> targetClass) throws ValueException {
 

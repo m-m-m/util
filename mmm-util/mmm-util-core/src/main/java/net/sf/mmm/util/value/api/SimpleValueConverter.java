@@ -22,6 +22,7 @@ public interface SimpleValueConverter<SOURCE, TARGET> {
    * This method converts the given <code>pojo</code> to the
    * &lt;TARGET&gt;-type.
    * 
+   * @param <T> is the generic type of <code>targetClass</code>.
    * @param value is the value to convert.
    * @param valueSource describes the source of the value. This may be the
    *        filename where the value was read from, an XPath where the value was

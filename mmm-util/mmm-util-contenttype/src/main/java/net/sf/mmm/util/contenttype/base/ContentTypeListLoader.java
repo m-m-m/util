@@ -6,19 +6,21 @@ package net.sf.mmm.util.contenttype.base;
 import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
 
 /**
- * TODO: this class ...
+ * This is the {@link XmlBeanMapper} used to load the {@link ContentTypeList}
+ * via JAXB.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContentTypeLoader extends XmlBeanMapper<ContentTypeBean> {
+public class ContentTypeListLoader extends XmlBeanMapper<ContentTypeList> {
 
   /**
    * The constructor.
    */
-  public ContentTypeLoader() {
+  public ContentTypeListLoader() {
 
-    super(ContentTypeBean.class);
+    super(ContentTypeList.class);
+    setXIncludeAware(true);
   }
 
 }

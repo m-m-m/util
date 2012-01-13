@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-types xmlns:xi="http://www.w3.org/2001/XInclude">
+  <content-type id="GRAPHICS" title="graphics" parent="DATA" abstract="true">
+  </content-type>
+  <xi:include href="jpeg.xml" xpointer="element(/1/*)"/>  
+</content-types>

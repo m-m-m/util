@@ -21,11 +21,14 @@ import javax.xml.stream.events.XMLEvent;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.StringValueConverterImpl;
 import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.api.XmlException;
 import net.sf.mmm.util.xml.api.XmlGenericException;
+import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
 
 /**
  * This utility class contains methods that help to work with the StAX API (JSR
@@ -183,6 +186,22 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
       return this.xmlInputFactory.createXMLStreamReader(inputStream);
     } catch (XMLStreamException e) {
       throw new XmlGenericException(e);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public XMLStreamReader createXmlStreamReader(DataResource resource, boolean xIncludeAware)
+      throws XmlException {
+
+    if (xIncludeAware) {
+      return new XIncludeStreamReader(this.xmlInputFactory, resource);
+    } else {
+      // closing of stream has to be performed via XMLStreamReader.close()
+      // however the strange StAX specification prevents this...
+      // TODO: create wrapper to ensure closing of stream...
+      return createXmlStreamReader(resource.openStream());
     }
   }
 

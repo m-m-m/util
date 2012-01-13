@@ -3,17 +3,43 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.contenttype.base.format;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+
 /**
- * TODO: this class ...
+ * A {@link SegmentRange} is a {@link Segment} that matches a value of a fixed
+ * {@link #getMinimumLength() length} like {@link SegmentConstant} but the value
+ * can be in a specific range from {@link #getBytesMinimum()} to
+ * {@link #getBytesMaximum()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class SegmentRange extends Segment {
 
-  private byte[] min;
+  /** The XML tag name for this object. */
+  public static final String XML_TAG = "range";
 
-  private byte[] max;
+  /** The XML attribute for {@link #hexMin}. */
+  private static final String XML_ATTRIBUTE_HEX_MIN = "hexMin";
+
+  /** The XML attribute for {@link #hexMax}. */
+  private static final String XML_ATTRIBUTE_HEX_MAX = "hexMax";
+
+  /** @see #getBytesMinimum() */
+  @XmlAttribute(name = XML_ATTRIBUTE_HEX_MIN)
+  private String hexMin;
+
+  /** @see #getBytesMaximum() */
+  @XmlAttribute(name = XML_ATTRIBUTE_HEX_MAX)
+  private String hexMax;
+
+  /** @see #getBytesMinimum() */
+  private byte[] bytesMinimum;
+
+  /** @see #getBytesMaximum() */
+  private byte[] bytesMaximum;
 
   /**
    * The constructor.
@@ -24,28 +50,62 @@ public class SegmentRange extends Segment {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getTagName() {
+
+    return XML_TAG;
+  }
+
+  /**
    * @return the min
    */
-  public byte[] getMin() {
+  public byte[] getBytesMinimum() {
 
-    return this.min;
+    if (this.bytesMinimum == null) {
+      this.bytesMinimum = SegmentConstant.parseBytes(this.hexMin, XML_ATTRIBUTE_HEX_MIN);
+    }
+    return this.bytesMinimum;
   }
 
   /**
    * @return the max
    */
-  public byte[] getMax() {
+  public byte[] getBytesMaximum() {
 
-    return this.max;
+    if (this.bytesMaximum == null) {
+      this.bytesMaximum = SegmentConstant.parseBytes(this.hexMax, XML_ATTRIBUTE_HEX_MAX);
+    }
+    return this.bytesMaximum;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public long getLength() {
+  public long getMinimumLength() {
 
-    return this.min.length;
+    return getBytesMinimum().length;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void validateNonRecursive(StringBuilder source) {
+
+    super.validateNonRecursive(source);
+    int length = getBytesMinimum().length;
+    if (length <= 0) {
+      source.append(".min.length");
+      throw new NlsIllegalArgumentException(Integer.valueOf(length), source.toString());
+    }
+    if (length != getBytesMaximum().length) {
+
+      throw new NlsIllegalArgumentException(Integer.valueOf(length), "min.length != max.length["
+          + getBytesMaximum().length + "]");
+    }
   }
 
 }

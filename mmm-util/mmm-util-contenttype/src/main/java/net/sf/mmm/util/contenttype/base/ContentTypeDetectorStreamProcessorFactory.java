@@ -4,11 +4,11 @@
 package net.sf.mmm.util.contenttype.base;
 
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
-import net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory;
 import net.sf.mmm.util.io.base.AbstractDetectorStreamProcessorFactory;
 
 /**
- * This is the implementation of {@link DetectorStreamProcessorFactory} for
+ * This is the implementation of
+ * {@link net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory} for
  * {@link ContentTypeDetectorStreamProcessor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

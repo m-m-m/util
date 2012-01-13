@@ -8,6 +8,7 @@ import java.util.Date;
 import net.sf.mmm.data.api.entity.DataEntityView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassIds;
+import net.sf.mmm.util.date.api.Recurrence;
 
 /**
  * This is the view interface for a {@link DataEntityView} that represents an
@@ -57,10 +58,10 @@ public interface DataEventView extends DataEntityView {
   String getDescription();
 
   /**
-   * TODO: the recurrence
+   * This method gets the {@link Recurrence} of this event.
    * 
-   * @return
+   * @return the {@link Recurrence}.
    */
-  String getRecurrence();
+  Recurrence getRecurrence();
 
 }

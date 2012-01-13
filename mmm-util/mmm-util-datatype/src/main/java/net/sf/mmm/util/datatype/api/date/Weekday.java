@@ -160,6 +160,28 @@ public enum Weekday implements Datatype<String> {
   }
 
   /**
+   * This method returns the {@link Weekday} resulting if the given number of
+   * <code>days</code> are elapsed after the current {@link Weekday} (this). The
+   * {@link Weekday} will wrap so {@link #add(int) add(7)} will return the
+   * {@link Weekday} itself (this) just like {@link #add(int) add(0)} or e.g.
+   * {@link #add(int) add(-14)}.
+   * 
+   * @param days are the number of days to add. May be negative to subtract or
+   *        zero (<code>0</code>) for no change.
+   * @return the resulting {@link Weekday}.
+   */
+  public Weekday add(int days) {
+
+    int sum = (ordinal() + days) % 7;
+    for (Weekday weekday : values()) {
+      if (weekday.ordinal() == sum) {
+        return weekday;
+      }
+    }
+    throw new IllegalCaseException(this.title + "+" + days);
+  }
+
+  /**
    * This method gets the {@link Weekday} for the given <code>value</code>.
    * 
    * @param value is the {@link #getValue() value} of the requested

@@ -23,6 +23,8 @@ import org.junit.Test;
 
 import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.logging.TestLogger.LogEvent;
+import net.sf.mmm.test.ExceptionHelper;
+import net.sf.mmm.test.TestStrings;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.io.api.DevZero;
 import net.sf.mmm.util.io.api.StreamUtil;
@@ -180,13 +182,13 @@ public class StreamUtilTest {
       if (error != e.getCause()) {
         e.printStackTrace();
       }
-      assertSame(error, e.getCause());
+      ExceptionHelper.assertCause(e, error);
     }
     assertEquals(0, outStream.size());
-    assertSame(error, callback.exception);
+    ExceptionHelper.assertCause(callback.exception, error);
     boolean errorWasLogged = false;
     for (LogEvent logEvent : logger.getEventList()) {
-      if (logEvent.throwable == error) {
+      if (ExceptionHelper.isCause(logEvent.throwable, error)) {
         errorWasLogged = true;
       }
     }

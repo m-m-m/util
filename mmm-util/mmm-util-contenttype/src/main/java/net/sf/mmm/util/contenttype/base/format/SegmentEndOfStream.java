@@ -12,11 +12,31 @@ package net.sf.mmm.util.contenttype.base.format;
  */
 public class SegmentEndOfStream extends Segment {
 
+  /** The XML tag name for this object. */
+  public static final String XML_TAG = "eos";
+
+  /**
+   * The constructor.
+   */
+  public SegmentEndOfStream() {
+
+    super();
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
-  public long getLength() {
+  protected String getTagName() {
+
+    return XML_TAG;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getMinimumLength() {
 
     return 0;
   }

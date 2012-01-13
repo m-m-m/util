@@ -500,6 +500,7 @@ public class CliState extends CliClassContainer {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("all")
     public <T extends String> T convert(CliArgumentContainer value, Object valueSource,
         Class<T> targetClass) throws ValueException {
 

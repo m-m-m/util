@@ -89,6 +89,7 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("all")
   public <T extends Calendar> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if ((value == null) || (targetClass != Calendar.class)) {

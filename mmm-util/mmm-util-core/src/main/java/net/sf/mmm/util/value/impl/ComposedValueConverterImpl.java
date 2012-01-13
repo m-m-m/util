@@ -136,7 +136,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("rawtypes")
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T convert(Object value, Object valueSource, GenericType<T> targetType) {
 
     if (value == null) {

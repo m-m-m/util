@@ -4,8 +4,6 @@
 package net.sf.mmm.util.xml.base.jaxb;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,6 +15,11 @@ import javax.xml.bind.MarshalException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.ValidationEventHandler;
+import javax.xml.bind.ValidationEventLocator;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.IoMode;
@@ -27,8 +30,10 @@ import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
-import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
+import net.sf.mmm.util.resource.base.FileResource;
 import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
+import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.base.StaxUtilImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 import com.sun.xml.internal.bind.IDResolver;
@@ -54,7 +59,7 @@ import com.sun.xml.internal.bind.IDResolver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class XmlBeanMapper<T> extends AbstractLoggableComponent {
+public class XmlBeanMapper<T> extends AbstractLoggableComponent implements ValidationEventHandler {
 
   /** @see #getJaxbContext() */
   private final JAXBContext jaxbContext;
@@ -64,6 +69,12 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
 
   /** @see #getResourceFactory() */
   private BrowsableResourceFactory resourceFactory;
+
+  /** @see #getStaxUtil() */
+  private StaxUtil staxUtil;
+
+  /** @see #isXIncludeAware() */
+  private boolean xIncludeAware;
 
   /**
    * The constructor.
@@ -80,6 +91,24 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
     } catch (JAXBException e) {
       throw new NlsIllegalStateException(e);
     }
+  }
+
+  /**
+   * @return the staxUtil
+   */
+  protected StaxUtil getStaxUtil() {
+
+    return this.staxUtil;
+  }
+
+  /**
+   * @param staxUtil is the staxUtil to set
+   */
+  @Inject
+  public void setStaxUtil(StaxUtil staxUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.staxUtil = staxUtil;
   }
 
   /**
@@ -113,6 +142,25 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
       resourceFactoryImpl.initialize();
       this.resourceFactory = resourceFactoryImpl;
     }
+    if (this.staxUtil == null) {
+      this.staxUtil = StaxUtilImpl.getInstance();
+    }
+  }
+
+  /**
+   * @return the xIncludeAware
+   */
+  public boolean isXIncludeAware() {
+
+    return this.xIncludeAware;
+  }
+
+  /**
+   * @param xIncludeAware is the xIncludeAware to set
+   */
+  public void setXIncludeAware(boolean xIncludeAware) {
+
+    this.xIncludeAware = xIncludeAware;
   }
 
   /**
@@ -124,7 +172,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
   protected Marshaller getOrCreateMarshaller() {
 
     try {
-      return this.jaxbContext.createMarshaller();
+      Marshaller marshaller = this.jaxbContext.createMarshaller();
+      marshaller.setEventHandler(this);
+      return marshaller;
     } catch (JAXBException e) {
       throw new NlsIllegalStateException(e);
     }
@@ -140,6 +190,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
 
     try {
       Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
+      unmarshaller.setEventHandler(this);
       try {
         unmarshaller.setProperty(IDResolver.class.getName(), new InternalValidatingIdResolver());
       } catch (PropertyException e) {
@@ -224,20 +275,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
    */
   public T loadXml(File file) {
 
-    try {
-      FileInputStream inputStream = new FileInputStream(file);
-      try {
-        return loadXml(inputStream, file);
-      } finally {
-        try {
-          inputStream.close();
-        } catch (Exception e) {
-          // ignore...
-        }
-      }
-    } catch (FileNotFoundException e) {
-      throw new ResourceNotAvailableException(e, file.getPath());
-    }
+    FileResource resource = new FileResource(file);
+    return loadXml(resource);
   }
 
   /**
@@ -249,14 +288,32 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
    */
   public T loadXml(DataResource resource) {
 
-    InputStream inputStream = resource.openStream();
-    try {
-      return loadXml(inputStream, resource);
-    } finally {
+    if (isXIncludeAware()) {
+      XMLStreamReader streamReader = getStaxUtil().createXmlStreamReader(resource, true);
       try {
-        inputStream.close();
+        Object unmarshalledObject = getOrCreateUnmarshaller().unmarshal(streamReader);
+        T jaxbBean = this.xmlBeanClass.cast(unmarshalledObject);
+        validate(jaxbBean);
+        return jaxbBean;
       } catch (Exception e) {
-        // ignore...
+        throw new XmlInvalidException(e, resource);
+      } finally {
+        try {
+          streamReader.close();
+        } catch (XMLStreamException e) {
+          throw new RuntimeIoException(e, IoMode.CLOSE);
+        }
+      }
+    } else {
+      InputStream inputStream = resource.openStream();
+      try {
+        return loadXml(inputStream, resource);
+      } finally {
+        try {
+          inputStream.close();
+        } catch (Exception e) {
+          // ignore...
+        }
       }
     }
   }
@@ -323,4 +380,31 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public boolean handleEvent(ValidationEvent event) {
+
+    Throwable exception = event.getLinkedException();
+    String message = event.getMessage();
+    ValidationEventLocator locator = event.getLocator();
+    if (locator != null) {
+      message = message + " at " + locator.toString();
+    }
+    switch (event.getSeverity()) {
+      case ValidationEvent.WARNING:
+        if (exception == null) {
+          getLogger().warn(message);
+        } else {
+          getLogger().warn(message, exception);
+        }
+        break;
+      case ValidationEvent.ERROR:
+      case ValidationEvent.FATAL_ERROR:
+        throw new XmlInvalidException(exception, message);
+      default :
+        // ignore unknown severity...
+    }
+    return true;
+  }
 }

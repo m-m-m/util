@@ -13,6 +13,7 @@ import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.XMLEvent;
 
 import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
@@ -34,10 +35,26 @@ public interface StaxUtil {
    * 
    * @param inputStream is the {@link InputStream} to read from.
    * @return the {@link XMLStreamReader}.
-   * @throws XmlGenericException if the creation of the stream-reader failed
-   *         (StAX not available or misconfigured).
+   * @throws XmlException if the creation of the stream-reader failed (StAX not
+   *         available or misconfigured).
    */
-  XMLStreamReader createXmlStreamReader(InputStream inputStream) throws XmlGenericException;
+  XMLStreamReader createXmlStreamReader(InputStream inputStream) throws XmlException;
+
+  /**
+   * This method creates an {@link XMLStreamReader}.
+   * 
+   * @see javax.xml.stream.XMLInputFactory#createXMLStreamReader(InputStream)
+   * 
+   * @param resource is the {@link DataResource} to read from.
+   * @param xIncludeAware - <code>true</code> if
+   *        {@link XmlUtil#NAMESPACE_URI_XINCLUDE XInclude} should be supported,
+   *        <code>false</code> otherwise.
+   * @return the {@link XMLStreamReader}.
+   * @throws XmlException if the creation of the stream-reader failed (StAX not
+   *         available or misconfigured).
+   */
+  XMLStreamReader createXmlStreamReader(DataResource resource, boolean xIncludeAware)
+      throws XmlException;
 
   /**
    * This method creates an {@link XMLEventReader}.
@@ -46,10 +63,10 @@ public interface StaxUtil {
    * 
    * @param inputStream is the {@link InputStream} to read from.
    * @return the {@link XMLEventReader}.
-   * @throws XmlGenericException if the creation of the event-reader failed
-   *         (StAX not available or misconfigured).
+   * @throws XmlException if the creation of the event-reader failed (StAX not
+   *         available or misconfigured).
    */
-  XMLEventReader createXmlEventReader(InputStream inputStream) throws XmlGenericException;
+  XMLEventReader createXmlEventReader(InputStream inputStream) throws XmlException;
 
   /**
    * This method creates a {@link XMLStreamWriter}.
@@ -58,10 +75,10 @@ public interface StaxUtil {
    * 
    * @param out is the output stream where the XML will be written to.
    * @return the XML stream writer.
-   * @throws XmlGenericException if the creation of the stream-writer failed
-   *         (StAX not available or misconfigured).
+   * @throws XmlException if the creation of the stream-writer failed (StAX not
+   *         available or misconfigured).
    */
-  XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XmlGenericException;
+  XMLStreamWriter createXmlStreamWriter(OutputStream out) throws XmlException;
 
   /**
    * This method creates a {@link XMLStreamWriter}.
@@ -70,10 +87,10 @@ public interface StaxUtil {
    * 
    * @param writer is the writer where the XML will be written to.
    * @return the XML stream writer.
-   * @throws XmlGenericException if the creation of the stream-writer failed
-   *         (StAX not available or misconfigured).
+   * @throws XmlException if the creation of the stream-writer failed (StAX not
+   *         available or misconfigured).
    */
-  XMLStreamWriter createXmlStreamWriter(Writer writer) throws XmlGenericException;
+  XMLStreamWriter createXmlStreamWriter(Writer writer) throws XmlException;
 
   /**
    * This method parses the attribute with the given

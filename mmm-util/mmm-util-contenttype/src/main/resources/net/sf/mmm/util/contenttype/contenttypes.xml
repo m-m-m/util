@@ -1,62 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<contenttypes>
-  <groups>
-    <group id="Data" title="Any file">
-      <groups>
-        <group id="Package">
-          <groups>
-            <group id="Compressed">
-              <groups>
-                <group id="Compressed-File">
-                </group>
-                <group id="Compressed-Archive">
-                </group>
-                <group id="Uncompressed-Archive">
-                </group>
-              </groups>
-            </group>
-            <group id="Installer-Package">
-            </group>
-          </groups>          
-        </group>
-        <group id="Office">
-          <groups>
-            <group id="Presentation">
-            </group>
-            <group id="Document">
-            </group>
-            <group id="Spreadsheet">
-            </group>
-          </groups>          
-        </group>
-        <group id="Multimedia">
-          <groups>
-            <group id="Audio">
-            </group>
-            <group id="Video">
-            </group>
-            <group id="Picture">
-            </group>
-          </groups>
-        </group>
-      </groups>
-    </group>
-  </groups>
-  <contenttype id="Data">
-    <subtypes>
-      <contenttype id="XML" group="Markup">
-      </contenttype>
-      <contenttype id="ZIP" group="Compressed">
-        <properties>
-          <property id="net.sf.mmm.util.io.filetype.zipped" value="true"/>
-        </properties>
-        <subtypes>
-          <contenttype id="DOCX" group="Document">
-            
-          </contenttype>
-        </subtypes>
-      </contenttype>
-      
-    </subtypes>
-  </contenttype>
-</contenttypes>
+<content-types xmlns:xi="http://www.w3.org/2001/XInclude">
+  <content-type id="DATA" title="data" mimetype="*/*">
+    <format>
+      <any/>
+      <eos/>
+    </format>
+  </content-type>
+  <xi:include href="graphic/all.xml" xpointer="element(/1/*)"/>
+</content-types>

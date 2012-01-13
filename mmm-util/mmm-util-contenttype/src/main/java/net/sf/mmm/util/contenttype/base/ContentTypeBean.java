@@ -6,10 +6,8 @@ package net.sf.mmm.util.contenttype.base;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -21,9 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.util.collection.base.AbstractTreeNode;
 import net.sf.mmm.util.contenttype.api.ContentType;
-import net.sf.mmm.util.contenttype.base.format.ContainerSequence;
+import net.sf.mmm.util.contenttype.base.format.SegmentContainerSequence;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
 
 /**
  * This is the abstract base implementation of the {@link ContentType}
@@ -33,8 +30,7 @@ import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
  */
 @XmlRootElement(name = "content-type")
 @XmlAccessorType(XmlAccessType.NONE)
-public class ContentTypeBean extends AbstractTreeNode<ContentType> implements ContentType,
-    JaxbObject {
+public class ContentTypeBean extends AbstractTreeNode<ContentType> implements ContentType {
 
   /** @see #getId() */
   @XmlID
@@ -70,7 +66,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
 
   /** @see #getFormat() */
   @XmlElement(name = "format")
-  private ContainerSequence format;
+  private SegmentContainerSequence format;
 
   /**
    * The constructor.
@@ -233,12 +229,12 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method gets the {@link ContainerSequence} representing the actual
+   * This method gets the {@link SegmentContainerSequence} representing the actual
    * format of the {@link ContentType}.
    * 
    * @return the format.
    */
-  public ContainerSequence getFormat() {
+  public SegmentContainerSequence getFormat() {
 
     return this.format;
   }
@@ -246,7 +242,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   /**
    * @param format is the {@link #getFormat() format} to set.
    */
-  protected void setFormat(ContainerSequence format) {
+  protected void setFormat(SegmentContainerSequence format) {
 
     this.format = format;
   }
@@ -254,22 +250,45 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   /**
    * {@inheritDoc}
    */
-  public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+  @Override
+  @XmlIDREF
+  @XmlAttribute(name = "parent")
+  public ContentTypeBean getParent() {
 
-    if (parent instanceof ContentType) {
-      setParent((ContentType) parent);
-    }
+    return (ContentTypeBean) super.getParent();
+  }
+
+  /**
+   * This method is required for JAXB. As there is no way than the return type
+   * to specify the type of a {@link XmlIDREF} of a getter, we also need a
+   * specialized setter with that type to satisfy JAXB.
+   * 
+   * @see #setParent(ContentType)
+   * 
+   * @param parent is the new {@link #getParent() parent}.
+   */
+  protected void setParent(ContentTypeBean parent) {
+
+    super.setParent(parent);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  @XmlElementWrapper(name = "children")
-  @XmlElement(name = "content-type", type = ContentTypeBean.class)
-  protected List<ContentType> getMutableChildList() {
+  protected void addChild(ContentType child) {
 
-    return super.getMutableChildList();
+    // make visible
+    super.addChild(child);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return super.toString();
   }
 
 }

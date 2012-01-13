@@ -1,12 +1,12 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.xml.stream;
+package net.sf.mmm.util.xml.impl.stax;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.util.xml.path.api.XmlParseException;
+import net.sf.mmm.util.xml.api.XmlException;
 
 /**
  * This is the interface used to create an {@link XMLStreamReader} facade that
@@ -27,10 +27,10 @@ public interface XPointerStreamBuilder {
    * @param namespaceContext is the namespace-context to inherit from when
    *        parsing the XPointer expression.
    * @return the requested {@link XMLStreamReader} facade.
-   * @throws XmlParseException if the given <code>xpointerExpression</code> is
+   * @throws XmlException if the given <code>xpointerExpression</code> is
    *         illegal or NOT supported.
    */
   XMLStreamReader createStreamReader(XMLStreamReader xmlReader, String xpointerExpression,
-      NamespaceContext namespaceContext) throws XmlParseException;
+      NamespaceContext namespaceContext) throws XmlException;
 
 }

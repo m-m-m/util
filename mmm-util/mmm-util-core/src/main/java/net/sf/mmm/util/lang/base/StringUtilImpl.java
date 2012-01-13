@@ -508,7 +508,7 @@ public class StringUtilImpl implements StringUtil {
         format.append("]*");
         throw new NlsParseException(separatedString, format, collection.getClass());
       }
-      E element = (E) converter.convert(elementString, separatedString, type);
+      E element = converter.convert(elementString, separatedString, type);
       collection.add(element);
     }
   }

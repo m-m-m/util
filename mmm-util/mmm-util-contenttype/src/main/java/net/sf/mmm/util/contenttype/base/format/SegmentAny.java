@@ -13,12 +13,24 @@ package net.sf.mmm.util.contenttype.base.format;
  */
 public class SegmentAny extends SegmentVariableLength {
 
+  /** The XML tag name for this object. */
+  public static final String XML_TAG = "any";
+
   /**
    * The constructor.
    */
   public SegmentAny() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getTagName() {
+
+    return XML_TAG;
   }
 
 }

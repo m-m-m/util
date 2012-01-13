@@ -98,6 +98,10 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     // CHARACTER_TO_ASCII_MAP.put(GREEK_SMALL_LETTER_SAN, "M");
     // CHARACTER_TO_ASCII_MAP.put(GREEK_SMALL_LETTER_SAMPI, "t");
 
+    // musical symbols
+    CHARACTER_TO_ASCII_MAP.put(MUSIC_FLAT_SIGN, "b");
+    CHARACTER_TO_ASCII_MAP.put(MUSIC_SHARP_SIGN, "#");
+
     CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_SHARP_S, "" + LATIN_SMALL_LETTER_S);
     for (DiacriticalMark mark : DiacriticalMark.values()) {
       for (char composed : mark.getComposedCharacters()) {

@@ -62,6 +62,34 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   public WeekdaySet(Set<Weekday> set) {
 
     super(Integer.valueOf(encode(set)));
+    this.set = set;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param weekdays are the {@link Weekday}s representing the
+   *        {@link WeekdaySet} to create.
+   */
+  public WeekdaySet(Weekday... weekdays) {
+
+    super(Integer.valueOf(encode(weekdays)));
+  }
+
+  /**
+   * This method encodes the given <code>set</code> to a bit-mask for
+   * {@link #getValue()}.
+   * 
+   * @param weekdays are the {@link Weekday}s.
+   * @return the encoded {@link #getValue() value}.
+   */
+  private static int encode(Weekday... weekdays) {
+
+    int bitmask = 0;
+    for (Weekday weekday : weekdays) {
+      bitmask = bitmask | (1 << weekday.ordinal());
+    }
+    return bitmask;
   }
 
   /**

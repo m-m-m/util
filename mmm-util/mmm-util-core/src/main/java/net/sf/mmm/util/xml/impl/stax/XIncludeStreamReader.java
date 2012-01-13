@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.xml.stream;
+package net.sf.mmm.util.xml.impl.stax;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,25 +13,27 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.util.StreamReaderDelegate;
 
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.xml.api.StaxUtil;
+import net.sf.mmm.util.xml.api.XmlException;
 import net.sf.mmm.util.xml.api.XmlUtil;
-import net.sf.mmm.util.xml.base.StaxUtilImpl;
+import net.sf.mmm.util.xml.base.StreamReaderProxy;
+import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
  * This is an implementation of the {@link XMLStreamReader} interface that
- * adapts an {@link XMLStreamReader} adding simple support for XInclude.<br>
+ * adapts an {@link XMLStreamReader} adding support for XInclude.<br>
  * For details about XInclude see: <a
  * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>.<br>
- * Please note that only plain XML inclusion is currently supported and no
- * XPointer.
+ * <b>ATTENTION:</b><br/>
+ * Please note that currently only plain XML inclusion is currently supported
+ * and no XPointer.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class XIncludeStreamReader extends StreamReaderDelegate {
+public class XIncludeStreamReader extends StreamReaderProxy {
 
   /** the parent reader or <code>null</code> if this is the root. */
   private final XIncludeStreamReader parent;
@@ -50,9 +52,6 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
    * stream ourselves.
    */
   private final InputStream inputStream;
-
-  /** @see #getStaxUtil() */
-  private StaxUtil staxUtil;
 
   /**
    * The reader to the current XInclude document or <code>null</code> if we
@@ -81,13 +80,11 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
   /**
    * The constructor.
    * 
-   * @param factory
-   * @param resource
-   * @throws XMLStreamException
-   * @throws IOException
+   * @param factory is the {@link XMLInputFactory} required to create new
+   *        {@link XMLStreamReader} instances for includes.
+   * @param resource is the {@link DataResource} pointing to the XML content.
    */
-  public XIncludeStreamReader(XMLInputFactory factory, DataResource resource)
-      throws XMLStreamException, IOException {
+  public XIncludeStreamReader(XMLInputFactory factory, DataResource resource) {
 
     this(factory, resource, null);
   }
@@ -98,11 +95,11 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
    * @param factory is the input factory used to create raw XML-readers.
    * @param resource is where to read the XML from.
    * @param parent is the parent {@link XMLStreamReader}.
-   * @throws XMLStreamException
-   * @throws IOException
+   * @throws XmlException in case of an XML error.
+   * @throws RuntimeIoException is case of an input/output error.
    */
   protected XIncludeStreamReader(XMLInputFactory factory, DataResource resource,
-      XIncludeStreamReader parent) throws XMLStreamException, IOException {
+      XIncludeStreamReader parent) throws XmlException, RuntimeIoException {
 
     super();
     this.parent = parent;
@@ -112,30 +109,16 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
     this.inputStream = resource.openStream();
     try {
       this.mainReader = factory.createXMLStreamReader(this.inputStream);
-    } catch (RuntimeException e) {
-      this.inputStream.close();
-      throw e;
+    } catch (Exception e) {
+      XmlInvalidException xmlEx = new XmlInvalidException(e);
+      try {
+        this.inputStream.close();
+      } catch (IOException e1) {
+        xmlEx.addSuppressed(e1);
+      }
+      throw xmlEx;
     }
     setParent(this.mainReader);
-  }
-
-  /**
-   * @return the staxUtil
-   */
-  public StaxUtil getStaxUtil() {
-
-    if (this.staxUtil == null) {
-      this.staxUtil = StaxUtilImpl.getInstance();
-    }
-    return this.staxUtil;
-  }
-
-  /**
-   * @param staxUtil the staxUtil to set
-   */
-  public void setStaxUtil(StaxUtil staxUtil) {
-
-    this.staxUtil = staxUtil;
   }
 
   /**
@@ -220,38 +203,34 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
     // and try to include it...
     boolean success = false;
     if (includeResource.isAvailable()) {
-      try {
-        // determine inclusion format type...
-        String parse = getAttributeValue(null, "parse");
-        if ((parse == null) || ("xml".equals(parse))) {
-          this.includeReader = new XIncludeStreamReader(this.factory, includeResource, this);
-          eventType = this.includeReader.nextTag();
-          setParent(this.includeReader);
-          if (xpointer != null) {
-            // shorthand form: id
-            // scheme-based form: e.g. element(/1/*)
-          }
-          // we ascend the XML until the initial include is closed.
-          closeInitialInclude();
-          success = true;
-        } else if ("text".equals(parse)) {
-          String encoding = getAttributeValue(null, "encoding");
-          Charset charset;
-          if (encoding == null) {
-            charset = Charset.defaultCharset();
-          } else {
-            charset = Charset.forName(encoding);
-          }
-          InputStream textInputStream = includeResource.openStream();
-          Reader reader = new InputStreamReader(textInputStream, charset);
-          this.includeText = StreamUtilImpl.getInstance().read(reader);
-          return XMLStreamConstants.CHARACTERS;
-        } else {
-          throw new XMLStreamException("Unsupported XInclude parse type:" + parse);
+      // determine inclusion format type...
+      String parse = getAttributeValue(null, "parse");
+      if ((parse == null) || ("xml".equals(parse))) {
+        this.includeReader = new XIncludeStreamReader(this.factory, includeResource, this);
+        if (xpointer != null) {
+          // shorthand form: id
+          // scheme-based form: e.g. element(/1/*)
+          this.includeReader = new XPointerStreamReader(this.includeReader, xpointer);
         }
-      } catch (IOException e) {
-        // TODO: log error!
-        e.printStackTrace();
+        eventType = this.includeReader.nextTag();
+        setParent(this.includeReader);
+        // we ascend the XML until the initial include is closed.
+        closeInitialInclude();
+        success = true;
+      } else if ("text".equals(parse)) {
+        String encoding = getAttributeValue(null, "encoding");
+        Charset charset;
+        if (encoding == null) {
+          charset = Charset.defaultCharset();
+        } else {
+          charset = Charset.forName(encoding);
+        }
+        InputStream textInputStream = includeResource.openStream();
+        Reader reader = new InputStreamReader(textInputStream, charset);
+        this.includeText = StreamUtilImpl.getInstance().read(reader);
+        return XMLStreamConstants.CHARACTERS;
+      } else {
+        throw new XMLStreamException("Unsupported XInclude parse type:" + parse);
       }
     }
     if (!success) {
@@ -343,34 +322,6 @@ public class XIncludeStreamReader extends StreamReaderDelegate {
       this.depth = 0;
       eventType = next();
     }
-    return eventType;
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * We override this method to get sure that it delegates to our
-   * {@link #next()} instead of the {@link #next()} of the delegate.
-   */
-  @Override
-  public int nextTag() throws javax.xml.stream.XMLStreamException {
-
-    int eventType = next();
-    while ((eventType == XMLStreamConstants.CHARACTERS && isWhiteSpace())
-        || (eventType == XMLStreamConstants.CDATA && isWhiteSpace())
-        || eventType == XMLStreamConstants.SPACE
-        || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
-        || eventType == XMLStreamConstants.COMMENT) {
-      eventType = next();
-    }
-
-    if (eventType != XMLStreamConstants.START_ELEMENT
-        && eventType != XMLStreamConstants.END_ELEMENT) {
-      throw new XMLStreamException("found: " + getStaxUtil().getEventTypeName(eventType)
-          + ", expected " + getStaxUtil().getEventTypeName(XMLStreamConstants.START_ELEMENT)
-          + " or " + getStaxUtil().getEventTypeName(XMLStreamConstants.END_ELEMENT), getLocation());
-    }
-
     return eventType;
   }
 
