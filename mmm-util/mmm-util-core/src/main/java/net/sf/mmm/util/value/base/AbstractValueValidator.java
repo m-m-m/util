@@ -13,7 +13,9 @@ import net.sf.mmm.util.value.api.ValueValidator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @deprecated use {@link net.sf.mmm.util.validation.base.AbstractValueValidator} instead.
  */
+@Deprecated
 public abstract class AbstractValueValidator<V> extends AbstractLoggableComponent implements ValueValidator<V> {
 
   /**

@@ -11,7 +11,9 @@ package net.sf.mmm.util.value.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @deprecated - use {@link net.sf.mmm.util.validation.api.ValueValidator} instead.
  */
+@Deprecated
 public interface ValueValidator<V> {
 
   /**
