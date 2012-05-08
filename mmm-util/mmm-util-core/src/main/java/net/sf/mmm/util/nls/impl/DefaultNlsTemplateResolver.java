@@ -14,11 +14,9 @@ import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 
 /**
- * This is the default implementation of the
- * {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}. It locates all
- * {@link ResourceBundle}s declared in the
- * {@link net.sf.mmm.util.nls.api.NlsTemplateResolver#CLASSPATH_NLS_BUNDLE
- * bundle-declaration-files}.
+ * This is the default implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}. It locates
+ * all {@link ResourceBundle}s declared in the
+ * {@link net.sf.mmm.util.nls.api.NlsTemplateResolver#CLASSPATH_NLS_BUNDLE bundle-declaration-files}.
  * 
  * @see AbstractResourceBundleNlsTemplateResolver
  * 

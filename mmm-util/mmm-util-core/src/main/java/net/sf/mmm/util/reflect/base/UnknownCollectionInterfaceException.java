@@ -7,9 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link UnknownCollectionInterfaceException} is thrown if a
- * {@link java.util.Collection}-interface was given that is unknown or no
- * {@link java.util.Collection}.
+ * A {@link UnknownCollectionInterfaceException} is thrown if a {@link java.util.Collection}-interface was
+ * given that is unknown or no {@link java.util.Collection}.
  * 
  * @see CollectionReflectionUtilImpl#create(Class)
  * 
@@ -24,8 +23,8 @@ public class UnknownCollectionInterfaceException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param collectionInterface is the {@link Class} reflecting the potential
-   *        {@link java.util.Collection}-interface.
+   * @param collectionInterface is the {@link Class} reflecting the potential {@link java.util.Collection}
+   *        -interface.
    */
   public UnknownCollectionInterfaceException(Class<?> collectionInterface) {
 

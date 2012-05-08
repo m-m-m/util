@@ -6,8 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionAndArgumentAnnotationException} is thrown if a property is
- * annotated with both {@link CliOption} and {@link CliArgument}.
+ * A {@link CliOptionAndArgumentAnnotationException} is thrown if a property is annotated with both
+ * {@link CliOption} and {@link CliArgument}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

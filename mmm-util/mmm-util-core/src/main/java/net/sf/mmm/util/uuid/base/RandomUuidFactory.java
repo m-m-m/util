@@ -11,8 +11,8 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.uuid.api.UuidFactory;
 
 /**
- * This is an implementation of the {@link UuidFactory} interface that simply
- * delegates to {@link UUID#randomUUID()}.
+ * This is an implementation of the {@link UuidFactory} interface that simply delegates to
+ * {@link UUID#randomUUID()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

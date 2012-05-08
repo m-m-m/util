@@ -8,9 +8,8 @@ import java.lang.annotation.Annotation;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link AnnotationNotRuntimeException} is thrown if an
- * {@link java.lang.annotation.Annotation} should be resolved at runtime but has
- * NOT the {@link java.lang.annotation.Retention}
+ * A {@link AnnotationNotRuntimeException} is thrown if an {@link java.lang.annotation.Annotation} should be
+ * resolved at runtime but has NOT the {@link java.lang.annotation.Retention}
  * {@link java.lang.annotation.RetentionPolicy#RUNTIME}.
  * 
  * @see AnnotationUtil#isRuntimeAnnotation(Class)

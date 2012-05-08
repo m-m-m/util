@@ -13,11 +13,11 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.base.ComposedNlsMessage;
 
 /**
- * An {@link ComposedException} combines a list of exceptions in one single
- * exception. This is helpful if you are validating something and want to
- * collect all errors and throw them as one exception with all information.<br/>
- * Otherwise you would stop at the first error, the user could fix it, restart
- * and end up with the next error and so on.
+ * An {@link ComposedException} combines a list of exceptions in one single exception. This is helpful if you
+ * are validating something and want to collect all errors and throw them as one exception with all
+ * information.<br/>
+ * Otherwise you would stop at the first error, the user could fix it, restart and end up with the next error
+ * and so on.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -42,8 +42,7 @@ public class ComposedException extends NlsRuntimeException {
   }
 
   /**
-   * This method creates the {@link NlsMessage} wrapping the given
-   * <code>errors</code>.
+   * This method creates the {@link NlsMessage} wrapping the given <code>errors</code>.
    * 
    * @param errors are the {@link Throwable errors} that have been collected.
    * @return the combined {@link NlsMessage}.

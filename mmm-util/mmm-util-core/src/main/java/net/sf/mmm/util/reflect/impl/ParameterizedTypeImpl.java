@@ -33,8 +33,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
    * 
    * @param rawType is the {@link #getRawType() raw type}.
    * @param typeArguments are the {@link #getActualTypeArguments()}.
-   * @param ownerType is the {@link #getOwnerType() owner type} (may be
-   *        <code>null</code>).
+   * @param ownerType is the {@link #getOwnerType() owner type} (may be <code>null</code>).
    */
   public ParameterizedTypeImpl(Class<?> rawType, Type[] typeArguments, Type ownerType) {
 

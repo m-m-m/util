@@ -8,8 +8,8 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is a simple implementation of the
- * {@link net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory} interface.
+ * This is a simple implementation of the {@link net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -31,11 +31,10 @@ public class SimpleDetectorStreamProcessorFactory extends AbstractDetectorStream
   /**
    * The constructor.
    * 
-   * @param processorImplementation is the
-   *        {@link #setProcessorImplementation(Class) processor-implementation}.
+   * @param processorImplementation is the {@link #setProcessorImplementation(Class) processor-implementation}
+   *        .
    */
-  public SimpleDetectorStreamProcessorFactory(
-      Class<? extends DetectorStreamProcessor> processorImplementation) {
+  public SimpleDetectorStreamProcessorFactory(Class<? extends DetectorStreamProcessor> processorImplementation) {
 
     super();
     this.processorImplementation = processorImplementation;

@@ -11,8 +11,8 @@ import java.util.Date;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
- * This is an abstract implementation of the {@link DataResource} interface that
- * {@link #getDelegate() delegates to another} {@link DataResource}.
+ * This is an abstract implementation of the {@link DataResource} interface that {@link #getDelegate()
+ * delegates to another} {@link DataResource}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

@@ -6,8 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionDuplicateException} is thrown if the same {@link CliOption
- * option} occurred multiple times as commandline-argument.
+ * A {@link CliOptionDuplicateException} is thrown if the same {@link CliOption option} occurred multiple
+ * times as commandline-argument.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

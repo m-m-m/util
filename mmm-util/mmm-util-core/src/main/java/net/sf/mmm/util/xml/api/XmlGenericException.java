@@ -4,8 +4,8 @@
 package net.sf.mmm.util.xml.api;
 
 /**
- * A {@link XmlGenericException} is used to wrap exceptions of underlying
- * XML-frameworks such as StAX or SAX that throw checked exceptions.
+ * A {@link XmlGenericException} is used to wrap exceptions of underlying XML-frameworks such as StAX or SAX
+ * that throw checked exceptions.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

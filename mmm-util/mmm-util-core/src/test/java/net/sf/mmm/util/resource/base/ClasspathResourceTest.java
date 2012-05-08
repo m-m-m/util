@@ -47,11 +47,10 @@ public class ClasspathResourceTest {
     verifyResource(resource);
     verifyResource(new ClasspathResource(ClasspathResource.class, //
         ClasspathResource.class.getSimpleName() + ".txt", false));
-    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(),
-        ClasspathResource.class.getSimpleName() + ".txt"));
+    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(), ClasspathResource.class.getSimpleName()
+        + ".txt"));
     String name = ClasspathResource.class.getSimpleName() + ".txt";
-    String absoluteClasspath = ClasspathResource.class.getPackage().getName().replace('.', '/')
-        + "/" + name;
+    String absoluteClasspath = ClasspathResource.class.getPackage().getName().replace('.', '/') + "/" + name;
     verifyResource(new ClasspathResource(absoluteClasspath));
     Assert.assertEquals(name, resource.getName());
     Assert.assertEquals(absoluteClasspath, resource.getPath());

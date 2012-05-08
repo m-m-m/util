@@ -13,9 +13,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorNonArg}
- * interface for {@link PojoPropertyAccessorNonArgMode#GET getting} a
- * {@link Field}.
+ * This is the implementation of the {@link PojoPropertyAccessorNonArg} interface for
+ * {@link PojoPropertyAccessorNonArgMode#GET getting} a {@link Field}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -30,8 +29,7 @@ public class PojoPropertyAccessorGetField extends AbstractPojoPropertyAccessorFi
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param field is the {@link #getField() field} to access.
    */
-  public PojoPropertyAccessorGetField(PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies, Field field) {
+  public PojoPropertyAccessorGetField(PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies, Field field) {
 
     super(descriptor, dependencies, field);
   }

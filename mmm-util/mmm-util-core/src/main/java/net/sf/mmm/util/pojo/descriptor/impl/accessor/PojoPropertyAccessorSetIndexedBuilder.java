@@ -17,10 +17,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexedOneArgBuilder;
 
 /**
- * This is the implementation of the
- * {@link PojoPropertyAccessorIndexedOneArgBuilder} interface for
- * {@link PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed
- * setter-access}.
+ * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArgBuilder} interface for
+ * {@link PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed setter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -61,12 +59,10 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
         Class<?> argument2Class = parameterTypes[1];
         if (isIntegerType(argument1Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument2Class,
-              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, dependencies, method,
-              false);
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, dependencies, method, false);
         } else if (isIntegerType(argument2Class)) {
           return new PojoPropertyAccessorIndexedOneArgMethod(propertyName, argument1Class,
-              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, dependencies, method,
-              true);
+              PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, descriptor, dependencies, method, true);
         }
       }
     }

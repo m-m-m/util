@@ -6,12 +6,11 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * An {@link NlsUnsupportedOperationException} is thrown if an operation was
- * invoked that is NOT implemented or generally NOT supported.<br>
+ * An {@link NlsUnsupportedOperationException} is thrown if an operation was invoked that is NOT implemented
+ * or generally NOT supported.<br>
  * <b>ATTENTION:</b><br>
- * Please always consider to avoid APIs that throw such exception and use
- * inheritance instead (e.g. if there was a <code>ReadOnlyIterator</code> such
- * as <code>Enumeration</code> that <code>Iterator</code> extends).
+ * Please always consider to avoid APIs that throw such exception and use inheritance instead (e.g. if there
+ * was a <code>ReadOnlyIterator</code> such as <code>Enumeration</code> that <code>Iterator</code> extends).
  * 
  * @see UnsupportedOperationException
  * 
@@ -34,9 +33,8 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param operation is a description (e.g. the
-   *        {@link java.lang.reflect.Method} or a string with the name of the
-   *        class and method) of the operation that is NOT supported.
+   * @param operation is a description (e.g. the {@link java.lang.reflect.Method} or a string with the name of
+   *        the class and method) of the operation that is NOT supported.
    */
   public NlsUnsupportedOperationException(Object operation) {
 

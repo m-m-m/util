@@ -12,13 +12,11 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
- * This class represents a {@link String} or better a sequence of characters (
- * <code>char[]</code>) together with a {@link #getCurrentIndex() position} in
- * that sequence.<br>
- * It has various useful methods for scanning the sequence. This scanner is
- * designed to be fast on long sequences and therefore internally
- * {@link String#toCharArray() converts} {@link String}s to a char array instead
- * of frequently calling {@link String#charAt(int)}.<br>
+ * This class represents a {@link String} or better a sequence of characters ( <code>char[]</code>) together
+ * with a {@link #getCurrentIndex() position} in that sequence.<br>
+ * It has various useful methods for scanning the sequence. This scanner is designed to be fast on long
+ * sequences and therefore internally {@link String#toCharArray() converts} {@link String}s to a char array
+ * instead of frequently calling {@link String#charAt(int)}.<br>
  * <b>ATTENTION:</b><br>
  * This implementation is NOT and has no intention to be thread-safe.
  * 
@@ -43,8 +41,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   private final int endIndex;
 
   /**
-   * The length of the char-sequence:
-   * <code>{@link #endIndex} - {@link #startIndex}</code>.
+   * The length of the char-sequence: <code>{@link #endIndex} - {@link #startIndex}</code>.
    */
   private final int length;
 
@@ -83,12 +80,10 @@ public class CharSequenceScanner implements CharStreamScanner {
    * The constructor.
    * 
    * @param characters is an array containing the characters to scan.
-   * @param offset is the index of the first char to scan in
-   *        <code>characters</code> (typically <code>0</code> to start at the
-   *        beginning of the array).
-   * @param length is the {@link #getLength() number of characters} to scan from
-   *        <code>characters</code> starting at <code>offset</code> (typically
-   *        <code>characters.length - offset</code>).
+   * @param offset is the index of the first char to scan in <code>characters</code> (typically <code>0</code>
+   *        to start at the beginning of the array).
+   * @param length is the {@link #getLength() number of characters} to scan from <code>characters</code>
+   *        starting at <code>offset</code> (typically <code>characters.length - offset</code>).
    */
   public CharSequenceScanner(char[] characters, int offset, int length) {
 
@@ -123,8 +118,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * @see java.lang.CharSequence#length()
    * 
-   * @return the total length of the {@link #getOriginalString() string to
-   *         parse}.
+   * @return the total length of the {@link #getOriginalString() string to parse}.
    */
   public int getLength() {
 
@@ -145,15 +139,14 @@ public class CharSequenceScanner implements CharStreamScanner {
   }
 
   /**
-   * This method gets the {@link #getOriginalString() original string} where the
-   * {@link #substring(int, int) substring} specified by <code>start</code> and
-   * <code>end</code> is replaced by <code>substitute</code>.
+   * This method gets the {@link #getOriginalString() original string} where the {@link #substring(int, int)
+   * substring} specified by <code>start</code> and <code>end</code> is replaced by <code>substitute</code>.
    * 
    * @param substitute is the string used as replacement.
    * @param start is the inclusive start index of the substring to replace.
    * @param end is the exclusive end index of the substring to replace.
-   * @return the {@link #getOriginalString() original string} with the specified
-   *         substring replaced by <code>substitute</code>.
+   * @return the {@link #getOriginalString() original string} with the specified substring replaced by
+   *         <code>substitute</code>.
    */
   public String getReplaced(String substitute, int start, int end) {
 
@@ -166,10 +159,9 @@ public class CharSequenceScanner implements CharStreamScanner {
   }
 
   /**
-   * This method appends the {@link #substring(int, int) substring} specified by
-   * <code>start</code> and <code>end</code> to the given <code>buffer</code>.<br>
-   * This avoids the overhead of creating a new string and copying the char
-   * array.
+   * This method appends the {@link #substring(int, int) substring} specified by <code>start</code> and
+   * <code>end</code> to the given <code>buffer</code>.<br>
+   * This avoids the overhead of creating a new string and copying the char array.
    * 
    * @param buffer is the buffer where to append the substring to.
    * @param start the start index, inclusive.
@@ -191,9 +183,8 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * This method sets the {@link #getCurrentIndex() current index}.
    * 
-   * @param index is the next index position to set. The value has to be greater
-   *        or equal to <code>0</code> and less or equal to {@link #getLength()}
-   *        .
+   * @param index is the next index position to set. The value has to be greater or equal to <code>0</code>
+   *        and less or equal to {@link #getLength()} .
    */
   public void setCurrentIndex(int index) {
 
@@ -243,19 +234,16 @@ public class CharSequenceScanner implements CharStreamScanner {
   }
 
   /**
-   * This method peeks the number of {@link #peek() next characters} given by
-   * <code>count</code> and returns them as string. If there are less characters
-   * {@link #hasNext() available} the returned string will be shorter than
-   * <code>count</code> and only contain the available characters. Unlike
-   * {@link #read(int)} this method does NOT consume the characters and will
-   * therefore NOT change the state of this scanner.
+   * This method peeks the number of {@link #peek() next characters} given by <code>count</code> and returns
+   * them as string. If there are less characters {@link #hasNext() available} the returned string will be
+   * shorter than <code>count</code> and only contain the available characters. Unlike {@link #read(int)} this
+   * method does NOT consume the characters and will therefore NOT change the state of this scanner.
    * 
-   * @param count is the number of characters to peek. You may use
-   *        {@link Integer#MAX_VALUE} to peek until the end of data if the
-   *        data-size is suitable.
-   * @return a string with the given number of characters or all available
-   *         characters if less than <code>count</code>. Will be the empty
-   *         string if no character is {@link #hasNext() available} at all.
+   * @param count is the number of characters to peek. You may use {@link Integer#MAX_VALUE} to peek until the
+   *        end of data if the data-size is suitable.
+   * @return a string with the given number of characters or all available characters if less than
+   *         <code>count</code>. Will be the empty string if no character is {@link #hasNext() available} at
+   *         all.
    * @since 2.0.2
    */
   public String peek(int count) {
@@ -281,9 +269,8 @@ public class CharSequenceScanner implements CharStreamScanner {
   }
 
   /**
-   * This method decrements the {@link #getCurrentIndex() index} by one. If the
-   * {@link #getCurrentIndex() index} is <code>0</code> this method will have no
-   * effect.<br>
+   * This method decrements the {@link #getCurrentIndex() index} by one. If the {@link #getCurrentIndex()
+   * index} is <code>0</code> this method will have no effect.<br>
    * E.g. use this method if you read a character too much.
    */
   public void stepBack() {
@@ -687,8 +674,7 @@ public class CharSequenceScanner implements CharStreamScanner {
       }
       value = Character.toString(this.chars[this.pos]);
     }
-    throw new NlsParseException(value, Character.toString(expected), Character.class,
-        getOriginalString());
+    throw new NlsParseException(value, Character.toString(expected), Character.class, getOriginalString());
   }
 
   /**
@@ -706,11 +692,10 @@ public class CharSequenceScanner implements CharStreamScanner {
   }
 
   /**
-   * This method gets the tail of this scanner limited (truncated) to the given
-   * <code>maximum</code> number of characters without changing the state.
+   * This method gets the tail of this scanner limited (truncated) to the given <code>maximum</code> number of
+   * characters without changing the state.
    * 
-   * @param maximum is the maximum number of characters to return from the
-   *        {@link #getTail() tail}.
+   * @param maximum is the maximum number of characters to return from the {@link #getTail() tail}.
    * @return the tail of this scanner.
    */
   protected String getTail(int maximum) {
@@ -732,8 +717,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   public void require(String expected, boolean ignoreCase) throws NlsParseException {
 
     if (!expectStrict(expected, ignoreCase)) {
-      throw new NlsParseException(getTail(expected.length()), expected, String.class,
-          getOriginalString());
+      throw new NlsParseException(getTail(expected.length()), expected, String.class, getOriginalString());
     }
   }
 

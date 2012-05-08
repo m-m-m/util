@@ -11,11 +11,10 @@ import java.util.Map;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is an abstract base implementation of
- * {@link net.sf.mmm.util.nls.api.NlsFormatter} that adapts a {@link Format}.
+ * This is an abstract base implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} that adapts a
+ * {@link Format}.
  * 
- * @param <O> is the generic type of the object to
- *        {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
+ * @param <O> is the generic type of the object to {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -50,7 +49,8 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsFormatterPlugin<O
   /**
    * {@inheritDoc}
    */
-  public void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver, Appendable buffer) {
+  public void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) {
 
     try {
       buffer.append(format(object, locale, arguments, resolver));

@@ -8,8 +8,8 @@ import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
- * This is an implementation of the {@link CharFilter} interface that combines a
- * given list of filters using a boolean {@link Conjunction}.
+ * This is an implementation of the {@link CharFilter} interface that combines a given list of filters using a
+ * boolean {@link Conjunction}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -25,8 +25,7 @@ public class ConjunctionCharFilter implements CharFilter {
   /**
    * The constructor.
    * 
-   * @param conjunction is the {@link Conjunction} used to combine the
-   *        <code>filters</code>.
+   * @param conjunction is the {@link Conjunction} used to combine the <code>filters</code>.
    * @param filters are the filters to combine.
    */
   public ConjunctionCharFilter(Conjunction conjunction, CharFilter... filters) {

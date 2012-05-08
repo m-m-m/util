@@ -12,9 +12,8 @@ import java.util.List;
 import net.sf.mmm.util.filter.api.FilterRule;
 
 /**
- * This class allows to parse a list of including and excluding regex
- * {@link PatternFilterRule}s and build an according {@link FilterRuleChain}.
- * The rules (include/exclude patterns) are proceeded in the order of their
+ * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s and build an
+ * according {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order of their
  * appearance in the list.<br>
  * Here is an example of a configuration (rule list) parsed by this class:
  * 
@@ -83,8 +82,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method gets the character used to identify an accept pattern. The
-   * default value is <code>'+'</code>.
+   * This method gets the character used to identify an accept pattern. The default value is <code>'+'</code>.
    * 
    * @return the accept character
    */
@@ -102,8 +100,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method gets the character used to identify a deny pattern. The default
-   * value is <code>'-'</code>.
+   * This method gets the character used to identify a deny pattern. The default value is <code>'-'</code>.
    * 
    * @return the deny character
    */
@@ -121,8 +118,8 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method gets the character used to identify a comment. If a line starts
-   * with this character it is ignored. The default value is <code>'#'</code>.
+   * This method gets the character used to identify a comment. If a line starts with this character it is
+   * ignored. The default value is <code>'#'</code>.
    * 
    * @return the comment character
    */
@@ -140,14 +137,12 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser
-   * above}.
+   * This method parses the content of the given <code>reader</code> as {@link FilterRuleChain} as described
+   * {@link FilterRuleChainPlainParser above}.
    * 
-   * @param reader is where to read from. It will be closed at the end of this
-   *        method (on success and in an exceptional state).
-   * @param defaultResult is the {@link FilterRuleChain#getDefaultResult()
-   *        default-result} of the chain.
+   * @param reader is where to read from. It will be closed at the end of this method (on success and in an
+   *        exceptional state).
+   * @param defaultResult is the {@link FilterRuleChain#getDefaultResult() default-result} of the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
    */
@@ -157,19 +152,16 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method parses the content of the given <code>reader</code> as
-   * {@link FilterRuleChain} as described {@link FilterRuleChainPlainParser
-   * above}.
+   * This method parses the content of the given <code>reader</code> as {@link FilterRuleChain} as described
+   * {@link FilterRuleChainPlainParser above}.
    * 
-   * @param reader is where to read from. It will be closed at the end of this
-   *        method (on success and in an exceptional state).
-   * @param defaultResult is the {@link FilterRuleChain#getDefaultResult()
-   *        default-result} of the chain.
+   * @param reader is where to read from. It will be closed at the end of this method (on success and in an
+   *        exceptional state).
+   * @param defaultResult is the {@link FilterRuleChain#getDefaultResult() default-result} of the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
    */
-  public FilterRuleChain<String> parse(BufferedReader reader, boolean defaultResult)
-      throws IOException {
+  public FilterRuleChain<String> parse(BufferedReader reader, boolean defaultResult) throws IOException {
 
     try {
       int lineCount = 0;
@@ -188,8 +180,7 @@ public class FilterRuleChainPlainParser {
           } else if (first == this.commentChar) {
             // ignore line
           } else {
-            throw new IllegalArgumentException("Illegal start character '" + first + "' in line "
-                + lineCount + "!");
+            throw new IllegalArgumentException("Illegal start character '" + first + "' in line " + lineCount + "!");
           }
         }
         line = reader.readLine();

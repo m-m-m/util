@@ -28,8 +28,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ResourceBundleSynchronizerTest {
 
-  public void checkValue(AbstractResourceBundle bundle, Properties properties, String key,
-      String locale) {
+  public void checkValue(AbstractResourceBundle bundle, Properties properties, String key, String locale) {
 
     String bundleValue = bundle.getString(key);
     String propertiesValue = properties.getProperty(key);
@@ -40,8 +39,7 @@ public class ResourceBundleSynchronizerTest {
     assertEquals(bundleValue, propertiesValue);
   }
 
-  public void checkBundle(AbstractResourceBundle bundle, String resultFileBase, String locale)
-      throws Exception {
+  public void checkBundle(AbstractResourceBundle bundle, String resultFileBase, String locale) throws Exception {
 
     String suffix = ".properties";
     if (locale != null) {
@@ -70,10 +68,9 @@ public class ResourceBundleSynchronizerTest {
     Class<? extends AbstractResourceBundle> bundleClass = NlsBundleUtilCore.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
-    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH,
-        targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
-        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(),
-        ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
+        ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
+        bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
     NlsBundleUtilCore bundle = new NlsBundleUtilCore();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');

@@ -16,8 +16,7 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.nls.api.NlsMessageFactory} interface.
+ * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsMessageFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

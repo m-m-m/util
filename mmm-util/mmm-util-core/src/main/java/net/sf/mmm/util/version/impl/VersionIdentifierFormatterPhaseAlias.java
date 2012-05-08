@@ -7,8 +7,8 @@ import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for
- * the {@link VersionIdentifier#getPhaseAlias() phase alias}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the
+ * {@link VersionIdentifier#getPhaseAlias() phase alias}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -18,12 +18,10 @@ public class VersionIdentifierFormatterPhaseAlias extends AbstractVersionIdentif
   /**
    * The constructor.
    * 
-   * @param prefix is the static prefix to append before the
-   *        {@link VersionIdentifier#getPhase() phase}. Will be omitted if
-   *        {@link VersionIdentifier#getPhase() phase} is <code>null</code>.
-   * @param maximumLength is the maximum number of letters for the
-   *        {@link VersionIdentifier#getPhaseAlias() phase alias}. The default
-   *        is {@link Integer#MAX_VALUE}.
+   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhase() phase}. Will
+   *        be omitted if {@link VersionIdentifier#getPhase() phase} is <code>null</code>.
+   * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getPhaseAlias()
+   *        phase alias}. The default is {@link Integer#MAX_VALUE}.
    */
   public VersionIdentifierFormatterPhaseAlias(String prefix, int maximumLength) {
 

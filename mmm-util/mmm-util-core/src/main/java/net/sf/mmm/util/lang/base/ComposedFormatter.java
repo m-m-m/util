@@ -8,14 +8,12 @@ import java.io.IOException;
 import net.sf.mmm.util.lang.api.Formatter;
 
 /**
- * This is the implementation of a {@link Formatter} that is composed out of
- * other {@link Formatter}s. It implements the divide and conquer strategy by
- * delegating to a given sequence of sub-{@link Formatter formatters} in a given
- * order. Each sub-formatter appends a particular part to the result according
- * to his responsibility.
+ * This is the implementation of a {@link Formatter} that is composed out of other {@link Formatter}s. It
+ * implements the divide and conquer strategy by delegating to a given sequence of sub-{@link Formatter
+ * formatters} in a given order. Each sub-formatter appends a particular part to the result according to his
+ * responsibility.
  * 
- * @param <V> is the generic type of the actual value to {@link #format(Object)
- *        format}.
+ * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
@@ -27,8 +25,7 @@ public class ComposedFormatter<V> extends AbstractFormatter<V> {
   /**
    * The constructor.
    * 
-   * @param subFormatters are the {@link Formatter}s to delegate to in the given
-   *        order.
+   * @param subFormatters are the {@link Formatter}s to delegate to in the given order.
    */
   public ComposedFormatter(Formatter<V>... subFormatters) {
 

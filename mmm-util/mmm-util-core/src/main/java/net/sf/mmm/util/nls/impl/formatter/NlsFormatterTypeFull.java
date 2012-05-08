@@ -9,8 +9,7 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 /**
- * The {@link NlsFormatterType} for
- * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_FULL full}
+ * The {@link NlsFormatterType} for {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_FULL full}
  * {@link #getStyle() style}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

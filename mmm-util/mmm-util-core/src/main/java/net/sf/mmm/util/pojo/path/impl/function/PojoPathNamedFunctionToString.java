@@ -11,16 +11,16 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 
 /**
- * This is the implementation of a {@link PojoPathNamedFunction} that performs a
- * {@link Object#toString()} on the input-object.
+ * This is the implementation of a {@link PojoPathNamedFunction} that performs a {@link Object#toString()} on
+ * the input-object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 @Singleton
 @Named
-public class PojoPathNamedFunctionToString extends AbstractPojoPathFunction<Object, String>
-    implements PojoPathNamedFunction<Object, String> {
+public class PojoPathNamedFunctionToString extends AbstractPojoPathFunction<Object, String> implements
+    PojoPathNamedFunction<Object, String> {
 
   /**
    * The constructor.

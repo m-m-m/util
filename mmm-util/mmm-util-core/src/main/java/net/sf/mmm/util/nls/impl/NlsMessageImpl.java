@@ -30,14 +30,12 @@ public class NlsMessageImpl extends BasicNlsMessage {
   /**
    * The constructor.
    * 
-   * @param template is the {@link NlsTemplate} for the
-   *        {@link #getInternationalizedMessage() raw message}.
-   * @param messageArguments are the {@link #getArgument(String) arguments}
-   *        filled into the message after nationalization.
+   * @param template is the {@link NlsTemplate} for the {@link #getInternationalizedMessage() raw message}.
+   * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
+   *        nationalization.
    * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
-  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments,
-      NlsDependencies nlsDependencies) {
+  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments, NlsDependencies nlsDependencies) {
 
     super(template, messageArguments);
     this.nlsDependencies = nlsDependencies;
@@ -46,10 +44,9 @@ public class NlsMessageImpl extends BasicNlsMessage {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is the
-   *        {@link #getInternationalizedMessage() internationalized message}.
-   * @param messageArguments are the {@link #getArgument(String) arguments}
-   *        filled into the message after nationalization.
+   * @param internationalizedMessage is the {@link #getInternationalizedMessage() internationalized message}.
+   * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
+   *        nationalization.
    * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
   public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments,
@@ -96,8 +93,7 @@ public class NlsMessageImpl extends BasicNlsMessage {
       } else {
         boolean success = false;
         if (nlsTemplate != null) {
-          success = nlsTemplate
-              .translate(locale, arguments, buffer, resolver, this.nlsDependencies);
+          success = nlsTemplate.translate(locale, arguments, buffer, resolver, this.nlsDependencies);
         }
         if (!success) {
           // This does not make sense:
@@ -107,8 +103,7 @@ public class NlsMessageImpl extends BasicNlsMessage {
           // if (locale != LOCALE_ROOT) {
           // buffer.append(LOCALIZATION_FAILURE_PREFIX);
           // }
-          NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message,
-              getNlsDependencies());
+          NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message, getNlsDependencies());
           format.format(null, locale, arguments, resolver, buffer);
         }
       }

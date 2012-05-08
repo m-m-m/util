@@ -62,17 +62,14 @@ public class FileUtilTest {
     assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
     assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
     assertEquals(homeDir + "/.mmm/search.xml", util.normalizePath("~/.mmm/search.xml", '/'));
-    assertEquals("/root/.ssh/authorized_keys",
-        util.normalizePath("~root/.ssh/authorized_keys", '/'));
+    assertEquals("/root/.ssh/authorized_keys", util.normalizePath("~root/.ssh/authorized_keys", '/'));
     if ("/root".equals(homeDir)) {
       homeDir = "/home/nobody";
     }
-    assertEquals(util.normalizePath(homeDir + "/../someuser", '/'),
-        util.normalizePath("~someuser", '/'));
+    assertEquals(util.normalizePath(homeDir + "/../someuser", '/'), util.normalizePath("~someuser", '/'));
     String uncPath = "\\\\10.0.0.1\\share";
     assertEquals(uncPath, util.normalizePath(uncPath, '/'));
-    assertEquals("http://www.host.com/foo",
-        util.normalizePath("http://www.host.com/foo/bar/./test/.././.."));
+    assertEquals("http://www.host.com/foo", util.normalizePath("http://www.host.com/foo/bar/./test/.././.."));
     assertEquals("../../bar/some", util.normalizePath("../..\\foo/../bar\\.\\some", '/'));
   }
 

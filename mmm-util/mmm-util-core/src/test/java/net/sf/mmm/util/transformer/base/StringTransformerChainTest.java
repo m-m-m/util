@@ -27,11 +27,9 @@ public class StringTransformerChainTest {
   public void testUnmarshall() throws Exception {
 
     JAXBContext context = JAXBContext.newInstance(StringTransformerList.class);
-    InputStream inStream = new ClasspathResource(StringTransformerList.class, ".xml", true)
-        .openStream();
+    InputStream inStream = new ClasspathResource(StringTransformerList.class, ".xml", true).openStream();
     try {
-      StringTransformerList chainList = (StringTransformerList) context.createUnmarshaller()
-          .unmarshal(inStream);
+      StringTransformerList chainList = (StringTransformerList) context.createUnmarshaller().unmarshal(inStream);
       Map<String, StringTransformerChain> chainMap = new HashMap<String, StringTransformerChain>();
       for (StringTransformerChain chain : chainList.getTransformers()) {
         chainMap.put(chain.getId(), chain);

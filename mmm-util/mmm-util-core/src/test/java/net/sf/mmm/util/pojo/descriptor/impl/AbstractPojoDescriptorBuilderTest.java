@@ -24,27 +24,23 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 public abstract class AbstractPojoDescriptorBuilderTest {
 
   /**
-   * This method checks read/write accessors to the property
-   * <code>propertyName</code> of the <code>pojoDescriptor</code> according
-   * to the given <code>readType</code> and <code>writeType</code>.
+   * This method checks read/write accessors to the property <code>propertyName</code> of the
+   * <code>pojoDescriptor</code> according to the given <code>readType</code> and <code>writeType</code>.
    * 
    * @param pojoDescriptor is the descriptor.
    * @param propertyName is the name of the property to check.
-   * @param readType is the expected read-type or <code>null</code> if NOT to
-   *        check.
-   * @param writeType is the expected write-type or <code>null</code> if NOT
-   *        to check.
+   * @param readType is the expected read-type or <code>null</code> if NOT to check.
+   * @param writeType is the expected write-type or <code>null</code> if NOT to check.
    */
-  protected void checkProperty(PojoDescriptor<?> pojoDescriptor, String propertyName,
-      Class<?> readType, Class<?> writeType) {
+  protected void checkProperty(PojoDescriptor<?> pojoDescriptor, String propertyName, Class<?> readType,
+      Class<?> writeType) {
 
     PojoPropertyDescriptor propertyDescriptor = pojoDescriptor.getPropertyDescriptor(propertyName);
     assertNotNull(propertyDescriptor);
     assertEquals(propertyName, propertyDescriptor.getName());
 
     // test read accessor
-    PojoPropertyAccessorNonArg getAccessor = propertyDescriptor
-        .getAccessor(PojoPropertyAccessorNonArgMode.GET);
+    PojoPropertyAccessorNonArg getAccessor = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
     if (readType == null) {
       assertNull(getAccessor);
     } else {
@@ -56,8 +52,7 @@ public abstract class AbstractPojoDescriptorBuilderTest {
       assertSame(getAccessor.getPropertyClass(), getAccessor.getReturnClass());
     }
     // test write accessor
-    PojoPropertyAccessorOneArg setAccessor = propertyDescriptor
-        .getAccessor(PojoPropertyAccessorOneArgMode.SET);
+    PojoPropertyAccessorOneArg setAccessor = propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.SET);
     if (writeType == null) {
       assertNull(setAccessor);
     } else {

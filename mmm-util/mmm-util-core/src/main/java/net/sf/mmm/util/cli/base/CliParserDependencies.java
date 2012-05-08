@@ -15,9 +15,8 @@ import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This interface bundles the dependencies for the
- * {@link net.sf.mmm.util.cli.api.CliParser}. It contains components required by
- * the parser.
+ * This interface bundles the dependencies for the {@link net.sf.mmm.util.cli.api.CliParser}. It contains
+ * components required by the parser.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -56,20 +55,17 @@ public interface CliParserDependencies {
   NlsMessageFactory getNlsMessageFactory();
 
   /**
-   * @return the {@link NlsTemplateResolver} instance to use or
-   *         <code>null</code> to use the default instance.
+   * @return the {@link NlsTemplateResolver} instance to use or <code>null</code> to use the default instance.
    */
   NlsTemplateResolver getNlsTemplateResolver();
 
   /**
-   * @return the {@link ComposedValueConverter} instance used to convert CLI
-   *         parameters to typed values.
+   * @return the {@link ComposedValueConverter} instance used to convert CLI parameters to typed values.
    */
   ComposedValueConverter getConverter();
 
   /**
-   * @return the {@link LineWrapper} used for justification of texts for the
-   *         help texts.
+   * @return the {@link LineWrapper} used for justification of texts for the help texts.
    */
   LineWrapper getLineWrapper();
 

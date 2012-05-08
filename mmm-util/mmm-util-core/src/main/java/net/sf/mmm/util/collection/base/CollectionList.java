@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This is an implementation of the {@link java.util.List} interface that adapts
- * another {@link Collection} as {@link #getDelegate() delegate}.
+ * This is an implementation of the {@link java.util.List} interface that adapts another {@link Collection} as
+ * {@link #getDelegate() delegate}.
  * 
  * @param <E> is the generic type of the elements.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -37,8 +37,7 @@ public class CollectionList<E> extends ArrayList<E> {
   }
 
   /**
-   * This method gets the underlying {@link Collection} that is adapted to
-   * appear as {@link java.util.List}.
+   * This method gets the underlying {@link Collection} that is adapted to appear as {@link java.util.List}.
    * 
    * @return the delegate.
    */
@@ -123,8 +122,7 @@ public class CollectionList<E> extends ArrayList<E> {
   }
 
   /**
-   * This inner class implements an {@link Iterator} for this
-   * {@link CollectionList}.
+   * This inner class implements an {@link Iterator} for this {@link CollectionList}.
    */
   private class ListIterator implements Iterator<E> {
 
@@ -134,15 +132,14 @@ public class CollectionList<E> extends ArrayList<E> {
     private int cursor;
 
     /**
-     * Index of element returned by most recent call to next or previous. Reset
-     * to -1 if this element is deleted by a call to remove.
+     * Index of element returned by most recent call to next or previous. Reset to -1 if this element is
+     * deleted by a call to remove.
      */
     private int lastRet = -1;
 
     /**
-     * The modCount value that the iterator believes that the backing List
-     * should have. If this expectation is violated, the iterator has detected
-     * concurrent modification.
+     * The modCount value that the iterator believes that the backing List should have. If this expectation is
+     * violated, the iterator has detected concurrent modification.
      */
     private int expectedModCount = CollectionList.this.modCount;
 

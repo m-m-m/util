@@ -20,8 +20,7 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class ProcessableDetectorOutputStream extends ProcessableDetectorStream implements
-    DetectorOutputStream {
+public class ProcessableDetectorOutputStream extends ProcessableDetectorStream implements DetectorOutputStream {
 
   /** @see #getStream() */
   private final WrapperOutputStream wrapperOutputStream;
@@ -29,16 +28,12 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
   /**
    * The constructor.
    * 
-   * @param outputStream is the raw {@link OutputStream} to {@link #getStream()
-   *        warp}.
-   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable
-   *        metadata}.
-   * @param provider is the
-   *        {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this
-   *        instance.
+   * @param outputStream is the raw {@link OutputStream} to {@link #getStream() warp}.
+   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
+   * @param provider is the {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this instance.
    */
-  public ProcessableDetectorOutputStream(OutputStream outputStream,
-      Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider) {
+  public ProcessableDetectorOutputStream(OutputStream outputStream, Map<String, Object> mutableMetadata,
+      AbstractDetectorStreamProvider provider) {
 
     super(mutableMetadata, provider.getByteArrayPool());
     this.wrapperOutputStream = new WrapperOutputStream(outputStream);
@@ -105,8 +100,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     /**
      * This method flushes the internal {@link #bytes buffer}.
      * 
-     * @throws IOException if the underlying {@link OutputStream} caused such
-     *         exception.
+     * @throws IOException if the underlying {@link OutputStream} caused such exception.
      */
     private void flushBuffer() throws IOException {
 
@@ -155,14 +149,12 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     /**
      * {@inheritDoc}
      */
-    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos)
-        throws IOException {
+    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
 
       int arrayCount = buffer.getByteArrayCount();
       for (int i = 0; i < arrayCount; i++) {
         ByteArray byteArray = buffer.getByteArray(i);
-        this.delegate.write(byteArray.getBytes(), byteArray.getCurrentIndex(), byteArray
-            .getBytesAvailable());
+        this.delegate.write(byteArray.getBytes(), byteArray.getCurrentIndex(), byteArray.getBytesAvailable());
       }
       buffer.skip();
     }

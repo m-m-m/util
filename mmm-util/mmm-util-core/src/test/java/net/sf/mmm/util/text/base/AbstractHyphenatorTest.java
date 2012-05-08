@@ -27,17 +27,16 @@ public abstract class AbstractHyphenatorTest {
   }
 
   /**
-   * This method checks if a given <code>hyphenatedWord</code> is properly
-   * hyphenated using the given <code>hyphenator</code>.
+   * This method checks if a given <code>hyphenatedWord</code> is properly hyphenated using the given
+   * <code>hyphenator</code>.
    * 
    * @param hyphenator is the {@link Hyphenator} to test.
    * @param hyphenatedWord is the hyphenated word.
-   * @param failuresExpected is where expected value is appended in case of
-   *        failure.
+   * @param failuresExpected is where expected value is appended in case of failure.
    * @param failuresActual is where actual value is appended in case of failure.
    */
-  protected void checkHyphenation(Hyphenator hyphenator, String hyphenatedWord,
-      StringBuilder failuresExpected, StringBuilder failuresActual) {
+  protected void checkHyphenation(Hyphenator hyphenator, String hyphenatedWord, StringBuilder failuresExpected,
+      StringBuilder failuresActual) {
 
     Hyphenation hyphenation = new HyphenationImpl(hyphenatedWord);
     String word = hyphenation.getWord();
@@ -56,10 +55,9 @@ public abstract class AbstractHyphenatorTest {
   }
 
   /**
-   * This method
-   * {@link #checkHyphenation(Hyphenator, String, StringBuilder, StringBuilder)
-   * checks the hyphenation} of for all given words. It performs the actual
-   * assertion at the end so the test does NOT stop on the first failure.
+   * This method {@link #checkHyphenation(Hyphenator, String, StringBuilder, StringBuilder) checks the
+   * hyphenation} of for all given words. It performs the actual assertion at the end so the test does NOT
+   * stop on the first failure.
    * 
    * @param hyphenator is the {@link Hyphenator} to test.
    * @param hyphenatedWords are the pre-hyphenated words.
@@ -71,8 +69,7 @@ public abstract class AbstractHyphenatorTest {
     for (String word : hyphenatedWords) {
       checkHyphenation(hyphenator, word, failuresExpected, failuresActual);
     }
-    Assert.assertEquals("incorrect hyphenation(s)!", failuresExpected.toString(), failuresActual
-        .toString());
+    Assert.assertEquals("incorrect hyphenation(s)!", failuresExpected.toString(), failuresActual.toString());
   }
 
 }

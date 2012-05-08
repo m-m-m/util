@@ -14,14 +14,12 @@ import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.io.api.DetectorOutputStream}.
+ * This is the implementation of the {@link net.sf.mmm.util.io.api.DetectorOutputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class ProcessableDetectorInputStream extends ProcessableDetectorStream implements
-    DetectorInputStream {
+public class ProcessableDetectorInputStream extends ProcessableDetectorStream implements DetectorInputStream {
 
   /** @see #getStream() */
   private final WrapperInputStream wrapperInputStream;
@@ -29,16 +27,12 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
   /**
    * The constructor.
    * 
-   * @param inputStream is the raw {@link InputStream} to {@link #getStream()
-   *        warp}.
-   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable
-   *        metadata}.
-   * @param provider is the
-   *        {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this
-   *        instance.
+   * @param inputStream is the raw {@link InputStream} to {@link #getStream() warp}.
+   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
+   * @param provider is the {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this instance.
    */
-  public ProcessableDetectorInputStream(InputStream inputStream,
-      Map<String, Object> mutableMetadata, AbstractDetectorStreamProvider provider) {
+  public ProcessableDetectorInputStream(InputStream inputStream, Map<String, Object> mutableMetadata,
+      AbstractDetectorStreamProvider provider) {
 
     super(mutableMetadata, provider.getByteArrayPool());
     this.wrapperInputStream = new WrapperInputStream(inputStream);
@@ -67,8 +61,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     private DetectorStreamBuffer targetBuffer;
 
     /**
-     * <code>true</code> if end of detection-stream, <code>false</code>
-     * otherwise.
+     * <code>true</code> if end of detection-stream, <code>false</code> otherwise.
      */
     private boolean endOfStream;
 
@@ -151,14 +144,12 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     }
 
     /**
-     * This method tries to ensure that the internal buffer has at least the
-     * given number of bytes available. If less bytes are available, the buffer
-     * is filled up accordingly using the underlying stream.<br>
+     * This method tries to ensure that the internal buffer has at least the given number of bytes available.
+     * If less bytes are available, the buffer is filled up accordingly using the underlying stream.<br>
      * <b>ATTENTION:</b><br>
      * If EOS is hit, the requested buffer size can NOT be ensured.
      * 
-     * @param requiredBufferLength is the desired number of bytes for the
-     *        buffer.
+     * @param requiredBufferLength is the desired number of bytes for the buffer.
      * @throws IOException if an I/O error occurred.
      */
     protected void fill(int requiredBufferLength) throws IOException {
@@ -196,8 +187,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     /**
      * {@inheritDoc}
      */
-    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos)
-        throws IOException {
+    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
 
       if (this.endOfStream) {
         // throw new NlsIllegalStateException();

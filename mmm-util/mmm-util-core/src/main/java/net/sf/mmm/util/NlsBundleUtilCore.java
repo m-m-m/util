@@ -65,12 +65,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!";
 
   /** @see net.sf.mmm.util.nls.api.NlsParseException */
-  public static final String ERR_PARSE_EXPECTED = "Failed to parse \"{value}\" - "
-      + "expected \"{type}\"!";
+  public static final String ERR_PARSE_EXPECTED = "Failed to parse \"{value}\" - " + "expected \"{type}\"!";
 
   /** @see net.sf.mmm.util.nls.api.NlsParseException */
-  public static final String ERR_PARSE_TYPE = "Failed to parse \"{value}\" as value "
-      + "of the type \"{type}\"!";
+  public static final String ERR_PARSE_TYPE = "Failed to parse \"{value}\" as value " + "of the type \"{type}\"!";
 
   /** @see net.sf.mmm.util.nls.api.NlsParseException */
   public static final String ERR_PARSE_TYPE_SOURCE = "Failed to parse \"{value}\" "
@@ -303,14 +301,12 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String MSG_MAIN_MODE_VERSION_USAGE = "Print the version of this program.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
-  public static final String MSG_SYNCHRONIZER_USAGE = "Create and/or update "
-      + "resource-bundle property-files.";
+  public static final String MSG_SYNCHRONIZER_USAGE = "Create and/or update " + "resource-bundle property-files.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT = "Create and/or "
       + "update resource-bundle property-files from <bundle-class> for the given "
-      + "locales (including the root locale). Example:\n\n"
-      + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample "
+      + "locales (including the root locale). Example:\n\n" + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample "
       + "de de_DE en en_US en_GB fr zh ja_JP zh_TW\n\n"
       + "For each locale a property-file foo/bar/NlsBundleMyExample_<locale>.properties "
       + "will be created or updated in the base-path. In each property-file all "
@@ -322,8 +318,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String MSG_SYNCHRONIZER_USAGE_LOCALES = "The list of locales "
       + "to synchronize. Each locale has to be in the form \"ll[_CC[_vv]]\" where "
       + "\"ll\" is the lowercase ISO 639 code, CC is the uppercase ISO 3166 "
-      + "2-letter code and vv is an arbitrary variant. Examples are \"de\", "
-      + "\"en_US\" or \"th_TH_TH\".";
+      + "2-letter code and vv is an arbitrary variant. Examples are \"de\", " + "\"en_US\" or \"th_TH_TH\".";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   public static final String MSG_SYNCHRONIZER_USAGE_ENCODING = "Read and write "
@@ -367,12 +362,10 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
   public static final String ERR_CLI_OPTION_UNDEFINED = "Undefined option \"{option}\"!";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionMissingValueException */
-  public static final String ERR_CLI_OPTION_MISSING_VALUE = "The option "
-      + "\"{option}\" must be followed by a value!";
+  public static final String ERR_CLI_OPTION_MISSING_VALUE = "The option " + "\"{option}\" must be followed by a value!";
 
   /** @see net.sf.mmm.util.cli.api.CliOptionMissingException */
-  public static final String ERR_CLI_OPTION_MISSING = "The option \"{option}\" "
-      + "is required for mode \"{mode}\"!";
+  public static final String ERR_CLI_OPTION_MISSING = "The option \"{option}\" " + "is required for mode \"{mode}\"!";
 
   /** @see net.sf.mmm.util.cli.api.CliArgumentMissingException */
   public static final String ERR_CLI_ARGUMENT_MISSING = "The argument \"{argument}\" "
@@ -417,8 +410,7 @@ public class NlsBundleUtilCore extends AbstractResourceBundle {
       + "\"{function}\" does NOT support the operation \"{operation}\"!";
 
   /** @see net.sf.mmm.util.pojo.path.api.PojoPathUnsafeException */
-  public static final String ERR_POJO_PATH_UNSAFE = "The pojo-path \"{path}\" "
-      + "is unsafe for type \"{type}\"!";
+  public static final String ERR_POJO_PATH_UNSAFE = "The pojo-path \"{path}\" " + "is unsafe for type \"{type}\"!";
 
   /** @see net.sf.mmm.util.pojo.path.api.PojoPathSegmentIsNullException */
   public static final String ERR_POJO_PATH_SEGMENT_IS_NULL = "The pojo-path \"{path}\" "

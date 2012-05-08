@@ -9,8 +9,8 @@ import java.lang.reflect.WildcardType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
- * This is an implementation of the {@link WildcardType} interface for the
- * unbounded wildcard (<code>?</code>).
+ * This is an implementation of the {@link WildcardType} interface for the unbounded wildcard (<code>?</code>
+ * ).
  * 
  * @see ReflectionUtil#toType(String)
  * 
@@ -60,8 +60,7 @@ public final class UnboundedWildcardType implements WildcardType {
     }
     if ((other != null) && (other instanceof WildcardType)) {
       WildcardType otherWildcard = (WildcardType) other;
-      if ((otherWildcard.getLowerBounds().length == 0)
-          && (otherWildcard.getUpperBounds().length == 0)) {
+      if ((otherWildcard.getLowerBounds().length == 0) && (otherWildcard.getUpperBounds().length == 0)) {
         return true;
       }
     }

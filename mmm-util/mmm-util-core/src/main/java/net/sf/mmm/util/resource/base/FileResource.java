@@ -21,8 +21,8 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
- * This is the implementation of the {@link BrowsableResource} interface for a
- * resource that is a {@link File#isFile() regular} {@link File}. <br>
+ * This is the implementation of the {@link BrowsableResource} interface for a resource that is a
+ * {@link File#isFile() regular} {@link File}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -30,8 +30,7 @@ import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 public class FileResource extends AbstractBrowsableResource {
 
   /**
-   * The {@link #getSchemePrefix() scheme-prefix} for this type of
-   * {@link BrowsableResource}.
+   * The {@link #getSchemePrefix() scheme-prefix} for this type of {@link BrowsableResource}.
    */
   public static final String SCHEME_PREFIX = "file://";
 
@@ -52,8 +51,7 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * The constructor.
    * 
-   * @param filePath is the {@link File#getPath() path} to the {@link File} to
-   *        represent.
+   * @param filePath is the {@link File#getPath() path} to the {@link File} to represent.
    */
   public FileResource(String filePath) {
 
@@ -106,6 +104,7 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public OutputStream openOutputStream() throws ResourceNotWritableException {
 
     try {

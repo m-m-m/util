@@ -14,19 +14,16 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is the abstract base implementation of the {@link NlsFormatter}
- * interface.<br>
- * You should extend this class rather than directly implementing the
- * {@link NlsFormatter} interface to gain compatibility with further releases.
+ * This is the abstract base implementation of the {@link NlsFormatter} interface.<br>
+ * You should extend this class rather than directly implementing the {@link NlsFormatter} interface to gain
+ * compatibility with further releases.
  * 
- * @param <O> is the generic type of the object to
- *        {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
+ * @param <O> is the generic type of the object to {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatter<O> extends AbstractLoggableComponent implements
-    NlsFormatter<O> {
+public abstract class AbstractNlsFormatter<O> extends AbstractLoggableComponent implements NlsFormatter<O> {
 
   /**
    * The constructor.
@@ -39,8 +36,7 @@ public abstract class AbstractNlsFormatter<O> extends AbstractLoggableComponent 
   /**
    * {@inheritDoc}
    */
-  public String format(O object, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver) {
+  public String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver) {
 
     try {
       StringBuilder buffer = new StringBuilder();

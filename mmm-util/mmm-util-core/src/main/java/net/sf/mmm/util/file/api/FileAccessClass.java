@@ -4,8 +4,7 @@
 package net.sf.mmm.util.file.api;
 
 /**
- * This class represents the three distinct classes of Unix (POSIX) file
- * permissions.
+ * This class represents the three distinct classes of Unix (POSIX) file permissions.
  * 
  * @see #USER
  * @see #GROUP

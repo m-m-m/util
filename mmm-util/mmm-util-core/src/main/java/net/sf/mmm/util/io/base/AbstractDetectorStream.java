@@ -37,8 +37,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
   /**
    * The constructor.
    * 
-   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable
-   *        metadata}.
+   * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
    */
   public AbstractDetectorStream(Map<String, Object> mutableMetadata) {
 

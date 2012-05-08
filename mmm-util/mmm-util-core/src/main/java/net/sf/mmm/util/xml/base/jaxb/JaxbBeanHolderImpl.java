@@ -13,10 +13,8 @@ import net.sf.mmm.util.resource.api.DataResource;
 /**
  * This is the implementation of {@link JaxbBeanHolder}.
  * 
- * @param <VIEW> is the generic type for the API of the {@link #getBean() JAXB
- *        bean}.
- * @param <BEAN> is the generic type for the implementation of the
- *        {@link #getBean() JAXB bean}.
+ * @param <VIEW> is the generic type for the API of the {@link #getBean() JAXB bean}.
+ * @param <BEAN> is the generic type for the implementation of the {@link #getBean() JAXB bean}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -43,8 +41,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
    * 
    * @param bean is the JAXB {@link #getBean() bean}.
    * @param resource is the {@link #getDataResource() resource}.
-   * @param beanMapper is the {@link XmlBeanMapper} used for {@link #flush()}
-   *        and {@link #refresh()}.
+   * @param beanMapper is the {@link XmlBeanMapper} used for {@link #flush()} and {@link #refresh()}.
    */
   public JaxbBeanHolderImpl(BEAN bean, DataResource resource, XmlBeanMapper<BEAN> beanMapper) {
 
@@ -56,12 +53,10 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
    * 
    * @param bean is the JAXB {@link #getBean() bean}.
    * @param resource is the {@link #getDataResource() resource}.
-   * @param beanMapper is the {@link XmlBeanMapper} used for {@link #flush()}
-   *        and {@link #refresh()}.
+   * @param beanMapper is the {@link XmlBeanMapper} used for {@link #flush()} and {@link #refresh()}.
    * @param allowSave - see {@link #isAllowSave()}.
    */
-  public JaxbBeanHolderImpl(BEAN bean, DataResource resource, XmlBeanMapper<BEAN> beanMapper,
-      boolean allowSave) {
+  public JaxbBeanHolderImpl(BEAN bean, DataResource resource, XmlBeanMapper<BEAN> beanMapper, boolean allowSave) {
 
     super();
     this.bean = bean;
@@ -74,11 +69,9 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
   }
 
   /**
-   * This method determines if this implementation allows to {@link #flush()
-   * save}.
+   * This method determines if this implementation allows to {@link #flush() save}.
    * 
-   * @return <code>true</code> if {@link #flush() saving} is allowed,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if {@link #flush() saving} is allowed, <code>false</code> otherwise.
    */
   public boolean isAllowSave() {
 
@@ -96,8 +89,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
   }
 
   /**
-   * This method gets the {@link DataResource} where the {@link #getBean() bean}
-   * was loaded from.
+   * This method gets the {@link DataResource} where the {@link #getBean() bean} was loaded from.
    * 
    * @return the {@link DataResource}.
    */

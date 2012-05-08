@@ -15,8 +15,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 
 /**
- * This is the test-case for the class {@link PojoPropertyAccessorMode} and its
- * subclasses.
+ * This is the test-case for the class {@link PojoPropertyAccessorMode} and its subclasses.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

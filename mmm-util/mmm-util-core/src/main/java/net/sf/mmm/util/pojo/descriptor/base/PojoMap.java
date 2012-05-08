@@ -14,10 +14,9 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 
 /**
- * This is represents a given {@link net.sf.mmm.util.pojo.api.Pojo} as
- * {@link java.util.Map} where the key is a
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getName()
- * property-name} given as String.
+ * This is represents a given {@link net.sf.mmm.util.pojo.api.Pojo} as {@link java.util.Map} where the key is
+ * a {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getName() property-name} given
+ * as String.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
@@ -38,8 +37,7 @@ public class PojoMap extends AbstractSimpleMap<String, Object> {
    * The constructor.
    * 
    * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to use.
-   * @param pojo the {@link net.sf.mmm.util.pojo.api.Pojo} to represent as
-   *        {@link java.util.Map}.
+   * @param pojo the {@link net.sf.mmm.util.pojo.api.Pojo} to represent as {@link java.util.Map}.
    */
   public PojoMap(PojoDescriptorBuilder pojoDescriptorBuilder, Object pojo) {
 

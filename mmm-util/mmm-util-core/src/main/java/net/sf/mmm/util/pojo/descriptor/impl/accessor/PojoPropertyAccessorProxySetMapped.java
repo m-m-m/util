@@ -13,22 +13,21 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorTwoArg}
- * interface for {@link PojoPropertyAccessorTwoArgMode#SET_MAPPED setting} an
- * element in a {@link java.util.Map} returned from another accessor.
+ * This is the implementation of the {@link PojoPropertyAccessorTwoArg} interface for
+ * {@link PojoPropertyAccessorTwoArgMode#SET_MAPPED setting} an element in a {@link java.util.Map} returned
+ * from another accessor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorProxySetMapped extends
-    AbstractPojoPropertyAccessorProxyAdapterComponentType implements PojoPropertyAccessorTwoArg {
+public class PojoPropertyAccessorProxySetMapped extends AbstractPojoPropertyAccessorProxyAdapterComponentType implements
+    PojoPropertyAccessorTwoArg {
 
   /**
    * The constructor.
    * 
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
-   * @param mapGetAccessor is the accessor delegate that gets a
-   *        {@link java.util.Map} property.
+   * @param mapGetAccessor is the accessor delegate that gets a {@link java.util.Map} property.
    */
   public PojoPropertyAccessorProxySetMapped(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg mapGetAccessor) {

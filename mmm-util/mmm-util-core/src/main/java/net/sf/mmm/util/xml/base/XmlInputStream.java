@@ -8,8 +8,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 /**
- * This class is an input-stream that detects the encoding from the potential
- * XML-header of a stream.
+ * This class is an input-stream that detects the encoding from the potential XML-header of a stream.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -20,8 +19,7 @@ final class XmlInputStream extends InputStream {
   private static final byte[] XML_HEADER_START = new byte[] { '<', '?', 'x', 'm', 'l', ' ' };
 
   /** the start of the XML encoding attribute (<code>"encoding="</code>). */
-  private static final byte[] XML_ENCODING_ATRIBUTE = new byte[] { 'e', 'n', 'c', 'o', 'd', 'i',
-      'n', 'g', '=' };
+  private static final byte[] XML_ENCODING_ATRIBUTE = new byte[] { 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=' };
 
   /** The original input-stream to adapt. */
   private final InputStream delegate;
@@ -36,8 +34,7 @@ final class XmlInputStream extends InputStream {
   private int index;
 
   /**
-   * The encoding detected from the XML header or <code>null</code> if it was
-   * NOT specified.
+   * The encoding detected from the XML header or <code>null</code> if it was NOT specified.
    */
   private Charset charset;
 
@@ -45,10 +42,9 @@ final class XmlInputStream extends InputStream {
    * The constructor.
    * 
    * @param delegate is the input-stream to adapt.
-   * @param defaultCharset is the {@link Charset} used if NO encoding was
-   *        specified via an XML header.
-   * @throws IOException if an I/O error was caused by <code>delegate</code>
-   *         when trying to read the XML header.
+   * @param defaultCharset is the {@link Charset} used if NO encoding was specified via an XML header.
+   * @throws IOException if an I/O error was caused by <code>delegate</code> when trying to read the XML
+   *         header.
    */
   public XmlInputStream(InputStream delegate, Charset defaultCharset) throws IOException {
 
@@ -81,8 +77,7 @@ final class XmlInputStream extends InputStream {
                   int encodingStartIndex = bufferIndex;
                   while (bufferIndex < this.length) {
                     if (quote == this.buffer[bufferIndex++]) {
-                      encoding = new String(this.buffer, encodingStartIndex, bufferIndex
-                          - encodingStartIndex - 1);
+                      encoding = new String(this.buffer, encodingStartIndex, bufferIndex - encodingStartIndex - 1);
                     }
                   }
                 }

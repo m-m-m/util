@@ -6,8 +6,7 @@ package net.sf.mmm.util.cli.base;
 import org.slf4j.Logger;
 
 /**
- * This is the abstract base-implementation of the {@link CliValueContainer}
- * interface.
+ * This is the abstract base-implementation of the {@link CliValueContainer} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -29,8 +28,7 @@ public abstract class AbstractCliValueContainer implements CliValueContainer {
   /**
    * The constructor.
    * 
-   * @param parameterContainer is the {@link #getParameterContainer()
-   *        parameter-container}.
+   * @param parameterContainer is the {@link #getParameterContainer() parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
    * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.

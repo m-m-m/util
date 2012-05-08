@@ -10,8 +10,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import org.slf4j.Logger;
 
 /**
- * This is an implementation of {@link CliValueContainer} for simple objects (no
- * arrays, collections, maps).
+ * This is an implementation of {@link CliValueContainer} for simple objects (no arrays, collections, maps).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -24,8 +23,7 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
   /**
    * The constructor.
    * 
-   * @param parameterContainer is the {@link #getParameterContainer()
-   *        parameter-container}.
+   * @param parameterContainer is the {@link #getParameterContainer() parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
    * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
@@ -63,8 +61,7 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
         handling = CliStyleHandling.EXCEPTION;
       }
       if (handling != CliStyleHandling.OK) {
-        CliOptionDuplicateException exception = new CliOptionDuplicateException(
-            parameterContainer.getName());
+        CliOptionDuplicateException exception = new CliOptionDuplicateException(parameterContainer.getName());
         handling.handle(getLogger(), exception);
       }
     }

@@ -9,8 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import net.sf.mmm.util.collection.api.BlockingQueueFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.BlockingQueueFactory} interface that
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.BlockingQueueFactory} interface that
  * creates instances of {@link java.util.concurrent.LinkedBlockingQueue}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

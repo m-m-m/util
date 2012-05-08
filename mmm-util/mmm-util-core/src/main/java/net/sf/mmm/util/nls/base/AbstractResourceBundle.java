@@ -12,15 +12,13 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * This is the abstract base class for {@link ResourceBundle} implementations
- * using this NLS support. Create your {@link ResourceBundle}s by sub-classing
- * this class and simply define some public static final fields that will be
- * automatically added to the bundle using reflection (only from constructor).<br/>
- * Please note that your sub-class must also be public or you need to set
- * privileges in the security manager to allow this class reading the fields via
- * reflection.<br/>
- * Please also follow the convention using the following prefixes followed by a
- * suffix that properly explains what the text is about:
+ * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. Create
+ * your {@link ResourceBundle}s by sub-classing this class and simply define some public static final fields
+ * that will be automatically added to the bundle using reflection (only from constructor).<br/>
+ * Please note that your sub-class must also be public or you need to set privileges in the security manager
+ * to allow this class reading the fields via reflection.<br/>
+ * Please also follow the convention using the following prefixes followed by a suffix that properly explains
+ * what the text is about:
  * <table border="1">
  * <tr>
  * <th>Prefix</th>
@@ -61,14 +59,13 @@ import java.util.ResourceBundle;
 public abstract class AbstractResourceBundle extends ResourceBundle {
 
   /**
-   * Fields that start with this prefix ({@value} ), will be ignored as
-   * {@link #getString(String) bundle properties}.
+   * Fields that start with this prefix ({@value} ), will be ignored as {@link #getString(String) bundle
+   * properties}.
    */
   private static final String PREFIX_INTERNAL_FIELD = "INT_";
 
   /**
-   * The key value pairs; maps keys (String) to values (Object). No Map because
-   * Enumeration is required...
+   * The key value pairs; maps keys (String) to values (Object). No Map because Enumeration is required...
    */
   private Hashtable<String, Object> bundle;
 
@@ -87,8 +84,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
       this.reverse = new HashMap<Object, String>(fields.length);
       for (int i = 0; i < fields.length; i++) {
         int modifiers = fields[i].getModifiers();
-        if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)
-            && !Modifier.isPrivate(modifiers)) {
+        if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers) && !Modifier.isPrivate(modifiers)) {
           if (fields[i].getType() == String.class) {
             String key = fields[i].getName();
             if (!key.startsWith(PREFIX_INTERNAL_FIELD)) {
@@ -109,11 +105,9 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
   /**
    * This method is the inverse of {@link #getObject(String)}.
    * 
-   * @param object is the object (potentially) retrieved via
-   *        {@link #getObject(String)}.
-   * @return the key for the given <code>object</code> or <code>null</code> if
-   *         it was NOT retrieved via {@link #getObject(String)} from this
-   *         instance.
+   * @param object is the object (potentially) retrieved via {@link #getObject(String)}.
+   * @return the key for the given <code>object</code> or <code>null</code> if it was NOT retrieved via
+   *         {@link #getObject(String)} from this instance.
    */
   public String getKey(Object object) {
 

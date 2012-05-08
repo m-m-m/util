@@ -19,9 +19,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorTwoArgBuilder;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorTwoArgBuilder}
- * interface for {@link PojoPropertyAccessorTwoArgMode#SET_MAPPED mapped
- * setter-access}.
+ * This is the implementation of the {@link PojoPropertyAccessorTwoArgBuilder} interface for
+ * {@link PojoPropertyAccessorTwoArgMode#SET_MAPPED mapped setter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -29,8 +28,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorTwoArgB
 @Singleton
 @Named
 public class PojoPropertyAccessorSetMappedBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorTwoArg> implements
-    PojoPropertyAccessorTwoArgBuilder {
+    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorTwoArg> implements PojoPropertyAccessorTwoArgBuilder {
 
   /** method name prefix for classic setter */
   private static final String METHOD_PREFIX_SET = "set";
@@ -39,8 +37,7 @@ public class PojoPropertyAccessorSetMappedBuilder extends
   private static final String METHOD_PREFIX_PUT = "put";
 
   /** alternative method name prefixes for boolean getters. */
-  private static final String[] METHOD_PREFIXES = new String[] { METHOD_PREFIX_SET,
-      METHOD_PREFIX_PUT };
+  private static final String[] METHOD_PREFIXES = new String[] { METHOD_PREFIX_SET, METHOD_PREFIX_PUT };
 
   /**
    * The constructor.
@@ -57,8 +54,7 @@ public class PojoPropertyAccessorSetMappedBuilder extends
       PojoDescriptorDependencies dependencies) {
 
     String methodName = method.getName();
-    String propertyName = getPropertyName(methodName, METHOD_PREFIXES,
-        StringUtil.EMPTY_STRING_ARRAY);
+    String propertyName = getPropertyName(methodName, METHOD_PREFIXES, StringUtil.EMPTY_STRING_ARRAY);
     if (propertyName != null) {
       Class<?>[] argumentClasses = method.getParameterTypes();
       if (argumentClasses.length == 2) {

@@ -9,21 +9,19 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.api.VersionIdentifierFormatter;
 
 /**
- * This is the default implementation of the {@link VersionIdentifierFormatter}
- * interface. It extends {@link ComposedFormatter} to solve the problem by
- * composing sub-formatters.
+ * This is the default implementation of the {@link VersionIdentifierFormatter} interface. It extends
+ * {@link ComposedFormatter} to solve the problem by composing sub-formatters.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
-public class ComposedVersionIdentifierFormatter extends ComposedFormatter<VersionIdentifier>
-    implements VersionIdentifierFormatter {
+public class ComposedVersionIdentifierFormatter extends ComposedFormatter<VersionIdentifier> implements
+    VersionIdentifierFormatter {
 
   /**
    * The constructor.
    * 
-   * @param subFormatters are the {@link Formatter}s to delegate to in the given
-   *        order.
+   * @param subFormatters are the {@link Formatter}s to delegate to in the given order.
    */
   public ComposedVersionIdentifierFormatter(Formatter<VersionIdentifier>... subFormatters) {
 

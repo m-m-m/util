@@ -6,13 +6,12 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * An {@link ObjectNotFoundException} is thrown if an object was requested but
- * does NOT exist or could NOT be found.<br>
- * This typically happens in situations where required objects are requested by
- * a key (e.g. in a registry- {@link java.util.Map}) but an expected object was
- * NOT registered or the key is wrong for some reason.<br>
- * If you design your API please always consider if you should return
- * <code>null</code> or throw an {@link ObjectNotFoundException}.
+ * An {@link ObjectNotFoundException} is thrown if an object was requested but does NOT exist or could NOT be
+ * found.<br>
+ * This typically happens in situations where required objects are requested by a key (e.g. in a registry-
+ * {@link java.util.Map}) but an expected object was NOT registered or the key is wrong for some reason.<br>
+ * If you design your API please always consider if you should return <code>null</code> or throw an
+ * {@link ObjectNotFoundException}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -25,8 +24,8 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param object is a description (e.g. the classname) of the object that was
-   *        required but could NOT be found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
+   *        found.
    */
   public ObjectNotFoundException(Object object) {
 
@@ -36,8 +35,8 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param object is a description (e.g. the classname) of the object that was
-   *        required but could NOT be found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
+   *        found.
    * @param key is the key to the required object.
    */
   public ObjectNotFoundException(Object object, Object key) {

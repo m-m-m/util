@@ -12,16 +12,15 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
- * This is the abstract base implementation of the {@link GenericValueConverter}
- * interface.
+ * This is the abstract base implementation of the {@link GenericValueConverter} interface.
  * 
  * @param <SOURCE> is the generic type of the values to convert.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent
-    implements GenericValueConverter<SOURCE> {
+public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent implements
+    GenericValueConverter<SOURCE> {
 
   /**
    * The constructor.
@@ -43,8 +42,8 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public final <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> type,
-      Type targetType, TARGET defaultValue) throws WrongValueTypeException {
+  public final <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> type, Type targetType,
+      TARGET defaultValue) throws WrongValueTypeException {
 
     if (value == null) {
       return defaultValue;
@@ -56,8 +55,8 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass,
-      TARGET defaultValue) throws WrongValueTypeException {
+  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass, TARGET defaultValue)
+      throws WrongValueTypeException {
 
     return convertValue(value, valueSource, targetClass, targetClass, defaultValue);
   }
@@ -65,9 +64,8 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource,
-      TARGET minimum, TARGET maximum, TARGET defaultValue) throws WrongValueTypeException,
-      ValueOutOfRangeException {
+  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum, TARGET maximum,
+      TARGET defaultValue) throws WrongValueTypeException, ValueOutOfRangeException {
 
     if (defaultValue != null) {
       ValueOutOfRangeException.checkRange(defaultValue, minimum, maximum, valueSource);
@@ -82,9 +80,8 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource,
-      TARGET minimum, TARGET maximum) throws ValueNotSetException, WrongValueTypeException,
-      ValueOutOfRangeException {
+  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum, TARGET maximum)
+      throws ValueNotSetException, WrongValueTypeException, ValueOutOfRangeException {
 
     Class<? extends Number> targetClass = minimum.getClass();
     TARGET result = (TARGET) convertValue(value, valueSource, targetClass, targetClass);

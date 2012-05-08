@@ -9,11 +9,10 @@ import java.lang.reflect.InvocationTargetException;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * An {@link InvocationFailedException} is thrown if an invocation failed.
- * Typically invocation means a {@link java.lang.reflect reflective} call of an
- * {@link AccessibleObject}. Unlike {@link InvocationTargetException} this is a
- * {@link RuntimeException} and has {@link net.sf.mmm.util.nls.api.NlsThrowable
- * native-language-support}.
+ * An {@link InvocationFailedException} is thrown if an invocation failed. Typically invocation means a
+ * {@link java.lang.reflect reflective} call of an {@link AccessibleObject}. Unlike
+ * {@link InvocationTargetException} this is a {@link RuntimeException} and has
+ * {@link net.sf.mmm.util.nls.api.NlsThrowable native-language-support}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -47,20 +46,16 @@ public class InvocationFailedException extends ReflectionException {
    * The constructor.
    * 
    * @param nested is the exception to adapt.
-   * @param accessible is the {@link AccessibleObject} (
-   *        {@link java.lang.reflect.Method} or
-   *        {@link java.lang.reflect.Constructor}) that was invoked and caused
-   *        the exception.
-   * @param instance is the instance on which the invocation took place and
-   *        caused the exception. It may be <code>null</code> if the
-   *        <code>accessible</code> is
+   * @param accessible is the {@link AccessibleObject} ( {@link java.lang.reflect.Method} or
+   *        {@link java.lang.reflect.Constructor}) that was invoked and caused the exception.
+   * @param instance is the instance on which the invocation took place and caused the exception. It may be
+   *        <code>null</code> if the <code>accessible</code> is
    *        {@link java.lang.reflect.Modifier#isStatic(int) static}.
    */
-  public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible,
-      Object instance) {
+  public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible, Object instance) {
 
-    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED_ON, toMap(KEY_ACCESSIBLE,
-        accessible, KEY_OBJECT, instance));
+    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED_ON, toMap(KEY_ACCESSIBLE, accessible, KEY_OBJECT,
+        instance));
   }
 
 }

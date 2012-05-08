@@ -29,8 +29,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * The constructor.
    * 
-   * @param stringRepresentation is the {@link String} returned by
-   *        {@link #toString()}.
+   * @param stringRepresentation is the {@link String} returned by {@link #toString()}.
    */
   public AbstractVersionIdentifier(String stringRepresentation) {
 
@@ -88,8 +87,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for
-   * the {@link #getVersionSegment(int) version number}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the
+   * {@link #getVersionSegment(int) version number}.
    * 
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -101,8 +100,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     // Direct predecessors: 1.2.3.3[.*]
     boolean equivalent = true;
     int result = 0;
-    int maxSegmentCount = StrictMath.max(getVersionSegmentCount(),
-        otherVersion.getVersionSegmentCount());
+    int maxSegmentCount = StrictMath.max(getVersionSegmentCount(), otherVersion.getVersionSegmentCount());
     for (int i = 0; i < maxSegmentCount; i++) {
       int segment = getVersionSegment(i);
       int otherSegment = otherVersion.getVersionSegment(i);
@@ -132,8 +130,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
    * This method gets {@link #getPhaseNumber()} as <code>int</code>.
    * 
    * @param version is the {@link VersionIdentifier}.
-   * @return the {@link #getPhaseNumber()} as <code>int</code>, using
-   *         <code>0</code> for <code>null</code>.
+   * @return the {@link #getPhaseNumber()} as <code>int</code>, using <code>0</code> for <code>null</code>.
    */
   private static int getPhaseNumberAsInt(VersionIdentifier version) {
 
@@ -146,8 +143,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for
-   * the {@link #getTimestamp() timestamp}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
+   * timestamp}.
    * 
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -211,8 +208,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for
-   * the {@link #getTimestamp() timestamp}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
+   * timestamp}.
    * 
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -224,9 +221,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for
-   * linear and optional attributes like {@link #getTimestamp()} or
-   * {@link #getRevision()}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for linear and optional attributes
+   * like {@link #getTimestamp()} or {@link #getRevision()}.
    * 
    * @param <T> is the generic type of the {@link Comparable} value.
    * @param currentResult is the current result so far.
@@ -235,8 +231,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
    */
-  private <T extends Comparable<T>> int compareToLinear(int currentResult, T thisValue,
-      T otherValue, VersionIdentifier otherVersion) {
+  private <T extends Comparable<T>> int compareToLinear(int currentResult, T thisValue, T otherValue,
+      VersionIdentifier otherVersion) {
 
     if (currentResult == COMPARE_TO_INCOMPARABLE) {
       return COMPARE_TO_INCOMPARABLE;
@@ -271,8 +267,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for
-   * the {@link #getRevision() revision}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getRevision()
+   * revision}.
    * 
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -284,8 +280,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for
-   * the {@link #getLabel() label}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getLabel() label}.
    * 
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.

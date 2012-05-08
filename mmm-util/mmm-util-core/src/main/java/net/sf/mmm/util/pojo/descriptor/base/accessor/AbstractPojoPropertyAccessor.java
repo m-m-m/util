@@ -7,8 +7,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract base-implementation of the {@link PojoPropertyAccessor}
- * interface.
+ * This is the abstract base-implementation of the {@link PojoPropertyAccessor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -42,8 +41,8 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   @Override
   public String toString() {
 
-    return getMode() + "-accessor of property '" + getDeclaringClass().getSimpleName() + "."
-        + getName() + "' with type " + getPropertyType() + "(" + getClass().getSimpleName() + ")";
+    return getMode() + "-accessor of property '" + getDeclaringClass().getSimpleName() + "." + getName()
+        + "' with type " + getPropertyType() + "(" + getClass().getSimpleName() + ")";
   }
 
 }

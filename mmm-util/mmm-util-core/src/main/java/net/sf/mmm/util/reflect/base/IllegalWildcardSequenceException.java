@@ -7,9 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link IllegalWildcardSequenceException} is thrown if a wildcard-type given
- * as string could NOT be parsed because it contains an illegal sequence (e.g.
- * "? implements X").
+ * A {@link IllegalWildcardSequenceException} is thrown if a wildcard-type given as string could NOT be parsed
+ * because it contains an illegal sequence (e.g. "? implements X").
  * 
  * @see ReflectionUtilImpl#toType(String)
  * 

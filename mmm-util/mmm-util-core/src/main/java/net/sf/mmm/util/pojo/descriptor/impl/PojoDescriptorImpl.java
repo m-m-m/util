@@ -29,8 +29,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorProxySe
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}
+ * interface.
  * 
  * @param <POJO> is the templated type of the {@link #getPojoClass() POJO}.
  * 
@@ -67,11 +67,10 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   }
 
   /**
-   * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all
-   * properties of the according {@link #getPojoClass() pojo}.
+   * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all properties of the according
+   * {@link #getPojoClass() pojo}.
    * 
-   * @return a collection with all {@link PojoPropertyDescriptorImpl property
-   *         descriptor}s
+   * @return a collection with all {@link PojoPropertyDescriptorImpl property descriptor}s
    */
   @Override
   public Collection<PojoPropertyDescriptorImpl> getPropertyDescriptors() {
@@ -101,15 +100,15 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
         PojoPropertyAccessorIndexedNonArg indexedGetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED);
         if (indexedGetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor,
-              pojoProperty.getIndex().intValue());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor, pojoProperty.getIndex()
+              .intValue());
         }
       } else if (mode == PojoPropertyAccessorOneArgMode.SET) {
         PojoPropertyAccessorIndexedOneArg indexedSetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED);
         if (indexedSetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor,
-              pojoProperty.getIndex().intValue());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor, pojoProperty.getIndex()
+              .intValue());
         }
       }
     } else if (pojoProperty.getKey() != null) {
@@ -117,15 +116,13 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
         PojoPropertyAccessorOneArg mappedGetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED);
         if (mappedGetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByKey(mappedGetAccessor,
-              pojoProperty.getKey());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByKey(mappedGetAccessor, pojoProperty.getKey());
         }
       } else if (mode == PojoPropertyAccessorOneArgMode.SET) {
         PojoPropertyAccessorTwoArg mappedSetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED);
         if (mappedSetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByKey(mappedSetAccessor,
-              pojoProperty.getKey());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByKey(mappedSetAccessor, pojoProperty.getKey());
         }
       }
     }

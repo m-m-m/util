@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is an implementation of {@link InputStream} that will throw an exception
- * for every method of {@link InputStream}.
+ * This is an implementation of {@link InputStream} that will throw an exception for every method of
+ * {@link InputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

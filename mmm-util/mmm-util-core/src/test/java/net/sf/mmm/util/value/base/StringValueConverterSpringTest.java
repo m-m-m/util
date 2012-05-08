@@ -10,8 +10,7 @@ import net.sf.mmm.util.value.api.StringValueConverter;
 import org.junit.AfterClass;
 
 /**
- * This is the test-case for {@link StringValueConverter} configured using
- * spring.
+ * This is the test-case for {@link StringValueConverter} configured using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

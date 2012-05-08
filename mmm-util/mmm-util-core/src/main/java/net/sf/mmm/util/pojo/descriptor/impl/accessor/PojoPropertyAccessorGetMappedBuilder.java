@@ -18,9 +18,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgBuilder;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder}
- * interface for {@link PojoPropertyAccessorOneArgMode#GET_MAPPED mapped
- * getter-access}.
+ * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder} interface for
+ * {@link PojoPropertyAccessorOneArgMode#GET_MAPPED mapped getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -28,8 +27,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
 @Singleton
 @Named
 public class PojoPropertyAccessorGetMappedBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> implements
-    PojoPropertyAccessorOneArgBuilder {
+    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> implements PojoPropertyAccessorOneArgBuilder {
 
   /** method name prefix for classic getter. */
   private static final String METHOD_PREFIX_GET = "get";
@@ -41,8 +39,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
   private static final String METHOD_PREFIX_HAS = "has";
 
   /** alternative method name prefixes for boolean getters. */
-  private static final String[] METHOD_PREFIXES_BOOLEAN = new String[] { METHOD_PREFIX_IS,
-      METHOD_PREFIX_HAS };
+  private static final String[] METHOD_PREFIXES_BOOLEAN = new String[] { METHOD_PREFIX_IS, METHOD_PREFIX_HAS };
 
   /**
    * The constructor.
@@ -66,11 +63,9 @@ public class PojoPropertyAccessorGetMappedBuilder extends
         String methodName = method.getName();
         // is property read method (getter)?
         propertyName = getPropertyName(methodName, METHOD_PREFIX_GET, "");
-        if ((propertyName == null)
-            && ((propertyClass == boolean.class) || (propertyClass == Boolean.class))) {
+        if ((propertyName == null) && ((propertyClass == boolean.class) || (propertyClass == Boolean.class))) {
           // boolean getters may be is* or has* ...
-          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN,
-              StringUtil.EMPTY_STRING_ARRAY);
+          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN, StringUtil.EMPTY_STRING_ARRAY);
         }
         if (propertyName != null) {
           return new PojoPropertyAccessorOneArgMethod(propertyName, method.getGenericReturnType(),

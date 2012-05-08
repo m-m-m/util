@@ -6,16 +6,14 @@ package net.sf.mmm.util.lang.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link Conjunction} represents a function that maps a list of boolean
- * arguments to one boolean result.
+ * A {@link Conjunction} represents a function that maps a list of boolean arguments to one boolean result.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public enum Conjunction implements Datatype<String> {
   /**
-   * This conjunction is <code>true</code> if and only if all arguments are
-   * <code>true</code>.
+   * This conjunction is <code>true</code> if and only if all arguments are <code>true</code>.
    */
   AND("&&", NlsBundleUtilCore.INF_AND) {
 
@@ -35,8 +33,7 @@ public enum Conjunction implements Datatype<String> {
   },
 
   /**
-   * This conjunction is <code>true</code> if and only if at least one argument
-   * is <code>true</code>.
+   * This conjunction is <code>true</code> if and only if at least one argument is <code>true</code>.
    */
   OR("||", NlsBundleUtilCore.INF_OR) {
 
@@ -56,8 +53,8 @@ public enum Conjunction implements Datatype<String> {
   },
 
   /**
-   * This is the negation of {@link #AND}. It is only <code>true</code> if at
-   * least one argument is <code>false</code>.
+   * This is the negation of {@link #AND}. It is only <code>true</code> if at least one argument is
+   * <code>false</code>.
    */
   NAND("!&", NlsBundleUtilCore.INF_NAND) {
 
@@ -77,8 +74,8 @@ public enum Conjunction implements Datatype<String> {
   },
 
   /**
-   * This is the negation of {@link #OR}. It is only <code>true</code> if all
-   * arguments are <code>false</code>.
+   * This is the negation of {@link #OR}. It is only <code>true</code> if all arguments are <code>false</code>
+   * .
    */
   NOR("!|", NlsBundleUtilCore.INF_NOR) {
 
@@ -116,12 +113,10 @@ public enum Conjunction implements Datatype<String> {
   }
 
   /**
-   * This method evaluates this conjunction for the given boolean
-   * <code>arguments</code>.
+   * This method evaluates this conjunction for the given boolean <code>arguments</code>.
    * 
    * @param arguments are the boolean values to evaluate.
-   * @return the result of this conjunction applied to the given
-   *         <code>arguments</code>.
+   * @return the result of this conjunction applied to the given <code>arguments</code>.
    * @since 2.0.0
    */
   public abstract boolean eval(boolean... arguments);
@@ -152,11 +147,9 @@ public enum Conjunction implements Datatype<String> {
   }
 
   /**
-   * This method gets the {@link Conjunction} with the given
-   * <code>{@link #getValue() value}</code>.
+   * This method gets the {@link Conjunction} with the given <code>{@link #getValue() value}</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link Conjunction}.
+   * @param value is the {@link #getValue() value} of the requested {@link Conjunction}.
    * @return the requested {@link Conjunction}.
    */
   public static Conjunction fromValue(String value) {

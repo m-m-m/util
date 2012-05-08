@@ -9,17 +9,15 @@ import net.sf.mmm.util.lang.base.AbstractFormatter;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the abstract base implementation of
- * {@link net.sf.mmm.util.lang.api.Formatter} for a {@link String}-based part of
- * the {@link VersionIdentifier}.
+ * This is the abstract base implementation of {@link net.sf.mmm.util.lang.api.Formatter} for a {@link String}
+ * -based part of the {@link VersionIdentifier}.
  * 
  * @see ComposedVersionIdentifierFormatter
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
-public abstract class AbstractVersionIdentifierFormatterString extends
-    AbstractFormatter<VersionIdentifier> {
+public abstract class AbstractVersionIdentifierFormatterString extends AbstractFormatter<VersionIdentifier> {
 
   /** The static prefix. */
   private final String prefix;
@@ -30,10 +28,10 @@ public abstract class AbstractVersionIdentifierFormatterString extends
   /**
    * The constructor.
    * 
-   * @param prefix is the static prefix to append before the number. Will be
-   *        omitted if the number is <code>null</code>.
-   * @param maximumLength is the maximum number of letters for the
-   *        {@link String} to format. The default is {@link Integer#MAX_VALUE}.
+   * @param prefix is the static prefix to append before the number. Will be omitted if the number is
+   *        <code>null</code>.
+   * @param maximumLength is the maximum number of letters for the {@link String} to format. The default is
+   *        {@link Integer#MAX_VALUE}.
    */
   public AbstractVersionIdentifierFormatterString(String prefix, int maximumLength) {
 

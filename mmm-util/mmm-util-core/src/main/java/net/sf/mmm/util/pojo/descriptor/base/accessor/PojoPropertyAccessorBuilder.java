@@ -22,37 +22,28 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 public abstract interface PojoPropertyAccessorBuilder<ACCESSOR extends PojoPropertyAccessor> {
 
   /**
-   * This method creates the {@link PojoPropertyAccessor accessor} for the given
-   * <code>method</code> if that method is suitable for this builder (e.g.
-   * starts with "set").
+   * This method creates the {@link PojoPropertyAccessor accessor} for the given <code>method</code> if that
+   * method is suitable for this builder (e.g. starts with "set").
    * 
    * @param method the method to access.
-   * @param descriptor is the descriptor of the
-   *        {@link net.sf.mmm.util.pojo.api.Pojo} having the given
+   * @param descriptor is the descriptor of the {@link net.sf.mmm.util.pojo.api.Pojo} having the given
    *        <code>method</code>.
-   * @param dependencies are the {@link PojoDescriptorDependencies} with
-   *        injected helper components.
-   * @return the {@link PojoPropertyAccessor accessor} for the given
-   *         <code>method</code> or <code>null</code> if the <code>method</code>
-   *         is NOT suitable for this builder.
+   * @param dependencies are the {@link PojoDescriptorDependencies} with injected helper components.
+   * @return the {@link PojoPropertyAccessor accessor} for the given <code>method</code> or <code>null</code>
+   *         if the <code>method</code> is NOT suitable for this builder.
    */
-  ACCESSOR create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies);
+  ACCESSOR create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies);
 
   /**
-   * This method creates the {@link PojoPropertyAccessor accessor} for the given
-   * <code>field</code> if that field is suitable for this builder (e.g.
-   * contains a container type).
+   * This method creates the {@link PojoPropertyAccessor accessor} for the given <code>field</code> if that
+   * field is suitable for this builder (e.g. contains a container type).
    * 
    * @param field is the field.
-   * @param descriptor is the descriptor of the
-   *        {@link net.sf.mmm.util.pojo.api.Pojo} having the given
+   * @param descriptor is the descriptor of the {@link net.sf.mmm.util.pojo.api.Pojo} having the given
    *        <code>field</code>.
-   * @param dependencies are the {@link PojoDescriptorDependencies} with
-   *        injected helper components.
-   * @return the {@link PojoPropertyAccessor accessor} for the given
-   *         <code>field</code> or <code>null</code> if the <code>field</code>
-   *         is NOT suitable for this builder.
+   * @param dependencies are the {@link PojoDescriptorDependencies} with injected helper components.
+   * @return the {@link PojoPropertyAccessor accessor} for the given <code>field</code> or <code>null</code>
+   *         if the <code>field</code> is NOT suitable for this builder.
    */
   ACCESSOR create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies);
 

@@ -6,10 +6,9 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link IllegalCaseException} is thrown if a specific case occurred that
- * should never happen. It is typically thrown in the <code>default</code>
- * -section of a <code>switch</code>-statement where all <code>case</code>s
- * should have been covered.
+ * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is
+ * typically thrown in the <code>default</code> -section of a <code>switch</code>-statement where all
+ * <code>case</code>s should have been covered.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

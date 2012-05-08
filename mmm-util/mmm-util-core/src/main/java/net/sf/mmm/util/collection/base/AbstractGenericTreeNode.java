@@ -13,8 +13,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is the abstract base implementation of the {@link GenericTreeNode}
- * interface.
+ * This is the abstract base implementation of the {@link GenericTreeNode} interface.
  * 
  * @param <CHILD> is the generic type of the {@link #getChildren() children}.
  * @param <PARENT> is the generic type of the {@link #getParent() parent}.
@@ -85,13 +84,11 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method sets the {@link #getParent() parent} of this
-   * {@link GenericTreeNode}.
+   * This method sets the {@link #getParent() parent} of this {@link GenericTreeNode}.
    * 
-   * @param parent is the {@link #getParent() parent} to set. It may be
-   *        <code>null</code>. However you should typically only call this
-   *        method once with a non-null argument. It is still legal to
-   *        re-arrange the tree-structure on existing {@link GenericTreeNode}s.
+   * @param parent is the {@link #getParent() parent} to set. It may be <code>null</code>. However you should
+   *        typically only call this method once with a non-null argument. It is still legal to re-arrange the
+   *        tree-structure on existing {@link GenericTreeNode}s.
    */
   protected void setParent(PARENT parent) {
 
@@ -115,12 +112,11 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method adds the given <code>child</code> to the {@link #getChildren()
-   * children} of this {@link GenericTreeNode}.
+   * This method adds the given <code>child</code> to the {@link #getChildren() children} of this
+   * {@link GenericTreeNode}.
    * 
-   * @param child is the {@link #getChildren() child} to add. It's
-   *        {@link #getParent() parent} has to be identical to this
-   *        {@link GenericTreeNode}.
+   * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
+   *        identical to this {@link GenericTreeNode}.
    */
   protected void addChild(CHILD child) {
 
@@ -134,13 +130,12 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method removes the given <code>child</code> from the
-   * {@link #getChildren() children} of this {@link GenericTreeNode}.
+   * This method removes the given <code>child</code> from the {@link #getChildren() children} of this
+   * {@link GenericTreeNode}.
    * 
    * @param child is the {@link #getChildren() child} to remove.
-   * @return <code>true</code> if the given <code>child</code> was contained in
-   *         this {@link GenericTreeNode}s {@link #getChildren() children} and
-   *         has been removed successfully, <code>false</code> otherwise.
+   * @return <code>true</code> if the given <code>child</code> was contained in this {@link GenericTreeNode}s
+   *         {@link #getChildren() children} and has been removed successfully, <code>false</code> otherwise.
    */
   protected boolean removeChild(CHILD child) {
 
@@ -151,12 +146,10 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method removes the {@link #getChildren() child} from the
-   * {@link #getChildren() children} of this {@link GenericTreeNode} at the
-   * given <code>index</code>.
+   * This method removes the {@link #getChildren() child} from the {@link #getChildren() children} of this
+   * {@link GenericTreeNode} at the given <code>index</code>.
    * 
-   * @param index is {@link List#get(int) index} of the {@link #getChildren()
-   *        child} to remove.
+   * @param index is {@link List#get(int) index} of the {@link #getChildren() child} to remove.
    * @return the {@link #getChildren() child} that has actually been removed.
    */
   protected CHILD removeChild(int index) {

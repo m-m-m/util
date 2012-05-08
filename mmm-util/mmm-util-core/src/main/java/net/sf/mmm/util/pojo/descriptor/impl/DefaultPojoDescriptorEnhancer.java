@@ -37,24 +37,18 @@ import net.sf.mmm.util.text.api.Singularizer;
 import net.sf.mmm.util.text.base.EnglishSingularizer;
 
 /**
- * This is an implementation of the {@link PojoDescriptorEnhancer} interface
- * that scans all
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPropertyDescriptors()
- * PropertyDescriptor}s for accessing {@link java.util.Collection}s, {@link Map}
- * s or arrays. For such {@link PojoPropertyDescriptor}s additional
- * {@link PojoPropertyAccessor accessors} that are NOT already present are
- * created and added.<br>
+ * This is an implementation of the {@link PojoDescriptorEnhancer} interface that scans all
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPropertyDescriptors() PropertyDescriptor}s for
+ * accessing {@link java.util.Collection}s, {@link Map} s or arrays. For such {@link PojoPropertyDescriptor}s
+ * additional {@link PojoPropertyAccessor accessors} that are NOT already present are created and added.<br>
  * <br>
- * In a first step the {@link PojoPropertyDescriptor#getName() name} of the
- * {@link PojoPropertyDescriptor} is {@link Singularizer#transform(String)
- * singularized}. If a different singular form is determined, the
- * {@link PojoPropertyAccessor accessors} of the singular-named
- * {@link PojoPropertyDescriptor} are copied to the original
- * {@link PojoPropertyDescriptor} if such accessors do NOT already exist.<br>
- * In a second step {@link PojoPropertyAccessor accessors} that are (still) NOT
- * present in the original {@link PojoPropertyDescriptor} are created and added
- * as virtual delegates on the container-typed getter (and according setter for
- * array-resizing if available). This will happen for the following modes:
+ * In a first step the {@link PojoPropertyDescriptor#getName() name} of the {@link PojoPropertyDescriptor} is
+ * {@link Singularizer#transform(String) singularized}. If a different singular form is determined, the
+ * {@link PojoPropertyAccessor accessors} of the singular-named {@link PojoPropertyDescriptor} are copied to
+ * the original {@link PojoPropertyDescriptor} if such accessors do NOT already exist.<br>
+ * In a second step {@link PojoPropertyAccessor accessors} that are (still) NOT present in the original
+ * {@link PojoPropertyDescriptor} are created and added as virtual delegates on the container-typed getter
+ * (and according setter for array-resizing if available). This will happen for the following modes:
  * <ul>
  * <li>{@link PojoPropertyAccessorOneArgMode#ADD add}</li>
  * <li>{@link PojoPropertyAccessorOneArgMode#REMOVE remove}</li>
@@ -68,18 +62,16 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * 
  * <pre>List&lt;Foo&gt; getChildren()</pre>
  * 
- * is available via the {@link PojoPropertyDescriptor}
- * {@link PojoPropertyDescriptor#getName() named} <code>children</code>. Further
- * the method
+ * is available via the {@link PojoPropertyDescriptor} {@link PojoPropertyDescriptor#getName() named}
+ * <code>children</code>. Further the method
  * 
  * <pre>void addChild(Foo child)</pre>
  * 
- * is available via the {@link PojoPropertyDescriptor}
- * {@link PojoPropertyDescriptor#getName() named} <code>child</code>. This
- * enhancer makes the <code>addChild</code>-method also available via
- * <code>children</code> which is the plural form of <code>child</code>. Further
- * it will add the virtual {@link PojoPropertyAccessor accessors} as described
- * above so it behaves as if the following method would also be present:
+ * is available via the {@link PojoPropertyDescriptor} {@link PojoPropertyDescriptor#getName() named}
+ * <code>child</code>. This enhancer makes the <code>addChild</code>-method also available via
+ * <code>children</code> which is the plural form of <code>child</code>. Further it will add the virtual
+ * {@link PojoPropertyAccessor accessors} as described above so it behaves as if the following method would
+ * also be present:
  * 
  * <pre>
  * Foo getChild(int index) {
@@ -99,16 +91,15 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * }
  * </pre>
  * 
- * This makes it easier for generic access and allows ultimate flexibility since
- * the explicit methods of a POJO always overrule the virtual accessors.
+ * This makes it easier for generic access and allows ultimate flexibility since the explicit methods of a
+ * POJO always overrule the virtual accessors.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
 @Named
-public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent implements
-    PojoDescriptorEnhancer {
+public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent implements PojoDescriptorEnhancer {
 
   /** The singularizer. */
   private Singularizer singularizer;
@@ -133,19 +124,16 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   /**
    * The constructor.
    * 
-   * @param addSingularAccessors - if <code>true</code> each
-   *        {@link PojoPropertyAccessorNonArgMode#GET getter} that points to an
-   *        array, {@link java.util.Collection} or {@link Map} is scanned. If it
-   *        has a plural form for that the {@link #getSingularizer() singular
-   *        form can be determined}, the {@link PojoPropertyAccessor}s of the
-   *        singular {@link PojoPropertyDescriptor} are copied to the plural
-   *        {@link PojoPropertyDescriptor} as long as no such
+   * @param addSingularAccessors - if <code>true</code> each {@link PojoPropertyAccessorNonArgMode#GET getter}
+   *        that points to an array, {@link java.util.Collection} or {@link Map} is scanned. If it has a
+   *        plural form for that the {@link #getSingularizer() singular form can be determined}, the
+   *        {@link PojoPropertyAccessor}s of the singular {@link PojoPropertyDescriptor} are copied to the
+   *        plural {@link PojoPropertyDescriptor} as long as no such {@link PojoPropertyAccessor} already
+   *        exists.
+   * @param addVirtualAccessors - if <code>true</code> for each {@link PojoPropertyAccessorNonArgMode#GET
+   *        getter} that points to an array, {@link java.util.Collection} or {@link Map} according virtual
+   *        {@link PojoPropertyAccessor}s are created and added as long as senseful and no such
    *        {@link PojoPropertyAccessor} already exists.
-   * @param addVirtualAccessors - if <code>true</code> for each
-   *        {@link PojoPropertyAccessorNonArgMode#GET getter} that points to an
-   *        array, {@link java.util.Collection} or {@link Map} according virtual
-   *        {@link PojoPropertyAccessor}s are created and added as long as
-   *        senseful and no such {@link PojoPropertyAccessor} already exists.
    */
   public DefaultPojoDescriptorEnhancer(boolean addSingularAccessors, boolean addVirtualAccessors) {
 
@@ -155,9 +143,8 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   }
 
   /**
-   * This method gets the {@link Singularizer}, which is used to determine
-   * singular forms so e.g. <code>getChildren</code> and <code>addChild</code>
-   * can be matched to the same property.
+   * This method gets the {@link Singularizer}, which is used to determine singular forms so e.g.
+   * <code>getChildren</code> and <code>addChild</code> can be matched to the same property.
    * 
    * @return the {@link Singularizer} to use.
    */
@@ -216,15 +203,12 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   }
 
   /**
-   * This method adds the given <code>accessor</code> to the given
-   * <code>propertyDescriptor</code>.
+   * This method adds the given <code>accessor</code> to the given <code>propertyDescriptor</code>.
    * 
-   * @param propertyDescriptor is the descriptor of the property where to add
-   *        the given <code>accessor</code>.
+   * @param propertyDescriptor is the descriptor of the property where to add the given <code>accessor</code>.
    * @param accessor is the (virtual) accessor to add.
    */
-  private void addVirtualAccessor(AbstractPojoPropertyDescriptor propertyDescriptor,
-      PojoPropertyAccessor accessor) {
+  private void addVirtualAccessor(AbstractPojoPropertyDescriptor propertyDescriptor, PojoPropertyAccessor accessor) {
 
     if (getLogger().isTraceEnabled()) {
       getLogger().trace("adding virtual accessor: " + accessor);
@@ -238,8 +222,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   public void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor) {
 
     for (AbstractPojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
-      PojoPropertyAccessorNonArg getAccessor = propertyDescriptor
-          .getAccessor(PojoPropertyAccessorNonArgMode.GET);
+      PojoPropertyAccessorNonArg getAccessor = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
       if (getAccessor != null) {
         GenericType<?> type = getAccessor.getReturnType();
         Class<?> typeClass = getAccessor.getReturnClass();
@@ -253,14 +236,11 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
             PojoPropertyDescriptor singularDescriptor = descriptor.getPropertyDescriptor(singular);
             if (singularDescriptor != null) {
               for (PojoPropertyAccessor singularAccessor : singularDescriptor.getAccessors()) {
-                PojoPropertyAccessorMode<? extends PojoPropertyAccessor> mode = singularAccessor
-                    .getMode();
+                PojoPropertyAccessorMode<? extends PojoPropertyAccessor> mode = singularAccessor.getMode();
                 PojoPropertyAccessor pluralAccessor = propertyDescriptor.getAccessor(mode);
                 if (pluralAccessor == null) {
                   if (getLogger().isDebugEnabled()) {
-                    getLogger().debug(
-                        "copying accessor '" + singularAccessor + "' to '" + propertyDescriptor
-                            + "'");
+                    getLogger().debug("copying accessor '" + singularAccessor + "' to '" + propertyDescriptor + "'");
                   }
                   propertyDescriptor.putAccessor(singularAccessor);
                 }
@@ -270,17 +250,17 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
           if (this.addVirtualAccessors) {
             // add size accessor
             if (propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET_SIZE) == null) {
-              addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetSize(
-                  this.dependencies, getAccessor));
+              addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetSize(this.dependencies,
+                  getAccessor));
             }
             if (isMap) {
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED) == null) {
-                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetMapped(
-                    this.dependencies, getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetMapped(this.dependencies,
+                    getAccessor));
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED) == null) {
-                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetMapped(
-                    this.dependencies, getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetMapped(this.dependencies,
+                    getAccessor));
               }
             } else {
               // array or collection
@@ -289,24 +269,24 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.ADD) == null) {
                 // we can NOT add 'add'-accessor for arrays without setter
                 if (!typeClass.isArray() || (setAccessor != null)) {
-                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyAdd(
-                      this.dependencies, getAccessor, setAccessor));
+                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyAdd(this.dependencies,
+                      getAccessor, setAccessor));
                 }
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.REMOVE) == null) {
                 // we can NOT add 'remove'-accessor for arrays without setter
                 if (!typeClass.isArray() || (setAccessor != null)) {
-                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyRemove(
-                      this.dependencies, getAccessor, setAccessor));
+                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyRemove(this.dependencies,
+                      getAccessor, setAccessor));
                 }
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED) == null) {
-                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetIndexed(
-                    this.dependencies, getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetIndexed(this.dependencies,
+                    getAccessor));
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED) == null) {
-                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetIndexed(
-                    this.dependencies, getAccessor, setAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetIndexed(this.dependencies,
+                    getAccessor, setAccessor));
               }
             }
           }

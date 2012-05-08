@@ -6,8 +6,8 @@ package net.sf.mmm.util.collection.api;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * This is the interface for a {@link MapFactory} that {@link #create() creates}
- * instances of {@link ConcurrentMap}.
+ * This is the interface for a {@link MapFactory} that {@link #create() creates} instances of
+ * {@link ConcurrentMap}.
  * 
  * @see net.sf.mmm.util.collection.base.ConcurrentHashMapFactory#INSTANCE
  * 

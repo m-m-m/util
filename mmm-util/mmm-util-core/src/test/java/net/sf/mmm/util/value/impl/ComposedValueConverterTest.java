@@ -136,8 +136,7 @@ public class ComposedValueConverterTest {
     ComposedValueConverter converter = getComposedValueConverter();
     String valueSource = "test-case";
     // convert to enum
-    String valueString = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT, valueSource,
-        String.class);
+    String valueString = converter.convertValue(TestEnum.SOME_ENUM_CONSTANT, valueSource, String.class);
     String someEnumConstant = "some-enum-constant";
     Assert.assertEquals(someEnumConstant, valueString);
     TestEnum value;
@@ -160,23 +159,19 @@ public class ComposedValueConverterTest {
     Assert.assertEquals(String.class, value);
     Type classOfNumber = Generic.class.getMethod("getClassOfNumber", ReflectionUtil.NO_PARAMETERS)
         .getGenericReturnType();
-    Type classExtendsNumber = Generic.class.getMethod("getClassExtendsNumber",
-        ReflectionUtil.NO_PARAMETERS).getGenericReturnType();
+    Type classExtendsNumber = Generic.class.getMethod("getClassExtendsNumber", ReflectionUtil.NO_PARAMETERS)
+        .getGenericReturnType();
     value = converter.convertValue("java.lang.Number", valueSource, Class.class, classOfNumber);
     Assert.assertEquals(Number.class, value);
-    value = converter
-        .convertValue("java.lang.Number", valueSource, Class.class, classExtendsNumber);
+    value = converter.convertValue("java.lang.Number", valueSource, Class.class, classExtendsNumber);
     Assert.assertEquals(Number.class, value);
-    value = converter.convertValue("java.lang.Integer", valueSource, Class.class,
-        classExtendsNumber);
+    value = converter.convertValue("java.lang.Integer", valueSource, Class.class, classExtendsNumber);
     Assert.assertEquals(Integer.class, value);
-    value = converter
-        .convertValue("java.lang.Double", valueSource, Class.class, classExtendsNumber);
+    value = converter.convertValue("java.lang.Double", valueSource, Class.class, classExtendsNumber);
     Assert.assertEquals(Double.class, value);
     // Class java.lang.Date does not match Class<? extends Number>
     try {
-      value = converter
-          .convertValue("java.util.Date", valueSource, Class.class, classExtendsNumber);
+      value = converter.convertValue("java.util.Date", valueSource, Class.class, classExtendsNumber);
       ExceptionHelper.failExceptionExpected();
     } catch (RuntimeException e) {
       // OK
@@ -184,8 +179,7 @@ public class ComposedValueConverterTest {
     }
     // Class java.lang.Object does not match Class<? extends Number>
     try {
-      value = converter.convertValue("java.lang.Object", valueSource, Class.class,
-          classExtendsNumber);
+      value = converter.convertValue("java.lang.Object", valueSource, Class.class, classExtendsNumber);
       ExceptionHelper.failExceptionExpected();
     } catch (RuntimeException e) {
       // OK
@@ -240,8 +234,7 @@ public class ComposedValueConverterTest {
     Map<Integer, List<String>> value;
     Type genericType = TypeClass.class.getDeclaredField("mapOfInteger2StringList").getGenericType();
     String valueSource = "test-case";
-    value = converter.convertValue("41=foo,<{[42=bar,thing]}>,43=some", valueSource, Map.class,
-        genericType);
+    value = converter.convertValue("41=foo,<{[42=bar,thing]}>,43=some", valueSource, Map.class, genericType);
     Assert.assertEquals(3, value.size());
     List<String> list41 = value.get(41);
     Assert.assertEquals(1, list41.size());
@@ -271,8 +264,7 @@ public class ComposedValueConverterTest {
       Assert.assertSame(array[i], value[i]);
     }
     // convert 2-dimensional array
-    Object[][] array2 = new Object[][] { new Object[] { s1, s2 }, new Object[] { s2 },
-        new Object[0] };
+    Object[][] array2 = new Object[][] { new Object[] { s1, s2 }, new Object[] { s2 }, new Object[0] };
     String[][] value2 = converter.convertValue(array2, valueSource, String[][].class);
     Assert.assertNotNull(value2);
     Assert.assertEquals(array2.length, value2.length);
@@ -333,8 +325,7 @@ public class ComposedValueConverterTest {
     }
   }
 
-  protected void addConverter(ComposedValueConverterImpl composedConverter,
-      ValueConverter<?, ?> subConverter) {
+  protected void addConverter(ComposedValueConverterImpl composedConverter, ValueConverter<?, ?> subConverter) {
 
     if (subConverter instanceof AbstractComponent) {
       ((AbstractComponent) subConverter).initialize();
@@ -380,8 +371,7 @@ public class ComposedValueConverterTest {
     Assert.assertSame(ValueConverterFooToObject.MAGIC, value);
   }
 
-  private static class ValueConverterToInteger extends
-      AbstractSimpleValueConverter<Object, Integer> {
+  private static class ValueConverterToInteger extends AbstractSimpleValueConverter<Object, Integer> {
 
     public static final Integer MAGIC = Integer.valueOf(4242);
 

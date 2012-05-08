@@ -11,8 +11,8 @@ import net.sf.mmm.util.io.api.StreamClosedException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is an {@link InputStream} that wraps an existing {@link InputStream} and
- * prevents {@link #close() closing} the original {@link InputStream}.<br/>
+ * This is an {@link InputStream} that wraps an existing {@link InputStream} and prevents {@link #close()
+ * closing} the original {@link InputStream}.<br/>
  * This can be useful as workaround for bugs like <a
  * href="http://bugs.sun.com/view_bug.do?bug_id=6539065">6539065</a>.
  * 
@@ -42,8 +42,7 @@ public class NonClosingInputStream extends FilterInputStream {
   }
 
   /**
-   * This inner class is a stream that will always throw a
-   * {@link StreamClosedException}.
+   * This inner class is a stream that will always throw a {@link StreamClosedException}.
    */
   protected static class ClosedInputStream extends FailingInputStream {
 

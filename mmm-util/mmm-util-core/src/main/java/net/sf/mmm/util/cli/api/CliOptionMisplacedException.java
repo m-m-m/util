@@ -6,9 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionMisplacedException} is thrown if an option is misplaced,
- * meaning that it occurred after the first {@link CliArgument argument} has
- * been detected.
+ * A {@link CliOptionMisplacedException} is thrown if an option is misplaced, meaning that it occurred after
+ * the first {@link CliArgument argument} has been detected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

@@ -8,8 +8,7 @@ import net.sf.mmm.util.cli.base.CliParserDependencies;
 import net.sf.mmm.util.cli.base.CliState;
 
 /**
- * This is the default implementation of the
- * {@link net.sf.mmm.util.cli.api.CliParser} interface.
+ * This is the default implementation of the {@link net.sf.mmm.util.cli.api.CliParser} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

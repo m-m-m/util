@@ -13,8 +13,7 @@ package net.sf.mmm.util.lang.api.attribute;
 public abstract interface AttributeReadId<T> {
 
   /**
-   * This method gets the ID used to identify this object. An ID should be
-   * unique.
+   * This method gets the ID used to identify this object. An ID should be unique.
    * 
    * @return the object's ID.
    */

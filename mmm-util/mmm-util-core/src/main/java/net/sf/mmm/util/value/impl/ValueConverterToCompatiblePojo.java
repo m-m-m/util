@@ -22,12 +22,10 @@ import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * POJO to a POJO with the same properties. E.g. this can be useful when you
- * have generated transport-objects (maybe from some strange
- * web-service-framework) and want to convert those from or to your nice
- * equivalent handwritten POJOs.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an POJO to a POJO with the same properties. E.g. this can be useful when you have generated
+ * transport-objects (maybe from some strange web-service-framework) and want to convert those from or to your
+ * nice equivalent handwritten POJOs.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -64,8 +62,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
       if (this.pojoDescriptorBuilderFactory == null) {
         this.pojoDescriptorBuilderFactory = new PojoDescriptorBuilderFactoryImpl();
       }
-      this.pojoDescriptorBuilder = this.pojoDescriptorBuilderFactory
-          .createPublicMethodDescriptorBuilder();
+      this.pojoDescriptorBuilder = this.pojoDescriptorBuilderFactory.createPublicMethodDescriptorBuilder();
     }
     if (this.pojoFactory == null) {
       this.pojoFactory = new GuessingPojoFactory();
@@ -92,8 +89,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
    * {@inheritDoc}
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public <T> T convert(Object value, Object valueSource, GenericType<T> targetType)
-      throws ValueException {
+  public <T> T convert(Object value, Object valueSource, GenericType<T> targetType) throws ValueException {
 
     if (value == null) {
       return null;
@@ -102,20 +98,16 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
     Class<?> targetClass = targetType.getAssignmentClass();
     Object result = this.pojoFactory.newInstance(targetClass);
     PojoDescriptor sourceDescriptor = this.pojoDescriptorBuilder.getDescriptor(sourceClass);
-    PojoDescriptor<?> targetDescriptor = this.pojoDescriptorBuilder
-        .getDescriptor(result.getClass());
-    for (PojoPropertyDescriptor targetPropertyDescriptor : targetDescriptor
-        .getPropertyDescriptors()) {
-      PojoPropertyAccessorOneArg setter = targetPropertyDescriptor
-          .getAccessor(PojoPropertyAccessorOneArgMode.SET);
+    PojoDescriptor<?> targetDescriptor = this.pojoDescriptorBuilder.getDescriptor(result.getClass());
+    for (PojoPropertyDescriptor targetPropertyDescriptor : targetDescriptor.getPropertyDescriptors()) {
+      PojoPropertyAccessorOneArg setter = targetPropertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.SET);
       if (setter != null) {
         try {
-          Object sourcePropertyValue = sourceDescriptor.getProperty(value,
-              targetPropertyDescriptor.getName());
+          Object sourcePropertyValue = sourceDescriptor.getProperty(value, targetPropertyDescriptor.getName());
           GenericType<?> targetPropertyType = setter.getPropertyType();
 
-          Object targetPropertyValue = getComposedValueConverter().convert(sourcePropertyValue,
-              valueSource, targetPropertyType);
+          Object targetPropertyValue = getComposedValueConverter().convert(sourcePropertyValue, valueSource,
+              targetPropertyType);
           setter.invoke(result, targetPropertyValue);
         } catch (Exception e) {
           throw new ValueConvertException(e, value, targetType, valueSource);
@@ -126,8 +118,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   }
 
   /**
-   * This method sets the {@link PojoFactory} instance to used to create new
-   * instances of POJOs.
+   * This method sets the {@link PojoFactory} instance to used to create new instances of POJOs.
    * 
    * @param pojoFactory is the {@link PojoFactory} to use.
    */
@@ -139,8 +130,7 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   }
 
   /**
-   * @return the {@link #setPojoDescriptorBuilder(PojoDescriptorBuilder)
-   *         PojoDescriptorBuilder}.
+   * @return the {@link #setPojoDescriptorBuilder(PojoDescriptorBuilder) PojoDescriptorBuilder}.
    */
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
@@ -148,11 +138,9 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   }
 
   /**
-   * This method sets the {@link PojoDescriptorBuilder} instance to use. If no
-   * such instance is set, the
-   * {@link #setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory)
-   * factory} has to be set and an individual instance will be created
-   * automatically on {@link #initialize() initialization}.
+   * This method sets the {@link PojoDescriptorBuilder} instance to use. If no such instance is set, the
+   * {@link #setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory) factory} has to be set and an
+   * individual instance will be created automatically on {@link #initialize() initialization}.
    * 
    * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to use.
    */
@@ -165,12 +153,10 @@ public class ValueConverterToCompatiblePojo extends AbstractRecursiveValueConver
   /**
    * This method sets the {@link PojoDescriptorBuilderFactory} instance to use.
    * 
-   * @param pojoDescriptorBuilderFactory is the pojoDescriptorBuilderFactory to
-   *        set
+   * @param pojoDescriptorBuilderFactory is the pojoDescriptorBuilderFactory to set
    */
   @Inject
-  public void setPojoDescriptorBuilderFactory(
-      PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
+  public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
 
     getInitializationState().requireNotInitilized();
     this.pojoDescriptorBuilderFactory = pojoDescriptorBuilderFactory;

@@ -110,8 +110,7 @@ public class CharSequenceScannerTest {
   }
 
   /**
-   * Tests
-   * {@link CharSequenceScanner#readUntil(char, boolean, CharScannerSyntax)}.
+   * Tests {@link CharSequenceScanner#readUntil(char, boolean, CharScannerSyntax)}.
    */
   @Test
   public void testReadUntilWithSyntax() {
@@ -165,8 +164,7 @@ public class CharSequenceScannerTest {
     syntax.setAltQuoteEscape('\'');
     syntax.setEntityStart('&');
     syntax.setEntityEnd(';');
-    scanner = new CharSequenceScanner(
-        "Hi \"$\"quote$\"\", 'a''l\\t' and \\\"esc\\'&lt;&gt;&lt;x&gt;!");
+    scanner = new CharSequenceScanner("Hi \"$\"quote$\"\", 'a''l\\t' and \\\"esc\\'&lt;&gt;&lt;x&gt;!");
     result = scanner.readUntil('!', false, syntax);
     Assert.assertEquals("Hi \"quote\", a'l\\t and \"esc'<><x>", result);
     Assert.assertFalse(scanner.hasNext());
@@ -178,8 +176,8 @@ public class CharSequenceScannerTest {
     Assert.assertFalse(scanner.hasNext());
   }
 
-  private CharSequenceScanner check(char stop, boolean acceptEof, CharScannerSyntax syntax,
-      String expected, String input) {
+  private CharSequenceScanner check(char stop, boolean acceptEof, CharScannerSyntax syntax, String expected,
+      String input) {
 
     CharSequenceScanner scanner = new CharSequenceScanner(input);
     String output = scanner.readUntil(stop, acceptEof, syntax);
@@ -262,8 +260,7 @@ public class CharSequenceScannerTest {
     String end = " this is cool!";
     CharSequenceScanner parser = new CharSequenceScanner(start + middle + end);
     String middleNew = "universe";
-    String replaced = parser.getReplaced(middleNew, start.length(), start.length()
-        + middle.length());
+    String replaced = parser.getReplaced(middleNew, start.length(), start.length() + middle.length());
     Assert.assertEquals(start + middleNew + end, replaced);
   }
 

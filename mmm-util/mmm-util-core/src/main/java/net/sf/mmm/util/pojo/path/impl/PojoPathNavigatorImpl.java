@@ -24,8 +24,7 @@ import net.sf.mmm.util.pojo.path.base.AbstractPojoPathNavigator;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.pojo.path.api.PojoPathNavigator} interface.
+ * This is the implementation of the {@link net.sf.mmm.util.pojo.path.api.PojoPathNavigator} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -51,8 +50,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
   }
 
   /**
-   * This method gets the {@link PojoDescriptorBuilder} used for the underlying
-   * reflectional property access.
+   * This method gets the {@link PojoDescriptorBuilder} used for the underlying reflectional property access.
    * 
    * @return the descriptorBuilder
    */
@@ -62,8 +60,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
   }
 
   /**
-   * This method sets the {@link #getDescriptorBuilder() descriptor-builder} to
-   * use.
+   * This method sets the {@link #getDescriptorBuilder() descriptor-builder} to use.
    * 
    * @param descriptorBuilder is the descriptorBuilder to use.
    */
@@ -91,8 +88,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     super.doInitialize();
     if (this.descriptorBuilder == null) {
       if (this.descriptorBuilderFactory != null) {
-        this.descriptorBuilder = this.descriptorBuilderFactory
-            .createPublicMethodDescriptorBuilder();
+        this.descriptorBuilder = this.descriptorBuilderFactory.createPublicMethodDescriptorBuilder();
       } else {
         PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
         builder.initialize();
@@ -106,8 +102,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked", "null" })
-  protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context,
-      PojoPathState state) {
+  protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state) {
 
     CachingPojoPath parentPath = currentPath.getParent();
     PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPath.getPojoType());
@@ -153,8 +148,8 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
    * {@inheritDoc}
    */
   @Override
-  protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context,
-      PojoPathState state, Object parentPojo, Object value) {
+  protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
+      Object parentPojo, Object value) {
 
     PojoDescriptor<?> descriptor = getDescriptorBuilder().getDescriptor(parentPojo.getClass());
     PojoPropertyAccessorOneArg setAccessor = descriptor.getAccessor(currentPath.getSegment(),

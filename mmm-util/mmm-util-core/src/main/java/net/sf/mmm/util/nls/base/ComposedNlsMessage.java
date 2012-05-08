@@ -13,8 +13,8 @@ import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} for
- * composing other objects or messages.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} for composing other objects or
+ * messages.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1

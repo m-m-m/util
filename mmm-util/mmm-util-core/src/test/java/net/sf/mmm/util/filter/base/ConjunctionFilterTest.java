@@ -38,8 +38,7 @@ public class ConjunctionFilterTest {
     assertFalse(filter.accept(42));
 
     // Test two filters
-    filter = new ConjunctionFilter<Integer>(Conjunction.OR, new IntegerFilter(0),
-        new IntegerFilter(1));
+    filter = new ConjunctionFilter<Integer>(Conjunction.OR, new IntegerFilter(0), new IntegerFilter(1));
     assertTrue(filter.accept(0));
     assertTrue(filter.accept(1));
     assertFalse(filter.accept(42));
@@ -63,8 +62,7 @@ public class ConjunctionFilterTest {
     assertTrue(filter.accept(42));
 
     // Test two filters
-    filter = new ConjunctionFilter<Integer>(Conjunction.NOR, new IntegerFilter(0),
-        new IntegerFilter(1));
+    filter = new ConjunctionFilter<Integer>(Conjunction.NOR, new IntegerFilter(0), new IntegerFilter(1));
     assertFalse(filter.accept(0));
     assertFalse(filter.accept(1));
     assertTrue(filter.accept(42));
@@ -88,13 +86,11 @@ public class ConjunctionFilterTest {
     assertFalse(filter.accept(42));
 
     // Test two filters
-    filter = new ConjunctionFilter<Integer>(Conjunction.AND, new IntegerFilter(0),
-        new IntegerFilter(1));
+    filter = new ConjunctionFilter<Integer>(Conjunction.AND, new IntegerFilter(0), new IntegerFilter(1));
     assertFalse(filter.accept(0));
     assertFalse(filter.accept(1));
     assertFalse(filter.accept(42));
-    filter = new ConjunctionFilter<Integer>(Conjunction.AND, new IntegerFilter(0),
-        new IntegerFilter(0));
+    filter = new ConjunctionFilter<Integer>(Conjunction.AND, new IntegerFilter(0), new IntegerFilter(0));
     assertTrue(filter.accept(0));
     assertFalse(filter.accept(1));
     assertFalse(filter.accept(42));
@@ -118,13 +114,11 @@ public class ConjunctionFilterTest {
     assertTrue(filter.accept(42));
 
     // Test two filters
-    filter = new ConjunctionFilter<Integer>(Conjunction.NAND, new IntegerFilter(0),
-        new IntegerFilter(1));
+    filter = new ConjunctionFilter<Integer>(Conjunction.NAND, new IntegerFilter(0), new IntegerFilter(1));
     assertTrue(filter.accept(0));
     assertTrue(filter.accept(1));
     assertTrue(filter.accept(42));
-    filter = new ConjunctionFilter<Integer>(Conjunction.NAND, new IntegerFilter(0),
-        new IntegerFilter(0));
+    filter = new ConjunctionFilter<Integer>(Conjunction.NAND, new IntegerFilter(0), new IntegerFilter(0));
     assertFalse(filter.accept(0));
     assertTrue(filter.accept(1));
     assertTrue(filter.accept(42));

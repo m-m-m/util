@@ -9,14 +9,13 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the abstract base implementation of the
- * {@link PojoDescriptorBuilderFactory} interface.
+ * This is the abstract base implementation of the {@link PojoDescriptorBuilderFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent
-    implements PojoDescriptorBuilderFactory {
+public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent implements
+    PojoDescriptorBuilderFactory {
 
   /**
    * The constructor.

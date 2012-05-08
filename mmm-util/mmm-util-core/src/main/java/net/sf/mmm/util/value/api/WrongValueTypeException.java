@@ -8,8 +8,7 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * This exception is thrown if a value has the wrong type (a different value
- * type was expected).
+ * This exception is thrown if a value has the wrong type (a different value type was expected).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -30,8 +29,8 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Object value, Type expectedType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE,
-        getType(value), KEY_TARGET_TYPE, expectedType));
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE, getType(value),
+        KEY_TARGET_TYPE, expectedType));
   }
 
   /**
@@ -43,25 +42,24 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Throwable nested, Object value, Type expectedType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE,
-        getType(value), KEY_TARGET_TYPE, expectedType));
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE, toMap(KEY_VALUE, value, KEY_VALUE_TYPE, getType(value),
+        KEY_TARGET_TYPE, expectedType));
   }
 
   /**
    * The constructor.
    * 
    * @param value is the wrong value.
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier.
    * @param expectedType is the expected type of the value.
    */
   public WrongValueTypeException(Object value, Object valueSource, Type expectedType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, addToMap(
-        toMap(KEY_VALUE, value, KEY_VALUE_TYPE, getType(value), KEY_TARGET_TYPE, expectedType),
-        KEY_SOURCE, valueSource));
+    super(NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE,
+        addToMap(toMap(KEY_VALUE, value, KEY_VALUE_TYPE, getType(value), KEY_TARGET_TYPE, expectedType), KEY_SOURCE,
+            valueSource));
   }
 
   /**
@@ -69,18 +67,16 @@ public class WrongValueTypeException extends ValueException {
    * 
    * @param nested is the throwable that caused this exception.
    * @param value is the wrong value.
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier.
    * @param expectedType is the expected type of the value.
    */
-  public WrongValueTypeException(Throwable nested, Object value, Object valueSource,
-      Class<?> expectedType) {
+  public WrongValueTypeException(Throwable nested, Object value, Object valueSource, Class<?> expectedType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE, addToMap(
-        toMap(KEY_VALUE, value, KEY_VALUE_TYPE, getType(value), KEY_TARGET_TYPE, expectedType),
-        KEY_SOURCE, valueSource));
+    super(nested, NlsBundleUtilCore.ERR_VALUE_WRONG_TYPE_SOURCE,
+        addToMap(toMap(KEY_VALUE, value, KEY_VALUE_TYPE, getType(value), KEY_TARGET_TYPE, expectedType), KEY_SOURCE,
+            valueSource));
   }
 
   /**

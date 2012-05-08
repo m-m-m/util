@@ -6,9 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliParameterListEmptyException} is thrown if
- * {@link CliParser#parseParameters(String...)} is called without a single
- * parameter.
+ * A {@link CliParameterListEmptyException} is thrown if {@link CliParser#parseParameters(String...)} is
+ * called without a single parameter.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

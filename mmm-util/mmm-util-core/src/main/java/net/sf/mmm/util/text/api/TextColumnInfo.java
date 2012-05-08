@@ -9,10 +9,9 @@ import net.sf.mmm.util.lang.api.HorizontalAlignment;
 
 /**
  * This is a Java-bean for the layout-configuration of a text column.<br>
- * It contains the {@link TextColumnInfo#getWidth() width},
- * {@link TextColumnInfo#getAlignment() alignment},
- * {@link TextColumnInfo#getIndent() indent}, and various other meta-information
- * for the layout of a textual column.
+ * It contains the {@link TextColumnInfo#getWidth() width}, {@link TextColumnInfo#getAlignment() alignment},
+ * {@link TextColumnInfo#getIndent() indent}, and various other meta-information for the layout of a textual
+ * column.
  * 
  * @see LineWrapper
  * 
@@ -22,20 +21,17 @@ import net.sf.mmm.util.lang.api.HorizontalAlignment;
 public class TextColumnInfo {
 
   /**
-   * The minimum {@link #getWidth() width} of a {@link TextColumnInfo column} in
-   * order that {@link #getIndent() indentation} and {@link Hyphenator
-   * hyphenation} will be active. The value is
+   * The minimum {@link #getWidth() width} of a {@link TextColumnInfo column} in order that
+   * {@link #getIndent() indentation} and {@link Hyphenator hyphenation} will be active. The value is
    * {@value #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN}.
    */
   public static final int MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN = 4;
 
   /**
-   * The value used for {@link #getWidth() width} of a {@link TextColumnInfo
-   * column} in order to activate automatic adjustment of the width. The value
-   * is {@value #WIDTH_AUTO_ADJUST}. Please note that automatic adjustment for
-   * multiple columns needs to pre-process the entire
-   * {@link TextColumn#getText() text} of these columns what costs a little bit
-   * of additional performance.
+   * The value used for {@link #getWidth() width} of a {@link TextColumnInfo column} in order to activate
+   * automatic adjustment of the width. The value is {@value #WIDTH_AUTO_ADJUST}. Please note that automatic
+   * adjustment for multiple columns needs to pre-process the entire {@link TextColumn#getText() text} of
+   * these columns what costs a little bit of additional performance.
    */
   public static final int WIDTH_AUTO_ADJUST = -1;
 
@@ -88,18 +84,15 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the width of this column in characters excluding the
-   * {@link #getBorderLeft() left} and {@link #getBorderRight() right border}.<br>
-   * The value has to be positive or may have the value of
-   * {@link #WIDTH_AUTO_ADJUST} (the default). A reasonable value is at least 5,
-   * typically more than 10. However you may use a very low values (&lt;5) for
-   * rendering a small column of a large table, but then do NOT expect nice
-   * results if text is really wrapped.
+   * This method gets the width of this column in characters excluding the {@link #getBorderLeft() left} and
+   * {@link #getBorderRight() right border}.<br>
+   * The value has to be positive or may have the value of {@link #WIDTH_AUTO_ADJUST} (the default). A
+   * reasonable value is at least 5, typically more than 10. However you may use a very low values (&lt;5) for
+   * rendering a small column of a large table, but then do NOT expect nice results if text is really wrapped.
    * 
    * @see #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN
    * 
-   * @return the width of this column or {@link #WIDTH_AUTO_ADJUST} for
-   *         automatic calculation of the width.
+   * @return the width of this column or {@link #WIDTH_AUTO_ADJUST} for automatic calculation of the width.
    */
   public int getWidth() {
 
@@ -115,11 +108,10 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the auto calculated width of the {@link #getBorderLeft()
-   * left} and {@link #getBorderRight() right border}.<br>
+   * This method gets the auto calculated width of the {@link #getBorderLeft() left} and
+   * {@link #getBorderRight() right border}.<br>
    * 
-   * @return {@link #getBorderLeft()}.length() + {@link #getBorderRight()}
-   *         .length()
+   * @return {@link #getBorderLeft()}.length() + {@link #getBorderRight()} .length()
    */
   public int getBorderWidth() {
 
@@ -127,11 +119,9 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the string for the right border of this column. It is
-   * appended to the end of the column text in each line. The default value is
-   * the empty string. For multi-column-layouts this should typically be
-   * {@link #setBorderRight(String) changed} for all columns except the last
-   * one.
+   * This method gets the string for the right border of this column. It is appended to the end of the column
+   * text in each line. The default value is the empty string. For multi-column-layouts this should typically
+   * be {@link #setBorderRight(String) changed} for all columns except the last one.
    * 
    * @return the right border separator.
    */
@@ -141,9 +131,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method sets the {@link #getBorderRight() right border string}. This is
-   * typically a single character (e.g. ' ' or '|'). However it is also possible
-   * to use the empty string or a sequence of characters.
+   * This method sets the {@link #getBorderRight() right border string}. This is typically a single character
+   * (e.g. ' ' or '|'). However it is also possible to use the empty string or a sequence of characters.
    * 
    * @param separator is the right border.
    */
@@ -153,9 +142,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the string for the left border of this column. It is
-   * appended before the column text in each line. The default value is the
-   * empty string.
+   * This method gets the string for the left border of this column. It is appended before the column text in
+   * each line. The default value is the empty string.
    * 
    * @return the left border separator.
    */
@@ -165,9 +153,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method sets the {@link #getBorderLeft() left border string}. This is
-   * typically a single character (e.g. '|'). However it is also possible to use
-   * a sequence of characters.
+   * This method sets the {@link #getBorderLeft() left border string}. This is typically a single character
+   * (e.g. '|'). However it is also possible to use a sequence of characters.
    * 
    * @param separator is the right border.
    */
@@ -177,17 +164,15 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the indent. This string is added after the
-   * {@link #getBorderLeft() left border} and before the text of the column in
-   * each line except the first one. The exact behavior depends on
+   * This method gets the indent. This string is added after the {@link #getBorderLeft() left border} and
+   * before the text of the column in each line except the first one. The exact behavior depends on
    * {@link #getIndentationMode()}. The default is the empty string.<br>
    * <b>ATTENTION:</b><br>
    * <ul>
    * <li>Indentation is ignored if {@link #getWidth() width} is less than
    * {@link #MINIMUM_WIDTH_FOR_INDENT_AND_HYPHEN}.</li>
-   * <li>Be aware that indentation also works with an {@link #getAlignment()
-   * alignment} other than {@link HorizontalAlignment#LEFT left}. However this
-   * might cause confusing results.</li>
+   * <li>Be aware that indentation also works with an {@link #getAlignment() alignment} other than
+   * {@link HorizontalAlignment#LEFT left}. However this might cause confusing results.</li>
    * </ul>
    * 
    * @see #getIndentationMode()
@@ -230,8 +215,7 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the character used to fill up the column. The default
-   * value is a whitespace (' ').
+   * This method gets the character used to fill up the column. The default value is a whitespace (' ').
    * 
    * @return the fill-character.
    */
@@ -251,8 +235,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the characters where a wrap of the line is preferred.
-   * Typical characters are space (' ') or hyphen ('-').
+   * This method gets the characters where a wrap of the line is preferred. Typical characters are space (' ')
+   * or hyphen ('-').
    * 
    * @return the characters where to wrap the text.
    */
@@ -272,9 +256,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the characters to omit at the beginning of each
-   * {@link #getIndent() indented} line. E.g. if space (' ') is contained in
-   * {@link #getWrapChars()} you can add it to omit chars to prevent the space
+   * This method gets the characters to omit at the beginning of each {@link #getIndent() indented} line. E.g.
+   * if space (' ') is contained in {@link #getWrapChars()} you can add it to omit chars to prevent the space
    * to occur at the beginning of the next line.
    * 
    * @return the omitChars
@@ -287,8 +270,7 @@ public class TextColumnInfo {
   /**
    * This method sets the {@link #getOmitChars() characters to omit}.
    * 
-   * @param omitChars are the characters that shall be omitted from the column
-   *        text.
+   * @param omitChars are the characters that shall be omitted from the column text.
    */
   public void setOmitChars(char... omitChars) {
 
@@ -296,9 +278,9 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the {@link IndentationMode} that defines when to add an
-   * {@link #getIndent() indentation}. To turn {@link #getIndent() indentation}
-   * off, simply set {@link #getIndent() indent} to the empty string.<br>
+   * This method gets the {@link IndentationMode} that defines when to add an {@link #getIndent() indentation}
+   * . To turn {@link #getIndent() indentation} off, simply set {@link #getIndent() indent} to the empty
+   * string.<br>
    * The default is {@link IndentationMode#NO_INDENT_AFTER_DOUBLE_NEWLINE}.
    * 
    * @see #getIndent()
@@ -321,8 +303,8 @@ public class TextColumnInfo {
   }
 
   /**
-   * This method gets the {@link Locale} to use for this column. It is used for
-   * line wrapping including hyphenation.
+   * This method gets the {@link Locale} to use for this column. It is used for line wrapping including
+   * hyphenation.
    * 
    * @return the columns locale.
    */
@@ -342,38 +324,30 @@ public class TextColumnInfo {
   }
 
   /**
-   * This enum contains the available modes how to deal with
-   * {@link TextColumnInfo#getIndent() indentation} after
-   * {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newlines}.
+   * This enum contains the available modes how to deal with {@link TextColumnInfo#getIndent() indentation}
+   * after {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newlines}.
    */
   public enum IndentationMode {
 
     /**
-     * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line,
-     * but for each following lines. After
-     * {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the
-     * text, no {@link TextColumnInfo#getIndent() indent} is added for the
-     * following line of the column.
+     * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line, but for each following lines.
+     * After {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the text, no
+     * {@link TextColumnInfo#getIndent() indent} is added for the following line of the column.
      */
     NO_INDENT_AFTER_NEWLINE,
 
     /**
-     * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line,
-     * but for each following lines, even after a single
-     * {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the
-     * text. If a column-line starts with a
-     * {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline}
-     * (duplicate newlines), this indicates a new paragraph. So after an empty
-     * line in the column, no {@link TextColumnInfo#getIndent() indent} is added
-     * for the next line of the column.
+     * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line, but for each following lines,
+     * even after a single {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the text. If
+     * a column-line starts with a {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline}
+     * (duplicate newlines), this indicates a new paragraph. So after an empty line in the column, no
+     * {@link TextColumnInfo#getIndent() indent} is added for the next line of the column.
      */
     NO_INDENT_AFTER_DOUBLE_NEWLINE,
 
     /**
-     * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line,
-     * but for each following lines, even after a
-     * {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the
-     * text.
+     * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line, but for each following lines,
+     * even after a {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the text.
      */
     INDENT_AFTER_NEWLINE
 

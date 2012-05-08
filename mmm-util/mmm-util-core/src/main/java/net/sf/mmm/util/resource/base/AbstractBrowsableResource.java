@@ -13,8 +13,7 @@ import net.sf.mmm.util.resource.api.BrowsableResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractBrowsableResource extends AbstractDataResource implements
-    BrowsableResource {
+public abstract class AbstractBrowsableResource extends AbstractDataResource implements BrowsableResource {
 
   /**
    * The constructor.

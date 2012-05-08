@@ -9,8 +9,8 @@ import java.io.FileFilter;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This class implements the {@link FileFilter} interface by simply delegating
- * to a <code>{@link Filter}&lt;{@link File}&gt;</code>.
+ * This class implements the {@link FileFilter} interface by simply delegating to a
+ * <code>{@link Filter}&lt;{@link File}&gt;</code>.
  * 
  * @see FileStringFilterAdapter
  * 

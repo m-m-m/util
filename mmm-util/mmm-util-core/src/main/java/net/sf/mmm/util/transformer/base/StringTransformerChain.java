@@ -14,14 +14,12 @@ import net.sf.mmm.util.transformer.api.StringTransformerRule;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
- * This class represents a {@link Transformer} for {@link String}s that is build
- * out of a list of {@link StringTransformerRule rules}. It performs its
- * {@link #transform(String) transformation} by passing the given value to the
- * first rule and its result to the next rule and so on. If a rule matched, it
- * can stop further proceeding via the
- * {@link StringTransformerRule#isStopOnMatch() stop-on-match} flag and cause
- * its result to be returned immediately. Otherwise the result of the last rule
- * in the chain is returned (like a left associative operator).
+ * This class represents a {@link Transformer} for {@link String}s that is build out of a list of
+ * {@link StringTransformerRule rules}. It performs its {@link #transform(String) transformation} by passing
+ * the given value to the first rule and its result to the next rule and so on. If a rule matched, it can stop
+ * further proceeding via the {@link StringTransformerRule#isStopOnMatch() stop-on-match} flag and cause its
+ * result to be returned immediately. Otherwise the result of the last rule in the chain is returned (like a
+ * left associative operator).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -45,8 +43,8 @@ public class StringTransformerChain implements Transformer<String> {
   /**
    * The non-arg constructor.<br>
    * <b>NOTE:</b><br>
-   * This constructor should not be called directly! It is only intended for
-   * reflective access (e.g. for JAXB).
+   * This constructor should not be called directly! It is only intended for reflective access (e.g. for
+   * JAXB).
    */
   public StringTransformerChain() {
 
@@ -68,12 +66,11 @@ public class StringTransformerChain implements Transformer<String> {
    * The constructor.
    * 
    * @param id the {@link #getId() ID} of this chain.
-   * @param parent is the parent {@link StringTransformerChain chain} to extend
-   *        or <code>null</code> for a root-chain.
+   * @param parent is the parent {@link StringTransformerChain chain} to extend or <code>null</code> for a
+   *        root-chain.
    * @param rules are the rules of this chain.
    */
-  public StringTransformerChain(String id, StringTransformerChain parent,
-      StringTransformerRule... rules) {
+  public StringTransformerChain(String id, StringTransformerChain parent, StringTransformerRule... rules) {
 
     super();
     this.id = id;
@@ -93,9 +90,8 @@ public class StringTransformerChain implements Transformer<String> {
    * This method implements {@link #transform(String)} recursively.
    * 
    * @param original is the original value.
-   * @param state is the {@link State} used to indicate if a
-   *        {@link StringTransformerRule rule} causes the chain to
-   *        {@link State#stop}.
+   * @param state is the {@link State} used to indicate if a {@link StringTransformerRule rule} causes the
+   *        chain to {@link State#stop}.
    * @return the transformed result.
    */
   private String transformRecursive(String original, State state) {
@@ -136,13 +132,11 @@ public class StringTransformerChain implements Transformer<String> {
    * instead.
    * 
    * @param additionalRules are the rules to add.
-   * @return the chain that also checks the <code>additionalRules</code> if none
-   *         of this rules match.
+   * @return the chain that also checks the <code>additionalRules</code> if none of this rules match.
    */
   public StringTransformerChain extend(StringTransformerRule... additionalRules) {
 
-    StringTransformerRule[] newRules = new StringTransformerRule[this.rules.length
-        + additionalRules.length];
+    StringTransformerRule[] newRules = new StringTransformerRule[this.rules.length + additionalRules.length];
     System.arraycopy(this.rules, 0, newRules, 0, this.rules.length);
     System.arraycopy(additionalRules, 0, newRules, this.rules.length, additionalRules.length);
     return new StringTransformerChain(newRules);
@@ -165,8 +159,7 @@ public class StringTransformerChain implements Transformer<String> {
     }
 
     /**
-     * <code>true</code> if the chain should be stopped, <code>false</code>
-     * otherwise.
+     * <code>true</code> if the chain should be stopped, <code>false</code> otherwise.
      */
     private boolean stop;
   }

@@ -16,14 +16,14 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArg}
- * interface for accessing a {@link Method}.
+ * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArg} interface for accessing a
+ * {@link Method}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropertyAccessorMethod
-    implements PojoPropertyAccessorIndexedOneArg {
+public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropertyAccessorMethod implements
+    PojoPropertyAccessorIndexedOneArg {
 
   /** @see #getMode() */
   private final PojoPropertyAccessorIndexedOneArgMode mode;
@@ -37,15 +37,13 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
    * The constructor.
    * 
    * @param propertyName is the {@link #getName() name} of the property.
-   * @param propertyType is the {@link #getPropertyType() generic type} of the
-   *        property.
+   * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param mode is the {@link #getMode() mode} of access.
    * @param descriptor is the descriptor this accessor is intended for.
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
-   * @param inverted - <code>false</code> if the index is first
-   *        <code>method</code>-argument, <code>true</code> if it is the second
-   *        argument.
+   * @param inverted - <code>false</code> if the index is first <code>method</code>-argument,
+   *        <code>true</code> if it is the second argument.
    */
   public PojoPropertyAccessorIndexedOneArgMethod(String propertyName, Type propertyType,
       PojoPropertyAccessorIndexedOneArgMode mode, PojoDescriptor<?> descriptor,

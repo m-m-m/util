@@ -9,8 +9,7 @@ import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * This class represents the current state of the hyphenation of a specific
- * word.
+ * This class represents the current state of the hyphenation of a specific word.
  * 
  * @see net.sf.mmm.util.text.api.Hyphenator#hyphenate(String, int, int)
  * 
@@ -35,9 +34,8 @@ public class HyphenationState {
   private final char[] normalizedWord;
 
   /**
-   * The hashes of all substrings of {@link #normalizedWord}. The first index
-   * indicates the substring-length - 2, the second is the offset in
-   * {@link #normalizedWord}.
+   * The hashes of all substrings of {@link #normalizedWord}. The first index indicates the substring-length -
+   * 2, the second is the offset in {@link #normalizedWord}.
    */
   private int[][] hashes;
 
@@ -55,18 +53,16 @@ public class HyphenationState {
    * 
    * @param word is the {@link #getWord() word to hyphenate}.
    * @param normalizedWord is the {@link #getNormalizedWord() normalized word}.
-   * @param hyphen is the
-   *        {@link net.sf.mmm.util.text.api.Hyphenator#getHyphen() hyphen}.
-   * @param maxPatternLength is the maximum {@link String#length() length} of
-   *        all {@link HyphenationPattern patterns}.
+   * @param hyphen is the {@link net.sf.mmm.util.text.api.Hyphenator#getHyphen() hyphen}.
+   * @param maxPatternLength is the maximum {@link String#length() length} of all {@link HyphenationPattern
+   *        patterns}.
    * @param offset is the start-position in word. Typically <code>0</code>.
-   * @param hasher is the {@link StringHasher hash-algorithm}. It should be
-   *        fast. The same {@link StringHasher} needs to be used for
-   *        {@link HyphenationPattern#getWordPartHash()}.
+   * @param hasher is the {@link StringHasher hash-algorithm}. It should be fast. The same
+   *        {@link StringHasher} needs to be used for {@link HyphenationPattern#getWordPartHash()}.
    * @param stringUtil is the {@link StringUtil} to use.
    */
-  public HyphenationState(String word, String normalizedWord, char hyphen, int maxPatternLength,
-      int offset, StringHasher hasher, StringUtil stringUtil) {
+  public HyphenationState(String word, String normalizedWord, char hyphen, int maxPatternLength, int offset,
+      StringHasher hasher, StringUtil stringUtil) {
 
     super();
     this.stringUtil = stringUtil;
@@ -89,12 +85,10 @@ public class HyphenationState {
   }
 
   /**
-   * This method gets the hashes of all substrings of the
-   * {@link #getNormalizedWord() normalized word} that have the given
-   * {@link String#length() length}.
+   * This method gets the hashes of all substrings of the {@link #getNormalizedWord() normalized word} that
+   * have the given {@link String#length() length}.
    * 
-   * @param length is the {@link String#length() length} of the
-   *        substrings to get hashes for.
+   * @param length is the {@link String#length() length} of the substrings to get hashes for.
    * @return the array with the hashes.
    */
   private int[] getHashes(int length) {
@@ -109,8 +103,8 @@ public class HyphenationState {
   }
 
   /**
-   * This is the heart of the hyphenation algorithm. It checks if the
-   * {@link HyphenationPattern pattern} is a substring of the
+   * This is the heart of the hyphenation algorithm. It checks if the {@link HyphenationPattern pattern} is a
+   * substring of the
    * 
    * 
    * @param pattern is the pattern to check and potentially apply.
@@ -141,8 +135,7 @@ public class HyphenationState {
   }
 
   /**
-   * This method applies the {@link HyphenationPattern pattern} matching at the
-   * given <code>offset</code>.
+   * This method applies the {@link HyphenationPattern pattern} matching at the given <code>offset</code>.
    * 
    * @param pattern is the matching {@link HyphenationPattern pattern}.
    * @param pos is the offset in the word to hyphenate.
@@ -153,17 +146,15 @@ public class HyphenationState {
     HyphenationPatternPosition[] positions = pattern.getHyphenationPositions();
     for (HyphenationPatternPosition hyphenationPosition : positions) {
       int i = hyphenationPosition.index + internalOffset;
-      if ((i >= 0) && (i < this.rankings.length)
-          && (hyphenationPosition.ranking > this.rankings[i])) {
+      if ((i >= 0) && (i < this.rankings.length) && (hyphenationPosition.ranking > this.rankings[i])) {
         this.rankings[i] = hyphenationPosition.ranking;
       }
     }
   }
 
   /**
-   * This method creates the
-   * {@link HyphenationImpl#HyphenationImpl(String, char, int[])
-   * hyphenationPoints} of a hyphenated word.
+   * This method creates the {@link HyphenationImpl#HyphenationImpl(String, char, int[]) hyphenationPoints} of
+   * a hyphenated word.
    * 
    * @see #toHyphenation()
    * 
@@ -212,9 +203,8 @@ public class HyphenationState {
   }
 
   /**
-   * This method gets the normalized word. This is the {@link #getWord() word}
-   * in normalized form (lower case) and surrounded by
-   * {@link HyphenationPattern#TERMINATOR}.
+   * This method gets the normalized word. This is the {@link #getWord() word} in normalized form (lower case)
+   * and surrounded by {@link HyphenationPattern#TERMINATOR}.
    * 
    * @return the normalizedWord.
    */
@@ -224,9 +214,9 @@ public class HyphenationState {
   }
 
   /**
-   * This method generates a string with the given <code>word</code> including
-   * the {@link HyphenationPatternPosition#ranking ranked} hyphenation points.
-   * It is intended for debugging purposes.
+   * This method generates a string with the given <code>word</code> including the
+   * {@link HyphenationPatternPosition#ranking ranked} hyphenation points. It is intended for debugging
+   * purposes.
    * 
    * @return the word with hyphenation ranks.
    */

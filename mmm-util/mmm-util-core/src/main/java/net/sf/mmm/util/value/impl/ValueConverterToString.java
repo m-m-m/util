@@ -18,9 +18,8 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to a {@link String}.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an {@link Object} to a {@link String}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

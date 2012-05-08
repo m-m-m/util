@@ -9,8 +9,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link RuntimeIoException} is like an {@link java.io.IOException} but as a
- * {@link RuntimeException}. Besides it has native language support build in.
+ * A {@link RuntimeIoException} is like an {@link java.io.IOException} but as a {@link RuntimeException}.
+ * Besides it has native language support build in.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -41,9 +41,8 @@ public class RuntimeIoException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param nested is the {@link #getCause() cause} of this exception. This
-   *        should be an {@link java.io.IOException}. However it may also be an
-   *        {@link java.io.IOError}.
+   * @param nested is the {@link #getCause() cause} of this exception. This should be an
+   *        {@link java.io.IOException}. However it may also be an {@link java.io.IOError}.
    */
   public RuntimeIoException(Throwable nested) {
 
@@ -53,9 +52,8 @@ public class RuntimeIoException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param nested is the {@link #getCause() cause} of this exception. This
-   *        should be an {@link java.io.IOException}. However it may also be an
-   *        {@link java.io.IOError}.
+   * @param nested is the {@link #getCause() cause} of this exception. This should be an
+   *        {@link java.io.IOException}. However it may also be an {@link java.io.IOError}.
    * @param mode is the {@link IoMode}.
    */
   public RuntimeIoException(Throwable nested, IoMode mode) {
@@ -69,18 +67,14 @@ public class RuntimeIoException extends NlsRuntimeException {
    * @see #toMap(String, Object, String, Object)
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   *        arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        filled into <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
-  protected RuntimeIoException(Throwable nested, String internationalizedMessage,
-      Map<String, Object> arguments) {
+  protected RuntimeIoException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
   }
@@ -90,15 +84,12 @@ public class RuntimeIoException extends NlsRuntimeException {
    * 
    * @see #toMap(String, Object, String, Object)
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   *        arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        filled into <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
   protected RuntimeIoException(String internationalizedMessage, Map<String, Object> arguments) {
 
@@ -106,9 +97,8 @@ public class RuntimeIoException extends NlsRuntimeException {
   }
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   * message} according to the given <code>mode</code>.
+   * This method gets the {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() message}
+   * according to the given <code>mode</code>.
    * 
    * @param mode is the {@link IoMode} or <code>null</code> if unknown.
    * @return the message according to <code>mode</code>.

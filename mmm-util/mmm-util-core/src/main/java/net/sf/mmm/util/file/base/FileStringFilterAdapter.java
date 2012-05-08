@@ -9,12 +9,10 @@ import java.io.FileFilter;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This class implements the {@link FileFilter} interface by simply delegating
- * to a <code>{@link Filter}&lt;{@link String}&gt;</code>. It will get the
- * {@link File#getPath() path and filename} of the {@link #accept(File) file to
- * check} and normalizes all {@link File#separator separators} to
- * <code>'/'</code>. The resulting string is passed to the adapted
- * {@link Filter}.
+ * This class implements the {@link FileFilter} interface by simply delegating to a
+ * <code>{@link Filter}&lt;{@link String}&gt;</code>. It will get the {@link File#getPath() path and filename}
+ * of the {@link #accept(File) file to check} and normalizes all {@link File#separator separators} to
+ * <code>'/'</code>. The resulting string is passed to the adapted {@link Filter}.
  * 
  * @see FileFilterAdapter
  * 

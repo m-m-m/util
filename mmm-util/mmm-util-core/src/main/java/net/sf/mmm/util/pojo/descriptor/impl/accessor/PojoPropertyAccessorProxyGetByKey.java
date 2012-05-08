@@ -10,9 +10,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
- * This is an implementation of the {@link PojoPropertyAccessorNonArg} acting as
- * as a {@link PojoPropertyAccessorNonArgMode#GET getter} that
- * {@link #getDelegate() delegates} to a
+ * This is an implementation of the {@link PojoPropertyAccessorNonArg} acting as as a
+ * {@link PojoPropertyAccessorNonArgMode#GET getter} that {@link #getDelegate() delegates} to a
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED
  * mapped-getter} using a fixed key.
  * 

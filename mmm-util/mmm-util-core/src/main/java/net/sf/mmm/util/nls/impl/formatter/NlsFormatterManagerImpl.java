@@ -15,8 +15,7 @@ import net.sf.mmm.util.nls.impl.NlsDependenciesImpl;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.nls.api.NlsFormatterManager} interface.
+ * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsFormatterManager} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -77,8 +76,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
 
     if (TYPE_NUMBER.equals(formatType)) {
       return new NlsFormatterNumberPattern(subformat);
-    } else if ((TYPE_DATE.equals(formatType)) || (TYPE_TIME.equals(formatType))
-        || (TYPE_DATETIME.equals(formatType))) {
+    } else if ((TYPE_DATE.equals(formatType)) || (TYPE_TIME.equals(formatType)) || (TYPE_DATETIME.equals(formatType))) {
       return new NlsFormatterDatePattern(subformat);
     } else {
       return super.getSubFormatter(formatType, subformat);

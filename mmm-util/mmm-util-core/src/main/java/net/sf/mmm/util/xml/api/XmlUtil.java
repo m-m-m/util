@@ -12,8 +12,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the interface for a collection of utility functions that help to deal
- * with XML.
+ * This is the interface for a collection of utility functions that help to deal with XML.
  * 
  * @see DomUtil
  * @see StaxUtil
@@ -102,96 +101,78 @@ public interface XmlUtil {
   String NAMESPACE_URI_RELAXNG_ANNOTATION = "http://relaxng.org/ns/annotation/1.0".intern();
 
   /**
-   * This method escapes the given <code>string</code> for usage in XML (or
-   * HTML, etc.).
+   * This method escapes the given <code>string</code> for usage in XML (or HTML, etc.).
    * 
    * @param string is the string to escape.
-   * @param escapeQuotations if <code>true</code> also the ASCII quotation
-   *        characters (apos <code>'\''</code> and quot <code>'"'</code>) will
-   *        be escaped, else if <code>false</code> quotations are untouched. Set
-   *        this to <code>true</code> if you are writing the value of an
-   *        attribute.
+   * @param escapeQuotations if <code>true</code> also the ASCII quotation characters (apos <code>'\''</code>
+   *        and quot <code>'"'</code>) will be escaped, else if <code>false</code> quotations are untouched.
+   *        Set this to <code>true</code> if you are writing the value of an attribute.
    * @return the escaped string.
    */
   String escapeXml(String string, boolean escapeQuotations);
 
   /**
-   * This method writes the given <code>string</code> to the <code>writer</code>
-   * while escaping special characters for XML (or HTML, etc.).
+   * This method writes the given <code>string</code> to the <code>writer</code> while escaping special
+   * characters for XML (or HTML, etc.).
    * 
    * @param string is the string to escape.
    * @param writer is where to write the string to.
-   * @param escapeQuotations if <code>true</code> also the ASCII quotation
-   *        characters (apos <code>'\''</code> and quot <code>'"'</code>) will
-   *        be escaped, else if <code>false</code> quotations are untouched. Set
-   *        this to <code>true</code> if you are writing the value of an
-   *        attribute.
-   * @throws RuntimeIoException if the <code>writer</code> produced an I/O
-   *         error.
+   * @param escapeQuotations if <code>true</code> also the ASCII quotation characters (apos <code>'\''</code>
+   *        and quot <code>'"'</code>) will be escaped, else if <code>false</code> quotations are untouched.
+   *        Set this to <code>true</code> if you are writing the value of an attribute.
+   * @throws RuntimeIoException if the <code>writer</code> produced an I/O error.
    */
   void escapeXml(String string, Writer writer, boolean escapeQuotations) throws RuntimeIoException;
 
   /**
-   * This method creates a {@link Reader} from the given
-   * <code>inputStream</code> that uses the encoding specified in the
-   * (potential) XML header of the {@link InputStream}s content. If no XML
-   * header is specified, the default encoding is used.
+   * This method creates a {@link Reader} from the given <code>inputStream</code> that uses the encoding
+   * specified in the (potential) XML header of the {@link InputStream}s content. If no XML header is
+   * specified, the default encoding is used.
    * 
-   * @param inputStream is a fresh input-stream that is supposed to point to the
-   *        content of an XML document.
-   * @return a reader on the given <code>inputStream</code> that takes respect
-   *         on the encoding specified in the (potential) XML header.
-   * @throws RuntimeIoException if an I/O error occurred when trying to read the
-   *         XML header.
+   * @param inputStream is a fresh input-stream that is supposed to point to the content of an XML document.
+   * @return a reader on the given <code>inputStream</code> that takes respect on the encoding specified in
+   *         the (potential) XML header.
+   * @throws RuntimeIoException if an I/O error occurred when trying to read the XML header.
    */
   Reader createXmlReader(InputStream inputStream) throws RuntimeIoException;
 
   /**
-   * This method creates a {@link Reader} from the given
-   * <code>inputStream</code> that uses the encoding specified in the
-   * (potential) XML header of the {@link InputStream}s content. If no XML
-   * header is specified, the default encoding is used.
+   * This method creates a {@link Reader} from the given <code>inputStream</code> that uses the encoding
+   * specified in the (potential) XML header of the {@link InputStream}s content. If no XML header is
+   * specified, the default encoding is used.
    * 
-   * @param inputStream is a fresh input-stream that is supposed to point to the
-   *        content of an XML document.
-   * @param defaultCharset is the {@link Charset} used if NO encoding was
-   *        specified via an XML header.
-   * @return a reader on the given <code>inputStream</code> that takes respect
-   *         on the encoding specified in the (potential) XML header.
-   * @throws RuntimeIoException if an I/O error occurred when trying to read the
-   *         XML header.
+   * @param inputStream is a fresh input-stream that is supposed to point to the content of an XML document.
+   * @param defaultCharset is the {@link Charset} used if NO encoding was specified via an XML header.
+   * @return a reader on the given <code>inputStream</code> that takes respect on the encoding specified in
+   *         the (potential) XML header.
+   * @throws RuntimeIoException if an I/O error occurred when trying to read the XML header.
    */
   Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws RuntimeIoException;
 
   /**
    * This method resolves an HTML entity given by <code>entityName</code>.
    * 
-   * @param entityName is the bare name of the entity (e.g. "amp" or "uuml").
-   *        Please note that entity-names are case-sensitive.
-   * @return the value of the entity or <code>null</code> if no entity exists
-   *         for the given <code>entityName</code>.
+   * @param entityName is the bare name of the entity (e.g. "amp" or "uuml"). Please note that entity-names
+   *        are case-sensitive.
+   * @return the value of the entity or <code>null</code> if no entity exists for the given
+   *         <code>entityName</code>.
    */
   Character resolveEntity(String entityName);
 
   /**
-   * This method extracts the plain text from the given
-   * <code>htmlFragment</code> and appends it to the given <code>buffer</code>.
-   * This includes removing tags, un-escaping entities and parsing CDATA
-   * sections. Unlike DOM parsers this method is completely fault tolerant, fast
-   * and uses a minimum amount of memory.<br>
+   * This method extracts the plain text from the given <code>htmlFragment</code> and appends it to the given
+   * <code>buffer</code>. This includes removing tags, un-escaping entities and parsing CDATA sections. Unlike
+   * DOM parsers this method is completely fault tolerant, fast and uses a minimum amount of memory.<br>
    * <b>ATTENTION:</b><br>
-   * Be aware that the caller is responsible for reading the HTML with the
-   * proper encoding (according to Content-Type from HTTP header and/or META
-   * tag).
+   * Be aware that the caller is responsible for reading the HTML with the proper encoding (according to
+   * Content-Type from HTTP header and/or META tag).
    * 
    * @param htmlFragment is the HTML fragment to parse.
    * @param buffer is the buffer where the plain text will be appended to.
-   * @param parserState is the state to continue on a subsequent call for
-   *        multiple <code>htmlFragment</code>s of the same HTML-document or
-   *        <code>null</code> for a fresh start.
-   * @return the state at the end of <code>htmlFragment</code>. You can pass
-   *         this as <code>parserState</code> argument on subsequent call to
-   *         continue parsing.
+   * @param parserState is the state to continue on a subsequent call for multiple <code>htmlFragment</code>s
+   *        of the same HTML-document or <code>null</code> for a fresh start.
+   * @return the state at the end of <code>htmlFragment</code>. You can pass this as <code>parserState</code>
+   *         argument on subsequent call to continue parsing.
    */
   ParserState extractPlainText(String htmlFragment, StringBuilder buffer, ParserState parserState);
 

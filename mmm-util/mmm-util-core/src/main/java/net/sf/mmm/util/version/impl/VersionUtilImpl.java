@@ -40,28 +40,25 @@ import net.sf.mmm.util.version.api.VersionIdentifierFormatter;
 import net.sf.mmm.util.version.api.VersionUtil;
 
 /**
- * This is the abstract base-implementation of the {@link VersionUtil}
- * interface.
+ * This is the abstract base-implementation of the {@link VersionUtil} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
 @Singleton
 @Named
-public class VersionUtilImpl extends AbstractLoggableComponent implements
-    VersionUtil {
+public class VersionUtilImpl extends AbstractLoggableComponent implements VersionUtil {
 
   /** A {@link CharFilter} that accepts all but ASCII letters. */
   private static final CharFilter INFIX_FILTER = new ConjunctionCharFilter(Conjunction.NOR,
       CharFilter.ASCII_LETTER_FILTER, new ListCharFilter(true, '$', '(', ')', '{', '}'));
 
   /** A {@link CharFilter} that accepts common separators. */
-  private static final CharFilter SEPARATOR_FILTER = new ListCharFilter(true, '.', '-', '_', '#',
-      ',');
+  private static final CharFilter SEPARATOR_FILTER = new ListCharFilter(true, '.', '-', '_', '#', ',');
 
   /** A {@link CharFilter} that accepts all but separators and digits. */
-  private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR,
-      SEPARATOR_FILTER, CharFilter.LATIN_DIGIT_FILTER);
+  private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR, SEPARATOR_FILTER,
+      CharFilter.LATIN_DIGIT_FILTER);
 
   /** @see #getInstance() */
   private static VersionUtil instance;
@@ -90,17 +87,13 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
   }
 
   /**
-   * This method gets the singleton instance of this
-   * {@link VersionUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the
-   * {@link net.sf.mmm.util.component.api.IocContainer container-framework} of
-   * your choice. To wire up the dependent components everything is properly
-   * annotated using annotations (JSR-250 and JSR-330). If your container does
-   * NOT support this, you should consider using a better one.
+   * This method gets the singleton instance of this {@link VersionUtilImpl}.<br>
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the
+   * dependent components everything is properly annotated using annotations (JSR-250 and JSR-330). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -163,8 +156,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
   }
 
   /**
-   * @return the {@link Set} containing the prefix of the {@link Map#keySet()
-   *         keys} before the first hyphen.
+   * @return the {@link Set} containing the prefix of the {@link Map#keySet() keys} before the first hyphen.
    */
   protected Set<String> getPhasePrefixSet() {
 
@@ -236,8 +228,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
   }
 
   /**
-   * This method puts the given <code>phase</code> in the given <code>map</code>
-   * using normalized variants of the given <code>key</code>.
+   * This method puts the given <code>phase</code> in the given <code>map</code> using normalized variants of
+   * the given <code>key</code>.
    * 
    * @param map is the {@link #getPhaseMap()}.
    * @param key is the key.
@@ -307,15 +299,15 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
       // snapshot
       if (scanner.expectStrict(VersionIdentifier.SNAPSHOT, true)) {
         if (snapshot) {
-          throw new NlsParseException(new DuplicateObjectException(Boolean.TRUE,
-              VersionIdentifier.SNAPSHOT), versionString, VersionIdentifier.class);
+          throw new NlsParseException(new DuplicateObjectException(Boolean.TRUE, VersionIdentifier.SNAPSHOT),
+              versionString, VersionIdentifier.class);
         }
         snapshot = true;
       } else if (scanner.expectStrict("rev", true)) {
         // revision
         if (revision != null) {
-          throw new NlsParseException(new DuplicateObjectException(revision, "revision"),
-              versionString, VersionIdentifier.class);
+          throw new NlsParseException(new DuplicateObjectException(revision, "revision"), versionString,
+              VersionIdentifier.class);
         }
         segmentsCompleted = true;
         scanner.expectStrict("ision", true);
@@ -328,8 +320,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
         // timestamp?
         // 19991231, 1999-12-31
         if ((numberString.length() >= 4) && (numberString.length() <= 14)) {
-          if (numberString.startsWith("19") || numberString.startsWith("20")
-              || numberString.startsWith("21")) {
+          if (numberString.startsWith("19") || numberString.startsWith("20") || numberString.startsWith("21")) {
             // longest ISO-8601 format is 28 characters
             // 1999-12-31T23:59:59+12:45:00
             // shortest format is 8 characters
@@ -342,15 +333,15 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
               int end = isoMatcher.end();
               buffer.setLength(end);
               if (timestamp != null) {
-                throw new NlsParseException(new DuplicateObjectException(buffer, "timestamp"),
-                    versionString, VersionIdentifier.class);
+                throw new NlsParseException(new DuplicateObjectException(buffer, "timestamp"), versionString,
+                    VersionIdentifier.class);
               }
               timestamp = this.iso8601Util.parseDate(buffer.toString());
               scanner.read(end - numberString.length());
             } else {
               // support other date formats?
-              throw new NlsParseException(new NlsParseException(dateString, Date.class),
-                  versionString, VersionIdentifier.class);
+              throw new NlsParseException(new NlsParseException(dateString, Date.class), versionString,
+                  VersionIdentifier.class);
             }
           }
         }
@@ -384,15 +375,14 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
           }
           if (currentPhase == null) {
             if (label != null) {
-              throw new NlsParseException(
-                  new DuplicateObjectException(phaseOrLabel, "label", label), versionString,
+              throw new NlsParseException(new DuplicateObjectException(phaseOrLabel, "label", label), versionString,
                   VersionIdentifier.class);
             }
             label = phaseOrLabel;
           } else {
             if (phase != null) {
-              throw new NlsParseException(new DuplicateObjectException(currentPhase,
-                  DevelopmentPhase.class, phase), versionString, VersionIdentifier.class);
+              throw new NlsParseException(new DuplicateObjectException(currentPhase, DevelopmentPhase.class, phase),
+                  versionString, VersionIdentifier.class);
             }
             phase = currentPhase;
             phaseAlias = phaseOrLabel;
@@ -410,8 +400,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
     for (int i = 0; i < versionSegments.length; i++) {
       versionSegments[i] = versionSegmentList.get(i).intValue();
     }
-    VersionIdentifierImpl result = new VersionIdentifierImpl(versionString, label, timestamp,
-        revision, phase, phaseAlias, phaseNumber, snapshot, versionSegments);
+    VersionIdentifierImpl result = new VersionIdentifierImpl(versionString, label, timestamp, revision, phase,
+        phaseAlias, phaseNumber, snapshot, versionSegments);
     if (normalizeFormat) {
       result.setStringRepresentation(this.defaultFormatter.format(result));
     }
@@ -434,11 +424,10 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
    * @param formatPattern is the format pattern.
    * @param infixBuffer is a {@link StringBuilder} containing the current infix.
    * @param status is the {@link FormatPatternStatus}.
-   * @return the sub {@link Formatter} or <code>null</code> to continue parsing
-   *         the infix.
+   * @return the sub {@link Formatter} or <code>null</code> to continue parsing the infix.
    */
-  protected Formatter<VersionIdentifier> parseSubFormatter(CharSequenceScanner scanner,
-      String formatPattern, StringBuilder infixBuffer, FormatPatternStatus status) {
+  protected Formatter<VersionIdentifier> parseSubFormatter(CharSequenceScanner scanner, String formatPattern,
+      StringBuilder infixBuffer, FormatPatternStatus status) {
 
     char c = scanner.next();
     if (c == 'V') {
@@ -459,8 +448,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
         scanner.require('}');
       }
       status.versionSegmentsCount++;
-      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(),
-          segmentSeparator, minimumSegmentCount, maximumSegmentCount, segmentPadding);
+      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(), segmentSeparator,
+          minimumSegmentCount, maximumSegmentCount, segmentPadding);
     } else if ((c == 'P') || (c == 'A') || (c == 'L')) {
       int maximumLength = 0;
       if (scanner.expect('{')) {
@@ -483,12 +472,10 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
         scanner.require('}');
       }
       if (c == 'R') {
-        return new VersionIdentifierFormatterRevision(this.stringUtil, infixBuffer.toString(),
-            padding);
+        return new VersionIdentifierFormatterRevision(this.stringUtil, infixBuffer.toString(), padding);
       } else {
         status.phaseNumberCount++;
-        return new VersionIdentifierFormatterPhaseNumber(this.stringUtil, infixBuffer.toString(),
-            padding);
+        return new VersionIdentifierFormatterPhaseNumber(this.stringUtil, infixBuffer.toString(), padding);
       }
     } else if (c == 'T') {
       DateFormat dateFormat = null;
@@ -499,8 +486,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
         }
         dateFormat = new SimpleDateFormat(datePattern);
       }
-      return new VersionIdentifierFormatterTimestamp(this.iso8601Util, dateFormat,
-          infixBuffer.toString());
+      return new VersionIdentifierFormatterTimestamp(this.iso8601Util, dateFormat, infixBuffer.toString());
     } else if (c == 'S') {
       String snapshotIndicator = VersionIdentifier.SNAPSHOT;
       if (scanner.expect('{')) {
@@ -538,8 +524,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
     while (scanner.hasNext()) {
       infixBuffer.append(scanner.readWhile(INFIX_FILTER));
       if (scanner.hasNext()) {
-        Formatter<VersionIdentifier> formatter = parseSubFormatter(scanner, formatPattern,
-            infixBuffer, status);
+        Formatter<VersionIdentifier> formatter = parseSubFormatter(scanner, formatPattern, infixBuffer, status);
         if (formatter != null) {
           subFormatterList.add(formatter);
           infixBuffer.setLength(0);
@@ -562,8 +547,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
 
   /**
    * This inner class holds the status used to determine if a
-   * {@link VersionUtilImpl#createFormatter(String, boolean)
-   * formatPattern} is {@link #isStrict() strict}.
+   * {@link VersionUtilImpl#createFormatter(String, boolean) formatPattern} is {@link #isStrict() strict}.
    */
   protected static class FormatPatternStatus {
 
@@ -583,13 +567,11 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements
     private int snapshotCount;
 
     /**
-     * @return <code>true</code> if valid for strict mode, <code>false</code>
-     *         otherwise.
+     * @return <code>true</code> if valid for strict mode, <code>false</code> otherwise.
      */
     public boolean isStrict() {
 
-      return ((this.versionSegmentsCount == 1) && (this.phaseCount == 1)
-          && (this.phaseNumberCount == 1) && (this.snapshotCount == 1));
+      return ((this.versionSegmentsCount == 1) && (this.phaseCount == 1) && (this.phaseNumberCount == 1) && (this.snapshotCount == 1));
     }
 
   }

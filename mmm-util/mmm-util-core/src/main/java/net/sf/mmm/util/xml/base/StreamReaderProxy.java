@@ -9,10 +9,9 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.util.StreamReaderDelegate;
 
 /**
- * This is an implementation of {@link XMLStreamReader} interface that adapts an
- * {@link XMLStreamReader}. It therefore extends {@link StreamReaderDelegate}
- * but adds the default implementation to {@link #nextTag()} to allow overriding
- * {@link #next()} properly.
+ * This is an implementation of {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}. It
+ * therefore extends {@link StreamReaderDelegate} but adds the default implementation to {@link #nextTag()} to
+ * allow overriding {@link #next()} properly.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -39,27 +38,22 @@ public class StreamReaderProxy extends StreamReaderDelegate {
   /**
    * {@inheritDoc}
    * 
-   * We override this method to get sure that it delegates to our
-   * {@link #next()} instead of the {@link #next()} of the {@link #getParent()
-   * delegate}.
+   * We override this method to get sure that it delegates to our {@link #next()} instead of the
+   * {@link #next()} of the {@link #getParent() delegate}.
    */
   @Override
   public int nextTag() throws javax.xml.stream.XMLStreamException {
 
     int eventType = next();
     while ((eventType == XMLStreamConstants.CHARACTERS && isWhiteSpace())
-        || (eventType == XMLStreamConstants.CDATA && isWhiteSpace())
-        || eventType == XMLStreamConstants.SPACE
-        || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
-        || eventType == XMLStreamConstants.COMMENT) {
+        || (eventType == XMLStreamConstants.CDATA && isWhiteSpace()) || eventType == XMLStreamConstants.SPACE
+        || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT) {
       eventType = next();
     }
 
-    if (eventType != XMLStreamConstants.START_ELEMENT
-        && eventType != XMLStreamConstants.END_ELEMENT) {
+    if (eventType != XMLStreamConstants.START_ELEMENT && eventType != XMLStreamConstants.END_ELEMENT) {
 
-      throw new XMLStreamException("expected start or end tag (but found " + eventType + ")",
-          getLocation());
+      throw new XMLStreamException("expected start or end tag (but found " + eventType + ")", getLocation());
     }
 
     return eventType;

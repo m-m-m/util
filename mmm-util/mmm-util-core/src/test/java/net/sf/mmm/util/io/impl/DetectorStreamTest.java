@@ -49,10 +49,8 @@ public class DetectorStreamTest {
     DetectorStreamProviderImpl provider = new DetectorStreamProviderImpl();
     provider.setByteArrayPool(pool);
     List<DetectorStreamProcessorFactory> processorFactoryList = new ArrayList<DetectorStreamProcessorFactory>();
-    processorFactoryList.add(new SimpleDetectorStreamProcessorFactory(
-        DetectorStreamProcessorCountX.class));
-    processorFactoryList.add(new SimpleDetectorStreamProcessorFactory(
-        DetectorStreamProcessorReplaceXx.class));
+    processorFactoryList.add(new SimpleDetectorStreamProcessorFactory(DetectorStreamProcessorCountX.class));
+    processorFactoryList.add(new SimpleDetectorStreamProcessorFactory(DetectorStreamProcessorReplaceXx.class));
     provider.setProcessorFactoryList(processorFactoryList);
     provider.initialize();
     return provider;
@@ -69,9 +67,8 @@ public class DetectorStreamTest {
   }
 
   /**
-   * Test that a text file is properly read while scanned by
-   * {@link DetectorStreamProcessorCountX} and afterwards manipulated by
-   * {@link DetectorStreamProcessorReplaceXx}.
+   * Test that a text file is properly read while scanned by {@link DetectorStreamProcessorCountX} and
+   * afterwards manipulated by {@link DetectorStreamProcessorReplaceXx}.
    * 
    * @see DetectorStreamProvider#wrapInputStream(InputStream)
    * 
@@ -114,9 +111,8 @@ public class DetectorStreamTest {
   }
 
   /**
-   * Test that a text file is properly written while scanned by
-   * {@link DetectorStreamProcessorCountX} and afterwards manipulated by
-   * {@link DetectorStreamProcessorReplaceXx}.
+   * Test that a text file is properly written while scanned by {@link DetectorStreamProcessorCountX} and
+   * afterwards manipulated by {@link DetectorStreamProcessorReplaceXx}.
    * 
    * @see DetectorStreamProvider#wrapOutputStream(java.io.OutputStream)
    * 
@@ -190,9 +186,8 @@ public class DetectorStreamTest {
   }
 
   /**
-   * This inner class is a {@link ByteArrayPool} that can be used to test that
-   * {@link #borrow() borrowed} buffers get {@link #release(byte[]) released}
-   * properly.
+   * This inner class is a {@link ByteArrayPool} that can be used to test that {@link #borrow() borrowed}
+   * buffers get {@link #release(byte[]) released} properly.
    */
   protected static class DummyByteArrayPool implements ByteArrayPool {
 

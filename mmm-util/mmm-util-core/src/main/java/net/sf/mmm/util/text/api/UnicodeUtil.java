@@ -6,8 +6,7 @@ package net.sf.mmm.util.text.api;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface for a collection of utility functions that help with
- * unicode characters and texts.
+ * This is the interface for a collection of utility functions that help with unicode characters and texts.
  * 
  * @see DiacriticalMark
  * @see net.sf.mmm.util.xml.api.XmlUtil#resolveEntity(String)
@@ -37,14 +36,13 @@ public interface UnicodeUtil {
   char NUMBER_SIGN = 0x00023;
 
   /**
-   * The sign for the currency dollar ({@value} ). This currency is not unique
-   * as many countries named their currency dollar (e.g. US-$, CAN-$, AU-$).
+   * The sign for the currency dollar ({@value} ). This currency is not unique as many countries named their
+   * currency dollar (e.g. US-$, CAN-$, AU-$).
    */
   char DOLLAR_SIGN = 0x0024;
 
   /**
-   * The percent sign ({@value} ). Indicates the 1/100 part of the preceeding
-   * number.
+   * The percent sign ({@value} ). Indicates the 1/100 part of the preceeding number.
    */
   char PERCENT_SIGN = 0x0025;
 
@@ -250,8 +248,8 @@ public interface UnicodeUtil {
   char RIGHT_CURLY_BRACKET = 0x0007D;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
-   * for {@link DiacriticalMark#TILDE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#TILDE}.
    */
   char TILDE = 0x007E;
 
@@ -264,14 +262,13 @@ public interface UnicodeUtil {
   char NO_BREAK_SPACE = 0x000A0;
 
   /**
-   * An inverted (upside-down) {@link #EXCLAMATION_MARK exclamation mark} (!)
-   * used at the beginning of an exclamation in Spanish.
+   * An inverted (upside-down) {@link #EXCLAMATION_MARK exclamation mark} (!) used at the beginning of an
+   * exclamation in Spanish.
    */
   char INVERTED_EXCLAMATION_MARK = 0x000A1;
 
   /**
-   * The sign for the currency unit cent. A cent is the 1/100 part of a
-   * {@link #DOLLAR_SIGN dollar}.
+   * The sign for the currency unit cent. A cent is the 1/100 part of a {@link #DOLLAR_SIGN dollar}.
    */
   char CENT_SIGN = 0x00A2;
 
@@ -303,16 +300,16 @@ public interface UnicodeUtil {
   char NOT_SIGN = 0x000AC;
 
   /**
-   * The soft hyphen that indicates a word-wrap position (for hyphenation).
-   * Similar to ASCII hyphen-minus ('-').
+   * The soft hyphen that indicates a word-wrap position (for hyphenation). Similar to ASCII hyphen-minus
+   * ('-').
    */
   char SOFT_HYPHEN = 0x000AD;
 
   char REGISTERED_SIGN = 0x000AE;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
-   * for {@link DiacriticalMark#MACRON}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#MACRON}.
    */
   char MACRON = 0x000AF;
 
@@ -924,8 +921,7 @@ public interface UnicodeUtil {
   char LATIN_SMALL_LETTER_U_WITH_DIAERESIS_AND_GRAVE = 0x01DC;
 
   /**
-   * Looks like a {@link #LATIN_SMALL_LETTER_E} that is turned (mirrored to the
-   * vertical axis).
+   * Looks like a {@link #LATIN_SMALL_LETTER_E} that is turned (mirrored to the vertical axis).
    */
   char LATIN_SMALL_LETTER_TURNED_E = 0x01DD;
 
@@ -1178,10 +1174,9 @@ public interface UnicodeUtil {
   char LATIN_SMALL_LETTER_REVERSED_E = 0x0258;
 
   /**
-   * The small <em>schwa</em> letter is used in the International Phonetic
-   * Alphabet to represent the "mid central unrounded vowel". It is used for
-   * instance in the second syllable of the English word "harmony". This letter
-   * uses the same glyph as {@link #LATIN_SMALL_LETTER_TURNED_E}.
+   * The small <em>schwa</em> letter is used in the International Phonetic Alphabet to represent the
+   * "mid central unrounded vowel". It is used for instance in the second syllable of the English word
+   * "harmony". This letter uses the same glyph as {@link #LATIN_SMALL_LETTER_TURNED_E}.
    */
   char LATIN_SMALL_LETTER_SCHWA = 0x0259;
 
@@ -1440,26 +1435,26 @@ public interface UnicodeUtil {
   char MODIFIER_LETTER_MINUS_SIGN = 0x02D7;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
-   * for {@link DiacriticalMark#BREVE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#BREVE}.
    */
   char BREVE = 0x02D8;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
-   * for {@link DiacriticalMark#DOT_ABOVE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#DOT_ABOVE}.
    */
   char DOT_ABOVE = 0x02D9;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
-   * for {@link DiacriticalMark#RING_ABOVE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#RING_ABOVE}.
    */
   char RING_ABOVE = 0x02DA;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character}
-   * for {@link DiacriticalMark#OGONEK}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#OGONEK}.
    */
   char OGONEK = 0x02DB;
 
@@ -1504,80 +1499,67 @@ public interface UnicodeUtil {
   // ** Combining characters (300-36F) **
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for { link
-   * DiacriticalMark#GRAVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for { link DiacriticalMark#GRAVE}.
    */
   char COMBINING_GRAVE_ACCENT = 0x0300;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for { link
-   * {@link DiacriticalMark#ACUTE} .
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for { link {@link DiacriticalMark#ACUTE} .
    */
   char COMBINING_ACUTE_ACCENT = 0x0301;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#CIRCUMFLEX} .
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#CIRCUMFLEX} .
    */
   char COMBINING_CIRCUMFLEX_ACCENT = 0x0302;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#TILDE} .
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#TILDE} .
    */
   char COMBINING_TILDE = 0x0303;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#MACRON}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#MACRON}.
    */
   char COMBINING_MACRON = 0x0304;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#OVERLINE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#OVERLINE}.
    */
   char COMBINING_OVERLINE = 0x0305;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#BREVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#BREVE}.
    */
   char COMBINING_BREVE = 0x0306;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#DOT_ABOVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#DOT_ABOVE}.
    */
   char COMBINING_DOT_ABOVE = 0x0307;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#DIAERESIS}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#DIAERESIS}.
    */
   char COMBINING_DIAERESIS = 0x0308;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#HOOK_ABOVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#HOOK_ABOVE}.
    */
   char COMBINING_HOOK_ABOVE = 0x0309;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#RING_ABOVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#RING_ABOVE}.
    */
   char COMBINING_RING_ABOVE = 0x030A;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#DOUBLE_ACUTE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#DOUBLE_ACUTE}.
    */
   char COMBINING_DOUBLE_ACUTE_ACCENT = 0x030B;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#CARON}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#CARON}.
    */
   char COMBINING_CARON = 0x030C;
 
@@ -1586,8 +1568,7 @@ public interface UnicodeUtil {
   char COMBINING_DOUBLE_VERTICAL_LINE_ABOVE = 0x030E;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#DOUBLE_GRAVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#DOUBLE_GRAVE}.
    */
   char COMBINING_DOUBLE_GRAVE_ACCENT = 0x030F;
 
@@ -1614,8 +1595,7 @@ public interface UnicodeUtil {
   char COMBINING_LEFT_ANGLE_ABOVE = 0x031A;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for
-   * {@link DiacriticalMark#HORN_ABOVE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#HORN_ABOVE}.
    */
   char COMBINING_HORN = 0x031B;
 
@@ -3932,13 +3912,11 @@ public interface UnicodeUtil {
   char HORN = '\0';
 
   /**
-   * This method determines an ASCII-representation for the given character if
-   * available.
+   * This method determines an ASCII-representation for the given character if available.
    * 
    * @param character is the character to convert.
-   * @return a sequence of ASCII-characters that represent the given character
-   *         or <code>null</code> if the character is already ASCII or there is
-   *         no ASCII-representation available.
+   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the
+   *         character is already ASCII or there is no ASCII-representation available.
    */
   String normalize2Ascii(char character);
 
@@ -3958,8 +3936,8 @@ public interface UnicodeUtil {
   boolean isDash(char character);
 
   /**
-   * This method determines if the given character is a hyphen. A hyphen is a
-   * character used to separate syllables in words or to join words.
+   * This method determines if the given character is a hyphen. A hyphen is a character used to separate
+   * syllables in words or to join words.
    * 
    * @see net.sf.mmm.util.text.api.Hyphenator
    * 

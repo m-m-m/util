@@ -20,14 +20,13 @@ import org.junit.Test;
 public class ComparatorTest {
 
   /**
-   * This method checks the {@link Comparator#eval(Object, Object)} for the
-   * given <code>comparator</code> and according {@link Comparator}s.
+   * This method checks the {@link Comparator#eval(Object, Object)} for the given <code>comparator</code> and
+   * according {@link Comparator}s.
    * 
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @param comparator - {@link Comparator#EQUAL} if <code>arg1 == arg2</code>,
-   *        {@link Comparator#LESS_THAN} if <code>arg1 < arg2</code>,
-   *        {@link Comparator#GREATER_THAN} if <code>arg1 > arg2</code> and
+   * @param comparator - {@link Comparator#EQUAL} if <code>arg1 == arg2</code>, {@link Comparator#LESS_THAN}
+   *        if <code>arg1 < arg2</code>, {@link Comparator#GREATER_THAN} if <code>arg1 > arg2</code> and
    *        {@link Comparator#NOT_EQUAL} otherwise.
    */
   protected void checkEvalTrue(Object arg1, Object arg2, Comparator comparator) {
@@ -84,8 +83,7 @@ public class ComparatorTest {
   }
 
   /**
-   * Tests {@link Comparator#eval(Object, Object)} for
-   * {@link Comparator#NOT_EQUAL}.
+   * Tests {@link Comparator#eval(Object, Object)} for {@link Comparator#NOT_EQUAL}.
    */
   @Test
   public void testGreaterThan() {
@@ -99,8 +97,7 @@ public class ComparatorTest {
   }
 
   /**
-   * Tests {@link Comparator#eval(Object, Object)} for
-   * {@link Comparator#NOT_EQUAL}.
+   * Tests {@link Comparator#eval(Object, Object)} for {@link Comparator#NOT_EQUAL}.
    */
   @Test
   public void testLessThan() {
@@ -114,8 +111,7 @@ public class ComparatorTest {
   }
 
   /**
-   * Tests {@link Comparator#eval(Object, Object)} for
-   * {@link Comparator#NOT_EQUAL}.
+   * Tests {@link Comparator#eval(Object, Object)} for {@link Comparator#NOT_EQUAL}.
    */
   @Test
   public void testNotEqual() {

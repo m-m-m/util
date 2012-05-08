@@ -8,8 +8,7 @@ import java.util.SortedSet;
 import net.sf.mmm.util.collection.api.SortedSetFactory;
 
 /**
- * This is the abstract base implementation of the {@link SortedSetFactory}
- * interface.
+ * This is the abstract base implementation of the {@link SortedSetFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

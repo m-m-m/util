@@ -22,8 +22,7 @@ import net.sf.mmm.util.pool.api.ByteArrayPool;
 import net.sf.mmm.util.pool.base.NoByteArrayPool;
 
 /**
- * This is the abstract base implementation of the
- * {@link DetectorStreamProvider}.
+ * This is the abstract base implementation of the {@link DetectorStreamProvider}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -46,9 +45,8 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
   }
 
   /**
-   * This method gets the {@link List} of
-   * {@link #addProcessorFactory(DetectorStreamProcessorFactory) registered}
-   * {@link DetectorStreamProcessorFactory}-instances.
+   * This method gets the {@link List} of {@link #addProcessorFactory(DetectorStreamProcessorFactory)
+   * registered} {@link DetectorStreamProcessorFactory}-instances.
    * 
    * @return the processorFactoryList
    */
@@ -61,13 +59,11 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
   }
 
   /**
-   * This method registers a {@link DetectorStreamProcessorFactory} to this
-   * {@link DetectorStreamProvider}.
+   * This method registers a {@link DetectorStreamProcessorFactory} to this {@link DetectorStreamProvider}.
    * 
    * @see #setProcessorFactoryList(List)
    * 
-   * @param processorFactory is the {@link DetectorStreamProcessorFactory} to
-   *        add.
+   * @param processorFactory is the {@link DetectorStreamProcessorFactory} to add.
    */
   public void addProcessorFactory(DetectorStreamProcessorFactory processorFactory) {
 
@@ -75,13 +71,11 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
   }
 
   /**
-   * This method sets the complete {@link List} of
-   * {@link DetectorStreamProcessorFactory}-instances. Do NOT call this method
-   * after {@link #addProcessorFactory(DetectorStreamProcessorFactory)} has been
-   * called.
+   * This method sets the complete {@link List} of {@link DetectorStreamProcessorFactory}-instances. Do NOT
+   * call this method after {@link #addProcessorFactory(DetectorStreamProcessorFactory)} has been called.
    * 
-   * @param processorFactoryList is the complete {@link List} of
-   *        {@link DetectorStreamProcessorFactory}-instances to set.
+   * @param processorFactoryList is the complete {@link List} of {@link DetectorStreamProcessorFactory}
+   *        -instances to set.
    */
   public void setProcessorFactoryList(List<DetectorStreamProcessorFactory> processorFactoryList) {
 
@@ -104,8 +98,7 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
   }
 
   /**
-   * This method gets the {@link ByteArrayPool} used to
-   * {@link ByteArrayPool#borrow() borrow} byte-arrays.
+   * This method gets the {@link ByteArrayPool} used to {@link ByteArrayPool#borrow() borrow} byte-arrays.
    * 
    * @return the {@link ByteArrayPool}.
    */

@@ -32,10 +32,9 @@ import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 
 /**
- * This class can be used to create and update the localized bundles
- * (properties) from an {@link AbstractResourceBundle}.<br>
- * It is a main-program. Simply call it with the parameter "--help" to get help.
- * <b>ATTENTION:</b><br>
+ * This class can be used to create and update the localized bundles (properties) from an
+ * {@link AbstractResourceBundle}.<br>
+ * It is a main-program. Simply call it with the parameter "--help" to get help. <b>ATTENTION:</b><br>
  * This class only works with java 6 or above.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -46,8 +45,7 @@ import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
-   * The command-line option to {@link #setDatePattern(String) set the
-   * date-pattern}.
+   * The command-line option to {@link #setDatePattern(String) set the date-pattern}.
    */
   public static final String OPTION_DATE_PATTERN = "--date-pattern";
 
@@ -137,9 +135,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the locales of the bundles that should be
-   * {@link #synchronize(ResourceBundle) synchronized}. Examples for locales
-   * (entries of the returned array) are <code>""</code>, <code></code>
+   * This method gets the locales of the bundles that should be {@link #synchronize(ResourceBundle)
+   * synchronized}. Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
    * 
    * @return the locales to create/update.
    */
@@ -172,12 +169,10 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the base-path where the bundles are written to. They will
-   * appear there under their appropriate classpath. The default is
-   * {@link #DEFAULT_BASE_PATH}.
+   * This method gets the base-path where the bundles are written to. They will appear there under their
+   * appropriate classpath. The default is {@link #DEFAULT_BASE_PATH}.
    * 
-   * @return the basePath is the base path where the resource bundles are
-   *         written to.
+   * @return the basePath is the base path where the resource bundles are written to.
    */
   public String getPath() {
 
@@ -195,8 +190,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the encoding used to read and write the bundles. The
-   * default is <code>UTF-8</code>.
+   * This method gets the encoding used to read and write the bundles. The default is <code>UTF-8</code>.
    * 
    * @return the encoding.
    */
@@ -216,8 +210,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method sets the newline string used to terminate a line in the
-   * resource bundle. The default is LF (<code>\n</code>).
+   * This method sets the newline string used to terminate a line in the resource bundle. The default is LF (
+   * <code>\n</code>).
    * 
    * @return the newline
    */
@@ -235,8 +229,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the {@link Class} reflecting the {@link ResourceBundle} to
-   * synchronize.
+   * This method gets the {@link Class} reflecting the {@link ResourceBundle} to synchronize.
    * 
    * @return the bundle-class.
    */
@@ -298,10 +291,9 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method synchronizes (creates or updates) the localized bundles
-   * (properties). If a bundle already exists, it will NOT just be overwritten
-   * but the missing keys are appended to the end of the file. If no keys are
-   * missing, the existing file remains untouched.
+   * This method synchronizes (creates or updates) the localized bundles (properties). If a bundle already
+   * exists, it will NOT just be overwritten but the missing keys are appended to the end of the file. If no
+   * keys are missing, the existing file remains untouched.
    * 
    * @param bundle is the bundle instance as java object.
    * @throws IOException if the operation failed with an input/output error.
@@ -315,8 +307,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     }
     SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
     String date = sdf.format(new Date());
-    String propertyPath = this.path + File.separatorChar
-        + bundle.getClass().getName().replace('.', File.separatorChar);
+    String propertyPath = this.path + File.separatorChar + bundle.getClass().getName().replace('.', File.separatorChar);
     new File(propertyPath).getParentFile().mkdirs();
     synchronize(bundle, "", propertyPath, date);
     for (String locale : this.locales) {
@@ -329,13 +320,11 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * 
    * @param bundle is the bundle instance as java object.
    * @param locale is the locale to synchronize as string.
-   * @param propertyPath is the path to the property-file excluding
-   *        locale-suffix.
+   * @param propertyPath is the path to the property-file excluding locale-suffix.
    * @param date is the current date as string.
    * @throws IOException if an I/O problem occurred.
    */
-  protected void synchronize(ResourceBundle bundle, String locale, String propertyPath, String date)
-      throws IOException {
+  protected void synchronize(ResourceBundle bundle, String locale, String propertyPath, String date) throws IOException {
 
     PrintWriter out = getStandardOutput();
     StringBuffer pathBuffer = new StringBuffer(propertyPath);

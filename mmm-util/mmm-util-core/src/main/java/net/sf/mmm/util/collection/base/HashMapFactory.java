@@ -9,8 +9,7 @@ import java.util.Map;
 import net.sf.mmm.util.collection.api.MapFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.MapFactory} interface that creates
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.MapFactory} interface that creates
  * instances of {@link HashMap}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

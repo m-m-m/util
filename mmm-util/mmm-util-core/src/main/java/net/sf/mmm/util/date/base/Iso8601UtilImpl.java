@@ -19,10 +19,8 @@ import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.date.api.Iso8601Util} interface. It does NOT use
- * {@link java.text.SimpleDateFormat}. All methods of this class are fast and
- * thread-safe.<br>
+ * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601Util} interface. It does NOT use
+ * {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe.<br>
  * 
  * @see #getInstance()
  * 
@@ -40,10 +38,9 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   private static final int MAX_MONTH = 12;
 
   /**
-   * This is the singleton instance of this {@link Iso8601UtilImpl}. Instead of
-   * declaring the methods static, we declare this static instance what gives
-   * the same way of access while still allowing a design for extension by
-   * inheriting from this class.
+   * This is the singleton instance of this {@link Iso8601UtilImpl}. Instead of declaring the methods static,
+   * we declare this static instance what gives the same way of access while still allowing a design for
+   * extension by inheriting from this class.
    */
   private static Iso8601UtilImpl instance;
 
@@ -63,15 +60,12 @@ public final class Iso8601UtilImpl implements Iso8601Util {
 
   /**
    * This method gets the singleton instance of this {@link Iso8601UtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -176,8 +170,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   /**
    * {@inheritDoc}
    */
-  public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
-      boolean extendedTimezone) {
+  public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
     StringBuilder buffer = new StringBuilder(25);
@@ -188,8 +181,8 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   /**
    * {@inheritDoc}
    */
-  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
-      boolean extendedTimezone, Appendable buffer) {
+  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone,
+      Appendable buffer) {
 
     try {
       formatDate(calendar, extendedDate, buffer);
@@ -311,11 +304,9 @@ public final class Iso8601UtilImpl implements Iso8601Util {
    * This method reads two digits from the given <code>scanner</code>.
    * 
    * @param scanner is the scanner potentially pointing to the digits.
-   * @return <code>-1</code> if the <code>scanner</code> does NOT point to a
-   *         digit or the number represented by the two digits consumed from the
-   *         <code>scanner</code>.
-   * @throws IllegalDateFormatException if the <code>scanner</code> only
-   *         contained a single digit.
+   * @return <code>-1</code> if the <code>scanner</code> does NOT point to a digit or the number represented
+   *         by the two digits consumed from the <code>scanner</code>.
+   * @throws IllegalDateFormatException if the <code>scanner</code> only contained a single digit.
    */
   private int read2Digits(CharSequenceScanner scanner) throws IllegalDateFormatException {
 
@@ -331,8 +322,8 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   }
 
   /**
-   * This method parses the time (or timezone offset) from the given
-   * <code>parser</code>. The format is <code>hh[[:]mm[[:]ss]]</code>
+   * This method parses the time (or timezone offset) from the given <code>parser</code>. The format is
+   * <code>hh[[:]mm[[:]ss]]</code>
    * 
    * @param scanner is the parser pointing to the time.
    * @return an int-array containing the hour, minute and second in that order.
@@ -353,8 +344,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
       if ((second == -1) && (!colon)) {
         second = 0;
       }
-      if (((hour < 0) || (hour > 23)) || ((minute < 0) || (minute > 59))
-          || ((second < 0) || (second > 59))) {
+      if (((hour < 0) || (hour > 23)) || ((minute < 0) || (minute > 59)) || ((second < 0) || (second > 59))) {
         throw new IllegalDateFormatException(scanner.getOriginalString());
       }
     }
@@ -362,20 +352,16 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   }
 
   /**
-   * This method parses the time (and timezone) from the given
-   * <code>parser</code> and sets it to the given <code>calendar</code>
-   * including <code>year</code>, <code>month</code> and <code>date</code>.
+   * This method parses the time (and timezone) from the given <code>parser</code> and sets it to the given
+   * <code>calendar</code> including <code>year</code>, <code>month</code> and <code>date</code>.
    * 
-   * @param scanner is the parser pointing to the time or at the end of the
-   *        string
+   * @param scanner is the parser pointing to the time or at the end of the string
    * @param calendar is the calendar where the parsed date and time will be set.
    * @param year is the year to set that has already been parsed.
-   * @param month is the month to set that has already been parsed (in the range
-   *        of 1-12).
+   * @param month is the month to set that has already been parsed (in the range of 1-12).
    * @param day is the day to set that has already been parsed.
    */
-  private void parseTime(CharSequenceScanner scanner, Calendar calendar, int year, int month,
-      int day) {
+  private void parseTime(CharSequenceScanner scanner, Calendar calendar, int year, int month, int day) {
 
     char c = scanner.forceNext();
     if (c == 'T') {
@@ -391,8 +377,7 @@ public final class Iso8601UtilImpl implements Iso8601Util {
     } else if (c == 0) {
       calendar.set(year, month - 1, day);
     } else {
-      throw new NlsParseException(scanner.toString(), PATTERN_STRING_TIME, "time",
-          scanner.toString());
+      throw new NlsParseException(scanner.toString(), PATTERN_STRING_TIME, "time", scanner.toString());
     }
     calendar.set(Calendar.MILLISECOND, 0);
   }
@@ -400,10 +385,8 @@ public final class Iso8601UtilImpl implements Iso8601Util {
   /**
    * This method parses the timezone from the given <code>parser</code>.
    * 
-   * @param scanner is the parser pointing to the timezone or at the end of the
-   *        string
-   * @return the parsed timezone or <code>null</code> if parser already at the
-   *         end of the string.
+   * @param scanner is the parser pointing to the timezone or at the end of the string
+   * @return the parsed timezone or <code>null</code> if parser already at the end of the string.
    */
   private TimeZone parseTimezone(CharSequenceScanner scanner) {
 

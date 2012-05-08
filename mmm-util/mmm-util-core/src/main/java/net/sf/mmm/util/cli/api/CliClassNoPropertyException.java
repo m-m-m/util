@@ -6,9 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliClassNoPropertyException} is thrown if a {@link CliClass
- * CLI-class} is illegal because it has no property annotated with
- * {@link CliOption} or {@link CliArgument}.
+ * A {@link CliClassNoPropertyException} is thrown if a {@link CliClass CLI-class} is illegal because it has
+ * no property annotated with {@link CliOption} or {@link CliArgument}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

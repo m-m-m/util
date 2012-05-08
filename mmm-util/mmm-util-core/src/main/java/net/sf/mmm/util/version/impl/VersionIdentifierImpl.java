@@ -16,8 +16,7 @@ import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.base.AbstractVersionIdentifier;
 
 /**
- * This is the abstract base implementation of
- * {@link net.sf.mmm.util.version.api.VersionIdentifier}.
+ * This is the abstract base implementation of {@link net.sf.mmm.util.version.api.VersionIdentifier}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -79,18 +78,17 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
    * @param timestamp - see {@link #getTimestamp()}. May be <code>null</code>.
    * @param revision - see {@link #getRevision()}. May be <code>null</code>.
    * @param phase - see {@link #getPhase()}. May be <code>null</code>.
-   * @param phaseAlias - see {@link #getPhase()}. May be <code>null</code> (only
-   *        if <code>phase</code> is <code>null</code>).
-   * @param phaseNumber - see {@link #getPhaseNumber()}. May be
-   *        <code>null</code> (only if <code>phase</code> is <code>null</code>).
+   * @param phaseAlias - see {@link #getPhase()}. May be <code>null</code> (only if <code>phase</code> is
+   *        <code>null</code>).
+   * @param phaseNumber - see {@link #getPhaseNumber()}. May be <code>null</code> (only if <code>phase</code>
+   *        is <code>null</code>).
    * @param snapshot - see {@link #isSnapshot()}.
-   * @param versionSegments - see {@link #getVersionSegment(int)}. At least one
-   *        segment is required if no {@link #isSnapshot() snapshot}.
+   * @param versionSegments - see {@link #getVersionSegment(int)}. At least one segment is required if no
+   *        {@link #isSnapshot() snapshot}.
    */
   // CHECKSTYLE:OFF (only internal constructor)
-  public VersionIdentifierImpl(String stringRepresentation, String label, Date timestamp,
-      Long revision, DevelopmentPhase phase, String phaseAlias, Integer phaseNumber,
-      boolean snapshot, int... versionSegments) {
+  public VersionIdentifierImpl(String stringRepresentation, String label, Date timestamp, Long revision,
+      DevelopmentPhase phase, String phaseAlias, Integer phaseNumber, boolean snapshot, int... versionSegments) {
 
     // CHECKSTYLE:ON
     super(stringRepresentation);
@@ -112,13 +110,11 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
   private void validate() {
 
     if ((this.segments.length < 0) && (!this.snapshot)) {
-      throw new NlsIllegalArgumentException(Integer.valueOf(this.segments.length),
-          "segments.length");
+      throw new NlsIllegalArgumentException(Integer.valueOf(this.segments.length), "segments.length");
     }
     for (int i = 0; i < this.segments.length; i++) {
       if (this.segments[i] < 0) {
-        throw new NlsIllegalArgumentException(Integer.valueOf(this.segments[i]), "segments[" + i
-            + "]");
+        throw new NlsIllegalArgumentException(Integer.valueOf(this.segments[i]), "segments[" + i + "]");
       }
     }
     if (this.phaseNumber != null) {

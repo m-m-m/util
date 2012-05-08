@@ -115,8 +115,8 @@ public class StringSyntaxBean implements StringSyntax {
   }
 
   /**
-   * This method sets both the {@link #getQuoteStart() quote-start} and
-   * {@link #getQuoteEnd() quote-end} character.
+   * This method sets both the {@link #getQuoteStart() quote-start} and {@link #getQuoteEnd() quote-end}
+   * character.
    * 
    * @param quote the quote character to set.
    */

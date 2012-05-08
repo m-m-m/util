@@ -9,10 +9,9 @@ import java.lang.annotation.ElementType;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link AnnotationNotForTargetException} is thrown if an
- * {@link java.lang.annotation.Annotation} should be resolved for a specific
- * {@link ElementType} that it is NOT {@link java.lang.annotation.Target
- * targeted} for.
+ * A {@link AnnotationNotForTargetException} is thrown if an {@link java.lang.annotation.Annotation} should be
+ * resolved for a specific {@link ElementType} that it is NOT {@link java.lang.annotation.Target targeted}
+ * for.
  * 
  * @see AnnotationUtil#isRuntimeAnnotation(Class)
  * @see AnnotationUtil#getTypeAnnotation(Class, Class)
@@ -29,14 +28,12 @@ public class AnnotationNotForTargetException extends ReflectionException {
    * The constructor.
    * 
    * @param annotation is the {@link Class} reflecting the {@link Annotation}.
-   * @param target is the {@link ElementType} not
-   *        {@link java.lang.annotation.Target targeted} by the given
+   * @param target is the {@link ElementType} not {@link java.lang.annotation.Target targeted} by the given
    *        <code>annotation</code>.
    */
   public AnnotationNotForTargetException(Class<? extends Annotation> annotation, ElementType target) {
 
-    super(NlsBundleUtilCore.ERR_ANNOTATION_NOT_FOR_TARGET, toMap(KEY_ANNOTATION, annotation,
-        KEY_ACCESSIBLE, target));
+    super(NlsBundleUtilCore.ERR_ANNOTATION_NOT_FOR_TARGET, toMap(KEY_ANNOTATION, annotation, KEY_ACCESSIBLE, target));
   }
 
 }

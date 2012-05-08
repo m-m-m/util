@@ -16,14 +16,14 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg}
- * interface for accessing a {@link Method}.
+ * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg} interface for accessing a
+ * {@link Method}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropertyAccessorMethod
-    implements PojoPropertyAccessorIndexedNonArg {
+public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropertyAccessorMethod implements
+    PojoPropertyAccessorIndexedNonArg {
 
   /** @see #getMode() */
   private final PojoPropertyAccessorIndexedNonArgMode mode;
@@ -32,8 +32,7 @@ public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropert
    * The constructor.
    * 
    * @param propertyName is the {@link #getName() name} of the property.
-   * @param propertyType is the {@link #getPropertyType() generic type} of the
-   *        property.
+   * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param mode is the {@link #getMode() mode} of access.
    * @param descriptor is the descriptor this accessor is intended for.
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.

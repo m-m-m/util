@@ -16,14 +16,12 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
- * This is an abstract base implementation of a checked exception with real
- * <em>native language support</em> (NLS). <br>
+ * This is an abstract base implementation of a checked exception with real <em>native language support</em>
+ * (NLS). <br>
  * <b>ATTENTION:</b><br>
- * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsException} instead
- * of this class.<br>
+ * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsException} instead of this class.<br>
  * <b>INFORMATION:</b><br>
- * Checked exceptions should be used for business errors and should only occur
- * in unexpected situations.
+ * Checked exceptions should be used for business errors and should only occur in unexpected situations.
  * 
  * @see NlsThrowable
  * 
@@ -50,8 +48,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * The constructor.
    * 
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public AbstractNlsException(NlsMessage message) {
 
@@ -64,8 +61,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public AbstractNlsException(Throwable nested, NlsMessage message) {
 
@@ -146,8 +142,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * @param resolver translates the original message.
    * @param buffer is where to write the stack trace to.
    */
-  static void printStackTrace(NlsThrowable throwable, Locale locale, NlsTemplateResolver resolver,
-      Appendable buffer) {
+  static void printStackTrace(NlsThrowable throwable, Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     try {
       synchronized (buffer) {
@@ -193,8 +188,8 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * @param buffer is where to write the stack trace to.
    * @throws IOException if caused by <code>buffer</code>.
    */
-  private static void printStackTraceNested(Throwable nested, Locale locale,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  private static void printStackTraceNested(Throwable nested, Locale locale, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     if (nested instanceof NlsThrowable) {
       ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);

@@ -10,13 +10,11 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler.
- * However it allows to {@link #setCurrentIndex(int) set the current index} so
- * the internal {@link #getBytes() buffer}-array can be consumed externally and
- * proceeded very fast.<br>
+ * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler. However it allows to
+ * {@link #setCurrentIndex(int) set the current index} so the internal {@link #getBytes() buffer}-array can be
+ * consumed externally and proceeded very fast.<br>
  * <b>ATTENTION:</b><br>
- * This class is NOT intended to be exposed. It should only be used internally
- * by some class or component.<br>
+ * This class is NOT intended to be exposed. It should only be used internally by some class or component.<br>
  * 
  * @see java.nio.ByteBuffer#wrap(byte[], int, int)
  * 
@@ -31,8 +29,7 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
   /**
    * The constructor.
    * 
-   * @param capacity is the <code>length</code> of the internal
-   *        {@link #getBytes() buffer}.
+   * @param capacity is the <code>length</code> of the internal {@link #getBytes() buffer}.
    */
   public ByteArrayBufferImpl(int capacity) {
 
@@ -77,8 +74,8 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
    */
   public void setCurrentIndex(int currentIndex) {
 
-    ValueOutOfRangeException.checkRange(Integer.valueOf(currentIndex), Integer
-        .valueOf(getMinimumIndex()), Integer.valueOf(getMaximumIndex() + 1), "currentIndex");
+    ValueOutOfRangeException.checkRange(Integer.valueOf(currentIndex), Integer.valueOf(getMinimumIndex()),
+        Integer.valueOf(getMaximumIndex() + 1), "currentIndex");
     this.currentIndex = currentIndex;
   }
 

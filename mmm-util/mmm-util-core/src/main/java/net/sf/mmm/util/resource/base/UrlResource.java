@@ -16,8 +16,8 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 
 /**
- * This is the implementation of the {@link DataResource} interface for a
- * resource that comes from an {@link URL}.
+ * This is the implementation of the {@link DataResource} interface for a resource that comes from an
+ * {@link URL}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -52,8 +52,7 @@ public class UrlResource extends AbstractDataResource {
   /**
    * The constructor.
    * 
-   * @param absolutePath is the absolute path to the resource. E.g.
-   *        "http://foo.bar/index.html".
+   * @param absolutePath is the absolute path to the resource. E.g. "http://foo.bar/index.html".
    * @param fileUtil is the {@link FileUtil} to use.
    */
   public UrlResource(String absolutePath, FileUtil fileUtil) {

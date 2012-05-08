@@ -14,8 +14,8 @@ import net.sf.mmm.util.resource.base.FileResource;
 import net.sf.mmm.util.resource.base.UrlResource;
 
 /**
- * This is the default implementation of the
- * {@link net.sf.mmm.util.resource.api.DataResourceFactory} interface.
+ * This is the default implementation of the {@link net.sf.mmm.util.resource.api.DataResourceFactory}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -37,8 +37,7 @@ public class DataResourceFactoryImpl extends AbstractDataResourceFactory {
    * {@inheritDoc}
    */
   @Override
-  protected DataResource createDataResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException {
+  protected DataResource createDataResource(ResourceUri resourceUri) throws ResourceUriUndefinedException {
 
     String schemePrefix = resourceUri.getSchemePrefix();
     if (ClasspathResource.SCHEME_PREFIX.equals(schemePrefix)) {

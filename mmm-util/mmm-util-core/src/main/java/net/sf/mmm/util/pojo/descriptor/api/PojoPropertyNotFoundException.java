@@ -8,9 +8,8 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 
 /**
- * A {@link PojoPropertyNotFoundException} is thrown if a property should be
- * accessed that does NOT exist (was NOT found) or can NOT be accessed in the
- * intended way.
+ * A {@link PojoPropertyNotFoundException} is thrown if a property should be accessed that does NOT exist (was
+ * NOT found) or can NOT be accessed in the intended way.
  * 
  * @see PojoDescriptor#getProperty(Object, String)
  * @see PojoDescriptor#setProperty(Object, String, Object)
@@ -31,8 +30,7 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PROPERTY_NOT_FOUND, toMap(KEY_PROPERTY, propertyName,
-        KEY_TYPE, pojoType));
+    super(NlsBundleUtilCore.ERR_POJO_PROPERTY_NOT_FOUND, toMap(KEY_PROPERTY, propertyName, KEY_TYPE, pojoType));
   }
 
   /**
@@ -42,11 +40,10 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    * @param propertyName is the name of the missing property.
    * @param mode is the access-mode for which the property is NOT available.
    */
-  public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName,
-      PojoPropertyAccessorMode<?> mode) {
+  public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName, PojoPropertyAccessorMode<?> mode) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PROPERTY_NOT_ACCESSABLE, toMap(KEY_PROPERTY, propertyName,
-        KEY_TYPE, pojoType, KEY_MODE, mode));
+    super(NlsBundleUtilCore.ERR_POJO_PROPERTY_NOT_ACCESSABLE, toMap(KEY_PROPERTY, propertyName, KEY_TYPE, pojoType,
+        KEY_MODE, mode));
   }
 
 }

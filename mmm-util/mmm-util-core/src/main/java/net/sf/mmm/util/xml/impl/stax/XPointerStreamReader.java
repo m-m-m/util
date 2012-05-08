@@ -11,8 +11,8 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.xml.base.StreamReaderProxy;
 
 /**
- * This is an implementation of the {@link XMLStreamReader} interface that
- * adapts an {@link XMLStreamReader} adding limited XPointer support.<br>
+ * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}
+ * adding limited XPointer support.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

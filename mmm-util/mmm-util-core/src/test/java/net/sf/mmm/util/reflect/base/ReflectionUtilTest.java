@@ -90,8 +90,8 @@ public class ReflectionUtilTest {
     Assert.assertEquals(String.class, type.getAssignmentClass());
     Assert.assertEquals(String.class, type.getRetrievalClass());
     // the really hard ones...
-    type = getReflectionUtil().createGenericType(
-        ExParameterizedStringList.class.getGenericSuperclass()).getComponentType();
+    type = getReflectionUtil().createGenericType(ExParameterizedStringList.class.getGenericSuperclass())
+        .getComponentType();
     Assert.assertEquals(String.class, type.getRetrievalClass());
     type = getReflectionUtil().createGenericType(StringList.class).getComponentType();
     Assert.assertEquals(String.class, type.getRetrievalClass());
@@ -243,8 +243,7 @@ public class ReflectionUtilTest {
 
     ReflectionUtil util = getReflectionUtil();
     // test directories
-    Set<String> classNameSet = util.findClassNames(ReflectionUtilImpl.class.getPackage().getName(),
-        false);
+    Set<String> classNameSet = util.findClassNames(ReflectionUtilImpl.class.getPackage().getName(), false);
     Assert.assertTrue(classNameSet.contains(ReflectionUtilImpl.class.getName()));
     Assert.assertTrue(classNameSet.contains(ReflectionUtilTest.class.getName()));
 

@@ -27,8 +27,7 @@ public class CliValueContainerMap extends AbstractCliValueContainerContainer {
   /**
    * The constructor.
    * 
-   * @param parameterContainer is the {@link #getParameterContainer()
-   *        parameter-container}.
+   * @param parameterContainer is the {@link #getParameterContainer() parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
    * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
@@ -76,13 +75,12 @@ public class CliValueContainerMap extends AbstractCliValueContainerContainer {
     String keyString = entry.substring(0, splitIndex);
     GenericType<?> keyType = propertyType.getKeyType();
     GenericValueConverter<Object> converter = getDependencies().getConverter();
-    Object key = converter.convertValue(keyString, getParameterContainer(),
-        keyType.getAssignmentClass(), keyType);
+    Object key = converter.convertValue(keyString, getParameterContainer(), keyType.getAssignmentClass(), keyType);
     // value
     String valueString = entry.substring(splitIndex + 1);
     GenericType<?> valueType = propertyType.getComponentType();
-    Object value = converter.convertValue(valueString, getParameterContainer(),
-        valueType.getAssignmentClass(), valueType);
+    Object value = converter.convertValue(valueString, getParameterContainer(), valueType.getAssignmentClass(),
+        valueType);
     Object old = this.map.put(key, value);
     if (old != null) {
       CliStyleHandling handling = getCliState().getCliStyle().valueDuplicateMapKey();

@@ -32,13 +32,11 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 /**
  * This is the implementation of the {@link ProcessUtil} interface. <br>
  * <b>ATTENTION:</b><br>
- * The <code>execute</code>-methods spin up multiple {@link Thread threads},
- * especially when multiple processes are piped (2*n+1[+1] threads). Therefore
- * you should NOT use the {@link #getInstance() singleton} variant of this util
- * except you are writing a simple command-line client that does a simple job
- * and then terminates. When writing a server-application or library, that makes
- * such calls repetitive, you should create your own instance and
- * {@link #setExecutor(Executor) configure} a thread-pool as
+ * The <code>execute</code>-methods spin up multiple {@link Thread threads}, especially when multiple
+ * processes are piped (2*n+1[+1] threads). Therefore you should NOT use the {@link #getInstance() singleton}
+ * variant of this util except you are writing a simple command-line client that does a simple job and then
+ * terminates. When writing a server-application or library, that makes such calls repetitive, you should
+ * create your own instance and {@link #setExecutor(Executor) configure} a thread-pool as
  * {@link java.util.concurrent.Executor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -67,15 +65,12 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
   /**
    * This method gets the singleton instance of this {@link ProcessUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -109,8 +104,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   }
 
   /**
-   * This method gets the {@link Executor} used to run asynchronous tasks. It
-   * may use a thread-pool.
+   * This method gets the {@link Executor} used to run asynchronous tasks. It may use a thread-pool.
    * 
    * @return the executor.
    */
@@ -157,8 +151,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * {@inheritDoc}
    */
-  public int execute(ProcessContext context, ProcessBuilder... builders) throws IOException,
-      InterruptedException {
+  public int execute(ProcessContext context, ProcessBuilder... builders) throws IOException, InterruptedException {
 
     ProcessExecutor processExecutor = new ProcessExecutor(context, builders);
     return processExecutor.call().intValue();
@@ -167,8 +160,8 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * {@inheritDoc}
    */
-  public int execute(ProcessContext context, long timeout, TimeUnit unit,
-      ProcessBuilder... builders) throws IOException, TimeoutException, InterruptedException {
+  public int execute(ProcessContext context, long timeout, TimeUnit unit, ProcessBuilder... builders)
+      throws IOException, TimeoutException, InterruptedException {
 
     AsyncProcessExecutor processExecutor = executeAsync(context, builders);
     try {
@@ -189,8 +182,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * {@inheritDoc}
    */
-  public AsyncProcessExecutor executeAsync(ProcessContext context, ProcessBuilder... builders)
-      throws IOException {
+  public AsyncProcessExecutor executeAsync(ProcessContext context, ProcessBuilder... builders) throws IOException {
 
     ProcessExecutor processExecutor = new ProcessExecutor(context, builders);
     AsyncProcessExecutorImpl asyncExecutor = new AsyncProcessExecutorImpl(processExecutor);
@@ -201,8 +193,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * This inner class is the default implementation of the AsyncProcessExecutor.
    */
-  protected static class AsyncProcessExecutorImpl extends FutureTask<Integer> implements
-      AsyncProcessExecutor {
+  protected static class AsyncProcessExecutorImpl extends FutureTask<Integer> implements AsyncProcessExecutor {
 
     /** The actual task to run. */
     private final ProcessExecutor executor;
@@ -248,8 +239,8 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
      * The constructor.
      * 
      * @param context is the context of the process pipe.
-     * @param builders are the configurations of the {@link Process}(es) to
-     *        execute. The array needs to have a length greater than zero.
+     * @param builders are the configurations of the {@link Process}(es) to execute. The array needs to have a
+     *        length greater than zero.
      * @throws IOException if an input/output error occurred.
      */
     public ProcessExecutor(ProcessContext context, ProcessBuilder[] builders) throws IOException {
@@ -272,18 +263,16 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
         OutputStream err = context.getErrStream();
         for (int i = 0; i < builders.length; i++) {
           Process process = builders[i].start();
-          AsyncTransferrer inOutTransferrer = streamUtility.transferAsync(in,
-              process.getOutputStream(), false);
-          AsyncTransferrer errTransferrer = streamUtility.transferAsync(process.getErrorStream(),
-              err, true);
+          AsyncTransferrer inOutTransferrer = streamUtility.transferAsync(in, process.getOutputStream(), false);
+          AsyncTransferrer errTransferrer = streamUtility.transferAsync(process.getErrorStream(), err, true);
           this.processes[i] = process;
           in = this.processes[i].getInputStream();
           int transferrersIndex = i + i;
           this.transferrers[transferrersIndex] = inOutTransferrer;
           this.transferrers[transferrersIndex + 1] = errTransferrer;
         }
-        this.transferrers[builders.length + builders.length] = streamUtility.transferAsync(in,
-            context.getOutStream(), false);
+        this.transferrers[builders.length + builders.length] = streamUtility.transferAsync(in, context.getOutStream(),
+            false);
         success = true;
       } finally {
         if (!success) {
@@ -293,8 +282,8 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
     }
 
     /**
-     * This method disposes this executor. All processes are
-     * {@link Process#destroy() destroyed} and all streams are closed.
+     * This method disposes this executor. All processes are {@link Process#destroy() destroyed} and all
+     * streams are closed.
      */
     protected void dispose() {
 

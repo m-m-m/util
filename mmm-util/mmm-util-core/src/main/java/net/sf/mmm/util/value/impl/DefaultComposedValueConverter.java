@@ -8,10 +8,10 @@ import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
- * This is a default {@link net.sf.mmm.util.value.api.ComposedValueConverter} to
- * be used without IoC-Container. It extends {@link ComposedValueConverterImpl}
- * by {@link #addConverter(net.sf.mmm.util.value.api.ValueConverter) adding}
- * typical {@link net.sf.mmm.util.value.api.ValueConverter}s.
+ * This is a default {@link net.sf.mmm.util.value.api.ComposedValueConverter} to be used without
+ * IoC-Container. It extends {@link ComposedValueConverterImpl} by
+ * {@link #addConverter(net.sf.mmm.util.value.api.ValueConverter) adding} typical
+ * {@link net.sf.mmm.util.value.api.ValueConverter}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

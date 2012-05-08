@@ -101,14 +101,14 @@ public abstract class PojoPathNavigatorTest {
     DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
     defaultContext.setAdditionalFunctionManager(functionManager);
     context = defaultContext;
-    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName,
-        PojoPathMode.RETURN_IF_NULL, context);
+    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName, PojoPathMode.RETURN_IF_NULL,
+        context);
     assertEquals(foo, result);
     Integer bar = Integer.valueOf(84);
     myPojo.setBar(bar.intValue());
     myPojo.setFlag();
-    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName,
-        PojoPathMode.RETURN_IF_NULL, context);
+    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName, PojoPathMode.RETURN_IF_NULL,
+        context);
     assertEquals(bar, result);
   }
 
@@ -142,8 +142,7 @@ public abstract class PojoPathNavigatorTest {
     Object result;
     result = navigator.get(map, key + ".0.parent.parent.foo", PojoPathMode.RETURN_IF_NULL, context);
     assertEquals(foo, result);
-    result = navigator.get(map, key + ".0.parent.parent.@" + functionName,
-        PojoPathMode.RETURN_IF_NULL, context);
+    result = navigator.get(map, key + ".0.parent.parent.@" + functionName, PojoPathMode.RETURN_IF_NULL, context);
     assertEquals(foo, result);
   }
 
@@ -173,8 +172,8 @@ public abstract class PojoPathNavigatorTest {
     // rerun with different indices...
     listIndex = 2;
     arrayIndex = 1;
-    result = navigator.get(pojo, "map." + key + "." + listIndex + "." + arrayIndex,
-        PojoPathMode.CREATE_IF_NULL, context);
+    result = navigator.get(pojo, "map." + key + "." + listIndex + "." + arrayIndex, PojoPathMode.CREATE_IF_NULL,
+        context);
     assertEquals("", result);
     value = pojo.getMap().get(key).get(listIndex)[arrayIndex];
     assertSame(value, result);
@@ -358,8 +357,7 @@ public abstract class PojoPathNavigatorTest {
     }
     // function with unsupported operation...
     try {
-      navigator.set(new MyPojo(), "@" + functionName, PojoPathMode.CREATE_IF_NULL, context,
-          Integer.valueOf(0));
+      navigator.set(new MyPojo(), "@" + functionName, PojoPathMode.CREATE_IF_NULL, context, Integer.valueOf(0));
       fail("exception expected");
     } catch (PojoPathFunctionUnsupportedOperationException e) {
     }
@@ -547,8 +545,7 @@ public abstract class PojoPathNavigatorTest {
   }
 
   /**
-   * A {@link PojoPathFunction} that returns either foo or bar and is used for
-   * testing.
+   * A {@link PojoPathFunction} that returns either foo or bar and is used for testing.
    */
   public static class FooFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 
@@ -593,8 +590,7 @@ public abstract class PojoPathNavigatorTest {
   }
 
   /**
-   * A {@link PojoPathFunction} that returns either foo or bar and is used for
-   * testing.
+   * A {@link PojoPathFunction} that returns either foo or bar and is used for testing.
    */
   public static class FooOrBarFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 

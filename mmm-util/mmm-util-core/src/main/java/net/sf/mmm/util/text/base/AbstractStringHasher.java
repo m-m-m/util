@@ -7,11 +7,9 @@ import net.sf.mmm.util.lang.api.BasicUtil;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * This is the abstract base implementation of the {@link StringHasher}
- * interface.<br>
+ * This is the abstract base implementation of the {@link StringHasher} interface.<br>
  * <b>NOTE:</b><br>
- * For efficiency you should override some of the default
- * method-implementations.
+ * For efficiency you should override some of the default method-implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

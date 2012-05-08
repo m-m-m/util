@@ -7,11 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This is an abstract base implementation of a checked exception with real
- * <em>native language support</em> (NLS).<br>
+ * This is an abstract base implementation of a checked exception with real <em>native language support</em>
+ * (NLS).<br>
  * <b>ATTENTION:</b><br>
- * Checked exceptions should be used for business errors and should only occur
- * in unexpected situations.
+ * Checked exceptions should be used for business errors and should only occur in unexpected situations.
  * 
  * @see net.sf.mmm.util.nls.api.NlsThrowable
  * 
@@ -26,13 +25,11 @@ public abstract class NlsException extends AbstractNlsException {
   /**
    * The constructor.<br>
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization. May be
-   *        empty if no variable arguments exist.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the arguments filled into the <code>internaitionalizedMessage</code> after
+   *        nationalization. May be empty if no variable arguments exist.
    * @deprecated use {@link #NlsException(String, Map)} instead.
    */
   @Deprecated
@@ -45,13 +42,11 @@ public abstract class NlsException extends AbstractNlsException {
    * The constructor.<br>
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization. May be
-   *        empty if no variable arguments exist.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the arguments filled into the <code>internaitionalizedMessage</code> after
+   *        nationalization. May be empty if no variable arguments exist.
    * @deprecated use {@link #NlsException(String, Map)} instead.
    */
   @Deprecated
@@ -63,12 +58,12 @@ public abstract class NlsException extends AbstractNlsException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for {@link NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
-   *        to be {@link NlsMessage#getInternationalizedMessage() filled into
-   *        <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
+   *        language.
+   * @param arguments are the {@link NlsMessage#getArgument(String) arguments} to be
+   *        {@link NlsMessage#getInternationalizedMessage() filled into <code>internationalizedMessage</code>}
+   *        .
    */
   public NlsException(String internationalizedMessage, Map<String, Object> arguments) {
 
@@ -81,15 +76,14 @@ public abstract class NlsException extends AbstractNlsException {
    * @see #toMap(String, Object, String, Object)
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for {@link NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
-   *        to be {@link NlsMessage#getInternationalizedMessage() filled into
-   *        <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
+   *        language.
+   * @param arguments are the {@link NlsMessage#getArgument(String) arguments} to be
+   *        {@link NlsMessage#getInternationalizedMessage() filled into <code>internationalizedMessage</code>}
+   *        .
    */
-  public NlsException(Throwable nested, String internationalizedMessage,
-      Map<String, Object> arguments) {
+  public NlsException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
 
     super(nested, NlsAccess.getFactory().create(internationalizedMessage, arguments));
   }
@@ -97,8 +91,7 @@ public abstract class NlsException extends AbstractNlsException {
   /**
    * The constructor.
    * 
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public NlsException(NlsMessage message) {
 
@@ -109,8 +102,7 @@ public abstract class NlsException extends AbstractNlsException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public NlsException(Throwable nested, NlsMessage message) {
 
@@ -120,12 +112,11 @@ public abstract class NlsException extends AbstractNlsException {
   /**
    * This method adds the given arguments to the given {@link Map}.
    * 
-   * @param map is the {@link Map} to use or <code>null</code> to create a new
-   *        {@link Map}.
+   * @param map is the {@link Map} to use or <code>null</code> to create a new {@link Map}.
    * @param key is the {@link Map#keySet() key} of the entry to add.
    * @param value is the {@link Map#get(Object) value} of the entry to add.
-   * @return a the given <code>map</code> (or a new one if <code>map</code> was
-   *         <code>null</code>) after the given entry was added.
+   * @return a the given <code>map</code> (or a new one if <code>map</code> was <code>null</code>) after the
+   *         given entry was added.
    */
   protected static Map<String, Object> addToMap(Map<String, Object> map, String key, Object value) {
 
@@ -181,8 +172,8 @@ public abstract class NlsException extends AbstractNlsException {
    * @param value3 is the {@link Map#get(Object) value} of the third map entry.
    * @return a {@link Map} containing only the given arguments.
    */
-  protected static Map<String, Object> toMap(String key1, Object value1, String key2,
-      Object value2, String key3, Object value3) {
+  protected static Map<String, Object> toMap(String key1, Object value1, String key2, Object value2, String key3,
+      Object value3) {
 
     Map<String, Object> map = new HashMap<String, Object>();
     map.put(key1, value1);

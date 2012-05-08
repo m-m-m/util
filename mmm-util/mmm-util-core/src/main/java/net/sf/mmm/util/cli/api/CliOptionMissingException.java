@@ -6,8 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionMissingException} is thrown if a
- * {@link CliOption#required() required} {@link CliOption option} is missing.
+ * A {@link CliOptionMissingException} is thrown if a {@link CliOption#required() required} {@link CliOption
+ * option} is missing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -21,8 +21,7 @@ public class CliOptionMissingException extends CliException {
    * The constructor.
    * 
    * @param option is the required {@link CliOption option}.
-   * @param mode is {@link CliModeObject#getTitle() title} of the activated
-   *        {@link CliMode mode}.
+   * @param mode is {@link CliModeObject#getTitle() title} of the activated {@link CliMode mode}.
    */
   public CliOptionMissingException(String option, String mode) {
 

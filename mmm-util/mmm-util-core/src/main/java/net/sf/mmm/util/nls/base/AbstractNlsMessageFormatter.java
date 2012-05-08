@@ -7,14 +7,12 @@ import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
 
 /**
- * This is the abstract base implementation of the {@link NlsMessageFormatter}
- * interface.
+ * This is the abstract base implementation of the {@link NlsMessageFormatter} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractNlsMessageFormatter extends AbstractNlsFormatter<Void> implements
-    NlsMessageFormatter {
+public abstract class AbstractNlsMessageFormatter extends AbstractNlsFormatter<Void> implements NlsMessageFormatter {
 
   /** The syntax of the message-format patterns. */
   protected static final SimpleCharScannerSyntax SYNTAX = new SimpleCharScannerSyntax();

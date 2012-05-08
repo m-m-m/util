@@ -12,7 +12,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-
 /**
  * This is the test-case for {@link HashSetFactory#INSTANCE}.
  * 

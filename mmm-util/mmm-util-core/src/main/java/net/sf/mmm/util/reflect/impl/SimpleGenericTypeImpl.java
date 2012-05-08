@@ -11,11 +11,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.AbstractGenericType;
 
 /**
- * This is an implementation of the {@link GenericType} interface for a simple
- * {@link Class}.
+ * This is an implementation of the {@link GenericType} interface for a simple {@link Class}.
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper
- *        bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -23,8 +21,7 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
 public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /** The {@link GenericType} for {@link Object}. */
-  public static final GenericType<Object> TYPE_OBJECT = new SimpleGenericTypeImpl<Object>(
-      Object.class);
+  public static final GenericType<Object> TYPE_OBJECT = new SimpleGenericTypeImpl<Object>(Object.class);
 
   /** The {@link GenericType} for <code>void</code>. */
   @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -57,8 +54,7 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
       this.componentType = new SimpleGenericTypeImpl(type.getComponentType());
       this.keyType = null;
     } else if (Collection.class.isAssignableFrom(type)) {
-      Type resolvedType = resolveTypeVariable(CommonTypeVariables.TYPE_VARIABLE_COLLECTION_ELEMENT,
-          this);
+      Type resolvedType = resolveTypeVariable(CommonTypeVariables.TYPE_VARIABLE_COLLECTION_ELEMENT, this);
       this.componentType = new GenericTypeImpl(resolvedType);
       this.keyType = null;
     } else if (Map.class.isAssignableFrom(type)) {

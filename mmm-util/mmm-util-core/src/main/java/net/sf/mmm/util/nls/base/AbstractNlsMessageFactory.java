@@ -18,8 +18,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponent implements
-    NlsMessageFactory {
+public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponent implements NlsMessageFactory {
 
   /**
    * The constructor.
@@ -59,8 +58,8 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
    * {@inheritDoc}
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
-  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
-      Object argument2, String key3, Object argument3, String key4, Object argument4) {
+  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
+      String key3, Object argument3, String key4, Object argument4) {
 
     // CHECKSTYLE:ON
 
@@ -75,8 +74,8 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
-  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
-      Object argument2, String key3, Object argument3) {
+  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
+      String key3, Object argument3) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
     arguments.put(key1, argument1);
@@ -88,8 +87,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
-  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2,
-      Object argument2) {
+  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
     arguments.put(key1, argument1);
@@ -111,8 +109,8 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
    * {@inheritDoc}
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
-  public NlsMessage create(String internationalizedMessage, String key1, Object argument1,
-      String key2, Object argument2, String key3, Object argument3, String key4, Object argument4) {
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
+      Object argument2, String key3, Object argument3, String key4, Object argument4) {
 
     // CHECKSTYLE:ON
 
@@ -127,8 +125,8 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
-  public NlsMessage create(String internationalizedMessage, String key1, Object argument1,
-      String key2, Object argument2, String key3, Object argument3) {
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
+      Object argument2, String key3, Object argument3) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
     arguments.put(key1, argument1);
@@ -140,8 +138,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
-  public NlsMessage create(String internationalizedMessage, String key1, Object argument1,
-      String key2, Object argument2) {
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2, Object argument2) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
     arguments.put(key1, argument1);

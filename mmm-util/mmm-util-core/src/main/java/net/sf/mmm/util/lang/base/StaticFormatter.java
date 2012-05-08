@@ -6,12 +6,10 @@ package net.sf.mmm.util.lang.base;
 import java.io.IOException;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.lang.api.Formatter} that
- * always formats to a static string. This may be useful for
- * {@link ComposedFormatter}.
+ * This is an implementation of {@link net.sf.mmm.util.lang.api.Formatter} that always formats to a static
+ * string. This may be useful for {@link ComposedFormatter}.
  * 
- * @param <V> is the generic type of the actual value to {@link #format(Object)
- *        format}.
+ * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */

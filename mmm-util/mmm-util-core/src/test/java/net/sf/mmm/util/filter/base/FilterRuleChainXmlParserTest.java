@@ -24,8 +24,7 @@ public class FilterRuleChainXmlParserTest {
   public void test() throws Exception {
 
     FilterRuleChainXmlParser parser = new FilterRuleChainXmlParser();
-    InputStream inStream = new ClasspathResource(FilterRuleChainXmlParserTest.class, ".xml", true)
-        .openStream();
+    InputStream inStream = new ClasspathResource(FilterRuleChainXmlParserTest.class, ".xml", true).openStream();
     FilterRuleChain chain = parser.parseChain(inStream);
     assertTrue(chain.accept("/doc/manual.pdf"));
     assertFalse(chain.accept("/data/manual.pdf"));

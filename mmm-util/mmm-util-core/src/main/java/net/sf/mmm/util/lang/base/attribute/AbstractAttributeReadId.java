@@ -6,10 +6,9 @@ package net.sf.mmm.util.lang.base.attribute;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
 /**
- * This is the abstract base implementation of the {@link AttributeReadId}
- * interface. It implements the common methods {@link #equals(Object)},
- * {@link #hashCode()} and {@link #toString()} to make your life easier. You may
- * want to override {@link #toString()} with a more specific implementation.
+ * This is the abstract base implementation of the {@link AttributeReadId} interface. It implements the common
+ * methods {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()} to make your life easier. You
+ * may want to override {@link #toString()} with a more specific implementation.
  * 
  * @param <T> is the generic type of the {@link #getId() ID}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

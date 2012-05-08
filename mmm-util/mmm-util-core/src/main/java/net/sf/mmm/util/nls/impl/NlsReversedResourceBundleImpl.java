@@ -8,9 +8,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * This class is contains the reversed {@link Map} for a {@link ResourceBundle}.
- * It allows to get the key for a {@link ResourceBundle#getString(String)
- * message}.
+ * This class is contains the reversed {@link Map} for a {@link ResourceBundle}. It allows to get the key for
+ * a {@link ResourceBundle#getString(String) message}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -52,11 +51,9 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
   /**
    * This method is the inverse of {@link ResourceBundle#getString(String)}.
    * 
-   * @param message is the {@link ResourceBundle#getString(String) message} for
-   *        which the key is requested.
-   * @return the key for the given <code>message</code> or <code>null</code> if
-   *         no such message is contained in the associated
-   *         {@link ResourceBundle}.
+   * @param message is the {@link ResourceBundle#getString(String) message} for which the key is requested.
+   * @return the key for the given <code>message</code> or <code>null</code> if no such message is contained
+   *         in the associated {@link ResourceBundle}.
    */
   public String getKey(String message) {
 

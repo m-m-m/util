@@ -9,9 +9,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 /**
- * The {@link NlsFormatterDateTime} for
- * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_MEDIUM medium}
- * {@link #getStyle() style}.
+ * The {@link NlsFormatterDateTime} for {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_MEDIUM
+ * medium} {@link #getStyle() style}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

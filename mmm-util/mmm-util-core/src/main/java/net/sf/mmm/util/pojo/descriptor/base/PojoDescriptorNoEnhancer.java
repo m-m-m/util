@@ -4,8 +4,7 @@
 package net.sf.mmm.util.pojo.descriptor.base;
 
 /**
- * This is the simplest implementation of the {@link PojoDescriptorEnhancer}. It
- * does nothing!
+ * This is the simplest implementation of the {@link PojoDescriptorEnhancer}. It does nothing!
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

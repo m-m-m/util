@@ -38,13 +38,11 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * The constructor for a {@link #createChildContext() sub-context}.
    * 
    * @param mapFactory is used to create the map for storing variables.
-   * @param valueConverter is the {@link GenericValueConverter} used to convert
-   *        variables that are {@link #getVariable(String, Class) requested} as
-   *        a different type.
+   * @param valueConverter is the {@link GenericValueConverter} used to convert variables that are
+   *        {@link #getVariable(String, Class) requested} as a different type.
    */
   @SuppressWarnings("rawtypes")
-  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory,
-      GenericValueConverter<Object> valueConverter) {
+  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericValueConverter<Object> valueConverter) {
 
     this(mapFactory, null, valueConverter);
   }
@@ -56,8 +54,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * @param parentContext is the context the created one will derive from.
    */
   @SuppressWarnings("rawtypes")
-  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory,
-      GenericContext parentContext) {
+  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericContext parentContext) {
 
     this(mapFactory, parentContext, null);
   }
@@ -67,13 +64,12 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * 
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
-   * @param valueConverter is the {@link GenericValueConverter} used to convert
-   *        variables that are {@link #getVariable(String, Class) requested} as
-   *        a different type.
+   * @param valueConverter is the {@link GenericValueConverter} used to convert variables that are
+   *        {@link #getVariable(String, Class) requested} as a different type.
    */
   @SuppressWarnings("rawtypes")
-  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory,
-      GenericContext parentContext, GenericValueConverter<Object> valueConverter) {
+  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericContext parentContext,
+      GenericValueConverter<Object> valueConverter) {
 
     super(mapFactory, parentContext);
     this.valueConverter = valueConverter;

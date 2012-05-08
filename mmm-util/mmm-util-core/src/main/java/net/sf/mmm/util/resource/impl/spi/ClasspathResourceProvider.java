@@ -11,8 +11,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 
 /**
- * This is the implementation of
- * {@link net.sf.mmm.util.resource.api.spi.DataResourceProvider} for
+ * This is the implementation of {@link net.sf.mmm.util.resource.api.spi.DataResourceProvider} for
  * {@link ClasspathResource}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

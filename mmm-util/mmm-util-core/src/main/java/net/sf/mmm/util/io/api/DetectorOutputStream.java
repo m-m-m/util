@@ -6,8 +6,7 @@ package net.sf.mmm.util.io.api;
 import java.io.OutputStream;
 
 /**
- * This is the interface for a {@link DetectorStream} that wraps an
- * {@link OutputStream}.
+ * This is the interface for a {@link DetectorStream} that wraps an {@link OutputStream}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -15,11 +14,10 @@ import java.io.OutputStream;
 public interface DetectorOutputStream extends DetectorStream {
 
   /**
-   * This method gets the wrapped stream. After this stream is completely
-   * written and closed, the {@link #getMetadata() metadata} can be retrieved.
-   * This requires that the entire data is written and no existing data is
-   * appended via the original stream. This method is a simple getter - it will
-   * always return the same stream object.<br>
+   * This method gets the wrapped stream. After this stream is completely written and closed, the
+   * {@link #getMetadata() metadata} can be retrieved. This requires that the entire data is written and no
+   * existing data is appended via the original stream. This method is a simple getter - it will always return
+   * the same stream object.<br>
    * 
    * @return the wrapper stream.
    */

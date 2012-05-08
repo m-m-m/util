@@ -8,12 +8,11 @@ import java.util.Iterator;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is an implementation of an {@link Iterator} that adapts another
- * {@link Iterator} but only {@link #iterator() iterates} the elements that are
- * {@link Filter#accept(Object) accepted} by a given {@link Filter}.<br/>
+ * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only
+ * {@link #iterator() iterates} the elements that are {@link Filter#accept(Object) accepted} by a given
+ * {@link Filter}.<br/>
  * <b>ATTENTION:</b><br>
- * This implementation is using {@link FilteredIterator}. Please read according
- * javadoc first.
+ * This implementation is using {@link FilteredIterator}. Please read according javadoc first.
  * 
  * @param <E> is the generic type of the {@link #iterator() iterated} elements.
  * 
@@ -32,8 +31,7 @@ public class FilteredIterable<E> implements Iterable<E> {
    * The constructor.
    * 
    * @param delegate is the {@link Iterable} to adapt.
-   * @param filter is the {@link Filter} that {@link Filter#accept(Object)
-   *        filters} the iterated elements.
+   * @param filter is the {@link Filter} that {@link Filter#accept(Object) filters} the iterated elements.
    */
   public FilteredIterable(Iterable<E> delegate, Filter<E> filter) {
 

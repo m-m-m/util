@@ -10,8 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is the abstract base class for a component that needs a
- * {@link #getLogger() logger}.
+ * This is the abstract base class for a component that needs a {@link #getLogger() logger}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.0.1)
@@ -30,15 +29,13 @@ public abstract class AbstractLoggableComponent extends AbstractComponent {
   }
 
   /**
-   * This method gets the {@link Logger logger} for this component. It should
-   * only be invoked after the component has been {@link #initialize()
-   * initialized}.<br>
-   * This method is NOT public because the logger should only be used by the
-   * component itself and NOT externally.
+   * This method gets the {@link Logger logger} for this component. It should only be invoked after the
+   * component has been {@link #initialize() initialized}.<br>
+   * This method is NOT public because the logger should only be used by the component itself and NOT
+   * externally.
    * 
    * @return the logger to be used by this component.
-   * @throws NotInitializedException if this component has NOT yet been
-   *         {@link #initialize() initialized}.
+   * @throws NotInitializedException if this component has NOT yet been {@link #initialize() initialized}.
    */
   protected Logger getLogger() throws NotInitializedException {
 
@@ -49,13 +46,12 @@ public abstract class AbstractLoggableComponent extends AbstractComponent {
   }
 
   /**
-   * This method allows to inject the {@link #getLogger() logger} instance for
-   * this component. This is an optional operation that has to be invoked before
-   * the component has been {@link #initialize() initialized}.<br>
+   * This method allows to inject the {@link #getLogger() logger} instance for this component. This is an
+   * optional operation that has to be invoked before the component has been {@link #initialize() initialized}
+   * .<br>
    * 
    * @param logger is the {@link #getLogger() logger} to set.
-   * @throws AlreadyInitializedException if this component has already been
-   *         {@link #initialize() initialized}.
+   * @throws AlreadyInitializedException if this component has already been {@link #initialize() initialized}.
    */
   // @Resource
   public void setLogger(Logger logger) throws AlreadyInitializedException {

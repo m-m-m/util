@@ -6,8 +6,7 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.text.api.Justification;
 
 /**
- * This class represents an argument of an
- * {@link net.sf.mmm.util.nls.api.NlsMessage}.
+ * This class represents an argument of an {@link net.sf.mmm.util.nls.api.NlsMessage}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

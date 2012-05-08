@@ -7,8 +7,8 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.io.api.ByteArray} that
- * holds a pooled {@link #getBytes() byte-array}.
+ * This is an implementation of {@link net.sf.mmm.util.io.api.ByteArray} that holds a pooled
+ * {@link #getBytes() byte-array}.
  * 
  * @see net.sf.mmm.util.pool.api.ByteArrayPool
  * 
@@ -40,8 +40,8 @@ public class PooledByteArray extends ByteArrayImpl {
    * The constructor.
    * 
    * @param buffer is the internal {@link #getBytes() buffer}.
-   * @param startIndex is the {@link #getCurrentIndex() current index} as well
-   *        as the {@link #getMinimumIndex() minimum index}.
+   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the
+   *        {@link #getMinimumIndex() minimum index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.
    */
   public PooledByteArray(byte[] buffer, int startIndex, int maximumIndex) {
@@ -53,11 +53,10 @@ public class PooledByteArray extends ByteArrayImpl {
    * The constructor.
    * 
    * @param buffer is the internal {@link #getBytes() buffer}.
-   * @param startIndex is the {@link #getCurrentIndex() current index} as well
-   *        as the {@link #getMinimumIndex() minimum index}.
+   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the
+   *        {@link #getMinimumIndex() minimum index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.
-   * @param parent is the parent that {@link #createSubArray(int, int) created}
-   *        this array.
+   * @param parent is the parent that {@link #createSubArray(int, int) created} this array.
    */
   protected PooledByteArray(byte[] buffer, int startIndex, int maximumIndex, PooledByteArray parent) {
 
@@ -87,8 +86,8 @@ public class PooledByteArray extends ByteArrayImpl {
   /**
    * This method marks this array to be released.
    * 
-   * @return <code>true</code> if this array can be released, <code>false</code>
-   *         if there are references left that have to be released before.
+   * @return <code>true</code> if this array can be released, <code>false</code> if there are references left
+   *         that have to be released before.
    */
   public boolean release() {
 

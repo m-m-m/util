@@ -7,8 +7,8 @@ import net.sf.mmm.util.pojo.path.api.PojoPath;
 import net.sf.mmm.util.pojo.path.api.PojoPathRecognizer;
 
 /**
- * This is a dummy implementation of the {@link PojoPathRecognizer} that
- * {@link #recognize(Object, PojoPath) does} nothing.
+ * This is a dummy implementation of the {@link PojoPathRecognizer} that {@link #recognize(Object, PojoPath)
+ * does} nothing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

@@ -7,8 +7,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link NodeCycleException} is thrown if a chain of nodes has a cyclic
- * dependency.
+ * A {@link NodeCycleException} is thrown if a chain of nodes has a cyclic dependency.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -19,8 +18,7 @@ public class NodeCycleException extends NlsRuntimeException {
   private static final long serialVersionUID = 8888925901313417066L;
 
   /**
-   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   * argument} {@value}.
+   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) argument} {@value}.
    */
   public static final String KEY_CYCLE = "cycle";
 

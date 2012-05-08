@@ -131,8 +131,8 @@ public class Iso8601UtilTest {
     // ATTENTION: parsed and calendar may NOT be equal because the timezone
     // may have changed to the fixed UTC-Offset...
     Assert.assertEquals(calendar.getTimeInMillis(), parsed.getTimeInMillis());
-    Assert.assertEquals(calendar.getTimeZone().getOffset(calendar.getTimeInMillis()), parsed
-        .getTimeZone().getOffset(parsed.getTimeInMillis()));
+    Assert.assertEquals(calendar.getTimeZone().getOffset(calendar.getTimeInMillis()),
+        parsed.getTimeZone().getOffset(parsed.getTimeInMillis()));
   }
 
 }

@@ -12,8 +12,7 @@ import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractValueConverter;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts a
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts a
  * {@link CharSequence} to a {@link Class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -52,8 +51,8 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
    * {@inheritDoc}
    */
   @SuppressWarnings("all")
-  public <T extends Class> T convert(CharSequence value, Object valueSource,
-      GenericType<T> targetType) throws ValueException {
+  public <T extends Class> T convert(CharSequence value, Object valueSource, GenericType<T> targetType)
+      throws ValueException {
 
     if (value == null) {
       return null;

@@ -6,8 +6,7 @@ package net.sf.mmm.util.text.base;
 import net.sf.mmm.util.lang.api.BasicUtil;
 
 /**
- * This is a fast implementation of
- * {@link net.sf.mmm.util.text.api.StringHasher}.
+ * This is a fast implementation of {@link net.sf.mmm.util.text.api.StringHasher}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

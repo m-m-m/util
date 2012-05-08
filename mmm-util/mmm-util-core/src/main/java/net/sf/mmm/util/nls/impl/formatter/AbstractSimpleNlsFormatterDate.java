@@ -12,8 +12,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
- * This is the abstract base implementation for a {@link SimpleNlsFormatter}
- * using {@link DateFormat}.
+ * This is the abstract base implementation for a {@link SimpleNlsFormatter} using {@link DateFormat}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -26,8 +25,7 @@ public abstract class AbstractSimpleNlsFormatterDate extends SimpleNlsFormatter<
   /**
    * The constructor.
    * 
-   * @param style is the style used for formatting dates (e.g.
-   *        {@link DateFormat#SHORT}).
+   * @param style is the style used for formatting dates (e.g. {@link DateFormat#SHORT}).
    */
   public AbstractSimpleNlsFormatterDate(int style) {
 
@@ -36,14 +34,11 @@ public abstract class AbstractSimpleNlsFormatterDate extends SimpleNlsFormatter<
   }
 
   /**
-   * This method converts the given {@link DateFormat}-style constant (e.g.
-   * {@link DateFormat#LONG}) to the according {@link #getStyle() NLS-style
-   * name}.
+   * This method converts the given {@link DateFormat}-style constant (e.g. {@link DateFormat#LONG}) to the
+   * according {@link #getStyle() NLS-style name}.
    * 
-   * @param style is the {@link DateFormat}-style constant (e.g.
-   *        {@link DateFormat#MEDIUM}).
-   * @return the according {@link #getStyle() NLS-style name} or
-   *         <code>null</code> if unknown.
+   * @param style is the {@link DateFormat}-style constant (e.g. {@link DateFormat#MEDIUM}).
+   * @return the according {@link #getStyle() NLS-style name} or <code>null</code> if unknown.
    */
   static String convertStyle(int style) {
 

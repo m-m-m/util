@@ -6,8 +6,8 @@ package net.sf.mmm.util.collection.api;
 import java.util.Deque;
 
 /**
- * This is the interface for a {@link CollectionFactory} that {@link #create()
- * creates} instances of {@link Deque}.
+ * This is the interface for a {@link CollectionFactory} that {@link #create() creates} instances of
+ * {@link Deque}.
  * 
  * @see net.sf.mmm.util.collection.base.LinkedListDequeFactory#INSTANCE
  * 

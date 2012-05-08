@@ -14,11 +14,9 @@ public interface ResourceVisitor {
   /**
    * This method is invoked for each traversed package.
    * 
-   * @param classpath is the absolute classpath of the traversed package (e.g.
-   *        "net/sf/mmm/util/reflect").
-   * @return <code>true</code> if the package should be traversed recursively,
-   *         <code>false</code> if the package and all its content (including
-   *         sub-packages) should be skipped.
+   * @param classpath is the absolute classpath of the traversed package (e.g. "net/sf/mmm/util/reflect").
+   * @return <code>true</code> if the package should be traversed recursively, <code>false</code> if the
+   *         package and all its content (including sub-packages) should be skipped.
    */
   boolean visitPackage(String classpath);
 

@@ -8,20 +8,17 @@ import java.util.Locale;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the interface for a {@link Formatter} that is {@link Locale
- * localizable}. Methods inherited from {@link Formatter} will use
- * {@link Locale#getDefault()}.
+ * This is the interface for a {@link Formatter} that is {@link Locale localizable}. Methods inherited from
+ * {@link Formatter} will use {@link Locale#getDefault()}.
  * 
- * @param <V> is the generic type of the actual value to {@link #format(Object)
- *        format}.
+ * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
 public interface LocalizableFormatter<V> extends Formatter<V> {
 
   /**
-   * This method formats the given <code>value</code> for the given
-   * <code>locale</code>.<br/>
+   * This method formats the given <code>value</code> for the given <code>locale</code>.<br/>
    * This is a shorthand of the following code:
    * 
    * <pre>
@@ -32,23 +29,21 @@ public interface LocalizableFormatter<V> extends Formatter<V> {
    * 
    * @param value is the value to format. May be <code>null</code>.
    * @param locale is the {@link Locale}.
-   * @return the formatted value. If the given <code>value</code> is
-   *         <code>null</code>, a legal implementation will return "null" or "".
+   * @return the formatted value. If the given <code>value</code> is <code>null</code>, a legal implementation
+   *         will return "null" or "".
    */
   String format(V value, Locale locale);
 
   /**
-   * This method formats the given <code>value</code> for the given
-   * <code>locale</code> and directly {@link Appendable#append(CharSequence)
-   * appends} to the given <code>buffer</code>.
+   * This method formats the given <code>value</code> for the given <code>locale</code> and directly
+   * {@link Appendable#append(CharSequence) appends} to the given <code>buffer</code>.
    * 
    * @param value is the value to format. May be <code>null</code>.
-   * @param buffer is the {@link Appendable} to
-   *        {@link Appendable#append(CharSequence) append} the formatted value
-   *        to.
+   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
+   *        value to.
    * @param locale is the {@link Locale} to use.
-   * @throws RuntimeIoException if {@link Appendable#append(CharSequence)
-   *         append} caused a {@link java.io.IOException}.
+   * @throws RuntimeIoException if {@link Appendable#append(CharSequence) append} caused a
+   *         {@link java.io.IOException}.
    */
   void format(V value, Appendable buffer, Locale locale) throws RuntimeIoException;
 

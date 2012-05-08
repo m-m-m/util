@@ -12,8 +12,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
- * using {@link DecimalFormat}.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using {@link DecimalFormat}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -10,8 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- * This class represents a simple
- * {@link java.util.Properties#getProperty(String) property} as JAXB bean.
+ * This class represents a simple {@link java.util.Properties#getProperty(String) property} as JAXB bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

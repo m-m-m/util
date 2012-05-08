@@ -10,12 +10,10 @@ import net.sf.mmm.util.component.api.NotInitializedException;
 
 /**
  * This class represents the state of an initialization.<br>
- * It therefore offers the method {@link #requireNotInitilized()} that can be
- * called before initialization e.g. from {@link javax.inject.Inject
- * injection-setters} so nothing can be re-injected after
- * {@link #setInitializing() initialization}. Additionally there is
- * {@link #requireInitilized()} that can be called after initialization e.g.
- * from functional methods of the component to ensure that the component has
+ * It therefore offers the method {@link #requireNotInitilized()} that can be called before initialization
+ * e.g. from {@link javax.inject.Inject injection-setters} so nothing can be re-injected after
+ * {@link #setInitializing() initialization}. Additionally there is {@link #requireInitilized()} that can be
+ * called after initialization e.g. from functional methods of the component to ensure that the component has
  * been {@link #setInitializing() initialized}.
  * 
  * @see javax.annotation.PostConstruct
@@ -32,8 +30,7 @@ public class InitializationState {
   private static final int STATE_INITIALIZING = 1;
 
   /**
-   * The {@link #state} if {@link #setInitialized() initialization} has
-   * completed.
+   * The {@link #state} if {@link #setInitialized() initialization} has completed.
    */
   private static final int STATE_INITIALIZED = 2;
 
@@ -50,15 +47,13 @@ public class InitializationState {
   }
 
   /**
-   * This method sets the state to <em>initializing</em>. This should be done to
-   * start the initialization in a thread-safe and atomic way. After the
-   * initialization has completed, the method {@link #setInitialized()} should
-   * be invoked.
+   * This method sets the state to <em>initializing</em>. This should be done to start the initialization in a
+   * thread-safe and atomic way. After the initialization has completed, the method {@link #setInitialized()}
+   * should be invoked.
    * 
-   * @return <code>true</code> if the state was NOT {@link #isInitialized()
-   *         initialized} and is now {@link #isInitialized() initialized},
-   *         <code>false</code> if the state is already {@link #isInitialized()
-   *         initialized}.
+   * @return <code>true</code> if the state was NOT {@link #isInitialized() initialized} and is now
+   *         {@link #isInitialized() initialized}, <code>false</code> if the state is already
+   *         {@link #isInitialized() initialized}.
    */
   public boolean setInitializing() {
 
@@ -83,12 +78,10 @@ public class InitializationState {
   }
 
   /**
-   * This method gets the status of the {@link #setInitialized() initialization}
-   * .
+   * This method gets the status of the {@link #setInitialized() initialization} .
    * 
-   * @return <code>true</code> if this component has been
-   *         {@link #setInitializing() initialized}, <code>false</code>
-   *         otherwise.
+   * @return <code>true</code> if this component has been {@link #setInitializing() initialized},
+   *         <code>false</code> otherwise.
    */
   public boolean isInitialized() {
 
@@ -96,8 +89,7 @@ public class InitializationState {
   }
 
   /**
-   * This method checks that this state has already been
-   * {@link #setInitialized() initialized}.
+   * This method checks that this state has already been {@link #setInitialized() initialized}.
    * 
    * @throws NotInitializedException if this state has NOT been initialized yet.
    */
@@ -109,11 +101,9 @@ public class InitializationState {
   }
 
   /**
-   * This method checks that this state has NOT yet been
-   * {@link #setInitialized() initialized}.
+   * This method checks that this state has NOT yet been {@link #setInitialized() initialized}.
    * 
-   * @throws AlreadyInitializedException if this state has already been
-   *         initialized.
+   * @throws AlreadyInitializedException if this state has already been initialized.
    */
   public void requireNotInitilized() throws AlreadyInitializedException {
 

@@ -7,8 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link StreamClosedException} is thrown if a stream is used that has
- * already been {@link java.io.Closeable#close() closed}.
+ * A {@link StreamClosedException} is thrown if a stream is used that has already been
+ * {@link java.io.Closeable#close() closed}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

@@ -6,8 +6,8 @@ package net.sf.mmm.util.collection.api;
 import java.util.SortedMap;
 
 /**
- * This is the interface for a {@link MapFactory} that {@link #create() creates}
- * instances of {@link SortedMap}.
+ * This is the interface for a {@link MapFactory} that {@link #create() creates} instances of
+ * {@link SortedMap}.
  * 
  * @see net.sf.mmm.util.collection.base.TreeMapFactory#INSTANCE
  * 

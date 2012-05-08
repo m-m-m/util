@@ -6,8 +6,8 @@ package net.sf.mmm.util.value.base;
 import net.sf.mmm.util.value.api.PojoValidator;
 
 /**
- * This is a dummy implementation of {@link PojoValidator} that accepts all
- * objects as {@link #validate(Object) valid}.
+ * This is a dummy implementation of {@link PojoValidator} that accepts all objects as
+ * {@link #validate(Object) valid}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

@@ -22,8 +22,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class StringTokenizerTest {
 
-  public void checkTokenizer(String escapeStart, String escapeEnd, char[] delimiters,
-      String... strings) {
+  public void checkTokenizer(String escapeStart, String escapeEnd, char[] delimiters, String... strings) {
 
     StringBuilder buffer = new StringBuilder();
     int delimiterIndex = 0;

@@ -10,8 +10,8 @@ import net.sf.mmm.util.lang.base.AbstractFormatter;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for
- * the plain {@link VersionIdentifier#getVersionSegment(int) version number}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the plain
+ * {@link VersionIdentifier#getVersionSegment(int) version number}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -40,21 +40,18 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
    * The constructor.
    * 
    * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the number. Will be
-   *        omitted if the number is <code>null</code>.
-   * @param segmentSeparator is the separator for
-   *        {@link VersionIdentifier#getVersionSegment(int) segments}. The typical
-   *        value is the dot sign (".").
-   * @param minimumSegmentCount is the minimum number of segments to format. The
-   *        default is <code>0</code>.
-   * @param maximumSegmentCount is maximum number of segments to format. The
-   *        default is <code>{@link Integer#MAX_VALUE}</code>.
+   * @param prefix is the static prefix to append before the number. Will be omitted if the number is
+   *        <code>null</code>.
+   * @param segmentSeparator is the separator for {@link VersionIdentifier#getVersionSegment(int) segments}.
+   *        The typical value is the dot sign (".").
+   * @param minimumSegmentCount is the minimum number of segments to format. The default is <code>0</code>.
+   * @param maximumSegmentCount is maximum number of segments to format. The default is
+   *        <code>{@link Integer#MAX_VALUE}</code>.
    * @param segmentPadding is the padding (minimum number of digits) for each
-   *        {@link VersionIdentifier#getVersionSegment(int) segment}. The default is
-   *        <code>0</code>.
+   *        {@link VersionIdentifier#getVersionSegment(int) segment}. The default is <code>0</code>.
    */
-  public VersionIdentifierFormatterVersionSegments(StringUtil stringUtil, String prefix,
-      String segmentSeparator, int minimumSegmentCount, int maximumSegmentCount, int segmentPadding) {
+  public VersionIdentifierFormatterVersionSegments(StringUtil stringUtil, String prefix, String segmentSeparator,
+      int minimumSegmentCount, int maximumSegmentCount, int segmentPadding) {
 
     super();
     this.stringUtil = stringUtil;
@@ -90,12 +87,11 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
   }
 
   /**
-   * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment}
-   * at the given <code>index</code>.
+   * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment} at the given
+   * <code>index</code>.
    * 
    * @param value is the {@link VersionIdentifier}.
-   * @param index is the index of the {@link VersionIdentifier#getVersionSegment(int)
-   *        segment} to format.
+   * @param index is the index of the {@link VersionIdentifier#getVersionSegment(int) segment} to format.
    * @return the formatted segment.
    */
   protected CharSequence doFormatSegment(VersionIdentifier value, int index) {

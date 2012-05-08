@@ -4,9 +4,8 @@
 package net.sf.mmm.util.reflect.api;
 
 /**
- * This class represents an argument list. It is a container for an
- * {@link java.lang.Object} array and can be used as
- * {@link java.util.Map#get(java.lang.Object) hash-key}.
+ * This class represents an argument list. It is a container for an {@link java.lang.Object} array and can be
+ * used as {@link java.util.Map#get(java.lang.Object) hash-key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -55,9 +54,8 @@ public class Arguments {
   /**
    * This method gets the argument at the given <code>position</code>.
    * 
-   * @param position is the index of the requested type. This value must be in
-   *        the range from <code>0</code> to
-   *        <code>{@link #getArgumentCount()} - 1</code>.
+   * @param position is the index of the requested type. This value must be in the range from <code>0</code>
+   *        to <code>{@link #getArgumentCount()} - 1</code>.
    * @return the argument at the given index.
    */
   public Object getArgument(int position) {

@@ -7,8 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * The {@link NlsFormatterChoiceNoElseConditionException} is thrown if a
- * {@link NlsFormatterChoice choice-format} has no (else)-condition.
+ * The {@link NlsFormatterChoiceNoElseConditionException} is thrown if a {@link NlsFormatterChoice
+ * choice-format} has no (else)-condition.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

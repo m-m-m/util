@@ -6,9 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliModeUndefinedException} is thrown if a {@link CliOption} or
- * {@link CliArgument} defines a {@link CliOption#mode() mode} that is NOT
- * {@link CliMode defined}.
+ * A {@link CliModeUndefinedException} is thrown if a {@link CliOption} or {@link CliArgument} defines a
+ * {@link CliOption#mode() mode} that is NOT {@link CliMode defined}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -22,8 +21,8 @@ public class CliModeUndefinedException extends CliException {
    * The constructor.
    * 
    * @param mode is the undefined mode.
-   * @param annotation is the object representing the {@link CliOption} or
-   *        {@link CliArgument} that used the undefined mode.
+   * @param annotation is the object representing the {@link CliOption} or {@link CliArgument} that used the
+   *        undefined mode.
    */
   public CliModeUndefinedException(String mode, Object annotation) {
 

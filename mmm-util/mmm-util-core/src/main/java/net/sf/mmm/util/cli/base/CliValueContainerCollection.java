@@ -10,8 +10,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import org.slf4j.Logger;
 
 /**
- * This is an implementation of {@link CliValueContainer} for a
- * {@link Collection}.
+ * This is an implementation of {@link CliValueContainer} for a {@link Collection}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -24,13 +23,11 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
   /**
    * The constructor.
    * 
-   * @param parameterContainer is the {@link #getParameterContainer()
-   *        parameter-container}.
+   * @param parameterContainer is the {@link #getParameterContainer() parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
    * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
-   * @param value is the initial, empty {@link Collection}-{@link #getValue()
-   *        value}.
+   * @param value is the initial, empty {@link Collection}-{@link #getValue() value}.
    */
   public CliValueContainerCollection(CliParameterContainer parameterContainer, CliState cliState,
       CliParserDependencies dependencies, Logger logger, Collection<Object> value) {

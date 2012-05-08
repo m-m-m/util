@@ -10,8 +10,8 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This class represents the settings for the
- * {@link CliParser#printHelp(Appendable, CliOutputSettings) help output}.
+ * This class represents the settings for the {@link CliParser#printHelp(Appendable, CliOutputSettings) help
+ * output}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -57,9 +57,8 @@ public class CliOutputSettings {
   }
 
   /**
-   * This method gets the width of the
-   * {@link CliParser#printHelp(Appendable, CliOutputSettings) help-output} in
-   * characters per line.
+   * This method gets the width of the {@link CliParser#printHelp(Appendable, CliOutputSettings) help-output}
+   * in characters per line.
    * 
    * @return the width.
    */
@@ -97,8 +96,8 @@ public class CliOutputSettings {
   }
 
   /**
-   * This method gets the {@link Locale} used to nationalize the output. By
-   * default {@link Locale#getDefault()} ist used.
+   * This method gets the {@link Locale} used to nationalize the output. By default
+   * {@link Locale#getDefault()} ist used.
    * 
    * @return the {@link Locale}.
    */

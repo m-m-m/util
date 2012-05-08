@@ -9,8 +9,7 @@ import java.util.concurrent.ConcurrentMap;
 import net.sf.mmm.util.collection.api.ConcurrentMapFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.ConcurrentMapFactory} interface that
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.ConcurrentMapFactory} interface that
  * creates instances of {@link ConcurrentHashMap}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -13,8 +13,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the test-case for {@link PojoDescriptorBuilder} using private method
- * introspection.
+ * This is the test-case for {@link PojoDescriptorBuilder} using private method introspection.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -28,8 +27,7 @@ public class PrivateMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescri
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
     PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
-    builder
-        .setMethodIntrospector(new PojoMethodIntrospectorImpl(VisibilityModifier.PRIVATE, false));
+    builder.setMethodIntrospector(new PojoMethodIntrospectorImpl(VisibilityModifier.PRIVATE, false));
     builder.initialize();
     return builder;
   }

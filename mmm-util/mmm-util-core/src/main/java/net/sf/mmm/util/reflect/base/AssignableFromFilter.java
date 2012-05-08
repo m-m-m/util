@@ -6,9 +6,8 @@ package net.sf.mmm.util.reflect.base;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is a filter that only {@link #accept(Class) accepts} {@link Class types}
- * that are {@link Class#isAssignableFrom(Class) assignable from} a
- * {@link #AssignableFromFilter(Class) special type}.
+ * This is a filter that only {@link #accept(Class) accepts} {@link Class types} that are
+ * {@link Class#isAssignableFrom(Class) assignable from} a {@link #AssignableFromFilter(Class) special type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -21,8 +20,7 @@ public class AssignableFromFilter implements Filter<Class<?>> {
   /**
    * The constructor.
    * 
-   * @param superType is the super-type defining which types to
-   *        {@link #accept(Class) accept}.
+   * @param superType is the super-type defining which types to {@link #accept(Class) accept}.
    */
   public AssignableFromFilter(Class<?> superType) {
 
@@ -34,9 +32,8 @@ public class AssignableFromFilter implements Filter<Class<?>> {
    * {@inheritDoc}
    * 
    * @return <code>true</code> if and only if the given <code>type</code> is
-   *         {@link Class#isAssignableFrom(Class) assignable from} the
-   *         super-type defined at {@link #AssignableFromFilter(Class)
-   *         construction}. This means the given <code>type</code> has to
+   *         {@link Class#isAssignableFrom(Class) assignable from} the super-type defined at
+   *         {@link #AssignableFromFilter(Class) construction}. This means the given <code>type</code> has to
    *         implement/extend the super-type or be equal to it.
    */
   public boolean accept(Class<?> type) {

@@ -9,8 +9,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 /**
- * The {@link NlsFormatterDateTime} for
- * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_FULL full}
+ * The {@link NlsFormatterDateTime} for {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_FULL full}
  * {@link #getStyle() style}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

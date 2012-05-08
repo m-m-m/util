@@ -30,8 +30,7 @@ public class JustificationBuilderTest {
   }
 
   /**
-   * This method tests the examples specified from the javadoc of
-   * {@link JustificationBuilder}.
+   * This method tests the examples specified from the javadoc of {@link JustificationBuilder}.
    */
   @Test
   public void testExamples() {

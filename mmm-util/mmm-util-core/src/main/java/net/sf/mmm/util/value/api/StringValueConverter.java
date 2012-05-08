@@ -6,8 +6,7 @@ package net.sf.mmm.util.value.api;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is a sub-interface of {@link GenericValueConverter} for the most common
- * value type {@link String}.<br>
+ * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

@@ -6,9 +6,8 @@ package net.sf.mmm.util.cli.base;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * A {@link CliParameterConsumer} holds the command-line parameters together
- * with the current index. In other words it is like an
- * {@link java.util.Iterator} for the parameters.
+ * A {@link CliParameterConsumer} holds the command-line parameters together with the current index. In other
+ * words it is like an {@link java.util.Iterator} for the parameters.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -40,8 +39,7 @@ public class CliParameterConsumer {
    * @see java.util.Iterator#hasNext()
    * @see java.util.Enumeration#hasMoreElements()
    * 
-   * @return <code>true</code> if {@link #getNext() element is available},
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if {@link #getNext() element is available}, <code>false</code> otherwise.
    */
   public boolean hasNext() {
 
@@ -62,11 +60,10 @@ public class CliParameterConsumer {
   }
 
   /**
-   * This method gets the current element. It is the same as {@link #getNext()}
-   * except that it does NOT step on to the next element.
+   * This method gets the current element. It is the same as {@link #getNext()} except that it does NOT step
+   * on to the next element.
    * 
-   * @return the current element or <code>null</code> if no {@link #hasNext()
-   *         next} is available.
+   * @return the current element or <code>null</code> if no {@link #hasNext() next} is available.
    */
   public String getCurrent() {
 

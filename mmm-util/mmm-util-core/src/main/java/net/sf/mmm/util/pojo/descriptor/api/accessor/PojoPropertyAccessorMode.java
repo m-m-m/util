@@ -4,8 +4,7 @@
 package net.sf.mmm.util.pojo.descriptor.api.accessor;
 
 /**
- * This is the abstract base class for the mode of a specific
- * {@link PojoPropertyAccessor}.
+ * This is the abstract base class for the mode of a specific {@link PojoPropertyAccessor}.
  * 
  * @see PojoPropertyAccessor#getMode()
  * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
@@ -27,8 +26,7 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of this mode.
-   * @param reading is a flag that determines if this mode is for
-   *        {@link #isReading() reading}.
+   * @param reading is a flag that determines if this mode is for {@link #isReading() reading}.
    */
   PojoPropertyAccessorMode(String name, boolean reading) {
 
@@ -48,16 +46,12 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
   }
 
   /**
-   * This method determines if this mode is for a reading
-   * {@link PojoPropertyAccessor accessor}.
+   * This method determines if this mode is for a reading {@link PojoPropertyAccessor accessor}.
    * 
-   * @return <code>true</code> if this mode is for a reading
-   *         {@link PojoPropertyAccessor accessor} that
-   *         {@link PojoPropertyAccessor#getReturnType() returns} a
-   *         property-value, <code>false</code> if this mode is for a modifying
-   *         {@link PojoPropertyAccessor accessor} that expects a
-   *         {@link PojoPropertyAccessor#getPropertyType() property}-value as
-   *         argument.
+   * @return <code>true</code> if this mode is for a reading {@link PojoPropertyAccessor accessor} that
+   *         {@link PojoPropertyAccessor#getReturnType() returns} a property-value, <code>false</code> if this
+   *         mode is for a modifying {@link PojoPropertyAccessor accessor} that expects a
+   *         {@link PojoPropertyAccessor#getPropertyType() property}-value as argument.
    */
   public boolean isReading() {
 

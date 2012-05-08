@@ -11,8 +11,8 @@ import net.sf.mmm.util.component.api.IocContainer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * This is just an ugly static pool used to simplify testing. It might cause
- * memory holes and should never be used in productive code.
+ * This is just an ugly static pool used to simplify testing. It might cause memory holes and should never be
+ * used in productive code.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -46,8 +46,7 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method disposes the {@link #getInstance() singleton-instance} (if it
-   * exists).
+   * This method disposes the {@link #getInstance() singleton-instance} (if it exists).
    */
   public static void dispose() {
 
@@ -58,8 +57,7 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method gets the {@link IocContainer} for the given
-   * <code>xmlClasspath</code>.
+   * This method gets the {@link IocContainer} for the given <code>xmlClasspath</code>.
    * 
    * @param xmlClasspath is the classpath to the XML configuration.
    * @return the requested container.
@@ -78,8 +76,8 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method disposes the {@link #getInstance(String) instance} identified
-   * by the given <code>xmlClasspath</code> (if it exists).
+   * This method disposes the {@link #getInstance(String) instance} identified by the given
+   * <code>xmlClasspath</code> (if it exists).
    * 
    * @param xmlClasspath is the classpath to the XML configuration.
    */

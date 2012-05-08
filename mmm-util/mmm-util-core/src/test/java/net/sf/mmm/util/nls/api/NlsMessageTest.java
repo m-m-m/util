@@ -51,8 +51,7 @@ public class NlsMessageTest {
   }
 
   /**
-   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} using a
-   * custom resolver.
+   * This method tests the {@link net.sf.mmm.util.nls.api.NlsMessage} using a custom resolver.
    */
   @Test
   public void testMessage() {
@@ -79,8 +78,7 @@ public class NlsMessageTest {
       }
     };
     translatorDe.initialize();
-    Assert.assertEquals(helloDe + arg + suffix,
-        testMessage.getLocalizedMessage(Locale.GERMAN, translatorDe));
+    Assert.assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(Locale.GERMAN, translatorDe));
   }
 
   @Test
@@ -94,17 +92,15 @@ public class NlsMessageTest {
     final String realDe = "relle Zahl[{" + keyMin + "},{" + keyMax + "}]";
     NlsMessageFactory factory = getMessageFactory();
     NlsMessage simpleMessageInteger = factory.create(integer);
-    NlsMessage simpleMessageReal = factory.create(real, keyMin, Double.valueOf(-5), keyMax,
-        Double.valueOf(5));
+    NlsMessage simpleMessageReal = factory.create(real, keyMin, Double.valueOf(-5), keyMax, Double.valueOf(5));
 
     String keyExpected = "expectedType";
     String keyActual = "actualType";
-    final String err = "The given value must be of the type \"{" + keyExpected
-        + "}\" but has the type \"{" + keyActual + "}\"!";
-    final String errDe = "Der angegebene Wert muss vom Typ \"{" + keyExpected
-        + "}\" sein, hat aber den Typ \"{" + keyActual + "}\"!";
-    NlsMessage cascadedMessage = factory.create(err, keyExpected, simpleMessageInteger, keyActual,
-        simpleMessageReal);
+    final String err = "The given value must be of the type \"{" + keyExpected + "}\" but has the type \"{" + keyActual
+        + "}\"!";
+    final String errDe = "Der angegebene Wert muss vom Typ \"{" + keyExpected + "}\" sein, hat aber den Typ \"{"
+        + keyActual + "}\"!";
+    NlsMessage cascadedMessage = factory.create(err, keyExpected, simpleMessageInteger, keyActual, simpleMessageReal);
     AbstractNlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
@@ -174,11 +170,10 @@ public class NlsMessageTest {
 
     String[] types = new String[] { NlsFormatterManager.TYPE_DATE, NlsFormatterManager.TYPE_TIME,
         NlsFormatterManager.TYPE_DATETIME };
-    String[] styles = new String[] { NlsFormatterManager.STYLE_SHORT,
-        NlsFormatterManager.STYLE_MEDIUM, NlsFormatterManager.STYLE_LONG,
-        NlsFormatterManager.STYLE_FULL, null };
-    int[] dateStyles = new int[] { DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.LONG,
-        DateFormat.FULL, DateFormat.MEDIUM };
+    String[] styles = new String[] { NlsFormatterManager.STYLE_SHORT, NlsFormatterManager.STYLE_MEDIUM,
+        NlsFormatterManager.STYLE_LONG, NlsFormatterManager.STYLE_FULL, null };
+    int[] dateStyles = new int[] { DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.LONG, DateFormat.FULL,
+        DateFormat.MEDIUM };
     Locale locale = Locale.GERMANY;
     for (String type : types) {
       for (int styleIndex = 0; styleIndex < styles.length; styleIndex++) {
@@ -222,10 +217,9 @@ public class NlsMessageTest {
     NlsTemplateResolver resolver = createResolver(myRB);
     Number number = new Double(0.42);
     NlsMessage msg = getMessageFactory().create(MyResourceBundle.MSG_TEST_NUMBER, "value", number);
-    Assert
-        .assertEquals(
-            "Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!",
-            msg.getMessage());
+    Assert.assertEquals(
+        "Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!",
+        msg.getMessage());
     Assert
         .assertEquals(
             "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
@@ -249,13 +243,11 @@ public class NlsMessageTest {
     msg = getMessageFactory().create("{" + key + ",type,medium}", key, type);
     Assert.assertEquals("java.util.Map", msg.getMessage());
     msg = getMessageFactory().create("{" + key + ",type,long}", key, type);
-    Assert.assertEquals(
-        "java.util.Map<java.util.List<? extends String>, java.util.List<java.util.Map<? "
-            + "extends Object, ? super VARIABLE[]>>>", msg.getMessage());
+    Assert.assertEquals("java.util.Map<java.util.List<? extends String>, java.util.List<java.util.Map<? "
+        + "extends Object, ? super VARIABLE[]>>>", msg.getMessage());
     msg = getMessageFactory().create("{" + key + ",type,full}", key, type);
     Assert.assertEquals("java.util.Map<java.util.List<? extends java.lang.String>, "
-        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>",
-        msg.getMessage());
+        + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>", msg.getMessage());
   }
 
   /**
@@ -288,8 +280,7 @@ public class NlsMessageTest {
     Assert.assertEquals("zero", msg.getMessage());
 
     // date choice
-    template = "{"
-        + key
+    template = "{" + key
         + ",choice,(?==2010-01-31T23:59:59Z)'special day'(?>2010-01-31T23:59:59Z)'after'(else)\"before\"}";
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -321,8 +312,7 @@ public class NlsMessageTest {
     // test nested choice
     String key2 = "key2";
     String key3 = "key3";
-    template = "{" + key + ",choice,(?==true)'foo'(else){" + key2 + ",choice,(?==true)'bar'(else){"
-        + key3 + "}}}";
+    template = "{" + key + ",choice,(?==true)'foo'(else){" + key2 + ",choice,(?==true)'bar'(else){" + key3 + "}}}";
     msg = factory.create(template, key, Boolean.TRUE);
     Assert.assertEquals("foo", msg.getMessage());
     msg = factory.create(template, key, Boolean.FALSE, key2, Boolean.TRUE);

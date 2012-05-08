@@ -70,8 +70,7 @@ public enum Comparator implements Datatype<String> {
   },
 
   /**
-   * {@link Comparator} to check if objects are {@link Object#equals(Object)
-   * equal}.
+   * {@link Comparator} to check if objects are {@link Object#equals(Object) equal}.
    */
   EQUAL("==", NlsBundleUtilCore.INF_EQUAL, true, null) {
 
@@ -86,8 +85,7 @@ public enum Comparator implements Datatype<String> {
   },
 
   /**
-   * {@link Comparator} to check if objects are NOT
-   * {@link Object#equals(Object) equal}.
+   * {@link Comparator} to check if objects are NOT {@link Object#equals(Object) equal}.
    */
   NOT_EQUAL("!=", NlsBundleUtilCore.INF_NOT_EQUAL, false, null) {
 
@@ -118,13 +116,11 @@ public enum Comparator implements Datatype<String> {
    * 
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #getTitle() title}.
-   * @param evalTrueIfEquals - <code>true</code> if {@link Comparator}
-   *        {@link #eval(Object, Object) evaluates} to <code>true</code> if
-   *        arguments are equal, <code>false</code> otherwise.
-   * @param less - {@link Boolean#TRUE} if {@link Comparator}
-   *        {@link #eval(Object, Object) evaluates} to <code>true</code> if
-   *        first argument is less than second, {@link Boolean#FALSE} on
-   *        greater, <code>null</code> otherwise.
+   * @param evalTrueIfEquals - <code>true</code> if {@link Comparator} {@link #eval(Object, Object) evaluates}
+   *        to <code>true</code> if arguments are equal, <code>false</code> otherwise.
+   * @param less - {@link Boolean#TRUE} if {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   *        <code>true</code> if first argument is less than second, {@link Boolean#FALSE} on greater,
+   *        <code>null</code> otherwise.
    */
   private Comparator(String value, String title, boolean evalTrueIfEquals, Boolean less) {
 
@@ -135,8 +131,7 @@ public enum Comparator implements Datatype<String> {
   }
 
   /**
-   * This method gets the symbol of the {@link Comparator}. E.g. "==", ">",
-   * ">=", etc.
+   * This method gets the symbol of the {@link Comparator}. E.g. "==", ">", ">=", etc.
    * 
    * @return the comparator symbol.
    */
@@ -158,21 +153,18 @@ public enum Comparator implements Datatype<String> {
    * 
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given
-   *         arguments.
+   * @return the result of the {@link Comparator} applied to the given arguments.
    */
   public abstract boolean eval(double arg1, double arg2);
 
   /**
-   * This method converts the given value to a more common type. E.g. instances
-   * of {@link Calendar} or {@link XMLGregorianCalendar} will be converted to
-   * {@link java.util.Date}.
+   * This method converts the given value to a more common type. E.g. instances of {@link Calendar} or
+   * {@link XMLGregorianCalendar} will be converted to {@link java.util.Date}.
    * 
    * @param object is the value to convert.
-   * @param otherType the type of the value to compare that differs from the
-   *        type
-   * @return a simpler representation of <code>value</code> or the same
-   *         <code>value</code> if on simpler type is known.
+   * @param otherType the type of the value to compare that differs from the type
+   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type
+   *         is known.
    */
   private Object convert(Object object, Class<?> otherType) {
 
@@ -193,13 +185,11 @@ public enum Comparator implements Datatype<String> {
   }
 
   /**
-   * This method handles {@link #eval(Object, Object)} for two
-   * {@link Comparable}s.
+   * This method handles {@link #eval(Object, Object)} for two {@link Comparable}s.
    * 
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given
-   *         arguments.
+   * @return the result of the {@link Comparator} applied to the given arguments.
    */
   @SuppressWarnings({ "unchecked" })
   private boolean evalComparable(Comparable arg1, Comparable arg2) {
@@ -237,8 +227,7 @@ public enum Comparator implements Datatype<String> {
    * 
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given
-   *         arguments.
+   * @return the result of the {@link Comparator} applied to the given arguments.
    */
   @SuppressWarnings("rawtypes")
   public boolean eval(Object arg1, Object arg2) {
@@ -281,10 +270,8 @@ public enum Comparator implements Datatype<String> {
   /**
    * This method gets the {@link Comparator} for the given <code>symbol</code>.
    * 
-   * @param value is the {@link #getValue() symbol} of the requested
-   *        {@link Comparator}.
-   * @return the requested {@link Comparator} or <code>null</code> if no such
-   *         {@link Comparator} exists.
+   * @param value is the {@link #getValue() symbol} of the requested {@link Comparator}.
+   * @return the requested {@link Comparator} or <code>null</code> if no such {@link Comparator} exists.
    */
   public static Comparator fromValue(String value) {
 

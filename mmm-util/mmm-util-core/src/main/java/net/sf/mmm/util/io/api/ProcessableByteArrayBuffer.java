@@ -4,11 +4,10 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This is the interface for a provider of data bytes (a <code>byte[]</code>
- * -Buffer) that is {@link ByteIterator iterable} and {@link ByteProcessable
- * processable}.<br>
- * Bytes that are {@link #process(ByteProcessor, long) processed} will be
- * consumed (as if they were {@link #next() iterated}).
+ * This is the interface for a provider of data bytes (a <code>byte[]</code> -Buffer) that is
+ * {@link ByteIterator iterable} and {@link ByteProcessable processable}.<br>
+ * Bytes that are {@link #process(ByteProcessor, long) processed} will be consumed (as if they were
+ * {@link #next() iterated}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

@@ -14,8 +14,8 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This is the abstract implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}
- * interface used to access a {@link Method}.
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} interface used to access a
+ * {@link Method}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -32,14 +32,13 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
    * The constructor.
    * 
    * @param propertyName is the {@link #getName() name} of the property.
-   * @param propertyType is the {@link #getPropertyType() generic type} of the
-   *        property.
+   * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param descriptor is the descriptor this accessor is intended for.
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
    */
-  public AbstractPojoPropertyAccessorMethod(String propertyName, Type propertyType,
-      PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies, Method method) {
+  public AbstractPojoPropertyAccessorMethod(String propertyName, Type propertyType, PojoDescriptor<?> descriptor,
+      PojoDescriptorDependencies dependencies, Method method) {
 
     super(propertyName, propertyType, descriptor, dependencies);
     this.method = method;

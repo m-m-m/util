@@ -7,8 +7,7 @@ import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
- * A {@link DevelopmentPhase} represents the state of development of an
- * artifact.
+ * A {@link DevelopmentPhase} represents the state of development of an artifact.
  * 
  * @see VersionIdentifier#getPhase()
  * 
@@ -18,64 +17,51 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
 public enum DevelopmentPhase implements Datatype<String> {
 
   /**
-   * This is the earliest {@link DevelopmentPhase} in the development cycle. In
-   * this {@link DevelopmentPhase} the software is typically very unstable,
-   * experimental, and the focus is on creating new functionality.<br/>
-   * This {@link DevelopmentPhase} is sometimes also just called
-   * <em>development</em> but this is quite ambiguous as development happens in
-   * all {@link DevelopmentPhase}s.
+   * This is the earliest {@link DevelopmentPhase} in the development cycle. In this {@link DevelopmentPhase}
+   * the software is typically very unstable, experimental, and the focus is on creating new functionality.<br/>
+   * This {@link DevelopmentPhase} is sometimes also just called <em>development</em> but this is quite
+   * ambiguous as development happens in all {@link DevelopmentPhase}s.
    */
   PRE_ALPHA("pre-alpha", "pre"),
 
   /**
-   * This {@link DevelopmentPhase} aims to given an early preview of the product
-   * and to allow first testings (by "friendly users"). Therefore this
-   * {@link DevelopmentPhase} has focus on gathering feedback.<br/>
-   * This {@link DevelopmentPhase} is sometimes also called
-   * <em>developer preview (DP)</em> .
+   * This {@link DevelopmentPhase} aims to given an early preview of the product and to allow first testings
+   * (by "friendly users"). Therefore this {@link DevelopmentPhase} has focus on gathering feedback.<br/>
+   * This {@link DevelopmentPhase} is sometimes also called <em>developer preview (DP)</em> .
    */
   ALPHA("alpha", "a", Character.toString(UnicodeUtil.GREEK_SMALL_LETTER_ALPHA)),
 
   /**
-   * This {@link DevelopmentPhase} already gives a good impression of the final
-   * {@link #RELEASE release} but is still containing bugs and may not be fully
-   * complete while all major features should be included. Therefore this
-   * {@link DevelopmentPhase} has focus on stabilization of the product.<br/>
-   * This {@link DevelopmentPhase} is sometimes also called
-   * <em>early access (EA)</em>.
+   * This {@link DevelopmentPhase} already gives a good impression of the final {@link #RELEASE release} but
+   * is still containing bugs and may not be fully complete while all major features should be included.
+   * Therefore this {@link DevelopmentPhase} has focus on stabilization of the product.<br/>
+   * This {@link DevelopmentPhase} is sometimes also called <em>early access (EA)</em>.
    */
   BETA("beta", "b", Character.toString(UnicodeUtil.GREEK_SMALL_LETTER_BETA)),
 
   /**
-   * This {@link DevelopmentPhase} is feature complete but may contain some last
-   * bugs while known bugs should already be fixed. If all acceptance tests are
-   * passed, the {@link #RELEASE} is reached. Therefore this
+   * This {@link DevelopmentPhase} is feature complete but may contain some last bugs while known bugs should
+   * already be fixed. If all acceptance tests are passed, the {@link #RELEASE} is reached. Therefore this
    * {@link DevelopmentPhase} has focus on finalization of the product.<br/>
-   * This {@link DevelopmentPhase} is sometimes also just called
-   * <em>pre-release</em> or <em>gamma</em> (while gamma may be somewhere in
-   * between of {@link #BETA} and {@link #RELEASE_CANDIDATE}).
+   * This {@link DevelopmentPhase} is sometimes also just called <em>pre-release</em> or <em>gamma</em> (while
+   * gamma may be somewhere in between of {@link #BETA} and {@link #RELEASE_CANDIDATE}).
    */
   RELEASE_CANDIDATE("release-candidate", "RC", "pre-release"),
 
   /**
-   * This {@link DevelopmentPhase} is feature complete and has passed acceptance
-   * tests. For productive usage only product releases in this
-   * {@link DevelopmentPhase phase} or {@link #isAfter(DevelopmentPhase) after}
-   * are officially intended. Please note that also a release can obviously
-   * still have bugs. <br/>
-   * This {@link DevelopmentPhase} is sometimes also just called <em>final</em>,
-   * <em>stable</em>, <em>gold</em>, <em>release to manufacturing (RTM)</em> or
-   * <em>general availability (GA)</em>.
+   * This {@link DevelopmentPhase} is feature complete and has passed acceptance tests. For productive usage
+   * only product releases in this {@link DevelopmentPhase phase} or {@link #isAfter(DevelopmentPhase) after}
+   * are officially intended. Please note that also a release can obviously still have bugs. <br/>
+   * This {@link DevelopmentPhase} is sometimes also just called <em>final</em>, <em>stable</em>,
+   * <em>gold</em>, <em>release to manufacturing (RTM)</em> or <em>general availability (GA)</em>.
    */
-  RELEASE("release", "GA", "gold", "stable", "final", "RTM", "general-availability",
-      "globally-available", "global-available"),
+  RELEASE("release", "GA", "gold", "stable", "final", "RTM", "general-availability", "globally-available",
+      "global-available"),
 
   /**
-   * This {@link DevelopmentPhase} is like {@link #RELEASE} but may be used for
-   * bugfixes or tiny improvements of the {@link #RELEASE released} product
-   * version.<br/>
-   * This is sometimes called <em>service release (SR)</em> or
-   * <code>service pack (SP)</code>.
+   * This {@link DevelopmentPhase} is like {@link #RELEASE} but may be used for bugfixes or tiny improvements
+   * of the {@link #RELEASE released} product version.<br/>
+   * This is sometimes called <em>service release (SR)</em> or <code>service pack (SP)</code>.
    */
   UPDATE("update", "u", "SR", "service-release", "SP", "service-pack");
 
@@ -119,12 +105,10 @@ public enum DevelopmentPhase implements Datatype<String> {
   }
 
   /**
-   * This method gets the alternatives. On each call of this method a copy of
-   * the internal array is created.
+   * This method gets the alternatives. On each call of this method a copy of the internal array is created.
    * 
-   * @return an array with string representations alternative to
-   *         {@link #getTitle() title} and {@link #getValue() value}. May be
-   *         empty.
+   * @return an array with string representations alternative to {@link #getTitle() title} and
+   *         {@link #getValue() value}. May be empty.
    */
   public String[] getAlternatives() {
 
@@ -134,14 +118,12 @@ public enum DevelopmentPhase implements Datatype<String> {
   }
 
   /**
-   * This method determines if this {@link DevelopmentPhase} is before the given
-   * <code>phase</code>. Here <em>before</em> means that it is earlier and
-   * typically less stable.
+   * This method determines if this {@link DevelopmentPhase} is before the given <code>phase</code>. Here
+   * <em>before</em> means that it is earlier and typically less stable.
    * 
    * @param phase is the {@link DevelopmentPhase} to compare with.
-   * @return <code>true</code> if this phase is before the given
-   *         <code>phase</code>, <code>false</code> otherwise (also if
-   *         <code>phase</code> is <code>null</code>).
+   * @return <code>true</code> if this phase is before the given <code>phase</code>, <code>false</code>
+   *         otherwise (also if <code>phase</code> is <code>null</code>).
    */
   public boolean isBefore(DevelopmentPhase phase) {
 
@@ -152,14 +134,12 @@ public enum DevelopmentPhase implements Datatype<String> {
   }
 
   /**
-   * This method determines if this {@link DevelopmentPhase} is after the given
-   * <code>phase</code>. Here <em>after</em> means that it is later and
-   * typically more stable.
+   * This method determines if this {@link DevelopmentPhase} is after the given <code>phase</code>. Here
+   * <em>after</em> means that it is later and typically more stable.
    * 
    * @param phase is the {@link DevelopmentPhase} to compare with.
-   * @return <code>true</code> if this phase is after the given
-   *         <code>phase</code>, <code>false</code> otherwise (also if
-   *         <code>phase</code> is <code>null</code>).
+   * @return <code>true</code> if this phase is after the given <code>phase</code>, <code>false</code>
+   *         otherwise (also if <code>phase</code> is <code>null</code>).
    */
   public boolean isAfter(DevelopmentPhase phase) {
 
@@ -170,13 +150,10 @@ public enum DevelopmentPhase implements Datatype<String> {
   }
 
   /**
-   * This method gets the {@link DevelopmentPhase} with the given
-   * <code>value</code>.
+   * This method gets the {@link DevelopmentPhase} with the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link DevelopmentPhase}.
-   * @return the requested {@link DevelopmentPhase} or <code>null</code> if it
-   *         does not exists.
+   * @param value is the {@link #getValue() value} of the requested {@link DevelopmentPhase}.
+   * @return the requested {@link DevelopmentPhase} or <code>null</code> if it does not exists.
    */
   public static DevelopmentPhase fromValue(String value) {
 
@@ -189,8 +166,7 @@ public enum DevelopmentPhase implements Datatype<String> {
   }
 
   /**
-   * This method gets the {@link #getTitle() title} of this
-   * {@link DevelopmentPhase}.
+   * This method gets the {@link #getTitle() title} of this {@link DevelopmentPhase}.
    * 
    * {@inheritDoc}
    */

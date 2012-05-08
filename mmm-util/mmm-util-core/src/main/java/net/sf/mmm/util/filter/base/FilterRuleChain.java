@@ -14,8 +14,7 @@ import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.api.FilterRule;
 
 /**
- * This class implements a {@link Filter} that is based on a chain of
- * {@link FilterRule}s.
+ * This class implements a {@link Filter} that is based on a chain of {@link FilterRule}s.
  * 
  * @param <V> is the generic type of the value to check.
  * 
@@ -46,8 +45,8 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * The non-arg constructor.<br>
    * <b>NOTE:</b><br>
-   * This constructor should not be called directly! It is only intended for
-   * reflective access (e.g. for JAXB).
+   * This constructor should not be called directly! It is only intended for reflective access (e.g. for
+   * JAXB).
    */
   public FilterRuleChain() {
 
@@ -58,8 +57,7 @@ public class FilterRuleChain<V> implements Filter<V> {
    * The constructor.
    * 
    * @param rules is the chain of rules.
-   * @param defaultResult is the {@link #accept(Object) result} if none of the
-   *        <code>rules</code> match.
+   * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
    */
   public FilterRuleChain(boolean defaultResult, FilterRule<V>... rules) {
 
@@ -72,14 +70,12 @@ public class FilterRuleChain<V> implements Filter<V> {
    * The constructor.
    * 
    * @param id is the {@link #getId() ID}.
-   * @param parent is the parent-{@link FilterRuleChain chain} to extend or
-   *        <code>null</code> for a root-chain.
+   * @param parent is the parent-{@link FilterRuleChain chain} to extend or <code>null</code> for a
+   *        root-chain.
    * @param rules is the chain of rules.
-   * @param defaultResult is the {@link #accept(Object) result} if none of the
-   *        <code>rules</code> match.
+   * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
    */
-  public FilterRuleChain(String id, FilterRuleChain<V> parent, boolean defaultResult,
-      FilterRule<V>... rules) {
+  public FilterRuleChain(String id, FilterRuleChain<V> parent, boolean defaultResult, FilterRule<V>... rules) {
 
     super();
     this.id = id;
@@ -89,8 +85,7 @@ public class FilterRuleChain<V> implements Filter<V> {
   }
 
   /**
-   * This method gets the default {@link #accept(Object) result} used if none of
-   * the rules matched.
+   * This method gets the default {@link #accept(Object) result} used if none of the rules matched.
    * 
    * @return the default result.
    */
@@ -102,9 +97,8 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * {@inheritDoc}
    * 
-   * This method checks all rules in the chain and returns the result of the
-   * first matching rule. If no rule matches,
-   * <code>{@link #getDefaultResult()}</code> is returned.
+   * This method checks all rules in the chain and returns the result of the first matching rule. If no rule
+   * matches, <code>{@link #getDefaultResult()}</code> is returned.
    */
   public boolean accept(V value) {
 
@@ -120,9 +114,8 @@ public class FilterRuleChain<V> implements Filter<V> {
    * This method implements {@link #accept(Object)} recursively.
    * 
    * @param value is the value to filter.
-   * @return <code>true</code> if the value is accepted, <code>false</code> if
-   *         the value is NOT accepted, or <code>null</code> if no decision is
-   *         made.
+   * @return <code>true</code> if the value is accepted, <code>false</code> if the value is NOT accepted, or
+   *         <code>null</code> if no decision is made.
    */
   private Boolean acceptRecursive(V value) {
 
@@ -145,11 +138,9 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * This method extends this chain with <code>additionalRules</code>.
    * 
-   * @param newDefaultResult is the result of the new extended chain if none of
-   *        the rules match.
+   * @param newDefaultResult is the result of the new extended chain if none of the rules match.
    * @param additionalRules are the rules to add.
-   * @return the chain that also checks the <code>additionalRules</code> if none
-   *         of this rules match.
+   * @return the chain that also checks the <code>additionalRules</code> if none of this rules match.
    */
   @SuppressWarnings("unchecked")
   public FilterRuleChain<V> extend(boolean newDefaultResult, FilterRule<V>... additionalRules) {

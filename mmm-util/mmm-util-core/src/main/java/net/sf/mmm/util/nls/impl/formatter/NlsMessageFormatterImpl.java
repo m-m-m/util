@@ -19,18 +19,14 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} interface.<br>
+ * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} interface.<br>
  * <b>NOTE:</b><br>
- * This is more or less a rewrite of {@link java.text.MessageFormat} and is
- * syntax-compatible with the
- * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern}
- * -format. Some special (and somewhat sick) features as modifying internal
- * {@link java.text.Format}s or {@link java.text.FieldPosition} are NOT
- * supported. Currently also parsing is NOT supported.<br>
- * Instead this implementation is immutable and thread-safe. Further it works on
- * any {@link Appendable} rather than only on {@link StringBuffer}. It also uses
- * the same {@link Appendable} for recursive invocations.
+ * This is more or less a rewrite of {@link java.text.MessageFormat} and is syntax-compatible with the
+ * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern} -format. Some special (and
+ * somewhat sick) features as modifying internal {@link java.text.Format}s or {@link java.text.FieldPosition}
+ * are NOT supported. Currently also parsing is NOT supported.<br>
+ * Instead this implementation is immutable and thread-safe. Further it works on any {@link Appendable} rather
+ * than only on {@link StringBuffer}. It also uses the same {@link Appendable} for recursive invocations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -49,8 +45,8 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
   /**
    * The constructor.
    * 
-   * @param pattern is the pattern of the message to format. It is
-   *        syntax-compatible with {@link java.text.MessageFormat}.
+   * @param pattern is the pattern of the message to format. It is syntax-compatible with
+   *        {@link java.text.MessageFormat}.
    * @param nlsDependencies are the {@link NlsDependencies}.
    */
   public NlsMessageFormatterImpl(String pattern, NlsDependencies nlsDependencies) {
@@ -67,8 +63,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
       try {
         argument = this.nlsDependnecies.getArgumentParser().parse(scanner);
       } catch (Exception e) {
-        throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()),
-            NlsArgument.class);
+        throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()), NlsArgument.class);
       }
       PatternSegment segment = new PatternSegment(prefix, argument);
       segmentList.add(segment);
@@ -81,26 +76,24 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
   /**
    * {@inheritDoc}
    */
-  public final void format(Void nothing, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public final void format(Void nothing, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     for (PatternSegment segment : this.segments) {
       buffer.append(segment.prefix);
       NlsArgument argument = segment.argument;
-      this.nlsDependnecies.getArgumentFormatter().format(argument, locale, arguments, resolver,
-          buffer);
+      this.nlsDependnecies.getArgumentFormatter().format(argument, locale, arguments, resolver, buffer);
     }
     buffer.append(this.suffix);
   }
 
   /**
    * This inner class represents a segment out of the parsed message-pattern.<br>
-   * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is
-   * parsed into two {@link PatternSegment}s. The first has a {@link #prefix} of
-   * <code>"Hi "</code> and {@link #argument} of <code>{0}</code> and the second
-   * has <code>" you have "</code> as {@link #prefix} and {@link #argument} of
-   * <code>{1}</code>. The rest of the pattern which is <code>" items!"</code>
-   * will be stored in {@link NlsMessageFormatterImpl#suffix}.
+   * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is parsed into two
+   * {@link PatternSegment}s. The first has a {@link #prefix} of <code>"Hi "</code> and {@link #argument} of
+   * <code>{0}</code> and the second has <code>" you have "</code> as {@link #prefix} and {@link #argument} of
+   * <code>{1}</code>. The rest of the pattern which is <code>" items!"</code> will be stored in
+   * {@link NlsMessageFormatterImpl#suffix}.
    */
   protected static class PatternSegment {
 
@@ -124,8 +117,8 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
     }
 
     /**
-     * This method gets the prefix. This is the raw part of the message-pattern
-     * (until the next '{') that will be taken as is.
+     * This method gets the prefix. This is the raw part of the message-pattern (until the next '{') that will
+     * be taken as is.
      * 
      * @return the prefix
      */

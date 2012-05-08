@@ -7,11 +7,11 @@ import java.util.AbstractList;
 import java.util.List;
 
 /**
- * This is an implementation of the {@link List} interface that gives a
- * read-only view on other lists that appear as if they were concatenated. <br>
+ * This is an implementation of the {@link List} interface that gives a read-only view on other lists that
+ * appear as if they were concatenated. <br>
  * <b>ATTENTION:</b><br>
- * This implementation is NOT thread-safe. It may cause problems if a method is
- * called while one of the concatenated sub-lists is modified.
+ * This implementation is NOT thread-safe. It may cause problems if a method is called while one of the
+ * concatenated sub-lists is modified.
  * 
  * @param <E> is the generic type of the list elements.
  * 
@@ -25,8 +25,7 @@ public class AppendingList<E> extends AbstractList<E> {
   /**
    * The constructor.
    * 
-   * @param lists is the array of lists to "concatenate" in the order of the
-   *        array.
+   * @param lists is the array of lists to "concatenate" in the order of the array.
    */
   public AppendingList(List<? extends E>... lists) {
 

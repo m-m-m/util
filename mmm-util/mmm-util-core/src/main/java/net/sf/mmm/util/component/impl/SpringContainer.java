@@ -14,8 +14,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * This is the implementation of the {@link IocContainer} using spring.<br/>
  * <b>ATTENTION:</b><br>
- * Please check your dependencies as <code>spring</code> is an optional
- * dependency in <code>mmm-util-core</code>.
+ * Please check your dependencies as <code>spring</code> is an optional dependency in
+ * <code>mmm-util-core</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -46,8 +46,7 @@ public class SpringContainer implements IocContainer {
   /**
    * The constructor.
    * 
-   * @param applicationContext is the {@link ConfigurableApplicationContext} to
-   *        adapt.
+   * @param applicationContext is the {@link ConfigurableApplicationContext} to adapt.
    */
   public SpringContainer(ConfigurableApplicationContext applicationContext) {
 
@@ -78,8 +77,7 @@ public class SpringContainer implements IocContainer {
   /**
    * {@inheritDoc}
    */
-  public <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass,
-      String componentId) {
+  public <COMPONENT_API> COMPONENT_API getComponent(Class<COMPONENT_API> apiClass, String componentId) {
 
     COMPONENT_API component;
     try {

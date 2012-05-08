@@ -105,8 +105,7 @@ public class XmlBeanMapperTest {
   public void testLoadXmlWithInvalidIds() {
 
     String xml = "<?xml version='1.0'?><bean><node id='duplicate-id'/>"
-        + "<node id='duplicate-id' parent='undefined-parent'/>"
-        + "<node id='root' parent='unknown-parent'/></bean>";
+        + "<node id='duplicate-id' parent='undefined-parent'/>" + "<node id='root' parent='unknown-parent'/></bean>";
     XmlBeanMapper<XmlBean> mapper = new XmlBeanMapper<XmlBeanMapperTest.XmlBean>(XmlBean.class);
     mapper.initialize();
     ByteArrayInputStream inputStream = new ByteArrayInputStream(xml.getBytes());

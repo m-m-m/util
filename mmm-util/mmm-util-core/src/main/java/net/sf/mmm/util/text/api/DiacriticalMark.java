@@ -14,15 +14,13 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
  * This enum contains the most important diacritical marks.<br>
- * If you are NOT familiar with unicode and languages that use non-ASCII
- * characters, you should know that each {@link DiacriticalMark} represents a
- * specific shape like e.g. '~', '^', etc. that is added at a specific position
- * (on top, at bottom, etc.) to a letter. For instance if you add
- * {@link #DIAERESIS two dots} to the letter 'a' you get '&auml;'.<br>
- * To make things really complicated, unicode added
- * {@link #getCombiningCharacter() combining characters} representing the mark
- * itself in addition to the precomposed characters (combination of a specific
- * character with the mark[s]).
+ * If you are NOT familiar with unicode and languages that use non-ASCII characters, you should know that each
+ * {@link DiacriticalMark} represents a specific shape like e.g. '~', '^', etc. that is added at a specific
+ * position (on top, at bottom, etc.) to a letter. For instance if you add {@link #DIAERESIS two dots} to the
+ * letter 'a' you get '&auml;'.<br>
+ * To make things really complicated, unicode added {@link #getCombiningCharacter() combining characters}
+ * representing the mark itself in addition to the precomposed characters (combination of a specific character
+ * with the mark[s]).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -30,9 +28,8 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 public enum DiacriticalMark implements Datatype<Character> {
 
   /**
-   * A mark that can be placed on top of some Latin, Cyrillic or Greek
-   * characters. It looks like a stroke directing to the upper right corner. If
-   * your environment supports unicode, you can see it here: &#180;
+   * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke
+   * directing to the upper right corner. If your environment supports unicode, you can see it here: &#180;
    */
   ACUTE(UnicodeUtil.ACUTE_ACCENT, UnicodeUtil.COMBINING_ACUTE_ACCENT, "acute accent") {
 
@@ -88,9 +85,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin, ... characters. It looks
-   * like an arc as the lower third of a circle. the If your environment
-   * supports unicode, you can see it here: &#728;
+   * A mark that can be placed on top of some Latin, ... characters. It looks like an arc as the lower third
+   * of a circle. the If your environment supports unicode, you can see it here: &#728;
    */
   BREVE(UnicodeUtil.BREVE, UnicodeUtil.COMBINING_BREVE, "breve") {
 
@@ -117,9 +113,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin, ... characters. It looks
-   * like a little 'v'. If your environment supports unicode, you can see it
-   * here: &#711;
+   * A mark that can be placed on top of some Latin, ... characters. It looks like a little 'v'. If your
+   * environment supports unicode, you can see it here: &#711;
    */
   CARON(UnicodeUtil.CARON, UnicodeUtil.COMBINING_CARON, "caron") {
 
@@ -171,8 +166,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A mark that can be placed at the bottom of some Latin characters. If your
-   * environment supports unicode, you can see it here: &#184;
+   * A mark that can be placed at the bottom of some Latin characters. If your environment supports unicode,
+   * you can see it here: &#184;
    */
   CEDILLA(UnicodeUtil.CEDILLA, UnicodeUtil.COMBINING_CEDILLA, "cedilla") {
 
@@ -204,12 +199,10 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin characters (e.g. in French).
-   * It looks like a small '^'. If your environment supports unicode, you can
-   * see it here: &#770;
+   * A mark that can be placed on top of some Latin characters (e.g. in French). It looks like a small '^'. If
+   * your environment supports unicode, you can see it here: &#770;
    */
-  CIRCUMFLEX(UnicodeUtil.CIRCUMFLEX_ACCENT, UnicodeUtil.COMBINING_CIRCUMFLEX_ACCENT,
-      "circumflex accent") {
+  CIRCUMFLEX(UnicodeUtil.CIRCUMFLEX_ACCENT, UnicodeUtil.COMBINING_CIRCUMFLEX_ACCENT, "circumflex accent") {
 
     /**
      * {@inheritDoc}
@@ -246,8 +239,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * Two small dots placed on top of Latin vowels, called trema, diaeresis, or
-   * umlaut. If your environment supports unicode, you can see it here: &#168;
+   * Two small dots placed on top of Latin vowels, called trema, diaeresis, or umlaut. If your environment
+   * supports unicode, you can see it here: &#168;
    */
   DIAERESIS(UnicodeUtil.DIAERESIS, UnicodeUtil.COMBINING_DIAERESIS, "diaeresis") {
 
@@ -303,8 +296,7 @@ public enum DiacriticalMark implements Datatype<Character> {
      * {@inheritDoc}
      */
     @Override
-    protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer,
-        int compositionCount) {
+    protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer, int compositionCount) {
 
       super.normalizeToAsciiRecursive(decomposed, buffer, compositionCount);
       buffer.append('e');
@@ -313,9 +305,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A small dot placed to the top of some Latin letters used in some European
-   * languages and Vietnamese. If your environment supports unicode, you can see
-   * it here: &#729;
+   * A small dot placed to the top of some Latin letters used in some European languages and Vietnamese. If
+   * your environment supports unicode, you can see it here: &#729;
    */
   DOT_ABOVE(UnicodeUtil.DOT_ABOVE, UnicodeUtil.COMBINING_DOT_ABOVE, "dot above") {
 
@@ -352,9 +343,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A small dot placed to the bottom of some Latin letters used in some
-   * European languages and Vietnamese. If your environment supports unicode,
-   * you can see it here: &#803;&#32;
+   * A small dot placed to the bottom of some Latin letters used in some European languages and Vietnamese. If
+   * your environment supports unicode, you can see it here: &#803;&#32;
    */
   DOT_BELOW(UnicodeUtil.DOT_BELOW, UnicodeUtil.COMBINING_DOT_BELOW, "dot below") {
 
@@ -370,11 +360,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * Like {@link #ACUTE} but doubled. If your environment supports unicode, you
-   * can see it here: &#733;
+   * Like {@link #ACUTE} but doubled. If your environment supports unicode, you can see it here: &#733;
    */
-  DOUBLE_ACUTE(UnicodeUtil.DOUBLE_ACUTE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_ACUTE_ACCENT,
-      "double acute accent") {
+  DOUBLE_ACUTE(UnicodeUtil.DOUBLE_ACUTE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_ACUTE_ACCENT, "double acute accent") {
 
     /**
      * {@inheritDoc}
@@ -391,11 +379,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * Like {@link #GRAVE} but doubled. If your environment supports unicode, you
-   * can see it here: &#783;&#32;.
+   * Like {@link #GRAVE} but doubled. If your environment supports unicode, you can see it here: &#783;&#32;.
    */
-  DOUBLE_GRAVE(UnicodeUtil.DOUBLE_GRAVE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_GRAVE_ACCENT,
-      "double grave accent") {
+  DOUBLE_GRAVE(UnicodeUtil.DOUBLE_GRAVE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_GRAVE_ACCENT, "double grave accent") {
 
     /**
      * {@inheritDoc}
@@ -420,9 +406,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin, Cyrillic or Greek
-   * characters. It looks like a stroke directing to the lower right. If your
-   * environment supports unicode, you can see it here: &#96;
+   * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke
+   * directing to the lower right. If your environment supports unicode, you can see it here: &#96;
    */
   GRAVE(UnicodeUtil.GRAVE_ACCENT, UnicodeUtil.COMBINING_GRAVE_ACCENT, "grave accent") {
 
@@ -453,9 +438,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A little question mark without the dot, that is placed on top of Vietnamese
-   * letters. If your environment supports unicode, you can see it here: &#x3D2;
-   * &#x253;
+   * A little question mark without the dot, that is placed on top of Vietnamese letters. If your environment
+   * supports unicode, you can see it here: &#x3D2; &#x253;
    */
   HOOK_ABOVE(UnicodeUtil.HOOK_ABOVE, UnicodeUtil.COMBINING_HOOK_ABOVE, "hook above") {
 
@@ -493,16 +477,14 @@ public enum DiacriticalMark implements Datatype<Character> {
       addComposition('Z', UnicodeUtil.LATIN_CAPITAL_LETTER_Z_WITH_HOOK);
       addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE,
           UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE_AND_HOOK);
-      addComposition(UnicodeUtil.GREEK_CAPITAL_LETTER_UPSILON,
-          UnicodeUtil.GREEK_UPSILON_WITH_HOOK_SYMBOL);
+      addComposition(UnicodeUtil.GREEK_CAPITAL_LETTER_UPSILON, UnicodeUtil.GREEK_UPSILON_WITH_HOOK_SYMBOL);
     }
 
   },
 
   /**
-   * A mark similar to a comma (,) that is placed to the top right of Vietnamese
-   * vowels. If your environment supports unicode, you can see it here:
-   * &#795;&#32;
+   * A mark similar to a comma (,) that is placed to the top right of Vietnamese vowels. If your environment
+   * supports unicode, you can see it here: &#795;&#32;
    */
   HORN_ABOVE(UnicodeUtil.HORN, UnicodeUtil.COMBINING_HORN, "horn") {
 
@@ -521,8 +503,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A long horizontal stroke placed on top of letters. If your environment
-   * supports unicode, you can see it here: &#175;
+   * A long horizontal stroke placed on top of letters. If your environment supports unicode, you can see it
+   * here: &#175;
    */
   MACRON(UnicodeUtil.MACRON, UnicodeUtil.COMBINING_MACRON, "macron") {
 
@@ -581,8 +563,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A little hook placed to the bottom right of Latin vowels. If your
-   * environment supports unicode, you can see it here: &#731;
+   * A little hook placed to the bottom right of Latin vowels. If your environment supports unicode, you can
+   * see it here: &#731;
    */
   OGONEK(UnicodeUtil.OGONEK, UnicodeUtil.COMBINING_OGONEK, "ogonek") {
 
@@ -611,8 +593,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   },
 
   /**
-   * A small ring placed to the top of some Latin letters. If your environment
-   * supports unicode, you can see it here: &#730;
+   * A small ring placed to the top of some Latin letters. If your environment supports unicode, you can see
+   * it here: &#730;
    */
   RING_ABOVE(UnicodeUtil.RING_ABOVE, UnicodeUtil.COMBINING_RING_ABOVE, "ring above") {
 
@@ -651,8 +633,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   // },
 
   /**
-   * A small tilde (~) placed on top of some letters. If your environment
-   * supports unicode, you can see it here: &#126;
+   * A small tilde (~) placed on top of some letters. If your environment supports unicode, you can see it
+   * here: &#126;
    */
   TILDE(UnicodeUtil.TILDE, UnicodeUtil.COMBINING_TILDE, "tilde") {
 
@@ -704,10 +686,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   /**
    * The constructor.
    * 
-   * @param separateCharacter is the {@link #getSeparateCharacter() separator
-   *        character}.
-   * @param combiningChar is the {@link #getCombiningCharacter() combining
-   *        character}.
+   * @param separateCharacter is the {@link #getSeparateCharacter() separator character}.
+   * @param combiningChar is the {@link #getCombiningCharacter() combining character}.
    * @param title is the {@link #getTitle() title}.
    */
   private DiacriticalMark(char separateCharacter, char combiningChar, String title) {
@@ -747,8 +727,7 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method gets the separate character for this {@link DiacriticalMark}.
-   * It represents the mark itself.
+   * This method gets the separate character for this {@link DiacriticalMark}. It represents the mark itself.
    * 
    * @see #getCombiningCharacter()
    * 
@@ -760,9 +739,9 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method gets the combining character for this {@link DiacriticalMark}.
-   * Unlike the {@link #getSeparateCharacter() separate character} this
-   * character gets combined with the following character to a single glyph.
+   * This method gets the combining character for this {@link DiacriticalMark}. Unlike the
+   * {@link #getSeparateCharacter() separate character} this character gets combined with the following
+   * character to a single glyph.
    * 
    * @return the combining character.
    */
@@ -788,12 +767,11 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method composes the given <code>character</code> with this
-   * {@link DiacriticalMark}.
+   * This method composes the given <code>character</code> with this {@link DiacriticalMark}.
    * 
    * @param character is the character to compose (e.g. 'a').
-   * @return the composed character (e.g. '&auml;' or '&aacute;') or
-   *         <code>null</code> if no such composition exists in unicode.
+   * @return the composed character (e.g. '&auml;' or '&aacute;') or <code>null</code> if no such composition
+   *         exists in unicode.
    */
   public Character compose(char character) {
 
@@ -801,17 +779,13 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method de-composes the given <code>character</code> with this
-   * {@link DiacriticalMark}. In other words this {@link DiacriticalMark} is
-   * removed from the given <code>character</code> if it is
-   * {@link #compose(char) composed}. It is the inverse operation of
-   * {@link #compose(char)}.
+   * This method de-composes the given <code>character</code> with this {@link DiacriticalMark}. In other
+   * words this {@link DiacriticalMark} is removed from the given <code>character</code> if it is
+   * {@link #compose(char) composed}. It is the inverse operation of {@link #compose(char)}.
    * 
-   * @param character is the character to de-compose (e.g. '&auml;' or
-   *        '&aacute;').
-   * @return the de-composed character (e.g. 'a') or <code>null</code> if the
-   *         given <code>character</code> does is not {@link #compose(char)
-   *         composed} with this {@link DiacriticalMark}.
+   * @param character is the character to de-compose (e.g. '&auml;' or '&aacute;').
+   * @return the de-composed character (e.g. 'a') or <code>null</code> if the given <code>character</code>
+   *         does is not {@link #compose(char) composed} with this {@link DiacriticalMark}.
    */
   public Character decompose(char character) {
 
@@ -819,18 +793,16 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method gets the ASCII-representation of the given
-   * <code>character</code> {@link #compose(char) composed} with this
-   * {@link DiacriticalMark}. This is similar to {@link #decompose(char)} but
-   * e.g. for {@value #DIAERESIS} the character 'e' is appended.
+   * This method gets the ASCII-representation of the given <code>character</code> {@link #compose(char)
+   * composed} with this {@link DiacriticalMark}. This is similar to {@link #decompose(char)} but e.g. for
+   * {@value #DIAERESIS} the character 'e' is appended.
    * 
    * @see UnicodeUtil#normalize2Ascii(char)
    * 
-   * @param character is the character to normalize to ASCII (e.g. '&Auml;' or
-   *        '&aacute;').
-   * @return the de-composed character (e.g. 'Ae' or 'a') or <code>null</code>
-   *         if the given <code>character</code> does is not
-   *         {@link #compose(char) composed} with this {@link DiacriticalMark}.
+   * @param character is the character to normalize to ASCII (e.g. '&Auml;' or '&aacute;').
+   * @return the de-composed character (e.g. 'Ae' or 'a') or <code>null</code> if the given
+   *         <code>character</code> does is not {@link #compose(char) composed} with this
+   *         {@link DiacriticalMark}.
    */
   public String normalizeToAscii(char character) {
 
@@ -844,19 +816,16 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This is the internal recursive implemenation of
-   * {@link #normalizeToAscii(char)}.
+   * This is the internal recursive implemenation of {@link #normalizeToAscii(char)}.
    * 
    * @param decomposed is the decomposed character to normalize to ASCII.
    * @param buffer is the {@link StringBuilder} where to
-   * @param compositionCount is the recursion counter used to detect infinity
-   *        loops in case of a missconfiguration.
+   * @param compositionCount is the recursion counter used to detect infinity loops in case of a
+   *        missconfiguration.
    */
-  protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer,
-      int compositionCount) {
+  protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer, int compositionCount) {
 
-    if (((decomposed <= 'a') && (decomposed >= 'z'))
-        || ((decomposed <= 'A') && (decomposed >= 'Z'))) {
+    if (((decomposed <= 'a') && (decomposed >= 'z')) || ((decomposed <= 'A') && (decomposed >= 'Z'))) {
       buffer.append(decomposed);
     } else {
       for (DiacriticalMark mark : DiacriticalMark.values()) {
@@ -875,8 +844,8 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method gets a {@link Collection} with all precomposed
-   * {@link Character characters} containing this mark.
+   * This method gets a {@link Collection} with all precomposed {@link Character characters} containing this
+   * mark.
    * 
    * @return the composed characters.
    */

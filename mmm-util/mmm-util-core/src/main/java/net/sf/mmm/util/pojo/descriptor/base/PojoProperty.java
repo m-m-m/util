@@ -6,13 +6,10 @@ package net.sf.mmm.util.pojo.descriptor.base;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This class represents the property of a {@link net.sf.mmm.util.pojo.api.Pojo}
- * .<br>
- * It can be a <em>simple property</em> such as <code>fooBar</code>, an
- * <em>indexed property</em> such as <code>fooBar[42]</code> or a
- * <em>mapped property</em> such as <code>fooBar['my.key']</code>.<br>
- * This class contains the logic to parse such property and gives structured
- * access via the offered getters.
+ * This class represents the property of a {@link net.sf.mmm.util.pojo.api.Pojo} .<br>
+ * It can be a <em>simple property</em> such as <code>fooBar</code>, an <em>indexed property</em> such as
+ * <code>fooBar[42]</code> or a <em>mapped property</em> such as <code>fooBar['my.key']</code>.<br>
+ * This class contains the logic to parse such property and gives structured access via the offered getters.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -99,8 +96,8 @@ public class PojoProperty {
   /**
    * This method gets the optional index.
    * 
-   * @return the index or <code>null</code> if this {@link PojoProperty} does
-   *         NOT represent an indexed property.
+   * @return the index or <code>null</code> if this {@link PojoProperty} does NOT represent an indexed
+   *         property.
    */
   public Integer getIndex() {
 
@@ -110,8 +107,7 @@ public class PojoProperty {
   /**
    * This method gets the optional key.
    * 
-   * @return the key of <code>null</code> if this {@link PojoProperty} does NOT
-   *         represent a mapped property.
+   * @return the key of <code>null</code> if this {@link PojoProperty} does NOT represent a mapped property.
    */
   public String getKey() {
 

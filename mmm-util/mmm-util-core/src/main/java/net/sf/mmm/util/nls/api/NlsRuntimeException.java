@@ -20,10 +20,10 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internationalizedMessage</code> after nationalization.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments are the arguments filled into the <code>internationalizedMessage</code> after
+   *        nationalization.
    * @deprecated use {@link #NlsRuntimeException(String, Map)} instead.
    */
   @Deprecated
@@ -36,12 +36,11 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internationalizedMessage</code> after nationalization.
-   * @deprecated use {@link #NlsRuntimeException(Throwable, String, Map)}
-   *             instead.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments are the arguments filled into the <code>internationalizedMessage</code> after
+   *        nationalization.
+   * @deprecated use {@link #NlsRuntimeException(Throwable, String, Map)} instead.
    */
   @Deprecated
   public NlsRuntimeException(Throwable nested, String internationalizedMessage, Object... arguments) {
@@ -52,9 +51,9 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for {@link NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
+   *        language.
    */
   public NlsRuntimeException(String internationalizedMessage) {
 
@@ -65,9 +64,9 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for {@link NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
+   *        language.
    */
   public NlsRuntimeException(Throwable nested, String internationalizedMessage) {
 
@@ -77,12 +76,12 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for {@link NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
-   *        to be {@link NlsMessage#getInternationalizedMessage() filled into
-   *        <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
+   *        language.
+   * @param arguments are the {@link NlsMessage#getArgument(String) arguments} to be
+   *        {@link NlsMessage#getInternationalizedMessage() filled into <code>internationalizedMessage</code>}
+   *        .
    */
   public NlsRuntimeException(String internationalizedMessage, Map<String, Object> arguments) {
 
@@ -95,15 +94,14 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
    * @see #toMap(String, Object, String, Object)
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for {@link NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the {@link NlsMessage#getArgument(String) arguments}
-   *        to be {@link NlsMessage#getInternationalizedMessage() filled into
-   *        <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
+   *        language.
+   * @param arguments are the {@link NlsMessage#getArgument(String) arguments} to be
+   *        {@link NlsMessage#getInternationalizedMessage() filled into <code>internationalizedMessage</code>}
+   *        .
    */
-  public NlsRuntimeException(Throwable nested, String internationalizedMessage,
-      Map<String, Object> arguments) {
+  public NlsRuntimeException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
 
     super(nested, NlsAccess.getFactory().create(internationalizedMessage, arguments));
   }
@@ -111,8 +109,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public NlsRuntimeException(NlsMessage message) {
 
@@ -123,8 +120,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public NlsRuntimeException(Throwable nested, NlsMessage message) {
 
@@ -134,12 +130,11 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   /**
    * This method adds the given arguments to the given {@link Map}.
    * 
-   * @param map is the {@link Map} to use or <code>null</code> to create a new
-   *        {@link Map}.
+   * @param map is the {@link Map} to use or <code>null</code> to create a new {@link Map}.
    * @param key is the {@link Map#keySet() key} of the entry to add.
    * @param value is the {@link Map#get(Object) value} of the entry to add.
-   * @return a the given <code>map</code> (or a new one if <code>map</code> was
-   *         <code>null</code>) after the given entry was added.
+   * @return a the given <code>map</code> (or a new one if <code>map</code> was <code>null</code>) after the
+   *         given entry was added.
    */
   protected static Map<String, Object> addToMap(Map<String, Object> map, String key, Object value) {
 
@@ -197,8 +192,8 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
    * @param value3 is the {@link Map#get(Object) value} of the third map entry.
    * @return a {@link Map} containing only the given arguments.
    */
-  protected static Map<String, Object> toMap(String key1, Object value1, String key2,
-      Object value2, String key3, Object value3) {
+  protected static Map<String, Object> toMap(String key1, Object value1, String key2, Object value2, String key3,
+      Object value3) {
 
     Map<String, Object> map = new HashMap<String, Object>();
     map.put(key1, value1);

@@ -6,8 +6,8 @@ package net.sf.mmm.util.reflect.api;
 import java.lang.reflect.Modifier;
 
 /**
- * This enum contains the possible modifiers for the visibility of a java
- * element (type, field, method or constructor).
+ * This enum contains the possible modifiers for the visibility of a java element (type, field, method or
+ * constructor).
  * 
  * @see Modifier
  * @see javax.lang.model.element.Modifier
@@ -25,9 +25,8 @@ public enum VisibilityModifier {
   PRIVATE(Modifier.PRIVATE),
 
   /**
-   * The modifier for "friendly" visibility. This is the visibility of elements,
-   * that have no explicit visibility modifier (are NOT public, protected or
-   * private).
+   * The modifier for "friendly" visibility. This is the visibility of elements, that have no explicit
+   * visibility modifier (are NOT public, protected or private).
    */
   FRIENDLY(0),
 
@@ -59,8 +58,7 @@ public enum VisibilityModifier {
   }
 
   /**
-   * This method gets the <code>{@link Modifier bit-mask}</code> of this
-   * visibility-modifier.
+   * This method gets the <code>{@link Modifier bit-mask}</code> of this visibility-modifier.
    * 
    * @return the bit-mask.
    */
@@ -70,8 +68,8 @@ public enum VisibilityModifier {
   }
 
   /**
-   * This method gets a non-negative integer value that follows the strict order
-   * of the visibility. The following equation applies:
+   * This method gets a non-negative integer value that follows the strict order of the visibility. The
+   * following equation applies:
    * 
    * <pre>
    * {@link #PRIVATE}.{@link #getOrder()} &lt; {@link #FRIENDLY}.{@link #getOrder()}
@@ -86,8 +84,7 @@ public enum VisibilityModifier {
   }
 
   /**
-   * This method gets the {@link VisibilityModifier} for the given
-   * <code>{@link Modifier modifiers}</code>.
+   * This method gets the {@link VisibilityModifier} for the given <code>{@link Modifier modifiers}</code>.
    * 
    * @see java.lang.Class#getModifiers()
    * @see java.lang.reflect.Method#getModifiers()

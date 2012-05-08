@@ -30,8 +30,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSetMapp
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBuilder;
 
 /**
- * This class extends {@link PojoDescriptorDependenciesImpl} with additional
- * components to inject.
+ * This class extends {@link PojoDescriptorDependenciesImpl} with additional components to inject.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.1.0)
@@ -84,11 +83,9 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
 
   /**
    * This method gets the accessor-builders used to create the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor
-   * accessors} for
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
-   * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
-   * POJO}.
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor accessors} for
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties} of a
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
    * 
    * @return the accessorBuilders.
    */
@@ -100,9 +97,8 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
   /**
    * This method sets the {@link #getAccessorBuilders() accessor-builders}.
    * 
-   * @param accessorBuilders is a collection with the accessorBuilders to use.
-   *        It must NOT contain two entries with the same
-   *        {@link PojoPropertyAccessorBuilder#getMode() mode}.
+   * @param accessorBuilders is a collection with the accessorBuilders to use. It must NOT contain two entries
+   *        with the same {@link PojoPropertyAccessorBuilder#getMode() mode}.
    */
   @Inject
   public void setAccessorBuilders(Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders) {

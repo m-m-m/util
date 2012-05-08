@@ -14,8 +14,7 @@ import net.sf.mmm.util.pojo.descriptor.base.NoPojoMethodIntrospector;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory}
+ * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory}
  * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -46,8 +45,7 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
     if (methodVisibility == null) {
       descriptorBuilder.setMethodIntrospector(new NoPojoMethodIntrospector());
     } else {
-      descriptorBuilder.setMethodIntrospector(new PojoMethodIntrospectorImpl(methodVisibility,
-          false));
+      descriptorBuilder.setMethodIntrospector(new PojoMethodIntrospectorImpl(methodVisibility, false));
     }
     if (fieldVisibility == null) {
       descriptorBuilder.setFieldIntrospector(new NoPojoFieldIntrospector());
@@ -74,8 +72,7 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
   /**
    * This method sets the {@link ExtendedPojoDescriptorDependenciesImpl}.
    * 
-   * @param dependencies are the {@link ExtendedPojoDescriptorDependenciesImpl}
-   *        .
+   * @param dependencies are the {@link ExtendedPojoDescriptorDependenciesImpl} .
    */
   @Inject
   public void setDependencies(ExtendedPojoDescriptorDependenciesImpl dependencies) {

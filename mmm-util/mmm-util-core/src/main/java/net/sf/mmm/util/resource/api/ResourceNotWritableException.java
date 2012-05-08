@@ -7,9 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This exception is thrown if a resource should be
- * {@link DataResource#openOutputStream() written} that is read-only or NOT
- * writable for any other reason.
+ * This exception is thrown if a resource should be {@link DataResource#openOutputStream() written} that is
+ * read-only or NOT writable for any other reason.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

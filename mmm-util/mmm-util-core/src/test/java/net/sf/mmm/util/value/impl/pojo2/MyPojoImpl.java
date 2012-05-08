@@ -6,8 +6,7 @@ package net.sf.mmm.util.value.impl.pojo2;
 import java.util.List;
 
 /**
- * This is some code only used for
- * {@link net.sf.mmm.util.value.impl.ComposedValueConverterTest}.
+ * This is some code only used for {@link net.sf.mmm.util.value.impl.ComposedValueConverterTest}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

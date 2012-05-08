@@ -6,8 +6,8 @@ package net.sf.mmm.util.collection.api;
 import java.util.Set;
 
 /**
- * This is the interface for a {@link CollectionFactory} that {@link #create()
- * creates} instances of {@link Set}.
+ * This is the interface for a {@link CollectionFactory} that {@link #create() creates} instances of
+ * {@link Set}.
  * 
  * @see net.sf.mmm.util.collection.base.HashSetFactory#INSTANCE
  * 

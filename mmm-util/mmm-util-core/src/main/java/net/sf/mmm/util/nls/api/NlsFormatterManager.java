@@ -64,8 +64,7 @@ public interface NlsFormatterManager {
   NlsFormatter<Object> getFormatter();
 
   /**
-   * This method gets the {@link NlsFormatter} for the given
-   * <code>formatType</code>.<br>
+   * This method gets the {@link NlsFormatter} for the given <code>formatType</code>.<br>
    * 
    * @see #getFormatter(String, String)
    * 
@@ -75,10 +74,10 @@ public interface NlsFormatterManager {
   NlsFormatter<?> getFormatter(String formatType);
 
   /**
-   * This method gets the {@link NlsFormatter} for the given
-   * <code>formatType</code> and <code>formatStyle</code>.<br>
-   * To be compliant with {@link java.text.MessageFormat} the following types
-   * and styles need to be supported by the implementation: <br>
+   * This method gets the {@link NlsFormatter} for the given <code>formatType</code> and
+   * <code>formatStyle</code>.<br>
+   * To be compliant with {@link java.text.MessageFormat} the following types and styles need to be supported
+   * by the implementation: <br>
    * <br>
    * <code>formatType</code>:
    * <ul>
@@ -103,11 +102,9 @@ public interface NlsFormatterManager {
    * </ul>
    * 
    * <b>ATTENTION:</b><br>
-   * The support for {@link java.text.ChoiceFormat}s is NOT provided in a
-   * compatible way as by hacking internal arrays of
-   * {@link java.text.MessageFormat}. Instead this implementation provides a
-   * clean configuration via <code>formatStyle</code> when
-   * <code>formatType</code> is <code>choice</code> (see
+   * The support for {@link java.text.ChoiceFormat}s is NOT provided in a compatible way as by hacking
+   * internal arrays of {@link java.text.MessageFormat}. Instead this implementation provides a clean
+   * configuration via <code>formatStyle</code> when <code>formatType</code> is <code>choice</code> (see
    * {@link net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice}).
    * 
    * @see java.text.MessageFormat

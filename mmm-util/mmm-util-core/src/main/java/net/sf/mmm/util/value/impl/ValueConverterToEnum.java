@@ -13,11 +13,10 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to an {@link Enum}. It supports objects given as
- * {@link CharSequence} (e.g. {@link String}) or {@link Number} as well as an
- * {@link Enum} having an value with the same {@link Enum#name() name}.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an {@link Object} to an {@link Enum}. It supports objects given as {@link CharSequence} (e.g.
+ * {@link String}) or {@link Number} as well as an {@link Enum} having an value with the same
+ * {@link Enum#name() name}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

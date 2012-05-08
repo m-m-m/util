@@ -7,8 +7,7 @@ import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
- * This is an implementation of {@link Filter} that either accepts or rejects
- * all objects to filter.
+ * This is an implementation of {@link Filter} that either accepts or rejects all objects to filter.
  * 
  * @param <V> is the generic type of the filtered objects.
  * 
@@ -51,8 +50,8 @@ public final class ConstantFilter<V> implements Filter<V> {
    * This method gets the an instance of this class.
    * 
    * @param <V> is the generic type of the filtered object.
-   * @param accept - <code>true</code> if the returned {@link Filter} should
-   *        accept all objects, <code>false</code> to reject all objects.
+   * @param accept - <code>true</code> if the returned {@link Filter} should accept all objects,
+   *        <code>false</code> to reject all objects.
    * @return the requested filter.
    */
   public static <V> Filter<V> getInstance(boolean accept) {

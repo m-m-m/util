@@ -41,9 +41,8 @@ public class NodeCycle<V> {
    * The constructor.
    * 
    * @param startNode is the {@link #getStartNode() start-node}.
-   * @param formatter is the {@link SimpleValueConverter} used to get a custom
-   *        string-representation of the nodes. If <code>null</code>
-   *        {@link Object#toString()} is used as fallback.
+   * @param formatter is the {@link SimpleValueConverter} used to get a custom string-representation of the
+   *        nodes. If <code>null</code> {@link Object#toString()} is used as fallback.
    */
   public NodeCycle(V startNode, SimpleValueConverter<V, String> formatter) {
 
@@ -55,9 +54,8 @@ public class NodeCycle<V> {
   }
 
   /**
-   * This method gets the {@link List} of nodes that build a cycle. It is stored
-   * in reverse order so the last node is the start of the cycle from top-level.
-   * The first node will be the same node as the last one.
+   * This method gets the {@link List} of nodes that build a cycle. It is stored in reverse order so the last
+   * node is the start of the cycle from top-level. The first node will be the same node as the last one.
    * 
    * @return the inverse cycle of nodes.
    */

@@ -31,15 +31,13 @@ public class NlsResourceLocatorTest {
   }
 
   /**
-   * This method performs a single check of the method
-   * {@link NlsResourceLocator#getLocaleForInfix(String)}.
+   * This method performs a single check of the method {@link NlsResourceLocator#getLocaleForInfix(String)}.
    * 
    * @param resourceLocator is the {@link NlsResourceLocator} to test.
    * @param localeInfix is the locale-infix.
    * @param expectedLocale the expected Locale.
    */
-  private void checkLocaleForInfix(NlsResourceLocator resourceLocator, String localeInfix,
-      Locale expectedLocale) {
+  private void checkLocaleForInfix(NlsResourceLocator resourceLocator, String localeInfix, Locale expectedLocale) {
 
     Locale locale = resourceLocator.getLocaleForInfix(localeInfix);
     Assert.assertEquals("language", expectedLocale.getLanguage(), locale.getLanguage());
@@ -57,14 +55,11 @@ public class NlsResourceLocatorTest {
     checkLocaleForInfix(resourceLocator, "_myLanguage", new Locale("myLanguage", "", ""));
     checkLocaleForInfix(resourceLocator, "__myCountry", new Locale("", "myCountry", ""));
     checkLocaleForInfix(resourceLocator, "___myVariant", new Locale("", "", "myVariant"));
-    checkLocaleForInfix(resourceLocator, "_myLanguage_myCountry", new Locale("myLanguage",
-        "myCountry", ""));
-    checkLocaleForInfix(resourceLocator, "_myLanguage__myVariant", new Locale("myLanguage", "",
+    checkLocaleForInfix(resourceLocator, "_myLanguage_myCountry", new Locale("myLanguage", "myCountry", ""));
+    checkLocaleForInfix(resourceLocator, "_myLanguage__myVariant", new Locale("myLanguage", "", "myVariant"));
+    checkLocaleForInfix(resourceLocator, "__myCountry_myVariant", new Locale("", "myCountry", "myVariant"));
+    checkLocaleForInfix(resourceLocator, "_myLanguage_myCountry_myVariant", new Locale("myLanguage", "myCountry",
         "myVariant"));
-    checkLocaleForInfix(resourceLocator, "__myCountry_myVariant", new Locale("", "myCountry",
-        "myVariant"));
-    checkLocaleForInfix(resourceLocator, "_myLanguage_myCountry_myVariant", new Locale(
-        "myLanguage", "myCountry", "myVariant"));
     checkLocaleForInfix(resourceLocator, "___", new Locale("", "", ""));
     checkLocaleForInfix(resourceLocator, null, Locale.ROOT);
     checkLocaleForInfix(resourceLocator, "", Locale.ROOT);

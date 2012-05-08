@@ -19,17 +19,16 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgBuilder;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder}
- * interface for {@link PojoPropertyAccessorOneArgMode#SET setter-access}.
+ * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder} interface for
+ * {@link PojoPropertyAccessorOneArgMode#SET setter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
 @Named
-public class PojoPropertyAccessorSetBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> implements
-    PojoPropertyAccessorOneArgBuilder {
+public class PojoPropertyAccessorSetBuilder extends AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg>
+    implements PojoPropertyAccessorOneArgBuilder {
 
   /** method name prefix for classic setter */
   private static final String METHOD_PREFIX_SET = "set";

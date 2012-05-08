@@ -6,8 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionMissingValueException} is thrown if an option requires a
- * value that is missing (no proper value is specified as commandline argument).
+ * A {@link CliOptionMissingValueException} is thrown if an option requires a value that is missing (no proper
+ * value is specified as commandline argument).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

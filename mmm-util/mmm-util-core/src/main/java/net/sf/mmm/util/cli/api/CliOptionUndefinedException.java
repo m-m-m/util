@@ -6,8 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionUndefinedException} is thrown if an {@link CliOption
- * option} is given as commandline-argument if NOT defined.
+ * A {@link CliOptionUndefinedException} is thrown if an {@link CliOption option} is given as
+ * commandline-argument if NOT defined.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

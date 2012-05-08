@@ -55,8 +55,7 @@ public class ProcessUtilTest {
     ProcessContext context = new ProcessContext();
     ByteArrayOutputStream errStream = new ByteArrayOutputStream();
     context.setErrStream(errStream);
-    AsyncProcessExecutor executor = getProcessUtil().executeAsync(context,
-        new ProcessBuilder("java", "-version"));
+    AsyncProcessExecutor executor = getProcessUtil().executeAsync(context, new ProcessBuilder("java", "-version"));
     int exitCode = executor.get().intValue();
     assertEquals(0, exitCode);
     byte[] errBytes = errStream.toByteArray();
@@ -68,8 +67,7 @@ public class ProcessUtilTest {
   public void testExecuteAsyncTimeout() throws Exception {
 
     ProcessContext context = new ProcessContext();
-    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
-        SleepApp.class.getName());
+    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes", SleepApp.class.getName());
     long start = System.currentTimeMillis();
     try {
       int exitCode = getProcessUtil().execute(context, 100, TimeUnit.MILLISECONDS, builder);
@@ -93,8 +91,7 @@ public class ProcessUtilTest {
     context.setInStream(inStream);
     context.setErrStream(errStream);
     context.setOutStream(outStream);
-    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
-        SleepApp.class.getName());
+    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes", SleepApp.class.getName());
     assertFalse(inStream.isClosed());
     AsyncProcessExecutor executor = getProcessUtil().executeAsync(context, builder);
     Thread.sleep(10);
@@ -113,8 +110,7 @@ public class ProcessUtilTest {
   public void testExecuteAsyncStopChildProcess() throws Exception {
 
     ProcessContext context = new ProcessContext();
-    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
-        SwingApp.class.getName());
+    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes", SwingApp.class.getName());
     AsyncProcessExecutor executor = getProcessUtil().executeAsync(context, builder);
     Thread.sleep(2000);
     boolean stopped = executor.cancel(true);
@@ -147,9 +143,8 @@ public class ProcessUtilTest {
     // test output of stderr
     byte[] errBytes = errStream.toByteArray();
     String errString = new String(errBytes);
-    String expectedErrString = PipeApp1.class.getSimpleName() + " done."
-        + StringUtil.LINE_SEPARATOR + PipeApp2.class.getSimpleName() + " done."
-        + StringUtil.LINE_SEPARATOR;
+    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + StringUtil.LINE_SEPARATOR
+        + PipeApp2.class.getSimpleName() + " done." + StringUtil.LINE_SEPARATOR;
     assertEquals(expectedErrString, errString);
   }
 

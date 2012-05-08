@@ -10,17 +10,14 @@ import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is the default implementation of the
- * {@link net.sf.mmm.util.pojo.api.PojoFactory} interface.<br>
- * In advance to {@link DefaultPojoFactory} it tries to find implementations for
- * interfaces by guessing according to conventions:<br>
- * For an interface <code>some.package.api.Foo</code> it will try to find the
- * following classes...
+ * This is the default implementation of the {@link net.sf.mmm.util.pojo.api.PojoFactory} interface.<br>
+ * In advance to {@link DefaultPojoFactory} it tries to find implementations for interfaces by guessing
+ * according to conventions:<br>
+ * For an interface <code>some.package.api.Foo</code> it will try to find the following classes...
  * <ul>
  * <li><code>some.package.api.FooImpl</code></li>
  * <li><code>some.package.api.impl.FooImpl</code></li>
- * <li><code>some.package.impl.FooImpl</code> (only if package of interface ends
- * with ".api")</li>
+ * <li><code>some.package.impl.FooImpl</code> (only if package of interface ends with ".api")</li>
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -50,9 +47,8 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
   /**
    * The constructor.
    * 
-   * @param collectionFactoryManager is the {@link CollectionFactoryManager}
-   *        instance used to create {@link java.util.Map}s and
-   *        {@link java.util.Collection}s.
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager} instance used to create
+   *        {@link java.util.Map}s and {@link java.util.Collection}s.
    */
   public GuessingPojoFactory(CollectionFactoryManager collectionFactoryManager) {
 
@@ -63,8 +59,7 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
    * {@inheritDoc}
    */
   @Override
-  protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface)
-      throws InstantiationFailedException {
+  protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface) throws InstantiationFailedException {
 
     POJO pojo = super.newInstanceForInterface(pojoInterface);
     if (pojo == null) {
@@ -78,8 +73,7 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
           implementation = Class.forName(packageName + IMPL_PKG_SUFFIX + className);
         } catch (ClassNotFoundException e1) {
           if (packageName.endsWith(API_PKG_SUFFIX)) {
-            String implPackageName = packageName.substring(0,
-                packageName.length() - API_PKG_SUFFIX.length());
+            String implPackageName = packageName.substring(0, packageName.length() - API_PKG_SUFFIX.length());
             try {
               implementation = Class.forName(implPackageName + className);
             } catch (ClassNotFoundException e2) {
@@ -92,8 +86,7 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
         if (pojoInterface.isAssignableFrom(implementation)) {
           pojo = pojoInterface.cast(newInstanceForClass(implementation));
         } else {
-          getLogger().warn(
-              "Class '" + implementation + "' does NOT implement '" + pojoInterface + "'!");
+          getLogger().warn("Class '" + implementation + "' does NOT implement '" + pojoInterface + "'!");
         }
       }
     }

@@ -15,8 +15,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
- * This is the abstract base implementation of the {@link DataResource}
- * interface.
+ * This is the abstract base implementation of the {@link DataResource} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -32,12 +31,10 @@ public abstract class AbstractDataResource implements DataResource {
   }
 
   /**
-   * This method gets the <em>scheme-prefix</em> of absolute {@link #getUri()
-   * URIs} for this type of {@link DataResource}. The scheme-prefix has the
-   * following form:
-   * <code>{@link java.net.URI#getScheme() &lt;scheme&gt;}:&lt;suffix&gt;</code>
-   * where <code>&lt;suffix&gt;</code> is the empty string or something like
-   * <code>//</code>.
+   * This method gets the <em>scheme-prefix</em> of absolute {@link #getUri() URIs} for this type of
+   * {@link DataResource}. The scheme-prefix has the following form:
+   * <code>{@link java.net.URI#getScheme() &lt;scheme&gt;}:&lt;suffix&gt;</code> where
+   * <code>&lt;suffix&gt;</code> is the empty string or something like <code>//</code>.
    * 
    * @return the scheme-prefix of this resource.
    */
@@ -46,8 +43,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    * 
-   * This is a default implementation. Override if there is a more performing
-   * way to implement this.
+   * This is a default implementation. Override if there is a more performing way to implement this.
    */
   public long getSize() throws ResourceNotAvailableException {
 
@@ -62,8 +58,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    * 
-   * This is a default implementation. Override if there is a more performing
-   * way to implement this.
+   * This is a default implementation. Override if there is a more performing way to implement this.
    */
   public InputStream openStream() {
 
@@ -113,8 +108,8 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
-  public OutputStream openOutputStream() throws ResourceNotAvailableException,
-      ResourceNotWritableException, RuntimeIoException {
+  public OutputStream openOutputStream() throws ResourceNotAvailableException, ResourceNotWritableException,
+      RuntimeIoException {
 
     throw new ResourceNotWritableException(getUri());
   }

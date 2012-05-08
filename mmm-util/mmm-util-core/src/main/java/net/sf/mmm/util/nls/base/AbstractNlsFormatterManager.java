@@ -19,25 +19,23 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
 import net.sf.mmm.util.text.base.JustificationBuilderImpl;
 
 /**
- * This is the abstract base implementation of the {@link NlsFormatterManager}
- * interface.<br>
- * You should extend this class rather than directly implementing the
- * {@link NlsFormatterManager} interface to gain compatibility with further
- * releases.
+ * This is the abstract base implementation of the {@link NlsFormatterManager} interface.<br>
+ * You should extend this class rather than directly implementing the {@link NlsFormatterManager} interface to
+ * gain compatibility with further releases.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterManager extends AbstractLoggableComponent implements
-    NlsFormatterManager, NlsArgumentParser {
+public abstract class AbstractNlsFormatterManager extends AbstractLoggableComponent implements NlsFormatterManager,
+    NlsArgumentParser {
 
   /** A char filter that accepts everything except ',' and '}'. */
   protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(false,
       NlsArgumentParser.FORMAT_SEPARATOR, NlsArgumentParser.END_EXPRESSION);
 
   /** A char filter that accepts everything except ',' and '}'. */
-  protected static final CharFilter NO_EXPRESSION = new ListCharFilter(false,
-      NlsArgumentParser.START_EXPRESSION, NlsArgumentParser.END_EXPRESSION);
+  protected static final CharFilter NO_EXPRESSION = new ListCharFilter(false, NlsArgumentParser.START_EXPRESSION,
+      NlsArgumentParser.END_EXPRESSION);
 
   /** @see #getJustificationBuilder() */
   private JustificationBuilder justificationBuilder;
@@ -69,8 +67,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
         try {
           formatter = getSubFormatter(formatType, scanner);
         } catch (Exception e) {
-          throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()),
-              NlsFormatter.class);
+          throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()), NlsFormatter.class);
         }
         c = scanner.forceNext();
       } else {
@@ -98,8 +95,8 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
    * {@link AbstractNlsFormatterPlugin#getStyle() style} from the given scanner.
    * 
    * @param formatType is the type to be formatted.
-   * @param scanner is the current {@link CharSequenceScanner} for parsing the
-   *        style defining details of formatting.
+   * @param scanner is the current {@link CharSequenceScanner} for parsing the style defining details of
+   *        formatting.
    * @return the according {@link NlsFormatter}.
    */
   protected NlsFormatter<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
@@ -121,8 +118,8 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
   }
 
   /**
-   * This method gets the {@link JustificationBuilder} used to
-   * {@link JustificationBuilder#build(String) build} {@link Justification}s.
+   * This method gets the {@link JustificationBuilder} used to {@link JustificationBuilder#build(String)
+   * build} {@link Justification}s.
    * 
    * @return the {@link JustificationBuilder}.
    */

@@ -12,16 +12,15 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorOneArg}
- * interface for {@link PojoPropertyAccessorOneArgMode#ADD adding} an element
- * using the getter from another accessor returning an array or
- * {@link java.util.Collection}.
+ * This is the implementation of the {@link PojoPropertyAccessorOneArg} interface for
+ * {@link PojoPropertyAccessorOneArgMode#ADD adding} an element using the getter from another accessor
+ * returning an array or {@link java.util.Collection}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorProxyAdd extends
-    AbstractPojoPropertyAccessorProxyAdapterComponentType implements PojoPropertyAccessorOneArg {
+public class PojoPropertyAccessorProxyAdd extends AbstractPojoPropertyAccessorProxyAdapterComponentType implements
+    PojoPropertyAccessorOneArg {
 
   /** The according setter to use if array has to be resized. */
   private final PojoPropertyAccessorOneArg containerSetAccessor;
@@ -30,15 +29,12 @@ public class PojoPropertyAccessorProxyAdd extends
    * The constructor.
    * 
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
-   * @param containerGetAccessor is the accessor delegate that gets an array, or
-   *        list property.
-   * @param containerSetAccessor is the accessor that sets the array, or
-   *        {@link java.util.Collection} property. May be <code>null</code> if
-   *        NOT available.
+   * @param containerGetAccessor is the accessor delegate that gets an array, or list property.
+   * @param containerSetAccessor is the accessor that sets the array, or {@link java.util.Collection}
+   *        property. May be <code>null</code> if NOT available.
    */
   public PojoPropertyAccessorProxyAdd(PojoDescriptorDependencies dependencies,
-      PojoPropertyAccessorNonArg containerGetAccessor,
-      PojoPropertyAccessorOneArg containerSetAccessor) {
+      PojoPropertyAccessorNonArg containerGetAccessor, PojoPropertyAccessorOneArg containerSetAccessor) {
 
     super(dependencies, containerGetAccessor);
     this.containerSetAccessor = containerSetAccessor;
@@ -77,8 +73,7 @@ public class PojoPropertyAccessorProxyAdd extends
   public Object invoke(Object pojoInstance, Object argument) {
 
     Object arrayOrCollection = getDelegate().invoke(pojoInstance);
-    Object arrayCopy = getDependencies().getCollectionReflectionUtil().add(arrayOrCollection,
-        argument);
+    Object arrayCopy = getDependencies().getCollectionReflectionUtil().add(arrayOrCollection, argument);
     if ((arrayCopy != arrayOrCollection) && (this.containerSetAccessor != null)) {
       // we will NOT create this proxy if the setter is missing for an array
       // type getter.

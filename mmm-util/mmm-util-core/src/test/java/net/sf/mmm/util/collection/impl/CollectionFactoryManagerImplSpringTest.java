@@ -7,8 +7,7 @@ import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
- * This is the test-case for {@link CollectionFactoryManager} configured using
- * spring.
+ * This is the test-case for {@link CollectionFactoryManager} configured using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

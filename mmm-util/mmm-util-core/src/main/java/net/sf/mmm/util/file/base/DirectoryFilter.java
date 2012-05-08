@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.FileFilter;
 
 /**
- * This class represents a {@link java.io.FileFilter file-filter} that only
- * accepts {@link java.io.File#isDirectory() directories}. Use
- * {@link #getInstance()} to get the instance of this filter.
+ * This class represents a {@link java.io.FileFilter file-filter} that only accepts
+ * {@link java.io.File#isDirectory() directories}. Use {@link #getInstance()} to get the instance of this
+ * filter.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

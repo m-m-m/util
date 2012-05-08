@@ -8,9 +8,8 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * This is the exception thrown if a cast failed. It is the equivalent of a
- * {@link ClassCastException} but gives more details about the problem. It can
- * be used by generic converters and the like.
+ * This is the exception thrown if a cast failed. It is the equivalent of a {@link ClassCastException} but
+ * gives more details about the problem. It can be used by generic converters and the like.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -53,8 +52,7 @@ public class CastFailedException extends ReflectionException {
    */
   public CastFailedException(Object object, Type source, Type destination) {
 
-    super(NlsBundleUtilCore.ERR_CAST, toMap(KEY_OBJECT, object, KEY_SOURCE, source,
-        KEY_TARGET_TYPE, destination));
+    super(NlsBundleUtilCore.ERR_CAST, toMap(KEY_OBJECT, object, KEY_SOURCE, source, KEY_TARGET_TYPE, destination));
   }
 
   /**
@@ -67,8 +65,8 @@ public class CastFailedException extends ReflectionException {
    */
   public CastFailedException(Throwable nested, Object object, Type source, Type destination) {
 
-    super(nested, NlsBundleUtilCore.ERR_CAST, toMap(KEY_OBJECT, object, KEY_SOURCE, source,
-        KEY_TARGET_TYPE, destination));
+    super(nested, NlsBundleUtilCore.ERR_CAST, toMap(KEY_OBJECT, object, KEY_SOURCE, source, KEY_TARGET_TYPE,
+        destination));
   }
 
 }

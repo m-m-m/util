@@ -9,8 +9,7 @@ import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import org.junit.AfterClass;
 
 /**
- * This is the test-case for {@link CollectionReflectionUtil} configured using
- * spring.
+ * This is the test-case for {@link CollectionReflectionUtil} configured using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

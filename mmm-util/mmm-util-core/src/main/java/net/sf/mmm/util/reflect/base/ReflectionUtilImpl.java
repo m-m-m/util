@@ -58,8 +58,7 @@ import net.sf.mmm.util.resource.base.UrlResource;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This class is a collection of utility functions for dealing with
- * {@link java.lang.reflect reflection}.
+ * This class is a collection of utility functions for dealing with {@link java.lang.reflect reflection}.
  * 
  * @see #getInstance()
  * 
@@ -91,15 +90,12 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
 
   /**
    * This method gets the singleton instance of this {@link ReflectionUtil}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -174,19 +170,15 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from
-   * <code>descendant</code> up to <code>ancestor</code> and returns the
-   * sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface()
-   * interface}, the hierarchy may NOT be unique. In such case it will be
-   * unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
+   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
+   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
+   * NOT be unique. In such case it will be unspecified which of the possible paths is used.
    * 
-   * @param ancestor is the super-class or super-interface of
-   *        <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of
-   *        <code>ancestor</code>.
-   * @return the sub-class or sub-interface on the hierarchy-path from
-   *         <code>descendant</code> up to <code>ancestor</code>.
+   * @param ancestor is the super-class or super-interface of <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
+   * @return the sub-class or sub-interface on the hierarchy-path from <code>descendant</code> up to
+   *         <code>ancestor</code>.
    */
   protected Class<?> getSubClass(Class<?> ancestor, Class<?> descendant) {
 
@@ -219,19 +211,15 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from
-   * <code>descendant</code> up to <code>ancestor</code> and returns the
-   * sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface()
-   * interface}, the hierarchy may NOT be unique. In such case it will be
-   * unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
+   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
+   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
+   * NOT be unique. In such case it will be unspecified which of the possible paths is used.
    * 
-   * @param ancestor is the super-class or super-interface of
-   *        <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of
-   *        <code>ancestor</code>.
-   * @return the sub-class or sub-interface on the hierarchy-path from
-   *         <code>descendant</code> up to <code>ancestor</code>.
+   * @param ancestor is the super-class or super-interface of <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
+   * @return the sub-class or sub-interface on the hierarchy-path from <code>descendant</code> up to
+   *         <code>ancestor</code>.
    */
   protected Type getGenericDeclaration(Class<?> ancestor, Class<?> descendant) {
 
@@ -302,14 +290,13 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
 
   /**
    * This method parses the given <code>type</code> as generic {@link Type}.<br>
-   * This would be easier when using <code>StringParser</code> but we want to
-   * avoid the dependency on <code>util-misc</code>.
+   * This would be easier when using <code>StringParser</code> but we want to avoid the dependency on
+   * <code>util-misc</code>.
    * 
    * @param parser is the string-parser on the type string to parse.
    * @param resolver is used to resolve classes.
-   * @param owner is the
-   *        {@link java.lang.reflect.ParameterizedType#getOwnerType()
-   *        owner-type} or <code>null</code>.
+   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or
+   *        <code>null</code>.
    * @return the parsed type.
    */
   private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner) {
@@ -480,8 +467,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
           }
         }
       } else if (actualType instanceof GenericArrayType) {
-        toString(((GenericArrayType) actualType).getGenericComponentType(), appendable,
-            classFormatter);
+        toString(((GenericArrayType) actualType).getGenericComponentType(), appendable, classFormatter);
         appendable.append("[]");
       } else {
         throw new IllegalCaseException(type.getClass().getName());
@@ -558,19 +544,17 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
    * {@inheritDoc}
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType,
-      boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws NoSuchFieldException,
-      IllegalAccessException, IllegalArgumentException {
+  public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
+      boolean mustBeFinal, boolean inherit) throws NoSuchFieldException, IllegalAccessException,
+      IllegalArgumentException {
 
     Field field = type.getField(fieldName);
     int modifiers = field.getModifiers();
     if (!Modifier.isStatic(modifiers)) {
-      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type
-          + "') is not static!");
+      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type + "') is not static!");
     }
     if (mustBeFinal && !Modifier.isFinal(modifiers)) {
-      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type
-          + "') is not final!");
+      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type + "') is not final!");
     }
     Class<?> actualType = field.getType();
     boolean typeMismatch = false;
@@ -588,8 +572,8 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
       throw new NoSuchFieldException(fieldName);
     }
     if (typeMismatch) {
-      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type
-          + "') has type '" + field.getType() + "' but requested type was '" + fieldType + "'!");
+      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type + "') has type '"
+          + field.getType() + "' but requested type was '" + fieldType + "'!");
     }
     return (T) field.get(null);
   }
@@ -597,8 +581,8 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType,
-      boolean exactTypeMatch, boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
+  public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
+      boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
 
     try {
       return getStaticField(type, fieldName, fieldType, exactTypeMatch, mustBeFinal, inherit);
@@ -620,8 +604,8 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Method getParentMethod(Class<?> inheritingClass, String methodName,
-      Class<?>[] parameterTypes) throws SecurityException {
+  public Method getParentMethod(Class<?> inheritingClass, String methodName, Class<?>[] parameterTypes)
+      throws SecurityException {
 
     Class<?> parentClass = inheritingClass.getSuperclass();
     if (parentClass != null) {
@@ -650,14 +634,12 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   }
 
   /**
-   * This method scans the given <code>packageDirectory</code> recursively for
-   * resources.
+   * This method scans the given <code>packageDirectory</code> recursively for resources.
    * 
    * @param packageDirectory is the directory representing the {@link Package}.
-   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the
-   *        qualified prefix (the {@link Package} with a trailing dot).
-   * @param qualifiedNamePrefixLength the length of the prefix used to rest the
-   *        string-builder after reuse.
+   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the
+   *        {@link Package} with a trailing dot).
+   * @param qualifiedNamePrefixLength the length of the prefix used to rest the string-builder after reuse.
    * @param visitor is the {@link ResourceVisitor}.
    */
   private static void visitResources(File packageDirectory, StringBuilder qualifiedNameBuilder,
@@ -702,20 +684,18 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter) {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter) {
 
     Set<String> result = new HashSet<String>();
-    findClassNames(packageName, includeSubPackages, result, filter,
-        getDefaultClassLoader(filter.getClass()));
+    findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter.getClass()));
     return result;
   }
 
   /**
    * {@inheritDoc}
    */
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+      ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
     findClassNames(packageName, includeSubPackages, result, filter, classLoader);
@@ -726,20 +706,17 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
    * @see #findClassNames(String, boolean, Filter, ClassLoader)
    * 
    * @param packageName is the name of the {@link Package} to scan.
-   * @param includeSubPackages - if <code>true</code> all sub-packages of the
-   *        specified {@link Package} will be included in the search.
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
+   *        be included in the search.
    * @param classSet is where to add the classes.
-   * @param filter is used to {@link Filter#accept(Object) filter} the
-   *        {@link Class}-names to be added to the resulting {@link Set}. The
-   *        {@link Filter} will receive {@link Class#getName() fully qualified
-   *        class-names} as argument (e.g.
-   *        "net.sf.mmm.reflect.api.ReflectionUtil").
+   * @param filter is used to {@link Filter#accept(Object) filter} the {@link Class}-names to be added to the
+   *        resulting {@link Set}. The {@link Filter} will receive {@link Class#getName() fully qualified
+   *        class-names} as argument (e.g. "net.sf.mmm.reflect.api.ReflectionUtil").
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @throws RuntimeIoException if the operation failed with an I/O error.
    */
-  protected void findClassNames(String packageName, boolean includeSubPackages,
-      Set<String> classSet, Filter<String> filter, ClassLoader classLoader)
-      throws RuntimeIoException {
+  protected void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet,
+      Filter<String> filter, ClassLoader classLoader) throws RuntimeIoException {
 
     ResourceVisitor visitor = new ClassNameCollector(classSet, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
@@ -748,18 +725,16 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter) {
 
-    return findResourceNames(packageName, includeSubPackages, filter,
-        getDefaultClassLoader(filter.getClass()));
+    return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
 
   /**
    * {@inheritDoc}
    */
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+      ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
     ResourceNameCollector visitor = new ResourceNameCollector(result, filter);
@@ -770,11 +745,9 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<String> filter) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter) {
 
-    return findResources(packageName, includeSubPackages, filter,
-        getDefaultClassLoader(filter.getClass()));
+    return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
 
   /**
@@ -784,8 +757,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
 
     try {
       Set<DataResource> result = new HashSet<DataResource>();
-      Enumeration<URL> resourceUrlEnumeration = getDefaultClassLoader().getResources(
-          absoluteClasspath);
+      Enumeration<URL> resourceUrlEnumeration = getDefaultClassLoader().getResources(absoluteClasspath);
       while (resourceUrlEnumeration.hasMoreElements()) {
         URL url = resourceUrlEnumeration.nextElement();
         result.add(new UrlResource(url));
@@ -799,8 +771,8 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<String> filter, ClassLoader classLoader) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter,
+      ClassLoader classLoader) {
 
     Set<DataResource> result = new HashSet<DataResource>();
     ResourceVisitor visitor = new ResourceCollector(result, filter);
@@ -811,16 +783,16 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * This method does the actual magic to locate resources on the classpath.
    * 
-   * @param packageName is the name of the {@link Package} to scan. Both "." and
-   *        "/" are accepted as separator (e.g. "net.sf.mmm.util.reflect).
-   * @param includeSubPackages - if <code>true</code> all sub-packages of the
-   *        specified {@link Package} will be included in the search.
+   * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
+   *        (e.g. "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
+   *        be included in the search.
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @param visitor is the {@link ResourceVisitor}.
    * @throws RuntimeIoException if the operation failed with an I/O error.
    */
-  public void visitResourceNames(String packageName, boolean includeSubPackages,
-      ClassLoader classLoader, ResourceVisitor visitor) throws RuntimeIoException {
+  public void visitResourceNames(String packageName, boolean includeSubPackages, ClassLoader classLoader,
+      ResourceVisitor visitor) throws RuntimeIoException {
 
     try {
       String path = packageName.replace('.', '/');
@@ -837,8 +809,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
           File packageDirectory = new File(urlString);
           if (packageDirectory.isDirectory()) {
             if (includeSubPackages) {
-              visitResources(packageDirectory, qualifiedNameBuilder, qualifiedNamePrefixLength,
-                  visitor);
+              visitResources(packageDirectory, qualifiedNameBuilder, qualifiedNamePrefixLength, visitor);
             } else {
               for (File child : packageDirectory.listFiles()) {
                 if (child.isFile()) {
@@ -897,15 +868,13 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
    */
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) {
 
-    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
-        ConstantFilter.getInstance(true));
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, ConstantFilter.getInstance(true));
   }
 
   /**
    * {@inheritDoc}
    */
-  public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames,
-      Filter<? super Class<?>> filter) {
+  public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames, Filter<? super Class<?>> filter) {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
   }
@@ -928,8 +897,8 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
 
   /**
    * This method gets the default {@link ClassLoader} to use. This should be the
-   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to
-   * alternatives if no such {@link ClassLoader} is available.
+   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
+   * {@link ClassLoader} is available.
    * 
    * @return the default {@link ClassLoader} to use.
    */
@@ -940,13 +909,11 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
 
   /**
    * This method gets the default {@link ClassLoader} to use. This should be the
-   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to
-   * alternatives if no such {@link ClassLoader} is available.
+   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
+   * {@link ClassLoader} is available.
    * 
-   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a
-   *        {@link ClassLoader} as fallback if the
-   *        {@link Thread#getContextClassLoader() ContextClassLoader} is not
-   *        available.
+   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a {@link ClassLoader} as fallback
+   *        if the {@link Thread#getContextClassLoader() ContextClassLoader} is not available.
    * @return the default {@link ClassLoader} to use.
    */
   protected ClassLoader getDefaultClassLoader(Class<?> fallbackClass) {

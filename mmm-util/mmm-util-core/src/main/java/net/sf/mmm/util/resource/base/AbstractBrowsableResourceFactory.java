@@ -17,14 +17,13 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 
 /**
- * This is the abstract base implementation of the
- * {@link BrowsableResourceFactory} interface.
+ * This is the abstract base implementation of the {@link BrowsableResourceFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractBrowsableResourceFactory extends AbstractDataResourceFactory
-    implements BrowsableResourceFactory {
+public abstract class AbstractBrowsableResourceFactory extends AbstractDataResourceFactory implements
+    BrowsableResourceFactory {
 
   /** @see #createBrowsableResource(ResourceUri) */
   private final Map<String, DataResourceProvider<? extends DataResource>> schema2providerMap;
@@ -42,12 +41,10 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    * This method registers the given <code>provider</code>.
    * 
    * @param provider is the {@link DataResourceProvider} to register.
-   * @throws DuplicateObjectException if a {@link DataResourceProvider} is
-   *         already registered for one of the
+   * @throws DuplicateObjectException if a {@link DataResourceProvider} is already registered for one of the
    *         {@link DataResourceProvider#getSchemePrefixes() scheme-prefixes}.
    */
-  public void registerProvider(DataResourceProvider<? extends DataResource> provider)
-      throws DuplicateObjectException {
+  public void registerProvider(DataResourceProvider<? extends DataResource> provider) throws DuplicateObjectException {
 
     getInitializationState().requireNotInitilized();
     if (provider == null) {
@@ -72,19 +69,17 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   }
 
   /**
-   * This method registers the given <code>provider</code> for the given
-   * <code>schemaPrefix</code>.
+   * This method registers the given <code>provider</code> for the given <code>schemaPrefix</code>.
    * 
    * @param provider is the {@link DataResourceProvider} to register.
-   * @param schemaPrefix is the {@link ResourceUriImpl#getSchemePrefix()
-   *        scheme-prefix} for which the provider shall be registered.
+   * @param schemaPrefix is the {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} for which the provider
+   *        shall be registered.
    * 
-   * @throws DuplicateObjectException if a {@link DataResourceProvider} is
-   *         already registered with the same
+   * @throws DuplicateObjectException if a {@link DataResourceProvider} is already registered with the same
    *         {@link DataResourceProvider#getSchemePrefixes() scheme-prefix}.
    */
-  public void registerProvider(DataResourceProvider<? extends DataResource> provider,
-      String schemaPrefix) throws DuplicateObjectException {
+  public void registerProvider(DataResourceProvider<? extends DataResource> provider, String schemaPrefix)
+      throws DuplicateObjectException {
 
     getInitializationState().requireNotInitilized();
     if (provider == null) {
@@ -100,16 +95,13 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   }
 
   /**
-   * This method gets the {@link DataResourceProvider provider} for the given
-   * <code>resourceUri</code>.
+   * This method gets the {@link DataResourceProvider provider} for the given <code>resourceUri</code>.
    * 
    * @param resourceUri is the {@link ResourceUriImpl}.
-   * @return the {@link DataResourceProvider}
-   *         {@link DataResourceProvider#getSchemePrefixes() responsible} for
+   * @return the {@link DataResourceProvider} {@link DataResourceProvider#getSchemePrefixes() responsible} for
    *         the given <code>resourceUri</code>.
-   * @throws ResourceUriUndefinedException if no {@link DataResourceProvider
-   *         provider} is {@link #registerProvider(DataResourceProvider)
-   *         registered} that is responsible.
+   * @throws ResourceUriUndefinedException if no {@link DataResourceProvider provider} is
+   *         {@link #registerProvider(DataResourceProvider) registered} that is responsible.
    */
   protected DataResourceProvider<? extends DataResource> getProvider(ResourceUri resourceUri)
       throws ResourceUriUndefinedException {
@@ -119,8 +111,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
       // default is file://
       schemePrefix = FileResource.SCHEME_PREFIX;
     }
-    DataResourceProvider<? extends DataResource> provider = this.schema2providerMap
-        .get(schemePrefix);
+    DataResourceProvider<? extends DataResource> provider = this.schema2providerMap.get(schemePrefix);
     if (provider == null) {
       throw new ResourceUriUndefinedException(resourceUri.getUri());
     }
@@ -131,24 +122,20 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    * {@inheritDoc}
    */
   @Override
-  protected DataResource createDataResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException {
+  protected DataResource createDataResource(ResourceUri resourceUri) throws ResourceUriUndefinedException {
 
     return getProvider(resourceUri).createResource(resourceUri);
   }
 
   /**
-   * This method {@link #createBrowsableResource(String) creates} the actual raw
-   * {@link BrowsableResource}.
+   * This method {@link #createBrowsableResource(String) creates} the actual raw {@link BrowsableResource}.
    * 
    * @param resourceUri is the parsed and qualified {@link ResourceUriImpl}.
    * @return the created {@link BrowsableResource}.
-   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code>
-   *         is undefined, e.g. the {@link ResourceUriImpl#getSchemePrefix()
-   *         scheme-prefix} is NOT supported by this factory.
+   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code> is undefined, e.g. the
+   *         {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} is NOT supported by this factory.
    */
-  protected BrowsableResource createBrowsableResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException {
+  protected BrowsableResource createBrowsableResource(ResourceUri resourceUri) throws ResourceUriUndefinedException {
 
     DataResourceProvider<? extends DataResource> provider = getProvider(resourceUri);
     if (!BrowsableResource.class.isAssignableFrom(provider.getResourceType())) {
@@ -161,8 +148,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   /**
    * {@inheritDoc}
    */
-  public BrowsableResource createBrowsableResource(String resourceUri)
-      throws ResourceUriUndefinedException {
+  public BrowsableResource createBrowsableResource(String resourceUri) throws ResourceUriUndefinedException {
 
     ResourceUri uri = new ResourceUriImpl(resourceUri);
     BrowsableResource resource = createBrowsableResource(uri);
@@ -170,11 +156,9 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   }
 
   /**
-   * This is an implementation of the {@link BrowsableResource} interface, that
-   * adapts {@link #getDelegate() another} {@link BrowsableResource} and
-   * enhances the {@link #navigate(String)}-method to support switching schemes
-   * via the {@link BrowsableResourceFactory} that created this
-   * {@link BrowsableResource}.
+   * This is an implementation of the {@link BrowsableResource} interface, that adapts {@link #getDelegate()
+   * another} {@link BrowsableResource} and enhances the {@link #navigate(String)}-method to support switching
+   * schemes via the {@link BrowsableResourceFactory} that created this {@link BrowsableResource}.
    * 
    * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
    */

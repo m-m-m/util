@@ -6,9 +6,8 @@ package net.sf.mmm.util.text.api;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface used to {@link #build(String) build} a
- * {@link Justification} from a {@link String}. It therefore expects the
- * following format:<br>
+ * This is the interface used to {@link #build(String) build} a {@link Justification} from a {@link String}.
+ * It therefore expects the following format:<br>
  * <code>&lt;filler&gt;&lt;alignment&gt;&lt;width&gt;[&lt;mode&gt;]</code><br>
  * The segments have the following meaning:
  * <table border="1">
@@ -30,19 +29,15 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * <tr>
  * <td><code>&lt;with&gt;</code></td>
  * <td><code>[0-9]+</code></td>
- * <td>if the length of the string to
- * {@link Justification#justify(CharSequence, Appendable) justify} is less than
- * this width, the string will be expanded using the filler according to the
- * alignment.</td>
+ * <td>if the length of the string to {@link Justification#justify(CharSequence, Appendable) justify} is less
+ * than this width, the string will be expanded using the filler according to the alignment.</td>
  * </tr>
  * <tr>
  * <td><code>&lt;mode&gt;</code></td>
  * <td><code>[|]</code></td>
- * <td>if the mode is truncate(|) then the string will be truncated if its
- * length is greater than &lt;with&gt; so the result will always have the length
- * of &lt;with&gt;. Please note that truncate can remove valuable information or
- * cause wrong results (e.g. "10000" with a justification of " +3|" will result
- * in "100").</td>
+ * <td>if the mode is truncate(|) then the string will be truncated if its length is greater than &lt;with&gt;
+ * so the result will always have the length of &lt;with&gt;. Please note that truncate can remove valuable
+ * information or cause wrong results (e.g. "10000" with a justification of " +3|" will result in "100").</td>
  * </tr>
  * </table>
  * Examples:

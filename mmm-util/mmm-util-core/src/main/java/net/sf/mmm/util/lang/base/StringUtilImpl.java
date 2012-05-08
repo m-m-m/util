@@ -53,15 +53,12 @@ public class StringUtilImpl implements StringUtil {
 
   /**
    * This method gets the singleton instance of this {@link StringUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -178,8 +175,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
-  public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase,
-      Locale locale) {
+  public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase, Locale locale) {
 
     int stringLength = string.length();
     int newSuffixLength = newSuffixLowerCase.length();
@@ -355,8 +351,8 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
-  public <E> String toSeparatedString(Collection<E> collection, String separator,
-      StringSyntax syntax, Formatter<E> formatter) {
+  public <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
+      Formatter<E> formatter) {
 
     StringBuilder buffer = new StringBuilder();
     toSeparatedString(collection, separator, syntax, formatter, buffer);
@@ -366,8 +362,8 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
-  public <E> void toSeparatedString(Collection<E> collection, String separator,
-      StringSyntax syntax, Formatter<E> formatter, Appendable buffer) {
+  public <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
+      Formatter<E> formatter, Appendable buffer) {
 
     NlsNullPointerException.checkNotNull("separator", separator);
     if (separator.length() == 0) {
@@ -417,8 +413,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
-  public List<String> fromSeparatedString(CharSequence separatedString, String separator,
-      StringSyntax syntax) {
+  public List<String> fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax) {
 
     List<String> result = new ArrayList<String>();
     fromSeparatedString(separatedString, separator, syntax, result);
@@ -428,30 +423,27 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
-  public void fromSeparatedString(CharSequence separatedString, String separator,
-      StringSyntax syntax, Collection<String> collection) {
+  public void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
+      Collection<String> collection) {
 
-    ValueConverterIdentity<String> identityConverter = new ValueConverterIdentity<String>(
-        String.class);
+    ValueConverterIdentity<String> identityConverter = new ValueConverterIdentity<String>(String.class);
     fromSeparatedString(separatedString, separator, syntax, collection, identityConverter);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <E> void fromSeparatedString(CharSequence separatedString, String separator,
-      StringSyntax syntax, Collection<E> collection, ValueConverter<String, E> converter) {
+  public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
+      Collection<E> collection, ValueConverter<String, E> converter) {
 
-    fromSeparatedString(separatedString, separator, syntax, collection, converter,
-        converter.getTargetType());
+    fromSeparatedString(separatedString, separator, syntax, collection, converter, converter.getTargetType());
   }
 
   /**
    * {@inheritDoc}
    */
-  public <E> void fromSeparatedString(CharSequence separatedString, String separator,
-      StringSyntax syntax, Collection<E> collection,
-      ValueConverter<? super String, ? super E> converter, Class<E> type) {
+  public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
+      Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type) {
 
     NlsNullPointerException.checkNotNull("separator", separator);
     if (separator.length() == 0) {

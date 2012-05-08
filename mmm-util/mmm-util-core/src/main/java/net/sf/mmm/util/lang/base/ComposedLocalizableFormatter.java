@@ -9,12 +9,10 @@ import java.util.Locale;
 import net.sf.mmm.util.lang.api.LocalizableFormatter;
 
 /**
- * This is the implementation of a {@link LocalizableFormatter} that is composed
- * out of other {@link LocalizableFormatter}s. See {@link ComposedFormatter} for
- * further details.
+ * This is the implementation of a {@link LocalizableFormatter} that is composed out of other
+ * {@link LocalizableFormatter}s. See {@link ComposedFormatter} for further details.
  * 
- * @param <V> is the generic type of the actual value to {@link #format(Object)
- *        format}.
+ * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
@@ -26,8 +24,7 @@ public class ComposedLocalizableFormatter<V> extends AbstractLocalizableFormatte
   /**
    * The constructor.
    * 
-   * @param subFormatters are the {@link LocalizableFormatter}s to delegate to
-   *        in the given order.
+   * @param subFormatters are the {@link LocalizableFormatter}s to delegate to in the given order.
    */
   public ComposedLocalizableFormatter(LocalizableFormatter<V>... subFormatters) {
 

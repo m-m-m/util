@@ -11,8 +11,7 @@ import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.component.api.InitializationState;
 
 /**
- * This is a container for a {@link CliMode} together with additional associated
- * information.
+ * This is a container for a {@link CliMode} together with additional associated information.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

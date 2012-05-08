@@ -4,8 +4,7 @@
 package net.sf.mmm.util.scanner.base;
 
 /**
- * This class is a simple container for the special characters of a syntax to
- * scan.<br>
+ * This class is a simple container for the special characters of a syntax to scan.<br>
  * 
  * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean,
  *      net.sf.mmm.util.scanner.api.CharScannerSyntax)

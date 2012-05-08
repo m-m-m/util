@@ -6,10 +6,9 @@ package net.sf.mmm.util.lang.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * This enum represents a horizontal alignment (e.g. for
- * {@link net.sf.mmm.util.text.api.Justification}).<br>
- * The following table gives an example to illustrate the expected behavior of
- * according to an {@link HorizontalAlignment}.
+ * This enum represents a horizontal alignment (e.g. for {@link net.sf.mmm.util.text.api.Justification}).<br>
+ * The following table gives an example to illustrate the expected behavior of according to an
+ * {@link HorizontalAlignment}.
  * <table border="1">
  * <tr>
  * <th>Alignment</th>
@@ -41,8 +40,7 @@ public enum HorizontalAlignment implements Datatype<String> {
   RIGHT("+", NlsBundleUtilCore.INF_RIGHT),
 
   /**
-   * Align content centered to the middle (same space to the left and the
-   * right).
+   * Align content centered to the middle (same space to the left and the right).
    */
   CENTER("~", NlsBundleUtilCore.INF_CENTER);
 
@@ -90,11 +88,9 @@ public enum HorizontalAlignment implements Datatype<String> {
   }
 
   /**
-   * This method gets the {@link HorizontalAlignment} with the given
-   * <code>{@link #getValue() value}</code>.
+   * This method gets the {@link HorizontalAlignment} with the given <code>{@link #getValue() value}</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link HorizontalAlignment alignment}.
+   * @param value is the {@link #getValue() value} of the requested {@link HorizontalAlignment alignment}.
    * @return the requested {@link HorizontalAlignment alignment}.
    */
   public static HorizontalAlignment fromValue(String value) {

@@ -16,11 +16,9 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * This is an abstract base implementation of an unchecked exception with real
  * <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
- * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsRuntimeException}
- * instead of this class.<br>
+ * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsRuntimeException} instead of this class.<br>
  * <b>INFORMATION:</b><br>
- * Unchecked exceptions should be used for technical errors and should only
- * occur in unexpected situations.
+ * Unchecked exceptions should be used for technical errors and should only occur in unexpected situations.
  * 
  * @see NlsThrowable
  * 
@@ -44,8 +42,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * The constructor.
    * 
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public AbstractNlsRuntimeException(NlsMessage message) {
 
@@ -58,8 +55,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param message the {@link #getNlsMessage() message} describing the problem
-   *        briefly.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public AbstractNlsRuntimeException(Throwable nested, NlsMessage message) {
 

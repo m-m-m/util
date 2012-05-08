@@ -28,7 +28,6 @@ public interface AsyncTransferrer extends Future<Long> {
    * 
    * @return the number of bytes that have been transferred.
    */
-  Long get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException,
-      TimeoutException;
+  Long get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 
 }

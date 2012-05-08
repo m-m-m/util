@@ -6,8 +6,8 @@ package net.sf.mmm.util.version.impl;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for
- * the {@link VersionIdentifier#isSnapshot() snapshot} indicator.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the
+ * {@link VersionIdentifier#isSnapshot() snapshot} indicator.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -17,8 +17,7 @@ public class VersionIdentifierFormatterSnapshot extends AbstractVersionIdentifie
   /**
    * The constructor.
    * 
-   * @param snapshotIndicator is the static string to append if the
-   *        {@link VersionIdentifier} is a
+   * @param snapshotIndicator is the static string to append if the {@link VersionIdentifier} is a
    *        {@link VersionIdentifier#isSnapshot() snapshot} (e.g. "-SNAPSHOT").
    */
   public VersionIdentifierFormatterSnapshot(String snapshotIndicator) {

@@ -16,10 +16,9 @@ import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to a {@link Number}. It supports objects given as
- * {@link CharSequence} (e.g. {@link String}) or {@link Number}.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an {@link Object} to a {@link Number}. It supports objects given as {@link CharSequence} (e.g.
+ * {@link String}) or {@link Number}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -74,10 +73,8 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
   }
 
   /**
-   * This method determines if the conversion from one {@link Number
-   * number-type} to another should
-   * {@link net.sf.mmm.util.math.api.NumberConversionException fail} if it is
-   * unprecise.
+   * This method determines if the conversion from one {@link Number number-type} to another should
+   * {@link net.sf.mmm.util.math.api.NumberConversionException fail} if it is unprecise.
    * 
    * @see NumberType#valueOf(Number, boolean)
    * 

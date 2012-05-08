@@ -9,12 +9,11 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * A {@link FileAlreadyExistsException} is thrown if a file or directory already
- * exists but was NOT expected. This means the {@link File file} is in the way
- * in order to create a new one. The exception is both for the case, that the
- * {@link File file} should NOT be overwritten to prevent loss of data as well
- * as the {@link FileType type} differs (e.g. if there is already a directory
- * with the same name, a regular file can NOT be created).
+ * A {@link FileAlreadyExistsException} is thrown if a file or directory already exists but was NOT expected.
+ * This means the {@link File file} is in the way in order to create a new one. The exception is both for the
+ * case, that the {@link File file} should NOT be overwritten to prevent loss of data as well as the
+ * {@link FileType type} differs (e.g. if there is already a directory with the same name, a regular file can
+ * NOT be created).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -49,12 +48,11 @@ public class FileAlreadyExistsException extends RuntimeIoException {
    * The constructor.
    * 
    * @param file is the name of the file that already exists.
-   * @param directory - <code>true</code> if the exception is about a directory,
-   *        <code>false</code> if the exception is about a file.
+   * @param directory - <code>true</code> if the exception is about a directory, <code>false</code> if the
+   *        exception is about a file.
    */
   public FileAlreadyExistsException(String file, boolean directory) {
 
-    super(NlsBundleUtilCore.ERR_FILE_ALREADY_EXISTS, toMap(KEY_FILE, file, KEY_DIRECTORY,
-        Boolean.valueOf(directory)));
+    super(NlsBundleUtilCore.ERR_FILE_ALREADY_EXISTS, toMap(KEY_FILE, file, KEY_DIRECTORY, Boolean.valueOf(directory)));
   }
 }

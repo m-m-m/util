@@ -14,8 +14,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import org.slf4j.Logger;
 
 /**
- * This is the abstract base class for a {@link CliValueContainer} that holds a
- * {@link CliContainerStyle container-value}.
+ * This is the abstract base class for a {@link CliValueContainer} that holds a {@link CliContainerStyle
+ * container-value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -28,14 +28,13 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
   /**
    * The constructor.
    * 
-   * @param parameterContainer is the {@link #getParameterContainer()
-   *        parameter-container}.
+   * @param parameterContainer is the {@link #getParameterContainer() parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
    * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
    */
-  public AbstractCliValueContainerContainer(CliParameterContainer parameterContainer,
-      CliState cliState, CliParserDependencies dependencies, Logger logger) {
+  public AbstractCliValueContainerContainer(CliParameterContainer parameterContainer, CliState cliState,
+      CliParserDependencies dependencies, Logger logger) {
 
     super(parameterContainer, cliState, dependencies, logger);
     this.valueAlreadySet = false;
@@ -63,20 +62,17 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
   }
 
   /**
-   * This method parses container value as from a single argument and sets it as
-   * new object.
+   * This method parses container value as from a single argument and sets it as new object.
    * 
    * @param argument is the argument representing the container as string.
-   * @param separator is the character used as separator for the container
-   *        values.
+   * @param separator is the character used as separator for the container values.
    * @param propertyType is the {@link GenericType} of the property.
    * 
    */
   protected void setValueInternal(String argument, char separator, GenericType<?> propertyType) {
 
     if (this.valueAlreadySet) {
-      CliOptionDuplicateException exception = new CliOptionDuplicateException(
-          getParameterContainer().getName());
+      CliOptionDuplicateException exception = new CliOptionDuplicateException(getParameterContainer().getName());
       CliStyleHandling.EXCEPTION.handle(getLogger(), exception);
     }
     // TODO: separator currently ignored!

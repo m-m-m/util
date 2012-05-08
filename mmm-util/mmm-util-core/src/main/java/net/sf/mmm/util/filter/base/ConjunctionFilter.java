@@ -8,8 +8,8 @@ import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
- * This is an implementation of the {@link Filter} interface that combines a
- * given list of filters using a boolean {@link Conjunction}.
+ * This is an implementation of the {@link Filter} interface that combines a given list of filters using a
+ * boolean {@link Conjunction}.
  * 
  * @param <V> is the generic type of the value to check.
  * 
@@ -27,8 +27,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
   /**
    * The constructor.
    * 
-   * @param conjunction is the {@link Conjunction} used to combine the
-   *        <code>filters</code>.
+   * @param conjunction is the {@link Conjunction} used to combine the <code>filters</code>.
    * @param filters are the filters to combine.
    */
   public ConjunctionFilter(Conjunction conjunction, Filter<V>... filters) {

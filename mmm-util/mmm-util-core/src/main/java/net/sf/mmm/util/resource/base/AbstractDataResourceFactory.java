@@ -10,14 +10,12 @@ import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 
 /**
- * This is the abstract base implementation of the {@link DataResourceFactory}
- * interface.
+ * This is the abstract base implementation of the {@link DataResourceFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public abstract class AbstractDataResourceFactory extends AbstractLoggableComponent implements
-    DataResourceFactory {
+public abstract class AbstractDataResourceFactory extends AbstractLoggableComponent implements DataResourceFactory {
 
   /**
    * The constructor.
@@ -38,23 +36,19 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
   }
 
   /**
-   * This method {@link #createDataResource(String) creates} the actual raw
-   * {@link DataResource}.
+   * This method {@link #createDataResource(String) creates} the actual raw {@link DataResource}.
    * 
    * @param resourceUri is the parsed and qualified {@link ResourceUriImpl}.
    * @return the created {@link DataResource}.
-   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code>
-   *         is undefined, e.g. the {@link ResourceUriImpl#getSchemePrefix()
-   *         scheme-prefix} is NOT supported by this factory.
+   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code> is undefined, e.g. the
+   *         {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} is NOT supported by this factory.
    */
-  protected abstract DataResource createDataResource(ResourceUri resourceUri)
-      throws ResourceUriUndefinedException;
+  protected abstract DataResource createDataResource(ResourceUri resourceUri) throws ResourceUriUndefinedException;
 
   /**
-   * This is an implementation of the {@link DataResource} interface, that
-   * adapts {@link #getDelegate() another} {@link DataResource} and enhances the
-   * {@link #navigate(String)}-method to support switching schemes via the
-   * {@link DataResourceFactory} that created this {@link DataResource}.
+   * This is an implementation of the {@link DataResource} interface, that adapts {@link #getDelegate()
+   * another} {@link DataResource} and enhances the {@link #navigate(String)}-method to support switching
+   * schemes via the {@link DataResourceFactory} that created this {@link DataResource}.
    * 
    * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
    */

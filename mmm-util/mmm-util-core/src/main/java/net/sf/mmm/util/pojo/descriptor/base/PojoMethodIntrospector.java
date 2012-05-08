@@ -7,10 +7,9 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 
 /**
- * This is the interface used to find {@link Method methods} that can
- * (potentially) {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
- * access} a {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
- * property} of a given
+ * This is the interface used to find {@link Method methods} that can (potentially)
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor access} a
+ * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property} of a given
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -21,8 +20,7 @@ public interface PojoMethodIntrospector {
   /**
    * This method finds all {@link Method}s of the given <code>pojoType</code>.
    * 
-   * @param pojoType is the type reflecting the POJO for which the
-   *        {@link Method}s are requested.
+   * @param pojoType is the type reflecting the POJO for which the {@link Method}s are requested.
    * @return a read-only iterator of all the {@link Method}s.
    */
   Iterator<Method> findMethods(Class<?> pojoType);

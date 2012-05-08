@@ -6,10 +6,8 @@ package net.sf.mmm.util.filter.base;
 import net.sf.mmm.util.filter.api.CharFilter;
 
 /**
- * This is an implementation of the {@link CharFilter} interface that
- * {@link #accept(char) filters} characters according to a
- * {@link ListCharFilter#ListCharFilter(boolean, char...) given} blacklist or
- * whitelist.
+ * This is an implementation of the {@link CharFilter} interface that {@link #accept(char) filters} characters
+ * according to a {@link ListCharFilter#ListCharFilter(boolean, char...) given} blacklist or whitelist.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -25,9 +23,8 @@ public class ListCharFilter implements CharFilter {
   /**
    * The constructor.
    * 
-   * @param accept - if <code>true</code> exactly the chars given by
-   *        <code>charArray</code> are accepted (whitelist), if
-   *        <code>false</code> exactly these chars are NOT accepted (blacklist).
+   * @param accept - if <code>true</code> exactly the chars given by <code>charArray</code> are accepted
+   *        (whitelist), if <code>false</code> exactly these chars are NOT accepted (blacklist).
    * @param charArray are the chars to accept or to reject.
    */
   public ListCharFilter(boolean accept, char... charArray) {

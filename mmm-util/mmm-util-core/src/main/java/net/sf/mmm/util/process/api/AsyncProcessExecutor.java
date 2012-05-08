@@ -28,7 +28,6 @@ public interface AsyncProcessExecutor extends Future<Integer> {
    * 
    * @return the {@link Process#waitFor() exit-code} of the process.
    */
-  Integer get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException,
-      TimeoutException;
+  Integer get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 
 }

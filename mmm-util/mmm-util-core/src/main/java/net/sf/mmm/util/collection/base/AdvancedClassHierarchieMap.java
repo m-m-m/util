@@ -8,12 +8,10 @@ import java.util.Map;
 import net.sf.mmm.util.collection.api.MapFactory;
 
 /**
- * This class extends {@link AbstractClassHierarchieMap} with the ability to
- * replace elements (<code>&lt;E&gt;</code>) on recursive
- * {@link #put(Class, Object) puts} if the new element has a
+ * This class extends {@link AbstractClassHierarchieMap} with the ability to replace elements (
+ * <code>&lt;E&gt;</code>) on recursive {@link #put(Class, Object) puts} if the new element has a
  * {@link Class#isAssignableFrom(Class) more general} {@link Class type}.<br>
- * Therefore an according sub-class has to implement the abstract method
- * {@link #getClass(Object)}.
+ * Therefore an according sub-class has to implement the abstract method {@link #getClass(Object)}.
  * 
  * @param <E> is the generic type of the elements contained in this map.
  * 
@@ -42,22 +40,19 @@ public abstract class AdvancedClassHierarchieMap<E> extends AbstractClassHierarc
   }
 
   /**
-   * This method gets the associated {@link Class type} for the given
-   * <code>element</code>.
+   * This method gets the associated {@link Class type} for the given <code>element</code>.
    * 
-   * @param element is the element for which the {@link Class type} is
-   *        requested.
+   * @param element is the element for which the {@link Class type} is requested.
    * @return the {@link Class} of the given <code>element</code>.
    */
   protected abstract Class<?> getClass(E element);
 
   /**
-   * This method {@link #put(Class, Object) puts} the given <code>element</code>
-   * using its {@link #getClass(Object) associated class}.
+   * This method {@link #put(Class, Object) puts} the given <code>element</code> using its
+   * {@link #getClass(Object) associated class}.
    * 
    * @param element is the element to put.
-   * @return the element that has been replaced or <code>null</code> if none has
-   *         been replaced.
+   * @return the element that has been replaced or <code>null</code> if none has been replaced.
    */
   protected E put(E element) {
 

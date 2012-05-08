@@ -53,8 +53,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * This utility class contains methods that help to deal with the
- * {@link org.w3c.dom.Node DOM} API.
+ * This utility class contains methods that help to deal with the {@link org.w3c.dom.Node DOM} API.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -94,8 +93,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   }
 
   /**
-   * This method sets the {@link #getDocumentBuilderFactory()
-   * documentBuilderFactory}.
+   * This method sets the {@link #getDocumentBuilderFactory() documentBuilderFactory}.
    * 
    * @param documentBuilderFactory is the documentBuilderFactory to set.
    */
@@ -150,15 +148,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method gets the singleton instance of this {@link DomUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -223,9 +218,8 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * This method creates a new transformer.
    * 
-   * @param indent - <code>true</code> if the XML should be indented
-   *        (automatically add linebreaks before opening tags),
-   *        <code>false</code> otherwise.
+   * @param indent - <code>true</code> if the XML should be indented (automatically add linebreaks before
+   *        opening tags), <code>false</code> otherwise.
    * @return the new transformer.
    */
   private Transformer createTransformer(boolean indent) {
@@ -279,14 +273,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
-  public Element requireFirstChildElement(Element element, String tagName)
-      throws IllegalArgumentException {
+  public Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException {
 
     Element result = getFirstChildElement(element, tagName);
     if (result == null) {
       // TODO: NLS
-      throw new IllegalArgumentException("Missing element '" + tagName + "' in element '"
-          + element.getTagName() + "'!");
+      throw new IllegalArgumentException("Missing element '" + tagName + "' in element '" + element.getTagName() + "'!");
     }
     return result;
   }
@@ -338,8 +330,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
       NodeList nodeList = node.getChildNodes();
       for (int i = 0; i < nodeList.getLength(); i++) {
         Node childNode = nodeList.item(i);
-        if ((childNode.getNodeType() == Node.TEXT_NODE)
-            || (childNode.getNodeType() == Node.CDATA_SECTION_NODE)) {
+        if ((childNode.getNodeType() == Node.TEXT_NODE) || (childNode.getNodeType() == Node.CDATA_SECTION_NODE)) {
 
           buffer.append(childNode.getNodeValue());
         } else if ((depth > 0) && (childNode.getNodeType() == Node.ELEMENT_NODE)) {
@@ -352,8 +343,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   }
 
   /**
-   * This method removes all {@link Node#getChildNodes() child nodes} of the
-   * given node.
+   * This method removes all {@link Node#getChildNodes() child nodes} of the given node.
    * 
    * @param node is the node to clean of children.
    */
@@ -450,15 +440,13 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   }
 
   /**
-   * This method determines if the given nodes have the same
-   * {@link #getLocalName(Node) name} and {@link Node#getNamespaceURI()
-   * namespace}.
+   * This method determines if the given nodes have the same {@link #getLocalName(Node) name} and
+   * {@link Node#getNamespaceURI() namespace}.
    * 
    * @param node1 is the first node.
    * @param node2 is the second node.
-   * @return <code>true</code> if both nodes have equal
-   *         {@link #getLocalName(Node) name} and {@link Node#getNamespaceURI()
-   *         namespace}.
+   * @return <code>true</code> if both nodes have equal {@link #getLocalName(Node) name} and
+   *         {@link Node#getNamespaceURI() namespace}.
    */
   private boolean isEqualName(Node node1, Node node2) {
 
@@ -510,8 +498,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
       return true;
     } else if ((type1 == Node.COMMENT_NODE) && !mode.isCheckComments()) {
       return true;
-    } else if ((type1 == Node.TEXT_NODE) || (type1 == Node.CDATA_SECTION_NODE)
-        || (type1 == Node.COMMENT_NODE)) {
+    } else if ((type1 == Node.TEXT_NODE) || (type1 == Node.CDATA_SECTION_NODE) || (type1 == Node.COMMENT_NODE)) {
       CharIterator charIterator1 = new NodeValueCharIterator(node1);
       CharIterator charIterator2 = new NodeValueCharIterator(node2);
       return isEqual(charIterator1, charIterator2, mode);
@@ -553,8 +540,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * @param mode is the mode of comparison.
    * @return <code>true</code> if equal, <code>false</code> otherwise.
    */
-  protected boolean isEqual(CharIterator charIterator1, CharIterator charIterator2,
-      XmlCompareMode mode) {
+  protected boolean isEqual(CharIterator charIterator1, CharIterator charIterator2, XmlCompareMode mode) {
 
     CharIterator c1, c2;
     if (mode.isNormalizeSpaces()) {

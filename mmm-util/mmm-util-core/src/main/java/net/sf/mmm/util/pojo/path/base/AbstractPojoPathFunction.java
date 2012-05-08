@@ -10,8 +10,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationExcepti
 import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
 
 /**
- * This is the abstract base implementation of the {@link PojoPathFunction}
- * interface.
+ * This is the abstract base implementation of the {@link PojoPathFunction} interface.
  * 
  * @param <IN> is the generic {@link #getInputClass() input-type}.
  * @param <VALUE> is the generic {@link #getValueClass() value-type}
@@ -19,8 +18,8 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggableComponent
-    implements PojoPathFunction<IN, VALUE> {
+public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggableComponent implements
+    PojoPathFunction<IN, VALUE> {
 
   /**
    * The constructor.
@@ -33,8 +32,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
   /**
    * {@inheritDoc}
    * 
-   * This implementation always returns <code>true</code>. Override for
-   * indeterministic implementations.
+   * This implementation always returns <code>true</code>. Override for indeterministic implementations.
    */
   public boolean isDeterministic() {
 
@@ -64,8 +62,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
    */
   public VALUE create(IN actual, String functionName, PojoPathContext context) {
 
-    throw new PojoPathFunctionUnsupportedOperationException("create",
-        getFunctionDescription(functionName));
+    throw new PojoPathFunctionUnsupportedOperationException("create", getFunctionDescription(functionName));
   }
 
   /**
@@ -74,8 +71,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
   public VALUE get(IN actual, String functionName, PojoPathContext context) {
 
     // actually get should always be supported!
-    throw new PojoPathFunctionUnsupportedOperationException("get",
-        getFunctionDescription(functionName));
+    throw new PojoPathFunctionUnsupportedOperationException("get", getFunctionDescription(functionName));
   }
 
   /**
@@ -83,8 +79,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
    */
   public VALUE set(IN actual, String functionName, VALUE value, PojoPathContext context) {
 
-    throw new PojoPathFunctionUnsupportedOperationException("set",
-        getFunctionDescription(functionName));
+    throw new PojoPathFunctionUnsupportedOperationException("set", getFunctionDescription(functionName));
   }
 
   /**

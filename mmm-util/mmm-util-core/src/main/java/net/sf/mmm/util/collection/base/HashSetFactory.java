@@ -9,8 +9,7 @@ import java.util.Set;
 import net.sf.mmm.util.collection.api.SetFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.SetFactory} interface that creates
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.SetFactory} interface that creates
  * instances of {@link HashSet}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

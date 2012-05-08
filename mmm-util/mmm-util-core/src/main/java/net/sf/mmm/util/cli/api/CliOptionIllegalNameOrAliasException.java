@@ -6,11 +6,9 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionIllegalNameOrAliasException} is thrown if the
- * {@link CliOption#name() name} or {@link CliOption#aliases() alias} of a
- * {@link CliOption} is illegal.<br>
- * Proper values should follow GNU conventions (e.g. "-h" for short option and
- * "--help" for long option).
+ * A {@link CliOptionIllegalNameOrAliasException} is thrown if the {@link CliOption#name() name} or
+ * {@link CliOption#aliases() alias} of a {@link CliOption} is illegal.<br>
+ * Proper values should follow GNU conventions (e.g. "-h" for short option and "--help" for long option).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -23,14 +21,12 @@ public class CliOptionIllegalNameOrAliasException extends CliException {
   /**
    * The constructor.
    * 
-   * @param nameOrAlias is the illegal {@link CliOption#name() name} or
-   *        {@link CliOption#aliases() alias}.
+   * @param nameOrAlias is the illegal {@link CliOption#name() name} or {@link CliOption#aliases() alias}.
    * @param option is the according {@link CliOption}.
    */
   public CliOptionIllegalNameOrAliasException(String nameOrAlias, CliOption option) {
 
-    super(NlsBundleUtilCore.ERR_CLI_OPTION_NAME_ILLEGAL, toMap(KEY_NAME, nameOrAlias, KEY_OPTION,
-        option));
+    super(NlsBundleUtilCore.ERR_CLI_OPTION_NAME_ILLEGAL, toMap(KEY_NAME, nameOrAlias, KEY_OPTION, option));
   }
 
 }

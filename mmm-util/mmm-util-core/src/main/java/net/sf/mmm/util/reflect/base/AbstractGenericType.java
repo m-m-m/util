@@ -15,8 +15,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the implementation of the {@link GenericType} interface.
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper
- *        bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -32,8 +31,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method creates the {@link GenericType} that encapsulates the given
-   * <code>type</code>.
+   * This method creates the {@link GenericType} that encapsulates the given <code>type</code>.
    * 
    * @see net.sf.mmm.util.reflect.api.ReflectionUtil#createGenericType(Type)
    * 
@@ -43,9 +41,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   protected abstract GenericType<?> create(Type type);
 
   /**
-   * This method gets the defining type. This will typically be the
-   * {@link Class} where the {@link #getType() type} of this {@link GenericType}
-   * was retrieved from as parameter, return-type or field-type.
+   * This method gets the defining type. This will typically be the {@link Class} where the {@link #getType()
+   * type} of this {@link GenericType} was retrieved from as parameter, return-type or field-type.
    * 
    * @return the defining type or <code>null</code> if NOT available.
    */
@@ -163,24 +160,18 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from
-   * <code>descendant</code> up to <code>ancestor</code> and collects the
-   * generic {@link Class#getGenericSuperclass() super-classes} or
-   * {@link Class#getGenericInterfaces() super-interfaces} of
-   * <code>ancestor</code> on that hierarchy-path.<br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface()
-   * interface}, the hierarchy may NOT be unique. In such case it will be
-   * unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
+   * and collects the generic {@link Class#getGenericSuperclass() super-classes} or
+   * {@link Class#getGenericInterfaces() super-interfaces} of <code>ancestor</code> on that hierarchy-path.<br>
+   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
+   * NOT be unique. In such case it will be unspecified which of the possible paths is used.
    * 
-   * @param ancestor is the super-class or super-interface of
-   *        <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of
-   *        <code>ancestor</code>.
-   * @return the {@link List} of the generic super-{@link Type}s from
-   *         <code>descendant</code> up to <code>ancestor</code>, where the
-   *         first element represents the super-{@link Type} of
-   *         <code>descendant</code> and the last element represents the generic
-   *         declaration of <code>ancestor</code> itself.
+   * @param ancestor is the super-class or super-interface of <code>descendant</code>.
+   * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
+   * @return the {@link List} of the generic super-{@link Type}s from <code>descendant</code> up to
+   *         <code>ancestor</code>, where the first element represents the super-{@link Type} of
+   *         <code>descendant</code> and the last element represents the generic declaration of
+   *         <code>ancestor</code> itself.
    */
   protected List<Type> getGenericDeclarations(Class<?> ancestor, Class<?> descendant) {
 
@@ -222,8 +213,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method gets the declaration-index of the given
-   * <code>typeVariable</code>.
+   * This method gets the declaration-index of the given <code>typeVariable</code>.
    * 
    * @param typeVariable is the {@link TypeVariable}.
    * @return the index of the given <code>typeVariable</code> in its
@@ -242,25 +232,23 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method resolves the given <code>typeVariable</code> in the context of
-   * the given <code>declaringType</code>.
+   * This method resolves the given <code>typeVariable</code> in the context of the given
+   * <code>declaringType</code>.
    * 
    * @param typeVariable is the {@link TypeVariable} to resolve.
-   * @param declaringType is the {@link GenericType} where the given
-   *        <code>typeVariable</code> occurs or is replaced.
-   * @return the resolved {@link Type} or <code>null</code> if the given
-   *         <code>typeVariable</code> could NOT be resolved (e.g. it was
-   *         {@link TypeVariable#getGenericDeclaration() declared} in a
-   *         {@link Class} that is NOT {@link Class#isAssignableFrom(Class)
-   *         assignable from} the given <code>declaringType</code>) .
+   * @param declaringType is the {@link GenericType} where the given <code>typeVariable</code> occurs or is
+   *        replaced.
+   * @return the resolved {@link Type} or <code>null</code> if the given <code>typeVariable</code> could NOT
+   *         be resolved (e.g. it was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class}
+   *         that is NOT {@link Class#isAssignableFrom(Class) assignable from} the given
+   *         <code>declaringType</code>) .
    */
   protected Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType) {
 
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
     if (genericDeclaration instanceof Class<?>) {
       Class<?> declaringClass = (Class<?>) genericDeclaration;
-      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType
-          .getRetrievalClass());
+      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getRetrievalClass());
       if (hierarchy != null) {
         TypeVariable<?> currentVariable = typeVariable;
         for (int i = hierarchy.size() - 1; i >= -1; i--) {

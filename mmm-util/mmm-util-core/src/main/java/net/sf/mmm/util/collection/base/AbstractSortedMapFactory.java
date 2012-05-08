@@ -8,8 +8,7 @@ import java.util.SortedMap;
 import net.sf.mmm.util.collection.api.SortedMapFactory;
 
 /**
- * This is the abstract base implementation of the {@link SortedMapFactory}
- * interface.
+ * This is the abstract base implementation of the {@link SortedMapFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

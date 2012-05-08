@@ -18,8 +18,8 @@ import net.sf.mmm.util.resource.impl.spi.FileResourceProvider;
 import net.sf.mmm.util.resource.impl.spi.UrlResourceProvider;
 
 /**
- * This is the default implementation of the
- * {@link net.sf.mmm.util.resource.api.BrowsableResourceFactory} interface.
+ * This is the default implementation of the {@link net.sf.mmm.util.resource.api.BrowsableResourceFactory}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -72,8 +72,8 @@ public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFacto
   }
 
   /**
-   * This method sets the {@link List} of {@link DataResourceProvider providers}
-   * to {@link #registerProvider(DataResourceProvider) register}.
+   * This method sets the {@link List} of {@link DataResourceProvider providers} to
+   * {@link #registerProvider(DataResourceProvider) register}.
    * 
    * @param providers is the list of providers.
    */

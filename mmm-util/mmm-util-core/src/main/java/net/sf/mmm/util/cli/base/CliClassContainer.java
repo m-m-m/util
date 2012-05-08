@@ -26,8 +26,8 @@ import net.sf.mmm.util.value.api.ValueException;
 import org.slf4j.Logger;
 
 /**
- * A {@link CliClassContainer} determines and holds the class-specific
- * CLI-informations of a {@link #getStateClass() state-class}.
+ * A {@link CliClassContainer} determines and holds the class-specific CLI-informations of a
+ * {@link #getStateClass() state-class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -56,8 +56,7 @@ public class CliClassContainer {
    * The constructor.
    * 
    * @param stateClass is the {@link #getStateClass() state-class}.
-   * @param logger is the {@link Logger} to use (e.g. for
-   *        {@link CliStyleHandling}).
+   * @param logger is the {@link Logger} to use (e.g. for {@link CliStyleHandling}).
    */
   public CliClassContainer(Class<?> stateClass, Logger logger) {
 
@@ -82,8 +81,8 @@ public class CliClassContainer {
       cliStyleAnnotation = CliDefaultAnnotations.CLI_STYLE;
     }
     if (cliStyleAnnotation.containerStyle() == CliContainerStyle.DEFAULT) {
-      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT, "@"
-          + CliStyle.class.getSimpleName() + ".containerStyle()");
+      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT, "@" + CliStyle.class.getSimpleName()
+          + ".containerStyle()");
     }
     this.cliStyle = cliStyleAnnotation;
     if (cliClassAnnotation == null) {
@@ -133,14 +132,11 @@ public class CliClassContainer {
    * This method initializes the given {@link CliModeContainer}.
    * 
    * @param mode is the {@link CliModeContainer} to initialize.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is
-   *         NOT yet complete or <code>null</code> if the initialization was
-   *         successful.
-   * @throws NodeCycleException if a cyclic dependency was detected and
-   *         completed.
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or
+   *         <code>null</code> if the initialization was successful.
+   * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
-  protected NodeCycle<CliModeContainer> initializeModeRecursive(CliModeContainer mode)
-      throws NodeCycleException {
+  protected NodeCycle<CliModeContainer> initializeModeRecursive(CliModeContainer mode) throws NodeCycleException {
 
     InitializationState initState = mode.getState();
     if (initState != InitializationState.INITIALIZED) {
@@ -200,8 +196,7 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link Class} reflecting the
-   * {@link AbstractCliParser#getState() state-object}.
+   * This method gets the {@link Class} reflecting the {@link AbstractCliParser#getState() state-object}.
    * 
    * @return the state-class.
    */
@@ -211,9 +206,8 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliStyle style} configured for the
-   * {@link #getStateClass() state-class}. If no such annotation is present, a
-   * default instance is returned.
+   * This method gets the {@link CliStyle style} configured for the {@link #getStateClass() state-class}. If
+   * no such annotation is present, a default instance is returned.
    * 
    * @return the {@link CliStyle}.
    */
@@ -223,9 +217,8 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliClass} configured for the
-   * {@link #getStateClass() state-class}. If no such annotation is present, a
-   * default instance is returned.
+   * This method gets the {@link CliClass} configured for the {@link #getStateClass() state-class}. If no such
+   * annotation is present, a default instance is returned.
    * 
    * @return the {@link CliClass}.
    */
@@ -235,12 +228,10 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliModeContainer mode} associated with the
-   * given {@link CliMode#id() ID}.
+   * This method gets the {@link CliModeContainer mode} associated with the given {@link CliMode#id() ID}.
    * 
    * @param id the {@link CliMode#id() ID} of the requested {@link CliMode}.
-   * @return the requested {@link CliMode} or <code>null</code> if no such
-   *         {@link CliMode} exists.
+   * @return the requested {@link CliMode} or <code>null</code> if no such {@link CliMode} exists.
    */
   public CliModeObject getMode(String id) {
 
@@ -248,8 +239,8 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link Collection} with the {@link CliMode#id() IDs}
-   * of all {@link #getMode(String) registered} {@link CliMode}s.
+   * This method gets the {@link Collection} with the {@link CliMode#id() IDs} of all {@link #getMode(String)
+   * registered} {@link CliMode}s.
    * 
    * @return the mode-IDs.
    */
@@ -259,12 +250,11 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliClass#name() name} configured for the
-   * {@link #getStateClass() state-class}.
+   * This method gets the {@link CliClass#name() name} configured for the {@link #getStateClass() state-class}
+   * .
    * 
-   * @return the annotated {@link CliClass#name() name} or the
-   *         {@link Class#getName() class-name} of the {@link #getStateClass()
-   *         state-class} if NOT configured.
+   * @return the annotated {@link CliClass#name() name} or the {@link Class#getName() class-name} of the
+   *         {@link #getStateClass() state-class} if NOT configured.
    */
   public String getName() {
 
@@ -272,20 +262,17 @@ public class CliClassContainer {
   }
 
   /**
-   * This inner class is a dummy for getting default instances of CLI
-   * annotations.
+   * This inner class is a dummy for getting default instances of CLI annotations.
    */
   @CliClass
   @CliStyle
   private static final class CliDefaultAnnotations {
 
     /** The default instance of {@link CliClass}. */
-    private static final CliClass CLI_CLASS = CliDefaultAnnotations.class
-        .getAnnotation(CliClass.class);
+    private static final CliClass CLI_CLASS = CliDefaultAnnotations.class.getAnnotation(CliClass.class);
 
     /** The default instance of {@link CliStyle}. */
-    private static final CliStyle CLI_STYLE = CliDefaultAnnotations.class
-        .getAnnotation(CliStyle.class);
+    private static final CliStyle CLI_STYLE = CliDefaultAnnotations.class.getAnnotation(CliStyle.class);
 
     /**
      * The forbidden constructor.
@@ -299,8 +286,7 @@ public class CliClassContainer {
   /**
    * This inner class converts a {@link CliModeContainer} to a {@link String}.
    */
-  protected static final class CliModeFormatter implements
-      SimpleValueConverter<CliModeContainer, String> {
+  protected static final class CliModeFormatter implements SimpleValueConverter<CliModeContainer, String> {
 
     /** The singleton instance. */
     protected static final CliModeFormatter INSTANCE = new CliModeFormatter();
@@ -309,8 +295,8 @@ public class CliClassContainer {
      * {@inheritDoc}
      */
     @SuppressWarnings("all")
-    public <T extends String> T convert(CliModeContainer value, Object valueSource,
-        Class<T> targetClass) throws ValueException {
+    public <T extends String> T convert(CliModeContainer value, Object valueSource, Class<T> targetClass)
+        throws ValueException {
 
       return (T) value.getId();
     }

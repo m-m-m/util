@@ -12,9 +12,8 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
- * {@link net.sf.mmm.util.pojo.api.Pojo}. A
- * {@link net.sf.mmm.util.pojo.api.Pojo} in this manner is more or less any java
- * object.<br>
+ * {@link net.sf.mmm.util.pojo.api.Pojo}. A {@link net.sf.mmm.util.pojo.api.Pojo} in this manner is more or
+ * less any java object.<br>
  * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
  * Look at the following example:
  * 
@@ -35,18 +34,16 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * }
  * </pre>
  * 
- * This interface does NOT completely follow the JAVA-Beans specification. The
- * properties "fooBar" and "someFlag" do NOT have the same type for reading and
- * writing. Therefore the {@link java.beans.Introspector} for java-beans or <a
- * href="http://commons.apache.org/beanutils">commons-beanutils</a> can NOT be
- * used to read and write these properties. Using this utility the properties
- * can be accessed as described in the following table:<br>
+ * This interface does NOT completely follow the JAVA-Beans specification. The properties "fooBar" and
+ * "someFlag" do NOT have the same type for reading and writing. Therefore the {@link java.beans.Introspector}
+ * for java-beans or <a href="http://commons.apache.org/beanutils">commons-beanutils</a> can NOT be used to
+ * read and write these properties. Using this utility the properties can be accessed as described in the
+ * following table:<br>
  * <br>
  * <table border="1">
  * <tr>
  * <th>
- * {@link net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName#getName()
- * Name}</th>
+ * {@link net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName#getName() Name}</th>
  * <th>{@link PojoPropertyAccessorMode Mode}</th>
  * <th>{@link PojoAttributeType#getPojoClass() Property-Type}</th>
  * <th>{@link PojoPropertyAccessor#getAccessibleObject() Method}</th>
@@ -131,13 +128,11 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * </table>
  * <br>
  * <b>ATTENTION:</b><br>
- * When using this interface without generic parameterization you can NOT
- * properly call the
- * {@link #getAccessor(String, PojoPropertyAccessorMode, boolean) getAccessor}
- * methods. If the type of your {@link net.sf.mmm.util.pojo.api.Pojo} is unknown
- * at compile-time, you need to parameterize with the unbound wildcard as
- * <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not call
- * the <code>get</code> or <code>set</code> methods.
+ * When using this interface without generic parameterization you can NOT properly call the
+ * {@link #getAccessor(String, PojoPropertyAccessorMode, boolean) getAccessor} methods. If the type of your
+ * {@link net.sf.mmm.util.pojo.api.Pojo} is unknown at compile-time, you need to parameterize with the unbound
+ * wildcard as <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not call the
+ * <code>get</code> or <code>set</code> methods.
  * 
  * @param <POJO> is the templated type of the {@link #getPojoClass() pojo}.
  * 
@@ -149,87 +144,70 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
 
   /**
-   * This method gets the {@link PojoPropertyDescriptor descriptor} for the
-   * property identified by the given <code>propertyName</code>.
+   * This method gets the {@link PojoPropertyDescriptor descriptor} for the property identified by the given
+   * <code>propertyName</code>.
    * 
    * @param propertyName is the name of the requested property.
-   * @return the descriptor for the property identified by the given
-   *         <code>propertyName</code> or <code>null</code> if no such property
-   *         exists for the according {@link #getPojoClass() pojo}.
+   * @return the descriptor for the property identified by the given <code>propertyName</code> or
+   *         <code>null</code> if no such property exists for the according {@link #getPojoClass() pojo}.
    */
   PojoPropertyDescriptor getPropertyDescriptor(String propertyName);
 
   /**
-   * This method gets the {@link PojoPropertyDescriptor descriptor}s of all
-   * properties of the according {@link #getPojoClass() pojo}.
+   * This method gets the {@link PojoPropertyDescriptor descriptor}s of all properties of the according
+   * {@link #getPojoClass() pojo}.
    * 
-   * @return a collection with all {@link PojoPropertyDescriptor property
-   *         descriptor}s
+   * @return a collection with all {@link PojoPropertyDescriptor property descriptor}s
    */
   Collection<? extends PojoPropertyDescriptor> getPropertyDescriptors();
 
   /**
-   * This method gets the {@link PojoPropertyAccessor accessor} for the property
-   * with the given <code>propertyName</code> and for the given access
-   * <code>mode</code>.
+   * This method gets the {@link PojoPropertyAccessor accessor} for the property with the given
+   * <code>propertyName</code> and for the given access <code>mode</code>.
    * 
    * @param <ACCESSOR> is the type of the requested accessor.
-   * @param property is the {@link PojoPropertyDescriptor#getName() name} of the
-   *        property. If the given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
-   *        GET} it is treated as for {@link #getProperty(Object, String)}. If
-   *        the given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET
-   *        SET} it is treated as for
-   *        {@link #setProperty(Object, String, Object)}.
-   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
-   *        requested accessor.
-   * @return the requested accessor or <code>null</code> if NOT found (there is
-   *         no property named <code>propertyName</code>, the property has no
-   *         accessor for the given <code>mode</code>, etc.).
+   * @param property is the {@link PojoPropertyDescriptor#getName() name} of the property. If the given
+   *        <code>mode</code> is
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET GET} it is
+   *        treated as for {@link #getProperty(Object, String)}. If the given <code>mode</code> is
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET SET} it is
+   *        treated as for {@link #setProperty(Object, String, Object)}.
+   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the requested accessor.
+   * @return the requested accessor or <code>null</code> if NOT found (there is no property named
+   *         <code>propertyName</code>, the property has no accessor for the given <code>mode</code>, etc.).
    */
-  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
-      PojoPropertyAccessorMode<ACCESSOR> mode);
+  <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property, PojoPropertyAccessorMode<ACCESSOR> mode);
 
   /**
-   * This method gets the accessor for the given
-   * <code>{@link PojoPropertyAccessor#getMode() mode}</code> from the
-   * {@link #getPropertyDescriptor(String) descriptor} with the given
-   * <code>{@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() propertyName}</code>
-   * .
+   * This method gets the accessor for the given <code>{@link PojoPropertyAccessor#getMode() mode}</code> from
+   * the {@link #getPropertyDescriptor(String) descriptor} with the given
+   * <code>{@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() propertyName}</code> .
    * 
    * @see #getPropertyDescriptor(String)
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
    * 
    * @param <ACCESSOR> is the type of the requested accessor.
-   * @param property is the {@link PojoPropertyDescriptor#getName() name} of the
-   *        property. If the given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
-   *        GET} it is treated as for {@link #getProperty(Object, String)}. If
-   *        the given <code>mode</code> is
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET
-   *        SET} it is treated as for
-   *        {@link #setProperty(Object, String, Object)}.
-   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the
-   *        requested accessor.
-   * @param required - if <code>true</code> the accessor is required and an
-   *        exception is thrown if NOT found.
-   * @return the requested accessor or <code>null</code> if NOT found and
-   *         <code>required</code> is <code>false</code>.
-   * @throws PojoPropertyNotFoundException if <code>required</code> is
-   *         <code>true</code> and no property named <code>propertyName</code>
-   *         was found or no accessor exists for that property with the given
+   * @param property is the {@link PojoPropertyDescriptor#getName() name} of the property. If the given
+   *        <code>mode</code> is
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET GET} it is
+   *        treated as for {@link #getProperty(Object, String)}. If the given <code>mode</code> is
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET SET} it is
+   *        treated as for {@link #setProperty(Object, String, Object)}.
+   * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the requested accessor.
+   * @param required - if <code>true</code> the accessor is required and an exception is thrown if NOT found.
+   * @return the requested accessor or <code>null</code> if NOT found and <code>required</code> is
+   *         <code>false</code>.
+   * @throws PojoPropertyNotFoundException if <code>required</code> is <code>true</code> and no property named
+   *         <code>propertyName</code> was found or no accessor exists for that property with the given
    *         <code>mode</code>.
    */
   <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
-      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required)
-      throws PojoPropertyNotFoundException;
+      PojoPropertyAccessorMode<ACCESSOR> mode, boolean required) throws PojoPropertyNotFoundException;
 
   /**
-   * This method gets the {@link #getPropertyDescriptor(String) property}
-   * identified by the given <code>property</code> from the given
-   * <code>pojoInstance</code>. The result depends on the form of the given
-   * <code>property</code> as shown by the following table:<br>
+   * This method gets the {@link #getPropertyDescriptor(String) property} identified by the given
+   * <code>property</code> from the given <code>pojoInstance</code>. The result depends on the form of the
+   * given <code>property</code> as shown by the following table:<br>
    * <table border="1">
    * <tr>
    * <th><code>property</code></th>
@@ -239,8 +217,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]*</code></td>
-   * <td><small>
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET}
+   * <td><small> {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET}
    * </small></td>
    * <td>fooBar</td>
    * <td>
@@ -266,8 +243,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]* "['" [a-zA-Z0-9]+ "']"</code></td>
    * <td><small>
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED}
-   * </small></td>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#GET_MAPPED} </small></td>
    * <td>fooBar['key']</td>
    * <td>
    * <ul>
@@ -278,31 +254,24 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * </table>
    * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        access the property.
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to access the property.
    * @param property identifies the property to get as described above.
    * @return the value of the requested property. It will be an instance of the
-   *         {@link PojoPropertyAccessor#getPropertyClass() type} of the
-   *         according
-   *         {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
-   *         getter}. Depending on the POJO, the value may be <code>null</code>.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
+   *         {@link PojoPropertyAccessor#getPropertyClass() type} of the according
+   *         {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}.
+   *         Depending on the POJO, the value may be <code>null</code>.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
    */
-  Object getProperty(POJO pojoInstance, String property) throws PojoPropertyNotFoundException,
-      ReflectionException;
+  Object getProperty(POJO pojoInstance, String property) throws PojoPropertyNotFoundException, ReflectionException;
 
   /**
-   * This method sets the given <code>value</code> for the
-   * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>property</code> of the given <code>pojoInstance</code>. The effect
-   * depends on the form of the given <code>property</code> as shown by the
-   * following table:<br>
+   * This method sets the given <code>value</code> for the {@link #getPropertyDescriptor(String) property}
+   * with the given <code>property</code> of the given <code>pojoInstance</code>. The effect depends on the
+   * form of the given <code>property</code> as shown by the following table:<br>
    * <table border="1">
    * <tr>
    * <th><code>property</code></th>
@@ -312,8 +281,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]*</code></td>
-   * <td><small>
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET}
+   * <td><small> {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET}
    * </small></td>
    * <td>fooBar</td>
    * <td>
@@ -339,8 +307,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * <tr>
    * <td><code>[a-zA-Z][a-zA-Z0-9]* "['" [a-zA-Z0-9]+ "']"</code></td>
    * <td><small>
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED}
-   * </small></td>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode#SET_MAPPED} </small></td>
    * <td>fooBar['key']</td>
    * <td>
    * <ul>
@@ -351,158 +318,119 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * </tr>
    * </table>
    * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        access the property.
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to access the property.
    * @param property identifies the property to set as explained above.
-   * @param value is the property value to set. Depending on the POJO the value
-   *        may be <code>null</code>.
-   * @return the result of the setter method. Will be <code>null</code> if the
-   *         return type is <code>void</code> what should be the regular case.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
+   * @param value is the property value to set. Depending on the POJO the value may be <code>null</code>.
+   * @return the result of the setter method. Will be <code>null</code> if the return type is
+   *         <code>void</code> what should be the regular case.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
    */
-  Object setProperty(POJO pojoInstance, String property, Object value)
-      throws PojoPropertyNotFoundException, ReflectionException;
-
-  /**
-   * This method gets the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE
-   * size} of the {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> from the given <code>pojoInstance</code>.
-   * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        access the property.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
-   * @return the size of the requested property.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
-   */
-  int getPropertySize(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException,
+  Object setProperty(POJO pojoInstance, String property, Object value) throws PojoPropertyNotFoundException,
       ReflectionException;
 
   /**
-   * This method adds the given <code>item</code> to the list-like
-   * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> from the given <code>pojoInstance</code> using
-   * the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#ADD
-   * add} {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
-   * accessor}.
+   * This method gets the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE size} of the
+   * {@link #getPropertyDescriptor(String) property} with the given <code>propertyName</code> from the given
+   * <code>pojoInstance</code>.
    * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        access the property.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to access the property.
+   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of the property.
+   * @return the size of the requested property.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
+   */
+  int getPropertySize(POJO pojoInstance, String propertyName) throws PojoPropertyNotFoundException, ReflectionException;
+
+  /**
+   * This method adds the given <code>item</code> to the list-like {@link #getPropertyDescriptor(String)
+   * property} with the given <code>propertyName</code> from the given <code>pojoInstance</code> using the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#ADD add}
+   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
+   * 
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to access the property.
+   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of the property.
    * @param item is the item to add to the property.
-   * @return the result of the add-method. Will be <code>null</code> if the
-   *         return type is <code>void</code> what should be the regular case.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
+   * @return the result of the add-method. Will be <code>null</code> if the return type is <code>void</code>
+   *         what should be the regular case.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
    */
-  Object addPropertyItem(POJO pojoInstance, String propertyName, Object item)
-      throws PojoPropertyNotFoundException, ReflectionException;
+  Object addPropertyItem(POJO pojoInstance, String propertyName, Object item) throws PojoPropertyNotFoundException,
+      ReflectionException;
 
   /**
-   * This method removes the given <code>item</code> from an array or
-   * {@link Collection} using the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#REMOVE
-   * remove}
+   * This method removes the given <code>item</code> from an array or {@link Collection} using the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#REMOVE remove}
    * 
-   * {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> from the given <code>pojoInstance</code>
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
-   * accessor}.
+   * {@link #getPropertyDescriptor(String) property} with the given <code>propertyName</code> from the given
+   * <code>pojoInstance</code> {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
    * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        access the property.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to access the property.
+   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of the property.
    * @param item is the item to remove from the property.
-   * @return {@link Boolean#TRUE} if the item has been removed successfully and
-   *         {@link Boolean#FALSE} if the item was NOT present in the array or
-   *         {@link Collection}, or <code>null</code> if the accessor is
+   * @return {@link Boolean#TRUE} if the item has been removed successfully and {@link Boolean#FALSE} if the
+   *         item was NOT present in the array or {@link Collection}, or <code>null</code> if the accessor is
    *         pointing to a remove method that returns no boolean.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
    */
-  Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item)
-      throws PojoPropertyNotFoundException, ReflectionException;
+  Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item) throws PojoPropertyNotFoundException,
+      ReflectionException;
 
   /**
-   * This method gets the item with the given <code>index</code> from the
-   * list-like {@link #getPropertyDescriptor(String) property} with the given
-   * <code>propertyName</code> of the given <code>pojoInstance</code> using the
+   * This method gets the item with the given <code>index</code> from the list-like
+   * {@link #getPropertyDescriptor(String) property} with the given <code>propertyName</code> of the given
+   * <code>pojoInstance</code> using the
    * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED
-   * indexed getter}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
-   * accessor}.
+   * indexed getter} {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
    * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        add the given property <code>item</code>.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
-   * @param index is the position of the requested item (see
-   *        {@link java.util.List#get(int)}).
-   * @return the result of the add-method. Will be <code>null</code> if the
-   *         return type is <code>void</code> what should be the regular case.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to add the given property
+   *        <code>item</code>.
+   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of the property.
+   * @param index is the position of the requested item (see {@link java.util.List#get(int)}).
+   * @return the result of the add-method. Will be <code>null</code> if the return type is <code>void</code>
+   *         what should be the regular case.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
    */
-  Object getPropertyItem(POJO pojoInstance, String propertyName, int index)
-      throws PojoPropertyNotFoundException, ReflectionException;
+  Object getPropertyItem(POJO pojoInstance, String propertyName, int index) throws PojoPropertyNotFoundException,
+      ReflectionException;
 
   /**
-   * This method sets the given <code>item</code> at the given
-   * <code>index</code> in the list-like {@link #getPropertyDescriptor(String)
-   * property} with the given <code>propertyName</code> of the given
+   * This method sets the given <code>item</code> at the given <code>index</code> in the list-like
+   * {@link #getPropertyDescriptor(String) property} with the given <code>propertyName</code> of the given
    * <code>pojoInstance</code> using the
    * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED
-   * indexed setter}
-   * {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode)
-   * accessor}.
+   * indexed setter} {@link PojoPropertyDescriptor#getAccessor(PojoPropertyAccessorMode) accessor}.
    * 
-   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to
-   *        access the property.
-   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of
-   *        the property.
-   * @param index is the position of the item to set (see
-   *        {@link java.util.List#set(int, Object)}).
+   * @param pojoInstance is the {@link #getPojoClass() POJO} instance where to access the property.
+   * @param propertyName is the {@link PojoPropertyDescriptor#getName() name} of the property.
+   * @param index is the position of the item to set (see {@link java.util.List#set(int, Object)}).
    * @param item is the item to set at the given <code>index</code>.
-   * @return the result of the add-method. Will be <code>null</code> if the
-   *         return type is <code>void</code> what should be the regular case.
-   * @throws PojoPropertyNotFoundException if the property with the given
-   *         <code>propertyName</code> was NOT
-   *         {@link #getPropertyDescriptor(String) found} or has no such
-   *         {@link PojoPropertyAccessor accessor}.
-   * @throws ReflectionException if the underlying
-   *         {@link PojoPropertyAccessor#getAccessibleObject() accessor} caused
-   *         an error during reflection.
+   * @return the result of the add-method. Will be <code>null</code> if the return type is <code>void</code>
+   *         what should be the regular case.
+   * @throws PojoPropertyNotFoundException if the property with the given <code>propertyName</code> was NOT
+   *         {@link #getPropertyDescriptor(String) found} or has no such {@link PojoPropertyAccessor accessor}
+   *         .
+   * @throws ReflectionException if the underlying {@link PojoPropertyAccessor#getAccessibleObject() accessor}
+   *         caused an error during reflection.
    */
   Object setPropertyItem(POJO pojoInstance, String propertyName, int index, Object item)
       throws PojoPropertyNotFoundException, ReflectionException;

@@ -11,10 +11,9 @@ import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 
 /**
- * This is an implementation of the {@link ClassResolver} interface that uses an
- * internal {@link Map} to define specific mappings. If no mapping is found for
- * the {@link #resolveClass(String) requested} type the default strategy
- * {@link Class#forName(String)} is used.
+ * This is an implementation of the {@link ClassResolver} interface that uses an internal {@link Map} to
+ * define specific mappings. If no mapping is found for the {@link #resolveClass(String) requested} type the
+ * default strategy {@link Class#forName(String)} is used.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -45,8 +44,8 @@ public class MappedClassResolver implements ClassResolver {
   }
 
   /**
-   * This method adds a mapping for the given <code>type</code> using the
-   * {@link Class#getSimpleName() simple-name}.
+   * This method adds a mapping for the given <code>type</code> using the {@link Class#getSimpleName()
+   * simple-name}.
    * 
    * @param type is the type to add.
    */
@@ -56,11 +55,9 @@ public class MappedClassResolver implements ClassResolver {
   }
 
   /**
-   * This method adds a mapping for the given <code>type</code> using the given
-   * <code>name</code>.
+   * This method adds a mapping for the given <code>type</code> using the given <code>name</code>.
    * 
-   * @param name is the name under which the class is
-   *        {@link #resolveClass(String) mapped}.
+   * @param name is the name under which the class is {@link #resolveClass(String) mapped}.
    * @param type is the mapped class.
    */
   public void addClassMapping(String name, Class<?> type) {

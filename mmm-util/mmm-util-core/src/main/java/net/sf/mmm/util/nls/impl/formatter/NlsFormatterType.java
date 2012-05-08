@@ -20,8 +20,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
- * that formats {@link Type}s.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} that formats {@link Type}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -97,8 +96,8 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     if (object == null) {
       buffer.append("null");

@@ -45,8 +45,7 @@ public abstract class AbstractPojoIntrospector {
   }
 
   /**
-   * The constructor. Configures and {@link #initialize() initializes} the
-   * component.
+   * The constructor. Configures and {@link #initialize() initializes} the component.
    * 
    * @param visibility is the {@link #getVisibility() visibility}.
    * @param acceptStatic is the {@link #isAcceptStatic() accept-static} flag.
@@ -60,9 +59,8 @@ public abstract class AbstractPojoIntrospector {
   }
 
   /**
-   * This method gets the {@link VisibilityModifier#getOrder() lowest}
-   * {@link VisibilityModifier visibility} to be considered when searching for
-   * methods or fields.
+   * This method gets the {@link VisibilityModifier#getOrder() lowest} {@link VisibilityModifier visibility}
+   * to be considered when searching for methods or fields.
    * 
    * @return the visibility
    */
@@ -74,9 +72,8 @@ public abstract class AbstractPojoIntrospector {
   /**
    * This method sets the {@link #getVisibility() visibility}.
    * 
-   * @param visibility is the {@link VisibilityModifier#getOrder() lowest}
-   *        {@link VisibilityModifier visibility} to be considered when
-   *        searching for accessors-fields.
+   * @param visibility is the {@link VisibilityModifier#getOrder() lowest} {@link VisibilityModifier
+   *        visibility} to be considered when searching for accessors-fields.
    */
   public void setVisibility(VisibilityModifier visibility) {
 
@@ -102,8 +99,7 @@ public abstract class AbstractPojoIntrospector {
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
+   * This method initializes this class. It has to be called after construction and injection is completed.
    */
   @PostConstruct
   public void initialize() {

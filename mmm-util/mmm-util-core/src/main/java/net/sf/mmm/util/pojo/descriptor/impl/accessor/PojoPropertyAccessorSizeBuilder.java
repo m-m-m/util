@@ -20,17 +20,16 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgBuilder;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder}
- * interface for {@link PojoPropertyAccessorNonArgMode#GET getter-access}.
+ * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder} interface for
+ * {@link PojoPropertyAccessorNonArgMode#GET getter-access}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
 @Named
-public class PojoPropertyAccessorSizeBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorNonArg> implements
-    PojoPropertyAccessorNonArgBuilder {
+public class PojoPropertyAccessorSizeBuilder extends AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorNonArg>
+    implements PojoPropertyAccessorNonArgBuilder {
 
   /** the method name prefixes for getter. */
   private static final String[] METHOD_PREFIXES = new String[] { "get" };
@@ -54,17 +53,15 @@ public class PojoPropertyAccessorSizeBuilder extends
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
-      NumberType<? extends Number> numberType = MathUtilImpl.getInstance().getNumberType(
-          propertyClass);
+      NumberType<? extends Number> numberType = MathUtilImpl.getInstance().getNumberType(propertyClass);
       if ((numberType != null) && (!numberType.isDecimal())) {
         if (NumberTypeImpl.INTEGER.getExactnessDifference(numberType) >= 0) {
           String methodName = method.getName();
           // is property read method (getter)?
           String propertyName = getPropertyName(methodName, METHOD_PREFIXES, METHOD_SUFFIXES);
           if (propertyName != null) {
-            return new PojoPropertyAccessorNonArgMethod(propertyName,
-                method.getGenericReturnType(), PojoPropertyAccessorNonArgMode.GET_SIZE, descriptor,
-                dependencies, method);
+            return new PojoPropertyAccessorNonArgMethod(propertyName, method.getGenericReturnType(),
+                PojoPropertyAccessorNonArgMode.GET_SIZE, descriptor, dependencies, method);
           }
         }
       }

@@ -8,8 +8,8 @@ import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
 
 /**
- * This interface bundles the dependencies for the native language support
- * (NLS). It contains the required components.
+ * This interface bundles the dependencies for the native language support (NLS). It contains the required
+ * components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

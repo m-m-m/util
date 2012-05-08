@@ -13,8 +13,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
- * This is a container for a {@link CliOption} together with additional
- * associated information.
+ * This is a container for a {@link CliOption} together with additional associated information.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -33,8 +32,8 @@ public class CliOptionContainer extends CliParameterContainer {
    * @param validator is the {@link #getValidator() validator}.
    */
   @SuppressWarnings("rawtypes")
-  public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter, ValueValidator validator) {
+  public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter,
+      ValueValidator validator) {
 
     super(setter, getter, validator);
     this.option = option;
@@ -69,9 +68,8 @@ public class CliOptionContainer extends CliParameterContainer {
   }
 
   /**
-   * This method determines if the {@link #getOption() option} is a trigger.
-   * Trigger means that the type of the {@link #getSetter() setter} is a
-   * primitive boolean and the option is never followed by a value on the
+   * This method determines if the {@link #getOption() option} is a trigger. Trigger means that the type of
+   * the {@link #getSetter() setter} is a primitive boolean and the option is never followed by a value on the
    * commandline.
    * 
    * @return <code>true</code> if trigger, <code>false</code> otherwise.

@@ -8,9 +8,8 @@ import java.util.Set;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is an implementation of the {@link ResourceVisitor} interface that
- * collects the names of all resources {@link Filter#accept(Object) accepted} by
- * a given filter in a {@link Set}.
+ * This is an implementation of the {@link ResourceVisitor} interface that collects the names of all resources
+ * {@link Filter#accept(Object) accepted} by a given filter in a {@link Set}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -26,10 +25,8 @@ public class ResourceNameCollector implements ResourceVisitor {
   /**
    * The constructor.
    * 
-   * @param resourceSet is the {@link Set} where collected resource-names will
-   *        be added.
-   * @param filter is used to {@link Filter#accept(Object) filter} resources by
-   *        name.
+   * @param resourceSet is the {@link Set} where collected resource-names will be added.
+   * @param filter is used to {@link Filter#accept(Object) filter} resources by name.
    */
   public ResourceNameCollector(Set<String> resourceSet, Filter<String> filter) {
 

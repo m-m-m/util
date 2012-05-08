@@ -17,8 +17,7 @@ public class PojoPathNavigatorSpringTest extends PojoPathNavigatorTest {
 
   protected PojoPathNavigator createNavigator() {
 
-    PojoPathNavigator navigator = SpringContainerPool.getInstance().getComponent(
-        PojoPathNavigator.class);
+    PojoPathNavigator navigator = SpringContainerPool.getInstance().getComponent(PojoPathNavigator.class);
     return navigator;
   }
 

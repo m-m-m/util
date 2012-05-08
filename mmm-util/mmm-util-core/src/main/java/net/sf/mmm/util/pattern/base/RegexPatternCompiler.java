@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 
 /**
- * This is the canonical implementation of the {@link PatternCompiler}
- * interface. It simply delegates to {@link Pattern#compile(String, int)}.
+ * This is the canonical implementation of the {@link PatternCompiler} interface. It simply delegates to
+ * {@link Pattern#compile(String, int)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

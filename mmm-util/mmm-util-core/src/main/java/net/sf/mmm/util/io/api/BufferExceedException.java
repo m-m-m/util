@@ -7,8 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link BufferExceedException} is thrown if a buffer (typically array of
- * bytes or chars) is exceeded (e.g. offset or length are out of range).
+ * A {@link BufferExceedException} is thrown if a buffer (typically array of bytes or chars) is exceeded (e.g.
+ * offset or length are out of range).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -26,8 +26,8 @@ public class BufferExceedException extends NlsRuntimeException {
    */
   public BufferExceedException(int length, int capacity) {
 
-    super(NlsBundleUtilCore.ERR_BUFFER_LENGTH_EXCEED, toMap(KEY_VALUE, Integer.valueOf(length),
-        KEY_CAPACITY, Integer.valueOf(capacity)));
+    super(NlsBundleUtilCore.ERR_BUFFER_LENGTH_EXCEED, toMap(KEY_VALUE, Integer.valueOf(length), KEY_CAPACITY,
+        Integer.valueOf(capacity)));
   }
 
 }

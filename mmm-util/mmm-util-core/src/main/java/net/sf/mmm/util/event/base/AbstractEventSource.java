@@ -13,13 +13,11 @@ import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.util.event.api.EventListener} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.util.event.api.EventListener} interface.
  * 
  * @param <E> is the templated type of the events to send.
- * @param <L> is the templated type of the listeners that can be
- *        {@link #addListener(EventListener) registered} here and that will
- *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event)
+ * @param <L> is the templated type of the listeners that can be {@link #addListener(EventListener)
+ *        registered} here and that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event)
  *        receive} the sent events.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -42,8 +40,8 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   /**
    * The constructor.
    * 
-   * @param collectionFactory is the collection factory used to create the
-   *        internal {@link Collection} for the listeners.
+   * @param collectionFactory is the collection factory used to create the internal {@link Collection} for the
+   *        listeners.
    */
   @SuppressWarnings("rawtypes")
   protected AbstractEventSource(CollectionFactory<? extends Collection> collectionFactory) {
@@ -69,8 +67,8 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method sends the given <code>event</code> to all
-   * {@link #addListener(EventListener) registered} listeners.
+   * This method sends the given <code>event</code> to all {@link #addListener(EventListener) registered}
+   * listeners.
    * 
    * @param event the event to set.
    */
@@ -86,8 +84,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method sends the given <code>event</code> to the given
-   * <code>listener</code>.
+   * This method sends the given <code>event</code> to the given <code>listener</code>.
    * 
    * @param event the event to set.
    * @param listener the listener that should receive the <code>event</code>.
@@ -98,21 +95,17 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method is called if a listener throws something while handling an
-   * event.<br>
-   * The default implementation is log the error. Override this method to change
-   * the behaviour (e.g. ignore the problem, remove the "evil" listener, throw
-   * the error anyways).
+   * This method is called if a listener throws something while handling an event.<br>
+   * The default implementation is log the error. Override this method to change the behaviour (e.g. ignore
+   * the problem, remove the "evil" listener, throw the error anyways).
    * 
    * @param listener is the listener that caused the error.
    * @param event is the event that could not be handled.
-   * @param error is the throwable caused by the <code>listener</code> while
-   *        handling the <code>event</code>.
+   * @param error is the throwable caused by the <code>listener</code> while handling the <code>event</code>.
    */
   protected void handleListenerError(L listener, E event, Throwable error) {
 
-    getLogger().debug("The listener (" + listener + ") failed to handle event (" + event + "):",
-        error);
+    getLogger().debug("The listener (" + listener + ") failed to handle event (" + event + "):", error);
   }
 
 }

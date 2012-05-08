@@ -30,9 +30,8 @@ public class VersionUtilTest {
   }
 
   /**
-   * This method {@link VersionUtil#createVersionIdentifier(String)
-   * parses} a {@link VersionIdentifier} given by <code>versionString</code>. It
-   * also does some sanity checks.
+   * This method {@link VersionUtil#createVersionIdentifier(String) parses} a {@link VersionIdentifier} given
+   * by <code>versionString</code>. It also does some sanity checks.
    * 
    * @param versionString is the {@link String} to parse.
    * @return the parsed {@link VersionIdentifier}.
@@ -45,8 +44,7 @@ public class VersionUtilTest {
   }
 
   /**
-   * This method tests the
-   * {@link VersionUtil#createVersionIdentifier(String) parsing} of
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
    * {@link VersionIdentifier}s from {@link String}s.
    * 
    * @throws Exception if something goes wrong.
@@ -168,8 +166,7 @@ public class VersionUtilTest {
   }
 
   /**
-   * This method tests the
-   * {@link VersionUtil#createVersionIdentifier(String) parsing} of
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
    * {@link VersionIdentifier}s from {@link String}s.
    */
   @Test

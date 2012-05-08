@@ -7,9 +7,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to an array.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an {@link Object} to an array.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

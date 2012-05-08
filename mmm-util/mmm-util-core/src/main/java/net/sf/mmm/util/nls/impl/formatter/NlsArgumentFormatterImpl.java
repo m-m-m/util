@@ -19,9 +19,8 @@ import net.sf.mmm.util.nls.base.NlsArgumentFormatter;
 import net.sf.mmm.util.text.api.Justification;
 
 /**
- * The {@link NlsFormatter} for an actual {@link NlsArgument}. It performs the
- * higher-level formatting with {@link NlsArgument#getJustification()
- * justification} delegating the lower-level formatting to the
+ * The {@link NlsFormatter} for an actual {@link NlsArgument}. It performs the higher-level formatting with
+ * {@link NlsArgument#getJustification() justification} delegating the lower-level formatting to the
  * {@link NlsArgument#getFormatter() according sub-formatter} (typically a
  * {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin}).
  * 
@@ -30,8 +29,7 @@ import net.sf.mmm.util.text.api.Justification;
  */
 @Singleton
 @Named
-public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> implements
-    NlsArgumentFormatter {
+public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> implements NlsArgumentFormatter {
 
   /**
    * The constructor.
@@ -44,8 +42,8 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
   /**
    * {@inheritDoc}
    */
-  public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     Object value = null;
     if (arguments != null) {

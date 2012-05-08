@@ -77,15 +77,12 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method gets the singleton instance of this {@link StreamUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -104,8 +101,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This method gets the {@link Executor} used to run asynchronous tasks. It
-   * may use a thread-pool.
+   * This method gets the {@link Executor} used to run asynchronous tasks. It may use a thread-pool.
    * 
    * @return the executor.
    */
@@ -128,9 +124,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method gets the byte-array {@link Pool} used to transfer streams.<br>
-   * The implementation should create byte-arrays with a suitable length (at
-   * least 512, suggested is 4096). Override this method to use a real pool
-   * implementation.
+   * The implementation should create byte-arrays with a suitable length (at least 512, suggested is 4096).
+   * Override this method to use a real pool implementation.
    * 
    * @return the {@link Pool} instance.
    */
@@ -152,9 +147,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This method gets the char-array {@link Pool} used to transfer
-   * {@link Reader}s and {@link Writer}s. The implementation should create
-   * char-arrays with a suitable length (at least 512, suggested is 2048).<br>
+   * This method gets the char-array {@link Pool} used to transfer {@link Reader}s and {@link Writer}s. The
+   * implementation should create char-arrays with a suitable length (at least 512, suggested is 2048).<br>
    * Override this method to use a real pool implementation.
    * 
    * @return the {@link Pool} instance.
@@ -207,8 +201,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public long transfer(Reader reader, Writer writer, boolean keepWriterOpen)
-      throws RuntimeIoException {
+  public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws RuntimeIoException {
 
     ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, null);
     long bytes = transferrer.transfer();
@@ -263,8 +256,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen,
-      long size) throws RuntimeIoException {
+  public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen, long size)
+      throws RuntimeIoException {
 
     ReadableByteChannel inChannel = Channels.newChannel(inStream);
     FileChannel outChannel = outStream.getChannel();
@@ -311,8 +304,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws RuntimeIoException {
 
-    StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen,
-        null);
+    StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen, null);
     long bytes = transferrer.transfer();
     return bytes;
   }
@@ -320,8 +312,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream,
-      boolean keepOutStreamOpen) {
+  public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen) {
 
     return transferAsync(inStream, outStream, keepOutStreamOpen, null);
   }
@@ -329,11 +320,10 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream,
-      boolean keepOutStreamOpen, TransferCallback callback) {
+  public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen,
+      TransferCallback callback) {
 
-    StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen,
-        callback);
+    StreamTransferrer transferrer = new StreamTransferrer(inStream, outStream, keepOutStreamOpen, callback);
     AsyncTransferrerImpl task = new AsyncTransferrerImpl(transferrer);
     this.executor.execute(task);
     return task;
@@ -350,8 +340,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
-  public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen,
-      TransferCallback callback) {
+  public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen, TransferCallback callback) {
 
     ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, callback);
     AsyncTransferrerImpl task = new AsyncTransferrerImpl(transferrer);
@@ -503,8 +492,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is the default implementation of the {@link AsyncTransferrer}
-   * interface.
+   * This is the default implementation of the {@link AsyncTransferrer} interface.
    */
   protected static class AsyncTransferrerImpl extends FutureTask<Long> implements AsyncTransferrer {
 
@@ -535,8 +523,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is the abstract base class for the {@link Callable} that transfers
-   * data of streams or readers/writers.
+   * This is the abstract base class for the {@link Callable} that transfers data of streams or
+   * readers/writers.
    */
   protected abstract static class AbstractAsyncTransferrer implements Callable<Long>, Stoppable {
 
@@ -567,9 +555,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /**
      * This method determines if the transfer has been completed successfully.
      * 
-     * @return <code>true</code> if successfully completed, <code>false</code>
-     *         if still running, {@link #isStopped() stopped} or an exception
-     *         occurred.
+     * @return <code>true</code> if successfully completed, <code>false</code> if still running,
+     *         {@link #isStopped() stopped} or an exception occurred.
      */
     public final boolean isCompleted() {
 
@@ -587,11 +574,10 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is an abstract implementation of the {@link AsyncTransferrer}
-   * interface, that implements {@link Runnable} defining the main flow.
+   * This is an abstract implementation of the {@link AsyncTransferrer} interface, that implements
+   * {@link Runnable} defining the main flow.
    * 
-   * @param <BUFFER> is the generic type of the buffers provided by
-   *        {@link BaseTransferrer#getPool()}.
+   * @param <BUFFER> is the generic type of the buffers provided by {@link BaseTransferrer#getPool()}.
    */
   protected abstract class BaseTransferrer<BUFFER> extends AbstractAsyncTransferrer {
 
@@ -599,8 +585,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     private final TransferCallback callback;
 
     /**
-     * <code>true</code> if {@link #getDestination() destination} should be
-     * closed.
+     * <code>true</code> if {@link #getDestination() destination} should be closed.
      */
     private final boolean keepDestinationOpen;
 
@@ -608,9 +593,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
      * The constructor.
      * 
      * @param callback is the callback or <code>null</code>.
-     * @param keepDestinationOpen <code>true</code> if the
-     *        {@link #getDestination() destination} should be closed,
-     *        <code>false</code> otherwise.
+     * @param keepDestinationOpen <code>true</code> if the {@link #getDestination() destination} should be
+     *        closed, <code>false</code> otherwise.
      */
     public BaseTransferrer(TransferCallback callback, boolean keepDestinationOpen) {
 
@@ -735,8 +719,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This inner class is used to transfer an {@link InputStream} to an
-   * {@link OutputStream}.
+   * This inner class is used to transfer an {@link InputStream} to an {@link OutputStream}.
    */
   protected class StreamTransferrer extends BaseTransferrer<byte[]> {
 
@@ -753,12 +736,11 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
      * 
      * @param source is {@link InputStream} to read from.
      * @param destination the {@link OutputStream} to write to.
-     * @param keepDestinationOpen <code>true</code> if the
-     *        <code>destination</code> should be closed.
+     * @param keepDestinationOpen <code>true</code> if the <code>destination</code> should be closed.
      * @param callback is the callback or <code>null</code>.
      */
-    public StreamTransferrer(InputStream source, OutputStream destination,
-        boolean keepDestinationOpen, TransferCallback callback) {
+    public StreamTransferrer(InputStream source, OutputStream destination, boolean keepDestinationOpen,
+        TransferCallback callback) {
 
       super(callback, keepDestinationOpen);
       this.source = source;
@@ -830,12 +812,10 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
      * 
      * @param source is {@link Reader} to read from.
      * @param destination the {@link Writer} to write to.
-     * @param keepDestinationOpen <code>true</code> if the
-     *        <code>destination</code> should be closed.
+     * @param keepDestinationOpen <code>true</code> if the <code>destination</code> should be closed.
      * @param callback is the callback or <code>null</code>.
      */
-    public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen,
-        TransferCallback callback) {
+    public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen, TransferCallback callback) {
 
       super(callback, keepDestinationOpen);
       this.source = source;

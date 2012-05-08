@@ -17,8 +17,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
  * @since 1.1.0
  */
 @SuppressWarnings("rawtypes")
-public class DefaultPojoPathFunctionManager extends AbstractComponent implements
-    PojoPathFunctionManager {
+public class DefaultPojoPathFunctionManager extends AbstractComponent implements PojoPathFunctionManager {
 
   /** @see #getFunction(String) */
   private final Map<String, PojoPathFunction> functionMap;
@@ -34,8 +33,7 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
   /**
    * The constructor.
    * 
-   * @param functionMap is the underlying {@link Map} with the
-   *        {@link #getFunction(String) functions}.
+   * @param functionMap is the underlying {@link Map} with the {@link #getFunction(String) functions}.
    */
   public DefaultPojoPathFunctionManager(Map<String, PojoPathFunction> functionMap) {
 
@@ -52,16 +50,15 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
   }
 
   /**
-   * This method registers the given <code>function</code> for the given
-   * <code>functionName</code> so it is available via
-   * {@link #getFunction(String)}.
+   * This method registers the given <code>function</code> for the given <code>functionName</code> so it is
+   * available via {@link #getFunction(String)}.
    * 
    * @see #getFunction(String)
    * 
    * @param function is the {@link PojoPathFunction} to register.
    * @param functionName is the {@link #getFunction(String) associated name}.
-   * @return the {@link PojoPathFunction} that was registered before for the
-   *         given <code>functionName</code> and has now been replaced.
+   * @return the {@link PojoPathFunction} that was registered before for the given <code>functionName</code>
+   *         and has now been replaced.
    */
   public PojoPathFunction registerFunction(PojoPathFunction function, String functionName) {
 

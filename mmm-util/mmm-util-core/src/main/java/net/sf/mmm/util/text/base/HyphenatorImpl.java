@@ -16,8 +16,8 @@ import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.text.api.Hyphenator}
- * interface. It uses a list of rules to determine hyphenation-points.
+ * This is the implementation of the {@link net.sf.mmm.util.text.api.Hyphenator} interface. It uses a list of
+ * rules to determine hyphenation-points.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -44,16 +44,13 @@ public class HyphenatorImpl extends AbstractHyphenator {
    * 
    * @param locale is the {@link #getLocale() locale}.
    * @param hyphen is the {@link #getHyphen() hyphen-character}.
-   * @param patternList is the {@link List} of {@link HyphenationPattern
-   *        patterns}.
-   * @param exceptionList is the list of pre-hyphenated exceptions (e.g.
-   *        "as-so-ciate").
-   * @param hasher is the {@link StringHasher hash-algorithm}. It should be
-   *        fast.
+   * @param patternList is the {@link List} of {@link HyphenationPattern patterns}.
+   * @param exceptionList is the list of pre-hyphenated exceptions (e.g. "as-so-ciate").
+   * @param hasher is the {@link StringHasher hash-algorithm}. It should be fast.
    * @param stringUtil is the {@link StringUtil} to use.
    */
-  public HyphenatorImpl(Locale locale, char hyphen, List<String> patternList,
-      List<String> exceptionList, StringHasher hasher, StringUtil stringUtil) {
+  public HyphenatorImpl(Locale locale, char hyphen, List<String> patternList, List<String> exceptionList,
+      StringHasher hasher, StringUtil stringUtil) {
 
     super(locale, hyphen);
     this.hasher = hasher;
@@ -79,9 +76,8 @@ public class HyphenatorImpl extends AbstractHyphenator {
   }
 
   /**
-   * This method sorts the given {@link HyphenationPattern patterns} according
-   * to the {@link String#length() length} of their
-   * {@link HyphenationPattern#getWordPart() word-part}.
+   * This method sorts the given {@link HyphenationPattern patterns} according to the {@link String#length()
+   * length} of their {@link HyphenationPattern#getWordPart() word-part}.
    * 
    * @param patternArray are the unsorted {@link HyphenationPattern patterns}.
    * @return the sorted {@link HyphenationPattern patterns}.
@@ -124,10 +120,9 @@ public class HyphenatorImpl extends AbstractHyphenator {
     if (exception != null) {
       hyphenation = new HyphenationImpl(word, getHyphen(), exception.getHyphenationPoints());
     } else {
-      String newWord = HyphenationPattern.TERMINATOR + normalizedWord
-          + HyphenationPattern.TERMINATOR;
-      HyphenationState state = new HyphenationState(word, newWord, getHyphen(),
-          this.maxPatternLength, 0, this.hasher, this.stringUtil);
+      String newWord = HyphenationPattern.TERMINATOR + normalizedWord + HyphenationPattern.TERMINATOR;
+      HyphenationState state = new HyphenationState(word, newWord, getHyphen(), this.maxPatternLength, 0, this.hasher,
+          this.stringUtil);
       for (HyphenationPattern pattern : this.patterns) {
         state.apply(pattern);
       }

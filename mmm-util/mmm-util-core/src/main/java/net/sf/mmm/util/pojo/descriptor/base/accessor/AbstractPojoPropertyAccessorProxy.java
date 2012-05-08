@@ -10,8 +10,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract implementation of the {@link PojoPropertyAccessor}
- * interface that delegates to another {@link PojoPropertyAccessor accessor}.
+ * This is the abstract implementation of the {@link PojoPropertyAccessor} interface that delegates to another
+ * {@link PojoPropertyAccessor accessor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -27,8 +27,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   }
 
   /**
-   * This method gets the {@link PojoPropertyAccessor accessor} this proxy
-   * delegates to.
+   * This method gets the {@link PojoPropertyAccessor accessor} this proxy delegates to.
    * 
    * @return the delegate.
    */

@@ -36,8 +36,8 @@ public class PojoFactoryTest {
   public void testCollections() {
 
     PojoFactory factory = getPojoFactory();
-    Class<? extends Collection>[] collectionTypes = new Class[] { Set.class, List.class,
-        Queue.class, Collection.class, SortedSet.class };
+    Class<? extends Collection>[] collectionTypes = new Class[] { Set.class, List.class, Queue.class, Collection.class,
+        SortedSet.class };
     for (Class<? extends Collection> type : collectionTypes) {
       Collection instance = factory.newInstance(type);
       assertNotNull(instance);

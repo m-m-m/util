@@ -6,9 +6,8 @@ package net.sf.mmm.util.value.base;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.value.api.ValueValidator}
- * that {@link #validate(Number, Object) validates} if a {@link Number} is in a
- * specific range.
+ * This is an implementation of {@link net.sf.mmm.util.value.api.ValueValidator} that
+ * {@link #validate(Number, Object) validates} if a {@link Number} is in a specific range.
  * 
  * @see ValueOutOfRangeException#checkRange(Number, Number, Number, Object)
  * 
@@ -26,10 +25,10 @@ public class ValueValidatorNumberRange extends AbstractValueValidator<Number> {
   /**
    * The constructor.
    * 
-   * @param minimum is the minimum value that is {@link #validate(Number) valid}
-   *        or <code>null</code> for no minimum.
-   * @param maximum is the maximum value that is {@link #validate(Number) valid}
-   *        or <code>null</code> for no maximum.
+   * @param minimum is the minimum value that is {@link #validate(Number) valid} or <code>null</code> for no
+   *        minimum.
+   * @param maximum is the maximum value that is {@link #validate(Number) valid} or <code>null</code> for no
+   *        maximum.
    */
   public ValueValidatorNumberRange(Double minimum, Double maximum) {
 

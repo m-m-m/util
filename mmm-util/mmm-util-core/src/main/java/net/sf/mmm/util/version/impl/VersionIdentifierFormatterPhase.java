@@ -7,8 +7,8 @@ import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for
- * the {@link VersionIdentifier#getPhase() phase}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the
+ * {@link VersionIdentifier#getPhase() phase}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -18,12 +18,10 @@ public class VersionIdentifierFormatterPhase extends AbstractVersionIdentifierFo
   /**
    * The constructor.
    * 
-   * @param prefix is the static prefix to append before the
-   *        {@link VersionIdentifier#getPhase() phase}. Will be omitted if
-   *        {@link VersionIdentifier#getPhase() phase} is <code>null</code>.
-   * @param maximumLength is the maximum number of letters for the
-   *        {@link VersionIdentifier#getPhase() phase}. The default is
-   *        {@link Integer#MAX_VALUE}.
+   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhase() phase}. Will
+   *        be omitted if {@link VersionIdentifier#getPhase() phase} is <code>null</code>.
+   * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getPhase() phase}.
+   *        The default is {@link Integer#MAX_VALUE}.
    */
   public VersionIdentifierFormatterPhase(String prefix, int maximumLength) {
 

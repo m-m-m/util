@@ -8,8 +8,7 @@ import java.util.List;
 import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
- * This is the abstract base implementation of a {@link Transformer} for
- * strings.
+ * This is the abstract base implementation of a {@link Transformer} for strings.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -25,10 +24,9 @@ public abstract class AbstractTextTransformer implements Transformer<String> {
   }
 
   /**
-   * This method gets the list of rules. These rules are processed in the order
-   * of occurrence. If a rule matches (does NOT
-   * {@link TransformerRule#transform(String, String) return} <code>null</code>
-   * ), that result is taken as singular form and no further rule is invoked.
+   * This method gets the list of rules. These rules are processed in the order of occurrence. If a rule
+   * matches (does NOT {@link TransformerRule#transform(String, String) return} <code>null</code> ), that
+   * result is taken as singular form and no further rule is invoked.
    * 
    * @return the rules.
    */
@@ -37,10 +35,9 @@ public abstract class AbstractTextTransformer implements Transformer<String> {
   /**
    * {@inheritDoc}
    * 
-   * This implementation processes the {@link #getRules() rules} in the order of
-   * occurrence. If a rule matches (does NOT
-   * {@link TransformerRule#transform(String, String) return} <code>null</code>
-   * ), that result is taken as result and no further rule is invoked.
+   * This implementation processes the {@link #getRules() rules} in the order of occurrence. If a rule matches
+   * (does NOT {@link TransformerRule#transform(String, String) return} <code>null</code> ), that result is
+   * taken as result and no further rule is invoked.
    */
   public String transform(String string) {
 

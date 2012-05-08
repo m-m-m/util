@@ -7,39 +7,33 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * A {@link HyphenationPattern} is a pattern that acts as rule for a hyphenation
- * algorithm.<br>
- * The concept is based on the thesis <em>Word Hy-phen-a-tion by Com-put-er</em>
- * by <em>Franklin Mark Liang</em>. Out of an entire dictionary of hyphenated
- * words for a specific language, a set of {@link HyphenationPattern patterns}
- * is extracted. To allow correct results with a reasonable small set of
- * patterns, these patterns form a chain of positive rules and exceptions.
- * Therefore a pattern can {@link HyphenationPatternPosition#ranking rank} a
- * potential hyphenation-position with a number from <code>1</code> to
- * <code>9</code>. If two patterns apply for a hyphenation-position the higher
- * number wins. Odd numbers indicate a hyphenation while even values indicate an
- * exception that should NOT be hyphenated. The character '.' is used at the
- * beginning and/or end of a pattern to indicate that it should only match at
+ * A {@link HyphenationPattern} is a pattern that acts as rule for a hyphenation algorithm.<br>
+ * The concept is based on the thesis <em>Word Hy-phen-a-tion by Com-put-er</em> by
+ * <em>Franklin Mark Liang</em>. Out of an entire dictionary of hyphenated words for a specific language, a
+ * set of {@link HyphenationPattern patterns} is extracted. To allow correct results with a reasonable small
+ * set of patterns, these patterns form a chain of positive rules and exceptions. Therefore a pattern can
+ * {@link HyphenationPatternPosition#ranking rank} a potential hyphenation-position with a number from
+ * <code>1</code> to <code>9</code>. If two patterns apply for a hyphenation-position the higher number wins.
+ * Odd numbers indicate a hyphenation while even values indicate an exception that should NOT be hyphenated.
+ * The character '.' is used at the beginning and/or end of a pattern to indicate that it should only match at
  * the beginning/end of the word to hyphenate.<br>
- * Logically for each start-index of the (normalized) word to hyphenate
- * (enclosed with '.') all {@link HyphenationPattern patterns} are checked if
- * they match (please note that the order of the patterns is important!).
- * Matching means that the pattern stripped from digits is a substring of the
- * word at this start-index. If the pattern matches the
- * {@link HyphenationPatternPosition hyphenation-positions} are applied.<br>
+ * Logically for each start-index of the (normalized) word to hyphenate (enclosed with '.') all
+ * {@link HyphenationPattern patterns} are checked if they match (please note that the order of the patterns
+ * is important!). Matching means that the pattern stripped from digits is a substring of the word at this
+ * start-index. If the pattern matches the {@link HyphenationPatternPosition hyphenation-positions} are
+ * applied.<br>
  * <br>
  * Here is an example to illustrate the algorithm:<br>
- * The string <code>"Computer"</code> will be transformed to
- * <code>".computer."</code> that matches the following patterns:
+ * The string <code>"Computer"</code> will be transformed to <code>".computer."</code> that matches the
+ * following patterns:
  * <ul>
  * <li>4m1p</li>
  * <li>pu2t</li>
  * <li>5pute</li>
  * <li>put3er</li>
  * </ul>
- * This results to <code>co4m5pu2t3er</code> so the hyphenated input String is
- * finally <code>"Com-put-er"</code>. The challenge is to implement this
- * algorithm in an efficient way.
+ * This results to <code>co4m5pu2t3er</code> so the hyphenated input String is finally
+ * <code>"Com-put-er"</code>. The challenge is to implement this algorithm in an efficient way.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -62,8 +56,8 @@ public class HyphenationPattern {
    * The constructor.
    * 
    * @param pattern is the raw {@link HyphenationPattern pattern}.
-   * @param hasher is the {@link StringHasher hash-algorithm} to use for the
-   *        {@link #getWordPartHash() word-part-hash}.
+   * @param hasher is the {@link StringHasher hash-algorithm} to use for the {@link #getWordPartHash()
+   *        word-part-hash}.
    */
   public HyphenationPattern(String pattern, StringHasher hasher) {
 
@@ -95,8 +89,7 @@ public class HyphenationPattern {
   }
 
   /**
-   * This method gets the {@link HyphenationPatternPosition
-   * hyphenation-positions} of the pattern.
+   * This method gets the {@link HyphenationPatternPosition hyphenation-positions} of the pattern.
    * 
    * @return the {@link HyphenationPatternPosition}s.
    */
@@ -106,11 +99,9 @@ public class HyphenationPattern {
   }
 
   /**
-   * This method gets the <em>word-part</em>, that is the
-   * {@link HyphenationPattern pattern} without digits. If the word-part is a
-   * substring of the word to hyphenate (enclosed with '.'), the
-   * {@link #getHyphenationPositions() hyphenation-points} are applied to the
-   * {@link HyphenationState}.
+   * This method gets the <em>word-part</em>, that is the {@link HyphenationPattern pattern} without digits.
+   * If the word-part is a substring of the word to hyphenate (enclosed with '.'), the
+   * {@link #getHyphenationPositions() hyphenation-points} are applied to the {@link HyphenationState}.
    * 
    * @see HyphenationState#apply(HyphenationPattern)
    * 
@@ -122,12 +113,10 @@ public class HyphenationPattern {
   }
 
   /**
-   * This method gets the pre-calculated hash of {@link #getWordPart()
-   * word-part}.<br>
+   * This method gets the pre-calculated hash of {@link #getWordPart() word-part}.<br>
    * <b>ATTENTION:</b><br>
-   * The result may be different to the {@link String#hashCode() hash-code} of
-   * {@link #getWordPart() word-part}. A specific hash algorithm is used that
-   * allows efficient calculation of shifting substrings.
+   * The result may be different to the {@link String#hashCode() hash-code} of {@link #getWordPart()
+   * word-part}. A specific hash algorithm is used that allows efficient calculation of shifting substrings.
    * 
    * @return the hash.
    */
@@ -137,18 +126,16 @@ public class HyphenationPattern {
   }
 
   /**
-   * This method gets the original pattern ({@link #getWordPart() word-part}
-   * with {@link #getHyphenationPositions() hyphenation-points}).<br>
+   * This method gets the original pattern ({@link #getWordPart() word-part} with
+   * {@link #getHyphenationPositions() hyphenation-points}).<br>
    * <b>ATTENTION:</b><br>
-   * This method is intended for debugging purposes. It rebuilds the pattern
-   * wasting some performance.
+   * This method is intended for debugging purposes. It rebuilds the pattern wasting some performance.
    * 
    * @return the pattern (e.g. ".af1t").
    */
   public String getPattern() {
 
-    StringBuilder pattern = new StringBuilder(this.wordPart.length()
-        + this.hyphenationPositions.length);
+    StringBuilder pattern = new StringBuilder(this.wordPart.length() + this.hyphenationPositions.length);
     int start = 0;
     for (HyphenationPatternPosition position : this.hyphenationPositions) {
       int end = position.index;

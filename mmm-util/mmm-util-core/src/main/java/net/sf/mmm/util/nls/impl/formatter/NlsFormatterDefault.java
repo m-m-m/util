@@ -19,8 +19,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
- * default formatting.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for default formatting.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -40,16 +39,15 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     String result = null;
     if (object != null) {
       if (object instanceof Number) {
         result = NumberFormat.getInstance(locale).format(object);
       } else if (object instanceof Date) {
-        DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT,
-            locale);
+        DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
         result = format.format(object);
       } else if (object instanceof NlsObject) {
         NlsMessage message = ((NlsObject) object).toNlsMessage();

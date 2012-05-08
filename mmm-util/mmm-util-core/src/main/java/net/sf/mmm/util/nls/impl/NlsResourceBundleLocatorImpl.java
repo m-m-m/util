@@ -36,8 +36,7 @@ import org.slf4j.Logger;
  */
 @Singleton
 @Named
-public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent implements
-    NlsResourceBundleLocator {
+public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent implements NlsResourceBundleLocator {
 
   /** @see #findBundles() */
   private List<ResourceBundle> nlsBundles;
@@ -107,8 +106,7 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
       if (this.reflectionUtil == null) {
         this.reflectionUtil = ReflectionUtilImpl.getInstance();
       }
-      Set<DataResource> bundleResources = this.reflectionUtil
-          .findResources(NlsTemplateResolver.CLASSPATH_NLS_BUNDLE);
+      Set<DataResource> bundleResources = this.reflectionUtil.findResources(NlsTemplateResolver.CLASSPATH_NLS_BUNDLE);
       for (DataResource dataResource : bundleResources) {
         if (logger.isTraceEnabled()) {
           logger.trace("Loading " + dataResource.getUri());
@@ -130,8 +128,8 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
                 ResourceBundle bundleInstance = ResourceBundle.getBundle(line, Locale.ROOT);
                 this.nlsBundles.add(bundleInstance);
               } catch (Exception e) {
-                logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '"
-                    + line + "' is invalid!", e);
+                logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line
+                    + "' is invalid!", e);
               }
             }
             line = reader.readLine();

@@ -8,8 +8,8 @@ import java.util.Map;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link ReflectionException} is thrown if an operation based on
- * {@link java.lang.reflect reflection} failed.
+ * A {@link ReflectionException} is thrown if an operation based on {@link java.lang.reflect reflection}
+ * failed.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -25,10 +25,10 @@ public abstract class ReflectionException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
+   * @param internaitionalizedMessage is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments are the arguments filled into the <code>internaitionalizedMessage</code> after
+   *        nationalization.
    * @deprecated use {@link #ReflectionException(String, Map)} instead.
    */
   @Deprecated
@@ -41,16 +41,14 @@ public abstract class ReflectionException extends NlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internaitionalizedMessage is a short description of the problem. It
-   *        is used for internationalization and should be in English language.
-   * @param arguments are the arguments filled into the
-   *        <code>internaitionalizedMessage</code> after nationalization.
-   * @deprecated use {@link #ReflectionException(Throwable, String, Map)}
-   *             instead.
+   * @param internaitionalizedMessage is a short description of the problem. It is used for
+   *        internationalization and should be in English language.
+   * @param arguments are the arguments filled into the <code>internaitionalizedMessage</code> after
+   *        nationalization.
+   * @deprecated use {@link #ReflectionException(Throwable, String, Map)} instead.
    */
   @Deprecated
-  public ReflectionException(Throwable nested, String internaitionalizedMessage,
-      Object... arguments) {
+  public ReflectionException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
 
     super(nested, internaitionalizedMessage, arguments);
   }
@@ -58,15 +56,12 @@ public abstract class ReflectionException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   *        arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        filled into <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
   public ReflectionException(String internationalizedMessage, Map<String, Object> arguments) {
 
@@ -76,10 +71,9 @@ public abstract class ReflectionException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
    */
   public ReflectionException(String internationalizedMessage) {
 
@@ -92,18 +86,14 @@ public abstract class ReflectionException extends NlsRuntimeException {
    * @see #toMap(String, Object, String, Object)
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   *        arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        filled into <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
-  public ReflectionException(Throwable nested, String internationalizedMessage,
-      Map<String, Object> arguments) {
+  public ReflectionException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
   }
@@ -112,10 +102,9 @@ public abstract class ReflectionException extends NlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
    */
   public ReflectionException(Throwable nested, String internationalizedMessage) {
 

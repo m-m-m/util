@@ -26,8 +26,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract test-case for
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
+ * This is the abstract test-case for {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
  * implementations using {@link MyPojo}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -42,8 +41,8 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
    */
   protected abstract PojoDescriptorBuilder getPojoDescriptorBuilder();
 
-  protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance,
-      PojoDescriptorBuilder builder) throws Exception {
+  protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance, PojoDescriptorBuilder builder)
+      throws Exception {
 
     // test property "name"
     checkProperty(pojoDescriptor, "name", String.class, String.class);
@@ -95,8 +94,7 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     }
   }
 
-  protected void checkItems(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance,
-      boolean viaMethods) {
+  protected void checkItems(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance, boolean viaMethods) {
 
     // test property "items"
     List<String> myList = new ArrayList<String>();
@@ -143,8 +141,7 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     assertEquals(item2, pojoDescriptor.getProperty(pojoInstance, "items[1]"));
   }
 
-  protected void checkValues(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance,
-      boolean viaMethods) {
+  protected void checkValues(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance, boolean viaMethods) {
 
     // test property "values"
     Map<String, String> values = new HashMap<String, String>();

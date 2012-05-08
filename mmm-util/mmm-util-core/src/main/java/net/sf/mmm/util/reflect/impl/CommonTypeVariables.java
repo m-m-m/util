@@ -27,8 +27,7 @@ public final class CommonTypeVariables {
   }
 
   /**
-   * The {@link TypeVariable} <code>E</code> of <code>Collection&lt;E&gt;</code>
-   * .
+   * The {@link TypeVariable} <code>E</code> of <code>Collection&lt;E&gt;</code> .
    */
   public static final TypeVariable<Class<Collection>> TYPE_VARIABLE_COLLECTION_ELEMENT;
 

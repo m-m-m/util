@@ -9,8 +9,7 @@ import net.sf.mmm.util.text.api.Singularizer;
 import org.junit.AfterClass;
 
 /**
- * This is the test-case for {@link EnglishSingularizer} configured using
- * spring.
+ * This is the test-case for {@link EnglishSingularizer} configured using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

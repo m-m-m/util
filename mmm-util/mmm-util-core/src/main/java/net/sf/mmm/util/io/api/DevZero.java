@@ -7,9 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is an implementation of <code>/dev/zero</code> as {@link InputStream}.
- * In other words the {@link DevZero} is a dummy {@link InputStream} that
- * produces infinite zeros.<br>
+ * This is an implementation of <code>/dev/zero</code> as {@link InputStream}. In other words the
+ * {@link DevZero} is a dummy {@link InputStream} that produces infinite zeros.<br>
  * <b>ATTENTION:</b><br>
  * Please be careful NOT to cause infinity loops when using this class!
  * 
@@ -56,7 +55,7 @@ public final class DevZero extends InputStream {
   @Override
   public void close() {
 
-  // do nothing...
+    // do nothing...
   }
 
 }

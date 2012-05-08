@@ -15,14 +15,13 @@ import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
- * This is the abstract base implementation of the
- * {@link ComposedValueConverter} interface.
+ * This is the abstract base implementation of the {@link ComposedValueConverter} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractComposedValueConverter extends AbstractGenericValueConverter<Object>
-    implements ComposedValueConverter {
+public abstract class AbstractComposedValueConverter extends AbstractGenericValueConverter<Object> implements
+    ComposedValueConverter {
 
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;
@@ -111,8 +110,8 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
   /**
    * {@inheritDoc}
    */
-  public <TARGET> TARGET convertValue(Object value, Object valueSource, Class<TARGET> targetClass,
-      Type targetType) throws ValueNotSetException, WrongValueTypeException {
+  public <TARGET> TARGET convertValue(Object value, Object valueSource, Class<TARGET> targetClass, Type targetType)
+      throws ValueNotSetException, WrongValueTypeException {
 
     if (value == null) {
       throw new ValueNotSetException(valueSource);

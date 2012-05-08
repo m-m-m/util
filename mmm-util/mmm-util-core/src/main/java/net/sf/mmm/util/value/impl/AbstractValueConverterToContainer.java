@@ -19,14 +19,12 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
- * This is the abstract base-implementation of a
- * {@link net.sf.mmm.util.value.api.ValueConverter} that converts an
- * {@link Object} to a container type. A container type is an array,
- * {@link java.util.Collection} or {@link java.util.Map}. It supports objects
- * given as {@link CharSequence} (e.g. {@link String}), {@link Collection}, or
- * array. If a value is given as {@link CharSequence} it will be parsed as
- * comma-separated values. An individual value can be escaped by enclosing it
- * with "<{[" and "]}>" so it can itself contain the separator character.<br/>
+ * This is the abstract base-implementation of a {@link net.sf.mmm.util.value.api.ValueConverter} that
+ * converts an {@link Object} to a container type. A container type is an array, {@link java.util.Collection}
+ * or {@link java.util.Map}. It supports objects given as {@link CharSequence} (e.g. {@link String}),
+ * {@link Collection}, or array. If a value is given as {@link CharSequence} it will be parsed as
+ * comma-separated values. An individual value can be escaped by enclosing it with "<{[" and "]}>" so it can
+ * itself contain the separator character.<br/>
  * Here are some examples:<br/>
  * <table border="1">
  * <tr>
@@ -71,14 +69,12 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
   protected static final char ELEMENT_SEPARATOR = ',';
 
   /**
-   * The prefix used to escape an element (that may contain
-   * {@link #ELEMENT_SEPARATOR}).
+   * The prefix used to escape an element (that may contain {@link #ELEMENT_SEPARATOR}).
    */
   protected static final String ELEMENT_ESCAPE_START = "<{[";
 
   /**
-   * The suffix used to escape an element (that may contain
-   * {@link #ELEMENT_SEPARATOR}).
+   * The suffix used to escape an element (that may contain {@link #ELEMENT_SEPARATOR}).
    */
   protected static final String ELEMENT_ESCAPE_END = "]}>";
 
@@ -154,19 +150,17 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
   }
 
   /**
-   * This method performs the {@link #convert(Object, Object, GenericType)
-   * conversion} for {@link Collection} values.
+   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for {@link Collection}
+   * values.
    * 
    * @param <T> is the generic type of <code>targetType</code>.
    * @param collectionValue is the {@link Collection} value to convert.
-   * @param valueSource describes the source of the value or <code>null</code>
-   *        if NOT available.
-   * @param targetType is the {@link #getTargetType() target-type} to convert
-   *        to.
+   * @param valueSource describes the source of the value or <code>null</code> if NOT available.
+   * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @return the converted container.
    */
-  protected <T extends CONTAINER> T convertFromCollection(Collection collectionValue,
-      Object valueSource, GenericType<T> targetType) {
+  protected <T extends CONTAINER> T convertFromCollection(Collection collectionValue, Object valueSource,
+      GenericType<T> targetType) {
 
     int size = collectionValue.size();
     T container = createContainer(targetType, size);
@@ -179,23 +173,20 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
   }
 
   /**
-   * This method performs the {@link #convert(Object, Object, GenericType)
-   * conversion} for {@link String} values.
+   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for {@link String}
+   * values.
    * 
    * @param <T> is the generic type of <code>targetType</code>.
    * @param stringValue is the {@link String} value to convert.
-   * @param valueSource describes the source of the value or <code>null</code>
-   *        if NOT available.
-   * @param targetType is the {@link #getTargetType() target-type} to convert
-   *        to.
+   * @param valueSource describes the source of the value or <code>null</code> if NOT available.
+   * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @return the converted container.
    */
-  protected <T extends CONTAINER> T convertFromString(String stringValue, Object valueSource,
-      GenericType<T> targetType) {
+  protected <T extends CONTAINER> T convertFromString(String stringValue, Object valueSource, GenericType<T> targetType) {
 
     List<String> stringList = new ArrayList<String>();
-    StringTokenizer tokenizer = new StringTokenizer(stringValue, ELEMENT_ESCAPE_START,
-        ELEMENT_ESCAPE_END, ELEMENT_SEPARATOR);
+    StringTokenizer tokenizer = new StringTokenizer(stringValue, ELEMENT_ESCAPE_START, ELEMENT_ESCAPE_END,
+        ELEMENT_SEPARATOR);
     for (String element : tokenizer) {
       stringList.add(element);
     }
@@ -208,19 +199,15 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
   }
 
   /**
-   * This method performs the {@link #convert(Object, Object, GenericType)
-   * conversion} for array values.
+   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for array values.
    * 
    * @param <T> is the generic type of <code>targetType</code>.
    * @param arrayValue is the array value to convert.
-   * @param valueSource describes the source of the value or <code>null</code>
-   *        if NOT available.
-   * @param targetType is the {@link #getTargetType() target-type} to convert
-   *        to.
+   * @param valueSource describes the source of the value or <code>null</code> if NOT available.
+   * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @return the converted container.
    */
-  protected <T extends CONTAINER> T convertFromArray(Object arrayValue, Object valueSource,
-      GenericType<T> targetType) {
+  protected <T extends CONTAINER> T convertFromArray(Object arrayValue, Object valueSource, GenericType<T> targetType) {
 
     int len = Array.getLength(arrayValue);
     T container = createContainer(targetType, len);
@@ -235,18 +222,14 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * This method converts a single entry of a container.
    * 
    * @param element is the single entry (element) of the container to convert.
-   * @param index is the index of the given <code>element</code> in the order of
-   *        occurrence.
-   * @param container is the current container where to add the given
-   *        <code>element</code> as entry.
-   * @param valueSource describes the source of the value or <code>null</code>
-   *        if NOT available.
-   * @param targetType is the {@link #getTargetType() target-type} to convert
-   *        to.
+   * @param index is the index of the given <code>element</code> in the order of occurrence.
+   * @param container is the current container where to add the given <code>element</code> as entry.
+   * @param valueSource describes the source of the value or <code>null</code> if NOT available.
+   * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @param value is the original value to convert.
    */
-  protected abstract void convertContainerEntry(Object element, int index, CONTAINER container,
-      Object valueSource, GenericType<? extends CONTAINER> targetType, Object value);
+  protected abstract void convertContainerEntry(Object element, int index, CONTAINER container, Object valueSource,
+      GenericType<? extends CONTAINER> targetType, Object value);
 
   // {
   // ComposedValueConverter parentConverter = getComposedValueConverter();
@@ -261,8 +244,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
   // }
 
   /**
-   * This method creates the according container for the given
-   * <code>containerType</code>.
+   * This method creates the according container for the given <code>containerType</code>.
    * 
    * @param <T> is the generic type of <code>targetType</code>.
    * @param targetType is the {@link GenericType} of the container.

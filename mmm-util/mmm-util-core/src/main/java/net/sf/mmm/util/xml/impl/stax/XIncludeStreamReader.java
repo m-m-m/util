@@ -23,13 +23,12 @@ import net.sf.mmm.util.xml.base.StreamReaderProxy;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
- * This is an implementation of the {@link XMLStreamReader} interface that
- * adapts an {@link XMLStreamReader} adding support for XInclude.<br>
+ * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}
+ * adding support for XInclude.<br>
  * For details about XInclude see: <a
  * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>.<br>
  * <b>ATTENTION:</b><br/>
- * Please note that currently only plain XML inclusion is currently supported
- * and no XPointer.
+ * Please note that currently only plain XML inclusion is currently supported and no XPointer.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -48,27 +47,23 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   private final DataResource resource;
 
   /**
-   * The StAX resource management sucks: we need to manage the underlying input
-   * stream ourselves.
+   * The StAX resource management sucks: we need to manage the underlying input stream ourselves.
    */
   private final InputStream inputStream;
 
   /**
-   * The reader to the current XInclude document or <code>null</code> if we
-   * currently have no active XInclude.
+   * The reader to the current XInclude document or <code>null</code> if we currently have no active XInclude.
    */
   private XMLStreamReader includeReader;
 
   /**
-   * The included text or <code>null</code> if currently no text is to be
-   * included.
+   * The included text or <code>null</code> if currently no text is to be included.
    */
   private String includeText;
 
   /**
-   * The current depth in the XML tree relative to the first "include" tag of
-   * the XInclude namespace that is currently active. Will be <code>0</code> if
-   * we are outside of an XInclude.
+   * The current depth in the XML tree relative to the first "include" tag of the XInclude namespace that is
+   * currently active. Will be <code>0</code> if we are outside of an XInclude.
    */
   private int depth;
 
@@ -80,8 +75,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   /**
    * The constructor.
    * 
-   * @param factory is the {@link XMLInputFactory} required to create new
-   *        {@link XMLStreamReader} instances for includes.
+   * @param factory is the {@link XMLInputFactory} required to create new {@link XMLStreamReader} instances
+   *        for includes.
    * @param resource is the {@link DataResource} pointing to the XML content.
    */
   public XIncludeStreamReader(XMLInputFactory factory, DataResource resource) {
@@ -98,8 +93,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
    * @throws XmlException in case of an XML error.
    * @throws RuntimeIoException is case of an input/output error.
    */
-  protected XIncludeStreamReader(XMLInputFactory factory, DataResource resource,
-      XIncludeStreamReader parent) throws XmlException, RuntimeIoException {
+  protected XIncludeStreamReader(XMLInputFactory factory, DataResource resource, XIncludeStreamReader parent)
+      throws XmlException, RuntimeIoException {
 
     super();
     this.parent = parent;
@@ -124,12 +119,12 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   /**
    * This method detects if a recursive inclusion takes place.<br>
    * 
-   * TODO: Potentially the same resource could cause an inclusion cycle without
-   * causing an infinity loop by using different XPointer expressions.
+   * TODO: Potentially the same resource could cause an inclusion cycle without causing an infinity loop by
+   * using different XPointer expressions.
    * 
    * @param dataResource is the current data-resource to include.
-   * @throws XMLStreamException if the given <code>dataResource</code> has
-   *         already been included causing an infinity loop.
+   * @throws XMLStreamException if the given <code>dataResource</code> has already been included causing an
+   *         infinity loop.
    */
   protected void detectRecursiveInclusion(DataResource dataResource) throws XMLStreamException {
 
@@ -150,17 +145,14 @@ public class XIncludeStreamReader extends StreamReaderProxy {
    * 
    * <b>ATTENTION:</b><br>
    * This method violates the StAX API and closes the underlying input stream!<br>
-   * The StAX API has a bad design mistake about the {@link #close()} method NOT
-   * to close the underlying input stream. Besides the {@link XMLStreamReader}
-   * the user also has to manage the input stream what will lead in additional
-   * programming mistakes ending up with open file-handles. Since many
-   * {@link XMLStreamReader} implementations have an empty body for this method
-   * developers, may tend to take it NOT as serious as e.g.
-   * {@link InputStream#close()}. Since this implementation has to open new
-   * streams behind the scenes the only senseful implementation of this method
-   * is to close the underlying stream (and recursively closing all included
-   * streams). You have to ensure this reader is safely closed via this method
-   * so remaining open streams are closed.
+   * The StAX API has a bad design mistake about the {@link #close()} method NOT to close the underlying input
+   * stream. Besides the {@link XMLStreamReader} the user also has to manage the input stream what will lead
+   * in additional programming mistakes ending up with open file-handles. Since many {@link XMLStreamReader}
+   * implementations have an empty body for this method developers, may tend to take it NOT as serious as e.g.
+   * {@link InputStream#close()}. Since this implementation has to open new streams behind the scenes the only
+   * senseful implementation of this method is to close the underlying stream (and recursively closing all
+   * included streams). You have to ensure this reader is safely closed via this method so remaining open
+   * streams are closed.
    */
   @Override
   public void close() throws XMLStreamException {
@@ -183,8 +175,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   }
 
   /**
-   * This method is called when an include tag of the XInclude namespace was
-   * started. It resolves the include and finds a fallback on failure.
+   * This method is called when an include tag of the XInclude namespace was started. It resolves the include
+   * and finds a fallback on failure.
    * 
    * @return the next event type.
    * @throws XMLStreamException if the XML stream processing caused an error.
@@ -237,11 +229,9 @@ public class XIncludeStreamReader extends StreamReaderProxy {
       // search for fallback
       do {
         eventType = super.next();
-      } while ((eventType != XMLStreamConstants.START_ELEMENT)
-          && (eventType != XMLStreamConstants.END_ELEMENT));
+      } while ((eventType != XMLStreamConstants.START_ELEMENT) && (eventType != XMLStreamConstants.END_ELEMENT));
       if (eventType == XMLStreamConstants.START_ELEMENT) {
-        if ((XmlUtil.NAMESPACE_URI_XINCLUDE.equals(getNamespaceURI()))
-            && ("fallback".equals(getLocalName()))) {
+        if ((XmlUtil.NAMESPACE_URI_XINCLUDE.equals(getNamespaceURI())) && ("fallback".equals(getLocalName()))) {
           // found fallback
           this.fallback = true;
           return next();
@@ -282,8 +272,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     this.includeText = null;
     int eventType = super.next();
     if (this.includeReader == null) {
-      if ((eventType == XMLStreamConstants.START_ELEMENT)
-          || (eventType == XMLStreamConstants.END_ELEMENT)) {
+      if ((eventType == XMLStreamConstants.START_ELEMENT) || (eventType == XMLStreamConstants.END_ELEMENT)) {
         String namespace = getNamespaceURI();
         String tag = getLocalName();
         if (XmlUtil.NAMESPACE_URI_XINCLUDE.equals(namespace)) {

@@ -83,8 +83,7 @@ public class BrowsableResourceFactoryTest {
   @Test
   public void testClasspathResource() throws Exception {
 
-    String resourceUri = ClasspathResource.SCHEME_PREFIX
-        + ClasspathResource.class.getName().replace('.', '/') + ".txt";
+    String resourceUri = ClasspathResource.SCHEME_PREFIX + ClasspathResource.class.getName().replace('.', '/') + ".txt";
     DataResource resource = getBrowsableResourceFactory().createDataResource(resourceUri);
     ClasspathResourceTest.verifyResource(resource);
 

@@ -6,28 +6,23 @@ package net.sf.mmm.util.pattern.base;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 
 /**
- * This is an implementation of the {@link PatternCompiler} interface that
- * {@link #compile(String) compiles} <em>path-glob-patterns</em>. A
- * path-glob-pattern is like a {@link GlobPatternCompiler glob-pattern} but more
- * specific for matching directory paths:
+ * This is an implementation of the {@link PatternCompiler} interface that {@link #compile(String) compiles}
+ * <em>path-glob-patterns</em>. A path-glob-pattern is like a {@link GlobPatternCompiler glob-pattern} but
+ * more specific for matching directory paths:
  * <ul>
- * <li><code>'?'</code> matches any character except for a slash (
- * <code>'/'</code> or <code>'\\'</code>).</li>
- * <li>A single <code>'*'</code> matches a sequence of characters excluding
- * slashes including the empty sequence.</li>
- * <li><code>'**'</code> matches any sequence of characters (including slashes).</li>
- * <li>the character <code>'/'</code> matches a slash (<code>'/'</code> or
- * <code>'\\'</code>).</li>
- * <li><code>'**&#47;'</code> matches any sequence terminated by a slash as well as the empty
+ * <li><code>'?'</code> matches any character except for a slash ( <code>'/'</code> or <code>'\\'</code>).</li>
+ * <li>A single <code>'*'</code> matches a sequence of characters excluding slashes including the empty
  * sequence.</li>
+ * <li><code>'**'</code> matches any sequence of characters (including slashes).</li>
+ * <li>the character <code>'/'</code> matches a slash (<code>'/'</code> or <code>'\\'</code>).</li>
+ * <li><code>'**&#47;'</code> matches any sequence terminated by a slash as well as the empty sequence.</li>
  * </ul>
- * The idea is taken from <a
- * href="http://ant.apache.org/manual/dirtasks.html#patterns">ant</a> even
- * though it might be slightly different.<br>
+ * The idea is taken from <a href="http://ant.apache.org/manual/dirtasks.html#patterns">ant</a> even though it
+ * might be slightly different.<br>
  * Examples:
  * <ul>
- * <li><code>A*bc?e</code> matches <code>Abcde</code> or
- * <code>AFOObarbcxe</code> but NOT <code>abcde</code> or <code>Abce</code>.</li>
+ * <li><code>A*bc?e</code> matches <code>Abcde</code> or <code>AFOObarbcxe</code> but NOT <code>abcde</code>
+ * or <code>Abce</code>.</li>
  * </ul>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

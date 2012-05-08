@@ -13,15 +13,13 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This is the implementation of the {@link PojoDescriptorDependencies}
- * interface.
+ * This is the implementation of the {@link PojoDescriptorDependencies} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.1.0)
  */
 @Singleton
-public class PojoDescriptorDependenciesImpl extends AbstractComponent implements
-    PojoDescriptorDependencies {
+public class PojoDescriptorDependenciesImpl extends AbstractComponent implements PojoDescriptorDependencies {
 
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;

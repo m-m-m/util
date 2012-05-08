@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-
 /**
  * This is the test-case for {@link ArrayListFactory#INSTANCE}.
  * 

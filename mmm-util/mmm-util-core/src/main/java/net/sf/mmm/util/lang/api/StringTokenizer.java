@@ -10,13 +10,12 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
- * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided
- * by the JDK. This implementation {@link #next() returns} an empty
- * {@link String} if a duplicate delimiter is detected. Further it implements
+ * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided by the JDK. This implementation
+ * {@link #next() returns} an empty {@link String} if a duplicate delimiter is detected. Further it implements
  * {@link Iterable} and can be used in enhanced for-loops.<br>
  * <b>ATTENTION:</b><br>
- * Returning an empty {@link String} also for duplicated delimited might NOT
- * always be desired (especially when delimiter is whitespace).
+ * Returning an empty {@link String} also for duplicated delimited might NOT always be desired (especially
+ * when delimiter is whitespace).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -53,8 +52,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    * The constructor.
    * 
    * @param string is the string to be tokenized.
-   * @param delimiters is a {@link String} with all the characters that will be
-   *        detected as delimiters.
+   * @param delimiters is a {@link String} with all the characters that will be detected as delimiters.
    */
   public StringTokenizer(String string, String delimiters) {
 
@@ -71,16 +69,15 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    * will return "foo,{[bar,thing]}".
    * 
    * @param string is the string to be tokenized.
-   * @param escapeStart is the string used to start escaping of a token. The
-   *        string has to be free of <code>delimiters</code>.
-   * @param escapeEnd is the string used to end escaping of a token. The string
-   *        has to be free of <code>delimiters</code>.
+   * @param escapeStart is the string used to start escaping of a token. The string has to be free of
+   *        <code>delimiters</code>.
+   * @param escapeEnd is the string used to end escaping of a token. The string has to be free of
+   *        <code>delimiters</code>.
    * @param delimiters are the characters that will be detected as delimiters.
-   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or
-   *         <code>escapeEnd</code> is an empty string or contains a character
-   *         of <code>delimiters</code>, or one of them is <code>null</code>
-   *         while the other is not, or both are not <code>null</code> but
-   *         {@link Object#equals(Object) equal} to each other.
+   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or <code>escapeEnd</code> is an empty
+   *         string or contains a character of <code>delimiters</code>, or one of them is <code>null</code>
+   *         while the other is not, or both are not <code>null</code> but {@link Object#equals(Object) equal}
+   *         to each other.
    * 
    * @since 2.0.0
    */
@@ -96,18 +93,15 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    * @see #StringTokenizer(String, String, String, char...)
    * 
    * @param string is the string to be tokenized.
-   * @param escapeStart is the string used to start escaping of a token. May NOT
-   *        be the empty string. The string has to be free of
-   *        <code>delimiters</code>.
-   * @param escapeEnd is the string used to end escaping of a token. May NOT be
-   *        the empty string.The string has to be free of
-   *        <code>delimiters</code>.
+   * @param escapeStart is the string used to start escaping of a token. May NOT be the empty string. The
+   *        string has to be free of <code>delimiters</code>.
+   * @param escapeEnd is the string used to end escaping of a token. May NOT be the empty string.The string
+   *        has to be free of <code>delimiters</code>.
    * @param delimiters are the characters that will be detected as delimiters.
-   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or
-   *         <code>escapeEnd</code> is an empty string or contains a character
-   *         of <code>delimiters</code>, or one of them is <code>null</code>
-   *         while the other is not, or both are not <code>null</code> but
-   *         {@link Object#equals(Object) equal} to each other.
+   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or <code>escapeEnd</code> is an empty
+   *         string or contains a character of <code>delimiters</code>, or one of them is <code>null</code>
+   *         while the other is not, or both are not <code>null</code> but {@link Object#equals(Object) equal}
+   *         to each other.
    * 
    * @since 2.0.0
    */
@@ -158,14 +152,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method checks that the given <code>escape</code> sequence does NOT
-   * contain any of the <code>delimiters</code>.
+   * This method checks that the given <code>escape</code> sequence does NOT contain any of the
+   * <code>delimiters</code>.
    * 
    * @param escape is the escape-sequence to check.
-   * @param delimiters are the delimiters that should NOT be contained in
-   *        <code>escape</code>.
-   * @return <code>true</code> if <code>escape</code> contains a character of
-   *         <code>delimiters</code>, <code>false</code> otherwise.
+   * @param delimiters are the delimiters that should NOT be contained in <code>escape</code>.
+   * @return <code>true</code> if <code>escape</code> contains a character of <code>delimiters</code>,
+   *         <code>false</code> otherwise.
    */
   private static boolean containsDelimiter(char[] escape, char[] delimiters) {
 
@@ -233,8 +226,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
         format.append(this.escapeStart);
         format.append('*');
         format.append(this.escapeEnd);
-        throw new NlsParseException(new String(this.string, rawStart, this.index - rawStart),
-            format, "token");
+        throw new NlsParseException(new String(this.string, rawStart, this.index - rawStart), format, "token");
       }
       if (this.index < this.string.length) {
         char c = this.string[this.index];
@@ -246,8 +238,8 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
           }
         }
         if (!isDelimiter) {
-          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart),
-              new String(this.escapeEnd) + this.delimiters[0], "token");
+          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart), new String(
+              this.escapeEnd) + this.delimiters[0], "token");
         }
       }
     } else {
@@ -272,13 +264,12 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method tests if the {@link #string} contains the given
-   * <code>substring</code> starting at the given <code>index</code>.
+   * This method tests if the {@link #string} contains the given <code>substring</code> starting at the given
+   * <code>index</code>.
    * 
    * @param substring is the substring to check for.
    * @param startIndex is the start index in {@link #string}.
-   * @return <code>true</code> if the given <code>substring</code> was found at
-   *         <code>index</code>.
+   * @return <code>true</code> if the given <code>substring</code> was found at <code>index</code>.
    */
   protected boolean containsSubstring(char[] substring, int startIndex) {
 
@@ -296,8 +287,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   /**
    * @see java.util.StringTokenizer#hasMoreTokens()
    * 
-   * @return <code>true</code> if {@link #next()} is available,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if {@link #next()} is available, <code>false</code> otherwise.
    */
   public boolean hasMoreTokens() {
 

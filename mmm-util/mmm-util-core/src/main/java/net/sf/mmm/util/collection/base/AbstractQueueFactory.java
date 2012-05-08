@@ -8,8 +8,7 @@ import java.util.Queue;
 import net.sf.mmm.util.collection.api.QueueFactory;
 
 /**
- * This is the abstract base implementation of the {@link QueueFactory}
- * interface.
+ * This is the abstract base implementation of the {@link QueueFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

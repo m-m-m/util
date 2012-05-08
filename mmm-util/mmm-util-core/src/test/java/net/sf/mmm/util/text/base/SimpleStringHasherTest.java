@@ -27,8 +27,7 @@ public class SimpleStringHasherTest extends AbstractStringHasherTest {
   }
 
   /**
-   * This method tests that {@link SimpleStringHasher} is compatible to
-   * {@link String#hashCode()}.
+   * This method tests that {@link SimpleStringHasher} is compatible to {@link String#hashCode()}.
    */
   @Test
   public void testCompatibleHashCode() {

@@ -4,9 +4,8 @@
 package net.sf.mmm.util.pojo.path.api;
 
 /**
- * This is the call-back interface used to {@link #recognize(Object, PojoPath)
- * recognize} {@link net.sf.mmm.util.pojo.api.Pojo}s traversed by a
- * {@link PojoPathNavigator}.
+ * This is the call-back interface used to {@link #recognize(Object, PojoPath) recognize}
+ * {@link net.sf.mmm.util.pojo.api.Pojo}s traversed by a {@link PojoPathNavigator}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -14,14 +13,12 @@ package net.sf.mmm.util.pojo.path.api;
 public interface PojoPathRecognizer {
 
   /**
-   * This method is called to recognize the <code>actualPojo</code>. It is
-   * called by the {@link PojoPathNavigator} (an {@link PojoPathFunction}s) for
-   * each {@link net.sf.mmm.util.pojo.api.Pojo} that has been traversed.
+   * This method is called to recognize the <code>actualPojo</code>. It is called by the
+   * {@link PojoPathNavigator} (an {@link PojoPathFunction}s) for each {@link net.sf.mmm.util.pojo.api.Pojo}
+   * that has been traversed.
    * 
-   * @param actualPojo is the actual {@link net.sf.mmm.util.pojo.api.Pojo} to
-   *        recognize.
-   * @param currentPath is the {@link PojoPath} that lead to the
-   *        <code>actualPojo</code>.
+   * @param actualPojo is the actual {@link net.sf.mmm.util.pojo.api.Pojo} to recognize.
+   * @param currentPath is the {@link PojoPath} that lead to the <code>actualPojo</code>.
    */
   void recognize(Object actualPojo, PojoPath currentPath);
 

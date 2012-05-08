@@ -16,17 +16,14 @@ import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
 
 /**
- * This is the abstract base-implementation of the {@link HyphenatorBuilder}
- * interface.<br>
- * It uses a cache with {@link WeakReference}s to the {@link Hyphenator}s that
- * have already been build. If a {@link Hyphenator} is requested several times,
- * it can typically be served from the cache.
+ * This is the abstract base-implementation of the {@link HyphenatorBuilder} interface.<br>
+ * It uses a cache with {@link WeakReference}s to the {@link Hyphenator}s that have already been build. If a
+ * {@link Hyphenator} is requested several times, it can typically be served from the cache.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponent implements
-    HyphenatorBuilder {
+public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponent implements HyphenatorBuilder {
 
   /** Cache for {@link #getHyphenator(Locale)}. */
   private final ConcurrentHashMap<String, WeakReference<Hyphenator>> hyphenatorCache;
@@ -99,12 +96,10 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
    * 
    * @see #getHyphenator(Locale)
    * 
-   * @param localeInfix is the
-   *        {@link NlsResourceLocator#getLocaleInfixes(Locale) locale-infix} of
-   *        the requested {@link Hyphenator}.
-   * @return the requested {@link Hyphenator} or <code>null</code> if no
-   *         hyphenation configuration is available for the given
-   *         <code>localeInfix</code>.
+   * @param localeInfix is the {@link NlsResourceLocator#getLocaleInfixes(Locale) locale-infix} of the
+   *        requested {@link Hyphenator}.
+   * @return the requested {@link Hyphenator} or <code>null</code> if no hyphenation configuration is
+   *         available for the given <code>localeInfix</code>.
    */
   protected abstract Hyphenator createHyphenator(String localeInfix);
 

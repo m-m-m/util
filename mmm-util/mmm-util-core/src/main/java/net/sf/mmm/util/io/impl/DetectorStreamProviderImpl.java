@@ -12,8 +12,7 @@ import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.io.api.DetectorStreamProvider} interface.
+ * This is the implementation of the {@link net.sf.mmm.util.io.api.DetectorStreamProvider} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

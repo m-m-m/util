@@ -21,8 +21,7 @@ public class ResourceUriImpl implements ResourceUri {
   /**
    * The {@link Pattern} for a {@link ResourceUri} {@link #getUri() as string}.
    */
-  private static final Pattern SCHEME_PATTERN = Pattern
-      .compile("([a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?)(.*)");
+  private static final Pattern SCHEME_PATTERN = Pattern.compile("([a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?)(.*)");
 
   /** @see #getUri() */
   private final String uri;

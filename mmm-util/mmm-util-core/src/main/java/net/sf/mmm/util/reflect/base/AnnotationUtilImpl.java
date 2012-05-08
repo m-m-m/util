@@ -21,8 +21,7 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
- * This class is a collection of utility functions for dealing with
- * {@link Annotation annotations}.
+ * This class is a collection of utility functions for dealing with {@link Annotation annotations}.
  * 
  * @see #getInstance()
  * 
@@ -49,15 +48,12 @@ public class AnnotationUtilImpl implements AnnotationUtil {
 
   /**
    * This method gets the singleton instance of this {@link AnnotationUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -76,8 +72,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   }
 
   /**
-   * This method gets the {@link ReflectionUtilImpl} used by this
-   * {@link AnnotationUtilImpl} instance.
+   * This method gets the {@link ReflectionUtilImpl} used by this {@link AnnotationUtilImpl} instance.
    * 
    * @return the {@link ReflectionUtilImpl} to use.
    */
@@ -113,8 +108,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * {@inheritDoc}
    */
-  public <A extends Annotation> boolean isAnnotationForType(Class<A> annotationType,
-      ElementType targetType) {
+  public <A extends Annotation> boolean isAnnotationForType(Class<A> annotationType, ElementType targetType) {
 
     Target target = annotationType.getAnnotation(Target.class);
     if (target != null) {
@@ -155,30 +149,24 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   }
 
   /**
-   * This method gets the first {@link Class#getAnnotation(Class) annotation} of
-   * the type given by <code>annotation</code> in the
-   * {@link Class#getInterfaces() hierarchy} of the given
+   * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
+   * <code>annotation</code> in the {@link Class#getInterfaces() hierarchy} of the given
    * <code>annotatedInterface</code>.<br>
-   * This method is only useful if the given <code>annotation</code> is a
-   * {@link #isRuntimeAnnotation(Class) runtime annotation} that is
-   * {@link #isAnnotationForType(Class, ElementType) applicable} for
+   * This method is only useful if the given <code>annotation</code> is a {@link #isRuntimeAnnotation(Class)
+   * runtime annotation} that is {@link #isAnnotationForType(Class, ElementType) applicable} for
    * {@link ElementType#TYPE classes}.
    * 
    * @param <A> is the type of the requested annotation.
-   * @param annotatedType is the type potentially implementing an interface
-   *        annotated with the given <code>annotation</code>. This should NOT be
-   *        an {@link Class#isPrimitive() primitive}, {@link Class#isArray()
-   *        array}, {@link Class#isEnum() enum}, or {@link Class#isAnnotation()
+   * @param annotatedType is the type potentially implementing an interface annotated with the given
+   *        <code>annotation</code>. This should NOT be an {@link Class#isPrimitive() primitive},
+   *        {@link Class#isArray() array}, {@link Class#isEnum() enum}, or {@link Class#isAnnotation()
    *        annotation}.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if neither the
-   *         <code>annotatedInterface</code> nor one of its
-   *         {@link Class#getInterfaces() super-interfaces} are
-   *         {@link Class#getAnnotation(Class) annotated} with the given
-   *         <code>annotation</code>.
+   * @return the requested annotation or <code>null</code> if neither the <code>annotatedInterface</code> nor
+   *         one of its {@link Class#getInterfaces() super-interfaces} are {@link Class#getAnnotation(Class)
+   *         annotated} with the given <code>annotation</code>.
    */
-  private <A extends Annotation> A getInterfacesAnnotation(Class<?> annotatedType,
-      Class<A> annotation) {
+  private <A extends Annotation> A getInterfacesAnnotation(Class<?> annotatedType, Class<A> annotation) {
 
     Class<?>[] interfaces = annotatedType.getInterfaces();
     for (int i = 0; i < interfaces.length; i++) {
@@ -230,8 +218,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
       Class<?>[] parameterTypes = annotatedMethod.getParameterTypes();
       Class<?> inheritingClass = annotatedMethod.getDeclaringClass();
       while (result == null) {
-        Method currentMethod = getReflectionUtil().getParentMethod(inheritingClass, methodName,
-            parameterTypes);
+        Method currentMethod = getReflectionUtil().getParentMethod(inheritingClass, methodName, parameterTypes);
         if (currentMethod == null) {
           return null;
         } else {

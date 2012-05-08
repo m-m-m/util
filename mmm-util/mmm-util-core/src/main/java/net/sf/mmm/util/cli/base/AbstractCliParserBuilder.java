@@ -31,14 +31,13 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
- * This is the abstract base implementation of the {@link CliParserBuilder}
- * interface.
+ * This is the abstract base implementation of the {@link CliParserBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent implements
-    CliParserBuilder, CliParserDependencies {
+public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent implements CliParserBuilder,
+    CliParserDependencies {
 
   /** @see #getDescriptorBuilderFactory() */
   private PojoDescriptorBuilderFactory descriptorBuilderFactory;
@@ -132,8 +131,8 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
       throw new NlsNullPointerException("pojo");
     }
     try {
-      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger(),
-          getReflectionUtil(), getAnnotationUtil());
+      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger(), getReflectionUtil(),
+          getAnnotationUtil());
       CliParser parser = buildInternal(pojo, state);
       return parser;
     } catch (Exception e) {

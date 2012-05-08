@@ -4,8 +4,8 @@
 package net.sf.mmm.util.text.api;
 
 /**
- * This class is a simple container for the {@link #getText() text} of a column
- * together with its {@link TextColumnInfo metadata}.
+ * This class is a simple container for the {@link #getText() text} of a column together with its
+ * {@link TextColumnInfo metadata}.
  * 
  * @see LineWrapper#wrap(Appendable, TextTableInfo, TextColumn[])
  * 
@@ -44,8 +44,7 @@ public class TextColumn {
   }
 
   /**
-   * This method gets the {@link TextColumnInfo} holding the metadata of the
-   * column.
+   * This method gets the {@link TextColumnInfo} holding the metadata of the column.
    * 
    * @return the column-info.
    */

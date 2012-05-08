@@ -17,8 +17,7 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.context.api.GenericContextFactory}.
+ * This is the implementation of the {@link net.sf.mmm.util.context.api.GenericContextFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

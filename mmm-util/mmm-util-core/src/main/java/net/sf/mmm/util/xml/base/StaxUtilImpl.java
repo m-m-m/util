@@ -31,8 +31,7 @@ import net.sf.mmm.util.xml.api.XmlGenericException;
 import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
 
 /**
- * This utility class contains methods that help to work with the StAX API (JSR
- * 173).
+ * This utility class contains methods that help to work with the StAX API (JSR 173).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -63,15 +62,12 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
 
   /**
    * This method gets the singleton instance of this {@link StaxUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -192,8 +188,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
-  public XMLStreamReader createXmlStreamReader(DataResource resource, boolean xIncludeAware)
-      throws XmlException {
+  public XMLStreamReader createXmlStreamReader(DataResource resource, boolean xIncludeAware) throws XmlException {
 
     if (xIncludeAware) {
       return new XIncludeStreamReader(this.xmlInputFactory, resource);
@@ -232,8 +227,8 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
-      String localAttributeName, Class<V> type) throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type)
+      throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
@@ -243,8 +238,8 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri,
-      String localAttributeName, Class<V> type, V defaultValue) throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type,
+      V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     return getValueConverter().convertValue(value, localAttributeName, type, type, defaultValue);
@@ -326,8 +321,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
       while (xmlReader.hasNext()) {
         XMLEvent event = xmlReader.nextEvent();
         int eventType = event.getEventType();
-        if ((eventType == XMLStreamConstants.START_ELEMENT)
-            || (eventType == XMLStreamConstants.END_ELEMENT)
+        if ((eventType == XMLStreamConstants.START_ELEMENT) || (eventType == XMLStreamConstants.END_ELEMENT)
             || (eventType == XMLStreamConstants.END_DOCUMENT)) {
           return event;
         }

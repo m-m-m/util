@@ -14,14 +14,12 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract base-implementation of the {@link PojoDescriptorBuilder}
- * interface.
+ * This is the abstract base-implementation of the {@link PojoDescriptorBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements
-    PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
   private final Map<GenericType<?>, PojoDescriptorImpl<?>> pojoMap;
@@ -37,8 +35,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   /**
    * The constructor.
    * 
-   * @param mapFactory the factory used to create the
-   *        {@link #getDescriptor(Class) descriptor-cache}.
+   * @param mapFactory the factory used to create the {@link #getDescriptor(Class) descriptor-cache}.
    */
   @SuppressWarnings({ "rawtypes" })
   public AbstractPojoDescriptorBuilder(MapFactory mapFactory) {
@@ -59,8 +56,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
    */
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
-    GenericType<POJO> genericType = getDependencies().getReflectionUtil().createGenericType(
-        pojoClass);
+    GenericType<POJO> genericType = getDependencies().getReflectionUtil().createGenericType(pojoClass);
     return getDescriptor(genericType);
   }
 
@@ -87,17 +83,15 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   }
 
   /**
-   * This method creates the
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor}
-   * for the given <code>pojoType</code>.
+   * This method creates the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor} for
+   * the given <code>pojoType</code>.
    * 
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#getDescriptor(java.lang.Class)
    * 
    * @param <POJO> is the templated type of the <code>pojoType</code>.
-   * @param pojoType is the {@link GenericType} reflecting the
-   *        {@link net.sf.mmm.util.pojo.api.Pojo}.
-   * @return the descriptor used to get information about the properties of the
-   *         according {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * @param pojoType is the {@link GenericType} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * @return the descriptor used to get information about the properties of the according
+   *         {@link net.sf.mmm.util.pojo.api.Pojo}.
    */
   protected abstract <POJO> PojoDescriptorImpl<POJO> createDescriptor(GenericType<POJO> pojoType);
 

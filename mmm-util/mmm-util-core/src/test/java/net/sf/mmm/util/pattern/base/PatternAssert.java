@@ -15,8 +15,8 @@ import org.junit.Assert;
 public class PatternAssert {
 
   /**
-   * Asserts that <code>string</code> is
-   * {@link java.util.regex.Matcher#matches() matching} <code>pattern</code>.
+   * Asserts that <code>string</code> is {@link java.util.regex.Matcher#matches() matching}
+   * <code>pattern</code>.
    * 
    * @param pattern is the {@link Pattern}.
    * @param string is the string to match.
@@ -28,16 +28,16 @@ public class PatternAssert {
   }
 
   /**
-   * Asserts that <code>string</code> is NOT
-   * {@link java.util.regex.Matcher#matches() matching} <code>pattern</code>.
+   * Asserts that <code>string</code> is NOT {@link java.util.regex.Matcher#matches() matching}
+   * <code>pattern</code>.
    * 
    * @param pattern is the {@link Pattern}.
    * @param string is the string that should NOT match.
    */
   public static void assertMatchesNot(Pattern pattern, String string) {
 
-    Assert.assertFalse("String '" + string + "' should NOT match pattern '" + pattern.pattern()
-        + "'!", pattern.matcher(string).matches());
+    Assert.assertFalse("String '" + string + "' should NOT match pattern '" + pattern.pattern() + "'!", pattern
+        .matcher(string).matches());
   }
 
 }

@@ -11,10 +11,8 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is the abstract implementation of
- * {@link net.sf.mmm.util.nls.api.NlsMessage} with the basic features.<br>
- * You should extend this class whenever suitable to implement
- * {@link net.sf.mmm.util.nls.api.NlsMessage}.
+ * This is the abstract implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} with the basic features.<br>
+ * You should extend this class whenever suitable to implement {@link net.sf.mmm.util.nls.api.NlsMessage}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -33,10 +31,9 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
   /**
    * The constructor.
    * 
-   * @param template is the {@link NlsTemplate} for the
-   *        {@link #getInternationalizedMessage() raw message}.
-   * @param messageArguments are the {@link #getArgument(String) arguments}
-   *        filled into the message after nationalization.
+   * @param template is the {@link NlsTemplate} for the {@link #getInternationalizedMessage() raw message}.
+   * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
+   *        nationalization.
    */
   public BasicNlsMessage(NlsTemplate template, Map<String, Object> messageArguments) {
 
@@ -54,10 +51,9 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is the
-   *        {@link #getInternationalizedMessage() internationalized message}.
-   * @param messageArguments are the {@link #getArgument(String) arguments}
-   *        filled into the message after nationalization.
+   * @param internationalizedMessage is the {@link #getInternationalizedMessage() internationalized message}.
+   * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
+   *        nationalization.
    */
   public BasicNlsMessage(String internationalizedMessage, Map<String, Object> messageArguments) {
 
@@ -112,8 +108,8 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
    * This method gets the {@link NlsTemplate} of this message.
    * 
    * @param resolver is the {@link NlsTemplateResolver} used to
-   *        {@link NlsTemplateResolver#resolveTemplate(String) resolve} the
-   *        {@link NlsTemplate} if NOT yet available.
+   *        {@link NlsTemplateResolver#resolveTemplate(String) resolve} the {@link NlsTemplate} if NOT yet
+   *        available.
    * @return the text the {@link NlsTemplate}.
    */
   public NlsTemplate getTemplate(NlsTemplateResolver resolver) {

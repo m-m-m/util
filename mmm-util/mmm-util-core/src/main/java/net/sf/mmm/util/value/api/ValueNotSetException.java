@@ -19,10 +19,9 @@ public class ValueNotSetException extends ValueException {
   /**
    * The constructor.
    * 
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier.
    */
   public ValueNotSetException(Object valueSource) {
 

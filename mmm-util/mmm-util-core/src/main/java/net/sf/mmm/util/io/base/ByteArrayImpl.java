@@ -27,8 +27,7 @@ public class ByteArrayImpl extends AbstractByteArray {
   /**
    * The constructor.
    * 
-   * @param capacity is the <code>length</code> of the internal
-   *        {@link #getBytes() buffer}.
+   * @param capacity is the <code>length</code> of the internal {@link #getBytes() buffer}.
    */
   public ByteArrayImpl(int capacity) {
 
@@ -49,8 +48,8 @@ public class ByteArrayImpl extends AbstractByteArray {
    * The constructor.
    * 
    * @param buffer is the internal {@link #getBytes() buffer}.
-   * @param startIndex is the {@link #getCurrentIndex() current index} as well
-   *        as the {@link #getMinimumIndex() minimum index}.
+   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the
+   *        {@link #getMinimumIndex() minimum index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.
    */
   public ByteArrayImpl(byte[] buffer, int startIndex, int maximumIndex) {
@@ -97,14 +96,13 @@ public class ByteArrayImpl extends AbstractByteArray {
   }
 
   /**
-   * This method sets the {@link #getMaximumIndex() maximumIndex}. This may be
-   * useful if the buffer should be reused.<br>
+   * This method sets the {@link #getMaximumIndex() maximumIndex}. This may be useful if the buffer should be
+   * reused.<br>
    * <b>ATTENTION:</b><br>
    * Be very careful and only use this method if you know what you are doing!
    * 
-   * @param maximumIndex is the {@link #getMaximumIndex() maximumIndex} to set.
-   *        It has to be in the range from <code>0</code> (
-   *        <code>{@link #getCurrentIndex() currentIndex} - 1</code>) to
+   * @param maximumIndex is the {@link #getMaximumIndex() maximumIndex} to set. It has to be in the range from
+   *        <code>0</code> ( <code>{@link #getCurrentIndex() currentIndex} - 1</code>) to
    *        <code>{@link #getBytes()}.length</code>.
    */
   protected void setMaximumIndex(int maximumIndex) {

@@ -33,12 +33,11 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  */
 @Singleton
 @Named
-public class CollectionReflectionUtilImpl extends AbstractLoggableComponent implements
-    CollectionReflectionUtil {
+public class CollectionReflectionUtilImpl extends AbstractLoggableComponent implements CollectionReflectionUtil {
 
   /**
-   * The default value for the maximum growth of the {@link #getSize(Object)
-   * size} of an array or {@link List}: {@value}
+   * The default value for the maximum growth of the {@link #getSize(Object) size} of an array or {@link List}
+   * : {@value}
    */
   public static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
 
@@ -61,17 +60,13 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method gets the singleton instance of this
-   * {@link CollectionReflectionUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This method gets the singleton instance of this {@link CollectionReflectionUtilImpl}.<br>
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -112,8 +107,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * This method sets the {@link CollectionFactoryManager} instance to use.
    * 
-   * @param collectionFactoryManager is the {@link CollectionFactoryManager}
-   *        instance.
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager} instance.
    */
   @Inject
   public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
@@ -214,8 +208,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
-  public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow)
-      throws NlsIllegalArgumentException {
+  public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsNullPointerException("arrayOrList");
@@ -263,8 +256,8 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
    * {@inheritDoc}
    */
   @SuppressWarnings({ "rawtypes", "unchecked", "null" })
-  public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver,
-      int maximumGrowth) throws NlsIllegalArgumentException {
+  public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver, int maximumGrowth)
+      throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsNullPointerException("arrayOrList");

@@ -24,10 +24,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * This class allows to parse a list of including and excluding regex
- * {@link PatternFilterRule}s from XML and build an according
- * {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded
- * in the order of their appearance in the list.<br>
+ * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s from XML and
+ * build an according {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order
+ * of their appearance in the list.<br>
  * Here is an example of a configuration (rule list) parsed by this class:
  * 
  * <pre>
@@ -59,8 +58,7 @@ public class FilterRuleChainXmlParser {
   public static final String XML_ATR_CHAIN_ID = "id";
 
   /**
-   * The name of the XML attribute for the parent of a {@link #XML_TAG_CHAIN
-   * chain}.
+   * The name of the XML attribute for the parent of a {@link #XML_TAG_CHAIN chain}.
    */
   public static final String XML_ATR_CHAIN_PARENT = "parent";
 
@@ -74,8 +72,7 @@ public class FilterRuleChainXmlParser {
   public static final String XML_TAG_RULE_EXCLUDE = "exclude";
 
   /**
-   * The name of the XML attribute for the pattern of a (include or exclude)
-   * rule.
+   * The name of the XML attribute for the pattern of a (include or exclude) rule.
    */
   public static final String XML_ATR_RULE_PATTERN = "pattern";
 
@@ -102,14 +99,13 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses the chain from the given <code>inStream</code>. The XML
-   * contained in <code>inStream</code> needs to contain the chain rules as
-   * child-nodes of the {@link Document#getDocumentElement() root-element}. The
-   * name of the root-element is ignored (use e.g. "chain").
+   * This method parses the chain from the given <code>inStream</code>. The XML contained in
+   * <code>inStream</code> needs to contain the chain rules as child-nodes of the
+   * {@link Document#getDocumentElement() root-element}. The name of the root-element is ignored (use e.g.
+   * "chain").
    * 
-   * @param inStream is the stream containing the XML to parse. It will be
-   *        closed by this method (on success as well as in an exceptional
-   *        state).
+   * @param inStream is the stream containing the XML to parse. It will be closed by this method (on success
+   *        as well as in an exceptional state).
    * @return the parsed filter rule.
    * @throws IOException if an input/output error occurred.
    * @throws SAXException if the <code>inStream</code> contains invalid XML.
@@ -127,13 +123,11 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a map of {@link FilterRuleChain chain}s given by
-   * <code>xmlElement</code>.
+   * This method parses a map of {@link FilterRuleChain chain}s given by <code>xmlElement</code>.
    * 
-   * @param xmlElement is the XML element containing the filter-chains (see
-   *        {@link #XML_TAG_CHAIN}) as children and puts them into a map with
-   *        the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or
-   *        attributes are simply ignored.
+   * @param xmlElement is the XML element containing the filter-chains (see {@link #XML_TAG_CHAIN}) as
+   *        children and puts them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child
+   *        elements or attributes are simply ignored.
    * @return the map of all parsed chains.
    */
   public Map<String, FilterRuleChain<String>> parseChains(Element xmlElement) {
@@ -151,8 +145,8 @@ public class FilterRuleChainXmlParser {
             String parentId = element.getAttribute(XML_ATR_CHAIN_PARENT);
             parent = chainMap.get(parentId);
             if (parent == null) {
-              throw new IllegalArgumentException("Illegal parent (" + parentId + ") in chain ("
-                  + id + "): parent chain has to be defined before being referenced!");
+              throw new IllegalArgumentException("Illegal parent (" + parentId + ") in chain (" + id
+                  + "): parent chain has to be defined before being referenced!");
             }
           }
           FilterRuleChain<String> chain = parseChain(element, parent);
@@ -167,14 +161,12 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a {@link FilterRuleChain chain} given by
-   * <code>xmlElement</code>.
+   * This method parses a {@link FilterRuleChain chain} given by <code>xmlElement</code>.
    * 
    * @see #XML_TAG_CHAIN
    * 
-   * @param xmlElement is the XML element containing the filter-rules (see
-   *        {@link #XML_TAG_RULE_INCLUDE} and {@link #XML_TAG_RULE_EXCLUDE}) as
-   *        children.
+   * @param xmlElement is the XML element containing the filter-rules (see {@link #XML_TAG_RULE_INCLUDE} and
+   *        {@link #XML_TAG_RULE_EXCLUDE}) as children.
    * @return the parsed filter-chain.
    */
   public FilterRuleChain<String> parseChain(Element xmlElement) {
@@ -183,20 +175,17 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a {@link FilterRuleChain chain} given as XML via
-   * <code>xmlElement</code>.
+   * This method parses a {@link FilterRuleChain chain} given as XML via <code>xmlElement</code>.
    * 
-   * @param xmlElement is the XML element containing the filter-rules (see
-   *        {@link #XML_TAG_RULE_INCLUDE} and {@link #XML_TAG_RULE_EXCLUDE}) as
-   *        children. Unknown child elements or attributes are simply ignored.
-   * @param parent is the parent chain that is to be extended by the chain to
-   *        parse.
+   * @param xmlElement is the XML element containing the filter-rules (see {@link #XML_TAG_RULE_INCLUDE} and
+   *        {@link #XML_TAG_RULE_EXCLUDE}) as children. Unknown child elements or attributes are simply
+   *        ignored.
+   * @param parent is the parent chain that is to be extended by the chain to parse.
    * @return the parsed filter-chain.
    */
   public FilterRuleChain<String> parseChain(Element xmlElement, FilterRuleChain<String> parent) {
 
-    boolean defaultResult = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_CHAIN_DEFAULT,
-        true);
+    boolean defaultResult = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_CHAIN_DEFAULT, true);
     List<FilterRule<String>> rules = new ArrayList<FilterRule<String>>();
     NodeList childList = xmlElement.getChildNodes();
     for (int childIndex = 0; childIndex < childList.getLength(); childIndex++) {
@@ -224,8 +213,7 @@ public class FilterRuleChainXmlParser {
       }
     }
     if (rules.size() == 0) {
-      throw new IllegalArgumentException("No rule found in element '" + xmlElement.getTagName()
-          + "'!");
+      throw new IllegalArgumentException("No rule found in element '" + xmlElement.getTagName() + "'!");
     }
     FilterRule<String>[] ruleArray = rules.toArray(new FilterRule[rules.size()]);
     FilterRuleChain<String> chain;

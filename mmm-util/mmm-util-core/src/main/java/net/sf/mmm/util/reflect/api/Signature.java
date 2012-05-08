@@ -8,9 +8,9 @@ import java.lang.reflect.Method;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This class represents a {@link java.lang.reflect.Method#getParameterTypes()
- * "method signature"}. It is a container for a {@link java.lang.Class} array
- * and can be used as {@link java.util.Map#get(java.lang.Object) hash-key}.
+ * This class represents a {@link java.lang.reflect.Method#getParameterTypes() "method signature"}. It is a
+ * container for a {@link java.lang.Class} array and can be used as
+ * {@link java.util.Map#get(java.lang.Object) hash-key}.
  * 
  * @see #isApplicable(Signature)
  * 
@@ -70,16 +70,14 @@ public class Signature {
   }
 
   /**
-   * This method determines if the given signature is applicable for this
-   * signature. Here applicable means that if this is the signature of a method,
-   * that method could be called with arguments of the given signature
-   * <code>s</code>.<br>
-   * Only call this method if this signature does NOT {@link #getType(int)
-   * contain} <code>null</code>.
+   * This method determines if the given signature is applicable for this signature. Here applicable means
+   * that if this is the signature of a method, that method could be called with arguments of the given
+   * signature <code>s</code>.<br>
+   * Only call this method if this signature does NOT {@link #getType(int) contain} <code>null</code>.
    * 
    * @param s is the signature to test.
-   * @return <code>true</code> if the given signature is applicable for this
-   *         signature, <code>false</code> otherwise.
+   * @return <code>true</code> if the given signature is applicable for this signature, <code>false</code>
+   *         otherwise.
    */
   public boolean isApplicable(Signature s) {
 
@@ -112,12 +110,10 @@ public class Signature {
   }
 
   /**
-   * This method gets the {@link Class type} of this signature at the given
-   * position.
+   * This method gets the {@link Class type} of this signature at the given position.
    * 
-   * @param position is the index of the requested type. This value must be in
-   *        the range from <code>0</code> to
-   *        <code>{@link #getTypeCount()} - 1</code>.
+   * @param position is the index of the requested type. This value must be in the range from <code>0</code>
+   *        to <code>{@link #getTypeCount()} - 1</code>.
    * @return the {@link Class type} at the given index.
    */
   public Class<?> getType(int position) {

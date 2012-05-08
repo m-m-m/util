@@ -6,13 +6,12 @@ package net.sf.mmm.util.lang.base;
 import net.sf.mmm.util.lang.api.CharIterator;
 
 /**
- * This is an abstract base implementation of the {@link CharIterator}
- * interface. It allows to implement a lookahead {@link CharIterator} easier:<br>
- * Simply extend this class and implement {@link #findNext()}. From your
- * constructor or initializer call {@link #findFirst()}.<br>
+ * This is an abstract base implementation of the {@link CharIterator} interface. It allows to implement a
+ * lookahead {@link CharIterator} easier:<br>
+ * Simply extend this class and implement {@link #findNext()}. From your constructor or initializer call
+ * {@link #findFirst()}.<br>
  * <b>ATTENTION:</b><br>
- * Do NOT forget to call {@link #findFirst()} from your constructor or your
- * iterator will always be empty.
+ * Do NOT forget to call {@link #findFirst()} from your constructor or your iterator will always be empty.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -32,8 +31,7 @@ public abstract class AbstractCharIterator implements CharIterator {
   }
 
   /**
-   * This method has to be called from the constructor of the implementing
-   * class.
+   * This method has to be called from the constructor of the implementing class.
    */
   protected final void findFirst() {
 

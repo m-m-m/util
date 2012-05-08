@@ -10,17 +10,16 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
- * This is an implementation of the {@link PojoPropertyAccessorNonArg} acting as
- * as a {@link PojoPropertyAccessorNonArgMode#GET getter} that
- * {@link #getDelegate() delegates} to a
+ * This is an implementation of the {@link PojoPropertyAccessorNonArg} acting as as a
+ * {@link PojoPropertyAccessorNonArgMode#GET getter} that {@link #getDelegate() delegates} to a
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED
  * indexed-getter} using a fixed index.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorProxyGetByIndex extends AbstractPojoPropertyAccessorProxy
-    implements PojoPropertyAccessorNonArg {
+public class PojoPropertyAccessorProxyGetByIndex extends AbstractPojoPropertyAccessorProxy implements
+    PojoPropertyAccessorNonArg {
 
   /** @see #getDelegate() */
   private final PojoPropertyAccessorIndexedNonArg delegate;

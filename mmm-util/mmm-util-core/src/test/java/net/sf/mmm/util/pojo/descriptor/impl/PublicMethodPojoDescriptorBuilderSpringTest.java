@@ -8,14 +8,12 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 
 /**
- * This is the test-case for
- * {@link PojoDescriptorBuilderFactory#createPublicMethodDescriptorBuilder()}
- * using spring.
+ * This is the test-case for {@link PojoDescriptorBuilderFactory#createPublicMethodDescriptorBuilder()} using
+ * spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PublicMethodPojoDescriptorBuilderSpringTest extends
-    PublicMethodPojoDescriptorBuilderTest {
+public class PublicMethodPojoDescriptorBuilderSpringTest extends PublicMethodPojoDescriptorBuilderTest {
 
   /**
    * {@inheritDoc}

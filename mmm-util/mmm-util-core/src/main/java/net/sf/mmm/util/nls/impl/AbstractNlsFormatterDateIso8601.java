@@ -20,8 +20,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
- * {@link Date}s.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for {@link Date}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -107,8 +106,8 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsFormatt
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     Calendar calendar = null;
     if (object != null) {

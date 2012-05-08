@@ -8,8 +8,7 @@ import java.util.Deque;
 import net.sf.mmm.util.collection.api.DequeFactory;
 
 /**
- * This is the abstract base implementation of the {@link DequeFactory}
- * interface.
+ * This is the abstract base implementation of the {@link DequeFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

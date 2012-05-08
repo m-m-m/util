@@ -52,8 +52,7 @@ public class AnnotationUtilTest {
 
     // annotation target type
     assertTrue(util.isAnnotationForType(MyAnnotation.class, ElementType.TYPE));
-    assertTrue(getAnnotationUtil()
-        .isAnnotationForType(Inherited.class, ElementType.ANNOTATION_TYPE));
+    assertTrue(getAnnotationUtil().isAnnotationForType(Inherited.class, ElementType.ANNOTATION_TYPE));
     assertFalse(util.isAnnotationForType(Inherited.class, ElementType.TYPE));
 
     // annotation inheritance

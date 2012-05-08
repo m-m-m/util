@@ -37,8 +37,7 @@ import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This class is a collection of utility functions for {@link File} handling and
- * manipulation.
+ * This class is a collection of utility functions for {@link File} handling and manipulation.
  * 
  * @see #getInstance()
  * 
@@ -53,14 +52,12 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   private static final String HOME_ROOT = "/root";
 
   /**
-   * The prefix of an UNC (Uniform Naming Convention) path (e.g.
-   * <code>\\10.0.0.1\share</code>).
+   * The prefix of an UNC (Uniform Naming Convention) path (e.g. <code>\\10.0.0.1\share</code>).
    */
   private static final String UNC_PATH_PREFIX = "\\\\";
 
   /**
-   * The {@link Pattern} for an URL schema such as <code>http://</code> or
-   * <code>ftp://</code>.
+   * The {@link Pattern} for an URL schema such as <code>http://</code> or <code>ftp://</code>.
    */
   private static final Pattern URL_SCHEMA_PATTERN = Pattern.compile("([a-zA-Z]+://)(.*)");
 
@@ -95,15 +92,12 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /**
    * This method gets the singleton instance of this {@link FileUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -151,8 +145,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This method gets the {@link StringUtilImpl} that is used by this
-   * {@link FileUtilImpl}.
+   * This method gets the {@link StringUtilImpl} that is used by this {@link FileUtilImpl}.
    * 
    * @return the stringUtil the {@link StringUtilImpl}.
    */
@@ -162,8 +155,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This method sets the {@link #getStringUtil() StringUtil}. It can only be
-   * set once during initialization.
+   * This method sets the {@link #getStringUtil() StringUtil}. It can only be set once during initialization.
    * 
    * @param stringUtil the stringUtil to set.
    * @throws AlreadyInitializedException if the value has already been set.
@@ -184,8 +176,8 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This method set the {@link #getUserHomeDirectory() users home directory}.
-   * It can only be set once during initialization.
+   * This method set the {@link #getUserHomeDirectory() users home directory}. It can only be set once during
+   * initialization.
    * 
    * @param userHome is the home directory of the user.
    * @throws AlreadyInitializedException if the value has already been set.
@@ -544,17 +536,15 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This method copies the file or directory given by <code>source</code> into
-   * the given <code>destination</code>.<br>
+   * This method copies the file or directory given by <code>source</code> into the given
+   * <code>destination</code>.<br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of <code>source</code> a new
-   * {@link File#getName() name}, the <code>destination</code> has to point to
-   * the final place where the copy should appear rather than the directory
-   * where the copy will be located in.<br>
+   * In order to allow giving the copy of <code>source</code> a new {@link File#getName() name}, the
+   * <code>destination</code> has to point to the final place where the copy should appear rather than the
+   * directory where the copy will be located in.<br>
    * <br>
-   * E.g. the following code copies the folder "foo" located in "/usr/local"
-   * recursively to the directory "/tmp". The copy will have the same name
-   * "foo".
+   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
+   * "/tmp". The copy will have the same name "foo".
    * 
    * <pre>
    * {@link File} source = new {@link File}("/usr/local/foo");
@@ -564,10 +554,9 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
    * 
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
-   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File)
-   *        decides} which files should be copied. Only
-   *        {@link FileFilter#accept(File) accepted} files and directories are
-   *        copied, others will be ignored.
+   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be
+   *        copied. Only {@link FileFilter#accept(File) accepted} files and directories are copied, others
+   *        will be ignored.
    */
   private void copyRecursive(File source, File destination, FileFilter filter) {
 
@@ -696,27 +685,23 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This method adds all files matching to the given <code>path</code> and
-   * <code>fileType</code> to the <code>list</code>. The <code>path</code> may
-   * contain {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
+   * This method adds all files matching to the given <code>path</code> and <code>fileType</code> to the
+   * <code>list</code>. The <code>path</code> may contain
+   * {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
    * 
-   * @param cwd is the current working directory and should therefore point to
-   *        an existing {@link File#isDirectory() directory}. If the given
-   *        <code>path</code> is NOT {@link File#isAbsolute() absolute} it is
-   *        interpreted relative to this directory.
-   * @param segments is the path the files to collect must match. If this path
-   *        is NOT {@link File#isAbsolute() absolute} it is interpreted relative
-   *        to the {@link File#isDirectory() directory} given by
-   *        <code>cwd</code>.
-   * @param segmentIndex is the current index in <code>pathChars</code> for the
-   *        collection process.
-   * @param fileType is the type of the files to collect or <code>null</code> if
-   *        files of any type are acceptable.
-   * @param list is the list where to {@link List#add(Object) add} the collected
-   *        files.
+   * @param cwd is the current working directory and should therefore point to an existing
+   *        {@link File#isDirectory() directory}. If the given <code>path</code> is NOT
+   *        {@link File#isAbsolute() absolute} it is interpreted relative to this directory.
+   * @param segments is the path the files to collect must match. If this path is NOT
+   *        {@link File#isAbsolute() absolute} it is interpreted relative to the {@link File#isDirectory()
+   *        directory} given by <code>cwd</code>.
+   * @param segmentIndex is the current index in <code>pathChars</code> for the collection process.
+   * @param fileType is the type of the files to collect or <code>null</code> if files of any type are
+   *        acceptable.
+   * @param list is the list where to {@link List#add(Object) add} the collected files.
    */
-  private void collectMatchingFiles(File cwd, PathSegment[] segments, int segmentIndex,
-      FileType fileType, List<File> list) {
+  private void collectMatchingFiles(File cwd, PathSegment[] segments, int segmentIndex, FileType fileType,
+      List<File> list) {
 
     boolean lastSegment;
     if ((segmentIndex + 1) < segments.length) {
@@ -762,16 +747,15 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This method tokenized the given <code>path</code> by adding
-   * {@link PathSegment}s to the given <code>list</code>.
+   * This method tokenized the given <code>path</code> by adding {@link PathSegment}s to the given
+   * <code>list</code>.
    * 
    * @param path is the path to tokenized
    * @param list is the list where to add the segment tokens.
-   * @param patternCompiler is the {@link PatternCompiler} used to compile the
-   *        individual {@link PathSegment segments} of the given
-   *        <code>path</code>.
-   * @return <code>true</code> if the path is a glob-pattern (contains '*' or
-   *         '?'), <code>false</code> otherwise.
+   * @param patternCompiler is the {@link PatternCompiler} used to compile the individual {@link PathSegment
+   *        segments} of the given <code>path</code>.
+   * @return <code>true</code> if the path is a glob-pattern (contains '*' or '?'), <code>false</code>
+   *         otherwise.
    */
   private boolean tokenizePath(String path, List<PathSegment> list, PatternCompiler patternCompiler) {
 
@@ -803,8 +787,8 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   }
 
   /**
-   * This inner class represents a segment of a glob-matching path. It is a
-   * simple container for a string and a pattern.
+   * This inner class represents a segment of a glob-matching path. It is a simple container for a string and
+   * a pattern.
    */
   protected static class PathSegment {
 
@@ -828,8 +812,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
      * The constructor.
      * 
      * @param string is the {@link #getString() string} of the segment.
-     * @param pattern is the <code>string</code> parsed as {@link #getPattern()
-     *        pattern}.
+     * @param pattern is the <code>string</code> parsed as {@link #getPattern() pattern}.
      */
     public PathSegment(String string, Pattern pattern) {
 
@@ -839,8 +822,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
     }
 
     /**
-     * This method gets the segment as raw string. This may be a
-     * {@link #getPattern() pattern}.
+     * This method gets the segment as raw string. This may be a {@link #getPattern() pattern}.
      * 
      * @return the string.
      */
@@ -852,8 +834,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
     /**
      * This method gets the pattern.
      * 
-     * @return the pattern or <code>null</code> if the {@link #getString()
-     *         string} is to be matched exactly.
+     * @return the pattern or <code>null</code> if the {@link #getString() string} is to be matched exactly.
      */
     public Pattern getPattern() {
 

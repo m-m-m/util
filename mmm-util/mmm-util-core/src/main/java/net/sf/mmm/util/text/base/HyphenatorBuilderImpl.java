@@ -33,8 +33,7 @@ import net.sf.mmm.util.xml.base.StaxUtilImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
- * The implementation of the {@link net.sf.mmm.util.text.api.HyphenatorBuilder}
- * interface.
+ * The implementation of the {@link net.sf.mmm.util.text.api.HyphenatorBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -106,17 +105,13 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   }
 
   /**
-   * This method gets the singleton instance of this
-   * {@link HyphenatorBuilderImpl}.<br>
-   * This design is the best compromise between easy access (via this
-   * indirection you have direct, static access to all offered functionality)
-   * and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and
-   * construct new instances via the container-framework of your choice (like
-   * plexus, pico, springframework, etc.). To wire up the dependent components
-   * everything is properly annotated using common-annotations (JSR-250). If
-   * your container does NOT support this, you should consider using a better
-   * one.
+   * This method gets the singleton instance of this {@link HyphenatorBuilderImpl}.<br>
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
+   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
+   * container does NOT support this, you should consider using a better one.
    * 
    * @return the singleton instance.
    */
@@ -150,8 +145,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   }
 
   /**
-   * This method creates a new {@link Hyphenator} instance from the
-   * XML-configuration identified by the given {@link DataResource}.
+   * This method creates a new {@link Hyphenator} instance from the XML-configuration identified by the given
+   * {@link DataResource}.
    * 
    * @param locale is the {@link Hyphenator#getLocale() locale}.
    * @param resource is the {@link DataResource} with the XML-configuration.
@@ -214,8 +209,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
           throw new NlsIllegalStateException();
         }
         reader.close();
-        HyphenatorImpl hyphenator = new HyphenatorImpl(locale, hyphen, patterns, exceptions,
-            this.stringHasher, this.stringUtil);
+        HyphenatorImpl hyphenator = new HyphenatorImpl(locale, hyphen, patterns, exceptions, this.stringHasher,
+            this.stringUtil);
         hyphenator.initialize();
         return hyphenator;
       } finally {
@@ -231,9 +226,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   }
 
   /**
-   * This method parses a list of strings enclosed by elements with the given
-   * <code>elementName</code> until the current element ends. E.g. if you have
-   * this XML:
+   * This method parses a list of strings enclosed by elements with the given <code>elementName</code> until
+   * the current element ends. E.g. if you have this XML:
    * 
    * <pre>
    * &lt;foo>
@@ -243,18 +237,15 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
    * &lt;/foo>
    * </pre>
    * 
-   * And your XML-reader is pointing after the opening &lt;foo> and you call
-   * this method, you will get a list with "text1", "text2", and "text3".
+   * And your XML-reader is pointing after the opening &lt;foo> and you call this method, you will get a list
+   * with "text1", "text2", and "text3".
    * 
-   * @param reader is the XMLEventReader pointing after the {@link StartElement}
-   *        of the surrounding element.
+   * @param reader is the XMLEventReader pointing after the {@link StartElement} of the surrounding element.
    * @param elementName is the name of the element containing a single string.
-   * @return the List of strings encountered until the surrounding element was
-   *         closed.
+   * @return the List of strings encountered until the surrounding element was closed.
    * @throws XMLStreamException if caused by the reader.
    */
-  private List<String> parseStringList(XMLEventReader reader, QName elementName)
-      throws XMLStreamException {
+  private List<String> parseStringList(XMLEventReader reader, QName elementName) throws XMLStreamException {
 
     List<String> result = new ArrayList<String>();
     XMLEvent event = this.staxUtil.nextElement(reader);

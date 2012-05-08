@@ -23,9 +23,8 @@ public enum FileType {
    * This method determines the type of a file.
    * 
    * @param file is the file to check.
-   * @return {@link #DIRECTORY} if the given <code>file</code> is a
-   *         {@link File#isDirectory() directory}, {@link #FILE} for a
-   *         {@link File#isFile() plain file} and <code>null</code> otherwise.
+   * @return {@link #DIRECTORY} if the given <code>file</code> is a {@link File#isDirectory() directory},
+   *         {@link #FILE} for a {@link File#isFile() plain file} and <code>null</code> otherwise.
    */
   public static FileType getType(File file) {
 

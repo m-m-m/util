@@ -9,8 +9,7 @@ import java.util.TreeMap;
 import net.sf.mmm.util.collection.api.SortedMapFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.SortedMapFactory} interface that
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.SortedMapFactory} interface that
  * creates instances of {@link TreeMap}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

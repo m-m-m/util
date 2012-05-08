@@ -10,10 +10,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * {@link ComponentSpecification} is used to annotate the specification (should
- * be an interface) of a component. It acts only for the purpose of
- * documentation and has no functional impact. However it will say that you can
- * get one (or {@link #plugin() multiple}) instance(s) of this specification via
+ * {@link ComponentSpecification} is used to annotate the specification (should be an interface) of a
+ * component. It acts only for the purpose of documentation and has no functional impact. However it will say
+ * that you can get one (or {@link #plugin() multiple}) instance(s) of this specification via
  * {@link javax.inject.Inject injection}.<br/>
  * If you find this:
  * 
@@ -44,9 +43,9 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
- * For simplicity all implementations of such component in this project have to
- * be {@link javax.inject.Singleton stateless} and thread-safe. Otherwise this
- * has to be documented in an explicit WARNING.
+ * For simplicity all implementations of such component in this project have to be
+ * {@link javax.inject.Singleton stateless} and thread-safe. Otherwise this has to be documented in an
+ * explicit WARNING.
  * 
  * @see org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 
@@ -59,10 +58,9 @@ import java.lang.annotation.Target;
 public @interface ComponentSpecification {
 
   /**
-   * <code>true</code> if multiple implementations of this "component" are
-   * (potentially) expected at a time. In this case it is typically some sort of
-   * plugin that should be {@link javax.inject.Inject injected} to a list of the
-   * annotated type.
+   * <code>true</code> if multiple implementations of this "component" are (potentially) expected at a time.
+   * In this case it is typically some sort of plugin that should be {@link javax.inject.Inject injected} to a
+   * list of the annotated type.
    */
   boolean plugin() default false;
 

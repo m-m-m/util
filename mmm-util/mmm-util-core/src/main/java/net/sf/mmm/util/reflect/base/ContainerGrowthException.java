@@ -7,9 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link ContainerGrowthException} is thrown if a container should grow
- * (increase its size) but this failed. Here a container stands for an array
- * (that can never grow) or a {@link java.util.Collection}.
+ * A {@link ContainerGrowthException} is thrown if a container should grow (increase its size) but this
+ * failed. Here a container stands for an array (that can never grow) or a {@link java.util.Collection}.
  * 
  * @see ReflectionUtilImpl#toType(String)
  * 
@@ -29,8 +28,8 @@ public class ContainerGrowthException extends NlsRuntimeException {
    */
   public ContainerGrowthException(int size, int max) {
 
-    super(NlsBundleUtilCore.ERR_INCREASE_EXCEEDS_MAX_GROWTH, toMap(KEY_SIZE, Integer.valueOf(size),
-        KEY_MAX, Integer.valueOf(max)));
+    super(NlsBundleUtilCore.ERR_INCREASE_EXCEEDS_MAX_GROWTH, toMap(KEY_SIZE, Integer.valueOf(size), KEY_MAX,
+        Integer.valueOf(max)));
   }
 
 }

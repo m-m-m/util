@@ -18,13 +18,12 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is a class that stores {@link NlsMessage messages} and simplifies to
- * resolve them.<br/>
+ * This is a class that stores {@link NlsMessage messages} and simplifies to resolve them.<br/>
  * <b>ATTENTION:</b><br>
- * This class collects instances {@link NlsMessage} and {@link NlsTemplate} to
- * speed up repetitive translations. So only use this class for a dedicated set
- * of constant {@link #localize(Locale, String) internationalized messages} to
- * avoid memory leaks or supply an according {@link MapFactory} at construction.
+ * This class collects instances {@link NlsMessage} and {@link NlsTemplate} to speed up repetitive
+ * translations. So only use this class for a dedicated set of constant {@link #localize(Locale, String)
+ * internationalized messages} to avoid memory leaks or supply an according {@link MapFactory} at
+ * construction.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -44,8 +43,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   private final Map<String, NlsMessage> messagesMap;
 
   /**
-   * The {@link Map} used to cache {@link #localize(Locale, String, Map)
-   * templates}.
+   * The {@link Map} used to cache {@link #localize(Locale, String, Map) templates}.
    */
   private final Map<String, NlsTemplate> templatesMap;
 
@@ -57,9 +55,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   /**
    * The constructor.
    * 
-   * @param bundleName is the default
-   *        {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName()
-   *        bundle-name}.
+   * @param bundleName is the default {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName() bundle-name}.
    */
   public NlsCachingLocalizer(String bundleName) {
 
@@ -69,14 +65,11 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   /**
    * The constructor.
    * 
-   * @param bundleName is the default
-   *        {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName()
-   *        bundle-name}.
+   * @param bundleName is the default {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName() bundle-name}.
    * @param messageFactory is the {@link NlsMessageFactory} instance.
    * @param templateResolver is the {@link NlsTemplateResolver} instance.
    */
-  public NlsCachingLocalizer(String bundleName, NlsMessageFactory messageFactory,
-      NlsTemplateResolver templateResolver) {
+  public NlsCachingLocalizer(String bundleName, NlsMessageFactory messageFactory, NlsTemplateResolver templateResolver) {
 
     this(bundleName, messageFactory, templateResolver, ConcurrentHashMapFactory.INSTANCE);
   }
@@ -84,17 +77,15 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   /**
    * The constructor.
    * 
-   * @param bundleName is the default
-   *        {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName()
-   *        bundle-name}.
+   * @param bundleName is the default {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName() bundle-name}.
    * @param messageFactory is the {@link NlsMessageFactory} instance.
    * @param templateResolver is the {@link NlsTemplateResolver} instance.
-   * @param mapFactory is the {@link MapFactory} used to create caches for the
-   *        the {@link NlsMessage messages} and {@link NlsTemplate templates}.
+   * @param mapFactory is the {@link MapFactory} used to create caches for the the {@link NlsMessage messages}
+   *        and {@link NlsTemplate templates}.
    */
   @SuppressWarnings("rawtypes")
-  public NlsCachingLocalizer(String bundleName, NlsMessageFactory messageFactory,
-      NlsTemplateResolver templateResolver, MapFactory<? extends Map> mapFactory) {
+  public NlsCachingLocalizer(String bundleName, NlsMessageFactory messageFactory, NlsTemplateResolver templateResolver,
+      MapFactory<? extends Map> mapFactory) {
 
     super();
     this.bundleName = bundleName;
@@ -105,16 +96,12 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   }
 
   /**
-   * This method parses the given <code>internationalizedMessage</code> as
-   * {@link NlsTemplate} in case it is given in the form
-   * <code>{&lt;BUNDLE&gt;#&lt;KEY&gt;}</code>.
+   * This method parses the given <code>internationalizedMessage</code> as {@link NlsTemplate} in case it is
+   * given in the form <code>{&lt;BUNDLE&gt;#&lt;KEY&gt;}</code>.
    * 
-   * @param internationalizedMessage is the template specified in the form
-   *        described above or the
-   *        {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
-   * @return the {@link NlsTemplate} if the
-   *         <code>internationalizedMessage</code> has the form described above
+   * @param internationalizedMessage is the template specified in the form described above or the
+   *        {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   * @return the {@link NlsTemplate} if the <code>internationalizedMessage</code> has the form described above
    *         or <code>null</code> otherwise.
    */
   protected NlsTemplate parseTemplate(String internationalizedMessage) {
@@ -134,8 +121,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   /**
    * {@inheritDoc}
    */
-  public String localize(Locale locale, String internationalizedMessage,
-      Map<String, Object> arguments) {
+  public String localize(Locale locale, String internationalizedMessage, Map<String, Object> arguments) {
 
     NlsTemplate template = this.templatesMap.get(internationalizedMessage);
     if (template == null) {

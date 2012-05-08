@@ -7,9 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.base.CliArgumentContainer;
 
 /**
- * A {@link CliArgumentReferenceMissingException} is thrown if a
- * {@link CliArgument#addCloseTo() referenced} {@link CliArgument argument} is
- * missing.
+ * A {@link CliArgumentReferenceMissingException} is thrown if a {@link CliArgument#addCloseTo() referenced}
+ * {@link CliArgument argument} is missing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -22,13 +21,13 @@ public class CliArgumentReferenceMissingException extends CliException {
   /**
    * The constructor.
    * 
-   * @param argumentContainer is the {@link CliArgumentContainer} with the
-   *        unresolved {@link CliArgument#addCloseTo() reference}.
+   * @param argumentContainer is the {@link CliArgumentContainer} with the unresolved
+   *        {@link CliArgument#addCloseTo() reference}.
    */
   public CliArgumentReferenceMissingException(CliArgumentContainer argumentContainer) {
 
-    super(NlsBundleUtilCore.ERR_CLI_ARGUMENT_REFERENCE_MISSING, toMap(KEY_KEY, argumentContainer
-        .getArgument().addCloseTo(), KEY_ARGUMENT, argumentContainer));
+    super(NlsBundleUtilCore.ERR_CLI_ARGUMENT_REFERENCE_MISSING, toMap(KEY_KEY, argumentContainer.getArgument()
+        .addCloseTo(), KEY_ARGUMENT, argumentContainer));
   }
 
 }

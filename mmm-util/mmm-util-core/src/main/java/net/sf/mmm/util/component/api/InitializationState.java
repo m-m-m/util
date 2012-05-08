@@ -4,10 +4,9 @@
 package net.sf.mmm.util.component.api;
 
 /**
- * This enum contains the available states of an initialization. The lifecycle
- * starts in state {@link #UNINITIALIZED}. At the beginning of the
- * initialization it switches to {@link #INITIALIZING} and if initialization has
- * completed it goes to {@link #INITIALIZED}.
+ * This enum contains the available states of an initialization. The lifecycle starts in state
+ * {@link #UNINITIALIZED}. At the beginning of the initialization it switches to {@link #INITIALIZING} and if
+ * initialization has completed it goes to {@link #INITIALIZED}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

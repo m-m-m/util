@@ -7,8 +7,8 @@ import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This is an implementation of {@link SimpleValueConverter} that returns the
- * unmodified value (identity conversion).
+ * This is an implementation of {@link SimpleValueConverter} that returns the unmodified value (identity
+ * conversion).
  * 
  * @param <V> is the generic type of the value.
  * 
@@ -32,8 +32,7 @@ public class SimpleValueConverterIdentity<V> implements SimpleValueConverter<V, 
   /**
    * {@inheritDoc}
    */
-  public <T extends V> T convert(V value, Object valueSource, Class<T> targetClass)
-      throws ValueException {
+  public <T extends V> T convert(V value, Object valueSource, Class<T> targetClass) throws ValueException {
 
     return targetClass.cast(value);
   }

@@ -27,10 +27,8 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE, toMap(KEY_VALUE, value, KEY_MIN, minimum,
-        KEY_MAX, maximum));
-    assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum
-        .doubleValue()));
+    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE, toMap(KEY_VALUE, value, KEY_MIN, minimum, KEY_MAX, maximum));
+    assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
   }
 
   /**
@@ -39,33 +37,30 @@ public class ValueOutOfRangeException extends ValueException {
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier.
    */
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE_SOURCE, addToMap(toMap(KEY_VALUE, value,
-        KEY_MIN, minimum, KEY_MAX, maximum), KEY_SOURCE, valueSource));
-    assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum
-        .doubleValue()));
+    super(NlsBundleUtilCore.ERR_VALUE_OUT_OF_RANGE_SOURCE, addToMap(
+        toMap(KEY_VALUE, value, KEY_MIN, minimum, KEY_MAX, maximum), KEY_SOURCE, valueSource));
+    assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
   }
 
   /**
-   * This method checks that the given <code>value</code> is in the inclusive
-   * range from <code>minimum</code> to <code>maximum</code>.
+   * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code>
+   * to <code>maximum</code>.
    * 
    * @param value is the value to check.
    * @param minimum is the minimum number allowed.
    * @param maximum is the maximum number allowed.
-   * @param valueSource describes the source of the value. This may be the
-   *        filename where the value was read from, an XPath where the value was
-   *        located in an XML document, etc. It is used in exceptions thrown if
-   *        something goes wrong. This will help to find the problem easier. It
-   *        may be <code>null</code> if there is no helpful source available.
-   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT
-   *         in the range from <code>minimum</code> to <code>maximum</code>.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier. It may be
+   *        <code>null</code> if there is no helpful source available.
+   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from
+   *         <code>minimum</code> to <code>maximum</code>.
    */
   public static void checkRange(Number value, Number minimum, Number maximum, Object valueSource)
       throws ValueOutOfRangeException {

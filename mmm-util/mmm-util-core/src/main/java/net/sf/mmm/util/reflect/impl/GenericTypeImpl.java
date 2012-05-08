@@ -19,8 +19,7 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
 /**
  * This is the implementation of the {@link GenericType} interface.
  * 
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper
- *        bound}.
+ * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -136,8 +135,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   }
 
   /**
-   * This method creates a new instance of this class. It may be overridden to
-   * create the appropriate sub-type.
+   * This method creates a new instance of this class. It may be overridden to create the appropriate
+   * sub-type.
    * 
    * @param genericType is the {@link #getType() value-type}.
    * @param genericDefiningType is the {@link #getDefiningType() defining-type}.
@@ -150,10 +149,9 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   }
 
   /**
-   * This method gets the most specific {@link Class} available by the type-safe
-   * analyzation of the given generic <code>type</code>. Unlike
-   * {@link #getClassBounds(Type)} this method resolves {@link TypeVariable}s
-   * with the proper type they have been bound with.<br>
+   * This method gets the most specific {@link Class} available by the type-safe analyzation of the given
+   * generic <code>type</code>. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable}
+   * s with the proper type they have been bound with.<br>
    * 
    * Examples: <br>
    * <table border="1">
@@ -167,8 +165,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * <td>E</td>
    * <td>{@link java.util.List}&lt;Foo&gt;</td>
    * <td>Foo</td>
-   * <td>E is a {@link TypeVariable} representing the generic return-type of the
-   * method {@link java.util.List#get(int)}</td>
+   * <td>E is a {@link TypeVariable} representing the generic return-type of the method
+   * {@link java.util.List#get(int)}</td>
    * </tr>
    * </table>
    * 
@@ -229,12 +227,10 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   }
 
   /**
-   * This method creates the {@link Class} reflecting an {@link Class#isArray()
-   * array} of the given
+   * This method creates the {@link Class} reflecting an {@link Class#isArray() array} of the given
    * <code>{@link Class#getComponentType() componentType}</code>.
    * 
-   * @param componentClass is the {@link Class#getComponentType() component
-   *        type}.
+   * @param componentClass is the {@link Class#getComponentType() component type}.
    * @return the according {@link Class#isArray() array}-class.
    */
   public Class<?> getArrayClass(Class<?> componentClass) {
@@ -329,8 +325,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     /**
      * The constructor.
      * 
-     * @param bound is the {@link Class} for {@link #getAssignmentClass()
-     *        assignment} and {@link #getRetrievalClass() retrieval}.
+     * @param bound is the {@link Class} for {@link #getAssignmentClass() assignment} and
+     *        {@link #getRetrievalClass() retrieval}.
      */
     public ClassBounds(Class<?> bound) {
 
@@ -340,10 +336,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     /**
      * The constructor.
      * 
-     * @param assignmentClass is the {@link #getAssignmentClass() assignment
-     *        class}.
-     * @param retrievalClass is the {@link #getRetrievalClass() retrieval class}
-     *        .
+     * @param assignmentClass is the {@link #getAssignmentClass() assignment class}.
+     * @param retrievalClass is the {@link #getRetrievalClass() retrieval class} .
      */
     public ClassBounds(Class<?> assignmentClass, Class<?> retrievalClass) {
 

@@ -13,12 +13,11 @@ import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This class is like a {@link Map} to
- * {@link #registerFormatter(NlsFormatter, String, String) register} and
+ * This class is like a {@link Map} to {@link #registerFormatter(NlsFormatter, String, String) register} and
  * {@link #getFormatter(String, String) retrieve} {@link NlsFormatter}s.<br>
  * <b>ATTENTION:</b><br>
- * The {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default
- * formatter} is NOT stored in this map.
+ * The {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default formatter} is NOT stored in
+ * this map.
  * 
  * @see net.sf.mmm.util.nls.impl.ConfiguredNlsFormatterMap
  * 
@@ -43,11 +42,9 @@ public class NlsFormatterMap extends AbstractLoggableComponent {
    * This method registers the given <code>formatBuilder</code>.
    * 
    * @param formatter is the {@link NlsFormatterPlugin} to register.
-   * @return the {@link NlsFormatter} that was registered for the given
-   *         {@link NlsFormatterPlugin#getType() type} and
-   *         {@link NlsFormatterPlugin#getStyle() style} and is now replaced by
-   *         the given <code>formatter</code> or <code>null</code> if no
-   *         {@link NlsFormatter} was replaced.
+   * @return the {@link NlsFormatter} that was registered for the given {@link NlsFormatterPlugin#getType()
+   *         type} and {@link NlsFormatterPlugin#getStyle() style} and is now replaced by the given
+   *         <code>formatter</code> or <code>null</code> if no {@link NlsFormatter} was replaced.
    */
   public NlsFormatter<?> registerFormatter(NlsFormatterPlugin<?> formatter) {
 
@@ -59,15 +56,13 @@ public class NlsFormatterMap extends AbstractLoggableComponent {
    * 
    * @param formatter is the formatter to register.
    * @param formatType is the type to be formatted.
-   * @param formatStyle is the style defining details of formatting. May be
-   *        <code>null</code> for default formatter.
-   * @return the {@link NlsFormatter} that was registered for the given
-   *         <code>formatType</code> and <code>formatStyle</code> and is now
-   *         replaced by the given <code>formatter</code> or <code>null</code>
-   *         if no {@link NlsFormatter} was replaced.
+   * @param formatStyle is the style defining details of formatting. May be <code>null</code> for default
+   *        formatter.
+   * @return the {@link NlsFormatter} that was registered for the given <code>formatType</code> and
+   *         <code>formatStyle</code> and is now replaced by the given <code>formatter</code> or
+   *         <code>null</code> if no {@link NlsFormatter} was replaced.
    */
-  public NlsFormatter<?> registerFormatter(NlsFormatter<?> formatter, String formatType,
-      String formatStyle) {
+  public NlsFormatter<?> registerFormatter(NlsFormatter<?> formatter, String formatType, String formatStyle) {
 
     NlsNullPointerException.checkNotNull(NlsFormatter.class, formatter);
     if ((formatType == null) && (formatStyle != null)) {
@@ -82,17 +77,13 @@ public class NlsFormatterMap extends AbstractLoggableComponent {
   }
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String,
-   *      String)
+   * @see net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String, String)
    * 
    * @param formatType is the type to be formatted.
-   * @param formatStyle is the style defining details of formatting. May be
-   *        <code>null</code> for default formatter of the given
-   *        <code>formatType</code>.
-   * @return the according {@link NlsFormatter} instance or <code>null</code> if
-   *         NO such {@link NlsFormatter} is
-   *         {@link #registerFormatter(NlsFormatter, String, String) registered}
-   *         .
+   * @param formatStyle is the style defining details of formatting. May be <code>null</code> for default
+   *        formatter of the given <code>formatType</code>.
+   * @return the according {@link NlsFormatter} instance or <code>null</code> if NO such {@link NlsFormatter}
+   *         is {@link #registerFormatter(NlsFormatter, String, String) registered} .
    */
   public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
 

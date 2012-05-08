@@ -17,8 +17,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector implements
-    PojoMethodIntrospector {
+public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector implements PojoMethodIntrospector {
 
   /**
    * The constructor.
@@ -29,8 +28,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
   }
 
   /**
-   * The constructor. Configures and {@link #initialize() initializes} the
-   * component.
+   * The constructor. Configures and {@link #initialize() initializes} the component.
    * 
    * @param visibility is the {@link #getVisibility() visibility}.
    * @param acceptStatic is the {@link #isAcceptStatic() accept-static} flag.
@@ -67,8 +65,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
     /**
      * The constructor.
      * 
-     * @param pojoClass is the class for which the property-accessors should be
-     *        iterated.
+     * @param pojoClass is the class for which the property-accessors should be iterated.
      */
     protected PojoMethodIterator(Class<?> pojoClass) {
 

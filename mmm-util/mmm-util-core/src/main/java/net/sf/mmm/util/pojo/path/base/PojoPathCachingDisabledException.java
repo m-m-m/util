@@ -7,9 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.pojo.path.api.PojoPathException;
 
 /**
- * A {@link PojoPathCachingDisabledException} is thrown if caching is required
- * to access a specific {@link net.sf.mmm.util.pojo.path.api.PojoPath} but
- * caching was disabled at this point.
+ * A {@link PojoPathCachingDisabledException} is thrown if caching is required to access a specific
+ * {@link net.sf.mmm.util.pojo.path.api.PojoPath} but caching was disabled at this point.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -22,8 +21,8 @@ public class PojoPathCachingDisabledException extends PojoPathException {
   /**
    * The constructor.
    * 
-   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} for
-   *        which caching is disabled but was required.
+   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} for which caching is disabled but
+   *        was required.
    */
   public PojoPathCachingDisabledException(String pojoPath) {
 

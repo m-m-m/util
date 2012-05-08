@@ -6,8 +6,7 @@ package net.sf.mmm.util.component.base;
 import javax.annotation.PostConstruct;
 
 /**
- * This is the abstract base class for a component that needs
- * {@link #initialize() initialization}.
+ * This is the abstract base class for a component that needs {@link #initialize() initialization}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -27,8 +26,7 @@ public abstract class AbstractComponent {
   }
 
   /**
-   * This method initializes this class. It has to be called after construction
-   * and injection is completed.
+   * This method initializes this class. It has to be called after construction and injection is completed.
    */
   @PostConstruct
   public final void initialize() {
@@ -41,8 +39,8 @@ public abstract class AbstractComponent {
   }
 
   /**
-   * This method performs the actual {@link #initialize() initialization}. It is
-   * called when {@link #initialize()} is invoked for the first time.<br>
+   * This method performs the actual {@link #initialize() initialization}. It is called when
+   * {@link #initialize()} is invoked for the first time.<br>
    * <b>ATTENTION:</b><br>
    * When you override this method from a sub-class you need to do a
    * <code>super.{@link #doInitialize()}</code>.
@@ -53,9 +51,8 @@ public abstract class AbstractComponent {
   }
 
   /**
-   * This method is invoked at the end of the actual {@link #initialize()
-   * initialization}. It is called when {@link #initialize()} is invoked for the
-   * first time after {@link #doInitialize()} is completed and
+   * This method is invoked at the end of the actual {@link #initialize() initialization}. It is called when
+   * {@link #initialize()} is invoked for the first time after {@link #doInitialize()} is completed and
    * {@link #getInitializationState() initialization-state} has changed to
    * {@link InitializationState#isInitialized() initialized}.<br>
    * <b>ATTENTION:</b><br>

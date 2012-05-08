@@ -6,8 +6,8 @@ package net.sf.mmm.util.pojo.path.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * An {@link IllegalPojoPathException} is thrown by the
- * {@link PojoPathNavigator} if the supplied {@link PojoPath} is illegal.<br>
+ * An {@link IllegalPojoPathException} is thrown by the {@link PojoPathNavigator} if the supplied
+ * {@link PojoPath} is illegal.<br>
  * Here are some examples of illegal POJO-paths:
  * <ul>
  * <li><code>null</code></li>

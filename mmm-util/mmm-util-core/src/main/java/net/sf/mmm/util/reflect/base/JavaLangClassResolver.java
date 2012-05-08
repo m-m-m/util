@@ -4,11 +4,11 @@
 package net.sf.mmm.util.reflect.base;
 
 /**
- * This is a {@link MappedClassResolver} that contains the mapping for typical
- * {@link Class classes} located in the package <code>java.lang</code>.<br>
+ * This is a {@link MappedClassResolver} that contains the mapping for typical {@link Class classes} located
+ * in the package <code>java.lang</code>.<br>
  * <b>ATTENTION:</b><br>
- * This class does NOT contain the mapping for all possible types in
- * <code>java.lang</code> but only common data-types and important classes.
+ * This class does NOT contain the mapping for all possible types in <code>java.lang</code> but only common
+ * data-types and important classes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

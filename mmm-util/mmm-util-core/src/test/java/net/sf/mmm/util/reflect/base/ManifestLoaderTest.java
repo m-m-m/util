@@ -26,8 +26,8 @@ import org.junit.Test;
 public class ManifestLoaderTest {
 
   /**
-   * Tests the content of the manifest from the servlet-api that is added as
-   * test-dependency especially for this test.
+   * Tests the content of the manifest from the servlet-api that is added as test-dependency especially for
+   * this test.
    * 
    * @throws IOException on error.
    */
@@ -52,8 +52,7 @@ public class ManifestLoaderTest {
     assertTrue(manifests.size() > 0);
     Manifest servletManifest = null;
     for (Manifest manifest : manifests) {
-      if ("javax.servlet".equals(ManifestLoader.getValue(manifest,
-          Attributes.Name.IMPLEMENTATION_TITLE))) {
+      if ("javax.servlet".equals(ManifestLoader.getValue(manifest, Attributes.Name.IMPLEMENTATION_TITLE))) {
         // if (manifest.getAttributes("javax/servlet/") != null) {
         servletManifest = manifest;
       }
@@ -67,17 +66,13 @@ public class ManifestLoaderTest {
     assertEquals("servlet-api-2.4.jar", mainAttributes.getValue(ManifestLoader.MANIFEST_SOURCE));
 
     Attributes servletAttributes = servletManifest.getAttributes("javax/servlet/");
-    assertEquals("Java API for Servlets",
-        servletAttributes.getValue(Attributes.Name.SPECIFICATION_TITLE));
-    assertEquals("Sun Microsystems, Inc.",
-        servletAttributes.getValue(Attributes.Name.SPECIFICATION_VENDOR));
+    assertEquals("Java API for Servlets", servletAttributes.getValue(Attributes.Name.SPECIFICATION_TITLE));
+    assertEquals("Sun Microsystems, Inc.", servletAttributes.getValue(Attributes.Name.SPECIFICATION_VENDOR));
     assertEquals("2.4", servletAttributes.getValue(Attributes.Name.SPECIFICATION_VERSION));
 
     assertEquals("javax.servlet", servletAttributes.getValue(Attributes.Name.IMPLEMENTATION_TITLE));
-    assertEquals("2.4.public_draft",
-        servletAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
-    assertEquals("Apache Software Foundation",
-        servletAttributes.getValue(Attributes.Name.IMPLEMENTATION_VENDOR));
+    assertEquals("2.4.public_draft", servletAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
+    assertEquals("Apache Software Foundation", servletAttributes.getValue(Attributes.Name.IMPLEMENTATION_VENDOR));
     assertNull(servletAttributes.getValue(Attributes.Name.IMPLEMENTATION_VENDOR_ID));
   }
 }

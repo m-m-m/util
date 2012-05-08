@@ -111,8 +111,7 @@ public class CliStateTest {
   }
 
   /**
-   * This method gets the {@link CliModeCycle} in the hierarchy of the given
-   * <code>exception</code>.
+   * This method gets the {@link CliModeCycle} in the hierarchy of the given <code>exception</code>.
    * 
    * @param exception the {@link CliException}
    * @return the {@link CliModeCycle}.
@@ -125,8 +124,7 @@ public class CliStateTest {
     while ((cycle == null) && (cause != null)) {
       if (cause instanceof NodeCycleException) {
         NodeCycleException cycleException = (NodeCycleException) cause;
-        cycle = (NodeCycle) cycleException.getNlsMessage()
-            .getArgument(NodeCycleException.KEY_CYCLE);
+        cycle = (NodeCycle) cycleException.getNlsMessage().getArgument(NodeCycleException.KEY_CYCLE);
       }
       cause = cause.getCause();
     }
@@ -164,8 +162,7 @@ public class CliStateTest {
   }
 
   /**
-   * Tests that {@link CliMode#parentIds() hierarchy} of {@link CliMode}s is
-   * properly build.
+   * Tests that {@link CliMode#parentIds() hierarchy} of {@link CliMode}s is properly build.
    */
   @Test
   public void testModeExtensions() {
@@ -186,8 +183,7 @@ public class CliStateTest {
   }
 
   /**
-   * Tests that {@link CliArgument}s are ordered correnctly and properly
-   * assigned to modes.
+   * Tests that {@link CliArgument}s are ordered correnctly and properly assigned to modes.
    */
   @Test
   public void testArguments() {
@@ -197,8 +193,7 @@ public class CliStateTest {
 
     // test regular order
     state = createState(ArgumentTest1.class);
-    List<CliArgumentContainer> argumentsList = state.getArguments(state
-        .getMode(MODE_Z_EXTENDS_X_Y_HELP));
+    List<CliArgumentContainer> argumentsList = state.getArguments(state.getMode(MODE_Z_EXTENDS_X_Y_HELP));
     Assert.assertEquals(1, argumentsList.size());
     Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
     argumentsList = state.getArguments(state.getMode(CliMode.ID_HELP));
@@ -269,11 +264,9 @@ public class CliStateTest {
 
     CliState state = createState(ContainerStyleTest.class);
     CliOptionContainer option = state.getOption(OPTION_NAME_OPTION);
-    Assert.assertEquals(CliContainerStyle.MULTIPLE_OCCURRENCE,
-        option.getContainerStyle(state.getCliStyle()));
+    Assert.assertEquals(CliContainerStyle.MULTIPLE_OCCURRENCE, option.getContainerStyle(state.getCliStyle()));
     CliOptionContainer list = state.getOption(OPTION_NAME_LIST);
-    Assert.assertEquals(CliContainerStyle.COMMA_SEPARATED,
-        list.getContainerStyle(state.getCliStyle()));
+    Assert.assertEquals(CliContainerStyle.COMMA_SEPARATED, list.getContainerStyle(state.getCliStyle()));
   }
 
   /**
@@ -337,10 +330,8 @@ public class CliStateTest {
   @CliModes({
       @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT),
       @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
-      @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT,
-          MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
-      @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP),
-      @CliMode(id = CliMode.ID_HELP, title = "help") })
+      @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
+      @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP), @CliMode(id = CliMode.ID_HELP, title = "help") })
   public static class ArgumentTest1 {
 
     @CliArgument(name = ARGUMENT_NAME_STRING, usage = OPTION_USAGE_STRING, //

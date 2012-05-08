@@ -8,9 +8,8 @@ import java.util.Set;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is an implementation of the {@link ResourceVisitor} interface that
- * collects the names of all classes {@link Filter#accept(Object) accepted} by a
- * given filter in a {@link Set}.
+ * This is an implementation of the {@link ResourceVisitor} interface that collects the names of all classes
+ * {@link Filter#accept(Object) accepted} by a given filter in a {@link Set}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -29,10 +28,8 @@ public class ClassNameCollector implements ResourceVisitor {
   /**
    * The constructor.
    * 
-   * @param classNameSet is the {@link Set} where collected {@link Class}-names
-   *        will be added.
-   * @param filter is used to {@link Filter#accept(Object) filter} classes by
-   *        name.
+   * @param classNameSet is the {@link Set} where collected {@link Class}-names will be added.
+   * @param filter is used to {@link Filter#accept(Object) filter} classes by name.
    */
   public ClassNameCollector(Set<String> classNameSet, Filter<String> filter) {
 
@@ -56,8 +53,7 @@ public class ClassNameCollector implements ResourceVisitor {
   public void visitResource(String classpath) {
 
     if (classpath.endsWith(SUFFIX_CLASS)) {
-      String classname = classpath.substring(0, classpath.length() - SUFFIX_CLASS.length())
-          .replace('/', '.');
+      String classname = classpath.substring(0, classpath.length() - SUFFIX_CLASS.length()).replace('/', '.');
       if (this.filter.accept(classname)) {
         this.classNameSet.add(classname);
       }

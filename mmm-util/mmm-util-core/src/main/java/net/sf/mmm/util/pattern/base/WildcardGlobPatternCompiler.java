@@ -6,8 +6,7 @@ package net.sf.mmm.util.pattern.base;
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 
 /**
- * This class behaves like {@link GlobPatternCompiler} but requires wildcards in
- * the pattern.
+ * This class behaves like {@link GlobPatternCompiler} but requires wildcards in the pattern.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

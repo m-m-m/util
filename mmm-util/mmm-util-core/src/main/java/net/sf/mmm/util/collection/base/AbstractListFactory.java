@@ -8,8 +8,7 @@ import java.util.List;
 import net.sf.mmm.util.collection.api.ListFactory;
 
 /**
- * This is the abstract base implementation of the {@link ListFactory}
- * interface.
+ * This is the abstract base implementation of the {@link ListFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

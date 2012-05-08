@@ -10,8 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the abstract base class for test-cases of {@link StringHasher}
- * implementations.
+ * This is the abstract base class for test-cases of {@link StringHasher} implementations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -26,8 +25,8 @@ public abstract class AbstractStringHasherTest {
   protected abstract StringHasher getStringHasher();
 
   /**
-   * This method performs arbitrary checks to verify consistency of the various
-   * methods of a {@link StringHasher}.
+   * This method performs arbitrary checks to verify consistency of the various methods of a
+   * {@link StringHasher}.
    * 
    * @param hasher is the {@link StringHasher} to test.
    * @param string is a reasonable test-string.
@@ -56,19 +55,18 @@ public abstract class AbstractStringHasherTest {
       int[] hashes = hasher.getHashCodes(string, length);
       Assert.assertEquals(string.length() - length + 1, hashes.length);
       for (int start = 0; start < hashes.length; start++) {
-        Assert.assertEquals("Test ('" + string + "', length=" + length + ", start=" + start, hasher
-            .getHashCode(string, start, start + length), hashes[start]);
+        Assert.assertEquals("Test ('" + string + "', length=" + length + ", start=" + start,
+            hasher.getHashCode(string, start, start + length), hashes[start]);
       }
       Assert.assertArrayEquals(hashes, hasher.getHashCodes(string, length, 0, string.length()));
       Assert.assertArrayEquals(hashes, hasher.getHashCodes(string.toCharArray(), length));
-      Assert.assertArrayEquals(hashes, hasher.getHashCodes(string.toCharArray(), length, 0, string
-          .length()));
+      Assert.assertArrayEquals(hashes, hasher.getHashCodes(string.toCharArray(), length, 0, string.length()));
     }
   }
 
   /**
-   * This method performs general {@link #check(StringHasher, String) checks} to
-   * verify the {@link #getStringHasher() hasher}.
+   * This method performs general {@link #check(StringHasher, String) checks} to verify the
+   * {@link #getStringHasher() hasher}.
    */
   @Test
   public void testHasher() {

@@ -22,8 +22,7 @@ public class GenericArrayTypeImpl implements GenericArrayType {
   /**
    * The constructor.
    * 
-   * @param componentType is the {@link #getGenericComponentType() generic
-   *        component-type}.
+   * @param componentType is the {@link #getGenericComponentType() generic component-type}.
    */
   public GenericArrayTypeImpl(Type componentType) {
 

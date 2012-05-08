@@ -15,8 +15,7 @@ package net.sf.mmm.util.pojo.descriptor.base;
 public interface PojoDescriptorEnhancer {
 
   /**
-   * This method performs the generic enhancements on the given
-   * <code>descriptor</code>.
+   * This method performs the generic enhancements on the given <code>descriptor</code>.
    * 
    * @param descriptor is the descriptor to enhance.
    */

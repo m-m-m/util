@@ -4,10 +4,9 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This class is a simple java bean that has one generic property named
- * {@link #getValue() value}. It can be used for various purposes - e.g. to
- * receive a value by passing it as argument to a method that already returns
- * something else.
+ * This class is a simple java bean that has one generic property named {@link #getValue() value}. It can be
+ * used for various purposes - e.g. to receive a value by passing it as argument to a method that already
+ * returns something else.
  * 
  * @param <TYPE> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

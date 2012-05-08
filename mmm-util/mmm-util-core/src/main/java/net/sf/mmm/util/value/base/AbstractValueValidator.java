@@ -7,17 +7,14 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
- * This is the abstract-base implementation of the {@link ValueValidator}
- * interface.
+ * This is the abstract-base implementation of the {@link ValueValidator} interface.
  * 
- * @param <V> is the generic type of the value to {@link #validate(Object)
- *        validate}.
+ * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractValueValidator<V> extends AbstractLoggableComponent implements
-    ValueValidator<V> {
+public abstract class AbstractValueValidator<V> extends AbstractLoggableComponent implements ValueValidator<V> {
 
   /**
    * {@inheritDoc}

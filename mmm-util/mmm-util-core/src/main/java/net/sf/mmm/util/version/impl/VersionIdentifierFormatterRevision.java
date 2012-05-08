@@ -7,8 +7,8 @@ import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for
- * the {@link VersionIdentifier#getRevision() revision}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the
+ * {@link VersionIdentifier#getRevision() revision}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -19,13 +19,10 @@ public class VersionIdentifierFormatterRevision extends AbstractVersionIdentifie
    * The constructor.
    * 
    * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the
-   *        {@link VersionIdentifier#getRevision() revision}. Will be omitted if
-   *        {@link VersionIdentifier#getRevision() revision} is
-   *        <code>null</code>.
-   * @param padding is the padding (minimum number of digits) for the
-   *        {@link VersionIdentifier#getRevision() revision}. The default is
-   *        <code>0</code>.
+   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getRevision() revision}.
+   *        Will be omitted if {@link VersionIdentifier#getRevision() revision} is <code>null</code>.
+   * @param padding is the padding (minimum number of digits) for the {@link VersionIdentifier#getRevision()
+   *        revision}. The default is <code>0</code>.
    */
   public VersionIdentifierFormatterRevision(StringUtil stringUtil, String prefix, int padding) {
 

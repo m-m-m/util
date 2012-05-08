@@ -13,8 +13,7 @@ import net.sf.mmm.util.value.api.ValueValidator;
 import org.slf4j.Logger;
 
 /**
- * This class is a container for the values for
- * {@link net.sf.mmm.util.cli.api.CliOption options} and
+ * This class is a container for the values for {@link net.sf.mmm.util.cli.api.CliOption options} and
  * {@link net.sf.mmm.util.cli.api.CliArgument arguments}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -51,13 +50,11 @@ public class CliValueMap {
   }
 
   /**
-   * This method gets the {@link CliValueContainer} for the given
-   * {@link CliParameterContainer}.
+   * This method gets the {@link CliValueContainer} for the given {@link CliParameterContainer}.
    * 
-   * @param parameterContainer is the {@link CliParameterContainer} that acts as
-   *        key to the requested {@link CliValueContainerObject}.
-   * @return the requested {@link CliValueContainerObject} or <code>null</code>
-   *         if NOT present.
+   * @param parameterContainer is the {@link CliParameterContainer} that acts as key to the requested
+   *        {@link CliValueContainerObject}.
+   * @return the requested {@link CliValueContainerObject} or <code>null</code> if NOT present.
    */
   public CliValueContainer get(CliParameterContainer parameterContainer) {
 
@@ -65,19 +62,16 @@ public class CliValueMap {
   }
 
   /**
-   * This method gets the {@link CliValueContainer} for the given
-   * {@link CliParameterContainer}. In advance to
-   * {@link #get(CliParameterContainer)} this method will create an according
-   * {@link CliValueContainerObject} if not present and the
-   * {@link CliParameterContainer} has a
-   * {@link CliParameterContainer#getSetter() setter} with a
-   * {@link PojoPropertyAccessorOneArg#getPropertyType() property-type}
-   * reflecting an array, {@link Collection} or {@link Map}.
+   * This method gets the {@link CliValueContainer} for the given {@link CliParameterContainer}. In advance to
+   * {@link #get(CliParameterContainer)} this method will create an according {@link CliValueContainerObject}
+   * if not present and the {@link CliParameterContainer} has a {@link CliParameterContainer#getSetter()
+   * setter} with a {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} reflecting an array,
+   * {@link Collection} or {@link Map}.
    * 
-   * @param parameterContainer is the {@link CliParameterContainer} that acts as
-   *        key to the requested {@link CliValueContainerObject}.
-   * @return the requested {@link CliValueContainerObject} or <code>null</code>
-   *         if NOT present and NOT created.
+   * @param parameterContainer is the {@link CliParameterContainer} that acts as key to the requested
+   *        {@link CliValueContainerObject}.
+   * @return the requested {@link CliValueContainerObject} or <code>null</code> if NOT present and NOT
+   *         created.
    */
   @SuppressWarnings("unchecked")
   public CliValueContainer getOrCreate(CliParameterContainer parameterContainer) {
@@ -87,23 +81,19 @@ public class CliValueMap {
       PojoPropertyAccessorOneArg setter = parameterContainer.getSetter();
       Class<?> propertyClass = setter.getPropertyClass();
       if (propertyClass.isArray()) {
-        result = new CliValueContainerArray(parameterContainer, this.cliState, this.dependencies,
-            this.logger);
+        result = new CliValueContainerArray(parameterContainer, this.cliState, this.dependencies, this.logger);
       } else if (Collection.class.isAssignableFrom(propertyClass)) {
         Class<? extends Collection<?>> collectionClass = (Class<? extends Collection<?>>) propertyClass;
         Collection<Object> collection = this.dependencies.getCollectionFactoryManager()
             .getCollectionFactory(collectionClass).create();
-        result = new CliValueContainerCollection(parameterContainer, this.cliState,
-            this.dependencies, this.logger, collection);
+        result = new CliValueContainerCollection(parameterContainer, this.cliState, this.dependencies, this.logger,
+            collection);
       } else if (Map.class.isAssignableFrom(propertyClass)) {
         Class<? extends Map<?, ?>> mapClass = (Class<? extends Map<?, ?>>) propertyClass;
-        Map<Object, Object> mapValue = this.dependencies.getCollectionFactoryManager()
-            .getMapFactory(mapClass).create();
-        result = new CliValueContainerMap(parameterContainer, this.cliState, this.dependencies,
-            this.logger, mapValue);
+        Map<Object, Object> mapValue = this.dependencies.getCollectionFactoryManager().getMapFactory(mapClass).create();
+        result = new CliValueContainerMap(parameterContainer, this.cliState, this.dependencies, this.logger, mapValue);
       } else {
-        result = new CliValueContainerObject(parameterContainer, this.cliState, this.dependencies,
-            this.logger);
+        result = new CliValueContainerObject(parameterContainer, this.cliState, this.dependencies, this.logger);
       }
       this.map.put(parameterContainer, result);
     }
@@ -113,16 +103,16 @@ public class CliValueMap {
   /**
    * This method applies the parsed CLI values to the given <code>state</code>.
    * 
-   * @param state is the {@link AbstractCliParser#getState() state-object} where
-   *        to apply the values of this {@link CliValueMap}.
+   * @param state is the {@link AbstractCliParser#getState() state-object} where to apply the values of this
+   *        {@link CliValueMap}.
    */
   public void assign(Object state) {
 
     for (CliParameterContainer parameter : this.map.keySet()) {
       CliValueContainer valueContainer = this.map.get(parameter);
       Object value = valueContainer.getValue();
-      ValueValidator<Object> validator = ((AbstractCliValueContainer) valueContainer)
-          .getParameterContainer().getValidator();
+      ValueValidator<Object> validator = ((AbstractCliValueContainer) valueContainer).getParameterContainer()
+          .getValidator();
       if (validator != null) {
         validator.validate(value);
       }

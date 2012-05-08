@@ -25,8 +25,7 @@ public class FilterRuleChainPlainParserTest {
   public void test() throws Exception {
 
     FilterRuleChainPlainParser parser = new FilterRuleChainPlainParser();
-    InputStream inStream = new ClasspathResource(FilterRuleChainPlainParserTest.class, ".txt", true)
-        .openStream();
+    InputStream inStream = new ClasspathResource(FilterRuleChainPlainParserTest.class, ".txt", true).openStream();
     FilterRuleChain chain = parser.parse(new InputStreamReader(inStream, "UTF-8"), true);
     assertTrue(chain.accept("/doc/manual.pdf"));
     assertFalse(chain.accept("/data/manual.pdf"));

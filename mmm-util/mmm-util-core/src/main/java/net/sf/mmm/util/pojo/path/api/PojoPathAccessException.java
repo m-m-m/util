@@ -8,8 +8,8 @@ import java.lang.reflect.Type;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link PojoPathAccessException} is thrown if a {@link PojoPath} could NOT
- * be evaluated because it lead to an invalid access on some object.
+ * A {@link PojoPathAccessException} is thrown if a {@link PojoPath} could NOT be evaluated because it lead to
+ * an invalid access on some object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -22,34 +22,26 @@ public class PojoPathAccessException extends PojoPathException {
   /**
    * The constructor.
    * 
-   * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the
-   *        intended way.
-   * @param currentPojoType is the type of the current
-   *        {@link net.sf.mmm.util.pojo.api.Pojo} for which the
-   *        {@link PojoPath#getSegment() segment} of the given
-   *        <code>pojoPath</code> could NOT be accessed.
+   * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the intended way.
+   * @param currentPojoType is the type of the current {@link net.sf.mmm.util.pojo.api.Pojo} for which the
+   *        {@link PojoPath#getSegment() segment} of the given <code>pojoPath</code> could NOT be accessed.
    */
   public PojoPathAccessException(String pojoPath, Type currentPojoType) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE,
-        currentPojoType));
+    super(NlsBundleUtilCore.ERR_POJO_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE, currentPojoType));
   }
 
   /**
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the
-   *        intended way.
-   * @param currentPojoType is the type of the current
-   *        {@link net.sf.mmm.util.pojo.api.Pojo} for which the
-   *        {@link PojoPath#getSegment() segment} of the given
-   *        <code>pojoPath</code> could NOT be accessed.
+   * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the intended way.
+   * @param currentPojoType is the type of the current {@link net.sf.mmm.util.pojo.api.Pojo} for which the
+   *        {@link PojoPath#getSegment() segment} of the given <code>pojoPath</code> could NOT be accessed.
    */
   public PojoPathAccessException(Throwable nested, String pojoPath, Type currentPojoType) {
 
-    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE,
-        currentPojoType));
+    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_ACCESS, toMap(KEY_PATH, pojoPath, KEY_TYPE, currentPojoType));
   }
 
 }

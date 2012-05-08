@@ -20,8 +20,7 @@ public class IllegalDateFormatException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param dateString is the string that was supposed to be a valid date but is
-   *        NOT.
+   * @param dateString is the string that was supposed to be a valid date but is NOT.
    */
   public IllegalDateFormatException(String dateString) {
 
@@ -31,8 +30,7 @@ public class IllegalDateFormatException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param dateString is the string that was supposed to be a valid date but is
-   *        NOT.
+   * @param dateString is the string that was supposed to be a valid date but is NOT.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
   public IllegalDateFormatException(String dateString, Exception nested) {

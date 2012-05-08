@@ -7,8 +7,7 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 
 /**
- * This is the abstract base implementation of the
- * {@link PojoPropertyDescriptor} interface.
+ * This is the abstract base implementation of the {@link PojoPropertyDescriptor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -38,20 +37,16 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   }
 
   /**
-   * This method puts the given <code>accessor</code> into this
-   * property-descriptor.<br>
+   * This method puts the given <code>accessor</code> into this property-descriptor.<br>
    * <b>ATTENTION:</b><br>
-   * Be careful NOT to accidently replace existing {@link PojoPropertyAccessor
-   * accessors}.
+   * Be careful NOT to accidently replace existing {@link PojoPropertyAccessor accessors}.
    * 
    * @see #getAccessor(net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode)
    * 
    * @param accessor is the accessor to add.
-   * @return the {@link PojoPropertyAccessor} with the same
-   *         {@link PojoPropertyAccessor#getMode() mode} as the given
-   *         <code>accessor</code> that has been replaced by
-   *         <code>accessor</code> or <code>null</code> if none has been
-   *         replaced.
+   * @return the {@link PojoPropertyAccessor} with the same {@link PojoPropertyAccessor#getMode() mode} as the
+   *         given <code>accessor</code> that has been replaced by <code>accessor</code> or <code>null</code>
+   *         if none has been replaced.
    */
   public abstract PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor);
 

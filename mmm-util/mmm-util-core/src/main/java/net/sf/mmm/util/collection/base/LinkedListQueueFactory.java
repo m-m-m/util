@@ -9,8 +9,7 @@ import java.util.Queue;
 import net.sf.mmm.util.collection.api.QueueFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates
  * instances of {@link LinkedList}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

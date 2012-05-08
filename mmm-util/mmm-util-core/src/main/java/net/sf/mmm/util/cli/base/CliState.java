@@ -43,10 +43,9 @@ import net.sf.mmm.util.value.api.ValueValidator;
 import org.slf4j.Logger;
 
 /**
- * This is a container for the {@link #getStateClass() state-class}. It
- * determines and holds the CLI-informations of that {@link #getStateClass()
- * state-class}. In advance to {@link CliClassContainer} it also handles the CLI
- * specific property annotations.
+ * This is a container for the {@link #getStateClass() state-class}. It determines and holds the
+ * CLI-informations of that {@link #getStateClass() state-class}. In advance to {@link CliClassContainer} it
+ * also handles the CLI specific property annotations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -72,16 +71,14 @@ public class CliState extends CliClassContainer {
    * The constructor.
    * 
    * @param stateClass is the {@link #getStateClass() state-class}.
-   * @param descriptorBuilderFactory is the {@link PojoDescriptorBuilderFactory}
-   *        used to introspect the {@link PojoPropertyDescriptor properties} of
-   *        the {@link #getStateClass() stateClass}.
-   * @param logger is the {@link Logger} to use (e.g. for
-   *        {@link CliStyleHandling}).
+   * @param descriptorBuilderFactory is the {@link PojoDescriptorBuilderFactory} used to introspect the
+   *        {@link PojoPropertyDescriptor properties} of the {@link #getStateClass() stateClass}.
+   * @param logger is the {@link Logger} to use (e.g. for {@link CliStyleHandling}).
    * @param reflectionUtil is the {@link ReflectionUtil} instance to use.
    * @param annotationUtil is the {@link AnnotationUtil} instance to use.
    */
-  public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory,
-      Logger logger, ReflectionUtil reflectionUtil, AnnotationUtil annotationUtil) {
+  public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory, Logger logger,
+      ReflectionUtil reflectionUtil, AnnotationUtil annotationUtil) {
 
     super(stateClass, logger);
     this.name2OptionMap = new HashMap<String, CliOptionContainer>();
@@ -117,8 +114,8 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method initializes the {@link #arguments}. This means that the
-   * {@link #arguments} are ordered properly.
+   * This method initializes the {@link #arguments}. This means that the {@link #arguments} are ordered
+   * properly.
    * 
    * @see CliArgument#addCloseTo()
    * @see CliArgument#addAfter()
@@ -198,24 +195,19 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method initializes the {@link BasicDoubleLinkedNode node}
-   * {@link BasicDoubleLinkedNode#getValue() containing} an
-   * {@link CliArgumentContainer} in order to determine the appropriate order of
-   * the {@link CliArgument}s.
+   * This method initializes the {@link BasicDoubleLinkedNode node} {@link BasicDoubleLinkedNode#getValue()
+   * containing} an {@link CliArgumentContainer} in order to determine the appropriate order of the
+   * {@link CliArgument}s.
    * 
    * @param node is the node to initialize (link into the node-list).
-   * @param argumentMap maps the {@link CliArgumentContainer#getId() id} to the
-   *        according argument-node.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is
-   *         NOT yet complete or <code>null</code> if the initialization was
-   *         successful.
-   * @throws NodeCycleException if a cyclic dependency was detected and
-   *         completed.
+   * @param argumentMap maps the {@link CliArgumentContainer#getId() id} to the according argument-node.
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or
+   *         <code>null</code> if the initialization was successful.
+   * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
   protected NodeCycle<CliArgumentContainer> initializeArgumentRecursive(
       BasicDoubleLinkedNode<CliArgumentContainer> node,
-      Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap)
-      throws NodeCycleException {
+      Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap) throws NodeCycleException {
 
     CliArgumentContainer argumentContainer = node.getValue();
     if (argumentContainer.getState() != InitializationState.INITIALIZED) {
@@ -252,21 +244,19 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method finds the properties annotated with {@link CliOption} or
-   * {@link CliArgument}.
+   * This method finds the properties annotated with {@link CliOption} or {@link CliArgument}.
    * 
-   * @param descriptorBuilder is the {@link PojoDescriptorBuilder} to use
-   *        (determines if fields or setters are used).
-   * @return <code>true</code> if at least one annotated property has been
-   *         found, <code>false</code> otherwise.
+   * @param descriptorBuilder is the {@link PojoDescriptorBuilder} to use (determines if fields or setters are
+   *        used).
+   * @return <code>true</code> if at least one annotated property has been found, <code>false</code>
+   *         otherwise.
    */
   protected boolean findPropertyAnnotations(PojoDescriptorBuilder descriptorBuilder) {
 
     boolean annotationFound = false;
     PojoDescriptor<?> descriptor = descriptorBuilder.getDescriptor(getStateClass());
     for (PojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
-      PojoPropertyAccessorOneArg setter = propertyDescriptor
-          .getAccessor(PojoPropertyAccessorOneArgMode.SET);
+      PojoPropertyAccessorOneArg setter = propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.SET);
       if (setter != null) {
         AccessibleObject accessible = setter.getAccessibleObject();
         CliOption option = accessible.getAnnotation(CliOption.class);
@@ -276,19 +266,16 @@ public class CliState extends CliClassContainer {
           throw new CliOptionAndArgumentAnnotationException(propertyDescriptor.getName());
         } else if ((option != null) || (argument != null)) {
           annotationFound = true;
-          PojoPropertyAccessorNonArg getter = propertyDescriptor
-              .getAccessor(PojoPropertyAccessorNonArgMode.GET);
+          PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
           // Annotation constraint = findConstraintAnnotation(setter);
           // JSR 303 ?
           ValueValidator<Object> validator = null;
           if (option != null) {
-            CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter,
-                validator);
+            CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter, validator);
             addOption(optionContainer);
           } else {
             assert (argument != null);
-            CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter,
-                getter, validator);
+            CliArgumentContainer argumentContainer = new CliArgumentContainer(argument, setter, getter, validator);
             addArgument(argumentContainer);
           }
         }
@@ -299,13 +286,12 @@ public class CliState extends CliClassContainer {
 
   /**
    * This method is like {@link #getMode(String)} but also
-   * {@link net.sf.mmm.util.cli.api.CliStyle#modeUndefined() handles} the case
-   * that a {@link net.sf.mmm.util.cli.api.CliMode} may be undefined.
+   * {@link net.sf.mmm.util.cli.api.CliStyle#modeUndefined() handles} the case that a
+   * {@link net.sf.mmm.util.cli.api.CliMode} may be undefined.
    * 
-   * @param id is the {@link net.sf.mmm.util.cli.api.CliMode#id() ID} of the
-   *        requested {@link net.sf.mmm.util.cli.api.CliMode}.
-   * @param annotationContainer is the {@link CliArgumentContainer} or
-   *        {@link CliOptionContainer}.
+   * @param id is the {@link net.sf.mmm.util.cli.api.CliMode#id() ID} of the requested
+   *        {@link net.sf.mmm.util.cli.api.CliMode}.
+   * @param annotationContainer is the {@link CliArgumentContainer} or {@link CliOptionContainer}.
    * @return the requested {@link CliModeObject}.
    */
   protected CliModeObject requireMode(String id, Object annotationContainer) {
@@ -324,11 +310,10 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method {@link #getArguments(CliModeObject) registers} the given
-   * {@link CliArgumentContainer argument}.
+   * This method {@link #getArguments(CliModeObject) registers} the given {@link CliArgumentContainer
+   * argument}.
    * 
-   * @param argumentContainer is the {@link CliArgumentContainer argument} to
-   *        register.
+   * @param argumentContainer is the {@link CliArgumentContainer argument} to register.
    */
   private void addArgument(CliArgumentContainer argumentContainer) {
 
@@ -338,11 +323,9 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method {@link #getOptions() registers} the given
-   * {@link CliOptionContainer option}.
+   * This method {@link #getOptions() registers} the given {@link CliOptionContainer option}.
    * 
-   * @param optionContainer is the {@link CliOptionContainer option} to
-   *        register.
+   * @param optionContainer is the {@link CliOptionContainer option} to register.
    */
   private void addOption(CliOptionContainer optionContainer) {
 
@@ -357,11 +340,10 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method {@link #getOption(String) registers} the given
-   * {@link CliOptionContainer option} with the given <code>name</code>.
+   * This method {@link #getOption(String) registers} the given {@link CliOptionContainer option} with the
+   * given <code>name</code>.
    * 
-   * @param nameOrAlias is the {@link CliOption#name()} or
-   *        {@link CliOption#aliases() alias} of the option.
+   * @param nameOrAlias is the {@link CliOption#name()} or {@link CliOption#aliases() alias} of the option.
    * @param option is the {@link CliOptionContainer option} to register.
    */
   private void addOption(String nameOrAlias, CliOptionContainer option) {
@@ -373,15 +355,13 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliOptionContainer option} associated with the
-   * given <code>nameOrAlias</code>.
+   * This method gets the {@link CliOptionContainer option} associated with the given <code>nameOrAlias</code>
+   * .
    * 
-   * @param nameOrAlias is the {@link CliOption#name()} or
-   *        {@link CliOption#aliases() alias} of the requested
+   * @param nameOrAlias is the {@link CliOption#name()} or {@link CliOption#aliases() alias} of the requested
    *        {@link CliOptionContainer option}.
-   * @return the requested {@link CliOptionContainer option} or
-   *         <code>null</code> if no such {@link CliOptionContainer option}
-   *         exists.
+   * @return the requested {@link CliOptionContainer option} or <code>null</code> if no such
+   *         {@link CliOptionContainer option} exists.
    */
   public CliOptionContainer getOption(String nameOrAlias) {
 
@@ -389,8 +369,7 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method gets the {@link List} of {@link CliOptionContainer CLI-options}
-   * .
+   * This method gets the {@link List} of {@link CliOptionContainer CLI-options} .
    * 
    * @return the options
    */
@@ -400,8 +379,7 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method gets the {@link List} of all {@link CliArgumentContainer
-   * CLI-arguments}.
+   * This method gets the {@link List} of all {@link CliArgumentContainer CLI-arguments}.
    * 
    * @return the arguments
    */
@@ -411,8 +389,8 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method gets the {@link List} of {@link CliArgumentContainer
-   * CLI-arguments} for the given {@link CliModeObject mode}.
+   * This method gets the {@link List} of {@link CliArgumentContainer CLI-arguments} for the given
+   * {@link CliModeObject mode}.
    * 
    * @param mode is the according {@link CliModeContainer mode}.
    * @return the arguments.
@@ -460,14 +438,11 @@ public class CliState extends CliClassContainer {
   // }
 
   /**
-   * This method gets the {@link CliOption options} for the given
-   * {@link CliModeObject mode}.
+   * This method gets the {@link CliOption options} for the given {@link CliModeObject mode}.
    * 
-   * @param mode is the {@link CliModeObject} for which the {@link CliOption
-   *        options} are required.
-   * @return a {@link Collection} with all {@link CliOption options} that are
-   *         {@link CliOption#mode() compatible} with the given
-   *         <code>mode</code>.
+   * @param mode is the {@link CliModeObject} for which the {@link CliOption options} are required.
+   * @return a {@link Collection} with all {@link CliOption options} that are {@link CliOption#mode()
+   *         compatible} with the given <code>mode</code>.
    */
   public Collection<CliOptionContainer> getOptions(CliModeObject mode) {
 
@@ -488,11 +463,9 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This inner class converts a {@link CliArgumentContainer} to a
-   * {@link String}.
+   * This inner class converts a {@link CliArgumentContainer} to a {@link String}.
    */
-  protected static final class CliArgumentFormatter implements
-      SimpleValueConverter<CliArgumentContainer, String> {
+  protected static final class CliArgumentFormatter implements SimpleValueConverter<CliArgumentContainer, String> {
 
     /** The singleton instance. */
     protected static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
@@ -501,8 +474,8 @@ public class CliState extends CliClassContainer {
      * {@inheritDoc}
      */
     @SuppressWarnings("all")
-    public <T extends String> T convert(CliArgumentContainer value, Object valueSource,
-        Class<T> targetClass) throws ValueException {
+    public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass)
+        throws ValueException {
 
       return (T) value.getId();
     }

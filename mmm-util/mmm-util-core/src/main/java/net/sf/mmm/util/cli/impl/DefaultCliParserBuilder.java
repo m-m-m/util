@@ -11,8 +11,7 @@ import net.sf.mmm.util.cli.base.AbstractCliParserBuilder;
 import net.sf.mmm.util.cli.base.CliState;
 
 /**
- * The default implementation of the
- * {@link net.sf.mmm.util.cli.api.CliParserBuilder} interface.
+ * The default implementation of the {@link net.sf.mmm.util.cli.api.CliParserBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

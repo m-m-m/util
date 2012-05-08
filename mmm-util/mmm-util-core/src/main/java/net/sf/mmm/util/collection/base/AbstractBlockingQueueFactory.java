@@ -8,8 +8,7 @@ import java.util.concurrent.BlockingQueue;
 import net.sf.mmm.util.collection.api.BlockingQueueFactory;
 
 /**
- * This is the abstract base implementation of the {@link BlockingQueueFactory}
- * interface.
+ * This is the abstract base implementation of the {@link BlockingQueueFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

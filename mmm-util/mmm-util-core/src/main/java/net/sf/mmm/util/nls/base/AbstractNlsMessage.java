@@ -10,8 +10,8 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
  * This is the abstract base implementation of {@link NlsMessage}.<br>
- * You should extend this class rather than directly implementing the
- * {@link NlsMessage} interface to gain compatibility with further releases.
+ * You should extend this class rather than directly implementing the {@link NlsMessage} interface to gain
+ * compatibility with further releases.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -30,12 +30,10 @@ public abstract class AbstractNlsMessage implements NlsMessage {
   }
 
   /**
-   * This method gets the {@link #getArgument(String) Argument} for the given
-   * index.
+   * This method gets the {@link #getArgument(String) Argument} for the given index.
    * 
    * @param index is the index of the requested argument.
-   * @return the argument at the given index or <code>null</code> if no such
-   *         argument exists.
+   * @return the argument at the given index or <code>null</code> if no such argument exists.
    * @deprecated use {@link #getArgument(String)}
    */
   @Deprecated

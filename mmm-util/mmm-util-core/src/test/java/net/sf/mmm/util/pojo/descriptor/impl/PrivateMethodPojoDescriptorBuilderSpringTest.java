@@ -9,13 +9,11 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the test-case for {@link PojoDescriptorBuilder} using private methods
- * via spring.
+ * This is the test-case for {@link PojoDescriptorBuilder} using private methods via spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class PrivateMethodPojoDescriptorBuilderSpringTest extends
-    PrivateMethodPojoDescriptorBuilderTest {
+public class PrivateMethodPojoDescriptorBuilderSpringTest extends PrivateMethodPojoDescriptorBuilderTest {
 
   /**
    * {@inheritDoc}

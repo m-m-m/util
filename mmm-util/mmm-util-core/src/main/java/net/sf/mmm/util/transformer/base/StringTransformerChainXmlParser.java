@@ -20,9 +20,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * This class allows to parse a list of {@link StringTransformerRule}s from XML
- * and build an according {@link StringTransformerChain}. The rules are
- * proceeded in the order of their appearance in the list.<br>
+ * This class allows to parse a list of {@link StringTransformerRule}s from XML and build an according
+ * {@link StringTransformerChain}. The rules are proceeded in the order of their appearance in the list.<br>
  * Here is an example of a configuration (rule list) parsed by this class:
  * 
  * <pre>
@@ -53,8 +52,7 @@ public class StringTransformerChainXmlParser {
   public static final String XML_ATR_CHAIN_ID = "id";
 
   /**
-   * The name of the XML attribute for the parent of a {@link #XML_TAG_CHAIN
-   * chain}.
+   * The name of the XML attribute for the parent of a {@link #XML_TAG_CHAIN chain}.
    */
   public static final String XML_ATR_CHAIN_PARENT = "parent";
 
@@ -62,27 +60,23 @@ public class StringTransformerChainXmlParser {
   public static final String XML_TAG_RULE = "regex";
 
   /**
-   * The name of the XML attribute for
-   * {@link RegexStringTransformerRule#getPattern()}.
+   * The name of the XML attribute for {@link RegexStringTransformerRule#getPattern()}.
    */
   public static final String XML_ATR_RULE_PATTERN = "pattern";
 
   /**
-   * The name of the XML attribute for
-   * {@link RegexStringTransformerRule#getReplacement()}.
+   * The name of the XML attribute for {@link RegexStringTransformerRule#getReplacement()}.
    */
   public static final String XML_ATR_RULE_REPLACEMENT = "replacement";
 
   /**
-   * The name of the XML attribute for
-   * {@link RegexStringTransformerRule#isReplaceAll()}. Default value is
+   * The name of the XML attribute for {@link RegexStringTransformerRule#isReplaceAll()}. Default value is
    * <code>false</code>.
    */
   public static final String XML_ATR_RULE_REPLACEALL = "replace-all";
 
   /**
-   * The name of the XML attribute for
-   * {@link RegexStringTransformerRule#isStopOnMatch()}. Default value is
+   * The name of the XML attribute for {@link RegexStringTransformerRule#isStopOnMatch()}. Default value is
    * <code>false</code>.
    */
   public static final String XML_ATR_RULE_STOPONMATCH = "stop-on-match";
@@ -125,8 +119,7 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * This method parses a {@link StringTransformerRule rule} given by
-   * <code>xmlElement</code>.
+   * This method parses a {@link StringTransformerRule rule} given by <code>xmlElement</code>.
    * 
    * @see #XML_TAG_RULE
    * 
@@ -136,10 +129,8 @@ public class StringTransformerChainXmlParser {
   public StringTransformerRule parseRule(Element xmlElement) {
 
     if (XML_TAG_RULE.equals(xmlElement.getTagName())) {
-      boolean replaceAll = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL,
-          false);
-      boolean stopOnMatch = this.domUtil.getAttributeAsBoolean(xmlElement,
-          XML_ATR_RULE_STOPONMATCH, false);
+      boolean replaceAll = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_REPLACEALL, false);
+      boolean stopOnMatch = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_RULE_STOPONMATCH, false);
       String patternString = xmlElement.getAttribute(XML_ATR_RULE_PATTERN);
       Pattern pattern = this.patternCompiler.compile(patternString);
       String replacement = xmlElement.getAttribute(XML_ATR_RULE_REPLACEMENT);
@@ -150,15 +141,13 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * This method parses a {@link StringTransformerChain chain} given by
-   * <code>xmlElement</code>.
+   * This method parses a {@link StringTransformerChain chain} given by <code>xmlElement</code>.
    * 
    * @see #XML_TAG_CHAIN
    * 
-   * @param xmlElement is the XML element containing the transformer-rules (see
-   *        {@link #XML_TAG_RULE}) as children.
-   * @param parent is the parent chain to extend or <code>null</code> if no
-   *        rules should be inherited.
+   * @param xmlElement is the XML element containing the transformer-rules (see {@link #XML_TAG_RULE}) as
+   *        children.
+   * @param parent is the parent chain to extend or <code>null</code> if no rules should be inherited.
    * @return the parsed filter-chain.
    */
   public StringTransformerChain parseChain(Element xmlElement, StringTransformerChain parent) {
@@ -181,13 +170,11 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * This method parses a map of {@link StringTransformerChain chain}s given by
-   * <code>xmlElement</code>.
+   * This method parses a map of {@link StringTransformerChain chain}s given by <code>xmlElement</code>.
    * 
-   * @param xmlElement is the XML element containing the transformer-chains (see
-   *        {@link #XML_TAG_CHAIN}) as children and puts them into a map with
-   *        the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or
-   *        attributes are simply ignored.
+   * @param xmlElement is the XML element containing the transformer-chains (see {@link #XML_TAG_CHAIN}) as
+   *        children and puts them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child
+   *        elements or attributes are simply ignored.
    * @return the map of all parsed chains.
    */
   public Map<String, StringTransformerChain> parseChains(Element xmlElement) {
@@ -205,8 +192,8 @@ public class StringTransformerChainXmlParser {
             String parentId = element.getAttribute(XML_ATR_CHAIN_PARENT);
             parent = chainMap.get(parentId);
             if (parent == null) {
-              throw new IllegalArgumentException("Illegal parent (" + parentId + ") in chain ("
-                  + id + "): parent chain has to be defined before being referenced!");
+              throw new IllegalArgumentException("Illegal parent (" + parentId + ") in chain (" + id
+                  + "): parent chain has to be defined before being referenced!");
             }
           }
           StringTransformerChain chain = parseChain(element, parent);

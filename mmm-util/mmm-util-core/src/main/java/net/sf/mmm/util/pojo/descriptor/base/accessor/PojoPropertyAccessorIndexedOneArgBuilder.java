@@ -7,8 +7,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedO
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
 
 /**
- * This is the interface used to create a
- * {@link PojoPropertyAccessorIndexedOneArg indexed one-arg accessor}.
+ * This is the interface used to create a {@link PojoPropertyAccessorIndexedOneArg indexed one-arg accessor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

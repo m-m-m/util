@@ -29,22 +29,19 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   protected static final int EXIT_CODE_OK = 0;
 
   /**
-   * The {@link #run(CliModeObject) exit-code} on syntax error (illegal
-   * command-line arguments).
+   * The {@link #run(CliModeObject) exit-code} on syntax error (illegal command-line arguments).
    */
   protected static final int EXIT_CODE_ILLEGAL_SYNTAX = 1;
 
   /**
-   * The {@link #run(CliModeObject) exit-code} on constraint error (illegal
-   * command-line value).
+   * The {@link #run(CliModeObject) exit-code} on constraint error (illegal command-line value).
    * 
    * @see net.sf.mmm.util.cli.base.CliParameterContainer#getValidator()
    */
   protected static final int EXIT_CODE_CONSTRAINT_VIOLATION = 2;
 
   /**
-   * The {@link #run(CliModeObject) exit-code} if an unexpected
-   * {@link Exception error} occurred.
+   * The {@link #run(CliModeObject) exit-code} if an unexpected {@link Exception error} occurred.
    */
   protected static final int EXIT_CODE_UNEXPECTED = -1;
 
@@ -82,8 +79,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method is called after the options are parsed and injected. It has to
-   * be implemented and should do the actual job.
+   * This method is called after the options are parsed and injected. It has to be implemented and should do
+   * the actual job.
    * 
    * @param mode is the {@link CliModeObject mode} of the invocation.
    * @return the error-code or {@link #EXIT_CODE_OK} on success.
@@ -92,8 +89,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   protected abstract int run(CliModeObject mode) throws Exception;
 
   /**
-   * This method is invoked if an {@link Exception} occurred. It implements how
-   * to handle the error. You may override to add a custom handling.
+   * This method is invoked if an {@link Exception} occurred. It implements how to handle the error. You may
+   * override to add a custom handling.
    * 
    * @param exception is the actual error that occurred.
    * @param parser is the {@link CliParser}.
@@ -121,12 +118,10 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link IocContainer} used to manage components with
-   * their implementation. It should be created and initialized on the first
-   * call of this method.<br/>
-   * This default implementation simply returns <code>null</code> to avoid
-   * dependencies on a {@link IocContainer} implementation. Override this method
-   * to use proper component management.
+   * This method gets the {@link IocContainer} used to manage components with their implementation. It should
+   * be created and initialized on the first call of this method.<br/>
+   * This default implementation simply returns <code>null</code> to avoid dependencies on a
+   * {@link IocContainer} implementation. Override this method to use proper component management.
    * 
    * @see net.sf.mmm.util.component.impl.SpringContainer
    * 
@@ -138,11 +133,10 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link CliParserBuilder} used to
-   * {@link CliParserBuilder#build(Object) build} the {@link CliParser}.<br>
-   * To extend with custom functionality you should use an
-   * {@link #getIocContainer() IoC container} in advance to overriding this
-   * method.
+   * This method gets the {@link CliParserBuilder} used to {@link CliParserBuilder#build(Object) build} the
+   * {@link CliParser}.<br>
+   * To extend with custom functionality you should use an {@link #getIocContainer() IoC container} in advance
+   * to overriding this method.
    * 
    * @return the {@link CliParserBuilder}.
    */
@@ -180,8 +174,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link CliOutputSettings output settings} used for
-   * information and error messages.
+   * This method gets the {@link CliOutputSettings output settings} used for information and error messages.
    * 
    * @return the outputSettings.
    */
@@ -191,8 +184,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the standard output where to {@link PrintWriter#println()
-   * print} information for the end-user.<br>
+   * This method gets the standard output where to {@link PrintWriter#println() print} information for the
+   * end-user.<br>
    * Default is {@link System#out}.
    * 
    * @return the standard output.
@@ -203,8 +196,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method sets the {@link #getStandardOutput() standard output}. It may
-   * be used by sub-classes or tests to redirect output.
+   * This method sets the {@link #getStandardOutput() standard output}. It may be used by sub-classes or tests
+   * to redirect output.
    * 
    * @param output is the output to set
    */
@@ -214,8 +207,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the standard error where to
-   * {@link Appendable#append(CharSequence) print} errors for the end-user.<br>
+   * This method gets the standard error where to {@link Appendable#append(CharSequence) print} errors for the
+   * end-user.<br>
    * Default is {@link System#err}.
    * 
    * @return the output stream.
@@ -226,8 +219,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method sets the {@link #getStandardError() standard error}. It may be
-   * used by sub-classes or tests to redirect errors.
+   * This method sets the {@link #getStandardError() standard error}. It may be used by sub-classes or tests
+   * to redirect errors.
    * 
    * @param error is the error to set.
    */
@@ -247,9 +240,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method is called after the command-line arguments are checked for
-   * syntactically correctness and applied to this class in order to perform
-   * complex validations.
+   * This method is called after the command-line arguments are checked for syntactically correctness and
+   * applied to this class in order to perform complex validations.
    * 
    * @param mode is the {@link CliModeObject mode} of the invocation.
    * @throws RuntimeException if the state is invalid.

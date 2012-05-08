@@ -6,9 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is the default {@link Filter} used to decide if the
- * {@link CliOption#name() name} or {@link CliOption#aliases() alias} of a
- * {@link CliOption} is {@link #accept(String) acceptable}.
+ * This is the default {@link Filter} used to decide if the {@link CliOption#name() name} or
+ * {@link CliOption#aliases() alias} of a {@link CliOption} is {@link #accept(String) acceptable}.
  * 
  * @see CliStyle#optionNameFilter()
  * 
@@ -18,13 +17,12 @@ import net.sf.mmm.util.filter.api.Filter;
 public class CliOptionNameDefaultFilter implements Filter<String> {
 
   /**
-   * This method determines if a character the name (excluding the initial
-   * hyphens) is acceptable. You may extend this class and override this method
-   * to declare a less strict {@link CliStyle#optionNameFilter() naming style}.
+   * This method determines if a character the name (excluding the initial hyphens) is acceptable. You may
+   * extend this class and override this method to declare a less strict {@link CliStyle#optionNameFilter()
+   * naming style}.
    * 
    * @param c is the character to check.
-   * @return <code>true</code> if the given character is acceptable,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if the given character is acceptable, <code>false</code> otherwise.
    */
   protected boolean accept(char c) {
 

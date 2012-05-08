@@ -48,8 +48,7 @@ public class DefaultLineWrapperTest {
     String text = "เด็กที่มีปัญหาทางการเรียนรู้่บางคนสามารถเรียนร่วมกับเด็กปกติได้";
     breakIterator.setText(text);
     int start = breakIterator.first();
-    for (int end = breakIterator.next(); end != BreakIterator.DONE; start = end, end = breakIterator
-        .next()) {
+    for (int end = breakIterator.next(); end != BreakIterator.DONE; start = end, end = breakIterator.next()) {
       String substring = text.substring(start, end);
       if (substring.length() == 1) {
         System.out.println(((int) substring.charAt(0)));
@@ -60,9 +59,7 @@ public class DefaultLineWrapperTest {
   }
 
   /**
-   * Tests the method
-   * {@link LineWrapper#wrap(Appendable, TextTableInfo, String, TextColumnInfo)}
-   * .
+   * Tests the method {@link LineWrapper#wrap(Appendable, TextTableInfo, String, TextColumnInfo)} .
    */
   @Test
   public void testSingleColumn() {
@@ -110,12 +107,11 @@ public class DefaultLineWrapperTest {
   }
 
   /**
-   * This method counts the number of newlines by scanning the given text in
-   * reverse order starting at the given <code>index</code>.
+   * This method counts the number of newlines by scanning the given text in reverse order starting at the
+   * given <code>index</code>.
    * 
    * @param text is the text to scan for newlines.
-   * @param index is the index where to start from in reverse direction (to the
-   *        start of the text).
+   * @param index is the index where to start from in reverse direction (to the start of the text).
    * @return the number of newlines.
    */
   private int countReverseNewlines(CharSequence text, int index) {
@@ -143,21 +139,16 @@ public class DefaultLineWrapperTest {
   }
 
   /**
-   * This method verifies the result of a {@link LineWrapper} according to the
-   * input that was given.
+   * This method verifies the result of a {@link LineWrapper} according to the input that was given.
    * 
-   * @param wrappedText is the result of
-   *        {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn...)
+   * @param wrappedText is the result of {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn...)
    *        line-wrapping} that should be checked.
-   * @param tableInfo is the {@link TextTableInfo} that was given to the
-   *        {@link LineWrapper}.
-   * @param columns are the {@link TextColumn}s that have been given to the
-   *        {@link LineWrapper}.
-   * @return the number of lines produced by the {@link LineWrapper}. May be
-   *         used to check that an expected maximum of lines is not exceeded.
+   * @param tableInfo is the {@link TextTableInfo} that was given to the {@link LineWrapper}.
+   * @param columns are the {@link TextColumn}s that have been given to the {@link LineWrapper}.
+   * @return the number of lines produced by the {@link LineWrapper}. May be used to check that an expected
+   *         maximum of lines is not exceeded.
    */
-  protected int checkWrappedColumnText(CharSequence wrappedText, TextTableInfo tableInfo,
-      TextColumn... columns) {
+  protected int checkWrappedColumnText(CharSequence wrappedText, TextTableInfo tableInfo, TextColumn... columns) {
 
     int lineCount = 0;
     ColumnState[] columnStates = new ColumnState[columns.length];
@@ -295,8 +286,7 @@ public class DefaultLineWrapperTest {
   }
 
   /**
-   * Tests the method
-   * {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn...)} .
+   * Tests the method {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn...)} .
    */
   @Test
   public void testMultiColumn() {
@@ -342,8 +332,7 @@ public class DefaultLineWrapperTest {
     private int textIndex;
 
     /**
-     * <code>true</code> if line is expected to be indented, <code>false</code>
-     * otherwise.
+     * <code>true</code> if line is expected to be indented, <code>false</code> otherwise.
      */
     private boolean indent;
 

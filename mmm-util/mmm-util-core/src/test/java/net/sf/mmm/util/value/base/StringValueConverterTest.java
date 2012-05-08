@@ -60,8 +60,7 @@ public class StringValueConverterTest {
     // test int
     int intValue = getStringValueConverter().convertValue(valueString, source, int.class);
     assertEquals(value, intValue);
-    Integer integerObject = getStringValueConverter().convertValue(valueString, source,
-        Integer.class);
+    Integer integerObject = getStringValueConverter().convertValue(valueString, source, Integer.class);
     assertEquals(value, integerObject.intValue());
     // test long
     long longValue = getStringValueConverter().convertValue(valueString, source, long.class);
@@ -97,22 +96,17 @@ public class StringValueConverterTest {
       assertEquals(source, e.getNlsMessage().getArgument("source"));
     }
     // test string
-    assertEquals(valueString, getStringValueConverter().convertValue(valueString, source,
-        String.class));
+    assertEquals(valueString, getStringValueConverter().convertValue(valueString, source, String.class));
     // test boolean
-    assertTrue(getStringValueConverter().convertValue(StringUtil.TRUE, source, Boolean.class)
-        .booleanValue());
+    assertTrue(getStringValueConverter().convertValue(StringUtil.TRUE, source, Boolean.class).booleanValue());
     assertTrue(getStringValueConverter().convertValue(StringUtil.TRUE, source, boolean.class));
-    assertFalse(getStringValueConverter().convertValue(StringUtil.FALSE, source, Boolean.class)
-        .booleanValue());
+    assertFalse(getStringValueConverter().convertValue(StringUtil.FALSE, source, Boolean.class).booleanValue());
     assertFalse(getStringValueConverter().convertValue(StringUtil.FALSE, source, boolean.class));
     // test char
     char c = '\u0223';
     String charString = Character.toString(c);
-    assertEquals(Character.valueOf(c), getStringValueConverter().convertValue(charString, source,
-        char.class));
-    assertEquals(Character.valueOf(c), getStringValueConverter().convertValue(charString, source,
-        Character.class));
+    assertEquals(Character.valueOf(c), getStringValueConverter().convertValue(charString, source, char.class));
+    assertEquals(Character.valueOf(c), getStringValueConverter().convertValue(charString, source, Character.class));
     // test date
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
@@ -125,16 +119,13 @@ public class StringValueConverterTest {
     assertEquals(type, getStringValueConverter().convertValue(typeString, source, Class.class));
     // test enum
     RetentionPolicy policy = RetentionPolicy.RUNTIME;
-    assertEquals(policy, getStringValueConverter().convertValue(policy.name(), source,
-        RetentionPolicy.class));
+    assertEquals(policy, getStringValueConverter().convertValue(policy.name(), source, RetentionPolicy.class));
     Conjunction conjunction = Conjunction.NOR;
-    assertEquals(conjunction, getStringValueConverter().convertValue(conjunction.name(), source,
-        Conjunction.class));
+    assertEquals(conjunction, getStringValueConverter().convertValue(conjunction.name(), source, Conjunction.class));
     // test default-value
-    assertEquals(valueString, getStringValueConverter().convertValue(null, source, String.class,
-        type, valueString));
-    assertEquals(valueString, getStringValueConverter().convertValue(valueString, source,
-        String.class, type, "default"));
+    assertEquals(valueString, getStringValueConverter().convertValue(null, source, String.class, type, valueString));
+    assertEquals(valueString, getStringValueConverter()
+        .convertValue(valueString, source, String.class, type, "default"));
     integerObject = getStringValueConverter().convertValue(null, source, value, value, value);
     assertEquals(value, integerObject.intValue());
     // wrong value type

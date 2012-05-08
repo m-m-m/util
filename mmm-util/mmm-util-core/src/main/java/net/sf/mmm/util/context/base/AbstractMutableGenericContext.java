@@ -14,8 +14,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 
 /**
- * This class is the basic implementation of the {@link GenericContext}
- * interface.
+ * This class is the basic implementation of the {@link GenericContext} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -42,8 +41,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
    * @param parentContext is the context the created one will derive from.
    */
   @SuppressWarnings("rawtypes")
-  public AbstractMutableGenericContext(MapFactory<? extends Map> mapFactory,
-      GenericContext parentContext) {
+  public AbstractMutableGenericContext(MapFactory<? extends Map> mapFactory, GenericContext parentContext) {
 
     super();
     this.parent = parentContext;

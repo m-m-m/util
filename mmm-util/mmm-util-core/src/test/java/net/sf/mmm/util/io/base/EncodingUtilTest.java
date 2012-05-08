@@ -39,8 +39,7 @@ import org.junit.Test;
 public class EncodingUtilTest {
 
   private static final String[] UNSUPPORTED_ENCODINGS = { EncodingUtil.ENCODING_ISO_8859_10,
-      EncodingUtil.ENCODING_ISO_8859_12, EncodingUtil.ENCODING_ISO_8859_14,
-      EncodingUtil.ENCODING_ISO_8859_16 };
+      EncodingUtil.ENCODING_ISO_8859_12, EncodingUtil.ENCODING_ISO_8859_14, EncodingUtil.ENCODING_ISO_8859_16 };
 
   protected EncodingUtil getEncodingUtil() {
 
@@ -152,8 +151,7 @@ public class EncodingUtilTest {
     String expectedData = StreamUtilImpl.getInstance().read(reader);
     // test reading character per character
     in = new ByteArrayInputStream(data);
-    EncodingDetectionReader utfReader = getEncodingUtil().createUtfDetectionReader(in,
-        nonUtfEncoding);
+    EncodingDetectionReader utfReader = getEncodingUtil().createUtfDetectionReader(in, nonUtfEncoding);
     int len = expectedData.length();
     for (int i = 0; i < len; i++) {
       int c = utfReader.read();

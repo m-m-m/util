@@ -13,8 +13,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
 /**
  * This is the abstract base implementation of the {@link Formatter} interface.
  * 
- * @param <V> is the generic type of the actual value to {@link #format(Object)
- *        format}.
+ * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
  */
@@ -55,8 +54,7 @@ public abstract class AbstractFormatter<V> implements Formatter<V> {
   }
 
   /**
-   * Returns the (static) string representation for the undefined value
-   * <code>null</code>.
+   * Returns the (static) string representation for the undefined value <code>null</code>.
    * 
    * @return the null string.
    */
@@ -69,11 +67,9 @@ public abstract class AbstractFormatter<V> implements Formatter<V> {
    * @see #format(Object, Appendable)
    * 
    * @param value is the value to format (not <code>null</code>).
-   * @param buffer is the {@link Appendable} to
-   *        {@link Appendable#append(CharSequence) append} the formatted value
-   *        to.
-   * @throws IOException if caused by {@link Appendable#append(CharSequence)
-   *         append}.
+   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
+   *        value to.
+   * @throws IOException if caused by {@link Appendable#append(CharSequence) append}.
    */
   protected abstract void doFormat(V value, Appendable buffer) throws IOException;
 

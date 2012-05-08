@@ -7,11 +7,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface for a manager of {@link PojoPathFunction}s.<br>
- * Typically a {@link PojoPathNavigator} instance will have an
- * {@link PojoPathFunctionManager} to {@link #getFunction(String) resolve}
- * {@link PojoPathFunction}s. Further the {@link PojoPathContext} can
- * {@link PojoPathContext#getAdditionalFunctionManager() provide additional
- * functions} that are used prior.
+ * Typically a {@link PojoPathNavigator} instance will have an {@link PojoPathFunctionManager} to
+ * {@link #getFunction(String) resolve} {@link PojoPathFunction}s. Further the {@link PojoPathContext} can
+ * {@link PojoPathContext#getAdditionalFunctionManager() provide additional functions} that are used prior.
  * 
  * @see #getFunction(String)
  * 
@@ -22,15 +20,13 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 public interface PojoPathFunctionManager {
 
   /**
-   * This method gets a {@link PojoPathFunction} by its name. Therefore the
-   * {@link PojoPathFunction} instance has to be registered somehow in the
-   * implementation of {@link PojoPathFunctionManager this} interface.
+   * This method gets a {@link PojoPathFunction} by its name. Therefore the {@link PojoPathFunction} instance
+   * has to be registered somehow in the implementation of {@link PojoPathFunctionManager this} interface.
    * 
-   * @param functionName is the name of the requested {@link PojoPathFunction}
-   *        excluding the {@link PojoPathFunction#FUNCTION_NAME_PREFIX prefix}.
-   * @return the requested {@link PojoPathFunction} or <code>null</code> if no
-   *         {@link PojoPathFunction} is registered for the given
-   *         <code>functionName</code>.
+   * @param functionName is the name of the requested {@link PojoPathFunction} excluding the
+   *        {@link PojoPathFunction#FUNCTION_NAME_PREFIX prefix}.
+   * @return the requested {@link PojoPathFunction} or <code>null</code> if no {@link PojoPathFunction} is
+   *         registered for the given <code>functionName</code>.
    */
   @SuppressWarnings("rawtypes")
   PojoPathFunction getFunction(String functionName);

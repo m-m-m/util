@@ -4,12 +4,11 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * A {@link BooleanEnum} represents a {@link Boolean} as enum type. This may
- * seem pointless in the first place but is usable for annotations that can not
- * have <code>null</code> values. However, in this case it is often desirable to
- * express a default that is neither <code>true</code> nor <code>false</code>
- * e.g. if the default can be determined from other values. In such case you can
- * use {@link BooleanEnum} instead and {@link BooleanEnum#NULL} as default.
+ * A {@link BooleanEnum} represents a {@link Boolean} as enum type. This may seem pointless in the first place
+ * but is usable for annotations that can not have <code>null</code> values. However, in this case it is often
+ * desirable to express a default that is neither <code>true</code> nor <code>false</code> e.g. if the default
+ * can be determined from other values. In such case you can use {@link BooleanEnum} instead and
+ * {@link BooleanEnum#NULL} as default.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2
@@ -87,8 +86,7 @@ public enum BooleanEnum implements Datatype<Boolean> {
   /**
    * This method gets the {@link BooleanEnum} for the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link BooleanEnum}.
+   * @param value is the {@link #getValue() value} of the requested {@link BooleanEnum}.
    * @return the requested {@link BooleanEnum}.
    */
   public static BooleanEnum fromValue(Boolean value) {

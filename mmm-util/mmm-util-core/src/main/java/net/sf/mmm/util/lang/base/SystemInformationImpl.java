@@ -70,8 +70,8 @@ public class SystemInformationImpl implements SystemInformation {
    * @param systemType - see {@link #getSystemType()}.
    * @param mobileDevice - see {@link #isLimitedDevice()}.
    */
-  public SystemInformationImpl(String systemName, String systemVersion, String systemArchitecture,
-      String systemType, boolean mobileDevice) {
+  public SystemInformationImpl(String systemName, String systemVersion, String systemArchitecture, String systemType,
+      boolean mobileDevice) {
 
     super();
     this.systemName = systemName;
@@ -85,9 +85,9 @@ public class SystemInformationImpl implements SystemInformation {
    * @see #getSystemType()
    * 
    * @param osName - see {@link #getSystemName()}.
-   * @param currentSystem - <code>true</code> if the value should be determined
-   *        for the system and JVM currently running (in this case additional
-   *        system-properties might be evaluated), <code>false</code> otherwise.
+   * @param currentSystem - <code>true</code> if the value should be determined for the system and JVM
+   *        currently running (in this case additional system-properties might be evaluated),
+   *        <code>false</code> otherwise.
    * @return the value for {@link #isLimitedDevice()}.
    */
   private static String detectSystemType(String osName, boolean currentSystem) {
@@ -104,13 +104,11 @@ public class SystemInformationImpl implements SystemInformation {
       return SYSTEM_TYPE_LINUX;
     } else if (os.contains("bsd")) {
       return SYSTEM_TYPE_BSD;
-    } else if (os.contains("solaris") || os.contains("hp-ux") || os.contains("nix")
-        || os.contains("aix") || os.contains("nextstep") || os.contains("sorix")
-        || os.contains("irix")) {
+    } else if (os.contains("solaris") || os.contains("hp-ux") || os.contains("nix") || os.contains("aix")
+        || os.contains("nextstep") || os.contains("sorix") || os.contains("irix")) {
       return SYSTEM_TYPE_UNIX;
-    } else if (os.startsWith("z/") || os.startsWith("os/360") || os.startsWith("os/390")
-        || os.startsWith("os/400") || os.startsWith("bs2000") || os.startsWith("mvs")
-        || os.startsWith("tpf") || os.equals("cms")) {
+    } else if (os.startsWith("z/") || os.startsWith("os/360") || os.startsWith("os/390") || os.startsWith("os/400")
+        || os.startsWith("bs2000") || os.startsWith("mvs") || os.startsWith("tpf") || os.equals("cms")) {
       return SYSTEM_TYPE_MAINFRAIME;
     } else {
       return SYSTEM_TYPE_OTHER;
@@ -122,13 +120,12 @@ public class SystemInformationImpl implements SystemInformation {
    * 
    * @param osName - see {@link #getSystemName()}.
    * @param osArchitecture - see {@link #getSystemArchitecture()}.
-   * @param currentSystem - <code>true</code> if the value should be determined
-   *        for the system and JVM currently running (in this case additional
-   *        system-properties might be evaluated), <code>false</code> otherwise.
+   * @param currentSystem - <code>true</code> if the value should be determined for the system and JVM
+   *        currently running (in this case additional system-properties might be evaluated),
+   *        <code>false</code> otherwise.
    * @return the value for {@link #isLimitedDevice()}.
    */
-  private static boolean detectLimitedDevice(String osName, String osArchitecture,
-      boolean currentSystem) {
+  private static boolean detectLimitedDevice(String osName, String osArchitecture, boolean currentSystem) {
 
     String os = osName.toLowerCase(Locale.US).trim();
     if (os.contains("windows ce")) {
@@ -142,8 +139,7 @@ public class SystemInformationImpl implements SystemInformation {
       return true;
     }
     if (currentSystem) {
-      String vmName = System.getProperty(SystemUtil.PROPERTY_JAVA_VM_NAME).toLowerCase(
-          Locale.US);
+      String vmName = System.getProperty(SystemUtil.PROPERTY_JAVA_VM_NAME).toLowerCase(Locale.US);
       if (vmName.contains("dalvik")) {
         return true;
       }

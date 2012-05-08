@@ -10,8 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.reflect.base.ManifestLoader;
 
 /**
- * This is the abstract base class for a {@link AbstractMain main-program} that
- * has a version.
+ * This is the abstract base class for a {@link AbstractMain main-program} that has a version.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

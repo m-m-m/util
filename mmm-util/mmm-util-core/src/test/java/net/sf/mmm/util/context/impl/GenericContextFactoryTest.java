@@ -94,8 +94,7 @@ public class GenericContextFactoryTest {
   }
 
   /**
-   * This method tests {@link GenericContext#createChildContext() child
-   * contexts}.
+   * This method tests {@link GenericContext#createChildContext() child contexts}.
    */
   @Test
   public void testChildContexts() {
@@ -134,9 +133,8 @@ public class GenericContextFactoryTest {
   }
 
   /**
-   * This method tests modifications of a root-context while concurrent threads
-   * read from individual {@link GenericContext#createChildContext() child
-   * contexts}.
+   * This method tests modifications of a root-context while concurrent threads read from individual
+   * {@link GenericContext#createChildContext() child contexts}.
    * 
    * @throws Exception on failure.
    */

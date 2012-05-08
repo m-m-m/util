@@ -6,13 +6,11 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link ReadOnlyException} is thrown if the modification of something failed
- * because it is read-only. Here something can be the property of a java object,
- * an attribute in a persistent store, a file, etc.<br/>
+ * A {@link ReadOnlyException} is thrown if the modification of something failed because it is read-only. Here
+ * something can be the property of a java object, an attribute in a persistent store, a file, etc.<br/>
  * <b>ATTENTION:</b><br>
- * Please design your APIs in a way to prevent such exception where ever
- * possible. However for generic access to objects that can be mutable or
- * read-only this exception is the right choice.
+ * Please design your APIs in a way to prevent such exception where ever possible. However for generic access
+ * to objects that can be mutable or read-only this exception is the right choice.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.2

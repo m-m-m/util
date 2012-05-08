@@ -8,8 +8,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * This class is the implementation of the
- * {@link net.sf.mmm.util.nls.api.NlsTemplate} interface. It uses
+ * This class is the implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplate} interface. It uses
  * {@link ResourceBundle}s for localization.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -27,8 +26,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
    * The constructor.
    * 
    * @param name is the {@link #getName() name} of the bundle.
-   * @param key is the {@link #getKey() key} of the string to lookup in the
-   *        bundle.
+   * @param key is the {@link #getKey() key} of the string to lookup in the bundle.
    */
   public NlsTemplateImpl(String name, String key) {
 
@@ -38,10 +36,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * This method gets the
-   * {@link java.util.ResourceBundle#getBundle(String, java.util.Locale)
-   * base-name} used to lookup the bundle (typically a
-   * {@link java.util.ResourceBundle}).
+   * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used
+   * to lookup the bundle (typically a {@link java.util.ResourceBundle}).
    * 
    * @return the bundleName is the base-name of the associated bundle.
    */
@@ -51,9 +47,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * This method gets the {@link java.util.ResourceBundle#getString(String) key}
-   * of the string to lookup from the {@link #getName() bundle}. The key is a
-   * technical UID like (<code>ERR_VALUE_OUT_OF_RANGE</code>).
+   * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from
+   * the {@link #getName() bundle}. The key is a technical UID like (<code>ERR_VALUE_OUT_OF_RANGE</code>).
    * 
    * @return the bundleKey is the key used to lookup the string from the bundle.
    */

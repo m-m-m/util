@@ -7,8 +7,8 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This exception is thrown if a resource was requested for an URI that is
- * undefined or illegal (e.g. "hppt:\\.com/...").
+ * This exception is thrown if a resource was requested for an URI that is undefined or illegal (e.g.
+ * "hppt:\\.com/...").
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

@@ -64,8 +64,8 @@ public class StringUtilTest {
     Assert.assertEquals("foo-bar", getStringUtil().fromCamlCase("FooBar", '-'));
     Assert.assertEquals("foo_bar", getStringUtil().fromCamlCase("FOO_BAR", '*'));
     Assert.assertEquals("some.word.mix", getStringUtil().fromCamlCase("someWordMix", '.'));
-    Assert.assertEquals("abbreviations_like_xmlshould_not_be_capitalized", getStringUtil()
-        .fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));
+    Assert.assertEquals("abbreviations_like_xmlshould_not_be_capitalized",
+        getStringUtil().fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));
   }
 
   @Test
@@ -97,17 +97,14 @@ public class StringUtilTest {
     collection.add(Character.valueOf('\''));
 
     StringSyntaxBean syntax = new StringSyntaxBean('\\');
-    Assert.assertEquals("abc;,a\\,b\\,c,123,'",
-        getStringUtil().toSeparatedString(collection, ",", syntax));
+    Assert.assertEquals("abc;,a\\,b\\,c,123,'", getStringUtil().toSeparatedString(collection, ",", syntax));
 
     syntax.setQuote('\'');
-    Assert.assertEquals("'abc;','a,b,c','123','\\''",
-        getStringUtil().toSeparatedString(collection, ",", syntax));
+    Assert.assertEquals("'abc;','a,b,c','123','\\''", getStringUtil().toSeparatedString(collection, ",", syntax));
 
     syntax.setQuoteStart('[');
     syntax.setQuoteEnd(']');
-    Assert.assertEquals("[abc;]; [a,b,c]; [123]; [']",
-        getStringUtil().toSeparatedString(collection, "; ", syntax));
+    Assert.assertEquals("[abc;]; [a,b,c]; [123]; [']", getStringUtil().toSeparatedString(collection, "; ", syntax));
   }
 
   @Test
@@ -123,8 +120,7 @@ public class StringUtilTest {
 
     List<Integer> collection = new ArrayList<Integer>();
     ValueConverterToNumber converter = getValueConverterToNumber();
-    getStringUtil().fromSeparatedString("1; 42; 3; 99", "; ", syntax, collection, converter,
-        Integer.class);
+    getStringUtil().fromSeparatedString("1; 42; 3; 99", "; ", syntax, collection, converter, Integer.class);
     Assert.assertEquals(4, collection.size());
     Assert.assertEquals(Integer.valueOf(1), collection.get(0));
     Assert.assertEquals(Integer.valueOf(42), collection.get(1));

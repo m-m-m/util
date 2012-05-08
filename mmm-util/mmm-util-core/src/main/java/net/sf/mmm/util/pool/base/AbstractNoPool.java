@@ -6,9 +6,8 @@ package net.sf.mmm.util.pool.base;
 import net.sf.mmm.util.pool.api.Pool;
 
 /**
- * This is the abstract base implementation of a dummy {@link Pool} that is
- * actually NOT pooling at all. It always creates a fresh instance on
- * {@link #borrow()} and does nothing on {@link #release(Object)}.
+ * This is the abstract base implementation of a dummy {@link Pool} that is actually NOT pooling at all. It
+ * always creates a fresh instance on {@link #borrow()} and does nothing on {@link #release(Object)}.
  * 
  * @param <E> is the templated type of the elements in the pool.
  * 

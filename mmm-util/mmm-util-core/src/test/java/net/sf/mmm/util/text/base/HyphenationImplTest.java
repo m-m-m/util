@@ -30,7 +30,7 @@ public class HyphenationImplTest {
     int start = prefix.length();
     int end = text.length() - suffix.length();
     char hyphen = '-';
-    Hyphenation hyphenation = new HyphenationImpl(text.substring(start, end), hyphen, new int[] { });
+    Hyphenation hyphenation = new HyphenationImpl(text.substring(start, end), hyphen, new int[] {});
     Assert.assertEquals(word, hyphenation.toString());
     Assert.assertEquals(word, hyphenation.getWord());
     Assert.assertEquals(hyphen, hyphenation.getHyphen());

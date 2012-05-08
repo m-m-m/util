@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * This is the interface for a node of a linked list.<br>
  * <b>ATTENTION:</b><br>
- * According to the generic-type-system of Java this interface can not be used
- * as a proper API until the generic &lt;NODE&gt; is finally bound. Please use
- * {@link net.sf.mmm.util.collection.base.BasicLinkedNode} instead.
+ * According to the generic-type-system of Java this interface can not be used as a proper API until the
+ * generic &lt;NODE&gt; is finally bound. Please use {@link net.sf.mmm.util.collection.base.BasicLinkedNode}
+ * instead.
  * 
  * 
  * @param <V> is the generic type of the {@link #getValue() value} of this node.
@@ -24,8 +24,7 @@ public interface LinkedNode<V, NODE extends LinkedNode<V, NODE>> {
   /**
    * This method gets the next node of the linked list.
    * 
-   * @return the next {@link LinkedNode node} or <code>null</code> if this is
-   *         the last node (tail).
+   * @return the next {@link LinkedNode node} or <code>null</code> if this is the last node (tail).
    */
   NODE getNext();
 
@@ -37,29 +36,26 @@ public interface LinkedNode<V, NODE extends LinkedNode<V, NODE>> {
   V getValue();
 
   /**
-   * This method determines if this node is linked. A node is linked if it has a
-   * {@link #getNext() next node}.
+   * This method determines if this node is linked. A node is linked if it has a {@link #getNext() next node}.
    * 
    * @return <code>true</code> if linked, <code>false</code> otherwise.
    */
   boolean isLinked();
 
   /**
-   * This method appends the {@link #getValue() values} of the list represented
-   * by this node to the given <code>list</code>.<br/>
-   * Call this method on the head-node with an empty {@link List} to convert a
-   * {@link LinkedNode}-list to a regular {@link List}.
+   * This method appends the {@link #getValue() values} of the list represented by this node to the given
+   * <code>list</code>.<br/>
+   * Call this method on the head-node with an empty {@link List} to convert a {@link LinkedNode}-list to a
+   * regular {@link List}.
    * 
    * @param list is where to append the values.
    */
   void addToList(List<V> list);
 
   /**
-   * This method converts the list represented by this node to a regular
-   * {@link List}.
+   * This method converts the list represented by this node to a regular {@link List}.
    * 
-   * @return the {@link List} of all {@link #getValue() values} of the list
-   *         represented by this node.
+   * @return the {@link List} of all {@link #getValue() values} of the list represented by this node.
    */
   List<V> toList();
 

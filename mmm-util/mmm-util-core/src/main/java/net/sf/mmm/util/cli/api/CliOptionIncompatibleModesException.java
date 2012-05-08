@@ -6,8 +6,8 @@ package net.sf.mmm.util.cli.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link CliOptionIncompatibleModesException} is thrown if two {@link CliOption options} are
- * used together that have incompatible {@link CliOption#mode() modes}.
+ * A {@link CliOptionIncompatibleModesException} is thrown if two {@link CliOption options} are used together
+ * that have incompatible {@link CliOption#mode() modes}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -18,8 +18,7 @@ public class CliOptionIncompatibleModesException extends CliException {
   private static final long serialVersionUID = 1233209808038797353L;
 
   /**
-   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   * argument} {@value}.
+   * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) argument} {@value}.
    */
   public static final String KEY_OPTION2 = "option2";
 

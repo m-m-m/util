@@ -6,23 +6,18 @@ package net.sf.mmm.util.collection.api;
 import java.util.Map;
 
 /**
- * This is the interface for a factory of {@link Map maps}. It allows to
- * abstract from {@link Map} implementations.<br>
- * A {@link Map} instance can be used for different purposes such as a cache or
- * with different aspects such as a thread-safe map. If you write a generic
- * component different users of that component may expect different aspects of
- * your component and therefore the underlying {@link Map}.<br>
- * If you use this interface and allow the user to {@link javax.inject.Inject
- * inject} an instance of this interface to override the default, your code will
- * increase usability.<br>
- * <b>Why passing a {@link MapFactory} rather than a {@link Map} instance to the
- * constructor?</b><br>
- * Since java 5 you want to use generics for type-safe code. If these generic
- * types change slightly over the time of development (e.g. from
- * <code>Class</code> to <code>Class&lt;?&gt;</code>) you would break
- * compatibility of the users of your code. Additionally you may want to express
- * that the {@link Map} should be empty and/or NOT shared with others. Anyways
- * the interface can obviously NOT guarantee this.
+ * This is the interface for a factory of {@link Map maps}. It allows to abstract from {@link Map}
+ * implementations.<br>
+ * A {@link Map} instance can be used for different purposes such as a cache or with different aspects such as
+ * a thread-safe map. If you write a generic component different users of that component may expect different
+ * aspects of your component and therefore the underlying {@link Map}.<br>
+ * If you use this interface and allow the user to {@link javax.inject.Inject inject} an instance of this
+ * interface to override the default, your code will increase usability.<br>
+ * <b>Why passing a {@link MapFactory} rather than a {@link Map} instance to the constructor?</b><br>
+ * Since java 5 you want to use generics for type-safe code. If these generic types change slightly over the
+ * time of development (e.g. from <code>Class</code> to <code>Class&lt;?&gt;</code>) you would break
+ * compatibility of the users of your code. Additionally you may want to express that the {@link Map} should
+ * be empty and/or NOT shared with others. Anyways the interface can obviously NOT guarantee this.
  * 
  * @see net.sf.mmm.util.collection.base.HashMapFactory#INSTANCE
  * 
@@ -41,8 +36,7 @@ public interface MapFactory<MAP extends Map> {
   Class<MAP> getMapInterface();
 
   /**
-   * This method gets the implementation of the {@link #getMapInterface()
-   * map-interface} used by this factory.
+   * This method gets the implementation of the {@link #getMapInterface() map-interface} used by this factory.
    * 
    * @return the {@link Map} implementation.
    */
@@ -50,11 +44,10 @@ public interface MapFactory<MAP extends Map> {
 
   /**
    * This method creates a new {@link Map} instance.<br>
-   * It is explicitly typed and respects the generic key and value type of the
-   * map. Therefore the type of the {@link Map} can NOT be bound to the generic
-   * type <code>&lt;MAP&gt;</code> because of limitations in Java's generic type
-   * system. You need to work on the actual sub-interface (e.g.
-   * {@link SortedMapFactory}) to get a more specific result type.
+   * It is explicitly typed and respects the generic key and value type of the map. Therefore the type of the
+   * {@link Map} can NOT be bound to the generic type <code>&lt;MAP&gt;</code> because of limitations in
+   * Java's generic type system. You need to work on the actual sub-interface (e.g. {@link SortedMapFactory})
+   * to get a more specific result type.
    * 
    * @param <K> the type of keys maintained by the map.
    * @param <V> the type of mapped values.
@@ -63,9 +56,8 @@ public interface MapFactory<MAP extends Map> {
   <K, V> Map<K, V> create();
 
   /**
-   * This method creates a new {@link Map} instance with the given
-   * <code>capacity</code>. For a regular map this will be the initial capacity
-   * while a cache may never grow beyond this capacity limit and if reached
+   * This method creates a new {@link Map} instance with the given <code>capacity</code>. For a regular map
+   * this will be the initial capacity while a cache may never grow beyond this capacity limit and if reached
    * force out entries last recently of frequently used.
    * 
    * @param <K> the type of keys maintained by the map.
@@ -76,16 +68,14 @@ public interface MapFactory<MAP extends Map> {
   <K, V> Map<K, V> create(int capacity);
 
   /**
-   * This method creates a new instance of the generic {@link Map} type
-   * <code>&lt;MAP&gt;</code>.
+   * This method creates a new instance of the generic {@link Map} type <code>&lt;MAP&gt;</code>.
    * 
    * @return the new {@link Map} instance.
    */
   MAP createGeneric();
 
   /**
-   * This method creates a new instance of the generic {@link Map} type
-   * <code>&lt;MAP&gt;</code>.
+   * This method creates a new instance of the generic {@link Map} type <code>&lt;MAP&gt;</code>.
    * 
    * @param capacity is the capacity of the map to create.
    * @return the new {@link Map} instance.

@@ -8,8 +8,7 @@ import java.util.Map;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * A {@link CliException} is thrown, if the commandline arguments are invalid
- * for a specific main-program.
+ * A {@link CliException} is thrown, if the commandline arguments are invalid for a specific main-program.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -22,10 +21,9 @@ public abstract class CliException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
    */
   public CliException(String internationalizedMessage) {
 
@@ -36,10 +34,9 @@ public abstract class CliException extends NlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
    */
   public CliException(Throwable nested, String internationalizedMessage) {
 
@@ -49,15 +46,12 @@ public abstract class CliException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   *        arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        filled into <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
   public CliException(String internationalizedMessage, Map<String, Object> arguments) {
 
@@ -68,18 +62,14 @@ public abstract class CliException extends NlsRuntimeException {
    * The constructor.
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It
-   *        is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        internationalization} and should be in English language.
-   * @param arguments are the
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String)
-   *        arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage()
-   *        filled into <code>internationalizedMessage</code>}.
+   * @param internationalizedMessage is a short description of the problem. It is used for
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
+   *        should be in English language.
+   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
+   *        <code>internationalizedMessage</code>}.
    */
-  public CliException(Throwable nested, String internationalizedMessage,
-      Map<String, Object> arguments) {
+  public CliException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
   }

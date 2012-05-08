@@ -10,8 +10,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This is an implementation of the {@link WildcardType} interface for a single
- * lower bound.
+ * This is an implementation of the {@link WildcardType} interface for a single lower bound.
  * 
  * @see ReflectionUtilImpl#toType(String)
  * 
@@ -64,8 +63,7 @@ public class LowerBoundWildcardType implements WildcardType {
     }
     if ((other != null) && (other instanceof WildcardType)) {
       WildcardType otherWildcard = (WildcardType) other;
-      if ((otherWildcard.getLowerBounds().length == 1)
-          && (otherWildcard.getUpperBounds().length == 0)
+      if ((otherWildcard.getLowerBounds().length == 1) && (otherWildcard.getUpperBounds().length == 0)
           && (this.lowerBound.equals(otherWildcard.getLowerBounds()[0]))) {
         return true;
       }

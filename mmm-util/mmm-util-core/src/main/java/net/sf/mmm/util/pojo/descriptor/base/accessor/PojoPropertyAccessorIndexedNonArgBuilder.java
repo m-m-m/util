@@ -7,8 +7,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedN
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 
 /**
- * This is the interface used to create a
- * {@link PojoPropertyAccessorIndexedNonArg indexed non-arg accessor}.
+ * This is the interface used to create a {@link PojoPropertyAccessorIndexedNonArg indexed non-arg accessor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

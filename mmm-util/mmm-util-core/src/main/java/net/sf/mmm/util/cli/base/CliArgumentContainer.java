@@ -14,8 +14,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.value.api.ValueValidator;
 
 /**
- * This is a container for a {@link CliArgument} together with additional
- * associated information.
+ * This is a container for a {@link CliArgument} together with additional associated information.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -74,11 +73,9 @@ public class CliArgumentContainer extends CliParameterContainer {
   }
 
   /**
-   * This method gets the {@link CliArgument#id() ID} of the {@link CliArgument
-   * argument}.
+   * This method gets the {@link CliArgument#id() ID} of the {@link CliArgument argument}.
    * 
-   * @return the {@link CliArgument#id() ID} or the {@link CliArgument#name()
-   *         name} if ID is not set.
+   * @return the {@link CliArgument#id() ID} or the {@link CliArgument#name() name} if ID is not set.
    */
   public String getId() {
 

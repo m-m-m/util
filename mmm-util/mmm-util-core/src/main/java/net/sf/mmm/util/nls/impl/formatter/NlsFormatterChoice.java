@@ -27,9 +27,8 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter}
- * for {@link net.sf.mmm.util.nls.api.NlsFormatterManager#TYPE_CHOICE
- * choice-format}.<br>
+ * This is the implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
+ * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#TYPE_CHOICE choice-format}.<br>
  * Examples:<br>
  * <table border="1">
  * <tr>
@@ -37,8 +36,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * <th>Example result</th>
  * </tr>
  * <tr>
- * <td>{deleteCount} {deleteCount,choice,(?==1)['files'](else)['file']} deleted.
- * </td>
+ * <td>{deleteCount} {deleteCount,choice,(?==1)['files'](else)['file']} deleted.</td>
  * <td>1 file deleted.</td>
  * </tr>
  * <tr>
@@ -56,8 +54,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   private static final String REQUIRED_FORMAT_COMPARATOR = "(==|!=|>=|>|<=|<)";
 
   /** The format of a condition. */
-  private static final String REQUIRED_FORMAT_CONDITION = "(else|?" + REQUIRED_FORMAT_COMPARATOR
-      + "[0-9a-zA-Z+-.:])";
+  private static final String REQUIRED_FORMAT_CONDITION = "(else|?" + REQUIRED_FORMAT_COMPARATOR + "[0-9a-zA-Z+-.:])";
 
   /** The character used to indicate the start of a {@link Choice} condition. */
   public static final char CONDITION_START = '(';
@@ -66,8 +63,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   public static final char CONDITION_END = ')';
 
   /**
-   * The character used to indicate the variable object of a {@link Choice}
-   * condition.
+   * The character used to indicate the variable object of a {@link Choice} condition.
    */
   public static final char CONDITION_VAR = '?';
 
@@ -78,15 +74,13 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   private static final Filter<Object> FILTER_ELSE = ConstantFilter.getInstance(true);
 
   /**
-   * The {@link CharFilter} for the {@link Comparator#getValue() comparator
-   * symbol} .
+   * The {@link CharFilter} for the {@link Comparator#getValue() comparator symbol} .
    */
   private static final CharFilter FILTER_COMPARATOR = new ListCharFilter(true, '<', '=', '>', '!');
 
   /** The {@link CharFilter} for the comparator argument. */
-  private static final CharFilter FILTER_COMPARATOR_ARGUMENT = new ConjunctionCharFilter(
-      Conjunction.OR, CharFilter.LATIN_DIGIT_OR_LETTER_FILTER, new ListCharFilter(true, '-', '+',
-          '.', ':'));
+  private static final CharFilter FILTER_COMPARATOR_ARGUMENT = new ConjunctionCharFilter(Conjunction.OR,
+      CharFilter.LATIN_DIGIT_OR_LETTER_FILTER, new ListCharFilter(true, '-', '+', '.', ':'));
 
   /** The {@link NlsDependencies} to use. */
   private final NlsDependencies nlsDependencies;
@@ -97,8 +91,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   /**
    * The constructor.
    * 
-   * @param scanner is the {@link CharSequenceScanner} pointing to the choice-
-   *        <code>formatStyle</code>.
+   * @param scanner is the {@link CharSequenceScanner} pointing to the choice- <code>formatStyle</code>.
    * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
   public NlsFormatterChoice(CharSequenceScanner scanner, NlsDependencies nlsDependencies) {
@@ -144,8 +137,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
       String result = scanner.readUntil(c, false, c);
       choice = new Choice(condition, result, null);
     } else {
-      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
-          "({...}|'.*'])", NlsArgument.class);
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), "({...}|'.*'])",
+          NlsArgument.class);
     }
     return choice;
   }
@@ -154,8 +147,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
    * This method parses the {@link Condition}.
    * 
    * @param scanner is the {@link CharSequenceScanner}.
-   * @return the parsed {@link Condition} or {@link #FILTER_ELSE} in case of
-   *         {@link #CONDITION_ELSE}.
+   * @return the parsed {@link Condition} or {@link #FILTER_ELSE} in case of {@link #CONDITION_ELSE}.
    */
   private Filter<Object> parseCondition(CharSequenceScanner scanner) {
 
@@ -173,19 +165,18 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     } else if (scanner.expect(CONDITION_ELSE, false)) {
       condition = FILTER_ELSE;
     } else {
-      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
-          REQUIRED_FORMAT_CONDITION, getType());
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_CONDITION,
+          getType());
     }
     if (!scanner.expect(CONDITION_END)) {
-      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
-          REQUIRED_FORMAT_CONDITION, getType());
+      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_CONDITION,
+          getType());
     }
     return condition;
   }
 
   /**
-   * This method parses the {@link Condition#comparatorArgument comparator
-   * argument}.
+   * This method parses the {@link Condition#comparatorArgument comparator argument}.
    * 
    * @param scanner is the {@link CharSequenceScanner}.
    * @return the parsed comparator argument.
@@ -201,8 +192,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     } else {
       String argument = scanner.readWhile(FILTER_COMPARATOR_ARGUMENT);
       if (argument.length() == 0) {
-        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
-            REQUIRED_FORMAT_CONDITION, getType());
+        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_CONDITION,
+            getType());
       }
       if ("null".equals(argument)) {
         comparatorArgument = null;
@@ -223,14 +214,13 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   /**
    * {@inheritDoc}
    */
-  public void format(Object object, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     for (Choice choice : this.choices) {
       if (choice.condition.accept(object)) {
         if (choice.argument != null) {
-          this.nlsDependencies.getArgumentFormatter().format(choice.argument, locale, arguments,
-              resolver, buffer);
+          this.nlsDependencies.getArgumentFormatter().format(choice.argument, locale, arguments, resolver, buffer);
         } else {
           buffer.append(choice.result);
         }
@@ -265,8 +255,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     private final Filter<Object> condition;
 
     /**
-     * The {@link NlsArgument} to use as result or <code>null</code> if
-     * {@link #result} should be used instead.
+     * The {@link NlsArgument} to use as result or <code>null</code> if {@link #result} should be used
+     * instead.
      */
     private final NlsArgument argument;
 

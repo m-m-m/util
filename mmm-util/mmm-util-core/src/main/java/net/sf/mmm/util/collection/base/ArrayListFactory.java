@@ -9,8 +9,7 @@ import java.util.List;
 import net.sf.mmm.util.collection.api.ListFactory;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.util.collection.api.ListFactory} interface that creates
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.ListFactory} interface that creates
  * instances of {@link ArrayList}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -39,8 +39,7 @@ public class XmlCompareMode {
   /**
    * This method determines how {@link org.w3c.dom.Comment}s are compared.
    * 
-   * @return <code>true</code> if comments will be compared, <code>false</code>
-   *         to ignore comments.
+   * @return <code>true</code> if comments will be compared, <code>false</code> to ignore comments.
    */
   public boolean isCheckComments() {
 
@@ -56,15 +55,13 @@ public class XmlCompareMode {
   }
 
   /**
-   * This method determines how to deal with <em>whitespace-characters</em>
-   * <code>' '</code> ,<code>'\t'</code>,<code>'\r'</code>, and
-   * <code>'\n'</code> when comparing content of {@link org.w3c.dom.Text} (or
-   * {@link org.w3c.dom.CDATASection}).
+   * This method determines how to deal with <em>whitespace-characters</em> <code>' '</code> ,
+   * <code>'\t'</code>,<code>'\r'</code>, and <code>'\n'</code> when comparing content of
+   * {@link org.w3c.dom.Text} (or {@link org.w3c.dom.CDATASection}).
    * 
-   * @return <code>true</code> if leading and trailing whitespace-characters
-   *         will be ignored around line-breaks (breaking and indentation does
-   *         NOT matter) and <code>false</code> if all whitespace-characters
-   *         have to be equal.
+   * @return <code>true</code> if leading and trailing whitespace-characters will be ignored around
+   *         line-breaks (breaking and indentation does NOT matter) and <code>false</code> if all
+   *         whitespace-characters have to be equal.
    */
   public boolean isNormalizeSpaces() {
 
@@ -80,17 +77,14 @@ public class XmlCompareMode {
   }
 
   /**
-   * This method determines if subsequent {@link org.w3c.dom.Text}-nodes should
-   * be treated as one single {@link org.w3c.dom.Text}-node when comparing XML.
-   * The {@link #XmlCompareMode() default} is <code>true</code>. If both
-   * {@link #isJoinText() joinText} {@link #isJoinCData() joinCData} are set,
-   * {@link org.w3c.dom.Text} and {@link org.w3c.dom.CDATASection} are treated
-   * as equal, what means that all text between nodes is treated as single text
-   * no matter what node-structure is used to represent it.
+   * This method determines if subsequent {@link org.w3c.dom.Text}-nodes should be treated as one single
+   * {@link org.w3c.dom.Text}-node when comparing XML. The {@link #XmlCompareMode() default} is
+   * <code>true</code>. If both {@link #isJoinText() joinText} {@link #isJoinCData() joinCData} are set,
+   * {@link org.w3c.dom.Text} and {@link org.w3c.dom.CDATASection} are treated as equal, what means that all
+   * text between nodes is treated as single text no matter what node-structure is used to represent it.
    * 
-   * @return <code>true</code> if the content of {@link org.w3c.dom.Text}-nodes
-   *         should joined before comparison, <code>false</code> if each
-   *         {@link org.w3c.dom.Text}-node is compared separately.
+   * @return <code>true</code> if the content of {@link org.w3c.dom.Text}-nodes should joined before
+   *         comparison, <code>false</code> if each {@link org.w3c.dom.Text}-node is compared separately.
    */
   public boolean isJoinText() {
 
@@ -106,18 +100,15 @@ public class XmlCompareMode {
   }
 
   /**
-   * This method determines if subsequent {@link org.w3c.dom.CDATASection}-nodes
-   * should be treated as one single {@link org.w3c.dom.CDATASection}-node when
-   * comparing XML. The {@link #XmlCompareMode() default} is <code>true</code>.
-   * If both {@link #isJoinText() joinText} {@link #isJoinCData() joinCData} are
-   * set, {@link org.w3c.dom.Text} and {@link org.w3c.dom.CDATASection} are
-   * treated as equal, what means that all text between nodes is treated as
-   * single text no matter what node-structure is used to represent it.
+   * This method determines if subsequent {@link org.w3c.dom.CDATASection}-nodes should be treated as one
+   * single {@link org.w3c.dom.CDATASection}-node when comparing XML. The {@link #XmlCompareMode() default} is
+   * <code>true</code>. If both {@link #isJoinText() joinText} {@link #isJoinCData() joinCData} are set,
+   * {@link org.w3c.dom.Text} and {@link org.w3c.dom.CDATASection} are treated as equal, what means that all
+   * text between nodes is treated as single text no matter what node-structure is used to represent it.
    * 
-   * @return <code>true</code> if the content of
-   *         {@link org.w3c.dom.CDATASection}-nodes should joined before
-   *         comparison, <code>false</code> if each
-   *         {@link org.w3c.dom.CDATASection}-node is compared separately.
+   * @return <code>true</code> if the content of {@link org.w3c.dom.CDATASection}-nodes should joined before
+   *         comparison, <code>false</code> if each {@link org.w3c.dom.CDATASection}-node is compared
+   *         separately.
    */
   public boolean isJoinCData() {
 
@@ -133,13 +124,11 @@ public class XmlCompareMode {
   }
 
   /**
-   * This method determines if subsequent {@link org.w3c.dom.Comment}-nodes
-   * should be treated as one single {@link org.w3c.dom.Comment}-node when
-   * comparing XML.
+   * This method determines if subsequent {@link org.w3c.dom.Comment}-nodes should be treated as one single
+   * {@link org.w3c.dom.Comment}-node when comparing XML.
    * 
-   * @return <code>true</code> if the content of {@link org.w3c.dom.Comment}
-   *         -nodes should joined before comparison, <code>false</code> if each
-   *         {@link org.w3c.dom.Comment}-node is compared separately.
+   * @return <code>true</code> if the content of {@link org.w3c.dom.Comment} -nodes should joined before
+   *         comparison, <code>false</code> if each {@link org.w3c.dom.Comment}-node is compared separately.
    */
   public boolean isJoinComment() {
 

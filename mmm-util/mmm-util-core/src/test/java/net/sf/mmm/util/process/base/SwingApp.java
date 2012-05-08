@@ -8,9 +8,8 @@ import javax.swing.JFrame;
 import net.sf.mmm.util.process.base.ProcessUtilImpl;
 
 /**
- * This is a swing application showing a frame but never exists. It is used to
- * test, that child-processes of a {@link Process} are carefully terminated by
- * {@link ProcessUtilImpl}.
+ * This is a swing application showing a frame but never exists. It is used to test, that child-processes of a
+ * {@link Process} are carefully terminated by {@link ProcessUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

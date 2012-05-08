@@ -30,8 +30,7 @@ public class HyphenationImpl implements Hyphenation {
    * 
    * @param word is the {@link #getWord() word}.
    * @param hyphen is the {@link #getHyphen() hyphen-character}.
-   * @param hyphenationPoints are the actual {@link #getHyphenation(int)
-   *        hyphenation-points}.
+   * @param hyphenationPoints are the actual {@link #getHyphenation(int) hyphenation-points}.
    */
   public HyphenationImpl(String word, char hyphen, int[] hyphenationPoints) {
 

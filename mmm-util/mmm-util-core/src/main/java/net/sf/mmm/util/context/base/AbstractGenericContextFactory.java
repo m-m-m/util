@@ -9,14 +9,12 @@ import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 
 /**
- * This is the abstract base-implementation of the {@link GenericContextFactory}
- * interface.
+ * This is the abstract base-implementation of the {@link GenericContextFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractGenericContextFactory extends AbstractLoggableComponent implements
-    GenericContextFactory {
+public abstract class AbstractGenericContextFactory extends AbstractLoggableComponent implements GenericContextFactory {
 
   /**
    * The constructor.

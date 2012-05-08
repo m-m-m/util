@@ -6,8 +6,8 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
- * A {@link NlsIllegalStateException} is analog to an
- * {@link IllegalStateException} but with true native language support.
+ * A {@link NlsIllegalStateException} is analog to an {@link IllegalStateException} but with true native
+ * language support.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

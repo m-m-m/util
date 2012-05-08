@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 
 /**
- * This is an implementation of {@link CliValueContainer} for an array. It uses
- * a {@link ArrayList} that is dynamically converted to an array if
- * {@link #getValue()} gets called.
+ * This is an implementation of {@link CliValueContainer} for an array. It uses a {@link ArrayList} that is
+ * dynamically converted to an array if {@link #getValue()} gets called.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -23,8 +22,7 @@ public class CliValueContainerArray extends CliValueContainerCollection {
   /**
    * The constructor.
    * 
-   * @param parameterContainer is the {@link #getParameterContainer()
-   *        parameter-container}.
+   * @param parameterContainer is the {@link #getParameterContainer() parameter-container}.
    * @param cliState is the {@link #getCliState() state}.
    * @param dependencies are the {@link #getDependencies() dependencies}.
    * @param logger is the {@link #getLogger() logger}.
@@ -52,10 +50,8 @@ public class CliValueContainerArray extends CliValueContainerCollection {
   public Object getValue() {
 
     if (this.array == null) {
-      Class<?> componentType = getParameterContainer().getSetter().getPropertyClass()
-          .getComponentType();
-      this.array = getDependencies().getCollectionReflectionUtil().toArray(getCollection(),
-          componentType);
+      Class<?> componentType = getParameterContainer().getSetter().getPropertyClass().getComponentType();
+      this.array = getDependencies().getCollectionReflectionUtil().toArray(getCollection(), componentType);
     }
     return this.array;
   }
