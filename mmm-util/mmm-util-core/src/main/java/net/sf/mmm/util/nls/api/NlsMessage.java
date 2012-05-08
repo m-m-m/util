@@ -5,8 +5,6 @@ package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.io.api.RuntimeIoException;
-
 /**
  * This is the interface for an internationalized message. It stores an {@link #getInternationalizedMessage()
  * internationalized-message} separated from language independent {@link #getArgument(String) arguments}. This
@@ -376,8 +374,7 @@ public interface NlsMessage extends NlsObject {
    * @param resolver is used to resolve the template required to translate the
    *        {@link #getInternationalizedMessage() internationalized message}.
    * @param buffer is the buffer where to write the message to.
-   * @throws RuntimeIoException if the given <code>buffer</code> produced an {@link java.io.IOException}.
    */
-  void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) throws RuntimeIoException;
+  void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer);
 
 }

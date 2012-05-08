@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
 
@@ -38,10 +38,10 @@ public interface NlsDependencies {
   NlsMessageFormatterFactory getMessageFormatterFactory();
 
   /**
-   * This method gets the {@link Iso8601Util}.
+   * This method gets the {@link Iso8601UtilLimited}.
    * 
-   * @return the {@link Iso8601Util}.
+   * @return the {@link Iso8601UtilLimited}.
    */
-  Iso8601Util getIso8601Util();
+  Iso8601UtilLimited getIso8601Util();
 
 }

@@ -28,28 +28,6 @@ public abstract class AbstractNlsFormatterPlugin<O> extends AbstractNlsFormatter
     super();
   }
 
-  //
-  // /**
-  // * This method
-  // * {@link
-  // NlsFormatterMap#registerFormatter(net.sf.mmm.util.nls.api.NlsFormatter,
-  // String, String)
-  // * registers} this formatter to the given {@link NlsFormatterMap}. The
-  // default
-  // * implementation registers this {@link
-  // net.sf.mmm.util.nls.api.NlsFormatter}
-  // * by its {@link #getType() type} and {@link #getStyle() style}.<br>
-  // * This method may be overridden to allow that a single formatter instance
-  // is
-  // * registered for multiple types and styles.
-  // *
-  // * @param formatterMap is the {@link NlsFormatterMap} where to register.
-  // */
-  // public void register(NlsFormatterMap formatterMap) {
-  //
-  // formatterMap.registerFormatter(this, getType(), getStyle());
-  // }
-
   /**
    * {@inheritDoc}
    */

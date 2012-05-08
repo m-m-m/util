@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponent implements NlsMessageFactory {
+public abstract class AbstractNlsMessageFactory extends AbstractComponent implements NlsMessageFactory {
 
   /**
    * The constructor.

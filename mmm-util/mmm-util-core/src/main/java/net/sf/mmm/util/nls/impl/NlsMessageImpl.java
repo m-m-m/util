@@ -96,13 +96,6 @@ public class NlsMessageImpl extends BasicNlsMessage {
           success = nlsTemplate.translate(locale, arguments, buffer, resolver, this.nlsDependencies);
         }
         if (!success) {
-          // This does not make sense:
-          // If one wants for format "{0,date}" with a specific locale no
-          // translation is required...
-
-          // if (locale != LOCALE_ROOT) {
-          // buffer.append(LOCALIZATION_FAILURE_PREFIX);
-          // }
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message, getNlsDependencies());
           format.format(null, locale, arguments, resolver, buffer);
         }

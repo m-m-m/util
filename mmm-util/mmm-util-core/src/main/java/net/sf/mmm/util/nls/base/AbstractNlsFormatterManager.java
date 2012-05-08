@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsArgument;
@@ -26,7 +26,7 @@ import net.sf.mmm.util.text.base.JustificationBuilderImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterManager extends AbstractLoggableComponent implements NlsFormatterManager,
+public abstract class AbstractNlsFormatterManager extends AbstractComponent implements NlsFormatterManager,
     NlsArgumentParser {
 
   /** A char filter that accepts everything except ',' and '}'. */

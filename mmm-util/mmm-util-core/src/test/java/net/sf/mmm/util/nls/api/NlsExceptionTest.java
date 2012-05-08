@@ -57,7 +57,8 @@ public class NlsExceptionTest {
     pw.println(uuid.toString());
     pw.print("\tat ");
     pw.flush();
-    Assert.assertTrue(stacktrace.contains(sw.toString()));
+    String expected = sw.toString();
+    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
 
     // test German stacktrace
     StringBuilder buffer = new StringBuilder();
@@ -68,7 +69,8 @@ public class NlsExceptionTest {
     pw.println(uuid.toString());
     pw.print("\tat ");
     pw.flush();
-    Assert.assertTrue(stacktrace.contains(sw.toString()));
+    expected = sw.toString();
+    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
 
     // test German stacktrace
     buffer = new StringBuilder();

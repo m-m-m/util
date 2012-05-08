@@ -36,6 +36,12 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** @see #getSuppressed() */
   protected static final Throwable[] EMPTY_THROWABLE_ARRAY = new Throwable[0];
 
+  /**
+   * The line separator used by
+   * {@link #printStackTrace(NlsThrowable, Locale, NlsTemplateResolver, Appendable)}.
+   */
+  static final String LINE_SEPARATOR = StringUtil.LINE_SEPARATOR;
+
   /** the internationalized message */
   private final NlsMessage nlsMessage;
 
@@ -103,24 +109,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void printStackTrace(PrintStream s) {
-
-    printStackTrace(Locale.getDefault(), null, s);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void printStackTrace(PrintWriter s) {
-
-    printStackTrace(Locale.getDefault(), null, s);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public void printStackTrace(Locale locale, Appendable buffer) {
 
     printStackTrace(locale, null, buffer);
@@ -149,28 +137,28 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
         buffer.append(throwable.getClass().getName());
         buffer.append(": ");
         throwable.getLocalizedMessage(locale, resolver, buffer);
-        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append(LINE_SEPARATOR);
         UUID uuid = throwable.getUuid();
         if (uuid != null) {
           buffer.append(uuid.toString());
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append(LINE_SEPARATOR);
         }
         StackTraceElement[] trace = throwable.getStackTrace();
         for (int i = 0; i < trace.length; i++) {
           buffer.append("\tat ");
           buffer.append(trace[i].toString());
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append(LINE_SEPARATOR);
         }
         for (Throwable suppressed : throwable.getSuppressed()) {
           buffer.append("Suppressed: ");
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append(LINE_SEPARATOR);
           printStackTraceNested(suppressed, locale, resolver, buffer);
         }
 
         Throwable nested = throwable.getCause();
         if (nested != null) {
           buffer.append("Caused by: ");
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append(LINE_SEPARATOR);
           printStackTraceNested(nested, locale, resolver, buffer);
         }
       }
@@ -280,5 +268,18 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
     } else {
       return this.suppressedList.toArray(new Throwable[this.suppressedList.size()]);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    String result = super.toString();
+    if (this.uuid != null) {
+      result = result + LINE_SEPARATOR + this.uuid.toString();
+    }
+    return result;
   }
 }

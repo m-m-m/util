@@ -3,8 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -97,24 +95,6 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
-  @Override
-  public void printStackTrace(PrintStream s) {
-
-    printStackTrace(Locale.getDefault(), null, s);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void printStackTrace(PrintWriter s) {
-
-    printStackTrace(Locale.getDefault(), null, s);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     AbstractNlsException.printStackTrace(this, locale, resolver, buffer);
@@ -202,4 +182,16 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    String result = super.toString();
+    if (this.uuid != null) {
+      result = result + AbstractNlsException.LINE_SEPARATOR + this.uuid.toString();
+    }
+    return result;
+  }
 }

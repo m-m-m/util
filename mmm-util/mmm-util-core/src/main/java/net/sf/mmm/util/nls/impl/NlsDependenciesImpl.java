@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
@@ -37,7 +37,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   private NlsMessageFormatterFactory messageFormatterFactory;
 
   /** @see #getIso8601Util() */
-  private Iso8601Util iso8601Util;
+  private Iso8601UtilLimited iso8601Util;
 
   /**
    * The constructor.
@@ -104,7 +104,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   /**
    * {@inheritDoc}
    */
-  public Iso8601Util getIso8601Util() {
+  public Iso8601UtilLimited getIso8601Util() {
 
     return this.iso8601Util;
   }
@@ -113,7 +113,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
    * @param iso8601Util is the iso8601Util to set
    */
   @Inject
-  public void setIso8601Util(Iso8601Util iso8601Util) {
+  public void setIso8601Util(Iso8601UtilLimited iso8601Util) {
 
     getInitializationState().requireNotInitilized();
     this.iso8601Util = iso8601Util;
@@ -127,7 +127,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
 
     super.doInitialize();
     if (this.argumentParser == null) {
-      throw new ResourceMissingException(NlsArgumentParser.class.getSimpleName());
+      throw new ResourceMissingException(NlsArgumentParser.class.getName());
     }
     if (this.iso8601Util == null) {
       this.iso8601Util = Iso8601UtilImpl.getInstance();

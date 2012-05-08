@@ -197,7 +197,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
       }
       if ("null".equals(argument)) {
         comparatorArgument = null;
-      } else if (Iso8601Util.PATTERN_ALL.matcher(argument).matches()) {
+      } else if (argument.matches(Iso8601Util.PATTERN_STRING_ALL)) {
         comparatorArgument = this.nlsDependencies.getIso8601Util().parseDate(argument);
       } else if (Boolean.TRUE.toString().equals(argument)) {
         comparatorArgument = Boolean.TRUE;

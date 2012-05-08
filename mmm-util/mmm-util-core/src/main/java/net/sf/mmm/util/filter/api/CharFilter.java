@@ -109,7 +109,7 @@ public interface CharFilter {
 
     public boolean accept(char c) {
 
-      return Character.isWhitespace(c);
+      return WhitespaceHelper.isWhitespace(c);
     }
   };
 
