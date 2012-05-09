@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
+import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
@@ -149,6 +151,16 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
+  }
+
+  /**
+   * @param type the {@link Class}.
+   * @return see {@link ReflectionUtilLimited#getSimpleName(Class)}
+   * @since 2.0.2
+   */
+  protected static String getSimpleName(Class<?> type) {
+
+    return ReflectionUtilLimitedImpl.getInstance().getSimpleName(type);
   }
 
   /**

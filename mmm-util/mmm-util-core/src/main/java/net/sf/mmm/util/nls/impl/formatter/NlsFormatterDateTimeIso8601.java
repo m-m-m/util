@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.impl.AbstractNlsFormatterDateIso8601;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using

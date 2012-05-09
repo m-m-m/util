@@ -6,7 +6,7 @@ package net.sf.mmm.util.text.base;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.text.api.Justification;
 import net.sf.mmm.util.text.api.JustificationBuilder;
 
@@ -18,7 +18,7 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
  */
 @Singleton
 @Named
-public class JustificationBuilderImpl extends AbstractLoggableComponent implements JustificationBuilder {
+public class JustificationBuilderImpl extends AbstractComponent implements JustificationBuilder {
 
   /** @see #getInstance() */
   private static JustificationBuilder instance;

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module>
+  <inherits name='net.sf.mmm.util.gwt.SuperSource'/>
+  <source path='component'/>
+  <source path='scanner'/>
+  <source path='filter'/>
+  <source path='text'/>
+  <source path='uuid'/>
+  <source path='date'/>
+  <source path='nls'/>
+  <source path='reflect'/>
+  <source path='lang'/>
+  <source path='io/api'/>
+</module>

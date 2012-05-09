@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.gwt.supersource.java.util.concurrent.atomic;
+package java.util.concurrent.atomic;
 
 /**
  * This is a very simple variant of {@link java.util.concurrent.atomic.AtomicInteger} to allow access in GWT

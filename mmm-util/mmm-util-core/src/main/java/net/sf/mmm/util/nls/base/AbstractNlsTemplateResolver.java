@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsTemplateResolver extends AbstractLoggableComponent implements NlsTemplateResolver {
+public abstract class AbstractNlsTemplateResolver extends AbstractComponent implements NlsTemplateResolver {
 
   /** @see #getNlsDependencies() */
   private NlsDependencies nlsDependencies;

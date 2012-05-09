@@ -6,7 +6,7 @@ package net.sf.mmm.util.nls.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
@@ -24,7 +24,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public class NlsFormatterMap extends AbstractLoggableComponent {
+public class NlsFormatterMap extends AbstractComponent {
 
   /** @see #getFormatter(String, String) */
   private final Map<String, Map<String, NlsFormatter<?>>> builders;

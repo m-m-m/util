@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.gwt.supersource.java.util;
+package java.util;
 
 import java.io.Serializable;
 
@@ -15,6 +15,12 @@ public final class Locale implements Serializable {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 9149081749638150636L;
+
+  /** English {@link Locale}. */
+  public static final Locale ENGLISH = new Locale("en");
+
+  /** US-American {@link Locale}. */
+  public static final Locale US = new Locale("en", "US");
 
   /** @see java.util.Locale#ROOT */
   public static final Locale ROOT = new Locale("");

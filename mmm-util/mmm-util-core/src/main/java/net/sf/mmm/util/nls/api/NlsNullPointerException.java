@@ -65,7 +65,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
   public static <O> void checkNotNull(Class<O> type, O object) throws NlsNullPointerException {
 
     if (object == null) {
-      throw new NlsNullPointerException(type.getSimpleName());
+      throw new NlsNullPointerException(getSimpleName(type));
     }
   }
 

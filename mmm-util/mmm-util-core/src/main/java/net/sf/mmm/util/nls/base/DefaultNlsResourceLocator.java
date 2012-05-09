@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsResourceLocator;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
@@ -23,7 +23,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
  */
 @Singleton
 @Named
-public class DefaultNlsResourceLocator extends AbstractLoggableComponent implements NlsResourceLocator {
+public class DefaultNlsResourceLocator extends AbstractComponent implements NlsResourceLocator {
 
   /**
    * The constructor.
