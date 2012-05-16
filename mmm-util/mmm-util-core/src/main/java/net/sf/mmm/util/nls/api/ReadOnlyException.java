@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link ReadOnlyException} is thrown if the modification of something failed because it is read-only. Here
@@ -27,18 +27,18 @@ public class ReadOnlyException extends NlsRuntimeException {
    */
   public ReadOnlyException(Object object) {
 
-    super(NlsBundleUtilCore.ERR_READ_ONLY, toMap(KEY_OBJECT, object));
+    this(null, object);
   }
 
   /**
    * The constructor.
    * 
-   * @param object is the object that is read-only and can not be modified.
    * @param nested is the {@link #getCause() cause} of this exception.
+   * @param object is the object that is read-only and can not be modified.
    */
-  public ReadOnlyException(Object object, Throwable nested) {
+  public ReadOnlyException(Throwable nested, Object object) {
 
-    super(nested, NlsBundleUtilCore.ERR_READ_ONLY, toMap(KEY_OBJECT, object));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorReadOnly(object));
   }
 
 }

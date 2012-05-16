@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * The {@link ValueConvertException} is thrown if the {@link ValueConverter#convert(Object, Object, Class)
@@ -27,7 +27,7 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Object value, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_CONVERT, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
+    this(null, value, targetType);
   }
 
   /**
@@ -41,8 +41,7 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Object value, Type targetType, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_VALUE_CONVERT_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType, KEY_SOURCE,
-        valueSource));
+    this(null, value, targetType, valueSource);
   }
 
   /**
@@ -54,7 +53,7 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Throwable nested, Object value, Type targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_CONVERT, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
+    this(nested, value, targetType, null);
   }
 
   /**
@@ -69,8 +68,7 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Throwable nested, Object value, Type targetType, Object valueSource) {
 
-    super(nested, NlsBundleUtilCore.ERR_VALUE_CONVERT_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType, KEY_SOURCE,
-        valueSource));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorValueConvert(value, targetType, valueSource));
   }
 
 }

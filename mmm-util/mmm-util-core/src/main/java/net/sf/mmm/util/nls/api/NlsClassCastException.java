@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link NlsClassCastException} is analog to an {@link ClassCastException} but with native language
@@ -27,8 +27,7 @@ public class NlsClassCastException extends NlsRuntimeException {
    */
   public NlsClassCastException(Object object, Type expectedType) {
 
-    super(NlsBundleUtilCore.ERR_CLASS_CAST, toMap(KEY_OBJECT, object, KEY_TYPE, getType(object), KEY_TARGET_TYPE,
-        expectedType));
+    this(null, object, expectedType);
   }
 
   /**
@@ -40,8 +39,7 @@ public class NlsClassCastException extends NlsRuntimeException {
    */
   public NlsClassCastException(Throwable nested, Object object, Type expectedType) {
 
-    super(nested, NlsBundleUtilCore.ERR_CLASS_CAST, toMap(KEY_OBJECT, object, KEY_TYPE, getType(object),
-        KEY_TARGET_TYPE, expectedType));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorCast(object, getType(object), expectedType));
   }
 
   /**

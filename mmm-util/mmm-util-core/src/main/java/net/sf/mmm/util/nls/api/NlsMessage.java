@@ -279,7 +279,8 @@ public interface NlsMessage extends NlsObject {
    * translated to German as <code>"Willkommen {name}!"</code> the final result will be
    * <code>"Willkommen Joelle!"</code>.
    * 
-   * @see NlsMessage#getArgument(String)
+   * @see NlsMessage
+   * @see #getArgument(String)
    * @see java.text.MessageFormat
    * 
    * @return the message for internationalization.

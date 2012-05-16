@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link CliOptionAndArgumentAnnotationException} is thrown if a property is annotated with both
@@ -24,7 +24,7 @@ public class CliOptionAndArgumentAnnotationException extends CliException {
    */
   public CliOptionAndArgumentAnnotationException(String property) {
 
-    super(NlsBundleUtilCore.ERR_CLI_OPTION_AND_ARGUMENT_ANNOTATION, toMap(KEY_PROPERTY, property));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliOptionAndArgumentAnnotation(property));
   }
 
 }

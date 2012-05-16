@@ -54,9 +54,17 @@ public abstract class AbstractNlsTemplate extends AbstractLoggableObject impleme
     if (translation == null) {
       return false;
     } else {
-      NlsMessageFormatter formatter = createFormatter(translation, locale, nlsDependencies);
-      formatter.format(null, locale, arguments, resolver, buffer);
-      return true;
+      try {
+        NlsMessageFormatter formatter = createFormatter(translation, locale, nlsDependencies);
+        formatter.format(null, locale, arguments, resolver, buffer);
+        return true;
+      } catch (Exception e) {
+        buffer.append(translation);
+        buffer.append("@");
+        buffer.append(arguments.toString());
+        // true lies...
+        return true;
+      }
     }
   }
 

@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
 import net.sf.mmm.util.nls.impl.DefaultNlsTemplateResolver;
+import net.sf.mmm.util.nls.impl.NlsBundleFactoryImpl;
 
 /**
  * This is an ugly static accessor for the {@link NlsMessageFactory} used to create instances of
@@ -20,6 +21,9 @@ public final class NlsAccess {
 
   /** @see #getTemplateResolver() */
   private static NlsTemplateResolver templateResolver;
+
+  /** @see #getBundleFactory() */
+  private static NlsBundleFactory bundleFactory;
 
   /**
    * The constructor.
@@ -107,6 +111,44 @@ public final class NlsAccess {
   public static void setTemplateResolver(NlsTemplateResolver templateResolver) {
 
     NlsAccess.templateResolver = templateResolver;
+  }
+
+  /**
+   * This method gets the default {@link NlsBundleFactory}.
+   * 
+   * @return the default {@link NlsBundleFactory}.
+   * @since 2.0.2
+   */
+  public static NlsBundleFactory getBundleFactory() {
+
+    if (bundleFactory == null) {
+      synchronized (NlsAccess.class) {
+        if (bundleFactory == null) {
+          NlsBundleFactoryImpl impl = new NlsBundleFactoryImpl();
+          impl.initialize();
+          bundleFactory = impl;
+        }
+      }
+    }
+    return bundleFactory;
+  }
+
+  /**
+   * This method sets (overrides) the default {@link NlsBundleFactory}.<br/>
+   * <b>WARNING:</b><br>
+   * This is only a back-door for simple applications or test situations. Please try to avoid using this
+   * feature and solve this issue with IoC strategies (using non-final static fields like here is evil).<br>
+   * <b>ATTENTION:</b><br>
+   * No synchronization is performed setting the instance. This assumes that an assignment is an atomic
+   * operation in the JVM you are using. Additionally this method should only be invoked in the initialization
+   * phase of your application.
+   * 
+   * @param bundleFactory is the {@link NlsBundleFactory} to use by default.
+   * @since 2.0.2
+   */
+  public static void setBundleFactory(NlsBundleFactory bundleFactory) {
+
+    NlsAccess.bundleFactory = bundleFactory;
   }
 
 }

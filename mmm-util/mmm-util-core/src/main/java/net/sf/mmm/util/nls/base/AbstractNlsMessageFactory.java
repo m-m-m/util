@@ -172,4 +172,22 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
     return create(internationalizedMessage, Collections.<String, Object> emptyMap());
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public NlsMessage create(String internationalizedMessage, NlsTemplate template) {
+
+    // Dummy implementation for downward compatibility.
+    return create(template);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments, NlsTemplate template) {
+
+    // Dummy implementation for downward compatibility.
+    return create(template, messageArguments);
+  }
+
 }

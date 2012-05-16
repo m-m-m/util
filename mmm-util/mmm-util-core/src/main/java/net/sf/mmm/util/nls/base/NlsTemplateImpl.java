@@ -65,10 +65,21 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
     try {
       return ResourceBundle.getBundle(this.name, locale).getString(this.key);
     } catch (MissingResourceException e) {
-      String messageId = this.name + ":" + this.key;
-      getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
-      return "unresolved (" + messageId + ")";
+      return translateFallback(e);
     }
+  }
+
+  /**
+   * Called from {@link #translate(Locale)} if localization failed.
+   * 
+   * @param e is the {@link MissingResourceException}.
+   * @return the fallback message.
+   */
+  protected String translateFallback(MissingResourceException e) {
+
+    String messageId = this.name + ":" + this.key;
+    getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
+    return "unresolved (" + messageId + ")";
   }
 
   /**

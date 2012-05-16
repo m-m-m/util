@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.api;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link AnnotationNotForTargetException} is thrown if an {@link java.lang.annotation.Annotation} should be
@@ -33,7 +33,7 @@ public class AnnotationNotForTargetException extends ReflectionException {
    */
   public AnnotationNotForTargetException(Class<? extends Annotation> annotation, ElementType target) {
 
-    super(NlsBundleUtilCore.ERR_ANNOTATION_NOT_FOR_TARGET, toMap(KEY_ANNOTATION, annotation, KEY_ACCESSIBLE, target));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorAnnotationNotForTarget(annotation, target));
   }
 
 }

@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link PojoPathConversionException} is thrown if a {@link net.sf.mmm.util.pojo.api.Pojo} has the wrong
@@ -26,13 +26,12 @@ public class PojoPathConversionException extends PojoPathException {
    * 
    * @param pojoPath is the {@link PojoPath} pointing to the {@link PojoPath#getSegment() segment} that could
    *        NOT be converted.
-   * @param pojoClass is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
    * @param targetType is the required type for the given <code>pojoPath</code>.
    */
-  public PojoPathConversionException(String pojoPath, Type pojoClass, Type targetType) {
+  public PojoPathConversionException(String pojoPath, Type pojoType, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_CONVERSION, toMap(KEY_PATH, pojoPath, KEY_TYPE, pojoClass, KEY_TARGET_TYPE,
-        targetType));
+    this(null, pojoPath, pojoType, targetType);
   }
 
   /**
@@ -41,13 +40,13 @@ public class PojoPathConversionException extends PojoPathException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param pojoPath is the {@link PojoPath} pointing to the {@link PojoPath#getSegment() segment} that could
    *        NOT be converted.
-   * @param pojoClass is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
    * @param targetType is the required type for the given <code>pojoPath</code>.
    */
-  public PojoPathConversionException(Throwable nested, String pojoPath, Class<?> pojoClass, Object targetType) {
+  public PojoPathConversionException(Throwable nested, String pojoPath, Type pojoType, Object targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_CONVERSION, toMap(KEY_PATH, pojoPath, KEY_TYPE, pojoClass,
-        KEY_TARGET_TYPE, targetType));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class)
+        .errorPojoPathConversion(pojoPath, pojoType, targetType));
   }
 
 }

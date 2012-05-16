@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link TypeNotFoundException} is thrown if a {@link java.lang.reflect.Type} was requested (e.g. via
@@ -25,7 +25,7 @@ public class TypeNotFoundException extends ReflectionException {
    */
   public TypeNotFoundException(String type) {
 
-    super(NlsBundleUtilCore.ERR_CLASS_NOT_FOUND, toMap(KEY_TYPE, type));
+    this(null, type);
   }
 
   /**
@@ -36,7 +36,7 @@ public class TypeNotFoundException extends ReflectionException {
    */
   public TypeNotFoundException(Throwable nested, String type) {
 
-    super(nested, NlsBundleUtilCore.ERR_CLASS_NOT_FOUND, toMap(KEY_TYPE, type));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorTypeNotFound(type));
   }
 
 }

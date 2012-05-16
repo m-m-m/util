@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Locale;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.base.ComposedNlsMessage;
 
@@ -37,7 +37,7 @@ public class ComposedException extends NlsRuntimeException {
    */
   public ComposedException(Throwable... errors) {
 
-    super(NlsBundleUtilCore.ERR_COMPOSED, toMap(KEY_ERROR, createSubMessage(errors)));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorComposed(createSubMessage(errors)));
     this.errors = errors;
   }
 

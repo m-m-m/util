@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -23,7 +23,7 @@ public class NlsFormatterChoiceOnlyElseConditionException extends NlsRuntimeExce
    */
   public NlsFormatterChoiceOnlyElseConditionException() {
 
-    super(NlsBundleUtilCore.ERR_NLS_CHOICE_ONLY_ELSE);
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorNlsChoiceOnlyElse());
   }
 
 }

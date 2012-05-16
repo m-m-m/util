@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * An {@link PojoPathFunctionUndefinedException} is thrown by the {@link PojoPathNavigator} if the
@@ -26,7 +26,7 @@ public class PojoPathFunctionUndefinedException extends PojoPathException {
    */
   public PojoPathFunctionUndefinedException(String functionName) {
 
-    super(NlsBundleUtilCore.ERR_POJO_FUNCTION_UNDEFINED, toMap(KEY_FUNCTION, functionName));
+    super(functionName, null);
   }
 
   /**
@@ -38,7 +38,6 @@ public class PojoPathFunctionUndefinedException extends PojoPathException {
    */
   public PojoPathFunctionUndefinedException(String functionName, Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_POJO_FUNCTION_UNDEFINED, toMap(KEY_FUNCTION, functionName));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorPojoFunctionUndefined(functionName));
   }
-
 }

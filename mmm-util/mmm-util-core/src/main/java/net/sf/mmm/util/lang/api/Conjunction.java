@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link Conjunction} represents a function that maps a list of boolean arguments to one boolean result.
@@ -15,7 +15,7 @@ public enum Conjunction implements Datatype<String> {
   /**
    * This conjunction is <code>true</code> if and only if all arguments are <code>true</code>.
    */
-  AND("&&", NlsBundleUtilCore.INF_AND) {
+  AND("&&", NlsMessagesBundleUtilCore.INF_AND) {
 
     /**
      * {@inheritDoc}
@@ -35,7 +35,7 @@ public enum Conjunction implements Datatype<String> {
   /**
    * This conjunction is <code>true</code> if and only if at least one argument is <code>true</code>.
    */
-  OR("||", NlsBundleUtilCore.INF_OR) {
+  OR("||", NlsMessagesBundleUtilCore.INF_OR) {
 
     /**
      * {@inheritDoc}
@@ -56,7 +56,7 @@ public enum Conjunction implements Datatype<String> {
    * This is the negation of {@link #AND}. It is only <code>true</code> if at least one argument is
    * <code>false</code>.
    */
-  NAND("!&", NlsBundleUtilCore.INF_NAND) {
+  NAND("!&", NlsMessagesBundleUtilCore.INF_NAND) {
 
     /**
      * {@inheritDoc}
@@ -77,7 +77,7 @@ public enum Conjunction implements Datatype<String> {
    * This is the negation of {@link #OR}. It is only <code>true</code> if all arguments are <code>false</code>
    * .
    */
-  NOR("!|", NlsBundleUtilCore.INF_NOR) {
+  NOR("!|", NlsMessagesBundleUtilCore.INF_NOR) {
 
     /**
      * {@inheritDoc}

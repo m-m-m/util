@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.xml.api.XmlException;
 
 /**
@@ -26,7 +26,7 @@ public class XmlInvalidException extends XmlException {
    */
   public XmlInvalidException(Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_XML_INVALID);
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorXmlInvalid());
   }
 
   /**
@@ -39,7 +39,7 @@ public class XmlInvalidException extends XmlException {
    */
   public XmlInvalidException(Throwable nested, Object source) {
 
-    super(nested, NlsBundleUtilCore.ERR_XML_INVALID_WITH_SOURCE, toMap(KEY_SOURCE, source));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorXmlInvalidWithSource(source));
   }
 
 }

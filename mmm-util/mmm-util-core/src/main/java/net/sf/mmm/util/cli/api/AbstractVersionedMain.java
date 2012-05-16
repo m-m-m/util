@@ -6,7 +6,7 @@ package net.sf.mmm.util.cli.api;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.reflect.base.ManifestLoader;
 
 /**
@@ -15,8 +15,8 @@ import net.sf.mmm.util.reflect.base.ManifestLoader;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@CliMode(id = CliMode.ID_VERSION, title = NlsBundleUtilCore.INF_MAIN_MODE_VERSION, //
-usage = NlsBundleUtilCore.MSG_MAIN_MODE_VERSION_USAGE)
+@CliMode(id = CliMode.ID_VERSION, title = NlsMessagesBundleUtilCore.INF_MAIN_MODE_VERSION, //
+usage = NlsMessagesBundleUtilCore.MSG_MAIN_MODE_VERSION_USAGE)
 public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The {@link #getVersion() version} if NOT available from {@link Manifest}. */
@@ -24,7 +24,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The option to print the version. */
   @CliOption(name = CliOption.NAME_VERSION, aliases = CliOption.ALIAS_VERSION, //
-  usage = NlsBundleUtilCore.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.ID_VERSION, required = true)
+  usage = NlsMessagesBundleUtilCore.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.ID_VERSION, required = true)
   private boolean version;
 
   /**

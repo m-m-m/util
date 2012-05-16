@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -28,7 +28,7 @@ public class UnknownCollectionInterfaceException extends NlsRuntimeException {
    */
   public UnknownCollectionInterfaceException(Class<?> collectionInterface) {
 
-    super(NlsBundleUtilCore.ERR_UNKNOWN_COLLECTION_INTERFACE, toMap(KEY_TYPE, collectionInterface));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorUnknownCollectionInterface(collectionInterface));
   }
 
 }

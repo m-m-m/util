@@ -5,7 +5,8 @@ package net.sf.mmm.util.io.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -25,7 +26,7 @@ public class RuntimeIoException extends NlsRuntimeException {
    */
   public RuntimeIoException() {
 
-    super(NlsBundleUtilCore.ERR_IO);
+    this((Throwable) null);
   }
 
   /**
@@ -46,7 +47,7 @@ public class RuntimeIoException extends NlsRuntimeException {
    */
   public RuntimeIoException(Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_IO);
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorIo());
   }
 
   /**
@@ -97,28 +98,52 @@ public class RuntimeIoException extends NlsRuntimeException {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @since 2.0.2
+   */
+  protected RuntimeIoException(NlsMessage message) {
+
+    super(message);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @since 2.0.2
+   */
+  protected RuntimeIoException(Throwable nested, NlsMessage message) {
+
+    super(nested, message);
+  }
+
+  /**
    * This method gets the {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() message}
    * according to the given <code>mode</code>.
    * 
    * @param mode is the {@link IoMode} or <code>null</code> if unknown.
    * @return the message according to <code>mode</code>.
    */
-  private static String getMessage(IoMode mode) {
+  private static NlsMessage getMessage(IoMode mode) {
 
+    NlsMessagesBundleUtilCore bundle = createBundle(NlsMessagesBundleUtilCore.class);
     switch (mode) {
       case READ:
-        return NlsBundleUtilCore.ERR_IO_READ;
+        return bundle.errorIoRead();
       case WRITE:
-        return NlsBundleUtilCore.ERR_IO_WRITE;
+        return bundle.errorIoWrite();
       case CLOSE:
-        return NlsBundleUtilCore.ERR_IO_CLOSE;
+        return bundle.errorIoClose();
       case FLUSH:
-        return NlsBundleUtilCore.ERR_IO_FLUSH;
+        return bundle.errorIoFlush();
       case COPY:
-        return NlsBundleUtilCore.ERR_IO_COPY;
+        return bundle.errorIoCopy();
       default :
         assert (false) : "IoMode is null!";
-        return NlsBundleUtilCore.ERR_IO;
+        return bundle.errorIo();
     }
   }
 

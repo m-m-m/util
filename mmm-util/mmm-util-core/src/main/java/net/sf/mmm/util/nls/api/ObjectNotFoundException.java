@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * An {@link ObjectNotFoundException} is thrown if an object was requested but does NOT exist or could NOT be
@@ -29,7 +29,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    */
   public ObjectNotFoundException(Object object) {
 
-    super(NlsBundleUtilCore.ERR_OBJECT_NOT_FOUND, toMap(KEY_OBJECT, object));
+    this((Throwable) null, object);
   }
 
   /**
@@ -41,7 +41,34 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    */
   public ObjectNotFoundException(Object object, Object key) {
 
-    super(NlsBundleUtilCore.ERR_OBJECT_NOT_FOUND_WITH_KEY, toMap(KEY_OBJECT, object, KEY_KEY, key));
+    this((Throwable) null, object, key);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
+   *        found.
+   * @since 2.0.2
+   */
+  public ObjectNotFoundException(Throwable nested, Object object) {
+
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectNotFound(object));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
+   *        found.
+   * @param key is the key to the required object.
+   * @since 2.0.2
+   */
+  public ObjectNotFoundException(Throwable nested, Object object, Object key) {
+
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectNotFoundWithKey(object, key));
   }
 
 }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -24,7 +24,7 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
    */
   public ResourceNotAvailableException(String resourceUri) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_NOT_AVAILABLE, toMap(KEY_RESOURCE, resourceUri));
+    this(null, resourceUri);
   }
 
   /**
@@ -35,7 +35,7 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
    */
   public ResourceNotAvailableException(Throwable nested, String resourceUri) {
 
-    super(nested, NlsBundleUtilCore.ERR_RESOURCE_NOT_AVAILABLE, toMap(KEY_RESOURCE, resourceUri));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorResourceNotAvailable(resourceUri));
   }
 
 }

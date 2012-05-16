@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -26,8 +26,6 @@ public class BufferExceedException extends NlsRuntimeException {
    */
   public BufferExceedException(int length, int capacity) {
 
-    super(NlsBundleUtilCore.ERR_BUFFER_LENGTH_EXCEED, toMap(KEY_VALUE, Integer.valueOf(length), KEY_CAPACITY,
-        Integer.valueOf(capacity)));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorBufferLengthExceed(length, capacity));
   }
-
 }

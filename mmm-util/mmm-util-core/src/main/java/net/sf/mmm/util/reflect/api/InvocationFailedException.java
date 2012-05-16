@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.api;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.InvocationTargetException;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * An {@link InvocationFailedException} is thrown if an invocation failed. Typically invocation means a
@@ -29,7 +29,7 @@ public class InvocationFailedException extends ReflectionException {
    */
   public InvocationFailedException(InvocationTargetException nested) {
 
-    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED);
+    super(nested.getCause(), createBundle(NlsMessagesBundleUtilCore.class).errorInvocationFailed());
   }
 
   /**
@@ -39,7 +39,7 @@ public class InvocationFailedException extends ReflectionException {
    */
   public InvocationFailedException(Exception nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_INVOCATION_FAILED);
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorInvocationFailed());
   }
 
   /**
@@ -54,8 +54,7 @@ public class InvocationFailedException extends ReflectionException {
    */
   public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible, Object instance) {
 
-    super(nested.getCause(), NlsBundleUtilCore.ERR_INVOCATION_FAILED_ON, toMap(KEY_ACCESSIBLE, accessible, KEY_OBJECT,
-        instance));
+    super(nested.getCause(), createBundle(NlsMessagesBundleUtilCore.class)
+        .errorInvocationFailedOn(instance, accessible));
   }
-
 }

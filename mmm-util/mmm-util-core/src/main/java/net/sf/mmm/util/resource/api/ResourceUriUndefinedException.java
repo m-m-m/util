@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -25,7 +25,7 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
    */
   public ResourceUriUndefinedException(String uri) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_UNDEFINED_URI, toMap(KEY_URI, uri));
+    this(null, uri);
   }
 
   /**
@@ -36,7 +36,7 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
    */
   public ResourceUriUndefinedException(Throwable nested, String uri) {
 
-    super(nested, NlsBundleUtilCore.ERR_RESOURCE_UNDEFINED_URI, toMap(KEY_URI, uri));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorResourceUndefinedUri(uri));
   }
 
 }

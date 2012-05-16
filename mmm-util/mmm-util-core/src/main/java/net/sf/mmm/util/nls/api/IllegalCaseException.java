@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is
@@ -18,9 +18,6 @@ public class IllegalCaseException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5031356555598229511L;
 
-  /** The key for the NLS message. */
-  private static final String KEY_CASE = "case";
-
   /**
    * The constructor.
    * 
@@ -28,7 +25,7 @@ public class IllegalCaseException extends NlsRuntimeException {
    */
   public IllegalCaseException(String illegalCase) {
 
-    super(NlsBundleUtilCore.ERR_ILLEGAL_CASE, toMap(KEY_CASE, illegalCase));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorIllegalCase(illegalCase));
   }
 
   /**

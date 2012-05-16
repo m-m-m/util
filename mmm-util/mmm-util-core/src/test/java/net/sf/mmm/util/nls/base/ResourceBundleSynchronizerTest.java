@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import junit.framework.Assert;
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreOld;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
@@ -65,14 +65,14 @@ public class ResourceBundleSynchronizerTest {
     ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
     String targetPath = "target/test";
     FileUtilImpl.getInstance().deleteRecursive(new File(targetPath));
-    Class<? extends AbstractResourceBundle> bundleClass = NlsBundleUtilCore.class;
+    Class<? extends AbstractResourceBundle> bundleClass = NlsBundleUtilCoreOld.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
     int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
         ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
         bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
-    NlsBundleUtilCore bundle = new NlsBundleUtilCore();
+    NlsBundleUtilCoreOld bundle = new NlsBundleUtilCoreOld();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
 
     checkBundle(bundle, resultFileBase, null);

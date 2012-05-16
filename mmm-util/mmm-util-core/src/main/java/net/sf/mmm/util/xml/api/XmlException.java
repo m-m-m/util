@@ -5,6 +5,7 @@ package net.sf.mmm.util.xml.api;
 
 import java.util.Map;
 
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -76,6 +77,29 @@ public abstract class XmlException extends NlsRuntimeException {
   public XmlException(Throwable nested, String internationalizedMessage) {
 
     super(nested, internationalizedMessage);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @since 2.0.2
+   */
+  public XmlException(NlsMessage message) {
+
+    super(message);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @since 2.0.2
+   */
+  public XmlException(Throwable nested, NlsMessage message) {
+
+    super(nested, message);
   }
 
 }

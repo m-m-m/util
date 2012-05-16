@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * The {@link NlsParseException} is thrown if some data could NOT be parsed because it does NOT match the
@@ -31,7 +31,21 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(CharSequence value, CharSequence expected) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_EXPECTED, toMap(KEY_VALUE, value, KEY_TYPE, expected));
+    this((Throwable) null, value, expected);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param value is the value that could NOT be parsed.
+   * @param expected is the string or character that was expected but not found at the end of
+   *        <code>value</code>.
+   * @since 2.0.2
+   */
+  public NlsParseException(Throwable nested, CharSequence value, CharSequence expected) {
+
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorParseExpected(value, expected));
   }
 
   /**
@@ -43,7 +57,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(CharSequence value, CharSequence requiredFormat, Object type) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_FORMAT, toMap(KEY_VALUE, value, KEY_TYPE, type, KEY_FORMAT, requiredFormat));
+    this((Throwable) null, value, requiredFormat, type);
   }
 
   /**
@@ -58,8 +72,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(CharSequence value, CharSequence requiredFormat, Object type, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_FORMAT, addToMap(
-        toMap(KEY_VALUE, value, KEY_TYPE, type, KEY_FORMAT, requiredFormat), KEY_SOURCE, valueSource));
+    this((Throwable) null, value, requiredFormat, type, valueSource);
   }
 
   /**
@@ -72,8 +85,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Throwable nested, CharSequence value, CharSequence requiredFormat, Object type) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE_FORMAT, toMap(KEY_VALUE, value, KEY_TYPE, type, KEY_FORMAT,
-        requiredFormat));
+    this(nested, value, requiredFormat, type, null);
   }
 
   /**
@@ -90,8 +102,7 @@ public class NlsParseException extends NlsRuntimeException {
   public NlsParseException(Throwable nested, CharSequence value, CharSequence requiredFormat, Object type,
       Object valueSource) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE_FORMAT, addToMap(
-        toMap(KEY_VALUE, value, KEY_TYPE, type, KEY_FORMAT, requiredFormat), KEY_SOURCE, valueSource));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorParseFormat(value, requiredFormat, type, valueSource));
   }
 
   /**
@@ -105,8 +116,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Object value, Type targetType, Object valueSource) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_TYPE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType, KEY_SOURCE,
-        valueSource));
+    this((Throwable) null, value, targetType, valueSource);
   }
 
   /**
@@ -121,8 +131,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Throwable nested, Object value, Type targetType, Object valueSource) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE_TYPE_SOURCE, toMap(KEY_VALUE, value, KEY_TYPE, targetType, KEY_SOURCE,
-        valueSource));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorParseType(value, targetType, valueSource));
   }
 
   /**
@@ -133,7 +142,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Object value, Type targetType) {
 
-    super(NlsBundleUtilCore.ERR_PARSE_TYPE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
+    this(value, targetType, null);
   }
 
   /**
@@ -145,7 +154,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Throwable nested, Object value, Type targetType) {
 
-    super(nested, NlsBundleUtilCore.ERR_PARSE_TYPE, toMap(KEY_VALUE, value, KEY_TYPE, targetType));
+    this(nested, value, targetType, null);
   }
 
 }

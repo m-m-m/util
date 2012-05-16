@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * An {@link NlsUnsupportedOperationException} is thrown if an operation was invoked that is NOT implemented
@@ -27,7 +27,7 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
    */
   public NlsUnsupportedOperationException() {
 
-    super(NlsBundleUtilCore.ERR_UNSUPPORTED_OPERATION);
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorUnsupportedOperation());
   }
 
   /**
@@ -38,7 +38,7 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
    */
   public NlsUnsupportedOperationException(Object operation) {
 
-    super(NlsBundleUtilCore.ERR_UNSUPPORTED_OPERATION_WITH_NAME, toMap(KEY_OPERATION, operation));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorUnsupportedOperationWithName(operation));
   }
 
 }

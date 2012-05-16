@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -20,9 +20,6 @@ public class IllegalWildcardSequenceException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5003374937127659992L;
 
-  /** Key for the NLS message. */
-  private static final String KEY_SEQUENCE = "sequence";
-
   /**
    * The constructor.
    * 
@@ -30,7 +27,7 @@ public class IllegalWildcardSequenceException extends NlsRuntimeException {
    */
   public IllegalWildcardSequenceException(String sequence) {
 
-    super(NlsBundleUtilCore.ERR_TYPE_ILLEGAL_WILDCARD, toMap(KEY_SEQUENCE, sequence));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorTypeIllegalWildcard(sequence));
   }
 
 }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link CliOptionDuplicateException} is thrown if the same {@link CliOption option} occurred multiple
@@ -24,7 +24,7 @@ public class CliOptionDuplicateException extends CliException {
    */
   public CliOptionDuplicateException(String option) {
 
-    super(NlsBundleUtilCore.ERR_CLI_OPTION_DUPLICATE, toMap(KEY_OPTION, option));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliOptionDuplicate(option));
   }
 
 }

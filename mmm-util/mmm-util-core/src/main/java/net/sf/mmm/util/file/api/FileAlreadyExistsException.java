@@ -5,7 +5,7 @@ package net.sf.mmm.util.file.api;
 
 import java.io.File;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
@@ -53,6 +53,6 @@ public class FileAlreadyExistsException extends RuntimeIoException {
    */
   public FileAlreadyExistsException(String file, boolean directory) {
 
-    super(NlsBundleUtilCore.ERR_FILE_ALREADY_EXISTS, toMap(KEY_FILE, file, KEY_DIRECTORY, Boolean.valueOf(directory)));
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorFileAlreadyExists(file, directory));
   }
 }

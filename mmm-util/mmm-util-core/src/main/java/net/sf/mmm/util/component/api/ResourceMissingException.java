@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -25,7 +25,7 @@ public class ResourceMissingException extends NlsRuntimeException {
    */
   public ResourceMissingException(String resourceName) {
 
-    super(NlsBundleUtilCore.ERR_RESOURCE_MISSING, toMap(KEY_RESOURCE, resourceName));
+    this(resourceName, null);
   }
 
   /**
@@ -36,7 +36,7 @@ public class ResourceMissingException extends NlsRuntimeException {
    */
   public ResourceMissingException(String resourceName, Throwable nested) {
 
-    super(nested, NlsBundleUtilCore.ERR_RESOURCE_MISSING, toMap(KEY_RESOURCE, resourceName));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorResourceMissing(resourceName));
   }
 
 }

@@ -11,4 +11,7 @@
   <source path='reflect'/>
   <source path='lang'/>
   <source path='io/api'/>
+  <generate-with class="net.sf.mmm.util.nls.impl.NlsResourceBundleGenerator">
+    <when-type-assignable class="net.sf.mmm.util.nls.impl.NlsGwtSupport" />
+  </generate-with>
 </module>

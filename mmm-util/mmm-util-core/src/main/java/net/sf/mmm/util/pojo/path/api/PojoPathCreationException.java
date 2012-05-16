@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 
 /**
  * A {@link PojoPathCreationException} is thrown by the {@link PojoPathNavigator} if the supplied
@@ -30,7 +30,7 @@ public class PojoPathCreationException extends PojoPathException {
    */
   public PojoPathCreationException(Object initialPojo, String pojoPath) {
 
-    super(NlsBundleUtilCore.ERR_POJO_PATH_CREATION, toMap(KEY_OBJECT, initialPojo, KEY_PATH, pojoPath));
+    this(null, initialPojo, pojoPath);
   }
 
   /**
@@ -43,7 +43,7 @@ public class PojoPathCreationException extends PojoPathException {
    */
   public PojoPathCreationException(Throwable nested, Object initialPojo, String pojoPath) {
 
-    super(nested, NlsBundleUtilCore.ERR_POJO_PATH_CREATION, toMap(KEY_OBJECT, initialPojo, KEY_PATH, pojoPath));
+    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorPojoPathCreation(pojoPath, initialPojo));
   }
 
 }

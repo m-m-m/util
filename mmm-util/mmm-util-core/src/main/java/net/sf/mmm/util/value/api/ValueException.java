@@ -5,6 +5,7 @@ package net.sf.mmm.util.value.api;
 
 import java.util.Map;
 
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -52,6 +53,29 @@ public abstract class ValueException extends NlsRuntimeException {
   public ValueException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
 
     super(nested, internationalizedMessage, arguments);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @since 2.0.2
+   */
+  public ValueException(NlsMessage message) {
+
+    super(message);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @since 2.0.2
+   */
+  public ValueException(Throwable nested, NlsMessage message) {
+
+    super(nested, message);
   }
 
 }
