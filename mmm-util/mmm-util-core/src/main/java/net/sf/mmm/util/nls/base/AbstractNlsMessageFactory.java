@@ -11,6 +11,7 @@ import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This is the implementation of the {@link NlsMessageFactory} interface.
@@ -161,7 +162,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
    */
   public NlsMessage create(NlsTemplate template) {
 
-    return create(template, Collections.emptyMap());
+    return create(template, ReflectionUtil.NO_ARGUMENTS);
   }
 
   /**

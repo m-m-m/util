@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.api.ComposedException;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
@@ -20,13 +21,16 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * evaluates} it immediately instead of storing it until the initial processing phase has been completed. If
  * it returns <code>null</code> it will try again later but never complains if the ID could not be resolved in
  * the end.<br/>
- * This class solves the problem by tracking the each {@link Callable} and check that in the
+ * This class solves the problem by tracking each {@link Callable} and check that in the
  * {@link #disposeAndValidate() end} all are resolved successfully.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
  */
 public class IdResolverContext {
+
+  /** The bundle for creating error messages. */
+  private final NlsMessagesBundleUtilCore bundle;
 
   /** @see #put(String, Object) */
   private Map<String, Object> id2valueMap;
@@ -35,7 +39,7 @@ public class IdResolverContext {
   private Map<String, Resolver> id2callableMap;
 
   /** @see #put(String, Object) */
-  private List<DuplicateObjectException> duplicateIdErrors;
+  private List<NlsObject> duplicateIdErrors;
 
   /**
    * The constructor.
@@ -45,7 +49,8 @@ public class IdResolverContext {
     super();
     this.id2valueMap = new HashMap<String, Object>();
     this.id2callableMap = new HashMap<String, IdResolverContext.Resolver>();
-    this.duplicateIdErrors = new ArrayList<DuplicateObjectException>();
+    this.duplicateIdErrors = new ArrayList<NlsObject>();
+    this.bundle = NlsAccess.getBundleFactory().createBundle(NlsMessagesBundleUtilCore.class);
   }
 
   /**
@@ -59,7 +64,7 @@ public class IdResolverContext {
 
     Object old = this.id2valueMap.put(id, value);
     if ((old != null) && (old != value)) {
-      this.duplicateIdErrors.add(new DuplicateObjectException(value, id));
+      this.duplicateIdErrors.add(this.bundle.errorDuplicateObjectWithKey(value, id));
     }
   }
 
@@ -90,37 +95,19 @@ public class IdResolverContext {
    */
   public void disposeAndValidate() throws ObjectNotFoundException, ComposedException {
 
-    List<ObjectNotFoundException> idNotFoundExceptions = new ArrayList<ObjectNotFoundException>();
+    List<NlsObject> errorList = this.duplicateIdErrors;
+    this.duplicateIdErrors = null;
     for (Resolver resolver : this.id2callableMap.values()) {
       if (!resolver.resolved) {
-        idNotFoundExceptions.add(new ObjectNotFoundException(resolver.type, resolver.id));
+        errorList.add(this.bundle.errorObjectNotFoundWithKey(resolver.type, resolver.id));
       }
     }
-    List<DuplicateObjectException> duplicateIdExceptions = this.duplicateIdErrors;
-    this.duplicateIdErrors = null;
     this.id2valueMap = null;
     this.id2callableMap = null;
-    int errorCount = idNotFoundExceptions.size() + duplicateIdExceptions.size();
+    int errorCount = errorList.size();
     if (errorCount > 0) {
-      if (errorCount == 1) {
-        if (idNotFoundExceptions.size() == 1) {
-          throw idNotFoundExceptions.get(0);
-        } else {
-          throw duplicateIdExceptions.get(0);
-        }
-      } else {
-        NlsRuntimeException[] errors = new NlsRuntimeException[errorCount];
-        int i = 0;
-        for (NlsRuntimeException exception : duplicateIdExceptions) {
-          errors[i] = exception;
-          i++;
-        }
-        for (NlsRuntimeException exception : idNotFoundExceptions) {
-          errors[i] = exception;
-          i++;
-        }
-        throw new ComposedException(errors);
-      }
+      NlsObject[] errors = errorList.toArray(new NlsObject[errorCount]);
+      throw new ComposedException(errors);
     }
   }
 

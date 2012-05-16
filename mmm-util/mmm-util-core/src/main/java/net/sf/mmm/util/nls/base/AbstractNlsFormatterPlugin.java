@@ -34,7 +34,8 @@ public abstract class AbstractNlsFormatterPlugin<O> extends AbstractNlsFormatter
   @Override
   public String toString() {
 
-    StringBuilder sb = new StringBuilder(getType());
+    StringBuilder sb = new StringBuilder();
+    sb.append(getType());
     String style = getStyle();
     if (style != null) {
       sb.append(",");

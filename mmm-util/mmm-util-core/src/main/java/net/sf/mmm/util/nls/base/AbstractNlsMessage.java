@@ -19,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 public abstract class AbstractNlsMessage implements NlsMessage {
 
   /** Locale.ROOT is only available since java 6. */
-  protected static final Locale LOCALE_ROOT = new Locale("");
+  public static final Locale LOCALE_ROOT = new Locale("");
 
   /**
    * The constructor.

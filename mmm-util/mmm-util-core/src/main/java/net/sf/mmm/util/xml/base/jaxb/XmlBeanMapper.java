@@ -380,6 +380,12 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
         }
         break;
       case ValidationEvent.ERROR:
+        if (message.startsWith("Undefined ID")) {
+          // ignore as this is handled by our ID resolver...
+        } else {
+          throw new XmlInvalidException(exception, message);
+        }
+        break;
       case ValidationEvent.FATAL_ERROR:
         throw new XmlInvalidException(exception, message);
       default :

@@ -67,6 +67,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractComponent impl
         try {
           formatter = getSubFormatter(formatType, scanner);
         } catch (Exception e) {
+          @SuppressWarnings("rawtypes")
           Class type = NlsFormatter.class;
           throw new NlsParseException(e, scanner.substring(index, scanner.getCurrentIndex()), type);
         }

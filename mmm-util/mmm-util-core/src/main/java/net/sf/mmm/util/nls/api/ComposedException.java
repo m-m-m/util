@@ -42,21 +42,34 @@ public class ComposedException extends NlsRuntimeException {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param errors are the {@link NlsMessage error messages} that have been collected.
+   */
+  public ComposedException(NlsObject... errors) {
+
+    super(createBundle(NlsMessagesBundleUtilCore.class).errorComposed(createSubMessage(errors)));
+    this.errors = null;
+  }
+
+  /**
    * This method creates the {@link NlsMessage} wrapping the given <code>errors</code>.
    * 
    * @param errors are the {@link Throwable errors} that have been collected.
    * @return the combined {@link NlsMessage}.
    */
-  private static NlsMessage createSubMessage(Throwable[] errors) {
+  private static NlsMessage createSubMessage(Object[] errors) {
 
     Object[] messages = new Object[errors.length];
     for (int i = 0; i < messages.length; i++) {
       if (errors[i] == null) {
         messages[i] = null;
-      } else if (errors[i] instanceof NlsThrowable) {
-        messages[i] = ((NlsThrowable) errors[i]).getNlsMessage();
+      } else if (errors[i] instanceof NlsObject) {
+        messages[i] = ((NlsObject) errors[i]).toNlsMessage();
+      } else if (errors[i] instanceof Throwable) {
+        messages[i] = ((Throwable) errors[i]).getLocalizedMessage();
       } else {
-        messages[i] = errors[i].getLocalizedMessage();
+        messages[i] = errors[i];
       }
     }
     return new ComposedNlsMessage(messages);
@@ -69,33 +82,34 @@ public class ComposedException extends NlsRuntimeException {
   public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     super.printStackTrace(locale, resolver, buffer);
-    try {
-      synchronized (buffer) {
-        for (Throwable nested : this.errors) {
-          if (nested != null) {
-            buffer.append("Caused by: ");
-            buffer.append(StringUtil.LINE_SEPARATOR);
-            if (nested instanceof NlsThrowable) {
-              ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
-            } else {
-              if (buffer instanceof PrintStream) {
-                nested.printStackTrace((PrintStream) buffer);
-              } else if (buffer instanceof PrintWriter) {
-                nested.printStackTrace((PrintWriter) buffer);
+    if (this.errors != null) {
+      try {
+        synchronized (buffer) {
+          for (Throwable nested : this.errors) {
+            if (nested != null) {
+              buffer.append("Caused by: ");
+              buffer.append(StringUtil.LINE_SEPARATOR);
+              if (nested instanceof NlsThrowable) {
+                ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
               } else {
-                StringWriter writer = new StringWriter();
-                PrintWriter printWriter = new PrintWriter(writer);
-                nested.printStackTrace(printWriter);
-                printWriter.flush();
-                buffer.append(writer.toString());
+                if (buffer instanceof PrintStream) {
+                  nested.printStackTrace((PrintStream) buffer);
+                } else if (buffer instanceof PrintWriter) {
+                  nested.printStackTrace((PrintWriter) buffer);
+                } else {
+                  StringWriter writer = new StringWriter();
+                  PrintWriter printWriter = new PrintWriter(writer);
+                  nested.printStackTrace(printWriter);
+                  printWriter.flush();
+                  buffer.append(writer.toString());
+                }
               }
             }
           }
         }
+      } catch (Exception e) {
+        throw new IllegalStateException(e);
       }
-    } catch (Exception e) {
-      throw new IllegalStateException(e);
     }
   }
-
 }

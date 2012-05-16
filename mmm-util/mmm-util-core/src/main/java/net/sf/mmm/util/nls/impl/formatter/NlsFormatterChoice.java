@@ -50,6 +50,9 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object> {
 
+  /** The format of the segments. */
+  private static final String REQUIRED_FORMAT_SEGMENTS = "({...}|'.*'])+";
+
   /** The format of a comparator. */
   private static final String REQUIRED_FORMAT_COMPARATOR = "(==|!=|>=|>|<=|<)";
 
@@ -127,20 +130,43 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   private Choice parseChoice(CharSequenceScanner scanner) {
 
     Filter<Object> condition = parseCondition(scanner);
-    int index = scanner.getCurrentIndex();
-    char c = scanner.forceNext();
-    Choice choice;
-    if (c == NlsArgumentParser.START_EXPRESSION) {
-      NlsArgument argument = this.nlsDependencies.getArgumentParser().parse(scanner);
-      choice = new Choice(condition, null, argument);
-    } else if ((c == '"') || (c == '\'')) {
-      String result = scanner.readUntil(c, false, c);
-      choice = new Choice(condition, result, null);
-    } else {
-      throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), "({...}|'.*'])",
-          NlsArgument.class);
+    List<Segment> segments = new ArrayList<NlsFormatterChoice.Segment>();
+    while (scanner.hasNext()) {
+      int index = scanner.getCurrentIndex();
+      char c = scanner.peek();
+      String literal = null;
+      if ((c == '"') || (c == '\'')) {
+        scanner.next();
+        literal = scanner.readUntil(c, false, c);
+        if (literal == null) {
+          throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_SEGMENTS,
+              NlsArgument.class);
+        }
+        c = scanner.peek();
+      }
+      NlsArgument argument = null;
+      if (c == NlsArgumentParser.START_EXPRESSION) {
+        scanner.next();
+        argument = this.nlsDependencies.getArgumentParser().parse(scanner);
+      }
+      if ((argument != null) || (literal != null)) {
+        segments.add(new Segment(literal, argument));
+      } else {
+        break;
+      }
     }
-    return choice;
+    // char c = scanner.forceNext();
+    // if (c == NlsArgumentParser.START_EXPRESSION) {
+    // NlsArgument argument = this.nlsDependencies.getArgumentParser().parse(scanner);
+    // choice = new Choice(condition, null, argument);
+    // } else if ((c == '"') || (c == '\'')) {
+    // String result = scanner.readUntil(c, false, c);
+    // choice = new Choice(condition, result, null);
+    // } else {
+    // throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), "({...}|'.*'])",
+    // NlsArgument.class);
+    // }
+    return new Choice(condition, segments);
   }
 
   /**
@@ -219,10 +245,11 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
     for (Choice choice : this.choices) {
       if (choice.condition.accept(object)) {
-        if (choice.argument != null) {
-          this.nlsDependencies.getArgumentFormatter().format(choice.argument, locale, arguments, resolver, buffer);
-        } else {
-          buffer.append(choice.result);
+        for (Segment segment : choice.segments) {
+          buffer.append(segment.literal);
+          if (segment.argument != null) {
+            this.nlsDependencies.getArgumentFormatter().format(segment.argument, locale, arguments, resolver, buffer);
+          }
         }
         return;
       }
@@ -254,35 +281,59 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     /** The condition that determines when the choice applies. */
     private final Filter<Object> condition;
 
-    /**
-     * The {@link NlsArgument} to use as result or <code>null</code> if {@link #result} should be used
-     * instead.
-     */
-    private final NlsArgument argument;
-
-    /** The literal result. */
-    private final String result;
+    /** The segments */
+    private final List<Segment> segments;
 
     /**
      * The constructor.
      * 
      * @param condition is the {@link #condition}.
-     * @param result is the {@link #result}.
-     * @param argument is the {@link #argument}.
+     * @param segments is the {@link List} of {@link Segment}s.
      */
-    private Choice(Filter<Object> condition, String result, NlsArgument argument) {
+    private Choice(Filter<Object> condition, List<Segment> segments) {
 
       super();
       this.condition = condition;
-      this.result = result;
+      this.segments = segments;
+    }
+  }
+
+  /**
+   * This inner class represents a single segment of a {@link Choice}.
+   */
+  private static class Segment {
+
+    /** The literal result. */
+    private final String literal;
+
+    /**
+     * The {@link NlsArgument} to use as result or <code>null</code> if this is the last {@link Segment}.
+     */
+    private final NlsArgument argument;
+
+    /**
+     * The constructor.
+     * 
+     * @param literal is the literal (prefix).
+     * @param argument is the {@link NlsArgument} or <code>null</code> if this is the last {@link Segment}.
+     */
+    public Segment(String literal, NlsArgument argument) {
+
+      super();
+      if (literal == null) {
+        this.literal = "";
+      } else {
+        this.literal = literal;
+      }
       this.argument = argument;
     }
+
   }
 
   /**
    * This inner class represents a single choice.
    */
-  private class Condition implements Filter<Object> {
+  private static class Condition implements Filter<Object> {
 
     /** The {@link Comparator}. */
     private final Comparator comparator;

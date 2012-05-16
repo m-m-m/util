@@ -76,6 +76,7 @@ public class NlsArgument {
     StringBuilder sb = new StringBuilder();
     sb.append(NlsArgumentParser.START_EXPRESSION);
     sb.append(this.key);
+    sb.append(NlsArgumentParser.FORMAT_SEPARATOR);
     sb.append(this.formatter);
     if (this.justification != null) {
       sb.append(NlsArgumentParser.START_EXPRESSION);

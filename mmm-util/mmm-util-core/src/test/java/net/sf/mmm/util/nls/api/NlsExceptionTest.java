@@ -8,7 +8,6 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
@@ -31,6 +30,41 @@ public class NlsExceptionTest {
     super();
   }
 
+  protected void checkException(String expectedMessage, NlsException e, Locale locale, NlsTemplateResolver resolver) {
+
+    UUID uuid = e.getUuid();
+    Assert.assertNotNull(uuid);
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter(sw);
+    // test stacktrace via PrintWriter in default locale
+    if (locale == null) {
+      if (resolver == null) {
+        e.printStackTrace(pw);
+      } else {
+        e.printStackTrace(Locale.getDefault(), resolver, pw);
+      }
+    } else {
+      if (resolver == null) {
+        e.printStackTrace(locale, pw);
+      } else {
+        e.printStackTrace(locale, resolver, pw);
+      }
+    }
+    pw.flush();
+    String stacktrace = sw.toString();
+
+    sw.getBuffer().setLength(0); // reset sw
+    pw.println(expectedMessage);
+    pw.println(uuid.toString());
+    pw.print("\tat ");
+    pw.flush();
+    String expected = sw.toString();
+    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
+  }
+
+  /**
+   * Test fundamentals of {@link NlsException}.
+   */
   @Test
   public void testNlsException() {
 
@@ -44,99 +78,12 @@ public class NlsExceptionTest {
     Assert.assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN, resolver));
 
     // test UUID and stacktrace
-    UUID uuid = e.getUuid();
-    Assert.assertNotNull(uuid);
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter(sw);
-    // test stacktrace via PrintWriter in default locale
-    e.printStackTrace(pw);
-    pw.flush();
-    String stacktrace = sw.toString();
+    checkException(e.getLocalizedMessage(), e, null, null);
 
-    sw.getBuffer().setLength(0); // reset sw
-    pw.println(e.getLocalizedMessage());
-    pw.println(uuid.toString());
-    pw.print("\tat ");
-    pw.flush();
-    String expected = sw.toString();
-    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
+    // test ROOT locale stacktrace
+    checkException(message, e, Locale.ROOT, resolver);
 
     // test German stacktrace
-    StringBuilder buffer = new StringBuilder();
-    e.printStackTrace(Locale.ROOT, resolver, buffer);
-    stacktrace = buffer.toString();
-    sw.getBuffer().setLength(0); // reset sw
-    pw.println(message);
-    pw.println(uuid.toString());
-    pw.print("\tat ");
-    pw.flush();
-    expected = sw.toString();
-    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
-
-    // test German stacktrace
-    buffer = new StringBuilder();
-    e.printStackTrace(Locale.GERMAN, resolver, buffer);
-    String stacktraceDe = buffer.toString();
-    sw.getBuffer().setLength(0); // reset sw
-    pw.println(messageDe);
-    pw.println(uuid.toString());
-    pw.print("\tat ");
-    pw.flush();
-    Assert.assertTrue(stacktraceDe.contains(sw.toString()));
-  }
-
-  @Test
-  public void testNlsException2() {
-
-    String source = "bad boy";
-    NlsMessagesBundleUtilCore bundle = NlsAccess.getBundleFactory().createBundle(NlsMessagesBundleUtilCore.class);
-    NlsException e = new NlsException(bundle.errorArgumentNull(source)) {};
-    String message = "NullPointerException caused by \"" + source + "\"!";
-    Assert.assertEquals(message, e.getLocalizedMessage(Locale.ROOT));
-    NlsTemplateResolverImpl resolver = new NlsTemplateResolverImpl(new MyResourceBundle());
-    resolver.initialize();
-    String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";
-    Assert.assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN, resolver));
-
-    // test UUID and stacktrace
-    UUID uuid = e.getUuid();
-    Assert.assertNotNull(uuid);
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter(sw);
-    // test stacktrace via PrintWriter in default locale
-    e.printStackTrace(pw);
-    pw.flush();
-    String stacktrace = sw.toString();
-
-    sw.getBuffer().setLength(0); // reset sw
-    pw.println(e.getLocalizedMessage());
-    pw.println(uuid.toString());
-    pw.print("\tat ");
-    pw.flush();
-    String expected = sw.toString();
-    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
-
-    // test German stacktrace
-    StringBuilder buffer = new StringBuilder();
-    e.printStackTrace(Locale.ROOT, resolver, buffer);
-    stacktrace = buffer.toString();
-    sw.getBuffer().setLength(0); // reset sw
-    pw.println(message);
-    pw.println(uuid.toString());
-    pw.print("\tat ");
-    pw.flush();
-    expected = sw.toString();
-    Assert.assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
-
-    // test German stacktrace
-    buffer = new StringBuilder();
-    e.printStackTrace(Locale.GERMAN, resolver, buffer);
-    String stacktraceDe = buffer.toString();
-    sw.getBuffer().setLength(0); // reset sw
-    pw.println(messageDe);
-    pw.println(uuid.toString());
-    pw.print("\tat ");
-    pw.flush();
-    Assert.assertTrue(stacktraceDe.contains(sw.toString()));
+    checkException(messageDe, e, Locale.GERMAN, resolver);
   }
 }

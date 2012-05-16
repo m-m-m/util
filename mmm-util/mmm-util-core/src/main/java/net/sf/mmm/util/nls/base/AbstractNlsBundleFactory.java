@@ -223,7 +223,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       Object result;
       if (NlsMessage.class.equals(method.getReturnType())) {
         NlsTemplate template = createTemplate(method);
-        if (args.length == 0) {
+        if ((args == null) || (args.length == 0)) {
           result = getMessageFactory().create(template);
         } else {
           Map<String, Object> messageArguments = createArgumentMap(method, args);

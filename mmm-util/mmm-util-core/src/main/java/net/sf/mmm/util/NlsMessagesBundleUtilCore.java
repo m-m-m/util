@@ -303,7 +303,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
    * @param source is the source of the value.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from '{source}} as value of the type \"{type}\"!")
+  @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as value of the type \"{type}\"!")
   NlsMessage errorParseType(@Named("value")
   Object value, @Named("type")
   Object type, @Named("source")

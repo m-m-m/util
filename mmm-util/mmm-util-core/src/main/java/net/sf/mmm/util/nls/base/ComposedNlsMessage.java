@@ -85,7 +85,13 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
       throws RuntimeIoException {
 
     try {
+      boolean newline = false;
       for (Object message : this.arguments) {
+        if (newline) {
+          buffer.append(StringUtil.LINE_SEPARATOR);
+        } else {
+          newline = true;
+        }
         if (message == null) {
           buffer.append("null");
         } else if (message instanceof NlsObject) {
@@ -94,7 +100,6 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
         } else {
           buffer.append(message.toString());
         }
-        buffer.append(StringUtil.LINE_SEPARATOR);
       }
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.WRITE);

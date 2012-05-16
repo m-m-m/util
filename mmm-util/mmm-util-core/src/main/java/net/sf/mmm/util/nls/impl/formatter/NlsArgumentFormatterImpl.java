@@ -46,13 +46,18 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
       Appendable buffer) throws IOException {
 
     Object value = null;
+    boolean hasValue = false;
     if (arguments != null) {
       value = arguments.get(argument.getKey());
-      if ((value == null) && (arguments.containsKey(argument.getKey()))) {
-        value = "null";
+      if (value == null) {
+        if (arguments.containsKey(argument.getKey())) {
+          hasValue = true;
+        }
+      } else {
+        hasValue = true;
       }
     }
-    if (value == null) {
+    if (!hasValue) {
       buffer.append(NlsArgumentParser.START_EXPRESSION);
       buffer.append(argument.getKey());
       buffer.append(NlsArgumentParser.END_EXPRESSION);
