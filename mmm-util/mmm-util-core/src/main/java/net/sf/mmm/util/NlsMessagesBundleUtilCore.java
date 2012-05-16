@@ -247,21 +247,6 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
    * @param value is the invalid value.
    * @param valueType is the actual type of the value.
    * @param targetType is the expected type of the value.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The value \"{value}\" with the "
-      + "type \"{valueType}\" can NOT be converted to the requested type \"{targetType}\"!")
-  NlsMessage errorValueWrongType(@Named("value")
-  Object value, @Named("valueType")
-  Object valueType, @Named("targetType")
-  Type targetType);
-
-  /**
-   * @see net.sf.mmm.util.value.api.WrongValueTypeException
-   * 
-   * @param value is the invalid value.
-   * @param valueType is the actual type of the value.
-   * @param targetType is the expected type of the value.
    * @param source is the source of the value.
    * @return the {@link NlsMessage}
    */
