@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link DuplicateObjectException} is thrown if an object was rejected because it is a duplicate. This
@@ -27,7 +27,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorDuplicateObject(object));
+    super(createBundle(NlsBundleUtilCore.class).errorDuplicateObject(object));
   }
 
   /**
@@ -38,7 +38,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object, Object key) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorDuplicateObjectWithKey(object, key));
+    super(createBundle(NlsBundleUtilCore.class).errorDuplicateObjectWithKey(object, key));
   }
 
   /**
@@ -51,7 +51,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object, Object key, Object existing) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorDuplicateObjectWithKeyAndExisting(object, key, existing));
+    super(createBundle(NlsBundleUtilCore.class).errorDuplicateObjectWithKeyAndExisting(object, key, existing));
   }
 
   /**

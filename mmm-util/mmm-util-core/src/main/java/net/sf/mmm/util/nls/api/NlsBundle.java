@@ -12,7 +12,7 @@ package net.sf.mmm.util.nls.api;
  * <b>NOTE:</b><br/>
  * You should NOT create an implementation of that interface as this is created for you automatically via
  * {@link NlsBundleFactory#createBundle(Class)}. This is the new and recommended approach for defining and
- * binding {@link NlsMessage}s. For an example see {@link net.sf.mmm.util.NlsMessagesBundleUtilCore}.<br/>
+ * binding {@link NlsMessage}s. For an example see {@link net.sf.mmm.util.NlsBundleUtilCore}.<br/>
  * <b>IMPORTANT:</b><br/>
  * Unless annotated with {@link NlsBundleKey} the {@link java.util.ResourceBundle#getString(String) key} is
  * derived from the name of the method. You have to ensure that the keys are unique as otherwise the

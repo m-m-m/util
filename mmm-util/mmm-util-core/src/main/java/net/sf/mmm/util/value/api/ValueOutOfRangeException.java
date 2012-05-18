@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
@@ -42,7 +42,7 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorValueOutOfRangeWithSource(value, minimum, maximum,
+    super(createBundle(NlsBundleUtilCore.class).errorValueOutOfRangeWithSource(value, minimum, maximum,
         valueSource));
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
   }

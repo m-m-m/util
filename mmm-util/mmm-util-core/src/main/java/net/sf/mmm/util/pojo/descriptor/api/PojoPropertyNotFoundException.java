@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 
@@ -30,7 +30,7 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorPojoPropertyNotFound(propertyName, pojoType));
+    super(createBundle(NlsBundleUtilCore.class).errorPojoPropertyNotFound(propertyName, pojoType));
   }
 
   /**
@@ -42,7 +42,7 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
    */
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName, PojoPropertyAccessorMode<?> mode) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorPojoPropertyNotAccessible(propertyName, pojoType, mode));
+    super(createBundle(NlsBundleUtilCore.class).errorPojoPropertyNotAccessible(propertyName, pojoType, mode));
   }
 
 }

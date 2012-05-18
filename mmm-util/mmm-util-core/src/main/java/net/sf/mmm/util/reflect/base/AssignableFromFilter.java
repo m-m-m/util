@@ -17,15 +17,32 @@ public class AssignableFromFilter implements Filter<Class<?>> {
   /** The class */
   private final Class<?> superClass;
 
+  /** @see #accept(Class) */
+  private final boolean excludeSuperType;
+
   /**
    * The constructor.
    * 
-   * @param superType is the super-type defining which types to {@link #accept(Class) accept}.
+   * @param superClass is the super-type defining which types to {@link #accept(Class) accept}.
    */
-  public AssignableFromFilter(Class<?> superType) {
+  public AssignableFromFilter(Class<?> superClass) {
+
+    this(superClass, false);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param superClass is the super-type defining which types to {@link #accept(Class) accept}.
+   * @param excludeSuperClass - <code>true</code> if the given <code>superClass</code> itself shall NOT be
+   *        {@link #accept(Class) accepted}, <code>false</code> otherwise.
+   * @since 2.0.2
+   */
+  public AssignableFromFilter(Class<?> superClass, boolean excludeSuperClass) {
 
     super();
-    this.superClass = superType;
+    this.superClass = superClass;
+    this.excludeSuperType = excludeSuperClass;
   }
 
   /**
@@ -39,6 +56,11 @@ public class AssignableFromFilter implements Filter<Class<?>> {
   public boolean accept(Class<?> type) {
 
     if (type != null) {
+      if (this.excludeSuperType) {
+        if (this.superClass.equals(type)) {
+          return false;
+        }
+      }
       return this.superClass.isAssignableFrom(type);
     }
     return false;

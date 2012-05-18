@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -25,7 +25,7 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
    */
   public ResourceAmbiguousException(String resourceName) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorResourceAmbiguous(resourceName));
+    super(createBundle(NlsBundleUtilCore.class).errorResourceAmbiguous(resourceName));
   }
 
   /**
@@ -36,7 +36,7 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
    */
   public ResourceAmbiguousException(String resourceName, String... resourceIds) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorResourceAmbiguousWithIds(resourceName, resourceIds));
+    super(createBundle(NlsBundleUtilCore.class).errorResourceAmbiguousWithIds(resourceName, resourceIds));
   }
 
 }

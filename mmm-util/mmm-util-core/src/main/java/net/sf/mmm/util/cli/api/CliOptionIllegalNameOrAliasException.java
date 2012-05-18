@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link CliOptionIllegalNameOrAliasException} is thrown if the {@link CliOption#name() name} or
@@ -26,7 +26,7 @@ public class CliOptionIllegalNameOrAliasException extends CliException {
    */
   public CliOptionIllegalNameOrAliasException(String nameOrAlias, CliOption option) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliOptionNameIllegal(option, nameOrAlias));
+    super(createBundle(NlsBundleUtilCore.class).errorCliOptionNameIllegal(option, nameOrAlias));
   }
 
 }

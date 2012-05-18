@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link NlsIllegalStateException} is analog to an {@link IllegalStateException} but with true native
@@ -32,7 +32,7 @@ public class NlsIllegalStateException extends NlsRuntimeException {
    */
   public NlsIllegalStateException(Throwable nested) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorIllegalState());
+    super(nested, createBundle(NlsBundleUtilCore.class).errorIllegalState());
   }
 
 }

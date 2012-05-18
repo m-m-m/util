@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link CliClassNoPropertyException} is thrown if a {@link CliClass CLI-class} is illegal because it has
@@ -24,7 +24,7 @@ public class CliClassNoPropertyException extends CliException {
    */
   public CliClassNoPropertyException(Class<?> cliStateClass) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliClassNoProperty(cliStateClass));
+    super(createBundle(NlsBundleUtilCore.class).errorCliClassNoProperty(cliStateClass));
   }
 
 }

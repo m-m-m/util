@@ -5,7 +5,7 @@ package net.sf.mmm.util.cli.api;
 
 import java.io.PrintWriter;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.impl.DefaultCliParserBuilder;
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
@@ -21,8 +21,8 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
  */
 @CliClass
 @CliModes(//
-{ @CliMode(id = CliMode.ID_HELP, title = NlsMessagesBundleUtilCore.INF_MAIN_MODE_HELP, //
-usage = NlsMessagesBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE) })
+{ @CliMode(id = CliMode.ID_HELP, title = NlsBundleUtilCore.INF_MAIN_MODE_HELP, //
+usage = NlsBundleUtilCore.MSG_MAIN_MODE_HELP_USAGE) })
 public abstract class AbstractMain extends AbstractLoggableObject {
 
   /** The {@link #run(CliModeObject) exit-code} on success. */
@@ -62,7 +62,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /** Option to show the {@link #printHelp(CliParser) usage}. */
   @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //
-  required = true, usage = NlsMessagesBundleUtilCore.MSG_MAIN_OPTION_HELP_USAGE, mode = CliMode.ID_HELP)
+  required = true, usage = NlsBundleUtilCore.MSG_MAIN_OPTION_HELP_USAGE, mode = CliMode.ID_HELP)
   private boolean help;
 
   /**

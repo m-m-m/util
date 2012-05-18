@@ -6,7 +6,7 @@ package net.sf.mmm.util.reflect.api;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link AccessFailedException} is thrown if a {@link java.lang.reflect reflective} call failed because
@@ -32,7 +32,7 @@ public class AccessFailedException extends ReflectionException {
    */
   public AccessFailedException(Throwable nested, AccessibleObject accessible) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorAccessFailed(accessible));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorAccessFailed(accessible));
   }
 
   /**
@@ -43,7 +43,7 @@ public class AccessFailedException extends ReflectionException {
    */
   public AccessFailedException(Throwable nested, Type type) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorAccessFailed(type));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorAccessFailed(type));
   }
 
 }

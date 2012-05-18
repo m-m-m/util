@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link CliOptionMissingValueException} is thrown if an option requires a value that is missing (no proper
@@ -24,7 +24,7 @@ public class CliOptionMissingValueException extends CliException {
    */
   public CliOptionMissingValueException(String option) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliOptionMissingValue(option));
+    super(createBundle(NlsBundleUtilCore.class).errorCliOptionMissingValue(option));
   }
 
 }

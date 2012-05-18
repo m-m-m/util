@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.math.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -39,7 +39,7 @@ public class NumberConversionException extends NlsRuntimeException {
    */
   public NumberConversionException(Throwable nested, Object value, Object targetType) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorNumberConversion(value, targetType));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorNumberConversion(value, targetType));
   }
 
 }

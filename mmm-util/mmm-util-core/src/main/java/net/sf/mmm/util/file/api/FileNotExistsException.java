@@ -5,7 +5,7 @@ package net.sf.mmm.util.file.api;
 
 import java.io.File;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
@@ -51,7 +51,7 @@ public class FileNotExistsException extends RuntimeIoException {
    */
   public FileNotExistsException(String file, boolean directory) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorFileNotExists(file, directory));
+    super(createBundle(NlsBundleUtilCore.class).errorFileNotExists(file, directory));
   }
 
 }

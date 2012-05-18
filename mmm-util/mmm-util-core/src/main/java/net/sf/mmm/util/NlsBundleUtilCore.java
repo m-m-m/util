@@ -20,7 +20,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @since 2.0.2
  */
 @NlsBundleLocation(bundleName = "NlsBundleUtilCore")
-public interface NlsMessagesBundleUtilCore extends NlsBundle {
+public interface NlsBundleUtilCore extends NlsBundle {
 
   /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
   String INF_LEFT = "left";
@@ -297,10 +297,13 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.NlsParseException
    * 
+   * @param value is the value that could NOT be parsed.
+   * @param format is the expected format.
+   * @param type is the target type for the value to parse.
    * @param source is the source of the value.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Failed to parse \"{value}\" from \"{source}\" as \"{type}\" - required format is \"{format}\"!")
+  @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as \"{type}\" - required format is \"{format}\"!")
   NlsMessage errorParseFormat(@Named("value")
   Object value, @Named("format")
   Object format, @Named("type")
@@ -310,15 +313,10 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.value.api.ValueOutOfRangeException
    * 
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The value \"{value}\" is not in the expected range of \"[{min} - {max}]\"!")
-  NlsMessage errorValueOutOfRange(Number value, Number min, Number max);
-
-  /**
-   * @see net.sf.mmm.util.value.api.ValueOutOfRangeException
-   * 
-   * @param source is the source of the value.
+   * @param value is the invalid value.
+   * @param min is the minimum value.
+   * @param max is the maximum value.
+   * @param source is the source of the value or <code>null</code> if NOT available.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} is not in the expected range of \"[{min} - {max}]\"!")
@@ -331,6 +329,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.value.api.ValueConvertException
    * 
+   * @param value is the value that could NOT be converted.
+   * @param type is the type to convert to.
    * @param source is the source of the value.
    * @return the {@link NlsMessage}
    */
@@ -353,6 +353,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.component.api.ResourceAmbiguousException
    * 
+   * @param resource is the identifier (path, URL, etc.) of the ambiguous resource.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The required resource \"{resource}\" is ambiguous!")
@@ -362,12 +363,14 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.component.api.ResourceAmbiguousException
    * 
+   * @param resource is the identifier (path, URL, class, etc.) of the missing resource.
+   * @param ids are the IDs of the ambiguous resources.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("The required resource \"{resource}\" is ambiguous!\n{value}")
+  @NlsBundleMessage("The required resource \"{resource}\" is ambiguous!\n{ids}")
   NlsMessage errorResourceAmbiguousWithIds(@Named("resource")
-  String resource, @Named("value")
-  String... value);
+  String resource, @Named("ids")
+  String... ids);
 
   /**
    * @see net.sf.mmm.util.component.api.AlreadyInitializedException
@@ -398,6 +401,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.NlsIllegalArgumentException
    * 
+   * @param value is the illegal value of the argument.
+   * @param name is the name of the argument.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The given value \"{value}\" is illegal for the argument \"{name}\"!")
@@ -408,6 +413,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.date.api.IllegalDateFormatException
    * 
+   * @param value is the illegal date {@link String}.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Illegal date \"{value}\"!")
@@ -417,6 +423,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.math.api.NumberConversionException
    * 
+   * @param value is the value that could NOT be converted.
+   * @param type is the type the value should be converted to.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Can not convert number \"{value}\" to \"{type}\"!")
@@ -483,6 +491,9 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.file.api.FileAlreadyExistsException
    * 
+   * @param file is the name or path of the file.
+   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
+   *        otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" already exists!")
@@ -493,6 +504,9 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.file.api.FileNotExistsException
    * 
+   * @param file is the name or path of the file.
+   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
+   *        otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" does not exist!")
@@ -503,6 +517,9 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.file.api.FileCreationFailedException
    * 
+   * @param file is the name or path of the file.
+   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
+   *        otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be created!")
@@ -513,6 +530,9 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.file.api.FileDeletionFailedException
    * 
+   * @param file is the name or path of the file.
+   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
+   *        otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be deleted!")
@@ -523,6 +543,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.NlsNullPointerException
    * 
+   * @param object is the name of the object that is <code>null</code>.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The object \"{object}\" is null!")
@@ -532,6 +553,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.DuplicateObjectException
    * 
+   * @param object is the duplicate object.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Duplicate object \"{object}\"!")
@@ -541,6 +563,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.DuplicateObjectException
    * 
+   * @param object is the duplicate object.
+   * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Duplicate object \"{object}\" for key \"{key}\"!")
@@ -551,6 +575,9 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.DuplicateObjectException
    * 
+   * @param object is the duplicate object.
+   * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
+   * @param existing is the object already associated with the given <code>key</code>.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Duplicate object \"{object}\" for key \"{key}\" - already mapped to \"{existing}\"!")
@@ -562,54 +589,29 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.api.ObjectMismatchException
    * 
+   * @param object is the mismatching object.
+   * @param expected is the expected object (e.g. type).
+   * @param source is the source of the mismatching object or <code>null</code> if unknown.
+   * @param property is the property holding the mismatching object or <code>null</code> if undefined.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Mismatch detected: found \"{object}\", but expected \"{expected}\"!")
+  @NlsBundleMessage("Mismatch detected{source,choice,(?==null)''(else)' in \"'{source}'\"'}"
+      + "{property,choice,(?==null)''(else)' for \"'{property}'\"'}: found \"{object}\", but expected \"{expected}\"!")
   NlsMessage errorObjectMismatch(@Named("object")
   Object object, @Named("expected")
-  Object expected);
-
-  /**
-   * @see net.sf.mmm.util.nls.api.ObjectMismatchException
-   * 
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("Mismatch in \"{container}\" detected: found \"{object}\", but expected \"{expected}\"!")
-  NlsMessage errorObjectMismatchWithContainer(@Named("object")
-  Object object, @Named("expected")
-  Object expected, @Named("container")
-  Object container);
-
-  /**
-   * @see net.sf.mmm.util.nls.api.ObjectMismatchException
-   * 
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("Mismatch in \"{container}\" for \"{property}\" detected: found \"{object}\", but expected \"{expected}\"!")
-  NlsMessage errorObjectMismatchWithContainerAndProperty(@Named("object")
-  Object object, @Named("expected")
-  Object expected, @Named("container")
-  Object container, Object property);
+  Object expected, @Named("source")
+  Object source, @Named("property")
+  Object property);
 
   /**
    * @see net.sf.mmm.util.nls.api.ObjectNotFoundException
    * 
-   * @param object is the missing object.
+   * @param object describes the missing object (e.g. the expected type).
+   * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Could NOT find object \"{object}\"!")
+  @NlsBundleMessage("Could NOT find object \"{object}\"{key,choice,(?==null)''(else)' for \"'{key}'\"'}!")
   NlsMessage errorObjectNotFound(@Named("object")
-  Object object);
-
-  /**
-   * @see net.sf.mmm.util.nls.api.ObjectNotFoundException
-   * 
-   * @param object is the missing object.
-   * @param key is the key for the request.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("Could NOT find object \"{object}\" for key \"{key}\"!")
-  NlsMessage errorObjectNotFoundWithKey(@Named("object")
   Object object, @Named("key")
   Object key);
 
@@ -692,6 +694,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.base.IllegalWildcardSequenceException
    * 
+   * @param sequence is the illegal sequence that was used in a wildcard-type.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Illegal sequence in wildcard type \"{sequence}\"!")
@@ -701,6 +704,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.api.AnnotationNotRuntimeException
    * 
+   * @param annotation is the invalid {@link java.lang.annotation.Annotation}.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The given annotation \"{annotation}\" can NOT be resolved at runtime!")
@@ -710,6 +714,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.api.AnnotationNotForTargetException
    * 
+   * @param annotation is the invalid {@link java.lang.annotation.Annotation}.
+   * @param target is the expected {@link java.lang.annotation.ElementType}.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The given annotation \"{annotation}\" can NOT annotate the target \"{target}\"!")
@@ -720,6 +726,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.api.TypeNotFoundException
    * 
+   * @param type is the missing {@link java.lang.reflect.Type}.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The type \"{type}\" could NOT be found!")
@@ -729,6 +736,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.base.ContainerGrowthException
    * 
+   * @param size is the size to increase.
+   * @param max is the maximum allowed increase.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Can not increase size of array or list by \"{size}\", because limit is \"{max}\"!")
@@ -739,6 +748,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.base.UnknownCollectionInterfaceException
    * 
+   * @param type is the {@link Class} reflecting the unknown collection.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Unknown collection interface \"{type}\"!")
@@ -748,6 +758,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.api.InstantiationFailedException
    * 
+   * @param type is the {@link java.lang.reflect.Type} that could NOT be instantiated.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to create an instance of \"{type}\"!")
@@ -765,6 +776,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.api.InvocationFailedException
    * 
+   * @param object is the object on which the invocation failed.
+   * @param accessible is the method or field that was invoked.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Invocation of \"{accessible}\" failed on \"{object}\"!")
@@ -775,7 +788,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.reflect.api.AccessFailedException
    * 
-   * @param accessible is the A
+   * @param accessible is the method, constructor or field that could not be accessed.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Reflective access for \"{accessible}\" failed!")
@@ -813,18 +826,11 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.xml.base.XmlInvalidException
    * 
+   * @param source is the source of the XML or <code>null</code> if unknown.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Invalid XML!")
-  NlsMessage errorXmlInvalid();
-
-  /**
-   * @see net.sf.mmm.util.xml.base.XmlInvalidException
-   * 
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The XML from {source} is invalid!")
-  NlsMessage errorXmlInvalidWithSource(@Named("source")
+  @NlsBundleMessage("The XML{source,choice,(?==null)''(else)' from \"'{source}'\"'} is invalid!")
+  NlsMessage errorXmlInvalid(@Named("source")
   Object source);
 
   /**
@@ -950,6 +956,7 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer
    * 
+   * @param mainClass is the {@link Class} with the main-method.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
@@ -967,6 +974,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer
    * 
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_SYNCHRONIZER_USAGE_ENCODING)
@@ -977,6 +986,8 @@ public interface NlsMessagesBundleUtilCore extends NlsBundle {
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer
    * 
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_SYNCHRONIZER_USAGE_PATH)

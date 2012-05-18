@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * The {@link NlsParseException} is thrown if some data could NOT be parsed because it does NOT match the
@@ -45,7 +45,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Throwable nested, CharSequence value, CharSequence expected) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorParseExpected(value, expected));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorParseExpected(value, expected));
   }
 
   /**
@@ -102,7 +102,7 @@ public class NlsParseException extends NlsRuntimeException {
   public NlsParseException(Throwable nested, CharSequence value, CharSequence requiredFormat, Object type,
       Object valueSource) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorParseFormat(value, requiredFormat, type, valueSource));
+    super(createBundle(NlsBundleUtilCore.class).errorParseFormat(value, requiredFormat, type, valueSource));
   }
 
   /**
@@ -131,7 +131,7 @@ public class NlsParseException extends NlsRuntimeException {
    */
   public NlsParseException(Throwable nested, Object value, Type targetType, Object valueSource) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorParseType(value, targetType, valueSource));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorParseType(value, targetType, valueSource));
   }
 
   /**

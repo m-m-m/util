@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link CliModeUndefinedException} is thrown if a {@link CliOption} or {@link CliArgument} defines a
@@ -26,7 +26,7 @@ public class CliModeUndefinedException extends CliException {
    */
   public CliModeUndefinedException(String mode, Object annotation) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliModeUndefined(mode, annotation));
+    super(createBundle(NlsBundleUtilCore.class).errorCliModeUndefined(mode, annotation));
   }
 
 }

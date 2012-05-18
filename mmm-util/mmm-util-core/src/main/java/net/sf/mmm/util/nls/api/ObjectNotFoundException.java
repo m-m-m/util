@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link ObjectNotFoundException} is thrown if an object was requested but does NOT exist or could NOT be
@@ -54,7 +54,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    */
   public ObjectNotFoundException(Throwable nested, Object object) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectNotFound(object));
+    this(nested, object, null);
   }
 
   /**
@@ -68,7 +68,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    */
   public ObjectNotFoundException(Throwable nested, Object object, Object key) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectNotFoundWithKey(object, key));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorObjectNotFound(object, key));
   }
 
 }

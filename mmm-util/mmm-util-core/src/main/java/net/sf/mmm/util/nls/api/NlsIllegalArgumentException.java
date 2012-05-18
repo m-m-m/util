@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link NlsIllegalArgumentException} is analog to an {@link IllegalArgumentException} but with true native
@@ -47,7 +47,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
    */
   public NlsIllegalArgumentException(Object value, Throwable nested) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorIllegalArgument(value));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorIllegalArgument(value));
   }
 
   /**
@@ -60,7 +60,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
    */
   public NlsIllegalArgumentException(Object value, String name, Throwable nested) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorIllegalArgumentWithName(value, name));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorIllegalArgumentWithName(value, name));
   }
 
 }

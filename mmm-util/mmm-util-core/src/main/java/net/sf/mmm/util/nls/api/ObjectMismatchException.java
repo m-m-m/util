@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * An {@link ObjectMismatchException} is thrown if an object or value do NOT match as expected.
@@ -32,11 +32,11 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * 
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
-   * @param container is the object containing the mismatching <code>object</code>.
+   * @param source is the source of the mismatching <code>object</code>.
    */
-  public ObjectMismatchException(Object object, Object expected, Object container) {
+  public ObjectMismatchException(Object object, Object expected, Object source) {
 
-    this((Throwable) null, object, expected, container);
+    this((Throwable) null, object, expected, source);
   }
 
   /**
@@ -44,11 +44,11 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * 
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
-   * @param container is the object containing the mismatching <code>object</code>.
+   * @param source is the source of the mismatching <code>object</code>.
    * @param property is the property or key of the <code>container</code> containing the mismatching
    *        <code>object</code>.
    */
-  public ObjectMismatchException(Object object, Object expected, Object container, Object property) {
+  public ObjectMismatchException(Object object, Object expected, Object source, Object property) {
 
     this((Throwable) null, object, expected, property);
   }
@@ -62,7 +62,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
    */
   public ObjectMismatchException(Throwable nested, Object object, Object expected) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectMismatch(object, expected));
+    this(nested, object, expected, null);
   }
 
   /**
@@ -71,12 +71,11 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
-   * @param container is the object containing the mismatching <code>object</code>.
+   * @param source is the source of the mismatching <code>object</code>.
    */
-  public ObjectMismatchException(Throwable nested, Object object, Object expected, Object container) {
+  public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectMismatchWithContainer(object, expected,
-        container));
+    this(nested, object, expected, source, null);
   }
 
   /**
@@ -85,14 +84,13 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
-   * @param container is the object containing the mismatching <code>object</code>.
+   * @param source is the source of the mismatching <code>object</code>.
    * @param property is the property or key of the <code>container</code> containing the mismatching
    *        <code>object</code>.
    */
-  public ObjectMismatchException(Throwable nested, Object object, Object expected, Object container, Object property) {
+  public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source, Object property) {
 
-    super(nested, createBundle(NlsMessagesBundleUtilCore.class).errorObjectMismatchWithContainerAndProperty(object,
-        expected, container, property));
+    super(nested, createBundle(NlsBundleUtilCore.class).errorObjectMismatch(object, expected, source, property));
   }
 
 }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.base.CliArgumentContainer;
 
 /**
@@ -26,7 +26,7 @@ public class CliArgumentReferenceMissingException extends CliException {
    */
   public CliArgumentReferenceMissingException(CliArgumentContainer argumentContainer) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliArgumentReferenceMissing(
+    super(createBundle(NlsBundleUtilCore.class).errorCliArgumentReferenceMissing(
         argumentContainer.getArgument().addCloseTo(), argumentContainer));
   }
 

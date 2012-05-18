@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -28,7 +28,7 @@ public class ContainerGrowthException extends NlsRuntimeException {
    */
   public ContainerGrowthException(int size, int max) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorIncreaseExceedsMaxGrowth(size, max));
+    super(createBundle(NlsBundleUtilCore.class).errorIncreaseExceedsMaxGrowth(size, max));
   }
 
 }

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link CliOptionIncompatibleModesException} is thrown if two {@link CliOption options} are used together
@@ -25,7 +25,7 @@ public class CliOptionIncompatibleModesException extends CliException {
    */
   public CliOptionIncompatibleModesException(String option1, String option2) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliOptionIncompatibleModes(option1, option2));
+    super(createBundle(NlsBundleUtilCore.class).errorCliOptionIncompatibleModes(option1, option2));
   }
 
 }

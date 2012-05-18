@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 
 /**
  * A {@link CliOptionUndefinedException} is thrown if an {@link CliOption option} is given as
@@ -24,7 +24,7 @@ public class CliOptionUndefinedException extends CliException {
    */
   public CliOptionUndefinedException(String option) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorCliOptionUndefined(option));
+    super(createBundle(NlsBundleUtilCore.class).errorCliOptionUndefined(option));
   }
 
 }

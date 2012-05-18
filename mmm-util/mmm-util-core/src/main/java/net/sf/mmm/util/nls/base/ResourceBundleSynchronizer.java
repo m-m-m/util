@@ -13,23 +13,33 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.Set;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.AssignableFromFilter;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This class can be used to create and update the localized bundles (properties) from an
@@ -40,9 +50,9 @@ import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@CliClass(usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE)
-@CliMode(id = CliMode.ID_DEFAULT, title = NlsMessagesBundleUtilCore.INF_MAIN_MODE_DEFAULT, //
-usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
+@CliClass(usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE)
+@CliMode(id = CliMode.ID_DEFAULT, title = NlsBundleUtilCore.INF_MAIN_MODE_DEFAULT, //
+usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
 public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
@@ -73,12 +83,12 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /** @see #getPath() */
   @CliOption(name = OPTION_PATH, aliases = "-p", operand = "DIR", //
-  usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE_PATH)
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_PATH)
   private String path;
 
   /** @see #getEncoding() */
   @CliOption(name = OPTION_ENCODING, aliases = "-e", operand = "ENC", //
-  usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE_ENCODING)
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_ENCODING)
   private String encoding;
 
   /** @see #getNewline() */
@@ -86,21 +96,27 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /** @see #getDatePattern() */
   @CliOption(name = OPTION_DATE_PATTERN, aliases = "-d", operand = "PATTERN", //
-  usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
   private String datePattern;
 
   /** @see #getLocales() */
   @CliOption(name = OPTION_LOCALE, aliases = "-l", operand = "LOCALE", //
-  required = true, usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES)
+  required = true, usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
 
   /** @see #getBundleClasses() */
   @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", //
-  usage = NlsMessagesBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
-  private List<Class<? extends ResourceBundle>> bundleClasses;
+  usage = NlsBundleUtilCore.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
+  private List<Class<?>> bundleClasses;
 
   /** @see #getResourceBundleFinder() */
   private NlsResourceBundleLocator resourceBundleFinder;
+
+  /** @see #getReflectionUtil() */
+  private ReflectionUtil reflectionUtil;
+
+  /** @see #getBundleHelper() */
+  private NlsBundleHelper bundleHelper;
 
   /**
    * The constructor.
@@ -136,7 +152,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the locales of the bundles that should be {@link #synchronize(ResourceBundle)
+   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer)
    * synchronized}. Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
    * 
    * @return the locales to create/update.
@@ -234,7 +250,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * 
    * @return the bundle-class.
    */
-  public List<Class<? extends ResourceBundle>> getBundleClasses() {
+  public List<Class<?>> getBundleClasses() {
 
     return this.bundleClasses;
   }
@@ -246,9 +262,9 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * @deprecated use {@link #setBundleClasses(List)}
    */
   @Deprecated
-  public void setBundleClass(Class<? extends ResourceBundle> bundleClass) {
+  public void setBundleClass(Class<?> bundleClass) {
 
-    List<Class<? extends ResourceBundle>> list = new ArrayList<Class<? extends ResourceBundle>>();
+    List<Class<?>> list = new ArrayList<Class<?>>();
     list.add(bundleClass);
     setBundleClasses(list);
   }
@@ -258,7 +274,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * 
    * @param bundleClasses is the {@link List} of bundle-classes to set
    */
-  public void setBundleClasses(List<Class<? extends ResourceBundle>> bundleClasses) {
+  public void setBundleClasses(List<Class<?>> bundleClasses) {
 
     this.bundleClasses = bundleClasses;
   }
@@ -292,6 +308,51 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
+   * This method gets the {@link ReflectionUtil}.
+   * 
+   * @return the {@link ReflectionUtil}.
+   */
+  public ReflectionUtil getReflectionUtil() {
+
+    if (this.reflectionUtil == null) {
+      IocContainer container = getIocContainer();
+      if (container == null) {
+        this.reflectionUtil = ReflectionUtilImpl.getInstance();
+      } else {
+        this.reflectionUtil = container.getComponent(ReflectionUtil.class);
+      }
+    }
+    return this.reflectionUtil;
+  }
+
+  /**
+   * @param reflectionUtil is the {@link ReflectionUtil}.
+   */
+  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
+
+    this.reflectionUtil = reflectionUtil;
+  }
+
+  /**
+   * @return the {@link NlsBundleHelper}.
+   */
+  public NlsBundleHelper getBundleHelper() {
+
+    if (this.bundleHelper == null) {
+      this.bundleHelper = new NlsBundleHelper();
+    }
+    return this.bundleHelper;
+  }
+
+  /**
+   * @param bundleHelper is the {@link NlsBundleHelper}.
+   */
+  public void setBundleHelper(NlsBundleHelper bundleHelper) {
+
+    this.bundleHelper = bundleHelper;
+  }
+
+  /**
    * This method synchronizes (creates or updates) the localized bundles (properties). If a bundle already
    * exists, it will NOT just be overwritten but the missing keys are appended to the end of the file. If no
    * keys are missing, the existing file remains untouched.
@@ -299,16 +360,16 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * @param bundle is the bundle instance as java object.
    * @throws IOException if the operation failed with an input/output error.
    */
-  public void synchronize(ResourceBundle bundle) throws IOException {
+  public void synchronize(NlsBundleContainer bundle) throws IOException {
 
     PrintWriter out = getStandardOutput();
-    if (bundle.keySet().isEmpty()) {
+    if (bundle.getProperties().isEmpty()) {
       out.println(bundle.getClass().getName() + " is empty - noting to do!");
       return;
     }
     SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
     String date = sdf.format(new Date());
-    String propertyPath = this.path + File.separatorChar + bundle.getClass().getName().replace('.', File.separatorChar);
+    String propertyPath = this.path + File.separatorChar + bundle.getName().replace('.', File.separatorChar);
     new File(propertyPath).getParentFile().mkdirs();
     synchronize(bundle, "", propertyPath, date);
     for (String locale : this.locales) {
@@ -317,7 +378,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * Like {@link #synchronize(ResourceBundle)} but for a single {@link Locale}.
+   * Like {@link #synchronize(NlsBundleContainer)} but for a single {@link Locale}.
    * 
    * @param bundle is the bundle instance as java object.
    * @param locale is the locale to synchronize as string.
@@ -325,7 +386,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * @param date is the current date as string.
    * @throws IOException if an I/O problem occurred.
    */
-  protected void synchronize(ResourceBundle bundle, String locale, String propertyPath, String date) throws IOException {
+  protected void synchronize(NlsBundleContainer bundle, String locale, String propertyPath, String date)
+      throws IOException {
 
     PrintWriter out = getStandardOutput();
     StringBuffer pathBuffer = new StringBuffer(propertyPath);
@@ -347,9 +409,10 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
       existingBundle = new Properties();
     }
     StringBuffer buffer = new StringBuffer();
-    for (String key : bundle.keySet()) {
+    Map<String, String> bundleProperties = bundle.getProperties();
+    for (String key : bundleProperties.keySet()) {
       if (!existingBundle.containsKey(key)) {
-        String value = bundle.getString(key);
+        String value = bundleProperties.get(key);
         buffer.append(key);
         buffer.append(" = ");
         if (locale.length() > 0) {
@@ -396,12 +459,29 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     if (CliMode.ID_DEFAULT.equals(mode.getId())) {
       if (this.bundleClasses == null) {
         List<ResourceBundle> bundleList = getResourceBundleFinder().findBundles();
-        for (ResourceBundle bundle : bundleList) {
-          synchronize(bundle);
+        for (ResourceBundle resourceBundle : bundleList) {
+          synchronize(new NlsBundleContainer(resourceBundle));
+        }
+        Set<String> allClasses = getReflectionUtil().findClassNames("", true);
+        Filter<? super Class<?>> filter = new AssignableFromFilter(NlsBundle.class, true);
+        @SuppressWarnings({ "unchecked", "rawtypes" })
+        Set<Class<? extends NlsBundle>> nlsBundleClasses = (Set) getReflectionUtil().loadClasses(allClasses, filter);
+        for (Class<? extends NlsBundle> bundleClass : nlsBundleClasses) {
+          synchronize(new NlsBundleContainer(bundleClass));
         }
       } else {
-        for (Class<? extends ResourceBundle> bundleClass : this.bundleClasses) {
-          ResourceBundle bundle = bundleClass.newInstance();
+        for (Class<?> bundleClass : this.bundleClasses) {
+          NlsBundleContainer bundle;
+          if (ResourceBundle.class.isAssignableFrom(bundleClass)) {
+            ResourceBundle resourceBundle = (ResourceBundle) bundleClass.newInstance();
+            bundle = new NlsBundleContainer(resourceBundle);
+          } else if (NlsBundle.class.isAssignableFrom(bundleClass)) {
+            @SuppressWarnings("unchecked")
+            Class<? extends NlsBundle> bundleInterface = (Class<? extends NlsBundle>) bundleClass;
+            bundle = new NlsBundleContainer(bundleInterface);
+          } else {
+            throw new IllegalArgumentException(bundleClass.getName());
+          }
           synchronize(bundle);
         }
       }
@@ -423,6 +503,84 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     // CHECKSTYLE:OFF (OK for main methods)
     System.exit(exitCode);
     // CHECKSTYLE:ON
+  }
+
+  /**
+   * This inner class is a container for {@link ResourceBundle} or {@link NlsBundle}.
+   */
+  public class NlsBundleContainer {
+
+    /** The {@link ResourceBundle} or <code>null</code> if {@link #nlsBundleInterface} is given. */
+    private final ResourceBundle resourceBundle;
+
+    /** The {@link NlsBundle}-interface or <code>null</code> if {@link #resourceBundle} is given. */
+    private final Class<? extends NlsBundle> nlsBundleInterface;
+
+    /** @see #getProperties() */
+    private Map<String, String> properties;
+
+    /**
+     * The constructor.
+     * 
+     * @param resourceBundle is the {@link ResourceBundle}.
+     */
+    public NlsBundleContainer(ResourceBundle resourceBundle) {
+
+      super();
+      this.resourceBundle = resourceBundle;
+      this.nlsBundleInterface = null;
+    }
+
+    /**
+     * The constructor.
+     * 
+     * @param nlsBundleInterface is the {@link NlsBundle} interface.
+     */
+    public NlsBundleContainer(Class<? extends NlsBundle> nlsBundleInterface) {
+
+      super();
+      this.nlsBundleInterface = nlsBundleInterface;
+      this.resourceBundle = null;
+    }
+
+    /**
+     * @return the fully qualified name of the bundle in java class notation.
+     */
+    public String getName() {
+
+      if (this.nlsBundleInterface != null) {
+        return getBundleHelper().getQualifiedLocation(this.nlsBundleInterface);
+      }
+      return this.resourceBundle.getClass().getName();
+    }
+
+    /**
+     * @return the properties
+     */
+    public Map<String, String> getProperties() {
+
+      if (this.properties == null) {
+        this.properties = new HashMap<String, String>();
+        if (this.resourceBundle == null) {
+          for (Method method : this.nlsBundleInterface.getMethods()) {
+            if (getBundleHelper().isNlsBundleMethod(method, false)) {
+              String key = getBundleHelper().getKey(method);
+              String message = "";
+              NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
+              if (messageAnnotation != null) {
+                message = messageAnnotation.value();
+              }
+              this.properties.put(key, message);
+            }
+          }
+        } else {
+          for (String key : this.resourceBundle.keySet()) {
+            this.properties.put(key, this.resourceBundle.getString(key));
+          }
+        }
+      }
+      return this.properties;
+    }
   }
 
 }

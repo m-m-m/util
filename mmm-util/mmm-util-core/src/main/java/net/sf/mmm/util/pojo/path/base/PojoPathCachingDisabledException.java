@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.base;
 
-import net.sf.mmm.util.NlsMessagesBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCore;
 import net.sf.mmm.util.pojo.path.api.PojoPathException;
 
 /**
@@ -26,7 +26,7 @@ public class PojoPathCachingDisabledException extends PojoPathException {
    */
   public PojoPathCachingDisabledException(String pojoPath) {
 
-    super(createBundle(NlsMessagesBundleUtilCore.class).errorPojoPathCachingDisabled(pojoPath));
+    super(createBundle(NlsBundleUtilCore.class).errorPojoPathCachingDisabled(pojoPath));
   }
 
 }

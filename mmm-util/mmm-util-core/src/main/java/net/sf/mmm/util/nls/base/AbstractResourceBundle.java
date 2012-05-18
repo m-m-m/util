@@ -10,11 +10,16 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
- * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. Create
- * your {@link ResourceBundle}s by sub-classing this class and simply define some public static final fields
- * that will be automatically added to the bundle using reflection (only from constructor).<br/>
+ * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. <br/>
+ * <b>ATTENTION:</b><br/>
+ * The preferred approach to define messages for the root locale is via
+ * {@link net.sf.mmm.util.nls.api.NlsAccess} instead of using this class.<br/>
+ * <br/>
+ * Create your {@link ResourceBundle}s by sub-classing this class and simply define some public static final
+ * fields that will be automatically added to the bundle using reflection (only from constructor).<br/>
  * Please note that your sub-class must also be public or you need to set privileges in the security manager
  * to allow this class reading the fields via reflection.<br/>
  * Please also follow the convention using the following prefixes followed by a suffix that properly explains
@@ -50,8 +55,6 @@ import java.util.ResourceBundle;
  * <code>INT_MAIN_OPTION_NAME_VERSION = "--version"</code></td>
  * </tr>
  * </table>
- * 
- * @see net.sf.mmm.util.NlsBundleUtilCore
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -121,6 +124,24 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
   public Enumeration<String> getKeys() {
 
     return this.bundle.keys();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean containsKey(String key) {
+
+    return this.bundle.containsKey(key);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Set<String> keySet() {
+
+    return this.bundle.keySet();
   }
 
   /**
