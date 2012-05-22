@@ -549,7 +549,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     public String getName() {
 
       if (this.nlsBundleInterface != null) {
-        return getBundleHelper().getQualifiedLocation(this.nlsBundleInterface);
+        return getBundleHelper().getQualifiedLocation(this.nlsBundleInterface).getName();
       }
       return this.resourceBundle.getClass().getName();
     }

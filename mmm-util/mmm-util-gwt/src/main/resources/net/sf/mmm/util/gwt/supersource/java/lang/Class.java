@@ -176,6 +176,22 @@ public final class Class<T> implements Type {
 
     return this.typeName;
   }
+  
+  /**
+   * @return the simple name of the underlying class. Will be the empty string for anonymous classes.
+   */
+  public String getSimpleName() {
+    
+    int lastDot = this.typeName.lastIndexOf('.');
+    if (lastDot >= 0) {
+      int lastDollar = this.typeName.lastIndexOf('$', lastDot);
+      if (lastDollar > lastDot) {
+        lastDot = lastDollar;
+      }
+      return this.typeName.substring(lastDot + 1);
+    }
+    return this.typeName;
+  }
 
   public Class<? super T> getSuperclass() {
 

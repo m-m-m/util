@@ -11,11 +11,9 @@ import javax.inject.Named;
 
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsBundle;
-import net.sf.mmm.util.nls.api.NlsBundleFactory;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
@@ -30,12 +28,15 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.LocalizableResource.Generate;
+import com.google.gwt.i18n.rebind.format.PropertiesFormat;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
- * This is the GWT {@link Generator} for generation of the true {@link NlsBundleFactory} implementation as
- * well as according {@link NlsBundle} implementations.
+ * This is the GWT {@link Generator} for generation of the true
+ * {@link net.sf.mmm.util.nls.api.NlsBundleFactory} implementation as well as according {@link NlsBundle}
+ * implementations.
  * 
  * @author hohwille
  * @since 1.0.0
@@ -116,7 +117,7 @@ public class NlsResourceBundleGenerator extends Generator {
   /**
    * This method generates the GWT variant of the NLS-bundle.
    * 
-   * @param bundleClass is the {@link JClassType class} of the {@link AbstractResourceBundle} to generate.
+   * @param bundleClass is the {@link JClassType class} of the {@link NlsBundle} to generate.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
    * @return the name of the generated class.
@@ -231,9 +232,10 @@ public class NlsResourceBundleGenerator extends Generator {
   /**
    * This method generates the GWT-i18n-interface for the NLS-bundle.
    * 
-   * @param bundleClass is the {@link JClassType class} of the {@link AbstractResourceBundle} to generate.
+   * @param bundleClass is the {@link JClassType class} of the {@link NlsBundle} to generate.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
+   * @return the name of the generated class.
    */
   private String generateBundleInterface(JClassType bundleClass, TreeLogger logger, GeneratorContext context) {
 
@@ -244,9 +246,22 @@ public class NlsResourceBundleGenerator extends Generator {
     sourceComposerFactory.makeInterface();
     // import statements
     sourceComposerFactory.addImport(Constants.class.getName());
-    sourceComposerFactory.addImport(GWT.class.getName());
+    sourceComposerFactory.addImport(Generate.class.getCanonicalName());
 
     sourceComposerFactory.addImplementedInterface(Constants.class.getSimpleName());
+
+    // @Generate annotation
+    StringBuilder annotationBuffer = new StringBuilder();
+    annotationBuffer.append("@");
+    annotationBuffer.append(Generate.class.getSimpleName());
+    annotationBuffer.append("(format = \"");
+    annotationBuffer.append(PropertiesFormat.class.getName());
+    annotationBuffer.append("\", fileName = \"");
+    annotationBuffer.append(bundleClass.getSimpleSourceName());
+    annotationBuffer.append("\")");
+
+    sourceComposerFactory.addAnnotationDeclaration("@" + Generate.class.getSimpleName() + "(format = \""
+        + PropertiesFormat.class.getName() + "\", fileName = \"" + "BasisDialogMessages" + "\")");
 
     PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
     if (writer != null) {

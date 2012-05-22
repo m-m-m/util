@@ -38,7 +38,7 @@ public class IllegalCaseException extends NlsRuntimeException {
    */
   public <E extends Enum<E>> IllegalCaseException(Class<E> enumType, E enumValue) {
 
-    this(getSimpleName(enumType) + "." + enumValue.name());
+    this(enumType.getSimpleName() + "." + enumValue.name());
   }
 
 }

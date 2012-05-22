@@ -12,16 +12,6 @@ package net.sf.mmm.util.reflect.api;
 public interface ReflectionUtilLimited {
 
   /**
-   * This method gets the {@link Class#getSimpleName() simple name} of the given {@link Class}. This
-   * indirection is
-   * 
-   * @param type is the {@link Class}.
-   * @return the {@link Class#getSimpleName() simple name} of the given {@link Class}.
-   * @since 2.0.2
-   */
-  String getSimpleName(Class<?> type);
-
-  /**
    * This method gets the according non-{@link Class#isPrimitive() primitive} type for the class given by
    * <code>type</code>.<br>
    * E.g. <code>{@link #getNonPrimitiveType(Class) getNonPrimitiveType}(int.class)</code> will return

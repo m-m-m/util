@@ -111,7 +111,8 @@ public class ResourceBundleSynchronizerTest {
       }
     }
     GenericResourceBundle bundle = new GenericResourceBundle(bundleProperties);
-    String resultFileBase = targetPath + "/" + bundleHelper.getQualifiedLocation(bundleClass).replace('.', '/');
+    String resultFileBase = targetPath + "/"
+        + bundleHelper.getQualifiedLocation(bundleClass).getName().replace('.', '/');
 
     checkBundle(bundle, resultFileBase, null);
     checkBundle(bundle, resultFileBase, locale1);

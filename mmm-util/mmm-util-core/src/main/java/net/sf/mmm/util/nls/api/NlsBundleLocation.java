@@ -9,7 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This optional annotation is used to define a different name for an {@link NlsBundle} interface.
+ * This optional annotation is used to define a different location for the {@link java.util.ResourceBundle}
+ * -properties of an {@link NlsBundle} interface.
  * 
  * @author hohwille
  * @since 2.0.2

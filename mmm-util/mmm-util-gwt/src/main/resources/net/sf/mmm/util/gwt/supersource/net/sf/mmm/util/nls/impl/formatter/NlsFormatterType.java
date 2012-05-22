@@ -66,7 +66,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
       Class<?> type = (Class<?>) object;
       String result = type.getName();
       if (NlsFormatterManager.STYLE_SHORT.equals(this.style)) {
-        result = ReflectionUtilLimitedImpl.getInstance().getSimpleName(type);
+        result = type.getSimpleName();
       } else if (NlsFormatterManager.STYLE_MEDIUM.equals(this.style)) {
         if (result.startsWith(PREFIX_JAVA_LANG)) {
           result = result.substring(PREFIX_JAVA_LANG.length());

@@ -35,19 +35,6 @@ public class ReflectionUtilLimitedImpl implements ReflectionUtilLimited {
   /**
    * {@inheritDoc}
    */
-  public String getSimpleName(Class<?> type) {
-
-    String result = type.getName();
-    int lastDot = result.lastIndexOf('.');
-    if (lastDot > 0) {
-      result = result.substring(lastDot + 1);
-    }
-    return result;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public Class<?> getNonPrimitiveType(Class<?> type) {
 
     Class<?> result = type;
