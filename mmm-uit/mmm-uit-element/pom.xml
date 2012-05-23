@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='Cp1252'?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-uit</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-uit-element</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>uit-element</name>
+  <description>UI elements offered by the UI-Toolkit.</description>
+  <modules>
+    <module>mmm-uit-element-api</module>
+  </modules>
+</project>

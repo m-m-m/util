@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='Cp1252'?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-uit</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-uit-adapter</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>uit-adapter</name>
+  <description>Abstraction layer for native UI-Toolkits.</description>
+  <modules>
+    <module>mmm-uit-adapter-api</module>
+  </modules>
+</project>

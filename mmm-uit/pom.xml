@@ -16,6 +16,9 @@
   </dependencies>
 
   <modules>
+    <module>mmm-uit-core</module>
+    <module>mmm-uit-adapter</module>
+    <module>mmm-uit-element</module>
     <module>mmm-uit-api</module>
     <module>mmm-uit-impl-swt</module>
     <module>mmm-uit-impl-swing</module>
