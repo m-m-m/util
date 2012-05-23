@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link CliParameterListEmptyException} is thrown if {@link CliParser#parseParameters(String...)} is
@@ -22,7 +22,7 @@ public class CliParameterListEmptyException extends CliException {
    */
   public CliParameterListEmptyException() {
 
-    super(createBundle(NlsBundleUtilCore.class).errorCliParameterListEmpty());
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorCliParameterListEmpty());
   }
 
 }

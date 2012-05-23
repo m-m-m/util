@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.api;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link AnnotationNotRuntimeException} is thrown if an {@link java.lang.annotation.Annotation} should be
@@ -30,7 +30,7 @@ public class AnnotationNotRuntimeException extends ReflectionException {
    */
   public AnnotationNotRuntimeException(Class<? extends Annotation> annotation) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorAnnotationNotRuntime(annotation));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorAnnotationNotRuntime(annotation));
   }
 
 }

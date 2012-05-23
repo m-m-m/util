@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link PojoPathConversionException} is thrown if a {@link net.sf.mmm.util.pojo.api.Pojo} has the wrong
@@ -45,7 +45,7 @@ public class PojoPathConversionException extends PojoPathException {
    */
   public PojoPathConversionException(Throwable nested, String pojoPath, Type pojoType, Object targetType) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class)
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class)
         .errorPojoPathConversion(pojoPath, pojoType, targetType));
   }
 

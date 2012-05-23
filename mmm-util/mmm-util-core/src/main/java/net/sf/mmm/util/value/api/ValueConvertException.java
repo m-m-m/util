@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * The {@link ValueConvertException} is thrown if the {@link ValueConverter#convert(Object, Object, Class)
@@ -68,7 +68,7 @@ public class ValueConvertException extends ValueException {
    */
   public ValueConvertException(Throwable nested, Object value, Type targetType, Object valueSource) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorValueConvert(value, targetType, valueSource));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValueConvert(value, targetType, valueSource));
   }
 
 }

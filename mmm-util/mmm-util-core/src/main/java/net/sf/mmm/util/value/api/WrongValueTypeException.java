@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * This exception is thrown if a value has the wrong type (a different value type was expected).
@@ -70,7 +70,7 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Throwable nested, Object value, Object valueSource, Type expectedType) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorValueWrongType(value, getType(value),
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValueWrongType(value, getType(value),
         expectedType, valueSource));
   }
 

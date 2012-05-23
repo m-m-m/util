@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -25,7 +25,7 @@ public class AlreadyInitializedException extends NlsRuntimeException {
    */
   public AlreadyInitializedException() {
 
-    super(createBundle(NlsBundleUtilCore.class).errorAlreadyInitialized());
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorAlreadyInitialized());
   }
 
 }

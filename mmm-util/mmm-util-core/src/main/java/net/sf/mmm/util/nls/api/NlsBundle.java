@@ -12,7 +12,31 @@ package net.sf.mmm.util.nls.api;
  * <b>NOTE:</b><br/>
  * You should NOT create an implementation of that interface as this is created for you automatically via
  * {@link NlsBundleFactory#createBundle(Class)}. This is the new and recommended approach for defining and
- * binding {@link NlsMessage}s. For an example see {@link net.sf.mmm.util.NlsBundleUtilCore}.<br/>
+ * binding {@link NlsMessage}s. In order to make your {@link NlsBundle} work on the client side with GWT
+ * (google web toolkit), you have to use {@link NlsBundleLocation} to specify a different and non-existent
+ * {@link net.sf.mmm.util.reflect.api.ClassName}. Then your localized <code>*.properties</code> files have to
+ * use this reserved base-name. The recommended convention is as following, where <em>Myname</em> is a
+ * placeholder for your custom name:
+ * 
+ * <pre>
+ * {@literal @}{@link NlsBundleLocation}(bundleName = "NlsBundleMyname")
+ * public interface NlsBundleMynameRoot extends {@link NlsBundle} {
+ *   {@literal @}{@link NlsBundleMessage}("The value {value} has to be in the range from {min} to {max}!")
+ *   {@link NlsMessage} errorValueOutOfRange({@literal @}{@link javax.inject.Named}("value") int value, 
+ *            {@literal @}{@link javax.inject.Named}("min") int min, {@literal @}{@link javax.inject.Named}("max") int max);
+ * }
+ * </pre>
+ * 
+ * For localization you create <code>*.properties</code> files (see
+ * {@link net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}) in the same package for each supported
+ * {@link java.util.Locale}. In the example above e.g. <code>NlsBundleMyname_de.properties</code> with this
+ * content:
+ * 
+ * <pre>
+ * errorValueOutOfRange = Der Wert {value} muss innerhalb des Wertebereichs von {min} bis {max} liegen!
+ * </pre>
+ * 
+ * For an example see {@link net.sf.mmm.util.NlsBundleUtilCoreRoot}.<br/>
  * <b>IMPORTANT:</b><br/>
  * Unless annotated with {@link NlsBundleKey} the {@link java.util.ResourceBundle#getString(String) key} is
  * derived from the name of the method. You have to ensure that the keys are unique as otherwise the
@@ -26,7 +50,7 @@ package net.sf.mmm.util.nls.api;
  * it is nasty to add these annotations manually here is a script for automation. This is just an example -
  * please add more types as needed.
  * 
- * <pre>sed -i -r 's/([(]|, )((Object|Type|int|Number|String|boolean)([.]{3})?) ([a-z][a-zA-Z0-9]*)/\1@Named("\5") \2 \5/g' MyNlsBundle.java</pre>
+ * <pre>sed -i -r 's/([(]|, )((Object|Type|int|Number|String|boolean)([.]{3})?) ([a-z][a-zA-Z0-9]*)/\1@Named("\5") \2 \5/g' NlsBundleExampleRoot.java</pre>
  * 
  * <b>ATTENTION:</b><br/>
  * It is strongly recommended NOT to use inheritance for {@link NlsBundle} interfaces. Instead create an

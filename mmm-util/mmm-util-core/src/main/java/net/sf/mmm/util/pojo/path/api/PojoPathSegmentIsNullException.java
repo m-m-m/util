@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link PojoPathSegmentIsNullException} is thrown by the {@link PojoPathNavigator} if the supplied
@@ -27,7 +27,7 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
    */
   public PojoPathSegmentIsNullException(Object initialPojo, String pojoPath) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorPojoPathSegmentIsNull(pojoPath, initialPojo));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathSegmentIsNull(pojoPath, initialPojo));
   }
 
 }

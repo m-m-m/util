@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is
@@ -25,7 +25,7 @@ public class IllegalCaseException extends NlsRuntimeException {
    */
   public IllegalCaseException(String illegalCase) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorIllegalCase(illegalCase));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorIllegalCase(illegalCase));
   }
 
   /**

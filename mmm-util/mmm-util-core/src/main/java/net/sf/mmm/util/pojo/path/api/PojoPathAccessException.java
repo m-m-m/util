@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link PojoPathAccessException} is thrown if a {@link PojoPath} could NOT be evaluated because it lead to
@@ -41,7 +41,7 @@ public class PojoPathAccessException extends PojoPathException {
    */
   public PojoPathAccessException(Throwable nested, String pojoPath, Type currentPojoType) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorPojoPathAccess(pojoPath, currentPojoType));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathAccess(pojoPath, currentPojoType));
   }
 
 }

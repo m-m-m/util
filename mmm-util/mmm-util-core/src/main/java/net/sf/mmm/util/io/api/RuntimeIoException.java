@@ -5,7 +5,7 @@ package net.sf.mmm.util.io.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
@@ -47,7 +47,7 @@ public class RuntimeIoException extends NlsRuntimeException {
    */
   public RuntimeIoException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorIo());
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIo());
   }
 
   /**
@@ -129,7 +129,7 @@ public class RuntimeIoException extends NlsRuntimeException {
    */
   private static NlsMessage getMessage(IoMode mode) {
 
-    NlsBundleUtilCore bundle = createBundle(NlsBundleUtilCore.class);
+    NlsBundleUtilCoreRoot bundle = createBundle(NlsBundleUtilCoreRoot.class);
     switch (mode) {
       case READ:
         return bundle.errorIoRead();

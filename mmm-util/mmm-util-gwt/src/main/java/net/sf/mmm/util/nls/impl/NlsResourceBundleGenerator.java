@@ -12,10 +12,14 @@ import javax.inject.Named;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
+import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.base.NlsBundleHelper;
 import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
+import net.sf.mmm.util.reflect.api.ClassName;
+import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.Generator;
@@ -52,16 +56,27 @@ public class NlsResourceBundleGenerator extends Generator {
   /** The suffix for the generated resource-bundle class. */
   private static final String SUFFIX_CLASS = "_GwtImpl";
 
-  /** The suffix for the generated resource-bundle interface. */
-  private static final String SUFFIX_INTERFACE = "_Interface";
+  /** The {@link NlsBundleHelper} instance to use. */
+  private final NlsBundleHelper bundleHelper;
+
+  /**
+   * The constructor.
+   */
+  public NlsResourceBundleGenerator() {
+
+    this(new NlsBundleHelper());
+  }
 
   /**
    * The constructor.
    * 
+   * @param bundleHelper is the {@link NlsBundleHelper}. You may extend it and this class in order to override
+   *        logic.
    */
-  public NlsResourceBundleGenerator() {
+  public NlsResourceBundleGenerator(NlsBundleHelper bundleHelper) {
 
     super();
+    this.bundleHelper = bundleHelper;
   }
 
   /**
@@ -237,10 +252,26 @@ public class NlsResourceBundleGenerator extends Generator {
    * @param context is the {@link GeneratorContext}.
    * @return the name of the generated class.
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private String generateBundleInterface(JClassType bundleClass, TreeLogger logger, GeneratorContext context) {
 
-    String packageName = bundleClass.getPackage().getName();
-    String simpleName = bundleClass.getName() + SUFFIX_INTERFACE;
+    Class bundleJavaClass;
+    String bundleName = bundleClass.getQualifiedSourceName();
+    try {
+      bundleJavaClass = Class.forName(bundleName);
+    } catch (ClassNotFoundException e) {
+      throw new TypeNotFoundException(bundleName);
+    }
+    ClassName i18nInterfaceName = this.bundleHelper.getQualifiedLocation(bundleJavaClass);
+    ClassName bundleClassName = new ClassName(bundleJavaClass);
+    String packageName = i18nInterfaceName.getPackageName();
+    String simpleName = i18nInterfaceName.getSimpleName();
+    if (bundleClassName.equals(i18nInterfaceName)) {
+      logger.log(TreeLogger.ERROR, getClass().getSimpleName() + ": " + NlsBundle.class.getSimpleName()
+          + " NOT relocated via @" + NlsBundleLocation.class.getSimpleName() + " in " + bundleName
+          + " - localization will not work properly!");
+      simpleName = simpleName + "_Interface";
+    }
     logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
     ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
     sourceComposerFactory.makeInterface();
@@ -273,18 +304,14 @@ public class NlsResourceBundleGenerator extends Generator {
         if (!NlsMessage.class.getName().equals(returnType.getQualifiedSourceName())) {
           throw new IllegalCaseException(returnType.getQualifiedSourceName());
         }
-
         NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
-        String message;
-        if (messageAnnotation == null) {
-          message = "TODO";
-        } else {
-          message = messageAnnotation.value();
+        if (messageAnnotation != null) {
+          String message = messageAnnotation.value();
+          // generate message annotation
+          sourceWriter.print("@DefaultStringValue(\"");
+          sourceWriter.print(escape(message));
+          sourceWriter.println("\")");
         }
-        // generate message annotation
-        sourceWriter.print("@DefaultStringValue(\"");
-        sourceWriter.print("X" + escape(message));
-        sourceWriter.println("\")");
 
         NlsBundleKey keyAnnotation = method.getAnnotation(NlsBundleKey.class);
         if (keyAnnotation != null) {

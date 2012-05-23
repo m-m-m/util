@@ -20,7 +20,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @since 2.0.2
  */
 @NlsBundleLocation(bundleName = "NlsBundleUtilCore")
-public interface NlsBundleUtilCore extends NlsBundle {
+public interface NlsBundleUtilCoreRoot extends NlsBundle {
 
   /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
   String INF_LEFT = "left";

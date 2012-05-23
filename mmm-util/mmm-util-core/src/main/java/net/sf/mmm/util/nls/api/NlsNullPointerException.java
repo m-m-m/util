@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link NlsNullPointerException} is analog to an {@link NullPointerException} but with native language
@@ -35,7 +35,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
    */
   public NlsNullPointerException(String argument, Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorArgumentNull(argument));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorArgumentNull(argument));
   }
 
   /**

@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliArgumentMissingException;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
@@ -368,7 +368,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     // TODO: NLS
     nlsArguments.put(NlsObject.KEY_OPTION, "[<option>*]");
 
-    writer.printText(NlsBundleUtilCore.MSG_CLI_USAGE);
+    writer.printText(NlsBundleUtilCoreRoot.MSG_CLI_USAGE);
 
     String mainUsage = this.cliState.getCliClass().usage();
     if (mainUsage.length() > 0) {
@@ -382,7 +382,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       if ((cliMode == null) || (!cliMode.isAbstract())) {
         NlsMessage modeMessage = nlsMessageFactory.create(mode.getTitle());
         nlsArguments.put(NlsObject.KEY_MODE, modeMessage);
-        writer.printText(NlsBundleUtilCore.MSG_CLI_MODE_USAGE);
+        writer.printText(NlsBundleUtilCoreRoot.MSG_CLI_MODE_USAGE);
         StringBuilder parameters = new StringBuilder();
         Collection<CliOptionContainer> modeOptions = this.cliState.getOptions(mode);
         int maxOptionColumnWidth = 0;
@@ -460,7 +460,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
         }
 
         nlsArguments.put(NlsObject.KEY_OPTION, parameters);
-        writer.printText(NlsBundleUtilCore.MSG_CLI_USAGE);
+        writer.printText(NlsBundleUtilCoreRoot.MSG_CLI_USAGE);
         writer.println();
         String optionUsage = "";
         if (cliMode != null) {
@@ -855,7 +855,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     public void printArguments(List<CliArgumentHelpInfo> argumentList, int maxArgumentColumnWidth) {
 
       if (!argumentList.isEmpty()) {
-        printText(NlsBundleUtilCore.MSG_CLI_ARGUMENTS);
+        printText(NlsBundleUtilCoreRoot.MSG_CLI_ARGUMENTS);
         this.parameterColumnInfo.setWidth(maxArgumentColumnWidth);
         LineWrapper lineWrapper = this.dependencies.getLineWrapper();
 
@@ -915,9 +915,9 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
           if (firstOption) {
             String nlsText;
             if (required) {
-              nlsText = NlsBundleUtilCore.MSG_CLI_REQUIRED_OPTIONS;
+              nlsText = NlsBundleUtilCoreRoot.MSG_CLI_REQUIRED_OPTIONS;
             } else {
-              nlsText = NlsBundleUtilCore.MSG_CLI_ADDITIONAL_OPTIONS;
+              nlsText = NlsBundleUtilCoreRoot.MSG_CLI_ADDITIONAL_OPTIONS;
             }
             printText(nlsText);
             firstOption = false;

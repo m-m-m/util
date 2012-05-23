@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link CliParserExcepiton} is thrown if a property is annotated as {@link CliOption} or
@@ -25,7 +25,7 @@ public class CliParserExcepiton extends CliException {
    */
   public CliParserExcepiton(Exception nested, Class<?> type) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorCliParser(type));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorCliParser(type));
   }
 
 }

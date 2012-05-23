@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * An {@link InstantiationFailedException} indicates that the {@link Class#newInstance() instantiation} of a
@@ -38,7 +38,7 @@ public class InstantiationFailedException extends ReflectionException {
    */
   public InstantiationFailedException(Throwable nested, Type type) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorInstantiationFailed(type));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorInstantiationFailed(type));
   }
 
 }

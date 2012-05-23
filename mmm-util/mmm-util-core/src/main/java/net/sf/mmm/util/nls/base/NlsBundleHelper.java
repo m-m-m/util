@@ -21,6 +21,14 @@ import net.sf.mmm.util.reflect.api.ClassName;
 public class NlsBundleHelper {
 
   /**
+   * The constructor.
+   */
+  public NlsBundleHelper() {
+
+    super();
+  }
+
+  /**
    * This method gets the {@link NlsBundleLocation location} of the {@link java.util.ResourceBundle} for the
    * given {@link NlsBundle}-interface.
    * 
@@ -33,11 +41,11 @@ public class NlsBundleHelper {
     NlsBundleLocation location = nlsBundleInterface.getAnnotation(NlsBundleLocation.class);
     if (location != null) {
       String pkg = location.bundlePackage();
-      if (pkg == null) {
+      if (pkg.length() == 0) {
         pkg = nlsBundleInterface.getPackage().getName();
       }
       String name = location.bundleName();
-      if (name == null) {
+      if (name.length() == 0) {
         name = nlsBundleInterface.getSimpleName();
       }
       return new ClassName(pkg, name);

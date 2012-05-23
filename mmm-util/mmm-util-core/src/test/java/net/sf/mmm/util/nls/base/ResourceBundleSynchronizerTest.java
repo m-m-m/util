@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import junit.framework.Assert;
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
@@ -95,7 +95,7 @@ public class ResourceBundleSynchronizerTest {
     ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
     String targetPath = TARGET_TEST;
     FileUtilImpl.getInstance().deleteRecursive(new File(targetPath));
-    Class<NlsBundleUtilCore> bundleClass = NlsBundleUtilCore.class;
+    Class<NlsBundleUtilCoreRoot> bundleClass = NlsBundleUtilCoreRoot.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
     int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * This enum represents a horizontal alignment (e.g. for {@link net.sf.mmm.util.text.api.Justification}).<br>
@@ -34,15 +34,15 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 public enum HorizontalAlignment implements Datatype<String> {
 
   /** Align content to the left side. */
-  LEFT("-", NlsBundleUtilCore.INF_LEFT),
+  LEFT("-", NlsBundleUtilCoreRoot.INF_LEFT),
 
   /** Align content to the right side. */
-  RIGHT("+", NlsBundleUtilCore.INF_RIGHT),
+  RIGHT("+", NlsBundleUtilCoreRoot.INF_RIGHT),
 
   /**
    * Align content centered to the middle (same space to the left and the right).
    */
-  CENTER("~", NlsBundleUtilCore.INF_CENTER);
+  CENTER("~", NlsBundleUtilCoreRoot.INF_CENTER);
 
   /** @see #getValue() */
   private final String value;

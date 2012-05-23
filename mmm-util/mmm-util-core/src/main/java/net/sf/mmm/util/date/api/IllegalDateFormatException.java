@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -35,7 +35,7 @@ public class IllegalDateFormatException extends NlsRuntimeException {
    */
   public IllegalDateFormatException(String dateString, Exception nested) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorIllegalDate(dateString));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalDate(dateString));
   }
 
 }

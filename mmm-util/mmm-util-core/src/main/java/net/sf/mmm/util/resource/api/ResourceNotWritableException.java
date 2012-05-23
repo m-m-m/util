@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -36,7 +36,7 @@ public class ResourceNotWritableException extends NlsRuntimeException {
    */
   public ResourceNotWritableException(Throwable nested, String resourceUri) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorResourceNotWritable(resourceUri));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceNotWritable(resourceUri));
   }
 
 }

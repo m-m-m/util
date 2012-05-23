@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link CliArgumentMissingException} is thrown if a {@link CliArgument#required() required}
@@ -25,7 +25,7 @@ public class CliArgumentMissingException extends CliException {
    */
   public CliArgumentMissingException(String argument, String mode) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorCliArgumentMissing(argument, mode));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorCliArgumentMissing(argument, mode));
   }
 
 }

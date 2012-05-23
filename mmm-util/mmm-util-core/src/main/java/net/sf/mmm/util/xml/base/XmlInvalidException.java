@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.xml.api.XmlException;
 
 /**
@@ -39,7 +39,7 @@ public class XmlInvalidException extends XmlException {
    */
   public XmlInvalidException(Throwable nested, Object source) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorXmlInvalid(source));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorXmlInvalid(source));
   }
 
 }

@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link Comparator} represents a function that compares two given values.
@@ -18,7 +18,7 @@ import net.sf.mmm.util.NlsBundleUtilCore;
 public enum Comparator implements Datatype<String> {
 
   /** {@link Comparator} to check if some value is greater than another. */
-  GREATER_THAN(">", NlsBundleUtilCore.INF_GREATER_THAN, false, Boolean.FALSE) {
+  GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN, false, Boolean.FALSE) {
 
     /**
      * {@inheritDoc}
@@ -31,7 +31,7 @@ public enum Comparator implements Datatype<String> {
   },
 
   /** {@link Comparator} to check if some value is greater or equal to another. */
-  GREATER_OR_EQUAL(">=", NlsBundleUtilCore.INF_GREATER_OR_EQUAL, true, Boolean.FALSE) {
+  GREATER_OR_EQUAL(">=", NlsBundleUtilCoreRoot.INF_GREATER_OR_EQUAL, true, Boolean.FALSE) {
 
     /**
      * {@inheritDoc}
@@ -44,7 +44,7 @@ public enum Comparator implements Datatype<String> {
   },
 
   /** {@link Comparator} to check if some value is less than another. */
-  LESS_THAN("<", NlsBundleUtilCore.INF_LESS_THAN, false, Boolean.TRUE) {
+  LESS_THAN("<", NlsBundleUtilCoreRoot.INF_LESS_THAN, false, Boolean.TRUE) {
 
     /**
      * {@inheritDoc}
@@ -57,7 +57,7 @@ public enum Comparator implements Datatype<String> {
   },
 
   /** {@link Comparator} to check if some value is less or equal than another. */
-  LESS_OR_EQUAL("<=", NlsBundleUtilCore.INF_LESS_OR_EQUAL, true, Boolean.TRUE) {
+  LESS_OR_EQUAL("<=", NlsBundleUtilCoreRoot.INF_LESS_OR_EQUAL, true, Boolean.TRUE) {
 
     /**
      * {@inheritDoc}
@@ -72,7 +72,7 @@ public enum Comparator implements Datatype<String> {
   /**
    * {@link Comparator} to check if objects are {@link Object#equals(Object) equal}.
    */
-  EQUAL("==", NlsBundleUtilCore.INF_EQUAL, true, null) {
+  EQUAL("==", NlsBundleUtilCoreRoot.INF_EQUAL, true, null) {
 
     /**
      * {@inheritDoc}
@@ -87,7 +87,7 @@ public enum Comparator implements Datatype<String> {
   /**
    * {@link Comparator} to check if objects are NOT {@link Object#equals(Object) equal}.
    */
-  NOT_EQUAL("!=", NlsBundleUtilCore.INF_NOT_EQUAL, false, null) {
+  NOT_EQUAL("!=", NlsBundleUtilCoreRoot.INF_NOT_EQUAL, false, null) {
 
     /**
      * {@inheritDoc}

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * This is the exception thrown if a required value was not set.
@@ -25,7 +25,7 @@ public class ValueNotSetException extends ValueException {
    */
   public ValueNotSetException(Object valueSource) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorValueNotSet(valueSource));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorValueNotSet(valueSource));
   }
 
 }

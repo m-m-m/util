@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * A {@link CliOptionMisplacedException} is thrown if an option is misplaced, meaning that it occurred after
@@ -24,7 +24,7 @@ public class CliOptionMisplacedException extends CliException {
    */
   public CliOptionMisplacedException(String option) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorCliOptionMisplaced(option));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionMisplaced(option));
   }
 
 }

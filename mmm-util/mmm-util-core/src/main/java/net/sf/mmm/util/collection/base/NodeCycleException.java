@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.base;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
@@ -40,7 +40,7 @@ public class NodeCycleException extends NlsRuntimeException {
    */
   public NodeCycleException(NodeCycle<?> cycle, Object type) {
 
-    super(createBundle(NlsBundleUtilCore.class).errorNodeCycle(cycle, type));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorNodeCycle(cycle, type));
   }
 
 }

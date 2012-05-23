@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.NlsBundleUtilCore;
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * An {@link ObjectMismatchException} is thrown if an object or value do NOT match as expected.
@@ -90,7 +90,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
    */
   public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source, Object property) {
 
-    super(nested, createBundle(NlsBundleUtilCore.class).errorObjectMismatch(object, expected, source, property));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorObjectMismatch(object, expected, source, property));
   }
 
 }
