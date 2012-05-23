@@ -16,6 +16,7 @@
 
   <modules>
     <module>mmm-util-core</module>
+    <module>mmm-util-gwt</module>
     <module>mmm-util-http</module>
     <module>mmm-util-xml</module>
     <module>mmm-util-contenttype</module>
