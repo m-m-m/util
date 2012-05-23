@@ -17,8 +17,7 @@ import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() adapter}.
  * @since 1.0.0
  */
-public abstract class AbstractUiWidget<DELEGATE> extends AbstractUiElement<DELEGATE> implements
-    UiWidget {
+public abstract class AbstractUiWidget<DELEGATE> extends AbstractUiElement<DELEGATE> implements UiWidget {
 
   /**
    * The constructor.

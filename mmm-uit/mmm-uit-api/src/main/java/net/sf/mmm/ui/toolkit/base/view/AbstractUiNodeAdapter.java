@@ -74,7 +74,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
    * <b>ATTENTION:</b><br>
    * This default implementation throws a {@link UnsupportedOperationException}.
    * You need to override this in subclasses that support
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled} via the end-user
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled} via the end-user
    * API.
    * 
    * {@inheritDoc}
@@ -142,7 +142,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
-  public void removeStyle(String style) {
+  public boolean removeStyle(String style) {
 
     assert (style != null);
     assert (!style.isEmpty());
@@ -165,7 +165,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
         doSetStyles(sb.toString());
       }
     }
-
+    return false;
   }
 
   /**

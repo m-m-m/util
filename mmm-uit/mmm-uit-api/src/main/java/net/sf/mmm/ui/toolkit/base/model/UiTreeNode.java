@@ -51,9 +51,9 @@ public interface UiTreeNode<T> {
    * contains the tree structure. The data is stored as generic object and is
    * used to create the display name of the tree node. That is done in the
    * toString method of the tree node implementation. By default the call is
-   * delegated to the toString method of the data object.<br/> In the most
-   * simple approach the data may be only a String that represents the display
-   * name of this node.
+   * delegated to the toString method of the data object.<br/>
+   * In the most simple approach the data may be only a String that represents
+   * the display name of this node.
    * 
    * @return the data object of this node.
    */

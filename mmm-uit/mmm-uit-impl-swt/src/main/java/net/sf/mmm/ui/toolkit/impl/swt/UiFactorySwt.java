@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.impl.swt;
 
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -14,6 +13,8 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridRow;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSplitPanel;
@@ -62,6 +63,7 @@ import net.sf.mmm.ui.toolkit.impl.swt.view.window.AbstractUiWindowSwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiDialogImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiFrameImpl;
 import net.sf.mmm.ui.toolkit.impl.swt.view.window.UiWorkbenchImpl;
+import net.sf.mmm.util.lang.api.Orientation;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -70,14 +72,22 @@ import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * This class is the implementation of the UIFactory interface using SWT as the
- * UI toolkit.
+ * This class is the implementation of the UIFactory interface using SWT as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class UiFactorySwt extends AbstractUiFactory {
+
+  /**
+   * {@inheritDoc}
+   */
+  public UiGridPanel<? extends UiGridRow<? extends UiElement>> createGridPanel() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
 
   /** the display */
   private UiDisplayImpl display;
@@ -91,12 +101,10 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * The dummy constructor.
    * 
-   * This constructor may be used for testing if an instance is required for the
-   * default display without using the
-   * {@link net.sf.mmm.ui.toolkit.api.UiService UIService}.
+   * This constructor may be used for testing if an instance is required for the default display without using
+   * the {@link net.sf.mmm.ui.toolkit.api.UiService UIService}.
    * 
-   * @param title is the title of this factory. Should be the name of the actual
-   *        application creating the UI.
+   * @param title is the title of this factory. Should be the name of the actual application creating the UI.
    */
   public UiFactorySwt(String title) {
 
@@ -111,8 +119,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * The constructor.
    * 
-   * @param title is the title of this factory. Should be the name of the actual
-   *        application creating the UI.
+   * @param title is the title of this factory. Should be the name of the actual application creating the UI.
    * @param swtDisplay is the display to use.
    */
   public UiFactorySwt(String title, Display swtDisplay) {
@@ -123,11 +130,9 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * The constructor.
    * 
-   * @param title is the title of this factory. Should be the name of the actual
-   *        application creating the UI.
+   * @param title is the title of this factory. Should be the name of the actual application creating the UI.
    * @param swtDisplay is the display to use.
-   * @param uiDevice is the graphics device the display of this factory belongs
-   *        to.
+   * @param uiDevice is the graphics device the display of this factory belongs to.
    */
   public UiFactorySwt(String title, Display swtDisplay, UiDeviceImpl uiDevice) {
 
@@ -137,8 +142,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   }
 
   /**
-   * This method gets the dummy parent used for UI objects that should have no
-   * parent (<code>null</code>).
+   * This method gets the dummy parent used for UI objects that should have no parent (<code>null</code>).
    * 
    * @return the SWT dummy parent.
    * @deprecated this hack should be removed!
@@ -188,8 +192,8 @@ public class UiFactorySwt extends AbstractUiFactory {
    * {@inheritDoc}
    */
   @Override
-  public void showMessage(final UiWindow parent, String message, final String title,
-      MessageType messageType, Throwable throwable) {
+  public void showMessage(final UiWindow parent, String message, final String title, MessageType messageType,
+      Throwable throwable) {
 
     int style = SWT.ICON_INFORMATION;
     if (messageType == MessageType.ERROR) {
@@ -212,8 +216,7 @@ public class UiFactorySwt extends AbstractUiFactory {
 
       public void run() {
 
-        MessageBox messageBox = new MessageBox(((AbstractUiWindowSwt) parent).getSwtWindow(),
-            swtStyle);
+        MessageBox messageBox = new MessageBox(((AbstractUiWindowSwt) parent).getSwtWindow(), swtStyle);
         messageBox.setText(title);
         messageBox.setMessage(msg);
         messageBox.open();
@@ -228,8 +231,8 @@ public class UiFactorySwt extends AbstractUiFactory {
   @Override
   public boolean showQuestion(UiWindow parent, String question, String title) {
 
-    MessageBox messageBox = new MessageBox(((AbstractUiWindowSwt) parent).getSwtWindow(),
-        SWT.ICON_QUESTION | SWT.YES | SWT.NO);
+    MessageBox messageBox = new MessageBox(((AbstractUiWindowSwt) parent).getSwtWindow(), SWT.ICON_QUESTION | SWT.YES
+        | SWT.NO);
     messageBox.setText(title);
     messageBox.setMessage(question);
     int result = messageBox.open();
@@ -430,9 +433,8 @@ public class UiFactorySwt extends AbstractUiFactory {
   }
 
   /**
-   * This method converts the given <code>buttonStyle</code> to the according
-   * {@link org.eclipse.swt.SWT} constant for a
-   * {@link org.eclipse.swt.widgets.MenuItem}.
+   * This method converts the given <code>buttonStyle</code> to the according {@link org.eclipse.swt.SWT}
+   * constant for a {@link org.eclipse.swt.widgets.MenuItem}.
    * 
    * @param buttonStyle is the button-style to convert.
    * @return the according SWT button style.
@@ -441,15 +443,14 @@ public class UiFactorySwt extends AbstractUiFactory {
 
     return convertButtonStyle(buttonStyle);
     /*
-     * if (buttonStyle == ButtonStyle.DEFAULT) { return SWT.CASCADE; } else {
-     * return convertButtonStyle(buttonStyle); }
+     * if (buttonStyle == ButtonStyle.DEFAULT) { return SWT.CASCADE; } else { return
+     * convertButtonStyle(buttonStyle); }
      */
   }
 
   /**
-   * This method converts the given <code>buttonStyle</code> to the according
-   * {@link org.eclipse.swt.SWT} constant for a
-   * {@link org.eclipse.swt.widgets.Button}.
+   * This method converts the given <code>buttonStyle</code> to the according {@link org.eclipse.swt.SWT}
+   * constant for a {@link org.eclipse.swt.widgets.Button}.
    * 
    * @param buttonStyle is the button-style to convert.
    * @return the according SWT button style.
@@ -471,8 +472,8 @@ public class UiFactorySwt extends AbstractUiFactory {
   }
 
   /**
-   * This method converts the given <code>orientation</code> to the according
-   * {@link org.eclipse.swt.SWT} constant.
+   * This method converts the given <code>orientation</code> to the according {@link org.eclipse.swt.SWT}
+   * constant.
    * 
    * @param orientation is the orientation to convert.
    * @return the according SWT style.
@@ -490,14 +491,12 @@ public class UiFactorySwt extends AbstractUiFactory {
   }
 
   /**
-   * This method gets the given <code>baseStyle</code> adjusted with the global
-   * settings of the factory.
+   * This method gets the given <code>baseStyle</code> adjusted with the global settings of the factory.
    * 
    * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.common.ScriptOrientation)
    * 
    * @param baseStyle is the basic style.
-   * @return the given <code>baseStyle</code> with additional options from this
-   *         factory.
+   * @return the given <code>baseStyle</code> with additional options from this factory.
    */
   public int adjustStyle(int baseStyle) {
 

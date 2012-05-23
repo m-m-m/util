@@ -72,8 +72,8 @@ public interface UiTreeMvcModel<N> {
    * This method gets the parent node of the given node.
    * 
    * @param node is node whose parent is requested.
-   * @return the parent node of the given node or <code>null</code> if the
-   *         given node is the root node.
+   * @return the parent node of the given node or <code>null</code> if the given
+   *         node is the root node.
    */
   N getParent(N node);
 

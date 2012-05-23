@@ -90,7 +90,7 @@ public abstract class AbstractUIListModel<E> implements UiListMvcModel<E> {
    */
   protected void handleListenerException(UIListModelListener listener, Throwable t) {
 
-  // TODO: log?
+    // TODO: log?
   }
 
   /**
@@ -105,10 +105,10 @@ public abstract class AbstractUIListModel<E> implements UiListMvcModel<E> {
    * {@inheritDoc}
    */
   public String getNullString() {
-  
+
     return "";
   }
-  
+
   /**
    * {@inheritDoc}
    */

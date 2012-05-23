@@ -23,8 +23,9 @@ public interface UiValueChangeListener<V> {
    * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} changed where this
    * {@link UiValueChangeListener} was registered.
    * 
-   * @param uiNode is the according {@link net.sf.mmm.ui.toolkit.api.view.UiNode} and
-   *        can be cased to such.
+   * @param uiNode is the according
+   *        {@link net.sf.mmm.ui.toolkit.api.view.UiNode} and can be cased to
+   *        such.
    * @param programatic - <code>true</code> if the change was caused
    *        programatical and <code>false</code> if caused by the user.
    */

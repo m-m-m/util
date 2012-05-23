@@ -83,8 +83,8 @@ public interface UiListMvcModel<E> {
    * selection. This is used e.g. if the model is assigned to a a combo-box and
    * that combo-box is rendered with no selection.<br>
    * The <code>{@link #toString(Object)}</code> method is NOT used with
-   * <code>null</code> as argument to prevent {@link NullPointerException}s.
-   * The default implementation of this method will return the empty string what
+   * <code>null</code> as argument to prevent {@link NullPointerException}s. The
+   * default implementation of this method will return the empty string what
    * should suite in most situations. You may individually implement this method
    * anyways (e.g. returning "-" or "*** please choose ***") but keep in mind
    * that this option may NOT be supported on all platforms.
@@ -111,8 +111,7 @@ public interface UiListMvcModel<E> {
    * @param element is the (potential) element of this list (as received by
    *        {@link #getElement(int)}).
    * @return the index of the first occurrence of the given element or
-   *         <code>-1</code> if the given element is NOT contained in this
-   *         list.
+   *         <code>-1</code> if the given element is NOT contained in this list.
    */
   int getIndexOf(E element);
 
@@ -140,8 +139,8 @@ public interface UiListMvcModel<E> {
    * @return the (first) index of an {@link #getElement(int) element} with the
    *         {@link String#equals(java.lang.Object) same}
    *         {@link #toString(Object) string representation} as the given
-   *         <code>element</code> or <code>-1</code> if NO such element
-   *         exists (or feature NOT supported).
+   *         <code>element</code> or <code>-1</code> if NO such element exists
+   *         (or feature NOT supported).
    */
   int getIndexOfString(String element);
 

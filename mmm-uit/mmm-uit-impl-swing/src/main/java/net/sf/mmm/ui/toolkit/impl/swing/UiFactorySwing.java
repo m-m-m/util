@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -76,6 +75,7 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.window.UiDialogImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UiFrameImpl;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UiInternalFrame;
 import net.sf.mmm.ui.toolkit.impl.swing.view.window.UiWorkbenchImpl;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This class is the implementation of the UIFactory interface using Swing as

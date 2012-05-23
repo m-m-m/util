@@ -12,8 +12,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -24,8 +24,8 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class MySpinner extends Composite implements UiWriteSelectionIndex, UIListModelListener,
-    UiWriteEditable {
+public class MySpinner extends Composite implements AttributeWriteSelectionIndex, UIListModelListener,
+    AttributeWriteEditable {
 
   /** the width of the inc/dec buttons */
   private static final int FIXED_WIDTH = 15;

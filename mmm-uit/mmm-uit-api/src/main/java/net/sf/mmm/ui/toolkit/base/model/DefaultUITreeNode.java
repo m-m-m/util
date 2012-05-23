@@ -31,8 +31,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
    * @param parentNode is the parent node of the node to create.
    * @param nodeData is the data of the node to create.
    */
-  protected DefaultUITreeNode(DefaultUITreeModel<T> treeModel, DefaultUITreeNode<T> parentNode,
-      T nodeData) {
+  protected DefaultUITreeNode(DefaultUITreeModel<T> treeModel, DefaultUITreeNode<T> parentNode, T nodeData) {
 
     super();
     this.model = treeModel;

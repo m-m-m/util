@@ -22,8 +22,8 @@ public interface UiAction {
 
   /**
    * This method gets the display name of the action. This is used as
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue#setValue(String) text}
-   * for the widget that visualizes this action.
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue#setValue(String)
+   * text} for the widget that visualizes this action.
    * 
    * @return the name of this action.
    */
@@ -34,8 +34,8 @@ public interface UiAction {
    * {@link net.sf.mmm.ui.toolkit.api.UiObject#getId() object-id} for the widget
    * that visualizes this action.
    * 
-   * @return the id of this action or <code>null</code> if the default id of
-   *         the widget should NOT be changed.
+   * @return the id of this action or <code>null</code> if the default id of the
+   *         widget should NOT be changed.
    */
   String getId();
 

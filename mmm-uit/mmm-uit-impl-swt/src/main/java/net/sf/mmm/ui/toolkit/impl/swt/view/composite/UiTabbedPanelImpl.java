@@ -6,13 +6,13 @@ package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTabFolderAccess;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncTabItemAccess;
+import net.sf.mmm.util.lang.api.Orientation;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;

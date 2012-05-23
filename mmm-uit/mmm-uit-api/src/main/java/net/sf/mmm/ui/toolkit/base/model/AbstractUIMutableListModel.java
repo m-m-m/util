@@ -16,8 +16,7 @@ import net.sf.mmm.util.event.api.ChangeType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUIMutableListModel<E> extends AbstractUIListModel<E> implements
-    UiMutableListMvcModel<E> {
+public abstract class AbstractUIMutableListModel<E> extends AbstractUIListModel<E> implements UiMutableListMvcModel<E> {
 
   /**
    * The constructor.

@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTooltip;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 
 /**
  * This is the interface for a UI component. Such object is either a
@@ -16,7 +16,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiElement extends UiNode, UiWriteVisible, UiWriteTooltip, UiWriteEnabled,
-    UiWriteSize {
+public interface UiElement extends UiNode, AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteSize {
 
 }

@@ -3,9 +3,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTitle;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWritePosition;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTitle;
 import net.sf.mmm.ui.toolkit.base.view.UiNodeAdapter;
 
 /**
@@ -17,8 +17,7 @@ import net.sf.mmm.ui.toolkit.base.view.UiNodeAdapter;
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public interface UiWindowAdapter<DELEGATE> extends UiNodeAdapter<DELEGATE>, UiWriteSize,
-    UiWriteTitle, UiWritePosition {
+public interface UiWindowAdapter<DELEGATE> extends UiNodeAdapter<DELEGATE>, AttributeWriteSize, AttributeWriteTitle, AttributeWritePosition {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.view.window.UiWindow#pack()

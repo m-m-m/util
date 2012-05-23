@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
 
 /**
  * This is the abstract interface for a UI object. A UI object is any object of
@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiObject extends UiReadId {
+public abstract interface UiObject extends AttributeReadHtmlId {
 
   /**
    * This method gets the UI factory that created this component.

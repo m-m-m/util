@@ -3,11 +3,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncCompositeAccess;
+import net.sf.mmm.util.lang.api.Orientation;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;

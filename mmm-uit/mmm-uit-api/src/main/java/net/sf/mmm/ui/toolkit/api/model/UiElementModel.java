@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.model;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadId;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyles;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadStyles;
 
 /**
  * This is the model of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement}.
@@ -12,6 +12,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadStyles;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiElementModel extends UiReadId, UiReadStyles {
+public interface UiElementModel extends AttributeReadHtmlId, AttributeReadStyles {
 
 }

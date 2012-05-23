@@ -9,7 +9,7 @@ import java.beans.PropertyVetoException;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
@@ -228,7 +228,7 @@ public class UiInternalFrame extends AbstractUiWindow<JInternalFrame> implements
    * {@inheritDoc}
    */
   @Override
-  protected UiReadSize getDesktopSize() {
+  protected AttributeReadSize getDesktopSize() {
 
     return this.workbench;
   }

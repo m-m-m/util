@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.impl.gwt;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -13,6 +12,8 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiBorderPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridPanel;
+import net.sf.mmm.ui.toolkit.api.view.composite.UiGridRow;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSimplePanel;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
@@ -36,6 +37,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.gwt.AbstractUiFactoryGwt;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This is the implementation of {@link UiFactory} using GWT.
@@ -46,10 +48,18 @@ import net.sf.mmm.ui.toolkit.base.gwt.AbstractUiFactoryGwt;
 public class UiFactoryGwt extends AbstractUiFactoryGwt {
 
   /**
+   * {@inheritDoc}
+   */
+  public UiGridPanel<? extends UiGridRow<? extends UiElement>> createGridPanel() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /**
    * The constructor.
    * 
-   * @param title is the title of this factory. Should be the name of the actual
-   *        application creating the UI.
+   * @param title is the title of this factory. Should be the name of the actual application creating the UI.
    */
   public UiFactoryGwt(String title) {
 

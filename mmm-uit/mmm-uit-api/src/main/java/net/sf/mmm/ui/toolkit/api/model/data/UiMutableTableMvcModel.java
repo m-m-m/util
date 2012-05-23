@@ -5,7 +5,8 @@ package net.sf.mmm.ui.toolkit.api.model.data;
 
 /**
  * This is the interface of a
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} that can be modified.
+ * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} that can be
+ * modified.
  * 
  * @param <E> is the templated type of the objects in the table cells.
  * 

@@ -4,7 +4,7 @@
 package net.sf.mmm.ui.toolkit.base;
 
 import net.sf.mmm.ui.toolkit.api.UiObject;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 
 /**
  * This is the abstract base implementation of the
@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiObject implements UiObject, UiWriteId {
+public abstract class AbstractUiObject implements UiObject, AttributeWriteHtmlId {
 
   /** @see #getFactory() */
   private AbstractUiFactory factory;

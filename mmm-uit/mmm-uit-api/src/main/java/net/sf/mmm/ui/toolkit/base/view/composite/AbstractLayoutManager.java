@@ -4,23 +4,24 @@
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.api.common.Alignment;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
 import net.sf.mmm.ui.toolkit.api.common.Filling;
 import net.sf.mmm.ui.toolkit.api.common.Insets;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
+import net.sf.mmm.util.lang.api.Alignment;
+import net.sf.mmm.util.lang.api.HorizontalAlignment;
+import net.sf.mmm.util.lang.api.Orientation;
+import net.sf.mmm.util.lang.api.VerticalAlignment;
 
 /**
  * This is the abstract base implementation of a manager for the layout of a
  * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel panel}.<br>
- * The implementation assumes that for each panel an own layout-manager is
- * created and is therefore not thread-safe.
+ * The implementation assumes that for each panel an own layout-manager is created and is therefore not
+ * thread-safe.
  * 
- * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addChild(UiElement,
- *      LayoutConstraints)
+ * @see net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel#addChild(UiElement, LayoutConstraints)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -37,24 +38,22 @@ public abstract class AbstractLayoutManager {
   private AbstractUiFactory factory;
 
   /**
-   * The layout constraints of the components. For a given array position the
-   * constraint, childSize and childArea must belong to the same component.
+   * The layout constraints of the components. For a given array position the constraint, childSize and
+   * childArea must belong to the same component.
    */
   protected LayoutConstraints[] constraints;
 
   /**
-   * The preferred child sizes. If the {@link #layoutOrientation layout} is
-   * {@link Orientation#VERTICAL}, {@link Size#width} and {@link Size#height}
-   * must be swapped.
+   * The preferred child sizes. If the {@link #layoutOrientation layout} is {@link Orientation#VERTICAL},
+   * {@link Size#width} and {@link Size#height} must be swapped.
    * 
    * @see #constraints
    */
   protected Size[] childSizes;
 
   /**
-   * The child areas calculated for layout. If the
-   * {@link #layoutOrientation layout} is {@link Orientation#VERTICAL},
-   * {@link Rectangle#x} and {@link Rectangle#y} as well as
+   * The child areas calculated for layout. If the {@link #layoutOrientation layout} is
+   * {@link Orientation#VERTICAL}, {@link Rectangle#x} and {@link Rectangle#y} as well as
    * {@link Rectangle#width} and {@link Rectangle#height} must be swapped.
    * 
    * @see #constraints
@@ -101,8 +100,7 @@ public abstract class AbstractLayoutManager {
   }
 
   /**
-   * This method calculates the size of a
-   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel panel}.
+   * This method calculates the size of a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel panel}.
    * 
    * @return the calculated size for the panel.
    */
@@ -145,8 +143,7 @@ public abstract class AbstractLayoutManager {
    * @see UiFactory#getScriptOrientation()
    * @see net.sf.mmm.ui.toolkit.api.common.ScriptOrientation#isHorizontal()
    * 
-   * @return <code>true</code> if the layout is horizontal, <code>false</code>
-   *         if vertical.
+   * @return <code>true</code> if the layout is horizontal, <code>false</code> if vertical.
    */
   protected boolean isHorizontal() {
 
@@ -265,8 +262,7 @@ public abstract class AbstractLayoutManager {
         if (width < childWidth) {
           if (width > this.childAreas[childIndex].width) {
             int space = width - this.childSizes[childIndex].width;
-            this.childAreas[childIndex].x += (int) (insetsLeft * ((double) space / insets
-                .getHorizontalSpace()));
+            this.childAreas[childIndex].x += (int) (insetsLeft * ((double) space / insets.getHorizontalSpace()));
           }
           this.childAreas[childIndex].width = width;
         } else if ((filling == Filling.HORIZONTAL) || (filling == Filling.BOTH)) {
@@ -274,26 +270,25 @@ public abstract class AbstractLayoutManager {
           this.childAreas[childIndex].width = width - insets.getHorizontalSpace();
         } else {
           this.childAreas[childIndex].width = this.childSizes[childIndex].width;
-          Alignment hAlignment = alignment.getHorizontalPart();
+          HorizontalAlignment hAlignment = alignment.getHorizontalAlignment();
           int xSpace = width - this.childSizes[childIndex].width;
-          if (hAlignment == Alignment.CENTER) {
+          if (hAlignment == HorizontalAlignment.CENTER) {
             this.childAreas[childIndex].x += xSpace / 2;
-          } else if (hAlignment == Alignment.RIGHT) {
+          } else if (hAlignment == HorizontalAlignment.RIGHT) {
             this.childAreas[childIndex].x += xSpace;
           }
         }
 
         // vertical filling?
-        if ((height < this.childAreas[childIndex].height) || (filling == Filling.VERTICAL)
-            || (filling == Filling.BOTH)) {
+        if ((height < this.childAreas[childIndex].height) || (filling == Filling.VERTICAL) || (filling == Filling.BOTH)) {
           this.childAreas[childIndex].height = height - insets.getVerticalSpace();
         } else {
           this.childAreas[childIndex].height = this.childSizes[childIndex].height;
-          Alignment vAlignment = alignment.getVerticalPart();
+          VerticalAlignment vAlignment = alignment.getVerticalAlignment();
           int ySpace = height - this.childSizes[childIndex].height;
-          if (vAlignment == Alignment.CENTER) {
+          if (vAlignment == VerticalAlignment.CENTER) {
             this.childAreas[childIndex].y += ySpace / 2;
-          } else if (vAlignment == Alignment.BOTTOM) {
+          } else if (vAlignment == VerticalAlignment.BOTTOM) {
             this.childAreas[childIndex].y += ySpace;
           }
         }
@@ -349,16 +344,13 @@ public abstract class AbstractLayoutManager {
   }
 
   /**
-   * This method handles the size overriding. The width and/or height of the
-   * given component size is overridden according to the given
-   * {@link LayoutConstraints#size}.
+   * This method handles the size overriding. The width and/or height of the given component size is
+   * overridden according to the given {@link LayoutConstraints#size}.
    * 
-   * @param constraintsSize is the {@link LayoutConstraints#size} that may
-   *        override width/height.
-   * @param componentSize is the size of the component. It will be manipulated
-   *        as necessary.
+   * @param constraintsSize is the {@link LayoutConstraints#size} that may override width/height.
+   * @param componentSize is the size of the component. It will be manipulated as necessary.
    */
-  public static void overrideSize(UiReadSize constraintsSize, Size componentSize) {
+  public static void overrideSize(AttributeReadSize constraintsSize, Size componentSize) {
 
     int w = constraintsSize.getWidth();
     if (w > 0) {

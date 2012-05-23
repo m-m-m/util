@@ -9,7 +9,6 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
@@ -29,6 +28,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.ui.toolkit.base.view.window.AbstractUiWindow;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This is the abstract base implementation of the
@@ -411,8 +411,7 @@ public abstract class AbstractUiFactory implements UiFactory {
    *        user.
    * @return the created dialog.
    */
-  public abstract UiDialog createDialog(UiWindow parent, String title, boolean modal,
-      boolean resizeable);
+  public abstract UiDialog createDialog(UiWindow parent, String title, boolean modal, boolean resizeable);
 
   /**
    * @see UiWindow#showMessage(String, String, MessageType, Throwable)
@@ -428,8 +427,8 @@ public abstract class AbstractUiFactory implements UiFactory {
    *        <code>null</code> here (if invoked via
    *        {@link UiWindow#showMessage(String, String, MessageType)}).
    */
-  public abstract void showMessage(UiWindow parent, String message, String title,
-      MessageType messageType, Throwable throwable);
+  public abstract void showMessage(UiWindow parent, String message, String title, MessageType messageType,
+      Throwable throwable);
 
   /**
    * @see UiWindow#showQuestion(String, String)

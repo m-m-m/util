@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.base.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.common.EnabledState;
 import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
@@ -28,8 +28,8 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implements UiNode,
-    UiWriteVisible, UiWriteEnabled {
+public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implements UiNode, AttributeWriteVisible,
+    AttributeWriteEnabled {
 
   /** the parent object */
   private UiNode parent;
@@ -152,7 +152,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
    * if the local visible-flag of this object changed.<br/>
    * This default implementation throws a {@link UnsupportedOperationException}.
    * You need to override this in subclasses that implement
-   * {@link UiWriteVisible}.
+   * {@link AttributeWriteVisible}.
    * 
    * @param visible - <code>true</code> if the object shall be shown,
    *        <code>false</code> if it shall be hidden.
@@ -447,9 +447,9 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
-  public void removeStyle(String style) {
+  public boolean removeStyle(String style) {
 
-    getAdapter().removeStyle(style);
+    return getAdapter().removeStyle(style);
   }
 
 }

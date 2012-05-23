@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMaximized;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteMinimized;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteMaximized;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteMinimized;
 import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
 
 /**
  * This is the interface for a frame. A frame is a non
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadModal#isModal() modal}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadModal#isModal() modal}
  * window. Unlike a {@link UiDialog} it typically exists for a major purpose
  * rather than just a temporary interaction. A frame can exist standalone and
  * will then appear in something like a task-bar. Otherwise it exists as
@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFrame extends UiWindow, UiWriteMaximized, UiWriteMinimized {
+public interface UiFrame extends UiWindow, AttributeWriteMaximized, AttributeWriteMinimized {
 
   /** the type of this object */
   String TYPE = "Frame";

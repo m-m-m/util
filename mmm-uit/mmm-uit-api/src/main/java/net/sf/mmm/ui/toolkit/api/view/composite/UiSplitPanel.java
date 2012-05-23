@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
@@ -11,21 +11,21 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * {@link UiComposite} that is split either {@link #getOrientation() horizontal
  * or vertical}. Therefore two components can be added to this split panel. They
  * appear either side-by-side (if the
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation#getOrientation()
  * orientation} is
- * {@link net.sf.mmm.ui.toolkit.api.common.Orientation#HORIZONTAL}) or
+ * {@link net.sf.mmm.util.lang.api.Orientation#HORIZONTAL}) or
  * top-to-bottom (if the
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()
- * orientation} is {@link net.sf.mmm.ui.toolkit.api.common.Orientation#VERTICAL}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation#getOrientation()
+ * orientation} is {@link net.sf.mmm.util.lang.api.Orientation#VERTICAL}
  * ).<br/>
  * The two components are separated by a split-bar that is orthogonal to the
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation#getOrientation()
  * orientation}. The user can change the position of the split-bar (increasing
  * the size of the one component and decreasing the size of the other) along the
  * axis of the
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation#getOrientation()
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation#getOrientation()
  * orientation} if the split-panel is
- * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadEnabled#isEnabled() enabled}
+ * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabled#isEnabled() enabled}
  * .<br>
  * It is undefined what will happen if you make the split panel visible before
  * you set the two components in the splitted slots of this panel.
@@ -34,8 +34,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiSplitPanel<CHILD extends UiElement> extends UiComposite<CHILD>,
-    UiReadOrientation {
+public interface UiSplitPanel<CHILD extends UiElement> extends UiComposite<CHILD>, AttributeReadOrientation {
 
   /** the type of this object */
   String TYPE = "SplitPanel";

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadScrollbarPolicy;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadScrollbarPolicy;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
@@ -20,8 +20,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiScrollPanel<CHILD extends UiElement> extends UiSingleComposite<CHILD>,
-    UiReadScrollbarPolicy {
+public interface UiScrollPanel<CHILD extends UiElement> extends UiSingleComposite<CHILD>, AttributeReadScrollbarPolicy {
 
   /** @see #getType() */
   String TYPE = "ScrollPanel";

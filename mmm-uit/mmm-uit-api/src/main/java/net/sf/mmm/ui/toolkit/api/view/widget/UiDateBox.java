@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.api.view.widget;
 
 import java.util.Date;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteLocale;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteLocale;
 
 /**
  * This is the interface of a date box. It is a widget where the user can
@@ -20,7 +20,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiDateBox extends UiWidget, UiWriteLocale, UiWriteValue<Date> {
+public interface UiDateBox extends UiWidget, AttributeWriteLocale, UiWriteValue<Date> {
 
   /** the type of this object */
   String TYPE = "DateEditor";

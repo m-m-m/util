@@ -28,12 +28,11 @@ public abstract class AbstractUiElementGwt extends AbstractUiNodeGwt implements 
   }
 
   /**
-   * Sets the internal {@link #getTooltip() tooltip}. Requires according to sick
-   * design of {@link Widget#setTitle(String)} in GWT + SmartGWT.
+   * Sets the internal {@link #getTooltip() tooltip}. Requires according to sick design of
+   * {@link Widget#setTitle(String)} in GWT + SmartGWT.
    * 
    * @param newTooltip is the {@link #getTooltip() tooltip}.
    */
-  @Override
   protected void doSetTooltip(String newTooltip) {
 
     getNativeUiObject().setTitle(newTooltip);

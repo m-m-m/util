@@ -4,13 +4,13 @@
 package net.sf.mmm.ui.toolkit.api.view;
 
 import net.sf.mmm.ui.toolkit.api.UiObject;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadEnabledState;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadVisible;
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadVisibleState;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabled;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabledState;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisible;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisibleState;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteStyles;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStyles;
 import net.sf.mmm.ui.toolkit.api.event.UiEventSender;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
@@ -23,8 +23,8 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiNode extends UiObject, UiWriteId, UiWriteStyles, UiReadVisible,
-    UiReadVisibleState, UiReadEnabled, UiReadEnabledState, UiWriteDisposed, UiEventSender {
+public interface UiNode extends UiObject, AttributeWriteHtmlId, AttributeWriteStyles, AttributeReadVisible, AttributeReadVisibleState, AttributeReadEnabled,
+    AttributeReadEnabledState, UiWriteDisposed, UiEventSender {
 
   /**
    * This method gets the parent component.

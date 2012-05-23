@@ -6,10 +6,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiProgressBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.custom.MyProgressBar;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This class is the implementation of the

@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.api;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -37,6 +36,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTextField;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This is the interface for the user interface (UI) factory. It is used to
@@ -156,7 +156,7 @@ public interface UiFactory extends UiWriteDisposed {
    * 
    * @param title is the title for the frame to create.
    * @param resizable - if <code>true</code> the frame will be
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize#isResizable()
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize#isResizable()
    *        resizable}
    * @return the created frame.
    */
@@ -286,7 +286,7 @@ public interface UiFactory extends UiWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param multiSelection is the value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadMultiSelection#isMultiSelection()
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadMultiSelection#isMultiSelection()
    *        multi-selection-flag}.
    * @return the created list.
    */
@@ -309,7 +309,7 @@ public interface UiFactory extends UiWriteDisposed {
    *        the widget.
    * @param model is the model defining the the selectable elements.
    * @param editable is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable()
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable#isEditable()
    *        editable-flag}.
    * @return the created combo-box.
    */

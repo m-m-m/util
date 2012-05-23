@@ -21,8 +21,8 @@ import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractUiElement<?>>
-    extends AbstractUiComposite<DELEGATE, CHILD> implements UiMultiComposite<CHILD> {
+public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractUiElement<?>> extends
+    AbstractUiComposite<DELEGATE, CHILD> implements UiMultiComposite<CHILD> {
 
   /** the component list. */
   private final List<CHILD> components;

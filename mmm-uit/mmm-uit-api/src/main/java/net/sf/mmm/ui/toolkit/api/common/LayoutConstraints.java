@@ -3,13 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.common;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
-import net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
+import net.sf.mmm.util.lang.api.Alignment;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
- * This class is a container for the layout constraints of a
- * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} inside a
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel}.
+ * This class is a container for the layout constraints of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement}
+ * inside a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiSlicePanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -19,7 +19,7 @@ public class LayoutConstraints {
   /**
    * This inner class is a dummy that does not override the size.
    */
-  private static class DummySize implements UiReadSize {
+  private static class DummySize implements AttributeReadSize {
 
     /**
      * {@inheritDoc}
@@ -40,7 +40,7 @@ public class LayoutConstraints {
   }
 
   /** the dummy for no size override */
-  private static final UiReadSize NO_SIZE = new DummySize();
+  private static final AttributeReadSize NO_SIZE = new DummySize();
 
   /**
    * The default layout constraints:<br>
@@ -51,8 +51,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints DEFAULT = new LayoutConstraints(Alignment.CENTER,
-      Filling.BOTH, 1.0, Insets.NO_SPACE);
+  public static final LayoutConstraints DEFAULT = new LayoutConstraints(Alignment.CENTER, Filling.BOTH, 1.0,
+      Insets.NO_SPACE);
 
   /**
    * The default layout constraints:<br>
@@ -63,8 +63,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints SCALED = new LayoutConstraints(Alignment.CENTER,
-      Filling.BOTH, 1.0, Insets.NO_SPACE);
+  public static final LayoutConstraints SCALED = new LayoutConstraints(Alignment.CENTER, Filling.BOTH, 1.0,
+      Insets.NO_SPACE);
 
   /**
    * The default layout constraints:<br>
@@ -75,8 +75,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints SCALED_HORIZONTAL = new LayoutConstraints(Alignment.CENTER,
-      Filling.HORIZONTAL, 1.0, Insets.NO_SPACE);
+  public static final LayoutConstraints SCALED_HORIZONTAL = new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL,
+      1.0, Insets.NO_SPACE);
 
   /**
    * The default layout constraints:<br>
@@ -87,8 +87,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints SCALED_NO_FILL = new LayoutConstraints(Alignment.CENTER,
-      Filling.NONE, 1.0, Insets.NO_SPACE);
+  public static final LayoutConstraints SCALED_NO_FILL = new LayoutConstraints(Alignment.CENTER, Filling.NONE, 1.0,
+      Insets.NO_SPACE);
 
   /**
    * Layout constraints with:
@@ -99,8 +99,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints FIXED_HORIZONTAL = new LayoutConstraints(Alignment.CENTER,
-      Filling.HORIZONTAL, 0.0, Insets.NO_SPACE);
+  public static final LayoutConstraints FIXED_HORIZONTAL = new LayoutConstraints(Alignment.CENTER, Filling.HORIZONTAL,
+      0.0, Insets.NO_SPACE);
 
   /**
    * Layout constraints with:
@@ -111,8 +111,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#SMALL_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints FIXED_HORIZONTAL_INSETS = new LayoutConstraints(
-      Alignment.CENTER, Filling.HORIZONTAL, 0.0, Insets.SMALL_SPACE);
+  public static final LayoutConstraints FIXED_HORIZONTAL_INSETS = new LayoutConstraints(Alignment.CENTER,
+      Filling.HORIZONTAL, 0.0, Insets.SMALL_SPACE);
 
   /**
    * Layout constraints with:
@@ -123,8 +123,8 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints FIXED_VERTICAL = new LayoutConstraints(Alignment.CENTER,
-      Filling.VERTICAL, 0.0, Insets.NO_SPACE);
+  public static final LayoutConstraints FIXED_VERTICAL = new LayoutConstraints(Alignment.CENTER, Filling.VERTICAL, 0.0,
+      Insets.NO_SPACE);
 
   /**
    * Layout constraints with:
@@ -135,35 +135,33 @@ public class LayoutConstraints {
    * <li>{@link #insets} = {@link Insets#NO_SPACE}</li>
    * </ul>
    */
-  public static final LayoutConstraints FIXED_NONE = new LayoutConstraints(Alignment.CENTER,
-      Filling.NONE, 0.0, Insets.NO_SPACE);
+  public static final LayoutConstraints FIXED_NONE = new LayoutConstraints(Alignment.CENTER, Filling.NONE, 0.0,
+      Insets.NO_SPACE);
 
   /**
-   * The alignment specifies the placement of the component inside its space.
-   * This value is ignored if the weight is greater than zero (>0).
+   * The alignment specifies the placement of the component inside its space. This value is ignored if the
+   * weight is greater than zero (>0).
    */
   public final Alignment alignment;
 
   /**
-   * The filling specifies if the component's size is extended horizontally
-   * and/or vertically if its area is bigger than the component's size.
+   * The filling specifies if the component's size is extended horizontally and/or vertically if its area is
+   * bigger than the component's size.
    */
   public final Filling filling;
 
   /**
-   * The weight is a value in the range of [0,1] (0<=weight<=1). Typical values
-   * are -1, 0 and 1.<br>
+   * The weight is a value in the range of [0,1] (0<=weight<=1). Typical values are -1, 0 and 1.<br>
    * If 0, the component will be sized as preferred by the component's
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}.<br>
-   * If the weight is positive, the component will be scaled according to the
-   * avaliable size and in proportion to the weight. The width (if
-   * {@link Orientation#HORIZONTAL horizontal} layout) or height (if
-   * {@link Orientation#VERTICAL vertical} layout) proportional to the given
-   * weight (absolute) and the size available for this panel. <br>
-   * If the weight is negative, the behaviour is like <code>-weight</code>, but
-   * only the space for the component is sized and the component itself is sized
-   * as its {@link net.sf.mmm.ui.toolkit.api.attribute.UiReadSize size}. The
-   * alignment is used to place the component inside the sized space.
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}.<br>
+   * If the weight is positive, the component will be scaled according to the avaliable size and in proportion
+   * to the weight. The width (if {@link Orientation#HORIZONTAL horizontal} layout) or height (if
+   * {@link Orientation#VERTICAL vertical} layout) proportional to the given weight (absolute) and the size
+   * available for this panel. <br>
+   * If the weight is negative, the behaviour is like <code>-weight</code>, but only the space for the
+   * component is sized and the component itself is sized as its
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}. The alignment is used to place the component
+   * inside the sized space.
    */
   public final double weight;
 
@@ -173,17 +171,15 @@ public class LayoutConstraints {
   public final Insets insets;
 
   /**
-   * The size used to override default size. If {@link UiReadSize#getWidth()
-   * width} or {@link UiReadSize#getHeight() height} is greater than
-   * <code>0</code>, it overrides the size-value of the associated
-   * {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
+   * The size used to override default size. If {@link AttributeReadSize#getWidth() width} or
+   * {@link AttributeReadSize#getHeight() height} is greater than <code>0</code>, it overrides the size-value of the
+   * associated {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
    */
-  public final UiReadSize size;
+  public final AttributeReadSize size;
 
   /**
    * The constructor.<br>
-   * Using {@link Alignment#CENTER}, {@link Filling#BOTH} and
-   * {@link Insets#NO_SPACE}.
+   * Using {@link Alignment#CENTER}, {@link Filling#BOTH} and {@link Insets#NO_SPACE}.
    * 
    * @param w is the {@link #weight}
    */
@@ -194,8 +190,7 @@ public class LayoutConstraints {
 
   /**
    * The constructor.<br>
-   * Using {@link Insets#NO_SPACE}, {@link Filling#NONE} and a weight of
-   * <code>0</code>.
+   * Using {@link Insets#NO_SPACE}, {@link Filling#NONE} and a weight of <code>0</code>.
    * 
    * @param align is the {@link #alignment}
    */
@@ -260,8 +255,7 @@ public class LayoutConstraints {
    * @param border are the {@link #insets}
    * @param overrideSize is the {@link #size}.
    */
-  public LayoutConstraints(Alignment align, Filling fill, double w, Insets border,
-      UiReadSize overrideSize) {
+  public LayoutConstraints(Alignment align, Filling fill, double w, Insets border, AttributeReadSize overrideSize) {
 
     super();
     this.alignment = align;

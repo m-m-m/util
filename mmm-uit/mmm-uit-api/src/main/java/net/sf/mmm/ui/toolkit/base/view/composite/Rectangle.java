@@ -63,7 +63,8 @@ public class Rectangle {
   }
 
   /**
-   * This method swapps {@link #x}/{@link #y} and {@link #width}/{@link #height}.
+   * This method swapps {@link #x}/{@link #y} and {@link #width}/{@link #height}
+   * .
    */
   public void swap() {
 

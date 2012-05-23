@@ -6,11 +6,11 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.widget;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
 import net.sf.mmm.ui.toolkit.impl.swing.model.SlideBarModelAdapter;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This class is the implementation of the

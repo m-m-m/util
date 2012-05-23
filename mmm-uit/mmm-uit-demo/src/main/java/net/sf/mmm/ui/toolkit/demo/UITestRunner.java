@@ -6,7 +6,6 @@ package net.sf.mmm.ui.toolkit.demo;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
@@ -27,6 +26,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.base.feature.UiFileAccessSimple;
 import net.sf.mmm.ui.toolkit.base.model.DefaultUIListModel;
 import net.sf.mmm.ui.toolkit.base.model.NumericUIRangeModel;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This is a test runner that tests the various UIFactorySwing implementations.

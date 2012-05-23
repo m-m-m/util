@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiTable<C> extends UiWidget, UiWriteSelectionIndex {
+public interface UiTable<C> extends UiWidget, AttributeWriteSelectionIndex {
 
   /** the type of this object */
   String TYPE = "Table";

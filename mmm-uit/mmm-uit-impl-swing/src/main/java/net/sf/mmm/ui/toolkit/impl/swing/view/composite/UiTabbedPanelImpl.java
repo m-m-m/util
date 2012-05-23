@@ -6,10 +6,10 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.composite;
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiTabPanel;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.impl.swing.UiFactorySwing;
+import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This class is the implementation of the

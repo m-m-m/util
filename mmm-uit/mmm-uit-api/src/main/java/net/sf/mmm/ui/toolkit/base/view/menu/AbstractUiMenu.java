@@ -23,8 +23,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGATE> implements
-    UiMenu {
+public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGATE> implements UiMenu {
 
   /** the menu entries */
   private final List<AbstractUiMenuItem<?>> items;
@@ -86,8 +85,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
    */
   public UiMenuItem addItem(UiAction uiAction) {
 
-    UiMenuItem item = addItem(uiAction.getName(), uiAction.getActionListener(),
-        uiAction.getButtonStyle());
+    UiMenuItem item = addItem(uiAction.getName(), uiAction.getActionListener(), uiAction.getButtonStyle());
     UiImage icon = uiAction.getIcon();
     if (icon != null) {
       // item.setIcon(icon);

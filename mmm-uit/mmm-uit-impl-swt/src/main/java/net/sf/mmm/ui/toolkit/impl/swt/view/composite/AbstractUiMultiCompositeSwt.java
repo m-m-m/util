@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 import net.sf.mmm.ui.toolkit.base.view.composite.AbstractUiMultiComposite;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
+import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 import org.eclipse.swt.SWT;

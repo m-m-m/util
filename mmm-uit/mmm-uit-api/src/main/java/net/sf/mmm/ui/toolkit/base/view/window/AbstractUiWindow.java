@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
@@ -21,8 +21,7 @@ import net.sf.mmm.ui.toolkit.base.view.composite.AbstractUiComposite;
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE> implements
-    UiWindow {
+public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE> implements UiWindow {
 
   /** the composite content of this window */
   private AbstractUiComposite<?, ? extends UiElement> composite;
@@ -50,7 +49,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * 
    * @return read-access to the size of the desktop.
    */
-  protected UiReadSize getDesktopSize() {
+  protected AttributeReadSize getDesktopSize() {
 
     return getFactory().getDisplay();
   }
@@ -60,7 +59,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    */
   public void centerWindow() {
 
-    UiReadSize desktop = getDesktopSize();
+    AttributeReadSize desktop = getDesktopSize();
     int xDiff = desktop.getWidth() - getWidth();
     int yDiff = desktop.getHeight() - getHeight();
     if (xDiff < 0) {

@@ -9,8 +9,7 @@ import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the abstract base implementation of
- * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} using GWT.
+ * This is the abstract base implementation of {@link net.sf.mmm.ui.toolkit.api.view.UiNode} using GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -40,8 +39,8 @@ public abstract class AbstractUiNodeGwt extends AbstractUiNode {
   @Override
   public void setStyles(String styles) {
 
-    super.setStyles(styles);
     getNativeUiObject().setStyleName(styles);
+    super.setStyles(styles);
   }
 
   /**
@@ -58,10 +57,10 @@ public abstract class AbstractUiNodeGwt extends AbstractUiNode {
    * {@inheritDoc}
    */
   @Override
-  public void removeStyle(String style) {
+  public boolean removeStyle(String style) {
 
-    super.removeStyle(style);
     getNativeUiObject().setStyleName(style, false);
+    return super.removeStyle(style);
   }
 
   /**

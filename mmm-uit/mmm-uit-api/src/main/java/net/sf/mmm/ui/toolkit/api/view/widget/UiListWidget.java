@@ -3,8 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionValue;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionValue;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 
 /**
@@ -21,8 +21,7 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiListWidget<E> extends UiWidget, UiWriteSelectionIndex,
-    UiWriteSelectionValue<E> {
+public abstract interface UiListWidget<E> extends UiWidget, AttributeWriteSelectionIndex, AttributeWriteSelectionValue<E> {
 
   /**
    * This method gets the model of this list.

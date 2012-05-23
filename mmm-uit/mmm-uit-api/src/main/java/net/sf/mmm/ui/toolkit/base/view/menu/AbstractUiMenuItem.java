@@ -14,8 +14,7 @@ import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiMenuItem<DELEGATE> extends AbstractUiNode<DELEGATE> implements
-    UiMenuItem {
+public abstract class AbstractUiMenuItem<DELEGATE> extends AbstractUiNode<DELEGATE> implements UiMenuItem {
 
   /**
    * The constructor.

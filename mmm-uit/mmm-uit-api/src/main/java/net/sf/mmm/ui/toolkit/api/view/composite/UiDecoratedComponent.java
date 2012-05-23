@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
@@ -26,8 +26,8 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @deprecated - nonsense, remove!
  */
 @Deprecated
-public interface UiDecoratedComponent<CHILD extends UiElement, D extends CHILD, C extends CHILD>
-    extends UiComposite<CHILD>, UiReadOrientation {
+public interface UiDecoratedComponent<CHILD extends UiElement, D extends CHILD, C extends CHILD> extends
+    UiComposite<CHILD>, AttributeReadOrientation {
 
   /** the type of this object */
   String TYPE = "DecoratedComponent";

@@ -13,8 +13,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() adapter}.
  * @since 1.0.0
  */
-public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGATE> implements
-    UiElement {
+public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGATE> implements UiElement {
 
   /** @see #getTooltip() */
   private String tooltip;

@@ -6,8 +6,8 @@ package net.sf.mmm.ui.toolkit.api.event;
 /**
  * This is the event send internally from the
  * {@link net.sf.mmm.ui.toolkit.api.UiFactory factory} to all
- * {@link net.sf.mmm.ui.toolkit.base.view.AbstractUiNode UI-elements} in order to
- * cause a refresh.
+ * {@link net.sf.mmm.ui.toolkit.base.view.AbstractUiNode UI-elements} in order
+ * to cause a refresh.
  * 
  * @see net.sf.mmm.ui.toolkit.base.view.AbstractUiNode#refresh(UIRefreshEvent)
  * 

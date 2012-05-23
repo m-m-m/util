@@ -3,10 +3,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWritePosition;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSize;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteTitle;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWritePosition;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTitle;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
@@ -18,8 +18,7 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWindow extends UiNode, UiWriteSize, UiWriteTitle, UiWritePosition,
-    UiWriteVisible {
+public abstract interface UiWindow extends UiNode, AttributeWriteSize, AttributeWriteTitle, AttributeWritePosition, AttributeWriteVisible {
 
   /**
    * This method creates a new {@link UiDialog} as child of this window.

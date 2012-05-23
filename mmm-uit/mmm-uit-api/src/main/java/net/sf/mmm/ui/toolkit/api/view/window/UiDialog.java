@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadModal;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadModal;
 
 /**
  * This is the interface for a dialog. A dialog is a {@link UiWindow} used for a
@@ -17,7 +17,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiReadModal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiDialog extends UiWindow, UiReadModal {
+public interface UiDialog extends UiWindow, AttributeReadModal {
 
   /** the type of this object */
   String TYPE = "Dialog";

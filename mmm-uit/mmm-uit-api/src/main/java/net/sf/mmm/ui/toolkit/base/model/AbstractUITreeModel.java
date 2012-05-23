@@ -101,7 +101,7 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
    * @param t is the exception or error.
    */
   protected void handleListenerException(UITreeModelListener listener, Throwable t) {
-    
+
   }
 
   /**

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.view.widget;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadButtonStyle;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteImage;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelected;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelected;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 
 /**
@@ -19,8 +19,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiButton extends UiWidget, UiWriteValue<String>, UiReadButtonStyle, UiWriteImage,
-    UiWriteSelected {
+public interface UiButton extends UiWidget, UiWriteValue<String>, UiReadButtonStyle, UiWriteImage, AttributeWriteSelected {
 
   /** the type of this object */
   String TYPE = "Button";

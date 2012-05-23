@@ -39,7 +39,7 @@ public class UIComboBoxImpl<E> extends AbstractUiWidgetSwt<Combo> implements UiC
    * 
    * @param uiFactory is the {@link #getFactory() factory} instance.
    * @param editableFlag is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.UiWriteEditable#isEditable()
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable#isEditable()
    *        editable-flag}.
    * @param listModel is the model defining the the selectable elements.
    */

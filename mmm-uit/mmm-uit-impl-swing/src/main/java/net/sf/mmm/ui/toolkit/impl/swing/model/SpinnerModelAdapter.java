@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.model;
 
 import javax.swing.AbstractSpinnerModel;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionIndex;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteSelectionValue;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionIndex;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionValue;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -20,8 +20,8 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements UiWriteSelectionIndex,
-    UiWriteSelectionValue<E>, UIListModelListener {
+public class SpinnerModelAdapter<E> extends AbstractSpinnerModel implements AttributeWriteSelectionIndex,
+    AttributeWriteSelectionValue<E>, UIListModelListener {
 
   /** the model to adapt */
   private UiListMvcModel<E> model;

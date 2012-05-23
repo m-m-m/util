@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteOrientation;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
@@ -37,8 +37,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @deprecated - use dedicated panels instead.
  */
 @Deprecated
-public interface UiSlicePanel<CHILD extends UiElement> extends UiExtendableComposite<CHILD>,
-    UiWriteOrientation {
+public interface UiSlicePanel<CHILD extends UiElement> extends UiExtendableComposite<CHILD>, AttributeWriteOrientation {
 
   /** the type of this object */
   String TYPE = "Panel";

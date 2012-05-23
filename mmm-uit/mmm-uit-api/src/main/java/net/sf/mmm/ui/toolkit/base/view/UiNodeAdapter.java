@@ -4,10 +4,10 @@
 package net.sf.mmm.ui.toolkit.base.view;
 
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteId;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteStyles;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteVisible;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStyles;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 
 /**
@@ -24,8 +24,8 @@ import net.sf.mmm.ui.toolkit.api.view.UiNode;
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public interface UiNodeAdapter<DELEGATE> extends UiWriteId, UiWriteStyles, UiWriteVisible,
-    UiWriteEnabled, UiWriteDisposed {
+public interface UiNodeAdapter<DELEGATE> extends AttributeWriteHtmlId, AttributeWriteStyles, AttributeWriteVisible, AttributeWriteEnabled,
+    UiWriteDisposed {
 
   /**
    * This method gets the native UI object.
@@ -41,10 +41,10 @@ public interface UiNodeAdapter<DELEGATE> extends UiWriteId, UiWriteStyles, UiWri
    * this method can be overridden to return the top-level delegate used for
    * composition e.g. via
    * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiExtendableComposite#addChild(net.sf.mmm.ui.toolkit.api.view.UiElement)}
-   * as well as to update {@link UiWriteVisible#setVisible(boolean) visibility}.
+   * as well as to update {@link AttributeWriteVisible#setVisible(boolean) visibility}.
    * However {@link #getDelegate() delegate} still returns the active part of
    * the composed widget used to update
-   * {@link UiWriteEnabled#setEnabled(boolean) activity}, etc.
+   * {@link AttributeWriteEnabled#setEnabled(boolean) activity}, etc.
    * 
    * @return the top-level UI object.
    */

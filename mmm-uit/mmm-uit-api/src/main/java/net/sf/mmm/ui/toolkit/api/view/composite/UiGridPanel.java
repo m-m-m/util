@@ -16,8 +16,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiGridPanel<CHILD extends UiGridRow<? extends UiElement>> extends
-    UiExtendableComposite<CHILD> {
+public interface UiGridPanel<CHILD extends UiGridRow<? extends UiElement>> extends UiExtendableComposite<CHILD> {
 
   /** @see #getType() */
   String TYPE = "GridPanel";

@@ -3,7 +3,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiReadOrientation;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
@@ -14,8 +14,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiTabPanel<CHILD extends UiElement> extends UiMultiComposite<CHILD>,
-    UiReadOrientation {
+public interface UiTabPanel<CHILD extends UiElement> extends UiMultiComposite<CHILD>, AttributeReadOrientation {
 
   /** the type of this object */
   String TYPE = "TabPanel";

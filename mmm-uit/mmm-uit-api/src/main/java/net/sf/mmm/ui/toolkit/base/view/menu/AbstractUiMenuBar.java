@@ -18,8 +18,7 @@ import net.sf.mmm.ui.toolkit.base.view.AbstractUiNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGATE> implements
-    UiMenuBar {
+public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGATE> implements UiMenuBar {
 
   /** maps the name of a menu (String) to a menu (UIMenu) */
   private Map<String, UiMenu> menuTable;

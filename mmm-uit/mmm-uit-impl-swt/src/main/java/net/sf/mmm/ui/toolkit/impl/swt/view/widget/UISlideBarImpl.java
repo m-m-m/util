@@ -3,12 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.common.Orientation;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiSlideBar;
 import net.sf.mmm.ui.toolkit.impl.swt.UiFactorySwt;
 import net.sf.mmm.ui.toolkit.impl.swt.model.SlideBarModelAdapter;
 import net.sf.mmm.ui.toolkit.impl.swt.view.sync.SyncSliderAccess;
+import net.sf.mmm.util.lang.api.Orientation;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Slider;

@@ -5,19 +5,48 @@ package net.sf.mmm.ui.toolkit.impl.gwt.view.widget;
 
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 import net.sf.mmm.ui.toolkit.api.view.widget.UiButton;
+import net.sf.mmm.ui.toolkit.base.view.UiNodeAdapter;
 import net.sf.mmm.ui.toolkit.impl.gwt.UiFactoryGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.view.UiImageImpl;
 
 import com.google.gwt.user.client.ui.ButtonBase;
 
 /**
- * This class is the abstract base implementation of
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} using GWT.
+ * This class is the abstract base implementation of {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton}
+ * using GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractUiButton extends AbstractUiWidget implements UiButton {
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getTooltip() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setTooltip(String tooltip) {
+
+    // TODO Auto-generated method stub
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiNodeAdapter getAdapter() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
 
   /** @see #getImage() */
   private UiImageImpl image;
