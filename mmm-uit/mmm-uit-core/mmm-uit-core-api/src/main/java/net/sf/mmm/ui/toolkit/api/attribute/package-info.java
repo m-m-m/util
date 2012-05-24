@@ -7,10 +7,7 @@
  * This package contains interfaces for common attributes such as 
  * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId ID}. This helps to
  * standardize signatures (including javadoc) and allows generic access to such 
- * attributes for other utilities and libraries.<br/>
- * <b>NOTE:</b><br/>
- * The interfaces from {@link net.sf.mmm.util.lang.api.attribute} are NOT used 
- * to simplify the UI toolkit implementation for the GWT.
+ * attributes for other utilities and libraries.
  */
 package net.sf.mmm.ui.toolkit.api.attribute;
 

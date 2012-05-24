@@ -11,6 +11,10 @@ package net.sf.mmm.ui.toolkit.api.handler.plain;
  */
 public interface UiHandlerPlainOpen extends UiHandlerPlain {
 
+  /**
+   * This method is invoked for the action <em>open</em>. This means that something (e.g. an entity) is opened
+   * - typically in a popup or new dialog.
+   */
   void onOpen();
 
 }

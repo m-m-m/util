@@ -3,13 +3,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.model;
 
-import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteIntegerRange;
+import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This is an implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface that
+ * This is an implementation of the {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface that
  * contains a range of numeric (integer) values.<br>
  * This model should NOT be used for a regular list or combo-box widget.
  * 

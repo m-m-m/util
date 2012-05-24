@@ -11,9 +11,11 @@ import net.sf.mmm.ui.toolkit.api.handler.UiHandler;
  * 
  * @author hohwille
  * @since 1.0.0
- * @param <VALUE> is the generic type of the object to invoke the action operation on.
+ * @param <O> is the generic type of the object to invoke the action operation on. There is no limitation for
+ *        this object. However it should typically be a business oriented transfer object but can also be a
+ *        {@link java.util.Collection} of such.
  */
-public abstract interface UiHandlerObject<VALUE> extends UiHandler {
+public abstract interface UiHandlerObject<O> extends UiHandler {
 
   // just a marker interface.
 

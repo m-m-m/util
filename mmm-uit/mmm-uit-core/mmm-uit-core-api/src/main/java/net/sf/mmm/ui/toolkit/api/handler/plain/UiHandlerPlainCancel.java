@@ -11,6 +11,10 @@ package net.sf.mmm.ui.toolkit.api.handler.plain;
  */
 public interface UiHandlerPlainCancel extends UiHandlerPlain {
 
+  /**
+   * This method is invoked for the action <em>cancel</em>. This means the current steps or changes will be
+   * aborted, discarded or reverted.
+   */
   void onCancel();
 
 }

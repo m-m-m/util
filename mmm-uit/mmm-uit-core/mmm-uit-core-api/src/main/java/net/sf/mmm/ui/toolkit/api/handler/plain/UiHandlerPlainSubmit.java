@@ -6,11 +6,18 @@ package net.sf.mmm.ui.toolkit.api.handler.plain;
 /**
  * This is the {@link UiHandlerPlain} for the action {@link #onSubmit() submit}.
  * 
+ * @see UiHandlerPlainConfirm
+ * 
  * @author hohwille
  * @since 1.0.0
  */
 public interface UiHandlerPlainSubmit extends UiHandlerPlain {
 
+  /**
+   * This method is invoked for the action <em>submit</em>. This means that some step or change is completed
+   * and shall be submitted. This is more generic than e.g. {@link UiHandlerPlainSave#onSave() save} or
+   * {@link UiHandlerPlainApprove#onApprove() approve}.
+   */
   void onSubmit();
 
 }

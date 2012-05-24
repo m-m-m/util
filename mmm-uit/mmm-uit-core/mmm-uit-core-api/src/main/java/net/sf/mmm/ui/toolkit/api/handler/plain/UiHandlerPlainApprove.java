@@ -12,7 +12,9 @@ package net.sf.mmm.ui.toolkit.api.handler.plain;
 public interface UiHandlerPlainApprove extends UiHandlerPlain {
 
   /**
-   * This method is invoked for the action <em>approve</em>.
+   * This method is invoked for the action <em>approve</em>. This means that some change or step is confirmed.
+   * Approval is often workflow related and may require a particular role (following the double-check or
+   * four-eye principle).
    */
   void onApprove();
 

@@ -11,6 +11,10 @@ package net.sf.mmm.ui.toolkit.api.handler.plain;
  */
 public interface UiHandlerPlainSave extends UiHandlerPlain {
 
+  /**
+   * This method is invoked for the action <em>save</em>. This means that a step, change or creation is saved
+   * to a persistent store.
+   */
   void onSave();
 
 }
