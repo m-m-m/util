@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='Cp1252'?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-service</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>service</name>
+  <description>Simple leight-weight services</description>
+  <modules>
+    <module>mmm-service-api</module>
+  </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

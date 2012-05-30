@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='Cp1252'?>
+<!-- $Id$ -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-service</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-service-api</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>service-api</name>
+  <description>The API for the services and their invocation on client-side.</description>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-core</artifactId>
+      <version>2.0.2-SNAPSHOT</version>
+    </dependency>
+  </dependencies>  
+</project>
