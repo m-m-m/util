@@ -6,8 +6,8 @@ package net.sf.mmm.service.base;
 import java.io.Serializable;
 
 /**
- * This is the generic transfer-object for an invocation of a {@link net.sf.mmm.service.api.RemoteInvocationService}. It
- * contains the data for a single method call.
+ * This is the generic transfer-object for an invocation of a
+ * {@link net.sf.mmm.service.api.RemoteInvocationService}. It contains the data for a single method call.
  * 
  * @author hohwille
  * @since 1.0.0
@@ -24,7 +24,7 @@ public class RemoteInvocationServiceCall implements Serializable {
   private String methodName;
 
   /** @see #getSignature() */
-  private String signature;
+  private int signature;
 
   /** @see #getArguments() */
   private Serializable[] arguments;
@@ -45,7 +45,8 @@ public class RemoteInvocationServiceCall implements Serializable {
    * @param signature - see {@link #getSignature()}.
    * @param arguments - see {@link #getArguments()}.
    */
-  public RemoteInvocationServiceCall(String serviceInterfaceName, String methodName, String signature, Serializable[] arguments) {
+  public RemoteInvocationServiceCall(String serviceInterfaceName, String methodName, int signature,
+      Serializable[] arguments) {
 
     super();
     this.serviceInterfaceName = serviceInterfaceName;
@@ -55,8 +56,8 @@ public class RemoteInvocationServiceCall implements Serializable {
   }
 
   /**
-   * @return the {@link Class#getName() qualified classname} of the {@link net.sf.mmm.service.api.RemoteInvocationService}
-   *         interface to invoke.
+   * @return the {@link Class#getName() qualified classname} of the
+   *         {@link net.sf.mmm.service.api.RemoteInvocationService} interface to invoke.
    */
   public String getServiceInterfaceName() {
 
@@ -72,12 +73,51 @@ public class RemoteInvocationServiceCall implements Serializable {
   }
 
   /**
-   * @return a technical identifier for the method signature to distinguish methods with the same
-   *         {@link #getMethodName() name}.
+   * This method gets a technical identifier for the method signature to distinguish methods with the same
+   * {@link #getMethodName() name}.
+   * 
+   * @see #getSignature(String...)
+   * 
+   * @return the signature identifier.
    */
-  public String getSignature() {
+  public int getSignature() {
 
     return this.signature;
+  }
+
+  /**
+   * This method calculates the {@link #getSignature() signature}.
+   * 
+   * @see #getSignature(String...)
+   * 
+   * @param parameterTypes are the method parameter types.
+   * @return the calculated {@link #getSignature() signature}.
+   */
+  public static int getSignature(Class<?>... parameterTypes) {
+
+    String[] qualifiedParameterTypes = new String[parameterTypes.length];
+    for (int i = 0; i < parameterTypes.length; i++) {
+      qualifiedParameterTypes[i] = parameterTypes[i].getName();
+    }
+    return getSignature(qualifiedParameterTypes);
+  }
+
+  /**
+   * This method calculates the {@link #getSignature() signature}.
+   * 
+   * @param qualifiedParameterTypes are the {@link Class#getName() qualified names} of the method parameter
+   *        types.
+   * @return the calculated {@link #getSignature() signature}.
+   */
+  public static int getSignature(String... qualifiedParameterTypes) {
+
+    int hashcode = 0;
+    for (String parameterType : qualifiedParameterTypes) {
+      hashcode = (31 * hashcode) + parameterType.hashCode();
+    }
+    hashcode = hashcode << 2;
+    hashcode = hashcode | qualifiedParameterTypes.length;
+    return hashcode;
   }
 
   /**

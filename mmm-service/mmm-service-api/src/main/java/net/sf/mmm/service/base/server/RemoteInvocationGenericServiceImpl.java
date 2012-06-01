@@ -3,6 +3,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.base.server;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.api.RemoteInvocationServiceContext;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
@@ -32,7 +35,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
     RemoteInvocationGenericService {
 
   /** @see #registerService(RemoteInvocationService) */
-  private final Map<String, RemoteInvocationService> serviceMap;
+  private final Map<String, RemoteInvocationServiceMethod<?>> serviceMap;
 
   /**
    * The constructor.
@@ -40,7 +43,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
   public RemoteInvocationGenericServiceImpl() {
 
     super();
-    this.serviceMap = new HashMap<String, RemoteInvocationService>();
+    this.serviceMap = new HashMap<String, RemoteInvocationServiceMethod<?>>();
   }
 
   /**
@@ -56,17 +59,42 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
     RemoteInvocationServiceResult[] results = new RemoteInvocationServiceResult[calls.length];
     RemoteInvocationGenericServiceResponse response = new RemoteInvocationGenericServiceResponse(
         request.getRequestId(), results);
-    for (RemoteInvocationServiceCall call : request.getCalls()) {
+
+    for (int i = 0; i < calls.length; i++) {
+      RemoteInvocationServiceCall call = calls[i];
       getLogger().debug("start processing call {}.", call.toString(true));
-      RemoteInvocationService service = this.serviceMap.get(call.getServiceInterfaceName());
-      if (service == null) {
-        throw new ObjectNotFoundException(call.getServiceInterfaceName());
+      String id = RemoteInvocationServiceMethod.getId(call);
+      RemoteInvocationServiceMethod<?> serviceMethod = this.serviceMap.get(id);
+      if (serviceMethod == null) {
+        throw new ObjectNotFoundException(RemoteInvocationServiceMethod.class.getSimpleName(), id);
       }
-      // TODO...
+      // method found, invoke it and add result to response...
+      RemoteInvocationServiceContext context = null;
+      RemoteInvocationServiceResult serviceResult;
+      try {
+        Serializable result = serviceMethod.invoke(call.getArguments());
+        serviceResult = new RemoteInvocationServiceResult(result, context);
+      } catch (Throwable e) {
+        serviceResult = createFailureResult(e, context);
+      }
+      results[i] = serviceResult;
       getLogger().debug("end processing call {}.", call.toString(true));
     }
     getLogger().debug("end processing request {}.", request);
     return response;
+  }
+
+  /**
+   * This method creates the {@link RemoteInvocationServiceResult} in case the service-method threw an
+   * exception.
+   * 
+   * @param failure is the {@link Throwable} that occurred when invoking the service-method.
+   * @param context is the {@link RemoteInvocationServiceContext}.
+   * @return the {@link RemoteInvocationServiceResult} with the failure.
+   */
+  private RemoteInvocationServiceResult createFailureResult(Throwable failure, RemoteInvocationServiceContext context) {
+
+    return new RemoteInvocationServiceResult(failure, context);
   }
 
   /**
@@ -106,14 +134,19 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
     boolean registered = false;
     Class<?> serviceClass = service.getClass();
     while (RemoteInvocationService.class.isAssignableFrom(serviceClass)) {
-      for (Class<?> interfaceClass : serviceClass.getInterfaces()) {
-        if ((RemoteInvocationService.class.isAssignableFrom(interfaceClass))
-            && (interfaceClass != RemoteInvocationService.class)) {
-          RemoteInvocationService old = this.serviceMap.put(interfaceClass.getName(), service);
-          if (old != null) {
-            throw new DuplicateObjectException(service, interfaceClass.getName(), old);
+      for (Class<?> serviceInterface : serviceClass.getInterfaces()) {
+        if ((RemoteInvocationService.class.isAssignableFrom(serviceInterface))
+            && (serviceInterface != RemoteInvocationService.class)) {
+          for (Method method : serviceInterface.getMethods()) {
+            @SuppressWarnings({ "rawtypes", "unchecked" })
+            RemoteInvocationServiceMethod<?> serviceMethod = new RemoteInvocationServiceMethod(serviceInterface,
+                service, method);
+            RemoteInvocationServiceMethod<?> old = this.serviceMap.put(serviceMethod.getId(), serviceMethod);
+            if (old != null) {
+              throw new DuplicateObjectException(serviceMethod, serviceMethod.getId(), old);
+            }
+            registered = true;
           }
-          registered = true;
         }
       }
       serviceClass = serviceClass.getSuperclass();

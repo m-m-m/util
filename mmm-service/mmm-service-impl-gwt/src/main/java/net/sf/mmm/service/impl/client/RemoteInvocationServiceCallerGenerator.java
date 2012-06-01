@@ -171,13 +171,20 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
     sourceWriter.print("[");
     sourceWriter.print(Integer.toString(parameters.length));
     sourceWriter.println("];");
+
+    String[] signatureArray = new String[parameters.length];
+    // fill in arguments
     for (int i = 0; i < parameters.length; i++) {
+      // assign argument statement
       JParameter parameter = parameters[i];
       sourceWriter.print("_arguments[");
       sourceWriter.print(Integer.toString(i));
-      sourceWriter.print("]");
+      sourceWriter.print("] = ");
       sourceWriter.print(parameter.getName());
       sourceWriter.println(";");
+
+      // assign argument type for signature
+      signatureArray[i] = parameter.getType().getQualifiedSourceName();
     }
 
     // generate statement to create call
@@ -188,7 +195,9 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
     sourceWriter.print(serviceInterface.getQualifiedSourceName());
     sourceWriter.print(".class.getName(), \"");
     sourceWriter.print(method.getName());
-    sourceWriter.println("\", _signature, _arguments);");
+    sourceWriter.print("\", ");
+    sourceWriter.print(Integer.toString(RemoteInvocationServiceCall.getSignature(signatureArray)));
+    sourceWriter.println(", _arguments);");
 
     // add recorded call
     sourceWriter.print("getRemoteInvocationSerivceCaller().addCall(_call, ");
