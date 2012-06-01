@@ -8,16 +8,27 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-service-server-gwt</artifactId>
+  <artifactId>mmm-service-impl-gwt</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>service-server-gwt</name>
-  <description>The server-side implementation of mmm-service-api for Google Web Toolkit (GWT).</description>
+  <name>service-impl-gwt</name>
+  <description>The implementation of mmm-service-api for Google Web Toolkit (GWT).</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-service-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-  </dependencies>  
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>2.4.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>

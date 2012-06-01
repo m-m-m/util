@@ -15,6 +15,7 @@
   <description>Simple leight-weight services</description>
   <modules>
     <module>mmm-service-api</module>
+    <module>mmm-service-impl-gwt</module>
   </modules>
   
   <dependencies>
