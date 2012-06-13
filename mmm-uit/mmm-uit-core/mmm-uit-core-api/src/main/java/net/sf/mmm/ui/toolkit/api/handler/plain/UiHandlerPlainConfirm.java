@@ -15,8 +15,8 @@ package net.sf.mmm.ui.toolkit.api.handler.plain;
 public interface UiHandlerPlainConfirm extends UiHandlerPlain {
 
   /**
-   * This method is invoked for the action <em>confirm</em>. This means the current step or data is
-   * acknowledged.
+   * This method is invoked for the action <em>confirm</em> often also labeled with <code>OK</code>. This
+   * means the current step or data is acknowledged.
    */
   void onConfirm();
 
