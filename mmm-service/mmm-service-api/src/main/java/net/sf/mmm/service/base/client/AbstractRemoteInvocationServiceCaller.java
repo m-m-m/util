@@ -77,7 +77,12 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
    */
   public RemoteInvocationServiceQueueImpl newQueue(RemoteInvocationServiceQueueSettings context) {
 
-    return new RemoteInvocationServiceQueueImpl(context);
+    if (this.currentQueue == null) {
+      this.currentQueue = new RemoteInvocationServiceQueueImpl(context);
+    } else {
+      this.currentQueue = new RemoteInvocationServiceQueueImpl(context, this.currentQueue);
+    }
+    return this.currentQueue;
   }
 
   /**
@@ -330,6 +335,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
       }
       this.callQueue.clear();
       this.open = false;
+      AbstractRemoteInvocationServiceCaller.this.currentQueue = this.parentQueue;
     }
 
     /**
@@ -341,6 +347,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
       this.callQueue.clear();
       this.currentCall = null;
       this.open = false;
+      AbstractRemoteInvocationServiceCaller.this.currentQueue = this.parentQueue;
     }
 
   }

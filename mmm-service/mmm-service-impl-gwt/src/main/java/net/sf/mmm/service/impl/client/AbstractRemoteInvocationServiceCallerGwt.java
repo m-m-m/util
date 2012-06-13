@@ -14,6 +14,7 @@ import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwtAsync;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -63,14 +64,17 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractR
       /**
        * {@inheritDoc}
        */
+      @Override
       public void onFailure(Throwable caught) {
 
         // TODO
+        Window.alert(caught.toString());
       }
 
       /**
        * {@inheritDoc}
        */
+      @Override
       @SuppressWarnings({ "rawtypes", "unchecked" })
       public void onSuccess(RemoteInvocationGenericServiceResponse response) {
 

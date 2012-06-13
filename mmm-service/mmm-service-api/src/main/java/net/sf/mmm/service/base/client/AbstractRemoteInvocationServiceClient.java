@@ -4,6 +4,7 @@
 package net.sf.mmm.service.base.client;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 
 /**
  * This is the abstract base implementation for the service-client stubs of {@link RemoteInvocationService}s.
@@ -40,4 +41,15 @@ public abstract class AbstractRemoteInvocationServiceClient implements RemoteInv
     return this.remoteInvocationSerivceCaller;
   }
 
+  /**
+   * @see AbstractRemoteInvocationServiceCaller#addCall(RemoteInvocationServiceCall, Class)
+   * 
+   * @param call is the {@link RemoteInvocationServiceCall} to add.
+   * @param returnType is the {@link java.lang.reflect.Method#getReturnType() return type} of the invoked
+   *        {@link java.lang.reflect.Method}.
+   */
+  protected void addCall(RemoteInvocationServiceCall call, Class<?> returnType) {
+
+    getRemoteInvocationSerivceCaller().addCall(call, returnType);
+  }
 }

@@ -8,6 +8,7 @@ import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * This is the <a href=
@@ -19,6 +20,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
  * @author hohwille
  * @since 1.0.0
  */
+@RemoteServiceRelativePath("service/RemoteInvocationGenericServiceGwt")
 public interface RemoteInvocationGenericServiceGwt extends RemoteInvocationGenericService, RemoteService {
 
   /**
@@ -28,6 +30,7 @@ public interface RemoteInvocationGenericServiceGwt extends RemoteInvocationGener
    * @param request is the {@link RemoteInvocationGenericServiceRequest}.
    * @return the according {@link RemoteInvocationGenericServiceResponse}.
    */
+  @Override
   RemoteInvocationGenericServiceResponse callServices(RemoteInvocationGenericServiceRequest request);
 
 }

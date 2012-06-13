@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module>
+  <inherits name='net.sf.mmm.Util'/>
+  <source path='api'/>
+  <source path='base'/>
+  <source path='impl'/>
+  <generate-with class="net.sf.mmm.service.impl.client.RemoteInvocationServiceCallerGenerator">
+    <when-type-assignable class="net.sf.mmm.service.api.client.RemoteInvocationServiceCaller" />
+  </generate-with>
+</module>

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
-import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCaller;
+import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceClient;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 import com.google.gwt.core.ext.Generator;
@@ -49,13 +49,13 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
   public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
 
     String simpleName = RemoteInvocationServiceCaller.class.getSimpleName() + "Impl";
-    String packageName = AbstractRemoteInvocationServiceCaller.class.getPackage().getName();
+    String packageName = AbstractRemoteInvocationServiceCallerGwt.class.getPackage().getName();
     logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
     ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
 
     // imports
     sourceComposerFactory.addImport(RemoteInvocationService.class.getName());
-    sourceComposerFactory.setSuperclass(AbstractRemoteInvocationServiceCaller.class.getSimpleName());
+    sourceComposerFactory.setSuperclass(AbstractRemoteInvocationServiceCallerGwt.class.getSimpleName());
     PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
     if (writer != null) {
       SourceWriter sourceWriter = sourceComposerFactory.createSourceWriter(context, writer);
@@ -70,7 +70,7 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
       TypeOracle typeOracle = context.getTypeOracle();
       JClassType dabayServiceType = typeOracle.findType(RemoteInvocationService.class.getName());
       for (JClassType type : typeOracle.getTypes()) {
-        if ((type.isAssignableTo(dabayServiceType)) && (!type.equals(dabayServiceType))) {
+        if ((type.isAssignableTo(dabayServiceType)) && (!type.equals(dabayServiceType)) && (type.isInterface() != null)) {
           sourceWriter.print("registerService(");
           sourceWriter.print(type.getQualifiedSourceName());
           sourceWriter.print(".class, new ");
@@ -106,8 +106,10 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
     sourceComposerFactory.addImport(RemoteInvocationService.class.getName());
     sourceComposerFactory.addImport(Serializable.class.getName());
     sourceComposerFactory.addImport(RemoteInvocationServiceCall.class.getName());
+    sourceComposerFactory.addImport(AbstractRemoteInvocationServiceClient.class.getName());
 
     sourceComposerFactory.addImplementedInterface(serviceInterface.getQualifiedSourceName());
+    sourceComposerFactory.setSuperclass(AbstractRemoteInvocationServiceClient.class.getSimpleName());
     PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
     if (writer != null) {
       SourceWriter sourceWriter = sourceComposerFactory.createSourceWriter(context, writer);
@@ -200,7 +202,7 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
     sourceWriter.println(", _arguments);");
 
     // add recorded call
-    sourceWriter.print("getRemoteInvocationSerivceCaller().addCall(_call, ");
+    sourceWriter.print("addCall(_call, ");
     sourceWriter.print(returnType.getQualifiedSourceName());
     sourceWriter.println(".class);");
 

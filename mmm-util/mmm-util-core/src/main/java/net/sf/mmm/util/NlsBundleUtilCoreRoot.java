@@ -22,43 +22,67 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 @NlsBundleLocation(bundleName = "NlsBundleUtilCore")
 public interface NlsBundleUtilCoreRoot extends NlsBundle {
 
-  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT */
+  /** @see #infoLeft() */
   String INF_LEFT = "left";
 
-  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#RIGHT */
+  /** @see #infoRight() */
   String INF_RIGHT = "right";
 
-  /** @see net.sf.mmm.util.lang.api.HorizontalAlignment#CENTER */
+  /** @see #infoCenter() */
   String INF_CENTER = "center";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#AND */
+  /** @see #infoTop() */
+  String INF_TOP = "top";
+
+  /** @see #infoTopLeft() */
+  String INF_TOP_LEFT = "top-left";
+
+  /** @see #infoTopRight() */
+  String INF_TOP_RIGHT = "top-right";
+
+  /** @see #infoBottom() */
+  String INF_BOTTOM = "bottom";
+
+  /** @see #infoBottomLeft() */
+  String INF_BOTTOM_LEFT = "bottom-left";
+
+  /** @see #infoBottomRight() */
+  String INF_BOTTOM_RIGHT = "bottom-right";
+
+  /** @see #infoHorizontal() */
+  String INF_HORIZONTAL = "horizontal";
+
+  /** @see #infoVertical() */
+  String INF_VERTICAL = "vertical";
+
+  /** @see #infoAnd() */
   String INF_AND = "and";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#OR */
+  /** @see #infoOr() */
   String INF_OR = "or";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#NAND */
+  /** @see #infoNand() */
   String INF_NAND = "nand";
 
-  /** @see net.sf.mmm.util.lang.api.Conjunction#NOR */
+  /** @see #infoNor() */
   String INF_NOR = "nor";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_THAN */
+  /** @see #infoGreaterThan() */
   String INF_GREATER_THAN = "greater-than";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#GREATER_OR_EQUAL */
+  /** @see #infoGreaterOrEqual() */
   String INF_GREATER_OR_EQUAL = "greater-or-equal";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#EQUAL */
+  /** @see #infoEqual() */
   String INF_EQUAL = "equal";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#NOT_EQUAL */
+  /** @see #infoNotEqual() */
   String INF_NOT_EQUAL = "not-equal";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_THAN */
+  /** @see #infoLessThan() */
   String INF_LESS_THAN = "less-than";
 
-  /** @see net.sf.mmm.util.lang.api.Comparator#LESS_OR_EQUAL */
+  /** @see #infoLessOrEqual() */
   String INF_LESS_OR_EQUAL = "less-or-equal";
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
@@ -160,6 +184,70 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    */
   @NlsBundleMessage(INF_CENTER)
   NlsMessage infoCenter();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.VerticalAlignment#TOP
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_TOP)
+  NlsMessage infoTop();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Alignment#TOP_LEFT
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_TOP_LEFT)
+  NlsMessage infoTopLeft();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Alignment#TOP_RIGHT
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_TOP_RIGHT)
+  NlsMessage infoTopRight();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.VerticalAlignment#BOTTOM
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_BOTTOM)
+  NlsMessage infoBottom();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Alignment#BOTTOM_LEFT
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_BOTTOM_LEFT)
+  NlsMessage infoBottomLeft();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Alignment#BOTTOM_RIGHT
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_BOTTOM_RIGHT)
+  NlsMessage infoBottomRight();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Orientation#HORIZONTAL
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_HORIZONTAL)
+  NlsMessage infoHorizontal();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Orientation#VERTICAL
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_VERTICAL)
+  NlsMessage infoVertical();
 
   /**
    * @see net.sf.mmm.util.lang.api.Conjunction#AND

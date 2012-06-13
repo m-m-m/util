@@ -7,7 +7,7 @@
   <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
   <bean id="RemoteInvocationGenericServiceUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
     <property name="mappings">
-      <value>/**/RemoteInvocationGenericService=RemoteInvocationGenericServiceServlet</value>
+      <value>/**/RemoteInvocationGenericServiceGwt=RemoteInvocationGenericServiceServlet</value>
     </property>
   </bean>  
 </beans>

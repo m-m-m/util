@@ -138,6 +138,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
         if ((RemoteInvocationService.class.isAssignableFrom(serviceInterface))
             && (serviceInterface != RemoteInvocationService.class)) {
           for (Method method : serviceInterface.getMethods()) {
+            // if (RemoteInvocationService.class.isAssignableFrom(method.getDeclaringClass())) {
             @SuppressWarnings({ "rawtypes", "unchecked" })
             RemoteInvocationServiceMethod<?> serviceMethod = new RemoteInvocationServiceMethod(serviceInterface,
                 service, method);
@@ -146,6 +147,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
               throw new DuplicateObjectException(serviceMethod, serviceMethod.getId(), old);
             }
             registered = true;
+            // }
           }
         }
       }

@@ -29,10 +29,10 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   private static final long serialVersionUID = -7838850701154079724L;
 
   /** the internationalized message */
-  private final NlsMessage nlsMessage;
+  private NlsMessage nlsMessage;
 
   /** @see #getUuid() */
-  private final UUID uuid;
+  private UUID uuid;
 
   /** @see #getSuppressed() */
   private List<Throwable> suppressedList;

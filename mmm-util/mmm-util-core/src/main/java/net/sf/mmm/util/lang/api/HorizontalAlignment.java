@@ -4,6 +4,7 @@
 package net.sf.mmm.util.lang.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This enum represents a horizontal alignment (e.g. for {@link net.sf.mmm.util.text.api.Justification}).<br>
@@ -79,6 +80,25 @@ public enum HorizontalAlignment implements Datatype<String> {
   }
 
   /**
+   * This method gets the corresponding {@link Alignment}.
+   * 
+   * @return the corresponding {@link Alignment}.
+   */
+  public Alignment getAlignment() {
+
+    switch (this) {
+      case LEFT:
+        return Alignment.LEFT;
+      case CENTER:
+        return Alignment.CENTER;
+      case RIGHT:
+        return Alignment.RIGHT;
+      default :
+        throw new IllegalCaseException(HorizontalAlignment.class, this);
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -90,8 +110,8 @@ public enum HorizontalAlignment implements Datatype<String> {
   /**
    * This method gets the {@link HorizontalAlignment} with the given <code>{@link #getValue() value}</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested {@link HorizontalAlignment alignment}.
-   * @return the requested {@link HorizontalAlignment alignment}.
+   * @param value is the {@link #getValue() value} of the requested {@link HorizontalAlignment}.
+   * @return the requested {@link HorizontalAlignment}.
    */
   public static HorizontalAlignment fromValue(String value) {
 
