@@ -8,8 +8,8 @@ import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This is the major interface to access all relevant attributes and components
- * for the view (user-interface) of the search.
+ * This is the major interface to access all relevant attributes and components for the view (user-interface)
+ * of the search.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -52,8 +52,7 @@ public interface SearchViewContext {
   /**
    * This method gets the {@link SearchResultPage}.
    * 
-   * @return the {@link SearchResultPage} or <code>null</code> if no search has
-   *         been performed.
+   * @return the {@link SearchResultPage} or <code>null</code> if no search has been performed.
    */
   SearchResultPage getResultPage();
 
@@ -62,8 +61,7 @@ public interface SearchViewContext {
    * 
    * @see SearchViewConfiguration#getDetailsPath()
    * 
-   * @return the {@link SearchEntry} or <code>null</code> if no details shall be
-   *         displayed.
+   * @return the {@link SearchEntry} or <code>null</code> if no details shall be displayed.
    */
   SearchEntry getEntry();
 

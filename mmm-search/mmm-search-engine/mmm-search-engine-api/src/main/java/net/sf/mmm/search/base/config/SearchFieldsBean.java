@@ -32,15 +32,12 @@ public class SearchFieldsBean implements SearchFields {
   static {
     DEFAULTS = new HashMap<String, SearchFieldConfigurationBean>();
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_ID, SearchFieldType.LONG));
-    add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_CUSTOM_ID,
-        SearchFieldType.STRING));
+    add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_CUSTOM_ID, SearchFieldType.STRING));
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_URI, SearchFieldType.STRING));
-    add(DEFAULTS,
-        new SearchFieldConfigurationBean(SearchEntry.FIELD_SOURCE, SearchFieldType.STRING));
+    add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_SOURCE, SearchFieldType.STRING));
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_CREATOR));
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_KEYWORDS));
-    add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_LANGUAGE,
-        SearchFieldType.STRING));
+    add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_LANGUAGE, SearchFieldType.STRING));
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_SIZE, SearchFieldType.LONG));
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_TEXT));
     add(DEFAULTS, new SearchFieldConfigurationBean(SearchEntry.FIELD_TITLE));
@@ -55,14 +52,12 @@ public class SearchFieldsBean implements SearchFields {
   private transient Map<String, SearchFieldConfigurationBean> fieldMap;
 
   /**
-   * This method adds the given <code>fieldConfiguration</code> to the given
-   * <code>map</code>.
+   * This method adds the given <code>fieldConfiguration</code> to the given <code>map</code>.
    * 
    * @param map is the {@link Map}.
    * @param fieldConfiguration is the {@link SearchFieldConfigurationBean}.
    */
-  private static void add(Map<String, SearchFieldConfigurationBean> map,
-      SearchFieldConfigurationBean fieldConfiguration) {
+  private static void add(Map<String, SearchFieldConfigurationBean> map, SearchFieldConfigurationBean fieldConfiguration) {
 
     String key = fieldConfiguration.getName();
     if (map.containsKey(key)) {
@@ -80,8 +75,7 @@ public class SearchFieldsBean implements SearchFields {
   }
 
   /**
-   * This method gets the {@link List} of {@link SearchFieldConfigurationBean
-   * fields}.
+   * This method gets the {@link List} of {@link SearchFieldConfigurationBean fields}.
    * 
    * @return the fields.
    */
@@ -91,8 +85,7 @@ public class SearchFieldsBean implements SearchFields {
   }
 
   /**
-   * This method gets the {@link Map} of {@link SearchFieldConfigurationBean
-   * fields}.
+   * This method gets the {@link Map} of {@link SearchFieldConfigurationBean fields}.
    * 
    * @return the field-map.
    */
@@ -123,6 +116,7 @@ public class SearchFieldsBean implements SearchFields {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchFieldConfigurationBean getFieldConfiguration(String name) {
 
     SearchFieldConfigurationBean result = getFieldMap().get(name);
@@ -135,6 +129,7 @@ public class SearchFieldsBean implements SearchFields {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchFieldConfigurationBean getOrCreateFieldConfiguration(String name) {
 
     SearchFieldConfigurationBean result = getFieldConfiguration(name);

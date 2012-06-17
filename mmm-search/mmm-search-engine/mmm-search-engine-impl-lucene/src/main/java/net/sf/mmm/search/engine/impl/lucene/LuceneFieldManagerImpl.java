@@ -40,8 +40,8 @@ import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.util.NumericUtils;
 
 /**
- * This class centralizes the behavior of fields according to their
- * {@link SearchFieldConfiguration} for lucene.
+ * This class centralizes the behavior of fields according to their {@link SearchFieldConfiguration} for
+ * lucene.
  * 
  * @see Field
  * @see NumericField
@@ -71,11 +71,9 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
    * 
    * @param configurationHolder is the {@link SearchConfigurationHolder}.
    * @param analyzer the {@link Analyzer}.
-   * @param iso8601Util is the {@link Iso8601Util} instance used to handle
-   *        {@link Date} fields.
+   * @param iso8601Util is the {@link Iso8601Util} instance used to handle {@link Date} fields.
    */
-  public LuceneFieldManagerImpl(
-      SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder,
+  public LuceneFieldManagerImpl(SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder,
       Analyzer analyzer, Iso8601Util iso8601Util) {
 
     super();
@@ -87,6 +85,7 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchConfigurationHolder<? extends SearchConfiguration> getConfigurationHolder() {
 
     return this.configurationHolder;
@@ -105,13 +104,13 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * @return the precisionStep
    */
+  @Override
   public int getPrecisionStep() {
 
     Integer result = this.precisionStep;
     if (result == null) {
       int step = NumericUtils.PRECISION_STEP_DEFAULT;
-      String precision = this.configurationHolder.getBean().getProperties()
-          .getProperty(PROPERTY_PRECISION_STEP);
+      String precision = this.configurationHolder.getBean().getProperties().getProperty(PROPERTY_PRECISION_STEP);
       if (precision != null) {
         try {
           step = Integer.parseInt(precision);
@@ -128,12 +127,13 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
+  @Override
+  @SuppressWarnings("null")
   public Fieldable createField(String field, Object value) {
 
     NlsNullPointerException.checkNotNull("field", field);
     NlsNullPointerException.checkNotNull("value", value);
-    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(
-        field);
+    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(field);
     SearchFieldType fieldType = fieldConfiguration.getType();
     SearchFieldMode fieldMode = fieldConfiguration.getMode();
     Store store;
@@ -212,21 +212,20 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
+  @Override
   public Term createTerm(String field, Object value) {
 
     NlsNullPointerException.checkNotNull("field", field);
     NlsNullPointerException.checkNotNull("value", value);
     String normalizedValue;
-    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(
-        field);
+    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(field);
     SearchFieldType fieldType = fieldConfiguration.getType();
     boolean isString = (value instanceof String);
     try {
       switch (fieldType) {
         case TEXT:
           try {
-            TokenStream tokenStream = this.analyzer.tokenStream(field, new StringReader(
-                (String) value));
+            TokenStream tokenStream = this.analyzer.tokenStream(field, new StringReader((String) value));
             TermAttribute termAttribute = tokenStream.getAttribute(TermAttribute.class);
             if (tokenStream.incrementToken()) {
               normalizedValue = termAttribute.term();
@@ -297,12 +296,12 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
+  @Override
   public Query createPhraseQuery(String field, String value) {
 
     NlsNullPointerException.checkNotNull("field", field);
     NlsNullPointerException.checkNotNull("value", value);
-    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(
-        field);
+    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(field);
     SearchFieldType fieldType = fieldConfiguration.getType();
     Query result;
     if (fieldType == SearchFieldType.TEXT) {
@@ -326,14 +325,14 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
-  public Query createRangeQuery(String field, String minimum, String maximum,
-      boolean minimumInclusive, boolean maximumInclusive) {
+  @Override
+  public Query createRangeQuery(String field, String minimum, String maximum, boolean minimumInclusive,
+      boolean maximumInclusive) {
 
     NlsNullPointerException.checkNotNull("field", field);
     NlsNullPointerException.checkNotNull("minimum", minimum);
     NlsNullPointerException.checkNotNull("maximum", maximum);
-    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(
-        field);
+    SearchFieldConfiguration fieldConfiguration = getSearchFields().getOrCreateFieldConfiguration(field);
     SearchFieldType fieldType = fieldConfiguration.getType();
     Query result;
     switch (fieldType) {
@@ -356,15 +355,14 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
             Float.valueOf(maximum), minimumInclusive, maximumInclusive);
         break;
       case DOUBLE:
-        result = NumericRangeQuery.newDoubleRange(field, getPrecisionStep(),
-            Double.valueOf(minimum), Double.valueOf(maximum), minimumInclusive, maximumInclusive);
+        result = NumericRangeQuery.newDoubleRange(field, getPrecisionStep(), Double.valueOf(minimum),
+            Double.valueOf(maximum), minimumInclusive, maximumInclusive);
         break;
       case DATE:
         Date minDate = this.iso8601Util.parseDate(minimum);
         Date maxDate = this.iso8601Util.parseDate(maximum);
-        result = NumericRangeQuery.newLongRange(field, getPrecisionStep(),
-            Long.valueOf(minDate.getTime()), Long.valueOf(maxDate.getTime()), minimumInclusive,
-            maximumInclusive);
+        result = NumericRangeQuery.newLongRange(field, getPrecisionStep(), Long.valueOf(minDate.getTime()),
+            Long.valueOf(maxDate.getTime()), minimumInclusive, maximumInclusive);
         break;
       default :
         throw new IllegalCaseException(SearchFieldType.class, fieldType);
@@ -375,6 +373,7 @@ public class LuceneFieldManagerImpl extends AbstractLoggableObject implements Lu
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean refresh() {
 
     this.precisionStep = null;

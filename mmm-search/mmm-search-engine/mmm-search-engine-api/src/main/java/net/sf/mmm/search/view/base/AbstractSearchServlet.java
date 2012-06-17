@@ -54,17 +54,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is the abstract base implementation of the controller
- * {@link javax.servlet.Servlet servlet} of the search.<br/>
+ * This is the abstract base implementation of the controller {@link javax.servlet.Servlet servlet} of the
+ * search.<br/>
  * <b>ATTENTION:</b><br>
- * Please set <code>URIEncoding="UTF-8"</code> or better
- * <code>useBodyEncodingForURI="true"</code> for the connector in the server.xml
- * of your tomcat.
+ * Please set <code>URIEncoding="UTF-8"</code> or better <code>useBodyEncodingForURI="true"</code> for the
+ * connector in the server.xml of your tomcat.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchServlet extends HttpServlet implements SearchViewLogic,
-    SearchViewConfiguration {
+public abstract class AbstractSearchServlet extends HttpServlet implements SearchViewLogic, SearchViewConfiguration {
 
   /** The {@link Logger}. */
   private final Logger logger;
@@ -79,8 +77,8 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   private String detailsPath;
 
   /**
-   * The name of the view (JSP without ".jsp") for the error page or
-   * <code>null</code> to dispatch to the current view even in case of an error.
+   * The name of the view (JSP without ".jsp") for the error page or <code>null</code> to dispatch to the
+   * current view even in case of an error.
    */
   private String errorPath;
 
@@ -142,6 +140,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public ManagedSearchEngine getSearchEngine() {
 
     return this.searchEngine;
@@ -150,6 +149,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEngineConfiguration getConfiguration() {
 
     return this.configurationHolder.getBean();
@@ -158,6 +158,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public XmlUtil getXmlUtil() {
 
     return this.xmlUtil;
@@ -166,6 +167,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iso8601Util getIso8601Util() {
 
     return this.iso8601Util;
@@ -174,6 +176,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLastRefreshDate() {
 
     return this.lastRefreshDate;
@@ -182,6 +185,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getSearchPath() {
 
     return this.searchPath;
@@ -190,6 +194,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getDetailsPath() {
 
     return this.detailsPath;
@@ -198,6 +203,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getErrorPath() {
 
     return this.errorPath;
@@ -206,6 +212,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<? extends SearchEntryTypeView> getEntryTypeViews() {
 
     return this.entryTypeViews;
@@ -214,6 +221,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<SearchSourceViewBean> getSourceViews() {
 
     return this.sourceViews;
@@ -222,6 +230,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsLocalizer getNlsLocalizer() {
 
     return this.nlsLocalizer;
@@ -230,6 +239,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getBundleName() {
 
     return this.bundleName;
@@ -238,6 +248,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEntryType getEntryType(String id) {
 
     SearchEntryType result = this.id2viewMap.get(id);
@@ -256,22 +267,20 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   }
 
   /**
-   * This method gets the {@link IocContainer} used to manage components with
-   * their implementation. The {@link IocContainer} will be created and
-   * initialized on the first call of this method.
+   * This method gets the {@link IocContainer} used to manage components with their implementation. The
+   * {@link IocContainer} will be created and initialized on the first call of this method.
    * 
    * @return the {@link IocContainer}.
    */
   protected abstract IocContainer getIocContainer();
 
   /**
-   * This method gets an {@link ServletConfig#getInitParameter(String)
-   * init-parameter}.
+   * This method gets an {@link ServletConfig#getInitParameter(String) init-parameter}.
    * 
    * @param config is the {@link ServletConfig}.
    * @param key is the name of the requested parameter.
-   * @param defaultValue the default value returned if the actual parameter is
-   *        NOT set (<code>null</code>). May also be <code>null</code>.
+   * @param defaultValue the default value returned if the actual parameter is NOT set (<code>null</code>).
+   *        May also be <code>null</code>.
    * @return the requested parameter or <code>defaultValue</code> if NOT set.
    */
   private static String getParameter(ServletConfig config, String key, String defaultValue) {
@@ -301,8 +310,8 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
       this.iso8601Util = container.getComponent(Iso8601Util.class);
       this.configurationReader = container.getComponent(SearchEngineConfigurationLoader.class);
       this.configurationHolder = this.configurationReader.loadConfiguration(this.configurationUri);
-      this.searchEngine = container.getComponent(SearchEngineBuilder.class).createSearchEngine(
-          this.configurationHolder);
+      this.searchEngine = container.getComponent(SearchEngineBuilder.class)
+          .createSearchEngine(this.configurationHolder);
       NlsMessageFactory messageFactory = container.getComponent(NlsMessageFactory.class);
       NlsTemplateResolver templateResolver = container.getComponent(NlsTemplateResolver.class);
       this.bundleName = getParameter(config, PARAMETER_BUNDLE_NAME, DEFAULT_BUNDLE_NAME);
@@ -327,8 +336,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   }
 
   /**
-   * This method extends the given <code>complexQuery</code> with a query for
-   * the given <code>property</code>.
+   * This method extends the given <code>complexQuery</code> with a query for the given <code>property</code>.
    * 
    * @param complexQuery is the existing query to extend.
    * @param field is the name of the field to add to the query.
@@ -343,18 +351,16 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   }
 
   /**
-   * This method dispatches the request to the according view (by default
-   * according JSP).
+   * This method dispatches the request to the according view (by default according JSP).
    * 
    * @param request is the {@link HttpServletRequest}.
    * @param response is the {@link HttpServletResponse}.
-   * @param exception - <code>true</code> if an {@link Exception} occurred,
-   *        <code>false</code> on success.
+   * @param exception - <code>true</code> if an {@link Exception} occurred, <code>false</code> on success.
    * @throws ServletException if something goes wrong.
    * @throws IOException if something goes wrong.
    */
-  protected void doDispatch(HttpServletRequest request, HttpServletResponse response,
-      boolean exception) throws ServletException, IOException {
+  protected void doDispatch(HttpServletRequest request, HttpServletResponse response, boolean exception)
+      throws ServletException, IOException {
 
     String dispatchPath = request.getServletPath();
     if (dispatchPath.endsWith("/")) {
@@ -374,8 +380,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
    * {@inheritDoc}
    */
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     long time = System.currentTimeMillis();
     request.setCharacterEncoding("UTF-8");
@@ -425,8 +430,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
               } else {
                 ComplexSearchQuery typesQuery = queryBuilder.createComplexQuery();
                 for (String typeId : combinedIds) {
-                  SearchQuery typeQuery = queryBuilder.createPhraseQuery(SearchEntry.FIELD_TYPE,
-                      typeId);
+                  SearchQuery typeQuery = queryBuilder.createPhraseQuery(SearchEntry.FIELD_TYPE, typeId);
                   typesQuery.addOptionalQuery(typeQuery);
                 }
                 mainQuery.addRequiredQuery(typesQuery);
@@ -472,13 +476,12 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
 
   /**
    * This method updates the {@link #getEntryTypeViews() entry type views}.<br/>
-   * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s.
-   * For this view these {@link SearchEntryType}s are reduced to those types
-   * that actually exist in the search-index. Then they are
-   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and
-   * finally sorted according to the {@link SearchEntryType#getTitle() title}.<br/>
-   * This way the view can present the proper titles of the types and the search
-   * can filter even on combined types.
+   * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s. For this view these
+   * {@link SearchEntryType}s are reduced to those types that actually exist in the search-index. Then they
+   * are {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and finally sorted according
+   * to the {@link SearchEntryType#getTitle() title}.<br/>
+   * This way the view can present the proper titles of the types and the search can filter even on combined
+   * types.
    */
   private void updateSourceViews() {
 
@@ -510,19 +513,17 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
 
     updateEntryTypeViews();
     updateSourceViews();
-    this.lastRefreshDate = this.iso8601Util.formatDateTime(Calendar.getInstance(), true, true,
-        false);
+    this.lastRefreshDate = this.iso8601Util.formatDateTime(Calendar.getInstance(), true, true, false);
   }
 
   /**
    * This method updates the {@link #getEntryTypeViews() entry type views}.<br/>
-   * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s.
-   * For this view these {@link SearchEntryType}s are reduced to those types
-   * that actually exist in the search-index. Then they are
-   * {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and
-   * finally sorted according to the {@link SearchEntryType#getTitle() title}.<br/>
-   * This way the view can present the proper titles of the types and the search
-   * can filter even on combined types.
+   * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s. For this view these
+   * {@link SearchEntryType}s are reduced to those types that actually exist in the search-index. Then they
+   * are {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and finally sorted according
+   * to the {@link SearchEntryType#getTitle() title}.<br/>
+   * This way the view can present the proper titles of the types and the search can filter even on combined
+   * types.
    */
   private void updateEntryTypeViews() {
 
@@ -570,6 +571,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public synchronized boolean refresh() {
 
     boolean updated = this.searchEngine.refresh();
@@ -582,6 +584,7 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getDisplayTitle(SearchEntry searchEntry) {
 
     String uri = searchEntry.getUri();

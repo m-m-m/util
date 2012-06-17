@@ -166,7 +166,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
-  public void addSuppressedExceptions(Throwable suppressed) {
+  public void addSuppressedException(Throwable suppressed) {
 
     // only available since Java 1.7
     // super.addSuppressed(suppressed);

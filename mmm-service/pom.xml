@@ -1,6 +1,7 @@
-<?xml version='1.0' encoding='Cp1252'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!-- $Id$ -->
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
@@ -15,6 +16,7 @@
   <description>Simple leight-weight services</description>
   <modules>
     <module>mmm-service-api</module>
+    <module>mmm-service-base</module>
     <module>mmm-service-impl-gwt</module>
   </modules>
   

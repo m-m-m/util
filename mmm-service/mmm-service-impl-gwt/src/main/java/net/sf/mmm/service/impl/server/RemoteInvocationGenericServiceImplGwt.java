@@ -5,7 +5,6 @@ package net.sf.mmm.service.impl.server;
 
 import javax.inject.Named;
 
-import net.sf.mmm.service.base.server.RemoteInvocationGenericServiceImpl;
 
 /**
  * This class extends {@link RemoteInvocationGenericServiceImpl} with ready-to-use CDI annotations.

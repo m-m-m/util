@@ -46,7 +46,6 @@ public class SearchQueryParseException extends SearchException {
    * 
    * @param nested is the {@link #getCause() cause} of this message.
    */
-  @SuppressWarnings("unchecked")
   public SearchQueryParseException(Throwable nested) {
 
     super(nested, NlsBundleSearchApi.ERR_QUERY_PARSE, Collections.EMPTY_MAP);

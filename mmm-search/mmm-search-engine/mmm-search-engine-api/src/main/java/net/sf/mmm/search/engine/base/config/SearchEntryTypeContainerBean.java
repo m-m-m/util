@@ -18,8 +18,7 @@ import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.search.engine.api.config.SearchEntryTypeContainer;
 
 /**
- * This is the implementation of {@link SearchEntryType} as JAXB-ready
- * Java-Bean.
+ * This is the implementation of {@link SearchEntryType} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -50,6 +49,7 @@ public class SearchEntryTypeContainerBean implements SearchEntryTypeContainer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isExtendDefaults() {
 
     return this.extendDefaults;
@@ -66,6 +66,7 @@ public class SearchEntryTypeContainerBean implements SearchEntryTypeContainer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEntryType getEntryType(String id) {
 
     SearchEntryType result = getEntryTypeMap().get(id);
@@ -98,8 +99,7 @@ public class SearchEntryTypeContainerBean implements SearchEntryTypeContainer {
   }
 
   /**
-   * This method gets the list of raw entry types (without
-   * {@link #isExtendDefaults() extension}).
+   * This method gets the list of raw entry types (without {@link #isExtendDefaults() extension}).
    * 
    * @return the {@link SearchEntryType}s.
    */
@@ -123,6 +123,7 @@ public class SearchEntryTypeContainerBean implements SearchEntryTypeContainer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<SearchEntryType> iterator() {
 
     return getEntryTypeMap().values().iterator();

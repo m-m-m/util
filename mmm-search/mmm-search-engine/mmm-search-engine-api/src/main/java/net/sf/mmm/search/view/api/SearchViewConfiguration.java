@@ -3,7 +3,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.view.api;
 
-
 /**
  * This interface contains the servlet-specific configuration of the view.
  * 
@@ -13,18 +12,15 @@ package net.sf.mmm.search.view.api;
 public interface SearchViewConfiguration {
 
   /**
-   * The name of the
-   * {@link javax.servlet.ServletConfig#getInitParameter(String)
-   * servlet-parameter} for the
+   * The name of the {@link javax.servlet.ServletConfig#getInitParameter(String) servlet-parameter} for the
    * {@link net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader#loadConfiguration(String)
    * configuration-URL}.
    */
   String PARAMETER_CONFIGURATION_URL = "configuration-url";
 
   /**
-   * The name of the
-   * {@link javax.servlet.ServletConfig#getInitParameter(String)
-   * servlet-parameter} for the {@link #getSearchPath() search-path}.
+   * The name of the {@link javax.servlet.ServletConfig#getInitParameter(String) servlet-parameter} for the
+   * {@link #getSearchPath() search-path}.
    */
   String PARAMETER_SEARCH_PATH = "search-path";
 
@@ -32,9 +28,8 @@ public interface SearchViewConfiguration {
   String DEFAULT_SEARCH_PATH = "/search";
 
   /**
-   * The name of the
-   * {@link javax.servlet.ServletConfig#getInitParameter(String)
-   * servlet-parameter} for the {@link #getDetailsPath() details-path}.
+   * The name of the {@link javax.servlet.ServletConfig#getInitParameter(String) servlet-parameter} for the
+   * {@link #getDetailsPath() details-path}.
    */
   String PARAMETER_DETAILS_PATH = "details-path";
 
@@ -42,16 +37,14 @@ public interface SearchViewConfiguration {
   String DEFAULT_DETAILS_PATH = "/details";
 
   /**
-   * The name of the
-   * {@link javax.servlet.ServletConfig#getInitParameter(String)
-   * servlet-parameter} for the {@link #getErrorPath() error-path}.
+   * The name of the {@link javax.servlet.ServletConfig#getInitParameter(String) servlet-parameter} for the
+   * {@link #getErrorPath() error-path}.
    */
   String PARAMETER_ERROR_PATH = "error-path";
 
   /**
-   * The name of the
-   * {@link javax.servlet.ServletConfig#getInitParameter(String)
-   * servlet-parameter} for the {@link #getBundleName() bundle-name}.
+   * The name of the {@link javax.servlet.ServletConfig#getInitParameter(String) servlet-parameter} for the
+   * {@link #getBundleName() bundle-name}.
    */
   String PARAMETER_BUNDLE_NAME = "bundle-name";
 
@@ -59,9 +52,8 @@ public interface SearchViewConfiguration {
   String DEFAULT_BUNDLE_NAME = "net.sf.mmm.search.view.NlsBundleSearchView";
 
   /**
-   * The {@link javax.servlet.http.HttpServletRequest#getServletPath()
-   * servlet-path} for the view of the actual search (enter query and show
-   * results).
+   * The {@link javax.servlet.http.HttpServletRequest#getServletPath() servlet-path} for the view of the
+   * actual search (enter query and show results).
    * 
    * @see #DEFAULT_SEARCH_PATH
    * 
@@ -70,9 +62,8 @@ public interface SearchViewConfiguration {
   String getSearchPath();
 
   /**
-   * The {@link javax.servlet.http.HttpServletRequest#getServletPath()
-   * servlet-path} for the view of the details of a particular
-   * {@link net.sf.mmm.search.engine.api.SearchHit}.
+   * The {@link javax.servlet.http.HttpServletRequest#getServletPath() servlet-path} for the view of the
+   * details of a particular {@link net.sf.mmm.search.engine.api.SearchHit}.
    * 
    * @see #DEFAULT_DETAILS_PATH
    * 
@@ -81,20 +72,18 @@ public interface SearchViewConfiguration {
   String getDetailsPath();
 
   /**
-   * This method get the name of the path to
-   * {@link javax.servlet.ServletRequest#getRequestDispatcher(String) dispatch}
-   * to in case of an error (e.g. "error.jsp") or <code>null</code> to dispatch
-   * to the current view even in case of an error.
+   * This method get the name of the path to {@link javax.servlet.ServletRequest#getRequestDispatcher(String)
+   * dispatch} to in case of an error (e.g. "error.jsp") or <code>null</code> to dispatch to the current view
+   * even in case of an error.
    * 
    * @return the error view.
    */
   String getErrorPath();
 
   /**
-   * This method gets the qualified name of the {@link java.util.ResourceBundle}
-   * used if texts for the UI from the
-   * {@link net.sf.mmm.search.api.config.SearchConfiguration configuration} are
-   * specified in the from <code>{&lt;KEY&gt;}</code>.
+   * This method gets the qualified name of the {@link java.util.ResourceBundle} used if texts for the UI from
+   * the {@link net.sf.mmm.search.api.config.SearchConfiguration configuration} are specified in the from
+   * <code>{&lt;KEY&gt;}</code>.
    * 
    * @see net.sf.mmm.util.nls.base.NlsTemplateImpl#getName()
    * 

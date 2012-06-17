@@ -10,8 +10,7 @@ import net.sf.mmm.search.engine.api.SearchQueryErrorHandler;
 import net.sf.mmm.util.nls.api.NlsObject;
 
 /**
- * This is an implementation of {@link SearchQueryErrorHandler} that collects
- * all errors.
+ * This is an implementation of {@link SearchQueryErrorHandler} that collects all errors.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -33,8 +32,8 @@ public class SearchQueryErrorHandlerCollectErrors implements SearchQueryErrorHan
   /**
    * {@inheritDoc}
    */
-  public void handleError(String query, int start, int end, NlsObject message)
-      throws RuntimeException {
+  @Override
+  public void handleError(String query, int start, int end, NlsObject message) throws RuntimeException {
 
     this.messages.add(message);
   }
@@ -50,8 +49,7 @@ public class SearchQueryErrorHandlerCollectErrors implements SearchQueryErrorHan
   }
 
   /**
-   * This inner class represents an
-   * {@link SearchQueryErrorHandler#handleError(String, int, int, NlsObject)
+   * This inner class represents an {@link SearchQueryErrorHandler#handleError(String, int, int, NlsObject)
    * error event}.
    */
   public static class Error {

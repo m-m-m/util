@@ -7,8 +7,7 @@ import net.sf.mmm.search.engine.api.SearchQueryBuilderFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
- * This is the abstract base implementation of the
- * {@link SearchQueryBuilderFactory} interface.
+ * This is the abstract base implementation of the {@link SearchQueryBuilderFactory} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

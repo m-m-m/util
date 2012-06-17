@@ -17,8 +17,14 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-service-api</artifactId>
+      <artifactId>mmm-service-base</artifactId>
       <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-service-base</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -38,21 +44,15 @@
       <classifier>sources</classifier>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <version>2.4.0</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>3.1.0.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-dev</artifactId>
       <version>2.4.0</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>3.0.6.RELEASE</version>
-      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>

@@ -14,14 +14,12 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.component.impl.PeriodicRefresherImpl;
 
 /**
- * This is the abstract base-implementation of the {@link SearchEngineBuilder}
- * interface.
+ * This is the abstract base-implementation of the {@link SearchEngineBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSearchEngineBuilder extends AbstractLoggableComponent implements
-    SearchEngineBuilder {
+public abstract class AbstractSearchEngineBuilder extends AbstractLoggableComponent implements SearchEngineBuilder {
 
   /** @see #getSearchQueryBuilderFactory() */
   private SearchQueryBuilderFactory searchQueryBuilderFactory;
@@ -68,8 +66,7 @@ public abstract class AbstractSearchEngineBuilder extends AbstractLoggableCompon
   }
 
   /**
-   * @param searchQueryBuilderFactory is the {@link SearchQueryBuilderFactory}
-   *        to set.
+   * @param searchQueryBuilderFactory is the {@link SearchQueryBuilderFactory} to set.
    */
   @Inject
   public void setSearchQueryBuilderFactory(SearchQueryBuilderFactory searchQueryBuilderFactory) {

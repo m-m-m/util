@@ -15,10 +15,9 @@ import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.util.xml.base.jaxb.XmlAdapterProperties;
 
 /**
- * This is the abstract base-implementation of {@link SearchConfiguration} as
- * JAXB-ready Java-Bean.<br/>
- * Unfortunately JAXB does not properly support generics so we cannot use a
- * generic for polymorphism of {@link SearchSourceBean}.
+ * This is the abstract base-implementation of {@link SearchConfiguration} as JAXB-ready Java-Bean.<br/>
+ * Unfortunately JAXB does not properly support generics so we cannot use a generic for polymorphism of
+ * {@link SearchSourceBean}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -61,6 +60,7 @@ public abstract class AbstractSearchConfigurationBean implements SearchConfigura
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchIndexConfiguration getSearchIndex() {
 
     return this.searchIndex;
@@ -90,6 +90,7 @@ public abstract class AbstractSearchConfigurationBean implements SearchConfigura
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchPropertiesBean getProperties() {
 
     if (this.properties == null) {
@@ -110,6 +111,7 @@ public abstract class AbstractSearchConfigurationBean implements SearchConfigura
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchFieldsBean getFields() {
 
     if (this.fields == null) {

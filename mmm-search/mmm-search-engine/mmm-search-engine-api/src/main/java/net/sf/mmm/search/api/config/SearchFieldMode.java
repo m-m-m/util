@@ -12,36 +12,32 @@ package net.sf.mmm.search.api.config;
 public enum SearchFieldMode {
 
   /**
-   * Indicates that the field will be {@link #isSearchable() searchable} and
-   * {@link #isRetrievable() retrievable}. This is the default.
+   * Indicates that the field will be {@link #isSearchable() searchable} and {@link #isRetrievable()
+   * retrievable}. This is the default.
    */
   SEARCHABLE_AND_RETRIEVABLE,
 
   /**
-   * Indicates that the field will be {@link #isSearchable() searchable} but NOT
-   * {@link #isRetrievable() retrievable}. This is useful for indexing very
-   * large texts. Please note that
-   * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText()
-   * highlighting} only works for {@link #isRetrievable() retrievable} fields.
+   * Indicates that the field will be {@link #isSearchable() searchable} but NOT {@link #isRetrievable()
+   * retrievable}. This is useful for indexing very large texts. Please note that
+   * {@link net.sf.mmm.search.engine.api.SearchHit#getHighlightedText() highlighting} only works for
+   * {@link #isRetrievable() retrievable} fields.
    */
   SEARCHABLE,
 
   /**
-   * Indicates that the field will NOT be indexed but only stored. Such field is
-   * hidden for the {@link net.sf.mmm.search.engine.api.SearchEngine} but can be
-   * {@link net.sf.mmm.search.api.SearchEntry#getField(String) retrieved} from
-   * the result.
+   * Indicates that the field will NOT be indexed but only stored. Such field is hidden for the
+   * {@link net.sf.mmm.search.engine.api.SearchEngine} but can be
+   * {@link net.sf.mmm.search.api.SearchEntry#getField(String) retrieved} from the result.
    */
   RETRIEVABLE;
 
   /**
    * This method determines if the represented
-   * {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) field} will be
-   * searchable so it can be found via the
-   * {@link net.sf.mmm.search.engine.api.SearchEngine}.
+   * {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) field} will be searchable so it can be
+   * found via the {@link net.sf.mmm.search.engine.api.SearchEngine}.
    * 
-   * @return <code>true</code> if searchable, <code>false</code> otherwise
-   *         (hidden for searches).
+   * @return <code>true</code> if searchable, <code>false</code> otherwise (hidden for searches).
    */
   public boolean isSearchable() {
 
@@ -53,8 +49,7 @@ public enum SearchFieldMode {
    * {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) retrieved} from a
    * {@link net.sf.mmm.search.api.SearchEntry}.
    * 
-   * @return <code>true</code> if retrievable, <code>false</code> otherwise (can
-   *         be found but NOT retrieved).
+   * @return <code>true</code> if retrievable, <code>false</code> otherwise (can be found but NOT retrieved).
    */
   public boolean isRetrievable() {
 

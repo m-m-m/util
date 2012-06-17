@@ -39,6 +39,7 @@ public class SearchSourceViewBean extends SearchSourceBean implements SearchSour
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getEntryCount() {
 
     return this.entryCount;

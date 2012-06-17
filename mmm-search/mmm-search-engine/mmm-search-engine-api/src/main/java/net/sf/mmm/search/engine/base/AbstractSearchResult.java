@@ -8,8 +8,7 @@ import net.sf.mmm.search.engine.api.SearchResult;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 
 /**
- * This is the abstract base implementation of the {@link SearchResult}
- * interface.
+ * This is the abstract base implementation of the {@link SearchResult} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,8 +20,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   /**
    * The constructor.
    * 
-   * @param searchQuery is the {@link #getQuery() query} that caused this
-   *        result.
+   * @param searchQuery is the {@link #getQuery() query} that caused this result.
    */
   public AbstractSearchResult(String searchQuery) {
 
@@ -33,6 +31,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getQuery() {
 
     return this.query;
@@ -41,6 +40,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPageCount() {
 
     return getPageCount(SearchResultPage.DEFAULT_HITS_PER_PAGE);
@@ -49,6 +49,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPageCount(int hitsPerPage) {
 
     int total = getHitCount();
@@ -62,6 +63,7 @@ public abstract class AbstractSearchResult implements SearchResult {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchResultPage getPage(int pageIndex) {
 
     return getPage(pageIndex, SearchResultPage.DEFAULT_HITS_PER_PAGE);
@@ -70,9 +72,10 @@ public abstract class AbstractSearchResult implements SearchResult {
   /**
    * {@inheritDoc}
    * 
-   * This method is a simple implementation of this method. Please override if
-   * there is a more efficient way to do this.
+   * This method is a simple implementation of this method. Please override if there is a more efficient way
+   * to do this.
    */
+  @Override
   public SearchResultPage getPage(int pageIndex, int hitsPerPage) {
 
     int pageCount = getPageCount(hitsPerPage);

@@ -13,8 +13,7 @@ import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.value.api.ValueConvertException;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.search.api.SearchEntry} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.search.api.SearchEntry} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -62,17 +61,16 @@ public abstract class BasicSearchEntry extends AbstractSearchEntry {
   /**
    * @see #getField(String)
    * 
-   * @param name is the
-   *        {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getName()
-   *        name} of the requested field.
-   * @return the raw value of the field as it is given by the underlying search
-   *         technology.
+   * @param name is the {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getName() name} of the
+   *        requested field.
+   * @return the raw value of the field as it is given by the underlying search technology.
    */
   protected abstract Object getFieldRaw(String name);
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object getField(String name) {
 
     Class<?> fieldType = String.class;
@@ -86,6 +84,7 @@ public abstract class BasicSearchEntry extends AbstractSearchEntry {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public <T> T getField(String name, Class<T> type) {
 
@@ -134,8 +133,7 @@ public abstract class BasicSearchEntry extends AbstractSearchEntry {
         }
       }
     } else if (Number.class.isAssignableFrom(type)) {
-      NumberType<? extends Number> numberType = this.searchDependencies.getMathUtil()
-          .getNumberType(type);
+      NumberType<? extends Number> numberType = this.searchDependencies.getMathUtil().getNumberType(type);
       if (Number.class.isAssignableFrom(fieldType)) {
         Number number = (Number) fieldValue;
         result = numberType.valueOf(number, true);

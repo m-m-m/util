@@ -17,8 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is the implementation of the {@link SearchEntryTypeView} interface as
- * java bean.
+ * This is the implementation of the {@link SearchEntryTypeView} interface as java bean.
  * 
  * @see #combine(SearchEntryType, long)
  * 
@@ -46,14 +45,13 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   }
 
   /**
-   * This method combines the given <code>type</code> with this object.
-   * Therefore the {@link SearchEntryType#getTitle() title} of all
-   * {@link #combine(SearchEntryType, long) combined} types has to be equal.
+   * This method combines the given <code>type</code> with this object. Therefore the
+   * {@link SearchEntryType#getTitle() title} of all {@link #combine(SearchEntryType, long) combined} types
+   * has to be equal.
    * 
    * @param type is the {@link SearchEntryType} to combine.
-   * @param typeCount is the
-   *        {@link net.sf.mmm.search.engine.api.SearchEngine#count(String, String)
-   *        count} for the given <code>type</code>.
+   * @param typeCount is the {@link net.sf.mmm.search.engine.api.SearchEngine#count(String, String) count} for
+   *        the given <code>type</code>.
    */
   public void combine(SearchEntryType type, long typeCount) {
 
@@ -79,8 +77,8 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
       } else {
         if (!typeIcon.equals(getIcon())) {
           // throw new NlsIllegalStateException();
-          LOGGER.warn("Mismatching icons for " + SearchEntryType.class.getSimpleName()
-              + " with title '" + title + "' (" + typeIcon + " != " + getIcon() + ")");
+          LOGGER.warn("Mismatching icons for " + SearchEntryType.class.getSimpleName() + " with title '" + title
+              + "' (" + typeIcon + " != " + getIcon() + ")");
         }
       }
     }
@@ -93,6 +91,7 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<String> getCombinedIds() {
 
     return this.combinedIds;
@@ -101,6 +100,7 @@ public class SearchEntryTypeViewBean extends SearchEntryTypeBean implements Sear
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getEntryCount() {
 
     return this.entryCount;

@@ -17,6 +17,7 @@ public interface SearchQuery {
    * 
    * @see SearchQueryBuilder#parseStandardQuery(String, SearchQueryBuilderOptions)
    */
+  @Override
   String toString();
 
 }

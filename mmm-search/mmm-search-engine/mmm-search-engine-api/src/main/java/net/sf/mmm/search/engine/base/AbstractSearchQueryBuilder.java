@@ -20,21 +20,17 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
- * This is the abstract base implementation of the {@link SearchQueryBuilder}
- * interface.
+ * This is the abstract base implementation of the {@link SearchQueryBuilder} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject implements
-    SearchQueryBuilder {
+public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject implements SearchQueryBuilder {
 
   /** The {@link CharFilter} to match anything except the end of a range query. */
-  private static final CharFilter CHAR_FILTER_ACCEPT_UNTIL_END_OF_RANGE = new ListCharFilter(false,
-      '}', ']');
+  private static final CharFilter CHAR_FILTER_ACCEPT_UNTIL_END_OF_RANGE = new ListCharFilter(false, '}', ']');
 
   /**
-   * The separator of minimum and maximum in a range query. Has to be separated
-   * with whitespaces.
+   * The separator of minimum and maximum in a range query. Has to be separated with whitespaces.
    */
   private static final Set<String> RANGE_QUERY_SEPARATOR_SET;
   static {
@@ -74,6 +70,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchQuery parseStandardQuery(String query) throws SearchException {
 
     return parseStandardQuery(query, new SearchQueryBuilderOptionsBean());
@@ -84,15 +81,13 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
    * 
    * @param parser is the scanner of the query-string.
    * @param options are the {@link SearchQueryBuilderOptions}.
-   * @param defaultProperty is the property to use as default for unqualified
-   *        search-terms.
-   * @param depth is the depth of the query expression (number of open
-   *        parenthesis).
-   * @return the parsed query or <code>null</code> if this a call with a depth
-   *         greater than <code>0</code> and the parsed query segment was void.
+   * @param defaultProperty is the property to use as default for unqualified search-terms.
+   * @param depth is the depth of the query expression (number of open parenthesis).
+   * @return the parsed query or <code>null</code> if this a call with a depth greater than <code>0</code> and
+   *         the parsed query segment was void.
    */
-  private SearchQuery parseStandardQuery(CharSequenceScanner parser,
-      SearchQueryBuilderOptions options, String defaultProperty, int depth) {
+  private SearchQuery parseStandardQuery(CharSequenceScanner parser, SearchQueryBuilderOptions options,
+      String defaultProperty, int depth) {
 
     ComplexSearchQuery complexQuery = createComplexQuery();
     SearchQuery subQuery = null;
@@ -151,16 +146,13 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
   /**
    * 
    * @param parser is the scanner of the query-string.
-   * @param defaultField is the field to use as default for unqualified
-   *        search-terms.
-   * @param depth is the depth of the query expression (number of open
-   *        parenthesis).
+   * @param defaultField is the field to use as default for unqualified search-terms.
+   * @param depth is the depth of the query expression (number of open parenthesis).
    * @param options are the {@link SearchQueryBuilderOptions}.
-   * @return the parsed query or <code>null</code> if the parsed query segment
-   *         was void.
+   * @return the parsed query or <code>null</code> if the parsed query segment was void.
    */
-  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultField,
-      int depth, SearchQueryBuilderOptions options) {
+  private SearchQuery parseStandardClause(CharSequenceScanner parser, String defaultField, int depth,
+      SearchQueryBuilderOptions options) {
 
     char c;
     String fieldName = defaultField;
@@ -203,8 +195,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
                 if (parser.hasNext()) {
                   c = parser.next();
                   boolean maximumInclusive = (c == ']');
-                  return createRangeQuery(fieldName, minimum, maximum, minimumInclusive,
-                      maximumInclusive);
+                  return createRangeQuery(fieldName, minimum, maximum, minimumInclusive, maximumInclusive);
                 }
               }
             }
@@ -228,12 +219,10 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
         return createWordQuery(fieldName, term);
       }
     } catch (NlsRuntimeException e) {
-      options.getErrorHandler().handleError(parser.getOriginalString(), start,
-          parser.getCurrentIndex(), e);
+      options.getErrorHandler().handleError(parser.getOriginalString(), start, parser.getCurrentIndex(), e);
     } catch (RuntimeException e) {
       SearchQueryParseException ex = new SearchQueryParseException(e);
-      options.getErrorHandler().handleError(parser.getOriginalString(), start,
-          parser.getCurrentIndex(), ex);
+      options.getErrorHandler().handleError(parser.getOriginalString(), start, parser.getCurrentIndex(), ex);
     }
     return null;
   }
@@ -241,6 +230,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchQuery parseStandardQuery(String query, SearchQueryBuilderOptions options) {
 
     CharSequenceScanner parser = new CharSequenceScanner(query);

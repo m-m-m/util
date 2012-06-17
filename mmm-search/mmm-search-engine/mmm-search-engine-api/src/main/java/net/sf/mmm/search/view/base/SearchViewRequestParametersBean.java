@@ -37,19 +37,17 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
     super();
     this.servletRequest = request;
     this.pageNumber = getParameterAsInt(PARAMETER_PAGE, 0, 0, 10000);
-    this.hitsPerPage = getParameterAsInt(PARAMETER_HITS_PER_PAGE,
-        SearchResultPage.DEFAULT_HITS_PER_PAGE, 2, 100);
+    this.hitsPerPage = getParameterAsInt(PARAMETER_HITS_PER_PAGE, SearchResultPage.DEFAULT_HITS_PER_PAGE, 2, 100);
     this.totalHitCount = getParameterAsInt(PARAMETER_TOTAL_HIT_COUNT, -1, 0, Integer.MAX_VALUE);
   }
 
   /**
-   * This method gets the {@link ServletRequest#getParameter(String) parameter}
-   * with the given <code>name</code> from the {@link #getServletRequest()
-   * request}.
+   * This method gets the {@link ServletRequest#getParameter(String) parameter} with the given
+   * <code>name</code> from the {@link #getServletRequest() request}.
    * 
    * @param name is the name of the requested parameter.
-   * @return the parameter as {@link String#trim() trimmed} string. If the
-   *         parameter is NOT set, the empty string is returned.
+   * @return the parameter as {@link String#trim() trimmed} string. If the parameter is NOT set, the empty
+   *         string is returned.
    */
   private String getParameter(String name) {
 
@@ -63,16 +61,14 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   }
 
   /**
-   * This method gets the {@link ServletRequest#getParameter(String) parameter}
-   * with the given <code>name</code> from the {@link #getServletRequest()
-   * request}.
+   * This method gets the {@link ServletRequest#getParameter(String) parameter} with the given
+   * <code>name</code> from the {@link #getServletRequest() request}.
    * 
    * @param name is the name of the requested parameter.
    * @param defaultValue is returned if the parameter is NOT set or invalid.
    * @param minimum is the minimum allowed value.
    * @param maximum is the maximum allowed value.
-   * @return the parameter as integer. If the parameter is NOT set, the
-   *         <code>defaultValue</code> is returned.
+   * @return the parameter as integer. If the parameter is NOT set, the <code>defaultValue</code> is returned.
    */
   private int getParameterAsInt(String name, int defaultValue, int minimum, int maximum) {
 
@@ -110,6 +106,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPageNumber() {
 
     return this.pageNumber;
@@ -118,6 +115,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHitsPerPage() {
 
     return this.hitsPerPage;
@@ -126,6 +124,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getTotalHitCount() {
 
     return this.totalHitCount;
@@ -134,6 +133,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getQuery() {
 
     return getParameter(PARAMETER_QUERY);
@@ -142,6 +142,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getSource() {
 
     return getParameter(PARAMETER_SOURCE);
@@ -150,6 +151,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getCreator() {
 
     return getParameter(PARAMETER_CREATOR);
@@ -158,6 +160,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return getParameter(PARAMETER_TITLE);
@@ -166,6 +169,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return getParameter(PARAMETER_TYPE);
@@ -174,6 +178,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     return getParameter(PARAMETER_ID);

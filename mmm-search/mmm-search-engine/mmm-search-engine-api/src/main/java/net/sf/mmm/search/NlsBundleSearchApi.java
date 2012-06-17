@@ -120,8 +120,7 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
 
   /** Message for hits of search-page in UI. */
   public static final String MSG_RESULT_RAGE = "Result <strong>{min}</strong> "
-      + "to <strong>{max}</strong> of <strong>{size}</strong> for your search "
-      + "for \"<strong>{query}</strong>\"";
+      + "to <strong>{max}</strong> of <strong>{size}</strong> for your search " + "for \"<strong>{query}</strong>\"";
 
   /** Message for no hits in UI. */
   public static final String MSG_NO_HITS = "Your search for <strong>{query}</strong> produced no hit.";

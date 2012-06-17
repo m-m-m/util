@@ -8,8 +8,8 @@ import javax.servlet.ServletRequest;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * This class allows to {@link #getContext(ServletRequest) get} the
- * {@link SearchViewContext} from anywhere via {@link ServletRequest}.
+ * This class allows to {@link #getContext(ServletRequest) get} the {@link SearchViewContext} from anywhere
+ * via {@link ServletRequest}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -25,11 +25,9 @@ public final class SearchViewContextAccess {
   }
 
   /**
-   * This method gets the {@link SearchViewContext} from the given
-   * <code>request</code>.
+   * This method gets the {@link SearchViewContext} from the given <code>request</code>.
    * 
-   * @param request is the request where to get the {@link SearchViewContext}
-   *        from.
+   * @param request is the request where to get the {@link SearchViewContext} from.
    * @return the {@link SearchViewContext} instance.
    */
   public static SearchViewContext getContext(ServletRequest request) {

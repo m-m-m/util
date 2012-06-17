@@ -8,8 +8,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This is an implementation of {@link SearchQueryErrorHandler} that throws an
- * exception in case of any error.
+ * This is an implementation of {@link SearchQueryErrorHandler} that throws an exception in case of any error.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -27,8 +26,8 @@ public class SearchQueryErrorHandlerFail implements SearchQueryErrorHandler {
   /**
    * {@inheritDoc}
    */
-  public void handleError(String query, int start, int end, NlsObject message)
-      throws RuntimeException {
+  @Override
+  public void handleError(String query, int start, int end, NlsObject message) throws RuntimeException {
 
     if (message instanceof NlsRuntimeException) {
       throw (NlsRuntimeException) message;

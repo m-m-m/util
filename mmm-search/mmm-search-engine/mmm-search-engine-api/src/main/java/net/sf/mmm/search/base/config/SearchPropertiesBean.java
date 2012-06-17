@@ -50,14 +50,14 @@ public class SearchPropertiesBean implements SearchProperties {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getProperty(String key) {
 
     return this.properties.getProperty(key);
   }
 
   /**
-   * This method sets the property associated with <code>key</code> to the given
-   * <code>value</code>.
+   * This method sets the property associated with <code>key</code> to the given <code>value</code>.
    * 
    * @see #getProperty(String)
    * 

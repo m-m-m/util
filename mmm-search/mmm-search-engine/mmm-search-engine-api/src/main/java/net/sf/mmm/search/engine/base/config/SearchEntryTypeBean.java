@@ -11,8 +11,7 @@ import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.util.lang.base.attribute.AbstractAttributeReadId;
 
 /**
- * This is the implementation of {@link SearchEntryType} as JAXB-ready
- * Java-Bean.
+ * This is the implementation of {@link SearchEntryType} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -58,6 +57,7 @@ public class SearchEntryTypeBean extends AbstractAttributeReadId<String> impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getIcon() {
 
     return this.icon;
@@ -76,6 +76,7 @@ public class SearchEntryTypeBean extends AbstractAttributeReadId<String> impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     return this.id;
@@ -94,6 +95,7 @@ public class SearchEntryTypeBean extends AbstractAttributeReadId<String> impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return this.title;

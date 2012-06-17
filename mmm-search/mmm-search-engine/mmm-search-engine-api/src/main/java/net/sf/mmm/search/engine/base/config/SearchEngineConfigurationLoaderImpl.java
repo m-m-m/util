@@ -13,16 +13,15 @@ import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
 
 /**
- * This is the implementation of the {@link SearchEngineConfigurationLoader}
- * interface.
+ * This is the implementation of the {@link SearchEngineConfigurationLoader} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Singleton
 @Named
-public class SearchEngineConfigurationLoaderImpl extends
-    XmlBeanMapper<SearchEngineConfigurationBean> implements SearchEngineConfigurationLoader {
+public class SearchEngineConfigurationLoaderImpl extends XmlBeanMapper<SearchEngineConfigurationBean> implements
+    SearchEngineConfigurationLoader {
 
   /**
    * The constructor.
@@ -35,6 +34,7 @@ public class SearchEngineConfigurationLoaderImpl extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEngineConfigurationHolder loadConfiguration() {
 
     return loadConfiguration(SearchConfiguration.DEFAULT_CONFIGURATION_URL);
@@ -43,6 +43,7 @@ public class SearchEngineConfigurationLoaderImpl extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEngineConfigurationHolder loadConfiguration(String locationUrl) {
 
     DataResource resource = getResourceFactory().createDataResource(locationUrl);

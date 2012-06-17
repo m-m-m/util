@@ -34,27 +34,26 @@ public interface SearchViewLogic extends Refreshable {
   SearchEngineConfiguration getConfiguration();
 
   /**
-   * This method gets the list of {@link SearchEntryTypeView}s sorted by
-   * {@link SearchEntryType#getTitle() title}.
+   * This method gets the list of {@link SearchEntryTypeView}s sorted by {@link SearchEntryType#getTitle()
+   * title}.
    * 
    * @return the {@link SearchEntryTypeView}s.
    */
   Collection<? extends SearchEntryTypeView> getEntryTypeViews();
 
   /**
-   * This method gets the list of views on the {@link SearchSourceView}s sorted
-   * by {@link SearchSourceView#getTitle() title}.
+   * This method gets the list of views on the {@link SearchSourceView}s sorted by
+   * {@link SearchSourceView#getTitle() title}.
    * 
    * @return the sources.
    */
   Collection<? extends SearchSourceView> getSourceViews();
 
   /**
-   * This method gets the {@link SearchEntryTypeView} or {@link SearchEntryType}
-   * for the given <code>id</code>.
+   * This method gets the {@link SearchEntryTypeView} or {@link SearchEntryType} for the given <code>id</code>
+   * .
    * 
-   * @param id is the {@link SearchEntryType#getId() ID} of the requested
-   *        {@link SearchEntryType}.
+   * @param id is the {@link SearchEntryType#getId() ID} of the requested {@link SearchEntryType}.
    * @return the requested {@link SearchEntryType}.
    */
   SearchEntryType getEntryType(String id);
@@ -67,17 +66,15 @@ public interface SearchViewLogic extends Refreshable {
   ManagedSearchEngine getSearchEngine();
 
   /**
-   * This method gets the {@link XmlUtil} that can be used for
-   * {@link XmlUtil#escapeXml(String, boolean) escaping} to prevent from
-   * XSS-attacks.
+   * This method gets the {@link XmlUtil} that can be used for {@link XmlUtil#escapeXml(String, boolean)
+   * escaping} to prevent from XSS-attacks.
    * 
    * @return the {@link XmlUtil}.
    */
   XmlUtil getXmlUtil();
 
   /**
-   * This method gets the {@link Iso8601Util} that can be used to format and
-   * parse dates.
+   * This method gets the {@link Iso8601Util} that can be used to format and parse dates.
    * 
    * @return the {@link Iso8601Util}.
    */
@@ -101,24 +98,22 @@ public interface SearchViewLogic extends Refreshable {
    * This method reloads the {@link #getConfiguration() configuration} and the
    * {@link net.sf.mmm.search.engine.api.SearchEngine} on the fly.<br/>
    * <b>ATTENTION:</b><br>
-   * The search-engine will not be rebuild on reload so configuration-changes
-   * only reflect the view and NOT the {@link #getSearchEngine() search-engine}.
+   * The search-engine will not be rebuild on reload so configuration-changes only reflect the view and NOT
+   * the {@link #getSearchEngine() search-engine}.
    * 
    * {@inheritDoc}
    */
+  @Override
   boolean refresh();
 
   /**
-   * This method get the display-title from the given <code>searchEntry</code>.
-   * In advance to {@link SearchEntry#getTitle()} this method will create a
-   * combination of filename and the actual title and handle <code>null</code>
-   * values.
+   * This method get the display-title from the given <code>searchEntry</code>. In advance to
+   * {@link SearchEntry#getTitle()} this method will create a combination of filename and the actual title and
+   * handle <code>null</code> values.
    * 
-   * @param searchEntry is the {@link SearchEntry} where to get the
-   *        {@link SearchEntry#getTitle() title} from.
+   * @param searchEntry is the {@link SearchEntry} where to get the {@link SearchEntry#getTitle() title} from.
    * 
-   * @return the display {@link SearchEntry#getTitle() title} of the
-   *         {@link SearchEntry}.
+   * @return the display {@link SearchEntry#getTitle() title} of the {@link SearchEntry}.
    */
   String getDisplayTitle(SearchEntry searchEntry);
 

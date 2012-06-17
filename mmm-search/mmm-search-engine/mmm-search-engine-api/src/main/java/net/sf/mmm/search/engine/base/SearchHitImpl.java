@@ -34,11 +34,9 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
    * @param searchEntry is the actual entry this hit delegates to.
    * @param entryId is the {@link #getEntryId() entry-ID}.
    * @param hitScore is the {@link #getScore() score} of the hit.
-   * @param searchHighlighter is the highlighter used for
-   *        {@link #getHighlightedText() highlighting}.
+   * @param searchHighlighter is the highlighter used for {@link #getHighlightedText() highlighting}.
    */
-  public SearchHitImpl(SearchEntry searchEntry, String entryId, double hitScore,
-      SearchHighlighter searchHighlighter) {
+  public SearchHitImpl(SearchEntry searchEntry, String entryId, double hitScore, SearchHighlighter searchHighlighter) {
 
     super();
     this.entry = searchEntry;
@@ -51,6 +49,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public double getScore() {
 
     return this.score;
@@ -59,6 +58,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getScore(int maximum) {
 
     return (int) (getScore() * maximum);
@@ -67,6 +67,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getHighlightedText() {
 
     return this.highlighter.getHighlightedText(getText());
@@ -75,6 +76,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getEntryId() {
 
     return this.entryId;
@@ -92,6 +94,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object getField(String name) {
 
     return this.entry.getField(name);
@@ -100,6 +103,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <T> T getField(String name, Class<T> type) {
 
     return this.entry.getField(name, type);
@@ -108,6 +112,7 @@ public class SearchHitImpl extends AbstractSearchEntry implements SearchHit {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<String> getFieldNames() {
 
     return this.entry.getFieldNames();

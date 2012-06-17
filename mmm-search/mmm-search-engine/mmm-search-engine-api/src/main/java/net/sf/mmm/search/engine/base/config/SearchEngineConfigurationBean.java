@@ -11,15 +11,13 @@ import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 import net.sf.mmm.search.engine.api.config.SearchEntryTypeContainer;
 
 /**
- * This is the implementation of {@link SearchEngineConfiguration} as JAXB-ready
- * Java-Bean.
+ * This is the implementation of {@link SearchEngineConfiguration} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @XmlRootElement(name = "search")
-public class SearchEngineConfigurationBean extends SearchConfigurationBean implements
-    SearchEngineConfiguration {
+public class SearchEngineConfigurationBean extends SearchConfigurationBean implements SearchEngineConfiguration {
 
   /** @see #getEntryTypes() */
   @XmlElement(name = "entry-types")
@@ -36,6 +34,7 @@ public class SearchEngineConfigurationBean extends SearchConfigurationBean imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEntryTypeContainer getEntryTypes() {
 
     if (this.entryTypes == null) {

@@ -48,8 +48,7 @@ public class SearchEngineConfigurationLoaderTest {
    * @param icon - see {@link SearchEntryType#getIcon()}.
    * @return the {@link SearchEntryType}.
    */
-  protected SearchEntryType checkEntryType(SearchEntryTypeContainer types, String id, String title,
-      String icon) {
+  protected SearchEntryType checkEntryType(SearchEntryTypeContainer types, String id, String title, String icon) {
 
     SearchEntryType entryType = types.getEntryType(id);
     Assert.assertNotNull(entryType);
@@ -68,8 +67,7 @@ public class SearchEngineConfigurationLoaderTest {
    * @param urlPrefix - see {@link SearchSource#getUrlPrefix()}.
    * @return the {@link SearchSource}.
    */
-  protected SearchSource checkSource(SearchEngineConfiguration configuration, String id,
-      String title, String urlPrefix) {
+  protected SearchSource checkSource(SearchEngineConfiguration configuration, String id, String title, String urlPrefix) {
 
     SearchSource source = configuration.getSource(id);
     Assert.assertNotNull(source);
@@ -86,8 +84,7 @@ public class SearchEngineConfigurationLoaderTest {
   public void testReadConfiguration() {
 
     SearchEngineConfigurationLoader loader = getSearchEngineConfigurationLoader();
-    ClasspathResource resource = new ClasspathResource(SearchEngineConfigurationLoaderTest.class,
-        ".xml", true);
+    ClasspathResource resource = new ClasspathResource(SearchEngineConfigurationLoaderTest.class, ".xml", true);
     SearchEngineConfiguration configuration = loader.loadConfiguration(resource.getUri()).getBean();
     // entryTypes
     SearchEntryTypeContainer types = configuration.getEntryTypes();

@@ -10,8 +10,7 @@ import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 
 /**
- * This is the abstract base implementation of the {@link SearchResultPage}
- * interface.
+ * This is the abstract base implementation of the {@link SearchResultPage} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -53,6 +52,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHitsPerPage() {
 
     return this.hitsPerPage;
@@ -61,6 +61,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPageCount() {
 
     return this.pageCount;
@@ -69,6 +70,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPageIndex() {
 
     return this.pageIndex;
@@ -77,6 +79,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getQuery() {
 
     return this.query;
@@ -85,6 +88,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getTotalHitCount() {
 
     return this.totalHitCount;
@@ -93,6 +97,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHitStartNumber() {
 
     return this.pageIndex * this.hitsPerPage + 1;
@@ -101,6 +106,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHitEndNumber() {
 
     return getHitStartNumber() + getPageHitCount();
@@ -109,6 +115,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPagingStartIndex(int pagingRange) {
 
     int diff = pagingRange;
@@ -127,6 +134,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getPagingEndIndex(int pagingRange) {
 
     int diff = pagingRange;
@@ -144,6 +152,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<SearchHit> iterator() {
 
     return new HitIterator();
@@ -168,6 +177,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasNext() {
 
       return (this.hitIndex < getPageHitCount());
@@ -176,6 +186,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public SearchHit next() {
 
       if (!hasNext()) {
@@ -189,6 +200,7 @@ public abstract class AbstractSearchResultPage implements SearchResultPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void remove() {
 
       throw new UnsupportedOperationException();

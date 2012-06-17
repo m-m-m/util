@@ -141,19 +141,25 @@ public interface NlsThrowable extends NlsObject {
    * 
    * @param suppressed is the {@link Throwable} to add.
    * @since 3.0.0
+   * @deprecated should be addSuppressed that is only available in Java 1.7+. As Java 1.7+ marked the method
+   *             as final there is no other compatible way to implemented this.
    */
-  void addSuppressedExceptions(Throwable suppressed);
+  @Deprecated
+  void addSuppressedException(Throwable suppressed);
 
   /**
-   * Returns an array containing all of the exceptions that were {@link #addSuppressedExceptions(Throwable) suppressed},
-   * typically by the {@code try} -with-resources statement, in order to deliver this exception.<br/>
+   * Returns an array containing all of the exceptions that were {@link #addSuppressedException(Throwable)
+   * suppressed}, typically by the {@code try} -with-resources statement, in order to deliver this exception.<br/>
    * 
    * See <code>Throwable.getSuppressed()</code>.
    * 
    * @return an array containing all of the exceptions that have been added via
-   *         {@link #addSuppressedExceptions(Throwable)}.
+   *         {@link #addSuppressedException(Throwable)}.
    * @since 3.0.0
+   * @deprecated should be getSuppressed that is only available in Java 1.7+. As Java 1.7+ marked the method
+   *             as final there is no other compatible way to implemented this.
    */
+  @Deprecated
   Throwable[] getSuppressedExceptions();
 
 }

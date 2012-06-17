@@ -40,6 +40,7 @@ public class SearchDependenciesImpl extends AbstractComponent implements SearchD
   /**
    * {@inheritDoc}
    */
+  @Override
   public MathUtil getMathUtil() {
 
     return this.mathUtil;
@@ -58,6 +59,7 @@ public class SearchDependenciesImpl extends AbstractComponent implements SearchD
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iso8601Util getIso8601Util() {
 
     return this.iso8601Util;

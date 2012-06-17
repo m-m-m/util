@@ -9,8 +9,8 @@ import net.sf.mmm.util.component.api.Refreshable;
 /**
  * This is the interface used to build {@link SearchQuery search-queries}.<br>
  * You can either specify the query as string and
- * {@link #parseStandardQuery(String, SearchQueryBuilderOptions) parse} it or
- * {@link #createComplexQuery() create} your query constructively.<br>
+ * {@link #parseStandardQuery(String, SearchQueryBuilderOptions) parse} it or {@link #createComplexQuery()
+ * create} your query constructively.<br>
  * Here is an example:<br>
  * 
  * <pre>
@@ -30,9 +30,8 @@ import net.sf.mmm.util.component.api.Refreshable;
  * query.{@link ComplexSearchQuery#addOptionalQuery(SearchQuery) addOptionalQuery}(subQuery3);
  * </pre>
  * 
- * The resulting <code>query</code> will be the same as if
- * {@link #parseStandardQuery(String)} was called with "+text:Multimedia*
- * -text:PHP title:\"Enterprise Content Management\"".
+ * The resulting <code>query</code> will be the same as if {@link #parseStandardQuery(String)} was called with
+ * "+text:Multimedia* -text:PHP title:\"Enterprise Content Management\"".
  * 
  * A {@link SearchQueryBuilder} has to be stateless and thread-safe.
  * 
@@ -57,22 +56,21 @@ public interface SearchQueryBuilder extends Refreshable {
   // SearchQuery parseNativeQuery(String query) throws SearchException;
 
   /**
-   * This method parses the given <code>query</code> string in the standard
-   * query language of this specification.<br>
+   * This method parses the given <code>query</code> string in the standard query language of this
+   * specification.<br>
    * 
    * @see #parseStandardQuery(String, SearchQueryBuilderOptions)
    * 
    * @param query is the query to parse as string.
    * @return the parsed query.
-   * @throws SearchException if the given <code>query</code> string is illegal
-   *         and can NOT be parsed. Implementations should be tolerant and try
-   *         to avoid this situation.
+   * @throws SearchException if the given <code>query</code> string is illegal and can NOT be parsed.
+   *         Implementations should be tolerant and try to avoid this situation.
    */
   SearchQuery parseStandardQuery(String query) throws SearchException;
 
   /**
-   * This method parses the given <code>query</code> string in the standard
-   * query language of this specification.<br>
+   * This method parses the given <code>query</code> string in the standard query language of this
+   * specification.<br>
    * The standard query language is defined by the following EBNF grammar:
    * 
    * <pre>
@@ -95,34 +93,30 @@ public interface SearchQueryBuilder extends Refreshable {
    * @param query is the query to parse as string.
    * @param options are the {@link SearchQueryBuilderOptions}.
    * @return the parsed query.
-   * @throws SearchException if the given <code>query</code> string is illegal
-   *         and can NOT be parsed. Implementations should be tolerant and try
-   *         to avoid this situation.
+   * @throws SearchException if the given <code>query</code> string is illegal and can NOT be parsed.
+   *         Implementations should be tolerant and try to avoid this situation.
    */
-  SearchQuery parseStandardQuery(String query, SearchQueryBuilderOptions options)
-      throws SearchException;
+  SearchQuery parseStandardQuery(String query, SearchQueryBuilderOptions options) throws SearchException;
 
   /**
-   * This method creates a new {@link SearchQuery query} for the given
-   * <code>phrase</code> and <code>property</code>.
+   * This method creates a new {@link SearchQuery query} for the given <code>phrase</code> and
+   * <code>property</code>.
    * 
-   * @param field is the name of the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
-   *        field} to search.
+   * @param field is the name of the {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) field}
+   *        to search.
    * @param phrase is the exact phrase to search for.
    * @return the created query.
    */
   SearchQuery createPhraseQuery(String field, String phrase);
 
   /**
-   * This method creates a new {@link SearchQuery query} for the given
-   * <code>word</code> and <code>field</code>.
+   * This method creates a new {@link SearchQuery query} for the given <code>word</code> and
+   * <code>field</code>.
    * 
-   * @param field is the name of the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
-   *        field} where to search.
-   * @param word is the single term or glob pattern (e.g. "moon?i*" to match
-   *        "moonlight" or "moonride") to search for.
+   * @param field is the name of the {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) field}
+   *        where to search.
+   * @param word is the single term or glob pattern (e.g. "moon?i*" to match "moonlight" or "moonride") to
+   *        search for.
    * 
    * @return the created query.
    */
@@ -131,25 +125,24 @@ public interface SearchQueryBuilder extends Refreshable {
   /**
    * This method creates a {@link SearchQuery} for a range of values.
    * 
-   * @param field is the name of the
-   *        {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
+   * @param field is the name of the {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
    *        field(s)} to match.
    * @param minimum is the minimum or infimum value.
    * @param maximum is the maximum or supremum value.
-   * @param minimumInclusive - <code>true</code> if the <code>minimum</code> is
-   *        included and matches, <code>false</code> if the <code>minimum</code>
-   *        is treated as infimum and only higher values will match.
-   * @param maximumInclusive - <code>true</code> if the <code>maximum</code> is
-   *        included and matches, <code>false</code> if the <code>maximum</code>
-   *        is treated as supremum and only lower values will match.
+   * @param minimumInclusive - <code>true</code> if the <code>minimum</code> is included and matches,
+   *        <code>false</code> if the <code>minimum</code> is treated as infimum and only higher values will
+   *        match.
+   * @param maximumInclusive - <code>true</code> if the <code>maximum</code> is included and matches,
+   *        <code>false</code> if the <code>maximum</code> is treated as supremum and only lower values will
+   *        match.
    * @return the created range {@link SearchQuery}.
    */
-  SearchQuery createRangeQuery(String field, String minimum, String maximum,
-      boolean minimumInclusive, boolean maximumInclusive);
+  SearchQuery createRangeQuery(String field, String minimum, String maximum, boolean minimumInclusive,
+      boolean maximumInclusive);
 
   /**
-   * This method creates a {@link ComplexSearchQuery complex query}. You can
-   * then add sub-queries to this query with logical operations.
+   * This method creates a {@link ComplexSearchQuery complex query}. You can then add sub-queries to this
+   * query with logical operations.
    * 
    * @return the created query.
    */
@@ -158,6 +151,7 @@ public interface SearchQueryBuilder extends Refreshable {
   /**
    * {@inheritDoc}
    */
+  @Override
   boolean refresh();
 
 }

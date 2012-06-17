@@ -7,8 +7,7 @@ import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
- * This is the exception thrown if a given
- * {@link net.sf.mmm.search.engine.api.SearchHit#getId() entry ID} is
+ * This is the exception thrown if a given {@link net.sf.mmm.search.engine.api.SearchHit#getId() entry ID} is
  * invalid.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

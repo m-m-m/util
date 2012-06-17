@@ -8,15 +8,13 @@ import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 
 /**
- * This is the abstract base implementation of the {@link ManagedSearchEngine}
- * interface.
+ * This is the abstract base implementation of the {@link ManagedSearchEngine} interface.
  * 
  * @see #initialize()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractSearchEngine extends AbstractLoggableObject implements
-    ManagedSearchEngine {
+public abstract class AbstractSearchEngine extends AbstractLoggableObject implements ManagedSearchEngine {
 
   /** The {@link PeriodicRefresher}. */
   private final PeriodicRefresher periodicRefresher;
@@ -33,8 +31,7 @@ public abstract class AbstractSearchEngine extends AbstractLoggableObject implem
   }
 
   /**
-   * This method initializes this engine. It should be called after
-   * construction.
+   * This method initializes this engine. It should be called after construction.
    */
   public void initialize() {
 
@@ -46,6 +43,7 @@ public abstract class AbstractSearchEngine extends AbstractLoggableObject implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close() {
 
     if (this.periodicRefresher != null) {

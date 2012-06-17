@@ -57,6 +57,7 @@ public class SearchSourceBean extends AbstractAttributeReadId<String> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     return this.id;
@@ -65,6 +66,7 @@ public class SearchSourceBean extends AbstractAttributeReadId<String> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return this.title;
@@ -73,6 +75,7 @@ public class SearchSourceBean extends AbstractAttributeReadId<String> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getUrlPrefix() {
 
     return this.urlPrefix;

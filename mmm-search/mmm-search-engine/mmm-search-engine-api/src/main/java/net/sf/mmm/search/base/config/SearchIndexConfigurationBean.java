@@ -10,8 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 
 /**
- * This is implementation of {@link SearchIndexConfiguration} as JAXB-ready
- * Java-Bean.
+ * This is implementation of {@link SearchIndexConfiguration} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -34,6 +33,7 @@ public class SearchIndexConfigurationBean implements SearchIndexConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLocation() {
 
     return this.location;

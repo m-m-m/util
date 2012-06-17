@@ -7,8 +7,7 @@ import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 
 /**
- * This is the abstract base implementation of the {@link SearchEntry}
- * interface.
+ * This is the abstract base implementation of the {@link SearchEntry} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -25,6 +24,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return getFieldAsString(FIELD_TITLE);
@@ -33,6 +33,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getUri() {
 
     return getFieldAsString(FIELD_URI);
@@ -41,6 +42,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public Long getId() {
 
     return getField(FIELD_ID, Long.class);
@@ -49,6 +51,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object getCustomId() {
 
     return getField(FIELD_CUSTOM_ID);
@@ -57,6 +60,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getText() {
 
     String text = getFieldAsString(FIELD_TEXT);
@@ -70,6 +74,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return getFieldAsString(FIELD_TYPE);
@@ -78,6 +83,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getCreator() {
 
     return getFieldAsString(FIELD_CREATOR);
@@ -86,6 +92,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getSource() {
 
     return getFieldAsString(FIELD_SOURCE);
@@ -94,6 +101,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public Long getSize() {
 
     return getField(FIELD_SIZE, Long.class);
@@ -102,6 +110,7 @@ public abstract class AbstractSearchEntry extends AbstractLoggableObject impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getFieldAsString(String name) {
 
     return getField(name, String.class);

@@ -15,8 +15,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.xml.base.jaxb.XmlAdapterEnum;
 
 /**
- * This is the implementation of {@link SearchFieldConfiguration} as JAXB-ready
- * Java-Bean.
+ * This is the implementation of {@link SearchFieldConfiguration} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -94,6 +93,7 @@ public class SearchFieldConfigurationBean implements SearchFieldConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
 
     return this.name;
@@ -111,6 +111,7 @@ public class SearchFieldConfigurationBean implements SearchFieldConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchFieldType getType() {
 
     if (this.type == null) {
@@ -131,6 +132,7 @@ public class SearchFieldConfigurationBean implements SearchFieldConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchFieldMode getMode() {
 
     return this.mode;
@@ -148,6 +150,7 @@ public class SearchFieldConfigurationBean implements SearchFieldConfiguration {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isHidden() {
 
     return this.hidden;

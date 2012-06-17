@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import net.sf.mmm.search.api.config.SearchSource;
 
 /**
- * This is the implementation of
- * {@link net.sf.mmm.search.api.config.SearchConfiguration} as JAXB-ready
+ * This is the implementation of {@link net.sf.mmm.search.api.config.SearchConfiguration} as JAXB-ready
  * Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -42,6 +41,7 @@ public class SearchConfigurationBean extends AbstractSearchConfigurationBean {
   /**
    * @return the sources
    */
+  @Override
   public Collection<? extends SearchSource> getSources() {
 
     return this.sources;
@@ -50,6 +50,7 @@ public class SearchConfigurationBean extends AbstractSearchConfigurationBean {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchSourceBean getSource(String id) {
 
     return getSourceMap().get(id);

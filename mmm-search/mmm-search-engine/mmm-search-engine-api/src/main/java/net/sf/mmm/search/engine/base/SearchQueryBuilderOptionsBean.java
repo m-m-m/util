@@ -33,6 +33,7 @@ public class SearchQueryBuilderOptionsBean implements SearchQueryBuilderOptions 
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isRequireTerms() {
 
     return this.requireTerms;
@@ -49,6 +50,7 @@ public class SearchQueryBuilderOptionsBean implements SearchQueryBuilderOptions 
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchQueryErrorHandler getErrorHandler() {
 
     return this.errorHander;

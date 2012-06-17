@@ -21,8 +21,7 @@ public class SearchEngineConfigurationHolderImpl extends
   /**
    * The dummy constructor.
    * 
-   * @param configuration is the {@link SearchEngineConfigurationBean} for
-   *        {@link #getBean()}.
+   * @param configuration is the {@link SearchEngineConfigurationBean} for {@link #getBean()}.
    */
   public SearchEngineConfigurationHolderImpl(SearchEngineConfigurationBean configuration) {
 
@@ -32,14 +31,12 @@ public class SearchEngineConfigurationHolderImpl extends
   /**
    * The constructor.
    * 
-   * @param configuration is the {@link SearchEngineConfigurationBean} for
-   *        {@link #getBean()}.
+   * @param configuration is the {@link SearchEngineConfigurationBean} for {@link #getBean()}.
    * @param resource is the {@link DataResource}.
-   * @param loader is the {@link SearchEngineConfigurationLoaderImpl} for
-   *        {@link #refresh()}.
+   * @param loader is the {@link SearchEngineConfigurationLoaderImpl} for {@link #refresh()}.
    */
-  public SearchEngineConfigurationHolderImpl(SearchEngineConfigurationBean configuration,
-      DataResource resource, SearchEngineConfigurationLoaderImpl loader) {
+  public SearchEngineConfigurationHolderImpl(SearchEngineConfigurationBean configuration, DataResource resource,
+      SearchEngineConfigurationLoaderImpl loader) {
 
     super(configuration, resource, loader, false);
   }

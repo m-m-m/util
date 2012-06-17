@@ -40,20 +40,16 @@ public class SearchViewContextBean implements SearchViewContext {
 
   /**
    * The constructor.<br>
-   * It will fill all parameters except for
-   * {@link #setResultPage(SearchResultPage) result-page} and
+   * It will fill all parameters except for {@link #setResultPage(SearchResultPage) result-page} and
    * {@link #setException(NlsRuntimeException) exception}.<br>
-   * ATTENTION: This constructor will automatically
-   * {@link ServletRequest#setAttribute(String, Object) set}
-   * {@link SearchViewContextBean itself} (this) as attribute of the given
-   * <code>request</code>.
+   * ATTENTION: This constructor will automatically {@link ServletRequest#setAttribute(String, Object) set}
+   * {@link SearchViewContextBean itself} (this) as attribute of the given <code>request</code>.
    * 
    * @param request is the servlet request.
    * @param logic is the {@link SearchViewLogic}.
    * @param viewConfiguration is the {@link SearchViewConfiguration}.
    */
-  public SearchViewContextBean(ServletRequest request, SearchViewLogic logic,
-      SearchViewConfiguration viewConfiguration) {
+  public SearchViewContextBean(ServletRequest request, SearchViewLogic logic, SearchViewConfiguration viewConfiguration) {
 
     super();
     this.logic = logic;
@@ -65,6 +61,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchViewRequestParameters getRequestParameters() {
 
     return this.requestParameters;
@@ -73,6 +70,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchViewLogic getLogic() {
 
     return this.logic;
@@ -81,6 +79,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchViewConfiguration getViewConfiguration() {
 
     return this.viewConfiguration;
@@ -89,6 +88,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchResultPage getResultPage() {
 
     return this.resultPage;
@@ -105,6 +105,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEntry getEntry() {
 
     return this.entry;
@@ -121,6 +122,7 @@ public class SearchViewContextBean implements SearchViewContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsRuntimeException getException() {
 
     return this.exception;

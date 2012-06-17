@@ -6,8 +6,7 @@ package net.sf.mmm.search.engine.api.config;
 import net.sf.mmm.search.api.config.SearchConfigurationLoader;
 
 /**
- * This is the {@link SearchConfigurationLoader} for the
- * {@link SearchEngineConfiguration}.
+ * This is the {@link SearchConfigurationLoader} for the {@link SearchEngineConfiguration}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -17,11 +16,13 @@ public interface SearchEngineConfigurationLoader extends SearchConfigurationLoad
   /**
    * {@inheritDoc}
    */
+  @Override
   SearchEngineConfigurationHolder loadConfiguration();
 
   /**
    * {@inheritDoc}
    */
+  @Override
   SearchEngineConfigurationHolder loadConfiguration(String locationUrl);
 
 }

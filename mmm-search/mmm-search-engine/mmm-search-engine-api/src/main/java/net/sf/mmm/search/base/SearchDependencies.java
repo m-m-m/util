@@ -8,9 +8,8 @@ import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.math.api.MathUtil;
 
 /**
- * This interface bundles the dependencies for the search. It contains
- * components required by the {@link net.sf.mmm.search.engine.api.SearchEngine},
- * indexer, etc.
+ * This interface bundles the dependencies for the search. It contains components required by the
+ * {@link net.sf.mmm.search.engine.api.SearchEngine}, indexer, etc.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

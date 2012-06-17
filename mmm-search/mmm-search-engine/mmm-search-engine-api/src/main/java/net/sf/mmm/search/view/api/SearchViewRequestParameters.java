@@ -6,8 +6,8 @@ package net.sf.mmm.search.view.api;
 import net.sf.mmm.search.api.SearchEntry;
 
 /**
- * This is the interface for accessing
- * {@link javax.servlet.ServletRequest#getParameter(String) request parameters}.
+ * This is the interface for accessing {@link javax.servlet.ServletRequest#getParameter(String) request
+ * parameters}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -42,49 +42,47 @@ public interface SearchViewRequestParameters {
   String PARAMETER_ID = "id";
 
   /**
-   * This method gets the {@link net.sf.mmm.search.engine.api.SearchHit#getId()
-   * ID} from the request parameters.
+   * This method gets the {@link net.sf.mmm.search.engine.api.SearchHit#getId() ID} from the request
+   * parameters.
    * 
    * @return the id. Will be the empty string if NOT set in request.
    */
   String getId();
 
   /**
-   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_TYPE
-   * type} from the request parameters.
+   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_TYPE type} from the request
+   * parameters.
    * 
    * @return the type. Will be the empty string if NOT set in request.
    */
   String getType();
 
   /**
-   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_TITLE
-   * title} from the request parameters.
+   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_TITLE title} from the request
+   * parameters.
    * 
    * @return the title. Will be the empty string if NOT set in request.
    */
   String getTitle();
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.search.api.SearchEntry#FIELD_CREATOR creator} from the
-   * request parameters.
+   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_CREATOR creator} from the request
+   * parameters.
    * 
    * @return the creator. Will be the empty string if NOT set in request.
    */
   String getCreator();
 
   /**
-   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_SOURCE
-   * source} from the request parameters.
+   * This method gets the {@link net.sf.mmm.search.api.SearchEntry#FIELD_SOURCE source} from the request
+   * parameters.
    * 
    * @return the source. Will be the empty string if NOT set in request.
    */
   String getSource();
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.search.engine.api.SearchQueryBuilder#parseStandardQuery(String)
+   * This method gets the {@link net.sf.mmm.search.engine.api.SearchQueryBuilder#parseStandardQuery(String)
    * query} from the request parameters.
    * 
    * @return the query. Will be the empty string if NOT set in request.
@@ -92,29 +90,26 @@ public interface SearchViewRequestParameters {
   String getQuery();
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.search.engine.api.SearchResultPage#getTotalHitCount()
-   * total number of hits} from the request parameters.
+   * This method gets the {@link net.sf.mmm.search.engine.api.SearchResultPage#getTotalHitCount() total number
+   * of hits} from the request parameters.
    * 
    * @return the totalHitCount or <code>-1</code> if NOT set in request.
    */
   int getTotalHitCount();
 
   /**
-   * This method gets the number of
-   * {@link net.sf.mmm.search.engine.api.SearchResultPage#getHitsPerPage() hits
+   * This method gets the number of {@link net.sf.mmm.search.engine.api.SearchResultPage#getHitsPerPage() hits
    * per page} from the request parameters.
    * 
    * @return the hitsPerPage. Will be
-   *         {@link net.sf.mmm.search.engine.api.SearchResultPage#DEFAULT_HITS_PER_PAGE}
-   *         if NOT set in request.
+   *         {@link net.sf.mmm.search.engine.api.SearchResultPage#DEFAULT_HITS_PER_PAGE} if NOT set in
+   *         request.
    */
   int getHitsPerPage();
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.search.engine.api.SearchResultPage#getPageIndex()
-   * page-index} from the request parameters.
+   * This method gets the {@link net.sf.mmm.search.engine.api.SearchResultPage#getPageIndex() page-index} from
+   * the request parameters.
    * 
    * @return the pageNumber. Will be <code>0</code> if NOT set in request.
    */

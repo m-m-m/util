@@ -1,7 +1,7 @@
 /* $Id$
  * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.base.server;
+package net.sf.mmm.service.impl.server;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;

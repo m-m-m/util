@@ -7,8 +7,7 @@ import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface for the component that allows to create a
- * {@link ManagedSearchEngine}.
+ * This is the interface for the component that allows to create a {@link ManagedSearchEngine}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -17,8 +16,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 public interface SearchEngineBuilder {
 
   /**
-   * This method creates a {@link ManagedSearchEngine} for the given
-   * <code>configuration</code>.
+   * This method creates a {@link ManagedSearchEngine} for the given <code>configuration</code>.
    * 
    * @see net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader
    * 

@@ -242,7 +242,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  public void addSuppressedExceptions(Throwable suppressed) {
+  public void addSuppressedException(Throwable suppressed) {
 
     // only available since Java 1.7
     // super.addSuppressed(suppressed);

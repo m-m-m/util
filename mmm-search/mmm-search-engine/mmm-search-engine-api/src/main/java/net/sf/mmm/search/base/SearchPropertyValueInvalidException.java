@@ -7,9 +7,8 @@ import net.sf.mmm.search.NlsBundleSearchApi;
 import net.sf.mmm.search.api.SearchException;
 
 /**
- * This is the exception thrown if a
- * {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String) property value}
- * is invalid.
+ * This is the exception thrown if a {@link net.sf.mmm.search.api.SearchEntry#getFieldAsString(String)
+ * property value} is invalid.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -26,8 +25,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(String propertyName, String value) {
 
-    super(NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value, KEY_PROPERTY,
-        propertyName));
+    super(NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value, KEY_PROPERTY, propertyName));
   }
 
   /**
@@ -39,8 +37,7 @@ public class SearchPropertyValueInvalidException extends SearchException {
    */
   public SearchPropertyValueInvalidException(Throwable nested, String propertyName, String value) {
 
-    super(nested, NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value,
-        KEY_PROPERTY, propertyName));
+    super(nested, NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value, KEY_PROPERTY, propertyName));
   }
 
 }

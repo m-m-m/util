@@ -6,8 +6,7 @@ package net.sf.mmm.search.api.config;
 import net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolder;
 
 /**
- * This is the interface for a container {@link #getBean() holding} the
- * {@link SearchConfiguration}.
+ * This is the interface for a container {@link #getBean() holding} the {@link SearchConfiguration}.
  * 
  * @see JaxbBeanHolder
  * 
@@ -16,5 +15,7 @@ import net.sf.mmm.util.xml.base.jaxb.JaxbBeanHolder;
  * @since 1.0.0
  */
 public interface SearchConfigurationHolder<T extends SearchConfiguration> extends JaxbBeanHolder<T> {
+
+  // nothing to add...
 
 }

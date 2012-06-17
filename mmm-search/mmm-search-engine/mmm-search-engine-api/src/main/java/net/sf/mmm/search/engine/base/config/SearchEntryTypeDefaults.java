@@ -11,8 +11,7 @@ import java.util.List;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 
 /**
- * This class contains the {@link #getDefaultTypes() default}
- * {@link SearchEntryType}s.
+ * This class contains the {@link #getDefaultTypes() default} {@link SearchEntryType}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -27,8 +26,8 @@ public final class SearchEntryTypeDefaults {
   }
 
   /** @see #getEntryTypeAny() */
-  private static final SearchEntryType ENTRY_TYPE_ANY = new SearchEntryTypeBean(
-      SearchEntryType.ID_ANY, "Any", "file.png");
+  private static final SearchEntryType ENTRY_TYPE_ANY = new SearchEntryTypeBean(SearchEntryType.ID_ANY, "Any",
+      "file.png");
 
   /**
    * The default types.
@@ -67,8 +66,7 @@ public final class SearchEntryTypeDefaults {
   }
 
   /**
-   * This method gets the default {@link SearchEntryType} for
-   * {@link SearchEntryType#ID_ANY}.
+   * This method gets the default {@link SearchEntryType} for {@link SearchEntryType#ID_ANY}.
    * 
    * @return the any type.
    */
@@ -78,8 +76,7 @@ public final class SearchEntryTypeDefaults {
   }
 
   /**
-   * This method gets the {@link Collection} with the default
-   * {@link SearchEntryType}s.
+   * This method gets the {@link Collection} with the default {@link SearchEntryType}s.
    * 
    * @return the default {@link SearchEntryType}s.
    */
