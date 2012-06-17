@@ -16,7 +16,7 @@ import net.sf.mmm.util.reflect.api.ClassName;
  * Helper class to deal with {@link NlsBundle} interfaces.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class NlsBundleHelper {
 

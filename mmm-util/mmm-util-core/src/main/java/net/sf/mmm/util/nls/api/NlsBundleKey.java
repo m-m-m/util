@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  * {@link java.lang.reflect.Method#getName() name of the method} is used as key.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

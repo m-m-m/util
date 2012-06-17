@@ -15,7 +15,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * {@link VersionIdentifier#getTimestamp() timestamp}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class VersionIdentifierFormatterTimestamp extends AbstractVersionIdentifierFormatterString {
 

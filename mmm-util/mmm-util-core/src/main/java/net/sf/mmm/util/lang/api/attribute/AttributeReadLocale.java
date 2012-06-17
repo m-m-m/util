@@ -9,7 +9,7 @@ import java.util.Locale;
  * This interface gives {@link #getLocale() read} access to the {@link java.util.Locale} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface AttributeReadLocale {
 

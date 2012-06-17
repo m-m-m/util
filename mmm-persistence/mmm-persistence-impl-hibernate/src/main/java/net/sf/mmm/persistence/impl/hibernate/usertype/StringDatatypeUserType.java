@@ -3,14 +3,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.hibernate.usertype;
 
+import java.sql.Types;
+
 import net.sf.mmm.util.lang.api.Datatype;
 
-import org.hsqldb.types.Types;
-
 /**
- * This is the abstract base implementation of
- * {@link org.hibernate.usertype.UserType} to map a {@link String} based
- * {@link Datatype}.
+ * This is the abstract base implementation of {@link org.hibernate.usertype.UserType} to map a {@link String}
+ * based {@link Datatype}.
  * 
  * @param <T> the generic for the adapted {@link Datatype}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -21,8 +20,7 @@ public class StringDatatypeUserType<T extends Datatype<String>> extends Datatype
   /**
    * The constructor.
    * 
-   * @param datatype is the {@link #returnedClass() java class} representing the
-   *        adapted {@link Datatype}.
+   * @param datatype is the {@link #returnedClass() java class} representing the adapted {@link Datatype}.
    */
   public StringDatatypeUserType(Class<T> datatype) {
 

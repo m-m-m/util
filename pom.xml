@@ -12,28 +12,26 @@
   <inceptionYear>2001</inceptionYear>
   
   <modules>
-    <module>mmm-data</module>
-    <!-- <module>mmm-gui</module> -->
     <module>mmm-util</module>
+    <module>mmm-client</module>
     <module>mmm-l10n</module>
     <module>mmm-search</module>
+    <module>mmm-service</module>
     <module>mmm-content-parser</module>
     <module>mmm-transaction</module>
     <module>mmm-persistence</module>
     <module>mmm-security</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
-    <!-- only local -->
-    <!-- <module>mmm-ui</module> -->
     <module>mmm-setup</module>
     <module>mmm-test</module>
+    <module>mmm-data</module>
   </modules>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
-  
   
   <build>
     <!-- Only for maven 3.0 and above... -->
@@ -165,6 +163,28 @@
           <artifactId>maven-gpg-plugin</artifactId>
           <version>1.1</version>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>gwt-maven-plugin</artifactId>
+          <version>2.4.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-dev</artifactId>
+              <version>2.4.0</version>
+            </dependency>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-user</artifactId>
+              <version>2.4.0</version>
+            </dependency>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-servlet</artifactId>
+              <version>2.4.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>        
       </plugins>
     </pluginManagement>
     
@@ -191,6 +211,7 @@
            <fork>true</fork>
          </configuration>
       </plugin>
+      
       <!-- advanced manifests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -203,12 +224,39 @@
             </manifest>
           </archive>
         </configuration>
-      </plugin>      
+      </plugin>
+      
+      <!-- also generate source JARs -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- avoid version in local war files, exclude sources JARs from WARs -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+        	<packagingExcludes>WEB-INF/lib/*-sources.jar</packagingExcludes>
+          <warName>${project.artifactId}</warName>
+        </configuration>
+      </plugin>
+      
+      <!-- settings for eclipse (mvn eclipse:eclipse) -->   
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-eclipse-plugin</artifactId>
          <configuration>
-           <buildOutputDirectory>eclipse-target</buildOutputDirectory>
+           <buildOutputDirectory>eclipse-target/classes</buildOutputDirectory>
            <additionalBuildcommands>
              <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
            </additionalBuildcommands>
@@ -238,6 +286,8 @@
            </additionalConfig>
          </configuration>
       </plugin>
+
+      <!-- site generation settings-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId> 
         <artifactId>maven-site-plugin</artifactId> 
@@ -427,20 +477,6 @@
       <id>mmm.deploy</id>
       <build>
         <plugins> 
-          <!-- also generate source JARs -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
           <!-- also generate javadoc JARs -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -475,6 +511,18 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <!-- separate eclipse build from command-line... -->
+      <id>mmm.eclipse</id>
+      <activation>
+        <property>
+          <name>eclipse.application</name>
+        </property>
+      </activation>
+      <build>
+        <directory>eclipse-target</directory>
+      </build>
+    </profile>    
   </profiles>
   <issueManagement>
     <system>trac</system>

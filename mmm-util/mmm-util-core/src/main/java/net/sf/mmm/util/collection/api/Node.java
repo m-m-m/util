@@ -8,7 +8,7 @@ package net.sf.mmm.util.collection.api;
  * 
  * @param <PARENT> the generic type of the parent. Typically a self reference (see {@link TreeNode}).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface Node<PARENT> {
 

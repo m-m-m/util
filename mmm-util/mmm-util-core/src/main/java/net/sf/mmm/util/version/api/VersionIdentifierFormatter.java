@@ -9,7 +9,7 @@ import net.sf.mmm.util.lang.api.Formatter;
  * This is the interface used to format a {@link VersionIdentifier}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface VersionIdentifierFormatter extends Formatter<VersionIdentifier> {
 

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * {@link NlsMessage#getInternationalizedMessage() message} for a method of an {@link NlsBundle} interface.<br/>
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

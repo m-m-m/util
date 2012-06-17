@@ -109,7 +109,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
       try {
         this.inputStream.close();
       } catch (IOException e1) {
-        xmlEx.addSuppressed(e1);
+        xmlEx.addSuppressedExceptions(e1);
       }
       throw xmlEx;
     }

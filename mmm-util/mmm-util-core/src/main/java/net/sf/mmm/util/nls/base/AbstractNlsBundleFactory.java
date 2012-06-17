@@ -30,7 +30,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * This is the abstract base implementation of {@link NlsBundleFactory}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @NlsBundleOptions
 public abstract class AbstractNlsBundleFactory extends AbstractComponent implements NlsBundleFactory {

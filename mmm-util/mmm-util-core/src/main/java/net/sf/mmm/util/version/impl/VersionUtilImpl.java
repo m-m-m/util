@@ -43,7 +43,7 @@ import net.sf.mmm.util.version.api.VersionUtil;
  * This is the abstract base-implementation of the {@link VersionUtil} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Singleton
 @Named

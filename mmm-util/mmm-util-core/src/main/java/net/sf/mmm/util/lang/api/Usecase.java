@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
  * further documentation of the usecase like the detailed description or links to further documentation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Documented
 @Retention(RetentionPolicy.CLASS)

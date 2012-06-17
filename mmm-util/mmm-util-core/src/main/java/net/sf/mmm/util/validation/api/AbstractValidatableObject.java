@@ -9,7 +9,7 @@ import net.sf.mmm.util.validation.base.ValidationState;
  * This is the abstract interface for an object, that can be {@link #validate(ValidationState) validated}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface AbstractValidatableObject {
 

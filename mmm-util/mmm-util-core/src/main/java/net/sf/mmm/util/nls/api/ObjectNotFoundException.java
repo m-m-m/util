@@ -50,7 +50,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is a description (e.g. the classname) of the object that was required but could NOT be
    *        found.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public ObjectNotFoundException(Throwable nested, Object object) {
 
@@ -64,7 +64,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    * @param object is a description (e.g. the classname) of the object that was required but could NOT be
    *        found.
    * @param key is the key to the required object.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public ObjectNotFoundException(Throwable nested, Object object, Object key) {
 

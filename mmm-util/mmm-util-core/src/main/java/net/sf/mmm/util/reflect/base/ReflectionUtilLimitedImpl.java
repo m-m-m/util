@@ -9,7 +9,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * TODO: this class ...
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class ReflectionUtilLimitedImpl implements ReflectionUtilLimited {
 

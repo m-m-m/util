@@ -13,7 +13,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * declared {@link ResourceBundle bundles}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @ComponentSpecification
 public interface NlsResourceBundleLocator {

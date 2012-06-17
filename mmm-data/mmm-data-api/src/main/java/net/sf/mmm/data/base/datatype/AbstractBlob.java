@@ -59,12 +59,8 @@ public abstract class AbstractBlob implements Blob {
   public void streamData(OutputStream outStream, long offset) throws RuntimeIoException {
 
     InputStream inputStream = getReadAccess(offset);
-    try {
-      // copy from input stream to ouput
-      this.streamUtil.transfer(inputStream, outStream, true);
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.COPY);
-    }
+    // copy from input stream to ouput
+    this.streamUtil.transfer(inputStream, outStream, true);
   }
 
   /**

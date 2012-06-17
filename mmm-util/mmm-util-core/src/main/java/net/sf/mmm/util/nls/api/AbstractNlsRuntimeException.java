@@ -34,7 +34,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /** @see #getUuid() */
   private UUID uuid;
 
-  /** @see #getSuppressed() */
+  /** @see #getSuppressedExceptions() */
   private List<Throwable> suppressedList;
 
   /**
@@ -166,7 +166,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
-  public void addSuppressed(Throwable suppressed) {
+  public void addSuppressedExceptions(Throwable suppressed) {
 
     // only available since Java 1.7
     // super.addSuppressed(suppressed);
@@ -183,7 +183,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
-  public Throwable[] getSuppressed() {
+  public Throwable[] getSuppressedExceptions() {
 
     // only available since Java 1.7
     // return super.getSuppressed();

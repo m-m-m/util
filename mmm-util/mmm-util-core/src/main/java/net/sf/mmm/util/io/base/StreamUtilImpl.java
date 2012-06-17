@@ -229,7 +229,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       } catch (Exception e) {
         RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
         if (t != null) {
-          t.addSuppressed(ex);
+          t.addSuppressedExceptions(ex);
         } else {
           t = ex;
         }
@@ -241,7 +241,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
         } catch (Exception e) {
           RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
           if (t != null) {
-            t.addSuppressed(ex);
+            t.addSuppressedExceptions(ex);
           } else {
             t = ex;
           }
@@ -274,7 +274,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       } catch (Exception e) {
         RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
         if (t != null) {
-          t.addSuppressed(ex);
+          t.addSuppressedExceptions(ex);
         } else {
           t = ex;
         }
@@ -286,7 +286,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
         } catch (Exception e) {
           RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
           if (t != null) {
-            t.addSuppressed(ex);
+            t.addSuppressedExceptions(ex);
           } else {
             t = ex;
           }
@@ -367,7 +367,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       } catch (Exception suppressed) {
         RuntimeIoException ex = new RuntimeIoException(suppressed, IoMode.CLOSE);
         if (t != null) {
-          t.addSuppressed(ex);
+          t.addSuppressedExceptions(ex);
         } else {
           throw ex;
         }
@@ -394,7 +394,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       } catch (Exception suppressed) {
         RuntimeIoException ex = new RuntimeIoException(suppressed, IoMode.CLOSE);
         if (t != null) {
-          t.addSuppressed(ex);
+          t.addSuppressedExceptions(ex);
         } else {
           throw ex;
         }
@@ -655,7 +655,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
         } catch (Exception e) {
           RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
           if (t != null) {
-            t.addSuppressed(ex);
+            t.addSuppressedExceptions(ex);
           } else {
             t = ex;
           }
@@ -666,7 +666,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
           } catch (Exception e) {
             RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
             if (t != null) {
-              t.addSuppressed(ex);
+              t.addSuppressedExceptions(ex);
             } else {
               t = ex;
             }
@@ -682,7 +682,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
             if (t == null) {
               throw rte;
             } else {
-              t.addSuppressed(rte);
+              t.addSuppressedExceptions(rte);
             }
           }
           if ((t != null) && doThrow) {

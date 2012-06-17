@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @see HorizontalAlignment
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public enum VerticalAlignment implements Datatype<String> {
 

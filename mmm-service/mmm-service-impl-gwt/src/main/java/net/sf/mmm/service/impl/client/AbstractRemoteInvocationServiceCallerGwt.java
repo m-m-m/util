@@ -26,7 +26,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractRemoteInvocationServiceCaller {
 
-  /** */
+  /** @see #performRequest(RemoteInvocationServiceQueueImpl) */
   private final RemoteInvocationGenericServiceGwtAsync genericService;
 
   /**
@@ -64,7 +64,6 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractR
       /**
        * {@inheritDoc}
        */
-      @Override
       public void onFailure(Throwable caught) {
 
         // TODO
@@ -74,7 +73,6 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractR
       /**
        * {@inheritDoc}
        */
-      @Override
       @SuppressWarnings({ "rawtypes", "unchecked" })
       public void onSuccess(RemoteInvocationGenericServiceResponse response) {
 

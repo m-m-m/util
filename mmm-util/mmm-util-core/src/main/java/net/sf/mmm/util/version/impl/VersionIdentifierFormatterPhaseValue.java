@@ -11,7 +11,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * {@link DevelopmentPhase#getValue() value} of the {@link VersionIdentifier#getPhase() phase}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class VersionIdentifierFormatterPhaseValue extends AbstractVersionIdentifierFormatterString {
 

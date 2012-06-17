@@ -10,7 +10,7 @@ import java.util.Locale;
  * {@link #getMessage(Locale) internationalization}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class SimpleValidationFailure extends AbstractValidationFailure {
 

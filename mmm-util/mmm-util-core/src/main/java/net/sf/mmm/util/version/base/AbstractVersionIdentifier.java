@@ -13,7 +13,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * This is the abstract base implementation of {@link VersionIdentifier}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 

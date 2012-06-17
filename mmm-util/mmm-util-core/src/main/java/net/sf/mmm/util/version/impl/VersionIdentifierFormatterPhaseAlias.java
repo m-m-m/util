@@ -11,7 +11,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * {@link VersionIdentifier#getPhaseAlias() phase alias}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class VersionIdentifierFormatterPhaseAlias extends AbstractVersionIdentifierFormatterString {
 

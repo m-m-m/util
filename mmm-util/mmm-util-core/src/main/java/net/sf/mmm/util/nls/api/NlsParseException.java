@@ -41,7 +41,7 @@ public class NlsParseException extends NlsRuntimeException {
    * @param value is the value that could NOT be parsed.
    * @param expected is the string or character that was expected but not found at the end of
    *        <code>value</code>.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public NlsParseException(Throwable nested, CharSequence value, CharSequence expected) {
 

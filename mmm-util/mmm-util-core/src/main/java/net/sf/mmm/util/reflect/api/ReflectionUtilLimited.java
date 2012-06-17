@@ -7,7 +7,7 @@ package net.sf.mmm.util.reflect.api;
  * This is a limited subset of {@link ReflectionUtil} that is GWT compatible.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface ReflectionUtilLimited {
 

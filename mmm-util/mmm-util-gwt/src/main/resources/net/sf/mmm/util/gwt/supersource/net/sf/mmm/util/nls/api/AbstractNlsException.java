@@ -27,7 +27,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** UID for serialization. */
   private static final long serialVersionUID = -9077132842682462106L;
 
-  /** @see #getSuppressed() */
+  /** @see #getSuppressedExceptions() */
   protected static final Throwable[] EMPTY_THROWABLE_ARRAY = new Throwable[0];
 
   /**
@@ -143,7 +143,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           buffer.append(trace[i].toString());
           buffer.append(LINE_SEPARATOR);
         }
-        for (Throwable suppressed : throwable.getSuppressed()) {
+        for (Throwable suppressed : throwable.getSuppressedExceptions()) {
           buffer.append("Suppressed: ");
           buffer.append(LINE_SEPARATOR);
           printStackTraceNested(suppressed, locale, resolver, buffer);
@@ -179,11 +179,11 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
       if (buffer instanceof PrintStream) {
         nested.printStackTrace((PrintStream) buffer);
       } else if (buffer instanceof PrintWriter) {
-        nested.printStackTrace((PrintWriter) buffer);
+        //nested.printStackTrace((PrintWriter) buffer);
       } else {
         StringWriter writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
-        nested.printStackTrace(printWriter);
+        //nested.printStackTrace(printWriter);
         printWriter.flush();
         buffer.append(writer.toString());
       }
@@ -236,7 +236,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  public void addSuppressed(Throwable suppressed) {
+  public void addSuppressedExceptions(Throwable suppressed) {
 
     // only available since Java 1.7
     // super.addSuppressed(suppressed);
@@ -253,7 +253,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  public Throwable[] getSuppressed() {
+  public Throwable[] getSuppressedExceptions() {
 
     // only available since Java 1.7
     // return super.getSuppressed();

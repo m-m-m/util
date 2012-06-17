@@ -11,7 +11,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * @see Alignment
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public enum Orientation implements Datatype<String> {
 

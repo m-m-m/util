@@ -33,7 +33,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** UID for serialization. */
   private static final long serialVersionUID = -9077132842682462106L;
 
-  /** @see #getSuppressed() */
+  /** @see #getSuppressedExceptions() */
   protected static final Throwable[] EMPTY_THROWABLE_ARRAY = new Throwable[0];
 
   /**
@@ -48,7 +48,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** @see #getUuid() */
   private final UUID uuid;
 
-  /** @see #getSuppressed() */
+  /** @see #getSuppressedExceptions() */
   private List<Throwable> suppressedList;
 
   /**
@@ -149,7 +149,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           buffer.append(trace[i].toString());
           buffer.append(LINE_SEPARATOR);
         }
-        for (Throwable suppressed : throwable.getSuppressed()) {
+        for (Throwable suppressed : throwable.getSuppressedExceptions()) {
           buffer.append("Suppressed: ");
           buffer.append(LINE_SEPARATOR);
           printStackTraceNested(suppressed, locale, resolver, buffer);
@@ -242,7 +242,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  public void addSuppressed(Throwable suppressed) {
+  public void addSuppressedExceptions(Throwable suppressed) {
 
     // only available since Java 1.7
     // super.addSuppressed(suppressed);
@@ -259,7 +259,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  public Throwable[] getSuppressed() {
+  public Throwable[] getSuppressedExceptions() {
 
     // only available since Java 1.7
     // return super.getSuppressed();

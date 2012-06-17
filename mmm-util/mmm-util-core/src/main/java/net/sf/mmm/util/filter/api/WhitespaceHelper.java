@@ -8,7 +8,7 @@ package net.sf.mmm.util.filter.api;
  * compatibility.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 final class WhitespaceHelper {
 

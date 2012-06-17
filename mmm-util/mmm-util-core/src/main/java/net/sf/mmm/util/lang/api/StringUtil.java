@@ -435,7 +435,7 @@ public interface StringUtil {
    * @param syntax is the {@link StringSyntax} defining {@link StringSyntax#getEscape() escape} as well as
    *        {@link StringSyntax#getQuoteStart() start} and {@link StringSyntax#getQuoteEnd() end} of elements.
    * @return the formatted string.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String toSeparatedString(Collection<?> collection, String separator, StringSyntax syntax);
 
@@ -455,7 +455,7 @@ public interface StringUtil {
    *        {@link StringSyntax#getQuoteStart() start} and {@link StringSyntax#getQuoteEnd() end} of elements.
    * @param formatter is the {@link Formatter} to use.
    * @return the formatted string.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax, Formatter<E> formatter);
 
@@ -475,7 +475,7 @@ public interface StringUtil {
    *        {@link StringSyntax#getQuoteStart() start} and {@link StringSyntax#getQuoteEnd() end} of elements.
    * @param formatter is the {@link Formatter} to use.
    * @param buffer is where the separated string is {@link Appendable#append(CharSequence) appended} to.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax, Formatter<E> formatter,
       Appendable buffer);
@@ -492,7 +492,7 @@ public interface StringUtil {
    * @param syntax is the {@link StringSyntax} defining {@link StringSyntax#getEscape() escape} as well as
    *        {@link StringSyntax#getQuoteStart() start} and {@link StringSyntax#getQuoteEnd() end} of elements.
    * @return the {@link List} of elements from <code>separatedString</code>.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   List<String> fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax);
 
@@ -508,7 +508,7 @@ public interface StringUtil {
    * @param syntax is the {@link StringSyntax} defining {@link StringSyntax#getEscape() escape} as well as
    *        {@link StringSyntax#getQuoteStart() start} and {@link StringSyntax#getQuoteEnd() end} of elements.
    * @param collection is where to add the elements to. This should be initially empty.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<String> collection);
@@ -530,7 +530,7 @@ public interface StringUtil {
    * @param collection is where to add the elements to. This should be initially empty.
    * @param converter is used to parse the given elements from {@link String} to their actual type (
    *        {@literal <E>}).
-   * @since 2.0.2
+   * @since 3.0.0
    */
   <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<E> collection, ValueConverter<String, E> converter);
@@ -553,7 +553,7 @@ public interface StringUtil {
    * @param converter is used to parse the given elements from {@link String} to their actual type (
    *        {@literal <E>}). May be the {@link net.sf.mmm.util.value.api.GenericValueConverter}.
    * @param type is the {@link Class} reflecting the elements to add to <code>collection</code>.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type);

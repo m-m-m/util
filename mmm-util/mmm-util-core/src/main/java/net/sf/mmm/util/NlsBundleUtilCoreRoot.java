@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * This class holds the {@link NlsBundle internationalized messages} for this module.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @NlsBundleLocation(bundleName = "NlsBundleUtilCore")
 public interface NlsBundleUtilCoreRoot extends NlsBundle {

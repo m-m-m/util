@@ -9,7 +9,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * An {@link ObjectMismatchException} is thrown if an object or value do NOT match as expected.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class ObjectMismatchException extends NlsRuntimeException {
 

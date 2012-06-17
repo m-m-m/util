@@ -63,7 +63,7 @@ package net.sf.mmm.util.nls.api;
  * @see NlsBundleKey
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @SuppressWarnings("javadoc")
 public abstract interface NlsBundle {

@@ -110,28 +110,28 @@ public interface NlsObject {
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
    * 
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String KEY_USER = "user";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
    * 
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String KEY_EXISTING = "existing";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
    * 
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String KEY_EXPECTED = "expected";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
    * 
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String KEY_CONTAINER = "container";
 

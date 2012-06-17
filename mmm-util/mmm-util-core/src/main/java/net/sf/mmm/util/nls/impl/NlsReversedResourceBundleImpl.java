@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
  * a {@link ResourceBundle#getString(String) message}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle {
 

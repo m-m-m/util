@@ -13,7 +13,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * @see Iso8601Util
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @ComponentSpecification
 public interface Iso8601UtilLimited {
@@ -50,7 +50,7 @@ public interface Iso8601UtilLimited {
    * @return the given <code>calendar</code> as date string.
    * @param extended if <code>false</code> the basic format ("yyyyMMdd") is used, if <code>true</code> the
    *        extended format ("yyyy-MM-dd") is used.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String formatDate(Date date, boolean extended);
 
@@ -62,7 +62,7 @@ public interface Iso8601UtilLimited {
    * @param extended if <code>false</code> the basic date format ("yyyyMMdd") is used, if <code>true</code>
    *        the extended date format ("yyyy-MM-dd") is used.
    * @param buffer is where to append the formatted date.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   void formatDate(Date date, boolean extended, Appendable buffer);
 
@@ -86,7 +86,7 @@ public interface Iso8601UtilLimited {
    * @param extendedTime if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code>
    *        the extended time format ("HH:mm:ss") is used.
    * @return the given <code>calendar</code> as date string.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   String formatDateTime(Date date, boolean extendedDate, boolean extendedTime);
 
@@ -100,7 +100,7 @@ public interface Iso8601UtilLimited {
    * @param extendedTime if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code>
    *        the extended time format ("HH:mm:ss") is used.
    * @param buffer is where to append the formatted date and time.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, Appendable buffer);
 
@@ -111,7 +111,7 @@ public interface Iso8601UtilLimited {
    * @param extended if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code> the
    *        extended time format ("HH:mm:ss") is used.
    * @param buffer is where to append the formatted date.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   void formatTime(Date date, boolean extended, Appendable buffer);
 

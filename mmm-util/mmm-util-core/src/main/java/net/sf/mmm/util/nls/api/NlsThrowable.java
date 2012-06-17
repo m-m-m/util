@@ -140,20 +140,20 @@ public interface NlsThrowable extends NlsObject {
    * </pre>
    * 
    * @param suppressed is the {@link Throwable} to add.
-   * @since 2.0.2
+   * @since 3.0.0
    */
-  void addSuppressed(Throwable suppressed);
+  void addSuppressedExceptions(Throwable suppressed);
 
   /**
-   * Returns an array containing all of the exceptions that were {@link #addSuppressed(Throwable) suppressed},
+   * Returns an array containing all of the exceptions that were {@link #addSuppressedExceptions(Throwable) suppressed},
    * typically by the {@code try} -with-resources statement, in order to deliver this exception.<br/>
    * 
    * See <code>Throwable.getSuppressed()</code>.
    * 
    * @return an array containing all of the exceptions that have been added via
-   *         {@link #addSuppressed(Throwable)}.
-   * @since 2.0.2
+   *         {@link #addSuppressedExceptions(Throwable)}.
+   * @since 3.0.0
    */
-  Throwable[] getSuppressed();
+  Throwable[] getSuppressedExceptions();
 
 }

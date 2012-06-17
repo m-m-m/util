@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
  * {@link #createVersionIdentifier(String) parse} a a version {@link String} to a {@link VersionIdentifier}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @ComponentSpecification
 public interface VersionUtil {

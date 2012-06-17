@@ -10,7 +10,7 @@ package net.sf.mmm.util.nls.api;
  * @see NlsAccess#getBundleFactory()
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface NlsBundleFactory {
 

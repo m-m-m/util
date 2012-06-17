@@ -19,21 +19,19 @@ import net.sf.mmm.data.base.AbstractDataObject;
 import net.sf.mmm.data.base.reflection.AbstractMutableDataReflectionService;
 import net.sf.mmm.data.impl.entity.resource.DataFolderImpl;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
-import net.sf.mmm.util.reflect.api.CastFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is the abstract base implementation of the {@link DataRepository}
- * interface.
+ * This is the abstract base implementation of the {@link DataRepository} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataRepository extends AbstractLoggableComponent implements
-    DataRepository {
+public abstract class AbstractDataRepository extends AbstractLoggableComponent implements DataRepository {
 
   /** @see #getReflectionService() */
   private AbstractMutableDataReflectionService contentModel;
@@ -66,24 +64,21 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   }
 
   /**
-   * This method handles the cast of a <code>object</code> to the given
-   * <code>entityClass</code>.
+   * This method handles the cast of a <code>object</code> to the given <code>entityClass</code>.
    * 
    * @param <E> is the generic type of the <code>entityClass</code>.
    * @param object is the object to cast.
    * @param entityClass is the expected type of the given <code>object</code>.
    * @return the given <code>object</code> casted to <code>entityClass</code>.
-   * @throws CastFailedException if the cast failed because the given
-   *         <code>object</code> is NOT compatible with the given
-   *         <code>entityClass</code>.
+   * @throws NlsClassCastException if the cast failed because the given <code>object</code> is NOT compatible
+   *         with the given <code>entityClass</code>.
    */
-  protected <E extends DataObjectView> E cast(DataObjectView object, Class<E> entityClass)
-      throws CastFailedException {
+  protected <E extends DataObjectView> E cast(DataObjectView object, Class<E> entityClass) throws NlsClassCastException {
 
     try {
       return entityClass.cast(object);
     } catch (ClassCastException e) {
-      throw new CastFailedException(e, object, object.getClass(), entityClass);
+      throw new NlsClassCastException(e, object, entityClass);
     }
   }
 
@@ -98,8 +93,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public <E extends DataEntityResourceView> E getByPath(String path, Class<E> entityClass)
-      throws DataException {
+  public <E extends DataEntityResourceView> E getByPath(String path, Class<E> entityClass) throws DataException {
 
     return cast(getByPath(path), entityClass);
   }
@@ -113,8 +107,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   }
 
   /**
-   * @param contentModel the {@link #getReflectionService() content-model} to
-   *        set.
+   * @param contentModel the {@link #getReflectionService() content-model} to set.
    */
   @Resource
   public void setContentModel(AbstractMutableDataReflectionService contentModel) {
@@ -147,8 +140,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
     return child;
   }
 
-  protected DataObjectView createInstance(DataClass<? extends DataObjectView> dataClass)
-      throws DataException {
+  protected DataObjectView createInstance(DataClass<? extends DataObjectView> dataClass) throws DataException {
 
     DataObjectView object;
     try {
@@ -164,8 +156,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public DataObjectView create(DataClass contentClass, String name, DataEntityResource parent)
-      throws DataException {
+  public DataObjectView create(DataClass contentClass, String name, DataEntityResource parent) throws DataException {
 
     AbstractDataObject object = (AbstractDataObject) createInstance(contentClass);
     // object.setName(name);

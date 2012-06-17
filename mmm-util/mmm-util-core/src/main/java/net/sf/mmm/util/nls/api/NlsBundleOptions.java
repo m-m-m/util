@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * This optional annotation is used to define a different name for an {@link NlsBundle} interface.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

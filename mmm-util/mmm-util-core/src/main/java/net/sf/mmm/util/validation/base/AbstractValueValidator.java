@@ -12,7 +12,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public abstract class AbstractValueValidator<V> implements ValueValidator<V> {
 

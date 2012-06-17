@@ -10,7 +10,7 @@ package net.sf.mmm.util.validation.api;
  * @param <V> is the generic type of the value that shall be validated.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface HasValueValidators<V> {
 

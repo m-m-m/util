@@ -12,7 +12,7 @@ import java.util.MissingResourceException;
  * fallback.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class NlsTemplateImplWithMessage extends NlsTemplateImpl {
 

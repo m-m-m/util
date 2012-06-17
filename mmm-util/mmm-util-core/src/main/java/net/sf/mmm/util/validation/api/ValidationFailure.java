@@ -10,7 +10,7 @@ import java.util.Locale;
  * This is the interface for a failure of a {@link ValueValidator#validate(Object) validation}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface ValidationFailure extends Serializable {
 

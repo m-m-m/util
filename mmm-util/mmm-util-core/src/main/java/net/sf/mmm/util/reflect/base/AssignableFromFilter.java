@@ -36,7 +36,7 @@ public class AssignableFromFilter implements Filter<Class<?>> {
    * @param superClass is the super-type defining which types to {@link #accept(Class) accept}.
    * @param excludeSuperClass - <code>true</code> if the given <code>superClass</code> itself shall NOT be
    *        {@link #accept(Class) accepted}, <code>false</code> otherwise.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public AssignableFromFilter(Class<?> superClass, boolean excludeSuperClass) {
 

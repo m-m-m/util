@@ -117,7 +117,7 @@ public final class NlsAccess {
    * This method gets the default {@link NlsBundleFactory}.
    * 
    * @return the default {@link NlsBundleFactory}.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public static NlsBundleFactory getBundleFactory() {
 
@@ -144,7 +144,7 @@ public final class NlsAccess {
    * phase of your application.
    * 
    * @param bundleFactory is the {@link NlsBundleFactory} to use by default.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public static void setBundleFactory(NlsBundleFactory bundleFactory) {
 

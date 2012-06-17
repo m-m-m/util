@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * -properties of an {@link NlsBundle} interface.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

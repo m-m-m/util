@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * artifacts like an entire software product.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface VersionIdentifier extends Comparable<VersionIdentifier>, Datatype<String> {
 

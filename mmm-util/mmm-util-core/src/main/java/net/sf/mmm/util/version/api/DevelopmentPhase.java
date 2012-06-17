@@ -12,7 +12,7 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
  * @see VersionIdentifier#getPhase()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public enum DevelopmentPhase implements Datatype<String> {
 

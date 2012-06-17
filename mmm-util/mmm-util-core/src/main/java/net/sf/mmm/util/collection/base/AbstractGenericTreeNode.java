@@ -19,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @param <PARENT> is the generic type of the {@link #getParent() parent}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT extends GenericTreeNode<CHILD, PARENT>>
     implements GenericTreeNode<CHILD, PARENT> {

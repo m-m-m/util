@@ -5,19 +5,16 @@ package net.sf.mmm.data.api.reflection.access;
 
 import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.security.api.SecurityException;
+import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.ReadOnlyException;
-import net.sf.mmm.util.reflect.api.CastFailedException;
 
 /**
- * This is the interface for an accessor used to
- * {@link #getFieldValue(DataObjectView) read} or
- * {@link #setFieldValue(DataObjectView, Object) write} a
- * {@link net.sf.mmm.data.api.reflection.DataField field} of a
- * {@link net.sf.mmm.data.api.DataObjectView content-object}. According to the
- * {@link net.sf.mmm.data.api.reflection.DataField#getModifiers() modifiers} the
- * field may be
- * {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly()
- * read-only}. Then the write access will NOT be allowed and therefore fail.
+ * This is the interface for an accessor used to {@link #getFieldValue(DataObjectView) read} or
+ * {@link #setFieldValue(DataObjectView, Object) write} a {@link net.sf.mmm.data.api.reflection.DataField
+ * field} of a {@link net.sf.mmm.data.api.DataObjectView content-object}. According to the
+ * {@link net.sf.mmm.data.api.reflection.DataField#getModifiers() modifiers} the field may be
+ * {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly() read-only}. Then the write access
+ * will NOT be allowed and therefore fail.
  * 
  * @param <CLASS> is the generic type for the bound of
  *        {@link net.sf.mmm.data.api.reflection.DataField#getJavaClass()}.
@@ -32,35 +29,25 @@ public interface DataFieldAccessor<CLASS extends DataObjectView, FIELD> {
    * 
    * @param object is where to read the field value from.
    * @return the value of the field. May be <code>null</code>.
-   * @throws CastFailedException if the given <code>value</code> is not
-   *         compatible with the
-   *         {@link net.sf.mmm.data.api.reflection.DataField#getFieldType()
-   *         type} of the field.
+   * @throws NlsClassCastException if the given <code>value</code> is not compatible with the
+   *         {@link net.sf.mmm.data.api.reflection.DataField#getFieldType() type} of the field.
    * @throws SecurityException is the access failed for security reasons.
    */
-  FIELD getFieldValue(CLASS object) throws CastFailedException, SecurityException;
+  FIELD getFieldValue(CLASS object) throws NlsClassCastException, SecurityException;
 
   /**
-   * This method sets the field in the <code>object</code> to the given
-   * <code>value</code>. The field must NOT be
-   * {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly()
-   * read-only}.
+   * This method sets the field in the <code>object</code> to the given <code>value</code>. The field must NOT
+   * be {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly() read-only}.
    * 
-   * @param object is where to write the fields value to. Will be ignored if the
-   *        field is
-   *        {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isStatic()
-   *        static}.
+   * @param object is where to write the fields value to. Will be ignored if the field is
+   *        {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isStatic() static}.
    * @param value is the value of the field. May be <code>null</code>.
    * @throws ReadOnlyException if the field is
-   *         {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly()
-   *         read-only}.
-   * @throws CastFailedException if the given <code>value</code> is not
-   *         compatible with the
-   *         {@link net.sf.mmm.data.api.reflection.DataField#getFieldType()
-   *         type} of the field.
+   *         {@link net.sf.mmm.data.api.reflection.DataFieldModifiers#isReadOnly() read-only}.
+   * @throws NlsClassCastException if the given <code>value</code> is not compatible with the
+   *         {@link net.sf.mmm.data.api.reflection.DataField#getFieldType() type} of the field.
    * @throws SecurityException is the access failed for security reasons.
    */
-  void setFieldValue(CLASS object, FIELD value) throws ReadOnlyException, CastFailedException,
-      SecurityException;
+  void setFieldValue(CLASS object, FIELD value) throws ReadOnlyException, NlsClassCastException, SecurityException;
 
 }

@@ -9,7 +9,7 @@ import net.sf.mmm.util.lang.api.StringSyntax;
  * This is the implementation of {@link StringSyntax} as simple Java bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class StringSyntaxBean implements StringSyntax {
 

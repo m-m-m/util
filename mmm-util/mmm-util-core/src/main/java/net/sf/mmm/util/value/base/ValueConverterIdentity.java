@@ -12,7 +12,7 @@ import net.sf.mmm.util.value.api.ValueException;
  * @param <V> is the generic type of the value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class ValueConverterIdentity<V> extends AbstractSimpleValueConverter<V, V> {
 

@@ -17,7 +17,7 @@ import java.util.List;
  * @param <PARENT> is the generic type of the {@link #getParent() parent}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface GenericTreeNode<CHILD extends Node<PARENT>, PARENT extends GenericTreeNode<CHILD, PARENT>> extends
     Node<PARENT> {

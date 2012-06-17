@@ -9,7 +9,7 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  * This is the abstract base implementation of {@link ValidationFailure}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public abstract class AbstractValidationFailure implements ValidationFailure {
 

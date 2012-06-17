@@ -7,7 +7,7 @@ package net.sf.mmm.util.lang.api;
  * This interface defines the syntax for a decoding and encoding values from/to {@link String}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface StringSyntax {
 

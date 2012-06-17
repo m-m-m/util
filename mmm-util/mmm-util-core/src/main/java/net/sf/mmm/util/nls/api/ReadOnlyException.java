@@ -13,7 +13,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * to objects that can be mutable or read-only this exception is the right choice.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class ReadOnlyException extends NlsRuntimeException {
 

@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
  * {@link #afterUnmarshal(Unmarshaller, Object) perform custom initialization logic after un-marshaling}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface JaxbObject {
 

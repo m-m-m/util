@@ -86,8 +86,9 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
     list.add(this.value);
     NODE node = this.next;
     while (node != null) {
-      list.add(node.value);
-      node = node.next;
+      // bug in compiler of Java7: node.value and node.next are not accessible, need to access via getters
+      list.add(node.getValue());
+      node = node.getNext();
     }
   }
 

@@ -21,14 +21,14 @@ public abstract class SegmentContainer extends Segment {
 
   /** @see #getSegment(int) */
   @XmlElements(value = { @XmlElement(name = SegmentConstant.XML_TAG, type = SegmentConstant.class),
-      @XmlElement(name = "key", type = SegmentKey.class),
-      @XmlElement(name = "value", type = SegmentValue.class),
-      @XmlElement(name = "eos", type = SegmentEndOfStream.class),
-      @XmlElement(name = "any", type = SegmentAny.class),
-      @XmlElement(name = "range", type = SegmentRange.class),
-      @XmlElement(name = "sequence", type = SegmentContainerSequence.class),
-      @XmlElement(name = "repeat", type = SegmentContainerRepeat.class),
-      @XmlElement(name = "choice", type = SegmentContainerChoice.class) })
+      @XmlElement(name = SegmentKey.XML_TAG, type = SegmentKey.class),
+      @XmlElement(name = SegmentValue.XML_TAG, type = SegmentValue.class),
+      @XmlElement(name = SegmentEndOfStream.XML_TAG, type = SegmentEndOfStream.class),
+      @XmlElement(name = SegmentAny.XML_TAG, type = SegmentAny.class),
+      @XmlElement(name = SegmentRange.XML_TAG, type = SegmentRange.class),
+      @XmlElement(name = SegmentContainerSequence.XML_TAG, type = SegmentContainerSequence.class),
+      @XmlElement(name = SegmentContainerRepeat.XML_TAG, type = SegmentContainerRepeat.class),
+      @XmlElement(name = SegmentContainerChoice.XML_TAG, type = SegmentContainerChoice.class) })
   private List<Segment> segments;
 
   /**
@@ -159,6 +159,12 @@ public abstract class SegmentContainer extends Segment {
     super.validate(source);
     for (Segment segment : this.segments) {
       segment.validate(source);
+      SegmentContainer parent = segment.getParent();
+      if (parent == null) {
+        segment.setParent(this);
+      } else {
+        assert (parent == this);
+      }
     }
   }
 

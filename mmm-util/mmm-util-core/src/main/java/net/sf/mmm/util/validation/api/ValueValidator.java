@@ -17,7 +17,7 @@ package net.sf.mmm.util.validation.api;
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface ValueValidator<V> {
 

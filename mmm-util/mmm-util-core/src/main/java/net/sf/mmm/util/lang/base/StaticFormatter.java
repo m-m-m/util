@@ -11,7 +11,7 @@ import java.io.IOException;
  * 
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 public class StaticFormatter<V> extends AbstractFormatter<V> {
 

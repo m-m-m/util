@@ -49,8 +49,6 @@ public class PersistenceTest {
         return createAndSave();
       }
     });
-    // TODO: Bug in eclipse generic compiler?
-    // remove casts and see...
     final Integer fooId = foo.getId();
     final Integer barId = foo.getBar().getId();
 

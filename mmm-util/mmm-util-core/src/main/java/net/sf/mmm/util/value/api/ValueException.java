@@ -59,7 +59,7 @@ public abstract class ValueException extends NlsRuntimeException {
    * The constructor.
    * 
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public ValueException(NlsMessage message) {
 
@@ -71,7 +71,7 @@ public abstract class ValueException extends NlsRuntimeException {
    * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public ValueException(Throwable nested, NlsMessage message) {
 

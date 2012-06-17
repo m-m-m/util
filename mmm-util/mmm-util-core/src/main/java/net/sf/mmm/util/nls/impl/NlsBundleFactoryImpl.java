@@ -15,7 +15,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
  * This is the implementation of {@link net.sf.mmm.util.nls.api.NlsBundleFactory}.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Named
 @Singleton

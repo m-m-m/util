@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * @param <V> is the generic type of the {@link #getValue() value} to validate.
  * 
  * @author hohwille
- * @since 2.0.2
+ * @since 3.0.0
  */
 public interface ValidatableObject<V> extends HasValueValidators<V>, AttributeReadValue<V>, AbstractValidatableObject {
 

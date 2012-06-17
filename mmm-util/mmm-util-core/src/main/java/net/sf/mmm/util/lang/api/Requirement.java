@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  * description or links to further documentation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(value = { ElementType.TYPE, ElementType.METHOD })

@@ -32,7 +32,7 @@ import org.slf4j.Logger;
  * This is the implementation of {@link NlsResourceBundleLocator}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.2
+ * @since 3.0.0
  */
 @Singleton
 @Named

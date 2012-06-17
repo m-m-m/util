@@ -30,7 +30,6 @@ public interface RemoteInvocationGenericServiceGwt extends RemoteInvocationGener
    * @param request is the {@link RemoteInvocationGenericServiceRequest}.
    * @return the according {@link RemoteInvocationGenericServiceResponse}.
    */
-  @Override
   RemoteInvocationGenericServiceResponse callServices(RemoteInvocationGenericServiceRequest request);
 
 }
