@@ -1,5 +1,4 @@
-/* $Id: UIMenuImpl.java 977 2011-03-02 22:10:25Z hohwille $
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt.view.menu;
 

@@ -1,5 +1,4 @@
-/* $Id: NlsFormatterDefault.java 401 2008-01-13 21:02:06Z hohwille $
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 

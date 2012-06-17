@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id$ -->
 <search>
   <!-- core configuration of the search-engine -->
   <search-index location="../../mmm-search-engine/mmm-search-engine-impl-lucene/src/test/resources/net/sf/mmm/search/engine/impl/lucene/index"/>

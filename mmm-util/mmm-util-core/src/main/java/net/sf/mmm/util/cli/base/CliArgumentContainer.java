@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
@@ -11,7 +10,7 @@ import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.component.api.InitializationState;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-import net.sf.mmm.util.value.api.ValueValidator;
+import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is a container for a {@link CliArgument} together with additional associated information.
@@ -35,9 +34,8 @@ public class CliArgumentContainer extends CliParameterContainer {
    * @param getter is the {@link #getGetter() getter}
    * @param validator is the {@link #getValidator() validator}.
    */
-  @SuppressWarnings("rawtypes")
   public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter, ValueValidator validator) {
+      PojoPropertyAccessorNonArg getter, ValueValidator<Object> validator) {
 
     super(setter, getter, validator);
     this.argument = argument;

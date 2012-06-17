@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
 <search>
   <search-index location="target/search-index" />
   <!-- configuration of sources -->

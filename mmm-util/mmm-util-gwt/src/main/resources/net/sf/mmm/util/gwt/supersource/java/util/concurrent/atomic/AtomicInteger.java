@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package java.util.concurrent.atomic;
 
@@ -8,7 +7,7 @@ package java.util.concurrent.atomic;
  * clients. As a web-client does not yet really supports concurrency this trivial implementation is
  * sufficient. This may change with web-workers. If you ever realize any problems, let us know.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class AtomicInteger extends Number {

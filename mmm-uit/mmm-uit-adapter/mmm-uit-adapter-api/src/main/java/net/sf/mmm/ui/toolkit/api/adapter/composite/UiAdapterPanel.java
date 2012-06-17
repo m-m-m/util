@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.adapter.composite;
 
@@ -11,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.adapter.UiAdapterRegular;
  * widgets organizing them in a specific layout. Such widget is also called
  * container or layout.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface UiAdapterPanel extends UiAdapterRegularComposite<Void> {

@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
@@ -12,7 +11,7 @@ import com.google.gwt.core.client.GWT;
 /**
  * This is the GWT compatible implementation of {@link NlsBundleFactory}.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class NlsBundleFactoryImpl extends AbstractComponent implements NlsBundleFactory {

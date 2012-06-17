@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
@@ -12,7 +11,7 @@ import java.lang.annotation.Target;
  * This {@link NlsBundleOptions#requireMessages() required} annotation is used to define the
  * {@link NlsMessage#getInternationalizedMessage() message} for a method of an {@link NlsBundle} interface.<br/>
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)

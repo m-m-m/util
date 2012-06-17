@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.impl.server;
 
@@ -28,7 +27,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * {@link RemoteInvocationGenericServiceImplGwt} but can be changed by overriding the spring XML
  * configuration.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Named("RemoteInvocationGenericServiceServlet")

@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.handler.object;
 
@@ -8,7 +7,7 @@ package net.sf.mmm.ui.toolkit.api.handler.object;
  * 
  * @see net.sf.mmm.ui.toolkit.api.handler.plain.UiHandlerPlainSave
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <O> is the generic type of the object to invoke the action operation on.
  */

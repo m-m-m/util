@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
@@ -15,7 +14,7 @@ import net.sf.mmm.util.reflect.api.ClassName;
 /**
  * Helper class to deal with {@link NlsBundle} interfaces.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class NlsBundleHelper {

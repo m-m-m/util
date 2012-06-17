@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
@@ -9,7 +8,7 @@ import java.util.Locale;
  * This is a simple implementation of {@link AbstractValidationFailure} that does NOT (properly) support
  * {@link #getMessage(Locale) internationalization}.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class SimpleValidationFailure extends AbstractValidationFailure {

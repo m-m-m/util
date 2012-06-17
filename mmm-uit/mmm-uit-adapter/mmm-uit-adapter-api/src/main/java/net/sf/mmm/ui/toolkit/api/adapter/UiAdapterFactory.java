@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.adapter;
 
@@ -7,7 +6,7 @@ package net.sf.mmm.ui.toolkit.api.adapter;
  * This is the interface for a factory used to #create create {@link UiAdapter}s.
  * 
  * @param <WIDGET> is the generic top-level type of the underlying {@link #getWidget(UiAdapter) widgets}.
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface UiAdapterFactory<WIDGET> {

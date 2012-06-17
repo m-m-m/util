@@ -1,5 +1,4 @@
-/* $Id: AbstractUIWindow.java 957 2011-02-21 22:18:03Z hohwille $
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.window;
 

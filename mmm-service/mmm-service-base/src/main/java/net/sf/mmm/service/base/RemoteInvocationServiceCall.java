@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.base;
 
@@ -9,7 +8,7 @@ import java.io.Serializable;
  * This is the generic transfer-object for an invocation of a
  * {@link net.sf.mmm.service.api.RemoteInvocationService}. It contains the data for a single method call.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class RemoteInvocationServiceCall implements Serializable {

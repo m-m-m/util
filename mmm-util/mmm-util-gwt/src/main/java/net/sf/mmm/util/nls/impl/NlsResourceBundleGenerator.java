@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
@@ -42,7 +41,7 @@ import com.google.gwt.user.rebind.SourceWriter;
  * {@link net.sf.mmm.util.nls.api.NlsBundleFactory} implementation as well as according {@link NlsBundle}
  * implementations.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class NlsResourceBundleGenerator extends Generator {

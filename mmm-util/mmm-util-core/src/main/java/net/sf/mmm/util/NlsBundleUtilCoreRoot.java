@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util;
 
@@ -16,7 +15,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 /**
  * This class holds the {@link NlsBundle internationalized messages} for this module.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 @NlsBundleLocation(bundleName = "NlsBundleUtilCore")
@@ -422,7 +421,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @param source is the source of the value.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} could NOT be converted to \"{type}\"")
+  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} could NOT be converted to \"{type}\"!")
   NlsMessage errorValueConvert(@Named("value")
   Object value, @Named("type")
   Type type, @Named("source")
@@ -1200,7 +1199,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @param argument is the argument containing the reference.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("The argument \"{reference}\" referenced by \"{argument}\" is not defined!")
+  @NlsBundleMessage("The argument \"{argument}\" referenced by \"{reference}\" is not defined!")
   NlsMessage errorCliArgumentReferenceMissing(@Named("reference")
   Object reference, @Named("argument")
   Object argument);

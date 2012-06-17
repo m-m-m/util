@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
@@ -14,7 +13,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.value.api.ValueValidator;
+import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is the abstract base class for a container with the metadata of a CLI-parameter. A parameter is either
@@ -45,9 +44,8 @@ public abstract class CliParameterContainer {
    * @param getter is the {@link #getGetter() getter}.
    * @param validator is the {@link #getValidator() validator}.
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
   public CliParameterContainer(PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter,
-      ValueValidator validator) {
+      ValueValidator<Object> validator) {
 
     super();
     assert (setter.getMode() == PojoPropertyAccessorOneArgMode.SET);

@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
 <transformers>
   <transformer-chain id="default-transformer">
     <regex pattern="(?i)\.txt" replacement=""/>

@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.impl.client;
 
@@ -29,7 +28,7 @@ import com.google.gwt.user.rebind.SourceWriter;
  * This is the GWT-{@link Generator} for generating the {@link RemoteInvocationServiceCaller} and according
  * service-client stubs.
  * 
- * @author hohwille
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class RemoteInvocationServiceCallerGenerator extends Generator {

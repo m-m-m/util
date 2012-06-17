@@ -1,5 +1,4 @@
-/* $Id$
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
@@ -67,7 +66,7 @@ public interface UnicodeUtil {
   /**
    * The ASCII hyphen or minus sign ({@value} ).
    * 
-   * @see #HYPEN
+   * @see #HYPHEN
    * @see #MINUS_SIGN
    * @see #SOFT_HYPHEN
    */
