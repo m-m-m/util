@@ -10,7 +10,9 @@ import net.sf.mmm.util.value.api.PojoValidator;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @deprecated Use {@link net.sf.mmm.util.validation.api.ValueValidator} instead.
  */
+@Deprecated
 public class PojoValidatorDummy extends AbstractValueValidator<Object> implements PojoValidator {
 
   /**
@@ -24,6 +26,7 @@ public class PojoValidatorDummy extends AbstractValueValidator<Object> implement
   /**
    * {@inheritDoc}
    */
+  @Override
   public void validate(Object value, Object valueSource) throws RuntimeException {
 
     // dummy implementation - nothing to do...

@@ -113,6 +113,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?>[] getClasses(Object[] objects) {
 
     Class<?>[] result = new Class[objects.length];
@@ -130,6 +131,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public <T> GenericType<T> createGenericType(Class<T> type) {
 
     return new SimpleGenericTypeImpl<T>(type);
@@ -138,6 +140,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("rawtypes")
   public GenericType<?> createGenericType(Type type) {
 
@@ -153,6 +156,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public GenericType<?> createGenericType(Type type, GenericType<?> definingType) {
 
@@ -162,6 +166,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
@@ -255,6 +260,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?> getArrayClass(Class<?> componentType) {
 
     // this is sort of stupid but there seems no other way...
@@ -264,6 +270,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Type toType(String type) {
 
     return toType(type, ClassResolver.CLASS_FOR_NAME_RESOLVER);
@@ -272,6 +279,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Type toType(String type, ClassResolver resolver) {
 
     try {
@@ -393,6 +401,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toString(Type type) {
 
     if (type instanceof Class<?>) {
@@ -405,6 +414,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public void toString(Type type, Appendable appendable, Visitor<Class<?>> classFormatter) {
 
     NlsNullPointerException.checkNotNull(Type.class, type);
@@ -479,6 +489,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public int compare(Class<?> class1, Class<?> class2) {
 
     if (class1.equals(class2)) {
@@ -495,6 +506,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isMarkerInterface(Class<?> interfaceClass) {
 
     if (Cloneable.class == interfaceClass) {
@@ -512,14 +524,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
-  public String getSimpleName(Class<?> type) {
-
-    return type.getSimpleName();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<?> getNonPrimitiveType(Class<?> type) {
 
     return ReflectionUtilLimitedImpl.getInstance().getNonPrimitiveType(type);
@@ -528,6 +533,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
       boolean mustBeFinal, boolean inherit) throws NoSuchFieldException, IllegalAccessException,
@@ -566,6 +572,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
       boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
 
@@ -581,6 +588,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Method getParentMethod(Method method) throws SecurityException {
 
     return getParentMethod(method.getDeclaringClass(), method.getName(), method.getParameterTypes());
@@ -589,6 +597,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Method getParentMethod(Class<?> inheritingClass, String methodName, Class<?>[] parameterTypes)
       throws SecurityException {
 
@@ -650,6 +659,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages) {
 
     Set<String> classSet = new HashSet<String>();
@@ -660,6 +670,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet) {
 
     Filter<String> filter = ConstantFilter.getInstance(true);
@@ -669,6 +680,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter) {
 
     Set<String> result = new HashSet<String>();
@@ -679,6 +691,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
       ClassLoader classLoader) {
 
@@ -710,6 +723,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter) {
 
     return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
@@ -718,6 +732,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter,
       ClassLoader classLoader) {
 
@@ -730,6 +745,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter) {
 
     return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
@@ -738,6 +754,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<DataResource> findResources(String absoluteClasspath) throws RuntimeIoException {
 
     try {
@@ -756,6 +773,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter,
       ClassLoader classLoader) {
 
@@ -851,6 +869,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, ConstantFilter.getInstance(true));
@@ -859,6 +878,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames, Filter<? super Class<?>> filter) {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
@@ -867,6 +887,7 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
   /**
    * {@inheritDoc}
    */
+  @Override
   public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
       Filter<? super Class<?>> filter) {
 

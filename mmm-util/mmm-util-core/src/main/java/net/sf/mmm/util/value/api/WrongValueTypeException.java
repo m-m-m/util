@@ -17,9 +17,6 @@ public class WrongValueTypeException extends ValueException {
   /** UID for serialization. */
   private static final long serialVersionUID = 3681394831124284211L;
 
-  /** key for the NLS message. */
-  private static final String KEY_VALUE_TYPE = "valueType";
-
   /**
    * The constructor.
    * 
@@ -69,8 +66,8 @@ public class WrongValueTypeException extends ValueException {
    */
   public WrongValueTypeException(Throwable nested, Object value, Object valueSource, Type expectedType) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValueWrongType(value, getType(value),
-        expectedType, valueSource));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValueWrongType(value, getType(value), expectedType,
+        valueSource));
   }
 
   /**
