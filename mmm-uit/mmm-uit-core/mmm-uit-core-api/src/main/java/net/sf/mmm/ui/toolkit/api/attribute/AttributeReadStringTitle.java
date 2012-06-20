@@ -18,6 +18,7 @@ public interface AttributeReadStringTitle extends AttributeReadTitle<String> {
    * 
    * @return the title.
    */
+  @Override
   String getTitle();
 
 }

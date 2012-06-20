@@ -6,11 +6,9 @@ package net.sf.mmm.ui.toolkit.base;
 import java.util.concurrent.Callable;
 
 /**
- * This class allows executing a {@link java.util.concurrent.Callable} as
- * {@link java.lang.Runnable}.
+ * This class allows executing a {@link java.util.concurrent.Callable} as {@link java.lang.Runnable}.
  * 
- * @param <T> is the templated type of the callable
- *        {@link java.util.concurrent.Callable#call() result}.
+ * @param <T> is the templated type of the callable {@link java.util.concurrent.Callable#call() result}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -37,6 +35,7 @@ public class CallableRunner<T> implements Runnable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void run() {
 
     try {

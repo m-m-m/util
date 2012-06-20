@@ -5,8 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 
 /**
- * This interface gives read and write access to the
- * {@link net.sf.mmm.ui.toolkit.api.view.UiImage icon} of an
+ * This interface gives read and write access to the {@link net.sf.mmm.ui.toolkit.api.view.UiImage icon} of an
  * {@link net.sf.mmm.ui.toolkit.api.UiObject object}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

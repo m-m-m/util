@@ -3,8 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.model.data;
 
 /**
- * This is the interface of a
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} that can be
+ * This is the interface of a {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} that can be
  * modified.
  * 
  * @param <E> is the templated type of the objects in the list.
@@ -26,18 +25,18 @@ public interface UiMutableListMvcModel<E> extends UiListMvcModel<E> {
    * @see java.util.List#add(Object)
    * 
    * @param element is the element to insert.
-   * @param index is the position where to insert the element. The index must be
-   *        greater or equal to zero and less than {@link #getElementCount()}.
+   * @param index is the position where to insert the element. The index must be greater or equal to zero and
+   *        less than {@link #getElementCount()}.
    */
   void addElement(E element, int index);
 
   /**
-   * This method sets the element at the given index. The current element at the
-   * given index will be replaced by the given element.
+   * This method sets the element at the given index. The current element at the given index will be replaced
+   * by the given element.
    * 
    * @param newElement is the element to set.
-   * @param index is the index where to set the new element. The index must be
-   *        greater or equal to zero and less than {@link #getElementCount()}.
+   * @param index is the index where to set the new element. The index must be greater or equal to zero and
+   *        less than {@link #getElementCount()}.
    */
   void setElement(E newElement, int index);
 
@@ -46,8 +45,8 @@ public interface UiMutableListMvcModel<E> extends UiListMvcModel<E> {
    * 
    * @see java.util.List#remove(int)
    * 
-   * @param index is the position of the element to remove. The index must be
-   *        greater or equal to zero and less than {@link #getElementCount()}.
+   * @param index is the position of the element to remove. The index must be greater or equal to zero and
+   *        less than {@link #getElementCount()}.
    */
   void removeElement(int index);
 
@@ -57,8 +56,7 @@ public interface UiMutableListMvcModel<E> extends UiListMvcModel<E> {
    * @see java.util.List#remove(java.lang.Object)
    * 
    * @param element is the element to remove.
-   * @return <code>true</code> if the given element was found in the list,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if the given element was found in the list, <code>false</code> otherwise.
    */
   boolean removeElement(E element);
 

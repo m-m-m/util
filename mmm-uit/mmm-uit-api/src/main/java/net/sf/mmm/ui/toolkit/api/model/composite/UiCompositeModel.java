@@ -7,8 +7,7 @@ import java.util.List;
 import net.sf.mmm.ui.toolkit.api.model.UiElementModel;
 
 /**
- * This is the model of a
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite}.
+ * This is the model of a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

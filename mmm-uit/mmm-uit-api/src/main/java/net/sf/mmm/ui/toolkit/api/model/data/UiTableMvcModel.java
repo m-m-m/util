@@ -23,9 +23,8 @@ public interface UiTableMvcModel<C> {
   void addListener(UITableModelListener listener);
 
   /**
-   * This method unregisters the given change listener from this model. The
-   * listener should have been registered via the addChangeListener method
-   * before.
+   * This method unregisters the given change listener from this model. The listener should have been
+   * registered via the addChangeListener method before.
    * 
    * @param listener is the change listener to remove.
    */
@@ -50,8 +49,7 @@ public interface UiTableMvcModel<C> {
    * 
    * @param rowIndex is the row index of the requested cell value.
    * @param columnIndex is the column index of the requested cell value.
-   * @return the value at the specified cell. For an empty cell
-   *         <code>null</code> can be returned.
+   * @return the value at the specified cell. For an empty cell <code>null</code> can be returned.
    */
   C getCellValue(int rowIndex, int columnIndex);
 
@@ -62,8 +60,7 @@ public interface UiTableMvcModel<C> {
    * 
    * @param rowIndex is the row index of the requested cell value.
    * @param columnIndex is the column index of the requested cell value.
-   * @return the value at the specified cell. For an empty cell
-   *         <code>null</code> can be returned.
+   * @return the value at the specified cell. For an empty cell <code>null</code> can be returned.
    */
   String getCellValueAsString(int rowIndex, int columnIndex);
 

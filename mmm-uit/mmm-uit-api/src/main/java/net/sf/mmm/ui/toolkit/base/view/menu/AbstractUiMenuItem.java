@@ -28,6 +28,7 @@ public abstract class AbstractUiMenuItem<DELEGATE> extends AbstractUiNode<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return TYPE;

@@ -33,6 +33,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return TYPE;
@@ -50,6 +51,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiDevice getDevice() {
 
     return this.device;
@@ -58,6 +60,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
   /**
    * {@inheritDoc}
    */
+  @Override
   public <T> T invokeSynchron(Callable<T> task) throws Exception {
 
     if (isDispatchThread()) {
@@ -72,6 +75,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
   /**
    * {@inheritDoc}
    */
+  @Override
   public void invokeSynchron(Runnable task) {
 
     if (isDispatchThread()) {
@@ -82,8 +86,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
   }
 
   /**
-   * This method handles the {@link #invokeSynchron(Runnable)} if called from
-   * another thread.
+   * This method handles the {@link #invokeSynchron(Runnable)} if called from another thread.
    * 
    * @param task is the task to invoke.
    */

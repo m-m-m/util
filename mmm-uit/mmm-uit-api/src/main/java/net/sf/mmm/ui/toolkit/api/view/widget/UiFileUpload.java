@@ -6,10 +6,9 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 
 /**
- * This is the interface for a widget that allows the user to choose a file for
- * upload. Upload means that the file is send from the user (client) to the
- * application and can be accessed via this widget no matter if running on the
- * client or a webserver.
+ * This is the interface for a widget that allows the user to choose a file for upload. Upload means that the
+ * file is send from the user (client) to the application and can be accessed via this widget no matter if
+ * running on the client or a webserver.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

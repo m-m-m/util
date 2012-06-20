@@ -10,8 +10,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiNode;
  * This is the interface for a menu-bar. It represents a bar of pull down
  * {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenu menus} of a
  * {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame}.<br>
- * Use {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame#getMenuBar()} to
- * "create" a menu-bar.
+ * Use {@link net.sf.mmm.ui.toolkit.api.view.window.UiFrame#getMenuBar()} to "create" a menu-bar.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -39,15 +38,13 @@ public interface UiMenuBar extends UiNode {
    * This method gets the menu for the given name.
    * 
    * @param name is the name of the menu.
-   * @return the menu with the given name or <code>null</code> if no menu exists
-   *         for the given name.
+   * @return the menu with the given name or <code>null</code> if no menu exists for the given name.
    */
   UiMenu getMenu(String name);
 
   /**
-   * This method creates and adds a menu to this menu bar. If the menu with the
-   * given name already exists, no new menu will be created but the existing
-   * menu is returned.
+   * This method creates and adds a menu to this menu bar. If the menu with the given name already exists, no
+   * new menu will be created but the existing menu is returned.
    * 
    * @param name is the title for the new menu.
    * @return the created (or already existing) menu.

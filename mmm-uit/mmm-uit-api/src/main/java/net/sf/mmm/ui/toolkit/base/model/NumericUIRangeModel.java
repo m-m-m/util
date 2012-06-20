@@ -46,6 +46,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getElementCount() {
 
     return this.maximum - this.minimum + 1;
@@ -54,6 +55,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public Integer getElement(int index) {
 
     if (index < 0) {
@@ -65,6 +67,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMaximumValue(int newMaximum) {
 
     if (this.maximum != newMaximum) {
@@ -91,6 +94,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumValue(int newMinimum) {
 
     if (this.minimum != newMinimum) {
@@ -115,6 +119,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getMaximumValue() {
 
     return this.maximum;
@@ -123,6 +128,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getMinimumValue() {
 
     return this.minimum;
@@ -131,6 +137,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getIndexOf(Integer element) {
 
     if ((element.intValue() < this.minimum) || (element.intValue() > this.maximum)) {
@@ -143,6 +150,7 @@ public class NumericUIRangeModel extends AbstractUIListModel<Integer> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getIndexOfString(String element) {
 
     try {

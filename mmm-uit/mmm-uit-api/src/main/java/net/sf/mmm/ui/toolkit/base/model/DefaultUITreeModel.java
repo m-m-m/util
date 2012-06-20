@@ -34,8 +34,8 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UiTreeNode<T>> {
   }
 
   /**
-   * This method returns the same object as the getRootNode method. It only
-   * exists to avoid casting and to specify the used node type.
+   * This method returns the same object as the getRootNode method. It only exists to avoid casting and to
+   * specify the used node type.
    * 
    * @see DefaultUITreeModel#getRootNode()
    * 
@@ -49,6 +49,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UiTreeNode<T>> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiTreeNode<T> getRootNode() {
 
     return this.rootNode;
@@ -57,6 +58,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UiTreeNode<T>> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getChildCount(UiTreeNode<T> node) {
 
     return node.getChildNodeCount();
@@ -65,6 +67,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UiTreeNode<T>> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiTreeNode<T> getChildNode(UiTreeNode<T> node, int index) {
 
     return node.getChildNode(index);
@@ -73,6 +76,7 @@ public class DefaultUITreeModel<T> extends AbstractUITreeModel<UiTreeNode<T>> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiTreeNode<T> getParent(UiTreeNode<T> node) {
 
     return node.getParentNode();

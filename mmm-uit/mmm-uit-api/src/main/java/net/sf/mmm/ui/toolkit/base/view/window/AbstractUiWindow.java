@@ -43,8 +43,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
 
   /**
    * This method gets access to read the size of the desktop.<br>
-   * It is used by {@link #centerWindow()} and may be overridden in specific
-   * scenarios.
+   * It is used by {@link #centerWindow()} and may be overridden in specific scenarios.
    * 
    * @return read-access to the size of the desktop.
    */
@@ -56,6 +55,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void centerWindow() {
 
     AttributeReadSize desktop = getDesktopSize();
@@ -73,15 +73,15 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public AbstractUiComposite<?, ? extends UiElement> getComposite() {
 
     return this.composite;
   }
 
   /**
-   * This method registers the new composite and changes the parent of the old
-   * and the new composite. The method should be called from the
-   * {@link #setComposite(UiComposite)} method implementation.
+   * This method registers the new composite and changes the parent of the old and the new composite. The
+   * method should be called from the {@link #setComposite(UiComposite)} method implementation.
    * 
    * @see UiWindow#setComposite(UiComposite)
    * 
@@ -102,6 +102,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setTitle(String title) {
 
     getAdapter().setTitle(title);
@@ -110,6 +111,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSize(int width, int height) {
 
     getAdapter().setSize(width, height);
@@ -118,6 +120,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isResizable() {
 
     return getAdapter().isResizable();
@@ -126,6 +129,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPosition(int x, int y) {
 
     getAdapter().setPosition(x, y);
@@ -134,6 +138,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidth() {
 
     return getAdapter().getWidth();
@@ -142,6 +147,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeight() {
 
     return getAdapter().getHeight();
@@ -150,6 +156,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return getAdapter().getTitle();
@@ -158,6 +165,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getX() {
 
     return getAdapter().getX();
@@ -166,6 +174,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getY() {
 
     return getAdapter().getY();
@@ -174,6 +183,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiDialog createDialog(String title, boolean modal, boolean resizeable) {
 
     return getFactory().createDialog(this, title, modal, resizeable);
@@ -182,6 +192,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void showMessage(String message, String title, MessageType messageType) {
 
     getFactory().showMessage(this, message, title, messageType, null);
@@ -190,6 +201,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void showMessage(String message, String title, MessageType messageType, Throwable throwable) {
 
     getFactory().showMessage(this, message, title, messageType, throwable);
@@ -198,6 +210,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean showQuestion(String question, String title) {
 
     return getFactory().showQuestion(this, question, title);
@@ -228,6 +241,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   /**
    * {@inheritDoc}
    */
+  @Override
   public void pack() {
 
     getAdapter().pack();

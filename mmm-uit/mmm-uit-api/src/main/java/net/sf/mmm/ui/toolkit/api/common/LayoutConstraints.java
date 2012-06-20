@@ -23,6 +23,7 @@ public class LayoutConstraints {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getHeight() {
 
       return 0;
@@ -31,6 +32,7 @@ public class LayoutConstraints {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getWidth() {
 
       return 0;
@@ -159,8 +161,8 @@ public class LayoutConstraints {
    * available for this panel. <br>
    * If the weight is negative, the behaviour is like <code>-weight</code>, but only the space for the
    * component is sized and the component itself is sized as its
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}. The alignment is used to place the component
-   * inside the sized space.
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}. The alignment is used to place the
+   * component inside the sized space.
    */
   public final double weight;
 
@@ -171,8 +173,8 @@ public class LayoutConstraints {
 
   /**
    * The size used to override default size. If {@link AttributeReadSize#getWidth() width} or
-   * {@link AttributeReadSize#getHeight() height} is greater than <code>0</code>, it overrides the size-value of the
-   * associated {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
+   * {@link AttributeReadSize#getHeight() height} is greater than <code>0</code>, it overrides the size-value
+   * of the associated {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
    */
   public final AttributeReadSize size;
 

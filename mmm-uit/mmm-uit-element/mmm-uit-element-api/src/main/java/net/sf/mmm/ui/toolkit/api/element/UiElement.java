@@ -2,17 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.element;
 
-import net.sf.mmm.ui.toolkit.api.adapter.UiAdapter;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteMode;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStyles;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.common.EnabledState;
 import net.sf.mmm.ui.toolkit.api.common.UiMode;
 import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.element.composite.UiElementComposite;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
@@ -57,8 +57,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  *        s that do not carry a {@link #getValue() value}.
  * @param <ADAPTER> is the generic type of the underlying {@link #getAdapter()}.
  */
-public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements AttributeReadHtmlId,
-    AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStyles, AttributeWriteMode,
+public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements AttributeReadHtmlId,
+    AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteMode,
     AttributeWriteValue<VALUE> {
 
   /** @see #getValue() */
@@ -102,6 +102,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     return this.id;
@@ -121,6 +122,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean isEnabled() {
 
     // TODO is disabled if parent is disabled like in isVisible()?
@@ -130,6 +132,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setEnabled(boolean enabled) {
 
     EnabledState newEnabledState = this.enabledState.setEnabled(enabled);
@@ -155,6 +158,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean isVisible() {
 
     if (!this.visibleState.isVisible()) {
@@ -174,6 +178,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setVisible(boolean visible) {
 
     VisibleState newVisibleState = this.visibleState.setVisible(visible);
@@ -216,6 +221,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMode getMode() {
 
     return this.mode;
@@ -224,6 +230,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setMode(UiMode mode) {
 
     if (this.mode != mode) {
@@ -263,6 +270,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final String getTooltip() {
 
     return this.tooltip;
@@ -271,6 +279,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setTooltip(String tooltip) {
 
     if ((this.adapter != null) && (!this.tooltip.equals(tooltip))) {
@@ -282,6 +291,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final String getStyles() {
 
     return this.styles;
@@ -290,6 +300,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean hasStyle(String style) {
 
     return (indexOfStyle(style) >= 0);
@@ -334,6 +345,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setStyles(String styles) {
 
     assert (styles != null);
@@ -345,6 +357,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void addStyle(String style) {
 
     assert (style != null);
@@ -373,6 +386,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean removeStyle(String style) {
 
     assert (!style.isEmpty());
@@ -413,6 +427,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
    * @return the current value of this object or <code>null</code> if this element {@link #isEmpty() is empty}
    *         or contains invalid data.
    */
+  @Override
   public final VALUE getValue() {
 
     return getValueLastSet();
@@ -444,6 +459,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setValue(VALUE value) {
 
     setValueInternal(value);
@@ -469,17 +485,17 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   public abstract UiElementComposite<?, ?> getParent();
 
   /**
-   * This method gets the {@link Class} reflecting the underlying type of {@link UiAdapter}. It is required to
-   * create the adapter for {@link #initializeAdapter(UiAdapter) initialization}.
+   * This method gets the {@link Class} reflecting the underlying type of {@link UiWidget}. It is required to
+   * create the adapter for {@link #initializeAdapter(UiWidget) initialization}.
    * 
    * @return the {@link #getAdapter() adapter} {@link Class}.
    */
   protected abstract Class<ADAPTER> getAdapterClass();
 
   /**
-   * This method gets the underlying {@link UiAdapter}.
+   * This method gets the underlying {@link UiWidget}.
    * 
-   * @return the {@link UiAdapter} or <code>null</code> if NOT yet created.
+   * @return the {@link UiWidget} or <code>null</code> if NOT yet created.
    */
   protected final ADAPTER getAdapter() {
 
@@ -506,7 +522,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiAdapter<?>> implements 
   /**
    * This method initializes the {@link #getAdapter() view}.
    * 
-   * @param widgetAdapter is the {@link UiAdapter} to initialize.
+   * @param widgetAdapter is the {@link UiWidget} to initialize.
    */
   protected void initializeAdapter(ADAPTER widgetAdapter) {
 

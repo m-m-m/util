@@ -6,8 +6,7 @@ import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 
 /**
- * This is a simple implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.feature.UiAction} interface.
+ * This is a simple implementation of the {@link net.sf.mmm.ui.toolkit.api.feature.UiAction} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -54,6 +53,7 @@ public class SimpleAction extends AbstractAction {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiEventListener getActionListener() {
 
     return this.listener;

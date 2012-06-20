@@ -3,8 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
 /**
- * This class is a simple container for an rectangular area in a coordinate
- * system.
+ * This class is a simple container for an rectangular area in a coordinate system.
  * 
  * @see java.awt.Rectangle
  * 
@@ -62,8 +61,7 @@ public class Rectangle {
   }
 
   /**
-   * This method swapps {@link #x}/{@link #y} and {@link #width}/{@link #height}
-   * .
+   * This method swapps {@link #x}/{@link #y} and {@link #width}/{@link #height} .
    */
   public void swap() {
 

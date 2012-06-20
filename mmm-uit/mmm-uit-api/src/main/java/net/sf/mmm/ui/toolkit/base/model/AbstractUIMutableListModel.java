@@ -28,6 +28,7 @@ public abstract class AbstractUIMutableListModel<E> extends AbstractUIListModel<
   /**
    * {@inheritDoc}
    */
+  @Override
   public void removeAll() {
 
     if (getElementCount() > 0) {

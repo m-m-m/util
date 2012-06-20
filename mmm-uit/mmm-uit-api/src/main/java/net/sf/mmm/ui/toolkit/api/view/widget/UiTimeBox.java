@@ -7,14 +7,12 @@ import java.util.Date;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 
 /**
- * This is the interface of a time box. It is a widget where the user can
- * specify a time in a comfortable way.<br/>
- * The widget itself should be lightweight and require only little space to fit
- * into a single line (e.g. a text-field with a button beside). If more space is
- * required, a pull-down, pop-up, or dialog may be opened via a button.<br/>
- * A {@link Date} is used as {@link #getValue() value} for a convenience
- * container type. A plain time-box will ignore the year, month and day
- * attributes.
+ * This is the interface of a time box. It is a widget where the user can specify a time in a comfortable way.<br/>
+ * The widget itself should be lightweight and require only little space to fit into a single line (e.g. a
+ * text-field with a button beside). If more space is required, a pull-down, pop-up, or dialog may be opened
+ * via a button.<br/>
+ * A {@link Date} is used as {@link #getValue() value} for a convenience container type. A plain time-box will
+ * ignore the year, month and day attributes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

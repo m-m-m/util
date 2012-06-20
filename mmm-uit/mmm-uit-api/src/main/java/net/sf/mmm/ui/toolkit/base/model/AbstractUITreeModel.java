@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel}
+ * interface.
  * 
  * @param <N> is the templated type of the tree nodes.
  * 
@@ -36,6 +36,7 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addListener(UITreeModelListener<N> listener) {
 
     this.listeners.add(listener);
@@ -44,14 +45,14 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void removeListener(UITreeModelListener<N> listener) {
 
     this.listeners.remove(listener);
   }
 
   /**
-   * This method sends the given event to all registered listeners of this
-   * model.
+   * This method sends the given event to all registered listeners of this model.
    * 
    * @param event is the event to send.
    */
@@ -68,8 +69,7 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
   }
 
   /**
-   * This method creates an event for the given change and sends it to all
-   * registered listeners of this model.
+   * This method creates an event for the given change and sends it to all registered listeners of this model.
    * 
    * @param type is the type change.
    * @param node is the node that changed.
@@ -82,10 +82,10 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
   /**
    * {@inheritDoc}
    * 
-   * ATTENTION: This method assumes the {@link Object#getClass() class} of the
-   * {@link #getRootNode() root-node} as node-type. Please override this method
-   * if this is NOT applicable.
+   * ATTENTION: This method assumes the {@link Object#getClass() class} of the {@link #getRootNode()
+   * root-node} as node-type. Please override this method if this is NOT applicable.
    */
+  @Override
   @SuppressWarnings("unchecked")
   public Class<? extends N> getNodeType() {
 
@@ -93,8 +93,8 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
   }
 
   /**
-   * This method is called by the {@link #fireChangeEvent(UITreeModelEvent)}
-   * method if a listener caused an exception or error.
+   * This method is called by the {@link #fireChangeEvent(UITreeModelEvent)} method if a listener caused an
+   * exception or error.
    * 
    * @param listener is the listener that threw the exception or error.
    * @param t is the exception or error.
@@ -106,6 +106,7 @@ public abstract class AbstractUITreeModel<N> implements UiTreeMvcModel<N> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toString(N node) {
 
     if (node == null) {

@@ -20,8 +20,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiObject;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.UiNode} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.view.UiNode} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() delegate}.
@@ -43,8 +42,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   private boolean disposed;
 
   /**
-   * the registered listeners (or <code>null</code> if no listener is
-   * registered)
+   * the registered listeners (or <code>null</code> if no listener is registered)
    */
   private List<UiEventListener> listeners;
 
@@ -83,6 +81,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiNode getParent() {
 
     return this.parent;
@@ -91,6 +90,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void dispose() {
 
     if (!this.disposed) {
@@ -103,14 +103,15 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     return this.disposed;
   }
 
   /**
-   * This method gets the raw internal {@link VisibleState} without influence
-   * from the {@link #getParent() parent}.
+   * This method gets the raw internal {@link VisibleState} without influence from the {@link #getParent()
+   * parent}.
    * 
    * @return the raw {@link VisibleState}.
    */
@@ -122,6 +123,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public VisibleState getVisibleState() {
 
     if (this.visibleState.isVisible()) {
@@ -140,21 +142,20 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean isVisible() {
 
     return getVisibleState().isVisible();
   }
 
   /**
-   * This method shows or hides the underlying UI object according to the given
-   * <code>visible</code> flag. It is invoked from {@link #setVisible(boolean)}
-   * if the local visible-flag of this object changed.<br/>
-   * This default implementation throws a {@link UnsupportedOperationException}.
-   * You need to override this in subclasses that implement
-   * {@link AttributeWriteVisible}.
+   * This method shows or hides the underlying UI object according to the given <code>visible</code> flag. It
+   * is invoked from {@link #setVisible(boolean)} if the local visible-flag of this object changed.<br/>
+   * This default implementation throws a {@link UnsupportedOperationException}. You need to override this in
+   * subclasses that implement {@link AttributeWriteVisible}.
    * 
-   * @param visible - <code>true</code> if the object shall be shown,
-   *        <code>false</code> if it shall be hidden.
+   * @param visible - <code>true</code> if the object shall be shown, <code>false</code> if it shall be
+   *        hidden.
    */
   protected void doSetVisible(boolean visible) {
 
@@ -164,6 +165,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setVisible(boolean visible) {
 
     switch (this.visibleState) {
@@ -194,13 +196,11 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   }
 
   /**
-   * This method enables or disables the underlying UI object according to the
-   * given <code>enabled</code> flag. It is invoked from
-   * {@link #setEnabled(boolean)} if the local enabled-flag of this object
-   * changed.
+   * This method enables or disables the underlying UI object according to the given <code>enabled</code>
+   * flag. It is invoked from {@link #setEnabled(boolean)} if the local enabled-flag of this object changed.
    * 
-   * @param enabled - <code>true</code> if the object shall be enabled,
-   *        <code>false</code> if it shall be disabled.
+   * @param enabled - <code>true</code> if the object shall be enabled, <code>false</code> if it shall be
+   *        disabled.
    */
   protected void doSetEnabled(boolean enabled) {
 
@@ -210,6 +210,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public final void setEnabled(boolean enabled) {
 
     switch (this.enabledState) {
@@ -240,11 +241,10 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   }
 
   /**
-   * This method updates the {@link #getEnabledState() enabled-state} after the
-   * {@link #getParent() parent} has changed it. This should be invoked for all
-   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite#getChild(int)
-   * children} of a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite}
-   * in {@link #doSetEnabled(boolean)}.
+   * This method updates the {@link #getEnabledState() enabled-state} after the {@link #getParent() parent}
+   * has changed it. This should be invoked for all
+   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite#getChild(int) children} of a
+   * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} in {@link #doSetEnabled(boolean)}.
    */
   public void updateEnabledFromParent() {
 
@@ -266,6 +266,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public EnabledState getEnabledState() {
 
     return this.enabledState;
@@ -274,19 +275,19 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean isEnabled() {
 
     return getEnabledState().isEnabled();
   }
 
   /**
-   * This method sets the parent of this UI object. This is necessary if an
-   * object was constructed by this factory (parent is <code>null</code>) and is
-   * then added to a UI composite (or whenever it moves from one composite to
-   * another).
+   * This method sets the parent of this UI object. This is necessary if an object was constructed by this
+   * factory (parent is <code>null</code>) and is then added to a UI composite (or whenever it moves from one
+   * composite to another).
    * 
-   * @param newParent is the new parent of this object. It may be
-   *        <code>null</code> to remove the object from the UI tree.
+   * @param newParent is the new parent of this object. It may be <code>null</code> to remove the object from
+   *        the UI tree.
    */
   public void setParent(UiNode newParent) {
 
@@ -300,6 +301,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiFrame getParentFrame() {
 
     if (getType() == UiFrame.TYPE) {
@@ -319,6 +321,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiWindow getParentWindow() {
 
     if (this instanceof UiWindow) {
@@ -337,6 +340,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addListener(UiEventListener listener) {
 
     synchronized (this) {
@@ -351,12 +355,11 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   }
 
   /**
-   * This method registers the listener adapter in the wrapped UI object. It is
-   * called only once when the first listener is registered.
+   * This method registers the listener adapter in the wrapped UI object. It is called only once when the
+   * first listener is registered.
    * 
-   * @return <code>false</code> if this UI object will never send any event
-   *         therefore no listeners must be registered. If you override this
-   *         method to initialize the listener adapter, you should return
+   * @return <code>false</code> if this UI object will never send any event therefore no listeners must be
+   *         registered. If you override this method to initialize the listener adapter, you should return
    *         <code>true</code>.
    */
   protected boolean doInitializeListener() {
@@ -367,6 +370,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void sendEvent(UiEventType action) {
 
     if (this.listeners != null) {
@@ -384,6 +388,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void removeListener(UiEventListener listener) {
 
     synchronized (this) {
@@ -396,6 +401,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void refresh() {
 
     refresh(UIRefreshEvent.DEFAULT);
@@ -414,6 +420,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyles() {
 
     return getAdapter().getStyles();
@@ -422,6 +429,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean hasStyle(String style) {
 
     return getAdapter().hasStyle(style);
@@ -430,6 +438,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setStyles(String styles) {
 
     getAdapter().setStyles(styles);
@@ -438,6 +447,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addStyle(String style) {
 
     getAdapter().addStyle(style);
@@ -446,6 +456,7 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean removeStyle(String style) {
 
     return getAdapter().removeStyle(style);

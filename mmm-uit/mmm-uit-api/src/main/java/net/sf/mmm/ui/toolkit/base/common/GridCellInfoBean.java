@@ -31,6 +31,7 @@ public class GridCellInfoBean implements GridCellInfo {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setColumnSpan(int columnSpan) {
 
     if (columnSpan < 1) {
@@ -42,6 +43,7 @@ public class GridCellInfoBean implements GridCellInfo {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getColumnSpan() {
 
     return this.columnSpan;
@@ -50,6 +52,7 @@ public class GridCellInfoBean implements GridCellInfo {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setRowSpan(int rowSpan) {
 
     if (rowSpan < 1) {
@@ -61,6 +64,7 @@ public class GridCellInfoBean implements GridCellInfo {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getRowSpan() {
 
     return this.rowSpan;

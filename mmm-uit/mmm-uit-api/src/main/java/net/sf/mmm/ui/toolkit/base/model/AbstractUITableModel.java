@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel}
+ * interface.
  * 
  * @param <E> is the templated type of the objects in the table cells.
  * 
@@ -36,6 +36,7 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addListener(UITableModelListener listener) {
 
     this.listeners.add(listener);
@@ -44,6 +45,7 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void removeListener(UITableModelListener listener) {
 
     this.listeners.remove(listener);
@@ -52,6 +54,7 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getCellValueAsString(int rowIndex, int columnIndex) {
 
     E value = getCellValue(rowIndex, columnIndex);
@@ -63,8 +66,8 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   }
 
   /**
-   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
-   * an event that informs of the change of a single row.
+   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends} an event that informs of the
+   * change of a single row.
    * 
    * @param type is the type change.
    * @param rowIndex is the index of the row that has changed.
@@ -75,8 +78,8 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   }
 
   /**
-   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
-   * an event that informs of the change of a range of rows.
+   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends} an event that informs of the
+   * change of a range of rows.
    * 
    * @param type is the type change.
    * @param rowStartIndex is the index of the first row that has changed.
@@ -88,8 +91,8 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   }
 
   /**
-   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
-   * an event that informs of the change of a single column.
+   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends} an event that informs of the
+   * change of a single column.
    * 
    * @param type is the type change.
    * @param columnIndex is the index of the column that has changed.
@@ -100,8 +103,8 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   }
 
   /**
-   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends}
-   * an event that informs of the change of a range of rows.
+   * This method creates and {@link #fireChangeEvent(UITableModelEvent) sends} an event that informs of the
+   * change of a range of rows.
    * 
    * @param type is the type change.
    * @param rowStartIndex is the index of the first row that has changed.
@@ -114,9 +117,8 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   }
 
   /**
-   * This method sends the given event to all
-   * {@link UiTableMvcModel#addListener(UITableModelListener) registered}
-   * {@link UITableModelListener listeners} of this model.
+   * This method sends the given event to all {@link UiTableMvcModel#addListener(UITableModelListener)
+   * registered} {@link UITableModelListener listeners} of this model.
    * 
    * @param event is the event to send.
    */
@@ -133,8 +135,8 @@ public abstract class AbstractUITableModel<E> implements UiTableMvcModel<E> {
   }
 
   /**
-   * This method is called by the {@link #fireChangeEvent(UITableModelEvent)}
-   * method if a listener caused an exception or error.
+   * This method is called by the {@link #fireChangeEvent(UITableModelEvent)} method if a listener caused an
+   * exception or error.
    * 
    * @param listener is the listener that threw the exception or error.
    * @param t is the exception or error.

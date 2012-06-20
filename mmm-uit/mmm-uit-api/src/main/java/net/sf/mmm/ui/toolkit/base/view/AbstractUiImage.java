@@ -7,10 +7,8 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.AbstractUiObject;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.UiImage} interface.<br>
- * Set initial {@link #setSize(int, int) site} in constructor of the
- * implementation.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.view.UiImage} interface.<br>
+ * Set initial {@link #setSize(int, int) site} in constructor of the implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -26,8 +24,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * The constructor.
    * 
-   * @param uiFactory is the
-   *        {@link net.sf.mmm.ui.toolkit.base.AbstractUiFactory} instance.
+   * @param uiFactory is the {@link net.sf.mmm.ui.toolkit.base.AbstractUiFactory} instance.
    */
   public AbstractUiImage(AbstractUiFactory uiFactory) {
 
@@ -37,6 +34,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return TYPE;
@@ -45,6 +43,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSize(int newWidth, int newHeight) {
 
     this.width = newWidth;
@@ -54,6 +53,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isResizable() {
 
     return true;
@@ -62,6 +62,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidth() {
 
     return this.width;
@@ -70,6 +71,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeight() {
 
     return this.height;

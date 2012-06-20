@@ -10,8 +10,16 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteVisible extends AttributeReadVisible, AttributeWriteOnlyVisible {
+public interface AttributeWriteVisible extends AttributeReadVisible {
 
-  // nothing to add...
+  /**
+   * This method shows or hides this object.
+   * 
+   * @see AttributeReadVisibleState#getVisibleState()
+   * 
+   * @param visible is the new visibility status of this object. If <code>true</code>, the object will be
+   *        shown (and raised), if false the object will be hidden (iconified).
+   */
+  void setVisible(boolean visible);
 
 }

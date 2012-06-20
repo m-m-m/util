@@ -21,13 +21,4 @@ public interface AttributeReadStyles {
    */
   String getStyles();
 
-  /**
-   * This method checks if the given <code>style</code> is contained in the {@link #getStyles() set of styles}
-   * .
-   * 
-   * @param style is the style to check.
-   * @return true if the given <code>style</code> is active.
-   */
-  boolean hasStyle(String style);
-
 }

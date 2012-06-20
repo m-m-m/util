@@ -6,8 +6,7 @@ import net.sf.mmm.ui.toolkit.api.UiObject;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.UiObject} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.UiObject} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -37,6 +36,7 @@ public abstract class AbstractUiObject implements UiObject, AttributeWriteHtmlId
   /**
    * {@inheritDoc}
    */
+  @Override
   public AbstractUiFactory getFactory() {
 
     return this.factory;
@@ -45,6 +45,7 @@ public abstract class AbstractUiObject implements UiObject, AttributeWriteHtmlId
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     if (this.id == null) {
@@ -56,6 +57,7 @@ public abstract class AbstractUiObject implements UiObject, AttributeWriteHtmlId
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setId(String newId) {
 
     this.id = newId;

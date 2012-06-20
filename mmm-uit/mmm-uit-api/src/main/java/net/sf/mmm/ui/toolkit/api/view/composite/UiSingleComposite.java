@@ -5,8 +5,7 @@ package net.sf.mmm.ui.toolkit.api.view.composite;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
- * This is the abstract interface for a {@link UiComposite} that contains a
- * single {@link #getChild() child}.<br>
+ * This is the abstract interface for a {@link UiComposite} that contains a single {@link #getChild() child}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -15,11 +14,12 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 public abstract interface UiSingleComposite<CHILD extends UiElement> extends UiComposite<CHILD> {
 
   /**
-   * This method will return <code>0</code> if {@link #getChild()} will return
-   * <code>null</code>. Otherwise it will return <code>1</code>.
+   * This method will return <code>0</code> if {@link #getChild()} will return <code>null</code>. Otherwise it
+   * will return <code>1</code>.
    * 
    * {@inheritDoc}
    */
+  @Override
   int getChildCount();
 
   /**
@@ -30,9 +30,8 @@ public abstract interface UiSingleComposite<CHILD extends UiElement> extends UiC
   CHILD getChild();
 
   /**
-   * This method sets the single {@link #getChild() child}. The current
-   * {@link #getChild() child} will be replaced (and is therefore removed from
-   * the UI).
+   * This method sets the single {@link #getChild() child}. The current {@link #getChild() child} will be
+   * replaced (and is therefore removed from the UI).
    * 
    * @param child is the child to set.
    */

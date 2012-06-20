@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.api.view.widget;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 
 /**
- * This is the interface for a progress-bar. It is a widget used to display
- * feedback about an ongoing background process.
+ * This is the interface for a progress-bar. It is a widget used to display feedback about an ongoing
+ * background process.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -17,9 +17,8 @@ public interface UiProgressBar extends UiWidget, AttributeReadOrientation {
   String TYPE = "ProgressBar";
 
   /**
-   * This method gets the current progress. It is a value in the range of
-   * <code>[0, 100]</code> and represents the completeness of the progress in
-   * percent.
+   * This method gets the current progress. It is a value in the range of <code>[0, 100]</code> and represents
+   * the completeness of the progress in percent.
    * 
    * @return the progress.
    */
@@ -28,17 +27,14 @@ public interface UiProgressBar extends UiWidget, AttributeReadOrientation {
   /**
    * This method sets the progress to the given value.
    * 
-   * @param newProgress is the new progress. It must be in the range of
-   *        <code>[0, 100]</code>.
+   * @param newProgress is the new progress. It must be in the range of <code>[0, 100]</code>.
    */
   void setProgress(int newProgress);
 
   /**
-   * This method determines the status of the indeterminate flag of the
-   * progress-bar.
+   * This method determines the status of the indeterminate flag of the progress-bar.
    * 
-   * @return <code>true</code>, if the progress-bar continously,
-   *         <code>false</code>
+   * @return <code>true</code>, if the progress-bar continously, <code>false</code>
    */
   boolean isIndeterminate();
 

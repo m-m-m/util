@@ -5,29 +5,22 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 /**
  * This interface gives write access to the {@link #setStyles(String) style-name(s)} of an object.
  * 
- * @see AttributeReadStyles
+ * @see AttributeReadStylesAdvanced
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteStyles extends AttributeReadStyles, AttributeWriteOnlyStyles {
+public interface AttributeWriteStyles extends AttributeReadStyles {
 
   /**
-   * This method adds the given <code>style</code> to the {@link #getStyles() styles}.
+   * This method clears all {@link AttributeReadStylesAdvanced#getStyles() styles} and sets them to the given
+   * <code>styles</code>.
    * 
-   * @param style is the style to add. If this style is already contained in the {@link #getStyles() styles},
-   *        this will have no effect.
-   */
-  void addStyle(String style);
-
-  /**
-   * This method removes the given <code>style</code> from the {@link #getStyles() styles}.
+   * @see AttributeReadStylesAdvanced#getStyles()
    * 
-   * @param style is the style to remove. If this style is NOT contained in the {@link #getStyles() styles},
-   *        this will have no effect.
-   * @return <code>true</code> if the given <code>style</code> has actually been removed, <code>false</code>
-   *         otherwise (if it {@link #hasStyle(String) was NOT present}).
+   * @param styles are the styles of this object. Either a single style or a list of styles separated by
+   *        whitespaces. Use the empty string to unset all styles.
    */
-  boolean removeStyle(String style);
+  void setStyles(String styles);
 
 }

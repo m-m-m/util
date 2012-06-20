@@ -43,6 +43,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiTreeNode<T> getParentNode() {
 
     return this.parent;
@@ -51,6 +52,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiTreeNode<T> getChildNode(int index) {
 
     return this.children.get(index);
@@ -59,6 +61,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getChildNodeCount() {
 
     return this.children.size();
@@ -67,6 +70,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getIndexOfChildNode(UiTreeNode childNode) {
 
     return this.children.indexOf(childNode);
@@ -75,6 +79,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public T getData() {
 
     return this.data;
@@ -96,8 +101,7 @@ public class DefaultUITreeNode<T> implements UiTreeNode<T> {
   /**
    * This method creates a child node of this node.
    * 
-   * @param childData is the data object of this node. See
-   *        {@link UiTreeNode#getData()}.
+   * @param childData is the data object of this node. See {@link UiTreeNode#getData()}.
    * @return the created node.
    */
   public DefaultUITreeNode<T> createChildNode(T childData) {

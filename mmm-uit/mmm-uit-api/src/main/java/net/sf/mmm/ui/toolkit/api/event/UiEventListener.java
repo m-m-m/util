@@ -7,13 +7,12 @@ import java.util.EventListener;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 
 /**
- * This is the interface for a listener that gets
- * {@link #onEvent(UiNode, UiEventType) notified} if a particular
- * {@link UiEventType type of action} occurred.<br/>
+ * This is the interface for a listener that gets {@link #onEvent(UiNode, UiEventType) notified} if a
+ * particular {@link UiEventType type of action} occurred.<br/>
  * Some examples:
  * <ul>
- * <li>if a {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} was clicked
- * by the user, a {@link UiEventType#CLICK} is send.</li>
+ * <li>if a {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} was clicked by the user, a
+ * {@link UiEventType#CLICK} is send.</li>
  * <li></li>
  * <li></li>
  * <li></li>

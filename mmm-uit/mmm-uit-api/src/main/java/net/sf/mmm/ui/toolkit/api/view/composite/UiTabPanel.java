@@ -6,8 +6,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
- * This is the interface for a tabbed panel. Such component is a composite that
- * contains a number of components that can be switched via a tab-header.
+ * This is the interface for a tabbed panel. Such component is a composite that contains a number of
+ * components that can be switched via a tab-header.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -19,24 +19,21 @@ public interface UiTabPanel<CHILD extends UiElement> extends UiMultiComposite<CH
   String TYPE = "TabPanel";
 
   /**
-   * This method adds the given component as new tab on the ride of all existing
-   * tabs.
+   * This method adds the given component as new tab on the ride of all existing tabs.
    * 
-   * @param component is the component to add. The given component instance must
-   *        be created by the same factory.
+   * @param component is the component to add. The given component instance must be created by the same
+   *        factory.
    * @param title is the title that will be displayed in the tab.
    */
   void addChild(CHILD component, String title);
 
   /**
-   * This method adds the given component as new tab on the ride of all existing
-   * tabs.
+   * This method adds the given component as new tab on the ride of all existing tabs.
    * 
-   * @param component is the component to add. The given component instance must
-   *        be created by the same factory.
+   * @param component is the component to add. The given component instance must be created by the same
+   *        factory.
    * @param title is the title that will be displayed in the tab.
-   * @param position is the index position where the given component will be
-   *        inserted.
+   * @param position is the index position where the given component will be inserted.
    */
   void insertChild(CHILD component, String title, int position);
 

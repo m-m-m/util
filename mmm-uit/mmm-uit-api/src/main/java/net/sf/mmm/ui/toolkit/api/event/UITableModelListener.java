@@ -7,8 +7,8 @@ import java.util.EventListener;
 import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 
 /**
- * This is the interface of a table model listener. Such a listener gets
- * notified about any change of table cells from the table model.
+ * This is the interface of a table model listener. Such a listener gets notified about any change of table
+ * cells from the table model.
  * 
  * @see net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel
  * 
@@ -17,8 +17,7 @@ import net.sf.mmm.ui.toolkit.base.event.UITableModelEvent;
 public interface UITableModelListener extends EventListener {
 
   /**
-   * This method is called by the
-   * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel table-model} if
+   * This method is called by the {@link net.sf.mmm.ui.toolkit.api.model.data.UiTableMvcModel table-model} if
    * it changed (cells have been updated, inserted or removed).
    * 
    * @param event notifies about the change.

@@ -8,15 +8,15 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTitle;
 import net.sf.mmm.ui.toolkit.base.view.UiNodeAdapter;
 
 /**
- * This is the interface that adapts to the native UI object of the underlying
- * toolkit implementation for a
+ * This is the interface that adapts to the native UI object of the underlying toolkit implementation for a
  * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public interface UiWindowAdapter<DELEGATE> extends UiNodeAdapter<DELEGATE>, AttributeWriteSize, AttributeWriteTitle, AttributeWritePosition {
+public interface UiWindowAdapter<DELEGATE> extends UiNodeAdapter<DELEGATE>, AttributeWriteSize, AttributeWriteTitle,
+    AttributeWritePosition {
 
   /**
    * @see net.sf.mmm.ui.toolkit.api.view.window.UiWindow#pack()

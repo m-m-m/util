@@ -6,18 +6,15 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
- * This is the interface for a simple {@link UiComposite composite} containing
- * two {@link UiElement components}. The {@link #getDecorator() first component}
- * will be layouted with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE
- * fixed} size on the top/left, the {@link #getComponent() other component} will
- * be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and located
- * at the bottom/right.<br>
+ * This is the interface for a simple {@link UiComposite composite} containing two {@link UiElement
+ * components}. The {@link #getDecorator() first component} will be layouted with a
+ * {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE fixed} size on the top/left, the
+ * {@link #getComponent() other component} will be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH
+ * scaled} and located at the bottom/right.<br>
  * The intention of this composite is to simplify the layout management.
  * 
- * @param <D> is the templated type of the {@link #getDecorator() decorating
- *        component}.
- * @param <C> is the templated type of the {@link #getComponent() main
- *        component}.
+ * @param <D> is the templated type of the {@link #getDecorator() decorating component}.
+ * @param <C> is the templated type of the {@link #getComponent() main component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -32,20 +29,18 @@ public interface UiDecoratedComponent<CHILD extends UiElement, D extends CHILD, 
   String TYPE = "DecoratedComponent";
 
   /**
-   * This method gets the decorating component (e.g. a
-   * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel label}) that is layed
-   * out with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE fixed} size
-   * on the top/left.
+   * This method gets the decorating component (e.g. a {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel
+   * label}) that is layed out with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE fixed} size on the
+   * top/left.
    * 
    * @return the decorating component.
    */
   D getDecorator();
 
   /**
-   * This method gets the main component (e.g. a
-   * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField text-field} that
-   * will be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and
-   * located at the bottom/right.
+   * This method gets the main component (e.g. a {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField
+   * text-field} that will be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and located at the
+   * bottom/right.
    * 
    * @return the main component.
    */

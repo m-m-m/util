@@ -11,9 +11,8 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 
 /**
- * This is the abstract base implementation of a
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that can contain
- * any number of components.
+ * This is the abstract base implementation of a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite}
+ * that can contain any number of components.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type of the {@link #getAdapter() delegate}.
@@ -40,6 +39,7 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getChildCount() {
 
     return this.components.size();
@@ -48,6 +48,7 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
   /**
    * {@inheritDoc}
    */
+  @Override
   public CHILD getChild(int index) {
 
     return this.components.get(index);
@@ -65,8 +66,7 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
   }
 
   /**
-   * This method adds (inserts) the <code>child</code> at the given
-   * <code>index</code>.
+   * This method adds (inserts) the <code>child</code> at the given <code>index</code>.
    * 
    * @param child is the child element to add.
    * @param index is the position where to insert the child.
@@ -78,10 +78,9 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
   }
 
   /**
-   * This method sets the <code>child</code> at the given <code>index</code>. If
-   * the given <code>index</code> is greater or equal to
-   * {@link #getChildCount()}, according child entries will be allocated that
-   * are initialized with <code>null</code>.
+   * This method sets the <code>child</code> at the given <code>index</code>. If the given <code>index</code>
+   * is greater or equal to {@link #getChildCount()}, according child entries will be allocated that are
+   * initialized with <code>null</code>.
    * 
    * @param child is the child element to add.
    * @param index is the position where to insert the child.
@@ -112,8 +111,7 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
    * @see List#indexOf(Object)
    * 
    * @param component is the component to lookup.
-   * @return the index of the given <code>component</code> or <code>-1</code> if
-   *         NOT found.
+   * @return the index of the given <code>component</code> or <code>-1</code> if NOT found.
    */
   protected int indexOfComponent(UiElement component) {
 
@@ -123,6 +121,7 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
   /**
    * {@inheritDoc}
    */
+  @Override
   public CHILD removeChild(int index) {
 
     CHILD component = doRemoveChild(index);
@@ -133,6 +132,7 @@ public abstract class AbstractUiMultiComposite<DELEGATE, CHILD extends AbstractU
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean removeChild(CHILD component) {
 
     // return this.components.remove(component);

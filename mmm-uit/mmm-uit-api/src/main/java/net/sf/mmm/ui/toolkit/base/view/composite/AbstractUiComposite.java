@@ -7,9 +7,8 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 
 /**
- * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using Swing as the
- * UI toolkit.
+ * This class is the implementation of the {@link net.sf.mmm.ui.toolkit.api.view.UiElement} interface using
+ * Swing as the UI toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type of the {@link #getAdapter() delegate}.

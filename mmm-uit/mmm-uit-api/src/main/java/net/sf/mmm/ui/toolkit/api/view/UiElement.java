@@ -15,6 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiElement extends UiNode, AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteSize {
+public interface UiElement extends UiNode, AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled,
+    AttributeWriteSize {
 
 }

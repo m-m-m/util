@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.model;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadStyles;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadStylesAdvanced;
 
 /**
  * This is the model of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement}.
@@ -11,6 +11,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadStyles;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiElementModel extends AttributeReadHtmlId, AttributeReadStyles {
+public interface UiElementModel extends AttributeReadHtmlId, AttributeReadStylesAdvanced {
 
 }

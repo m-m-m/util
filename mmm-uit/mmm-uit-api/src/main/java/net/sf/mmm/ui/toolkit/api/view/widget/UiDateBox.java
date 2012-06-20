@@ -8,11 +8,11 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteLocale;
 
 /**
- * This is the interface of a date box. It is a widget where the user can
- * specify a date (without time) in a comfortable way.<br>
- * The widget itself should be lightweight and require only little space to fit
- * into a single line (e.g. a text-field with a button beside). If more space is
- * required, a pull-down, pop-up, or dialog may be opened via a button.
+ * This is the interface of a date box. It is a widget where the user can specify a date (without time) in a
+ * comfortable way.<br>
+ * The widget itself should be lightweight and require only little space to fit into a single line (e.g. a
+ * text-field with a button beside). If more space is required, a pull-down, pop-up, or dialog may be opened
+ * via a button.
  * 
  * @see UiTimeBox
  * 
@@ -29,6 +29,7 @@ public interface UiDateBox extends UiWidget, AttributeWriteLocale, UiWriteValue<
    * 
    * @param newDate is the new date value.
    */
+  @Override
   void setValue(Date newDate);
 
   /**
@@ -36,6 +37,7 @@ public interface UiDateBox extends UiWidget, AttributeWriteLocale, UiWriteValue<
    * 
    * @return the date value.
    */
+  @Override
   Date getValue();
 
 }

@@ -3,8 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.model.data;
 
 /**
- * This is the interface of a
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} that can be
+ * This is the interface of a {@link net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel} that can be
  * modified.
  * 
  * @param <E> is the templated type of the objects in the table cells.
@@ -23,8 +22,7 @@ public interface UiMutableTableMvcModel<E> extends UiTableMvcModel<E> {
   void setCellValue(int rowIndex, int columnIndex, E value);
 
   /**
-   * This method sets the {@link UiTableMvcModel#getColumnName(int) name} of the
-   * column at the given index.
+   * This method sets the {@link UiTableMvcModel#getColumnName(int) name} of the column at the given index.
    * 
    * @param columnIndex is the index of the according column.
    * @param name is the new name of the specified column.

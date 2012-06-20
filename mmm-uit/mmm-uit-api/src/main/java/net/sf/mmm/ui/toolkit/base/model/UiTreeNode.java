@@ -16,8 +16,7 @@ public interface UiTreeNode<T> {
   /**
    * This method gets the parent node of this node.
    * 
-   * @return the parent node of this node or <code>null</code> if this is the
-   *         root node of the tree.
+   * @return the parent node of this node or <code>null</code> if this is the root node of the tree.
    */
   UiTreeNode<T> getParentNode();
 
@@ -40,19 +39,17 @@ public interface UiTreeNode<T> {
    * This method gets the index of the given child node.
    * 
    * @param childNode is the child node whos index is requested.
-   * @return the index position of the requested child node or -1 if the given
-   *         node is no child node of this node.
+   * @return the index position of the requested child node or -1 if the given node is no child node of this
+   *         node.
    */
   int getIndexOfChildNode(UiTreeNode childNode);
 
   /**
-   * This method gets the data object of this node. The node itself only
-   * contains the tree structure. The data is stored as generic object and is
-   * used to create the display name of the tree node. That is done in the
-   * toString method of the tree node implementation. By default the call is
-   * delegated to the toString method of the data object.<br/>
-   * In the most simple approach the data may be only a String that represents
-   * the display name of this node.
+   * This method gets the data object of this node. The node itself only contains the tree structure. The data
+   * is stored as generic object and is used to create the display name of the tree node. That is done in the
+   * toString method of the tree node implementation. By default the call is delegated to the toString method
+   * of the data object.<br/>
+   * In the most simple approach the data may be only a String that represents the display name of this node.
    * 
    * @return the data object of this node.
    */

@@ -5,11 +5,9 @@ package net.sf.mmm.ui.toolkit.api.event;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This class represents the event sent by the
- * {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel tree-model} to its
- * {@link net.sf.mmm.ui.toolkit.api.event.UITreeModelListener listeners} in
- * order to notify about changes of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTree tree}.
+ * This class represents the event sent by the {@link net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel
+ * tree-model} to its {@link net.sf.mmm.ui.toolkit.api.event.UITreeModelListener listeners} in order to notify
+ * about changes of the {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTree tree}.
  * 
  * @param <N> is the type of the node that changed.
  * 

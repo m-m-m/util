@@ -50,6 +50,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getItemCount() {
 
     return this.items.size();
@@ -58,6 +59,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<? extends UiMenuItem> getItems() {
 
     return this.items.iterator();
@@ -66,6 +68,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenuItem addItem(String name, UiEventListener action) {
 
     return addItem(name, action, ButtonStyle.DEFAULT);
@@ -74,6 +77,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenuItem addItem(String name, ButtonStyle style) {
 
     return addItem(name, null, style);
@@ -82,6 +86,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenuItem addItem(UiAction uiAction) {
 
     UiMenuItem item = addItem(uiAction.getName(), uiAction.getActionListener(), uiAction.getButtonStyle());
@@ -100,6 +105,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenuItem addItem(String name, UiEventListener action, ButtonStyle style) {
 
     AbstractUiMenuItem<?> menuItem = createMenuItem(name, style);
@@ -125,6 +131,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenu addSubMenu(String name) {
 
     AbstractUiMenu<?> menu = createSubMenu(name);
@@ -145,6 +152,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public ButtonStyle getButtonStyle() {
 
     return ButtonStyle.DEFAULT;
@@ -153,6 +161,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isSelected() {
 
     return false;
@@ -161,6 +170,7 @@ public abstract class AbstractUiMenu<DELEGATE> extends AbstractUiMenuItem<DELEGA
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSelected(boolean selected) {
 
     // nothing to do here

@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.api.view.composite;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
- * This is the abstract interface for a panel. A panel is a {@link UiComposite}
- * that can dynamically aggregate multiple other {@link UiElement}s. <br>
+ * This is the abstract interface for a panel. A panel is a {@link UiComposite} that can dynamically aggregate
+ * multiple other {@link UiElement}s. <br>
  * 
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -19,9 +19,8 @@ public abstract interface UiMultiComposite<CHILD extends UiElement> extends UiCo
    * It will have no effect, if the component has not been added to this panel.
    * 
    * @param component is the component to remove.
-   * @return <code>true</code> if the <code>component</code> has been remove,
-   *         <code>false</code> otherwise (it was NOT in the panels component
-   *         list).
+   * @return <code>true</code> if the <code>component</code> has been remove, <code>false</code> otherwise (it
+   *         was NOT in the panels component list).
    */
   boolean removeChild(CHILD component);
 

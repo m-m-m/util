@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.base.view.composite;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
 
 /**
- * This class is a simple container for the size of a
- * {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
+ * This class is a simple container for the size of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement
+ * component}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -34,8 +34,7 @@ public class Size {
   /**
    * The constructor.
    * 
-   * @param size is a {@link AttributeReadSize sized-object} that will be converted to
-   *        a {@link Size}.
+   * @param size is a {@link AttributeReadSize sized-object} that will be converted to a {@link Size}.
    */
   public Size(AttributeReadSize size) {
 

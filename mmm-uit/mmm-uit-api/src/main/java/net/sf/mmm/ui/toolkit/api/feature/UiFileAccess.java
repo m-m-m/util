@@ -10,16 +10,15 @@ package net.sf.mmm.ui.toolkit.api.feature;
 public interface UiFileAccess {
 
   /**
-   * This method gets the href of the identified file. This can be an absolute
-   * URL but may also be a path relative to the base URL of the application.
+   * This method gets the href of the identified file. This can be an absolute URL but may also be a path
+   * relative to the base URL of the application.
    * 
    * @return the URL or href.
    */
   String getUrl();
 
   /**
-   * This method gets the size of the data in bytes or <code>-1</code> if the
-   * size is unknown.
+   * This method gets the size of the data in bytes or <code>-1</code> if the size is unknown.
    * 
    * @return the size in bytes or <code>-1</code> if unknown.
    */

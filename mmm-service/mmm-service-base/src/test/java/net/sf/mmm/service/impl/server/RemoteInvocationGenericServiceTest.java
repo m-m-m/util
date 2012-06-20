@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.service.api.RemoteInvocationServiceResult;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
-import net.sf.mmm.service.base.RemoteInvocationServiceResult;
 import net.sf.mmm.test.AbstractSpringTest;
 
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class RemoteInvocationGenericServiceTest extends AbstractSpringTest {
     RemoteInvocationGenericServiceResponse response = this.genericService.callServices(request);
     assertNotNull(response);
     assertEquals(requestId, response.getRequestId());
-    RemoteInvocationServiceResult[] results = response.getResults();
+    RemoteInvocationServiceResult<?>[] results = response.getResults();
     assertEquals(calls.length, results.length);
     assertSame(TestService.MAGIC_VALUE, results[0].getResult());
   }

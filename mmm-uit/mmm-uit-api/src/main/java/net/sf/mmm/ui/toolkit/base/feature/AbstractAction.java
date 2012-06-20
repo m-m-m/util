@@ -7,8 +7,8 @@ import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.view.UiImage;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.feature.UiAction} interface.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.feature.UiAction}
+ * interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -65,6 +65,7 @@ public abstract class AbstractAction implements UiAction {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
 
     return this.name;
@@ -83,6 +84,7 @@ public abstract class AbstractAction implements UiAction {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     return this.id;
@@ -101,6 +103,7 @@ public abstract class AbstractAction implements UiAction {
   /**
    * {@inheritDoc}
    */
+  @Override
   public ButtonStyle getButtonStyle() {
 
     return this.buttonStyle;
@@ -119,6 +122,7 @@ public abstract class AbstractAction implements UiAction {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiImage getIcon() {
 
     return this.icon;

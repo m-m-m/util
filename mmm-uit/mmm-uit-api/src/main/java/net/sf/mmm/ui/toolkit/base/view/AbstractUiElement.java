@@ -37,6 +37,7 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setTooltip(String tooltip) {
 
     getAdapter().setTooltip(tooltip);
@@ -46,6 +47,7 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTooltip() {
 
     return this.tooltip;
@@ -54,6 +56,7 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isResizable() {
 
     return true;
@@ -62,6 +65,7 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidth() {
 
     return getAdapter().getWidth();
@@ -70,6 +74,7 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeight() {
 
     return getAdapter().getHeight();
@@ -78,6 +83,7 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSize(int width, int height) {
 
     getAdapter().setSize(width, height);

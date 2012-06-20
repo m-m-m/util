@@ -2,16 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.base.client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.api.RemoteInvocationServiceResult;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
@@ -66,6 +69,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
   /**
    * {@inheritDoc}
    */
+  @Override
   public RemoteInvocationServiceQueueImpl newQueue() {
 
     return newQueue(new RemoteInvocationServiceQueueSettings());
@@ -74,13 +78,28 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
   /**
    * {@inheritDoc}
    */
-  public RemoteInvocationServiceQueueImpl newQueue(RemoteInvocationServiceQueueSettings context) {
+  @Override
+  public RemoteInvocationServiceQueueImpl newQueue(RemoteInvocationServiceQueueSettings settings) {
 
-    if (this.currentQueue == null) {
-      this.currentQueue = new RemoteInvocationServiceQueueImpl(context);
-    } else {
-      this.currentQueue = new RemoteInvocationServiceQueueImpl(context, this.currentQueue);
-    }
+    return this.currentQueue = createQueue(settings);
+  }
+
+  /**
+   * This method creates a new {@link RemoteInvocationServiceQueueImpl}. If a {@link #getCurrentQueue()
+   * current queue} is present, the new queue has to use it as
+   * {@link RemoteInvocationServiceQueueImpl#getParentQueue() parent}.
+   * 
+   * @param settings are the {@link RemoteInvocationServiceQueueSettings}.
+   * @return the new {@link RemoteInvocationServiceQueueImpl}.
+   */
+  protected abstract RemoteInvocationServiceQueueImpl createQueue(RemoteInvocationServiceQueueSettings settings);
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public RemoteInvocationServiceQueueImpl getCurrentQueue() {
+
     return this.currentQueue;
   }
 
@@ -145,13 +164,13 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     }
     RemoteInvocationServiceCall[] calls = callQueue.toArray(new RemoteInvocationServiceCall[callQueue.size()]);
     RemoteInvocationGenericServiceRequest request = new RemoteInvocationGenericServiceRequest(nextRequestId(), calls);
-    List<RemoteInvocationServiceCallback<?>> callbackQueue = queue.getCallbackQueue();
+    List<RemoteInvocationServiceResultCallback<?>> callbackQueue = queue.getCallbackQueue();
     int size = callbackQueue.size();
     if (size != calls.length) {
       throw new IllegalStateException("Length of service calls and callbacks does NOT match!");
     }
-    RemoteInvocationServiceCallback<?>[] callbacks = callbackQueue
-        .toArray(new RemoteInvocationServiceCallback<?>[callbackQueue.size()]);
+    RemoteInvocationServiceResultCallback<?>[] callbacks = callbackQueue
+        .toArray(new RemoteInvocationServiceResultCallback<?>[callbackQueue.size()]);
     performRequest(request, callbacks);
     this.currentQueue = null;
   }
@@ -164,7 +183,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
    *        {@link RemoteInvocationGenericServiceRequest#getCalls()}.
    */
   protected abstract void performRequest(RemoteInvocationGenericServiceRequest request,
-      RemoteInvocationServiceCallback<?>[] callbacks);
+      RemoteInvocationServiceResultCallback<?>[] callbacks);
 
   /**
    * This inner class is the implementation of {@link RemoteInvocationServiceQueue}.
@@ -181,9 +200,9 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     private final List<RemoteInvocationServiceCall> callQueue;
 
     /** @see #getCallbackQueue() */
-    private final List<RemoteInvocationServiceCallback<?>> callbackQueue;
+    private final List<RemoteInvocationServiceResultCallback<?>> callbackQueue;
 
-    /** The current {@link ServiceCallData} or <code>null</code>. */
+    /** The current {@link AbstractRemoteInvocationServiceCaller.ServiceCallData} or <code>null</code>. */
     private ServiceCallData<?> currentCall;
 
     /** @see #isOpen() */
@@ -192,11 +211,28 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /**
      * The constructor.
      * 
-     * @param context - see {@link #getSettings()}.
+     * @param settings - see {@link #getSettings()}.
      */
-    public RemoteInvocationServiceQueueImpl(RemoteInvocationServiceQueueSettings context) {
+    public RemoteInvocationServiceQueueImpl(RemoteInvocationServiceQueueSettings settings) {
 
-      this(context, null);
+      this(settings, null);
+    }
+
+    /**
+     * The constructor.
+     * 
+     * @param settings - see {@link #getSettings()}.
+     * @param parentQueue - see {@link #getParentQueue()}.
+     */
+    public RemoteInvocationServiceQueueImpl(RemoteInvocationServiceQueueSettings settings,
+        RemoteInvocationServiceQueueImpl parentQueue) {
+
+      super();
+      this.settings = settings;
+      this.parentQueue = parentQueue;
+      this.callQueue = new ArrayList<RemoteInvocationServiceCall>();
+      this.callbackQueue = new ArrayList<RemoteInvocationServiceResultCallback<?>>();
+      this.open = true;
     }
 
     /**
@@ -229,23 +265,6 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     }
 
     /**
-     * The constructor.
-     * 
-     * @param context - see {@link #getSettings()}.
-     * @param parentQueue - see {@link #getParentQueue()}.
-     */
-    public RemoteInvocationServiceQueueImpl(RemoteInvocationServiceQueueSettings context,
-        RemoteInvocationServiceQueueImpl parentQueue) {
-
-      super();
-      this.settings = context;
-      this.parentQueue = parentQueue;
-      this.callQueue = new ArrayList<RemoteInvocationServiceCall>();
-      this.callbackQueue = new ArrayList<RemoteInvocationServiceCallback<?>>();
-      this.open = true;
-    }
-
-    /**
      * @return the {@link RemoteInvocationServiceQueueSettings} given when this queue has been
      *         {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) created}.
      */
@@ -265,6 +284,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isOpen() {
 
       return this.open;
@@ -291,7 +311,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /**
      * @return the callbackQueue
      */
-    public List<RemoteInvocationServiceCallback<?>> getCallbackQueue() {
+    public List<RemoteInvocationServiceResultCallback<?>> getCallbackQueue() {
 
       return this.callbackQueue;
     }
@@ -299,8 +319,22 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /**
      * {@inheritDoc}
      */
+    @Override
     public <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,
         Class<RESULT> returnType, RemoteInvocationServiceCallback<? extends RESULT> callback) {
+
+      @SuppressWarnings({ "rawtypes", "unchecked" })
+      RemoteInvocationServiceResultCallback<? extends RESULT> resultCallback = new RemoteInvocationServiceCallbackAdapter(
+          callback);
+      return getServiceClient(serviceInterface, returnType, resultCallback);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,
+        Class<RESULT> returnType, RemoteInvocationServiceResultCallback<? extends RESULT> callback) {
 
       requireOpen();
       requireNoCurrentCall();
@@ -323,6 +357,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /**
      * {@inheritDoc}
      */
+    @Override
     public void commit() {
 
       requireOpen();
@@ -340,6 +375,7 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /**
      * {@inheritDoc}
      */
+    @Override
     public void cancel() {
 
       requireOpen();
@@ -355,15 +391,14 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
    * This inner class is a simple container for the data of an invocation of a {@link RemoteInvocationService}
    * method.
    * 
-   * @see RemoteInvocationServiceQueueImpl#getServiceClient(Class, Class, RemoteInvocationServiceCallback)
    * @see RemoteInvocationServiceCall
    * 
    * @param <RESULT> is the generic type of the method return-type;
    */
   private static class ServiceCallData<RESULT> {
 
-    /** The current {@link RemoteInvocationServiceCallback}. */
-    private final RemoteInvocationServiceCallback<? extends RESULT> callback;
+    /** The current {@link RemoteInvocationServiceResultCallback}. */
+    private final RemoteInvocationServiceResultCallback<? extends RESULT> callback;
 
     /** The current return-type. */
     private final Class<RESULT> returnType;
@@ -379,12 +414,52 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
      * @param callback is the {@link RemoteInvocationServiceCallback}.
      */
     public ServiceCallData(Class<?> serviceInterface, Class<RESULT> returnType,
-        RemoteInvocationServiceCallback<? extends RESULT> callback) {
+        RemoteInvocationServiceResultCallback<? extends RESULT> callback) {
 
       super();
       this.callback = callback;
       this.returnType = returnType;
       this.serviceInterface = serviceInterface;
+    }
+
+  }
+
+  /**
+   * This inner class adapts from {@link RemoteInvocationServiceResultCallback} to
+   * {@link RemoteInvocationServiceCallback}.
+   * 
+   * @param <RESULT> is the generic type of the {@link #onResult(RemoteInvocationServiceResult, boolean)
+   *        result to receive}.
+   */
+  private static class RemoteInvocationServiceCallbackAdapter<RESULT extends Serializable> implements
+      RemoteInvocationServiceResultCallback<RESULT> {
+
+    /** @see #onResult(RemoteInvocationServiceResult, boolean) */
+    private final RemoteInvocationServiceCallback<RESULT> delegate;
+
+    /**
+     * The constructor.
+     * 
+     * @param delegate is the {@link RemoteInvocationServiceCallback} to adapt.
+     */
+    public RemoteInvocationServiceCallbackAdapter(RemoteInvocationServiceCallback<RESULT> delegate) {
+
+      super();
+      this.delegate = delegate;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onResult(RemoteInvocationServiceResult<RESULT> result, boolean complete) {
+
+      Throwable failure = result.getFailure();
+      if (failure == null) {
+        this.delegate.onSuccess(result.getResult(), complete);
+      } else {
+        this.delegate.onFailure(failure, complete);
+      }
     }
 
   }

@@ -11,12 +11,12 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
-import net.sf.mmm.service.api.RemoteInvocationServiceContext;
+import net.sf.mmm.service.api.RemoteInvocationServiceResult;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
-import net.sf.mmm.service.base.RemoteInvocationServiceResult;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
@@ -25,7 +25,13 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * This is the server-side default implementation of the {@link RemoteInvocationGenericService} interface.
+ * This is the server-side default implementation of the {@link RemoteInvocationGenericService} interface. You
+ * can extend this class to add custom logik. E.g. you could add
+ * {@link #doSecurityCheck(RemoteInvocationGenericServiceRequest) custom security checks} or override
+ * {@link #createResultOnSuccess(Serializable)} and {@link #createResultOnFailure(Throwable)} in order to add
+ * context information to the result (e.g. request or session scoped) - see
+ * {@link RemoteInvocationServiceQueue#getServiceClient(Class, Class, net.sf.mmm.service.api.client.RemoteInvocationServiceCallback)}
+ * .
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -48,6 +54,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public RemoteInvocationGenericServiceResponse callServices(RemoteInvocationGenericServiceRequest request) {
 
     NlsNullPointerException.checkNotNull(RemoteInvocationGenericServiceRequest.class, request);
@@ -55,7 +62,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
     doSecurityCheck(request);
 
     RemoteInvocationServiceCall[] calls = request.getCalls();
-    RemoteInvocationServiceResult[] results = new RemoteInvocationServiceResult[calls.length];
+    RemoteInvocationServiceResult<?>[] results = new RemoteInvocationServiceResult<?>[calls.length];
     RemoteInvocationGenericServiceResponse response = new RemoteInvocationGenericServiceResponse(
         request.getRequestId(), results);
 
@@ -68,13 +75,12 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
         throw new ObjectNotFoundException(RemoteInvocationServiceMethod.class.getSimpleName(), id);
       }
       // method found, invoke it and add result to response...
-      RemoteInvocationServiceContext context = null;
-      RemoteInvocationServiceResult serviceResult;
+      RemoteInvocationServiceResult<?> serviceResult;
       try {
         Serializable result = serviceMethod.invoke(call.getArguments());
-        serviceResult = new RemoteInvocationServiceResult(result, context);
+        serviceResult = createResultOnSuccess(result);
       } catch (Throwable e) {
-        serviceResult = createFailureResult(e, context);
+        serviceResult = createResultOnFailure(e);
       }
       results[i] = serviceResult;
       getLogger().debug("end processing call {}.", call.toString(true));
@@ -84,16 +90,32 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
   }
 
   /**
+   * This method creates the {@link RemoteInvocationServiceResult} in case the service-method successfully
+   * returned a result.
+   * 
+   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceCallback#onSuccess(Serializable, boolean)
+   * 
+   * @param result is the {@link RemoteInvocationServiceResult#getResult() result} of the service-method.
+   * @return the {@link RemoteInvocationServiceResult} with the result.
+   */
+  protected <RESULT extends Serializable> RemoteInvocationServiceResult<RESULT> createResultOnSuccess(RESULT result) {
+
+    return new RemoteInvocationServiceResult<RESULT>(result);
+  }
+
+  /**
    * This method creates the {@link RemoteInvocationServiceResult} in case the service-method threw an
    * exception.
    * 
-   * @param failure is the {@link Throwable} that occurred when invoking the service-method.
-   * @param context is the {@link RemoteInvocationServiceContext}.
+   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceCallback#onFailure(Throwable, boolean)
+   * 
+   * @param failure is the {@link RemoteInvocationServiceResult#getFailure() failure} that occurred when
+   *        invoking the service-method.
    * @return the {@link RemoteInvocationServiceResult} with the failure.
    */
-  private RemoteInvocationServiceResult createFailureResult(Throwable failure, RemoteInvocationServiceContext context) {
+  protected RemoteInvocationServiceResult<Serializable> createResultOnFailure(Throwable failure) {
 
-    return new RemoteInvocationServiceResult(failure, context);
+    return new RemoteInvocationServiceResult<Serializable>(failure);
   }
 
   /**

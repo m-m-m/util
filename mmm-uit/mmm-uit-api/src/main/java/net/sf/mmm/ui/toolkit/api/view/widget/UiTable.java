@@ -26,8 +26,7 @@ public interface UiTable<C> extends UiWidget, AttributeWriteSelectionIndex {
   UiTableMvcModel<C> getModel();
 
   /**
-   * This method sets the model of this table. If the table already has a model
-   * assigned, it will be replaced.
+   * This method sets the model of this table. If the table already has a model assigned, it will be replaced.
    * 
    * @param newModel is the new model to set.
    */

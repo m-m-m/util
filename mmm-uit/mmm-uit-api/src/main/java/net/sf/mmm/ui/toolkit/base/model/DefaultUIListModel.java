@@ -34,6 +34,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getElementCount() {
 
     return this.elements.size();
@@ -42,6 +43,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public E getElement(int index) {
 
     return this.elements.get(index);
@@ -50,6 +52,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addElement(E element) {
 
     this.elements.add(element);
@@ -59,6 +62,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setElement(E newItem, int index) {
 
     this.elements.set(index, newItem);
@@ -68,6 +72,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addElement(E item, int index) {
 
     this.elements.add(index, item);
@@ -77,6 +82,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void removeElement(int index) {
 
     this.elements.remove(index);
@@ -86,6 +92,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean removeElement(E element) {
 
     int index = this.elements.indexOf(element);
@@ -112,6 +119,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getIndexOf(E element) {
 
     return this.elements.indexOf(element);
@@ -120,6 +128,7 @@ public class DefaultUIListModel<E> extends AbstractUIMutableListModel<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getIndexOfString(String element) {
 
     int len = this.elements.size();

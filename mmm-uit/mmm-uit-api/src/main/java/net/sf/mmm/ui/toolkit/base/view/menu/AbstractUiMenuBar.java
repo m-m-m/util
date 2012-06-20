@@ -36,6 +36,7 @@ public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenu addMenu(String name) {
 
     synchronized (this.menuTable) {
@@ -62,6 +63,7 @@ public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiMenu getMenu(String name) {
 
     return this.menuTable.get(name);
@@ -70,6 +72,7 @@ public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getMenuCount() {
 
     return this.menuTable.size();
@@ -78,6 +81,7 @@ public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return TYPE;
@@ -86,6 +90,7 @@ public abstract class AbstractUiMenuBar<DELEGATE> extends AbstractUiNode<DELEGAT
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<UiMenu> getMenus() {
 
     return this.menuTable.values().iterator();

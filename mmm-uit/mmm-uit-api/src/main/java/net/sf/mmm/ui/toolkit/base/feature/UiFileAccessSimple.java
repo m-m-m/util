@@ -5,9 +5,8 @@ package net.sf.mmm.ui.toolkit.base.feature;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 
 /**
- * This is a simple implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.feature.UiFileAccess} interface. It gives
- * read-access to a given file in the filesystem.
+ * This is a simple implementation of the {@link net.sf.mmm.ui.toolkit.api.feature.UiFileAccess} interface. It
+ * gives read-access to a given file in the filesystem.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -30,6 +29,7 @@ public class UiFileAccessSimple implements UiFileAccess {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getUrl() {
 
     return this.url;
@@ -38,6 +38,7 @@ public class UiFileAccessSimple implements UiFileAccess {
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getSize() {
 
     return -1;

@@ -5,11 +5,9 @@ package net.sf.mmm.ui.toolkit.api.view.composite;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
- * This is the interface for a
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that represents
- * a grid. A grid orders its contents as NxM matrix with N rows and M columns.
- * For flexible organization of the grid it is organized as a list of
- * {@link UiGridRow}s. This makes inserting or removing rows easy.
+ * This is the interface for a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that represents a
+ * grid. A grid orders its contents as NxM matrix with N rows and M columns. For flexible organization of the
+ * grid it is organized as a list of {@link UiGridRow}s. This makes inserting or removing rows easy.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -21,14 +19,11 @@ public interface UiGridPanel<CHILD extends UiGridRow<? extends UiElement>> exten
   String TYPE = "GridPanel";
 
   /**
-   * This method creates a new {@link UiGridRow}. The number of columns in this
-   * {@link UiGridPanel} will be preallocated for the new row. The cells will be
-   * empty and the row is not connected with this {@link UiGridPanel} and
-   * therefore not displayed to the user, yet.<br/>
-   * You can fill the cells and then
-   * {@link #insertChild(net.sf.mmm.ui.toolkit.api.view.UiElement, int) insert}
-   * or {@link #addChild(net.sf.mmm.ui.toolkit.api.view.UiElement) append} the
-   * new row.
+   * This method creates a new {@link UiGridRow}. The number of columns in this {@link UiGridPanel} will be
+   * preallocated for the new row. The cells will be empty and the row is not connected with this
+   * {@link UiGridPanel} and therefore not displayed to the user, yet.<br/>
+   * You can fill the cells and then {@link #insertChild(net.sf.mmm.ui.toolkit.api.view.UiElement, int)
+   * insert} or {@link #addChild(net.sf.mmm.ui.toolkit.api.view.UiElement) append} the new row.
    * 
    * @return the new {@link UiGridRow}.
    */

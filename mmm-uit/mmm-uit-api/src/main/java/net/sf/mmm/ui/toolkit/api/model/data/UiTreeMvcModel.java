@@ -23,17 +23,15 @@ public interface UiTreeMvcModel<N> {
   void addListener(UITreeModelListener<N> listener);
 
   /**
-   * This method unregisters the given change listener from this model. The
-   * listener should have been registered via the addChangeListener method
-   * before.
+   * This method unregisters the given change listener from this model. The listener should have been
+   * registered via the addChangeListener method before.
    * 
    * @param listener is the change listener to remove.
    */
   void removeListener(UITreeModelListener<N> listener);
 
   /**
-   * This method gets the root node object. That is the top-level node of the
-   * tree.
+   * This method gets the root node object. That is the top-level node of the tree.
    * 
    * @return the root node.
    */
@@ -49,8 +47,8 @@ public interface UiTreeMvcModel<N> {
   /**
    * This method determines the number of children of the given node.
    * 
-   * @param node is a node retrieved from this model via the method
-   *        <code>getRootNode</code> or <code>getChildNode</code>.
+   * @param node is a node retrieved from this model via the method <code>getRootNode</code> or
+   *        <code>getChildNode</code>.
    * @return the number of children of the given node.
    */
   int getChildCount(N node);
@@ -58,11 +56,10 @@ public interface UiTreeMvcModel<N> {
   /**
    * This method gets the child node of the given node at the given position.
    * 
-   * @param node is a node retrieved from this model via the method
-   *        <code>getRootNode</code> or <code>getChildNode</code>.
-   * @param index is the position of the requested child node. The value must be
-   *        greater or equal to zero and less than
-   *        {@link #getChildCount(Object)}.
+   * @param node is a node retrieved from this model via the method <code>getRootNode</code> or
+   *        <code>getChildNode</code>.
+   * @param index is the position of the requested child node. The value must be greater or equal to zero and
+   *        less than {@link #getChildCount(Object)}.
    * @return the child node of the given node at the given index.
    */
   N getChildNode(N node, int index);
@@ -71,8 +68,7 @@ public interface UiTreeMvcModel<N> {
    * This method gets the parent node of the given node.
    * 
    * @param node is node whose parent is requested.
-   * @return the parent node of the given node or <code>null</code> if the given
-   *         node is the root node.
+   * @return the parent node of the given node or <code>null</code> if the given node is the root node.
    */
   N getParent(N node);
 

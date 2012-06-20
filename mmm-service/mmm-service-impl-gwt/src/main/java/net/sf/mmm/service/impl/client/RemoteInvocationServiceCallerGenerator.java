@@ -5,10 +5,13 @@ package net.sf.mmm.service.impl.client;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceClient;
+import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwtAsync;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 import com.google.gwt.core.ext.Generator;
@@ -23,6 +26,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * This is the GWT-{@link Generator} for generating the {@link RemoteInvocationServiceCaller} and according
@@ -54,16 +58,27 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
 
     // imports
     sourceComposerFactory.addImport(RemoteInvocationService.class.getName());
+    sourceComposerFactory.addImport(RemoteInvocationGenericServiceGwtAsync.class.getName());
+    sourceComposerFactory.addImport(EventBus.class.getName());
+    sourceComposerFactory.addImport(Inject.class.getName());
     sourceComposerFactory.setSuperclass(AbstractRemoteInvocationServiceCallerGwt.class.getSimpleName());
     PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
     if (writer != null) {
       SourceWriter sourceWriter = sourceComposerFactory.createSourceWriter(context, writer);
       // generate constructor
+      sourceWriter.print("@");
+      sourceWriter.println(Inject.class.getSimpleName());
       sourceWriter.print("public ");
       sourceWriter.print(simpleName);
-      sourceWriter.println("() {");
+      sourceWriter.print("(");
+      // sourceWriter.print(RemoteInvocationGenericServiceGwtAsync.class.getSimpleName());
+      // sourceWriter.print(" genericService, ");
+      // sourceWriter.print(EventBus.class.getSimpleName());
+      // sourceWriter.println(" eventBus) {");
+      sourceWriter.println(") {");
       sourceWriter.indent();
       sourceWriter.println("super();");
+      // sourceWriter.println("super(genericService, eventBus);");
 
       // generate service clients and register in constructor...
       TypeOracle typeOracle = context.getTypeOracle();

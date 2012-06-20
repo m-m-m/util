@@ -6,13 +6,12 @@ import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadMultiSelection;
 
 /**
- * This is the interface for a tree. A tree is a widget used to display a
- * hierachical structure of nodes (items of the tree). The user can open and
- * close the nodes of the tree that are no leaves. Further he can select one or
- * multiple nodes (depending on selection type).
+ * This is the interface for a tree. A tree is a widget used to display a hierachical structure of nodes
+ * (items of the tree). The user can open and close the nodes of the tree that are no leaves. Further he can
+ * select one or multiple nodes (depending on selection type).
  * 
- * @param <N> is the templated type of the tree-nodes that can be
- *        {@link #getSelection() selected} with this widget.
+ * @param <N> is the templated type of the tree-nodes that can be {@link #getSelection() selected} with this
+ *        widget.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -37,8 +36,7 @@ public interface UiTree<N> extends UiWidget, AttributeReadMultiSelection {
   void setModel(UiTreeMvcModel<N> newModel);
 
   /**
-   * This method gets the selected
-   * {@link UiTreeMvcModel#getChildNode(Object, int) node}.
+   * This method gets the selected {@link UiTreeMvcModel#getChildNode(Object, int) node}.
    * 
    * @return the selected node or <code>null</code> if no node is selected.
    */
@@ -49,8 +47,8 @@ public interface UiTree<N> extends UiWidget, AttributeReadMultiSelection {
    * 
    * @see AttributeReadMultiSelection#isMultiSelection()
    * 
-   * @return an array containing all selected nodes. The array will have a
-   *         <code>length</code> of zero if no node is selected.
+   * @return an array containing all selected nodes. The array will have a <code>length</code> of zero if no
+   *         node is selected.
    */
   N[] getSelections();
 

@@ -8,8 +8,13 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteLabel extends AttributeReadLabel, AttributeWriteOnlyLabel {
+public interface AttributeWriteLabel extends AttributeReadLabel {
 
-  // nothing to add...
+  /**
+   * This method sets the {@link AttributeReadLabel#getLabel() label} of this object.
+   * 
+   * @param label is the new {@link AttributeReadLabel#getLabel() label} to set.
+   */
+  void setLabel(String label);
 
 }

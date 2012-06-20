@@ -49,6 +49,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDisposed() {
 
     // do not care here...
@@ -57,13 +58,13 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
 
   /**
    * <b>ATTENTION:</b><br>
-   * This method implementation always returns <code>true</code> by default. You
-   * have to override it for implementations that can be made invisible by the
-   * user, e.g. for a {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow}
-   * that can be closed.
+   * This method implementation always returns <code>true</code> by default. You have to override it for
+   * implementations that can be made invisible by the user, e.g. for a
+   * {@link net.sf.mmm.ui.toolkit.api.view.window.UiWindow} that can be closed.
    * 
    * {@inheritDoc}
    */
+  @Override
   public boolean isVisible() {
 
     return true;
@@ -71,13 +72,13 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
 
   /**
    * <b>ATTENTION:</b><br>
-   * This default implementation throws a {@link UnsupportedOperationException}.
-   * You need to override this in subclasses that support
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled} via the end-user
-   * API.
+   * This default implementation throws a {@link UnsupportedOperationException}. You need to override this in
+   * subclasses that support {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled} via the
+   * end-user API.
    * 
    * {@inheritDoc}
    */
+  @Override
   public void setEnabled(boolean enabled) {
 
     throw new UnsupportedOperationException();
@@ -86,6 +87,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyles() {
 
     return this.styles;
@@ -94,6 +96,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean hasStyle(String style) {
 
     if (this.stylesSet != null) {
@@ -115,6 +118,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addStyle(String style) {
 
     assert (style != null);
@@ -141,6 +145,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean removeStyle(String style) {
 
     assert (style != null);
@@ -170,6 +175,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setStyles(String styles) {
 
     if (this.stylesSet != null) {
@@ -214,6 +220,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setParent(UiNode newParent) {
 
     // nothing to do by default...

@@ -8,8 +8,16 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteHtmlId extends AttributeReadHtmlId, AttributeWriteOnlyHtmlId {
+public interface AttributeWriteHtmlId extends AttributeReadHtmlId {
 
-  // nothing to add...
+  /**
+   * This method set the identifier of this object. Use this method to give the object a meaningful identifier
+   * after creation.<br/>
+   * <b>ATTENTION:</b><br>
+   * See javadoc of {@link AttributeReadHtmlId#getId()} for the syntax constraints of IDs.
+   * 
+   * @param newId is the new identifier for the object.
+   */
+  void setId(String newId);
 
 }

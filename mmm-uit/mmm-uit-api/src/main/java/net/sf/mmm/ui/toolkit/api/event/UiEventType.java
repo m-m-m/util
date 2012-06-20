@@ -3,8 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.event;
 
 /**
- * This enum contains the available types of an event send to a
- * {@link UiEventListener}.
+ * This enum contains the available types of an event send to a {@link UiEventListener}.
  * 
  * @see UiEventListener
  * 
@@ -21,8 +20,7 @@ public enum UiEventType {
 
   /**
    * A {@link net.sf.mmm.ui.toolkit.api.view.UiNode} (e.g. a
-   * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton}) has been clicked by
-   * the user.
+   * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton}) has been clicked by the user.
    */
   CLICK,
 

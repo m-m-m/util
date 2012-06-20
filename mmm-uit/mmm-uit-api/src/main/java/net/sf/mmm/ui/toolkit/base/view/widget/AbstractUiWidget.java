@@ -9,8 +9,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 
 /**
- * This class is the abstract base-implementation of
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget}.
+ * This class is the abstract base-implementation of {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type for the {@link #getAdapter() adapter}.

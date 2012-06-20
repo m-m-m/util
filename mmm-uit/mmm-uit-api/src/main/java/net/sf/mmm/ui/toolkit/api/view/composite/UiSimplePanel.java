@@ -6,11 +6,9 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
- * This is the interface for a simple panel. Such panel is a {@link UiComposite}
- * that can dynamically aggregate multiple other {@link UiElement}s. According
- * to the {@link #getOrientation() orientation} the {@link #getChild(int)
- * children} are placed
- * {@link net.sf.mmm.util.lang.api.Orientation#HORIZONTAL} or
+ * This is the interface for a simple panel. Such panel is a {@link UiComposite} that can dynamically
+ * aggregate multiple other {@link UiElement}s. According to the {@link #getOrientation() orientation} the
+ * {@link #getChild(int) children} are placed {@link net.sf.mmm.util.lang.api.Orientation#HORIZONTAL} or
  * {@link net.sf.mmm.util.lang.api.Orientation#VERTICAL}.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -7,9 +7,8 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiFactory;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;
 
 /**
- * This is the abstract base implementation of a
- * {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite} that has exactly
- * one child (that may be <code>null</code>).
+ * This is the abstract base implementation of a {@link net.sf.mmm.ui.toolkit.api.view.composite.UiComposite}
+ * that has exactly one child (that may be <code>null</code>).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type of the {@link #getAdapter() delegate}.
@@ -35,6 +34,7 @@ public abstract class AbstractUiSingleComposite<DELEGATE, CHILD extends Abstract
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getChildCount() {
 
     if (this.child == null) {
@@ -47,6 +47,7 @@ public abstract class AbstractUiSingleComposite<DELEGATE, CHILD extends Abstract
   /**
    * {@inheritDoc}
    */
+  @Override
   public CHILD getChild() {
 
     return this.child;
@@ -55,6 +56,7 @@ public abstract class AbstractUiSingleComposite<DELEGATE, CHILD extends Abstract
   /**
    * {@inheritDoc}
    */
+  @Override
   public CHILD getChild(int index) {
 
     if (index == 0) {
@@ -68,6 +70,7 @@ public abstract class AbstractUiSingleComposite<DELEGATE, CHILD extends Abstract
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setChild(CHILD child) {
 
     if (this.child != null) {

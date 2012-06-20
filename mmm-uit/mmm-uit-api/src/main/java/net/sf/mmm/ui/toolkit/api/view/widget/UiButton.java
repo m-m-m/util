@@ -18,7 +18,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiButton extends UiWidget, UiWriteValue<String>, UiReadButtonStyle, UiWriteImage, AttributeWriteSelected {
+public interface UiButton extends UiWidget, UiWriteValue<String>, UiReadButtonStyle, UiWriteImage,
+    AttributeWriteSelected {
 
   /** the type of this object */
   String TYPE = "Button";

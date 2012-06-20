@@ -4,6 +4,8 @@ package net.sf.mmm.service.base;
 
 import java.io.Serializable;
 
+import net.sf.mmm.service.api.RemoteInvocationServiceResult;
+
 /**
  * This is the generic transfer-object for the response to a {@link RemoteInvocationGenericServiceRequest}.
  * 
@@ -16,7 +18,7 @@ public class RemoteInvocationGenericServiceResponse implements Serializable {
   private static final long serialVersionUID = -3659003282415103857L;
 
   /** @see #getResults() */
-  private RemoteInvocationServiceResult[] results;
+  private RemoteInvocationServiceResult<?>[] results;
 
   /** @see #getRequestId() */
   private int requestId;
@@ -35,7 +37,7 @@ public class RemoteInvocationGenericServiceResponse implements Serializable {
    * @param requestId - see {@link #getRequestId()}.
    * @param results - see {@link #getResults()}.
    */
-  public RemoteInvocationGenericServiceResponse(int requestId, RemoteInvocationServiceResult[] results) {
+  public RemoteInvocationGenericServiceResponse(int requestId, RemoteInvocationServiceResult<?>[] results) {
 
     super();
     this.results = results;
@@ -54,7 +56,7 @@ public class RemoteInvocationGenericServiceResponse implements Serializable {
   /**
    * @return an array with the {@link RemoteInvocationServiceResult}s.
    */
-  public RemoteInvocationServiceResult[] getResults() {
+  public RemoteInvocationServiceResult<?>[] getResults() {
 
     return this.results;
   }

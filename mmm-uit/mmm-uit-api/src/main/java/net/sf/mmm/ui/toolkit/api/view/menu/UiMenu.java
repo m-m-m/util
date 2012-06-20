@@ -11,8 +11,8 @@ import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 
 /**
  * This is the interface for a menu.<br>
- * Use {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar#addMenu(String)} or
- * {@link #addSubMenu(String)} to create menus.
+ * Use {@link net.sf.mmm.ui.toolkit.api.view.menu.UiMenuBar#addMenu(String)} or {@link #addSubMenu(String)} to
+ * create menus.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -41,14 +41,12 @@ public interface UiMenu extends UiMenuItem {
   void addSeparator();
 
   /**
-   * This method creates and adds a new {@link ButtonStyle#DEFAULT regular} item
-   * to this menu.
+   * This method creates and adds a new {@link ButtonStyle#DEFAULT regular} item to this menu.
    * 
    * @see #addItem(String, UiEventListener, ButtonStyle)
    * 
    * @param name is the name of the item to add.
-   * @param action is the action invoked by the item (may be <code>null</code>
-   *        for a separator).
+   * @param action is the action invoked by the item (may be <code>null</code> for a separator).
    * @return the created menu item.
    */
   UiMenuItem addItem(String name, UiEventListener action);
@@ -68,8 +66,7 @@ public interface UiMenu extends UiMenuItem {
    * This method creates and adds a new item to this menu.
    * 
    * @param name is the name of the item to add.
-   * @param action is the action invoked by the item (may be <code>null</code>
-   *        for a separator).
+   * @param action is the action invoked by the item (may be <code>null</code> for a separator).
    * @param style is the style defining how the item is visualized and behaves.
    * @return the created menu item.
    */

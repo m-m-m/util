@@ -25,8 +25,8 @@ public interface UiComposite<CHILD extends UiElement> extends UiElement {
    * 
    * @param index is the position of the requested sub-component.
    * @return the component at the given index.
-   * @throws IndexOutOfBoundsException if the given index is not in the range
-   *         from <code>0</code> to <code>{@link #getChildCount()} - 1</code>.
+   * @throws IndexOutOfBoundsException if the given index is not in the range from <code>0</code> to
+   *         <code>{@link #getChildCount()} - 1</code>.
    */
   CHILD getChild(int index) throws IndexOutOfBoundsException;
 
