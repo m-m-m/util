@@ -14,12 +14,12 @@
   <!-- map DispatcherServlet to all service calls -->
   <servlet-mapping>
     <servlet-name>beans-service</servlet-name>
-    <url-pattern>/mmm_client_demo/service/*</url-pattern>
+    <url-pattern>/mmm/service/*</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Mmm_client_demo.html</welcome-file>
+    <welcome-file>Mmm.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

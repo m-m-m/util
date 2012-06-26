@@ -105,10 +105,10 @@ public enum Comparator implements Datatype<String> {
   private final String title;
 
   /** @see #eval(Object, Object) */
-  private final boolean evalTrueIfEquals;
+  // private final boolean evalTrueIfEquals;
 
   /** @see #evalComparable(Comparable, Comparable) */
-  private final Boolean less;
+  // private final Boolean less;
 
   /**
    * The constructor.
@@ -125,8 +125,38 @@ public enum Comparator implements Datatype<String> {
 
     this.value = value;
     this.title = title;
-    this.evalTrueIfEquals = evalTrueIfEquals;
-    this.less = less;
+    // this.evalTrueIfEquals = evalTrueIfEquals;
+    // this.less = less;
+  }
+
+  /**
+   * @return <code>true</code> if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   *         <code>true</code> for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
+   *         <code>false</code> otherwise.
+   */
+  boolean isTrueIfEquals() {
+
+    return (this == EQUAL) || (this == GREATER_OR_EQUAL) || (this == LESS_OR_EQUAL);
+  }
+
+  /**
+   * @return <code>true</code> if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   *         <code>true</code> in case the first argument is less than the second, <code>false</code>
+   *         otherwise.
+   */
+  boolean isTrueIfLess() {
+
+    return (this == LESS_THAN) || (this == LESS_OR_EQUAL) || (this == NOT_EQUAL);
+  }
+
+  /**
+   * @return <code>true</code> if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   *         <code>true</code> in case the first argument is greater than the second, <code>false</code>
+   *         otherwise.
+   */
+  boolean isTrueIfGreater() {
+
+    return (this == GREATER_THAN) || (this == GREATER_OR_EQUAL) || (this == NOT_EQUAL);
   }
 
   /**
@@ -190,35 +220,9 @@ public enum Comparator implements Datatype<String> {
    * @param arg2 is the second argument.
    * @return the result of the {@link Comparator} applied to the given arguments.
    */
-  @SuppressWarnings({ "unchecked" })
   private boolean evalComparable(Comparable arg1, Comparable arg2) {
 
-    Class<?> type1 = arg1.getClass();
-    Class<?> type2 = arg2.getClass();
-    int delta;
-    if (type1.equals(type2) || type1.isAssignableFrom(type2)) {
-      delta = arg1.compareTo(arg2);
-    } else if (type2.isAssignableFrom(type1)) {
-      delta = -arg2.compareTo(arg1);
-    } else {
-      // incompatible comparables
-      return (arg1.equals(arg2) == this.evalTrueIfEquals);
-    }
-    if (delta == 0) {
-      return this.evalTrueIfEquals;
-    } else {
-      if (this.less == null) {
-        return !this.evalTrueIfEquals;
-      } else {
-        if (delta < 0) {
-          // arg1 < arg2
-          return (this.less.booleanValue());
-        } else {
-          // arg1 > arg2
-          return (!this.less.booleanValue());
-        }
-      }
-    }
+    return ComparatorHelper.evalComparable(this, arg1, arg2);
   }
 
   /**
@@ -232,9 +236,9 @@ public enum Comparator implements Datatype<String> {
   public boolean eval(Object arg1, Object arg2) {
 
     if (arg1 == arg2) {
-      return this.evalTrueIfEquals;
+      return isTrueIfEquals();
     } else if ((arg1 == null) || (arg2 == null)) {
-      return !this.evalTrueIfEquals;
+      return !isTrueIfEquals();
     } else {
       Object v1 = arg1;
       Object v2 = arg2;
@@ -249,9 +253,9 @@ public enum Comparator implements Datatype<String> {
       } else if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
         return evalComparable((Comparable) v1, (Comparable) v2);
       } else if (v1.equals(v2)) {
-        return this.evalTrueIfEquals;
+        return isTrueIfEquals();
       } else {
-        return !this.evalTrueIfEquals;
+        return !isTrueIfEquals();
       }
     }
 

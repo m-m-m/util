@@ -13,7 +13,7 @@
   
   <modules>
     <module>mmm-util</module>
-    <module>mmm-client</module>
+    <!-- <module>mmm-client</module> -->
     <module>mmm-l10n</module>
     <module>mmm-search</module>
     <module>mmm-service</module>
@@ -26,6 +26,7 @@
     <module>mmm-setup</module>
     <module>mmm-test</module>
     <module>mmm-data</module>
+    <module>mmm-app</module>
   </modules>
   
   <properties>

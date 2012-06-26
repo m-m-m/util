@@ -3,9 +3,6 @@
 package net.sf.mmm.util.nls.api;
 
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -41,7 +38,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** @see #getUuid() */
   private final UUID uuid;
 
-  /** @see #getSuppressed() */
+  /** @see #getSuppressedExceptions() */
   private List<Throwable> suppressedList;
 
   /**
@@ -175,16 +172,15 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
     if (nested instanceof NlsThrowable) {
       ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
     } else {
-      if (buffer instanceof PrintStream) {
-        nested.printStackTrace((PrintStream) buffer);
-      } else if (buffer instanceof PrintWriter) {
-        //nested.printStackTrace((PrintWriter) buffer);
-      } else {
-        StringWriter writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        //nested.printStackTrace(printWriter);
-        printWriter.flush();
-        buffer.append(writer.toString());
+      for (StackTraceElement element : nested.getStackTrace()) {
+        buffer.append("\tat ");
+        buffer.append(element.toString());
+        buffer.append(LINE_SEPARATOR);
+      }
+      Throwable cause = nested.getCause();
+      if (cause != null) {
+        buffer.append("Caused by: ");
+        buffer.append(LINE_SEPARATOR);
       }
     }
   }
@@ -235,7 +231,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /**
    * {@inheritDoc}
    */
-  public void addSuppressedExceptions(Throwable suppressed) {
+  public void addSuppressedException(Throwable suppressed) {
 
     // only available since Java 1.7
     // super.addSuppressed(suppressed);

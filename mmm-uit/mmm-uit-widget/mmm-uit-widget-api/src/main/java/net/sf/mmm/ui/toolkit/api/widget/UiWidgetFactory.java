@@ -5,10 +5,10 @@ package net.sf.mmm.ui.toolkit.api.widget;
 /**
  * This is the interface for a factory used to #create create {@link UiWidget}s.
  * 
- * @param <NATIVE_WIDGET> is the generic top-level type of the underlying {@link #getNativeWidget(UiWidget)
- *        widgets}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @param <NATIVE_WIDGET> is the generic top-level type of the underlying {@link #getNativeWidget(UiWidget)
+ *        widgets}.
  */
 public interface UiWidgetFactory<NATIVE_WIDGET> {
 

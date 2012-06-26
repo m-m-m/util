@@ -21,8 +21,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This is the abstract base implementation of the {@link DataClassLoader}
- * interface.
+ * This is the abstract base implementation of the {@link DataClassLoader} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -35,8 +34,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
   /**
    * The constructor.
    * 
-   * @param contentModelService is the {@link #getDataReflectionService()
-   *        content-model service}.
+   * @param contentModelService is the {@link #getDataReflectionService() content-model service}.
    */
   public AbstractDataClassLoader(AbstractMutableDataReflectionService contentModelService) {
 
@@ -78,8 +76,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
    * This inner class is the context used to cache results during class-loading.
    */
   @SuppressWarnings("rawtypes")
-  public static class Context implements DataFieldReadAccessById, DataClassReadAccessById,
-      DataClassReadAccessByTitle {
+  public static class Context implements DataFieldReadAccessById, DataClassReadAccessById, DataClassReadAccessByTitle {
 
     /** @see #getDataClass(String) */
     private final Map<String, AbstractDataClass> name2classMap;
@@ -120,8 +117,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
-    public DataField<? extends DataObjectView, ?> getDataField(DataId id)
-        throws ObjectNotFoundException {
+    public DataField<? extends DataObjectView, ?> getDataField(DataId id) throws ObjectNotFoundException {
 
       return getDataField(id.getObjectId());
     }
@@ -151,8 +147,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
      * This method registers the given <code>contentClass</code>.
      * 
      * @param contentClass is the content-class to add.
-     * @throws DuplicateObjectException if a content-class is already registered
-     *         with the same name or id.
+     * @throws DuplicateObjectException if a content-class is already registered with the same name or id.
      */
     public void put(AbstractDataClass contentClass) throws DuplicateObjectException {
 
@@ -161,9 +156,10 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
       if (old != null) {
         throw new DuplicateObjectException(DataClass.class.getName(), contentClass.getTitle());
       }
-      old = this.id2classMap.put(contentClass.getId(), contentClass);
+      Long id = contentClass.getId();
+      old = this.id2classMap.put(id, contentClass);
       if (old != null) {
-        throw new DuplicateObjectException(DataClass.class.getName(), contentClass.getId());
+        throw new DuplicateObjectException(DataClass.class.getName(), id);
       }
     }
 

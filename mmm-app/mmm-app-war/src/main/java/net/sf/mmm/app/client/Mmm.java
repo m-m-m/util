@@ -124,10 +124,6 @@ public class Mmm implements EntryPoint {
         // First, we validate the input.
         errorLabel.setText("");
         String textToServer = nameField.getText();
-        if (!FieldVerifier.isValidName(textToServer)) {
-          errorLabel.setText("Please enter at least four characters");
-          return;
-        }
 
         // Then, we send the input to the server.
         sendButton.setEnabled(false);
@@ -160,7 +156,7 @@ public class Mmm implements EntryPoint {
             closeButton.setFocus(true);
           }
         };
-        RemoteInvocationServiceQueue queue = MmmClientDemo.this.serviceCaller.newQueue();
+        RemoteInvocationServiceQueue queue = Mmm.this.serviceCaller.newQueue();
         queue.getServiceClient(GreetingService.class, String.class, callback).greeting(textToServer);
         queue.commit();
       }
