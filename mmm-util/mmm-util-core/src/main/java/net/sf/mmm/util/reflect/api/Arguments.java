@@ -12,7 +12,7 @@ package net.sf.mmm.util.reflect.api;
 public class Arguments {
 
   /** the void signature for a non-arg method */
-  public static final Arguments NO_ARGS = new Arguments(ReflectionUtil.NO_ARGUMENTS);
+  public static final Arguments NO_ARGS = new Arguments(ReflectionUtilLimited.NO_ARGUMENTS);
 
   /** the wrapped signature */
   private final Object[] args;

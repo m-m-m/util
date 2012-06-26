@@ -44,10 +44,10 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsFormatt
    * 
    * @param iso8601Util is the {@link Iso8601Util} instance to use.
    */
-  public AbstractNlsFormatterDateIso8601(Iso8601Util iso8601Util) {
+  public AbstractNlsFormatterDateIso8601(Iso8601UtilLimited iso8601Util) {
 
     super();
-    NlsNullPointerException.checkNotNull(Iso8601Util.class, iso8601Util);
+    NlsNullPointerException.checkNotNull(Iso8601UtilLimited.class, iso8601Util);
     this.iso8601Util = iso8601Util;
     initialize();
   }
@@ -56,7 +56,7 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsFormatt
    * @param iso8601Util is the iso8601Util to set
    */
   @Inject
-  public void setIso8601Util(Iso8601Util iso8601Util) {
+  public void setIso8601Util(Iso8601UtilLimited iso8601Util) {
 
     getInitializationState().requireNotInitilized();
     this.iso8601Util = iso8601Util;

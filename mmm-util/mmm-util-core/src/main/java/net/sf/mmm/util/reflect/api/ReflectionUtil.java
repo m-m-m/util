@@ -26,12 +26,6 @@ import net.sf.mmm.util.resource.api.DataResource;
 @ComponentSpecification
 public interface ReflectionUtil extends GenericTypeFactory, ReflectionUtilLimited {
 
-  /** an empty class array */
-  Class<?>[] NO_PARAMETERS = new Class[0];
-
-  /** an empty {@link Object}-array */
-  Object[] NO_ARGUMENTS = new Object[0];
-
   /** an empty {@link Type}-array */
   Type[] NO_TYPES = new Type[0];
 

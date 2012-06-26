@@ -55,6 +55,7 @@ import com.sun.xml.internal.bind.IDResolver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@SuppressWarnings("restriction")
 public class XmlBeanMapper<T> extends AbstractLoggableComponent implements ValidationEventHandler {
 
   /** @see #getJaxbContext() */

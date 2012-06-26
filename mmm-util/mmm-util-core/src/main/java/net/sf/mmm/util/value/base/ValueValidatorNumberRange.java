@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
+import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
@@ -12,7 +13,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @deprecated use {@link ValueValidator} instead.
  */
+@Deprecated
 public class ValueValidatorNumberRange extends AbstractValueValidator<Number> {
 
   /** @see #ValueValidatorNumberRange(Double, Double) */

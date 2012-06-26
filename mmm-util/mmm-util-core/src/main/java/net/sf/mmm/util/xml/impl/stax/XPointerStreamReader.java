@@ -24,6 +24,7 @@ public class XPointerStreamReader extends StreamReaderProxy {
    * The constructor.
    * 
    * @param delegate is the reader to adapt.
+   * @param xpointer is the XPointer expression.
    */
   public XPointerStreamReader(XMLStreamReader delegate, String xpointer) {
 

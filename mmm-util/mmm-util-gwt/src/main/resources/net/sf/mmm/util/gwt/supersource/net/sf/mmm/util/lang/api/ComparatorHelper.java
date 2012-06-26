@@ -12,6 +12,19 @@ package net.sf.mmm.util.lang.api;
 class ComparatorHelper {
 
   /**
+   * This method converts the given value to a more common type.
+   * 
+   * @param object is the value to convert.
+   * @param otherType the type of the value to compare that differs from the type
+   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type
+   *         is known.
+   */
+  static Object convert(Object object, Class<?> otherType) {
+    
+    return object;
+  }
+
+  /**
    * Logic for {@link Comparator#eval(Object, Object)} with {@link Comparable} arguments.
    * 
    * @param comparator is the {@link Comparator}.

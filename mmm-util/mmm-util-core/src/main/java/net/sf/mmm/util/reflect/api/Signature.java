@@ -19,7 +19,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 public class Signature {
 
   /** the void signature for a non-arg method */
-  public static final Signature VOID = new Signature(ReflectionUtil.NO_PARAMETERS);
+  public static final Signature VOID = new Signature(ReflectionUtilLimited.NO_PARAMETERS);
 
   /** the wrapped signature */
   private final Class<?>[] signature;

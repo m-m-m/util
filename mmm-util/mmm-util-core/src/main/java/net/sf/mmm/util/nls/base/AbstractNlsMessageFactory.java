@@ -10,7 +10,7 @@ import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the implementation of the {@link NlsMessageFactory} interface.
@@ -161,7 +161,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
    */
   public NlsMessage create(NlsTemplate template) {
 
-    return create(template, ReflectionUtil.NO_ARGUMENTS);
+    return create(template, ReflectionUtilLimited.NO_ARGUMENTS);
   }
 
   /**
@@ -170,24 +170,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   public NlsMessage create(String internationalizedMessage) {
 
     return create(internationalizedMessage, Collections.<String, Object> emptyMap());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public NlsMessage create(String internationalizedMessage, NlsTemplate template) {
-
-    // Dummy implementation for downward compatibility.
-    return create(template);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments, NlsTemplate template) {
-
-    // Dummy implementation for downward compatibility.
-    return create(template, messageArguments);
   }
 
 }

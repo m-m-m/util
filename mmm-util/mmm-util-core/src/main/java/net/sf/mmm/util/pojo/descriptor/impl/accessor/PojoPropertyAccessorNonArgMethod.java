@@ -13,7 +13,7 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessorMethod;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArg} interface for accessing a
@@ -51,7 +51,7 @@ public class PojoPropertyAccessorNonArgMethod extends AbstractPojoPropertyAccess
   public Object invoke(Object pojoInstance) {
 
     try {
-      return getMethod().invoke(pojoInstance, ReflectionUtil.NO_ARGUMENTS);
+      return getMethod().invoke(pojoInstance, ReflectionUtilLimited.NO_ARGUMENTS);
     } catch (IllegalAccessException e) {
       throw new AccessFailedException(e, getMethod());
     } catch (InvocationTargetException e) {

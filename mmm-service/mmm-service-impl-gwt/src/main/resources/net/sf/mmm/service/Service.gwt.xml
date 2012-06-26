@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <inherits name="net.sf.mmm.Util"/>
+  <inherits name="net.sf.mmm.util.Util"/>
   <source path="api"/>
   <source path="base" excludes="**/server/**"/>
   <source path="impl" excludes="**/server/**"/>

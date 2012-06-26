@@ -2,10 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-import java.util.Calendar;
-
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
@@ -187,8 +183,7 @@ public enum Comparator implements Datatype<String> {
   public abstract boolean eval(double arg1, double arg2);
 
   /**
-   * This method converts the given value to a more common type. E.g. instances of {@link Calendar} or
-   * {@link XMLGregorianCalendar} will be converted to {@link java.util.Date}.
+   * @see ComparatorHelper#convert(Object, Class)
    * 
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
@@ -197,20 +192,7 @@ public enum Comparator implements Datatype<String> {
    */
   private Object convert(Object object, Class<?> otherType) {
 
-    if (object instanceof Calendar) {
-      return ((Calendar) object).getTime();
-    }
-    if (object instanceof XMLGregorianCalendar) {
-      return ((XMLGregorianCalendar) object).toGregorianCalendar().getTime();
-    }
-    // if (value instanceof String) {
-    // if (Number.class.isAssignableFrom(otherType)) {
-    // return Double.valueOf((String) value);
-    // } else if (Date.class.isAssignableFrom(otherType)) {
-    //
-    // }
-    // }
-    return object;
+    return ComparatorHelper.convert(object, otherType);
   }
 
   /**

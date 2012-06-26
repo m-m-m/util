@@ -129,6 +129,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * @param resolver translates the original message.
    * @param buffer is where to write the stack trace to.
    */
+  @SuppressWarnings("deprecation")
   static void printStackTrace(NlsThrowable throwable, Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     try {

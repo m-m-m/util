@@ -10,6 +10,12 @@ package net.sf.mmm.util.reflect.api;
  */
 public interface ReflectionUtilLimited {
 
+  /** an empty class array */
+  Class<?>[] NO_PARAMETERS = new Class[0];
+
+  /** an empty {@link Object}-array */
+  Object[] NO_ARGUMENTS = new Object[0];
+
   /**
    * This method gets the according non-{@link Class#isPrimitive() primitive} type for the class given by
    * <code>type</code>.<br>

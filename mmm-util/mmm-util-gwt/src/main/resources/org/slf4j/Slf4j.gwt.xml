@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <module>
   <inherits name="com.allen_sauer.gwt.log.gwt-log-impl" />
-  <source path=""/>
+  <source path="" includes="Logger.java,LoggerFactory.java,Marker.java,helpers/NamedLoggerBase.java,helpers/MarkerIgnoringBase.java"/>
   <generate-with class="net.sf.mmm.util.nls.impl.NlsResourceBundleGenerator">
     <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory" />
   </generate-with>

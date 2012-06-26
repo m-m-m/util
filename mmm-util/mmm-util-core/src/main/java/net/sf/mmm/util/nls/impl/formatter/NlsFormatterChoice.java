@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConjunctionCharFilter;
@@ -222,7 +222,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
       }
       if ("null".equals(argument)) {
         comparatorArgument = null;
-      } else if (argument.matches(Iso8601Util.PATTERN_STRING_ALL)) {
+      } else if (argument.matches(Iso8601UtilLimited.PATTERN_STRING_ALL)) {
         comparatorArgument = this.nlsDependencies.getIso8601Util().parseDate(argument);
       } else if (Boolean.TRUE.toString().equals(argument)) {
         comparatorArgument = Boolean.TRUE;

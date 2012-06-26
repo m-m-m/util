@@ -3,6 +3,7 @@
 package net.sf.mmm.util.value.base;
 
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.value.api.ValueValidator} that
@@ -10,7 +11,9 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @deprecated use {@link ValueValidator} instead.
  */
+@Deprecated
 public class ValueValidatorNotNull extends AbstractValueValidator<Object> {
 
   /** The singleton instance. */
