@@ -17,6 +17,7 @@ import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
@@ -29,7 +30,8 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInvocationServiceCaller {
+public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLoggableComponent implements
+    RemoteInvocationServiceCaller {
 
   /** @see #getServiceClient(Class) */
   private final Map<Class<? extends RemoteInvocationService>, RemoteInvocationService> serviceClientMap;
@@ -79,6 +81,15 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
    * {@inheritDoc}
    */
   @Override
+  public RemoteInvocationServiceQueue newQueue(String id) {
+
+    return newQueue(new RemoteInvocationServiceQueueSettings(id));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public RemoteInvocationServiceQueueImpl newQueue(RemoteInvocationServiceQueueSettings settings) {
 
     return this.currentQueue = createQueue(settings);
@@ -92,7 +103,10 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
    * @param settings are the {@link RemoteInvocationServiceQueueSettings}.
    * @return the new {@link RemoteInvocationServiceQueueImpl}.
    */
-  protected abstract RemoteInvocationServiceQueueImpl createQueue(RemoteInvocationServiceQueueSettings settings);
+  protected RemoteInvocationServiceQueueImpl createQueue(RemoteInvocationServiceQueueSettings settings) {
+
+    return new RemoteInvocationServiceQueueImpl(settings, getCurrentQueue());
+  }
 
   /**
    * {@inheritDoc}
@@ -208,6 +222,9 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     /** @see #isOpen() */
     private boolean open;
 
+    /** @see #getParentQueue() */
+    private RemoteInvocationServiceQueueImpl childQueue;
+
     /**
      * The constructor.
      * 
@@ -230,6 +247,9 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
       super();
       this.settings = settings;
       this.parentQueue = parentQueue;
+      if (parentQueue != null) {
+        parentQueue.childQueue = this;
+      }
       this.callQueue = new ArrayList<RemoteInvocationServiceCall>();
       this.callbackQueue = new ArrayList<RemoteInvocationServiceResultCallback<?>>();
       this.open = true;
@@ -271,6 +291,20 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     public RemoteInvocationServiceQueueSettings getSettings() {
 
       return this.settings;
+    }
+
+    /**
+     * @return an info string with the {@link RemoteInvocationServiceQueueSettings#getId() ID} or the empty
+     *         string if not present.
+     */
+    protected String getId() {
+
+      String id = this.settings.getId();
+      if (id == null) {
+        return "";
+      } else {
+        return "(" + id + ")";
+      }
     }
 
     /**
@@ -355,6 +389,18 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     }
 
     /**
+     * Internal method to ensure that this queue is the current active queue and no child-queue has been
+     * opened and not completed.
+     */
+    protected void requireNoChildQueue() {
+
+      if (this.childQueue != null) {
+        throw new IllegalStateException("Child-queue" + this.childQueue.getId() + " of this queue" + getId()
+            + " not completed.");
+      }
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -362,13 +408,30 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
 
       requireOpen();
       requireNoCurrentCall();
-      if (this.parentQueue == null) {
-        performRequest(this);
-      } else {
-        this.parentQueue.callQueue.addAll(this.callQueue);
+      requireNoChildQueue();
+      try {
+        if (this.parentQueue == null) {
+          performRequest(this);
+        } else {
+          this.parentQueue.callQueue.addAll(this.callQueue);
+        }
+      } finally {
+        close();
       }
+    }
+
+    /**
+     * This method closes this queue. It is called from {@link #commit()} and {@link #cancel()}.
+     */
+    private void close() {
+
       this.callQueue.clear();
       this.open = false;
+      if (this.parentQueue != null) {
+        assert (this.parentQueue.childQueue == this);
+        this.parentQueue.childQueue = null;
+      }
+      assert (AbstractRemoteInvocationServiceCaller.this.currentQueue == this);
       AbstractRemoteInvocationServiceCaller.this.currentQueue = this.parentQueue;
     }
 
@@ -379,10 +442,13 @@ public abstract class AbstractRemoteInvocationServiceCaller implements RemoteInv
     public void cancel() {
 
       requireOpen();
-      this.callQueue.clear();
+      if (this.childQueue != null) {
+        getLogger().warn(
+            "Canceling of queue" + getId() + " will also cancel open child-queue" + this.childQueue.getId() + ".");
+        this.childQueue.cancel();
+      }
       this.currentCall = null;
-      this.open = false;
-      AbstractRemoteInvocationServiceCaller.this.currentQueue = this.parentQueue;
+      close();
     }
 
   }

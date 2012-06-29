@@ -12,15 +12,14 @@ package net.sf.mmm.service.api.client;
  */
 public class RemoteInvocationServiceQueueSettings {
 
-  /** @see #isOmitBusyIndication() */
-  private boolean omitBusyIndication;
+  /** @see #getId() */
+  private String id;
 
   /** @see #isRejectNestedInvocation() */
   private boolean rejectNestedInvocation;
 
   /**
    * The constructor.
-   * 
    */
   public RemoteInvocationServiceQueueSettings() {
 
@@ -28,19 +27,40 @@ public class RemoteInvocationServiceQueueSettings {
   }
 
   /**
-   * @return the omitBusyIndication
+   * The constructor.
+   * 
+   * @param id - see {@link #getId()}.
    */
-  public boolean isOmitBusyIndication() {
+  public RemoteInvocationServiceQueueSettings(String id) {
 
-    return this.omitBusyIndication;
+    super();
+    this.id = id;
   }
 
   /**
-   * @param omitBusyIndication is the omitBusyIndication to set
+   * This method gets the identifier of the {@link RemoteInvocationServiceQueue} to
+   * {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) create}. It will be
+   * used for error messages, logging, etc. and will therefore help you debugging problems if you specify a
+   * reasonable ID.
+   * 
+   * @return the ID of the {@link RemoteInvocationServiceQueue} to
+   *         {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) create} or
+   *         <code>null</code> for none.
    */
-  public void setOmitBusyIndication(boolean omitBusyIndication) {
+  public String getId() {
 
-    this.omitBusyIndication = omitBusyIndication;
+    return this.id;
+  }
+
+  /**
+   * Sets the {@link #getId() ID}.
+   * 
+   * @param id is the ID for the {@link RemoteInvocationServiceQueue} to
+   *        {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) create}.
+   */
+  public void setId(String id) {
+
+    this.id = id;
   }
 
   /**
