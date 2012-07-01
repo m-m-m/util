@@ -9,7 +9,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.text.base.UnicodeUtilImpl;
 
 /**
  * This enum contains the most important diacritical marks.<br>
@@ -303,16 +303,6 @@ public enum DiacriticalMark implements Datatype<Character> {
           UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_DIAERESIS_AND_ACUTE);
       addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_ACUTE,
           UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS_AND_ACUTE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer, int compositionCount) {
-
-      super.normalizeToAsciiRecursive(decomposed, buffer, compositionCount);
-      buffer.append('e');
     }
 
   },
@@ -835,61 +825,23 @@ public enum DiacriticalMark implements Datatype<Character> {
   /**
    * This method gets the ASCII-representation of the given <code>character</code> {@link #compose(char)
    * composed} with this {@link DiacriticalMark}. This is similar to {@link #decompose(char)} but e.g. for
-   * {@value #DIAERESIS} the character 'e' is appended.
+   * {@value #DIAERESIS} the character 'e' is appended for some characters.
    * 
    * @see UnicodeUtil#normalize2Ascii(char)
+   * @deprecated Use {@link UnicodeUtil#normalize2Ascii(char)} instead.
    * 
    * @param character is the character to normalize to ASCII (e.g. '&Auml;' or '&aacute;').
    * @return the de-composed character (e.g. 'Ae' or 'a') or <code>null</code> if the given
    *         <code>character</code> is not {@link #compose(char) composed} with this {@link DiacriticalMark}.
    */
+  @Deprecated
   public String normalizeToAscii(char character) {
 
     Character decomposed = this.decomposeMap.get(Character.valueOf(character));
     if (decomposed == null) {
       return null;
     }
-    StringBuilder buffer = new StringBuilder(2);
-    normalizeToAsciiRecursive(decomposed.charValue(), buffer, 1);
-    return buffer.toString();
-  }
-
-  /**
-   * This is the internal recursive implemenation of {@link #normalizeToAscii(char)}.
-   * 
-   * @param decomposed is the decomposed character to normalize to ASCII.
-   * @param buffer is the {@link StringBuilder} where to
-   * @param compositionCount is the recursion counter used to detect infinity loops in case of a
-   *        missconfiguration.
-   */
-  protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer, int compositionCount) {
-
-    if (((decomposed >= 'a') && (decomposed <= 'z')) || ((decomposed >= 'A') && (decomposed <= 'Z'))) {
-      buffer.append(decomposed);
-    } else {
-      for (DiacriticalMark mark : DiacriticalMark.values()) {
-        Character d = mark.decompose(decomposed);
-        if (d != null) {
-          if (compositionCount > 3) {
-            // should never happen, but we do not want infinity recursion
-            throw new NlsIllegalStateException();
-          }
-          normalizeToAsciiRecursive(d.charValue(), buffer, compositionCount + 1);
-          return;
-        }
-      }
-      // TODO
-      if (decomposed == UnicodeUtil.GREEK_CAPITAL_LETTER_UPSILON) {
-        normalizeToAsciiRecursive('Y', buffer, compositionCount + 1);
-        return;
-      }
-      if (decomposed == UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J) {
-        normalizeToAsciiRecursive('j', buffer, compositionCount + 1);
-        return;
-      }
-      // illegal composition...
-      throw new NlsIllegalStateException(new IllegalArgumentException("" + decomposed));
-    }
+    return UnicodeUtilImpl.getInstance().normalize2Ascii(character);
   }
 
   /**

@@ -3984,7 +3984,20 @@ public interface UnicodeUtil {
   /**
    * This method converts the given <code>text</code> to the best possible ASCII-representation. All
    * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
-   * to ASCII} and if
+   * to ASCII}.
+   * 
+   * @see #normalize2Ascii(CharSequence, char)
+   * @see java.text.Normalizer
+   * 
+   * @param text is the text to convert.
+   * @return the converted text.
+   */
+  String normalize2Ascii(CharSequence text);
+
+  /**
+   * This method converts the given <code>text</code> to the best possible ASCII-representation. All
+   * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
+   * to ASCII} and if not possible replaced by <code>nonNormalizableCharaterReplacement</code>.
    * 
    * @see java.text.Normalizer
    * 

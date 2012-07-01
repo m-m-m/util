@@ -4,6 +4,7 @@ package net.sf.mmm.util.text.base;
 
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -12,7 +13,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class UnicodeUtilTest {
+public class UnicodeUtilTest extends Assert {
 
   /**
    * This method gets the {@link UnicodeUtil} instance to test.
@@ -25,25 +26,26 @@ public class UnicodeUtilTest {
   }
 
   /**
-   * This method "tests" different minus-signs.
+   * Test for {@link UnicodeUtil#isMinus(char)}.
    */
   @Test
   public void testMinus() {
 
-    System.out.println(UnicodeUtil.MINUS_SIGN);
-    System.out.println(UnicodeUtil.SOFT_HYPHEN);
-    System.out.println(UnicodeUtil.NO_BREAK_SPACE);
+    UnicodeUtil util = getUnicodeUtil();
+    assertTrue(util.isMinus(UnicodeUtil.MINUS_SIGN));
+    assertTrue(util.isMinus(UnicodeUtil.HYPHEN_MINUS));
+    assertFalse(util.isMinus(UnicodeUtil.SOFT_HYPHEN));
   }
 
+  /**
+   * Test for {@link UnicodeUtil#normalize2Ascii(CharSequence, char)}.
+   */
   @Test
   public void testNormalizeToAscii() {
 
-    String text = "" + UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_DIAERESIS_AND_MACRON
-        + UnicodeUtil.GREEK_CAPITAL_LETTER_ALPHA + UnicodeUtil.GREEK_SMALL_LETTER_BETA
-        + UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_DIAERESIS_AND_MACRON
-        + UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_DOT_ABOVE;
-    System.out.println(text);
-    System.out.println(getUnicodeUtil().normalize2Ascii(text, '?'));
+    UnicodeUtil util = getUnicodeUtil();
+    assertEquals("haesslich", util.normalize2Ascii("häßlich"));
+    assertEquals("voila maitre asteroide", util.normalize2Ascii("voilà maître astéroïde"));
   }
 
 }

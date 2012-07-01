@@ -5,8 +5,11 @@ package net.sf.mmm.util.text.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.text.api.DiacriticalMark;
 import net.sf.mmm.util.text.api.UnicodeUtil;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the implementation of the {@link UnicodeUtil} interface.
@@ -36,6 +39,17 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     CHARACTER_TO_ASCII_MAP.put(FIGURE_DASH, "-");
     CHARACTER_TO_ASCII_MAP.put(SWUNG_DASH, "~");
     CHARACTER_TO_ASCII_MAP.put(HORIZONTAL_BAR, "-");
+
+    // Latin letters
+    CHARACTER_TO_ASCII_MAP.put(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J, "j");
+    // German umlauts
+    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_SHARP_S, "ss");
+    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_A_WITH_DIAERESIS, "ae");
+    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_O_WITH_DIAERESIS, "oe");
+    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_U_WITH_DIAERESIS, "ue");
+    CHARACTER_TO_ASCII_MAP.put(LATIN_CAPITAL_LETTER_A_WITH_DIAERESIS, "Ae");
+    CHARACTER_TO_ASCII_MAP.put(LATIN_CAPITAL_LETTER_O_WITH_DIAERESIS, "Oe");
+    CHARACTER_TO_ASCII_MAP.put(LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS, "Ue");
 
     // Greek letters
 
@@ -107,10 +121,43 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     CHARACTER_TO_ASCII_MAP.put(MUSIC_FLAT_SIGN, "b");
     CHARACTER_TO_ASCII_MAP.put(MUSIC_SHARP_SIGN, "#");
 
-    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_SHARP_S, "ss");
     for (DiacriticalMark mark : DiacriticalMark.values()) {
       for (char composed : mark.getComposedCharacters()) {
-        CHARACTER_TO_ASCII_MAP.put(composed, mark.normalizeToAscii(composed));
+        if (!CHARACTER_TO_ASCII_MAP.containsKey(composed)) {
+          Character decomposed = mark.decompose(composed);
+          if (decomposed == null) {
+            LoggerFactory.getLogger(UnicodeUtilImpl.class).error(
+                "Illegal diacritic '" + mark + "' could NOT decomposed '" + composed + "'!");
+          } else {
+            char normalized = decomposed.charValue();
+            String ascii = null;
+            while (ascii == null) {
+              if (CharFilter.ASCII_LETTER_FILTER.accept(normalized)) {
+                ascii = Character.toString(normalized);
+              } else {
+                ascii = CHARACTER_TO_ASCII_MAP.get(decomposed);
+              }
+              if (ascii == null) {
+                boolean decomposeFailed = true;
+                for (DiacriticalMark subMark : DiacriticalMark.values()) {
+                  decomposed = subMark.decompose(normalized);
+                  if (decomposed != null) {
+                    normalized = decomposed.charValue();
+                    decomposeFailed = false;
+                    break;
+                  }
+                }
+                if (decomposeFailed) {
+                  LoggerFactory.getLogger(UnicodeUtilImpl.class).error("Failed to decompose '" + normalized + "'!");
+                  break;
+                }
+              }
+            }
+            if (ascii != null) {
+              CHARACTER_TO_ASCII_MAP.put(composed, ascii);
+            }
+          }
+        }
       }
     }
   }
@@ -129,6 +176,15 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   public String normalize2Ascii(char character) {
 
     return CHARACTER_TO_ASCII_MAP.get(Character.valueOf(character));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String normalize2Ascii(CharSequence text) {
+
+    return normalize2Ascii(text, '?');
   }
 
   /**
