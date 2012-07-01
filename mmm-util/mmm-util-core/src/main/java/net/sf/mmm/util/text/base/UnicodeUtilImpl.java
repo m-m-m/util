@@ -30,6 +30,12 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     CHARACTER_TO_ASCII_MAP.put(NO_BREAK_SPACE, " ");
     CHARACTER_TO_ASCII_MAP.put(SOFT_HYPHEN, "-");
     CHARACTER_TO_ASCII_MAP.put(MINUS_SIGN, "-");
+    CHARACTER_TO_ASCII_MAP.put(EN_DASH, "-");
+
+    CHARACTER_TO_ASCII_MAP.put(EM_DASH, "-");
+    CHARACTER_TO_ASCII_MAP.put(FIGURE_DASH, "-");
+    CHARACTER_TO_ASCII_MAP.put(SWUNG_DASH, "~");
+    CHARACTER_TO_ASCII_MAP.put(HORIZONTAL_BAR, "-");
 
     // Greek letters
 
@@ -101,7 +107,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     CHARACTER_TO_ASCII_MAP.put(MUSIC_FLAT_SIGN, "b");
     CHARACTER_TO_ASCII_MAP.put(MUSIC_SHARP_SIGN, "#");
 
-    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_SHARP_S, "" + LATIN_SMALL_LETTER_S);
+    CHARACTER_TO_ASCII_MAP.put(LATIN_SMALL_LETTER_SHARP_S, "ss");
     for (DiacriticalMark mark : DiacriticalMark.values()) {
       for (char composed : mark.getComposedCharacters()) {
         CHARACTER_TO_ASCII_MAP.put(composed, mark.normalizeToAscii(composed));
@@ -123,6 +129,33 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   public String normalize2Ascii(char character) {
 
     return CHARACTER_TO_ASCII_MAP.get(Character.valueOf(character));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String normalize2Ascii(CharSequence text, char nonNormalizableCharaterReplacement) {
+
+    if (text == null) {
+      return null;
+    }
+    int length = text.length();
+    StringBuilder buffer = new StringBuilder(length);
+    for (int i = 0; i < length; i++) {
+      char c = text.charAt(i);
+      if (c <= 127) {
+        buffer.append(c);
+      } else {
+        String ascii = normalize2Ascii(c);
+        if (ascii != null) {
+          buffer.append(ascii);
+        } else if (nonNormalizableCharaterReplacement != NULL) {
+          buffer.append(nonNormalizableCharaterReplacement);
+        }
+      }
+    }
+    return buffer.toString();
   }
 
   /**

@@ -19,7 +19,21 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
  * letter 'a' you get '&auml;'.<br>
  * To make things really complicated, unicode added {@link #getCombiningCharacter() combining characters}
  * representing the mark itself in addition to the precomposed characters (combination of a specific character
- * with the mark[s]).
+ * with the mark[s]).<br/>
+ * <b>ATTENTION:</b><br/>
+ * The unicode standard is extremely complex and sometimes it appears inconsistent in the first place. E.g.
+ * there are {@link #getCombiningCharacter() combining characters} that have no equivalent
+ * {@link #getSeparateCharacter() separate character}. Further the naming of {@link #getComposedCharacters()
+ * composed characters} in the unicode standard are not always precise enough to determine the according
+ * {@link #getCombiningCharacter() combining character}. E.g.
+ * {@link UnicodeUtil#LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE} and
+ * {@link UnicodeUtil#LATIN_SMALL_LETTER_O_WITH_STROKE} could be considered to be both a combination of the
+ * diacritic "stroke". However, observing the glyphs and studying unicode indicated that this is wrong.<br/>
+ * Therefore this class and also {@link UnicodeUtil} should be considered as work in progress and we heavily
+ * require your contribution to improve and support more diacritics. It may also be possible that characters
+ * or diacritics get renamed in future versions if our understanding of unicode grows.
+ * 
+ * @see java.text.Normalizer
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -616,20 +630,42 @@ public enum DiacriticalMark implements Datatype<Character> {
 
   },
 
-  // STROKE(UnicodeUtil.COMBINING_STROKE) {
-  //
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // protected void initialize() {
-  //
-  // addComposition(UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_ACUTE,
-  // UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_STROKE_AND_ACUTE);
-  // addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_ACUTE,
-  // UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_STROKE_AND_ACUTE);
-  // }
-  // },
+  /**
+   * A short solidus is a line diagonal through a grapheme (letter). You can think of it as a slash.
+   */
+  // SOLIDUS is just an approach for the missing separate character
+  SHORT_SOLIDUS_OVERLAY(UnicodeUtil.SOLIDUS, UnicodeUtil.COMBINING_SHORT_SOLIDUS_OVERLAY, "short solidus") {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initialize() {
+
+      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_O, UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_STROKE);
+      addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_O, UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_STROKE);
+      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_ACUTE,
+          UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_STROKE_AND_ACUTE);
+      addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_ACUTE,
+          UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_STROKE_AND_ACUTE);
+    }
+  },
+
+  /**
+   * A short stroke is a short line drawn horizontal through a grapheme (letter).
+   */
+  // EN_DASH is just a rough approach for the missing separate character
+  SHORT_STROKE_OVERLAY(UnicodeUtil.EN_DASH, UnicodeUtil.COMBINING_SHORT_STROKE_OVERLAY, "short stroke") {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void initialize() {
+
+      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J, UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE);
+    }
+  },
 
   /**
    * A small tilde (~) placed on top of some letters. If your environment supports unicode, you can see it
@@ -726,7 +762,12 @@ public enum DiacriticalMark implements Datatype<Character> {
   }
 
   /**
-   * This method gets the separate character for this {@link DiacriticalMark}. It represents the mark itself.
+   * This method gets the separate character for this {@link DiacriticalMark}. It represents the mark itself
+   * as a standalone character.<br/>
+   * <b>ATTENTION:</b><br/>
+   * For an unknown reason unicode does NOT define a proper separate character for each diacritic or for each
+   * {@link #getCombiningCharacter() combining character}. Therefore this method may return a character that
+   * looks similar to the diacritic mark, but is NOT the correct representation for it.
    * 
    * @see #getCombiningCharacter()
    * 
@@ -800,8 +841,7 @@ public enum DiacriticalMark implements Datatype<Character> {
    * 
    * @param character is the character to normalize to ASCII (e.g. '&Auml;' or '&aacute;').
    * @return the de-composed character (e.g. 'Ae' or 'a') or <code>null</code> if the given
-   *         <code>character</code> does is not {@link #compose(char) composed} with this
-   *         {@link DiacriticalMark}.
+   *         <code>character</code> is not {@link #compose(char) composed} with this {@link DiacriticalMark}.
    */
   public String normalizeToAscii(char character) {
 
@@ -824,7 +864,7 @@ public enum DiacriticalMark implements Datatype<Character> {
    */
   protected void normalizeToAsciiRecursive(char decomposed, StringBuilder buffer, int compositionCount) {
 
-    if (((decomposed <= 'a') && (decomposed >= 'z')) || ((decomposed <= 'A') && (decomposed >= 'Z'))) {
+    if (((decomposed >= 'a') && (decomposed <= 'z')) || ((decomposed >= 'A') && (decomposed <= 'Z'))) {
       buffer.append(decomposed);
     } else {
       for (DiacriticalMark mark : DiacriticalMark.values()) {
@@ -835,10 +875,20 @@ public enum DiacriticalMark implements Datatype<Character> {
             throw new NlsIllegalStateException();
           }
           normalizeToAsciiRecursive(d.charValue(), buffer, compositionCount + 1);
+          return;
         }
       }
+      // TODO
+      if (decomposed == UnicodeUtil.GREEK_CAPITAL_LETTER_UPSILON) {
+        normalizeToAsciiRecursive('Y', buffer, compositionCount + 1);
+        return;
+      }
+      if (decomposed == UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J) {
+        normalizeToAsciiRecursive('j', buffer, compositionCount + 1);
+        return;
+      }
       // illegal composition...
-      throw new NlsIllegalStateException();
+      throw new NlsIllegalStateException(new IllegalArgumentException("" + decomposed));
     }
   }
 

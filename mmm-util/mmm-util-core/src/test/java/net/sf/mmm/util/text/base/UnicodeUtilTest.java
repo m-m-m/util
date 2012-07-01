@@ -35,4 +35,15 @@ public class UnicodeUtilTest {
     System.out.println(UnicodeUtil.NO_BREAK_SPACE);
   }
 
+  @Test
+  public void testNormalizeToAscii() {
+
+    String text = "" + UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_DIAERESIS_AND_MACRON
+        + UnicodeUtil.GREEK_CAPITAL_LETTER_ALPHA + UnicodeUtil.GREEK_SMALL_LETTER_BETA
+        + UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_DIAERESIS_AND_MACRON
+        + UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_DOT_ABOVE;
+    System.out.println(text);
+    System.out.println(getUnicodeUtil().normalize2Ascii(text, '?'));
+  }
+
 }

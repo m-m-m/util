@@ -5,7 +5,8 @@ package net.sf.mmm.util.text.api;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface for a collection of utility functions that help with unicode characters and texts.
+ * This is the interface for a collection of utility functions that help with unicode characters and texts. It
+ * also contains constants for many unicode characters.
  * 
  * @see DiacriticalMark
  * @see net.sf.mmm.util.xml.api.XmlUtil#resolveEntity(String)
@@ -18,49 +19,70 @@ public interface UnicodeUtil {
 
   // ** C0 controls **
 
+  /** The null character typically used for termination. */
   char NULL = 0x00000;
 
+  /** The tab character used for indendation. */
   char CHARACTER_TABULATION = 0x00009;
 
+  /**
+   * The character indicating a move of the cursor to the next line. Originally the cursor was only moved down
+   * but remained in the same column (horizontal position). On linux/unix systems this also includes a move of
+   * the cursor to the beginning of the next line (see {@link #CARRIAGE_RETURN}). This is the origin of the
+   * differences for newlines on different operating systems (windows vs. linux vs. mac).
+   */
   char LINE_FEED = 0x0000A;
+
+  /**
+   * The character indicating a move to the next page.
+   */
+  char FORM_FEED = 0x0000C;
+
+  /**
+   * The character indicating a move of the cursor to the beginning of the current line.
+   */
+  char CARRIAGE_RETURN = 0x0000D;
 
   // ** Basic Latin / "ASCII" (20-7F) **
 
+  /** The regular whitespace character used to separate words. */
   char SPACE = 0x0020;
 
   char EXCLAMATION_MARK = 0x00021;
 
   char QUOTATION_MARK = 0x00022;
 
+  /** The hash or number sign. Looks like this: {@value} */
   char NUMBER_SIGN = 0x00023;
 
   /**
-   * The sign for the currency dollar ({@value} ). This currency is not unique as many countries named their
-   * currency dollar (e.g. US-$, CAN-$, AU-$).
+   * The sign for the currency dollar. Looks like this: {@value}<br/>
+   * This currency is not unique as many countries named their currency dollar (e.g. US-$, CAN-$, AU-$).
    */
   char DOLLAR_SIGN = 0x0024;
 
   /**
-   * The percent sign ({@value} ). Indicates the 1/100 part of the preceeding number.
+   * The percent sign indicating the 1/100 part of the preceding number. Looks like this: {@value}
    */
   char PERCENT_SIGN = 0x0025;
 
-  /** The ampersand sign used for the term "and" ({@value} ). */
+  /** The ampersand sign used for the term "and". Looks like this: {@value} */
   char AMPERSAND = 0x0026;
 
-  /** The apostrophe sign ({@value} ). */
+  /** The apostrophe sign. Looks like this: {@value} */
   char APOSTROPHE = 0x0027;
 
   char LEFT_PARENTHESIS = 0x00028;
 
   char RIGHT_PARENTHESIS = 0x00029;
 
-  /** The asterisk sign ({@value} ). */
+  /** The asterisk sign commonly used for multiplication. Looks like this: {@value} */
   char ASTERISK = 0x002A;
 
-  /** The plus sign ({@value} ). */
+  /** The plus sign. Looks like this: {@value} */
   char PLUS_SIGN = 0x002B;
 
+  /** The comma used as a separator within a sentence. Looks like this: {@value} */
   char COMMA = 0x0002C;
 
   /**
@@ -111,12 +133,19 @@ public interface UnicodeUtil {
   // char GREATER_THAN_SIGN_WITH_VERTICAL_LINE=0x0003E-020D2;
   char QUESTION_MARK = 0x0003F;
 
+  /**
+   * The at sign used as separator in email addresses. Looks like a small letter <code>a</code> in a circle: *
+   * * {@value}
+   */
   char COMMERCIAL_AT = 0x00040;
 
+  /** The latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_A = 0x0041;
 
+  /** The latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_B = 0x0042;
 
+  /** The latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_C = 0x0043;
 
   char LATIN_CAPITAL_LETTER_D = 0x0044;
@@ -173,7 +202,7 @@ public interface UnicodeUtil {
   char RIGHT_SQUARE_BRACKET = 0x0005D;
 
   /**
-   * The circumflex accent ({@value} ).
+   * The circumflex accent. Looks like this: {@value}
    * 
    * @see #COMBINING_CIRCUMFLEX_ACCENT
    */
@@ -182,7 +211,7 @@ public interface UnicodeUtil {
   char LOW_LINE = 0x0005F;
 
   /**
-   * The grave accent ({@value} ).
+   * The grave accent. Looks like this: {@value}
    * 
    * @see #COMBINING_GRAVE_ACCENT
    */
@@ -244,6 +273,9 @@ public interface UnicodeUtil {
 
   char VERTICAL_LINE = 0x0007C;
 
+  /**
+   * The closing curly bracket. Looks like this: {@value}
+   */
   char RIGHT_CURLY_BRACKET = 0x0007D;
 
   /**
@@ -258,26 +290,30 @@ public interface UnicodeUtil {
 
   // ** Latin-1 supplement (A0-FF) **
 
+  /**
+   * A {@link #SPACE} that shall not be wrapped.
+   */
   char NO_BREAK_SPACE = 0x000A0;
 
   /**
    * An inverted (upside-down) {@link #EXCLAMATION_MARK exclamation mark} (!) used at the beginning of an
-   * exclamation in Spanish.
+   * exclamation in Spanish. Looks like this: {@value}
    */
   char INVERTED_EXCLAMATION_MARK = 0x000A1;
 
   /**
-   * The sign for the currency unit cent. A cent is the 1/100 part of a {@link #DOLLAR_SIGN dollar}.
+   * The sign for the currency unit cent. A cent is the 1/100 part of a {@link #DOLLAR_SIGN dollar}. Looks
+   * like this: {@value}
    */
   char CENT_SIGN = 0x00A2;
 
-  /** The sign for the British currency pound. */
+  /** The sign for the British currency pound. Looks like this: {@value} */
   char POUND_SIGN = 0x00A3;
 
-  /** The universal currency sign. */
+  /** The universal currency sign. Looks like this: {@value} */
   char CURRENCY_SIGN = 0x00A4;
 
-  /** The sign for the Chinese currency yen. */
+  /** The sign for the Chinese currency yen. Looks like a dobule striketrough letter Y: {@value} */
   char YEN_SIGN = 0x00A5;
 
   char BROKEN_BAR = 0x000A6;
@@ -285,6 +321,8 @@ public interface UnicodeUtil {
   char SECTION_SIGN = 0x000A7;
 
   /**
+   * Looks like two small upper dots: {@value}
+   * 
    * @see DiacriticalMark#DIAERESIS
    * @see #COMBINING_DIAERESIS
    */
@@ -296,14 +334,20 @@ public interface UnicodeUtil {
 
   char LEFT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK = 0x000AB;
 
+  /**
+   * The sign for a negation in boolean algebra. Looks like this: {@value}
+   */
   char NOT_SIGN = 0x000AC;
 
   /**
    * The soft hyphen that indicates a word-wrap position (for hyphenation). Similar to ASCII hyphen-minus
-   * ('-').
+   * ('-'). It has no visual glyph as representation.
    */
   char SOFT_HYPHEN = 0x000AD;
 
+  /**
+   * The symbol for a registered trademark. Looks like the letter <code>R</code> in a circle: {@value}
+   */
   char REGISTERED_SIGN = 0x000AE;
 
   /**
@@ -312,12 +356,25 @@ public interface UnicodeUtil {
    */
   char MACRON = 0x000AF;
 
+  /**
+   * The symbol indicating degrees for angles or temperature. It looks like a small superscript circle: * * *
+   * * {@value}
+   */
   char DEGREE_SIGN = 0x000B0;
 
+  /**
+   * The symbol indicating both plus (+) and minus (-). Looks like this: {@value}
+   */
   char PLUS_MINUS_SIGN = 0x000B1;
 
+  /**
+   * A small superscript variant of 2 e.g for the square. Looks like this: {@value}
+   */
   char SUPERSCRIPT_TWO = 0x000B2;
 
+  /**
+   * A small superscript variant of 3 e.g for cubic. Looks like this: {@value}
+   */
   char SUPERSCRIPT_THREE = 0x000B3;
 
   char ACUTE_ACCENT = 0x000B4;
@@ -1652,6 +1709,9 @@ public interface UnicodeUtil {
 
   char COMBINING_LONG_STROKE_OVERLAY = 0x0336;
 
+  /**
+   * @see #SOLIDUS
+   */
   char COMBINING_SHORT_SOLIDUS_OVERLAY = 0x0337;
 
   char COMBINING_LONG_SOLIDUS_OVERLAY = 0x0338;
@@ -3913,11 +3973,28 @@ public interface UnicodeUtil {
   /**
    * This method determines an ASCII-representation for the given character if available.
    * 
+   * @see java.text.Normalizer
+   * 
    * @param character is the character to convert.
    * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the
    *         character is already ASCII or there is no ASCII-representation available.
    */
   String normalize2Ascii(char character);
+
+  /**
+   * This method converts the given <code>text</code> to the best possible ASCII-representation. All
+   * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
+   * to ASCII} and if
+   * 
+   * @see java.text.Normalizer
+   * 
+   * @param text is the text to convert.
+   * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have
+   *        no {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove
+   *        these characters. A typical character to use is <code>?</code>.
+   * @return the converted text.
+   */
+  String normalize2Ascii(CharSequence text, char nonNormalizableCharaterReplacement);
 
   /**
    * This method determines if the given character is a dash.
@@ -3946,7 +4023,7 @@ public interface UnicodeUtil {
    * @see #HYPHENATION_POINT
    * 
    * @param character is the character to check.
-   * @return <code>true</code> if <code>character</code> is a dash.
+   * @return <code>true</code> if <code>character</code> is a hypen.
    */
   boolean isHyphen(char character);
 
@@ -3957,7 +4034,7 @@ public interface UnicodeUtil {
    * @see #MINUS_SIGN
    * 
    * @param character is the character to check.
-   * @return <code>true</code> if <code>character</code> is a dash.
+   * @return <code>true</code> if <code>character</code> is a minus sign.
    */
   boolean isMinus(char character);
 
