@@ -69,7 +69,7 @@ public interface RemoteInvocationServiceCaller {
    * 
    * @see #newQueue(RemoteInvocationServiceQueueSettings)
    * 
-   * @param id is the {@link RemoteInvocationServiceQueueSettings#getId() identifier} of the new
+   * @param id is the {@link RemoteInvocationServiceQueue#getId() identifier} of the new
    *        {@link RemoteInvocationServiceQueue queue}.
    * @return the new {@link RemoteInvocationServiceQueue}.
    */

@@ -329,6 +329,48 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoLessOrEqual();
 
   /**
+   * @return the {@link NlsMessage} for the label "OK".
+   */
+  @NlsBundleMessage("OK")
+  NlsMessage infoOk();
+
+  /**
+   * @return the {@link NlsMessage} for the text "Yes".
+   */
+  @NlsBundleMessage("Yes")
+  NlsMessage infoYes();
+
+  /**
+   * @return the {@link NlsMessage} for the text "No".
+   */
+  @NlsBundleMessage("No")
+  NlsMessage infoNo();
+
+  /**
+   * @return the {@link NlsMessage} for the text "Information".
+   */
+  @NlsBundleMessage("Information")
+  NlsMessage infoInformation();
+
+  /**
+   * @return the {@link NlsMessage} for the text "Warning".
+   */
+  @NlsBundleMessage("Warning")
+  NlsMessage infoWarning();
+
+  /**
+   * @return the {@link NlsMessage} for the text "Error".
+   */
+  @NlsBundleMessage("Error")
+  NlsMessage infoError();
+
+  /**
+   * @return the {@link NlsMessage} for the text "Confirmation".
+   */
+  @NlsBundleMessage("Confirmation")
+  NlsMessage infoConfirmation();
+
+  /**
    * @see net.sf.mmm.util.value.api.WrongValueTypeException
    * 
    * @param value is the invalid value.
@@ -1276,7 +1318,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @param mode is the mode of access.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Property \"{property}\" not accessible for \"{mode}\" in \"{type}\"!")
+  @NlsBundleMessage("Property \"{property}\" not accessible for the mode \"{mode}\" in \"{type}\"!")
   NlsMessage errorPojoPropertyNotAccessible(@Named("property")
   Object property, @Named("type")
   Object type, @Named("mode")

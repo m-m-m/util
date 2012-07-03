@@ -38,10 +38,11 @@ public class RemoteInvocationServiceQueueSettings {
   }
 
   /**
-   * This method gets the identifier of the {@link RemoteInvocationServiceQueue} to
-   * {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) create}. It will be
-   * used for error messages, logging, etc. and will therefore help you debugging problems if you specify a
-   * reasonable ID.
+   * This method gets the {@link RemoteInvocationServiceQueue#getId() identifier} of the
+   * {@link RemoteInvocationServiceQueue} to
+   * {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) create}.
+   * 
+   * @see RemoteInvocationServiceQueue#getId()
    * 
    * @return the ID of the {@link RemoteInvocationServiceQueue} to
    *         {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) create} or

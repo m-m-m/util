@@ -19,6 +19,7 @@ import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
@@ -245,6 +246,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
         RemoteInvocationServiceQueueImpl parentQueue) {
 
       super();
+      NlsNullPointerException.checkNotNull(RemoteInvocationServiceQueueSettings.class, settings);
       this.settings = settings;
       this.parentQueue = parentQueue;
       if (parentQueue != null) {
@@ -294,10 +296,19 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+
+      return this.settings.getId();
+    }
+
+    /**
      * @return an info string with the {@link RemoteInvocationServiceQueueSettings#getId() ID} or the empty
      *         string if not present.
      */
-    protected String getId() {
+    protected String getIdInfo() {
 
       String id = this.settings.getId();
       if (id == null) {
@@ -395,7 +406,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     protected void requireNoChildQueue() {
 
       if (this.childQueue != null) {
-        throw new IllegalStateException("Child-queue" + this.childQueue.getId() + " of this queue" + getId()
+        throw new IllegalStateException("Child-queue" + this.childQueue.getIdInfo() + " of this queue" + getIdInfo()
             + " not completed.");
       }
     }
@@ -444,7 +455,8 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
       requireOpen();
       if (this.childQueue != null) {
         getLogger().warn(
-            "Canceling of queue" + getId() + " will also cancel open child-queue" + this.childQueue.getId() + ".");
+            "Canceling of queue" + getIdInfo() + " will also cancel open child-queue" + this.childQueue.getIdInfo()
+                + ".");
         this.childQueue.cancel();
       }
       this.currentCall = null;

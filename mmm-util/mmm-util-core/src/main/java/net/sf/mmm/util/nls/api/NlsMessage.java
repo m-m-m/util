@@ -258,6 +258,8 @@ import java.util.Locale;
  * 
  * For the term <em>internationalization</em> usually the shortcut <em>i18n</em> is used.
  * 
+ * @see NlsMessageFactory
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

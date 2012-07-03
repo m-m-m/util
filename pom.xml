@@ -13,8 +13,7 @@
   
   <modules>
     <module>mmm-util</module>
-    <!-- <module>mmm-client</module> -->
-    <module>mmm-l10n</module>
+    <module>mmm-client</module>
     <module>mmm-search</module>
     <module>mmm-service</module>
     <module>mmm-content-parser</module>
@@ -23,10 +22,11 @@
     <module>mmm-security</module>
     <module>mmm-upnp</module>
     <module>mmm-uit</module>
-    <module>mmm-setup</module>
-    <module>mmm-test</module>
+    <module>mmm-l10n</module>
     <module>mmm-data</module>
     <module>mmm-app</module>
+    <module>mmm-setup</module>
+    <module>mmm-test</module>
   </modules>
   
   <properties>

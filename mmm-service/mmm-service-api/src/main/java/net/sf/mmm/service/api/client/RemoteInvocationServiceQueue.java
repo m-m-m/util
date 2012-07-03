@@ -5,6 +5,7 @@ package net.sf.mmm.service.api.client;
 import java.io.Serializable;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
 /**
  * This is the interface for a queue of method-calls to one or multiple {@link RemoteInvocationService}s. It
@@ -17,7 +18,17 @@ import net.sf.mmm.service.api.RemoteInvocationService;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface RemoteInvocationServiceQueue {
+public interface RemoteInvocationServiceQueue extends AttributeReadId<String> {
+
+  /**
+   * {@inheritDoc}
+   * 
+   * It will be used for error messages, logging, etc. and will therefore help you debugging problems if you
+   * specify a reasonable ID.
+   * 
+   * @see RemoteInvocationServiceCaller#newQueue(String)
+   */
+  String getId();
 
   /**
    * This method gets a client-stub for calling exactly <em>one single method</em> on a
