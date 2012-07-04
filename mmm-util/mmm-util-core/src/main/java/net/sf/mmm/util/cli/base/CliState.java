@@ -35,9 +35,9 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
-import net.sf.mmm.util.value.api.ValueValidator;
 
 import org.slf4j.Logger;
 

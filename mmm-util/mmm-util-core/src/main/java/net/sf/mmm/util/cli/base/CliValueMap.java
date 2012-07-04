@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-import net.sf.mmm.util.value.api.ValueValidator;
+import net.sf.mmm.util.validation.api.ValueValidator;
 
 import org.slf4j.Logger;
 
