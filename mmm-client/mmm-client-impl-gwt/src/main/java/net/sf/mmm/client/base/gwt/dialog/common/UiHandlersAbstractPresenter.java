@@ -13,4 +13,6 @@ import net.sf.mmm.client.api.dialog.Dialog;
  */
 public interface UiHandlersAbstractPresenter extends UiHandlersAbstractPresenterWidget, Dialog {
 
+  // nothing to add
+
 }
