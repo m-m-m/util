@@ -18,6 +18,7 @@
     <module>mmm-app-pim</module>
     <module>mmm-app-video</module>
     <module>mmm-app-audio</module>
+    <module>mmm-app-main</module>
     <module>mmm-app-war</module>
   </modules>
   
