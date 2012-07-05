@@ -5,7 +5,7 @@ package net.sf.mmm.client.impl.base.place;
 
 /**
  * This class is a collection of constants with the names of the {@link com.google.gwt.place.shared.Place}s
- * for the available {@link net.sf.mmm.client.base.gwt.dialog.presenter.AbstractPresenter Presenters}.
+ * for the available {@link net.sf.mmm.client.base.gwt.dialog.mvp.presenter.AbstractPresenter Presenters}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
