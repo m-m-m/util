@@ -14,6 +14,7 @@
   <name>app</name>
   <description>The actual multimedia application.</description>
   <modules>
+    <module>mmm-app-core</module>
     <module>mmm-app-pim</module>
     <module>mmm-app-video</module>
     <module>mmm-app-audio</module>
