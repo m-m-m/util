@@ -11,7 +11,7 @@
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
   <source path="lang" excludes="**/System*"/>
   <source path="uuid"/>
-  <source path="nls"/>
+  <source path="nls" excludes="**/NlsResourceLocator.java,**/AbstractNlsBundleFactory.java"/>
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
   <generate-with class="net.sf.mmm.util.nls.impl.NlsResourceBundleGenerator">

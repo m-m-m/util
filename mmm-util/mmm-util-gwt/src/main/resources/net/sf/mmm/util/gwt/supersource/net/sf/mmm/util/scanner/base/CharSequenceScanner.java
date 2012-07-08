@@ -16,7 +16,7 @@ import net.sf.mmm.util.scanner.api.CharStreamScanner;
  * instead of frequently calling {@link String#charAt(int)}.<br>
  * <b>ATTENTION:</b><br>
  * This implementation is NOT and has no intention to be thread-safe.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -44,7 +44,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * The constructor.
-   * 
+   *
    * @param charSequence is the {@link #getOriginalString() string} to scan.
    */
   public CharSequenceScanner(CharSequence charSequence) {
@@ -54,7 +54,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * The constructor.
-   * 
+   *
    * @param string is the {@link #getOriginalString() string} to parse.
    */
   public CharSequenceScanner(String string) {
@@ -65,7 +65,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * The constructor.
-   * 
+   *
    * @param characters is an array containing the characters to scan.
    */
   public CharSequenceScanner(char[] characters) {
@@ -75,7 +75,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * The constructor.
-   * 
+   *
    * @param characters is an array containing the characters to scan.
    * @param offset is the index of the first char to scan in <code>characters</code> (typically <code>0</code>
    *        to start at the beginning of the array).
@@ -103,7 +103,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * @see java.lang.CharSequence#charAt(int)
-   * 
+   *
    * @param index is the index of the requested character.
    * @return the character at the given <code>index</code>.
    */
@@ -114,7 +114,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * @see java.lang.CharSequence#length()
-   * 
+   *
    * @return the total length of the {@link #getOriginalString() string to parse}.
    */
   public int getLength() {
@@ -125,7 +125,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * @see String#substring(int, int)
    * @see #appendSubstring(StringBuffer, int, int)
-   * 
+   *
    * @param start the start index, inclusive.
    * @param end the end index, exclusive.
    * @return the specified substring.
@@ -138,7 +138,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * This method gets the {@link #getOriginalString() original string} where the {@link #substring(int, int)
    * substring} specified by <code>start</code> and <code>end</code> is replaced by <code>substitute</code>.
-   * 
+   *
    * @param substitute is the string used as replacement.
    * @param start is the inclusive start index of the substring to replace.
    * @param end is the exclusive end index of the substring to replace.
@@ -159,7 +159,7 @@ public class CharSequenceScanner implements CharStreamScanner {
    * This method appends the {@link #substring(int, int) substring} specified by <code>start</code> and
    * <code>end</code> to the given <code>buffer</code>.<br>
    * This avoids the overhead of creating a new string and copying the char array.
-   * 
+   *
    * @param buffer is the buffer where to append the substring to.
    * @param start the start index, inclusive.
    * @param end the end index, exclusive.
@@ -179,7 +179,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method sets the {@link #getCurrentIndex() current index}.
-   * 
+   *
    * @param index is the next index position to set. The value has to be greater or equal to <code>0</code>
    *        and less or equal to {@link #getLength()} .
    */
@@ -235,13 +235,13 @@ public class CharSequenceScanner implements CharStreamScanner {
    * them as string. If there are less characters {@link #hasNext() available} the returned string will be
    * shorter than <code>count</code> and only contain the available characters. Unlike {@link #read(int)} this
    * method does NOT consume the characters and will therefore NOT change the state of this scanner.
-   * 
+   *
    * @param count is the number of characters to peek. You may use {@link Integer#MAX_VALUE} to peek until the
    *        end of data if the data-size is suitable.
    * @return a string with the given number of characters or all available characters if less than
    *         <code>count</code>. Will be the empty string if no character is {@link #hasNext() available} at
    *         all.
-   * @since 2.0.2
+   * @since 3.0.0
    */
   public String peek(int count) {
 
@@ -676,7 +676,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method gets the tail of this scanner without changing the state.
-   * 
+   *
    * @return the tail of this scanner.
    */
   protected String getTail() {
@@ -691,7 +691,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * This method gets the tail of this scanner limited (truncated) to the given <code>maximum</code> number of
    * characters without changing the state.
-   * 
+   *
    * @param maximum is the maximum number of characters to return from the {@link #getTail() tail}.
    * @return the tail of this scanner.
    */
@@ -817,9 +817,9 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method gets the original string to parse.
-   * 
+   *
    * @see CharSequenceScanner#CharSequenceScanner(String)
-   * 
+   *
    * @return the original string.
    */
   public String getOriginalString() {
