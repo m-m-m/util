@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteMinimized extends AttributeReadMinimized {
+public abstract interface AttributeWriteMinimized extends AttributeReadMinimized {
 
   /**
    * This method (un)minimizes the object (window). If it is minimized it will be hidden from the screen

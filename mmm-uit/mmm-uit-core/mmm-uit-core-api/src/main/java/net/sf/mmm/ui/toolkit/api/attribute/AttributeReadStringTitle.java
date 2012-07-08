@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadStringTitle extends AttributeReadTitle<String> {
+public abstract interface AttributeReadStringTitle extends AttributeReadTitle<String> {
 
   /**
    * This method gets the title of this object. The detailed meaning of the title depends on the type of

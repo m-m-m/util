@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadStyles {
+public abstract interface AttributeReadStyles {
 
   /**
    * This method gets the style(s) of this object. The style defines aspects for the appearance (look & feel)

@@ -8,11 +8,11 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadModal {
+public abstract interface AttributeReadModal {
 
   /**
-   * This method determines if this object (dialog) is modal. If a modal dialog is opened all previous windows
-   * of the application are blocked until the window is closed.
+   * This method determines if this object (window) is modal. If a modal window (popup) is opened all previous
+   * windows of the application are blocked until the window is closed.
    * 
    * @return <code>true</code> if modal, <code>false</code> otherwise.
    */

@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWritePosition extends AttributeReadPosition {
+public abstract interface AttributeWritePosition extends AttributeReadPosition {
 
   /**
    * This method sets the position of the object.

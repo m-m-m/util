@@ -10,7 +10,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteStylesAdvanced extends AttributeReadStylesAdvanced, AttributeWriteStyles {
+public abstract interface AttributeWriteStylesAdvanced extends AttributeReadStylesAdvanced, AttributeWriteStyles {
 
   /**
    * This method adds the given <code>style</code> to the {@link #getStyles() styles}.

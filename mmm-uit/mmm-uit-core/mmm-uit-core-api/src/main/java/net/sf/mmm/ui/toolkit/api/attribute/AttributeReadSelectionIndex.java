@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadSelectionIndex {
+public abstract interface AttributeReadSelectionIndex {
 
   /**
    * This method gets the index of the selected item.

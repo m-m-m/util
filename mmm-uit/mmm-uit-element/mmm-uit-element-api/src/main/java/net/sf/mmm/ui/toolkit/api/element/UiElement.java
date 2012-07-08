@@ -26,7 +26,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * particular UI. {@link UiElement}s that have no value (e.g. a Button or a Menu) indicate this by using
  * {@link Void} for the generic &lt;VALUE&gt;.<br/>
  * <br/>
- * Further a {@link UiElement} internally has an {@link #getAdapter() adapter} that is used to abstract from
+ * Further a {@link UiElement} internally has an {@link #getWidget() adapter} that is used to abstract from
  * the underlying native UI toolkit. The adapter is lazily created when needed on
  * {@link #initialize(UiConfiguration) initialization}. The initialization has to be done only once for each
  * top-level {@link UiElement} (root {@link #getParent() node}). If a new {@link UiElement} is attached to a
@@ -55,17 +55,17 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Use {@link Void} for {@link UiElement}
  *        s that do not carry a {@link #getValue() value}.
- * @param <ADAPTER> is the generic type of the underlying {@link #getAdapter()}.
+ * @param <WIDGET> is the generic type of the underlying {@link #getWidget() widget}.
  */
-public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements AttributeReadHtmlId,
-    AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteMode,
+public abstract class UiElement<VALUE, WIDGET extends UiWidget> implements AttributeReadHtmlId, AttributeWriteVisible,
+    AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteMode,
     AttributeWriteValue<VALUE> {
 
   /** @see #getValue() */
   private VALUE value;
 
-  /** @see #getAdapter() */
-  private ADAPTER adapter;
+  /** @see #getWidget() */
+  private WIDGET widget;
 
   /** @see #getId() */
   private final String id;
@@ -113,7 +113,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
    */
   protected final EnabledState getEnabledState() {
 
-    if ((this.adapter == null) && (this.enabledState.isEnabled())) {
+    if ((this.widget == null) && (this.enabledState.isEnabled())) {
       return EnabledState.BLOCKED;
     }
     return this.enabledState;
@@ -149,7 +149,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
    */
   protected final VisibleState getVisibleState() {
 
-    if ((this.adapter == null) && (this.visibleState.isVisible())) {
+    if ((this.widget == null) && (this.visibleState.isVisible())) {
       return VisibleState.BLOCKED;
     }
     return this.visibleState;
@@ -164,7 +164,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
     if (!this.visibleState.isVisible()) {
       return false;
     }
-    if (this.adapter == null) {
+    if (this.widget == null) {
       return false;
     }
     UiElementComposite<?, ?> parent = getParent();
@@ -213,8 +213,8 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
    */
   private void doSetVisible(boolean visible) {
 
-    if (this.adapter != null) {
-      this.adapter.setVisible(visible);
+    if (this.widget != null) {
+      this.widget.setVisible(visible);
     }
   }
 
@@ -282,8 +282,8 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
   @Override
   public final void setTooltip(String tooltip) {
 
-    if ((this.adapter != null) && (!this.tooltip.equals(tooltip))) {
-      this.adapter.setTooltip(tooltip);
+    if ((this.widget != null) && (!this.tooltip.equals(tooltip))) {
+      this.widget.setTooltip(tooltip);
     }
     this.tooltip = tooltip;
   }
@@ -378,7 +378,7 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
    */
   protected final void updateStyles() {
 
-    if (this.adapter != null) {
+    if (this.widget != null) {
       // this.view.setStyles(this.styles);
     }
   }
@@ -467,14 +467,14 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
   }
 
   /**
-   * This method is invoked from {@link #setValue(Object)} to update the value in the {@link #getAdapter()
+   * This method is invoked from {@link #setValue(Object)} to update the value in the {@link #getWidget()
    * view}.
    * 
    * @param newValue is the value to set. May be <code>null</code> to clear the element.
    */
   protected void setValueInternal(VALUE newValue) {
 
-    if (this.adapter != null) {
+    if (this.widget != null) {
       // this.adapter.setValue(this.value);
     }
   }
@@ -488,43 +488,43 @@ public abstract class UiElement<VALUE, ADAPTER extends UiWidget<?>> implements A
    * This method gets the {@link Class} reflecting the underlying type of {@link UiWidget}. It is required to
    * create the adapter for {@link #initializeAdapter(UiWidget) initialization}.
    * 
-   * @return the {@link #getAdapter() adapter} {@link Class}.
+   * @return the {@link #getWidget() adapter} {@link Class}.
    */
-  protected abstract Class<ADAPTER> getAdapterClass();
+  protected abstract Class<WIDGET> getAdapterClass();
 
   /**
    * This method gets the underlying {@link UiWidget}.
    * 
    * @return the {@link UiWidget} or <code>null</code> if NOT yet created.
    */
-  protected final ADAPTER getAdapter() {
+  protected final WIDGET getWidget() {
 
-    return this.adapter;
+    return this.widget;
   }
 
   /**
    * This method initializes this {@link UiElement}. A tree of {@link UiElement}s has to be initialized once
-   * from its top-level node in order to be displayed. During the initialization the {@link #getAdapter()
+   * from its top-level node in order to be displayed. During the initialization the {@link #getWidget()
    * adapters} and their underlying native widgets are created.
    * 
    * @param configuration is the {@link UiConfiguration}.
    */
   protected final void initialize(UiConfiguration<?> configuration) {
 
-    if (this.adapter != null) {
+    if (this.widget != null) {
       // already initialized...
       return;
     }
-    this.adapter = configuration.getAdapterFactory().create(getAdapterClass());
-    initializeAdapter(this.adapter);
+    this.widget = configuration.getAdapterFactory().create(getAdapterClass());
+    initializeAdapter(this.widget);
   }
 
   /**
-   * This method initializes the {@link #getAdapter() view}.
+   * This method initializes the {@link #getWidget() view}.
    * 
    * @param widgetAdapter is the {@link UiWidget} to initialize.
    */
-  protected void initializeAdapter(ADAPTER widgetAdapter) {
+  protected void initializeAdapter(WIDGET widgetAdapter) {
 
     widgetAdapter.setId(this.id);
     widgetAdapter.setTooltip(this.tooltip);

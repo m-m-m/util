@@ -4,6 +4,10 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
+import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
+import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
+import net.sf.mmm.ui.toolkit.impl.widget.gwt.UiWidgetFactoryGwt;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -21,6 +25,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -43,7 +48,15 @@ public class Mmm implements EntryPoint {
    */
   public void onModuleLoad() {
 
-    final Button sendButton = new Button("Send");
+    UiWidgetFactory<Widget> factory = new UiWidgetFactoryGwt();
+    UiWidgetImage image = factory.create(UiWidgetImage.class);
+    image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
+    UiWidgetButton button = factory.create(UiWidgetButton.class);
+    button.setLabel("Send");
+    button.setImage(image);
+    button.setTooltip("Send to server");
+
+    final Button sendButton = (Button) factory.getNativeWidget(button); // new Button("Send");
     final TextBox nameField = new TextBox();
     // nameField.setText("GWT User");
     final Label errorLabel = new Label();

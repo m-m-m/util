@@ -10,7 +10,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteStyles extends AttributeReadStyles {
+public abstract interface AttributeWriteStyles extends AttributeReadStyles {
 
   /**
    * This method clears all {@link AttributeReadStylesAdvanced#getStyles() styles} and sets them to the given

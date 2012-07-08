@@ -12,7 +12,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadModified {
+public abstract interface AttributeReadModified {
 
   /**
    * This method determines if this object is <em>modified</em>. This means that the object has been modified

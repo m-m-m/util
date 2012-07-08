@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.common.ScrollbarPolicy;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadScrollbarPolicy {
+public abstract interface AttributeReadScrollbarPolicy {
 
   /**
    * This method gets the {@link ScrollbarPolicy} for the horizontal scrollbar.

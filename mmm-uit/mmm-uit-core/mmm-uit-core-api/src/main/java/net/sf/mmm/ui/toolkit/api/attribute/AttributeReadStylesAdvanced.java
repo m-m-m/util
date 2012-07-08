@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadStylesAdvanced extends AttributeReadStyles {
+public abstract interface AttributeReadStylesAdvanced extends AttributeReadStyles {
 
   /**
    * This method checks if the given <code>style</code> is contained in the {@link #getStyles() set of styles}

@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureHandlerObserver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteHandlerObserver extends AttributeReadHandlerObserver {
+public abstract interface AttributeWriteHandlerObserver extends AttributeReadHandlerObserver {
 
   /**
    * This method gets the editable status.

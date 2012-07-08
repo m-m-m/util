@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteEnabled extends AttributeReadEnabled {
+public abstract interface AttributeWriteEnabled extends AttributeReadEnabled {
 
   /**
    * This method sets the enabled status of this object. If it is disabled, the user can not interact with the

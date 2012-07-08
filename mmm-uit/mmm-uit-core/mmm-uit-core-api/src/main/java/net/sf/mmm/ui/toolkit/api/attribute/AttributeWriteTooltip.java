@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteTooltip extends AttributeReadTooltip {
+public abstract interface AttributeWriteTooltip extends AttributeReadTooltip {
 
   /**
    * This method sets the tooltip text of this object.

@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.Orientation;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadOrientation {
+public abstract interface AttributeReadOrientation {
 
   /**
    * This method gets the orientation of this object. The object is layed out along the axis defined by the

@@ -9,7 +9,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadVisible {
+public abstract interface AttributeReadVisible {
 
   /**
    * This method determines if this object is displayed to the user.

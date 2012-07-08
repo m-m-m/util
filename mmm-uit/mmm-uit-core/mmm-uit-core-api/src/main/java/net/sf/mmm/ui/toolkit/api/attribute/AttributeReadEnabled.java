@@ -13,7 +13,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadEnabled {
+public abstract interface AttributeReadEnabled {
 
   /**
    * This method determines if this object is enabled. If it is NOT enabled, the user can NOT interact with

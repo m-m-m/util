@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadPosition {
+public abstract interface AttributeReadPosition {
 
   /**
    * This method gets the position of this object on the x-axis (horizontal).

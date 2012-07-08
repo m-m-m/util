@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.Orientation;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteOrientation extends AttributeReadOrientation {
+public abstract interface AttributeWriteOrientation extends AttributeReadOrientation {
 
   /**
    * This method sets the orientation to the given value.

@@ -9,7 +9,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteSize extends AttributeReadSize {
+public abstract interface AttributeWriteSize extends AttributeReadSize {
 
   /**
    * This method sets the size of this object.

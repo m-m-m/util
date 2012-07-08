@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.common.VisibleState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadVisibleState {
+public abstract interface AttributeReadVisibleState {
 
   /**
    * This method gets the {@link VisibleState} of this object.

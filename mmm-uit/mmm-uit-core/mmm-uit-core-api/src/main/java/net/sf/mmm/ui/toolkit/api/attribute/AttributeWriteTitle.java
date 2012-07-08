@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteTitle extends AttributeReadStringTitle {
+public abstract interface AttributeWriteTitle extends AttributeReadStringTitle {
 
   /**
    * This method sets the title of this object.

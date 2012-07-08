@@ -9,7 +9,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteMaximized extends AttributeReadMaximized {
+public abstract interface AttributeWriteMaximized extends AttributeReadMaximized {
 
   /**
    * This method (un)maximizes the object. If it is maximized its position will be moved to the top left

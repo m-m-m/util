@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadPreferredSize {
+public abstract interface AttributeReadPreferredSize {
 
   /**
    * This method gets the preferred width of this object in pixels.

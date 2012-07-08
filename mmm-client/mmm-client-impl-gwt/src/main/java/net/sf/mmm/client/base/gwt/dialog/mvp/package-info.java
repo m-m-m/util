@@ -26,8 +26,8 @@
  * <li>Create a class extending {@link net.sf.mmm.client.base.gwt.dialog.mvp.view.AbstractViewImpl} and implementing 
  * <code><em>X</em>View</code> named <code>basepackage.<em>x</em>.view.<em>X</em>ViewImpl</code>.</li>
  * <li>Create a subclass of {@link net.sf.mmm.client.base.gwt.dialog.mvp.presenter.AbstractPresenter} named 
- * <code>basepackage.<em>x</em>.presenter.<em>X</em>Presenter</code>. This class has to have an inner interface named <code>Proxy</code> 
- * that extends {@link com.gwtplatform.mvp.client.proxy.ProxyPlace}&lt;<em>X</em>Presenter&gt; and is annotated with
+ * <code>basepackage.<em>x</em>.presenter.<em>X</em>Presenter</code>. This class has to have an inner interface named
+ * <code>MyProxy</code> that extends {@link com.gwtplatform.mvp.client.proxy.ProxyPlace}&lt;<em>X</em>Presenter&gt; and is annotated with
  * {@link com.gwtplatform.mvp.client.annotations.NameToken} specifying a constant from your central class all
  * your {@link com.google.gwt.place.shared.Place}s and either
  * {@link com.gwtplatform.mvp.client.annotations.ProxyStandard} (or
@@ -36,7 +36,7 @@
  * you add to the method 
  * {@link com.gwtplatform.mvp.client.gin.AbstractPresenterModule#configure(com.google.gwt.inject.client.binder.GinBinder)}
  * this magic line: 
- * <code>bindPresenter(XPresenter.class, XView.class, XViewImpl.class, XPresenter.Proxy.class);</code></li>
+ * <code>bindPresenter(XPresenter.class, XView.class, XViewImpl.class, XPresenter.MyProxy.class);</code></li>
  * <li>>In your interface <code><em>M</em>Ginjector</code> (see above) you add the following method:
  * <code>{@link com.google.inject.Provider}&lt;<em>X</em>Presenter&gt; get<em>X</em>Presenter()</code>.
  * In case you used {@link com.gwtplatform.mvp.client.annotations.ProxyCodeSplit}, you have to use {@link com.google.gwt.inject.client.AsyncProvider}

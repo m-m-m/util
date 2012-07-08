@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.widget.gwt;
 
-import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactoryPlain;
 import net.sf.mmm.ui.toolkit.impl.widget.gwt.atomic.UiWidgetButtonGwt;
+import net.sf.mmm.ui.toolkit.impl.widget.gwt.atomic.UiWidgetImageGwt;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -23,14 +22,8 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
   public UiWidgetFactoryGwt() {
 
     super();
-    register(new AbstractUiSingleWidgetFactory<UiWidgetButton>(UiWidgetButton.class) {
-
-      public UiWidgetButton create() {
-
-        return new UiWidgetButtonGwt();
-      }
-
-    });
+    register(new UiWidgetImageGwt.Factory());
+    register(new UiWidgetButtonGwt.Factory());
   }
 
 }

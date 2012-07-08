@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.base.gwt;
 
-import net.sf.mmm.client.api.ClientComponents;
 import net.sf.mmm.client.api.ClientContext;
 import net.sf.mmm.client.api.session.ClientSession;
+import net.sf.mmm.client.impl.gwt.gin.ClientGinjector;
 
 /**
  * This is an extension of {@link ClientContext} for GWT.
@@ -24,13 +24,31 @@ public class GwtClientContext extends ClientContext {
   }
 
   /**
-   * {@inheritDoc}
+   * @return the instance instance of {@link GwtClientContext}.
    */
-  @Override
-  protected void setComponents(ClientComponents clientComponents) {
+  public static GwtClientContext getInstance() {
+
+    return (GwtClientContext) ClientContext.getInstance();
+  }
+
+  /**
+   * This method sets the {@link ClientGinjector} as {@link #getComponents() components}.
+   * 
+   * @param clientComponents is the instance of {@link ClientGinjector}.
+   */
+  protected void setGinjector(ClientGinjector clientComponents) {
 
     // make package visible
     super.setComponents(clientComponents);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ClientGinjector getComponents() {
+
+    return (ClientGinjector) super.getComponents();
   }
 
   /**

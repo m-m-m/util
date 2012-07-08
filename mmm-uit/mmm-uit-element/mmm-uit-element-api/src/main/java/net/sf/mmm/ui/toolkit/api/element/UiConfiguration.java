@@ -3,12 +3,13 @@
 package net.sf.mmm.ui.toolkit.api.element;
 
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 
 /**
  * This interface contains the configuration for the {@link net.sf.mmm.ui.toolkit.api.element.UiElement}s.
  * 
  * @param <WIDGET> is the type of the
- *        {@link UiWidgetFactory#getNativeWidget(net.sf.mmm.ui.toolkit.api.widget.UiAdapter) widgets}.
+ *        {@link UiWidgetFactory#getNativeWidget(UiWidgetRegular) widgets}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

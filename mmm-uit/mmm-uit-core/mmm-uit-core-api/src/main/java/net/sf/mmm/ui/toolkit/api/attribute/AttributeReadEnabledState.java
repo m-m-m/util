@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.common.EnabledState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadEnabledState {
+public abstract interface AttributeReadEnabledState {
 
   /**
    * This method gets the {@link EnabledState} of this object.

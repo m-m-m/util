@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.common.UiMode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadMode {
+public abstract interface AttributeReadMode {
 
   /**
    * This method gets the current {@link UiMode} of this object.

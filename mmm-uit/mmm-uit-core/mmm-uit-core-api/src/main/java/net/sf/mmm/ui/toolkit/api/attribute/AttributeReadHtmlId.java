@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadHtmlId extends AttributeReadId<String> {
+public abstract interface AttributeReadHtmlId extends AttributeReadId<String> {
 
   /** Use this character to compose hierarchical {@link #getId() IDs}. */
   String ID_SEPARATOR = "-";

@@ -10,7 +10,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteEditable extends AtrributeReadEditable {
+public abstract interface AttributeWriteEditable extends AtrributeReadEditable {
 
   /**
    * This method set the editable status.

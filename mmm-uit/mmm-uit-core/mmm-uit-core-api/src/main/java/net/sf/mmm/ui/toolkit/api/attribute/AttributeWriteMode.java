@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.api.common.UiMode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteMode extends AttributeReadMode {
+public abstract interface AttributeWriteMode extends AttributeReadMode {
 
   /**
    * This method sets the {@link UiMode mode} of this object.

@@ -9,7 +9,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadMultiSelection {
+public abstract interface AttributeReadMultiSelection {
 
   /**
    * This methods determines the selection mode.

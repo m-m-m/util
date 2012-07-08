@@ -16,10 +16,10 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AtrributeReadEditable {
+public abstract interface AtrributeReadEditable {
 
   /**
-   * This method gets the editable status.
+   * This method gets the editable status of this object.
    * 
    * @return <code>true</code> if this object is editable.
    */

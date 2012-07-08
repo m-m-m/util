@@ -49,7 +49,7 @@ public abstract class AbstractEntryPoint implements EntryPoint {
 
     this.ginjector = createGinjector();
     GwtClientContext context = new GwtClientContext();
-    context.setComponents(this.ginjector);
+    context.setGinjector(this.ginjector);
     GWT.setUncaughtExceptionHandler(createExceptionHandler());
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 

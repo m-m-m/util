@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadTooltip {
+public abstract interface AttributeReadTooltip {
 
   /**
    * This method gets the tooltip of this object. It is a brief description that explains this object. If the

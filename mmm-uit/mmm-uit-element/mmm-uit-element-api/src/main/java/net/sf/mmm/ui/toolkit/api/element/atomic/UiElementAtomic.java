@@ -9,14 +9,16 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since X 03.05.2012
+ * @since 1.0.0
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <WIDGET> is the generic type of the underlying {@link #getWidget() widget}.
  */
-public abstract class UiElementAtomic<VALUE, VIEW extends UiWidget<?>> extends UiElement<VALUE, VIEW> {
+public abstract class UiElementAtomic<VALUE, WIDGET extends UiWidget> extends UiElement<VALUE, WIDGET> {
 
   /**
    * The constructor.
    * 
-   * @param id
+   * @param id is the {@link #getId() ID}.
    */
   public UiElementAtomic(String id) {
 

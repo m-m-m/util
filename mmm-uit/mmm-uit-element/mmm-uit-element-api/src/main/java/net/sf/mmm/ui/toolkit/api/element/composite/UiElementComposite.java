@@ -10,13 +10,15 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <WIDGET> is the generic type of the underlying {@link #getWidget() widget}.
  */
-public abstract class UiElementComposite<VALUE, VIEW extends UiWidget<?>> extends UiElement<VALUE, VIEW> {
+public abstract class UiElementComposite<VALUE, WIDGET extends UiWidget> extends UiElement<VALUE, WIDGET> {
 
   /**
    * The constructor.
    * 
-   * @param id
+   * @param id is the {@link #getId() ID}.
    */
   public UiElementComposite(String id) {
 

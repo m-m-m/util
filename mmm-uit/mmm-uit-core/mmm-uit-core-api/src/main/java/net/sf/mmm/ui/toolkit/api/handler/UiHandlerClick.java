@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.handler;
 
-import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClickable;
 
 /**
  * This is the interface for a listener that gets {@link #onClick(boolean) notified} if a UI object (e.g. a
@@ -16,8 +15,9 @@ public interface UiHandlerClick extends UiHandler {
   /**
    * This method is invoked if an UI object has been clicked.
    * 
-   * @param programmatic - <code>true</code> if the change was {@link UiFeatureClickable#click() triggered by
-   *        the program}, <code>false</code> if the change was performed by the end-user.
+   * @param programmatic - <code>true</code> if the change was
+   *        {@link net.sf.mmm.ui.toolkit.api.feature.UiFeatureClickable#click() triggered by the program},
+   *        <code>false</code> if the change was performed by the end-user.
    */
   void onClick(boolean programmatic);
 

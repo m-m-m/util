@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteHtmlId extends AttributeReadHtmlId {
+public abstract interface AttributeWriteHtmlId extends AttributeReadHtmlId {
 
   /**
    * This method set the identifier of this object. Use this method to give the object a meaningful identifier

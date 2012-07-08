@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadType {
+public abstract interface AttributeReadType {
 
   /**
    * This method returns the type of the object. This must be a TYPE constant defined in a sub-interface of

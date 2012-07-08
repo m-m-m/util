@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureHandlerObserver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeReadHandlerObserver {
+public abstract interface AttributeReadHandlerObserver {
 
   /**
    * This method gets the {@link UiFeatureHandlerObserver}.

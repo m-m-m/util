@@ -56,6 +56,12 @@ public interface Dialog extends AttributeReadId<String>, AttributeReadTitle<Stri
   String TYPE_SIDE = "Side";
 
   /**
+   * The {@link #getType() type} of the <em>home</em> dialog. This is the root dialog of the application and
+   * contains the other {@link Dialog}s.
+   */
+  String TYPE_HOME = "Home";
+
+  /**
    * This method determines the type of this {@link Dialog}.
    * 
    * @see #TYPE_MAIN

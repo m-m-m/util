@@ -10,7 +10,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteSelectionValue<V> extends AttributeReadSelectionValue<V> {
+public abstract interface AttributeWriteSelectionValue<V> extends AttributeReadSelectionValue<V> {
 
   /**
    * This method sets the value currently selected. If the given value is NOT available, the method will have
