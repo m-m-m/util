@@ -11,8 +11,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * @since 1.0.0
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to {@link #create() create}.
  */
-public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidget<?>> implements
-    UiSingleWidgetFactory<WIDGET> {
+public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidget> implements UiSingleWidgetFactory<WIDGET> {
 
   /** @see #getWidgetInterface() */
   private final Class<WIDGET> widgetInterface;

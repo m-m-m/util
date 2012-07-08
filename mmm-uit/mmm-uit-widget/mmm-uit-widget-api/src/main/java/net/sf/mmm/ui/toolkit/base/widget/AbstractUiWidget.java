@@ -9,10 +9,9 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of {@link #getValue()}.
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class AbstractUiWidget<VALUE, WIDGET> implements UiWidget<VALUE> {
+public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
 
   /** @see #getWidget() */
   private final WIDGET widget;
@@ -43,7 +42,7 @@ public abstract class AbstractUiWidget<VALUE, WIDGET> implements UiWidget<VALUE>
   }
 
   /**
-   * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#getNativeWidget(UiWidget)
+   * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#getNativeWidget(net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular)
    * 
    * @return the native widget.
    */

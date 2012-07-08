@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClickable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAtomicClickable extends UiWidgetAtomicRegular<Void>, UiFeatureClickable,
+public interface UiWidgetAtomicClickable extends UiWidgetAtomicRegular, UiFeatureClickable,
     AttributeWriteHandlerObserver {
 
   // nothing to add...

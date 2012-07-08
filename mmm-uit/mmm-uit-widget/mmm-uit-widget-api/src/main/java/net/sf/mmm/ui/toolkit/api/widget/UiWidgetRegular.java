@@ -9,9 +9,8 @@ package net.sf.mmm.ui.toolkit.api.widget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public abstract interface UiWidgetRegular<VALUE> extends UiWidget<VALUE> {
+public abstract interface UiWidgetRegular extends UiWidget {
 
   // just a marker interface...
 

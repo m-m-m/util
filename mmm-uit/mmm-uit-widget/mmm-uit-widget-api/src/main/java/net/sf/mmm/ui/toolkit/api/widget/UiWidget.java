@@ -7,7 +7,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStyles;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
-import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
  * This is the interface for an adapter to one or multiple physical widgets of the underlying native widget
@@ -15,10 +14,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of {@link #getValue()}.
  */
-public abstract interface UiWidget<VALUE> extends AttributeWriteHtmlId, AttributeWriteVisible, AttributeWriteTooltip,
-    AttributeWriteEnabled, AttributeWriteStyles, AttributeWriteValue<VALUE> {
+public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeWriteVisible, AttributeWriteTooltip,
+    AttributeWriteEnabled, AttributeWriteStyles {
 
   // nothing to add, just a combination of attribute/feature interfaces...
 

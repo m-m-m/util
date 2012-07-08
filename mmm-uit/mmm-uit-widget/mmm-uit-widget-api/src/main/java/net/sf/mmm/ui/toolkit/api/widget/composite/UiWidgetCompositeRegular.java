@@ -9,10 +9,10 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  */
-public interface UiWidgetCompositeRegular<VALUE> extends UiWidgetComposite<VALUE, UiWidgetRegular<?>>,
-    UiWidgetRegular<VALUE> {
+public interface UiWidgetCompositeRegular<CHILD extends UiWidgetRegular> extends UiWidgetComposite<CHILD>,
+    UiWidgetRegular {
 
   // nothing to add...
 

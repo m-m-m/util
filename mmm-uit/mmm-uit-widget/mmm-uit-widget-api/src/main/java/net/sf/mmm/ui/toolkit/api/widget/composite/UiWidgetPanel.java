@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetPanel extends UiWidgetCompositeRegular<Void> {
+public interface UiWidgetPanel extends UiWidgetCompositeRegular<UiWidgetRegular> {
 
   /**
    * This method adds the given <code>child</code> to the end of the {@link #getChild(int) child-list}. For
@@ -22,7 +22,7 @@ public interface UiWidgetPanel extends UiWidgetCompositeRegular<Void> {
    * 
    * @param child is the {@link UiWidgetRegular} to add as child of this panel.
    */
-  void addChild(UiWidgetRegular<?> child);
+  void addChild(UiWidgetRegular child);
 
   /**
    * This method adds the given <code>child</code> at the given <code>index</code>.
@@ -34,7 +34,7 @@ public interface UiWidgetPanel extends UiWidgetCompositeRegular<Void> {
    * @param index is the {@link #getChild(int) index} of the new child. It has to be in the range from
    *        <code>0</code> to {@link #getChildCount()}.
    */
-  void addChild(UiWidgetRegular<?> child, int index);
+  void addChild(UiWidgetRegular child, int index);
 
   /**
    * This method removes the given <code>child</code> from this panel.
@@ -45,7 +45,7 @@ public interface UiWidgetPanel extends UiWidgetCompositeRegular<Void> {
    * @return <code>true</code> if the given <code>child</code> has been removed successfully,
    *         <code>false</code> otherwise (it has NOT been previously added).
    */
-  boolean removeChild(UiWidgetRegular<?> child);
+  boolean removeChild(UiWidgetRegular child);
 
   /**
    * This method removes the child at the given <code>index</code> from this panel.
@@ -56,6 +56,6 @@ public interface UiWidgetPanel extends UiWidgetCompositeRegular<Void> {
    *        <code>0</code> to <code>{@link #getChildCount()} - 1</code>.
    * @return the removed child that has previously been at the given <code>index</code>.
    */
-  UiWidgetRegular<?> removeChild(int index);
+  UiWidgetRegular removeChild(int index);
 
 }

@@ -7,8 +7,8 @@ package net.sf.mmm.ui.toolkit.api.widget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <NATIVE_WIDGET> is the generic top-level type of the underlying {@link #getNativeWidget(UiWidget)
- *        widgets}.
+ * @param <NATIVE_WIDGET> is the generic top-level type of the underlying
+ *        {@link #getNativeWidget(UiWidgetRegular) widgets}.
  */
 public interface UiWidgetFactory<NATIVE_WIDGET> {
 
@@ -23,15 +23,15 @@ public interface UiWidgetFactory<NATIVE_WIDGET> {
    *        <code>abstract</code>.
    * @return the new {@link UiWidget}.
    */
-  <WIDGET extends UiWidget<?>> WIDGET create(Class<WIDGET> widgetInterface);
+  <WIDGET extends UiWidget> WIDGET create(Class<WIDGET> widgetInterface);
 
   /**
-   * This method gets the underlying native widget of the given {@link UiWidget}.
+   * This method gets the underlying native widget of the given {@link UiWidgetRegular regular widget}.
    * 
-   * @param widget is the {@link UiWidget} to unwrap. It has to be an instance {@link #create(Class) created}
-   *        by this factory.
+   * @param widget is the {@link UiWidgetRegular regular widget} to unwrap. It has to be an instance
+   *        {@link #create(Class) created} by this factory.
    * @return the native widget.
    */
-  NATIVE_WIDGET getNativeWidget(UiWidget<?> widget);
+  NATIVE_WIDGET getNativeWidget(UiWidgetRegular widget);
 
 }

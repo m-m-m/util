@@ -9,10 +9,9 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  */
-public interface UiWidgetComposite<VALUE, CHILD extends UiWidget<?>> extends UiWidget<VALUE> {
+public interface UiWidgetComposite<CHILD extends UiWidget> extends UiWidget {
 
   /**
    * This method gets the child at the given index.
