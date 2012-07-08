@@ -16,6 +16,7 @@
 
   <!-- Other module inherits                                      -->
   <inherits name='net.sf.mmm.service.Service'/>
+  <inherits name='net.sf.mmm.ui.toolkit.UIT'/>
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='net.sf.mmm.app.client.Mmm'/>
