@@ -3,7 +3,7 @@
   <inherits name="net.sf.mmm.util.Util"/>
   <source path="api"/>
   <source path="base" excludes="**/server/**"/>
-  <source path="impl" excludes="**/server/** **/*Generator.java"/>
+  <source path="impl" excludes="**/server/**"/>
   <generate-with class="net.sf.mmm.service.impl.client.RemoteInvocationServiceCallerGenerator">
     <when-type-assignable class="net.sf.mmm.service.api.client.RemoteInvocationServiceCaller" />
   </generate-with>

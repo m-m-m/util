@@ -5,7 +5,10 @@
                       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-  
+
   <import resource="classpath:net/sf/mmm/service/beans-service-gwt.xml" />
-  
+  <!-- All that is comming next is due to a bug of component-scan support in combination with GWT dev mode -->
+  <bean id="RemoteInvocationGenericServiceServlet" class="net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceServlet"/>
+  <bean id="RemoteInvocationGenericServiceImplGwt" class="net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceImplGwt"/>
+  <bean class="net.sf.mmm.app.server.GreetingServiceImpl"/>
 </beans>
