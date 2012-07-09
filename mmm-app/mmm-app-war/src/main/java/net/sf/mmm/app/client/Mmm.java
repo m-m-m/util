@@ -12,6 +12,7 @@ import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.impl.widget.gwt.UiWidgetFactoryGwt;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -50,6 +51,7 @@ public class Mmm implements EntryPoint {
    */
   public void onModuleLoad() {
 
+    Log.debug("Loaded");
     UiWidgetFactory<Widget> factory = new UiWidgetFactoryGwt();
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");

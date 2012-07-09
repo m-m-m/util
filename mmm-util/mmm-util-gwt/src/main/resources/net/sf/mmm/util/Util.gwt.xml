@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name="net.sf.mmm.util.gwt.SuperSource"/>
   <inherits name="com.google.gwt.i18n.I18N"/>
@@ -15,6 +15,6 @@
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
   <generate-with class="net.sf.mmm.util.nls.impl.NlsResourceBundleGenerator">
-    <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory" />
+    <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory"/>
   </generate-with>
 </module>

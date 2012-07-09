@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='mmm'>
+<module rename-to="mmm">
+  <inherits name="com.google.gwt.user.User"/>
+
+  <inherits name="com.google.gwt.user.theme.clean.Clean"/>
+  <!-- <inherits name="com.google.gwt.user.theme.standard.Standard"/> -->
+  <!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  <!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
   <!-- Set loglevel for gwt-log -->
-  <define-property name="log_level" values="TRACE" />
-  
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='com.google.gwt.user.User'/>
+  <define-property name="log_level" values="TRACE"/>
+  <!-- <inherits name="com.allen_sauer.gwt.log.gwt-log-TRACE"/> -->
+  <inherits name="net.sf.mmm.util.LogConfig"/>
+  <inherits name="net.sf.mmm.service.Service"/>
+  <inherits name="net.sf.mmm.ui.toolkit.UIT"/>
 
-  <!-- Inherit the default GWT style sheet.  You can change       -->
-  <!-- the theme of your GWT application by uncommenting          -->
-  <!-- any one of the following lines.                            -->
-  <inherits name='com.google.gwt.user.theme.clean.Clean'/>
-  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
-  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
-  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
-  <!-- Other module inherits                                      -->
-  <inherits name='net.sf.mmm.service.Service'/>
-  <inherits name='net.sf.mmm.ui.toolkit.UIT'/>
+  <entry-point class="net.sf.mmm.app.client.Mmm"/>
 
-  <!-- Specify the app entry point class.                         -->
-  <entry-point class='net.sf.mmm.app.client.Mmm'/>
-
-  <!-- Specify the paths for translatable code                    -->
-  <source path='client'/>
-  <source path='shared'/>
+  <source path="client"/>
+  <source path="shared"/>
 
   <!-- L10N -->
   <extend-property name="locale" values="de"/>
   <set-property-fallback name="locale" value="de"/>
-  <set-property name="locale" value="de"/> 
+  <set-property name="locale" value="de"/>
 </module>
