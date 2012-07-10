@@ -3,19 +3,20 @@
 package net.sf.mmm.util.lang.api.attribute;
 
 /**
- * This is the abstract interface for an object that has an {@link #getId() ID}.
+ * This interface gives read access to the {@link #getId() ID} of an object.
  * 
- * @param <T> is the generic type of the {@link #getId() ID}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @param <ID> is the generic type of the {@link #getId() ID}. The most common types are {@link Long} and
+ *        {@link String}.
  */
-public abstract interface AttributeReadId<T> {
+public abstract interface AttributeReadId<ID> {
 
   /**
    * This method gets the ID used to identify this object. An ID should be unique.
    * 
    * @return the object's ID.
    */
-  T getId();
+  ID getId();
 
 }

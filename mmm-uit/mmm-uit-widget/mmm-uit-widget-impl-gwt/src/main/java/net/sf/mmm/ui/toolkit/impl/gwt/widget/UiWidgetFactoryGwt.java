@@ -1,10 +1,11 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.widget.gwt;
+package net.sf.mmm.ui.toolkit.impl.gwt.widget;
 
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactoryPlain;
-import net.sf.mmm.ui.toolkit.impl.widget.gwt.atomic.UiWidgetButtonGwt;
-import net.sf.mmm.ui.toolkit.impl.widget.gwt.atomic.UiWidgetImageGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetButtonGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetImageGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetLabelGwt;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -24,6 +25,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
     super();
     register(new UiWidgetImageGwt.Factory());
     register(new UiWidgetButtonGwt.Factory());
+    register(new UiWidgetLabelGwt.Factory());
   }
 
 }

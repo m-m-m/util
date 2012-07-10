@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.handler.UiHandler;
 
 /**
  * This is the marker interface for a {@link UiHandler} that offers a action that operates on a given object
- * (&lt;VALUE&gt;).
+ * (the generic {@literal <O>}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

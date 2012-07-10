@@ -5,8 +5,8 @@ package net.sf.mmm.util.lang.api.attribute;
 import java.util.Locale;
 
 /**
- * This interface gives {@link AttributeReadLocale#getLocale() read} and {@link #setLocale(Locale) write}
- * access to the {@link java.util.Locale} of an object.
+ * This interface gives read and write access to the {@link AttributeReadLocale#getLocale() locale} of an
+ * object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

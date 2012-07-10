@@ -3,19 +3,19 @@
 package net.sf.mmm.util.lang.api.attribute;
 
 /**
- * The mutable variant of {@link AttributeReadValue}.
+ * This interface gives read and write access to the {@link #getValue() value} of an object.
  * 
- * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public abstract interface AttributeWriteValue<V> extends AttributeReadValue<V> {
+public abstract interface AttributeWriteValue<VALUE> extends AttributeReadValue<VALUE> {
 
   /**
    * This method sets the {@link #getValue() value}.
    * 
    * @param value is the new {@link #getValue() value}. May be <code>null</code> unless otherwise stated.
    */
-  void setValue(V value);
+  void setValue(VALUE value);
 
 }

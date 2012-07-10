@@ -93,7 +93,8 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   @Override
   public RemoteInvocationServiceQueueImpl newQueue(RemoteInvocationServiceQueueSettings settings) {
 
-    return this.currentQueue = createQueue(settings);
+    this.currentQueue = createQueue(settings);
+    return this.currentQueue;
   }
 
   /**
@@ -187,7 +188,6 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     RemoteInvocationServiceResultCallback<?>[] callbacks = callbackQueue
         .toArray(new RemoteInvocationServiceResultCallback<?>[callbackQueue.size()]);
     performRequest(request, callbacks);
-    this.currentQueue = null;
   }
 
   /**

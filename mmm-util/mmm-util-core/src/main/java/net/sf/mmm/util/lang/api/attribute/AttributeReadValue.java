@@ -3,19 +3,19 @@
 package net.sf.mmm.util.lang.api.attribute;
 
 /**
- * This is the abstract interface for an object that has a {@link #getValue() value}.
+ * This interface gives read access to the {@link #getValue() value} of an object.
  * 
- * @param <V> is the generic type of the {@link #getValue() value}.
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public abstract interface AttributeReadValue<V> {
+public abstract interface AttributeReadValue<VALUE> {
 
   /**
    * This method gets the value of this object.
    * 
    * @return the value of this object. May be <code>null</code> unless otherwise stated.
    */
-  V getValue();
+  VALUE getValue();
 
 }

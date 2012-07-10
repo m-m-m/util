@@ -6,10 +6,11 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
+import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
-import net.sf.mmm.ui.toolkit.impl.widget.gwt.UiWidgetFactoryGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetFactoryGwt;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -66,7 +67,7 @@ public class Mmm implements EntryPoint {
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
-    sendButton.addStyleName("sendButton");
+    button.setStyles("sendButton");
 
     String message = new NlsNullPointerException("test").getMessage();
     // NlsMessage message = NlsAccess.getFactory().create("Hello World {arg}!", "arg", "foo");
@@ -113,12 +114,13 @@ public class Mmm implements EntryPoint {
     });
 
     // Create a handler for the sendButton and nameField
-    class MyHandler implements ClickHandler, KeyUpHandler {
+    class MyHandler implements UiHandlerEventClick, KeyUpHandler {
 
       /**
-       * Fired when the user clicks on the sendButton.
+       * {@inheritDoc}
        */
-      public void onClick(ClickEvent event) {
+      @Override
+      public void onClick(boolean programmatic) {
 
         sendNameToServer();
       }
@@ -181,7 +183,7 @@ public class Mmm implements EntryPoint {
 
     // Add a handler to send the name to the server
     MyHandler handler = new MyHandler();
-    sendButton.addClickHandler(handler);
+    button.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
   }
 }

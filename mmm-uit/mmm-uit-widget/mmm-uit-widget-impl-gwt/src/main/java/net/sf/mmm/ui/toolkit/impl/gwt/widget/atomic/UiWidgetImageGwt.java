@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.widget.gwt.atomic;
+package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetImageGwt extends AbstractUiWidgetAtomicRegularGwt<Image> implements UiWidgetImage {
+public class UiWidgetImageGwt extends UiWidgetAtomicRegularGwt<Image> implements UiWidgetImage {
 
   /** @see #getAltText() */
   private String altText;
@@ -42,7 +42,7 @@ public class UiWidgetImageGwt extends AbstractUiWidgetAtomicRegularGwt<Image> im
   public void setUrl(String url) {
 
     this.url = url;
-    getWidget().setUrl(url);
+    getActiveWidget().setUrl(url);
   }
 
   /**
@@ -52,7 +52,7 @@ public class UiWidgetImageGwt extends AbstractUiWidgetAtomicRegularGwt<Image> im
   public void setAltText(String altText) {
 
     this.altText = altText;
-    getWidget().setAltText(altText);
+    getActiveWidget().setAltText(altText);
   }
 
   /**
@@ -63,7 +63,7 @@ public class UiWidgetImageGwt extends AbstractUiWidgetAtomicRegularGwt<Image> im
 
     this.width = newWidth;
     this.height = newHeight;
-    getWidget().setSize(Integer.toString(newWidth), Integer.toString(newHeight));
+    getToplevelWidget().setSize(Integer.toString(newWidth), Integer.toString(newHeight));
   }
 
   /**

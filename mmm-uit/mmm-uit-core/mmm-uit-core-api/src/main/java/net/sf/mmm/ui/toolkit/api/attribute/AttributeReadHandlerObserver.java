@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
-import net.sf.mmm.ui.toolkit.api.feature.UiFeatureHandlerObserver;
+import net.sf.mmm.ui.toolkit.api.handler.UiHandlerObserver;
 
 /**
  * This interface gives read access to the {@link #getHandlerObserver() handler observer} of an object.
  * 
- * @see UiFeatureHandlerObserver
+ * @see UiHandlerObserver
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -15,10 +15,10 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureHandlerObserver;
 public abstract interface AttributeReadHandlerObserver {
 
   /**
-   * This method gets the {@link UiFeatureHandlerObserver}.
+   * This method gets the {@link UiHandlerObserver}.
    * 
-   * @return the {@link UiFeatureHandlerObserver}.
+   * @return the {@link UiHandlerObserver}.
    */
-  UiFeatureHandlerObserver getHandlerObserver();
+  UiHandlerObserver getHandlerObserver();
 
 }

@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.impl.widget.gwt.atomic;
+package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Button;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetButtonGwt extends AbstractUiWidgetAtomicClickableGwt<Button> implements UiWidgetButton {
+public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implements UiWidgetButton {
 
   /** @see #getImage() */
   private UiWidgetImageGwt image;
@@ -34,7 +34,7 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetAtomicClickableGwt<Button
   @Override
   public void setLabel(String label) {
 
-    getWidget().setText(label);
+    getActiveWidget().setText(label);
   }
 
   /**
@@ -43,7 +43,7 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetAtomicClickableGwt<Button
   @Override
   public String getLabel() {
 
-    return getWidget().getText();
+    return getActiveWidget().getText();
   }
 
   /**
@@ -65,11 +65,11 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetAtomicClickableGwt<Button
       return;
     }
     if (this.image != null) {
-      getWidget().getElement().removeChild(this.image.getWidget().getElement());
+      getToplevelWidget().getElement().removeChild(this.image.getToplevelWidget().getElement());
     }
     this.image = (UiWidgetImageGwt) image;
     if (this.image != null) {
-      getWidget().getElement().insertFirst(this.image.getWidget().getElement());
+      getToplevelWidget().getElement().insertFirst(this.image.getToplevelWidget().getElement());
     }
   }
 
