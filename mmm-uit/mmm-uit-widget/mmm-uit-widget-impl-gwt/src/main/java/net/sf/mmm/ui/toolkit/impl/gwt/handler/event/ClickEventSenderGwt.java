@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.handler.event;
 
-import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClickable;
+import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.base.handler.event.ClickEventSender;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -21,7 +21,7 @@ public class ClickEventSenderGwt extends ClickEventSender implements ClickHandle
    * 
    * @param source is the {@link #getSource() source}.
    */
-  public ClickEventSenderGwt(UiFeatureClickable source) {
+  public ClickEventSenderGwt(UiFeatureClick source) {
 
     super(source);
   }
@@ -32,7 +32,7 @@ public class ClickEventSenderGwt extends ClickEventSender implements ClickHandle
   @Override
   public void onClick(ClickEvent event) {
 
-    onClick(false);
+    onClick(null, false);
   }
 
 }

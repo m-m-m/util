@@ -3,6 +3,8 @@
 package net.sf.mmm.ui.toolkit.api.widget.atomic;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteValidationError;
+import net.sf.mmm.ui.toolkit.api.feature.UiFeatureFocus;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureValue;
 
 /**
@@ -15,8 +17,8 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureValue;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
 public abstract interface UiWidgetEditor<VALUE> extends UiWidgetAtomicRegular, AttributeWriteLabel,
-    UiFeatureValue<VALUE> {
+    UiFeatureValue<VALUE>, UiFeatureFocus, AttributeWriteValidationError {
 
-  // nothing to add...
+  // nothing to add
 
 }

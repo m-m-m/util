@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.widget.atomic;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
-import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClickable;
+import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 
 /**
  * This is the interface for an {@link UiWidgetAtomicRegular adapter} that can be clicked.
@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClickable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAtomicClickable extends UiWidgetAtomicRegular, UiFeatureClickable,
+public interface UiWidgetAtomicClickable extends UiWidgetAtomicRegular, UiFeatureClick,
     AttributeWriteHandlerObserver {
 
   // nothing to add...

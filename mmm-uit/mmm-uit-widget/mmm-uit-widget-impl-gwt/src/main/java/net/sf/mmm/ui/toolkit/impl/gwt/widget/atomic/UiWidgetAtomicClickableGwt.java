@@ -72,7 +72,7 @@ public abstract class UiWidgetAtomicClickableGwt<WIDGET extends FocusWidget> ext
   public void click() {
 
     if (this.clickEventSender != null) {
-      this.clickEventSender.onClick(true);
+      this.clickEventSender.onClick(null, true);
     }
   }
 

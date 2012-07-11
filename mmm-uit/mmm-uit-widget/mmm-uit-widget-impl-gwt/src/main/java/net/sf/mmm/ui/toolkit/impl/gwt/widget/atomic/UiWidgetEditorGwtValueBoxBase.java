@@ -2,7 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
@@ -34,6 +36,35 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
   protected void registerChangeHandler(ChangeHandler handler) {
 
     getActiveWidget().addChangeHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void registerFocusHandler(FocusHandler focusHandler, BlurHandler blurHandler) {
+
+    getActiveWidget().addFocusHandler(focusHandler);
+    getActiveWidget().addBlurHandler(blurHandler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void focus() {
+
+    getActiveWidget().setFocus(true);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean hasFocus() {
+
+    // TODO maintain boolean flag and keep in sync via focus handler...
+    return false;
   }
 
   /**

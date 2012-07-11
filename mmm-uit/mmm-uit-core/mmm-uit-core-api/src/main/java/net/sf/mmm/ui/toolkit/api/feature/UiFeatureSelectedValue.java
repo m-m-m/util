@@ -7,8 +7,11 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectedValue;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventSelection;
 
 /**
- * This is the interface for the {@link UiFeature features} of an object that allows
- * {@link #getSelectedValues() selection of values}.
+ * This is the interface for the {@link UiFeature features} of an object that offers
+ * {@link #getSelectedValues() selection of values}. Additionally, it allows to
+ * {@link #addSelectionHandler(UiHandlerEventSelection) add} and
+ * {@link #removeSelectionHandler(UiHandlerEventSelection) remove} instances of
+ * {@link UiHandlerEventSelection}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

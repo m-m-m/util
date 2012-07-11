@@ -5,8 +5,8 @@ package net.sf.mmm.client.base.dialog;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.client.api.dialog.SeverityIcon;
 import net.sf.mmm.client.api.dialog.SimplePopupManager;
+import net.sf.mmm.ui.toolkit.api.common.MessageSeverity;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -43,21 +43,21 @@ public abstract class AbstractSimplePopupManager implements SimplePopupManager {
   }
 
   /**
-   * This method gets the title for the given {@link SeverityIcon}.
+   * This method gets the title for the given {@link MessageSeverity}.
    * 
-   * @param severityIcon is the {@link SeverityIcon}.
+   * @param severity is the {@link MessageSeverity}.
    * @return the according title.
    */
-  protected String getTitle(SeverityIcon severityIcon) {
+  protected String getTitle(MessageSeverity severity) {
 
     NlsMessage message;
-    if (severityIcon == SeverityIcon.INFORMATION) {
+    if (severity == MessageSeverity.INFORMATION) {
       message = this.nlsBundle.infoInformation();
-    } else if (severityIcon == SeverityIcon.WARNING) {
+    } else if (severity == MessageSeverity.WARNING) {
       message = this.nlsBundle.infoWarning();
-    } else if (severityIcon == SeverityIcon.ERROR) {
+    } else if (severity == MessageSeverity.ERROR) {
       message = this.nlsBundle.infoError();
-    } else if (severityIcon == SeverityIcon.QUESTION) {
+    } else if (severity == MessageSeverity.QUESTION) {
       message = this.nlsBundle.infoConfirmation();
     } else {
       message = null;
@@ -73,18 +73,18 @@ public abstract class AbstractSimplePopupManager implements SimplePopupManager {
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, SeverityIcon severityIcon, String title) {
+  public void showPopup(String message, MessageSeverity severity, String title) {
 
-    showPopup(message, severityIcon, title, null);
+    showPopup(message, severity, title, null);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, SeverityIcon severityIcon) {
+  public void showPopup(String message, MessageSeverity severity) {
 
-    showPopup(message, severityIcon, getTitle(severityIcon));
+    showPopup(message, severity, getTitle(severity));
   }
 
   /**
@@ -96,20 +96,20 @@ public abstract class AbstractSimplePopupManager implements SimplePopupManager {
     Map<String, String> id2buttonLabelMap = new HashMap<String, String>();
     id2buttonLabelMap.put(BUTTON_ID_OK, this.nlsBundle.infoYes().getLocalizedMessage());
     id2buttonLabelMap.put(BUTTON_ID_CANCEL, this.nlsBundle.infoNo().getLocalizedMessage());
-    showPopup(message, SeverityIcon.QUESTION, title, null, id2buttonLabelMap);
+    showPopup(message, MessageSeverity.QUESTION, title, null, id2buttonLabelMap);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, SeverityIcon severityIcon, String title, Callback<String> callback,
+  public void showPopup(String message, MessageSeverity severity, String title, Callback<String> callback,
       String labelOk, String labelCancel) {
 
     Map<String, String> id2buttonLabelMap = new HashMap<String, String>();
     id2buttonLabelMap.put(BUTTON_ID_OK, labelOk);
     id2buttonLabelMap.put(BUTTON_ID_CANCEL, labelCancel);
-    showPopup(message, severityIcon, title, callback, id2buttonLabelMap);
+    showPopup(message, severity, title, callback, id2buttonLabelMap);
   }
 
 }

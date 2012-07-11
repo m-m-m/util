@@ -4,7 +4,6 @@ package net.sf.mmm.ui.toolkit.impl.gwt.handler.event;
 
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureValue;
 import net.sf.mmm.ui.toolkit.base.handler.event.ChangeEventSender;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -14,7 +13,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed {@link AttributeReadValue#getValue() value}.
+ * @param <VALUE> is the generic type of the changed {@link UiFeatureValue#getValue() value}.
  */
 public class ChangeEventSenderGwt<VALUE> extends ChangeEventSender<VALUE> implements ChangeHandler {
 
@@ -34,7 +33,7 @@ public class ChangeEventSenderGwt<VALUE> extends ChangeEventSender<VALUE> implem
   @Override
   public void onChange(ChangeEvent event) {
 
-    onChange(getSource(), false);
+    onValueChange(getSource(), false);
   }
 
 }

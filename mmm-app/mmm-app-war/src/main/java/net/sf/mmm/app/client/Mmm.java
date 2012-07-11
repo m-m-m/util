@@ -6,6 +6,7 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
+import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
@@ -120,7 +121,7 @@ public class Mmm implements EntryPoint {
        * {@inheritDoc}
        */
       @Override
-      public void onClick(boolean programmatic) {
+      public void onClick(UiFeatureClick source, boolean programmatic) {
 
         sendNameToServer();
       }

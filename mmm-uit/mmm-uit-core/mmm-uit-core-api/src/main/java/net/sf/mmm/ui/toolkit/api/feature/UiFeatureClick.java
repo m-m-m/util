@@ -8,12 +8,12 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 /**
  * This is the interface for the {@link UiFeature features} of a clickable object. It can be {@link #click()
  * clicked} and allows to {@link #addClickHandler(UiHandlerEventClick) add} and
- * {@link #removeClickHandler(UiHandlerEventClick) remove} {@link UiHandlerEventClick}s.
+ * {@link #removeClickHandler(UiHandlerEventClick) remove} instances of {@link UiHandlerEventClick}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFeatureClickable extends UiFeature, AttributeWriteHandlerObserver {
+public interface UiFeatureClick extends UiFeature, AttributeWriteHandlerObserver {
 
   /**
    * This method adds the given {@link UiHandlerEventClick} to this object.
@@ -32,7 +32,7 @@ public interface UiFeatureClickable extends UiFeature, AttributeWriteHandlerObse
   boolean removeClickHandler(UiHandlerEventClick handler);
 
   /**
-   * This method programmatically {@link UiHandlerEventClick#onClick(boolean) notifies} all
+   * This method programmatically {@link UiHandlerEventClick#onClick(UiFeatureClick, boolean) notifies} all
    * {@link #addClickHandler(UiHandlerEventClick) registered} {@link UiHandlerEventClick listeners}.
    */
   void click();

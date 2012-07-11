@@ -3,12 +3,14 @@
 package net.sf.mmm.ui.toolkit.api.feature;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
-import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventChange;
+import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
- * This is the interface for the {@link UiFeature features} of an object that has a value that can be changed
- * programmatic as well as by the user (e.g. by typing in a text input field).
+ * This is the interface for the {@link UiFeature features} of an object that has a {@link #getValue() value}
+ * that can be {@link #setValue(Object) changed programmatic} as well as by the user (e.g. by typing in a text
+ * input field). Additionally, it allows to {@link #addChangeHandler(UiHandlerEventValueChange) add} and
+ * {@link #removeChangeHandler(UiHandlerEventValueChange) remove} instances of {@link UiHandlerEventValueChange}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -17,19 +19,19 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 public interface UiFeatureValue<VALUE> extends UiFeature, AttributeWriteValue<VALUE>, AttributeWriteHandlerObserver {
 
   /**
-   * This method adds the given {@link UiHandlerEventChange} to this object.
+   * This method adds the given {@link UiHandlerEventValueChange} to this object.
    * 
-   * @param handler is the {@link UiHandlerEventChange} to add.
+   * @param handler is the {@link UiHandlerEventValueChange} to add.
    */
-  void addChangeHandler(UiHandlerEventChange<VALUE> handler);
+  void addChangeHandler(UiHandlerEventValueChange<VALUE> handler);
 
   /**
-   * This method removes the given {@link UiHandlerEventChange} from this object.
+   * This method removes the given {@link UiHandlerEventValueChange} from this object.
    * 
-   * @param handler is the {@link UiHandlerEventChange} to remove.
+   * @param handler is the {@link UiHandlerEventValueChange} to remove.
    * @return <code>true</code> if the <code>handler</code> has been removed successfully, <code>false</code>
-   *         if it was NOT {@link #addChangeHandler(UiHandlerEventChange) registered} and nothing has changed.
+   *         if it was NOT {@link #addChangeHandler(UiHandlerEventValueChange) registered} and nothing has changed.
    */
-  boolean removeChangeHandler(UiHandlerEventChange<VALUE> handler);
+  boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler);
 
 }
