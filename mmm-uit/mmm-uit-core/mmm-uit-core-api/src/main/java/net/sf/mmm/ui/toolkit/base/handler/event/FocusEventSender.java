@@ -14,6 +14,9 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 public class FocusEventSender extends AbstractEventSender<UiHandlerEventFocus, UiFeatureFocus> implements
     UiHandlerEventFocus {
 
+  /** @see #hasFocus() */
+  private boolean hasFocus;
+
   /**
    * The constructor.
    * 
@@ -30,11 +33,20 @@ public class FocusEventSender extends AbstractEventSender<UiHandlerEventFocus, U
   @Override
   public void onFocusChange(UiFeatureFocus source, boolean programmatic, boolean lost) {
 
+    this.hasFocus = !lost;
     before();
     for (UiHandlerEventFocus handler : getHandlers()) {
       handler.onFocusChange(source, programmatic, lost);
     }
     after();
+  }
+
+  /**
+   * @return <code>true</code> if focused, <code>false</code> otherwise.
+   */
+  public boolean hasFocus() {
+
+    return this.hasFocus;
   }
 
 }
