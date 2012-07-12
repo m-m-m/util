@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget.atomic;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
+
 /**
  * This is the interface for a {@link UiWidgetEditor editor widget} that uses a regular text field to display
  * or edit its value.
@@ -9,7 +11,7 @@ package net.sf.mmm.ui.toolkit.api.widget.atomic;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTextField extends UiWidgetEditor<String> {
+public interface UiWidgetTextField extends UiWidgetEditor<String>, AttributeWriteKeyboardFilter {
 
   // nothing to add...
 

@@ -11,7 +11,9 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
+import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetTextField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetFactoryGwt;
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -62,8 +64,12 @@ public class Mmm implements EntryPoint {
     button.setImage(image);
     button.setTooltip("Send to server");
 
+    UiWidgetTextField textField = factory.create(UiWidgetTextField.class);
+    textField.setKeyboardFilter(CharFilter.LATIN_DIGIT_FILTER);
+
     final Button sendButton = (Button) factory.getNativeWidget(button); // new Button("Send");
-    final TextBox nameField = new TextBox();
+
+    final TextBox nameField = (TextBox) factory.getNativeWidget(textField);
     // nameField.setText("GWT User");
     final Label errorLabel = new Label();
 

@@ -6,6 +6,7 @@ import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactoryPlain;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetButtonGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetImageGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetLabelGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetTextFieldGwt;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -26,6 +27,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
     register(new UiWidgetImageGwt.Factory());
     register(new UiWidgetButtonGwt.Factory());
     register(new UiWidgetLabelGwt.Factory());
+    register(new UiWidgetTextFieldGwt.Factory());
   }
 
 }

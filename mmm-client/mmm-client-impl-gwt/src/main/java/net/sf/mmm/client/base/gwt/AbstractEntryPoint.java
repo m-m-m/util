@@ -12,7 +12,13 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.shared.UmbrellaException;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Event.NativePreviewHandler;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * This is the abstract base implementation for an application client using the framework based on GWT, GWTP
@@ -51,12 +57,36 @@ public abstract class AbstractEntryPoint implements EntryPoint {
     GwtClientContext context = new GwtClientContext();
     context.setGinjector(this.ginjector);
     GWT.setUncaughtExceptionHandler(createExceptionHandler());
+    cancelBackspaceNavigation();
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
       @Override
       public void execute() {
 
         onModuleLoadDeferred();
+      }
+    });
+  }
+
+  /**
+   * TODO: javadoc
+   */
+  private void cancelBackspaceNavigation() {
+
+    Event.addNativePreviewHandler(new NativePreviewHandler() {
+
+      @Override
+      public void onPreviewNativeEvent(NativePreviewEvent event) {
+
+        if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_BACKSPACE) {
+          if (event.getNativeEvent().getEventTarget() != null) {
+            Element as = Element.as(event.getNativeEvent().getEventTarget());
+            if (as == RootPanel.getBodyElement()) {
+              event.getNativeEvent().stopPropagation();
+              event.getNativeEvent().preventDefault();
+            }
+          }
+        }
       }
     });
   }

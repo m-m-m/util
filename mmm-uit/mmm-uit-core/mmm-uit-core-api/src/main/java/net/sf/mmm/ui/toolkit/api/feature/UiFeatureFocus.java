@@ -2,18 +2,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.feature;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteFocused;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 
 /**
- * This is the interface for the {@link UiFeature features} of a focusable object. It can {@link #hasFocus()
- * check} and {@link #focus() set} its focus and allows to {@link #addFocusHandler(UiHandlerEventFocus) add}
- * and {@link #removeFocusHandler(UiHandlerEventFocus) remove} instances of {@link UiHandlerEventFocus}.
+ * This is the interface for the {@link UiFeature features} of a focusable object. It can {@link #isFocused()
+ * check} and {@link #setFocused(boolean) set} its focus and allows to
+ * {@link #addFocusHandler(UiHandlerEventFocus) add} and {@link #removeFocusHandler(UiHandlerEventFocus)
+ * remove} instances of {@link UiHandlerEventFocus}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFeatureFocus extends UiFeature, AttributeWriteHandlerObserver {
+public interface UiFeatureFocus extends UiFeature, AttributeWriteHandlerObserver, AttributeWriteFocused {
 
   /**
    * This method adds the given {@link UiHandlerEventFocus} to this object.
@@ -30,17 +32,5 @@ public interface UiFeatureFocus extends UiFeature, AttributeWriteHandlerObserver
    *         if it was NOT {@link #addFocusHandler(UiHandlerEventFocus) registered} and nothing has changed.
    */
   boolean removeFocusHandler(UiHandlerEventFocus handler);
-
-  /**
-   * @return <code>true</code> if this object currently has the focus, <code>false</code> otherwise.
-   */
-  boolean hasFocus();
-
-  /**
-   * This method programmatically sets the focus. This will
-   * {@link UiHandlerEventFocus#onFocusChange(UiFeatureFocus, boolean, boolean) notify} all
-   * {@link #addFocusHandler(UiHandlerEventFocus) registered} {@link UiHandlerEventFocus listeners}.
-   */
-  void focus();
 
 }

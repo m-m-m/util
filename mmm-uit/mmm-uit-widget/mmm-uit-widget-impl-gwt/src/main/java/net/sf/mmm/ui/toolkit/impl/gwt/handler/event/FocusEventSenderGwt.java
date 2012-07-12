@@ -18,6 +18,9 @@ import com.google.gwt.event.dom.client.FocusHandler;
  */
 public class FocusEventSenderGwt extends FocusEventSender implements FocusHandler, BlurHandler {
 
+  /** */
+  private boolean programmatic;
+
   /**
    * The constructor.
    * 
@@ -34,7 +37,9 @@ public class FocusEventSenderGwt extends FocusEventSender implements FocusHandle
   @Override
   public void onBlur(BlurEvent event) {
 
-    onFocusChange(getSource(), false, true);
+    boolean prog = this.programmatic;
+    this.programmatic = false;
+    onFocusChange(getSource(), prog, true);
   }
 
   /**
@@ -43,7 +48,18 @@ public class FocusEventSenderGwt extends FocusEventSender implements FocusHandle
   @Override
   public void onFocus(FocusEvent event) {
 
-    onFocusChange(getSource(), false, false);
+    boolean prog = this.programmatic;
+    this.programmatic = false;
+    onFocusChange(getSource(), prog, false);
   }
 
+  /**
+   * This method sets the <em>programmatic</em> flag. This should be done immediately before
+   * {@link com.google.gwt.user.client.ui.Focusable#setFocus(boolean)} is called so it gets possible to
+   * distinguish the programmatic change if the event is received.
+   */
+  public void setProgrammatic() {
+
+    this.programmatic = true;
+  }
 }

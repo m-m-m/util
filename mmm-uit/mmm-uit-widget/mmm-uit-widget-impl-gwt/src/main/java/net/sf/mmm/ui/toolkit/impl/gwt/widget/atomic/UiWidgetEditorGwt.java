@@ -13,7 +13,6 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -21,8 +20,8 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE>
- * @param <WIDGET>
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends UiWidgetAtomicRegularGwt<WIDGET>
     implements UiWidgetEditor<VALUE> {
@@ -32,12 +31,6 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
 
   /** @see #addFocusHandler(UiHandlerEventFocus) */
   private FocusEventSenderGwt focusEventSender;
-
-  /** @see #getLabel() */
-  private Label label;
-
-  /** The alternative widget to display the value in view-mode (read-only). */
-  private Label view;
 
   /** The icon for {@link #getValidationError()}. */
   private Image errorIcon;
@@ -53,26 +46,7 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
   public UiWidgetEditorGwt(WIDGET widget) {
 
     super(widget);
-    this.label = new Label();
     this.errorIcon = new Image(IconConstants.ICON_VALIDATION_ERROR);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLabel() {
-
-    return this.label.getText();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setLabel(String label) {
-
-    this.label.setText(label);
   }
 
   /**
@@ -86,6 +60,14 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
       registerChangeHandler(this.changeEventSender);
     }
     this.changeEventSender.addHandler(handler);
+  }
+
+  /**
+   * @return the {@link ChangeEventSenderGwt} or <code>null</code> if NOT yet created.
+   */
+  protected ChangeEventSenderGwt<VALUE> getChangeEventSender() {
+
+    return this.changeEventSender;
   }
 
   /**
@@ -135,9 +117,17 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
 
     if (this.focusEventSender == null) {
       this.focusEventSender = new FocusEventSenderGwt(this);
-
+      registerFocusHandler(this.focusEventSender, this.focusEventSender);
     }
     this.focusEventSender.addHandler(handler);
+  }
+
+  /**
+   * @return the {@link FocusEventSenderGwt} or <code>null</code> if not yet created.
+   */
+  protected FocusEventSenderGwt getFocusEventSender() {
+
+    return this.focusEventSender;
   }
 
   /**
@@ -156,6 +146,18 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
 
     if (this.focusEventSender != null) {
       return this.focusEventSender.removeHandler(handler);
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isFocused() {
+
+    if (this.focusEventSender != null) {
+      return this.focusEventSender.isFocused();
     }
     return false;
   }

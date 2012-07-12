@@ -2,6 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
+import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.FocusEventSenderGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.KeyboardFilterAdapter;
+import net.sf.mmm.util.filter.api.CharFilter;
+
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
@@ -13,11 +18,14 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE>
- * @param <WIDGET>
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueBoxBase<VALUE>> extends
-    UiWidgetEditorGwt<VALUE, WIDGET> {
+    UiWidgetEditorGwt<VALUE, WIDGET> implements AttributeWriteKeyboardFilter {
+
+  /** @see #getKeyboardFilter() */
+  private KeyboardFilterAdapter keyboardFilterAdapter;
 
   /**
    * The constructor.
@@ -52,19 +60,13 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
    * {@inheritDoc}
    */
   @Override
-  public void focus() {
+  public void setFocused(boolean focused) {
 
-    getActiveWidget().setFocus(true);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean hasFocus() {
-
-    // TODO maintain boolean flag and keep in sync via focus handler...
-    return false;
+    FocusEventSenderGwt sender = getFocusEventSender();
+    if (sender != null) {
+      sender.setProgrammatic();
+    }
+    getActiveWidget().setFocus(focused);
   }
 
   /**
@@ -92,6 +94,39 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
   protected void doSetEnabled(boolean enabled) {
 
     getActiveWidget().setEnabled(enabled);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CharFilter getKeyboardFilter() {
+
+    if (this.keyboardFilterAdapter != null) {
+      return this.keyboardFilterAdapter.getKeyboardFilter();
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setKeyboardFilter(CharFilter keyboardFilter) {
+
+    if (keyboardFilter == null) {
+      if (this.keyboardFilterAdapter != null) {
+        this.keyboardFilterAdapter.remove();
+      }
+      return;
+    }
+    if (this.keyboardFilterAdapter == null) {
+      this.keyboardFilterAdapter = new KeyboardFilterAdapter();
+      this.keyboardFilterAdapter.setKeyboardFilter(keyboardFilter);
+      this.keyboardFilterAdapter.add(getActiveWidget());
+    } else {
+      this.keyboardFilterAdapter.setKeyboardFilter(keyboardFilter);
+    }
   }
 
 }

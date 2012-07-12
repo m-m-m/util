@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.handler.event;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadFocused;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 
@@ -12,10 +13,10 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
  * @since 1.0.0
  */
 public class FocusEventSender extends AbstractEventSender<UiHandlerEventFocus, UiFeatureFocus> implements
-    UiHandlerEventFocus {
+    UiHandlerEventFocus, AttributeReadFocused {
 
-  /** @see #hasFocus() */
-  private boolean hasFocus;
+  /** @see #isFocused() */
+  private boolean focused;
 
   /**
    * The constructor.
@@ -33,7 +34,7 @@ public class FocusEventSender extends AbstractEventSender<UiHandlerEventFocus, U
   @Override
   public void onFocusChange(UiFeatureFocus source, boolean programmatic, boolean lost) {
 
-    this.hasFocus = !lost;
+    this.focused = !lost;
     before();
     for (UiHandlerEventFocus handler : getHandlers()) {
       handler.onFocusChange(source, programmatic, lost);
@@ -42,11 +43,12 @@ public class FocusEventSender extends AbstractEventSender<UiHandlerEventFocus, U
   }
 
   /**
-   * @return <code>true</code> if focused, <code>false</code> otherwise.
+   * {@inheritDoc}
    */
-  public boolean hasFocus() {
+  @Override
+  public boolean isFocused() {
 
-    return this.hasFocus;
+    return this.focused;
   }
 
 }

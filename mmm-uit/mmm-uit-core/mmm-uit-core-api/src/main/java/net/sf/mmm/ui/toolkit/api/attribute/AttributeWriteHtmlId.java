@@ -2,13 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteId;
+
 /**
  * This interface gives read and write access to the {@link #getId() ID} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeWriteHtmlId extends AttributeReadHtmlId {
+public abstract interface AttributeWriteHtmlId extends AttributeReadHtmlId, AttributeWriteId<String> {
 
   /**
    * This method set the identifier of this object. Use this method to give the object a meaningful identifier

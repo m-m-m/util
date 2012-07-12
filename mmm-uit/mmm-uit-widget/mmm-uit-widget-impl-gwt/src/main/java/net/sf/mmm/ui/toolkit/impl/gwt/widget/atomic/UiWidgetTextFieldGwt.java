@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
 import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetTextField;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -20,6 +21,29 @@ public class UiWidgetTextFieldGwt extends UiWidgetEditorGwtValueBoxBase<String, 
   public UiWidgetTextFieldGwt() {
 
     super(new TextBox());
+  }
+
+  /**
+   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   */
+  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetTextField> {
+
+    /**
+     * The constructor.
+     */
+    public Factory() {
+
+      super(UiWidgetTextField.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public UiWidgetTextField create() {
+
+      return new UiWidgetTextFieldGwt();
+    }
+
   }
 
 }

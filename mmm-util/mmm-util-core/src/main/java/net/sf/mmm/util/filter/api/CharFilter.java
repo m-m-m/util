@@ -112,4 +112,18 @@ public interface CharFilter {
     }
   };
 
+  /**
+   * A filter that {@link #accept(char) accepts} any charater.
+   * 
+   * @since 3.0.0
+   */
+  CharFilter ACCEPT_ALL_FILTER = new CharFilter() {
+
+    @Override
+    public boolean accept(char c) {
+
+      return true;
+    }
+  };
+
 }
