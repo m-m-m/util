@@ -154,12 +154,13 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
 
     boolean registered = false;
     Class<?> serviceClass = service.getClass();
-    while (RemoteInvocationService.class.isAssignableFrom(serviceClass)) {
-      for (Class<?> serviceInterface : serviceClass.getInterfaces()) {
+    Class<?> currentServiceClass = serviceClass;
+    while (RemoteInvocationService.class.isAssignableFrom(currentServiceClass)) {
+      for (Class<?> serviceInterface : currentServiceClass.getInterfaces()) {
         if ((RemoteInvocationService.class.isAssignableFrom(serviceInterface))
             && (serviceInterface != RemoteInvocationService.class)) {
+          boolean empty = true;
           for (Method method : serviceInterface.getMethods()) {
-            // if (RemoteInvocationService.class.isAssignableFrom(method.getDeclaringClass())) {
             @SuppressWarnings({ "rawtypes", "unchecked" })
             RemoteInvocationServiceMethod<?> serviceMethod = new RemoteInvocationServiceMethod(serviceInterface,
                 service, method);
@@ -168,11 +169,15 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
               throw new DuplicateObjectException(serviceMethod, serviceMethod.getId(), old);
             }
             registered = true;
-            // }
+            empty = false;
+          }
+          if (!empty) {
+            getLogger().debug(
+                "Bound service interface '" + serviceInterface.getName() + "' to '" + serviceClass.getName() + "'");
           }
         }
       }
-      serviceClass = serviceClass.getSuperclass();
+      currentServiceClass = currentServiceClass.getSuperclass();
     }
     if (!registered) {
       throw new ObjectMismatchException(service, RemoteInvocationService.class);

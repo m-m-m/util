@@ -4,6 +4,8 @@
   <inherits name="com.google.gwt.i18n.I18N"/>
   <inherits name="org.slf4j.Slf4j"/>
   <source path="" includes="NlsBundleUtilCoreRoot.java"/>
+  <source path="concurrent/api"/>
+  <source path="collection/base" includes="AbstractIterator.java"/>
   <source path="date" includes="**/*Limited*,**/*Exception.java"/>
   <source path="reflect" includes="**/*Limited*"/>
   <source path="component" excludes="impl/**"/>
@@ -11,7 +13,7 @@
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
   <source path="lang" excludes="**/System*"/>
   <source path="uuid"/>
-  <source path="nls" excludes="**/NlsResourceLocator.java,**/AbstractNlsBundleFactory.java"/>
+  <source path="nls" excludes="base/NlsBundleHelper.java,base/NlsCachingLocalizer.java,**/*NlsResourceLocator*,**/AbstractNlsBundleFactory.java,**/*ResourceBundle*,api/ComposedException.java"/>
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
   <generate-with class="net.sf.mmm.util.nls.impl.NlsResourceBundleGenerator">

@@ -91,12 +91,32 @@ public abstract class AbstractSimplePopupManager implements SimplePopupManager {
    * {@inheritDoc}
    */
   @Override
+  public void showPopup(String message, MessageSeverity severity, Callback<String> callback) {
+
+    showPopup(message, severity, getTitle(severity), callback);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void showPopupYesNo(String message, String title, Callback<String> callback) {
 
     Map<String, String> id2buttonLabelMap = new HashMap<String, String>();
     id2buttonLabelMap.put(BUTTON_ID_OK, this.nlsBundle.infoYes().getLocalizedMessage());
     id2buttonLabelMap.put(BUTTON_ID_CANCEL, this.nlsBundle.infoNo().getLocalizedMessage());
-    showPopup(message, MessageSeverity.QUESTION, title, null, id2buttonLabelMap);
+    showPopup(message, MessageSeverity.QUESTION, title, callback, id2buttonLabelMap);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void showPopup(String message, MessageSeverity severity, String title, Callback<String> callback) {
+
+    Map<String, String> id2buttonLabelMap = new HashMap<String, String>();
+    id2buttonLabelMap.put(BUTTON_ID_OK, this.nlsBundle.infoOk().getLocalizedMessage());
+    showPopup(message, severity, title, callback, id2buttonLabelMap);
   }
 
   /**

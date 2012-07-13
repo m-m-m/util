@@ -30,8 +30,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-// Does NOT work for some strange reason (seems that DispatchServlet and ContextLoaderListener XMLs are
-// treated different/buggy in spring).
 @Named("RemoteInvocationGenericServiceServlet")
 public class RemoteInvocationGenericServiceServlet extends RemoteServiceServlet implements
     RemoteInvocationGenericServiceGwt, Controller, ServletContextAware {

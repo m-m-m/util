@@ -9,12 +9,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * This is the test-case for {@link AbstractEventSource}.
@@ -24,12 +25,16 @@ import net.sf.mmm.util.event.api.EventListener;
 @SuppressWarnings("all")
 public class AbstractEventSourceTest {
 
+  /**
+   * Tests {@link AbstractEventSource#addListener(EventListener)},
+   * {@link AbstractEventSource#fireEvent(Event)} and
+   * {@link AbstractEventSource#removeListener(EventListener)}.
+   */
   @Test
   public void testEvent() {
 
     MyEventSource source = new MyEventSource();
-    TestLogger testLogger = new TestLogger();
-    source.setLogger(testLogger);
+    TestLogger testLogger = source.getLogger();
     source.initialize();
 
     MyEventListener listener1 = new MyEventListener();
@@ -126,6 +131,24 @@ public class AbstractEventSourceTest {
     protected void fireEvent(MyEvent event) {
 
       super.fireEvent(event);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Logger createLogger() {
+
+      return new TestLogger();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected TestLogger getLogger() {
+
+      return (TestLogger) super.getLogger();
     }
 
   }

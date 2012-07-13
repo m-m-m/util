@@ -3,7 +3,6 @@
 package net.sf.mmm.util.io.base;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -17,18 +16,18 @@ import java.io.StringWriter;
 import java.util.concurrent.ExecutionException;
 
 import junit.framework.Assert;
-
-import org.junit.Test;
-
 import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.logging.TestLogger.LogEvent;
+import net.sf.mmm.logging.TestLogger.LogLevel;
 import net.sf.mmm.test.ExceptionHelper;
-import net.sf.mmm.test.TestStrings;
 import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.io.api.DevZero;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
+
+import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * This is the test-case for {@link StreamUtilImpl}.
@@ -167,9 +166,8 @@ public class StreamUtilTest {
     };
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     Callback callback = new Callback();
-    StreamUtilImpl streamUtil = new StreamUtilImpl();
-    TestLogger logger = new TestLogger();
-    streamUtil.setLogger(logger);
+    StreamUtilImplWithTestLogger streamUtil = new StreamUtilImplWithTestLogger();
+    TestLogger logger = streamUtil.getLogger();
     streamUtil.initialize();
     AsyncTransferrer transferrer = streamUtil.transferAsync(inStream, outStream, true, callback);
     try {
@@ -185,8 +183,11 @@ public class StreamUtilTest {
     ExceptionHelper.assertCause(callback.exception, error);
     boolean errorWasLogged = false;
     for (LogEvent logEvent : logger.getEventList()) {
-      if (ExceptionHelper.isCause(logEvent.throwable, error)) {
-        errorWasLogged = true;
+      if (logEvent.throwable != null) {
+        if (ExceptionHelper.isCause(logEvent.throwable, error)) {
+          assertEquals(LogLevel.ERROR, logEvent.level);
+          errorWasLogged = true;
+        }
       }
     }
     Assert.assertTrue(errorWasLogged);
@@ -236,4 +237,24 @@ public class StreamUtilTest {
 
   }
 
+  public static class StreamUtilImplWithTestLogger extends StreamUtilImpl {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Logger createLogger() {
+
+      return new TestLogger();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected TestLogger getLogger() {
+
+      return (TestLogger) super.getLogger();
+    }
+  }
 }

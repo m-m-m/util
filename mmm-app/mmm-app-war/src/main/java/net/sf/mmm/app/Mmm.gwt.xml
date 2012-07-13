@@ -11,9 +11,8 @@
   <define-property name="log_level" values="TRACE"/>
   <!-- <inherits name="com.allen_sauer.gwt.log.gwt-log-TRACE"/> -->
   <inherits name="net.sf.mmm.util.LogConfig"/>
-  <inherits name="net.sf.mmm.service.Service"/>
   <inherits name="net.sf.mmm.ui.toolkit.UIT"/>
-
+  <inherits name="net.sf.mmm.client.Client"/>
 
   <entry-point class="net.sf.mmm.app.client.Mmm"/>
 

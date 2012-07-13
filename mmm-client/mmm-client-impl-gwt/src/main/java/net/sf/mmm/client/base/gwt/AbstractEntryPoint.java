@@ -26,11 +26,12 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @param <GINJECTOR> is the generic type of the {@link #getGinjector() ginjector}.
  */
-public abstract class AbstractEntryPoint implements EntryPoint {
+public abstract class AbstractEntryPoint<GINJECTOR extends ClientGinjector> implements EntryPoint {
 
-  /** The instance of {@link ClientGinjector}. */
-  private ClientGinjector ginjector;
+  /** @see #getGinjector() */
+  private GINJECTOR ginjector;
 
   /**
    * The constructor.
@@ -45,7 +46,15 @@ public abstract class AbstractEntryPoint implements EntryPoint {
    * 
    * @return the {@link ClientGinjector} instance.
    */
-  protected abstract ClientGinjector createGinjector();
+  protected abstract GINJECTOR createGinjector();
+
+  /**
+   * @return the {@link ClientGinjector} instance.
+   */
+  public GINJECTOR getGinjector() {
+
+    return this.ginjector;
+  }
 
   /**
    * {@inheritDoc}
@@ -69,7 +78,8 @@ public abstract class AbstractEntryPoint implements EntryPoint {
   }
 
   /**
-   * TODO: javadoc
+   * This method registers a central handler that prevents the backspace key from performing a
+   * "back navigation".
    */
   private void cancelBackspaceNavigation() {
 

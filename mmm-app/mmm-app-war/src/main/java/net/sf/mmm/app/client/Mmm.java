@@ -3,8 +3,9 @@
 package net.sf.mmm.app.client;
 
 import net.sf.mmm.app.shared.GreetingService;
+import net.sf.mmm.client.base.gwt.AbstractEntryPoint;
+import net.sf.mmm.client.impl.gwt.gin.ClientGinjector;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
@@ -17,7 +18,6 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Mmm implements EntryPoint {
+public class Mmm extends AbstractEntryPoint<ClientGinjector> {
 
   /**
    * The message displayed to the user when the server cannot be reached or returns an error.
@@ -46,16 +46,30 @@ public class Mmm implements EntryPoint {
       + "attempting to contact the server. Please check your network " + "connection and try again.";
 
   /**
-   * Create a remote service proxy to talk to the server-side Greeting service.
+   * The constructor.
    */
-  private final RemoteInvocationServiceCaller serviceCaller = GWT.create(RemoteInvocationServiceCaller.class);
+  public Mmm() {
+
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ClientGinjector createGinjector() {
+
+    return GWT.create(ClientGinjector.class);
+  }
 
   /**
    * This is the entry point method.
    */
-  public void onModuleLoad() {
+  @Override
+  public void onModuleLoadDeferred() {
 
     Log.debug("Loaded");
+    super.onModuleLoadDeferred();
     UiWidgetFactory<Widget> factory = new UiWidgetFactoryGwt();
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
@@ -182,7 +196,7 @@ public class Mmm implements EntryPoint {
             closeButton.setFocus(true);
           }
         };
-        RemoteInvocationServiceQueue queue = Mmm.this.serviceCaller.newQueue();
+        RemoteInvocationServiceQueue queue = getGinjector().getServiceCaller().newQueue();
         queue.getServiceClient(GreetingService.class, String.class, callback).greeting(textToServer);
         queue.commit();
       }

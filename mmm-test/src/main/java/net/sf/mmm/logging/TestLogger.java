@@ -8,8 +8,8 @@ import java.util.List;
 import org.slf4j.helpers.MarkerIgnoringBase;
 
 /**
- * This is an implementation of the {@link org.slf4j.Logger} interface that
- * stores all log-entries in a {@link #getEventList() list}.
+ * This is an implementation of the {@link org.slf4j.Logger} interface that stores all log-entries in a
+ * {@link #getEventList() list}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -281,7 +281,7 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * Enumerats the loglevels.
    */
-  private static enum LogLevel {
+  public static enum LogLevel {
 
     /** @see org.slf4j.Logger#trace(String) */
     TRACE,

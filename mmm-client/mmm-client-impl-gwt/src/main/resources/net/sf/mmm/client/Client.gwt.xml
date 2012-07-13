@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <inherits name="net.sf.mmm.service.Service"/>
+  <inherits name="com.google.gwt.inject.Inject"/>
+  <inherits name='com.gwtplatform.mvp.Mvp' />
+
+  <source path="api"/>
+  <source path="base"/>
+  <source path="impl"/>
+</module>
