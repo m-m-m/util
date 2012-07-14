@@ -35,7 +35,7 @@
         documentation.<br/>
         The application is heavily based on the idioms separation of concerns (SoC) and
         inversion of control (IoC) and therefore split into tiny components 
-        (see <a href="overview.html">overview</a>). This open architecture allows any 
+        (see <a href="modules.html">modules</a>). This open architecture allows any 
         component implementation to be reused (by other projects) or be replaced (for custom needs).<br/>
         <b>ATTENTION:</b><br/>
         This mission statement applies to subprojects (modules) that are released. Modules that are NOT 
@@ -46,7 +46,7 @@
         Even though the project exists for many years now, there is no CMS and no multi-media
         management available. If you are looking for open, flexible and well-designed software
         components (see "Ready to use") or you want to get involved (see 
-        <a href="getting-involved.html">getting-involved</a>) and let the vision of 
+        <a href="https://github.com/hohwille/mmm/wiki/Get-Involved">Get Involved</a>) and let the vision of 
         MMM become reality then you are at the right place.
       </subsection>
     </section>
