@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget.atomic;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 
 /**
@@ -11,8 +10,7 @@ import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAtomicClickable extends UiWidgetAtomicRegular, UiFeatureClick,
-    AttributeWriteHandlerObserver {
+public interface UiWidgetAtomicClickable extends UiWidgetAtomicRegular, UiFeatureClick {
 
   // nothing to add...
 

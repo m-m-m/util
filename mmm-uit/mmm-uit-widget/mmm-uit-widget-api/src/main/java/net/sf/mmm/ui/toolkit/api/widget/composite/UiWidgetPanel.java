@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetPanel extends UiWidgetCompositeRegular<UiWidgetRegular> {
+public abstract interface UiWidgetPanel extends UiWidgetCompositeRegular<UiWidgetRegular> {
 
   /**
    * This method adds the given <code>child</code> to the end of the {@link #getChild(int) child-list}. For

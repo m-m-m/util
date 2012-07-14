@@ -11,7 +11,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
  * @since 1.0.0
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  */
-public interface UiWidgetCompositeRegular<CHILD extends UiWidgetRegular> extends UiWidgetComposite<CHILD>,
+public abstract interface UiWidgetCompositeRegular<CHILD extends UiWidgetRegular> extends UiWidgetComposite<CHILD>,
     UiWidgetRegular {
 
   // nothing to add...

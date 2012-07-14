@@ -16,10 +16,10 @@
   -->
   <body>
     <links>
-      <item name="Trac" href="http://sourceforge.net/apps/trac/m-m-m/" />
-      <item name="Javadoc" href="http://m-m-m.sourceforge.net/maven/apidocs/index.html" />
-      <item name="Overview" href="http://m-m-m.sourceforge.net/maven/overview.html" />
-      <item name="Home" href="http://m-m-m.sourceforge.net/" />
+      <item name="Github" href="https://github.com/hohwille/mmm"/>
+      <item name="Wiki" href="https://github.com/hohwille/mmm/wiki"/>
+      <item name="Javadoc" href="http://m-m-m.sourceforge.net/apidocs/index.html"/>
+      <item name="Home" href="http://m-m-m.sourceforge.net/"/>
     </links>
 
     <menu ref="parent" inherit="top"/>
@@ -27,24 +27,18 @@
     <menu name="General Information">
       <item name="Introduction" href="index.html"/>
       <item name="Overview" href="overview.html"/>
-      <item name="Getting Involved" href="getting-involved.html"/>
-      <item name="Road Map" href="https://sourceforge.net/apps/trac/m-m-m/roadmap"/>
+      <item name="Get Involved" href="https://github.com/hohwille/mmm/wiki/Get-Involved"/>
+      <item name="Road Map" href="https://github.com/hohwille/mmm/wiki/Roadmap"/>
       <!-- <item name="Release Notes" href="changes-report.html"/> -->
-      <item name="History" href="history.html"/>
-      <item name="Stories" href="story.html"/>
-      <item name="Downloads" href="download.html"/>
+      <item name="History" href="https://github.com/hohwille/mmm/wiki/History"/>
+      <item name="Downloads" href="https://github.com/hohwille/mmm/wiki/Download"/>
     </menu>
 
     <menu name="Documentation">
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="FAQ" href="faq.html"/>
-      <item name="Users Guide" href="users-guide.html"/>
-    </menu>
-
-    <menu name="Developer Guides">
-      <item name="Setup" href="setup-devel.html"/>
-      <item name="Eclipse" href="setup-eclipse.html"/>
-      <item name="Conventions" href="conventions.html"/>
+      <item name="Developer Guide" href="https://github.com/hohwille/mmm/wiki/Developer-Guide"/>
+      <item name="Users Guide" href="https://github.com/hohwille/mmm/wiki/User-Guide"/>
     </menu>
 
     <menu ref="modules" inherit="bottom"/>
