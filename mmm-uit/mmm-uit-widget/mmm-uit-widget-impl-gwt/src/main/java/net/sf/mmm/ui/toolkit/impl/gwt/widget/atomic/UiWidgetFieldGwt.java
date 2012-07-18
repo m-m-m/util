@@ -2,29 +2,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
-import net.sf.mmm.ui.toolkit.api.common.IconConstants;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetEditor;
+import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetField;
 import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.ChangeEventSenderGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.FocusEventSenderGwt;
 
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link UiWidgetEditor} using GWT.
+ * This is the implementation of {@link UiWidgetField} using GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends UiWidgetAtomicRegularGwt<WIDGET>
-    implements UiWidgetEditor<VALUE> {
+public abstract class UiWidgetFieldGwt<VALUE, WIDGET extends Widget> extends UiWidgetAtomicRegularGwt<WIDGET> implements
+    UiWidgetField<VALUE> {
 
   /** @see #addChangeHandler(UiHandlerEventValueChange) */
   private ChangeEventSenderGwt<VALUE> changeEventSender;
@@ -32,28 +30,21 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
   /** @see #addFocusHandler(UiHandlerEventFocus) */
   private FocusEventSenderGwt focusEventSender;
 
-  /** The icon for {@link #getValidationError()}. */
-  private Image errorIcon;
-
-  /** @see #getValidationError() */
-  private String validationError;
-
   /**
    * The constructor.
    * 
-   * @param widget is the {@link #getToplevelWidget() widget}.
+   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetEditorGwt(WIDGET widget) {
+  public UiWidgetFieldGwt(WIDGET widget) {
 
     super(widget);
-    this.errorIcon = new Image(IconConstants.ICON_VALIDATION_ERROR);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
+  public final void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
 
     if (this.changeEventSender == null) {
       this.changeEventSender = new ChangeEventSenderGwt<VALUE>(this);
@@ -65,14 +56,14 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
   /**
    * @return the {@link ChangeEventSenderGwt} or <code>null</code> if NOT yet created.
    */
-  protected ChangeEventSenderGwt<VALUE> getChangeEventSender() {
+  protected final ChangeEventSenderGwt<VALUE> getChangeEventSender() {
 
     return this.changeEventSender;
   }
 
   /**
-   * This method has to be implemented to register the given {@link ChangeHandler} in the
-   * {@link #getActiveWidget() active widget}.
+   * This method has to be implemented to register the given {@link ChangeHandler} in the {@link #getWidget()
+   * active widget}.
    * 
    * @param handler is the {@link ChangeHandler}.
    */
@@ -82,7 +73,7 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
    * {@inheritDoc}
    */
   @Override
-  public boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
+  public final boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
 
     if (this.changeEventSender != null) {
       return this.changeEventSender.removeHandler(handler);
@@ -103,7 +94,21 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
   }
 
   /**
-   * Called from {@link #setValue(Object)} to set the value in the {@link #getActiveWidget() active widget}.
+   * {@inheritDoc}
+   */
+  @Override
+  public final VALUE getValue() {
+
+    try {
+      return getValueOrException();
+    } catch (RuntimeException e) {
+      // ATTENTION: This is one of the very rare cases where we intentionally ignore an exception.
+      return null;
+    }
+  }
+
+  /**
+   * Called from {@link #setValue(Object)} to set the value in the {@link #getWidget() active widget}.
    * 
    * @param value is the new value to set.
    */
@@ -113,7 +118,7 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
    * {@inheritDoc}
    */
   @Override
-  public void addFocusHandler(UiHandlerEventFocus handler) {
+  public final void addFocusHandler(UiHandlerEventFocus handler) {
 
     if (this.focusEventSender == null) {
       this.focusEventSender = new FocusEventSenderGwt(this);
@@ -125,14 +130,14 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
   /**
    * @return the {@link FocusEventSenderGwt} or <code>null</code> if not yet created.
    */
-  protected FocusEventSenderGwt getFocusEventSender() {
+  protected final FocusEventSenderGwt getFocusEventSender() {
 
     return this.focusEventSender;
   }
 
   /**
    * This method has to be implemented to register the given {@link FocusHandler} and {@link BlurHandler} in
-   * the {@link #getActiveWidget() active widget}.
+   * the {@link #getWidget() active widget}.
    * 
    * @param focusHandler is the {@link FocusHandler}.
    * @param blurHandler is the {@link BlurHandler}.
@@ -142,7 +147,7 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
   /**
    * {@inheritDoc}
    */
-  public boolean removeFocusHandler(UiHandlerEventFocus handler) {
+  public final boolean removeFocusHandler(UiHandlerEventFocus handler) {
 
     if (this.focusEventSender != null) {
       return this.focusEventSender.removeHandler(handler);
@@ -160,26 +165,6 @@ public abstract class UiWidgetEditorGwt<VALUE, WIDGET extends Widget> extends Ui
       return this.focusEventSender.isFocused();
     }
     return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getValidationError() {
-
-    return this.validationError;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setValidationError(String validationError) {
-
-    this.validationError = validationError;
-    this.errorIcon.setTitle(validationError);
-    this.errorIcon.setVisible((validationError != null));
   }
 
 }

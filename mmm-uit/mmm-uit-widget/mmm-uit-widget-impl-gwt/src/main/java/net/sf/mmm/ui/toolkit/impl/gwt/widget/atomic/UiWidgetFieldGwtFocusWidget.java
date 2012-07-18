@@ -8,21 +8,20 @@ import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.KeyboardFilterAdapter;
 import net.sf.mmm.util.filter.api.CharFilter;
 
 import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.user.client.ui.ValueBoxBase;
+import com.google.gwt.user.client.ui.FocusWidget;
 
 /**
- * This is the implementation of {@link net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetEditor} using GWT
- * based on {@link ValueBoxBase}.
+ * This is the implementation of {@link net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetField} using GWT based
+ * on {@link FocusWidget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueBoxBase<VALUE>> extends
-    UiWidgetEditorGwt<VALUE, WIDGET> implements AttributeWriteKeyboardFilter {
+public abstract class UiWidgetFieldGwtFocusWidget<VALUE, WIDGET extends FocusWidget> extends
+    UiWidgetFieldGwt<VALUE, WIDGET> implements AttributeWriteKeyboardFilter {
 
   /** @see #getKeyboardFilter() */
   private KeyboardFilterAdapter keyboardFilterAdapter;
@@ -30,9 +29,9 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
   /**
    * The constructor.
    * 
-   * @param widget is the active widget.
+   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetEditorGwtValueBoxBase(WIDGET widget) {
+  public UiWidgetFieldGwtFocusWidget(WIDGET widget) {
 
     super(widget);
   }
@@ -41,66 +40,39 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
    * {@inheritDoc}
    */
   @Override
-  protected void registerChangeHandler(ChangeHandler handler) {
+  protected final void registerFocusHandler(FocusHandler focusHandler, BlurHandler blurHandler) {
 
-    getActiveWidget().addChangeHandler(handler);
+    getWidget().addFocusHandler(focusHandler);
+    getWidget().addBlurHandler(blurHandler);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void registerFocusHandler(FocusHandler focusHandler, BlurHandler blurHandler) {
-
-    getActiveWidget().addFocusHandler(focusHandler);
-    getActiveWidget().addBlurHandler(blurHandler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFocused(boolean focused) {
+  public final void setFocused(boolean focused) {
 
     FocusEventSenderGwt sender = getFocusEventSender();
     if (sender != null) {
       sender.setProgrammatic();
     }
-    getActiveWidget().setFocus(focused);
+    getWidget().setFocus(focused);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(VALUE value) {
+  protected final void doSetEnabled(boolean enabled) {
 
-    getActiveWidget().setValue(value, false);
+    getWidget().setEnabled(enabled);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public VALUE getValue() {
-
-    return getActiveWidget().getValue();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetEnabled(boolean enabled) {
-
-    getActiveWidget().setEnabled(enabled);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public CharFilter getKeyboardFilter() {
+  public final CharFilter getKeyboardFilter() {
 
     if (this.keyboardFilterAdapter != null) {
       return this.keyboardFilterAdapter.getKeyboardFilter();
@@ -112,7 +84,7 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
    * {@inheritDoc}
    */
   @Override
-  public void setKeyboardFilter(CharFilter keyboardFilter) {
+  public final void setKeyboardFilter(CharFilter keyboardFilter) {
 
     if (keyboardFilter == null) {
       if (this.keyboardFilterAdapter != null) {
@@ -123,7 +95,7 @@ public abstract class UiWidgetEditorGwtValueBoxBase<VALUE, WIDGET extends ValueB
     if (this.keyboardFilterAdapter == null) {
       this.keyboardFilterAdapter = new KeyboardFilterAdapter();
       this.keyboardFilterAdapter.setKeyboardFilter(keyboardFilter);
-      this.keyboardFilterAdapter.add(getActiveWidget());
+      this.keyboardFilterAdapter.add(getWidget());
     } else {
       this.keyboardFilterAdapter.setKeyboardFilter(keyboardFilter);
     }

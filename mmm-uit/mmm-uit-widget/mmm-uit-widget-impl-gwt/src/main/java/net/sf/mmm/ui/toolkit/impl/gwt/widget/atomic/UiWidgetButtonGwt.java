@@ -34,7 +34,7 @@ public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implem
   @Override
   public void setLabel(String label) {
 
-    getActiveWidget().setText(label);
+    getWidget().setText(label);
   }
 
   /**
@@ -43,7 +43,7 @@ public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implem
   @Override
   public String getLabel() {
 
-    return getActiveWidget().getText();
+    return getWidget().getText();
   }
 
   /**
@@ -65,11 +65,11 @@ public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implem
       return;
     }
     if (this.image != null) {
-      getToplevelWidget().getElement().removeChild(this.image.getToplevelWidget().getElement());
+      getWidget().getElement().removeChild(this.image.getWidget().getElement());
     }
     this.image = (UiWidgetImageGwt) image;
     if (this.image != null) {
-      getToplevelWidget().getElement().insertFirst(this.image.getToplevelWidget().getElement());
+      getWidget().getElement().insertFirst(this.image.getWidget().getElement());
     }
   }
 

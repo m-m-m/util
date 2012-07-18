@@ -13,7 +13,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed {@link UiFeatureValue#getValue() value}.
+ * @param <VALUE> is the generic type of the changed {@link UiFeatureValue#getStoredValue() value}.
  */
 public class ChangeEventSenderGwt<VALUE> extends ChangeEventSender<VALUE> implements ChangeHandler {
 

@@ -13,10 +13,10 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeWriteEditable extends AtrributeReadEditable {
 
   /**
-   * This method set the editable status.
+   * This method set the {@link #isEditable() editable} status.
    * 
    * @param editableFlag if <code>true</code> the object will become editable, if <code>false</code> the
-   *        object will become uneditable.
+   *        object will become un-editable.
    */
   void setEditable(boolean editableFlag);
 

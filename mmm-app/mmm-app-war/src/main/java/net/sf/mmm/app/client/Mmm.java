@@ -74,12 +74,13 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
     UiWidgetButton button = factory.create(UiWidgetButton.class);
-    button.setLabel("Send");
-    button.setImage(image);
-    button.setTooltip("Send to server");
 
     UiWidgetTextField textField = factory.create(UiWidgetTextField.class);
     textField.setKeyboardFilter(CharFilter.LATIN_DIGIT_FILTER);
+
+    button.setLabel("Send" + textField.getMaximumTextLength());
+    button.setImage(image);
+    button.setTooltip("Send to server");
 
     final Button sendButton = (Button) factory.getNativeWidget(button); // new Button("Send");
 

@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAtomicRegularGwt<WIDGET extends Widget> extends UiWidgetAtomicGwt<WIDGET>
     implements UiWidgetAtomicRegular {
@@ -19,7 +19,7 @@ public abstract class UiWidgetAtomicRegularGwt<WIDGET extends Widget> extends Ui
   /**
    * The constructor.
    * 
-   * @param widget is the {@link #getToplevelWidget() widget}.
+   * @param widget is the {@link #getWidget() widget}.
    */
   public UiWidgetAtomicRegularGwt(WIDGET widget) {
 

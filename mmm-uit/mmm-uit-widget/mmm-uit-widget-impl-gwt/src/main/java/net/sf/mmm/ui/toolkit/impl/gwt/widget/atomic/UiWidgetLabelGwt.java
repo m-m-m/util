@@ -42,7 +42,7 @@ public class UiWidgetLabelGwt extends UiWidgetAtomicRegularGwt<Label> implements
   public void setLabel(String label) {
 
     this.label = label;
-    getActiveWidget().setText(label);
+    getWidget().setText(label);
   }
 
   /**

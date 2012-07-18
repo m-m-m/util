@@ -9,11 +9,11 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
 
-  /** @see #getToplevelWidget() */
+  /** @see #getWidget() */
   private final WIDGET toplevelWidget;
 
   /** @see #getId() */
@@ -31,12 +31,12 @@ public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
   /**
    * The constructor.
    * 
-   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   * @param widget is the {@link #getWidget() widget}.
    */
-  public AbstractUiWidget(WIDGET toplevelWidget) {
+  public AbstractUiWidget(WIDGET widget) {
 
     super();
-    this.toplevelWidget = toplevelWidget;
+    this.toplevelWidget = widget;
     this.visible = true;
     this.enabled = true;
   }
@@ -44,9 +44,9 @@ public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
   /**
    * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#getNativeWidget(net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular)
    * 
-   * @return the native toplevel widget.
+   * @return the native widget.
    */
-  public WIDGET getToplevelWidget() {
+  public WIDGET getWidget() {
 
     return this.toplevelWidget;
   }
@@ -65,7 +65,7 @@ public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
 
   /**
    * Called from {@link #setId(String)} to actually set the {@link #getId() ID} in the underlying
-   * {@link #getToplevelWidget() widget}.
+   * {@link #getWidget() widget}.
    * 
    * @param newId is the new ID.
    */
@@ -94,7 +94,7 @@ public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
 
   /**
    * Called from {@link #setVisible(boolean)} to actually set the {@link #isVisible() visibility} in the
-   * underlying {@link #getToplevelWidget() widget}.
+   * underlying {@link #getWidget() widget}.
    * 
    * @param newVisible is the new {@link #isVisible() visible} flag.
    */
@@ -123,7 +123,7 @@ public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
 
   /**
    * Called from {@link #setTooltip(String)} to actually set the {@link #getTooltip() tooltip} in the
-   * underlying {@link #getToplevelWidget() widget}.
+   * underlying {@link #getWidget() widget}.
    * 
    * @param newTooltip is the new {@link #getTooltip() tooltip}.
    */
@@ -152,7 +152,7 @@ public abstract class AbstractUiWidget<WIDGET> implements UiWidget {
 
   /**
    * Called from {@link #setEnabled(boolean)} to actually set the {@link #isEnabled() enabled flag} in the
-   * underlying {@link #getToplevelWidget() widget}.
+   * underlying {@link #getWidget() widget}.
    * 
    * @param newEnabled is the new {@link #isEnabled() enabled} flag.
    */

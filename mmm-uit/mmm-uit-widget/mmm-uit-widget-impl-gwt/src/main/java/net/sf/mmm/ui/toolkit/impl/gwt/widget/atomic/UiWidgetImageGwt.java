@@ -42,7 +42,7 @@ public class UiWidgetImageGwt extends UiWidgetAtomicRegularGwt<Image> implements
   public void setUrl(String url) {
 
     this.url = url;
-    getActiveWidget().setUrl(url);
+    getWidget().setUrl(url);
   }
 
   /**
@@ -52,7 +52,7 @@ public class UiWidgetImageGwt extends UiWidgetAtomicRegularGwt<Image> implements
   public void setAltText(String altText) {
 
     this.altText = altText;
-    getActiveWidget().setAltText(altText);
+    getWidget().setAltText(altText);
   }
 
   /**
@@ -63,7 +63,7 @@ public class UiWidgetImageGwt extends UiWidgetAtomicRegularGwt<Image> implements
 
     this.width = newWidth;
     this.height = newHeight;
-    getToplevelWidget().setSize(Integer.toString(newWidth), Integer.toString(newHeight));
+    getWidget().setSize(Integer.toString(newWidth), Integer.toString(newHeight));
   }
 
   /**

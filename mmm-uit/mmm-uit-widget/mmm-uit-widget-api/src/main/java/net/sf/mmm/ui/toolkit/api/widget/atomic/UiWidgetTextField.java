@@ -5,13 +5,14 @@ package net.sf.mmm.ui.toolkit.api.widget.atomic;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
 
 /**
- * This is the interface for a {@link UiWidgetEditor editor widget} that uses a regular text field to display
- * or edit its value.
+ * This is the interface for a {@link UiWidgetInputField input field widget} that represents a text field.
+ * Such field allows to enter arbitrary text in a single line. If you want to allow the user to enter text
+ * with line breaks (new lines) use {@link UiWidgetTextArea} instead.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTextField extends UiWidgetEditor<String>, AttributeWriteKeyboardFilter {
+public interface UiWidgetTextField extends UiWidgetInputField<String>, AttributeWriteKeyboardFilter {
 
   // nothing to add...
 

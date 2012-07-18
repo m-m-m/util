@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAtomicClickableGwt<WIDGET extends FocusWidget> extends UiWidgetAtomicGwt<WIDGET>
     implements UiWidgetAtomicClickable {
@@ -24,7 +24,7 @@ public abstract class UiWidgetAtomicClickableGwt<WIDGET extends FocusWidget> ext
   /**
    * The constructor.
    * 
-   * @param widget is the {@link #getToplevelWidget() widget}.
+   * @param widget is the {@link #getWidget() widget}.
    */
   public UiWidgetAtomicClickableGwt(WIDGET widget) {
 
@@ -37,7 +37,7 @@ public abstract class UiWidgetAtomicClickableGwt<WIDGET extends FocusWidget> ext
   @Override
   protected void doSetEnabled(boolean newEnabled) {
 
-    getActiveWidget().setEnabled(newEnabled);
+    getWidget().setEnabled(newEnabled);
   }
 
   /**
@@ -48,7 +48,7 @@ public abstract class UiWidgetAtomicClickableGwt<WIDGET extends FocusWidget> ext
 
     if (this.clickEventSender == null) {
       this.clickEventSender = new ClickEventSenderGwt(this);
-      getActiveWidget().addClickHandler(this.clickEventSender);
+      getWidget().addClickHandler(this.clickEventSender);
     }
     this.clickEventSender.addHandler(handler);
   }

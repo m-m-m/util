@@ -8,16 +8,15 @@ import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.ui.toolkit.api.widget.UiWidget} using GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getActiveWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends AbstractUiWidget<Widget> implements
+public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends AbstractUiWidget<WIDGET> implements
     AttributeWriteHandlerObserver {
 
   /** The name of the <code>id</code> attribute. */
@@ -29,27 +28,11 @@ public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends Abstr
   /**
    * The constructor.
    * 
-   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   * @param widget is the {@link #getWidget() widget}.
    */
-  public AbstractUiWidgetGwt(Widget toplevelWidget) {
+  public AbstractUiWidgetGwt(WIDGET widget) {
 
-    super(toplevelWidget);
-  }
-
-  /**
-   * This method gets the active widget. If not overridden, this is the same as the
-   * {@link #getToplevelWidget() toplevel widget}. However for a complex
-   * {@link net.sf.mmm.ui.toolkit.api.widget.UiWidget} it might be necessary to have this
-   * {@link #getActiveWidget() active widget} embedded in a composite parent widget that is then returned by
-   * {@link #getToplevelWidget()}.<br/>
-   * Operations like {@link #setVisible(boolean)} are performed on {@link #getToplevelWidget()} while
-   * {@link #setEnabled(boolean)} has to be performed on {@link #getActiveWidget()}.
-   * 
-   * @return the active widget.
-   */
-  protected WIDGET getActiveWidget() {
-
-    return (WIDGET) getToplevelWidget();
+    super(widget);
   }
 
   /**
@@ -59,9 +42,9 @@ public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends Abstr
   protected void doSetId(String newId) {
 
     if (newId == null) {
-      DOM.removeElementAttribute(getToplevelWidget().getElement(), HTML_ATTRIBUTE_ID);
+      DOM.removeElementAttribute(getWidget().getElement(), HTML_ATTRIBUTE_ID);
     } else {
-      DOM.setElementAttribute(getToplevelWidget().getElement(), HTML_ATTRIBUTE_ID, newId);
+      DOM.setElementAttribute(getWidget().getElement(), HTML_ATTRIBUTE_ID, newId);
     }
   }
 
@@ -71,7 +54,7 @@ public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends Abstr
   @Override
   protected void doSetVisible(boolean newVisible) {
 
-    getToplevelWidget().setVisible(newVisible);
+    getWidget().setVisible(newVisible);
   }
 
   /**
@@ -80,7 +63,7 @@ public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends Abstr
   @Override
   protected void doSetTooltip(String newTooltip) {
 
-    getToplevelWidget().setTitle(newTooltip);
+    getWidget().setTitle(newTooltip);
   }
 
   /**
@@ -89,7 +72,7 @@ public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends Abstr
   @Override
   public String getStyles() {
 
-    return getToplevelWidget().getStyleName();
+    return getWidget().getStyleName();
   }
 
   /**
@@ -98,7 +81,7 @@ public abstract class AbstractUiWidgetGwt<WIDGET extends UIObject> extends Abstr
   @Override
   public void setStyles(String styles) {
 
-    getToplevelWidget().setStyleName(styles);
+    getWidget().setStyleName(styles);
   }
 
   /**

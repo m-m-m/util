@@ -2,46 +2,46 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic;
 
-import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetTextField;
+import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetLongField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.LongBox;
 
 /**
- * This is the implementation of {@link UiWidgetTextField} using GWT based on {@link TextBox}.
+ * This is the implementation of {@link UiWidgetLongField} using GWT based on {@link LongBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTextFieldGwt extends UiWidgetInputFieldGwtTextBox<TextBox> implements UiWidgetTextField {
+public class UiWidgetLongFieldGwt extends UiWidgetInputFieldGwtValueBox<Long, LongBox> implements UiWidgetLongField {
 
   /**
    * The constructor.
    */
-  public UiWidgetTextFieldGwt() {
+  public UiWidgetLongFieldGwt() {
 
-    super(new TextBox());
+    super(new LongBox());
   }
 
   /**
    * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetTextField> {
+  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetLongField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetTextField.class);
+      super(UiWidgetLongField.class);
     }
 
     /**
      * {@inheritDoc}
      */
-    public UiWidgetTextField create() {
+    public UiWidgetLongField create() {
 
-      return new UiWidgetTextFieldGwt();
+      return new UiWidgetLongFieldGwt();
     }
 
   }

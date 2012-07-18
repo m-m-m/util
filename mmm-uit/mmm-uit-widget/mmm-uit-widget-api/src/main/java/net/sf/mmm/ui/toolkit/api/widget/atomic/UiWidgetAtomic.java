@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 
 /**
  * This is the interface for an atomic {@link UiWidget}. Unlike
- * {@link net.sf.mmm.ui.toolkit.api.widget.composite.UiWidgetComposite} such adapter can not have
+ * {@link net.sf.mmm.ui.toolkit.api.widget.composite.UiWidgetComposite} such widget can not have
  * {@link net.sf.mmm.ui.toolkit.api.widget.composite.UiWidgetComposite#getChild(int) children}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -11,8 +11,8 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeWriteEnabled extends AttributeReadEnabled {
 
   /**
-   * This method sets the enabled status of this object. If it is disabled, the user can not interact with the
-   * object.
+   * This method sets the {@link #isEnabled() enabled} status of this object. If it is disabled, the user can
+   * not interact with the object.
    * 
    * @param enabled - if <code>true</code> the object will be enabled, else the object will be disabled.
    */

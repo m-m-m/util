@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.widget.atomic;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 
 /**
- * This is the interface for a {@link UiWidgetRegular regular} {@link UiWidgetAtomic}.
+ * This is the abstract interface for a {@link UiWidgetRegular regular} {@link UiWidgetAtomic}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
