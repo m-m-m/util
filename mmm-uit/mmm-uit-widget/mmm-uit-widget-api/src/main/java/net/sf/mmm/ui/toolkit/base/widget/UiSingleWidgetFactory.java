@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget;
 
-import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a factory of a single {@link UiWidget} of a particular
- * {@link #getWidgetInterface() type}.
+ * This is the interface for a factory of a single {@link net.sf.mmm.ui.toolkit.api.widget.UiWidget} of a
+ * particular {@link #getWidgetInterface() type}.
  * 
  * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory
  * 
@@ -14,22 +14,22 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * @since 1.0.0
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to {@link #create() create}.
  */
-public interface UiSingleWidgetFactory<WIDGET extends UiWidget> {
+public interface UiSingleWidgetFactory<WIDGET extends UiWidgetReal> {
 
   /**
    * This method gets the interface of the widget interface handled by this factory.
    * 
-   * @return the {@link UiWidget} interface.
+   * @return the {@link UiWidgetReal} interface.
    */
   Class<WIDGET> getWidgetInterface();
 
   /**
-   * This method creates a new {@link UiWidget} instance of the {@link #getWidgetInterface() managed}
-   * {@link UiWidget}.
+   * This method creates a new {@link UiWidgetReal} instance of the {@link #getWidgetInterface() managed}
+   * {@link UiWidgetReal}.
    * 
    * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#create(Class)
    * 
-   * @return the new {@link UiWidget}.
+   * @return the new {@link UiWidgetReal}.
    */
   WIDGET create();
 

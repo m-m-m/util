@@ -54,15 +54,6 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
    * {@inheritDoc}
    */
   @Override
-  public boolean isResizable() {
-
-    return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public int getWidth() {
 
     return this.width;

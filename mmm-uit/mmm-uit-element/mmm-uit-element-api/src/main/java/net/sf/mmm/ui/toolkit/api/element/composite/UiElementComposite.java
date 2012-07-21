@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.element.composite;
 
 import net.sf.mmm.ui.toolkit.api.element.UiElement;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
  * TODO: this class ...
@@ -13,7 +13,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <WIDGET> is the generic type of the underlying {@link #getWidget() widget}.
  */
-public abstract class UiElementComposite<VALUE, WIDGET extends UiWidget> extends UiElement<VALUE, WIDGET> {
+public abstract class UiElementComposite<VALUE, WIDGET extends UiWidgetReal> extends UiElement<VALUE, WIDGET> {
 
   /**
    * The constructor.

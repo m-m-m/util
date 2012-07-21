@@ -57,15 +57,6 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
    * {@inheritDoc}
    */
   @Override
-  public boolean isResizable() {
-
-    return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public int getWidth() {
 
     return getAdapter().getWidth();

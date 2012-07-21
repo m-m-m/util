@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -55,7 +56,7 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
    */
   @SuppressWarnings("unchecked")
   @Override
-  public <WIDGET extends UiWidget> WIDGET create(Class<WIDGET> widgetInterface) {
+  public <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface) {
 
     UiSingleWidgetFactory<? extends UiWidget> subFactory = this.interface2subFactoryMap.get(widgetInterface);
     if (subFactory == null) {

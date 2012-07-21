@@ -10,9 +10,13 @@ import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
-import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetButton;
-import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetImage;
-import net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetTextField;
+import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
+import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
+import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
+import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
+import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetFactoryGwt;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -29,6 +33,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -71,6 +76,34 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     Log.debug("Loaded");
     super.onModuleLoadDeferred();
     UiWidgetFactory<Widget> factory = new UiWidgetFactoryGwt();
+
+    UiWidgetTabPanel tabPanel = factory.create(UiWidgetTabPanel.class);
+
+    UiWidgetVerticalPanel verticalPanel1 = factory.create(UiWidgetVerticalPanel.class);
+    UiWidgetLabel label1 = factory.create(UiWidgetLabel.class);
+    label1.setLabel("label1");
+    verticalPanel1.addChild(label1);
+    final UiWidgetTab tab1 = tabPanel.addChild(verticalPanel1, "Tab1");
+
+    UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);
+    UiWidgetLabel label2 = factory.create(UiWidgetLabel.class);
+    final UiWidgetTab tab2 = tabPanel.addChild(verticalPanel2, "Tab2");
+    label2.setLabel("label2");
+    verticalPanel2.addChild(label2);
+    UiWidgetButton button2 = factory.create(UiWidgetButton.class);
+    button2.setLabel("button2");
+    verticalPanel2.addChild(button2);
+    button2.addClickHandler(new UiHandlerEventClick() {
+
+      @Override
+      public void onClick(UiFeatureClick source, boolean programmatic) {
+
+        tab1.setTitle(tab1.getTitle() + "X");
+        tab2.setTitle(tab2.getTitle() + "Y");
+      }
+    });
+    RootLayoutPanel.get().add(factory.getNativeWidget(tabPanel));
+
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
     UiWidgetButton button = factory.create(UiWidgetButton.class);

@@ -130,6 +130,15 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * {@inheritDoc}
    */
   @Override
+  public void setResizable(boolean resizable) {
+
+    getAdapter().setResizable(resizable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setPosition(int x, int y) {
 
     getAdapter().setPosition(x, y);

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.widget;
 /**
  * This is the interface for a <em>regular</em> {@link UiWidget}. Here regular means that it represents a
  * generic widget that can be placed
- * {@link net.sf.mmm.ui.toolkit.api.widget.composite.UiWidgetCompositeRegular almost anywhere}.
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularComposite almost anywhere}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

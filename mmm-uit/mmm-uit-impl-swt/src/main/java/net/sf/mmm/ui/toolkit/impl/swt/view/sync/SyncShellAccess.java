@@ -11,51 +11,39 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * This class is used for synchronous access on SWT
- * {@link org.eclipse.swt.widgets.Shell}.
+ * This class is used for synchronous access on SWT {@link org.eclipse.swt.widgets.Shell}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implements
-    UiWindowAdapter<Shell> {
+public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implements UiWindowAdapter<Shell> {
 
   /**
-   * operation to create and set the
-   * {@link org.eclipse.swt.widgets.Decorations#getMenuBar() menu-bar}
+   * operation to create and set the {@link org.eclipse.swt.widgets.Decorations#getMenuBar() menu-bar}
    */
   protected static final String OPERATION_CREATE_MENUBAR = "createMenuBar";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean) maximized}
-   * status.
+   * operation to set the {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean) maximized} status.
    */
   protected static final String OPERATION_SET_MAXIMIZED = "setMaximized";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean) minimized}
-   * status.
+   * operation to set the {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean) minimized} status.
    */
   protected static final String OPERATION_SET_MINIMIZED = "setMinimized";
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Decorations#getMaximized() maximized}
-   * status.
+   * operation to get the {@link org.eclipse.swt.widgets.Decorations#getMaximized() maximized} status.
    */
   protected static final String OPERATION_GET_MAXIMIZED = "getMaximized";
 
   /**
-   * operation to get the
-   * {@link org.eclipse.swt.widgets.Decorations#getMinimized() minimized}
-   * status.
+   * operation to get the {@link org.eclipse.swt.widgets.Decorations#getMinimized() minimized} status.
    */
   protected static final String OPERATION_GET_MINIMIZED = "getMinimized";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Decorations#setText(String) title}.
+   * operation to set the {@link org.eclipse.swt.widgets.Decorations#setText(String) title}.
    */
   protected static final String OPERATION_SET_TITLE = "setTitle";
 
@@ -79,8 +67,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
    * 
    * @param uiFactory is used to do the synchronization.
    * @param node is the owning {@link #getNode() node}.
-   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
-   *        style} of the sash-form.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the sash-form.
    * @param swtShell is the {@link Shell} to access synchronous.
    */
   public SyncShellAccess(UiFactorySwt uiFactory, UiWindow node, int swtStyle, Shell swtShell) {
@@ -129,8 +116,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   }
 
   /**
-   * This method creates the
-   * {@link org.eclipse.swt.widgets.Decorations#getMenuBar() menu-bar} of the
+   * This method creates the {@link org.eclipse.swt.widgets.Decorations#getMenuBar() menu-bar} of the
    * decorations.
    * 
    * @return the menu-bar.
@@ -161,9 +147,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean)
-   * maximized-state} of the decorations.
+   * This method sets the {@link org.eclipse.swt.widgets.Decorations#setMaximized(boolean) maximized-state} of
+   * the decorations.
    * 
    * @param doMaximize is the new maximized-state to set.
    */
@@ -174,9 +159,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Decorations#getMaximized() maximized-state}
-   * of the decorations.
+   * This method gets the {@link org.eclipse.swt.widgets.Decorations#getMaximized() maximized-state} of the
+   * decorations.
    * 
    * @return the maximized-state.
    */
@@ -187,9 +171,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean)
-   * minimized-state} of the decorations.
+   * This method sets the {@link org.eclipse.swt.widgets.Decorations#setMinimized(boolean) minimized-state} of
+   * the decorations.
    * 
    * @param doMinimize is the new minimized-state to set.
    */
@@ -200,9 +183,8 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Decorations#getMinimized() minimized-state}
-   * of the decorations.
+   * This method gets the {@link org.eclipse.swt.widgets.Decorations#getMinimized() minimized-state} of the
+   * decorations.
    * 
    * @return the minimized-state.
    */
@@ -235,6 +217,15 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   public boolean isResizable() {
 
     return ((getStyle() & SWT.RESIZE) == SWT.RESIZE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setResizable(boolean resizable) {
+
+    // not supported...
   }
 
 }

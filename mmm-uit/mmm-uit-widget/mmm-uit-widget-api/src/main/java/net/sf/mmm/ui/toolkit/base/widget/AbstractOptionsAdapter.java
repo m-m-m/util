@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is an abstract class that helps to implement
- * {@link net.sf.mmm.ui.toolkit.api.widget.atomic.UiWidgetOptionsField}. Due to the lack of multi-inheritance
+ * {@link net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetOptionsField}. Due to the lack of multi-inheritance
  * it should be extended as inner class of the according widget base-class.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

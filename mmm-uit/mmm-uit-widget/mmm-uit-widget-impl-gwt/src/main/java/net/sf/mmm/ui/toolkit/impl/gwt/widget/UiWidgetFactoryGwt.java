@@ -3,19 +3,23 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget;
 
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactoryPlain;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetButtonGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetComboBoxGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetDoubleFieldGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetImageGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetIntegerFieldGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetLabelGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetLongFieldGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetPasswordFieldGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetRadioButtonsGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetRadioButtonsVerticalGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetRichTextAreaGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetTextAreaGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.atomic.UiWidgetTextFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetButtonGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetImageGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetLabelGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetTabGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetComboBoxGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetLongFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetPasswordFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetRadioButtonsGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetRadioButtonsVerticalGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetRichTextAreaGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetTextAreaGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetTextFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -33,6 +37,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
   public UiWidgetFactoryGwt() {
 
     super();
+    // atomic
     register(new UiWidgetImageGwt.Factory());
     register(new UiWidgetButtonGwt.Factory());
     register(new UiWidgetLabelGwt.Factory());
@@ -46,6 +51,12 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
     register(new UiWidgetRadioButtonsGwt.Factory());
     register(new UiWidgetRadioButtonsVerticalGwt.Factory());
     register(new UiWidgetComboBoxGwt.Factory());
+    // composite
+    register(new UiWidgetTabGwt.Factory());
+    register(new UiWidgetTabPanelGwt.Factory());
+    register(new UiWidgetHorizontalPanelGwt.Factory());
+    register(new UiWidgetVerticalPanelGwt.Factory());
+
   }
 
 }

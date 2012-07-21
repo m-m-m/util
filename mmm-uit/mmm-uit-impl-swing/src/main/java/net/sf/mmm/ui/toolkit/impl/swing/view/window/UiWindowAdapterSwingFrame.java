@@ -5,9 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.swing.view.window;
 import javax.swing.JFrame;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter} using swing.
- * It adapts an {@link JFrame}.
+ * This is the implementation of the {@link net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter} using
+ * swing. It adapts an {@link JFrame}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -31,6 +30,15 @@ public class UiWindowAdapterSwingFrame extends AbstractUiWindowAdapterSwing<JFra
   public boolean isResizable() {
 
     return getDelegate().isResizable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setResizable(boolean resizable) {
+
+    getDelegate().setResizable(resizable);
   }
 
   /**

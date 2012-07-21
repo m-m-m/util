@@ -16,14 +16,17 @@ public interface UiWidgetFactory<NATIVE_WIDGET> {
    * This method creates a new {@link UiWidget} instance of the given type (<code>widgetInterface</code>).<br/>
    * <b>ATTENTION:</b><br/>
    * The API of the {@link UiWidget}s defines base interfaces marks as <code>abstract</code>. These interfaces
-   * should NOT be used as argument to this method as they will cause an exception.
+   * cannot be used as argument to this method. Further some widget interfaces are NOT abstract but will not
+   * be created via this method but from some other widget. To avoid confusion the widgets that can be created
+   * here are marked via the interface {@link UiWidgetReal}. All these interfaces except for
+   * {@link UiWidgetReal} itself can be created and should be supported as legal arguments to this method.
    * 
    * @param <WIDGET> is the generic type of the {@link UiWidget} to create.
    * @param widgetInterface is the interface reflecting the {@link UiWidget} to create. Must NOT be
    *        <code>abstract</code>.
    * @return the new {@link UiWidget}.
    */
-  <WIDGET extends UiWidget> WIDGET create(Class<WIDGET> widgetInterface);
+  <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface);
 
   /**
    * This method gets the underlying native widget of the given {@link UiWidgetRegular regular widget}.

@@ -13,6 +13,7 @@ import net.sf.mmm.ui.toolkit.api.common.UiMode;
 import net.sf.mmm.ui.toolkit.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.element.composite.UiElementComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
@@ -57,9 +58,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  *        s that do not carry a {@link #getValue() value}.
  * @param <WIDGET> is the generic type of the underlying {@link #getWidget() widget}.
  */
-public abstract class UiElement<VALUE, WIDGET extends UiWidget> implements AttributeReadHtmlId, AttributeWriteVisible,
-    AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteMode,
-    AttributeWriteValue<VALUE> {
+public abstract class UiElement<VALUE, WIDGET extends UiWidgetReal> implements AttributeReadHtmlId,
+    AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced,
+    AttributeWriteMode, AttributeWriteValue<VALUE> {
 
   /** @see #getValue() */
   private VALUE value;

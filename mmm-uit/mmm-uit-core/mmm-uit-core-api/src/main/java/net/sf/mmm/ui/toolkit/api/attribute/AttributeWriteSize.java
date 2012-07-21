@@ -3,8 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read and {@link #isResizable() potential} write access to the
- * {@link #setSize(int, int) size} of an object.
+ * This interface gives read and write access to the {@link #setSize(int, int) size} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -21,13 +20,5 @@ public abstract interface AttributeWriteSize extends AttributeReadSize {
    * @param height is the new {@link #getHeight() height} of the object.
    */
   void setSize(int width, int height);
-
-  /**
-   * This method determines if this object is resizable.
-   * 
-   * @return <code>true</code> if the object can be {@link #setSize(int, int) resized}, <code>false</code>
-   *         otherwise.
-   */
-  boolean isResizable();
 
 }

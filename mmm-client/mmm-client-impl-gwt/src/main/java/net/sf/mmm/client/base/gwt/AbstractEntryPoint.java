@@ -117,7 +117,7 @@ public abstract class AbstractEntryPoint<GINJECTOR extends ClientGinjector> impl
    */
   protected void onModuleLoadDeferred() {
 
-    this.ginjector.getPlaceManager().revealCurrentPlace();
+    // this.ginjector.getPlaceManager().revealCurrentPlace();
   }
 
   /**

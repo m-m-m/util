@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTitle;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @since 1.0.0
  */
-public interface UiBorderPanel<CHILD extends UiElement> extends UiSingleComposite<CHILD>, AttributeWriteTitle {
+public interface UiBorderPanel<CHILD extends UiElement> extends UiSingleComposite<CHILD>, AttributeWriteStringTitle {
 
   /** the type of this object */
   String TYPE = "BorderPanel";

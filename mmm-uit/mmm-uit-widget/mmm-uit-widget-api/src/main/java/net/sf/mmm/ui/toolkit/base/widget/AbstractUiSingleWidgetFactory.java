@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget;
 
-import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
  * This is the abstract base implementation of the {@link UiSingleWidgetFactory} interface.
@@ -11,7 +11,8 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * @since 1.0.0
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to {@link #create() create}.
  */
-public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidget> implements UiSingleWidgetFactory<WIDGET> {
+public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidgetReal> implements
+    UiSingleWidgetFactory<WIDGET> {
 
   /** @see #getWidgetInterface() */
   private final Class<WIDGET> widgetInterface;

@@ -12,9 +12,8 @@ import net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiNodeAdapterSwing;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter} using swing.
- * It adapts an {@link JInternalFrame}.
+ * This is the implementation of the {@link net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter} using
+ * swing. It adapts an {@link JInternalFrame}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -28,8 +27,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
    * @param node is the owning {@link #getNode() node}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWindowAdapterSwingInternalFrame(AbstractUiWindow<JInternalFrame> node,
-      JInternalFrame delegate) {
+  public UiWindowAdapterSwingInternalFrame(AbstractUiWindow<JInternalFrame> node, JInternalFrame delegate) {
 
     super(node, delegate);
   }
@@ -96,6 +94,15 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   public boolean isResizable() {
 
     return getDelegate().isResizable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setResizable(boolean resizable) {
+
+    getDelegate().setResizable(resizable);
   }
 
   /**
