@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetAtomicRegularGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetRegularAtomicGwt;
 
 import com.google.gwt.user.client.ui.Label;
 
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Label;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetLabelGwt extends UiWidgetAtomicRegularGwt<Label> implements UiWidgetLabel {
+public class UiWidgetLabelGwt extends UiWidgetRegularAtomicGwt<Label> implements UiWidgetLabel {
 
   /** @ee {@link #getLabel()} */
   private String label;
@@ -24,7 +24,16 @@ public class UiWidgetLabelGwt extends UiWidgetAtomicRegularGwt<Label> implements
    */
   public UiWidgetLabelGwt() {
 
-    super(new Label());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Label createWidget() {
+
+    return new Label();
   }
 
   /**

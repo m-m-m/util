@@ -28,12 +28,10 @@ public abstract class UiWidgetFieldGwtFocusWidget<VALUE, WIDGET extends FocusWid
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetFieldGwtFocusWidget(WIDGET widget) {
+  public UiWidgetFieldGwtFocusWidget() {
 
-    super(widget);
+    super();
   }
 
   /**

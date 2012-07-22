@@ -30,7 +30,6 @@ public abstract class AbstractUiWidget<DELEGATE> extends AbstractUiElement<DELEG
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   public UiComposite<? extends UiElement> getParent() {
 

@@ -26,12 +26,10 @@ public abstract class UiWidgetDynamicCompositeGwt<WIDGET extends Widget, CHILD e
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetDynamicCompositeGwt(WIDGET widget) {
+  public UiWidgetDynamicCompositeGwt() {
 
-    super(widget);
+    super();
     this.children = new ArrayList<CHILD>();
   }
 
@@ -71,8 +69,7 @@ public abstract class UiWidgetDynamicCompositeGwt<WIDGET extends Widget, CHILD e
    */
   protected void doRemoveChild(int index, CHILD child) {
 
-    // TODO
-    // child.removeFromParent();
+    ((UiWidgetGwt<?>) child).removeFromParent();
   }
 
   /**
@@ -110,6 +107,7 @@ public abstract class UiWidgetDynamicCompositeGwt<WIDGET extends Widget, CHILD e
 
     this.children.add(child);
     doAddChild(child, -1);
+    setParent((UiWidgetGwt<?>) child, this);
   }
 
   /**
@@ -120,6 +118,7 @@ public abstract class UiWidgetDynamicCompositeGwt<WIDGET extends Widget, CHILD e
 
     this.children.add(index, child);
     doAddChild(child, index);
+    setParent((UiWidgetGwt<?>) child, this);
   }
 
   /**

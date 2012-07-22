@@ -22,7 +22,16 @@ public class UiWidgetRadioButtonsGwt<VALUE> extends UiWidgetRadioButtonsGwtBase<
    */
   public UiWidgetRadioButtonsGwt() {
 
-    super(new HorizontalPanel());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HorizontalPanel createWidget() {
+
+    return new HorizontalPanel();
   }
 
   /**

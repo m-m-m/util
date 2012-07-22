@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
 import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.ChangeEventSenderGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.FocusEventSenderGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetAtomicRegularGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetRegularAtomicGwt;
 
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class UiWidgetFieldGwt<VALUE, WIDGET extends Widget> extends UiWidgetAtomicRegularGwt<WIDGET> implements
+public abstract class UiWidgetFieldGwt<VALUE, WIDGET extends Widget> extends UiWidgetRegularAtomicGwt<WIDGET> implements
     UiWidgetField<VALUE> {
 
   /** @see #addChangeHandler(UiHandlerEventValueChange) */
@@ -33,12 +33,10 @@ public abstract class UiWidgetFieldGwt<VALUE, WIDGET extends Widget> extends UiW
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetFieldGwt(WIDGET widget) {
+  public UiWidgetFieldGwt() {
 
-    super(widget);
+    super();
   }
 
   /**

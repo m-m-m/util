@@ -26,12 +26,10 @@ public abstract class UiWidgetOptionsFieldGwt<VALUE, WIDGET extends Widget> exte
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetOptionsFieldGwt(WIDGET widget) {
+  public UiWidgetOptionsFieldGwt() {
 
-    super(widget);
+    super();
     this.optionsAdapter = new OptionsAdapterImpl();
   }
 

@@ -23,21 +23,30 @@ import com.google.gwt.user.client.ui.Widget;
 public class UiWidgetTabGwt extends UiWidgetSingleCompositeGwt<HorizontalPanel, UiWidgetRegular> implements UiWidgetTab {
 
   /** @see #getTitle() */
-  private final Label label;
+  private Label label;
 
   /** @see #getContentPanel() */
-  private final HTMLPanel contentPanel;
+  private HTMLPanel contentPanel;
 
   /**
    * The constructor.
    */
   public UiWidgetTabGwt() {
 
-    super(new HorizontalPanel());
+    super();
     getWidget().setStyleName("gwt-TabLayoutPanelTab");
     this.label = new Label();
     getWidget().add(this.label);
     this.contentPanel = new HTMLPanel("");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HorizontalPanel createWidget() {
+
+    return new HorizontalPanel();
   }
 
   /**

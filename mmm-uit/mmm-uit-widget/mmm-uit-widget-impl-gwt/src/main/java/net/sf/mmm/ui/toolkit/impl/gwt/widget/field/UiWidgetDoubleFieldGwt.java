@@ -21,7 +21,16 @@ public class UiWidgetDoubleFieldGwt extends UiWidgetInputFieldGwtValueBox<Double
    */
   public UiWidgetDoubleFieldGwt() {
 
-    super(new DoubleBox());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected DoubleBox createWidget() {
+
+    return new DoubleBox();
   }
 
   /**

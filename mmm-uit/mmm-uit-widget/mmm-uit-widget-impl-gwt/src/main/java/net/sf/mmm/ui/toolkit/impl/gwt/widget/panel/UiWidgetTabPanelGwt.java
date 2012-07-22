@@ -26,7 +26,16 @@ public class UiWidgetTabPanelGwt extends UiWidgetDynamicCompositeGwt<TabLayoutPa
    */
   public UiWidgetTabPanelGwt() {
 
-    super(new TabLayoutPanel(2, Unit.EM));
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TabLayoutPanel createWidget() {
+
+    return new TabLayoutPanel(1.5, Unit.EM);
   }
 
   /**

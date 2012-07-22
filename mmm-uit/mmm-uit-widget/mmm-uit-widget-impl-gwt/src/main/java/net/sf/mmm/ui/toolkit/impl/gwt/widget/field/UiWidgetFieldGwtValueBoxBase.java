@@ -21,12 +21,10 @@ public abstract class UiWidgetFieldGwtValueBoxBase<VALUE, WIDGET extends ValueBo
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetFieldGwtValueBoxBase(WIDGET widget) {
+  public UiWidgetFieldGwtValueBoxBase() {
 
-    super(widget);
+    super();
   }
 
   /**

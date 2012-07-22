@@ -20,7 +20,16 @@ public class UiWidgetTextFieldGwt extends UiWidgetInputFieldGwtTextBox<TextBox> 
    */
   public UiWidgetTextFieldGwt() {
 
-    super(new TextBox());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TextBox createWidget() {
+
+    return new TextBox();
   }
 
   /**

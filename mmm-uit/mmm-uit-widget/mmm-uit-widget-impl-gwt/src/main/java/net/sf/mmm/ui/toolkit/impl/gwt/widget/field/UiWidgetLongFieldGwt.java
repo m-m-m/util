@@ -20,7 +20,16 @@ public class UiWidgetLongFieldGwt extends UiWidgetInputFieldGwtValueBox<Long, Lo
    */
   public UiWidgetLongFieldGwt() {
 
-    super(new LongBox());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected LongBox createWidget() {
+
+    return new LongBox();
   }
 
   /**

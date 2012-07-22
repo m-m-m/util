@@ -20,7 +20,16 @@ public class UiWidgetVerticalPanelGwt extends UiWidgetPanelGwt<VerticalPanel> im
    */
   public UiWidgetVerticalPanelGwt() {
 
-    super(new VerticalPanel());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected VerticalPanel createWidget() {
+
+    return new VerticalPanel();
   }
 
   /**

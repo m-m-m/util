@@ -2,13 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
-import net.sf.mmm.ui.toolkit.api.handler.UiHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.ui.toolkit.api.widget.UiWidget} using GWT.
@@ -17,35 +16,17 @@ import com.google.gwt.user.client.ui.UIObject;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class UiWidgetGwt<WIDGET extends UIObject> extends AbstractUiWidget<WIDGET> implements
-    AttributeWriteHandlerObserver {
+public abstract class UiWidgetGwt<WIDGET extends UIObject> extends AbstractUiWidget<WIDGET> {
 
   /** The name of the <code>id</code> attribute. */
   private static final String HTML_ATTRIBUTE_ID = "id";
 
-  /** @see #getHandlerObserver() */
-  private UiHandlerObserver handlerObserver;
-
-  /** @see #getParent() */
-  private UiWidgetCompositeGwt<?, ?> parent;
-
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetGwt(WIDGET widget) {
+  public UiWidgetGwt() {
 
-    super(widget);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetComposite<?> getParent() {
-
-    return this.parent;
+    super();
   }
 
   /**
@@ -54,9 +35,30 @@ public abstract class UiWidgetGwt<WIDGET extends UIObject> extends AbstractUiWid
    * @param widget is the widget where to set the {@link #getParent() parent}.
    * @param newParent is the new {@link #getParent() parent}.
    */
-  protected void setParent(UiWidgetGwt<?> widget, UiWidgetCompositeGwt<?, ?> newParent) {
+  protected void setParent(UiWidgetGwt<?> widget, UiWidgetComposite<?> newParent) {
 
-    widget.parent = newParent;
+    widget.setParent(newParent);
+  }
+
+  /**
+   * This method invokes {@link #removeFromParent()} on the given <code>widget</code>.
+   * 
+   * @param widget is the widget that should be removed from its {@link #getParent() parent}.
+   */
+  protected void removeFromParent(UiWidgetGwt<?> widget) {
+
+    widget.removeFromParent();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void removeFromParent() {
+
+    super.removeFromParent();
+    // TODO Widget vs. UIObject
+    ((Widget) getWidget()).removeFromParent();
   }
 
   /**
@@ -106,24 +108,6 @@ public abstract class UiWidgetGwt<WIDGET extends UIObject> extends AbstractUiWid
   public void setStyles(String styles) {
 
     getWidget().setStyleName(styles);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final UiHandlerObserver getHandlerObserver() {
-
-    return this.handlerObserver;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setHandlerObserver(UiHandlerObserver handlerObserver) {
-
-    this.handlerObserver = handlerObserver;
   }
 
 }

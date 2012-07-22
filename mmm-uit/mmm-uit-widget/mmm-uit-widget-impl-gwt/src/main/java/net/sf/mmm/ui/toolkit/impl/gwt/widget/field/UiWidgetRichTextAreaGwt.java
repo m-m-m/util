@@ -25,7 +25,16 @@ public class UiWidgetRichTextAreaGwt extends UiWidgetFieldGwtFocusWidget<String,
    */
   public UiWidgetRichTextAreaGwt() {
 
-    super(new RichTextArea());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected RichTextArea createWidget() {
+
+    return new RichTextArea();
   }
 
   /**

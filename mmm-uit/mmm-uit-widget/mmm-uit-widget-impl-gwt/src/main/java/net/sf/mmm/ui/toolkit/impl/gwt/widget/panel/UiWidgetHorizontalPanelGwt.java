@@ -20,7 +20,16 @@ public class UiWidgetHorizontalPanelGwt extends UiWidgetPanelGwt<HorizontalPanel
    */
   public UiWidgetHorizontalPanelGwt() {
 
-    super(new HorizontalPanel());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HorizontalPanel createWidget() {
+
+    return new HorizontalPanel();
   }
 
   /**

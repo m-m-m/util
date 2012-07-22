@@ -37,12 +37,10 @@ public abstract class UiWidgetRadioButtonsGwtBase<VALUE, WIDGET extends CellPane
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetRadioButtonsGwtBase(WIDGET widget) {
+  public UiWidgetRadioButtonsGwtBase() {
 
-    super(widget);
+    super();
     this.radioButtons = new ArrayList<RadioButton>();
     this.groupId = "group" + groupIdCounter++;
   }

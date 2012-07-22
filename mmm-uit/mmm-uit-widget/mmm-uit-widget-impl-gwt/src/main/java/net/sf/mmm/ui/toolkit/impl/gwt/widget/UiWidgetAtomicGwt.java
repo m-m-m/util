@@ -17,12 +17,10 @@ public abstract class UiWidgetAtomicGwt<WIDGET extends UIObject> extends UiWidge
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetAtomicGwt(WIDGET widget) {
+  public UiWidgetAtomicGwt() {
 
-    super(widget);
+    super();
   }
 
 }

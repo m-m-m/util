@@ -22,7 +22,16 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends UiWidgetRadioButtons
    */
   public UiWidgetRadioButtonsVerticalGwt() {
 
-    super(new VerticalPanel());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected VerticalPanel createWidget() {
+
+    return new VerticalPanel();
   }
 
   /**

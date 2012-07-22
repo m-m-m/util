@@ -13,14 +13,24 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetPasswordFieldGwt extends UiWidgetInputFieldGwtTextBox<PasswordTextBox> implements UiWidgetPasswordField {
+public class UiWidgetPasswordFieldGwt extends UiWidgetInputFieldGwtTextBox<PasswordTextBox> implements
+    UiWidgetPasswordField {
 
   /**
    * The constructor.
    */
   public UiWidgetPasswordFieldGwt() {
 
-    super(new PasswordTextBox());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected PasswordTextBox createWidget() {
+
+    return new PasswordTextBox();
   }
 
   /**

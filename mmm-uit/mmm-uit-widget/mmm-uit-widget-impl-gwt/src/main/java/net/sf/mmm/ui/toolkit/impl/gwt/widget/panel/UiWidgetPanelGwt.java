@@ -23,12 +23,10 @@ public abstract class UiWidgetPanelGwt<WIDGET extends Panel & InsertPanel> exten
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetPanelGwt(WIDGET widget) {
+  public UiWidgetPanelGwt() {
 
-    super(widget);
+    super();
   }
 
   /**

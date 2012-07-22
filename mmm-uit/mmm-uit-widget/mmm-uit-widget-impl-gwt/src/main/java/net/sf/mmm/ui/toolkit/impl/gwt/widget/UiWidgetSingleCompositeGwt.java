@@ -23,12 +23,10 @@ public abstract class UiWidgetSingleCompositeGwt<WIDGET extends Widget, CHILD ex
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetSingleCompositeGwt(WIDGET widget) {
+  public UiWidgetSingleCompositeGwt() {
 
-    super(widget);
+    super();
   }
 
   /**

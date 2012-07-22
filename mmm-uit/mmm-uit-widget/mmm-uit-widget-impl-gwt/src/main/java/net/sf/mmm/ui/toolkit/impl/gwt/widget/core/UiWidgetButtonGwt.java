@@ -24,8 +24,17 @@ public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implem
    */
   public UiWidgetButtonGwt() {
 
-    super(new Button());
+    super();
     this.image = null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Button createWidget() {
+
+    return new Button();
   }
 
   /**

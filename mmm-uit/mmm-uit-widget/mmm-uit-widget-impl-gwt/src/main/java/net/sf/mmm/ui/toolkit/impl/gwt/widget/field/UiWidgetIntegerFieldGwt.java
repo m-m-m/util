@@ -21,7 +21,16 @@ public class UiWidgetIntegerFieldGwt extends UiWidgetInputFieldGwtValueBox<Integ
    */
   public UiWidgetIntegerFieldGwt() {
 
-    super(new IntegerBox());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected IntegerBox createWidget() {
+
+    return new IntegerBox();
   }
 
   /**

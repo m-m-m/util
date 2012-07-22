@@ -20,12 +20,10 @@ public abstract class UiWidgetCompositeGwt<WIDGET extends Widget, CHILD extends 
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetCompositeGwt(WIDGET widget) {
+  public UiWidgetCompositeGwt() {
 
-    super(widget);
+    super();
   }
 
 }

@@ -17,12 +17,10 @@ public abstract class UiWidgetInputFieldGwtTextBox<WIDGET extends TextBox> exten
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetInputFieldGwtTextBox(WIDGET widget) {
+  public UiWidgetInputFieldGwtTextBox() {
 
-    super(widget);
+    super();
   }
 
   /**

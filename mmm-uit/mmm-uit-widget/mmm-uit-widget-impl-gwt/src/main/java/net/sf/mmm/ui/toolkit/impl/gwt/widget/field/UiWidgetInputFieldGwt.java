@@ -22,12 +22,10 @@ public abstract class UiWidgetInputFieldGwt<VALUE, WIDGET extends ValueBoxBase<V
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetInputFieldGwt(WIDGET widget) {
+  public UiWidgetInputFieldGwt() {
 
-    super(widget);
+    super();
     this.maximumTextLength = Integer.MAX_VALUE;
   }
 

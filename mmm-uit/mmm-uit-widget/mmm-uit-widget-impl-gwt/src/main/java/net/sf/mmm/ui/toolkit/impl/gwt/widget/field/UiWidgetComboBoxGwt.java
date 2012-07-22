@@ -31,8 +31,17 @@ public class UiWidgetComboBoxGwt<VALUE> extends UiWidgetOptionsFieldGwt<VALUE, L
    */
   public UiWidgetComboBoxGwt() {
 
-    super(new ListBox());
+    super();
     getWidget().setVisibleItemCount(1);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ListBox createWidget() {
+
+    return new ListBox();
   }
 
   /**

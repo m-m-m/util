@@ -20,7 +20,16 @@ public class UiWidgetTextAreaGwt extends UiWidgetInputFieldGwt<String, TextArea>
    */
   public UiWidgetTextAreaGwt() {
 
-    super(new TextArea());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TextArea createWidget() {
+
+    return new TextArea();
   }
 
   /**

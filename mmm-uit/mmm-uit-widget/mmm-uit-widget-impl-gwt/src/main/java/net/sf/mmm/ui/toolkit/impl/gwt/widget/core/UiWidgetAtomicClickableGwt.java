@@ -24,12 +24,10 @@ public abstract class UiWidgetAtomicClickableGwt<WIDGET extends FocusWidget> ext
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetAtomicClickableGwt(WIDGET widget) {
+  public UiWidgetAtomicClickableGwt() {
 
-    super(widget);
+    super();
   }
 
   /**

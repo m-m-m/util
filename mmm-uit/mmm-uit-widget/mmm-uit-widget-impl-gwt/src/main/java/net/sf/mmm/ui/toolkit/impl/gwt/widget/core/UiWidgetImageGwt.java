@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetAtomicRegularGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetRegularAtomicGwt;
 
 import com.google.gwt.user.client.ui.Image;
 
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetImageGwt extends UiWidgetAtomicRegularGwt<Image> implements UiWidgetImage {
+public class UiWidgetImageGwt extends UiWidgetRegularAtomicGwt<Image> implements UiWidgetImage {
 
   /** @see #getAltText() */
   private String altText;
@@ -33,7 +33,16 @@ public class UiWidgetImageGwt extends UiWidgetAtomicRegularGwt<Image> implements
    */
   public UiWidgetImageGwt() {
 
-    super(new Image());
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Image createWidget() {
+
+    return new Image();
   }
 
   /**

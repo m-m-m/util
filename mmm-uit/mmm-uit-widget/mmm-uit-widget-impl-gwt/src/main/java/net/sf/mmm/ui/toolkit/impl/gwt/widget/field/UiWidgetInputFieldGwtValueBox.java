@@ -18,12 +18,10 @@ public abstract class UiWidgetInputFieldGwtValueBox<VALUE, WIDGET extends ValueB
 
   /**
    * The constructor.
-   * 
-   * @param widget is the {@link #getWidget() widget}.
    */
-  public UiWidgetInputFieldGwtValueBox(WIDGET widget) {
+  public UiWidgetInputFieldGwtValueBox() {
 
-    super(widget);
+    super();
   }
 
   /**
