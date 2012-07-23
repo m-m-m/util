@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the interface that adapts to the native UI object of the underlying toolkit implementation for a
@@ -22,7 +22,7 @@ import net.sf.mmm.ui.toolkit.api.view.UiNode;
  * @since 1.0.0
  */
 public interface UiNodeAdapter<DELEGATE> extends AttributeWriteHtmlId, AttributeWriteStylesAdvanced, AttributeWriteVisible,
-    AttributeWriteEnabled, UiWriteDisposed {
+    AttributeWriteEnabled, AttributeWriteDisposed {
 
   /**
    * This method gets the native UI object.

@@ -98,8 +98,8 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        tab1.setTitle(tab1.getTitle() + "X");
-        tab2.setTitle(tab2.getTitle() + "Y");
+        tab1.setLabel(tab1.getLabel() + "X");
+        tab2.setLabel(tab2.getLabel() + "Y");
       }
     });
     RootLayoutPanel.get().add(factory.getNativeWidget(tabPanel));
@@ -160,6 +160,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     // Add a handler to close the DialogBox
     closeButton.addClickHandler(new ClickHandler() {
 
+      @Override
       public void onClick(ClickEvent event) {
 
         dialogBox.hide();
@@ -183,6 +184,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
       /**
        * Fired when the user types in the nameField.
        */
+      @Override
       public void onKeyUp(KeyUpEvent event) {
 
         if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
@@ -208,6 +210,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
           /**
            * {@inheritDoc}
            */
+          @Override
           public void onFailure(Throwable failure, boolean complete) {
 
             // Show the RPC error message to the user
@@ -221,6 +224,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
           /**
            * {@inheritDoc}
            */
+          @Override
           public void onSuccess(String result, boolean complete) {
 
             dialogBox.setText("Remote Procedure Call");

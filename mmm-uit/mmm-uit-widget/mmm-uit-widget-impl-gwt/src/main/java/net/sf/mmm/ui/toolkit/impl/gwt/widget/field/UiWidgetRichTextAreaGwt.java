@@ -4,21 +4,17 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRichTextArea;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.RichTextArea;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetRichTextArea;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtRichTextArea;
 
 /**
- * This is the implementation of {@link UiWidgetRichTextArea} using GWT based on {@link RichTextArea}.
+ * This is the implementation of {@link UiWidgetRichTextArea} using GWT based on
+ * {@link UiWidgetAdapterGwtRichTextArea}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetRichTextAreaGwt extends UiWidgetFieldGwtFocusWidget<String, RichTextArea> implements
-    UiWidgetRichTextArea {
-
-  /** @see #getHeightInTextLines() */
-  private int heightInTextLines;
+public class UiWidgetRichTextAreaGwt extends AbstractUiWidgetRichTextArea<UiWidgetAdapterGwtRichTextArea<String>> {
 
   /**
    * The constructor.
@@ -32,73 +28,9 @@ public class UiWidgetRichTextAreaGwt extends UiWidgetFieldGwtFocusWidget<String,
    * {@inheritDoc}
    */
   @Override
-  protected RichTextArea createWidget() {
+  protected UiWidgetAdapterGwtRichTextArea<String> createWidgetAdapter() {
 
-    return new RichTextArea();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getValueOrException() throws RuntimeException {
-
-    return getWidget().getHTML();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void registerChangeHandler(ChangeHandler handler) {
-
-    // getWidget().add
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetValue(String value) {
-
-    getWidget().setHTML(value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getMaximumTextLength() {
-
-    return Integer.MAX_VALUE;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setMaximumTextLength(int length) {
-
-    // not supported...
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getHeightInTextLines() {
-
-    return this.heightInTextLines;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInTextLines(int lines) {
-
-    this.heightInTextLines = lines;
-    getWidget().setHeight(lines + "em");
+    return new UiWidgetAdapterGwtRichTextArea<String>();
   }
 
   /**
@@ -117,6 +49,7 @@ public class UiWidgetRichTextAreaGwt extends UiWidgetFieldGwtFocusWidget<String,
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetRichTextArea create() {
 
       return new UiWidgetRichTextAreaGwt();

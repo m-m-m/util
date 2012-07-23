@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.api.common;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteAltText;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteOnlySizeInPixel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStyles;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteUrl;
@@ -15,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteUrl;
  * @since 1.0.0
  */
 public abstract interface AbstractImage extends AttributeWriteUrl, AttributeWriteAltText, AttributeWriteStyles,
-    AttributeReadHtmlId, AttributeWriteSize {
+    AttributeReadHtmlId, AttributeWriteSize, AttributeWriteOnlySizeInPixel {
 
   // nothing to add
 

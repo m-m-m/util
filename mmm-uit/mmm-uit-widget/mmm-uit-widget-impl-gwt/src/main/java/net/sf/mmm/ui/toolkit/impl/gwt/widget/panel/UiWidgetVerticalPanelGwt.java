@@ -2,10 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.panel;
 
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.VerticalPanel;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtVerticalPanel;
 
 /**
  * This is the implementation of {@link UiWidgetVerticalPanel} using GWT.
@@ -13,7 +14,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetVerticalPanelGwt extends UiWidgetPanelGwt<VerticalPanel> implements UiWidgetVerticalPanel {
+public class UiWidgetVerticalPanelGwt extends
+    AbstractUiWidgetDynamicComposite<UiWidgetAdapterGwtVerticalPanel, UiWidgetRegular> implements UiWidgetVerticalPanel {
 
   /**
    * The constructor.
@@ -27,9 +29,9 @@ public class UiWidgetVerticalPanelGwt extends UiWidgetPanelGwt<VerticalPanel> im
    * {@inheritDoc}
    */
   @Override
-  protected VerticalPanel createWidget() {
+  protected UiWidgetAdapterGwtVerticalPanel createWidgetAdapter() {
 
-    return new VerticalPanel();
+    return new UiWidgetAdapterGwtVerticalPanel();
   }
 
   /**

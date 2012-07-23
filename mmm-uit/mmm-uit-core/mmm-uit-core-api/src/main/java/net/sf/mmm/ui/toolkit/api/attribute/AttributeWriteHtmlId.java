@@ -18,8 +18,8 @@ public abstract interface AttributeWriteHtmlId extends AttributeReadHtmlId, Attr
    * <b>ATTENTION:</b><br>
    * See javadoc of {@link #getId()} for the syntax constraints of IDs.
    * 
-   * @param newId is the new identifier for the object.
+   * @param id is the new {@link #getId() ID} for the object.
    */
-  void setId(String newId);
+  void setId(String id);
 
 }

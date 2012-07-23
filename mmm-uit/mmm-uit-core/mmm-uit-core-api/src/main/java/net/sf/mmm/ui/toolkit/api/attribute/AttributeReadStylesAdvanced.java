@@ -3,12 +3,13 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives advanced read access to the {@link #getStyles() style(s)} of an object.
+ * This interface gives {@link #hasStyle(String) advanced} read access to the {@link #getStyles() style(s)} of
+ * an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeReadStylesAdvanced extends AttributeReadStyles {
+public abstract interface AttributeReadStylesAdvanced extends AttributeReadStyles, AttributeReadPrimaryStyle {
 
   /**
    * This method checks if the given <code>style</code> is contained in the {@link #getStyles() set of styles}

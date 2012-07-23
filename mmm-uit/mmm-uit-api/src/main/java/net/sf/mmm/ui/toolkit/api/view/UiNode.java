@@ -7,12 +7,12 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabledState;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisible;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisibleState;
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.event.UiEventSender;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the abstract interface of all view {@link UiObject objects} of the UI. Such objects are called
@@ -22,7 +22,7 @@ import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;
  * @since 1.0.0
  */
 public interface UiNode extends UiObject, AttributeWriteHtmlId, AttributeWriteStylesAdvanced, AttributeReadVisible,
-    AttributeReadVisibleState, AttributeReadEnabled, AttributeReadEnabledState, UiWriteDisposed, UiEventSender {
+    AttributeReadVisibleState, AttributeReadEnabled, AttributeReadEnabledState, AttributeWriteDisposed, UiEventSender {
 
   /**
    * This method gets the parent component.

@@ -2,16 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget.menu;
 
-import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetAtomic;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidget widget} that represents a <em>menu item</em>. A menu item is an
- * entry that can be added to a {@link UiWidgetMenu}.
+ * This is the interface for an {@link UiWidgetAtomic atomic widget} that represents a <em>menu item</em>. A
+ * menu item is an entry that can be added to a {@link UiWidgetMenu}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetMenuItem extends UiWidget {
+public abstract interface UiWidgetMenuItem extends UiWidgetAtomic, AttributeWriteLabel, UiWidgetReal {
 
   // nothing to add
 

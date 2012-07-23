@@ -28,7 +28,7 @@ public class UITestRunner3 {
     System.out.println(factory.getDisplay());
     final UiWorkbench workbench = factory.getOrCreateWorkbench();
     UIDemoBuilder.createMenus(workbench);
-    workbench.setSize(800, 1024);
+    workbench.setSizeInPixel(800, 1024);
     workbench.setVisible(true);
     UiSimplePanel panel2 = factory.createSimplePanel(Orientation.VERTICAL);
     UiButton button2 = factory.createButton("Button");
@@ -50,7 +50,7 @@ public class UITestRunner3 {
     panel.addChild(button);
     frame.setComposite(panel);
     UIDemoBuilder.createMenus(frame);
-    frame.setSize(500, 300);
+    frame.setSizeInPixel(500, 300);
     frame.centerWindow();
     frame.setVisible(true);
     while (workbench.isVisible()) {

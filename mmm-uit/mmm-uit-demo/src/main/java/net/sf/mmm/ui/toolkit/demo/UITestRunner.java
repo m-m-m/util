@@ -122,7 +122,7 @@ public class UITestRunner {
     listModel.addElement("a");
     listModel.addElement("test");
 
-    frame.setSize(500, 300);
+    frame.setSizeInPixel(500, 300);
     frame.centerWindow();
     frame.setVisible(true);
 

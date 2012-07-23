@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.ui.toolkit.api.common.Filling;
 import net.sf.mmm.ui.toolkit.api.common.Insets;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
@@ -349,13 +349,13 @@ public abstract class AbstractLayoutManager {
    * @param constraintsSize is the {@link LayoutConstraints#size} that may override width/height.
    * @param componentSize is the size of the component. It will be manipulated as necessary.
    */
-  public static void overrideSize(AttributeReadSize constraintsSize, Size componentSize) {
+  public static void overrideSize(AttributeReadSizeInPixel constraintsSize, Size componentSize) {
 
-    int w = constraintsSize.getWidth();
+    int w = constraintsSize.getWidthInPixel();
     if (w > 0) {
       componentSize.width = w;
     }
-    int h = constraintsSize.getHeight();
+    int h = constraintsSize.getHeightInPixel();
     if (h > 0) {
       componentSize.height = h;
     }

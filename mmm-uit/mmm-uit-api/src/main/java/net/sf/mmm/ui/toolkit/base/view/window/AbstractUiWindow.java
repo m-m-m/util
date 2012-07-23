@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
@@ -47,7 +47,7 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * 
    * @return read-access to the size of the desktop.
    */
-  protected AttributeReadSize getDesktopSize() {
+  protected AttributeReadSizeInPixel getDesktopSize() {
 
     return getFactory().getDisplay();
   }
@@ -58,9 +58,9 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
   @Override
   public void centerWindow() {
 
-    AttributeReadSize desktop = getDesktopSize();
-    int xDiff = desktop.getWidth() - getWidth();
-    int yDiff = desktop.getHeight() - getHeight();
+    AttributeReadSizeInPixel desktop = getDesktopSize();
+    int xDiff = desktop.getWidthInPixel() - getWidthInPixel();
+    int yDiff = desktop.getHeightInPixel() - getHeightInPixel();
     if (xDiff < 0) {
       xDiff = 0;
     }
@@ -112,9 +112,9 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * {@inheritDoc}
    */
   @Override
-  public void setSize(int width, int height) {
+  public void setSizeInPixel(int width, int height) {
 
-    getAdapter().setSize(width, height);
+    getAdapter().setSizeInPixel(width, height);
   }
 
   /**
@@ -148,18 +148,18 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * {@inheritDoc}
    */
   @Override
-  public int getWidth() {
+  public int getWidthInPixel() {
 
-    return getAdapter().getWidth();
+    return getAdapter().getWidthInPixel();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int getHeight() {
+  public int getHeightInPixel() {
 
-    return getAdapter().getHeight();
+    return getAdapter().getHeightInPixel();
   }
 
   /**

@@ -6,10 +6,10 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetDynamicCompositeGwt;
+import net.sf.mmm.ui.toolkit.base.widget.panel.AbstractUiWidgetTabPanel;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTabLayoutPanel;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetTabGwt;
 
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 /**
@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTabPanelGwt extends UiWidgetDynamicCompositeGwt<TabLayoutPanel, UiWidgetTab> implements
+public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapterGwtTabLayoutPanel> implements
     UiWidgetTabPanel {
 
   /**
@@ -33,69 +33,22 @@ public class UiWidgetTabPanelGwt extends UiWidgetDynamicCompositeGwt<TabLayoutPa
    * {@inheritDoc}
    */
   @Override
-  protected TabLayoutPanel createWidget() {
+  protected UiWidgetAdapterGwtTabLayoutPanel createWidgetAdapter() {
 
-    return new TabLayoutPanel(1.5, Unit.EM);
+    return new UiWidgetAdapterGwtTabLayoutPanel();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void showChild(int index) {
-
-    getWidget().selectTab(index);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean showChild(UiWidgetTab child) {
-
-    int index = getChildIndex(child);
-    if (index >= 0) {
-      getWidget().selectTab(index);
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetTab addChild(UiWidgetRegular child, String title) {
+  public UiWidgetTab addChild(UiWidgetRegular child, String label) {
 
     UiWidgetTabGwt tab = new UiWidgetTabGwt();
-    tab.setTitle(title);
+    tab.setLabel(label);
     tab.setChild(child);
     addChild(tab);
     return tab;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doAddChild(UiWidgetTab child, int index) {
-
-    super.doAddChild(child, index);
-    UiWidgetTabGwt tab = (UiWidgetTabGwt) child;
-    if (index == -1) {
-      getWidget().add(tab.getContentPanel(), tab.getWidget());
-    } else {
-      getWidget().insert(tab.getContentPanel(), tab.getWidget(), index);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetEnabled(boolean newEnabled) {
-
-    // getWidget().getTabBar().setTabEnabled(index, this.enabled);
   }
 
   /**

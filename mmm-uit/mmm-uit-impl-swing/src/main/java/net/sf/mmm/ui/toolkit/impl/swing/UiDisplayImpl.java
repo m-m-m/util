@@ -39,7 +39,7 @@ public class UiDisplayImpl extends AbstractUiDisplay {
   /**
    * {@inheritDoc}
    */
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     return this.gc.getBounds().width;
   }
@@ -47,7 +47,7 @@ public class UiDisplayImpl extends AbstractUiDisplay {
   /**
    * {@inheritDoc}
    */
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     return this.gc.getBounds().height;
   }

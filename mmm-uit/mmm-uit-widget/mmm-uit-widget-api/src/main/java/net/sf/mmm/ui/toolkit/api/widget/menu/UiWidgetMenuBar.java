@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.widget.menu;
 
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetDynamicComposite;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularComposite;
 
 /**
@@ -10,13 +11,17 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularComposite;
  * <em>menu bar</em>. It is {@link #getChild(int) contains} {@link UiWidgetMenu menus} that are displayed by
  * their title in the menu bar.<br/>
  * <b>ATTENTION:</b><br/>
- * A {@link UiWidgetMenuBar} is NOT created via {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory}. It
- * can be retrieved via {@link net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow#getMenuBar()}.
+ * A {@link UiWidgetMenuBar} should typically be created via
+ * {@link net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow#getMenuBar()}. For portability and
+ * usability you should avoid creating it manually via
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory}. However, if you are using GWT with GWTP it might
+ * make sense to do so.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetMenuBar extends UiWidgetDynamicComposite<UiWidgetMenu>, UiWidgetRegularComposite<UiWidgetMenu> {
+public interface UiWidgetMenuBar extends UiWidgetDynamicComposite<UiWidgetMenu>,
+    UiWidgetRegularComposite<UiWidgetMenu>, UiWidgetReal {
 
   // nothing to add
 

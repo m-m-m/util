@@ -39,6 +39,9 @@ public class KeyboardFilterAdapter implements KeyPressHandler, AttributeWriteKey
   @Override
   public void onKeyPress(KeyPressEvent event) {
 
+    if (this.keyboardFilter == null) {
+      return;
+    }
     char key = event.getCharCode();
     if (isControlKey(key)) {
       // never cancel control keys...
@@ -65,6 +68,7 @@ public class KeyboardFilterAdapter implements KeyPressHandler, AttributeWriteKey
   /**
    * {@inheritDoc}
    */
+  @Override
   public CharFilter getKeyboardFilter() {
 
     return this.keyboardFilter;
@@ -73,6 +77,7 @@ public class KeyboardFilterAdapter implements KeyPressHandler, AttributeWriteKey
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setKeyboardFilter(CharFilter keyboardFilter) {
 
     this.keyboardFilter = keyboardFilter;
@@ -100,6 +105,14 @@ public class KeyboardFilterAdapter implements KeyPressHandler, AttributeWriteKey
       this.handlerRegistration = null;
     }
     this.keyboardFilter = null;
+  }
+
+  /**
+   * @return <code>true</code> if never {@link #add(HasKeyPressHandlers) added} or {@link #remove() removed}.
+   */
+  public boolean isRemoved() {
+
+    return (this.handlerRegistration == null);
   }
 
 }

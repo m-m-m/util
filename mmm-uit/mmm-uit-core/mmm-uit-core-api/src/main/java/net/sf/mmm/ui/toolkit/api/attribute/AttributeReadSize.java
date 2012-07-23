@@ -11,17 +11,17 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeReadSize {
 
   /**
-   * This method gets the width of this object in pixels.
+   * This method gets the width of this object (e.g. "0.9em", "10px", or "90%").
    * 
-   * @return the width.
+   * @return the width or <code>null</code> if undefined (NOT set).
    */
-  int getWidth();
+  String getWidth();
 
   /**
-   * This method gets the height of this object in pixels.
+   * This method gets the height of this object (e.g. "0.9em", "10px", or "90%").
    * 
-   * @return the height.
+   * @return the height or <code>null</code> if undefined (NOT set).
    */
-  int getHeight();
+  String getHeight();
 
 }

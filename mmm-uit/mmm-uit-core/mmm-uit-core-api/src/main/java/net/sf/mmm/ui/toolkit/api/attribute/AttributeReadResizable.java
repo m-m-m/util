@@ -15,7 +15,7 @@ public abstract interface AttributeReadResizable {
   /**
    * This method determines if this object is resizable.
    * 
-   * @return <code>true</code> if the object can be {@link AttributeWriteSize#setSize(int, int) resized} (by
+   * @return <code>true</code> if the object can be {@link AttributeWriteSizeInPixel#setSizeInPixel(int, int) resized} (by
    *         the end-user), <code>false</code> otherwise.
    */
   boolean isResizable();

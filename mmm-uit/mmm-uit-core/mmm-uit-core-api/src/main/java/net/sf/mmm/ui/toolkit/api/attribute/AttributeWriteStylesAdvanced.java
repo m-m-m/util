@@ -3,14 +3,16 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives write access to the {@link #setStyles(String) style-name(s)} of an object.
+ * This interface gives {@link #addStyle(String) advanced} read and write access to the {@link #getStyles()
+ * style(s)} of an object.
  * 
  * @see AttributeReadStylesAdvanced
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeWriteStylesAdvanced extends AttributeReadStylesAdvanced, AttributeWriteStyles {
+public abstract interface AttributeWriteStylesAdvanced extends AttributeReadStylesAdvanced, AttributeWriteStyles,
+    AttributeWritePrimaryStyle {
 
   /**
    * This method adds the given <code>style</code> to the {@link #getStyles() styles}.

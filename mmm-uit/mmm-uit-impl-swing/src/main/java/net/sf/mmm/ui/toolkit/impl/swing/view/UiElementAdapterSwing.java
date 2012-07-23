@@ -49,7 +49,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
-  public void setSize(int width, int height) {
+  public void setSizeInPixel(int width, int height) {
 
     getToplevelDelegate().setSize(width, height);
   }
@@ -65,7 +65,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     return getToplevelDelegate().getWidth();
   }
@@ -73,7 +73,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     return getToplevelDelegate().getHeight();
   }

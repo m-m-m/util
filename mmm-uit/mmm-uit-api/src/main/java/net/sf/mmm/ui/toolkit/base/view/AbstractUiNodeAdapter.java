@@ -226,4 +226,24 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
     // nothing to do by default...
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPrimaryStyle(String primaryStyle) {
+
+    // TODO Auto-generated method stub
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getPrimaryStyle() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

@@ -45,7 +45,7 @@ public abstract class AbstractUiDisplay extends AbstractUiObject implements UiDi
   @Override
   public String toString() {
 
-    return getDevice().toString() + "[" + getWidth() + "*" + getHeight() + "]";
+    return getDevice().toString() + "[" + getWidthInPixel() + "*" + getHeightInPixel() + "]";
   }
 
   /**

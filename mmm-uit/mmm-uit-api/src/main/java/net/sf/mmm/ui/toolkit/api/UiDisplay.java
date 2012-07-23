@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.api;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
 
 /**
  * This is the interface for the display where the UI objects are shown.
@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiDisplay extends UiObject, AttributeReadSize {
+public interface UiDisplay extends UiObject, AttributeReadSizeInPixel {
 
   /** the type of this object */
   String TYPE = "Display";

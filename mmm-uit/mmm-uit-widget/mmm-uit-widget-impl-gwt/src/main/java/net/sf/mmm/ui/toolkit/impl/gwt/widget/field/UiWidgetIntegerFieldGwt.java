@@ -4,17 +4,18 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.IntegerBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtIntegerBox;
 
 /**
- * This is the implementation of {@link UiWidgetIntegerField} using GWT based on {@link IntegerBox}.
+ * This is the implementation of {@link UiWidgetIntegerField} using GWT based on
+ * {@link UiWidgetAdapterGwtIntegerBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetIntegerFieldGwt extends UiWidgetInputFieldGwtValueBox<Integer, IntegerBox> implements
-    UiWidgetIntegerField {
+public class UiWidgetIntegerFieldGwt extends
+    AbstractUiWidgetInputField<UiWidgetAdapterGwtIntegerBox<Integer>, Integer, Integer> implements UiWidgetIntegerField {
 
   /**
    * The constructor.
@@ -28,9 +29,9 @@ public class UiWidgetIntegerFieldGwt extends UiWidgetInputFieldGwtValueBox<Integ
    * {@inheritDoc}
    */
   @Override
-  protected IntegerBox createWidget() {
+  protected UiWidgetAdapterGwtIntegerBox<Integer> createWidgetAdapter() {
 
-    return new IntegerBox();
+    return new UiWidgetAdapterGwtIntegerBox<Integer>();
   }
 
   /**
@@ -49,6 +50,7 @@ public class UiWidgetIntegerFieldGwt extends UiWidgetInputFieldGwtValueBox<Integ
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetIntegerField create() {
 
       return new UiWidgetIntegerFieldGwt();

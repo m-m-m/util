@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.common;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.util.lang.api.Alignment;
 import net.sf.mmm.util.lang.api.Orientation;
 
@@ -18,13 +18,13 @@ public class LayoutConstraints {
   /**
    * This inner class is a dummy that does not override the size.
    */
-  private static class DummySize implements AttributeReadSize {
+  private static class DummySize implements AttributeReadSizeInPixel {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getHeight() {
+    public int getHeightInPixel() {
 
       return 0;
     }
@@ -33,7 +33,7 @@ public class LayoutConstraints {
      * {@inheritDoc}
      */
     @Override
-    public int getWidth() {
+    public int getWidthInPixel() {
 
       return 0;
     }
@@ -41,7 +41,7 @@ public class LayoutConstraints {
   }
 
   /** the dummy for no size override */
-  private static final AttributeReadSize NO_SIZE = new DummySize();
+  private static final AttributeReadSizeInPixel NO_SIZE = new DummySize();
 
   /**
    * The default layout constraints:<br>
@@ -154,14 +154,14 @@ public class LayoutConstraints {
   /**
    * The weight is a value in the range of [0,1] (0<=weight<=1). Typical values are -1, 0 and 1.<br>
    * If 0, the component will be sized as preferred by the component's
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}.<br>
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel size}.<br>
    * If the weight is positive, the component will be scaled according to the avaliable size and in proportion
    * to the weight. The width (if {@link Orientation#HORIZONTAL horizontal} layout) or height (if
    * {@link Orientation#VERTICAL vertical} layout) proportional to the given weight (absolute) and the size
    * available for this panel. <br>
    * If the weight is negative, the behaviour is like <code>-weight</code>, but only the space for the
    * component is sized and the component itself is sized as its
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}. The alignment is used to place the
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel size}. The alignment is used to place the
    * component inside the sized space.
    */
   public final double weight;
@@ -172,11 +172,11 @@ public class LayoutConstraints {
   public final Insets insets;
 
   /**
-   * The size used to override default size. If {@link AttributeReadSize#getWidth() width} or
-   * {@link AttributeReadSize#getHeight() height} is greater than <code>0</code>, it overrides the size-value
+   * The size used to override default size. If {@link AttributeReadSizeInPixel#getWidthInPixel() width} or
+   * {@link AttributeReadSizeInPixel#getHeightInPixel() height} is greater than <code>0</code>, it overrides the size-value
    * of the associated {@link net.sf.mmm.ui.toolkit.api.view.UiElement component}.
    */
-  public final AttributeReadSize size;
+  public final AttributeReadSizeInPixel size;
 
   /**
    * The constructor.<br>
@@ -256,7 +256,7 @@ public class LayoutConstraints {
    * @param border are the {@link #insets}
    * @param overrideSize is the {@link #size}.
    */
-  public LayoutConstraints(Alignment align, Filling fill, double w, Insets border, AttributeReadSize overrideSize) {
+  public LayoutConstraints(Alignment align, Filling fill, double w, Insets border, AttributeReadSizeInPixel overrideSize) {
 
     super();
     this.alignment = align;

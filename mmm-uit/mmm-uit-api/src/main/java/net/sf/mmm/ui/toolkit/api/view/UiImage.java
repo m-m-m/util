@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.api.view;
 
 import net.sf.mmm.ui.toolkit.api.UiObject;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadPreferredSize;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
 
 /**
  * This is the interface for an image in the UI toolkit. Think of it as a regular picture-file (jpg, png, gif,
@@ -13,13 +13,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
  * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiWidget}. To add it to the UI, use
  * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel#setImage(UiImage)}.<br/>
  * The {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadPreferredSize preferred-size} is the physical
- * size of the image. The regular {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size} is
+ * size of the image. The regular {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel size} is
  * initialized with the preferred size but may be changed to scale the image.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiImage extends UiObject, AttributeWriteSize, AttributeReadPreferredSize {
+public interface UiImage extends UiObject, AttributeWriteSizeInPixel, AttributeReadPreferredSize {
 
   /** the type of this object */
   String TYPE = "Picture";

@@ -83,7 +83,7 @@ public class UiDisplayImpl extends AbstractUiDisplay {
   /**
    * {@inheritDoc}
    */
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     invokeSynchron(this.sizeGetter);
     return this.sizeGetter.size.width;
@@ -92,7 +92,7 @@ public class UiDisplayImpl extends AbstractUiDisplay {
   /**
    * {@inheritDoc}
    */
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     invokeSynchron(this.sizeGetter);
     return this.sizeGetter.size.height;

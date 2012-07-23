@@ -4,8 +4,8 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRadioButtons;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtCellPanelRadiosHorizontal;
 
 /**
  * This is the implementation of {@link UiWidgetRadioButtons} using GWT.
@@ -14,7 +14,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public class UiWidgetRadioButtonsGwt<VALUE> extends UiWidgetRadioButtonsGwtBase<VALUE, HorizontalPanel> implements
+public class UiWidgetRadioButtonsGwt<VALUE> extends
+    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE>, VALUE> implements
     UiWidgetRadioButtons<VALUE> {
 
   /**
@@ -29,9 +30,9 @@ public class UiWidgetRadioButtonsGwt<VALUE> extends UiWidgetRadioButtonsGwtBase<
    * {@inheritDoc}
    */
   @Override
-  protected HorizontalPanel createWidget() {
+  protected UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE> createWidgetAdapter() {
 
-    return new HorizontalPanel();
+    return new UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE>();
   }
 
   /**
@@ -51,6 +52,7 @@ public class UiWidgetRadioButtonsGwt<VALUE> extends UiWidgetRadioButtonsGwtBase<
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetRadioButtons create() {
 
       return new UiWidgetRadioButtonsGwt();

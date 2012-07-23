@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.Button;
+import net.sf.mmm.ui.toolkit.base.widget.core.AbstractUiWidgetButton;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtButton;
 
 /**
  * This is the implementation of {@link UiWidgetButton} using GWT.
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Button;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implements UiWidgetButton {
+public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwtButton> {
 
   /** @see #getImage() */
   private UiWidgetImageGwt image;
@@ -32,27 +32,9 @@ public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implem
    * {@inheritDoc}
    */
   @Override
-  protected Button createWidget() {
+  protected UiWidgetAdapterGwtButton createWidgetAdapter() {
 
-    return new Button();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setLabel(String label) {
-
-    getWidget().setText(label);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLabel() {
-
-    return getWidget().getText();
+    return new UiWidgetAdapterGwtButton();
   }
 
   /**
@@ -62,24 +44,6 @@ public class UiWidgetButtonGwt extends UiWidgetAtomicClickableGwt<Button> implem
   public UiWidgetImage getImage() {
 
     return this.image;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setImage(UiWidgetImage image) {
-
-    if (this.image == image) {
-      return;
-    }
-    if (this.image != null) {
-      getWidget().getElement().removeChild(this.image.getWidget().getElement());
-    }
-    this.image = (UiWidgetImageGwt) image;
-    if (this.image != null) {
-      getWidget().getElement().insertFirst(this.image.getWidget().getElement());
-    }
   }
 
   /**

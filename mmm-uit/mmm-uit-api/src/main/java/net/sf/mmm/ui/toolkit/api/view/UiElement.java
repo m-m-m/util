@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.view;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 
@@ -16,6 +16,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
  * @since 1.0.0
  */
 public interface UiElement extends UiNode, AttributeWriteVisible, AttributeWriteTooltip, AttributeWriteEnabled,
-    AttributeWriteSize {
+    AttributeWriteSizeInPixel {
 
 }

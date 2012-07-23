@@ -4,16 +4,17 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextArea;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.TextArea;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextArea;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTextArea;
 
 /**
- * This is the implementation of {@link UiWidgetTextArea} using GWT based on {@link TextArea}.
+ * This is the implementation of {@link UiWidgetTextArea} using GWT based on
+ * {@link UiWidgetAdapterGwtTextArea}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTextAreaGwt extends UiWidgetInputFieldGwt<String, TextArea> implements UiWidgetTextArea {
+public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapterGwtTextArea<String>> {
 
   /**
    * The constructor.
@@ -27,36 +28,9 @@ public class UiWidgetTextAreaGwt extends UiWidgetInputFieldGwt<String, TextArea>
    * {@inheritDoc}
    */
   @Override
-  protected TextArea createWidget() {
+  protected UiWidgetAdapterGwtTextArea<String> createWidgetAdapter() {
 
-    return new TextArea();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetMaximumTextLength(int length) {
-
-    getWidget().getElement().setAttribute("maxlength", Integer.toString(length));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getHeightInTextLines() {
-
-    return getWidget().getVisibleLines();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInTextLines(int lines) {
-
-    getWidget().setVisibleLines(lines);
+    return new UiWidgetAdapterGwtTextArea<String>();
   }
 
   /**
@@ -75,6 +49,7 @@ public class UiWidgetTextAreaGwt extends UiWidgetInputFieldGwt<String, TextArea>
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetTextArea create() {
 
       return new UiWidgetTextAreaGwt();

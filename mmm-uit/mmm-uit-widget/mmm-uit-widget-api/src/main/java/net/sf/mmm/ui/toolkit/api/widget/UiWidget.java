@@ -4,9 +4,12 @@ package net.sf.mmm.ui.toolkit.api.widget;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStyles;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteOnlySizeInPixel;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the interface for an adapter to a physical <em>widget</em> (or potentially a composition of such
@@ -16,6 +19,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
  * Real {@link UiWidget}s can be {@link UiWidgetFactory#create(Class) created} via the {@link UiWidgetFactory}
  * so by choosing the implementation of {@link UiWidgetFactory} (via an IoC container framework like spring or
  * GIN) you can decide which native toolkit you like to use.<br/>
+ * If you want to make your UI code portable even for toolkits such as SWT, you need to make proper use of
+ * {@link #dispose()} for all {@link UiWidget} that are no longer needed.<br/>
  * <b>ATTENTION:</b><br/>
  * A {@link UiWidget} can only be used once in a client application. Even if you want to have the exact same
  * button twice on the screen you need to create two distinct instances. <br/>
@@ -26,7 +31,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
  * @since 1.0.0
  */
 public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeWriteVisible, AttributeWriteTooltip,
-    AttributeWriteEnabled, AttributeWriteStyles {
+    AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
+    AttributeWriteOnlySizeInPixel {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

@@ -10,9 +10,9 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 /**
  * This is the interface for a {@link UiWidgetPanel panel widget} that represents a <code>tab panel</code>. It
  * contains a number of {@link #getChild(int) children} but only shows one of them at a time. On the top it
- * shows a tab header with the {@link UiWidgetTab#getTitle() titles} of its {@link #getChild(int)
- * children}. The user can click on one of these tabs in order to see the actual
- * {@link UiWidgetTab#getChild() content} of the according tab.<br/>
+ * shows a tab header with the {@link UiWidgetTab#getLabel() labels} of its {@link #getChild(int) children}.
+ * The user can click on one of these tabs in order to see the actual {@link UiWidgetTab#getChild() content}
+ * of the according tab.<br/>
  * This design might look a little complicated but gives a lot more flexibility for setting and changing
  * attributes of the {@link UiWidgetTab tab}. For convenience usage there is also
  * {@link #addChild(UiWidgetRegular, String)}.
@@ -20,8 +20,8 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>,
-    UiWidgetSwitchComposite<UiWidgetTab>, UiWidgetReal {
+public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>, UiWidgetSwitchComposite<UiWidgetTab>,
+    UiWidgetReal {
 
   /**
    * This method adds the given {@link UiWidgetRegular} as new tab on the right of all existing tabs. This is
@@ -36,10 +36,10 @@ public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>,
    * 
    * @param child is the {@link UiWidgetRegular child widget} to add. The given component instance must be
    *        created by the same factory.
-   * @param title is the title that will be displayed in the tab.
-   * @return the {@link UiWidgetTab} for this tab. It allows to change the title, set tooltip or image
-   *         (icon), etc.
+   * @param label is the label that will be displayed to identify the tab.
+   * @return the {@link UiWidgetTab} for this tab. It allows to change the title, set tooltip or image (icon),
+   *         etc.
    */
-  UiWidgetTab addChild(UiWidgetRegular child, String title);
+  UiWidgetTab addChild(UiWidgetRegular child, String label);
 
 }

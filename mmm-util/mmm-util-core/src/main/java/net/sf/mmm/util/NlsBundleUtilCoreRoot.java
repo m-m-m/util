@@ -1442,4 +1442,14 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   Type source, @Named("target")
   Type target);
 
+  /**
+   * @see net.sf.mmm.util.nls.api.ObjectDisposedException
+   * 
+   * @param object is the disposed object.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The object \"{object}\" has already been disposed!")
+  NlsMessage errorObjectDisposed(@Named("object")
+  Object object);
+
 }

@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
-import net.sf.mmm.ui.toolkit.api.attribute.UiWriteDisposed;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
 import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
@@ -36,6 +35,7 @@ import net.sf.mmm.ui.toolkit.api.view.widget.UiTree;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWorkbench;
 import net.sf.mmm.util.lang.api.Orientation;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the interface for the user interface (UI) factory. It is used to create {@link UiObject} to build
@@ -46,7 +46,7 @@ import net.sf.mmm.util.lang.api.Orientation;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFactory extends UiWriteDisposed {
+public interface UiFactory extends AttributeWriteDisposed {
 
   /**
    * This method gets the locale currently applied to this factory. The locale contains the language and
@@ -143,7 +143,7 @@ public interface UiFactory extends UiWriteDisposed {
    * 
    * @param title is the title for the frame to create.
    * @param resizable - if <code>true</code> the frame will be
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize#isResizable() resizable}
+   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel#isResizable() resizable}
    * @return the created frame.
    */
   UiFrame createFrame(String title, boolean resizable);

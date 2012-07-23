@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.widget.window;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteResizable;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
@@ -19,11 +19,11 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @since 1.0.0
  */
 public abstract interface UiWidgetBaseWindow extends UiWidgetDynamicComposite<UiWidgetRegular>,
-    AttributeWriteTitle<String>, AttributeWriteSize, AttributeWriteResizable {
+    AttributeWriteTitle<String>, AttributeWriteSizeInPixel, AttributeWriteResizable {
 
   /**
    * This method sets the position of the window, so that it is in the center of the screen. You should set
-   * the {@link #setSize(int, int) size} before invoking this method.
+   * the {@link #setSizeInPixel(int, int) size} before invoking this method.
    */
   void centerWindow();
 

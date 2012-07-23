@@ -366,7 +366,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
-  public void setSize(int width, int height) {
+  public void setSizeInPixel(int width, int height) {
 
     if (this.size == null) {
       this.size = new Point(width, height);
@@ -385,7 +385,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   public void setSize(Point newSize) {
 
     if (newSize != null) {
-      setSize(newSize.x, newSize.y);
+      setSizeInPixel(newSize.x, newSize.y);
     }
   }
 
@@ -400,7 +400,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     return getSize().y;
   }
@@ -408,7 +408,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     return getSize().x;
   }

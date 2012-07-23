@@ -31,7 +31,7 @@ public abstract class AbstractAttributeReadId<T> implements AttributeReadId<T> {
 
     T id = getId();
     if (id == null) {
-      return 0;
+      return super.hashCode();
     } else {
       return id.hashCode();
     }
@@ -50,7 +50,6 @@ public abstract class AbstractAttributeReadId<T> implements AttributeReadId<T> {
       return true;
     }
     if (getClass() == object.getClass()) {
-
       T myId = getId();
       if (myId != null) {
         Object otherId = ((AttributeReadId<?>) object).getId();
@@ -68,7 +67,11 @@ public abstract class AbstractAttributeReadId<T> implements AttributeReadId<T> {
   @Override
   public String toString() {
 
-    return getClass().getSimpleName() + " [" + getId() + "]";
+    T id = getId();
+    if (id == null) {
+      return getClass().getSimpleName();
+    }
+    return getClass().getSimpleName() + " [" + id + "]";
   }
 
 }

@@ -31,7 +31,7 @@ public class UITestRunner2 {
     final UiFrame frame = factory.createFrame("MyApplication", true);
     frame.setComposite(UIDemoBuilder.createTabbedPanel(factory));
     UIDemoBuilder.createMenus(frame);
-    frame.setSize(600, 500);
+    frame.setSizeInPixel(600, 500);
     frame.centerWindow();
     frame.setVisible(true);
     // while (workbench.isVisible()) {

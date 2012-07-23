@@ -4,16 +4,18 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetPasswordField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.PasswordTextBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtPasswordTextBox;
 
 /**
- * This is the implementation of {@link UiWidgetPasswordField} using GWT based on {@link PasswordTextBox}.
+ * This is the implementation of {@link UiWidgetPasswordField} using GWT based on
+ * {@link UiWidgetAdapterGwtPasswordTextBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetPasswordFieldGwt extends UiWidgetInputFieldGwtTextBox<PasswordTextBox> implements
+public class UiWidgetPasswordFieldGwt extends
+    AbstractUiWidgetInputField<UiWidgetAdapterGwtPasswordTextBox<String>, String, String> implements
     UiWidgetPasswordField {
 
   /**
@@ -28,9 +30,9 @@ public class UiWidgetPasswordFieldGwt extends UiWidgetInputFieldGwtTextBox<Passw
    * {@inheritDoc}
    */
   @Override
-  protected PasswordTextBox createWidget() {
+  protected UiWidgetAdapterGwtPasswordTextBox<String> createWidgetAdapter() {
 
-    return new PasswordTextBox();
+    return new UiWidgetAdapterGwtPasswordTextBox<String>();
   }
 
   /**
@@ -49,6 +51,7 @@ public class UiWidgetPasswordFieldGwt extends UiWidgetInputFieldGwtTextBox<Passw
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetPasswordField create() {
 
       return new UiWidgetPasswordFieldGwt();

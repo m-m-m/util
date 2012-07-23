@@ -4,16 +4,17 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.TextBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTextBox;
 
 /**
- * This is the implementation of {@link UiWidgetTextField} using GWT based on {@link TextBox}.
+ * This is the implementation of {@link UiWidgetTextField} using GWT based on
+ * {@link UiWidgetAdapterGwtTextBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTextFieldGwt extends UiWidgetInputFieldGwtTextBox<TextBox> implements UiWidgetTextField {
+public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdapterGwtTextBox<String>> {
 
   /**
    * The constructor.
@@ -27,9 +28,9 @@ public class UiWidgetTextFieldGwt extends UiWidgetInputFieldGwtTextBox<TextBox> 
    * {@inheritDoc}
    */
   @Override
-  protected TextBox createWidget() {
+  protected UiWidgetAdapterGwtTextBox<String> createWidgetAdapter() {
 
-    return new TextBox();
+    return new UiWidgetAdapterGwtTextBox<String>();
   }
 
   /**
@@ -48,6 +49,7 @@ public class UiWidgetTextFieldGwt extends UiWidgetInputFieldGwtTextBox<TextBox> 
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetTextField create() {
 
       return new UiWidgetTextFieldGwt();

@@ -84,7 +84,7 @@ public class UiWorkbenchImpl extends UiFrameImpl implements UiWorkbench {
 
     if (this.contentPane == null) {
       this.contentPane = new JPanel(new GridLayout(1, 1));
-      this.contentPane.setSize(getWidth(), getHeight());
+      this.contentPane.setSize(getWidthInPixel(), getHeightInPixel());
       this.workbench.add(this.contentPane);
       this.workbench.addComponentListener(new ResizeListener());
     } else if (this.contentPane.getComponentCount() > 0) {
@@ -125,7 +125,7 @@ public class UiWorkbenchImpl extends UiFrameImpl implements UiWorkbench {
      */
     public void componentResized(ComponentEvent e) {
 
-      UiWorkbenchImpl.this.contentPane.setSize(getWidth(), getHeight());
+      UiWorkbenchImpl.this.contentPane.setSize(getWidthInPixel(), getHeightInPixel());
     }
 
     /**

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 
 /**
@@ -13,6 +13,6 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public interface UiElementAdapter<DELEGATE> extends UiNodeAdapter<DELEGATE>, AttributeWriteTooltip, AttributeWriteSize {
+public interface UiElementAdapter<DELEGATE> extends UiNodeAdapter<DELEGATE>, AttributeWriteTooltip, AttributeWriteSizeInPixel {
 
 }

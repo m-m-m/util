@@ -83,7 +83,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
-  public void setSize(int width, int height) {
+  public void setSizeInPixel(int width, int height) {
 
     getDelegate().setSize(width, height);
   }
@@ -108,7 +108,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     return getDelegate().getWidth();
   }
@@ -116,7 +116,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     return getDelegate().getHeight();
   }

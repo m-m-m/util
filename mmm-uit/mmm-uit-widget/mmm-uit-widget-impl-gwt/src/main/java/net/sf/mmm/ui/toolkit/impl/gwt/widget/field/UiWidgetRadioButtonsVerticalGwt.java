@@ -4,8 +4,8 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRadioButtonsVertical;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.VerticalPanel;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtCellPanelRadiosVertical;
 
 /**
  * This is the implementation of {@link UiWidgetRadioButtonsVertical} using GWT.
@@ -14,7 +14,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends UiWidgetRadioButtonsGwtBase<VALUE, VerticalPanel> implements
+public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
+    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>, VALUE> implements
     UiWidgetRadioButtonsVertical<VALUE> {
 
   /**
@@ -29,9 +30,9 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends UiWidgetRadioButtons
    * {@inheritDoc}
    */
   @Override
-  protected VerticalPanel createWidget() {
+  protected UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE> createWidgetAdapter() {
 
-    return new VerticalPanel();
+    return new UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>();
   }
 
   /**
@@ -51,6 +52,7 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends UiWidgetRadioButtons
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetRadioButtonsVertical create() {
 
       return new UiWidgetRadioButtonsVerticalGwt();

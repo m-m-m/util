@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.base.AbstractUiObject;
 
 /**
  * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.view.UiImage} interface.<br>
- * Set initial {@link #setSize(int, int) site} in constructor of the implementation.
+ * Set initial {@link #setSizeInPixel(int, int) site} in constructor of the implementation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -44,7 +44,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
    * {@inheritDoc}
    */
   @Override
-  public void setSize(int newWidth, int newHeight) {
+  public void setSizeInPixel(int newWidth, int newHeight) {
 
     this.width = newWidth;
     this.height = newHeight;
@@ -54,7 +54,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
    * {@inheritDoc}
    */
   @Override
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     return this.width;
   }
@@ -63,7 +63,7 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
    * {@inheritDoc}
    */
   @Override
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     return this.height;
   }

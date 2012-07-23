@@ -462,4 +462,24 @@ public abstract class AbstractUiNode<DELEGATE> extends AbstractUiObject implemen
     return getAdapter().removeStyle(style);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPrimaryStyle(String primaryStyle) {
+
+    // TODO Auto-generated method stub
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getPrimaryStyle() {
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

@@ -4,9 +4,8 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetRegularAtomicGwt;
-
-import com.google.gwt.user.client.ui.Label;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetAtomicWithLabel;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtLabel;
 
 /**
  * This is the implementation of {@link UiWidgetLabel} using GWT.
@@ -14,10 +13,7 @@ import com.google.gwt.user.client.ui.Label;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetLabelGwt extends UiWidgetRegularAtomicGwt<Label> implements UiWidgetLabel {
-
-  /** @ee {@link #getLabel()} */
-  private String label;
+public class UiWidgetLabelGwt extends AbstractUiWidgetAtomicWithLabel<UiWidgetAdapterGwtLabel> implements UiWidgetLabel {
 
   /**
    * The constructor.
@@ -31,37 +27,9 @@ public class UiWidgetLabelGwt extends UiWidgetRegularAtomicGwt<Label> implements
    * {@inheritDoc}
    */
   @Override
-  protected Label createWidget() {
+  protected UiWidgetAdapterGwtLabel createWidgetAdapter() {
 
-    return new Label();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetEnabled(boolean newEnabled) {
-
-    // nothing to do/not supported...
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setLabel(String label) {
-
-    this.label = label;
-    getWidget().setText(label);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLabel() {
-
-    return this.label;
+    return new UiWidgetAdapterGwtLabel();
   }
 
   /**

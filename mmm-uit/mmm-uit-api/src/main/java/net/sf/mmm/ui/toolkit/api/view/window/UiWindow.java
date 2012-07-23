@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.api.view.window;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteResizable;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.common.MessageType;
@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWindow extends UiNode, AttributeWriteSize, AttributeWriteStringTitle,
+public abstract interface UiWindow extends UiNode, AttributeWriteSizeInPixel, AttributeWriteStringTitle,
     AttributeWritePosition, AttributeWriteVisible, AttributeWriteResizable {
 
   /**

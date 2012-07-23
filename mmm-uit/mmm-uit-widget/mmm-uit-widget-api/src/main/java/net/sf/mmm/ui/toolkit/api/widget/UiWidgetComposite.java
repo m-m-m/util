@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.widget;
 
 /**
- * This is the interface for an {@link UiWidget} that is a composite.
+ * This is the abstract interface for an {@link UiWidget} that is a composite.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -4,9 +4,8 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetRegularAtomicGwt;
-
-import com.google.gwt.user.client.ui.Image;
+import net.sf.mmm.ui.toolkit.base.widget.core.AbstractUiWidgetImage;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtImage;
 
 /**
  * This is the implementation of {@link UiWidgetImage} using GWT.
@@ -14,19 +13,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetImageGwt extends UiWidgetRegularAtomicGwt<Image> implements UiWidgetImage {
-
-  /** @see #getAltText() */
-  private String altText;
-
-  /** @see #getUrl() */
-  private String url;
-
-  /** @see #getWidth() */
-  private int width;
-
-  /** @see #getHeight() */
-  private int height;
+public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtImage> {
 
   /**
    * The constructor.
@@ -40,85 +27,9 @@ public class UiWidgetImageGwt extends UiWidgetRegularAtomicGwt<Image> implements
    * {@inheritDoc}
    */
   @Override
-  protected Image createWidget() {
+  protected UiWidgetAdapterGwtImage createWidgetAdapter() {
 
-    return new Image();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setUrl(String url) {
-
-    this.url = url;
-    getWidget().setUrl(url);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setAltText(String altText) {
-
-    this.altText = altText;
-    getWidget().setAltText(altText);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(int newWidth, int newHeight) {
-
-    this.width = newWidth;
-    this.height = newHeight;
-    getWidget().setSize(Integer.toString(newWidth), Integer.toString(newHeight));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getWidth() {
-
-    return this.width;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getHeight() {
-
-    return this.height;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getAltText() {
-
-    return this.altText;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getUrl() {
-
-    return this.url;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetEnabled(boolean newEnabled) {
-
-    // nothing to do / not supported
+    return new UiWidgetAdapterGwtImage();
   }
 
   /**

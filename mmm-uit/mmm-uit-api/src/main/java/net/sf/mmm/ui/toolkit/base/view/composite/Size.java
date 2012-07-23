@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
 
 /**
  * This class is a simple container for the size of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement
@@ -34,11 +34,11 @@ public class Size {
   /**
    * The constructor.
    * 
-   * @param size is a {@link AttributeReadSize sized-object} that will be converted to a {@link Size}.
+   * @param size is a {@link AttributeReadSizeInPixel sized-object} that will be converted to a {@link Size}.
    */
-  public Size(AttributeReadSize size) {
+  public Size(AttributeReadSizeInPixel size) {
 
-    this(size.getWidth(), size.getHeight());
+    this(size.getWidthInPixel(), size.getHeightInPixel());
   }
 
   /**

@@ -4,9 +4,9 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.menu;
 
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetDynamicCompositeGwt;
-
-import com.google.gwt.user.client.ui.MenuBar;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenuBar;
 
 /**
  * This is the implementation of {@link UiWidgetMenuBar} using GWT.
@@ -14,7 +14,8 @@ import com.google.gwt.user.client.ui.MenuBar;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetMenuBarGwt extends UiWidgetDynamicCompositeGwt<MenuBar, UiWidgetMenu> implements UiWidgetMenuBar {
+public class UiWidgetMenuBarGwt extends AbstractUiWidgetDynamicComposite<UiWidgetAdapterGwtMenuBar, UiWidgetMenu>
+    implements UiWidgetMenuBar {
 
   /**
    * The constructor.
@@ -28,18 +29,32 @@ public class UiWidgetMenuBarGwt extends UiWidgetDynamicCompositeGwt<MenuBar, UiW
    * {@inheritDoc}
    */
   @Override
-  protected MenuBar createWidget() {
+  protected UiWidgetAdapterGwtMenuBar createWidgetAdapter() {
 
-    return new MenuBar();
+    return new UiWidgetAdapterGwtMenuBar();
   }
 
   /**
-   * {@inheritDoc}
+   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
    */
-  @Override
-  protected void doSetEnabled(boolean newEnabled) {
+  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetMenuBar> {
 
-    // getWidget().setEnabled
+    /**
+     * The constructor.
+     */
+    public Factory() {
+
+      super(UiWidgetMenuBar.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public UiWidgetMenuBar create() {
+
+      return new UiWidgetMenuBarGwt();
+    }
+
   }
 
 }

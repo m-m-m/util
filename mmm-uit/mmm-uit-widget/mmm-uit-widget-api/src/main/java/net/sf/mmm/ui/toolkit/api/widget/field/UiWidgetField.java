@@ -38,4 +38,13 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularAtomic, Ui
    */
   VALUE getValueOrException() throws RuntimeException;
 
+  /**
+   * This method gets the last value that has been {@link #setValue(Object) set}. If you invoke
+   * {@link #setValue(Object)} then later calls to {@link #getValue()} will return the latest value that can
+   * be modified by the end-user. This method will ensure to get the value that was set before by the program.
+   * 
+   * @return the original value.
+   */
+  VALUE getOriginalValue();
+
 }

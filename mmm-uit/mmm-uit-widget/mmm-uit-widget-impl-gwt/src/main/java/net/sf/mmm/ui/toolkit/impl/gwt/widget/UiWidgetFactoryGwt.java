@@ -17,6 +17,9 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetRadioButtonsVerticalG
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetRichTextAreaGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetTextAreaGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetTextFieldGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.UiWidgetMenuBarGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.UiWidgetMenuGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.UiWidgetMenuItemGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
@@ -56,7 +59,10 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
     register(new UiWidgetTabPanelGwt.Factory());
     register(new UiWidgetHorizontalPanelGwt.Factory());
     register(new UiWidgetVerticalPanelGwt.Factory());
-
+    // menu
+    register(new UiWidgetMenuBarGwt.Factory());
+    register(new UiWidgetMenuGwt.Factory());
+    register(new UiWidgetMenuItemGwt.Factory());
   }
 
 }

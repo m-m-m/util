@@ -4,17 +4,18 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-
-import com.google.gwt.user.client.ui.DoubleBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtDoubleBox;
 
 /**
- * This is the implementation of {@link UiWidgetDoubleField} using GWT based on {@link DoubleBox}.
+ * This is the implementation of {@link UiWidgetDoubleField} using GWT based on
+ * {@link UiWidgetAdapterGwtDoubleBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetDoubleFieldGwt extends UiWidgetInputFieldGwtValueBox<Double, DoubleBox> implements
-    UiWidgetDoubleField {
+public class UiWidgetDoubleFieldGwt extends
+    AbstractUiWidgetInputField<UiWidgetAdapterGwtDoubleBox<Double>, Double, Double> implements UiWidgetDoubleField {
 
   /**
    * The constructor.
@@ -28,9 +29,9 @@ public class UiWidgetDoubleFieldGwt extends UiWidgetInputFieldGwtValueBox<Double
    * {@inheritDoc}
    */
   @Override
-  protected DoubleBox createWidget() {
+  protected UiWidgetAdapterGwtDoubleBox<Double> createWidgetAdapter() {
 
-    return new DoubleBox();
+    return new UiWidgetAdapterGwtDoubleBox<Double>();
   }
 
   /**
@@ -49,6 +50,7 @@ public class UiWidgetDoubleFieldGwt extends UiWidgetInputFieldGwtValueBox<Double
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetDoubleField create() {
 
       return new UiWidgetDoubleFieldGwt();

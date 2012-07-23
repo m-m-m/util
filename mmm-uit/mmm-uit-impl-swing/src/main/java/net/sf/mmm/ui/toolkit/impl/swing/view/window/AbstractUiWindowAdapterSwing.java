@@ -36,7 +36,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
-  public void setSize(int width, int height) {
+  public void setSizeInPixel(int width, int height) {
 
     getDelegate().setSize(width, height);
   }
@@ -44,7 +44,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
-  public int getWidth() {
+  public int getWidthInPixel() {
 
     return getDelegate().getWidth();
   }
@@ -52,7 +52,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
-  public int getHeight() {
+  public int getHeightInPixel() {
 
     return getDelegate().getHeight();
   }
