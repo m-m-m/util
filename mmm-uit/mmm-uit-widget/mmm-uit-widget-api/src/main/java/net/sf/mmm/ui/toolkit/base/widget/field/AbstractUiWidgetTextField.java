@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextField;
 
 /**
@@ -17,10 +18,11 @@ public abstract class AbstractUiWidgetTextField<ADAPTER extends UiWidgetAdapterT
 
   /**
    * The constructor.
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetTextField() {
+  public AbstractUiWidgetTextField(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
 }

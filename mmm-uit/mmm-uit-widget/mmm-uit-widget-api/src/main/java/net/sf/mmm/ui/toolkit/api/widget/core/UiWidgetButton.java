@@ -9,7 +9,8 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularAtomic;
 
 /**
- * This is the interface for an {@link UiWidgetAtomicClickable clickable widget} that represents a button.
+ * This is the interface for an {@link UiWidgetRegularAtomic regular atomic widget} that represents a
+ * <em>button</em>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

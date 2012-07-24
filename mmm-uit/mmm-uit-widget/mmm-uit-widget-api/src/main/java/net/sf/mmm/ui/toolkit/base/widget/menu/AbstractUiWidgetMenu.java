@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.base.widget.menu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItem;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterMenu;
 
 /**
@@ -22,10 +23,12 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu<?
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetMenu() {
+  public AbstractUiWidgetMenu(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**

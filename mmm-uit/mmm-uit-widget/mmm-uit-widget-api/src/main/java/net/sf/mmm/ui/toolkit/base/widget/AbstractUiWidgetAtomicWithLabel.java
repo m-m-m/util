@@ -21,10 +21,12 @@ public abstract class AbstractUiWidgetAtomicWithLabel<ADAPTER extends UiWidgetAd
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetAtomicWithLabel() {
+  public AbstractUiWidgetAtomicWithLabel(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**

@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextArea;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextArea;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTextArea;
 
@@ -18,10 +19,12 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetTextAreaGwt() {
+  public UiWidgetTextAreaGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -50,9 +53,9 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTextArea create() {
+    public UiWidgetTextArea create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetTextAreaGwt();
+      return new UiWidgetTextAreaGwt(factory);
     }
 
   }

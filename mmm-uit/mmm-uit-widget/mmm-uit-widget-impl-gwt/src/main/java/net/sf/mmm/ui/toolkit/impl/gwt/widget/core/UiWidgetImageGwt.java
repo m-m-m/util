@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.core.AbstractUiWidgetImage;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtImage;
 
@@ -17,10 +18,12 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetImageGwt() {
+  public UiWidgetImageGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -48,9 +51,10 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
     /**
      * {@inheritDoc}
      */
-    public UiWidgetImage create() {
+    @Override
+    public UiWidgetImage create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetImageGwt();
+      return new UiWidgetImageGwt(factory);
     }
 
   }

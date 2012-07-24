@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtDoubleBox;
 
@@ -19,10 +20,11 @@ public class UiWidgetDoubleFieldGwt extends
 
   /**
    * The constructor.
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetDoubleFieldGwt() {
+  public UiWidgetDoubleFieldGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -51,9 +53,9 @@ public class UiWidgetDoubleFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetDoubleField create() {
+    public UiWidgetDoubleField create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetDoubleFieldGwt();
+      return new UiWidgetDoubleFieldGwt(factory);
     }
 
   }

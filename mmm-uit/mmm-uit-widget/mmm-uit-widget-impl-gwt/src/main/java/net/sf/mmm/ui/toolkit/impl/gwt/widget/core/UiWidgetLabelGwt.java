@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetAtomicWithLabel;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtLabel;
 
 /**
@@ -17,10 +18,12 @@ public class UiWidgetLabelGwt extends AbstractUiWidgetAtomicWithLabel<UiWidgetAd
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetLabelGwt() {
+  public UiWidgetLabelGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -48,9 +51,10 @@ public class UiWidgetLabelGwt extends AbstractUiWidgetAtomicWithLabel<UiWidgetAd
     /**
      * {@inheritDoc}
      */
-    public UiWidgetLabel create() {
+    @Override
+    public UiWidgetLabel create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetLabelGwt();
+      return new UiWidgetLabelGwt(factory);
     }
 
   }

@@ -7,6 +7,7 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
 import net.sf.mmm.ui.toolkit.base.handler.event.ChangeEventSender;
 import net.sf.mmm.ui.toolkit.base.handler.event.FocusEventSender;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterField;
 
@@ -33,10 +34,12 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetField() {
+  public AbstractUiWidgetField(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**

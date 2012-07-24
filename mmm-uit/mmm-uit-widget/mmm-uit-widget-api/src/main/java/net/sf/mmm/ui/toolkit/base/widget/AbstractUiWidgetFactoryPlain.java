@@ -62,7 +62,7 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
     if (subFactory == null) {
       throw new ObjectNotFoundException(UiSingleWidgetFactory.class, widgetInterface);
     }
-    UiWidget widget = subFactory.create();
+    UiWidget widget = subFactory.create(this);
     NlsNullPointerException.checkNotNull(UiWidget.class, widget);
     try {
       return (WIDGET) widget;

@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRichTextArea;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterRichTextArea;
 
 /**
@@ -17,10 +18,12 @@ public abstract class AbstractUiWidgetRichTextArea<ADAPTER extends UiWidgetAdapt
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetRichTextArea() {
+  public AbstractUiWidgetRichTextArea(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
 }

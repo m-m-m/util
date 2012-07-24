@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.menu;
 
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.menu.AbstractUiWidgetMenu;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenu;
 
@@ -17,10 +18,12 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetMenuGwt() {
+  public UiWidgetMenuGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -48,9 +51,10 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
     /**
      * {@inheritDoc}
      */
-    public UiWidgetMenu create() {
+    @Override
+    public UiWidgetMenu create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetMenuGwt();
+      return new UiWidgetMenuGwt(factory);
     }
 
   }

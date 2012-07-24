@@ -3,8 +3,8 @@
 package net.sf.mmm.ui.toolkit.api.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.common.AbstractImage;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularAtomic;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularAtomic;
 
 /**
  * This is the interface for a {@link UiWidgetRegularAtomic regular atomic widget} that represents an

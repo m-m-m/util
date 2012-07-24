@@ -6,6 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenuBar;
 
 /**
@@ -19,10 +20,12 @@ public class UiWidgetMenuBarGwt extends AbstractUiWidgetDynamicComposite<UiWidge
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetMenuBarGwt() {
+  public UiWidgetMenuBarGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -50,9 +53,10 @@ public class UiWidgetMenuBarGwt extends AbstractUiWidgetDynamicComposite<UiWidge
     /**
      * {@inheritDoc}
      */
-    public UiWidgetMenuBar create() {
+    @Override
+    public UiWidgetMenuBar create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetMenuBarGwt();
+      return new UiWidgetMenuBarGwt(factory);
     }
 
   }

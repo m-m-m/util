@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtLongBox;
 
@@ -19,10 +20,11 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetInputField<UiWidgetAda
 
   /**
    * The constructor.
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetLongFieldGwt() {
+  public UiWidgetLongFieldGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -51,9 +53,9 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetInputField<UiWidgetAda
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetLongField create() {
+    public UiWidgetLongField create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetLongFieldGwt();
+      return new UiWidgetLongFieldGwt(factory);
     }
 
   }

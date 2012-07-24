@@ -24,6 +24,9 @@ import net.sf.mmm.util.nls.api.ObjectDisposedException;
 public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> implements UiWidget,
     AttributeWriteHandlerObserver {
 
+  /** @see #getFactory() */
+  private final AbstractUiWidgetFactory<?> factory;
+
   /** @see #getWidgetAdapter() */
   private ADAPTER widgetAdapter;
 
@@ -59,13 +62,25 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidget() {
+  public AbstractUiWidget(AbstractUiWidgetFactory<?> factory) {
 
     super();
+    this.factory = factory;
     this.visible = true;
     this.enabled = true;
     this.styles = "";
+  }
+
+  /**
+   * @return the factory
+   */
+  @Override
+  public AbstractUiWidgetFactory<?> getFactory() {
+
+    return this.factory;
   }
 
   /**
@@ -350,6 +365,7 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   /**
    * @return the height
    */
+  @Override
   public String getHeight() {
 
     if ((this.height == null) && (this.widgetAdapter != null)) {

@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.base.widget.core;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetAtomicWithLabel;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterButton;
 
 /**
@@ -22,10 +23,12 @@ public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButt
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetButton() {
+  public AbstractUiWidgetButton(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
     this.image = null;
   }
 

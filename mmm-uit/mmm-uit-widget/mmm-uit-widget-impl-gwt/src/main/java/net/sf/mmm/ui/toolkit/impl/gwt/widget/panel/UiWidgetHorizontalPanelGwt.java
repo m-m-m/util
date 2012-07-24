@@ -6,6 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtHorizontalPanel;
 
 /**
@@ -20,10 +21,11 @@ public class UiWidgetHorizontalPanelGwt extends
 
   /**
    * The constructor.
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetHorizontalPanelGwt() {
+  public UiWidgetHorizontalPanelGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -51,9 +53,9 @@ public class UiWidgetHorizontalPanelGwt extends
     /**
      * {@inheritDoc}
      */
-    public UiWidgetHorizontalPanel create() {
+    public UiWidgetHorizontalPanel create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetHorizontalPanelGwt();
+      return new UiWidgetHorizontalPanelGwt(factory);
     }
   }
 

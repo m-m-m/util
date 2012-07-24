@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtListBoxCombo;
 
@@ -20,10 +21,12 @@ public class UiWidgetComboBoxGwt<VALUE> extends
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetComboBoxGwt() {
+  public UiWidgetComboBoxGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -52,9 +55,11 @@ public class UiWidgetComboBoxGwt<VALUE> extends
     /**
      * {@inheritDoc}
      */
-    public UiWidgetComboBox create() {
+    @SuppressWarnings("unchecked")
+    @Override
+    public UiWidgetComboBox create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetComboBoxGwt();
+      return new UiWidgetComboBoxGwt(factory);
     }
 
   }

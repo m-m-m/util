@@ -6,6 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSingleComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTab;
 
@@ -27,10 +28,12 @@ public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab<?>>
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetTab() {
+  public AbstractUiWidgetTab(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**

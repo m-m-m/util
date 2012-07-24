@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextFieldBase;
 import net.sf.mmm.util.filter.api.CharFilter;
 
@@ -23,10 +24,12 @@ public abstract class AbstractUiWidgetTextFieldBase<ADAPTER extends UiWidgetAdap
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetTextFieldBase() {
+  public AbstractUiWidgetTextFieldBase(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**

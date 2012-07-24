@@ -25,10 +25,12 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetDynamicComposite() {
+  public AbstractUiWidgetDynamicComposite(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
     this.children = new ArrayList<CHILD>();
   }
 

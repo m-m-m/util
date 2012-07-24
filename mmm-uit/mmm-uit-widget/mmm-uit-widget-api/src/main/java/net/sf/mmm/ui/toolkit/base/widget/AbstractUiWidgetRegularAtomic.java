@@ -17,10 +17,11 @@ public abstract class AbstractUiWidgetRegularAtomic<ADAPTER extends UiWidgetAdap
 
   /**
    * The constructor.
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetRegularAtomic() {
+  public AbstractUiWidgetRegularAtomic(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
 }

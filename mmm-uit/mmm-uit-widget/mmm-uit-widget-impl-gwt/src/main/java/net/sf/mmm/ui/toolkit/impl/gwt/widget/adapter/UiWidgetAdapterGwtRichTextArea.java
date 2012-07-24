@@ -3,7 +3,6 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterRichTextArea;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextArea;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtRichTextArea.MyRichTextArea;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
@@ -11,10 +10,9 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.TextArea;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterTextArea} using GWT based on {@link TextArea}.
+ * This is the implementation of {@link UiWidgetAdapterRichTextArea} using GWT based on {@link RichTextArea}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

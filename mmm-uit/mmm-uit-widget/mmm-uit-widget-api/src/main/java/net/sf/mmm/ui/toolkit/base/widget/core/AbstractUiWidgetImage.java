@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterImage;
 
@@ -24,10 +25,12 @@ public abstract class AbstractUiWidgetImage<ADAPTER extends UiWidgetAdapterImage
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetImage() {
+  public AbstractUiWidgetImage(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**

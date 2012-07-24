@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRadioButtonsVertical;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtCellPanelRadiosVertical;
 
@@ -20,10 +21,12 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetRadioButtonsVerticalGwt() {
+  public UiWidgetRadioButtonsVerticalGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -52,10 +55,11 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public UiWidgetRadioButtonsVertical create() {
+    public UiWidgetRadioButtonsVertical create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetRadioButtonsVerticalGwt();
+      return new UiWidgetRadioButtonsVerticalGwt(factory);
     }
 
   }

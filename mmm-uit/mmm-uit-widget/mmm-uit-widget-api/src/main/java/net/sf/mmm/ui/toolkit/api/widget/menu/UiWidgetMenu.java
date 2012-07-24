@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget.menu;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
@@ -16,7 +17,8 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetMenu extends UiWidgetDynamicComposite<UiWidgetMenuItem>, UiWidgetMenuItem, UiWidgetReal {
+public interface UiWidgetMenu extends UiWidgetDynamicComposite<UiWidgetMenuItem>, UiWidgetMenuItem,
+    AttributeWriteLabel, UiWidgetReal {
 
   // nothing to add
 

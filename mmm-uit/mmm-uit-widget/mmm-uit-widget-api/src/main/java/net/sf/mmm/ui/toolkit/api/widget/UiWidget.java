@@ -40,4 +40,13 @@ public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeWriteV
    */
   UiWidgetComposite<?> getParent();
 
+  /**
+   * This method gets the {@link UiWidgetFactory} that created this {@link UiWidget}. It may be used
+   * internally in {@link UiWidget} implementations as well as externally to create new {@link UiWidget}s
+   * (typically children).
+   * 
+   * @return the {@link UiWidgetFactory}.
+   */
+  UiWidgetFactory<?> getFactory();
+
 }

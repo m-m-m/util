@@ -22,10 +22,12 @@ public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAd
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetSwitchComposite() {
+  public AbstractUiWidgetSwitchComposite(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
     this.showChildIndex = 0;
   }
 

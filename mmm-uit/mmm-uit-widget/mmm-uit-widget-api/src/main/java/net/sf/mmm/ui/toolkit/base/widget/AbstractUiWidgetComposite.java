@@ -19,10 +19,12 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetComposite() {
+  public AbstractUiWidgetComposite(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
 }

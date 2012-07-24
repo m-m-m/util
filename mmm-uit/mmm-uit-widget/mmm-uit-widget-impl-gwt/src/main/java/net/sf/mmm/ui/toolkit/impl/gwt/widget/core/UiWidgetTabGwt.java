@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.core.AbstractUiWidgetTab;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTab;
 
@@ -17,10 +18,12 @@ public class UiWidgetTabGwt extends AbstractUiWidgetTab<UiWidgetAdapterGwtTab> {
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetTabGwt() {
+  public UiWidgetTabGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -48,9 +51,10 @@ public class UiWidgetTabGwt extends AbstractUiWidgetTab<UiWidgetAdapterGwtTab> {
     /**
      * {@inheritDoc}
      */
-    public UiWidgetTab create() {
+    @Override
+    public UiWidgetTab create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetTabGwt();
+      return new UiWidgetTabGwt(factory);
     }
 
   }

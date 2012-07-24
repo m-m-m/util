@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtIntegerBox;
 
@@ -19,10 +20,11 @@ public class UiWidgetIntegerFieldGwt extends
 
   /**
    * The constructor.
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetIntegerFieldGwt() {
+  public UiWidgetIntegerFieldGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -51,9 +53,9 @@ public class UiWidgetIntegerFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetIntegerField create() {
+    public UiWidgetIntegerField create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetIntegerFieldGwt();
+      return new UiWidgetIntegerFieldGwt(factory);
     }
 
   }

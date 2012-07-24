@@ -6,27 +6,27 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.panel.AbstractUiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTabLayoutPanel;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetTabGwt;
-
-import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 /**
- * This is the implementation of {@link UiWidgetTabPanel} using GWT based on {@link TabLayoutPanel}.
+ * This is the implementation of {@link UiWidgetTabPanel} using GWT based on
+ * {@link UiWidgetAdapterGwtTabLayoutPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapterGwtTabLayoutPanel> implements
-    UiWidgetTabPanel {
+public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapterGwtTabLayoutPanel> {
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public UiWidgetTabPanelGwt() {
+  public UiWidgetTabPanelGwt(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
   }
 
   /**
@@ -44,7 +44,7 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
   @Override
   public UiWidgetTab addChild(UiWidgetRegular child, String label) {
 
-    UiWidgetTabGwt tab = new UiWidgetTabGwt();
+    UiWidgetTab tab = getFactory().create(UiWidgetTab.class);
     tab.setLabel(label);
     tab.setChild(child);
     addChild(tab);
@@ -67,9 +67,10 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
     /**
      * {@inheritDoc}
      */
-    public UiWidgetTabPanel create() {
+    @Override
+    public UiWidgetTabPanel create(AbstractUiWidgetFactory<?> factory) {
 
-      return new UiWidgetTabPanelGwt();
+      return new UiWidgetTabPanelGwt(factory);
     }
 
   }

@@ -12,7 +12,8 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to {@link #create() create}.
+ * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to
+ *        {@link #create(AbstractUiWidgetFactory) create}.
  */
 public interface UiSingleWidgetFactory<WIDGET extends UiWidgetReal> {
 
@@ -29,8 +30,9 @@ public interface UiSingleWidgetFactory<WIDGET extends UiWidgetReal> {
    * 
    * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#create(Class)
    * 
+   * @param factory is the instance of the {@link AbstractUiWidgetFactory widget factory}.
    * @return the new {@link UiWidgetReal}.
    */
-  WIDGET create();
+  WIDGET create(AbstractUiWidgetFactory<?> factory);
 
 }

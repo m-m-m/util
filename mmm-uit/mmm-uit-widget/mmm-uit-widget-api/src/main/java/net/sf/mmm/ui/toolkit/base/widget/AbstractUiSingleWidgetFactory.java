@@ -9,7 +9,8 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to {@link #create() create}.
+ * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to
+ *        {@link #create(AbstractUiWidgetFactory) create}.
  */
 public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidgetReal> implements
     UiSingleWidgetFactory<WIDGET> {

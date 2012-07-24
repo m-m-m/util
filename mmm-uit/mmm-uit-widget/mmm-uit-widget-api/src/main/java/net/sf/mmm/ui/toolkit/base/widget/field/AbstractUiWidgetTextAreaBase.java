@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInTextLines;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextAreaBase;
 
 /**
@@ -22,10 +23,12 @@ public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapt
 
   /**
    * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
    */
-  public AbstractUiWidgetTextAreaBase() {
+  public AbstractUiWidgetTextAreaBase(AbstractUiWidgetFactory<?> factory) {
 
-    super();
+    super(factory);
     this.heightInTextLines = 0;
   }
 
