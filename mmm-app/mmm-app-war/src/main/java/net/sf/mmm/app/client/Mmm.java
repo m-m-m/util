@@ -15,8 +15,12 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
+import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
+import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItemClickable;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetVerticalPanel;
+import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetFactoryGwt;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -33,7 +37,6 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -77,6 +80,15 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     super.onModuleLoadDeferred();
     UiWidgetFactory<Widget> factory = new UiWidgetFactoryGwt();
 
+    final UiWidgetMainWindow mainWindow = factory.getMainWindow();
+    UiWidgetMenuBar menuBar = mainWindow.getMenuBar();
+    UiWidgetMenu fileMenu = factory.create(UiWidgetMenu.class);
+    fileMenu.setLabel("File");
+    menuBar.addChild(fileMenu);
+    UiWidgetMenuItemClickable exitMenuItem = factory.create(UiWidgetMenuItemClickable.class);
+    exitMenuItem.setLabel("Exit");
+    fileMenu.addChild(exitMenuItem);
+
     UiWidgetTabPanel tabPanel = factory.create(UiWidgetTabPanel.class);
 
     UiWidgetVerticalPanel verticalPanel1 = factory.create(UiWidgetVerticalPanel.class);
@@ -86,7 +98,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     final UiWidgetTab tab1 = tabPanel.addChild(verticalPanel1, "Tab1");
 
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);
-    UiWidgetLabel label2 = factory.create(UiWidgetLabel.class);
+    final UiWidgetLabel label2 = factory.create(UiWidgetLabel.class);
     final UiWidgetTab tab2 = tabPanel.addChild(verticalPanel2, "Tab2");
     label2.setLabel("label2");
     verticalPanel2.addChild(label2);
@@ -98,11 +110,12 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        tab1.setLabel(tab1.getLabel() + "X");
-        tab2.setLabel(tab2.getLabel() + "Y");
+        label2.setLabel(mainWindow.getWidthInPixel() + "x" + mainWindow.getHeightInPixel());
+        mainWindow.setPosition(mainWindow.getPositionX() - 5, mainWindow.getPositionY() - 5);
+        mainWindow.setSizeInPixel(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1);
       }
     });
-    RootLayoutPanel.get().add(factory.getNativeWidget(tabPanel));
+    mainWindow.setChild(tabPanel);
 
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");

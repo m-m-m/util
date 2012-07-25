@@ -54,6 +54,24 @@ public abstract class AbstractUiImage extends AbstractUiObject implements UiImag
    * {@inheritDoc}
    */
   @Override
+  public void setWidthInPixel(int width) {
+
+    this.width = width;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    this.height = height;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public int getWidthInPixel() {
 
     return this.width;

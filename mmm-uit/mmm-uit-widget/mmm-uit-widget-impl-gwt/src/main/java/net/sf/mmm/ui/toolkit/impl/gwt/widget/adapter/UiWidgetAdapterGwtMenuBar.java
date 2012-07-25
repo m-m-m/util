@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterDynamicComposite;
+import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterMenuBar;
 
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.MenuItem;
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar> implements
-    UiWidgetAdapterDynamicComposite<MenuBar, UiWidgetMenu> {
+    UiWidgetAdapterMenuBar<MenuBar> {
 
   /**
    * The constructor.

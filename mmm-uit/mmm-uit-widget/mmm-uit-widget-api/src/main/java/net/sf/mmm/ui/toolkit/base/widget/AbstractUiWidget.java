@@ -424,6 +424,24 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * {@inheritDoc}
    */
   @Override
+  public void setWidthInPixel(int widthInPixel) {
+
+    setWidth(widthInPixel + "px");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int heightInPixel) {
+
+    setHeight(heightInPixel + "px");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public String getStyles() {
 
     return this.styles;
@@ -625,6 +643,12 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
       buffer.append("[");
       buffer.append(this.id);
       buffer.append("]");
+    }
+    if (!this.visible) {
+      buffer.append("[hidden]");
+    }
+    if (!this.enabled) {
+      buffer.append("[disabled]");
     }
     return buffer.toString();
   }

@@ -25,89 +25,78 @@ import org.eclipse.swt.widgets.Shell;
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extends
-    AbstractSyncWidgetAccess<DELEGATE> implements UiElementAdapter<DELEGATE> {
+public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extends AbstractSyncWidgetAccess<DELEGATE>
+    implements UiElementAdapter<DELEGATE> {
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setParent(org.eclipse.swt.widgets.Composite)
+   * operation to set the {@link org.eclipse.swt.widgets.Control#setParent(org.eclipse.swt.widgets.Composite)
    * parent}
    */
   protected static final String OPERATION_SET_PARENT = "setParent";
 
   /**
-   * operation to get the {@link org.eclipse.swt.widgets.Control#getSize()
-   * bounds}
+   * operation to get the {@link org.eclipse.swt.widgets.Control#getSize() bounds}
    */
   protected static final String OPERATION_GET_SIZE = "getSize";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setSize(int, int) size}
+   * operation to set the {@link org.eclipse.swt.widgets.Control#setSize(int, int) size}
    */
   protected static final String OPERATION_SET_SIZE = "setSize";
 
   /**
-   * operation to get the {@link org.eclipse.swt.widgets.Control#getLocation()
-   * location}
+   * operation to get the {@link org.eclipse.swt.widgets.Control#getLocation() location}
    */
   protected static final String OPERATION_GET_LOCATION = "getLocation";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setLocation(int, int) location}
+   * operation to set the {@link org.eclipse.swt.widgets.Control#setLocation(int, int) location}
    */
   protected static final String OPERATION_SET_LOCATION = "setLocation";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setToolTipText(String) tooltip-text}
+   * operation to set the {@link org.eclipse.swt.widgets.Control#setToolTipText(String) tooltip-text}
    */
   protected static final String OPERATION_SET_TOOLTIP = "setTooltip";
 
   /**
-   * operation to get the {@link org.eclipse.swt.widgets.Control#isVisible()
-   * "visible-flag"}
+   * operation to get the {@link org.eclipse.swt.widgets.Control#isVisible() "visible-flag"}
    */
   protected static final String OPERATION_IS_VISIBLE = "isVisible";
 
   /**
-   * operation to {@link org.eclipse.swt.widgets.Control#pack() pack} the
-   * control.
+   * operation to {@link org.eclipse.swt.widgets.Control#pack() pack} the control.
    */
   protected static final String OPERATION_PACK = "pack";
 
   /**
-   * operation to {@link org.eclipse.swt.widgets.Control#computeSize(int, int)
-   * "compute size"} of the control.
+   * operation to {@link org.eclipse.swt.widgets.Control#computeSize(int, int) "compute size"} of the control.
    */
   protected static final String OPERATION_COMPUTE_SIZE = "computeSize";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font)
-   * font} of the control.
+   * operation to set the {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font) font}
+   * of the control.
    */
   protected static final String OPERATION_SET_FONT = "setFont";
 
   /**
-   * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setLayoutData(Object) "layout data"}
-   * of the control.
+   * operation to set the {@link org.eclipse.swt.widgets.Control#setLayoutData(Object) "layout data"} of the
+   * control.
    */
   protected static final String OPERATION_SET_LAYOUT_DATA = "setLayoutData";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color)
-   * foreground-color} of the control.
+   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color) foreground-color} of
+   * the control.
    */
   protected static final String OPERATION_SET_FOREGROUND = "setForeground";
 
   /**
    * operation to set the
-   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color)
-   * background-color} of the control.
+   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color) background-color} of
+   * the control.
    */
   protected static final String OPERATION_SET_BACKGROUND = "setBackground";
 
@@ -149,8 +138,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
    * 
    * @param uiFactory is used to do the synchronization.
    * @param node is the owning {@link #getNode() node}.
-   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle()
-   *        style} of the control.
+   * @param swtStyle is the {@link org.eclipse.swt.widgets.Widget#getStyle() style} of the control.
    */
   public AbstractSyncControlAccess(UiFactorySwt uiFactory, UiNode node, int swtStyle) {
 
@@ -226,8 +214,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
       if (this.parentAccess.getDelegate() != null) {
         super.doCreateSynchron();
       } else {
-        new Exception("Warning: parent (" + this.parentAccess.getClass() + ") is empty!")
-            .printStackTrace();
+        new Exception("Warning: parent (" + this.parentAccess.getClass() + ") is empty!").printStackTrace();
       }
     } else {
       new Exception("Warning: parent is null!").printStackTrace();
@@ -279,9 +266,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * This method gets the {@link Control#getParent() parent} of this control.
    * 
-   * @return the parent or <code>null</code> if NOT
-   *         {@link #setParentAccess(AbstractSyncCompositeAccess) set} and
-   *         {@link AbstractSyncWidgetAccess#create() created}.
+   * @return the parent or <code>null</code> if NOT {@link #setParentAccess(AbstractSyncCompositeAccess) set}
+   *         and {@link AbstractSyncWidgetAccess#create() created}.
    */
   public Composite getParent() {
 
@@ -292,8 +278,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method gets the synchronous access to the {@link Control#getParent()
-   * parent} of this control.
+   * This method gets the synchronous access to the {@link Control#getParent() parent} of this control.
    * 
    * @return the synchronous access to the parent.
    */
@@ -304,9 +289,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
 
   /**
    * This method sets the parent sync-access of this control. If the parent
-   * {@link AbstractSyncCompositeAccess#getDelegate() exists}, it will be set as
-   * parent of this control. Else if the control does NOT yet exist, the parent
-   * will be set on {@link #create() creation}.
+   * {@link AbstractSyncCompositeAccess#getDelegate() exists}, it will be set as parent of this control. Else
+   * if the control does NOT yet exist, the parent will be set on {@link #create() creation}.
    * 
    * @param newParentAccess is the synchronous access to the new parent
    */
@@ -324,8 +308,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * This method determines if the control can be created.
    * 
-   * @return <code>true</code> if there is an ancestor that is already created,
-   *         <code>false</code> otherwise.
+   * @return <code>true</code> if there is an ancestor that is already created, <code>false</code> otherwise.
    */
   protected boolean canCreate() {
 
@@ -339,8 +322,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * The {@link #setParentAccess(AbstractSyncCompositeAccess) parent} must be
-   * set before this method is called.
+   * The {@link #setParentAccess(AbstractSyncCompositeAccess) parent} must be set before this method is
+   * called.
    * 
    * @see net.sf.mmm.ui.toolkit.impl.swt.view.sync.AbstractSyncWidgetAccess#create()
    */
@@ -366,12 +349,43 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSizeInPixel(int width, int height) {
 
     if (this.size == null) {
       this.size = new Point(width, height);
     } else {
       this.size.x = width;
+      this.size.y = height;
+    }
+    invoke(OPERATION_SET_SIZE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidthInPixel(int width) {
+
+    if (this.size == null) {
+      this.size = new Point(width, getHeightInPixel());
+    } else {
+      this.size.x = width;
+      this.size.y = getHeightInPixel();
+    }
+    invoke(OPERATION_SET_SIZE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    if (this.size == null) {
+      this.size = new Point(getWidthInPixel(), height);
+    } else {
+      this.size.x = getWidthInPixel();
       this.size.y = height;
     }
     invoke(OPERATION_SET_SIZE);
@@ -400,6 +414,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeightInPixel() {
 
     return getSize().y;
@@ -408,6 +423,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidthInPixel() {
 
     return getSize().x;
@@ -420,8 +436,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method sets the {@link Control#setLocation(int, int) location} of the
-   * control.
+   * This method sets the {@link Control#setLocation(int, int) location} of the control.
    * 
    * @param x is the x-coordinate to set.
    * @param y is the y-coordinate to set.
@@ -441,6 +456,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setTooltip(String tooltipText) {
 
     assert (checkReady());
@@ -451,6 +467,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTooltip() {
 
     // tooltip can NOT be modified externally (e.g. by user-interaction).
@@ -458,8 +475,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method {@link org.eclipse.swt.widgets.Control#pack() packs} the
-   * control.
+   * This method {@link org.eclipse.swt.widgets.Control#pack() packs} the control.
    */
   public void pack() {
 
@@ -468,8 +484,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method {@link Control#computeSize(int, int) computes} the size of the
-   * control.
+   * This method {@link Control#computeSize(int, int) computes} the size of the control.
    * 
    * @return the computed size.
    */
@@ -479,13 +494,10 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method {@link Control#computeSize(int, int) computes} the size of the
-   * control.
+   * This method {@link Control#computeSize(int, int) computes} the size of the control.
    * 
-   * @param widthHint the suggested width or {@link org.eclipse.swt.SWT#DEFAULT}
-   *        .
-   * @param heightHint the suggested height or
-   *        {@link org.eclipse.swt.SWT#DEFAULT}.
+   * @param widthHint the suggested width or {@link org.eclipse.swt.SWT#DEFAULT} .
+   * @param heightHint the suggested height or {@link org.eclipse.swt.SWT#DEFAULT}.
    * @return the computed size.
    */
   public Point computeSize(int widthHint, int heightHint) {
@@ -498,9 +510,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setLayoutData(Object) "layout data"}
-   * of the control.
+   * This method sets the {@link org.eclipse.swt.widgets.Control#setLayoutData(Object) "layout data"} of the
+   * control.
    * 
    * @param data is the layout-data to set.
    */
@@ -512,11 +523,9 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method gets the {@link org.eclipse.swt.widgets.Control#getFont() font}
-   * of the control.
+   * This method gets the {@link org.eclipse.swt.widgets.Control#getFont() font} of the control.
    * 
-   * @return the font of the control. May be <code>null</code> if the control
-   *         has NOT been created.
+   * @return the font of the control. May be <code>null</code> if the control has NOT been created.
    */
   public Font getFont() {
 
@@ -524,9 +533,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font)
-   * font} of the control.
+   * This method sets the {@link org.eclipse.swt.widgets.Control#setFont(org.eclipse.swt.graphics.Font) font}
+   * of the control.
    * 
    * @param newFont is the new font to set.
    */
@@ -538,12 +546,10 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Control#getForeground() foreground-color} of
-   * the control.
+   * This method gets the {@link org.eclipse.swt.widgets.Control#getForeground() foreground-color} of the
+   * control.
    * 
-   * @return the foreground of the control. May be <code>null</code> if the
-   *         control has NOT been created.
+   * @return the foreground of the control. May be <code>null</code> if the control has NOT been created.
    */
   public Color getForeground() {
 
@@ -552,8 +558,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color)
-   * foreground-color} of the control.
+   * {@link org.eclipse.swt.widgets.Control#setForeground(org.eclipse.swt.graphics.Color) foreground-color} of
+   * the control.
    * 
    * @param foregroundColor is the foreground-color to set.
    */
@@ -565,12 +571,10 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * This method gets the
-   * {@link org.eclipse.swt.widgets.Control#getBackground() background-color} of
-   * the control.
+   * This method gets the {@link org.eclipse.swt.widgets.Control#getBackground() background-color} of the
+   * control.
    * 
-   * @return the background of the control. May be <code>null</code> if the
-   *         control has NOT been created.
+   * @return the background of the control. May be <code>null</code> if the control has NOT been created.
    */
   public Color getBackground() {
 
@@ -579,8 +583,8 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
 
   /**
    * This method sets the
-   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color)
-   * background-color} of the control.
+   * {@link org.eclipse.swt.widgets.Control#setBackground(org.eclipse.swt.graphics.Color) background-color} of
+   * the control.
    * 
    * @param backgroundColor is the background-color to set.
    */
@@ -622,7 +626,7 @@ public abstract class AbstractSyncControlAccess<DELEGATE extends Control> extend
   }
 
   /**
-   * 
+   *
    */
   public void update() {
 

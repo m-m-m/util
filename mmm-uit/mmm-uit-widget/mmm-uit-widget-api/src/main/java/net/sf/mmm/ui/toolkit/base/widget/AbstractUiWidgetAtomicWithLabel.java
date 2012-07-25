@@ -62,4 +62,16 @@ public abstract class AbstractUiWidgetAtomicWithLabel<ADAPTER extends UiWidgetAd
     return this.label;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    if (this.label == null) {
+      return super.toString();
+    }
+    return super.toString() + "[" + this.label + "]";
+  }
+
 }

@@ -12,15 +12,15 @@ import net.sf.mmm.ui.toolkit.base.view.window.UiWindowAdapter;
 import net.sf.mmm.ui.toolkit.impl.swing.view.UiNodeAdapterSwing;
 
 /**
- * This is the abstract base implementation of the {@link UiWindowAdapter} using
- * swing. It adapts an AWT {@link Window}.
+ * This is the abstract base implementation of the {@link UiWindowAdapter} using swing. It adapts an AWT
+ * {@link Window}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> extends
-    UiNodeAdapterSwing<DELEGATE> implements UiWindowAdapter<DELEGATE>, WindowListener {
+public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> extends UiNodeAdapterSwing<DELEGATE>
+    implements UiWindowAdapter<DELEGATE>, WindowListener {
 
   /**
    * The constructor.
@@ -36,6 +36,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSizeInPixel(int width, int height) {
 
     getDelegate().setSize(width, height);
@@ -44,6 +45,25 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
+  public void setWidthInPixel(int width) {
+
+    getDelegate().setSize(width, getHeightInPixel());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    getDelegate().setSize(getWidthInPixel(), height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public int getWidthInPixel() {
 
     return getDelegate().getWidth();
@@ -52,6 +72,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeightInPixel() {
 
     return getDelegate().getHeight();
@@ -60,7 +81,8 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
-  public int getX() {
+  @Override
+  public int getPositionX() {
 
     return getDelegate().getX();
   }
@@ -68,7 +90,8 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
-  public int getY() {
+  @Override
+  public int getPositionY() {
 
     return getDelegate().getX();
   }
@@ -76,6 +99,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPosition(int x, int y) {
 
     getDelegate().setLocation(x, y);
@@ -84,6 +108,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void pack() {
 
     getDelegate().pack();
@@ -92,6 +117,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowOpened(WindowEvent e) {
 
     getNode().sendEvent(UiEventType.SHOW);
@@ -100,6 +126,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowClosing(WindowEvent e) {
 
   }
@@ -107,6 +134,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowClosed(WindowEvent e) {
 
     // TODO Close is NOT hide
@@ -116,6 +144,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowIconified(WindowEvent e) {
 
     getNode().sendEvent(UiEventType.ICONIFY);
@@ -124,6 +153,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowDeiconified(WindowEvent e) {
 
     getNode().sendEvent(UiEventType.DEICONIFY);
@@ -132,6 +162,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowActivated(WindowEvent e) {
 
     getNode().sendEvent(UiEventType.ACTIVATE);
@@ -140,6 +171,7 @@ public abstract class AbstractUiWindowAdapterSwing<DELEGATE extends Window> exte
   /**
    * {@inheritDoc}
    */
+  @Override
   public void windowDeactivated(WindowEvent e) {
 
     getNode().sendEvent(UiEventType.DEACTIVATE);

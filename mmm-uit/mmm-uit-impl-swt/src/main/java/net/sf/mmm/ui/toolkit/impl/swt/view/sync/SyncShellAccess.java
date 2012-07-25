@@ -197,7 +197,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   /**
    * {@inheritDoc}
    */
-  public int getX() {
+  public int getPositionX() {
 
     return getPosition().x;
   }
@@ -205,7 +205,7 @@ public class SyncShellAccess extends AbstractSyncCompositeAccess<Shell> implemen
   /**
    * {@inheritDoc}
    */
-  public int getY() {
+  public int getPositionY() {
 
     return getPosition().y;
   }

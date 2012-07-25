@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget;
 
+import net.sf.mmm.ui.toolkit.api.widget.UiDispatcher;
+import net.sf.mmm.ui.toolkit.api.widget.UiDisplay;
+import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactoryPlain;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetImageGwt;
@@ -23,6 +26,7 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.UiWidgetMenuItemClickableGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.window.UiWidgetMainWindowGwt;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -33,6 +37,15 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  */
 public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
+
+  /** @see #getDisplay() */
+  private UiDisplay display;
+
+  /** @see #getDispatcher() */
+  private UiDispatcher dispatcher;
+
+  /** @see #getMainWindow() */
+  private UiWidgetMainWindow mainWindow;
 
   /**
    * The constructor.
@@ -65,4 +78,65 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
     register(new UiWidgetMenuItemClickableGwt.Factory());
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiDisplay getDisplay() {
+
+    if (this.display == null) {
+      this.display = createDisplay();
+    }
+    return this.display;
+  }
+
+  /**
+   * @return a new instance of {@link UiDisplay}.
+   */
+  protected UiDisplay createDisplay() {
+
+    return new UiDisplayGwt();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiDispatcher getDispatcher() {
+
+    if (this.dispatcher == null) {
+      this.dispatcher = createDispatcher();
+    }
+    return this.dispatcher;
+  }
+
+  /**
+   * @return a new instance of {@link UiDispatcher}.
+   */
+  protected UiDispatcher createDispatcher() {
+
+    return new UiDispatcherGwt();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetMainWindow getMainWindow() {
+
+    if (this.mainWindow == null) {
+      this.mainWindow = createMainWindow();
+    }
+    return this.mainWindow;
+  }
+
+  /**
+   * @return a new instance of {@link UiWidgetMainWindow}.
+   */
+  private UiWidgetMainWindow createMainWindow() {
+
+    UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(this);
+    window.initialize();
+    return window;
+  }
 }

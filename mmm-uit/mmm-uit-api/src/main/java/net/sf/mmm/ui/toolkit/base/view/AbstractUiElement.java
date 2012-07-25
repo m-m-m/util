@@ -84,6 +84,24 @@ public abstract class AbstractUiElement<DELEGATE> extends AbstractUiNode<DELEGAT
    * {@inheritDoc}
    */
   @Override
+  public void setWidthInPixel(int width) {
+
+    getAdapter().setWidthInPixel(width);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    getAdapter().setHeightInPixel(height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setPrimaryStyle(String primaryStyle) {
 
     // TODO Auto-generated method stub

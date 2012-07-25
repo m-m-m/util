@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
+import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
+
 /**
  * This is the interface for a factory used to #create create {@link UiWidget}s.
  * 
@@ -11,6 +13,28 @@ package net.sf.mmm.ui.toolkit.api.widget;
  *        {@link #getNativeWidget(UiWidgetRegular) widgets}.
  */
 public interface UiWidgetFactory<NATIVE_WIDGET> {
+
+  /**
+   * This method gets the {@link UiDisplay} e.g. to read the current screen resolution.
+   * 
+   * @return the {@link UiDisplay}.
+   */
+  UiDisplay getDisplay();
+
+  /**
+   * @return the {@link UiDispatcher}.
+   */
+  UiDispatcher getDispatcher();
+
+  /**
+   * This method gets the application {@link UiWidgetMainWindow main window}. In case of a web application
+   * this will be the browser window (respective the current tab). In case of a MDI (multiple document
+   * interface) client this is the master window. Otherwise it will be a new window that should be
+   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible#setVisible(boolean) opened} initially.
+   * 
+   * @return the {@link UiWidgetMainWindow main window}.
+   */
+  UiWidgetMainWindow getMainWindow();
 
   /**
    * This method creates a new {@link UiWidget} instance of the given type (<code>widgetInterface</code>).<br/>

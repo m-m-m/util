@@ -11,7 +11,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeWriteOnlySizeInPixel {
 
   /**
-   * This method sets the size of this object.
+   * This method sets the size of this object in pixels.
    * 
    * @see AttributeReadSizeInPixel#getWidthInPixel()
    * @see AttributeReadSizeInPixel#getHeightInPixel()
@@ -20,5 +20,23 @@ public abstract interface AttributeWriteOnlySizeInPixel {
    * @param height is the new {@link AttributeReadSizeInPixel#getHeightInPixel() height} of the object.
    */
   void setSizeInPixel(int width, int height);
+
+  /**
+   * This method sets the {@link AttributeReadSizeInPixel#getWidthInPixel() width} of this object in pixels.
+   * 
+   * @see AttributeReadSizeInPixel#getWidthInPixel()
+   * 
+   * @param width is the new {@link AttributeReadSizeInPixel#getWidthInPixel() width} of the object.
+   */
+  void setWidthInPixel(int width);
+
+  /**
+   * This method sets the {@link AttributeReadSizeInPixel#getHeightInPixel() height} of this object in pixels.
+   * 
+   * @see AttributeReadSizeInPixel#getHeightInPixel()
+   * 
+   * @param height is the new {@link AttributeReadSizeInPixel#getHeightInPixel() height} of the object.
+   */
+  void setHeightInPixel(int height);
 
 }

@@ -22,8 +22,8 @@ import net.sf.mmm.ui.toolkit.impl.swing.view.UiNodeAdapterSwing;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
- * This class is the implementation of the
- * {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} interface using Swing.
+ * This class is the implementation of the {@link net.sf.mmm.ui.toolkit.api.view.widget.UiButton} interface
+ * using Swing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -75,6 +75,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setValue(String text) {
 
     getAdapter().getDelegate().setText(text);
@@ -83,6 +84,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getValue() {
 
     return getAdapter().getDelegate().getText();
@@ -101,6 +103,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return TYPE;
@@ -109,6 +112,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isSelected() {
 
     return getAdapter().getDelegate().isSelected();
@@ -117,6 +121,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSelected(boolean selected) {
 
     getAdapter().getDelegate().setSelected(selected);
@@ -125,6 +130,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public ButtonStyle getButtonStyle() {
 
     return this.style;
@@ -133,6 +139,7 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setImage(UiImage newIcon) {
 
     this.image = (UiImageImpl) newIcon;
@@ -146,14 +153,14 @@ public class UiButtonImpl extends AbstractUiWidgetSwing<AbstractButton> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public UiImage getImage() {
 
     return this.image;
   }
 
   /**
-   * This method gets the {@link ButtonGroup} for the given parent
-   * <code>node</code>.
+   * This method gets the {@link ButtonGroup} for the given parent <code>node</code>.
    * 
    * @param node is the parent {@link UiNode}.
    * @return the according {@link ButtonGroup}.

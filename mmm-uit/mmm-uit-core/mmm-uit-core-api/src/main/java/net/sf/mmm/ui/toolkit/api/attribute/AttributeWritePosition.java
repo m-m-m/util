@@ -3,7 +3,8 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This is the interface for an object of the UI framework that has a position.
+ * This interface gives read and write access to the {@link #setPosition(int, int) position} of an object
+ * (e.g. a window).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -13,8 +14,8 @@ public abstract interface AttributeWritePosition extends AttributeReadPosition {
   /**
    * This method sets the position of the object.
    * 
-   * @param x is the position on the x-axsis (horizontal).
-   * @param y is the position on the y-axsis (vertical).
+   * @param x is the {@link #getPositionX() position on the x-axsis} (horizontal).
+   * @param y is the {@link #getPositionY() position on the y-axsis} (vertical).
    */
   void setPosition(int x, int y);
 

@@ -8,16 +8,15 @@ import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.base.view.UiElementAdapter;
 
 /**
- * This is the abstract base implementation of the
- * {@link net.sf.mmm.ui.toolkit.base.view.UiElementAdapter} using swing. It
- * adapts a {@link JComponent}.
+ * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.base.view.UiElementAdapter}
+ * using swing. It adapts a {@link JComponent}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * @since 1.0.0
  */
-public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
-    UiNodeAdapterSwing<DELEGATE> implements UiElementAdapter<DELEGATE> {
+public class UiElementAdapterSwing<DELEGATE extends JComponent> extends UiNodeAdapterSwing<DELEGATE> implements
+    UiElementAdapter<DELEGATE> {
 
   /**
    * The constructor.
@@ -33,6 +32,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setTooltip(String tooltip) {
 
     getDelegate().setToolTipText(tooltip);
@@ -41,6 +41,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTooltip() {
 
     return getDelegate().getToolTipText();
@@ -49,9 +50,28 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSizeInPixel(int width, int height) {
 
     getToplevelDelegate().setSize(width, height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    getToplevelDelegate().setSize(getWidthInPixel(), height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidthInPixel(int width) {
+
+    getToplevelDelegate().setSize(width, getHeightInPixel());
   }
 
   /**
@@ -65,6 +85,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidthInPixel() {
 
     return getToplevelDelegate().getWidth();
@@ -73,6 +94,7 @@ public class UiElementAdapterSwing<DELEGATE extends JComponent> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeightInPixel() {
 
     return getToplevelDelegate().getHeight();

@@ -121,6 +121,24 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * {@inheritDoc}
    */
   @Override
+  public void setWidthInPixel(int width) {
+
+    getAdapter().setWidthInPixel(width);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    getAdapter().setHeightInPixel(height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public boolean isResizable() {
 
     return getAdapter().isResizable();
@@ -175,18 +193,18 @@ public abstract class AbstractUiWindow<DELEGATE> extends AbstractUiNode<DELEGATE
    * {@inheritDoc}
    */
   @Override
-  public int getX() {
+  public int getPositionX() {
 
-    return getAdapter().getX();
+    return getAdapter().getPositionX();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int getY() {
+  public int getPositionY() {
 
-    return getAdapter().getY();
+    return getAdapter().getPositionY();
   }
 
   /**

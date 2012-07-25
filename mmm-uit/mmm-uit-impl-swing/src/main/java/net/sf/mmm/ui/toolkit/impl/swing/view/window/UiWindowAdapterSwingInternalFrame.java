@@ -35,6 +35,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setTitle(String title) {
 
     getDelegate().setTitle(title);
@@ -43,6 +44,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return getDelegate().getTitle();
@@ -51,6 +53,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPosition(int x, int y) {
 
     getDelegate().setLocation(x, y);
@@ -59,7 +62,8 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
-  public int getX() {
+  @Override
+  public int getPositionX() {
 
     return getDelegate().getX();
   }
@@ -67,7 +71,8 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
-  public int getY() {
+  @Override
+  public int getPositionY() {
 
     return getDelegate().getY();
   }
@@ -75,6 +80,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void pack() {
 
     getDelegate().pack();
@@ -83,6 +89,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSizeInPixel(int width, int height) {
 
     getDelegate().setSize(width, height);
@@ -91,6 +98,25 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
+  public void setWidthInPixel(int width) {
+
+    getDelegate().setSize(width, getHeightInPixel());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(int height) {
+
+    getDelegate().setSize(getWidthInPixel(), height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public boolean isResizable() {
 
     return getDelegate().isResizable();
@@ -108,6 +134,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getWidthInPixel() {
 
     return getDelegate().getWidth();
@@ -116,6 +143,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getHeightInPixel() {
 
     return getDelegate().getHeight();
@@ -124,6 +152,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameOpened(InternalFrameEvent e) {
 
     getNode().sendEvent(UiEventType.SHOW);
@@ -132,6 +161,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameClosing(InternalFrameEvent e) {
 
     // ignore
@@ -140,6 +170,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameClosed(InternalFrameEvent e) {
 
     // TODO: add close
@@ -149,6 +180,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameIconified(InternalFrameEvent e) {
 
     getNode().sendEvent(UiEventType.ICONIFY);
@@ -157,6 +189,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameDeiconified(InternalFrameEvent e) {
 
     getNode().sendEvent(UiEventType.DEICONIFY);
@@ -165,6 +198,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameActivated(InternalFrameEvent e) {
 
     getNode().sendEvent(UiEventType.ACTIVATE);
@@ -173,6 +207,7 @@ public class UiWindowAdapterSwingInternalFrame extends UiNodeAdapterSwing<JInter
   /**
    * {@inheritDoc}
    */
+  @Override
   public void internalFrameDeactivated(InternalFrameEvent e) {
 
     getNode().sendEvent(UiEventType.DEACTIVATE);

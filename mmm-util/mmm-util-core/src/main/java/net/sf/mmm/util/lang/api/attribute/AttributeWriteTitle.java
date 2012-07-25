@@ -14,8 +14,8 @@ public abstract interface AttributeWriteTitle<TITLE> extends AttributeReadTitle<
   /**
    * This method sets the {@link #getTitle() title} of this object.
    * 
-   * @param newTitle is the new {@link #getTitle() title} to set.
+   * @param title is the new {@link #getTitle() title} to set.
    */
-  void setTitle(TITLE newTitle);
+  void setTitle(TITLE title);
 
 }

@@ -9,16 +9,24 @@ import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
  * <em>main window</em>. Each client application has a single instance of this main window widget. In case of
  * a web-application this represents the browser window.
  * 
+ * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#getMainWindow()
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract interface UiWidgetMainWindow extends UiWidgetBaseWindow {
 
   /**
-   * @return the {@link UiWidgetMenuBar menu bar} of this window. Will become visible after the first
-   *         {@link net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu menu} is
-   *         {@link UiWidgetMenuBar#addChild(net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu) added}.
+   * @return the {@link UiWidgetMenuBar menu bar} of this window. Will be created and attached to the window
+   *         on the first call of this method.
    */
   UiWidgetMenuBar getMenuBar();
+
+  /**
+   * @return <code>true</code> if the {@link #setPosition(int, int) position} of {@link UiWidgetBaseWindow
+   *         windows} is absolute (on {@link net.sf.mmm.ui.toolkit.api.widget.UiDisplay}), <code>false</code>
+   *         if relative to this main window (MDI mode).
+   */
+  boolean isWindowPositionAbsolute();
 
 }

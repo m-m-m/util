@@ -38,7 +38,9 @@ public abstract class AbstractUiWidgetAtomic<ADAPTER extends UiWidgetAdapter<?>>
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    getWidgetAdapter().setClickEventSender(this, this.clickEventSender);
+    if (this.clickEventSender != null) {
+      adapter.setClickEventSender(this, this.clickEventSender);
+    }
   }
 
   /**

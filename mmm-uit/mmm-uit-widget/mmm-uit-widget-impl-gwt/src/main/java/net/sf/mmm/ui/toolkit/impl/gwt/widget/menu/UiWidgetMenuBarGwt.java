@@ -2,11 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.menu;
 
-import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.menu.AbstractUiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenuBar;
 
 /**
@@ -15,8 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenuBar;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetMenuBarGwt extends AbstractUiWidgetDynamicComposite<UiWidgetAdapterGwtMenuBar, UiWidgetMenu>
-    implements UiWidgetMenuBar {
+public class UiWidgetMenuBarGwt extends AbstractUiWidgetMenuBar<UiWidgetAdapterGwtMenuBar> {
 
   /**
    * The constructor.

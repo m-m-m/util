@@ -61,7 +61,7 @@ public abstract class UiWidgetAdapterGwtWidget<WIDGET extends Widget> extends Ui
       }
     };
     // HandlerRegistration registration =
-    getWidget().addHandler(handler, ClickEvent.getType());
+    getWidget().addDomHandler(handler, ClickEvent.getType());
   }
 
 }

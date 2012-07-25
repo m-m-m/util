@@ -18,7 +18,7 @@ public class GwtLogger extends MarkerIgnoringBase {
   private static final long serialVersionUID = 1715317043677185014L;
 
   /**
-   * The constructor.
+   * The constructor. *
    * 
    * @param name - is the {@link #getName() name} of the logger.
    */
@@ -55,11 +55,31 @@ public class GwtLogger extends MarkerIgnoringBase {
    */
   protected String format(String format, Object... args) {
 
-    // // TODO hohwille
-    StringBuilder buffer = new StringBuilder(format);
-    for (int i = 0; i < args.length; i++) {
-      buffer.append(":");
-      buffer.append(args);
+    if (format == null) {
+      return null;
+    }
+    if (args == null) {
+      return format;
+    }
+    StringBuilder buffer = new StringBuilder();
+    int argumentIndex = 0;
+    int formatStartIndex = 0;
+    while (formatStartIndex >= 0) {
+      if (argumentIndex >= args.length) {
+        // too few arguments given - append the rest of the format string
+        buffer.append(format.substring(formatStartIndex));
+        formatStartIndex = -1;
+      } else {
+        int formatEndIndex = format.indexOf("{}");
+        if (formatEndIndex == -1) {
+          buffer.append(format.substring(formatStartIndex));
+          formatStartIndex = -1;
+        } else {
+          buffer.append(format.substring(formatStartIndex, formatEndIndex));
+          formatStartIndex = formatEndIndex + 2;
+          buffer.append(args[argumentIndex++]);
+        }
+      }
     }
     return buffer.toString();
   }

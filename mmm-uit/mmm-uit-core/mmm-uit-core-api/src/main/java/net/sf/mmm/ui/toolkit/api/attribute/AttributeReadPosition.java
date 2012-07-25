@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read access to the position of an object.
+ * This interface gives read access to the {@link #getPositionX() position} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -11,17 +11,21 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeReadPosition {
 
   /**
-   * This method gets the position of this object on the x-axis (horizontal).
+   * This method gets the pixel position of the left border object on the x-axis (horizontal).
+   * 
+   * @see #getPositionY()
    * 
    * @return the x position.
    */
-  int getX();
+  int getPositionX();
 
   /**
-   * This method gets the position of this object on the y-axis (vertical).
+   * This method gets the pixel position of the top border of this object on the y-axis (vertical).
+   * 
+   * @see #getPositionX()
    * 
    * @return the y position.
    */
-  int getY();
+  int getPositionY();
 
 }
