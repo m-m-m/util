@@ -16,8 +16,8 @@
   -->
   <body>
     <links>
-      <item name="Github" href="https://github.com/hohwille/mmm"/>
-      <item name="Wiki" href="https://github.com/hohwille/mmm/wiki"/>
+      <item name="Github" href="https://github.com/m-m-m/mmm"/>
+      <item name="Wiki" href="https://github.com/m-m-m/mmm/wiki"/>
       <item name="Javadoc" href="http://m-m-m.sourceforge.net/apidocs/index.html"/>
       <item name="Home" href="http://m-m-m.sourceforge.net/"/>
     </links>
@@ -27,18 +27,18 @@
     <menu name="General Information">
       <item name="Introduction" href="index.html"/>
       <item name="Overview" href="overview.html"/>
-      <item name="Get Involved" href="https://github.com/hohwille/mmm/wiki/Get-Involved"/>
-      <item name="Road Map" href="https://github.com/hohwille/mmm/wiki/Roadmap"/>
+      <item name="Get Involved" href="https://github.com/m-m-m/mmm/wiki/Get-Involved"/>
+      <item name="Road Map" href="https://github.com/m-m-m/mmm/wiki/Roadmap"/>
       <!-- <item name="Release Notes" href="changes-report.html"/> -->
-      <item name="History" href="https://github.com/hohwille/mmm/wiki/History"/>
-      <item name="Downloads" href="https://github.com/hohwille/mmm/wiki/Download"/>
+      <item name="History" href="https://github.com/m-m-m/mmm/wiki/History"/>
+      <item name="Downloads" href="https://github.com/m-m-m/mmm/wiki/Download"/>
     </menu>
 
     <menu name="Documentation">
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="FAQ" href="faq.html"/>
-      <item name="Developer Guide" href="https://github.com/hohwille/mmm/wiki/Developer-Guide"/>
-      <item name="Users Guide" href="https://github.com/hohwille/mmm/wiki/User-Guide"/>
+      <item name="Developer Guide" href="https://github.com/m-m-m/mmm/wiki/Developer-Guide"/>
+      <item name="Users Guide" href="https://github.com/m-m-m/mmm/wiki/User-Guide"/>
     </menu>
 
     <menu ref="modules" inherit="bottom"/>

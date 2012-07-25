@@ -546,12 +546,12 @@
   </profiles>
   <issueManagement>
     <system>GitHub</system>
-    <url>http://github.com/hohwille/mmm/issues</url>
+    <url>http://github.com/m-m-m/mmm/issues</url>
   </issueManagement>
   <scm>
-    <connection>scm:git:git@github.com:hohwille/mmm.git</connection>
-    <developerConnection>scm:git:git@github.com:hohwille/mmm.git</developerConnection>
-    <url>https://github.com/hohwille/mmm/tree/master</url>
+    <connection>scm:git:git@github.com:m-m-m/mmm.git</connection>
+    <developerConnection>scm:git:git@github.com:m-m-m/mmm.git</developerConnection>
+    <url>https://github.com/m-m-m/mmm/tree/master</url>
     <tag/>
   </scm>
   <distributionManagement>
