@@ -3,19 +3,18 @@
 package net.sf.mmm.ui.toolkit.api.feature;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteFocused;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 
 /**
  * This is the interface for the {@link UiFeature features} of a focusable object. It can {@link #isFocused()
- * check} and {@link #setFocused(boolean) set} its focus and allows to
- * {@link #addFocusHandler(UiHandlerEventFocus) add} and {@link #removeFocusHandler(UiHandlerEventFocus)
- * remove} instances of {@link UiHandlerEventFocus}.
+ * check} and {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteFocused#setFocused(boolean) set} its
+ * focus and allows to {@link #addFocusHandler(UiHandlerEventFocus) add} and
+ * {@link #removeFocusHandler(UiHandlerEventFocus) remove} instances of {@link UiHandlerEventFocus}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFeatureFocus extends UiFeature, AttributeWriteHandlerObserver, AttributeWriteFocused {
+public interface UiFeatureFocus extends UiFeature, AttributeWriteFocused {
 
   /**
    * This method adds the given {@link UiHandlerEventFocus} to this object.

@@ -27,4 +27,24 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
     super(factory);
   }
 
+  /**
+   * {@inheritDoc}
+   * 
+   * <b>ATTENTION:</b><br/>
+   * For ultimate flexibility we did NOT declare this method as final here. However you should only override
+   * this if you are really sure what you are doing.
+   */
+  @Override
+  public boolean isModifiedRecursive() {
+
+    int childCount = getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      CHILD child = getChild(i);
+      if (child.isModified()) {
+        return true;
+      }
+    }
+    return super.isModified();
+  }
+
 }

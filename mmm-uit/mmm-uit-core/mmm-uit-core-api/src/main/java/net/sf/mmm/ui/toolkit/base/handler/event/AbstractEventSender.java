@@ -20,7 +20,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @param <HANDLER> is the generic type of the {@link UiHandlerEvent} to address.
  * @param <SOURCE> is the source of the events.
  */
-public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE extends AttributeReadHandlerObserver> {
+public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE> {
 
   /** The type of the managed {@link UiHandlerEvent event handlers}. */
   private final Class<HANDLER> handlerType;
@@ -31,18 +31,24 @@ public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE
   /** @see #getSource() */
   private final SOURCE source;
 
+  /** @see #before() */
+  private final AttributeReadHandlerObserver observerSource;
+
   /**
    * The constructor.
    * 
    * @param handlerType is the type of the managed {@link UiHandlerEvent event handlers}.
    * @param source is the source of the events.
+   * @param observerSource is the {@link AttributeReadHandlerObserver provider} of a potential
+   *        {@link UiHandlerObserver}.
    */
-  public AbstractEventSender(Class<HANDLER> handlerType, SOURCE source) {
+  public AbstractEventSender(Class<HANDLER> handlerType, SOURCE source, AttributeReadHandlerObserver observerSource) {
 
     super();
     this.handlers = new ArrayList<HANDLER>();
     this.handlerType = handlerType;
     this.source = source;
+    this.observerSource = observerSource;
   }
 
   /**
@@ -90,7 +96,7 @@ public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE
    */
   protected final void before() {
 
-    UiHandlerObserver handlerObserver = this.source.getHandlerObserver();
+    UiHandlerObserver handlerObserver = this.observerSource.getHandlerObserver();
     if (handlerObserver != null) {
       handlerObserver.beforeHandler(this.handlerType);
     }
@@ -101,7 +107,7 @@ public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE
    */
   protected final void after() {
 
-    UiHandlerObserver handlerObserver = this.source.getHandlerObserver();
+    UiHandlerObserver handlerObserver = this.observerSource.getHandlerObserver();
     if (handlerObserver != null) {
       handlerObserver.afterHandler(this.handlerType);
     }

@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
-import net.sf.mmm.ui.toolkit.api.handler.UiHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
@@ -21,8 +19,7 @@ import net.sf.mmm.util.nls.api.ObjectDisposedException;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> implements UiWidget,
-    AttributeWriteHandlerObserver {
+public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> implements UiWidget {
 
   /** @see #getFactory() */
   private final AbstractUiWidgetFactory<?> factory;
@@ -56,9 +53,6 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
 
   /** @see #getHeight() */
   private String height;
-
-  /** @see #getHandlerObserver() */
-  private UiHandlerObserver handlerObserver;
 
   /**
    * The constructor.
@@ -618,24 +612,6 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * {@inheritDoc}
    */
   @Override
-  public final UiHandlerObserver getHandlerObserver() {
-
-    return this.handlerObserver;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setHandlerObserver(UiHandlerObserver handlerObserver) {
-
-    this.handlerObserver = handlerObserver;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String toString() {
 
     StringBuilder buffer = new StringBuilder(getClass().getSimpleName());
@@ -651,6 +627,39 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
       buffer.append("[disabled]");
     }
     return buffer.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   * 
+   * This is the most general implementation for a {@link UiWidget} that has no value. It always returns
+   * <code>false</code>. This method has to be overridden by more specific widgets.
+   */
+  @Override
+  public final boolean isModified() {
+
+    if (isModifiedLocal()) {
+      return true;
+    }
+    return isModifiedRecursive();
+  }
+
+  /**
+   * @return {@link #isModified()} for this {@link UiWidget} itself (without {@link #isModifiedRecursive()
+   *         recursion}).
+   */
+  protected boolean isModifiedLocal() {
+
+    return false;
+  }
+
+  /**
+   * @return <code>true</code> if this is a {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite
+   *         composite widget} and one of its children is {@link #isModified() modified}.
+   */
+  protected boolean isModifiedRecursive() {
+
+    return false;
   }
 
 }

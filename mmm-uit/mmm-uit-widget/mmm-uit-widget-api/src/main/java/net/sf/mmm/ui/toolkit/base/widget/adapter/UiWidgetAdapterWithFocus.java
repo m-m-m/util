@@ -20,7 +20,8 @@ public interface UiWidgetAdapterWithFocus<WIDGET> extends UiWidgetAdapter<WIDGET
    * This method registers the given {@link UiHandlerEventFocus focus handler} in the {@link #getWidget()
    * widget}. This method will be called only once.
    * 
-   * @param source is the {@link UiHandlerEventFocus#onFocusChange(UiFeatureFocus, boolean, boolean)
+   * @param source is the
+   *        {@link UiHandlerEventFocus#onFocusChange(net.sf.mmm.ui.toolkit.api.attribute.AttributeReadFocused, boolean, boolean)
    *        event source}.
    * @param sender is the {@link UiHandlerEventFocus}.
    */

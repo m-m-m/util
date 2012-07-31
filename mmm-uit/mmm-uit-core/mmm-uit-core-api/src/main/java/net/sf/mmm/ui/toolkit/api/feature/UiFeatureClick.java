@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.feature;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 
 /**
@@ -13,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFeatureClick extends UiFeature, AttributeWriteHandlerObserver {
+public interface UiFeatureClick extends UiFeature {
 
   /**
    * This method adds the given {@link UiHandlerEventClick} to this object.

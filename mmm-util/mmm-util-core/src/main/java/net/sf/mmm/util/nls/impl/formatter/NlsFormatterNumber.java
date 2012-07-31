@@ -2,19 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 
-import java.text.Format;
-import java.text.NumberFormat;
 import java.util.Locale;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using
- * {@link NumberFormat#getInstance(Locale)}.
+ * {@link NlsFormatterManager#TYPE_NUMBER}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -35,14 +34,15 @@ public final class NlsFormatterNumber extends SimpleNlsFormatter<Object> {
    * {@inheritDoc}
    */
   @Override
-  public Format createFormat(Locale locale) {
+  protected Formatter<Object> createFormatter(Locale locale) {
 
-    return NumberFormat.getInstance(locale);
+    return FormatterProvider.getNumberFormatter(locale);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_NUMBER;
@@ -51,6 +51,7 @@ public final class NlsFormatterNumber extends SimpleNlsFormatter<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyle() {
 
     return null;

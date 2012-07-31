@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteModified;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
@@ -21,7 +22,7 @@ import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterField;
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getWidgetAdapter() adapter} value.
  */
 public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<?, VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
-    extends AbstractUiWidgetRegularAtomic<ADAPTER> implements UiWidgetField<VALUE> {
+    extends AbstractUiWidgetRegularAtomic<ADAPTER> implements UiWidgetField<VALUE>, AttributeWriteModified {
 
   /** @see #addChangeHandler(UiHandlerEventValueChange) */
   private ChangeEventSender<VALUE> changeEventSender;
@@ -31,6 +32,12 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
 
   /** @see #getValue() */
   private VALUE value;
+
+  /** @see #getOriginalValue() */
+  private VALUE originalValue;
+
+  /** @see #isModified() */
+  private boolean modified;
 
   /**
    * The constructor.
@@ -64,7 +71,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public final void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
 
     if (this.changeEventSender == null) {
-      this.changeEventSender = new ChangeEventSender<VALUE>(this);
+      this.changeEventSender = new ChangeEventSender<VALUE>(this, getFactory());
       if (hasWidgetAdapter()) {
         getWidgetAdapter().setChangeEventSender(this, this.changeEventSender);
       }
@@ -98,19 +105,53 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final void setValue(VALUE value) {
 
-    this.value = value;
+    setValue(value, false);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValueForUser(VALUE userValue) {
+
+    setValue(userValue, true);
+  }
+
+  /**
+   * Implementation of {@link #setValue(Object)} and {@link #setValueForUser(Object)}.
+   * 
+   * @param newValue is the new {@link #getValue() value}.
+   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
+   *        set from {@link #setValue(Object)}.
+   */
+  private void setValue(VALUE newValue, boolean forUser) {
+
+    this.value = newValue;
+    if (!forUser) {
+      this.originalValue = newValue;
+    }
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue;
-      if (value == null) {
+      if (newValue == null) {
         adapterValue = getNullValue();
       } else {
-        adapterValue = convertFromValue(value);
+        adapterValue = convertFromValue(newValue);
       }
       getWidgetAdapter().setValue(adapterValue);
     }
+    setModified(forUser);
     if (this.changeEventSender != null) {
       this.changeEventSender.onValueChange(this, true);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final void resetValue() {
+
+    setValue(this.originalValue);
   }
 
   /**
@@ -189,7 +230,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final VALUE getOriginalValue() {
 
-    return this.value;
+    return this.originalValue;
   }
 
   /**
@@ -199,7 +240,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public final void addFocusHandler(UiHandlerEventFocus handler) {
 
     if (this.focusEventSender == null) {
-      this.focusEventSender = new FocusEventSender(this);
+      this.focusEventSender = new FocusEventSender(this, getFactory());
       if (hasWidgetAdapter()) {
         getWidgetAdapter().setFocusEventSender(this, this.focusEventSender);
       }
@@ -245,6 +286,24 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       return this.focusEventSender.isFocused();
     }
     return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final boolean isModifiedLocal() {
+
+    return this.modified;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setModified(boolean modified) {
+
+    this.modified = modified;
   }
 
 }

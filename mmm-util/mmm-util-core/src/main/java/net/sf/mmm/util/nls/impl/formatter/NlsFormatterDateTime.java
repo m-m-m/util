@@ -11,21 +11,20 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsFormatterDateTime extends AbstractSimpleNlsFormatterDate {
+public abstract class NlsFormatterDateTime extends AbstractSimpleNlsFormatterDate {
 
   /**
    * The constructor.
-   * 
-   * @param style is the style used for formatting dates and times (e.g. {@link java.text.DateFormat#SHORT}).
    */
-  public NlsFormatterDateTime(int style) {
+  public NlsFormatterDateTime() {
 
-    super(style);
+    super();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_DATETIME;

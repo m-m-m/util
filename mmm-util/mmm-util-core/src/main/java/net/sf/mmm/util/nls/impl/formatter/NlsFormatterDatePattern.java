@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
  */
 public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
 
-  /** @see #createFormat(Locale) */
+  /** @see #createFormatter(Locale) */
   private final String pattern;
 
   /**
@@ -37,15 +37,15 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
    * {@inheritDoc}
    */
   @Override
-  public Format createFormat(Locale locale) {
+  protected Formatter<Object> createFormatter(Locale locale) {
 
-    // reimplement thread-safe SimpleDateFormat?
-    return new SimpleDateFormat(this.pattern, locale);
+    return FormatterProvider.getDateFormatter(locale, this.pattern);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_DATE;
@@ -54,6 +54,7 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyle() {
 
     return this.pattern;

@@ -3,6 +3,7 @@
 package net.sf.mmm.ui.toolkit.base.handler.event;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadFocused;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 
@@ -22,17 +23,19 @@ public class FocusEventSender extends AbstractEventSender<UiHandlerEventFocus, U
    * The constructor.
    * 
    * @param source is the {@link #getSource() source}.
+   * @param observerSource is the {@link AttributeReadHandlerObserver provider} of a potential
+   *        {@link net.sf.mmm.ui.toolkit.api.handler.UiHandlerObserver}.
    */
-  public FocusEventSender(UiFeatureFocus source) {
+  public FocusEventSender(UiFeatureFocus source, AttributeReadHandlerObserver observerSource) {
 
-    super(UiHandlerEventFocus.class, source);
+    super(UiHandlerEventFocus.class, source, observerSource);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void onFocusChange(UiFeatureFocus source, boolean programmatic, boolean lost) {
+  public void onFocusChange(AttributeReadFocused source, boolean programmatic, boolean lost) {
 
     this.focused = !lost;
     before();

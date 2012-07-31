@@ -50,7 +50,7 @@ public abstract class AbstractUiWidgetAtomic<ADAPTER extends UiWidgetAdapter<?>>
   public void addClickHandler(UiHandlerEventClick handler) {
 
     if (this.clickEventSender == null) {
-      this.clickEventSender = new ClickEventSender(this);
+      this.clickEventSender = new ClickEventSender(this, getFactory());
       if (hasWidgetAdapter()) {
         getWidgetAdapter().setClickEventSender(this, this.clickEventSender);
       }

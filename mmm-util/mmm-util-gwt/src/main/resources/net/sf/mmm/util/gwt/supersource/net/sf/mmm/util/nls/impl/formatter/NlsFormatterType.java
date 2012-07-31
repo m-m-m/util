@@ -9,7 +9,6 @@ import java.util.Map;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
-import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} that formats
@@ -40,6 +39,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyle() {
 
     return this.style;
@@ -48,6 +48,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_TYPE;
@@ -56,6 +57,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {
 

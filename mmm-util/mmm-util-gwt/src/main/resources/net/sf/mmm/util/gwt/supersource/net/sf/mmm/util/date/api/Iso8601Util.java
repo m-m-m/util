@@ -2,18 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.api;
 
-import java.util.Calendar;
-import java.util.regex.Pattern;
-
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is a GWT compatible and reduced variant of this class.
- *  
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @ComponentSpecification
 public interface Iso8601Util extends Iso8601UtilLimited {
+
+  // nothing to add - extended methods are NOT supported by GWT
 
 }

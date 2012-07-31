@@ -6,7 +6,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * This interface gives read access to the {@link #isModified() modified} attribute of an object. Such object
  * tracks if it gets modifications.
  * 
- * @see AtrributeReadEditable
+ * @see AttributeReadEditable
  * @see AttributeWriteEnabled
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -15,13 +15,14 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeReadModified {
 
   /**
-   * This method determines if this object is <em>modified</em>. This means that the object has been modified
-   * since it has been saved for the last time. Often this is also called <em>dirty</em>. Depending on the
-   * implementation it may even remain modified if changes are done that bring the object back into its
-   * initial state so it is {@link Object#equals(Object) equal} to its persistent state. If possible this
-   * should be avoided. However a robust and easy solution is often better than a complex and potentially
-   * buggy approach. This method may be offered by the data object itself (persistent entity) but also by an
-   * object managing the data (e.g. a user interface).
+   * This method determines if this object (or more precisely its value) is <em>modified</em>. This means that
+   * the object has been modified (via a the user interface) since it's value was programatically
+   * {@link net.sf.mmm.util.lang.api.attribute.AttributeWriteValue#setValue(Object) set} for the last time.
+   * Often this is also called <em>dirty</em>. A composite object is also modified if one of its children are
+   * modified.<br/>
+   * <b>NOTE:</b><br/>
+   * If the object's value is changed by the end-user to something else but then changed back to its original
+   * value it may still remain {@link #isModified() modified}.
    * 
    * @return <code>true</code> if this object has been modified, <code>false</code> otherwise (if no changes
    *         have been made to this object).

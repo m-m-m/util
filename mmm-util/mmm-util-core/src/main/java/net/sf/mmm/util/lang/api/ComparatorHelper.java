@@ -13,7 +13,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-class ComparatorHelper {
+final class ComparatorHelper {
+
+  /**
+   * Construction prohibited.
+   */
+  private ComparatorHelper() {
+
+    super();
+  }
 
   /**
    * This method converts the given value to a more common type. E.g. instances of {@link Calendar} or

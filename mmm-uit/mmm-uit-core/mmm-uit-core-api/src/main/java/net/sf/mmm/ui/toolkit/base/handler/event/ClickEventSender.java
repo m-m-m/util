@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.handler.event;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 
@@ -18,15 +19,18 @@ public class ClickEventSender extends AbstractEventSender<UiHandlerEventClick, U
    * The constructor.
    * 
    * @param source is the {@link #getSource() source}.
+   * @param observerSource is the {@link AttributeReadHandlerObserver provider} of a potential
+   *        {@link net.sf.mmm.ui.toolkit.api.handler.UiHandlerObserver}.
    */
-  public ClickEventSender(UiFeatureClick source) {
+  public ClickEventSender(UiFeatureClick source, AttributeReadHandlerObserver observerSource) {
 
-    super(UiHandlerEventClick.class, source);
+    super(UiHandlerEventClick.class, source, observerSource);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void onClick(UiFeatureClick source, boolean programmatic) {
 
     before();

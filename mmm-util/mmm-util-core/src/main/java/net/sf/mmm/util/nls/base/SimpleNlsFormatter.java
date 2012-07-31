@@ -3,15 +3,15 @@
 package net.sf.mmm.util.nls.base;
 
 import java.io.IOException;
-import java.text.Format;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is an abstract base implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} that adapts a
- * {@link Format}.
+ * This is an abstract base implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} based on
+ * {@link Formatter}.
  * 
  * @param <O> is the generic type of the object to {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
  * 
@@ -29,12 +29,12 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsFormatterPlugin<O
   }
 
   /**
-   * This method creates the underlying {@link Format} to delegate to.
+   * This method creates the underlying {@link Formatter} to delegate to.
    * 
-   * @param locale is the locale of the {@link Format} to create.
+   * @param locale is the locale of the {@link Formatter} to create.
    * @return the according format.
    */
-  protected abstract Format createFormat(Locale locale);
+  protected abstract Formatter<O> createFormatter(Locale locale);
 
   /**
    * {@inheritDoc}
@@ -42,12 +42,13 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsFormatterPlugin<O
   @Override
   public String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver) {
 
-    return createFormat(locale).format(object);
+    return createFormatter(locale).format(object);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) {
 

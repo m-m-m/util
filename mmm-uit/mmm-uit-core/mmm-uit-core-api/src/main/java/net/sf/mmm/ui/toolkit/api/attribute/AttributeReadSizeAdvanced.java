@@ -5,7 +5,8 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 import net.sf.mmm.ui.toolkit.api.common.SizeUnit;
 
 /**
- * This interface gives read access to the size of an object.
+ * This interface gives {@link #getHeightUnit() advanced} read access to the {@link #getWidth() size} of an
+ * object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

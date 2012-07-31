@@ -24,8 +24,9 @@ public interface UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> extends UiWi
    * This method registers the given {@link UiHandlerEventValueChange value change handler} in the
    * {@link #getWidget() widget}. This method will be called only once.
    * 
-   * @param source is the {@link UiHandlerEventValueChange#onValueChange(UiFeatureValue, boolean) event
-   *        source}.
+   * @param source is the
+   *        {@link UiHandlerEventValueChange#onValueChange(net.sf.mmm.util.lang.api.attribute.AttributeReadValue, boolean)
+   *        event source}.
    * @param sender is the {@link UiHandlerEventValueChange}.
    */
   void setChangeEventSender(UiFeatureValue<VALUE> source, UiHandlerEventValueChange<VALUE> sender);

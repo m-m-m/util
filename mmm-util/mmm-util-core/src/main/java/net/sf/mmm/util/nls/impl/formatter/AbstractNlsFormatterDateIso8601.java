@@ -2,21 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 
-import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
+import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for {@link Date}s.
@@ -24,9 +20,9 @@ import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsFormatterPlugin<Object> {
+public abstract class AbstractNlsFormatterDateIso8601 extends SimpleNlsFormatter<Object> {
 
-  /** @see #format(Calendar, Locale, Appendable) */
+  /** @see #createFormatter(Locale) */
   private Iso8601Util iso8601Util;
 
   /**
@@ -73,65 +69,21 @@ public abstract class AbstractNlsFormatterDateIso8601 extends AbstractNlsFormatt
   }
 
   /**
-   * This method formats the given <code>calendar</code>.
-   * 
-   * @param calendar is the calendar to format.
-   * @param locale is the locale used for localized formatting.
-   * @param buffer is where to append the formatted <code>calendar</code>.
+   * {@inheritDoc}
    */
-  protected void format(Calendar calendar, Locale locale, Appendable buffer) {
+  @Override
+  protected Formatter<Object> createFormatter(Locale locale) {
 
-    String type = getType();
-    if (NlsFormatterManager.TYPE_DATE.equals(type)) {
-      this.iso8601Util.formatDate(calendar, true, buffer);
-    } else if (NlsFormatterManager.TYPE_TIME.equals(type)) {
-      this.iso8601Util.formatTime(calendar, true, buffer);
-      this.iso8601Util.formatTimeZone(calendar, true, buffer);
-    } else if (NlsFormatterManager.TYPE_DATETIME.equals(type)) {
-      this.iso8601Util.formatDateTime(calendar, true, true, true, buffer);
-    } else {
-      throw new IllegalCaseException(type);
-    }
+    return FormatterProvider.getDateFormatter(locale, getType(), this.iso8601Util);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyle() {
 
     return NlsFormatterManager.STYLE_ISO_8601;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
-      Appendable buffer) throws IOException {
-
-    Calendar calendar = null;
-    if (object != null) {
-      if (object instanceof Calendar) {
-        calendar = (Calendar) object;
-      } else if (object instanceof Date) {
-        calendar = Calendar.getInstance(locale);
-        calendar.setTime((Date) object);
-      } else if (object instanceof Number) {
-        calendar = Calendar.getInstance(locale);
-        long millis = ((Number) object).longValue();
-        calendar.setTime(new Date(millis));
-      }
-    }
-    if (calendar == null) {
-      String string = null;
-      if (object != null) {
-        string = object.toString();
-      }
-      if (string == null) {
-        string = "null";
-      }
-      buffer.append(string);
-    } else {
-      format(calendar, locale, buffer);
-    }
-  }
 }

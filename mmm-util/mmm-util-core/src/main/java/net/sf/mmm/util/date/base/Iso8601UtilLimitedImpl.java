@@ -39,6 +39,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDate(Date date) {
 
     return formatDate(date, true);
@@ -47,6 +48,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDate(Date date, boolean extended) {
 
     // we could save 2*2 bytes here according to extended flag ;)
@@ -59,6 +61,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("deprecation")
   public void formatDate(Date date, boolean extended, Appendable buffer) {
 
@@ -110,32 +113,38 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDateTime(Date date) {
 
-    return formatDateTime(date, true, true);
+    return formatDateTime(date, true, true, true);
   }
 
   /**
    * {@inheritDoc}
    */
-  public String formatDateTime(Date date, boolean extendedDate, boolean extendedTime) {
+  @Override
+  public String formatDateTime(Date date, boolean extendedDate, boolean extendedTime, boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ssZ".length() == 20
     StringBuilder buffer = new StringBuilder(20);
-    formatDateTime(date, extendedDate, extendedTime, buffer);
+    formatDateTime(date, extendedDate, extendedTime, extendedTimezone, buffer);
     return buffer.toString();
   }
 
   /**
    * {@inheritDoc}
    */
-  public void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, Appendable buffer) {
+  @SuppressWarnings("deprecation")
+  @Override
+  public void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, boolean extendedTimeZone,
+      Appendable buffer) {
 
     try {
       formatDate(date, extendedDate, buffer);
       buffer.append('T');
       formatTime(date, extendedTime, buffer);
       buffer.append('Z');
+      formatTimeZone(date.getTimezoneOffset(), extendedTimeZone, buffer);
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
@@ -144,6 +153,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("deprecation")
   public void formatTime(Date date, boolean extended, Appendable buffer) {
 
@@ -198,6 +208,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void formatTimeZone(int timezoneOffset, boolean extended, Appendable buffer) {
 
     try {
@@ -241,6 +252,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("deprecation")
   public Date parseDate(String dateIso8601) {
 

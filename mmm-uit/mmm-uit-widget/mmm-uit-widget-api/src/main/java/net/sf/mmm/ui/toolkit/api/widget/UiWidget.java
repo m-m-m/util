@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadModified;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteOnlySizeInPixel;
@@ -32,7 +33,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  */
 public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeWriteVisible, AttributeWriteTooltip,
     AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
-    AttributeWriteOnlySizeInPixel {
+    AttributeWriteOnlySizeInPixel, AttributeReadModified {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

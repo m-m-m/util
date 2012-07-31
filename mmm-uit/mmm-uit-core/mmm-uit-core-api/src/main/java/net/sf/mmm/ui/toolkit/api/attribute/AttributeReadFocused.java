@@ -7,7 +7,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
  * interactive behavior that can be enabled or disabled. If an object is disabled, the user can NOT interact
  * with the object. This is typically visualized by greying out the object.
  * 
- * @see AtrributeReadEditable
+ * @see AttributeReadEditable
  * @see AttributeWriteEnabled
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

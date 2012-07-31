@@ -84,10 +84,12 @@ public interface Iso8601UtilLimited {
    *        <code>true</code> the extended date format ("yyyy-MM-dd") is used.
    * @param extendedTime if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code>
    *        the extended time format ("HH:mm:ss") is used.
+   * @param extendedTimezone if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if
+   *        <code>true</code> the extended timezone format ("&#177;HH:mm[:ss]") is used.
    * @return the given <code>calendar</code> as date string.
    * @since 3.0.0
    */
-  String formatDateTime(Date date, boolean extendedDate, boolean extendedTime);
+  String formatDateTime(Date date, boolean extendedDate, boolean extendedTime, boolean extendedTimezone);
 
   /**
    * This method formats the given <code>date</code> as a date and time according to
@@ -98,10 +100,12 @@ public interface Iso8601UtilLimited {
    *        <code>true</code> the extended date format ("yyyy-MM-dd") is used.
    * @param extendedTime if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code>
    *        the extended time format ("HH:mm:ss") is used.
+   * @param extendedTimezone if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if
+   *        <code>true</code> the extended timezone format ("&#177;HH:mm[:ss]") is used.
    * @param buffer is where to append the formatted date and time.
    * @since 3.0.0
    */
-  void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, Appendable buffer);
+  void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, boolean extendedTimezone, Appendable buffer);
 
   /**
    * This method formats the given <code>date</code> as time according to {@link Iso8601UtilLimited ISO 8601}.

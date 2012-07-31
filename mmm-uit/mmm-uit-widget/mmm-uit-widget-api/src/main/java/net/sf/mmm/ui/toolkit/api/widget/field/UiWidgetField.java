@@ -16,35 +16,6 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularAtomic;
  */
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularAtomic, UiFeatureValue<VALUE>, UiFeatureFocus {
 
-  /**
-   * {@inheritDoc}
-   * 
-   * <br/>
-   * <b>ATTENTION:</b><br/>
-   * If the current value entered by the user can NOT be parsed, this method will catch and ignore the
-   * exception and return <code>null</code> instead. If you want to do validation and give feedback to the
-   * user please use {@link #getValueOrException()} instead.
-   */
-  VALUE getValue();
-
-  /**
-   * This method is like {@link #getValue()} but does NOT catch exceptions while parsing the value from the
-   * user input.
-   * 
-   * @return the current value of this widget. May be <code>null</code> if empty. If the value type is
-   *         {@link String} the empty {@link String} has to be returned if no value has been entered.
-   * @throws RuntimeException if the entered value is invalid (e.g. paring caused a
-   *         {@link NumberFormatException}).
-   */
-  VALUE getValueOrException() throws RuntimeException;
-
-  /**
-   * This method gets the last value that has been {@link #setValue(Object) set}. If you invoke
-   * {@link #setValue(Object)} then later calls to {@link #getValue()} will return the latest value that can
-   * be modified by the end-user. This method will ensure to get the value that was set before by the program.
-   * 
-   * @return the original value.
-   */
-  VALUE getOriginalValue();
+  // nothing to add
 
 }

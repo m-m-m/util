@@ -87,6 +87,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDate(Calendar calendar) {
 
     return formatDate(calendar, true);
@@ -95,6 +96,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDate(Calendar calendar, boolean extended) {
 
     // we could save 2*2 bytes here according to extended flag ;)
@@ -107,6 +109,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public void formatDate(Calendar calendar, boolean extended, Appendable buffer) {
 
     int year = calendar.get(Calendar.YEAR);
@@ -119,9 +122,11 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
    * {@inheritDoc}
    */
   @Override
-  public void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, Appendable buffer) {
+  public void formatDateTime(Date date, boolean extendedDate, boolean extendedTime, boolean extendedTimeZone,
+      Appendable buffer) {
 
     try {
+      // TODO use timezone offset from date?
       Calendar calendar = Calendar.getInstance(TZ_UTC);
       calendar.setTime(date);
       formatDate(calendar, extendedDate, buffer);
@@ -136,6 +141,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDateTime(Calendar calendar) {
 
     return formatDateTime(calendar, true, true, true);
@@ -144,6 +150,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
@@ -155,6 +162,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone,
       Appendable buffer) {
 
@@ -171,6 +179,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public void formatTime(Calendar calendar, boolean extended, Appendable buffer) {
 
     int hours = calendar.get(Calendar.HOUR_OF_DAY);
@@ -182,6 +191,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public void formatTimeZone(Calendar calendar, boolean extended, Appendable buffer) {
 
     TimeZone timezone = calendar.getTimeZone();
@@ -201,6 +211,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public Calendar parseCalendar(String date) {
 
     Calendar calendar = Calendar.getInstance();
@@ -242,6 +253,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   /**
    * {@inheritDoc}
    */
+  @Override
   public void parseCalendar(String date, Calendar calendar) {
 
     CharSequenceScanner scanner = new CharSequenceScanner(date);

@@ -5,12 +5,12 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 /**
  * This interface gives read and write access to the {@link #isEditable() editable} attribute of an object.
  * 
- * @see AtrributeReadEditable
+ * @see AttributeReadEditable
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeWriteEditable extends AtrributeReadEditable {
+public abstract interface AttributeWriteEditable extends AttributeReadEditable {
 
   /**
    * This method set the {@link #isEditable() editable} status.
