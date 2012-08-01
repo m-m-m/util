@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
 import net.sf.mmm.util.nls.impl.DefaultNlsTemplateResolver;
 import net.sf.mmm.util.nls.impl.NlsBundleFactoryImpl;
@@ -44,6 +45,9 @@ public final class NlsAccess {
       synchronized (NlsAccess.class) {
         if (factory == null) {
           NlsMessageFactoryImpl factoryImpl = new NlsMessageFactoryImpl();
+          if ((templateResolver != null) && (templateResolver instanceof AbstractNlsTemplateResolver)) {
+            factoryImpl.setNlsDependencies(((AbstractNlsTemplateResolver) templateResolver).getNlsDependencies());
+          }
           factoryImpl.initialize();
           factory = factoryImpl;
         }
@@ -87,6 +91,9 @@ public final class NlsAccess {
       synchronized (NlsAccess.class) {
         if (templateResolver == null) {
           DefaultNlsTemplateResolver resolver = new DefaultNlsTemplateResolver();
+          if ((factory != null) && (factory instanceof NlsMessageFactoryImpl)) {
+            resolver.setNlsDependencies(((NlsMessageFactoryImpl) factory).getNlsDependencies());
+          }
           resolver.initialize();
           templateResolver = resolver;
         }

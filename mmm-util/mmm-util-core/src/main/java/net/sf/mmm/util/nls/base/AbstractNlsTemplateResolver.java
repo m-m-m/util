@@ -46,7 +46,7 @@ public abstract class AbstractNlsTemplateResolver extends AbstractComponent impl
   /**
    * @return the {@link NlsDependencies}.
    */
-  protected NlsDependencies getNlsDependencies() {
+  public NlsDependencies getNlsDependencies() {
 
     return this.nlsDependencies;
   }

@@ -17,7 +17,7 @@
   <source path="nls" excludes="base/NlsBundleHelper.java,base/NlsCachingLocalizer.java,**/*NlsResourceLocator*,**/AbstractNlsBundleFactory.java,**/*ResourceBundle*,api/ComposedException.java"/>
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
-  <generate-with class="net.sf.mmm.util.nls.impl.NlsResourceBundleGenerator">
+  <generate-with class="net.sf.mmm.util.nls.impl.NlsBundleGenerator">
     <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory"/>
   </generate-with>
 </module>
