@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -16,13 +17,13 @@ import com.google.gwt.user.client.ui.HasValue;
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
  *        {@link #getWidget() widget}.
  */
-public abstract class UiWidgetAdapterGwtFocusWidgetField<WIDGET extends FocusWidget & HasValue<ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
-    extends UiWidgetAdapterGwtFocusWidgetFieldBase<WIDGET, VALUE, ADAPTER_VALUE> {
+public abstract class UiWidgetAdapterGwtFieldFocusWidget<WIDGET extends FocusWidget & HasValue<ADAPTER_VALUE> & HasChangeHandlers, VALUE, ADAPTER_VALUE>
+    extends UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET, VALUE, ADAPTER_VALUE> {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtFocusWidgetField() {
+  public UiWidgetAdapterGwtFieldFocusWidget() {
 
     super();
   }
@@ -31,18 +32,9 @@ public abstract class UiWidgetAdapterGwtFocusWidgetField<WIDGET extends FocusWid
    * {@inheritDoc}
    */
   @Override
-  public ADAPTER_VALUE getValue() {
+  protected final HasValue<ADAPTER_VALUE> getWidgetAsHasValue() {
 
-    return getWidget().getValue();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setValue(ADAPTER_VALUE value) {
-
-    getWidget().setValue(value, false);
+    return getWidget();
   }
 
 }

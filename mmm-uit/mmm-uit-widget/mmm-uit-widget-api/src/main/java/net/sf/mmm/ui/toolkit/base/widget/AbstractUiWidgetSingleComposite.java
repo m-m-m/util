@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterSingleComposite;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetSingleComposite} using GWT.
+ * This is the abstract base implementation of {@link UiWidgetSingleComposite}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -78,10 +78,11 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
   }
 
   /**
-   * {@inheritDoc}
+   * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleMutableComposite#setChild(UiWidget)
+   * 
+   * @param child is the new {@link #getChild() child}.
    */
-  @Override
-  public final void setChild(CHILD child) {
+  protected void setChild(CHILD child) {
 
     if (this.child != null) {
       removeFromParent((AbstractUiWidget<?>) this.child);

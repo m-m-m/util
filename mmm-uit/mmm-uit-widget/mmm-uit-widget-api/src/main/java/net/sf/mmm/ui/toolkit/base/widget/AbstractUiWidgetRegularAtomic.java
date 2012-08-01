@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularAtomic;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetRegularAtomic} using GWT.
+ * This is the abstract base implementation of {@link UiWidgetRegularAtomic}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -17,6 +17,7 @@ public abstract class AbstractUiWidgetRegularAtomic<ADAPTER extends UiWidgetAdap
 
   /**
    * The constructor.
+   * 
    * @param factory is the {@link #getFactory() factory}.
    */
   public AbstractUiWidgetRegularAtomic(AbstractUiWidgetFactory<?> factory) {

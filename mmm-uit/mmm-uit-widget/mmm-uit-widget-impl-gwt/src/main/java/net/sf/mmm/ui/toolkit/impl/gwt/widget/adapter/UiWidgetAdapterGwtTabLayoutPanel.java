@@ -34,7 +34,9 @@ public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicC
   @Override
   protected TabLayoutPanel createWidget() {
 
-    return new TabLayoutPanel(1.5, Unit.EM);
+    TabLayoutPanel tabLayoutPanel = new TabLayoutPanel(1.5, Unit.EM);
+    // tabLayoutPanel.setWidth("100%");
+    return tabLayoutPanel;
   }
 
   /**

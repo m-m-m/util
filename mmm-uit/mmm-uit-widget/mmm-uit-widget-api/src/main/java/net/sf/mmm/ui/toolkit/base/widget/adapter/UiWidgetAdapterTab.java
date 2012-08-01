@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterTab<WIDGET> extends UiWidgetAdapterSingleComposite<WIDGET, UiWidgetRegular>,
+public interface UiWidgetAdapterTab<WIDGET> extends UiWidgetAdapterSingleMutableComposite<WIDGET, UiWidgetRegular>,
     UiWidgetAdapterWithLabel<WIDGET>, AttributeWriteImage<UiWidgetImage> {
 
   // nothing to add

@@ -8,7 +8,7 @@ package net.sf.mmm.ui.toolkit.api.widget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
+ * @param <CHILD> is the generic type of the {@link #getChild(int) child}.
  */
 public interface UiWidgetSingleComposite<CHILD extends UiWidget> extends UiWidgetComposite<CHILD> {
 
@@ -18,14 +18,6 @@ public interface UiWidgetSingleComposite<CHILD extends UiWidget> extends UiWidge
    * @return the single child or <code>null</code> if not set.
    */
   CHILD getChild();
-
-  /**
-   * This method sets the single {@link #getChild() child} of this widget. The current {@link #getChild()
-   * child} will be replaced (and is therefore removed from the UI).
-   * 
-   * @param child is the new child to set.
-   */
-  void setChild(CHILD child);
 
   /**
    * {@inheritDoc}

@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterBaseWindow<WIDGET> extends UiWidgetAdapterSingleComposite<WIDGET, UiWidgetRegular>,
+public interface UiWidgetAdapterBaseWindow<WIDGET> extends UiWidgetAdapterDynamicComposite<WIDGET, UiWidgetRegular>,
     AttributeWriteSizeInPixel, AttributeWritePosition, AttributeWriteTitle<String>, AttributeWriteResizable {
 
   // nothing to add

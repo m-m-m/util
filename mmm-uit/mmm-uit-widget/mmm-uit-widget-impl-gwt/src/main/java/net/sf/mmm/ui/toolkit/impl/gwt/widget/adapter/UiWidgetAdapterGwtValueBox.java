@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.ValueBox;
  *        {@link #getWidget() widget}.
  */
 public abstract class UiWidgetAdapterGwtValueBox<WIDGET extends ValueBox<ADAPTER_VALUE>, VALUE, ADAPTER_VALUE> extends
-    UiWidgetAdapterGwtFocusWidgetField<WIDGET, VALUE, ADAPTER_VALUE> implements
+    UiWidgetAdapterGwtFieldFocusWidget<WIDGET, VALUE, ADAPTER_VALUE> implements
     UiWidgetAdapterInputField<WIDGET, VALUE, ADAPTER_VALUE> {
 
   /**

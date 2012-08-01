@@ -110,6 +110,9 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
   public void addChild(CHILD child) {
 
     this.children.add(child);
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().addChild(child, -1);
+    }
     doAddChild(child, -1);
     ((AbstractUiWidget<?>) child).setParent(this);
   }

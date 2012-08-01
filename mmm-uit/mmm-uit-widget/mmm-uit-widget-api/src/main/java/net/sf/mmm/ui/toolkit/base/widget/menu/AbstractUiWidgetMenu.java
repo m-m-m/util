@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.base.widget.menu;
 
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItem;
+import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItemSeparator;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterMenu;
@@ -62,6 +63,28 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu<?
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setLabel(label);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addSeparator() {
+
+    UiWidgetMenuItemSeparator separator = getFactory().create(UiWidgetMenuItemSeparator.class);
+    addChild(separator);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetMenu addSubmenu(String submenuLabel) {
+
+    UiWidgetMenu submenu = getFactory().create(UiWidgetMenu.class);
+    submenu.setLabel(submenuLabel);
+    addChild(submenu);
+    return submenu;
   }
 
 }

@@ -2,14 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterMainWindow;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterMainWindow} using GWT based on {@link RootLayoutPanel}
@@ -18,11 +16,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtSingleComposite<RootLayoutPanel, UiWidgetRegular>
-    implements UiWidgetAdapterMainWindow<RootLayoutPanel> {
-
-  /** @see #setChild(UiWidgetRegular) */
-  private Widget childWidget;
+public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<RootLayoutPanel> implements
+    UiWidgetAdapterMainWindow<RootLayoutPanel> {
 
   /**
    * The constructor.
@@ -48,23 +43,6 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtSingleCompos
   public void setTitle(String title) {
 
     Window.setTitle(title);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setChild(UiWidgetRegular child) {
-
-    if (this.childWidget != null) {
-      getWidget().remove(this.childWidget);
-    }
-    if (child == null) {
-      this.childWidget = null;
-    } else {
-      this.childWidget = getWidget(child);
-      getWidget().add(this.childWidget);
-    }
   }
 
   /**
@@ -173,7 +151,7 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtSingleCompos
   @Override
   public void setMenuBar(UiWidgetMenuBar menuBar) {
 
-    getWidget().insert(getWidget(menuBar), 0);
+    getContentPanel().insert(getWidget(menuBar), 0);
   }
 
   /**
@@ -182,7 +160,8 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtSingleCompos
   @Override
   protected RootLayoutPanel createWidget() {
 
-    return RootLayoutPanel.get();
+    RootLayoutPanel rootLayoutPanel = RootLayoutPanel.get();
+    return rootLayoutPanel;
   }
 
 }

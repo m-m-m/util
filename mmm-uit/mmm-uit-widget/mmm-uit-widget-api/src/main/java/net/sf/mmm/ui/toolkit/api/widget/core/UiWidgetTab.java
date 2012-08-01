@@ -6,10 +6,10 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteImage;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleComposite;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleMutableComposite;
 
 /**
- * This is the interface for a {@link UiWidgetSingleComposite single composite widget} that represents a
+ * This is the interface for a {@link UiWidgetSingleMutableComposite single composite widget} that represents a
  * single <code>tab</code>. In order to
  * {@link net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel#addChild(UiWidgetTab) add} a something like
  * a {@link net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetPanel panel} to a
@@ -23,7 +23,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTab extends UiWidgetSingleComposite<UiWidgetRegular>, AttributeWriteLabel,
+public interface UiWidgetTab extends UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteLabel,
     AttributeWriteImage<UiWidgetImage>, UiWidgetReal {
 
   // nothing to add

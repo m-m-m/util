@@ -6,6 +6,8 @@ import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterRichTextArea;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtRichTextArea.MyRichTextArea;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
@@ -77,7 +79,7 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
   /**
    * This inner class makes {@link RichTextArea} implement {@link HasValue}.
    */
-  public static class MyRichTextArea extends RichTextArea implements HasValue<String> {
+  public static class MyRichTextArea extends RichTextArea implements HasValue<String>, HasChangeHandlers {
 
     /**
      * The constructor.
@@ -92,6 +94,16 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
      */
     @Override
     public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HandlerRegistration addChangeHandler(ChangeHandler handler) {
 
       // TODO Auto-generated method stub
       return null;

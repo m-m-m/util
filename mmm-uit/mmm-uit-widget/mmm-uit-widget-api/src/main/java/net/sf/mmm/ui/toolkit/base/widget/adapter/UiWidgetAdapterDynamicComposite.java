@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
  */
 public abstract interface UiWidgetAdapterDynamicComposite<WIDGET, CHILD extends UiWidget> extends
-    UiWidgetAdapter<WIDGET> {
+    UiWidgetAdapterComposite<WIDGET, CHILD> {
 
   /**
    * This method adds the given <code>child</code> at the given <code>index</code>.

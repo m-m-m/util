@@ -27,7 +27,9 @@ public class UiWidgetAdapterGwtVerticalPanel extends UiWidgetAdapterGwtPanel<Ver
   @Override
   protected VerticalPanel createWidget() {
 
-    return new VerticalPanel();
+    VerticalPanel verticalPanel = new VerticalPanel();
+    verticalPanel.setWidth("100%");
+    return verticalPanel;
   }
 
 }

@@ -23,6 +23,12 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegularComposite;
 public interface UiWidgetMenuBar extends UiWidgetDynamicComposite<UiWidgetMenu>,
     UiWidgetRegularComposite<UiWidgetMenu>, UiWidgetReal {
 
-  // nothing to add
+  /**
+   * This method {@link #addChild(UiWidgetMenu) adds} a {@link UiWidgetMenu menu} to this menu-bar.
+   * 
+   * @param label is the {@link UiWidgetMenu#getLabel() label} of the menu.
+   * @return the new menu.
+   */
+  UiWidgetMenu addMenu(String label);
 
 }

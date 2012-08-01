@@ -31,7 +31,7 @@ public abstract class UiWidgetAdapterGwtWidget<WIDGET extends Widget> extends Ui
    * {@inheritDoc}
    */
   @Override
-  public void removeFromParent() {
+  public final void removeFromParent() {
 
     getWidget().removeFromParent();
   }

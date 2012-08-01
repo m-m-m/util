@@ -3,7 +3,6 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextArea;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.user.client.ui.TextArea;
 
@@ -14,8 +13,8 @@ import com.google.gwt.user.client.ui.TextArea;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
-public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtFocusWidgetField<TextArea, VALUE, String>
-    implements UiWidgetAdapterTextArea<TextArea, VALUE> {
+public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAreaBase<TextArea, VALUE> implements
+    UiWidgetAdapterTextArea<TextArea, VALUE> {
 
   /**
    * The constructor.
@@ -50,24 +49,6 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtFocusWi
   public void setHeightInTextLines(int lines) {
 
     getWidget().setVisibleLines(lines);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getMaximumTextLength() {
-
-    throw new NlsUnsupportedOperationException();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setMaximumTextLength(int length) {
-
-    getWidget().getElement().setAttribute("maxlength", Integer.toString(length));
   }
 
 }

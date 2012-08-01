@@ -2,32 +2,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
-import net.sf.mmm.ui.toolkit.api.feature.UiFeatureFocus;
-import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterWithFocus;
-import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.FocusEventAdapterGwt;
-import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.KeyboardFilterAdapter;
-import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-
+import com.google.gwt.event.dom.client.HasAllFocusHandlers;
+import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.Focusable;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterWithFocus} using GWT based on {@link FocusWidget}.
+ * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterWithFocus}
+ * using GWT based on {@link FocusWidget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> extends
-    UiWidgetAdapterGwtWidget<WIDGET> implements UiWidgetAdapterWithFocus<WIDGET>, AttributeWriteKeyboardFilter {
-
-  /** @see #getKeyboardFilter() */
-  private KeyboardFilterAdapter keyboardFilterAdapter;
-
-  /** The {@link FocusEventAdapterGwt} */
-  private FocusEventAdapterGwt focusEventAdapter;
+    UiWidgetAdapterGwtWidgetWithFocus<WIDGET> {
 
   /**
    * The constructor.
@@ -35,15 +24,6 @@ public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> 
   public UiWidgetAdapterGwtFocusWidget() {
 
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void removeFromParent() {
-
-    getWidget().removeFromParent();
   }
 
   /**
@@ -59,67 +39,27 @@ public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> 
    * {@inheritDoc}
    */
   @Override
-  public boolean isFocused() {
+  protected Focusable getWidgetAsFocusable() {
 
-    return false;
+    return getWidget();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setFocused(boolean focused) {
+  protected HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
 
-    if (this.focusEventAdapter != null) {
-      this.focusEventAdapter.setProgrammatic();
-    }
-    getWidget().setFocus(focused);
+    return getWidget();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setFocusEventSender(final UiFeatureFocus source, final UiHandlerEventFocus sender) {
+  protected HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
 
-    if (this.focusEventAdapter != null) {
-      throw new NlsIllegalStateException();
-    }
-    this.focusEventAdapter = new FocusEventAdapterGwt(source, sender);
-    getWidget().addFocusHandler(this.focusEventAdapter);
-    getWidget().addBlurHandler(this.focusEventAdapter);
+    return getWidget();
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final CharFilter getKeyboardFilter() {
-
-    if (this.keyboardFilterAdapter != null) {
-      return this.keyboardFilterAdapter.getKeyboardFilter();
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setKeyboardFilter(CharFilter keyboardFilter) {
-
-    if (keyboardFilter == null) {
-      if (this.keyboardFilterAdapter != null) {
-        this.keyboardFilterAdapter.remove();
-      }
-      return;
-    }
-    if (this.keyboardFilterAdapter == null) {
-      this.keyboardFilterAdapter = new KeyboardFilterAdapter();
-    }
-    this.keyboardFilterAdapter.setKeyboardFilter(keyboardFilter);
-    if (this.keyboardFilterAdapter.isRemoved()) {
-      this.keyboardFilterAdapter.add(getWidget());
-    }
-  }
 }

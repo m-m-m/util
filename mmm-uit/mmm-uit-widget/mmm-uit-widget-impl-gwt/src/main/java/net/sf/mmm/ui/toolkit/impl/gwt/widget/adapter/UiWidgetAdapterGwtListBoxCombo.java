@@ -5,7 +5,9 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 import java.util.List;
 
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterOptionsField;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.ListBox;
 
 /**
@@ -17,7 +19,7 @@ import com.google.gwt.user.client.ui.ListBox;
  * @param <VALUE> is the generic type of the changed value.
  */
 public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
-    UiWidgetAdapterGwtFocusWidgetFieldBase<ListBox, VALUE, String> implements
+    UiWidgetAdapterGwtFieldFocusWidgetBase<ListBox, VALUE, String> implements
     UiWidgetAdapterOptionsField<ListBox, VALUE> {
 
   /** @see #setOptions(List) */
@@ -96,4 +98,12 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HasValue<String> getWidgetAsHasValue() {
+
+    throw new NlsIllegalStateException();
+  }
 }

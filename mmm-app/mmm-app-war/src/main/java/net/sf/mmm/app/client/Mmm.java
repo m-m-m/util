@@ -37,7 +37,6 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -82,9 +81,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();
-    UiWidgetMenu fileMenu = factory.create(UiWidgetMenu.class);
-    fileMenu.setLabel("File");
-    menuBar.addChild(fileMenu);
+    UiWidgetMenu fileMenu = menuBar.addMenu("File");
     UiWidgetMenuItemClickable exitMenuItem = factory.create(UiWidgetMenuItemClickable.class);
     exitMenuItem.setLabel("Exit");
     fileMenu.addChild(exitMenuItem);
@@ -115,7 +112,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
         mainWindow.setSizeInPixel(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1);
       }
     });
-    mainWindow.setChild(tabPanel);
+    mainWindow.addChild(tabPanel);
 
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
@@ -143,9 +140,9 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
 
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
-    RootPanel.get("nameFieldContainer").add(nameField);
-    RootPanel.get("sendButtonContainer").add(sendButton);
-    RootPanel.get("errorLabelContainer").add(errorLabel);
+    // RootPanel.get("nameFieldContainer").add(nameField);
+    // RootPanel.get("sendButtonContainer").add(sendButton);
+    // RootPanel.get("errorLabelContainer").add(errorLabel);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);

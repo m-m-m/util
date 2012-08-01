@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSingleComposite;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTab;
 
 /**
@@ -18,7 +18,7 @@ import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTab;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab<?>> extends
-    AbstractUiWidgetSingleComposite<ADAPTER, UiWidgetRegular> implements UiWidgetTab {
+    AbstractUiWidgetSingleMutableComposite<ADAPTER, UiWidgetRegular> implements UiWidgetTab {
 
   /** @see #getLabel() */
   private String label;

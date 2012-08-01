@@ -7,8 +7,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetBaseWindow;
 import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSingleComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterBaseWindow;
 
 /**
@@ -19,7 +19,7 @@ import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterBaseWindow;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapterBaseWindow<?>> extends
-    AbstractUiWidgetSingleComposite<ADAPTER, UiWidgetRegular> implements UiWidgetBaseWindow, AttributeWriteResizable {
+    AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetBaseWindow, AttributeWriteResizable {
 
   /** @see #getTitle() */
   private String title;

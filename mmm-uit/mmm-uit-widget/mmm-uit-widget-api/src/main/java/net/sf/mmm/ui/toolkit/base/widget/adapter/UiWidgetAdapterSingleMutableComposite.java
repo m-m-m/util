@@ -13,15 +13,9 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <CHILD> is the generic type of the {@link #setChild(UiWidget) child}.
  */
-public interface UiWidgetAdapterSingleComposite<WIDGET, CHILD extends UiWidget> extends
-    UiWidgetAdapterComposite<WIDGET, CHILD> {
+public interface UiWidgetAdapterSingleMutableComposite<WIDGET, CHILD extends UiWidget> extends
+    UiWidgetAdapterSingleComposite<WIDGET, CHILD> {
 
-  /**
-   * This method sets the single child of this widget. The current child will be replaced (and is therefore
-   * removed from the UI).
-   * 
-   * @param child is the new child to set.
-   */
-  void setChild(CHILD child);
+  // nothing to add
 
 }

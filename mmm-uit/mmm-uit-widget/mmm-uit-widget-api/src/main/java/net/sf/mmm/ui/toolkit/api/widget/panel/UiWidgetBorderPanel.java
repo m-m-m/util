@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.widget.panel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleComposite;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleMutableComposite;
 
 /**
  * This is the interface for a {@link UiWidgetPanel panel widget} that shows a single {@link #getChild()
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetSingleComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetBorderPanel extends UiWidgetPanel<UiWidgetRegular>, UiWidgetSingleComposite<UiWidgetRegular>,
+public interface UiWidgetBorderPanel extends UiWidgetPanel<UiWidgetRegular>, UiWidgetSingleMutableComposite<UiWidgetRegular>,
     AttributeWriteLabel, UiWidgetReal {
 
   // nothing to add

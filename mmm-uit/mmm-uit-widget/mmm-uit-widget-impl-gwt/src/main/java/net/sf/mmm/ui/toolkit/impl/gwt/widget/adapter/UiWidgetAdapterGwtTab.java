@@ -60,6 +60,7 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
     this.label = new Label();
     horizontalPanel.add(this.label);
     this.contentPanel = new HTMLPanel("");
+    this.contentPanel.setHeight("100%");
     return horizontalPanel;
   }
 

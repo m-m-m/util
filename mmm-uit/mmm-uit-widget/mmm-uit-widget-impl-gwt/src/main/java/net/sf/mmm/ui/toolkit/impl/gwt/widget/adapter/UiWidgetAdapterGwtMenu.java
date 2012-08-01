@@ -38,6 +38,7 @@ public class UiWidgetAdapterGwtMenu extends UiWidgetAdapterGwtMenuItemBase imple
   protected MenuItem createWidget() {
 
     this.menuBar = new MenuBar(true);
+    this.menuBar.setAnimationEnabled(true);
     return new MenuItem("", this.menuBar);
   }
 

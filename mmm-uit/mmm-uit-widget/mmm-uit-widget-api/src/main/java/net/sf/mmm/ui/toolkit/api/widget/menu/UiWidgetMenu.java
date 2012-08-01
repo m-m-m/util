@@ -20,6 +20,18 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 public interface UiWidgetMenu extends UiWidgetDynamicComposite<UiWidgetMenuItem>, UiWidgetMenuItem,
     AttributeWriteLabel, UiWidgetReal {
 
-  // nothing to add
+  /**
+   * This method {@link #addChild(UiWidgetMenuItem) adds} a {@link UiWidgetMenuItemSeparator separator} to
+   * this menu.
+   */
+  void addSeparator();
+
+  /**
+   * This method {@link #addChild(UiWidgetMenuItem) adds} a sub-{@link UiWidgetMenu menu} to this menu.
+   * 
+   * @param label is the {@link #getLabel() label} of the sub-menu.
+   * @return the new sub-menu.
+   */
+  UiWidgetMenu addSubmenu(String label);
 
 }

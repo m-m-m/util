@@ -5,18 +5,21 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterBaseWindow;
 
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterBaseWindow} using GWT based on {@link DialogBox}.
+ * This is the implementation of {@link UiWidgetAdapterBaseWindow} using GWT based on {@link Panel}.<br/>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends DialogBox> extends
-    UiWidgetAdapterGwtSingleComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterBaseWindow<WIDGET> {
+public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends Panel> extends
+    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterBaseWindow<WIDGET> {
+
+  /** The container for the children. */
+  private final VerticalPanel contentPanel;
 
   /**
    * The constructor.
@@ -24,6 +27,17 @@ public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends DialogBox> ext
   public UiWidgetAdapterGwtBaseWindow() {
 
     super();
+    this.contentPanel = new VerticalPanel();
+    this.contentPanel.setWidth("100%");
+    getWidget().add(this.contentPanel);
+  }
+
+  /**
+   * @return the content panel.
+   */
+  protected VerticalPanel getContentPanel() {
+
+    return this.contentPanel;
   }
 
   /**
@@ -40,113 +54,13 @@ public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends DialogBox> ext
    * {@inheritDoc}
    */
   @Override
-  public void setChild(UiWidgetRegular child) {
+  public void addChild(UiWidgetRegular child, int index) {
 
-    Widget widget = null;
-    if (child != null) {
-      widget = getWidget(child);
+    if (index >= 0) {
+      this.contentPanel.insert(getWidget(child), index);
+    } else {
+      this.contentPanel.add(getWidget(child));
     }
-    getWidget().setWidget(widget);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getWidthInPixel() {
-
-    return getWidget().getOffsetWidth();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getHeightInPixel() {
-
-    return getWidget().getOffsetHeight();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setTitle(String title) {
-
-    getWidget().setText(title);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setPosition(int x, int y) {
-
-    getWidget().setPopupPosition(x, y);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setResizable(boolean resizable) {
-
-    // getWidget().set
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isResizable() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSizeInPixel(int width, int height) {
-
-    getWidget().setPixelSize(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidthInPixel(int width) {
-
-    // unsupported - we need to delegate to setPixelSize
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPixel(int height) {
-
-    // unsupported - we need to delegate to setPixelSize
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getPositionX() {
-
-    return getWidget().getAbsoluteLeft();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getPositionY() {
-
-    return getWidget().getAbsoluteTop();
   }
 
 }

@@ -28,4 +28,16 @@ public abstract class AbstractUiWidgetMenuBar<ADAPTER extends UiWidgetAdapterMen
     super(factory);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetMenu addMenu(String label) {
+
+    UiWidgetMenu menu = getFactory().create(UiWidgetMenu.class);
+    menu.setLabel(label);
+    addChild(menu);
+    return menu;
+  }
+
 }

@@ -33,7 +33,10 @@ public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar>
   @Override
   protected MenuBar createWidget() {
 
-    return new MenuBar();
+    MenuBar menuBar = new MenuBar();
+    menuBar.setAutoOpen(true);
+    menuBar.setAnimationEnabled(true);
+    return menuBar;
   }
 
   /**

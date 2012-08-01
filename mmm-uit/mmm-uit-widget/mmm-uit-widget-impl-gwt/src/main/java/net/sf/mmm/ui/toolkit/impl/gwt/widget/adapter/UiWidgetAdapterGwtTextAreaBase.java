@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextAreaBase;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -17,8 +18,9 @@ import com.google.gwt.user.client.ui.HasValue;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
-public abstract class UiWidgetAdapterGwtTextAreaBase<WIDGET extends FocusWidget & HasValue<String>, VALUE> extends
-    UiWidgetAdapterGwtFocusWidgetField<WIDGET, VALUE, String> implements UiWidgetAdapterTextAreaBase<WIDGET, VALUE> {
+public abstract class UiWidgetAdapterGwtTextAreaBase<WIDGET extends FocusWidget & HasValue<String> & HasChangeHandlers, VALUE>
+    extends UiWidgetAdapterGwtFieldFocusWidget<WIDGET, VALUE, String> implements
+    UiWidgetAdapterTextAreaBase<WIDGET, VALUE> {
 
   /**
    * The constructor.

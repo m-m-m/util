@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.widget;
 import net.sf.mmm.ui.toolkit.api.widget.UiDisplay;
 
 /**
- * TODO: this class ...
+ * This is the abstract base implementation of {@link UiDisplay}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

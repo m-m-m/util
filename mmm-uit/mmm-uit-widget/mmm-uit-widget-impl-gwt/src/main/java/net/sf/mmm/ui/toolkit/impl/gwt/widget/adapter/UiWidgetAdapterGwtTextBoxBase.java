@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
 public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALUE> extends
-    UiWidgetAdapterGwtFocusWidgetField<WIDGET, VALUE, String> implements
+    UiWidgetAdapterGwtFieldFocusWidget<WIDGET, VALUE, String> implements
     UiWidgetAdapterInputField<WIDGET, VALUE, String> {
 
   /**
