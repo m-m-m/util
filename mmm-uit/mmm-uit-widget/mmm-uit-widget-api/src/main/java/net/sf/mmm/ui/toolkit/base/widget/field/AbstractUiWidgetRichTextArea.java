@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRichTextArea;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterRichTextArea;
+import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterRichTextArea;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetRichTextArea}.

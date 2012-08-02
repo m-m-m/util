@@ -7,17 +7,17 @@ import java.util.Date;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtDateBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField;
 
 /**
  * This is the implementation of {@link UiWidgetDateField} using GWT based on
- * {@link UiWidgetAdapterGwtDateBox}.
+ * {@link UiWidgetAdapterGwtDateField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetDateFieldGwt extends AbstractUiWidgetInputField<UiWidgetAdapterGwtDateBox<Date>, Date, Date>
+public class UiWidgetDateFieldGwt extends AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDateField<Date>, Date, Date>
     implements UiWidgetDateField {
 
   /**
@@ -34,9 +34,9 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetInputField<UiWidgetAda
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtDateBox<Date> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtDateField<Date> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtDateBox<Date>();
+    return new UiWidgetAdapterGwtDateField<Date>();
   }
 
   /**

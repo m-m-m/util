@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSingleMutableComposite;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTab;
+import net.sf.mmm.ui.toolkit.base.widget.core.adapter.UiWidgetAdapterTab;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetTab}.

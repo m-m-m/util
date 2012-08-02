@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextField;
+import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextField;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetTextField}.

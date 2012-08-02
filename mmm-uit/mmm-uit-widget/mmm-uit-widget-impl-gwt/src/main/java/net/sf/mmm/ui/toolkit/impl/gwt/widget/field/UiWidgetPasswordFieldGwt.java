@@ -5,8 +5,8 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetPasswordField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtPasswordTextBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPasswordTextBox;
 
 /**
  * This is the implementation of {@link UiWidgetPasswordField} using GWT based on
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtPasswordT
  * @since 1.0.0
  */
 public class UiWidgetPasswordFieldGwt extends
-    AbstractUiWidgetInputField<UiWidgetAdapterGwtPasswordTextBox<String>, String, String> implements
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtPasswordTextBox<String>, String, String> implements
     UiWidgetPasswordField {
 
   /**

@@ -7,7 +7,7 @@ import java.util.Date;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidgetInputField input field widget} that represents a date field.
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a date field.
  * Such field allows to enter a value of the type {@link Date}. It should both support a textual input field
  * as well as a (icon-)button that opens a calendar popup to pick the date from. If this widget is not
  * available by the underlying native toolkit, an implementation shall be provided that is based on
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetDateField extends UiWidgetInputField<Date>, UiWidgetReal {
+public interface UiWidgetDateField extends UiWidgetTextualInputField<Date>, UiWidgetReal {
 
   // nothing to add...
 

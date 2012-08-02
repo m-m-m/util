@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextFieldBase;
+import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextFieldBase;
 import net.sf.mmm.util.filter.api.CharFilter;
 
 /**
@@ -17,7 +17,7 @@ import net.sf.mmm.util.filter.api.CharFilter;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetTextFieldBase<ADAPTER extends UiWidgetAdapterTextFieldBase<?, String>> extends
-    AbstractUiWidgetInputField<ADAPTER, String, String> implements AttributeWriteKeyboardFilter {
+    AbstractUiWidgetTextualInputField<ADAPTER, String, String> implements AttributeWriteKeyboardFilter {
 
   /** @see #getKeyboardFilter() */
   private CharFilter keyboardFilter;

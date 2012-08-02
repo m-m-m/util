@@ -7,14 +7,14 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidgetInputField input field widget} that represents a text area
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a text area
  * field. Such field is a multi-line variant of {@link UiWidgetTextField}. The user can enter line breaks by
  * hitting [enter] or [return].
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTextArea extends UiWidgetInputField<String>, AttributeWriteKeyboardFilter,
+public interface UiWidgetTextArea extends UiWidgetTextualInputField<String>, AttributeWriteKeyboardFilter,
     AttributeWriteHeightInTextLines, UiWidgetReal {
 
   // nothing to add...

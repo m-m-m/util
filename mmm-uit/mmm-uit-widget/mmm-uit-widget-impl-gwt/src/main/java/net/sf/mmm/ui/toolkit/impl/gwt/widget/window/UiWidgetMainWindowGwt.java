@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.window;
 
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.window.AbstractUiWidgetMainWindow;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMainWindow;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.window.adapter.UiWidgetAdapterGwtMainWindow;
 
 /**
  * This is the implementation of {@link net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow} using GWT.

@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.widget.core;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterImage;
+import net.sf.mmm.ui.toolkit.base.widget.core.adapter.UiWidgetAdapterImage;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetImage}.

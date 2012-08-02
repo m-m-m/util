@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRadioButtons;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtCellPanelRadiosHorizontal;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosHorizontal;
 
 /**
  * This is the implementation of {@link UiWidgetRadioButtons} using GWT.

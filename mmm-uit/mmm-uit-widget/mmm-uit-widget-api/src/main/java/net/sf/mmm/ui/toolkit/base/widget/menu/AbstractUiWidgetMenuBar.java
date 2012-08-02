@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterMenuBar;
+import net.sf.mmm.ui.toolkit.base.widget.menu.adapter.UiWidgetAdapterMenuBar;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetMenu}.

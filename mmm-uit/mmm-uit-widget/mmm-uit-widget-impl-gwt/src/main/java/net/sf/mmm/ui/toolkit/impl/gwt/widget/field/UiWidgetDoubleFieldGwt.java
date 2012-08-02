@@ -5,18 +5,18 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtDoubleBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoubleField;
 
 /**
  * This is the implementation of {@link UiWidgetDoubleField} using GWT based on
- * {@link UiWidgetAdapterGwtDoubleBox}.
+ * {@link UiWidgetAdapterGwtDoubleField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetDoubleFieldGwt extends
-    AbstractUiWidgetInputField<UiWidgetAdapterGwtDoubleBox<Double>, Double, Double> implements UiWidgetDoubleField {
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDoubleField<Double>, Double, Double> implements UiWidgetDoubleField {
 
   /**
    * The constructor.
@@ -31,9 +31,9 @@ public class UiWidgetDoubleFieldGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtDoubleBox<Double> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtDoubleField<Double> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtDoubleBox<Double>();
+    return new UiWidgetAdapterGwtDoubleField<Double>();
   }
 
   /**

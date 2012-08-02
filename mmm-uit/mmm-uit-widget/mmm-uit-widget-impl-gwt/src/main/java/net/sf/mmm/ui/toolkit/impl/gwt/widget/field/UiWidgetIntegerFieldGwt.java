@@ -5,18 +5,18 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtIntegerBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtIntegerField;
 
 /**
  * This is the implementation of {@link UiWidgetIntegerField} using GWT based on
- * {@link UiWidgetAdapterGwtIntegerBox}.
+ * {@link UiWidgetAdapterGwtIntegerField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetIntegerFieldGwt extends
-    AbstractUiWidgetInputField<UiWidgetAdapterGwtIntegerBox<Integer>, Integer, Integer> implements UiWidgetIntegerField {
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtIntegerField<Integer>, Integer, Integer> implements UiWidgetIntegerField {
 
   /**
    * The constructor.
@@ -31,9 +31,9 @@ public class UiWidgetIntegerFieldGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtIntegerBox<Integer> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtIntegerField<Integer> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtIntegerBox<Integer>();
+    return new UiWidgetAdapterGwtIntegerField<Integer>();
   }
 
   /**

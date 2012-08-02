@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.menu.AbstractUiWidgetMenuBar;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenuBar;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuBar;
 
 /**
  * This is the implementation of {@link UiWidgetMenuBar} using GWT.

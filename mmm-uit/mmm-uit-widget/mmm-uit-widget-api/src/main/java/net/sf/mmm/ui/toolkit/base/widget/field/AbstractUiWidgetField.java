@@ -10,7 +10,7 @@ import net.sf.mmm.ui.toolkit.base.handler.event.ChangeEventSender;
 import net.sf.mmm.ui.toolkit.base.handler.event.FocusEventSender;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterField;
+import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetField}.

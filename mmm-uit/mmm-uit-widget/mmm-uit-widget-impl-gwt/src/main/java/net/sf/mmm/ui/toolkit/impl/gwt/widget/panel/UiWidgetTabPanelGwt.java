@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.panel.AbstractUiWidgetTabPanel;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTabLayoutPanel;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtTabLayoutPanel;
 
 /**
  * This is the implementation of {@link UiWidgetTabPanel} using GWT based on

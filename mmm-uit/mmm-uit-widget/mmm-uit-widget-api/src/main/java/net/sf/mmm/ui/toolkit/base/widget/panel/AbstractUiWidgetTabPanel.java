@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSwitchComposite;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTabPanel;
+import net.sf.mmm.ui.toolkit.base.widget.panel.adapter.UiWidgetAdapterTabPanel;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetTabPanel}.

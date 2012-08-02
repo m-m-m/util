@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetAtomicWithLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterButton;
+import net.sf.mmm.ui.toolkit.base.widget.core.adapter.UiWidgetAdapterButton;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetButton}.

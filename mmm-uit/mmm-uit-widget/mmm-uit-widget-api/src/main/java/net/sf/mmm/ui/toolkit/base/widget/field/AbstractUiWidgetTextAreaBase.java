@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.base.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInTextLines;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterTextAreaBase;
+import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextAreaBase;
 
 /**
  * This is the abstract base implementation for

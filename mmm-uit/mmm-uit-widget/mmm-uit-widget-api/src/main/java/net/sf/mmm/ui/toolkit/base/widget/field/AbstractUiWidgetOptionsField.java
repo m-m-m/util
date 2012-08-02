@@ -10,7 +10,7 @@ import java.util.Map;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetOptionsField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterOptionsField;
+import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;

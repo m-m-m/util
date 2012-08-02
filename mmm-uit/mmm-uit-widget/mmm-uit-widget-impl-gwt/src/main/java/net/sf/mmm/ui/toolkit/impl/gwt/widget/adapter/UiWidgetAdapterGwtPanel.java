@@ -3,14 +3,14 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter;
 
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterPanel;
+import net.sf.mmm.ui.toolkit.base.widget.panel.adapter.UiWidgetAdapterPanel;
 
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterPanel} using
+ * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.panel.adapter.UiWidgetAdapterPanel} using
  * GWT based on {@link Panel} and {@link InsertPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

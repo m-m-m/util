@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRichTextArea;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetRichTextArea;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtRichTextArea;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtRichTextArea;
 
 /**
  * This is the implementation of {@link UiWidgetRichTextArea} using GWT based on

@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItemClickable;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.menu.AbstractUiWidgetMenuItem;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtMenuItem;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuItem;
 
 /**
  * This is the implementation of {@link UiWidgetMenuItemClickable} using GWT.

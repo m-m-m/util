@@ -5,17 +5,17 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetInputField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtLongBox;
+import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtLongField;
 
 /**
  * This is the implementation of {@link UiWidgetLongField} using GWT based on
- * {@link UiWidgetAdapterGwtLongBox}.
+ * {@link UiWidgetAdapterGwtLongField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetLongFieldGwt extends AbstractUiWidgetInputField<UiWidgetAdapterGwtLongBox<Long>, Long, Long>
+public class UiWidgetLongFieldGwt extends AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtLongField<Long>, Long, Long>
     implements UiWidgetLongField {
 
   /**
@@ -31,9 +31,9 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetInputField<UiWidgetAda
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtLongBox<Long> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtLongField<Long> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtLongBox<Long>();
+    return new UiWidgetAdapterGwtLongField<Long>();
   }
 
   /**

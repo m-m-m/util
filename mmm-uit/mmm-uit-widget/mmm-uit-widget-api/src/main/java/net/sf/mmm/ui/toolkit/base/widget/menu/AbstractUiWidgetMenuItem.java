@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.base.widget.menu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItem;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetAtomicWithLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterMenuItem;
+import net.sf.mmm.ui.toolkit.base.widget.menu.adapter.UiWidgetAdapterMenuItem;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetMenuItem}.

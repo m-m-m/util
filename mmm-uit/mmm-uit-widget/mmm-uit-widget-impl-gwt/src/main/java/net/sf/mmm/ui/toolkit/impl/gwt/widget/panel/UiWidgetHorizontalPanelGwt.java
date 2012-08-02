@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtHorizontalPanel;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtHorizontalPanel;
 
 /**
  * This is the implementation of {@link UiWidgetHorizontalPanel} using GWT.

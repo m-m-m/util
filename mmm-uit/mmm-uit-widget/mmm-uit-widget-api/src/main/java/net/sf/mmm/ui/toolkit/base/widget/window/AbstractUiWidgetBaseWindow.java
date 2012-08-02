@@ -9,7 +9,7 @@ import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetBaseWindow;
 import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterBaseWindow;
+import net.sf.mmm.ui.toolkit.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetBaseWindow}.

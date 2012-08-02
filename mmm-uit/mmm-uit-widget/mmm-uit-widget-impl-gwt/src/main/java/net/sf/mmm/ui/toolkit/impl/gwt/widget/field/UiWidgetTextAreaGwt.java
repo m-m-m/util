@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextArea;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextArea;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtTextArea;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextArea;
 
 /**
  * This is the implementation of {@link UiWidgetTextArea} using GWT based on

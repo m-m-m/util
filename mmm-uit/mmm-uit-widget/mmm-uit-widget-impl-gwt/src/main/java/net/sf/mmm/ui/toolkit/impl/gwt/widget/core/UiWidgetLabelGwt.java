@@ -4,9 +4,9 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetAtomicWithLabel;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtLabel;
+import net.sf.mmm.ui.toolkit.base.widget.core.AbstractUiWidgetLabel;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtLabel;
 
 /**
  * This is the implementation of {@link UiWidgetLabel} using GWT.
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtLabel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetLabelGwt extends AbstractUiWidgetAtomicWithLabel<UiWidgetAdapterGwtLabel> implements UiWidgetLabel {
+public class UiWidgetLabelGwt extends AbstractUiWidgetLabel<UiWidgetAdapterGwtLabel> {
 
   /**
    * The constructor.

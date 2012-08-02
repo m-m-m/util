@@ -7,7 +7,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidgetInputField input field widget} that represents a rich text area
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a rich text area
  * field. Such field is like {@link UiWidgetTextArea} but allows to enter rich text with markup. It should
  * support the user with a nice toolbar that allows to apply styles to the selected text (e.g. bold, italic,
  * blockquote, etc.). It should also support unordered and ordered lists as well as headings (at least four
@@ -16,7 +16,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetRichTextArea extends UiWidgetInputField<String>, AttributeWriteKeyboardFilter,
+public interface UiWidgetRichTextArea extends UiWidgetTextualInputField<String>, AttributeWriteKeyboardFilter,
     AttributeWriteHeightInTextLines, UiWidgetReal {
 
   /**

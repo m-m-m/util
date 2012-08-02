@@ -6,7 +6,7 @@ import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtListBoxCombo;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtListBoxCombo;
 
 /**
  * This is a simple implementation of {@link UiWidgetComboBox} using GWT based on
