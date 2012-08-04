@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.IntegerBox;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value - typically {@link Integer}.
  */
-public class UiWidgetAdapterGwtIntegerField<VALUE> extends UiWidgetAdapterGwtValueBox<IntegerBox, VALUE, Integer>
+public class UiWidgetAdapterGwtIntegerField<VALUE> extends UiWidgetAdapterGwtFieldValueBox<IntegerBox, VALUE, Integer>
     implements UiWidgetAdapterIntegerField<IntegerBox, VALUE> {
 
   /**

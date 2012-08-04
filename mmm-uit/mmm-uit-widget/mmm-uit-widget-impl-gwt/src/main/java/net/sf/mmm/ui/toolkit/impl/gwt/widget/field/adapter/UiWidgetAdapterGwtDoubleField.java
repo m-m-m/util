@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.DoubleBox;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value - typically {@link Double}.
  */
-public class UiWidgetAdapterGwtDoubleField<VALUE> extends UiWidgetAdapterGwtValueBox<DoubleBox, VALUE, Double> implements
+public class UiWidgetAdapterGwtDoubleField<VALUE> extends UiWidgetAdapterGwtFieldValueBox<DoubleBox, VALUE, Double> implements
     UiWidgetAdapterDoubleField<DoubleBox, VALUE> {
 
   /**

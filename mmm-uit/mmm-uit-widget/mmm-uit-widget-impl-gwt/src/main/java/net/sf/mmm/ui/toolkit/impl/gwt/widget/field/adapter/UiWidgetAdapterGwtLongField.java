@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.LongBox;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value - typically {@link Long}.
  */
-public class UiWidgetAdapterGwtLongField<VALUE> extends UiWidgetAdapterGwtValueBox<LongBox, VALUE, Long> implements
+public class UiWidgetAdapterGwtLongField<VALUE> extends UiWidgetAdapterGwtFieldValueBox<LongBox, VALUE, Long> implements
     UiWidgetAdapterLongField<LongBox, VALUE> {
 
   /**

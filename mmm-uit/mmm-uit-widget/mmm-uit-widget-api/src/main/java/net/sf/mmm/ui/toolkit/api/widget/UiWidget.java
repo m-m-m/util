@@ -5,6 +5,8 @@ package net.sf.mmm.ui.toolkit.api.widget;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadModified;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteMode;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteModeFixed;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteOnlySizeInPixel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSize;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
@@ -33,7 +35,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  */
 public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeWriteVisible, AttributeWriteTooltip,
     AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
-    AttributeWriteOnlySizeInPixel, AttributeReadModified {
+    AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode, AttributeWriteModeFixed {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

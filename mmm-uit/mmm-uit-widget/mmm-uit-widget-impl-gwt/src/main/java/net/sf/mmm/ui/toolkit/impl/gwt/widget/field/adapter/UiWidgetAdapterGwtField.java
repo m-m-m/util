@@ -4,12 +4,14 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureValue;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.ui.toolkit.impl.gwt.handler.event.ChangeEventAdapterGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetWithFocus;
 
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -44,6 +46,30 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    *         supported.
    */
   protected abstract HasValue<ADAPTER_VALUE> getWidgetAsHasValue();
+
+  /**
+   * @return the {@link #getWidget() widget} as {@link ValueBoxBase} or <code>null</code> if NOT supported.
+   */
+  protected abstract ValueBoxBase<?> getWidgetAsValueBoxBase();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMode(boolean editMode, AbstractUiWidget<?> widget) {
+
+    super.setMode(editMode, widget);
+    ValueBoxBase<?> valueBoxBase = getWidgetAsValueBoxBase();
+    if (valueBoxBase != null) {
+      valueBoxBase.setReadOnly(!editMode);
+    } else {
+      if (editMode) {
+        setEnabled(widget.isEnabled());
+      } else {
+        setEnabled(false);
+      }
+    }
+  }
 
   /**
    * {@inheritDoc}

@@ -9,6 +9,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterOptionsField} using GWT based on {@link ListBox} to
@@ -31,6 +32,15 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
   public UiWidgetAdapterGwtListBoxCombo() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
+
+    return null;
   }
 
   /**

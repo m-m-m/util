@@ -7,8 +7,8 @@ import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextField;
 import com.google.gwt.user.client.ui.TextBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField} using
- * GWT based on {@link TextBox}.
+ * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField}
+ * using GWT based on {@link TextBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -31,6 +31,8 @@ public class UiWidgetAdapterGwtTextBox<VALUE> extends UiWidgetAdapterGwtTextBoxB
   @Override
   protected TextBox createWidget() {
 
-    return new TextBox();
+    TextBox textBox = new TextBox();
+    textBox.setReadOnly(true);
+    return textBox;
   }
 }

@@ -4,25 +4,27 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextualInputField;
 
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ValueBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField}
- * using GWT based on {@link TextBox}.
+ * using GWT based on {@link ValueBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
- * @param <VALUE> is the generic type of the changed value - typically {@link String}.
+ * @param <VALUE> is the generic type of the changed value.
+ * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
+ *        {@link #getWidget() widget}.
  */
-public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALUE> extends
-    UiWidgetAdapterGwtFieldValueBoxBase<WIDGET, VALUE, String> implements
-    UiWidgetAdapterTextualInputField<WIDGET, VALUE, String> {
+public abstract class UiWidgetAdapterGwtFieldValueBox<WIDGET extends ValueBox<ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
+    extends UiWidgetAdapterGwtFieldValueBoxBase<WIDGET, VALUE, ADAPTER_VALUE> implements
+    UiWidgetAdapterTextualInputField<WIDGET, VALUE, ADAPTER_VALUE> {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtTextBoxBase() {
+  public UiWidgetAdapterGwtFieldValueBox() {
 
     super();
   }

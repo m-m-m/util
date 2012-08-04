@@ -12,6 +12,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterRichTextArea} using GWT based on {@link RichTextArea}.
@@ -29,6 +30,15 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
   public UiWidgetAdapterGwtRichTextArea() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
+
+    return null;
   }
 
   /**

@@ -5,6 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter;
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextArea;
 
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterTextArea} using GWT based on {@link TextArea}.
@@ -31,6 +32,15 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAre
   protected TextArea createWidget() {
 
     return new TextArea();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
+
+    return getWidget();
   }
 
   /**

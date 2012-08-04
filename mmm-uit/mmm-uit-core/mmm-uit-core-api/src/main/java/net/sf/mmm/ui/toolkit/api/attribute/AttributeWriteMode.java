@@ -13,7 +13,8 @@ import net.sf.mmm.ui.toolkit.api.common.UiMode;
 public abstract interface AttributeWriteMode extends AttributeReadMode {
 
   /**
-   * This method sets the {@link UiMode mode} of this object.
+   * This method sets the {@link UiMode mode} of this object. It will change the object to {@link UiMode#VIEW
+   * view} or {@link UiMode#EDIT edit} mode. This is a recursive operation.
    * 
    * @param mode is the new {@link UiMode} to set.
    */

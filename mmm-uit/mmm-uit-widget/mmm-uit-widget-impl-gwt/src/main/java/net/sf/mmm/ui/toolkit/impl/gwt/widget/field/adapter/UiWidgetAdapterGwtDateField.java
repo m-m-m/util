@@ -11,6 +11,7 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 /**
@@ -84,6 +85,15 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   protected HasValue<Date> getWidgetAsHasValue() {
 
     return getWidget();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
+
+    return getWidget().getTextBox();
   }
 
   /**

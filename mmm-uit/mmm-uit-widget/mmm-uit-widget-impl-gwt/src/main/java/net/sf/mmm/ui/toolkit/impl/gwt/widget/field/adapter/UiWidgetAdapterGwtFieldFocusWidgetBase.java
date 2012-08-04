@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Focusable;
 
 /**
- * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField} using
- * GWT based on {@link FocusWidget} and {@link HasChangeHandlers}.
+ * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField}
+ * using GWT based on {@link FocusWidget} and {@link HasChangeHandlers}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
