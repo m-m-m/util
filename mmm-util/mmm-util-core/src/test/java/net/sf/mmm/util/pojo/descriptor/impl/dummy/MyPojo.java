@@ -36,6 +36,7 @@ public class MyPojo extends AbstractPojo {
     this.port = null;
     this.flag = null;
     this.items = new ArrayList<String>();
+    this.privateString = "privateString";
   }
 
   public Integer getPort() {

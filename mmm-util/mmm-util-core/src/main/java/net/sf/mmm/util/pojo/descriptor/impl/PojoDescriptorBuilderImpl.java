@@ -4,6 +4,7 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.security.AccessController;
@@ -242,7 +243,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
             }
           }
         }
-        if (methodUsed && !Modifier.isPublic(method.getModifiers())) {
+        if (methodUsed && !isPublicAccessible(method)) {
           // reflective access that violates visibility
           nonPublicAccessibleObjects.add(method);
         }
@@ -263,7 +264,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
             }
           }
         }
-        if (fieldUsed && !Modifier.isPublic(field.getModifiers())) {
+        if (fieldUsed && !isPublicAccessible(field)) {
           // reflective access that violates visibility
           nonPublicAccessibleObjects.add(field);
         }
@@ -276,6 +277,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
       // fail if disallowed by security-manager.
       AccessController.doPrivileged(new PrivilegedAction<Object>() {
 
+        @Override
         public Object run() {
 
           AccessibleObject.setAccessible(nonPublicAccessibles, true);
@@ -285,6 +287,27 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     }
     getDescriptorEnhancer().enhanceDescriptor(descriptor);
     return descriptor;
+  }
+
+  /**
+   * This method determines if the given {@link Member} is {@link AccessibleObject#isAccessible() accessible}
+   * or <code>public</code> (declared as public in a public class).
+   * 
+   * @param member is the {@link Member} to check.
+   * @return <code>true</code> if it can be accessed, <code>false</code> if it needs to be made accessible.
+   */
+  private boolean isPublicAccessible(Member member) {
+
+    if (((AccessibleObject) member).isAccessible()) {
+      return true;
+    }
+    if (!Modifier.isPublic(member.getModifiers())) {
+      return false;
+    }
+    if (Modifier.isPublic(member.getDeclaringClass().getModifiers())) {
+      return true;
+    }
+    return false;
   }
 
   /**

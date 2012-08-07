@@ -2,12 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +17,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.GenericType;
+
+import org.junit.Test;
 
 /**
  * This is the abstract test-case for {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
@@ -40,8 +36,30 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
    */
   protected abstract PojoDescriptorBuilder getPojoDescriptorBuilder();
 
-  protected void checkPojo(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance, PojoDescriptorBuilder builder)
-      throws Exception {
+  /**
+   * @return <code>true</code> if methods are introspected, <code>false</code> otherwise.
+   */
+  protected abstract boolean isMethodIntrostection();
+
+  /**
+   * @return <code>true</code> if fields are introspected, <code>false</code> otherwise.
+   */
+  protected boolean isFieldIntrostection() {
+
+    return !isMethodIntrostection();
+  }
+
+  /**
+   * Test of {@link PojoDescriptorBuilder} using external public class {@link MyPojo}.
+   */
+  @Test
+  public void testPojoDescriptor() {
+
+    checkPojoDescriptor(new MyPojo(), MyPojo.class);
+  }
+
+  protected <POJO extends MyPojo> void checkPojo(PojoDescriptor<POJO> pojoDescriptor, POJO pojoInstance,
+      PojoDescriptorBuilder builder) {
 
     // test property "name"
     checkProperty(pojoDescriptor, "name", String.class, String.class);
@@ -79,6 +97,37 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     getter = genericPojoDescriptor.getAccessor("element", PojoPropertyAccessorNonArgMode.GET, true);
     assertEquals(Long.class, getter.getPropertyClass());
 
+    // test property "privateString"
+    String secret = "secret";
+    if (isFieldIntrostection()) {
+      checkProperty(pojoDescriptor, "privateString", String.class, String.class);
+      pojoDescriptor.setProperty(pojoInstance, "privateString", secret);
+    } else {
+      checkProperty(pojoDescriptor, "privateString", String.class, null);
+      secret = "privateString";
+    }
+    String result = (String) pojoDescriptor.getProperty(pojoInstance, "privateString");
+    assertEquals(secret, result);
+    if (isFieldIntrostection() && !isMethodIntrostection()) {
+      assertSame(secret, result);
+    } else {
+      // property is retrieved via getter...
+      assertNotSame(secret, result);
+    }
+    // test property "renamedProperty"
+    if (isMethodIntrostection()) {
+      checkProperty(pojoDescriptor, "renamedProperty", String.class, String.class);
+    }
+    // test property "string"
+    if (isFieldIntrostection()) {
+      checkProperty(pojoDescriptor, "string", String.class, String.class);
+      secret = "h5g/{h%k$z";
+      pojoDescriptor.setProperty(pojoInstance, "string", secret);
+      if (isMethodIntrostection()) {
+        assertSame(secret, pojoDescriptor.getProperty(pojoInstance, "renamedProperty"));
+      }
+    }
+
     // check non-existent property
     try {
       pojoDescriptor.getAccessor("not-existent", PojoPropertyAccessorNonArgMode.GET, true);
@@ -93,7 +142,8 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     }
   }
 
-  protected void checkItems(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance, boolean viaMethods) {
+  protected <POJO extends MyPojo> void checkItems(PojoDescriptor<POJO> pojoDescriptor, POJO pojoInstance,
+      boolean viaMethods) {
 
     // test property "items"
     List<String> myList = new ArrayList<String>();
@@ -140,7 +190,8 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     assertEquals(item2, pojoDescriptor.getProperty(pojoInstance, "items[1]"));
   }
 
-  protected void checkValues(PojoDescriptor<MyPojo> pojoDescriptor, MyPojo pojoInstance, boolean viaMethods) {
+  protected <POJO extends MyPojo> void checkValues(PojoDescriptor<POJO> pojoDescriptor, POJO pojoInstance,
+      boolean viaMethods) {
 
     // test property "values"
     Map<String, String> values = new HashMap<String, String>();
@@ -165,6 +216,50 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
       assertSame(value1, pojoDescriptor.getProperty(pojoInstance, property));
     }
 
+  }
+
+  protected <POJO extends MyPojo> PojoDescriptor<POJO> checkPojoDescriptor(POJO pojoInstance, Class<POJO> pojoClass) {
+
+    PojoDescriptorBuilder builder = getPojoDescriptorBuilder();
+    PojoDescriptor<POJO> pojoDescriptor = builder.getDescriptor(pojoClass);
+    assertEquals(pojoClass, pojoDescriptor.getPojoClass());
+    // test property "class"
+    if (isMethodIntrostection()) {
+      assertEquals(pojoClass, pojoDescriptor.getProperty(pojoInstance, "class"));
+    } else {
+      assertNull(pojoDescriptor.getPropertyDescriptor("class"));
+    }
+    checkPojo(pojoDescriptor, pojoInstance, builder);
+    // test property "port"
+    if (isFieldIntrostection() && !isMethodIntrostection()) {
+      checkProperty(pojoDescriptor, "port", Integer.class, Integer.class);
+    } else {
+      checkProperty(pojoDescriptor, "port", Integer.class, int.class);
+    }
+    // test property "flag"
+    if (isFieldIntrostection() && !isMethodIntrostection()) {
+      checkProperty(pojoDescriptor, "flag", Boolean.class, Boolean.class);
+    } else {
+      checkProperty(pojoDescriptor, "flag", Boolean.class, boolean.class);
+    }
+    // test property "items"/"item"
+    checkProperty(pojoDescriptor, "items", List.class, List.class);
+
+    checkItems(pojoDescriptor, pojoInstance, isMethodIntrostection());
+
+    checkValues(pojoDescriptor, pojoInstance, isMethodIntrostection());
+
+    return pojoDescriptor;
+  }
+
+  static class TestPojo extends MyPojo {
+
+    public String bar = "Bar";
+
+    public String getFoo() {
+
+      return "Foo";
+    }
   }
 
 }

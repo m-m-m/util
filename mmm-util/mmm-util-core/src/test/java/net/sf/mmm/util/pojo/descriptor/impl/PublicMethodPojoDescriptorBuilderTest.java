@@ -2,13 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link PojoDescriptorBuilder} using public method introspection.
@@ -28,23 +25,25 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
     return builder;
   }
 
-  @Test
-  public void testPojoDescriptor() throws Exception {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected boolean isMethodIntrostection() {
 
-    PojoDescriptorBuilder builder = getPojoDescriptorBuilder();
-    PojoDescriptor<MyPojo> pojoDescriptor = builder.getDescriptor(MyPojo.class);
-    assertEquals(MyPojo.class, pojoDescriptor.getPojoClass());
-    MyPojo pojoInstance = new MyPojo();
-    // test property "class"
-    assertEquals(MyPojo.class, pojoDescriptor.getProperty(pojoInstance, "class"));
-    checkPojo(pojoDescriptor, pojoInstance, builder);
-    // test property "port"
-    checkProperty(pojoDescriptor, "port", Integer.class, int.class);
-    // test property "flag"
-    checkProperty(pojoDescriptor, "flag", Boolean.class, boolean.class);
-
-    checkItems(pojoDescriptor, pojoInstance, true);
-
-    checkValues(pojoDescriptor, pojoInstance, true);
+    return true;
   }
+
+  /**
+   * Test of {@link PojoDescriptorBuilder} using external public class {@link TestPojo}.
+   */
+  @Test
+  public void testPojoDescriptorInnerClass() {
+
+    TestPojo pojoInstance = new TestPojo();
+    PojoDescriptor<TestPojo> pojoDescriptor = checkPojoDescriptor(pojoInstance, TestPojo.class);
+    Object foo = pojoDescriptor.getProperty(pojoInstance, "foo");
+    assertEquals("Foo", foo);
+  }
+
 }
