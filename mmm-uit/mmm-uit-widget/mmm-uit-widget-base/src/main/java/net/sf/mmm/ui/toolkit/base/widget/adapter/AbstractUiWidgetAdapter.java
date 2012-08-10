@@ -6,8 +6,12 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadAltText;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadImage;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadLabel;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadUrl;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadValidationFailure;
+import net.sf.mmm.ui.toolkit.api.widget.UiConfiguration;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
+import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
@@ -19,10 +23,14 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter<WIDGET>, AttributeReadAltText,
-    AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage> {
+    AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage>,
+    AttributeReadValidationFailure {
 
   /** @see #getWidget() */
   private final WIDGET widget;
+
+  /** @see #getConfiguration() */
+  private UiConfiguration configuration;
 
   /**
    * The constructor.
@@ -52,6 +60,36 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   public WIDGET getWidget() {
 
     return this.widget;
+  }
+
+  /**
+   * @return the {@link UiConfiguration}
+   */
+  @Override
+  public final UiConfiguration getConfiguration() {
+
+    return this.configuration;
+  }
+
+  /**
+   * @param configuration is the value for {@link #getConfiguration()}.
+   */
+  @Override
+  public final void setConfiguration(UiConfiguration configuration) {
+
+    if (this.configuration != null) {
+      throw new AlreadyInitializedException();
+    }
+    this.configuration = configuration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setParent(UiWidgetComposite<?> parent) {
+
+    // do nothing by default...
   }
 
   /**
@@ -158,6 +196,15 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    */
   @Override
   public UiWidgetImage getImage() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getValidationFailure() {
 
     throw new NlsUnsupportedOperationException();
   }

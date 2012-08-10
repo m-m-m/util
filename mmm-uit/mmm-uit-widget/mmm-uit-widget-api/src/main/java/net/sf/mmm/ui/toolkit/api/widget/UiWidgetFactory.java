@@ -37,6 +37,14 @@ public interface UiWidgetFactory<NATIVE_WIDGET> {
   UiWidgetMainWindow getMainWindow();
 
   /**
+   * This method gets the {@link UiConfiguration} for this factory. It is intended to be read by
+   * {@link UiWidget} implementations to configure their look and feel.
+   * 
+   * @return the {@link UiConfiguration}.
+   */
+  UiConfiguration getConfiguration();
+
+  /**
    * This method creates a new {@link UiWidget} instance of the given type (<code>widgetInterface</code>).<br/>
    * <b>ATTENTION:</b><br/>
    * The API of the {@link UiWidget}s defines base interfaces marks as <code>abstract</code>. These interfaces

@@ -371,6 +371,12 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoConfirmation();
 
   /**
+   * @return the {@link NlsMessage} for the text "validation failure".
+   */
+  @NlsBundleMessage("validation failure")
+  NlsMessage infoValidationFailure();
+
+  /**
    * @see net.sf.mmm.util.value.api.WrongValueTypeException
    * 
    * @param value is the invalid value.

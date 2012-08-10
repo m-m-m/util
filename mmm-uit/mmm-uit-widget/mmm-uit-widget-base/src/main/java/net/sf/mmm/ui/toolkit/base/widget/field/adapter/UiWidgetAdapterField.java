@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget.field.adapter;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureValue;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterWithFocus;
@@ -19,7 +20,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  *        {@link #getWidget() widget}.
  */
 public interface UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> extends UiWidgetAdapterWithFocus<WIDGET>,
-    AttributeWriteValue<ADAPTER_VALUE> {
+    AttributeWriteValue<ADAPTER_VALUE>, AttributeWriteValidationFailure {
 
   /**
    * This method registers the given {@link UiHandlerEventValueChange value change handler} in the

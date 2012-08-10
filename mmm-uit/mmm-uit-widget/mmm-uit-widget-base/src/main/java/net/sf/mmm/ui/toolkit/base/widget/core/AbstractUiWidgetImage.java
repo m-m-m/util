@@ -41,11 +41,29 @@ public abstract class AbstractUiWidgetImage<ADAPTER extends UiWidgetAdapterImage
 
     super.initializeWidgetAdapter(adapter);
     if (this.url != null) {
-      adapter.setUrl(this.url);
+      setUrl(adapter);
     }
     if (this.altText != null) {
       adapter.setAltText(this.altText);
     }
+  }
+
+  /**
+   * @param adapter is the {@link #getWidgetAdapter() widget adapter}.
+   */
+  private void setUrl(ADAPTER adapter) {
+
+    String absoluteUrl;
+    if (this.url.startsWith("http://")) {
+      absoluteUrl = this.url;
+    } else if (this.url.startsWith("https://")) {
+      absoluteUrl = this.url;
+    } else if (this.url.startsWith("/")) {
+      absoluteUrl = this.url;
+    } else {
+      absoluteUrl = adapter.createAbsoluteImageUrl(this.url);
+    }
+    adapter.setUrl(absoluteUrl);
   }
 
   /**
@@ -65,7 +83,7 @@ public abstract class AbstractUiWidgetImage<ADAPTER extends UiWidgetAdapterImage
 
     this.url = url;
     if (hasWidgetAdapter()) {
-      getWidgetAdapter().setUrl(url);
+      setUrl(getWidgetAdapter());
     }
   }
 

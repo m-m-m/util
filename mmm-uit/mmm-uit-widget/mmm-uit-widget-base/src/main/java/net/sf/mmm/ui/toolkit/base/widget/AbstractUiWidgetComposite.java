@@ -6,6 +6,7 @@ import net.sf.mmm.ui.toolkit.api.common.UiMode;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetComposite}.
@@ -60,6 +61,23 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
       CHILD child = getChild(i);
       child.setMode(mode);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public CHILD getChild(String id) {
+
+    NlsNullPointerException.checkNotNull("id", id);
+    int size = getChildCount();
+    for (int i = 0; i < size; i++) {
+      CHILD child = getChild(i);
+      if ((child != null) && (id.equals(child.getId()))) {
+        return child;
+      }
+    }
+    return null;
   }
 
 }

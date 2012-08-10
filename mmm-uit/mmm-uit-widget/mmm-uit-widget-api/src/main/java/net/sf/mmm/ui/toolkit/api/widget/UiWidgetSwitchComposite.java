@@ -30,4 +30,13 @@ public abstract interface UiWidgetSwitchComposite<CHILD extends UiWidget> extend
    */
   boolean showChild(CHILD child);
 
+  /**
+   * This method {@link #showChild(UiWidget) shows the child} identified by the given <code>id</code>.
+   * 
+   * @param id is the {@link #getId() ID} of the requested child.
+   * @return <code>true</code> if the {@link #getChild(int) child} with the given <code>id</code> was found
+   *         and shown, <code>false</code> if there is no such {@link #getChild(int) child} in this composite.
+   */
+  boolean showChild(String id);
+
 }

@@ -7,6 +7,7 @@ import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
@@ -158,6 +159,15 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   public void dispose() {
 
     // do nothing...
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String createAbsoluteImageUrl(String relativePath) {
+
+    return GWT.getModuleBaseURL() + "gwt/" + getConfiguration().getTheme() + "/images/" + relativePath;
   }
 
 }

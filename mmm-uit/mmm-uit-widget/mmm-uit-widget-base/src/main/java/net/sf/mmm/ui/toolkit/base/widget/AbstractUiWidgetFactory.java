@@ -4,6 +4,7 @@ package net.sf.mmm.ui.toolkit.base.widget;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.ui.toolkit.api.handler.UiHandlerObserver;
+import net.sf.mmm.ui.toolkit.api.widget.UiConfiguration;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -26,12 +27,26 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
   /** @see #getModeChanger() */
   private UiModeChanger modeChanger;
 
+  /** @see #getConfiguration() */
+  private final UiConfiguration configuration;
+
   /**
    * The constructor.
    */
   public AbstractUiWidgetFactory() {
 
+    this(new UiConfigurationDefault());
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param configuration is the custom {@link #getConfiguration() configuration} to use.
+   */
+  public AbstractUiWidgetFactory(UiConfiguration configuration) {
+
     super();
+    this.configuration = configuration;
   }
 
   /**
@@ -84,6 +99,15 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
       getLogger().warn("Replacing mode changer {} with {}", new Object[] { this.modeChanger, modeChanger });
     }
     this.modeChanger = modeChanger;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiConfiguration getConfiguration() {
+
+    return this.configuration;
   }
 
 }

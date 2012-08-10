@@ -35,6 +35,15 @@ public abstract interface UiWidgetComposite<CHILD extends UiWidget> extends UiWi
   CHILD getChild(int index);
 
   /**
+   * This method gets the child with the given <code>id</code>.
+   * 
+   * @param id is the {@link #getId() ID} of the requested {@link #getChild(int) child}.
+   * @return the {@link #getChild(int) child} with the given <code>id</code> or <code>null</code> if no such
+   *         {@link #getChild(int) child} exists.
+   */
+  CHILD getChild(String id);
+
+  /**
    * This method gets the number of children in this composite.
    * 
    * @return the child count.

@@ -110,6 +110,7 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
         throw new ObjectDisposedException(this);
       }
       this.widgetAdapter = createWidgetAdapter();
+      this.widgetAdapter.setConfiguration(this.factory.getConfiguration());
       initializeWidgetAdapter(this.widgetAdapter);
     }
     return this.widgetAdapter;
@@ -167,6 +168,9 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
 
     adapter.setVisible(this.visible);
     adapter.setEnabled(this.enabled);
+    if (this.parent != null) {
+      adapter.setParent(this.parent);
+    }
     if (this.id != null) {
       adapter.setId(this.id);
     }
@@ -236,6 +240,9 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   protected void setParent(UiWidgetComposite<?> parent) {
 
     this.parent = parent;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setParent(parent);
+    }
   }
 
   /**
@@ -368,12 +375,12 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   @Override
   public void setTooltip(String tooltip) {
 
-    if (((this.tooltip == null) && (tooltip != null)) || (!this.tooltip.equals(tooltip))) {
-      if (this.widgetAdapter != null) {
-        this.widgetAdapter.setTooltip(tooltip);
+    if (hasWidgetAdapter()) {
+      if (((this.tooltip == null) && (tooltip != null)) || (!this.tooltip.equals(tooltip))) {
+        getWidgetAdapter().setTooltip(tooltip);
       }
-      this.tooltip = tooltip;
     }
+    this.tooltip = tooltip;
   }
 
   /**

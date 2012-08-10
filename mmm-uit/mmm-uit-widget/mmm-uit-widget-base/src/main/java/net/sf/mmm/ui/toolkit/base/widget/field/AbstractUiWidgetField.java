@@ -39,6 +39,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #isModified() */
   private boolean modified;
 
+  /** @see #getValidationFailure() */
+  private String validationFailure;
+
   /**
    * The constructor.
    * 
@@ -61,6 +64,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     }
     if (this.focusEventSender != null) {
       adapter.setFocusEventSender(this, this.focusEventSender);
+    }
+    if (this.validationFailure != null) {
+      adapter.setValidationFailure(this.validationFailure);
     }
   }
 
@@ -304,6 +310,27 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public void setModified(boolean modified) {
 
     this.modified = modified;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getValidationFailure() {
+
+    return this.validationFailure;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValidationFailure(String validationFailure) {
+
+    this.validationFailure = validationFailure;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setValidationFailure(validationFailure);
+    }
   }
 
 }

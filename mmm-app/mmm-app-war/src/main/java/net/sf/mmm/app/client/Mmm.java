@@ -14,6 +14,8 @@ import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
+import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRichTextArea;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
@@ -113,6 +115,18 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
       }
     });
     mainWindow.addChild(tabPanel);
+
+    UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
+    UiWidgetDateField dateField = factory.create(UiWidgetDateField.class);
+    dateField.setValidationFailure("Test");
+    verticalPanel3.addChild(dateField);
+    UiWidgetTextField textBoxField = factory.create(UiWidgetTextField.class);
+    textBoxField.setValidationFailure("Test");
+    verticalPanel3.addChild(textBoxField);
+    UiWidgetRichTextArea richTextArea = factory.create(UiWidgetRichTextArea.class);
+    richTextArea.setValidationFailure("Test");
+    verticalPanel3.addChild(richTextArea);
+    mainWindow.addChild(verticalPanel3);
 
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");

@@ -10,6 +10,8 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.ui.toolkit.api.widget.UiConfiguration;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
@@ -45,6 +47,15 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
   void removeFromParent();
 
   /**
+   * This method gets called whenever the parent of the according
+   * {@link net.sf.mmm.ui.toolkit.api.widget.UiWidget} is changed. It does nothing by default but may be
+   * overridden to deal with special behavior of native UI toolkits.
+   * 
+   * @param parent is the new parent or <code>null</code> if {@link #removeFromParent() removed from parent}.
+   */
+  void setParent(UiWidgetComposite<?> parent);
+
+  /**
    * This method is called from {@link net.sf.mmm.ui.toolkit.base.widget.UiModeChanger} for
    * {@link net.sf.mmm.ui.toolkit.api.widget.UiWidget#setMode(net.sf.mmm.ui.toolkit.api.common.UiMode)}. It
    * only handles the predefined {@link net.sf.mmm.ui.toolkit.api.common.UiMode}s.
@@ -63,5 +74,33 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
    * @param eventSender is the {@link UiHandlerEventClick}.
    */
   void setClickEventSender(UiFeatureClick eventSource, UiHandlerEventClick eventSender);
+
+  /**
+   * This method gets the {@link UiConfiguration}. It is used to implement configuration specific features.
+   * 
+   * @return the {@link UiConfiguration}
+   */
+  UiConfiguration getConfiguration();
+
+  /**
+   * This method sets the {@link #getConfiguration() configuration}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This method is automatically called from {@link AbstractUiWidget#getWidgetAdapter(AbstractUiWidget)}. It
+   * must be called only once.
+   * 
+   * @param configuration is the value for {@link #getConfiguration()}.
+   */
+  void setConfiguration(UiConfiguration configuration);
+
+  /**
+   * This method creates an absolute URL from the given <code>relativePath</code>.
+   * 
+   * @param relativePath is the relative path (URL suffix) to the image.
+   * 
+   * @see UiConfiguration#getTheme()
+   * 
+   * @return the absolute URL.
+   */
+  String createAbsoluteImageUrl(String relativePath);
 
 }

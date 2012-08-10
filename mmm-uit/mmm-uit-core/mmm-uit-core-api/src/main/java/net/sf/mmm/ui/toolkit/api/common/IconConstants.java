@@ -14,9 +14,9 @@ public interface IconConstants {
    * The name of the icon for a validation error. The icon is typically showing a red cross but smaller than
    * {@link #ICON_MESSAGE_ERROR}.
    * 
-   * @see net.sf.mmm.ui.toolkit.api.attribute.AttributeReadValidationError#getValidationError()
+   * @see net.sf.mmm.ui.toolkit.api.attribute.AttributeReadValidationFailure#getValidationFailure()
    */
-  String ICON_VALIDATION_ERROR = "validation-error.png";
+  String ICON_VALIDATION_FAILURE = "validation-failure.png";
 
   /**
    * The name of the icon for an error message. The icon is typically showing a red cross.

@@ -69,4 +69,17 @@ public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAd
     return false;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean showChild(String id) {
+
+    CHILD child = getChild(id);
+    if (child != null) {
+      return showChild(child);
+    }
+    return false;
+  }
+
 }

@@ -11,6 +11,7 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetImageGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetLabelGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetTabGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetComboBoxGwt;
+import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.UiWidgetLongFieldGwt;
@@ -53,10 +54,11 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
   public UiWidgetFactoryGwt() {
 
     super();
-    // atomic
+    // core
     register(new UiWidgetImageGwt.Factory());
     register(new UiWidgetButtonGwt.Factory());
     register(new UiWidgetLabelGwt.Factory());
+    // field
     register(new UiWidgetTextFieldGwt.Factory());
     register(new UiWidgetPasswordFieldGwt.Factory());
     register(new UiWidgetTextAreaGwt.Factory());
@@ -64,6 +66,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
     register(new UiWidgetLongFieldGwt.Factory());
     register(new UiWidgetIntegerFieldGwt.Factory());
     register(new UiWidgetDoubleFieldGwt.Factory());
+    register(new UiWidgetDateFieldGwt.Factory());
     register(new UiWidgetRadioButtonsGwt.Factory());
     register(new UiWidgetRadioButtonsVerticalGwt.Factory());
     register(new UiWidgetComboBoxGwt.Factory());
