@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link AbstractRemoteInvocationServiceCaller}
+ * This is the test-case for {@link AbstractRemoteInvocationServiceCaller}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <CALLER> is the generic type of the {@link #getServiceCaller() service caller implementation to
@@ -53,6 +53,12 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
    */
   protected abstract RemoteInvocationServiceResultCallback<?>[] getCurrentCallbacks(CALLER caller);
 
+  /**
+   * Cancels the given {@link RemoteInvocationServiceQueue} and performs verifications.
+   * 
+   * @param caller is the {@link RemoteInvocationServiceCaller}.
+   * @param queue is the {@link RemoteInvocationServiceQueue} to cancel.
+   */
   protected void cancel(CALLER caller, RemoteInvocationServiceQueue queue) {
 
     queue.cancel();
@@ -60,6 +66,12 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
     verifyNoRequest(caller);
   }
 
+  /**
+   * This method creates a new {@link RemoteInvocationServiceQueue} and performs verifcations.
+   * 
+   * @param caller is the {@link RemoteInvocationServiceCaller}.
+   * @return the new queue.
+   */
   protected RemoteInvocationServiceQueue newQueue(CALLER caller) {
 
     RemoteInvocationServiceQueue queue = caller.newQueue();
@@ -70,7 +82,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
   }
 
   /**
-   * This method tests the basic
+   * This method tests {@link RemoteInvocationServiceQueue#cancel()} for a simple queue.
    */
   @Test
   public void testCancel() {
@@ -83,7 +95,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
   }
 
   /**
-   * This method tests the basic
+   * This method tests {@link RemoteInvocationServiceQueue#cancel()} for a queue with child queues.
    */
   @Test
   public void testCancelWithChildQueues() {

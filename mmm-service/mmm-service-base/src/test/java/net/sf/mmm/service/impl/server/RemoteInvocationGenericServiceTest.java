@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.service.TestService;
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
