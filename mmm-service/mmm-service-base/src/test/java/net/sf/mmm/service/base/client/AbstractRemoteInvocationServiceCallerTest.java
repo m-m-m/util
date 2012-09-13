@@ -96,7 +96,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
   /**
    * This inner class extends {@link AbstractRemoteInvocationServiceCaller} so it can be tested.
    */
-  public static class RemoteInvocationServiceCallerTestImpl extends AbstractRemoteInvocationServiceCaller {
+  public static class RemoteInvocationServiceCallerTestImpl extends AbstractRemoteInvocationServiceCallerWithClientMap {
 
     /** @see AbstractRemoteInvocationServiceCallerTest#getCurrentRequest(RemoteInvocationServiceCallerTestImpl) */
     private RemoteInvocationGenericServiceRequest currentRequest;

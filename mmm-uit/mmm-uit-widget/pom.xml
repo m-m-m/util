@@ -17,5 +17,6 @@
     <module>mmm-uit-widget-api</module>
     <module>mmm-uit-widget-base</module>
     <module>mmm-uit-widget-impl-gwt</module>
+    <module>mmm-uit-widget-theme-standard</module>
   </modules>
 </project>

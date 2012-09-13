@@ -4,9 +4,7 @@ package net.sf.mmm.service.base.client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
@@ -16,12 +14,11 @@ import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
+import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 
@@ -33,9 +30,6 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
  */
 public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLoggableComponent implements
     RemoteInvocationServiceCaller {
-
-  /** @see #getServiceClient(Class) */
-  private final Map<Class<? extends RemoteInvocationService>, RemoteInvocationService> serviceClientMap;
 
   /** @see #nextRequestId() */
   private int requestCount;
@@ -49,24 +43,6 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   public AbstractRemoteInvocationServiceCaller() {
 
     super();
-    this.serviceClientMap = new HashMap<Class<? extends RemoteInvocationService>, RemoteInvocationService>();
-  }
-
-  /**
-   * This method registers a {@link #getServiceClient(Class) service-client}.
-   * 
-   * @param <SERVICE> is the generic type of <code>serviceInterface</code>.
-   * @param serviceInterface is the interface of the {@link RemoteInvocationService}.
-   * @param serviceClient is the client stub for the given <code>serviceInterface</code>.
-   */
-  protected <SERVICE extends RemoteInvocationService> void registerService(Class<SERVICE> serviceInterface,
-      SERVICE serviceClient) {
-
-    RemoteInvocationService old = this.serviceClientMap.put(serviceInterface, serviceClient);
-    if (old != null) {
-      throw new DuplicateObjectException(serviceClient, serviceInterface, old);
-    }
-    ((AbstractRemoteInvocationServiceClient) serviceClient).setRemoteInvocationSerivceCaller(this);
   }
 
   /**
@@ -151,22 +127,6 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   }
 
   /**
-   * @see RemoteInvocationServiceQueue#getServiceClient(Class, Class, RemoteInvocationServiceCallback)
-   * 
-   * @param <SERVICE> is the generic type of <code>serviceInterface</code>.
-   * @param serviceInterface is the interface of the {@link RemoteInvocationService}.
-   * @return the according client-service stub.
-   */
-  protected <SERVICE extends RemoteInvocationService> SERVICE getServiceClient(Class<SERVICE> serviceInterface) {
-
-    SERVICE serviceClient = (SERVICE) this.serviceClientMap.get(serviceInterface);
-    if (serviceClient == null) {
-      throw new ObjectNotFoundException(RemoteInvocationService.class.getSimpleName(), serviceInterface);
-    }
-    return serviceClient;
-  }
-
-  /**
    * This method finally performs a request with the invocations collected by the given <code>queue</code>.
    * 
    * @param queue is the {@link RemoteInvocationServiceQueueImpl}.
@@ -191,6 +151,16 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   }
 
   /**
+   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceQueue#getServiceClient(Class, Class,
+   *      net.sf.mmm.service.api.client.RemoteInvocationServiceCallback)
+   * 
+   * @param <SERVICE> is the generic type of <code>serviceInterface</code>.
+   * @param serviceInterface is the interface of the {@link RemoteInvocationService}.
+   * @return the according client-service stub.
+   */
+  protected abstract <SERVICE extends RemoteInvocationService> SERVICE getServiceClient(Class<SERVICE> serviceInterface);
+
+  /**
    * This method finally performs the given <code>request</code>.
    * 
    * @param request is the {@link RemoteInvocationGenericServiceRequest} to perform.
@@ -199,6 +169,64 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    */
   protected abstract void performRequest(RemoteInvocationGenericServiceRequest request,
       RemoteInvocationServiceResultCallback<?>[] callbacks);
+
+  /**
+   * This method is called from
+   * {@link #handleResponse(RemoteInvocationGenericServiceRequest, RemoteInvocationServiceResultCallback[], RemoteInvocationGenericServiceResponse)}
+   * for each {@link RemoteInvocationServiceResult} to handle.
+   * 
+   * @param call is the corresponding {@link RemoteInvocationServiceCall}.
+   * @param result is the received {@link RemoteInvocationServiceResult} to handle.
+   * @param callback is the {@link RemoteInvocationServiceResultCallback} to
+   *        {@link RemoteInvocationServiceResultCallback#onResult(RemoteInvocationServiceResult, boolean)
+   *        delegate} to.
+   * @param complete - see
+   *        {@link RemoteInvocationServiceResultCallback#onResult(RemoteInvocationServiceResult, boolean)}.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  protected void handleResult(RemoteInvocationServiceCall call, RemoteInvocationServiceResult result,
+      RemoteInvocationServiceResultCallback<?> callback, boolean complete) {
+
+    callback.onResult(result, complete);
+
+  }
+
+  /**
+   * This method should be called from
+   * {@link #performRequest(RemoteInvocationGenericServiceRequest, RemoteInvocationServiceResultCallback[])}
+   * if a {@link RemoteInvocationGenericServiceResponse} has been received.
+   * 
+   * @param request is the {@link RemoteInvocationGenericServiceRequest} that has been
+   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, RemoteInvocationServiceResultCallback[])
+   *        performed}.
+   * @param callbacks is the array of {@link RemoteInvocationServiceCallback}s according to
+   *        {@link RemoteInvocationGenericServiceRequest#getCalls()}.
+   * @param response is the {@link RemoteInvocationGenericServiceResponse} to handle.
+   */
+  protected void handleResponse(RemoteInvocationGenericServiceRequest request,
+      RemoteInvocationServiceResultCallback<?>[] callbacks, RemoteInvocationGenericServiceResponse response) {
+
+    if (request.getRequestId() != response.getRequestId()) {
+      String source = "request-ID";
+      throw new ObjectMismatchException(Integer.valueOf(response.getRequestId()), Integer.valueOf(request
+          .getRequestId()), source);
+    }
+    @SuppressWarnings("rawtypes")
+    RemoteInvocationServiceResult[] results = response.getResults();
+    if (results.length != request.getCalls().length) {
+      String source = "#calls/results";
+      throw new ObjectMismatchException(Integer.valueOf(results.length), Integer.valueOf(request.getCalls().length),
+          source);
+    }
+    for (int i = 0; i < results.length; i++) {
+      RemoteInvocationServiceCall call = request.getCalls()[i];
+      @SuppressWarnings("rawtypes")
+      RemoteInvocationServiceResult result = results[i];
+
+      boolean complete = (i == (results.length - 1));
+      handleResult(call, result, callbacks[i], complete);
+    }
+  }
 
   /**
    * This inner class is the implementation of {@link RemoteInvocationServiceQueue}.

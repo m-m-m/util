@@ -1,25 +1,23 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.impl.client;
+package net.sf.mmm.service.impl.gwt.client;
 
 import java.io.Serializable;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCallerGwt;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
-import net.sf.mmm.service.api.client.event.RemoteInvocationServiceCallEvent;
-import net.sf.mmm.service.api.client.event.RemoteInvocationServiceEvent;
+import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
+import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceQueueGwt;
+import net.sf.mmm.service.api.gwt.client.event.RemoteInvocationServiceCallEvent;
+import net.sf.mmm.service.api.gwt.client.event.RemoteInvocationServiceEvent;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
-import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCaller;
+import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCallerWithClientMap;
 import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwt;
 import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwtAsync;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -33,8 +31,8 @@ import com.google.web.bindery.event.shared.EventBus;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractRemoteInvocationServiceCaller implements
-    RemoteInvocationServiceCallerGwt {
+public abstract class AbstractRemoteInvocationServiceCallerGwt extends
+    AbstractRemoteInvocationServiceCallerWithClientMap implements RemoteInvocationServiceCallerGwt {
 
   /** @see #performRequest(RemoteInvocationServiceQueueImpl) */
   private final RemoteInvocationGenericServiceGwtAsync genericService;
@@ -126,6 +124,42 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractR
    * {@inheritDoc}
    */
   @Override
+  protected void handleResult(RemoteInvocationServiceCall call, RemoteInvocationServiceResult result,
+      RemoteInvocationServiceResultCallback<?> callback, boolean complete) {
+
+    if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
+      RemoteInvocationServiceCallEvent.fireEventResultReceived(AbstractRemoteInvocationServiceCallerGwt.this.eventBus,
+          call, result);
+    }
+    super.handleResult(call, result, callback, complete);
+    if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
+      RemoteInvocationServiceCallEvent.fireEventResultProceeded(AbstractRemoteInvocationServiceCallerGwt.this.eventBus,
+          call, result);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void handleResponse(RemoteInvocationGenericServiceRequest request,
+      RemoteInvocationServiceResultCallback<?>[] callbacks, RemoteInvocationGenericServiceResponse response) {
+
+    if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
+      RemoteInvocationServiceEvent.fireEventResponseReceived(AbstractRemoteInvocationServiceCallerGwt.this.eventBus,
+          request, response);
+    }
+    super.handleResponse(request, callbacks, response);
+    if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
+      RemoteInvocationServiceEvent.fireEventResponseProceeded(AbstractRemoteInvocationServiceCallerGwt.this.eventBus,
+          request, response);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void performRequest(final RemoteInvocationGenericServiceRequest request,
       final RemoteInvocationServiceResultCallback<?>[] callbacks) {
 
@@ -145,42 +179,9 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractR
        * {@inheritDoc}
        */
       @Override
-      @SuppressWarnings({ "rawtypes", "unchecked" })
       public void onSuccess(RemoteInvocationGenericServiceResponse response) {
 
-        if (request.getRequestId() != response.getRequestId()) {
-          String source = "request-ID";
-          throw new ObjectMismatchException(Integer.valueOf(response.getRequestId()), Integer.valueOf(request
-              .getRequestId()), source);
-        }
-        if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
-          RemoteInvocationServiceEvent.fireEventResponseReceived(
-              AbstractRemoteInvocationServiceCallerGwt.this.eventBus, request, response);
-        }
-        RemoteInvocationServiceResult[] results = response.getResults();
-        if (results.length != request.getCalls().length) {
-          String source = "#calls/results";
-          throw new ObjectMismatchException(Integer.valueOf(results.length),
-              Integer.valueOf(request.getCalls().length), source);
-        }
-        for (int i = 0; i < results.length; i++) {
-          RemoteInvocationServiceCall call = request.getCalls()[i];
-          RemoteInvocationServiceResult result = results[i];
-          if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
-            RemoteInvocationServiceCallEvent.fireEventResultReceived(
-                AbstractRemoteInvocationServiceCallerGwt.this.eventBus, call, result);
-          }
-          boolean complete = (i == (results.length - 1));
-          callbacks[i].onResult(result, complete);
-          if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
-            RemoteInvocationServiceCallEvent.fireEventResultProceeded(
-                AbstractRemoteInvocationServiceCallerGwt.this.eventBus, call, result);
-          }
-        }
-        if (AbstractRemoteInvocationServiceCallerGwt.this.eventBus != null) {
-          RemoteInvocationServiceEvent.fireEventResponseProceeded(
-              AbstractRemoteInvocationServiceCallerGwt.this.eventBus, request, response);
-        }
+        handleResponse(request, callbacks, response);
       }
     };
 
@@ -235,7 +236,7 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends AbstractR
 
   /**
    * This inner class adapts from {@link RemoteInvocationServiceResultCallback} to
-   * {@link RemoteInvocationServiceCallback}.
+   * {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCallback}.
    * 
    * @param <RESULT> is the generic type of the {@link #onResult(RemoteInvocationServiceResult, boolean)
    *        result to receive}.

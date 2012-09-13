@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.api.client;
 
-import java.io.Serializable;
-
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
@@ -28,6 +26,7 @@ public interface RemoteInvocationServiceQueue extends AttributeReadId<String> {
    * 
    * @see RemoteInvocationServiceCaller#newQueue(String)
    */
+  @Override
   String getId();
 
   /**
@@ -45,8 +44,8 @@ public interface RemoteInvocationServiceQueue extends AttributeReadId<String> {
    * @param returnType is the {@link java.lang.reflect.Method#getReturnType() return type} of the
    *        {@link java.lang.reflect.Method} to invoke.
    * @param callback is the {@link RemoteInvocationServiceCallback} that will be
-   *        {@link RemoteInvocationServiceCallback#onSuccess(Serializable, boolean) called} asynchronously
-   *        when the result of the invoked {@link java.lang.reflect.Method} has been received.
+   *        {@link RemoteInvocationServiceCallback#onSuccess(java.io.Serializable, boolean) called}
+   *        asynchronously when the result of the invoked {@link java.lang.reflect.Method} has been received.
    * @return the client-stub of the {@link RemoteInvocationService}.
    */
   <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,
@@ -67,8 +66,8 @@ public interface RemoteInvocationServiceQueue extends AttributeReadId<String> {
    * @param returnType is the {@link java.lang.reflect.Method#getReturnType() return type} of the
    *        {@link java.lang.reflect.Method} to invoke.
    * @param callback is the {@link RemoteInvocationServiceCallback} that will be
-   *        {@link RemoteInvocationServiceCallback#onSuccess(Serializable, boolean) called} asynchronously
-   *        when the result of the invoked {@link java.lang.reflect.Method} has been received.
+   *        {@link RemoteInvocationServiceCallback#onSuccess(java.io.Serializable, boolean) called}
+   *        asynchronously when the result of the invoked {@link java.lang.reflect.Method} has been received.
    * @return the client-stub of the {@link RemoteInvocationService}.
    */
   <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,

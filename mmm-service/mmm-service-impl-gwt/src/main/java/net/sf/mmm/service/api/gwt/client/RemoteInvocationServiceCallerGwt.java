@@ -1,12 +1,14 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.api.client;
+package net.sf.mmm.service.api.gwt.client;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
+
 
 /**
  * This is the GWT specific variant of {@link RemoteInvocationServiceCaller}. It allows to use
- * {@link AsyncCallback} as alternative to
+ * {@link com.google.gwt.user.client.rpc.AsyncCallback} as alternative to
  * {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCallback}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -17,16 +19,19 @@ public interface RemoteInvocationServiceCallerGwt extends RemoteInvocationServic
   /**
    * {@inheritDoc}
    */
+  @Override
   RemoteInvocationServiceQueueGwt getCurrentQueue();
 
   /**
    * {@inheritDoc}
    */
+  @Override
   RemoteInvocationServiceQueueGwt newQueue();
 
   /**
    * {@inheritDoc}
    */
+  @Override
   RemoteInvocationServiceQueueGwt newQueue(RemoteInvocationServiceQueueSettings settings);
 
 }

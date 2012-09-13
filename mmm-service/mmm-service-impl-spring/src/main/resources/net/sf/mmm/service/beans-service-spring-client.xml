@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+                      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                      http://www.springframework.org/schema/context
+                      http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+  <import resource="classpath:net/sf/mmm/util/beans-core.xml" />
+
+  <bean id="ServiceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <property name="singleton" value="true"/>
+    <property name="location">
+      <value>classpath:net/sf/mmm/service/service-client.properties</value>
+    </property>
+  </bean>
+
+  <bean id="RemoteInvocationServiceClient" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+    <property name="serviceUrl"
+      value="#{ ServiceProperties['service.protocol'] + '://' + ServiceProperties['service.host'] + ':' + ServiceProperties['service.port'] + ServiceProperties['service.path'] }"/>
+    <property name="serviceInterface" value="net.sf.mmm.service.base.RemoteInvocationGenericService"/>
+    <!--
+    <property name="httpInvokerRequestExecutor" ref="httpInvokerExecutor"/>
+     -->
+  </bean>
+
+  <!--
+  <bean id="httpInvokerExecutor" class="org.springframework.security.remoting.httpinvoker.AuthenticationSimpleHttpInvokerRequestExecutor"/>
+   -->
+</beans>

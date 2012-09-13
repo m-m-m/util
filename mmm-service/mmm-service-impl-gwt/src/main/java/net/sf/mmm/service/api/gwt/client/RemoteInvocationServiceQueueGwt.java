@@ -1,10 +1,9 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.api.client;
-
-import java.io.Serializable;
+package net.sf.mmm.service.api.gwt.client;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -32,9 +31,8 @@ public interface RemoteInvocationServiceQueueGwt extends RemoteInvocationService
    * @param serviceInterface is the interface of the {@link RemoteInvocationService}.
    * @param returnType is the {@link java.lang.reflect.Method#getReturnType() return type} of the
    *        {@link java.lang.reflect.Method} to invoke.
-   * @param callback is the {@link RemoteInvocationServiceCallback} that will be
-   *        {@link RemoteInvocationServiceCallback#onSuccess(Serializable, boolean) called} asynchronously
-   *        when the result of the invoked {@link java.lang.reflect.Method} has been received.
+   * @param callback is the {@link AsyncCallback} that will be {@link AsyncCallback#onSuccess(Object) called}
+   *        asynchronously when the result of the invoked {@link java.lang.reflect.Method} has been received.
    * @return the client-stub of the {@link RemoteInvocationService}.
    */
   <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,

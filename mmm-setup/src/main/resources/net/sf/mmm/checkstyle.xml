@@ -33,6 +33,7 @@
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
     <module name="LineLength">
+      <property name="severity" value="info"/>
       <property name="ignorePattern" value="^.*@see.*$"/>
       <property name="max" value="160"/>
     </module>

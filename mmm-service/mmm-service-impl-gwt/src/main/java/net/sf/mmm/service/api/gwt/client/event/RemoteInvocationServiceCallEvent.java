@@ -1,10 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.api.client.event;
+package net.sf.mmm.service.api.gwt.client.event;
 
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 
 import com.google.gwt.event.shared.GwtEvent;
@@ -134,17 +132,18 @@ public class RemoteInvocationServiceCallEvent extends GwtEvent<RemoteInvocationS
   public static enum ServiceCallState {
 
     /**
-     * Sending {@link RemoteInvocationGenericServiceRequest}.
+     * Sending {@link net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest}.
      */
     CALL_QUEUED,
 
     /**
-     * {@link RemoteInvocationGenericServiceResponse} has been received (and de-serialized).
+     * {@link net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse} has been received (and
+     * de-serialized).
      */
     RESULT_RECEIVED,
 
     /**
-     * {@link RemoteInvocationGenericServiceResponse} has been proceeded.
+     * {@link net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse} has been proceeded.
      */
     RESULT_PROCEEDED,
 

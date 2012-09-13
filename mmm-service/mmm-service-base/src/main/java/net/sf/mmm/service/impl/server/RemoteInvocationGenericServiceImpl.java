@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
@@ -26,12 +25,11 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the server-side default implementation of the {@link RemoteInvocationGenericService} interface. You
- * can extend this class to add custom logik. E.g. you could add
+ * can extend this class to add custom logic. E.g. you could add
  * {@link #doSecurityCheck(RemoteInvocationGenericServiceRequest) custom security checks} or override
  * {@link #createResultOnSuccess(Serializable)} and {@link #createResultOnFailure(Throwable)} in order to add
  * context information to the result (e.g. request or session scoped) - see
- * {@link RemoteInvocationServiceQueue#getServiceClient(Class, Class, net.sf.mmm.service.api.client.RemoteInvocationServiceCallback)}
- * .
+ * {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCallback}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -95,6 +93,7 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
    * 
    * @see net.sf.mmm.service.api.client.RemoteInvocationServiceCallback#onSuccess(Serializable, boolean)
    * 
+   * @param <RESULT> is the generic type of the {@link RemoteInvocationServiceResult#getResult() result}.
    * @param result is the {@link RemoteInvocationServiceResult#getResult() result} of the service-method.
    * @return the {@link RemoteInvocationServiceResult} with the result.
    */

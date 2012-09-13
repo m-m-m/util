@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.api.client.event;
+package net.sf.mmm.service.api.gwt.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
 
