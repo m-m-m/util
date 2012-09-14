@@ -17,6 +17,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @SuppressWarnings("rawtypes")
 public interface CollectionFactoryManager {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.collection.api.CollectionFactoryManager";
+
   /**
    * This method gets the {@link MapFactory} for the given <code>mapType</code>.
    * 

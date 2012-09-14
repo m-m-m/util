@@ -21,6 +21,9 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 @ComponentSpecification
 public interface FileUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.file.api.FileUtil";
+
   /** The path segment indicating the current folder itself. */
   String PATH_SEGMENT_CURRENT = ".";
 
@@ -106,7 +109,7 @@ public interface FileUtil {
   String normalizePath(String path, char separator);
 
   /**
-   * This method is a shortcut for <code>{@link #normalizePath(String, char) normalizePath}(path, 
+   * This method is a shortcut for <code>{@link #normalizePath(String, char) normalizePath}(path,
    * {@link File#separatorChar})</code>.
    * 
    * @see #normalizePath(String, char)
@@ -356,15 +359,15 @@ public interface FileUtil {
    * Examples:
    * <ul>
    * <li>
-   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
+   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd,
    * "*", {@link FileType#DIRECTORY})</code> will return all {@link File#isDirectory() directories} in
    * <code>cwd</code></li>
    * <li>
-   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
+   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd,
    * "*&#47;*.xml", {@link FileType#FILE})</code> will return all {@link File#isFile() files} from all direct
    * {@link File#list() sub-folders} of <code>cwd</code> that end with ".xml"</li>
    * <li>
-   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd, 
+   * <code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd,
    * "**&#47;*.xml", {@link FileType#FILE})</code> will return all {@link File#isFile() files} in
    * <code>cwd</code> or any of its transitive {@link File#list() sub-folders} that end with ".xml"</li>
    * </ul>

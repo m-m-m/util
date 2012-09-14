@@ -24,6 +24,9 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 @ComponentSpecification
 public interface XmlUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.xml.api.XmlUtil";
+
   /** the URI of the xmlns namespace */
   String NAMESPACE_URI_XML = "http://www.w3.org/XML/1998/namespace".intern();
 

@@ -65,7 +65,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(ReflectionUtil.CDI_NAME)
 public class ReflectionUtilImpl extends AbstractLoggableComponent implements ReflectionUtil {
 
   /** The prefix of resources in WAR-files. */

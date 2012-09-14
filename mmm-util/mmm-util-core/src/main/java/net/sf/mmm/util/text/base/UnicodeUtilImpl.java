@@ -5,6 +5,9 @@ package net.sf.mmm.util.text.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.text.api.DiacriticalMark;
 import net.sf.mmm.util.text.api.UnicodeUtil;
@@ -20,6 +23,8 @@ import org.slf4j.LoggerFactory;
  * @since 2.0.0
  */
 @SuppressWarnings("boxing")
+@Singleton
+@Named(UnicodeUtil.CDI_NAME)
 public class UnicodeUtilImpl implements UnicodeUtil {
 
   /** @see #getInstance() */
@@ -173,6 +178,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String normalize2Ascii(char character) {
 
     return CHARACTER_TO_ASCII_MAP.get(Character.valueOf(character));
@@ -217,6 +223,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDash(char character) {
 
     if (character == HYPHEN_MINUS) {
@@ -238,6 +245,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isHyphen(char character) {
 
     if (character == HYPHEN_MINUS) {
@@ -255,6 +263,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isMinus(char character) {
 
     if (character == HYPHEN_MINUS) {

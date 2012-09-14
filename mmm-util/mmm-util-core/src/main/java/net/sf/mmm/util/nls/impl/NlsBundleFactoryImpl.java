@@ -7,16 +7,17 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsBundleFactory;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.nls.api.NlsBundleFactory}.
+ * This is the implementation of {@link NlsBundleFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@Named
+@Named(NlsBundleFactory.CDI_NAME)
 @Singleton
 public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
 

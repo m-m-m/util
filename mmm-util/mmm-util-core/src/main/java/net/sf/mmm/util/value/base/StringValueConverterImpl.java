@@ -19,13 +19,13 @@ import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
- * This is a utility class providing support for dealing with values (e.g. when reading configurations).
+ * This is the implementation of {@link StringValueConverter}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(StringValueConverter.CDI_NAME)
 public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements StringValueConverter {
 
   /** @see #getInstance() */
@@ -151,6 +151,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public final <TARGET> TARGET convertValue(String value, Object valueSource, Class<TARGET> type, Type targetType)
       throws ValueNotSetException, WrongValueTypeException {

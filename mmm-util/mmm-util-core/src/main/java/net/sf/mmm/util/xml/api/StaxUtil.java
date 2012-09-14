@@ -26,6 +26,9 @@ import net.sf.mmm.util.value.api.ValueException;
 @ComponentSpecification
 public interface StaxUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.xml.api.StaxUtil";
+
   /**
    * This method creates an {@link XMLStreamReader}.
    * 

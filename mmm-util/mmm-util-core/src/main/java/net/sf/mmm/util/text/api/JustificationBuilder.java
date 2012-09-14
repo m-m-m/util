@@ -79,6 +79,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface JustificationBuilder {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.text.api.JustificationBuilder";
+
   /**
    * This method parses the given <code>format</code> as {@link Justification}.
    * 

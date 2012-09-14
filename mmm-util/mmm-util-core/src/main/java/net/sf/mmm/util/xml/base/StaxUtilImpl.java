@@ -36,7 +36,7 @@ import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
  * @since 1.0.2
  */
 @Singleton
-@Named
+@Named(StaxUtil.CDI_NAME)
 public final class StaxUtilImpl extends AbstractLoggableComponent implements StaxUtil {
 
   /** @see #getInstance() */
@@ -163,6 +163,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public XMLEventReader createXmlEventReader(InputStream inputStream) {
 
     try {
@@ -175,6 +176,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public XMLStreamReader createXmlStreamReader(InputStream inputStream) {
 
     try {
@@ -187,6 +189,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public XMLStreamReader createXmlStreamReader(DataResource resource, boolean xIncludeAware) throws XmlException {
 
     if (xIncludeAware) {
@@ -202,6 +205,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public XMLStreamWriter createXmlStreamWriter(OutputStream out) {
 
     try {
@@ -214,6 +218,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public XMLStreamWriter createXmlStreamWriter(Writer writer) {
 
     try {
@@ -226,6 +231,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type)
       throws ValueException {
 
@@ -237,6 +243,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type,
       V defaultValue) throws ValueException {
 
@@ -247,6 +254,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public String readText(XMLStreamReader xmlReader) {
 
     try {
@@ -272,6 +280,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void skipOpenElement(XMLStreamReader xmlReader) {
 
     try {
@@ -293,6 +302,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void skipOpenElement(XMLEventReader xmlReader) {
 
     try {
@@ -314,6 +324,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public XMLEvent nextElement(XMLEventReader xmlReader) {
 
     try {
@@ -334,6 +345,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getEventTypeName(int eventType) {
 
     switch (eventType) {

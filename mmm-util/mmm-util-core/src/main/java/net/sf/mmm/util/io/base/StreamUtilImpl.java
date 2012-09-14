@@ -48,7 +48,7 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(StreamUtil.CDI_NAME)
 public class StreamUtilImpl extends AbstractLoggableComponent implements StreamUtil {
 
   /** @see #getInstance() */
@@ -190,6 +190,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public String read(Reader reader) throws RuntimeIoException {
 
     StringWriter writer = new StringWriter();
@@ -200,6 +201,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws RuntimeIoException {
 
     ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, null);
@@ -210,6 +212,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public long transfer(FileInputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws RuntimeIoException {
 
@@ -255,6 +258,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen, long size)
       throws RuntimeIoException {
 
@@ -300,6 +304,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws RuntimeIoException {
 
@@ -311,6 +316,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen) {
 
     return transferAsync(inStream, outStream, keepOutStreamOpen, null);
@@ -319,6 +325,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen,
       TransferCallback callback) {
 
@@ -331,6 +338,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen) {
 
     return transferAsync(reader, writer, keepWriterOpen, null);
@@ -339,6 +347,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen, TransferCallback callback) {
 
     ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, callback);
@@ -350,6 +359,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Properties loadProperties(InputStream inStream) throws RuntimeIoException {
 
     RuntimeIoException t = null;
@@ -377,6 +387,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Properties loadProperties(Reader reader) throws RuntimeIoException {
 
     RuntimeIoException t = null;
@@ -404,6 +415,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public PrintWriter toPrintWriter(Appendable appendable) {
 
     NlsNullPointerException.checkNotNull(Appendable.class, appendable);
@@ -417,6 +429,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Writer toWriter(Appendable appendable) {
 
     NlsNullPointerException.checkNotNull(Appendable.class, appendable);
@@ -430,6 +443,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close(InputStream inputStream) {
 
     try {
@@ -442,6 +456,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close(OutputStream outputStream) {
 
     try {
@@ -454,6 +469,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close(Writer writer) {
 
     try {
@@ -466,6 +482,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close(Reader reader) {
 
     try {
@@ -478,6 +495,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close(Channel channel) {
 
     try {
@@ -536,6 +554,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /**
      * {@inheritDoc}
      */
+    @Override
     public void stop() {
 
       this.stopped = true;
@@ -694,6 +713,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long call() throws Exception {
 
       try {

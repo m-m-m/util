@@ -23,7 +23,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(NlsDependencies.CDI_NAME)
 public class NlsDependenciesImpl extends AbstractComponent implements NlsDependencies {
 
   /** @see #getArgumentParser() */
@@ -49,6 +49,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsArgumentParser getArgumentParser() {
 
     return this.argumentParser;
@@ -67,6 +68,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsArgumentFormatter getArgumentFormatter() {
 
     return this.argumentFormatter;
@@ -85,6 +87,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessageFormatterFactory getMessageFormatterFactory() {
 
     return this.messageFormatterFactory;
@@ -103,6 +106,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iso8601UtilLimited getIso8601Util() {
 
     return this.iso8601Util;

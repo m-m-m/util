@@ -32,13 +32,13 @@ import net.sf.mmm.util.xml.base.StaxUtilImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
- * The implementation of the {@link net.sf.mmm.util.text.api.HyphenatorBuilder} interface.
+ * The implementation of {@link HyphenatorBuilder}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(HyphenatorBuilder.CDI_NAME)
 public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
 
   /** @see #createHyphenator(String) */

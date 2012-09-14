@@ -11,13 +11,17 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 /**
  * This is the interface for a collection of utility functions to deal with {@link Annotation annotations}.
  * 
- * @see net.sf.mmm.util.reflect.api.AnnotationUtil
+ * @see ReflectionUtil
+ * @see net.sf.mmm.util.reflect.base.AnnotationUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 @ComponentSpecification
 public interface AnnotationUtil {
+
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.reflect.api.AnnotationUtil";
 
   /** an empty element-type array */
   ElementType[] NO_TARGET = new ElementType[0];

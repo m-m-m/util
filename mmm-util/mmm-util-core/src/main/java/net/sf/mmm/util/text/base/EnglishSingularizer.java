@@ -19,7 +19,7 @@ import net.sf.mmm.util.text.api.Singularizer;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(Singularizer.CDI_NAME)
 public class EnglishSingularizer extends AbstractTextTransformer implements Singularizer {
 
   /** The singleton instance. */

@@ -19,6 +19,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface ProcessUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.process.api.ProcessUtil";
+
   /**
    * This method executes the external {@link Process}es configured by the given <code>builders</code>. If
    * more than one {@link ProcessBuilder builder} is given, the according processes are piped.<br>

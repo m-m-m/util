@@ -6,6 +6,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
@@ -23,7 +24,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @since 1.1.0
  */
 @Singleton
-@Named
+@Named(PojoFactory.CDI_NAME)
 public class GuessingPojoFactory extends DefaultPojoFactory {
 
   /** The conventional suffix for an implementation class. */

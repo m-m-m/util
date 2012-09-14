@@ -5,7 +5,10 @@ package net.sf.mmm.util.value.api;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}.<br>
+ * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}. It
+ * is typically used for dealing with values (e.g. when reading configurations).
+ * 
+ * @see ComposedValueConverter
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -13,6 +16,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface StringValueConverter extends GenericValueConverter<String> {
 
-  // nothing to add, just the generic is bound.
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.value.api.StringValueConverter";
 
 }

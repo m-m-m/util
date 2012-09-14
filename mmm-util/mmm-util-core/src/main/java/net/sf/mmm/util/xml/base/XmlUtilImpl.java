@@ -31,7 +31,7 @@ import net.sf.mmm.util.xml.api.XmlUtil;
  * @since 1.0.2
  */
 @Singleton
-@Named
+@Named(XmlUtil.CDI_NAME)
 public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
 
   /** @see #getInstance() */
@@ -339,6 +339,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Reader createXmlReader(InputStream inputStream) {
 
     return createXmlReader(inputStream, Charset.defaultCharset());
@@ -347,6 +348,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Reader createXmlReader(InputStream inputStream, Charset defaultCharset) {
 
     try {
@@ -360,6 +362,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String escapeXml(String string, boolean escapeQuotations) {
 
     if (string == null) {
@@ -373,6 +376,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void escapeXml(String string, Writer writer, boolean escapeQuotations) {
 
     try {
@@ -411,6 +415,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Character resolveEntity(String entityName) {
 
     return ENTITY_MAP.get(entityName);
@@ -419,6 +424,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public ParserState extractPlainText(String htmlFragment, StringBuilder buffer, ParserState parserState) {
 
     int len = htmlFragment.length();

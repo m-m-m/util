@@ -13,6 +13,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface MathUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.math.api.MathUtil";
+
   /**
    * This method gets the {@link NumberType} for the given <code>numericType</code>.
    * 

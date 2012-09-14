@@ -19,6 +19,7 @@ import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
@@ -30,7 +31,7 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(ComposedValueConverter.CDI_NAME)
 public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
   /** @see #addConverter(ValueConverter) */
@@ -116,8 +117,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method allows to {@link #addConverter(ValueConverter) add} a {@link List} of {@link ValueConverter}
-   * s.
+   * This method injects a {@link List} of {@link ValueConverter}s to {@link #addConverter(ValueConverter)
+   * add}.
    * 
    * @param converterList is the list of converters to register.
    */
@@ -131,6 +132,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T convert(Object value, Object valueSource, GenericType<T> targetType) {
 
@@ -383,6 +385,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Object> getSourceType() {
 
       return Object.class;
@@ -391,6 +394,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<TARGET> getTargetType() {
 
       return this.targetType;
@@ -411,6 +415,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public <T extends TARGET> T convert(Object value, Object valueSource, Class<T> targetClass) throws ValueException {
 
       return convert(value, valueSource, getReflectionUtil().createGenericType(targetClass));
@@ -419,6 +424,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public <T extends TARGET> T convert(Object value, Object valueSource, GenericType<T> genericTargetType) {
 
       if (value == null) {

@@ -26,7 +26,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(Iso8601Util.CDI_NAME)
 public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso8601Util {
 
   /**

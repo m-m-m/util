@@ -13,6 +13,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface CliParserBuilder {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.cli.api.CliParserBuilder";
+
   /**
    * This method builds a {@link CliParser} instance from the given {@link net.sf.mmm.util.pojo.api.Pojo}. The
    * following applies for the class reflecting this pojo:

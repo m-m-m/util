@@ -58,7 +58,7 @@ import org.xml.sax.SAXException;
  * @since 1.0.2
  */
 @Singleton
-@Named
+@Named(DomUtil.CDI_NAME)
 public final class DomUtilImpl extends AbstractLoggableComponent implements DomUtil {
 
   /** @see #getInstance() */
@@ -238,6 +238,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Element getFirstElement(NodeList nodeList) {
 
     return getFirstElement(nodeList, null);
@@ -246,6 +247,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Element getFirstElement(NodeList nodeList, String tagName) {
 
     int len = nodeList.getLength();
@@ -264,6 +266,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Element getFirstChildElement(Element element, String tagName) {
 
     return getFirstElement(element.getChildNodes(), tagName);
@@ -272,6 +275,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException {
 
     Element result = getFirstChildElement(element, tagName);
@@ -285,6 +289,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
       throws IllegalArgumentException {
 
@@ -305,6 +310,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getNodeText(Node node) {
 
     return getNodeText(node, 0);
@@ -313,6 +319,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getNodeText(Node node, int depth) {
 
     StringBuffer buffer = new StringBuffer();
@@ -323,6 +330,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void getNodeText(Node node, Appendable buffer, int depth) {
 
     try {
@@ -346,6 +354,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * 
    * @param node is the node to clean of children.
    */
+  @Override
   public void removeChildren(Element node) {
 
     NodeList children = node.getChildNodes();
@@ -357,6 +366,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Document createDocument() {
 
     return createDocumentBuilder().newDocument();
@@ -365,6 +375,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Document parseDocument(InputStream inputStream) throws XmlException, IOException {
 
     try {
@@ -379,6 +390,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Document parseDocument(Reader reader) throws XmlException {
 
     return parseDocument(new InputSource(reader));
@@ -387,6 +399,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public Document parseDocument(InputSource inputSource) throws XmlException {
 
     try {
@@ -401,6 +414,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void writeXml(Node xmlNode, OutputStream outputStream, boolean indent) throws XmlException {
 
     transformXml(new DOMSource(xmlNode), new StreamResult(outputStream), indent);
@@ -409,6 +423,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException {
 
     transformXml(new DOMSource(xmlNode), new StreamResult(writer), indent);
@@ -417,6 +432,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public void transformXml(Source source, Result result, boolean indent) throws XmlException {
 
     try {
@@ -429,6 +445,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLocalName(Node node) {
 
     String localName = node.getLocalName();
@@ -461,6 +478,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isEqual(Node node1, Node node2, XmlCompareMode mode) {
 
     if (node1 == null) {

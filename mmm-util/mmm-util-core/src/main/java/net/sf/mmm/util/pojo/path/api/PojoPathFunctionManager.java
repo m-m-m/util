@@ -18,6 +18,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface PojoPathFunctionManager {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager";
+
   /**
    * This method gets a {@link PojoPathFunction} by its name. Therefore the {@link PojoPathFunction} instance
    * has to be registered somehow in the implementation of {@link PojoPathFunctionManager this} interface.

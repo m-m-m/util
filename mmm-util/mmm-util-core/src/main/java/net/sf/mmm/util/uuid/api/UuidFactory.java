@@ -16,6 +16,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface UuidFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.uuid.api.UuidFactory";
+
   /**
    * This method creates a new {@link UUID}.
    * 

@@ -6,6 +6,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.cli.api.CliParser;
+import net.sf.mmm.util.cli.api.CliParserBuilder;
 import net.sf.mmm.util.cli.base.AbstractCliParserBuilder;
 import net.sf.mmm.util.cli.base.CliState;
 
@@ -16,12 +17,11 @@ import net.sf.mmm.util.cli.base.CliState;
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(CliParserBuilder.CDI_NAME)
 public class DefaultCliParserBuilder extends AbstractCliParserBuilder {
 
   /**
    * The constructor.
-   * 
    */
   public DefaultCliParserBuilder() {
 

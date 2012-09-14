@@ -30,7 +30,7 @@ import net.sf.mmm.util.io.impl.BufferInputStream;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(EncodingUtil.CDI_NAME)
 public class EncodingUtilImpl extends AbstractLoggableComponent implements EncodingUtil {
 
   /**
@@ -164,6 +164,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
   /**
    * {@inheritDoc}
    */
+  @Override
   public EncodingDetectionReader createUtfDetectionReader(InputStream inputStream, String nonUtfEncoding) {
 
     String encoding = nonUtfEncoding;
@@ -217,6 +218,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     /**
      * {@inheritDoc}
      */
+    @Override
     public int process(byte[] buffer, int offset, int length) {
 
       int len = offset + length;
@@ -303,6 +305,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     /**
      * {@inheritDoc}
      */
+    @Override
     public int process(byte[] buffer, int offset, int length) {
 
       int len = offset + length;

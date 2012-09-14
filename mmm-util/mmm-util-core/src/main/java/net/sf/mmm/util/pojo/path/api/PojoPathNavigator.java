@@ -26,6 +26,9 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 @ComponentSpecification
 public interface PojoPathNavigator {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.pojo.path.api.PojoPathNavigator";
+
   /**
    * This method evaluates the given <code>pojoPath</code> for the given <code>pojo</code> using the given
    * <code>mode</code> and <code>context</code>. It returns the result of the evaluation.<br>

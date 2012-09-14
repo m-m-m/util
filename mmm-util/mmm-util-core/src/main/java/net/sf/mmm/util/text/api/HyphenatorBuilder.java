@@ -17,6 +17,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface HyphenatorBuilder {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.text.api.HyphenatorBuilder";
+
   /**
    * This method {@link #getHyphenator(Locale) gets} the {@link Hyphenator} for the
    * {@link Locale#getDefault() default locale}.

@@ -15,6 +15,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface NlsMessageFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.nls.api.NlsMessageFactory";
+
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
    * 

@@ -15,6 +15,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface LineWrapper {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.text.api.LineWrapper";
+
   /**
    * This method {@link Appendable#append(CharSequence) appends} the given <code>text</code> to the
    * <code>appendable</code>. If the text is longer than the {@link TextColumnInfo#getWidth() number of

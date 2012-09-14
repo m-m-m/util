@@ -27,7 +27,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(CollectionFactoryManager.CDI_NAME)
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements CollectionFactoryManager {
 
@@ -108,6 +108,7 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public <C extends Collection> CollectionFactory<C> getCollectionFactory(Class<C> collectionType) {
 
     return this.collectionFactoryMap.get(collectionType);
@@ -116,6 +117,7 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public <MAP extends Map> MapFactory getMapFactory(Class<MAP> mapType) {
 
     return this.mapFactoryMap.get(mapType);

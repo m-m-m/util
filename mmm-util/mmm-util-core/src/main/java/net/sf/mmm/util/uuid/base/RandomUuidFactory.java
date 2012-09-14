@@ -17,7 +17,7 @@ import net.sf.mmm.util.uuid.api.UuidFactory;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(UuidFactory.CDI_NAME)
 public class RandomUuidFactory implements UuidFactory {
 
   /**
@@ -31,6 +31,7 @@ public class RandomUuidFactory implements UuidFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   public UUID createUuid() {
 
     return UUID.randomUUID();

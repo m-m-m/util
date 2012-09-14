@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 /**
  * This is the interface for a collection of utility functions to deal with {@link Collection}s reflectively.
  * 
+ * @see ReflectionUtil
  * @see net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl
  * @see net.sf.mmm.util.reflect.api.GenericType#getComponentType()
  * 
@@ -20,6 +21,9 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
  */
 @ComponentSpecification
 public interface CollectionReflectionUtil {
+
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.reflect.api.CollectionReflectionUtil";
 
   /**
    * This method gets the {@link CollectionFactoryManager} instance used by this util.

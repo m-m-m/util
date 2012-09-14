@@ -10,17 +10,18 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsMessageFactory} interface.
+ * This is the implementation of {@link NlsMessageFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named
+@Named(NlsMessageFactory.CDI_NAME)
 @Singleton
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
 
@@ -38,6 +39,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
     return new NlsMessageImpl(template, messageArguments, this.nlsDependencies);
@@ -46,6 +48,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
     return new NlsMessageImpl(internationalizedMessage, messageArguments, this.nlsDependencies);

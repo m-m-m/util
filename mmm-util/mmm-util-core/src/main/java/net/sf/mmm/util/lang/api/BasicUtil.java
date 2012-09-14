@@ -19,6 +19,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface BasicUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.lang.api.BasicUtil";
+
   /** An empty int array. */
   int[] EMPTY_INT_ARRAY = new int[0];
 

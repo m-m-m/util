@@ -17,6 +17,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface UnicodeUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.text.api.UnicodeUtil";
+
   // ** C0 controls **
 
   /** The null character typically used for termination. */

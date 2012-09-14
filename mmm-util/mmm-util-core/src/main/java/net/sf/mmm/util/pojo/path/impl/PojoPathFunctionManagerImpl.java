@@ -10,17 +10,18 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
+import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
 import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager}.
+ * This is the implementation of {@link PojoPathFunctionManager}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
-@Named
+@Named(PojoPathFunctionManager.CDI_NAME)
 @SuppressWarnings("rawtypes")
 public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager {
 

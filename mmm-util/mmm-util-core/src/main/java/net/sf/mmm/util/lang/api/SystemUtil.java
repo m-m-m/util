@@ -17,6 +17,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface SystemUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.lang.api.SystemUtil";
+
   /**
    * The name of the {@link System#getProperty(String) system-property} for
    * {@link SystemInformation#getSystemName()}.

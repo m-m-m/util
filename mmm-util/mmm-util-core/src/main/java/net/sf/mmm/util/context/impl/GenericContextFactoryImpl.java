@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.MapFactory;
+import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.context.base.AbstractGenericContextFactory;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
@@ -16,13 +17,13 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.context.api.GenericContextFactory}.
+ * This is the implementation of {@link GenericContextFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
-@Named
+@Named(GenericContextFactory.CDI_NAME)
 public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
 
   /** @see #setComposedValueConverter(ComposedValueConverter) */
@@ -63,6 +64,7 @@ public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("rawtypes")
   public MutableGenericContext createContext(MapFactory<? extends Map> mapFactory) {
 
@@ -72,6 +74,7 @@ public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("rawtypes")
   public MutableGenericContext createContext(MapFactory<? extends Map> mapFactory,
       GenericValueConverter<Object> valueConverter) {

@@ -31,7 +31,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(CollectionReflectionUtil.CDI_NAME)
 public class CollectionReflectionUtilImpl extends AbstractLoggableComponent implements CollectionReflectionUtil {
 
   /**
@@ -98,6 +98,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public CollectionFactoryManager getCollectionFactoryManager() {
 
     return this.collectionFactoryManager;
@@ -142,6 +143,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("rawtypes")
   public <C extends Collection> C create(Class<C> type) {
 
@@ -162,6 +164,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isArrayOrList(Object object) {
 
     if (object == null) {
@@ -179,6 +182,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getSize(Object arrayMapOrCollection) throws NlsIllegalArgumentException {
 
     if (arrayMapOrCollection == null) {
@@ -199,6 +203,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object get(Object arrayOrList, int index) throws NlsIllegalArgumentException {
 
     return get(arrayOrList, index, true);
@@ -207,6 +212,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
@@ -237,6 +243,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
 
     return set(arrayOrList, index, item, null, this.maximumListGrowth);
@@ -245,6 +252,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver)
       throws NlsIllegalArgumentException {
 
@@ -254,6 +262,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked", "null" })
   public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver, int maximumGrowth)
       throws NlsIllegalArgumentException {
@@ -318,6 +327,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object add(Object arrayOrCollection, Object item) {
 
@@ -343,6 +353,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("rawtypes")
   public Object remove(Object arrayOrCollection, Object item) {
 
@@ -379,6 +390,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object toArray(Collection<?> collection, Class<?> componentType) throws ClassCastException {
 
     if (componentType == null) {
@@ -407,6 +419,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public <T> T[] toArrayTyped(Collection<T> collection, Class<T> componentType) {
 

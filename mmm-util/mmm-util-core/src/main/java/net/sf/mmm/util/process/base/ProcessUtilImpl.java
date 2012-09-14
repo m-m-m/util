@@ -42,7 +42,7 @@ import net.sf.mmm.util.process.api.ProcessUtil;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(ProcessUtil.CDI_NAME)
 public class ProcessUtilImpl extends AbstractLoggableComponent implements ProcessUtil {
 
   /** @see #getInstance() */
@@ -150,6 +150,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * {@inheritDoc}
    */
+  @Override
   public int execute(ProcessContext context, ProcessBuilder... builders) throws IOException, InterruptedException {
 
     ProcessExecutor processExecutor = new ProcessExecutor(context, builders);
@@ -159,6 +160,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * {@inheritDoc}
    */
+  @Override
   public int execute(ProcessContext context, long timeout, TimeUnit unit, ProcessBuilder... builders)
       throws IOException, TimeoutException, InterruptedException {
 
@@ -181,6 +183,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * {@inheritDoc}
    */
+  @Override
   public AsyncProcessExecutor executeAsync(ProcessContext context, ProcessBuilder... builders) throws IOException {
 
     ProcessExecutor processExecutor = new ProcessExecutor(context, builders);
@@ -315,6 +318,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
     /**
      * {@inheritDoc}
      */
+    @Override
     public void stop() {
 
       dispose();
@@ -328,6 +332,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
      * @return the return-code of the (last) process.
      * @throws InterruptedException if a process was interrupted.
      */
+    @Override
     public Integer call() throws InterruptedException {
 
       try {

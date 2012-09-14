@@ -21,7 +21,7 @@ import net.sf.mmm.util.math.api.NumberType;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(MathUtil.CDI_NAME)
 public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil {
 
   /** @see #getInstance() */
@@ -63,6 +63,7 @@ public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public NumberType<? extends Number> getNumberType(Class<?> numericType) {
 
     if ((numericType == int.class) || (numericType == Integer.class)) {
@@ -93,6 +94,7 @@ public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public <NUMBER extends Number> NumberType<NUMBER> getNumberTypeGeneric(Class<NUMBER> numericType) {
 
@@ -102,6 +104,7 @@ public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public Number toSimplestNumber(Number value) {
 
     double d = value.doubleValue();

@@ -7,20 +7,20 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoFieldIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoMethodIntrospector;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory}
- * interface.
+ * This is the implementation of {@link PojoDescriptorBuilderFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
-@Named
+@Named(PojoDescriptorBuilderFactory.CDI_NAME)
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
   /** @see #getDependencies() */
@@ -37,6 +37,7 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
   /**
    * {@inheritDoc}
    */
+  @Override
   public PojoDescriptorBuilder createDescriptorBuilder(VisibilityModifier methodVisibility,
       VisibilityModifier fieldVisibility) {
 

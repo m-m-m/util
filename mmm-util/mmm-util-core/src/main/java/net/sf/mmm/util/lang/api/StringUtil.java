@@ -22,6 +22,9 @@ import net.sf.mmm.util.value.api.ValueConverter;
 @ComponentSpecification
 public interface StringUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.lang.api.StringUtil";
+
   /** a string representing the boolean value <code>true</code> */
   String TRUE = String.valueOf(true);
 

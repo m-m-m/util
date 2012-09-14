@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleFactory;
 
 /**
- * TODO: this class ...
+ * This is the GWT compatible implementation of {@link NlsBundleFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -45,6 +45,7 @@ public abstract class AbstractNlsBundleFactoryGwt implements NlsBundleFactory {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 
     BUNDLE bundle = (BUNDLE) this.bundleMap.get(bundleInterface);

@@ -15,6 +15,9 @@ import net.sf.mmm.util.nls.api.NlsParseException;
 @ComponentSpecification
 public interface VersionUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.version.api.VersionUtil";
+
   /**
    * This method parses the given <code>versionString</code> and builds an according {@link VersionIdentifier}
    * instance. It delegates to {@link #createFormatter(String, boolean)} using <code>false</code> for

@@ -14,6 +14,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface NlsTemplateResolver {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.nls.api.NlsTemplateResolver";
+
   /**
    * The classpath of a textual file containing the full qualified name(s) of one or multiple
    * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle NLS-bundle}(s).<br>

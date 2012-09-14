@@ -44,7 +44,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(FileUtil.CDI_NAME)
 public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil {
 
   /** The typical home directory of the user "root" under Unix/Linux. */
@@ -169,6 +169,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public File getUserHomeDirectory() {
 
     return this.userHomeDirectory;
@@ -190,6 +191,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public File getTemporaryDirectory() {
 
     return this.temporaryDirectory;
@@ -229,6 +231,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String normalizePath(String path) {
 
     return normalizePath(path, File.separatorChar);
@@ -237,6 +240,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String normalizePath(String path, char separator) {
 
     if (path == null) {
@@ -374,6 +378,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getExtension(String filename) {
 
     int lastDot = filename.lastIndexOf('.');
@@ -389,6 +394,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getBasename(String filename) {
 
     int len = filename.length();
@@ -418,6 +424,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getDirname(String filename) {
 
     int len = filename.length();
@@ -469,6 +476,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void copyFile(File source, File destination) {
 
     try {
@@ -500,6 +508,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void copyFile(File source, File destination, boolean keepFlags) {
 
     copyFile(source, destination);
@@ -518,6 +527,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void copyRecursive(File source, File destination, boolean allowOverwrite) {
 
     copyRecursive(source, destination, allowOverwrite, null);
@@ -526,6 +536,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter) {
 
     if (!allowOverwrite && (destination.exists())) {
@@ -581,6 +592,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public FileAccessPermissions getPermissions(File file, FileAccessClass accessClass) {
 
     FileAccessPermissions permissions = new FileAccessPermissions();
@@ -602,6 +614,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPermissions(File file, FileAccessPermissions permissions) {
 
     // global permissions
@@ -617,6 +630,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public int deleteRecursive(File path) {
 
     int deleteCount = 0;
@@ -637,6 +651,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public int deleteChildren(File directory) {
 
     int deleteCount = 0;
@@ -660,6 +675,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public File[] getMatchingFiles(File cwd, String path, FileType fileType) {
 
     List<File> list = new ArrayList<File>();
@@ -670,6 +686,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list) {
 
     if ((path == null) || (path.length() == 0)) {

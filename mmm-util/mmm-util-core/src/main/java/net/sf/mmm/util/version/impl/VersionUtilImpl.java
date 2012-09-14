@@ -45,7 +45,7 @@ import net.sf.mmm.util.version.api.VersionUtil;
  * @since 3.0.0
  */
 @Singleton
-@Named
+@Named(VersionUtil.CDI_NAME)
 public class VersionUtilImpl extends AbstractLoggableComponent implements VersionUtil {
 
   /** A {@link CharFilter} that accepts all but ASCII letters. */
@@ -272,6 +272,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * {@inheritDoc}
    */
+  @Override
   public VersionIdentifier createVersionIdentifier(String versionString) throws NlsParseException {
 
     return createVersionIdentifier(versionString, false);
@@ -280,6 +281,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * {@inheritDoc}
    */
+  @Override
   public VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat)
       throws NlsParseException {
 
@@ -410,6 +412,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * {@inheritDoc}
    */
+  @Override
   public VersionIdentifierFormatter createFormatter(String formatPattern) {
 
     boolean strict = true;
@@ -514,6 +517,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * {@inheritDoc}
    */
+  @Override
   public VersionIdentifierFormatter createFormatter(String formatPattern, boolean strict) {
 
     CharSequenceScanner scanner = new CharSequenceScanner(formatPattern);

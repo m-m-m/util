@@ -33,7 +33,7 @@ import net.sf.mmm.util.value.base.ValueConverterIdentity;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(StringUtil.CDI_NAME)
 public class StringUtilImpl implements StringUtil {
 
   /** @see #getInstance() */
@@ -76,6 +76,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Boolean parseBoolean(String booleanValue) {
 
     if (TRUE.equalsIgnoreCase(booleanValue)) {
@@ -90,6 +91,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void replace(char[] string, char oldChar, char newChar) {
 
     for (int i = 0; i < string.length; i++) {
@@ -102,6 +104,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String replace(String string, String match, String replace) {
 
     int matchLen = match.length();
@@ -134,6 +137,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isSubstring(String string, String substring, int offset) {
 
     int stringLength = string.length();
@@ -149,6 +153,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isSubstring(char[] string, String substring, int offset) {
 
     int substringLength = substring.length();
@@ -166,6 +171,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase) {
 
     return replaceSuffixWithCase(string, suffixLength, newSuffixLowerCase, Locale.ENGLISH);
@@ -174,6 +180,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase, Locale locale) {
 
     int stringLength = string.length();
@@ -219,6 +226,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isEmpty(String string) {
 
     return isEmpty(string, true);
@@ -227,6 +235,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isEmpty(String string, boolean trim) {
 
     if (string == null) {
@@ -244,6 +253,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String padNumber(long number, int digits) {
 
     return padNumber(number, digits, 10);
@@ -252,6 +262,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String padNumber(long number, int digits, int radix) {
 
     String result = Long.toString(number, radix);
@@ -272,6 +283,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toCamlCase(String string) {
 
     return toCamlCase(string, SEPARATORS);
@@ -280,6 +292,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String toCamlCase(String string, char... separators) {
 
     char[] chars = string.toCharArray();
@@ -316,6 +329,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String fromCamlCase(String string, char separator) {
 
     char[] chars = string.toCharArray();
@@ -340,6 +354,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public String toSeparatedString(Collection<?> collection, String separator, StringSyntax syntax) {
 
@@ -350,6 +365,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
       Formatter<E> formatter) {
 
@@ -361,6 +377,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
       Formatter<E> formatter, Appendable buffer) {
 
@@ -412,6 +429,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<String> fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax) {
 
     List<String> result = new ArrayList<String>();
@@ -422,6 +440,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<String> collection) {
 
@@ -432,6 +451,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<E> collection, ValueConverter<String, E> converter) {
 
@@ -441,6 +461,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type) {
 

@@ -14,6 +14,9 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 @ComponentSpecification
 public interface PojoDescriptorBuilderFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory";
+
   /**
    * This method creates a {@link PojoDescriptorBuilder} that introspects public methods for building
    * {@link PojoPropertyDescriptor}s. All other methods and all fields will be ignored. This is the preferred

@@ -18,6 +18,7 @@ import net.sf.mmm.util.resource.api.DataResource;
  * This is the interface for a collection of utility functions to deal with {@link java.lang.reflect
  * reflection}.
  * 
+ * @see AnnotationUtil
  * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -25,6 +26,9 @@ import net.sf.mmm.util.resource.api.DataResource;
  */
 @ComponentSpecification
 public interface ReflectionUtil extends GenericTypeFactory, ReflectionUtilLimited {
+
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.reflect.api.ReflectionUtil";
 
   /** an empty {@link Type}-array */
   Type[] NO_TYPES = new Type[0];

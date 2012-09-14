@@ -30,6 +30,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface StreamUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.io.api.StreamUtil";
+
   /**
    * This method reads the contents of the given <code>reader</code> into a string.<br>
    * <b>ATTENTION:</b><br>

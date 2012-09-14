@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
+
 /**
  * This is the interface for a factory that can dynamically {@link #createBundle(Class) create} instance of
  * {@link NlsBundle}-interfaces.
@@ -11,7 +13,11 @@ package net.sf.mmm.util.nls.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
+@ComponentSpecification
 public interface NlsBundleFactory {
+
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.nls.api.NlsBundleFactory";
 
   /**
    * This method dynamically creates an instance for the given <code>bundleInterface</code>.

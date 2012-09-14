@@ -15,6 +15,9 @@ import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
  */
 public interface NlsDependencies {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.nls.base.NlsDependencies";
+
   /**
    * This method gets the {@link NlsArgumentParser}.
    * 

@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 import net.sf.mmm.util.resource.base.AbstractBrowsableResourceFactory;
 import net.sf.mmm.util.resource.impl.spi.ClasspathResourceProvider;
@@ -24,7 +25,7 @@ import net.sf.mmm.util.resource.impl.spi.UrlResourceProvider;
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(DataResourceFactory.CDI_NAME)
 public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFactory {
 
   /** @see #getProviders() */

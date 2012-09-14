@@ -24,6 +24,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
+import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
 import net.sf.mmm.util.text.api.TextColumnInfo.IndentationMode;
@@ -32,13 +33,13 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.text.api.LineWrapper} interface.
+ * This is the default implementation of {@link LineWrapper}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(LineWrapper.CDI_NAME)
 public class DefaultLineWrapper extends AbstractLineWrapper {
 
   /** @see #getHyphenatorBuilder() */
@@ -227,6 +228,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int wrap(Appendable appendable, TextTableInfo tableInfo, TextColumn... columns) {
 
     try {
@@ -1186,6 +1188,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int compareTo(AutoAdjustInfo other) {
 
       NlsNullPointerException.checkNotNull(AutoAdjustInfo.class, other);

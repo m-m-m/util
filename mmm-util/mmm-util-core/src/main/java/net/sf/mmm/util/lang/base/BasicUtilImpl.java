@@ -20,7 +20,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(BasicUtil.CDI_NAME)
 public class BasicUtilImpl implements BasicUtil {
 
   /** @see #getInstance() */
@@ -60,6 +60,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isEqual(Object o1, Object o2) {
 
     if (o1 == null) {
@@ -72,6 +73,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isEqual(Object[] array1, Object[] array2) {
 
     if (array1 == array2) {
@@ -90,6 +92,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDeepEqual(Object o1, Object o2) {
 
     if (o1 == o2) {
@@ -150,6 +153,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int findInArray(Object value, Object[] array, boolean checkEqual) {
 
     int length = array.length;
@@ -166,6 +170,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int findInArray(Object value, Object array, boolean checkEqual) {
 
     if (array instanceof Object[]) {
@@ -185,6 +190,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isInArray(Object value, Object[] array, boolean checkEqual) {
 
     return (findInArray(value, array, checkEqual) >= 0);
@@ -193,6 +199,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isInArray(Object value, Object array, boolean checkEqual) {
 
     return (findInArray(value, array, checkEqual) >= 0);
@@ -201,6 +208,7 @@ public class BasicUtilImpl implements BasicUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean compare(CharIterator charIterator1, CharIterator charIterator2) {
 
     char c1, c2;

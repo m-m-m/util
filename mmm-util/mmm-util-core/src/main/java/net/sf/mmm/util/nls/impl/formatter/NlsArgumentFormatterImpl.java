@@ -27,7 +27,7 @@ import net.sf.mmm.util.text.api.Justification;
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(NlsArgumentFormatter.CDI_NAME)
 public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> implements NlsArgumentFormatter {
 
   /**
@@ -41,6 +41,7 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {
 

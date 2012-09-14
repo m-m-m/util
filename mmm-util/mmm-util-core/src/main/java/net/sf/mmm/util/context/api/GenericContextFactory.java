@@ -17,6 +17,9 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
 @ComponentSpecification
 public interface GenericContextFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.context.api.GenericContextFactory";
+
   /**
    * This method creates a new instance of a {@link MutableGenericContext}. It will use a
    * {@link net.sf.mmm.util.collection.base.HashMapFactory} and delegate to {@link #createContext(MapFactory)}

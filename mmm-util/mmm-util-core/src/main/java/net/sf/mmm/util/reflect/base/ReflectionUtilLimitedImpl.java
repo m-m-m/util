@@ -5,7 +5,7 @@ package net.sf.mmm.util.reflect.base;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
- * TODO: this class ...
+ * This is the implementation of the {@link ReflectionUtilLimited} interface. It is strictly GWT compatible.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -34,6 +34,7 @@ public class ReflectionUtilLimitedImpl implements ReflectionUtilLimited {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?> getNonPrimitiveType(Class<?> type) {
 
     Class<?> result = type;

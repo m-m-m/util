@@ -11,18 +11,19 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}. It locates
- * all {@link ResourceBundle}s declared in the
- * {@link net.sf.mmm.util.nls.api.NlsTemplateResolver#CLASSPATH_NLS_BUNDLE bundle-declaration-files}.
+ * This is the default implementation of the {@link NlsTemplateResolver}. It locates all
+ * {@link ResourceBundle}s declared in the {@link NlsTemplateResolver#CLASSPATH_NLS_BUNDLE
+ * bundle-declaration-files}.
  * 
  * @see AbstractResourceBundleNlsTemplateResolver
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Named
+@Named(NlsTemplateResolver.CDI_NAME)
 @Singleton
 public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver {
 
@@ -85,6 +86,7 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
     return resolveTemplate(internationalizedMessage, this.nlsBundles);

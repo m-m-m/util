@@ -16,6 +16,9 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 @ComponentSpecification
 public interface PojoFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.pojo.api.PojoFactory";
+
   /**
    * This method creates a new instance of the given <code>pojoType</code>.<br>
    * The simplest implementation may just delegate to {@link Class#newInstance()}. However implementations can

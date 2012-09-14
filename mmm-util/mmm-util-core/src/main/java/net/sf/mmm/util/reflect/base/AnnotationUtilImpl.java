@@ -28,7 +28,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  * @since 1.0.1
  */
 @Singleton
-@Named
+@Named(AnnotationUtil.CDI_NAME)
 public class AnnotationUtilImpl implements AnnotationUtil {
 
   /** @see #getInstance() */
@@ -95,6 +95,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <A extends Annotation> boolean isRuntimeAnnotation(Class<A> annotationType) {
 
     Retention retention = annotationType.getAnnotation(Retention.class);
@@ -107,6 +108,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <A extends Annotation> boolean isAnnotationForType(Class<A> annotationType, ElementType targetType) {
 
     Target target = annotationType.getAnnotation(Target.class);
@@ -125,6 +127,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass, Class<A> annotation)
       throws IllegalArgumentException {
 
@@ -186,6 +189,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <A extends Annotation> A getTypeAnnotation(Class<?> annotatedType, Class<A> annotation) {
 
     A result = getClassAnnotation(annotatedType, annotation);
@@ -203,6 +207,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotation) {
 
     if (!isRuntimeAnnotation(annotation)) {

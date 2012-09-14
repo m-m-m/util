@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.SystemUtil;
  * @since 2.0.0
  */
 @Singleton
-@Named
+@Named(SystemUtil.CDI_NAME)
 public class SystemUtilImpl extends AbstractLoggableComponent implements SystemUtil {
 
   /** @see #getInstance() */
@@ -62,6 +62,7 @@ public class SystemUtilImpl extends AbstractLoggableComponent implements SystemU
   /**
    * {@inheritDoc}
    */
+  @Override
   public SystemInformation getSystemInformation() {
 
     return this.systemInformation;

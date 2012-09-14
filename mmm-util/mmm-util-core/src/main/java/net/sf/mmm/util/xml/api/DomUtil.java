@@ -29,6 +29,9 @@ import org.xml.sax.InputSource;
 @ComponentSpecification
 public interface DomUtil {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.xml.api.DomUtil";
+
   /**
    * This method creates a new empty XML DOM document.
    * 

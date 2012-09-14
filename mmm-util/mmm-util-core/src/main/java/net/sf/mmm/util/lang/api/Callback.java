@@ -19,6 +19,6 @@ public interface Callback<IN> extends Function<IN, Void> {
    * @return always <code>null</code>
    */
   @Override
-  public Void apply(IN argument);
+  Void apply(IN argument);
 
 }

@@ -16,6 +16,9 @@ import net.sf.mmm.util.transformer.api.Transformer;
 @ComponentSpecification
 public interface Singularizer extends Transformer<String> {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.text.api.Singularizer";
+
   /**
    * This method gets the singular form of the given term (some word) <code>pluralForm</code> that is
    * (potentially) in plural form. Additionally it preserves the case of the term.<br>
@@ -63,6 +66,7 @@ public interface Singularizer extends Transformer<String> {
    * @return the according singular form. This will be {@link Object#equals(Object) equal} to the given string
    *         <code>plural</code> if already singular or no singular form is known.
    */
+  @Override
   String transform(String plural);
 
 }

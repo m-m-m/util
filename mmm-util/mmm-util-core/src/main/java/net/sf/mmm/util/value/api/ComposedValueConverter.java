@@ -6,9 +6,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This is the interface for a {@link ValueConverter} that is composed out of individual
- * {@link ValueConverter}s. The idea of this interface is the idiom <em>separations of concerns</em>.
- * Therefore you can write an individual {@link ValueConverter} for each type of value you want to deal with.<br>
- * The idea is to combine various individual {@link ValueConverter}s to one generic converter following the
+ * {@link ValueConverter}s. The idea of this component is the idiom <em>separations of concerns</em>.
+ * Therefore you can write an individual {@link ValueConverter} for each type of value you want to deal with.
+ * These individual {@link ValueConverter}s are combined to one generic converter following the
  * composition-pattern. Therefore this generic converter needs to choose the individual {@link ValueConverter}
  * that is appropriate for a specific
  * {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) conversion}.<br>
@@ -111,6 +111,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface ComposedValueConverter extends ValueConverter<Object, Object>, GenericValueConverter<Object> {
 
-  // nothing to add
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.util.value.api.ComposedValueConverter";
 
 }
