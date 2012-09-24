@@ -18,6 +18,7 @@ import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.search.api.config.SearchSource;
 import net.sf.mmm.search.indexer.api.EntryUpdateVisitor;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
+import net.sf.mmm.search.indexer.api.ResourceSearchIndexer;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.util.context.api.GenericContext;
@@ -28,13 +29,12 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
- * This is the abstract base-implementation of the
- * {@link net.sf.mmm.search.indexer.api.ResourceSearchIndexer} interface.
+ * This is the implementation of {@link ResourceSearchIndexer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named
+@Named(ResourceSearchIndexer.CDI_NAME)
 @Singleton
 public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
 
@@ -109,8 +109,8 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
   /**
    * {@inheritDoc}
    */
-  public MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource,
-      String resourceUri) {
+  @Override
+  public MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource, String resourceUri) {
 
     ContentParserOptions options = new ContentParserOptionsBean();
     return createEntry(indexer, resource, resourceUri, options);
@@ -121,13 +121,13 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
    * 
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
-   * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the
-   *        {@link MutableSearchEntry entry}.
+   * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the {@link MutableSearchEntry
+   *        entry}.
    * @param options are the {@link ContentParserOptionsBean options}.
    * @return the created {@link MutableSearchEntry}.
    */
-  protected MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource,
-      String resourceUri, ContentParserOptions options) {
+  protected MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource, String resourceUri,
+      ContentParserOptions options) {
 
     String filename = resource.getName();
     String extension = this.fileUtil.getExtension(filename);
@@ -176,9 +176,10 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
-      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor,
-      DataResource locationResource, String nonUtfEncoding) {
+      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor, DataResource locationResource,
+      String nonUtfEncoding) {
 
     String uri = getEntryUri(resource, location, locationResource);
     uriVisitor.visitIndexedEntryUri(uri, changeType);

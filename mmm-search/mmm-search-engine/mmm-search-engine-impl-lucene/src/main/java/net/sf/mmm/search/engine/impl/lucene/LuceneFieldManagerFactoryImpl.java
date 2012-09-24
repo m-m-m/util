@@ -19,16 +19,14 @@ import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import org.apache.lucene.analysis.Analyzer;
 
 /**
- * This is the factory used to
- * {@link #createFieldManager(SearchConfigurationHolder) create}.
+ * This is the factory used to {@link #createFieldManager(SearchConfigurationHolder) create}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Singleton
-@Named
-public class LuceneFieldManagerFactoryImpl extends AbstractLoggableComponent implements
-    LuceneFieldManagerFactory {
+@Named(LuceneFieldManagerFactory.CDI_NAME)
+public class LuceneFieldManagerFactoryImpl extends AbstractLoggableComponent implements LuceneFieldManagerFactory {
 
   /** @see #getAnalyzer() */
   private Analyzer analyzer;
@@ -126,6 +124,7 @@ public class LuceneFieldManagerFactoryImpl extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
+  @Override
   public LuceneFieldManager createFieldManager(
       SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder) {
 

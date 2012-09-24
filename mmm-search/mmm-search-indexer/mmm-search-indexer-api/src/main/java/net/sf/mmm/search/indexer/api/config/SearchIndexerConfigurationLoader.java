@@ -6,8 +6,7 @@ import net.sf.mmm.search.api.config.SearchConfigurationLoader;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the {@link SearchConfigurationLoader} for the
- * {@link SearchIndexerConfiguration}.
+ * This is the {@link SearchConfigurationLoader} for the {@link SearchIndexerConfiguration}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -15,19 +14,23 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface SearchIndexerConfigurationLoader extends SearchConfigurationLoader {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader";
+
   /**
    * {@inheritDoc}
    */
+  @Override
   SearchIndexerConfigurationHolder loadConfiguration();
 
   /**
    * {@inheritDoc}
    */
+  @Override
   SearchIndexerConfigurationHolder loadConfiguration(String locationUrl);
 
   /**
-   * This method validates the given <code>configuration</code> according to
-   * logical constraints.
+   * This method validates the given <code>configuration</code> according to logical constraints.
    * 
    * @param configuration is the {@link SearchIndexerConfiguration} to validate.
    * @throws RuntimeException if the configuration is invalid.

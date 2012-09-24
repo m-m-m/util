@@ -7,8 +7,7 @@ import net.sf.mmm.search.api.config.SearchConfigurationHolder;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface for a factory used to
- * {@link #createFieldManager(SearchConfigurationHolder) create} a
+ * This is the interface for a factory used to {@link #createFieldManager(SearchConfigurationHolder) create} a
  * {@link LuceneFieldManager}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -17,14 +16,15 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface LuceneFieldManagerFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.search.engine.impl.lucene.LuceneFieldManagerFactory";
+
   /**
-   * This method creates a new {@link LuceneFieldManager} instance for the given
-   * <code>configuration</code>.
+   * This method creates a new {@link LuceneFieldManager} instance for the given <code>configuration</code>.
    * 
    * @param configurationHolder is the {@link SearchConfigurationHolder}.
    * @return the {@link LuceneFieldManager}.
    */
-  LuceneFieldManager createFieldManager(
-      SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder);
+  LuceneFieldManager createFieldManager(SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder);
 
 }

@@ -29,8 +29,7 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.util.NumericUtils;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.search.indexer.api.SearchIndexer} interface using lucene as
+ * This is the implementation of {@link net.sf.mmm.search.indexer.api.SearchIndexer} using lucene as
  * underlying search-engine.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -51,14 +50,13 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   private final SearchDependencies searchDependencies;
 
   /**
-   * The base-ID for this session. It is combined with {@link #addCounter} to
-   * create {@link SearchEntry#getId() IDs}.
+   * The base-ID for this session. It is combined with {@link #addCounter} to create
+   * {@link SearchEntry#getId() IDs}.
    */
   private final long sessionId;
 
   /**
-   * The number of {@link SearchEntry entries} {@link #add(MutableSearchEntry)
-   * added} in this session.
+   * The number of {@link SearchEntry entries} {@link #add(MutableSearchEntry) added} in this session.
    */
   private int addCounter;
 
@@ -72,14 +70,13 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * The constructor.
    * 
    * @param indexWriter is the index modifier to use.
-   * @param searchEngineBuilder is the {@link LuceneSearchEngineBuilder}
-   *        required for {@link #getSearchEngine()}.
+   * @param searchEngineBuilder is the {@link LuceneSearchEngineBuilder} required for
+   *        {@link #getSearchEngine()}.
    * @param fieldManager is the {@link LuceneFieldManager}.
    * @param searchDependencies are the {@link SearchDependencies}.
    */
-  public LuceneSearchIndexer(IndexWriter indexWriter,
-      LuceneSearchEngineBuilder searchEngineBuilder, LuceneFieldManager fieldManager,
-      SearchDependencies searchDependencies) {
+  public LuceneSearchIndexer(IndexWriter indexWriter, LuceneSearchEngineBuilder searchEngineBuilder,
+      LuceneFieldManager fieldManager, SearchDependencies searchDependencies) {
 
     super();
     this.searchEngineBuilder = searchEngineBuilder;
@@ -107,6 +104,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void add(MutableSearchEntry entry) throws SearchException {
 
     NlsNullPointerException.checkNotNull(MutableSearchEntry.class, entry);
@@ -124,8 +122,8 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
     LuceneMutableSearchEntry luceneEntry = (LuceneMutableSearchEntry) entry;
     try {
       Document luceneDocument = luceneEntry.getLuceneDocument();
-      NumericField idField = new NumericField(SearchEntry.FIELD_ID,
-          NumericUtils.PRECISION_STEP_DEFAULT, Store.YES, true);
+      NumericField idField = new NumericField(SearchEntry.FIELD_ID, NumericUtils.PRECISION_STEP_DEFAULT, Store.YES,
+          true);
       idField.setLongValue(id.longValue());
       luceneDocument.add(idField);
       getIndexWriter().addDocument(luceneDocument);
@@ -139,6 +137,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void close() {
 
     try {
@@ -158,6 +157,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void flush() throws SearchException {
 
     try {
@@ -172,6 +172,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public MutableSearchEntry createEntry() {
 
     return new LuceneMutableSearchEntry(new Document(), this.fieldManager, this.searchDependencies);
@@ -180,6 +181,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void optimize() throws SearchException {
 
     try {
@@ -196,8 +198,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
    * @see #removeByUri(String, String)
    * @see IndexWriter#deleteDocuments(Term)
    * 
-   * @param term is the {@link Term} identifying the {@link SearchEntry
-   *        entry/entries} to remove.
+   * @param term is the {@link Term} identifying the {@link SearchEntry entry/entries} to remove.
    * @return the number of removed {@link SearchEntry entries}.
    */
   protected int remove(Term term) {
@@ -217,6 +218,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int remove(String field, Object value) throws SearchException {
 
     if (value == null) {
@@ -232,12 +234,13 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEngine getSearchEngine() {
 
     try {
       if (this.searchEngine == null) {
-        this.searchEngine = this.searchEngineBuilder.createSearchEngine(
-            this.indexWriter.getReader(), this.fieldManager.getConfigurationHolder(), null);
+        this.searchEngine = this.searchEngineBuilder.createSearchEngine(this.indexWriter.getReader(),
+            this.fieldManager.getConfigurationHolder(), null);
       }
       return this.searchEngine;
     } catch (IOException e) {

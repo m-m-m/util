@@ -80,7 +80,7 @@
       <activation>
         <jdk>1.4</jdk>
       </activation>
-      <dependencies>      
+      <dependencies>
         <dependency>
           <!-- does NOT work before java5 at all -->
           <groupId>wrong.java.version</groupId>
@@ -88,14 +88,14 @@
           <version>1.5+</version>
           <scope>compile</scope>
         </dependency>
-      </dependencies>			
+      </dependencies>
     </profile>
     <profile>
       <id>java1.3</id>
       <activation>
         <jdk>1.3</jdk>
       </activation>
-      <dependencies>      
+      <dependencies>
         <dependency>
           <!-- does NOT work before java5 at all -->
           <groupId>wrong.java.version</groupId>
@@ -114,15 +114,15 @@
       <version>1.6.1</version>
       <scope>compile</scope>
     </dependency>
-    <!-- 
-    Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like 
-    together with mmm as it comes with proper annotations using JSR 250 and JSR 330. 
+    <!--
+    Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like
+    together with mmm as it comes with proper annotations using JSR 250 and JSR 330.
     However, everything is tested with spring so you will this will be best choice if there are no other constraints.
     -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>3.1.0.RELEASE</version>
+      <version>3.1.2.RELEASE</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -172,7 +172,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <reporting>
     <plugins>
       <plugin>

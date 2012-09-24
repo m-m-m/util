@@ -14,6 +14,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface SearchEngineBuilder {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.search.engine.api.SearchEngineBuilder";
+
   /**
    * This method creates a {@link ManagedSearchEngine} for the given <code>configuration</code>.
    * 

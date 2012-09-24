@@ -16,6 +16,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface SearchQueryBuilderFactory {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.search.engine.api.SearchQueryBuilderFactory";
+
   // /**
   // * This method will create a default {@link SearchQueryBuilder}.
   // *

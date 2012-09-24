@@ -22,16 +22,15 @@ import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
 
 /**
- * This is the implementation of the {@link SearchIndexerConfigurationLoader}
- * interface.
+ * This is the implementation of {@link SearchIndexerConfigurationLoader}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Singleton
-@Named
-public class SearchIndexerConfigurationLoaderImpl extends
-    XmlBeanMapper<SearchIndexerConfigurationBean> implements SearchIndexerConfigurationLoader {
+@Named(SearchIndexerConfigurationLoader.CDI_NAME)
+public class SearchIndexerConfigurationLoaderImpl extends XmlBeanMapper<SearchIndexerConfigurationBean> implements
+    SearchIndexerConfigurationLoader {
 
   /**
    * The constructor.
@@ -44,6 +43,7 @@ public class SearchIndexerConfigurationLoaderImpl extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchIndexerConfigurationHolder loadConfiguration() {
 
     return loadConfiguration(SearchConfiguration.DEFAULT_CONFIGURATION_URL);
@@ -52,6 +52,7 @@ public class SearchIndexerConfigurationLoaderImpl extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchIndexerConfigurationHolder loadConfiguration(String locationUrl) {
 
     DataResource resource = getResourceFactory().createDataResource(locationUrl);
@@ -72,8 +73,8 @@ public class SearchIndexerConfigurationLoaderImpl extends
   /**
    * {@inheritDoc}
    */
-  public void validateConfiguration(SearchIndexerConfiguration configuration)
-      throws SearchException {
+  @Override
+  public void validateConfiguration(SearchIndexerConfiguration configuration) throws SearchException {
 
     NlsNullPointerException.checkNotNull(SearchIndexerConfiguration.class, configuration);
     Collection<? extends SearchIndexerSource> sourceList = configuration.getSources();

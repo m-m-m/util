@@ -13,7 +13,7 @@ import net.sf.mmm.transaction.base.TransactionRollbackException;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.transaction.api.TransactionExecutor} interface using
- * the {@link javax.transaction JTA} (Java Transaction API).
+ * the {@link javax.persistence JPA} (Java Persistence API).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -64,7 +64,7 @@ public class JpaTransactionExecutor extends AbstractTransactionExecutor {
 
   /**
    * This is the implementation of the {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using
-   * JTA.
+   * JPA.
    */
   private class JpaTransactionAdapter extends AbstractTransactionAdapter<EntityTransaction> {
 

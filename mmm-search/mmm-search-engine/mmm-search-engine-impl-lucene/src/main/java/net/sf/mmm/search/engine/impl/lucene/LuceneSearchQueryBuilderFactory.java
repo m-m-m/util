@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchConfigurationHolder;
+import net.sf.mmm.search.engine.api.SearchQueryBuilderFactory;
 import net.sf.mmm.search.engine.base.AbstractSearchQueryBuilderFactory;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
@@ -18,15 +19,13 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import org.apache.lucene.analysis.Analyzer;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.search.engine.api.SearchQueryBuilderFactory} interface
- * using lucene as underlying search-engine.
+ * This is the implementation of {@link SearchQueryBuilderFactory} using lucene as underlying search-engine.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(SearchQueryBuilderFactory.CDI_NAME)
 public class LuceneSearchQueryBuilderFactory extends AbstractSearchQueryBuilderFactory {
 
   /** @see #getAnalyzer() */
@@ -129,14 +128,13 @@ public class LuceneSearchQueryBuilderFactory extends AbstractSearchQueryBuilderF
   /**
    * {@inheritDoc}
    */
+  @Override
   public LuceneSearchQueryBuilder createQueryBuilder(
       SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder) {
 
     NlsNullPointerException.checkNotNull(SearchConfigurationHolder.class, configurationHolder);
-    LuceneFieldManager fieldManager = this.fieldManagerFactory
-        .createFieldManager(configurationHolder);
-    return new LuceneSearchQueryBuilder(this.analyzer, this.luceneVersion.getLuceneVersion(),
-        fieldManager);
+    LuceneFieldManager fieldManager = this.fieldManagerFactory.createFieldManager(configurationHolder);
+    return new LuceneSearchQueryBuilder(this.analyzer, this.luceneVersion.getLuceneVersion(), fieldManager);
   }
 
 }

@@ -16,22 +16,22 @@ import net.sf.mmm.util.resource.api.DataResource;
 @ComponentSpecification
 public interface ResourceSearchIndexer {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.search.indexer.api.ResourceSearchIndexer";
+
   /**
-   * This method creates a {@link MutableSearchEntry} for a single
-   * {@link DataResource}. It may be used for specific situations when the
-   * {@link ConfiguredSearchIndexer} is NOT suitable. You can
-   * {@link MutableSearchEntry#setField(String, Object) add} additional fields
-   * before {@link SearchIndexer#add(MutableSearchEntry) adding} it to the
-   * index.<br/>
+   * This method creates a {@link MutableSearchEntry} for a single {@link DataResource}. It may be used for
+   * specific situations when the {@link ConfiguredSearchIndexer} is NOT suitable. You can
+   * {@link MutableSearchEntry#setField(String, Object) add} additional fields before
+   * {@link SearchIndexer#add(MutableSearchEntry) adding} it to the index.<br/>
    * <b>ATTENTION:</b><br>
-   * This method will NOT {@link SearchIndexer#add(MutableSearchEntry) index}
-   * the given <code>resource</code>. You have to do that manually after calling
-   * this method.
+   * This method will NOT {@link SearchIndexer#add(MutableSearchEntry) index} the given <code>resource</code>.
+   * You have to do that manually after calling this method.
    * 
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
-   * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the
-   *        {@link MutableSearchEntry entry}.
+   * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the {@link MutableSearchEntry
+   *        entry}.
    * @return the created {@link MutableSearchEntry}.
    */
   MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource, String resourceUri);
@@ -45,21 +45,16 @@ public interface ResourceSearchIndexer {
    * 
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
-   * @param changeType indicates the change for <code>resource</code>. In case
-   *        of {@link ChangeType#ADD add} it should be
-   *        {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
-   *        {@link ChangeType#UPDATE update} it should be
-   *        {@link SearchIndexer#update(MutableSearchEntry) updated} and in case
-   *        of {@link ChangeType#REMOVE remove} it should be
-   *        {@link SearchIndexer#remove(String, Object) removed}. The
-   *        <code>changeType</code> can also be <code>null</code> to indicate
-   *        that the <code>resource</code> was already indexed and remains
+   * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
+   *        it should be {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
+   *        {@link ChangeType#UPDATE update} it should be {@link SearchIndexer#update(MutableSearchEntry)
+   *        updated} and in case of {@link ChangeType#REMOVE remove} it should be
+   *        {@link SearchIndexer#remove(String, Object) removed}. The <code>changeType</code> can also be
+   *        <code>null</code> to indicate that the <code>resource</code> was already indexed and remains
    *        untouched as it is not modified.
-   * @param location is the {@link SearchIndexerDataLocation} where the
-   *        <code>resource</code> comes from.
+   * @param location is the {@link SearchIndexerDataLocation} where the <code>resource</code> comes from.
    */
-  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
-      SearchIndexerDataLocation location);
+  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType, SearchIndexerDataLocation location);
 
   /**
    * This method indexes a single {@link DataResource}.<br/>
@@ -70,74 +65,59 @@ public interface ResourceSearchIndexer {
    * 
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
-   * @param changeType indicates the change for <code>resource</code>. In case
-   *        of {@link ChangeType#ADD add} it should be
-   *        {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
-   *        {@link ChangeType#UPDATE update} it should be
-   *        {@link SearchIndexer#update(MutableSearchEntry) updated} and in case
-   *        of {@link ChangeType#REMOVE remove} it should be
-   *        {@link SearchIndexer#remove(String, Object) removed}. The
-   *        <code>changeType</code> can also be <code>null</code> to indicate
-   *        that the <code>resource</code> was already indexed and remains
+   * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
+   *        it should be {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
+   *        {@link ChangeType#UPDATE update} it should be {@link SearchIndexer#update(MutableSearchEntry)
+   *        updated} and in case of {@link ChangeType#REMOVE remove} it should be
+   *        {@link SearchIndexer#remove(String, Object) removed}. The <code>changeType</code> can also be
+   *        <code>null</code> to indicate that the <code>resource</code> was already indexed and remains
    *        untouched as it is not modified.
-   * @param location is the {@link SearchIndexerDataLocation} where the
-   *        <code>resource</code> comes from.
+   * @param location is the {@link SearchIndexerDataLocation} where the <code>resource</code> comes from.
    * @param uriVisitor is the {@link EntryUpdateVisitor}.
    */
-  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
-      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor);
+  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType, SearchIndexerDataLocation location,
+      EntryUpdateVisitor uriVisitor);
 
   /**
    * This method indexes a single {@link DataResource}.
    * 
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
-   * @param changeType indicates the change for <code>resource</code>. In case
-   *        of {@link ChangeType#ADD add} it should be
-   *        {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
-   *        {@link ChangeType#UPDATE update} it should be
-   *        {@link SearchIndexer#update(MutableSearchEntry) updated} and in case
-   *        of {@link ChangeType#REMOVE remove} it should be
-   *        {@link SearchIndexer#remove(String, Object) removed}. The
-   *        <code>changeType</code> can also be <code>null</code> to indicate
-   *        that the <code>resource</code> was already indexed and remains
+   * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
+   *        it should be {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
+   *        {@link ChangeType#UPDATE update} it should be {@link SearchIndexer#update(MutableSearchEntry)
+   *        updated} and in case of {@link ChangeType#REMOVE remove} it should be
+   *        {@link SearchIndexer#remove(String, Object) removed}. The <code>changeType</code> can also be
+   *        <code>null</code> to indicate that the <code>resource</code> was already indexed and remains
    *        untouched as it is not modified.
-   * @param location is the {@link SearchIndexerDataLocation} where the
-   *        <code>resource</code> comes from.
+   * @param location is the {@link SearchIndexerDataLocation} where the <code>resource</code> comes from.
    * @param uriVisitor is the {@link EntryUpdateVisitor}.
-   * @param locationFolder is the {@link DataResource} for
-   *        {@link SearchIndexerDataLocation#getLocationUri()}.
+   * @param locationFolder is the {@link DataResource} for {@link SearchIndexerDataLocation#getLocationUri()}.
    */
-  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
-      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor, DataResource locationFolder);
+  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType, SearchIndexerDataLocation location,
+      EntryUpdateVisitor uriVisitor, DataResource locationFolder);
 
   /**
    * This method indexes a single {@link DataResource}.
    * 
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
-   * @param changeType indicates the change for <code>resource</code>. In case
-   *        of {@link ChangeType#ADD add} it should be
-   *        {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
-   *        {@link ChangeType#UPDATE update} it should be
-   *        {@link SearchIndexer#update(MutableSearchEntry) updated} and in case
-   *        of {@link ChangeType#REMOVE remove} it should be
-   *        {@link SearchIndexer#remove(String, Object) removed}. The
-   *        <code>changeType</code> can also be <code>null</code> to indicate
-   *        that the <code>resource</code> was already indexed and remains
+   * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
+   *        it should be {@link SearchIndexer#add(MutableSearchEntry) added}, in case of
+   *        {@link ChangeType#UPDATE update} it should be {@link SearchIndexer#update(MutableSearchEntry)
+   *        updated} and in case of {@link ChangeType#REMOVE remove} it should be
+   *        {@link SearchIndexer#remove(String, Object) removed}. The <code>changeType</code> can also be
+   *        <code>null</code> to indicate that the <code>resource</code> was already indexed and remains
    *        untouched as it is not modified.
-   * @param location is the {@link SearchIndexerDataLocation} where the
-   *        <code>resource</code> comes from.
+   * @param location is the {@link SearchIndexerDataLocation} where the <code>resource</code> comes from.
    * @param uriVisitor is the {@link EntryUpdateVisitor}.
-   * @param locationFolder is the {@link DataResource} for
-   *        {@link SearchIndexerDataLocation#getLocationUri()}.
+   * @param locationFolder is the {@link DataResource} for {@link SearchIndexerDataLocation#getLocationUri()}.
    * @param nonUtfEncoding is the
-   *        {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration#getNonUtfEncoding()
-   *        non-UTF encoding}.
+   *        {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration#getNonUtfEncoding() non-UTF
+   *        encoding}.
    * @since 1.0.1
    */
-  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType,
-      SearchIndexerDataLocation location, EntryUpdateVisitor uriVisitor,
-      DataResource locationFolder, String nonUtfEncoding);
+  void index(SearchIndexer indexer, DataResource resource, ChangeType changeType, SearchIndexerDataLocation location,
+      EntryUpdateVisitor uriVisitor, DataResource locationFolder, String nonUtfEncoding);
 
 }

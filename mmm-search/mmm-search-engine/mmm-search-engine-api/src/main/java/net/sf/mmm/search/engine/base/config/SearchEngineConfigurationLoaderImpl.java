@@ -18,7 +18,7 @@ import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(SearchEngineConfigurationLoader.CDI_NAME)
 public class SearchEngineConfigurationLoaderImpl extends XmlBeanMapper<SearchEngineConfigurationBean> implements
     SearchEngineConfigurationLoader {
 

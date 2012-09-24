@@ -12,6 +12,9 @@ import net.sf.mmm.search.api.config.SearchConfigurationLoader;
  */
 public interface SearchEngineConfigurationLoader extends SearchConfigurationLoader {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader";
+
   /**
    * {@inheritDoc}
    */

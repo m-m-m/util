@@ -20,6 +20,7 @@ import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
+import net.sf.mmm.search.indexer.api.SearchIndexerBuilder;
 import net.sf.mmm.search.indexer.api.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
@@ -33,13 +34,11 @@ import org.apache.lucene.index.IndexWriter.MaxFieldLength;
 import org.apache.lucene.store.Directory;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.search.indexer.api.SearchIndexer} interface using lucene as
- * underlying search-engine.
+ * This is the implementation of {@link SearchIndexerBuilder} using lucene as underlying search-engine.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@Named
+@Named(SearchIndexerBuilder.CDI_NAME)
 @Singleton
 public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
 
@@ -178,17 +177,16 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
   /**
    * {@inheritDoc}
    */
-  public SearchIndexer createIndexer(SearchIndexerConfigurationHolder configurationHolder,
-      SearchIndexerOptions options) throws SearchException {
+  @Override
+  public SearchIndexer createIndexer(SearchIndexerConfigurationHolder configurationHolder, SearchIndexerOptions options)
+      throws SearchException {
 
-    NlsNullPointerException.checkNotNull(SearchIndexerConfigurationHolder.class,
-        configurationHolder);
+    NlsNullPointerException.checkNotNull(SearchIndexerConfigurationHolder.class, configurationHolder);
     NlsNullPointerException.checkNotNull(SearchIndexerOptions.class, options);
     SearchIndexerConfiguration configuration = configurationHolder.getBean();
     NlsNullPointerException.checkNotNull(SearchIndexerConfiguration.class, configuration);
     try {
-      Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration
-          .getSearchIndex());
+      Directory directory = this.luceneDirectoryBuilder.createDirectory(configuration.getSearchIndex());
       IndexWriter indexWriter;
       MaxFieldLength maxFieldLength = MaxFieldLength.UNLIMITED;
       if (options.isOverwriteIndex()) {
@@ -196,10 +194,8 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
       } else {
         indexWriter = new IndexWriter(directory, this.analyzer, maxFieldLength);
       }
-      LuceneFieldManager fieldManager = this.fiedManagerFactory
-          .createFieldManager(configurationHolder);
-      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder, fieldManager,
-          this.searchDependencies);
+      LuceneFieldManager fieldManager = this.fiedManagerFactory.createFieldManager(configurationHolder);
+      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder, fieldManager, this.searchDependencies);
     } catch (IOException e) {
       throw new RuntimeIoException(e);
     }

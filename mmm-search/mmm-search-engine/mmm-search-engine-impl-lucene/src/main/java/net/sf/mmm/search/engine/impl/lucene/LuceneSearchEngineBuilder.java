@@ -13,6 +13,7 @@ import net.sf.mmm.search.api.config.SearchConfigurationHolder;
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.search.api.config.SearchProperties;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
+import net.sf.mmm.search.engine.api.SearchEngineBuilder;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfiguration;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.search.engine.base.AbstractSearchEngineBuilder;
@@ -32,15 +33,13 @@ import org.apache.lucene.search.highlight.Formatter;
 import org.apache.lucene.store.Directory;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.search.engine.api.SearchEngineBuilder} using apache lucene
- * as underlying search-engine.
+ * This is the implementation of {@link SearchEngineBuilder} using apache lucene as underlying search-engine.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Singleton
-@Named
+@Named(SearchEngineBuilder.CDI_NAME)
 public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
 
   /** @see #getAnalyzer() */
@@ -84,8 +83,8 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   }
 
   /**
-   * This method sets (injects) the {@link LuceneAnalyzer}. You may also use
-   * {@link #setAnalyzer(Analyzer)} if you assemble this component manually.
+   * This method sets (injects) the {@link LuceneAnalyzer}. You may also use {@link #setAnalyzer(Analyzer)} if
+   * you assemble this component manually.
    * 
    * @param luceneAnalyzer is the luceneAnalyzer to set
    */
@@ -193,10 +192,10 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   /**
    * {@inheritDoc}
    */
+  @Override
   public ManagedSearchEngine createSearchEngine(SearchEngineConfigurationHolder configurationHolder) {
 
-    NlsNullPointerException
-        .checkNotNull(SearchEngineConfigurationHolder.class, configurationHolder);
+    NlsNullPointerException.checkNotNull(SearchEngineConfigurationHolder.class, configurationHolder);
     SearchEngineConfiguration configuration = configurationHolder.getBean();
     SearchProperties properties = configuration.getProperties();
     NlsNullPointerException.checkNotNull(SearchProperties.class, properties);
@@ -217,24 +216,20 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   }
 
   /**
-   * This method creates a {@link ManagedSearchEngine} for an existing
-   * {@link IndexReader}.
+   * This method creates a {@link ManagedSearchEngine} for an existing {@link IndexReader}.
    * 
    * @param indexReader is the {@link IndexReader}.
    * @param configurationHolder is the {@link SearchConfigurationHolder}.
-   * @param refresher is the {@link PeriodicRefresher} or <code>null</code> to
-   *        disable auto-refresh.
+   * @param refresher is the {@link PeriodicRefresher} or <code>null</code> to disable auto-refresh.
    * @return the {@link ManagedSearchEngine}.
    */
   public ManagedSearchEngine createSearchEngine(IndexReader indexReader,
-      SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder,
-      PeriodicRefresher refresher) {
+      SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder, PeriodicRefresher refresher) {
 
-    LuceneFieldManager fieldManager = this.fieldManagerFactory
-        .createFieldManager(configurationHolder);
-    LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer,
-        getSearchQueryBuilderFactory().createQueryBuilder(configurationHolder),
-        this.highlightFormatter, fieldManager, getSearchDependencies(), refresher);
+    LuceneFieldManager fieldManager = this.fieldManagerFactory.createFieldManager(configurationHolder);
+    LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer, getSearchQueryBuilderFactory()
+        .createQueryBuilder(configurationHolder), this.highlightFormatter, fieldManager, getSearchDependencies(),
+        refresher);
     engine.initialize();
     return engine;
   }

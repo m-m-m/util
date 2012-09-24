@@ -10,15 +10,17 @@ import net.sf.mmm.search.engine.api.SearchHit;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 
 /**
- * This class is the default
- * {@link org.apache.lucene.search.highlight.Formatter}. It is just a
+ * This class is the default {@link org.apache.lucene.search.highlight.Formatter}. It is just a
  * {@link SimpleHTMLFormatter} with default tags.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Singleton
-@Named
+@Named(HighlightFormatter.CDI_NAME)
 public class HighlightFormatter extends SimpleHTMLFormatter {
+
+  /** The {@link javax.inject.Named name} of this component. */
+  public static final String CDI_NAME = "org.apache.lucene.search.highlight.Formatter";
 
   /**
    * The constructor.

@@ -17,10 +17,9 @@ import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named
+@Named(IndexerDependencies.CDI_NAME)
 @Singleton
-public class IndexerDependenciesImpl extends AbstractComponent implements
-    IndexerDependencies {
+public class IndexerDependenciesImpl extends AbstractComponent implements IndexerDependencies {
 
   /** @see #getBrowsableResourceFactory() */
   private BrowsableResourceFactory browsableResourceFactory;
@@ -39,6 +38,7 @@ public class IndexerDependenciesImpl extends AbstractComponent implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public BrowsableResourceFactory getBrowsableResourceFactory() {
 
     return this.browsableResourceFactory;
@@ -57,6 +57,7 @@ public class IndexerDependenciesImpl extends AbstractComponent implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public ResourceSearchIndexer getResourceSearchIndexer() {
 
     return this.resourceSearchIndexer;

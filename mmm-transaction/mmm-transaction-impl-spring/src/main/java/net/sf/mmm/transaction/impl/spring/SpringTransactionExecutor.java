@@ -5,6 +5,7 @@ package net.sf.mmm.transaction.impl.spring;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import net.sf.mmm.transaction.api.TransactionExecutor;
 import net.sf.mmm.transaction.api.TransactionSettings;
 import net.sf.mmm.transaction.base.AbstractTransactionExecutor;
 
@@ -14,13 +15,12 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.transaction.api.TransactionExecutor} interface using
- * {@link PlatformTransactionManager spring-transaction}.
+ * This is the implementation of {@link TransactionExecutor} using {@link PlatformTransactionManager
+ * spring-transaction}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@Named
+@Named(TransactionExecutor.CDI_NAME)
 public class SpringTransactionExecutor extends AbstractTransactionExecutor {
 
   /** @see #getPlatformTransactionManager() */
@@ -61,8 +61,7 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
   }
 
   /**
-   * This is the implementation of the
-   * {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using
+   * This is the implementation of the {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using
    * spring-tx.
    */
   private class SpringTransactionAdapter extends AbstractTransactionAdapter<TransactionStatus> {
@@ -78,8 +77,7 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
     public SpringTransactionAdapter(TransactionSettings settings) {
 
       super();
-      this.transactionDefinition = new DefaultTransactionDefinition(
-          TransactionDefinition.PROPAGATION_REQUIRED);
+      this.transactionDefinition = new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED);
 
       if (settings.getIsolationLevel() != null) {
         this.transactionDefinition.setIsolationLevel(settings.getIsolationLevel().getJdbcCode());
@@ -95,8 +93,7 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
     @Override
     protected TransactionStatus createNewTransaction() {
 
-      TransactionStatus tx = getPlatformTransactionManager().getTransaction(
-          this.transactionDefinition);
+      TransactionStatus tx = getPlatformTransactionManager().getTransaction(this.transactionDefinition);
       return tx;
     }
 
@@ -117,8 +114,7 @@ public class SpringTransactionExecutor extends AbstractTransactionExecutor {
 
       TransactionStatus transaction = getActiveTransaction();
       if (transaction.isCompleted()) {
-        getLogger().error(
-            "Internal error in spring transaction: transaction completed but commit failed!");
+        getLogger().error("Internal error in spring transaction: transaction completed but commit failed!");
       } else {
         getPlatformTransactionManager().rollback(transaction);
       }

@@ -10,9 +10,8 @@ import net.sf.mmm.transaction.base.TransactionCommitException;
 import net.sf.mmm.transaction.base.TransactionRollbackException;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.transaction.api.TransactionExecutor} interface using the
- * {@link javax.transaction JTA} (Java Transaction API).
+ * This is the implementation of the {@link net.sf.mmm.transaction.api.TransactionExecutor} interface using
+ * the {@link javax.transaction JTA} (Java Transaction API).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -36,8 +35,8 @@ public class JtaTransactionExecutor extends AbstractTransactionExecutor {
   }
 
   /**
-   * This is the implementation of the
-   * {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using JTA.
+   * This is the implementation of the {@link net.sf.mmm.transaction.api.TransactionAdapter} interface using
+   * JTA.
    */
   private class JtaTransactionAdapter extends AbstractTransactionAdapter<Transaction> {
 
@@ -54,6 +53,8 @@ public class JtaTransactionExecutor extends AbstractTransactionExecutor {
      */
     @Override
     protected Transaction createNewTransaction() {
+
+      // Retrieve UserTransaction via JNDI Lookup "java:comp/UserTransaction"
 
       // TODO Auto-generated method stub
       return null;
