@@ -9,50 +9,8 @@
                       http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-  <import resource="classpath:net/sf/mmm/util/beans-util-core.xml"/>
+  <import resource="classpath:net/sf/mmm/persistence/beans-persistence.xml"/>
 
-  <bean id="javax.sql.DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-    <!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-    <!-- class="org.apache.commons.dbcp.BasicDataSource"> -->
-    <property name="user" value="sa"/>
-    <property name="password" value="none"/>
-    <property name="driverClass" value="org.h2.Driver"/>
-    <property name="jdbcUrl" value="jdbc:h2:target/database/database"/>
-    <property name="initialPoolSize" value="0"/>
-    <property name="maxPoolSize" value="5"/>
-    <property name="minPoolSize" value="1"/>
-    <property name="acquireIncrement" value="1"/>
-    <property name="acquireRetryAttempts" value="0"/>
-  </bean>
-
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    <property name="dataSource" ref="javax.sql.DataSource"/>
-    <property name="persistenceUnitName" value="m-m-m"/>
-    <property name="jpaVendorAdapter">
-      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <property name="showSql" value="true"/>
-        <property name="generateDdl" value="true"/>
-        <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
-      </bean>
-    </property>
-    <!--
-    <property name="jpaVendorAdapter">
-      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-      <property name="showSql" value="true"/>
-      <property name="generateDdl" value="true"/>
-      <property name="databasePlatform" value="oracle.toplink.essentials.platform.database.HSQLPlatform"/>
-      </bean>
-    </property>
-    <property name="loadTimeWeaver">
-      <bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
-    </property>
-    -->
-  </bean>
-
-  <bean id="org.springframework.transaction.PlatformTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-    <property name="entityManagerFactory">
-      <ref bean="entityManagerFactory"/>
-    </property>
-  </bean>
+  <import resource="classpath:net/sf/mmm/transaction/beans-transaction.xml"/>
 
 </beans>

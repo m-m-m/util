@@ -2,7 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.entity.pim.contact;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.address.DataAddress;
@@ -11,6 +13,8 @@ import net.sf.mmm.data.api.entity.pim.address.DataCountry;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.data.impl.entity.pim.DataCountryImpl;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
+
+import org.hibernate.annotations.Type;
 
 /**
  * This is the implementation of {@link DataAddress} using JPA.
@@ -55,6 +59,8 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @return the country
    */
+  @Override
+  @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE })
   public DataCountryImpl getCountry() {
 
     return this.country;
@@ -63,6 +69,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @param country is the country to set
    */
+  @Override
   public void setCountry(DataCountry country) {
 
     this.country = (DataCountryImpl) country;
@@ -71,6 +78,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @return the city
    */
+  @Override
   public String getCity() {
 
     return this.city;
@@ -79,6 +87,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @param city is the city to set
    */
+  @Override
   public void setCity(String city) {
 
     this.city = city;
@@ -87,6 +96,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @return the street
    */
+  @Override
   public String getStreet() {
 
     return this.street;
@@ -95,6 +105,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @param street is the street to set
    */
+  @Override
   public void setStreet(String street) {
 
     this.street = street;
@@ -103,6 +114,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @return the houseNumber
    */
+  @Override
   public String getHouseNumber() {
 
     return this.houseNumber;
@@ -111,6 +123,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @param houseNumber is the houseNumber to set
    */
+  @Override
   public void setHouseNumber(String houseNumber) {
 
     this.houseNumber = houseNumber;
@@ -119,6 +132,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @return the postalCode
    */
+  @Override
   public PostalCode getPostalCode() {
 
     return this.postalCode;
@@ -127,6 +141,8 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * @param postalCode is the postalCode to set
    */
+  @Override
+  @Type(type = "net.sf.mmm.data.impl.datatype.usertype.PostalCodeUserType")
   public void setPostalCode(PostalCode postalCode) {
 
     this.postalCode = postalCode;
@@ -135,6 +151,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getState() {
 
     return this.state;
@@ -143,6 +160,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setState(String state) {
 
     this.state = state;

@@ -43,6 +43,7 @@ public class DataContactImpl extends AbstractDataEntity implements DataContact {
   /**
    * @return the person
    */
+  @Override
   @OneToOne(cascade = CascadeType.ALL, optional = false)
   public DataPersonImpl getPerson() {
 
@@ -52,6 +53,7 @@ public class DataContactImpl extends AbstractDataEntity implements DataContact {
   /**
    * @param person is the person to set
    */
+  @Override
   public void setPerson(DataPerson person) {
 
     this.person = (DataPersonImpl) person;
@@ -60,6 +62,8 @@ public class DataContactImpl extends AbstractDataEntity implements DataContact {
   /**
    * {@inheritDoc}
    */
+  @Override
+  @Transient
   public MutableLinkList<DataContactInfo> getContactInfos() {
 
     return getLinklist(DataFieldIds.ID_CONTACT_CONTACT_INFOS, DataContactInfo.class);
@@ -68,11 +72,12 @@ public class DataContactImpl extends AbstractDataEntity implements DataContact {
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public DataContactInfo getDefaultContactInfo() {
 
-    Link<DataContactInfo> firstLink = getContactInfos().getFirstLink(true,
-        CONTACT_INFO_CLASSIFIER_PRIVATE, CONTACT_INFO_CLASSIFIER_BUSINESS);
+    Link<DataContactInfo> firstLink = getContactInfos().getFirstLink(true, CONTACT_INFO_CLASSIFIER_PRIVATE,
+        CONTACT_INFO_CLASSIFIER_BUSINESS);
     if (firstLink == null) {
       return null;
     } else {
@@ -83,6 +88,8 @@ public class DataContactImpl extends AbstractDataEntity implements DataContact {
   /**
    * {@inheritDoc}
    */
+  @Override
+  @Transient
   public MutableLinkList<DataContact> getRelatedContacts() {
 
     return getLinklist(DataFieldIds.ID_CONTACT_RELATED_CONTACTS, DataContact.class);

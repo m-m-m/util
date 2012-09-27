@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.address.DataAddress;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfo;
@@ -58,6 +59,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public PhoneNumber getPhoneNumber() {
 
     return this.phoneNumber;
@@ -66,6 +68,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public PhoneNumber getPhoneNumberFax() {
 
     return this.phoneNumberFax;
@@ -74,6 +77,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public PhoneNumber getPhoneNumberMobile() {
 
     return this.phoneNumberMobile;
@@ -82,6 +86,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public InternetAddress getEmail() {
 
     return this.email;
@@ -90,6 +95,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getHomepage() {
 
     return this.homepage;
@@ -98,11 +104,11 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc} <br/>
    * <b>ATTENTION:</b><br/>
-   * This is a {@link OneToOne} relation. If you want to share a
-   * {@link DataAddress} between multiple {@link DataContactInfo}s, you need to
-   * create one as primary entity and the others as {@link #getProxyTarget()
-   * proxy} pointing to the primary.
+   * This is a {@link OneToOne} relation. If you want to share a {@link DataAddress} between multiple
+   * {@link DataContactInfo}s, you need to create one as primary entity and the others as
+   * {@link #getProxyTarget() proxy} pointing to the primary.
    */
+  @Override
   @OneToOne(cascade = CascadeType.ALL, optional = true)
   public DataAddressImpl getAddress() {
 
@@ -112,6 +118,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setAddress(DataAddress address) {
 
     this.address = (DataAddressImpl) address;
@@ -120,6 +127,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPhoneNumber(PhoneNumber phoneNumber) {
 
     this.phoneNumber = phoneNumber;
@@ -128,6 +136,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPhoneNumberFax(PhoneNumber phoneNumberFax) {
 
     this.phoneNumberFax = phoneNumberFax;
@@ -136,6 +145,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setPhoneNumberMobile(PhoneNumber phoneNumberMobile) {
 
     this.phoneNumberMobile = phoneNumberMobile;
@@ -144,6 +154,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setEmail(InternetAddress email) {
 
     this.email = email;
@@ -152,6 +163,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setHomepage(String homepage) {
 
     this.homepage = homepage;
@@ -161,6 +173,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
    * {@inheritDoc}
    */
   @Override
+  @Transient
   protected long getStaticDataClassId() {
 
     return DataContactInfoView.CLASS_ID;

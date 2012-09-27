@@ -14,9 +14,13 @@
 
   <context:component-scan base-package="net.sf.mmm.persistence"/>
 
-  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-datasource-${persistence.datasource}.xml"/>
+  <!-- https://jira.springsource.org/browse/SPR-1358 -->
+  <!-- <import resource="classpath:net/sf/mmm/persistence/beans-persistence-datasource-${persistence.datasource}.xml"/> -->
+  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-datasource-h2.xml"/>
 
-  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-jpa-${persistence.jpa.vendor}.xml"/>
+  <!-- https://jira.springsource.org/browse/SPR-1358 -->
+  <!-- <import resource="classpath:net/sf/mmm/persistence/beans-persistence-jpa-${persistence.jpa.vendor}.xml"/> -->
+  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-jpa-hibernate.xml"/>
 
   <bean id="org.springframework.transaction.PlatformTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory">

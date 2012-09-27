@@ -11,4 +11,6 @@
 
   <import resource="classpath:net/sf/mmm/persistence/beans-persistence.xml"/>
 
+  <import resource="classpath:net/sf/mmm/transaction/beans-transaction.xml"/>
+
 </beans>

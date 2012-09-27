@@ -33,7 +33,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>3.1.2.RELEASE</version>
-      <scope>test</scope>
+      <!-- <scope>test</scope> -->
     </dependency>
 
     <!-- Test dependencies -->

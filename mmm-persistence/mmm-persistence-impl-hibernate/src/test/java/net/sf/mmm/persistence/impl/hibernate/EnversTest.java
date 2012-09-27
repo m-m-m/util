@@ -24,30 +24,27 @@ public class EnversTest {
 
   protected RevisionedPersistenceManager getPersistenceManager() {
 
-    return SpringContainerPool.getInstance(SPRING_XML).getComponent(
-        RevisionedPersistenceManager.class);
+    return SpringContainerPool.getInstance(SPRING_XML).getComponent(RevisionedPersistenceManager.class);
   }
 
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
-        .getComponent(TransactionExecutor.class);
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(
+        TransactionExecutor.class);
 
-    DummyRevisionedFooEntity foo = transactionExecutor
-        .doInTransaction(new Callable<DummyRevisionedFooEntity>() {
+    DummyRevisionedFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyRevisionedFooEntity>() {
 
-          public DummyRevisionedFooEntity call() throws Exception {
+      public DummyRevisionedFooEntity call() throws Exception {
 
-            return createAndSave();
-          }
-        });
+        return createAndSave();
+      }
+    });
     final Long fooId = foo.getId();
 
     // shutdown and restart to ensure we really read from DB
     SpringContainerPool.dispose(SPRING_XML);
-    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(
-        TransactionExecutor.class);
+    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(TransactionExecutor.class);
 
     transactionExecutor.doInTransaction(new Callable<Void>() {
 
@@ -60,8 +57,7 @@ public class EnversTest {
 
     // shutdown and restart to ensure we really read from DB
     SpringContainerPool.dispose(SPRING_XML);
-    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(
-        TransactionExecutor.class);
+    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(TransactionExecutor.class);
 
     transactionExecutor.doInTransaction(new Callable<Void>() {
 
@@ -92,10 +88,9 @@ public class EnversTest {
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
     DummyRevisionedFooEntityManager fooManager = (DummyRevisionedFooEntityManager) persistenceManager
         .getManager(DummyRevisionedFooEntity.class);
-    DummyRevisionedFooEntity foo = fooManager.load(fooId,
-        RevisionedPersistenceEntity.LATEST_REVISION);
+    DummyRevisionedFooEntity foo = fooManager.load(fooId, RevisionedPersistenceEntity.LATEST_REVISION);
     Assert.assertEquals("It was magic", foo.getValue());
-    fooManager.delete(foo);
+    // fooManager.delete(foo);
     DummyRevisionedFooEntity fooHistory = fooManager.load(fooId, 1);
     Assert.assertNotNull(fooHistory);
     Assert.assertEquals("It is magic", fooHistory.getValue());

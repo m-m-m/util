@@ -7,13 +7,15 @@ import javax.persistence.Entity;
 
 import net.sf.mmm.persistence.impl.jpa.JpaRevisionedPersistenceEntity;
 
+import org.hibernate.envers.Audited;
+
 /**
  * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-// @Audited
+@Audited
 public class DummyRevisionedFooEntity extends JpaRevisionedPersistenceEntity<Long> {
 
   /** @see #getValue() */
