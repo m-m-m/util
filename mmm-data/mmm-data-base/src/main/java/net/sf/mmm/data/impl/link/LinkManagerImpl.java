@@ -26,7 +26,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 public class LinkManagerImpl extends AbstractLinkManager {
 
   /** @see #createClassifierMap() */
-  private static final String CLASSPATH_PROPERTIES_LINK_CLASSIFIERS = "net/sf/mmm/data/link/classifiers.properties";
+  private static final String CLASSPATH_PROPERTIES_LINK_CLASSIFIERS = "net/sf/mmm/data/link/classifier.properties";
 
   /** @see #getInverseClassifierStrict(String) */
   private Map<String, String> classifierMap;
@@ -52,16 +52,14 @@ public class LinkManagerImpl extends AbstractLinkManager {
   }
 
   /**
-   * This method creates the default {@link Map} for
-   * {@link #getInverseClassifierStrict(String)}.
+   * This method creates the default {@link Map} for {@link #getInverseClassifierStrict(String)}.
    * 
    * @return the {@link Map} for {@link #getInverseClassifierStrict(String)}.
    */
   protected Map<String, String> createClassifierMap() {
 
     Properties properties = new Properties();
-    InputStream inStream = new ClasspathResource(CLASSPATH_PROPERTIES_LINK_CLASSIFIERS)
-        .openStream();
+    InputStream inStream = new ClasspathResource(CLASSPATH_PROPERTIES_LINK_CLASSIFIERS).openStream();
     try {
       properties.load(inStream);
     } catch (IOException e) {
@@ -105,6 +103,7 @@ public class LinkManagerImpl extends AbstractLinkManager {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getInverseClassifierStrict(String classifier) {
 
     return this.classifierMap.get(classifier);
