@@ -42,6 +42,9 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface RemoteInvocationServiceCaller {
 
+  /** The {@link javax.inject.Named name} of this component. */
+  String CDI_NAME = "net.sf.mmm.service.api.client.RemoteInvocationServiceCaller";
+
   /**
    * This method gets the current {@link RemoteInvocationServiceQueue}. This is the last queue that has been
    * {@link #newQueue() created} and is still {@link RemoteInvocationServiceQueue#isOpen() open}.<br/>

@@ -4,6 +4,7 @@ package net.sf.mmm.service.impl.spring.server;
 
 import javax.inject.Named;
 
+import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceImpl;
 
 /**
@@ -12,11 +13,8 @@ import net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(RemoteInvocationGenericServiceImplSpring.CDI_NAME)
+@Named(RemoteInvocationGenericService.CDI_NAME)
 public class RemoteInvocationGenericServiceImplSpring extends RemoteInvocationGenericServiceImpl {
-
-  /** The {@link Named name} of this component. */
-  public static final String CDI_NAME = "RemoteInvocationGenericServiceImplSpring";
 
   /**
    * The constructor.

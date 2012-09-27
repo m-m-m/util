@@ -54,6 +54,7 @@ public class RemoteInvocationGenericServiceServlet extends RemoteServiceServlet 
   /**
    * {@inheritDoc}
    */
+  @Override
   public RemoteInvocationGenericServiceResponse callServices(RemoteInvocationGenericServiceRequest request) {
 
     return this.genericService.callServices(request);
@@ -71,6 +72,7 @@ public class RemoteInvocationGenericServiceServlet extends RemoteServiceServlet 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setServletContext(ServletContext servletContext) {
 
     this.servletContext = servletContext;
@@ -79,6 +81,7 @@ public class RemoteInvocationGenericServiceServlet extends RemoteServiceServlet 
   /**
    * {@inheritDoc}
    */
+  @Override
   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 
     super.doPost(request, response);
@@ -89,7 +92,7 @@ public class RemoteInvocationGenericServiceServlet extends RemoteServiceServlet 
    * @param genericService is the genericService to set
    */
   @Inject
-  @Named(RemoteInvocationGenericServiceImplGwt.CDI_NAME)
+  @Named(RemoteInvocationGenericService.CDI_NAME)
   public void setGenericService(RemoteInvocationGenericService genericService) {
 
     this.genericService = genericService;

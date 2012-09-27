@@ -8,8 +8,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
@@ -19,12 +22,15 @@ import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCaller;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This is the implementation of {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCaller} using
- * spring-remoting.
+ * This is the implementation of {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCaller} using an
+ * {@link #setServiceClient(RemoteInvocationGenericService) injected client-stub} (provided by
+ * spring-remoting) and {@link Proxy java dynamic proxies}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Singleton
+@Named(RemoteInvocationServiceCaller.CDI_NAME)
 public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvocationServiceCaller {
 
   /** @see #setServiceClient(RemoteInvocationGenericService) */
@@ -60,7 +66,10 @@ public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvoc
       @Override
       public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        // TODO: Handling for equals + hashCode?
+        // handle Object standard methods like equals/hashCode/toString/...
+        if (method.getDeclaringClass().equals(Object.class)) {
+          return method.invoke(proxy, args);
+        }
 
         Serializable[] arguments = new Serializable[args.length];
         for (int i = 0; i < args.length; i++) {
