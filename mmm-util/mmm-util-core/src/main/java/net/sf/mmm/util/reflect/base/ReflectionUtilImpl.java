@@ -802,7 +802,9 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
       String pathWithPrefix = path + '/';
       Enumeration<URL> urls = classLoader.getResources(path);
       StringBuilder qualifiedNameBuilder = new StringBuilder(path);
-      qualifiedNameBuilder.append('/');
+      if (qualifiedNameBuilder.length() > 0) {
+        qualifiedNameBuilder.append('/');
+      }
       int qualifiedNamePrefixLength = qualifiedNameBuilder.length();
       while (urls.hasMoreElements()) {
         URL packageUrl = urls.nextElement();
@@ -893,9 +895,14 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
 
     Set<Class<?>> classesSet = new HashSet<Class<?>>();
     for (String className : classNames) {
-      Class<?> clazz = classResolver.resolveClass(className);
-      if (filter.accept(clazz)) {
-        classesSet.add(clazz);
+      try {
+        Class<?> clazz = classResolver.resolveClass(className);
+        if (filter.accept(clazz)) {
+          classesSet.add(clazz);
+        }
+      } catch (Throwable e) {
+        // we catch throwable to also get NoClassDefFoundError, etc.
+        getLogger().warn("Failed to resolve class {}: {}", className, e.toString());
       }
     }
     return classesSet;
