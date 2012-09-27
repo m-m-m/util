@@ -12,7 +12,7 @@
   <packaging>jar</packaging>
   <name>search-engine-api</name>
   <description>This project provides the API and base implementation of the search-engine.</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -29,9 +29,9 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.2.RELEASE</version>
       <scope>compile</scope>
       <optional>true</optional>
-    </dependency>    
+    </dependency>
   </dependencies>
 </project>
