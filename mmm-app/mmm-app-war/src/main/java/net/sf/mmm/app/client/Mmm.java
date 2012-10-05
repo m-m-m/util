@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
+import java.util.concurrent.Callable;
+
 import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.base.gwt.AbstractEntryPoint;
 import net.sf.mmm.client.impl.gwt.gin.ClientGinjector;
@@ -34,11 +36,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -157,6 +161,24 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     // RootPanel.get("nameFieldContainer").add(nameField);
     // RootPanel.get("sendButtonContainer").add(sendButton);
     // RootPanel.get("errorLabelContainer").add(errorLabel);
+    final Audio audio = Audio.createIfSupported();
+    // audio.setControls(true);
+    RootLayoutPanel.get().add(audio);
+    audio.setSrc("http://allen-sauer.com/com.allen_sauer.gwt.voices.demo.VoicesDemo/wikipedia/Rondo_Alla_Turka.ogg");
+    audio.load();
+    audio.play();
+    final Label info = new Label("info: ");
+    RootLayoutPanel.get().add(info);
+    Callable<Boolean> task = new Callable<Boolean>() {
+
+      @Override
+      public Boolean call() {
+
+        info.setText("Duration: " + audio.getDuration() + " seconds, position: " + audio.getCurrentTime());
+        return Boolean.TRUE;
+      }
+    };
+    factory.getDispatcher().invokeTimer(task, 1000);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);

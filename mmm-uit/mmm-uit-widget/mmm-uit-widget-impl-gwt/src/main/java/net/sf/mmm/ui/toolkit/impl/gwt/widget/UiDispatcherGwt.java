@@ -2,10 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.gwt.widget;
 
+import java.util.concurrent.Callable;
+
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiDispatcher;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 /**
@@ -47,6 +51,45 @@ public class UiDispatcherGwt extends AbstractUiDispatcher {
         task.run();
       }
     });
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void invokeTimer(final Callable<Boolean> task, int delayMilliseconds) {
+
+    Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+
+      @Override
+      public boolean execute() {
+
+        try {
+          Boolean repeat = task.call();
+          return (Boolean.TRUE.equals(repeat));
+        } catch (Exception e) {
+          Log.error("Timer task failed: " + task.getClass().getSimpleName(), e);
+          return false;
+        }
+      }
+    }, delayMilliseconds);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void invokeTimer(final Runnable task, int delayMilliseconds) {
+
+    Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+
+      @Override
+      public boolean execute() {
+
+        task.run();
+        return false;
+      }
+    }, delayMilliseconds);
   }
 
 }

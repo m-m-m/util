@@ -7,4 +7,7 @@
                       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
   <import resource="classpath:net/sf/mmm/service/beans-service-gwt-server.xml" />
+
+  <context:component-scan base-package="net.sf.mmm.app"/>
+
 </beans>

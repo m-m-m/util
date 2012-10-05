@@ -66,6 +66,27 @@ public interface UiDispatcher {
   void invokeAsynchron(Runnable task);
 
   /**
+   * This method {@link Runnable#run() invokes} the given <code>task</code> asynchronous after the given
+   * dalay.
+   * 
+   * @param task is the job to {@link Runnable#run() invoke}.
+   * @param delayMilliseconds is the delay in milliseconds when the <code>task</code> shall be executed.
+   */
+  void invokeTimer(Runnable task, int delayMilliseconds);
+
+  /**
+   * This method {@link Callable#call() invokes} the given <code>task</code> periodically. The first
+   * {@link Callable#call() invocation} is performed after the given delay. Every time the <code>task</code>
+   * returns {@link Boolean#TRUE true}, another {@link Callable#call() invocation} is performed after the same
+   * delay until {@link Boolean#FALSE false} is returned.
+   * 
+   * @param task is the job to {@link Callable#call() invoke}.
+   * @param delayMilliseconds is the periodically delay in milliseconds when the <code>task</code> shall be
+   *        executed.
+   */
+  void invokeTimer(Callable<Boolean> task, int delayMilliseconds);
+
+  /**
    * This method {@link Callable#call() invokes} the given <code>task</code> synchronous in the dispatcher
    * thread of the UI. The term "synchronous" means that the current thread is suspended and this method will
    * NOT return before the task is completed. If this method is called in the dispatcher thread or there is NO

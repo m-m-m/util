@@ -11,7 +11,7 @@ import net.sf.mmm.service.base.server.AbstractRemoteInvocationService;
  * TODO: this class ...
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since X 12.06.2012
+ * @since 1.0.0
  */
 @Named
 public class GreetingServiceImpl extends AbstractRemoteInvocationService implements GreetingService {
@@ -27,6 +27,7 @@ public class GreetingServiceImpl extends AbstractRemoteInvocationService impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public String greeting(String name) {
 
     return "Hello " + name;
