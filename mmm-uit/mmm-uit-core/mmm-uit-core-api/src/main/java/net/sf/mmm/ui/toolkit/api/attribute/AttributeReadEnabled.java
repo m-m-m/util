@@ -17,10 +17,7 @@ public abstract interface AttributeReadEnabled {
 
   /**
    * This method determines if this object is enabled. If it is NOT enabled, the user can NOT interact with
-   * the object. This method is a shortcut for:<br/>
-   * <code>{@link AttributeReadEnabledState#getEnabledState()}.isEnabled()</code>
-   * 
-   * @see AttributeReadEnabledState#getEnabledState()
+   * the object.
    * 
    * @return <code>true</code> if this object is enabled, <code>false</code> if this object is disabled.
    */

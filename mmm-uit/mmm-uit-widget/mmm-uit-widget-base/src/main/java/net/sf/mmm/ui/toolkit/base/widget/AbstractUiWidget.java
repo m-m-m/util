@@ -55,6 +55,9 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   /** @see #getHeight() */
   private String height;
 
+  /** @see #getAriaRole() */
+  private String ariaRole;
+
   /** @see #getMode() */
   private UiMode mode;
 
@@ -176,6 +179,9 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
     }
     if (this.tooltip != null) {
       adapter.setTooltip(this.tooltip);
+    }
+    if (this.ariaRole != null) {
+      adapter.setAriaRole(this.ariaRole);
     }
     if (!this.styles.isEmpty()) {
       adapter.setStyles(this.styles);
@@ -360,6 +366,15 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   @Override
   public boolean isVisible() {
 
+    return this.visible;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isVisibleRecursive() {
+
     if (!this.visible) {
       return false;
     }
@@ -507,6 +522,27 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   public void setHeightInPixel(int heightInPixel) {
 
     setHeight(heightInPixel + "px");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getAriaRole() {
+
+    return this.ariaRole;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAriaRole(String ariaRole) {
+
+    this.ariaRole = ariaRole;
+    if (this.widgetAdapter != null) {
+      this.widgetAdapter.setAriaRole(ariaRole);
+    }
   }
 
   /**
@@ -687,27 +723,6 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
 
   /**
    * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    StringBuilder buffer = new StringBuilder(getClass().getSimpleName());
-    if (this.id != null) {
-      buffer.append("[");
-      buffer.append(this.id);
-      buffer.append("]");
-    }
-    if (!this.visible) {
-      buffer.append("[hidden]");
-    }
-    if (!this.enabled) {
-      buffer.append("[disabled]");
-    }
-    return buffer.toString();
-  }
-
-  /**
-   * {@inheritDoc}
    * 
    * This is the most general implementation for a {@link UiWidget} that has no value. It always returns
    * <code>false</code>. This method has to be overridden by more specific widgets.
@@ -737,6 +752,27 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   protected boolean isModifiedRecursive() {
 
     return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    StringBuilder buffer = new StringBuilder(getClass().getSimpleName());
+    if (this.id != null) {
+      buffer.append("[");
+      buffer.append(this.id);
+      buffer.append("]");
+    }
+    if (!this.visible) {
+      buffer.append("[hidden]");
+    }
+    if (!this.enabled) {
+      buffer.append("[disabled]");
+    }
+    return buffer.toString();
   }
 
 }

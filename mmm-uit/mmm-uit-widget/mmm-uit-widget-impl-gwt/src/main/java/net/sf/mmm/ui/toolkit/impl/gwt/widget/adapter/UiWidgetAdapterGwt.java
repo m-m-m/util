@@ -8,7 +8,7 @@ import net.sf.mmm.ui.toolkit.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -24,6 +24,9 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
 
   /** The name of the <code>id</code> attribute. */
   private static final String HTML_ATTRIBUTE_ID = "id";
+
+  /** The name of the <code>role</code> attribute. */
+  private static final String HTML_ATTRIBUTE_ARIA_ROLE = "role";
 
   /**
    * The constructor.
@@ -71,10 +74,11 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setId(String id) {
 
+    Element element = getWidget().getElement();
     if (id == null) {
-      DOM.removeElementAttribute(getWidget().getElement(), HTML_ATTRIBUTE_ID);
+      element.removeAttribute(HTML_ATTRIBUTE_ID);
     } else {
-      DOM.setElementAttribute(getWidget().getElement(), HTML_ATTRIBUTE_ID, id);
+      element.setAttribute(HTML_ATTRIBUTE_ID, id);
     }
   }
 
@@ -85,6 +89,20 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   public void setTooltip(String tooltip) {
 
     getWidget().setTitle(tooltip);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAriaRole(String ariaRole) {
+
+    Element element = getWidget().getElement();
+    if (ariaRole == null) {
+      element.removeAttribute(HTML_ATTRIBUTE_ARIA_ROLE);
+    } else {
+      element.setAttribute(HTML_ATTRIBUTE_ARIA_ROLE, ariaRole);
+    }
   }
 
   /**

@@ -41,9 +41,28 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRangeWithSource(value, minimum, maximum,
-        valueSource));
+    super(createBundle(NlsBundleUtilCoreRoot.class)
+        .errorValueOutOfRangeWithSource(value, minimum, maximum, valueSource));
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param <V> is the generic type of the values.
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
+   * @param valueSource describes the source of the value or <code>null</code> if NOT available. This may be
+   *        the filename where the value was read from, an XPath where the value was located in an XML
+   *        document, etc. It is used in exceptions thrown if something goes wrong. This will help to find the
+   *        problem easier.
+   */
+  public <V extends Comparable<V>> ValueOutOfRangeException(V value, V minimum, V maximum, Object valueSource) {
+
+    super(createBundle(NlsBundleUtilCoreRoot.class)
+        .errorValueOutOfRangeWithSource(value, minimum, maximum, valueSource));
+    assert ((value.compareTo(minimum) < 0) || (value.compareTo(maximum) > 0));
   }
 
   /**

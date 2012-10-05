@@ -3,6 +3,8 @@
 package net.sf.mmm.ui.toolkit.api.widget;
 
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadModified;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisibleRecursive;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteAriaRole;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteMode;
@@ -33,9 +35,10 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeWriteVisible, AttributeWriteTooltip,
-    AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
-    AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode, AttributeWriteModeFixed {
+public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeReadVisibleRecursive, AttributeWriteVisible,
+    AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
+    AttributeWriteSize, AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode,
+    AttributeWriteModeFixed, AttributeWriteAriaRole {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

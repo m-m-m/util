@@ -456,9 +456,9 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    */
   @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} is not in the expected range of \"[{min} - {max}]\"!")
   NlsMessage errorValueOutOfRangeWithSource(@Named("value")
-  Number value, @Named("min")
-  Number min, @Named("max")
-  Number max, @Named("source")
+  Object value, @Named("min")
+  Object min, @Named("max")
+  Object max, @Named("source")
   Object source);
 
   /**

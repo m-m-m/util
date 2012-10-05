@@ -209,4 +209,13 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
     throw new NlsUnsupportedOperationException();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getAriaRole() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
 }

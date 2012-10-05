@@ -11,7 +11,8 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeReadMaximized {
 
   /**
-   * This method determines if this object is maximized.
+   * This method determines if this object is maximized. In this case the size is fully expanded to cover the
+   * entire screen (also called <em>full-screen</em>).
    * 
    * @return <code>true</code> if the object is maximized, <code>false</code> otherwise.
    */

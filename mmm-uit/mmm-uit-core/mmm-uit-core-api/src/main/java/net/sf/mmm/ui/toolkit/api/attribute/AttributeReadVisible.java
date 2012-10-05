@@ -12,11 +12,12 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeReadVisible {
 
   /**
-   * This method determines if this object is displayed to the user.
+   * This method determines if this object is set visible.
    * 
-   * @see AttributeReadVisibleState#getVisibleState()
+   * @see AttributeReadVisibleRecursive#isVisibleRecursive()
    * 
-   * @return the value of {@link net.sf.mmm.ui.toolkit.api.common.VisibleState#isVisible()}.
+   * @return <code>true</code> if programmatically set visible, <code>false</code> if directly
+   *         programmatically hidden.
    */
   boolean isVisible();
 

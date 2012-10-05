@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
  * This interface gives read and {@link #setMaximized(boolean) write} access to the
- * {@link AttributeReadMaximized#isMaximized() maximized} attribute of an object (window).
+ * {@link AttributeReadMaximized#isMaximized() maximized} attribute of an object (e.g. window).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -12,11 +12,12 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 public abstract interface AttributeWriteMaximized extends AttributeReadMaximized {
 
   /**
-   * This method (un)maximizes the object. If it is maximized its position will be moved to the top left
-   * corner and its size will be set to the maximum size available (display for windows). If it is unmaximized
-   * after it was maximized, its size and position will be restored to the values before it was maximized.
+   * This method (un){@link #isMaximized() maximizes} the object. If it is un-maximized, its size and position
+   * will be restored to the values before it was maximized.
    * 
-   * @param maximize - if <code>true</code>, the window will be maximized, else it will be unmaximized.
+   * @see #isMaximized()
+   * 
+   * @param maximize - <code>true</code> to maximize, <code>false</code> to un-maximize.
    */
   void setMaximized(boolean maximize);
 

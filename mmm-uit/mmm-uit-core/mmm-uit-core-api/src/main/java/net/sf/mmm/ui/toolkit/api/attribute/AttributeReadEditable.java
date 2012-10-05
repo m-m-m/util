@@ -3,8 +3,8 @@
 package net.sf.mmm.ui.toolkit.api.attribute;
 
 /**
- * This interface gives read access to the {@link #isEditable() editable-flag} of an object. Editable means
- * that the end-user can edit the data of the object (e.g. the text of a text-input field). If the
+ * This interface gives read access to the {@link #isEditable() editable} attribute of an object. Editable
+ * means that the end-user can edit the data of the object (e.g. the text of a text-input field). If the
  * {@link #isEditable() editable} feature is turned off, the user can no longer edit the data.<br/>
  * This is closely related to {@link AttributeReadEnabled#isEnabled()}. However turning off the
  * {@link #isEditable() editable-flag} is weaker than {@link AttributeWriteEnabled#setEnabled(boolean)
