@@ -56,7 +56,7 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
   public NATIVE_WIDGET getNativeWidget(UiWidgetRegular widget) {
 
     NlsNullPointerException.checkNotNull(UiWidgetRegular.class, widget);
-    AbstractUiWidget<?> abstractWidget = (AbstractUiWidget<?>) widget;
+    AbstractUiWidget<?> abstractWidget = AbstractUiWidget.asAbstractWidget(widget);
     NATIVE_WIDGET nativeWidget = (NATIVE_WIDGET) abstractWidget.getWidgetAdapter().getWidget();
     return nativeWidget;
   }

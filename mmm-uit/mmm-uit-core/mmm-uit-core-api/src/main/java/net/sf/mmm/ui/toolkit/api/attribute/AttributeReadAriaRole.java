@@ -57,9 +57,9 @@ public abstract interface AttributeReadAriaRole {
   String ARIA_ROLE_COLUMN_HEADER = "columnheader";
 
   /**
-   * A presentation of a select; usually similar to a {@link #ARIA_ROLE_TEXTBOX textbox} where users can type
-   * ahead to select an option, or type to enter arbitrary text as a new item in the list. See related
-   * {@link #ARIA_ROLE_LISTBOX listbox}.
+   * A presentation of a {@link #ARIA_ABSTRACT_ROLE_SELECT select}; usually similar to a
+   * {@link #ARIA_ROLE_TEXTBOX textbox} where users can type ahead to select an option, or type to enter
+   * arbitrary text as a new item in the list. See related {@link #ARIA_ROLE_LISTBOX listbox}.
    */
   String ARIA_ROLE_COMBOBOX = "combobox";
 

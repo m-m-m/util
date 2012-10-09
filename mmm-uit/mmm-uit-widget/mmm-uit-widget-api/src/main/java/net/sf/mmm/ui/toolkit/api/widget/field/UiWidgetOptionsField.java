@@ -2,9 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget.field;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteFormatter;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteOptions;
-import net.sf.mmm.util.lang.api.Formatter;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetOptionsBase;
 
 /**
  * This is the abstract interface for a {@link UiWidgetField field widget} that allows to select a single
@@ -14,17 +12,8 @@ import net.sf.mmm.util.lang.api.Formatter;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public abstract interface UiWidgetOptionsField<VALUE> extends UiWidgetField<VALUE>, AttributeWriteOptions<VALUE>,
-    AttributeWriteFormatter<VALUE> {
+public abstract interface UiWidgetOptionsField<VALUE> extends UiWidgetField<VALUE>, UiWidgetOptionsBase<VALUE> {
 
-  /**
-   * {@inheritDoc}
-   * 
-   * <b>ATTENTION:</b><br/>
-   * The {@link Formatter} has to be set before the {@link #getOptions() options} are
-   * {@link #setOptions(java.util.List) set} in order to reflect this change.
-   */
-  @Override
-  void setFormatter(Formatter<VALUE> formatter);
+  // nothing to add...
 
 }

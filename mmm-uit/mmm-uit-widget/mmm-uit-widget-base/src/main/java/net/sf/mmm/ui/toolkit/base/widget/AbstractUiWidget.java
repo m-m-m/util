@@ -5,9 +5,14 @@ package net.sf.mmm.ui.toolkit.base.widget;
 import net.sf.mmm.ui.toolkit.api.common.UiMode;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
+import net.sf.mmm.ui.toolkit.api.widget.custom.UiWidgetCustom;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectDisposedException;
+import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.util.validation.base.ValidationStateImpl;
 
 /**
  * This is the abstract base implementation of {@link UiWidget}. It is independent of any native toolkit via
@@ -135,6 +140,20 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   }
 
   /**
+   * This method gives access to {@link #getWidgetAdapter()}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
+   * regular users (what also applies for all classes in this <code>base</code> packages).
+   * 
+   * @param widget is the widget.
+   * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
+   */
+  public static final UiWidgetAdapter<?> getWidgetAdapter(UiWidget widget) {
+
+    return asAbstractWidget(widget).getWidgetAdapter();
+  }
+
+  /**
    * This method sets the {@link #getParent() parent} of the given <code>widget</code>.<br/>
    * <b>ATTENTION:</b><br/>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
@@ -143,9 +162,35 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * @param widget is the widget where to set the {@link #getParent() parent}.
    * @param newParent is the new {@link #getParent() parent}.
    */
-  public static void setParent(AbstractUiWidget<?> widget, UiWidgetComposite<?> newParent) {
+  public static void setParent(UiWidget widget, UiWidgetComposite<?> newParent) {
 
-    widget.setParent(newParent);
+    asAbstractWidget(widget).setParent(newParent);
+  }
+
+  /**
+   * This method gets the given <code>widget</code> as {@link AbstractUiWidget}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This method does more than a simple cast. Never cast manually to {@link AbstractUiWidget} but use this
+   * method instead.
+   * 
+   * @param widget is the widget to "cast".
+   * @return the (underlying) {@link AbstractUiWidget}.
+   */
+  protected static AbstractUiWidget<?> asAbstractWidget(UiWidget widget) {
+
+    AbstractUiWidget<?> abstractWidget;
+    if (widget instanceof UiWidgetCustom) {
+      UiWidgetCustom<?, ?> customWidget = (UiWidgetCustom<?, ?>) widget;
+      UiWidgetReal delegate = AccessHelperWidgetCustom.getDelegateStatic(customWidget);
+      return asAbstractWidget(delegate);
+    } else {
+      try {
+        abstractWidget = (AbstractUiWidget<?>) widget;
+      } catch (Exception e) {
+        throw new NlsClassCastException(e, widget, AbstractUiWidget.class);
+      }
+    }
+    return abstractWidget;
   }
 
   /**
@@ -156,9 +201,9 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * 
    * @param widget is the widget that should be removed from its {@link #getParent() parent}.
    */
-  public static void removeFromParent(AbstractUiWidget<?> widget) {
+  public static void removeFromParent(UiWidget widget) {
 
-    widget.removeFromParent();
+    asAbstractWidget(widget).removeFromParent();
   }
 
   /**
@@ -373,7 +418,7 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * {@inheritDoc}
    */
   @Override
-  public boolean isVisibleRecursive() {
+  public final boolean isVisibleRecursive() {
 
     if (!this.visible) {
       return false;
@@ -749,9 +794,46 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * @return <code>true</code> if this is a {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite
    *         composite widget} and one of its children is {@link #isModified() modified}.
    */
-  protected boolean isModifiedRecursive() {
+  boolean isModifiedRecursive() {
 
     return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final boolean validate(ValidationState state) {
+
+    ValidationState validationState = state;
+    if (validationState == null) {
+      validationState = new ValidationStateImpl();
+    }
+    validateLocal(validationState);
+    validateRecursive(validationState);
+    return state.isValid();
+  }
+
+  /**
+   * This method performs the local validation of this widget excluding potential child widgets.
+   * 
+   * @param state is the {@link ValidationState}.
+   */
+  protected void validateLocal(ValidationState state) {
+
+    // nothing to do...
+  }
+
+  /**
+   * This method performs the recursive validation of potential children of this widget excluding the
+   * validation of this widget itself. A legal implementation of a composite widget needs to call
+   * {@link #validate(ValidationState)} on all child widgets.
+   * 
+   * @param state is the {@link ValidationState}.
+   */
+  void validateRecursive(ValidationState state) {
+
+    // nothing to do...
   }
 
   /**

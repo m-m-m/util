@@ -2,11 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget;
 
+import net.sf.mmm.ui.toolkit.api.common.UiMode;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetAtomic;
 import net.sf.mmm.ui.toolkit.base.handler.event.ClickEventSender;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetAtomic}.
@@ -79,6 +81,33 @@ public abstract class AbstractUiWidgetAtomic<ADAPTER extends UiWidgetAdapter<?>>
     if (this.clickEventSender != null) {
       this.clickEventSender.onClick(this, true);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  final boolean isModifiedRecursive() {
+
+    return super.isModifiedRecursive();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  final void setModeRecursive(UiMode newMode) {
+
+    super.setModeRecursive(newMode);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  final void validateRecursive(ValidationState state) {
+
+    super.validateRecursive(state);
   }
 
 }

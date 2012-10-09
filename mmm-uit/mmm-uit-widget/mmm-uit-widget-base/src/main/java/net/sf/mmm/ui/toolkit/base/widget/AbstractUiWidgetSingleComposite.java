@@ -85,7 +85,7 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
   protected void setChild(CHILD child) {
 
     if (this.child != null) {
-      removeFromParent((AbstractUiWidget<?>) this.child);
+      removeFromParent(this.child);
     }
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setChild(child);

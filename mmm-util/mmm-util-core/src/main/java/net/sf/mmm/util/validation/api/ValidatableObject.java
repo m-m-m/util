@@ -6,8 +6,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
  * This is the interface for an object, that {@link #getValue() has a value} as well as
- * {@link #addValidator(ValueValidator) validators} and can be
- * {@link #validate(net.sf.mmm.util.validation.base.ValidationState) validated}.
+ * {@link #addValidator(ValueValidator) validators} and can be {@link #validate(ValidationState) validated}.
  * 
  * @param <V> is the generic type of the {@link #getValue() value} to validate.
  * 

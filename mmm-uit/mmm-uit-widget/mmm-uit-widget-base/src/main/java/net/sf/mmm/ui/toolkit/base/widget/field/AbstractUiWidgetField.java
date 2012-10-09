@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteModified;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
@@ -11,6 +14,10 @@ import net.sf.mmm.ui.toolkit.base.handler.event.FocusEventSender;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField;
+import net.sf.mmm.util.validation.api.ValidationFailure;
+import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.SimpleValidationFailure;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetField}.
@@ -42,6 +49,12 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #getValidationFailure() */
   private String validationFailure;
 
+  /** @see #addValidator(ValueValidator) */
+  private final List<ValueValidator<? super VALUE>> validatorList;
+
+  /** @see #getLabel() */
+  private String label;
+
   /**
    * The constructor.
    * 
@@ -50,6 +63,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public AbstractUiWidgetField(AbstractUiWidgetFactory<?> factory) {
 
     super(factory);
+    this.validatorList = new LinkedList<ValueValidator<? super VALUE>>();
   }
 
   /**
@@ -331,6 +345,91 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setValidationFailure(validationFailure);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLabel() {
+
+    return this.label;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setLabel(String label) {
+
+    // TODO: pass to widget adapter
+    this.label = label;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addValidator(ValueValidator<? super VALUE> validator) {
+
+    this.validatorList.add(validator);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeValidator(ValueValidator<? super VALUE> validator) {
+
+    return this.validatorList.remove(validator);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void validateLocal(ValidationState state) {
+
+    super.validateLocal(state);
+    VALUE currentValue;
+    try {
+      currentValue = getValueOrException();
+      for (ValueValidator<? super VALUE> validator : this.validatorList) {
+        ValidationFailure failure = validator.validate(currentValue, getSource());
+        if (failure != null) {
+          state.onFailure(failure);
+        }
+      }
+    } catch (RuntimeException e) {
+      ValidationFailure failure = createValidationFailure(e);
+      if (failure != null) {
+        state.onFailure(failure);
+      }
+    }
+  }
+
+  /**
+   * This method converts an exception from {@link #getValueOrException()} to a {@link ValidationFailure}.
+   * 
+   * @param error is the exception.
+   * @return the {@link ValidationFailure}.
+   */
+  protected ValidationFailure createValidationFailure(Throwable error) {
+
+    return new SimpleValidationFailure(error.getClass().getSimpleName(), getSource(), error.getLocalizedMessage());
+  }
+
+  /**
+   * @return the source for validation failures.
+   */
+  private String getSource() {
+
+    String source = getLabel();
+    if (source == null) {
+      source = getId();
+      // may still be null, but then no reasonable source is available...
+    }
+    return source;
   }
 
 }

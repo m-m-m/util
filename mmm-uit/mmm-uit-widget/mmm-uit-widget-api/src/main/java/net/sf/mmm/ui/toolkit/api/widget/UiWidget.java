@@ -15,6 +15,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
+import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 
 /**
  * This is the interface for an adapter to a physical <em>widget</em> (or potentially a composition of such
@@ -38,7 +39,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeReadVisibleRecursive, AttributeWriteVisible,
     AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
     AttributeWriteSize, AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode,
-    AttributeWriteModeFixed, AttributeWriteAriaRole {
+    AttributeWriteModeFixed, AttributeWriteAriaRole, AbstractValidatableObject {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

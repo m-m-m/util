@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.widget.field;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInTextLines;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInRows;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
@@ -15,7 +15,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * @since 1.0.0
  */
 public interface UiWidgetTextArea extends UiWidgetTextualInputField<String>, AttributeWriteKeyboardFilter,
-    AttributeWriteHeightInTextLines, UiWidgetReal {
+    AttributeWriteHeightInRows, UiWidgetReal {
 
   // nothing to add...
 

@@ -5,9 +5,9 @@ package net.sf.mmm.ui.toolkit.base.widget.window.adapter;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapterDynamicComposite;
-import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
 
 /**
  * This is the interface for a {@link net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter} adapting
@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public interface UiWidgetAdapterBaseWindow<WIDGET> extends UiWidgetAdapterDynamicComposite<WIDGET, UiWidgetRegular>,
-    AttributeWriteSizeInPixel, AttributeWritePosition, AttributeWriteTitle<String>, AttributeWriteResizable {
+    AttributeWriteSizeInPixel, AttributeWritePosition, AttributeWriteStringTitle, AttributeWriteResizable {
 
   // nothing to add
 

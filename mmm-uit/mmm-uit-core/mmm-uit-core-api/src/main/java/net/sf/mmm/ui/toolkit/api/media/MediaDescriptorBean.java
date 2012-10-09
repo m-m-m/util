@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.media;
 
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteUrl;
-import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
 
 /**
  * This is the abstract base implementation of {@link MediaDescriptor} as java bean.
@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class MediaDescriptorBean implements MediaDescriptor, AttributeWriteUrl, AttributeWriteTitle<String> {
+public abstract class MediaDescriptorBean implements MediaDescriptor, AttributeWriteUrl, AttributeWriteStringTitle {
 
   /** @see #getUrl() */
   private String url;

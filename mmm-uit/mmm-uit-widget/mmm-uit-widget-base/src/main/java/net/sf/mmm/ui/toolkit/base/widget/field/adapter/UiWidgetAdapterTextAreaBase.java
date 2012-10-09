@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget.field.adapter;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInTextLines;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInRows;
 
 /**
  * This is the interface for a {@link net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter} adapting
@@ -14,7 +14,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInTextLines;
  * @param <VALUE> is the generic type of the changed value.
  */
 public abstract interface UiWidgetAdapterTextAreaBase<WIDGET, VALUE> extends
-    UiWidgetAdapterTextFieldBase<WIDGET, VALUE>, AttributeWriteHeightInTextLines {
+    UiWidgetAdapterTextFieldBase<WIDGET, VALUE>, AttributeWriteHeightInRows {
 
   // nothing to add
 

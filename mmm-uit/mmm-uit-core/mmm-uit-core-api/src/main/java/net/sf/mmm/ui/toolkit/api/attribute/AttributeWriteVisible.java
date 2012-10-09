@@ -15,7 +15,7 @@ public abstract interface AttributeWriteVisible extends AttributeReadVisible {
   /**
    * This method shows or hides this object.
    * 
-   * @see AttributeReadVisibleState#getVisibleState()
+   * @see #isVisible()
    * 
    * @param visible is the new visibility status of this object. If <code>true</code>, the object will be
    *        shown (and raised), if false the object will be hidden (iconified).

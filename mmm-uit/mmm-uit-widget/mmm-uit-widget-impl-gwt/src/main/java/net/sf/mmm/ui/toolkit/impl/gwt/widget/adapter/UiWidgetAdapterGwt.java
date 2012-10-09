@@ -60,7 +60,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @SuppressWarnings("unchecked")
   protected static final <W extends UIObject> W getWidget(UiWidget widget, Class<W> widgetType) {
 
-    Object nativeWidget = AbstractUiWidget.getWidgetAdapter((AbstractUiWidget<?>) widget).getWidget();
+    Object nativeWidget = AbstractUiWidget.getWidgetAdapter(widget).getWidget();
     try {
       return (W) nativeWidget;
     } catch (ClassCastException e) {

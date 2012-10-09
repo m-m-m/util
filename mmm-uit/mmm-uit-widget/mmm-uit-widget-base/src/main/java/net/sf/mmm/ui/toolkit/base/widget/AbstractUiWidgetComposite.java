@@ -7,6 +7,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetComposite}.
@@ -37,7 +38,7 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
    * this if you are really sure what you are doing.
    */
   @Override
-  public boolean isModifiedRecursive() {
+  final boolean isModifiedRecursive() {
 
     int childCount = getChildCount();
     for (int i = 0; i < childCount; i++) {
@@ -53,7 +54,7 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
    * {@inheritDoc}
    */
   @Override
-  void setModeRecursive(UiMode mode) {
+  final void setModeRecursive(UiMode mode) {
 
     super.setModeRecursive(mode);
     int childCount = getChildCount();
@@ -78,6 +79,19 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
       }
     }
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  final void validateRecursive(ValidationState state) {
+
+    int size = getChildCount();
+    for (int i = 0; i < size; i++) {
+      CHILD child = getChild(i);
+      child.validate(state);
+    }
   }
 
 }

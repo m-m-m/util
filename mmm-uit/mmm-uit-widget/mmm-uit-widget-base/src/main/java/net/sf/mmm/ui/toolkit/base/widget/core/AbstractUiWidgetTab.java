@@ -5,7 +5,6 @@ package net.sf.mmm.ui.toolkit.base.widget.core;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidget;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.ui.toolkit.base.widget.core.adapter.UiWidgetAdapterTab;
@@ -88,7 +87,7 @@ public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab<?>>
       return;
     }
     if (this.image != null) {
-      removeFromParent((AbstractUiWidget<?>) this.image);
+      removeFromParent(this.image);
     }
     this.image = image;
     if (hasWidgetAdapter()) {

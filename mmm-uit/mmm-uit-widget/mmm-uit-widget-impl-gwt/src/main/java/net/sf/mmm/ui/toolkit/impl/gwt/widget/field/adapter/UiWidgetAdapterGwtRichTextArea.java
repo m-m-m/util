@@ -54,7 +54,7 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInTextLines() {
+  public int getHeightInRows() {
 
     return 0;
   }
@@ -63,9 +63,9 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
    * {@inheritDoc}
    */
   @Override
-  public void setHeightInTextLines(int lines) {
+  public void setHeightInRows(int rows) {
 
-    getWidget().setHeight(lines + "em");
+    getWidget().setHeight(rows + "em");
   }
 
   /**

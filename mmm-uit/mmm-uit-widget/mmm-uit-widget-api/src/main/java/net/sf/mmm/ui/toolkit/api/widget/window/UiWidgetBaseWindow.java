@@ -5,9 +5,9 @@ package net.sf.mmm.ui.toolkit.api.widget.window;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadResizable;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWritePosition;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
-import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
 
 /**
  * This is the abstract base interface for a {@link UiWidgetDynamicComposite dynamic composite widget} that
@@ -20,7 +20,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @since 1.0.0
  */
 public abstract interface UiWidgetBaseWindow extends UiWidgetDynamicComposite<UiWidgetRegular>,
-    AttributeWriteTitle<String>, AttributeWriteSizeInPixel, AttributeReadResizable, AttributeWritePosition {
+    AttributeWriteStringTitle, AttributeWriteSizeInPixel, AttributeReadResizable, AttributeWritePosition {
 
   /**
    * This method sets the position of the window, so that it is in the center of the screen. You should set

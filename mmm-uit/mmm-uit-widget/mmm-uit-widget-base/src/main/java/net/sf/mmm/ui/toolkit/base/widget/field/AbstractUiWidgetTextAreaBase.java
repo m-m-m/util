@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInTextLines;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHeightInRows;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextAreaBase;
 
@@ -16,9 +16,9 @@ import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterTextAreaBa
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapterTextAreaBase<?, String>> extends
-    AbstractUiWidgetTextFieldBase<ADAPTER> implements AttributeWriteHeightInTextLines {
+    AbstractUiWidgetTextFieldBase<ADAPTER> implements AttributeWriteHeightInRows {
 
-  /** @see #getHeightInTextLines() */
+  /** @see #getHeightInRows() */
   private int heightInTextLines;
 
   /**
@@ -40,7 +40,7 @@ public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapt
 
     super.initializeWidgetAdapter(adapter);
     if (this.heightInTextLines != 0) {
-      adapter.setHeightInTextLines(this.heightInTextLines);
+      adapter.setHeightInRows(this.heightInTextLines);
     }
   }
 
@@ -48,7 +48,7 @@ public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInTextLines() {
+  public int getHeightInRows() {
 
     return this.heightInTextLines;
   }
@@ -57,11 +57,11 @@ public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
-  public void setHeightInTextLines(int lines) {
+  public void setHeightInRows(int lines) {
 
     this.heightInTextLines = lines;
     if (hasWidgetAdapter()) {
-      getWidgetAdapter().setHeightInTextLines(lines);
+      getWidgetAdapter().setHeightInRows(lines);
     }
   }
 

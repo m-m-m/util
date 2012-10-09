@@ -14,7 +14,12 @@ package net.sf.mmm.util.validation.api;
 public interface HasValueValidators<V> {
 
   /**
-   * This method adds the given {@link ValueValidator} to this object.
+   * This method adds the given {@link ValueValidator} to this object. All {@link ValueValidator}s are
+   * {@link ValueValidator#validate(Object) invoked} in the same order as they are added by this method. They
+   * are {@link ValueValidator#validate(Object) invoked} no matter if the previous {@link ValueValidator}s
+   * failed or succeeded. You should always design {@link ValueValidator}s in a robust and reusable way (e.g.
+   * a range validator should accept <code>null</code> as valid input so it can be used for both mandatory and
+   * optional fields).
    * 
    * @param validator is the {@link ValueValidator} to add.
    */
@@ -25,7 +30,7 @@ public interface HasValueValidators<V> {
    * 
    * @param validator is the {@link ValueValidator} to remove.
    * @return <code>true</code> if the {@link ValueValidator} has actually been removed, <code>false</code>
-   *         otherwise.
+   *         otherwise (it has NOT previously been {@link #addValidator(ValueValidator) added}).
    */
   boolean removeValidator(ValueValidator<? super V> validator);
 

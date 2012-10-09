@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.api.attribute;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 
 /**
- * This interface gives read and write access to the {@link #getTitle() title} of an object.
+ * This interface gives read access to the {@link #getTitle() title} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

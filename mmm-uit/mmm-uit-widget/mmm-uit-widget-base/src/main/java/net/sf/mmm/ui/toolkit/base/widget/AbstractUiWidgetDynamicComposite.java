@@ -68,7 +68,7 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
 
     CHILD child = this.children.remove(index);
     if (child != null) {
-      ((AbstractUiWidget<?>) child).removeFromParent();
+      removeFromParent(child);
       if (hasWidgetAdapter()) {
         getWidgetAdapter().removeChild(child, index);
       }
@@ -114,7 +114,7 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
       getWidgetAdapter().addChild(child, -1);
     }
     doAddChild(child, -1);
-    ((AbstractUiWidget<?>) child).setParent(this);
+    setParent(child, this);
   }
 
   /**
@@ -125,7 +125,7 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
 
     this.children.add(index, child);
     doAddChild(child, index);
-    ((AbstractUiWidget<?>) child).setParent(this);
+    setParent(child, this);
   }
 
   /**

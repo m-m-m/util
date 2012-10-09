@@ -279,7 +279,24 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object get(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context) {
+
+    CachingPojoPath path = getPath(pojo, pojoPath, mode, context);
+    return path.pojo;
+  }
+
+  /**
+   * This method contains the internal implementation of
+   * {@link #get(Object, String, PojoPathMode, PojoPathContext)}.
+   * 
+   * @param pojo is the initial {@link net.sf.mmm.util.pojo.api.Pojo} to operate on.
+   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} to navigate.
+   * @param mode is the {@link PojoPathMode mode} that determines how to deal with <code>null</code> values.
+   * @param context is the {@link PojoPathContext} for this operation.
+   * @return the {@link CachingPojoPath} for the given <code>pojoPath</code>.
+   */
+  private CachingPojoPath getPath(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context) {
 
     if (pojo == null) {
       if (mode == PojoPathMode.RETURN_IF_NULL) {
@@ -291,28 +308,18 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
       }
     }
     PojoPathState state = createState(pojo, pojoPath, mode, context);
-    CachingPojoPath path = getRecursive(pojoPath, context, state);
-    return path.pojo;
+    return getRecursive(pojoPath, context, state);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public <TYPE> TYPE get(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context,
       Class<TYPE> targetClass) {
 
-    if (pojo == null) {
-      if (mode == PojoPathMode.RETURN_IF_NULL) {
-        return null;
-      } else if (mode == PojoPathMode.RETURN_IF_NULL) {
-        throw new PojoPathCreationException(null, pojoPath);
-      } else {
-        throw new PojoPathSegmentIsNullException(null, pojoPath);
-      }
-    }
-    PojoPathState state = createState(pojo, pojoPath, mode, context);
-    CachingPojoPath path = getRecursive(pojoPath, context, state);
+    CachingPojoPath path = getPath(pojo, pojoPath, mode, context);
     return (TYPE) convert(path, context, path.pojo, targetClass, null);
   }
 
@@ -659,6 +666,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public GenericType<?> getType(Type pojoType, String pojoPath, boolean failOnUnsafePath, PojoPathContext context)
       throws PojoPathException, IllegalPojoPathException, PojoPathUnsafeException {
 
@@ -669,6 +677,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public GenericType<?> getType(GenericType<?> pojoType, String pojoPath, boolean failOnUnsafePath,
       PojoPathContext context) {
 
@@ -689,6 +698,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object set(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context, Object value) {
 
     if (pojo == null) {
@@ -961,6 +971,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public Map<String, Object> pojo2Map(Object pojo) {
 
     return new PojoPathMap(this, pojo);
@@ -969,6 +980,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * {@inheritDoc}
    */
+  @Override
   public Map<String, Object> pojo2Map(Object pojo, PojoPathContext context) {
 
     return new PojoPathMap(this, pojo, context);

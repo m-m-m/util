@@ -47,7 +47,7 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAre
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInTextLines() {
+  public int getHeightInRows() {
 
     return getWidget().getVisibleLines();
   }
@@ -56,9 +56,9 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAre
    * {@inheritDoc}
    */
   @Override
-  public void setHeightInTextLines(int lines) {
+  public void setHeightInRows(int rows) {
 
-    getWidget().setVisibleLines(lines);
+    getWidget().setVisibleLines(rows);
   }
 
 }

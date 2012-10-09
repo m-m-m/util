@@ -1458,4 +1458,10 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorObjectDisposed(@Named("object")
   Object object);
 
+  /**
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("Value has to be filled.")
+  NlsMessage failureMandatory();
+
 }
