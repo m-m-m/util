@@ -26,7 +26,10 @@ public interface HasValueValidators<V> {
   void addValidator(ValueValidator<? super V> validator);
 
   /**
-   * This method removes the given {@link ValueValidator} from this object.
+   * This method removes the given {@link ValueValidator} from this object.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Having dynamic validators is an exotic case that should be avoided. This feature is provided but not
+   * recommended.
    * 
    * @param validator is the {@link ValueValidator} to remove.
    * @return <code>true</code> if the {@link ValueValidator} has actually been removed, <code>false</code>

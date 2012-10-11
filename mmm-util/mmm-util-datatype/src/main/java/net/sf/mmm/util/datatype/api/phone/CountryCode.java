@@ -7,21 +7,18 @@ import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the
- * country code for a phone number. The country code is the prefix of the phone
- * number that identifies the country where the phone is located.<br/>
- * If formatted as string the country code is typically prefixed by "+". This
- * stands for the actual {@link InternationalCallPrefix}.<br/>
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the country code for a phone
+ * number. The country code is the prefix of the phone number that identifies the country where the phone is
+ * located.<br/>
+ * If formatted as string the country code is typically prefixed by "+". This stands for the actual
+ * {@link InternationalCallPrefix}.<br/>
  * <b>ATTENTION:</b><br/>
- * The international country codes are historically grown. Therefore it does not
- * actually perform its purpose to identify a country as some countries share
- * the same country code (e.g. USA, Canada, and Puerto Rico all have "1").
- * Further, the length of country codes is not normalized. The length varies
- * from 1 to 4 (excluding the {@link InternationalCallPrefix}). Additionally,
- * some country codes are prefixes of other country codes. Since the zero of the
- * area code is suppressed, the country code of a phone number given as string
- * can only be determined by knowledge of the area codes that has to be
- * up-to-date.
+ * The international country codes are historically grown. Therefore it does not actually perform its purpose
+ * to identify a country as some countries share the same country code (e.g. USA, Canada, and Puerto Rico all
+ * have "1"). Further, the length of country codes is not normalized. The length varies from 1 to 4 (excluding
+ * the {@link InternationalCallPrefix}). Additionally, some country codes are prefixes of other country codes.
+ * Since the zero of the area code is suppressed, the country code of a phone number given as string can only
+ * be determined by knowledge of the area codes that has to be up-to-date.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -35,6 +32,14 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
   private static final int MAX_VALUE = 9999;
 
   /**
+   * The constructor for de-serialization.
+   */
+  protected CountryCode() {
+
+    super();
+  }
+
+  /**
    * The constructor.
    * 
    * @param countryCode - see {@link #getCountryCode()}.
@@ -42,8 +47,8 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
   public CountryCode(int countryCode) {
 
     super(Integer.valueOf(countryCode));
-    ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0),
-        Integer.valueOf(MAX_VALUE), "country code");
+    ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0), Integer.valueOf(MAX_VALUE),
+        "country code");
   }
 
   /**
@@ -57,8 +62,8 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method parses a {@link CountryCode} given as {@link String} to its
-   * {@link #getCountryCode() int representation}.
+   * This method parses a {@link CountryCode} given as {@link String} to its {@link #getCountryCode() int
+   * representation}.
    * 
    * @param countryCode is the {@link CountryCode} as {@link String}.
    * @return the {@link CountryCode} as int.
@@ -85,8 +90,8 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the raw value (the actual country code). E.g.
-   * <code>49</code> for the country code of Germany.
+   * This method gets the raw value (the actual country code). E.g. <code>49</code> for the country code of
+   * Germany.
    * 
    * @return the country code.
    */

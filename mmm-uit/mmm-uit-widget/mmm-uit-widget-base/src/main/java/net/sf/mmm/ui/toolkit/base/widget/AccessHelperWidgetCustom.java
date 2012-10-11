@@ -2,8 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget;
 
+import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
-import net.sf.mmm.ui.toolkit.api.widget.custom.UiWidgetCustom;
+import net.sf.mmm.ui.toolkit.base.handler.event.ChangeEventSender;
+import net.sf.mmm.ui.toolkit.base.widget.custom.UiWidgetCustom;
 
 /**
  * This is an internal class to get access to the {@link #getDelegate() delegate} of a {@link UiWidgetCustom
@@ -48,9 +50,18 @@ final class AccessHelperWidgetCustom extends UiWidgetCustom<Void, UiWidgetReal> 
    * @param customWidget is the custom widget.
    * @return the {@link #getDelegate() delegate} of the given widget.
    */
-  static <DELEGATE extends UiWidgetReal> DELEGATE getDelegateStatic(UiWidgetCustom<?, DELEGATE> customWidget) {
+  static <DELEGATE extends UiWidget> DELEGATE getDelegateStatic(UiWidgetCustom<?, DELEGATE> customWidget) {
 
     return getDelegate(customWidget);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ChangeEventSender<Void> createChangeEventSender() {
+
+    return null;
   }
 
 }

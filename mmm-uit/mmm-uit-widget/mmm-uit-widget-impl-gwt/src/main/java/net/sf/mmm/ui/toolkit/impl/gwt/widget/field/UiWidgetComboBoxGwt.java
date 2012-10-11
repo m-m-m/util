@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetComboBox;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtListBoxCombo;
@@ -16,6 +16,12 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtLis
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
+// TODO: use alternate widget adapter using HTML5 (ideally use browser switch to choose)
+// <input list=languages>
+// <datalist id=languages>
+// <option value="English"></option>
+// <option value="Dutch"></option>
+// </datalist>
 public class UiWidgetComboBoxGwt<VALUE> extends
     AbstractUiWidgetOptionsField<UiWidgetAdapterGwtListBoxCombo<VALUE>, VALUE> implements UiWidgetComboBox<VALUE> {
 
@@ -39,10 +45,10 @@ public class UiWidgetComboBoxGwt<VALUE> extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetComboBox> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetComboBox> {
 
     /**
      * The constructor.

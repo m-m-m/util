@@ -9,13 +9,11 @@ import net.sf.mmm.util.lang.api.AbstractDatatype;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
- * This is the interface for a <em>phone number</em>. In this context phone
- * number means an international number that potentially connects to an
- * end-point via the phone network (PTSIN, VoIP, etc.) from anywhere in the
- * world. This means that some numbers accepted by your phone may NOT be valid
- * in the sense of this datatype (e.g. <code>"**6#1"</code>). On the other hand
- * a phone number that is syntactically correct but does not point to an
- * existing line, will still be accepted (e.g. "+49 69 987654321").<br/>
+ * This is the interface for a <em>phone number</em>. In this context phone number means an international
+ * number that potentially connects to an end-point via the phone network (PTSIN, VoIP, etc.) from anywhere in
+ * the world. This means that some numbers accepted by your phone may NOT be valid in the sense of this
+ * datatype (e.g. <code>"**6#1"</code>). On the other hand a phone number that is syntactically correct but
+ * does not point to an existing line, will still be accepted (e.g. "+49 69 987654321").<br/>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -30,23 +28,30 @@ public class PhoneNumber extends AbstractDatatype<String> {
       .compile("((([+]|00|011)([1-9][0-9]{1,3}))[/ -])?([(][01][)])?([0-9]{1,6})[/ -]([0-9/ -]{1,11})([-]([0-9]{1,8}))?");
 
   /** @see #PhoneNumber(String) */
-  private static final Pattern PATTERN_PHONENUMBER_FREEFORM = Pattern
-      .compile("[+]?[0-9*#~]+[0-9*#/ -]*[0-9*#]+");
+  private static final Pattern PATTERN_PHONENUMBER_FREEFORM = Pattern.compile("[+]?[0-9*#~]+[0-9*#/ -]*[0-9*#]+");
 
   /** @see #getCountryCode() */
-  private final CountryCode countryCode;
+  private CountryCode countryCode;
 
   /** @see #getAreaCode() */
-  private final AreaCode areaCode;
+  private AreaCode areaCode;
 
   /** @see #getLocalNumber() */
-  private final String localNumber;
+  private String localNumber;
 
   /** @see #getExtension() */
-  private final String extension;
+  private String extension;
 
   /** @see #getValue() */
-  private final String phoneNumber;
+  private String phoneNumber;
+
+  /**
+   * The constructor for de-serialization.
+   */
+  protected PhoneNumber() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -62,8 +67,8 @@ public class PhoneNumber extends AbstractDatatype<String> {
    * The constructor.
    * 
    * @param phoneNumber is the phone number as string {@link #getValue() value}.
-   * @param countryCode is the {@link #getCountryCode() country code} to use if
-   *        none is supplied by <code>phoneNumber</code>.
+   * @param countryCode is the {@link #getCountryCode() country code} to use if none is supplied by
+   *        <code>phoneNumber</code>.
    */
   public PhoneNumber(String phoneNumber, CountryCode countryCode) {
 
@@ -85,8 +90,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
       this.phoneNumber = formatPhoneNumber();
     } else {
       if (!PATTERN_PHONENUMBER_FREEFORM.matcher(phoneNumber).matches()) {
-        throw new NlsParseException(phoneNumber, PATTERN_PHONENUMBER_FREEFORM.pattern(),
-            PhoneNumber.class);
+        throw new NlsParseException(phoneNumber, PATTERN_PHONENUMBER_FREEFORM.pattern(), PhoneNumber.class);
       }
       this.phoneNumber = phoneNumber;
       this.countryCode = null;
@@ -104,8 +108,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
    * @param localNumber - see {@link #getLocalNumber()}.
    * @param extension - see {@link #getExtension()}.
    */
-  public PhoneNumber(CountryCode countryCode, AreaCode areaCode, String localNumber,
-      String extension) {
+  public PhoneNumber(CountryCode countryCode, AreaCode areaCode, String localNumber, String extension) {
 
     super();
     this.countryCode = countryCode;
@@ -146,9 +149,8 @@ public class PhoneNumber extends AbstractDatatype<String> {
   }
 
   /**
-   * This method gets the {@link AreaCode} of the {@link PhoneNumber}. Within
-   * the county (or set of countries) identified by the
-   * {@link #getCountryCode()}.
+   * This method gets the {@link AreaCode} of the {@link PhoneNumber}. Within the county (or set of countries)
+   * identified by the {@link #getCountryCode()}.
    * 
    * @return the {@link AreaCode}.
    */
@@ -158,8 +160,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
   }
 
   /**
-   * This method gets the local number (subscriber number) excluding the
-   * {@link #getExtension() extension}.
+   * This method gets the local number (subscriber number) excluding the {@link #getExtension() extension}.
    * 
    * @return the subscriber number.
    */
@@ -169,11 +170,10 @@ public class PhoneNumber extends AbstractDatatype<String> {
   }
 
   /**
-   * This method gets the extension (also called DDI - direct dial in). Phone
-   * customers that have multiple phone numbers typically have a common prefix
-   * for all their phone numbers and only the last digits differ. In this case
-   * these group of digits is called extension. Typically this is separated by a
-   * hyphen character ('-') when the phone number is formatted.
+   * This method gets the extension (also called DDI - direct dial in). Phone customers that have multiple
+   * phone numbers typically have a common prefix for all their phone numbers and only the last digits differ.
+   * In this case these group of digits is called extension. Typically this is separated by a hyphen character
+   * ('-') when the phone number is formatted.
    * 
    * @return the extension.
    */
@@ -187,6 +187,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
    * 
    * {@inheritDoc}
    */
+  @Override
   public String getValue() {
 
     return this.phoneNumber;

@@ -7,13 +7,14 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 /**
  * This is the abstract base implementation of the {@link UiSingleWidgetFactory} interface.
  * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to
  *        {@link #create(AbstractUiWidgetFactory) create}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
-public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidgetReal> implements
-    UiSingleWidgetFactory<WIDGET> {
+public abstract class AbstractUiSingleWidgetFactoryReal<WIDGET extends UiWidgetReal> implements
+    UiSingleWidgetFactoryReal<WIDGET> {
 
   /** @see #getWidgetInterface() */
   private final Class<WIDGET> widgetInterface;
@@ -23,7 +24,7 @@ public abstract class AbstractUiSingleWidgetFactory<WIDGET extends UiWidgetReal>
    * 
    * @param widgetInterface is the {@link #getWidgetInterface() widget interface}.
    */
-  public AbstractUiSingleWidgetFactory(Class<WIDGET> widgetInterface) {
+  public AbstractUiSingleWidgetFactoryReal(Class<WIDGET> widgetInterface) {
 
     super();
     this.widgetInterface = widgetInterface;

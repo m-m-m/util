@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.panel;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetRegular;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.panel.AbstractUiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtTabLayoutPanel;
@@ -52,9 +52,9 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetTabPanel> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetTabPanel> {
 
     /**
      * The constructor.

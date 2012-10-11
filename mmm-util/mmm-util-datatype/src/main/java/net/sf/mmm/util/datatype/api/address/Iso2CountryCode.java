@@ -9,8 +9,8 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
- * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a 2
- * letter code representing a country of the world according to ISO 3116.
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a 2 letter code representing a
+ * country of the world according to ISO 3116.
  * 
  * @see java.util.Locale#getCountry()
  * 
@@ -29,10 +29,17 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
   private String title;
 
   /**
+   * The constructor for de-serialization.
+   */
+  protected Iso2CountryCode() {
+
+    super();
+  }
+
+  /**
    * The constructor.
    * 
-   * @param value is the {@link #getValue() value} and has to consist of exactly
-   *        two Latin letters.
+   * @param value is the {@link #getValue() value} and has to consist of exactly two Latin letters.
    */
   public Iso2CountryCode(String value) {
 

@@ -122,13 +122,10 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
 
     UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
     UiWidgetDateField dateField = factory.create(UiWidgetDateField.class);
-    dateField.setValidationFailure("Test");
     verticalPanel3.addChild(dateField);
     UiWidgetTextField textBoxField = factory.create(UiWidgetTextField.class);
-    textBoxField.setValidationFailure("Test");
     verticalPanel3.addChild(textBoxField);
     UiWidgetRichTextArea richTextArea = factory.create(UiWidgetRichTextArea.class);
-    richTextArea.setValidationFailure("Test");
     verticalPanel3.addChild(richTextArea);
     mainWindow.addChild(verticalPanel3);
 

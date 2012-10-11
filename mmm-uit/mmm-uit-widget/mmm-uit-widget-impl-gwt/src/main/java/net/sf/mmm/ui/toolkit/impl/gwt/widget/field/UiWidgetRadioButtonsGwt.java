@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRadioButtons;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosHorizontal;
@@ -39,10 +39,10 @@ public class UiWidgetRadioButtonsGwt<VALUE> extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetRadioButtons> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetRadioButtons> {
 
     /**
      * The constructor.

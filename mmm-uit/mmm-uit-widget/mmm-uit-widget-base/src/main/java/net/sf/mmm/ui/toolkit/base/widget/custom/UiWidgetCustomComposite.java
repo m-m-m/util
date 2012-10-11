@@ -1,11 +1,10 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.api.widget.custom;
+package net.sf.mmm.ui.toolkit.base.widget.custom;
 
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is also a
@@ -19,19 +18,8 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DELEGATE extends UiWidgetComposite<CHILD> & UiWidgetReal>
+public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DELEGATE extends UiWidgetComposite<CHILD>>
     extends UiWidgetCustom<VALUE, DELEGATE> implements UiWidgetComposite<CHILD> {
-
-  /**
-   * The constructor.
-   * 
-   * @param factory is the {@link #getFactory() factory}.
-   * @param delegateWidgetInterface is the interface of the {@link #getDelegate() delegate}.
-   */
-  public UiWidgetCustomComposite(UiWidgetFactory<?> factory, Class<DELEGATE> delegateWidgetInterface) {
-
-    this(factory, factory.create(delegateWidgetInterface));
-  }
 
   /**
    * The constructor.

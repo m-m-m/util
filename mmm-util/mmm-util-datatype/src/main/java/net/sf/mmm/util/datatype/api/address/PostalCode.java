@@ -6,18 +6,15 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a
- * postal code (also called ZIP code). This is an identifier of a region, city,
- * or even a district within a country. Different countries have different
- * systems for their postal codes. Some are numeric some are alphanumeric. In
- * any case the postal codes aim to optimize the logistics of mail delivery and
- * typically allow sorting mail for different regions. In most cases the (major)
- * city can be determined from country and postal code.<br/>
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a postal code (also called ZIP
+ * code). This is an identifier of a region, city, or even a district within a country. Different countries
+ * have different systems for their postal codes. Some are numeric some are alphanumeric. In any case the
+ * postal codes aim to optimize the logistics of mail delivery and typically allow sorting mail for different
+ * regions. In most cases the (major) city can be determined from country and postal code.<br/>
  * <b>ATTENTION:</b><br/>
- * Please note that some countries (e.g. Panama) do not have the concept of
- * postal codes. Further, this datatype is just a container for the actual
- * postal code value. It does NOT perform true validation as this is specific
- * per country.
+ * Please note that some countries (e.g. Panama) do not have the concept of postal codes. Further, this
+ * datatype is just a container for the actual postal code value. It does NOT perform true validation as this
+ * is specific per country.
  * 
  * @see #getValue()
  * 
@@ -28,6 +25,14 @@ public class PostalCode extends AbstractSimpleDatatype<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -7499247409257142127L;
+
+  /**
+   * The constructor for de-serialization.
+   */
+  protected PostalCode() {
+
+    super();
+  }
 
   /**
    * The constructor.

@@ -2,22 +2,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.widget.field;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteModified;
+import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
+import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
 import net.sf.mmm.ui.toolkit.base.handler.event.ChangeEventSender;
 import net.sf.mmm.ui.toolkit.base.handler.event.FocusEventSender;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
+import net.sf.mmm.ui.toolkit.base.widget.UiAspectValue;
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField;
-import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
-import net.sf.mmm.util.validation.base.SimpleValidationFailure;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetField}.
@@ -29,19 +27,14 @@ import net.sf.mmm.util.validation.base.SimpleValidationFailure;
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getWidgetAdapter() adapter} value.
  */
 public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<?, VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
-    extends AbstractUiWidgetRegularAtomic<ADAPTER> implements UiWidgetField<VALUE>, AttributeWriteModified {
+    extends AbstractUiWidgetRegularAtomic<ADAPTER> implements UiWidgetField<VALUE>, AttributeWriteModified,
+    AttributeWriteValidationFailure {
 
-  /** @see #addChangeHandler(UiHandlerEventValueChange) */
-  private ChangeEventSender<VALUE> changeEventSender;
+  /** The instance of {@link ValueAspect} to avoid redundancy and due to lack of multi-inheritance. */
+  private final ValueAspect aspectValue;
 
   /** @see #addFocusHandler(UiHandlerEventFocus) */
   private FocusEventSender focusEventSender;
-
-  /** @see #getValue() */
-  private VALUE value;
-
-  /** @see #getOriginalValue() */
-  private VALUE originalValue;
 
   /** @see #isModified() */
   private boolean modified;
@@ -49,11 +42,11 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #getValidationFailure() */
   private String validationFailure;
 
-  /** @see #addValidator(ValueValidator) */
-  private final List<ValueValidator<? super VALUE>> validatorList;
-
   /** @see #getLabel() */
   private String label;
+
+  /** @see #getLabelWidget() */
+  private UiWidgetLabel labelWidget;
 
   /**
    * The constructor.
@@ -63,7 +56,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public AbstractUiWidgetField(AbstractUiWidgetFactory<?> factory) {
 
     super(factory);
-    this.validatorList = new LinkedList<ValueValidator<? super VALUE>>();
+    this.aspectValue = new ValueAspect();
   }
 
   /**
@@ -73,8 +66,12 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    if (this.changeEventSender != null) {
-      adapter.setChangeEventSender(this, this.changeEventSender);
+    ChangeEventSender<VALUE> changeEventSender = this.aspectValue.getSender();
+    if (changeEventSender != null) {
+      adapter.setChangeEventSender(this, changeEventSender);
+    }
+    if (this.aspectValue.value != null) {
+      adapter.setValue(convertFromValue(this.aspectValue.value));
     }
     if (this.focusEventSender != null) {
       adapter.setFocusEventSender(this, this.focusEventSender);
@@ -90,22 +87,24 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
 
-    if (this.changeEventSender == null) {
-      this.changeEventSender = new ChangeEventSender<VALUE>(this, getFactory());
-      if (hasWidgetAdapter()) {
-        getWidgetAdapter().setChangeEventSender(this, this.changeEventSender);
-      }
-    }
-    this.changeEventSender.addHandler(handler);
+    this.aspectValue.addChangeHandler(handler);
   }
 
   /**
-   * @return the {@link ChangeEventSender} or <code>null</code> if NOT yet created.
+   * @return the {@link ValueAspect}.
    */
-  protected final ChangeEventSender<VALUE> getChangeEventSender() {
+  protected ValueAspect getAspectValue() {
 
-    return this.changeEventSender;
+    return this.aspectValue;
   }
+
+  // /**
+  // * @return the {@link ChangeEventSender} or <code>null</code> if NOT yet created.
+  // */
+  // protected final ChangeEventSender<VALUE> getChangeEventSender() {
+  //
+  // return this.changeEventSender;
+  // }
 
   /**
    * {@inheritDoc}
@@ -113,10 +112,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
 
-    if (this.changeEventSender != null) {
-      return this.changeEventSender.removeHandler(handler);
-    }
-    return false;
+    return this.aspectValue.removeChangeHandler(handler);
   }
 
   /**
@@ -125,7 +121,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final void setValue(VALUE value) {
 
-    setValue(value, false);
+    this.aspectValue.setValue(value);
   }
 
   /**
@@ -134,35 +130,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public void setValueForUser(VALUE userValue) {
 
-    setValue(userValue, true);
-  }
-
-  /**
-   * Implementation of {@link #setValue(Object)} and {@link #setValueForUser(Object)}.
-   * 
-   * @param newValue is the new {@link #getValue() value}.
-   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
-   *        set from {@link #setValue(Object)}.
-   */
-  private void setValue(VALUE newValue, boolean forUser) {
-
-    this.value = newValue;
-    if (!forUser) {
-      this.originalValue = newValue;
-    }
-    if (hasWidgetAdapter()) {
-      ADAPTER_VALUE adapterValue;
-      if (newValue == null) {
-        adapterValue = getNullValue();
-      } else {
-        adapterValue = convertFromValue(newValue);
-      }
-      getWidgetAdapter().setValue(adapterValue);
-    }
-    setModified(forUser);
-    if (this.changeEventSender != null) {
-      this.changeEventSender.onValueChange(this, true);
-    }
+    this.aspectValue.setValueForUser(userValue);
   }
 
   /**
@@ -171,7 +139,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final void resetValue() {
 
-    setValue(this.originalValue);
+    this.aspectValue.resetValue();
   }
 
   /**
@@ -220,12 +188,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final VALUE getValue() {
 
-    try {
-      return getValueOrException();
-    } catch (RuntimeException e) {
-      // ATTENTION: This is one of the very rare cases where we intentionally ignore an exception.
-      return null;
-    }
+    return this.aspectValue.getValue();
   }
 
   /**
@@ -234,14 +197,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public VALUE getValueOrException() throws RuntimeException {
 
-    if (hasWidgetAdapter()) {
-      ADAPTER_VALUE adapterValue = getWidgetAdapter().getValue();
-      if (adapterValue == null) {
-        return null;
-      }
-      return convertToValue(adapterValue);
-    }
-    return this.value;
+    return this.aspectValue.getValueOrException();
   }
 
   /**
@@ -250,7 +206,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public final VALUE getOriginalValue() {
 
-    return this.originalValue;
+    return this.aspectValue.getOriginalValue();
   }
 
   /**
@@ -362,8 +318,34 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public void setLabel(String label) {
 
-    // TODO: pass to widget adapter
     this.label = label;
+    if (this.labelWidget != null) {
+      this.labelWidget.setLabel(label);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final UiWidgetLabel getLabelWidget() {
+
+    if (this.labelWidget == null) {
+      this.labelWidget = createLabelWidget();
+      if (this.label != null) {
+        this.labelWidget.setLabel(this.label);
+      }
+    }
+    return this.labelWidget;
+  }
+
+  /**
+   * @return the label widget.
+   */
+  private UiWidgetLabel createLabelWidget() {
+
+    // TODO: This actually needs to happen via the WidgetAdapter!
+    return getFactory().create(UiWidgetLabel.class);
   }
 
   /**
@@ -372,7 +354,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public void addValidator(ValueValidator<? super VALUE> validator) {
 
-    this.validatorList.add(validator);
+    this.aspectValue.addValidator(validator);
   }
 
   /**
@@ -381,7 +363,25 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public boolean removeValidator(ValueValidator<? super VALUE> validator) {
 
-    return this.validatorList.remove(validator);
+    return this.aspectValue.removeValidator(validator);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addValidatorMandatory() {
+
+    this.aspectValue.addValidatorMandatory();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMandatory() {
+
+    return this.aspectValue.isMandatory();
   }
 
   /**
@@ -391,45 +391,95 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   protected void validateLocal(ValidationState state) {
 
     super.validateLocal(state);
-    VALUE currentValue;
-    try {
-      currentValue = getValueOrException();
-      for (ValueValidator<? super VALUE> validator : this.validatorList) {
-        ValidationFailure failure = validator.validate(currentValue, getSource());
-        if (failure != null) {
-          state.onFailure(failure);
+    this.aspectValue.validate(state);
+  }
+
+  /**
+   * This inner class exists to avoid redundancy and due to lack of multi-inheritance.
+   */
+  private class ValueAspect extends UiAspectValue<VALUE> {
+
+    /** @see #getValue() */
+    private VALUE value;
+
+    /**
+     * The constructor.
+     */
+    public ValueAspect() {
+
+      super();
+    }
+
+    /**
+     * @return The value of {@link #getChangeEventSender()} so it can be accessed by outer class.
+     */
+    protected ChangeEventSender<VALUE> getSender() {
+
+      return getChangeEventSender();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected VALUE doGetValue() throws RuntimeException {
+
+      if (hasWidgetAdapter()) {
+        ADAPTER_VALUE adapterValue = getWidgetAdapter().getValue();
+        if (adapterValue == null) {
+          return null;
         }
+        return convertToValue(adapterValue);
       }
-    } catch (RuntimeException e) {
-      ValidationFailure failure = createValidationFailure(e);
-      if (failure != null) {
-        state.onFailure(failure);
+      return this.value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doSetValue(VALUE newValue) {
+
+      this.value = newValue;
+      if (hasWidgetAdapter()) {
+        ADAPTER_VALUE adapterValue;
+        if (newValue == null) {
+          adapterValue = getNullValue();
+        } else {
+          adapterValue = convertFromValue(newValue);
+        }
+        getWidgetAdapter().setValue(adapterValue);
       }
     }
-  }
 
-  /**
-   * This method converts an exception from {@link #getValueOrException()} to a {@link ValidationFailure}.
-   * 
-   * @param error is the exception.
-   * @return the {@link ValidationFailure}.
-   */
-  protected ValidationFailure createValidationFailure(Throwable error) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    return new SimpleValidationFailure(error.getClass().getSimpleName(), getSource(), error.getLocalizedMessage());
-  }
-
-  /**
-   * @return the source for validation failures.
-   */
-  private String getSource() {
-
-    String source = getLabel();
-    if (source == null) {
-      source = getId();
-      // may still be null, but then no reasonable source is available...
+      ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(AbstractUiWidgetField.this,
+          getFactory());
+      if (hasWidgetAdapter()) {
+        getWidgetAdapter().setChangeEventSender(AbstractUiWidgetField.this, changeEventSender);
+      }
+      return changeEventSender;
     }
-    return source;
+
+    /**
+     * @return the source for validation failures.
+     */
+    @Override
+    protected String getSource() {
+
+      String source = getLabel();
+      if (source == null) {
+        source = getId();
+        // may still be null, but then no reasonable source is available...
+      }
+      return source;
+    }
+
   }
 
 }

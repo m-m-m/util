@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.core;
 
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.core.AbstractUiWidgetButton;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtButton;
@@ -50,9 +50,9 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetButton> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetButton> {
 
     /**
      * The constructor.

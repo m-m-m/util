@@ -15,7 +15,15 @@ public abstract class AbstractSimpleDatatype<V> extends AbstractDatatype<V> {
   private static final long serialVersionUID = -7672725330000849564L;
 
   /** @see #getValue() */
-  private final V value;
+  private V value;
+
+  /**
+   * The constructor for de-serialization.
+   */
+  protected AbstractSimpleDatatype() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -31,6 +39,7 @@ public abstract class AbstractSimpleDatatype<V> extends AbstractDatatype<V> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public V getValue() {
 
     return this.value;

@@ -1,13 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.ui.toolkit.api.widget.custom;
+package net.sf.mmm.ui.toolkit.base.widget.custom;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteValueAdvanced;
 import net.sf.mmm.ui.toolkit.api.common.UiMode;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetWithValue;
+import net.sf.mmm.ui.toolkit.base.widget.UiAspectValue;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -24,20 +24,14 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  */
-public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidgetReal> implements UiWidgetWithValue<VALUE>,
-    AttributeWriteValueAdvanced<VALUE> {
+public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends UiAspectValue<VALUE> implements
+    UiWidgetWithValue<VALUE> {
 
   /** @see #getFactory() */
   private final UiWidgetFactory<?> factory;
 
   /** @see #getDelegate() */
   private final DELEGATE delegate;
-
-  /** @see #getOriginalValue() */
-  private VALUE originalValue;
-
-  /** @see #isModified() */
-  private boolean modified;
 
   /**
    * The constructor.
@@ -80,7 +74,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidgetReal> imple
    * @param customWidget is the widget for which the {@link #getDelegate() delegate} is requested.
    * @return the requested {@link #getDelegate() delegate}.
    */
-  protected static final <WIDGET extends UiWidgetReal> WIDGET getDelegate(UiWidgetCustom<?, WIDGET> customWidget) {
+  protected static final <WIDGET extends UiWidget> WIDGET getDelegate(UiWidgetCustom<?, WIDGET> customWidget) {
 
     return customWidget.getDelegate();
   }
@@ -89,124 +83,12 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidgetReal> imple
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValue() {
-
-    try {
-      return getValueOrException();
-    } catch (RuntimeException e) {
-      // ATTENTION: This is one of the very rare cases where we intentionally ignore an exception.
-      return null;
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setValue(VALUE value) {
-
-    setValue(value, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final VALUE getValueOrException() throws RuntimeException {
-
-    return doGetValue();
-  }
-
-  /**
-   * This method is called from {@link #getValueOrException()}. It has to be implemented with the custom logic
-   * to get the value from the view. The returned value needs to be created as new object rather than
-   * modifying the {@link #getOriginalValue() original value} that has been previously set. This is required
-   * to support operations such as {@link #resetValue()}. The implementation of this method has to correspond
-   * with the implementation of {@link #doSetValue(Object)}.
-   * 
-   * @see #doSetValue(Object)
-   * 
-   * @return a new value reflecting the current data as specified by the end-user.
-   * @throws RuntimeException if something goes wrong (e.g. validation failure).
-   */
-  protected abstract VALUE doGetValue() throws RuntimeException;
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final VALUE getOriginalValue() {
-
-    return this.originalValue;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setValueForUser(VALUE value) {
-
-    setValue(value, true);
-  }
-
-  /**
-   * Implementation of {@link #setValue(Object)} and {@link #setValueForUser(Object)}.
-   * 
-   * @param newValue is the new {@link #getValue() value}.
-   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
-   *        set from {@link #setValue(Object)}.
-   */
-  private void setValue(VALUE newValue, boolean forUser) {
-
-    setModified(forUser);
-    if (!forUser) {
-      this.originalValue = newValue;
-    }
-    doSetValue(newValue);
-    // if (this.changeEventSender != null) {
-    // this.changeEventSender.onValueChange(this, true);
-    // }
-  }
-
-  /**
-   * This method is called from {@link #setValue(Object)} and {@link #setValueForUser(Object)}. It has to be
-   * implemented with the custom logic to set the value in the view. The implementation of this method has to
-   * correspond with the implementation of {@link #doGetValue()}.
-   * 
-   * @see #doGetValue()
-   * 
-   * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
-   *        to {@link net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField atomic fields}.
-   */
-  protected abstract void doSetValue(VALUE value);
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void resetValue() {
-
-    setValue(this.originalValue);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public final boolean isModified() {
 
-    if (this.modified) {
+    if (super.isModified()) {
       return true;
     }
     return this.delegate.isModified();
-  }
-
-  /**
-   * @param modified <code>true</code> if this widget is modified (locally), <code>false</code> otherwise.
-   */
-  protected final void setModified(boolean modified) {
-
-    this.modified = modified;
   }
 
   // --- delegation methods ---
@@ -512,22 +394,19 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidgetReal> imple
    * {@inheritDoc}
    */
   @Override
-  public final boolean validate(ValidationState state) {
+  protected void doValidate(ValidationState state) {
 
+    super.doValidate(state);
     this.delegate.validate(state);
-    validateLocal(state);
-    return state.isValid();
   }
 
   /**
-   * This method performs the local validation of this widget excluding validation performed by the
-   * {@link #getDelegate()} and its children.
-   * 
-   * @param state is the {@link ValidationState}.
+   * {@inheritDoc}
    */
-  protected void validateLocal(ValidationState state) {
+  @Override
+  protected String getSource() {
 
-    // nothing to do...
+    return getId();
   }
 
 }

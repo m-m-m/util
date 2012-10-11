@@ -7,6 +7,7 @@ import java.util.Map;
 
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
+import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -15,7 +16,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory} using
  * {@link UiSingleWidgetFactory}. This is helpful for implementations that can NOT use reflection.
- * Implementations extending this {@link Class} need to {@link #register(UiSingleWidgetFactory) register}
+ * Implementations extending this {@link Class} need to {@link #register(UiSingleWidgetFactoryReal) register}
  * instances of {@link UiSingleWidgetFactory} for all supported types of {@link UiWidget}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -26,7 +27,10 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends AbstractUiWidgetFactory<NATIVE_WIDGET> {
 
   /** @see #create(Class) */
-  private final Map<Class<? extends UiWidget>, UiSingleWidgetFactory<? extends UiWidget>> interface2subFactoryMap;
+  private final Map<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>> interface2subFactoryMap;
+
+  /** @see #createForDatatype(Class) */
+  private final Map<Class<?>, UiSingleWidgetFactoryDatatype<?>> datatype2subFactoryMap;
 
   /**
    * The constructor.
@@ -34,18 +38,19 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
   public AbstractUiWidgetFactoryPlain() {
 
     super();
-    this.interface2subFactoryMap = new HashMap<Class<? extends UiWidget>, UiSingleWidgetFactory<? extends UiWidget>>();
+    this.interface2subFactoryMap = new HashMap<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>>();
+    this.datatype2subFactoryMap = new HashMap<Class<?>, UiSingleWidgetFactoryDatatype<?>>();
   }
 
   /**
-   * This method registers the given {@link UiSingleWidgetFactory} as sub-factory of this factory.
+   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-factory of this factory.
    * 
-   * @param subFactory is the {@link UiSingleWidgetFactory} to register.
+   * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
    */
-  protected void register(UiSingleWidgetFactory<? extends UiWidget> subFactory) {
+  protected void register(UiSingleWidgetFactoryReal<?> subFactory) {
 
-    UiSingleWidgetFactory<? extends UiWidget> oldFactory = this.interface2subFactoryMap.put(
-        subFactory.getWidgetInterface(), subFactory);
+    UiSingleWidgetFactoryReal<?> oldFactory = this.interface2subFactoryMap.put(subFactory.getWidgetInterface(),
+        subFactory);
     if (oldFactory != null) {
       throw new DuplicateObjectException(subFactory, subFactory.getWidgetInterface(), oldFactory);
     }
@@ -58,17 +63,47 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
   @Override
   public <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface) {
 
-    UiSingleWidgetFactory<? extends UiWidget> subFactory = this.interface2subFactoryMap.get(widgetInterface);
+    UiSingleWidgetFactoryReal<?> subFactory = this.interface2subFactoryMap.get(widgetInterface);
     if (subFactory == null) {
-      throw new ObjectNotFoundException(UiSingleWidgetFactory.class, widgetInterface);
+      throw new ObjectNotFoundException(UiSingleWidgetFactoryReal.class, widgetInterface);
     }
     UiWidget widget = subFactory.create(this);
     NlsNullPointerException.checkNotNull(UiWidget.class, widget);
     try {
+      // widgetInterface.cast is not GWT compatible
       return (WIDGET) widget;
     } catch (ClassCastException e) {
       throw new NlsClassCastException(widget, widgetInterface);
     }
+  }
+
+  /**
+   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-factory of this factory.
+   * 
+   * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
+   */
+  protected void register(UiSingleWidgetFactoryDatatype<?> subFactory) {
+
+    UiSingleWidgetFactoryDatatype<?> oldFactory = this.datatype2subFactoryMap.put(subFactory.getDatatype(), subFactory);
+    if (oldFactory != null) {
+      throw new DuplicateObjectException(subFactory, subFactory.getDatatype(), oldFactory);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <VALUE> UiWidgetField<VALUE> createForDatatype(Class<VALUE> datatype) {
+
+    UiSingleWidgetFactoryDatatype<VALUE> subFactory = (UiSingleWidgetFactoryDatatype<VALUE>) this.datatype2subFactoryMap
+        .get(datatype);
+    if (subFactory == null) {
+      throw new ObjectNotFoundException(UiSingleWidgetFactoryDatatype.class, datatype);
+    }
+    UiWidgetField<VALUE> widget = subFactory.create(this);
+    NlsNullPointerException.checkNotNull(UiWidget.class, widget);
+    return widget;
   }
 
 }

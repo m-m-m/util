@@ -5,7 +5,7 @@ package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 import java.util.Date;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField;
@@ -40,9 +40,9 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetTextualInputField<UiWi
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetDateField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetDateField> {
 
     /**
      * The constructor.

@@ -10,9 +10,4 @@
 
   <context:component-scan base-package="net.sf.mmm.service.impl.spring.server"/>
 
-  <bean name="RemoteInvocationServiceExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-    <property name="service" ref="RemoteInvocationGenericServiceImplSpring" />
-    <property name="serviceInterface" value="net.sf.mmm.service.base.RemoteInvocationGenericService"/>
-  </bean>
-
 </beans>

@@ -11,9 +11,11 @@ import java.io.Serializable;
  * instance with an inconsistent value. Based on the {@link Datatype} a presentation layer can decide how to
  * view and how to edit the value. Therefore a structured data model should make use of custom datatypes in
  * order to be expressive.<br/>
- * Common generic datatypes are {@link String}, {@link Boolean}, {@link Long}, {@link Integer}, {@link Double}
- * and {@link java.util.Date}. They should always be accepted and supported as datatypes (even though they do
- * NOT implement this interface).<br/>
+ * Common generic datatypes are {@link String}, {@link Boolean}, {@link Long}, {@link Integer},
+ * {@link java.math.BigDecimal}, {@link Double}, etc. They should always be accepted and supported as
+ * datatypes (even though they do NOT implement this interface).<br/>
+ * Please note that both {@link java.util.Date} and {@link java.util.Calendar} are mutable and have very
+ * confusing APIs. Therefore, use JSR-310 or jodatime instead. <br/>
  * Even if a datatype is technically nothing but a {@link String} or a {@link Number} but logically something
  * special it is worth to define it as a dedicated datatype class already for the purpose of having a central
  * javadoc to explain it. On the other side avoid to introduce technical datatypes like <code>String32</code>
@@ -24,13 +26,15 @@ import java.io.Serializable;
  * If a datatype is <em>mutable</em> this should be documented with an according reason (e.g. a Blob may allow
  * to append data as it would be inefficient to create a copy instead). In such case it is recommended to
  * declare a view interface that only declares methods to read (getters).<br/>
- * An immutable implementation of this interface should declare all its {@link java.lang.reflect.Field}s as
- * final and bind them at {@link java.lang.reflect.Constructor construction}. When ever possible it should
- * have a {@link java.lang.reflect.Constructor} that is compatible with {@link #getValue()}. It is suitable
- * and also recommended to use the class implementing the datatype as API omitting a dedicated interface if
- * possible. An {@link Enum} implementing this interface should also offer a static method called
- * <code>fromValue(V value)</code> that returns the appropriate {@link Enum} instance or <code>null</code> if
- * no such instance exists.
+ * An implementation of this interface should NOT declare its {@link java.lang.reflect.Field}s as final in
+ * order to be fully {@link java.io.Serializable}. Additionally, it should have a (protected) non-arg
+ * {@link java.lang.reflect.Constructor}.<br/>
+ * A regular implementation should be immutable and bind all fields at {@link java.lang.reflect.Constructor
+ * construction}. When ever possible it should have a {@link java.lang.reflect.Constructor} that is compatible
+ * with {@link #getValue()} . It is suitable and also recommended to use the class implementing the datatype
+ * as API omitting a dedicated interface if possible. An {@link Enum} implementing this interface should also
+ * offer a static method called <code>fromValue(V value)</code> that returns the appropriate {@link Enum}
+ * instance or <code>null</code> if no such instance exists.
  * 
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -67,6 +71,7 @@ public interface Datatype<V> extends Serializable {
    * 
    * @return the display title of this datatype.
    */
+  @Override
   String toString();
 
 }

@@ -13,22 +13,25 @@
  * There are various features and advantages of this layer:
  * <ul>
  *   <li><b>Unit-testing</b><br/>Using a test implementation of this layer, you can easily test your dialogs and client logic.</li>
- *   <li><b>Web and native client</b><br/>Same client-code can run with all supported native toolkits.</li>
+ *   <li><b>Web and native client</b><br/>Same client-code can run with all supported toolkits (GWT for web/RIA,
+ *   Swing for native client, potentially also SWT for native client).</li>
  *   <li><b>Faster development</b><br/>GWT (Google Web Toolkit) is a great technology but development cycles are extremely slow
  *   as starting your client takes very long. This layer allows to test parts of your dialogs e.g. in Swing in
  *   order to find initial bugs. After these have been fixed you can start testing with GWT in order to find web related
- *   problems. This approach can save a lot of time.</li>
+ *   problems. This approach can save a lot of time. There is also a generic client that allows to modify and dialogs
+ *   defined in XML on the server without recompiling the client.</li>
  *   <li><b>Clean API</b><br/>Simple, clear, well documented, and easy to use API. Native UI toolkits typically use
  *   java classes as API. Due to lack of multi-inheritance and due to implementation specific decisions the API often
  *   sucks. There are many inherited API methods in particular widgets that do NOT make sense there and will confuse
- *   the user. This API is entirely designed using interfaces. Every individual attribute or feature is defined by a
+ *   the user. This API is designed using interfaces. Every individual attribute or feature is defined by a
  *   central interface. This approach allows that each method is defined only in one place and documentation gets
  *   consistent and maintainable. Finally, we have analyzed various native UI toolkits with their API and internals.
  *   From this perspective and with the experience of building various large enterprise application clients this
  *   API has been designed. Please have a look.</li>
  *   <li><b>Consistent</b><br/>Hide strange and touchy behaviors of existing toolkits.</li>
  *   <li><b>Extensibility</b><br/>Even though we define widgets by interfaces and have support for multiple native UI
- *   toolkits, you can extend this code. Either with UI toolkit independent widgets by composing existing ones
+ *   toolkits, you can extend this code. Either with UI toolkit independent widgets by composing existing ones (see
+ *   <code>UiWidgetCustom</code> in uit-widget-base)
  *   or by replacing or adding widgets for native toolkit support. We hope that the latter case will never be necessary
  *   or that you join this project in this case.</li>
  *   <li><b>Higher Level</b><br/>While the adoption of native UI toolkits takes place on a quite low level, there
@@ -38,6 +41,11 @@
  *   order to build the widgets for your custom needs (e.g. the <code>UiWidgetMyCustomerNumberField</code> or the
  *   <code>UiWidgetMyCustomerForm</code>). You are free to pick and choose: If you only want to use the lower level
  *   abstraction you can still ignore the higher level stuff.</li>
+ *   <li><b>Usability</b><br/>By providing established UI patterns this framework supports you in creating a UI with
+ *   high usability.
+ *   <li><b>Accessibility</b><br/>Accessibility is an important but also complex topic. This layer support standards such
+ *   as {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteAriaRole#setAriaRole(String) WAI-ARIA} as well as keyboard
+ *   control and other features to increase accessibility.
  * </ul>
  * <h3>Limitations</h3>
  * Please also note the following limitations before you make your choice:

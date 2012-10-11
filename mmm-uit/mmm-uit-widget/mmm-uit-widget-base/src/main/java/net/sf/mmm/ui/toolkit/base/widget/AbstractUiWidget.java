@@ -5,9 +5,8 @@ package net.sf.mmm.ui.toolkit.base.widget;
 import net.sf.mmm.ui.toolkit.api.common.UiMode;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
-import net.sf.mmm.ui.toolkit.api.widget.custom.UiWidgetCustom;
 import net.sf.mmm.ui.toolkit.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.ui.toolkit.base.widget.custom.UiWidgetCustom;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectDisposedException;
@@ -181,7 +180,7 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
     AbstractUiWidget<?> abstractWidget;
     if (widget instanceof UiWidgetCustom) {
       UiWidgetCustom<?, ?> customWidget = (UiWidgetCustom<?, ?>) widget;
-      UiWidgetReal delegate = AccessHelperWidgetCustom.getDelegateStatic(customWidget);
+      UiWidget delegate = AccessHelperWidgetCustom.getDelegateStatic(customWidget);
       return asAbstractWidget(delegate);
     } else {
       try {

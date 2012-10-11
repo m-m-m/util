@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.field;
 
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextArea;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.field.AbstractUiWidgetTextArea;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextArea;
@@ -37,9 +37,9 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetTextArea> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetTextArea> {
 
     /**
      * The constructor.

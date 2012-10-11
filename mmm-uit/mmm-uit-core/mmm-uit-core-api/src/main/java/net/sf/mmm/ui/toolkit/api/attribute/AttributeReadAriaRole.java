@@ -432,7 +432,9 @@ public abstract interface AttributeReadAriaRole {
    * note that <code>ARIA_ABSTRACT_ROLE_*</code> constants are just for documentation purpose and should never
    * be assigned as actual role.
    * 
-   * @return the alternative text or <code>null</code> if NOT set.
+   * @see AttributeReadAltText#getAltText()
+   * 
+   * @return the aria role or <code>null</code> if NOT set.
    */
   String getAriaRole();
 

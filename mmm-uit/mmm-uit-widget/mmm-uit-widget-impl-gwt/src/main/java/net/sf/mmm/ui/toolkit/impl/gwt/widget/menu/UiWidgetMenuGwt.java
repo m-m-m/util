@@ -3,7 +3,7 @@
 package net.sf.mmm.ui.toolkit.impl.gwt.widget.menu;
 
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactory;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.menu.AbstractUiWidgetMenu;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenu;
@@ -36,9 +36,9 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactory factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactory<UiWidgetMenu> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetMenu> {
 
     /**
      * The constructor.

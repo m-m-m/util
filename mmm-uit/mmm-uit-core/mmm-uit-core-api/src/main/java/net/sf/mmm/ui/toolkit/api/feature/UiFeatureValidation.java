@@ -13,6 +13,18 @@ import net.sf.mmm.util.validation.api.ValidatableObject;
  */
 public interface UiFeatureValidation<VALUE> extends ValidatableObject<VALUE> {
 
-  // nothing to add...
+  /**
+   * This is a convenience method for adding the most common validator
+   * {@link net.sf.mmm.util.validation.base.ValidatorMandatory}.
+   */
+  void addValidatorMandatory();
+
+  /**
+   * This method determines if {@link net.sf.mmm.util.validation.base.ValidatorMandatory} (or a sub-class) has
+   * been {@link #addValidator(net.sf.mmm.util.validation.api.ValueValidator) added} to this object.
+   * 
+   * @return <code>true</code> if this the {@link #getValue() value} of this object is mandatory.
+   */
+  boolean isMandatory();
 
 }
