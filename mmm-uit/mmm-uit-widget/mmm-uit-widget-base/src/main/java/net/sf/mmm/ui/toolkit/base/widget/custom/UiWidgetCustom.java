@@ -7,6 +7,7 @@ import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetComposite;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetWithValue;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.ui.toolkit.base.widget.UiAspectValue;
 import net.sf.mmm.util.validation.api.ValidationState;
 
@@ -28,7 +29,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends U
     UiWidgetWithValue<VALUE> {
 
   /** @see #getFactory() */
-  private final UiWidgetFactory<?> factory;
+  private final AbstractUiWidgetFactory<?> factory;
 
   /** @see #getDelegate() */
   private final DELEGATE delegate;
@@ -42,7 +43,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends U
   public UiWidgetCustom(UiWidgetFactory<?> factory, DELEGATE delegate) {
 
     super();
-    this.factory = factory;
+    this.factory = (AbstractUiWidgetFactory<?>) factory;
     this.delegate = delegate;
   }
 
@@ -50,7 +51,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends U
    * {@inheritDoc}
    */
   @Override
-  public final UiWidgetFactory<?> getFactory() {
+  public final AbstractUiWidgetFactory<?> getFactory() {
 
     return this.factory;
   }

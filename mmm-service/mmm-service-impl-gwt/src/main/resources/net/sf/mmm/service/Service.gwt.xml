@@ -5,6 +5,6 @@
   <source path="base" excludes="**/server/**"/>
   <source path="impl" excludes="**/server/**"/>
   <generate-with class="net.sf.mmm.service.impl.gwt.client.RemoteInvocationServiceCallerGenerator">
-    <when-type-assignable class="net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCaller"/>
+    <when-type-assignable class="net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt"/>
   </generate-with>
 </module>

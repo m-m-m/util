@@ -46,7 +46,7 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
    * {@inheritDoc}
    */
   @Override
-  public final int getChildIndex(CHILD childWidget) {
+  public final int getChildIndex(UiWidget childWidget) {
 
     if ((childWidget == this.child) && (childWidget != null)) {
       return 0;

@@ -80,7 +80,7 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public final int getChildIndex(CHILD child) {
+  public final int getChildIndex(UiWidget child) {
 
     return this.children.indexOf(child);
   }

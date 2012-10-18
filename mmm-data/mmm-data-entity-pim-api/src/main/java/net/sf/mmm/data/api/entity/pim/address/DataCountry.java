@@ -5,7 +5,7 @@ package net.sf.mmm.data.api.entity.pim.address;
 import net.sf.mmm.data.api.DataSelectionList;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.util.datatype.api.address.Iso2CountryCode;
-import net.sf.mmm.util.datatype.api.phone.CountryCode;
+import net.sf.mmm.util.datatype.api.phone.PhoneCountryCode;
 import net.sf.mmm.util.datatype.api.phone.InternationalCallPrefix;
 
 /**
@@ -27,9 +27,9 @@ public interface DataCountry extends DataCountryView, DataSelectionList {
   /**
    * This method sets the {@link #getCountryCode() country code}.
    * 
-   * @param countryCode is the {@link CountryCode} to set.
+   * @param countryCode is the {@link PhoneCountryCode} to set.
    */
-  void setCountryCode(CountryCode countryCode);
+  void setCountryCode(PhoneCountryCode countryCode);
 
   /**
    * This method sets the {@link #getIsoCode() ISO code}.

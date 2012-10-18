@@ -87,6 +87,7 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
   @Override
   final void validateRecursive(ValidationState state) {
 
+    super.validateRecursive(state);
     int size = getChildCount();
     for (int i = 0; i < size; i++) {
       CHILD child = getChild(i);

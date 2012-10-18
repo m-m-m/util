@@ -28,6 +28,6 @@ public interface UiSingleWidgetFactoryDatatype<VALUE> extends UiSingleWidgetFact
    * @see net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#createForDatatype(Class)
    */
   @Override
-  public UiWidgetField<VALUE> create(AbstractUiWidgetFactory<?> factory);
+  UiWidgetField<VALUE> create(AbstractUiWidgetFactory<?> factory);
 
 }

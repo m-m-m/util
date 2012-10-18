@@ -8,6 +8,7 @@ import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterMainWindow} using GWT based on {@link RootLayoutPanel}
@@ -16,8 +17,8 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<RootLayoutPanel> implements
-    UiWidgetAdapterMainWindow<RootLayoutPanel> {
+public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<RootPanel> implements
+    UiWidgetAdapterMainWindow<RootPanel> {
 
   /**
    * The constructor.
@@ -158,9 +159,9 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
    * {@inheritDoc}
    */
   @Override
-  protected RootLayoutPanel createWidget() {
+  protected RootPanel createWidget() {
 
-    RootLayoutPanel rootLayoutPanel = RootLayoutPanel.get();
+    RootPanel rootLayoutPanel = RootPanel.get();
     return rootLayoutPanel;
   }
 

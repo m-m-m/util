@@ -10,7 +10,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
 /**
  * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the international call prefix
  * (also called exit code or IDD code) for a phone number. It is the sequence that has to be dialed before the
- * {@link CountryCode} to make an international call. The {@link InternationalCallPrefix} is specific for the
+ * {@link PhoneCountryCode} to make an international call. The {@link InternationalCallPrefix} is specific for the
  * county the caller is dialing from. Therefore it is typically indicated by the plus sign (+) in
  * internationalized phone numbers. The {@link InternationalCallPrefix} is typically "00" as suggested by the
  * international telecommunications union (ITU). However, some countries have other codes like "011" (NANPA).

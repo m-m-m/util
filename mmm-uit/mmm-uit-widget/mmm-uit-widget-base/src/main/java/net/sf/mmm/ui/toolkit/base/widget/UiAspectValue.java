@@ -187,14 +187,19 @@ public abstract class UiAspectValue<VALUE> implements UiFeatureValue<VALUE>, UiF
   @Override
   public final void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
 
+    requireChangeEventSender().addHandler(handler);
+  }
+
+  /**
+   * @return the {@link ChangeEventSender}. Will be {@link #createChangeEventSender() created} on the first
+   *         call.
+   */
+  protected final ChangeEventSender<VALUE> requireChangeEventSender() {
+
     if (this.changeEventSender == null) {
       this.changeEventSender = createChangeEventSender();
-      // new ChangeEventSender<VALUE>(this, getFactory());
-      // if (hasWidgetAdapter()) {
-      // getWidgetAdapter().setChangeEventSender(this, this.changeEventSender);
-      // }
     }
-    this.changeEventSender.addHandler(handler);
+    return this.changeEventSender;
   }
 
   /**

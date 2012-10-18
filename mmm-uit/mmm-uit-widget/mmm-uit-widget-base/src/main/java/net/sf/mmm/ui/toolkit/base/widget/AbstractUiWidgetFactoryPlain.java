@@ -5,7 +5,10 @@ package net.sf.mmm.ui.toolkit.base.widget;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactoryDatatype;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetReal;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
@@ -29,8 +32,8 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
   /** @see #create(Class) */
   private final Map<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>> interface2subFactoryMap;
 
-  /** @see #createForDatatype(Class) */
-  private final Map<Class<?>, UiSingleWidgetFactoryDatatype<?>> datatype2subFactoryMap;
+  /** @see #getWidgetFactoryDatatpye() */
+  private UiWidgetFactoryDatatype widgetFactoryDatatpye;
 
   /**
    * The constructor.
@@ -39,7 +42,18 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
 
     super();
     this.interface2subFactoryMap = new HashMap<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>>();
-    this.datatype2subFactoryMap = new HashMap<Class<?>, UiSingleWidgetFactoryDatatype<?>>();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.widgetFactoryDatatpye == null) {
+      this.widgetFactoryDatatpye = new UiWidgetFactoryDatatypeSimple();
+    }
   }
 
   /**
@@ -78,32 +92,32 @@ public abstract class AbstractUiWidgetFactoryPlain<NATIVE_WIDGET> extends Abstra
   }
 
   /**
-   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-factory of this factory.
-   * 
-   * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
-   */
-  protected void register(UiSingleWidgetFactoryDatatype<?> subFactory) {
-
-    UiSingleWidgetFactoryDatatype<?> oldFactory = this.datatype2subFactoryMap.put(subFactory.getDatatype(), subFactory);
-    if (oldFactory != null) {
-      throw new DuplicateObjectException(subFactory, subFactory.getDatatype(), oldFactory);
-    }
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
   public <VALUE> UiWidgetField<VALUE> createForDatatype(Class<VALUE> datatype) {
 
-    UiSingleWidgetFactoryDatatype<VALUE> subFactory = (UiSingleWidgetFactoryDatatype<VALUE>) this.datatype2subFactoryMap
-        .get(datatype);
-    if (subFactory == null) {
-      throw new ObjectNotFoundException(UiSingleWidgetFactoryDatatype.class, datatype);
+    return this.widgetFactoryDatatpye.createForDatatype(datatype);
+  }
+
+  /**
+   * @return the instance of {@link UiWidgetFactoryDatatype}.
+   */
+  protected UiWidgetFactoryDatatype getWidgetFactoryDatatpye() {
+
+    return this.widgetFactoryDatatpye;
+  }
+
+  /**
+   * @param widgetFactoryDatatpye is the {@link UiWidgetFactoryDatatype} to inject.
+   */
+  @Inject
+  public void setWidgetFactoryDatatpye(UiWidgetFactoryDatatype widgetFactoryDatatpye) {
+
+    if (widgetFactoryDatatpye instanceof AbstractUiWidgetFactoryDatatype) {
+      ((AbstractUiWidgetFactoryDatatype) widgetFactoryDatatpye).setFactory(this);
     }
-    UiWidgetField<VALUE> widget = subFactory.create(this);
-    NlsNullPointerException.checkNotNull(UiWidget.class, widget);
-    return widget;
+    this.widgetFactoryDatatpye = widgetFactoryDatatpye;
   }
 
 }

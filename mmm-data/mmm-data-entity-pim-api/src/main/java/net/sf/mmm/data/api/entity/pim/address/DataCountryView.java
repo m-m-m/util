@@ -8,7 +8,7 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassCachingStrategy;
 import net.sf.mmm.data.api.reflection.DataClassIds;
 import net.sf.mmm.util.datatype.api.address.Iso2CountryCode;
-import net.sf.mmm.util.datatype.api.phone.CountryCode;
+import net.sf.mmm.util.datatype.api.phone.PhoneCountryCode;
 import net.sf.mmm.util.datatype.api.phone.InternationalCallPrefix;
 import net.sf.mmm.util.lang.api.BooleanEnum;
 
@@ -61,9 +61,9 @@ public interface DataCountryView extends DataEntityView, DataSelectionListView {
    * This method gets the phone code of this country (e.g. "49" for Germany, "1"
    * for USA, etc.).
    * 
-   * @return the {@link CountryCode}.
+   * @return the {@link PhoneCountryCode}.
    */
-  CountryCode getCountryCode();
+  PhoneCountryCode getCountryCode();
 
   /**
    * This method gets the 2-letter code of the country according to ISO 639.

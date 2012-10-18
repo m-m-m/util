@@ -10,7 +10,7 @@ import net.sf.mmm.data.api.entity.pim.address.DataCountry;
 import net.sf.mmm.data.api.entity.pim.address.DataCountryView;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.util.datatype.api.address.Iso2CountryCode;
-import net.sf.mmm.util.datatype.api.phone.CountryCode;
+import net.sf.mmm.util.datatype.api.phone.PhoneCountryCode;
 import net.sf.mmm.util.datatype.api.phone.InternationalCallPrefix;
 
 import org.hibernate.annotations.Type;
@@ -31,7 +31,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   private InternationalCallPrefix callPrefix;
 
   /** @see #getCountryCode() */
-  private CountryCode countryCode;
+  private PhoneCountryCode countryCode;
 
   /** @see #getIsoCode() */
   private Iso2CountryCode isoCode;
@@ -60,7 +60,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
    */
   @Type(type = "")
   @Column(unique = true)
-  public CountryCode getCountryCode() {
+  public PhoneCountryCode getCountryCode() {
 
     return this.countryCode;
   }
@@ -100,7 +100,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
-  public void setCountryCode(CountryCode countryCode) {
+  public void setCountryCode(PhoneCountryCode countryCode) {
 
     this.countryCode = countryCode;
   }

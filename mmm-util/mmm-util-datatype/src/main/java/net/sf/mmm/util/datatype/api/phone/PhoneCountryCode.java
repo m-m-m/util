@@ -23,7 +23,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class CountryCode extends AbstractSimpleDatatype<Integer> {
+public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 6052425985912842711L;
@@ -34,7 +34,7 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
   /**
    * The constructor for de-serialization.
    */
-  protected CountryCode() {
+  protected PhoneCountryCode() {
 
     super();
   }
@@ -44,7 +44,7 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
    * 
    * @param countryCode - see {@link #getCountryCode()}.
    */
-  public CountryCode(int countryCode) {
+  public PhoneCountryCode(int countryCode) {
 
     super(Integer.valueOf(countryCode));
     ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0), Integer.valueOf(MAX_VALUE),
@@ -56,17 +56,17 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
    * 
    * @param countryCode - see {@link #getTitle()}.
    */
-  public CountryCode(String countryCode) {
+  public PhoneCountryCode(String countryCode) {
 
     this(parseCountryCode(countryCode));
   }
 
   /**
-   * This method parses a {@link CountryCode} given as {@link String} to its {@link #getCountryCode() int
+   * This method parses a {@link PhoneCountryCode} given as {@link String} to its {@link #getCountryCode() int
    * representation}.
    * 
-   * @param countryCode is the {@link CountryCode} as {@link String}.
-   * @return the {@link CountryCode} as int.
+   * @param countryCode is the {@link PhoneCountryCode} as {@link String}.
+   * @return the {@link PhoneCountryCode} as int.
    */
   private static int parseCountryCode(String countryCode) {
 
@@ -79,13 +79,13 @@ public final class CountryCode extends AbstractSimpleDatatype<Integer> {
       normalized = normalized.substring(3);
     }
     if (normalized.startsWith("0")) {
-      throw new NlsParseException(countryCode, CountryCode.class);
+      throw new NlsParseException(countryCode, PhoneCountryCode.class);
     }
     try {
       int cc = Integer.parseInt(normalized);
       return cc;
     } catch (NumberFormatException e) {
-      throw new NlsParseException(e, countryCode, CountryCode.class);
+      throw new NlsParseException(e, countryCode, PhoneCountryCode.class);
     }
   }
 

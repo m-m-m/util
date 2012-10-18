@@ -9,10 +9,10 @@ import net.sf.mmm.ui.toolkit.base.widget.core.adapter.UiWidgetAdapterTab;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetImageGwt;
 
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterTab} using GWT based on {@link HorizontalPanel}.
@@ -27,7 +27,7 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
   private Label label;
 
   /** @see #getContentPanel() */
-  private HTMLPanel contentPanel;
+  private VerticalPanel contentPanel;
 
   /** @see #setImage(UiWidgetImage) */
   private Image image;
@@ -60,7 +60,8 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
     horizontalPanel.setStyleName("gwt-TabLayoutPanelTab");
     this.label = new Label();
     horizontalPanel.add(this.label);
-    this.contentPanel = new HTMLPanel("");
+    this.contentPanel = new VerticalPanel();
+    this.contentPanel.setWidth("100%");
     this.contentPanel.setHeight("100%");
     return horizontalPanel;
   }
@@ -77,7 +78,7 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
   /**
    * @return the contentPanel where the {@link #setChild(UiWidgetRegular) child} is attached.
    */
-  public HTMLPanel getContentPanel() {
+  public VerticalPanel getContentPanel() {
 
     return this.contentPanel;
   }

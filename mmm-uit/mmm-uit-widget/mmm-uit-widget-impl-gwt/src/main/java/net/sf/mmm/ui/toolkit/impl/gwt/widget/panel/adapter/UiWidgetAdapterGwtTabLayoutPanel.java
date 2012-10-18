@@ -9,18 +9,18 @@ import net.sf.mmm.ui.toolkit.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicCo
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.UiWidgetTabGwt;
 import net.sf.mmm.ui.toolkit.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtTab;
 
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
+import com.google.gwt.user.client.ui.TabPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.panel.adapter.UiWidgetAdapterPanel} using
- * GWT based on {@link TabLayoutPanel}.
+ * This is the implementation of {@link net.sf.mmm.ui.toolkit.base.widget.panel.adapter.UiWidgetAdapterPanel}
+ * using GWT based on {@link TabLayoutPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicComposite<TabLayoutPanel, UiWidgetTab>
-    implements UiWidgetAdapterTabPanel<TabLayoutPanel> {
+public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicComposite<TabPanel, UiWidgetTab>
+    implements UiWidgetAdapterTabPanel<TabPanel> {
 
   /**
    * The constructor.
@@ -34,9 +34,9 @@ public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicC
    * {@inheritDoc}
    */
   @Override
-  protected TabLayoutPanel createWidget() {
+  protected TabPanel createWidget() {
 
-    TabLayoutPanel tabLayoutPanel = new TabLayoutPanel(1.5, Unit.EM);
+    TabPanel tabLayoutPanel = new TabPanel(); // new TabLayoutPanel(1.5, Unit.EM);
     // tabLayoutPanel.setWidth("100%");
     return tabLayoutPanel;
   }

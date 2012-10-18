@@ -36,7 +36,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * {@inheritDoc}
    */
   @Override
-  public int getChildIndex(CHILD child) {
+  public int getChildIndex(UiWidget child) {
 
     return getDelegate().getChildIndex(child);
   }

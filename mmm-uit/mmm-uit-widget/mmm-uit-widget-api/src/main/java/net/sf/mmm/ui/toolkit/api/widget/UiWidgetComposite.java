@@ -13,7 +13,9 @@ public abstract interface UiWidgetComposite<CHILD extends UiWidget> extends UiWi
 
   /**
    * This method determines the index of the given <code>child</code> in the list of {@link #getChild(int)
-   * children} of this composite.
+   * children} of this composite.<br/>
+   * The signature is by intention not using the generic to support delegation without suffering by the java
+   * compiler.
    * 
    * @see java.util.List#indexOf(Object)
    * 
@@ -21,7 +23,7 @@ public abstract interface UiWidgetComposite<CHILD extends UiWidget> extends UiWi
    * @return the {@link #getChild(int) index} of the given <code>child</code> or <code>-1</code> if it is NOT
    *         a {@link #getChild(int) child} of this composite.
    */
-  int getChildIndex(CHILD child);
+  int getChildIndex(UiWidget child);
 
   /**
    * This method gets the child at the given index.
@@ -31,8 +33,9 @@ public abstract interface UiWidgetComposite<CHILD extends UiWidget> extends UiWi
    * @param index is the index of the requested child. Has to be in the range from <code>0</code> to
    *        <code>{@link #getChildCount()} - 1</code>.
    * @return the requested child.
+   * @throws IndexOutOfBoundsException if the given <code>index</code> is out of bounds.
    */
-  CHILD getChild(int index);
+  CHILD getChild(int index) throws IndexOutOfBoundsException;
 
   /**
    * This method gets the child with the given <code>id</code>.

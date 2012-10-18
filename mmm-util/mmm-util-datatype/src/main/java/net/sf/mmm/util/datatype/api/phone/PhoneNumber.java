@@ -31,7 +31,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
   private static final Pattern PATTERN_PHONENUMBER_FREEFORM = Pattern.compile("[+]?[0-9*#~]+[0-9*#/ -]*[0-9*#]+");
 
   /** @see #getCountryCode() */
-  private CountryCode countryCode;
+  private PhoneCountryCode countryCode;
 
   /** @see #getAreaCode() */
   private AreaCode areaCode;
@@ -70,7 +70,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
    * @param countryCode is the {@link #getCountryCode() country code} to use if none is supplied by
    *        <code>phoneNumber</code>.
    */
-  public PhoneNumber(String phoneNumber, CountryCode countryCode) {
+  public PhoneNumber(String phoneNumber, PhoneCountryCode countryCode) {
 
     super();
     Matcher matcher = PATTERN_PHONENUMBER.matcher(phoneNumber);
@@ -82,7 +82,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
         }
         this.countryCode = countryCode;
       } else {
-        this.countryCode = new CountryCode(countryCodeString);
+        this.countryCode = new PhoneCountryCode(countryCodeString);
       }
       this.areaCode = new AreaCode(matcher.group(6));
       this.localNumber = matcher.group(7);
@@ -108,7 +108,7 @@ public class PhoneNumber extends AbstractDatatype<String> {
    * @param localNumber - see {@link #getLocalNumber()}.
    * @param extension - see {@link #getExtension()}.
    */
-  public PhoneNumber(CountryCode countryCode, AreaCode areaCode, String localNumber, String extension) {
+  public PhoneNumber(PhoneCountryCode countryCode, AreaCode areaCode, String localNumber, String extension) {
 
     super();
     this.countryCode = countryCode;
@@ -139,11 +139,11 @@ public class PhoneNumber extends AbstractDatatype<String> {
   }
 
   /**
-   * This method gets the {@link CountryCode} of the {@link PhoneNumber}.
+   * This method gets the {@link PhoneCountryCode} of the {@link PhoneNumber}.
    * 
-   * @return the {@link CountryCode}.
+   * @return the {@link PhoneCountryCode}.
    */
-  public CountryCode getCountryCode() {
+  public PhoneCountryCode getCountryCode() {
 
     return this.countryCode;
   }

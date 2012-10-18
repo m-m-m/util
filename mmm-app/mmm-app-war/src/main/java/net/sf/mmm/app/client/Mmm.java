@@ -2,13 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
-import java.util.concurrent.Callable;
-
 import net.sf.mmm.app.shared.GreetingService;
-import net.sf.mmm.client.base.gwt.AbstractEntryPoint;
-import net.sf.mmm.client.impl.gwt.gin.ClientGinjector;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
+import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
 import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
@@ -22,6 +19,7 @@ import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItemClickable;
+import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
@@ -30,27 +28,25 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.media.client.Audio;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Mmm extends AbstractEntryPoint<ClientGinjector> {
+public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinjector> {
 
   /**
    * The message displayed to the user when the server cannot be reached or returns an error.
@@ -66,24 +62,27 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     super();
   }
 
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // protected ClientGinjector createGinjector() {
+  //
+  // return GWT.create(ClientGinjector.class);
+  // }
+
   /**
    * {@inheritDoc}
    */
   @Override
-  protected ClientGinjector createGinjector() {
+  public void onModuleLoad() {
 
-    return GWT.create(ClientGinjector.class);
-  }
-
-  /**
-   * This is the entry point method.
-   */
-  @Override
-  public void onModuleLoadDeferred() {
-
+    // public void onModuleLoadDeferred() {
+    // super.onModuleLoadDeferred();
     Log.debug("Loaded");
-    super.onModuleLoadDeferred();
-    UiWidgetFactory<Widget> factory = new UiWidgetFactoryGwt();
+    UiWidgetFactoryGwt factoryGwt = new UiWidgetFactoryGwt();
+    factoryGwt.initialize();
+    UiWidgetFactory<Widget> factory = factoryGwt;
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();
@@ -127,59 +126,60 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     verticalPanel3.addChild(textBoxField);
     UiWidgetRichTextArea richTextArea = factory.create(UiWidgetRichTextArea.class);
     verticalPanel3.addChild(richTextArea);
-    mainWindow.addChild(verticalPanel3);
+    // mainWindow.addChild(verticalPanel3);
 
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
-    UiWidgetButton button = factory.create(UiWidgetButton.class);
+    final UiWidgetButton button = factory.create(UiWidgetButton.class);
 
-    UiWidgetTextField textField = factory.create(UiWidgetTextField.class);
+    final UiWidgetTextField textField = factory.create(UiWidgetTextField.class);
     textField.setKeyboardFilter(CharFilter.LATIN_DIGIT_FILTER);
 
-    button.setLabel("Send" + textField.getMaximumTextLength());
-    button.setImage(image);
+    button.setLabel("Send");
+    // button.setImage(image);
     button.setTooltip("Send to server");
 
-    final Button sendButton = (Button) factory.getNativeWidget(button); // new Button("Send");
-
-    final TextBox nameField = (TextBox) factory.getNativeWidget(textField);
     // nameField.setText("GWT User");
     final Label errorLabel = new Label();
 
-    // We can add style names to widgets
-    button.setStyles("sendButton");
+    UiWidgetHorizontalPanel horizontalPanel = factory.create(UiWidgetHorizontalPanel.class);
+    horizontalPanel.addChild(textField);
+    horizontalPanel.addChild(button);
+    mainWindow.addChild(horizontalPanel);
 
     String message = new NlsNullPointerException("test").getMessage();
     // NlsMessage message = NlsAccess.getFactory().create("Hello World {arg}!", "arg", "foo");
-    nameField.setValue(message);
+    textField.setValue(message);
 
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
     // RootPanel.get("nameFieldContainer").add(nameField);
     // RootPanel.get("sendButtonContainer").add(sendButton);
     // RootPanel.get("errorLabelContainer").add(errorLabel);
-    final Audio audio = Audio.createIfSupported();
+
+    // final Audio audio = Audio.createIfSupported();
     // audio.setControls(true);
-    RootLayoutPanel.get().add(audio);
-    audio.setSrc("http://allen-sauer.com/com.allen_sauer.gwt.voices.demo.VoicesDemo/wikipedia/Rondo_Alla_Turka.ogg");
-    audio.load();
-    audio.play();
-    final Label info = new Label("info: ");
-    RootLayoutPanel.get().add(info);
-    Callable<Boolean> task = new Callable<Boolean>() {
-
-      @Override
-      public Boolean call() {
-
-        info.setText("Duration: " + audio.getDuration() + " seconds, position: " + audio.getCurrentTime());
-        return Boolean.TRUE;
-      }
-    };
-    factory.getDispatcher().invokeTimer(task, 1000);
+    // RootLayoutPanel.get().add(audio);
+    // audio.setSrc("http://allen-sauer.com/com.allen_sauer.gwt.voices.demo.VoicesDemo/wikipedia/Rondo_Alla_Turka.ogg");
+    // audio.load();
+    // audio.play();
+    // final Label info = new Label("info: ");
+    // RootLayoutPanel.get().add(info);
+    // Callable<Boolean> task = new Callable<Boolean>() {
+    //
+    // @Override
+    // public Boolean call() {
+    //
+    // info.setText("Duration: " + audio.getDuration() + " seconds, position: " + audio.getCurrentTime());
+    // return Boolean.TRUE;
+    // }
+    // };
+    // factory.getDispatcher().invokeTimer(task, 1000);
 
     // Focus the cursor on the name field when the app loads
-    nameField.setFocus(true);
-    nameField.selectAll();
+    textField.setFocused(true);
+    // support for selectAll in TextualField?
+    // textField.selectAll();
 
     // Create the popup dialog box
     final DialogBox dialogBox = new DialogBox();
@@ -207,8 +207,9 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
       public void onClick(ClickEvent event) {
 
         dialogBox.hide();
-        sendButton.setEnabled(true);
-        sendButton.setFocus(true);
+        button.setEnabled(true);
+        // TODO: Support Focus for button...
+        // button.setFocus(true);
       }
     });
 
@@ -242,10 +243,10 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
 
         // First, we validate the input.
         errorLabel.setText("");
-        String textToServer = nameField.getText();
+        String textToServer = textField.getValue();
 
         // Then, we send the input to the server.
-        sendButton.setEnabled(false);
+        button.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
         RemoteInvocationServiceCallback<String> callback = new RemoteInvocationServiceCallback<String>() {
@@ -277,7 +278,10 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
             closeButton.setFocus(true);
           }
         };
-        RemoteInvocationServiceQueue queue = getGinjector().getServiceCaller().newQueue();
+        RemoteInvocationServiceCallerGwt serviceCaller;
+        serviceCaller = GWT.create(RemoteInvocationServiceCallerGwt.class);
+        // serviceCaller = getGinjector().getServiceCaller();
+        RemoteInvocationServiceQueue queue = serviceCaller.newQueue();
         queue.getServiceClient(GreetingService.class, String.class, callback).greeting(textToServer);
         queue.commit();
       }
@@ -286,6 +290,7 @@ public class Mmm extends AbstractEntryPoint<ClientGinjector> {
     // Add a handler to send the name to the server
     MyHandler handler = new MyHandler();
     button.addClickHandler(handler);
-    nameField.addKeyUpHandler(handler);
+    // TODO textField.addSubmitHandler();
+    // textField.setKeyboardFilter(handler);
   }
 }

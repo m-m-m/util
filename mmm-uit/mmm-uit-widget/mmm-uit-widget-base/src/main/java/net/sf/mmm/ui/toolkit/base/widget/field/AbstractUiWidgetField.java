@@ -6,12 +6,13 @@ import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteModified;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventValueChange;
+import net.sf.mmm.ui.toolkit.api.widget.UiWidget;
 import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetField;
 import net.sf.mmm.ui.toolkit.base.handler.event.ChangeEventSender;
 import net.sf.mmm.ui.toolkit.base.handler.event.FocusEventSender;
+import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetComposite;
 import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.ui.toolkit.base.widget.AbstractUiWidgetRegularAtomic;
 import net.sf.mmm.ui.toolkit.base.widget.UiAspectValue;
 import net.sf.mmm.ui.toolkit.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.util.validation.api.ValidationState;
@@ -27,7 +28,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getWidgetAdapter() adapter} value.
  */
 public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<?, VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
-    extends AbstractUiWidgetRegularAtomic<ADAPTER> implements UiWidgetField<VALUE>, AttributeWriteModified,
+    extends AbstractUiWidgetComposite<ADAPTER, UiWidget> implements UiWidgetField<VALUE>, AttributeWriteModified,
     AttributeWriteValidationFailure {
 
   /** The instance of {@link ValueAspect} to avoid redundancy and due to lack of multi-inheritance. */
@@ -479,7 +480,33 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       }
       return source;
     }
+  }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getChildCount() {
+
+    return 0;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getChildIndex(UiWidget child) {
+
+    return -1;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidget getChild(int index) {
+
+    throw new IndexOutOfBoundsException(Integer.toString(index));
   }
 
 }
