@@ -157,6 +157,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getBytesAvailable() {
 
     int count = this.currentBufferMax - this.currentBufferIndex + 1;
@@ -175,6 +176,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean hasNext() {
 
     if (this.currentBufferIndex <= this.currentBufferMax) {
@@ -186,6 +188,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public byte next() throws NoSuchElementException {
 
     if (this.currentBufferIndex <= this.currentBufferMax) {
@@ -202,6 +205,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public byte peek() throws NoSuchElementException {
 
     if (this.currentBufferIndex <= this.currentBufferMax) {
@@ -214,6 +218,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public long skip(long byteCount) {
 
     return process(null, byteCount);
@@ -222,6 +227,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public long process(ByteProcessor processor, long byteCount) {
 
     if (byteCount < 0) {
@@ -332,6 +338,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public int fill(byte[] buffer, int offset, int length) {
 
     if (offset >= buffer.length) {
@@ -371,6 +378,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public ByteArray getByteArray(int index) {
 
     assert (index >= 0);
@@ -397,6 +405,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getByteArrayCount() {
 
     if (this.buffersIndex <= this.buffersEndIndex) {

@@ -50,15 +50,17 @@ public class ValueOutOfRangeException extends ValueException {
    * The constructor.
    * 
    * @param <V> is the generic type of the values.
-   * @param value is the number that is out of range.
-   * @param minimum is the minimum value allowed
-   * @param maximum is the maximum value allowed.
+   * 
    * @param valueSource describes the source of the value or <code>null</code> if NOT available. This may be
    *        the filename where the value was read from, an XPath where the value was located in an XML
    *        document, etc. It is used in exceptions thrown if something goes wrong. This will help to find the
    *        problem easier.
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
+   * @since 3.0.0
    */
-  public <V extends Comparable<V>> ValueOutOfRangeException(V value, V minimum, V maximum, Object valueSource) {
+  public <V extends Comparable<V>> ValueOutOfRangeException(Object valueSource, V value, V minimum, V maximum) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class)
         .errorValueOutOfRangeWithSource(value, minimum, maximum, valueSource));

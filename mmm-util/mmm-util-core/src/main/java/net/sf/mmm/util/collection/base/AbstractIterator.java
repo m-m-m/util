@@ -11,7 +11,8 @@ import java.util.NoSuchElementException;
  * Simply extend this class and implement {@link #findNext()}. From your constructor or initializer call
  * {@link #findFirst()}.<br>
  * <b>ATTENTION:</b><br>
- * Do NOT forget to call {@link #findFirst()} from your constructor or your iterator will always be empty.
+ * This {@link Iterator} can NOT iterate <code>null</code> values. Further do NOT forget to call
+ * {@link #findFirst()} from your constructor or your iterator will always be empty.
  * 
  * @param <E> is the generic type of the {@link #next() iterated} elements.
  * 
@@ -51,6 +52,7 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public final boolean hasNext() {
 
     return (this.next != null);
@@ -59,6 +61,7 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public final E next() {
 
     if (this.next == null) {
@@ -77,6 +80,7 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
    * 
    * @throws UnsupportedOperationException whenever this method is called.
    */
+  @Override
   public final void remove() throws UnsupportedOperationException {
 
     throw new UnsupportedOperationException();

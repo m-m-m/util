@@ -4,6 +4,9 @@ package net.sf.mmm.util.lang.api;
 
 import java.io.Serializable;
 
+import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+
 /**
  * This is the interface for a <em>datatype</em>. A datatype is an object representing a value of a specific
  * type. It is typically <em>immutable</em> so it gets its value assigned at construction time and can then
@@ -32,15 +35,15 @@ import java.io.Serializable;
  * A regular implementation should be immutable and bind all fields at {@link java.lang.reflect.Constructor
  * construction}. When ever possible it should have a {@link java.lang.reflect.Constructor} that is compatible
  * with {@link #getValue()} . It is suitable and also recommended to use the class implementing the datatype
- * as API omitting a dedicated interface if possible. An {@link Enum} implementing this interface should also
- * offer a static method called <code>fromValue(V value)</code> that returns the appropriate {@link Enum}
- * instance or <code>null</code> if no such instance exists.
+ * as API omitting a dedicated interface if possible. An {@link EnumTypeWithCategory} implementing this interface should
+ * also offer a static method called <code>fromValue(V value)</code> that returns the appropriate
+ * {@link EnumTypeWithCategory} instance or <code>null</code> if no such instance exists.
  * 
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public interface Datatype<V> extends Serializable {
+public interface Datatype<V> extends AttributeReadTitle<String>, AttributeReadValue<V>, Serializable {
 
   /**
    * This method returns the raw value of this datatype. This will typically be a common
@@ -49,11 +52,12 @@ public interface Datatype<V> extends Serializable {
    * 
    * @return the value of this datatype.
    */
+  @Override
   V getValue();
 
   /**
    * This method gets the <em>title</em> of this datatype. The title is a string representation intended to be
-   * displayed to end-users (i18n will be done externally - see {@link net.sf.mmm.util.nls.api.NlsMessage}).<br>
+   * displayed to end-users (for i18n see {@link net.sf.mmm.util.nls.api.NlsMessage}).<br>
    * Since the general contract of {@link #toString()} is quite weak, this method is added to explicitly
    * express the presence of the title and to ensure implementors of this interface can NOT miss to implement
    * this.
@@ -62,6 +66,7 @@ public interface Datatype<V> extends Serializable {
    * 
    * @return the display title of this datatype.
    */
+  @Override
   String getTitle();
 
   /**

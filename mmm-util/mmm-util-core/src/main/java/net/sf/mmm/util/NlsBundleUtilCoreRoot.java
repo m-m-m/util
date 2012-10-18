@@ -347,6 +347,12 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoNo();
 
   /**
+   * @return the {@link NlsMessage} for the text "Undefined".
+   */
+  @NlsBundleMessage("Undefined")
+  NlsMessage infoUndefined();
+
+  /**
    * @return the {@link NlsMessage} for the text "Information".
    */
   @NlsBundleMessage("Information")

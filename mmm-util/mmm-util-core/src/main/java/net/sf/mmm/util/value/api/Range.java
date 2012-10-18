@@ -47,7 +47,7 @@ public class Range<V extends Comparable<V>> implements Serializable {
     NlsNullPointerException.checkNotNull("to", to);
     int delta = from.compareTo(to);
     if (delta > 0) {
-      throw new ValueOutOfRangeException(from, from, to, null);
+      throw new ValueOutOfRangeException(null, from, from, to);
     }
     this.min = from;
     this.max = to;
@@ -103,7 +103,7 @@ public class Range<V extends Comparable<V>> implements Serializable {
   public void verifyContained(V value) throws ValueOutOfRangeException {
 
     if (!isContained(value)) {
-      throw new ValueOutOfRangeException(value, this.min, this.max, null);
+      throw new ValueOutOfRangeException(null, value, this.min, this.max);
     }
   }
 
