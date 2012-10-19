@@ -86,7 +86,8 @@
  * <li><b>Extensibility</b><br/>
  * Even though we define widgets by interfaces and have support for multiple native UI toolkits, you can
  * extend this code. Either with UI toolkit independent widgets by composing existing ones (see
- * <code>UiWidgetCustom</code> in uit-widget-base) or by replacing or adding widgets for native toolkit
+ * <code>UiWidgetCustom</code> in <code>uit-widget-base</code> and
+ * {@link net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory#createForDatatype(Class)}) or by replacing or adding widgets for native toolkit
  * support. We hope that the latter case will never be necessary or that you join this project in this case.</li>
  * <li><b>Higher Level</b><br/>
  * While the adoption of native UI toolkits takes place on a quite low level, there are many high level
@@ -99,14 +100,12 @@
  * switching} between {@link net.sf.mmm.ui.toolkit.api.common.UiMode#VIEW view} and
  * {@link net.sf.mmm.ui.toolkit.api.common.UiMode#EDIT edit} {@link net.sf.mmm.ui.toolkit.api.common.UiMode
  * mode}</li>
- * <li>{@link net.sf.mmm.ui.toolkit.api.widget.grid grid widgets}</li>
+ * <li>Higher level widgets such as {@link net.sf.mmm.ui.toolkit.api.widget.grid grid widgets},
+ * {@link net.sf.mmm.ui.toolkit.api.widget.panel panels}, {@link net.sf.mmm.ui.toolkit.api.widget.window windows}, etc.</li>
+ * <li>High level widgets to support {@link net.sf.mmm.ui.toolkit.api.widget.pattern UI patterns}</li>
  * </ul>
- *
- * such as complex lists and trees, two-panel-selectors, two-list-selection, and much more. As implied above
- * we also recommend you to do the same in order to build the widgets for your custom needs (e.g. the
- * <code>UiWidgetMyCustomerNumberField</code> or the <code>UiWidgetMyCustomerForm</code>). You are free to
- * pick and choose: If you only want to use the lower level abstraction you can still ignore the higher level
- * stuff.</li>
+ * But you are still free to pick and choose: If you only want to use the lower level abstraction you can still ignore
+ * the higher level stuff.</li>
  * <li><b>Usability</b><br/>
  * By providing established UI patterns this framework supports you in creating a UI with high usability.
  * <li><b>Accessibility</b><br/>
