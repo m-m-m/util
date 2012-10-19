@@ -4,38 +4,38 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-uit-widget</artifactId>
+    <artifactId>mmm-client-ui-widget</artifactId>
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-uit-widget-impl-gwt</artifactId>
+  <artifactId>mmm-client-ui-widget-impl-gwt</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>uit-widget-impl-gwt</name>
-  <description>Implementation of the UI-Toolkit widget layer for Google Web Toolkit (GWT).</description>
+  <name>client-ui-widget-impl-gwt</name>
+  <description>Implementation of the UI widget layer for web based on Google Web Toolkit (GWT).</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-uit-widget-base</artifactId>
+      <artifactId>mmm-client-ui-widget-base</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-uit-widget-base</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <classifier>sources</classifier>
-    </dependency>
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-uit-widget-api</artifactId>
+      <artifactId>mmm-client-ui-widget-base</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <classifier>sources</classifier>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-uit-core-api</artifactId>
+      <artifactId>mmm-client-ui-widget-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-client-ui-core-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <classifier>sources</classifier>
     </dependency>

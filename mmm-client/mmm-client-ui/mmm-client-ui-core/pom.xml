@@ -4,16 +4,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-uit</artifactId>
+    <artifactId>mmm-client-ui</artifactId>
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-uit-core</artifactId>
+  <artifactId>mmm-client-ui-core</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>uit-core</name>
-  <description>Core APIs, etc. for the UI-Toolkit.</description>
+  <name>client-ui-core</name>
+  <description>Core APIs for user-interfaces (UI).</description>
   <modules>
-    <module>mmm-uit-core-api</module>
+    <module>mmm-client-ui-core-api</module>
   </modules>
 </project>
