@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.model;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadStylesAdvanced;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadHtmlId;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadStylesAdvanced;
 
 /**
  * This is the model of a {@link net.sf.mmm.ui.toolkit.api.view.UiElement}.

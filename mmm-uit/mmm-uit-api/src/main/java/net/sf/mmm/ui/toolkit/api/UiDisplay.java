@@ -4,7 +4,7 @@ package net.sf.mmm.ui.toolkit.api;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 
 /**
  * This is the interface for the display where the UI objects are shown.

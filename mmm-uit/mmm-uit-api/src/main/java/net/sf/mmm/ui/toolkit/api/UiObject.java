@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadHtmlId;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadHtmlId;
 
 /**
  * This is the abstract interface for a UI object. A UI object is any object of the user interface within this

@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api;
 
+import net.sf.mmm.client.ui.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.common.ScriptOrientation;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -143,7 +143,7 @@ public interface UiFactory extends AttributeWriteDisposed {
    * 
    * @param title is the title for the frame to create.
    * @param resizable - if <code>true</code> the frame will be
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel#isResizable() resizable}
+   *        {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeInPixel#isResizable() resizable}
    * @return the created frame.
    */
   UiFrame createFrame(String title, boolean resizable);
@@ -257,7 +257,7 @@ public interface UiFactory extends AttributeWriteDisposed {
    * @param <E> is the templated type of the elements that can be selected with the widget.
    * @param model is the model defining the the selectable elements.
    * @param multiSelection is the value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadMultiSelection#isMultiSelection()
+   *        {@link net.sf.mmm.client.ui.api.attribute.AttributeReadMultiSelection#isMultiSelection()
    *        multi-selection-flag}.
    * @return the created list.
    */
@@ -278,7 +278,7 @@ public interface UiFactory extends AttributeWriteDisposed {
    * @param <E> is the templated type of the elements that can be selected with the widget.
    * @param model is the model defining the the selectable elements.
    * @param editable is the (initial) value of the
-   *        {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable#isEditable() editable-flag}.
+   *        {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable#isEditable() editable-flag}.
    * @return the created combo-box.
    */
   <E> UiComboBox<E> createComboBox(UiListMvcModel<E> model, boolean editable);

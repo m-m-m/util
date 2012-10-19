@@ -6,7 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import net.sf.mmm.ui.toolkit.api.common.ScrollbarPolicy;
+import net.sf.mmm.client.ui.api.common.ScrollbarPolicy;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiScrollPanel;
 import net.sf.mmm.ui.toolkit.base.view.AbstractUiElement;

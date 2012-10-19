@@ -4,7 +4,7 @@
  * Contains the base implementation common package of the UI toolkit.
  * <a name="documentation"/><h2>UIT Base - Common</h2> 
  * This package contains the base implementation 
- * of the {@link net.sf.mmm.ui.toolkit.api.common UIT Common API}. 
+ * of the {@link net.sf.mmm.client.ui.api.common UIT Common API}. 
  * Extend this classes rather than implementing the API interfaces directly.
  */
 package net.sf.mmm.ui.toolkit.base.common;

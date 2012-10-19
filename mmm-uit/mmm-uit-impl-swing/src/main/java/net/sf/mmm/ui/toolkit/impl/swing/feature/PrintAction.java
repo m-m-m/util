@@ -11,7 +11,7 @@ import java.awt.print.PrinterJob;
 
 import javax.swing.JComponent;
 
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
+import net.sf.mmm.client.ui.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;

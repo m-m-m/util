@@ -2,13 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadEnabled;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadEnabledState;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadVisibleState;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.UiObject;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadEnabledState;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisible;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadVisibleState;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.ui.toolkit.api.event.UiEventSender;
 import net.sf.mmm.ui.toolkit.api.view.window.UiFrame;
 import net.sf.mmm.ui.toolkit.api.view.window.UiWindow;

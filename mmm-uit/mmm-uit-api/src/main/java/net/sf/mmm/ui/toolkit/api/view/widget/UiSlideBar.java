@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadOrientation;
 
 /**
  * This is the interface for a slide-bar. It is an interactive widget used to specify an value by sliding a

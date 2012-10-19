@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.menu;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelected;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadButtonStyle;
 import net.sf.mmm.ui.toolkit.api.attribute.UiReadValue;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelected;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 
 /**

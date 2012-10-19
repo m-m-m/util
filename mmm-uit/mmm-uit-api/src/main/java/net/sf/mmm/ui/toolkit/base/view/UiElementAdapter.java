@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteTooltip;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeInPixel;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 
 /**
  * This is the interface that adapts to the native UI object of the underlying toolkit implementation for a

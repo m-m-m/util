@@ -12,9 +12,9 @@ import javax.inject.Singleton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import net.sf.mmm.client.ui.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.UiDisplay;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;

@@ -5,10 +5,10 @@ package net.sf.mmm.ui.toolkit.base.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
-import net.sf.mmm.ui.toolkit.api.common.EnabledState;
-import net.sf.mmm.ui.toolkit.api.common.VisibleState;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
+import net.sf.mmm.client.ui.api.common.EnabledState;
+import net.sf.mmm.client.ui.api.common.VisibleState;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.event.UiEventListener;
 import net.sf.mmm.ui.toolkit.api.event.UiEventType;

@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStylesAdvanced;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 

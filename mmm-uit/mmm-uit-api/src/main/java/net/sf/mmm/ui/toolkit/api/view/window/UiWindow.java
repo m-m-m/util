@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWritePosition;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteResizable;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSizeInPixel;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteStringTitle;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteVisible;
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
+import net.sf.mmm.client.ui.api.attribute.AttributeWritePosition;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeInPixel;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
+import net.sf.mmm.client.ui.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.UiNode;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;

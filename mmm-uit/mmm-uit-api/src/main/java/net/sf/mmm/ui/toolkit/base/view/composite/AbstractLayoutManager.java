@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.composite;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
+import net.sf.mmm.client.ui.api.common.Filling;
 import net.sf.mmm.ui.toolkit.api.UiFactory;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
-import net.sf.mmm.ui.toolkit.api.common.Filling;
 import net.sf.mmm.ui.toolkit.api.common.Insets;
 import net.sf.mmm.ui.toolkit.api.common.LayoutConstraints;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
@@ -140,7 +140,7 @@ public abstract class AbstractLayoutManager {
    * 
    * @see #getOrientation()
    * @see UiFactory#getScriptOrientation()
-   * @see net.sf.mmm.ui.toolkit.api.common.ScriptOrientation#isHorizontal()
+   * @see net.sf.mmm.client.ui.api.common.ScriptOrientation#isHorizontal()
    * 
    * @return <code>true</code> if the layout is horizontal, <code>false</code> if vertical.
    */

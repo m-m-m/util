@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.ui.toolkit.api.UiObject;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteHtmlId;
 
 /**
  * This is the abstract base implementation of the {@link net.sf.mmm.ui.toolkit.api.UiObject} interface.

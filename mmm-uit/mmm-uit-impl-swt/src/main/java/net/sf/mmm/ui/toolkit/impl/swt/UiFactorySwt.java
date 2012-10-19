@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
+import net.sf.mmm.client.ui.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.common.ButtonStyle;
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.feature.UiAction;
 import net.sf.mmm.ui.toolkit.api.feature.UiFileAccess;
 import net.sf.mmm.ui.toolkit.api.model.data.UiListMvcModel;
@@ -492,7 +492,7 @@ public class UiFactorySwt extends AbstractUiFactory {
   /**
    * This method gets the given <code>baseStyle</code> adjusted with the global settings of the factory.
    * 
-   * @see #setScriptOrientation(net.sf.mmm.ui.toolkit.api.common.ScriptOrientation)
+   * @see #setScriptOrientation(net.sf.mmm.client.ui.api.common.ScriptOrientation)
    * 
    * @param baseStyle is the basic style.
    * @return the given <code>baseStyle</code> with additional options from this factory.

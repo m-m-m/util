@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.base.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSizeInPixel;
-import net.sf.mmm.ui.toolkit.api.common.MessageType;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
+import net.sf.mmm.client.ui.api.common.MessageType;
 import net.sf.mmm.ui.toolkit.api.event.UIRefreshEvent;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 import net.sf.mmm.ui.toolkit.api.view.composite.UiComposite;

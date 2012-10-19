@@ -73,7 +73,7 @@ public abstract class AbstractUiNodeAdapter<DELEGATE> implements UiNodeAdapter<D
   /**
    * <b>ATTENTION:</b><br>
    * This default implementation throws a {@link UnsupportedOperationException}. You need to override this in
-   * subclasses that support {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled} via the
+   * subclasses that support {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled} via the
    * end-user API.
    * 
    * {@inheritDoc}

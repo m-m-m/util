@@ -16,6 +16,7 @@
   <modules>
     <module>mmm-client-api</module>
     <module>mmm-client-impl-gwt</module>
+    <module>mmm-client-ui</module>
   </modules>
   
   <dependencies>

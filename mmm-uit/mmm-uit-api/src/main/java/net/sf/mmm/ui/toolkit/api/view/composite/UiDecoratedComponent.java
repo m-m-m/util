@@ -2,14 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.composite;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadOrientation;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadOrientation;
 import net.sf.mmm.ui.toolkit.api.view.UiElement;
 
 /**
  * This is the interface for a simple {@link UiComposite composite} containing two {@link UiElement
  * components}. The {@link #getDecorator() first component} will be layouted with a
- * {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE fixed} size on the top/left, the
- * {@link #getComponent() other component} will be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH
+ * {@link net.sf.mmm.client.ui.api.common.Filling#NONE fixed} size on the top/left, the
+ * {@link #getComponent() other component} will be {@link net.sf.mmm.client.ui.api.common.Filling#BOTH
  * scaled} and located at the bottom/right.<br>
  * The intention of this composite is to simplify the layout management.
  * 
@@ -30,7 +30,7 @@ public interface UiDecoratedComponent<CHILD extends UiElement, D extends CHILD, 
 
   /**
    * This method gets the decorating component (e.g. a {@link net.sf.mmm.ui.toolkit.api.view.widget.UiLabel
-   * label}) that is layed out with a {@link net.sf.mmm.ui.toolkit.api.common.Filling#NONE fixed} size on the
+   * label}) that is layed out with a {@link net.sf.mmm.client.ui.api.common.Filling#NONE fixed} size on the
    * top/left.
    * 
    * @return the decorating component.
@@ -39,7 +39,7 @@ public interface UiDecoratedComponent<CHILD extends UiElement, D extends CHILD, 
 
   /**
    * This method gets the main component (e.g. a {@link net.sf.mmm.ui.toolkit.api.view.widget.UiTextField
-   * text-field} that will be {@link net.sf.mmm.ui.toolkit.api.common.Filling#BOTH scaled} and located at the
+   * text-field} that will be {@link net.sf.mmm.client.ui.api.common.Filling#BOTH scaled} and located at the
    * bottom/right.
    * 
    * @return the main component.

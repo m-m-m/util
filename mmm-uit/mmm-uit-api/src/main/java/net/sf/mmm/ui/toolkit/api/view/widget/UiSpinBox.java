@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
 
 /**
  * This is the interface for a spin-box. It is an iteractive widget used to specify an value out of an ordered

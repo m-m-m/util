@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
 import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteSelectionIndex;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelEvent;
 import net.sf.mmm.ui.toolkit.api.event.UIListModelListener;

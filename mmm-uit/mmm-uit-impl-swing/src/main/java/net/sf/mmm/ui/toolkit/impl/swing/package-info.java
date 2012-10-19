@@ -4,7 +4,7 @@
  * Provides the swing implementation of the UI toolkit.
  * <a name="documentation"/><h2>UIT Impl Swing</h2>
  * Contains the implementation of the 
- * {@link net.sf.mmm.ui.toolkit.api UIT API} using swing.
+ * {@link net.sf.mmm.client.ui.api UIT API} using swing.
  */
 package net.sf.mmm.ui.toolkit.impl.swing;
 

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
 import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
 
 /**
@@ -12,7 +12,7 @@ import net.sf.mmm.ui.toolkit.api.attribute.UiWriteValue;
  * complete list pops up as menu ontop of the button. If the number of items is too large to fit in one menu,
  * the menu becomes scrollable or contains a "virtual" item at the end that opens another menu containing more
  * of the elements. <br>
- * If the combo-box is {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEditable#isEditable()
+ * If the combo-box is {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable#isEditable()
  * editable}, the user can additionally enter free text instead of selecting one of the given items. Please
  * note that the user can enter text, that does not correspond to an item in the model. Therefore you need to
  * call {@link #getValue()} instead of {@link #getSelectedValue()} to retrieve the user selection if the combo

@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.widget;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadMultiSelection;
 import net.sf.mmm.ui.toolkit.api.model.data.UiTreeMvcModel;
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadMultiSelection;
 
 /**
  * This is the interface for a tree. A tree is a widget used to display a hierachical structure of nodes

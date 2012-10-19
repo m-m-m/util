@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.view.window;
 
-import net.sf.mmm.ui.toolkit.api.attribute.AttributeReadModal;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadModal;
 
 /**
  * This is the interface for a dialog. A dialog is a {@link UiWindow} used for a temporary interaction (e.g. a

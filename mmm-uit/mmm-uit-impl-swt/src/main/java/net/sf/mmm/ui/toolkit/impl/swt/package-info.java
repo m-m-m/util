@@ -4,7 +4,7 @@
  * Provides the SWT implementation of the UI toolkit.
  * <a name="documentation"/><h2>UIT Impl SWT</h2>
  * Contains the implementation of the 
- * {@link net.sf.mmm.ui.toolkit.api UIT API} using SWT.
+ * {@link net.sf.mmm.client.ui.api UIT API} using SWT.
  */
 package net.sf.mmm.ui.toolkit.impl.swt;
 
