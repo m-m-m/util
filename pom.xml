@@ -21,7 +21,6 @@
     <module>mmm-persistence</module>
     <module>mmm-security</module>
     <module>mmm-upnp</module>
-    <module>mmm-uit</module>
     <module>mmm-l10n</module>
     <module>mmm-data</module>
     <module>mmm-app</module>
