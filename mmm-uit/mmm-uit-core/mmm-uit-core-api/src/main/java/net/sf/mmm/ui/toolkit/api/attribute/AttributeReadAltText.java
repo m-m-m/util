@@ -2,13 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
+import net.sf.mmm.ui.toolkit.api.common.Accessibility;
+
 /**
  * This interface gives read access to the {@link #getAltText() alternative text} attribute of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeReadAltText {
+public abstract interface AttributeReadAltText extends Accessibility {
 
   /**
    * This method gets the <em>alternative text</em> of this object. This text is used to provide the essential

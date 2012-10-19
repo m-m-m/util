@@ -2,13 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
+import net.sf.mmm.ui.toolkit.api.common.Accessibility;
+
 /**
  * This interface gives read access to the {@link #getAriaRole() ARIA role} attribute of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeReadAriaRole {
+public abstract interface AttributeReadAriaRole extends Accessibility {
 
   /**
    * A message with important, and usually time-sensitive, information. See related

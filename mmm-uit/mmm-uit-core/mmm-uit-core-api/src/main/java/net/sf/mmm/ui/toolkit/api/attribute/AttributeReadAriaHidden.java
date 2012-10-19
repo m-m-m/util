@@ -2,13 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.ui.toolkit.api.attribute;
 
+import net.sf.mmm.ui.toolkit.api.common.Accessibility;
+
 /**
- * This interface gives read access to the {@link #getAriaHidden() aria-hidden} attribute of an object.
+ * This interface gives read access to the {@link #isAriaHidden() aria-hidden} attribute of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeReadAriaHidden {
+public abstract interface AttributeReadAriaHidden extends Accessibility {
 
   /**
    * This method gets the <em>ARIA hidden</em> attribute of this object. It indicates that the element and all
@@ -19,6 +21,6 @@ public abstract interface AttributeReadAriaHidden {
    * @return <code>true</code> if the object is hidden, <code>false</code> if it is visible for assistive
    *         technologies.
    */
-  boolean getAriaHidden();
+  boolean isAriaHidden();
 
 }
