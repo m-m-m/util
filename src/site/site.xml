@@ -26,7 +26,6 @@
 
     <menu name="General Information">
       <item name="Introduction" href="index.html"/>
-      <item name="Overview" href="overview.html"/>
       <item name="Get Involved" href="https://github.com/m-m-m/mmm/wiki/Get-Involved"/>
       <item name="Road Map" href="https://github.com/m-m-m/mmm/wiki/Roadmap"/>
       <!-- <item name="Release Notes" href="changes-report.html"/> -->
