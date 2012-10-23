@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.api;
 
-import net.sf.mmm.client.api.busy.BusyManager;
 import net.sf.mmm.client.api.dialog.DialogManager;
-import net.sf.mmm.client.api.dialog.SimplePopupManager;
+import net.sf.mmm.client.ui.api.SimplePopupManager;
+import net.sf.mmm.client.ui.api.busy.BusyManager;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 
 /**

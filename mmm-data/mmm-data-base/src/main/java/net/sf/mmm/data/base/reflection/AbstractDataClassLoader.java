@@ -101,6 +101,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
+    @Override
     public AbstractDataClass<? extends DataObjectView> getDataClass(String name) {
 
       return this.name2classMap.get(name);
@@ -109,6 +110,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
+    @Override
     public AbstractDataClass<? extends DataObjectView> getDataClass(long id) {
 
       return this.id2classMap.get(Long.valueOf(id));
@@ -117,6 +119,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DataField<? extends DataObjectView, ?> getDataField(DataId id) throws ObjectNotFoundException {
 
       return getDataField(id.getObjectId());
@@ -125,6 +128,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DataClass<? extends DataObjectView> getDataClass(DataId id) {
 
       NlsNullPointerException.checkNotNull(DataId.class, id);
@@ -138,6 +142,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
     /**
      * {@inheritDoc}
      */
+    @Override
     public AbstractDataField<? extends DataObjectView, ?> getDataField(long id) {
 
       return this.id2fieldMap.get(Long.valueOf(id));

@@ -8,8 +8,8 @@ package net.sf.mmm.util.lang.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
- * @param <IN> is the generic type of the argument passed to {@link #apply(Object)}. May be a "tuple" or array
- *        if more than one argument is needed.
+ * @param <IN> is the generic type of the argument passed to {@link #apply(Object)}. May be a composite object
+ *        (e.g. java bean) if more than one argument is needed.
  */
 public interface Callback<IN> extends Function<IN, Void> {
 

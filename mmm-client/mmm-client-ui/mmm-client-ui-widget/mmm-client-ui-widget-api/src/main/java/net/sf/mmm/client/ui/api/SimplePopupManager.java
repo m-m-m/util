@@ -1,10 +1,10 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.api.dialog;
+package net.sf.mmm.client.ui.api;
 
 import java.util.Map;
 
-import net.sf.mmm.ui.toolkit.api.common.MessageSeverity;
+import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.lang.api.Callback;
 

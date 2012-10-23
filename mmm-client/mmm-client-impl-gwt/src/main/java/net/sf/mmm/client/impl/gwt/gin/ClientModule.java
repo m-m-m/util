@@ -2,13 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.impl.gwt.gin;
 
-import net.sf.mmm.client.api.busy.BusyManager;
 import net.sf.mmm.client.api.dialog.DialogManager;
-import net.sf.mmm.client.api.dialog.SimplePopupManager;
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImpl;
 import net.sf.mmm.client.base.gwt.dialog.SimplePopupManagerDummy;
 import net.sf.mmm.client.impl.gwt.busy.BusyManagerImplGwt;
 import net.sf.mmm.client.impl.gwt.place.ClientPlaceManager;
+import net.sf.mmm.client.ui.api.SimplePopupManager;
+import net.sf.mmm.client.ui.api.busy.BusyManager;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;

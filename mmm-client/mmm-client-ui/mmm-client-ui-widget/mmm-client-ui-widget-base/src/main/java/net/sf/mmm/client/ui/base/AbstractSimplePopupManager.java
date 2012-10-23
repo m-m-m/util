@@ -1,12 +1,12 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.base.dialog;
+package net.sf.mmm.client.ui.base;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.client.api.dialog.SimplePopupManager;
-import net.sf.mmm.ui.toolkit.api.common.MessageSeverity;
+import net.sf.mmm.client.ui.api.SimplePopupManager;
+import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsAccess;

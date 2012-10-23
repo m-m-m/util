@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.base.busy;
 
-import net.sf.mmm.client.api.busy.BusyManager;
-import net.sf.mmm.client.api.busy.BusySession;
+import net.sf.mmm.client.ui.api.busy.BusyManager;
+import net.sf.mmm.client.ui.api.busy.BusySession;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**

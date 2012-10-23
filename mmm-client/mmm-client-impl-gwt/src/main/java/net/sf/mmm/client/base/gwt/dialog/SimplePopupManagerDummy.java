@@ -4,8 +4,8 @@ package net.sf.mmm.client.base.gwt.dialog;
 
 import java.util.Map;
 
-import net.sf.mmm.client.base.dialog.AbstractSimplePopupManager;
-import net.sf.mmm.ui.toolkit.api.common.MessageSeverity;
+import net.sf.mmm.client.ui.api.common.MessageSeverity;
+import net.sf.mmm.client.ui.base.AbstractSimplePopupManager;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.Callback;
 
