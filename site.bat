@@ -1,9 +1,7 @@
 @ECHO OFF
-REM $Id$
 
 CD %~dp0
-CALL mmm-setup/src/scripts/windows/include.bat
-
-CD %~dp0
-CALL mvn site:stage
+set MAVEN_OPTS=-Xmx1024m
+CALL mvn site
+CALL mvn site:deploy
 PAUSE

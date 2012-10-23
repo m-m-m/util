@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <name>mmm</name>
   <description>The Multi-Media-Manager (MMM) is a generic plattform and a enterprise content management system (ECMS) build on top.</description>
-  <url>http://m-m-m.sourceforge.net/maven</url>
+  <url>http://m-m-m.sourceforge.net/</url>
   <inceptionYear>2001</inceptionYear>
 
   <modules>
@@ -81,7 +81,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.1</version>
+          <version>3.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -113,7 +113,8 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <!--http://jira.codehaus.org/browse/MJAVADOC-268 -->
-          <version>2.8.1</version>
+          <!--<version>2.8.1</version>-->
+          <version>2.9</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -314,13 +315,13 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
               <configuration>
-                <maxmemory>512m</maxmemory>
+                <maxmemory>812m</maxmemory>
                 <show>private</show>
                 <encoding>UTF-8</encoding>
                 <charset>UTF-8</charset>
                 <links>
                   <link>http://download.oracle.com/javase/6/docs/api/</link>
-                  <link>http://m-m-m.sourceforge.net/maven/apidocs/</link>
+                  <link>http://m-m-m.sourceforge.net/apidocs/</link>
                 </links>
                 <doctitle>JavaDocs for ${project.name} ${project.version}</doctitle>
                 <windowtitle>JavaDocs for ${project.name} ${project.version}</windowtitle>
