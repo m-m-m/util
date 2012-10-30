@@ -3,9 +3,12 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter;
 
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItem;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuItem;
 
@@ -62,4 +65,35 @@ public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase i
     this.clickEventSender = eventSender;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAccessKey(char accessKey) {
+
+    Element element = getWidget().getElement();
+    if (accessKey == ACCESS_KEY_NONE) {
+      element.removeAttribute(HTML_ATTRIBUTE_ACCESS_KEY);
+    } else {
+      element.setAttribute(HTML_ATTRIBUTE_ACCESS_KEY, String.valueOf(accessKey));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFocusEventSender(UiFeatureFocus focusSource, UiHandlerEventFocus focusSender) {
+
+    // Not supported by GWT...
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFocused(boolean focused) {
+
+    // Not supported by GWT...
+  }
 }

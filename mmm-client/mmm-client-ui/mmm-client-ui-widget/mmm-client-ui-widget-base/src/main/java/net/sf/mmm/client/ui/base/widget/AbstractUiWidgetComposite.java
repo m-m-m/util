@@ -2,12 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
-import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetComposite}.
@@ -32,67 +29,23 @@ public abstract class AbstractUiWidgetComposite<ADAPTER extends UiWidgetAdapter<
 
   /**
    * {@inheritDoc}
-   * 
-   * <b>ATTENTION:</b><br/>
-   * For ultimate flexibility we did NOT declare this method as final here. However you should only override
-   * this if you are really sure what you are doing.
-   */
-  @Override
-  final boolean isModifiedRecursive() {
-
-    int childCount = getChildCount();
-    for (int i = 0; i < childCount; i++) {
-      CHILD child = getChild(i);
-      if (child.isModified()) {
-        return true;
-      }
-    }
-    return super.isModified();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  final void setModeRecursive(UiMode mode) {
-
-    super.setModeRecursive(mode);
-    int childCount = getChildCount();
-    for (int i = 0; i < childCount; i++) {
-      CHILD child = getChild(i);
-      child.setMode(mode);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
    */
   @Override
   public CHILD getChild(String id) {
 
-    NlsNullPointerException.checkNotNull("id", id);
-    int size = getChildCount();
-    for (int i = 0; i < size; i++) {
-      CHILD child = getChild(i);
-      if ((child != null) && (id.equals(child.getId()))) {
-        return child;
-      }
-    }
-    return null;
+    return (CHILD) super.getChild(id);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  final void validateRecursive(ValidationState state) {
+  public abstract CHILD getChild(int index);
 
-    super.validateRecursive(state);
-    int size = getChildCount();
-    for (int i = 0; i < size; i++) {
-      CHILD child = getChild(i);
-      child.validate(state);
-    }
-  }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public abstract int getChildIndex(UiWidget child);
 
 }

@@ -15,7 +15,7 @@ import net.sf.mmm.util.lang.api.Orientation;
 public enum Filling {
 
   /**
-   * The object will keep its {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeReadSize size}.
+   * The object will keep its {@link net.sf.mmm.client.ui.api.attribute.AttributeReadSize size}.
    */
   NONE,
 

@@ -2,9 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import net.sf.mmm.client.ui.api.aria.role.Role;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.base.aria.role.AbstractRole;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
@@ -24,7 +28,8 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> implements UiWidget {
+public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> implements AbstractUiWidgetComposite,
+    AttributeWriteAriaRole {
 
   /** @see #getFactory() */
   private final AbstractUiWidgetFactory<?> factory;
@@ -60,7 +65,7 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   private String height;
 
   /** @see #getAriaRole() */
-  private String ariaRole;
+  private AbstractRole ariaRole;
 
   /** @see #getMode() */
   private UiMode mode;
@@ -225,7 +230,8 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
       adapter.setTooltip(this.tooltip);
     }
     if (this.ariaRole != null) {
-      adapter.setAriaRole(this.ariaRole);
+      // TODO: create AbstractRole.apply method
+      // adapter.setRole(this.ariaRole.getName());
     }
     if (!this.styles.isEmpty()) {
       adapter.setStyles(this.styles);
@@ -342,7 +348,11 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    */
   void setModeRecursive(UiMode newMode) {
 
-    // do nothing by default...
+    int childCount = getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      UiWidget child = getChild(i);
+      child.setMode(this.mode);
+    }
   }
 
   /**
@@ -572,7 +582,7 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * {@inheritDoc}
    */
   @Override
-  public String getAriaRole() {
+  public Role getAriaRole() {
 
     return this.ariaRole;
   }
@@ -581,12 +591,25 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    * {@inheritDoc}
    */
   @Override
-  public void setAriaRole(String ariaRole) {
+  @SuppressWarnings("unchecked")
+  public <ROLE extends Role> ROLE setAriaRole(Class<ROLE> roleType) {
 
-    this.ariaRole = ariaRole;
-    if (this.widgetAdapter != null) {
-      this.widgetAdapter.setAriaRole(ariaRole);
+    NlsNullPointerException.checkNotNull("roleInterface", roleType);
+    if ((this.ariaRole != null) && (roleType.equals(this.ariaRole.getRoleInterface()))) {
+      return (ROLE) this.ariaRole;
     }
+    ROLE role = createAriaRole(roleType);
+    this.ariaRole = (AbstractRole) role;
+    if (this.widgetAdapter != null) {
+      // this.widgetAdapter.setAriaRole(ariaRole);
+    }
+    return role;
+  }
+
+  protected <ROLE extends Role> ROLE createAriaRole(Class<ROLE> roleType) {
+
+    // TODO
+    return null;
   }
 
   /**
@@ -790,11 +813,18 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
   }
 
   /**
-   * @return <code>true</code> if this is a {@link net.sf.mmm.client.ui.api.widget.UiWidgetComposite
-   *         composite widget} and one of its children is {@link #isModified() modified}.
+   * @return <code>true</code> if this is a {@link net.sf.mmm.client.ui.api.widget.UiWidgetComposite composite
+   *         widget} and one of its children is {@link #isModified() modified}.
    */
   boolean isModifiedRecursive() {
 
+    int childCount = getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      UiWidget child = getChild(i);
+      if (child.isModified()) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -832,7 +862,55 @@ public abstract class AbstractUiWidget<ADAPTER extends UiWidgetAdapter<?>> imple
    */
   void validateRecursive(ValidationState state) {
 
-    // nothing to do...
+    int size = getChildCount();
+    for (int i = 0; i < size; i++) {
+      UiWidget child = getChild(i);
+      child.validate(state);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidget getChild(int index) throws IndexOutOfBoundsException {
+
+    throw new IndexOutOfBoundsException(String.valueOf(index));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getChildIndex(UiWidget child) {
+
+    return -1;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getChildCount() {
+
+    return 0;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidget getChild(String childId) {
+
+    NlsNullPointerException.checkNotNull("childId", childId);
+    int size = getChildCount();
+    for (int i = 0; i < size; i++) {
+      UiWidget child = getChild(i);
+      if ((child != null) && (childId.equals(child.getId()))) {
+        return child;
+      }
+    }
+    return null;
   }
 
   /**

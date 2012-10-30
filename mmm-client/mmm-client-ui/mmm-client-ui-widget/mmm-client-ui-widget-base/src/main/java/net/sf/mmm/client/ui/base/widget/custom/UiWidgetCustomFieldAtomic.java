@@ -8,7 +8,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
@@ -118,27 +117,27 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  public final String getLabel() {
+  public final String getFieldLabel() {
 
-    return getDelegate().getLabel();
+    return getDelegate().getFieldLabel();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public final void setLabel(String label) {
+  public final void setFieldLabel(String label) {
 
-    getDelegate().setLabel(label);
+    getDelegate().setFieldLabel(label);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetLabel getLabelWidget() {
+  public UiWidgetLabel getFieldLabelWidget() {
 
-    return getDelegate().getLabelWidget();
+    return getDelegate().getFieldLabelWidget();
   }
 
   /**
@@ -181,10 +180,18 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
+  protected UiWidgetField<?> getFirstField() {
+
+    return getDelegate();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    final ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this,
-        (AbstractUiWidgetFactory<?>) getFactory());
+    final ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getFactory());
     getDelegate().addChangeHandler(new UiHandlerEventValueChange<DELEGATE_VALUE>() {
 
       @Override

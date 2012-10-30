@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Focusable;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithFocus}
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive}
  * using GWT based on {@link FocusWidget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Focusable;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> extends
-    UiWidgetAdapterGwtWidgetWithFocus<WIDGET> {
+    UiWidgetAdapterGwtWidgetActive<WIDGET> {
 
   /**
    * The constructor.

@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetAtomicWithLabel;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetWithLabel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
 
@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel<?>> extends
-    AbstractUiWidgetAtomicWithLabel<ADAPTER> implements UiWidgetLabel {
+    AbstractUiWidgetWithLabel<ADAPTER> implements UiWidgetLabel {
 
   /**
    * The constructor.

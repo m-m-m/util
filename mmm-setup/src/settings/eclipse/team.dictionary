@@ -248,3 +248,6 @@ playback
 fullscreen
 aria
 assistive
+autocomplete
+multiselectable
+inline

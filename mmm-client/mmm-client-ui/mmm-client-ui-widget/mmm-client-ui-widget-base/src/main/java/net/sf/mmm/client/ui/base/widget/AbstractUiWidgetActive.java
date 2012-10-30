@@ -1,0 +1,137 @@
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.client.ui.base.widget;
+
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
+import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
+import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
+
+/**
+ * This is the abstract base implementation of a {@link #setFocused(boolean) focusable}
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidget}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ */
+public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActive<?>> extends
+    AbstractUiWidget<ADAPTER> implements UiWidgetActive {
+
+  /** @see #addFocusHandler(UiHandlerEventFocus) */
+  private FocusEventSender focusEventSender;
+
+  /** @see #getAccessKey() */
+  private char accessKey;
+
+  /**
+   * The constructor.
+   * 
+   * @param factory is the {@link #getFactory() factory}.
+   */
+  public AbstractUiWidgetActive(AbstractUiWidgetFactory<?> factory) {
+
+    super(factory);
+    this.accessKey = ACCESS_KEY_NONE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    if (this.focusEventSender != null) {
+      adapter.setFocusEventSender(this, this.focusEventSender);
+    }
+    if (this.accessKey != ACCESS_KEY_NONE) {
+      adapter.setAccessKey(this.accessKey);
+    }
+  }
+
+  /**
+   * @return the {@link FocusEventSender} or <code>null</code> if NOT yet created.
+   */
+  protected final FocusEventSender getFocusEventSender() {
+
+    return this.focusEventSender;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFocused(boolean focused) {
+
+    if (hasWidgetAdapter()) {
+      // if (this.focusEventSender != null) {
+      // this.focusEventSender.setProgrammatic();
+      // }
+      getWidgetAdapter().setFocused(focused);
+    } else if (this.focusEventSender != null) {
+      this.focusEventSender.onFocusChange(this, true, !focused);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isFocused() {
+
+    if (this.focusEventSender != null) {
+      return this.focusEventSender.isFocused();
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addFocusHandler(UiHandlerEventFocus handler) {
+
+    if (this.focusEventSender == null) {
+      this.focusEventSender = new FocusEventSender(this, getFactory());
+      if (hasWidgetAdapter()) {
+        getWidgetAdapter().setFocusEventSender(this, this.focusEventSender);
+      }
+    }
+    this.focusEventSender.addHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeFocusHandler(UiHandlerEventFocus handler) {
+
+    if (this.focusEventSender != null) {
+      return this.focusEventSender.removeHandler(handler);
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public char getAccessKey() {
+
+    return this.accessKey;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAccessKey(char accessKey) {
+
+    this.accessKey = accessKey;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setAccessKey(accessKey);
+    }
+  }
+
+}

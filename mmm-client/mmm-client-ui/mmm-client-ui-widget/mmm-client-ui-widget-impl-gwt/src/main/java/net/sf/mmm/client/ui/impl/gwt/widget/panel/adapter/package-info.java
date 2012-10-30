@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the implementation for panel widget adapters using GWT.
- * <a name="documentation"/><h2>UIT Impl GWT Widget Panel Adapter</h2>
+ * <a name="documentation"/><h2>Client UI Impl GWT Widget Panel Adapter</h2>
  * This package contains the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter}s
  * for {@link net.sf.mmm.client.ui.impl.gwt.widget.panel} using GWT (Google Web Toolkit).
  */

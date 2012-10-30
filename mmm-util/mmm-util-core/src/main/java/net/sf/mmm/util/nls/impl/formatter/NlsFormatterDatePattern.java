@@ -30,7 +30,7 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
     super();
     this.pattern = pattern;
     // trigger pattern validation if assertions are one
-    assert (new SimpleDateFormat(this.pattern, Locale.ROOT) != null);
+    // assert (new SimpleDateFormat(this.pattern, Locale.ROOT) != null);
   }
 
   /**

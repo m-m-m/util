@@ -4,16 +4,13 @@ package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
-import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetComposite;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.client.ui.base.widget.UiAspectValue;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -28,26 +25,23 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getWidgetAdapter() adapter} value.
  */
 public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<?, VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
-    extends AbstractUiWidgetComposite<ADAPTER, UiWidget> implements UiWidgetField<VALUE>, AttributeWriteModified,
+    extends AbstractUiWidgetActive<ADAPTER> implements UiWidgetField<VALUE>, AttributeWriteModified,
     AttributeWriteValidationFailure {
 
   /** The instance of {@link ValueAspect} to avoid redundancy and due to lack of multi-inheritance. */
   private final ValueAspect aspectValue;
 
-  /** @see #addFocusHandler(UiHandlerEventFocus) */
-  private FocusEventSender focusEventSender;
+  /** @see #getValidationFailure() */
+  private String validationFailure;
 
   /** @see #isModified() */
   private boolean modified;
 
-  /** @see #getValidationFailure() */
-  private String validationFailure;
+  /** @see #getFieldLabel() */
+  private String fieldLabel;
 
-  /** @see #getLabel() */
-  private String label;
-
-  /** @see #getLabelWidget() */
-  private UiWidgetLabel labelWidget;
+  /** @see #getFieldLabelWidget() */
+  private UiWidgetLabel fieldLabelWidget;
 
   /**
    * The constructor.
@@ -73,9 +67,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     }
     if (this.aspectValue.value != null) {
       adapter.setValue(convertFromValue(this.aspectValue.value));
-    }
-    if (this.focusEventSender != null) {
-      adapter.setFocusEventSender(this, this.focusEventSender);
     }
     if (this.validationFailure != null) {
       adapter.setValidationFailure(this.validationFailure);
@@ -214,61 +205,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public final void addFocusHandler(UiHandlerEventFocus handler) {
-
-    if (this.focusEventSender == null) {
-      this.focusEventSender = new FocusEventSender(this, getFactory());
-      if (hasWidgetAdapter()) {
-        getWidgetAdapter().setFocusEventSender(this, this.focusEventSender);
-      }
-    }
-    this.focusEventSender.addHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFocused(boolean focused) {
-
-    if (hasWidgetAdapter()) {
-      // if (this.focusEventSender != null) {
-      // this.focusEventSender.setProgrammatic();
-      // }
-      getWidgetAdapter().setFocused(focused);
-    } else if (this.focusEventSender != null) {
-      this.focusEventSender.onFocusChange(this, true, !focused);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final boolean removeFocusHandler(UiHandlerEventFocus handler) {
-
-    if (this.focusEventSender != null) {
-      return this.focusEventSender.removeHandler(handler);
-    }
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isFocused() {
-
-    if (this.focusEventSender != null) {
-      return this.focusEventSender.isFocused();
-    }
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public final boolean isModifiedLocal() {
 
     return this.modified;
@@ -308,20 +244,20 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public String getLabel() {
+  public String getFieldLabel() {
 
-    return this.label;
+    return this.fieldLabel;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setLabel(String label) {
+  public void setFieldLabel(String label) {
 
-    this.label = label;
-    if (this.labelWidget != null) {
-      this.labelWidget.setLabel(label);
+    this.fieldLabel = label;
+    if (this.fieldLabelWidget != null) {
+      this.fieldLabelWidget.setLabel(label);
     }
   }
 
@@ -329,15 +265,15 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public final UiWidgetLabel getLabelWidget() {
+  public final UiWidgetLabel getFieldLabelWidget() {
 
-    if (this.labelWidget == null) {
-      this.labelWidget = createLabelWidget();
-      if (this.label != null) {
-        this.labelWidget.setLabel(this.label);
+    if (this.fieldLabelWidget == null) {
+      this.fieldLabelWidget = createLabelWidget();
+      if (this.fieldLabel != null) {
+        this.fieldLabelWidget.setLabel(this.fieldLabel);
       }
     }
-    return this.labelWidget;
+    return this.fieldLabelWidget;
   }
 
   /**
@@ -398,7 +334,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /**
    * This inner class exists to avoid redundancy and due to lack of multi-inheritance.
    */
-  private class ValueAspect extends UiAspectValue<VALUE> {
+  private class ValueAspect extends AbstractUiFeatureValue<VALUE> {
 
     /** @see #getValue() */
     private VALUE value;
@@ -473,40 +409,13 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     @Override
     protected String getSource() {
 
-      String source = getLabel();
+      String source = getFieldLabel();
       if (source == null) {
         source = getId();
         // may still be null, but then no reasonable source is available...
       }
       return source;
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getChildCount() {
-
-    return 0;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getChildIndex(UiWidget child) {
-
-    return -1;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidget getChild(int index) {
-
-    throw new IndexOutOfBoundsException(Integer.toString(index));
   }
 
 }

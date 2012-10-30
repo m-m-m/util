@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget.core.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
 
 /**
@@ -14,8 +15,8 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterButton<WIDGET> extends UiWidgetAdapterWithLabel<WIDGET>,
-    AttributeWriteImage<UiWidgetImage> {
+public interface UiWidgetAdapterButton<WIDGET> extends UiWidgetAdapterActiveWithLabel<WIDGET>,
+    UiWidgetAdapterWithLabel<WIDGET>, AttributeWriteImage<UiWidgetImage> {
 
   // nothing to add
 

@@ -14,7 +14,7 @@ public abstract interface AttributeWriteAltText extends AttributeReadAltText {
    * This method sets the {@link #getAltText() alternative text} of this object.
    * 
    * @see #getAltText()
-   * @see AttributeWriteAriaRole#setAriaRole(String)
+   * @see net.sf.mmm.client.ui.api.common.Accessibility
    * 
    * @param altText is the new {@link #getAltText() alternative text}.
    */

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.menu.adapter;
 
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterMenuItem<WIDGET> extends UiWidgetAdapterWithLabel<WIDGET> {
+public interface UiWidgetAdapterMenuItem<WIDGET> extends UiWidgetAdapterActiveWithLabel<WIDGET> {
 
   // nothing to add
 

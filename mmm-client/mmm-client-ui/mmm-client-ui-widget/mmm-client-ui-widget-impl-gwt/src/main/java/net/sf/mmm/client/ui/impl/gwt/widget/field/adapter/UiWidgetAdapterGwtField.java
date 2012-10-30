@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetWithFocus;
+import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.ui.HasValue;
@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
  *        {@link #getWidget() widget}.
  */
 public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAPTER_VALUE> extends
-    UiWidgetAdapterGwtWidgetWithFocus<WIDGET> implements UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> {
+    UiWidgetAdapterGwtWidgetActive<WIDGET> implements UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> {
 
   /**
    * The constructor.

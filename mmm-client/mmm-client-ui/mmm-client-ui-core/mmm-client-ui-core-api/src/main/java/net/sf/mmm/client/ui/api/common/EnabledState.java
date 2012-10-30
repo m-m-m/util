@@ -21,16 +21,15 @@ public enum EnabledState {
   ENABLED,
 
   /**
-   * The object is {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled#setEnabled(boolean)
+   * The object is {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled#setEnabled(boolean)
    * programatically disabled}. It will not become {@link #isEnabled() enabled} until the program sets it
    * {@link #ENABLED} again. In this case it may still switch to {@link #BLOCKED} instead.
    */
   DISABLED,
 
   /**
-   * The object itself is
-   * {@link net.sf.mmm.ui.toolkit.api.attribute.AttributeWriteEnabled#setEnabled(boolean) set enabled} but its
-   * parent is not <code>null</code> and {@link #DISABLED}.
+   * The object itself is {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled#setEnabled(boolean)
+   * set enabled} but its parent is not <code>null</code> and {@link #DISABLED}.
    */
   BLOCKED,
 

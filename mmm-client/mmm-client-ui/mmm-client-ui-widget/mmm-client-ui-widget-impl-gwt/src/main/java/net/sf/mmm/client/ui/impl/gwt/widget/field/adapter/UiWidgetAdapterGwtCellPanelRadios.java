@@ -33,6 +33,9 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
   /** @see #setOptions(List) */
   private final List<RadioButton> radioButtons;
 
+  /** The unique group ID for the {@link RadioButton}s. */
+  private final String groupId;
+
   /** @see #setOptions(List) */
   private List<String> options;
 
@@ -42,8 +45,8 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
   /** The {@link ChangeEventAdapterGwt} */
   private ChangeEventAdapterGwt<VALUE> changeEventAdapter;
 
-  /** The unique group ID for the {@link RadioButton}s. */
-  private final String groupId;
+  /** @see #setOptions(List) */
+  private char accessKey;
 
   /**
    * The constructor.
@@ -53,6 +56,7 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
     super();
     this.radioButtons = new ArrayList<RadioButton>();
     this.groupId = RadioGroupIdManager.getInstance().getUniqueId();
+    this.accessKey = ACCESS_KEY_NONE;
   }
 
   /**
@@ -75,8 +79,15 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
     }
     this.radioButtons.clear();
     this.options = options;
+    boolean first = true;
     for (String title : options) {
       RadioButton rb = new RadioButton(this.groupId, title);
+      if (first) {
+        if (this.accessKey != ACCESS_KEY_NONE) {
+          rb.setAccessKey(this.accessKey);
+        }
+        first = false;
+      }
       getWidget().add(rb);
       this.radioButtons.add(rb);
     }
@@ -197,6 +208,18 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
 
     for (RadioButton rb : this.radioButtons) {
       rb.setEnabled(enabled);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAccessKey(char accessKey) {
+
+    this.accessKey = accessKey;
+    if (this.radioButtons.size() > 0) {
+      this.radioButtons.get(0).setAccessKey(accessKey);
     }
   }
 

@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetAtomicWithLabel;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickableWithLabel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 
@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButton<?>> extends
-    AbstractUiWidgetAtomicWithLabel<ADAPTER> implements UiWidgetButton {
+    AbstractUiWidgetClickableWithLabel<ADAPTER> implements UiWidgetButton {
 
   /** @see #getImage() */
   private UiWidgetImage image;

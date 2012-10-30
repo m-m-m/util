@@ -5,7 +5,7 @@ package net.sf.mmm.util.validation.api;
 /**
  * This is the interface for the state of a validation.
  * 
- * @see net.sf.mmm.util.validation.base.ValidationState
+ * @see net.sf.mmm.util.validation.base.ValidationStateImpl
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

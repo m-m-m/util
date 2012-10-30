@@ -22,12 +22,6 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends AbstractUiWidgetAdapter<WIDGET> {
 
-  /** The name of the <code>id</code> attribute. */
-  private static final String HTML_ATTRIBUTE_ID = "id";
-
-  /** The name of the <code>role</code> attribute. */
-  private static final String HTML_ATTRIBUTE_ARIA_ROLE = "role";
-
   /**
    * The constructor.
    */
@@ -95,13 +89,13 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
    * {@inheritDoc}
    */
   @Override
-  public void setAriaRole(String ariaRole) {
+  public void setAttribute(String name, String value) {
 
     Element element = getWidget().getElement();
-    if (ariaRole == null) {
-      element.removeAttribute(HTML_ATTRIBUTE_ARIA_ROLE);
+    if (value == null) {
+      element.removeAttribute(name);
     } else {
-      element.setAttribute(HTML_ATTRIBUTE_ARIA_ROLE, ariaRole);
+      element.setAttribute(name, value);
     }
   }
 

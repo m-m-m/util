@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithFocus;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
@@ -19,7 +19,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
  *        {@link #getWidget() widget}.
  */
-public interface UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> extends UiWidgetAdapterWithFocus<WIDGET>,
+public interface UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> extends UiWidgetAdapterActive<WIDGET>,
     AttributeWriteValue<ADAPTER_VALUE>, AttributeWriteValidationFailure {
 
   /**

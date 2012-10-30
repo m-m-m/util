@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetRegularAtomic<ADAPTER extends UiWidgetAdapter<?>> extends
-    AbstractUiWidgetAtomic<ADAPTER> implements UiWidgetRegularAtomic {
+    AbstractUiWidget<ADAPTER> implements UiWidgetRegularAtomic {
 
   /**
    * The constructor.

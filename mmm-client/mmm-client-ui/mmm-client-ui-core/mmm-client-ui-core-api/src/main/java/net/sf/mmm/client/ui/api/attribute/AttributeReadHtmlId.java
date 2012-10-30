@@ -12,6 +12,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  */
 public abstract interface AttributeReadHtmlId extends AttributeReadId<String> {
 
+  /** The name of the <code>id</code> attribute. */
+  String HTML_ATTRIBUTE_ID = "id";
+
   /** Use this character to compose hierarchical {@link #getId() IDs}. */
   String ID_SEPARATOR = "-";
 

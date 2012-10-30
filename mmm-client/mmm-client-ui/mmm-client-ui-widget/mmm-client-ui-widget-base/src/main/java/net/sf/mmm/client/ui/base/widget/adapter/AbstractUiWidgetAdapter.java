@@ -2,7 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.adapter;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadAccessKey;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAltText;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadLabel;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
@@ -24,7 +26,7 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  */
 public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter<WIDGET>, AttributeReadAltText,
     AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage>,
-    AttributeReadValidationFailure {
+    AttributeReadValidationFailure, AttributeReadAccessKey, AttributeReadFocused {
 
   /** @see #getWidget() */
   private final WIDGET widget;
@@ -213,9 +215,27 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public String getAriaRole() {
+  public String getAttribute(String name) {
 
     throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public char getAccessKey() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isFocused() {
+
+    return false;
   }
 
 }

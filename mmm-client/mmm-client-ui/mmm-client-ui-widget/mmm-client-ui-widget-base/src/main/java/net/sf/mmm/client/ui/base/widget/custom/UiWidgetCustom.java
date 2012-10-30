@@ -2,13 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom;
 
+import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
+import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.client.ui.base.widget.UiAspectValue;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -25,7 +26,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  */
-public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends UiAspectValue<VALUE> implements
+public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends AbstractUiFeatureValue<VALUE> implements
     UiWidgetWithValue<VALUE> {
 
   /** @see #getFactory() */
@@ -296,16 +297,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends U
    * {@inheritDoc}
    */
   @Override
-  public final void setAriaRole(String ariaRole) {
-
-    this.delegate.setAriaRole(ariaRole);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final String getAriaRole() {
+  public Role getAriaRole() {
 
     return this.delegate.getAriaRole();
   }

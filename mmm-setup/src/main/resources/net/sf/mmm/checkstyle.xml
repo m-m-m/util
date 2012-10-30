@@ -128,7 +128,7 @@
     </module>
     <module name="AvoidStaticImport"/>
     <module name="JavaNCSS">
-      <property name="methodMaximum" value="100"/>
+      <property name="methodMaximum" value="200"/>
     </module>
     <module name="RegexpSinglelineJava">
       <metadata name="net.sf.eclipsecs.core.comment" value="Supply version"/>

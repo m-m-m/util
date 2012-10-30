@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.adapter;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteAttribute;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
@@ -32,7 +32,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, AttributeWriteTooltip, AttributeWriteVisible,
-    AttributeWriteEnabled, AttributeWriteStyles, AttributeWriteDisposed, AttributeWriteSize, AttributeWriteAriaRole {
+    AttributeWriteEnabled, AttributeWriteStyles, AttributeWriteDisposed, AttributeWriteSize, AttributeWriteAttribute {
 
   /**
    * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
@@ -58,8 +58,8 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
 
   /**
    * This method is called from {@link net.sf.mmm.client.ui.base.widget.UiModeChanger} for
-   * {@link net.sf.mmm.client.ui.api.widget.UiWidget#setMode(net.sf.mmm.client.ui.api.common.UiMode)}. It
-   * only handles the predefined {@link net.sf.mmm.client.ui.api.common.UiMode}s.
+   * {@link net.sf.mmm.client.ui.api.widget.UiWidget#setMode(net.sf.mmm.client.ui.api.common.UiMode)}. It only
+   * handles the predefined {@link net.sf.mmm.client.ui.api.common.UiMode}s.
    * 
    * @param editMode - <code>true</code> of {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT} and
    *        <code>false</code> for {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW}.

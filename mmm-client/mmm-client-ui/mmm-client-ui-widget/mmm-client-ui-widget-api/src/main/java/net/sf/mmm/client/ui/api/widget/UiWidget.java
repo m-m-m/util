@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadModified;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadVisibleRecursive;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMode;
@@ -39,7 +39,7 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeReadVisibleRecursive, AttributeWriteVisible,
     AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
     AttributeWriteSize, AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode,
-    AttributeWriteModeFixed, AttributeWriteAriaRole, AbstractValidatableObject {
+    AttributeWriteModeFixed, AttributeReadAriaRole, AbstractValidatableObject {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

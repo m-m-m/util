@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom;
 
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
@@ -53,13 +54,22 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   @Override
   protected String getSource() {
 
-    String source = getLabel();
+    String source = getFieldLabel();
     if (source == null) {
       source = super.getSource();
       // source may still be null but no useful fallback available...
     }
     return source;
   }
+
+  /**
+   * This method gets the first active field contained in this custom field. This can be the
+   * {@link #getDelegate() delegate} itself but also a child of the delegate in case of a composite custom
+   * field.
+   * 
+   * @return the {@link #getDelegate()}
+   */
+  protected abstract UiWidgetField<?> getFirstField();
 
   /**
    * {@inheritDoc}
@@ -95,6 +105,51 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   public int getChildCount() {
 
     return getDelegate().getChildCount();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFocused(boolean focused) {
+
+    getFirstField().setFocused(focused);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addFocusHandler(UiHandlerEventFocus handler) {
+
+    getFirstField().addFocusHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeFocusHandler(UiHandlerEventFocus handler) {
+
+    return getFirstField().removeFocusHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAccessKey(char accessKey) {
+
+    getFirstField().setAccessKey(accessKey);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public char getAccessKey() {
+
+    return getFirstField().getAccessKey();
   }
 
 }
