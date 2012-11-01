@@ -126,7 +126,7 @@
  * </pre>
  * For the error message create an exception like this:
  * <pre>
- * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.nls.api.NlsException} {
+ * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.nls.api.NlsRuntimeException} {
  *   public LoginAlreadyInUseException(String usedLogin) {
  *     super(MyResourceBundle.ERR_LOGIN_IN_USE, toMap(KEY_NAME, usedLogin));
  *   }
