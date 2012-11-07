@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
-import net.sf.mmm.persistence.api.PersistenceEntity;
+import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 import org.hibernate.annotations.Type;
@@ -21,7 +21,7 @@ import org.hibernate.annotations.Type;
  * @since 1.0.0
  */
 @Entity(name = "DataClassGroupVersion")
-public class DataClassGroupVersionImpl implements DataClassGroupVersion, PersistenceEntity<String> {
+public class DataClassGroupVersionImpl implements DataClassGroupVersion, GenericEntity<String> {
 
   /** @see #getId() */
   private String id;

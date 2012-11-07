@@ -9,11 +9,11 @@ import net.sf.mmm.persistence.api.PersistenceException;
 
 /**
  * This exception is thrown if an implementation of
- * {@link net.sf.mmm.persistence.api.RevisionedPersistenceEntity} shall be
+ * {@link net.sf.mmm.util.entity.api.RevisionedEntity} shall be
  * managed by a
- * {@link net.sf.mmm.persistence.api.RevisionedPersistenceEntityManager} but has
+ * {@link net.sf.mmm.persistence.api.RevisionedDao} but has
  * no setter method for the
- * {@link net.sf.mmm.persistence.api.RevisionedPersistenceEntity#getRevision()
+ * {@link net.sf.mmm.util.entity.api.RevisionedEntity#getRevision()
  * revision}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -28,7 +28,7 @@ public class RevisionedPersistenceEntityWithoutRevisionSetterException extends P
    * The constructor.
    * 
    * @param entityClass is the {@link Type} reflecting the
-   *        {@link net.sf.mmm.persistence.api.RevisionedPersistenceEntity} that
+   *        {@link net.sf.mmm.util.entity.api.RevisionedEntity} that
    *        is missing the setter for the revision.
    */
   public RevisionedPersistenceEntityWithoutRevisionSetterException(Type entityClass) {

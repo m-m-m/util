@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 import net.sf.mmm.data.api.entity.pim.contact.DataContact;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactView;
-import net.sf.mmm.persistence.impl.jpa.JpaPersistenceEntityManager;
+import net.sf.mmm.persistence.impl.jpa.AbstractJpaGenericDao;
 
 /**
  * TODO: this class ...
@@ -15,7 +15,7 @@ import net.sf.mmm.persistence.impl.jpa.JpaPersistenceEntityManager;
  * @since 1.0.0
  */
 @Named
-public class DataContactManagerImpl extends JpaPersistenceEntityManager<Long, DataContact> {
+public class DataContactManagerImpl extends AbstractJpaGenericDao<Long, DataContact> {
 
   /**
    * The constructor.

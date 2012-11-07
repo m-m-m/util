@@ -4,34 +4,34 @@ package net.sf.mmm.persistence.api.search;
 
 /**
  * This is the interface for a searcher that can be offered by a
- * {@link net.sf.mmm.persistence.api.PersistenceEntityManager}.
+ * {@link net.sf.mmm.persistence.api.GenericDao}.
  * 
- * @param <QUERY> is the type of the {@link PersistenceSearchQuery}.
+ * @param <CRITERIA> is the type of the {@link PersistenceSearchCriteria}.
  * @param <HIT>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface PersistenceSearcher<QUERY extends PersistenceSearchQuery, HIT> {
+public interface PersistenceSearcher<CRITERIA extends PersistenceSearchCriteria, HIT> {
 
   /**
    * This method performs a search specified by the given <code>query</code>.
    * 
-   * @param query is the {@link PersistenceSearchQuery} that specifies the
+   * @param query is the {@link PersistenceSearchCriteria} that specifies the
    *        criteria of the searched objects.
    * @return the result of the search.
    */
-  PersistenceSearchResult<HIT> search(QUERY query);
+  PersistenceSearchResult<HIT> search(CRITERIA query);
 
   /**
    * This method performs a search specified by the given <code>query</code> but
    * only determines the total number of hits. Therefore the
-   * {@link PersistenceSearchQuery#getMaximumHitCount() maximum hit-count} of
+   * {@link PersistenceSearchCriteria#getMaximumHitCount() maximum hit-count} of
    * the given <code>query</code> is ignored.
    * 
-   * @param query is the {@link PersistenceSearchQuery} that specifies the
+   * @param query is the {@link PersistenceSearchCriteria} that specifies the
    *        criteria of the searched objects.
    * @return the total number of hits that match the given <code>query</code>.
    */
-  long count(QUERY query);
+  long count(CRITERIA query);
 
 }

@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.base.link.AbstractLink;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
-import net.sf.mmm.persistence.api.PersistenceEntity;
+import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
@@ -28,7 +28,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  */
 @Entity(name = "DataEntiyLink")
 public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> implements
-    PersistenceEntity<Long> {
+    GenericEntity<Long> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3818102518986171086L;

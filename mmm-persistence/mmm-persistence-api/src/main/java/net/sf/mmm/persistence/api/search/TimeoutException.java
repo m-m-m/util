@@ -11,7 +11,7 @@ import net.sf.mmm.persistence.api.PersistenceException;
  * This typically means that the end-user should refine his query and rerun the
  * search.
  * 
- * @see PersistenceSearchQuery#getSearchTimeout()
+ * @see PersistenceSearchCriteria#getSearchTimeout()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

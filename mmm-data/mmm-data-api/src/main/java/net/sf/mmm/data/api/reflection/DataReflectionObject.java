@@ -41,7 +41,7 @@ public abstract interface DataReflectionObject<CLASS> extends
   /**
    * This method gets the java-class of the reflected object. The &lt;CLASS&gt;
    * will typically be a subclass of {@link net.sf.mmm.data.api.DataObjectView}
-   * or at least {@link net.sf.mmm.persistence.api.PersistenceEntity}. However
+   * or at least {@link net.sf.mmm.util.entity.api.GenericEntity}. However
    * for ultimate flexibility and freedom the type is not bound in its generic
    * declaration. This allows to use this API even with third-party entities
    * that do not implement such interfaces.<br/>

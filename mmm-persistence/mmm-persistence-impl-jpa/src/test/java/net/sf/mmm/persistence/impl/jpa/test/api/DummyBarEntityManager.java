@@ -2,16 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.test.api;
 
-import net.sf.mmm.persistence.api.PersistenceEntityManager;
+import net.sf.mmm.persistence.api.GenericDao;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
 
 /**
- * This is the interface for the {@link PersistenceEntityManager} responsible
+ * This is the interface for the {@link GenericDao} responsible
  * for the entity {@link DummyBarEntityImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public interface DummyBarEntityManager extends PersistenceEntityManager<Integer, DummyBarEntity> {
+public interface DummyBarEntityManager extends GenericDao<Integer, DummyBarEntity> {
 
   //
 

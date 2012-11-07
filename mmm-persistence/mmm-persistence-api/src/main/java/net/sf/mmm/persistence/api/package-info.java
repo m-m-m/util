@@ -17,9 +17,9 @@
  * <br/>
  * A major principle of this API is to establish a uniform structure as well as
  * generic access for your entities and DAOs. All your entities shall therefore
- * implement the interface {@link net.sf.mmm.persistence.api.PersistenceEntity}
+ * implement the interface {@link net.sf.mmm.util.entity.api.GenericEntity}
  * and all your DAOs the interface
- * {@link net.sf.mmm.persistence.api.PersistenceEntityManager}.
+ * {@link net.sf.mmm.persistence.api.GenericDao}.
  * The overall entry point is {@link net.sf.mmm.persistence.api.PersistenceManager}.<br/>
  * For revisioning/auditing support there are also <code>Revisioned*</code>
  * extensions of the interfaces like {@link net.sf.mmm.persistence.api.RevisionedPersistenceManager}.<br/>

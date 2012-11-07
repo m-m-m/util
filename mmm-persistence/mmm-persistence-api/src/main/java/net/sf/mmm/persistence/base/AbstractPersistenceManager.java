@@ -5,10 +5,10 @@ package net.sf.mmm.persistence.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.persistence.api.PersistenceEntity;
-import net.sf.mmm.persistence.api.PersistenceEntityManager;
+import net.sf.mmm.persistence.api.GenericDao;
 import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
@@ -22,7 +22,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
     PersistenceManager {
 
   /** @see #getManager(Class) */
-  private final Map<Class<?>, PersistenceEntityManager<?, ?>> class2managerMap;
+  private final Map<Class<?>, GenericDao<?, ?>> class2managerMap;
 
   /**
    * The constructor.
@@ -30,20 +30,20 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   public AbstractPersistenceManager() {
 
     super();
-    this.class2managerMap = new HashMap<Class<?>, PersistenceEntityManager<?, ?>>();
+    this.class2managerMap = new HashMap<Class<?>, GenericDao<?, ?>>();
   }
 
   /**
    * This method registers the given <code>entityManager</code>.
    * 
-   * @param entityManager is the {@link PersistenceEntityManager} to register.
+   * @param entityManager is the {@link GenericDao} to register.
    * @throws DuplicateObjectException if a manager is already registered for the
    *         same entity-class (
-   *         {@link PersistenceEntityManager#getEntityClassImplementation()},
-   *         {@link PersistenceEntityManager#getEntityClassReadWrite()}, or
-   *         {@link PersistenceEntityManager#getEntityClassReadOnly()}).
+   *         {@link GenericDao#getEntityClassImplementation()},
+   *         {@link GenericDao#getEntityClassReadWrite()}, or
+   *         {@link GenericDao#getEntityClassReadOnly()}).
    */
-  protected void addManager(PersistenceEntityManager<?, ?> entityManager)
+  protected void addManager(GenericDao<?, ?> entityManager)
       throws DuplicateObjectException {
 
     getInitializationState().requireNotInitilized();
@@ -65,11 +65,11 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
    * 
    * @param entityClass is the {@link Class} used as key to associate the
    *        <code>entityManager</code> with.
-   * @param entityManager is the {@link PersistenceEntityManager} to register.
+   * @param entityManager is the {@link GenericDao} to register.
    * @throws DuplicateObjectException if a manager is already registered for the
    *         same <code>entityClass</code>.
    */
-  private void registerManager(Class<?> entityClass, PersistenceEntityManager<?, ?> entityManager)
+  private void registerManager(Class<?> entityClass, GenericDao<?, ?> entityManager)
       throws DuplicateObjectException {
 
     if (this.class2managerMap.containsKey(entityClass)) {
@@ -81,7 +81,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
-  public boolean hasManager(Class<? extends PersistenceEntity<?>> entityClass) {
+  public boolean hasManager(Class<? extends GenericEntity<?>> entityClass) {
 
     return this.class2managerMap.containsKey(entityClass);
   }
@@ -89,13 +89,13 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends PersistenceEntity<ID>> PersistenceEntityManager<ID, ENTITY> getManager(
+  public <ID, ENTITY extends GenericEntity<ID>> GenericDao<ID, ENTITY> getManager(
       Class<ENTITY> entityType) {
 
-    PersistenceEntityManager<ID, ENTITY> manager = (PersistenceEntityManager<ID, ENTITY>) this.class2managerMap
+    GenericDao<ID, ENTITY> manager = (GenericDao<ID, ENTITY>) this.class2managerMap
         .get(entityType);
     if (manager == null) {
-      throw new ObjectNotFoundException(PersistenceEntityManager.class.getSimpleName(), entityType);
+      throw new ObjectNotFoundException(GenericDao.class.getSimpleName(), entityType);
     }
     return manager;
   }
@@ -103,38 +103,38 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY load(Class<ENTITY> entityClass, ID id) {
+  public <ID, ENTITY extends GenericEntity<ID>> ENTITY load(Class<ENTITY> entityClass, ID id) {
 
-    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getManager(entityClass);
     return manager.load(id);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY loadIfExists(Class<ENTITY> entityClass,
+  public <ID, ENTITY extends GenericEntity<ID>> ENTITY loadIfExists(Class<ENTITY> entityClass,
       ID id) {
 
-    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getManager(entityClass);
     return manager.loadIfExists(id);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass,
+  public <ID, ENTITY extends GenericEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass,
       ID id) throws ObjectNotFoundException {
 
-    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getManager(entityClass);
     return manager.getReference(id);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends PersistenceEntity<ID>> ENTITY create(Class<ENTITY> entityClass) {
+  public <ID, ENTITY extends GenericEntity<ID>> ENTITY create(Class<ENTITY> entityClass) {
 
-    PersistenceEntityManager<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getManager(entityClass);
     return manager.create();
   }
 
@@ -142,10 +142,10 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
    * {@inheritDoc}
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public void save(PersistenceEntity entity) {
+  public void save(GenericEntity entity) {
 
-    Class<? extends PersistenceEntity> entityClass = getEntityClass(entity);
-    PersistenceEntityManager manager = getManager(entityClass);
+    Class<? extends GenericEntity> entityClass = getEntityClass(entity);
+    GenericDao manager = getManager(entityClass);
     manager.save(entity);
   }
 
@@ -153,27 +153,27 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
    * {@inheritDoc}
    */
   @SuppressWarnings("all")
-  public void delete(PersistenceEntity entity) {
+  public void delete(GenericEntity entity) {
 
-    Class<? extends PersistenceEntity> entityClass = getEntityClass(entity);
-    PersistenceEntityManager manager = getManager(entityClass);
+    Class<? extends GenericEntity> entityClass = getEntityClass(entity);
+    GenericDao manager = getManager(entityClass);
     manager.delete(entity);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Class<? extends PersistenceEntity<?>> getEntityClass(PersistenceEntity<?> entity) {
+  public Class<? extends GenericEntity<?>> getEntityClass(GenericEntity<?> entity) {
 
     // this is a very simple way - it might be wrong...
     Class<?> entityClass = entity.getClass();
     if (!this.class2managerMap.containsKey(entityClass)) {
       entityClass = entityClass.getSuperclass();
       if (!this.class2managerMap.containsKey(entityClass)) {
-        throw new ObjectNotFoundException(PersistenceEntityManager.class.getSimpleName(),
+        throw new ObjectNotFoundException(GenericDao.class.getSimpleName(),
             entity.getClass());
       }
     }
-    return (Class<? extends PersistenceEntity<?>>) entity.getClass();
+    return (Class<? extends GenericEntity<?>>) entity.getClass();
   }
 }

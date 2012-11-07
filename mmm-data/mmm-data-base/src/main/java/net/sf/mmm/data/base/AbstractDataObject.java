@@ -9,7 +9,7 @@ import javax.persistence.Transient;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
-import net.sf.mmm.persistence.impl.jpa.JpaRevisionedPersistenceEntity;
+import net.sf.mmm.persistence.impl.jpa.JpaRevisionedEntity;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 
 /**
@@ -21,7 +21,7 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 @MappedSuperclass
 @DataClassAnnotation(id = DataObjectView.CLASS_ID, title = DataObjectView.CLASS_TITLE, //
 groupId = DataClassGroupRoot.GROUP_ID, groupVersion = DataClassGroupRoot.GROUP_VERSION)
-public abstract class AbstractDataObject extends JpaRevisionedPersistenceEntity<Long> implements
+public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> implements
     DataObject {
 
   /** UID for serialization. */

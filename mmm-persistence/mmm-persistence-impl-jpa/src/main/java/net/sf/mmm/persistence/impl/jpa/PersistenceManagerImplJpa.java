@@ -12,21 +12,24 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 
-import net.sf.mmm.persistence.api.PersistenceEntity;
-import net.sf.mmm.persistence.api.PersistenceEntityManager;
+import net.sf.mmm.persistence.api.GenericDao;
 import net.sf.mmm.persistence.base.AbstractRevisionedPersistenceManager;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.persistence.api.PersistenceManager} interface.
+ * This is the default implementation of the {@link net.sf.mmm.persistence.api.PersistenceManager} interface.<br/>
+ * <b>ATTENTION:</b><br/>
+ * This class assumes that you have at least one custom implementation of {@link GenericDao} that gets
+ * injected to {@link #setManagers(List)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class JpaPersistenceManager extends AbstractRevisionedPersistenceManager {
+public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceManager {
 
   /** @see #getPojoFactory() */
   private PojoFactory pojoFactory;
@@ -37,7 +40,7 @@ public class JpaPersistenceManager extends AbstractRevisionedPersistenceManager 
   /**
    * The constructor.
    */
-  public JpaPersistenceManager() {
+  public PersistenceManagerImplJpa() {
 
     super();
   }
@@ -64,9 +67,9 @@ public class JpaPersistenceManager extends AbstractRevisionedPersistenceManager 
     getLogger().info("EntityManager registered with " + entities.size() + " entities.");
     for (EntityType<?> entityType : entities) {
       Class<?> entityClass = entityType.getJavaType();
-      if (PersistenceEntity.class.isAssignableFrom(entityClass)) {
-        if (!hasManager((Class<? extends PersistenceEntity<?>>) entityClass)) {
-          JpaGenericPersistenceEntityManager manager = new JpaGenericPersistenceEntityManager(entityClass);
+      if (GenericEntity.class.isAssignableFrom(entityClass)) {
+        if (!hasManager((Class<? extends GenericEntity<?>>) entityClass)) {
+          JpaGenericDao manager = new JpaGenericDao(entityClass);
           manager.setEntityManager(this.entityManager);
           manager.setPojoFactory(this.pojoFactory);
           manager.initialize();
@@ -76,8 +79,7 @@ public class JpaPersistenceManager extends AbstractRevisionedPersistenceManager 
           getLogger().debug("Found registered manager for entity " + entityClass.getName());
         }
       } else {
-        getLogger()
-            .warn("Entity " + entityClass.getName() + " does NOT implement " + PersistenceEntity.class.getName());
+        getLogger().warn("Entity " + entityClass.getName() + " does NOT implement " + GenericEntity.class.getName());
       }
     }
   }
@@ -128,16 +130,15 @@ public class JpaPersistenceManager extends AbstractRevisionedPersistenceManager 
   /**
    * This method injects the {@link #getManager(Class) entity-managers}.
    * 
-   * @param managerList is the {@link List} of all {@link PersistenceEntityManager} to register.
+   * @param managerList is the {@link List} of all {@link GenericDao} to register.
    * @throws DuplicateObjectException if two managers use the same entity-class (
-   *         {@link PersistenceEntityManager#getEntityClassImplementation()},
-   *         {@link PersistenceEntityManager#getEntityClassReadWrite()}, or
-   *         {@link PersistenceEntityManager#getEntityClassReadOnly()}).
+   *         {@link GenericDao#getEntityClassImplementation()}, {@link GenericDao#getEntityClassReadWrite()},
+   *         or {@link GenericDao#getEntityClassReadOnly()}).
    */
   @Inject
-  public void setManagers(List<PersistenceEntityManager<?, ?>> managerList) throws DuplicateObjectException {
+  public void setManagers(List<GenericDao<?, ?>> managerList) throws DuplicateObjectException {
 
-    for (PersistenceEntityManager<?, ?> manager : managerList) {
+    for (GenericDao<?, ?> manager : managerList) {
       addManager(manager);
     }
   }

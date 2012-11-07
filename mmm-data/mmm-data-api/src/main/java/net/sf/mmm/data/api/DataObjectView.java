@@ -8,7 +8,7 @@ import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassIds;
 import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
 import net.sf.mmm.data.api.reflection.DataFieldIds;
-import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
+import net.sf.mmm.util.entity.api.RevisionedEntity;
 import net.sf.mmm.util.lang.api.BooleanEnum;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 
@@ -54,7 +54,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * @since 1.0.0
  */
 @DataClassAnnotation(id = DataObjectView.CLASS_ID, title = DataObjectView.CLASS_TITLE, isExtendable = BooleanEnum.FALSE)
-public abstract interface DataObjectView extends RevisionedPersistenceEntity<Long>,
+public abstract interface DataObjectView extends RevisionedEntity<Long>,
     AttributeReadTitle<String>, Serializable {
 
   /**

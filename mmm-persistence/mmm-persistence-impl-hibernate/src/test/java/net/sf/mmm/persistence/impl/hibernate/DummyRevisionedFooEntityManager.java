@@ -12,7 +12,7 @@ import javax.inject.Named;
  */
 @Named
 public class DummyRevisionedFooEntityManager extends
-    EnversPersistenceEntityManager<Long, DummyRevisionedFooEntity> {
+    AbstractRevisionedDaoEnvers<Long, DummyRevisionedFooEntity> {
 
   /**
    * The constructor.

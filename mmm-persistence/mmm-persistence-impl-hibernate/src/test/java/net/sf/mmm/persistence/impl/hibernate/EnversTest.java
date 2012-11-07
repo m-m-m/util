@@ -4,10 +4,10 @@ package net.sf.mmm.persistence.impl.hibernate;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.persistence.api.RevisionedPersistenceEntity;
 import net.sf.mmm.persistence.api.RevisionedPersistenceManager;
 import net.sf.mmm.transaction.api.TransactionExecutor;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+import net.sf.mmm.util.entity.api.RevisionedEntity;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -88,7 +88,7 @@ public class EnversTest {
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
     DummyRevisionedFooEntityManager fooManager = (DummyRevisionedFooEntityManager) persistenceManager
         .getManager(DummyRevisionedFooEntity.class);
-    DummyRevisionedFooEntity foo = fooManager.load(fooId, RevisionedPersistenceEntity.LATEST_REVISION);
+    DummyRevisionedFooEntity foo = fooManager.load(fooId, RevisionedEntity.LATEST_REVISION);
     Assert.assertEquals("It was magic", foo.getValue());
     // fooManager.delete(foo);
     DummyRevisionedFooEntity fooHistory = fooManager.load(fooId, 1);
