@@ -123,6 +123,7 @@ public enum Conjunction implements Datatype<String> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getValue() {
 
     return this.value;
@@ -131,9 +132,19 @@ public enum Conjunction implements Datatype<String> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return this.title;
+  }
+
+  /**
+   * @return <code>true</code> if {@link #NOR} or {@link #NAND}, <code>false</code> otherwise.
+   * @since 3.0.0
+   */
+  public boolean isNegation() {
+
+    return ((this == NOR) || (this == NAND));
   }
 
   /**

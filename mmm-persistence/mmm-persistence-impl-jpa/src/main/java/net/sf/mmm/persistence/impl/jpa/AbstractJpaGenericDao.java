@@ -54,7 +54,7 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
    * 
    * @return the according {@link EntityManager}.
    */
-  protected EntityManager getEntityManager() {
+  protected final EntityManager getEntityManager() {
 
     return this.entityManager;
   }
