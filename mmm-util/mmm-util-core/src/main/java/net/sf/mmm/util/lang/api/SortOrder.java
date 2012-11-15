@@ -1,14 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.common;
+package net.sf.mmm.util.lang.api;
 
-import net.sf.mmm.util.lang.api.Datatype;
 
 /**
  * This enum contains the possible values for the sort order of a list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 3.0.0
  */
 public enum SortOrder implements Datatype<String> {
 
@@ -16,13 +15,7 @@ public enum SortOrder implements Datatype<String> {
   ASCENDING("asc", "ascending"),
 
   /** Indicating that values are in decreasing order (e.g. "3, 2, 1"). */
-  DESCENDING("desc", "descending"),
-
-  /** Indicating that values are in no particular order (typically unsorted). */
-  NONE("none", "none"),
-
-  /** Indicating that a sort algorithm other than ascending or descending has been applied. */
-  OTHER("other", "other");
+  DESCENDING("desc", "descending");
 
   /** @see #getValue() */
   private final String value;

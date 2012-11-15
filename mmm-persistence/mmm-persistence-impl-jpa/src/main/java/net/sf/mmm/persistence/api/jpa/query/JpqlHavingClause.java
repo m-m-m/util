@@ -14,4 +14,6 @@ package net.sf.mmm.persistence.api.jpa.query;
  */
 public interface JpqlHavingClause<E> extends JpqlConditionalExpression<E, JpqlHavingClause<E>> {
 
+  // nothing to add...
+
 }

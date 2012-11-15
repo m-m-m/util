@@ -12,6 +12,9 @@ import net.sf.mmm.util.entity.api.GenericEntity;
  */
 public interface DummyBarEntityView extends GenericEntity<Integer> {
 
+  /** The name of the property {@link #getValue() value}. */
+  String PROPERTY_VALUE = "value";
+
   /**
    * @return the value or <code>null</code>.
    */

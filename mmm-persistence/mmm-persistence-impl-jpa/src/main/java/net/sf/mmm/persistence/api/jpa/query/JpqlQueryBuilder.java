@@ -17,14 +17,28 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * <pre>
  * {@link JpqlQueryBuilder} builder = getQueryBuilder();
  * builder.{@link #from(Class) from}(MyEntity.class).{@link JpqlFromClause#where() where()}.{@link JpqlWhereClause#isGreaterEqual(String, Object)
- * greaterEqual}(MyEntity.PROPERTY_AGE, minAge).{@link JpqlWhereClause#groupBy() groupBy};
+ * greaterEqual}(MyEntity.PROPERTY_AGE, minAge).{@link JpqlWhereClause#select() select()};
  * </pre>
+ * 
+ * Will result in the following JQPL query
+ * 
+ * <pre>
+ * SELECT myEntityAlias FROM MyEntity myEntityAlias WHERE myEntityAlias.age >= ?
+ * </pre>
+ * 
+ * where the {@link javax.persistence.TypedQuery#setParameter(int, Object) parameter is set} to
+ * <code>minAge</code>. <br/>
+ * <b>NOTE:</b><br/>
+ * It might appear confusing that the {@link JpqlFragment#select() select-operation} is performed at the end
+ * of the query. This is designed on purpose to be able to create a dynamic {@link JpqlFragment} and then be
+ * able to decide if {@link JpqlFragment#select() all entities should be selected} or e.g. only the
+ * {@link JpqlFragment#selectCount() total hit count} shall be determined.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface JpqlQueryBuilder {
+public interface JpqlQueryBuilder extends JpqlPropertySupport {
 
   /**
    * This method is a shortcut for {@link #from(Class, String)} that automatically creates the

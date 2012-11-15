@@ -3,6 +3,8 @@
 package net.sf.mmm.test;
 
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a utility-class with static methods that help to write negative-tests that check expected
@@ -11,6 +13,9 @@ import org.junit.Assert;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public final class ExceptionHelper {
+
+  /** The {@link Logger} instance. */
+  private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHelper.class);
 
   /**
    * The constructor.
@@ -39,8 +44,9 @@ public final class ExceptionHelper {
   public static void assertCause(Throwable catched, Class<? extends Throwable> expectedType) {
 
     if (!isCause(catched, expectedType)) {
-      catched.printStackTrace();
-      Assert.fail(expectedType.getName() + " expected but catched " + catched.getClass().getName() + "!");
+      String message = expectedType.getName() + " expected but catched " + catched.getClass().getName() + "!";
+      LOGGER.error(message, catched);
+      Assert.fail(message);
     }
   }
 

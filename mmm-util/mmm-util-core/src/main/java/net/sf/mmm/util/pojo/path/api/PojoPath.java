@@ -103,38 +103,7 @@ package net.sf.mmm.util.pojo.path.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public interface PojoPath {
-
-  /**
-   * The character that separates the {@link #getSegment() segments} of a {@link #getPojoPath() PojoPath}. The
-   * value ({@value} ) will never change. It is NOT necessary to use this constant to construct a
-   * {@link PojoPath}.
-   */
-  char SEPARATOR = '.';
-
-  /**
-   * This method gets the actual {@link PojoPath} represented by this object.
-   * 
-   * @return the actual {@link PojoPath}.
-   */
-  String getPojoPath();
-
-  /**
-   * This method gets the parent-path of this {@link PojoPath}.<br>
-   * E.g. if this path represents <code>"foo.bar.property"</code> then this method would return
-   * <code>"foo.bar"</code>.
-   * 
-   * @return the parent-path or <code>null</code> if this is the root-segment.
-   */
-  String getParentPath();
-
-  /**
-   * This method gets the last segment of this current {@link PojoPath}. E.g. if this path represents
-   * <code>"foo.bar.property"</code> then this method would return <code>"property"</code>.
-   * 
-   * @return the last segment.
-   */
-  String getSegment();
+public interface PojoPath extends PojoPropertyPath {
 
   /**
    * This method gets the <em>index</em> given by the {@link #getSegment() segment} or <code>null</code> if it

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.aria.attribute;
 
-import net.sf.mmm.client.ui.api.common.SortOrder;
+import net.sf.mmm.client.ui.api.aria.datatype.AriaSortOrder;
 
 /**
  * This interface gives read and write access to the {@link #getSort() sort} attribute of an object.
@@ -17,6 +17,6 @@ public abstract interface AttributeWriteAriaSort extends AttributeReadAriaSort {
    * 
    * @param sort is the new value of {@link #getSort()}. May be <code>null</code> to unset.
    */
-  void setSort(SortOrder sort);
+  void setSort(AriaSortOrder sort);
 
 }

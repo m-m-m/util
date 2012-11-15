@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.aria.attribute;
 
+import net.sf.mmm.client.ui.api.aria.datatype.AriaSortOrder;
 import net.sf.mmm.client.ui.api.common.Accessibility;
-import net.sf.mmm.client.ui.api.common.SortOrder;
 
 /**
  * This interface gives read access to the {@link #getSort() sort} attribute (property) of an object.
@@ -20,8 +20,8 @@ public abstract interface AttributeReadAriaSort extends Accessibility {
    * This method gets the <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-sort">sort</a>
    * property of this object.
    * 
-   * @return the {@link SortOrder}. The default (if NOT set) is {@link SortOrder#NONE}.
+   * @return the {@link AriaSortOrder}. The default (if NOT set) is {@link AriaSortOrder#NONE}.
    */
-  SortOrder getSort();
+  AriaSortOrder getSort();
 
 }

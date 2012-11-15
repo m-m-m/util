@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.aria.role;
 
 import net.sf.mmm.client.ui.api.aria.attribute.AttributeWriteAriaSort;
-import net.sf.mmm.client.ui.api.common.SortOrder;
+import net.sf.mmm.client.ui.api.aria.datatype.AriaSortOrder;
 
 /**
  * This class extends {@link AbstractRoleGridCell} with {@link AttributeWriteAriaSort}.
@@ -15,7 +15,7 @@ public abstract class AbstractRoleGridCellHeader extends AbstractRoleWithBaseAtt
     AttributeWriteAriaSort {
 
   /** @see #getSort() */
-  private SortOrder sort;
+  private AriaSortOrder sort;
 
   /**
    * The constructor.
@@ -29,10 +29,10 @@ public abstract class AbstractRoleGridCellHeader extends AbstractRoleWithBaseAtt
    * {@inheritDoc}
    */
   @Override
-  public SortOrder getSort() {
+  public AriaSortOrder getSort() {
 
     if (this.sort == null) {
-      return SortOrder.NONE;
+      return AriaSortOrder.NONE;
     }
     return this.sort;
   }
@@ -41,7 +41,7 @@ public abstract class AbstractRoleGridCellHeader extends AbstractRoleWithBaseAtt
    * {@inheritDoc}
    */
   @Override
-  public void setSort(SortOrder sort) {
+  public void setSort(AriaSortOrder sort) {
 
     this.sort = sort;
     setAttribute(HTML_ATTRIBUTE_ARIA_SORT, sort);

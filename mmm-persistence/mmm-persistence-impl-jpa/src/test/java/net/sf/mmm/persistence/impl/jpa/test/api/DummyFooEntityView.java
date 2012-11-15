@@ -3,14 +3,24 @@
 package net.sf.mmm.persistence.impl.jpa.test.api;
 
 import net.sf.mmm.util.entity.api.GenericEntity;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
- * TODO: this class ...
+ * This is the read only interface for the {@link DummyFooEntity}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface DummyFooEntityView extends GenericEntity<Integer> {
+
+  /** The name of the property {@link #getBar() bar}. */
+  String PROPERTY_BAR = "bar";
+
+  /** The name of the property {@link #getNumber() number}. */
+  String PROPERTY_NUMBER = "number";
+
+  /** The typed property for {@link #getNumber() number}. */
+  TypedProperty<Integer> TYPED_PROPERTY_NUMBER = new TypedProperty<Integer>(PROPERTY_NUMBER);
 
   /**
    * @return the {@link DummyBarEntity} or <code>null</code>.

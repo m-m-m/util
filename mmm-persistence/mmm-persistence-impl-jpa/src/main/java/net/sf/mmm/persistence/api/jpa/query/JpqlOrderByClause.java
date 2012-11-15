@@ -5,7 +5,7 @@ package net.sf.mmm.persistence.api.jpa.query;
 import net.sf.mmm.util.lang.api.SortOrder;
 
 /**
- * This is the interface for a where-clause of a JPQL query.
+ * This is the interface for a group-by clause (groupby_clause) in JPQL.
  * 
  * @see JpqlQueryBuilder
  * 
@@ -14,18 +14,18 @@ import net.sf.mmm.util.lang.api.SortOrder;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface JpqlWhereClause<E> extends JpqlConditionalExpression<E, JpqlWhereClause<E>> {
+public interface JpqlOrderByClause<E> extends JpqlFragment<E> {
 
   /**
    * This method closes this clause and opens an ORDER BY clause.
    * 
-   * @see #orderBy(String, SortOrder)
+   * @see #also(String, SortOrder)
    * 
    * @param property is the primary property to sort the results by. See also
    *        {@link #createPropertyPath(String...)} and {@link #getPropertyPrefix()}.
    * @return the {@link JpqlOrderByClause}.
    */
-  JpqlOrderByClause<E> orderBy(String property);
+  JpqlOrderByClause<E> also(String property);
 
   /**
    * This method closes this clause and opens an ORDER BY clause.
@@ -35,13 +35,6 @@ public interface JpqlWhereClause<E> extends JpqlConditionalExpression<E, JpqlWhe
    * @param order is the {@link SortOrder}.
    * @return the {@link JpqlOrderByClause}.
    */
-  JpqlOrderByClause<E> orderBy(String property, SortOrder order);
-
-  /**
-   * This method closes this clause and opens a GROUPED BY clause.
-   * 
-   * @return the {@link JpqlGroupByClause}.
-   */
-  JpqlGroupByClause<E> groupBy();
+  JpqlOrderByClause<E> also(String property, SortOrder order);
 
 }

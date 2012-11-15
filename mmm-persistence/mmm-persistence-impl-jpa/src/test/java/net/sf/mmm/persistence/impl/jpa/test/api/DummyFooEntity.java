@@ -3,7 +3,7 @@
 package net.sf.mmm.persistence.impl.jpa.test.api;
 
 /**
- * TODO: this class ...
+ * This is a test entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -23,6 +23,7 @@ public interface DummyFooEntity extends DummyFooEntityView {
   /**
    * {@inheritDoc}
    */
+  @Override
   DummyBarEntity getBar();
 
 }

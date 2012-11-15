@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api.jpa.query;
 
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.Range;
 
 /**
@@ -19,323 +20,244 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
     JpqlFragment<E> {
 
   /**
+   * This constant is used to document the concept of a property. A property can either be provided in a
+   * type-safe way as a {@link TypedProperty} (recommended) or as a regular {@link String}. Properties are
+   * addressed in JPQL by a path of java bean properties separated by a dot. E.g. for the
+   * {@link #getEntityAlias alias} <code>myAlias</code> a final property may be
+   * <code>myAlias.address.city</code> will refer to <code>getAddress().getCity()</code> invoked on
+   * <code>myAlias</code>. If properties are provided as {@link String} you can still use
+   * {@link TypedProperty#createPath(String...)} to build that {@link String} (e.g. {@link TypedProperty}.
+   * {@link TypedProperty#createPath(String...) createPath}("address", "city") for "address.city").<br/>
+   * Whenever a property is given in this API and will be appended to the query, the
+   * {@link #getPropertyPrefix() property prefix} will automatically be added before the actual property.
+   */
+  String PROPERTY = "property";
+
+  /**
    * This method adds the specified comparison expression to the query. It will compare a property with a
-   * given dynamic value.
+   * given dynamic <code>value</code> using the given <code>operator</code>.<br/>
+   * <b>IMPORTANT:</b><br/>
+   * If the given <code>value</code> is <code>null</code> and <code>operator</code> is
+   * {@link JpqlOperator#EQUAL} or {@link JpqlOperator#NOT_EQUAL}, then an according
+   * {@link #JPQL_CONDITION_IS_NULL} or {@link #JPQL_CONDITION_IS_NOT_NULL} is created instead.
    * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param operator is the operator used for comparison (e.g. "=", "<>", " LIKE ", etc.)
+   * @param <T> is the generic type of the {@link TypedProperty property}.
+   * 
+   * @param property is the {@link #PROPERTY property} to use as first argument.
+   * @param operator is the operator used for comparison (e.g. {@link JpqlOperator#EQUAL},
+   *        {@link JpqlOperator#NOT_EQUAL}, {@link JpqlOperator#LIKE}, etc.)
    * @param value is the value to use as second argument.
    * @return this instance itself.
    */
-  SELF isOperator(String property, String operator, Object value);
+  <T> SELF isCompare(TypedProperty<T> property, JpqlOperator operator, T value);
 
   /**
-   * This method adds the specified comparison expression to the query. It will compare a given dynamic value
-   * with a property.<br/>
+   * This method adds the specified comparison expression to the query. It will compare two properties using
+   * the given <code>operator</code>.
+   * 
+   * @param <T> is the generic type of the {@link TypedProperty property}.
+   * 
+   * @param property is the {@link #PROPERTY property} to use as first argument.
+   * @param operator is the operator used for comparison (e.g. {@link JpqlOperator#EQUAL},
+   *        {@link JpqlOperator#NOT_EQUAL}, {@link JpqlOperator#LIKE}, etc.)
+   * @param otherProperty is the {@link #PROPERTY property} to use as second argument.
+   * @return this instance itself.
+   */
+  <T> SELF isCompare(TypedProperty<T> property, JpqlOperator operator, TypedProperty<T> otherProperty);
+
+  /**
+   * This method adds the specified comparison expression to the query. It will compare a property with a
+   * given dynamic <code>value</code> using the given <code>operator</code>.<br/>
    * <b>ATTENTION:</b><br/>
-   * In most cases you should use {@link #isOperator(String, String, Object)} instead. This method is only for
-   * special cases like inverse LIKE expressions.
+   * In most cases you should use {@link #isCompare(TypedProperty, JpqlOperator, Object)} instead. This method
+   * is only for special cases like inverse {@link JpqlOperator#LIKE like} expressions.
+   * 
+   * @param <T> is the generic type of the {@link TypedProperty property}.
    * 
    * @param value is the value to use as first argument.
-   * @param operator is the operator used for comparison (e.g. "=", "<>", " LIKE ", etc.)
-   * @param property is the property to use as second argument. See also {@link #getPropertyPrefix()}.
+   * @param operator is the operator used for comparison (e.g. {@link JpqlOperator#EQUAL},
+   *        {@link JpqlOperator#NOT_EQUAL}, {@link JpqlOperator#LIKE}, etc.)
+   * @param property is the {@link #PROPERTY property} to use as second argument.
    * @return this instance itself.
    */
-  SELF isOperatorInvers(Object value, String operator, String property);
+  <T> SELF isCompare(T value, JpqlOperator operator, TypedProperty<T> property);
 
   /**
-   * This method adds the specified comparison expression to the query. It will compare to properties with
-   * each other.
+   * This method adds the specified comparison expression to the query. It will compare a property with a
+   * given dynamic <code>value</code> using the given <code>operator</code>.<br/>
+   * <b>ATTENTION:</b><br/>
+   * For type-safe access consider using {@link #isCompare(TypedProperty, JpqlOperator, Object)} instead.
    * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param operator is the operator used for comparison (e.g. "=", "<>", " LIKE ", etc.)
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
-   * @return this instance itself.
-   */
-  SELF isOperatorProperty(String property, String operator, String otherProperty);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the equals operator ("=").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to use as first argument.
+   * @param operator is the operator used for comparison (e.g. {@link JpqlOperator#EQUAL},
+   *        {@link JpqlOperator#NOT_EQUAL}, {@link JpqlOperator#LIKE}, etc.)
    * @param value is the value to use as second argument.
    * @return this instance itself.
    */
-  SELF isEqual(String property, Object value);
+  SELF isCompareValue(String property, JpqlOperator operator, Object value);
 
   /**
-   * This method calls {@link #isOperator(String, String, Object)} using the equals operator ("=").
+   * This method adds the specified comparison expression to the query. It will compare a property with a
+   * given dynamic <code>value</code> using the given <code>operator</code>.<br/>
+   * <b>ATTENTION:</b><br/>
+   * For type-safe access consider using {@link #isCompare(TypedProperty, JpqlOperator, Object)} instead.
    * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to use as first argument.
+   * @param operator is the operator used for comparison (e.g. {@link JpqlOperator#EQUAL},
+   *        {@link JpqlOperator#NOT_EQUAL}, {@link JpqlOperator#LIKE}, etc.)
+   * @param otherProperty is the {@link #PROPERTY property} to use as second argument.
    * @return this instance itself.
    */
-  SELF isEqualProperty(String property, String otherProperty);
+  SELF isCompareProperties(String property, JpqlOperator operator, String otherProperty);
 
   /**
-   * This method calls {@link #isOperator(String, String, Object)} using the not-equals operator ("<>").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @return this instance itself.
-   */
-  SELF isNotEqual(String property, Object value);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the not-equals operator ("<>").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
-   * @return this instance itself.
-   */
-  SELF isNotEqualProperty(String property, String otherProperty);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the greater-or-equals operator
-   * (">=").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @return this instance itself.
-   */
-  SELF isGreaterEqual(String property, Object value);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the greater-or-equals operator
-   * (">=").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
-   * @return this instance itself.
-   */
-  SELF isGreaterEqualProperty(String property, String otherProperty);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the greater operator (">").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @return this instance itself.
-   */
-  SELF isGreater(String property, Object value);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the greater operator (">").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
-   * @return this instance itself.
-   */
-  SELF isGreaterProperty(String property, String otherProperty);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the less-or-equals operator ("<=").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @return this instance itself.
-   */
-  SELF isLessEqual(String property, Object value);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the less-or-equals operator ("<=").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
-   * @return this instance itself.
-   */
-  SELF isLessEqualProperty(String property, String otherProperty);
-
-/**
-   * This method calls {@link #isOperator(String, String, Object)} using the less operator ("<").
-   *
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @return this instance itself.
-   */
-  SELF isLess(String property, Object value);
-
-/**
-   * This method calls {@link #isOperator(String, String, Object)} using the less operator ("<").
-   *
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param otherProperty is the property to use as second argument. See also {@link #getPropertyPrefix()}.
-   * @return this instance itself.
-   */
-  SELF isLessProperty(String property, String otherProperty);
-
-  /**
-   * This method calls {@link #isLike(String, String, boolean)} using <code>true</code> for
-   * <code>convertGlob</code>.
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument. Should be in {@link #convertGlobPattern(String)
-   *        GLOB-syntax}.
-   * @return this instance itself.
-   */
-  SELF isLike(String property, String value);
-
-  /**
-   * This method calls {@link #isNotLike(String, String, boolean)} using <code>true</code> for
-   * <code>convertGlob</code>.
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument. Should be in {@link #convertGlobPattern(String)
-   *        GLOB-syntax}.
-   * @return this instance itself.
-   */
-  SELF isNotLike(String property, String value);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the LIKE operator (" LIKE ").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @param convertGlob - <code>true</code> if the given <code>value</code> should be
-   *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
-   *        otherwise (if the value should be used as is).
-   * @return this instance itself.
-   */
-  SELF isLike(String property, String value, boolean convertGlob);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the (NOT) LIKE operator
-   * (" [NOT ]LIKE ").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @param convertGlob - <code>true</code> if the given <code>value</code> should be
-   *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
-   *        otherwise (if the value should be used as is).
-   * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
-   * @return this instance itself.
-   */
-  SELF isLike(String property, String value, boolean convertGlob, boolean not);
-
-  /**
-   * This method calls {@link #isOperator(String, String, Object)} using the LIKE operator (" LIKE ").
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @param convertGlob - <code>true</code> if the given <code>value</code> should be
-   *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
-   *        otherwise (if the value should be used as is).
-   * @return this instance itself.
-   */
-  SELF isNotLike(String property, String value, boolean convertGlob);
-
-  /**
-   * This method calls {@link #isOperatorInvers(Object, String, String)} using the LIKE operator (" LIKE ").
+   * This method adds the specified comparison expression to the query. It will compare a property with a
+   * given dynamic <code>value</code> using the given <code>operator</code>.<br/>
+   * <b>ATTENTION:</b><br/>
+   * For type-safe access consider using {@link #isCompare(Object, JpqlOperator, TypedProperty)} instead.
+   * Otherwise also consider using {@link #isCompareValue(String, JpqlOperator, Object)} instead. This method
+   * is only for special cases like inverse {@link JpqlOperator#LIKE like} expressions.
    * 
    * @param value is the value to use as first argument.
-   * @param property is the property to use as string argument. See also {@link #getPropertyPrefix()}.
+   * @param operator is the operator used for comparison (e.g. {@link JpqlOperator#EQUAL},
+   *        {@link JpqlOperator#NOT_EQUAL}, {@link JpqlOperator#LIKE}, etc.)
+   * @param property is the {@link #PROPERTY property} to use as second argument.
+   * @return this instance itself.
+   */
+  SELF isCompareInvers(Object value, JpqlOperator operator, String property);
+
+  /**
+   * This method is similar to {@link #isCompare(TypedProperty, JpqlOperator, Object)} using the operator
+   * {@link JpqlOperator#LIKE} or {@link JpqlOperator#NOT_LIKE}.
+   * 
+   * @param property is the {@link #PROPERTY property} to match against the given <code>pattern</code>.
+   * @param pattern is the value with the pattern to match.
    * @param convertGlob - <code>true</code> if the given <code>value</code> should be
    *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
    *        otherwise (if the value should be used as is).
+   * @param not - <code>true</code> for {@link JpqlOperator#NOT_LIKE}, <code>false</code> for
+   *        {@link JpqlOperator#LIKE}.
    * @return this instance itself.
    */
-  SELF isLikeInverse(String value, String property, boolean convertGlob);
+  SELF isLike(TypedProperty<String> property, String pattern, boolean convertGlob, boolean not);
 
   /**
-   * This method calls {@link #isOperatorInvers(Object, String, String)} using the (NOT) LIKE operator
-   * (" [NOT ]LIKE ").
+   * This method is similar to {@link #isCompare(Object, JpqlOperator, TypedProperty)} using the operator
+   * {@link JpqlOperator#LIKE} or {@link JpqlOperator#NOT_LIKE}.
    * 
-   * @param value is the value to use as first argument.
-   * @param property is the property to use as string argument. See also {@link #getPropertyPrefix()}.
+   * @param pattern is the value with the pattern to match against the value of the given
+   *        <code>property</code>.
+   * @param property is the {@link #PROPERTY property} to be matched.
    * @param convertGlob - <code>true</code> if the given <code>value</code> should be
    *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
    *        otherwise (if the value should be used as is).
-   * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
+   * @param not - <code>true</code> for {@link JpqlOperator#NOT_LIKE}, <code>false</code> for
+   *        {@link JpqlOperator#LIKE}.
    * @return this instance itself.
    */
-  SELF isLikeInverse(String value, String property, boolean convertGlob, boolean not);
+  SELF isLike(String pattern, TypedProperty<String> property, boolean convertGlob, boolean not);
 
   /**
-   * This method adds a null check expression to the query (property + " IS NULL ").
+   * This method is similar to {@link #isCompareValue(String, JpqlOperator, Object)} using the operator
+   * {@link JpqlOperator#LIKE} or {@link JpqlOperator#NOT_LIKE}.
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to match against the given <code>pattern</code>.
+   * @param pattern is the value with the pattern to match.
+   * @param convertGlob - <code>true</code> if the given <code>value</code> should be
+   *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
+   *        otherwise (if the value should be used as is).
+   * @param not - <code>true</code> for {@link JpqlOperator#NOT_LIKE}, <code>false</code> for
+   *        {@link JpqlOperator#LIKE}.
+   * @return this instance itself.
+   */
+  SELF isLikeValue(String property, String pattern, boolean convertGlob, boolean not);
+
+  /**
+   * This method is similar to {@link #isCompareInvers(Object, JpqlOperator, String)} using the operator
+   * {@link JpqlOperator#LIKE} or {@link JpqlOperator#NOT_LIKE}.
+   * 
+   * @param pattern is the value with the pattern to match against the value of the given
+   *        <code>property</code>.
+   * @param property is the {@link #PROPERTY property} to be matched.
+   * @param convertGlob - <code>true</code> if the given <code>value</code> should be
+   *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
+   *        otherwise (if the value should be used as is).
+   * @param not - <code>true</code> for {@link JpqlOperator#NOT_LIKE}, <code>false</code> for
+   *        {@link JpqlOperator#LIKE}.
+   * @return this instance itself.
+   */
+  SELF isLikeInverse(String pattern, String property, boolean convertGlob, boolean not);
+
+  /**
+   * This method adds a given conditional expression to the query (property + " " + condition).
+   * 
+   * @see #isNull(String)
+   * @see #isNotNull(String)
+   * @see #isEmpty(String)
+   * @see #isNotEmpty(String)
+   * 
+   * @param property is the {@link #PROPERTY property} to check.
+   * @param condition is the condition to add.
+   * @return this instance itself.
+   */
+  SELF isCondition(String property, String condition);
+
+  /**
+   * This method calls {@link #isCondition(String, String)} using the condition "IS NULL".
+   * 
+   * @param property is the {@link #PROPERTY property} to check.
    * @return this instance itself.
    */
   SELF isNull(String property);
 
   /**
-   * This method adds a (not) null check expression to the query (property + " IS [NOT] NULL ").
+   * This method calls {@link #isCondition(String, String)} using the condition "IS [NOT ]NULL".
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
    * @return this instance itself.
    */
   SELF isNull(String property, boolean not);
 
   /**
-   * This method adds a not null check expression to the query (property + " IS NOT NULL ").
+   * This method calls {@link #isCondition(String, String)} using the condition "IS NOT NULL".
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @return this instance itself.
    */
   SELF isNotNull(String property);
 
   /**
-   * This method adds an empty check expression to the query (property + " IS EMPTY ").
+   * This method calls {@link #isCondition(String, String)} using the condition "IS EMPTY".
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @return this instance itself.
    */
   SELF isEmpty(String property);
 
   /**
-   * This method adds a (not) empty check expression to the query (property + " IS [NOT] EMPTY ").
+   * This method calls {@link #isCondition(String, String)} using the condition "IS [NOT ]EMPTY".
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
    * @return this instance itself.
    */
   SELF isEmpty(String property, boolean not);
 
   /**
-   * This method adds a not empty check expression to the query (property + " IS NOT EMPTY ").
+   * This method calls {@link #isCondition(String, String)} using the condition "IS NOT EMPTY".
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @return this instance itself.
    */
   SELF isNotEmpty(String property);
-
-  /**
-   * This method adds an empty check expression to the query (property + " IS MEMBER " + collectionProperty).
-   * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
-   * @param collectionProperty is the property of the collection to check.
-   * @return this instance itself.
-   */
-  SELF isMemberOf(String property, String collectionProperty);
-
-  /**
-   * This method adds an (not) empty check expression to the query (property + " IS [NOT] MEMBER " +
-   * collectionProperty).
-   * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
-   * @param collectionProperty is the property of the collection to check.
-   * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
-   * @return this instance itself.
-   */
-  SELF isMemberOf(String property, String collectionProperty, boolean not);
-
-  /**
-   * This method adds a not empty check expression to the query (property + " IS NOT MEMBER " +
-   * collectionProperty).
-   * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
-   * @param collectionProperty is the property of the collection to check.
-   * @return this instance itself.
-   */
-  SELF isNotMemberOf(String property, String collectionProperty);
 
   /**
    * This method adds a between expression to the query (property + " BETWEEN :min AND :max").
    * 
    * @param <T> is the generic type of <code>min</code> and <code>max</code>.
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @param min is the minimum value.
    * @param max is the maximum value.
    * @return this instance itself.
@@ -347,7 +269,7 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
    * 
    * @param <T> is the generic type of <code>min</code> and <code>max</code>.
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @param min is the minimum value.
    * @param max is the maximum value.
    * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
@@ -358,7 +280,7 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
   /**
    * This method adds a (not) between expression to the query (property + " [NOT ]BETWEEN :min AND :max").
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
    * @param range is the {@link Range}.
    * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
    * @return this instance itself.
@@ -368,9 +290,9 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
   /**
    * This method adds a between expression to the query (property + " BETWEEN :min AND :max").
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
-   * @param minProperty is the property with the minimum value. See also {@link #getPropertyPrefix()}.
-   * @param maxProperty is the property with the maximum value. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
+   * @param minProperty is the {@link #PROPERTY property} with the minimum value.
+   * @param maxProperty is the {@link #PROPERTY property} with the maximum value.
    * @return this instance itself.
    */
   SELF isBetweenProperty(String property, String minProperty, String maxProperty);
@@ -378,9 +300,9 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
   /**
    * This method adds a (not) between expression to the query (property + " [NOT ]BETWEEN :min AND :max").
    * 
-   * @param property is the property to check. See also {@link #getPropertyPrefix()}.
-   * @param minProperty is the property with the minimum value. See also {@link #getPropertyPrefix()}.
-   * @param maxProperty is the property with the maximum value. See also {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property} to check.
+   * @param minProperty is the {@link #PROPERTY property} with the minimum value.
+   * @param maxProperty is the {@link #PROPERTY property} with the maximum value.
    * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
    * @return this instance itself.
    */
@@ -424,33 +346,6 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
   String convertGlobPattern(String pattern);
 
   /**
-   * This method gets the current property prefix that is automatically appended before a given property.
-   * 
-   * @return the empty string if {@link #getPropertyBasePath()} is empty. Otherwise
-   *         {@link #getPropertyBasePath()} + ".".
-   */
-  String getPropertyPrefix();
-
-  /**
-   * This method gets the current property path used as {@link #getPropertyPrefix() prefix} for properties.
-   * The default is {@link #getEntityAlias()}.
-   * 
-   * @see #getPropertyPrefix()
-   * 
-   * @return the current property base path.
-   */
-  String getPropertyBasePath();
-
-  /**
-   * This method sets the value of {@link #getPropertyBasePath()}.
-   * 
-   * @param path is the new value of {@link #getPropertyBasePath()}. May be the empty {@link String}, an alias
-   *        or path expression.
-   * @return this instance itself.
-   */
-  SELF setPropertyBasePath(String path);
-
-  /**
    * @see #setConjunctionDefaultToAnd()
    * 
    * @return this instance.
@@ -479,5 +374,11 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
    * @return this instance.
    */
   SELF or();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  SELF setPropertyBasePath(String path);
 
 }
