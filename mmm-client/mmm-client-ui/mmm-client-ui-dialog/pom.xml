@@ -18,12 +18,4 @@
     <module>mmm-client-ui-dialog-impl-gwt</module>
   </modules>
   
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-test</artifactId>
-      <version>SNAPSHOT</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 </project>

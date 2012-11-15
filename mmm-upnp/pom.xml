@@ -8,12 +8,22 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>mmm-upnp</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>upnp</name>
   <description>This project provides support for the Universal Plug and Play (UPnP) protocol stack.</description>
 
   <modules>
     <module>mmm-upnp-ssdp</module>
-  </modules>  
+  </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
 </project>

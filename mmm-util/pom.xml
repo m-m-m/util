@@ -23,4 +23,14 @@
     <module>mmm-util-metakeys</module>
     <module>mmm-util-datatype</module>
   </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
 </project>

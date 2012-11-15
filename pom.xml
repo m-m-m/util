@@ -315,7 +315,7 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
               <configuration>
-                <maxmemory>812m</maxmemory>
+                <maxmemory>1200m</maxmemory>
                 <show>private</show>
                 <encoding>UTF-8</encoding>
                 <charset>UTF-8</charset>
@@ -450,7 +450,7 @@
           <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mmm-setup</artifactId>
-            <version>SNAPSHOT</version>
+            <version>0-SNAPSHOT</version>
           </dependency>
           <!-- for dashboard -->
           <!--
@@ -476,7 +476,7 @@
       <extension>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-setup</artifactId>
-        <version>SNAPSHOT</version>
+        <version>0-SNAPSHOT</version>
       </extension>
       -->
     </extensions>

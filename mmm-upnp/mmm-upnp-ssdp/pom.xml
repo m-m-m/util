@@ -5,14 +5,14 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-upnp</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
   <artifactId>mmm-upnp-ssdp</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>upnp-ssdp</name>
   <description>This project provides support for the Simple Service Discovery Protocol.</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -20,11 +20,5 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-test</artifactId>
-      <version>SNAPSHOT</version>
-      <scope>test</scope>
-    </dependency>    
   </dependencies>
 </project>
