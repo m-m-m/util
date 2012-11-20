@@ -10,10 +10,6 @@ import net.sf.mmm.persistence.api.jpa.query.JpqlFromClause;
 import net.sf.mmm.persistence.api.jpa.query.JpqlOperator;
 import net.sf.mmm.persistence.api.jpa.query.JpqlOrderByClause;
 import net.sf.mmm.persistence.api.jpa.query.JpqlQueryBuilder;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityView;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;
-import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
-import net.sf.mmm.persistence.impl.jpa.test.impl.DummyFooEntityImpl;
 import net.sf.mmm.test.jpa.EntityManagerMock;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
@@ -47,10 +43,10 @@ public class JqplQueryBuilderImplTest {
   public void testSimpleQuery() {
 
     // given
-    Class<DummyBarEntityImpl> entityType = DummyBarEntityImpl.class;
+    Class<DummyBarEntity> entityType = DummyBarEntity.class;
 
     // then
-    TypedQuery<DummyBarEntityImpl> query = getQueryBuilder().from(entityType).select();
+    TypedQuery<DummyBarEntity> query = getQueryBuilder().from(entityType).select();
 
     // test
     Assert.assertNotNull(query);
@@ -67,7 +63,7 @@ public class JqplQueryBuilderImplTest {
   public void testCountQuery() {
 
     // given
-    Class<DummyBarEntityImpl> entityType = DummyBarEntityImpl.class;
+    Class<DummyBarEntity> entityType = DummyBarEntity.class;
 
     // then
     TypedQuery<Long> query = getQueryBuilder().from(entityType).selectCount();
@@ -86,18 +82,17 @@ public class JqplQueryBuilderImplTest {
   public void testQueryWithWhereClause() {
 
     // given
-    Class<DummyFooEntityImpl> entityType = DummyFooEntityImpl.class;
+    Class<DummyFooEntity> entityType = DummyFooEntity.class;
     String alias = "foo";
     JpqlQueryBuilder queryBuilder = getQueryBuilder();
-    String property1Name = TypedProperty.createPath(DummyFooEntityView.PROPERTY_BAR, DummyBarEntityView.PROPERTY_VALUE);
+    String property1Name = TypedProperty.createPath(DummyFooEntity.PROPERTY_BAR, DummyBarEntity.PROPERTY_VALUE);
     String property1Value = "magic";
-    String property2Name = DummyFooEntityView.PROPERTY_NUMBER;
+    String property2Name = DummyFooEntity.PROPERTY_NUMBER;
     Integer property2Value = Integer.valueOf(42);
 
     // then
-    JpqlFromClause<DummyFooEntityImpl> from = queryBuilder.from(entityType, alias);
-    TypedQuery<DummyFooEntityImpl> query = from.where()
-        .isCompareValue(property1Name, JpqlOperator.EQUAL, property1Value)
+    JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType, alias);
+    TypedQuery<DummyFooEntity> query = from.where().isCompareValue(property1Name, JpqlOperator.EQUAL, property1Value)
         .isCompareValue(property2Name, JpqlOperator.NOT_EQUAL, property2Value).or()
         .isCompareValue(property2Name, JpqlOperator.GREATER_EQUAL, property2Value).select();
 
@@ -119,17 +114,17 @@ public class JqplQueryBuilderImplTest {
   public void testQueryWithOrderBy() {
 
     // given
-    Class<DummyFooEntityImpl> entityType = DummyFooEntityImpl.class;
+    Class<DummyFooEntity> entityType = DummyFooEntity.class;
     JpqlQueryBuilder queryBuilder = getQueryBuilder();
-    String property2Name = DummyFooEntityView.PROPERTY_NUMBER;
+    String property2Name = DummyFooEntity.PROPERTY_NUMBER;
     Integer property2Min = Integer.valueOf(42);
     Integer property2Max = Integer.valueOf(142);
 
     // then
-    JpqlFromClause<DummyFooEntityImpl> from = queryBuilder.from(entityType);
-    JpqlOrderByClause<DummyFooEntityImpl> clause = from.where().isBetween(property2Name, property2Min, property2Max)
+    JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType);
+    JpqlOrderByClause<DummyFooEntity> clause = from.where().isBetween(property2Name, property2Min, property2Max)
         .orderBy(property2Name, SortOrder.DESCENDING);
-    TypedQuery<DummyFooEntityImpl> query = clause.select();
+    TypedQuery<DummyFooEntity> query = clause.select();
 
     // test
     Assert.assertNotNull(query);

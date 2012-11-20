@@ -16,6 +16,8 @@
   
   <modules>
     <module>mmm-persistence-api</module>
+    <module>mmm-persistence-query-api</module>
+    <module>mmm-persistence-query-impl</module>
     <module>mmm-persistence-impl-jpa</module>
     <module>mmm-persistence-impl-hibernate</module>
   </modules>
