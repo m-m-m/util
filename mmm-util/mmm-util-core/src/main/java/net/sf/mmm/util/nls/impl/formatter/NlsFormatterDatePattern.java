@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import net.sf.mmm.util.lang.api.Formatter;
@@ -10,7 +9,8 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using {@link SimpleDateFormat}.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using a custom date pattern
+ * (typically using {@link java.text.SimpleDateFormat}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -23,7 +23,8 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
   /**
    * The constructor.
    * 
-   * @param pattern is the pattern for the {@link SimpleDateFormat}.
+   * @param pattern is the pattern for the {@link FormatterProvider#getDateFormatter(Locale, String) date
+   *        formatter}.
    */
   public NlsFormatterDatePattern(String pattern) {
 

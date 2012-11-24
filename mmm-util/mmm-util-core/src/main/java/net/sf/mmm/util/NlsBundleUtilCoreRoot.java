@@ -1470,4 +1470,12 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   @NlsBundleMessage("Value has to be filled.")
   NlsMessage failureMandatory();
 
+  /**
+   * @see net.sf.mmm.util.search.api.SearchTimeoutException
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("Your search query was canceled because it exceeded a given timeout! Please try to simplify, "
+      + "specialize to match less hits, or try again later.")
+  String errorSearchTimeout();
+
 }

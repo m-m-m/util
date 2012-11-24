@@ -11,11 +11,11 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * This is the interface for a manager of a {@link #getEntityClassImplementation() specific type} of
  * {@link GenericEntity}. In other contexts this is often called a DAO (Data Access Object). It is responsible
  * for {@link #load(Object) loading} , {@link #save(GenericEntity) saving} and
- * {@link net.sf.mmm.persistence.api.search.PersistenceSearchQuery searching} {@link GenericEntity entities}
- * of the {@link #getEntityClassImplementation() according type}.<br>
- * For each (non-abstract) implementation of {@link GenericEntity} there should exists one instance of this
+ * {@link net.sf.mmm.util.search.api.SearchQuery searching} {@link GenericEntity entities} of the
+ * {@link #getEntityClassImplementation() according type}.<br>
+ * For each (non-abstract) implementation of {@link GenericEntity} there should exist one instance of this
  * interface. Typically when you create a custom {@link GenericEntity entity} you will also create a custom
- * interface and implementation of an according {@link GenericDao} . If there is no custom implementation of a
+ * interface and implementation of an according {@link GenericDao}. If there is no custom implementation of a
  * {@link GenericDao} for some type of {@link GenericEntity}, a generic implementation is used as fallback.<br>
  * The {@link PersistenceManager} can be seen as the manager of all {@link GenericDao} and acts as front-end
  * to them.
@@ -55,7 +55,8 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   /**
    * This method gets the {@link #getEntityClassImplementation() entity-class} with the view for reading the
    * entity. This may be the same as {@link #getEntityClassImplementation()} but can also be an interface with
-   * the getters of the entity.
+   * the getters of the entity. If there is only one interface containing both setters and getters, this
+   * method and {@link #getEntityClassReadWrite()} should both return that interface.
    * 
    * @return the according entity-class.
    */
@@ -64,8 +65,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   /**
    * This method gets the {@link #getEntityClassImplementation() entity-class} with the view for reading and
    * writing the entity. This may be the same as {@link #getEntityClassImplementation()} but can also be an
-   * interface with the getters and setters (typically extending {@link #getEntityClassReadOnly()}) of the
-   * entity.
+   * interface with the getters and setters (extending {@link #getEntityClassReadOnly()}) of the entity.
    * 
    * @return the according entity-class.
    */

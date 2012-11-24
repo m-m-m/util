@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.formatter;
 
-import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -15,7 +14,8 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for {@link Date}s.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for {@link java.util.Date}s using
+ * {@link Iso8601Util}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

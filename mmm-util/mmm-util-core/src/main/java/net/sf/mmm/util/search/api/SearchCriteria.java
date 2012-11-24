@@ -1,19 +1,19 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.persistence.api.search;
+package net.sf.mmm.util.search.api;
 
 import java.io.Serializable;
 
 /**
- * This is the interface for a search query. Such object specifies the criteria of the hits when performing a
- * search.
+ * This is the interface for the transfer-object with the criteria for a search query. Such object specifies
+ * the criteria which {@link SearchResult#getHits() hits} will match when performing a search.
  * 
- * @see PersistenceSearchQuery
- * @see PersistenceSearchResult
+ * @see SearchResult
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 3.0.0
  */
-public interface PersistenceSearchCriteria extends Serializable {
+public interface SearchCriteria extends Serializable {
 
   /**
    * This method gets the maximum number of hits that will be received as result for this query.

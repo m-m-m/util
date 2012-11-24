@@ -1,16 +1,16 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.persistence.base.search;
+package net.sf.mmm.util.search.base;
 
-import net.sf.mmm.persistence.api.search.PersistenceSearchCriteria;
+import net.sf.mmm.util.search.api.SearchCriteria;
 
 /**
- * This is the abstract base implementation of {@link PersistenceSearchCriteria}.
+ * This is the abstract base implementation of {@link SearchCriteria}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 3.0.0
  */
-public abstract class AbstractPersistenceSearchCriteria implements PersistenceSearchCriteria {
+public abstract class AbstractSearchCriteria implements SearchCriteria {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -8080276978548478955L;
@@ -27,7 +27,7 @@ public abstract class AbstractPersistenceSearchCriteria implements PersistenceSe
   /**
    * The constructor.
    */
-  public AbstractPersistenceSearchCriteria() {
+  public AbstractSearchCriteria() {
 
     super();
   }
