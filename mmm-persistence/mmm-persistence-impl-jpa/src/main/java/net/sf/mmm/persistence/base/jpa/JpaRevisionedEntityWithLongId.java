@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.persistence.impl.jpa;
+package net.sf.mmm.persistence.base.jpa;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,15 +35,10 @@ public abstract class JpaRevisionedEntityWithLongId extends JpaRevisionedEntity<
   }
 
   /**
-   * This method sets the {@link #getId() primary key}.<br>
-   * <b>ATTENTION:</b><br>
-   * This method is only intended for internal usage. It should NOT be set manually outside this
-   * persistence-layer.
-   * 
-   * @param id is the ID to set.
+   * {@inheritDoc}
    */
   @Override
-  public void setId(Long id) {
+  protected void setId(Long id) {
 
     super.setId(id);
   }

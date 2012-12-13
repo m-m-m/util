@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa;
 
+import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 import net.sf.mmm.util.entity.api.GenericEntity;
 
 /**

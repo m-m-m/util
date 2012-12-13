@@ -4,7 +4,7 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 
 import javax.inject.Named;
 
-import net.sf.mmm.persistence.impl.jpa.AbstractJpaGenericDao;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityManager;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;

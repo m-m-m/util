@@ -22,7 +22,7 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
   private int hitOffset;
 
   /** @see #getSearchTimeout() */
-  private Integer searchTimeout;
+  private Long searchTimeout;
 
   /**
    * The constructor.
@@ -54,7 +54,7 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
    * {@inheritDoc}
    */
   @Override
-  public Integer getSearchTimeout() {
+  public Long getSearchTimeout() {
 
     return this.searchTimeout;
   }
@@ -78,7 +78,7 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
   /**
    * @param searchTimeout is the new value of {@link #getSearchTimeout()}.
    */
-  public void setSearchTimeout(Integer searchTimeout) {
+  public void setSearchTimeout(Long searchTimeout) {
 
     this.searchTimeout = searchTimeout;
   }

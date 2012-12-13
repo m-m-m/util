@@ -1,10 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.persistence.impl.jpa;
+package net.sf.mmm.persistence.base.jpa;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import net.sf.mmm.persistence.api.query.JpqlBuilder;
+import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
 import net.sf.mmm.persistence.base.AbstractGenericDao;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.entity.api.GenericEntity;
@@ -26,6 +29,9 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
 
   /** @see #getEntityManager() */
   private EntityManager entityManager;
+
+  /** @see #getJpqlBuilder() */
+  private JpqlBuilder jpqlBuilder;
 
   /**
    * The constructor.
@@ -57,6 +63,50 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
   protected final EntityManager getEntityManager() {
 
     return this.entityManager;
+  }
+
+  /**
+   * This method injects a thread-safe {@link EntityManager} instance that acts as proxy to an
+   * {@link EntityManager} associated with the current thread (created when the transaction is opened).
+   * 
+   * @param entityManager is the {@link EntityManager} to inject.
+   */
+  @PersistenceContext
+  public void setEntityManager(EntityManager entityManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.entityManager = entityManager;
+  }
+
+  /**
+   * @see #newQuery()
+   * 
+   * @return the {@link JpqlBuilder}.
+   */
+  protected JpqlBuilder getJpqlBuilder() {
+
+    return this.jpqlBuilder;
+  }
+
+  /**
+   * @param jpqlBuilder is the {@link JpqlBuilder} to inject.
+   */
+  @Inject
+  public void setJpqlBuilder(JpqlBuilder jpqlBuilder) {
+
+    this.jpqlBuilder = jpqlBuilder;
+  }
+
+  /**
+   * @see #getJpqlBuilder()
+   * @see SearchQueryJpa
+   * 
+   * @return a new {@link JpqlFromClause} to build a dynamic JPQL query for finding instances of the
+   *         {@link #getEntityClassImplementation() managed entity}.
+   */
+  protected JpqlFromClause<? extends ENTITY> newQuery() {
+
+    return this.jpqlBuilder.from(getEntityClassImplementation());
   }
 
   /**
@@ -100,19 +150,6 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
     if (!getEntityManager().contains(entity)) {
       getEntityManager().persist(entity);
     }
-  }
-
-  /**
-   * This method injects a thread-safe {@link EntityManager} instance that acts as proxy to an
-   * {@link EntityManager} associated with the current thread (created when the transaction is opened).
-   * 
-   * @param entityManager is the entityManager to set
-   */
-  @PersistenceContext
-  public void setEntityManager(EntityManager entityManager) {
-
-    getInitializationState().requireNotInitilized();
-    this.entityManager = entityManager;
   }
 
   /**

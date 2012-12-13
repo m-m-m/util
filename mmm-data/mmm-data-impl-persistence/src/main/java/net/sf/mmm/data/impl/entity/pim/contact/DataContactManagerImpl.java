@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 import net.sf.mmm.data.api.entity.pim.contact.DataContact;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactView;
-import net.sf.mmm.persistence.impl.jpa.AbstractJpaGenericDao;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 
 /**
  * TODO: this class ...

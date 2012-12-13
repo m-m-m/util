@@ -5,7 +5,7 @@ package net.sf.mmm.persistence.impl.hibernate;
 
 import javax.persistence.Entity;
 
-import net.sf.mmm.persistence.impl.jpa.JpaRevisionedEntity;
+import net.sf.mmm.persistence.base.jpa.JpaRevisionedEntity;
 
 import org.hibernate.envers.Audited;
 

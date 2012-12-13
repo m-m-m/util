@@ -13,12 +13,12 @@ package net.sf.mmm.util.search.api;
  * <pre>
  * public interface MyEntityDao extends GenericDao&lt;Long, MyEntity> {
  *
- *   {@link SearchQuery}&lt;MyEntity> search({@link SearchCriteria MySearchCriteria} criteria);
+ *   {@link SearchQuery}&lt;MyEntity> findByCriteria({@link SearchCriteria MySearchCriteria} criteria);
  *
  * }
  * </pre>
  * 
- * @param <HIT> is the generic type of the result of this query. Typically one of your
+ * @param <HIT> is the generic type of the {@link #search() result} of this query. Typically one of your
  *        {@link net.sf.mmm.util.entity.api.GenericEntity entities} but may also be a transfer object (in case
  *        of constructor-query).
  * 
@@ -33,7 +33,7 @@ public interface SearchQuery<HIT> {
    * 
    * @return the total number of hits for this query in the database.
    */
-  int count();
+  long count();
 
   /**
    * This method performs the actual search to get the {@link SearchResult}. To prevent performance problems

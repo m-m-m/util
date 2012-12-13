@@ -9,7 +9,7 @@ import javax.persistence.Transient;
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
-import net.sf.mmm.persistence.impl.jpa.JpaRevisionedEntity;
+import net.sf.mmm.persistence.base.jpa.JpaRevisionedEntity;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 
 /**

@@ -5,7 +5,7 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-import net.sf.mmm.persistence.impl.jpa.JpaEntity;
+import net.sf.mmm.persistence.base.jpa.JpaEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 

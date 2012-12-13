@@ -11,7 +11,7 @@ import java.util.List;
 import net.sf.mmm.persistence.api.RevisionMetadata;
 import net.sf.mmm.persistence.api.RevisionedDao;
 import net.sf.mmm.persistence.base.RevisionedPersistenceEntityWithoutRevisionSetterException;
-import net.sf.mmm.persistence.impl.jpa.AbstractJpaGenericDao;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 import net.sf.mmm.util.entity.api.RevisionedEntity;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
