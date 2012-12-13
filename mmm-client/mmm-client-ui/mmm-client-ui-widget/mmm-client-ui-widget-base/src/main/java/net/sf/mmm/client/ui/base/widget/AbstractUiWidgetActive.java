@@ -11,12 +11,14 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
  * This is the abstract base implementation of a {@link #setFocused(boolean) focusable}
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * @param <VALUE> is the generic type of the {@link #getValue() value}. Use {@link Void} for no value.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActive<?>> extends
-    AbstractUiWidget<ADAPTER> implements UiWidgetActive {
+public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActive<?>, VALUE> extends
+    AbstractUiWidgetReal<ADAPTER, VALUE> implements UiWidgetActive {
 
   /** @see #addFocusHandler(UiHandlerEventFocus) */
   private FocusEventSender focusEventSender;
@@ -128,6 +130,8 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   @Override
   public void setAccessKey(char accessKey) {
 
+    // TODO hohwille add AccessKeyManager to check for duplicate bindings and to implement easily for toolkits
+    // no supporting this feature natively.
     this.accessKey = accessKey;
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setAccessKey(accessKey);

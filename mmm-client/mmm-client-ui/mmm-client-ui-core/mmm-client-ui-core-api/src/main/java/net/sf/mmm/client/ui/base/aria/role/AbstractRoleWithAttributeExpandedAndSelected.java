@@ -43,4 +43,16 @@ public abstract class AbstractRoleWithAttributeExpandedAndSelected extends Abstr
     return this.selected;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.selected != null) {
+      setSelected(this.selected);
+    }
+  }
+
 }

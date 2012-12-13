@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
@@ -56,7 +56,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    * {@inheritDoc}
    */
   @Override
-  public void setMode(boolean editMode, AbstractUiWidget<?> widget) {
+  public void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> widget) {
 
     super.setMode(editMode, widget);
     ValueBoxBase<?> valueBoxBase = getWidgetAsValueBoxBase();

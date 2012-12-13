@@ -13,15 +13,16 @@ import net.sf.mmm.client.ui.api.common.UiMode;
 public abstract interface AttributeWriteModeFixed extends AttributeReadModeFixed {
 
   /**
-   * This method sets the {@link #getModeFixed() fixed mode} of this object. This will force to (recursively)
-   * {@link AttributeWriteMode#setMode(UiMode) set} the {@link AttributeReadMode#getMode() mode of this
-   * object} but also fixing it to this value. The {@link #getModeFixed() fixed mode} itself will NOT be set
-   * recursively.<br/>
+   * This method sets the {@link #getModeFixed() fixed mode} of this object. This will
+   * {@link AttributeWriteMode#setMode(UiMode) set} the {@link AttributeReadMode#getMode() mode} to the given
+   * mode (if not <code>null</code>, recursively) and then mark the mode as fixed so
+   * {@link AttributeWriteMode#setMode(UiMode)} will have no effect anymore. The {@link #getModeFixed() fixed
+   * mode} itself will NOT be set recursively.<br/>
    * The typical use-case is to set the fixed mode to {@link UiMode#VIEW} in order to prevent a UI widget (a
    * field or even an entire sub-dialog) from switching to edit-mode ({@link UiMode#EDIT}) so the UI widget
    * will always remain read-only.
    * 
-   * @param mode is the new {@link UiMode} to set.
+   * @param mode is the new fixed {@link UiMode} to set. May be <code>null</code> to unset fixation.
    */
   void setModeFixed(UiMode mode);
 

@@ -43,4 +43,16 @@ public abstract class AbstractRoleWithAttributeChecked extends AbstractRole impl
     return this.checked;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.checked != null) {
+      setChecked(this.checked);
+    }
+  }
+
 }

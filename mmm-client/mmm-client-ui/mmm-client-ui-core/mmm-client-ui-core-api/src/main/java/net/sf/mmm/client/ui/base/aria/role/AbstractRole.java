@@ -88,6 +88,73 @@ public abstract class AbstractRole implements Role {
   public abstract Class<? extends Role> getRoleInterface();
 
   /**
+   * @param delegate is the delegate where {@link AttributeWriteOnlyAttribute#setAttribute(String, String)
+   *        attributes are set}.
+   */
+  public final void setDelegate(AttributeWriteOnlyAttribute delegate) {
+
+    this.delegate = delegate;
+    this.delegate.setAttribute(HTML_ATTRIBUTE_ARIA_ROLE, getName());
+    updateDelegate();
+  }
+
+  /**
+   * This method is called from {@link #setDelegate(AttributeWriteOnlyAttribute)} in order to update all
+   * attributes on the new delegate.
+   */
+  protected void updateDelegate() {
+
+    if (this.atomic) {
+      setAtomic(true);
+    }
+    if (this.busy) {
+      setBusy(true);
+    }
+    if (this.disabled) {
+      setDisabled(true);
+    }
+    if (this.hasPopup) {
+      setHasPopup(true);
+    }
+    if (this.hidden) {
+      setHidden(true);
+    }
+    if (this.grabbed != null) {
+      setGrabbed(this.grabbed);
+    }
+    if (this.controls != null) {
+      setControls(this.controls);
+    }
+    if (this.describedBy != null) {
+      setDescribedBy(this.describedBy);
+    }
+    if (this.dropEffect != null) {
+      setDropEffect(this.dropEffect);
+    }
+    if (this.flowTo != null) {
+      setFlowTo(this.flowTo);
+    }
+    if (this.invalid != null) {
+      setInvalid(this.invalid);
+    }
+    if (this.label != null) {
+      setLabel(this.label);
+    }
+    if (this.labelledBy != null) {
+      setLabelledBy(this.labelledBy);
+    }
+    if (this.live != null) {
+      setLive(this.live);
+    }
+    if (this.owns != null) {
+      setOwns(this.owns);
+    }
+    if (this.relevant != null) {
+      setRelevant(this.relevant);
+    }
+  }
+
+  /**
    * @see AttributeWriteOnlyAttribute#setAttribute(String, String)
    * 
    * @param name is the name of the attribute.
@@ -221,6 +288,19 @@ public abstract class AbstractRole implements Role {
    * {@inheritDoc}
    */
   @Override
+  public void setControls(String controls) {
+
+    if ((controls == null) || (controls.isEmpty())) {
+      setControls((AriaIdList) null);
+    } else {
+      setControls(new AriaIdList(controls));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public AriaIdList getControls() {
 
     if (this.controls == null) {
@@ -237,6 +317,19 @@ public abstract class AbstractRole implements Role {
 
     this.describedBy = describedBy;
     setAttribute(HTML_ATTRIBUTE_ARIA_DESCRIBED_BY, describedBy);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDescribedBy(String describedBy) {
+
+    if ((describedBy == null) || (describedBy.isEmpty())) {
+      setDescribedBy((AriaIdList) null);
+    } else {
+      setDescribedBy(new AriaIdList(describedBy));
+    }
   }
 
   /**
@@ -300,6 +393,19 @@ public abstract class AbstractRole implements Role {
 
     this.flowTo = flowTo;
     setAttribute(HTML_ATTRIBUTE_ARIA_FLOW_TO, flowTo);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFlowTo(String flowTo) {
+
+    if ((flowTo == null) || (flowTo.isEmpty())) {
+      setFlowTo((AriaIdList) null);
+    } else {
+      setFlowTo(new AriaIdList(flowTo));
+    }
   }
 
   /**
@@ -426,6 +532,19 @@ public abstract class AbstractRole implements Role {
    * {@inheritDoc}
    */
   @Override
+  public void setLabelledBy(String labelledBy) {
+
+    if ((labelledBy == null) || (labelledBy.isEmpty())) {
+      setLabelledBy((AriaIdList) null);
+    } else {
+      setLabelledBy(new AriaIdList(labelledBy));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public AriaIdList getLabelledBy() {
 
     if (this.labelledBy == null) {
@@ -464,6 +583,19 @@ public abstract class AbstractRole implements Role {
 
     this.owns = owns;
     setAttribute(HTML_ATTRIBUTE_ARIA_OWNS, owns);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setOwns(String owns) {
+
+    if ((owns == null) || (owns.isEmpty())) {
+      setOwns((AriaIdList) null);
+    } else {
+      setOwns(new AriaIdList(owns));
+    }
   }
 
   /**

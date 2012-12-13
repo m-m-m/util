@@ -34,6 +34,9 @@ public abstract interface Role extends AttributeWriteAriaAtomic, AttributeWriteA
     AttributeWriteAriaLabel, AttributeWriteAriaLabelledBy, AttributeWriteAriaLive, AttributeWriteAriaOwns,
     AttributeWriteAriaRelevant {
 
+  /** The name of the <code>role</code> attribute. */
+  String HTML_ATTRIBUTE_ARIA_ROLE = "role";
+
   /**
    * {@link #getName() Name} of {@link RoleAlert}.
    */

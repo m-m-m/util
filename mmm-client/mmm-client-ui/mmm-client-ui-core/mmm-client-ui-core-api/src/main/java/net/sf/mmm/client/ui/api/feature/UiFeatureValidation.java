@@ -5,7 +5,10 @@ package net.sf.mmm.client.ui.api.feature;
 import net.sf.mmm.util.validation.api.ValidatableObject;
 
 /**
- * This is the interface for the {@link UiFeature features} of an object that can be validated.
+ * This is the interface for the {@link UiFeature features} of an object that can be validated. It allows to
+ * {@link #addValidator(net.sf.mmm.util.validation.api.ValueValidator) add validators} and perform a
+ * {@link #validate(net.sf.mmm.util.validation.api.ValidationState) validation} of the current
+ * {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

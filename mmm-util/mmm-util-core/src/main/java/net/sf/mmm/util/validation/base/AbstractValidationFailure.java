@@ -37,6 +37,7 @@ public abstract class AbstractValidationFailure implements ValidationFailure {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getCode() {
 
     return this.code;
@@ -45,9 +46,19 @@ public abstract class AbstractValidationFailure implements ValidationFailure {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getSource() {
 
     return this.source;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return getMessage();
   }
 
 }

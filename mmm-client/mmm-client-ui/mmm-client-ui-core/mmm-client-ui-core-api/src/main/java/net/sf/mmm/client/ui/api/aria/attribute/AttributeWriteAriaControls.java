@@ -19,4 +19,12 @@ public abstract interface AttributeWriteAriaControls extends AttributeReadAriaCo
    */
   void setControls(AriaIdList controls);
 
+  /**
+   * This method sets the {@link #getControls() controls} attribute of this object.
+   * 
+   * @param controls is value of {@link #getControls()} as {@link String}. May be <code>null</code> or the
+   *        empty string to unset.
+   */
+  void setControls(String controls);
+
 }

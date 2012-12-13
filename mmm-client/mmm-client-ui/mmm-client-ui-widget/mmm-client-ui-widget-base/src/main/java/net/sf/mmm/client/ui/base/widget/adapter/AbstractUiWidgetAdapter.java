@@ -11,8 +11,11 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
+import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
@@ -107,7 +110,7 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public void setMode(boolean editMode, AbstractUiWidget<?> uiWidget) {
+  public void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> uiWidget) {
 
     // do nothing by default
   }
@@ -236,6 +239,15 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   public boolean isFocused() {
 
     return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public AbstractUiWidgetLabel<?> createLabel(UiWidgetFactory<?> factory) {
+
+    return (AbstractUiWidgetLabel<?>) factory.create(UiWidgetLabel.class);
   }
 
 }

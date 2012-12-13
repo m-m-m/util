@@ -67,4 +67,19 @@ public abstract class AbstractRoleWithBaseAttributes extends AbstractRoleWithAtt
     return this.readOnly;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.readOnly) {
+      setReadOnly(true);
+    }
+    if (this.required) {
+      setRequired(true);
+    }
+  }
+
 }

@@ -12,6 +12,8 @@ import net.sf.mmm.util.validation.api.ValidationState;
 /**
  * This class represents the state of a validation.
  * 
+ * @see ValidationStateFailureCollector
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

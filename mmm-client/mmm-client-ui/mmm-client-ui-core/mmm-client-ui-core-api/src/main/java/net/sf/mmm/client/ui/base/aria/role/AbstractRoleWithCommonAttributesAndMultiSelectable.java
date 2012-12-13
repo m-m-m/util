@@ -43,4 +43,16 @@ public abstract class AbstractRoleWithCommonAttributesAndMultiSelectable extends
     setAttribute(HTML_ATTRIBUTE_ARIA_MULTI_SELECTABLE, multiSelectable);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.multiSelectable) {
+      setMultiSelectable(true);
+    }
+  }
+
 }

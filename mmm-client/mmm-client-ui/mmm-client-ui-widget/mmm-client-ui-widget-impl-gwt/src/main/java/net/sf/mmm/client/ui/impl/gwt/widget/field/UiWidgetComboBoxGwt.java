@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBox;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtListBoxCombo;
 
 /**
@@ -22,8 +22,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtList
 // <option value="English"></option>
 // <option value="Dutch"></option>
 // </datalist>
-public class UiWidgetComboBoxGwt<VALUE> extends
-    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtListBoxCombo<VALUE>, VALUE> implements UiWidgetComboBox<VALUE> {
+public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidgetAdapterGwtListBoxCombo<VALUE>, VALUE> {
 
   /**
    * The constructor.

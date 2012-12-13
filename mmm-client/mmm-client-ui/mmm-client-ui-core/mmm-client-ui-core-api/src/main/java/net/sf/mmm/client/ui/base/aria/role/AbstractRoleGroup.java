@@ -42,4 +42,16 @@ public abstract class AbstractRoleGroup extends AbstractRoleWithAttributeExpande
     return this.activeDescendant;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.activeDescendant != null) {
+      setActiveDescendant(this.activeDescendant);
+    }
+  }
+
 }

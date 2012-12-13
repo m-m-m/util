@@ -118,4 +118,25 @@ public abstract class AbstractRoleWithCommonAttributes extends AbstractRoleWithB
     setAttribute(HTML_ATTRIBUTE_ARIA_ORIENTATION, orientation);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.activeDescendant != null) {
+      setActiveDescendant(this.activeDescendant);
+    }
+    if (this.checked != null) {
+      setChecked(this.checked);
+    }
+    if (this.level != null) {
+      setLevel(this.level);
+    }
+    if (this.orientation != null) {
+      setOrientation(this.orientation);
+    }
+  }
+
 }

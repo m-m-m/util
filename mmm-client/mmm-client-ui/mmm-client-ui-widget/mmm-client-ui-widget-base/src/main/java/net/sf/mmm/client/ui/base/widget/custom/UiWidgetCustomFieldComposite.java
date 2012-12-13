@@ -8,11 +8,11 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
+import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
@@ -27,11 +27,13 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically a custom
  *        {@link net.sf.mmm.util.lang.api.Datatype}.
+ * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetCustomFieldComposite<VALUE> extends UiWidgetCustomField<VALUE, UiWidgetHorizontalPanel> {
+public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWidgetDynamicComposite<UiWidgetRegular>>
+    extends UiWidgetCustomField<VALUE, DELEGATE> {
 
   /** The {@link List} of children that are field widgets. */
   private final List<UiWidgetField<?>> fieldList;
@@ -46,10 +48,11 @@ public class UiWidgetCustomFieldComposite<VALUE> extends UiWidgetCustomField<VAL
    * The constructor.
    * 
    * @param factory is the {@link #getFactory() factory}.
+   * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWidgetCustomFieldComposite(UiWidgetFactory<?> factory) {
+  public UiWidgetCustomFieldComposite(UiWidgetFactory<?> factory, DELEGATE delegate) {
 
-    super(factory, factory.create(UiWidgetHorizontalPanel.class));
+    super(factory, delegate);
     this.fieldList = new LinkedList<UiWidgetField<?>>();
     this.focusEventSender = new FocusEventSender(this, getFactory());
   }
@@ -177,26 +180,6 @@ public class UiWidgetCustomFieldComposite<VALUE> extends UiWidgetCustomField<VAL
   public boolean isFocused() {
 
     return (this.focusField != null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected VALUE doGetValue() throws RuntimeException {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetValue(VALUE value) {
-
-    // TODO Auto-generated method stub
-
   }
 
   /**

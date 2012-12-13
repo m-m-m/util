@@ -18,10 +18,11 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 /**
  * This is the abstract base implementation of {@link UiWidgetOptionsField}.
  * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapterOptionsField<?, VALUE>, VALUE>
     extends AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE> {
@@ -110,14 +111,15 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
-  public VALUE getValueOrException() throws RuntimeException {
+  protected VALUE doGetValue() throws RuntimeException {
 
     if (this.optionTitleList == null) {
       // the options have not been set yet! As they may be received asynchronously but the widget adapter may
-      // have already been created, we return the original value here.
+      // have already been created, we return the original value here. Without the options it should be
+      // impossible for the user to change the value...
       return getOriginalValue();
     }
-    return super.getValueOrException();
+    return super.doGetValue();
   }
 
   /**

@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.widget;
 
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
+import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 
 /**
  * This is the interface for a factory used to #create create {@link UiWidget}s.
@@ -43,6 +44,11 @@ public interface UiWidgetFactory<NATIVE_WIDGET> extends UiWidgetFactoryDatatype 
    * @return the {@link UiConfiguration}.
    */
   UiConfiguration getConfiguration();
+
+  /**
+   * @return the instance of {@link RoleFactory}.
+   */
+  RoleFactory getRoleFactory();
 
   /**
    * This method creates a new {@link UiWidget} instance of the given type (<code>widgetInterface</code>).<br/>

@@ -17,12 +17,14 @@ public abstract interface AttributeReadModified {
   /**
    * This method determines if this object (or more precisely its value) is <em>modified</em>. This means that
    * the object has been modified (via a the user interface) since it's value was programatically
-   * {@link net.sf.mmm.util.lang.api.attribute.AttributeWriteValue#setValue(Object) set} for the last time.
-   * Often this is also called <em>dirty</em>. A composite object is also modified if one of its children are
-   * modified.<br/>
+   * {@link AttributeWriteValueAdvanced#setValue(Object) set} for the last time. Often this is also called
+   * <em>dirty</em>. A composite object is also modified if one of its children are modified.<br/>
    * <b>NOTE:</b><br/>
    * If the object's value is changed by the end-user to something else but then changed back to its original
    * value it may still remain {@link #isModified() modified}.
+   * 
+   * @see AttributeReadValueAdvanced#getOriginalValue()
+   * @see AttributeWriteValueAdvanced#setValueForUser(Object)
    * 
    * @return <code>true</code> if this object has been modified, <code>false</code> otherwise (if no changes
    *         have been made to this object).

@@ -4,8 +4,10 @@ package net.sf.mmm.client.ui.api.widget;
 
 /**
  * This is the interface for a <em>regular</em> {@link UiWidget}. Here regular means that it represents a
- * generic widget that can be placed
- * {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite almost anywhere}.
+ * generic widget that can be placed {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite almost
+ * anywhere}. Examples for widgets that are NOT regular are
+ * {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetWindow} or
+ * {@link net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -42,4 +42,16 @@ public abstract class AbstractRoleWithAttributeExpanded extends AbstractRole imp
     return this.expanded;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.expanded) {
+      setExpanded(true);
+    }
+  }
+
 }

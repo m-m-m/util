@@ -23,6 +23,6 @@ public interface UiModeChanger {
    *        to <code>newMode</code>.
    * @param newMode is the new {@link UiMode}.
    */
-  void changeMode(AbstractUiWidget<?> widget, UiMode newMode);
+  void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode);
 
 }

@@ -8,12 +8,13 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 /**
  * This is the abstract base implementation of {@link UiWidgetRegularAtomic}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetRegularAtomic<ADAPTER extends UiWidgetAdapter<?>> extends
-    AbstractUiWidget<ADAPTER> implements UiWidgetRegularAtomic {
+    AbstractUiWidgetReal<ADAPTER, Void> implements UiWidgetRegularAtomic {
 
   /**
    * The constructor.

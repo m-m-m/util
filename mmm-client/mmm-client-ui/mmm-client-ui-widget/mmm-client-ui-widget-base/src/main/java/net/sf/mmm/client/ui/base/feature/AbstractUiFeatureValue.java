@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.base.feature;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeReadModified;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValidation;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
@@ -28,7 +28,7 @@ import net.sf.mmm.util.validation.base.ValidatorMandatory;
  * @since 1.0.0
  */
 public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VALUE>, UiFeatureValidation<VALUE>,
-    AttributeReadModified {
+    AttributeWriteModified {
 
   /** @see #addValidator(ValueValidator) */
   private final List<ValueValidator<? super VALUE>> validatorList;
@@ -165,18 +165,36 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * {@inheritDoc}
    */
   @Override
-  public boolean isModified() {
+  public final boolean isModified() {
 
-    if (this.modified) {
+    if (isModifiedLocal()) {
       return true;
     }
+    return isModifiedRecursive();
+  }
+
+  /**
+   * @return {@link #isModified()} for this object itself (without {@link #isModifiedRecursive() recursion}).
+   */
+  protected boolean isModifiedLocal() {
+
+    return this.modified;
+  }
+
+  /**
+   * @return <code>true</code> if a child or descendant of this object is {@link #isModified() modified},
+   *         <code>false</code> otherwise.
+   */
+  protected boolean isModifiedRecursive() {
+
     return false;
   }
 
   /**
-   * @param modified <code>true</code> if this widget is modified (locally), <code>false</code> otherwise.
+   * {@inheritDoc}
    */
-  protected final void setModified(boolean modified) {
+  @Override
+  public void setModified(boolean modified) {
 
     this.modified = modified;
   }
@@ -321,6 +339,16 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * @param state is the {@link ValidationState}. Never <code>null</code>.
    */
   protected void doValidate(ValidationState state) {
+
+    validateLocal(state);
+  }
+
+  /**
+   * This method performs the local validation of this object excluding potential child objects.
+   * 
+   * @param state is the {@link ValidationState}.
+   */
+  protected void validateLocal(ValidationState state) {
 
     VALUE currentValue;
     try {

@@ -64,4 +64,18 @@ public abstract class AbstractRoleOption extends AbstractRoleWithCommonAttribute
     return this.setSize;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.posInSet != null) {
+      setPosInSet(this.posInSet);
+    }
+    if (this.setSize != null) {
+      setSetSize(this.setSize);
+    }
+  }
 }

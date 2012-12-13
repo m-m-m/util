@@ -41,13 +41,14 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue() throws RuntimeException {
+  protected final VALUE doGetValue() throws RuntimeException {
 
     DELEGATE_VALUE value = getDelegate().getValueOrException();
     if (value == null) {
       return getNullValue();
+    } else {
+      return convertValueFromDelegate(value);
     }
-    return convertValueFromDelegate(value);
   }
 
   /**
@@ -191,7 +192,8 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
   @Override
   protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    final ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getFactory());
+    final ChangeEventSender<VALUE> changeEventSender = super.createChangeEventSender();
+    // TODO hohwille this may cause dulicated events: one from delegate and one directly... needs redesign
     getDelegate().addChangeHandler(new UiHandlerEventValueChange<DELEGATE_VALUE>() {
 
       @Override

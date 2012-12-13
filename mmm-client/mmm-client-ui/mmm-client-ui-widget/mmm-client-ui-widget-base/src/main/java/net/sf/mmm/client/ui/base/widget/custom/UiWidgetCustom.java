@@ -7,9 +7,8 @@ import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
-import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
-import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -26,11 +25,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
  */
-public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends AbstractUiFeatureValue<VALUE> implements
-    UiWidgetWithValue<VALUE> {
-
-  /** @see #getFactory() */
-  private final AbstractUiWidgetFactory<?> factory;
+public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends AbstractUiWidget<VALUE> {
 
   /** @see #getDelegate() */
   private final DELEGATE delegate;
@@ -43,8 +38,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    */
   public UiWidgetCustom(UiWidgetFactory<?> factory, DELEGATE delegate) {
 
-    super();
-    this.factory = (AbstractUiWidgetFactory<?>) factory;
+    super(factory);
     this.delegate = delegate;
   }
 
@@ -52,10 +46,18 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final AbstractUiWidgetFactory<?> getFactory() {
+  @SuppressWarnings("unchecked")
+  protected VALUE doGetValue() throws RuntimeException {
 
-    return this.factory;
+    Object value = ((AbstractUiWidget<?>) this.delegate).getValueOrException();
+    return (VALUE) value;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected abstract void doSetValue(VALUE value);
 
   /**
    * This method gets the underlying {@link net.sf.mmm.client.ui.api.widget.UiWidget widget} that is adapted
@@ -85,15 +87,33 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final boolean isModified() {
+  protected boolean isModifiedRecursive() {
 
-    if (super.isModified()) {
+    if (super.isModifiedRecursive()) {
       return true;
     }
     return this.delegate.isModified();
   }
 
   // --- delegation methods ---
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected UiWidgetAdapter<?> getWidgetAdapter() {
+
+    return getWidgetAdapter(this.delegate);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean hasWidgetAdapter() {
+
+    return ((AbstractUiWidget<?>) this.delegate).hasWidgetAdapter();
+  }
 
   /**
    * {@inheritDoc}
@@ -381,6 +401,24 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   public final void setId(String id) {
 
     this.delegate.setId(id);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void removeFromParent() {
+
+    removeFromParent(this.delegate);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setParent(UiWidgetComposite<?> parent) {
+
+    setParent(this.delegate, parent);
   }
 
   /**

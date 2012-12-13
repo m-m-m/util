@@ -15,8 +15,16 @@ public abstract interface AttributeWriteAriaFlowTo extends AttributeReadAriaFlow
   /**
    * This method sets the {@link #getFlowTo() flowTo} attribute of this object.
    * 
-   * @param flowTo is value of {@link #getFlowTo()}.
+   * @param flowTo is value of {@link #getFlowTo()}. May be <code>null</code> to unset.
    */
   void setFlowTo(AriaIdList flowTo);
+
+  /**
+   * This method sets the {@link #getFlowTo() flowTo} attribute of this object.
+   * 
+   * @param flowTo is value of {@link #getFlowTo()} as {@link String}. May be <code>null</code> or the empty
+   *        string to unset.
+   */
+  void setFlowTo(String flowTo);
 
 }

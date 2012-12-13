@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetWithLabel<ADAPTER extends UiWidgetAdapterWithLabel<?>> extends
-    AbstractUiWidget<ADAPTER> implements AttributeWriteLabel {
+    AbstractUiWidgetReal<ADAPTER, Void> implements AttributeWriteLabel {
 
   /** @see #getLabel() */
   private String label;

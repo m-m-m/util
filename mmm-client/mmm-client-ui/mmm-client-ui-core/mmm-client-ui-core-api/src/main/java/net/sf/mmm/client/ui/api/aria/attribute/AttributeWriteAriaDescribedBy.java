@@ -20,4 +20,12 @@ public abstract interface AttributeWriteAriaDescribedBy extends AttributeReadAri
    */
   void setDescribedBy(AriaIdList describedBy);
 
+  /**
+   * This method sets the {@link #getDescribedBy() describedBy} attribute of this object.
+   * 
+   * @param describedBy is value of {@link #getDescribedBy()} as {@link String}. May be <code>null</code> or
+   *        the empty string to unset.
+   */
+  void setDescribedBy(String describedBy);
+
 }

@@ -61,4 +61,16 @@ public final class RoleButtonImpl extends AbstractRoleWithAttributeExpanded impl
     return RoleButton.class;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.pressed != null) {
+      setPressed(this.pressed);
+    }
+  }
+
 }

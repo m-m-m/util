@@ -2,11 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
+import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -29,6 +33,9 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
 
   /** @see #getConfiguration() */
   private final UiConfiguration configuration;
+
+  /** @see #getRoleFactory() */
+  private RoleFactory roleFactory;
 
   /**
    * The constructor.
@@ -56,7 +63,7 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
   public NATIVE_WIDGET getNativeWidget(UiWidgetRegular widget) {
 
     NlsNullPointerException.checkNotNull(UiWidgetRegular.class, widget);
-    AbstractUiWidget<?> abstractWidget = AbstractUiWidget.asAbstractWidget(widget);
+    AbstractUiWidget<?> abstractWidget = (AbstractUiWidget<?>) widget;
     NATIVE_WIDGET nativeWidget = (NATIVE_WIDGET) abstractWidget.getWidgetAdapter().getWidget();
     return nativeWidget;
   }
@@ -108,6 +115,27 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
   public UiConfiguration getConfiguration() {
 
     return this.configuration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public RoleFactory getRoleFactory() {
+
+    if (this.roleFactory == null) {
+      this.roleFactory = new RoleFactoryImpl();
+    }
+    return this.roleFactory;
+  }
+
+  /**
+   * @param roleFactory is the {@link RoleFactory} instance to set (to inject).
+   */
+  @Inject
+  public void setRoleFactory(RoleFactory roleFactory) {
+
+    this.roleFactory = roleFactory;
   }
 
 }

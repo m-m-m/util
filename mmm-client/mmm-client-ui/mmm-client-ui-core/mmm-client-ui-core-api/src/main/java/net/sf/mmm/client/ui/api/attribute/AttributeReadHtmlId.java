@@ -16,18 +16,19 @@ public abstract interface AttributeReadHtmlId extends AttributeReadId<String> {
   String HTML_ATTRIBUTE_ID = "id";
 
   /** Use this character to compose hierarchical {@link #getId() IDs}. */
-  String ID_SEPARATOR = "-";
+  String ID_SEPARATOR = "_";
 
   /**
    * This method gets the unique identifier of this object.<br/>
    * <b>ATTENTION:</b><br>
-   * In order to be compliant with all possible UI toolkit implementations, a valid ID has to be in the form
-   * <code>[a-zA-Z][a-zA-Z0-9-_]*</code>. Colons and periods are not accepted to prevent you from later having
-   * chaos with CSS selectors.
+   * In order to be compliant with all possible UI toolkit implementations, a valid ID has to fulfill
+   * ECMA-262, Section 7.6. It is recommended to use IDs of the form <code>[a-zA-Z][a-zA-Z0-9_$]*</code>.
+   * Invalid IDs (e.g. containing colon, hash or period) are not accepted to prevent you from later having
+   * problems with CSS selectors.
    * 
    * @see #ID_SEPARATOR
    * 
-   * @return the ID of this object or <code>null</code> if NOT {@link AttributeWriteHtmlId#setId(String) set}.
+   * @return the ID of this object.
    */
   @Override
   String getId();

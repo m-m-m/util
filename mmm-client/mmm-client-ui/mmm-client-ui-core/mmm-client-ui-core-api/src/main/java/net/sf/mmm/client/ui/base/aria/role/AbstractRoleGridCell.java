@@ -64,4 +64,19 @@ public abstract class AbstractRoleGridCell extends AbstractRoleWithAttributeExpa
     return this.readOnly;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.readOnly) {
+      setReadOnly(true);
+    }
+    if (this.required) {
+      setRequired(true);
+    }
+  }
+
 }

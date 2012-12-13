@@ -9,10 +9,11 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleComposite;
 /**
  * This is the abstract base implementation of {@link UiWidgetSingleComposite}.
  * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAdapterSingleComposite<?, CHILD>, CHILD extends UiWidget>
     extends AbstractUiWidgetComposite<ADAPTER, CHILD> implements UiWidgetSingleComposite<CHILD> {

@@ -16,8 +16,16 @@ public abstract interface AttributeWriteAriaLabelledBy extends AttributeReadAria
   /**
    * This method sets the {@link #getLabelledBy() labelledBy} attribute of this object.
    * 
-   * @param labelledBy is value of {@link #getLabelledBy()}.
+   * @param labelledBy is value of {@link #getLabelledBy()}. May be <code>null</code> to unset.
    */
   void setLabelledBy(AriaIdList labelledBy);
+
+  /**
+   * This method sets the {@link #getLabelledBy() labelledBy} attribute of this object.
+   * 
+   * @param labelledBy is value of {@link #getLabelledBy()} as String. May be <code>null</code> or the empty
+   *        string to unset.
+   */
+  void setLabelledBy(String labelledBy);
 
 }

@@ -35,7 +35,11 @@ public interface ValidationFailure extends Serializable {
   String getMessage();
 
   /**
-   * This method gets the {@link #getMessage() message} localized for the given {@link Locale}.
+   * This method gets the {@link #getMessage() message} localized for the given {@link Locale}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This method is designed for server applications with NLS. On client side (e.g. for GWT clients) only a
+   * single locale may be supported at a time and this method will behave like {@link #getMessage()} ignoring
+   * the lcoale.
    * 
    * @param locale is the {@link Locale}.
    * @return the message.

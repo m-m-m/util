@@ -14,7 +14,9 @@ public abstract interface AttributeWriteMode extends AttributeReadMode {
 
   /**
    * This method sets the {@link UiMode mode} of this object. It will change the object to {@link UiMode#VIEW
-   * view} or {@link UiMode#EDIT edit} mode. This is a recursive operation.
+   * view} or {@link UiMode#EDIT edit} mode. This is a recursive operation that will also apply to all
+   * descendants of this object. If a {@link AttributeReadModeFixed#getModeFixed() fixed mode} is set (not
+   * <code>null</code>), this method will have no effect and recursive calls will stop at this object.
    * 
    * @param mode is the new {@link UiMode} to set.
    */

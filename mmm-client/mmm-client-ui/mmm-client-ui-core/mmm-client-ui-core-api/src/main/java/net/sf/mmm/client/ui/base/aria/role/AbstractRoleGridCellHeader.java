@@ -47,4 +47,16 @@ public abstract class AbstractRoleGridCellHeader extends AbstractRoleWithBaseAtt
     setAttribute(HTML_ATTRIBUTE_ARIA_SORT, sort);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.sort != null) {
+      setSort(this.sort);
+    }
+  }
+
 }

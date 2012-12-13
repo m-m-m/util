@@ -60,4 +60,16 @@ public final class RoleTextboxImpl extends AbstractRoleWithCommonAttributesAndAu
     return this.multiLine;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.multiLine) {
+      setMultiLine(true);
+    }
+  }
+
 }

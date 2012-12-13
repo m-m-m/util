@@ -13,12 +13,14 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
+import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the interface that adapts to the native {@link #getWidget() widget} of the underlying toolkit
- * implementation for a {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidget}.<br/>
+ * implementation for a {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal}.<br/>
  * It is a design trade-off as java does not have multi-inheritance (we would need scala traits here). This
  * way it is possible to implement an abstract base-implementation for the types of the
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}-hierarchy and inherit different implementations (Swing,
@@ -63,9 +65,9 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
    * 
    * @param editMode - <code>true</code> of {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT} and
    *        <code>false</code> for {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW}.
-   * @param widget is the {@link AbstractUiWidget}.
+   * @param widget is the {@link AbstractUiWidgetReal}.
    */
-  void setMode(boolean editMode, AbstractUiWidget<?> widget);
+  void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> widget);
 
   /**
    * This method registers the given {@link UiHandlerEventClick click handler} in the {@link #getWidget()
@@ -86,8 +88,8 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
   /**
    * This method sets the {@link #getConfiguration() configuration}.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method is automatically called from {@link AbstractUiWidget#getWidgetAdapter(AbstractUiWidget)}. It
-   * must be called only once.
+   * This method is automatically called from
+   * {@link AbstractUiWidgetReal#getWidgetAdapter(AbstractUiWidgetReal)}. It must be called only once.
    * 
    * @param configuration is the value for {@link #getConfiguration()}.
    */
@@ -103,5 +105,16 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
    * @return the absolute URL.
    */
   String createAbsoluteImageUrl(String relativePath);
+
+  /**
+   * This method creates the label for this widget. Depending on the underlying toolkit implementation the
+   * native widget may already contain the label (applies e.g. for <code>FormItem</code> in SmartGWT). In such
+   * case this method will wrap it as {@link AbstractUiWidgetLabel}. Otherwise this method should
+   * {@link UiWidgetFactory#create(Class) create} a new {@link AbstractUiWidgetLabel} and return it.
+   * 
+   * @param factory is the {@link UiWidgetFactory} that may be used to create the label.
+   * @return the label.
+   */
+  AbstractUiWidgetLabel<?> createLabel(UiWidgetFactory<?> factory);
 
 }

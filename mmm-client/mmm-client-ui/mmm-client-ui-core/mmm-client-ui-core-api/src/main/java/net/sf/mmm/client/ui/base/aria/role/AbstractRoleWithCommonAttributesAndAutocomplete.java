@@ -47,4 +47,16 @@ public abstract class AbstractRoleWithCommonAttributesAndAutocomplete extends Ab
     setAttribute(HTML_ATTRIBUTE_ARIA_AUTOCOMPLETE, autocomplete);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.autocomplete != null) {
+      setAutocomplete(this.autocomplete);
+    }
+  }
+
 }

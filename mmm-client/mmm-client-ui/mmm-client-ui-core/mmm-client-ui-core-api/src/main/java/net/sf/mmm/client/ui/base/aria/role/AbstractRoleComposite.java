@@ -42,4 +42,16 @@ public abstract class AbstractRoleComposite extends AbstractRole implements Role
     return this.activeDescendant;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateDelegate() {
+
+    super.updateDelegate();
+    if (this.activeDescendant != null) {
+      setActiveDescendant(this.activeDescendant);
+    }
+  }
+
 }
