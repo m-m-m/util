@@ -51,8 +51,10 @@ public interface UnicodeUtil {
   /** The regular whitespace character used to separate words. */
   char SPACE = 0x0020;
 
+  /** The exclamation mark used to terminate an exclamation. Looks like this: {@value} */
   char EXCLAMATION_MARK = 0x00021;
 
+  /** The quotation mark sign used to enclose quotations. Looks like this: {@value} */
   char QUOTATION_MARK = 0x00022;
 
   /** The hash or number sign. Looks like this: {@value} */
@@ -75,8 +77,10 @@ public interface UnicodeUtil {
   /** The apostrophe sign. Looks like this: {@value} */
   char APOSTROPHE = 0x0027;
 
+  /** The left/opening parenthesis. Looks like this: {@value} */
   char LEFT_PARENTHESIS = 0x00028;
 
+  /** The right/closing parenthesis. Looks like this: {@value} */
   char RIGHT_PARENTHESIS = 0x00029;
 
   /** The asterisk sign commonly used for multiplication. Looks like this: {@value} */
@@ -97,43 +101,74 @@ public interface UnicodeUtil {
    */
   char HYPHEN_MINUS = 0x002D;
 
+  /** The full stop sign used in most languages to terminate a sentence. Looks like this: {@value} */
   char FULL_STOP = 0x0002E;
 
+  /**
+   * The slash sign also commonly used for divisions (where actually {@link #DIVISION_SIGN} shall be used).
+   * Looks like this: {@value}
+   */
   char SOLIDUS = 0x0002F;
 
+  /** The Arabic digit for zero. Looks like this: {@value} */
   char DIGIT_ZERO = 0x0030;
 
+  /** The Arabic digit for one. Looks like this: {@value} */
   char DIGIT_ONE = 0x0031;
 
+  /** The Arabic digit for two. Looks like this: {@value} */
   char DIGIT_TWO = 0x0032;
 
+  /** The Arabic digit for three. Looks like this: {@value} */
   char DIGIT_THREE = 0x0033;
 
+  /** The Arabic digit for four. Looks like this: {@value} */
   char DIGIT_FOUR = 0x0034;
 
+  /** The Arabic digit for five. Looks like this: {@value} */
   char DIGIT_FIVE = 0x0035;
 
+  /** The Arabic digit for six. Looks like this: {@value} */
   char DIGIT_SIX = 0x0036;
 
+  /** The Arabic digit for seven. Looks like this: {@value} */
   char DIGIT_SEVEN = 0x0037;
 
+  /** The Arabic digit for eight. Looks like this: {@value} */
   char DIGIT_EIGHT = 0x0038;
 
+  /** The Arabic digit for nine. Looks like this: {@value} */
   char DIGIT_NINE = 0x0039;
 
+  /** The colon sign informally called double-dot. Looks like this: {@value} */
   char COLON = 0x0003A;
 
+  /**
+   * The semi-colon sign used as separator for various cases (e.g. for connected sentences instead of
+   * {@link #FULL_STOP}). Looks like this: {@value}
+   */
   char SEMICOLON = 0x0003B;
 
+  /**
+   * The less-than sign for the according mathematical relation. Also used as opening brace in markup
+   * languages. Looks like this: {@value}
+   */
   char LESS_THAN_SIGN = 0x0003C;
 
   // char LESS_THAN_SIGN_WITH_VERTICAL_LINE=0x0003C-020D2;
+
+  /** The equals-than sign for the according mathematical relation. Looks like this: {@value} */
   char EQUALS_SIGN = 0x0003D;
 
   // char EQUALS_SIGN_WITH_REVERSE_SLASH=0x0003D-020E5;
+  /**
+   * The greater-than sign for the according mathematical relation. Also used as closing brace in markup
+   * languages. Looks like this: {@value}
+   */
   char GREATER_THAN_SIGN = 0x0003E;
 
   // char GREATER_THAN_SIGN_WITH_VERTICAL_LINE=0x0003E-020D2;
+  /** The question mark sign used to terminate a question. Looks like this: {@value} */
   char QUESTION_MARK = 0x0003F;
 
   /**
@@ -142,59 +177,82 @@ public interface UnicodeUtil {
    */
   char COMMERCIAL_AT = 0x00040;
 
-  /** The latin letter {@value} . */
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_A = 0x0041;
 
-  /** The latin letter {@value} . */
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_B = 0x0042;
 
-  /** The latin letter {@value} . */
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_C = 0x0043;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_D = 0x0044;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_E = 0x0045;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_F = 0x0046;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_G = 0x0047;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_H = 0x0048;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_I = 0x0049;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_J = 0x004A;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_K = 0x004B;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_L = 0x004C;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_M = 0x004D;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_N = 0x004E;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_O = 0x004F;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_P = 0x0050;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_Q = 0x0051;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_R = 0x0052;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_S = 0x0053;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_T = 0x0054;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_U = 0x0055;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_V = 0x0056;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_W = 0x0057;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_X = 0x0058;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_Y = 0x0059;
 
+  /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_Z = 0x005A;
 
   char LEFT_SQUARE_BRACKET = 0x0005B;
