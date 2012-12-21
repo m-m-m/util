@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.BooleanFormatter;
@@ -36,8 +37,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   /** @see #createForDatatype(Class) */
   private final Map<Class<?>, UiSingleWidgetFactoryDatatype<?>> datatype2subFactoryMap;
 
-  /** @see #getFactory() */
-  private AbstractUiWidgetFactory<?> factory;
+  /** @see #getContext() */
+  private AbstractUiContext context;
 
   /**
    * The constructor.
@@ -49,7 +50,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-factory of this factory.
+   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-context of this context.
    * 
    * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
    */
@@ -85,29 +86,29 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     if (subFactory == null) {
       throw new ObjectNotFoundException(UiSingleWidgetFactoryDatatype.class, datatype);
     }
-    UiWidgetField<VALUE> widget = subFactory.create(this.factory);
+    UiWidgetField<VALUE> widget = subFactory.create(this.context);
     NlsNullPointerException.checkNotNull(UiWidget.class, widget);
     return widget;
   }
 
   /**
-   * @return the {@link AbstractUiWidgetFactory} instance.
+   * @return the {@link AbstractUiContext} instance.
    */
-  protected AbstractUiWidgetFactory<?> getFactory() {
+  protected AbstractUiContext getContext() {
 
-    return this.factory;
+    return this.context;
   }
 
   /**
-   * @param factory is the {@link AbstractUiWidgetFactory} to inject.
+   * @param context is the {@link AbstractUiContext} to inject.
    */
-  public void setFactory(AbstractUiWidgetFactory<?> factory) {
+  public void setContext(AbstractUiContext context) {
 
-    this.factory = factory;
+    this.context = context;
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype factory} for the datatype
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
    * {@link String}.
    */
   public static class UiSingleWidgetFactoryDatatypeString extends AbstractUiSingleWidgetFactoryDatatype<String> {
@@ -124,14 +125,14 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<String> create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetField<String> create(AbstractUiContext context) {
 
-      return factory.create(UiWidgetTextField.class);
+      return context.getWidgetFactory().create(UiWidgetTextField.class);
     }
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype factory} for the datatype
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
    * {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeLong extends AbstractUiSingleWidgetFactoryDatatype<Long> {
@@ -148,14 +149,14 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Long> create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetField<Long> create(AbstractUiContext context) {
 
-      return factory.create(UiWidgetLongField.class);
+      return context.getWidgetFactory().create(UiWidgetLongField.class);
     }
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype factory} for the datatype
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
    * {@link Double}.
    */
   public static class UiSingleWidgetFactoryDatatypeDouble extends AbstractUiSingleWidgetFactoryDatatype<Double> {
@@ -172,14 +173,14 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Double> create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetField<Double> create(AbstractUiContext context) {
 
-      return factory.create(UiWidgetDoubleField.class);
+      return context.getWidgetFactory().create(UiWidgetDoubleField.class);
     }
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype factory} for the datatype
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
    * {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeBoolean extends AbstractUiSingleWidgetFactoryDatatype<Boolean> {
@@ -196,9 +197,9 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Boolean> create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetField<Boolean> create(AbstractUiContext context) {
 
-      UiWidgetRadioButtons<Boolean> radioButtons = factory.create(UiWidgetRadioButtons.class);
+      UiWidgetRadioButtons<Boolean> radioButtons = context.getWidgetFactory().create(UiWidgetRadioButtons.class);
       radioButtons.setFormatter(BooleanFormatter.getInstance());
       radioButtons.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
       return radioButtons;
@@ -206,7 +207,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype factory} for {@link Enum}
+   * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype context} for {@link Enum}
    * datatypes.
    * 
    * @param <E> is the generic type of the {@link Enum}.
@@ -214,7 +215,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   public static class UiSingleWidgetFactoryDatatypeEnum<E extends Enum<E>> extends
       AbstractUiSingleWidgetFactoryDatatype<E> {
 
-    /** @see #create(AbstractUiWidgetFactory) */
+    /** @see #create(AbstractUiContext) */
     private final Formatter<E> formatter;
 
     /**
@@ -243,9 +244,9 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<E> create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetField<E> create(AbstractUiContext context) {
 
-      UiWidgetComboBox<E> radioButtons = factory.create(UiWidgetComboBox.class);
+      UiWidgetComboBox<E> radioButtons = context.getWidgetFactory().create(UiWidgetComboBox.class);
       radioButtons.setFormatter(this.formatter);
       radioButtons.setOptions(getOptionList());
       return radioButtons;

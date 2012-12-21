@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextualInputField;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInputField;
 
 /**
@@ -24,11 +24,11 @@ public abstract class AbstractUiWidgetTextualInputField<ADAPTER extends UiWidget
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTextualInputField(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetTextualInputField(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.maximumTextLength = Integer.MAX_VALUE;
   }
 

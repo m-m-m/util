@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.client.ui.api.widget.UiDispatcher;
+import net.sf.mmm.client.ui.api.UiDispatcher;
 
 /**
  * This is the abstract base implementation of {@link UiDispatcher}.

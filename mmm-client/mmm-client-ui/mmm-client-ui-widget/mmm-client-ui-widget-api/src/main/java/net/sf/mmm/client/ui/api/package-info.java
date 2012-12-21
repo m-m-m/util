@@ -86,8 +86,9 @@
  * Even though we define widgets by interfaces and have support for multiple native UI toolkits, you can
  * extend this code. Either with UI toolkit independent widgets by composing existing ones (see
  * <code>UiWidgetCustom</code> in <code>uit-widget-base</code> and
- * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class)}) or by replacing or adding widgets for native toolkit
- * support. We hope that the latter case will never be necessary or that you join this project in this case.</li>
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)}) or by replacing or adding
+ * widgets for native toolkit support. We hope that the latter case will never be necessary or that you join this
+ * project in this case.</li>
  * <li><b>Higher Level</b><br/>
  * While the adoption of native UI toolkits takes place on a quite low level, there are many high level
  * features like

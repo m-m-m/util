@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextArea;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextArea;
 
@@ -20,11 +20,11 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetTextAreaGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetTextAreaGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -53,9 +53,9 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTextArea create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetTextArea create(AbstractUiContext context) {
 
-      return new UiWidgetTextAreaGwt(factory);
+      return new UiWidgetTextAreaGwt(context);
     }
 
   }

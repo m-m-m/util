@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.window;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
 
 /**
@@ -23,11 +23,11 @@ public abstract class AbstractUiWidgetMainWindow<ADAPTER extends UiWidgetAdapter
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMainWindow(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetMainWindow(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -49,7 +49,7 @@ public abstract class AbstractUiWidgetMainWindow<ADAPTER extends UiWidgetAdapter
   public UiWidgetMenuBar getMenuBar() {
 
     if (this.menuBar == null) {
-      this.menuBar = getFactory().create(UiWidgetMenuBar.class);
+      this.menuBar = getContext().getWidgetFactory().create(UiWidgetMenuBar.class);
       if (hasWidgetAdapter()) {
         getWidgetAdapter().setMenuBar(this.menuBar);
       }

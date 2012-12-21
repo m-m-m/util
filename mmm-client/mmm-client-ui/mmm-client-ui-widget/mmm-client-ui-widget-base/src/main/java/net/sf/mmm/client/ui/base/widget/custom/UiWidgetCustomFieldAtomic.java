@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
@@ -29,12 +29,12 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWidgetCustomFieldAtomic(UiWidgetFactory<?> factory, DELEGATE delegate) {
+  public UiWidgetCustomFieldAtomic(UiContext context, DELEGATE delegate) {
 
-    super(factory, delegate);
+    super(context, delegate);
   }
 
   /**

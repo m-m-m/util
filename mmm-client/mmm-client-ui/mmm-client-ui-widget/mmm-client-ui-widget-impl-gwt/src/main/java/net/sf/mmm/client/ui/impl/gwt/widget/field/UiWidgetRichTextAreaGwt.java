@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetRichTextArea;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtRichTextArea;
 
@@ -19,11 +19,11 @@ public class UiWidgetRichTextAreaGwt extends AbstractUiWidgetRichTextArea<UiWidg
 
   /**
    * The constructor.
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetRichTextAreaGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetRichTextAreaGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -52,9 +52,9 @@ public class UiWidgetRichTextAreaGwt extends AbstractUiWidgetRichTextArea<UiWidg
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetRichTextArea create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetRichTextArea create(AbstractUiContext context) {
 
-      return new UiWidgetRichTextAreaGwt(factory);
+      return new UiWidgetRichTextAreaGwt(context);
     }
 
   }

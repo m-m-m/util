@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window;
 
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetMainWindow;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.adapter.UiWidgetAdapterGwtMainWindow;
 
@@ -17,11 +17,11 @@ public class UiWidgetMainWindowGwt extends AbstractUiWidgetMainWindow<UiWidgetAd
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetMainWindowGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetMainWindowGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**

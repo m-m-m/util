@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite;
  * A {@link UiWidgetMenuBar} should typically be created via
  * {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow#getMenuBar()}. For portability and
  * usability you should avoid creating it manually via
- * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory}. However, if you are using GWT with GWTP it might
+ * {@link net.sf.mmm.client.ui.api.UiContext}. However, if you are using GWT with GWTP it might
  * make sense to do so.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

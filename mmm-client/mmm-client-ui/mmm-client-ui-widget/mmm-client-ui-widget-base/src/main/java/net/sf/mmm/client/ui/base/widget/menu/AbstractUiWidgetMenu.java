@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.base.widget.menu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemSeparator;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenu;
 
 /**
@@ -25,11 +25,11 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu<?
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMenu(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetMenu(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -71,7 +71,7 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu<?
   @Override
   public void addSeparator() {
 
-    UiWidgetMenuItemSeparator separator = getFactory().create(UiWidgetMenuItemSeparator.class);
+    UiWidgetMenuItemSeparator separator = getContext().getWidgetFactory().create(UiWidgetMenuItemSeparator.class);
     addChild(separator);
   }
 
@@ -81,7 +81,7 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu<?
   @Override
   public UiWidgetMenu addSubmenu(String submenuLabel) {
 
-    UiWidgetMenu submenu = getFactory().create(UiWidgetMenu.class);
+    UiWidgetMenu submenu = getContext().getWidgetFactory().create(UiWidgetMenu.class);
     submenu.setLabel(submenuLabel);
     addChild(submenu);
     return submenu;

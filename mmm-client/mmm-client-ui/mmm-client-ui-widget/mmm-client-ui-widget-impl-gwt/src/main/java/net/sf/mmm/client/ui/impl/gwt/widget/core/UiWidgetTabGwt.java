@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetTab;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtTab;
 
@@ -19,11 +19,11 @@ public class UiWidgetTabGwt extends AbstractUiWidgetTab<UiWidgetAdapterGwtTab> {
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetTabGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetTabGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -52,9 +52,9 @@ public class UiWidgetTabGwt extends AbstractUiWidgetTab<UiWidgetAdapterGwtTab> {
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTab create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetTab create(AbstractUiContext context) {
 
-      return new UiWidgetTabGwt(factory);
+      return new UiWidgetTabGwt(context);
     }
 
   }

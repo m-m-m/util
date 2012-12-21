@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.handler.event.ClickEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
@@ -25,11 +26,11 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterA
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetClickable(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetClickable(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -51,7 +52,7 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterA
   public void addClickHandler(UiHandlerEventClick handler) {
 
     if (this.clickEventSender == null) {
-      this.clickEventSender = new ClickEventSender(this, getFactory());
+      this.clickEventSender = new ClickEventSender(this, getContext());
       if (hasWidgetAdapter()) {
         getWidgetAdapter().setClickEventSender(this, this.clickEventSender);
       }

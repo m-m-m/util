@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
  * {@link net.sf.mmm.util.lang.api.Datatype} based on existing {@link UiWidgetField field widgets}.<br/>
  * Instead of extending this class directly you should rather extend one of its sub-classes.
  * 
- * @see UiWidgetFactory#createForDatatype(Class)
+ * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically a custom
  *        {@link net.sf.mmm.util.lang.api.Datatype}.
@@ -29,12 +29,12 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWidgetCustomField(UiWidgetFactory<?> factory, DELEGATE delegate) {
+  public UiWidgetCustomField(UiContext context, DELEGATE delegate) {
 
-    super(factory, delegate);
+    super(context, delegate);
   }
 
   /**

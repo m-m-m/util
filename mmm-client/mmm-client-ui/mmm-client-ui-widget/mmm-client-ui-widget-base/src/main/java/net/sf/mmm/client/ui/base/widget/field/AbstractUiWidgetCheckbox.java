@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
 
 /**
@@ -23,11 +23,11 @@ public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCh
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetCheckbox(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetCheckbox(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**

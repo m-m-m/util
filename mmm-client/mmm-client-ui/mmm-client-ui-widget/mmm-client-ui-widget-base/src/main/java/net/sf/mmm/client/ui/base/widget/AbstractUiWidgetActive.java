@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
@@ -29,11 +30,11 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetActive(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetActive(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.accessKey = ACCESS_KEY_NONE;
   }
 
@@ -95,7 +96,7 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   public void addFocusHandler(UiHandlerEventFocus handler) {
 
     if (this.focusEventSender == null) {
-      this.focusEventSender = new FocusEventSender(this, getFactory());
+      this.focusEventSender = new FocusEventSender(this, getContext());
       if (hasWidgetAdapter()) {
         getWidgetAdapter().setFocusEventSender(this, this.focusEventSender);
       }

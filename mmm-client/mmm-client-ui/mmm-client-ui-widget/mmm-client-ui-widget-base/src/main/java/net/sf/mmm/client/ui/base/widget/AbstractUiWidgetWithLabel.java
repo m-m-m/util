@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
 
 /**
@@ -23,11 +24,11 @@ public abstract class AbstractUiWidgetWithLabel<ADAPTER extends UiWidgetAdapterW
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetWithLabel(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetWithLabel(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**

@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
 
 /**
@@ -23,11 +24,11 @@ public abstract class AbstractUiWidgetClickableWithLabel<ADAPTER extends UiWidge
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetClickableWithLabel(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetClickableWithLabel(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**

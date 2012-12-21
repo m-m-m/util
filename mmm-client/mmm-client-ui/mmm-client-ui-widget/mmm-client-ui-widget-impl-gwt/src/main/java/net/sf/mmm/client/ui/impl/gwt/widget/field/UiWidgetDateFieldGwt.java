@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import java.util.Date;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField;
 
@@ -23,11 +23,11 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetTextualInputField<UiWi
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetDateFieldGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetDateFieldGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -56,9 +56,9 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetTextualInputField<UiWi
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetDateField create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetDateField create(AbstractUiContext context) {
 
-      return new UiWidgetDateFieldGwt(factory);
+      return new UiWidgetDateFieldGwt(context);
     }
 
   }

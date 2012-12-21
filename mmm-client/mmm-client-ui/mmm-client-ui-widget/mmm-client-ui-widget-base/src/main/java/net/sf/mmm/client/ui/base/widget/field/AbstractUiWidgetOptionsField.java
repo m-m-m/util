@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetOptionsField;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
@@ -48,11 +48,11 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetOptionsField(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetOptionsField(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.mutableOptions = new ArrayList<VALUE>();
     this.options = Collections.unmodifiableList(this.mutableOptions);
     this.title2OptionMap = new HashMap<String, VALUE>();

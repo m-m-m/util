@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * This is the abstract base implementation of the {@link UiSingleWidgetFactory} interface.
  * 
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to
- *        {@link #create(AbstractUiWidgetFactory) create}.
+ *        {@link #create(net.sf.mmm.client.ui.base.AbstractUiContext) create}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

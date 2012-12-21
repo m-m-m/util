@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleComposite;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleComposite;
 
 /**
@@ -24,11 +25,11 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetSingleComposite(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetSingleComposite(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**

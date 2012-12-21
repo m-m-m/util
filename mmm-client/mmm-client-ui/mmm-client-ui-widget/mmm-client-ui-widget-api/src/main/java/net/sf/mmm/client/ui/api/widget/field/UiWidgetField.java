@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * confusing in the first place that this is a composite rather than an atomic widget, but a field widget may
  * also be composed out of multiple native input widgets (e.g. to edit a composite
  * {@link net.sf.mmm.util.lang.api.Datatype} - see
- * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class)}).
+ * {@link net.sf.mmm.client.ui.api.UiContext#createForDatatype(Class)}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

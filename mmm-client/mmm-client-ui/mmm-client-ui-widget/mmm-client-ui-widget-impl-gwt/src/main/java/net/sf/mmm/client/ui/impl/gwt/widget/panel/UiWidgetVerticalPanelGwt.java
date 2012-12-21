@@ -4,9 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtVerticalPanel;
 
 /**
@@ -21,11 +21,11 @@ public class UiWidgetVerticalPanelGwt extends
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetVerticalPanelGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetVerticalPanelGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -54,9 +54,9 @@ public class UiWidgetVerticalPanelGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetVerticalPanel create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetVerticalPanel create(AbstractUiContext context) {
 
-      return new UiWidgetVerticalPanelGwt(factory);
+      return new UiWidgetVerticalPanelGwt(context);
     }
   }
 

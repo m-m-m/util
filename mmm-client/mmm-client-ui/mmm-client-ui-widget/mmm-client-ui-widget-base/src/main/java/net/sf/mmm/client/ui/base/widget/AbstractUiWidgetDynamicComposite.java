@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
 
 /**
@@ -26,11 +27,11 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetDynamicComposite(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetDynamicComposite(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.children = new ArrayList<CHILD>();
   }
 

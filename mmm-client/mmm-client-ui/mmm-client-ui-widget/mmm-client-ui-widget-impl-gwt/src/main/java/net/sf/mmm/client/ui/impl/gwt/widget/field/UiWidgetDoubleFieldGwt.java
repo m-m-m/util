@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoubleField;
 
@@ -20,11 +20,11 @@ public class UiWidgetDoubleFieldGwt extends
 
   /**
    * The constructor.
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetDoubleFieldGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetDoubleFieldGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -53,9 +53,9 @@ public class UiWidgetDoubleFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetDoubleField create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetDoubleField create(AbstractUiContext context) {
 
-      return new UiWidgetDoubleFieldGwt(factory);
+      return new UiWidgetDoubleFieldGwt(context);
     }
 
   }

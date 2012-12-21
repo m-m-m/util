@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetBaseWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
 
 /**
@@ -42,11 +42,11 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetBaseWindow(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetBaseWindow(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.resizable = true;
   }
 
@@ -224,10 +224,10 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
   @Override
   public void centerWindow() {
 
-    UiWidgetMainWindow mainWindow = getFactory().getMainWindow();
+    UiWidgetMainWindow mainWindow = getContext().getWidgetFactory().getMainWindow();
     AttributeReadSizeInPixel desktop = mainWindow;
     if (!mainWindow.isWindowPositionAbsolute()) {
-      desktop = getFactory().getDisplay();
+      desktop = getContext().getDisplay();
     }
 
     int xDiff = desktop.getWidthInPixel() - getWidthInPixel();

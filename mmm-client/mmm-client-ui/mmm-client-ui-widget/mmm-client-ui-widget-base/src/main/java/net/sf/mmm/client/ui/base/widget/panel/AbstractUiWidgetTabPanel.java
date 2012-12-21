@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.panel;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSwitchComposite;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterTabPanel;
 
@@ -21,11 +21,11 @@ public abstract class AbstractUiWidgetTabPanel<ADAPTER extends UiWidgetAdapterTa
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTabPanel(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetTabPanel(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
 }

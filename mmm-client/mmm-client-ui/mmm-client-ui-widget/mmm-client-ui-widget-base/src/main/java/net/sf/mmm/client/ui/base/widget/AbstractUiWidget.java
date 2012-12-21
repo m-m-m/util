@@ -2,10 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
@@ -25,27 +26,27 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
  */
 public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VALUE> implements UiWidgetWithValue<VALUE> {
 
-  /** @see #getFactory() */
-  private final AbstractUiWidgetFactory<?> factory;
+  /** @see #getContext() */
+  private final AbstractUiContext context;
 
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidget(UiWidgetFactory<?> factory) {
+  public AbstractUiWidget(UiContext context) {
 
     super();
-    this.factory = (AbstractUiWidgetFactory<?>) factory;
+    this.context = (AbstractUiContext) context;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public final AbstractUiWidgetFactory<?> getFactory() {
+  public final AbstractUiContext getContext() {
 
-    return this.factory;
+    return this.context;
   }
 
   /**
@@ -86,7 +87,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   @Override
   protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getFactory());
+    ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getContext());
     return changeEventSender;
   }
 

@@ -7,7 +7,8 @@
  * build a user interface (UI). It abstracts from underlying native UI toolkits (such as Swing, GWT, etc.).<br/>
  * The main entry point is the {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory} that allows to
  * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#create(Class) create} arbitrary
- * {@link net.sf.mmm.client.ui.api.widget.UiWidget}s.<br/>
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidget}s. Use {@link net.sf.mmm.client.ui.api.UiContext}
+ * to get access.<br/>
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
  */
 package net.sf.mmm.client.ui.api.widget;

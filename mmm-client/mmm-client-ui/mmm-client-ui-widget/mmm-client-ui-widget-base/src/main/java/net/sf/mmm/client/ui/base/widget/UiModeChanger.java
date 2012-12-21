@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.api.common.UiMode;
 /**
  * This is the interface used to handle the change of a {@link UiMode}. In case you need to extend
  * {@link UiMode} with custom mode(s) you can also
- * {@link AbstractUiWidgetFactory#setModeChanger(UiModeChanger) replace} the {@link UiModeChangerImpl default
- * implementation} of this interface.
+ * {@link net.sf.mmm.client.ui.base.AbstractUiContext#setModeChanger(UiModeChanger) replace} the
+ * {@link UiModeChangerImpl default implementation} of this interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

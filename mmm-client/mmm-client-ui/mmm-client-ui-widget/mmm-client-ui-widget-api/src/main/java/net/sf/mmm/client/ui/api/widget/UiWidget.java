@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadModified;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadVisibleRecursive;
@@ -22,9 +23,9 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  * widgets) of the underlying native widget toolkit.<br/>
  * A widget is any object of the UI (user interface) including both {@link UiWidgetAtomic atomic widgets} as
  * well a {@link UiWidgetComposite composite widgets}. <br/>
- * Real {@link UiWidget}s can be {@link UiWidgetFactory#create(Class) created} via the {@link UiWidgetFactory}
- * so by choosing the implementation of {@link UiWidgetFactory} (via an IoC container framework like spring or
- * GIN) you can decide which native toolkit you like to use.<br/>
+ * Real {@link UiWidget}s can be {@link UiContext#create(Class) created} via the {@link UiContext} so by
+ * choosing the implementation of {@link UiContext} (via an IoC container framework like spring or GIN) you
+ * can decide which native toolkit you like to use.<br/>
  * If you want to make your UI code portable even for toolkits such as SWT, you need to make proper use of
  * {@link #dispose()} for all {@link UiWidget} that are no longer needed.<br/>
  * <b>ATTENTION:</b><br/>
@@ -48,12 +49,12 @@ public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeReadVi
   UiWidgetComposite<?> getParent();
 
   /**
-   * This method gets the {@link UiWidgetFactory} that created this {@link UiWidget}. It may be used
-   * internally in {@link UiWidget} implementations as well as externally to create new {@link UiWidget}s
-   * (typically children).
+   * This method gets the {@link UiContext} that created this {@link UiWidget}. It may be used internally in
+   * {@link UiWidget} implementations as well as externally to create new {@link UiWidget}s (typically
+   * children).
    * 
-   * @return the {@link UiWidgetFactory}.
+   * @return the {@link UiContext}.
    */
-  UiWidgetFactory<?> getFactory();
+  UiContext getContext();
 
 }

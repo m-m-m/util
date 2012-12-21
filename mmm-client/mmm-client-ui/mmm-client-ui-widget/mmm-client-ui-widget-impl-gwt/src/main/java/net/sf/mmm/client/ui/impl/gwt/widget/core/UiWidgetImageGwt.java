@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetImage;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtImage;
 
@@ -19,11 +19,11 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetImageGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetImageGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -52,9 +52,9 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetImage create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetImage create(AbstractUiContext context) {
 
-      return new UiWidgetImageGwt(factory);
+      return new UiWidgetImageGwt(context);
     }
 
   }

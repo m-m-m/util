@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 
 /**
  * This is the interface for a {@link UiSingleWidgetFactory} to create a {@link UiWidgetField field widget}
@@ -25,9 +26,9 @@ public interface UiSingleWidgetFactoryDatatype<VALUE> extends UiSingleWidgetFact
   /**
    * {@inheritDoc}
    * 
-   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class)
+   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)
    */
   @Override
-  UiWidgetField<VALUE> create(AbstractUiWidgetFactory<?> factory);
+  UiWidgetField<VALUE> create(AbstractUiContext context);
 
 }

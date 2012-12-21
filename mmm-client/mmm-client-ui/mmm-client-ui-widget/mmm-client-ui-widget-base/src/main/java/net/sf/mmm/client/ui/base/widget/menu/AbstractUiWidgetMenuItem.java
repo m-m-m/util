@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.base.widget.menu;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickableWithLabel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItem;
 
 /**
@@ -20,11 +20,11 @@ public abstract class AbstractUiWidgetMenuItem<ADAPTER extends UiWidgetAdapterMe
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMenuItem(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetMenuItem(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
 }

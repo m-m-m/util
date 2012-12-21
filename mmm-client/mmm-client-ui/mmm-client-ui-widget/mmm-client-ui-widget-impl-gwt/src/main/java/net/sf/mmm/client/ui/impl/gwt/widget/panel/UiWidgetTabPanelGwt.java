@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetTabPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtTabLayoutPanel;
 
@@ -22,11 +22,11 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetTabPanelGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetTabPanelGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -44,7 +44,7 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
   @Override
   public UiWidgetTab addChild(UiWidgetRegular child, String label) {
 
-    UiWidgetTab tab = getFactory().create(UiWidgetTab.class);
+    UiWidgetTab tab = getContext().getWidgetFactory().create(UiWidgetTab.class);
     tab.setLabel(label);
     tab.setChild(child);
     addChild(tab);
@@ -68,9 +68,9 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTabPanel create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetTabPanel create(AbstractUiContext context) {
 
-      return new UiWidgetTabPanelGwt(factory);
+      return new UiWidgetTabPanelGwt(context);
     }
 
   }

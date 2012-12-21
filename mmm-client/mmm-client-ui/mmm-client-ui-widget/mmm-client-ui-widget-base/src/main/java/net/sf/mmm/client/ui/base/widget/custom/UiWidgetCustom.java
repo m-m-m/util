@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.validation.api.ValidationState;
@@ -33,12 +33,12 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWidgetCustom(UiWidgetFactory<?> factory, DELEGATE delegate) {
+  public UiWidgetCustom(UiContext context, DELEGATE delegate) {
 
-    super(factory);
+    super(context);
     this.delegate = delegate;
   }
 

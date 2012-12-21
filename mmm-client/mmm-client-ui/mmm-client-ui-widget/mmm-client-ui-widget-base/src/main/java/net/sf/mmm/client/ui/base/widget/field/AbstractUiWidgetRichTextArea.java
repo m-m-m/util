@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextArea;
 
 /**
@@ -19,11 +19,11 @@ public abstract class AbstractUiWidgetRichTextArea<ADAPTER extends UiWidgetAdapt
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetRichTextArea(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetRichTextArea(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
 }

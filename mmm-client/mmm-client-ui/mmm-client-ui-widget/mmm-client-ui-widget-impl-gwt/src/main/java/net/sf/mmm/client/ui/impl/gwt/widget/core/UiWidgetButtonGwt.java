@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetButton;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtButton;
 
@@ -23,11 +23,11 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetButtonGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetButtonGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.image = null;
   }
 
@@ -66,9 +66,9 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetButton create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetButton create(AbstractUiContext context) {
 
-      return new UiWidgetButtonGwt(factory);
+      return new UiWidgetButtonGwt(context);
     }
 
   }

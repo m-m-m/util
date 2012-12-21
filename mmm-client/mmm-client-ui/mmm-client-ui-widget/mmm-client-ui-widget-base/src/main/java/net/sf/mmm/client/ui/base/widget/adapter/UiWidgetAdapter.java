@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.adapter;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAttribute;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
@@ -13,7 +14,6 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
@@ -110,11 +110,12 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
    * This method creates the label for this widget. Depending on the underlying toolkit implementation the
    * native widget may already contain the label (applies e.g. for <code>FormItem</code> in SmartGWT). In such
    * case this method will wrap it as {@link AbstractUiWidgetLabel}. Otherwise this method should
-   * {@link UiWidgetFactory#create(Class) create} a new {@link AbstractUiWidgetLabel} and return it.
+   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#create(Class) create} a new
+   * {@link AbstractUiWidgetLabel} and return it.
    * 
-   * @param factory is the {@link UiWidgetFactory} that may be used to create the label.
+   * @param context is the {@link UiContext} that may be used to create the label.
    * @return the label.
    */
-  AbstractUiWidgetLabel<?> createLabel(UiWidgetFactory<?> factory);
+  AbstractUiWidgetLabel<?> createLabel(UiContext context);
 
 }

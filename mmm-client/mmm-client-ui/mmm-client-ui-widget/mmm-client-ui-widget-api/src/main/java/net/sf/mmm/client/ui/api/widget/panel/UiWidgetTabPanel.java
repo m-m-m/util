@@ -28,7 +28,7 @@ public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>, UiW
    * a convenience method for the following code:
    * 
    * <pre>
-   * {@link UiWidgetTab} tab = {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory widgetFactory}.create({@link UiWidgetTab}.class);
+   * {@link UiWidgetTab} tab = {@link net.sf.mmm.client.ui.api.UiContext widgetFactory}.create({@link UiWidgetTab}.class);
    * tab.setTitle(title);
    * tab.setChild(child);
    * {@link UiWidgetTabPanel tabPanel}.addChild(tab);

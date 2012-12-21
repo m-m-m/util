@@ -1,0 +1,66 @@
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.client.ui.impl.gwt;
+
+import net.sf.mmm.client.ui.api.UiDispatcher;
+import net.sf.mmm.client.ui.api.UiDisplay;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.base.UiContextImpl;
+import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryGwt;
+
+import com.google.gwt.user.client.ui.Widget;
+
+/**
+ * This is the implementation of {@link net.sf.mmm.client.ui.api.UiContext} for GWT.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
+ */
+public class UiContextGwt extends UiContextImpl {
+
+  /**
+   * The constructor.
+   */
+  public UiContextGwt() {
+
+    super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+
+    UiDisplay display = getDisplay();
+    if (display == null) {
+      display = new UiDisplayGwt();
+      setDisplay(display);
+    }
+
+    UiDispatcher dispatcher = getDispatcher();
+    if (dispatcher == null) {
+      dispatcher = new UiDispatcherGwt();
+      setDispatcher(dispatcher);
+    }
+
+    if (getWidgetFactory() == null) {
+      UiWidgetFactoryGwt widgetFactory = new UiWidgetFactoryGwt();
+      widgetFactory.setContext(this);
+      widgetFactory.initialize();
+      setWidgetFactory(widgetFactory);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetFactory<Widget> getWidgetFactory() {
+
+    return (UiWidgetFactory<Widget>) super.getWidgetFactory();
+  }
+
+}

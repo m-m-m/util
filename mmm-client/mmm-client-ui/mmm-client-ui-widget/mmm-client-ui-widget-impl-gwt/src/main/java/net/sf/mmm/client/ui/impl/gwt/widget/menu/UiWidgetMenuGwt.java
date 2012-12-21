@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.menu;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenu;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenu;
 
@@ -19,11 +19,11 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetMenuGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetMenuGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -52,9 +52,9 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetMenu create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetMenu create(AbstractUiContext context) {
 
-      return new UiWidgetMenuGwt(factory);
+      return new UiWidgetMenuGwt(context);
     }
 
   }

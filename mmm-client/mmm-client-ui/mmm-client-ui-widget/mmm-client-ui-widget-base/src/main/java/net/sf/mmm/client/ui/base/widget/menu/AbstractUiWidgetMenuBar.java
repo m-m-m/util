@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.base.widget.menu;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuBar;
 
 /**
@@ -21,11 +21,11 @@ public abstract class AbstractUiWidgetMenuBar<ADAPTER extends UiWidgetAdapterMen
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMenuBar(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetMenuBar(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -34,7 +34,7 @@ public abstract class AbstractUiWidgetMenuBar<ADAPTER extends UiWidgetAdapterMen
   @Override
   public UiWidgetMenu addMenu(String label) {
 
-    UiWidgetMenu menu = getFactory().create(UiWidgetMenu.class);
+    UiWidgetMenu menu = getContext().getWidgetFactory().create(UiWidgetMenu.class);
     menu.setLabel(label);
     addChild(menu);
     return menu;

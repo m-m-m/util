@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.api.widget;
 
 /**
  * This is the marker interface for {@link UiWidget}s that can be {@link UiWidgetFactory#create(Class)
- * created} via the {@link UiWidgetFactory}.
+ * created} via {@link net.sf.mmm.client.ui.api.UiContext}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

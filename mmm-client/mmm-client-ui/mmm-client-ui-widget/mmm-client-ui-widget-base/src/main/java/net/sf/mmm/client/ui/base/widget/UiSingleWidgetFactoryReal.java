@@ -3,17 +3,18 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 
 /**
  * This is the interface for a factory of a single {@link net.sf.mmm.client.ui.api.widget.UiWidget} of a
  * particular {@link #getWidgetInterface() type}.
  * 
- * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory
+ * @see net.sf.mmm.client.ui.api.UiContext
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to
- *        {@link #create(AbstractUiWidgetFactory) create}. Should typically be a
+ *        {@link #create(AbstractUiContext) create}. Should typically be a
  *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetReal}.
  */
 public interface UiSingleWidgetFactoryReal<WIDGET extends UiWidgetReal> extends UiSingleWidgetFactory<WIDGET> {
@@ -31,6 +32,6 @@ public interface UiSingleWidgetFactoryReal<WIDGET extends UiWidgetReal> extends 
    * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory#create(Class)
    */
   @Override
-  WIDGET create(AbstractUiWidgetFactory<?> factory);
+  WIDGET create(AbstractUiContext context);
 
 }

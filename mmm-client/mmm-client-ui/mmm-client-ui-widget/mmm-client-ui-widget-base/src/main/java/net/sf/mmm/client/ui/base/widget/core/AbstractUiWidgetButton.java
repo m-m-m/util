@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.base.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickableWithLabel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 
 /**
@@ -24,11 +24,11 @@ public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButt
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetButton(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetButton(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.image = null;
   }
 

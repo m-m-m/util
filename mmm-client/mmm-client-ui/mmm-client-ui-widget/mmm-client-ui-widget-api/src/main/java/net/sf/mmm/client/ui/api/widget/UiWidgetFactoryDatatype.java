@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 
 /**
  * This is the interface for a factory to {@link #createForDatatype(Class) create widgets for particular
- * datatypes}. You will typically use {@link UiWidgetFactory} that extends this interface.
+ * datatypes}. You will typically use {@link net.sf.mmm.client.ui.api.UiContext} that extends this interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

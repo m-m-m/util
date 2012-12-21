@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtLongField;
 
@@ -20,11 +20,11 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetTextualInputField<UiWi
 
   /**
    * The constructor.
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetLongFieldGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetLongFieldGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -53,9 +53,9 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetTextualInputField<UiWi
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetLongField create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetLongField create(AbstractUiContext context) {
 
-      return new UiWidgetLongFieldGwt(factory);
+      return new UiWidgetLongFieldGwt(context);
     }
 
   }

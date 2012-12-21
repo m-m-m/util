@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.menu;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenuItem;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuItem;
 
@@ -20,11 +20,11 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItem<UiWid
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetMenuItemClickableGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetMenuItemClickableGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -53,9 +53,9 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItem<UiWid
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetMenuItemClickable create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetMenuItemClickable create(AbstractUiContext context) {
 
-      return new UiWidgetMenuItemClickableGwt(factory);
+      return new UiWidgetMenuItemClickableGwt(context);
     }
 
   }

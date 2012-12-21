@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.adapter;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAccessKey;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAltText;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
@@ -11,7 +12,6 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
@@ -245,9 +245,9 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public AbstractUiWidgetLabel<?> createLabel(UiWidgetFactory<?> factory) {
+  public AbstractUiWidgetLabel<?> createLabel(UiContext context) {
 
-    return (AbstractUiWidgetLabel<?>) factory.create(UiWidgetLabel.class);
+    return (AbstractUiWidgetLabel<?>) context.getWidgetFactory().create(UiWidgetLabel.class);
   }
 
 }

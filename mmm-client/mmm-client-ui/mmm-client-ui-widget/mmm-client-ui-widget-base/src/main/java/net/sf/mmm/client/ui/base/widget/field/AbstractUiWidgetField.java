@@ -5,9 +5,9 @@ package net.sf.mmm.client.ui.base.widget.field;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 
@@ -39,11 +39,11 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetField(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetField(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -189,7 +189,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public final UiWidgetLabel getFieldLabelWidget() {
 
     if (this.fieldLabelWidget == null) {
-      this.fieldLabelWidget = getWidgetAdapter().createLabel(getFactory());
+      this.fieldLabelWidget = getWidgetAdapter().createLabel(getContext());
       this.fieldLabelWidget.setLabelledWidget(this);
       if (this.fieldLabel != null) {
         this.fieldLabelWidget.setLabel(this.fieldLabel);

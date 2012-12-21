@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget;
 
-import net.sf.mmm.client.ui.api.widget.UiDispatcher;
-import net.sf.mmm.client.ui.api.widget.UiDisplay;
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryPlain;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLabelGwt;
@@ -28,22 +28,17 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetMainWindowGwt;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory} for GWT widgets.
+ * This is the implementation of the {@link net.sf.mmm.client.ui.api.UiContext} for GWT widgets.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
-
-  /** @see #getDisplay() */
-  private UiDisplay display;
-
-  /** @see #getDispatcher() */
-  private UiDispatcher dispatcher;
+public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory<Widget> {
 
   /** @see #getMainWindow() */
   private UiWidgetMainWindow mainWindow;
@@ -85,46 +80,6 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
    * {@inheritDoc}
    */
   @Override
-  public UiDisplay getDisplay() {
-
-    if (this.display == null) {
-      this.display = createDisplay();
-    }
-    return this.display;
-  }
-
-  /**
-   * @return a new instance of {@link UiDisplay}.
-   */
-  protected UiDisplay createDisplay() {
-
-    return new UiDisplayGwt();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiDispatcher getDispatcher() {
-
-    if (this.dispatcher == null) {
-      this.dispatcher = createDispatcher();
-    }
-    return this.dispatcher;
-  }
-
-  /**
-   * @return a new instance of {@link UiDispatcher}.
-   */
-  protected UiDispatcher createDispatcher() {
-
-    return new UiDispatcherGwt();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public UiWidgetMainWindow getMainWindow() {
 
     if (this.mainWindow == null) {
@@ -138,7 +93,9 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactoryPlain<Widget> {
    */
   private UiWidgetMainWindow createMainWindow() {
 
-    UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(this);
+    AbstractUiContext context = getContext();
+    NlsNullPointerException.checkNotNull(UiContext.class, context);
+    UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(context);
     window.initialize();
     return window;
   }

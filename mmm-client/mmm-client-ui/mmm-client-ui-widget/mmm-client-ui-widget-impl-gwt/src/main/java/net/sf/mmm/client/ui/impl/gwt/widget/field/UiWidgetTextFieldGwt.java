@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextBox;
 
@@ -20,11 +20,11 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetTextFieldGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetTextFieldGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -53,9 +53,9 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTextField create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetTextField create(AbstractUiContext context) {
 
-      return new UiWidgetTextFieldGwt(factory);
+      return new UiWidgetTextFieldGwt(context);
     }
 
   }

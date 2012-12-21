@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBox;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtListBoxCombo;
 
@@ -27,11 +27,11 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetComboBoxGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetComboBoxGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -60,11 +60,10 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public UiWidgetComboBox create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetComboBox create(AbstractUiContext context) {
 
-      return new UiWidgetComboBoxGwt(factory);
+      return new UiWidgetComboBoxGwt(context);
     }
 
   }

@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtLabel;
 
@@ -19,11 +19,11 @@ public class UiWidgetLabelGwt extends AbstractUiWidgetLabel<UiWidgetAdapterGwtLa
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetLabelGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetLabelGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -52,9 +52,9 @@ public class UiWidgetLabelGwt extends AbstractUiWidgetLabel<UiWidgetAdapterGwtLa
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetLabel create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetLabel create(AbstractUiContext context) {
 
-      return new UiWidgetLabelGwt(factory);
+      return new UiWidgetLabelGwt(context);
     }
 
   }

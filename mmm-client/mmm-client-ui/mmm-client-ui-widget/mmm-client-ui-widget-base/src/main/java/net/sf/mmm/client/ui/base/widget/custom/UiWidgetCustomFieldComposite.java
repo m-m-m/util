@@ -5,11 +5,11 @@ package net.sf.mmm.client.ui.base.widget.custom;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
@@ -47,14 +47,14 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWidgetCustomFieldComposite(UiWidgetFactory<?> factory, DELEGATE delegate) {
+  public UiWidgetCustomFieldComposite(UiContext context, DELEGATE delegate) {
 
-    super(factory, delegate);
+    super(context, delegate);
     this.fieldList = new LinkedList<UiWidgetField<?>>();
-    this.focusEventSender = new FocusEventSender(this, getFactory());
+    this.focusEventSender = new FocusEventSender(this, getContext());
   }
 
   /**
@@ -188,7 +188,7 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
   @Override
   protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    return new ChangeEventSender<VALUE>(this, getFactory());
+    return new ChangeEventSender<VALUE>(this, getContext());
   }
 
 }

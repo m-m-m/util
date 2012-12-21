@@ -2,58 +2,102 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
-import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
-import net.sf.mmm.client.ui.api.widget.UiConfiguration;
+import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
-import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
+import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetFactory}.
+ * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.UiContext} using
+ * {@link UiSingleWidgetFactory}. This is helpful for implementations that can NOT use reflection.
+ * Implementations extending this {@link Class} need to {@link #register(UiSingleWidgetFactoryReal) register}
+ * instances of {@link UiSingleWidgetFactory} for all supported types of {@link UiWidget}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <NATIVE_WIDGET> is the generic top-level type of the underlying
- *        {@link #getNativeWidget(UiWidgetRegular) widgets}.
+ *        {@link #getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular) widgets}.
  */
-public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLoggableComponent implements
-    UiWidgetFactory<NATIVE_WIDGET>, AttributeWriteHandlerObserver {
+public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractComponent implements
+    UiWidgetFactory<NATIVE_WIDGET> {
 
-  /** @see #getHandlerObserver() */
-  private UiHandlerObserver handlerObserver;
+  /** @see #create(Class) */
+  private final Map<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>> interface2subFactoryMap;
 
-  /** @see #getModeChanger() */
-  private UiModeChanger modeChanger;
-
-  /** @see #getConfiguration() */
-  private final UiConfiguration configuration;
-
-  /** @see #getRoleFactory() */
-  private RoleFactory roleFactory;
+  /** @see #getContext() */
+  private AbstractUiContext context;
 
   /**
    * The constructor.
    */
   public AbstractUiWidgetFactory() {
 
-    this(new UiConfigurationDefault());
+    super();
+    this.interface2subFactoryMap = new HashMap<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>>();
   }
 
   /**
-   * The constructor.
-   * 
-   * @param configuration is the custom {@link #getConfiguration() configuration} to use.
+   * @return the context
    */
-  public AbstractUiWidgetFactory(UiConfiguration configuration) {
+  public AbstractUiContext getContext() {
 
-    super();
-    this.configuration = configuration;
+    return this.context;
+  }
+
+  /**
+   * @param context is the context to set
+   */
+  @Inject
+  public void setContext(AbstractUiContext context) {
+
+    getInitializationState().requireNotInitilized();
+    this.context = context;
+  }
+
+  /**
+   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-factory of this factory.
+   * 
+   * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
+   */
+  protected void register(UiSingleWidgetFactoryReal<?> subFactory) {
+
+    UiSingleWidgetFactoryReal<?> oldFactory = this.interface2subFactoryMap.put(subFactory.getWidgetInterface(),
+        subFactory);
+    if (oldFactory != null) {
+      throw new DuplicateObjectException(subFactory, subFactory.getWidgetInterface(), oldFactory);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface) {
+
+    UiSingleWidgetFactoryReal<?> subFactory = this.interface2subFactoryMap.get(widgetInterface);
+    if (subFactory == null) {
+      throw new ObjectNotFoundException(UiSingleWidgetFactoryReal.class, widgetInterface);
+    }
+    UiWidget widget = subFactory.create(this.context);
+    NlsNullPointerException.checkNotNull(UiWidget.class, widget);
+    try {
+      // widgetInterface.cast is not GWT compatible
+      return (WIDGET) widget;
+    } catch (ClassCastException e) {
+      throw new NlsClassCastException(widget, widgetInterface);
+    }
   }
 
   /**
@@ -66,76 +110,6 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractLog
     AbstractUiWidget<?> abstractWidget = (AbstractUiWidget<?>) widget;
     NATIVE_WIDGET nativeWidget = (NATIVE_WIDGET) abstractWidget.getWidgetAdapter().getWidget();
     return nativeWidget;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiHandlerObserver getHandlerObserver() {
-
-    return this.handlerObserver;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHandlerObserver(UiHandlerObserver handlerObserver) {
-
-    this.handlerObserver = handlerObserver;
-  }
-
-  /**
-   * @return the {@link UiModeChanger} instance to use.
-   */
-  public UiModeChanger getModeChanger() {
-
-    if (this.modeChanger == null) {
-      this.modeChanger = new UiModeChangerImpl();
-    }
-    return this.modeChanger;
-  }
-
-  /**
-   * @param modeChanger is the new {@link UiModeChanger} to use.
-   */
-  public void setModeChanger(UiModeChanger modeChanger) {
-
-    if (this.modeChanger != null) {
-      getLogger().warn("Replacing mode changer {} with {}", new Object[] { this.modeChanger, modeChanger });
-    }
-    this.modeChanger = modeChanger;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiConfiguration getConfiguration() {
-
-    return this.configuration;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public RoleFactory getRoleFactory() {
-
-    if (this.roleFactory == null) {
-      this.roleFactory = new RoleFactoryImpl();
-    }
-    return this.roleFactory;
-  }
-
-  /**
-   * @param roleFactory is the {@link RoleFactory} instance to set (to inject).
-   */
-  @Inject
-  public void setRoleFactory(RoleFactory roleFactory) {
-
-    this.roleFactory = roleFactory;
   }
 
 }

@@ -3,27 +3,27 @@
 package net.sf.mmm.app.client;
 
 import net.sf.mmm.app.shared.GreetingService;
+import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
+import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
+import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
+import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
+import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
-import net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick;
-import net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.ui.toolkit.api.widget.UiWidgetFactory;
-import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetButton;
-import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetImage;
-import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.ui.toolkit.api.widget.core.UiWidgetTab;
-import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetRichTextArea;
-import net.sf.mmm.ui.toolkit.api.widget.field.UiWidgetTextField;
-import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenu;
-import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuBar;
-import net.sf.mmm.ui.toolkit.api.widget.menu.UiWidgetMenuItemClickable;
-import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetHorizontalPanel;
-import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetTabPanel;
-import net.sf.mmm.ui.toolkit.api.widget.panel.UiWidgetVerticalPanel;
-import net.sf.mmm.ui.toolkit.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.ui.toolkit.impl.gwt.widget.UiWidgetFactoryGwt;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -80,9 +80,9 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     // public void onModuleLoadDeferred() {
     // super.onModuleLoadDeferred();
     Log.debug("Loaded");
-    UiWidgetFactoryGwt factoryGwt = new UiWidgetFactoryGwt();
-    factoryGwt.initialize();
-    UiWidgetFactory<Widget> factory = factoryGwt;
+    UiContextGwt context = new UiContextGwt();
+    context.initialize();
+    UiWidgetFactory<Widget> factory = context.getWidgetFactory();
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();

@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetPasswordField;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPasswordTextBox;
 
@@ -22,11 +22,11 @@ public class UiWidgetPasswordFieldGwt extends
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetPasswordFieldGwt(AbstractUiWidgetFactory<?> factory) {
+  public UiWidgetPasswordFieldGwt(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
   }
 
   /**
@@ -55,9 +55,9 @@ public class UiWidgetPasswordFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetPasswordField create(AbstractUiWidgetFactory<?> factory) {
+    public UiWidgetPasswordField create(AbstractUiContext context) {
 
-      return new UiWidgetPasswordFieldGwt(factory);
+      return new UiWidgetPasswordFieldGwt(context);
     }
 
   }

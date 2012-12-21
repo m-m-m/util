@@ -8,6 +8,7 @@ import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.aria.role.AbstractRole;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
@@ -81,11 +82,11 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetReal(AbstractUiWidgetFactory<?> factory) {
+  public AbstractUiWidgetReal(AbstractUiContext context) {
 
-    super(factory);
+    super(context);
     this.visible = true;
     this.enabled = true;
     this.styles = "";
@@ -111,7 +112,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
         throw new ObjectDisposedException(this);
       }
       this.widgetAdapter = createWidgetAdapter();
-      this.widgetAdapter.setConfiguration(getFactory().getConfiguration());
+      this.widgetAdapter.setConfiguration(getContext().getConfiguration());
       initializeWidgetAdapter(this.widgetAdapter);
       if (this.ariaRole != null) {
         this.ariaRole.setDelegate(this.widgetAdapter);
@@ -234,6 +235,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
    * 
    * @param parent is the new {@link #getParent() parent}.
    */
+  @Override
   protected void setParent(UiWidgetComposite<?> parent) {
 
     this.parent = parent;
@@ -278,7 +280,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
       // fixed mode prevents changing the mode...
       return;
     }
-    getFactory().getModeChanger().changeMode(this, mode);
+    getContext().getModeChanger().changeMode(this, mode);
     this.mode = mode;
     setModeRecursive(mode);
   }
@@ -567,7 +569,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
         return (ROLE) this.ariaRole;
       }
     }
-    RoleFactory roleFactory = getFactory().getRoleFactory();
+    RoleFactory roleFactory = getContext().getRoleFactory();
     ROLE role = roleFactory.createRole(roleType);
     this.ariaRole = (AbstractRole) role;
     if (this.widgetAdapter != null) {

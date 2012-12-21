@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is also a
@@ -24,12 +24,12 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   /**
    * The constructor.
    * 
-   * @param factory is the {@link #getFactory() factory}.
+   * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
-  public UiWidgetCustomComposite(UiWidgetFactory<?> factory, DELEGATE delegate) {
+  public UiWidgetCustomComposite(UiContext context, DELEGATE delegate) {
 
-    super(factory, delegate);
+    super(context, delegate);
   }
 
   /**
