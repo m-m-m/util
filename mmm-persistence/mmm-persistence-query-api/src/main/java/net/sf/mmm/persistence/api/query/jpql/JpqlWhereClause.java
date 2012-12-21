@@ -21,7 +21,7 @@ public interface JpqlWhereClause<E> extends JpqlConditionalExpression<E, JpqlWhe
    * 
    * @see #orderBy(String, SortOrder)
    * 
-   * @param property is the primary {@link #PROPERTY property} to sort the results by.
+   * @param property is the primary {@link JpqlCore#PROPERTY property} to sort the results by.
    * @return the {@link JpqlOrderByClause}.
    */
   JpqlOrderByClause<E> orderBy(String property);
@@ -29,7 +29,7 @@ public interface JpqlWhereClause<E> extends JpqlConditionalExpression<E, JpqlWhe
   /**
    * This method closes this clause and opens an ORDER BY clause.
    * 
-   * @param property is the primary {@link #PROPERTY property} to sort the results by.
+   * @param property is the primary {@link JpqlCore#PROPERTY property} to sort the results by.
    * @param order is the {@link SortOrder}.
    * @return the {@link JpqlOrderByClause}.
    */

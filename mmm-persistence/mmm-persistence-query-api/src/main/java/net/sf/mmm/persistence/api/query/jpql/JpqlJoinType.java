@@ -14,16 +14,16 @@ package net.sf.mmm.persistence.api.query.jpql;
 public enum JpqlJoinType {
 
   /** A regular join. */
-  JOIN(JpqlBase.JPQL_JOIN),
+  JOIN(JpqlCore.JPQL_JOIN),
 
   /** A left join. */
-  LEFT_JOIN(JpqlBase.JPQL_LEFT_JOIN),
+  LEFT_JOIN(JpqlCore.JPQL_LEFT_JOIN),
 
   /** An left outer join. */
-  LEFT_OUTER_JOIN(JpqlBase.JPQL_LEFT_OUTER_JOIN),
+  LEFT_OUTER_JOIN(JpqlCore.JPQL_LEFT_OUTER_JOIN),
 
   /** An inner join. */
-  INNER_JOIN(JpqlBase.JPQL_INNER_JOIN);
+  INNER_JOIN(JpqlCore.JPQL_INNER_JOIN);
 
   /** @see #toString() */
   private final String title;

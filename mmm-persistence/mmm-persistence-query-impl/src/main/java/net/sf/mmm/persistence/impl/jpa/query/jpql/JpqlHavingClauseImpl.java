@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlHavingClause;
 
 /**
@@ -24,7 +25,7 @@ public class JpqlHavingClauseImpl<E> extends AbstractJpqlConditionalExpression<E
   public JpqlHavingClauseImpl(JpqlContext<E> context, String propertyBasePath) {
 
     super(context, propertyBasePath);
-    context.getQueryBuffer().append(JPQL_HAVING);
+    context.getQueryBuffer().append(JpqlCore.JPQL_HAVING);
   }
 
 }

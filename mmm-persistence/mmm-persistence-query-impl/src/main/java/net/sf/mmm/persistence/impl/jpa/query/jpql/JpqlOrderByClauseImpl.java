@@ -4,6 +4,7 @@ package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
 import java.util.Locale;
 
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlOrderByClause;
 import net.sf.mmm.util.lang.api.SortOrder;
 
@@ -31,7 +32,7 @@ public class JpqlOrderByClauseImpl<E> extends AbstractJpqlFragment<E> implements
 
     super(context);
     setPropertyBasePath(propertyBasePath);
-    context.getQueryBuffer().append(JPQL_ORDER_BY);
+    context.getQueryBuffer().append(JpqlCore.JPQL_ORDER_BY);
     appendOrderByProperty(property, order);
   }
 

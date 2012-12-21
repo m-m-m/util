@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlGroupByClause;
 import net.sf.mmm.persistence.api.query.jpql.JpqlHavingClause;
 
@@ -28,7 +29,7 @@ public class JpqlGroupByClauseImpl<E> extends AbstractJpqlFragment<E> implements
     super(context);
     setPropertyBasePath(propertyBasePath);
     StringBuilder queryBuffer = context.getQueryBuffer();
-    queryBuffer.append(JPQL_GROUP_BY);
+    queryBuffer.append(JpqlCore.JPQL_GROUP_BY);
     String separator = "";
     for (String property : groupByItems) {
       queryBuffer.append(separator);

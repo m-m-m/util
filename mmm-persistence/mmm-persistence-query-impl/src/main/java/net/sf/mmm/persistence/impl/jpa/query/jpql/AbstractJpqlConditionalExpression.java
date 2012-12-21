@@ -2,14 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
+import net.sf.mmm.persistence.api.query.SimpleQuery;
 import net.sf.mmm.persistence.api.query.jpql.JpqlConditionalExpression;
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
-import net.sf.mmm.persistence.api.query.jpql.JpqlOperator;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.persistence.api.query.jpql.JpqlPropertyExpression;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
-import net.sf.mmm.util.value.api.Range;
 
 /**
  * This is the implementation of {@link JpqlConditionalExpression}.
@@ -28,9 +27,8 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
   private boolean conjunctionDefaultOr;
 
   /**
-   * <code>true</code> if a expression (e.g. {@link #isCompareValue(String, JpqlOperator, Object)} has
-   * previously been added), <code>false</code> otherwise (initially or after conjunction like {@link #and()}
-   * or {@link #or()} has been added.
+   * <code>true</code> if a expression has previously been added), <code>false</code> otherwise (initially or
+   * after conjunction like {@link #and()} or {@link #or()} has been added.
    */
   private boolean hasPreviousExpression;
 
@@ -52,7 +50,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * This method automatically appends the {@link #setConjunctionDefaultToAnd() default conjunction} as
    * needed.
    */
-  private void appendConjunctionIfRequired() {
+  protected void appendConjunctionIfRequired() {
 
     if (this.hasPreviousExpression) {
       appendConjunction(this.conjunctionDefaultOr);
@@ -62,8 +60,8 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
   /**
    * This method appends a conjunction.
    * 
-   * @param or - <code>true</code> for {@link #JPQL_CONJUNCTION_OR}, <code>false</code> for
-   *        {@link #JPQL_CONJUNCTION_AND}.
+   * @param or - <code>true</code> for {@link JpqlCore#JPQL_CONJUNCTION_OR}, <code>false</code> for
+   *        {@link JpqlCore#JPQL_CONJUNCTION_AND}.
    */
   private void appendConjunction(boolean or) {
 
@@ -73,374 +71,74 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
     }
     String conjunction;
     if (or) {
-      conjunction = JPQL_CONJUNCTION_OR;
+      conjunction = JpqlCore.JPQL_CONJUNCTION_OR;
     } else {
-      conjunction = JPQL_CONJUNCTION_AND;
+      conjunction = JpqlCore.JPQL_CONJUNCTION_AND;
     }
     getContext().getQueryBuffer().append(conjunction);
     this.hasPreviousExpression = false;
   }
 
   /**
-   * {@inheritDoc}
+   * This method is called after a previous expression has been appended.
    */
-  @Override
-  public <T> SELF isCompare(TypedProperty<T> property, JpqlOperator operator, T value) {
+  protected void setExpressionAppended() {
 
-    return isCompareValue(property.getPojoPath(), operator, value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public <T> SELF isCompare(TypedProperty<T> property, JpqlOperator operator, TypedProperty<T> otherProperty) {
-
-    return isCompareProperties(property.getPojoPath(), operator, otherProperty.getPojoPath());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public <T> SELF isCompare(T value, JpqlOperator operator, TypedProperty<T> property) {
-
-    return isCompareInvers(value, operator, property.getPojoPath());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isCompareValue(String property, JpqlOperator operator, Object value) {
-
-    return isCompare(property, operator.getTitle(), value, false, true);
-  }
-
-  /**
-   * @see #isCompareValue(String, JpqlOperator, Object)
-   * 
-   * @param property - see #isCompareValue(String, JpqlOperator, Object)
-   * @param operator - see #isCompareValue(String, JpqlOperator, Object)
-   * @param value - see #isCompareValue(String, JpqlOperator, Object)
-   * @param inverse - <code>true</code> if <code>property</code> is second argument and <code>value</code> is
-   *        first (see {@link #isCompareInvers(Object, JpqlOperator, String)}), <code>false</code> otherwise.
-   * @param convertGlob - <code>true</code> if {@link #convertGlobPattern(String)} shall be invoked for LIKEs,
-   *        <code>false</code> otherwise.
-   * @return this instance.
-   */
-  private SELF isCompare(String property, String operator, Object value, boolean inverse, boolean convertGlob) {
-
-    appendConjunctionIfRequired();
-    Object parameter = value;
-    JpqlContext<E> context = getContext();
-    StringBuilder queryBuffer = context.getQueryBuffer();
-    if (parameter == null) {
-      appendProperty(property);
-      if (JpqlOperator.EQUAL.getTitle().equals(operator)) {
-        queryBuffer.append(JPQL_CONDITION_IS_NULL);
-      } else if (JpqlOperator.NOT_EQUAL.getTitle().equals(operator)) {
-        queryBuffer.append(JPQL_CONDITION_IS_NOT_NULL);
-      } else {
-        throw new NlsNullPointerException("value");
-      }
-    } else {
-      if (JpqlOperator.LIKE.equals(operator) || JpqlOperator.NOT_LIKE.equals(operator)) {
-        if (!(parameter instanceof CharSequence)) {
-          throw new NlsClassCastException(parameter, CharSequence.class);
-        }
-        if (convertGlob) {
-          parameter = convertGlobPattern(parameter.toString());
-        }
-      }
-      if (inverse) {
-        context.addParameter(parameter, property);
-        queryBuffer.append(operator);
-        appendProperty(property);
-      } else {
-        appendProperty(property);
-        queryBuffer.append(operator);
-        context.addParameter(parameter, property);
-      }
-    }
     this.hasPreviousExpression = true;
-    return (SELF) this;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SELF isCompareProperties(String property, JpqlOperator operator, String otherProperty) {
+  public JpqlPropertyExpression<Object, SELF> property(String basePath, String property) {
 
-    return isCompareProperties(otherProperty, operator.getTitle(), otherProperty);
-  }
-
-  /**
-   * @see #isCompareProperties(String, JpqlOperator, String)
-   * 
-   * @param property - see {@link #isCompareProperties(String, JpqlOperator, String)}.
-   * @param operator - see {@link #isCompareProperties(String, JpqlOperator, String)}.
-   * @param otherProperty - see {@link #isCompareProperties(String, JpqlOperator, String)}.
-   * @return this instance.
-   */
-  private SELF isCompareProperties(String property, String operator, String otherProperty) {
-
-    appendConjunctionIfRequired();
-    JpqlContext<E> context = getContext();
-    StringBuilder queryBuffer = context.getQueryBuffer();
-    appendProperty(property);
-    queryBuffer.append(operator);
-    appendProperty(otherProperty);
-    this.hasPreviousExpression = true;
-    return (SELF) this;
+    return property(basePath, property, Object.class);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SELF isCompareInvers(Object value, JpqlOperator operator, String property) {
+  public <T> JpqlPropertyExpression<T, SELF> property(String basePath, TypedProperty<T> property) {
 
-    return isCompare(property, operator.getTitle(), value, true, true);
+    return property(basePath, property.getPojoPath(), property.getPropertyType());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SELF isLikeValue(String property, String pattern, boolean convertGlob, boolean not) {
+  public <T> JpqlPropertyExpression<T, SELF> property(String basePath, String property, Class<T> propertyType) {
 
-    return isLike(property, pattern, convertGlob, not, false);
+    return new JpqlPropertyExpressionImpl<T, SELF>((SELF) this, basePath, property);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SELF isLikeInverse(String pattern, String property, boolean convertGlob, boolean not) {
+  public JpqlPropertyExpression<Object, SELF> property(String property) {
 
-    return isLike(property, pattern, convertGlob, not, true);
+    return property(null, property);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SELF isLike(TypedProperty<String> property, String pattern, boolean convertGlob, boolean not) {
+  public <T> JpqlPropertyExpression<T, SELF> property(TypedProperty<T> property) {
 
-    return isLike(property.getPojoPath(), pattern, convertGlob, not, false);
+    return property(null, property);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public SELF isLike(String pattern, TypedProperty<String> property, boolean convertGlob, boolean not) {
+  public <T> JpqlPropertyExpression<T, SELF> subQuery(SimpleQuery<T> subQuery) {
 
-    return isLikeInverse(pattern, property.getPojoPath(), convertGlob, not);
-  }
-
-  /**
-   * @see #isLikeValue(String, String, boolean, boolean)
-   * @see #isLikeInverse(String, String, boolean, boolean)
-   * 
-   * @param property is the property to use as first argument. See also {@link #getPropertyPrefix()}.
-   * @param value is the value to use as second argument.
-   * @param convertGlob - <code>true</code> if the given <code>value</code> should be
-   *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
-   *        otherwise (if the value should be used as is).
-   * @param not - <code>true</code> if the expression shall be negated ("NOT "), <code>false</code> otherwise.
-   * @param inverse - <code>true</code> if called from
-   *        {@link #isLikeInverse(String, String, boolean, boolean)} (value is first argument, property is
-   *        second argument), <code>false</code> otherwise.
-   * @return this instance itself.
-   */
-  private SELF isLike(String property, String value, boolean convertGlob, boolean not, boolean inverse) {
-
-    JpqlOperator operator;
-    if (not) {
-      operator = JpqlOperator.NOT_LIKE;
-    } else {
-      operator = JpqlOperator.LIKE;
-    }
-    return isCompare(property, operator.getTitle(), value, inverse, convertGlob);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isCondition(String property, String condition) {
-
-    appendConjunctionIfRequired();
-    JpqlContext<E> context = getContext();
-    StringBuilder queryBuffer = context.getQueryBuffer();
-    appendProperty(property);
-    queryBuffer.append(' ');
-    queryBuffer.append(condition);
-    this.hasPreviousExpression = true;
-    return (SELF) this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isNull(String property) {
-
-    return isCondition(property, JPQL_CONDITION_IS_NULL);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isNull(String property, boolean not) {
-
-    String condition;
-    if (not) {
-      condition = JPQL_CONDITION_IS_NOT_NULL;
-    } else {
-      condition = JPQL_CONDITION_IS_NULL;
-    }
-    return isCondition(property, condition);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isNotNull(String property) {
-
-    return isNull(property, true);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isEmpty(String property) {
-
-    return isEmpty(property, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isEmpty(String property, boolean not) {
-
-    String condition;
-    if (not) {
-      condition = JPQL_CONDITION_IS_NOT_EMPTY;
-    } else {
-      condition = JPQL_CONDITION_IS_EMPTY;
-    }
-    return isCondition(property, condition);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isNotEmpty(String property) {
-
-    return isEmpty(property, true);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public <T> SELF isBetween(String property, T min, T max) {
-
-    return isBetween(property, min, max, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public <T> SELF isBetween(String property, T min, T max, boolean not) {
-
-    // property BETWEEN :min AND :max <=> property >= :min AND property <= :max
-    if (min == null) {
-      if (max == null) {
-        throw new NlsNullPointerException("min & max");
-      }
-      if (not) {
-        return isCompareValue(property, JpqlOperator.GREATER_THAN, max);
-      } else {
-        return isCompareValue(property, JpqlOperator.LESS_EQUAL, max);
-      }
-    } else if (max == null) {
-      if (not) {
-        return isCompareValue(property, JpqlOperator.LESS_THAN, min);
-      } else {
-        return isCompareValue(property, JpqlOperator.GREATER_EQUAL, min);
-      }
-    }
-    String operator;
-    if (not) {
-      operator = JPQL_OPERATOR_NOT_BETWEEN;
-    } else {
-      operator = JPQL_OPERATOR_BETWEEN;
-    }
-
-    StringBuilder queryBuffer = getContext().getQueryBuffer();
-    isCompare(property, operator, min, false, false);
-    queryBuffer.append(JPQL_CONJUNCTION_AND);
-    getContext().addParameter(max, property + "Max");
-    return (SELF) this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isBetween(String property, Range<?> range, boolean not) {
-
-    NlsNullPointerException.checkNotNull(Range.class, range);
-    return isBetween(property, range.getMin(), range.getMax(), not);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isBetweenProperty(String property, String minProperty, String maxProperty) {
-
-    return isBetweenProperty(property, minProperty, maxProperty, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SELF isBetweenProperty(String property, String minProperty, String maxProperty, boolean not) {
-
-    String operator;
-    if (not) {
-      operator = JPQL_OPERATOR_NOT_BETWEEN;
-    } else {
-      operator = JPQL_OPERATOR_BETWEEN;
-    }
-    StringBuilder queryBuffer = getContext().getQueryBuffer();
-    isCompareProperties(property, operator, minProperty);
-    queryBuffer.append(JPQL_CONJUNCTION_AND);
-    appendProperty(property);
-    return (SELF) this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String convertGlobPattern(String pattern) {
-
-    // TODO hohwille Do we need to escape % and _ before?
-    return pattern.replace('*', '%').replace('?', '_');
+    return property("", subQuery.getJpqlStatement(), null);
   }
 
   /**
@@ -506,10 +204,21 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public JpqlFromClause<?> newSubQuery(String property, String alias) {
+  public JpqlFromClause<?> newSubQuery(String basePath, String property, String alias) {
 
     JpqlContext<Object> context = new JpqlContext<Object>(getContext().getEntityManager(), Object.class, alias, true);
-    return new JpqlFromClauseImpl<Object>(context, getPropertyPrefix() + property);
+    return new JpqlFromClauseImpl<Object>(context, getProperty(basePath, property));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T> JpqlFromClause<T> newSubQuery(String basePath, TypedProperty<T> property, String alias) {
+
+    JpqlContext<T> context = new JpqlContext<T>(getContext().getEntityManager(), property.getPropertyType(), alias,
+        true);
+    return new JpqlFromClauseImpl<T>(context, getProperty(basePath, property.getPojoPath()));
   }
 
 }

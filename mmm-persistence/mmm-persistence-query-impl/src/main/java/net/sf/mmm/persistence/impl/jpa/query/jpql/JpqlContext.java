@@ -4,7 +4,8 @@ package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
 import javax.persistence.EntityManager;
 
-import net.sf.mmm.persistence.api.query.jpql.JpqlBase;
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
+import net.sf.mmm.persistence.api.query.jpql.JpqlSegment;
 import net.sf.mmm.persistence.impl.jpa.query.AbstractJpqlContext;
 
 /**
@@ -15,7 +16,7 @@ import net.sf.mmm.persistence.impl.jpa.query.AbstractJpqlContext;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class JpqlContext<E> extends AbstractJpqlContext implements JpqlBase<E> {
+public class JpqlContext<E> extends AbstractJpqlContext implements JpqlSegment<E> {
 
   /** @see #getEntityType() */
   private final Class<E> entityType;
@@ -88,12 +89,12 @@ public class JpqlContext<E> extends AbstractJpqlContext implements JpqlBase<E> {
    * This method adds a parameter to the query.
    * 
    * @param parameter is the {@link javax.persistence.TypedQuery#setParameter(int, Object) parameter} to add.
-   * @param property is the property that may be used to create nice named parameters instead of indexed
-   *        parameters.
+   * @param property is the name of the property that may be used to create nice named parameters instead of
+   *        indexed parameters.
    */
   public void addParameter(Object parameter, String property) {
 
-    this.queryBuffer.append(JPQL_PARAMETER);
+    this.queryBuffer.append(JpqlCore.JPQL_PARAMETER);
     getParameters().add(parameter);
   }
 

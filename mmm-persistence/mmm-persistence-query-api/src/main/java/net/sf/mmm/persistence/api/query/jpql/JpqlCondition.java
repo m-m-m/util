@@ -15,16 +15,16 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
 public enum JpqlCondition implements AttributeReadTitle<String> {
 
   /** The null condition: {@value} . */
-  NULL(" IS NULL"),
+  IS_NULL(" IS NULL"),
 
   /** The not null condition: {@value} . */
-  NOT_NULL(" IS NOT NULL"),
+  IS_NOT_NULL(" IS NOT NULL"),
 
   /** The empty condition: {@value} . */
-  EMPTY(" IS EMPTY"),
+  IS_EMPTY(" IS EMPTY"),
 
   /** The not empty condition: {@value} . */
-  NOT_EMPTY(" IS NOT EMPTY");
+  IS_NOT_EMPTY(" IS NOT EMPTY");
 
   /** @see #getTitle() */
   private final String title;
@@ -49,20 +49,20 @@ public enum JpqlCondition implements AttributeReadTitle<String> {
   }
 
   /**
-   * @return the negated (inverse) operator. E.g. {@link #EMPTY}.{@link #negate()} will return
-   *         {@link #NOT_EMPTY}.
+   * @return the negated (inverse) operator. E.g. {@link #IS_EMPTY}.{@link #negate()} will return
+   *         {@link #IS_NOT_EMPTY}.
    */
   public JpqlCondition negate() {
 
     switch (this) {
-      case EMPTY:
-        return NOT_EMPTY;
-      case NOT_EMPTY:
-        return EMPTY;
-      case NULL:
-        return NOT_NULL;
-      case NOT_NULL:
-        return NULL;
+      case IS_EMPTY:
+        return IS_NOT_EMPTY;
+      case IS_NOT_EMPTY:
+        return IS_EMPTY;
+      case IS_NULL:
+        return IS_NOT_NULL;
+      case IS_NOT_NULL:
+        return IS_NULL;
       default :
         throw new IllegalCaseException(JpqlCondition.class, this);
     }

@@ -15,18 +15,18 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 public abstract interface JpqlGroupBySupport<E> extends JpqlFragment<E> {
 
   /**
-   * This method closes this clause and opens a {@link #JPQL_GROUP_BY} clause.
+   * This method closes this clause and opens a {@link JpqlCore#JPQL_GROUP_BY} clause.
    * 
-   * @param groupByItems are the {@link #PROPERTY properties} or items (singleValuedPathExpression or
+   * @param groupByItems are the {@link JpqlCore#PROPERTY properties} or items (singleValuedPathExpression or
    *        identificationVariable) to group by.
    * @return the {@link JpqlGroupByClause}.
    */
   JpqlGroupByClause<E> groupBy(String... groupByItems);
 
   /**
-   * This method closes this clause and opens a {@link #JPQL_GROUP_BY} clause.
+   * This method closes this clause and opens a {@link JpqlCore#JPQL_GROUP_BY} clause.
    * 
-   * @param properties are the {@link #PROPERTY properties} to group by.
+   * @param properties are the {@link JpqlCore#PROPERTY properties} to group by.
    * @return the {@link JpqlGroupByClause}.
    */
   JpqlGroupByClause<E> groupBy(TypedProperty<?>... properties);

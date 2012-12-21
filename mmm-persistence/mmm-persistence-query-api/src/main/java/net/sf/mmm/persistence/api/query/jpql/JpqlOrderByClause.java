@@ -21,7 +21,7 @@ public interface JpqlOrderByClause<E> extends JpqlFragment<E> {
    * 
    * @see #also(String, SortOrder)
    * 
-   * @param property is an additional {@link #PROPERTY property} to sort the results by.
+   * @param property is an additional {@link JpqlCore#PROPERTY property} to sort the results by.
    * @return the {@link JpqlOrderByClause}.
    */
   JpqlOrderByClause<E> also(String property);
@@ -29,7 +29,7 @@ public interface JpqlOrderByClause<E> extends JpqlFragment<E> {
   /**
    * This method adds more properties to order the results by.
    * 
-   * @param property is an additional {@link #PROPERTY property} to sort the results by.
+   * @param property is an additional {@link JpqlCore#PROPERTY property} to sort the results by.
    * @param order is the {@link SortOrder}.
    * @return the {@link JpqlOrderByClause}.
    */

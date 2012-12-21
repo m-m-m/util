@@ -7,10 +7,10 @@ import javax.persistence.PersistenceContext;
 
 import net.sf.mmm.persistence.api.query.JpqlBuilder;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
-import net.sf.mmm.persistence.impl.jpa.query.jpql.AbstractJpqlPropertySupport;
-import net.sf.mmm.persistence.impl.jpa.query.jpql.JpqlFromClauseImpl;
 import net.sf.mmm.persistence.impl.jpa.query.jpql.JpqlContext;
+import net.sf.mmm.persistence.impl.jpa.query.jpql.JpqlFromClauseImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
  * This is the implementation of {@link JpqlBuilder}.
@@ -18,7 +18,7 @@ import net.sf.mmm.util.component.api.ResourceMissingException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class JpqlBuilderImpl extends AbstractJpqlPropertySupport implements JpqlBuilder {
+public class JpqlBuilderImpl extends AbstractLoggableComponent implements JpqlBuilder {
 
   /** @see #getEntityManager() */
   private EntityManager entityManager;

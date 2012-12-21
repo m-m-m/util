@@ -4,13 +4,12 @@ package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
 import net.sf.mmm.persistence.api.query.ListQuery;
 import net.sf.mmm.persistence.api.query.SimpleQuery;
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFragment;
 import net.sf.mmm.persistence.impl.jpa.query.ListQueryImpl;
 import net.sf.mmm.persistence.impl.jpa.query.SimpleQueryImpl;
-import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectDisposedException;
 
 /**
  * This is the implementation of {@link JpqlFragment}.
@@ -20,14 +19,10 @@ import net.sf.mmm.util.nls.api.ObjectDisposedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySupport implements JpqlFragment<E>,
-    AttributeWriteDisposed {
+public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySupport implements JpqlFragment<E> {
 
   /** @see #getContext() */
   private final JpqlContext<E> context;
-
-  /** @see #isDisposed() */
-  private boolean disposed;
 
   /**
    * The constructor.
@@ -38,7 +33,6 @@ public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySuppor
 
     super();
     this.context = context;
-    this.disposed = false;
   }
 
   /**
@@ -71,36 +65,6 @@ public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySuppor
    * {@inheritDoc}
    */
   @Override
-  public boolean isDisposed() {
-
-    return this.disposed;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void dispose() {
-
-    this.disposed = true;
-  }
-
-  /**
-   * This method ensures that this object is NOT {@link #isDisposed() disposed}.
-   * 
-   * @throws ObjectDisposedException if this fragment is already {@link #isDisposed() disposed}.
-   */
-  protected void ensureNotDisposed() throws ObjectDisposedException {
-
-    if (this.disposed) {
-      throw new ObjectDisposedException(this);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String getCurrentQuery() {
 
     return this.context.getQueryBuffer().toString();
@@ -121,7 +85,7 @@ public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySuppor
   @Override
   public ListQuery<E> selectDistinct() {
 
-    return select(JPQL_DISTINCT + getEntityAlias());
+    return select(JpqlCore.JPQL_DISTINCT + getEntityAlias());
   }
 
   /**
@@ -155,7 +119,7 @@ public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySuppor
     if (this.context.isSubQuery()) {
       statement.append('(');
     }
-    statement.append(JPQL_SELECT);
+    statement.append(JpqlCore.JPQL_SELECT);
     statement.append(selection);
     statement.append(queryBuffer);
     if (this.context.isSubQuery()) {
@@ -186,7 +150,7 @@ public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySuppor
       throw new NlsIllegalArgumentException("0", "arguments.length");
     }
     StringBuilder selection = new StringBuilder();
-    selection.append(JPQL_NEW);
+    selection.append(JpqlCore.JPQL_NEW);
     selection.append(resultType.getName());
     char separator = '(';
     for (String arg : arguments) {
@@ -230,21 +194,14 @@ public abstract class AbstractJpqlFragment<E> extends AbstractJpqlPropertySuppor
   }
 
   /**
-   * This method appends the {@link #getPropertyPrefix() prefix} and the given <code>property</code> to the
-   * query.
+   * This method appends the {@link #getPropertyBasePath() base path} and the given <code>property</code> to
+   * the query.
    * 
-   * @param property is the property. See {@link #getPropertyPrefix()}.
+   * @param property is the {@link #PROPERTY property}.
    */
   protected void appendProperty(String property) {
 
-    NlsNullPointerException.checkNotNull("property", property);
-    // TODO define regexp for legal properties...
-    // assert (!property.contains(" "));
-    StringBuilder queryBuffer = getContext().getQueryBuffer();
-    if (!property.startsWith("(")) {
-      queryBuffer.append(getPropertyPrefix());
-    }
-    queryBuffer.append(property);
+    appendProperty(property, getContext());
   }
 
 }

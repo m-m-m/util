@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlOrderByClause;
 import net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause;
 import net.sf.mmm.util.lang.api.SortOrder;
@@ -26,7 +27,7 @@ public class JpqlWhereClauseImpl<E> extends AbstractJpqlConditionalExpression<E,
   public JpqlWhereClauseImpl(JpqlContext<E> context, String propertyBasePath) {
 
     super(context, propertyBasePath);
-    context.getQueryBuffer().append(JPQL_WHERE);
+    context.getQueryBuffer().append(JpqlCore.JPQL_WHERE);
   }
 
   /**

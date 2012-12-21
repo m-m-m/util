@@ -97,9 +97,9 @@ public class JqplBuilderImplTest {
 
     // then
     JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType, alias);
-    ListQuery<DummyFooEntity> query = from.where().isCompareValue(property1Name, JpqlOperator.EQUAL, property1Value)
-        .isCompareValue(property2Name, JpqlOperator.NOT_EQUAL, property2Value).or()
-        .isCompareValue(property2Name, JpqlOperator.GREATER_EQUAL, property2Value).select();
+    ListQuery<DummyFooEntity> query = from.where().property(property1Name).isEqual(property1Value)
+        .property(property2Name).not().isEqual(property2Value).or().property(property2Name)
+        .isCompare(JpqlOperator.GREATER_EQUAL, property2Value).select();
 
     // test
     Assert.assertNotNull(query);
@@ -115,6 +115,36 @@ public class JqplBuilderImplTest {
   }
 
   /**
+   * Test for {@link JpqlBuilder#from(Class, String)} with WHERE clause.
+   */
+  @Test
+  public void testQueryWithTwoEntitesAndWhereComparingThem() {
+
+    // given
+    Class<DummyFooEntity> entityType = DummyFooEntity.class;
+    String alias = "foo";
+    JpqlBuilder queryBuilder = getQueryBuilder();
+    String property1Name = TypedProperty.createPath(DummyFooEntity.PROPERTY_BAR, DummyBarEntity.PROPERTY_VALUE);
+
+    Class<DummyBarEntity> entityType2 = DummyBarEntity.class;
+    String alias2 = "bar";
+    String property2Name = DummyBarEntity.PROPERTY_VALUE;
+
+    // then
+    JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType, alias).also(entityType2, alias2);
+    ListQuery<DummyFooEntity> query = from.where().property(property1Name).isEqual(alias2, property2Name).select();
+
+    // test
+    Assert.assertNotNull(query);
+    String entityName = entityType.getSimpleName();
+    String expectedQuery = MessageFormat.format("SELECT {1} FROM {0} {1},{3} {4} WHERE {1}.{2} = {4}.{5}", entityName,
+        alias, property1Name, entityType2.getSimpleName(), alias2, property2Name);
+    Assert.assertEquals(expectedQuery, query.getJpqlStatement());
+    TypedQuery<DummyFooEntity> typedQuery = query.getOrCreateQuery();
+    Assert.assertNotNull(typedQuery);
+  }
+
+  /**
    * Test for {@link JpqlBuilder#from(Class, String)} with a sub-query.
    */
   @Test
@@ -126,14 +156,14 @@ public class JqplBuilderImplTest {
     JpqlBuilder queryBuilder = getQueryBuilder();
     String propertyName = DummyFooEntity.PROPERTY_BAR;
     String barAlias = "barAlias";
-    Integer countValue = Integer.valueOf(10);
+    Long countValue = Long.valueOf(10);
 
     // then
     JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType, alias);
     JpqlWhereClause<DummyFooEntity> whereClause = from.where();
-    SimpleQuery<Long> subQuery = whereClause.newSubQuery(propertyName, barAlias).selectCount();
-    ListQuery<DummyFooEntity> query = whereClause.isCompareValue(subQuery.getJpqlStatement(),
-        JpqlOperator.GREATER_THAN, countValue).selectDistinct();
+    SimpleQuery<Long> subQuery = whereClause.newSubQuery(null, propertyName, barAlias).selectCount();
+    ListQuery<DummyFooEntity> query = whereClause.subQuery(subQuery).isCompare(JpqlOperator.GREATER_THAN, countValue)
+        .selectDistinct();
 
     // test
     Assert.assertNotNull(query);
@@ -162,8 +192,8 @@ public class JqplBuilderImplTest {
 
     // then
     JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType);
-    JpqlHavingClause<DummyFooEntity> clause = from.groupBy(propertyName).having()
-        .isBetween(propertyName, propertyMin, propertyMax);
+    JpqlHavingClause<DummyFooEntity> clause = from.groupBy(propertyName).having().property(propertyName)
+        .isBetween(propertyMin, propertyMax);
     ListQuery<DummyFooEntity> query = clause.select();
 
     // test
@@ -192,8 +222,8 @@ public class JqplBuilderImplTest {
 
     // then
     JpqlFromClause<DummyFooEntity> from = queryBuilder.from(entityType);
-    JpqlOrderByClause<DummyFooEntity> clause = from.where().isBetween(propertyName, propertyMin, propertyMax)
-        .orderBy(propertyName, SortOrder.DESCENDING);
+    JpqlOrderByClause<DummyFooEntity> clause = from.where().property(null, propertyName)
+        .isBetween(propertyMin, propertyMax).orderBy(propertyName, SortOrder.DESCENDING);
     ListQuery<DummyFooEntity> query = clause.select();
 
     // test

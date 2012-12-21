@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.query.jpql;
 
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
 import net.sf.mmm.persistence.api.query.jpql.JpqlJoinType;
 import net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause;
@@ -38,7 +39,7 @@ public class JpqlFromClauseImpl<E> extends AbstractJpqlFragmentWithGroupBySuppor
 
     super(context);
     StringBuilder queryBuffer = context.getQueryBuffer();
-    queryBuffer.append(JPQL_FROM);
+    queryBuffer.append(JpqlCore.JPQL_FROM);
     appendEntity(property, getEntityAlias());
     setPropertyBasePath(getEntityAlias());
   }
@@ -118,7 +119,7 @@ public class JpqlFromClauseImpl<E> extends AbstractJpqlFragmentWithGroupBySuppor
     NlsNullPointerException.checkNotNull(JpqlJoinType.class, type);
     StringBuilder queryBuffer = getContext().getQueryBuffer();
     queryBuffer.append(type);
-    queryBuffer.append(JPQL_FETCH);
+    queryBuffer.append(JpqlCore.JPQL_FETCH);
     queryBuffer.append(valuedPathExpression);
     return this;
   }
@@ -132,9 +133,9 @@ public class JpqlFromClauseImpl<E> extends AbstractJpqlFragmentWithGroupBySuppor
     ensureNotDisposed();
     NlsNullPointerException.checkNotNull("expression", collectionValuedPathExpression);
     StringBuilder queryBuffer = getContext().getQueryBuffer();
-    queryBuffer.append(JPQL_IN_START);
+    queryBuffer.append(JpqlCore.JPQL_IN_START);
     appendProperty(collectionValuedPathExpression);
-    queryBuffer.append(JPQL_IN_END);
+    queryBuffer.append(JpqlCore.JPQL_IN_END);
     queryBuffer.append(alias);
     return this;
   }

@@ -15,7 +15,7 @@ import net.sf.mmm.persistence.api.query.SimpleQuery;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface JpqlFragment<E> extends JpqlBase<E>, JpqlPropertySupport {
+public abstract interface JpqlFragment<E> extends JpqlSegment<E>, JpqlPropertySupport {
 
   /**
    * @return the current JPQL query fragment as string. This is NOT a complete JQPL query. Use
@@ -41,7 +41,7 @@ public abstract interface JpqlFragment<E> extends JpqlBase<E>, JpqlPropertySuppo
   ListQuery<E> select(String selection);
 
   /**
-   * Builds the actual query as {@link #JPQL_DISTINCT DISTINCT} <code>select_statement</code> using defaults
+   * Builds the actual query as {@link JpqlCore#JPQL_DISTINCT DISTINCT} <code>select_statement</code> using defaults
    * (selecting by {@link #getEntityAlias() alias}).
    * 
    * @return the {@link ListQuery} representing the build query.

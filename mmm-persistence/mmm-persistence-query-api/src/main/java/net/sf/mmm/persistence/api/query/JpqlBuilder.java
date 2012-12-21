@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.api.query;
 
+import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
-import net.sf.mmm.persistence.api.query.jpql.JpqlPropertySupport;
 import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
@@ -19,9 +19,10 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * <pre>
  * {@link JpqlBuilder} builder = getJpqlBuilder();
  * builder.{@link #from(Class) from}(MyEntity.class).{@link JpqlFromClause#where()
- * where()}.{@link net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause#isCompare(net.sf.mmm.util.pojo.path.api.TypedProperty,
- * net.sf.mmm.persistence.api.query.jpql.JpqlOperator, Object) isCompare}(MyEntity.TYPED_PROPERTY_AGE{@literal
- * ,} {@link net.sf.mmm.persistence.api.query.jpql.JpqlOperator#GREATER_THAN}, minAge){@literal
+ * where()}.{@link net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause#property(net.sf.mmm.util.pojo.path.api.TypedProperty)
+ * property}(MyEntity.TYPED_PROPERTY_AGE).{@link
+ * net.sf.mmm.persistence.api.query.jpql.JpqlPropertyExpression#isCompare(net.sf.mmm.persistence.api.query.jpql.JpqlOperator, Object)
+ * isCompare}({@link net.sf.mmm.persistence.api.query.jpql.JpqlOperator#GREATER_THAN}, minAge){@literal
  * .}{@link net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause#select() select()};
  * </pre>
  * 
@@ -45,7 +46,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface JpqlBuilder extends JpqlPropertySupport {
+public interface JpqlBuilder extends JpqlCore {
 
   /**
    * This method is a shortcut for {@link #from(Class, String)} that automatically creates the
