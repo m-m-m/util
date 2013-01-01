@@ -29,7 +29,7 @@ import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
  * reasonable application with a modular design. Therefore this is a workaround to solve the problem.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class EntityLocator extends AbstractLoggableComponent implements PersistenceUnitPostProcessor {
 

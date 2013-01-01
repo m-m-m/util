@@ -17,7 +17,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
  * @param <SELF> is the generic type reflecting the type of this instance itself.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlConditionalExpression<E, SELF>> extends

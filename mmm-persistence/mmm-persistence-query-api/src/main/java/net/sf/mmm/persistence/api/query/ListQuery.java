@@ -12,7 +12,7 @@ import java.util.List;
  * @param <RESULT> is the generic type of the {@link #getSingleResult() result}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public interface ListQuery<RESULT> extends OptionalQuery<RESULT> {
 

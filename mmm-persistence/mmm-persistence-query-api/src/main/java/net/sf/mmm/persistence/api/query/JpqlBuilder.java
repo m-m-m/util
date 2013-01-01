@@ -43,7 +43,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * determined.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 @ComponentSpecification
 public interface JpqlBuilder extends JpqlCore {

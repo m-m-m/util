@@ -112,7 +112,7 @@ public class StreamUtilTest {
 
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(DevZero.INSTANCE, outStream, true);
-    Thread.sleep(10);
+    Thread.sleep(100);
     long size = outStream.size();
     transferrer.cancel(true);
     assertTrue(size > 0);

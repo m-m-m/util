@@ -8,7 +8,7 @@ import net.sf.mmm.util.entity.api.GenericEntity;
  * This is the read only interface for the {@link DummyBarEntity}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public interface DummyBarEntityView extends GenericEntity<Integer> {
 

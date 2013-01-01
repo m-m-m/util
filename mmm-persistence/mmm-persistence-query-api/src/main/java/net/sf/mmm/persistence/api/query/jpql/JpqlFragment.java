@@ -13,7 +13,7 @@ import net.sf.mmm.persistence.api.query.SimpleQuery;
  * @param <E> is the generic type of the {@link #getEntityType() entity type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public abstract interface JpqlFragment<E> extends JpqlSegment<E>, JpqlPropertySupport {
 

@@ -14,7 +14,7 @@ import net.sf.mmm.util.entity.api.GenericEntity;
  * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class JpaGenericDao<ID, ENTITY extends GenericEntity<ID>> extends AbstractJpaGenericDao<ID, ENTITY> {
 

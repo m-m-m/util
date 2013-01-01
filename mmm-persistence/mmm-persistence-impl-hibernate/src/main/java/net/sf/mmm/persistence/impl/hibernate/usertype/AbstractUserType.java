@@ -22,7 +22,7 @@ import org.slf4j.Logger;
  * 
  * @param <T> the generic for the adapted datatype.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public abstract class AbstractUserType<T> extends AbstractLoggableComponent implements UserType {
 

@@ -12,7 +12,7 @@ import net.sf.mmm.persistence.api.query.JpqlStatement;
  * This is the implementation of {@link JpqlStatement} using JPA.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public abstract class AbstractStatementImpl extends AbstractJpqlContext implements JpqlStatement {
 

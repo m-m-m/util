@@ -25,7 +25,7 @@ import org.junit.Test;
  * This is the test-case for {@link JpqlBuilderImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class JqplBuilderImplTest {
 

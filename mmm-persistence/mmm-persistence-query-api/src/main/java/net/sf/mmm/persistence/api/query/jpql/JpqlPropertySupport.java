@@ -6,7 +6,7 @@ package net.sf.mmm.persistence.api.query.jpql;
  * This is the abstract interface for JPQL property path support.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public abstract interface JpqlPropertySupport extends JpqlCore {
 

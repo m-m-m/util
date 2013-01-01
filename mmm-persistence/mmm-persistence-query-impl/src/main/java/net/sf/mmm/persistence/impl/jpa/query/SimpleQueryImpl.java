@@ -15,7 +15,7 @@ import net.sf.mmm.persistence.api.query.SimpleQuery;
  * @param <RESULT> is the generic type of the {@link #getSingleResult() result}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SimpleQueryImpl<RESULT> extends AbstractStatementImpl implements SimpleQuery<RESULT> {
 

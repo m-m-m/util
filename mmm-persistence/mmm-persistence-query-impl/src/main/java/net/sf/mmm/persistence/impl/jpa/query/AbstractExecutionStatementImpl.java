@@ -12,7 +12,7 @@ import javax.persistence.Query;
  * statements that represent untyped {@link Query queries} for DELETE or UPDATE.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public abstract class AbstractExecutionStatementImpl extends AbstractStatementImpl {
 

@@ -13,7 +13,7 @@ import javax.persistence.TypedQuery;
  * This class is the container for the context and state required to build a JPQL query.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public abstract class AbstractJpqlContext {
 

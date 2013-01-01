@@ -7,7 +7,7 @@ package net.sf.mmm.persistence.api.sequence;
  * this as an {@link Enum} for your particular sequences.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public interface Sequence {
 

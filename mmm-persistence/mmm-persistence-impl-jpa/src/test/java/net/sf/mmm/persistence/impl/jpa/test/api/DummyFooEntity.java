@@ -6,7 +6,7 @@ package net.sf.mmm.persistence.impl.jpa.test.api;
  * This is a test entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public interface DummyFooEntity extends DummyFooEntityView {
 

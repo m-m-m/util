@@ -20,7 +20,7 @@ import net.sf.mmm.util.value.api.Range;
  *        {@link JpqlPropertyExpression}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class JpqlPropertyExpressionImpl<T, EXPRESSION extends JpqlConditionalExpression<?, ?>> extends
     AbstractJpqlPropertySupport implements JpqlPropertyExpression<T, EXPRESSION> {

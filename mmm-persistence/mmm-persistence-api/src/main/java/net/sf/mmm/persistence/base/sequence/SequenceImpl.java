@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * with instances of this class.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SequenceImpl implements Sequence {
 

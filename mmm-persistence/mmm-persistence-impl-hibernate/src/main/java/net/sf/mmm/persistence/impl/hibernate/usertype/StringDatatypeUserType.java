@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * 
  * @param <T> the generic for the adapted {@link Datatype}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class StringDatatypeUserType<T extends Datatype<String>> extends DatatypeUserType<String, T> {
 

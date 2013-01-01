@@ -11,7 +11,7 @@ import net.sf.mmm.persistence.api.query.jpql.JpqlHavingClause;
  * @param <E> is the generic type of the {@link #getEntityType() entity type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class JpqlHavingClauseImpl<E> extends AbstractJpqlConditionalExpression<E, JpqlHavingClause<E>> implements
     JpqlHavingClause<E> {

@@ -12,7 +12,7 @@ import net.sf.mmm.persistence.api.query.DeleteStatement;
  * This is the implementation of {@link DeleteStatement}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class DeleteStatementImpl extends AbstractExecutionStatementImpl implements DeleteStatement {
 

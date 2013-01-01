@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.query;
 
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -16,8 +17,9 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * This is the implementation of {@link JpqlBuilder}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
+@Named
 public class JpqlBuilderImpl extends AbstractLoggableComponent implements JpqlBuilder {
 
   /** @see #getEntityManager() */

@@ -1476,6 +1476,6 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    */
   @NlsBundleMessage("Your search query was canceled because it exceeded a given timeout! Please try to simplify, "
       + "specialize to match less hits, or try again later.")
-  String errorSearchTimeout();
+  NlsMessage errorSearchTimeout();
 
 }

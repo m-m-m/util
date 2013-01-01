@@ -21,7 +21,7 @@ import net.sf.mmm.util.search.base.SearchResultBean;
  * @param <HIT> is the generic type of the {@link #search() result} of this query.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SearchQueryJpa<HIT> implements SearchQuery<HIT> {
 
