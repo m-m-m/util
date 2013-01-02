@@ -452,34 +452,9 @@
             <artifactId>mmm-setup</artifactId>
             <version>0-SNAPSHOT</version>
           </dependency>
-          <!-- for dashboard -->
-          <!--
-          <dependency>
-            <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>1.8.0.7</version>
-          </dependency>
-          -->
         </dependencies>
-        <executions>
-          <execution>
-            <goals>
-              <goal>attach-descriptor</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
-    <!-- http://jira.codehaus.org/browse/MNG-4253 -->
-    <extensions>
-      <!--
-      <extension>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-setup</artifactId>
-        <version>0-SNAPSHOT</version>
-      </extension>
-      -->
-    </extensions>
   </build>
 
   <profiles>
@@ -508,6 +483,9 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
+            <configuration>
+            	<keyname>Jörg Hohwiller</keyname>
+            </configuration>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
