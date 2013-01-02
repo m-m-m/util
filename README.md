@@ -9,4 +9,4 @@ The Multi-Media-Manager (MMM) is a generic application plattform and a enterpris
 system (ECMS) with custom modules for multi-media management build on top.
 
 * [Homepage](http://m-m-m.sourceforge.net/index.html)
-* [Wiki](mmm/wiki)
+* [Wiki](wiki)
