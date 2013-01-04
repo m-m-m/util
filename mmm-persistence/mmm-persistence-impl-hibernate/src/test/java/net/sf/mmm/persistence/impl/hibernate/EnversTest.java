@@ -24,13 +24,13 @@ public class EnversTest {
 
   protected RevisionedPersistenceManager getPersistenceManager() {
 
-    return SpringContainerPool.getInstance(SPRING_XML).getComponent(RevisionedPersistenceManager.class);
+    return SpringContainerPool.getInstance(SPRING_XML).get(RevisionedPersistenceManager.class);
   }
 
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(
         TransactionExecutor.class);
 
     DummyRevisionedFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyRevisionedFooEntity>() {
@@ -44,7 +44,7 @@ public class EnversTest {
 
     // shutdown and restart to ensure we really read from DB
     SpringContainerPool.dispose(SPRING_XML);
-    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(TransactionExecutor.class);
+    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(TransactionExecutor.class);
 
     transactionExecutor.doInTransaction(new Callable<Void>() {
 
@@ -57,7 +57,7 @@ public class EnversTest {
 
     // shutdown and restart to ensure we really read from DB
     SpringContainerPool.dispose(SPRING_XML);
-    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(TransactionExecutor.class);
+    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(TransactionExecutor.class);
 
     transactionExecutor.doInTransaction(new Callable<Void>() {
 

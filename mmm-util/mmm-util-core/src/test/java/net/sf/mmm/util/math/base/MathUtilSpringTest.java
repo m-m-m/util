@@ -21,7 +21,7 @@ public class MathUtilSpringTest extends MathUtilTest {
   @Override
   public MathUtil getMathUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(MathUtil.class);
+    return SpringContainerPool.getInstance().get(MathUtil.class);
   }
 
   /**

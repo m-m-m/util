@@ -3,6 +3,7 @@
 package net.sf.mmm.client.api;
 
 import net.sf.mmm.client.api.session.ClientSession;
+import net.sf.mmm.util.component.api.ComponentContainer;
 
 /**
  * This class gives {@link #getInstance() static access} to central client infrastructure.
@@ -18,6 +19,9 @@ public class ClientContext {
   /** @see #getComponents() */
   private ClientComponents components;
 
+  /** @see #getContainer() */
+  private ComponentContainer container;
+
   /** @see #getSession() */
   private ClientSession session;
 
@@ -30,6 +34,8 @@ public class ClientContext {
   }
 
   /**
+   * @see #getContainer()
+   * 
    * @return the {@link ClientComponents}.
    */
   public ClientComponents getComponents() {
@@ -59,6 +65,22 @@ public class ClientContext {
   protected void setSession(ClientSession session) {
 
     this.session = session;
+  }
+
+  /**
+   * @return the instance of {@link ComponentContainer}.
+   */
+  public ComponentContainer getContainer() {
+
+    return this.container;
+  }
+
+  /**
+   * @param container is the container to set
+   */
+  protected void setContainer(ComponentContainer container) {
+
+    this.container = container;
   }
 
   /**

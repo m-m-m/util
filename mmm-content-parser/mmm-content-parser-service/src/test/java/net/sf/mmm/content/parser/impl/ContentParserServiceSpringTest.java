@@ -19,7 +19,7 @@ public class ContentParserServiceSpringTest extends ContentParserServiceImplTest
   @Override
   protected ContentParserService getContentParserService() {
 
-    return SpringContainerPool.getInstance().getComponent(ContentParserService.class);
+    return SpringContainerPool.getInstance().get(ContentParserService.class);
   }
 
 }

@@ -18,7 +18,7 @@ public class ContentParserDocSpringTest extends ContentParserDocTest {
   @Override
   protected ContentParser getContentParser() {
 
-    return SpringContainerPool.getInstance().getComponent(ContentParserDoc.class);
+    return SpringContainerPool.getInstance().get(ContentParserDoc.class);
   }
 
 }

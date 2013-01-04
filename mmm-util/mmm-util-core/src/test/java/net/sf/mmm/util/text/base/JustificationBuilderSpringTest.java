@@ -19,7 +19,7 @@ public class JustificationBuilderSpringTest extends JustificationBuilderTest {
   @Override
   protected JustificationBuilder getJustificationBuilder() {
 
-    return SpringContainerPool.getInstance().getComponent(JustificationBuilder.class);
+    return SpringContainerPool.getInstance().get(JustificationBuilder.class);
   }
 
 }

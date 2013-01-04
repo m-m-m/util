@@ -20,7 +20,7 @@ public class PrivateMethodPojoDescriptorBuilderSpringTest extends PrivateMethodP
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
-    PojoDescriptorBuilderFactory factory = SpringContainerPool.getInstance().getComponent(
+    PojoDescriptorBuilderFactory factory = SpringContainerPool.getInstance().get(
         PojoDescriptorBuilderFactory.class);
     return factory.createDescriptorBuilder(VisibilityModifier.PRIVATE, null);
   }

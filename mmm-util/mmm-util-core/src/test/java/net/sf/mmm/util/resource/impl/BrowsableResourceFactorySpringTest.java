@@ -21,7 +21,7 @@ public class BrowsableResourceFactorySpringTest extends BrowsableResourceFactory
   @Override
   public BrowsableResourceFactory getBrowsableResourceFactory() {
 
-    return SpringContainerPool.getInstance().getComponent(BrowsableResourceFactory.class);
+    return SpringContainerPool.getInstance().get(BrowsableResourceFactory.class);
   }
 
   /**

@@ -55,11 +55,11 @@ public class LuceneSearchIndexerTest {
     String configLocation = TestResourceHelper.getTestPath(LuceneSearchIndexerTest.class, ".xml");
     int exitCode = main.run(new String[] { "--config", configLocation, "--overwrite" });
     Assert.assertEquals(0, exitCode);
-    SearchEngineConfigurationLoader configLoader = main.getIocContainer().getComponent(
+    SearchEngineConfigurationLoader configLoader = main.getIocContainer().get(
         SearchEngineConfigurationLoader.class);
     SearchEngineConfigurationHolder configurationHolder = configLoader
         .loadConfiguration(configLocation);
-    SearchEngineBuilder searchEngineBuilder = main.getIocContainer().getComponent(
+    SearchEngineBuilder searchEngineBuilder = main.getIocContainer().get(
         SearchEngineBuilder.class);
     String path = LuceneSearchIndexerTest.class.getName().replace('.', '/');
     ManagedSearchEngine searchEngine = searchEngineBuilder.createSearchEngine(configurationHolder);

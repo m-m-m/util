@@ -79,7 +79,7 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
     IocContainer container = getIocContainer();
     try {
       ConfiguredSearchIndexer configuredSearchIndexer = container
-          .getComponent(ConfiguredSearchIndexer.class);
+          .get(ConfiguredSearchIndexer.class);
       ConfiguredSearchIndexerOptionsBean options = new ConfiguredSearchIndexerOptionsBean();
       options.setOptimize(Boolean.TRUE.equals(this.optimize));
       options.setOverwriteEntries(this.overwrite);

@@ -32,13 +32,13 @@ public class PersistenceTest {
 
   protected PersistenceManager getPersistenceManager() {
 
-    return SpringContainerPool.getInstance(SPRING_XML).getComponent(PersistenceManager.class);
+    return SpringContainerPool.getInstance(SPRING_XML).get(PersistenceManager.class);
   }
 
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(
         TransactionExecutor.class);
 
     DummyFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyFooEntity>() {
@@ -56,7 +56,7 @@ public class PersistenceTest {
     System.out.println(barId);
     System.out.println("--------------------------------------------------------");
     SpringContainerPool.dispose(SPRING_XML);
-    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).getComponent(TransactionExecutor.class);
+    transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(TransactionExecutor.class);
 
     transactionExecutor.doInTransaction(new Callable<Void>() {
 

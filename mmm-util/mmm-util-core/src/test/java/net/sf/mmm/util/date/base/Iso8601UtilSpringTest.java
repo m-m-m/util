@@ -18,7 +18,7 @@ public class Iso8601UtilSpringTest extends Iso8601UtilTest {
   @Override
   public Iso8601Util getIso8601Util() {
 
-    return SpringContainerPool.getInstance().getComponent(Iso8601Util.class);
+    return SpringContainerPool.getInstance().get(Iso8601Util.class);
   }
 
 }

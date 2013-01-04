@@ -22,7 +22,7 @@ public class StringUtilSpringTest extends StringUtilTest {
   @Override
   public StringUtil getStringUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(StringUtil.class);
+    return SpringContainerPool.getInstance().get(StringUtil.class);
   }
 
   /**
@@ -31,7 +31,7 @@ public class StringUtilSpringTest extends StringUtilTest {
   @Override
   protected ValueConverterToNumber getValueConverterToNumber() {
 
-    return SpringContainerPool.getInstance().getComponent(ValueConverterToNumber.class);
+    return SpringContainerPool.getInstance().get(ValueConverterToNumber.class);
   }
 
   /**

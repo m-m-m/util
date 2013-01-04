@@ -21,7 +21,7 @@ public class ComposedValueConverterSpringTest extends ComposedValueConverterTest
   @Override
   protected ComposedValueConverter getComposedValueConverter() {
 
-    return SpringContainerPool.getInstance().getComponent(ComposedValueConverter.class);
+    return SpringContainerPool.getInstance().get(ComposedValueConverter.class);
   }
 
   /**

@@ -52,7 +52,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
    * The message displayed to the user when the server cannot be reached or returns an error.
    */
   private static final String SERVER_ERROR = "An error occurred while "
-      + "attempting to contact the server. Please check your network " + "connection and try again.";
+      + "attempting to contact the server. Please check your network connection and try again.";
 
   /**
    * The constructor.

@@ -8,4 +8,7 @@
 
   <context:annotation-config/>
   <context:component-scan base-package="net.sf.mmm.util"/>
+
+  <bean class="net.sf.mmm.util.component.impl.SpringContainerBean"/>
+
 </beans>

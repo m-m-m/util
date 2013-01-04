@@ -292,7 +292,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
         impl.initialize();
         this.resourceBundleFinder = impl;
       } else {
-        this.resourceBundleFinder = container.getComponent(NlsResourceBundleLocator.class);
+        this.resourceBundleFinder = container.get(NlsResourceBundleLocator.class);
       }
     }
     return this.resourceBundleFinder;
@@ -318,7 +318,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
       if (container == null) {
         this.reflectionUtil = ReflectionUtilImpl.getInstance();
       } else {
-        this.reflectionUtil = container.getComponent(ReflectionUtil.class);
+        this.reflectionUtil = container.get(ReflectionUtil.class);
       }
     }
     return this.reflectionUtil;

@@ -21,7 +21,7 @@ public class AnnotationUtilSpringTest extends AnnotationUtilTest {
   @Override
   public AnnotationUtil getAnnotationUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(AnnotationUtil.class);
+    return SpringContainerPool.getInstance().get(AnnotationUtil.class);
   }
 
   /**

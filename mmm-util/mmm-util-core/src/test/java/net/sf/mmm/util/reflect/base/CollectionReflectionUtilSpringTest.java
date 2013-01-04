@@ -21,7 +21,7 @@ public class CollectionReflectionUtilSpringTest extends CollectionReflectionUtil
   @Override
   public CollectionReflectionUtil getCollectionReflectionUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(CollectionReflectionUtil.class);
+    return SpringContainerPool.getInstance().get(CollectionReflectionUtil.class);
   }
 
   /**

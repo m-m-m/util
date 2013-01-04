@@ -18,7 +18,7 @@ public class FileUtilSpringTest extends FileUtilTest {
   @Override
   protected FileUtil getFileUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(FileUtil.class);
+    return SpringContainerPool.getInstance().get(FileUtil.class);
   }
 
 }

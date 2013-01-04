@@ -20,7 +20,7 @@ public class LuceneSearchQueryBuilderFactorySpringTest extends LuceneSearchQuery
   @Override
   protected SearchQueryBuilderFactory getQueryBuilderFactory() {
 
-    return SpringContainerPool.getInstance().getComponent(LuceneSearchQueryBuilderFactory.class);
+    return SpringContainerPool.getInstance().get(LuceneSearchQueryBuilderFactory.class);
   }
 
 }

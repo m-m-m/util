@@ -305,20 +305,20 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
       this.configurationUri = getParameter(config, PARAMETER_CONFIGURATION_URL,
           SearchConfiguration.DEFAULT_CONFIGURATION_URL);
       IocContainer container = getIocContainer();
-      this.xmlUtil = container.getComponent(XmlUtil.class);
-      this.iso8601Util = container.getComponent(Iso8601Util.class);
-      this.configurationReader = container.getComponent(SearchEngineConfigurationLoader.class);
+      this.xmlUtil = container.get(XmlUtil.class);
+      this.iso8601Util = container.get(Iso8601Util.class);
+      this.configurationReader = container.get(SearchEngineConfigurationLoader.class);
       this.configurationHolder = this.configurationReader.loadConfiguration(this.configurationUri);
-      this.searchEngine = container.getComponent(SearchEngineBuilder.class)
+      this.searchEngine = container.get(SearchEngineBuilder.class)
           .createSearchEngine(this.configurationHolder);
-      NlsMessageFactory messageFactory = container.getComponent(NlsMessageFactory.class);
-      NlsTemplateResolver templateResolver = container.getComponent(NlsTemplateResolver.class);
+      NlsMessageFactory messageFactory = container.get(NlsMessageFactory.class);
+      NlsTemplateResolver templateResolver = container.get(NlsTemplateResolver.class);
       this.bundleName = getParameter(config, PARAMETER_BUNDLE_NAME, DEFAULT_BUNDLE_NAME);
       this.nlsLocalizer = new NlsCachingLocalizer(this.bundleName, messageFactory, templateResolver);
       updateEntryTypeViews();
       updateSourceViews();
       update();
-      container.getComponent(PeriodicRefresher.class).addRefreshable(this);
+      container.get(PeriodicRefresher.class).addRefreshable(this);
     } catch (Exception e) {
       throw new NlsIllegalStateException(e);
     }

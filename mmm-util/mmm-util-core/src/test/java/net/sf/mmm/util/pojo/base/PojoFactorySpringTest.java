@@ -18,7 +18,7 @@ public class PojoFactorySpringTest extends PojoFactoryTest {
   @Override
   protected PojoFactory getPojoFactory() {
 
-    return SpringContainerPool.getInstance().getComponent(PojoFactory.class);
+    return SpringContainerPool.getInstance().get(PojoFactory.class);
   }
 
 }

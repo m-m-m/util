@@ -18,6 +18,7 @@ import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.UiModeChangerImpl;
 import net.sf.mmm.client.ui.base.widget.UiWidgetFactoryDatatypeSimple;
+import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
@@ -52,6 +53,9 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
   /** @see #getWidgetFactoryDatatype() */
   private UiWidgetFactoryDatatype widgetFactoryDatatype;
+
+  /** @see #getContainer() */
+  private ComponentContainer container;
 
   /**
    * The constructor.
@@ -118,6 +122,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   /**
    * @param modeChanger is the new {@link UiModeChanger} to use.
    */
+  @Inject
   public void setModeChanger(UiModeChanger modeChanger) {
 
     if (this.modeChanger != null) {
@@ -233,6 +238,24 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   public void setWidgetFactoryDatatype(UiWidgetFactoryDatatype widgetFactoryDatatype) {
 
     this.widgetFactoryDatatype = widgetFactoryDatatype;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ComponentContainer getContainer() {
+
+    return this.container;
+  }
+
+  /**
+   * @param container is the {@link ComponentContainer} to set.
+   */
+  @Inject
+  protected void setContainer(ComponentContainer container) {
+
+    this.container = container;
   }
 
 }

@@ -20,7 +20,7 @@ public class VersionUtilSpringTest extends VersionUtilTest {
   @Override
   public VersionUtil getVersionUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(VersionUtil.class);
+    return SpringContainerPool.getInstance().get(VersionUtil.class);
   }
 
   /**

@@ -21,7 +21,7 @@ public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
   @Override
   public Singularizer getEnglishSingularizer() {
 
-    return SpringContainerPool.getInstance().getComponent(Singularizer.class);
+    return SpringContainerPool.getInstance().get(Singularizer.class);
   }
 
   /**

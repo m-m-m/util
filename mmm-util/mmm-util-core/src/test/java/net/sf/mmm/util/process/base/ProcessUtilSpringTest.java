@@ -21,7 +21,7 @@ public class ProcessUtilSpringTest extends ProcessUtilTest {
   @Override
   public ProcessUtil getProcessUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(ProcessUtil.class);
+    return SpringContainerPool.getInstance().get(ProcessUtil.class);
   }
 
   /**

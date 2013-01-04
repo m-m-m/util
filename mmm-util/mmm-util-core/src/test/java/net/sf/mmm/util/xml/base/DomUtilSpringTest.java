@@ -21,7 +21,7 @@ public class DomUtilSpringTest extends DomUtilTest {
   @Override
   public DomUtil getDomUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(DomUtil.class);
+    return SpringContainerPool.getInstance().get(DomUtil.class);
   }
 
   /**

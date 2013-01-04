@@ -18,7 +18,7 @@ public class EncodingUtilSpringTest extends EncodingUtilTest {
   @Override
   protected EncodingUtil getEncodingUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(EncodingUtil.class);
+    return SpringContainerPool.getInstance().get(EncodingUtil.class);
   }
 
 }

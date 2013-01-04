@@ -18,7 +18,7 @@ public class ContentParserPptxSpringTest extends ContentParserPptxTest {
   @Override
   protected ContentParser getContentParser() {
 
-    return SpringContainerPool.getInstance().getComponent(ContentParserPptx.class);
+    return SpringContainerPool.getInstance().get(ContentParserPptx.class);
   }
 
 }

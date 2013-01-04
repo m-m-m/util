@@ -18,7 +18,7 @@ public class CollectionFactoryManagerImplSpringTest extends CollectionFactoryMan
   @Override
   protected CollectionFactoryManager getCollectionFactoryManager() {
 
-    return SpringContainerPool.getInstance().getComponent(CollectionFactoryManager.class);
+    return SpringContainerPool.getInstance().get(CollectionFactoryManager.class);
   }
 
 }

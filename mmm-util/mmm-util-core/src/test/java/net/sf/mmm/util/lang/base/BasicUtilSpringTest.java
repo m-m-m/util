@@ -20,7 +20,7 @@ public class BasicUtilSpringTest extends BasicUtilTest {
   @Override
   public BasicUtil getBasicUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(BasicUtil.class);
+    return SpringContainerPool.getInstance().get(BasicUtil.class);
   }
 
   /**

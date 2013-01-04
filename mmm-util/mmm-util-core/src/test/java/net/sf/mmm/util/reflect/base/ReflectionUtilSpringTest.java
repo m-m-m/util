@@ -21,7 +21,7 @@ public class ReflectionUtilSpringTest extends ReflectionUtilTest {
   @Override
   public ReflectionUtil getReflectionUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(ReflectionUtil.class);
+    return SpringContainerPool.getInstance().get(ReflectionUtil.class);
   }
 
   /**

@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
@@ -9,23 +8,23 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-transaction-impl-spring</artifactId>
-  <version>0.9.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>transaction-impl-spring</name>
   <description>This project implements the transaction-api using spring-tx (springframework.org).</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-transaction-api</artifactId>
-      <version>0.9.0</version>
+      <version>1.0.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>3.1.0.RELEASE</version>
+      <version>3.2.0.RELEASE</version>
       <scope>compile</scope>
     </dependency>
 

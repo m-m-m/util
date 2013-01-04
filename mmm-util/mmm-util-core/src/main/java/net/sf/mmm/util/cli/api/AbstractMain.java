@@ -148,7 +148,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
         impl.initialize();
         this.parserBuilder = impl;
       } else {
-        this.parserBuilder = container.getComponent(CliParserBuilder.class);
+        this.parserBuilder = container.get(CliParserBuilder.class);
       }
     }
     return this.parserBuilder;
@@ -166,7 +166,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
       if (container == null) {
         this.streamUtil = StreamUtilImpl.getInstance();
       } else {
-        this.streamUtil = container.getComponent(StreamUtil.class);
+        this.streamUtil = container.get(StreamUtil.class);
       }
     }
     return this.streamUtil;

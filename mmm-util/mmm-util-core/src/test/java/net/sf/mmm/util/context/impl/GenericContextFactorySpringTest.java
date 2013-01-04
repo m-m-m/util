@@ -19,7 +19,7 @@ public class GenericContextFactorySpringTest extends GenericContextFactoryTest {
   @Override
   protected GenericContextFactory getFactory() {
 
-    return SpringContainerPool.getInstance().getComponent(GenericContextFactory.class);
+    return SpringContainerPool.getInstance().get(GenericContextFactory.class);
   }
 
 }

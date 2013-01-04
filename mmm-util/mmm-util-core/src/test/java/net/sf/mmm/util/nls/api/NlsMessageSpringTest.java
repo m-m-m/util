@@ -18,7 +18,7 @@ public class NlsMessageSpringTest extends NlsMessageTest {
   @Override
   protected NlsMessageFactory getMessageFactory() {
 
-    return SpringContainerPool.getInstance().getComponent(NlsMessageFactory.class);
+    return SpringContainerPool.getInstance().get(NlsMessageFactory.class);
   }
 
 }

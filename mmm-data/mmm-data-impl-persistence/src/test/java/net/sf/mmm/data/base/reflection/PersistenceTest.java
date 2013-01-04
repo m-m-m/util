@@ -44,19 +44,19 @@ public class PersistenceTest {
 
   protected PersistenceManager getPersistenceManager() {
 
-    return SpringContainerPool.getInstance(SPRING_XML).getComponent(PersistenceManager.class);
+    return SpringContainerPool.getInstance(SPRING_XML).get(PersistenceManager.class);
   }
 
   protected ReflectionUtil getReflectionUtil() {
 
-    return SpringContainerPool.getInstance(SPRING_XML).getComponent(ReflectionUtil.class);
+    return SpringContainerPool.getInstance(SPRING_XML).get(ReflectionUtil.class);
   }
 
   @Test
   public void testPersistence() throws Exception {
 
     TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
-        .getComponent(TransactionExecutor.class);
+        .get(TransactionExecutor.class);
 
     DataContactImpl contact = transactionExecutor.doInTransaction(new Callable<DataContactImpl>() {
 

@@ -18,7 +18,7 @@ public class StreamUtilSpringTest extends StreamUtilTest {
   @Override
   protected StreamUtil getStreamUtil() {
 
-    return SpringContainerPool.getInstance().getComponent(StreamUtil.class);
+    return SpringContainerPool.getInstance().get(StreamUtil.class);
   }
 
 }

@@ -8,7 +8,7 @@
     <relativePath>../persistence.xml</relativePath>
   </parent>
   <artifactId>mmm-persistence-query-api</artifactId>
-  <version>0.9.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>persistence-query-api</name>
   <description>The API to build typesafe dynamic queries</description>
@@ -16,7 +16,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
-      <version>3.0.0</version>
+      <version>3.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate.javax.persistence</groupId>

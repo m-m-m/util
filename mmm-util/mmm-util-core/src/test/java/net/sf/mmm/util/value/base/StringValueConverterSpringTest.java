@@ -21,7 +21,7 @@ public class StringValueConverterSpringTest extends StringValueConverterTest {
   @Override
   public StringValueConverter getStringValueConverter() {
 
-    return SpringContainerPool.getInstance().getComponent(StringValueConverter.class);
+    return SpringContainerPool.getInstance().get(StringValueConverter.class);
   }
 
   /**
@@ -30,7 +30,7 @@ public class StringValueConverterSpringTest extends StringValueConverterTest {
   @Override
   protected Iso8601Util getIso8601Util() {
 
-    return SpringContainerPool.getInstance().getComponent(Iso8601Util.class);
+    return SpringContainerPool.getInstance().get(Iso8601Util.class);
 
   }
 

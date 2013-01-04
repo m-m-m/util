@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
+import net.sf.mmm.util.component.api.ComponentContainer;
 
 /**
  * This is the interface for the context of the UI. In various places you can use CDI (Context and Dependency
@@ -36,6 +37,11 @@ public interface UiContext {
    * @return the {@link UiWidgetFactory}.
    */
   UiWidgetFactory<?> getWidgetFactory();
+
+  /**
+   * @return the instance of {@link ComponentContainer}.
+   */
+  ComponentContainer getContainer();
 
   /**
    * @return the {@link UiWidgetFactoryDatatype}.

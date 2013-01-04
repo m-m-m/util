@@ -18,7 +18,7 @@ public class ContentParserXlsSpringTest extends ContentParserXlsTest {
   @Override
   protected ContentParser getContentParser() {
 
-    return SpringContainerPool.getInstance().getComponent(ContentParserXls.class);
+    return SpringContainerPool.getInstance().get(ContentParserXls.class);
   }
 
 }
