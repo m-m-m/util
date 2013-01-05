@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
+import java.util.Locale;
+
 import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
@@ -105,7 +107,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     label2.setLabel("label2");
     verticalPanel2.addChild(label2);
     UiWidgetButton button2 = factory.create(UiWidgetButton.class);
-    button2.setLabel("button2");
+    button2.setLabel("button2:" + Locale.getDefault());
     verticalPanel2.addChild(button2);
     button2.addClickHandler(new UiHandlerEventClick() {
 

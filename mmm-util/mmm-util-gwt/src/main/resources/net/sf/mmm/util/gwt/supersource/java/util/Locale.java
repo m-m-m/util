@@ -4,6 +4,8 @@ package java.util;
 
 import java.io.Serializable;
 
+import com.google.gwt.i18n.client.LocaleInfo;
+
 /**
  * This is a very simple variant of {@link java.util.Locale} to allow access in GWT clients.
  * 
@@ -25,7 +27,7 @@ public final class Locale implements Serializable {
   public static final Locale ROOT = new Locale("");
 
   /** @see #getDefault() */
-  private static Locale defaultLocale = ROOT;
+  private static Locale defaultLocale;
 
   /** @see #getLanguage() */
   private final String language;
@@ -101,7 +103,32 @@ public final class Locale implements Serializable {
    */
   public static Locale getDefault() {
 
+    if (defaultLocale == null) {
+      defaultLocale = createDefaultLocale();
+    }
     return defaultLocale;
+  }
+
+  /**
+   * @return the default locale.
+   */
+  private static Locale createDefaultLocale() {
+
+    LocaleInfo defaultLocaleInfo = LocaleInfo.getCurrentLocale();
+    String localeName = defaultLocaleInfo.getLocaleName();
+    if ("default".equals(localeName)) {
+      return ROOT;
+    }
+    String[] segments = localeName.split("_");
+    if (segments.length == 1) {
+      return new Locale(localeName);
+    } else if (segments.length == 2) {
+      return new Locale(segments[0], segments[1]);
+    } else if (segments.length >= 3) {
+      return new Locale(segments[0], segments[1], segments[2]);
+    } else {
+      return ROOT;
+    }
   }
 
   /**

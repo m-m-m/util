@@ -25,6 +25,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
@@ -107,8 +108,12 @@ public class NlsBundleGenerator extends Generator {
       // find all subclasses of NlsBundle
       TypeOracle typeOracle = context.getTypeOracle();
       JClassType bundleClass = typeOracle.findType(NlsBundle.class.getName());
-      for (JClassType type : typeOracle.getTypes()) {
+      JClassType[] types = typeOracle.getTypes();
+      int bundleCount = 0;
+      logger.log(Type.INFO, "Checking " + types.length + " types...");
+      for (JClassType type : types) {
         if ((type.isAssignableTo(bundleClass)) && (!type.equals(bundleClass))) {
+          logger.log(Type.INFO, "Generating NlsBundle for " + type);
           String bundleClassName = generateBundleClass(type, logger, context);
 
           sourceWriter.print("bundleInterface = ");
@@ -118,8 +123,10 @@ public class NlsBundleGenerator extends Generator {
           sourceWriter.print("register(bundleInterface, new ");
           sourceWriter.print(bundleClassName);
           sourceWriter.println("());");
+          bundleCount++;
         }
       }
+      logger.log(Type.INFO, "Generated " + bundleCount + " NlsBundle(s).");
       sourceWriter.outdent();
       sourceWriter.println("}");
       // end constructor
