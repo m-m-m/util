@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <inherits name="net.sf.mmm.util.gwt.SuperSource"/>
-  <inherits name="com.google.gwt.i18n.I18N"/>
-  <inherits name="org.slf4j.Slf4j"/>
-  <source path="" includes="NlsBundleUtilCoreRoot.java"/>
-  <source path="gwt"/>
-  <source path="concurrent/api"/>
-  <source path="collection/base" includes="AbstractIterator.java"/>
-  <source path="date" includes="**/*Limited*,**/*Exception.java"/>
-  <source path="reflect" includes="**/*Limited*"/>
-  <source path="component" excludes="impl/**"/>
-  <source path="scanner"/>
-  <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
-  <source path="lang" excludes="**/System*"/>
-  <source path="uuid"/>
-  <source path="nls" excludes="base/NlsBundleHelper.java,base/NlsCachingLocalizer.java,**/*NlsResourceLocator*,**/AbstractNlsBundleFactory.java,**/*ResourceBundle*,api/ComposedException.java"/>
-  <source path="text" includes="**/*Justification*"/>
-  <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
-  <source path="validation"/>
-  <generate-with class="net.sf.mmm.util.nls.impl.NlsBundleGenerator">
-    <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory"/>
+  <inherits name="net.sf.mmm.util.UtilBaseNls"/>
+
+  <generate-with class="net.sf.mmm.util.nls.impl.rebind.NlsBundleGeneratorGwtI18n">
+    <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundle"/>
   </generate-with>
 </module>

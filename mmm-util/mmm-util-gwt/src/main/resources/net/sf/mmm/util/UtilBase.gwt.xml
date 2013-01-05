@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <inherits name="net.sf.mmm.util.gwt.SuperSource"/>
+  <inherits name="org.slf4j.Slf4j"/>
+
+  <source path="" includes="NlsBundleUtilCoreRoot.java"/>
+  <source path="gwt"/>
+  <source path="concurrent/api"/>
+  <source path="collection/base" includes="AbstractIterator.java"/>
+  <source path="date" includes="**/*Limited*,**/*Exception.java"/>
+  <source path="reflect" includes="**/*Limited*"/>
+  <source path="component" excludes="impl/**"/>
+  <source path="scanner"/>
+  <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
+  <source path="lang" excludes="**/System*"/>
+  <source path="uuid"/>
+  <source path="text" includes="**/*Justification*"/>
+  <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
+  <source path="validation"/>
+</module>

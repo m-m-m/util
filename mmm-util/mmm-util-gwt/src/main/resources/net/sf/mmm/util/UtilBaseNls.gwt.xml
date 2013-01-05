@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <inherits name="net.sf.mmm.util.UtilBase"/>
+  <inherits name="com.google.gwt.i18n.I18N"/>
+
+  <source path="nls" excludes="base/NlsBundleHelper.java,base/NlsCachingLocalizer.java,**/*NlsResourceLocator*,**/AbstractNlsBundleFactory.java,**/*ResourceBundle*,api/ComposedException.java"/>
+
+  <generate-with class="net.sf.mmm.util.nls.impl.rebind.NlsBundleFactoryGenerator">
+    <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory"/>
+  </generate-with>
+</module>

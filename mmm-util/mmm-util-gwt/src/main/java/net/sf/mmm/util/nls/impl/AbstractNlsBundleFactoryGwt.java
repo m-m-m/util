@@ -48,11 +48,24 @@ public abstract class AbstractNlsBundleFactoryGwt implements NlsBundleFactory {
   @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 
-    BUNDLE bundle = (BUNDLE) this.bundleMap.get(bundleInterface);
+    BUNDLE bundle = getBundle(bundleInterface);
     if (bundle == null) {
       throw new IllegalStateException("Undefined NlsBundle " + bundleInterface.getName());
     }
     return bundle;
+  }
+
+  /**
+   * This method gets the {@link NlsBundle} for the given <code>bundleInterface</code> from the internal map.
+   * 
+   * @param <BUNDLE> is the generic type of the {@link NlsBundle}.
+   * 
+   * @param bundleInterface is the class reflecting the {@link NlsBundle} interface.
+   * @return the {@link NlsBundle} implementation or <code>null</code> if NOT registered.
+   */
+  protected <BUNDLE extends NlsBundle> BUNDLE getBundle(Class<BUNDLE> bundleInterface) {
+
+    return (BUNDLE) this.bundleMap.get(bundleInterface);
   }
 
 }
