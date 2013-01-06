@@ -32,4 +32,9 @@ public interface UiConfiguration {
    */
   HorizontalAlignment getValidationFailureAlignment();
 
+  // focus on set edit mode: first editable field, off, ...
+  // focus on validation failure: first invalid field, off, ...
+  // validation failure handling: popup, message panel, popup & message panel, ...
+  // tab control: tab passive fields, only active fields (accessibility setting?)
+
 }
