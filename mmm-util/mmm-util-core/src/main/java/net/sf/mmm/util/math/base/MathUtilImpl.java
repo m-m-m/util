@@ -2,15 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.math.base;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 
@@ -22,7 +19,7 @@ import net.sf.mmm.util.math.api.NumberType;
  */
 @Singleton
 @Named(MathUtil.CDI_NAME)
-public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil {
+public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
 
   /** @see #getInstance() */
   private static MathUtil instance;
@@ -66,68 +63,95 @@ public class MathUtilImpl extends AbstractLoggableComponent implements MathUtil 
   @Override
   public NumberType<? extends Number> getNumberType(Class<?> numericType) {
 
-    if ((numericType == int.class) || (numericType == Integer.class)) {
-      return NumberTypeImpl.INTEGER;
-    } else if ((numericType == long.class) || (numericType == Long.class)) {
-      return NumberTypeImpl.LONG;
-    } else if ((numericType == double.class) || (numericType == Double.class)) {
-      return NumberTypeImpl.DOUBLE;
-    } else if ((numericType == float.class) || (numericType == Float.class)) {
-      return NumberTypeImpl.FLOAT;
-    } else if ((numericType == short.class) || (numericType == Short.class)) {
-      return NumberTypeImpl.SHORT;
-    } else if ((numericType == byte.class) || (numericType == Byte.class)) {
-      return NumberTypeImpl.BYTE;
-    } else if ((BigInteger.class.isAssignableFrom(numericType))) {
-      return NumberTypeImpl.BIG_INTEGER;
-    } else if ((BigDecimal.class.isAssignableFrom(numericType))) {
-      return NumberTypeImpl.BIG_DECIMAL;
-    } else if ((AtomicInteger.class.isAssignableFrom(numericType))) {
-      return NumberTypeImpl.ATOMIC_INTEGER;
+    if ((AtomicInteger.class.isAssignableFrom(numericType))) {
+      return ATOMIC_INTEGER;
     } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
-      return NumberTypeImpl.ATOMIC_LONG;
+      return ATOMIC_LONG;
     } else {
-      return null;
+      return super.getNumberType(numericType);
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  @SuppressWarnings("unchecked")
-  public <NUMBER extends Number> NumberType<NUMBER> getNumberTypeGeneric(Class<NUMBER> numericType) {
+  /** The {@link NumberTypeImpl} for {@link AtomicLong}. */
+  public static final NumberTypeImpl<AtomicLong> ATOMIC_LONG = new NumberTypeImpl<AtomicLong>(4) {
 
-    return (NumberType<NUMBER>) getNumberType(numericType);
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<AtomicLong> getNumberClass() {
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Number toSimplestNumber(Number value) {
-
-    double d = value.doubleValue();
-    long l = value.longValue();
-    // is the value a numeric integer value?
-    // findbugs is wrong here!
-    if (l == d) {
-      if (value.byteValue() == d) {
-        return Byte.valueOf(value.byteValue());
-      } else if (value.shortValue() == d) {
-        return Short.valueOf(value.shortValue());
-      } else if (value.intValue() == d) {
-        return Integer.valueOf(value.intValue());
-      } else {
-        return Long.valueOf(l);
-      }
-    } else {
-      if (value.floatValue() == d) {
-        return Float.valueOf(value.floatValue());
-      } else {
-        return value;
-      }
+      return AtomicLong.class;
     }
-  }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDecimal() {
+
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AtomicLong convert(Number number) {
+
+      return new AtomicLong(number.longValue());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AtomicLong parse(String number) throws NumberFormatException {
+
+      return new AtomicLong(Long.parseLong(number));
+    }
+
+  };
+
+  /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
+  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3) {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Class<AtomicInteger> getNumberClass() {
+
+      return AtomicInteger.class;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDecimal() {
+
+      return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AtomicInteger convert(Number number) {
+
+      return new AtomicInteger(number.intValue());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AtomicInteger parse(String number) throws NumberFormatException {
+
+      return new AtomicInteger(Integer.parseInt(number));
+    }
+
+  };
 
 }

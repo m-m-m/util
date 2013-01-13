@@ -4,8 +4,6 @@ package net.sf.mmm.util.math.base;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 import net.sf.mmm.util.math.api.NumberConversionException;
 import net.sf.mmm.util.math.api.NumberType;
@@ -30,6 +28,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Byte> getNumberClass() {
 
       return Byte.class;
@@ -38,6 +37,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return false;
@@ -69,6 +69,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Short> getNumberClass() {
 
       return Short.class;
@@ -77,6 +78,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return false;
@@ -108,6 +110,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Integer> getNumberClass() {
 
       return Integer.class;
@@ -116,6 +119,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return false;
@@ -141,51 +145,13 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
 
   };
 
-  /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
-  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3) {
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<AtomicInteger> getNumberClass() {
-
-      return AtomicInteger.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isDecimal() {
-
-      return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicInteger convert(Number number) {
-
-      return new AtomicInteger(number.intValue());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicInteger parse(String number) throws NumberFormatException {
-
-      return new AtomicInteger(Integer.parseInt(number));
-    }
-
-  };
-
   /** The {@link NumberTypeImpl} for {@link Long}. */
   public static final NumberTypeImpl<Long> LONG = new NumberTypeImpl<Long>(4) {
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Long> getNumberClass() {
 
       return Long.class;
@@ -194,6 +160,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return false;
@@ -219,51 +186,13 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
 
   };
 
-  /** The {@link NumberTypeImpl} for {@link AtomicLong}. */
-  public static final NumberTypeImpl<AtomicLong> ATOMIC_LONG = new NumberTypeImpl<AtomicLong>(4) {
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class<AtomicLong> getNumberClass() {
-
-      return AtomicLong.class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isDecimal() {
-
-      return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicLong convert(Number number) {
-
-      return new AtomicLong(number.longValue());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicLong parse(String number) throws NumberFormatException {
-
-      return new AtomicLong(Long.parseLong(number));
-    }
-
-  };
-
   /** The {@link NumberTypeImpl} for {@link Float}. */
   public static final NumberTypeImpl<Float> FLOAT = new NumberTypeImpl<Float>(5) {
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Float> getNumberClass() {
 
       return Float.class;
@@ -272,6 +201,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return true;
@@ -303,6 +233,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<Double> getNumberClass() {
 
       return Double.class;
@@ -311,6 +242,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return true;
@@ -342,6 +274,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<BigInteger> getNumberClass() {
 
       return BigInteger.class;
@@ -350,6 +283,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return false;
@@ -381,6 +315,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public Class<BigDecimal> getNumberClass() {
 
       return BigDecimal.class;
@@ -389,6 +324,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isDecimal() {
 
       return true;
@@ -441,6 +377,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   /**
    * {@inheritDoc}
    */
+  @Override
   public NUMBER valueOf(Number number, boolean failIfUnprecise) throws NumberConversionException {
 
     if (getNumberClass().isInstance(number)) {
@@ -467,6 +404,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   /**
    * {@inheritDoc}
    */
+  @Override
   public NUMBER valueOf(String number) throws NumberConversionException {
 
     try {
@@ -512,6 +450,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
    *         to <code>otherType</code>, positive if this {@link NumberTypeImpl} is more exact (later in the
    *         examples above) and negative if <code>otherType</code> is more exact.
    */
+  @Override
   public int getExactnessDifference(NumberType<?> otherType) {
 
     return this.exactness - ((NumberTypeImpl<?>) otherType).exactness;

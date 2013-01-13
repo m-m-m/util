@@ -13,10 +13,10 @@ import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
-
 import net.sf.mmm.util.math.api.NumberConversionException;
 import net.sf.mmm.util.math.api.NumberType;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link NumberType}.
@@ -93,7 +93,7 @@ public class NumberTypeImplTest {
   @Test
   public void testAtomicInteger() {
 
-    NumberType<AtomicInteger> numberType = NumberTypeImpl.ATOMIC_INTEGER;
+    NumberType<AtomicInteger> numberType = MathUtilImpl.ATOMIC_INTEGER;
     assertEquals(AtomicInteger.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     AtomicInteger value = new AtomicInteger(1234567890);
@@ -123,7 +123,7 @@ public class NumberTypeImplTest {
   @Test
   public void testAtomicLong() {
 
-    NumberType<AtomicLong> numberType = NumberTypeImpl.ATOMIC_LONG;
+    NumberType<AtomicLong> numberType = MathUtilImpl.ATOMIC_LONG;
     assertEquals(AtomicLong.class, numberType.getNumberClass());
     assertFalse(numberType.isDecimal());
     AtomicLong value = new AtomicLong(1234567890123456L);
@@ -230,9 +230,9 @@ public class NumberTypeImplTest {
       assertEquals(diff, -inverseDiff);
     }
 
-    int diff = NumberTypeImpl.ATOMIC_INTEGER.getExactnessDifference(NumberTypeImpl.INTEGER);
+    int diff = MathUtilImpl.ATOMIC_INTEGER.getExactnessDifference(NumberTypeImpl.INTEGER);
     assertEquals(0, diff);
-    diff = NumberTypeImpl.ATOMIC_LONG.getExactnessDifference(NumberTypeImpl.LONG);
+    diff = MathUtilImpl.ATOMIC_LONG.getExactnessDifference(NumberTypeImpl.LONG);
     assertEquals(0, diff);
   }
 }
