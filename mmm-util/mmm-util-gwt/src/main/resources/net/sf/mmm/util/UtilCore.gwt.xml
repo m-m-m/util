@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <inherits name="net.sf.mmm.util.UtilBaseNls"/>
+  <inherits name="net.sf.mmm.util.UtilCoreBaseNls"/>
 
   <generate-with class="net.sf.mmm.util.nls.impl.rebind.NlsBundleGeneratorGwtI18n">
     <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundle"/>

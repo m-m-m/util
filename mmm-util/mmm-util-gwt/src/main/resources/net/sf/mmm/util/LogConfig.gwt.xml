@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <!-- This file contains the default config for reasonable logging. -->
-  <inherits name="net.sf.mmm.util.Util"/>
+  <!-- <inherits name="net.sf.mmm.util.UtilCore"/> -->
 
   <!-- Enable/Disable loggers -->
   <set-property name="log_ConsoleLogger" value="ENABLED"/>
