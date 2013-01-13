@@ -4,18 +4,18 @@ package net.sf.mmm.util.date.base;
 
 import java.util.Calendar;
 
-import net.sf.mmm.util.datatype.api.date.DateUnit;
-import net.sf.mmm.util.datatype.api.date.WeekOfMonth;
-import net.sf.mmm.util.datatype.api.date.Weekday;
-import net.sf.mmm.util.datatype.api.date.WeekdaySet;
+import net.sf.mmm.util.date.api.DateUnit;
 import net.sf.mmm.util.date.api.Recurrence;
 import net.sf.mmm.util.date.api.RecurrenceUtil;
+import net.sf.mmm.util.date.api.WeekOfMonth;
+import net.sf.mmm.util.date.api.Weekday;
+import net.sf.mmm.util.date.api.WeekdaySet;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * TODO: this class ...
+ * This is the test-case for {@link RecurrenceUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -54,15 +54,13 @@ public class RecurrenceUtilTest {
     Assert.assertEquals(calendar, next);
 
     // first Monday in 2 months...
-    recurrence = new RecurrenceBean(DateUnit.MONTH, 2, new WeekdaySet(Weekday.WEDNESDAY),
-        WeekOfMonth.FIRST);
+    recurrence = new RecurrenceBean(DateUnit.MONTH, 2, new WeekdaySet(Weekday.WEDNESDAY), WeekOfMonth.FIRST);
     next = util.getNextDate(calendar, recurrence);
     calendar.set(2000, Calendar.MARCH, 1);
     Assert.assertEquals(calendar, next);
 
     // first Sunday of month in one year...
-    recurrence = new RecurrenceBean(DateUnit.YEAR, 1, new WeekdaySet(Weekday.SUNDAY),
-        WeekOfMonth.LAST);
+    recurrence = new RecurrenceBean(DateUnit.YEAR, 1, new WeekdaySet(Weekday.SUNDAY), WeekOfMonth.LAST);
     next = util.getNextDate(calendar, recurrence);
     calendar.set(2001, Calendar.MARCH, 25);
     Assert.assertEquals(calendar, next);

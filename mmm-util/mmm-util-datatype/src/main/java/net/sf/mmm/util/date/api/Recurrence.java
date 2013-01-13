@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.api;
 
-import net.sf.mmm.util.datatype.api.date.DateUnit;
-import net.sf.mmm.util.datatype.api.date.WeekOfMonth;
-import net.sf.mmm.util.datatype.api.date.WeekdaySet;
 
 /**
  * This is the interface for a datatype representing the recurrence of an event
@@ -58,7 +55,7 @@ import net.sf.mmm.util.datatype.api.date.WeekdaySet;
  * <td>Every month on the first Monday</td>
  * <td>{@link DateUnit#MONTH}</td>
  * <td>1</td>
- * <td>&#123;{@link net.sf.mmm.util.datatype.api.date.Weekday#MONDAY}&#125;</td>
+ * <td>&#123;{@link net.sf.mmm.util.date.api.Weekday#MONDAY}&#125;</td>
  * <td>{@link WeekOfMonth#FIRST}</td>
  * </tr>
  * <tr>
@@ -79,7 +76,7 @@ import net.sf.mmm.util.datatype.api.date.WeekdaySet;
  * <td>Every two years on the second Wednesday of a fixed month</td>
  * <td>{@link DateUnit#YEAR}</td>
  * <td>2</td>
- * <td>&#123;{@link net.sf.mmm.util.datatype.api.date.Weekday#WEDNESDAY}&#125;</td>
+ * <td>&#123;{@link net.sf.mmm.util.date.api.Weekday#WEDNESDAY}&#125;</td>
  * <td>{@link WeekOfMonth#SECOND}</td>
  * </tr>
  * </table>
@@ -110,15 +107,15 @@ public interface Recurrence {
 
   /**
    * This method gets the {@link WeekdaySet} containing the
-   * {@link net.sf.mmm.util.datatype.api.date.Weekday}s of the recurrence. This
+   * {@link net.sf.mmm.util.date.api.Weekday}s of the recurrence. This
    * is used as a filter to match only for particular
-   * {@link net.sf.mmm.util.datatype.api.date.Weekday}s. The default is
+   * {@link net.sf.mmm.util.date.api.Weekday}s. The default is
    * {@link WeekdaySet#ALL}. This method is ignored for {@link DateUnit#WEEK
    * weekly} {@link Recurrence} as it would NOT make any sense.<br/>
    * <b>ATTENTION:</b><br/>
    * If {@link #getUnit() unit} is {@link DateUnit#DAY daily} recurrences that
    * do not
-   * {@link WeekdaySet#contains(net.sf.mmm.util.datatype.api.date.Weekday)
+   * {@link WeekdaySet#contains(net.sf.mmm.util.date.api.Weekday)
    * match} will be omitted, while otherwise the closest match will be used. If
    * it is {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly} it
    * will recurre on the <em>first</em> match of the weekdays according to the

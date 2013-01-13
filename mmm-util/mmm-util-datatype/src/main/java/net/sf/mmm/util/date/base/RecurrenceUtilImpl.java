@@ -9,12 +9,12 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.datatype.api.date.DateUnit;
-import net.sf.mmm.util.datatype.api.date.WeekOfMonth;
-import net.sf.mmm.util.datatype.api.date.Weekday;
-import net.sf.mmm.util.datatype.api.date.WeekdaySet;
+import net.sf.mmm.util.date.api.DateUnit;
 import net.sf.mmm.util.date.api.Recurrence;
 import net.sf.mmm.util.date.api.RecurrenceUtil;
+import net.sf.mmm.util.date.api.WeekOfMonth;
+import net.sf.mmm.util.date.api.Weekday;
+import net.sf.mmm.util.date.api.WeekdaySet;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;

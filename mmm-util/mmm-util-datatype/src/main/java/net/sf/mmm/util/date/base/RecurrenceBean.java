@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.base;
 
-import net.sf.mmm.util.datatype.api.date.DateUnit;
-import net.sf.mmm.util.datatype.api.date.WeekOfMonth;
-import net.sf.mmm.util.datatype.api.date.WeekdaySet;
+import net.sf.mmm.util.date.api.DateUnit;
 import net.sf.mmm.util.date.api.Recurrence;
+import net.sf.mmm.util.date.api.WeekOfMonth;
+import net.sf.mmm.util.date.api.WeekdaySet;
 
 /**
  * This is the implementation of {@link Recurrence} as simple Java Bean.
