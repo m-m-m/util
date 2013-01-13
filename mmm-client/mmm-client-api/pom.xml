@@ -21,7 +21,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-client-ui-widget-api</artifactId>
+      <artifactId>mmm-client-ui-dialog-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>

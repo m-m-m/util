@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.base.gwt.dialog.mvp.common;
 
-import net.sf.mmm.client.api.dialog.Dialog;
+import net.sf.mmm.client.ui.dialog.api.Dialog;
 
 /**
  * This is the {@link com.gwtplatform.mvp.client.UiHandlers} interface for

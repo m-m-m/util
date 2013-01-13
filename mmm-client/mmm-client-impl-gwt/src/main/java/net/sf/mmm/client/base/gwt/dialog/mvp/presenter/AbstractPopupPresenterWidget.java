@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.base.gwt.dialog.mvp.presenter;
 
-import net.sf.mmm.client.api.dialog.Dialog;
 import net.sf.mmm.client.base.gwt.dialog.mvp.common.AbstractPopupView;
+import net.sf.mmm.client.ui.dialog.api.Dialog;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.google.gwt.event.shared.EventBus;
@@ -44,7 +44,7 @@ public abstract class AbstractPopupPresenterWidget<VIEW extends AbstractPopupVie
 
     Dialog dialog = getComponents().getDialogManager().getCurrentMainDialog();
     if (dialog == null) {
-      dialog = getComponents().getDialogManager().getCurrentDialog(Dialog.TYPE_HOME);
+      dialog = getComponents().getDialogManager().getCurrentDialog(Dialog.TYPE_ROOT);
       NlsNullPointerException.checkNotNull(Dialog.class, dialog);
     }
     AbstractPresenterWidget<?> presenterWidget = (AbstractPresenterWidget<?>) dialog;

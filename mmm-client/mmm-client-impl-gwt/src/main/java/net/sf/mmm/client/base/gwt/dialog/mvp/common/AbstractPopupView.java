@@ -8,7 +8,7 @@ import com.gwtplatform.mvp.client.PopupView;
 
 /**
  * This is the interface for the {@link AbstractView view} of a
- * {@link net.sf.mmm.client.api.dialog.Dialog#TYPE_POPUP popup} {@link net.sf.mmm.client.api.dialog.Dialog}.
+ * {@link net.sf.mmm.client.ui.dialog.api.Dialog#TYPE_POPUP popup} {@link net.sf.mmm.client.ui.dialog.api.Dialog}.
  * 
  * @see PopupView
  * 

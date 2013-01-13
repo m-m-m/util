@@ -6,9 +6,9 @@ import javax.inject.Inject;
 
 import net.sf.mmm.app.core.base.dialog.home.mvp.common.HomeView;
 import net.sf.mmm.app.core.base.dialog.home.mvp.presenter.HomePresenter.MyProxy;
-import net.sf.mmm.client.api.dialog.Dialog;
 import net.sf.mmm.client.base.gwt.dialog.mvp.presenter.AbstractPresenter;
 import net.sf.mmm.client.impl.base.place.PlaceConstants;
+import net.sf.mmm.client.ui.dialog.api.Dialog;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -20,7 +20,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 /**
- * This is the {@link AbstractPresenter presenter} for the {@link Dialog#TYPE_HOME home page}.
+ * This is the {@link AbstractPresenter presenter} for the {@link Dialog#TYPE_ROOT home page}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

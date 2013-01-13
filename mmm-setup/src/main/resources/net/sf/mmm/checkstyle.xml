@@ -54,7 +54,9 @@
     <module name="LeftCurly"/>
     <module name="NeedBraces"/>
     <module name="RightCurly"/>
-    <module name="AvoidInlineConditionals"/>
+    <module name="AvoidInlineConditionals">
+      <property name="severity" value="info"/>
+    </module>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode">
       <property name="severity" value="info"/>
