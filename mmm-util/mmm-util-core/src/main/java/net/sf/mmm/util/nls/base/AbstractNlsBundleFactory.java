@@ -8,10 +8,12 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Named;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
@@ -37,6 +39,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   /** @see #createBundle(Class) */
   private final ClassLoader classLoader;
 
+  /** @see #createBundle(Class) */
+  private final Map<Class<? extends NlsBundle>, NlsBundle> bundleMap;
+
   /**
    * The constructor.
    */
@@ -54,18 +59,24 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
     super();
     this.classLoader = classLoader;
+    this.bundleMap = new ConcurrentHashMap<Class<? extends NlsBundle>, NlsBundle>();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 
-    if (!bundleInterface.isInterface()) {
-      throw new IllegalArgumentException(bundleInterface.getName());
+    BUNDLE result = (BUNDLE) this.bundleMap.get(bundleInterface);
+    if (result == null) {
+      if (!bundleInterface.isInterface()) {
+        throw new IllegalArgumentException(bundleInterface.getName());
+      }
+      InvocationHandler handler = createHandler(bundleInterface);
+      result = (BUNDLE) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { bundleInterface }, handler);
+      this.bundleMap.put(bundleInterface, result);
     }
-    InvocationHandler handler = createHandler(bundleInterface);
-    BUNDLE result = (BUNDLE) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { bundleInterface }, handler);
     return result;
   }
 
@@ -151,6 +162,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /** The {@link NlsBundleOptions}. */
     private final NlsBundleOptions options;
 
+    /** The cache for the {@link NlsBundleMethodInfo}s. */
+    private final Map<Method, NlsBundleMethodInfo> method2BundleInfoMap;
+
     /**
      * The constructor.
      * 
@@ -162,6 +176,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       super();
       this.bundleName = bundleName;
       this.options = options;
+      this.method2BundleInfoMap = new ConcurrentHashMap<Method, NlsBundleMethodInfo>();
     }
 
     /**
@@ -169,13 +184,14 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * {@link NlsMessage#getArgument(String) arguments}.
      * 
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
+     * @param methodInfo is the {@link NlsBundleMethodInfo} for the given {@link Method}.
      * @param arguments are the arguments for the call of the {@link Method}.
      * @return the {@link Map} with the {@link NlsMessage#getArgument(String) arguments}.
      */
-    protected Map<String, Object> createArgumentMap(Method method, Object[] arguments) {
+    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo, Object[] arguments) {
 
       Map<String, Object> map = new HashMap<String, Object>();
-      String[] argumentNames = getArgumentNames(method, arguments);
+      String[] argumentNames = methodInfo.argumentNames;
       for (int i = 0; i < arguments.length; i++) {
         Object old = map.put(argumentNames[i], arguments[i]);
         if (old != null) {
@@ -217,16 +233,28 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
       Object result;
       if (NlsMessage.class.equals(method.getReturnType())) {
-        NlsTemplate template = createTemplate(method);
+        NlsBundleMethodInfo methodInfo = this.method2BundleInfoMap.get(method);
+        if (methodInfo == null) {
+          NlsTemplate template = createTemplate(method);
+          String[] argumentNames;
+          if ((args == null) || (args.length == 0)) {
+            argumentNames = StringUtil.EMPTY_STRING_ARRAY;
+          } else {
+            argumentNames = getArgumentNames(method, args);
+          }
+          methodInfo = new NlsBundleMethodInfo(template, argumentNames);
+          this.method2BundleInfoMap.put(method, methodInfo);
+        }
         if ((args == null) || (args.length == 0)) {
-          result = getMessageFactory().create(template);
+          result = getMessageFactory().create(methodInfo.template);
         } else {
-          Map<String, Object> messageArguments = createArgumentMap(method, args);
-          result = getMessageFactory().create(template, messageArguments);
+          Map<String, Object> messageArguments = createArgumentMap(method, methodInfo, args);
+          result = getMessageFactory().create(methodInfo.template, messageArguments);
         }
       } else {
         // equals, hashCode, etc.
@@ -263,6 +291,48 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       }
       return template;
     }
+  }
+
+  /**
+   * This inner class holds all the information to be cached for a {@link NlsBundle}-method.
+   */
+  protected static class NlsBundleMethodInfo {
+
+    /** @see #getTemplate() */
+    private final NlsTemplate template;
+
+    /** @see #getArgumentNames() */
+    private final String[] argumentNames;
+
+    /**
+     * The constructor.
+     * 
+     * @param template - see {@link #getTemplate()}.
+     * @param argumentNames - see {@link #getArgumentNames()}.
+     */
+    public NlsBundleMethodInfo(NlsTemplate template, String[] argumentNames) {
+
+      super();
+      this.template = template;
+      this.argumentNames = argumentNames;
+    }
+
+    /**
+     * @return the {@link NlsTemplate}
+     */
+    public NlsTemplate getTemplate() {
+
+      return this.template;
+    }
+
+    /**
+     * @return the names of the method parameters for the {@link NlsMessage#getArgument(String) arguments}.
+     */
+    public String[] getArgumentNames() {
+
+      return this.argumentNames;
+    }
 
   }
+
 }
