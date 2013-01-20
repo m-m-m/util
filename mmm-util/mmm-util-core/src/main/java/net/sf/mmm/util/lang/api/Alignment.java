@@ -17,9 +17,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be horizontally and vertically centered.<br>
-   * 000<br>
-   * 0x0<br>
-   * 000<br>
+   * <code>
+   * ___<br>
+   * _<b>*</b>_<br>
+   * ___<br>
+   * </code>
    */
   CENTER("-~", NlsBundleUtilCoreRoot.INF_CENTER) {
 
@@ -35,9 +37,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the top and horizontally centered.<br>
-   * 0x0<br>
-   * 000<br>
-   * 000<br>
+   * <code>
+   * _<b>*</b>_<br>
+   * ___<br>
+   * ___<br>
+   * </code>
    */
   TOP("^~", NlsBundleUtilCoreRoot.INF_TOP) {
 
@@ -53,9 +57,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the bottom and horizontally centered.<br>
-   * 000<br>
-   * 000<br>
-   * 0x0<br>
+   * <code>
+   * ___<br>
+   * ___<br>
+   * _<b>*</b>_<br>
+   * </code>
    */
   BOTTOM("_~", NlsBundleUtilCoreRoot.INF_BOTTOM) {
 
@@ -72,9 +78,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the left and vertically centered.<br>
-   * 000<br>
-   * x00<br>
-   * 000<br>
+   * <code>
+   * ___<br>
+   * <b>*</b>__<br>
+   * ___<br>
+   * </code>
    */
   LEFT("--", NlsBundleUtilCoreRoot.INF_LEFT) {
 
@@ -91,9 +99,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the right and vertically centered.<br>
-   * 000<br>
-   * 00x<br>
-   * 000<br>
+   * <code>
+   * ___<br>
+   * __<b>*</b><br>
+   * ___<br>
+   * </code>
    */
   RIGHT("-+", NlsBundleUtilCoreRoot.INF_RIGHT) {
 
@@ -110,9 +120,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the right and vertically centered.<br>
-   * x00<br>
-   * 000<br>
-   * 000<br>
+   * <code>
+   * <b>*</b>__<br>
+   * ___<br>
+   * ___<br>
+   * </code>
    */
   TOP_LEFT("^-", NlsBundleUtilCoreRoot.INF_TOP_LEFT) {
 
@@ -129,9 +141,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the right and vertically centered.<br>
-   * 00x<br>
-   * 000<br>
-   * 000<br>
+   * <code>
+   * __<b>*</b><br>
+   * ___<br>
+   * ___<br>
+   * </code>
    */
   TOP_RIGHT("^+", NlsBundleUtilCoreRoot.INF_TOP_RIGHT) {
 
@@ -148,9 +162,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the right and vertically centered.<br>
-   * 000<br>
-   * 000<br>
-   * x00<br>
+   * <code>
+   * ___<br>
+   * ___<br>
+   * <b>*</b>__<br>
+   * </code>
    */
   BOTTOM_LEFT("_-", NlsBundleUtilCoreRoot.INF_BOTTOM_LEFT) {
 
@@ -167,9 +183,11 @@ public enum Alignment implements Datatype<String> {
 
   /**
    * the component will be located at the right and vertically centered.<br>
-   * 000<br>
-   * 000<br>
-   * 00x<br>
+   * <code>
+   * ___<br>
+   * ___<br>
+   * __<b>*</b><br>
+   * </code>
    */
   BOTTOM_RIGHT("_+", NlsBundleUtilCoreRoot.INF_BOTTOM_RIGHT) {
 
@@ -205,6 +223,7 @@ public enum Alignment implements Datatype<String> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getValue() {
 
     return this.value;
@@ -213,6 +232,7 @@ public enum Alignment implements Datatype<String> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return this.title;
