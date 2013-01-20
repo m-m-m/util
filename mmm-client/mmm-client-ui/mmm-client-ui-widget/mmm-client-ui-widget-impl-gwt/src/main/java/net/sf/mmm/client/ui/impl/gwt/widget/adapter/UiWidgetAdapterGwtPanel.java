@@ -3,14 +3,14 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterPanel;
+import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel;
 
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterPanel} using
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using
  * GWT based on {@link Panel} and {@link InsertPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAdapterGwtPanel<WIDGET extends Panel & InsertPanel> extends
-    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterPanel<WIDGET> {
+    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterDynamicPanel<WIDGET> {
 
   /**
    * The constructor.

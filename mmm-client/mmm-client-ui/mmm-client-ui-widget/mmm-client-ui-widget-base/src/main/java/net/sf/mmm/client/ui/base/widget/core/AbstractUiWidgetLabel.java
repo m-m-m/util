@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.core;
 
+import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
@@ -31,6 +32,15 @@ public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel
     super(context);
   }
 
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // protected Class<? extends Role> getAriaRoleFixedType() {
+  //
+  // return Role;
+  // }
+
   /**
    * @return the {@link AbstractUiWidget widget}
    *         {@link net.sf.mmm.client.ui.api.aria.attribute.AttributeReadAriaLabelledBy#getLabelledBy()
@@ -48,7 +58,10 @@ public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel
 
     this.labelledWidget = labelForWidget;
     if (this.labelledWidget != null) {
-      this.labelledWidget.getAriaRole().setLabelledBy(getId());
+      Role ariaRole = this.labelledWidget.getAriaRole();
+      if (ariaRole != null) {
+        ariaRole.setLabelledBy(getId());
+      }
     }
   }
 

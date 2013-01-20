@@ -6,10 +6,10 @@ import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 
 /**
  * This is the interface for a {@link UiWidgetBaseWindow base window widget} that represents a
- * <em>main window</em>. Each client application has a single instance of this main window widget. In case of
- * a web-application this represents the browser window.
+ * <em>main window</em>. Each client application has an instance of this main window widget. In case of a
+ * web-application this represents the browser window (or more precisely the tab-instance).
  * 
- * @see net.sf.mmm.client.ui.api.UiContext#getMainWindow()
+ * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory#getMainWindow()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -24,8 +24,8 @@ public abstract interface UiWidgetMainWindow extends UiWidgetBaseWindow {
 
   /**
    * @return <code>true</code> if the {@link #setPosition(int, int) position} of {@link UiWidgetBaseWindow
-   *         windows} is absolute (on {@link net.sf.mmm.client.ui.api.UiDisplay}), <code>false</code>
-   *         if relative to this main window (MDI mode).
+   *         windows} is absolute (on {@link net.sf.mmm.client.ui.api.UiDisplay}), <code>false</code> if
+   *         relative to this main window (MDI mode).
    */
   boolean isWindowPositionAbsolute();
 

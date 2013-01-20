@@ -5,6 +5,7 @@ package net.sf.mmm.app.client;
 import java.util.Locale;
 
 import net.sf.mmm.app.shared.GreetingService;
+import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
@@ -18,6 +19,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
@@ -100,6 +102,15 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     label1.setLabel("label1");
     verticalPanel1.addChild(label1);
     final UiWidgetTab tab1 = tabPanel.addChild(verticalPanel1, "Tab1");
+
+    UiWidgetGridPanel gridPanel = factory.create(UiWidgetGridPanel.class);
+    final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
+    textField1.setFieldLabel("Label1");
+    final UiWidgetTextField textField2 = factory.create(UiWidgetTextField.class);
+    textField2.setFieldLabel("Label2");
+    gridPanel.addChildren(textField1, textField2);
+    verticalPanel1.addChild(gridPanel);
+    verticalPanel1.setMode(UiMode.EDIT);
 
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);
     final UiWidgetLabel label2 = factory.create(UiWidgetLabel.class);

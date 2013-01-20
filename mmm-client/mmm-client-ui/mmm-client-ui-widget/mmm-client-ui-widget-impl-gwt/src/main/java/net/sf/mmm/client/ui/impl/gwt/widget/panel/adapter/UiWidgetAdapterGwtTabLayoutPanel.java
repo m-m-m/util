@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtTab;
 import com.google.gwt.user.client.ui.TabPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterPanel}
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel}
  * using GWT based on {@link TabPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

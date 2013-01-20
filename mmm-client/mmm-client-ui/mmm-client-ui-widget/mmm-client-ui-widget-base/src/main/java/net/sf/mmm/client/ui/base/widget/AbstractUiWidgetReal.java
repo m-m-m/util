@@ -114,7 +114,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
       this.widgetAdapter = createWidgetAdapter();
       this.widgetAdapter.setConfiguration(getContext().getConfiguration());
       initializeWidgetAdapter(this.widgetAdapter);
-      if (this.ariaRole != null) {
+      if (getAriaRole() != null) {
         this.ariaRole.setDelegate(this.widgetAdapter);
       }
     }

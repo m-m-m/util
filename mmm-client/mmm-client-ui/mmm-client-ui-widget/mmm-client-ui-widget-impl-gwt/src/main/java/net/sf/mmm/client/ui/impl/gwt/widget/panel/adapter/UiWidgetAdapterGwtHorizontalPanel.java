@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterPanel} using
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using
  * GWT based on {@link HorizontalPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

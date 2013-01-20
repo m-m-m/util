@@ -24,6 +24,9 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuBarGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuItemClickableGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridCellGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridPanelGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridRowGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
@@ -65,11 +68,14 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory<Widget> {
     register(new UiWidgetRadioButtonsGwt.Factory());
     register(new UiWidgetRadioButtonsVerticalGwt.Factory());
     register(new UiWidgetComboBoxGwt.Factory());
-    // composite
+    // panels
     register(new UiWidgetTabGwt.Factory());
     register(new UiWidgetTabPanelGwt.Factory());
     register(new UiWidgetHorizontalPanelGwt.Factory());
     register(new UiWidgetVerticalPanelGwt.Factory());
+    register(new UiWidgetGridPanelGwt.Factory());
+    register(new UiWidgetGridRowGwt.Factory());
+    register(new UiWidgetGridCellGwt.Factory());
     // menu
     register(new UiWidgetMenuBarGwt.Factory());
     register(new UiWidgetMenuGwt.Factory());

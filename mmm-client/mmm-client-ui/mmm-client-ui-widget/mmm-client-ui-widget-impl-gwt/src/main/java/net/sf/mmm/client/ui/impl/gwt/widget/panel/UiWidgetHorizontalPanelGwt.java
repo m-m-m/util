@@ -2,11 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
+import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtHorizontalPanel;
 
 /**
@@ -15,12 +14,11 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtHori
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetHorizontalPanelGwt extends
-    AbstractUiWidgetDynamicComposite<UiWidgetAdapterGwtHorizontalPanel, UiWidgetRegular> implements
-    UiWidgetHorizontalPanel {
+public class UiWidgetHorizontalPanelGwt extends AbstractUiWidgetHorizontalPanel<UiWidgetAdapterGwtHorizontalPanel> {
 
   /**
    * The constructor.
+   * 
    * @param context is the {@link #getContext() context}.
    */
   public UiWidgetHorizontalPanelGwt(AbstractUiContext context) {
@@ -53,6 +51,7 @@ public class UiWidgetHorizontalPanelGwt extends
     /**
      * {@inheritDoc}
      */
+    @Override
     public UiWidgetHorizontalPanel create(AbstractUiContext context) {
 
       return new UiWidgetHorizontalPanelGwt(context);

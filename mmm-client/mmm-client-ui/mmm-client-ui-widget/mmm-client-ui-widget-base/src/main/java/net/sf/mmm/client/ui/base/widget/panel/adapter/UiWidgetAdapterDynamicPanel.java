@@ -2,19 +2,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.panel.adapter;
 
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSwitchComposite;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel}.
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel}.
  * 
  * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterTabPanel<WIDGET> extends UiWidgetAdapterSwitchComposite<WIDGET, UiWidgetTab> {
+public abstract interface UiWidgetAdapterDynamicPanel<WIDGET> extends
+    UiWidgetAdapterDynamicComposite<WIDGET, UiWidgetRegular> {
 
   // nothing to add
 
