@@ -60,6 +60,16 @@ public class DialogManagerImpl extends AbstractDialogManager {
    * {@inheritDoc}
    */
   @Override
+  protected DialogPlace getStartPlace() {
+
+    String startToken = History.getToken();
+    return DialogPlace.fromString(startToken);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public ApplicationWindow openWindow(DialogPlace place) {
 
     String url = Location.getHref();

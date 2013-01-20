@@ -14,6 +14,7 @@ import net.sf.mmm.client.ui.dialog.api.DialogManager;
 import net.sf.mmm.client.ui.dialog.api.DialogPlace;
 import net.sf.mmm.client.ui.dialog.api.PopupDialog;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
@@ -78,7 +79,11 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   public void initialize(DialogPlace defaultDialogPlace) {
 
     this.defaultPlace = defaultDialogPlace;
-
+    DialogPlace startPlace = getStartPlace();
+    if (startPlace == null) {
+      startPlace = this.defaultPlace;
+    }
+    navigateTo(startPlace);
   }
 
   /**
@@ -89,6 +94,18 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
 
     return this.currentPlace;
   }
+
+  /**
+   * This method determines the start {@link DialogPlace}. If the application is started from a bookmark, this
+   * method will create the {@link DialogPlace} from this bookmark (in case of a web-application from the hash
+   * of the URL).
+   * 
+   * @see #initialize(DialogPlace)
+   * 
+   * @return the start {@link DialogPlace} or <code>null</code> if not present (and
+   *         {@link #initialize(DialogPlace) default} shall be used.
+   */
+  protected abstract DialogPlace getStartPlace();
 
   /**
    * {@inheritDoc}
@@ -138,7 +155,21 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
    */
   void onShowDialog(Dialog dialog) {
 
-    this.type2currentDialogMap.put(dialog.getType(), dialog);
+    String type = dialog.getType();
+    if (dialog.isVisible()) {
+      Dialog previousDialog = this.type2currentDialogMap.put(type, dialog);
+      if (previousDialog != null) {
+        if (previousDialog.isVisible() && (previousDialog != this)) {
+          // there should never be two dialogs visible of the same type...
+          throw new DuplicateObjectException(this, type, previousDialog);
+        }
+      }
+    } else {
+      Dialog previousDialog = this.type2currentDialogMap.remove(type);
+      if (previousDialog != this) {
+        throw new ObjectMismatchException(previousDialog, this, type);
+      }
+    }
   }
 
   /**

@@ -106,10 +106,10 @@ public interface DialogManager {
    * {@link ApplicationWindow}. The operation does not affect the current navigation history. In case of a
    * web-application a new browser window (or tab) is opened that starts another instance of the client at the
    * given <code>place</code>. In a native client a new window is opened with its own {@link DialogManager}
-   * instance.
+   * instance and new instances of all {@link Dialog}s.
    * 
-   * @param place
-   * @return
+   * @param place is the {@link DialogPlace} to open in the new window.
+   * @return the handle for the new window.
    */
   ApplicationWindow openWindow(DialogPlace place);
 

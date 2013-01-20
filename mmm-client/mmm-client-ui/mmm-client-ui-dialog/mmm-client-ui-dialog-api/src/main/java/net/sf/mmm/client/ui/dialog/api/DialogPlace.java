@@ -76,7 +76,7 @@ public class DialogPlace {
   public static final String PATTERN_VALUE = "[^;]*";
 
   /** @see Dialog#PATTERN_DIALOG_ID */
-  public static final String PATTERN_DIALOG_ID = Dialog.PATTERN_DIALOG_ID;
+  public static final String PATTERN_DIALOG_ID = AbstractDialog.PATTERN_DIALOG_ID;
 
   /** @see #getDialogId() */
   private final String dialogId;

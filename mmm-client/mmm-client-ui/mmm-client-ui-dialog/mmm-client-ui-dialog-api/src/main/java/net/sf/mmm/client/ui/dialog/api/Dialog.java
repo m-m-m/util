@@ -13,6 +13,12 @@ package net.sf.mmm.client.ui.dialog.api;
 public interface Dialog extends AbstractDialog {
 
   /**
+   * The {@link net.sf.mmm.client.ui.dialog.api.Dialog#getId() dialog-id} of the {@link #TYPE_ROOT root}
+   * dialog.
+   */
+  String DIALOG_ID_ROOT = "root";
+
+  /**
    * The {@link #getType() type} of a <em>popup</em> dialog. Popup means that the {@link Dialog} is opened in
    * a new window that is typically modal and smaller than a main {@link Dialog}.
    */
@@ -54,8 +60,8 @@ public interface Dialog extends AbstractDialog {
   String TYPE_SIDE = "Side";
 
   /**
-   * The {@link #getType() type} of the <em>home</em> dialog. This is the root dialog of the application and
-   * contains the other {@link Dialog}s.
+   * The {@link #getType() type} of the <em>root</em> dialog. This is the top-level dialog of the application
+   * and contains the other {@link Dialog}s.
    */
   String TYPE_ROOT = "Root";
 
@@ -69,6 +75,7 @@ public interface Dialog extends AbstractDialog {
    * @see #TYPE_FOOTER
    * @see #TYPE_NAVIGATION
    * @see #TYPE_SIDE
+   * @see #TYPE_ROOT
    * 
    * @return the type of this {@link Dialog}.
    */

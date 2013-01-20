@@ -5,6 +5,9 @@ package net.sf.mmm.client.ui.dialog.base;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.dialog.api.Dialog;
 import net.sf.mmm.client.ui.dialog.api.DialogManager;
@@ -30,6 +33,9 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
 
   /** @see #getDialogManager() */
   private AbstractDialogManager dialogManager;
+
+  /** @see #setUiContext(UiContext) */
+  private UiContext uiContext;
 
   /**
    * The parent {@link DialogController} or <code>null</code> for no parent (if this is the root
@@ -101,37 +107,38 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   /**
    * This method opens this dialog as triggered by the given {@link DialogPlace}.
    * 
-   * @param dialogPlace is the {@link DialogPlace} identifying this {@link DialogController} and providing
-   *        potential {@link DialogPlace#getParameter(String) parameters}.
-   * @return the {@link DialogSlot} where this {@link DialogController} should be embedded or
-   *         <code>null</code> if this is the root {@link DialogController} that gets embedded into the top of
-   *         the {@link net.sf.mmm.client.ui.dialog.api.ApplicationWindow}.
+   * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() identifying} this
+   *        {@link DialogController} and providing potential {@link DialogPlace#getParameter(String)
+   *        parameters}.
    */
-  public final DialogSlot show(DialogPlace dialogPlace) {
+  public final void show(DialogPlace dialogPlace) {
 
     NlsNullPointerException.checkNotNull(DialogPlace.class, dialogPlace);
     if (!getId().equals(dialogPlace.getDialogId())) {
       throw new ObjectMismatchException(dialogPlace.getDialogId(), getId(), DialogPlace.class.getSimpleName()
           + ".dialogId");
     }
-    // if (this.place == dialogPlace) {
-    // return null;
-    // }
-    return showInternal(dialogPlace);
+    if (this.place == dialogPlace) {
+      return;
+    }
+    showInternal(dialogPlace);
   }
 
+  /**
+   * 
+   * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() pointing} to the
+   *        <em>direct</em> dialog to open and containing potential {@link DialogPlace#getParameter(String)
+   *        parameters}.
+   * @return the {@link DialogSlot} {@link DialogSlot#getDialogId() identifying} the parent
+   *         {@link DialogController} and its slot where to embed this {@link DialogController}.
+   */
   private DialogSlot showInternal(DialogPlace dialogPlace) {
 
     DialogSlot slot = doShow(dialogPlace);
-    DialogController<?> parentDialog = null;
-    if (slot == null) {
-      // TODO put view into root page...
-      throw new IllegalStateException("not yet implemented");
-    } else {
-      // TODO prevent infinity loop...
-      parentDialog = (DialogController<?>) getDialogManager().getDialog(slot.getDialogId());
-      parentDialog.setSubDialog(this, slot, dialogPlace);
-    }
+    NlsNullPointerException.checkNotNull(DialogSlot.class, slot);
+    DialogController<?> parentDialog = this.dialogManager.getDialog(slot.getDialogId());
+    // TODO prevent infinity loop...
+    parentDialog.setSubDialog(this, slot, dialogPlace);
     setParent(parentDialog);
     setVisible(true);
     this.place = dialogPlace;
@@ -149,6 +156,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    * Because of a direct request to {@link #doShow(DialogPlace) show} a dialog, its parent (and ancestors)
    * will be shown that will embed their child dialog in the {@link DialogSlot} returned by this method.</li>
    * </ul>
+   * If this is the {@link #TYPE_ROOT root} {@link DialogController} this method will never be called.
    * 
    * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() pointing} to the
    *        <em>direct</em> dialog to open and containing potential {@link DialogPlace#getParameter(String)
@@ -217,6 +225,24 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   protected void embed(DialogController<?> subDialog, DialogSlot slot) {
 
     throw new IllegalCaseException(slot.toString());
+  }
+
+  /**
+   * @return the uiContext
+   */
+  public UiContext getUiContext() {
+
+    return this.uiContext;
+  }
+
+  /**
+   * @param uiContext is the uiContext to set
+   */
+  @Inject
+  public void setUiContext(UiContext uiContext) {
+
+    getInitializationState().requireNotInitilized();
+    this.uiContext = uiContext;
   }
 
 }
