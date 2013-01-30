@@ -35,10 +35,8 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * The constructor.
    * 
-   * @param sqlType is the {@link #sqlTypes() SQL type} used to store the
-   *        adapted datatype.
-   * @param javaType is the {@link #returnedClass() java class} representing the
-   *        adapted datatype.
+   * @param sqlType is the {@link #sqlTypes() SQL type} used to store the adapted datatype.
+   * @param javaType is the {@link #returnedClass() java class} representing the adapted datatype.
    */
   public AbstractUserType(int sqlType, Class<T> javaType) {
 
@@ -64,6 +62,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public int[] sqlTypes() {
 
     return this.sqlTypes;
@@ -72,6 +71,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<T> returnedClass() {
 
     return this.javaType;
@@ -80,6 +80,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean equals(Object x, Object y) throws HibernateException {
 
     if (x == null) {
@@ -92,6 +93,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public int hashCode(Object x) throws HibernateException {
 
     if (x != null) {
@@ -103,12 +105,14 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
-  public abstract T nullSafeGet(ResultSet rs, String[] names, SessionImplementor session,
-      Object owner) throws SQLException;
+  @Override
+  public abstract T nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
+      throws SQLException;
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object deepCopy(Object value) throws HibernateException {
 
     return value;
@@ -117,6 +121,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isMutable() {
 
     // datatypes should be immutable
@@ -127,6 +132,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Serializable disassemble(Object value) throws HibernateException {
 
     throw new NlsUnsupportedOperationException("disassemble");
@@ -135,6 +141,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object assemble(Serializable cached, Object owner) throws HibernateException {
 
     throw new NlsUnsupportedOperationException("assemble");
@@ -143,9 +150,10 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object replace(Object original, Object target, Object owner) throws HibernateException {
 
-    throw new NlsUnsupportedOperationException("replace");
+    return original;
   }
 
 }
