@@ -16,7 +16,6 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
-import net.sf.mmm.util.lang.api.EnumType;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
@@ -78,15 +77,62 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
    * 
    * @param enumDefinition is the {@link EnumDefinition} to register.
    */
-  protected void registerEnumDefinition(EnumDefinition<?, ?> enumDefinition) {
+  protected void registerEnumDefinition(AbstractEnumDefinition<?, ?> enumDefinition) {
 
     NlsNullPointerException.checkNotNull(EnumDefinition.class, enumDefinition);
     EnumContainer container = new EnumContainer(enumDefinition);
+
+    List<?> enumValues = enumDefinition.getEnumValues();
+    if (enumValues != null) {
+      container.setAllValues(enumValues);
+    }
+
     String key = enumDefinition.getValue();
-    EnumContainer old = this.enumDefinitionMap.put(key, container);
+    EnumContainer old = this.enumDefinitionMap.get(key);
     if (old != null) {
       throw new DuplicateObjectException(enumDefinition, key, old.enumDefinition);
     }
+    this.enumDefinitionMap.put(key, container);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> EnumDefinition<ENUM, CATEGORY> getEnumDefinitionWithCategory(
+      Class<? extends ENUM> enumType) throws ObjectNotFoundException {
+
+    return (EnumDefinition<ENUM, CATEGORY>) getEnumDefinition(enumType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public <TYPE> EnumDefinition<TYPE, ?> getEnumDefinition(Class<TYPE> enumType) throws ObjectNotFoundException {
+
+    NlsNullPointerException.checkNotNull("enumType", enumType);
+    String key = enumType.getName();
+    EnumContainer container = this.enumDefinitionMap.get(key);
+    if (isSupportEnumAutoRegistration() && (container == null) && enumType.isEnum()) {
+      registerEnum((Class<? extends Enum<?>>) enumType);
+      container = this.enumDefinitionMap.get(key);
+    }
+    if (container == null) {
+      throw new ObjectNotFoundException(EnumDefinition.class, key);
+    }
+    return (EnumDefinition<TYPE, ?>) container.enumDefinition;
+  }
+
+  /**
+   * @return <code>true</code> to automatically {@link #registerEnum(Class)} requested {@link Enum} types
+   *         (default), <code>false</code> otherwise (override to disable).
+   */
+  protected boolean isSupportEnumAutoRegistration() {
+
+    return true;
   }
 
   /**
@@ -119,8 +165,9 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
-  public List<? extends EnumType<?>> getEnumValues(EnumDefinition<?, ?> enumDefinition) {
+  public <ENUM> List<ENUM> getEnumValues(EnumDefinition<ENUM, ?> enumDefinition) {
 
     NlsNullPointerException.checkNotNull(EnumDefinition.class, enumDefinition);
     EnumContainer container = this.enumDefinitionMap.get(enumDefinition.getValue());
@@ -128,7 +175,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     if (container.activeValues == null) {
       loadEnumValues(container);
     }
-    return container.activeValues;
+    return (List<ENUM>) container.activeValues;
   }
 
   /**
@@ -140,12 +187,13 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
-  public <CATEGORY extends EnumType<?>> List<? extends EnumTypeWithCategory<?, CATEGORY>> getEnumValues(
-      EnumDefinition<?, CATEGORY> enumDefinition, CATEGORY... categories) {
+  public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> List<ENUM> getEnumValues(
+      EnumDefinition<ENUM, CATEGORY> enumDefinition, CATEGORY... categories) {
 
     assert (enumDefinition.getCategory() != null);
-    List<? extends EnumType<?>> allEnumValues = getEnumValues(enumDefinition);
+    List<?> allEnumValues = getEnumValues(enumDefinition);
     List<EnumTypeWithCategory<?, CATEGORY>> result = new LinkedList<EnumTypeWithCategory<?, CATEGORY>>();
 
     Set<CATEGORY> categorySet = new HashSet<CATEGORY>();
@@ -153,15 +201,14 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
       categorySet.add(currentCategory);
     }
 
-    for (EnumType<?> value : allEnumValues) {
-      @SuppressWarnings("unchecked")
+    for (Object value : allEnumValues) {
       EnumTypeWithCategory<?, CATEGORY> enumValue = (EnumTypeWithCategory<?, CATEGORY>) value;
       CATEGORY category = enumValue.getCategory();
       if (categorySet.contains(category)) {
         result.add(enumValue);
       }
     }
-    return result;
+    return (List<ENUM>) result;
   }
 
   /**
@@ -196,10 +243,10 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     private final EnumDefinition<?, ?> enumDefinition;
 
     /** @see #setAllValues(List) */
-    private volatile List<? extends EnumType<?>> allValues;
+    private volatile List<?> allValues;
 
     /** @see #getValues() */
-    private volatile List<? extends EnumType<?>> activeValues;
+    private volatile List<?> activeValues;
 
     /**
      * The constructor.
@@ -223,13 +270,13 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     /**
      * @param values the {@link EnumProvider#getEnumValues(EnumDefinition) enum values}.
      */
-    public void setAllValues(List<? extends EnumType<?>> values) {
+    public void setAllValues(List<?> values) {
 
       this.allValues = values;
       if (values != null) {
-        List<EnumType<?>> nonDeprecatedValues = new ArrayList<EnumType<?>>(this.allValues.size());
+        List<Object> nonDeprecatedValues = new ArrayList<Object>(this.allValues.size());
         Boolean implementsDeprecated = null;
-        for (EnumType<?> value : this.allValues) {
+        for (Object value : this.allValues) {
           if (implementsDeprecated == null) {
             implementsDeprecated = Boolean.valueOf(value instanceof AttributeReadDeprecated);
           }
@@ -251,7 +298,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
      * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or <code>null</code> if NOT
      *         the {@link EnumProvider#isAvailable(EnumDefinition) available}.
      */
-    public List<? extends EnumType<?>> getValues() {
+    public List<?> getValues() {
 
       return this.activeValues;
     }

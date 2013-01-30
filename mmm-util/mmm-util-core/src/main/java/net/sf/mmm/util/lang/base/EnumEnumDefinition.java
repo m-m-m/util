@@ -3,17 +3,22 @@
 package net.sf.mmm.util.lang.base;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.mmm.util.collection.base.NodeCycle;
 import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
-import net.sf.mmm.util.lang.api.EnumType;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 /**
- * This class implements {@link EnumDefinition} for a java {@link Enum}.
+ * This class implements {@link EnumDefinition} for a java {@link Enum}.<br/>
+ * <b>ATTENTION:</b><br/>
+ * Please only use this class to build an {@link net.sf.mmm.util.lang.api.EnumProvider}. From out-side use
+ * {@link net.sf.mmm.util.lang.api.EnumProvider#getEnumDefinition(Class)} instead.
  * 
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
  * @param <CATEGORY> is the generic type of the {@link #getCategory() category} or {@link Void} for none.
@@ -21,7 +26,7 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> implements EnumDefinition<TYPE, CATEGORY> {
+public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends AbstractEnumDefinition<TYPE, CATEGORY> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -5796877491769409263L;
@@ -39,16 +44,28 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> implements EnumD
   private Class<TYPE> enumType;
 
   /** @see #getEnumValues() */
-  private List<EnumType<?>> enumValues;
+  private List<TYPE> enumValues;
 
   /**
-   * The constructor.
+   * The constructor. A potential {@link #getCategory() category} is automatically detected.
    * 
    * @param enumType - see {@link #getEnumType()}.
    */
   public EnumEnumDefinition(Class<TYPE> enumType) {
 
-    this(enumType, new NodeCycle<Class<?>>(enumType));
+    this(enumType, new NodeCycle<Class<?>>(enumType), null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param enumType - see {@link #getEnumType()}.
+   * @param category is the explicit {@link #getCategory() category} (if not realized by an {@link Enum} or
+   *        auto-detection not desired for other reasons).
+   */
+  public EnumEnumDefinition(Class<TYPE> enumType, EnumDefinition<CATEGORY, ?> category) {
+
+    this(enumType, new NodeCycle<Class<?>>(enumType), category);
   }
 
   /**
@@ -56,63 +73,68 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> implements EnumD
    * 
    * @param enumType - see {@link #getEnumType()}.
    * @param cycle is a {@link NodeCycle} instance to detect cyclic {@link #getCategory() categories}.
+   * @param category is the {@link #getCategory() category} or <code>null</code> for auto-detect / none.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle) {
+  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle, EnumDefinition<CATEGORY, ?> category) {
 
     super();
     this.enumType = enumType;
     this.value = getKey(enumType);
     Class<?> categoryType = null;
-    boolean hasCategory = false;
-    Boolean instanceofEnumType = null;
-    TYPE[] enumConstants = enumType.getEnumConstants();
-    this.enumValues = new ArrayList<EnumType<?>>(enumConstants.length);
-    for (TYPE constant : enumConstants) {
-      if (instanceofEnumType == null) {
-        instanceofEnumType = Boolean.valueOf(constant instanceof EnumType);
-        if (instanceofEnumType.booleanValue()) {
-          hasCategory = (constant instanceof EnumTypeWithCategory);
-        }
-      }
-      if (instanceofEnumType.booleanValue()) {
-        if (hasCategory && categoryType == null) {
-          EnumTypeWithCategory<?, ?> e = (EnumTypeWithCategory<?, ?>) constant;
-          EnumType<?> categoryValue = e.getCategory();
-          if (categoryValue != null) {
-            categoryType = categoryValue.getClass();
-          }
-          // why do I need this downcast? Eclipse compiler bug?
-          this.enumValues.add((EnumType<?>) e);
-        } else {
-          this.enumValues.add((EnumType<?>) constant);
-        }
-      } else {
-        this.enumValues.add(new EnumEnumType(constant));
+    Boolean hasCategory = null;
+    if (category != null) {
+      // hasCategory = Boolean.TRUE;
+      categoryType = category.getEnumType();
+      if (categoryType == null) {
+        throw new NlsNullPointerException("category.enumType");
       }
     }
-    if (categoryType == null) {
-      this.category = null;
-    } else {
-      if (categoryType.isEnum()) {
-        List<Class<?>> inverseCycle = cycle.getInverseCycle();
-        if (inverseCycle.contains(categoryType)) {
-          throw new NodeCycleException(cycle, EnumTypeWithCategory.class);
+    TYPE[] enumConstants = enumType.getEnumConstants();
+    this.enumValues = new ArrayList<TYPE>(enumConstants.length);
+    for (TYPE constant : enumConstants) {
+      if (hasCategory == null) {
+        hasCategory = Boolean.valueOf(constant instanceof EnumTypeWithCategory);
+        if (!hasCategory.booleanValue() && (category != null)) {
+          throw new NlsIllegalArgumentException(category, "category for " + enumType);
         }
-        this.category = new EnumEnumDefinition(categoryType, cycle);
       } else {
-        throw new ObjectMismatchException(categoryType, Enum.class, enumType);
+        assert ((constant instanceof EnumTypeWithCategory) == hasCategory.booleanValue());
       }
+      if (hasCategory.booleanValue() && (categoryType == null)) {
+        EnumTypeWithCategory<?, ?> e = (EnumTypeWithCategory<?, ?>) constant;
+        Object categoryValue = e.getCategory();
+        if (categoryValue != null) {
+          categoryType = categoryValue.getClass();
+        }
+      }
+      this.enumValues.add(constant);
+    }
+    this.enumValues = Collections.unmodifiableList(this.enumValues);
+    if (category != null) {
+      this.category = category;
+    } else if (categoryType == null) {
+      this.category = null;
+    } else if (categoryType.isEnum()) {
+      List<Class<?>> inverseCycle = cycle.getInverseCycle();
+      if (inverseCycle.contains(categoryType)) {
+        throw new NodeCycleException(cycle, EnumTypeWithCategory.class);
+      }
+      this.category = new EnumEnumDefinition(categoryType, cycle, null);
+    } else {
+      throw new ObjectMismatchException(categoryType, Enum.class, enumType);
     }
   }
 
   /**
    * This method is called from the constructor to set the {@link #getValue() value}. By default it returns
-   * {@link Class#getName()}. Override to change (e.g. to {@link Class#getSimpleName()}).
+   * the {@link Class#getName() qualified name} of {@link #getEnumType()}. Override to change (e.g. to
+   * {@link Class#getSimpleName() simple name}).
    * 
    * @param type is the {@link #getEnumType()}.
    * @return the {@link #getValue()} to use.
    */
+  @Override
   protected String getKey(Class<TYPE> type) {
 
     return type.getName();
@@ -155,9 +177,10 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> implements EnumD
   }
 
   /**
-   * @return the {@link List} of the {@link Class#getEnumConstants() enum values} as {@link EnumType}s.
+   * @return the {@link List} of the {@link Class#getEnumConstants() enum values}.
    */
-  public List<? extends EnumType<?>> getEnumValues() {
+  @Override
+  public List<TYPE> getEnumValues() {
 
     return this.enumValues;
   }

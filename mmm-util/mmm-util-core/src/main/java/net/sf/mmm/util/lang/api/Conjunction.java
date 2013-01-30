@@ -10,7 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum Conjunction implements Datatype<String> {
+public enum Conjunction implements EnumType<String> {
   /**
    * This conjunction is <code>true</code> if and only if all arguments are <code>true</code>.
    */
