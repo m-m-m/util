@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 
 /**
  * This is the interface for a {@link UiWidget widget} that presents a list of {@link #getOptions() options}
- * and allows the end-user to select {@link #setSelectionMode(net.sf.mmm.ui.toolkit.api.common.SelectionMode)
+ * and allows the end-user to select {@link #setSelectionMode(net.sf.mmm.client.ui.api.common.SelectionMode)
  * one or multiple} out of these options.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

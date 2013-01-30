@@ -11,12 +11,14 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.UiModeChangerImpl;
+import net.sf.mmm.client.ui.base.widget.UiWidgetFactoryAdvancedImpl;
 import net.sf.mmm.client.ui.base.widget.UiWidgetFactoryDatatypeSimple;
 import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -54,6 +56,9 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   /** @see #getWidgetFactoryDatatype() */
   private UiWidgetFactoryDatatype widgetFactoryDatatype;
 
+  /** @see #getWidgetFactoryAdvanced() */
+  private UiWidgetFactoryAdvanced widgetFactoryAdvanced;
+
   /** @see #getContainer() */
   private ComponentContainer container;
 
@@ -90,6 +95,12 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
       widgetFactoryDatatypeSimple.setContext(this);
       widgetFactoryDatatypeSimple.initialize();
       this.widgetFactoryDatatype = widgetFactoryDatatypeSimple;
+    }
+    if (this.widgetFactoryAdvanced == null) {
+      UiWidgetFactoryAdvancedImpl widgetFactoryAdvancedImpl = new UiWidgetFactoryAdvancedImpl();
+      widgetFactoryAdvancedImpl.setFactory(this.widgetFactory);
+      widgetFactoryAdvancedImpl.initialize();
+      this.widgetFactoryAdvanced = widgetFactoryAdvancedImpl;
     }
   }
 
@@ -238,6 +249,25 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   public void setWidgetFactoryDatatype(UiWidgetFactoryDatatype widgetFactoryDatatype) {
 
     this.widgetFactoryDatatype = widgetFactoryDatatype;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetFactoryAdvanced getWidgetFactoryAdvanced() {
+
+    return this.widgetFactoryAdvanced;
+  }
+
+  /**
+   * @param widgetFactoryAdvanced is the widgetFactoryAdvanced to set
+   */
+  @Inject
+  public void setWidgetFactoryAdvanced(UiWidgetFactoryAdvanced widgetFactoryAdvanced) {
+
+    getInitializationState().requireNotInitilized();
+    this.widgetFactoryAdvanced = widgetFactoryAdvanced;
   }
 
   /**

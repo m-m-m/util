@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.api;
 
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.util.component.api.ComponentContainer;
@@ -34,19 +35,26 @@ public interface UiContext {
   UiDispatcher getDispatcher();
 
   /**
-   * @return the {@link UiWidgetFactory}.
-   */
-  UiWidgetFactory<?> getWidgetFactory();
-
-  /**
    * @return the instance of {@link ComponentContainer}.
    */
   ComponentContainer getContainer();
 
   /**
+   * @see #getWidgetFactoryAdvanced()
+   * 
+   * @return the {@link UiWidgetFactory}.
+   */
+  UiWidgetFactory<?> getWidgetFactory();
+
+  /**
    * @return the {@link UiWidgetFactoryDatatype}.
    */
   UiWidgetFactoryDatatype getWidgetFactoryDatatype();
+
+  /**
+   * @return the {@link UiWidgetFactoryAdvanced}.
+   */
+  UiWidgetFactoryAdvanced getWidgetFactoryAdvanced();
 
   /**
    * This method gets the {@link UiConfiguration} for this factory. It is intended to be read by
