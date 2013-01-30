@@ -8,11 +8,11 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-content-parser-api</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>content-parser-api</name>
   <description>This is the API of the search parsers.</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>

@@ -21,7 +21,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-service</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
