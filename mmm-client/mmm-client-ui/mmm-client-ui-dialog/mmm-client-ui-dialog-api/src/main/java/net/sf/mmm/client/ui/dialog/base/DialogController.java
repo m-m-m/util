@@ -21,6 +21,35 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
  * For each {@link net.sf.mmm.client.ui.dialog.api.ApplicationWindow} a single instance of
  * {@link DialogController} exists for each {@link Dialog} holding its state.
  * 
+ * <pre>
+ * public class PageDialogController extends {@link net.sf.mmm.client.ui.dialog.base.DialogController} {
+ *
+ *   public static final {@link net.sf.mmm.client.ui.dialog.base.DialogSlot} SLOT_MAIN = new {@link net.sf.mmm.client.ui.dialog.base.DialogSlot}({@link #DIALOG_ID_PAGE}, {@link #TYPE_PAGE});
+ *
+ *   ...
+ *
+   *   public String {@link #getId()} {
+   *     return {@link #DIALOG_ID_PAGE};
+   *   }
+   *
+   *   protected {@link net.sf.mmm.client.ui.dialog.base.DialogSlot} doShow({@link net.sf.mmm.client.ui.dialog.api.DialogPlace} place) {
+   *     return {@link net.sf.mmm.client.ui.dialog.base.root.RootDialogController#SLOT_PAGE};
+   *   }
+   *
+   *   protected void embed({@link net.sf.mmm.client.ui.dialog.base.DialogController}<?> subDialog, {@link net.sf.mmm.client.ui.dialog.base.DialogSlot} slot) {
+   *     if (slot == SLOT_MAIN) {
+   *       this.widgetMainSlot.setChild(subDialog.getView());
+   *     } else if (slot == SLOT_...) {
+   *       ...
+   *     } else {
+   *       super.embed(subDialog, slot);
+   *     }
+   *   }
+   *
+   * }
+   * </pre>
+ * 
+ * 
  * @param <VIEW> is the generic type of the {@link #getView() view}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

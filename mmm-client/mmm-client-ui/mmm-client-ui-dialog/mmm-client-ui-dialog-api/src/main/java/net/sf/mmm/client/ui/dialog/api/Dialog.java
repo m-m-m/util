@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.dialog.api;
 
+import net.sf.mmm.client.ui.dialog.base.DialogController;
+
 /**
  * This is the interface for a dialog of the client application. It displays itself in the page of the main
  * application window. It is a singleton instance that is addressed via a {@link DialogPlace}. A
@@ -19,10 +21,10 @@ public interface Dialog extends AbstractDialog {
   String DIALOG_ID_ROOT = "root";
 
   /**
-   * The {@link #getType() type} of a <em>popup</em> dialog. Popup means that the {@link Dialog} is opened in
-   * a new window that is typically modal and smaller than a main {@link Dialog}.
+   * The {@link net.sf.mmm.client.ui.dialog.api.Dialog#getId() dialog-id} of the {@link #TYPE_PAGE page}
+   * dialog.
    */
-  String TYPE_POPUP = "Popup";
+  String DIALOG_ID_PAGE = "page";
 
   /**
    * The {@link #getType() type} of a <em>main</em> dialog. This is a regular dialog displayed in the main
@@ -61,16 +63,27 @@ public interface Dialog extends AbstractDialog {
 
   /**
    * The {@link #getType() type} of the <em>root</em> dialog. This is the top-level dialog of the application
-   * and contains the other {@link Dialog}s.
+   * and represents the {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow}.
+   * 
+   * @see net.sf.mmm.client.ui.dialog.base.root.RootDialogController
    */
   String TYPE_ROOT = "Root";
+
+  /**
+   * The {@link #getType() type} of the <em>page</em> dialog. This is the first custom dialog that defines the
+   * structure of the application page (main window). It is supposed to embed itself into the
+   * {@link #TYPE_ROOT root} page and provide {@link net.sf.mmm.client.ui.dialog.base.DialogSlot slots} for
+   * child dialogs, at least a {@link #TYPE_MAIN main} slot. For an example see {@link DialogController}.
+   * 
+   * @see net.sf.mmm.client.ui.dialog.base.root.RootDialogController
+   */
+  String TYPE_PAGE = "Page";
 
   /**
    * This method determines the type of this {@link Dialog}. There are predefined TYPE_* constants for common
    * types. You can simply create additional types.
    * 
    * @see #TYPE_MAIN
-   * @see #TYPE_POPUP
    * @see #TYPE_HEADER
    * @see #TYPE_FOOTER
    * @see #TYPE_NAVIGATION

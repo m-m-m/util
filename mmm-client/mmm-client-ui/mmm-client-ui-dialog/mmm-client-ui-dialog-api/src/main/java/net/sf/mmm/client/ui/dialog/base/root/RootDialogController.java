@@ -11,7 +11,9 @@ import net.sf.mmm.client.ui.dialog.base.DialogSlot;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 /**
- * This is the {@link DialogController} for the {@link #TYPE_ROOT root} dialog.
+ * This is the {@link DialogController} for the {@link #TYPE_ROOT root} dialog. It simply represents the empty
+ * {@link UiWidgetMainWindow main window} of the application and provides a {@link #SLOT_PAGE slot} to embed
+ * the actual {@link #TYPE_PAGE top} dialog.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -19,7 +21,7 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
 public class RootDialogController extends DialogController<UiWidgetMainWindow> {
 
   /** The {@link DialogSlot} for the entire page. */
-  public static final DialogSlot SLOT_PAGE = new DialogSlot(DIALOG_ID_ROOT, "page");
+  public static final DialogSlot SLOT_PAGE = new DialogSlot(DIALOG_ID_ROOT, TYPE_PAGE);
 
   /**
    * The constructor.
