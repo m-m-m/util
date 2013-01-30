@@ -10,6 +10,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * This is the GWT service-client stub of {@link RemoteInvocationGenericServiceGwt}.
  * 
+ * TODO hohwille: Offer alternative concept to GWT-RPC because it is
+ * <ul>
+ * <li>cryptic and hard to read or debug</li>
+ * <li>asymmetric</li>
+ * <li>too slow in DevMode</li>
+ * </ul>
+ * Concept:
+ * <ul>
+ * <li>Require to use interfaces for TOs and have JavaBean only types as default implementations that can be
+ * created with new.</li>
+ * <li>Provide specific JSON parser on server-side using reflection (maybe an existing OSS component).</li>
+ * <li>Define a TypeFactory for datatypes and others so the user can use custom types.</li>
+ * <li>On the client side parse as regular JSon and then use generated code that maps this result back to the
+ * interfaces.</li>
+ * <li>Consider reusing existing stuff from autobean where possible</li>
+ * </ul>
+ * 
+ * 
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
