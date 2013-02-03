@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends AbstractUiWidgetAdapter<WIDGET> {
 
@@ -31,19 +31,19 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   }
 
   /**
-   * This method is a simplified variant of {@link #getWidget(UiWidget, Class)}.
+   * This method is a simplified variant of {@link #getToplevelWidget(UiWidget, Class)}.
    * 
    * @param widget is the {@link UiWidget} to "unwrap".
    * @return the native widget.
    */
-  protected static final Widget getWidget(UiWidget widget) {
+  protected static final Widget getToplevelWidget(UiWidget widget) {
 
-    return getWidget(widget, Widget.class);
+    return getToplevelWidget(widget, Widget.class);
   }
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.client.ui.api.UiContext#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
+   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
    * native widget} of the given <code>widget</code>.
    * 
    * @param <W> is the generic type of <code>widgetType</code>.
@@ -52,9 +52,9 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
    * @return the native widget.
    */
   @SuppressWarnings("unchecked")
-  protected static final <W extends UIObject> W getWidget(UiWidget widget, Class<W> widgetType) {
+  protected static final <W extends UIObject> W getToplevelWidget(UiWidget widget, Class<W> widgetType) {
 
-    Object nativeWidget = AbstractUiWidget.getWidgetAdapter(widget).getWidget();
+    Object nativeWidget = AbstractUiWidget.getWidgetAdapter(widget).getToplevelWidget();
     try {
       return (W) nativeWidget;
     } catch (ClassCastException e) {
@@ -66,9 +66,18 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
    * {@inheritDoc}
    */
   @Override
+  public UIObject getActiveWidget() {
+
+    return getToplevelWidget();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setId(String id) {
 
-    Element element = getWidget().getElement();
+    Element element = getToplevelWidget().getElement();
     if (id == null) {
       element.removeAttribute(HTML_ATTRIBUTE_ID);
     } else {
@@ -82,7 +91,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setTooltip(String tooltip) {
 
-    getWidget().setTitle(tooltip);
+    getToplevelWidget().setTitle(tooltip);
   }
 
   /**
@@ -91,7 +100,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setAttribute(String name, String value) {
 
-    Element element = getWidget().getElement();
+    Element element = getToplevelWidget().getElement();
     if (value == null) {
       element.removeAttribute(name);
     } else {
@@ -105,7 +114,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setVisible(boolean visible) {
 
-    getWidget().setVisible(visible);
+    getToplevelWidget().setVisible(visible);
   }
 
   /**
@@ -114,7 +123,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setStyles(String styles) {
 
-    getWidget().setStyleName(styles);
+    getToplevelWidget().setStyleName(styles);
   }
 
   /**
@@ -143,7 +152,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setWidth(String width) {
 
-    getWidget().setWidth(width);
+    getToplevelWidget().setWidth(width);
   }
 
   /**
@@ -152,7 +161,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setHeight(String height) {
 
-    getWidget().setHeight(height);
+    getToplevelWidget().setHeight(height);
   }
 
   /**
@@ -161,7 +170,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public void setSize(String width, String height) {
 
-    getWidget().setSize(width, height);
+    getToplevelWidget().setSize(width, height);
   }
 
   /**

@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPane
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetVerticalPanel<ADAPTER extends UiWidgetAdapterDynamicPanel<?>> extends
+public abstract class AbstractUiWidgetVerticalPanel<ADAPTER extends UiWidgetAdapterDynamicPanel> extends
     AbstractUiWidgetDynamicPanel<ADAPTER, UiWidgetRegular> implements UiWidgetVerticalPanel {
 
   /**

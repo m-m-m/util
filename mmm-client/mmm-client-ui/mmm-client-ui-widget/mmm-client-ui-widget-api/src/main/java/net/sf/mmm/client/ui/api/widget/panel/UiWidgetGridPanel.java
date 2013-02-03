@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
+import net.sf.mmm.client.ui.api.aria.role.RolePresentation;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
@@ -16,6 +17,14 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>, UiWidgetReal {
 
   /**
+   * {@inheritDoc}
+   * 
+   * Here {@link RolePresentation} is used so the implementation can use a table as layout element.
+   */
+  @Override
+  RolePresentation getAriaRole();
+
+  /**
    * This method creates a {@link UiWidgetGridRow}, {@link UiWidgetGridRow#addChild(UiWidgetRegular) adds} the
    * given <code>children</code> to it and then {@link #addChild(UiWidgetGridRow) adds} it to this
    * {@link UiWidgetGridPanel}.
@@ -24,5 +33,12 @@ public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>
    * @return the created {@link UiWidgetGridRow}.
    */
   UiWidgetGridRow addChildren(UiWidgetRegular... children);
+
+  /**
+   * Adds an empty {@link UiWidgetGridRow row} that acts as a spacer to group blocks of rows with widgets.
+   * This row will have the {@link #setStyles(String) style}
+   * {@link net.sf.mmm.client.ui.api.common.CssStyles#GRID_ROW_SEPARATOR}.
+   */
+  void addSeparatorRow();
 
 }

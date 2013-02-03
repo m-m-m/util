@@ -18,8 +18,8 @@ import com.google.gwt.user.client.ui.MenuItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase implements
-    UiWidgetAdapterMenuItem<MenuItem>, Command {
+public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase implements UiWidgetAdapterMenuItem,
+    Command {
 
   /** @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick) */
   private UiFeatureClick source;
@@ -39,7 +39,7 @@ public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase i
    * {@inheritDoc}
    */
   @Override
-  protected MenuItem createWidget() {
+  protected MenuItem createToplevelWidget() {
 
     return new MenuItem("", this);
   }
@@ -71,7 +71,7 @@ public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase i
   @Override
   public void setAccessKey(char accessKey) {
 
-    Element element = getWidget().getElement();
+    Element element = getToplevelWidget().getElement();
     if (accessKey == ACCESS_KEY_NONE) {
       element.removeAttribute(HTML_ATTRIBUTE_ACCESS_KEY);
     } else {

@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
 public class UiWidgetAdapterGwtTextBox<VALUE> extends UiWidgetAdapterGwtTextBoxBase<TextBox, VALUE> implements
-    UiWidgetAdapterTextField<TextBox, VALUE> {
+    UiWidgetAdapterTextField<VALUE> {
 
   /**
    * The constructor.
@@ -29,10 +29,9 @@ public class UiWidgetAdapterGwtTextBox<VALUE> extends UiWidgetAdapterGwtTextBoxB
    * {@inheritDoc}
    */
   @Override
-  protected TextBox createWidget() {
+  protected TextBox createActiveWidget() {
 
     TextBox textBox = new TextBox();
-    textBox.setReadOnly(true);
     return textBox;
   }
 }

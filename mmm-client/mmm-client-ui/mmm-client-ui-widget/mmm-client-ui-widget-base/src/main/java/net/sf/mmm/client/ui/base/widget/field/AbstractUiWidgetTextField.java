@@ -13,11 +13,12 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextField;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetTextField<ADAPTER extends UiWidgetAdapterTextField<?, String>> extends
+public abstract class AbstractUiWidgetTextField<ADAPTER extends UiWidgetAdapterTextField<String>> extends
     AbstractUiWidgetTextFieldBase<ADAPTER> implements UiWidgetTextField {
 
   /**
    * The constructor.
+   * 
    * @param context is the {@link #getContext() context}.
    */
   public AbstractUiWidgetTextField(AbstractUiContext context) {

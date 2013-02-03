@@ -12,7 +12,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterRichTextArea} using GWT based on {@link RichTextArea}.
@@ -22,7 +21,7 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
 public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTextAreaBase<MyRichTextArea, VALUE>
-    implements UiWidgetAdapterRichTextArea<MyRichTextArea, VALUE> {
+    implements UiWidgetAdapterRichTextArea<VALUE> {
 
   /**
    * The constructor.
@@ -36,16 +35,7 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
    * {@inheritDoc}
    */
   @Override
-  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
-
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected MyRichTextArea createWidget() {
+  protected MyRichTextArea createActiveWidget() {
 
     return new MyRichTextArea();
   }
@@ -65,7 +55,7 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
   @Override
   public void setHeightInRows(int rows) {
 
-    getWidget().setHeight(rows + "em");
+    getToplevelWidget().setHeight(rows + "em");
   }
 
   /**
@@ -83,7 +73,7 @@ public class UiWidgetAdapterGwtRichTextArea<VALUE> extends UiWidgetAdapterGwtTex
   @Override
   public void setMaximumTextLength(int length) {
 
-    getWidget().getElement().setAttribute("maxlength", Integer.toString(length));
+    getToplevelWidget().getElement().setAttribute("maxlength", Integer.toString(length));
   }
 
   /**

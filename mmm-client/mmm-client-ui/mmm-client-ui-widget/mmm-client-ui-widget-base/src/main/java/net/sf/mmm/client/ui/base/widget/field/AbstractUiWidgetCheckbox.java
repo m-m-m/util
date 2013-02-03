@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCheckbox<?>> extends
+public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCheckbox> extends
     AbstractUiWidgetField<ADAPTER, Boolean, Boolean> implements UiWidgetCheckbox {
 
   /** @see #getLabel() */

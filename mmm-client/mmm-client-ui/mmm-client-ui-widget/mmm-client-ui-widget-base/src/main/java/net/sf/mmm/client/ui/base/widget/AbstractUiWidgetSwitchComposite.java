@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSwitchComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAdapterSwitchComposite<?, CHILD>, CHILD extends UiWidget>
+public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAdapterSwitchComposite<CHILD>, CHILD extends UiWidget>
     extends AbstractUiWidgetDynamicComposite<ADAPTER, CHILD> implements UiWidgetSwitchComposite<CHILD> {
 
   /** @see #showChild(int) */

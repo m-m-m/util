@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<?, VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
+public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
     extends AbstractUiWidgetActive<ADAPTER, VALUE> implements UiWidgetField<VALUE>, AttributeWriteValidationFailure {
 
   /** @see #getValue() */

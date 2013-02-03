@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using
- * GWT based on {@link PasswordTextBox}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
+ * using GWT based on {@link PasswordTextBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -26,7 +26,7 @@ public class UiWidgetAdapterGwtPasswordTextBox<VALUE> extends UiWidgetAdapterGwt
    * {@inheritDoc}
    */
   @Override
-  protected PasswordTextBox createWidget() {
+  protected PasswordTextBox createActiveWidget() {
 
     return new PasswordTextBox();
   }

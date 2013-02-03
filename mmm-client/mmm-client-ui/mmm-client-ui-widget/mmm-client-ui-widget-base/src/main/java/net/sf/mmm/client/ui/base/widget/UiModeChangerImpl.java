@@ -30,7 +30,7 @@ public class UiModeChangerImpl extends AbstractUiModeChanger {
    * {@inheritDoc}
    */
   @Override
-  protected void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode, UiWidgetAdapter<?> widgetAdapter) {
+  protected void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode, UiWidgetAdapter widgetAdapter) {
 
     boolean editMode = (newMode == UiMode.EDIT);
     widgetAdapter.setMode(editMode, widget);

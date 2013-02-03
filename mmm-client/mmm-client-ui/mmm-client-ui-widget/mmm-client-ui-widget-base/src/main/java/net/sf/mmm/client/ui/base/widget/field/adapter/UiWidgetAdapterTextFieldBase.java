@@ -10,11 +10,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  */
-public abstract interface UiWidgetAdapterTextFieldBase<WIDGET, VALUE> extends
-    UiWidgetAdapterTextualInputField<WIDGET, VALUE, String>, AttributeWriteKeyboardFilter {
+public abstract interface UiWidgetAdapterTextFieldBase<VALUE> extends UiWidgetAdapterTextualInputField<VALUE, String>,
+    AttributeWriteKeyboardFilter {
 
   // nothing to add
 

@@ -32,7 +32,7 @@ public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableC
    * {@inheritDoc}
    */
   @Override
-  protected GridCell createWidget() {
+  protected GridCell createToplevelWidget() {
 
     return new GridCell();
   }
@@ -43,7 +43,7 @@ public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableC
   @Override
   public void setChild(UiWidgetRegular child) {
 
-    getWidget().setChild(getWidget(child));
+    getToplevelWidget().setChild(getToplevelWidget(child));
   }
 
   /**

@@ -10,13 +10,14 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * This is the implementation of {@link UiWidgetAdapterDynamicComposite} using GWT.
  * 
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
- * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
  */
 public abstract class UiWidgetAdapterGwtDynamicComposite<WIDGET extends Widget, CHILD extends UiWidget> extends
-    UiWidgetAdapterGwtWidget<WIDGET> implements UiWidgetAdapterDynamicComposite<WIDGET, CHILD> {
+    UiWidgetAdapterGwtWidget<WIDGET> implements UiWidgetAdapterDynamicComposite<CHILD> {
 
   /**
    * The constructor.

@@ -8,10 +8,9 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  */
-public interface UiWidgetAdapterRichTextArea<WIDGET, VALUE> extends UiWidgetAdapterTextAreaBase<WIDGET, VALUE> {
+public interface UiWidgetAdapterRichTextArea<VALUE> extends UiWidgetAdapterTextAreaBase<VALUE> {
 
   // nothing to add
 

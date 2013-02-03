@@ -7,15 +7,14 @@ import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextAreaBase;
 
 /**
- * This is the abstract base implementation for
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea} and
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea}.
+ * This is the abstract base implementation for {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea}
+ * and {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapterTextAreaBase<?, String>> extends
+public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapterTextAreaBase<String>> extends
     AbstractUiWidgetTextFieldBase<ADAPTER> implements AttributeWriteHeightInRows {
 
   /** @see #getHeightInRows() */

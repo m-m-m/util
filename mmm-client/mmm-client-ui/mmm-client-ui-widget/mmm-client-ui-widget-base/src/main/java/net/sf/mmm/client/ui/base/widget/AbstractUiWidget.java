@@ -65,7 +65,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
    * 
    * @return the {@link UiWidgetAdapter}.
    */
-  protected abstract UiWidgetAdapter<?> getWidgetAdapter();
+  protected abstract UiWidgetAdapter getWidgetAdapter();
 
   /**
    * This method gives access to {@link #getWidgetAdapter()}.<br/>
@@ -76,7 +76,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
    * @param widget is the widget.
    * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
    */
-  public static final UiWidgetAdapter<?> getWidgetAdapter(UiWidget widget) {
+  public static final UiWidgetAdapter getWidgetAdapter(UiWidget widget) {
 
     return ((AbstractUiWidget<?>) widget).getWidgetAdapter();
   }

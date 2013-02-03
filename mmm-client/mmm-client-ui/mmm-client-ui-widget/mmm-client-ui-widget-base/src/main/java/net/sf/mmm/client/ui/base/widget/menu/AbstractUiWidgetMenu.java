@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenu;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu<?>> extends
+public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu> extends
     AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetMenuItem> implements UiWidgetMenu {
 
   /** @see #getLabel() */

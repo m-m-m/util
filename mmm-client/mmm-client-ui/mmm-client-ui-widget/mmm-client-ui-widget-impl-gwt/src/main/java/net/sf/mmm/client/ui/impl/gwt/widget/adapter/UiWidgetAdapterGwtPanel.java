@@ -10,15 +10,17 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using
- * GWT based on {@link Panel} and {@link InsertPanel}.
+ * This is the implementation of
+ * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
+ * {@link Panel} and {@link InsertPanel}.
+ * 
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAdapterGwtPanel<WIDGET extends Panel & InsertPanel> extends
-    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterDynamicPanel<WIDGET> {
+    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterDynamicPanel {
 
   /**
    * The constructor.
@@ -44,11 +46,11 @@ public abstract class UiWidgetAdapterGwtPanel<WIDGET extends Panel & InsertPanel
   public void addChild(UiWidgetRegular child, int index) {
 
     // @SuppressWarnings("unchecked")
-    Widget childWidget = getWidget(child);
+    Widget childWidget = getToplevelWidget(child);
     if (index == -1) {
-      getWidget().add(childWidget);
+      getToplevelWidget().add(childWidget);
     } else {
-      getWidget().insert(childWidget, index);
+      getToplevelWidget().insert(childWidget, index);
     }
   }
 

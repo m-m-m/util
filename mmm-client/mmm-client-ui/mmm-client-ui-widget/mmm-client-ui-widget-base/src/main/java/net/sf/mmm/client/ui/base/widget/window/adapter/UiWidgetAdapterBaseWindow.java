@@ -15,9 +15,8 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterBaseWindow<WIDGET> extends UiWidgetAdapterDynamicComposite<WIDGET, UiWidgetRegular>,
+public interface UiWidgetAdapterBaseWindow extends UiWidgetAdapterDynamicComposite<UiWidgetRegular>,
     AttributeWriteSizeInPixel, AttributeWritePosition, AttributeWriteStringTitle, AttributeWriteResizable {
 
   // nothing to add

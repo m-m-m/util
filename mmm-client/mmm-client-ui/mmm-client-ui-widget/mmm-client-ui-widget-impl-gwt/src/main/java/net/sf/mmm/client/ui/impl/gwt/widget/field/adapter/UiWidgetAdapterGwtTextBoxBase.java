@@ -12,12 +12,12 @@ import com.google.gwt.user.client.ui.TextBox;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
 public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALUE> extends
     UiWidgetAdapterGwtFieldValueBoxBase<WIDGET, VALUE, String> implements
-    UiWidgetAdapterTextualInputField<WIDGET, VALUE, String> {
+    UiWidgetAdapterTextualInputField<VALUE, String> {
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALU
   @Override
   public void setMaximumTextLength(int length) {
 
-    getWidget().setMaxLength(length);
+    getActiveWidget().setMaxLength(length);
   }
 
   /**
@@ -42,7 +42,7 @@ public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALU
   @Override
   public int getMaximumTextLength() {
 
-    return getWidget().getMaxLength();
+    return getActiveWidget().getMaxLength();
   }
 
 }

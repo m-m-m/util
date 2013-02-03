@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAdapterSingleComposite<?, CHILD>, CHILD extends UiWidget>
+public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAdapterSingleComposite<CHILD>, CHILD extends UiWidget>
     extends AbstractUiWidgetComposite<ADAPTER, CHILD> implements UiWidgetSingleComposite<CHILD> {
 
   /** @see #getChild() */

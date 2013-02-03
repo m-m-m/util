@@ -14,10 +14,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends Panel> extends
-    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterBaseWindow<WIDGET> {
+    UiWidgetAdapterGwtDynamicComposite<WIDGET, UiWidgetRegular> implements UiWidgetAdapterBaseWindow {
 
   /** The container for the children. */
   private final VerticalPanel contentPanel;
@@ -30,7 +30,7 @@ public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends Panel> extends
     super();
     this.contentPanel = new VerticalPanel();
     this.contentPanel.setWidth("100%");
-    getWidget().add(this.contentPanel);
+    getToplevelWidget().add(this.contentPanel);
   }
 
   /**
@@ -58,9 +58,9 @@ public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends Panel> extends
   public void addChild(UiWidgetRegular child, int index) {
 
     if (index >= 0) {
-      this.contentPanel.insert(getWidget(child), index);
+      this.contentPanel.insert(getToplevelWidget(child), index);
     } else {
-      this.contentPanel.add(getWidget(child));
+      this.contentPanel.add(getToplevelWidget(child));
     }
   }
 

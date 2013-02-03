@@ -8,13 +8,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
  * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox}.
  * 
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterCheckbox<WIDGET> extends UiWidgetAdapterField<WIDGET, Boolean, Boolean>,
-    AttributeWriteLabel {
+public interface UiWidgetAdapterCheckbox extends UiWidgetAdapterField<Boolean, Boolean>, AttributeWriteLabel {
 
   // nothing to add
 

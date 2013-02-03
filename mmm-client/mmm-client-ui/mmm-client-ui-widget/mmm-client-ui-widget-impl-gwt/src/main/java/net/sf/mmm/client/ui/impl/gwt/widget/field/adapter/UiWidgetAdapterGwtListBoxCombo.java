@@ -9,7 +9,6 @@ import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterOptionsField} using GWT based on {@link ListBox} to
@@ -20,8 +19,7 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
  * @param <VALUE> is the generic type of the changed value.
  */
 public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
-    UiWidgetAdapterGwtFieldFocusWidgetBase<ListBox, VALUE, String> implements
-    UiWidgetAdapterOptionsField<ListBox, VALUE> {
+    UiWidgetAdapterGwtFieldFocusWidgetBase<ListBox, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE> {
 
   /** @see #setOptions(List) */
   private List<String> options;
@@ -38,16 +36,7 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
-
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ListBox createWidget() {
+  protected ListBox createActiveWidget() {
 
     ListBox listBox = new ListBox();
     listBox.setVisibleItemCount(1);
@@ -69,10 +58,10 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
   @Override
   public void setOptions(List<String> options) {
 
-    getWidget().clear();
+    getToplevelWidget().clear();
     this.options = options;
     for (String item : options) {
-      getWidget().addItem(item);
+      getActiveWidget().addItem(item);
     }
   }
 
@@ -83,7 +72,7 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
   public String getValue() {
 
     if (this.options != null) {
-      int selectedIndex = getWidget().getSelectedIndex();
+      int selectedIndex = getActiveWidget().getSelectedIndex();
       if ((selectedIndex >= 0) && (selectedIndex < this.options.size())) {
         return this.options.get(selectedIndex);
       }
@@ -102,7 +91,7 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
     }
     for (int i = 0; i < this.options.size(); i++) {
       if (value.equals(this.options.get(i))) {
-        getWidget().setSelectedIndex(i);
+        getActiveWidget().setSelectedIndex(i);
         break;
       }
     }

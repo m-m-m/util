@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget.panel;
 
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.aria.role.RolePresentation;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
@@ -18,7 +19,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetGridPanel<ADAPTER extends UiWidgetAdapterGridPanel<?>> extends
+public abstract class AbstractUiWidgetGridPanel<ADAPTER extends UiWidgetAdapterGridPanel> extends
     AbstractUiWidgetDynamicPanel<ADAPTER, UiWidgetGridRow> implements UiWidgetGridPanel {
 
   /**
@@ -35,6 +36,15 @@ public abstract class AbstractUiWidgetGridPanel<ADAPTER extends UiWidgetAdapterG
    * {@inheritDoc}
    */
   @Override
+  public RolePresentation getAriaRole() {
+
+    return (RolePresentation) super.getAriaRole();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetGridRow addChildren(UiWidgetRegular... children) {
 
     UiWidgetGridRow row = getContext().getWidgetFactory().create(UiWidgetGridRow.class);
@@ -43,6 +53,17 @@ public abstract class AbstractUiWidgetGridPanel<ADAPTER extends UiWidgetAdapterG
     }
     addChild(row);
     return row;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addSeparatorRow() {
+
+    UiWidgetGridRow row = getContext().getWidgetFactory().create(UiWidgetGridRow.class);
+    row.addStyle(CssStyles.GRID_ROW_SEPARATOR);
+    addChild(row);
   }
 
   /**

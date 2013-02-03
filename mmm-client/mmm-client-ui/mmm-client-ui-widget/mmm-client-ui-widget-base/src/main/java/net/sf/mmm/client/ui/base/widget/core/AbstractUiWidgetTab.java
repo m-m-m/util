@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterTab;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab<?>> extends
+public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab> extends
     AbstractUiWidgetSingleMutableComposite<ADAPTER, UiWidgetRegular> implements UiWidgetTab {
 
   /** @see #getLabel() */

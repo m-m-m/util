@@ -11,7 +11,6 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.ValueBoxBase;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 /**
@@ -23,7 +22,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
  * @param <VALUE> is the generic type of the changed value - typically {@link Double}.
  */
 public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<DateBox, VALUE, Date> implements
-    UiWidgetAdapterDateField<DateBox, VALUE> {
+    UiWidgetAdapterDateField<VALUE> {
 
   /**
    * The constructor.
@@ -37,7 +36,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
    * {@inheritDoc}
    */
   @Override
-  protected DateBox createWidget() {
+  protected DateBox createActiveWidget() {
 
     return new DateBox();
   }
@@ -48,7 +47,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected Focusable getWidgetAsFocusable() {
 
-    return getWidget().getTextBox();
+    return getActiveWidget().getTextBox();
   }
 
   /**
@@ -57,7 +56,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
 
-    return getWidget().getTextBox();
+    return getActiveWidget().getTextBox();
   }
 
   /**
@@ -66,7 +65,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
 
-    return getWidget().getTextBox();
+    return getActiveWidget().getTextBox();
   }
 
   /**
@@ -75,7 +74,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasChangeHandlers getWidgetAsHasChangeHandlers() {
 
-    return getWidget().getTextBox();
+    return getActiveWidget().getTextBox();
   }
 
   /**
@@ -84,16 +83,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasValue<Date> getWidgetAsHasValue() {
 
-    return getWidget();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
-
-    return getWidget().getTextBox();
+    return getActiveWidget();
   }
 
   /**
@@ -102,7 +92,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   public void setEnabled(boolean enabled) {
 
-    getWidget().setEnabled(enabled);
+    getActiveWidget().setEnabled(enabled);
   }
 
   /**
@@ -111,7 +101,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   public void setMaximumTextLength(int length) {
 
-    getWidget().getTextBox().setMaxLength(length);
+    getActiveWidget().getTextBox().setMaxLength(length);
   }
 
   /**
@@ -120,7 +110,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   public int getMaximumTextLength() {
 
-    return getWidget().getTextBox().getMaxLength();
+    return getActiveWidget().getTextBox().getMaxLength();
   }
 
 }

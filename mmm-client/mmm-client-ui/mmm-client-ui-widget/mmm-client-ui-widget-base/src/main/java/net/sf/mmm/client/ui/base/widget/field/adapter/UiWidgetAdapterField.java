@@ -14,17 +14,16 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
- *        {@link #getWidget() widget}.
+ *        {@link #getToplevelWidget() widget}.
  */
-public interface UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE> extends UiWidgetAdapterActive<WIDGET>,
+public interface UiWidgetAdapterField<VALUE, ADAPTER_VALUE> extends UiWidgetAdapterActive,
     AttributeWriteValue<ADAPTER_VALUE>, AttributeWriteValidationFailure {
 
   /**
    * This method registers the given {@link UiHandlerEventValueChange value change handler} in the
-   * {@link #getWidget() widget}. This method will be called only once.
+   * {@link #getToplevelWidget() widget}. This method will be called only once.
    * 
    * @param source is the
    *        {@link UiHandlerEventValueChange#onValueChange(net.sf.mmm.util.lang.api.attribute.AttributeReadValue, boolean)

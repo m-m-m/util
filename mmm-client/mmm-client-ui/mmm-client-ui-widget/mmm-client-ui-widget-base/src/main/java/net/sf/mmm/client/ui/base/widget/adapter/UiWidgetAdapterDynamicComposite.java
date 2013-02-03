@@ -10,11 +10,10 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
  */
-public abstract interface UiWidgetAdapterDynamicComposite<WIDGET, CHILD extends UiWidget> extends
-    UiWidgetAdapterComposite<WIDGET, CHILD> {
+public abstract interface UiWidgetAdapterDynamicComposite<CHILD extends UiWidget> extends
+    UiWidgetAdapterComposite<CHILD> {
 
   /**
    * This method adds the given <code>child</code> at the given <code>index</code>.
@@ -29,7 +28,7 @@ public abstract interface UiWidgetAdapterDynamicComposite<WIDGET, CHILD extends 
   void addChild(CHILD child, int index);
 
   /**
-   * This method removes the given <code>child</code> from the {@link #getWidget() widget}.
+   * This method removes the given <code>child</code> from the {@link #getToplevelWidget() widget}.
    * 
    * @param child is the child to remove.
    * @param index is the index of the child to remove.

@@ -31,7 +31,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, VALUE> extends AbstractUiWidget<VALUE>
+public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALUE> extends AbstractUiWidget<VALUE>
     implements AbstractUiWidgetComposite, AttributeWriteAriaRole {
 
   /** @see #getWidgetAdapter() */
@@ -131,7 +131,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
    * @param widget is the widget.
    * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
    */
-  public static final <A extends UiWidgetAdapter<?>> A getWidgetAdapter(AbstractUiWidgetReal<A, ?> widget) {
+  public static final <A extends UiWidgetAdapter> A getWidgetAdapter(AbstractUiWidgetReal<A, ?> widget) {
 
     return widget.getWidgetAdapter();
   }
@@ -146,7 +146,9 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter<?>, V
 
     // for ariaRole see getWidgetAdapter()
     adapter.setVisible(this.visible);
-    adapter.setEnabled(this.enabled);
+    if (!this.enabled) {
+      adapter.setEnabled(this.enabled);
+    }
     if (this.parent != null) {
       adapter.setParent(this.parent);
     }

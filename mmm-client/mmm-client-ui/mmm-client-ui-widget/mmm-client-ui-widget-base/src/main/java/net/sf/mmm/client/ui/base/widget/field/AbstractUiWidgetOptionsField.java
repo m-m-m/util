@@ -24,8 +24,8 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapterOptionsField<?, VALUE>, VALUE>
-    extends AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE> {
+public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapterOptionsField<VALUE>, VALUE> extends
+    AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE> {
 
   /** @see #getOptions() */
   private final List<VALUE> mutableOptions;

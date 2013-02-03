@@ -8,15 +8,14 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextFieldBa
 import net.sf.mmm.util.filter.api.CharFilter;
 
 /**
- * This is the abstract base implementation of
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField} or
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea}.
+ * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField}
+ * or {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetTextFieldBase<ADAPTER extends UiWidgetAdapterTextFieldBase<?, String>> extends
+public abstract class AbstractUiWidgetTextFieldBase<ADAPTER extends UiWidgetAdapterTextFieldBase<String>> extends
     AbstractUiWidgetTextualInputField<ADAPTER, String, String> implements AttributeWriteKeyboardFilter {
 
   /** @see #getKeyboardFilter() */

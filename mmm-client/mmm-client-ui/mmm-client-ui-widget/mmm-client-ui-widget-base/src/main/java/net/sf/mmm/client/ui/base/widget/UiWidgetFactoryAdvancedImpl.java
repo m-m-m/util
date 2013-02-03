@@ -23,6 +23,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.Orientation;
+import net.sf.mmm.util.lang.base.SimpleEnumProvider;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -37,7 +38,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent implements UiWidgetFactoryAdvanced {
 
   /** @see #getFactory() */
-  private UiWidgetFactory<?> factory;
+  private UiWidgetFactory factory;
 
   /** @see #getEnumProvider() */
   private EnumProvider enumProvider;
@@ -53,16 +54,30 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   /**
    * @return the {@link UiWidgetFactory} instance.
    */
-  protected UiWidgetFactory<?> getFactory() {
+  protected UiWidgetFactory getFactory() {
 
     return this.factory;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.enumProvider == null) {
+      SimpleEnumProvider impl = new SimpleEnumProvider();
+      impl.initialize();
+      this.enumProvider = impl;
+    }
   }
 
   /**
    * @param factory is the factory to set
    */
   @Inject
-  public void setFactory(UiWidgetFactory<?> factory) {
+  public void setFactory(UiWidgetFactory factory) {
 
     getInitializationState().requireNotInitilized();
     this.factory = factory;

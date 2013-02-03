@@ -26,11 +26,8 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <NATIVE_WIDGET> is the generic top-level type of the underlying
- *        {@link #getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular) widgets}.
  */
-public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractComponent implements
-    UiWidgetFactory<NATIVE_WIDGET> {
+public abstract class AbstractUiWidgetFactory extends AbstractComponent implements UiWidgetFactory {
 
   /** @see #create(Class) */
   private final Map<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>> interface2subFactoryMap;
@@ -104,11 +101,11 @@ public abstract class AbstractUiWidgetFactory<NATIVE_WIDGET> extends AbstractCom
    * {@inheritDoc}
    */
   @Override
-  public NATIVE_WIDGET getNativeWidget(UiWidgetRegular widget) {
+  public Object getNativeWidget(UiWidgetRegular widget) {
 
     NlsNullPointerException.checkNotNull(UiWidgetRegular.class, widget);
     AbstractUiWidget<?> abstractWidget = (AbstractUiWidget<?>) widget;
-    NATIVE_WIDGET nativeWidget = (NATIVE_WIDGET) abstractWidget.getWidgetAdapter().getWidget();
+    Object nativeWidget = abstractWidget.getWidgetAdapter().getToplevelWidget();
     return nativeWidget;
   }
 

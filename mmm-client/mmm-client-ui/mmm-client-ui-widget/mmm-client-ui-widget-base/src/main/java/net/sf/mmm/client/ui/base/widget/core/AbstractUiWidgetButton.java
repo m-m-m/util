@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButton<?>> extends
+public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButton> extends
     AbstractUiWidgetClickableWithLabel<ADAPTER> implements UiWidgetButton {
 
   /** @see #getImage() */

@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsFiel
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetComboBox<ADAPTER extends UiWidgetAdapterOptionsField<?, VALUE>, VALUE> extends
+public abstract class AbstractUiWidgetComboBox<ADAPTER extends UiWidgetAdapterOptionsField<VALUE>, VALUE> extends
     AbstractUiWidgetOptionsField<ADAPTER, VALUE> implements UiWidgetComboBox<VALUE> {
 
   /**

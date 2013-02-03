@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridRow;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetGridRow<ADAPTER extends UiWidgetAdapterGridRow<?>> extends
+public abstract class AbstractUiWidgetGridRow<ADAPTER extends UiWidgetAdapterGridRow> extends
     AbstractUiWidgetDynamicPanel<ADAPTER, UiWidgetGridCell> implements UiWidgetGridRow {
 
   /**

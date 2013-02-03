@@ -15,12 +15,11 @@ import com.google.gwt.user.client.ui.HasValue;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
 public abstract class UiWidgetAdapterGwtTextAreaBase<WIDGET extends FocusWidget & HasValue<String> & HasChangeHandlers, VALUE>
-    extends UiWidgetAdapterGwtFieldFocusWidget<WIDGET, VALUE, String> implements
-    UiWidgetAdapterTextAreaBase<WIDGET, VALUE> {
+    extends UiWidgetAdapterGwtFieldFocusWidget<WIDGET, VALUE, String> implements UiWidgetAdapterTextAreaBase<VALUE> {
 
   /**
    * The constructor.
@@ -45,7 +44,7 @@ public abstract class UiWidgetAdapterGwtTextAreaBase<WIDGET extends FocusWidget 
   @Override
   public void setMaximumTextLength(int length) {
 
-    getWidget().getElement().setAttribute("maxlength", Integer.toString(length));
+    getToplevelWidget().getElement().setAttribute("maxlength", Integer.toString(length));
   }
 
 }

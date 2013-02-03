@@ -5,18 +5,20 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.widget.adapter.RadioGroupIdManager;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.FocusEventAdapterGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
+import com.google.gwt.event.dom.client.HasAllFocusHandlers;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.ui.CellPanel;
+import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RadioButton;
 
 /**
@@ -27,8 +29,8 @@ import com.google.gwt.user.client.ui.RadioButton;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value.
  */
-public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetAdapterGwtWidget<CellPanel> implements
-    UiWidgetAdapterOptionsField<CellPanel, VALUE> {
+public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
+    UiWidgetAdapterGwtField<CellPanel, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE> {
 
   /** @see #setOptions(List) */
   private final List<RadioButton> radioButtons;
@@ -38,9 +40,6 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
 
   /** @see #setOptions(List) */
   private List<String> options;
-
-  /** The {@link FocusEventAdapterGwt} */
-  private FocusEventAdapterGwt focusEventAdapter;
 
   /** The {@link ChangeEventAdapterGwt} */
   private ChangeEventAdapterGwt<VALUE> changeEventAdapter;
@@ -57,6 +56,54 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
     this.radioButtons = new ArrayList<RadioButton>();
     this.groupId = RadioGroupIdManager.getInstance().getUniqueId();
     this.accessKey = ACCESS_KEY_NONE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HasChangeHandlers getWidgetAsHasChangeHandlers() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Focusable getWidgetAsFocusable() {
+
+    if (this.radioButtons.size() > 0) {
+      return this.radioButtons.get(0);
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected HasValue<String> getWidgetAsHasValue() {
+
+    return null;
   }
 
   /**
@@ -88,11 +135,11 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
         }
         first = false;
       }
-      getWidget().add(rb);
+      getToplevelWidget().add(rb);
       this.radioButtons.add(rb);
     }
     registerChangeEventAdapter();
-    registerFocusEventAdapter();
+    applyFocusEventAdapter();
   }
 
   /**
@@ -127,22 +174,6 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public void setFocused(boolean focused) {
-
-    if (this.radioButtons.size() > 0) {
-      if (this.focusEventAdapter != null) {
-        this.focusEventAdapter.setProgrammatic();
-      }
-      if (!this.radioButtons.isEmpty()) {
-        this.radioButtons.get(0).setFocus(focused);
-      }
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public void setChangeEventSender(UiFeatureValue<VALUE> source, UiHandlerEventValueChange<VALUE> sender) {
 
     if (this.changeEventAdapter != null) {
@@ -156,13 +187,15 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public void setFocusEventSender(UiFeatureFocus source, UiHandlerEventFocus sender) {
+  protected void applyFocusEventAdapter() {
 
-    if (this.focusEventAdapter != null) {
-      throw new NlsIllegalStateException();
+    FocusEventAdapterGwt focusEventAdapter = getFocusEventAdapter();
+    if (focusEventAdapter != null) {
+      for (RadioButton rb : this.radioButtons) {
+        rb.addFocusHandler(focusEventAdapter);
+        rb.addBlurHandler(focusEventAdapter);
+      }
     }
-    this.focusEventAdapter = new FocusEventAdapterGwt(source, sender);
-    registerFocusEventAdapter();
   }
 
   /**
@@ -175,29 +208,6 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends UiWidgetA
         rb.addClickHandler(this.changeEventAdapter);
       }
     }
-  }
-
-  /**
-   * Registers the {@link FocusEventAdapterGwt} in all {@link RadioButton}s.
-   */
-  private void registerFocusEventAdapter() {
-
-    if (this.focusEventAdapter != null) {
-      for (RadioButton rb : this.radioButtons) {
-        rb.addFocusHandler(this.focusEventAdapter);
-        rb.addBlurHandler(this.focusEventAdapter);
-      }
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isFocused() {
-
-    // dummy, never called
-    return false;
   }
 
   /**

@@ -10,11 +10,10 @@ import java.util.Date;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically {@link Date} but may also be
  *        a custom datatype for date or {@link java.util.Calendar}.
  */
-public interface UiWidgetAdapterDateField<WIDGET, VALUE> extends UiWidgetAdapterTextualInputField<WIDGET, VALUE, Date> {
+public interface UiWidgetAdapterDateField<VALUE> extends UiWidgetAdapterTextualInputField<VALUE, Date> {
 
   // nothing to add
 

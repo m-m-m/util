@@ -19,7 +19,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetAdapterDynamicComposite<?, CHILD>, CHILD extends UiWidget>
+public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetAdapterDynamicComposite<CHILD>, CHILD extends UiWidget>
     extends AbstractUiWidgetComposite<ADAPTER, CHILD> implements UiWidgetDynamicComposite<CHILD> {
 
   /** @see #getChild(int) */

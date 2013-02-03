@@ -8,9 +8,8 @@ package net.sf.mmm.client.ui.base.widget.window.adapter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterWindow<WIDGET> extends UiWidgetAdapterBaseWindow<WIDGET> {
+public interface UiWidgetAdapterWindow extends UiWidgetAdapterBaseWindow {
 
   // nothing to add
 

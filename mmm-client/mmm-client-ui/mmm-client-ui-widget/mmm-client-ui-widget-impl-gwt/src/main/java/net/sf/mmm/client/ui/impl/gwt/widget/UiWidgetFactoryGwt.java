@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
@@ -33,7 +34,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetMainWindowGwt;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.UIObject;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.client.ui.api.UiContext} for GWT widgets.
@@ -41,7 +42,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory<Widget> {
+public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory {
 
   /** @see #getMainWindow() */
   private UiWidgetMainWindow mainWindow;
@@ -104,5 +105,14 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory<Widget> {
     UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(context);
     window.initialize();
     return window;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UIObject getNativeWidget(UiWidgetRegular widget) {
+
+    return (UIObject) super.getNativeWidget(widget);
   }
 }

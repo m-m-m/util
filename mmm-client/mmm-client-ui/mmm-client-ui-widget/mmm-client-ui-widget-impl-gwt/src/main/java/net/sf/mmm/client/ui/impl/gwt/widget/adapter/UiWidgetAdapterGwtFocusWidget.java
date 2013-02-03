@@ -8,12 +8,13 @@ import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Focusable;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive}
- * using GWT based on {@link FocusWidget}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive} using
+ * GWT based on {@link FocusWidget}.
+ * 
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> extends
     UiWidgetAdapterGwtWidgetActive<WIDGET> {
@@ -32,7 +33,7 @@ public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> 
   @Override
   public void setEnabled(boolean enabled) {
 
-    getWidget().setEnabled(enabled);
+    getToplevelWidget().setEnabled(enabled);
   }
 
   /**
@@ -41,7 +42,7 @@ public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> 
   @Override
   protected Focusable getWidgetAsFocusable() {
 
-    return getWidget();
+    return getToplevelWidget();
   }
 
   /**
@@ -50,7 +51,7 @@ public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> 
   @Override
   protected HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
 
-    return getWidget();
+    return getToplevelWidget();
   }
 
   /**
@@ -59,7 +60,7 @@ public abstract class UiWidgetAdapterGwtFocusWidget<WIDGET extends FocusWidget> 
   @Override
   protected HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
 
-    return getWidget();
+    return getToplevelWidget();
   }
 
 }

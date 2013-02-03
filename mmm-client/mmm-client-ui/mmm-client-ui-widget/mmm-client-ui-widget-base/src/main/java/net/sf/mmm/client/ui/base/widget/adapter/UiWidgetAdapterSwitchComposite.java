@@ -10,11 +10,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
  */
-public interface UiWidgetAdapterSwitchComposite<WIDGET, CHILD extends UiWidget> extends
-    UiWidgetAdapterDynamicComposite<WIDGET, CHILD> {
+public interface UiWidgetAdapterSwitchComposite<CHILD extends UiWidget> extends UiWidgetAdapterDynamicComposite<CHILD> {
 
   /**
    * This method shows the {@link #addChild(UiWidget, int) child} with the given <code>index</code>.

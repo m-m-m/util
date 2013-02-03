@@ -9,10 +9,8 @@ import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <NATIVE_WIDGET> is the generic top-level type of the underlying
- *        {@link #getNativeWidget(UiWidgetRegular) widgets}.
  */
-public interface UiWidgetFactory<NATIVE_WIDGET> {
+public interface UiWidgetFactory {
 
   /**
    * This method gets the application {@link UiWidgetMainWindow main window}. In case of a web application
@@ -53,6 +51,6 @@ public interface UiWidgetFactory<NATIVE_WIDGET> {
    *        {@link #create(Class) created} by this factory.
    * @return the native widget.
    */
-  NATIVE_WIDGET getNativeWidget(UiWidgetRegular widget);
+  Object getNativeWidget(UiWidgetRegular widget);
 
 }

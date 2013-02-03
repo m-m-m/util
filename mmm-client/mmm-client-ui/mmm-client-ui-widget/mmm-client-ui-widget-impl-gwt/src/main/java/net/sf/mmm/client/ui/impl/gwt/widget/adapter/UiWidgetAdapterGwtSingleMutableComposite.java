@@ -10,13 +10,14 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * This is the implementation of {@link UiWidgetAdapterSingleMutableComposite} using GWT.
  * 
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * @param <CHILD> is the generic type of the {@link #setChild(UiWidget) child}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
- * @param <CHILD> is the generic type of the {@link #setChild(UiWidget) child}.
  */
 public abstract class UiWidgetAdapterGwtSingleMutableComposite<WIDGET extends Widget, CHILD extends UiWidget> extends
-    UiWidgetAdapterGwtWidget<WIDGET> implements UiWidgetAdapterSingleMutableComposite<WIDGET, CHILD> {
+    UiWidgetAdapterGwtWidget<WIDGET> implements UiWidgetAdapterSingleMutableComposite<CHILD> {
 
   /**
    * The constructor.

@@ -6,8 +6,9 @@ import com.google.gwt.user.client.ui.CellPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField}
- * using GWT based on {@link HorizontalPanel} and {@link com.google.gwt.user.client.ui.RadioButton}s.
+ * This is the implementation of
+ * {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField} using GWT based on
+ * {@link HorizontalPanel} and {@link com.google.gwt.user.client.ui.RadioButton}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -27,7 +28,7 @@ public class UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE> extends UiWidget
    * {@inheritDoc}
    */
   @Override
-  protected CellPanel createWidget() {
+  protected CellPanel createActiveWidget() {
 
     return new HorizontalPanel();
   }

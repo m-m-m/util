@@ -101,7 +101,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapter<?> getWidgetAdapter() {
+  protected UiWidgetAdapter getWidgetAdapter() {
 
     return getWidgetAdapter(this.delegate);
   }

@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterImage;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetImage<ADAPTER extends UiWidgetAdapterImage<?>> extends
+public abstract class AbstractUiWidgetImage<ADAPTER extends UiWidgetAdapterImage> extends
     AbstractUiWidgetRegularAtomic<ADAPTER> implements UiWidgetImage {
 
   /** @see #getAltText() */

@@ -13,10 +13,9 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterButton<WIDGET> extends UiWidgetAdapterActiveWithLabel<WIDGET>,
-    UiWidgetAdapterWithLabel<WIDGET>, AttributeWriteImage<UiWidgetImage> {
+public interface UiWidgetAdapterButton extends UiWidgetAdapterActiveWithLabel, UiWidgetAdapterWithLabel,
+    AttributeWriteImage<UiWidgetImage> {
 
   // nothing to add
 

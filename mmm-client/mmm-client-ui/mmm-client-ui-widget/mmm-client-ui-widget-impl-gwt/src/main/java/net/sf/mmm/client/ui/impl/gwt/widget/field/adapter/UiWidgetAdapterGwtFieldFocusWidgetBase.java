@@ -14,10 +14,10 @@ import com.google.gwt.user.client.ui.Focusable;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
- *        {@link #getWidget() widget}.
+ *        {@link #getToplevelWidget() widget}.
  */
 public abstract class UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET extends FocusWidget & HasChangeHandlers, VALUE, ADAPTER_VALUE>
     extends UiWidgetAdapterGwtField<WIDGET, VALUE, ADAPTER_VALUE> {
@@ -36,7 +36,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET extends Focu
   @Override
   public final void setEnabled(boolean enabled) {
 
-    getWidget().setEnabled(enabled);
+    getActiveWidget().setEnabled(enabled);
   }
 
   /**
@@ -45,7 +45,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET extends Focu
   @Override
   protected final Focusable getWidgetAsFocusable() {
 
-    return getWidget();
+    return getActiveWidget();
   }
 
   /**
@@ -54,7 +54,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET extends Focu
   @Override
   protected final HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
 
-    return getWidget();
+    return getActiveWidget();
   }
 
   /**
@@ -63,7 +63,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET extends Focu
   @Override
   protected final HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
 
-    return getWidget();
+    return getActiveWidget();
   }
 
   /**
@@ -72,7 +72,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET extends Focu
   @Override
   protected final HasChangeHandlers getWidgetAsHasChangeHandlers() {
 
-    return getWidget();
+    return getActiveWidget();
   }
 
 }

@@ -19,8 +19,8 @@ import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
- * This is the interface that adapts to the native {@link #getWidget() widget} of the underlying toolkit
- * implementation for a {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal}.<br/>
+ * This is the interface that adapts to the native {@link #getToplevelWidget() widget} of the underlying
+ * toolkit implementation for a {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal}.<br/>
  * It is a design trade-off as java does not have multi-inheritance (we would need scala traits here). This
  * way it is possible to implement an abstract base-implementation for the types of the
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}-hierarchy and inherit different implementations (Swing,
@@ -31,9 +31,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, AttributeWriteTooltip, AttributeWriteVisible,
+public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteTooltip, AttributeWriteVisible,
     AttributeWriteEnabled, AttributeWriteStyles, AttributeWriteDisposed, AttributeWriteSize, AttributeWriteAttribute {
 
   /**
@@ -41,11 +40,11 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
    * 
    * @return the native widget.
    */
-  WIDGET getWidget();
+  Object getToplevelWidget();
 
   /**
-   * This method removes the {@link #getWidget() widget} from its parent. After this method, the
-   * {@link #getWidget() widget} is detached from the UI.
+   * This method removes the {@link #getToplevelWidget() widget} from its parent. After this method, the
+   * {@link #getToplevelWidget() widget} is detached from the UI.
    */
   void removeFromParent();
 
@@ -70,8 +69,8 @@ public interface UiWidgetAdapter<WIDGET> extends AttributeWriteHtmlId, Attribute
   void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> widget);
 
   /**
-   * This method registers the given {@link UiHandlerEventClick click handler} in the {@link #getWidget()
-   * widget}. This method will be called only once.
+   * This method registers the given {@link UiHandlerEventClick click handler} in the
+   * {@link #getToplevelWidget() widget}. This method will be called only once.
    * 
    * @param eventSource is the {@link UiHandlerEventClick#onClick(UiFeatureClick, boolean) event source}.
    * @param eventSender is the {@link UiHandlerEventClick}.

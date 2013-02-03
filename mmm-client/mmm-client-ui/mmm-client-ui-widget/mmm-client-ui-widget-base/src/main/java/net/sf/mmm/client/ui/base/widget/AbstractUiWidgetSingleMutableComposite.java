@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComp
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetSingleMutableComposite<ADAPTER extends UiWidgetAdapterSingleMutableComposite<?, CHILD>, CHILD extends UiWidget>
+public abstract class AbstractUiWidgetSingleMutableComposite<ADAPTER extends UiWidgetAdapterSingleMutableComposite<CHILD>, CHILD extends UiWidget>
     extends AbstractUiWidgetSingleComposite<ADAPTER, CHILD> implements UiWidgetSingleMutableComposite<CHILD> {
 
   /**

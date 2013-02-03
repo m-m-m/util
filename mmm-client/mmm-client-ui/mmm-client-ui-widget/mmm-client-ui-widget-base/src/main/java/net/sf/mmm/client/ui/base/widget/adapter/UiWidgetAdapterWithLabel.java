@@ -9,9 +9,8 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterWithLabel<WIDGET> extends UiWidgetAdapter<WIDGET>, AttributeWriteLabel {
+public interface UiWidgetAdapterWithLabel extends UiWidgetAdapter, AttributeWriteLabel {
 
   // nothing to add
 

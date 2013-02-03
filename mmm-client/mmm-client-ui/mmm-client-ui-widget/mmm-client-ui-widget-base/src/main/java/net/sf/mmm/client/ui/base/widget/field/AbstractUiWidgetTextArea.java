@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextArea;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetTextArea<ADAPTER extends UiWidgetAdapterTextArea<?, String>> extends
+public abstract class AbstractUiWidgetTextArea<ADAPTER extends UiWidgetAdapterTextArea<String>> extends
     AbstractUiWidgetTextAreaBase<ADAPTER> implements UiWidgetTextArea {
 
   /**

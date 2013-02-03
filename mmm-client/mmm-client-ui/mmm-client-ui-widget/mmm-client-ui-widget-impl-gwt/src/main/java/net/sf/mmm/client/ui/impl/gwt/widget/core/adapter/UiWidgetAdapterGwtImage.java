@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtImage extends UiWidgetAdapterGwtWidget<Image> implements UiWidgetAdapterImage<Image> {
+public class UiWidgetAdapterGwtImage extends UiWidgetAdapterGwtWidget<Image> implements UiWidgetAdapterImage {
 
   /**
    * The constructor.
@@ -28,7 +28,7 @@ public class UiWidgetAdapterGwtImage extends UiWidgetAdapterGwtWidget<Image> imp
    * {@inheritDoc}
    */
   @Override
-  protected Image createWidget() {
+  protected Image createToplevelWidget() {
 
     return new Image();
   }
@@ -48,7 +48,7 @@ public class UiWidgetAdapterGwtImage extends UiWidgetAdapterGwtWidget<Image> imp
   @Override
   public void setAltText(String altText) {
 
-    getWidget().setAltText(altText);
+    getToplevelWidget().setAltText(altText);
   }
 
   /**
@@ -57,7 +57,7 @@ public class UiWidgetAdapterGwtImage extends UiWidgetAdapterGwtWidget<Image> imp
   @Override
   public void setUrl(String url) {
 
-    getWidget().setUrl(url);
+    getToplevelWidget().setUrl(url);
   }
 
 }

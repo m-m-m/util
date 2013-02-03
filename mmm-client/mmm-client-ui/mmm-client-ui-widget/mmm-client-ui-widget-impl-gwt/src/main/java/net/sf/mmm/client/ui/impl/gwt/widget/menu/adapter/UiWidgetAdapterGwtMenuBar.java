@@ -17,8 +17,7 @@ import com.google.gwt.user.client.ui.MenuItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar> implements
-    UiWidgetAdapterMenuBar<MenuBar> {
+public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar> implements UiWidgetAdapterMenuBar {
 
   /**
    * The constructor.
@@ -32,7 +31,7 @@ public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar>
    * {@inheritDoc}
    */
   @Override
-  protected MenuBar createWidget() {
+  protected MenuBar createToplevelWidget() {
 
     MenuBar menuBar = new MenuBar();
     menuBar.setAutoOpen(true);
@@ -56,8 +55,8 @@ public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar>
   @Override
   public void addChild(UiWidgetMenu child, int index) {
 
-    MenuItem menu = getWidget(child, MenuItem.class);
-    getWidget().addItem(menu);
+    MenuItem menu = getToplevelWidget(child, MenuItem.class);
+    getToplevelWidget().addItem(menu);
   }
 
   /**
@@ -66,8 +65,8 @@ public class UiWidgetAdapterGwtMenuBar extends UiWidgetAdapterGwtWidget<MenuBar>
   @Override
   public void removeChild(UiWidgetMenu child, int index) {
 
-    MenuItem menu = getWidget(child, MenuItem.class);
-    getWidget().removeItem(menu);
+    MenuItem menu = getToplevelWidget(child, MenuItem.class);
+    getToplevelWidget().removeItem(menu);
   }
 
 }

@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActive<?>, VALUE> extends
+public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActive, VALUE> extends
     AbstractUiWidgetReal<ADAPTER, VALUE> implements UiWidgetActive {
 
   /** @see #addFocusHandler(UiHandlerEventFocus) */

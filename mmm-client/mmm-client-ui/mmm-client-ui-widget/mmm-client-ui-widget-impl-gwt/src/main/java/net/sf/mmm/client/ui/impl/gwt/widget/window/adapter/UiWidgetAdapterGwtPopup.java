@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.DialogBox;
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtBaseWindowDialogBox<DialogBox> implements
-    UiWidgetAdapterPopup<DialogBox> {
+    UiWidgetAdapterPopup {
 
   /**
    * The constructor.
@@ -27,7 +27,7 @@ public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtBaseWindowDialogB
    * {@inheritDoc}
    */
   @Override
-  protected DialogBox createWidget() {
+  protected DialogBox createToplevelWidget() {
 
     DialogBox dialogBox = new DialogBox(false, true);
     dialogBox.setGlassEnabled(true);

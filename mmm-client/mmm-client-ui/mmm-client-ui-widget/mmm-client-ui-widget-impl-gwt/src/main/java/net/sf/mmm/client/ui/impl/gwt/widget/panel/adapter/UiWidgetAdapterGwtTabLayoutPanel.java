@@ -12,14 +12,15 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtTab;
 import com.google.gwt.user.client.ui.TabPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel}
- * using GWT based on {@link TabPanel}.
+ * This is the implementation of
+ * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
+ * {@link TabPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicComposite<TabPanel, UiWidgetTab>
-    implements UiWidgetAdapterTabPanel<TabPanel> {
+    implements UiWidgetAdapterTabPanel {
 
   /**
    * The constructor.
@@ -33,7 +34,7 @@ public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicC
    * {@inheritDoc}
    */
   @Override
-  protected TabPanel createWidget() {
+  protected TabPanel createToplevelWidget() {
 
     TabPanel tabLayoutPanel = new TabPanel(); // new TabLayoutPanel(1.5, Unit.EM);
     // tabLayoutPanel.setWidth("100%");
@@ -46,7 +47,7 @@ public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicC
   @Override
   public void showChild(int index) {
 
-    getWidget().selectTab(index);
+    getToplevelWidget().selectTab(index);
   }
 
   /**
@@ -58,9 +59,9 @@ public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicC
     UiWidgetTabGwt tabWidget = (UiWidgetTabGwt) child;
     UiWidgetAdapterGwtTab widgetAdapter = AbstractUiWidgetReal.getWidgetAdapter(tabWidget);
     if (index >= 0) {
-      getWidget().insert(widgetAdapter.getContentPanel(), widgetAdapter.getWidget(), index);
+      getToplevelWidget().insert(widgetAdapter.getContentPanel(), widgetAdapter.getToplevelWidget(), index);
     } else {
-      getWidget().add(widgetAdapter.getContentPanel(), widgetAdapter.getWidget());
+      getToplevelWidget().add(widgetAdapter.getContentPanel(), widgetAdapter.getToplevelWidget());
     }
   }
 

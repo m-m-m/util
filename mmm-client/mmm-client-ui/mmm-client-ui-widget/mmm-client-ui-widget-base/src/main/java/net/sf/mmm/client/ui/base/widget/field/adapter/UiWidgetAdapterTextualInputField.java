@@ -10,13 +10,12 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumTextLength;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
- *        {@link #getWidget() widget}.
+ *        {@link #getToplevelWidget() widget}.
  */
-public interface UiWidgetAdapterTextualInputField<WIDGET, VALUE, ADAPTER_VALUE> extends
-    UiWidgetAdapterField<WIDGET, VALUE, ADAPTER_VALUE>, AttributeWriteMaximumTextLength {
+public interface UiWidgetAdapterTextualInputField<VALUE, ADAPTER_VALUE> extends
+    UiWidgetAdapterField<VALUE, ADAPTER_VALUE>, AttributeWriteMaximumTextLength {
 
   // nothing to add
 

@@ -8,7 +8,6 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -25,6 +24,7 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
@@ -45,7 +45,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -86,7 +85,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     Log.debug("Loaded");
     UiContextGwt context = new UiContextGwt();
     context.initialize();
-    UiWidgetFactory<Widget> factory = context.getWidgetFactory();
+    UiWidgetFactoryGwt factory = context.getWidgetFactory();
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();

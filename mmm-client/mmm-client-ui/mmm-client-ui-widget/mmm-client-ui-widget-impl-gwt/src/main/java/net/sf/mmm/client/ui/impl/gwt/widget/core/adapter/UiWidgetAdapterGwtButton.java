@@ -18,8 +18,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtButton extends UiWidgetAdapterGwtFocusWidget<Button> implements
-    UiWidgetAdapterButton<Button> {
+public class UiWidgetAdapterGwtButton extends UiWidgetAdapterGwtFocusWidget<Button> implements UiWidgetAdapterButton {
 
   /** @see #setImage(UiWidgetImage) */
   private Image image;
@@ -36,7 +35,7 @@ public class UiWidgetAdapterGwtButton extends UiWidgetAdapterGwtFocusWidget<Butt
    * {@inheritDoc}
    */
   @Override
-  protected Button createWidget() {
+  protected Button createToplevelWidget() {
 
     return new Button();
   }
@@ -49,9 +48,9 @@ public class UiWidgetAdapterGwtButton extends UiWidgetAdapterGwtFocusWidget<Butt
 
     Image newImage = null;
     if (imageWidget != null) {
-      newImage = getWidget(imageWidget, Image.class);
+      newImage = getToplevelWidget(imageWidget, Image.class);
     }
-    Element element = getWidget().getElement();
+    Element element = getToplevelWidget().getElement();
     if (this.image == null) {
       if (newImage != null) {
         element.insertFirst(newImage.getElement());
@@ -81,7 +80,7 @@ public class UiWidgetAdapterGwtButton extends UiWidgetAdapterGwtFocusWidget<Butt
   @Override
   public void setLabel(String label) {
 
-    getWidget().setText(label);
+    getToplevelWidget().setText(label);
   }
 
 }

@@ -7,8 +7,9 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using
- * GWT based on {@link VerticalPanel}.
+ * This is the implementation of
+ * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
+ * {@link VerticalPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -27,7 +28,7 @@ public class UiWidgetAdapterGwtVerticalPanel extends UiWidgetAdapterGwtPanel<Ver
    * {@inheritDoc}
    */
   @Override
-  protected VerticalPanel createWidget() {
+  protected VerticalPanel createToplevelWidget() {
 
     VerticalPanel verticalPanel = new VerticalPanel();
     verticalPanel.setWidth("100%");

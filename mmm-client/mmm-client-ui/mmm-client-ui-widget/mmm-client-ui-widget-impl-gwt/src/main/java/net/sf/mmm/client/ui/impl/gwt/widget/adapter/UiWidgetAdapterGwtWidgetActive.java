@@ -19,12 +19,13 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * This is the implementation of {@link UiWidgetAdapterActive} using GWT based on {@link Widget}.
  * 
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
 public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> extends UiWidgetAdapterGwtWidget<WIDGET>
-    implements UiWidgetAdapterActive<WIDGET>, AttributeWriteKeyboardFilter {
+    implements UiWidgetAdapterActive, AttributeWriteKeyboardFilter {
 
   /** @see #getKeyboardFilter() */
   private KeyboardFilterAdapter keyboardFilterAdapter;
@@ -41,19 +42,20 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
   }
 
   /**
-   * @return the {@link #getWidget() widget} as {@link Focusable} or <code>null</code> if NOT supported.
+   * @return the {@link #getToplevelWidget() widget} as {@link Focusable} or <code>null</code> if NOT
+   *         supported.
    */
   protected abstract Focusable getWidgetAsFocusable();
 
   /**
-   * @return the {@link #getWidget() widget} as {@link HasKeyPressHandlers} or <code>null</code> if NOT
-   *         supported.
+   * @return the {@link #getToplevelWidget() widget} as {@link HasKeyPressHandlers} or <code>null</code> if
+   *         NOT supported.
    */
   protected abstract HasKeyPressHandlers getWidgetAsKeyPressHandlers();
 
   /**
-   * @return the {@link #getWidget() widget} as {@link HasAllFocusHandlers} or <code>null</code> if NOT
-   *         supported.
+   * @return the {@link #getToplevelWidget() widget} as {@link HasAllFocusHandlers} or <code>null</code> if
+   *         NOT supported.
    */
   protected abstract HasAllFocusHandlers getWidgetAsHasAllFocusHandlers();
 
@@ -81,9 +83,18 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
     if (this.focusEventAdapter != null) {
       throw new NlsIllegalStateException();
     }
+    this.focusEventAdapter = new FocusEventAdapterGwt(source, sender);
+    applyFocusEventAdapter();
+  }
+
+  /**
+   * @see #setFocusEventSender(UiFeatureFocus, UiHandlerEventFocus)
+   * @see #getFocusEventAdapter()
+   */
+  protected void applyFocusEventAdapter() {
+
     HasAllFocusHandlers focusWidget = getWidgetAsHasAllFocusHandlers();
     if (focusWidget != null) {
-      this.focusEventAdapter = new FocusEventAdapterGwt(source, sender);
       focusWidget.addFocusHandler(this.focusEventAdapter);
       focusWidget.addBlurHandler(this.focusEventAdapter);
     }
@@ -133,5 +144,13 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
   public void setAccessKey(char accessKey) {
 
     getWidgetAsFocusable().setAccessKey(accessKey);
+  }
+
+  /**
+   * @return the {@link FocusEventAdapterGwt} or <code>null</code> if NOT (yet) set.
+   */
+  protected FocusEventAdapterGwt getFocusEventAdapter() {
+
+    return this.focusEventAdapter;
   }
 }

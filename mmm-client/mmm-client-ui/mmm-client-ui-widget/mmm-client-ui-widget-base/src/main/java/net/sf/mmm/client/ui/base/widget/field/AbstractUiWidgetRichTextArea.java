@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextAre
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetRichTextArea<ADAPTER extends UiWidgetAdapterRichTextArea<?, String>> extends
+public abstract class AbstractUiWidgetRichTextArea<ADAPTER extends UiWidgetAdapterRichTextArea<String>> extends
     AbstractUiWidgetTextAreaBase<ADAPTER> implements UiWidgetRichTextArea {
 
   /**

@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtGridPanel extends UiWidgetAdapterGwtDynamicComposite<GridPanel, UiWidgetGridRow>
-    implements UiWidgetAdapterGridPanel<GridPanel> {
+    implements UiWidgetAdapterGridPanel {
 
   /**
    * The constructor.
@@ -35,7 +35,7 @@ public class UiWidgetAdapterGwtGridPanel extends UiWidgetAdapterGwtDynamicCompos
    * {@inheritDoc}
    */
   @Override
-  protected GridPanel createWidget() {
+  protected GridPanel createToplevelWidget() {
 
     return new GridPanel();
   }
@@ -46,8 +46,8 @@ public class UiWidgetAdapterGwtGridPanel extends UiWidgetAdapterGwtDynamicCompos
   @Override
   public void addChild(UiWidgetGridRow child, int index) {
 
-    Element childElement = getWidget(child).getElement();
-    Element element = getWidget().getElement();
+    Element childElement = getToplevelWidget(child).getElement();
+    Element element = getToplevelWidget().getElement();
     if (index < 0) {
       DOM.appendChild(element, childElement);
     } else {

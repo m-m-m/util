@@ -20,8 +20,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPanel> implements
-    UiWidgetAdapterTab<HorizontalPanel> {
+public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPanel> implements UiWidgetAdapterTab {
 
   /** @see #setLabel(String) */
   private Label label;
@@ -54,7 +53,7 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
    * {@inheritDoc}
    */
   @Override
-  protected HorizontalPanel createWidget() {
+  protected HorizontalPanel createToplevelWidget() {
 
     HorizontalPanel horizontalPanel = new HorizontalPanel();
     horizontalPanel.setStyleName("gwt-TabLayoutPanelTab");
@@ -92,7 +91,7 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
     // if (this.contentPanel.getWidgetCount() > 0) {
     // this.contentPanel.remove(0);
     // }
-    this.contentPanel.add(getWidget(child));
+    this.contentPanel.add(getToplevelWidget(child));
   }
 
   /**
@@ -105,8 +104,8 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
     // getWidget().remove(this.image);
     // }
     if (image != null) {
-      this.image = AbstractUiWidgetReal.getWidgetAdapter((UiWidgetImageGwt) image).getWidget();
-      getWidget().insert(this.image, 0);
+      this.image = AbstractUiWidgetReal.getWidgetAdapter((UiWidgetImageGwt) image).getToplevelWidget();
+      getToplevelWidget().insert(this.image, 0);
     }
   }
 }

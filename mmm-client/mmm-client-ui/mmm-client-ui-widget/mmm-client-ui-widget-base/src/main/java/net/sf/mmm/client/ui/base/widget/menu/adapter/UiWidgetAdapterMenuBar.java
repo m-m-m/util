@@ -11,9 +11,8 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterMenuBar<WIDGET> extends UiWidgetAdapterDynamicComposite<WIDGET, UiWidgetMenu> {
+public interface UiWidgetAdapterMenuBar extends UiWidgetAdapterDynamicComposite<UiWidgetMenu> {
 
   // nothing to add
 

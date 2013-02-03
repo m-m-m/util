@@ -12,9 +12,8 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterImage<WIDGET> extends UiWidgetAdapter<WIDGET>, AttributeWriteAltText, AttributeWriteUrl {
+public interface UiWidgetAdapterImage extends UiWidgetAdapter, AttributeWriteAltText, AttributeWriteUrl {
 
   // nothing to add
 

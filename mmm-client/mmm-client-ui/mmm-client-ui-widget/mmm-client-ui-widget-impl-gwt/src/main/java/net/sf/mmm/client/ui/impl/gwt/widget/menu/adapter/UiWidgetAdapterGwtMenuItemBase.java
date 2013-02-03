@@ -32,7 +32,7 @@ public abstract class UiWidgetAdapterGwtMenuItemBase extends UiWidgetAdapterGwt<
   @Override
   public void setEnabled(boolean enabled) {
 
-    getWidget().setEnabled(enabled);
+    getToplevelWidget().setEnabled(enabled);
   }
 
   /**
@@ -41,7 +41,7 @@ public abstract class UiWidgetAdapterGwtMenuItemBase extends UiWidgetAdapterGwt<
   @Override
   public void setLabel(String label) {
 
-    getWidget().setText(label);
+    getToplevelWidget().setText(label);
   }
 
   /**
@@ -51,7 +51,7 @@ public abstract class UiWidgetAdapterGwtMenuItemBase extends UiWidgetAdapterGwt<
   public void removeFromParent() {
 
     // not supported by GWT
-    MenuItem item = getWidget();
+    MenuItem item = getToplevelWidget();
     MenuBar menu = item.getParentMenu();
     if (menu != null) {
       menu.removeItem(item);

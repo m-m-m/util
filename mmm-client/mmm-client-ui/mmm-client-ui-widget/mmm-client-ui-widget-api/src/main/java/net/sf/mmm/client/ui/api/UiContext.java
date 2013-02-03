@@ -44,7 +44,7 @@ public interface UiContext {
    * 
    * @return the {@link UiWidgetFactory}.
    */
-  UiWidgetFactory<?> getWidgetFactory();
+  UiWidgetFactory getWidgetFactory();
 
   /**
    * @return the {@link UiWidgetFactoryDatatype}.

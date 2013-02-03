@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<RootPanel> implements
-    UiWidgetAdapterMainWindow<RootPanel> {
+    UiWidgetAdapterMainWindow {
 
   /**
    * The constructor.
@@ -151,14 +151,14 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
   @Override
   public void setMenuBar(UiWidgetMenuBar menuBar) {
 
-    getContentPanel().insert(getWidget(menuBar), 0);
+    getContentPanel().insert(getToplevelWidget(menuBar), 0);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected RootPanel createWidget() {
+  protected RootPanel createToplevelWidget() {
 
     RootPanel rootLayoutPanel = RootPanel.get();
     return rootLayoutPanel;

@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapterBaseWindow<?>> extends
+public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapterBaseWindow> extends
     AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetBaseWindow, AttributeWriteResizable {
 
   /** @see #getTitle() */

@@ -12,11 +12,22 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 
 /**
  * This is the abstract interface for a {@link UiWidgetRegularComposite regular composite widget} that
- * represents a editable field (text field, combobox, text area, radio-buttons, checkbox, etc.). It appears
- * confusing in the first place that this is a composite rather than an atomic widget, but a field widget may
- * also be composed out of multiple native input widgets (e.g. to edit a composite
- * {@link net.sf.mmm.util.lang.api.Datatype} - see
- * {@link net.sf.mmm.client.ui.api.UiContext#createForDatatype(Class)}).
+ * represents a (potentially) editable field (text field, combobox, text area, radio-buttons, checkbox, etc.).
+ * Such a field is associated with a {@link #getFieldLabel() label}. To build a form with multiple fields a
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel} should be used (typically indirectly via a
+ * custom widget). Such form can be used to display the fields with their values in
+ * {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view mode} (read-only) or in
+ * {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT edit mode}. This can be changed dynamically via
+ * {@link #setMode(net.sf.mmm.client.ui.api.common.UiMode)}. To prevent a single field from switching to
+ * {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT edit mode} you can call
+ * {@link #setModeFixed(net.sf.mmm.client.ui.api.common.UiMode)} with
+ * {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW} so it will remain immutable. Besides a field can also
+ * be {@link #isEnabled() disabled} so in {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT edit mode} it
+ * will be grayed out and prevents the user from changing its value. This is suggested for fields that
+ * dynamically change their ( {@link #isEnabled() editable}) status based on a particular condition (e.g. the
+ * current value of another field). A field widget is a composite because it may also be composed out of
+ * multiple native input widgets (e.g. to edit a composite {@link net.sf.mmm.util.lang.api.Datatype} - see
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)}).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

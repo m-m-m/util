@@ -7,15 +7,15 @@ import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using
- * GWT based on {@link FocusWidget} and {@link HasValue}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
+ * using GWT based on {@link FocusWidget} and {@link HasValue}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
- *        {@link #getWidget() widget}.
+ *        {@link #getToplevelWidget() widget}.
  */
 public abstract class UiWidgetAdapterGwtFieldFocusWidget<WIDGET extends FocusWidget & HasValue<ADAPTER_VALUE> & HasChangeHandlers, VALUE, ADAPTER_VALUE>
     extends UiWidgetAdapterGwtFieldFocusWidgetBase<WIDGET, VALUE, ADAPTER_VALUE> {
@@ -34,7 +34,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidget<WIDGET extends FocusWid
   @Override
   protected final HasValue<ADAPTER_VALUE> getWidgetAsHasValue() {
 
-    return getWidget();
+    return getActiveWidget();
   }
 
 }

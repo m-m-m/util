@@ -7,14 +7,14 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow;
 import com.google.gwt.user.client.ui.DialogBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow} using
- * GWT based on {@link DialogBox}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow}
+ * using GWT based on {@link DialogBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtBaseWindowDialogBox<DialogBox> implements
-    UiWidgetAdapterWindow<DialogBox> {
+    UiWidgetAdapterWindow {
 
   /**
    * The constructor.
@@ -28,7 +28,7 @@ public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtBaseWindowDialog
    * {@inheritDoc}
    */
   @Override
-  protected DialogBox createWidget() {
+  protected DialogBox createToplevelWidget() {
 
     return new DialogBox(false, false);
   }

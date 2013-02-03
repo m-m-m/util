@@ -30,7 +30,7 @@ public abstract class AbstractUiModeChanger implements UiModeChanger {
   public void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode) {
 
     if (widget.hasWidgetAdapter()) {
-      UiWidgetAdapter<?> widgetAdapter = widget.getWidgetAdapter();
+      UiWidgetAdapter widgetAdapter = widget.getWidgetAdapter();
       changeMode(widget, newMode, widgetAdapter);
     }
   }
@@ -44,5 +44,5 @@ public abstract class AbstractUiModeChanger implements UiModeChanger {
    * @param newMode is the new {@link UiMode}.
    * @param widgetAdapter is the {@link UiWidgetAdapter} of the <code>widget</code>.
    */
-  protected abstract void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode, UiWidgetAdapter<?> widgetAdapter);
+  protected abstract void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode, UiWidgetAdapter widgetAdapter);
 }

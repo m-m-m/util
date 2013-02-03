@@ -10,9 +10,8 @@ import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  */
-public interface UiWidgetAdapterMainWindow<WIDGET> extends UiWidgetAdapterBaseWindow<WIDGET> {
+public interface UiWidgetAdapterMainWindow extends UiWidgetAdapterBaseWindow {
 
   /**
    * This method sets the {@link UiWidgetMenuBar}. It will be called just once.

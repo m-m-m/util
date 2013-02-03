@@ -51,7 +51,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   private RoleFactory roleFactory;
 
   /** @see #getWidgetFactory() */
-  private UiWidgetFactory<?> widgetFactory;
+  private UiWidgetFactory widgetFactory;
 
   /** @see #getWidgetFactoryDatatype() */
   private UiWidgetFactoryDatatype widgetFactoryDatatype;
@@ -218,7 +218,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetFactory<?> getWidgetFactory() {
+  public UiWidgetFactory getWidgetFactory() {
 
     return this.widgetFactory;
   }
@@ -227,7 +227,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * @param widgetFactory is the widgetFactory to set
    */
   @Inject
-  public void setWidgetFactory(UiWidgetFactory<?> widgetFactory) {
+  public void setWidgetFactory(UiWidgetFactory widgetFactory) {
 
     getInitializationState().requireNotInitilized();
     this.widgetFactory = widgetFactory;

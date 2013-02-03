@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetClickableWithLabel<ADAPTER extends UiWidgetAdapterActiveWithLabel<?>> extends
+public abstract class AbstractUiWidgetClickableWithLabel<ADAPTER extends UiWidgetAdapterActiveWithLabel> extends
     AbstractUiWidgetClickable<ADAPTER> implements AttributeWriteLabel {
 
   /** @see #getLabel() */

@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends DialogBox> extends
     UiWidgetAdapterGwtBaseWindow<WIDGET> {
@@ -57,9 +57,9 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   public void addChild(UiWidgetRegular child, int index) {
 
     if (index >= 0) {
-      this.contentPanel.insert(getWidget(child), index);
+      this.contentPanel.insert(getToplevelWidget(child), index);
     } else {
-      this.contentPanel.add(getWidget(child));
+      this.contentPanel.add(getToplevelWidget(child));
     }
   }
 
@@ -69,7 +69,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public int getWidthInPixel() {
 
-    return getWidget().getOffsetWidth();
+    return getToplevelWidget().getOffsetWidth();
   }
 
   /**
@@ -78,7 +78,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public int getHeightInPixel() {
 
-    return getWidget().getOffsetHeight();
+    return getToplevelWidget().getOffsetHeight();
   }
 
   /**
@@ -87,7 +87,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public void setTitle(String title) {
 
-    getWidget().setText(title);
+    getToplevelWidget().setText(title);
   }
 
   /**
@@ -96,7 +96,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public void setPosition(int x, int y) {
 
-    getWidget().setPopupPosition(x, y);
+    getToplevelWidget().setPopupPosition(x, y);
   }
 
   /**
@@ -124,7 +124,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public void setSizeInPixel(int width, int height) {
 
-    getWidget().setPixelSize(width, height);
+    getToplevelWidget().setPixelSize(width, height);
   }
 
   /**
@@ -151,7 +151,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public int getPositionX() {
 
-    return getWidget().getAbsoluteLeft();
+    return getToplevelWidget().getAbsoluteLeft();
   }
 
   /**
@@ -160,7 +160,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends Dialo
   @Override
   public int getPositionY() {
 
-    return getWidget().getAbsoluteTop();
+    return getToplevelWidget().getAbsoluteTop();
   }
 
 }

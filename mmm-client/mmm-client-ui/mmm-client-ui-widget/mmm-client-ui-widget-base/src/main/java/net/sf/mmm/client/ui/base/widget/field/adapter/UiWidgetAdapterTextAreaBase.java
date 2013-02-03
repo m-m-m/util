@@ -10,11 +10,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  */
-public abstract interface UiWidgetAdapterTextAreaBase<WIDGET, VALUE> extends
-    UiWidgetAdapterTextFieldBase<WIDGET, VALUE>, AttributeWriteHeightInRows {
+public abstract interface UiWidgetAdapterTextAreaBase<VALUE> extends UiWidgetAdapterTextFieldBase<VALUE>,
+    AttributeWriteHeightInRows {
 
   // nothing to add
 

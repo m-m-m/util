@@ -25,14 +25,14 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
-public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter<WIDGET>, AttributeReadAltText,
+public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter, AttributeReadAltText,
     AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage>,
     AttributeReadValidationFailure, AttributeReadAccessKey, AttributeReadFocused {
 
-  /** @see #getWidget() */
-  private final WIDGET widget;
+  /** @see #getToplevelWidget() */
+  private final WIDGET toplevelWidget;
 
   /** @see #getConfiguration() */
   private UiConfiguration configuration;
@@ -43,28 +43,40 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   public AbstractUiWidgetAdapter() {
 
     super();
-    this.widget = createWidget();
+    this.toplevelWidget = createToplevelWidget();
   }
 
   /**
-   * This method creates the {@link #getWidget() underlying widget}.<br/>
+   * This method creates the {@link #getToplevelWidget() underlying widget}.<br/>
    * <b>ATTENTION:</b><br/>
    * This method is called from the constructor but implemented in sub-classes. You should NOT access or even
    * modify member variables as they are NOT set at this point (even final members). However, this design is
    * done by intention instead of passing the widget as constructor argument to give more flexibility by
    * overriding and also for potential lazy initialization of the widget.
    * 
-   * @return a new instance of the {@link #getWidget() underlying widget}.
+   * @return a new instance of the {@link #getToplevelWidget() underlying widget}.
    */
-  protected abstract WIDGET createWidget();
+  protected abstract WIDGET createToplevelWidget();
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public WIDGET getWidget() {
+  public WIDGET getToplevelWidget() {
 
-    return this.widget;
+    return this.toplevelWidget;
+  }
+
+  /**
+   * This method gets the active widget. For simple cases this will be the same as
+   * {@link #getToplevelWidget()}. In more complex scenarios the {@link #getToplevelWidget() toplevel widget}
+   * may only be a container widget and this method returns a child that represents the active part.
+   * 
+   * @return the active widget.
+   */
+  public Object getActiveWidget() {
+
+    return this.toplevelWidget;
   }
 
   /**
@@ -238,6 +250,7 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   @Override
   public boolean isFocused() {
 
+    // dummy, will never be called in adapter (only in widget)...
     return false;
   }
 

@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInpu
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getWidgetAdapter() adapter} value.
  */
-public abstract class AbstractUiWidgetTextualInputField<ADAPTER extends UiWidgetAdapterTextualInputField<?, VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
+public abstract class AbstractUiWidgetTextualInputField<ADAPTER extends UiWidgetAdapterTextualInputField<VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
     extends AbstractUiWidgetField<ADAPTER, VALUE, ADAPTER_VALUE> implements UiWidgetTextualInputField<VALUE> {
 
   /** @see #getMaximumTextLength() */

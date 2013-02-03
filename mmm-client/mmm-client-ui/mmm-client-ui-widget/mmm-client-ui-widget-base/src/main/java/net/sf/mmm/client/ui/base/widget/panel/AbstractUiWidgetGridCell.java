@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComp
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterSingleMutableComposite<?, UiWidgetRegular>>
+public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterSingleMutableComposite<UiWidgetRegular>>
     extends AbstractUiWidgetSingleMutableComposite<ADAPTER, UiWidgetRegular> implements UiWidgetGridCell {
 
   /**

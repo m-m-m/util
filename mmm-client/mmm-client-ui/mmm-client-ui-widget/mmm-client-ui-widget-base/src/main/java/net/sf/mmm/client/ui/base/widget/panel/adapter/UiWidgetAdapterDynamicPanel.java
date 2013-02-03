@@ -9,13 +9,10 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel}.
  * 
- * @param <WIDGET> is the generic type of {@link #getWidget()}.
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetAdapterDynamicPanel<WIDGET> extends
-    UiWidgetAdapterDynamicComposite<WIDGET, UiWidgetRegular> {
+public abstract interface UiWidgetAdapterDynamicPanel extends UiWidgetAdapterDynamicComposite<UiWidgetRegular> {
 
   // nothing to add
 

@@ -5,7 +5,6 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextArea;
 
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterTextArea} using GWT based on {@link TextArea}.
@@ -15,7 +14,7 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
  * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
 public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAreaBase<TextArea, VALUE> implements
-    UiWidgetAdapterTextArea<TextArea, VALUE> {
+    UiWidgetAdapterTextArea<VALUE> {
 
   /**
    * The constructor.
@@ -29,7 +28,7 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAre
    * {@inheritDoc}
    */
   @Override
-  protected TextArea createWidget() {
+  protected TextArea createActiveWidget() {
 
     return new TextArea();
   }
@@ -38,18 +37,9 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAre
    * {@inheritDoc}
    */
   @Override
-  protected ValueBoxBase<?> getWidgetAsValueBoxBase() {
-
-    return getWidget();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public int getHeightInRows() {
 
-    return getWidget().getVisibleLines();
+    return getActiveWidget().getVisibleLines();
   }
 
   /**
@@ -58,7 +48,7 @@ public class UiWidgetAdapterGwtTextArea<VALUE> extends UiWidgetAdapterGwtTextAre
   @Override
   public void setHeightInRows(int rows) {
 
-    getWidget().setVisibleLines(rows);
+    getActiveWidget().setVisibleLines(rows);
   }
 
 }

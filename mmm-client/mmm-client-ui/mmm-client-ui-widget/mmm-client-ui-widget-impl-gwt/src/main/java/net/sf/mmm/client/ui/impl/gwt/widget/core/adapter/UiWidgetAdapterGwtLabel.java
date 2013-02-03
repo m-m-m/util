@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Label;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> implements UiWidgetAdapterLabel<Label> {
+public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> implements UiWidgetAdapterLabel {
 
   /**
    * The constructor.
@@ -28,7 +28,7 @@ public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> imp
    * {@inheritDoc}
    */
   @Override
-  protected Label createWidget() {
+  protected Label createToplevelWidget() {
 
     return new Label();
   }
@@ -39,7 +39,7 @@ public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> imp
   @Override
   public void setLabel(String label) {
 
-    getWidget().setText(label);
+    getToplevelWidget().setText(label);
   }
 
   /**

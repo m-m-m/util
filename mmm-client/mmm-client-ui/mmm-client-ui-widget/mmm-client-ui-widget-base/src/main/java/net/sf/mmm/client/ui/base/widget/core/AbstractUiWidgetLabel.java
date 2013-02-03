@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
  * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
-public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel<?>> extends
+public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel> extends
     AbstractUiWidgetWithLabel<ADAPTER> implements UiWidgetLabel {
 
   /** @see #getLabelledWidget() */
