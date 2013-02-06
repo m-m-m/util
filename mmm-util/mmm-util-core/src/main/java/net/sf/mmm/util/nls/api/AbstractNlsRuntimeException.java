@@ -78,6 +78,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public final UUID getUuid() {
 
     return this.uuid;
@@ -86,6 +87,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public final NlsMessage getNlsMessage() {
 
     return this.nlsMessage;
@@ -94,6 +96,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     AbstractNlsException.printStackTrace(this, locale, resolver, buffer);
@@ -102,6 +105,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public void printStackTrace(Locale locale, Appendable buffer) {
 
     printStackTrace(locale, null, buffer);
@@ -119,6 +123,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLocalizedMessage(Locale locale) {
 
     return getLocalizedMessage(locale, null);
@@ -127,6 +132,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     StringBuffer message = new StringBuffer();
@@ -137,6 +143,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
@@ -145,6 +152,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
@@ -165,6 +173,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addSuppressedException(Throwable suppressed) {
 
     // only available since Java 1.7
@@ -182,6 +191,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public Throwable[] getSuppressedExceptions() {
 
     // only available since Java 1.7
@@ -191,6 +201,16 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
     } else {
       return this.suppressedList.toArray(new Throwable[this.suppressedList.size()]);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTechnical() {
+
+    // override to change...
+    return true;
   }
 
   /**

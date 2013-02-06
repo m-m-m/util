@@ -319,7 +319,7 @@ public interface NlsMessage extends NlsObject {
   /**
    * This method gets the untranslated message (default language should be English) with arguments filled in.
    * 
-   * @see NlsMessage#getLocalizedMessage(Locale, NlsTemplateResolver)
+   * @see #getLocalizedMessage(Locale, NlsTemplateResolver)
    * 
    * @return the i18n message with arguments filled in.
    */

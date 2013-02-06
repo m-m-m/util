@@ -2,8 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.api;
 
-import java.io.Serializable;
 import java.util.Locale;
+
+import net.sf.mmm.util.lang.api.Message;
 
 /**
  * This is the interface for a failure of a {@link ValueValidator#validate(Object) validation}.
@@ -11,7 +12,7 @@ import java.util.Locale;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface ValidationFailure extends Serializable {
+public interface ValidationFailure extends Message {
 
   /**
    * This method gets the (optional) {@link ValueValidator#validate(Object, Object) source} of the validation.

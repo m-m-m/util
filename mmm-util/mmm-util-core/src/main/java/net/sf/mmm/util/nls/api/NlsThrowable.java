@@ -41,6 +41,24 @@ public interface NlsThrowable extends NlsObject {
   String getMessage();
 
   /**
+   * Determines if this is a <em>technical exception</em> or a <em>user failure</em>.
+   * <ul>
+   * <li>A technical exception is an unexpected situation that is to be logged on error level and should be
+   * analyzed by the operators or software developers of the system. Further in such case the end-user can
+   * typically do nothing about the problem (except to retry his operation) and will typically not understand
+   * the problem. Therefore a generic message should be displayed as {@link net.sf.mmm.util.lang.api.Message}
+   * for the end-user in such case.</li>
+   * <li>A user failure is an undesired but NOT abnormal situation. It should be logged on a level less than
+   * error (typically info). The {@link #getMessage() message} will directly be displayed as
+   * {@link net.sf.mmm.util.lang.api.Message} to end-users and has to be easy to understand.</li>
+   * </ul>
+   * 
+   * 
+   * @return <code>true</code> if this is a technical exception, <code>false</code> if this is a user error.
+   */
+  boolean isTechnical();
+
+  /**
    * This method gets the {@link NlsMessage} describing the problem.
    * 
    * @return the {@link NlsMessage}.

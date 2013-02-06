@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.UUID;
+
+import net.sf.mmm.util.lang.base.AbstractMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
@@ -10,16 +13,18 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public abstract class AbstractValidationFailure implements ValidationFailure {
+public abstract class AbstractValidationFailure extends AbstractMessage implements ValidationFailure {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -882452608746200225L;
 
-  /** @see #getCode() */
-  private final String code;
+  /**
+   * The constructor for de-serialization.
+   */
+  protected AbstractValidationFailure() {
 
-  /** @see #getSource() */
-  private final String source;
+    super();
+  }
 
   /**
    * The constructor.
@@ -29,36 +34,36 @@ public abstract class AbstractValidationFailure implements ValidationFailure {
    */
   public AbstractValidationFailure(String code, String source) {
 
-    super();
-    this.code = code;
-    this.source = source;
+    super(code, source);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String getCode() {
+  public String getType() {
 
-    return this.code;
+    return TYPE_VALIDATION_FAILURE;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String getSource() {
+  public String getDetails() {
 
-    return this.source;
+    // no details by default - override to change...
+    return null;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String toString() {
+  public UUID getUuid() {
 
-    return getMessage();
+    // UUID is expensive to create and only required to track down errors in log-files what is pointless in
+    // validation failures
+    return null;
   }
-
 }
