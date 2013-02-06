@@ -5,7 +5,7 @@ package net.sf.mmm.client.base.gwt.dialog;
 import java.util.Map;
 
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
-import net.sf.mmm.client.ui.base.AbstractSimplePopupManager;
+import net.sf.mmm.client.ui.base.AbstractUiPopupHelper;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.Callback;
 
@@ -17,12 +17,12 @@ import com.google.gwt.user.client.Window;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class SimplePopupManagerDummy extends AbstractSimplePopupManager {
+public class UiPopupHelperDummy extends AbstractUiPopupHelper {
 
   /**
    * The constructor.
    */
-  public SimplePopupManagerDummy() {
+  public UiPopupHelperDummy() {
 
     super();
   }
@@ -32,7 +32,7 @@ public class SimplePopupManagerDummy extends AbstractSimplePopupManager {
    * 
    * @param nlsBundle
    */
-  public SimplePopupManagerDummy(NlsBundleUtilCoreRoot nlsBundle) {
+  public UiPopupHelperDummy(NlsBundleUtilCoreRoot nlsBundle) {
 
     super(nlsBundle);
     // TODO Auto-generated constructor stub

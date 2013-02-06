@@ -47,4 +47,24 @@ public interface IconConstants {
    */
   String ICON_MESSAGE_QUESTION = "message-question.png";
 
+  /**
+   * The name of the icon for the next button. The icon is typically showing an arrow to the right.
+   */
+  String ICON_BUTTON_NEXT = "next.png";
+
+  /**
+   * The name of the icon for the previous button. The icon is typically showing an arrow to the left.
+   */
+  String ICON_BUTTON_PREVIOUS = "previous.png";
+
+  /**
+   * The name of the icon for the up button. The icon is typically showing an arrow up.
+   */
+  String ICON_BUTTON_UP = "up.png";
+
+  /**
+   * The name of the icon for the down button. The icon is typically showing an arrow down.
+   */
+  String ICON_BUTTON_DOWN = "down.png";
+
 }

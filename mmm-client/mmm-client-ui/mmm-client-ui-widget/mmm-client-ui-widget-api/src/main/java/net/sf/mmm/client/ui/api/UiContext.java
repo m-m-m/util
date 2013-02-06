@@ -57,6 +57,11 @@ public interface UiContext {
   UiWidgetFactoryAdvanced getWidgetFactoryAdvanced();
 
   /**
+   * @return the instance of {@link UiPopupHelper}.
+   */
+  UiPopupHelper getPopupHelper();
+
+  /**
    * This method gets the {@link UiConfiguration} for this factory. It is intended to be read by
    * {@link net.sf.mmm.client.ui.api.widget.UiWidget} implementations to configure their look and feel.
    * 

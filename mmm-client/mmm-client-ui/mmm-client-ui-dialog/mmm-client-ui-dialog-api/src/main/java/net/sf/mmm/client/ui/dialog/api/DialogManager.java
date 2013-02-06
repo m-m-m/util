@@ -37,7 +37,7 @@ public interface DialogManager {
    * This method gets the current {@link PopupDialog}. If multiple {@link PopupDialog}s are open, it will
    * return the top-level one.<br/>
    * <b>ATTENTION:</b><br/>
-   * Beside a {@link PopupDialog} there can also be {@link net.sf.mmm.client.ui.api.SimplePopupManager simple
+   * Beside a {@link PopupDialog} there can also be {@link net.sf.mmm.client.ui.api.UiPopupHelper simple
    * popups} that are NOT considered by this method.
    * 
    * @return the current {@link PopupDialog} or <code>null</code> if no {@link PopupDialog} is currently open.

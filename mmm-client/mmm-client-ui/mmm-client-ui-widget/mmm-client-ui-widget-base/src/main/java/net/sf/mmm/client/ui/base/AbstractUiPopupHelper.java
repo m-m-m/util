@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.client.ui.api.SimplePopupManager;
+import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.Callback;
@@ -13,12 +13,12 @@ import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is the abstract base implementation of {@link SimplePopupManager}.
+ * This is the abstract base implementation of {@link UiPopupHelper}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSimplePopupManager implements SimplePopupManager {
+public abstract class AbstractUiPopupHelper implements UiPopupHelper {
 
   /** The instance of {@link NlsBundleUtilCoreRoot}. */
   private final NlsBundleUtilCoreRoot nlsBundle;
@@ -26,7 +26,7 @@ public abstract class AbstractSimplePopupManager implements SimplePopupManager {
   /**
    * The constructor.
    */
-  public AbstractSimplePopupManager() {
+  public AbstractUiPopupHelper() {
 
     this(NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class));
   }
@@ -36,7 +36,7 @@ public abstract class AbstractSimplePopupManager implements SimplePopupManager {
    * 
    * @param nlsBundle is the instance of {@link NlsBundleUtilCoreRoot}.
    */
-  public AbstractSimplePopupManager(NlsBundleUtilCoreRoot nlsBundle) {
+  public AbstractUiPopupHelper(NlsBundleUtilCoreRoot nlsBundle) {
 
     super();
     this.nlsBundle = nlsBundle;

@@ -2,7 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
@@ -26,10 +29,41 @@ public interface UiWidgetFactoryAdvanced {
   /**
    * This method creates a new {@link UiWidgetButton}.
    * 
+   * @see #createButton(UiHandlerPlain)
+   * 
    * @param label is the {@link UiWidgetButton#getLabel() label}.
+   * @param clickHandler is the {@link UiHandlerEventClick} invoked if the button is clicked.
    * @return the new widget instance.
    */
-  UiWidgetButton createButton(String label);
+  UiWidgetButton createButton(String label, UiHandlerEventClick clickHandler);
+
+  /**
+   * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. E.g. passing an
+   * instance of {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave} will create a save-button
+   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()} if clicked.
+   * 
+   * @param handler is the {@link UiHandlerPlain} instance.
+   * @return the new widget instance.
+   */
+  UiWidgetButton createButton(UiHandlerPlain handler);
+
+  /**
+   * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. E.g. passing an
+   * instance of {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave} will create a save-button
+   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()} if clicked.
+   * 
+   * @param handler is the {@link UiHandlerPlain} instance.
+   * @param preventConfirmationPopup - some {@link UiHandlerPlain plain handlers} represent operations like
+   *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete()} that should be
+   *        confirmed by the user to prevent accidental invocations. In such case the returned
+   *        {@link UiWidgetButton} will by itself open a confirmation popup allowing to cancel to operation.
+   *        This will make your life easier. However, if you want to customize the popup with contextual
+   *        information (e.g. "Are you sure you want to delete the 23 selected documents?") you can implement
+   *        that inside the given <code>handler</code> and prevent the default popup by providing
+   *        <code>true</code> here. Use <code>false</code> for the default behavior.
+   * @return the new widget instance.
+   */
+  UiWidgetButton createButton(UiHandlerPlain handler, boolean preventConfirmationPopup);
 
   /**
    * This method creates a new {@link UiWidgetLabel}.
@@ -38,6 +72,15 @@ public interface UiWidgetFactoryAdvanced {
    * @return the new widget instance.
    */
   UiWidgetLabel createLabel(String label);
+
+  /**
+   * This method creates a new {@link UiWidgetImage}.
+   * 
+   * @param url is the {@link UiWidgetImage#getUrl() URL}.
+   * @param altText is the {@link UiWidgetImage#getAltText() alternative text}.
+   * @return the new widget instance.
+   */
+  UiWidgetImage createImage(String url, String altText);
 
   /**
    * This method creates a new {@link UiWidgetTextField}.

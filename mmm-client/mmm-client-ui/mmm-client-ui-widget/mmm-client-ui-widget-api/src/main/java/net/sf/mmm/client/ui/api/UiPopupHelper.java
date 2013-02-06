@@ -19,7 +19,7 @@ import net.sf.mmm.util.lang.api.Callback;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface SimplePopupManager {
+public interface UiPopupHelper {
 
   /** The ID for the "OK" button. */
   String BUTTON_ID_OK = "#ok";

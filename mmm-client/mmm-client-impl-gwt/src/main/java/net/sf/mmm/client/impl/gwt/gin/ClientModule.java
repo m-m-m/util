@@ -3,10 +3,10 @@
 package net.sf.mmm.client.impl.gwt.gin;
 
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImpl;
-import net.sf.mmm.client.base.gwt.dialog.SimplePopupManagerDummy;
+import net.sf.mmm.client.base.gwt.dialog.UiPopupHelperDummy;
 import net.sf.mmm.client.impl.gwt.busy.BusyManagerImplGwt;
 import net.sf.mmm.client.impl.gwt.place.ClientPlaceManager;
-import net.sf.mmm.client.ui.api.SimplePopupManager;
+import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.busy.BusyManager;
 import net.sf.mmm.client.ui.dialog.api.DialogManager;
 
@@ -40,7 +40,7 @@ public class ClientModule extends AbstractGinModule {
     install(new DefaultModule(ClientPlaceManager.class));
     bind(BusyManager.class).to(BusyManagerImplGwt.class).asEagerSingleton();
     bind(DialogManager.class).to(DialogManagerImpl.class).asEagerSingleton();
-    bind(SimplePopupManager.class).to(SimplePopupManagerDummy.class).asEagerSingleton();
+    bind(UiPopupHelper.class).to(UiPopupHelperDummy.class).asEagerSingleton();
   }
 
 }

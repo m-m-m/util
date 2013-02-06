@@ -1,12 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.widget.custom;
+package net.sf.mmm.client.ui.base.widget.custom.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is a {@link UiWidgetField

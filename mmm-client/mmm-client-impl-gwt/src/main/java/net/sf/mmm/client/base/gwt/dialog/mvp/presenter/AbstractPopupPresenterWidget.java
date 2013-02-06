@@ -13,7 +13,7 @@ import com.google.gwt.event.shared.EventBus;
  * {@link #openPopup(AbstractPopupPresenterWidget) opened in a popup window}.<br/>
  * <b>NOTE:</b><br/>
  * For simple popups that just show a message with one or multiple buttons, you should use
- * {@link net.sf.mmm.client.ui.api.SimplePopupManager} (see
+ * {@link net.sf.mmm.client.ui.api.UiPopupHelper} (see
  * {@link net.sf.mmm.client.base.gwt.GwtClientContext#getComponents()}). This class is only for real popup
  * dialogs that allow to display and potentially edit complex data.
  * 

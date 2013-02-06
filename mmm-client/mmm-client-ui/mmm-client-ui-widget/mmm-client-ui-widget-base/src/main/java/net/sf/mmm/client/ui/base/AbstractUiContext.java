@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
+import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
@@ -59,6 +60,9 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   /** @see #getWidgetFactoryAdvanced() */
   private UiWidgetFactoryAdvanced widgetFactoryAdvanced;
 
+  /** @see #getPopupHelper() */
+  private UiPopupHelper popupHelper;
+
   /** @see #getContainer() */
   private ComponentContainer container;
 
@@ -98,7 +102,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
     }
     if (this.widgetFactoryAdvanced == null) {
       UiWidgetFactoryAdvancedImpl widgetFactoryAdvancedImpl = new UiWidgetFactoryAdvancedImpl();
-      widgetFactoryAdvancedImpl.setFactory(this.widgetFactory);
+      widgetFactoryAdvancedImpl.setContext(this);
       widgetFactoryAdvancedImpl.initialize();
       this.widgetFactoryAdvanced = widgetFactoryAdvancedImpl;
     }
@@ -268,6 +272,25 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
     getInitializationState().requireNotInitilized();
     this.widgetFactoryAdvanced = widgetFactoryAdvanced;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiPopupHelper getPopupHelper() {
+
+    return this.popupHelper;
+  }
+
+  /**
+   * @param popupHelper is the popupHelper to set
+   */
+  @Inject
+  protected void setPopupHelper(UiPopupHelper popupHelper) {
+
+    getInitializationState().requireNotInitilized();
+    this.popupHelper = popupHelper;
   }
 
   /**
