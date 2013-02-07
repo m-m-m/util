@@ -16,6 +16,9 @@ public class CliArgumentMissingException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = -3181963192632167209L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "MissingArg";
+
   /**
    * The constructor.
    * 
@@ -25,6 +28,15 @@ public class CliArgumentMissingException extends CliException {
   public CliArgumentMissingException(String argument, String mode) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliArgumentMissing(argument, mode));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

@@ -23,6 +23,9 @@ public class AnnotationNotForTargetException extends ReflectionException {
   /** UID for serialization. */
   private static final long serialVersionUID = -2021750351215591596L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "AnnotationNotForTarget";
+
   /**
    * The constructor.
    * 
@@ -33,6 +36,15 @@ public class AnnotationNotForTargetException extends ReflectionException {
   public AnnotationNotForTargetException(Class<? extends Annotation> annotation, ElementType target) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorAnnotationNotForTarget(annotation, target));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

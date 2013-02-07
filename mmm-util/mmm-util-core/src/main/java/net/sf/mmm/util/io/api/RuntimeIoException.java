@@ -20,6 +20,9 @@ public class RuntimeIoException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5931918722203161328L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IO";
+
   /**
    * The constructor.
    */
@@ -144,6 +147,15 @@ public class RuntimeIoException extends NlsRuntimeException {
         assert (false) : "IoMode is null!";
         return bundle.errorIo();
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

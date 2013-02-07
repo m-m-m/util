@@ -19,6 +19,9 @@ public class PojoPathUnsafeException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -7485880426331604481L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathUnsafe";
+
   /**
    * The constructor.
    * 
@@ -29,6 +32,15 @@ public class PojoPathUnsafeException extends PojoPathException {
   public PojoPathUnsafeException(Object initialPojoType, String pojoPath) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathUnsafe(pojoPath, initialPojoType));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

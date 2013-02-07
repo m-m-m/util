@@ -21,6 +21,9 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -7713121978429674081L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PropertyNotFound";
+
   /**
    * The constructor.
    * 
@@ -42,6 +45,15 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
   public PojoPropertyNotFoundException(Class<?> pojoType, String propertyName, PojoPropertyAccessorMode<?> mode) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorPojoPropertyNotAccessible(propertyName, pojoType, mode));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

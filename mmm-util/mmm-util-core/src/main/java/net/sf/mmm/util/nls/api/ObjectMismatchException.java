@@ -15,6 +15,9 @@ public class ObjectMismatchException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -6318098527301303965L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "Mismatch";
+
   /**
    * The constructor.
    * 
@@ -90,6 +93,15 @@ public class ObjectMismatchException extends NlsRuntimeException {
   public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source, Object property) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorObjectMismatch(object, expected, source, property));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

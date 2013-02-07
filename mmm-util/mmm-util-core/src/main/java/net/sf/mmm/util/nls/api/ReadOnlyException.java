@@ -19,6 +19,9 @@ public class ReadOnlyException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -4118721668441129491L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ReadOnly";
+
   /**
    * The constructor.
    * 
@@ -38,6 +41,15 @@ public class ReadOnlyException extends NlsRuntimeException {
   public ReadOnlyException(Throwable nested, Object object) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorReadOnly(object));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

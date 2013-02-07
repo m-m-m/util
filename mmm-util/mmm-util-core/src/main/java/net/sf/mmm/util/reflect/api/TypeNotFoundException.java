@@ -17,6 +17,9 @@ public class TypeNotFoundException extends ReflectionException {
   /** UID for serialization. */
   private static final long serialVersionUID = 8148127703407920465L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "TypeNotFound";
+
   /**
    * The constructor.
    * 
@@ -36,6 +39,15 @@ public class TypeNotFoundException extends ReflectionException {
   public TypeNotFoundException(Throwable nested, String type) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorTypeNotFound(type));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

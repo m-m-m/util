@@ -203,4 +203,13 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
     return map;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return getClass().getSimpleName();
+  }
+
 }

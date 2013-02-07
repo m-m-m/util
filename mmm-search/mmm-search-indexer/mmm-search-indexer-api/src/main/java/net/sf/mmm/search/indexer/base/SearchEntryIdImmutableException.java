@@ -7,8 +7,7 @@ import net.sf.mmm.search.indexer.NlsBundleSearchIndexerApi;
 
 /**
  * This is the exception thrown if the user tried to modify the
- * {@link net.sf.mmm.search.api.SearchEntry#getId() ID} of a
- * {@link net.sf.mmm.search.api.SearchEntry}.
+ * {@link net.sf.mmm.search.api.SearchEntry#getId() ID} of a {@link net.sf.mmm.search.api.SearchEntry}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -17,12 +16,24 @@ public class SearchEntryIdImmutableException extends SearchException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5094191781995187934L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchEntryIdImmutable";
+
   /**
    * The constructor.
    */
   public SearchEntryIdImmutableException() {
 
     super(NlsBundleSearchIndexerApi.ERR_ID_IMMUTABLE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

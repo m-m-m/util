@@ -14,6 +14,9 @@ public class XmlGenericException extends XmlException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5597494957022339458L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "XmlGeneric";
+
   /**
    * The constructor.
    * 
@@ -22,6 +25,15 @@ public class XmlGenericException extends XmlException {
   public XmlGenericException(Throwable nested) {
 
     super(nested, nested.getMessage());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

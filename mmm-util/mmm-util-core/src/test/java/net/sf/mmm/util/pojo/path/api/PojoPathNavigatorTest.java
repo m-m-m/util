@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.Set;
 
 import junit.framework.Assert;
+import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
@@ -343,10 +345,12 @@ public abstract class PojoPathNavigatorTest {
     } catch (PojoPathSegmentIsNullException e) {
     }
     // undefined function...
+    String functionUndefined = "undefined";
     try {
-      navigator.get("foo", "@undefined", PojoPathMode.RETURN_IF_NULL, context);
+      navigator.get("foo", "@" + functionUndefined, PojoPathMode.RETURN_IF_NULL, context);
       fail("exception expected");
-    } catch (PojoPathFunctionUndefinedException e) {
+    } catch (ObjectNotFoundException e) {
+      assertTrue(e.getMessage().contains(functionUndefined));
     }
     // path segment creation impossible...
     try {
@@ -358,7 +362,7 @@ public abstract class PojoPathNavigatorTest {
     try {
       navigator.set(new MyPojo(), "@" + functionName, PojoPathMode.CREATE_IF_NULL, context, Integer.valueOf(0));
       fail("exception expected");
-    } catch (PojoPathFunctionUnsupportedOperationException e) {
+    } catch (NlsUnsupportedOperationException e) {
     }
   }
 

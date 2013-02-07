@@ -16,6 +16,9 @@ public class CliOptionDuplicateException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5934504531477162386L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "DuplOpt";
+
   /**
    * The constructor.
    * 
@@ -24,6 +27,15 @@ public class CliOptionDuplicateException extends CliException {
   public CliOptionDuplicateException(String option) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionDuplicate(option));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

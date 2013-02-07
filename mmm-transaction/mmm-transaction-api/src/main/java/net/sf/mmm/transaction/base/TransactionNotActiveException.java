@@ -6,10 +6,8 @@ import net.sf.mmm.transaction.NlsBundleTransaction;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This exception is thrown if a
- * {@link net.sf.mmm.transaction.api.TransactionAdapter transaction} should be
- * closed but none is
- * {@link net.sf.mmm.transaction.api.TransactionAdapter#isActive() active}.
+ * This exception is thrown if a {@link net.sf.mmm.transaction.api.TransactionAdapter transaction} should be
+ * closed but none is {@link net.sf.mmm.transaction.api.TransactionAdapter#isActive() active}.
  * 
  * @see net.sf.mmm.transaction.api.TransactionAdapter#commit()
  * @see net.sf.mmm.transaction.api.TransactionAdapter#rollback()
@@ -22,12 +20,24 @@ public class TransactionNotActiveException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5210691076548551174L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "TxNotActive";
+
   /**
    * The constructor.
    */
   public TransactionNotActiveException() {
 
     super(NlsBundleTransaction.ERR_TRANSACTION_NOT_ACTIVE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

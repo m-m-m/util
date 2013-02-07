@@ -4,7 +4,10 @@ package net.sf.mmm.util.lang.api;
 
 import java.io.Serializable;
 import java.util.Locale;
-import java.util.UUID;
+
+import net.sf.mmm.util.lang.api.attribute.AttributeReadMessage;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadMessageCode;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
 
 /**
  * This is the interface for a message that gets displayed to an end-user.
@@ -12,7 +15,7 @@ import java.util.UUID;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.1
  */
-public interface Message extends Serializable {
+public interface Message extends Serializable, AttributeReadUuid, AttributeReadMessage, AttributeReadMessageCode {
 
   /**
    * The {@link #getType() type} for a technical error.
@@ -47,20 +50,10 @@ public interface Message extends Serializable {
   String getSource();
 
   /**
-   * This method gets the actual message text. This is a localized text displayed to end-users. It should
-   * explain the reason of the failure in a understandable but short form.<br/>
-   * Some examples are "This field may not be blank." or "This value has to be in the range from 5 to 9.". It
-   * may also contain other context information in order to determine the source of the problem.
-   * 
-   * @return the message.
-   */
-  String getMessage();
-
-  /**
    * This method gets the {@link #getMessage() message} localized for the given {@link Locale}.<br/>
    * <b>ATTENTION:</b><br/>
    * This method is designed for server applications with {@link net.sf.mmm.util.nls.api.NlsMessage NLS}. On
-   * client side (e.g. for GWT clients) only a single locale may be supported at a time and this method will
+   * client side (e.g. for GWT clients) only a single locale may be supported at a time and this method may
    * behave like {@link #getMessage()} ignoring the {@link Locale}.
    * 
    * @param locale is the {@link Locale}.
@@ -75,25 +68,6 @@ public interface Message extends Serializable {
    * @return the details or <code>null</code> if no additional details are available.
    */
   String getDetails();
-
-  /**
-   * This method gets the optional {@link UUID} of this message instance.
-   * 
-   * @see net.sf.mmm.util.nls.api.NlsThrowable#getUuid()
-   * 
-   * @return the {@link UUID} or <code>null</code> if not available.
-   */
-  UUID getUuid();
-
-  /**
-   * This method gets the <em>code</em> of this {@link Message}. The code is a stable identifier that
-   * indicates the type of the failure. It can be used for automated testing in order to make the test-cases
-   * independent from the actual message texts so they are maintainable and will not break e.g. if typos are
-   * fixed in the messages.
-   * 
-   * @return the failure code.
-   */
-  String getCode();
 
   /**
    * This method gets the type of this {@link Message}. This should be one of the following options:

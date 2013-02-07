@@ -16,6 +16,9 @@ public class CliOptionMisplacedException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = -1935672231264852131L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "MisplOpt";
+
   /**
    * The constructor.
    * 
@@ -24,6 +27,15 @@ public class CliOptionMisplacedException extends CliException {
   public CliOptionMisplacedException(String option) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionMisplaced(option));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

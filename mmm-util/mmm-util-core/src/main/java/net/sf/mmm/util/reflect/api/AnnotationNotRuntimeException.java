@@ -22,6 +22,9 @@ public class AnnotationNotRuntimeException extends ReflectionException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5375096243963460300L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "AnnotationNotRuntime";
+
   /**
    * The constructor.
    * 
@@ -30,6 +33,15 @@ public class AnnotationNotRuntimeException extends ReflectionException {
   public AnnotationNotRuntimeException(Class<? extends Annotation> annotation) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorAnnotationNotRuntime(annotation));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

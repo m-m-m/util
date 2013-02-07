@@ -17,6 +17,9 @@ public class ResourceNotWritableException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -7527198711344080897L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ResourceNotWritable";
+
   /**
    * The constructor.
    * 
@@ -36,6 +39,15 @@ public class ResourceNotWritableException extends NlsRuntimeException {
   public ResourceNotWritableException(Throwable nested, String resourceUri) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceNotWritable(resourceUri));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

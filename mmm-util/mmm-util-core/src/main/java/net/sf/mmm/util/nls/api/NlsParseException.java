@@ -18,6 +18,9 @@ public class NlsParseException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5909310169818471597L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "Parse";
+
   /** Key for the {@link NlsMessage#getArgument(String) argument} {@value}. */
   public static final String KEY_FORMAT = "format";
 
@@ -154,6 +157,15 @@ public class NlsParseException extends NlsRuntimeException {
   public NlsParseException(Throwable nested, Object value, Type targetType) {
 
     this(nested, value, targetType, null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

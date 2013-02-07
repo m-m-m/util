@@ -17,6 +17,9 @@ public class WrongValueTypeException extends ValueException {
   /** UID for serialization. */
   private static final long serialVersionUID = 3681394831124284211L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "WrongValueType";
+
   /**
    * The constructor.
    * 
@@ -83,6 +86,15 @@ public class WrongValueTypeException extends ValueException {
     } else {
       return value.getClass();
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

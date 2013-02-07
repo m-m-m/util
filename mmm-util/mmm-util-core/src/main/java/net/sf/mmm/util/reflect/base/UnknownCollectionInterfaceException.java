@@ -19,6 +19,9 @@ public class UnknownCollectionInterfaceException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1094581788015698338L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "UnknwonCollection";
+
   /**
    * The constructor.
    * 
@@ -28,6 +31,15 @@ public class UnknownCollectionInterfaceException extends NlsRuntimeException {
   public UnknownCollectionInterfaceException(Class<?> collectionInterface) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorUnknownCollectionInterface(collectionInterface));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

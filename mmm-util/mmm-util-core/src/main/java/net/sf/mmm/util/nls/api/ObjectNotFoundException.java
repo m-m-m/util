@@ -20,6 +20,9 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1008016155549441562L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "NotFound";
+
   /**
    * The constructor.
    * 
@@ -68,6 +71,15 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   public ObjectNotFoundException(Throwable nested, Object object, Object key) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorObjectNotFound(object, key));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

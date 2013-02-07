@@ -20,8 +20,8 @@ import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.QueryScorer;
 
 /**
- * This is the implementation of the {@link SearchHighlighter} interface using
- * lucene as underlying search-engine.
+ * This is the implementation of the {@link SearchHighlighter} interface using lucene as underlying
+ * search-engine.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -36,11 +36,9 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
   /**
    * The constructor.
    * 
-   * @param searchAnalyzer is the {@link Analyzer} used by the
-   *        {@link LuceneSearchEngine search-engine}.
+   * @param searchAnalyzer is the {@link Analyzer} used by the {@link LuceneSearchEngine search-engine}.
    * @param formatter is the formatter used to highlight terms.
-   * @param searchQuery is the {@link Query} of the search. Matching terms of
-   *        this query shall be highlighted.
+   * @param searchQuery is the {@link Query} of the search. Matching terms of this query shall be highlighted.
    */
   public LuceneSearchHighlighter(Analyzer searchAnalyzer, Formatter formatter, Query searchQuery) {
 
@@ -52,6 +50,7 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getHighlightedText(String text) {
 
     String result = null;
@@ -60,15 +59,13 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
         // result = this.highlighter.getBestFragment(this.analyzer,
         // SearchProperties.PROPERTY_TEXT, text);
 
-        TokenStream tokenStream = this.analyzer.tokenStream(SearchEntry.FIELD_TEXT,
-            new StringReader(text));
-        result = this.highlighter.getBestFragments(tokenStream, text, 3,
-            SearchHit.HIGHLIGHT_CUT_TEXT);
+        TokenStream tokenStream = this.analyzer.tokenStream(SearchEntry.FIELD_TEXT, new StringReader(text));
+        result = this.highlighter.getBestFragments(tokenStream, text, 3, SearchHit.HIGHLIGHT_CUT_TEXT);
       } catch (IOException e) {
         result = text;
       } catch (InvalidTokenOffsetsException e) {
         // TODO
-        throw new SearchException(e, e.getMessage(), new HashMap<String, Object>());
+        throw new SearchException(e, e.getMessage(), new HashMap<String, Object>()) {};
       }
     }
     if (result == null) {

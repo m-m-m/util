@@ -19,6 +19,9 @@ public class DuplicateObjectException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -1754790439556739544L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "DuplicateObject";
+
   /**
    * The constructor.
    * 
@@ -73,6 +76,15 @@ public class DuplicateObjectException extends NlsRuntimeException {
       throw new DuplicateObjectException(value, key, old);
     }
     map.put(key, value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

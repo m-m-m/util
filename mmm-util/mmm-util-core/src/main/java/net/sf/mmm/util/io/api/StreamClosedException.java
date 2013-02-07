@@ -17,12 +17,24 @@ public class StreamClosedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 8196684815578319363L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "StreamClosed";
+
   /**
    * The constructor.
    */
   public StreamClosedException() {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorStreamClosed());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

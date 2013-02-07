@@ -17,6 +17,9 @@ public class ResourceMissingException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -3065138916833672449L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ResMissing";
+
   /**
    * The constructor.
    * 
@@ -36,6 +39,15 @@ public class ResourceMissingException extends NlsRuntimeException {
   public ResourceMissingException(String resourceName, Throwable nested) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceMissing(resourceName));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

@@ -16,12 +16,24 @@ public class CliParameterListEmptyException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5752476229604563280L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "EmptyParamList";
+
   /**
    * The constructor.
    */
   public CliParameterListEmptyException() {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliParameterListEmpty());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

@@ -16,6 +16,9 @@ public class NlsNullPointerException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5746393435577207765L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "NPE";
+
   /**
    * The constructor.
    * 
@@ -95,6 +98,15 @@ public class NlsNullPointerException extends NlsRuntimeException {
     if (object == null) {
       throw new NlsNullPointerException(objectName);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

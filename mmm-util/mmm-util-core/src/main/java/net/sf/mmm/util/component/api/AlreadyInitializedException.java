@@ -19,12 +19,24 @@ public class AlreadyInitializedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -2011255277429741541L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "AlreadyInit";
+
   /**
    * The constructor.
    */
   public AlreadyInitializedException() {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorAlreadyInitialized());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

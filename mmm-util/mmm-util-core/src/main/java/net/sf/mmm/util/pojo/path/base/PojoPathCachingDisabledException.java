@@ -17,6 +17,9 @@ public class PojoPathCachingDisabledException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -3185296481410849119L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathCacheDisabled";
+
   /**
    * The constructor.
    * 
@@ -26,6 +29,15 @@ public class PojoPathCachingDisabledException extends PojoPathException {
   public PojoPathCachingDisabledException(String pojoPath) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathCachingDisabled(pojoPath));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

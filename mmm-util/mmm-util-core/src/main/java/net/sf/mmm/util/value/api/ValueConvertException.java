@@ -18,6 +18,9 @@ public class ValueConvertException extends ValueException {
   /** UID for serialization */
   private static final long serialVersionUID = 9211949231445626445L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ValueConvert";
+
   /**
    * The constructor.
    * 
@@ -68,6 +71,15 @@ public class ValueConvertException extends ValueException {
   public ValueConvertException(Throwable nested, Object value, Type targetType, Object valueSource) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValueConvert(value, targetType, valueSource));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

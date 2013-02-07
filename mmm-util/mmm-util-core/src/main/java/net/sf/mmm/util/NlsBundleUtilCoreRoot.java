@@ -826,11 +826,13 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException
    * 
    * @param operation is the unsupported operation.
+   * @param source is the source object that does not support the operation.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("The operation \"{operation}\" was invoked but is NOT supported!")
+  @NlsBundleMessage("The operation \"{operation}\" was invoked{source,choice,(?==null)''(else)' on \"'{source}'\"'} but is NOT supported!")
   NlsMessage errorUnsupportedOperationWithName(@Named("operation")
-  Object operation);
+  Object operation, @Named("source")
+  Object source);
 
   /**
    * @see net.sf.mmm.util.reflect.base.IllegalWildcardSequenceException
@@ -1335,28 +1337,6 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   Object property, @Named("type")
   Object type, @Named("mode")
   Object mode);
-
-  /**
-   * @see net.sf.mmm.util.pojo.path.api.IllegalPojoPathException
-   * 
-   * @param function is the name of the missing function.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("Undefined function \"{function}\"!")
-  NlsMessage errorPojoFunctionUndefined(@Named("function")
-  String function);
-
-  /**
-   * @see net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationException
-   * 
-   * @param function is the name of the function.
-   * @param operation is the name of the unsupported operation.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The function \"{function}\" does NOT support the operation \"{operation}\"!")
-  NlsMessage errorPojoFunctionUnsupportedOperation(@Named("function")
-  String function, @Named("operation")
-  String operation);
 
   /**
    * @see net.sf.mmm.util.pojo.path.api.PojoPathUnsafeException

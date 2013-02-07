@@ -16,6 +16,9 @@ public class SearchPropertyValueInvalidException extends SearchException {
   /** UID for serialization. */
   private static final long serialVersionUID = -8530282554868568736L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchPropertyValueInvalid";
+
   /**
    * The constructor.
    * 
@@ -37,6 +40,15 @@ public class SearchPropertyValueInvalidException extends SearchException {
   public SearchPropertyValueInvalidException(Throwable nested, String propertyName, String value) {
 
     super(nested, NlsBundleSearchApi.ERR_PROPERTY_VALUE_INVALID, toMap(KEY_VALUE, value, KEY_PROPERTY, propertyName));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

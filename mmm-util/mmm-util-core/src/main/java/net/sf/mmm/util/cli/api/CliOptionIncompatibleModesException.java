@@ -16,6 +16,9 @@ public class CliOptionIncompatibleModesException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1233209808038797353L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IncompModes";
+
   /**
    * The constructor.
    * 
@@ -25,6 +28,15 @@ public class CliOptionIncompatibleModesException extends CliException {
   public CliOptionIncompatibleModesException(String option1, String option2) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionIncompatibleModes(option1, option2));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

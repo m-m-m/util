@@ -18,6 +18,9 @@ public class NlsClassCastException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -4554379519897968840L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ClassCast";
+
   /**
    * The constructor.
    * 
@@ -56,5 +59,14 @@ public class NlsClassCastException extends NlsRuntimeException {
     } else {
       return object.getClass();
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 }

@@ -15,7 +15,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class SearchException extends NlsRuntimeException {
+public abstract class SearchException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2903854338698104923L;

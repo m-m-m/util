@@ -18,6 +18,9 @@ public class PojoPathAccessException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -377916670743969317L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathAccess";
+
   /**
    * The constructor.
    * 
@@ -41,6 +44,15 @@ public class PojoPathAccessException extends PojoPathException {
   public PojoPathAccessException(Throwable nested, String pojoPath, Type currentPojoType) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathAccess(pojoPath, currentPojoType));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

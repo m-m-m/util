@@ -21,6 +21,9 @@ public class AccessFailedException extends ReflectionException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5506046383771496547L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "AccessFailed";
+
   /**
    * The constructor.
    * 
@@ -43,6 +46,15 @@ public class AccessFailedException extends ReflectionException {
   public AccessFailedException(Throwable nested, Type type) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorAccessFailed(type));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

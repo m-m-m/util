@@ -16,6 +16,9 @@ public class IllegalDateFormatException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5008989969842672695L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IllegalDateFormat";
+
   /**
    * The constructor.
    * 
@@ -35,6 +38,15 @@ public class IllegalDateFormatException extends NlsRuntimeException {
   public IllegalDateFormatException(String dateString, Exception nested) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalDate(dateString));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

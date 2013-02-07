@@ -20,6 +20,9 @@ public class PojoPathConversionException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -577255365330996887L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathConversion";
+
   /**
    * The constructor.
    * 
@@ -44,8 +47,16 @@ public class PojoPathConversionException extends PojoPathException {
    */
   public PojoPathConversionException(Throwable nested, String pojoPath, Type pojoType, Object targetType) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class)
-        .errorPojoPathConversion(pojoPath, pojoType, targetType));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathConversion(pojoPath, pojoType, targetType));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

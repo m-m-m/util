@@ -7,9 +7,8 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.indexer.NlsBundleSearchIndexerApi;
 
 /**
- * This is the exception thrown from
- * {@link net.sf.mmm.search.indexer.api.SearchIndexer} if the given entry could
- * NOT be added.
+ * This is the exception thrown from {@link net.sf.mmm.search.indexer.api.SearchIndexer} if the given entry
+ * could NOT be added.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -17,6 +16,9 @@ public class SearchAddFailedException extends SearchException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3642650920957925278L;
+
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchAddFailed";
 
   /**
    * The constructor.
@@ -39,4 +41,12 @@ public class SearchAddFailedException extends SearchException {
     super(nested, NlsBundleSearchIndexerApi.ERR_ADD_FAILED, toMap(KEY_ENTRY, entry));
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
+  }
 }

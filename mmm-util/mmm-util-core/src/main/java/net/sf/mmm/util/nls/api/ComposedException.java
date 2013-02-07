@@ -26,6 +26,9 @@ public class ComposedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 3290876155391059885L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "Composed";
+
   /** The child errors. */
   private Throwable[] errors;
 
@@ -111,4 +114,14 @@ public class ComposedException extends NlsRuntimeException {
       }
     }
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
+  }
+
 }

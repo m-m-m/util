@@ -181,4 +181,13 @@ public abstract class NlsException extends AbstractNlsException {
     return map;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return getClass().getSimpleName();
+  }
+
 }

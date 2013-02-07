@@ -21,6 +21,9 @@ public class InvocationFailedException extends ReflectionException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5065495224197046745L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "InvocationFailed";
+
   /**
    * The constructor.
    * 
@@ -53,7 +56,15 @@ public class InvocationFailedException extends ReflectionException {
    */
   public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible, Object instance) {
 
-    super(nested.getCause(), createBundle(NlsBundleUtilCoreRoot.class)
-        .errorInvocationFailedOn(instance, accessible));
+    super(nested.getCause(), createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailedOn(instance, accessible));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 }

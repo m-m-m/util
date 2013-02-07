@@ -19,6 +19,9 @@ public class InstantiationFailedException extends ReflectionException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5506046383771496547L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "InstatiationFailed";
+
   /**
    * The constructor.
    * 
@@ -38,6 +41,15 @@ public class InstantiationFailedException extends ReflectionException {
   public InstantiationFailedException(Throwable nested, Type type) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorInstantiationFailed(type));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

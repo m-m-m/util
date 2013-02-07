@@ -17,6 +17,9 @@ public class BufferExceedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5375096243963460300L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "BufExceed";
+
   /**
    * The constructor.
    * 
@@ -26,5 +29,14 @@ public class BufferExceedException extends NlsRuntimeException {
   public BufferExceedException(int length, int capacity) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorBufferLengthExceed(length, capacity));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 }

@@ -16,6 +16,9 @@ public class NlsIllegalStateException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 8417511549993455852L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IllStat";
+
   /**
    * The constructor.
    */
@@ -32,6 +35,15 @@ public class NlsIllegalStateException extends NlsRuntimeException {
   public NlsIllegalStateException(Throwable nested) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalState());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

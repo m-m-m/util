@@ -19,6 +19,9 @@ public class ContainerGrowthException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -9175146459502826035L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ContainerGrowth";
+
   /**
    * The constructor.
    * 
@@ -28,6 +31,15 @@ public class ContainerGrowthException extends NlsRuntimeException {
   public ContainerGrowthException(int size, int max) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorIncreaseExceedsMaxGrowth(size, max));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

@@ -16,6 +16,9 @@ public class CliOptionAndArgumentAnnotationException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = -3589470378509687716L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "Opt+Arg";
+
   /**
    * The constructor.
    * 
@@ -24,6 +27,24 @@ public class CliOptionAndArgumentAnnotationException extends CliException {
   public CliOptionAndArgumentAnnotationException(String property) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionAndArgumentAnnotation(property));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTechnical() {
+
+    return true;
   }
 
 }

@@ -17,6 +17,9 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -6589910110649307658L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ResAmbiguos";
+
   /**
    * The constructor.
    * 
@@ -36,6 +39,15 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
   public ResourceAmbiguousException(String resourceName, String... resourceIds) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorResourceAmbiguousWithIds(resourceName, resourceIds));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

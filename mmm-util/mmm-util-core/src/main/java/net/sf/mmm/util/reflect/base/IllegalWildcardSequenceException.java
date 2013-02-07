@@ -19,6 +19,9 @@ public class IllegalWildcardSequenceException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5003374937127659992L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IllegalWildcardSeq";
+
   /**
    * The constructor.
    * 
@@ -27,6 +30,15 @@ public class IllegalWildcardSequenceException extends NlsRuntimeException {
   public IllegalWildcardSequenceException(String sequence) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorTypeIllegalWildcard(sequence));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

@@ -16,6 +16,9 @@ public class SearchEntryIdInvalidException extends SearchException {
   /** UID for serialization. */
   private static final long serialVersionUID = 3613794146407350907L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchEntryInvalid";
+
   /**
    * The constructor.
    * 
@@ -35,6 +38,15 @@ public class SearchEntryIdInvalidException extends SearchException {
   public SearchEntryIdInvalidException(Throwable nested, String entryId) {
 
     super(nested, NlsBundleSearchApi.ERR_ID_INVALID, toMap(KEY_ID, entryId));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

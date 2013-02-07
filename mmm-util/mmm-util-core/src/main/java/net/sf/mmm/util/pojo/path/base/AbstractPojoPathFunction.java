@@ -3,9 +3,9 @@
 package net.sf.mmm.util.pojo.path.base;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
-import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
 
 /**
@@ -33,6 +33,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
    * 
    * This implementation always returns <code>true</code>. Override for indeterministic implementations.
    */
+  @Override
   public boolean isDeterministic() {
 
     return true;
@@ -59,26 +60,29 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
   /**
    * {@inheritDoc}
    */
+  @Override
   public VALUE create(IN actual, String functionName, PojoPathContext context) {
 
-    throw new PojoPathFunctionUnsupportedOperationException("create", getFunctionDescription(functionName));
+    throw new NlsUnsupportedOperationException("create", getFunctionDescription(functionName));
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public VALUE get(IN actual, String functionName, PojoPathContext context) {
 
     // actually get should always be supported!
-    throw new PojoPathFunctionUnsupportedOperationException("get", getFunctionDescription(functionName));
+    throw new NlsUnsupportedOperationException("get", getFunctionDescription(functionName));
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public VALUE set(IN actual, String functionName, VALUE value, PojoPathContext context) {
 
-    throw new PojoPathFunctionUnsupportedOperationException("set", getFunctionDescription(functionName));
+    throw new NlsUnsupportedOperationException("set", getFunctionDescription(functionName));
   }
 
   /**

@@ -17,6 +17,9 @@ public class IllegalCaseException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -5031356555598229511L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IllegalCase";
+
   /**
    * The constructor.
    * 
@@ -38,6 +41,15 @@ public class IllegalCaseException extends NlsRuntimeException {
   public <E extends Enum<E>> IllegalCaseException(Class<E> enumType, E enumValue) {
 
     this(enumType.getSimpleName() + "." + enumValue.name());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

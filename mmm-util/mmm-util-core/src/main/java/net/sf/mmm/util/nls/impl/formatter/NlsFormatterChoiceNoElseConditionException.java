@@ -17,12 +17,24 @@ public class NlsFormatterChoiceNoElseConditionException extends NlsRuntimeExcept
   /** UID for serialization. */
   private static final long serialVersionUID = -6417256932637230995L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ChoiceNoElse";
+
   /**
    * The constructor.
    */
   public NlsFormatterChoiceNoElseConditionException() {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorNlsChoiceNoElse());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

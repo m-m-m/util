@@ -17,6 +17,9 @@ public class CliOptionIllegalNameOrAliasException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = -2084363234149185718L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IllNameOrAlias";
+
   /**
    * The constructor.
    * 
@@ -26,6 +29,24 @@ public class CliOptionIllegalNameOrAliasException extends CliException {
   public CliOptionIllegalNameOrAliasException(String nameOrAlias, CliOption option) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionNameIllegal(option, nameOrAlias));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTechnical() {
+
+    return true;
   }
 
 }

@@ -17,6 +17,9 @@ public class XmlInvalidException extends XmlException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1309150847866589344L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "XmlInvalid";
+
   /**
    * The constructor.
    * 
@@ -39,6 +42,15 @@ public class XmlInvalidException extends XmlException {
   public XmlInvalidException(Throwable nested, Object source) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorXmlInvalid(source));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

@@ -16,6 +16,9 @@ public class SearchEntryIdMissingException extends SearchException {
   /** UID for serialization. */
   private static final long serialVersionUID = 301902932006670136L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchEntryIdMissing";
+
   /**
    * The constructor.
    * 
@@ -35,6 +38,15 @@ public class SearchEntryIdMissingException extends SearchException {
   public SearchEntryIdMissingException(Throwable nested, String entryId) {
 
     super(nested, NlsBundleSearchApi.ERR_ENTRY_ID_MISSING, toMap(KEY_ID, entryId));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

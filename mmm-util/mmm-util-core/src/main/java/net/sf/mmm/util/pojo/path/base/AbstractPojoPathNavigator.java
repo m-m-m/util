@@ -16,6 +16,7 @@ import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
@@ -26,7 +27,6 @@ import net.sf.mmm.util.pojo.path.api.PojoPathCreationException;
 import net.sf.mmm.util.pojo.path.api.PojoPathException;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
-import net.sf.mmm.util.pojo.path.api.PojoPathFunctionUndefinedException;
 import net.sf.mmm.util.pojo.path.api.PojoPathMode;
 import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
 import net.sf.mmm.util.pojo.path.api.PojoPathRecognizer;
@@ -637,12 +637,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    *        {@link PojoPathFunction}.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @return the requested {@link PojoPathFunction}.
-   * @throws PojoPathFunctionUndefinedException if no {@link PojoPathFunction} is defined for the given
+   * @throws ObjectNotFoundException if no {@link PojoPathFunction} is defined for the given
    *         <code>functionName</code>.
    */
   @SuppressWarnings("rawtypes")
-  protected PojoPathFunction getFunction(String functionName, PojoPathContext context)
-      throws PojoPathFunctionUndefinedException {
+  protected PojoPathFunction getFunction(String functionName, PojoPathContext context) throws ObjectNotFoundException {
 
     PojoPathFunction function = null;
     // context overrides functions...
@@ -658,7 +657,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
       }
     }
     if (function == null) {
-      throw new PojoPathFunctionUndefinedException(functionName);
+      throw new ObjectNotFoundException(PojoPathFunction.class, functionName);
     }
     return function;
   }

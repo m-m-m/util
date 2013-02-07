@@ -19,6 +19,9 @@ public class SearchQueryParseException extends SearchException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5347162013955772955L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchQueryParse";
+
   /**
    * The constructor.
    * 
@@ -59,6 +62,15 @@ public class SearchQueryParseException extends SearchException {
   public SearchQueryParseException(Throwable nested, String query) {
 
     super(nested, NlsBundleSearchApi.ERR_QUERY_PARSE_WITH_QUERY, toMap(KEY_QUERY, query));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

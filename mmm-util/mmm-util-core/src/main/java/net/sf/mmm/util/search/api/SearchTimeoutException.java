@@ -20,12 +20,24 @@ public class SearchTimeoutException extends NlsRuntimeException {
   /** UID for serialization.. */
   private static final long serialVersionUID = 4019398692999534503L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchTimeout";
+
   /**
    * The constructor.
    */
   public SearchTimeoutException() {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorSearchTimeout());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

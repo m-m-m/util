@@ -20,6 +20,9 @@ public class PojoPathCreationException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = 2315013832458974625L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathCreate";
+
   /**
    * The constructor.
    * 
@@ -43,6 +46,15 @@ public class PojoPathCreationException extends PojoPathException {
   public PojoPathCreationException(Throwable nested, Object initialPojo, String pojoPath) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathCreation(pojoPath, initialPojo));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

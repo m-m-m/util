@@ -16,6 +16,9 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -356811274649703298L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ResourceNotAvailable";
+
   /**
    * The constructor.
    * 
@@ -35,6 +38,15 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
   public ResourceNotAvailableException(Throwable nested, String resourceUri) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceNotAvailable(resourceUri));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

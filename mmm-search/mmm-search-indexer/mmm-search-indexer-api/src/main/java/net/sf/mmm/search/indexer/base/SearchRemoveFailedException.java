@@ -6,9 +6,8 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.indexer.NlsBundleSearchIndexerApi;
 
 /**
- * This is the exception thrown from
- * {@link net.sf.mmm.search.indexer.api.SearchIndexer} if the given entry has no
- * ID set.
+ * This is the exception thrown from {@link net.sf.mmm.search.indexer.api.SearchIndexer} if the given entry
+ * has no ID set.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -16,6 +15,9 @@ public class SearchRemoveFailedException extends SearchException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -7746309827926123365L;
+
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchRemoveFailed";
 
   /**
    * The constructor.
@@ -25,8 +27,7 @@ public class SearchRemoveFailedException extends SearchException {
    */
   public SearchRemoveFailedException(String property, String value) {
 
-    super(NlsBundleSearchIndexerApi.ERR_REMOVE_FAILED, toMap(KEY_PROPERTY, property, KEY_VALUE,
-        value));
+    super(NlsBundleSearchIndexerApi.ERR_REMOVE_FAILED, toMap(KEY_PROPERTY, property, KEY_VALUE, value));
   }
 
   /**
@@ -38,8 +39,16 @@ public class SearchRemoveFailedException extends SearchException {
    */
   public SearchRemoveFailedException(Throwable nested, String property, String value) {
 
-    super(nested, NlsBundleSearchIndexerApi.ERR_REMOVE_FAILED, toMap(KEY_PROPERTY, property,
-        KEY_VALUE, value));
+    super(nested, NlsBundleSearchIndexerApi.ERR_REMOVE_FAILED, toMap(KEY_PROPERTY, property, KEY_VALUE, value));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

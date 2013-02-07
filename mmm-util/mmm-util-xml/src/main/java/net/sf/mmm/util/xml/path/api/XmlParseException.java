@@ -5,8 +5,7 @@ package net.sf.mmm.util.xml.path.api;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This exception is thrown if any piece of XML could NOT be parsed because it
- * has an illegal syntax.
+ * This exception is thrown if any piece of XML could NOT be parsed because it has an illegal syntax.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -14,6 +13,9 @@ public class XmlParseException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 339859320909087567L;
+
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "XmlParse";
 
   /**
    * The constructor.
@@ -38,6 +40,15 @@ public class XmlParseException extends NlsRuntimeException {
 
     super(nested, internaitionalizedMessage, arguments);
     // TODO Auto-generated constructor stub
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

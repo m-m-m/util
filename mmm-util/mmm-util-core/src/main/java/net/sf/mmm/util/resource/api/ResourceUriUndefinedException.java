@@ -17,6 +17,9 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -1483011818509137119L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ResourceUriUndef";
+
   /**
    * The constructor.
    * 
@@ -36,6 +39,15 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
   public ResourceUriUndefinedException(Throwable nested, String uri) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceUndefinedUri(uri));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

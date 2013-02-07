@@ -19,12 +19,24 @@ public class NotInitializedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -2684272742410884991L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "NotInit";
+
   /**
    * The constructor.
    */
   public NotInitializedException() {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorNotInitialized());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

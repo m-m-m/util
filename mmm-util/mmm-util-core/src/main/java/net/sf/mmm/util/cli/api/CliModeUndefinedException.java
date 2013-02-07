@@ -16,6 +16,9 @@ public class CliModeUndefinedException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 6430569870631737026L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ModeUndef";
+
   /**
    * The constructor.
    * 
@@ -26,6 +29,24 @@ public class CliModeUndefinedException extends CliException {
   public CliModeUndefinedException(String mode, Object annotation) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliModeUndefined(mode, annotation));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTechnical() {
+
+    return true;
   }
 
 }

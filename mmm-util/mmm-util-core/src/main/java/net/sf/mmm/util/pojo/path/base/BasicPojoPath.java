@@ -5,6 +5,7 @@ package net.sf.mmm.util.pojo.path.base;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.pojo.path.api.PojoPath;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
+import net.sf.mmm.util.pojo.path.api.PojoPropertyPath;
 
 /**
  * This class represents a {@link PojoPath}. It contains the internal logic to validate and parse a
@@ -47,7 +48,7 @@ public class BasicPojoPath implements PojoPath {
     String pFunction = null;
     Integer pIndex = null;
     if (pojoPath.length() > 0) {
-      int lastDot = pojoPath.lastIndexOf(PojoPath.SEPARATOR);
+      int lastDot = pojoPath.lastIndexOf(PojoPropertyPath.SEPARATOR);
       if ((lastDot == 0) || (lastDot == (pojoPath.length() - 1))) {
         // starts or ends with dot
         throw new IllegalPojoPathException(pojoPath);
@@ -81,6 +82,7 @@ public class BasicPojoPath implements PojoPath {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getPojoPath() {
 
     return this.pojoPath;
@@ -89,6 +91,7 @@ public class BasicPojoPath implements PojoPath {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getParentPath() {
 
     return this.parentPath;
@@ -97,6 +100,7 @@ public class BasicPojoPath implements PojoPath {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getSegment() {
 
     return this.segment;
@@ -105,6 +109,7 @@ public class BasicPojoPath implements PojoPath {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getFunction() {
 
     return this.function;
@@ -113,6 +118,7 @@ public class BasicPojoPath implements PojoPath {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Integer getIndex() {
 
     return this.index;

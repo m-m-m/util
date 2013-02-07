@@ -24,6 +24,9 @@ public class IllegalPojoPathException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = -221363144035352042L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathIllegal";
+
   /**
    * The constructor.
    * 
@@ -43,6 +46,15 @@ public class IllegalPojoPathException extends PojoPathException {
   public IllegalPojoPathException(Throwable nested, String pojoPath) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathIllegal(pojoPath));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

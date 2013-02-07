@@ -16,6 +16,9 @@ public class CliOptionUndefinedException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 7069859410875864942L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "UndefOpt";
+
   /**
    * The constructor.
    * 
@@ -24,6 +27,15 @@ public class CliOptionUndefinedException extends CliException {
   public CliOptionUndefinedException(String option) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionUndefined(option));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

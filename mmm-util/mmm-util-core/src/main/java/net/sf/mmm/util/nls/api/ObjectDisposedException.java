@@ -17,6 +17,9 @@ public class ObjectDisposedException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 6525822430606725507L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "Disposed";
+
   /**
    * The constructor.
    * 
@@ -26,6 +29,15 @@ public class ObjectDisposedException extends NlsRuntimeException {
   public ObjectDisposedException(Object object) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorObjectDisposed(object));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

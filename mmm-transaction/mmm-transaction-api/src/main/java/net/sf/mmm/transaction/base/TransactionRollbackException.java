@@ -6,10 +6,8 @@ import net.sf.mmm.transaction.NlsBundleTransaction;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
- * This exception is thrown if a
- * {@link net.sf.mmm.transaction.api.TransactionAdapter transaction} could NOT
- * be {@link net.sf.mmm.transaction.api.TransactionAdapter#rollback() rolled
- * back}.
+ * This exception is thrown if a {@link net.sf.mmm.transaction.api.TransactionAdapter transaction} could NOT
+ * be {@link net.sf.mmm.transaction.api.TransactionAdapter#rollback() rolled back}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -17,6 +15,9 @@ public class TransactionRollbackException extends NlsRuntimeException {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 2768552110346253232L;
+
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "TxRollbackFailed";
 
   /**
    * The constructor.
@@ -26,6 +27,15 @@ public class TransactionRollbackException extends NlsRuntimeException {
   public TransactionRollbackException(Throwable nested) {
 
     super(NlsBundleTransaction.ERR_TRANSACTION_ROLLBACK);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

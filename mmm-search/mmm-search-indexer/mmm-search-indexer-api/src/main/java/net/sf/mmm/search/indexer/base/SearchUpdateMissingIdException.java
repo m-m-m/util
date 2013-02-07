@@ -19,12 +19,24 @@ public class SearchUpdateMissingIdException extends SearchException {
   /** UID for serialization. */
   private static final long serialVersionUID = 1458156115842499131L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "SearchUpdateMissingId";
+
   /**
    * The constructor.
    */
   public SearchUpdateMissingIdException() {
 
     super(NlsBundleSearchIndexerApi.ERR_UPDATE_MISSING_ID, Collections.<String, Object> emptyMap());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

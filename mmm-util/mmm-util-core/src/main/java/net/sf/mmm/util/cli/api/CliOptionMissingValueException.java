@@ -16,6 +16,9 @@ public class CliOptionMissingValueException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 5158277628043461982L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "MissOptValue";
+
   /**
    * The constructor.
    * 
@@ -24,6 +27,15 @@ public class CliOptionMissingValueException extends CliException {
   public CliOptionMissingValueException(String option) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionMissingValue(option));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

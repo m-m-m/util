@@ -16,6 +16,9 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -1537683835966488723L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "IllArg";
+
   /**
    * The constructor.
    * 
@@ -60,6 +63,15 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   public NlsIllegalArgumentException(Object value, String name, Throwable nested) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalArgumentWithName(value, name));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

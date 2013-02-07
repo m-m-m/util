@@ -3,7 +3,10 @@
 package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
-import java.util.UUID;
+
+import net.sf.mmm.util.lang.api.attribute.AttributeReadMessage;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadMessageCode;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
 
 /**
  * This is the interface for exceptions and runtime exceptions with real <em>native language support</em>
@@ -28,17 +31,12 @@ import java.util.UUID;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface NlsThrowable extends NlsObject {
+public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeReadMessage, AttributeReadMessageCode {
 
   /**
    * @return the {@link Throwable#getCause() cause}.
    */
   Throwable getCause();
-
-  /**
-   * @return the {@link Throwable#getMessage() message}.
-   */
-  String getMessage();
 
   /**
    * Determines if this is a <em>technical exception</em> or a <em>user failure</em>.
@@ -123,19 +121,6 @@ public interface NlsThrowable extends NlsObject {
    * @return the {@link Throwable#getStackTrace() stack-trace}.
    */
   StackTraceElement[] getStackTrace();
-
-  /**
-   * This method gets the {@link UUID} of this exception. The UUID is created when the exception is
-   * constructed or copied from the given {@link #getCause() cause} if it is also a {@link NlsThrowable}.<br>
-   * The {@link UUID} will appear in the {@link #printStackTrace(Locale, NlsTemplateResolver, Appendable)
-   * printed stacktrace} but NOT in the {@link #getMessage() message} and should therefore be written to
-   * log-files if the {@link NlsThrowable} is logged. If you supply the {@link UUID} to the end-user in case
-   * of an unexpected error, he can easily find the stacktrace in the log-files.
-   * 
-   * @return the {@link UUID} of this exception. It may be <code>null</code> if this feature is turned of (it
-   *         is turned on by default).
-   */
-  UUID getUuid();
 
   /**
    * This method appends the specified exception (<code>suppressed</code>) to this exception. This is used for

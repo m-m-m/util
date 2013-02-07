@@ -16,6 +16,9 @@ public class CliOptionMissingException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = -4100754383566756427L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "MissingOpt";
+
   /**
    * The constructor.
    * 
@@ -25,6 +28,15 @@ public class CliOptionMissingException extends CliException {
   public CliOptionMissingException(String option, String mode) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliOptionMissing(option, mode));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

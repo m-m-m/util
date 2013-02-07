@@ -15,6 +15,9 @@ public class ValueNotSetException extends ValueException {
   /** uid for serialization */
   private static final long serialVersionUID = -8722582228766326020L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "ValueNotSet";
+
   /**
    * The constructor.
    * 
@@ -25,6 +28,15 @@ public class ValueNotSetException extends ValueException {
   public ValueNotSetException(Object valueSource) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorValueNotSet(valueSource));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

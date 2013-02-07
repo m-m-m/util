@@ -16,6 +16,9 @@ public class NodeCycleException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = 8888925901313417066L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "NodeCycle";
+
   /**
    * Key for the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) argument} {@value}.
    */
@@ -40,6 +43,15 @@ public class NodeCycleException extends NlsRuntimeException {
   public NodeCycleException(NodeCycle<?> cycle, Object type) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorNodeCycle(cycle, type));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

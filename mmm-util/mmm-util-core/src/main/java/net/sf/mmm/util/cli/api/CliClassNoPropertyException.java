@@ -16,6 +16,9 @@ public class CliClassNoPropertyException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = 6430569870631737026L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "CliClsNoProp";
+
   /**
    * The constructor.
    * 
@@ -24,6 +27,24 @@ public class CliClassNoPropertyException extends CliException {
   public CliClassNoPropertyException(Class<?> cliStateClass) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliClassNoProperty(cliStateClass));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTechnical() {
+
+    return true;
   }
 
 }

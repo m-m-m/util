@@ -17,6 +17,9 @@ public class CliArgumentReferenceMissingException extends CliException {
   /** UID for serialization. */
   private static final long serialVersionUID = -4351735003857434632L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "MissingArgRef";
+
   /**
    * The constructor.
    * 
@@ -27,6 +30,15 @@ public class CliArgumentReferenceMissingException extends CliException {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorCliArgumentReferenceMissing(
         argumentContainer.getArgument().addCloseTo(), argumentContainer));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

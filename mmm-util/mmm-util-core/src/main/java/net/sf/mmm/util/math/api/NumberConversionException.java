@@ -16,6 +16,9 @@ public class NumberConversionException extends NlsRuntimeException {
   /** UID for serialization. */
   private static final long serialVersionUID = -7112183497163125178L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "NumberConv";
+
   /**
    * The constructor.
    * 
@@ -39,6 +42,15 @@ public class NumberConversionException extends NlsRuntimeException {
   public NumberConversionException(Throwable nested, Object value, Object targetType) {
 
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorNumberConversion(value, targetType));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }

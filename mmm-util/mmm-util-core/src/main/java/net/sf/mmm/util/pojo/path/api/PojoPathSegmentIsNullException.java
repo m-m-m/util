@@ -17,6 +17,9 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
   /** UID for serialization. */
   private static final long serialVersionUID = 7635900006037144705L;
 
+  /** @see #getCode() */
+  public static final String MESSAGE_CODE = "PojoPathSegmentNull";
+
   /**
    * The constructor.
    * 
@@ -27,6 +30,15 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
   public PojoPathSegmentIsNullException(Object initialPojo, String pojoPath) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathSegmentIsNull(pojoPath, initialPojo));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getCode() {
+
+    return MESSAGE_CODE;
   }
 
 }
