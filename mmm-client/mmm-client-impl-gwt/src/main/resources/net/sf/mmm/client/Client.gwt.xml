@@ -4,7 +4,12 @@
   <inherits name="com.google.gwt.inject.Inject"/>
   <inherits name='com.gwtplatform.mvp.Mvp' />
 
+  <script src="js/mmm-client-ui.js"/>
+
+  <source path=""/>
+  <!--
   <source path="api"/>
   <source path="base"/>
   <source path="impl"/>
+   -->
 </module>

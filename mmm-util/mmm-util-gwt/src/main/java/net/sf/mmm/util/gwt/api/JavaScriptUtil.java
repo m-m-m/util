@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.gwt.api;
 
+import com.google.gwt.dom.client.Element;
+
 /**
  * This class holds a collection of utility functions for GWT (Google Web Toolkit) using JSNI (JavaScript
  * Native Interface).
@@ -114,6 +116,17 @@ public class JavaScriptUtil {
       return $doc.documentElement.offsetHeight + 110;
     }
     return 0;
+  }-*/;
+
+  /**
+   * This method sets the custom validation message of the given input {@link Element}.
+   * The Browser needs to support HTML5 for this feature.
+   *
+   * @param inputElement is the input {@link Element} that has been validated.
+   * @param message - the empty string to mark as valid, the validation failure message otherwise.
+   */
+  public native void setCustomValidity(Element inputElement, String message) /*-{
+    inputElement.setCustomValidity(message);
   }-*/;
 
   //formatter:on

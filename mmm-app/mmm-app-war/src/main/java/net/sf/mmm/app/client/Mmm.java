@@ -105,6 +105,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetGridPanel gridPanel = factory.create(UiWidgetGridPanel.class);
     final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
     textField1.setFieldLabel("Label1");
+    textField1.setValidationFailure("Totally nonse. Please provide corrent data.");
     final UiWidgetTextField textField2 = factory.create(UiWidgetTextField.class);
     textField2.setFieldLabel("Label2");
     gridPanel.addChildren(textField1, textField2);

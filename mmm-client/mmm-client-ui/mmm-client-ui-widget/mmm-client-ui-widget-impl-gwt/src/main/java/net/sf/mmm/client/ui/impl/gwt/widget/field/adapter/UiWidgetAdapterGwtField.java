@@ -2,20 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
-import net.sf.mmm.client.ui.api.common.IconConstants;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
-import net.sf.mmm.util.lang.api.HorizontalAlignment;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -31,9 +29,6 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAPTER_VALUE> extends
     UiWidgetAdapterGwtWidgetActive<FlowPanel> implements UiWidgetAdapterField<VALUE, ADAPTER_VALUE> {
-
-  /** @see #setValidationFailure(String) */
-  private Widget validationFailureWidget;
 
   /** @see #getWidgetViewMode() */
   private Label widgetViewMode;
@@ -71,9 +66,6 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     if (editMode) {
       getActiveWidget();
     } else {
-      if (this.validationFailureWidget != null) {
-        this.validationFailureWidget.setVisible(false);
-      }
       getWidgetViewMode();
     }
     if (this.activeWidget != null) {
@@ -153,23 +145,8 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     if (this.activeWidget == null) {
       this.activeWidget = createActiveWidget();
-      this.validationFailureWidget = new Image(IconConstants.ICON_MESSAGE_ERROR);
-
-      switch (getConfiguration().getValidationFailureAlignment()) {
-        case LEFT:
-          getToplevelWidget().add(this.validationFailureWidget);
-          getToplevelWidget().add(this.activeWidget);
-          break;
-        case RIGHT:
-          getToplevelWidget().add(this.activeWidget);
-          getToplevelWidget().add(this.validationFailureWidget);
-          break;
-        case CENTER:
-          // TODO: center should add the failure text on top as label instead of failure icon...
-        default :
-          throw new IllegalCaseException(HorizontalAlignment.class, getConfiguration().getValidationFailureAlignment());
-      }
-
+      getInputElement().setAttribute("oninput", "mmmClearValidation(this)");
+      getToplevelWidget().add(this.activeWidget);
     }
     return this.activeWidget;
   }
@@ -181,21 +158,19 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   protected abstract WIDGET createActiveWidget();
 
   /**
+   * @return the input {@link Element} representing the actual editable field.
+   */
+  protected Element getInputElement() {
+
+    return getActiveWidget().getElement();
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
   public void setValidationFailure(String validationFailure) {
 
-    if (this.validationFailureWidget == null) {
-      getActiveWidget();
-    }
-    if ((validationFailure == null) || (validationFailure.isEmpty())) {
-      this.validationFailureWidget.setTitle("");
-      this.validationFailureWidget.setVisible(false);
-    } else {
-      this.validationFailureWidget.setTitle(validationFailure);
-      this.validationFailureWidget.setVisible(true);
-    }
+    JavaScriptUtil.getInstance().setCustomValidity(getInputElement(), validationFailure);
   }
-
 }

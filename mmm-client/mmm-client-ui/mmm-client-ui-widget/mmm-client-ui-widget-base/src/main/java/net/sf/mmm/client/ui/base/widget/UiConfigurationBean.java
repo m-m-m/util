@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
-import net.sf.mmm.util.lang.api.HorizontalAlignment;
 
 /**
  * This is an implementation of {@link net.sf.mmm.client.ui.api.widget.UiConfiguration} as Java bean.
@@ -27,15 +26,6 @@ public class UiConfigurationBean extends AbstractUiConfiguration {
   public void setTheme(String theme) {
 
     super.setTheme(theme);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setValidationFailureAlignment(HorizontalAlignment validationFailureAlignment) {
-
-    super.setValidationFailureAlignment(validationFailureAlignment);
   }
 
 }

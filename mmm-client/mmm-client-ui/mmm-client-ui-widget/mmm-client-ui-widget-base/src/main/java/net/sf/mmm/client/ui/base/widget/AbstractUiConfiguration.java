@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
-import net.sf.mmm.util.lang.api.HorizontalAlignment;
 
 /**
  * This is the abstract base implementation of {@link UiConfiguration}.
@@ -16,9 +15,6 @@ public abstract class AbstractUiConfiguration implements UiConfiguration {
   /** @see #getTheme() */
   private String theme;
 
-  /** @see #getValidationFailureAlignment() */
-  private HorizontalAlignment validationFailureAlignment;
-
   /**
    * The constructor.
    */
@@ -26,7 +22,6 @@ public abstract class AbstractUiConfiguration implements UiConfiguration {
 
     super();
     this.theme = DEFAULT_THEME;
-    this.validationFailureAlignment = HorizontalAlignment.LEFT;
   }
 
   /**
@@ -44,24 +39,6 @@ public abstract class AbstractUiConfiguration implements UiConfiguration {
   protected void setTheme(String theme) {
 
     this.theme = theme;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public HorizontalAlignment getValidationFailureAlignment() {
-
-    return this.validationFailureAlignment;
-  }
-
-  /**
-   * @param validationFailureAlignment is the new {@link #getValidationFailureAlignment() validation failure
-   *        alignment}.
-   */
-  protected void setValidationFailureAlignment(HorizontalAlignment validationFailureAlignment) {
-
-    this.validationFailureAlignment = validationFailureAlignment;
   }
 
 }

@@ -19,7 +19,8 @@ public abstract interface AttributeWriteValidationFailure extends AttributeReadV
    * infrastructure and perform validation outside this framework). It is not recommended to use this method
    * as an API user.
    * 
-   * @param validationFailure is the validation failure text or <code>null</code> to clear the error.
+   * @param validationFailure is the validation failure text. The empty string or <code>null</code> will clear
+   *        the error and mark the field as valid. Otherwise the field will be invalid.
    */
   void setValidationFailure(String validationFailure);
 

@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
-import net.sf.mmm.util.lang.api.HorizontalAlignment;
 
 /**
  * This is the interface for the configuration of the UI (user interface).
@@ -23,14 +22,6 @@ public interface UiConfiguration {
    * @return the URL path for the current theme.
    */
   String getTheme();
-
-  /**
-   * This method sets the {@link HorizontalAlignment} for validation failure icons.
-   * 
-   * @return the {@link HorizontalAlignment} for validation failure icons. Should be either
-   *         {@link HorizontalAlignment#LEFT left} or {@link HorizontalAlignment#RIGHT right}.
-   */
-  HorizontalAlignment getValidationFailureAlignment();
 
   // focus on set edit mode: first editable field, off, ...
   // focus on validation failure: first invalid field, off, ...

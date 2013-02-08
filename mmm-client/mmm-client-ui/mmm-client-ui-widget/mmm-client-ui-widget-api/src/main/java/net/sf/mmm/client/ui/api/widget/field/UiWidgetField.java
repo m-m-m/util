@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.field;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValidation;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -34,7 +35,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
-    UiWidgetActive, UiFeatureValue<VALUE>, UiFeatureValidation<VALUE> {
+    UiWidgetActive, UiFeatureValue<VALUE>, UiFeatureValidation<VALUE>, AttributeWriteValidationFailure {
 
   /**
    * This method is logically equivalent to
