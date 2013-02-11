@@ -63,6 +63,18 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    if (this.optionTitleList != null) {
+      adapter.setOptions(this.optionTitleList);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setOptions(List<VALUE> options) {
 
     NlsNullPointerException.checkNotNull(List.class, options);

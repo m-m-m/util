@@ -6,23 +6,17 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBox;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtListBoxCombo;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComboBox;
 
 /**
  * This is a simple implementation of {@link UiWidgetComboBox} using GWT based on
- * {@link UiWidgetAdapterGwtListBoxCombo}.
+ * {@link UiWidgetAdapterGwtComboBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-// TODO: use alternate widget adapter using HTML5 (ideally use browser switch to choose)
-// <input list=languages>
-// <datalist id=languages>
-// <option value="English"></option>
-// <option value="Dutch"></option>
-// </datalist>
-public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidgetAdapterGwtListBoxCombo<VALUE>, VALUE> {
+public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidgetAdapterGwtComboBox<VALUE>, VALUE> {
 
   /**
    * The constructor.
@@ -38,9 +32,9 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtListBoxCombo<VALUE> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtComboBox<VALUE> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtListBoxCombo<VALUE>();
+    return new UiWidgetAdapterGwtComboBox<VALUE>();
   }
 
   /**

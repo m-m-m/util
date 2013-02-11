@@ -62,7 +62,6 @@ public class UiWidgetAdapterGwtGridPanel extends UiWidgetAdapterGwtDynamicCompos
 
     /**
      * The constructor.
-     * 
      */
     public GridPanel() {
 

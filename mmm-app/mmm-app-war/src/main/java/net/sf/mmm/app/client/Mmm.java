@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import net.sf.mmm.app.shared.GreetingService;
@@ -12,6 +13,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -106,9 +108,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
     textField1.setFieldLabel("Label1");
     textField1.setValidationFailure("Totally nonse. Please provide corrent data.");
-    final UiWidgetTextField textField2 = factory.create(UiWidgetTextField.class);
-    textField2.setFieldLabel("Label2");
-    gridPanel.addChildren(textField1, textField2);
+    final UiWidgetComboBox<Boolean> comboBox = factory.create(UiWidgetComboBox.class);
+    comboBox.setFieldLabel("Label2");
+    comboBox.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
+    gridPanel.addChildren(textField1, comboBox);
     verticalPanel1.addChild(gridPanel);
     verticalPanel1.setMode(UiMode.EDIT);
 

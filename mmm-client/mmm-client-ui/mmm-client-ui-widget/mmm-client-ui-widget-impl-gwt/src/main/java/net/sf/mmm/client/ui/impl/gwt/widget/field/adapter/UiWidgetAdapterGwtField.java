@@ -146,9 +146,18 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     if (this.activeWidget == null) {
       this.activeWidget = createActiveWidget();
       getInputElement().setAttribute("oninput", "mmmClearValidation(this)");
-      getToplevelWidget().add(this.activeWidget);
+      attachActiveWidget();
     }
     return this.activeWidget;
+  }
+
+  /**
+   * Attaches the {@link #getActiveWidget() active widget} after {@link #createActiveWidget() creation} to
+   * {@link #getToplevelWidget()}. May be overridden for composed active widgets.
+   */
+  protected void attachActiveWidget() {
+
+    getToplevelWidget().add(this.activeWidget);
   }
 
   /**

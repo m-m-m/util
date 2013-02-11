@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.impl.gwt.busy;
 
-import net.sf.mmm.client.base.busy.AbstractBusyManager;
+import net.sf.mmm.client.ui.base.busy.AbstractBusyManager;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.api.busy.BusyManager} for the Google Web Toolkit
