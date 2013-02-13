@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-cd `dirname "$0"`
-pwd
-cd mmm-setup/src/scripts/linux/
-pwd
-./setup-all.sh
