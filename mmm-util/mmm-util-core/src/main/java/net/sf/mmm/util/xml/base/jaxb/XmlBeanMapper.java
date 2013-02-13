@@ -143,7 +143,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * @return the xIncludeAware
+   * @return <code>true</code> if {@link #loadXml(DataResource)} should support XIncludes when reading the
+   *         XML, <code>false</code> otherwise.
    */
   public boolean isXIncludeAware() {
 
@@ -151,11 +152,11 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * @param xIncludeAware is the xIncludeAware to set
+   * @param isXIncludeAware is the new value of {@link #isXIncludeAware()}.
    */
-  public void setXIncludeAware(boolean xIncludeAware) {
+  public void setXIncludeAware(boolean isXIncludeAware) {
 
-    this.xIncludeAware = xIncludeAware;
+    this.xIncludeAware = isXIncludeAware;
   }
 
   /**
@@ -294,6 +295,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
       InputStream inputStream = resource.openStream();
       try {
         return loadXml(inputStream, resource);
+      } catch (RuntimeException e) {
+        throw new XmlInvalidException(e, resource.getUri());
       } finally {
         try {
           inputStream.close();
@@ -363,6 +366,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean handleEvent(ValidationEvent event) {
 
     Throwable exception = event.getLinkedException();
