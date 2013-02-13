@@ -107,7 +107,11 @@ public class DialogPlace {
       throw new NlsIllegalArgumentException(dialogId, "dialogId");
     }
     this.dialogId = dialogId;
-    this.parameters = Collections.unmodifiableMap(parameters);
+    if (parameters == null) {
+      this.parameters = null;
+    } else {
+      this.parameters = Collections.unmodifiableMap(parameters);
+    }
   }
 
   /**
