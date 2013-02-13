@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.base.gwt.dialog;
 
-import net.sf.mmm.client.ui.dialog.api.ApplicationWindow;
-import net.sf.mmm.client.ui.dialog.api.DialogPlace;
-import net.sf.mmm.client.ui.dialog.base.AbstractDialogManager;
+import net.sf.mmm.client.ui.api.dialog.ApplicationWindow;
+import net.sf.mmm.client.ui.api.dialog.DialogPlace;
+import net.sf.mmm.client.ui.base.dialog.AbstractDialogManager;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;

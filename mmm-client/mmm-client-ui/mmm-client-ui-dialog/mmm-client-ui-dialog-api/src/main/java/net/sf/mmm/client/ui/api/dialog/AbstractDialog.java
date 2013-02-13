@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.api;
+package net.sf.mmm.client.ui.api.dialog;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadId;

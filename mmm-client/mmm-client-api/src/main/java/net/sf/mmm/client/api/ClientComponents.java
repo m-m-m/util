@@ -4,7 +4,7 @@ package net.sf.mmm.client.api;
 
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.busy.BusyManager;
-import net.sf.mmm.client.ui.dialog.api.DialogManager;
+import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 
 /**

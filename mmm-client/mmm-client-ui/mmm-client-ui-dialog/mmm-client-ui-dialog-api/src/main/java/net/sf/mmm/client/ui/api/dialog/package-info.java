@@ -3,8 +3,8 @@
 /**
  * Contains the API for dialog management of an application client.
  * <a name="documentation"/><h2>Client Dialog API</h2> 
- * This package contains the API for management of {@link net.sf.mmm.client.ui.dialog.api.Dialog}s.
- * For further details look at {@link net.sf.mmm.client.ui.dialog.api.DialogManager}.
+ * This package contains the API for management of {@link net.sf.mmm.client.ui.api.dialog.Dialog}s.
+ * For further details look at {@link net.sf.mmm.client.ui.api.dialog.DialogManager}.
  */
-package net.sf.mmm.client.ui.dialog.api;
+package net.sf.mmm.client.ui.api.dialog;
 

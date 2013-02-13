@@ -1,13 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.base.root;
+package net.sf.mmm.client.ui.base.dialog.root;
 
+import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.dialog.api.DialogPlace;
-import net.sf.mmm.client.ui.dialog.base.DialogController;
-import net.sf.mmm.client.ui.dialog.base.DialogSlot;
+import net.sf.mmm.client.ui.base.dialog.DialogController;
+import net.sf.mmm.client.ui.base.dialog.DialogSlot;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 /**

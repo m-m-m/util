@@ -3,7 +3,7 @@
 /**
  * Contains the base implementation of the Client Dialog API.
  * <a name="documentation"/><h2>Client Dialog Base</h2>
- * This package contains the base implementation of the {@link net.sf.mmm.client.ui.dialog.api Client Dialog API}.
+ * This package contains the base implementation of the {@link net.sf.mmm.client.ui.api.dialog Client Dialog API}.
  */
-package net.sf.mmm.client.ui.dialog.base;
+package net.sf.mmm.client.ui.base.dialog;
 

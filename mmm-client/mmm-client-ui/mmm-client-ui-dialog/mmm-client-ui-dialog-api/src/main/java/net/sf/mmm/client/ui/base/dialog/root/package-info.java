@@ -4,7 +4,7 @@
  * Contains the base implementation of the root dialog.
  * <a name="documentation"/><h2>Client Dialog Base Root</h2>
  * This package contains the default implementation of the
- * {@link net.sf.mmm.client.ui.dialog.base.root.RootDialogController}.
+ * {@link net.sf.mmm.client.ui.base.dialog.root.RootDialogController}.
  */
-package net.sf.mmm.client.ui.dialog.base.root;
+package net.sf.mmm.client.ui.base.dialog.root;
 

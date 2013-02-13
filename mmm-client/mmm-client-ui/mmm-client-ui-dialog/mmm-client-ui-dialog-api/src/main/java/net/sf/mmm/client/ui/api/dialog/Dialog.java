@@ -1,8 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.api;
+package net.sf.mmm.client.ui.api.dialog;
 
-import net.sf.mmm.client.ui.dialog.base.DialogController;
+import net.sf.mmm.client.ui.base.dialog.DialogController;
 
 /**
  * This is the interface for a dialog of the client application. It displays itself in the page of the main
@@ -15,13 +15,13 @@ import net.sf.mmm.client.ui.dialog.base.DialogController;
 public interface Dialog extends AbstractDialog {
 
   /**
-   * The {@link net.sf.mmm.client.ui.dialog.api.Dialog#getId() dialog-id} of the {@link #TYPE_ROOT root}
+   * The {@link net.sf.mmm.client.ui.api.dialog.Dialog#getId() dialog-id} of the {@link #TYPE_ROOT root}
    * dialog.
    */
   String DIALOG_ID_ROOT = "root";
 
   /**
-   * The {@link net.sf.mmm.client.ui.dialog.api.Dialog#getId() dialog-id} of the {@link #TYPE_PAGE page}
+   * The {@link net.sf.mmm.client.ui.api.dialog.Dialog#getId() dialog-id} of the {@link #TYPE_PAGE page}
    * dialog.
    */
   String DIALOG_ID_PAGE = "page";
@@ -65,17 +65,17 @@ public interface Dialog extends AbstractDialog {
    * The {@link #getType() type} of the <em>root</em> dialog. This is the top-level dialog of the application
    * and represents the {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow}.
    * 
-   * @see net.sf.mmm.client.ui.dialog.base.root.RootDialogController
+   * @see net.sf.mmm.client.ui.base.dialog.root.RootDialogController
    */
   String TYPE_ROOT = "Root";
 
   /**
    * The {@link #getType() type} of the <em>page</em> dialog. This is the first custom dialog that defines the
    * structure of the application page (main window). It is supposed to embed itself into the
-   * {@link #TYPE_ROOT root} page and provide {@link net.sf.mmm.client.ui.dialog.base.DialogSlot slots} for
+   * {@link #TYPE_ROOT root} page and provide {@link net.sf.mmm.client.ui.base.dialog.DialogSlot slots} for
    * child dialogs, at least a {@link #TYPE_MAIN main} slot. For an example see {@link DialogController}.
    * 
-   * @see net.sf.mmm.client.ui.dialog.base.root.RootDialogController
+   * @see net.sf.mmm.client.ui.base.dialog.root.RootDialogController
    */
   String TYPE_PAGE = "Page";
 

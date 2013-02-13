@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.dialog.api;
 
+import net.sf.mmm.client.ui.api.dialog.DialogPlace;
+
 import org.junit.Assert;
 import org.junit.Test;
 

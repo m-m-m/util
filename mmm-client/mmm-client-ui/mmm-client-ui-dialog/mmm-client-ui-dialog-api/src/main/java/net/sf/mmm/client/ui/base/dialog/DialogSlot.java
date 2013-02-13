@@ -1,11 +1,11 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.base;
+package net.sf.mmm.client.ui.base.dialog;
 
 
 /**
  * A {@link DialogSlot} represents a location within the view of a
- * {@link net.sf.mmm.client.ui.dialog.api.Dialog} where a sub-dialog can be embedded.
+ * {@link net.sf.mmm.client.ui.api.dialog.Dialog} where a sub-dialog can be embedded.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -32,10 +32,10 @@ public class DialogSlot {
   }
 
   /**
-   * This method gets the {@link net.sf.mmm.client.ui.dialog.api.Dialog#getId() ID} of the
-   * {@link net.sf.mmm.client.ui.dialog.api.Dialog} identified by this {@link DialogSlot}.
+   * This method gets the {@link net.sf.mmm.client.ui.api.dialog.Dialog#getId() ID} of the
+   * {@link net.sf.mmm.client.ui.api.dialog.Dialog} identified by this {@link DialogSlot}.
    * 
-   * @return the {@link net.sf.mmm.client.ui.dialog.api.Dialog#getId() dialog-id}.
+   * @return the {@link net.sf.mmm.client.ui.api.dialog.Dialog#getId() dialog-id}.
    */
   public String getDialogId() {
 

@@ -15,9 +15,9 @@
  * Next you annotate the interface with &#64;{@link com.google.gwt.inject.client.GinModules}<code>(<em>M</em>GinModule.class)</code>
  * (and potentially others such as <code>DispatchAsyncModule.class</code>)</li>
  * </ol>
- * Now for each {@link net.sf.mmm.client.ui.dialog.api.Dialog} of your module, you define a brief unique technical name 
+ * Now for each {@link net.sf.mmm.client.ui.api.dialog.Dialog} of your module, you define a brief unique technical name 
  * <code><em>X</em></code> and an according package path <code><em>x</em></code>. Next, you follow these steps to 
- * implement your own {@link net.sf.mmm.client.ui.dialog.api.Dialog}:
+ * implement your own {@link net.sf.mmm.client.ui.api.dialog.Dialog}:
  * <ul>
  * <li>Create an interface extending {@link net.sf.mmm.client.base.gwt.dialog.mvp.common.UiHandlersAbstractPresenter} named
  * <code>basepackage.<em>x</em>.common.UiHandlers<em>X</em></code>.</li>

@@ -8,7 +8,7 @@ import net.sf.mmm.client.impl.gwt.busy.BusyManagerImplGwt;
 import net.sf.mmm.client.impl.gwt.place.ClientPlaceManager;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.busy.BusyManager;
-import net.sf.mmm.client.ui.dialog.api.DialogManager;
+import net.sf.mmm.client.ui.api.dialog.DialogManager;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;

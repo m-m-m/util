@@ -3,7 +3,7 @@
 package net.sf.mmm.client.base.gwt.dialog.mvp.presenter;
 
 import net.sf.mmm.client.base.gwt.dialog.mvp.common.AbstractPopupView;
-import net.sf.mmm.client.ui.dialog.api.Dialog;
+import net.sf.mmm.client.ui.api.dialog.Dialog;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.google.gwt.event.shared.EventBus;

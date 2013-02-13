@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.base;
+package net.sf.mmm.client.ui.base.dialog;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,11 +8,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.client.ui.dialog.api.AbstractDialog;
-import net.sf.mmm.client.ui.dialog.api.Dialog;
-import net.sf.mmm.client.ui.dialog.api.DialogManager;
-import net.sf.mmm.client.ui.dialog.api.DialogPlace;
-import net.sf.mmm.client.ui.dialog.api.PopupDialog;
+import net.sf.mmm.client.ui.api.dialog.AbstractDialog;
+import net.sf.mmm.client.ui.api.dialog.Dialog;
+import net.sf.mmm.client.ui.api.dialog.DialogManager;
+import net.sf.mmm.client.ui.api.dialog.DialogPlace;
+import net.sf.mmm.client.ui.api.dialog.PopupDialog;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;

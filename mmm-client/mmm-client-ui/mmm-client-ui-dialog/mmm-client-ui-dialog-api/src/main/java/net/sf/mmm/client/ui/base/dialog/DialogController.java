@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.base;
+package net.sf.mmm.client.ui.base.dialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,23 +8,23 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.dialog.Dialog;
+import net.sf.mmm.client.ui.api.dialog.DialogManager;
+import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.client.ui.dialog.api.Dialog;
-import net.sf.mmm.client.ui.dialog.api.DialogManager;
-import net.sf.mmm.client.ui.dialog.api.DialogPlace;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 /**
  * This is the abstract base class for the {@link AbstractDialogController controller} of a {@link Dialog}.
- * For each {@link net.sf.mmm.client.ui.dialog.api.ApplicationWindow} a single instance of
+ * For each {@link net.sf.mmm.client.ui.api.dialog.ApplicationWindow} a single instance of
  * {@link DialogController} exists for each {@link Dialog} holding its state.
  * 
  * <pre>
- * public class PageDialogController extends {@link net.sf.mmm.client.ui.dialog.base.DialogController} {
+ * public class PageDialogController extends {@link net.sf.mmm.client.ui.base.dialog.DialogController} {
  *
- *   public static final {@link net.sf.mmm.client.ui.dialog.base.DialogSlot} SLOT_MAIN = new {@link net.sf.mmm.client.ui.dialog.base.DialogSlot}({@link #DIALOG_ID_PAGE}, {@link #TYPE_PAGE});
+ *   public static final {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} SLOT_MAIN = new {@link net.sf.mmm.client.ui.base.dialog.DialogSlot}({@link #DIALOG_ID_PAGE}, {@link #TYPE_PAGE});
  *
  *   ...
  *
@@ -32,11 +32,11 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
    *     return {@link #DIALOG_ID_PAGE};
    *   }
    *
-   *   protected {@link net.sf.mmm.client.ui.dialog.base.DialogSlot} doShow({@link net.sf.mmm.client.ui.dialog.api.DialogPlace} place) {
-   *     return {@link net.sf.mmm.client.ui.dialog.base.root.RootDialogController#SLOT_PAGE};
+   *   protected {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} doShow({@link net.sf.mmm.client.ui.api.dialog.DialogPlace} place) {
+   *     return {@link net.sf.mmm.client.ui.base.dialog.root.RootDialogController#SLOT_PAGE};
    *   }
    *
-   *   protected void embed({@link net.sf.mmm.client.ui.dialog.base.DialogController}<?> subDialog, {@link net.sf.mmm.client.ui.dialog.base.DialogSlot} slot) {
+   *   protected void embed({@link net.sf.mmm.client.ui.base.dialog.DialogController}<?> subDialog, {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} slot) {
    *     if (slot == SLOT_MAIN) {
    *       this.widgetMainSlot.setChild(subDialog.getView());
    *     } else if (slot == SLOT_...) {

@@ -1,16 +1,16 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.dialog.base;
+package net.sf.mmm.client.ui.base.dialog;
 
+import net.sf.mmm.client.ui.api.dialog.AbstractDialog;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.client.ui.dialog.api.AbstractDialog;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
- * This is the abstract base class for the controller of a {@link net.sf.mmm.client.ui.dialog.api.Dialog} or
- * {@link net.sf.mmm.client.ui.dialog.api.PopupDialog}. It implements {@link AbstractDialog} as it represents
- * the actual {@link net.sf.mmm.client.ui.dialog.api.Dialog} or
- * {@link net.sf.mmm.client.ui.dialog.api.PopupDialog} and is its main entry point. A
+ * This is the abstract base class for the controller of a {@link net.sf.mmm.client.ui.api.dialog.Dialog} or
+ * {@link net.sf.mmm.client.ui.api.dialog.PopupDialog}. It implements {@link AbstractDialog} as it represents
+ * the actual {@link net.sf.mmm.client.ui.api.dialog.Dialog} or
+ * {@link net.sf.mmm.client.ui.api.dialog.PopupDialog} and is its main entry point. A
  * {@link AbstractDialogController} is supposed to be a lightweight component and
  * {@link #AbstractDialogController() construction} shall be cheap and fast. It contains a {@link #getView()
  * view} that is lazily created for performance reasons. The {@link #getView() view} can also be
