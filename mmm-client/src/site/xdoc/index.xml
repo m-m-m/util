@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<document>
+  <properties>
+    <title>mmm-client</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About mmm-client">
+      This project provides infrastructure to build a rich client easier. There are many common 
+    best practices to build a server application. However, building a (complex) client application
+    is not so easy to do. With mmm-client we offer you the perfect framework to do so.
+    This includes the the communication with the server using <a href="../mmm-service">mmm-service<a>
+    as well as everything you need to build a user-interface by <a href="../mmm-client-ui">mmm-client-ui</a>.
+    Have a look at our <a href="http://m-m-m.sourceforge.net/images/Architecture.svg">technical architecture</a>
+      to get started and also read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/package-summary.html">JavaDoc</a>.
+    </section>
+  </body>
+</document>

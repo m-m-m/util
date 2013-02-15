@@ -18,6 +18,7 @@
     <links>
       <item name="Github" href="https://github.com/m-m-m/mmm"/>
       <item name="Wiki" href="https://github.com/m-m-m/mmm/wiki"/>
+      <item name="Architecture" href="http://m-m-m.sourceforge.net/images/Architecture.svg"/>
       <item name="Javadoc" href="http://m-m-m.sourceforge.net/apidocs/index.html"/>
       <item name="Home" href="http://m-m-m.sourceforge.net/"/>
     </links>

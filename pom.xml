@@ -306,16 +306,19 @@
               <artifactId>maven-checkstyle-plugin</artifactId>
               <configuration>
                 <configLocation>net/sf/mmm/checkstyle.xml</configLocation>
+                <propertiesLocation>net/sf/mmm/checkstyle.properties</propertiesLocation>
+				<!--
                 <m2eclipseConfig>
                   <disable>true</disable>
                 </m2eclipseConfig>
+				-->
               </configuration>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
               <configuration>
-                <maxmemory>1200m</maxmemory>
+                <maxmemory>1800m</maxmemory>
                 <show>private</show>
                 <encoding>UTF-8</encoding>
                 <charset>UTF-8</charset>

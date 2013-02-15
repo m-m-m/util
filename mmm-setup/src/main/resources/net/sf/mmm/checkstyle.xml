@@ -142,11 +142,13 @@
       <property name="format" value="System.gc\(\)"/>
       <property name="message" value="Never invoke gc() explicitly!"/>
     </module>
+	<!--
     <module name="ImportControl">
       <property name="severity" value="ignore"/>
       <property name="file" value="${config_loc}/checkstyle-import-control.xml"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
+	-->
   </module>
   <module name="FileLength"/>
   <module name="FileTabCharacter"/>

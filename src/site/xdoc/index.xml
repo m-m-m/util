@@ -10,17 +10,22 @@
     <section name="Introduction">
       Welcome to the Project Multi-Media-Manager (MMM). The project is still 
       under development. Before you get lost, first some words of what you can 
-      already find here.
+      already find here. In order to build the Multi-Media-Manager we first wanted
+	  to build a generic application framework for Java. This is where we currently
+	  seem to end so please do not get confused by the project name and have a closer look.
+	  To get started have a look at the <a href="images/Architecture.svg">technical architecture</a>.
+	  Please also read our strategic posting <a href="https://github.com/m-m-m/mmm/wiki/Rescue-the-java-world">Rescue the (Java) world</a>.
       <subsection name="Ready to use">
         This project provides the following generic components that can already be used now:
         <ul>
+          <li><a href="mmm-persistence/index.html">mmm-persistence</a> provides code and best practices to build your persistence layer with JPA easier.</li>
           <li><a href="mmm-search/index.html">mmm-search</a> provides a full-text solution base on lucene.</li>
           <li><a href="mmm-util/index.html">mmm-util</a> contains powerful utilities.</li>
         </ul>
       </subsection>
     </section>
     <section name="About MMM">
-      The Multi-Media-Manager (MMM) is a generic application plattform and 
+      The Multi-Media-Manager (MMM) is a generic application framework and (some day)
       a enterprise content management system (ECMS) with custom modules for 
       multi-media management build on top.
       <subsection name="Mission Statement">

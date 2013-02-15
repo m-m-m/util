@@ -6,7 +6,7 @@
   </properties>
 
   <body>
-    <section name="About MMM::Util">
+    <section name="About mmm-util">
       This project provides utilities for various purposes. They are NOT project
       specific and are all designed to be useful for everybody. Unlike older projects
       such as the <a href="http://commons.apache.org/">apache commons</a> we are
