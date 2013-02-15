@@ -161,7 +161,11 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
       if (old != null) {
         throw new DuplicateObjectException(DataClass.class.getName(), contentClass.getTitle());
       }
-      Long id = contentClass.getId();
+      // Long id = contentClass.getId();
+      // the following code is due to a generics bug in javac that does not occur in eclipse compiler
+      Object longId = contentClass.getId();
+      Long id = (Long) longId;
+
       old = this.id2classMap.put(id, contentClass);
       if (old != null) {
         throw new DuplicateObjectException(DataClass.class.getName(), id);
