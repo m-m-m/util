@@ -8,9 +8,9 @@
 
   <body>
     <section name="About mmm-client-ui-dialog">
-      This project provides a dialog framework to build a rich client based on <a href="../mmm-client-ui-widget">mmm-client-ui-widget</a>.
+      This project provides a dialog framework to build a rich client based on <a href="../mmm-client-ui-widget/index.html">mmm-client-ui-widget</a>.
       To get started have a look at our <a href="http://m-m-m.sourceforge.net/images/Architecture.svg">technical architecture</a>
-      and  read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/dialog/package-summary.html">JavaDoc</a>.
+      and  read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/dialog/api/package-summary.html#documentation">JavaDoc</a>.
     </section>
   </body>
 </document>
