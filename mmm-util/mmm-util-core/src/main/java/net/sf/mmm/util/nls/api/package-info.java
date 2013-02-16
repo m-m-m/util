@@ -52,14 +52,14 @@
  * <pre>
  * package foo.bar;
  *
- * @{@link net.sf.mmm.util.nls.api.NlsBundleLocation}(bundleName = "NlsBundleFooBar")
+ * &#64;{@link net.sf.mmm.util.nls.api.NlsBundleLocation}(bundleName = "NlsBundleFooBar")
  * public class NlsBundleFooBarRoot extends {@link net.sf.mmm.util.nls.api.NlsMessage} {
  *
- *   @{@link net.sf.mmm.util.nls.api.NlsBundleMessage}("Hi {name}! How are you?")
- *   {@link net.sf.mmm.util.nls.api.NlsMessage} messageSayHi(@{@link javax.inject.Named}("name") String name);
+ *   &#64;{@link net.sf.mmm.util.nls.api.NlsBundleMessage}("Hi {name}! How are you?")
+ *   {@link net.sf.mmm.util.nls.api.NlsMessage} messageSayHi(&#64;{@link javax.inject.Named}("name") String name);
  *
- *   @{@link net.sf.mmm.util.nls.api.NlsBundleMessage}("Sorry. The login \"{login}\" is already in use. Please choose a different login.")
- *   {@link net.sf.mmm.util.nls.api.NlsMessage} errorLoginInUse(@{@link javax.inject.Named}("login") String login);
+ *   &#64;{@link net.sf.mmm.util.nls.api.NlsBundleMessage}("Sorry. The login \"{login}\" is already in use. Please choose a different login.")
+ *   {@link net.sf.mmm.util.nls.api.NlsMessage} errorLoginInUse(&#64;{@link javax.inject.Named}("login") String login);
  * }
  * </pre>
  * From your code you now can do this:
