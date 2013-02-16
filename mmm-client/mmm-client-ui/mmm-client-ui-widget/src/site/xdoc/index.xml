@@ -13,7 +13,7 @@
     and complex clients using a clean and well documented API 
     that can be build as HTML5 web-client, native Swing client, etc.
     To get started have a look at our <a href="http://m-m-m.sourceforge.net/images/Architecture.svg">technical architecture</a>
-      and  read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/widget/package-summary.html#documentation">JavaDoc</a>.
+      and  read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/widget/package-summary.html#documentation">JavaDoc</a>.
     mmm-client-ui-widget is separated into the technology neutral
     <a href="mmm-client-ui-widget-api/index.html">API</a> and <a href="mmm-client-ui-widget-base/index.html">base-implementation</a>
     as well as the technology specific implementations.

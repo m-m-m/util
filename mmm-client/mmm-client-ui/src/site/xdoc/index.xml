@@ -12,7 +12,7 @@
     It allows you to build powerful and complex clients using a clean and well documented API
     that can be build as HTML5 web-client, native Swing client, etc.
     To get started have a look at our <a href="http://m-m-m.sourceforge.net/images/Architecture.svg">technical architecture</a>
-      and  read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/package-summary.html">JavaDoc</a>.
+      and  read the <a href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/package-summary.html#documentation">JavaDoc</a>.
     mmm-client-ui is separated in two sub-layers <a href="mmm-client-ui-widget/index.html">mmm-client-ui-widget</a> and 
     <a href="mmm-client-ui-dialog/index.html">mmm-client-ui-dialog</a>.
     </section>
