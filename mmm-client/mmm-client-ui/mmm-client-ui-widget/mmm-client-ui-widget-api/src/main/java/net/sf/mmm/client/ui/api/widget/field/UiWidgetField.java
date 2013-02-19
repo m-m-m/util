@@ -30,9 +30,10 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * multiple native input widgets (e.g. to edit a composite {@link net.sf.mmm.util.lang.api.Datatype} - see
  * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)}).
  * 
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
     UiWidgetActive, UiFeatureValue<VALUE>, UiFeatureValidation<VALUE>, AttributeWriteValidationFailure {

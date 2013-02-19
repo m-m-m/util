@@ -12,9 +12,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
@@ -64,9 +62,8 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * 
    * @param editMode - <code>true</code> of {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT} and
    *        <code>false</code> for {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW}.
-   * @param widget is the {@link AbstractUiWidgetReal}.
    */
-  void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> widget);
+  void setMode(boolean editMode);
 
   /**
    * This method registers the given {@link UiHandlerEventClick click handler} in the
@@ -77,29 +74,30 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    */
   void setClickEventSender(UiFeatureClick eventSource, UiHandlerEventClick eventSender);
 
-  /**
-   * This method gets the {@link UiConfiguration}. It is used to implement configuration specific features.
-   * 
-   * @return the {@link UiConfiguration}
-   */
-  UiConfiguration getConfiguration();
-
-  /**
-   * This method sets the {@link #getConfiguration() configuration}.<br/>
-   * <b>ATTENTION:</b><br/>
-   * This method is automatically called from
-   * {@link AbstractUiWidgetReal#getWidgetAdapter(AbstractUiWidgetReal)}. It must be called only once.
-   * 
-   * @param configuration is the value for {@link #getConfiguration()}.
-   */
-  void setConfiguration(UiConfiguration configuration);
+  //
+  // /**
+  // * This method gets the {@link UiConfiguration}. It is used to implement configuration specific features.
+  // *
+  // * @return the {@link UiConfiguration}
+  // */
+  // UiConfiguration getConfiguration();
+  //
+  // /**
+  // * This method sets the {@link #getConfiguration() configuration}.<br/>
+  // * <b>ATTENTION:</b><br/>
+  // * This method is automatically called from
+  // * {@link AbstractUiWidgetReal#getWidgetAdapter(AbstractUiWidgetReal)}. It must be called only once.
+  // *
+  // * @param configuration is the value for {@link #getConfiguration()}.
+  // */
+  // void setConfiguration(UiConfiguration configuration);
 
   /**
    * This method creates an absolute URL from the given <code>relativePath</code>.
    * 
    * @param relativePath is the relative path (URL suffix) to the image.
    * 
-   * @see UiConfiguration#getTheme()
+   * @see net.sf.mmm.client.ui.api.widget.UiConfiguration#getTheme()
    * 
    * @return the absolute URL.
    */

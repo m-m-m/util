@@ -10,12 +10,12 @@ import net.sf.mmm.client.ui.base.AbstractUiContext;
  * particular {@link #getWidgetInterface() type}.
  * 
  * @see net.sf.mmm.client.ui.api.UiContext
- * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <WIDGET> the generic type of the {@link #getWidgetInterface() widget} to
  *        {@link #create(AbstractUiContext) create}. Should typically be a
  *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetReal}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiSingleWidgetFactoryReal<WIDGET extends UiWidgetReal> extends UiSingleWidgetFactory<WIDGET> {
 

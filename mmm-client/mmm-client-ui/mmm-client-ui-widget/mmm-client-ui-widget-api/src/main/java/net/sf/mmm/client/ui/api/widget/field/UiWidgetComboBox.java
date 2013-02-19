@@ -9,7 +9,12 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * This is the interface for a {@link UiWidgetOptionsField options field widget} that represents a
  * <em>combo box</em>. Such widget is like a drop-down where the user can open a menu with the available
  * {@link #getOptions() options} to choose from. If supported by the underlying native toolkit it also allows
- * typing text and offering completions in order to allow better keyboard control.
+ * typing text and offering completions in order to allow better keyboard control.<br/>
+ * Here you can see an example (with {@link #setFieldLabel(String) field label} "Title"):
+ * 
+ * <pre>
+ * Title: <input type="text" list="options"/><datalist id="options"><option>Mrs.</option><option>Mr.</option><option>Ms.</option></datalist>
+ * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

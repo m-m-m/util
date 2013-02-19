@@ -10,11 +10,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadLabel;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
-import net.sf.mmm.client.ui.api.widget.UiConfiguration;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
@@ -34,8 +33,8 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   /** @see #getToplevelWidget() */
   private final WIDGET toplevelWidget;
 
-  /** @see #getConfiguration() */
-  private UiConfiguration configuration;
+  /** @see #getUiWidget() */
+  private AbstractUiWidget<?> uiWidget;
 
   /**
    * The constructor.
@@ -80,25 +79,45 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   }
 
   /**
-   * @return the {@link UiConfiguration}
+   * @return the uiWidget
    */
-  @Override
-  public final UiConfiguration getConfiguration() {
+  public AbstractUiWidget<?> getUiWidget() {
 
-    return this.configuration;
+    return this.uiWidget;
   }
 
   /**
-   * @param configuration is the value for {@link #getConfiguration()}.
+   * @param uiWidget is the uiWidget to set
    */
-  @Override
-  public final void setConfiguration(UiConfiguration configuration) {
+  public void setUiWidget(AbstractUiWidget<?> uiWidget) {
 
-    if (this.configuration != null) {
+    if (this.uiWidget != null) {
       throw new AlreadyInitializedException();
     }
-    this.configuration = configuration;
+    this.uiWidget = uiWidget;
   }
+
+  //
+  // /**
+  // * @return the {@link UiConfiguration}
+  // */
+  // @Override
+  // public final UiConfiguration getConfiguration() {
+  //
+  // return this.configuration;
+  // }
+  //
+  // /**
+  // * @param configuration is the value for {@link #getConfiguration()}.
+  // */
+  // @Override
+  // public final void setConfiguration(UiConfiguration configuration) {
+  //
+  // if (this.configuration != null) {
+  // throw new AlreadyInitializedException();
+  // }
+  // this.configuration = configuration;
+  // }
 
   /**
    * {@inheritDoc}
@@ -122,7 +141,7 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> uiWidget) {
+  public void setMode(boolean editMode) {
 
     // do nothing by default
   }

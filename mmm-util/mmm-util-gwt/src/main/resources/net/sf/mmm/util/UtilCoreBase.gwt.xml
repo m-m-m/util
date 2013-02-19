@@ -7,7 +7,7 @@
   <source path="math" excludes="base/MathUtilImpl.java"/>
   <source path="gwt"/>
   <source path="concurrent/api"/>
-  <source path="collection/base" includes="AbstractIterator.java,NodeCycle.java,NodeCycleException.java"/>
+  <source path="collection/base" includes="AbstractIterator.java,SingleElementIterator.java,NodeCycle.java,NodeCycleException.java"/>
   <source path="date" includes="**/*Limited*,**/*Exception.java"/>
   <source path="reflect" includes="**/*Limited*"/>
   <source path="component" excludes="impl/**"/>

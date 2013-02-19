@@ -107,6 +107,18 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
   NlsMessage messageConfirmDelete();
 
   /**
+   * @return the {@link NlsMessage} for the message of the popup to confirm a deletion.
+   */
+  @NlsBundleMessage("There are unsaved changes. Do you really want to cancel and discard all changes?")
+  NlsMessage messageConfirmStopEdit();
+
+  /**
+   * @return the {@link NlsMessage} for the title of the popup to confirm the discard of changes.
+   */
+  @NlsBundleMessage("Discard?")
+  NlsMessage titleDiscardPopup();
+
+  /**
    * @return the {@link NlsMessage} for the title of the popup to confirm a deletion.
    */
   @NlsBundleMessage("Delete?")

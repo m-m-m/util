@@ -20,10 +20,11 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * widgets} for custom datatypes and {@link UiWidgetComposite composites} for editors of particular business
  * objects.
  * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends AbstractUiWidget<VALUE> {
 

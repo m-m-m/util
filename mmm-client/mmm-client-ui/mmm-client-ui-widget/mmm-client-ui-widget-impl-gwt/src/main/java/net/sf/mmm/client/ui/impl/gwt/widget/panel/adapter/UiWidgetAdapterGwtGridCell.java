@@ -7,8 +7,6 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMuta
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtGridCell.GridCell;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of
@@ -56,12 +54,10 @@ public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableC
   }
 
   /**
-   * This inner class is a custom {@link Widget} that represents a {@link GridCell} (TD-tag).
+   * This inner class is a custom {@link com.google.gwt.user.client.ui.Widget} that represents a
+   * {@link GridCell} (TD-tag).
    */
-  protected static class GridCell extends Widget {
-
-    /** @see #setChild(Widget) */
-    private Element childElement;
+  protected static class GridCell extends UiWidgetAdapterGwtSingleMutableComposite.SingleCompositePanel {
 
     /**
      * The constructor.
@@ -70,18 +66,6 @@ public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableC
 
       super();
       setElement(Document.get().createTDElement());
-    }
-
-    /**
-     * @param child is the Widget to set as child. A potential previous child will be removed.
-     */
-    public void setChild(Widget child) {
-
-      if (this.childElement != null) {
-        getElement().removeChild(this.childElement);
-      }
-      this.childElement = child.getElement();
-      getElement().appendChild(this.childElement);
     }
 
   }

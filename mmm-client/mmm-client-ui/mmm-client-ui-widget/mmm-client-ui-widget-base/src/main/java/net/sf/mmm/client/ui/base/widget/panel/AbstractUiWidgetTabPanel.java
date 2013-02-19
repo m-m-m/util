@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.panel;
 
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
@@ -26,6 +27,19 @@ public abstract class AbstractUiWidgetTabPanel<ADAPTER extends UiWidgetAdapterTa
   public AbstractUiWidgetTabPanel(AbstractUiContext context) {
 
     super(context);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetTab addChild(UiWidgetRegular child, String label) {
+
+    UiWidgetTab tab = getContext().getWidgetFactory().create(UiWidgetTab.class);
+    tab.setLabel(label);
+    tab.setChild(child);
+    addChild(tab);
+    return tab;
   }
 
 }

@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterOptionsField} using GWT based on a {@link TextBox} and
- * a datalist.
+ * a {@link Datalist}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

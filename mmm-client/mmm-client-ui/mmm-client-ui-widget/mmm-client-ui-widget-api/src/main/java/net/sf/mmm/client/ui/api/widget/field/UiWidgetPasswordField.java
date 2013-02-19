@@ -5,10 +5,15 @@ package net.sf.mmm.client.ui.api.widget.field;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidgetTextualInputField input field widget} representing a password field.
- * Such field is like {@link UiWidgetTextField} but allows to enter secret data in a way the the value entered
- * is not visible on the screen (e.g. by echoing a standard symbol like * instead of the actual character that
- * was typed). The field also prevents to get the value via copy and paste.
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} representing a password
+ * field. Such field is like {@link UiWidgetTextField} but allows to enter secret data in a way the the value
+ * entered is not visible on the screen (e.g. by echoing a standard symbol like * instead of the actual
+ * character that was typed). The field also prevents to get the value via copy and paste.<br/>
+ * Here you can see an example (with {@link #setFieldLabel(String) field label} "Password"):
+ * 
+ * <pre>
+ * Password: <input type="password"/>
+ * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

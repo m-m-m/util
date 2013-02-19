@@ -40,7 +40,10 @@ public interface UiWidgetFactoryAdvanced {
   /**
    * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. E.g. passing an
    * instance of {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave} will create a save-button
-   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()} if clicked.
+   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()} if clicked.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This method will fail with an exception if the given <code>handler</code> implements more than one known
+   * {@link UiHandlerPlain} interface. Use {@link #createButton(Class, UiHandlerPlain)} to prevent this.
    * 
    * @param handler is the {@link UiHandlerPlain} instance.
    * @return the new widget instance.
@@ -48,10 +51,30 @@ public interface UiWidgetFactoryAdvanced {
   UiWidgetButton createButton(UiHandlerPlain handler);
 
   /**
-   * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. E.g. passing an
-   * instance of {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave} will create a save-button
-   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()} if clicked.
+   * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. In advance to
+   * {@link #createButton(UiHandlerPlain)} this method can be used for an handler implementation that realizes
+   * multiple {@link UiHandlerPlain} interfaces as the proper one to choose is identified by
+   * <code>handlerType</code>.
    * 
+   * @param <HANDLER> is the generic type of the {@link UiHandlerPlain}.
+   * 
+   * @param handlerType is the {@link Class} reflecting the {@link UiHandlerPlain} interface to create a
+   *        button for.
+   * @param handler is the {@link UiHandlerPlain} instance.
+   * @return the new widget instance.
+   */
+  <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler);
+
+  /**
+   * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. In advance to
+   * {@link #createButton(UiHandlerPlain)} this method can be used for an handler implementation that realizes
+   * multiple {@link UiHandlerPlain} interfaces as the proper one to choose is identified by
+   * <code>handlerType</code>.
+   * 
+   * @param <HANDLER> is the generic type of the {@link UiHandlerPlain}.
+   * 
+   * @param handlerType is the {@link Class} reflecting the {@link UiHandlerPlain} interface to create a
+   *        button for.
    * @param handler is the {@link UiHandlerPlain} instance.
    * @param preventConfirmationPopup - some {@link UiHandlerPlain plain handlers} represent operations like
    *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete()} that should be
@@ -63,7 +86,8 @@ public interface UiWidgetFactoryAdvanced {
    *        <code>true</code> here. Use <code>false</code> for the default behavior.
    * @return the new widget instance.
    */
-  UiWidgetButton createButton(UiHandlerPlain handler, boolean preventConfirmationPopup);
+  <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
+      boolean preventConfirmationPopup);
 
   /**
    * This method creates a new {@link UiWidgetLabel}.

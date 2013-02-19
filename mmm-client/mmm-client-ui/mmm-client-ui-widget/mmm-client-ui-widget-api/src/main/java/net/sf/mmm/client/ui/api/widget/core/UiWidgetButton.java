@@ -11,7 +11,12 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
 
 /**
  * This is the interface for an {@link UiWidgetRegularAtomic regular atomic widget} that represents a
- * <em>button</em>.
+ * <em>button</em>.<br/>
+ * Here you can see an example (with {@link #setLabel(String) label} "Click me"):
+ * 
+ * <pre>
+ * <button type="button">Click me</button>
+ * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

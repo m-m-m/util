@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
@@ -42,13 +40,12 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetTab addChild(UiWidgetRegular child, String label) {
+  protected void initializeWidgetAdapter(UiWidgetAdapterGwtTabLayoutPanel adapter) {
 
-    UiWidgetTab tab = getContext().getWidgetFactory().create(UiWidgetTab.class);
-    tab.setLabel(label);
-    tab.setChild(child);
-    addChild(tab);
-    return tab;
+    super.initializeWidgetAdapter(adapter);
+    if ((getShowChildIndex() == 0) && (getChildCount() > 0)) {
+      adapter.showChild(0);
+    }
   }
 
   /**

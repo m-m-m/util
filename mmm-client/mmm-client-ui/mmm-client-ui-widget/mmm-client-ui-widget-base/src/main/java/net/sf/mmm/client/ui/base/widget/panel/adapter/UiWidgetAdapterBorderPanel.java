@@ -7,6 +7,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComposite;
 
 /**
+ * This is the {@link UiWidgetAdapterSingleMutableComposite} for
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

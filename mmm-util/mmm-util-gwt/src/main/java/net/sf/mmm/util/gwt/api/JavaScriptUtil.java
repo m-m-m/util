@@ -2,7 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.gwt.api;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.InputElement;
 
 /**
  * This class holds a collection of utility functions for GWT (Google Web Toolkit) using JSNI (JavaScript
@@ -124,10 +126,42 @@ public class JavaScriptUtil {
    *
    * @param inputElement is the input {@link Element} that has been validated.
    * @param message - the empty string to mark as valid, the validation failure message otherwise.
+   * @return <code>true</code> if the browser supports custom validity and it has been set, <code>false</code>
+   *         otherwise.
    */
-  public native void setCustomValidity(Element inputElement, String message) /*-{
-    inputElement.setCustomValidity(message);
+  public native boolean setCustomValidity(Element inputElement, String message) /*-{
+    if (inputElement.setCustomValidity) {
+      inputElement.setCustomValidity(message);
+      return true;
+    }
+    return false;
   }-*/;
+
+  /**
+   * Creates an {@link InputElement} of a custom {@link InputElement#getType() type}. Only used while GWT does NOT
+   * directly provide a way to create HTML5 input elements.
+   *
+   * @param type is the requested {@link InputElement#getType() type} (e.g. "range", "date", etc.).
+   * @return the requested {@link InputElement} of the given <code>type</code>.
+   */
+  public InputElement createInputElement(String type) {
+
+    // return DOMImpl.impl.createInputElement(Document.get(), type);
+    InputElement inputElement = Document.get().createTextInputElement();
+    setInputElementType(inputElement, type);
+    return inputElement;
+  }
+
+  /**
+   * This method sets the {@link InputElement#getType() type} of an {@link InputElement}.
+   *
+   * @param inputElement is the input {@link InputElement}.
+   * @param type is the new {@link InputElement#getType() type} to set.
+   */
+  private native void setInputElementType(InputElement inputElement, String type) /*-{
+    inputElement.type = type;
+  }-*/;
+
 
   //formatter:on
 

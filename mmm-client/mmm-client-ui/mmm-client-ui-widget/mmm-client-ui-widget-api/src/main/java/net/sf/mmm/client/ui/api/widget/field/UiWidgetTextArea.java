@@ -7,9 +7,15 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a text area
- * field. Such field is a multi-line variant of {@link UiWidgetTextField}. The user can enter line breaks by
- * hitting [enter] or [return].
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a text
+ * area field. Such field is a multi-line variant of {@link UiWidgetTextField}. The user can enter line breaks
+ * by hitting [enter] or [return].<br/>
+ * Here you can see an example (with {@link #setFieldLabel(String) field label} "Comment" and
+ * {@link #setValue(String) value} set to "some text"):
+ * 
+ * <pre>
+ * Comment: <textarea>some text</textarea>
+ * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

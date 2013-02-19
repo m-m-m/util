@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboBoxGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerRangeFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLongFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetPasswordFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsGwt;
@@ -25,6 +26,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuBarGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuItemClickableGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetBorderPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridCellGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridRowGwt;
@@ -64,6 +66,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory {
     register(new UiWidgetRichTextAreaGwt.Factory());
     register(new UiWidgetLongFieldGwt.Factory());
     register(new UiWidgetIntegerFieldGwt.Factory());
+    register(new UiWidgetIntegerRangeFieldGwt.Factory());
     register(new UiWidgetDoubleFieldGwt.Factory());
     register(new UiWidgetDateFieldGwt.Factory());
     register(new UiWidgetRadioButtonsGwt.Factory());
@@ -77,6 +80,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory {
     register(new UiWidgetGridPanelGwt.Factory());
     register(new UiWidgetGridRowGwt.Factory());
     register(new UiWidgetGridCellGwt.Factory());
+    register(new UiWidgetBorderPanelGwt.Factory());
     // menu
     register(new UiWidgetMenuBarGwt.Factory());
     register(new UiWidgetMenuGwt.Factory());

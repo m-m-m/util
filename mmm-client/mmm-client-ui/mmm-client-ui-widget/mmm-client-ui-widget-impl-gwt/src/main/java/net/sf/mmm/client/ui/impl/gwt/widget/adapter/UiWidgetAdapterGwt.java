@@ -188,7 +188,8 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   @Override
   public String createAbsoluteImageUrl(String relativePath) {
 
-    return GWT.getModuleBaseURL() + "gwt/" + getConfiguration().getTheme() + "/images/" + relativePath;
+    return GWT.getModuleBaseURL() + "gwt/" + getUiWidget().getContext().getConfiguration().getTheme() + "/images/"
+        + relativePath;
   }
 
 }

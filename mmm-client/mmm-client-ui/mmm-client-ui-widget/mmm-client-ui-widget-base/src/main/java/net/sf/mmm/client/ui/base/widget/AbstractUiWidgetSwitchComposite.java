@@ -58,6 +58,14 @@ public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAd
   }
 
   /**
+   * @return the index of the {@link #getChild(int) child} to {@link #showChild(int) show}.
+   */
+  protected int getShowChildIndex() {
+
+    return this.showChildIndex;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

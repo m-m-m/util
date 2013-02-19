@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 
 /**
  * This is the default implementation of {@link UiModeChanger}. It delegates to
- * {@link UiWidgetAdapter#setMode(boolean, AbstractUiWidgetReal)} if the {@link UiWidgetAdapter} has
+ * {@link UiWidgetAdapter#setMode(boolean)} if the {@link UiWidgetAdapter} has
  * {@link AbstractUiWidgetReal#hasWidgetAdapter() already been created}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -33,7 +33,7 @@ public class UiModeChangerImpl extends AbstractUiModeChanger {
   protected void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode, UiWidgetAdapter widgetAdapter) {
 
     boolean editMode = (newMode == UiMode.EDIT);
-    widgetAdapter.setMode(editMode, widget);
+    widgetAdapter.setMode(editMode);
   }
 
 }

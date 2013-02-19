@@ -5,10 +5,10 @@ package net.sf.mmm.client.ui.api.widget.field;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 
 /**
- * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a long field.
- * Such field allows to enter a value of the type {@link Integer}. This widget exists in order to expose
- * native support for this feature (that might have advanced features or better performance). If this is not
- * available by the underlying native toolkit, an implementation shall be provided that is based on
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents an integer
+ * field. Such field allows to enter a value of the type {@link Integer}. This widget exists in order to
+ * expose native support for this feature (that might have advanced features or better performance). If this
+ * is not available by the underlying native toolkit, an implementation shall be provided that is based on
  * {@link UiWidgetTextField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

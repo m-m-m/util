@@ -9,6 +9,7 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -20,6 +21,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
@@ -88,6 +90,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiContextGwt context = new UiContextGwt();
     context.initialize();
     UiWidgetFactoryGwt factory = context.getWidgetFactory();
+    UiWidgetFactoryAdvanced factoryAdvanced = context.getWidgetFactoryAdvanced();
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();
@@ -112,7 +115,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     comboBox.setFieldLabel("Label2");
     comboBox.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
     gridPanel.addChildren(textField1, comboBox);
-    verticalPanel1.addChild(gridPanel);
+    UiWidgetBorderPanel borderPanel = factory.create(UiWidgetBorderPanel.class);
+    borderPanel.setLabel("Hello World");
+    borderPanel.setChild(gridPanel);
+    verticalPanel1.addChild(borderPanel);
     verticalPanel1.setMode(UiMode.EDIT);
 
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);

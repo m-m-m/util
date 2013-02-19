@@ -11,6 +11,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.aria.role.AbstractRole;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
+import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectDisposedException;
@@ -112,7 +113,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
         throw new ObjectDisposedException(this);
       }
       this.widgetAdapter = createWidgetAdapter();
-      this.widgetAdapter.setConfiguration(getContext().getConfiguration());
+      ((AbstractUiWidgetAdapter<?>) this.widgetAdapter).setUiWidget(this);
       initializeWidgetAdapter(this.widgetAdapter);
       if (getAriaRole() != null) {
         this.ariaRole.setDelegate(this.widgetAdapter);

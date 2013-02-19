@@ -9,7 +9,7 @@ import java.util.Locale;
  * internationalized-message} separated from language independent {@link #getArgument(String) arguments}. This
  * approach ensures that the message is always available in the internationalized language (should be English)
  * while it still allows to {@link #getLocalizedMessage(Locale, NlsTemplateResolver) translate} the message to
- * a native language.<br>
+ * a native language. For an introduction first read {@link net.sf.mmm.util.nls.api here}<br>
  * The format of the {@link #getInternationalizedMessage() internationalized-message} is compatible to
  * {@link java.text.MessageFormat}. This allows to migrate existing code from {@link java.text.MessageFormat}
  * to {@link NlsMessage} easily. However there are some advanced features available. While using numbers to

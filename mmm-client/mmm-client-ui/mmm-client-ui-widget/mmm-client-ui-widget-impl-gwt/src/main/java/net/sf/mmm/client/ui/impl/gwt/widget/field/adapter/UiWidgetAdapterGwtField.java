@@ -2,9 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadMaximumValue;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadMinimumValue;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
@@ -28,7 +29,8 @@ import com.google.gwt.user.client.ui.Widget;
  *        {@link #getToplevelWidget() widget}.
  */
 public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAPTER_VALUE> extends
-    UiWidgetAdapterGwtWidgetActive<FlowPanel> implements UiWidgetAdapterField<VALUE, ADAPTER_VALUE> {
+    UiWidgetAdapterGwtWidgetActive<FlowPanel> implements UiWidgetAdapterField<VALUE, ADAPTER_VALUE>,
+    AttributeReadMinimumValue<ADAPTER_VALUE>, AttributeReadMaximumValue<ADAPTER_VALUE> {
 
   /** @see #getWidgetViewMode() */
   private Label widgetViewMode;
@@ -60,9 +62,9 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    * {@inheritDoc}
    */
   @Override
-  public void setMode(boolean editMode, AbstractUiWidgetReal<?, ?> widget) {
+  public void setMode(boolean editMode) {
 
-    super.setMode(editMode, widget);
+    super.setMode(editMode);
     if (editMode) {
       getActiveWidget();
     } else {
@@ -180,6 +182,28 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   public void setValidationFailure(String validationFailure) {
 
-    JavaScriptUtil.getInstance().setCustomValidity(getInputElement(), validationFailure);
+    boolean success = JavaScriptUtil.getInstance().setCustomValidity(getInputElement(), validationFailure);
+    if (!success) {
+      // IE6-9 and other crap
+
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ADAPTER_VALUE getMinimumValue() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ADAPTER_VALUE getMaximumValue() {
+
+    return null;
   }
 }
