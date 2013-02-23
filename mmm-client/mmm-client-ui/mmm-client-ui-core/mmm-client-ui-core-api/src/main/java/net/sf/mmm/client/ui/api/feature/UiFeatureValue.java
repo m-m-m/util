@@ -13,9 +13,10 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
  * {@link #removeChangeHandler(UiHandlerEventValueChange) remove} instances of
  * {@link UiHandlerEventValueChange}.
  * 
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
 public interface UiFeatureValue<VALUE> extends UiFeature, AttributeWriteValueAdvanced<VALUE> {
 

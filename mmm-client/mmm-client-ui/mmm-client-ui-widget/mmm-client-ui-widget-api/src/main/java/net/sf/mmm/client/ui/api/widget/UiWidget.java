@@ -5,7 +5,6 @@ package net.sf.mmm.client.ui.api.widget;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadModified;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadVisibleRecursive;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMode;
@@ -14,7 +13,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteOnlySizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
+import net.sf.mmm.client.ui.api.feature.UiFeatureVisible;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 
@@ -37,10 +36,10 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeReadVisibleRecursive, AttributeWriteVisible,
-    AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
-    AttributeWriteSize, AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode,
-    AttributeWriteModeFixed, AttributeReadAriaRole, AbstractValidatableObject {
+public abstract interface UiWidget extends UiFeatureVisible, AttributeWriteHtmlId, AttributeWriteTooltip,
+    AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
+    AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode, AttributeWriteModeFixed,
+    AttributeReadAriaRole, AbstractValidatableObject {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root
@@ -49,9 +48,10 @@ public abstract interface UiWidget extends AttributeWriteHtmlId, AttributeReadVi
   UiWidgetComposite<?> getParent();
 
   /**
-   * This method gets the {@link UiContext} that created this {@link UiWidget}. It may be used internally in
-   * {@link UiWidget} implementations as well as externally to create new {@link UiWidget}s (typically
-   * children).
+   * This method gets the {@link UiContext}. This is the container with central components for the UI and
+   * client infrastructure. E.g. it contains the {@link UiContext#getWidgetFactory() widget-factory} that
+   * created this {@link UiWidget}. It may be used internally in {@link UiWidget} implementations as well as
+   * externally to create new {@link UiWidget}s (typically children).
    * 
    * @return the {@link UiContext}.
    */

@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget.custom;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -48,10 +49,12 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    */
   @Override
   @SuppressWarnings("unchecked")
-  protected VALUE doGetValue() throws RuntimeException {
+  protected VALUE doGetValue(VALUE template) throws RuntimeException {
 
-    Object value = ((AbstractUiWidget<?>) this.delegate).getValueOrException();
-    return (VALUE) value;
+    // TODO: this may be totally wrong and could lead to ClassCastException, even though it is a good default
+    // implementation for most cases
+    VALUE value = ((AbstractUiWidget<VALUE>) this.delegate).getValueOrException(template);
+    return value;
   }
 
   /**
@@ -165,9 +168,54 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
+  public void addVisibleFunction(AttributeReadVisible function) {
+
+    this.delegate.addVisibleFunction(function);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeVisibleFunction(AttributeReadVisible function) {
+
+    return this.delegate.removeVisibleFunction(function);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isVisibleAggregated() {
+
+    return this.delegate.isVisibleAggregated();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final boolean isVisibleRecursive() {
 
     return this.delegate.isVisibleRecursive();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateVisibility() {
+
+    this.delegate.updateVisibility();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateVisibilityLocal() {
+
+    this.delegate.updateVisibilityLocal();
   }
 
   /**

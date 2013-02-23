@@ -64,7 +64,7 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
   public final VALUE getValue() {
 
     try {
-      return getValueOrException();
+      return getValueOrException(null);
     } catch (RuntimeException e) {
       // ATTENTION: This is one of the very rare cases where we intentionally ignore an exception.
       return null;
@@ -84,24 +84,53 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValueOrException() throws RuntimeException {
+  public final VALUE getValueOrException(VALUE template) throws RuntimeException {
 
-    return doGetValue();
+    return doGetValue(template);
   }
 
   /**
-   * This method is called from {@link #getValueOrException()}. It has to be implemented with the custom logic
-   * to get the value from the view. The returned value needs to be created as new object rather than
-   * modifying the {@link #getOriginalValue() original value} that has been previously set. This is required
-   * to support operations such as {@link #resetValue()}. The implementation of this method has to correspond
-   * with the implementation of {@link #doSetValue(Object)}.
+   * This method is called from {@link #getValueOrException(Object)}. It has to be implemented with the custom
+   * logic to get the value from the view. The implementation of this method has to correspond with the
+   * implementation of {@link #doSetValue(Object)}. A typical implementation of this method for a composite
+   * widget should look like this:
+   * 
+   * <pre>
+   * protected MyBean doGetValue(MyBean template) {
+   *   MyBean result = template;
+   *   if (result == null) {
+   *     result = new MyBean();
+   *   }
+   *   MyBean original = {@link #getOriginalValue()};
+   *   if (original != null) {
+   *     // result.copyValues(original);
+   *     result.setId(original.getId());
+   *   }
+   *
+   *   result.setFoo(this.widgetFoo.{@link #getValue()});
+   *   Bar bar = this.widgetBar.{@link #getValueOrException(Object) getValueOrException}(result.getBar());
+   *   this.widgetBar2.{@link #getValueOrException(Object) getValueOrException}(bar);
+   *   result.setBar(bar);
+   *   ...
+   *
+   *   return result;
+   * }
+   * </pre>
    * 
    * @see #doSetValue(Object)
    * 
-   * @return a new value reflecting the current data as specified by the end-user.
-   * @throws RuntimeException if something goes wrong (e.g. validation failure).
+   * @param template is the object where the data is filled in. May also be <code>null</code> - then this
+   *        method will create a new instance.
+   * @return the current value of this widget. May be <code>null</code> if empty. If &lt;VALUE&gt; is
+   *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
+   *         &lt;VALUE&gt; is a mutable object (java bean) and <code>template</code> is NOT <code>null</code>,
+   *         this method is supposed to return <code>template</code> after the value(s) of this object have
+   *         been assigned. If <code>template</code> is <code>null</code> this method has to create a new
+   *         instance of &lt;VALUE&gt;. It is forbidden and an explicit bug-pattern to modify the
+   *         {@link #getOriginalValue() original value}. This is required to support operations such as
+   *         {@link #resetValue()}.
    */
-  protected abstract VALUE doGetValue() throws RuntimeException;
+  protected abstract VALUE doGetValue(VALUE template);
 
   /**
    * {@inheritDoc}
@@ -143,9 +172,9 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
   /**
    * This method is called from {@link #setValue(Object)} and {@link #setValueForUser(Object)}. It has to be
    * implemented with the custom logic to set the value in the view. The implementation of this method has to
-   * correspond with the implementation of {@link #doGetValue()}.
+   * correspond with the implementation of {@link #doGetValue(Object)}.
    * 
-   * @see #doGetValue()
+   * @see #doGetValue(Object)
    * 
    * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
    *        to {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField atomic fields}.
@@ -352,7 +381,7 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
 
     VALUE currentValue;
     try {
-      currentValue = getValueOrException();
+      currentValue = getValueOrException(null);
       for (ValueValidator<? super VALUE> validator : this.validatorList) {
         ValidationFailure failure = validator.validate(currentValue, getSource());
         if (failure != null) {
@@ -368,7 +397,8 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
   }
 
   /**
-   * This method converts an exception from {@link #getValueOrException()} to a {@link ValidationFailure}.
+   * This method converts an exception from {@link #getValueOrException(Object)} to a
+   * {@link ValidationFailure}.
    * 
    * @param error is the exception.
    * @return the {@link ValidationFailure}.

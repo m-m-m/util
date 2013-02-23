@@ -123,7 +123,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue() throws RuntimeException {
+  protected VALUE doGetValue(VALUE template) throws RuntimeException {
 
     if (this.optionTitleList == null) {
       // the options have not been set yet! As they may be received asynchronously but the widget adapter may
@@ -131,7 +131,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
       // impossible for the user to change the value...
       return getOriginalValue();
     }
-    return super.doGetValue();
+    return super.doGetValue(template);
   }
 
   /**

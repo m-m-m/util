@@ -41,9 +41,10 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  protected final VALUE doGetValue() throws RuntimeException {
+  protected final VALUE doGetValue(VALUE template) throws RuntimeException {
 
-    DELEGATE_VALUE value = getDelegate().getValueOrException();
+    // TODO: template should be passed but may not match...
+    DELEGATE_VALUE value = getDelegate().getValueOrException(null);
     if (value == null) {
       return getNullValue();
     } else {

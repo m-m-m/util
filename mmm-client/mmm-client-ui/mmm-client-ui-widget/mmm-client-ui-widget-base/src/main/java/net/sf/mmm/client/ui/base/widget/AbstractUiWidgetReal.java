@@ -2,7 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.sf.mmm.client.ui.api.aria.role.Role;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetComposite;
@@ -16,6 +20,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectDisposedException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.nls.api.ReadOnlyException;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -46,6 +51,12 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
 
   /** @see #isVisible() */
   private boolean visible;
+
+  /** @see #addVisibleFunction(AttributeReadVisible) */
+  private List<AttributeReadVisible> visiblityFunctions;
+
+  /** @see #updateVisibilityLocal() */
+  private boolean visibleCalculated;
 
   /** @see #isEnabled() */
   private boolean enabled;
@@ -89,6 +100,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
 
     super(context);
     this.visible = true;
+    this.visibleCalculated = true;
     this.enabled = true;
     this.styles = "";
   }
@@ -146,7 +158,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     // for ariaRole see getWidgetAdapter()
-    adapter.setVisible(this.visible);
+    adapter.setVisible(isVisibleAggregated());
     if (!this.enabled) {
       adapter.setEnabled(this.enabled);
     }
@@ -283,9 +295,21 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
       // fixed mode prevents changing the mode...
       return;
     }
+    doSetMode(mode);
     getContext().getModeChanger().changeMode(this, mode);
     this.mode = mode;
+    updateVisibilityLocal();
     setModeRecursive(mode);
+  }
+
+  /**
+   * This method is called from {@link #setMode(UiMode)} if the {@link UiMode} actually changed.
+   * 
+   * @param uiMode is the new {@link UiMode}.
+   */
+  protected void doSetMode(UiMode uiMode) {
+
+    // nothing by default...
   }
 
   /**
@@ -354,10 +378,12 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
   public void setVisible(boolean visible) {
 
     if (this.visible != visible) {
-      if (this.widgetAdapter != null) {
-        this.widgetAdapter.setVisible(visible);
-      }
+      boolean visibilityAggregated = (visible & this.visibleCalculated);
+      boolean updateUi = (isVisibleAggregated() != visibilityAggregated);
       this.visible = visible;
+      if (updateUi && (this.widgetAdapter != null)) {
+        this.widgetAdapter.setVisible(visibilityAggregated);
+      }
     }
   }
 
@@ -374,9 +400,86 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
+  public void addVisibleFunction(AttributeReadVisible function) {
+
+    if (this.visiblityFunctions == null) {
+      this.visiblityFunctions = new LinkedList<AttributeReadVisible>();
+    }
+    this.visiblityFunctions.add(function);
+    updateVisibilityLocal();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeVisibleFunction(AttributeReadVisible function) {
+
+    boolean removed = false;
+    if (this.visiblityFunctions != null) {
+      removed = this.visiblityFunctions.remove(function);
+      if (removed) {
+        updateVisibilityLocal();
+      }
+    }
+    return removed;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isVisibleAggregated() {
+
+    return this.visible && this.visibleCalculated;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateVisibilityLocal() {
+
+    if (this.visiblityFunctions != null) {
+      boolean visibility = true;
+      for (AttributeReadVisible function : this.visiblityFunctions) {
+        if (!function.isVisible()) {
+          visibility = false;
+          break;
+        }
+      }
+      if (this.visibleCalculated != visibility) {
+        boolean visibilityAggregated = this.visible && visibility;
+        boolean updateUi = (isVisibleAggregated() != visibilityAggregated);
+        this.visibleCalculated = visibility;
+        if (updateUi && hasWidgetAdapter()) {
+          getWidgetAdapter().setVisible(visibilityAggregated);
+        }
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateVisibility() {
+
+    updateVisibilityLocal();
+    int childCount = getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      UiWidget child = getChild(i);
+      child.updateVisibility();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final boolean isVisibleRecursive() {
 
-    if (!this.visible) {
+    if (!isVisibleAggregated()) {
       return false;
     }
     if ((this.parent == null) || !this.parent.isVisible()) {
@@ -559,8 +662,8 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
     Class<? extends Role> ariaRoleFixedType = getAriaRoleFixedType();
     if (ariaRoleFixedType != null) {
       if (this.ariaRole != null) {
-        // TODO hohwille create ObjectImmutableException()
-        throw new IllegalStateException(ariaRoleFixedType.getSimpleName());
+        // TODO hohwille create ReadOnlyException() constructor for object+attribute
+        throw new ReadOnlyException(ariaRoleFixedType.getSimpleName());
       }
       if (roleType != ariaRoleFixedType) {
         throw new ObjectMismatchException(roleType, ariaRoleFixedType);
@@ -862,7 +965,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue() throws RuntimeException {
+  protected VALUE doGetValue(VALUE template) throws RuntimeException {
 
     // default implementation only relevant for subclasses binding VOID for <VALUE>
     return null;

@@ -20,21 +20,26 @@ public abstract interface AttributeReadValueAdvanced<VALUE> extends AttributeRea
    * <b>ATTENTION:</b><br/>
    * If the current value entered by the user can NOT be parsed, this method will catch and ignore the
    * exception and return <code>null</code> instead. If you want to do validation and give feedback to the
-   * user please use {@link #getValueOrException()} instead.
+   * user please use {@link #getValueOrException(Object)} instead.
    */
   @Override
   VALUE getValue();
 
   /**
    * This method is like {@link #getValue()} but does NOT catch exceptions while parsing the value from the
-   * user input.
+   * user input. Additionally it allows to provide a template object that gets populated. This allows advanced
+   * features with polymorphism as you can also provide a sub-class of &lt;VALUE&gt;.
    * 
+   * @param template is the object where the data is filled in. May also be <code>null</code> - then this
+   *        method will create a new instance.
    * @return the current value of this widget. May be <code>null</code> if empty. If the value type is
-   *         {@link String} the empty {@link String} has to be returned if no value has been entered.
+   *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
+   *         &lt;VALUE&gt; is a mutable object (java bean) and <code>template</code> is NOT <code>null</code>,
+   *         this method is supposed to return <code>template</code>.
    * @throws RuntimeException if the entered value is invalid (e.g. paring caused a
    *         {@link NumberFormatException}).
    */
-  VALUE getValueOrException() throws RuntimeException;
+  VALUE getValueOrException(VALUE template) throws RuntimeException;
 
   /**
    * This method gets the last value that has been {@link AttributeWriteValueAdvanced#setValue(Object) set}.

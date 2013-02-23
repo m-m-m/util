@@ -30,7 +30,7 @@ import net.sf.mmm.util.nls.api.NlsAccess;
  * {@link #validate(net.sf.mmm.util.validation.api.ValidationState) validation} and create a new instance of
  * the {@link #getValue() value object} with the current modifications that is saved by delegation to the
  * {@link UiHandlerObjectSave#onSave(Object)} on widgets for UI patterns or forms to edit business objects
- * (see {@link #doGetValue()} and {@link #doSetValue(Object)}).
+ * (see {@link #doGetValue(Object)} and {@link #doSetValue(Object)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -58,12 +58,28 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
   }
 
   /**
-   *
+   * This method is called from the constructor and needs to create the actual editor form (e.g. a
+   * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel}) with the
+   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField editable fields} and add.
    */
-  protected void createAndAddChildren() {
+  protected abstract void createAndAddChildren();
 
+  /**
+   * This method adds a new child. It should be called from {@link #createAndAddChildren()}. Otherwise the
+   * child may appear after the {@link #createButtonPanel() button panel}.
+   * 
+   * @see net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite#addChild(net.sf.mmm.client.ui.api.widget.UiWidget)
+   * 
+   * @param child is the {@link UiWidgetRegular} to add as child.
+   */
+  protected void addChild(UiWidgetRegular child) {
+
+    getDelegate().addChild(child);
   }
 
+  /**
+   * @return the {@link UiWidgetButtonPanel} with the edit, save and cancel buttons.
+   */
   protected UiWidgetButtonPanel createButtonPanel() {
 
     UiWidgetButtonPanel buttonPanel = getContext().getWidgetFactory().create(UiWidgetButtonPanel.class);

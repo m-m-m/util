@@ -12,7 +12,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeReadVisible {
 
   /**
-   * This method determines if this object is set visible.
+   * This method determines if this object is {@link AttributeWriteVisible#setVisible(boolean) set} to
+   * visible.
    * 
    * @see AttributeReadVisibleRecursive#isVisibleRecursive()
    * 

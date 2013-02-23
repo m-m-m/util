@@ -68,7 +68,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue() throws RuntimeException {
+  protected VALUE doGetValue(VALUE template) throws RuntimeException {
 
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue = getWidgetAdapter().getValue();

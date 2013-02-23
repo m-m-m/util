@@ -117,6 +117,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     gridPanel.addChildren(textField1, comboBox);
     UiWidgetBorderPanel borderPanel = factory.create(UiWidgetBorderPanel.class);
     borderPanel.setLabel("Hello World");
+
     borderPanel.setChild(gridPanel);
     verticalPanel1.addChild(borderPanel);
     verticalPanel1.setMode(UiMode.EDIT);
