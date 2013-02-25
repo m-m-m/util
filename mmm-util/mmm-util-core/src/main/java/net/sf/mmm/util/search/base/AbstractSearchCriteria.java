@@ -24,6 +24,9 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
   /** @see #getSearchTimeout() */
   private Long searchTimeout;
 
+  /** @see #isReadOnly() */
+  private boolean readOnly;
+
   /**
    * The constructor.
    */
@@ -81,6 +84,23 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
   public void setSearchTimeout(Long searchTimeout) {
 
     this.searchTimeout = searchTimeout;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isReadOnly() {
+
+    return this.readOnly;
+  }
+
+  /**
+   * @param readOnly is the new value of {@link #isReadOnly()}.
+   */
+  public void setReadOnly(boolean readOnly) {
+
+    this.readOnly = readOnly;
   }
 
 }

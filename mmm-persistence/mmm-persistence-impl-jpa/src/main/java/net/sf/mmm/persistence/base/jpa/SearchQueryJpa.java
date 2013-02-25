@@ -30,6 +30,11 @@ public class SearchQueryJpa<HIT> implements SearchQuery<HIT> {
    */
   private static final String JAVAX_PERSISTENCE_QUERY_TIMEOUT = "javax.persistence.query.timeout";
 
+  /**
+   * The {@link Query#setHint(String, Object) hint} for the {@link SearchCriteria#isReadOnly() readonly} flag.
+   */
+  private static final String JAVAX_PERSISTENCE_QUERY_READONLY = "org.hibernate.readOnly"; // "javax.persistence.query.readOnly";
+
   /** @see #getSearchCriteria() */
   private final SearchCriteria searchCriteria;
 
@@ -138,6 +143,9 @@ public class SearchQueryJpa<HIT> implements SearchQuery<HIT> {
       Long searchTimeout = this.searchCriteria.getSearchTimeout();
       if (searchTimeout != null) {
         query.setHint(JAVAX_PERSISTENCE_QUERY_TIMEOUT, searchTimeout);
+      }
+      if (this.searchCriteria.isReadOnly()) {
+        query.setHint(JAVAX_PERSISTENCE_QUERY_READONLY, Boolean.TRUE);
       }
     }
     return maxHitCount;

@@ -8,6 +8,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.base.dynamic.VisibleFunctionMode;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
@@ -40,6 +41,17 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
   }
 
   /**
+   * @return <code>true</code> if the
+   *         {@link #createButton(UiContext, NlsMessage, UiHandlerEventClick, NlsMessage, UiWidgetImage)
+   *         button} shall only be visible if {@link net.sf.mmm.client.ui.api.common.UiMode#isEditable()
+   *         editable mode}, <code>false</code> for inverse and <code>null</code> for always visible.
+   */
+  protected Boolean getShowIfEditable() {
+
+    return null;
+  }
+
+  /**
    * Creates a new {@link UiWidgetButton}.
    * 
    * @param context is the {@link UiContext}.
@@ -62,6 +74,11 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
     }
     if (icon != null) {
       button.setImage(icon);
+    }
+    Boolean showIfEditable = getShowIfEditable();
+    if (showIfEditable != null) {
+      boolean autoAdd = true;
+      new VisibleFunctionMode(button, autoAdd, showIfEditable.booleanValue());
     }
     return button;
   }

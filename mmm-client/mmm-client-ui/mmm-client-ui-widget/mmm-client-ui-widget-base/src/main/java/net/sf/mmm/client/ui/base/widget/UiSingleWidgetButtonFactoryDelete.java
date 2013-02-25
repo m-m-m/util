@@ -53,6 +53,15 @@ public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
+  protected Boolean getShowIfEditable() {
+
+    return Boolean.TRUE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetButton create(final UiContext context, final UiHandlerPlainDelete handler,
       final boolean preventConfirmationPopup) {
 

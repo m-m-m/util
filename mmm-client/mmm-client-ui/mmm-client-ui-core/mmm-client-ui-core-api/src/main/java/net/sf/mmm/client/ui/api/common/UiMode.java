@@ -2,6 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This interface represents the available modes of a UI object. It can be either in the mode {@link #VIEW} or
  * in the mode {@link #EDIT}.<br/>
@@ -17,14 +22,47 @@ public interface UiMode {
    * The mode to show content in a read-only view.
    */
   UiMode VIEW = new UiMode() {
-    // nothing to add...
+
+    @Override
+    public boolean isEditable() {
+
+      return false;
+    };
   };
 
   /**
    * The mode to edit content.
    */
   UiMode EDIT = new UiMode() {
-    // nothing to add...
+
+    @Override
+    public boolean isEditable() {
+
+      return true;
+    };
   };
 
+  /**
+   * This method determines if this mode allows the end-user to modify values.
+   * 
+   * @return <code>true</code> if this {@link UiMode} allows editing, <code>false</code> otherwise (if the
+   *         end-user can not modify values in this mode).
+   */
+  boolean isEditable();
+
+  /**
+   * The {@link Set} containing only {@link #VIEW}.
+   */
+  Set<UiMode> SET_VIEW = Collections.unmodifiableSet(new HashSet<UiMode>(Arrays.asList(UiMode.VIEW)));
+
+  /**
+   * The {@link Set} containing only {@link #VIEW}.
+   */
+  Set<UiMode> SET_EDIT = Collections.unmodifiableSet(new HashSet<UiMode>(Arrays.asList(UiMode.EDIT)));
+
+  /**
+   * The {@link Set} containing {@link #VIEW} and {@link #EDIT}.
+   */
+  Set<UiMode> SET_VIEW_AND_EDIT = Collections.unmodifiableSet(new HashSet<UiMode>(Arrays.asList(UiMode.VIEW,
+      UiMode.EDIT)));
 }

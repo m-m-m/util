@@ -6,10 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValidation;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
+import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
@@ -19,16 +19,16 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;
 
 /**
- * This is a base implementation of {@link UiFeatureValue} and related aspects such as {@link #isModified()
- * modified} and {@link #validate(ValidationState) validation}.
+ * This is a base implementation of {@link UiFeatureValueAndValidation} and related aspects such as
+ * {@link #isModified() modified}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VALUE>, UiFeatureValidation<VALUE>,
-    AttributeWriteModified {
+public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObject implements
+    UiFeatureValueAndValidation<VALUE>, AttributeWriteModified {
 
   /** @see #addValidator(ValueValidator) */
   private final List<ValueValidator<? super VALUE>> validatorList;
@@ -44,6 +44,9 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
 
   /** @see #isMandatory() */
   private boolean mandatory;
+
+  /** @see #isValidated() */
+  private boolean validated;
 
   /**
    * The constructor.
@@ -66,8 +69,28 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
     try {
       return getValueOrException(null);
     } catch (RuntimeException e) {
-      // ATTENTION: This is one of the very rare cases where we intentionally ignore an exception.
+      handleGetValueError(e, null);
       return null;
+    }
+  }
+
+  /**
+   * This method handles a {@link RuntimeException} that occurred in
+   * {@link #getValueInternal(Object, ValidationState)}.
+   * 
+   * @param e is the {@link RuntimeException} to handle.
+   * @param state is the {@link ValidationState} or <code>null</code> if no validation is performed.
+   */
+  private void handleGetValueError(RuntimeException e, ValidationState state) {
+
+    if (state == null) {
+      // ATTENTION: This is one of the very rare cases where we intentionally consume an exception.
+      getLogger().debug("Error in getValue() at " + toString(), e);
+    } else {
+      ValidationFailure failure = createValidationFailure(e);
+      if (failure != null) {
+        state.onFailure(failure);
+      }
     }
   }
 
@@ -84,9 +107,71 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * {@inheritDoc}
    */
   @Override
+  public VALUE getValueAndValidate(ValidationState state) {
+
+    clearMessages();
+    ValidationState validationState = state;
+    if (validationState == null) {
+      validationState = new ValidationStateImpl();
+    }
+    VALUE result = getValueInternal(null, validationState);
+    if (validationState.isValid()) {
+      if ((result == null) && (state == null)) {
+        getLogger().error("null has been returned as valid value at " + toString());
+      }
+      return result;
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final VALUE getValueOrException(VALUE template) throws RuntimeException {
 
-    return doGetValue(template);
+    return getValueInternal(template, null);
+  }
+
+  /**
+   * @return <code>true</code> if this object has been {@link #validate(ValidationState) validated}
+   *         (technically via {@link #getValueInternal(Object, ValidationState)}) since
+   *         {@link #clearMessages() messages have been cleared}.
+   */
+  protected boolean isValidated() {
+
+    return this.validated;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void clearMessages() {
+
+    this.validated = false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public VALUE getValueInternal(VALUE template, ValidationState state) throws RuntimeException {
+
+    // clear validations (and flag)...?
+    try {
+      VALUE value = doGetValue(template, state);
+      if (state != null) {
+        doValidate(state, value);
+      }
+      return value;
+    } catch (RuntimeException e) {
+      if (state == null) {
+        throw e;
+      }
+      handleGetValueError(e, state);
+      return null;
+    }
   }
 
   /**
@@ -96,7 +181,7 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * widget should look like this:
    * 
    * <pre>
-   * protected MyBean doGetValue(MyBean template) {
+   * protected MyBean doGetValue(MyBean template, {@link ValidationState} state) {
    *   MyBean result = template;
    *   if (result == null) {
    *     result = new MyBean();
@@ -107,8 +192,10 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    *     result.setId(original.getId());
    *   }
    *
-   *   result.setFoo(this.widgetFoo.{@link #getValue()});
-   *   Bar bar = this.widgetBar.{@link #getValueOrException(Object) getValueOrException}(result.getBar());
+   *   // if foo is a datatype we could supply null instead of result.getFoo()
+   *   result.setFoo(this.widgetFoo.{@link #getValueInternal(Object, ValidationState) getValueInternal}(result.getFoo(), state));
+   *
+   *   Bar bar = this.widgetBar.{@link #getValueInternal(Object, ValidationState) getValueInternal}(result.getBar());
    *   this.widgetBar2.{@link #getValueOrException(Object) getValueOrException}(bar);
    *   result.setBar(bar);
    *   ...
@@ -121,6 +208,9 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * 
    * @param template is the object where the data is filled in. May also be <code>null</code> - then this
    *        method will create a new instance.
+   * @param state is the {@link ValidationState}. If <code>null</code> the validation will be omitted,
+   *        otherwise an implicit validation is performed.(see
+   *        {@link #getValueInternal(Object, ValidationState)}).
    * @return the current value of this widget. May be <code>null</code> if empty. If &lt;VALUE&gt; is
    *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
    *         &lt;VALUE&gt; is a mutable object (java bean) and <code>template</code> is NOT <code>null</code>,
@@ -130,7 +220,7 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    *         {@link #getOriginalValue() original value}. This is required to support operations such as
    *         {@link #resetValue()}.
    */
-  protected abstract VALUE doGetValue(VALUE template);
+  protected abstract VALUE doGetValue(VALUE template, ValidationState state);
 
   /**
    * {@inheritDoc}
@@ -172,9 +262,9 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
   /**
    * This method is called from {@link #setValue(Object)} and {@link #setValueForUser(Object)}. It has to be
    * implemented with the custom logic to set the value in the view. The implementation of this method has to
-   * correspond with the implementation of {@link #doGetValue(Object)}.
+   * correspond with the implementation of {@link #doGetValue(Object, ValidationState)}.
    * 
-   * @see #doGetValue(Object)
+   * @see #doGetValue(Object, ValidationState)
    * 
    * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
    *        to {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField atomic fields}.
@@ -357,7 +447,7 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
     if (validationState == null) {
       validationState = new ValidationStateImpl();
     }
-    doValidate(validationState);
+    getValueInternal(null, state);
     return validationState.isValid();
   }
 
@@ -366,32 +456,32 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * object.
    * 
    * @param state is the {@link ValidationState}. Never <code>null</code>.
+   * @param value is the {@link #getValue() current value} of this object that has already be determined.
    */
-  protected void doValidate(ValidationState state) {
+  protected void doValidate(ValidationState state, VALUE value) {
 
-    validateLocal(state);
+    validateLocal(state, value);
   }
 
   /**
    * This method performs the local validation of this object excluding potential child objects.
    * 
-   * @param state is the {@link ValidationState}.
+   * @param state is the {@link ValidationState}. Not <code>null</code>.
+   * @param value is the {@link #getValue() current value} of this object that has already be determined.
    */
-  protected void validateLocal(ValidationState state) {
+  protected void validateLocal(ValidationState state, VALUE value) {
 
-    VALUE currentValue;
-    try {
-      currentValue = getValueOrException(null);
+    if (this.validatorList != null) {
       for (ValueValidator<? super VALUE> validator : this.validatorList) {
-        ValidationFailure failure = validator.validate(currentValue, getSource());
-        if (failure != null) {
-          state.onFailure(failure);
+        try {
+          ValidationFailure failure = validator.validate(value, getSource());
+          if (failure != null) {
+            state.onFailure(failure);
+          }
+        } catch (RuntimeException e) {
+          getLogger().error("Error in validator '" + validator + "' at " + toString(), e);
+          handleGetValueError(e, state);
         }
-      }
-    } catch (RuntimeException e) {
-      ValidationFailure failure = createValidationFailure(e);
-      if (failure != null) {
-        state.onFailure(failure);
       }
     }
   }
@@ -412,5 +502,15 @@ public abstract class AbstractUiFeatureValue<VALUE> implements UiFeatureValue<VA
    * @return the source for validation failures.
    */
   protected abstract String getSource();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    // default implementation
+    return getSource() + "[" + getClass().getSimpleName() + "]";
+  }
 
 }

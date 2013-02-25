@@ -50,4 +50,15 @@ public interface SearchCriteria extends Serializable {
    */
   Long getSearchTimeout();
 
+  /**
+   * This method determines if the search should be performed in read-only mode. In such case the
+   * {@link SearchResult#getHits() result hits} can NOT be modified or their changes will NOT be persisted. If
+   * a search-engine does not support this feature (e.g. for full-text search this makes no sense), it will be
+   * ignored.
+   * 
+   * @return <code>true</code> if read-only, <code>false</code> otherwise (default).
+   * @since 3.0.1
+   */
+  boolean isReadOnly();
+
 }

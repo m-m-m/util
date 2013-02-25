@@ -51,6 +51,15 @@ public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonF
    * {@inheritDoc}
    */
   @Override
+  protected Boolean getShowIfEditable() {
+
+    return Boolean.TRUE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetButton create(UiContext context, final UiHandlerPlainUp handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {

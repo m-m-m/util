@@ -48,6 +48,15 @@ public class UiSingleWidgetButtonFactoryStopEdit extends AbstractUiSingleWidgetB
    * {@inheritDoc}
    */
   @Override
+  protected Boolean getShowIfEditable() {
+
+    return Boolean.TRUE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetButton create(UiContext context, final UiHandlerPlainStopEdit handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {

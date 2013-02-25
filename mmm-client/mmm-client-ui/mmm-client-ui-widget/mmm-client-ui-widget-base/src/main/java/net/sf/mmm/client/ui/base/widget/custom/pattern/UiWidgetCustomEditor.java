@@ -17,6 +17,8 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.util.validation.base.ValidationStateImpl;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustomComposite custom composite widget} that
@@ -30,7 +32,7 @@ import net.sf.mmm.util.nls.api.NlsAccess;
  * {@link #validate(net.sf.mmm.util.validation.api.ValidationState) validation} and create a new instance of
  * the {@link #getValue() value object} with the current modifications that is saved by delegation to the
  * {@link UiHandlerObjectSave#onSave(Object)} on widgets for UI patterns or forms to edit business objects
- * (see {@link #doGetValue(Object)} and {@link #doSetValue(Object)}).
+ * (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -43,15 +45,22 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
   /** @see #createButtonPanel() */
   private final UiHandler handler;
 
+  /** @see UiHandler#onSave() */
+  private final UiHandlerObjectSave<VALUE> handlerSaveObject;
+
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param handlerSaveObject is the {@link UiHandlerObjectSave} {@link UiHandlerObjectSave#onSave(Object)
+   *        invoked} if the end-user clicked "save" and the {@link #getValue() value} has been validated
+   *        successfully.
    */
-  public UiWidgetCustomEditor(UiContext context) {
+  public UiWidgetCustomEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject) {
 
     super(context, context.getWidgetFactory().create(UiWidgetVerticalPanel.class));
     this.handler = new UiHandler();
+    this.handlerSaveObject = handlerSaveObject;
     createAndAddChildren();
     UiWidgetButtonPanel buttonPanel = createButtonPanel();
     getDelegate().addChild(buttonPanel);
@@ -108,8 +117,34 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
     @Override
     public void onSave() {
 
-      // TODO Auto-generated method stub
+      ValidationState state = new ValidationStateImpl();
+      VALUE value = getValueAndValidate(state);
+      if (state.isValid()) {
+        UiWidgetCustomEditor.this.handlerSaveObject.onSave(value);
+      } else {
+        boolean showPopup = true;
+        // showPopup = getContext().getConfiguration().isShowValidationFailurePopup();
+        if (showPopup) {
+          showValidationFailurePopup();
+        }
+      }
+    }
 
+    /**
+     * This method shows a popup that informs about validation failures.
+     */
+    protected void showValidationFailurePopup() {
+
+      Callback<String> callback = new Callback<String>() {
+
+        @Override
+        public Void apply(String argument) {
+
+          return null;
+        }
+      };
+      getContext().getPopupHelper().showPopup("There are validation failures. Please correct input data.",
+          MessageSeverity.WARNING, "Validation failed", callback, "OK", "Details");
     }
 
     /**
@@ -139,8 +174,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
     }
 
     /**
-     * 
-     * TODO: javadoc
+     * Called from {@link #onStopEditMode()} to actually discard the changes and leave the edit mode.
      */
     private void stopEditMode() {
 

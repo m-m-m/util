@@ -1026,11 +1026,13 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @see net.sf.mmm.util.nls.api.ReadOnlyException
    * 
    * @param object is the object that is read-only and can not be modified.
+   * @param attribute is the attribute that is read-only or <code>null</code> for the entire object.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("Failed to modify \"{object}\" as it is read-only!")
+  @NlsBundleMessage("Failed to modify{attribute,choice,(?==null)''(else)' attribute \"'{attribute}'\" of'} \"{object}\" as it is read-only!")
   NlsMessage errorReadOnly(@Named("object")
-  Object object);
+  Object object, @Named("attribute")
+  Object attribute);
 
   /**
    * @see net.sf.mmm.util.cli.api.AbstractMain

@@ -49,12 +49,22 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    */
   @Override
   @SuppressWarnings("unchecked")
-  protected VALUE doGetValue(VALUE template) throws RuntimeException {
+  protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     // TODO: this may be totally wrong and could lead to ClassCastException, even though it is a good default
     // implementation for most cases
-    VALUE value = ((AbstractUiWidget<VALUE>) this.delegate).getValueOrException(template);
+    VALUE value = ((AbstractUiWidget<VALUE>) this.delegate).getValueInternal(template, state);
     return value;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void clearMessages() {
+
+    super.clearMessages();
+    this.delegate.clearMessages();
   }
 
   /**
@@ -474,9 +484,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  protected void doValidate(ValidationState state) {
+  protected void doValidate(ValidationState state, VALUE value) {
 
-    super.doValidate(state);
+    super.doValidate(state, value);
     this.delegate.validate(state);
   }
 

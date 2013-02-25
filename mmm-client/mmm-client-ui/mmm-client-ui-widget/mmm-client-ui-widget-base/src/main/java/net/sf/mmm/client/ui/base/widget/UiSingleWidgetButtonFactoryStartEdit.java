@@ -48,6 +48,15 @@ public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidget
    * {@inheritDoc}
    */
   @Override
+  protected Boolean getShowIfEditable() {
+
+    return Boolean.FALSE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetButton create(UiContext context, final UiHandlerPlainStartEdit handler,
       boolean preventConfirmationPopup) {
 

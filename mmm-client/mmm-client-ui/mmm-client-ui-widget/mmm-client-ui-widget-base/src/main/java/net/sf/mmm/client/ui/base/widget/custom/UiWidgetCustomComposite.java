@@ -5,11 +5,12 @@ package net.sf.mmm.client.ui.base.widget.custom;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is also a
  * {@link UiWidgetComposite composite widget}. It supports creating reusable high-level widgets for UI
- * patterns or forms to edit business objects (see {@link #doGetValue(Object)} and {@link #doSetValue(Object)}).
+ * patterns or forms to edit business objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -87,7 +88,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * </pre>
    */
   @Override
-  protected abstract VALUE doGetValue(VALUE template) throws RuntimeException;
+  protected abstract VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException;
 
   /**
    * {@inheritDoc}

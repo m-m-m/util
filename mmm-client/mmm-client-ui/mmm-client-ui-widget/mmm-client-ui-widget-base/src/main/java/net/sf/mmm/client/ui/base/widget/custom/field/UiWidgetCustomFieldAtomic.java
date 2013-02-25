@@ -9,6 +9,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustomField custom field widget} that is
@@ -41,7 +42,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  protected final VALUE doGetValue(VALUE template) throws RuntimeException {
+  protected final VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     // TODO: template should be passed but may not match...
     DELEGATE_VALUE value = getDelegate().getValueOrException(null);

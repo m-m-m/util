@@ -13,6 +13,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteOnlySizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
+import net.sf.mmm.client.ui.api.feature.UiFeatureMessages;
 import net.sf.mmm.client.ui.api.feature.UiFeatureVisible;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.validation.api.AbstractValidatableObject;
@@ -36,10 +37,10 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidget extends UiFeatureVisible, AttributeWriteHtmlId, AttributeWriteTooltip,
-    AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
-    AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode, AttributeWriteModeFixed,
-    AttributeReadAriaRole, AbstractValidatableObject {
+public abstract interface UiWidget extends UiFeatureVisible, UiFeatureMessages, AttributeWriteHtmlId,
+    AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
+    AttributeWriteSize, AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode,
+    AttributeWriteModeFixed, AttributeReadAriaRole, AbstractValidatableObject {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

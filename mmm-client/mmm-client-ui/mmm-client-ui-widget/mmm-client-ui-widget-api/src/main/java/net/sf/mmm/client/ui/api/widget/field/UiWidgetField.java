@@ -3,8 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValidation;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
+import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite;
@@ -36,12 +35,15 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * @since 1.0.0
  */
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
-    UiWidgetActive, UiFeatureValue<VALUE>, UiFeatureValidation<VALUE>, AttributeWriteValidationFailure {
+    UiWidgetActive, UiFeatureValueAndValidation<VALUE>, AttributeWriteValidationFailure {
 
   /**
-   * This method is logically equivalent to
+   * This method is like
    * <code>{@link #getFieldLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> without actually
-   * creating the {@link #getFieldLabelWidget() field label widget} if it does NOT yet exist.
+   * creating the {@link #getFieldLabelWidget() field label widget} if it does NOT yet exist. Further it will
+   * only return what has been set via {@link #setFieldLabel(String)} and NOT what has potentially been set
+   * via {@link #getFieldLabelWidget()}.{@link UiWidgetLabel#setLabel(String) setLabel} (what should be
+   * avoided).
    * 
    * @return the {@link UiWidgetLabel#getLabel() label} of the {@link #getFieldLabelWidget() field label
    *         widget} widget} or <code>null</code> if NOT set.

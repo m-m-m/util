@@ -9,6 +9,7 @@ import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetField}.
@@ -68,7 +69,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue(VALUE template) throws RuntimeException {
+  protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue = getWidgetAdapter().getValue();
@@ -158,6 +159,16 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setValidationFailure(validationFailure);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void clearMessagesLocal() {
+
+    super.clearMessagesLocal();
+    setValidationFailure("");
   }
 
   /**

@@ -662,8 +662,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
     Class<? extends Role> ariaRoleFixedType = getAriaRoleFixedType();
     if (ariaRoleFixedType != null) {
       if (this.ariaRole != null) {
-        // TODO hohwille create ReadOnlyException() constructor for object+attribute
-        throw new ReadOnlyException(ariaRoleFixedType.getSimpleName());
+        throw new ReadOnlyException(this, "ARIA role");
       }
       if (roleType != ariaRoleFixedType) {
         throw new ObjectMismatchException(roleType, ariaRoleFixedType);
@@ -878,17 +877,41 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
 
   /**
    * {@inheritDoc}
+   */
+  @Override
+  public final void clearMessages() {
+
+    clearMessagesLocal();
+    int childCount = getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      UiWidget child = getChild(i);
+      if (child.isModified()) {
+        child.clearMessages();
+      }
+    }
+  }
+
+  /**
+   * This method clears the messages locally (the non-recursive part of {@link #clearMessages()}).
+   */
+  public void clearMessagesLocal() {
+
+    // nothing to do by default.
+  }
+
+  /**
+   * {@inheritDoc}
    * 
    * <br/>
    * It performs the {@link #validate(ValidationState) validation} of this widget by delegating to
-   * {@link #validateLocal(ValidationState)} and {@link #validateRecursive(ValidationState)}. It may be
-   * overridden to collect potential validation failures and attach them to this widget. You should not forget
-   * the super-call in such case.
+   * {@link #validateLocal(ValidationState, Object)} and {@link #validateRecursive(ValidationState)}. It may
+   * be overridden to collect potential validation failures and attach them to this widget. You should not
+   * forget the super-call in such case.
    */
   @Override
-  protected void doValidate(ValidationState state) {
+  protected void doValidate(ValidationState state, VALUE value) {
 
-    super.doValidate(state);
+    super.doValidate(state, value);
     validateRecursive(state);
   }
 
@@ -965,7 +988,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue(VALUE template) throws RuntimeException {
+  protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     // default implementation only relevant for subclasses binding VOID for <VALUE>
     return null;

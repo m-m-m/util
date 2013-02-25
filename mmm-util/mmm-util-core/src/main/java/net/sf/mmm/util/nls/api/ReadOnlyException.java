@@ -35,12 +35,39 @@ public class ReadOnlyException extends NlsRuntimeException {
   /**
    * The constructor.
    * 
+   * @param object is the object that is read-only and can not be modified.
+   * @param attribute is the attribute of <code>object</code> that can not be modified.
+   * 
+   * @since 3.0.1
+   */
+  public ReadOnlyException(Object object, Object attribute) {
+
+    this(null, object, attribute);
+  }
+
+  /**
+   * The constructor.
+   * 
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object that is read-only and can not be modified.
    */
   public ReadOnlyException(Throwable nested, Object object) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorReadOnly(object));
+    this(nested, object, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param nested is the {@link #getCause() cause} of this exception.
+   * @param object is the object that is read-only and can not be modified.
+   * @param attribute is the attribute of <code>object</code> that can not be modified.
+   * 
+   * @since 3.0.1
+   */
+  public ReadOnlyException(Throwable nested, Object object, Object attribute) {
+
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorReadOnly(object, attribute));
   }
 
   /**

@@ -14,6 +14,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsFiel
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetOptionsField}.
@@ -123,7 +124,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
-  protected VALUE doGetValue(VALUE template) throws RuntimeException {
+  protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     if (this.optionTitleList == null) {
       // the options have not been set yet! As they may be received asynchronously but the widget adapter may
@@ -131,7 +132,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
       // impossible for the user to change the value...
       return getOriginalValue();
     }
-    return super.doGetValue(template);
+    return super.doGetValue(template, state);
   }
 
   /**
