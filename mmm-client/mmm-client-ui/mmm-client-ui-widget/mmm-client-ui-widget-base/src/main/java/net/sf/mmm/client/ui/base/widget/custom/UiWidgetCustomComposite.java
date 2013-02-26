@@ -10,7 +10,8 @@ import net.sf.mmm.util.validation.api.ValidationState;
 /**
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is also a
  * {@link UiWidgetComposite composite widget}. It supports creating reusable high-level widgets for UI
- * patterns or forms to edit business objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object)}).
+ * patterns or forms to edit business objects (see {@link #doGetValue(Object, ValidationState)} and
+ * {@link #doSetValue(Object)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -19,7 +20,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DELEGATE extends UiWidgetComposite<CHILD>>
+public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DELEGATE extends UiWidgetComposite<? super CHILD>>
     extends UiWidgetCustom<VALUE, DELEGATE> implements UiWidgetComposite<CHILD> {
 
   /**
@@ -48,7 +49,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   @Override
   public CHILD getChild(int index) {
 
-    return getDelegate().getChild(index);
+    return (CHILD) getDelegate().getChild(index);
   }
 
   /**
@@ -57,7 +58,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   @Override
   public CHILD getChild(String id) {
 
-    return getDelegate().getChild(id);
+    return (CHILD) getDelegate().getChild(id);
   }
 
   /**
@@ -75,14 +76,29 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * <br/>
    * An implementation should get the values from the {@link #getChild(int) child-widgets} and compose the
    * requested value out of these attributes.<br/>
-   * An example implementation may look like this:
+   * Here is an example implementation showing all relevant variants:
    * 
    * <pre>
-   * protected Person doGetValue() {
-   *   Person result = new Person();
-   *   result.setFirstName(this.widgetFirstName.getValue());
-   *   result.setLastName(this.widgetLastName.getValue());
+   * protected Person doGetValue(Person template, {@link ValidationState} state) {
+   *   Person result = template;
+   *   if (result == null) {
+   *     result = new Person();
+   *   }
+   *   Person original = {@link #getOriginalValue()};
+   *   if (original != null) {
+   *     // result.copyValues(original);
+   *     result.setId(original.getId());
+   *   }
+   *
+   *   // if the attribute is a datatype we can supply null (instead of result.getFirstName())
+   *   result.setFirstName(this.widgetFirstName.{@link #getValueDirect(Object, ValidationState) getValueDirect}(null, state));
+   *   result.setLastName(this.widgetLastName.{@link #getValueDirect(Object, ValidationState) getValueDirect}(null, state));
+   *
+   *   Address address = this.widgetAddressPanel.{@link #getValueDirect(Object, ValidationState) getValueDirect}(result.getAddress(), state);
+   *   this.widgetAddressExtraPanel.{@link #getValueDirect(Object, ValidationState) getValueDirect}(address, state);
+   *   result.setAddress(address);
    *   ...
+   *
    *   return result;
    * }
    * </pre>

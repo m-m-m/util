@@ -9,6 +9,7 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -43,6 +44,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
@@ -118,7 +120,17 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetBorderPanel borderPanel = factory.create(UiWidgetBorderPanel.class);
     borderPanel.setLabel("Hello World");
 
-    borderPanel.setChild(gridPanel);
+    // borderPanel.setChild(gridPanel);
+    UiHandlerObjectSave<ContactBean> handlerObjectSave = new UiHandlerObjectSave<ContactBean>() {
+
+      @Override
+      public void onSave(ContactBean object) {
+
+        Window.alert("Contact " + object + " saved.");
+      }
+    };
+    ContactEditor contactEditor = new ContactEditor(context, handlerObjectSave);
+    borderPanel.setChild(contactEditor);
     verticalPanel1.addChild(borderPanel);
     verticalPanel1.setMode(UiMode.EDIT);
 

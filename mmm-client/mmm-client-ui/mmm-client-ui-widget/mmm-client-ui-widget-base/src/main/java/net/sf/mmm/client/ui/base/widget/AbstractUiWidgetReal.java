@@ -926,8 +926,10 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
 
     int size = getChildCount();
     for (int i = 0; i < size; i++) {
-      UiWidget child = getChild(i);
-      child.validate(state);
+      AbstractUiWidget<?> child = (AbstractUiWidget<?>) getChild(i);
+      if (!child.isValidated()) {
+        child.validate(state);
+      }
     }
   }
 

@@ -53,7 +53,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
 
     // TODO: this may be totally wrong and could lead to ClassCastException, even though it is a good default
     // implementation for most cases
-    VALUE value = ((AbstractUiWidget<VALUE>) this.delegate).getValueInternal(template, state);
+    VALUE value = ((AbstractUiWidget<VALUE>) this.delegate).getValueDirect(template, state);
     return value;
   }
 

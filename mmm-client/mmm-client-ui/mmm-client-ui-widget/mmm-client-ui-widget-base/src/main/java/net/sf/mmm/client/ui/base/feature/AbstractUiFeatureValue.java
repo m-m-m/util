@@ -76,7 +76,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
 
   /**
    * This method handles a {@link RuntimeException} that occurred in
-   * {@link #getValueInternal(Object, ValidationState)}.
+   * {@link #getValueDirect(Object, ValidationState)}.
    * 
    * @param e is the {@link RuntimeException} to handle.
    * @param state is the {@link ValidationState} or <code>null</code> if no validation is performed.
@@ -114,7 +114,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
     if (validationState == null) {
       validationState = new ValidationStateImpl();
     }
-    VALUE result = getValueInternal(null, validationState);
+    VALUE result = getValueDirect(null, validationState);
     if (validationState.isValid()) {
       if ((result == null) && (state == null)) {
         getLogger().error("null has been returned as valid value at " + toString());
@@ -130,15 +130,15 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   @Override
   public final VALUE getValueOrException(VALUE template) throws RuntimeException {
 
-    return getValueInternal(template, null);
+    return getValueDirect(template, null);
   }
 
   /**
    * @return <code>true</code> if this object has been {@link #validate(ValidationState) validated}
-   *         (technically via {@link #getValueInternal(Object, ValidationState)}) since
-   *         {@link #clearMessages() messages have been cleared}.
+   *         (technically via {@link #getValueDirect(Object, ValidationState)}) since {@link #clearMessages()
+   *         messages have been cleared}.
    */
-  protected boolean isValidated() {
+  public final boolean isValidated() {
 
     return this.validated;
   }
@@ -156,13 +156,13 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public VALUE getValueInternal(VALUE template, ValidationState state) throws RuntimeException {
+  public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
-    // clear validations (and flag)...?
     try {
       VALUE value = doGetValue(template, state);
       if (state != null) {
         doValidate(state, value);
+        this.validated = true;
       }
       return value;
     } catch (RuntimeException e) {
@@ -180,37 +180,12 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * implementation of {@link #doSetValue(Object)}. A typical implementation of this method for a composite
    * widget should look like this:
    * 
-   * <pre>
-   * protected MyBean doGetValue(MyBean template, {@link ValidationState} state) {
-   *   MyBean result = template;
-   *   if (result == null) {
-   *     result = new MyBean();
-   *   }
-   *   MyBean original = {@link #getOriginalValue()};
-   *   if (original != null) {
-   *     // result.copyValues(original);
-   *     result.setId(original.getId());
-   *   }
-   *
-   *   // if foo is a datatype we could supply null instead of result.getFoo()
-   *   result.setFoo(this.widgetFoo.{@link #getValueInternal(Object, ValidationState) getValueInternal}(result.getFoo(), state));
-   *
-   *   Bar bar = this.widgetBar.{@link #getValueInternal(Object, ValidationState) getValueInternal}(result.getBar());
-   *   this.widgetBar2.{@link #getValueOrException(Object) getValueOrException}(bar);
-   *   result.setBar(bar);
-   *   ...
-   *
-   *   return result;
-   * }
-   * </pre>
-   * 
    * @see #doSetValue(Object)
    * 
    * @param template is the object where the data is filled in. May also be <code>null</code> - then this
    *        method will create a new instance.
-   * @param state is the {@link ValidationState}. If <code>null</code> the validation will be omitted,
-   *        otherwise an implicit validation is performed.(see
-   *        {@link #getValueInternal(Object, ValidationState)}).
+   * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted).
+   *        Should only be used to propagate to {@link #getValueDirect(Object, ValidationState)} of children.
    * @return the current value of this widget. May be <code>null</code> if empty. If &lt;VALUE&gt; is
    *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
    *         &lt;VALUE&gt; is a mutable object (java bean) and <code>template</code> is NOT <code>null</code>,
@@ -443,11 +418,12 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   @Override
   public final boolean validate(ValidationState state) {
 
+    clearMessages();
     ValidationState validationState = state;
     if (validationState == null) {
       validationState = new ValidationStateImpl();
     }
-    getValueInternal(null, state);
+    getValueDirect(null, state);
     return validationState.isValid();
   }
 

@@ -7,6 +7,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomButtonPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLabelGwt;
@@ -81,6 +82,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory {
     register(new UiWidgetGridRowGwt.Factory());
     register(new UiWidgetGridCellGwt.Factory());
     register(new UiWidgetBorderPanelGwt.Factory());
+    register(new UiWidgetCustomButtonPanel.Factory());
     // menu
     register(new UiWidgetMenuBarGwt.Factory());
     register(new UiWidgetMenuGwt.Factory());

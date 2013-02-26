@@ -57,6 +57,6 @@ public interface UiFeatureValueAndValidation<VALUE> extends UiFeatureValue<VALUE
    *         {@link ValidationState#onFailure(net.sf.mmm.util.validation.api.ValidationFailure) collected} and
    *         visualized by the UI.
    */
-  VALUE getValueInternal(VALUE template, ValidationState state) throws RuntimeException;
+  VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException;
 
 }

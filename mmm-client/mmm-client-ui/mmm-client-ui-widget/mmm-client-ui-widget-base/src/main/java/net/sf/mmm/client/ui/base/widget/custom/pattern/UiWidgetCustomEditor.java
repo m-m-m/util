@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
 import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.validation.api.ValidationState;
@@ -40,7 +41,7 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * @since 1.0.0
  */
 public abstract class UiWidgetCustomEditor<VALUE> extends
-    UiWidgetCustomComposite<VALUE, UiWidgetRegular, UiWidgetVerticalPanel> {
+    UiWidgetCustomRegularComposite<VALUE, UiWidgetRegular, UiWidgetVerticalPanel> {
 
   /** @see #createButtonPanel() */
   private final UiHandler handler;
@@ -121,6 +122,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
       VALUE value = getValueAndValidate(state);
       if (state.isValid()) {
         UiWidgetCustomEditor.this.handlerSaveObject.onSave(value);
+        setMode(UiMode.VIEW);
       } else {
         boolean showPopup = true;
         // showPopup = getContext().getConfiguration().isShowValidationFailurePopup();

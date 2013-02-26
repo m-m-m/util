@@ -10,6 +10,7 @@ import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.util.validation.base.ValidationStateMessageCollector;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetField}.
@@ -23,9 +24,6 @@ import net.sf.mmm.util.validation.api.ValidationState;
  */
 public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField<VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
     extends AbstractUiWidgetActive<ADAPTER, VALUE> implements UiWidgetField<VALUE> {
-
-  /** @see #getValue() */
-  private VALUE value;
 
   /** @see #getValidationFailure() */
   private String validationFailure;
@@ -57,8 +55,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (changeEventSender != null) {
       adapter.setChangeEventSender(this, changeEventSender);
     }
-    if (this.value != null) {
-      adapter.setValue(convertFromValue(this.value));
+    VALUE value = getValue();
+    if (value != null) {
+      adapter.setValue(convertFromValue(value));
     }
     if (this.validationFailure != null) {
       adapter.setValidationFailure(this.validationFailure);
@@ -71,14 +70,17 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
+    VALUE value;
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue = getWidgetAdapter().getValue();
       if (adapterValue == null) {
         return null;
       }
-      this.value = convertToValue(adapterValue);
+      value = convertToValue(adapterValue);
+    } else {
+      value = getOriginalValue();
     }
-    return this.value;
+    return value;
   }
 
   /**
@@ -87,7 +89,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   protected void doSetValue(VALUE newValue) {
 
-    this.value = newValue;
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue;
       if (newValue == null) {
@@ -249,6 +250,18 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       getWidgetAdapter().setChangeEventSender(this, changeEventSender);
     }
     return changeEventSender;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doValidate(ValidationState state, VALUE value) {
+
+    ValidationStateMessageCollector messageCollector = new ValidationStateMessageCollector(state);
+    super.doValidate(messageCollector, value);
+    String failureMessages = messageCollector.getFailureMessages();
+    setValidationFailure(failureMessages);
   }
 
 }
