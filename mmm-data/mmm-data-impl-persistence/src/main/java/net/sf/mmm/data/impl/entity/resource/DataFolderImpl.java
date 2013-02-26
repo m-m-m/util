@@ -11,21 +11,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.resource.DataEntityResource;
-import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
 import net.sf.mmm.data.api.entity.resource.DataFolder;
-import net.sf.mmm.data.api.entity.resource.DataFolderView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is the implementation of {@link DataFolderView}.
+ * This is the implementation of {@link DataFolder}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Entity(name = DataFolderView.CLASS_TITLE)
-@DataClassAnnotation(id = DataFolderView.CLASS_ID)
-@DiscriminatorValue("" + DataFolderView.CLASS_ID)
+@Entity(name = DataFolder.CLASS_TITLE)
+@DataClassAnnotation(id = DataFolder.CLASS_ID)
+@DiscriminatorValue("" + DataFolder.CLASS_ID)
 public class DataFolderImpl extends AbstractDataEntityResource implements DataFolder {
 
   /** UID for serialization. */
@@ -49,12 +47,13 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataFolderView.CLASS_ID;
+    return DataFolder.CLASS_ID;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataEntityResource getChild(String title) {
 
     for (DataEntityResource child : getChildren()) {
@@ -68,6 +67,7 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * {@inheritDoc}
    */
+  @Override
   @OneToMany(mappedBy = "parent", targetEntity = AbstractDataEntityResource.class)
   public List<DataEntityResource> getChildren() {
 
@@ -88,6 +88,7 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public boolean isSelectable() {
 
@@ -97,6 +98,7 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSelectable(boolean isAbstract) {
 
     // TODO Auto-generated method stub
@@ -106,16 +108,8 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * {@inheritDoc}
    */
-  @Transient
-  public boolean isCacheable() {
-
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean isDescendant(DataEntityResourceView node) {
+  @Override
+  public boolean isDescendant(DataEntityResource node) {
 
     DataFolderImpl parent = getParent();
     if (parent == null) {
@@ -130,9 +124,10 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
   /**
    * {@inheritDoc}
    */
-  public boolean isAncestor(DataFolderView node) {
+  @Override
+  public boolean isAncestor(DataFolder node) {
 
-    NlsNullPointerException.checkNotNull(DataEntityResourceView.class, node);
+    NlsNullPointerException.checkNotNull(DataEntityResource.class, node);
     return node.isDescendant(this);
   }
 

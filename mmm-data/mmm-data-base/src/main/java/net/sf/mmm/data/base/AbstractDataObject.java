@@ -7,22 +7,20 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.data.api.DataObjectView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.persistence.base.jpa.JpaRevisionedEntity;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 
 /**
- * This is the implementation of the abstract entity {@link DataObjectView}.
+ * This is the implementation of the abstract entity {@link DataObject}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @MappedSuperclass
-@DataClassAnnotation(id = DataObjectView.CLASS_ID, title = DataObjectView.CLASS_TITLE, //
+@DataClassAnnotation(id = DataObject.CLASS_ID, title = DataObject.CLASS_TITLE, //
 groupId = DataClassGroupRoot.GROUP_ID, groupVersion = DataClassGroupRoot.GROUP_VERSION)
-public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> implements
-    DataObject {
+public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> implements DataObject {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8616371370522165168L;
@@ -56,14 +54,13 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
 
   /**
    * This method allows to implement custom logic to provide read access to
-   * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically
-   * typed {@link net.sf.mmm.data.api.reflection.DataClass classes}.
+   * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically typed
+   * {@link net.sf.mmm.data.api.reflection.DataClass classes}.
    * 
-   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#getFieldValue(DataObjectView)
+   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#getFieldValue(DataObject)
    * 
-   * @param field is the
-   *        {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of
-   *        the requested {@link net.sf.mmm.data.api.reflection.DataField}.
+   * @param field is the {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of the requested
+   *        {@link net.sf.mmm.data.api.reflection.DataField}.
    * @return the value of the requested field.
    */
   protected Object getFieldValue(String field) {
@@ -73,15 +70,13 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
 
   /**
    * This method allows to implement custom logic to provide write access to
-   * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically
-   * typed {@link net.sf.mmm.data.api.reflection.DataClass classes}.
+   * {@link net.sf.mmm.data.api.reflection.DataField fields} of dynamically typed
+   * {@link net.sf.mmm.data.api.reflection.DataClass classes}.
    * 
-   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#setFieldValue(DataObjectView,
-   *      Object)
+   * @see net.sf.mmm.data.api.reflection.access.DataFieldAccessor#setFieldValue(DataObject, Object)
    * 
-   * @param field is the
-   *        {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of
-   *        the requested {@link net.sf.mmm.data.api.reflection.DataField}.
+   * @param field is the {@link net.sf.mmm.data.api.reflection.DataField#getTitle() title} of the requested
+   *        {@link net.sf.mmm.data.api.reflection.DataField}.
    * @param value is the value of the field to set.
    */
   protected void setFieldValue(String field, Object value) {
@@ -92,6 +87,7 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
   /**
    * {@inheritDoc}
    */
+  @Override
   @Column(nullable = true)
   public String getTitle() {
 
@@ -101,6 +97,7 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setTitle(String title) {
 
     this.title = title;
@@ -109,6 +106,7 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean getDeletedFlag() {
 
     return this.deletedFlag;
@@ -117,6 +115,7 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setDeletedFlag(boolean deleted) {
 
     this.deletedFlag = deleted;
@@ -128,7 +127,7 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
    * @return the parent or <code>null</code> if it has no parent.
    */
   @Transient
-  protected DataObjectView getParent() {
+  protected DataObject getParent() {
 
     return null;
   }
@@ -138,18 +137,18 @@ public abstract class AbstractDataObject extends JpaRevisionedEntity<Long> imple
    * 
    * <b>ATTENTION:</b><br>
    * This field/method is logically
-   * {@link net.sf.mmm.data.api.reflection.DataFieldAnnotation#isInheritedFromParent()
-   * inherited} but NOT annotated with <code>isInherited = true</code>. This
-   * feature is programmatically implemented since it is required at a very low
-   * level.
+   * {@link net.sf.mmm.data.api.reflection.DataFieldAnnotation#isInheritedFromParent() inherited} but NOT
+   * annotated with <code>isInherited = true</code>. This feature is programmatically implemented since it is
+   * required at a very low level.
    */
+  @Override
   @Transient
   public boolean isDeleted() {
 
     if (this.deletedFlag) {
       return true;
     } else {
-      DataObjectView parent = getParent();
+      DataObject parent = getParent();
       if (parent == null) {
         return false;
       } else {

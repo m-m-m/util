@@ -5,17 +5,15 @@ package net.sf.mmm.data.base.reflection;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataReflectionObject;
 import net.sf.mmm.data.base.AbstractDataObject;
 
 /**
- * This is the abstract base implementation of the {@link DataReflectionObject}
- * interface.
+ * This is the abstract base implementation of the {@link DataReflectionObject} interface.
  * 
- * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
- *        class}.
+ * @param <CLASS> is the generic type of the reflected {@link #getJavaClass() class}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -39,16 +37,7 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
    */
   @Override
   @Transient
-  public abstract DataClass<? extends DataObjectView> getParent();
-
-  /**
-   * {@inheritDoc}
-   */
-  @Transient
-  public boolean isCacheable() {
-
-    return true;
-  }
+  public abstract DataClass<? extends DataObject> getParent();
 
   /**
    * {@inheritDoc}

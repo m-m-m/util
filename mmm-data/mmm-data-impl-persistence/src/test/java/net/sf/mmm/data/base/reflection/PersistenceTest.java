@@ -4,7 +4,7 @@ package net.sf.mmm.data.base.reflection;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.entity.pim.address.DataCountry;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfo;
 import net.sf.mmm.data.api.link.Link;
@@ -32,8 +32,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for the persistence. It performs a full integration
- * test using hibernate as OR mapper and an embedded database.
+ * This is the test-case for the persistence. It performs a full integration test using hibernate as OR mapper
+ * and an embedded database.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -98,24 +98,24 @@ public class PersistenceTest {
   protected DataContactImpl createAndSave() {
 
     PersistenceManager persistenceManager = getPersistenceManager();
-    DataClassImpl<DataObjectView> rootClass = new DataClassImpl<DataObjectView>();
-    rootClass.setTitle(DataObjectView.CLASS_TITLE);
-    rootClass.setId(Long.valueOf(DataObjectView.CLASS_ID));
-    rootClass.setJavaClass(DataObjectView.class);
+    DataClassImpl<DataObject> rootClass = new DataClassImpl<DataObject>();
+    rootClass.setTitle(DataObject.CLASS_TITLE);
+    rootClass.setId(Long.valueOf(DataObject.CLASS_ID));
+    rootClass.setJavaClass(DataObject.class);
     rootClass.setModifiers(DataClassModifiersBean.SYSTEM_ABSTRACT_UNEXTENDABLE);
-    DataClassGroupVersionImpl groupVersion = persistenceManager.loadIfExists(
-        DataClassGroupVersionImpl.class, DataClassGroupRoot.GROUP_ID);
+    DataClassGroupVersionImpl groupVersion = persistenceManager.loadIfExists(DataClassGroupVersionImpl.class,
+        DataClassGroupRoot.GROUP_ID);
     if (groupVersion == null) {
-      groupVersion = new DataClassGroupVersionImpl(DataClassGroupRoot.GROUP_ID, VersionUtilImpl
-          .getInstance().createVersionIdentifier(DataClassGroupRoot.GROUP_VERSION));
+      groupVersion = new DataClassGroupVersionImpl(DataClassGroupRoot.GROUP_ID, VersionUtilImpl.getInstance()
+          .createVersionIdentifier(DataClassGroupRoot.GROUP_VERSION));
     }
     rootClass.setGroupVersion(groupVersion);
-    DataFieldImpl<DataObjectView, Long> idField = new DataFieldImpl<DataObjectView, Long>();
+    DataFieldImpl<DataObject, Long> idField = new DataFieldImpl<DataObject, Long>();
     idField.setTitle("id");
     idField.setDeclaringClass(rootClass);
     idField.setFieldType(getReflectionUtil().createGenericType(Long.class));
     // aint this a compiler bug? remove the cast and see...
-    ((AbstractDataClass<DataObjectView>) rootClass).addDeclaredField(idField);
+    ((AbstractDataClass<DataObject>) rootClass).addDeclaredField(idField);
     persistenceManager.save(rootClass);
     Assert.assertNotNull(idField.getId());
 

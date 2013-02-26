@@ -2,18 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.link;
 
-import net.sf.mmm.data.api.entity.DataEntityView;
+import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.api.link.Link;
 
 /**
  * This is the abstract base implementation of the {@link Link} interface.
  * 
- * @param <TARGET> is the type of the linked {@link #getTarget() target entity}.
- *        See {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
+ * @param <TARGET> is the type of the linked {@link #getTarget() target entity}. See
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractLink<TARGET extends DataEntityView> implements Link<TARGET> {
+public abstract class AbstractLink<TARGET extends DataEntity> implements Link<TARGET> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8830581540069493211L;
@@ -32,6 +32,7 @@ public abstract class AbstractLink<TARGET extends DataEntityView> implements Lin
   /**
    * {@inheritDoc}
    */
+  @Override
   public TARGET getValue() {
 
     return getTarget();
@@ -40,6 +41,7 @@ public abstract class AbstractLink<TARGET extends DataEntityView> implements Lin
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getClassifier() {
 
     return this.classifier;
@@ -56,6 +58,7 @@ public abstract class AbstractLink<TARGET extends DataEntityView> implements Lin
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     StringBuilder buffer = new StringBuilder();

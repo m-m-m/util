@@ -3,7 +3,7 @@
 package net.sf.mmm.data.base.reflection;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -12,8 +12,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
- * This is the implementation of the {@link DataFieldAccessor} using java
- * reflection.
+ * This is the implementation of the {@link DataFieldAccessor} using java reflection.
  * 
  * @param <CLASS> is the generic type for the bound of
  *        {@link net.sf.mmm.data.api.reflection.DataField#getJavaClass()}.
@@ -21,16 +20,15 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldAccessorPojo<CLASS extends DataObjectView, FIELD> implements
-    DataFieldAccessor<CLASS, FIELD> {
+public class DataFieldAccessorPojo<CLASS extends DataObject, FIELD> implements DataFieldAccessor<CLASS, FIELD> {
 
   /** The type of the content-field to access. */
   private final Class<FIELD> fieldClass;
 
-  /** @see #getFieldValue(DataObjectView) */
+  /** @see #getFieldValue(DataObject) */
   private final PojoPropertyAccessorNonArg getter;
 
-  /** @see #setFieldValue(DataObjectView, Object) */
+  /** @see #setFieldValue(DataObject, Object) */
   private final PojoPropertyAccessorOneArg setter;
 
   /**
@@ -41,8 +39,8 @@ public class DataFieldAccessorPojo<CLASS extends DataObjectView, FIELD> implemen
    *        {@link net.sf.mmm.data.api.reflection.DataField#getFieldType()
    *        }).
    * @param getter is the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
-   *        getter} of the field.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter} of
+   *        the field.
    */
   public DataFieldAccessorPojo(Class<FIELD> fieldClass, PojoPropertyAccessorNonArg getter) {
 
@@ -57,11 +55,11 @@ public class DataFieldAccessorPojo<CLASS extends DataObjectView, FIELD> implemen
    *        {@link net.sf.mmm.data.api.reflection.DataField#getFieldType()
    *        }).
    * @param getter is the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET
-   *        getter} of the field.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter} of
+   *        the field.
    * @param setter is the
-   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET
-   *        setter} of the field.
+   *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode#SET setter} of
+   *        the field.
    */
   public DataFieldAccessorPojo(Class<FIELD> fieldClass, PojoPropertyAccessorNonArg getter,
       PojoPropertyAccessorOneArg setter) {
@@ -85,6 +83,7 @@ public class DataFieldAccessorPojo<CLASS extends DataObjectView, FIELD> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public FIELD getFieldValue(CLASS object) throws DataException {
 
     return (FIELD) this.getter.invoke(object);
@@ -93,9 +92,10 @@ public class DataFieldAccessorPojo<CLASS extends DataObjectView, FIELD> implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setFieldValue(CLASS object, FIELD value) throws DataException {
 
-    NlsNullPointerException.checkNotNull(DataObjectView.class, object);
+    NlsNullPointerException.checkNotNull(DataObject.class, object);
     if (this.setter == null) {
       throw new ReadOnlyException(object.getClass().getSimpleName() + "." + this.getter.getName());
     }

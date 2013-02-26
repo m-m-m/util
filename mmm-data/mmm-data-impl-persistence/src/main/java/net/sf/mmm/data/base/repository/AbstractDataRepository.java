@@ -7,11 +7,10 @@ import java.util.StringTokenizer;
 import javax.annotation.Resource;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.entity.resource.DataEntityResource;
-import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
-import net.sf.mmm.data.api.entity.resource.DataFolderView;
+import net.sf.mmm.data.api.entity.resource.DataFolder;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.repository.DataRepository;
 import net.sf.mmm.data.base.AbstractDataObject;
@@ -49,6 +48,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataFolderImpl getRootFolder() {
 
     return this.rootFolder;
@@ -72,7 +72,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
    * @throws NlsClassCastException if the cast failed because the given <code>object</code> is NOT compatible
    *         with the given <code>entityClass</code>.
    */
-  protected <E extends DataObjectView> E cast(DataObjectView object, Class<E> entityClass) throws NlsClassCastException {
+  protected <E extends DataObject> E cast(DataObject object, Class<E> entityClass) throws NlsClassCastException {
 
     try {
       return entityClass.cast(object);
@@ -84,7 +84,8 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public <E extends DataObjectView> E getById(DataId id, Class<E> entityClass) throws DataException {
+  @Override
+  public <E extends DataObject> E getById(DataId id, Class<E> entityClass) throws DataException {
 
     return cast(getById(id), entityClass);
   }
@@ -92,7 +93,8 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public <E extends DataEntityResourceView> E getByPath(String path, Class<E> entityClass) throws DataException {
+  @Override
+  public <E extends DataEntityResource> E getByPath(String path, Class<E> entityClass) throws DataException {
 
     return cast(getByPath(path), entityClass);
   }
@@ -100,6 +102,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
+  @Override
   public AbstractMutableDataReflectionService getReflectionService() {
 
     return this.contentModel;
@@ -117,31 +120,32 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public DataEntityResourceView getByPath(String path) throws DataException {
+  @Override
+  public DataEntityResource getByPath(String path) throws DataException {
 
-    DataFolderView folder = getRootFolder();
+    DataFolder folder = getRootFolder();
     // use smart query on persistent store (recursive SQL)?
     // TODO: create Parser for Path
-    DataEntityResourceView child = folder;
-    StringTokenizer st = new StringTokenizer(path, DataEntityResourceView.PATH_SEPARATOR);
+    DataEntityResource child = folder;
+    StringTokenizer st = new StringTokenizer(path, DataEntityResource.PATH_SEPARATOR);
     while (st.hasMoreTokens()) {
       String segment = st.nextToken();
       child = folder.getChild(segment);
       if (child == null) {
         // TODO: return null instead?
-        throw new ObjectNotFoundException(DataEntityResourceView.class, path);
-      } else if (child instanceof DataFolderView) {
-        folder = (DataFolderView) child;
+        throw new ObjectNotFoundException(DataEntityResource.class, path);
+      } else if (child instanceof DataFolder) {
+        folder = (DataFolder) child;
       } else if (st.hasMoreElements()) {
-        throw new ObjectMismatchException(child, DataFolderView.class, path);
+        throw new ObjectMismatchException(child, DataFolder.class, path);
       }
     }
     return child;
   }
 
-  protected DataObjectView createInstance(DataClass<? extends DataObjectView> dataClass) throws DataException {
+  protected DataObject createInstance(DataClass<? extends DataObject> dataClass) throws DataException {
 
-    DataObjectView object;
+    DataObject object;
     try {
       object = dataClass.getJavaClass().newInstance();
     } catch (InstantiationException e) {
@@ -155,7 +159,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public DataObjectView create(DataClass contentClass, String name, DataEntityResource parent) throws DataException {
+  public DataObject create(DataClass contentClass, String name, DataEntityResource parent) throws DataException {
 
     AbstractDataObject object = (AbstractDataObject) createInstance(contentClass);
     // object.setName(name);
@@ -174,7 +178,7 @@ public abstract class AbstractDataRepository extends AbstractLoggableComponent i
   /**
    * {@inheritDoc}
    */
-  public void save(DataObjectView object) throws DataException {
+  public void save(DataObject object) throws DataException {
 
     // TODO Auto-generated method stub
 

@@ -8,22 +8,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.resource.DataEntityResource;
-import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
 import net.sf.mmm.data.api.entity.resource.DataFolder;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 
 /**
- * This is the implementation of the abstract entity
- * {@link DataEntityResourceView}.
+ * This is the implementation of the abstract entity {@link DataEntityResource}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Entity
-@DataClassAnnotation(id = DataEntityResourceView.CLASS_ID, title = DataEntityResourceView.CLASS_TITLE)
-public abstract class AbstractDataEntityResource extends AbstractDataEntity implements
-    DataEntityResource {
+@DataClassAnnotation(id = DataEntityResource.CLASS_ID, title = DataEntityResource.CLASS_TITLE)
+public abstract class AbstractDataEntityResource extends AbstractDataEntity implements DataEntityResource {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 1983465184282662205L;
@@ -53,6 +50,7 @@ public abstract class AbstractDataEntityResource extends AbstractDataEntity impl
   /**
    * @param parent the parent to set
    */
+  @Override
   public void setParent(DataFolder parent) {
 
     this.parent = (DataFolderImpl) parent;
@@ -61,6 +59,7 @@ public abstract class AbstractDataEntityResource extends AbstractDataEntity impl
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public String getPath() {
 

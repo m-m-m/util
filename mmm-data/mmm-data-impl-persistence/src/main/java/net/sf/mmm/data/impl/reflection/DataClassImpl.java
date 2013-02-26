@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataClassCachingStrategy;
@@ -27,11 +27,9 @@ import net.sf.mmm.data.base.reflection.AbstractDataField;
 import org.hibernate.annotations.Type;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.data.api.reflection.DataClass} interface.
+ * This is the implementation of the {@link net.sf.mmm.data.api.reflection.DataClass} interface.
  * 
- * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
- *        class}.
+ * @param <CLASS> is the generic type of the reflected {@link #getJavaClass() class}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -39,7 +37,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "DATA_CLASS")
 @DataClassAnnotation(id = DataClass.CLASS_ID, title = DataClass.CLASS_TITLE)
 @DiscriminatorValue("" + DataClass.CLASS_ID)
-public final class DataClassImpl<CLASS extends DataObjectView> extends AbstractDataClass<CLASS> {
+public final class DataClassImpl<CLASS extends DataObject> extends AbstractDataClass<CLASS> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -6926223109885122995L;
@@ -101,8 +99,7 @@ public final class DataClassImpl<CLASS extends DataObjectView> extends AbstractD
    * {@inheritDoc}
    */
   @Override
-  protected void addSubClass(AbstractDataClass<? extends CLASS> subClass)
-      throws DataReflectionException {
+  protected void addSubClass(AbstractDataClass<? extends CLASS> subClass) throws DataReflectionException {
 
     if (subClass.getSuperClass() != this) {
       // TODO: NLS
@@ -168,9 +165,9 @@ public final class DataClassImpl<CLASS extends DataObjectView> extends AbstractD
    */
   @Override
   @ManyToOne()
-  public DataClassImpl<? extends DataObjectView> getSuperClass() {
+  public DataClassImpl<? extends DataObject> getSuperClass() {
 
-    return (DataClassImpl<? extends DataObjectView>) super.getSuperClass();
+    return (DataClassImpl<? extends DataObject>) super.getSuperClass();
   }
 
   /**
@@ -201,6 +198,16 @@ public final class DataClassImpl<CLASS extends DataObjectView> extends AbstractD
   public DataClassModifiers getModifiers() {
 
     return super.getModifiers();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSelectable(boolean selectable) {
+
+    // TODO Auto-generated method stub
+
   }
 
 }

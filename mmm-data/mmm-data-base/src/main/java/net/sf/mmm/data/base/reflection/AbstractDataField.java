@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.reflection;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
@@ -13,15 +13,13 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the abstract base implementation of the {@link DataField} interface.
  * 
- * @param <FIELD> is the generic type of the
- *        {@link #getFieldValue(DataObjectView) value} reflected by this field.
- * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
- *        class}.
+ * @param <FIELD> is the generic type of the {@link #getFieldValue(DataObject) value} reflected by this field.
+ * @param <CLASS> is the generic type of the reflected {@link #getJavaClass() class}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> extends
-    AbstractDataReflectionObject<CLASS> implements DataField<CLASS, FIELD> {
+public abstract class AbstractDataField<CLASS extends DataObject, FIELD> extends AbstractDataReflectionObject<CLASS>
+    implements DataField<CLASS, FIELD> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 8457521410109028533L;
@@ -52,6 +50,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getDataClassId() {
 
     return DataField.CLASS_ID;
@@ -60,6 +59,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<CLASS> getJavaClass() {
 
     return this.declaringClass.getJavaClass();
@@ -145,6 +145,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDataClass() {
 
     return false;
@@ -156,6 +157,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public AbstractDataClass<CLASS> getDeclaringClass() {
 
     return this.declaringClass;
@@ -172,10 +174,11 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
-  public DataClass<? extends DataObjectView> getInitiallyDefiningClass() {
+  @Override
+  public DataClass<? extends DataObject> getInitiallyDefiningClass() {
 
-    DataClass<? extends DataObjectView> definingClass = this.declaringClass;
-    DataClass<? extends DataObjectView> superClass = definingClass.getSuperClass();
+    DataClass<? extends DataObject> definingClass = this.declaringClass;
+    DataClass<? extends DataObject> superClass = definingClass.getSuperClass();
     while (superClass != null) {
       if (superClass.getField(getTitle()) != null) {
         definingClass = superClass;
@@ -188,6 +191,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getFieldTypeSpecification() {
 
     return this.fieldType.toString();
@@ -196,6 +200,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public GenericType<FIELD> getFieldType() {
 
     return this.fieldType;
@@ -222,6 +227,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataFieldModifiers getModifiers() {
 
     return this.modifiers;
@@ -240,18 +246,19 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
-  public AbstractDataField<? extends DataObjectView, ? super FIELD> getSuperField() {
+  public AbstractDataField<? extends DataObject, ? super FIELD> getSuperField() {
 
-    AbstractDataField<? extends DataObjectView, ?> superField = null;
-    AbstractDataClass<? extends DataObjectView> superClass = getDeclaringClass().getSuperClass();
+    AbstractDataField<? extends DataObject, ?> superField = null;
+    AbstractDataClass<? extends DataObject> superClass = getDeclaringClass().getSuperClass();
     if (superClass != null) {
       superField = superClass.getField(getTitle());
       if (superField == this) {
         superField = null;
       }
     }
-    return (AbstractDataField<? extends DataObjectView, ? super FIELD>) superField;
+    return (AbstractDataField<? extends DataObject, ? super FIELD>) superField;
   }
 
   /**
@@ -265,7 +272,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
     } else if (getDeclaringClass().isDeleted()) {
       return true;
     } else {
-      DataField<? extends DataObjectView, ?> superField = getSuperField();
+      DataField<? extends DataObject, ?> superField = getSuperField();
       if (superField != null) {
         return superField.isDeleted();
       }
@@ -276,6 +283,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public FIELD getFieldValue(CLASS object) {
 
     // TODO: security?
@@ -285,6 +293,7 @@ public abstract class AbstractDataField<CLASS extends DataObjectView, FIELD> ext
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setFieldValue(CLASS object, FIELD value) {
 
     if (this.modifiers.isReadOnly()) {

@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.address.DataAddress;
-import net.sf.mmm.data.api.entity.pim.address.DataAddressView;
 import net.sf.mmm.data.api.entity.pim.address.DataCountry;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.data.impl.entity.pim.DataCountryImpl;
@@ -22,7 +21,7 @@ import org.hibernate.annotations.Type;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Entity(name = DataAddressView.CLASS_TITLE)
+@Entity(name = DataAddress.CLASS_TITLE)
 public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
 
   /** UID for serialization. */
@@ -53,7 +52,7 @@ public class DataAddressImpl extends AbstractDataEntity implements DataAddress {
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataAddressView.CLASS_ID;
+    return DataAddress.CLASS_ID;
   }
 
   /**

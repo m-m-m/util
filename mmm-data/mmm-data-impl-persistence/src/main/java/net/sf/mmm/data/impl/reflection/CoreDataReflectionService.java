@@ -5,7 +5,7 @@ package net.sf.mmm.data.impl.reflection;
 import java.io.IOException;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClassLoader;
 import net.sf.mmm.data.api.reflection.DataReflectionEvent;
@@ -18,10 +18,9 @@ import net.sf.mmm.data.impl.DataIdManagerImpl;
 import net.sf.mmm.util.event.api.ChangeType;
 
 /**
- * This is an abstract base implementation of the
- * {@link net.sf.mmm.data.api.reflection.DataReflectionService} interface that
- * assumes that {@link DataId}s are used as well as specific implementations for
- * class and field.
+ * This is an abstract base implementation of the {@link net.sf.mmm.data.api.reflection.DataReflectionService}
+ * interface that assumes that {@link DataId}s are used as well as specific implementations for class and
+ * field.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -46,6 +45,7 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isEditable() {
 
     return this.editable;
@@ -100,19 +100,17 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    */
   protected void loadClasses() {
 
-    AbstractDataClass<? extends DataObjectView> rootClass = (AbstractDataClass<? extends DataObjectView>) this.classLoader
+    AbstractDataClass<? extends DataObject> rootClass = (AbstractDataClass<? extends DataObject>) this.classLoader
         .loadClasses();
     setRootClass(rootClass);
     addClassRecursive(rootClass);
-    AbstractDataClass<? extends DataObjectView> classClass = getDataClass(getDataIdManager()
-        .getClassClassId());
+    AbstractDataClass<? extends DataObject> classClass = getDataClass(getDataIdManager().getClassClassId());
     if (classClass == null) {
       // TODO:
       throw new DataReflectionException("Missing class for ContentClass!");
     }
     // ContentClassImpl.setContentClass(classClass);
-    AbstractDataClass<? extends DataObjectView> fieldClass = getDataClass(getDataIdManager()
-        .getFieldClassId());
+    AbstractDataClass<? extends DataObject> fieldClass = getDataClass(getDataIdManager().getFieldClassId());
     if (fieldClass == null) {
       // TODO:
       throw new DataReflectionException("Missing class for ContentField!");
@@ -121,9 +119,8 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
   }
 
   /**
-   * This method reloads the content-model. If the external representation of
-   * the model has been modified, this method updates the model to import these
-   * changes.
+   * This method reloads the content-model. If the external representation of the model has been modified,
+   * this method updates the model to import these changes.
    * 
    * @throws IOException if an I/O error was caused by the class-loader.
    * @throws DataException if the content-model is invalid.
@@ -138,7 +135,7 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    * {@inheritDoc}
    */
   @Override
-  protected <CLASS extends DataObjectView> AbstractDataClass<CLASS> createDataClass() {
+  protected <CLASS extends DataObject> AbstractDataClass<CLASS> createDataClass() {
 
     return new DataClassImpl<CLASS>();
   }
@@ -147,7 +144,7 @@ public class CoreDataReflectionService extends AbstractMutableDataReflectionServ
    * {@inheritDoc}
    */
   @Override
-  protected <CLASS extends DataObjectView, FIELD> AbstractDataField<CLASS, FIELD> createDataField() {
+  protected <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField() {
 
     return new DataFieldImpl<CLASS, FIELD>();
   }

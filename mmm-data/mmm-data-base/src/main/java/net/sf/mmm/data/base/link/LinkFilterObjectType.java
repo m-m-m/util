@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.base.link;
 
-import net.sf.mmm.data.api.entity.DataEntityView;
+import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.api.link.Link;
 import net.sf.mmm.util.filter.api.Filter;
 
@@ -14,7 +14,7 @@ import net.sf.mmm.util.filter.api.Filter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class LinkFilterObjectType<CLASS extends DataEntityView> implements Filter<Link<CLASS>> {
+public class LinkFilterObjectType<CLASS extends DataEntity> implements Filter<Link<CLASS>> {
 
   /** @see #accept(Link) */
   private final int classId;
@@ -22,7 +22,7 @@ public class LinkFilterObjectType<CLASS extends DataEntityView> implements Filte
   /**
    * The constructor.
    * 
-   * @param classId is the {@link DataEntityView#getDataClassId() class ID}.
+   * @param classId is the {@link DataEntity#getDataClassId() class ID}.
    */
   public LinkFilterObjectType(int classId) {
 
@@ -33,6 +33,7 @@ public class LinkFilterObjectType<CLASS extends DataEntityView> implements Filte
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean accept(Link<CLASS> link) {
 
     return link.getTarget().getDataClassId() == this.classId;

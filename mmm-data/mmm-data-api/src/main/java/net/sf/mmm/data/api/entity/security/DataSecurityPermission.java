@@ -2,14 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.entity.security;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 
 /**
- * This is the interface for a permission that determines if an
- * {@link DataSecurityOperation operation} is permitted or NOT. A permissions
- * has NO {@link #getTitle() name}.
+ * This is the interface for a permission that determines if an {@link DataSecurityOperation operation} is
+ * permitted or NOT. A permissions has NO {@link #getTitle() name}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -35,7 +34,7 @@ public interface DataSecurityPermission extends DataSecurityObject {
    * 
    * @return TODO
    */
-  DataClass<? extends DataObjectView> getAllowedClass();
+  DataClass<? extends DataObject> getAllowedClass();
 
   /**
    * TODO: javadoc.
@@ -49,7 +48,7 @@ public interface DataSecurityPermission extends DataSecurityObject {
    * 
    * @return TODO
    */
-  DataField<? extends DataObjectView, ?> getAllowedField();
+  DataField<? extends DataObject, ?> getAllowedField();
 
   /**
    * TODO: javadoc.

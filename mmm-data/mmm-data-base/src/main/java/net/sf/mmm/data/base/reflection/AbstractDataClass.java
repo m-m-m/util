@@ -12,7 +12,7 @@ import java.util.Map;
 
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassCachingStrategy;
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
@@ -21,23 +21,23 @@ import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataReflectionException;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ReadOnlyException;
 
 /**
  * This is the abstract base implementation of the {@link DataClass} interface.
  * 
- * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
- *        class}.
+ * @param <CLASS> is the generic type of the reflected {@link #getJavaClass() class}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
-    AbstractDataReflectionObject<CLASS> implements DataClass<CLASS> {
+public abstract class AbstractDataClass<CLASS extends DataObject> extends AbstractDataReflectionObject<CLASS> implements
+    DataClass<CLASS> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -8444545908272830489L;
 
   /** the super-class of this class */
-  private AbstractDataClass<? extends DataObjectView> superClass;
+  private AbstractDataClass<? extends DataObject> superClass;
 
   /** @see #getModifiers() */
   private DataClassModifiers modifiers;
@@ -58,7 +58,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   private final Collection<AbstractDataField<CLASS, ?>> declaredFieldsView;
 
   /** @see #getDeclaredFields() */
-  private final Collection<AbstractDataField<? extends DataObjectView, ?>> fieldsView;
+  private final Collection<AbstractDataField<? extends DataObject, ?>> fieldsView;
 
   // /** @see #isRevisionControlled() */
   // private boolean revisionControlled;
@@ -77,6 +77,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getDataClassId() {
 
     return DataClass.CLASS_ID;
@@ -85,8 +86,9 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
-  public AbstractDataClass<? extends DataObjectView> getParent() {
+  public AbstractDataClass<? extends DataObject> getParent() {
 
     return getSuperClass();
   }
@@ -94,7 +96,8 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractDataClass<? extends DataObjectView> getSuperClass() {
+  @Override
+  public AbstractDataClass<? extends DataObject> getSuperClass() {
 
     return this.superClass;
   }
@@ -104,7 +107,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
    * 
    * @param superClass the super-class to set.
    */
-  protected void setSuperClass(AbstractDataClass<? extends DataObjectView> superClass) {
+  protected void setSuperClass(AbstractDataClass<? extends DataObject> superClass) {
 
     this.superClass = superClass;
   }
@@ -112,7 +115,17 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public List<? extends DataClass<? extends DataObjectView>> getChildren() {
+  @Override
+  public void setParent(DataClass<? extends DataObject> parent) {
+
+    throw new ReadOnlyException(this, "parent");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<? extends DataClass<? extends DataObject>> getChildren() {
 
     return getSubClasses();
   }
@@ -120,6 +133,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public abstract List<? extends AbstractDataClass<? extends CLASS>> getSubClasses();
 
   // /**
@@ -141,6 +155,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataClassGroupVersion getGroupVersion() {
 
     return this.groupVersion;
@@ -157,6 +172,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataClassCachingStrategy getCachingStrategy() {
 
     return this.cachingStrategy;
@@ -173,6 +189,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<AbstractDataField<CLASS, ?>> getDeclaredFields() {
 
     return this.declaredFieldsView;
@@ -181,6 +198,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public AbstractDataField<CLASS, ?> getDeclaredField(String title) {
 
     return this.declaredFields.get(title);
@@ -189,9 +207,10 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public AbstractDataField<? extends DataObjectView, ?> getField(String title) {
+  @Override
+  public AbstractDataField<? extends DataObject, ?> getField(String title) {
 
-    AbstractDataField<? extends DataObjectView, ?> field = this.declaredFields.get(title);
+    AbstractDataField<? extends DataObject, ?> field = this.declaredFields.get(title);
     if ((field == null) && (this.superClass != null)) {
       field = this.superClass.getField(title);
     }
@@ -201,7 +220,8 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public Collection<AbstractDataField<? extends DataObjectView, ?>> getFields() {
+  @Override
+  public Collection<AbstractDataField<? extends DataObject, ?>> getFields() {
 
     return this.fieldsView;
   }
@@ -209,6 +229,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataClassModifiers getModifiers() {
 
     return this.modifiers;
@@ -223,19 +244,18 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   }
 
   /**
-   * This method gets the class reflecting the closest type of this
-   * content-class.
+   * This method gets the class reflecting the closest type of this content-class.
    * 
    * @return the "implementation".
    */
+  @Override
   public Class<CLASS> getJavaClass() {
 
     return this.javaClass;
   }
 
   /**
-   * This method sets the {@link #getJavaClass() Java-class} of this
-   * content-class.
+   * This method sets the {@link #getJavaClass() Java-class} of this content-class.
    * 
    * @param javaClass is the class realizing the entity.
    */
@@ -247,6 +267,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isDataClass() {
 
     return true;
@@ -255,6 +276,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isSelectable() {
 
     return this.modifiers.isAbstract();
@@ -263,7 +285,8 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isSubClassOf(DataClass<? extends DataObjectView> dataClass) {
+  @Override
+  public boolean isSubClassOf(DataClass<? extends DataObject> dataClass) {
 
     if (this.superClass == null) {
       // root-class can NOT be a sub-class
@@ -280,7 +303,8 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isSuperClassOf(DataClass<? extends DataObjectView> dataClass) {
+  @Override
+  public boolean isSuperClassOf(DataClass<? extends DataObject> dataClass) {
 
     return dataClass.isSubClassOf(this);
   }
@@ -288,7 +312,8 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isAncestor(DataClass<? extends DataObjectView> dataClass) {
+  @Override
+  public boolean isAncestor(DataClass<? extends DataObject> dataClass) {
 
     return isSuperClassOf(dataClass);
   }
@@ -296,22 +321,21 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * {@inheritDoc}
    */
-  public boolean isDescendant(DataClass<? extends DataObjectView> dataClass) {
+  @Override
+  public boolean isDescendant(DataClass<? extends DataObject> dataClass) {
 
     return isSubClassOf(dataClass);
   }
 
   /**
    * This method adds a {@link #getSubClasses() sub-class} to this class.<br>
-   * It is an idempotent operation. Therefore it will have no effect if the
-   * given <code>subClass</code> is already a {@link #getSubClasses() registered
-   * sub-class} of this class.
+   * It is an idempotent operation. Therefore it will have no effect if the given <code>subClass</code> is
+   * already a {@link #getSubClasses() registered sub-class} of this class.
    * 
    * @param subClass is the sub-class to add.
    * @throws DataReflectionException if the operation fails.
    */
-  protected abstract void addSubClass(AbstractDataClass<? extends CLASS> subClass)
-      throws DataReflectionException;
+  protected abstract void addSubClass(AbstractDataClass<? extends CLASS> subClass) throws DataReflectionException;
 
   /**
    * This method adds the given <code>field</code> to this class.
@@ -337,14 +361,12 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
   /**
    * @see DataClass#getFields()
    */
-  private class FieldsCollection extends
-      AbstractCollection<AbstractDataField<? extends DataObjectView, ?>> {
+  private class FieldsCollection extends AbstractCollection<AbstractDataField<? extends DataObject, ?>> {
 
     /**
      * {@inheritDoc}
      * 
-     * TODO: This implementation is extremely expensive. Is there a better way
-     * to do this?
+     * TODO: This implementation is extremely expensive. Is there a better way to do this?
      */
     @Override
     public int size() {
@@ -368,7 +390,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
      * {@inheritDoc}
      */
     @Override
-    public Iterator<AbstractDataField<? extends DataObjectView, ?>> iterator() {
+    public Iterator<AbstractDataField<? extends DataObject, ?>> iterator() {
 
       return new DataFieldIterator(AbstractDataClass.this);
     }
@@ -381,10 +403,9 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
     public boolean contains(Object o) {
 
       if (o instanceof DataField) {
-        DataField<? extends DataObjectView, ?> field = (DataField<? extends DataObjectView, ?>) o;
-        DataClass<? extends DataObjectView> declaringClass = field.getDeclaringClass();
-        if ((declaringClass == AbstractDataClass.this)
-            || (declaringClass.isSuperClassOf(AbstractDataClass.this))) {
+        DataField<? extends DataObject, ?> field = (DataField<? extends DataObject, ?>) o;
+        DataClass<? extends DataObject> declaringClass = field.getDeclaringClass();
+        if ((declaringClass == AbstractDataClass.this) || (declaringClass.isSuperClassOf(AbstractDataClass.this))) {
           return true;
         }
       }
@@ -404,7 +425,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
      * {@inheritDoc}
      */
     @Override
-    public boolean add(AbstractDataField<? extends DataObjectView, ?> e) {
+    public boolean add(AbstractDataField<? extends DataObject, ?> e) {
 
       throw new UnsupportedOperationException();
     }
@@ -413,7 +434,7 @@ public abstract class AbstractDataClass<CLASS extends DataObjectView> extends
      * {@inheritDoc}
      */
     @Override
-    public boolean addAll(Collection<? extends AbstractDataField<? extends DataObjectView, ?>> c) {
+    public boolean addAll(Collection<? extends AbstractDataField<? extends DataObject, ?>> c) {
 
       throw new UnsupportedOperationException();
     }

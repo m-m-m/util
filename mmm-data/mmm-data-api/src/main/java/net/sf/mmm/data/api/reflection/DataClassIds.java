@@ -18,7 +18,7 @@ public interface DataClassIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * {@link net.sf.mmm.data.api.DataNodeView}.
+   * {@link net.sf.mmm.data.api.DataNode}.
    */
   long ID_NODE = 2;
 
@@ -79,70 +79,59 @@ public interface DataClassIds {
   // --- PIM ---
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataCity</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataCity</code>.
    */
   long ID_CITY = 101;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataCountry</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataCountry</code>.
    */
   long ID_COUNTRY = 102;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataAppointment</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataAppointment</code>.
    */
   long ID_POSTALCODE = 103;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataEvent</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataEvent</code>.
    */
   long ID_EVENT = 105;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataAppointment</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataAppointment</code>.
    */
   long ID_APPOINTMENT = 106;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataAddress</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataAddress</code>.
    */
   long ID_ADDRESS = 108;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataContactInfo</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataContactInfo</code>.
    */
   long ID_CONTACTINFO = 109;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataContact</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataContact</code>.
    */
   long ID_CONTACT = 110;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataContact</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataContact</code>.
    */
   long ID_PERSON = 111;
 
   // --- Audio ---
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataAudio</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataAudio</code>.
    */
   long ID_AUDIO = 200;
 
   /**
-   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for
-   * <code>DataAudioGenre</code>.
+   * {@link net.sf.mmm.data.api.reflection.DataClass#getId() Class ID} for <code>DataAudioGenre</code>.
    */
   long ID_AUDIOGENRE = 201;
 

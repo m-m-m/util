@@ -4,11 +4,10 @@ package net.sf.mmm.data.api.reflection;
 
 /**
  * This type is a simple collection of constants for the
- * {@link net.sf.mmm.data.api.reflection.DataField#getId() field IDs}. The
- * centralization of these IDs helps to establish their uniqueness. If you want
- * to extend the data model of mmm, you should define your own type (class or
- * interface) for this purpose that may extend this interface. Please be aware
- * that custom IDs for for end users have to be greater or equal to
+ * {@link net.sf.mmm.data.api.reflection.DataField#getId() field IDs}. The centralization of these IDs helps
+ * to establish their uniqueness. If you want to extend the data model of mmm, you should define your own type
+ * (class or interface) for this purpose that may extend this interface. Please be aware that custom IDs for
+ * for end users have to be greater or equal to
  * {@link net.sf.mmm.data.api.datatype.DataId#OBJECT_ID_MINIMUM_CUSTOM}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -18,63 +17,61 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObjectView#getId()}.
+   * {@link net.sf.mmm.data.api.DataObject#getId()}.
    */
   long ID_OBJECT_ID = 0;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObjectView#getDataClassId()}.
+   * {@link net.sf.mmm.data.api.DataObject#getDataClassId()}.
    */
   long ID_OBJECT_DATA_CLASS_ID = 1;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObjectView#getTitle()}.
+   * {@link net.sf.mmm.data.api.DataObject#getTitle()}.
    */
   long ID_OBJECT_TITLE = 6;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObjectView#isDeleted()}.
+   * {@link net.sf.mmm.data.api.DataObject#isDeleted()}.
    */
   long ID_OBJECT_DELETED = 7;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataObjectView#getDeletedFlag()}.
+   * {@link net.sf.mmm.data.api.DataObject#getDeletedFlag()}.
    */
   long ID_OBJECT_DELETED_FLAG = 8;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataNodeView#getParent()}.
+   * {@link net.sf.mmm.data.api.DataNode#getParent()}.
    */
   long ID_NODE_PARENT = 20;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#isSelectable()}.
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTree#isSelectable()}.
    */
   long ID_SELECTION_SELECTABLE = 42;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.DataSelectionGenericTreeView#getChildren()}.
+   * {@link net.sf.mmm.data.api.DataSelectionGenericTree#getChildren()}.
    */
   long ID_SELECTIONTREE_CHILDREN = 41;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getJavaClass()}
-   * .
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getJavaClass()} .
    */
   long ID_REFLECTIONOBJECT_JAVACLASS = 102;
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getModifiers()}
-   * .
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject#getModifiers()} .
    */
   long ID_REFLECTIONOBJECT_MODIFIERS = 103;
 
@@ -122,8 +119,7 @@ public interface DataFieldIds {
 
   /**
    * {@link net.sf.mmm.data.api.reflection.DataField#getId() Field ID} for
-   * {@link net.sf.mmm.data.api.entity.resource.DataEntityResourceView#getPath()}
-   * .
+   * {@link net.sf.mmm.data.api.entity.resource.DataEntityResource#getPath()} .
    */
   long ID_RESOURCE_PATH = 200;
 

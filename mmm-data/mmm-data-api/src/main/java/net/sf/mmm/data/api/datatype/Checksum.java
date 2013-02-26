@@ -5,7 +5,7 @@ package net.sf.mmm.data.api.datatype;
 /**
  * This is the interface for the checksum(s) of files.
  * 
- * @see net.sf.mmm.data.api.entity.resource.DataFileView#getChecksum()
+ * @see net.sf.mmm.data.api.entity.resource.DataFile#getChecksum()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -19,8 +19,7 @@ public interface Checksum {
   String KEY_SHA1 = "SHA-1";
 
   /**
-   * This method gets the checksum of the type identified by the given
-   * <code>key</code>.
+   * This method gets the checksum of the type identified by the given <code>key</code>.
    * 
    * @param key identifies the type of the checksum to get.
    * @return the requested checksum or <code>null</code> if not defined.

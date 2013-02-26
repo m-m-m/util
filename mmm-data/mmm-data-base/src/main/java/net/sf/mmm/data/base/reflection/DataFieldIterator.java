@@ -4,34 +4,32 @@ package net.sf.mmm.data.base.reflection;
 
 import java.util.Iterator;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
- * This class is an {@link Iterator} for the fields of a class. It will
- * enumerate the fields defined by the class and the fields inherited from the
- * sub-classes.
+ * This class is an {@link Iterator} for the fields of a class. It will enumerate the fields defined by the
+ * class and the fields inherited from the sub-classes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DataFieldIterator extends AbstractIterator<AbstractDataField<? extends DataObjectView, ?>> {
+public class DataFieldIterator extends AbstractIterator<AbstractDataField<? extends DataObject, ?>> {
 
   /** the current class */
-  private AbstractDataClass<? extends DataObjectView> currentClass;
+  private AbstractDataClass<? extends DataObject> currentClass;
 
   /** the current own field enumeration */
-  private Iterator<AbstractDataField<? extends DataObjectView, ?>> currentIt;
+  private Iterator<AbstractDataField<? extends DataObject, ?>> currentIt;
 
   /**
    * The constructor.
    * 
-   * @param contentClass is the class of that all
-   *        {@link net.sf.mmm.data.api.reflection.DataField fields} are to be
-   *        iterated.
+   * @param contentClass is the class of that all {@link net.sf.mmm.data.api.reflection.DataField fields} are
+   *        to be iterated.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public DataFieldIterator(AbstractDataClass<? extends DataObjectView> contentClass) {
+  public DataFieldIterator(AbstractDataClass<? extends DataObject> contentClass) {
 
     super();
     this.currentClass = contentClass;
@@ -46,10 +44,10 @@ public class DataFieldIterator extends AbstractIterator<AbstractDataField<? exte
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  protected AbstractDataField<? extends DataObjectView, ?> findNext() {
+  protected AbstractDataField<? extends DataObject, ?> findNext() {
 
     while (this.currentIt.hasNext()) {
-      AbstractDataField<? extends DataObjectView, ?> field = this.currentIt.next();
+      AbstractDataField<? extends DataObject, ?> field = this.currentIt.next();
       if (field.getSuperField() == null) {
         return field;
       }

@@ -5,7 +5,6 @@ package net.sf.mmm.data.impl.entity.pim.contact;
 import javax.inject.Named;
 
 import net.sf.mmm.data.api.entity.pim.contact.DataContact;
-import net.sf.mmm.data.api.entity.pim.contact.DataContactView;
 import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 
 /**
@@ -40,7 +39,7 @@ public class DataContactManagerImpl extends AbstractJpaGenericDao<Long, DataCont
   @Override
   public Class<? super DataContact> getEntityClassReadOnly() {
 
-    return DataContactView.class;
+    return DataContact.class;
   }
 
   /**

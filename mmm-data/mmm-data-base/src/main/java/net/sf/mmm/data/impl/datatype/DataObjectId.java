@@ -9,9 +9,8 @@ import net.sf.mmm.data.base.datatype.AbstractDataId;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This is the implementation of the {@link DataId} interface for the ID of the
- * latest version of a {@link net.sf.mmm.data.api.DataObjectView ContentObject} that
- * is no {@link net.sf.mmm.data.api.reflection.DataClass} or
+ * This is the implementation of the {@link DataId} interface for the ID of the latest version of a
+ * {@link net.sf.mmm.data.api.DataObject} that is no {@link net.sf.mmm.data.api.reflection.DataClass} or
  * {@link net.sf.mmm.data.api.reflection.DataField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -46,6 +45,7 @@ public class DataObjectId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getClassId() {
 
     return this.classId;
@@ -54,6 +54,7 @@ public class DataObjectId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getDataClassId() {
 
     return DataClassId.valueOf(this.classId);
@@ -62,6 +63,7 @@ public class DataObjectId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getRevision() {
 
     return 0;
@@ -70,6 +72,7 @@ public class DataObjectId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getStoreId() {
 
     return 0;

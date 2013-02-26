@@ -3,7 +3,7 @@
 package net.sf.mmm.data.base;
 
 import net.sf.mmm.data.api.DataIdManager;
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -11,14 +11,12 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
- * This is the abstract base implementation of the {@link DataIdManager}
- * interface.
+ * This is the abstract base implementation of the {@link DataIdManager} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataIdManager extends AbstractLoggableComponent implements
-    DataIdManager {
+public abstract class AbstractDataIdManager extends AbstractLoggableComponent implements DataIdManager {
 
   /**
    * The constructor.
@@ -31,14 +29,16 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getRootClassId() {
 
-    return getClassId(DataObjectView.CLASS_ID);
+    return getClassId(DataObject.CLASS_ID);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getClassClassId() {
 
     return getClassId(DataClass.CLASS_ID);
@@ -47,6 +47,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getFieldClassId() {
 
     return getClassId(DataField.CLASS_ID);
@@ -55,6 +56,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getClassId(long classId) {
 
     return getId(classId, DataClass.CLASS_ID);
@@ -63,6 +65,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getFieldId(long fieldId) {
 
     return getId(fieldId, DataField.CLASS_ID);
@@ -71,6 +74,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getId(String idAsString) {
 
     long resourceId = 0;
@@ -114,6 +118,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getId(long objectId, long classId) {
 
     return getId(objectId, classId, 0, 0);
@@ -122,6 +127,7 @@ public abstract class AbstractDataIdManager extends AbstractLoggableComponent im
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getId(long objectId, long classId, int revision) {
 
     return getId(objectId, classId, revision, 0);

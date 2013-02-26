@@ -8,7 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.api.reflection.DataFieldModifiers;
@@ -17,13 +18,10 @@ import net.sf.mmm.data.base.reflection.AbstractDataField;
 import org.hibernate.annotations.Type;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.data.api.reflection.DataField} interface.
+ * This is the implementation of the {@link net.sf.mmm.data.api.reflection.DataField} interface.
  * 
- * @param <FIELD> is the generic type of the
- *        {@link #getFieldValue(DataObjectView) value} reflected by this field.
- * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
- *        class}.
+ * @param <FIELD> is the generic type of the {@link #getFieldValue(DataObject) value} reflected by this field.
+ * @param <CLASS> is the generic type of the reflected {@link #getJavaClass() class}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -32,8 +30,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "DATA_FIELD")
 @DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_TITLE)
 @DiscriminatorValue("" + DataField.CLASS_ID)
-public final class DataFieldImpl<CLASS extends DataObjectView, FIELD> extends
-    AbstractDataField<CLASS, FIELD> {
+public final class DataFieldImpl<CLASS extends DataObject, FIELD> extends AbstractDataField<CLASS, FIELD> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2021919603941862430L;
@@ -69,10 +66,31 @@ public final class DataFieldImpl<CLASS extends DataObjectView, FIELD> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public boolean isSelectable() {
 
     return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setParent(DataClass<? extends DataObject> parent) {
+
+    // TODO Auto-generated method stub
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSelectable(boolean selectable) {
+
+    // TODO Auto-generated method stub
+
   }
 
 }

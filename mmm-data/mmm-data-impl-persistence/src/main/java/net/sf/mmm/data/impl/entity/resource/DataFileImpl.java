@@ -9,19 +9,18 @@ import javax.persistence.Transient;
 import net.sf.mmm.data.api.datatype.Checksum;
 import net.sf.mmm.data.api.datatype.MutableBlob;
 import net.sf.mmm.data.api.entity.resource.DataFile;
-import net.sf.mmm.data.api.entity.resource.DataFileView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.base.datatype.ChecksumImpl;
 
 /**
- * This is the implementation of {@link DataFileView}.
+ * This is the implementation of {@link DataFile}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Entity(name = DataFileView.CLASS_TITLE)
-@DataClassAnnotation(id = DataFileView.CLASS_ID)
-@DiscriminatorValue("" + DataFileView.CLASS_ID)
+@Entity(name = DataFile.CLASS_TITLE)
+@DataClassAnnotation(id = DataFile.CLASS_ID)
+@DiscriminatorValue("" + DataFile.CLASS_ID)
 public class DataFileImpl extends AbstractDataEntityResource implements DataFile {
 
   /** UID for serialization. */
@@ -44,6 +43,7 @@ public class DataFileImpl extends AbstractDataEntityResource implements DataFile
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getFiletype() {
 
     return this.filetype;
@@ -52,6 +52,7 @@ public class DataFileImpl extends AbstractDataEntityResource implements DataFile
   /**
    * @param filetype is the filetype to set
    */
+  @Override
   public void setFiletype(String filetype) {
 
     this.filetype = filetype;
@@ -60,6 +61,7 @@ public class DataFileImpl extends AbstractDataEntityResource implements DataFile
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public MutableBlob getFile() {
 
@@ -70,6 +72,7 @@ public class DataFileImpl extends AbstractDataEntityResource implements DataFile
   /**
    * {@inheritDoc}
    */
+  @Override
   public ChecksumImpl getChecksum() {
 
     return this.checksum;
@@ -78,6 +81,7 @@ public class DataFileImpl extends AbstractDataEntityResource implements DataFile
   /**
    * @param checksum is the checksum to set
    */
+  @Override
   public void setChecksum(Checksum checksum) {
 
     this.checksum = (ChecksumImpl) checksum;
@@ -90,7 +94,7 @@ public class DataFileImpl extends AbstractDataEntityResource implements DataFile
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataFileView.CLASS_ID;
+    return DataFile.CLASS_ID;
   }
 
 }

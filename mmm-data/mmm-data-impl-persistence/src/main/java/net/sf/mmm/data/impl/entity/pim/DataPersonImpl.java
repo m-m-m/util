@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.contact.DataPerson;
-import net.sf.mmm.data.api.entity.pim.contact.DataPersonView;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.util.datatype.api.person.Gender;
 
@@ -20,7 +19,7 @@ import net.sf.mmm.util.datatype.api.person.Gender;
  * @since 1.0.0
  */
 @Entity
-@DiscriminatorValue("" + DataPersonView.CLASS_ID)
+@DiscriminatorValue("" + DataPerson.CLASS_ID)
 public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
 
   /** UID for serialization. */
@@ -62,12 +61,13 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataPersonView.CLASS_ID;
+    return DataPerson.CLASS_ID;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLastName() {
 
     return this.lastName;
@@ -76,6 +76,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setLastName(String lastName) {
 
     this.lastName = lastName;
@@ -84,6 +85,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Gender getGender() {
 
     return this.gender;
@@ -92,6 +94,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setGender(Gender gender) {
 
     this.gender = gender;
@@ -100,6 +103,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getFirstName() {
 
     return this.firstName;
@@ -108,6 +112,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setFirstName(String firstName) {
 
     this.firstName = firstName;
@@ -116,6 +121,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getMiddleName() {
 
     return this.middleName;
@@ -124,6 +130,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMiddleName(String middleName) {
 
     this.middleName = middleName;
@@ -132,6 +139,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getNamePrefix() {
 
     return this.namePrefix;
@@ -140,6 +148,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setNamePrefix(String namePrefix) {
 
     this.namePrefix = namePrefix;
@@ -148,6 +157,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getNameSuffix() {
 
     return this.nameSuffix;
@@ -156,6 +166,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setNameSuffix(String nameSuffix) {
 
     this.nameSuffix = nameSuffix;
@@ -164,6 +175,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Date getDateOfBirth() {
 
     return this.dateOfBirth;
@@ -172,6 +184,7 @@ public class DataPersonImpl extends AbstractDataEntity implements DataPerson {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setDateOfBirth(Date dateOfBirth) {
 
     this.dateOfBirth = dateOfBirth;

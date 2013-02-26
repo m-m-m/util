@@ -11,7 +11,6 @@ import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.address.DataAddress;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfo;
-import net.sf.mmm.data.api.entity.pim.contact.DataContactInfoView;
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.util.datatype.api.phone.PhoneNumber;
@@ -23,8 +22,8 @@ import net.sf.mmm.util.datatype.api.phone.PhoneNumber;
  * @since 1.0.0
  */
 @Entity
-@DiscriminatorValue("" + DataContactInfoView.CLASS_ID)
-@DataClassAnnotation(id = DataContactInfoView.CLASS_ID)
+@DiscriminatorValue("" + DataContactInfo.CLASS_ID)
+@DataClassAnnotation(id = DataContactInfo.CLASS_ID)
 public class DataContactInfoImpl extends AbstractDataEntity implements DataContactInfo {
 
   /** UID for serialization. */
@@ -176,7 +175,7 @@ public class DataContactInfoImpl extends AbstractDataEntity implements DataConta
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataContactInfoView.CLASS_ID;
+    return DataContactInfo.CLASS_ID;
   }
 
 }

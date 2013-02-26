@@ -5,32 +5,53 @@ package net.sf.mmm.data.api;
 import java.util.List;
 
 import net.sf.mmm.data.api.reflection.DataClassAnnotation;
+import net.sf.mmm.data.api.reflection.DataClassIds;
+import net.sf.mmm.data.api.reflection.DataFieldAnnotation;
+import net.sf.mmm.data.api.reflection.DataFieldIds;
+import net.sf.mmm.util.collection.api.GenericTreeNode;
 
 /**
- * This is the interface of a mutable {@link DataSelectionGenericTreeView
- * generic selection-tree}.<br/>
- * <b>NOTE:</b><br/>
- * We are very sorry for this generic signature but java generics forced us to
- * make it that complicated.
+ * This is the interface for a {@link DataSelection} that represents a tree. Each instance is a tree-node that
+ * has a {@link #getParent() parent} and {@link #getChildren() children}.
  * 
- * @param <CHILDVIEW> is the genetic view of the {@link #getParent() parent}.
- * @param <PARENTVIEW> is the generic view of the {@link #getChildren()
- *        children}.
  * @param <PARENT> is the genetic type of the {@link #getParent() parent}.
  * @param <CHILD> is the generic type of the {@link #getChildren() children}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@DataClassAnnotation(id = DataSelectionGenericTreeView.CLASS_ID, title = DataSelectionGenericTreeView.CLASS_TITLE)
-public interface DataSelectionGenericTree<CHILDVIEW extends DataNodeView<PARENTVIEW>, //
-CHILD extends CHILDVIEW, PARENTVIEW extends DataSelectionGenericTreeView<CHILDVIEW, PARENTVIEW>, PARENT extends PARENTVIEW>
-    extends DataSelectionGenericTreeView<CHILDVIEW, PARENTVIEW>, DataNode<PARENTVIEW, PARENT>,
-    DataSelection {
+@DataClassAnnotation(id = DataSelectionGenericTree.CLASS_ID, title = DataSelectionGenericTree.CLASS_TITLE)
+public interface DataSelectionGenericTree<CHILD extends DataNode<PARENT>, PARENT extends DataSelectionGenericTree<CHILD, PARENT>>
+    extends DataSelection, DataNode<PARENT>, GenericTreeNode<CHILD, PARENT> {
+
+  /**
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of the
+   * {@link net.sf.mmm.data.api.reflection.DataClass} reflecting this type.
+   */
+  long CLASS_ID = DataClassIds.ID_SELECTIONGENERICTREE;
+
+  /**
+   * The {@link DataObject#getTitle() title} of the {@link net.sf.mmm.data.api.reflection.DataClass}
+   * reflecting this type.
+   */
+  String CLASS_TITLE = "DataSelectionGenericTree";
 
   /**
    * {@inheritDoc}
+   * 
+   * @return the parent or <code>null</code> if this is the root node.
    */
-  List<CHILD> getChildren();
+  @Override
+  PARENT getParent();
+
+  /**
+   * This method gets the children of this node. Implementations should use lazy loading for this property to
+   * prevent that the entire tree has to be loaded.
+   * 
+   * @return the children of this node. May be an empty list.
+   */
+  @Override
+  @DataFieldAnnotation(id = DataFieldIds.ID_SELECTIONTREE_CHILDREN)
+  List<? extends CHILD> getChildren();
 
 }

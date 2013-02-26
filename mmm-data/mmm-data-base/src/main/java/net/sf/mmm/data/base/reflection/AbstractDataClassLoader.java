@@ -5,7 +5,7 @@ package net.sf.mmm.data.base.reflection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataClassLoader;
@@ -102,7 +102,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
      * {@inheritDoc}
      */
     @Override
-    public AbstractDataClass<? extends DataObjectView> getDataClass(String name) {
+    public AbstractDataClass<? extends DataObject> getDataClass(String name) {
 
       return this.name2classMap.get(name);
     }
@@ -111,7 +111,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
      * {@inheritDoc}
      */
     @Override
-    public AbstractDataClass<? extends DataObjectView> getDataClass(long id) {
+    public AbstractDataClass<? extends DataObject> getDataClass(long id) {
 
       return this.id2classMap.get(Long.valueOf(id));
     }
@@ -120,7 +120,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
      * {@inheritDoc}
      */
     @Override
-    public DataField<? extends DataObjectView, ?> getDataField(DataId id) throws ObjectNotFoundException {
+    public DataField<? extends DataObject, ?> getDataField(DataId id) throws ObjectNotFoundException {
 
       return getDataField(id.getObjectId());
     }
@@ -129,7 +129,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
      * {@inheritDoc}
      */
     @Override
-    public DataClass<? extends DataObjectView> getDataClass(DataId id) {
+    public DataClass<? extends DataObject> getDataClass(DataId id) {
 
       NlsNullPointerException.checkNotNull(DataId.class, id);
       if (id.getClassId() == DataClass.CLASS_ID) {
@@ -143,7 +143,7 @@ public abstract class AbstractDataClassLoader implements DataClassLoader {
      * {@inheritDoc}
      */
     @Override
-    public AbstractDataField<? extends DataObjectView, ?> getDataField(long id) {
+    public AbstractDataField<? extends DataObject, ?> getDataField(long id) {
 
       return this.id2fieldMap.get(Long.valueOf(id));
     }

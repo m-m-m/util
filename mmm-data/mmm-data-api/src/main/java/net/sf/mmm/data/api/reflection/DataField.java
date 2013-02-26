@@ -2,44 +2,39 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.reflection;
 
-import net.sf.mmm.data.api.DataObjectView;
-import net.sf.mmm.data.api.DataSelectionTreeListView;
+import net.sf.mmm.data.api.DataObject;
+import net.sf.mmm.data.api.DataSelectionTreeList;
 import net.sf.mmm.data.api.reflection.access.DataFieldAccessor;
 import net.sf.mmm.util.lang.api.BooleanEnum;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This interface declares the api of a field in the content-model. Such object
- * describes the structure of a field of a
- * {@link net.sf.mmm.data.api.reflection.DataClass}.<br>
+ * This interface declares the api of a field in the content-model. Such object describes the structure of a
+ * field of a {@link net.sf.mmm.data.api.reflection.DataClass}.<br>
  * <b>ATTENTION:</b><br>
- * Do NOT get confused in comparison with {@link java.lang.reflect.Field fields}
- * in the java language specification. Better think of a {@link DataField} as
- * something like a Java-Bean property (pair of getter and setter
- * {@link java.lang.reflect.Method methods}).
+ * Do NOT get confused in comparison with {@link java.lang.reflect.Field fields} in the java language
+ * specification. Better think of a {@link DataField} as something like a Java-Bean property (pair of getter
+ * and setter {@link java.lang.reflect.Method methods}).
  * 
  * @see DataClass
  * 
- * @param <CLASS> is the generic type of the reflected {@link #getJavaClass()
- *        class}.
+ * @param <CLASS> is the generic type of the reflected {@link #getJavaClass() class}.
  * @param <FIELD> is the generic type of the value reflected by this field.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @DataClassAnnotation(id = DataField.CLASS_ID, title = DataField.CLASS_TITLE, isFinal = BooleanEnum.TRUE)
-public interface DataField<CLASS extends DataObjectView, FIELD> extends
-    DataReflectionObject<CLASS>, DataFieldAccessor<CLASS, FIELD>,
-    DataSelectionTreeListView<DataClass<? extends DataObjectView>> {
+public interface DataField<CLASS extends DataObject, FIELD> extends DataReflectionObject<CLASS>,
+    DataFieldAccessor<CLASS, FIELD>, DataSelectionTreeList<DataClass<? extends DataObject>> {
 
   /**
-   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of
-   * the {@link DataClass} reflecting this type.
+   * The {@link net.sf.mmm.data.api.datatype.DataId#getClassId() class-ID} of the {@link DataClass} reflecting
+   * this type.
    */
   long CLASS_ID = DataClassIds.ID_FIELD;
 
   /**
-   * The {@link net.sf.mmm.data.api.DataObjectView#getTitle() name} of the
-   * {@link DataClass} reflecting this type.
+   * The {@link net.sf.mmm.data.api.DataObject#getTitle() name} of the {@link DataClass} reflecting this type.
    */
   String CLASS_TITLE = "DataField";
 
@@ -50,21 +45,20 @@ public interface DataField<CLASS extends DataObjectView, FIELD> extends
   String XML_ATR_FIELD_TYPE = "type";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
-   * {@link #getFieldType() fieldType} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field} {@link #getFieldType() fieldType}
+   * for generic access.
    */
   String FIELD_NAME_FIELD_TYPE = "fieldType";
 
   /**
-   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
-   * {@link #getDeclaringClass() declaringClass} for generic access.
+   * The name of the {@link net.sf.mmm.data.api.reflection.DataField field} {@link #getDeclaringClass()
+   * declaringClass} for generic access.
    */
   String FIELD_NAME_DECLARING_CLASS = "declaringClass";
 
   /**
    * The name of the {@link net.sf.mmm.data.api.reflection.DataField field}
-   * {@link #getInitiallyDefiningClass() initiallyDefiningClass} for generic
-   * access.
+   * {@link #getInitiallyDefiningClass() initiallyDefiningClass} for generic access.
    */
   String FIELD_NAME_INITIALLY_DEFINING_CLASS = "initiallyDefiningClass";
 
@@ -73,34 +67,32 @@ public interface DataField<CLASS extends DataObjectView, FIELD> extends
    * 
    * @return the {@link #getDeclaringClass() declaring-class}.
    */
-  DataClass<? extends DataObjectView> getParent();
+  @Override
+  DataClass<? extends DataObject> getParent();
 
   /**
-   * This method gets the content-class that declares this field. This does NOT
-   * mean that the field is {@link #getInitiallyDefiningClass() initially
-   * defined} by that class. It can also be that the declaring class inherits
-   * the field from a {@link DataClass#getSuperClass() super-class} but
-   * overrides it (if supported by the {@link DataReflectionService
-   * content-model} ) in order to declare it more specific meaning that the type
-   * of the field is a sub-type of the field that is overridden or the validator
-   * is more restrictive.<br>
+   * This method gets the content-class that declares this field. This does NOT mean that the field is
+   * {@link #getInitiallyDefiningClass() initially defined} by that class. It can also be that the declaring
+   * class inherits the field from a {@link DataClass#getSuperClass() super-class} but overrides it (if
+   * supported by the {@link DataReflectionService content-model} ) in order to declare it more specific
+   * meaning that the type of the field is a sub-type of the field that is overridden or the validator is more
+   * restrictive.<br>
    * 
-   * This method will return the same result as {@link #getParent()} but is a
-   * more explicit and stronger typed.
+   * This method will return the same result as {@link #getParent()} but is a more explicit and stronger
+   * typed.
    * 
    * @return the class that declares this field.
    */
   DataClass<CLASS> getDeclaringClass();
 
   /**
-   * This method gets the content-class that initially defined by this field.
-   * This means that the returned content-class does not inherit this field and
-   * its parent class (if not root) has no field with the same
+   * This method gets the content-class that initially defined by this field. This means that the returned
+   * content-class does not inherit this field and its parent class (if not root) has no field with the same
    * {@link #getTitle() name}.
    * 
    * @return the class that initially defines this field.
    */
-  DataClass<? extends DataObjectView> getInitiallyDefiningClass();
+  DataClass<? extends DataObject> getInitiallyDefiningClass();
 
   // /**
   // * This method gets the direct sub-fields of this field. The sub-fields are
@@ -112,19 +104,17 @@ public interface DataField<CLASS extends DataObjectView, FIELD> extends
   // List<? extends DataField<? extends CLASS, ? extends FIELD>> getSubFields();
 
   /**
-   * This method gets the super-field of this field if this field is extended. A
-   * non-{@link DataFieldModifiers#isFinal() final} field defined in a class can
-   * be extended in a sub-class. The extended field may have a more specific
-   * type.
+   * This method gets the super-field of this field if this field is extended. A non-
+   * {@link DataFieldModifiers#isFinal() final} field defined in a class can be extended in a sub-class. The
+   * extended field may have a more specific type.
    * 
-   * @return the field extended by this field or <code>null</code> if the field
-   *         is NOT inherited.
+   * @return the field extended by this field or <code>null</code> if the field is NOT inherited.
    */
-  DataField<? extends DataObjectView, ? super FIELD> getSuperField();
+  DataField<? extends DataObject, ? super FIELD> getSuperField();
 
   /**
-   * This method gets the specification of the fields type. This is the most
-   * precise description of the fields type.
+   * This method gets the specification of the fields type. This is the most precise description of the fields
+   * type.
    * 
    * @see #getFieldType()
    * 
@@ -133,8 +123,7 @@ public interface DataField<CLASS extends DataObjectView, FIELD> extends
   String getFieldTypeSpecification();
 
   /**
-   * This method gets the value type of the field. Only values of this type can
-   * be stored in this field.
+   * This method gets the value type of the field. Only values of this type can be stored in this field.
    * 
    * @see GenericType#getAssignmentClass()
    * 
@@ -145,6 +134,7 @@ public interface DataField<CLASS extends DataObjectView, FIELD> extends
   /**
    * {@inheritDoc}
    */
+  @Override
   DataFieldModifiers getModifiers();
 
   // TODO: JSR 303

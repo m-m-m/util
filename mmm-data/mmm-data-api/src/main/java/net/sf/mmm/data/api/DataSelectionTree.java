@@ -3,19 +3,15 @@
 package net.sf.mmm.data.api;
 
 /**
- * This is the interface of a mutable {@link DataSelectionTreeView}.
+ * A {@link DataSelectionGenericTree} where {@link #getChildren() children} and {@link #getParent() parents}
+ * have the same type.
  * 
- * @param <NODEVIEW> is the generic view representing the {@link #getParent()
- *        parent tree node}.
- * @param <NODE> is the generic type representing the {@link #getParent() parent
- *        tree node}.
+ * @param <NODE> is the generic type representing the {@link #getParent() parent tree node}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataSelectionTree<NODEVIEW extends DataSelectionTreeView<NODEVIEW>, NODE extends NODEVIEW>
-    extends DataSelectionTreeView<NODEVIEW>,
-    DataSelectionGenericTree<NODEVIEW, NODE, NODEVIEW, NODE> {
+public interface DataSelectionTree<NODE extends DataSelectionTree<NODE>> extends DataSelectionGenericTree<NODE, NODE> {
 
   // nothing to add...
 

@@ -21,14 +21,13 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 /**
  * This is the implementation of {@link net.sf.mmm.data.api.link.Link}.
  * 
- * @param <TARGET> is the type of the linked {@link #getTarget() target entity}.
- *        See {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
+ * @param <TARGET> is the type of the linked {@link #getTarget() target entity}. See
+ *        {@link net.sf.mmm.data.api.reflection.DataClass#getJavaClass()}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Entity(name = "DataEntiyLink")
-public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> implements
-    GenericEntity<Long> {
+public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> implements GenericEntity<Long> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3818102518986171086L;
@@ -62,8 +61,7 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
    * @param source is the {@link #getSource() linking entity}.
    * @param fieldId is the {@link #getFieldId() field ID}.
    * @param target is the {@link #getTarget() linked entity}.
-   * @param classifier is the {@link #getClassifier() classifier}. May be
-   *        <code>null</code>.
+   * @param classifier is the {@link #getClassifier() classifier}. May be <code>null</code>.
    */
   public LinkImpl(DataEntity source, long fieldId, TARGET target, String classifier) {
 
@@ -79,6 +77,7 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
   /**
    * {@inheritDoc}
    */
+  @Override
   @Id
   @GeneratedValue
   public Long getId() {
@@ -95,10 +94,9 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
   }
 
   /**
-   * This method gets the
-   * {@link net.sf.mmm.data.api.reflection.DataField#getId() ID} of the
-   * {@link net.sf.mmm.data.api.reflection.DataField} containing this link
-   * (typically in a {@link net.sf.mmm.data.api.link.LinkList}).
+   * This method gets the {@link net.sf.mmm.data.api.reflection.DataField#getId() ID} of the
+   * {@link net.sf.mmm.data.api.reflection.DataField} containing this link (typically in a
+   * {@link net.sf.mmm.data.api.link.LinkList}).
    * 
    * @return the field ID.
    */
@@ -134,6 +132,7 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public int getModificationCounter() {
 
@@ -179,6 +178,7 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
   /**
    * {@inheritDoc}
    */
+  @Override
   @ManyToOne(optional = false, targetEntity = AbstractDataEntity.class, cascade = CascadeType.PERSIST)
   @JoinColumn(name = "TARGET_ID")
   public TARGET getTarget() {

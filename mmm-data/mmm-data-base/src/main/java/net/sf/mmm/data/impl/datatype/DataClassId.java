@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.datatype;
 
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
@@ -38,28 +38,25 @@ public final class DataClassId extends AbstractDataId {
   private static final String VALUE_SOURCE = "class ID";
 
   /**
-   * the id of the root {@link net.sf.mmm.data.api.reflection.DataClass
-   * ContentClass} (the class that all other classes are derived from).
+   * the id of the root {@link net.sf.mmm.data.api.reflection.DataClass ContentClass} (the class that all
+   * other classes are derived from).
    */
-  public static final DataClassId ROOT = valueOf(DataObjectView.CLASS_ID);
+  public static final DataClassId ROOT = valueOf(DataObject.CLASS_ID);
 
   /**
-   * the id of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} that reflects
-   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject
-   * content-reflection-object}.
+   * the id of the {@link net.sf.mmm.data.api.reflection.DataClass content-class} that reflects
+   * {@link net.sf.mmm.data.api.reflection.DataReflectionObject content-reflection-object}.
    */
   public static final DataClassId REFELCTION = valueOf(DataReflectionObject.CLASS_ID);
 
   /**
-   * the id of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} that reflects itself (Like {@link Class} in java).
+   * the id of the {@link net.sf.mmm.data.api.reflection.DataClass content-class} that reflects itself (Like
+   * {@link Class} in java).
    */
   public static final DataClassId CLASS = valueOf(DataClass.CLASS_ID);
 
   /**
-   * the id of the {@link net.sf.mmm.data.api.reflection.DataClass
-   * content-class} that reflects
+   * the id of the {@link net.sf.mmm.data.api.reflection.DataClass content-class} that reflects
    * {@link net.sf.mmm.data.api.reflection.DataField content-field}.
    */
   public static final DataClassId FIELD = valueOf(DataField.CLASS_ID);
@@ -70,8 +67,7 @@ public final class DataClassId extends AbstractDataId {
    * <b>ATTENTION:</b><br>
    * Please use {@link net.sf.mmm.data.api.DataIdManager} to create instances.
    * 
-   * @param objectId is the {@link #getObjectId() object-ID} identifying the
-   *        {@link DataClass}.
+   * @param objectId is the {@link #getObjectId() object-ID} identifying the {@link DataClass}.
    */
   public DataClassId(long objectId) {
 
@@ -81,6 +77,7 @@ public final class DataClassId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataId getDataClassId() {
 
     return CLASS;
@@ -89,6 +86,7 @@ public final class DataClassId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getClassId() {
 
     return DataClass.CLASS_ID;
@@ -97,6 +95,7 @@ public final class DataClassId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getRevision() {
 
     return 0;
@@ -105,26 +104,24 @@ public final class DataClassId extends AbstractDataId {
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getStoreId() {
 
     return 0;
   }
 
   /**
-   * This method gets the {@link DataClassId} instance for the given
-   * <code>classUid</code>. A pool is used to store the ID instances for the
-   * first N <code>class-IDs</code>. For those this method will always return
+   * This method gets the {@link DataClassId} instance for the given <code>classUid</code>. A pool is used to
+   * store the ID instances for the first N <code>class-IDs</code>. For those this method will always return
    * the same instance.
    * 
-   * @param classUid is the {@link #getObjectId() object-ID} of the requested
-   *        {@link DataClassId} instance.
+   * @param classUid is the {@link #getObjectId() object-ID} of the requested {@link DataClassId} instance.
    * @return the requested {@link DataClassId} instance.
    */
   public static DataClassId valueOf(long classUid) {
 
     DataClassId id;
-    ValueOutOfRangeException.checkRange(Long.valueOf(classUid), ID_MINIMUM_VALUE, ID_MAXIMUM_VALUE,
-        VALUE_SOURCE);
+    ValueOutOfRangeException.checkRange(Long.valueOf(classUid), ID_MINIMUM_VALUE, ID_MAXIMUM_VALUE, VALUE_SOURCE);
     if (classUid < POOL_SIZE) {
       int uidInt = (int) classUid;
       id = POOL[uidInt];

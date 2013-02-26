@@ -5,10 +5,9 @@ package net.sf.mmm.data.base.repository;
 import java.util.Map;
 
 import net.sf.mmm.data.api.DataException;
-import net.sf.mmm.data.api.DataObjectView;
+import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.datatype.DataId;
 import net.sf.mmm.data.api.entity.resource.DataEntityResource;
-import net.sf.mmm.data.api.entity.resource.DataEntityResourceView;
 import net.sf.mmm.data.api.reflection.DataClass;
 import net.sf.mmm.data.api.reflection.DataField;
 import net.sf.mmm.data.base.AbstractDataObject;
@@ -105,12 +104,12 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
         result = getReflectionService().getDataField(id);
       } else {
         // TODO: illegal ID
-        throw new ObjectNotFoundException(DataObjectView.class, id);
+        throw new ObjectNotFoundException(DataObject.class, id);
       }
     } else {
       // resource
       long cid = id.getClassId();
-      if (cid < DataEntityResourceView.CLASS_ID) {
+      if (cid < DataEntityResource.CLASS_ID) {
         // internal entity
         // TODO: should this be handled different at all?
       } else {
@@ -129,12 +128,13 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
   /**
    * {@inheritDoc}
    */
-  public DataObjectView getById(DataId id) throws DataException {
+  @Override
+  public DataObject getById(DataId id) throws DataException {
 
-    DataObjectView result = getFromCache(id);
+    DataObject result = getFromCache(id);
     // TODO: read object from persistent store...
     if (result == null) {
-      throw new ObjectNotFoundException(DataObjectView.class, id);
+      throw new ObjectNotFoundException(DataObject.class, id);
     }
     return result;
   }
@@ -153,7 +153,7 @@ public abstract class AbstractCachedDataRepository extends AbstractDataRepositor
   /**
    * {@inheritDoc}
    */
-  public void rename(DataObjectView entity, String newName) throws DataException {
+  public void rename(DataObject entity, String newName) throws DataException {
 
     // TODO Auto-generated method stub
 

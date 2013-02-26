@@ -9,7 +9,6 @@ import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.contact.DataContact;
 import net.sf.mmm.data.api.entity.pim.contact.DataContactInfo;
-import net.sf.mmm.data.api.entity.pim.contact.DataContactView;
 import net.sf.mmm.data.api.entity.pim.contact.DataPerson;
 import net.sf.mmm.data.api.link.Link;
 import net.sf.mmm.data.api.link.MutableLinkList;
@@ -23,7 +22,7 @@ import net.sf.mmm.data.impl.entity.pim.DataPersonImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Entity(name = DataContactView.CLASS_TITLE)
+@Entity(name = DataContact.CLASS_TITLE)
 public class DataContactImpl extends AbstractDataEntity implements DataContact {
 
   /** UID for serialization. */
@@ -102,7 +101,7 @@ public class DataContactImpl extends AbstractDataEntity implements DataContact {
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataContactView.CLASS_ID;
+    return DataContact.CLASS_ID;
   }
 
 }

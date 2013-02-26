@@ -7,11 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.entity.pim.address.DataCountry;
-import net.sf.mmm.data.api.entity.pim.address.DataCountryView;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 import net.sf.mmm.util.datatype.api.address.Iso2CountryCode;
-import net.sf.mmm.util.datatype.api.phone.PhoneCountryCode;
 import net.sf.mmm.util.datatype.api.phone.InternationalCallPrefix;
+import net.sf.mmm.util.datatype.api.phone.PhoneCountryCode;
 
 import org.hibernate.annotations.Type;
 
@@ -50,6 +49,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public InternationalCallPrefix getCallPrefix() {
 
     return this.callPrefix;
@@ -58,6 +58,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   @Type(type = "")
   @Column(unique = true)
   public PhoneCountryCode getCountryCode() {
@@ -68,6 +69,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iso2CountryCode getIsoCode() {
 
     return this.isoCode;
@@ -76,6 +78,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isSelectable() {
 
     return this.selectable;
@@ -84,6 +87,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setSelectable(boolean selectable) {
 
     this.selectable = selectable;
@@ -92,6 +96,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setCallPrefix(InternationalCallPrefix callPrefix) {
 
     this.callPrefix = callPrefix;
@@ -100,6 +105,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setCountryCode(PhoneCountryCode countryCode) {
 
     this.countryCode = countryCode;
@@ -108,6 +114,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setIsoCode(Iso2CountryCode isoCode) {
 
     this.isoCode = isoCode;
@@ -120,7 +127,7 @@ public class DataCountryImpl extends AbstractDataEntity implements DataCountry {
   @Transient
   protected long getStaticDataClassId() {
 
-    return DataCountryView.CLASS_ID;
+    return DataCountry.CLASS_ID;
   }
 
 }
