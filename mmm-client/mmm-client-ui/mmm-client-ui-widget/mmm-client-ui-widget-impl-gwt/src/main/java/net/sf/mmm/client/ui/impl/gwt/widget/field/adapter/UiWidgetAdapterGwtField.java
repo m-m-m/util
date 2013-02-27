@@ -74,8 +74,36 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
       this.activeWidget.setVisible(editMode);
     }
     if (this.widgetViewMode != null) {
+      if (!editMode) {
+        updateWidgetViewMode();
+      }
       this.widgetViewMode.setVisible(!editMode);
     }
+  }
+
+  /**
+   * This method updates the {@link #getWidgetViewMode() view-mode-widget} such that it displays the
+   * {@link #getValue() current value}.
+   */
+  protected void updateWidgetViewMode() {
+
+    ADAPTER_VALUE value = getValue();
+    String valueAsString = convertValueToString(value);
+    getWidgetViewMode().setText(valueAsString);
+  }
+
+  /**
+   * Converts the given value to {@link String}.
+   * 
+   * @param value the {@link #getValue() value} to convert.
+   * @return the {@link String} representation of the given <code>value</code>.
+   */
+  protected String convertValueToString(ADAPTER_VALUE value) {
+
+    if (value == null) {
+      return null;
+    }
+    return value.toString();
   }
 
   /**
