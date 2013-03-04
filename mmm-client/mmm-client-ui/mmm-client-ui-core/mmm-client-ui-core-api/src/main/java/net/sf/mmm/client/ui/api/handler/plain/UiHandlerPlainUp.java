@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onUp() up}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onUp(Object) up}.
  * 
  * @see UiHandlerPlainNext
  * 
@@ -15,7 +15,9 @@ public interface UiHandlerPlainUp extends UiHandlerPlain {
   /**
    * This method is invoked for the action <em>up</em>. This means that an object is moved upwards (typically
    * to re-order).
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onUp();
+  void onUp(Object variant);
 
 }

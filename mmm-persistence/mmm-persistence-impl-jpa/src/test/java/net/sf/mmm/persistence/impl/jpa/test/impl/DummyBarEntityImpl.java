@@ -4,7 +4,7 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 
 import javax.persistence.Entity;
 
-import net.sf.mmm.persistence.base.jpa.JpaEntity;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 
 /**
@@ -13,7 +13,7 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyBarEntityImpl extends JpaEntity<Integer> implements DummyBarEntity {
+public class DummyBarEntityImpl extends AbstractJpaEntity<Integer> implements DummyBarEntity {
 
   /** @see #getValue() */
   private String value;
@@ -29,6 +29,7 @@ public class DummyBarEntityImpl extends JpaEntity<Integer> implements DummyBarEn
   /**
    * @return the bar
    */
+  @Override
   public String getValue() {
 
     return this.value;
@@ -37,6 +38,7 @@ public class DummyBarEntityImpl extends JpaEntity<Integer> implements DummyBarEn
   /**
    * @param bar is the bar to set
    */
+  @Override
   public void setValue(String bar) {
 
     this.value = bar;

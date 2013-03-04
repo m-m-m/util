@@ -8,18 +8,17 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
-import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularCompositeNoValue;
 
 /**
  * This is the toolkit independent implementation of {@link UiWidgetButtonPanel} based on
- * {@link UiWidgetCustomRegularComposite} and {@link UiWidgetHorizontalPanel}.
+ * {@link UiWidgetCustomRegularCompositeNoValue} and {@link UiWidgetHorizontalPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetCustomButtonPanel extends
-    UiWidgetCustomRegularComposite<Void, UiWidgetButton, UiWidgetHorizontalPanel> implements UiWidgetButtonPanel {
+    UiWidgetCustomRegularCompositeNoValue<UiWidgetButton, UiWidgetHorizontalPanel> implements UiWidgetButtonPanel {
 
   /**
    * The constructor.
@@ -65,24 +64,6 @@ public class UiWidgetCustomButtonPanel extends
   public UiWidgetButton removeChild(int index) {
 
     return (UiWidgetButton) getDelegate().removeChild(index);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetValue(Void value) {
-
-    // nothing to do for Void.
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected Void doGetValue(Void template, ValidationState state) throws RuntimeException {
-
-    return null;
   }
 
   /**

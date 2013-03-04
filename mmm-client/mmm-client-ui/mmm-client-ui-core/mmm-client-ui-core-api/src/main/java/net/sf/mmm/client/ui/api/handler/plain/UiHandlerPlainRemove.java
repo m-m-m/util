@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onRemove() remove}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onRemove(Object) remove}.
  * 
  * @see UiHandlerPlainDelete
  * 
@@ -14,11 +14,13 @@ public interface UiHandlerPlainRemove extends UiHandlerPlain {
 
   /**
    * This method is invoked for the action <em>remove</em>. This means that something is removed. Unlike
-   * {@link UiHandlerPlainDelete#onDelete() delete} this operation will NOT (immediately) perform a persistent
+   * {@link UiHandlerPlainDelete#onDelete(Object) delete} this operation will NOT (immediately) perform a persistent
    * change. E.g. this action is appropriate for removing entries from a list locally while the user still has
-   * the option to {@link UiHandlerPlainSave#onSave() save} or {@link UiHandlerPlainCancel#onCancel() cancel}
-   * his changes.
+   * the option to {@link UiHandlerPlainSave#onSave(Object) save} or {@link UiHandlerPlainCancel#onCancel(Object)
+   * cancel} his changes.
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onRemove();
+  void onRemove(Object variant);
 
 }

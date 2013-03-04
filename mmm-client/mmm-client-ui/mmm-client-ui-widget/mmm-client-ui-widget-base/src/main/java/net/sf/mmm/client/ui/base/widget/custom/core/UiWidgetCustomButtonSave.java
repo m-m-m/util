@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave;
 import net.sf.mmm.util.nls.api.NlsAccess;
 
 /**
- * This is a {@link UiWidgetCustomButton} for the {@link UiHandlerPlainSave#onSave() save} operation.
+ * This is a {@link UiWidgetCustomButton} for the {@link UiHandlerPlainSave#onSave(Object) save} operation.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -21,7 +21,7 @@ public class UiWidgetCustomButtonSave extends UiWidgetCustomButton {
    * The constructor.
    * 
    * @param context - see {@link #getContext()}.
-   * @param handler gets {@link UiHandlerPlainSave#onSave() invoked} if the button is clicked.
+   * @param handler gets {@link UiHandlerPlainSave#onSave(Object) invoked} if the button is clicked.
    */
   public UiWidgetCustomButtonSave(UiContext context, final UiHandlerPlainSave handler) {
 
@@ -32,7 +32,7 @@ public class UiWidgetCustomButtonSave extends UiWidgetCustomButton {
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onSave();
+        handler.onSave(null);
       }
     });
   }

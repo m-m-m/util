@@ -80,15 +80,6 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * 
    * <pre>
    * protected Person doGetValue(Person template, {@link ValidationState} state) {
-   *   Person result = template;
-   *   if (result == null) {
-   *     result = new Person();
-   *   }
-   *   Person original = {@link #getOriginalValue()};
-   *   if (original != null) {
-   *     // result.copyValues(original);
-   *     result.setId(original.getId());
-   *   }
    *
    *   // if the attribute is a datatype we can supply null (instead of result.getFirstName())
    *   result.setFirstName(this.widgetFirstName.{@link #getValueDirect(Object, ValidationState) getValueDirect}(null, state));
@@ -109,6 +100,28 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   /**
    * {@inheritDoc}
    * 
+   * Here is an flexible example implementation.
+   * 
+   * <pre>
+   * Person result;
+   * Person original = {@link #getOriginalValue()};
+   * if (original == null) {
+   *   result = new Person();
+   * } else {
+   *   result = new Person(original);
+   *   // result = new Person();
+   *   // // result.copyValues(original);
+   *   // result.setId(original.getId());
+   *   // please note that attributes from GenericEntity/RevisionedEntity are automatically copied
+   * }
+   * </pre>
+   */
+  @Override
+  protected abstract VALUE createNewValue();
+
+  /**
+   * {@inheritDoc}
+   * 
    * <br/>
    * An implementation should set the attributes of the given <code>value</code> in the {@link #getChild(int)
    * child-widgets}.<br/>
@@ -116,8 +129,8 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * 
    * <pre>
    * protected void doSetValue(Person value) {
-   *   this.widgetFirstName.setValue(value?.getFirstName());
-   *   this.widgetLastName.setValue(value?.getLastName());
+   *   this.widgetFirstName.{@link #setValue(Object) setValue}(value?.getFirstName());
+   *   this.widgetLastName.{@link #setValue(Object) setValue}(value?.getLastName());
    *   ...
    * }
    * </pre>

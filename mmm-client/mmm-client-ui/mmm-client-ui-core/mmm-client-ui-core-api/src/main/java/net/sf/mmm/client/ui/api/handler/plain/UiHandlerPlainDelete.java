@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onDelete() delete}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onDelete(Object) delete}.
  * 
  * @see UiHandlerPlainRemove
  * 
@@ -15,7 +15,9 @@ public interface UiHandlerPlainDelete extends UiHandlerPlain {
   /**
    * This method is invoked for the action <em>delete</em>. This means that something (e.g. an entity) is to
    * be deleted and will no longer exist.
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onDelete();
+  void onDelete(Object variant);
 
 }

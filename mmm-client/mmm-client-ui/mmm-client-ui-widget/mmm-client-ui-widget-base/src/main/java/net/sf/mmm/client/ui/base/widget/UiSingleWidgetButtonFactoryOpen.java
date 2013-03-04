@@ -55,7 +55,7 @@ public class UiSingleWidgetButtonFactoryOpen extends AbstractUiSingleWidgetButto
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onOpen();
+        handler.onOpen(null);
       }
     };
     return createButton(context, getBundle().labelOpen(), clickHandler, null, null);

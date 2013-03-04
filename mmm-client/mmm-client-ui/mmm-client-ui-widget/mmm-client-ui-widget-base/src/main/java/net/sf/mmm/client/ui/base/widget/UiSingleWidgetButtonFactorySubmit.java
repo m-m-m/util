@@ -55,7 +55,7 @@ public class UiSingleWidgetButtonFactorySubmit extends AbstractUiSingleWidgetBut
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onSubmit();
+        handler.onSubmit(null);
       }
     };
     return createButton(context, getBundle().labelSubmit(), clickHandler, null, null);

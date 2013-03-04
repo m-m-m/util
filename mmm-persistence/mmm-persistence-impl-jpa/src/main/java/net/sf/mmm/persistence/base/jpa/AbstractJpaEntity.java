@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import net.sf.mmm.persistence.base.AbstractGenericEntity;
+import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
 
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.util.entity.api.GenericEntity} using the
@@ -19,10 +21,16 @@ import net.sf.mmm.persistence.base.AbstractGenericEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> {
+public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> implements MutableRevisionedEntity<ID> {
 
   /** @see #getId() */
   private ID id;
+
+  /** @see #getModificationCounter() */
+  private int modificationCounter;
+
+  /** @see #getRevision() */
+  private Number revision;
 
   /**
    * The constructor.
@@ -30,6 +38,7 @@ public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> {
   public AbstractJpaEntity() {
 
     super();
+    this.revision = LATEST_REVISION;
   }
 
   /**
@@ -49,9 +58,10 @@ public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> {
   }
 
   /**
-   * @param id is the id to set
+   * {@inheritDoc}
    */
-  protected void setId(ID id) {
+  @Override
+  public void setId(ID id) {
 
     this.id = id;
   }
@@ -60,10 +70,40 @@ public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> {
    * {@inheritDoc}
    */
   @Override
-  @Transient
+  @Version
   public int getModificationCounter() {
 
-    return 0;
+    return this.modificationCounter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setModificationCounter(int modificationCounter) {
+
+    this.modificationCounter = modificationCounter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @Transient
+  public Number getRevision() {
+
+    return this.revision;
+  }
+
+  /**
+   * This method sets the {@link #getRevision() revision}.
+   * 
+   * @param revision is the revision to set
+   */
+  @Override
+  public void setRevision(Number revision) {
+
+    this.revision = revision;
   }
 
 }

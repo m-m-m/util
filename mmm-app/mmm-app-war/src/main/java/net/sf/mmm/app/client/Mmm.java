@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 import net.sf.mmm.app.shared.GreetingService;
@@ -15,7 +14,6 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -23,7 +21,6 @@ import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel;
-import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
@@ -109,14 +106,14 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     verticalPanel1.addChild(label1);
     final UiWidgetTab tab1 = tabPanel.addChild(verticalPanel1, "Tab1");
 
-    UiWidgetGridPanel gridPanel = factory.create(UiWidgetGridPanel.class);
-    final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
-    textField1.setFieldLabel("Label1");
-    textField1.setValidationFailure("Totally nonse. Please provide corrent data.");
-    final UiWidgetComboBox<Boolean> comboBox = factory.create(UiWidgetComboBox.class);
-    comboBox.setFieldLabel("Label2");
-    comboBox.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
-    gridPanel.addChildren(textField1, comboBox);
+    // UiWidgetGridPanel gridPanel = factory.create(UiWidgetGridPanel.class);
+    // final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
+    // textField1.setFieldLabel("Label1");
+    // textField1.setValidationFailure("Totally nonse. Please provide corrent data.");
+    // final UiWidgetComboBox<Boolean> comboBox = factory.create(UiWidgetComboBox.class);
+    // comboBox.setFieldLabel("Label2");
+    // comboBox.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
+    // gridPanel.addChildren(textField1, comboBox);
     UiWidgetBorderPanel borderPanel = factory.create(UiWidgetBorderPanel.class);
     borderPanel.setLabel("Hello World");
 
@@ -124,7 +121,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiHandlerObjectSave<ContactBean> handlerObjectSave = new UiHandlerObjectSave<ContactBean>() {
 
       @Override
-      public void onSave(ContactBean object) {
+      public void onSave(ContactBean object, Object variant) {
 
         Window.alert("Contact " + object + " saved.");
       }

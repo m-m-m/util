@@ -50,7 +50,7 @@ public abstract class AbstractLink<TARGET extends DataEntity> implements Link<TA
   /**
    * @param classifier is the classifier to set
    */
-  protected void setClassifier(String classifier) {
+  public void setClassifier(String classifier) {
 
     this.classifier = classifier;
   }

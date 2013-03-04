@@ -73,4 +73,21 @@ public class ContactBean {
     this.birthday = birthday;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    StringBuilder result = new StringBuilder(this.lastName);
+    result.append(", ");
+    result.append(this.firstName);
+    if (this.birthday != null) {
+      result.append(" (*");
+      result.append(this.birthday);
+      result.append(")");
+    }
+    return result.toString();
+  }
+
 }

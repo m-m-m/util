@@ -2,8 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.handler.object;
 
+
 /**
- * This is the {@link UiHandlerObject} for the action {@link #onApprove(Object) approve}.
+ * This is the {@link UiHandlerObject} for the action {@link #onApprove(Object, Object) approve}.
  * 
  * @see net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave
  * 
@@ -15,10 +16,11 @@ public interface UiHandlerObjectApprove<O> extends UiHandlerObject<O> {
 
   /**
    * This method is invoked for the action
-   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainApprove#onApprove() approve}.
+   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainApprove#onApprove(Object) approve}.
    * 
    * @param object is the actual object to approve.
+   * @param variant is the optional {@link net.sf.mmm.util.lang.api.Variant}.
    */
-  void onApprove(O object);
+  void onApprove(O object, Object variant);
 
 }

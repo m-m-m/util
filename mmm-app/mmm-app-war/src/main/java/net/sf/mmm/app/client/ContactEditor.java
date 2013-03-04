@@ -15,7 +15,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
 public class ContactEditor extends UiWidgetCustomEditor<ContactBean> {
 
   /** The form to edit {@link ContactBean}. */
-  private ContactForm contactForm;
+  private final ContactForm contactForm;
 
   /**
    * The constructor.
@@ -26,16 +26,17 @@ public class ContactEditor extends UiWidgetCustomEditor<ContactBean> {
   public ContactEditor(UiContext context, UiHandlerObjectSave<ContactBean> handlerObjectSave) {
 
     super(context, handlerObjectSave);
+    this.contactForm = new ContactForm(getContext());
+    addChild(this.contactForm);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void createAndAddChildren() {
+  protected ContactBean createNewValue() {
 
-    this.contactForm = new ContactForm(getContext());
-    addChild(this.contactForm);
+    return new ContactBean();
   }
 
   /**

@@ -47,6 +47,15 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
    * {@inheritDoc}
    */
   @Override
+  protected ContactBean createNewValue() {
+
+    return new ContactBean();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected ContactBean doGetValue(ContactBean template, ValidationState state) throws RuntimeException {
 
     ContactBean result = template;

@@ -13,8 +13,15 @@ package net.sf.mmm.util.entity.api;
  * <li><b>historic {@link #getRevision() revision}</b><br/>
  * If the object is {@link #getRevision() revision controlled}, it has a history of modifications. A
  * {@link RevisionedEntity} can represent a historic {@link #getRevision() revision} out of this history. It
- * therefore is immutable so operations to modify the {@link RevisionedEntity} will typically fail.</li>
+ * therefore is immutable so operations to modify the {@link RevisionedEntity} will typically fail. At least
+ * they can NOT be written to the database.</li>
  * </ul>
+ * <b>ATTENTION:</b><br/>
+ * Due to the lack of multi-inheritance and for simplicity one will typically implement this interface in
+ * base-classes of the data-model. However, maybe only some classes of the hierarchy (or even not at all) are
+ * actually revision controlled. In case of envers you can see this by looking for an
+ * <code>&#64;Audited</code> annotations. Also in case of <code>mmm-persistence</code> you will notice this by
+ * looking at the <code>DAO</code>.
  * 
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 

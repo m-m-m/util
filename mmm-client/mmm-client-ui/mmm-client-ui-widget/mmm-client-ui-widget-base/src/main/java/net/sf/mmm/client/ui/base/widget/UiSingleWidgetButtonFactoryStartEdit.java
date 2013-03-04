@@ -65,7 +65,7 @@ public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidget
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onStartEditMode();
+        handler.onStartEditMode(null);
       }
     };
     return createButton(context, getBundle().labelStartEdit(), clickHandler, null, null);

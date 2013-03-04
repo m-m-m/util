@@ -55,7 +55,7 @@ public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetBut
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onCancel();
+        handler.onCancel(null);
       }
     };
     return createButton(context, getBundle().labelCancel(), clickHandler, null, null);

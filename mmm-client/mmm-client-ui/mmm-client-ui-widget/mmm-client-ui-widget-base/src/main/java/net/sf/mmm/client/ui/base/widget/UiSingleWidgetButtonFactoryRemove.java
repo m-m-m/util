@@ -75,7 +75,7 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
         if (preventConfirmationPopup) {
-          handler.onRemove();
+          handler.onRemove(null);
         } else {
           UiPopupHelper popupHelper = context.getPopupHelper();
           Callback<String> callback = new Callback<String>() {
@@ -84,7 +84,7 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
             public Void apply(String argument) {
 
               if (UiPopupHelper.BUTTON_ID_OK.equals(argument)) {
-                handler.onRemove();
+                handler.onRemove(null);
               }
               return null;
             }

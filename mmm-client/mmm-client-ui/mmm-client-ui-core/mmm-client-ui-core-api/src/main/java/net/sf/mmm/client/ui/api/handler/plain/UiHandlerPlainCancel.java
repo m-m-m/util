@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onCancel() cancel}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onCancel(Object) cancel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -13,7 +13,9 @@ public interface UiHandlerPlainCancel extends UiHandlerPlain {
   /**
    * This method is invoked for the action <em>cancel</em>. This means the current steps or changes will be
    * aborted, discarded or reverted.
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onCancel();
+  void onCancel(Object variant);
 
 }

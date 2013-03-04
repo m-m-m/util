@@ -55,7 +55,7 @@ public class UiSingleWidgetButtonFactoryConfirm extends AbstractUiSingleWidgetBu
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onConfirm();
+        handler.onConfirm(null);
       }
     };
     return createButton(context, getBundle().labelConfirm(), clickHandler, null, null);

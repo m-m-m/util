@@ -58,7 +58,7 @@ public class UiSingleWidgetButtonFactoryPrevious extends AbstractUiSingleWidgetB
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onPrevious();
+        handler.onPrevious(null);
       }
     };
     NlsMessage tooltipPrevious = getBundle().tooltipPrevious();

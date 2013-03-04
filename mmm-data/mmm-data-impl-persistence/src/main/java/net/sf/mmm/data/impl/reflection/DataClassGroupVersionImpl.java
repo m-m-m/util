@@ -2,14 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.reflection;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
-import net.sf.mmm.util.entity.api.GenericEntity;
+import net.sf.mmm.util.entity.api.MutableGenericEntity;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 import org.hibernate.annotations.Type;
@@ -21,7 +19,7 @@ import org.hibernate.annotations.Type;
  * @since 1.0.0
  */
 @Entity(name = "DataClassGroupVersion")
-public class DataClassGroupVersionImpl implements DataClassGroupVersion, GenericEntity<String> {
+public class DataClassGroupVersionImpl implements DataClassGroupVersion, MutableGenericEntity<String> {
 
   /** @see #getId() */
   private String id;
@@ -53,6 +51,7 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Generic
   /**
    * {@inheritDoc}
    */
+  @Override
   @Id
   public String getId() {
 
@@ -60,8 +59,9 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Generic
   }
 
   /**
-   * @param id is the id to set
+   * {@inheritDoc}
    */
+  @Override
   public void setId(String id) {
 
     this.id = id;
@@ -70,6 +70,7 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Generic
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public String getGroupId() {
 
@@ -87,6 +88,7 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Generic
   /**
    * {@inheritDoc}
    */
+  @Override
   @Type(type = "net.sf.mmm.data.impl.datatype.usertype.VersionIdentifierUserType")
   public VersionIdentifier getGroupVersion() {
 
@@ -104,6 +106,7 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Generic
   /**
    * {@inheritDoc}
    */
+  @Override
   @Transient
   public int getModificationCounter() {
 
@@ -113,20 +116,11 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Generic
   /**
    * {@inheritDoc}
    */
-  @Transient
-  public Date getModificationTimestamp() {
+  @Override
+  public void setModificationCounter(int version) {
 
-    return null;
-  }
+    // TODO Auto-generated method stub
 
-  /**
-   * {@inheritDoc}
-   */
-  @Transient
-  public boolean isPersistent() {
-
-    // how to implement this?
-    return false;
   }
 
 }

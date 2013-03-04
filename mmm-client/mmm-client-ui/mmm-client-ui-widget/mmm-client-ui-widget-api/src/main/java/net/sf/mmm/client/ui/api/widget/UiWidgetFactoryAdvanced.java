@@ -40,7 +40,7 @@ public interface UiWidgetFactoryAdvanced {
   /**
    * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. E.g. passing an
    * instance of {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave} will create a save-button
-   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()} if clicked.<br/>
+   * that invokes {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave(Object)} if clicked.<br/>
    * <b>ATTENTION:</b><br/>
    * This method will fail with an exception if the given <code>handler</code> implements more than one known
    * {@link UiHandlerPlain} interface. Use {@link #createButton(Class, UiHandlerPlain)} to prevent this.
@@ -77,7 +77,7 @@ public interface UiWidgetFactoryAdvanced {
    *        button for.
    * @param handler is the {@link UiHandlerPlain} instance.
    * @param preventConfirmationPopup - some {@link UiHandlerPlain plain handlers} represent operations like
-   *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete()} that should be
+   *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete(Object)} that should be
    *        confirmed by the user to prevent accidental invocations. In such case the returned
    *        {@link UiWidgetButton} will by itself open a confirmation popup allowing to cancel to operation.
    *        This will make your life easier. However, if you want to customize the popup with contextual

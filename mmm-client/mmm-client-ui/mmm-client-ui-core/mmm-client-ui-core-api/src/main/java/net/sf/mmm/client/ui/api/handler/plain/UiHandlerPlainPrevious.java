@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onPrevious() previous}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onPrevious(Object) previous}.
  * 
  * @see UiHandlerPlainNext
  * 
@@ -15,7 +15,9 @@ public interface UiHandlerPlainPrevious extends UiHandlerPlain {
   /**
    * This method is invoked for the action <em>previous</em>. This means that something should proceed to the
    * previous object (page, dialog, song, movie, etc.).
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onPrevious();
+  void onPrevious(Object variant);
 
 }

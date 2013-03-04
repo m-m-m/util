@@ -70,6 +70,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
+    // here we ignore template, as we assume that field widgets only use Datatypes for <VALUE>...
     VALUE value;
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue = getWidgetAdapter().getValue();

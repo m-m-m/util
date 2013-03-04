@@ -55,7 +55,7 @@ public class UiSingleWidgetButtonFactoryApprove extends AbstractUiSingleWidgetBu
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onApprove();
+        handler.onApprove(null);
       }
     };
     return createButton(context, getBundle().labelApprove(), clickHandler, null, null);

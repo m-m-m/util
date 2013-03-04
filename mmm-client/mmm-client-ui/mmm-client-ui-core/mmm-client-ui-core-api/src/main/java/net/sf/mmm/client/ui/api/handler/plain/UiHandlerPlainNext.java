@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onNext() next}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onNext(Object) next}.
  * 
  * @see UiHandlerPlainPrevious
  * 
@@ -15,7 +15,9 @@ public interface UiHandlerPlainNext extends UiHandlerPlain {
   /**
    * This method is invoked for the action <em>next</em>. This means that something should proceed to the next
    * object (page, dialog, song, movie, etc.).
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onNext();
+  void onNext(Object variant);
 
 }

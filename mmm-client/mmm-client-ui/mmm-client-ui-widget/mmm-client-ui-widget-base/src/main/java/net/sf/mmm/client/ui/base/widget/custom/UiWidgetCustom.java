@@ -32,6 +32,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   /** @see #getDelegate() */
   private final DELEGATE delegate;
 
+  /** @see #initialize() */
+  private boolean initialized;
+
   /**
    * The constructor.
    * 
@@ -477,7 +480,36 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   @Override
   protected void setParent(UiWidgetComposite<?> parent) {
 
+    initialize();
     setParent(this.delegate, parent);
+  }
+
+  /**
+   * This method initializes this widget. It is automatically called from
+   * {@link #setParent(UiWidgetComposite)} so initialization is performed before the widget is actually
+   * attached to the screen for the first time. The first call of this method delegates to
+   * {@link #doInitialize()}. Further calls of this method will have no effect.<br/>
+   * <b>ATTENTION:</b><br/>
+   * You should not call this method directly unless you are absolutely aware of what you are doing.
+   */
+  protected final void initialize() {
+
+    if (!this.initialized) {
+      doInitialize();
+      this.initialized = true;
+    }
+  }
+
+  /**
+   * This method is called from {@link #initialize()} but only if called for the first time. You may override
+   * this method to add additional initialization logic. Then do not forget the <code>super</code> call.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Never call this method directly.
+   */
+  protected void doInitialize() {
+
+    // TODO Auto-generated method stub
+
   }
 
   /**

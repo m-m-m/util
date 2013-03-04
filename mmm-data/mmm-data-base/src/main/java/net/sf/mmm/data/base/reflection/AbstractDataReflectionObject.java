@@ -39,13 +39,4 @@ public abstract class AbstractDataReflectionObject<CLASS> extends AbstractDataOb
   @Transient
   public abstract DataClass<? extends DataObject> getParent();
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void setId(Long id) {
-
-    super.setId(id);
-  }
-
 }

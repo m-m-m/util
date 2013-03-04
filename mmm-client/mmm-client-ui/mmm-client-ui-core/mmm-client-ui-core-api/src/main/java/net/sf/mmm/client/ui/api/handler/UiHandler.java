@@ -11,9 +11,9 @@ package net.sf.mmm.client.ui.api.handler;
  * start with the prefix <code>on</code> and are followed with the name of the event that has been triggered.<br/>
  * For examples see e.g.
  * {@link net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick#onClick(net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick, boolean)}
- * , {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainCancel#onCancel()},
- * {@link net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectDelete#onDelete(Object)}, or
- * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave()}.
+ * , {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainCancel#onCancel(Object)},
+ * {@link net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectDelete#onDelete(Object, Object)}, or
+ * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave(Object)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -10,11 +10,11 @@ import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStopEdit;
+import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
 import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationStateImpl;
 
 /**
- * This is the abstract base class for a {@link UiWidgetCustomComposite custom composite widget} that
+ * This is the abstract base class for a {@link UiWidgetCustomRegularComposite custom composite widget} that
  * implements the UI pattern <em>editor</em>. It supports {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW
  * viewing} a composite {@link #getValue() value} (an {@link net.sf.mmm.util.entity.api.GenericEntity entity}
  * or business object). It has a {@link UiWidgetButtonPanel button panel} with an "Edit"-Button that
@@ -32,8 +32,8 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * {@link #isModified() modifications}, trigger
  * {@link #validate(net.sf.mmm.util.validation.api.ValidationState) validation} and create a new instance of
  * the {@link #getValue() value object} with the current modifications that is saved by delegation to the
- * {@link UiHandlerObjectSave#onSave(Object)} on widgets for UI patterns or forms to edit business objects
- * (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object)}).
+ * {@link UiHandlerObjectSave#onSave(Object, Object)} on widgets for UI patterns or forms to edit business
+ * objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -46,37 +46,49 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
   /** @see #createButtonPanel() */
   private final UiHandler handler;
 
-  /** @see UiHandler#onSave() */
+  /** @see UiHandler#onSave(Object) */
   private final UiHandlerObjectSave<VALUE> handlerSaveObject;
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
-   * @param handlerSaveObject is the {@link UiHandlerObjectSave} {@link UiHandlerObjectSave#onSave(Object)
-   *        invoked} if the end-user clicked "save" and the {@link #getValue() value} has been validated
-   *        successfully.
+   * @param handlerSaveObject is the {@link UiHandlerObjectSave}
+   *        {@link UiHandlerObjectSave#onSave(Object, Object) invoked} if the end-user clicked "save" and the
+   *        {@link #getValue() value} has been validated successfully.
    */
   public UiWidgetCustomEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject) {
 
     super(context, context.getWidgetFactory().create(UiWidgetVerticalPanel.class));
     this.handler = new UiHandler();
     this.handlerSaveObject = handlerSaveObject;
-    createAndAddChildren();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
     UiWidgetButtonPanel buttonPanel = createButtonPanel();
     getDelegate().addChild(buttonPanel);
   }
 
   /**
-   * This method is called from the constructor and needs to create the actual editor form (e.g. a
-   * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel}) with the
-   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField editable fields} and add.
+   * {@inheritDoc}
    */
-  protected abstract void createAndAddChildren();
+  @Override
+  protected void setParent(UiWidgetComposite<?> parent) {
+
+    initialize();
+    super.setParent(parent);
+  }
 
   /**
-   * This method adds a new child. It should be called from {@link #createAndAddChildren()}. Otherwise the
-   * child may appear after the {@link #createButtonPanel() button panel}.
+   * This method adds a new child. It should be called from the constructor or from {@link #doInitialize()}
+   * before the <code>super</code> call. Otherwise the child may appear after the {@link #createButtonPanel()
+   * button panel}.
    * 
    * @see net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite#addChild(net.sf.mmm.client.ui.api.widget.UiWidget)
    * 
@@ -116,12 +128,12 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
      * {@inheritDoc}
      */
     @Override
-    public void onSave() {
+    public void onSave(Object variant) {
 
       ValidationState state = new ValidationStateImpl();
       VALUE value = getValueAndValidate(state);
       if (state.isValid()) {
-        UiWidgetCustomEditor.this.handlerSaveObject.onSave(value);
+        UiWidgetCustomEditor.this.handlerSaveObject.onSave(value, variant);
         setMode(UiMode.VIEW);
       } else {
         boolean showPopup = true;
@@ -153,7 +165,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
      * {@inheritDoc}
      */
     @Override
-    public void onStopEditMode() {
+    public void onStopEditMode(Object variant) {
 
       if (isModified()) {
         NlsBundleClientUiRoot bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class);
@@ -176,7 +188,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
     }
 
     /**
-     * Called from {@link #onStopEditMode()} to actually discard the changes and leave the edit mode.
+     * Called from {@link #onStopEditMode(Object)} to actually discard the changes and leave the edit mode.
      */
     private void stopEditMode() {
 
@@ -188,7 +200,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
      * {@inheritDoc}
      */
     @Override
-    public void onStartEditMode() {
+    public void onStartEditMode(Object variant) {
 
       setMode(UiMode.EDIT);
     }

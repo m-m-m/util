@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.object;
 
 /**
- * This is the {@link UiHandlerObject} for the action {@link #onDelete(Object) delete}.
+ * This is the {@link UiHandlerObject} for the action {@link #onDelete(Object, Object) delete}.
  * 
  * @see net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete
  * 
@@ -15,10 +15,11 @@ public interface UiHandlerObjectDelete<O> extends UiHandlerObject<O> {
 
   /**
    * This method is invoked for the action
-   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete() delete}.
+   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete(Object) delete}.
    * 
    * @param object is the actual object to delete.
+   * @param variant is the optional {@link net.sf.mmm.util.lang.api.Variant}.
    */
-  void onDelete(O object);
+  void onDelete(O object, Object variant);
 
 }

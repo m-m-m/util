@@ -58,7 +58,7 @@ public class UiSingleWidgetButtonFactoryNext extends AbstractUiSingleWidgetButto
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onNext();
+        handler.onNext(null);
       }
     };
     NlsMessage tooltipNext = getBundle().tooltipNext();

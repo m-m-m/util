@@ -67,7 +67,7 @@ public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonF
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onUp();
+        handler.onUp(null);
       }
     };
     // TODO: label/tooltip ?

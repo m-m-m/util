@@ -64,7 +64,7 @@ public class UiSingleWidgetButtonFactorySave extends AbstractUiSingleWidgetButto
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onSave();
+        handler.onSave(null);
       }
     };
     return createButton(context, getBundle().labelSave(), clickHandler, null, null);

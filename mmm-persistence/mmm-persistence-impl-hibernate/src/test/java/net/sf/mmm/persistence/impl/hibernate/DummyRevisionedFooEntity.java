@@ -5,7 +5,7 @@ package net.sf.mmm.persistence.impl.hibernate;
 
 import javax.persistence.Entity;
 
-import net.sf.mmm.persistence.base.jpa.JpaRevisionedEntity;
+import net.sf.mmm.persistence.base.jpa.JpaEntity;
 
 import org.hibernate.envers.Audited;
 
@@ -16,7 +16,7 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Audited
-public class DummyRevisionedFooEntity extends JpaRevisionedEntity<Long> {
+public class DummyRevisionedFooEntity extends JpaEntity {
 
   /** @see #getValue() */
   private String value;

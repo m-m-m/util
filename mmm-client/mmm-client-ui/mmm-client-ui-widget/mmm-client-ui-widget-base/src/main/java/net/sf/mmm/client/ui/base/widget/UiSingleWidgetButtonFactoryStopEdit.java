@@ -64,7 +64,7 @@ public class UiSingleWidgetButtonFactoryStopEdit extends AbstractUiSingleWidgetB
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onStopEditMode();
+        handler.onStopEditMode(null);
       }
     };
     return createButton(context, getBundle().labelStopEdit(), clickHandler, null, null);

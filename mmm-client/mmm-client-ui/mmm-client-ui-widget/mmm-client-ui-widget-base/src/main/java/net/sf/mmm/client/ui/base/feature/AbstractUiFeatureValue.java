@@ -10,7 +10,12 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import net.sf.mmm.util.entity.api.GenericEntity;
+import net.sf.mmm.util.entity.api.MutableGenericEntity;
+import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
+import net.sf.mmm.util.entity.api.RevisionedEntity;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -72,6 +77,24 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
       handleGetValueError(e, null);
       return null;
     }
+  }
+
+  /**
+   * This method creates a new instance of &lt;VALUE&gt; (see {@link #getValue()}). It may copy individual
+   * attributes from {@link #getOriginalValue()} (if not <code>null</code>).<br/>
+   * This method is called from {@link #getValueDirect(Object, ValidationState)} in case the given value is
+   * <code>null</code>.<br/>
+   * <b>NOTE:</b><br/>
+   * If &lt;VALUE&gt; is {@link Void} or a {@link net.sf.mmm.util.lang.api.Datatype} (immutable object), this
+   * method may legally return null. Further, to be GWT compatible you cannot create the new instance via
+   * reflection. If you do not care about GWT, you can use reflection or better use it via
+   * {@link net.sf.mmm.util.pojo.api.PojoFactory}.
+   * 
+   * @return a new instance of &lt;VALUE&gt;.
+   */
+  protected VALUE createNewValue() {
+
+    return null;
   }
 
   /**
@@ -159,7 +182,14 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
     try {
-      VALUE value = doGetValue(template, state);
+      VALUE value = template;
+      if (value == null) {
+        value = createNewValue();
+      }
+      if ((value != null) && (this.originalValue != null)) {
+        copyValueAttributes(this.originalValue, value);
+      }
+      value = doGetValue(template, state);
       if (state != null) {
         doValidate(state, value);
         this.validated = true;
@@ -175,6 +205,48 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   }
 
   /**
+   * This method copies generic attributes from the {@link #getOriginalValue() original value} to a new value.
+   * It applies both for {@link #createNewValue() newly create values} as well as for
+   * {@link #getValueDirect(Object, ValidationState) external template values}. In very specific cases this
+   * method may be overridden to add cross-cutting concerns. Individual attributes should be addressed by
+   * {@link #doGetValue(Object, ValidationState)}.
+   * 
+   * @param original is the {@link #getOriginalValue() original value} and NOT <code>null</code>.
+   * @param value is the {@link #getValueDirect(Object, ValidationState) new value} and NOT <code>null</code>.
+   */
+  @SuppressWarnings("unchecked")
+  protected void copyValueAttributes(VALUE original, VALUE value) {
+
+    if ((original instanceof GenericEntity<?>) && (value instanceof MutableGenericEntity<?>)) {
+      // bad generic code, but no other way...
+      GenericEntity<Object> originalEntity = (GenericEntity<Object>) original;
+      MutableGenericEntity<Object> valueEntity = (MutableGenericEntity<Object>) value;
+      Object originalId = originalEntity.getId();
+      if (originalId != null) {
+        Object valueId = valueEntity.getId();
+        if ((valueId != null) && (!valueId.equals(originalId))) {
+          throw new ObjectMismatchException(valueId, originalId, getSource());
+        }
+        valueEntity.setId(originalId);
+      }
+      if (valueEntity.getModificationCounter() == 0) {
+        int modificationCounter = originalEntity.getModificationCounter();
+        if (modificationCounter != 0) {
+          valueEntity.setModificationCounter(modificationCounter);
+        }
+      }
+      if ((original instanceof RevisionedEntity<?>) && (value instanceof MutableRevisionedEntity<?>)) {
+        RevisionedEntity<Object> originalRevisioned = (RevisionedEntity<Object>) original;
+        MutableRevisionedEntity<Object> valueRevisioned = (MutableRevisionedEntity<Object>) value;
+        Number revision = originalRevisioned.getRevision();
+        if (revision == null) {
+          valueRevisioned.setRevision(revision);
+        }
+      }
+    }
+  }
+
+  /**
    * This method is called from {@link #getValueOrException(Object)}. It has to be implemented with the custom
    * logic to get the value from the view. The implementation of this method has to correspond with the
    * implementation of {@link #doSetValue(Object)}. A typical implementation of this method for a composite
@@ -182,8 +254,8 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * 
    * @see #doSetValue(Object)
    * 
-   * @param template is the object where the data is filled in. May also be <code>null</code> - then this
-   *        method will create a new instance.
+   * @param template is the object where the data is filled in. May only be <code>null</code> if
+   *        {@link #createNewValue()} does.
    * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted).
    *        Should only be used to propagate to {@link #getValueDirect(Object, ValidationState)} of children.
    * @return the current value of this widget. May be <code>null</code> if empty. If &lt;VALUE&gt; is

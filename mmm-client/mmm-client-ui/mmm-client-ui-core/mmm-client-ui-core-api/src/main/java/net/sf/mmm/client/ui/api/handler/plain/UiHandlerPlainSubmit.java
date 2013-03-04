@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onSubmit() submit}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onSubmit(Object) submit}.
  * 
  * @see UiHandlerPlainConfirm
  * 
@@ -14,9 +14,11 @@ public interface UiHandlerPlainSubmit extends UiHandlerPlain {
 
   /**
    * This method is invoked for the action <em>submit</em>. This means that some step or change is completed
-   * and shall be submitted. This is more generic than e.g. {@link UiHandlerPlainSave#onSave() save} or
-   * {@link UiHandlerPlainApprove#onApprove() approve}.
+   * and shall be submitted. This is more generic than e.g. {@link UiHandlerPlainSave#onSave(Object) save} or
+   * {@link UiHandlerPlainApprove#onApprove(Object) approve}.
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onSubmit();
+  void onSubmit(Object variant);
 
 }

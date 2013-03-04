@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onStartEditMode() start edit mode}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onStartEditMode(Object) start edit mode}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -15,7 +15,9 @@ public interface UiHandlerPlainStartEdit extends UiHandlerPlain {
    * This means the current dialog is
    * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteMode#setMode(net.sf.mmm.client.ui.api.common.UiMode)
    * switched} to the {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT edit mode}.
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onStartEditMode();
+  void onStartEditMode(Object variant);
 
 }

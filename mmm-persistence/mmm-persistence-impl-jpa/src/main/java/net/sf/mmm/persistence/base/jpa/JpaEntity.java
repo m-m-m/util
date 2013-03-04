@@ -2,23 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.base.jpa;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
-
 
 /**
- * This is the abstract base-implementation of a {@link net.sf.mmm.util.entity.api.GenericEntity} using the
- * {@link javax.persistence JPA} (Java Persistence API).<br>
- * 
- * @param <ID> is the type of the {@link #getId() primary key}.
+ * This class extends {@link AbstractJpaEntity} binding the {@link #getId() ID} to the type {@link Long}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class JpaEntity<ID> extends AbstractJpaEntity<ID> {
-
-  /** @see #getModificationCounter() */
-  private int modificationCounter;
+public abstract class JpaEntity extends AbstractJpaEntity<Long> {
 
   /**
    * The constructor.
@@ -32,18 +27,20 @@ public abstract class JpaEntity<ID> extends AbstractJpaEntity<ID> {
    * {@inheritDoc}
    */
   @Override
-  @Version
-  public int getModificationCounter() {
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  public Long getId() {
 
-    return this.modificationCounter;
+    return super.getId();
   }
 
   /**
-   * @param modificationCounter is the modificationCounter to set
+   * {@inheritDoc}
    */
-  protected void setModificationCounter(int modificationCounter) {
+  @Override
+  public void setId(Long id) {
 
-    this.modificationCounter = modificationCounter;
+    super.setId(id);
   }
 
 }

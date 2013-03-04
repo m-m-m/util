@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.impl.link;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +13,7 @@ import javax.persistence.Transient;
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.data.base.link.AbstractLink;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
-import net.sf.mmm.util.entity.api.GenericEntity;
+import net.sf.mmm.util.entity.api.MutableGenericEntity;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
@@ -27,7 +25,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @since 1.0.0
  */
 @Entity(name = "DataEntiyLink")
-public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> implements GenericEntity<Long> {
+public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> implements MutableGenericEntity<Long> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3818102518986171086L;
@@ -86,9 +84,10 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
   }
 
   /**
-   * @param id is the id to set
+   * {@inheritDoc}
    */
-  protected void setId(Long id) {
+  @Override
+  public void setId(Long id) {
 
     this.id = id;
   }
@@ -142,10 +141,9 @@ public class LinkImpl<TARGET extends DataEntity> extends AbstractLink<TARGET> im
   /**
    * {@inheritDoc}
    */
-  @Transient
-  public Date getModificationTimestamp() {
+  @Override
+  public void setModificationCounter(int version) {
 
-    return null;
   }
 
   /**

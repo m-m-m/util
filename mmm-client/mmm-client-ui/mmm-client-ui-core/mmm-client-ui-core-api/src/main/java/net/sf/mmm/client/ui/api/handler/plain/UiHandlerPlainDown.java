@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.plain;
 
 /**
- * This is the {@link UiHandlerPlain} for the action {@link #onDown() down}.
+ * This is the {@link UiHandlerPlain} for the action {@link #onDown(Object) down}.
  * 
  * @see UiHandlerPlainNext
  * 
@@ -15,7 +15,9 @@ public interface UiHandlerPlainDown extends UiHandlerPlain {
   /**
    * This method is invoked for the action <em>down</em>. This means that an object is moved downwards
    * (typically to re-order).
+   * 
+   * @param variant is optional the {@link net.sf.mmm.util.lang.api.Variant} to use.
    */
-  void onDown();
+  void onDown(Object variant);
 
 }

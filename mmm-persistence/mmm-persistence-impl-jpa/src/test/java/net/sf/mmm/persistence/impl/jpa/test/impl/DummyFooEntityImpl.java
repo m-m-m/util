@@ -5,7 +5,7 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-import net.sf.mmm.persistence.base.jpa.JpaEntity;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 
@@ -15,7 +15,7 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyFooEntityImpl extends JpaEntity<Integer> implements DummyFooEntity {
+public class DummyFooEntityImpl extends AbstractJpaEntity<Integer> implements DummyFooEntity {
 
   /** @see #getNumber() */
   private int number;
@@ -34,6 +34,7 @@ public class DummyFooEntityImpl extends JpaEntity<Integer> implements DummyFooEn
   /**
    * @return the number
    */
+  @Override
   public int getNumber() {
 
     return this.number;
@@ -42,6 +43,7 @@ public class DummyFooEntityImpl extends JpaEntity<Integer> implements DummyFooEn
   /**
    * @param number is the number to set
    */
+  @Override
   public void setNumber(int number) {
 
     this.number = number;
@@ -50,6 +52,7 @@ public class DummyFooEntityImpl extends JpaEntity<Integer> implements DummyFooEn
   /**
    * @return the bar
    */
+  @Override
   @OneToOne
   public DummyBarEntityImpl getBar() {
 
@@ -59,6 +62,7 @@ public class DummyFooEntityImpl extends JpaEntity<Integer> implements DummyFooEn
   /**
    * @param bar is the bar to set
    */
+  @Override
   public void setBar(DummyBarEntity bar) {
 
     this.bar = (DummyBarEntityImpl) bar;

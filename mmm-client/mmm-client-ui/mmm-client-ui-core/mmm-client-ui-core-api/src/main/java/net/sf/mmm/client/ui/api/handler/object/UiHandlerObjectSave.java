@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.handler.object;
 
 /**
- * This is the {@link UiHandlerObject} for the action {@link #onSave(Object) save}.
+ * This is the {@link UiHandlerObject} for the action {@link #onSave(Object, Object) save}.
  * 
  * @see net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave
  * 
@@ -15,10 +15,11 @@ public interface UiHandlerObjectSave<O> extends UiHandlerObject<O> {
 
   /**
    * This method is invoked for the action
-   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave() save}.
+   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave(Object) save}.
    * 
    * @param object is the actual object to save.
+   * @param variant is the optional {@link net.sf.mmm.util.lang.api.Variant}.
    */
-  void onSave(O object);
+  void onSave(O object, Object variant);
 
 }
