@@ -3,19 +3,24 @@
 package net.sf.mmm.data.impl.datatype.usertype;
 
 import javax.inject.Inject;
+import javax.persistence.MappedSuperclass;
 
 import net.sf.mmm.persistence.impl.hibernate.usertype.StringDatatypeUserType;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.api.VersionUtil;
 import net.sf.mmm.util.version.impl.VersionUtilImpl;
 
+import org.hibernate.annotations.TypeDef;
+
 /**
- * This is the implementation of the {@link org.hibernate.usertype.UserType} to
- * map the datatype {@link VersionIdentifier}.
+ * This is the implementation of the {@link org.hibernate.usertype.UserType} to map the datatype
+ * {@link VersionIdentifier}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@MappedSuperclass
+@TypeDef(defaultForType = VersionIdentifier.class, typeClass = VersionIdentifierUserType.class)
 public class VersionIdentifierUserType extends StringDatatypeUserType<VersionIdentifier> {
 
   /** @see #getVersionUtil() */

@@ -10,8 +10,6 @@ import net.sf.mmm.data.api.reflection.DataClassGroupVersion;
 import net.sf.mmm.util.entity.api.MutableGenericEntity;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
-import org.hibernate.annotations.Type;
-
 /**
  * This is the implementation of {@link DataClassGroupVersion}.
  * 
@@ -89,7 +87,6 @@ public class DataClassGroupVersionImpl implements DataClassGroupVersion, Mutable
    * {@inheritDoc}
    */
   @Override
-  @Type(type = "net.sf.mmm.data.impl.datatype.usertype.VersionIdentifierUserType")
   public VersionIdentifier getGroupVersion() {
 
     return this.groupVersion;

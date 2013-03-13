@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 import net.sf.mmm.util.component.api.NotInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
@@ -135,7 +134,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   @Override
   public Serializable disassemble(Object value) throws HibernateException {
 
-    throw new NlsUnsupportedOperationException("disassemble");
+    return (Serializable) value;
   }
 
   /**
@@ -144,7 +143,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   @Override
   public Object assemble(Serializable cached, Object owner) throws HibernateException {
 
-    throw new NlsUnsupportedOperationException("assemble");
+    return cached;
   }
 
   /**
