@@ -100,9 +100,9 @@
  * switching} between {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view} and
  * {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT edit} {@link net.sf.mmm.client.ui.api.common.UiMode
  * mode}</li>
- * <li>Higher level widgets such as {@link net.sf.mmm.client.ui.api.widget.grid grid widgets},
+ * <li>Higher level widgets such as {@link net.sf.mmm.client.ui.api.widget.table table widgets},
  * {@link net.sf.mmm.client.ui.api.widget.panel panels}, {@link net.sf.mmm.client.ui.api.widget.window windows}, etc.</li>
- * <li>High level widgets to support {@link net.sf.mmm.client.ui.api.widget.pattern UI patterns}</li>
+ * <li>High level widgets to support {@link net.sf.mmm.client.ui.base.widget.custom.pattern UI patterns}</li>
  * </ul>
  * But you are still free to pick and choose: If you only want to use the lower level abstraction you can still ignore
  * the higher level stuff.</li>

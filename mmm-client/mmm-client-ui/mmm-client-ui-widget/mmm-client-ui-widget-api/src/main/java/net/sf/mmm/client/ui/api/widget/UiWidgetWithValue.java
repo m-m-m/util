@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
-import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteValueAdvanced;
 
 /**
  * This is the interface for a {@link UiWidget} that displays a {@link #getValue() value}.
@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetWithValue<VALUE> extends UiWidget, AttributeWriteValue<VALUE> {
+public interface UiWidgetWithValue<VALUE> extends UiWidgetRegular, AttributeWriteValueAdvanced<VALUE> {
 
   // nothing to add...
 

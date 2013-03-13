@@ -16,11 +16,14 @@ public abstract interface AttributeReadValueAdvanced<VALUE> extends AttributeRea
   /**
    * {@inheritDoc}
    * 
-   * <br/>
+   * This will typically be a newly created object.<br/>
    * <b>ATTENTION:</b><br/>
-   * If the current value entered by the user can NOT be parsed, this method will catch and ignore the
-   * exception and return <code>null</code> instead. If you want to do validation and give feedback to the
-   * user please use {@link #getValueOrException(Object)} instead.
+   * This method must NOT modify {@link #getOriginalValue()} to avoid undesired side effects. If the current
+   * value entered by the user can NOT be parsed, this method will catch and ignore the exception and return
+   * <code>null</code> instead. If you want to do validation and give feedback to the user please use
+   * {@link #getValueOrException(Object)} instead. However, there are higher-level ways to do this such as
+   * {@link net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation#getValueAndValidate(net.sf.mmm.util.validation.api.ValidationState)
+   * getValueAndValidate}.
    */
   @Override
   VALUE getValue();

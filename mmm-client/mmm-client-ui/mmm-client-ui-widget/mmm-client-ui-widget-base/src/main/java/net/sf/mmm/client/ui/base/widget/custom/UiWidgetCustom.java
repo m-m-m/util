@@ -264,6 +264,24 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   @Override
   public void setMode(UiMode mode) {
 
+    if (this.delegate.getMode() == mode) {
+      // mode not changed, nothing to do...
+      return;
+    }
+    if (this.delegate.getModeFixed() != null) {
+      // fixed mode prevents changing the mode...
+      return;
+    }
+    doSetMode(mode);
+  }
+
+  /**
+   * This method actually changes the {@link #getMode() mode}.
+   * 
+   * @param mode is the new {@link UiMode} to set.
+   */
+  protected void doSetMode(UiMode mode) {
+
     this.delegate.setMode(mode);
   }
 

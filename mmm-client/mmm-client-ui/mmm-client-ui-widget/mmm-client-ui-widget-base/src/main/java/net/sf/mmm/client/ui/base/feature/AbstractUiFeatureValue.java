@@ -80,14 +80,14 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   }
 
   /**
-   * This method creates a new instance of &lt;VALUE&gt; (see {@link #getValue()}). It may copy individual
-   * attributes from {@link #getOriginalValue()} (if not <code>null</code>).<br/>
-   * This method is called from {@link #getValueDirect(Object, ValidationState)} in case the given value is
+   * This method creates a new instance of &lt;VALUE&gt; (see {@link #getValue()}). It is called from
+   * {@link #getValueDirect(Object, ValidationState)} or {@link #setValue(Object)} in case the given value is
    * <code>null</code>.<br/>
    * <b>NOTE:</b><br/>
    * If &lt;VALUE&gt; is {@link Void} or a {@link net.sf.mmm.util.lang.api.Datatype} (immutable object), this
-   * method may legally return null. Further, to be GWT compatible you cannot create the new instance via
-   * reflection. If you do not care about GWT, you can use reflection or better use it via
+   * method should legally return <code>null</code>. This can also be suitable for objects that only delegate
+   * their {@link #getValue() value} to something else. Further, to be GWT compatible you cannot create the
+   * new instance via reflection. If you do not care about GWT, you can use reflection or better use it via
    * {@link net.sf.mmm.util.pojo.api.PojoFactory}.
    * 
    * @return a new instance of &lt;VALUE&gt;.
@@ -300,7 +300,12 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
     if (!forUser) {
       this.originalValue = newValue;
     }
-    doSetValue(newValue);
+    VALUE v = newValue;
+    if (v == null) {
+      // Prevent NPE and simplify clearing fields...
+      v = createNewValue();
+    }
+    doSetValue(v);
     if (this.changeEventSender != null) {
       this.changeEventSender.onValueChange(this, true);
     }
