@@ -19,9 +19,9 @@ package net.sf.mmm.util.entity.api;
  * <b>ATTENTION:</b><br/>
  * Due to the lack of multi-inheritance and for simplicity one will typically implement this interface in
  * base-classes of the data-model. However, maybe only some classes of the hierarchy (or even not at all) are
- * actually revision controlled. In case of envers you can see this by looking for an
- * <code>&#64;Audited</code> annotations. Also in case of <code>mmm-persistence</code> you will notice this by
- * looking at the <code>DAO</code>.
+ * actually revision controlled. In case of envers you can see this by looking for <code>&#64;Audited</code>
+ * annotations. Also in case of <code>mmm-persistence</code> you will notice this by looking at the
+ * <code>DAO</code>.
  * 
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 
