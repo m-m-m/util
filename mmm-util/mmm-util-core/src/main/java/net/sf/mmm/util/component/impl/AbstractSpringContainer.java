@@ -19,7 +19,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * <code>mmm-util-core</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public abstract class AbstractSpringContainer extends AbstractLoggableComponent implements IocContainer {
 

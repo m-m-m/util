@@ -11,6 +11,7 @@ import javax.persistence.Version;
 
 import net.sf.mmm.persistence.base.AbstractGenericEntity;
 import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
+import net.sf.mmm.util.entity.api.PersistenceEntity;
 
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.util.entity.api.GenericEntity} using the
@@ -21,7 +22,11 @@ import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @MappedSuperclass
-public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> implements MutableRevisionedEntity<ID> {
+public abstract class AbstractJpaEntity<ID> extends AbstractGenericEntity<ID> implements MutableRevisionedEntity<ID>,
+    PersistenceEntity<ID> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 3256209723131574786L;
 
   /** @see #getId() */
   private ID id;

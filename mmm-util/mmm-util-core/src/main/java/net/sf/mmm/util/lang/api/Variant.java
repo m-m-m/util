@@ -25,7 +25,7 @@ package net.sf.mmm.util.lang.api;
  * default.
  * 
  * @author hohwille
- * @since 3.0.1
+ * @since 3.1.0
  */
 public interface Variant {
 

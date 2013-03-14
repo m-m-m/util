@@ -11,7 +11,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * @see ComposedValueConverter
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 @ComponentSpecification
 public interface SimpleGenericValueConverter extends SimpleValueConverter<Object, Object> {

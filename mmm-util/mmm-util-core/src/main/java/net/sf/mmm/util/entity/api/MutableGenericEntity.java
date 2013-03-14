@@ -8,7 +8,7 @@ package net.sf.mmm.util.entity.api;
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 
  * @author hohwille
- * @since 3.0.1
+ * @since 3.1.0
  */
 public interface MutableGenericEntity<ID> extends GenericEntity<ID> {
 

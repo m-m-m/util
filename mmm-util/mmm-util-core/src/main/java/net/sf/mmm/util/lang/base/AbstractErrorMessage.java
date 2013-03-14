@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsThrowable;
  * This is the abstract base class for an error {@link net.sf.mmm.util.lang.api.Message}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public abstract class AbstractErrorMessage extends AbstractMessage {
 

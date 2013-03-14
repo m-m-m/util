@@ -22,7 +22,7 @@ import net.sf.mmm.util.value.api.ValueException;
  * no GWT limitations you should use {@link net.sf.mmm.util.value.api.ComposedValueConverter} instead.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent implements SimpleGenericValueConverter {
 

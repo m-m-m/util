@@ -8,7 +8,7 @@ import java.util.List;
  * This is the default {@link net.sf.mmm.util.lang.api.EnumDefinition} for the type {@link Boolean}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public class BooleanEnumDefinition extends AbstractSimpleEnumDefinition<Boolean> {
 

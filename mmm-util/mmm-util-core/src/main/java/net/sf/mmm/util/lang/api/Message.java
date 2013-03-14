@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
  * This is the interface for a message that gets displayed to an end-user.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public interface Message extends Serializable, AttributeReadUuid, AttributeReadMessage, AttributeReadMessageCode {
 

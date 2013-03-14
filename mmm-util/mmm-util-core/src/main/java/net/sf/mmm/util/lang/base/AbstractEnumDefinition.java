@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.Formatter;
  * @param <CATEGORY> is the generic type of the {@link #getCategory() category} or {@link Void} for none.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefinition<TYPE, CATEGORY> {
 

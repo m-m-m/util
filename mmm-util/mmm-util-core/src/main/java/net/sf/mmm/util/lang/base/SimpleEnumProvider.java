@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  * {@link Boolean} and any static {@link Enum} (where it dynamically creates definitions).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public class SimpleEnumProvider extends AbstractEnumProvider {
 

@@ -19,7 +19,7 @@ import org.junit.Test;
  * This is the test-case for {@link SimpleEnumProvider}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public class SimpleEnumProviderTest extends Assert {
 

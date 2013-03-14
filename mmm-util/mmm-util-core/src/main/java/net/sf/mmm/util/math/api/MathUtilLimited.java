@@ -6,7 +6,7 @@ package net.sf.mmm.util.math.api;
  * This is a limited subset of {@link MathUtil} that is GWT compatible.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public interface MathUtilLimited {
 

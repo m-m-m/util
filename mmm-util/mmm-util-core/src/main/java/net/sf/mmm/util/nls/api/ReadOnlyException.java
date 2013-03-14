@@ -38,7 +38,7 @@ public class ReadOnlyException extends NlsRuntimeException {
    * @param object is the object that is read-only and can not be modified.
    * @param attribute is the attribute of <code>object</code> that can not be modified.
    * 
-   * @since 3.0.1
+   * @since 3.1.0
    */
   public ReadOnlyException(Object object, Object attribute) {
 
@@ -63,7 +63,7 @@ public class ReadOnlyException extends NlsRuntimeException {
    * @param object is the object that is read-only and can not be modified.
    * @param attribute is the attribute of <code>object</code> that can not be modified.
    * 
-   * @since 3.0.1
+   * @since 3.1.0
    */
   public ReadOnlyException(Throwable nested, Object object, Object attribute) {
 

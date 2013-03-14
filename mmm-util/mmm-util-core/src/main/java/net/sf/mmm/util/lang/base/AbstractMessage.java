@@ -8,7 +8,7 @@ import net.sf.mmm.util.lang.api.Message;
  * This is the abstract base implementation of {@link Message}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public abstract class AbstractMessage implements Message {
 

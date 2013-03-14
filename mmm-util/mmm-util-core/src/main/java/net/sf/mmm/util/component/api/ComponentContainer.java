@@ -8,7 +8,7 @@ package net.sf.mmm.util.component.api;
  * project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public interface ComponentContainer {
 

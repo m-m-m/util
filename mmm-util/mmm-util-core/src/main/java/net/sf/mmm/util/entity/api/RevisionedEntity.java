@@ -26,6 +26,7 @@ package net.sf.mmm.util.entity.api;
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 3.0.0
  */
 public interface RevisionedEntity<ID> extends GenericEntity<ID> {
 

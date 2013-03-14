@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContextAware;
  * other container.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public class SpringContainerBean extends AbstractSpringContainer implements ApplicationContextAware {
 

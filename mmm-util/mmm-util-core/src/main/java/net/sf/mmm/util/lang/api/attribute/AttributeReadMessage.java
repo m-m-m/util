@@ -6,7 +6,7 @@ package net.sf.mmm.util.lang.api.attribute;
  * This interface gives read access to the {@link #getMessage() message} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public abstract interface AttributeReadMessage {
 

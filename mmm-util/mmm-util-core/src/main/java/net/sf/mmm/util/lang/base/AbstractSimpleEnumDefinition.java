@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.EnumDefinition;
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.0.1
+ * @since 3.1.0
  */
 public abstract class AbstractSimpleEnumDefinition<TYPE> extends AbstractEnumDefinition<TYPE, Void> {
 

@@ -57,7 +57,7 @@ public interface SearchCriteria extends Serializable {
    * ignored.
    * 
    * @return <code>true</code> if read-only, <code>false</code> otherwise (default).
-   * @since 3.0.1
+   * @since 3.1.0
    */
   boolean isReadOnly();
 
