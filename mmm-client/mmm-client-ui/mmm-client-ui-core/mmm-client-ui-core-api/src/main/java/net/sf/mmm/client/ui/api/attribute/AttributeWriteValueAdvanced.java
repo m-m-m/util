@@ -24,6 +24,18 @@ public interface AttributeWriteValueAdvanced<VALUE> extends AttributeReadValueAd
   void setValue(VALUE value);
 
   /**
+   * This is the generic variant of {@link #setValue(Object)} and {@link #setValueForUser(Object)}.<br/>
+   * <b>NOTE:</b><br/>
+   * To make your code expressive please only use this method for generic situations where
+   * <code>forUser</code> is dynamic.
+   * 
+   * @param value is the new value to set.
+   * @param forUser <code>true</code> for the semantics of {@link #setValueForUser(Object)},
+   *        <code>false</code> for {@link #setValue(Object)}.
+   */
+  void setValue(VALUE value, boolean forUser);
+
+  /**
    * This method is like {@link #setValue(Object)} but will NOT set the {@link #getOriginalValue() original
    * value} and will set the {@link AttributeReadModified#isModified() modified} to <code>true</code> (instead
    * of <code>false</code>).

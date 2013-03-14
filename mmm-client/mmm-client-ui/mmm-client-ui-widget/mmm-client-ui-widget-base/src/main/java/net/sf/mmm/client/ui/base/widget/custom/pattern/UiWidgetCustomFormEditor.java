@@ -61,9 +61,9 @@ public class UiWidgetCustomFormEditor<VALUE> extends UiWidgetCustomEditor<VALUE>
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(VALUE value) {
+  protected void doSetValue(VALUE value, boolean forUser) {
 
-    this.formPanel.setValue(value);
+    this.formPanel.setValue(value, forUser);
   }
 
 }

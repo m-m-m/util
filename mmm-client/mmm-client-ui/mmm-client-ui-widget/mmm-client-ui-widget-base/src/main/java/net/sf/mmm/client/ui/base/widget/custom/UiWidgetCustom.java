@@ -74,7 +74,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  protected abstract void doSetValue(VALUE value);
+  protected abstract void doSetValue(VALUE value, boolean forUser);
 
   /**
    * This method gets the underlying {@link net.sf.mmm.client.ui.api.widget.UiWidget widget} that is adapted

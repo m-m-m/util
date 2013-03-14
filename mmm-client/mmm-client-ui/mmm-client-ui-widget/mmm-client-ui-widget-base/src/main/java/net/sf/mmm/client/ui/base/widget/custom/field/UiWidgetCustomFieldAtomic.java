@@ -105,7 +105,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  protected final void doSetValue(VALUE value) {
+  protected final void doSetValue(VALUE value, boolean forUser) {
 
     DELEGATE_VALUE delegateValue;
     if (value == null) {

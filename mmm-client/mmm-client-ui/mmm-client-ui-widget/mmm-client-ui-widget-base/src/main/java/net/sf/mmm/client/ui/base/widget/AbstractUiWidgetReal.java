@@ -981,7 +981,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(VALUE value) {
+  protected void doSetValue(VALUE value, boolean forUser) {
 
     // default implementation only relevant for subclasses binding VOID for <VALUE>
   }

@@ -38,8 +38,12 @@
       <property name="ignorePattern" value="^.*@see.*$"/>
       <property name="max" value="160"/>
     </module>
-    <module name="MethodLength"/>
-    <module name="ParameterNumber"/>
+    <module name="MethodLength">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="ParameterNumber">
+      <property name="severity" value="warning"/>
+    </module>
     <module name="EmptyForIteratorPad"/>
     <module name="NoWhitespaceAfter">
       <property name="tokens" value="BNOT,DEC,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
@@ -144,7 +148,9 @@
       <property name="message" value="Never invoke gc() explicitly!"/>
     </module>
   </module>
-  <module name="FileLength"/>
+  <module name="FileLength">
+    <property name="severity" value="info"/>
+  </module>
   <module name="FileTabCharacter"/>
   <module name="RegexpHeader">
     <property name="header" value="/\* Copyright \(c\) The m-m-m Team, Licensed under the Apache License, Version 2\.0\n \* http://www\.apache\.org/licenses/LICENSE-2\.0 \*/"/>

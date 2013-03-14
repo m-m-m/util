@@ -11,7 +11,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is also a
  * {@link UiWidgetComposite composite widget}. It supports creating reusable high-level widgets for UI
  * patterns or forms to edit business objects (see {@link #doGetValue(Object, ValidationState)} and
- * {@link #doSetValue(Object)}).
+ * {@link #doSetValue(Object, boolean)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
@@ -136,6 +136,6 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * </pre>
    */
   @Override
-  protected abstract void doSetValue(VALUE value);
+  protected abstract void doSetValue(VALUE value, boolean forUser);
 
 }

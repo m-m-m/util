@@ -33,7 +33,7 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * {@link #validate(net.sf.mmm.util.validation.api.ValidationState) validation} and create a new instance of
  * the {@link #getValue() value object} with the current modifications that is saved by delegation to the
  * {@link UiHandlerObjectSave#onSave(Object, Object)} on widgets for UI patterns or forms to edit business
- * objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object)}).
+ * objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object, boolean)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 

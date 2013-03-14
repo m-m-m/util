@@ -52,7 +52,7 @@ public class ContactEditor extends UiWidgetCustomEditor<ContactBean> {
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(ContactBean value) {
+  protected void doSetValue(ContactBean value, boolean forUser) {
 
     this.contactForm.setValue(value);
   }

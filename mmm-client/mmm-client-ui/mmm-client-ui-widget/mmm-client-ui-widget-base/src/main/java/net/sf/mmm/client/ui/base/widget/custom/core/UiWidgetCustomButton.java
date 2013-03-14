@@ -149,7 +149,7 @@ public abstract class UiWidgetCustomButton extends UiWidgetCustom<Void, UiWidget
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(Void value) {
+  protected void doSetValue(Void value, boolean forUser) {
 
     // nothing to do...
   }

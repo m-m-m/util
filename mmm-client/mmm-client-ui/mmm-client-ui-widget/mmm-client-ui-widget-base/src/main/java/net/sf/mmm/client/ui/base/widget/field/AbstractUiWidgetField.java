@@ -88,7 +88,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(VALUE newValue) {
+  protected void doSetValue(VALUE newValue, boolean forUser) {
 
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue;

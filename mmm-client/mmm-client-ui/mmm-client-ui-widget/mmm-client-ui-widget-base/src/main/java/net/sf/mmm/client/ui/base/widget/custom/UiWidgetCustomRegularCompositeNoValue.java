@@ -54,7 +54,7 @@ public class UiWidgetCustomRegularCompositeNoValue<CHILD extends UiWidget, DELEG
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(Void value) {
+  protected void doSetValue(Void value, boolean forUser) {
 
     // no value, nothing to do...
   }

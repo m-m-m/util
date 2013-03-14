@@ -145,9 +145,9 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(VALUE value) {
+  protected void doSetValue(VALUE value, boolean forUser) {
 
-    getMasterPanel().setValue(value);
+    getMasterPanel().setValue(value, forUser);
   }
 
   /**

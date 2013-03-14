@@ -18,10 +18,10 @@ public abstract interface AttributeReadValueAdvanced<VALUE> extends AttributeRea
    * 
    * This will typically be a newly created object.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method must NOT modify {@link #getOriginalValue()} to avoid undesired side effects. If the current
-   * value entered by the user can NOT be parsed, this method will catch and ignore the exception and return
-   * <code>null</code> instead. If you want to do validation and give feedback to the user please use
-   * {@link #getValueOrException(Object)} instead. However, there are higher-level ways to do this such as
+   * If the current value entered by the user can NOT be parsed, this method will catch and ignore the
+   * exception and return <code>null</code> instead. If you want to do validation and give feedback to the
+   * user please use {@link #getValueOrException(Object)} instead. However, there are higher-level ways to do
+   * this such as
    * {@link net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation#getValueAndValidate(net.sf.mmm.util.validation.api.ValidationState)
    * getValueAndValidate}.
    */
@@ -46,9 +46,14 @@ public abstract interface AttributeReadValueAdvanced<VALUE> extends AttributeRea
 
   /**
    * This method gets the last value that has been {@link AttributeWriteValueAdvanced#setValue(Object) set}.
-   * If you invoke {@link AttributeWriteValueAdvanced#setValue(Object)} then later calls to
-   * {@link #getValue()} will return the latest value that can be modified by the end-user. This method will
-   * ensure to get the value that was set before by the program.
+   * After calling {@link AttributeWriteValueAdvanced#setValue(Object)} the value can be modified (by the user
+   * in case of a widget). Then calls to {@link #getValue()} will return the current value with its potential
+   * modifications (as a new object). This method will ensure to get the value that was
+   * {@link AttributeWriteValueAdvanced#setValue(Object) set} before by the program.<br/>
+   * <b>ATTENTION:</b><br/>
+   * The original value shall never be modified to avoid undesired side effects. Various features such as
+   * {@link AttributeWriteValueAdvanced#resetValue()} rely on this fact. Therefore {@link #getValue()} will
+   * always return a new instance.
    * 
    * @return the original value.
    */

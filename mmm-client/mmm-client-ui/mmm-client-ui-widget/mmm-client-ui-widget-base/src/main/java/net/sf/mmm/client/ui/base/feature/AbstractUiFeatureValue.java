@@ -249,10 +249,10 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   /**
    * This method is called from {@link #getValueOrException(Object)}. It has to be implemented with the custom
    * logic to get the value from the view. The implementation of this method has to correspond with the
-   * implementation of {@link #doSetValue(Object)}. A typical implementation of this method for a composite
-   * widget should look like this:
+   * implementation of {@link #doSetValue(Object, boolean)}. A typical implementation of this method for a
+   * composite widget should look like this:
    * 
-   * @see #doSetValue(Object)
+   * @see #doSetValue(Object, boolean)
    * 
    * @param template is the object where the data is filled in. May only be <code>null</code> if
    *        {@link #createNewValue()} does.
@@ -288,13 +288,10 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   }
 
   /**
-   * Implementation of {@link #setValue(Object)} and {@link #setValueForUser(Object)}.
-   * 
-   * @param newValue is the new {@link #getValue() value}.
-   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
-   *        set from {@link #setValue(Object)}.
+   * {@inheritDoc}
    */
-  private void setValue(VALUE newValue, boolean forUser) {
+  @Override
+  public final void setValue(VALUE newValue, boolean forUser) {
 
     setModified(forUser);
     if (!forUser) {
@@ -305,23 +302,25 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
       // Prevent NPE and simplify clearing fields...
       v = createNewValue();
     }
-    doSetValue(v);
+    doSetValue(v, forUser);
     if (this.changeEventSender != null) {
       this.changeEventSender.onValueChange(this, true);
     }
   }
 
   /**
-   * This method is called from {@link #setValue(Object)} and {@link #setValueForUser(Object)}. It has to be
-   * implemented with the custom logic to set the value in the view. The implementation of this method has to
-   * correspond with the implementation of {@link #doGetValue(Object, ValidationState)}.
+   * This method is called from {@link #setValue(Object, boolean)}. It has to be implemented with the custom
+   * logic to set the value in the view. The implementation of this method has to correspond with the
+   * implementation of {@link #doGetValue(Object, ValidationState)}.
    * 
    * @see #doGetValue(Object, ValidationState)
    * 
    * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
    *        to {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField atomic fields}.
+   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
+   *        set from {@link #setValue(Object)}.
    */
-  protected abstract void doSetValue(VALUE value);
+  protected abstract void doSetValue(VALUE value, boolean forUser);
 
   /**
    * {@inheritDoc}

@@ -72,15 +72,15 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
    * {@inheritDoc}
    */
   @Override
-  protected void doSetValue(ContactBean value) {
+  protected void doSetValue(ContactBean value, boolean forUser) {
 
     ContactBean contact = value;
     if (contact == null) {
       contact = new ContactBean();
     }
-    this.widgetFirstName.setValue(contact.getFirstName());
-    this.widgetLastName.setValue(contact.getLastName());
-    this.widgetBirthday.setValue(contact.getBirthday());
+    this.widgetFirstName.setValue(contact.getFirstName(), forUser);
+    this.widgetLastName.setValue(contact.getLastName(), forUser);
+    this.widgetBirthday.setValue(contact.getBirthday(), forUser);
   }
 
 }
