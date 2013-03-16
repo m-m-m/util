@@ -162,6 +162,45 @@ public class JavaScriptUtil {
     inputElement.type = type;
   }-*/;
 
+  /**
+   * This method creates a {@link Object#clone() clone} of the given <code>template</code>.
+   *
+   * @param template is the object to clone.
+   * @return the cloned object.
+   */
+  protected native Object clone(Object template) /*-{
+    var clone = {};
+
+    // create unique object hash code
+    @com.google.gwt.core.client.impl.Impl::getHashCode(Ljava/lang/Object;)(clone);
+
+    for (var i in template) {
+      if(!(i in clone)) {
+          clone[i] = template[i];
+      }
+    }
+    return clone;
+  }-*/;
+
+  /**
+   * This method creates a {@link Class#newInstance() new instance} of the given <code>template</code>.
+   *
+   * @param template is the object create a new instance of.
+   * @return the new instance.
+   */
+  protected native Object newInstance(Object template) /*-{
+    var clone = {};
+
+    // create unique object hash code
+    @com.google.gwt.core.client.impl.Impl::getHashCode(Ljava/lang/Object;)(clone);
+
+    for (var i in template) {
+      if(!(i in clone)) {
+          clone[i] = template[i];
+      }
+    }
+    return clone;
+  }-*/;
 
   //formatter:on
 

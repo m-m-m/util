@@ -2,21 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import net.sf.mmm.util.lang.api.BasicUtil;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link BasicUtilImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@SuppressWarnings("all")
-public class BasicUtilTest {
+public class BasicUtilTest extends Assert {
 
   public BasicUtil getBasicUtil() {
 

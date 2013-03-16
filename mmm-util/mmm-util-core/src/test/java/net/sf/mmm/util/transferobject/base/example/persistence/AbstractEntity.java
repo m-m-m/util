@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.persistence.base.jpa;
+package net.sf.mmm.util.transferobject.base.example.persistence;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +19,9 @@ import net.sf.mmm.util.entity.base.AbstractRevisionedEntity;
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  */
 @MappedSuperclass
-public abstract class AbstractJpaEntity<ID> extends AbstractRevisionedEntity<ID> implements PersistenceEntity<ID> {
+public abstract class AbstractEntity<ID> extends AbstractRevisionedEntity<ID> implements PersistenceEntity<ID> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3256209723131574786L;
@@ -30,7 +29,7 @@ public abstract class AbstractJpaEntity<ID> extends AbstractRevisionedEntity<ID>
   /**
    * The constructor.
    */
-  public AbstractJpaEntity() {
+  public AbstractEntity() {
 
     super();
   }

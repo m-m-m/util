@@ -208,9 +208,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
       this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
     if (this.valueConverter == null) {
-      DefaultComposedValueConverter converter = new DefaultComposedValueConverter();
-      converter.initialize();
-      this.valueConverter = converter;
+      this.valueConverter = DefaultComposedValueConverter.getInstance();
     }
     if (this.pojoFactory == null) {
       GuessingPojoFactory factory = new GuessingPojoFactory();

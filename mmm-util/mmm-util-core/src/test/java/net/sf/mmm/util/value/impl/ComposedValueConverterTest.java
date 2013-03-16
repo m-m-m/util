@@ -36,9 +36,7 @@ public class ComposedValueConverterTest {
 
   protected ComposedValueConverter getComposedValueConverter() {
 
-    ComposedValueConverterImpl converter = new DefaultComposedValueConverter();
-    converter.initialize();
-    return converter;
+    return DefaultComposedValueConverter.getInstance();
   }
 
   @Test

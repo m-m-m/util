@@ -23,6 +23,7 @@ package net.sf.mmm.util.pojo.api;
  * Do NOT use this interface in your code. Its only purpose is to document the meaning of the term POJO.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 public abstract interface Pojo {
 

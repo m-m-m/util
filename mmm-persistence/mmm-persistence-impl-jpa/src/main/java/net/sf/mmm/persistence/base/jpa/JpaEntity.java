@@ -11,9 +11,13 @@ import javax.persistence.MappedSuperclass;
  * This class extends {@link AbstractJpaEntity} binding the {@link #getId() ID} to the type {@link Long}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 @MappedSuperclass
 public abstract class JpaEntity extends AbstractJpaEntity<Long> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 4280571250879388596L;
 
   /**
    * The constructor.

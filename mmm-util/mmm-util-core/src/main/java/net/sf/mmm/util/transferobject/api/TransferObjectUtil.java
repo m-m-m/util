@@ -2,27 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.api;
 
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.entity.api.PersistenceEntity;
 
 /**
- * This is the interface for a collection of utility functions to deal with {@link TransferObject}s.
+ * This is the interface for a collection of utility functions to deal with {@link AbstractTransferObject}s.
+ * 
+ * @see net.sf.mmm.util.transferobject.base.TransferObjectUtilImpl#getInstance()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public interface TransferObjectUtil {
-
-  /**
-   * This method creates a new instance of the {@link TransferObject} given as <code>template</code>. A simple
-   * implementation my just return
-   * <code>template.{@link #getClass()}.{@link Class#newInstance() newInstance()}</code>. However, an
-   * implementation may also be generated to be GWT compatible.
-   * 
-   * @param <TO> is the generic type of the {@link TransferObject}.
-   * @param template is the {@link TransferObject} to create a new instance of. Must NOT be <code>null</code>.
-   * @return a new instance with the same {@link #getClass() type} as the given <code>template</code>.
-   */
-  <TO extends TransferObject> TO newInstance(TO template);
+@ComponentSpecification
+public interface TransferObjectUtil extends TransferObjectUtilLimited {
 
   /**
    * This method converts the given {@link PersistenceEntity} to the corresponding {@link EntityTo
@@ -32,7 +24,7 @@ public interface TransferObjectUtil {
    * @param <ENTITY> is the generic type of the {@link PersistenceEntity entity} to convert.
    * @param <TO> is the generic type of the {@link EntityTo transfer-object} to create.
    * @param entity is the {@link PersistenceEntity} to convert.
-   * @param toType is the {@link Class} reflecting the {@link TransferObject} to create.
+   * @param toType is the {@link Class} reflecting the {@link AbstractTransferObject} to create.
    * @return an instance of <code>toType</code> with the values of the given <code>entity</code>.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> TO convertFromEntity(ENTITY entity,

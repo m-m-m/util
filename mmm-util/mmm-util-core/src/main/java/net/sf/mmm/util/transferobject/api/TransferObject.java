@@ -2,95 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.api;
 
-import java.io.Serializable;
-
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.entity.api.Entity;
 
 /**
- * This is the abstract base class for a transfer object.
+ * This is the interface for a transfer-object. Such object is a {@link java.io.Serializable serializable}
+ * {@link net.sf.mmm.util.pojo.api.Pojo} used to transfer data between application layers (e.g. from
+ * <em>logic</em> to <em>client</em> layer). For more information see the <a
+ * href="http://www.corej2eepatterns.com/Patterns2ndEd/TransferObject.htm">Transfer Object Pattern</a>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public abstract class TransferObject implements Serializable, Cloneable {
+public interface TransferObject extends Entity {
 
-  /** UID for serialization. */
-  private static final long serialVersionUID = -6842823766837505377L;
-
-  /**
-   * The constructor.
-   */
-  public TransferObject() {
-
-    super();
-  }
-
-  /**
-   * The copy-constructor.
-   * 
-   * @param template is the object to create a deep-copy from.
-   */
-  protected TransferObject(Object template) {
-
-    super();
-    if (template != null) {
-      copyFrom(template, true);
-    }
-  }
-
-  /**
-   * This method copies all properties from <code>source</code> to this object. If a property is copied whose
-   * value is a mutable object (not a {@link net.sf.mmm.util.lang.api.Datatype} or the like), that object also
-   * has to be copied/cloned.
-   * 
-   * @param source is the source object where to copy the properties from.
-   * @param overwrite - <code>true</code> if all properties shall be copied, <code>false</code> if only the
-   *        properties shall be copied that are <code>null</code> in this object.
-   */
-  protected void copyFrom(Object source, boolean overwrite) {
-
-    // has to be overridden by every sub-class...
-    NlsNullPointerException.checkNotNull("source", source);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean equals(Object obj) {
-
-    // has to be overridden by every sub-class (use Eclipse "Generate equals() and hashCode()")...
-    if (obj == null) {
-      return false;
-    }
-    if (obj.getClass() != getClass()) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int hashCode() {
-
-    // has to be overridden by every sub-class (use Eclipse "Generate equals() and hashCode()")...
-    return 1;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public TransferObject clone() {
-
-    try {
-      return (TransferObject) super.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new NlsIllegalStateException(e);
-    }
-  }
+  // nothing to add, just a marker interface.
 
 }

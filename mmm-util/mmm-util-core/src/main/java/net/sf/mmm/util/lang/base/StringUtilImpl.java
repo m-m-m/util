@@ -25,7 +25,7 @@ import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.ValueConverterIdentity;
 
 /**
- * This is the implementation of the {@link StringUtil} interface.
+ * This is the implementation of {@link StringUtil}.
  * 
  * @see #getInstance()
  * 

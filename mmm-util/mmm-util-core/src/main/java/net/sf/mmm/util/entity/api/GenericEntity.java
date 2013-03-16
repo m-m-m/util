@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.entity.api;
 
-import java.io.Serializable;
-
 import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 
 /**
@@ -45,7 +43,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface GenericEntity<ID> extends AttributeReadId<ID>, Serializable {
+public interface GenericEntity<ID> extends AttributeReadId<ID>, Entity {
 
   /**
    * This method gets the unique identifier (primary key) of this entity. While this method is initially

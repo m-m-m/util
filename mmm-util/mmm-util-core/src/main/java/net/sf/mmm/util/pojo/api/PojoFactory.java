@@ -8,10 +8,22 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 /**
  * This is the interface for a generic factory used to {@link #newInstance(Class) create new instances} of
  * {@link net.sf.mmm.util.pojo.api.Pojo}s.<br>
- * {@link net.sf.mmm.util.pojo.api.Pojo} is a shortcut for <em>Plain Old Java Object</em> and simply means any
- * Java object. Typically a {@link net.sf.mmm.util.pojo.api.Pojo} has a public non-arg constructor.
+ * Typically a {@link net.sf.mmm.util.pojo.api.Pojo} has a public non-arg constructor. However there can be
+ * arbitrary reasons why <code>{@link Class#newInstance()}</code> might NOT do it and you want some
+ * abstraction like this interface. Here are just a few of them.
+ * <ul>
+ * <li>Reflection is NOT available (e.g. in GWT environments)</li>
+ * <li>The provided {@link Class} is an {@link Class#isInterface() interface} such as {@link java.util.List}.</li>
+ * <li>The provided {@link Class} does not have a non-arg constructor.</li>
+ * <li>{@link Class#newInstance()} is throwing ugly checked exceptions.</li>
+ * <li>You might need specific permissions to instantiate the provided {@link Class}.</li>
+ * </ul>
+ * This library comes with simple implementations of {@link PojoFactory}. You might want to hide <a
+ * href="http://code.google.com/p/objenesis/">objenesis</a> behind this interface to combine its features with
+ * the power of <code>mmm</code>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.1.0
  */
 @ComponentSpecification
 public interface PojoFactory {

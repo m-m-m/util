@@ -55,9 +55,7 @@ public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
 
     super.doInitialize();
     if (this.composedValueConverter == null) {
-      DefaultComposedValueConverter converter = new DefaultComposedValueConverter();
-      converter.initialize();
-      this.composedValueConverter = converter;
+      this.composedValueConverter = DefaultComposedValueConverter.getInstance();
     }
   }
 

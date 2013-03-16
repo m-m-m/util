@@ -6,18 +6,18 @@ import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
 import net.sf.mmm.util.entity.api.RevisionedEntity;
 
 /**
- * This is the abstract base class for an {@link TransferObject} corresponding to an
+ * This is the abstract base class for an {@link AbstractTransferObject} corresponding to an
  * {@link net.sf.mmm.util.entity.api.PersistenceEntity}. Unlike for the
  * {@link net.sf.mmm.util.entity.api.PersistenceEntity} there are no restrictions and you can treat the
- * instance as a regular java-bean or {@link net.sf.mmm.util.pojo.api.Pojo}.</li>
- * 
+ * instance as a regular java-bean or {@link net.sf.mmm.util.pojo.api.Pojo}.<br/>
+ * For an example see also JavaDoc of {@link CompositeTo}.
  * 
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public abstract class EntityTo<ID> extends TransferObject implements MutableRevisionedEntity<ID> {
+public abstract class EntityTo<ID> extends AbstractTransferObject implements MutableRevisionedEntity<ID> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -3039958170310580721L;
@@ -57,27 +57,9 @@ public abstract class EntityTo<ID> extends TransferObject implements MutableRevi
    * {@inheritDoc}
    */
   @Override
-  public Number getRevision() {
-
-    return this.revision;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public ID getId() {
 
     return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getModificationCounter() {
-
-    return this.modificationCounter;
   }
 
   /**
@@ -93,9 +75,27 @@ public abstract class EntityTo<ID> extends TransferObject implements MutableRevi
    * {@inheritDoc}
    */
   @Override
+  public int getModificationCounter() {
+
+    return this.modificationCounter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setModificationCounter(int version) {
 
     this.modificationCounter = version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Number getRevision() {
+
+    return this.revision;
   }
 
   /**

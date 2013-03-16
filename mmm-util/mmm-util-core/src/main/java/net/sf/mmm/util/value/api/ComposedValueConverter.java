@@ -105,6 +105,8 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
  * should therefore try all applicable converters starting from most to least specific until conversion
  * succeeds. If all applicable converters fail it will also fail and return <code>null</code>.<br>
  * 
+ * @see net.sf.mmm.util.value.impl.DefaultComposedValueConverter#getInstance()
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */

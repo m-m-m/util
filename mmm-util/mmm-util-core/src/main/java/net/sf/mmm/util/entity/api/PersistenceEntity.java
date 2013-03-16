@@ -4,7 +4,7 @@ package net.sf.mmm.util.entity.api;
 
 /**
  * This is the interface to mark a {@link RevisionedEntity} that represents an entity of the
- * <em>persistence</em>. Unlike {@link net.sf.mmm.util.transferobject.api.TransferObject}s such object may be
+ * <em>persistence</em>. Unlike {@link net.sf.mmm.util.transferobject.api.AbstractTransferObject}s such object may be
  * in {@link #STATE_MANAGED} and is connected with a persistent store. Typically this will happen using JPA
  * and an RDBMS. In this case classes implementing this interface will have {@link javax.persistence.Entity
  * JPA annotations} and gets {@link #STATE_MANAGED managed} by an {@link javax.persistence.EntityManager}.<br/>

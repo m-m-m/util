@@ -23,6 +23,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>> extends
     AbstractGenericDao<ID, ENTITY> {

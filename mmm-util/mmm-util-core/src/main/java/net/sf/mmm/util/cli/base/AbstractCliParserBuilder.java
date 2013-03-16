@@ -98,9 +98,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
     // this.nlsTemplateResolver = null;
     // }
     if (this.converter == null) {
-      DefaultComposedValueConverter valueConverter = new DefaultComposedValueConverter();
-      valueConverter.initialize();
-      this.converter = valueConverter;
+      this.converter = DefaultComposedValueConverter.getInstance();
     }
     if (this.stringUtil == null) {
       this.stringUtil = StringUtilImpl.getInstance();
@@ -124,6 +122,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public CliParser build(Object pojo) {
 
     if (pojo == null) {
@@ -187,6 +186,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public CollectionFactoryManager getCollectionFactoryManager() {
 
     return this.collectionFactoryManager;
@@ -205,6 +205,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public StringUtil getStringUtil() {
 
     return this.stringUtil;
@@ -223,6 +224,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public AnnotationUtil getAnnotationUtil() {
 
     return this.annotationUtil;
@@ -241,6 +243,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public CollectionReflectionUtil getCollectionReflectionUtil() {
 
     return this.collectionReflectionUtil;
@@ -259,6 +262,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public ReflectionUtil getReflectionUtil() {
 
     return this.reflectionUtil;
@@ -277,6 +281,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessageFactory getNlsMessageFactory() {
 
     return this.nlsMessageFactory;
@@ -295,6 +300,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsTemplateResolver getNlsTemplateResolver() {
 
     return this.nlsTemplateResolver;
@@ -311,6 +317,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public ComposedValueConverter getConverter() {
 
     return this.converter;
@@ -329,6 +336,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
   /**
    * {@inheritDoc}
    */
+  @Override
   public LineWrapper getLineWrapper() {
 
     return this.lineWrapper;
