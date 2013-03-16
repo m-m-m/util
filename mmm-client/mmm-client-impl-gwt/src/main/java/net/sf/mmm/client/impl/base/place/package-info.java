@@ -2,9 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the place related base classes for this client framework.
- * <a name="documentation"/><h2>Client Base Place (GWT)</h2> 
- * This package contains the {@link com.google.gwt.place.shared.Place} related base classes for this GWTP based 
- * application framework.
+ * <a name="documentation"/><h2>Client Base Place (GWT)</h2>
+ * This package contains the {@link net.sf.mmm.client.ui.api.dialog.DialogPlace} related base classes.
  */
 package net.sf.mmm.client.impl.base.place;
 

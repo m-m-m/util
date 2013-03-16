@@ -11,7 +11,6 @@ import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 import net.sf.mmm.util.date.base.Iso8601UtilLimitedImpl;
 import net.sf.mmm.util.math.api.MathUtilLimited;
 import net.sf.mmm.util.math.api.NumberType;
-import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.math.base.MathUtilLimitedImpl;
 import net.sf.mmm.util.value.api.SimpleGenericValueConverter;
 import net.sf.mmm.util.value.api.ValueConvertException;
@@ -111,7 +110,7 @@ public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent i
     } else if (targetClass.isEnum()) {
       result = Enum.valueOf((Class) targetClass, value.toString());
     } else if (Number.class.equals(targetClass)) {
-      NumberType<? extends Number> numberType = MathUtilImpl.getInstance().getNumberType(targetClass);
+      NumberType<? extends Number> numberType = this.mathUtil.getNumberType(targetClass);
       if (value instanceof String) {
         result = numberType.valueOf((String) value);
       } else if (value instanceof Number) {

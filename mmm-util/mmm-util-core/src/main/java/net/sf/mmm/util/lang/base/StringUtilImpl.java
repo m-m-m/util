@@ -205,10 +205,11 @@ public class StringUtilImpl implements StringUtil {
           // Capitalized or upper case?
           if (c != Character.toLowerCase(c)) {
             // all upper case
-            result.append(newSuffixLowerCase.toUpperCase(locale));
+            result.append(GwtHelper.toUpperCase(newSuffixLowerCase, locale));
           } else {
             // capitalize
-            String capital = newSuffixLowerCase.substring(0, 1).toUpperCase(locale);
+            String first = newSuffixLowerCase.substring(0, 1);
+            String capital = GwtHelper.toUpperCase(first, locale);
             if (capital.length() == 1) {
               result.append(newSuffixLowerCase);
               result.setCharAt(replaceIndex, capital.charAt(0));

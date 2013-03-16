@@ -378,10 +378,16 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
    * {@inheritDoc}
    */
   @Override
+  @SuppressWarnings("unchecked")
   public NUMBER valueOf(Number number, boolean failIfUnprecise) throws NumberConversionException {
 
-    if (getNumberClass().isInstance(number)) {
-      return getNumberClass().cast(number);
+    if (number == null) {
+      return null;
+    }
+    if (getNumberClass().equals(number.getClass())) {
+      // cast is not yet supported by GWT
+      return (NUMBER) number;
+      // return getNumberClass().cast(number);
     }
     NUMBER converted = convert(number);
     if (failIfUnprecise) {
@@ -396,7 +402,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       if (delta > REQUIRED_PRECISION) {
         throw new NumberConversionException(number, getNumberClass());
       }
-      // TODO: BigInt / BigDeci
+      // TODO: BigInt / BigDecimal
     }
     return converted;
   }

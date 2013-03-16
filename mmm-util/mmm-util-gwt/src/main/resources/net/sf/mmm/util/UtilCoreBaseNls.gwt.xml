@@ -3,7 +3,12 @@
   <inherits name="net.sf.mmm.util.UtilCoreBase"/>
   <inherits name="com.google.gwt.i18n.I18N"/>
 
-  <source path="nls" excludes="base/NlsBundleHelper.java,base/NlsCachingLocalizer.java,**/*NlsResourceLocator*,**/AbstractNlsBundleFactory.java,**/*ResourceBundle*,api/ComposedException.java"/>
+  <source path="nls/api" excludes="NlsResourceLocator.java,ComposedException.java"/>
+  <source path="nls/base" excludes="NlsBundleHelper.java,NlsCachingLocalizer.java,*ResourceBundle*,*NlsResourceLocator*,AbstractNlsBundleFactory.java,NlsTemplateImpl.java,NlsTemplateImplWithMessage.java,NlsWriter.java"/>
+  <source path="nls/impl" excludes="rebind/*,*ResourceBundle*,NlsTemplateResolverImpl.java"/>
+  <!--
+  <source path="nls" excludes="impl/rebind/*,base/NlsBundleHelper.java,base/NlsCachingLocalizer.java,**/*NlsResourceLocator*,**/AbstractNlsBundleFactory.java,**/*ResourceBundle*,api/ComposedException.java"/>
+   -->
 
   <generate-with class="net.sf.mmm.util.nls.impl.rebind.NlsBundleFactoryGenerator">
     <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundleFactory"/>

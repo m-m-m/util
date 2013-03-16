@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.Callback;
 import com.google.gwt.user.client.Window;
 
 /**
- * TODO: this class ...
+ * This is a dummy implementation of {@link net.sf.mmm.client.ui.api.UiPopupHelper}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -30,12 +30,11 @@ public class UiPopupHelperDummy extends AbstractUiPopupHelper {
   /**
    * The constructor.
    * 
-   * @param nlsBundle
+   * @param nlsBundle is the instance of {@link NlsBundleUtilCoreRoot}.
    */
   public UiPopupHelperDummy(NlsBundleUtilCoreRoot nlsBundle) {
 
     super(nlsBundle);
-    // TODO Auto-generated constructor stub
   }
 
   /**

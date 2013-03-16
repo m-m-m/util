@@ -186,13 +186,13 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
       if (value == null) {
         value = createNewValue();
       }
-      if ((value != null) && (this.originalValue != null)) {
-        copyValueAttributes(this.originalValue, value);
-      }
       value = doGetValue(template, state);
       if (state != null) {
         doValidate(state, value);
         this.validated = true;
+      }
+      if ((value != null) && (this.originalValue != null) && (template != null)) {
+        copyValueAttributes(this.originalValue, value);
       }
       return value;
     } catch (RuntimeException e) {

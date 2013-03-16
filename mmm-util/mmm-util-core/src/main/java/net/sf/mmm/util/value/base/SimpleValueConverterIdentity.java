@@ -31,9 +31,13 @@ public class SimpleValueConverterIdentity<V> implements SimpleValueConverter<V, 
   /**
    * {@inheritDoc}
    */
+  @Override
+  @SuppressWarnings("unchecked")
   public <T extends V> T convert(V value, Object valueSource, Class<T> targetClass) throws ValueException {
 
-    return targetClass.cast(value);
+    // GWT does not yet support cast...
+    // return targetClass.cast(value);
+    return (T) value;
   }
 
   /**

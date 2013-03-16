@@ -27,7 +27,7 @@ public class JavaScriptUtil {
   }
 
   /**
-   * @return the iNSTANCE
+   * @return the singleton instance of {@link JavaScriptUtil}.
    */
   public static JavaScriptUtil getInstance() {
 
@@ -168,7 +168,7 @@ public class JavaScriptUtil {
    * @param template is the object to clone.
    * @return the cloned object.
    */
-  protected native Object clone(Object template) /*-{
+  public native Object clone(Object template) /*-{
     var clone = {};
 
     // create unique object hash code
@@ -188,7 +188,7 @@ public class JavaScriptUtil {
    * @param template is the object create a new instance of.
    * @return the new instance.
    */
-  protected native Object newInstance(Object template) /*-{
+  public native Object newInstance(Object template) /*-{
     var clone = {};
 
     // create unique object hash code

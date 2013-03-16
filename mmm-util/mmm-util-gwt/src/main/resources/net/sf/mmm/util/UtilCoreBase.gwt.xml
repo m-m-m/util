@@ -13,10 +13,15 @@
   <source path="component" excludes="impl/**"/>
   <source path="scanner"/>
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
-  <source path="lang" excludes="**/System*"/>
+  <source path="lang" excludes="**/System*,**/BasicUtil*"/>
   <source path="uuid"/>
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
   <source path="validation"/>
-  <source path="value"/>
+  <source path="transferobject" excludes="base/TransferObjectUtilImpl.java"/>
+  <source path="entity"/>
+  <source path="reflect/api" includes="GenericType.java,ReflectionUtilLimited.java"/>
+  <source path="reflect/base" includes="ReflectionUtilLimitedImpl.java"/>
+  <source path="value/api"/>
+  <source path="value/base" includes="SimpleGenericValueConverterImpl.java,ValueConverterIdentity.java,AbstractSimpleValueConverter.java"/>
 </module>

@@ -3,8 +3,6 @@
 package net.sf.mmm.util.transferobject.base;
 
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.reflect.api.AccessFailedException;
-import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
 import net.sf.mmm.util.transferobject.api.AbstractTransferObject.AbstractTransferObjectUtilLimited;
 
@@ -28,19 +26,12 @@ public class TransferObjectUtilLimitedImpl extends AbstractTransferObjectUtilLim
    * {@inheritDoc}
    */
   @Override
-  public <TO extends AbstractTransferObject> TO newInstance(TO template) {
+  public <TO extends AbstractTransferObject> TO copy(TO template) {
 
     NlsNullPointerException.checkNotNull(AbstractTransferObject.class.getSimpleName(), template);
-    Class<? extends AbstractTransferObject> toClass = template.getClass();
-    TO newInstance;
-    try {
-      newInstance = (TO) toClass.newInstance();
-    } catch (InstantiationException e) {
-      throw new InstantiationFailedException(e, toClass);
-    } catch (IllegalAccessException e) {
-      throw new AccessFailedException(e, toClass);
-    }
-    return newInstance;
+    TO copy = newInstance(template);
+    copyProperties(template, copy, true);
+    return copy;
   }
 
 }

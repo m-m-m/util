@@ -7,7 +7,6 @@ import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
  * This is the {@link Ginjector} for mmm-client. It gives access to central components of the client
@@ -22,11 +21,7 @@ public interface ClientGinjector extends ClientComponents, Ginjector {
   /**
    * @return the instance of {@link RemoteInvocationServiceCallerGwt}.
    */
+  @Override
   RemoteInvocationServiceCallerGwt getServiceCaller();
-
-  /**
-   * @return the instance of {@link PlaceManager}.
-   */
-  PlaceManager getPlaceManager();
 
 }

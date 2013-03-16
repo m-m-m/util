@@ -32,6 +32,7 @@ public class ValueConverterIdentity<V> extends AbstractSimpleValueConverter<V, V
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<V> getSourceType() {
 
     return this.valueClass;
@@ -40,6 +41,7 @@ public class ValueConverterIdentity<V> extends AbstractSimpleValueConverter<V, V
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<V> getTargetType() {
 
     return this.valueClass;
@@ -48,9 +50,13 @@ public class ValueConverterIdentity<V> extends AbstractSimpleValueConverter<V, V
   /**
    * {@inheritDoc}
    */
+  @Override
+  @SuppressWarnings("unchecked")
   public <T extends V> T convert(V value, Object valueSource, Class<T> targetClass) throws ValueException {
 
-    return targetClass.cast(value);
+    // GWT does not yet support cast...
+    // return targetClass.cast(value);
+    return (T) value;
   }
 
 }

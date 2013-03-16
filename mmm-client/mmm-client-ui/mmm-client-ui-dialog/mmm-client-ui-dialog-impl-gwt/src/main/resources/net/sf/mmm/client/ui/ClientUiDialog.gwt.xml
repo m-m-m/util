@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <inherits name="net.sf.mmm.client.ui.ClientUiDialog"/>
+  <inherits name="net.sf.mmm.client.ui.ClientUi"/>
+  <!--
   <inherits name="net.sf.mmm.service.Service"/>
   <inherits name="com.google.gwt.inject.Inject"/>
-
-  <script src="js/mmm-client-ui.js"/>
+   -->
 
   <!-- <source path=""/> -->
   <source path="api"/>

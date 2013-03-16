@@ -43,9 +43,9 @@ public class MathUtilLimitedImpl extends AbstractLoggableComponent implements Ma
       return NumberTypeImpl.SHORT;
     } else if ((numericType == byte.class) || (numericType == Byte.class)) {
       return NumberTypeImpl.BYTE;
-    } else if ((BigInteger.class.isAssignableFrom(numericType))) {
+    } else if ((BigInteger.class.equals(numericType))) {
       return NumberTypeImpl.BIG_INTEGER;
-    } else if ((BigDecimal.class.isAssignableFrom(numericType))) {
+    } else if ((BigDecimal.class.equals(numericType))) {
       return NumberTypeImpl.BIG_DECIMAL;
     } else {
       return null;

@@ -13,7 +13,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link net.sf.mmm.client.ui.api.dialog.DialogManager} for GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -5,13 +5,11 @@ package net.sf.mmm.client.impl.gwt.gin;
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImpl;
 import net.sf.mmm.client.base.gwt.dialog.UiPopupHelperDummy;
 import net.sf.mmm.client.impl.gwt.busy.BusyManagerImplGwt;
-import net.sf.mmm.client.impl.gwt.place.ClientPlaceManager;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.busy.BusyManager;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 /**
  * This is the {@link AbstractGinModule} that configures which implementation to use for the components
@@ -37,7 +35,6 @@ public class ClientModule extends AbstractGinModule {
   protected void configure() {
 
     // NOTE: Components not configured here will be created as singletons via GWT.create()
-    install(new DefaultModule(ClientPlaceManager.class));
     bind(BusyManager.class).to(BusyManagerImplGwt.class).asEagerSingleton();
     bind(DialogManager.class).to(DialogManagerImpl.class).asEagerSingleton();
     bind(UiPopupHelper.class).to(UiPopupHelperDummy.class).asEagerSingleton();

@@ -3,8 +3,9 @@
   <inherits name="net.sf.mmm.util.UtilCore"/>
   <source path="api"/>
   <source path="base" excludes="**/server/**"/>
-  <source path="impl" excludes="**/server/**"/>
-  <generate-with class="net.sf.mmm.service.impl.gwt.client.RemoteInvocationServiceCallerGenerator">
+  <source path="impl" excludes="**/server/**,**/rebind/**"/>
+
+  <generate-with class="net.sf.mmm.service.impl.gwt.client.rebind.RemoteInvocationServiceCallerGenerator">
     <when-type-assignable class="net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt"/>
   </generate-with>
 </module>

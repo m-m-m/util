@@ -6,15 +6,18 @@ import java.lang.reflect.Type;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.entity.api.Entity;
+import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
+import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
+import net.sf.mmm.util.transferobject.api.TransferObjectUtil;
 
 /**
  * This is the abstract base class for a {@link TransferObject}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -33,7 +36,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
   /**
    * The copy-constructor.
-   * 
+   *
    * @param template is the object to create a deep-copy from.
    */
   protected AbstractTransferObject(Object template) {
@@ -46,7 +49,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
   /**
    * @see #copyFrom(Object, boolean)
-   * 
+   *
    * @param source is the source object where to copy the properties from.
    * @param overwrite - <code>true</code> if all properties shall be copied, <code>false</code> if only the
    *        properties shall be copied that are <code>null</code> in this object.
@@ -75,7 +78,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
    * This method copies all properties from <code>source</code> to this object. If a property is copied whose
    * value is a mutable object (not a {@link net.sf.mmm.util.lang.api.Datatype} or the like), that object also
    * has to be copied/cloned.
-   * 
+   *
    * @param source is the source object where to copy the properties from.
    * @param overwrite - <code>true</code> if all properties shall be copied, <code>false</code> if only the
    *        properties shall be copied that are <code>null</code> in this object.
@@ -114,18 +117,10 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
   /**
    * {@inheritDoc}
-   * 
-   * <b>ATTENTION:</b><br/>
-   * For being type-safe please use {@link TransferObjectUtil#clone(AbstractTransferObject)} instead.
    */
-  @Override
   public AbstractTransferObject clone() {
 
-    try {
-      return (AbstractTransferObject) super.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new NlsIllegalStateException(e);
-    }
+    return (AbstractTransferObject) JavaScriptUtil.getInstance().clone(this);
   }
 
   /**
@@ -170,16 +165,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
     public <TO extends AbstractTransferObject> TO newInstance(TO template) {
 
       NlsNullPointerException.checkNotNull(AbstractTransferObject.class.getSimpleName(), template);
-      Class<? extends AbstractTransferObject> toClass = template.getClass();
-      TO newInstance;
-      try {
-        newInstance = (TO) toClass.newInstance();
-      } catch (InstantiationException e) {
-        throw new InstantiationFailedException(e, toClass);
-      } catch (IllegalAccessException e) {
-        throw new AccessFailedException(e, toClass);
-      }
-      return newInstance;
+      return (TO) JavaScriptUtil.getInstance().newInstance(template);
     }
 
   }
