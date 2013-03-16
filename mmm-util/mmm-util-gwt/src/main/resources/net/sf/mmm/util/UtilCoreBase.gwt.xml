@@ -18,4 +18,5 @@
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
   <source path="validation"/>
+  <source path="value"/>
 </module>

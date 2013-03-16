@@ -34,12 +34,6 @@ public interface StringUtil {
   /** a string representing the undefined value <code>null</code>. */
   String NULL = "null";
 
-  /**
-   * The platform-specific line-separator string. Should be one of {@link #LINE_SEPARATOR_LF},
-   * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
-   */
-  String LINE_SEPARATOR = System.getProperty("line.separator");
-
   /** The line-separator with a single carriage-return. */
   String LINE_SEPARATOR_CR = "\r";
 
@@ -51,6 +45,24 @@ public interface StringUtil {
 
   /** The Mac line-separator (line-feed carriage-return). */
   String LINE_SEPARATOR_LFCR = "\n\r";
+
+  /**
+   * The platform-specific line-separator string. Should be one of {@link #LINE_SEPARATOR_LF},
+   * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
+   * 
+   * @deprecated Due to GWT compatibility we had to remove dependency on {@link System#getProperty(String)}.
+   *             Please use {@link #SYSTEM_PROPERTY_LINE_SEPARATOR} to get this via
+   *             {@link System#getProperty(String)}.
+   */
+  @Deprecated
+  String LINE_SEPARATOR = LINE_SEPARATOR_LF;
+
+  /**
+   * The {@link System#getProperty(String) system property name} for {@link #LINE_SEPARATOR}.
+   * 
+   * @since 3.1.0
+   */
+  String SYSTEM_PROPERTY_LINE_SEPARATOR = "line.separator";
 
   /** An empty {@link String} array. */
   String[] EMPTY_STRING_ARRAY = new String[0];
