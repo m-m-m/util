@@ -8,13 +8,12 @@
 
   <body>
     <section name="Introduction">
-      Welcome to the Project Multi-Media-Manager (MMM). The project is still 
-      under development. Before you get lost, first some words of what you can 
-      already find here. In order to build the Multi-Media-Manager we first wanted
-	  to build a generic application framework for Java. This is where we currently
-	  seem to end so please do not get confused by the project name and have a closer look.
-	  To get started have a look at the <a href="images/Architecture.svg">technical architecture</a>.
-	  Please also read our strategic posting <a href="https://github.com/m-m-m/mmm/wiki/Rescue-the-java-world">Rescue the (Java) world</a>.
+      Welcome to the wonderful world of MMM. The initial goal of this project was to build a Multi-Media-Manager (MMM).
+      However, in order to build this we first wanted to build a generic application framework for Java to build ontop.
+      This is where we currently seem to end so please do not get confused by the project name and have a closer look.
+      We could also rename this to <em>Modern-Mature-Modules</em>.
+      To get started have a look at the <a href="images/Architecture.svg">technical architecture</a>.
+      Please also read our strategic posting <a href="https://github.com/m-m-m/mmm/wiki/Rescue-the-java-world">Rescue the (Java) world</a>.
       <subsection name="Ready to use">
         This project provides the following generic components that can already be used now:
         <ul>
@@ -25,9 +24,17 @@
       </subsection>
     </section>
     <section name="About MMM">
-      The Multi-Media-Manager (MMM) is a generic application framework and (some day)
-      a enterprise content management system (ECMS) with custom modules for 
-      multi-media management build on top.
+      MMM is a generic application framework that massively speeds up development of (complex) applications.
+      It is based on common standards such as <em>Context and Dependency Injection</em> (CDI) by default using
+      the <a href="www.springframework.org">spring</a> or <em>Java Persistence Api</em> (JPA) by default using
+      <a href="http://hibernate.org/">hibernate</a>. Most of such frameworks aim to be minimal invasive what
+      is nice in general. However, development of large applications with only such frameworks is still not 
+      efficient as you always have to implement a lot of general code in every project reinventing the wheel.
+      Further there are hundreds of possible ways to do something and you can easily get on the wrong track.
+      This project helps you to make the right decisions leading to a mature, flexible and powerful architecture
+      that has proven success in various open-source and commercial medium to large scale projects.
+      By providing a lot of reusable and generic code for all the common problems on your way this projects
+      extremely speeds you up.
       <subsection name="Mission Statement">
         <ul>
           <li>Designed with beauty.</li>
@@ -36,11 +43,9 @@
           <li>Documented with devotion.</li>
         </ul>      
         MMM is entirely written in Java. It makes extensive use of the Java 5 syntax.
-        All code is written with focus on design &amp; quality and comes with detailed API
-        documentation.<br/>
-        The application is heavily based on the idioms separation of concerns (SoC) and
-        inversion of control (IoC) and therefore split into tiny components 
-        (see <a href="modules.html">modules</a>). This open architecture allows any 
+        All code is written with focus on design &amp; quality and comes with detailed API documentation.<br/>
+        The application is heavily based on the idioms separation of concerns (SoC) and inversion of control (IoC) 
+        and therefore split into tiny components (see <a href="modules.html">modules</a>). This open architecture allows any 
         component implementation to be reused (by other projects) or be replaced (for custom needs).<br/>
         <b>ATTENTION:</b><br/>
         This mission statement applies to subprojects (modules) that are released. Modules that are NOT 
@@ -48,11 +53,12 @@
         completely refactored, change their API or even dissappear completely.
       </subsection>
       <subsection name="Project State">
-        Even though the project exists for many years now, there is no CMS and no multi-media
-        management available. If you are looking for open, flexible and well-designed software
-        components (see "Ready to use") or you want to get involved (see 
-        <a href="https://github.com/m-m-m/mmm/wiki/Get-Involved">Get Involved</a>) and let the vision of 
-        MMM become reality then you are at the right place.
+        Even though the project exists for many years now, there is no multi-media-manager available.
+        However, the application framework provided here has matured over the last years and many modules
+        are going to be released officially within 2013.
+        If you are looking for open, flexible and well-designed software components (see "Ready to use") 
+        or you want to get involved (see <a href="https://github.com/m-m-m/mmm/wiki/Get-Involved">Get Involved</a>) 
+        and let the vision of MMM become reality then you are at the right place.
       </subsection>
     </section>
   </body>
