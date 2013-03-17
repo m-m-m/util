@@ -26,7 +26,7 @@
     <section name="About MMM">
       MMM is a generic application framework that massively speeds up development of (complex) applications.
       It is based on common standards such as <em>Context and Dependency Injection</em> (CDI) by default using
-      the <a href="www.springframework.org">spring</a> or <em>Java Persistence Api</em> (JPA) by default using
+      <a href="www.springframework.org">spring</a> or <em>Java Persistence Api</em> (JPA) by default using
       <a href="http://hibernate.org/">hibernate</a>. Most of such frameworks aim to be minimal invasive what
       is nice in general. However, development of large applications with only such frameworks is still not 
       efficient as you always have to implement a lot of general code in every project reinventing the wheel.

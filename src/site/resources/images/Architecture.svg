@@ -39,7 +39,7 @@
 		.st28 {marker-end:url(#mrkr1-301);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.48}
 		.st29 {fill:#000000;font-family:Arial;font-size:0.333344em;font-weight:bold}
 		.st30 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
-		.st31 {fill:#000000;font-family:Arial;font-size:0.499992em}
+		.st31 {fill:#000000;font-family:Arial;font-size:0.333344em}
 		.st32 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
 	
 	</style>
@@ -411,7 +411,7 @@
 				
 			</g>
 			<g id="shape116-115" v:mID="116" v:groupContext="groupContent" v:layerMember="3">
-				<path d="M-1.06 841.89 L-7.87 841.89 L-7.87 865.98 L-13.11 865.98" class="st21"/>
+				<path d="M-1.06 841.89 L-7.87 841.89 L-7.87 865.98 L-13.11 865.98" class="st18"/>
 			</g>
 		</g>
 		<g id="group118-118" transform="translate(523.878,-379.843)" v:mID="118" v:groupContext="group" v:layerMember="3">
@@ -432,7 +432,7 @@
 				
 			</g>
 			<g id="shape118-121" v:mID="118" v:groupContext="groupContent" v:layerMember="3">
-				<path d="M-1.24 841.89 L-8.04 841.89 L-8.04 817.8 L-12.93 817.8" class="st21"/>
+				<path d="M-1.24 841.89 L-8.04 841.89 L-8.04 817.8 L-12.93 817.8" class="st18"/>
 			</g>
 		</g>
 		<g id="group120-124" transform="translate(476.22,-355.748)" v:mID="120" v:groupContext="group" v:layerMember="3">
@@ -1693,7 +1693,7 @@
 			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
 			<v:textRect cx="14.1732" cy="838.817" width="28.35" height="6.14567"/>
 			<rect x="0" y="835.744" width="28.3465" height="6.14567" class="st30"/>
-			<text x="4" y="840.62" class="st31" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>delegate</text>		</g>
+			<text x="4" y="840.02" class="st31" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>delegate</text>		</g>
 		<g id="group253-582" transform="translate(351.142,-484.724)" v:mID="253" v:groupContext="group" v:layerMember="3">
 			
 			<g id="group49-583" transform="translate(8.85827,0)" v:mID="49" v:groupContext="group" v:layerMember="3">
@@ -1773,13 +1773,9 @@
 						
 						<path d="M0 841.89 L70.87 841.89" class="st12"/>
 					</g>
-					<g id="shape107-613" v:mID="107" v:groupContext="shape" v:layerMember="3" transform="translate(2.79776E-014,-12.7559)">
-						
-						<path d="M0 841.89 L70.87 841.89" class="st12"/>
-					</g>
 				</g>
 			</a>
-			<g id="shape250-616" v:mID="250" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,801.496) rotate(90)">
+			<g id="shape250-613" v:mID="250" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,801.496) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1787,18 +1783,18 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group257-618" transform="translate(476.187,-192.402)" v:mID="257" v:groupContext="group" v:layerMember="3">
+		<g id="group257-615" transform="translate(476.187,-192.402)" v:mID="257" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape223-619" v:mID="223" v:groupContext="shape" v:layerMember="3" transform="translate(17.0079,0)">
+			<g id="shape223-616" v:mID="223" v:groupContext="shape" v:layerMember="3" transform="translate(17.0079,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 				</v:userDefs>
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
-			<g id="group80-621" transform="translate(-807.165,833.031) rotate(-90)" v:mID="80" v:groupContext="group" v:layerMember="3">
+			<g id="group80-618" transform="translate(-807.165,833.031) rotate(-90)" v:mID="80" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape81-622" v:mID="81" v:groupContext="shape" v:layerMember="3">
+				<g id="shape81-619" v:mID="81" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">MyObject</desc>
 					<v:userDefs>
@@ -1808,12 +1804,12 @@
 					<v:textRect cx="29.7638" cy="829.134" width="59.53" height="25.5118"/>
 					<rect x="0" y="816.378" width="59.5276" height="25.5118" class="st19"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyObject</text>				</g>
-				<g id="shape82-625" v:mID="82" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17658E-011,-6.37795)">
+				<g id="shape82-622" v:mID="82" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17658E-011,-6.37795)">
 					
 					<path d="M0 841.89 L59.53 841.89" class="st12"/>
 				</g>
 			</g>
-			<g id="shape256-628" v:mID="256" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,798.307) rotate(90)">
+			<g id="shape256-625" v:mID="256" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,798.307) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1821,11 +1817,11 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group258-630" transform="translate(351.142,-272.126)" v:mID="258" v:groupContext="group" v:layerMember="3">
+		<g id="group258-627" transform="translate(351.142,-272.126)" v:mID="258" v:groupContext="group" v:layerMember="3">
 			
-			<g id="group99-631" transform="translate(8.85827,0)" v:mID="99" v:groupContext="group" v:layerMember="3">
+			<g id="group99-628" transform="translate(8.85827,0)" v:mID="99" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape100-632" v:mID="100" v:groupContext="shape" v:layerMember="3">
+				<g id="shape100-629" v:mID="100" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">AbstractMyUseCase</desc>
 					<v:userDefs>
@@ -1835,19 +1831,19 @@
 					<v:textRect cx="42.5197" cy="829.134" width="85.04" height="25.5118"/>
 					<rect x="0" y="816.378" width="85.0394" height="25.5118" class="st19"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>AbstractMyUseCase</text>				</g>
-				<g id="shape101-635" v:mID="101" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+				<g id="shape101-632" v:mID="101" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 					
 					<path d="M0 841.89 L85.04 841.89" class="st12"/>
 				</g>
 			</g>
-			<g id="shape248-638" v:mID="248" v:groupContext="shape" v:layerMember="3" transform="translate(56.3386,1649.41) rotate(180)">
+			<g id="shape248-635" v:mID="248" v:groupContext="shape" v:layerMember="3" transform="translate(56.3386,1649.41) rotate(180)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 				</v:userDefs>
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
-			<g id="shape249-640" v:mID="249" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,824.173) rotate(90)">
+			<g id="shape249-637" v:mID="249" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,824.173) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
