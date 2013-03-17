@@ -38,7 +38,7 @@ public class CliOutputSettings {
   public CliOutputSettings() {
 
     super();
-    this.lineSeparator = StringUtil.LINE_SEPARATOR;
+    this.lineSeparator = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
     this.width = 80;
     this.locale = Locale.getDefault();
     this.templateResolver = null;

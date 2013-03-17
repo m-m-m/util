@@ -53,7 +53,7 @@ public class AbstractVersionedMainTest {
     int exitCode = main.run(new String[] { "--version" });
     Assert.assertEquals(0, exitCode);
     String version = outputBuffer.toString();
-    Assert.assertEquals("42.1.2.3" + StringUtil.LINE_SEPARATOR, version);
+    Assert.assertEquals("42.1.2.3" + System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR), version);
     Assert.assertEquals("", errorBuffer.toString());
   }
 

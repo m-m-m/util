@@ -324,21 +324,21 @@ public class TextColumnInfo {
 
   /**
    * This enum contains the available modes how to deal with {@link TextColumnInfo#getIndent() indentation}
-   * after {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newlines}.
+   * after {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() newlines}.
    */
   public enum IndentationMode {
 
     /**
      * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line, but for each following lines.
-     * After {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the text, no
+     * After {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() newline} in the text, no
      * {@link TextColumnInfo#getIndent() indent} is added for the following line of the column.
      */
     NO_INDENT_AFTER_NEWLINE,
 
     /**
      * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line, but for each following lines,
-     * even after a single {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the text. If
-     * a column-line starts with a {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline}
+     * even after a single {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() newline} in the text.
+     * If a column-line starts with a {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() newline}
      * (duplicate newlines), this indicates a new paragraph. So after an empty line in the column, no
      * {@link TextColumnInfo#getIndent() indent} is added for the next line of the column.
      */
@@ -346,7 +346,7 @@ public class TextColumnInfo {
 
     /**
      * Do NOT add {@link TextColumnInfo#getIndent() indent} for the first line, but for each following lines,
-     * even after a {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline} in the text.
+     * even after a {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() newline} in the text.
      */
     INDENT_AFTER_NEWLINE
 

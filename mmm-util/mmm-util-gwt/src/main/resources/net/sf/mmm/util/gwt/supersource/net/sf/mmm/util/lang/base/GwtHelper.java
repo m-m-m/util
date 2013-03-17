@@ -22,6 +22,20 @@ final class GwtHelper {
   }
 
   /**
+   * Indirection for {@link System#getProperty(String)}.
+   *
+   * @param propertyName is the name of the requested property.
+   * @return the result of {@link System#getProperty(String)}.
+   */
+  public static String getSystemProperty(String propertyName) {
+
+    if ("line.separator".equals(propertyName)) {
+      return "\n";
+    }
+    return null;
+  }
+
+  /**
    * Indirection for {@link String#toLowerCase(Locale)}.
    *
    * @param string is the {@link String}.

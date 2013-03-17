@@ -21,11 +21,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ContentParserPdfTest {
 
-  protected GenericContext parse(ContentParser parser, String resourceName, long filesize)
-      throws Exception {
+  protected GenericContext parse(ContentParser parser, String resourceName, long filesize) throws Exception {
 
-    DataResource testResource = new ClasspathResource(ContentParserPdfTest.class, resourceName,
-        false);
+    DataResource testResource = new ClasspathResource(ContentParserPdfTest.class, resourceName, false);
     InputStream inputStream = testResource.openStream();
     try {
       return parser.parse(inputStream, filesize);
@@ -47,8 +45,8 @@ public class ContentParserPdfTest {
     Assert.assertTrue(text.contains("Footer"));
     Assert.assertTrue(text.contains("Footnote"));
     Assert.assertTrue(text.contains("Hello world, this is a test."));
-    Assert.assertTrue(text.contains("Kommentar [jh1]: This is a " + StringUtil.LINE_SEPARATOR
-        + "comment."));
+    Assert.assertTrue(text.contains("Kommentar [jh1]: This is a "
+        + System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR) + "comment."));
   }
 
   protected ContentParser getContentParser() {

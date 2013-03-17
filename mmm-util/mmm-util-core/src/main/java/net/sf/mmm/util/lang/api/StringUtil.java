@@ -51,8 +51,8 @@ public interface StringUtil {
    * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
    * 
    * @deprecated Due to GWT compatibility we had to remove dependency on {@link System#getProperty(String)}.
-   *             Please use {@link #SYSTEM_PROPERTY_LINE_SEPARATOR} to get this via
-   *             {@link System#getProperty(String)}.
+   *             Please use {@link #getLineSeparator()} or get it manually via
+   *             {@link System#getProperty(String)} using {@link #SYSTEM_PROPERTY_LINE_SEPARATOR}.
    */
   @Deprecated
   String LINE_SEPARATOR = LINE_SEPARATOR_LF;
@@ -73,6 +73,14 @@ public interface StringUtil {
    * @since 2.0.0
    */
   char[] EMPTY_CHAR_ARRAY = new char[0];
+
+  /**
+   * The platform-specific line-separator string. Should be one of {@link #LINE_SEPARATOR_LF},
+   * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
+   * 
+   * @return the line separator.
+   */
+  String getLineSeparator();
 
   /**
    * This method parses a boolean value given as string.

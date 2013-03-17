@@ -90,7 +90,7 @@ public class ComposedException extends NlsRuntimeException {
           for (Throwable nested : this.errors) {
             if (nested != null) {
               buffer.append("Caused by: ");
-              buffer.append(StringUtil.LINE_SEPARATOR);
+              buffer.append(System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR));
               if (nested instanceof NlsThrowable) {
                 ((NlsThrowable) nested).printStackTrace(locale, resolver, buffer);
               } else {

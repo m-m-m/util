@@ -59,6 +59,7 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getInternationalizedMessage() {
 
     return "";
@@ -67,6 +68,7 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object getArgument(String key) {
 
     try {
@@ -80,6 +82,7 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
       throws RuntimeIoException {
 
@@ -87,7 +90,7 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
       boolean newline = false;
       for (Object message : this.arguments) {
         if (newline) {
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append(StringUtil.LINE_SEPARATOR_LF);
         } else {
           newline = true;
         }

@@ -30,6 +30,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ProcessUtilTest {
 
+  /** TODO: javadoc. */
+  private static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
+
   public ProcessUtil getProcessUtil() {
 
     return ProcessUtilImpl.getInstance();
@@ -136,14 +139,14 @@ public class ProcessUtilTest {
     StringBuilder expectedOutString = new StringBuilder(30);
     for (int i = 1; i <= 10; i++) {
       expectedOutString.append(Integer.toString(i));
-      expectedOutString.append(StringUtil.LINE_SEPARATOR);
+      expectedOutString.append(LINE_SEPARATOR);
     }
     assertEquals(expectedOutString.toString(), outString);
     // test output of stderr
     byte[] errBytes = errStream.toByteArray();
     String errString = new String(errBytes);
-    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + StringUtil.LINE_SEPARATOR
-        + PipeApp2.class.getSimpleName() + " done." + StringUtil.LINE_SEPARATOR;
+    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + LINE_SEPARATOR
+        + PipeApp2.class.getSimpleName() + " done." + LINE_SEPARATOR;
     assertEquals(expectedErrString, errString);
   }
 

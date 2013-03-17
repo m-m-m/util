@@ -77,6 +77,15 @@ public class StringUtilImpl implements StringUtil {
    * {@inheritDoc}
    */
   @Override
+  public String getLineSeparator() {
+
+    return GwtHelper.getSystemProperty(SYSTEM_PROPERTY_LINE_SEPARATOR);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public Boolean parseBoolean(String booleanValue) {
 
     if (TRUE.equalsIgnoreCase(booleanValue)) {

@@ -3,6 +3,7 @@
 package net.sf.mmm.util.text.api;
 
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
@@ -34,14 +35,14 @@ public class TextTableInfo {
   public TextTableInfo() {
 
     super();
-    this.lineSeparator = StringUtil.LINE_SEPARATOR;
+    this.lineSeparator = StringUtilImpl.getInstance().getLineSeparator();
     this.width = DEFAULT_WIDTH;
   }
 
   /**
-   * This method gets the {@link StringUtil#LINE_SEPARATOR} used to terminate a line of text. Only the
-   * line-separator of the {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn[]) last column} is
-   * used and all others are ignored.
+   * This method gets the {@link StringUtil#getLineSeparator() line separator} used to terminate a line of
+   * text. Only the line-separator of the {@link LineWrapper#wrap(Appendable, TextTableInfo, TextColumn[])
+   * last column} is used and all others are ignored.
    * 
    * @return the line separator string.
    */
@@ -53,7 +54,7 @@ public class TextTableInfo {
   /**
    * This method sets the {@link #getLineSeparator() line-separator}.
    * 
-   * @see StringUtil#LINE_SEPARATOR
+   * @see StringUtil#getLineSeparator()
    * @see StringUtil#LINE_SEPARATOR_CR
    * @see StringUtil#LINE_SEPARATOR_CRLF
    * @see StringUtil#LINE_SEPARATOR_LF
@@ -79,7 +80,7 @@ public class TextTableInfo {
    * equal to the sum of the following term for each {@link TextColumnInfo column}:
    * 
    * <pre>
-   * {@link TextColumnInfo#getBorderLeft()}.length() + {@link TextColumnInfo#getBorderRight()}.length() + &lt;column-with&gt; 
+   * {@link TextColumnInfo#getBorderLeft()}.length() + {@link TextColumnInfo#getBorderRight()}.length() + &lt;column-with&gt;
    * </pre>
    * 
    * Where <code>&lt;column-with&gt;</code> is {@link TextColumnInfo#getWidth()} or (in case of

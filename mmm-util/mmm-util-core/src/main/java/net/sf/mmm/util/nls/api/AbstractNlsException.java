@@ -39,7 +39,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * The line separator used by
    * {@link #printStackTrace(NlsThrowable, Locale, NlsTemplateResolver, Appendable)}.
    */
-  static final String LINE_SEPARATOR = StringUtil.LINE_SEPARATOR;
+  static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
 
   /** the internationalized message */
   private final NlsMessage nlsMessage;

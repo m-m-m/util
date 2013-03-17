@@ -34,7 +34,7 @@ public interface LineWrapper {
    *        {@link TextColumnInfo#getAlignment() alignment}, {@link TextColumnInfo#getIndent() indent}, etc.
    * @return the number of lines that have been {@link Appendable#append(CharSequence) appended} excluding the
    *         first line. In other words the number of
-   *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line separators} that have been
+   *         {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line separators} that have been
    *         appended.
    */
   int wrap(Appendable appendable, TextTableInfo tableInfo, String columnText, TextColumnInfo columnInfo);
@@ -53,7 +53,7 @@ public interface LineWrapper {
    * @param column2Info is the {@link TextColumnInfo} of the second column.
    * @return the number of lines that have been {@link Appendable#append(CharSequence) appended} excluding the
    *         first line. In other words the number of
-   *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line separators} that have been
+   *         {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line separators} that have been
    *         appended.
    */
   int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text, TextColumnInfo column1Info,
@@ -75,7 +75,7 @@ public interface LineWrapper {
    * @param column3Info is the {@link TextColumnInfo} of the third column.
    * @return the number of lines that have been {@link Appendable#append(CharSequence) appended} excluding the
    *         first line. In other words the number of
-   *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line separators} that have been
+   *         {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line separators} that have been
    *         appended.
    */
   // CHECKSTYLE:OFF (more than 7 parameters required here)
@@ -94,7 +94,7 @@ public interface LineWrapper {
    * @param columns are the columns to {@link Appendable#append(CharSequence) append}.
    * @return the number of lines that have been {@link Appendable#append(CharSequence) appended} excluding the
    *         first line. In other words the number of
-   *         {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR line separators} that have been
+   *         {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line separators} that have been
    *         appended.
    */
   int wrap(Appendable appendable, TextTableInfo tableInfo, TextColumn... columns);
