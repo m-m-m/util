@@ -19,8 +19,8 @@ import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.UiModeChangerImpl;
-import net.sf.mmm.client.ui.base.widget.UiWidgetFactoryAdvancedImpl;
-import net.sf.mmm.client.ui.base.widget.UiWidgetFactoryDatatypeSimple;
+import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryAdvancedImpl;
+import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryDatatypeSimple;
 import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 

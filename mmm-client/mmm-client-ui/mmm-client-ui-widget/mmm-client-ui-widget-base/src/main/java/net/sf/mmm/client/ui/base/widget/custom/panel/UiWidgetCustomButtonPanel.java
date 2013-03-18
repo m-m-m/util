@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularCompositeNoValue;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
 
 /**
  * This is the toolkit independent implementation of {@link UiWidgetButtonPanel} based on

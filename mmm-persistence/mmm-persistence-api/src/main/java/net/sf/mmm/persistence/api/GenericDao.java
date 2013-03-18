@@ -4,6 +4,7 @@ package net.sf.mmm.persistence.api;
 
 import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.entity.api.GenericEntity;
+import net.sf.mmm.util.entity.api.PersistenceEntity;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
@@ -25,7 +26,8 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * 
  * @param <ID> is the type of the {@link GenericEntity#getId() primary key} of the managed
  *        {@link GenericEntity}.
- * @param <ENTITY> is the {@link #getEntityClassReadWrite() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClassReadWrite() type} of the managed entity. We strongly recommend
+ *        to extend {@link PersistenceEntity}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -108,16 +110,17 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
    * This method saves the given <code>entity</code> in the persistent store. If the <code>entity</code> is
-   * {@link GenericEntity#STATE_NEW new} it is initially created in the persistent store (after commit). If
-   * the <code>entity</code> is configured to have a generated {@link GenericEntity#getId() primary key} a
+   * {@link PersistenceEntity#STATE_NEW new} it is initially created in the persistent store (after commit).
+   * If the <code>entity</code> is configured to have a generated {@link GenericEntity#getId() primary key} a
    * unique ID is generated and assigned. Otherwise, if the <code>entity</code> is already
-   * {@link GenericEntity#STATE_MANAGED managed}, the <code>entity</code> is updated in the persistent store.<br>
+   * {@link PersistenceEntity#STATE_MANAGED managed}, the <code>entity</code> is updated in the persistent
+   * store.<br>
    * <b>ATTENTION:</b><br>
-   * Modifications to a {@link GenericEntity#STATE_MANAGED managed} {@link GenericEntity entity} are
+   * Modifications to a {@link PersistenceEntity#STATE_MANAGED managed} {@link GenericEntity entity} are
    * automatically saved even if this method has NOT been invoked. However you should always invoke this
-   * method after modifying a {@link GenericEntity#STATE_MANAGED managed} {@link GenericEntity entity} to make
-   * your code more explicit. This will also guarantee that potential custom-logic of your {@link GenericDao}
-   * is invoked.
+   * method after modifying a {@link PersistenceEntity#STATE_MANAGED managed} {@link GenericEntity entity} to
+   * make your code more explicit. This will also guarantee that potential custom-logic of your
+   * {@link GenericDao} is invoked.
    * 
    * @param entity is the {@link GenericEntity} to save.
    */
@@ -125,7 +128,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
    * This method deletes the given <code>entity</code> from the persistent store.<br>
-   * If the <code>entity</code> is {@link GenericEntity#STATE_NEW transient} this method has no effect.<br>
+   * If the <code>entity</code> is {@link PersistenceEntity#STATE_NEW transient} this method has no effect.<br>
    * 
    * @param entity is the {@link GenericEntity} to save.
    */

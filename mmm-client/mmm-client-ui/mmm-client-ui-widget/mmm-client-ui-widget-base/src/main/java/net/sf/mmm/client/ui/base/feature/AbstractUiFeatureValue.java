@@ -10,12 +10,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
-import net.sf.mmm.util.entity.api.GenericEntity;
-import net.sf.mmm.util.entity.api.MutableGenericEntity;
-import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
-import net.sf.mmm.util.entity.api.RevisionedEntity;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -69,213 +64,9 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValue() {
-
-    try {
-      return getValueOrException(null);
-    } catch (RuntimeException e) {
-      handleGetValueError(e, null);
-      return null;
-    }
-  }
-
-  /**
-   * This method creates a new instance of &lt;VALUE&gt; (see {@link #getValue()}). It is called from
-   * {@link #getValueDirect(Object, ValidationState)} or {@link #setValue(Object)} in case the given value is
-   * <code>null</code>.<br/>
-   * <b>NOTE:</b><br/>
-   * If &lt;VALUE&gt; is {@link Void} or a {@link net.sf.mmm.util.lang.api.Datatype} (immutable object), this
-   * method should legally return <code>null</code>. This can also be suitable for objects that only delegate
-   * their {@link #getValue() value} to something else. Further, to be GWT compatible you cannot create the
-   * new instance via reflection. If you do not care about GWT, you can use reflection or better use it via
-   * {@link net.sf.mmm.util.pojo.api.PojoFactory}.
-   * 
-   * @return a new instance of &lt;VALUE&gt;.
-   */
-  protected VALUE createNewValue() {
-
-    return null;
-  }
-
-  /**
-   * This method handles a {@link RuntimeException} that occurred in
-   * {@link #getValueDirect(Object, ValidationState)}.
-   * 
-   * @param e is the {@link RuntimeException} to handle.
-   * @param state is the {@link ValidationState} or <code>null</code> if no validation is performed.
-   */
-  private void handleGetValueError(RuntimeException e, ValidationState state) {
-
-    if (state == null) {
-      // ATTENTION: This is one of the very rare cases where we intentionally consume an exception.
-      getLogger().debug("Error in getValue() at " + toString(), e);
-    } else {
-      ValidationFailure failure = createValidationFailure(e);
-      if (failure != null) {
-        state.onFailure(failure);
-      }
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public final void setValue(VALUE value) {
 
     setValue(value, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public VALUE getValueAndValidate(ValidationState state) {
-
-    clearMessages();
-    ValidationState validationState = state;
-    if (validationState == null) {
-      validationState = new ValidationStateImpl();
-    }
-    VALUE result = getValueDirect(null, validationState);
-    if (validationState.isValid()) {
-      if ((result == null) && (state == null)) {
-        getLogger().error("null has been returned as valid value at " + toString());
-      }
-      return result;
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final VALUE getValueOrException(VALUE template) throws RuntimeException {
-
-    return getValueDirect(template, null);
-  }
-
-  /**
-   * @return <code>true</code> if this object has been {@link #validate(ValidationState) validated}
-   *         (technically via {@link #getValueDirect(Object, ValidationState)}) since {@link #clearMessages()
-   *         messages have been cleared}.
-   */
-  public final boolean isValidated() {
-
-    return this.validated;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void clearMessages() {
-
-    this.validated = false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
-
-    try {
-      VALUE value = template;
-      if (value == null) {
-        value = createNewValue();
-      }
-      value = doGetValue(template, state);
-      if (state != null) {
-        doValidate(state, value);
-        this.validated = true;
-      }
-      if ((value != null) && (this.originalValue != null) && (template != null)) {
-        copyValueAttributes(this.originalValue, value);
-      }
-      return value;
-    } catch (RuntimeException e) {
-      if (state == null) {
-        throw e;
-      }
-      handleGetValueError(e, state);
-      return null;
-    }
-  }
-
-  /**
-   * This method copies generic attributes from the {@link #getOriginalValue() original value} to a new value.
-   * It applies both for {@link #createNewValue() newly create values} as well as for
-   * {@link #getValueDirect(Object, ValidationState) external template values}. In very specific cases this
-   * method may be overridden to add cross-cutting concerns. Individual attributes should be addressed by
-   * {@link #doGetValue(Object, ValidationState)}.
-   * 
-   * @param original is the {@link #getOriginalValue() original value} and NOT <code>null</code>.
-   * @param value is the {@link #getValueDirect(Object, ValidationState) new value} and NOT <code>null</code>.
-   */
-  @SuppressWarnings("unchecked")
-  protected void copyValueAttributes(VALUE original, VALUE value) {
-
-    if ((original instanceof GenericEntity<?>) && (value instanceof MutableGenericEntity<?>)) {
-      // bad generic code, but no other way...
-      GenericEntity<Object> originalEntity = (GenericEntity<Object>) original;
-      MutableGenericEntity<Object> valueEntity = (MutableGenericEntity<Object>) value;
-      Object originalId = originalEntity.getId();
-      if (originalId != null) {
-        Object valueId = valueEntity.getId();
-        if ((valueId != null) && (!valueId.equals(originalId))) {
-          throw new ObjectMismatchException(valueId, originalId, getSource());
-        }
-        valueEntity.setId(originalId);
-      }
-      if (valueEntity.getModificationCounter() == 0) {
-        int modificationCounter = originalEntity.getModificationCounter();
-        if (modificationCounter != 0) {
-          valueEntity.setModificationCounter(modificationCounter);
-        }
-      }
-      if ((original instanceof RevisionedEntity<?>) && (value instanceof MutableRevisionedEntity<?>)) {
-        RevisionedEntity<Object> originalRevisioned = (RevisionedEntity<Object>) original;
-        MutableRevisionedEntity<Object> valueRevisioned = (MutableRevisionedEntity<Object>) value;
-        Number revision = originalRevisioned.getRevision();
-        if (revision == null) {
-          valueRevisioned.setRevision(revision);
-        }
-      }
-    }
-  }
-
-  /**
-   * This method is called from {@link #getValueOrException(Object)}. It has to be implemented with the custom
-   * logic to get the value from the view. The implementation of this method has to correspond with the
-   * implementation of {@link #doSetValue(Object, boolean)}. A typical implementation of this method for a
-   * composite widget should look like this:
-   * 
-   * @see #doSetValue(Object, boolean)
-   * 
-   * @param template is the object where the data is filled in. May only be <code>null</code> if
-   *        {@link #createNewValue()} does.
-   * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted).
-   *        Should only be used to propagate to {@link #getValueDirect(Object, ValidationState)} of children.
-   * @return the current value of this widget. May be <code>null</code> if empty. If &lt;VALUE&gt; is
-   *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
-   *         &lt;VALUE&gt; is a mutable object (java bean) and <code>template</code> is NOT <code>null</code>,
-   *         this method is supposed to return <code>template</code> after the value(s) of this object have
-   *         been assigned. If <code>template</code> is <code>null</code> this method has to create a new
-   *         instance of &lt;VALUE&gt;. It is forbidden and an explicit bug-pattern to modify the
-   *         {@link #getOriginalValue() original value}. This is required to support operations such as
-   *         {@link #resetValue()}.
-   */
-  protected abstract VALUE doGetValue(VALUE template, ValidationState state);
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final VALUE getOriginalValue() {
-
-    return this.originalValue;
   }
 
   /**
@@ -326,9 +117,188 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
+  public final VALUE getValue() {
+
+    try {
+      return getValueOrException(null);
+    } catch (RuntimeException e) {
+      handleGetValueError(e, null);
+      return null;
+    }
+  }
+
+  /**
+   * This method handles a {@link RuntimeException} that occurred in
+   * {@link #getValueDirect(Object, ValidationState)}.
+   * 
+   * @param e is the {@link RuntimeException} to handle.
+   * @param state is the {@link ValidationState} or <code>null</code> if no validation is performed.
+   */
+  private void handleGetValueError(RuntimeException e, ValidationState state) {
+
+    if (state == null) {
+      // ATTENTION: This is one of the very rare cases where we intentionally consume an exception.
+      getLogger().debug("Error in getValue() at " + toString(), e);
+    } else {
+      ValidationFailure failure = createValidationFailure(e);
+      if (failure != null) {
+        state.onFailure(failure);
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final VALUE getValueOrException(VALUE template) throws RuntimeException {
+
+    return getValueDirect(template, null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final VALUE getValueAndValidate(ValidationState state) {
+
+    clearMessages();
+    ValidationState validationState = state;
+    if (validationState == null) {
+      validationState = new ValidationStateImpl();
+    }
+    VALUE result = getValueDirect(null, validationState);
+    if (validationState.isValid()) {
+      if ((result == null) && (state == null)) {
+        getLogger().error("null has been returned as valid value at " + toString());
+      }
+      return result;
+    }
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
+
+    try {
+      VALUE value = template;
+      if (value == null) {
+        if (this.originalValue != null) {
+          value = createCopyOfValue(this.originalValue);
+        }
+        if (value == null) {
+          value = createNewValue();
+        }
+      }
+      value = doGetValue(value, state);
+      if (state != null) {
+        doValidate(state, value);
+        this.validated = true;
+      }
+      return value;
+    } catch (RuntimeException e) {
+      if (state == null) {
+        throw e;
+      }
+      handleGetValueError(e, state);
+      return null;
+    }
+  }
+
+  /**
+   * This method creates a new instance of &lt;VALUE&gt; (see {@link #getValue()}). It is called from
+   * {@link #getValueDirect(Object, ValidationState)} or {@link #setValue(Object)} in case the given value is
+   * <code>null</code>.<br/>
+   * <b>NOTE:</b><br/>
+   * If &lt;VALUE&gt; is {@link Void} or a {@link net.sf.mmm.util.lang.api.Datatype} (immutable object), this
+   * method should legally return <code>null</code>. This can also be suitable for objects that only delegate
+   * their {@link #getValue() value} to something else. Further, to be GWT compatible you cannot create the
+   * new instance via reflection. If you do not care about GWT, you can use reflection or better use it via
+   * {@link net.sf.mmm.util.pojo.api.PojoFactory}.
+   * 
+   * @return a new instance of &lt;VALUE&gt;.
+   */
+  protected VALUE createNewValue() {
+
+    return null;
+  }
+
+  /**
+   * This method may create a deep-copy of the given <code>value</code>.<br/>
+   * <b>ATTENTION:</b><br/>
+   * If &lt;VALUE&gt; is immutable there is nothing to do and you can live with the default implementation
+   * that simply returns null.
+   * 
+   * @param value is the {@link #getValue() value} to copy. Will typically be {@link #getOriginalValue()}.
+   *        Must NOT be modified in any way.
+   * @return a copy of the value or <code>null</code> if NOT implemented or supported.
+   */
+  protected VALUE createCopyOfValue(VALUE value) {
+
+    return null;
+  }
+
+  /**
+   * This method is called from {@link #getValueOrException(Object)}. It has to be implemented with the custom
+   * logic to get the value from the view. The implementation of this method has to correspond with the
+   * implementation of {@link #doSetValue(Object, boolean)}. A typical implementation of this method for a
+   * composite widget should look like this:
+   * 
+   * @see #doSetValue(Object, boolean)
+   * 
+   * @param template is the object where the data is filled in. May only be <code>null</code> if
+   *        {@link #createNewValue()} does.
+   * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted).
+   *        Should only be used to propagate to {@link #getValueDirect(Object, ValidationState)} of children.
+   * @return the current value of this widget. May be <code>null</code> if empty. If &lt;VALUE&gt; is
+   *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
+   *         &lt;VALUE&gt; is a mutable object (java bean) and <code>template</code> is NOT <code>null</code>,
+   *         this method is supposed to return <code>template</code> after the value(s) of this object have
+   *         been assigned. If <code>template</code> is <code>null</code> this method has to create a new
+   *         instance of &lt;VALUE&gt;. It is forbidden and an explicit bug-pattern to modify the
+   *         {@link #getOriginalValue() original value}. This is required to support operations such as
+   *         {@link #resetValue()}.
+   */
+  protected abstract VALUE doGetValue(VALUE template, ValidationState state);
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final VALUE getOriginalValue() {
+
+    return this.originalValue;
+  }
+
+  /**
+   * @return <code>true</code> if this object has been {@link #validate(ValidationState) validated}
+   *         (technically via {@link #getValueDirect(Object, ValidationState)}) since {@link #clearMessages()
+   *         messages have been cleared}.
+   */
+  public final boolean isValidated() {
+
+    return this.validated;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final void resetValue() {
 
     setValue(this.originalValue);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void clearMessages() {
+
+    this.validated = false;
   }
 
   /**

@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * locking (even though not strictly required - you could statically return 0).</li>
  * </ul>
  * <b>ATTENTION:</b><br>
- * An instance of this class can be one of the following:
+ * An instance of this interface can be one of the following:
  * <ul>
  * <li>a <b>{@link PersistenceEntity}</b><br/>
  * <li>a <b>{@link net.sf.mmm.util.transferobject.api.EntityTo transfer-object}</b><br/>

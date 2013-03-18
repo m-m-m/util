@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetTabPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtTabLayoutPanel;
 

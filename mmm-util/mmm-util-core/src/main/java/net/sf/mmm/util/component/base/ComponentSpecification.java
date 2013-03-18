@@ -8,6 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.mmm.util.component.api.Ioc;
+
 /**
  * {@link ComponentSpecification} is used to annotate the specification (should be an interface) of a
  * component. It acts only for the purpose of documentation and has no functional impact. However it will say
@@ -38,7 +40,7 @@ import java.lang.annotation.Target;
  *   ...
  *   &#64;{@link javax.inject.Inject}
  *   public void setMyPlugins({@link java.util.List}&lt;MyPlugins&gt; plugins) { ... }
- *   
+ *
  * }
  * </pre>
  * 
@@ -46,6 +48,7 @@ import java.lang.annotation.Target;
  * {@link javax.inject.Singleton stateless} and thread-safe. Otherwise this has to be documented in an
  * explicit WARNING.
  * 
+ * @see Ioc
  * @see org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

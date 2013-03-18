@@ -70,4 +70,5 @@ public interface TransferObjectUtilLimited {
    */
   <ENTITY extends Entity, TO extends AbstractTransferObject> void copyProperties(ENTITY source, TO target,
       boolean overwrite);
+
 }

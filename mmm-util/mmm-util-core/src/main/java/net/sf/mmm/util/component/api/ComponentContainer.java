@@ -3,9 +3,9 @@
 package net.sf.mmm.util.component.api;
 
 /**
- * This is the interface for a context and dependency injection (CDI) container. It is just use as abstraction
- * layer for frameworks like spring, guice or seam - you will not find a native implementation within this
- * project.
+ * This is the interface for a {@link Ioc}/context and dependency injection (CDI) container. It is just use as
+ * abstraction layer for frameworks like spring, guice or seam - you will not find a native implementation
+ * within this project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
@@ -38,7 +38,6 @@ public interface ComponentContainer {
    *         <code>componentId</code> or the registered component does NOT realize the given
    *         <code>apiClass</code>.
    */
-  <COMPONENT_API> COMPONENT_API get(Class<COMPONENT_API> apiClass, String componentId)
-      throws ResourceMissingException;
+  <COMPONENT_API> COMPONENT_API get(Class<COMPONENT_API> apiClass, String componentId) throws ResourceMissingException;
 
 }

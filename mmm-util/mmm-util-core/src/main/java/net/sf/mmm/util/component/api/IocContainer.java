@@ -5,8 +5,8 @@ package net.sf.mmm.util.component.api;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
- * This is the interface for the container of an inversion of control (IoC) framework. It is just use as
- * abstraction layer for frameworks like spring, guice or seam - you will not find a native implementation
+ * This is the interface for the container of an {@link Ioc} (inversion of control) framework. It is just use
+ * as abstraction layer for frameworks like spring, guice or seam - you will not find a native implementation
  * within this project.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

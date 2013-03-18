@@ -1,27 +1,27 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.widget;
+package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainConfirm;
+import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainApprove;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
- * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainConfirm confirm}
+ * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainApprove approve}
  * {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryConfirm extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainConfirm> {
+public class UiSingleWidgetButtonFactoryApprove extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainApprove> {
 
   /**
    * The constructor.
    */
-  public UiSingleWidgetButtonFactoryConfirm() {
+  public UiSingleWidgetButtonFactoryApprove() {
 
     super();
   }
@@ -30,9 +30,9 @@ public class UiSingleWidgetButtonFactoryConfirm extends AbstractUiSingleWidgetBu
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainConfirm> getHandlerInterface() {
+  public Class<UiHandlerPlainApprove> getHandlerInterface() {
 
-    return UiHandlerPlainConfirm.class;
+    return UiHandlerPlainApprove.class;
   }
 
   /**
@@ -41,24 +41,24 @@ public class UiSingleWidgetButtonFactoryConfirm extends AbstractUiSingleWidgetBu
   @Override
   public boolean isInstance(UiHandlerPlain handler) {
 
-    return (handler instanceof UiHandlerPlainConfirm);
+    return (handler instanceof UiHandlerPlainApprove);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainConfirm handler, boolean preventConfirmationPopup) {
+  public UiWidgetButton create(UiContext context, final UiHandlerPlainApprove handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onConfirm(null);
+        handler.onApprove(null);
       }
     };
-    return createButton(context, getBundle().labelConfirm(), clickHandler, null, null);
+    return createButton(context, getBundle().labelApprove(), clickHandler, null, null);
   }
 
 }

@@ -2,11 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.api;
 
+import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
 import net.sf.mmm.util.entity.api.RevisionedEntity;
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
- * This is the abstract base class for an {@link AbstractTransferObject} corresponding to an
+ * This is the abstract base class for an {@link TransferObject} corresponding to an
  * {@link net.sf.mmm.util.entity.api.PersistenceEntity}. Unlike for the
  * {@link net.sf.mmm.util.entity.api.PersistenceEntity} there are no restrictions and you can treat the
  * instance as a regular java-bean or {@link net.sf.mmm.util.pojo.api.Pojo}.<br/>
@@ -30,6 +32,12 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
 
   /** @see #getRevision() */
   private Number revision;
+
+  /**
+   * @see #copyFrom(Object, boolean)
+   * @see #getModificationCounter()
+   */
+  private transient GenericEntity<ID> persistentEntity;
 
   /**
    * The constructor.
@@ -77,6 +85,13 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
   @Override
   public int getModificationCounter() {
 
+    if (this.persistentEntity != null) {
+      // JPA implementations will update modification counter only after the transaction has been comitted.
+      // Conversion will typically happen before and would result in the wrong (old) modification counter.
+      // Therefore we update the modification counter here (that has to be called before serialization takes
+      // place).
+      this.modificationCounter = this.persistentEntity.getModificationCounter();
+    }
     return this.modificationCounter;
   }
 
@@ -126,16 +141,37 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
 
     super.copyFrom(source, overwrite);
     @SuppressWarnings("unchecked")
-    RevisionedEntity<ID> sourceEntity = (RevisionedEntity<ID>) source;
+    RevisionedEntity<ID> sourceRevisionedEntity = (RevisionedEntity<ID>) source;
+    // Update persistentEntity, see getModificationCounter() for details...
+    if ((this.persistentEntity == null) || overwrite) {
+      this.persistentEntity = sourceRevisionedEntity;
+    } else {
+      if (this.persistentEntity != sourceRevisionedEntity) {
+        handleDuplicatePersistentEntity(sourceRevisionedEntity);
+      }
+    }
     if ((this.id == null) || (overwrite)) {
-      this.id = sourceEntity.getId();
+      this.id = sourceRevisionedEntity.getId();
     }
     if ((this.modificationCounter == 0) || (overwrite)) {
-      this.modificationCounter = sourceEntity.getModificationCounter();
+      this.modificationCounter = sourceRevisionedEntity.getModificationCounter();
     }
     if ((this.revision == null) || (overwrite)) {
-      this.revision = sourceEntity.getRevision();
+      this.revision = sourceRevisionedEntity.getRevision();
     }
+  }
+
+  /**
+   * This method is called if {@link #copyFrom(Object, boolean)} has been called with <code>overwrite</code>
+   * set to false but the method has already been called before. It will throw an exception as this is not
+   * expected and might cause problems. You may override this method to allow this.
+   * 
+   * @param sourceRevisionedEntity is the {@link RevisionedEntity} to {@link #copyFrom(Object, boolean) copy
+   *        from}.
+   */
+  protected void handleDuplicatePersistentEntity(RevisionedEntity<ID> sourceRevisionedEntity) {
+
+    throw new DuplicateObjectException(sourceRevisionedEntity, "sourceEntity", this.persistentEntity);
   }
 
   /**

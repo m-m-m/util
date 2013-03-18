@@ -5,7 +5,39 @@ package net.sf.mmm.util.component.base;
 import javax.annotation.PostConstruct;
 
 /**
- * This is the abstract base class for a component that needs {@link #initialize() initialization}.
+ * This is the abstract base class for a {@link ComponentSpecification component} that needs
+ * {@link #initialize() initialization}. We strongly recommend that component implementations should be
+ * {@link javax.inject.Singleton stateless} and therefore thread-safe. It provides an
+ * {@link #getInitializationState() initialization state} that helps to prevent accidental coding mistakes.
+ * E.g. you can do this:
+ * 
+ * <pre>
+ * public class MyComponentImpl extends {@link AbstractComponent} {
+ *
+ *  private OtherComponent otherComponent;
+ *
+ *  public void setOtherComponent(OtherComponent otherComponent) {
+ *    {@link #getInitializationState()}.{@link InitializationState#requireNotInitilized() requireNotInitilized()};
+ *    this.otherComponent = otherComponent;
+ *  }
+ *
+ *  public void {@link #doInitialize()} {
+ *    if (this.otherCompoent == null) {
+ *      setOtherComponent(new OtherComponentDefault());
+ *    }
+ *  }
+ *
+ *  public void doSomething() {
+ *    {@link #getInitializationState()}.{@link InitializationState#requireInitilized() requireInitilized()};
+ *    // ... do something ...
+ *  }
+ *
+ * }
+ * </pre>
+ * 
+ * In advance to this class, we recommend that you extend {@link AbstractLoggableComponent}.
+ * 
+ * @see AbstractLoggableComponent
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

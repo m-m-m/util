@@ -12,6 +12,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
+import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactory;
+import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactoryReal;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsClassCastException;

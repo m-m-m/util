@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is the abstract base class for a component that needs a {@link #getLogger() logger}.
+ * This is the {@link AbstractComponent abstract base class for a component} that provides a
+ * {@link #getLogger() logger}.
+ * 
+ * @see net.sf.mmm.util.component.api.Ioc
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.0.1)

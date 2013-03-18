@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerRangeField;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetIntegerRangeField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtIntegerRangeField;
 

@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetImage;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtImage;
 
 /**

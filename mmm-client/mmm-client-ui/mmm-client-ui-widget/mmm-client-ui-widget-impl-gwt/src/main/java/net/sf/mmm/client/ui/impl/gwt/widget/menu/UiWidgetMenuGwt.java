@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.menu;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
 import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenu;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenu;
 

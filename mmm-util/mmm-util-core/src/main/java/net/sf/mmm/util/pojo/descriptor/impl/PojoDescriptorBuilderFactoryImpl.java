@@ -23,6 +23,9 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 @Named(PojoDescriptorBuilderFactory.CDI_NAME)
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
+  /** @see #getInstance() */
+  private static PojoDescriptorBuilderFactory instance;
+
   /** @see #getDependencies() */
   private ExtendedPojoDescriptorDependenciesImpl dependencies;
 
@@ -32,6 +35,27 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
   public PojoDescriptorBuilderFactoryImpl() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link PojoDescriptorBuilderFactory}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Please read {@link net.sf.mmm.util.component.api.Ioc#GET_INSTANCE} before using.
+   * 
+   * @return the singleton instance.
+   */
+  public static PojoDescriptorBuilderFactory getInstance() {
+
+    if (instance == null) {
+      synchronized (PojoDescriptorBuilderFactoryImpl.class) {
+        if (instance == null) {
+          PojoDescriptorBuilderFactoryImpl impl = new PojoDescriptorBuilderFactoryImpl();
+          impl.initialize();
+          instance = impl;
+        }
+      }
+    }
+    return instance;
   }
 
   /**

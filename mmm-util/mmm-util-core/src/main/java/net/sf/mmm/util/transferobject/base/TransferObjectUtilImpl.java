@@ -6,7 +6,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import net.sf.mmm.util.entity.api.PersistenceEntity;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 import net.sf.mmm.util.transferobject.api.EntityTo;
+import net.sf.mmm.util.transferobject.api.TransferObject;
 import net.sf.mmm.util.transferobject.api.TransferObjectUtil;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
@@ -28,6 +36,12 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   /** @see #getComposedValueConverter() */
   private ComposedValueConverter composedValueConverter;
 
+  /** @see #getPojoDescriptorBuilderFactory() */
+  private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
+
+  /** @see #getPojoDescriptorBuilder() */
+  private PojoDescriptorBuilder pojoDescriptorBuilder;
+
   /**
    * The constructor.
    */
@@ -37,13 +51,9 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   /**
-   * This method gets the singleton instance of this {@link TransferObjectUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this indirection you have direct, static
-   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
-   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
-   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
-   * container does NOT support this, you should consider using a better one.
+   * This method gets the singleton instance of this {@link TransferObjectUtilImpl}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Please read {@link net.sf.mmm.util.component.api.Ioc#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.
    */
@@ -53,12 +63,35 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
       synchronized (TransferObjectUtilImpl.class) {
         if (instance == null) {
           TransferObjectUtilImpl impl = new TransferObjectUtilImpl();
-          impl.setComposedValueConverter(DefaultComposedValueConverter.getInstance());
+          impl.initialize();
           instance = impl;
         }
       }
     }
     return instance;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.composedValueConverter == null) {
+      this.composedValueConverter = DefaultComposedValueConverter.getInstance();
+    }
+    if (this.pojoDescriptorBuilderFactory == null) {
+      this.pojoDescriptorBuilderFactory = PojoDescriptorBuilderFactoryImpl.getInstance();
+    }
+    if (this.pojoDescriptorBuilder == null) {
+      // VisibilityModifier methodVisibility = VisibilityModifier.PROTECTED;
+      // VisibilityModifier fieldVisibility = null;
+      // this.pojoDescriptorBuilder =
+      // this.pojoDescriptorBuilderFactory.createDescriptorBuilder(methodVisibility,
+      // fieldVisibility);
+      this.pojoDescriptorBuilder = this.pojoDescriptorBuilderFactory.createPublicMethodDescriptorBuilder();
+    }
   }
 
   /**
@@ -80,6 +113,41 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   /**
+   * @return the instance of {@link PojoDescriptorBuilderFactory}.
+   */
+  protected PojoDescriptorBuilderFactory getPojoDescriptorBuilderFactory() {
+
+    return this.pojoDescriptorBuilderFactory;
+  }
+
+  /**
+   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to
+   *        {@link Inject}.
+   */
+  @Inject
+  public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.pojoDescriptorBuilderFactory = pojoDescriptorBuilderFactory;
+  }
+
+  /**
+   * @return the {@link PojoDescriptorBuilder}.
+   */
+  protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
+
+    return this.pojoDescriptorBuilder;
+  }
+
+  /**
+   * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to set.
+   */
+  public void setPojoDescriptorBuilder(PojoDescriptorBuilder pojoDescriptorBuilder) {
+
+    this.pojoDescriptorBuilder = pojoDescriptorBuilder;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -97,6 +165,34 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
       Class<ENTITY> entityType) {
 
     return this.composedValueConverter.convert(transferObject, null, entityType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateModificationCounter(TransferObject transferObject) {
+
+    if (transferObject == null) {
+      return;
+    }
+    if (transferObject instanceof EntityTo) {
+      EntityTo<?> entityTo = (EntityTo<?>) transferObject;
+      // we call this method to update the field...
+      entityTo.getModificationCounter();
+    } else {
+      Class<? extends TransferObject> toClass = transferObject.getClass();
+      PojoDescriptor<? extends TransferObject> descriptor = this.pojoDescriptorBuilder.getDescriptor(toClass);
+      for (PojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
+        PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
+        if (getter != null) {
+          Object propertyValue = getter.invoke(transferObject);
+          if (propertyValue instanceof TransferObject) {
+            updateModificationCounter((TransferObject) propertyValue);
+          }
+        }
+      }
+    }
   }
 
 }

@@ -1,27 +1,27 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.widget;
+package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainCancel;
+import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
- * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainCancel cancel}
+ * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainStartEdit start edit}
  * {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainCancel> {
+public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainStartEdit> {
 
   /**
    * The constructor.
    */
-  public UiSingleWidgetButtonFactoryCancel() {
+  public UiSingleWidgetButtonFactoryStartEdit() {
 
     super();
   }
@@ -30,9 +30,9 @@ public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainCancel> getHandlerInterface() {
+  public Class<UiHandlerPlainStartEdit> getHandlerInterface() {
 
-    return UiHandlerPlainCancel.class;
+    return UiHandlerPlainStartEdit.class;
   }
 
   /**
@@ -41,24 +41,34 @@ public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetBut
   @Override
   public boolean isInstance(UiHandlerPlain handler) {
 
-    return (handler instanceof UiHandlerPlainCancel);
+    return (handler instanceof UiHandlerPlainStartEdit);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainCancel handler, boolean preventConfirmationPopup) {
+  protected Boolean getShowIfEditable() {
+
+    return Boolean.FALSE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetButton create(UiContext context, final UiHandlerPlainStartEdit handler,
+      boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onCancel(null);
+        handler.onStartEditMode(null);
       }
     };
-    return createButton(context, getBundle().labelCancel(), clickHandler, null, null);
+    return createButton(context, getBundle().labelStartEdit(), clickHandler, null, null);
   }
 
 }

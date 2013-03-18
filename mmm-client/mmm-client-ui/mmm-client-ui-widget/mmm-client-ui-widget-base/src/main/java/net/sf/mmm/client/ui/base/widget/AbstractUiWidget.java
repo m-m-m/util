@@ -10,6 +10,8 @@ import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
+import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this
@@ -138,6 +140,20 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   public static void setParent(UiWidget widget, UiWidgetComposite<?> newParent) {
 
     ((AbstractUiWidget<?>) widget).setParent(newParent);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected VALUE createCopyOfValue(VALUE value) {
+
+    if (value instanceof AbstractTransferObject) {
+      AbstractTransferObject to = (AbstractTransferObject) value;
+      TransferObjectUtilLimited transferObjectUtil = this.context.getContainer().get(TransferObjectUtilLimited.class);
+      return (VALUE) transferObjectUtil.copy(to);
+    }
+    return super.createCopyOfValue(value);
   }
 
 }
