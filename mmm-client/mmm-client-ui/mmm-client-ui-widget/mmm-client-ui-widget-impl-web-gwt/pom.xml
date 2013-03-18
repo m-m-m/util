@@ -8,10 +8,10 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-client-ui-widget-impl-gwt</artifactId>
+  <artifactId>mmm-client-ui-widget-impl-web-gwt</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>client-ui-widget-impl-gwt</name>
+  <name>client-ui-widget-impl-web-gwt</name>
   <description>Implementation of the UI widget layer for web based on Google Web Toolkit (GWT).</description>
   <dependencies>
     <dependency>

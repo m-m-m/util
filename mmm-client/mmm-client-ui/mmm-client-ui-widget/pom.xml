@@ -16,11 +16,13 @@
   <modules>
     <module>mmm-client-ui-widget-api</module>
     <module>mmm-client-ui-widget-base</module>
-    <module>mmm-client-ui-widget-impl-gwt</module>
     <module>mmm-client-ui-widget-impl-test</module>
-    <module>mmm-client-ui-widget-impl-swing</module>
-    <module>mmm-client-ui-widget-impl-swt</module>
-    <module>mmm-client-ui-widget-impl-android</module>
+    <module>mmm-client-ui-widget-impl-web-gwt</module>
+    <module>mmm-client-ui-widget-impl-web-javafx</module>
+    <module>mmm-client-ui-widget-impl-native-javafx</module>
+    <module>mmm-client-ui-widget-impl-native-swing</module>
+    <module>mmm-client-ui-widget-impl-native-swt</module>
+    <module>mmm-client-ui-widget-impl-native-android</module>
     <module>mmm-client-ui-widget-theme-standard</module>
   </modules>
 </project>

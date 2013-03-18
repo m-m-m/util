@@ -8,11 +8,11 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-client-ui-widget-impl-swt</artifactId>
+  <artifactId>mmm-client-ui-widget-impl-native-javafx</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>client-ui-widget-impl-swt</name>
-  <description>Implementation of the UI widget layer for native SWT client.</description>
+  <name>client-ui-widget-impl-native-javafx</name>
+  <description>Implementation of the UI widget layer for native javafx2 client.</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>

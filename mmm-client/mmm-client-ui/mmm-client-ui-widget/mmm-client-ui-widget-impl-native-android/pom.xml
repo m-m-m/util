@@ -8,10 +8,10 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-client-ui-widget-impl-android</artifactId>
+  <artifactId>mmm-client-ui-widget-impl-native-android</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>client-ui-widget-impl-andorid</name>
+  <name>client-ui-widget-impl-native-andorid</name>
   <description>Implementation of the UI widget layer for mobile android client.</description>
   <dependencies>
     <dependency>
