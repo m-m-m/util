@@ -60,13 +60,9 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   /**
-   * This method gets the singleton instance of this {@link StaxUtilImpl}.<br>
-   * This design is the best compromise between easy access (via this indirection you have direct, static
-   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
-   * the container-framework of your choice (like plexus, pico, springframework, etc.). To wire up the
-   * dependent components everything is properly annotated using common-annotations (JSR-250). If your
-   * container does NOT support this, you should consider using a better one.
+   * This method gets the singleton instance of this {@link StaxUtilImpl}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Please read {@link net.sf.mmm.util.component.api.Ioc#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.
    */
