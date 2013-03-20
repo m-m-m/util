@@ -20,12 +20,13 @@ public interface UiHandlerEventFocus extends UiHandlerEvent {
    * 
    * @param source is the object that has changed his focus.
    * @param programmatic - <code>true</code> if the
-   *        {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused(boolean) focus change
-   *        was triggered by the program}, <code>false</code> if performed by the end-user (by pressing the
-   *        [tab] key or clicking into a widget with the mouse).
+   *        {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused() focus change was
+   *        triggered by the program}, <code>false</code> if performed by the end-user (by pressing the [tab]
+   *        key or clicking into a widget with the mouse).
    * @param lost - <code>true</code> if the focus has been lost (<em>blur</em>), <code>false</code> if the
    *        focus has been gained (<em>focus</em>).
    */
+  // TODO hohwille invert logic from lost to focused
   void onFocusChange(AttributeReadFocused source, boolean programmatic, boolean lost);
 
 }

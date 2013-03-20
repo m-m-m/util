@@ -8,15 +8,14 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow}
- * using GWT based on {@link DialogBox}.
+ * This is the implementation of
+ * {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow} using GWT based on
+ * {@link DialogBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
-public abstract class UiWidgetAdapterGwtBaseWindowDialogBox<WIDGET extends DialogBox> extends
-    UiWidgetAdapterGwtBaseWindow<WIDGET> {
+public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdapterGwtBaseWindow<DialogBox> {
 
   /** The container for the children. */
   private final VerticalPanel contentPanel;

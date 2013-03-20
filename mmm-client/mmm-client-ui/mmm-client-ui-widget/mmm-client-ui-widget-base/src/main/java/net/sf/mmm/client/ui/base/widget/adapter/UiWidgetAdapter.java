@@ -10,8 +10,6 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStyles;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
@@ -64,15 +62,6 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    *        <code>false</code> for {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW}.
    */
   void setMode(boolean editMode);
-
-  /**
-   * This method registers the given {@link UiHandlerEventClick click handler} in the
-   * {@link #getToplevelWidget() widget}. This method will be called only once.
-   * 
-   * @param eventSource is the {@link UiHandlerEventClick#onClick(UiFeatureClick, boolean) event source}.
-   * @param eventSender is the {@link UiHandlerEventClick}.
-   */
-  void setClickEventSender(UiFeatureClick eventSource, UiHandlerEventClick eventSender);
 
   //
   // /**

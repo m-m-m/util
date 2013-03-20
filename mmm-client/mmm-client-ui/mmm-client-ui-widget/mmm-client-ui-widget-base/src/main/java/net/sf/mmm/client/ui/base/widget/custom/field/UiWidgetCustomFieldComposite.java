@@ -160,15 +160,15 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
    * {@inheritDoc}
    */
   @Override
-  public void setFocused(boolean focused) {
+  public void setFocused() {
 
     if (focused) {
-      this.fieldList.get(0).setFocused(true);
+      this.fieldList.get(0).setFocused();
     } else {
       if (this.focusField != null) {
-        ((UiWidgetField<?>) this.focusField).setFocused(false);
+        ((UiWidgetField<?>) this.focusField).setFocused();
       } else {
-        this.fieldList.get(0).setFocused(false);
+        this.fieldList.get(0).setFocused();
       }
     }
   }

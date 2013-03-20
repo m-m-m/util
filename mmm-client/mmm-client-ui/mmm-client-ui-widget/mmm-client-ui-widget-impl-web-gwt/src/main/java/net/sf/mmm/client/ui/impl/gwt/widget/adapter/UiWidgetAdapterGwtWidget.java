@@ -2,11 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -53,24 +48,6 @@ public abstract class UiWidgetAdapterGwtWidget<WIDGET extends Widget> extends Ui
 
     super.dispose();
     getToplevelWidget().removeFromParent();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setClickEventSender(final UiFeatureClick source, final UiHandlerEventClick clickEventSender) {
-
-    ClickHandler handler = new ClickHandler() {
-
-      @Override
-      public void onClick(ClickEvent event) {
-
-        clickEventSender.onClick(source, false);
-      }
-    };
-    // HandlerRegistration registration =
-    getToplevelWidget().addDomHandler(handler, ClickEvent.getType());
   }
 
 }

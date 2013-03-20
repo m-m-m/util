@@ -209,7 +209,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     // factory.getDispatcher().invokeTimer(task, 1000);
 
     // Focus the cursor on the name field when the app loads
-    textField.setFocused(true);
+    textField.setFocused();
     // support for selectAll in TextualField?
     // textField.selectAll();
 

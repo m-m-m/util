@@ -2,11 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter;
 
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenu;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -60,15 +57,6 @@ public class UiWidgetAdapterGwtMenu extends UiWidgetAdapterGwtMenuItemBase imple
 
     MenuItem menuItem = getToplevelWidget(child, MenuItem.class);
     this.menuBar.removeItem(menuItem);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setClickEventSender(UiFeatureClick source, UiHandlerEventClick clickEventSender) {
-
-    throw new NlsUnsupportedOperationException();
   }
 
 }

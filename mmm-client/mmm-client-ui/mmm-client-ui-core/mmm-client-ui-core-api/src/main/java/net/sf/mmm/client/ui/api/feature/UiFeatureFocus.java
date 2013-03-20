@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 
 /**
  * This is the interface for the {@link UiFeature features} of a focusable object. It can {@link #isFocused()
- * check} and {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused(boolean) set} its
+ * check} and {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused() set} its
  * focus and allows to {@link #addFocusHandler(UiHandlerEventFocus) add} and
  * {@link #removeFocusHandler(UiHandlerEventFocus) remove} instances of {@link UiHandlerEventFocus}.
  * 

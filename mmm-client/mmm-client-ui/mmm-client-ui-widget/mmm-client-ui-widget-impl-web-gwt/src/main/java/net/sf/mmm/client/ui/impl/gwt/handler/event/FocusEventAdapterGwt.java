@@ -64,7 +64,7 @@ public class FocusEventAdapterGwt implements FocusHandler, BlurHandler {
    * We can NOT prevent GWT from firing an event on
    * {@link com.google.gwt.user.client.ui.FocusWidget#setFocus(boolean)}. So we set this flag if we triggered
    * this programatically in
-   * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused(boolean)}.
+   * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused()}.
    */
   public void setProgrammatic() {
 

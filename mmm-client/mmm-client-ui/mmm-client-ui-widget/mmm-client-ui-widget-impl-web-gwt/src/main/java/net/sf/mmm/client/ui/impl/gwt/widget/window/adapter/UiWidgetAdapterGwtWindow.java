@@ -13,8 +13,7 @@ import com.google.gwt.user.client.ui.DialogBox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtBaseWindowDialogBox<DialogBox> implements
-    UiWidgetAdapterWindow {
+public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtBaseWindowDialogBox implements UiWidgetAdapterWindow {
 
   /**
    * The constructor.

@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
 /**
- * This is the abstract base implementation of a {@link #setFocused(boolean) focusable}
+ * This is the abstract base implementation of a {@link #setFocused() focusable}
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
@@ -65,15 +65,15 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
    * {@inheritDoc}
    */
   @Override
-  public void setFocused(boolean focused) {
+  public void setFocused() {
 
     if (hasWidgetAdapter()) {
       // if (this.focusEventSender != null) {
       // this.focusEventSender.setProgrammatic();
       // }
-      getWidgetAdapter().setFocused(focused);
+      getWidgetAdapter().setFocused();
     } else if (this.focusEventSender != null) {
-      this.focusEventSender.onFocusChange(this, true, !focused);
+      this.focusEventSender.onFocusChange(this, true, false);
     }
   }
 

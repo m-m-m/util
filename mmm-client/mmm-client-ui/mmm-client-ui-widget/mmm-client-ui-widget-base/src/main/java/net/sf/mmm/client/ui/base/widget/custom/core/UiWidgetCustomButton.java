@@ -77,9 +77,9 @@ public abstract class UiWidgetCustomButton extends UiWidgetCustom<Void, UiWidget
    * {@inheritDoc}
    */
   @Override
-  public void setFocused(boolean focused) {
+  public void setFocused() {
 
-    getDelegate().setFocused(focused);
+    getDelegate().setFocused();
   }
 
   /**

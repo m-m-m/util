@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteAccessKey;
 import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
 
 /**
- * This is the interface for a {@link UiWidgetRegular regular widget} that can be {@link #setFocused(boolean)
+ * This is the interface for a {@link UiWidgetRegular regular widget} that can be {@link #setFocused()
  * focused} and allows to {@link #setAccessKey(char) assign an access-key}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

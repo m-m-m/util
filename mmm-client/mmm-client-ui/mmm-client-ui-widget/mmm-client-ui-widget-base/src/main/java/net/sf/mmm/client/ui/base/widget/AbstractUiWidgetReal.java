@@ -266,10 +266,10 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
   @Override
   protected void removeFromParent() {
 
-    this.parent = null;
     if (this.widgetAdapter != null) {
       this.widgetAdapter.removeFromParent();
     }
+    this.parent = null;
   }
 
   /**

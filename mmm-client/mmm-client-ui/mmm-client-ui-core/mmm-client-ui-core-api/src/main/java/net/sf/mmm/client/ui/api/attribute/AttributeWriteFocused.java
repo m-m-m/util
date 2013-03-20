@@ -13,11 +13,9 @@ public abstract interface AttributeWriteFocused extends AttributeReadFocused {
   /**
    * This method sets the {@link #isFocused() focus} of this object.<br/>
    * <b>NOTE:</b><br/>
-   * You should typically only call this method with <code>true</code> as argument. Otherwise the focus is
-   * removed and goes nowhere what is usually bad for accessibility of your application.
-   * 
-   * @param focused <code>true</code> to set the focus into this object, <code>false</code> to remove it.
+   * You can only set the {@link #isFocused() focus}. To actually remove it, you need to set it in a different
+   * widget.
    */
-  void setFocused(boolean focused);
+  void setFocused();
 
 }
