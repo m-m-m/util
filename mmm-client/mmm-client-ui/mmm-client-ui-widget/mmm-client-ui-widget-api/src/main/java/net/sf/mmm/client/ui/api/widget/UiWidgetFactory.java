@@ -2,11 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryDatatype;
+import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryGeneric;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
@@ -18,10 +22,42 @@ import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.Orientation;
 
 /**
- * While {@link UiWidgetFactoryNative} allows to create any {@link UiWidget} via a generic and stable API
- * this interface defines a higher-level factory that offers more comfort. So {@link UiWidgetFactoryNative}
- * is the low-level factory to abstract from the underlying implementation this factory is technology
- * independent and offers more comfort to the end-user.<br/>
+ * This interface is the central API for the end-user to create widgets via factory. The central key to get
+ * started is the {@link UiContext} that gives access to this {@link UiWidgetFactory} via
+ * {@link UiContext#getWidgetFactory()}.<br/>
+ * Besides fabrication there are also custom widgets at a higher level - see
+ * <code>net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom</code> for details.<br/>
+ * While {@link UiWidgetFactoryNative} allows to create any {@link UiWidget} via a generic and stable API this
+ * interface defines a higher-level factory that offers more comfort. So {@link UiWidgetFactoryNative} is the
+ * low-level factory to abstract from the underlying implementation this factory is offers more comfort to the
+ * end-user and is implemented independent from the UI toolkit.<br/>
+ * For generic access you can do:
+ * 
+ * <pre>
+ * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton} saveButton = factory.{@link #create(Class) create}({@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton}.class);
+ * saveButton.{@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton#setLabel(String) setLabel}("save");
+ * saveButton.{@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton#addClickHandler(UiHandlerEventClick) addClickHandler}(clickHandler);
+ * </pre>
+ * 
+ * However, it is a more comfortable to do:
+ * 
+ * <pre>
+ * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton} saveButton = factory.{@link #createButton(String, UiHandlerEventClick) createButton}("save", clickHandler);
+ * </pre>
+ * 
+ * But you maybe also want to have a icon and a tooltip and {@link net.sf.mmm.util.nls.api.NlsMessage
+ * NLS/I18N}. And you discover that you do not only need this code once in your application but all over the
+ * place. Then you will be happy to see that you get all the comfort this way:
+ * 
+ * <pre>
+ * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave} saveHandler = ...;
+ * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton} saveButton = factory.{@link #createButton(UiHandlerPlain) createButton}(saveHandler);
+ * </pre>
+ * 
+ * Now this is just the beginning of this awesome UI framework. You will discover that there are even much
+ * higher level features such as e.g. the <em>editor pattern</em>. So see
+ * <code>net.sf.mmm.client.ui.base.widget.custom.pattern.UiWidgetCustomEditor</code> for more.
+ * 
  * <b>ATTENTION:</b><br/>
  * This is a {@link Api#EXTENDABLE_INTERFACE extendable interface}.
  * 
@@ -29,7 +65,7 @@ import net.sf.mmm.util.lang.api.Orientation;
  * @since 1.0.0
  */
 @ComponentSpecification
-public interface UiWidgetFactoryAdvanced extends AbstractUiWidgetFactoryGeneric, AbstractUiWidgetFactoryDatatype {
+public interface UiWidgetFactory extends AbstractUiWidgetFactoryGeneric, AbstractUiWidgetFactoryDatatype {
 
   /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced";

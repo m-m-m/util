@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget;
 
 
 /**
- * This is the default implementation of {@link net.sf.mmm.client.ui.api.widget.UiConfiguration}.
+ * This is the default implementation of {@link net.sf.mmm.client.ui.api.UiConfiguration}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

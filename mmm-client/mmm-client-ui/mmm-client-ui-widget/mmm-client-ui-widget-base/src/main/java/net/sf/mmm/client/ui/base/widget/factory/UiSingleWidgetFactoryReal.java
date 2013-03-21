@@ -29,7 +29,7 @@ public interface UiSingleWidgetFactoryReal<WIDGET extends UiWidgetReal> extends 
   /**
    * {@inheritDoc}
    * 
-   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative#create(Class)
+   * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class)
    */
   @Override
   WIDGET create(AbstractUiContext context);

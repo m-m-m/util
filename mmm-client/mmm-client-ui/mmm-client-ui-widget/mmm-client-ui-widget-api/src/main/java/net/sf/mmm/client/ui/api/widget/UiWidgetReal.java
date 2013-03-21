@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
+
 /**
  * This is the marker interface for {@link UiWidget}s that can be {@link UiWidgetFactoryNative#create(Class)
  * created} via {@link UiWidgetFactoryNative}.

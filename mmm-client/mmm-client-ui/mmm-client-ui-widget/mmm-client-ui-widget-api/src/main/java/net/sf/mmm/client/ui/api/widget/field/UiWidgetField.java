@@ -27,7 +27,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * dynamically change their ( {@link #isEnabled() editable}) status based on a particular condition (e.g. the
  * current value of another field). A field widget is a composite because it may also be composed out of
  * multiple native input widgets (e.g. to edit a composite {@link net.sf.mmm.util.lang.api.Datatype} - see
- * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)}).
+ * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 

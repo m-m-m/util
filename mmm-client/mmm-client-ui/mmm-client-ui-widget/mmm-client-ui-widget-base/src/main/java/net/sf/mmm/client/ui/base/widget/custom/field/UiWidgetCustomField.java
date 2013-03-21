@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
  * {@link net.sf.mmm.util.lang.api.Datatype} based on existing {@link UiWidgetField field widgets}.<br/>
  * Instead of extending this class directly you should rather extend one of its sub-classes.
  * 
- * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)
+ * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically a custom
  *        {@link net.sf.mmm.util.lang.api.Datatype}.

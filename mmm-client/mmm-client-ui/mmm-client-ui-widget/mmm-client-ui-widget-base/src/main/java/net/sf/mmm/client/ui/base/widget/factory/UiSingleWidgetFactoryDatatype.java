@@ -26,7 +26,7 @@ public interface UiSingleWidgetFactoryDatatype<VALUE> extends UiSingleWidgetFact
   /**
    * {@inheritDoc}
    * 
-   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)
+   * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)
    */
   @Override
   UiWidgetField<VALUE> create(AbstractUiContext context);

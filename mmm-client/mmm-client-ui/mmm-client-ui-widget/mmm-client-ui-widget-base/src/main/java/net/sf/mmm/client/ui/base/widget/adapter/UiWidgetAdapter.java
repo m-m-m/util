@@ -32,7 +32,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
     AttributeWriteEnabled, AttributeWriteStyles, AttributeWriteDisposed, AttributeWriteSize, AttributeWriteAttribute {
 
   /**
-   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
+   * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
    * 
    * @return the native widget.
    */
@@ -86,7 +86,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * 
    * @param relativePath is the relative path (URL suffix) to the image.
    * 
-   * @see net.sf.mmm.client.ui.api.widget.UiConfiguration#getTheme()
+   * @see net.sf.mmm.client.ui.api.UiConfiguration#getTheme()
    * 
    * @return the absolute URL.
    */
@@ -96,7 +96,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * This method creates the label for this widget. Depending on the underlying toolkit implementation the
    * native widget may already contain the label (applies e.g. for <code>FormItem</code> in SmartGWT). In such
    * case this method will wrap it as {@link AbstractUiWidgetLabel}. Otherwise this method should
-   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative#create(Class) create} a new
+   * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class) create} a new
    * {@link AbstractUiWidgetLabel} and return it.
    * 
    * @param context is the {@link UiContext} that may be used to create the label.

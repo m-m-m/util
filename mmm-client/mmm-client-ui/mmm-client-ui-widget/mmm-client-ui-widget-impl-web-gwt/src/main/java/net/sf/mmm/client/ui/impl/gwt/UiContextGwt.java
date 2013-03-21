@@ -44,20 +44,11 @@ public class UiContextGwt extends UiContextImpl {
     }
 
     if (getWidgetFactory() == null) {
-      UiWidgetFactoryNativeGwt widgetFactory = new UiWidgetFactoryNativeGwt();
-      widgetFactory.setContext(this);
-      widgetFactory.initialize();
-      setWidgetFactory(widgetFactory);
+      UiWidgetFactoryNativeGwt factoryGwt = new UiWidgetFactoryNativeGwt();
+      factoryGwt.setContext(this);
+      factoryGwt.initialize();
+      setWidgetFactoryNative(factoryGwt);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetFactoryNativeGwt getWidgetFactory() {
-
-    return (UiWidgetFactoryNativeGwt) super.getWidgetFactory();
   }
 
 }

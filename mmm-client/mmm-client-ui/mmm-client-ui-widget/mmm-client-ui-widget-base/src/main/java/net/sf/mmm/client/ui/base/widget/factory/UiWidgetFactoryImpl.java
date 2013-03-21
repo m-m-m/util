@@ -12,7 +12,7 @@ import javax.inject.Named;
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -35,12 +35,12 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is the implementation of {@link UiWidgetFactoryAdvanced}.
+ * This is the implementation of {@link UiWidgetFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(UiWidgetFactoryAdvanced.CDI_NAME)
+@Named(UiWidgetFactory.CDI_NAME)
 public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
 
   /** @see #getEnumProvider() */

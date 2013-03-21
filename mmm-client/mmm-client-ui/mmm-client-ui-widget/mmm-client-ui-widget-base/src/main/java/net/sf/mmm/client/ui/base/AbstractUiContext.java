@@ -4,24 +4,23 @@ package net.sf.mmm.client.ui.base;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.client.ui.api.UiConfiguration;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
-import net.sf.mmm.client.ui.api.widget.UiConfiguration;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.UiModeChangerImpl;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryImpl;
-import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryDatatypeSimple;
 import net.sf.mmm.util.component.api.ComponentContainer;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
@@ -52,19 +51,16 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   private RoleFactory roleFactory;
 
   /** @see #getWidgetFactory() */
-  private UiWidgetFactoryNative widgetFactory;
-
-  /** @see #getWidgetFactoryDatatype() */
-  private UiWidgetFactoryDatatype widgetFactoryDatatype;
-
-  /** @see #getWidgetFactoryAdvanced() */
-  private UiWidgetFactoryAdvanced widgetFactoryAdvanced;
+  private UiWidgetFactory widgetFactory;
 
   /** @see #getPopupHelper() */
   private UiPopupHelper popupHelper;
 
   /** @see #getContainer() */
   private ComponentContainer container;
+
+  /** @see #setWidgetFactoryNative(UiWidgetFactoryNative) */
+  private UiWidgetFactoryNative widgetFactoryNative;
 
   /**
    * The constructor.
@@ -94,17 +90,15 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
       this.roleFactory = new RoleFactoryImpl();
     }
 
-    if (this.widgetFactoryDatatype == null) {
-      UiWidgetFactoryDatatypeSimple widgetFactoryDatatypeSimple = new UiWidgetFactoryDatatypeSimple();
-      widgetFactoryDatatypeSimple.setContext(this);
-      widgetFactoryDatatypeSimple.initialize();
-      this.widgetFactoryDatatype = widgetFactoryDatatypeSimple;
-    }
-    if (this.widgetFactoryAdvanced == null) {
-      UiWidgetFactoryImpl widgetFactoryAdvancedImpl = new UiWidgetFactoryImpl();
-      widgetFactoryAdvancedImpl.setContext(this);
-      widgetFactoryAdvancedImpl.initialize();
-      this.widgetFactoryAdvanced = widgetFactoryAdvancedImpl;
+    if (this.widgetFactory == null) {
+      if (this.widgetFactoryNative == null) {
+        throw new ResourceMissingException(UiWidgetFactory.class.getSimpleName());
+      }
+      UiWidgetFactoryImpl impl = new UiWidgetFactoryImpl();
+      impl.setContext(this);
+      impl.setWidgetFactoryNative(this.widgetFactoryNative);
+      impl.initialize();
+      this.widgetFactory = impl;
     }
   }
 
@@ -222,56 +216,29 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetFactoryNative getWidgetFactory() {
+  public UiWidgetFactory getWidgetFactory() {
 
     return this.widgetFactory;
   }
 
   /**
-   * @param widgetFactory is the widgetFactory to set
+   * @param widgetFactory is the {@link UiWidgetFactory} to {@link Inject}.
    */
   @Inject
-  public void setWidgetFactory(UiWidgetFactoryNative widgetFactory) {
+  public void setWidgetFactory(UiWidgetFactory widgetFactory) {
 
     getInitializationState().requireNotInitilized();
     this.widgetFactory = widgetFactory;
   }
 
   /**
-   * {@inheritDoc}
+   * @param widgetFactoryNative is the {@link UiWidgetFactoryNative} to set.
    */
-  @Override
-  public UiWidgetFactoryDatatype getWidgetFactoryDatatype() {
+  protected void setWidgetFactoryNative(UiWidgetFactoryNative widgetFactoryNative) {
 
-    return this.widgetFactoryDatatype;
-  }
-
-  /**
-   * @param widgetFactoryDatatype is the widgetFactoryDatatype to set
-   */
-  @Inject
-  public void setWidgetFactoryDatatype(UiWidgetFactoryDatatype widgetFactoryDatatype) {
-
-    this.widgetFactoryDatatype = widgetFactoryDatatype;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetFactoryAdvanced getWidgetFactoryAdvanced() {
-
-    return this.widgetFactoryAdvanced;
-  }
-
-  /**
-   * @param widgetFactoryAdvanced is the widgetFactoryAdvanced to set
-   */
-  @Inject
-  public void setWidgetFactoryAdvanced(UiWidgetFactoryAdvanced widgetFactoryAdvanced) {
-
+    // see doInitialize()
     getInitializationState().requireNotInitilized();
-    this.widgetFactoryAdvanced = widgetFactoryAdvanced;
+    this.widgetFactoryNative = widgetFactoryNative;
   }
 
   /**

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
-import net.sf.mmm.client.ui.api.widget.UiConfiguration;
+import net.sf.mmm.client.ui.api.UiConfiguration;
 
 /**
  * This is the abstract base implementation of {@link UiConfiguration}.

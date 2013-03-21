@@ -68,7 +68,7 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
     if (label != null) {
       labelText = label.getLocalizedMessage();
     }
-    UiWidgetButton button = context.getWidgetFactoryAdvanced().createButton(labelText, handler);
+    UiWidgetButton button = context.getWidgetFactory().createButton(labelText, handler);
     if (tooltip != null) {
       button.setTooltip(tooltip.getLocalizedMessage());
     }

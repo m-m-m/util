@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget;
 
 
 /**
- * This is an implementation of {@link net.sf.mmm.client.ui.api.widget.UiConfiguration} as Java bean.
+ * This is an implementation of {@link net.sf.mmm.client.ui.api.UiConfiguration} as Java bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

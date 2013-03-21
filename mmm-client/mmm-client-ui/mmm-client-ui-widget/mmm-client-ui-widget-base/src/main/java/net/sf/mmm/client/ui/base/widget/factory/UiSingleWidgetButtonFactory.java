@@ -35,12 +35,12 @@ public interface UiSingleWidgetButtonFactory<HANDLER extends UiHandlerPlain> {
   boolean isInstance(UiHandlerPlain handler);
 
   /**
-   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced#createButton(Class, UiHandlerPlain, boolean)
+   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createButton(Class, UiHandlerPlain, boolean)
    * 
    * @param context is the instance of {@link UiContext}.
    * @param handler is the instance of the {@link UiHandlerPlain}.
    * @param preventConfirmationPopup - see
-   *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced#createButton(Class, UiHandlerPlain, boolean)}
+   *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createButton(Class, UiHandlerPlain, boolean)}
    * @return the new {@link UiWidgetButton}.
    */
   UiWidgetButton create(UiContext context, HANDLER handler, boolean preventConfirmationPopup);

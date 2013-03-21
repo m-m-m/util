@@ -2,10 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api;
 
-import net.sf.mmm.client.ui.api.widget.UiConfiguration;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
+import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.util.component.api.ComponentContainer;
 
@@ -40,21 +38,11 @@ public interface UiContext {
   ComponentContainer getContainer();
 
   /**
-   * @see #getWidgetFactoryAdvanced()
+   * This method gets the {@link UiWidgetFactory} that is used to create {@link UiWidget}s.
    * 
-   * @return the {@link UiWidgetFactoryNative}.
+   * @return the {@link UiWidgetFactory}.
    */
-  UiWidgetFactoryNative getWidgetFactory();
-
-  /**
-   * @return the {@link UiWidgetFactoryDatatype}.
-   */
-  UiWidgetFactoryDatatype getWidgetFactoryDatatype();
-
-  /**
-   * @return the {@link UiWidgetFactoryAdvanced}.
-   */
-  UiWidgetFactoryAdvanced getWidgetFactoryAdvanced();
+  UiWidgetFactory getWidgetFactory();
 
   /**
    * @return the instance of {@link UiPopupHelper}.

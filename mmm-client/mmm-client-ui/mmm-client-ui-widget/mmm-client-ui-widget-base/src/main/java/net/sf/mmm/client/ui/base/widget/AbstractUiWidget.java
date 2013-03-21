@@ -3,8 +3,10 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
@@ -26,7 +28,8 @@ import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VALUE> implements UiWidgetWithValue<VALUE> {
+public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VALUE> implements
+    AbstractUiWidgetWithValue<VALUE> {
 
   /** @see #getContext() */
   private final AbstractUiContext context;
@@ -49,6 +52,14 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   public final AbstractUiContext getContext() {
 
     return this.context;
+  }
+
+  /**
+   * @return the {@link UiWidgetFactory} via {@link #getContext()} for convenience.
+   */
+  public final UiWidgetFactory getFactory() {
+
+    return this.context.getWidgetFactory();
   }
 
   /**

@@ -8,9 +8,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactoryReal;

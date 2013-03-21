@@ -5,30 +5,30 @@ package net.sf.mmm.client.ui.base.widget.factory;
 import javax.inject.Inject;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
- * This is the implementation of {@link UiWidgetFactoryAdvanced}.
+ * This is the implementation of {@link UiWidgetFactory}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent implements
-    UiWidgetFactoryAdvanced {
+public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent implements UiWidgetFactory {
 
   /** @see #getContext() */
   private UiContext context;
 
-  /** @see #setWidgetFactoryGeneric(UiWidgetFactoryNative) */
-  private UiWidgetFactoryNative widgetFactoryGeneric;
+  /** @see #setWidgetFactoryNative(UiWidgetFactoryNative) */
+  private UiWidgetFactoryNative widgetFactoryNative;
 
   /** @see #setWidgetFactoryDatatype(UiWidgetFactoryDatatype) */
   private UiWidgetFactoryDatatype widgetFactoryDatatype;
@@ -51,9 +51,9 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
     if (this.context == null) {
       throw new ResourceMissingException(UiContext.class.getSimpleName());
     }
-    if (this.widgetFactoryGeneric == null) {
-      this.widgetFactoryGeneric = this.context.getContainer().get(UiWidgetFactoryNative.class);
-      if (this.widgetFactoryGeneric == null) {
+    if (this.widgetFactoryNative == null) {
+      this.widgetFactoryNative = this.context.getContainer().get(UiWidgetFactoryNative.class);
+      if (this.widgetFactoryNative == null) {
         throw new ResourceMissingException(UiWidgetFactoryNative.class.getSimpleName());
       }
     }
@@ -61,6 +61,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
       this.widgetFactoryDatatype = this.context.getContainer().get(UiWidgetFactoryDatatype.class);
       if (this.widgetFactoryDatatype == null) {
         UiWidgetFactoryDatatypeSimple impl = new UiWidgetFactoryDatatypeSimple();
+        impl.setContext((AbstractUiContext) this.context);
         impl.initialize();
         this.widgetFactoryDatatype = impl;
       }
@@ -96,12 +97,12 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
   }
 
   /**
-   * @param widgetFactoryGeneric is the {@link UiWidgetFactoryNative} to {@link Inject}.
+   * @param widgetFactoryNative is the {@link UiWidgetFactoryNative} to {@link Inject}.
    */
   @Inject
-  public void setWidgetFactoryGeneric(UiWidgetFactoryNative widgetFactoryGeneric) {
+  public void setWidgetFactoryNative(UiWidgetFactoryNative widgetFactoryNative) {
 
-    this.widgetFactoryGeneric = widgetFactoryGeneric;
+    this.widgetFactoryNative = widgetFactoryNative;
   }
 
   /**
@@ -110,7 +111,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
   @Override
   public UiWidgetMainWindow getMainWindow() {
 
-    return this.widgetFactoryGeneric.getMainWindow();
+    return this.widgetFactoryNative.getMainWindow();
   }
 
   /**
@@ -119,7 +120,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
   @Override
   public <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface) {
 
-    return this.widgetFactoryGeneric.create(widgetInterface);
+    return this.widgetFactoryNative.create(widgetInterface);
   }
 
   /**
@@ -128,7 +129,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
   @Override
   public Object getNativeWidget(UiWidgetRegular widget) {
 
-    return this.widgetFactoryGeneric.getNativeWidget(widget);
+    return this.widgetFactoryNative.getNativeWidget(widget);
   }
 
   /**

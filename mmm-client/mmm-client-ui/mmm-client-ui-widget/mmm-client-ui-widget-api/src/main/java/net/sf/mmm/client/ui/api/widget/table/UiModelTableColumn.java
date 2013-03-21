@@ -52,7 +52,7 @@ public interface UiModelTableColumn<ROW, CELL> extends AttributeReadHtmlId, Attr
    * the cell widgets remain in their rows but only the values change. Therefore it is important that you do
    * NOT store additional state information in your widgets (including validators, etc.).
    * 
-   * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype#createForDatatype(Class)
+   * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)
    * 
    * @return the new {@link UiWidgetWithValue widget}.
    */

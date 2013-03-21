@@ -62,7 +62,7 @@ public class UiSingleWidgetButtonFactoryNext extends AbstractUiSingleWidgetButto
       }
     };
     NlsMessage tooltipNext = getBundle().tooltipNext();
-    UiWidgetImage icon = context.getWidgetFactoryAdvanced().createImage(IconConstants.ICON_BUTTON_NEXT,
+    UiWidgetImage icon = context.getWidgetFactory().createImage(IconConstants.ICON_BUTTON_NEXT,
         tooltipNext.getLocalizedMessage());
     return createButton(context, null, clickHandler, tooltipNext, icon);
   }

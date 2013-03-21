@@ -22,7 +22,7 @@ public interface UiWidgetGridRow extends UiWidgetDynamicPanel<UiWidgetGridCell>,
    * method will also attach the
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getFieldLabelWidget() label} before. This is
    * done on purpose for convenience. If you want to prevent this,
-   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative#create(Class) create} a {@link UiWidgetGridCell}
+   * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class) create} a {@link UiWidgetGridCell}
    * directly and {@link UiWidgetGridCell#setChild(UiWidgetRegular) set} the
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField} directly before you
    * {@link #addChild(UiWidgetGridCell) add} it.

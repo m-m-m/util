@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;

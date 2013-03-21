@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.feature.UiFeatureMessages;
 import net.sf.mmm.client.ui.api.feature.UiFeatureVisible;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.util.component.api.Api;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.validation.api.AbstractValidatableObject;

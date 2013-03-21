@@ -32,11 +32,11 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
   public ContactForm(UiContext context) {
 
     super(context);
-    this.widgetFirstName = context.getWidgetFactoryAdvanced().createTextField("First name");
+    this.widgetFirstName = getFactory().createTextField("First name");
     this.widgetFirstName.addValidatorMandatory();
-    this.widgetLastName = context.getWidgetFactoryAdvanced().createTextField("Last name");
+    this.widgetLastName = getFactory().createTextField("Last name");
     this.widgetLastName.addValidatorMandatory();
-    this.widgetBirthday = context.getWidgetFactory().create(UiWidgetDateField.class);
+    this.widgetBirthday = getFactory().create(UiWidgetDateField.class);
     this.widgetBirthday.setFieldLabel("Birthday");
     getDelegate().addChildren(this.widgetFirstName);
     getDelegate().addChildren(this.widgetLastName);

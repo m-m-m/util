@@ -72,7 +72,7 @@ public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonF
     };
     // TODO: label/tooltip ?
     NlsMessage tooltip = getBundle().labelUp();
-    UiWidgetImage icon = context.getWidgetFactoryAdvanced().createImage(IconConstants.ICON_BUTTON_UP,
+    UiWidgetImage icon = context.getWidgetFactory().createImage(IconConstants.ICON_BUTTON_UP,
         tooltip.getLocalizedMessage());
     return createButton(context, null, clickHandler, tooltip, icon);
   }

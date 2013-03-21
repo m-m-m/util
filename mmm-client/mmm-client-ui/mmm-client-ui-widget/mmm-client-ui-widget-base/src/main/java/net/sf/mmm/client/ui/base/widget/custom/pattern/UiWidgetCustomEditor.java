@@ -11,6 +11,7 @@ import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStopEdit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
@@ -104,14 +105,12 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
    */
   protected UiWidgetButtonPanel createButtonPanel() {
 
-    UiWidgetButtonPanel buttonPanel = getContext().getWidgetFactory().create(UiWidgetButtonPanel.class);
+    UiWidgetFactory factory = getContext().getWidgetFactory();
+    UiWidgetButtonPanel buttonPanel = factory.create(UiWidgetButtonPanel.class);
 
-    UiWidgetButton startEditButton = getContext().getWidgetFactoryAdvanced().createButton(
-        UiHandlerPlainStartEdit.class, this.handler);
-    UiWidgetButton saveButton = getContext().getWidgetFactoryAdvanced().createButton(UiHandlerPlainSave.class,
-        this.handler);
-    UiWidgetButton stopEditButton = getContext().getWidgetFactoryAdvanced().createButton(UiHandlerPlainStopEdit.class,
-        this.handler);
+    UiWidgetButton startEditButton = factory.createButton(UiHandlerPlainStartEdit.class, this.handler);
+    UiWidgetButton saveButton = factory.createButton(UiHandlerPlainSave.class, this.handler);
+    UiWidgetButton stopEditButton = factory.createButton(UiHandlerPlainStopEdit.class, this.handler);
 
     buttonPanel.addChild(startEditButton);
     buttonPanel.addChild(saveButton);

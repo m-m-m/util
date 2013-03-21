@@ -1,12 +1,16 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.widget;
+package net.sf.mmm.client.ui.api.widget.factory;
 
+import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 
 /**
  * This is the abstract interface for a factory used to {@link #create(Class) create} {@link UiWidget}s. You
- * will typically use {@link UiWidgetFactoryAdvanced} that extends this interface.
+ * will typically use {@link UiWidgetFactory} that extends this interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

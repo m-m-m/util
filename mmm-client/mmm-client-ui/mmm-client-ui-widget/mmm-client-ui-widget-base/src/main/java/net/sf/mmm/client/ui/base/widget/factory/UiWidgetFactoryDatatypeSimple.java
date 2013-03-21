@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import javax.inject.Named;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
+import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryDatatype;
 
 /**
