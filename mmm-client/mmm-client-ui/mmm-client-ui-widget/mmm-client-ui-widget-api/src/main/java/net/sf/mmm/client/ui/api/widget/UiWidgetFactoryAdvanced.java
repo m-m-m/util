@@ -12,19 +12,27 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
+import net.sf.mmm.util.component.api.Api;
+import net.sf.mmm.util.component.base.ComponentSpecification;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.Orientation;
 
 /**
- * While {@link UiWidgetFactory} allows to create any {@link UiWidget} via a generic and stable API this
- * interface defines a higher-level factory that offers more comfort. So {@link UiWidgetFactory} is the
- * low-level factory to abstract from the underlying implementation this factory is technology independent and
- * offers more comfort to the end-user.
+ * While {@link UiWidgetFactoryNative} allows to create any {@link UiWidget} via a generic and stable API
+ * this interface defines a higher-level factory that offers more comfort. So {@link UiWidgetFactoryNative}
+ * is the low-level factory to abstract from the underlying implementation this factory is technology
+ * independent and offers more comfort to the end-user.<br/>
+ * <b>ATTENTION:</b><br/>
+ * This is a {@link Api#EXTENDABLE_INTERFACE extendable interface}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetFactoryAdvanced {
+@ComponentSpecification
+public interface UiWidgetFactoryAdvanced extends AbstractUiWidgetFactoryGeneric, AbstractUiWidgetFactoryDatatype {
+
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
+  String CDI_NAME = "net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced";
 
   /**
    * This method creates a new {@link UiWidgetButton}.
@@ -77,8 +85,8 @@ public interface UiWidgetFactoryAdvanced {
    *        button for.
    * @param handler is the {@link UiHandlerPlain} instance.
    * @param preventConfirmationPopup - some {@link UiHandlerPlain plain handlers} represent operations like
-   *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete(Object)} that should be
-   *        confirmed by the user to prevent accidental invocations. In such case the returned
+   *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete(Object)} that should
+   *        be confirmed by the user to prevent accidental invocations. In such case the returned
    *        {@link UiWidgetButton} will by itself open a confirmation popup allowing to cancel to operation.
    *        This will make your life easier. However, if you want to customize the popup with contextual
    *        information (e.g. "Are you sure you want to delete the 23 selected documents?") you can implement

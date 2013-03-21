@@ -17,7 +17,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface HyphenatorBuilder {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.util.text.api.HyphenatorBuilder";
 
   /**

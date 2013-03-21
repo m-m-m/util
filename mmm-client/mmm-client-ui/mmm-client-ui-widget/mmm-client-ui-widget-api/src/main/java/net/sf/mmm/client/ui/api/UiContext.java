@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api;
 
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
@@ -42,9 +42,9 @@ public interface UiContext {
   /**
    * @see #getWidgetFactoryAdvanced()
    * 
-   * @return the {@link UiWidgetFactory}.
+   * @return the {@link UiWidgetFactoryNative}.
    */
-  UiWidgetFactory getWidgetFactory();
+  UiWidgetFactoryNative getWidgetFactory();
 
   /**
    * @return the {@link UiWidgetFactoryDatatype}.

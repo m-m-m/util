@@ -21,7 +21,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 @ComponentSpecification
 public interface FileUtil {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.util.file.api.FileUtil";
 
   /** The path segment indicating the current folder itself. */

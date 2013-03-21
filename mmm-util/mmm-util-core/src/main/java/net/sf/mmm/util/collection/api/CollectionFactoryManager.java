@@ -17,7 +17,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @SuppressWarnings("rawtypes")
 public interface CollectionFactoryManager {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.util.collection.api.CollectionFactoryManager";
 
   /**

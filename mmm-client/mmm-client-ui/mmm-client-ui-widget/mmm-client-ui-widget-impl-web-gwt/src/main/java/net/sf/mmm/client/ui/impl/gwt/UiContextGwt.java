@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt;
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.base.UiContextImpl;
-import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryNativeGwt;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.api.UiContext} for GWT.
@@ -44,7 +44,7 @@ public class UiContextGwt extends UiContextImpl {
     }
 
     if (getWidgetFactory() == null) {
-      UiWidgetFactoryGwt widgetFactory = new UiWidgetFactoryGwt();
+      UiWidgetFactoryNativeGwt widgetFactory = new UiWidgetFactoryNativeGwt();
       widgetFactory.setContext(this);
       widgetFactory.initialize();
       setWidgetFactory(widgetFactory);
@@ -55,9 +55,9 @@ public class UiContextGwt extends UiContextImpl {
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetFactoryGwt getWidgetFactory() {
+  public UiWidgetFactoryNativeGwt getWidgetFactory() {
 
-    return (UiWidgetFactoryGwt) super.getWidgetFactory();
+    return (UiWidgetFactoryNativeGwt) super.getWidgetFactory();
   }
 
 }

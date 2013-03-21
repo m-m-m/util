@@ -12,7 +12,7 @@ package net.sf.mmm.service.base;
  */
 public interface RemoteInvocationGenericService {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.service.base.RemoteInvocationGenericService";
 
   /**

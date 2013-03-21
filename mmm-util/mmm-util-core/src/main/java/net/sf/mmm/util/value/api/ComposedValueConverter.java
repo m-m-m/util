@@ -113,7 +113,7 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 @ComponentSpecification
 public interface ComposedValueConverter extends ValueConverter<Object, Object>, GenericValueConverter<Object> {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.util.value.api.ComposedValueConverter";
 
 }

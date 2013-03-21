@@ -26,7 +26,7 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryNativeGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
@@ -88,7 +88,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     Log.debug("Loaded");
     UiContextGwt context = new UiContextGwt();
     context.initialize();
-    UiWidgetFactoryGwt factory = context.getWidgetFactory();
+    UiWidgetFactoryNativeGwt factory = context.getWidgetFactory();
     UiWidgetFactoryAdvanced factoryAdvanced = context.getWidgetFactoryAdvanced();
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();

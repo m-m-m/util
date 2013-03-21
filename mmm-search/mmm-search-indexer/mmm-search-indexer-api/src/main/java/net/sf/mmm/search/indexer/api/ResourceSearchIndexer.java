@@ -16,7 +16,7 @@ import net.sf.mmm.util.resource.api.DataResource;
 @ComponentSpecification
 public interface ResourceSearchIndexer {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.search.indexer.api.ResourceSearchIndexer";
 
   /**

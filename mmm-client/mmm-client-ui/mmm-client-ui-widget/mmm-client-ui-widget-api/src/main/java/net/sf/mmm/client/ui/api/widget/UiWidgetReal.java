@@ -3,11 +3,11 @@
 package net.sf.mmm.client.ui.api.widget;
 
 /**
- * This is the marker interface for {@link UiWidget}s that can be {@link UiWidgetFactory#create(Class)
- * created} via {@link UiWidgetFactory}.
+ * This is the marker interface for {@link UiWidget}s that can be {@link UiWidgetFactoryNative#create(Class)
+ * created} via {@link UiWidgetFactoryNative}.
  * 
  * @see net.sf.mmm.client.ui.api.UiContext#getWidgetFactory()
- * @see UiWidgetFactory#create(Class)
+ * @see UiWidgetFactoryNative#create(Class)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

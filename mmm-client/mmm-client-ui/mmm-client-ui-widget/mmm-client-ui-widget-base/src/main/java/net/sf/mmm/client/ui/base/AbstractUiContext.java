@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
 import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
 import net.sf.mmm.client.ui.api.widget.UiConfiguration;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
@@ -19,7 +19,7 @@ import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.UiModeChangerImpl;
-import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryAdvancedImpl;
+import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryDatatypeSimple;
 import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -52,7 +52,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   private RoleFactory roleFactory;
 
   /** @see #getWidgetFactory() */
-  private UiWidgetFactory widgetFactory;
+  private UiWidgetFactoryNative widgetFactory;
 
   /** @see #getWidgetFactoryDatatype() */
   private UiWidgetFactoryDatatype widgetFactoryDatatype;
@@ -101,7 +101,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
       this.widgetFactoryDatatype = widgetFactoryDatatypeSimple;
     }
     if (this.widgetFactoryAdvanced == null) {
-      UiWidgetFactoryAdvancedImpl widgetFactoryAdvancedImpl = new UiWidgetFactoryAdvancedImpl();
+      UiWidgetFactoryImpl widgetFactoryAdvancedImpl = new UiWidgetFactoryImpl();
       widgetFactoryAdvancedImpl.setContext(this);
       widgetFactoryAdvancedImpl.initialize();
       this.widgetFactoryAdvanced = widgetFactoryAdvancedImpl;
@@ -222,7 +222,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetFactory getWidgetFactory() {
+  public UiWidgetFactoryNative getWidgetFactory() {
 
     return this.widgetFactory;
   }
@@ -231,7 +231,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * @param widgetFactory is the widgetFactory to set
    */
   @Inject
-  public void setWidgetFactory(UiWidgetFactory widgetFactory) {
+  public void setWidgetFactory(UiWidgetFactoryNative widgetFactory) {
 
     getInitializationState().requireNotInitilized();
     this.widgetFactory = widgetFactory;

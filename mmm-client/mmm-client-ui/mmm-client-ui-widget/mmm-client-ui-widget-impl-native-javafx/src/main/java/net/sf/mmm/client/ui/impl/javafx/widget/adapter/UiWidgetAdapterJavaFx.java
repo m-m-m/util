@@ -30,7 +30,7 @@ public abstract class UiWidgetAdapterJavaFx<WIDGET> extends AbstractUiWidgetAdap
 
   /**
    * This method gets the
-   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
+   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
    * native widget} of the given <code>widget</code>.
    * 
    * @param <W> is the generic type of <code>widgetType</code>.

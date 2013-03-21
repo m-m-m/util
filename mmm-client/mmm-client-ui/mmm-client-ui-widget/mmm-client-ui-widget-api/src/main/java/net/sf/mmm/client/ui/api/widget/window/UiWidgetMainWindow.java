@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
  * <em>main window</em>. Each client application has an instance of this main window widget. In case of a
  * web-application this represents the browser window (or more precisely the tab-instance).
  * 
- * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactory#getMainWindow()
+ * @see net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative#getMainWindow()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

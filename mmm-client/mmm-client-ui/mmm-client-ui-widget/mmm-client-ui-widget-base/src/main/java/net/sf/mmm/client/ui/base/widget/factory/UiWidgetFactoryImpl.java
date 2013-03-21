@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
-import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryAdvanced;
@@ -25,7 +24,6 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalSplitPanel;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.Orientation;
@@ -42,11 +40,8 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named
-public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent implements UiWidgetFactoryAdvanced {
-
-  /** @see #getContext() */
-  private UiContext context;
+@Named(UiWidgetFactoryAdvanced.CDI_NAME)
+public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
 
   /** @see #getEnumProvider() */
   private EnumProvider enumProvider;
@@ -60,7 +55,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   /**
    * The constructor.
    */
-  public UiWidgetFactoryAdvancedImpl() {
+  public UiWidgetFactoryImpl() {
 
     super();
     this.handlerType2ButtonFactoryMap = new HashMap<Class<? extends UiHandlerPlain>, UiSingleWidgetButtonFactory<?>>();
@@ -107,14 +102,6 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   }
 
   /**
-   * @return the {@link UiContext} instance.
-   */
-  protected UiContext getContext() {
-
-    return this.context;
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
@@ -127,16 +114,6 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
       this.enumProvider = impl;
     }
     this.clientUiBundle = NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class);
-  }
-
-  /**
-   * @param context is the {@link UiContext} to {@link Inject}.
-   */
-  @Inject
-  public void setContext(UiContext context) {
-
-    getInitializationState().requireNotInitilized();
-    this.context = context;
   }
 
   /**
@@ -171,7 +148,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public UiWidgetButton createButton(String label, UiHandlerEventClick clickHandler) {
 
-    UiWidgetButton widget = this.context.getWidgetFactory().create(UiWidgetButton.class);
+    UiWidgetButton widget = getContext().getWidgetFactory().create(UiWidgetButton.class);
     widget.setLabel(label);
     widget.addClickHandler(clickHandler);
     return widget;
@@ -227,7 +204,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
       }
       throw new IllegalCaseException(illegalCase);
     }
-    return ((UiSingleWidgetButtonFactory<HANDLER>) buttonFactory).create(this.context, handler,
+    return ((UiSingleWidgetButtonFactory<HANDLER>) buttonFactory).create(getContext(), handler,
         preventConfirmationPopup);
   }
 
@@ -237,7 +214,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public UiWidgetImage createImage(String url, String altText) {
 
-    UiWidgetImage widget = this.context.getWidgetFactory().create(UiWidgetImage.class);
+    UiWidgetImage widget = getContext().getWidgetFactory().create(UiWidgetImage.class);
     widget.setUrl(url);
     widget.setAltText(altText);
     return widget;
@@ -249,7 +226,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public UiWidgetLabel createLabel(String label) {
 
-    UiWidgetLabel widget = this.context.getWidgetFactory().create(UiWidgetLabel.class);
+    UiWidgetLabel widget = getContext().getWidgetFactory().create(UiWidgetLabel.class);
     widget.setLabel(label);
     return widget;
   }
@@ -260,7 +237,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public UiWidgetTextField createTextField(String label) {
 
-    UiWidgetTextField widget = this.context.getWidgetFactory().create(UiWidgetTextField.class);
+    UiWidgetTextField widget = getContext().getWidgetFactory().create(UiWidgetTextField.class);
     widget.setFieldLabel(label);
     return widget;
   }
@@ -271,7 +248,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public UiWidgetIntegerField createIntegerField(String label) {
 
-    UiWidgetIntegerField widget = this.context.getWidgetFactory().create(UiWidgetIntegerField.class);
+    UiWidgetIntegerField widget = getContext().getWidgetFactory().create(UiWidgetIntegerField.class);
     widget.setFieldLabel(label);
     return widget;
   }
@@ -282,7 +259,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public UiWidgetLongField createLongField(String label) {
 
-    UiWidgetLongField widget = this.context.getWidgetFactory().create(UiWidgetLongField.class);
+    UiWidgetLongField widget = getContext().getWidgetFactory().create(UiWidgetLongField.class);
     widget.setFieldLabel(label);
     return widget;
   }
@@ -293,7 +270,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
   @Override
   public <VALUE> UiWidgetComboBox<VALUE> createComboBox(String label, final EnumDefinition<VALUE, ?> enumDefinition) {
 
-    final UiWidgetComboBox<VALUE> widget = this.context.getWidgetFactory().create(UiWidgetComboBox.class);
+    final UiWidgetComboBox<VALUE> widget = getContext().getWidgetFactory().create(UiWidgetComboBox.class);
     widget.setFieldLabel(label);
     widget.setFormatter(enumDefinition.getFormatter());
     Runnable callback = new Runnable() {
@@ -301,7 +278,7 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
       @Override
       public void run() {
 
-        List<VALUE> enumValues = UiWidgetFactoryAdvancedImpl.this.enumProvider.getEnumValues(enumDefinition);
+        List<VALUE> enumValues = UiWidgetFactoryImpl.this.enumProvider.getEnumValues(enumDefinition);
         widget.setOptions(enumValues);
       }
     };
@@ -324,10 +301,10 @@ public class UiWidgetFactoryAdvancedImpl extends AbstractLoggableComponent imple
     UiWidgetSplitPanel splitPanel;
     switch (orientation) {
       case HORIZONTAL:
-        splitPanel = this.context.getWidgetFactory().create(UiWidgetHorizontalSplitPanel.class);
+        splitPanel = getContext().getWidgetFactory().create(UiWidgetHorizontalSplitPanel.class);
         break;
       case VERTICAL:
-        splitPanel = this.context.getWidgetFactory().create(UiWidgetVerticalSplitPanel.class);
+        splitPanel = getContext().getWidgetFactory().create(UiWidgetVerticalSplitPanel.class);
         break;
       default :
         throw new IllegalCaseException(Orientation.class, orientation);

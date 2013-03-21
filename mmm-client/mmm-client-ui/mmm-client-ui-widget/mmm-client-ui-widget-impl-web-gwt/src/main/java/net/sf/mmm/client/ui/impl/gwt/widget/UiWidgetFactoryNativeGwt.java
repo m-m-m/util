@@ -2,11 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget;
 
+import javax.inject.Named;
+
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomButtonPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
@@ -45,7 +48,9 @@ import com.google.gwt.user.client.ui.UIObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory {
+// wont help but for consistency... maybe GIN will support it once...
+@Named(UiWidgetFactoryNative.CDI_NAME)
+public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
 
   /** @see #getMainWindow() */
   private UiWidgetMainWindow mainWindow;
@@ -53,7 +58,7 @@ public class UiWidgetFactoryGwt extends AbstractUiWidgetFactory {
   /**
    * The constructor.
    */
-  public UiWidgetFactoryGwt() {
+  public UiWidgetFactoryNativeGwt() {
 
     super();
     // core

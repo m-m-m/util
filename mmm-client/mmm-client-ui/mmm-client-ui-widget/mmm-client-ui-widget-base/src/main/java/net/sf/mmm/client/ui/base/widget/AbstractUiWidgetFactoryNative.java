@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
@@ -29,7 +29,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetFactory extends AbstractComponent implements UiWidgetFactory {
+public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent implements UiWidgetFactoryNative {
 
   /** @see #create(Class) */
   private final Map<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>> interface2subFactoryMap;
@@ -40,7 +40,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractComponent implemen
   /**
    * The constructor.
    */
-  public AbstractUiWidgetFactory() {
+  public AbstractUiWidgetFactoryNative() {
 
     super();
     this.interface2subFactoryMap = new HashMap<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>>();

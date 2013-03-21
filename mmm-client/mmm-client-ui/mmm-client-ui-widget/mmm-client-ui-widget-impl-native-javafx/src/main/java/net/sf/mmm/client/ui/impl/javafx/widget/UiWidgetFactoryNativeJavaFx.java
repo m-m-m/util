@@ -3,23 +3,28 @@
 package net.sf.mmm.client.ui.impl.javafx.widget;
 
 import javafx.scene.Node;
+
+import javax.inject.Named;
+
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactory;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.javafx.widget.core.UiWidgetButtonJavaFx;
 import net.sf.mmm.client.ui.impl.javafx.widget.core.UiWidgetImageJavaFx;
 import net.sf.mmm.client.ui.impl.javafx.widget.window.UiWidgetMainWindowJavaFx;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.client.ui.api.UiContext} for GWT widgets.
+ * This is the implementation of the {@link UiWidgetFactoryNative} for native JavaFx widgets.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetFactoryJavaFx extends AbstractUiWidgetFactory {
+@Named(UiWidgetFactoryNative.CDI_NAME)
+public class UiWidgetFactoryNativeJavaFx extends AbstractUiWidgetFactoryNative {
 
   /** @see #getMainWindow() */
   private UiWidgetMainWindow mainWindow;
@@ -27,7 +32,7 @@ public class UiWidgetFactoryJavaFx extends AbstractUiWidgetFactory {
   /**
    * The constructor.
    */
-  public UiWidgetFactoryJavaFx() {
+  public UiWidgetFactoryNativeJavaFx() {
 
     super();
     // core

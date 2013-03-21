@@ -3,20 +3,15 @@
 package net.sf.mmm.client.ui.api.widget;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
- * This is the interface for a factory to {@link #createForDatatype(Class) create widgets for particular
- * datatypes}. You will typically use {@link net.sf.mmm.client.ui.api.UiContext} that extends this interface.
+ * This is the abstract interface for a factory to {@link #createForDatatype(Class) create widgets for
+ * particular datatypes}. You will typically use {@link UiWidgetFactoryAdvanced} that extends this interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ComponentSpecification
-public interface UiWidgetFactoryDatatype extends AbstractUiWidgetFactoryDatatype {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.client.ui.api.widget.UiWidgetFactoryDatatype";
+public abstract interface AbstractUiWidgetFactoryDatatype {
 
   /**
    * This method creates a new instance of the {@link UiWidgetField field widget} to view and edit the given
@@ -37,7 +32,6 @@ public interface UiWidgetFactoryDatatype extends AbstractUiWidgetFactoryDatatype
    * @return the new {@link UiWidgetField field widget} to display and edit the specified
    *         <code>datatype</code>.
    */
-  @Override
   <VALUE> UiWidgetField<VALUE> createForDatatype(Class<VALUE> datatype);
 
 }

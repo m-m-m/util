@@ -19,7 +19,7 @@ import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 @Named(HighlightFormatter.CDI_NAME)
 public class HighlightFormatter extends SimpleHTMLFormatter {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   public static final String CDI_NAME = "org.apache.lucene.search.highlight.Formatter";
 
   /**

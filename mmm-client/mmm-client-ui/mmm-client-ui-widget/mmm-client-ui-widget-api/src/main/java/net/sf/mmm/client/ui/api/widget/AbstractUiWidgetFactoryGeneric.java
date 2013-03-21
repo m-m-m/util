@@ -5,12 +5,13 @@ package net.sf.mmm.client.ui.api.widget;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 
 /**
- * This is the interface for a factory used to {@link #create(Class) create} {@link UiWidget}s.
+ * This is the abstract interface for a factory used to {@link #create(Class) create} {@link UiWidget}s. You
+ * will typically use {@link UiWidgetFactoryAdvanced} that extends this interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetFactory {
+public abstract interface AbstractUiWidgetFactoryGeneric {
 
   /**
    * This method gets the application {@link UiWidgetMainWindow main window}. In case of a web application

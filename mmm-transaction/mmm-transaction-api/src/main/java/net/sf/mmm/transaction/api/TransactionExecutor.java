@@ -19,7 +19,7 @@ import net.sf.mmm.util.event.api.EventSource;
 @ComponentSpecification
 public interface TransactionExecutor extends EventSource<TransactionEvent, TransactionEventListener> {
 
-  /** The {@link javax.inject.Named name} of this component. */
+  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.transaction.api.TransactionExecutor";
 
   /**
