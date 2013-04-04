@@ -3,11 +3,12 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
-import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
@@ -19,8 +20,8 @@ import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this
  * class there are two inheritance hierarchies {@link AbstractUiWidgetReal} and
  * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom}. To avoid problems with the lack of
- * multi-inheritance in Java, we already implement {@link UiWidgetWithValue} by extending
- * {@link AbstractUiFeatureValue}. For subclasses that have no value {@link Void} is used for
+ * multi-inheritance in Java, we already implement {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue}
+ * by extending {@link AbstractUiFeatureValue}. For subclasses that have no value {@link Void} is used for
  * {@literal <VALUE>}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
@@ -165,6 +166,51 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
       return (VALUE) transferObjectUtil.copy(to);
     }
     return super.createCopyOfValue(value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPercent(double heightInPercent) {
+
+    setHeight(Length.valueOfPercent(heightInPercent));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeightInPixel(double heightInPixel) {
+
+    setHeight(Length.valueOfPixel(heightInPixel));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidthInPercent(double widthInPercent) {
+
+    setWidth(Length.valueOfPercent(widthInPercent));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidthInPixel(double widthInPixel) {
+
+    setWidth(Length.valueOfPixel(widthInPixel));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSize(double widthAmount, double heightAmount, SizeUnit unit) {
+
+    setSize(unit.newLength(widthAmount), unit.newLength(heightAmount));
   }
 
 }

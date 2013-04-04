@@ -10,6 +10,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadLabel;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -97,28 +98,6 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
     this.uiWidget = uiWidget;
   }
 
-  //
-  // /**
-  // * @return the {@link UiConfiguration}
-  // */
-  // @Override
-  // public final UiConfiguration getConfiguration() {
-  //
-  // return this.configuration;
-  // }
-  //
-  // /**
-  // * @param configuration is the value for {@link #getConfiguration()}.
-  // */
-  // @Override
-  // public final void setConfiguration(UiConfiguration configuration) {
-  //
-  // if (this.configuration != null) {
-  // throw new AlreadyInitializedException();
-  // }
-  // this.configuration = configuration;
-  // }
-
   /**
    * {@inheritDoc}
    */
@@ -144,6 +123,16 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   public void setMode(boolean editMode) {
 
     // do nothing by default
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSize(Length width, Length height) {
+
+    setWidth(width);
+    setHeight(height);
   }
 
   /**

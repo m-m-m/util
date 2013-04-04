@@ -26,6 +26,19 @@ public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtBaseWindowDialogB
    * {@inheritDoc}
    */
   @Override
+  public void setVisible(boolean visible) {
+
+    if (visible) {
+      getToplevelWidget().show();
+    } else {
+      getToplevelWidget().hide();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected DialogBox createToplevelWidget() {
 
     DialogBox dialogBox = new DialogBox(false, true);

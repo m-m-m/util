@@ -42,12 +42,4 @@ public class UiWidgetMainWindowGwt extends AbstractUiWidgetMainWindow<UiWidgetAd
     return false;
   }
 
-  /**
-   * This method initializes this main window.
-   */
-  public void initialize() {
-
-    getWidgetAdapter();
-  }
-
 }

@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget.custom;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -327,7 +328,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final String getWidth() {
+  public final Length getWidth() {
 
     return this.delegate.getWidth();
   }
@@ -336,7 +337,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final void setWidth(String width) {
+  public final void setWidth(Length width) {
 
     this.delegate.setWidth(width);
   }
@@ -345,7 +346,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final String getHeight() {
+  public final Length getHeight() {
 
     return this.delegate.getHeight();
   }
@@ -354,7 +355,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final void setHeight(String height) {
+  public final void setHeight(Length height) {
 
     this.delegate.setHeight(height);
   }
@@ -363,36 +364,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final void setSize(String width, String height) {
+  public final void setSize(Length width, Length height) {
 
     this.delegate.setSize(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setSizeInPixel(int width, int height) {
-
-    this.delegate.setSizeInPixel(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setWidthInPixel(int width) {
-
-    this.delegate.setWidthInPixel(width);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setHeightInPixel(int height) {
-
-    this.delegate.setHeightInPixel(height);
   }
 
   /**

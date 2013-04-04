@@ -2,8 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
+import net.sf.mmm.client.ui.api.common.Length;
+
 /**
- * This interface gives read access to the size of an object.
+ * This interface gives read access to the size (consisting of {@link #getWidth() width} and
+ * {@link #getHeight() height}) of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -11,17 +14,17 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeReadSize {
 
   /**
-   * This method gets the width of this object (e.g. "0.9em", "10px", or "90%").
+   * This method gets the width of this object.
    * 
-   * @return the width or <code>null</code> if undefined (NOT set).
+   * @return the width. Will be {@link Length#ZERO} if undefined (NOT set).
    */
-  String getWidth();
+  Length getWidth();
 
   /**
-   * This method gets the height of this object (e.g. "0.9em", "10px", or "90%").
+   * This method gets the height of this object.
    * 
-   * @return the height or <code>null</code> if undefined (NOT set).
+   * @return the height. Will be {@link Length#ZERO} if undefined (NOT set).
    */
-  String getHeight();
+  Length getHeight();
 
 }

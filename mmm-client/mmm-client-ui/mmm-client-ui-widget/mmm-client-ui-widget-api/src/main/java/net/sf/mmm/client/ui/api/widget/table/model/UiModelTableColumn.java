@@ -1,18 +1,25 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.widget.table;
+package net.sf.mmm.client.ui.api.widget.table.model;
 
 import java.util.Comparator;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeReadEditable;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadHtmlId;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadReorderable;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadStringTitle;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadTooltip;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
- * This is the interface for a descriptor that specifies a column of a table-widget such as
- * {@link UiWidgetListTable}.
+ * This is the interface for a descriptor that specifies a {@link AbstractUiModelTable#getColumns() column} of
+ * a table-widget such as {@link net.sf.mmm.client.ui.api.widget.table.UiWidgetListTable}.<br/>
+ * <b>ATTENTION:</b><br/>
+ * This is an {@link net.sf.mmm.util.component.api.Api#EXTENDABLE_INTERFACE extendable interface}. Use
+ * {@link AbstractUiModelTableColumn} to implement.
  * 
  * @param <ROW> is the generic type of the element representing a row of the grid. It should be a java-bean
  *        oriented object. Immutable objects (that have no setters) can also be used but only for read-only
@@ -22,7 +29,8 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiModelTableColumn<ROW, CELL> extends AttributeReadHtmlId, AttributeReadStringTitle, AttributeReadEditable {
+public interface UiModelTableColumn<ROW, CELL> extends AttributeReadHtmlId, AttributeReadStringTitle,
+    AttributeReadTooltip, AttributeReadEditable, AttributeReadVisible, AttributeReadResizable, AttributeReadReorderable {
 
   /**
    * This method gets the {@link PropertyAccessor} used to {@link PropertyAccessor#getValue(Object) get} and
@@ -57,17 +65,5 @@ public interface UiModelTableColumn<ROW, CELL> extends AttributeReadHtmlId, Attr
    * @return the new {@link UiWidgetWithValue widget}.
    */
   UiWidgetWithValue<CELL> createCellWidget();
-
-  /**
-   * This method creates a new, empty row. This method is only used if the table-widget is editable and
-   * supports adding new rows.<br/>
-   * <b>NOTE:</b><br/>
-   * It is then assumed that &lt;ROW&gt; is a java-bean oriented object that can be modified via the
-   * {@link #getPropertyAccessor() property accessor}. In other words inline table-editing of immutable
-   * objects that require all attributes (cell-values) at construction are (currently) NOT supported.
-   * 
-   * @return the new row instance.
-   */
-  ROW createNewRow();
 
 }

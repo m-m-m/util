@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.javafx.widget.core.adapter;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterImage;
 import net.sf.mmm.client.ui.impl.javafx.widget.adapter.UiWidgetAdapterJavaFxNode;
 
@@ -65,46 +65,36 @@ public class UiWidgetAdapterJavaFxImage extends UiWidgetAdapterJavaFxNode<ImageV
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(String width) {
+  public void setWidth(Length width) {
 
-    getActiveWidget().setScaleX(convertSizeUnit(width));
+    getActiveWidget().setScaleX(convertLength(width));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(String height) {
+  public void setHeight(Length height) {
 
-    getActiveWidget().setScaleY(convertSizeUnit(height));
+    getActiveWidget().setScaleY(convertLength(height));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setSize(String width, String height) {
+  public Length getWidth() {
 
-    setWidth(width);
-    setHeight(height);
+    return Length.valueOfPixel(getActiveWidget().getScaleX());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String getWidth() {
+  public Length getHeight() {
 
-    return getActiveWidget().getScaleX() + SizeUnit.PIXEL.getValue();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getHeight() {
-
-    return getActiveWidget().getScaleY() + SizeUnit.PIXEL.getValue();
+    return Length.valueOfPixel(getActiveWidget().getScaleY());
   }
 
 }

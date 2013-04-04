@@ -23,7 +23,7 @@ public abstract interface UiWidgetMainWindow extends UiWidgetBaseWindow {
   UiWidgetMenuBar getMenuBar();
 
   /**
-   * @return <code>true</code> if the {@link #setPosition(int, int) position} of {@link UiWidgetBaseWindow
+   * @return <code>true</code> if the {@link #setPosition(double, double) position} of {@link UiWidgetBaseWindow
    *         windows} is absolute (on {@link net.sf.mmm.client.ui.api.UiDisplay}), <code>false</code> if
    *         relative to this main window (MDI mode).
    */

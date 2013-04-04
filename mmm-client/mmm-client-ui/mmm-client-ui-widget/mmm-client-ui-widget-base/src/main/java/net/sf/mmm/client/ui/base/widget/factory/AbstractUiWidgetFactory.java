@@ -25,7 +25,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent implements UiWidgetFactory {
 
   /** @see #getContext() */
-  private UiContext context;
+  private AbstractUiContext context;
 
   /** @see #setWidgetFactoryNative(UiWidgetFactoryNative) */
   private UiWidgetFactoryNative widgetFactoryNative;
@@ -52,16 +52,16 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
       throw new ResourceMissingException(UiContext.class.getSimpleName());
     }
     if (this.widgetFactoryNative == null) {
-      this.widgetFactoryNative = this.context.getContainer().get(UiWidgetFactoryNative.class);
+      this.widgetFactoryNative = this.context.getWidgetFactoryNative();
       if (this.widgetFactoryNative == null) {
         throw new ResourceMissingException(UiWidgetFactoryNative.class.getSimpleName());
       }
     }
     if (this.widgetFactoryDatatype == null) {
-      this.widgetFactoryDatatype = this.context.getContainer().get(UiWidgetFactoryDatatype.class);
+      this.widgetFactoryDatatype = null; // this.context.getContainer().get(UiWidgetFactoryDatatype.class);
       if (this.widgetFactoryDatatype == null) {
         UiWidgetFactoryDatatypeSimple impl = new UiWidgetFactoryDatatypeSimple();
-        impl.setContext((AbstractUiContext) this.context);
+        impl.setContext(this.context);
         impl.initialize();
         this.widgetFactoryDatatype = impl;
       }
@@ -80,7 +80,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
    * @param context is the {@link UiContext} to {@link Inject}.
    */
   @Inject
-  public void setContext(UiContext context) {
+  public void setContext(AbstractUiContext context) {
 
     getInitializationState().requireNotInitilized();
     this.context = context;

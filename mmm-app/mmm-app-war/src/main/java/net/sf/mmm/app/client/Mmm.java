@@ -5,6 +5,7 @@ package net.sf.mmm.app.client;
 import java.util.Locale;
 
 import net.sf.mmm.app.shared.GreetingService;
+import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
@@ -25,6 +26,7 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
+import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
@@ -87,7 +89,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     Log.debug("Loaded");
     UiContextGwt context = new UiContextGwt();
     context.initialize();
-    UiWidgetFactory factory = context.getWidgetFactory();
+    final UiWidgetFactory factory = context.getWidgetFactory();
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();
@@ -134,6 +136,24 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     final UiWidgetTab tab2 = tabPanel.addChild(verticalPanel2, "Tab2");
     label2.setLabel("label2");
     verticalPanel2.addChild(label2);
+    UiWidgetButton button1 = factory.create(UiWidgetButton.class);
+    button1.setLabel("Button1");
+    verticalPanel2.addChild(button1);
+    button1.addClickHandler(new UiHandlerEventClick() {
+
+      @Override
+      public void onClick(UiFeatureClick source, boolean programmatic) {
+
+        UiWidgetPopup popup = factory.create(UiWidgetPopup.class);
+        popup.setTitle("Popup Test");
+        UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
+        UiWidgetLabel label3 = factory.create(UiWidgetLabel.class);
+        label3.setLabel("Hello World!");
+        verticalPanel3.addChild(label3);
+        popup.addChild(verticalPanel3);
+        popup.setVisible(true);
+      }
+    });
     UiWidgetButton button2 = factory.create(UiWidgetButton.class);
     button2.setLabel("button2:" + Locale.getDefault());
     verticalPanel2.addChild(button2);
@@ -144,7 +164,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
         label2.setLabel(mainWindow.getWidthInPixel() + "x" + mainWindow.getHeightInPixel());
         mainWindow.setPosition(mainWindow.getPositionX() - 5, mainWindow.getPositionY() - 5);
-        mainWindow.setSizeInPixel(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1);
+        mainWindow.setSize(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1, SizeUnit.PIXEL);
       }
     });
     mainWindow.addChild(tabPanel);

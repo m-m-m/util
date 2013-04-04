@@ -10,7 +10,9 @@ package net.sf.mmm.util.filter.api;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated will be replaced by {@link java.util.function.Predicate}.
  */
+@Deprecated
 public interface Filter<V> {
 
   /**

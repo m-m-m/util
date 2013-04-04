@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.api.handler.UiHandler;
 /**
  * This is the marker interface for a {@link UiHandler} that represents something that may also be called an
  * <em>event listener</em>. It declares action operations like
- * {@link UiHandlerEventClick#onClick(net.sf.mmm.ui.toolkit.api.feature.UiFeatureClick, boolean)},
+ * {@link UiHandlerEventClick#onClick(net.sf.mmm.client.ui.api.feature.UiFeatureClick, boolean)},
  * {@link UiHandlerEventValueChange#onValueChange(net.sf.mmm.util.lang.api.attribute.AttributeReadValue, boolean)}
  * .
  * 

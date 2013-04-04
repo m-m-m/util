@@ -29,6 +29,13 @@ public class UiContextGwt extends UiContextImpl {
   @Override
   protected void doInitialize() {
 
+    if (getWidgetFactoryNative() == null) {
+      UiWidgetFactoryNativeGwt factoryGwt = new UiWidgetFactoryNativeGwt();
+      factoryGwt.setContext(this);
+      factoryGwt.initialize();
+      setWidgetFactoryNative(factoryGwt);
+    }
+
     super.doInitialize();
 
     UiDisplay display = getDisplay();
@@ -43,12 +50,6 @@ public class UiContextGwt extends UiContextImpl {
       setDispatcher(dispatcher);
     }
 
-    if (getWidgetFactory() == null) {
-      UiWidgetFactoryNativeGwt factoryGwt = new UiWidgetFactoryNativeGwt();
-      factoryGwt.setContext(this);
-      factoryGwt.initialize();
-      setWidgetFactoryNative(factoryGwt);
-    }
   }
 
 }

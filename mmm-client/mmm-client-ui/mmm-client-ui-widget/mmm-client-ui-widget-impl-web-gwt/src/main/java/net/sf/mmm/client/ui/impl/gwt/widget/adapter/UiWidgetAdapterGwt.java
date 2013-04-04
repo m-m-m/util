@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
@@ -130,47 +131,38 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
    * {@inheritDoc}
    */
   @Override
-  public String getWidth() {
+  public Length getWidth() {
 
-    // not supported by GWT
-    return null;
+    int width = getToplevelWidget().getOffsetWidth();
+    return Length.valueOfPixel(width);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String getHeight() {
+  public Length getHeight() {
 
-    // not supported by GWT
-    return null;
+    int heigth = getToplevelWidget().getOffsetHeight();
+    return Length.valueOfPixel(heigth);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(String width) {
+  public void setWidth(Length width) {
 
-    getToplevelWidget().setWidth(width);
+    getToplevelWidget().setWidth(width.toString());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(String height) {
+  public void setHeight(Length height) {
 
-    getToplevelWidget().setHeight(height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(String width, String height) {
-
-    getToplevelWidget().setSize(width, height);
+    getToplevelWidget().setHeight(height.toString());
   }
 
   /**

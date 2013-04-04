@@ -25,7 +25,7 @@ public class UiDisplayGwt extends AbstractUiDisplay {
    * {@inheritDoc}
    */
   @Override
-  public int getWidthInPixel() {
+  public double getWidthInPixel() {
 
     return JavaScriptUtil.getInstance().getScreenWidth();
   }
@@ -34,7 +34,7 @@ public class UiDisplayGwt extends AbstractUiDisplay {
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInPixel() {
+  public double getHeightInPixel() {
 
     return JavaScriptUtil.getInstance().getScreenHeight();
   }

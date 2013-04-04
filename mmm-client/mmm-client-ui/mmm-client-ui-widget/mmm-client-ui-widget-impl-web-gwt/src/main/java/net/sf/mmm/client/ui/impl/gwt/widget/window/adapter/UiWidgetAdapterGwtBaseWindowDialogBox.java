@@ -66,7 +66,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public int getWidthInPixel() {
+  public double getWidthInPixel() {
 
     return getToplevelWidget().getOffsetWidth();
   }
@@ -75,7 +75,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInPixel() {
+  public double getHeightInPixel() {
 
     return getToplevelWidget().getOffsetHeight();
   }
@@ -93,9 +93,9 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public void setPosition(int x, int y) {
+  public void setPosition(double x, double y) {
 
-    getToplevelWidget().setPopupPosition(x, y);
+    getToplevelWidget().setPopupPosition((int) x, (int) y);
   }
 
   /**
@@ -104,6 +104,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
   @Override
   public void setResizable(boolean resizable) {
 
+    // getToplevelWidget().set
     // getWidget().set
   }
 
@@ -121,34 +122,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public void setSizeInPixel(int width, int height) {
-
-    getToplevelWidget().setPixelSize(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidthInPixel(int width) {
-
-    // unsupported - we need to delegate to setPixelSize
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPixel(int height) {
-
-    // unsupported - we need to delegate to setPixelSize
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getPositionX() {
+  public double getPositionX() {
 
     return getToplevelWidget().getAbsoluteLeft();
   }
@@ -157,7 +131,7 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public int getPositionY() {
+  public double getPositionY() {
 
     return getToplevelWidget().getAbsoluteTop();
   }

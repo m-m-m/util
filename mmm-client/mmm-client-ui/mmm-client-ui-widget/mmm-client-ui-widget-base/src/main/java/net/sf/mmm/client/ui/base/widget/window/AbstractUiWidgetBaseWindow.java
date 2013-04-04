@@ -4,19 +4,23 @@ package net.sf.mmm.client.ui.base.widget.window;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetBaseWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetBaseWindow}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapterBaseWindow> extends
     AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetBaseWindow, AttributeWriteResizable {
@@ -25,16 +29,10 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
   private String title;
 
   /** @see #getPositionX() */
-  private int x;
+  private double x;
 
   /** @see #getPositionY() */
-  private int y;
-
-  /** @see #getWidthInPixel() */
-  private int width;
-
-  /** @see #getHeightInPixel() */
-  private int height;
+  private double y;
 
   /** @see #isResizable() */
   private boolean resizable;
@@ -63,50 +61,7 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
     if ((this.x != 0) || (this.y != 0)) {
       adapter.setPosition(this.x, this.y);
     }
-    if (this.width != 0) {
-      adapter.setWidthInPixel(this.width);
-    }
-    if (this.height != 0) {
-      adapter.setHeightInPixel(this.width);
-    }
     adapter.setResizable(this.resizable);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidthInPixel(int widthInPixel) {
-
-    this.width = widthInPixel;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setWidthInPixel(widthInPixel);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPixel(int heightInPixel) {
-
-    this.height = heightInPixel;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setHeightInPixel(heightInPixel);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSizeInPixel(int widthInPixel, int heightInPixel) {
-
-    this.width = widthInPixel;
-    this.height = heightInPixel;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setSizeInPixel(widthInPixel, heightInPixel);
-    }
   }
 
   /**
@@ -146,7 +101,7 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public void setPosition(int xPos, int yPos) {
+  public void setPosition(double xPos, double yPos) {
 
     this.x = xPos;
     this.y = yPos;
@@ -159,10 +114,10 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public int getPositionX() {
+  public double getPositionX() {
 
     if (hasWidgetAdapter()) {
-      int positionX = getWidgetAdapter().getPositionX();
+      double positionX = getWidgetAdapter().getPositionX();
       if (positionX != Integer.MIN_VALUE) {
         return positionX;
       }
@@ -174,10 +129,10 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public int getPositionY() {
+  public double getPositionY() {
 
     if (hasWidgetAdapter()) {
-      int positionY = getWidgetAdapter().getPositionY();
+      double positionY = getWidgetAdapter().getPositionY();
       if (positionY != Integer.MIN_VALUE) {
         return positionY;
       }
@@ -189,24 +144,34 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public int getWidthInPixel() {
+  public double getWidthInPixel() {
 
     if (isResizable() && hasWidgetAdapter()) {
       return getWidgetAdapter().getWidthInPixel();
     }
-    return this.width;
+    Length width = getWidth();
+    if (width == null) {
+      return 0;
+    }
+    assert (width.getUnit() == SizeUnit.PIXEL);
+    return width.getAmount();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInPixel() {
+  public double getHeightInPixel() {
 
     if (isResizable() && hasWidgetAdapter()) {
       return getWidgetAdapter().getHeightInPixel();
     }
-    return this.height;
+    Length height = getHeight();
+    if (height == null) {
+      return 0;
+    }
+    assert (height.getUnit() == SizeUnit.PIXEL);
+    return height.getAmount();
   }
 
   /**
@@ -224,14 +189,10 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
   @Override
   public void centerWindow() {
 
-    UiWidgetMainWindow mainWindow = getContext().getWidgetFactory().getMainWindow();
-    AttributeReadSizeInPixel desktop = mainWindow;
-    if (!mainWindow.isWindowPositionAbsolute()) {
-      desktop = getContext().getDisplay();
-    }
+    AttributeReadSizeInPixel desktop = getScreenBase();
 
-    int xDiff = desktop.getWidthInPixel() - getWidthInPixel();
-    int yDiff = desktop.getHeightInPixel() - getHeightInPixel();
+    double xDiff = desktop.getWidthInPixel() - getWidthInPixel();
+    double yDiff = desktop.getHeightInPixel() - getHeightInPixel();
     if (xDiff < 0) {
       xDiff = 0;
     }
@@ -239,6 +200,84 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
       yDiff = 0;
     }
     setPosition(xDiff / 2, yDiff / 2);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Length convertHeight(Length newHeight) {
+
+    SizeUnit unit = newHeight.getUnit();
+    switch (unit) {
+      case PIXEL:
+        return super.convertHeight(newHeight);
+      case PERCENT:
+        double amount = getScreenBase().getHeightInPixel() * newHeight.getAmount() / 100.0;
+        return Length.valueOfPixel(amount);
+      case EM:
+        return convertEmToPixel(newHeight);
+      default :
+        throw new IllegalCaseException(SizeUnit.class, unit);
+    }
+
+  }
+
+  /**
+   * Converts a {@link Length} given in {@link SizeUnit#EM} to {@link SizeUnit#PIXEL}.
+   * 
+   * @param length is the {@link Length} to convert.
+   * @return the converted {@link Length}.
+   */
+  private Length convertEmToPixel(Length length) {
+
+    assert (length.getUnit() == SizeUnit.EM);
+    return Length.valueOfPixel(length.getAmount() * 16.0);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Length convertWidth(Length newWidth) {
+
+    SizeUnit unit = newWidth.getUnit();
+    switch (unit) {
+      case PIXEL:
+        return super.convertWidth(newWidth);
+      case PERCENT:
+        double amount = getScreenBase().getWidthInPixel() * newWidth.getAmount() / 100.0;
+        return Length.valueOfPixel(amount);
+      case EM:
+        return convertEmToPixel(newWidth);
+      default :
+        throw new IllegalCaseException(SizeUnit.class, unit);
+    }
+  }
+
+  /**
+   * @return the instance of {@link AttributeReadSizeInPixel} used to determine the base of the screen to
+   *         center or convert {@link Length}.
+   */
+  private AttributeReadSizeInPixel getScreenBase() {
+
+    UiWidgetMainWindow mainWindow = getContext().getWidgetFactory().getMainWindow();
+    AttributeReadSizeInPixel desktop = mainWindow;
+    if ((mainWindow == this) || !mainWindow.isWindowPositionAbsolute()) {
+      desktop = getContext().getDisplay();
+    }
+    return desktop;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setVisible(boolean visible) {
+
+    // ensure that the widget adapter has been created at this time...
+    getWidgetAdapter();
+    super.setVisible(visible);
   }
 
 }

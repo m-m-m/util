@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
@@ -49,43 +51,56 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
    * {@inheritDoc}
    */
   @Override
-  public void setPosition(int x, int y) {
+  public void setPosition(double x, double y) {
 
-    Window.moveTo(x, y);
+    Window.moveTo((int) x, (int) y);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setSizeInPixel(int width, int height) {
+  public void setWidth(Length width) {
 
-    Window.resizeTo(width, height);
+    Window.resizeTo(convertLength(width), Window.getClientHeight());
+  }
+
+  /**
+   * Converts the width to pixels. Actual conversion has already been done by the
+   * {@link net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetBaseWindow}.
+   * 
+   * @param length is the {@link Length}.
+   * @return the {@link Length#getAmount() amount} of pixels.
+   */
+  private int convertLength(Length length) {
+
+    assert (length.getUnit() == SizeUnit.PIXEL);
+    return (int) length.getAmount();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setWidthInPixel(int width) {
+  public void setHeight(Length height) {
 
-    Window.resizeTo(width, Window.getClientHeight());
+    Window.resizeTo(Window.getClientWidth(), convertLength(height));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeightInPixel(int height) {
+  public void setSize(Length width, Length height) {
 
-    Window.resizeTo(Window.getClientWidth(), height);
+    Window.resizeTo(convertLength(width), convertLength(height));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int getPositionX() {
+  public double getPositionX() {
 
     return JavaScriptUtil.getInstance().getBrowserPositionX();
   }
@@ -94,7 +109,7 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
    * {@inheritDoc}
    */
   @Override
-  public int getPositionY() {
+  public double getPositionY() {
 
     return JavaScriptUtil.getInstance().getBrowserPositionY();
   }
@@ -105,7 +120,9 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
   @Override
   public void setResizable(boolean resizable) {
 
-    // not supported - ignore
+    // not supported - browser window can be resized by default. Only if a new window is opened via
+    // JavaScript, the resize feature can be specified but NOT modified at a later point in time...
+    // we simply ignore this
   }
 
   /**
@@ -122,7 +139,7 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
    * {@inheritDoc}
    */
   @Override
-  public int getWidthInPixel() {
+  public double getWidthInPixel() {
 
     return JavaScriptUtil.getInstance().getBrowserWidth();
   }
@@ -131,7 +148,7 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInPixel() {
+  public double getHeightInPixel() {
 
     return JavaScriptUtil.getInstance().getBrowserHeight();
   }

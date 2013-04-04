@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.Orientation;
 
 /**
  * This enum contains the available values for the filling of an object. The filling determines if the
- * {@link net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel size} of the object will be expanded
+ * {@link net.sf.mmm.client.ui.api.attribute.AttributeReadSize size} of the object will be expanded
  * horizontally and/or vertically if there is more space available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

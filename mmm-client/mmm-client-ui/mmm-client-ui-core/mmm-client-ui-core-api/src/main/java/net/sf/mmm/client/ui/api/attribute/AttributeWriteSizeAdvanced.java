@@ -5,48 +5,54 @@ package net.sf.mmm.client.ui.api.attribute;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 
 /**
- * This interface gives advanced read and write access to the {@link #setSize(String, String) size} of an
+ * This interface gives read and write access to the
+ * {@link #setSize(net.sf.mmm.client.ui.api.common.Length, net.sf.mmm.client.ui.api.common.Length) size} of an
  * object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface AttributeWriteSizeAdvanced extends AttributeReadSizeAdvanced, AttributeWriteSize,
-    AttributeWriteOnlySizeInPixel {
+public abstract interface AttributeWriteSizeAdvanced extends AttributeWriteSize {
 
   /**
-   * This method sets the {@link #getWidth() width}.
+   * This method sets the {@link #getHeight() height} of this object in {@link SizeUnit#PERCENT percent}.
    * 
-   * @param value - see {@link #getWidthValue()}.
-   * @param unit - see {@link #getWidthUnit()}.
+   * @param heightInPercent is the new {@link #getHeight() height} in {@link SizeUnit#PERCENT percent}.
    */
-  void setWidth(double value, SizeUnit unit);
+  void setHeightInPercent(double heightInPercent);
 
   /**
-   * This method sets the {@link #getHeight() height}.
+   * This method sets the {@link #getHeight() height} of this object in {@link SizeUnit#PIXEL pixel}.
    * 
-   * @param value - see {@link #getHeightValue()}.
-   * @param unit - see {@link #getHeightUnit()}.
+   * @param heightInPixel is the new {@link #getHeight() height} in {@link SizeUnit#PIXEL pixel}.
    */
-  void setHeight(double value, SizeUnit unit);
+  void setHeightInPixel(double heightInPixel);
 
   /**
-   * This method sets the {@link #getWidth() width} {@link #getHeight() height}.
+   * This method sets the {@link #getWidth() width} of this object in {@link SizeUnit#PERCENT percent}.
    * 
-   * @param widthValue - see {@link #getWidthValue()}.
-   * @param heightValue - see {@link #getHeightValue()}.
-   * @param unit is the {@link SizeUnit unit} of the given size values.
+   * @param widthInPercent is the new {@link #getWidth() width} in {@link SizeUnit#PERCENT percent}.
    */
-  void setSize(double widthValue, double heightValue, SizeUnit unit);
+  void setWidthInPercent(double widthInPercent);
 
   /**
-   * This method sets the {@link #getWidth() width} {@link #getHeight() height}.
+   * This method sets the {@link #getWidth() width} of this object in {@link SizeUnit#PIXEL pixel}.
    * 
-   * @param widthValue - see {@link #getWidthValue()}.
-   * @param widthUnit - see {@link #getWidthUnit()}.
-   * @param heightValue - see {@link #getHeightValue()}.
-   * @param heightUnit - see {@link #getHeightUnit()}.
+   * @param widthInPixel is the new {@link #getWidth() width} in {@link SizeUnit#PIXEL pixel}.
    */
-  void setSize(double widthValue, SizeUnit widthUnit, double heightValue, SizeUnit heightUnit);
+  void setWidthInPixel(double widthInPixel);
+
+  /**
+   * This method sets the size of this object.
+   * 
+   * @see #getWidth()
+   * @see #getHeight()
+   * 
+   * @param width is the new {@link #getWidth() width} of the object.
+   * @param height is the new {@link #getHeight() height} of the object.
+   * @param unit is the {@link net.sf.mmm.client.ui.api.common.Length#getUnit() unit} of <code>width</code>
+   *        and <code>height</code>.
+   */
+  void setSize(double width, double height, SizeUnit unit);
 
 }

@@ -10,9 +10,10 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow
 /**
  * This is the abstract base implementation of {@link UiWidgetMainWindow}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetMainWindow<ADAPTER extends UiWidgetAdapterMainWindow> extends
     AbstractUiWidgetBaseWindow<ADAPTER> implements UiWidgetMainWindow {

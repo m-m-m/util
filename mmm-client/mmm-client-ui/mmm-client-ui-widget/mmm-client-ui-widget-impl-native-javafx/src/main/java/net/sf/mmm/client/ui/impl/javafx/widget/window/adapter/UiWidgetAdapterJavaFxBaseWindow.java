@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.impl.javafx.widget.window.adapter;
 
 import javafx.stage.Window;
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
 import net.sf.mmm.client.ui.impl.javafx.widget.adapter.UiWidgetAdapterJavaFx;
@@ -40,20 +42,18 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public String getWidth() {
+  public Length getWidth() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return Length.valueOfPixel(getToplevelWidget().getWidth());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String getHeight() {
+  public Length getHeight() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return Length.valueOfPixel(getToplevelWidget().getHeight());
   }
 
   /**
@@ -78,30 +78,20 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(String width) {
+  public void setWidth(Length width) {
 
-    // TODO Auto-generated method stub
-
+    assert (width.getUnit() == SizeUnit.PIXEL);
+    getToplevelWidget().setWidth(width.getAmount());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(String height) {
+  public void setHeight(Length height) {
 
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(String width, String height) {
-
-    // TODO Auto-generated method stub
-
+    assert (height.getUnit() == SizeUnit.PIXEL);
+    getToplevelWidget().setHeight(height.getAmount());
   }
 
   /**
@@ -109,36 +99,6 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    */
   @Override
   public void setAttribute(String name, String value) {
-
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSizeInPixel(int width, int height) {
-
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidthInPixel(int width) {
-
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPixel(int height) {
 
     // TODO Auto-generated method stub
 
@@ -158,20 +118,18 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public int getPositionX() {
+  public double getPositionX() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return getToplevelWidget().getX();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int getPositionY() {
+  public double getPositionY() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return getToplevelWidget().getY();
   }
 
   /**
@@ -180,7 +138,7 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
   @Override
   public void setResizable(boolean resizable) {
 
-    // TODO Auto-generated method stub
+    // getToplevelWidget().set
 
   }
 
@@ -207,7 +165,7 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public void setPosition(int x, int y) {
+  public void setPosition(double x, double y) {
 
     getToplevelWidget().setX(x);
     getToplevelWidget().setY(y);
@@ -217,18 +175,18 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public int getWidthInPixel() {
+  public double getWidthInPixel() {
 
-    return (int) getToplevelWidget().getWidth();
+    return getToplevelWidget().getWidth();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int getHeightInPixel() {
+  public double getHeightInPixel() {
 
-    return (int) getToplevelWidget().getHeight();
+    return getToplevelWidget().getHeight();
   }
 
 }

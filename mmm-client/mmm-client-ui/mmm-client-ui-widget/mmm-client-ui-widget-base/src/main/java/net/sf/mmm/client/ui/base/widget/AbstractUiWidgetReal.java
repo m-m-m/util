@@ -8,6 +8,7 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -71,10 +72,10 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
   private String styles;
 
   /** @see #getWidth() */
-  private String width;
+  private Length width;
 
   /** @see #getHeight() */
-  private String height;
+  private Length height;
 
   /** @see #getAriaRole() */
   private AbstractRole ariaRole;
@@ -175,12 +176,9 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
       adapter.setStyles(this.styles);
     }
     if (this.width != null) {
-      if (this.height != null) {
-        adapter.setSize(this.width, this.height);
-      } else {
-        adapter.setWidth(this.width);
-      }
-    } else if (this.height != null) {
+      adapter.setWidth(this.width);
+    }
+    if (this.height != null) {
       adapter.setHeight(this.height);
     }
   }
@@ -544,10 +542,13 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  public String getWidth() {
+  public Length getWidth() {
 
     if ((this.width == null) && (this.widgetAdapter != null)) {
       return this.widgetAdapter.getWidth();
+    }
+    if (this.width == null) {
+      return Length.ZERO;
     }
     return this.width;
   }
@@ -556,10 +557,13 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * @return the height
    */
   @Override
-  public String getHeight() {
+  public Length getHeight() {
 
     if ((this.height == null) && (this.widgetAdapter != null)) {
       return this.widgetAdapter.getHeight();
+    }
+    if (this.height == null) {
+      return Length.ZERO;
     }
     return this.height;
   }
@@ -568,11 +572,11 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(String width) {
+  public void setWidth(Length width) {
 
-    this.width = width;
+    this.width = convertWidth(width);
     if (this.widgetAdapter != null) {
-      this.widgetAdapter.setWidth(width);
+      this.widgetAdapter.setWidth(this.width);
     }
   }
 
@@ -580,11 +584,11 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(String height) {
+  public void setHeight(Length height) {
 
-    this.height = height;
+    this.height = convertHeight(height);
     if (this.widgetAdapter != null) {
-      this.widgetAdapter.setWidth(height);
+      this.widgetAdapter.setWidth(this.height);
     }
   }
 
@@ -592,40 +596,41 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * {@inheritDoc}
    */
   @Override
-  public void setSize(String newWidth, String newHeight) {
+  public void setSize(Length newWidth, Length newHeight) {
 
-    this.width = newWidth;
-    this.height = newHeight;
+    this.width = convertWidth(newWidth);
+    this.height = convertHeight(newHeight);
     if (this.widgetAdapter != null) {
-      this.widgetAdapter.setSize(newWidth, newHeight);
+      this.widgetAdapter.setSize(this.width, this.height);
     }
   }
 
   /**
-   * {@inheritDoc}
+   * Converts the {@link Length} given as width.<br/>
+   * Just returns the given {@link Length} by default. Override to change (e.g. if you need to convert to
+   * {@link net.sf.mmm.client.ui.api.common.SizeUnit#PIXEL pixels}). Global conversion should be done in
+   * {@link #getWidgetAdapter() widget adapter} instead.
+   * 
+   * @param newWidth is the width to convert.
+   * @return the converted {@link Length} value.
    */
-  @Override
-  public void setSizeInPixel(int newWidth, int newHeight) {
+  protected Length convertWidth(Length newWidth) {
 
-    setSize(newWidth + "px", newHeight + "px");
+    return newWidth;
   }
 
   /**
-   * {@inheritDoc}
+   * Converts the {@link Length} given as height.<br/>
+   * Just returns the given {@link Length} by default. Override to change (e.g. if you need to convert to
+   * {@link net.sf.mmm.client.ui.api.common.SizeUnit#PIXEL pixels}). Global conversion should be done in
+   * {@link #getWidgetAdapter() widget adapter} instead.
+   * 
+   * @param newHeight is the height to convert.
+   * @return the converted {@link Length} value.
    */
-  @Override
-  public void setWidthInPixel(int widthInPixel) {
+  protected Length convertHeight(Length newHeight) {
 
-    setWidth(widthInPixel + "px");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPixel(int heightInPixel) {
-
-    setHeight(heightInPixel + "px");
+    return newHeight;
   }
 
   /**

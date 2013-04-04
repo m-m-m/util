@@ -17,7 +17,7 @@ public abstract interface AttributeReadPosition {
    * 
    * @return the x position.
    */
-  int getPositionX();
+  double getPositionX();
 
   /**
    * This method gets the pixel position of the top border of this object on the y-axis (vertical).
@@ -26,6 +26,6 @@ public abstract interface AttributeReadPosition {
    * 
    * @return the y position.
    */
-  int getPositionY();
+  double getPositionY();
 
 }

@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.Tooltip;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -72,45 +72,36 @@ public abstract class UiWidgetAdapterJavaFxControl<WIDGET extends Control> exten
    * {@inheritDoc}
    */
   @Override
-  public String getWidth() {
+  public Length getWidth() {
 
-    return getToplevelWidget().getWidth() + SizeUnit.PIXEL.getValue();
+    return Length.valueOfPixel(getToplevelWidget().getWidth());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public String getHeight() {
+  public Length getHeight() {
 
-    return getToplevelWidget().getHeight() + SizeUnit.PIXEL.getValue();
+    return Length.valueOfPixel(getToplevelWidget().getHeight());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(String width) {
+  public void setWidth(Length width) {
 
-    getToplevelWidget().setPrefWidth(convertSizeUnit(width));
+    getToplevelWidget().setPrefWidth(convertLength(width));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(String height) {
+  public void setHeight(Length height) {
 
-    getToplevelWidget().setPrefHeight(convertSizeUnit(height));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(String width, String height) {
-
-    getToplevelWidget().setPrefSize(convertSizeUnit(width), convertSizeUnit(height));
+    getToplevelWidget().setPrefHeight(convertLength(height));
   }
 
   /**

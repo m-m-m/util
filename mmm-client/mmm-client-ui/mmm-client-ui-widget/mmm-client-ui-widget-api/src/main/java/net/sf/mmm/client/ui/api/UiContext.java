@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api;
 
-import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.util.component.api.ComponentContainer;
@@ -38,7 +37,8 @@ public interface UiContext {
   ComponentContainer getContainer();
 
   /**
-   * This method gets the {@link UiWidgetFactory} that is used to create {@link UiWidget}s.
+   * This method gets the {@link UiWidgetFactory} that is used to create
+   * {@link net.sf.mmm.client.ui.api.widget.UiWidget}s.
    * 
    * @return the {@link UiWidgetFactory}.
    */

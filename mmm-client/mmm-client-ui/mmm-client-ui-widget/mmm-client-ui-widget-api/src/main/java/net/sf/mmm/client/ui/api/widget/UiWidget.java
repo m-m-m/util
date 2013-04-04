@@ -9,14 +9,11 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMode;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModeFixed;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteOnlySizeInPixel;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.feature.UiFeatureMessages;
 import net.sf.mmm.client.ui.api.feature.UiFeatureVisible;
-import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
-import net.sf.mmm.util.component.api.Api;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 
@@ -25,17 +22,18 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  * widgets) of the underlying native widget toolkit.<br/>
  * A widget is any object of the UI (user interface) including both {@link UiWidgetAtomic atomic widgets} as
  * well a {@link UiWidgetComposite composite widgets}. <br/>
- * Real {@link UiWidget}s can be {@link UiWidgetFactoryNative#create(Class) created} via
- * {@link UiWidgetFactoryNative} that has implementations for all supported toolkits that can be chosen via
- * {@link net.sf.mmm.util.component.api.Cdi}. This way you can decide which native toolkit you like to use
- * just by configuration and classpath.<br/>
+ * Real {@link UiWidget}s can be {@link UiWidgetFactory#create(Class) created} via {@link UiWidgetFactory}
+ * that has implementations for all supported toolkits (technically via
+ * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative}). This way you can decide which
+ * native toolkit you like to use just by configuration and classpath (See
+ * {@link net.sf.mmm.util.component.api.Cdi CDI}).<br/>
  * If you want to make your UI code portable even for toolkits such as SWT, you need to make proper use of
  * {@link #dispose()} for all {@link UiWidget} that are no longer needed.<br/>
  * <b>ATTENTION:</b><br/>
  * A {@link UiWidget} can only be used once in a client application. Even if you want to have the exact same
  * button twice on the screen you need to create two distinct instances. <br/>
- * Please also note that {@link UiWidget} and all its sub-interfaces are {@link Api#EXTENDABLE_INTERFACE
- * extendable interfaces}.<br/>
+ * Please also note that {@link UiWidget} and all its sub-interfaces are
+ * {@link net.sf.mmm.util.component.api.Api#EXTENDABLE_INTERFACE extendable interfaces}.<br/>
  * <br/>
  * For advanced usage see also <code>net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom</code>.
  * 
@@ -45,8 +43,8 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  */
 public abstract interface UiWidget extends UiFeatureVisible, UiFeatureMessages, AttributeWriteHtmlId,
     AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
-    AttributeWriteSize, AttributeWriteOnlySizeInPixel, AttributeReadModified, AttributeWriteMode,
-    AttributeWriteModeFixed, AttributeReadAriaRole, AbstractValidatableObject {
+    AttributeWriteSizeAdvanced, AttributeReadModified, AttributeWriteMode, AttributeWriteModeFixed,
+    AttributeReadAriaRole, AbstractValidatableObject {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

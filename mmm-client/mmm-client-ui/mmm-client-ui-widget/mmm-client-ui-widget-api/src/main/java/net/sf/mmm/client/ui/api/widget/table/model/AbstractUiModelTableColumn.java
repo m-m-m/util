@@ -1,9 +1,11 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.widget.table;
+package net.sf.mmm.client.ui.api.widget.table.model;
 
 import java.util.Comparator;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
@@ -17,7 +19,8 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiModelTableColumn<ROW, CELL> implements UiModelTableColumn<ROW, CELL> {
+public abstract class AbstractUiModelTableColumn<ROW, CELL> implements UiModelTableColumn<ROW, CELL>,
+    AttributeWriteEditable, AttributeWriteVisible {
 
   /** @see #getId() */
   private String id;

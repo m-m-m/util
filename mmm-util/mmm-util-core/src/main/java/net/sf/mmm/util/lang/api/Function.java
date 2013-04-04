@@ -11,7 +11,9 @@ package net.sf.mmm.util.lang.api;
  * @param <IN> is the generic type of the argument passed to {@link #apply(Object)}. May be a "tuple" or array
  *        if more than one argument is needed.
  * @param <OUT> is the generic return type of {@link #apply(Object)}.
+ * @deprecated will be replaced by {@link java.util.function.Function}.
  */
+@Deprecated
 public interface Function<IN, OUT> {
 
   /**

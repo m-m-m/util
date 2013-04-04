@@ -38,6 +38,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetMainWindowGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetPopupGwt;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.google.gwt.user.client.ui.UIObject;
@@ -92,6 +93,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetMenuBarGwt.Factory());
     register(new UiWidgetMenuGwt.Factory());
     register(new UiWidgetMenuItemClickableGwt.Factory());
+    // window
+    register(new UiWidgetPopupGwt.Factory());
   }
 
   /**
@@ -114,7 +117,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     AbstractUiContext context = getContext();
     NlsNullPointerException.checkNotNull(UiContext.class, context);
     UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(context);
-    window.initialize();
+    window.setVisible(true);
     return window;
   }
 

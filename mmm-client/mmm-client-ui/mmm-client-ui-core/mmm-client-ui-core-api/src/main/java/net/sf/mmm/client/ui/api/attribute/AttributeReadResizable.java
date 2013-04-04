@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 /**
- * This interface gives read access to the {@link #isResizable() resizable} attribute of an object. Such
+ * This interface gives read access to the {@link #isResizable() resizable} attribute of an object.
  * 
  * @see AttributeWriteResizable
  * 
@@ -15,8 +15,9 @@ public abstract interface AttributeReadResizable {
   /**
    * This method determines if this object is resizable.
    * 
-   * @return <code>true</code> if the object can be {@link AttributeWriteSizeInPixel#setSizeInPixel(int, int) resized} (by
-   *         the end-user), <code>false</code> otherwise.
+   * @return <code>true</code> if the object can be
+   *         {@link AttributeWriteSizeAdvanced#setSize(net.sf.mmm.client.ui.api.common.Length, net.sf.mmm.client.ui.api.common.Length)
+   *         resized} (by the end-user), <code>false</code> otherwise.
    */
   boolean isResizable();
 

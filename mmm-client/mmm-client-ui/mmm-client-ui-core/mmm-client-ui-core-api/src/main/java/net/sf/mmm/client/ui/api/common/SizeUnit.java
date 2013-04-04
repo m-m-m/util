@@ -7,6 +7,8 @@ import net.sf.mmm.util.lang.api.Datatype;
 /**
  * This enum contains the available units for size measures.
  * 
+ * @see Length
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -57,6 +59,17 @@ public enum SizeUnit implements Datatype<String> {
   public String getValue() {
 
     return this.value;
+  }
+
+  /**
+   * Creates a new {@link Length} with this {@link SizeUnit} as {@link Length#getUnit() unit}.
+   * 
+   * @param amount is the {@link Length#getAmount() amount}.
+   * @return the new {@link Length}.
+   */
+  public Length newLength(double amount) {
+
+    return new Length(amount, this);
   }
 
   /**

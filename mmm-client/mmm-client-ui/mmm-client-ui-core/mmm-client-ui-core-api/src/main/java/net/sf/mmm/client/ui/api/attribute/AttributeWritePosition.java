@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 /**
- * This interface gives read and write access to the {@link #setPosition(int, int) position} of an object
+ * This interface gives read and write access to the {@link #setPosition(double, double) position} of an object
  * (e.g. a window).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -17,6 +17,6 @@ public abstract interface AttributeWritePosition extends AttributeReadPosition {
    * @param x is the {@link #getPositionX() position on the x-axsis} (horizontal).
    * @param y is the {@link #getPositionY() position on the y-axsis} (vertical).
    */
-  void setPosition(int x, int y);
+  void setPosition(double x, double y);
 
 }

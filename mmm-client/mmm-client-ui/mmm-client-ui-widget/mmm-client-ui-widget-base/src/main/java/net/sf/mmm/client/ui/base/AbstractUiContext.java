@@ -232,6 +232,14 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   }
 
   /**
+   * @return the instance of {@link UiWidgetFactoryNative}.
+   */
+  public UiWidgetFactoryNative getWidgetFactoryNative() {
+
+    return this.widgetFactoryNative;
+  }
+
+  /**
    * @param widgetFactoryNative is the {@link UiWidgetFactoryNative} to set.
    */
   protected void setWidgetFactoryNative(UiWidgetFactoryNative widgetFactoryNative) {

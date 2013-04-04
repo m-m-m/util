@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.factory;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 
 /**
  * This is the abstract interface for a factory to {@link #createForDatatype(Class) create widgets for
- * particular datatypes}. You will typically use {@link UiWidgetFactory} that extends this interface.
+ * particular datatypes}. You will typically use {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory} that
+ * extends this interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

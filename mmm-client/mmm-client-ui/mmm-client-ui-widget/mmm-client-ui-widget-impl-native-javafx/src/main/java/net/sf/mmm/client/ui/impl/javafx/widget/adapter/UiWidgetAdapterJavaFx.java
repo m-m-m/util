@@ -2,12 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.javafx.widget.adapter;
 
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the top-most implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} for
@@ -77,24 +78,16 @@ public abstract class UiWidgetAdapterJavaFx<WIDGET> extends AbstractUiWidgetAdap
   }
 
   /**
-   * This method converts the given <code>size</code> (width or height) to a double value for JavaFx.
+   * This method converts the given <code>length</code> (width or height) to a double value for JavaFx.
    * 
-   * @param size is the size to convert. May be any {@link SizeUnit}.
+   * @param length is the size to convert. May be any {@link SizeUnit}.
    * @return the converted size.
    */
-  protected double convertSizeUnit(String size) {
+  protected double convertLength(Length length) {
 
-    double widthDouble;
-    String pixelSuffix = SizeUnit.PIXEL.getValue();
-    if (size.endsWith(pixelSuffix)) {
-      String widthPixels = size.substring(0, size.length() - pixelSuffix.length());
-      widthDouble = Double.parseDouble(widthPixels);
-      // getToplevelWidget().setWidth(widthDouble);
-    } else {
-      // not implemented...
-      throw new IllegalCaseException(size);
-    }
-    return widthDouble;
+    NlsNullPointerException.checkNotNull(Length.class, length);
+    assert (length.getUnit() == SizeUnit.PIXEL);
+    return length.getAmount();
   }
 
   /**
