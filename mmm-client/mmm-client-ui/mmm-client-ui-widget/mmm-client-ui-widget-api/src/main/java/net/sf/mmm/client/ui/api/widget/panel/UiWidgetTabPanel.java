@@ -23,6 +23,9 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>, UiWidgetSwitchComposite<UiWidgetTab>,
     UiWidgetReal {
 
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "TabPanel";
+
   /**
    * This method adds the given {@link UiWidgetRegular} as new tab on the right of all existing tabs. This is
    * a convenience method for the following code:

@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterMenuItem extends UiWidgetAdapterActiveWithLabel {
+public interface UiWidgetAdapterMenuItemClickable extends UiWidgetAdapterActiveWithLabel {
 
   // nothing to add
 

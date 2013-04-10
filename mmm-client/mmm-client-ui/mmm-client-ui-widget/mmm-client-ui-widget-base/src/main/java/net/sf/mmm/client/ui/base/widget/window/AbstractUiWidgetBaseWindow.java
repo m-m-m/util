@@ -189,10 +189,15 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
   @Override
   public void centerWindow() {
 
+    getWidgetAdapter();
     AttributeReadSizeInPixel desktop = getScreenBase();
 
-    double xDiff = desktop.getWidthInPixel() - getWidthInPixel();
-    double yDiff = desktop.getHeightInPixel() - getHeightInPixel();
+    double desktopWidth = desktop.getWidthInPixel();
+    double windowWidth = getWidthInPixel();
+    double xDiff = desktopWidth - windowWidth;
+    double desktopHeight = desktop.getHeightInPixel();
+    double windowHeight = getHeightInPixel();
+    double yDiff = desktopHeight - windowHeight;
     if (xDiff < 0) {
       xDiff = 0;
     }
@@ -263,7 +268,7 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
 
     UiWidgetMainWindow mainWindow = getContext().getWidgetFactory().getMainWindow();
     AttributeReadSizeInPixel desktop = mainWindow;
-    if ((mainWindow == this) || !mainWindow.isWindowPositionAbsolute()) {
+    if ((mainWindow == this) || mainWindow.isWindowPositionAbsolute()) {
       desktop = getContext().getDisplay();
     }
     return desktop;

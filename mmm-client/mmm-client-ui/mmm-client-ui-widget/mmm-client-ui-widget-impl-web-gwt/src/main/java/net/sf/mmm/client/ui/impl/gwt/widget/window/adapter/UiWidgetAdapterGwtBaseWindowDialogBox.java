@@ -2,10 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * This is the implementation of
@@ -17,49 +14,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdapterGwtBaseWindow<DialogBox> {
 
-  /** The container for the children. */
-  private final VerticalPanel contentPanel;
-
   /**
    * The constructor.
    */
   public UiWidgetAdapterGwtBaseWindowDialogBox() {
 
     super();
-    this.contentPanel = new VerticalPanel();
-    this.contentPanel.setWidth("100%");
-  }
-
-  /**
-   * @return the content panel.
-   */
-  @Override
-  protected VerticalPanel getContentPanel() {
-
-    return this.contentPanel;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setEnabled(boolean enabled) {
-
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addChild(UiWidgetRegular child, int index) {
-
-    if (index >= 0) {
-      this.contentPanel.insert(getToplevelWidget(child), index);
-    } else {
-      this.contentPanel.add(getToplevelWidget(child));
-    }
   }
 
   /**

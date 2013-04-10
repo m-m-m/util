@@ -2,14 +2,6 @@
 <module rename-to="mmm">
   <inherits name="com.google.gwt.user.User"/>
   <inherits name="net.sf.mmm.ui.toolkit.widget.theme.standard.Standard"/>
-  <!--
-  <inherits name="com.google.gwt.user.theme.standard.Standard"/>
-   -->
-  <!--
-  <inherits name="com.google.gwt.user.theme.clean.Clean"/>
-  <inherits name="com.google.gwt.user.theme.chrome.Chrome"/>
-  <inherits name="com.google.gwt.user.theme.dark.Dark"/>
-  -->
 
   <!-- Set loglevel for gwt-log -->
   <define-property name="log_level" values="TRACE"/>

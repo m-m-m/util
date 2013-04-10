@@ -1,0 +1,306 @@
+/* Variables */
+/* Mixins */
+/* Main styles */
+body {
+  font-size: 14pt;
+  margin: 0;
+  padding: 0;
+}
+input {
+  font-size: 14pt;
+}
+*:focus {
+  outline: none;
+}
+*::-moz-focus-inner {
+  border: none;
+}
+.Button {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 2px 2px 2px white inset; */
+
+  box-shadow: 2px 2px 5px 0px #c7c7c7;
+  border-style: solid;
+  border-radius: 0.4em;
+  padding: 0.3em;
+  cursor: pointer;
+  font-size: 16pt;
+}
+.Button:hover,
+.Button:focus,
+.Button:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+}
+/* Popup */
+.gwt-PopupPanelGlass {
+  background-color: black;
+  opacity: 0.3;
+}
+.Popup {
+  box-shadow: 4px 4px 5px 0px black;
+  border-radius: 0.4em;
+}
+.Popup .dialogTopLeft {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  border-top-style: solid;
+  border-left-style: solid;
+  cursor: w-resize;
+  border-top-left-radius: 0.4em;
+}
+.Popup .Caption {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  border-top-style: solid;
+  padding: 0.3em;
+  cursor: move;
+}
+.Popup .dialogTopRight {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-top-right-radius: 0.4em;
+  cursor: e-resize;
+}
+.Popup .dialogMiddle {
+  background: #e0e0e0;
+}
+.Popup .dialogMiddleLeft {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background: #e0e0e0;
+  border-left-style: solid;
+  cursor: w-resize;
+}
+.Popup .dialogMiddleCenter {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.4em;
+  padding: 3px;
+  background: white;
+}
+.Popup .dialogMiddleRight {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background: #e0e0e0;
+  border-right-style: solid;
+  cursor: e-resize;
+}
+.Popup .dialogBottomLeft {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background: #e0e0e0;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  border-bottom-left-radius: 0.4em;
+  cursor: sw-resize;
+}
+.Popup .dialogBottomCenter {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background: #e0e0e0;
+  border-bottom-style: solid;
+  cursor: s-resize;
+}
+.Popup .dialogBottomRight {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background: #e0e0e0;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-bottom-right-radius: 0.4em;
+  cursor: se-resize;
+}
+.Popup .dialogTopLeftInner {
+  width: 0.3em;
+}
+.Popup .dialogTopRightInner {
+  width: 0.3em;
+}
+.Popup .dialogBottomLeftInner {
+  width: 0.3em;
+  height: 0.3em;
+}
+.Popup .dialogBottomRightInner {
+  width: 0.3em;
+  height: 0.3em;
+}
+/* Tabs */
+.TabPanel .gwt-TabBarFirst {
+  width: 5px;
+}
+.TabPanel .gwt-TabBarItem {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 2px 2px 2px white inset; */
+
+  box-shadow: 2px 2px 5px 0px #c7c7c7;
+  border-style: solid;
+  border-top-left-radius: 0.4em;
+  border-top-right-radius: 0.4em;
+  cursor: pointer;
+}
+.TabPanel .gwt-TabBarItem:hover,
+.TabPanel .gwt-TabBarItem:focus,
+.TabPanel .gwt-TabBarItem:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+}
+.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected {
+  cursor: default;
+  background-image: linear-gradient(to bottom, #ffffff, #c6d9ed);
+  border-bottom-style: none;
+}
+.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:hover,
+.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:focus,
+.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+}
+.TabPanel .gwt-TabBarItem {
+  padding: 0.4em;
+}
+.TabPanel .gwt-TabPanelBottom {
+  border-color: #92c1f0;
+  border-style: solid;
+  border-width: 3px 2px 2px;
+  padding: 6px;
+}
+/*
+.Tab {
+}
+.gwt-TabBar {
+}
+.gwt-TabBar .gwt-TabBarRest {
+}
+.gwt-TabBar .gwt-TabBarItem {
+  margin-left: 6px;
+  padding: 3px 6px 3px 6px;
+  cursor: pointer;
+  cursor: hand;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  background: #d0e4f6;
+}
+.gwt-TabBar .gwt-TabBarItem-selected {
+  cursor: default;
+  background: #92c1f0;
+}
+.gwt-TabBar .gwt-TabBarItem-disabled {
+  cursor: default;
+  color: #999999;
+}
+.TabPanel {
+}
+.gwt-TabPanelBottom {
+  border-color: #92c1f0;
+  border-style: solid;
+  border-width: 3px 2px 2px;
+  overflow: hidden;
+  padding: 6px;
+}
+*/
+/* Menu stuff */
+.gwt-MenuBar {
+  cursor: default;
+}
+.gwt-MenuBar .gwt-MenuItem-selected {
+  background: #a0c0e0;
+}
+.gwt-MenuBar .gwt-MenuItem-disabled {
+  color: #c0c0c0;
+}
+.gwt-MenuBar-horizontal {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  border-style: solid;
+}
+.gwt-MenuBar-horizontal .gwt-MenuItem {
+  padding: 0px 10px;
+  vertical-align: bottom;
+  color: #666666;
+  font-weight: bold;
+}
+.gwt-MenuBar-horizontal .gwt-MenuItemSeparator {
+  width: 1px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  border-left: 1px solid #888888;
+  background: white;
+}
+.gwt-MenuBar-horizontal .gwt-MenuItemSeparator .menuSeparatorInner {
+  width: 1px;
+  height: 1px;
+  background: white;
+}
+.gwt-MenuBar-vertical {
+  margin-top: 0px;
+  margin-left: 0px;
+  background: white;
+}
+.gwt-MenuBar-vertical table {
+  border-collapse: collapse;
+}
+.gwt-MenuBar-vertical .gwt-MenuItem {
+  padding: 4px 14px 4px 1px;
+}
+.gwt-MenuBar-vertical .gwt-MenuItemSeparator {
+  padding: 10px 0px;
+}
+.gwt-MenuBar-vertical .gwt-MenuItemSeparator .menuSeparatorInner {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  height: 1px;
+  padding: 0px;
+  border-top-style: solid;
+  background: #e0e0e0;
+  overflow: hidden;
+}
+.gwt-MenuBar-vertical .subMenuIcon {
+  padding-right: 4px;
+}
+.gwt-MenuBar-vertical .subMenuIcon-selected {
+  background: #a0c0e0;
+}
+.gwt-MenuBarPopup {
+  margin: 0px 0px 0px 3px;
+  border-color: #a0a0a0;
+  border-width: 1px;
+  border-style: solid;
+  background: white;
+  box-shadow: 4px 4px 5px 0px black;
+}
+.gwt-MenuBarPopup .menuPopupTopLeftInner {
+  width: 5px;
+  height: 5px;
+}
+.gwt-MenuBarPopup .menuPopupTopRightInner {
+  width: 8px;
+  height: 5px;
+}
+.gwt-MenuBarPopup .menuPopupBottomLeftInner {
+  width: 5px;
+  height: 8px;
+}
+.gwt-MenuBarPopup .menuPopupBottomRightInner {
+  width: 8px;
+  height: 8px;
+}

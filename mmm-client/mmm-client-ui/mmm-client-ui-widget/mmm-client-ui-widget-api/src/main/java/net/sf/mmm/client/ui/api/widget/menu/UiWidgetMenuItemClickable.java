@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
 /**
  * This is the interface for a <em>normal</em> {@link UiWidgetMenuItem menu item widget}. Normal means it can
  * be {@link #click() clicked} and causes an
- * {@link #addClickHandler(net.sf.mmm.ui.toolkit.api.handler.event.UiHandlerEventClick) action}.
+ * {@link #addClickHandler(net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick) action}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -1,0 +1,310 @@
+/* Variables */
+@normal-color: #E0E0E0;
+@focus-color: #A0C0E0;
+@selected-color: lighten(@focus-color, 10%);
+@border-color: #A0A0A0;
+
+@font-size: 14pt;
+@border-size: 0.3em;
+@radius: 0.4em;
+@padding: 0.3em;
+
+/* Mixins */
+.bordered() {
+  border-color: @border-color;
+  border-width: 1px;
+}
+.gradient() {
+  .bordered;
+  background-image: linear-gradient(to bottom, #FFFFFF, @normal-color);
+  -background: @normal-color;
+}
+.highlight() {
+  .gradient;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.highlighted() {
+  .highlight;
+  /* box-shadow: 2px 2px 2px white inset; */
+  box-shadow: 2px 2px 5px 0px darken(@normal-color, 10%);
+}
+
+/* Main styles */
+body {
+  font-size: @font-size;
+  margin: 0;
+  padding: 0;
+}
+input {
+  font-size: @font-size;
+}
+
+*:focus {
+  outline: none;
+}
+*::-moz-focus-inner {
+  border: none;
+}
+
+.Button {
+  .highlighted;
+  border-style: solid;
+  border-radius: @radius;
+  padding: @padding;
+  cursor: pointer;
+  font-size: 16pt;
+  &:hover, &:focus, &:active {
+    background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+  }
+}
+
+/* Popup */
+.gwt-PopupPanelGlass {
+    background-color: black;
+    opacity: 0.3;
+}
+.Popup {
+  box-shadow: 4px 4px 5px 0px black;
+  border-radius: @radius;
+
+  .dialogTopLeft {
+    .gradient;
+    border-top-style: solid;
+    border-left-style: solid;
+    cursor: w-resize;
+    border-top-left-radius: @radius;
+  }
+  .dialogTopCenter {
+  }
+  .Caption {
+    .highlight;
+    border-top-style: solid;
+    padding: @padding;
+    cursor: move;
+  }
+  .dialogTopRight {
+    .gradient;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-top-right-radius: @radius;
+    cursor: e-resize;
+  }
+  .dialogMiddle {
+    background: @normal-color;
+  }
+  .dialogMiddleLeft {
+    .bordered;
+    background: @normal-color;
+    border-left-style: solid;
+    cursor: w-resize;
+  }
+  .dialogMiddleCenter {
+    .bordered;
+    border-style: solid;
+    border-radius: @radius;
+    padding: 3px;
+    background: white;
+  }
+  .dialogContent {
+  }
+  .dialogMiddleRight {
+    .bordered;
+    background: @normal-color;
+    border-right-style: solid;
+    cursor: e-resize;
+  }
+  .dialogBottomLeft {
+    .bordered;
+    background: @normal-color;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-bottom-left-radius: @radius;
+    cursor: sw-resize;
+  }
+  .dialogBottomCenter {
+    .bordered;
+    background: @normal-color;
+    border-bottom-style: solid;
+    cursor: s-resize;
+  }
+  .dialogBottomRight {
+    .bordered;
+    background: @normal-color;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-bottom-right-radius: @radius;
+    cursor: se-resize;
+  }
+  .dialogTopLeftInner {
+    width: @border-size;
+  }
+  .dialogTopRightInner {
+    width: @border-size;
+  }
+  .dialogBottomLeftInner {
+    width: @border-size;
+    height: @border-size;
+  }
+  .dialogBottomRightInner {
+    width: @border-size;
+    height: @border-size;
+  }
+}
+/* Tabs */
+.TabPanel {
+  .gwt-TabBarFirst {
+    width: 5px;
+  }
+  .gwt-TabBarItem {
+    .highlighted;
+    border-style: solid;
+    border-top-left-radius: @radius;
+    border-top-right-radius: @radius;
+    cursor: pointer;
+    &:hover, &:focus, &:active {
+      background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+    }
+  }
+  .gwt-TabBarItem.gwt-TabBarItem-selected {
+    cursor: default;
+    background-image: linear-gradient(to bottom, #FFFFFF, @selected-color);
+    border-bottom-style: none;
+    &:hover, &:focus, &:active {
+      background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+    }
+  }
+  .gwt-TabBarItem {
+    padding: 0.4em;
+  }
+  .gwt-TabPanelBottom {
+    border-color: #92c1f0;
+    border-style: solid;
+    border-width: 3px 2px 2px;
+    padding: 6px;
+  }
+}
+/*
+.Tab {
+}
+.gwt-TabBar {
+}
+.gwt-TabBar .gwt-TabBarRest {
+}
+.gwt-TabBar .gwt-TabBarItem {
+  margin-left: 6px;
+  padding: 3px 6px 3px 6px;
+  cursor: pointer;
+  cursor: hand;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  background: #d0e4f6;
+}
+.gwt-TabBar .gwt-TabBarItem-selected {
+  cursor: default;
+  background: #92c1f0;
+}
+.gwt-TabBar .gwt-TabBarItem-disabled {
+  cursor: default;
+  color: #999999;
+}
+.TabPanel {
+}
+.gwt-TabPanelBottom {
+  border-color: #92c1f0;
+  border-style: solid;
+  border-width: 3px 2px 2px;
+  overflow: hidden;
+  padding: 6px;
+}
+*/
+
+/* Menu stuff */
+.gwt-MenuBar {
+  cursor: default;
+  .gwt-MenuItem {
+  }
+  .gwt-MenuItem-selected {
+    background: @focus-color;
+  }
+  .gwt-MenuItem-disabled {
+    color: #c0c0c0;
+  }
+}
+.gwt-MenuBar-horizontal {
+  .gradient;
+  border-style: solid;
+  
+  .gwt-MenuItem {
+    padding: 0px 10px;
+    vertical-align: bottom;
+    color: #666666;
+    font-weight: bold;
+  }
+  .gwt-MenuItemSeparator {
+    width: 1px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    border-left: 1px solid #888888;
+    background: white;
+  }
+  .gwt-MenuItemSeparator .menuSeparatorInner {
+    width: 1px;
+    height: 1px;
+    background: white;
+  }
+}
+.gwt-MenuBar-vertical {
+  margin-top: 0px;
+  margin-left: 0px;
+  background: white;
+  
+  table {
+    border-collapse: collapse;
+  }
+  .gwt-MenuItem {
+    padding: 4px 14px 4px 1px;
+  }
+  .gwt-MenuItemSeparator {
+    padding: 10px 0px;
+  }
+  .gwt-MenuItemSeparator .menuSeparatorInner {
+    .bordered;
+    height: 1px;
+    padding: 0px;
+    border-top-style: solid;
+    background: @normal-color;
+    overflow: hidden;
+  }
+  .subMenuIcon {
+    padding-right: 4px;
+  }
+  .subMenuIcon-selected {
+    background: @focus-color;
+  }
+}
+.gwt-MenuBarPopup {
+  margin: 0px 0px 0px 3px;
+  .bordered;
+  border-style: solid;
+  background: white;
+  box-shadow: 4px 4px 5px 0px black;
+
+  .menuPopupTopLeftInner {
+    width: 5px;
+    height: 5px;
+  }
+  .menuPopupTopRightInner {
+    width: 8px;
+    height: 5px;
+  }
+  .menuPopupBottomLeftInner {
+    width: 5px;
+    height: 8px;
+  }
+  .menuPopupBottomRightInner {
+    width: 8px;
+    height: 8px;
+  }
+}

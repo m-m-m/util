@@ -93,10 +93,22 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();
     UiWidgetMenuBar menuBar = mainWindow.getMenuBar();
+
     UiWidgetMenu fileMenu = menuBar.addMenu("File");
     UiWidgetMenuItemClickable exitMenuItem = factory.create(UiWidgetMenuItemClickable.class);
     exitMenuItem.setLabel("Exit");
     fileMenu.addChild(exitMenuItem);
+
+    UiWidgetMenu settingsMenu = menuBar.addMenu("Settings");
+    UiWidgetMenu prefernecesSubmenu = settingsMenu.addSubmenu("Preferences");
+    UiWidgetMenuItemClickable fooMenuItem = factory.create(UiWidgetMenuItemClickable.class);
+    fooMenuItem.setLabel("Foo");
+    prefernecesSubmenu.addChild(fooMenuItem);
+
+    settingsMenu.addSeparator();
+    UiWidgetMenuItemClickable optionsMenuItem = factory.create(UiWidgetMenuItemClickable.class);
+    optionsMenuItem.setLabel("Options");
+    settingsMenu.addChild(optionsMenuItem);
 
     UiWidgetTabPanel tabPanel = factory.create(UiWidgetTabPanel.class);
 
@@ -144,13 +156,27 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        UiWidgetPopup popup = factory.create(UiWidgetPopup.class);
+        final UiWidgetPopup popup = factory.create(UiWidgetPopup.class);
         popup.setTitle("Popup Test");
+        // popup.setSize(600, 400, SizeUnit.PIXEL);
         UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
         UiWidgetLabel label3 = factory.create(UiWidgetLabel.class);
         label3.setLabel("Hello World!");
+        UiWidgetButton button = factory.create(UiWidgetButton.class);
+        button.setLabel("Close");
+        UiHandlerEventClick handler = new UiHandlerEventClick() {
+
+          @Override
+          public void onClick(UiFeatureClick source, boolean programmatic) {
+
+            popup.setVisible(false);
+          }
+        };
+        button.addClickHandler(handler);
         verticalPanel3.addChild(label3);
+        verticalPanel3.addChild(button);
         popup.addChild(verticalPanel3);
+        popup.centerWindow();
         popup.setVisible(true);
       }
     });

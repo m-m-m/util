@@ -3,10 +3,12 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter;
 
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem;
+import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemSeparator;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenu;
 
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.MenuItemSeparator;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterMenu} using GWT based on {@link MenuItem} and
@@ -35,7 +37,6 @@ public class UiWidgetAdapterGwtMenu extends UiWidgetAdapterGwtMenuItemBase imple
   protected MenuItem createToplevelWidget() {
 
     this.menuBar = new MenuBar(true);
-    this.menuBar.setAnimationEnabled(true);
     return new MenuItem("", this.menuBar);
   }
 
@@ -45,8 +46,13 @@ public class UiWidgetAdapterGwtMenu extends UiWidgetAdapterGwtMenuItemBase imple
   @Override
   public void addChild(UiWidgetMenuItem child, int index) {
 
-    MenuItem menuItem = getToplevelWidget(child, MenuItem.class);
-    this.menuBar.addItem(menuItem);
+    if (child instanceof UiWidgetMenuItemSeparator) {
+      MenuItemSeparator separator = getToplevelWidget(child, MenuItemSeparator.class);
+      this.menuBar.addSeparator(separator);
+    } else {
+      MenuItem menu = getToplevelWidget(child, MenuItem.class);
+      this.menuBar.addItem(menu);
+    }
   }
 
   /**

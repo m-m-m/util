@@ -9,10 +9,10 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 
 /**
- * This is the interface for a {@link UiWidgetSingleMutableComposite single composite widget} that represents a
- * single <code>tab</code>. In order to
- * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel#addChild(UiWidgetTab) add} a something like
- * a {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel panel} to a
+ * This is the interface for a {@link UiWidgetSingleMutableComposite single composite widget} that represents
+ * a single <code>tab</code>. In order to
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel#addChild(UiWidgetTab) add} a something like a
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel panel} to a
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel tab panel}, you need to create an
  * {@link UiWidgetTab} {@link #getChild() containing} that
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel panel} and add it to the
@@ -26,6 +26,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 public interface UiWidgetTab extends UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteLabel,
     AttributeWriteImage<UiWidgetImage>, UiWidgetReal {
 
-  // nothing to add
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "Tab";
 
 }

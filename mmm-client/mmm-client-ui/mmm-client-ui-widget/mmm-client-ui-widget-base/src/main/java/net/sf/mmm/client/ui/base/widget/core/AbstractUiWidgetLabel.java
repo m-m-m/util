@@ -30,6 +30,7 @@ public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel
   public AbstractUiWidgetLabel(AbstractUiContext context) {
 
     super(context);
+    setPrimaryStyle(PRIMARY_STYLE);
   }
 
   // /**

@@ -25,6 +25,7 @@ public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup
   public AbstractUiWidgetPopup(AbstractUiContext context) {
 
     super(context);
+    setPrimaryStyle(PRIMARY_STYLE);
   }
 
 }

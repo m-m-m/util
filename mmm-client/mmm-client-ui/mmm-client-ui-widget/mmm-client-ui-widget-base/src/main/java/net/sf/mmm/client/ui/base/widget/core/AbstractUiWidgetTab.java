@@ -33,6 +33,7 @@ public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab> ex
   public AbstractUiWidgetTab(AbstractUiContext context) {
 
     super(context);
+    setPrimaryStyle(PRIMARY_STYLE);
   }
 
   /**

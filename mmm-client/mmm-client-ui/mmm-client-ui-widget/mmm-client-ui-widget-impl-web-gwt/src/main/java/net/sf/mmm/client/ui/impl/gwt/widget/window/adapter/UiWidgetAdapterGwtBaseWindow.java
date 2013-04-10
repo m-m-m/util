@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
@@ -62,6 +63,33 @@ public abstract class UiWidgetAdapterGwtBaseWindow<WIDGET extends Panel> extends
     } else {
       this.contentPanel.add(getToplevelWidget(child));
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidth(Length width) {
+
+    this.contentPanel.setWidth(width.toString());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeight(Length height) {
+
+    this.contentPanel.setHeight(height.toString());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSize(Length width, Length height) {
+
+    this.contentPanel.setSize(width.toString(), height.toString());
   }
 
 }

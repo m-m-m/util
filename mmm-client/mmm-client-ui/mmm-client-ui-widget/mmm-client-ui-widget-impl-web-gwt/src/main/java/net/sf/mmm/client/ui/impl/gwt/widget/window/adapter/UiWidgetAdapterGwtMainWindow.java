@@ -60,6 +60,15 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
    * {@inheritDoc}
    */
   @Override
+  public Length getWidth() {
+
+    return Length.valueOfPixel(getWidthInPixel());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setWidth(Length width) {
 
     Window.resizeTo(convertLength(width), Window.getClientHeight());
@@ -76,6 +85,15 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
 
     assert (length.getUnit() == SizeUnit.PIXEL);
     return (int) length.getAmount();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Length getHeight() {
+
+    return Length.valueOfPixel(getHeightInPixel());
   }
 
   /**
@@ -141,7 +159,8 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
   @Override
   public double getWidthInPixel() {
 
-    return JavaScriptUtil.getInstance().getBrowserWidth();
+    // return JavaScriptUtil.getInstance().getBrowserWidth();
+    return Window.getClientWidth();
   }
 
   /**
@@ -150,7 +169,8 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
   @Override
   public double getHeightInPixel() {
 
-    return JavaScriptUtil.getInstance().getBrowserHeight();
+    // return JavaScriptUtil.getInstance().getBrowserHeight();
+    return Window.getClientHeight();
   }
 
   /**

@@ -17,6 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  */
 public interface UiWidgetPopup extends UiWidgetBaseWindow, AttributeWriteResizable, UiWidgetReal {
 
-  // nothing to add
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "Popup";
 
 }

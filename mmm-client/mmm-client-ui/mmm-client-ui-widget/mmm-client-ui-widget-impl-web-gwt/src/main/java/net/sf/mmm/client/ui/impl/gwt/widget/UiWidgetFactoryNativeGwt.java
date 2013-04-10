@@ -30,6 +30,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuBarGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuItemClickableGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuItemSeparatorGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetBorderPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridCellGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridPanelGwt;
@@ -93,6 +94,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetMenuBarGwt.Factory());
     register(new UiWidgetMenuGwt.Factory());
     register(new UiWidgetMenuItemClickableGwt.Factory());
+    register(new UiWidgetMenuItemSeparatorGwt.Factory());
     // window
     register(new UiWidgetPopupGwt.Factory());
   }

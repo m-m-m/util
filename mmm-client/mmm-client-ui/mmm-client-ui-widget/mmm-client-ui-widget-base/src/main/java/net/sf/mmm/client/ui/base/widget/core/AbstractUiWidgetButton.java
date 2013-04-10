@@ -30,6 +30,7 @@ public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButt
 
     super(context);
     this.image = null;
+    setPrimaryStyle(PRIMARY_STYLE);
   }
 
   /**

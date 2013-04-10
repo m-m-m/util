@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.menu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
-import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenuItem;
+import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenuItemClickable;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuItem;
 
 /**
@@ -14,8 +14,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuI
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItem<UiWidgetAdapterGwtMenuItem> implements
-    UiWidgetMenuItemClickable {
+public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItemClickable<UiWidgetAdapterGwtMenuItem> {
 
   /**
    * The constructor.

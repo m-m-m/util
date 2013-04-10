@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
  */
 public interface UiWidgetLabel extends UiWidgetRegularAtomic, AttributeWriteLabel, UiWidgetReal {
 
-  // nothing to add
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "Label";
 
 }

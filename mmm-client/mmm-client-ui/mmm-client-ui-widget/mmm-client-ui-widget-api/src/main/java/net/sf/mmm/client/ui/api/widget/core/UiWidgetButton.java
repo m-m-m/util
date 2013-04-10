@@ -24,6 +24,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
 public interface UiWidgetButton extends UiWidgetRegularAtomic, UiWidgetActive, UiFeatureClick, AttributeWriteLabel,
     AttributeWriteImage<UiWidgetImage>, UiWidgetReal {
 
-  // nothing to add...
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "Button";
 
 }
