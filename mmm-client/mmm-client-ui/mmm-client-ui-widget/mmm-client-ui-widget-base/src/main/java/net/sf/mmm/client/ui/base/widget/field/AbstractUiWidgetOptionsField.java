@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetOptionsField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
@@ -51,7 +51,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetOptionsField(AbstractUiContext context) {
+  public AbstractUiWidgetOptionsField(UiContext context) {
 
     super(context);
     this.mutableOptions = new ArrayList<VALUE>();

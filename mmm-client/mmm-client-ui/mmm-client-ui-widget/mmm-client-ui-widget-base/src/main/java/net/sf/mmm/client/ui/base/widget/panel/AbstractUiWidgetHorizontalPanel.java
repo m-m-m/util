@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel;
 
 /**
@@ -23,7 +23,7 @@ public abstract class AbstractUiWidgetHorizontalPanel<ADAPTER extends UiWidgetAd
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetHorizontalPanel(AbstractUiContext context) {
+  public AbstractUiWidgetHorizontalPanel(UiContext context) {
 
     super(context);
   }

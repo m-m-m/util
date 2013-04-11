@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.field;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetField field widget} that represents an integer range field. Such
@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetIntegerRangeField extends UiWidgetRangeField<Integer>, UiWidgetReal {
+public interface UiWidgetIntegerRangeField extends UiWidgetRangeField<Integer>, UiWidgetNative {
 
   // nothing to add...
 

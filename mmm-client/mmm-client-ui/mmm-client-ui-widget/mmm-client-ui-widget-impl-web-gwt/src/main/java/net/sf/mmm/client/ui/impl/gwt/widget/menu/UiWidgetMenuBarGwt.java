@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.menu;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenuBar;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuBar;
 
@@ -21,7 +21,7 @@ public class UiWidgetMenuBarGwt extends AbstractUiWidgetMenuBar<UiWidgetAdapterG
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetMenuBarGwt(AbstractUiContext context) {
+  public UiWidgetMenuBarGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetMenuBarGwt extends AbstractUiWidgetMenuBar<UiWidgetAdapterG
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetMenuBar> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetMenuBar> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetMenuBarGwt extends AbstractUiWidgetMenuBar<UiWidgetAdapterG
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetMenuBar create(AbstractUiContext context) {
+    public UiWidgetMenuBar create(UiContext context) {
 
       return new UiWidgetMenuBarGwt(context);
     }

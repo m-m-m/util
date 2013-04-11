@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
@@ -118,7 +118,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
    * {@inheritDoc}
    */
   @Override
-  public <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface) {
+  public <WIDGET extends UiWidgetNative> WIDGET create(Class<WIDGET> widgetInterface) {
 
     return this.widgetFactoryNative.create(widgetInterface);
   }

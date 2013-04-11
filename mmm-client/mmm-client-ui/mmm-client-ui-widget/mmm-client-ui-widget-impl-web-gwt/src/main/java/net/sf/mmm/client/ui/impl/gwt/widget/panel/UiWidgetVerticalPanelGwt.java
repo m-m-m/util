@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtVerticalPanel;
 
@@ -21,7 +21,7 @@ public class UiWidgetVerticalPanelGwt extends AbstractUiWidgetVerticalPanel<UiWi
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetVerticalPanelGwt(AbstractUiContext context) {
+  public UiWidgetVerticalPanelGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetVerticalPanelGwt extends AbstractUiWidgetVerticalPanel<UiWi
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetVerticalPanel> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetVerticalPanel> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetVerticalPanelGwt extends AbstractUiWidgetVerticalPanel<UiWi
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetVerticalPanel create(AbstractUiContext context) {
+    public UiWidgetVerticalPanel create(UiContext context) {
 
       return new UiWidgetVerticalPanelGwt(context);
     }

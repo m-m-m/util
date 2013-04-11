@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetGridCell;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtGridCell;
 
@@ -21,7 +21,7 @@ public class UiWidgetGridCellGwt extends AbstractUiWidgetGridCell<UiWidgetAdapte
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetGridCellGwt(AbstractUiContext context) {
+  public UiWidgetGridCellGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetGridCellGwt extends AbstractUiWidgetGridCell<UiWidgetAdapte
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetGridCell> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetGridCell> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetGridCellGwt extends AbstractUiWidgetGridCell<UiWidgetAdapte
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetGridCell create(AbstractUiContext context) {
+    public UiWidgetGridCell create(UiContext context) {
 
       return new UiWidgetGridCellGwt(context);
     }

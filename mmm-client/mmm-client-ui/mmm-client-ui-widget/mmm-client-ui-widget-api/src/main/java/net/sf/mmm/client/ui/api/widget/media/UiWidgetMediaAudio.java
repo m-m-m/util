@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.media;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetMedia media-player widget} that plays audio tracks. <br/>
@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetMediaAudio extends UiWidgetMedia, UiWidgetReal {
+public interface UiWidgetMediaAudio extends UiWidgetMedia, UiWidgetNative {
 
   // nothing to add...
 

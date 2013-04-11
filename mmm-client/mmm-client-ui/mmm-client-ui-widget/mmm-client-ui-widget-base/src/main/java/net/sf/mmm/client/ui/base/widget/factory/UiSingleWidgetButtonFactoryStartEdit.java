@@ -10,8 +10,8 @@ import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
- * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainStartEdit start edit}
- * {@link UiWidgetButton buttons}.
+ * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
+ * {@link UiHandlerPlainStartEdit start edit} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -58,14 +58,14 @@ public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidget
    */
   @Override
   public UiWidgetButton create(UiContext context, final UiHandlerPlainStartEdit handler,
-      boolean preventConfirmationPopup) {
+      boolean preventConfirmationPopup, final Object variant) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onStartEditMode(null);
+        handler.onStartEditMode(variant);
       }
     };
     return createButton(context, getBundle().labelStartEdit(), clickHandler, null, null);

@@ -2,13 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.aria.role.RolePresentation;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridPanel;
 
 /**
@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetGridPanel<ADAPTER extends UiWidgetAdapterG
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetGridPanel(AbstractUiContext context) {
+  public AbstractUiWidgetGridPanel(UiContext context) {
 
     super(context);
   }

@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextArea;
 
 /**
@@ -21,7 +21,7 @@ public abstract class AbstractUiWidgetTextArea<ADAPTER extends UiWidgetAdapterTe
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTextArea(AbstractUiContext context) {
+  public AbstractUiWidgetTextArea(UiContext context) {
 
     super(context);
   }

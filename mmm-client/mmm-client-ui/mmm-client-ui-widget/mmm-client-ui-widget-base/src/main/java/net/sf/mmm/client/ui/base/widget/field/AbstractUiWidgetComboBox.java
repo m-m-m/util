@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.aria.role.RoleCombobox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 
 /**
@@ -25,7 +25,7 @@ public abstract class AbstractUiWidgetComboBox<ADAPTER extends UiWidgetAdapterOp
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetComboBox(AbstractUiContext context) {
+  public AbstractUiWidgetComboBox(UiContext context) {
 
     super(context);
   }

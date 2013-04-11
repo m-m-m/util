@@ -21,6 +21,9 @@ import net.sf.mmm.util.xml.api.XmlUtil;
 import net.sf.mmm.util.xml.base.StreamReaderProxy;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}
  * adding support for XInclude.<br>
@@ -32,6 +35,9 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XIncludeStreamReader extends StreamReaderProxy {
+
+  /** The {@link Logger} to use. */
+  private static final Logger LOGGER = LoggerFactory.getLogger(XIncludeStreamReader.class);
 
   /** the parent reader or <code>null</code> if this is the root. */
   private final XIncludeStreamReader parent;
@@ -303,8 +309,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
       try {
         this.includeReader.close();
       } catch (Exception e) {
-        e.printStackTrace();
-        // TODO: use logger!
+        LOGGER.warn("Failed to close include reader.", e);
       }
       this.includeReader = null;
       this.depth = 0;

@@ -5,12 +5,11 @@ package net.sf.mmm.client.ui.base.widget.custom.panel;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 
 /**
- * This is the abstract base class for a {@link UiWidgetCustomRegularComposite custom composite widget} that
- * adapts a {@link UiWidgetGridPanel}. It is typically used for building a reusable form to edit business
- * objects.
+ * This is the abstract base class for a {@link UiWidgetCustomComposite custom composite widget} that adapts a
+ * {@link UiWidgetGridPanel}. It is typically used for building a reusable form to edit business objects.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -18,7 +17,7 @@ import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
  * @since 1.0.0
  */
 public abstract class UiWidgetCustomGridPanel<VALUE> extends
-    UiWidgetCustomRegularComposite<VALUE, UiWidgetGridRow, UiWidgetGridPanel> {
+    UiWidgetCustomComposite<VALUE, UiWidgetGridRow, UiWidgetGridPanel> {
 
   /**
    * The constructor.

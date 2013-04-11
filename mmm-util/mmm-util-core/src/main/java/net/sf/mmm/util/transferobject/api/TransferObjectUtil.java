@@ -62,7 +62,7 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * having cycles in {@link TransferObject}s is typically a design flaw. If you think different you can try
    * to convince us so we will add support for this.
    * 
-   * @param transferObject
+   * @param transferObject is the {@link TransferObject} to update.
    */
   void updateModificationCounter(TransferObject transferObject);
 

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSwitchComposite;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSwitchComposite;
  * @since 1.0.0
  */
 public abstract interface UiWidgetSwitchPanel extends UiWidgetDynamicPanel<UiWidgetRegular>,
-    UiWidgetSwitchComposite<UiWidgetRegular>, UiWidgetReal {
+    UiWidgetSwitchComposite<UiWidgetRegular>, UiWidgetNative {
 
   // nothing to add
 

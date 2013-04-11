@@ -8,12 +8,12 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomButtonPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLabelGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLinkGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetTabGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboBoxGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
@@ -67,6 +67,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetImageGwt.Factory());
     register(new UiWidgetButtonGwt.Factory());
     register(new UiWidgetLabelGwt.Factory());
+    register(new UiWidgetLinkGwt.Factory());
     // field
     register(new UiWidgetTextFieldGwt.Factory());
     register(new UiWidgetPasswordFieldGwt.Factory());
@@ -116,7 +117,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
    */
   private UiWidgetMainWindow createMainWindow() {
 
-    AbstractUiContext context = getContext();
+    UiContext context = getContext();
     NlsNullPointerException.checkNotNull(UiContext.class, context);
     UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(context);
     window.setVisible(true);

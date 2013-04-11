@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.factory;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 
@@ -40,7 +40,7 @@ public abstract interface AbstractUiWidgetFactoryNative {
    * defines base interfaces marks as <code>abstract</code>. These interfaces cannot be used as argument to
    * this method. Further some widget interfaces are NOT abstract but will not be created via this method but
    * from some other widget. To avoid confusion the widgets that can be created here are marked via the
-   * interface {@link UiWidgetReal}. All these interfaces except for {@link UiWidgetReal} itself can be
+   * interface {@link UiWidgetNative}. All these interfaces except for {@link UiWidgetNative} itself can be
    * created and should be supported as legal arguments to this method.
    * 
    * @param <WIDGET> is the generic type of the {@link net.sf.mmm.client.ui.api.widget.UiWidget} to create.
@@ -48,7 +48,7 @@ public abstract interface AbstractUiWidgetFactoryNative {
    *        to create. Must NOT be <code>abstract</code>.
    * @return the new {@link net.sf.mmm.client.ui.api.widget.UiWidget}.
    */
-  <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface);
+  <WIDGET extends UiWidgetNative> WIDGET create(Class<WIDGET> widgetInterface);
 
   /**
    * This method gets the underlying native widget of the given {@link UiWidgetRegular regular widget}.

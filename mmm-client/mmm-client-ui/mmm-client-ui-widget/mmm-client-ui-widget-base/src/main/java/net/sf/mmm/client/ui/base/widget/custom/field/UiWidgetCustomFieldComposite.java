@@ -54,7 +54,7 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
 
     super(context, delegate);
     this.fieldList = new LinkedList<UiWidgetField<?>>();
-    this.focusEventSender = new FocusEventSender(this, getContext());
+    this.focusEventSender = new FocusEventSender(this, getObserverSource());
   }
 
   /**
@@ -184,7 +184,7 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
   @Override
   protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    return new ChangeEventSender<VALUE>(this, getContext());
+    return new ChangeEventSender<VALUE>(this, getObserverSource());
   }
 
 }

@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.api.widget.menu;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetDynamicComposite dynamic composite widget} that represents a
@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @since 1.0.0
  */
 public interface UiWidgetMenu extends UiWidgetDynamicComposite<UiWidgetMenuItem>, UiWidgetMenuItem,
-    AttributeWriteLabel, UiWidgetReal {
+    AttributeWriteLabel, UiWidgetNative {
 
   /**
    * This method {@link #addChild(UiWidgetMenuItem) adds} a {@link UiWidgetMenuItemSeparator separator} to

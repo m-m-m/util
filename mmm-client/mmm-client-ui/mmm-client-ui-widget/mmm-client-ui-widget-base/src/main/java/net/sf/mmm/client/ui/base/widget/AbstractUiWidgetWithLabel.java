@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
 
 /**
@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterWithLabel;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetWithLabel<ADAPTER extends UiWidgetAdapterWithLabel> extends
-    AbstractUiWidgetReal<ADAPTER, Void> implements AttributeWriteLabel {
+    AbstractUiWidgetNative<ADAPTER, Void> implements AttributeWriteLabel {
 
   /** @see #getLabel() */
   private String label;
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetWithLabel<ADAPTER extends UiWidgetAdapterW
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetWithLabel(AbstractUiContext context) {
+  public AbstractUiWidgetWithLabel(UiContext context) {
 
     super(context);
   }

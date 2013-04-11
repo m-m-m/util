@@ -96,9 +96,11 @@ public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE
    */
   protected final void before() {
 
-    UiHandlerObserver handlerObserver = this.observerSource.getHandlerObserver();
-    if (handlerObserver != null) {
-      handlerObserver.beforeHandler(this.handlerType);
+    if (this.observerSource != null) {
+      UiHandlerObserver handlerObserver = this.observerSource.getHandlerObserver();
+      if (handlerObserver != null) {
+        handlerObserver.beforeHandler(this.handlerType);
+      }
     }
   }
 
@@ -107,9 +109,11 @@ public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE
    */
   protected final void after() {
 
-    UiHandlerObserver handlerObserver = this.observerSource.getHandlerObserver();
-    if (handlerObserver != null) {
-      handlerObserver.afterHandler(this.handlerType);
+    if (this.observerSource != null) {
+      UiHandlerObserver handlerObserver = this.observerSource.getHandlerObserver();
+      if (handlerObserver != null) {
+        handlerObserver.afterHandler(this.handlerType);
+      }
     }
   }
 

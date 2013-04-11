@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 
 /**
@@ -15,14 +15,14 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetRegularAtomic<ADAPTER extends UiWidgetAdapter> extends
-    AbstractUiWidgetReal<ADAPTER, Void> implements UiWidgetRegularAtomic {
+    AbstractUiWidgetNative<ADAPTER, Void> implements UiWidgetRegularAtomic {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetRegularAtomic(AbstractUiContext context) {
+  public AbstractUiWidgetRegularAtomic(UiContext context) {
 
     super(context);
   }

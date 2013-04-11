@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridRow;
 
 /**
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetGridRow<ADAPTER extends UiWidgetAdapterGri
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetGridRow(AbstractUiContext context) {
+  public AbstractUiWidgetGridRow(UiContext context) {
 
     super(context);
   }

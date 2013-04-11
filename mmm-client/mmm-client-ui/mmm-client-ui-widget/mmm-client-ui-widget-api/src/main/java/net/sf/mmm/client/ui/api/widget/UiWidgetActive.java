@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetActive extends UiWidgetRegular, AttributeWriteAccessKey, UiFeatureFocus {
+public interface UiWidgetActive extends UiWidget, AttributeWriteAccessKey, UiFeatureFocus {
 
   // nothing to add...
 

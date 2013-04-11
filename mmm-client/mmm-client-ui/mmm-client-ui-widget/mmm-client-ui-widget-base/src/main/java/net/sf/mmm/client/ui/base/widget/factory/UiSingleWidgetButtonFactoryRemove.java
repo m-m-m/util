@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.factory;
 
+import java.util.function.Consumer;
+
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
@@ -11,12 +13,11 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainRemove;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainRemove remove}
- * {@link UiWidgetButton buttons}.
+ * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
+ * {@link UiHandlerPlainRemove remove} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -63,7 +64,7 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
    */
   @Override
   public UiWidgetButton create(final UiContext context, final UiHandlerPlainRemove handler,
-      final boolean preventConfirmationPopup) {
+      final boolean preventConfirmationPopup, final Object variant) {
 
     final NlsBundleClientUiRoot bundle = getBundle();
 
@@ -75,18 +76,17 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
         if (preventConfirmationPopup) {
-          handler.onRemove(null);
+          handler.onRemove(variant);
         } else {
           UiPopupHelper popupHelper = context.getPopupHelper();
-          Callback<String> callback = new Callback<String>() {
+          Consumer<String> callback = new Consumer<String>() {
 
             @Override
-            public Void apply(String argument) {
+            public void accept(String argument) {
 
               if (UiPopupHelper.BUTTON_ID_OK.equals(argument)) {
-                handler.onRemove(null);
+                handler.onRemove(variant);
               }
-              return null;
             }
           };
           String message = bundle.messageConfirmRemove().getLocalizedMessage();

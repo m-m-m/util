@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.api.widget.media;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximized;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 
 /**
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
  * @since 1.0.0
  */
 public interface UiWidgetMediaVideo extends UiWidgetMedia, AttributeWriteMaximized, AttributeWriteImage<UiWidgetImage>,
-    UiWidgetReal {
+    UiWidgetNative {
 
   // nothing to add...
 

@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextualInputField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInputField;
 
 /**
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetTextualInputField<ADAPTER extends UiWidget
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTextualInputField(AbstractUiContext context) {
+  public AbstractUiWidgetTextualInputField(UiContext context) {
 
     super(context);
     this.maximumTextLength = Integer.MAX_VALUE;

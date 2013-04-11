@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.api.media.AudioDescriptor;
 import net.sf.mmm.client.ui.api.media.VideoDescriptor;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the abstract interface for a {@link UiWidgetComposite composite widget} that represents a
@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetMediaPlayer extends UiWidgetComposite<UiWidget>, AttributeWritePaused, UiWidgetReal {
+public interface UiWidgetMediaPlayer extends UiWidgetComposite<UiWidget>, AttributeWritePaused, UiWidgetNative {
 
   /**
    * This method makes the <em>previous</em> and <em>next</em> buttons visible and connects them with the

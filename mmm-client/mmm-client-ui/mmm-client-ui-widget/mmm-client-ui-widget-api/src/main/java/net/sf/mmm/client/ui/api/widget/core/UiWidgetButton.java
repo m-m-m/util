@@ -2,11 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.core;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteImage;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetClickable;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
 
 /**
@@ -21,8 +18,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetButton extends UiWidgetRegularAtomic, UiWidgetActive, UiFeatureClick, AttributeWriteLabel,
-    AttributeWriteImage<UiWidgetImage>, UiWidgetReal {
+public interface UiWidgetButton extends UiWidgetRegularAtomic, UiWidgetClickable, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Button";

@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextFieldBase;
 import net.sf.mmm.util.filter.api.CharFilter;
 
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetTextFieldBase<ADAPTER extends UiWidgetAdap
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTextFieldBase(AbstractUiContext context) {
+  public AbstractUiWidgetTextFieldBase(UiContext context) {
 
     super(context);
   }

@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a rich text area
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @since 1.0.0
  */
 public interface UiWidgetRichTextArea extends UiWidgetTextualInputField<String>, AttributeWriteKeyboardFilter,
-    AttributeWriteHeightInRows, UiWidgetReal {
+    AttributeWriteHeightInRows, UiWidgetNative {
 
   /**
    * {@inheritDoc}

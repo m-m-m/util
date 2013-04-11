@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleComposite;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleComposite;
 
 /**
@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetSingleComposite(AbstractUiContext context) {
+  public AbstractUiWidgetSingleComposite(UiContext context) {
 
     super(context);
   }

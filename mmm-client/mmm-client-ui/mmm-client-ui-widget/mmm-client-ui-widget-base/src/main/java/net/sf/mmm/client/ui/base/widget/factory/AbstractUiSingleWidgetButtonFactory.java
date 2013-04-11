@@ -8,6 +8,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
 import net.sf.mmm.client.ui.base.dynamic.VisibleFunctionMode;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;

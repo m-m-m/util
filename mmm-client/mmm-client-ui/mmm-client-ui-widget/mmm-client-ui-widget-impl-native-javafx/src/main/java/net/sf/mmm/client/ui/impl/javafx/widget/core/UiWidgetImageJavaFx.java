@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.javafx.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetImage;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.javafx.widget.core.adapter.UiWidgetAdapterJavaFxImage;
 
 /**
@@ -21,7 +21,7 @@ public class UiWidgetImageJavaFx extends AbstractUiWidgetImage<UiWidgetAdapterJa
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetImageJavaFx(AbstractUiContext context) {
+  public UiWidgetImageJavaFx(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetImageJavaFx extends AbstractUiWidgetImage<UiWidgetAdapterJa
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetImage> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetImage> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetImageJavaFx extends AbstractUiWidgetImage<UiWidgetAdapterJa
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetImage create(AbstractUiContext context) {
+    public UiWidgetImage create(UiContext context) {
 
       return new UiWidgetImageJavaFx(context);
     }

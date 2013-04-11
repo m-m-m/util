@@ -18,8 +18,8 @@ import com.google.gwt.user.client.ui.MenuItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase implements UiWidgetAdapterMenuItemClickable,
-    Command {
+public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase implements
+    UiWidgetAdapterMenuItemClickable, Command {
 
   /** @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick) */
   private UiFeatureClick source;

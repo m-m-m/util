@@ -6,10 +6,11 @@ import java.util.List;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetListBase;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.table.model.UiModelListTable;
 import net.sf.mmm.client.ui.api.widget.table.model.UiModelTableColumn;
+import net.sf.mmm.util.lang.api.SortOrder;
 
 /**
  * This is the interface for a {@link UiWidgetComposite composite widget} that represents a
@@ -38,7 +39,8 @@ import net.sf.mmm.client.ui.api.widget.table.model.UiModelTableColumn;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetListTable<ROW> extends UiWidgetComposite<UiWidgetRegular>, UiWidgetListBase<ROW>, UiWidgetReal {
+public interface UiWidgetListTable<ROW> extends UiWidgetComposite<UiWidgetRegular>, UiWidgetListBase<ROW>,
+    UiWidgetNative {
 
   /**
    * {@inheritDoc}
@@ -66,5 +68,14 @@ public interface UiWidgetListTable<ROW> extends UiWidgetComposite<UiWidgetRegula
    * @param model is the {@link UiModelListTable model}.
    */
   void setModel(UiModelListTable<ROW> model);
+
+  /**
+   * This method sets the table {@link #getValue() data} according to the specified <code>column</code> and
+   * <code>order</code>.
+   * 
+   * @param column is the {@link UiModelTableColumn} to sort by.
+   * @param order is the {@link SortOrder}.
+   */
+  void sort(UiModelTableColumn<ROW, ?> column, SortOrder order);
 
 }

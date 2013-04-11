@@ -6,19 +6,18 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularCompositeNoValue;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomCompositeNoValue;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 
 /**
  * This is the toolkit independent implementation of {@link UiWidgetButtonPanel} based on
- * {@link UiWidgetCustomRegularCompositeNoValue} and {@link UiWidgetHorizontalPanel}.
+ * {@link UiWidgetCustomCompositeNoValue} and {@link UiWidgetHorizontalPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetCustomButtonPanel extends
-    UiWidgetCustomRegularCompositeNoValue<UiWidgetButton, UiWidgetHorizontalPanel> implements UiWidgetButtonPanel {
+    UiWidgetCustomCompositeNoValue<UiWidgetButton, UiWidgetHorizontalPanel> implements UiWidgetButtonPanel {
 
   /**
    * The constructor.
@@ -67,9 +66,9 @@ public class UiWidgetCustomButtonPanel extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetButtonPanel> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetButtonPanel> {
 
     /**
      * The constructor.
@@ -83,7 +82,7 @@ public class UiWidgetCustomButtonPanel extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetButtonPanel create(AbstractUiContext context) {
+    public UiWidgetButtonPanel create(UiContext context) {
 
       return new UiWidgetCustomButtonPanel(context);
     }

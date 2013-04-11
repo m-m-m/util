@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterTab;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
@@ -104,7 +104,7 @@ public class UiWidgetAdapterGwtTab extends UiWidgetAdapterGwtWidget<HorizontalPa
     // getWidget().remove(this.image);
     // }
     if (image != null) {
-      this.image = AbstractUiWidgetReal.getWidgetAdapter((UiWidgetImageGwt) image).getToplevelWidget();
+      this.image = AbstractUiWidgetNative.getWidgetAdapter((UiWidgetImageGwt) image).getToplevelWidget();
       getToplevelWidget().insert(this.image, 0);
     }
   }

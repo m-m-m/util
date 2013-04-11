@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.menu;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * @since 1.0.0
  */
 public interface UiWidgetMenuItemCheckbox extends UiWidgetMenuItem, AttributeWriteLabel, AttributeWriteValue<Boolean>,
-    UiWidgetReal {
+    UiWidgetNative {
 
   // nothing to add
 

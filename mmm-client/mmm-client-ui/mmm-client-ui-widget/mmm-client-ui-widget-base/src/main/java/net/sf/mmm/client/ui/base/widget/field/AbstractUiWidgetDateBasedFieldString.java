@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.base.widget.field;
 
 import java.util.Date;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateBasedField;
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 
@@ -31,7 +31,7 @@ public abstract class AbstractUiWidgetDateBasedFieldString<ADAPTER extends UiWid
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetDateBasedFieldString(AbstractUiContext context) {
+  public AbstractUiWidgetDateBasedFieldString(UiContext context) {
 
     super(context);
     this.iso8601Util = context.getContainer().get(Iso8601UtilLimited.class);

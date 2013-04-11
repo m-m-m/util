@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.common.AbstractImage;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
 
 /**
@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetImage extends UiWidgetRegularAtomic, AbstractImage, UiWidgetReal {
+public interface UiWidgetImage extends UiWidgetRegularAtomic, AbstractImage, UiWidgetNative {
 
   // nothing to add
 

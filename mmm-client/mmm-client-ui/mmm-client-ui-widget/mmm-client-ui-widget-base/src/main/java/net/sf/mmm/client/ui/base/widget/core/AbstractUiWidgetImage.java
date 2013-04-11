@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetRegularAtomic;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterImage;
 
@@ -28,7 +28,7 @@ public abstract class AbstractUiWidgetImage<ADAPTER extends UiWidgetAdapterImage
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetImage(AbstractUiContext context) {
+  public AbstractUiWidgetImage(UiContext context) {
 
     super(context);
   }

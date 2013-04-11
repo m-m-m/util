@@ -15,6 +15,7 @@
   <description>provides basic utilities used by various other projects.</description>
 
   <modules>
+    <module>mmm-util-backport-java.util.function</module>
     <module>mmm-util-core</module>
     <module>mmm-util-gwt</module>
     <module>mmm-util-http</module>

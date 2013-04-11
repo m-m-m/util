@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetListBase;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetDynamicPanel;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetCustomTwoListSelection<ROW> extends
-    UiWidgetCustomRegularComposite<List<ROW>, UiWidgetRegular, UiWidgetDynamicPanel<UiWidgetRegular>> {
+    UiWidgetCustomComposite<List<ROW>, UiWidgetRegular, UiWidgetDynamicPanel<UiWidgetRegular>> {
 
   /**
    * The constructor.
@@ -35,8 +35,14 @@ public abstract class AbstractUiWidgetCustomTwoListSelection<ROW> extends
     super(context, delegate);
   }
 
+  /**
+   * @return the source {@link UiWidgetListBase list} where to choose options from.
+   */
   public abstract UiWidgetListBase<ROW> getSourceList();
 
+  /**
+   * @return the target {@link UiWidgetListBase list} where to add the selected options to.
+   */
   public abstract UiWidgetListBase<ROW> getTargetList();
 
   /**

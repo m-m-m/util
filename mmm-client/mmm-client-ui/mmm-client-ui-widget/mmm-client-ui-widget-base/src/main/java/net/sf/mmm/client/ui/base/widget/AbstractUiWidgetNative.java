@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
@@ -26,7 +27,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the abstract base implementation of {@link UiWidget} or more precisely
- * {@link net.sf.mmm.client.ui.api.widget.UiWidgetReal}. It is independent of any native toolkit via
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative}. It is independent of any native toolkit via
  * {@link UiWidgetAdapter} that is {@link #getWidgetAdapter() lazily created}.<br/>
  * If you want to create an implementation of all the {@link UiWidget}s for a native UI toolkit, you are
  * strongly encouraged to extend from this class and its subclasses (all classes named
@@ -38,7 +39,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALUE> extends AbstractUiWidget<VALUE>
+public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VALUE> extends AbstractUiWidget<VALUE>
     implements AbstractUiWidgetComposite, AttributeWriteAriaRole {
 
   /** @see #getWidgetAdapter() */
@@ -97,7 +98,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetReal(AbstractUiContext context) {
+  public AbstractUiWidgetNative(UiContext context) {
 
     super(context);
     this.visible = true;
@@ -145,7 +146,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    * @param widget is the widget.
    * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
    */
-  public static final <A extends UiWidgetAdapter> A getWidgetAdapter(AbstractUiWidgetReal<A, ?> widget) {
+  public static final <A extends UiWidgetAdapter> A getWidgetAdapter(AbstractUiWidgetNative<A, ?> widget) {
 
     return widget.getWidgetAdapter();
   }
@@ -223,7 +224,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
    */
   public static void setIdPrefix(String idPrefix) {
 
-    AbstractUiWidgetReal.idPrefix = idPrefix;
+    AbstractUiWidgetNative.idPrefix = idPrefix;
   }
 
   /**
@@ -294,7 +295,7 @@ public abstract class AbstractUiWidgetReal<ADAPTER extends UiWidgetAdapter, VALU
       return;
     }
     doSetMode(mode);
-    getContext().getModeChanger().changeMode(this, mode);
+    ((AbstractUiContext) getContext()).getModeChanger().changeMode(this, mode);
     this.mode = mode;
     updateVisibilityLocal();
     setModeRecursive(mode);

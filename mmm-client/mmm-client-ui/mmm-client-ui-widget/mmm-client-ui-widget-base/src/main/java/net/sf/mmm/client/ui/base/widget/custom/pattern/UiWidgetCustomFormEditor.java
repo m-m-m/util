@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.custom.pattern;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
 public class UiWidgetCustomFormEditor<VALUE> extends UiWidgetCustomEditor<VALUE> {
 
   /** The form panel to view and edit the {@link #getValue() value}. */
-  private UiWidgetCustomRegularComposite<VALUE, ?, ?> formPanel;
+  private UiWidgetCustomComposite<VALUE, ?, ?> formPanel;
 
   /**
    * The constructor.
@@ -31,7 +31,7 @@ public class UiWidgetCustomFormEditor<VALUE> extends UiWidgetCustomEditor<VALUE>
    * @param formPanel is the
    */
   public UiWidgetCustomFormEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject,
-      UiWidgetCustomRegularComposite<VALUE, ?, ?> formPanel) {
+      UiWidgetCustomComposite<VALUE, ?, ?> formPanel) {
 
     super(context, handlerSaveObject);
     this.formPanel = formPanel;

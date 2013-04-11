@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
@@ -39,7 +39,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetField(AbstractUiContext context) {
+  public AbstractUiWidgetField(UiContext context) {
 
     super(context);
   }

@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 /**
  * This is the abstract base implementation of {@link UiModeChanger}. It delegates to
  * {@link UiWidgetAdapter#setMode(boolean)} if the {@link UiWidgetAdapter} has
- * {@link AbstractUiWidgetReal#hasWidgetAdapter() already been created}. Otherwise it does nothing.
+ * {@link AbstractUiWidgetNative#hasWidgetAdapter() already been created}. Otherwise it does nothing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -27,7 +27,7 @@ public abstract class AbstractUiModeChanger implements UiModeChanger {
    * {@inheritDoc}
    */
   @Override
-  public void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode) {
+  public void changeMode(AbstractUiWidgetNative<?, ?> widget, UiMode newMode) {
 
     if (widget.hasWidgetAdapter()) {
       UiWidgetAdapter widgetAdapter = widget.getWidgetAdapter();
@@ -36,15 +36,15 @@ public abstract class AbstractUiModeChanger implements UiModeChanger {
   }
 
   /**
-   * This method is called from {@link #changeMode(AbstractUiWidgetReal, UiMode)} if the
-   * {@link UiWidgetAdapter} has {@link AbstractUiWidgetReal#hasWidgetAdapter() already been created}.
+   * This method is called from {@link #changeMode(AbstractUiWidgetNative, UiMode)} if the
+   * {@link UiWidgetAdapter} has {@link AbstractUiWidgetNative#hasWidgetAdapter() already been created}.
    * 
    * @param widget is the {@link net.sf.mmm.client.ui.api.widget.UiWidget} where to change the {@link UiMode}
    *        to <code>newMode</code>.
    * @param newMode is the new {@link UiMode}.
    * @param widgetAdapter is the {@link UiWidgetAdapter} of the <code>widget</code>.
    */
-  protected void changeMode(AbstractUiWidgetReal<?, ?> widget, UiMode newMode, UiWidgetAdapter widgetAdapter) {
+  protected void changeMode(AbstractUiWidgetNative<?, ?> widget, UiMode newMode, UiWidgetAdapter widgetAdapter) {
 
     widgetAdapter.setMode(newMode.isEditable());
   }

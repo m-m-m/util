@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickableWithLabel;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickable;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 
 /**
@@ -16,57 +15,17 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButton> extends
-    AbstractUiWidgetClickableWithLabel<ADAPTER> implements UiWidgetButton {
-
-  /** @see #getImage() */
-  private UiWidgetImage image;
+    AbstractUiWidgetClickable<ADAPTER> implements UiWidgetButton {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetButton(AbstractUiContext context) {
+  public AbstractUiWidgetButton(UiContext context) {
 
     super(context);
-    this.image = null;
     setPrimaryStyle(PRIMARY_STYLE);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void initializeWidgetAdapter(ADAPTER adapter) {
-
-    super.initializeWidgetAdapter(adapter);
-    if (this.image != null) {
-      adapter.setImage(this.image);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetImage getImage() {
-
-    return this.image;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setImage(UiWidgetImage image) {
-
-    if (this.image == image) {
-      return;
-    }
-    this.image = image;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setImage(image);
-    }
   }
 
 }

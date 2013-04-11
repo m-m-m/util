@@ -10,7 +10,6 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.javafx.widget.core.UiWidgetButtonJavaFx;
 import net.sf.mmm.client.ui.impl.javafx.widget.core.UiWidgetImageJavaFx;
@@ -85,7 +84,7 @@ public class UiWidgetFactoryNativeJavaFx extends AbstractUiWidgetFactoryNative {
    */
   private UiWidgetMainWindow createMainWindow() {
 
-    AbstractUiContext context = getContext();
+    UiContext context = getContext();
     NlsNullPointerException.checkNotNull(UiContext.class, context);
     UiWidgetMainWindowJavaFx window = new UiWidgetMainWindowJavaFx(context);
     // TODO hohwille

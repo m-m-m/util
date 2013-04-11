@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.field;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetDateBasedField date-based field widget} that allows to display
@@ -19,7 +19,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetDateTimeField extends UiWidgetDateBasedField, UiWidgetReal {
+public abstract interface UiWidgetDateTimeField extends UiWidgetDateBasedField, UiWidgetNative {
 
   // nothing to add...
 

@@ -17,6 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
@@ -176,9 +177,20 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
       final boolean preventConfirmationPopup) {
+
+    Object variant = null;
+    return createButton(handlerType, handler, preventConfirmationPopup, variant);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @SuppressWarnings("unchecked")
+  public <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
+      final boolean preventConfirmationPopup, Object variant) {
 
     UiSingleWidgetButtonFactory<?> buttonFactory;
     if (handlerType != null) {
@@ -205,7 +217,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
       throw new IllegalCaseException(illegalCase);
     }
     return ((UiSingleWidgetButtonFactory<HANDLER>) buttonFactory).create(getContext(), handler,
-        preventConfirmationPopup);
+        preventConfirmationPopup, variant);
   }
 
   /**

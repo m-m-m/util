@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerRangeField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetIntegerRangeField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtIntegerRangeField;
 
@@ -23,7 +23,7 @@ public class UiWidgetIntegerRangeFieldGwt extends
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetIntegerRangeFieldGwt(AbstractUiContext context) {
+  public UiWidgetIntegerRangeFieldGwt(UiContext context) {
 
     super(context);
   }
@@ -38,9 +38,9 @@ public class UiWidgetIntegerRangeFieldGwt extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetIntegerRangeField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetIntegerRangeField> {
 
     /**
      * The constructor.
@@ -54,7 +54,7 @@ public class UiWidgetIntegerRangeFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetIntegerRangeField create(AbstractUiContext context) {
+    public UiWidgetIntegerRangeField create(UiContext context) {
 
       return new UiWidgetIntegerRangeFieldGwt(context);
     }

@@ -3,11 +3,11 @@
 package net.sf.mmm.client.base.gwt.dialog;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.client.ui.base.AbstractUiPopupHelper;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.lang.api.Callback;
 
 import com.google.gwt.user.client.Window;
 
@@ -41,12 +41,12 @@ public class UiPopupHelperDummy extends AbstractUiPopupHelper {
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, MessageSeverity severity, String title, Callback<String> callback,
+  public void showPopup(String message, MessageSeverity severity, String title, Consumer<String> callback,
       Map<String, String> id2buttonLabelMap) {
 
     Window.alert(message);
     if (callback != null) {
-      callback.apply(BUTTON_ID_OK);
+      callback.accept(BUTTON_ID_OK);
     }
   }
 

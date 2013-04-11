@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
 
@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetBorderPanel<ADAPTER extends UiWidgetAdapte
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetBorderPanel(AbstractUiContext context) {
+  public AbstractUiWidgetBorderPanel(UiContext context) {
 
     super(context);
   }

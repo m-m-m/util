@@ -4,11 +4,11 @@ package net.sf.mmm.client.ui.base;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.lang.api.Callback;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
@@ -91,7 +91,7 @@ public abstract class AbstractUiPopupHelper implements UiPopupHelper {
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, MessageSeverity severity, Callback<String> callback) {
+  public void showPopup(String message, MessageSeverity severity, Consumer<String> callback) {
 
     showPopup(message, severity, getTitle(severity), callback);
   }
@@ -100,7 +100,7 @@ public abstract class AbstractUiPopupHelper implements UiPopupHelper {
    * {@inheritDoc}
    */
   @Override
-  public void showPopupYesNo(String message, String title, Callback<String> callback) {
+  public void showPopupYesNo(String message, String title, Consumer<String> callback) {
 
     Map<String, String> id2buttonLabelMap = new HashMap<String, String>();
     id2buttonLabelMap.put(BUTTON_ID_OK, this.nlsBundle.infoYes().getLocalizedMessage());
@@ -112,7 +112,7 @@ public abstract class AbstractUiPopupHelper implements UiPopupHelper {
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, MessageSeverity severity, String title, Callback<String> callback) {
+  public void showPopup(String message, MessageSeverity severity, String title, Consumer<String> callback) {
 
     Map<String, String> id2buttonLabelMap = new HashMap<String, String>();
     id2buttonLabelMap.put(BUTTON_ID_OK, this.nlsBundle.infoOk().getLocalizedMessage());
@@ -123,7 +123,7 @@ public abstract class AbstractUiPopupHelper implements UiPopupHelper {
    * {@inheritDoc}
    */
   @Override
-  public void showPopup(String message, MessageSeverity severity, String title, Callback<String> callback,
+  public void showPopup(String message, MessageSeverity severity, String title, Consumer<String> callback,
       String labelOk, String labelCancel) {
 
     Map<String, String> id2buttonLabelMap = new HashMap<String, String>();

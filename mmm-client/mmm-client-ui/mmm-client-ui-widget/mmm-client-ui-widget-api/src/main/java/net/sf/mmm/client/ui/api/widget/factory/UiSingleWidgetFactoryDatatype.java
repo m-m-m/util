@@ -1,9 +1,9 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.widget.factory;
+package net.sf.mmm.client.ui.api.widget.factory;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 
 /**
  * This is the interface for a {@link UiSingleWidgetFactory} to create a {@link UiWidgetField field widget}
@@ -29,6 +29,6 @@ public interface UiSingleWidgetFactoryDatatype<VALUE> extends UiSingleWidgetFact
    * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)
    */
   @Override
-  UiWidgetField<VALUE> create(AbstractUiContext context);
+  UiWidgetField<VALUE> create(UiContext context);
 
 }

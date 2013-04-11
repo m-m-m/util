@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.menu;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemSeparator;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemSeparator;
 
 /**
@@ -15,14 +15,14 @@ import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemSepa
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetMenuItemSeparator<ADAPTER extends UiWidgetAdapterMenuItemSeparator> extends
-    AbstractUiWidgetReal<ADAPTER, Void> implements UiWidgetMenuItemSeparator {
+    AbstractUiWidgetNative<ADAPTER, Void> implements UiWidgetMenuItemSeparator {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMenuItemSeparator(AbstractUiContext context) {
+  public AbstractUiWidgetMenuItemSeparator(UiContext context) {
 
     super(context);
   }

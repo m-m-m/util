@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.panel;
 
 import net.sf.mmm.client.ui.api.aria.role.RolePresentation;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>, UiWidgetReal {
+public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>, UiWidgetNative {
 
   /**
    * {@inheritDoc}

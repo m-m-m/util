@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetBorderPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtBorderPanel;
 
@@ -21,7 +21,7 @@ public class UiWidgetBorderPanelGwt extends AbstractUiWidgetBorderPanel<UiWidget
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetBorderPanelGwt(AbstractUiContext context) {
+  public UiWidgetBorderPanelGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetBorderPanelGwt extends AbstractUiWidgetBorderPanel<UiWidget
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetBorderPanel> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetBorderPanel> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetBorderPanelGwt extends AbstractUiWidgetBorderPanel<UiWidget
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetBorderPanel create(AbstractUiContext context) {
+    public UiWidgetBorderPanel create(UiContext context) {
 
       return new UiWidgetBorderPanelGwt(context);
     }

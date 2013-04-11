@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerRangeField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerRangeField;
 
 /**
@@ -22,7 +22,7 @@ public abstract class AbstractUiWidgetIntegerRangeField<ADAPTER extends UiWidget
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetIntegerRangeField(AbstractUiContext context) {
+  public AbstractUiWidgetIntegerRangeField(UiContext context) {
 
     super(context);
   }

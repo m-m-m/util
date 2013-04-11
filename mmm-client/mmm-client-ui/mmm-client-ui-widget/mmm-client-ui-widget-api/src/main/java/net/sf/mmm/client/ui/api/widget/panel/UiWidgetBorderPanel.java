@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.panel;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 
@@ -26,7 +26,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
  * @since 1.0.0
  */
 public interface UiWidgetBorderPanel extends UiWidgetPanel<UiWidgetRegular>,
-    UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteLabel, UiWidgetReal {
+    UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteLabel, UiWidgetNative {
 
   // nothing to add
 

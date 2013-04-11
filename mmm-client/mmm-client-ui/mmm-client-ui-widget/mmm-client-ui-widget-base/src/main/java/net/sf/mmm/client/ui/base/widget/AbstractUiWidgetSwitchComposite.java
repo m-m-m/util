@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSwitchComposite;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSwitchComposite;
 
 /**
@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAd
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetSwitchComposite(AbstractUiContext context) {
+  public AbstractUiWidgetSwitchComposite(UiContext context) {
 
     super(context);
     this.showChildIndex = 0;

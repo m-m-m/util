@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.api.aria.role.RoleCombobox;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetOptionsField options field widget} that represents a
@@ -20,7 +20,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public interface UiWidgetComboBox<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetReal {
+public interface UiWidgetComboBox<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetNative {
 
   /**
    * {@inheritDoc}

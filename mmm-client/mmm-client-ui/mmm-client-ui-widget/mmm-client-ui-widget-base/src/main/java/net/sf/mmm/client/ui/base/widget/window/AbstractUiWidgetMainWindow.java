@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.window;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
 
 /**
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetMainWindow<ADAPTER extends UiWidgetAdapter
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMainWindow(AbstractUiContext context) {
+  public AbstractUiWidgetMainWindow(UiContext context) {
 
     super(context);
   }

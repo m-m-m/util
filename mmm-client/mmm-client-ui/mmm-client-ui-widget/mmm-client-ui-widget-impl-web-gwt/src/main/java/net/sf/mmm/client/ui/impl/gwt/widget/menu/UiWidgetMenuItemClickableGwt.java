@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.menu;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.menu.AbstractUiWidgetMenuItemClickable;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter.UiWidgetAdapterGwtMenuItem;
 
@@ -21,7 +21,7 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItemClicka
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetMenuItemClickableGwt(AbstractUiContext context) {
+  public UiWidgetMenuItemClickableGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItemClicka
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetMenuItemClickable> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetMenuItemClickable> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItemClicka
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetMenuItemClickable create(AbstractUiContext context) {
+    public UiWidgetMenuItemClickable create(UiContext context) {
 
       return new UiWidgetMenuItemClickableGwt(context);
     }

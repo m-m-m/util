@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterTab;
 
@@ -30,7 +30,7 @@ public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab> ex
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTab(AbstractUiContext context) {
+  public AbstractUiWidgetTab(UiContext context) {
 
     super(context);
     setPrimaryStyle(PRIMARY_STYLE);

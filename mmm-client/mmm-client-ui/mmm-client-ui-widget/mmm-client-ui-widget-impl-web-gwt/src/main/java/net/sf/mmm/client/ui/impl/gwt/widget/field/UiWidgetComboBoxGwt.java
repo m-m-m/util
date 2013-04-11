@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBox;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComboBox;
 
@@ -23,7 +23,7 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetComboBoxGwt(AbstractUiContext context) {
+  public UiWidgetComboBoxGwt(UiContext context) {
 
     super(context);
   }
@@ -38,10 +38,10 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetComboBox> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetComboBox> {
 
     /**
      * The constructor.
@@ -55,7 +55,7 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetComboBox create(AbstractUiContext context) {
+    public UiWidgetComboBox create(UiContext context) {
 
       return new UiWidgetComboBoxGwt(context);
     }

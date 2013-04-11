@@ -10,8 +10,8 @@ import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainOpen;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
- * This is the {@link UiSingleWidgetButtonFactory} for {@link UiHandlerPlainOpen open} {@link UiWidgetButton
- * buttons}.
+ * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
+ * {@link UiHandlerPlainOpen open} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -48,14 +48,15 @@ public class UiSingleWidgetButtonFactoryOpen extends AbstractUiSingleWidgetButto
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainOpen handler, boolean preventConfirmationPopup) {
+  public UiWidgetButton create(UiContext context, final UiHandlerPlainOpen handler, boolean preventConfirmationPopup,
+      final Object variant) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        handler.onOpen(null);
+        handler.onOpen(variant);
       }
     };
     return createButton(context, getBundle().labelOpen(), clickHandler, null, null);

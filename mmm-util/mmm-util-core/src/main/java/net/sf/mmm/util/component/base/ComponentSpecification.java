@@ -8,8 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.mmm.util.component.api.Ioc;
-
 /**
  * {@link ComponentSpecification} is used to annotate the specification (should be an interface) of a
  * component. It acts only for the purpose of documentation and has no functional impact. However it will say
@@ -48,7 +46,7 @@ import net.sf.mmm.util.component.api.Ioc;
  * {@link javax.inject.Singleton stateless} and thread-safe. Otherwise this has to be documented in an
  * explicit WARNING.
  * 
- * @see Ioc
+ * @see net.sf.mmm.util.component.api.Ioc
  * @see org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -57,6 +55,7 @@ import net.sf.mmm.util.component.api.Ioc;
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
+// TODO should be in api package, will move this for 4.0.0
 public @interface ComponentSpecification {
 
   /**

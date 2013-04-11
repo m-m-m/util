@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoubleField;
 
@@ -16,13 +16,15 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoub
  * @since 1.0.0
  */
 public class UiWidgetDoubleFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDoubleField<Double>, Double, Double> implements UiWidgetDoubleField {
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDoubleField<Double>, Double, Double> implements
+    UiWidgetDoubleField {
 
   /**
    * The constructor.
+   * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetDoubleFieldGwt(AbstractUiContext context) {
+  public UiWidgetDoubleFieldGwt(UiContext context) {
 
     super(context);
   }
@@ -37,9 +39,9 @@ public class UiWidgetDoubleFieldGwt extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetDoubleField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetDoubleField> {
 
     /**
      * The constructor.
@@ -53,7 +55,7 @@ public class UiWidgetDoubleFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetDoubleField create(AbstractUiContext context) {
+    public UiWidgetDoubleField create(UiContext context) {
 
       return new UiWidgetDoubleFieldGwt(context);
     }

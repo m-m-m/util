@@ -7,13 +7,12 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactory;
-import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactoryReal;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
@@ -22,9 +21,9 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.UiContext} using
- * {@link UiSingleWidgetFactory}. This is helpful for implementations that can NOT use reflection.
- * Implementations extending this {@link Class} need to {@link #register(UiSingleWidgetFactoryReal) register}
- * instances of {@link UiSingleWidgetFactory} for all supported types of {@link UiWidget}s.
+ * {@link UiSingleWidgetFactoryNative}. This is helpful for implementations that can NOT use reflection.
+ * Implementations extending this {@link Class} need to {@link #register(UiSingleWidgetFactoryNative)
+ * register} instances of {@link UiSingleWidgetFactoryNative} for all supported types of {@link UiWidget}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -32,10 +31,10 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent implements UiWidgetFactoryNative {
 
   /** @see #create(Class) */
-  private final Map<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>> interface2subFactoryMap;
+  private final Map<Class<? extends UiWidgetNative>, UiSingleWidgetFactoryNative<?>> interface2subFactoryMap;
 
   /** @see #getContext() */
-  private AbstractUiContext context;
+  private UiContext context;
 
   /**
    * The constructor.
@@ -43,35 +42,35 @@ public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent im
   public AbstractUiWidgetFactoryNative() {
 
     super();
-    this.interface2subFactoryMap = new HashMap<Class<? extends UiWidgetReal>, UiSingleWidgetFactoryReal<?>>();
+    this.interface2subFactoryMap = new HashMap<Class<? extends UiWidgetNative>, UiSingleWidgetFactoryNative<?>>();
   }
 
   /**
-   * @return the context
+   * @return the instance of {@link UiContext}.
    */
-  public AbstractUiContext getContext() {
+  public UiContext getContext() {
 
     return this.context;
   }
 
   /**
-   * @param context is the context to set
+   * @param context is the instance of {@link UiContext} to {@link Inject}
    */
   @Inject
-  public void setContext(AbstractUiContext context) {
+  public void setContext(UiContext context) {
 
     getInitializationState().requireNotInitilized();
     this.context = context;
   }
 
   /**
-   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-factory of this factory.
+   * This method registers the given {@link UiSingleWidgetFactoryNative} as sub-factory of this factory.
    * 
-   * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
+   * @param subFactory is the {@link UiSingleWidgetFactoryNative} to register.
    */
-  protected void register(UiSingleWidgetFactoryReal<?> subFactory) {
+  protected void register(UiSingleWidgetFactoryNative<?> subFactory) {
 
-    UiSingleWidgetFactoryReal<?> oldFactory = this.interface2subFactoryMap.put(subFactory.getWidgetInterface(),
+    UiSingleWidgetFactoryNative<?> oldFactory = this.interface2subFactoryMap.put(subFactory.getWidgetInterface(),
         subFactory);
     if (oldFactory != null) {
       throw new DuplicateObjectException(subFactory, subFactory.getWidgetInterface(), oldFactory);
@@ -83,11 +82,11 @@ public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent im
    */
   @SuppressWarnings("unchecked")
   @Override
-  public <WIDGET extends UiWidgetReal> WIDGET create(Class<WIDGET> widgetInterface) {
+  public <WIDGET extends UiWidgetNative> WIDGET create(Class<WIDGET> widgetInterface) {
 
-    UiSingleWidgetFactoryReal<?> subFactory = this.interface2subFactoryMap.get(widgetInterface);
+    UiSingleWidgetFactoryNative<?> subFactory = this.interface2subFactoryMap.get(widgetInterface);
     if (subFactory == null) {
-      throw new ObjectNotFoundException(UiSingleWidgetFactoryReal.class, widgetInterface);
+      throw new ObjectNotFoundException(UiSingleWidgetFactoryNative.class, widgetInterface);
     }
     UiWidget widget = subFactory.create(this.context);
     NlsNullPointerException.checkNotNull(UiWidget.class, widget);

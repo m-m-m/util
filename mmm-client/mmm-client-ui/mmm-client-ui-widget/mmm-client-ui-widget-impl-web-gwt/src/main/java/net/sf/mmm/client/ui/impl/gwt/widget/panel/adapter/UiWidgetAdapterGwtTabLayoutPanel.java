@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetReal;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterTabPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetTabGwt;
@@ -57,7 +57,7 @@ public class UiWidgetAdapterGwtTabLayoutPanel extends UiWidgetAdapterGwtDynamicC
   public void addChild(UiWidgetTab child, int index) {
 
     UiWidgetTabGwt tabWidget = (UiWidgetTabGwt) child;
-    UiWidgetAdapterGwtTab widgetAdapter = AbstractUiWidgetReal.getWidgetAdapter(tabWidget);
+    UiWidgetAdapterGwtTab widgetAdapter = AbstractUiWidgetNative.getWidgetAdapter(tabWidget);
     if (index >= 0) {
       getToplevelWidget().insert(widgetAdapter.getContentPanel(), widgetAdapter.getToplevelWidget(), index);
     } else {

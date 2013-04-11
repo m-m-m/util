@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.window;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetBaseWindow base window widget} that represents a <em>popup</em>
@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetPopup extends UiWidgetBaseWindow, AttributeWriteResizable, UiWidgetReal {
+public interface UiWidgetPopup extends UiWidgetBaseWindow, AttributeWriteResizable, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Popup";

@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetPopup;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.adapter.UiWidgetAdapterGwtPopup;
 
@@ -21,7 +21,7 @@ public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPo
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetPopupGwt(AbstractUiContext context) {
+  public UiWidgetPopupGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetPopup> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetPopup> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetPopup create(AbstractUiContext context) {
+    public UiWidgetPopup create(UiContext context) {
 
       return new UiWidgetPopupGwt(context);
     }

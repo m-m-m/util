@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.menu;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemSeparator;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenu;
 
@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu> 
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMenu(AbstractUiContext context) {
+  public AbstractUiWidgetMenu(UiContext context) {
 
     super(context);
   }

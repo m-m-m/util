@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetImage;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtImage;
 
 /**
@@ -21,7 +21,7 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetImageGwt(AbstractUiContext context) {
+  public UiWidgetImageGwt(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetImage> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetImage> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetImage create(AbstractUiContext context) {
+    public UiWidgetImage create(UiContext context) {
 
       return new UiWidgetImageGwt(context);
     }

@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom.pattern;
 
+import java.util.function.Consumer;
+
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
@@ -16,14 +18,13 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
-import net.sf.mmm.util.lang.api.Callback;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationStateImpl;
 
 /**
- * This is the abstract base class for a {@link UiWidgetCustomRegularComposite custom composite widget} that
+ * This is the abstract base class for a {@link UiWidgetCustomComposite custom composite widget} that
  * implements the UI pattern <em>editor</em>. It supports {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW
  * viewing} a composite {@link #getValue() value} (an {@link net.sf.mmm.util.entity.api.GenericEntity entity}
  * or business object). It has a {@link UiWidgetButtonPanel button panel} with an "Edit"-Button that
@@ -42,7 +43,7 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * @since 1.0.0
  */
 public abstract class UiWidgetCustomEditor<VALUE> extends
-    UiWidgetCustomRegularComposite<VALUE, UiWidgetRegular, UiWidgetVerticalPanel> {
+    UiWidgetCustomComposite<VALUE, UiWidgetRegular, UiWidgetVerticalPanel> {
 
   /** @see #createButtonPanel() */
   private final UiHandler handler;
@@ -148,14 +149,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
      */
     protected void showValidationFailurePopup() {
 
-      Callback<String> callback = new Callback<String>() {
-
-        @Override
-        public Void apply(String argument) {
-
-          return null;
-        }
-      };
+      Consumer<String> callback = null;
       getContext().getPopupHelper().showPopup("There are validation failures. Please correct input data.",
           MessageSeverity.WARNING, "Validation failed", callback, "OK", "Details");
     }
@@ -168,13 +162,13 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
 
       if (isModified()) {
         NlsBundleClientUiRoot bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class);
-        Callback<String> callback = new Callback<String>() {
+        Consumer<String> callback = new Consumer<String>() {
 
           @Override
-          public Void apply(String argument) {
+          public void accept(String argument) {
 
             stopEditMode();
-            return null;
+            return;
           }
         };
         String labelOk = bundle.labelConfirm().getLocalizedMessage();

@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetField field widget} that represents a <em>checkbox</em>. A
@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetCheckbox extends UiWidgetField<Boolean>, AttributeWriteLabel, UiWidgetReal {
+public interface UiWidgetCheckbox extends UiWidgetField<Boolean>, AttributeWriteLabel, UiWidgetNative {
 
   // nothing to add
 

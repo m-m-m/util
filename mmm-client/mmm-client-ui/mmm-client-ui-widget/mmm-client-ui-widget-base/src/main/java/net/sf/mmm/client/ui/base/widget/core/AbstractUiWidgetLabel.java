@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetWithLabel;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetLabel(AbstractUiContext context) {
+  public AbstractUiWidgetLabel(UiContext context) {
 
     super(context);
     setPrimaryStyle(PRIMARY_STYLE);

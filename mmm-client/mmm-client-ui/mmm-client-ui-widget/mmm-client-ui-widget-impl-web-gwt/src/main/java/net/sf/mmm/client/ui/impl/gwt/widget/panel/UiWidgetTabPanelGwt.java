@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.panel.AbstractUiWidgetTabPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtTabLayoutPanel;
 
@@ -22,7 +22,7 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetTabPanelGwt(AbstractUiContext context) {
+  public UiWidgetTabPanelGwt(UiContext context) {
 
     super(context);
   }
@@ -49,9 +49,9 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetTabPanel> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetTabPanel> {
 
     /**
      * The constructor.
@@ -65,7 +65,7 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTabPanel create(AbstractUiContext context) {
+    public UiWidgetTabPanel create(UiContext context) {
 
       return new UiWidgetTabPanelGwt(context);
     }

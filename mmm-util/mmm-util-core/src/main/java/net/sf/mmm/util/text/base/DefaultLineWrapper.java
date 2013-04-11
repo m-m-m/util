@@ -564,7 +564,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     WORD,
 
     /**
-     * Indicates a {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR newline}.
+     * Indicates a {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() newline}.
      */
     NEWLINE,
 

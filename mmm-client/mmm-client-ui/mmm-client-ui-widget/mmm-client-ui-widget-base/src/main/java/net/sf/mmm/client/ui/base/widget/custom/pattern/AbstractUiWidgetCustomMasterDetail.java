@@ -12,11 +12,11 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetDynamicPanel;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomRegularComposite;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
- * This is the abstract base class for a {@link UiWidgetCustomRegularComposite custom composite widget} that
+ * This is the abstract base class for a {@link UiWidgetCustomComposite custom composite widget} that
  * implements the UI pattern <em>master/detail (panel)</em>. It combines a {@link #getMasterPanel() master
  * panel} that allows {@link UiFeatureSelectedValue selecting} an object that automatically gets displayed in
  * the {@link #getDetailPanel() details panel} and can typically be edited there.
@@ -31,7 +31,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAIL> extends
-    UiWidgetCustomRegularComposite<VALUE, UiWidgetRegular, UiWidgetDynamicPanel<UiWidgetRegular>> {
+    UiWidgetCustomComposite<VALUE, UiWidgetRegular, UiWidgetDynamicPanel<UiWidgetRegular>> {
 
   /** @see #getDetailsForSelection(Object) */
   private UiHandlerDetailsForSelection<SELECTION, DETAIL> handlerDetailsForSelection;

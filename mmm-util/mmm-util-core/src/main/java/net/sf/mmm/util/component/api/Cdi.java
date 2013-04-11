@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
 
 /**
  * This interface only exists for documentation purpose!<br/>
@@ -78,8 +77,8 @@ import net.sf.mmm.util.component.base.ComponentSpecification;
 public interface Cdi {
 
   /**
-   * A <em>CDI name</em> is the {@link javax.inject.Named name} of a {@link ComponentSpecification component}
-   * for {@link Cdi CDI}.<br/>
+   * A <em>CDI name</em> is the {@link javax.inject.Named name} of a
+   * {@link net.sf.mmm.util.component.base.ComponentSpecification component} for {@link Cdi CDI}.<br/>
    * The regular implementation will be annotated with &#64;{@link javax.inject.Named}
    * (MyComponentInterface.CDI_NAME).<br/>
    * If you want to replace this implementation you can do so by defining your own spring-bean with the same

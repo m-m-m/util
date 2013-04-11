@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
@@ -15,10 +17,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
-import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactoryDatatype;
-import net.sf.mmm.client.ui.base.widget.factory.UiSingleWidgetFactoryReal;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.BooleanFormatter;
@@ -41,7 +40,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   private final Map<Class<?>, UiSingleWidgetFactoryDatatype<?>> datatype2subFactoryMap;
 
   /** @see #getContext() */
-  private AbstractUiContext context;
+  private UiContext context;
 
   /**
    * The constructor.
@@ -53,9 +52,9 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This method registers the given {@link UiSingleWidgetFactoryReal} as sub-context of this context.
+   * This method registers the given {@link UiSingleWidgetFactoryDatatype} as sub-context of this context.
    * 
-   * @param subFactory is the {@link UiSingleWidgetFactoryReal} to register.
+   * @param subFactory is the {@link UiSingleWidgetFactoryDatatype} to register.
    */
   protected void register(UiSingleWidgetFactoryDatatype<?> subFactory) {
 
@@ -95,17 +94,17 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * @return the {@link AbstractUiContext} instance.
+   * @return the {@link UiContext} instance.
    */
-  protected AbstractUiContext getContext() {
+  protected UiContext getContext() {
 
     return this.context;
   }
 
   /**
-   * @param context is the {@link AbstractUiContext} to inject.
+   * @param context is the {@link UiContext} to inject.
    */
-  public void setContext(AbstractUiContext context) {
+  public void setContext(UiContext context) {
 
     this.context = context;
   }
@@ -128,7 +127,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<String> create(AbstractUiContext context) {
+    public UiWidgetField<String> create(UiContext context) {
 
       return context.getWidgetFactory().create(UiWidgetTextField.class);
     }
@@ -152,7 +151,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Long> create(AbstractUiContext context) {
+    public UiWidgetField<Long> create(UiContext context) {
 
       return context.getWidgetFactory().create(UiWidgetLongField.class);
     }
@@ -176,7 +175,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Double> create(AbstractUiContext context) {
+    public UiWidgetField<Double> create(UiContext context) {
 
       return context.getWidgetFactory().create(UiWidgetDoubleField.class);
     }
@@ -200,7 +199,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Boolean> create(AbstractUiContext context) {
+    public UiWidgetField<Boolean> create(UiContext context) {
 
       UiWidgetRadioButtons<Boolean> radioButtons = context.getWidgetFactory().create(UiWidgetRadioButtons.class);
       radioButtons.setFormatter(BooleanFormatter.getInstance());
@@ -218,7 +217,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   public static class UiSingleWidgetFactoryDatatypeEnum<E extends Enum<E>> extends
       AbstractUiSingleWidgetFactoryDatatype<E> {
 
-    /** @see #create(AbstractUiContext) */
+    /** @see #create(UiContext) */
     private final Formatter<E> formatter;
 
     /**
@@ -247,7 +246,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<E> create(AbstractUiContext context) {
+    public UiWidgetField<E> create(UiContext context) {
 
       UiWidgetComboBox<E> radioButtons = context.getWidgetFactory().create(UiWidgetComboBox.class);
       radioButtons.setFormatter(this.formatter);

@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetButton;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtButton;
 
 /**
@@ -25,7 +25,7 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetButtonGwt(AbstractUiContext context) {
+  public UiWidgetButtonGwt(UiContext context) {
 
     super(context);
     this.image = null;
@@ -50,9 +50,9 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetButton> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetButton> {
 
     /**
      * The constructor.
@@ -66,7 +66,7 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetButton create(AbstractUiContext context) {
+    public UiWidgetButton create(UiContext context) {
 
       return new UiWidgetButtonGwt(context);
     }

@@ -10,7 +10,7 @@ package net.sf.mmm.util.lang.api;
  * @since 3.0.0
  * @param <IN> is the generic type of the argument passed to {@link #apply(Object)}. May be a composite object
  *        (e.g. java bean) if more than one argument is needed.
- * @deprecated will be replaced by {@link java.util.function.Consumer}.
+ * @deprecated will be removed and is replaced by {@link java.util.function.Consumer}.
  */
 @Deprecated
 public interface Callback<IN> extends Function<IN, Void> {

@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsVertical;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosVertical;
 
@@ -24,7 +24,7 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetRadioButtonsVerticalGwt(AbstractUiContext context) {
+  public UiWidgetRadioButtonsVerticalGwt(UiContext context) {
 
     super(context);
   }
@@ -39,10 +39,10 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetRadioButtonsVertical> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtonsVertical> {
 
     /**
      * The constructor.
@@ -56,7 +56,7 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetRadioButtonsVertical create(AbstractUiContext context) {
+    public UiWidgetRadioButtonsVertical create(UiContext context) {
 
       return new UiWidgetRadioButtonsVerticalGwt(context);
     }

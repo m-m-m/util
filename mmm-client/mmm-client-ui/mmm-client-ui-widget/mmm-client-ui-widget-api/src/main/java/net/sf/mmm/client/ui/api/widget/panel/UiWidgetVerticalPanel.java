@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetVerticalPanel extends UiWidgetDynamicPanel<UiWidgetRegular>, UiWidgetReal {
+public interface UiWidgetVerticalPanel extends UiWidgetDynamicPanel<UiWidgetRegular>, UiWidgetNative {
 
   // nothing to add
 

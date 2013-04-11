@@ -3,13 +3,13 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadHandlerObserver;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
 import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
@@ -18,7 +18,7 @@ import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this
- * class there are two inheritance hierarchies {@link AbstractUiWidgetReal} and
+ * class there are two inheritance hierarchies {@link AbstractUiWidgetNative} and
  * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom}. To avoid problems with the lack of
  * multi-inheritance in Java, we already implement {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue}
  * by extending {@link AbstractUiFeatureValue}. For subclasses that have no value {@link Void} is used for
@@ -33,7 +33,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
     AbstractUiWidgetWithValue<VALUE> {
 
   /** @see #getContext() */
-  private final AbstractUiContext context;
+  private final UiContext context;
 
   /**
    * The constructor.
@@ -43,16 +43,28 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   public AbstractUiWidget(UiContext context) {
 
     super();
-    this.context = (AbstractUiContext) context;
+    this.context = context;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public final AbstractUiContext getContext() {
+  public final UiContext getContext() {
 
     return this.context;
+  }
+
+  /**
+   * @return die Instanz von {@link AttributeReadHandlerObserver} oder <code>null</code> falls nicht
+   *         verfügbar.
+   */
+  protected final AttributeReadHandlerObserver getObserverSource() {
+
+    if (this.context instanceof AttributeReadHandlerObserver) {
+      return (AttributeReadHandlerObserver) this.context;
+    }
+    return null;
   }
 
   /**
@@ -101,7 +113,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   @Override
   protected ChangeEventSender<VALUE> createChangeEventSender() {
 
-    ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getContext());
+    ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getObserverSource());
     return changeEventSender;
   }
 

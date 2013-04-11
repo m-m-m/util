@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtIntegerField;
 
@@ -16,13 +16,15 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtInte
  * @since 1.0.0
  */
 public class UiWidgetIntegerFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtIntegerField<Integer>, Integer, Integer> implements UiWidgetIntegerField {
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtIntegerField<Integer>, Integer, Integer> implements
+    UiWidgetIntegerField {
 
   /**
    * The constructor.
+   * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetIntegerFieldGwt(AbstractUiContext context) {
+  public UiWidgetIntegerFieldGwt(UiContext context) {
 
     super(context);
   }
@@ -37,9 +39,9 @@ public class UiWidgetIntegerFieldGwt extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetIntegerField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetIntegerField> {
 
     /**
      * The constructor.
@@ -53,7 +55,7 @@ public class UiWidgetIntegerFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetIntegerField create(AbstractUiContext context) {
+    public UiWidgetIntegerField create(UiContext context) {
 
       return new UiWidgetIntegerFieldGwt(context);
     }

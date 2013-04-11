@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextAreaBase;
 
 /**
@@ -25,7 +25,7 @@ public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapt
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetTextAreaBase(AbstractUiContext context) {
+  public AbstractUiWidgetTextAreaBase(UiContext context) {
 
     super(context);
     this.heightInTextLines = 0;

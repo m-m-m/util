@@ -14,11 +14,17 @@ import org.junit.Test;
  */
 public class BasicUtilTest extends Assert {
 
+  /**
+   * @return the {@link BasicUtil} to test.
+   */
   public BasicUtil getBasicUtil() {
 
     return BasicUtilImpl.getInstance();
   }
 
+  /**
+   * Test of {@link BasicUtil#isEqual(Object, Object)}.
+   */
   @Test
   public void testIsEqual() {
 
@@ -32,6 +38,9 @@ public class BasicUtilTest extends Assert {
     assertTrue(getBasicUtil().isEqual(string, newString));
   }
 
+  /**
+   * Test of {@link BasicUtil#isEqual(Object[], Object[])}.
+   */
   @Test
   public void testIsEqualArray() {
 
@@ -51,6 +60,9 @@ public class BasicUtilTest extends Assert {
     assertTrue(getBasicUtil().isEqual(array1, array2));
   }
 
+  /**
+   * Test of {@link BasicUtil#isDeepEqual(Object, Object)}.
+   */
   @Test
   public void testIsDeepEqual() {
 
@@ -70,6 +82,9 @@ public class BasicUtilTest extends Assert {
 
   }
 
+  /**
+   * Test of {@link BasicUtil#isDeepEqual(Object, Object)} for primitive arrays.
+   */
   @Test
   public void testIsDeepEqualPrimitiveArrays() {
 

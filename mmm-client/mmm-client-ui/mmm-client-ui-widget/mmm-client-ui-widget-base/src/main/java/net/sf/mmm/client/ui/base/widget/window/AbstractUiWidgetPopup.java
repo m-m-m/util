@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.window;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
 
 /**
@@ -22,7 +22,7 @@ public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetPopup(AbstractUiContext context) {
+  public AbstractUiWidgetPopup(UiContext context) {
 
     super(context);
     setPrimaryStyle(PRIMARY_STYLE);

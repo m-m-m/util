@@ -2,14 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteImage;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -21,7 +25,11 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
-public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends AbstractUiWidgetAdapter<WIDGET> {
+public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends AbstractUiWidgetAdapter<WIDGET> implements
+    AttributeWriteImage<UiWidgetImage> {
+
+  /** @see #setImage(UiWidgetImage) */
+  private Image image;
 
   /**
    * The constructor.
@@ -163,6 +171,40 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
   public void setHeight(Length height) {
 
     getToplevelWidget().setHeight(height.toString());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setImage(UiWidgetImage imageWidget) {
+
+    Image newImage = null;
+    if (imageWidget != null) {
+      newImage = getToplevelWidget(imageWidget, Image.class);
+    }
+    Element element = getToplevelWidget().getElement();
+    if (this.image == null) {
+      if (newImage != null) {
+        element.insertFirst(newImage.getElement());
+      }
+    } else {
+      if (newImage == null) {
+        element.removeChild(this.image.getElement());
+      } else {
+        element.replaceChild(newImage.getElement(), this.image.getElement());
+      }
+    }
+    this.image = newImage;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetImage getImage() {
+
+    throw new NlsUnsupportedOperationException();
   }
 
   /**

@@ -78,7 +78,8 @@ public @interface CliMode {
    * modes} inherited (recursively) all {@link CliOption#required() required} {@link CliOption options} have
    * to be present.
    */
-  String[] parentIds() default {};
+  String[] parentIds() default { //
+  };
 
   /**
    * <code>true</code> if this mode is <em>abstract</em>, <code>false</code> otherwise (default).<br>

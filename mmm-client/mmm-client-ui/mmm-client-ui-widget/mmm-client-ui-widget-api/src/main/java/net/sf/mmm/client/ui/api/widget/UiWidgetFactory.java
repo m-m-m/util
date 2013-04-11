@@ -133,6 +133,31 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
       boolean preventConfirmationPopup);
 
   /**
+   * This method creates a new {@link UiWidgetButton} for the given {@link UiHandlerPlain}. In advance to
+   * {@link #createButton(UiHandlerPlain)} this method can be used for an handler implementation that realizes
+   * multiple {@link UiHandlerPlain} interfaces as the proper one to choose is identified by
+   * <code>handlerType</code>.
+   * 
+   * @param <HANDLER> is the generic type of the {@link UiHandlerPlain}.
+   * 
+   * @param handlerType is the {@link Class} reflecting the {@link UiHandlerPlain} interface to create a
+   *        button for.
+   * @param handler is the {@link UiHandlerPlain} instance.
+   * @param preventConfirmationPopup - some {@link UiHandlerPlain plain handlers} represent operations like
+   *        {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete#onDelete(Object)} that should
+   *        be confirmed by the user to prevent accidental invocations. In such case the returned
+   *        {@link UiWidgetButton} will by itself open a confirmation popup allowing to cancel to operation.
+   *        This will make your life easier. However, if you want to customize the popup with contextual
+   *        information (e.g. "Are you sure you want to delete the 23 selected documents?") you can implement
+   *        that inside the given <code>handler</code> and prevent the default popup by providing
+   *        <code>true</code> here. Use <code>false</code> for the default behavior.
+   * @param variant is the optional {@link net.sf.mmm.util.lang.api.Variant} to use. May be <code>null</code>.
+   * @return the new widget instance.
+   */
+  <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
+      boolean preventConfirmationPopup, Object variant);
+
+  /**
    * This method creates a new {@link UiWidgetLabel}.
    * 
    * @param label is the {@link UiWidgetLabel#getLabel() label}.

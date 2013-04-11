@@ -107,7 +107,8 @@ public @interface CliOption {
    * The list of optional aliases that can be used instead of the {@link #name()}. E.g. for {@link #name()}
    * "--help" an alias could be "-h".
    */
-  String[] aliases() default {};
+  String[] aliases() default { //
+  };
 
   /**
    * The description of this option for {@link CliParser#printHelp(Appendable) help usage}. It should be an

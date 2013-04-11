@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.menu.adapter;
 
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterClickable;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActiveWithLabel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterMenuItemClickable extends UiWidgetAdapterActiveWithLabel {
+public interface UiWidgetAdapterMenuItemClickable extends UiWidgetAdapterClickable {
 
   // nothing to add
 

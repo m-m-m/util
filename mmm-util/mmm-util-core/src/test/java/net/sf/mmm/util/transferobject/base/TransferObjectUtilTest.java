@@ -18,25 +18,34 @@ import org.junit.Test;
  */
 public class TransferObjectUtilTest extends Assert {
 
+  /** Test ZIP code. */
   private static final String ZIP = "9600";
 
+  /** Test street. */
   private static final String STREET = "Heraklesstreet";
 
+  /** Test state. */
   private static final String STATE = "Platon";
 
+  /** Test house number. */
   private static final String HOUSENUMBER = "1a";
 
+  /** Test country. */
   private static final String COUNTRY = "Atlantis";
 
+  /** Test city. */
   private static final String CITY = "Smalltown";
 
+  /**
+   * @return the {@link TransferObjectUtil} to test.
+   */
   protected TransferObjectUtil getTransferObjectUtil() {
 
     return TransferObjectUtilImpl.getInstance();
   }
 
   /**
-   * Tests {@link TransferObjectUtil#clone(net.sf.mmm.util.transferobject.api.AbstractTo)}.
+   * Tests {@link TransferObjectUtil#clone(net.sf.mmm.util.transferobject.api.AbstractTransferObject)}.
    */
   @Test
   public void testClone() {
@@ -78,6 +87,9 @@ public class TransferObjectUtilTest extends Assert {
     assertEquals(addressEntity, clone);
   }
 
+  /**
+   * @param address is the {@link Address} to verify for the expected test attributes (see constants).
+   */
   private void verifyAddress(Address address) {
 
     assertNotNull(address);
@@ -89,6 +101,9 @@ public class TransferObjectUtilTest extends Assert {
     assertEquals(HOUSENUMBER, address.getHouseNumber());
   }
 
+  /**
+   * @param address is the address to fill with test attributes (see constants).
+   */
   private void fillAddress(Address address) {
 
     address.setCity(CITY);

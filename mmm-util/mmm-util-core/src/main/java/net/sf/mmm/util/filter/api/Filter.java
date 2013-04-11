@@ -4,15 +4,14 @@ package net.sf.mmm.util.filter.api;
 
 /**
  * This is the interface for a filter that {@link #accept(Object) decides} if a given value is acceptable or
- * should be filtered.
+ * should be filtered.<br/>
+ * See also <code>java.util.function.Predicate</code>.
  * 
  * @param <V> is the generic type of the value to check.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @deprecated will be replaced by {@link java.util.function.Predicate}.
  */
-@Deprecated
 public interface Filter<V> {
 
   /**

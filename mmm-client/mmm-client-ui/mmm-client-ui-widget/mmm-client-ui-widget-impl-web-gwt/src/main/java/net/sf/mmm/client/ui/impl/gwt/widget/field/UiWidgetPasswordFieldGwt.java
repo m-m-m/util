@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetPasswordField;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPasswordTextBox;
 
@@ -24,7 +24,7 @@ public class UiWidgetPasswordFieldGwt extends
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetPasswordFieldGwt(AbstractUiContext context) {
+  public UiWidgetPasswordFieldGwt(UiContext context) {
 
     super(context);
   }
@@ -39,9 +39,9 @@ public class UiWidgetPasswordFieldGwt extends
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetPasswordField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetPasswordField> {
 
     /**
      * The constructor.
@@ -55,7 +55,7 @@ public class UiWidgetPasswordFieldGwt extends
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetPasswordField create(AbstractUiContext context) {
+    public UiWidgetPasswordField create(UiContext context) {
 
       return new UiWidgetPasswordFieldGwt(context);
     }

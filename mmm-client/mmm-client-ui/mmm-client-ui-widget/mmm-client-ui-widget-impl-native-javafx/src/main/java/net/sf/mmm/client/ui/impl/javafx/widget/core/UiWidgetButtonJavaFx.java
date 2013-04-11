@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.javafx.widget.core;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetButton;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.javafx.widget.core.adapter.UiWidgetAdapterJavaFxButton;
 
 /**
@@ -21,7 +21,7 @@ public class UiWidgetButtonJavaFx extends AbstractUiWidgetButton<UiWidgetAdapter
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetButtonJavaFx(AbstractUiContext context) {
+  public UiWidgetButtonJavaFx(UiContext context) {
 
     super(context);
   }
@@ -36,9 +36,9 @@ public class UiWidgetButtonJavaFx extends AbstractUiWidgetButton<UiWidgetAdapter
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetButton> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetButton> {
 
     /**
      * The constructor.
@@ -52,7 +52,7 @@ public class UiWidgetButtonJavaFx extends AbstractUiWidgetButton<UiWidgetAdapter
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetButton create(AbstractUiContext context) {
+    public UiWidgetButton create(UiContext context) {
 
       return new UiWidgetButtonJavaFx(context);
     }

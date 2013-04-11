@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.window;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.Length;
@@ -9,7 +10,6 @@ import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetBaseWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
@@ -42,7 +42,7 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetBaseWindow(AbstractUiContext context) {
+  public AbstractUiWidgetBaseWindow(UiContext context) {
 
     super(context);
     this.resizable = true;

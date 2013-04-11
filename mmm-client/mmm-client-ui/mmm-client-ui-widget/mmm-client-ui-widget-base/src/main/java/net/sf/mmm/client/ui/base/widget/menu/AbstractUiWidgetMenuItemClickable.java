@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.menu;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickableWithLabel;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickable;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemClickable;
 
 /**
@@ -15,14 +15,14 @@ import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemClic
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetMenuItemClickable<ADAPTER extends UiWidgetAdapterMenuItemClickable> extends
-    AbstractUiWidgetClickableWithLabel<ADAPTER> implements UiWidgetMenuItemClickable {
+    AbstractUiWidgetClickable<ADAPTER> implements UiWidgetMenuItemClickable {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetMenuItemClickable(AbstractUiContext context) {
+  public AbstractUiWidgetMenuItemClickable(UiContext context) {
 
     super(context);
   }

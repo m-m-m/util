@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.menu;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite;
 
 /**
@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite;
  * @since 1.0.0
  */
 public interface UiWidgetMenuBar extends UiWidgetDynamicComposite<UiWidgetMenu>,
-    UiWidgetRegularComposite<UiWidgetMenu>, UiWidgetReal {
+    UiWidgetRegularComposite<UiWidgetMenu>, UiWidgetNative {
 
   /**
    * This method {@link #addChild(UiWidgetMenu) adds} a {@link UiWidgetMenu menu} to this menu-bar.

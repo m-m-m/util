@@ -5,9 +5,9 @@ package net.sf.mmm.client.ui.base.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
 
 /**
@@ -30,7 +30,7 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetDynamicComposite(AbstractUiContext context) {
+  public AbstractUiWidgetDynamicComposite(UiContext context) {
 
     super(context);
     this.children = new ArrayList<CHILD>();

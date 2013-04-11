@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetReal;
+import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSwitchComposite;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
  * @since 1.0.0
  */
 public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>, UiWidgetSwitchComposite<UiWidgetTab>,
-    UiWidgetReal {
+    UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "TabPanel";

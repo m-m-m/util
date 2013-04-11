@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
 
 /**
@@ -25,7 +25,7 @@ public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCh
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetCheckbox(AbstractUiContext context) {
+  public AbstractUiWidgetCheckbox(UiContext context) {
 
     super(context);
   }

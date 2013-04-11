@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.widget.factory;
+package net.sf.mmm.client.ui.api.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
@@ -41,8 +41,9 @@ public interface UiSingleWidgetButtonFactory<HANDLER extends UiHandlerPlain> {
    * @param handler is the instance of the {@link UiHandlerPlain}.
    * @param preventConfirmationPopup - see
    *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createButton(Class, UiHandlerPlain, boolean)}
+   * @param variant is the optional {@link net.sf.mmm.util.lang.api.Variant} to use. May be <code>null</code>.
    * @return the new {@link UiWidgetButton}.
    */
-  UiWidgetButton create(UiContext context, HANDLER handler, boolean preventConfirmationPopup);
+  UiWidgetButton create(UiContext context, HANDLER handler, boolean preventConfirmationPopup, Object variant);
 
 }

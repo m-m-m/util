@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.factory;
 
+import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
+
 
 
 /**

@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextArea;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
-import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryReal;
+import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextArea;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextArea;
 
@@ -22,7 +22,7 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetTextAreaGwt(AbstractUiContext context) {
+  public UiWidgetTextAreaGwt(UiContext context) {
 
     super(context);
   }
@@ -37,9 +37,9 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryReal factory} for this widget.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryReal<UiWidgetTextArea> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetTextArea> {
 
     /**
      * The constructor.
@@ -53,7 +53,7 @@ public class UiWidgetTextAreaGwt extends AbstractUiWidgetTextArea<UiWidgetAdapte
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTextArea create(AbstractUiContext context) {
+    public UiWidgetTextArea create(UiContext context) {
 
       return new UiWidgetTextAreaGwt(context);
     }
