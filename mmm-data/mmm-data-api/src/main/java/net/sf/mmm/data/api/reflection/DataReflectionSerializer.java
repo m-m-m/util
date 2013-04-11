@@ -5,7 +5,7 @@ package net.sf.mmm.data.api.reflection;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a component that can

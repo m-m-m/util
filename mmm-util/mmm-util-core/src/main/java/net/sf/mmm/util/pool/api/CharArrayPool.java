@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pool.api;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a {@link Pool} of <code>char[]</code>.

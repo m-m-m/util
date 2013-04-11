@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a component that allows to open very simple popup dialogs.<br/>

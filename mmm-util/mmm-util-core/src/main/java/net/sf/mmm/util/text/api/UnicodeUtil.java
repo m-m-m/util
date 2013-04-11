@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a collection of utility functions that help with unicode characters and texts. It
@@ -278,56 +278,82 @@ public interface UnicodeUtil {
    */
   char GRAVE_ACCENT = 0x00060;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_A = 0x0061;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_B = 0x0062;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_C = 0x0063;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_D = 0x0064;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_E = 0x0065;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_F = 0x0066;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_G = 0x0067;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_H = 0x0068;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_I = 0x0069;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_J = 0x006A;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_K = 0x006B;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_L = 0x006C;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_M = 0x006D;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_N = 0x006E;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_O = 0x006F;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_P = 0x0070;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_Q = 0x0071;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_R = 0x0072;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_S = 0x0073;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_T = 0x0074;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_U = 0x0075;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_V = 0x0076;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_W = 0x0077;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_X = 0x0078;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_Y = 0x0079;
 
+  /** The Latin letter {@value} . */
   char LATIN_SMALL_LETTER_Z = 0x007A;
 
   char LEFT_CURLY_BRACKET = 0x0007B;
@@ -389,6 +415,7 @@ public interface UnicodeUtil {
    */
   char DIAERESIS = 0x000A8;
 
+  /** Copyright sign (c) as correct glyph: {@value} . */
   char COPYRIGHT_SIGN = 0x000A9;
 
   char FEMININE_ORDINAL_INDICATOR = 0x000AA;

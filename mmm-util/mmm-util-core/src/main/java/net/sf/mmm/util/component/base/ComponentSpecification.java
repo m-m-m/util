@@ -51,11 +51,12 @@ import java.lang.annotation.Target;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
+ * @deprecated - use {@link net.sf.mmm.util.component.api.ComponentSpecification} instead.
  */
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-// TODO should be in api package, will move this for 4.0.0
+@Deprecated
 public @interface ComponentSpecification {
 
   /**

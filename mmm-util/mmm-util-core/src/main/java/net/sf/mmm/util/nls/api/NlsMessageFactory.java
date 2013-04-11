@@ -4,7 +4,7 @@ package net.sf.mmm.util.nls.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory used to create instances of {@link NlsMessage}.

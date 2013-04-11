@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Set;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;

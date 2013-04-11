@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.Orientation;
 

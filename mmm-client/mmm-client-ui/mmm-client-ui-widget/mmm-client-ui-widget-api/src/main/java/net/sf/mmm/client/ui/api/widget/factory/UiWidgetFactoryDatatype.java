@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.factory;
 
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory to {@link #createForDatatype(Class) create widgets for particular

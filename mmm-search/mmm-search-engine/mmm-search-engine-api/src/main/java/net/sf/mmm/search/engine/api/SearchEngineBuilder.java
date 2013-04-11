@@ -3,7 +3,7 @@
 package net.sf.mmm.search.engine.api;
 
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the component that allows to create a {@link ManagedSearchEngine}.

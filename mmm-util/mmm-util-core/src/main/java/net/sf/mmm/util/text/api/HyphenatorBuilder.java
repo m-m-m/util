@@ -4,7 +4,7 @@ package net.sf.mmm.util.text.api;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface used to {@link #getHyphenator(Locale) retrieve} a {@link Hyphenator} for a given

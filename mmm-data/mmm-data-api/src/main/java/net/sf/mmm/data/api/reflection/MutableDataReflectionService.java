@@ -4,7 +4,7 @@ package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.access.DataReflectionWriteAccess;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
 

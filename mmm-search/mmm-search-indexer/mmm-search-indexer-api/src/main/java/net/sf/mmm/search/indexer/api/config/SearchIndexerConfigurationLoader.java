@@ -3,7 +3,7 @@
 package net.sf.mmm.search.indexer.api.config;
 
 import net.sf.mmm.search.api.config.SearchConfigurationLoader;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the {@link SearchConfigurationLoader} for the {@link SearchIndexerConfiguration}.

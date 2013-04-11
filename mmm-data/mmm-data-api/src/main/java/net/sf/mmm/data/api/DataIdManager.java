@@ -3,7 +3,7 @@
 package net.sf.mmm.data.api;
 
 import net.sf.mmm.data.api.datatype.DataId;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the manager of {@link DataId} instances.

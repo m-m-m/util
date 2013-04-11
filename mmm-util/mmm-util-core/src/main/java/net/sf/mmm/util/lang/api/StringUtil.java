@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.value.api.ValueConverter;
 
 /**

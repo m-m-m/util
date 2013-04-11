@@ -3,7 +3,7 @@
 package net.sf.mmm.search.indexer.api;
 
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.resource.api.DataResource;
 

@@ -11,7 +11,7 @@ import java.io.Writer;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

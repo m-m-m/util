@@ -4,7 +4,7 @@ package net.sf.mmm.util.io.api;
 
 import java.io.InputStream;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a collection of utility functions to that help deal with <em>encodings</em>. An

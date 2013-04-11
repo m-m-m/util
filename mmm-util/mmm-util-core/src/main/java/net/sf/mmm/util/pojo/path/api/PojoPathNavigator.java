@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.path.api;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 

@@ -5,7 +5,7 @@ package net.sf.mmm.util.date.api;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a collection of utility functions that help with to deal with {@link Recurrence}.

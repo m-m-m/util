@@ -14,7 +14,7 @@ public interface Address extends MutableRevisionedEntity<Long> {
 
   /**
    * This method gets the city (or village) the address is located in. This is a very important information.
-   * However, it may be possible to derive the city from the {@link #getPostalCode() postal code}.
+   * However, it may be possible to derive the city from the {@link #getZip() zip code}.
    * 
    * @return the city or <code>null</code> if not defined.
    */

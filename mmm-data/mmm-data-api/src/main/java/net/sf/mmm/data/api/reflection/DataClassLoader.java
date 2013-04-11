@@ -3,7 +3,7 @@
 package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.api.DataObject;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface of a "{@link ClassLoader}" for {@link net.sf.mmm.data.api.reflection.DataClass}es. It

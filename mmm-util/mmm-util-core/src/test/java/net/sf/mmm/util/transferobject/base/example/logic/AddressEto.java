@@ -14,6 +14,9 @@ import net.sf.mmm.util.transferobject.base.example.common.Address;
  */
 public class AddressEto extends EntityTo<Long> implements Address {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 4411887131075490176L;
+
   /** @see #getCity() */
   private String city;
 

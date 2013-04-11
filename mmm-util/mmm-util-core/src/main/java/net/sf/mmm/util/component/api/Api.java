@@ -6,12 +6,12 @@ package net.sf.mmm.util.component.api;
 /**
  * This interface only exists for documentation purpose!<br/>
  * <em>API</em> is a shortcut for <em>Application Programming Interface</em> and identifies all types required
- * to access a {@link net.sf.mmm.util.component.base.ComponentSpecification component}. The main idea is to
+ * to access a {@link net.sf.mmm.util.component.api.ComponentSpecification component}. The main idea is to
  * abstract from the implementation of the component so it gets replaceable and the design is maintainable.<br/>
  * The most important type in Java to define an API is the {@link Class#isInterface() interface}. However an
  * API may also consist of {@link Enum} types or {@link net.sf.mmm.util.pojo.api.Pojo} {@link Class classes}
  * and {@link net.sf.mmm.util.lang.api.Datatype}s that are accepted as arguments by an interface. The actual
- * <em>API</em> of a {@link net.sf.mmm.util.component.base.ComponentSpecification component} is therefore the
+ * <em>API</em> of a {@link net.sf.mmm.util.component.api.ComponentSpecification component} is therefore the
  * combination of all these types. It has to be <em>self-contained</em> what means that it only contains
  * references to types legally considered as part of the <em>API</em>. With references we are NOT talking
  * about JavaDoc-links.<br/>

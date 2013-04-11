@@ -12,7 +12,7 @@ import java.io.Writer;
 import java.nio.channels.Channel;
 import java.util.Properties;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a collection of utility functions that help to deal with {@link InputStream}s,

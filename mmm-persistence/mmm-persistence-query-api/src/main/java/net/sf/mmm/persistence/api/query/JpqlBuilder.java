@@ -4,7 +4,7 @@ package net.sf.mmm.persistence.api.query;
 
 import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a type-safe dynamic JPQL builder.<br/>

@@ -78,7 +78,7 @@ public interface Cdi {
 
   /**
    * A <em>CDI name</em> is the {@link javax.inject.Named name} of a
-   * {@link net.sf.mmm.util.component.base.ComponentSpecification component} for {@link Cdi CDI}.<br/>
+   * {@link net.sf.mmm.util.component.api.ComponentSpecification component} for {@link Cdi CDI}.<br/>
    * The regular implementation will be annotated with &#64;{@link javax.inject.Named}
    * (MyComponentInterface.CDI_NAME).<br/>
    * If you want to replace this implementation you can do so by defining your own spring-bean with the same

@@ -5,7 +5,7 @@ package net.sf.mmm.content.parser.api;
 import java.io.InputStream;
 import java.util.Set;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.context.api.GenericContext;
 
 /**

@@ -7,7 +7,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**

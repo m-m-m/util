@@ -6,7 +6,7 @@ import net.sf.mmm.search.indexer.api.config.ConfiguredSearchIndexerOptions;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.search.indexer.api.state.SearchIndexerStateHolder;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a high-level {@link SearchIndexer}. It recursively

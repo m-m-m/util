@@ -5,7 +5,7 @@ package net.sf.mmm.util.context.api;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 
 /**

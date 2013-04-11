@@ -5,10 +5,10 @@ package net.sf.mmm.util.component.base;
 import javax.annotation.PostConstruct;
 
 /**
- * This is the abstract base class for a {@link ComponentSpecification component} that needs
- * {@link #initialize() initialization}. We strongly recommend that component implementations should be
- * {@link javax.inject.Singleton stateless} and therefore thread-safe. It provides an
- * {@link #getInitializationState() initialization state} that helps to prevent accidental coding mistakes.
+ * This is the abstract base class for a {@link net.sf.mmm.util.component.api.ComponentSpecification
+ * component} that needs {@link #initialize() initialization}. We strongly recommend that component
+ * implementations should be {@link javax.inject.Singleton stateless} and therefore thread-safe. It provides
+ * an {@link #getInitializationState() initialization state} that helps to prevent accidental coding mistakes.
  * E.g. you can do this:
  * 
  * <pre>

@@ -3,7 +3,7 @@
 package net.sf.mmm.search.indexer.api.state;
 
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a manager that can

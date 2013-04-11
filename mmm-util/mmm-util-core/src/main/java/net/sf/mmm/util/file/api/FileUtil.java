@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.List;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.file.base.FileAccessPermissions;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 

@@ -4,7 +4,7 @@ package net.sf.mmm.util.date.api;
 
 import java.util.Date;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is a limited subset of {@link Iso8601Util} that is GWT compatible.

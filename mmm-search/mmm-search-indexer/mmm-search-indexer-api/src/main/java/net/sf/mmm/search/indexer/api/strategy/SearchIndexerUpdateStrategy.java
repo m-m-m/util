@@ -3,7 +3,7 @@
 package net.sf.mmm.search.indexer.api.strategy;
 
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the actual strategy used for the (delta-)indexing

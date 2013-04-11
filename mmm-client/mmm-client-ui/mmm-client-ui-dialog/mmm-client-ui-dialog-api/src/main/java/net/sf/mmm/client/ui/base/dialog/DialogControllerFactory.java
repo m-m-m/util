@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.dialog;
 
 import java.util.List;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the factory of all available {@link DialogController}s.

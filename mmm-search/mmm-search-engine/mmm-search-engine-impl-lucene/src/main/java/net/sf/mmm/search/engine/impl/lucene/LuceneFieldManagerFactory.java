@@ -4,7 +4,7 @@ package net.sf.mmm.search.engine.impl.lucene;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchConfigurationHolder;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory used to {@link #createFieldManager(SearchConfigurationHolder) create} a

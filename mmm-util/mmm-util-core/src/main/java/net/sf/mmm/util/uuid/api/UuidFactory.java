@@ -4,7 +4,7 @@ package net.sf.mmm.util.uuid.api;
 
 import java.util.UUID;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory used to create {@link UUID}s. There can be different implementations

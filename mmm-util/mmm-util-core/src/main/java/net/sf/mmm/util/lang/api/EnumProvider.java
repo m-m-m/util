@@ -5,7 +5,7 @@ package net.sf.mmm.util.lang.api;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**

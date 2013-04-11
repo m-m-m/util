@@ -4,7 +4,7 @@ package net.sf.mmm.data.api.reflection;
 
 import net.sf.mmm.data.api.DataObject;
 import net.sf.mmm.data.api.reflection.access.DataReflectionReadAccess;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a service that provides access to the content-model (reflection). <br>

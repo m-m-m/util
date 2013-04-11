@@ -4,7 +4,7 @@ package net.sf.mmm.transaction.api;
 
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.event.api.EventSource;
 
 /**

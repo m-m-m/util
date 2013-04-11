@@ -4,7 +4,7 @@ package net.sf.mmm.search.indexer.api;
 
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the component that allows to create the {@link SearchIndexer}.

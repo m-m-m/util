@@ -4,7 +4,7 @@ package net.sf.mmm.util.reflect.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory with ability to create {@link GenericType}s.

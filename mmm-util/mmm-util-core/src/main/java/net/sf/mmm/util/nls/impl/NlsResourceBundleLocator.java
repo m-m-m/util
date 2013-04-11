@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.impl;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for an internal component that automatically {@link #findBundles() finds} the

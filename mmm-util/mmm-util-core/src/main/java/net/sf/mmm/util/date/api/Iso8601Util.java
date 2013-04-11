@@ -5,7 +5,7 @@ package net.sf.mmm.util.date.api;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This class is a collection of utility functions for formatting and parsing dates according to ISO 8601

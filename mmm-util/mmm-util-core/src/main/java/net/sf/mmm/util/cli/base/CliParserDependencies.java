@@ -3,7 +3,7 @@
 package net.sf.mmm.util.cli.base;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
-import net.sf.mmm.util.component.base.ComponentSpecification;
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
