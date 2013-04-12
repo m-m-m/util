@@ -54,7 +54,10 @@ public class NlsRuntimeExceptionTest extends Assert {
     pw.flush();
     String stacktrace = sw.toString();
 
-    sw.getBuffer().setLength(0); // reset sw
+    // fails in maven surefire if we rest "sw" like this instead of creating new StringWriter()
+    // However, in Eclipse it works with both ways... Java remains a mystery
+    // sw.getBuffer().setLength(0);
+    sw = new StringWriter();
     pw.println(expectedMessage);
     pw.println(uuid.toString());
     pw.print("\tat ");
