@@ -158,9 +158,25 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
    * {@inheritDoc}
    */
   @Override
+  public void deleteById(ID id) {
+
+    NlsNullPointerException.checkNotNull("id", id);
+    ENTITY entity = getReference(id);
+    getEntityManager().remove(entity);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void delete(ENTITY entity) {
 
-    getEntityManager().remove(entity);
+    NlsNullPointerException.checkNotNull(GenericEntity.class, entity);
+    if (getEntityManager().contains(entity)) {
+      getEntityManager().remove(entity);
+    } else {
+      deleteById(entity.getId());
+    }
   }
 
 }
