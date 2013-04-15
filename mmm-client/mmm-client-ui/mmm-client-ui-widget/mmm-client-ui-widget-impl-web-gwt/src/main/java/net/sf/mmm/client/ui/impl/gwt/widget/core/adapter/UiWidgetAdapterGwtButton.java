@@ -8,8 +8,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtClickable;
 import com.google.gwt.user.client.ui.Button;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} using GWT
- * based on {@link Button}.
+ * This is the implementation of {@link UiWidgetAdapterButton} using GWT based on {@link Button}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -183,7 +183,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
     if (imageWidget != null) {
       newImage = getToplevelWidget(imageWidget, Image.class);
     }
-    Element element = getToplevelWidget().getElement();
+    Element element = getImageParentElement();
     if (this.image == null) {
       if (newImage != null) {
         element.insertFirst(newImage.getElement());
@@ -196,6 +196,17 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
       }
     }
     this.image = newImage;
+  }
+
+  /**
+   * This method gets the parent-{@link Element} where a potential {@link #setImage(UiWidgetImage) image is
+   * attached}.
+   * 
+   * @return the parent-{@link Element} for an image.
+   */
+  protected Element getImageParentElement() {
+
+    return getToplevelWidget().getElement();
   }
 
   /**

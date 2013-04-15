@@ -14,6 +14,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.feature.UiFeatureMessages;
 import net.sf.mmm.client.ui.api.feature.UiFeatureVisible;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 
@@ -44,7 +45,7 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 public abstract interface UiWidget extends UiFeatureVisible, UiFeatureMessages, AttributeWriteHtmlId,
     AttributeWriteTooltip, AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed,
     AttributeWriteSizeAdvanced, AttributeReadModified, AttributeWriteMode, AttributeWriteModeFixed,
-    AttributeReadAriaRole, AbstractValidatableObject {
+    AttributeReadAriaRole, AbstractValidatableObject, UiHandlerEventCollapse {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

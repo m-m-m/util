@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadHandlerObserver;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -223,6 +224,15 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   public void setSize(double widthAmount, double heightAmount, SizeUnit unit) {
 
     setSize(unit.newLength(widthAmount), unit.newLength(heightAmount));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void onCollapseOrExpand(UiFeatureCollapse source, boolean collapse, boolean programmatic) {
+
+    setVisible(!collapse);
   }
 
 }

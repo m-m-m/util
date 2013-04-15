@@ -2,23 +2,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
-import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
+import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSection;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 
 import com.google.gwt.user.client.ui.Label;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterLabel} using GWT based on {@link Label}.
+ * This is the implementation of {@link UiWidgetAdapterSection} using GWT based on {@link Label}. We simply
+ * and implicitly change the primary style to make it a section instead of a label.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> implements UiWidgetAdapterLabel {
+public class UiWidgetAdapterGwtSection extends UiWidgetAdapterGwtWidget<Label> implements UiWidgetAdapterSection {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtLabel() {
+  public UiWidgetAdapterGwtSection() {
 
     super();
   }
