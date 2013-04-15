@@ -8,12 +8,45 @@
     <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+  <!--
+  <parent>
+    <groupId>org.eclipse</groupId>
+    <artifactId>eclipse-platform-parent</artifactId>
+    <version>4.3.0</version>
+  </parent>
+  -->
   <artifactId>mmm-eclipse</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>eclipse</name>
-  <description>TODO</description>
+  <description>Eclipse plugins created by the mmm project.</description>
   <modules>
     <module>mmm-eclipse-templatevariables</module>
   </modules>
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>eclipse-hosted</id>
+      <url>https://repo.eclipse.org/content/repositories/eclipse/</url>
+    </repository>
+    <repository>
+      <id>eclipse</id>
+      <url>https://repo.eclipse.org/content/repositories/releases/</url>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+       <plugin>
+         <groupId>org.eclipse.tycho</groupId>
+         <artifactId>tycho-maven-plugin</artifactId>
+         <version>0.17.0</version>
+         <extensions>true</extensions>
+       </plugin>
+    </plugins>
+  </build>
 </project>

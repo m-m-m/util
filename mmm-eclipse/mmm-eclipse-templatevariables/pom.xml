@@ -10,9 +10,10 @@
   </parent>
   <artifactId>mmm-eclipse-templatevariables</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <packaging>bundle</packaging>
+  <packaging>eclipse-plugin</packaging>
   <name>eclipse-templatevariables</name>
   <description>Eclipse plugin to register additional variables for java templates like project_version.</description>
+  <!--
   <dependencies>
     <dependency>
       <groupId>org.eclipse.ui</groupId>
@@ -45,6 +46,8 @@
       <version>3.8.1</version>
     </dependency>
   </dependencies>
+  -->
+  <!--
   <build>
     <plugins>
       <plugin>
@@ -56,7 +59,7 @@
           <instructions>
             <Bundle-SymbolicName>net.sf.mmm.eclipse.templatevariables</Bundle-SymbolicName>
             <Bundle-Name>TemplateVariables</Bundle-Name>
-            <Bundle-Version>${pom.version}</Bundle-Version>
+            <Bundle-Version>${project.version}</Bundle-Version>
             <Bundle-Activator>net.sf.mmm.eclipse.templatevariables.Activator</Bundle-Activator>
             <Private-Package>net.sf.mmm.eclipse.templatevariables</Private-Package>
           </instructions>
@@ -64,4 +67,5 @@
       </plugin>
     </plugins>
   </build>
+  -->
 </project>
