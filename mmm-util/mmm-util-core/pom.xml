@@ -22,6 +22,14 @@
       <activation>
         <jdk>[1.5,1.7]</jdk>
       </activation>
+      <dependencies>
+        <!-- backport for java less than 1.8 -->
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>mmm-util-backport-java.util.function</artifactId>
+          <version>${backport-version}</version>
+        </dependency>
+      </dependencies>
       <build>
         <plugins>
           <plugin>
