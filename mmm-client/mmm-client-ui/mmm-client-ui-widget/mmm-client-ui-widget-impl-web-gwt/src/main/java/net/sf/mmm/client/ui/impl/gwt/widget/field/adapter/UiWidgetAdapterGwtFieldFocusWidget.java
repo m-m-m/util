@@ -32,7 +32,7 @@ public abstract class UiWidgetAdapterGwtFieldFocusWidget<WIDGET extends FocusWid
    * {@inheritDoc}
    */
   @Override
-  protected final HasValue<ADAPTER_VALUE> getWidgetAsHasValue() {
+  protected final HasValue<ADAPTER_VALUE> getWidgetAsTakesValue() {
 
     return getActiveWidget();
   }

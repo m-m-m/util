@@ -28,6 +28,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 public interface UiWidgetBorderPanel extends UiWidgetPanel<UiWidgetRegular>,
     UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteLabel, UiWidgetNative {
 
-  // nothing to add
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "BorderPanel";
 
 }

@@ -38,8 +38,10 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     this.widgetLastName.addValidatorMandatory();
     this.widgetBirthday = getFactory().create(UiWidgetDateField.class);
     this.widgetBirthday.setFieldLabel("Birthday");
+    getDelegate().setColumnCount(2);
     getDelegate().addChildren(this.widgetFirstName);
     getDelegate().addChildren(this.widgetLastName);
+    getDelegate().addChildSpanned(getFactory().createSection("Optionals"));
     getDelegate().addChildren(this.widgetBirthday);
   }
 

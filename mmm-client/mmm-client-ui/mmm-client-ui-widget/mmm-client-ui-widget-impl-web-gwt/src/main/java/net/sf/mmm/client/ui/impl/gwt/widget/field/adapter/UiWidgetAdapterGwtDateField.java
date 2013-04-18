@@ -5,24 +5,25 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.Date;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField.Html5DateField;
+import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Focusable;
-import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.client.ui.TextBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
- * using GWT based on {@link DateBox}.
+ * using GWT based on {@link Html5DateField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed value - typically {@link Double}.
  */
-public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<DateBox, VALUE, Date> implements
-    UiWidgetAdapterDateField<VALUE> {
+public class UiWidgetAdapterGwtDateField extends UiWidgetAdapterGwtDateBasedStringField<Html5DateField> implements
+    UiWidgetAdapterDateField, TakesValue<Date> {
 
   /**
    * The constructor.
@@ -36,9 +37,18 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
    * {@inheritDoc}
    */
   @Override
-  protected DateBox createActiveWidget() {
+  protected boolean hasTime() {
 
-    return new DateBox();
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Html5DateField createActiveWidget() {
+
+    return new Html5DateField();
   }
 
   /**
@@ -47,7 +57,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected Focusable getWidgetAsFocusable() {
 
-    return getActiveWidget().getTextBox();
+    return getActiveWidget();
   }
 
   /**
@@ -56,7 +66,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
 
-    return getActiveWidget().getTextBox();
+    return getActiveWidget();
   }
 
   /**
@@ -65,7 +75,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
 
-    return getActiveWidget().getTextBox();
+    return getActiveWidget();
   }
 
   /**
@@ -74,16 +84,42 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   protected HasChangeHandlers getWidgetAsHasChangeHandlers() {
 
-    return getActiveWidget().getTextBox();
+    return getActiveWidget();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected HasValue<Date> getWidgetAsHasValue() {
+  protected TakesValue<Date> getWidgetAsTakesValue() {
 
-    return getActiveWidget();
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Date getValue() {
+
+    String text = getActiveWidget().getValue();
+    if ((text == null) || (text.isEmpty())) {
+      return null;
+    }
+    return convertStringToDate(text);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValue(Date value) {
+
+    String text = "";
+    if (value != null) {
+      text = convertDateToString(value);
+    }
+    getActiveWidget().setValue(text, false);
   }
 
   /**
@@ -101,7 +137,7 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   public void setMaximumTextLength(int length) {
 
-    getActiveWidget().getTextBox().setMaxLength(length);
+    getActiveWidget().setMaxLength(length);
   }
 
   /**
@@ -110,7 +146,22 @@ public class UiWidgetAdapterGwtDateField<VALUE> extends UiWidgetAdapterGwtField<
   @Override
   public int getMaximumTextLength() {
 
-    return getActiveWidget().getTextBox().getMaxLength();
+    return getActiveWidget().getMaxLength();
+  }
+
+  /**
+   * HTML5 based date field based on {@link TextBox}.
+   */
+  public static class Html5DateField extends TextBox {
+
+    /**
+     * The constructor.
+     */
+    public Html5DateField() {
+
+      super(JavaScriptUtil.getInstance().createInputElement("date"));
+    }
+
   }
 
 }

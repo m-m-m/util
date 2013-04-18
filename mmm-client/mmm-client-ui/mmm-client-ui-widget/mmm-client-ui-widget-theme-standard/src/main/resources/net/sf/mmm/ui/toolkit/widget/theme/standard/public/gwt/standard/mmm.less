@@ -3,11 +3,14 @@
 @focus-color: #A0C0E0;
 @selected-color: lighten(@focus-color, 10%);
 @border-color: #A0A0A0;
+@background-color: #FFFFFF;
+@background-em-color: darken(@background-color, 10%);
 
 @font-size: 14pt;
 @border-size: 0.3em;
 @radius: 0.4em;
 @padding: 0.3em;
+@margin: @padding;
 
 /* Mixins */
 .bordered() {
@@ -45,6 +48,9 @@ input {
 *::-moz-focus-inner {
   border: none;
 }
+*:invalid {
+  border-color: red;
+}
 
 .Button {
   .highlighted;
@@ -56,6 +62,31 @@ input {
   &:hover, &:focus, &:active {
     background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
   }
+}
+
+.ButtonPanel {
+  /* background: @background-em-color; */
+  .Button {
+    margin: @margin;
+    min-width: 6em;
+  }
+}
+
+.Field {
+  margin-left: 0.5em;
+}
+.FieldView {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.Section {
+  .bordered;
+  border-bottom-style: solid;
+}
+
+.GridPanel {
+  width: 100%;
 }
 
 /* Popup */
@@ -234,7 +265,7 @@ input {
 .gwt-MenuBar-horizontal {
   .gradient;
   border-style: solid;
-  
+
   .gwt-MenuItem {
     padding: 0px 10px;
     vertical-align: bottom;
@@ -259,7 +290,7 @@ input {
   margin-top: 0px;
   margin-left: 0px;
   background: white;
-  
+
   table {
     border-collapse: collapse;
   }

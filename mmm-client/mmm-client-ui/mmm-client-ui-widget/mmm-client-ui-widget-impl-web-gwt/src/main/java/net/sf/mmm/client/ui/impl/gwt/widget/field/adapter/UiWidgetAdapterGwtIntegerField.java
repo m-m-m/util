@@ -7,16 +7,13 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerFiel
 import com.google.gwt.user.client.ui.IntegerBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
- * using GWT based on {@link IntegerBox}.
- * 
- * @param <VALUE> is the generic type of the changed value - typically {@link Integer}.
+ * This is the implementation of {@link UiWidgetAdapterIntegerField} using GWT based on {@link IntegerBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtIntegerField<VALUE> extends UiWidgetAdapterGwtFieldValueBox<IntegerBox, VALUE, Integer>
-    implements UiWidgetAdapterIntegerField<VALUE> {
+public class UiWidgetAdapterGwtIntegerField extends UiWidgetAdapterGwtFieldValueBox<IntegerBox, Integer, Integer>
+    implements UiWidgetAdapterIntegerField {
 
   /**
    * The constructor.

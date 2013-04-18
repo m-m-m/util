@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt;
 
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
+import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.base.UiContextImpl;
 import net.sf.mmm.client.ui.impl.gwt.widget.UiWidgetFactoryNativeGwt;
 
@@ -46,10 +47,17 @@ public class UiContextGwt extends UiContextImpl {
 
     UiDispatcher dispatcher = getDispatcher();
     if (dispatcher == null) {
-      dispatcher = new UiDispatcherGwt();
-      setDispatcher(dispatcher);
+      UiDispatcherGwt impl = new UiDispatcherGwt();
+      impl.initialize();
+      setDispatcher(impl);
     }
 
+    UiPopupHelper popupHelper = getPopupHelper();
+    if (popupHelper == null) {
+      UiPopupHelperDummy impl = new UiPopupHelperDummy();
+      impl.initialize();
+      setPopupHelper(impl);
+    }
   }
 
 }

@@ -119,7 +119,7 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFo
    * {@inheritDoc}
    */
   @Override
-  protected HasValue<String> getWidgetAsHasValue() {
+  protected HasValue<String> getWidgetAsTakesValue() {
 
     throw new NlsIllegalStateException();
   }

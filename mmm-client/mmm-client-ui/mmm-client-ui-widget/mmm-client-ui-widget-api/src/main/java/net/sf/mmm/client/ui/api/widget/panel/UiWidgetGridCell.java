@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteColumnSpan;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
@@ -13,7 +14,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetGridCell extends UiWidgetSingleMutableComposite<UiWidgetRegular>, UiWidgetNative {
+public interface UiWidgetGridCell extends UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteColumnSpan,
+    UiWidgetNative {
 
   // nothing to add...
 

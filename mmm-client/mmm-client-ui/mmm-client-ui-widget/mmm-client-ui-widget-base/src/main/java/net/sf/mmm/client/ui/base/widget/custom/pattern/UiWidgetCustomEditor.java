@@ -45,6 +45,9 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
 public abstract class UiWidgetCustomEditor<VALUE> extends
     UiWidgetCustomComposite<VALUE, UiWidgetRegular, UiWidgetVerticalPanel> {
 
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  public static final String PRIMARY_STYLE = "Editor";
+
   /** @see #createButtonPanel() */
   private final UiHandler handler;
 
@@ -62,6 +65,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
   public UiWidgetCustomEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject) {
 
     super(context, context.getWidgetFactory().create(UiWidgetVerticalPanel.class));
+    setPrimaryStyle(PRIMARY_STYLE);
     this.handler = new UiHandler();
     this.handlerSaveObject = handlerSaveObject;
   }

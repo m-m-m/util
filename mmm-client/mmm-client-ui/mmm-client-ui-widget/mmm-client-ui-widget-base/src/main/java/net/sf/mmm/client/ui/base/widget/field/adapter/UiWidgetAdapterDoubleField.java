@@ -8,10 +8,8 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically {@link Double} but may also
- *        be a custom datatype.
  */
-public interface UiWidgetAdapterDoubleField<VALUE> extends UiWidgetAdapterTextualInputField<VALUE, Double> {
+public interface UiWidgetAdapterDoubleField extends UiWidgetAdapterTextualInputField<Double, Double> {
 
   // nothing to add
 

@@ -130,15 +130,17 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     borderPanel.setLabel("Hello World");
 
     // borderPanel.setChild(gridPanel);
-    UiHandlerObjectSave<ContactBean> handlerObjectSave = new UiHandlerObjectSave<ContactBean>() {
+    SaveAdapter<ContactBean> handlerObjectSave = new SaveAdapter<ContactBean>();
+    final ContactEditor contactEditor = new ContactEditor(context, handlerObjectSave);
+    handlerObjectSave.delegate = new UiHandlerObjectSave<ContactBean>() {
 
       @Override
       public void onSave(ContactBean object, Object variant) {
 
+        contactEditor.setValue(object);
         Window.alert("Contact " + object + " saved.");
       }
     };
-    ContactEditor contactEditor = new ContactEditor(context, handlerObjectSave);
     borderPanel.setChild(contactEditor);
     verticalPanel1.addChild(borderPanel);
     verticalPanel1.setMode(UiMode.EDIT);
@@ -368,5 +370,25 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     button.addClickHandler(handler);
     // TODO textField.addSubmitHandler();
     // textField.setKeyboardFilter(handler);
+  }
+
+  /**
+   * Stupid adapter required due to lack of closures in java.
+   */
+  private static class SaveAdapter<O> implements UiHandlerObjectSave<O> {
+
+    /** @see #onSave(Object, Object) */
+    private UiHandlerObjectSave<O> delegate;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onSave(O object, Object variant) {
+
+      if (this.delegate != null) {
+        this.delegate.onSave(object, variant);
+      }
+    }
   }
 }

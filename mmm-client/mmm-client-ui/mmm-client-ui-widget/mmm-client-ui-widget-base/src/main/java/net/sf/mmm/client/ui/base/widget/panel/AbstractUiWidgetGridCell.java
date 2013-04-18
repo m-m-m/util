@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSingleMutableComposite;
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComposite;
+import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridCell;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetGridCell}.
@@ -16,8 +16,11 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComp
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterSingleMutableComposite<UiWidgetRegular>>
-    extends AbstractUiWidgetSingleMutableComposite<ADAPTER, UiWidgetRegular> implements UiWidgetGridCell {
+public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterGridCell> extends
+    AbstractUiWidgetSingleMutableComposite<ADAPTER, UiWidgetRegular> implements UiWidgetGridCell {
+
+  /** @see #getColumnSpan() */
+  private int columnSpan;
 
   /**
    * The constructor.
@@ -27,6 +30,41 @@ public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterSi
   public AbstractUiWidgetGridCell(UiContext context) {
 
     super(context);
+    this.columnSpan = 1;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    if (this.columnSpan != 1) {
+      adapter.setColumnSpan(this.columnSpan);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getColumnSpan() {
+
+    return this.columnSpan;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setColumnSpan(int columnSpan) {
+
+    assert (columnSpan > 0);
+    this.columnSpan = columnSpan;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setColumnSpan(columnSpan);
+    }
   }
 
 }

@@ -42,6 +42,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public AbstractUiWidgetField(UiContext context) {
 
     super(context);
+    setPrimaryStyle(PRIMARY_STYLE);
   }
 
   /**

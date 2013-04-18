@@ -16,8 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoub
  * @since 1.0.0
  */
 public class UiWidgetDoubleFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDoubleField<Double>, Double, Double> implements
-    UiWidgetDoubleField {
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDoubleField, Double, Double> implements UiWidgetDoubleField {
 
   /**
    * The constructor.
@@ -33,9 +32,9 @@ public class UiWidgetDoubleFieldGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtDoubleField<Double> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtDoubleField createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtDoubleField<Double>();
+    return new UiWidgetAdapterGwtDoubleField();
   }
 
   /**

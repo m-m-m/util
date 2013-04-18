@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
@@ -18,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiPopupHelper implements UiPopupHelper {
+public abstract class AbstractUiPopupHelper extends AbstractLoggableComponent implements UiPopupHelper {
 
   /** The instance of {@link NlsBundleUtilCoreRoot}. */
   private final NlsBundleUtilCoreRoot nlsBundle;

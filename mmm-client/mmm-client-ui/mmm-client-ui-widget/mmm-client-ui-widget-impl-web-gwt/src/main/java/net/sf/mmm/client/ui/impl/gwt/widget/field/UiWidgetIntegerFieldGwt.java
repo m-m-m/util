@@ -16,8 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtInte
  * @since 1.0.0
  */
 public class UiWidgetIntegerFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtIntegerField<Integer>, Integer, Integer> implements
-    UiWidgetIntegerField {
+    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtIntegerField, Integer, Integer> implements UiWidgetIntegerField {
 
   /**
    * The constructor.
@@ -33,9 +32,9 @@ public class UiWidgetIntegerFieldGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtIntegerField<Integer> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtIntegerField createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtIntegerField<Integer>();
+    return new UiWidgetAdapterGwtIntegerField();
   }
 
   /**

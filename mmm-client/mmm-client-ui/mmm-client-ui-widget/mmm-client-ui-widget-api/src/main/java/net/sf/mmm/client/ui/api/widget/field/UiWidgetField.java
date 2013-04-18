@@ -37,6 +37,15 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
     UiWidgetActive, UiFeatureValueAndValidation<VALUE>, AttributeWriteValidationFailure {
 
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "Field";
+
+  /**
+   * The {@link #getPrimaryStyle() primary style} of the internal widget to display the {@link #getValue()
+   * value} in {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view-mode}.
+   */
+  String PRIMARY_STYLE_VIEW = "FieldView";
+
   /**
    * This method is like
    * <code>{@link #getFieldLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> without actually

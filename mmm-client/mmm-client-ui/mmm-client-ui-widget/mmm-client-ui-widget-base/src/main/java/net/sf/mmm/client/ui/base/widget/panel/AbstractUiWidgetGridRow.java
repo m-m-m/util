@@ -3,12 +3,15 @@
 package net.sf.mmm.client.ui.base.widget.panel;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridRow;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetGridCell}.
@@ -56,6 +59,62 @@ public abstract class AbstractUiWidgetGridRow<ADAPTER extends UiWidgetAdapterGri
     cell.setChild(child);
     addChild(cell);
     return cell;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addChild(UiWidgetGridCell child) {
+
+    assert verifyColumnCount(child, -1);
+    super.addChild(child);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addChild(UiWidgetGridCell child, int index) {
+
+    assert verifyColumnCount(child, index);
+    super.addChild(child, index);
+  }
+
+  /**
+   * Verifies that the column count is not exceeded after addChild operation.
+   * 
+   * @param child is the child to add.
+   * @param index is the insert position or <code>-1</code> for add at end.
+   * @return <code>true</code> if valid, <code>false</code> (or Exception) otherwise.
+   */
+  private boolean verifyColumnCount(UiWidgetGridCell child, int index) {
+
+    UiWidgetComposite<?> parent = getParent();
+    if ((parent != null) && (parent instanceof UiWidgetGridPanel)) {
+      UiWidgetGridPanel gridPanel = (UiWidgetGridPanel) parent;
+      Integer columnCount = gridPanel.getColumnCount();
+      if (columnCount != null) {
+        int childCount = getChildCount();
+        int newColumnCount = 0;
+        for (int i = 0; i < childCount; i++) {
+          UiWidgetGridCell cell = getChild(i);
+          if ((i != index) && (cell != null)) {
+            int columnSpan = cell.getColumnSpan();
+            newColumnCount = newColumnCount + columnSpan;
+          }
+        }
+        if (child != null) {
+          newColumnCount = child.getColumnSpan();
+        }
+        if (newColumnCount > columnCount.intValue()) {
+          throw new ValueOutOfRangeException(Integer.valueOf(newColumnCount), Integer.valueOf(0), columnCount,
+              "columnCount of " + this);
+        }
+        return (newColumnCount <= columnCount.intValue());
+      }
+    }
+    return true;
   }
 
 }

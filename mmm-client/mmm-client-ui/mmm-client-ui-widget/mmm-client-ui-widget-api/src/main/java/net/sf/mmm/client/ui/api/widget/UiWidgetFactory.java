@@ -7,6 +7,7 @@ import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetSection;
 import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
@@ -164,6 +165,14 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    * @return the new widget instance.
    */
   UiWidgetLabel createLabel(String label);
+
+  /**
+   * This method creates a new {@link UiWidgetSection}.
+   * 
+   * @param label is the {@link UiWidgetSection#getLabel() label}.
+   * @return the new widget instance.
+   */
+  UiWidgetSection createSection(String label);
 
   /**
    * This method creates a new {@link UiWidgetImage}.

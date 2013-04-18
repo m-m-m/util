@@ -3,11 +3,11 @@
 package net.sf.mmm.client.impl.gwt.gin;
 
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImpl;
-import net.sf.mmm.client.base.gwt.dialog.UiPopupHelperDummy;
 import net.sf.mmm.client.impl.gwt.busy.BusyManagerImplGwt;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.busy.BusyManager;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
+import net.sf.mmm.client.ui.impl.gwt.UiPopupHelperDummy;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 

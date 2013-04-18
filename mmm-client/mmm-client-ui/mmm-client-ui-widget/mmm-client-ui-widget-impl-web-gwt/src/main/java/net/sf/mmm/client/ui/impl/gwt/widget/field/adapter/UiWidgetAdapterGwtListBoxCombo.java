@@ -101,7 +101,7 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected HasValue<String> getWidgetAsHasValue() {
+  protected HasValue<String> getWidgetAsTakesValue() {
 
     throw new NlsIllegalStateException();
   }

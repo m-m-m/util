@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadMaximumValue;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadMinimumValue;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
@@ -13,20 +14,20 @@ import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterField} using GWT.
  * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the changed value.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
  *        {@link #getToplevelWidget() widget}.
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAPTER_VALUE> extends
     UiWidgetAdapterGwtWidgetActive<FlowPanel> implements UiWidgetAdapterField<VALUE, ADAPTER_VALUE>,
@@ -56,7 +57,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    * @return the {@link #getToplevelWidget() widget} as {@link HasChangeHandlers} or <code>null</code> if NOT
    *         supported.
    */
-  protected abstract HasValue<ADAPTER_VALUE> getWidgetAsHasValue();
+  protected abstract TakesValue<ADAPTER_VALUE> getWidgetAsTakesValue();
 
   /**
    * {@inheritDoc}
@@ -125,7 +126,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   public ADAPTER_VALUE getValue() {
 
-    return getWidgetAsHasValue().getValue();
+    return getWidgetAsTakesValue().getValue();
   }
 
   /**
@@ -134,7 +135,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   public void setValue(ADAPTER_VALUE value) {
 
-    getWidgetAsHasValue().setValue(value, false);
+    getWidgetAsTakesValue().setValue(value);
   }
 
   /**
@@ -153,6 +154,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     if (this.widgetViewMode == null) {
       this.widgetViewMode = createViewWidget();
+      this.widgetViewMode.setStylePrimaryName(UiWidgetField.PRIMARY_STYLE_VIEW);
       getToplevelWidget().add(this.widgetViewMode);
     }
     return this.widgetViewMode;
@@ -164,7 +166,8 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    */
   protected Label createViewWidget() {
 
-    return new Label();
+    Label view = new Label();
+    return view;
   }
 
   /**

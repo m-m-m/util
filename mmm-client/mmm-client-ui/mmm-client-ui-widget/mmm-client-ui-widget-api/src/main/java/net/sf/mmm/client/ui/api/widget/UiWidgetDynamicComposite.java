@@ -24,7 +24,7 @@ public interface UiWidgetDynamicComposite<CHILD extends UiWidget> extends UiWidg
   void addChild(CHILD child);
 
   /**
-   * This method adds the given <code>child</code> at the given <code>index</code>.
+   * This method adds or better inserts the given <code>child</code> at the given <code>index</code>.
    * 
    * @see #addChild(UiWidget)
    * @see java.util.List#add(int, Object)

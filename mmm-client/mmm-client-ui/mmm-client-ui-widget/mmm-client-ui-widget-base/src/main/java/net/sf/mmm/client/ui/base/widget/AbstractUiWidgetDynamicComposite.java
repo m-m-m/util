@@ -9,6 +9,8 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetDynamicComposite}.
@@ -111,6 +113,7 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
   @Override
   public void addChild(CHILD child) {
 
+    NlsNullPointerException.checkNotNull("child", child);
     this.children.add(child);
     if (hasWidgetAdapter()) {
       getWidgetAdapter().addChild(child, -1);
@@ -125,6 +128,11 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
   @Override
   public void addChild(CHILD child, int index) {
 
+    NlsNullPointerException.checkNotNull("child", child);
+    if ((index < 0) || (index > this.children.size())) {
+      throw new ValueOutOfRangeException(Integer.valueOf(index), Integer.valueOf(0), Integer.valueOf(this.children
+          .size()), this);
+    }
     this.children.add(index, child);
     doAddChild(child, index);
     setParent(child, this);

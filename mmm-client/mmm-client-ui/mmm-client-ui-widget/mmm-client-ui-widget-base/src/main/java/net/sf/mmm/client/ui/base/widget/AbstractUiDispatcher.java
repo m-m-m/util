@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget;
 import java.util.concurrent.Callable;
 
 import net.sf.mmm.client.ui.api.UiDispatcher;
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
  * This is the abstract base implementation of {@link UiDispatcher}.
@@ -12,7 +13,7 @@ import net.sf.mmm.client.ui.api.UiDispatcher;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiDispatcher implements UiDispatcher {
+public abstract class AbstractUiDispatcher extends AbstractLoggableComponent implements UiDispatcher {
 
   /**
    * The constructor.

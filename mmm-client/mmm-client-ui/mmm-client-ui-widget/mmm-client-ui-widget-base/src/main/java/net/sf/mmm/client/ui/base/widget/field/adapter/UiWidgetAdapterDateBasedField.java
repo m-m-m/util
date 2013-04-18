@@ -10,10 +10,8 @@ import java.util.Date;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
- *        {@link #getToplevelWidget() widget}.
  */
-public interface UiWidgetAdapterDateBasedField<ADAPTER_VALUE> extends UiWidgetAdapterField<Date, ADAPTER_VALUE> {
+public interface UiWidgetAdapterDateBasedField extends UiWidgetAdapterTextualInputField<Date, Date> {
 
   // nothing to add
 

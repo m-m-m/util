@@ -2,12 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
-import java.util.Date;
-
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetDateField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField;
 
 /**
@@ -17,8 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDate
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetDateFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDateField<Date>, Date, Date> implements UiWidgetDateField {
+public class UiWidgetDateFieldGwt extends AbstractUiWidgetDateField<UiWidgetAdapterGwtDateField> {
 
   /**
    * The constructor.
@@ -34,9 +31,9 @@ public class UiWidgetDateFieldGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtDateField<Date> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtDateField createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtDateField<Date>();
+    return new UiWidgetAdapterGwtDateField();
   }
 
   /**

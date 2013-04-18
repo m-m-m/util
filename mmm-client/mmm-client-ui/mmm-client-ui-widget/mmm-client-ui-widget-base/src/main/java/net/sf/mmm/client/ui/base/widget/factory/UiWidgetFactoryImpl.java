@@ -17,6 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetSection;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
@@ -149,7 +150,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public UiWidgetButton createButton(String label, UiHandlerEventClick clickHandler) {
 
-    UiWidgetButton widget = getContext().getWidgetFactory().create(UiWidgetButton.class);
+    UiWidgetButton widget = create(UiWidgetButton.class);
     widget.setLabel(label);
     widget.addClickHandler(clickHandler);
     return widget;
@@ -226,7 +227,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public UiWidgetImage createImage(String url, String altText) {
 
-    UiWidgetImage widget = getContext().getWidgetFactory().create(UiWidgetImage.class);
+    UiWidgetImage widget = create(UiWidgetImage.class);
     widget.setUrl(url);
     widget.setAltText(altText);
     return widget;
@@ -238,7 +239,18 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public UiWidgetLabel createLabel(String label) {
 
-    UiWidgetLabel widget = getContext().getWidgetFactory().create(UiWidgetLabel.class);
+    UiWidgetLabel widget = create(UiWidgetLabel.class);
+    widget.setLabel(label);
+    return widget;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetSection createSection(String label) {
+
+    UiWidgetSection widget = create(UiWidgetSection.class);
     widget.setLabel(label);
     return widget;
   }
@@ -249,7 +261,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public UiWidgetTextField createTextField(String label) {
 
-    UiWidgetTextField widget = getContext().getWidgetFactory().create(UiWidgetTextField.class);
+    UiWidgetTextField widget = create(UiWidgetTextField.class);
     widget.setFieldLabel(label);
     return widget;
   }
@@ -260,7 +272,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public UiWidgetIntegerField createIntegerField(String label) {
 
-    UiWidgetIntegerField widget = getContext().getWidgetFactory().create(UiWidgetIntegerField.class);
+    UiWidgetIntegerField widget = create(UiWidgetIntegerField.class);
     widget.setFieldLabel(label);
     return widget;
   }
@@ -271,7 +283,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public UiWidgetLongField createLongField(String label) {
 
-    UiWidgetLongField widget = getContext().getWidgetFactory().create(UiWidgetLongField.class);
+    UiWidgetLongField widget = create(UiWidgetLongField.class);
     widget.setFieldLabel(label);
     return widget;
   }
@@ -282,7 +294,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   @Override
   public <VALUE> UiWidgetComboBox<VALUE> createComboBox(String label, final EnumDefinition<VALUE, ?> enumDefinition) {
 
-    final UiWidgetComboBox<VALUE> widget = getContext().getWidgetFactory().create(UiWidgetComboBox.class);
+    final UiWidgetComboBox<VALUE> widget = create(UiWidgetComboBox.class);
     widget.setFieldLabel(label);
     widget.setFormatter(enumDefinition.getFormatter());
     Runnable callback = new Runnable() {
@@ -313,10 +325,10 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
     UiWidgetSplitPanel splitPanel;
     switch (orientation) {
       case HORIZONTAL:
-        splitPanel = getContext().getWidgetFactory().create(UiWidgetHorizontalSplitPanel.class);
+        splitPanel = create(UiWidgetHorizontalSplitPanel.class);
         break;
       case VERTICAL:
-        splitPanel = getContext().getWidgetFactory().create(UiWidgetVerticalSplitPanel.class);
+        splitPanel = create(UiWidgetVerticalSplitPanel.class);
         break;
       default :
         throw new IllegalCaseException(Orientation.class, orientation);
