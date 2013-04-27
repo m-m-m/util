@@ -17,6 +17,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -77,8 +78,20 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
         clickEventSender.onClick(source, false);
       }
     };
-    // HandlerRegistration registration =
-    getToplevelWidget().addDomHandler(handler, ClickEvent.getType());
+    setClickEventSender(handler, getToplevelWidget());
+  }
+
+  /**
+   * @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick)
+   * 
+   * @param handler is the {@link ClickHandler} to register.
+   * @param widget is the {@link Widget} where to register the {@link ClickHandler}.
+   * @return the GWT {@link HandlerRegistration}.
+   */
+  protected HandlerRegistration setClickEventSender(ClickHandler handler, Widget widget) {
+
+    HandlerRegistration registration = widget.addDomHandler(handler, ClickEvent.getType());
+    return registration;
   }
 
   /**

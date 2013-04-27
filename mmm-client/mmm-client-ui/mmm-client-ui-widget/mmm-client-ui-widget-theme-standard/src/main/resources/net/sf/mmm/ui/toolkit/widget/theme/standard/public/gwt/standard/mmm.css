@@ -18,6 +18,9 @@ input {
 *:invalid {
   border-color: red;
 }
+.Search {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sLDBECFLwjt10AAAETSURBVBjTdY8tS0MBGEbPs7sNxsAiY8WwIibTxC/QbhCLYwbXRLlJxzAoDgUnJl1Q/Biy4ke5GkT0B2hwiE0YFjEYDP4A4brttXgRlJ14eDjwCMCdX+mRw5qJMUxNsOsvn9Wj3dIrP8gtFNMyuwMwOJEIGcqBfbb85vDhzmYdIAS2bJLTMA3sb5dm97ZKM9ZqjYBiTiS8GBRDGBOYVSvl9adAHpQ3HoQdA5OBCwNIRPiDGVHA/y2KS0M5t1BMB3JuYWkIKQt28e+MSY6MM8McpKwgiuF9vD1Pe57nO4/3t+99/aPnEkkT44JeiVNML4hMvKOzO9WVvBJtyOTzsYTiVaQpzCpOu2G9VmukBtM3cSIJgG9WX2G0CjSDnQAAAABJRU5ErkJggg==');
+}
 .Button {
   border-color: #a0a0a0;
   border-width: 1px;
@@ -33,10 +36,15 @@ input {
   cursor: pointer;
   font-size: 16pt;
 }
-.Button:hover,
-.Button:focus,
-.Button:active {
+button:hover,
+button:focus,
+button:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+}
+input:hover,
+input:focus,
+input:active {
+  border-color: #a0c0e0;
 }
 .ButtonPanel {
   /* background: @background-em-color; */
@@ -45,6 +53,19 @@ input {
 .ButtonPanel .Button {
   margin: 0.3em;
   min-width: 6em;
+}
+.MiniButton {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -background: #e0e0e0;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 2px 2px 2px white inset; */
+
+  box-shadow: 2px 2px 5px 0px #c7c7c7;
+  font-family: monospaced;
+  padding: 0;
+  margin: 0;
 }
 .Field {
   margin-left: 0.5em;
@@ -57,6 +78,20 @@ input {
   border-color: #a0a0a0;
   border-width: 1px;
   border-bottom-style: solid;
+  text-align: center;
+  margin-bottom: 1em;
+}
+.Section span {
+  padding: 0 0.5em;
+  position: relative;
+  top: 0.5em;
+  background: #ffffff;
+}
+.Section button {
+  padding: 0 0.2em;
+  position: relative;
+  top: 0.9em;
+  float: left;
 }
 .GridPanel {
   width: 100%;

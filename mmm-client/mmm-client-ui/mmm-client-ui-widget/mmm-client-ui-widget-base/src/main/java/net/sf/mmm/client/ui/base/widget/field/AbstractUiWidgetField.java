@@ -203,6 +203,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
 
     if (this.fieldLabelWidget == null) {
       this.fieldLabelWidget = getWidgetAdapter().createLabel(getContext());
+      this.fieldLabelWidget.setPrimaryStyle(PRIMARY_STYLE_LABEL);
       this.fieldLabelWidget.setLabelledWidget(this);
       if (this.fieldLabel != null) {
         this.fieldLabelWidget.setLabel(this.fieldLabel);
@@ -264,6 +265,19 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     super.doValidate(messageCollector, value);
     String failureMessages = messageCollector.getFailureMessages();
     setValidationFailure(failureMessages);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setVisible(boolean visible) {
+
+    super.setVisible(visible);
+    // TODO hohwille conceptional revisit required!
+    if (this.fieldLabelWidget != null) {
+      this.fieldLabelWidget.setVisible(visible);
+    }
   }
 
 }

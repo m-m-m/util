@@ -46,6 +46,9 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
    */
   String PRIMARY_STYLE_VIEW = "FieldView";
 
+  /** The {@link #getPrimaryStyle() primary style} of the {@link #getFieldLabelWidget() field label widget}. */
+  String PRIMARY_STYLE_LABEL = "FieldLabel";
+
   /**
    * This method is like
    * <code>{@link #getFieldLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> without actually

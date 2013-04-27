@@ -12,6 +12,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
@@ -143,6 +144,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     };
     borderPanel.setChild(contactEditor);
     verticalPanel1.addChild(borderPanel);
+    UiWidgetCollapsableSection section = factory.create(UiWidgetCollapsableSection.class);
+    section.setLabel("Foo");
+    section.addCollapseHandler(contactEditor);
+    verticalPanel1.addChild(section);
     verticalPanel1.setMode(UiMode.EDIT);
 
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);

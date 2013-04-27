@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.base.widget.core;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.aria.role.Role;
+import net.sf.mmm.client.ui.api.aria.role.RoleHeading;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetSection;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetWithLabel;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSection;
@@ -26,6 +28,24 @@ public abstract class AbstractUiWidgetSection<ADAPTER extends UiWidgetAdapterSec
 
     super(context);
     setPrimaryStyle(PRIMARY_STYLE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public RoleHeading getAriaRole() {
+
+    return (RoleHeading) super.getAriaRole();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Class<? extends Role> getAriaRoleFixedType() {
+
+    return RoleHeading.class;
   }
 
 }

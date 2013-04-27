@@ -79,13 +79,13 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
   /**
    * @return the {@link NlsMessage} for the tooltip "Next".
    */
-  @NlsBundleMessage("Next")
+  @NlsBundleMessage("Step to next item")
   NlsMessage tooltipNext();
 
   /**
    * @return the {@link NlsMessage} for the tooltip "Previous".
    */
-  @NlsBundleMessage("Previous")
+  @NlsBundleMessage("Step to previous item")
   NlsMessage tooltipPrevious();
 
   /**
@@ -135,5 +135,21 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
    */
   @NlsBundleMessage("Remove?")
   NlsMessage titleRemovePopup();
+
+  /**
+   * @return the {@link NlsMessage} for the tooltip of a widget to
+   *         {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed#setCollapsed(boolean) collapse}
+   *         content.
+   */
+  @NlsBundleMessage("Collapse content")
+  NlsMessage tooltipCollapse();
+
+  /**
+   * @return the {@link NlsMessage} for the tooltip of a widget to
+   *         {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed#setCollapsed(boolean) expand}
+   *         content.
+   */
+  @NlsBundleMessage("Expand content")
+  NlsMessage tooltipExpand();
 
 }

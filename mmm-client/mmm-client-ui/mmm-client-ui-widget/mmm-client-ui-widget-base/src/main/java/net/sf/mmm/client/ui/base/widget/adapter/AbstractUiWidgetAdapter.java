@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.adapter;
 
+import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAccessKey;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAltText;
@@ -18,6 +19,7 @@ import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 /**
@@ -133,6 +135,14 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
 
     setWidth(width);
     setHeight(height);
+  }
+
+  /**
+   * @return the instance of {@link NlsBundleClientUiRoot}.
+   */
+  protected NlsBundleClientUiRoot getBundle() {
+
+    return NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class);
   }
 
   /**

@@ -4,16 +4,18 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import java.util.Date;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumTextLength;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField.Html5DateField;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
+import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Focusable;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.TextBoxBase;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
@@ -137,7 +139,7 @@ public class UiWidgetAdapterGwtDateField extends UiWidgetAdapterGwtDateBasedStri
   @Override
   public void setMaximumTextLength(int length) {
 
-    getActiveWidget().setMaxLength(length);
+    getActiveWidget().setMaximumTextLength(length);
   }
 
   /**
@@ -146,13 +148,13 @@ public class UiWidgetAdapterGwtDateField extends UiWidgetAdapterGwtDateBasedStri
   @Override
   public int getMaximumTextLength() {
 
-    return getActiveWidget().getMaxLength();
+    return getActiveWidget().getMaximumTextLength();
   }
 
   /**
-   * HTML5 based date field based on {@link TextBox}.
+   * HTML5 based date field based on {@link TextBoxBase}.
    */
-  public static class Html5DateField extends TextBox {
+  public static class Html5DateField extends TextBoxBase implements AttributeWriteMaximumTextLength {
 
     /**
      * The constructor.
@@ -162,6 +164,31 @@ public class UiWidgetAdapterGwtDateField extends UiWidgetAdapterGwtDateBasedStri
       super(JavaScriptUtil.getInstance().createInputElement("date"));
     }
 
+    /**
+     * @return the {@link #getElement() element} as {@link InputElement}.
+     */
+    protected InputElement getInputElement() {
+
+      return getElement().cast();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getMaximumTextLength() {
+
+      return getInputElement().getMaxLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMaximumTextLength(int length) {
+
+      getInputElement().setMaxLength(length);
+    }
   }
 
 }

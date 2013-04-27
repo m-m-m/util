@@ -52,6 +52,10 @@ input {
   border-color: red;
 }
 
+.Search {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sLDBECFLwjt10AAAETSURBVBjTdY8tS0MBGEbPs7sNxsAiY8WwIibTxC/QbhCLYwbXRLlJxzAoDgUnJl1Q/Biy4ke5GkT0B2hwiE0YFjEYDP4A4brttXgRlJ14eDjwCMCdX+mRw5qJMUxNsOsvn9Wj3dIrP8gtFNMyuwMwOJEIGcqBfbb85vDhzmYdIAS2bJLTMA3sb5dm97ZKM9ZqjYBiTiS8GBRDGBOYVSvl9adAHpQ3HoQdA5OBCwNIRPiDGVHA/y2KS0M5t1BMB3JuYWkIKQt28e+MSY6MM8McpKwgiuF9vD1Pe57nO4/3t+99/aPnEkkT44JeiVNML4hMvKOzO9WVvBJtyOTzsYTiVaQpzCpOu2G9VmukBtM3cSIJgG9WX2G0CjSDnQAAAABJRU5ErkJggg==');
+}
+
 .Button {
   .highlighted;
   border-style: solid;
@@ -59,8 +63,17 @@ input {
   padding: @padding;
   cursor: pointer;
   font-size: 16pt;
+}
+
+button {
   &:hover, &:focus, &:active {
     background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+  }
+}
+
+input {
+  &:hover, &:focus, &:active {
+    border-color: @focus-color;
   }
 }
 
@@ -70,6 +83,13 @@ input {
     margin: @margin;
     min-width: 6em;
   }
+}
+
+.MiniButton {
+  .highlighted;
+  font-family: monospaced;
+  padding: 0;
+  margin: 0;
 }
 
 .Field {
@@ -83,7 +103,22 @@ input {
 .Section {
   .bordered;
   border-bottom-style: solid;
+  text-align: center;
+  margin-bottom: 1em;
+  span {
+    padding: 0 0.5em;
+    position: relative;
+    top: 0.5em;
+    background: @background-color;
+  }
+  button {
+    padding: 0 0.2em;
+    position: relative;
+    top: 0.9em;
+    float: left;
+  }
 }
+
 
 .GridPanel {
   width: 100%;

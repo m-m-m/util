@@ -54,7 +54,7 @@ public abstract class AbstractEventSender<HANDLER extends UiHandlerEvent, SOURCE
   /**
    * @return the source that triggers the events.
    */
-  protected SOURCE getSource() {
+  public SOURCE getSource() {
 
     return this.source;
   }

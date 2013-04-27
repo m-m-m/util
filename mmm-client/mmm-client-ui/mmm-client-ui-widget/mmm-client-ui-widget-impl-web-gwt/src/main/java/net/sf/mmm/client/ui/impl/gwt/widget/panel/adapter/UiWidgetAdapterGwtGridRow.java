@@ -8,14 +8,10 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicCom
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtGridRow.GridRow;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of
- * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
- * {@link GridRow}.
+ * This is the implementation of {@link UiWidgetAdapterGridRow} using GWT based on {@link GridRow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -46,23 +42,28 @@ public class UiWidgetAdapterGwtGridRow extends UiWidgetAdapterGwtDynamicComposit
   @Override
   public void addChild(UiWidgetGridCell child, int index) {
 
-    Element childElement = getToplevelWidget(child).getElement();
-    Element element = getToplevelWidget().getElement();
+    Widget widget = getToplevelWidget(child);
     if (index < 0) {
-      element.appendChild(childElement);
+      getToplevelWidget().add(widget);
     } else {
-      DOM.insertChild(element, childElement, index);
+      getToplevelWidget().insert(widget, index);
     }
+    // Element childElement = getToplevelWidget(child).getElement();
+    // Element element = getToplevelWidget().getElement();
+    // if (index < 0) {
+    // element.appendChild(childElement);
+    // } else {
+    // DOM.insertChild(element, childElement, index);
+    // }
   }
 
   /**
-   * This inner class is a custom {@link Widget} that represents a {@link GridRow} (TR-tag).
+   * This inner class is a custom panel that represents a {@link GridRow} (TR-tag).
    */
-  protected static class GridRow extends Widget {
+  protected static class GridRow extends UiWidgetAdapterGwtDynamicComposite.CustomPanel {
 
     /**
      * The constructor.
-     * 
      */
     public GridRow() {
 

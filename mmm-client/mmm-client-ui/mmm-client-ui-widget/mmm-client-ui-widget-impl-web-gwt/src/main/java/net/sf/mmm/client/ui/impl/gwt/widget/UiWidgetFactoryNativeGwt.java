@@ -11,6 +11,7 @@ import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomButtonPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetCollapsableSectionGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLabelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLinkGwt;
@@ -51,7 +52,7 @@ import com.google.gwt.user.client.ui.UIObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-// wont help but for consistency... maybe GIN will support it once...
+// @Named wont help but for consistency... maybe GIN will support it once...
 @Named(UiWidgetFactoryNative.CDI_NAME)
 public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
 
@@ -70,7 +71,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetLabelGwt.Factory());
     register(new UiWidgetLinkGwt.Factory());
     register(new UiWidgetSectionGwt.Factory());
-    // register(new UiWidgetCollapsableSectionGwt.Factory());
+    register(new UiWidgetCollapsableSectionGwt.Factory());
     // field
     register(new UiWidgetTextFieldGwt.Factory());
     register(new UiWidgetPasswordFieldGwt.Factory());

@@ -3,10 +3,16 @@
 package net.sf.mmm.app.client;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
+import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel;
 import net.sf.mmm.util.validation.api.ValidationState;
+
+import com.google.gwt.user.client.Window;
 
 /**
  * 
@@ -41,8 +47,22 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     getDelegate().setColumnCount(2);
     getDelegate().addChildren(this.widgetFirstName);
     getDelegate().addChildren(this.widgetLastName);
-    getDelegate().addChildSpanned(getFactory().createSection("Optionals"));
+    UiWidgetCollapsableSection section = getFactory().create(UiWidgetCollapsableSection.class);
+    section.setLabel("Optionals");
+    // section = getFactory().createSection("Optionals");
+    getDelegate().addChildSpanned(section);
+    section.addCollapseHandler(this.widgetBirthday);
     getDelegate().addChildren(this.widgetBirthday);
+    UiHandlerPlain handler = new UiHandlerPlainSave() {
+
+      @Override
+      public void onSave(Object variant) {
+
+        Window.alert("Saved");
+      }
+    };
+    UiWidgetButton button = getFactory().createButton(handler);
+    getDelegate().addChildSpanned(button);
   }
 
   /**

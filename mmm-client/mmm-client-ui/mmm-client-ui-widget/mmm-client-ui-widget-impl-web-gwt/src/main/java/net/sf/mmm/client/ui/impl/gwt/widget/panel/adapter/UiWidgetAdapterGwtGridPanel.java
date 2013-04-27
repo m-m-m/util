@@ -8,8 +8,6 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicCom
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtGridPanel.GridPanel;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -46,19 +44,25 @@ public class UiWidgetAdapterGwtGridPanel extends UiWidgetAdapterGwtDynamicCompos
   @Override
   public void addChild(UiWidgetGridRow child, int index) {
 
-    Element childElement = getToplevelWidget(child).getElement();
-    Element element = getToplevelWidget().getElement();
+    Widget widget = getToplevelWidget(child);
     if (index < 0) {
-      DOM.appendChild(element, childElement);
+      getToplevelWidget().add(widget);
     } else {
-      DOM.insertChild(element, childElement, index);
+      getToplevelWidget().insert(widget, index);
     }
+    // Element childElement = widget.getElement();
+    // Element element = getToplevelWidget().getElement();
+    // if (index < 0) {
+    // DOM.appendChild(element, childElement);
+    // } else {
+    // DOM.insertChild(element, childElement, index);
+    // }
   }
 
   /**
-   * This inner class is a custom {@link Widget} that represents a {@link GridPanel} (table-tag).
+   * This inner class is a custom panel that represents a {@link GridPanel} (table-tag).
    */
-  protected static class GridPanel extends Widget {
+  protected static class GridPanel extends UiWidgetAdapterGwtDynamicComposite.CustomPanel {
 
     /**
      * The constructor.

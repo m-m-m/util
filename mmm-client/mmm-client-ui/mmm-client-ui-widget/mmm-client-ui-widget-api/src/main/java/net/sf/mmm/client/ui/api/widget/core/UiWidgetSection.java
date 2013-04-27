@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.core;
 
+import net.sf.mmm.client.ui.api.aria.role.RoleHeading;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
@@ -19,5 +20,11 @@ public interface UiWidgetSection extends UiWidgetRegularAtomic, AttributeWriteLa
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Section";
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  RoleHeading getAriaRole();
 
 }
