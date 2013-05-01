@@ -27,7 +27,13 @@ public interface UiMode {
     public boolean isEditable() {
 
       return false;
-    };
+    }
+
+    @Override
+    public String toString() {
+
+      return "VIEW";
+    }
   };
 
   /**
@@ -39,7 +45,13 @@ public interface UiMode {
     public boolean isEditable() {
 
       return true;
-    };
+    }
+
+    @Override
+    public String toString() {
+
+      return "EDIT";
+    }
   };
 
   /**
