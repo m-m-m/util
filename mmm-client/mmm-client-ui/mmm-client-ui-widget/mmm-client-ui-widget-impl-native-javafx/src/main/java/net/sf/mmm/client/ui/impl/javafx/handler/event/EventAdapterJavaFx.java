@@ -45,10 +45,10 @@ public class EventAdapterJavaFx implements ChangeListener<Boolean>, EventHandler
    * 
    * @param type is the {@link EventType} to fire.
    */
-  protected void fireEvent(EventType type) {
+  public void fireEvent(EventType type) {
 
     boolean programmtic = (this.programmaticEventType == type);
-    this.sender.onEvent(this.source, EventType.FOCUS_LOSS, programmtic);
+    this.sender.onEvent(this.source, type, programmtic);
     if (programmtic) {
       this.programmaticEventType = null;
     }
