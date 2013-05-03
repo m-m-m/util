@@ -2,21 +2,22 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
+import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.common.FlagModifier;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.aria.role.AbstractRole;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
+import net.sf.mmm.client.ui.base.attribute.AbstractFlagAdvanced;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -42,6 +43,12 @@ import net.sf.mmm.util.validation.api.ValidationState;
 public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VALUE> extends AbstractUiWidget<VALUE>
     implements AbstractUiWidgetComposite, AttributeWriteAriaRole {
 
+  /** @see #setIdPrefix(String) */
+  private static String idPrefix = "mmm";
+
+  /** @see #createUniqueId() */
+  private static int idCounter;
+
   /** @see #getWidgetAdapter() */
   private ADAPTER widgetAdapter;
 
@@ -54,11 +61,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /** @see #isVisible() */
   private boolean visible;
 
-  /** @see #addVisibleFunction(AttributeReadVisible) */
-  private List<AttributeReadVisible> visiblityFunctions;
-
-  /** @see #updateVisibilityLocal() */
-  private boolean visibleCalculated;
+  /** @see #getVisibleFlag() */
+  private VisibleFlag visibleFlag;
 
   /** @see #isEnabled() */
   private boolean enabled;
@@ -87,12 +91,6 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /** @see #getModeFixed() */
   private UiMode modeFixed;
 
-  /** @see #setIdPrefix(String) */
-  private static String idPrefix = "mmm";
-
-  /** @see #createUniqueId() */
-  private static int idCounter;
-
   /**
    * The constructor.
    * 
@@ -102,7 +100,6 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
     super(context);
     this.visible = true;
-    this.visibleCalculated = true;
     this.enabled = true;
     this.styles = "";
   }
@@ -160,16 +157,17 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     // for ariaRole see getWidgetAdapter()
-    adapter.setVisible(isVisibleAggregated());
+    adapter.setVisible(isVisible());
     if (!this.enabled) {
       adapter.setEnabled(this.enabled);
     }
     if (this.parent != null) {
       adapter.setParent(this.parent);
     }
-    if (this.id != null) {
-      adapter.setId(this.id);
-    }
+    // if (this.id != null) {
+    // adapter.setId(this.id);
+    adapter.setId(getId());
+    // }
     if (this.tooltip != null) {
       adapter.setTooltip(this.tooltip);
     }
@@ -181,6 +179,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     }
     if (this.height != null) {
       adapter.setHeight(this.height);
+    }
+    if (hasEventSender()) {
+      adapter.setEventSender(this, getEventSender());
     }
   }
 
@@ -220,8 +221,11 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
+   * This method sets the static prefix used for generated IDs.
+   * 
    * @param idPrefix is the idPrefix to set
    */
+  // TODO hohwille statics are evil. Better use component "WidgetIdGenerator" via UiContext
   public static void setIdPrefix(String idPrefix) {
 
     AbstractUiWidgetNative.idPrefix = idPrefix;
@@ -275,6 +279,24 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
+  public void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
+
+    addEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
+
+    return removeEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final UiMode getMode() {
 
     return this.mode;
@@ -297,7 +319,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     doSetMode(mode);
     ((AbstractUiContext) getContext()).getModeChanger().changeMode(this, mode);
     this.mode = mode;
-    updateVisibilityLocal();
+    // TODO hohwille add programmatic attribute to internal method?
+    boolean programmatic = true;
+    fireEvent(EventType.MODE, programmatic);
     setModeRecursive(mode);
   }
 
@@ -377,11 +401,18 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   public void setVisible(boolean visible) {
 
     if (this.visible != visible) {
-      boolean visibilityAggregated = (visible & this.visibleCalculated);
-      boolean updateUi = (isVisibleAggregated() != visibilityAggregated);
+      boolean oldVisibility = this.visible;
+      if (this.visibleFlag != null) {
+        oldVisibility = this.visibleFlag.getFlag();
+      }
       this.visible = visible;
-      if (updateUi && (this.widgetAdapter != null)) {
-        this.widgetAdapter.setVisible(visibilityAggregated);
+      boolean newVisible = visible;
+      if (this.visibleFlag != null) {
+        // this would actually not be necessary but we do not want to assume implementation knowledge here...
+        newVisible = this.visibleFlag.getFlag();
+      }
+      if ((oldVisibility != newVisible) && (this.widgetAdapter != null)) {
+        this.widgetAdapter.setVisible(newVisible);
       }
     }
   }
@@ -392,69 +423,10 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   @Override
   public boolean isVisible() {
 
-    return this.visible;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addVisibleFunction(AttributeReadVisible function) {
-
-    if (this.visiblityFunctions == null) {
-      this.visiblityFunctions = new LinkedList<AttributeReadVisible>();
-    }
-    this.visiblityFunctions.add(function);
-    updateVisibilityLocal();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean removeVisibleFunction(AttributeReadVisible function) {
-
-    boolean removed = false;
-    if (this.visiblityFunctions != null) {
-      removed = this.visiblityFunctions.remove(function);
-      if (removed) {
-        updateVisibilityLocal();
-      }
-    }
-    return removed;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isVisibleAggregated() {
-
-    return this.visible && this.visibleCalculated;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void updateVisibilityLocal() {
-
-    if (this.visiblityFunctions != null) {
-      boolean visibility = true;
-      for (AttributeReadVisible function : this.visiblityFunctions) {
-        if (!function.isVisible()) {
-          visibility = false;
-          break;
-        }
-      }
-      if (this.visibleCalculated != visibility) {
-        boolean visibilityAggregated = this.visible && visibility;
-        boolean updateUi = (isVisibleAggregated() != visibilityAggregated);
-        this.visibleCalculated = visibility;
-        if (updateUi && hasWidgetAdapter()) {
-          getWidgetAdapter().setVisible(visibilityAggregated);
-        }
-      }
+    if (this.visibleFlag != null) {
+      return this.visibleFlag.getFlag();
+    } else {
+      return this.visible;
     }
   }
 
@@ -462,14 +434,12 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
-  public void updateVisibility() {
+  public AttributeWriteFlagAdvanced getVisibleFlag() {
 
-    updateVisibilityLocal();
-    int childCount = getChildCount();
-    for (int i = 0; i < childCount; i++) {
-      UiWidget child = getChild(i);
-      child.updateVisibility();
+    if (this.visibleFlag == null) {
+      this.visibleFlag = new VisibleFlag();
     }
+    return this.visibleFlag;
   }
 
   /**
@@ -478,7 +448,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   @Override
   public final boolean isVisibleRecursive() {
 
-    if (!isVisibleAggregated()) {
+    if (!isVisible()) {
       return false;
     }
     if ((this.parent == null) || !this.parent.isVisible()) {
@@ -706,7 +676,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
     NlsNullPointerException.checkNotNull("styles", styles);
     this.styles = styles;
-    updateStyles();
+    if (this.widgetAdapter != null) {
+      this.widgetAdapter.setStyles(this.styles);
+    }
   }
 
   /**
@@ -733,13 +705,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   @Override
   public void setPrimaryStyle(String primaryStyle) {
 
-    if ((primaryStyle == null) || (primaryStyle.isEmpty())) {
-      String currentPrimaryStyle = getPrimaryStyle();
-      if (currentPrimaryStyle != null) {
-        removeStyle(currentPrimaryStyle);
-      }
-      return;
-    }
+    NlsNullPointerException.checkNotNull("primaryStyle", primaryStyle);
+    assert (primaryStyle.matches(STYLE_PATTERN_SINGLE)) : primaryStyle;
     if (this.styles.isEmpty()) {
       this.styles = primaryStyle;
     } else {
@@ -771,7 +738,13 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       }
       this.styles = buffer.toString();
     }
-    updateStyles();
+    if (this.widgetAdapter != null) {
+      if (this.widgetAdapter.isStyleDeltaSupported()) {
+        this.widgetAdapter.setPrimaryStyle(primaryStyle);
+      } else {
+        this.widgetAdapter.setStyles(this.styles);
+      }
+    }
   }
 
   /**
@@ -818,7 +791,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
-  public final void addStyle(String style) {
+  public final boolean addStyle(String style) {
 
     NlsNullPointerException.checkNotNull("style", style);
     assert (style.matches(STYLE_PATTERN_SINGLE));
@@ -828,8 +801,16 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       } else {
         this.styles = this.styles + " " + style;
       }
-      updateStyles();
+      if (this.widgetAdapter != null) {
+        if (this.widgetAdapter.isStyleDeltaSupported()) {
+          this.widgetAdapter.addStyle(style);
+        } else {
+          this.widgetAdapter.setStyles(this.styles);
+        }
+      }
+      return true;
     }
+    return false;
   }
 
   /**
@@ -849,20 +830,16 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
         endIndex++;
       }
       this.styles = this.styles.substring(0, startIndex) + this.styles.substring(endIndex);
-      updateStyles();
+      if (this.widgetAdapter != null) {
+        if (this.widgetAdapter.isStyleDeltaSupported()) {
+          this.widgetAdapter.removeStyle(style);
+        } else {
+          this.widgetAdapter.setStyles(this.styles);
+        }
+      }
       return true;
     }
     return false;
-  }
-
-  /**
-   * This method updates the styles in the view.
-   */
-  protected final void updateStyles() {
-
-    if (hasWidgetAdapter()) {
-      this.widgetAdapter.setStyles(this.styles);
-    }
   }
 
   /**
@@ -1021,6 +998,63 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       buffer.append("[disabled]");
     }
     return buffer.toString();
+  }
+
+  /**
+   * This inner class is the implementation of the visible flag.
+   */
+  private class VisibleFlag extends AbstractFlagAdvanced {
+
+    /**
+     * The constructor.
+     */
+    public VisibleFlag() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean getFlag() {
+
+      if (!AbstractUiWidgetNative.this.visible) {
+        return false;
+      }
+      return super.getFlag();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean getFlag(FlagModifier modifier) {
+
+      if (modifier == null) {
+        return AbstractUiWidgetNative.this.visible;
+      }
+      return super.getFlag(modifier);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFlag(boolean flag, FlagModifier modifier) {
+
+      boolean oldFlag = getFlag();
+      if (modifier == null) {
+        AbstractUiWidgetNative.this.visible = flag;
+      }
+      super.setFlag(flag, modifier);
+      if (AbstractUiWidgetNative.this.widgetAdapter != null) {
+        boolean newFlag = getFlag();
+        if (oldFlag != newFlag) {
+          AbstractUiWidgetNative.this.widgetAdapter.setVisible(newFlag);
+        }
+      }
+    }
   }
 
 }

@@ -19,8 +19,10 @@ public abstract interface AttributeWriteStylesAdvanced extends AttributeReadStyl
    * 
    * @param style is the style to add. If this style is already contained in the {@link #getStyles() styles},
    *        this will have no effect.
+   * @return <code>true</code> if the styles has actually been added, <code>false</code> if it was already
+   *         present before.
    */
-  void addStyle(String style);
+  boolean addStyle(String style);
 
   /**
    * This method removes the given <code>style</code> from the {@link #getStyles() styles}.

@@ -2,13 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.javafx.widget.adapter;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.Tooltip;
 import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
@@ -102,23 +98,6 @@ public abstract class UiWidgetAdapterJavaFxControl<WIDGET extends Control> exten
   public void setHeight(Length height) {
 
     getToplevelWidget().setPrefHeight(convertLength(height));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setClickEventSender(final UiFeatureClick eventSource, final UiHandlerEventClick eventSender) {
-
-    EventHandler<? super ActionEvent> handler = new EventHandler<ActionEvent>() {
-
-      @Override
-      public void handle(ActionEvent event) {
-
-        eventSender.onClick(eventSource, false);
-      };
-    };
-    getActiveWidget().addEventHandler(ActionEvent.ACTION, handler);
   }
 
   /**

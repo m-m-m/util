@@ -4,10 +4,14 @@ package net.sf.mmm.client.ui.impl.javafx.widget.adapter;
 
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
+import net.sf.mmm.client.ui.impl.javafx.handler.event.EventAdapterJavaFx;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
@@ -20,6 +24,9 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @since 1.0.0
  */
 public abstract class UiWidgetAdapterJavaFx<WIDGET> extends AbstractUiWidgetAdapter<WIDGET> {
+
+  /** @see #setEventSender(UiFeatureEvent, UiHandlerEvent) */
+  private EventAdapterJavaFx eventAdapter;
 
   /**
    * The constructor.
@@ -48,6 +55,88 @@ public abstract class UiWidgetAdapterJavaFx<WIDGET> extends AbstractUiWidgetAdap
     } catch (ClassCastException e) {
       throw new NlsClassCastException(e, widget, widgetType);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEventSender(UiFeatureEvent source, UiHandlerEvent sender) {
+
+    if (this.eventAdapter != null) {
+      throw new NlsIllegalStateException();
+    }
+    this.eventAdapter = createEventAdapter(source, sender);
+    applyEventAdapter(this.eventAdapter);
+  }
+
+  /**
+   * This method creates the {@link #getEventAdapter()} instance. It may be overridden to use a sub-class
+   * instead.
+   * 
+   * @param source is the source of the events (typically {@link net.sf.mmm.client.ui.api.widget.UiWidget}).
+   * @param sender is the sender of events (an adapter that delegates to the individual handlers/listeners).
+   * @return the new {@link EventAdapterJavaFx}.
+   */
+  protected EventAdapterJavaFx createEventAdapter(UiFeatureEvent source, UiHandlerEvent sender) {
+
+    return new EventAdapterJavaFx(source, sender);
+  }
+
+  /**
+   * @return the {@link EventAdapterJavaFx}. May be <code>null</code>.
+   */
+  public EventAdapterJavaFx getEventAdapter() {
+
+    return this.eventAdapter;
+  }
+
+  /**
+   * This method applies the given {@link EventAdapterJavaFx} to the widget(s) to receive GWT events. It will
+   * be called only once. Override to add specific event registrations.
+   * 
+   * @param adapter is the {@link EventAdapterJavaFx}.
+   */
+  protected void applyEventAdapter(EventAdapterJavaFx adapter) {
+
+    // Click-Events...
+    applyEventAdapterForClick(adapter);
+
+    // Focus-Events...
+    applyEventAdapterForFocus(adapter);
+
+    // Change-Events...
+    applyEventAdapterForChange(adapter);
+  }
+
+  /**
+   * Applies for click events.
+   * 
+   * @param adapter is the {@link EventAdapterJavaFx}.
+   */
+  protected void applyEventAdapterForClick(EventAdapterJavaFx adapter) {
+
+    // nothing by default...
+  }
+
+  /**
+   * Applies for focus (and blur) events.
+   * 
+   * @param adapter is the {@link EventAdapterJavaFx}.
+   */
+  protected void applyEventAdapterForFocus(EventAdapterJavaFx adapter) {
+
+    // nothing by default...
+  }
+
+  /**
+   * Applies for (value) change events.
+   * 
+   * @param adapter is the {@link EventAdapterJavaFx}.
+   */
+  protected void applyEventAdapterForChange(EventAdapterJavaFx adapter) {
+
+    // nothing by default...
   }
 
   /**

@@ -13,12 +13,7 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWritePrimaryStyle extends AttributeReadPrimaryStyle {
 
   /**
-   * This method sets the {@link #getPrimaryStyle() primary style}.<br/>
-   * <b>ATTENTION:</b><br/>
-   * You should avoid setting the primary style to <code>null</code> or the empty string. This will
-   * {@link AttributeWriteStylesAdvanced#removeStyle(String) remove} the current primary style and replace it
-   * with the next additional style. This can be totally confusing if you do {@link #setPrimaryStyle(String)}
-   * and afterwards expect {@link #getPrimaryStyle()} to return the value you have set before.
+   * This method sets the {@link #getPrimaryStyle() primary style}.
    * 
    * @see AttributeReadStyles#getStyles()
    * 

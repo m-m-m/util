@@ -10,9 +10,10 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLink;
 /**
  * This is the abstract base implementation of {@link UiWidgetLink}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetLink<ADAPTER extends UiWidgetAdapterLink> extends
     AbstractUiWidgetClickable<ADAPTER> implements UiWidgetLink {

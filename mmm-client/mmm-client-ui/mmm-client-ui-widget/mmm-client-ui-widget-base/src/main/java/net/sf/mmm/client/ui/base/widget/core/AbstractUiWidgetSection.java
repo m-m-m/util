@@ -12,9 +12,10 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSection;
 /**
  * This is the abstract base implementation of {@link UiWidgetSection}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetSection<ADAPTER extends UiWidgetAdapterSection> extends
     AbstractUiWidgetWithLabel<ADAPTER> implements UiWidgetSection {

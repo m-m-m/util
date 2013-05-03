@@ -5,13 +5,12 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.base.widget.adapter.RadioGroupIdManager;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
-import net.sf.mmm.client.ui.impl.gwt.handler.event.ChangeEventAdapterGwt;
-import net.sf.mmm.client.ui.impl.gwt.handler.event.FocusEventAdapterGwt;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
+import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwtClickToChange;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -40,9 +39,6 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
 
   /** @see #setOptions(List) */
   private List<String> options;
-
-  /** The {@link ChangeEventAdapterGwt} */
-  private ChangeEventAdapterGwt<VALUE> changeEventAdapter;
 
   /** @see #setOptions(List) */
   private char accessKey;
@@ -138,8 +134,9 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
       getToplevelWidget().add(rb);
       this.radioButtons.add(rb);
     }
-    registerChangeEventAdapter();
-    applyFocusEventAdapter();
+    applyEventAdapter(getEventAdapter());
+    // registerChangeEventAdapter();
+    // applyFocusEventAdapter();
   }
 
   /**
@@ -174,40 +171,43 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  public void setChangeEventSender(UiFeatureValue<VALUE> source, UiHandlerEventValueChange<VALUE> sender) {
+  protected EventAdapterGwt createEventAdapter(UiFeatureEvent source, UiHandlerEvent sender) {
 
-    if (this.changeEventAdapter != null) {
-      throw new NlsIllegalStateException();
-    }
-    this.changeEventAdapter = new ChangeEventAdapterGwt<VALUE>(source, sender);
-    registerChangeEventAdapter();
+    return new EventAdapterGwtClickToChange(source, sender);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void applyFocusEventAdapter() {
+  protected void applyEventAdapterForFocus(EventAdapterGwt adapter) {
 
-    FocusEventAdapterGwt focusEventAdapter = getFocusEventAdapter();
-    if (focusEventAdapter != null) {
-      for (RadioButton rb : this.radioButtons) {
-        rb.addFocusHandler(focusEventAdapter);
-        rb.addBlurHandler(focusEventAdapter);
-      }
+    for (RadioButton rb : this.radioButtons) {
+      rb.addFocusHandler(adapter);
+      rb.addBlurHandler(adapter);
     }
   }
 
   /**
-   * Registers the {@link FocusEventAdapterGwt} in all {@link RadioButton}s.
+   * {@inheritDoc}
    */
-  private void registerChangeEventAdapter() {
+  @Override
+  protected void applyEventAdapterForChange(EventAdapterGwt adapter) {
 
-    if (this.changeEventAdapter != null) {
-      for (RadioButton rb : this.radioButtons) {
-        rb.addClickHandler(this.changeEventAdapter);
-      }
+    for (RadioButton rb : this.radioButtons) {
+      rb.addClickHandler(adapter);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void applyEventAdapterForClick(EventAdapterGwt adapter) {
+
+    // nothing to do...
+    // TODO hohwille test and remove...
+    super.applyEventAdapterForClick(adapter);
   }
 
   /**

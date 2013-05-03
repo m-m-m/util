@@ -3,8 +3,6 @@
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
@@ -21,15 +19,5 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 public interface UiWidgetAdapterField<VALUE, ADAPTER_VALUE> extends UiWidgetAdapterActive,
     AttributeWriteValue<ADAPTER_VALUE>, AttributeWriteValidationFailure {
 
-  /**
-   * This method registers the given {@link UiHandlerEventValueChange value change handler} in the
-   * {@link #getToplevelWidget() widget}. This method will be called only once.
-   * 
-   * @param source is the
-   *        {@link UiHandlerEventValueChange#onValueChange(net.sf.mmm.util.lang.api.attribute.AttributeReadValue, boolean)
-   *        event source}.
-   * @param sender is the {@link UiHandlerEventValueChange}.
-   */
-  void setChangeEventSender(UiFeatureValue<VALUE> source, UiHandlerEventValueChange<VALUE> sender);
-
+  // nothing to add...
 }

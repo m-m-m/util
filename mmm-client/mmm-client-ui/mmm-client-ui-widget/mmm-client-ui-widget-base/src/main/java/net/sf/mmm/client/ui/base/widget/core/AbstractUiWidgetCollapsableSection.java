@@ -2,19 +2,28 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.core;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.common.UiEvent;
+import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse;
+import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
-import net.sf.mmm.client.ui.base.handler.event.CollapseEventSender;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.dynamic.VisibilityFlagModifier;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickable;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetCollapsableSection}.
  * 
+ * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidgetAdapterCollapsableSection> extends
     AbstractUiWidgetClickable<ADAPTER> implements UiWidgetCollapsableSection {
@@ -22,8 +31,8 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
   /** @see #isCollapsed() */
   private boolean collapsed;
 
-  /** @see #addCollapseHandler(UiHandlerEventCollapse) */
-  private CollapseEventSender collapseEventSender;
+  /** @see #addCollapseWidget(UiWidget) */
+  private CollapseHandler collapseHandler;
 
   /**
    * The constructor.
@@ -46,9 +55,6 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
     super.initializeWidgetAdapter(adapter);
     if (this.collapsed) {
       adapter.setCollapsed(this.collapsed);
-    }
-    if (this.collapseEventSender != null) {
-      adapter.setCollapseEventSender(this, this.collapseEventSender);
     }
   }
 
@@ -76,9 +82,11 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
       if (this.collapsed == collapsed) {
         return;
       }
-      if (this.collapseEventSender != null) {
-        this.collapseEventSender.onCollapseOrExpand(this, collapsed, true);
+      UiEvent event = EventType.EXPAND;
+      if (collapsed) {
+        event = EventType.COLLAPSE;
       }
+      fireEvent(event, true);
     }
     this.collapsed = collapsed;
   }
@@ -89,13 +97,7 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
   @Override
   public void addCollapseHandler(UiHandlerEventCollapse handler) {
 
-    if (this.collapseEventSender == null) {
-      this.collapseEventSender = new CollapseEventSender(this, getObserverSource());
-      if (hasWidgetAdapter()) {
-        getWidgetAdapter().setCollapseEventSender(this, this.collapseEventSender);
-      }
-    }
-    this.collapseEventSender.addHandler(handler);
+    addEventHandler(handler);
   }
 
   /**
@@ -104,10 +106,54 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
   @Override
   public boolean removeCollapseHandle(UiHandlerEventCollapse handler) {
 
-    if (this.collapseEventSender == null) {
-      return false;
+    return removeEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addCollapseWidget(UiWidget widget) {
+
+    if (this.collapseHandler == null) {
+      this.collapseHandler = new CollapseHandler();
+      addCollapseHandler(this.collapseHandler);
     }
-    return this.collapseEventSender.removeHandler(handler);
+    this.collapseHandler.widgets.add(widget);
+  }
+
+  /**
+   * @see AbstractUiWidgetCollapsableSection#addCollapseWidget(UiWidget)
+   */
+  private class CollapseHandler extends UiHandlerEventCollapse {
+
+    /** The list of {@link UiWidget} to collapse and expand. */
+    private final List<UiWidget> widgets;
+
+    /**
+     * The constructor.
+     */
+    public CollapseHandler() {
+
+      super();
+      this.widgets = new LinkedList<UiWidget>();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onCollapseOrExpand(UiFeatureCollapse source, boolean collapse, boolean programmatic) {
+
+      for (UiWidget widget : this.widgets) {
+        widget.getVisibleFlag().setFlag(!collapse, VisibilityFlagModifier.MODIFIER_COLLAPSE);
+        if (widget instanceof UiWidgetField) {
+          UiWidgetField<?> field = (UiWidgetField<?>) widget;
+          field.getFieldLabelWidget().getVisibleFlag().setFlag(!collapse, VisibilityFlagModifier.MODIFIER_COLLAPSE);
+        }
+      }
+    }
+
   }
 
 }

@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.Date;
 
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
+import net.sf.mmm.util.date.base.Iso8601UtilLimitedImpl;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -38,7 +39,9 @@ public abstract class UiWidgetAdapterGwtDateBasedStringField<WIDGET extends Widg
   protected Iso8601UtilLimited getIso8601Util() {
 
     if (this.iso8601Util == null) {
-      this.iso8601Util = getUiWidget().getContext().getContainer().get(Iso8601UtilLimited.class);
+      // TODO hohwille
+      // this.iso8601Util = getUiWidget().getContext().getContainer().get(Iso8601UtilLimited.class);
+      this.iso8601Util = new Iso8601UtilLimitedImpl();
     }
     return this.iso8601Util;
   }

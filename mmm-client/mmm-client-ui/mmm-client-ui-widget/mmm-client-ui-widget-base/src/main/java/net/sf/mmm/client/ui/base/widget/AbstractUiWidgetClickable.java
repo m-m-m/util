@@ -3,10 +3,10 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidgetClickable;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.handler.event.ClickEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterClickable;
 
 /**
@@ -20,9 +20,6 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterClickable;
  */
 public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterClickable> extends
     AbstractUiWidgetActive<ADAPTER, Void> implements UiWidgetClickable {
-
-  /** @see #addClickHandler(UiHandlerEventClick) */
-  private ClickEventSender clickEventSender;
 
   /** @see #getLabel() */
   private String label;
@@ -48,9 +45,6 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    if (this.clickEventSender != null) {
-      adapter.setClickEventSender(this, this.clickEventSender);
-    }
     if (this.label != null) {
       adapter.setLabel(this.label);
     }
@@ -89,13 +83,7 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
   @Override
   public void addClickHandler(UiHandlerEventClick handler) {
 
-    if (this.clickEventSender == null) {
-      this.clickEventSender = new ClickEventSender(this, getObserverSource());
-      if (hasWidgetAdapter()) {
-        getWidgetAdapter().setClickEventSender(this, this.clickEventSender);
-      }
-    }
-    this.clickEventSender.addHandler(handler);
+    addEventHandler(handler);
   }
 
   /**
@@ -104,10 +92,7 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
   @Override
   public boolean removeClickHandler(UiHandlerEventClick handler) {
 
-    if (this.clickEventSender != null) {
-      return this.clickEventSender.removeHandler(handler);
-    }
-    return false;
+    return removeEventHandler(handler);
   }
 
   /**
@@ -116,9 +101,7 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
   @Override
   public void click() {
 
-    if (this.clickEventSender != null) {
-      this.clickEventSender.onClick(this, true);
-    }
+    fireEvent(EventType.CLICK, true);
   }
 
   /**

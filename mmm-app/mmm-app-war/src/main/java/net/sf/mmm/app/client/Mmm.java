@@ -146,7 +146,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     verticalPanel1.addChild(borderPanel);
     UiWidgetCollapsableSection section = factory.create(UiWidgetCollapsableSection.class);
     section.setLabel("Foo");
-    section.addCollapseHandler(contactEditor);
+    section.addCollapseWidget(contactEditor);
     verticalPanel1.addChild(section);
     verticalPanel1.setMode(UiMode.EDIT);
 
@@ -297,7 +297,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     });
 
     // Create a handler for the sendButton and nameField
-    class MyHandler implements UiHandlerEventClick, KeyUpHandler {
+    class MyHandler extends UiHandlerEventClick implements KeyUpHandler {
 
       /**
        * {@inheritDoc}

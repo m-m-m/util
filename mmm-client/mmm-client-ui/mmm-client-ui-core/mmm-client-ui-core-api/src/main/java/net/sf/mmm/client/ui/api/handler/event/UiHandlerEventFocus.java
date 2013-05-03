@@ -3,6 +3,9 @@
 package net.sf.mmm.client.ui.api.handler.event;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
+import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.common.UiEvent;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 
 /**
  * This is the {@link UiHandlerEvent} for the action
@@ -11,7 +14,26 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiHandlerEventFocus extends UiHandlerEvent {
+// TODO hohwille We need Java8 support for GWT!
+// public interface UiHandlerEventFocus extends UiHandlerEvent {
+public abstract class UiHandlerEventFocus implements UiHandlerEvent {
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+
+    boolean focusGained;
+    if (event.getType() == EventType.FOCUS_GAIN) {
+      focusGained = true;
+    } else if (event.getType() == EventType.FOCUS_LOSS) {
+      focusGained = false;
+    } else {
+      return;
+    }
+    onFocusChange((AttributeReadFocused) source, programmatic, focusGained);
+  }
 
   /**
    * This method is invoked if an UI object (a text input, etc.) has changed its focus. In that case there
@@ -23,10 +45,9 @@ public interface UiHandlerEventFocus extends UiHandlerEvent {
    *        {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused#setFocused() focus change was
    *        triggered by the program}, <code>false</code> if performed by the end-user (by pressing the [tab]
    *        key or clicking into a widget with the mouse).
-   * @param lost - <code>true</code> if the focus has been lost (<em>blur</em>), <code>false</code> if the
-   *        focus has been gained (<em>focus</em>).
+   * @param focusGained - <code>true</code> if the focus has been {@link EventType#FOCUS_GAIN gained},
+   *        <code>false</code> if the focus has been {@link EventType#FOCUS_LOSS lost} (<em>blur</em>).
    */
-  // TODO hohwille invert logic from lost to focused
-  void onFocusChange(AttributeReadFocused source, boolean programmatic, boolean lost);
+  public abstract void onFocusChange(AttributeReadFocused source, boolean programmatic, boolean focusGained);
 
 }

@@ -2,11 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.menu.adapter;
 
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemClickable;
+import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Command;
@@ -20,12 +17,6 @@ import com.google.gwt.user.client.ui.MenuItem;
  */
 public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase implements
     UiWidgetAdapterMenuItemClickable, Command {
-
-  /** @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick) */
-  private UiFeatureClick source;
-
-  /** @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick) */
-  private UiHandlerEventClick clickEventSender;
 
   /**
    * The constructor.
@@ -50,19 +41,10 @@ public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase i
   @Override
   public void execute() {
 
-    if (this.clickEventSender != null) {
-      this.clickEventSender.onClick(this.source, false);
+    EventAdapterGwt eventAdapter = getEventAdapter();
+    if (eventAdapter != null) {
+      eventAdapter.onClick(null);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setClickEventSender(UiFeatureClick eventSource, UiHandlerEventClick eventSender) {
-
-    this.source = eventSource;
-    this.clickEventSender = eventSender;
   }
 
   /**
@@ -77,15 +59,6 @@ public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase i
     } else {
       element.setAttribute(HTML_ATTRIBUTE_ACCESS_KEY, String.valueOf(accessKey));
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFocusEventSender(UiFeatureFocus focusSource, UiHandlerEventFocus focusSender) {
-
-    // Not supported by GWT...
   }
 
   /**

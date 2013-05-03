@@ -9,8 +9,8 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
-import net.sf.mmm.client.ui.api.handler.UiHandlerObserver;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEventObserver;
+import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
@@ -30,10 +30,10 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * @since 1.0.0
  */
 public abstract class AbstractUiContext extends AbstractLoggableComponent implements UiContext,
-    AttributeWriteHandlerObserver {
+    AttributeWriteEventObserver {
 
-  /** @see #getHandlerObserver() */
-  private UiHandlerObserver handlerObserver;
+  /** @see #getEventObserver() */
+  private UiEventObserver handlerObserver;
 
   /** @see #getModeChanger() */
   private UiModeChanger modeChanger;
@@ -106,7 +106,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * {@inheritDoc}
    */
   @Override
-  public UiHandlerObserver getHandlerObserver() {
+  public UiEventObserver getEventObserver() {
 
     return this.handlerObserver;
   }
@@ -115,7 +115,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * {@inheritDoc}
    */
   @Override
-  public void setHandlerObserver(UiHandlerObserver handlerObserver) {
+  public void setEventObserver(UiEventObserver handlerObserver) {
 
     this.handlerObserver = handlerObserver;
   }

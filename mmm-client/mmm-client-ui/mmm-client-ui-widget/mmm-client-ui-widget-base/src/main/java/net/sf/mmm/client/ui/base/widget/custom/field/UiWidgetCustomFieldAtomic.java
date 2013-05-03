@@ -4,11 +4,7 @@ package net.sf.mmm.client.ui.base.widget.custom.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -36,6 +32,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
   public UiWidgetCustomFieldAtomic(UiContext context, DELEGATE delegate) {
 
     super(context, delegate);
+    delegate.addEventHandler(getEventHandlerAdapter());
   }
 
   /**
@@ -120,33 +117,6 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  public final String getFieldLabel() {
-
-    return getDelegate().getFieldLabel();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setFieldLabel(String label) {
-
-    getDelegate().setFieldLabel(label);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetLabel getFieldLabelWidget() {
-
-    return getDelegate().getFieldLabelWidget();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public final void addFocusHandler(UiHandlerEventFocus handler) {
 
     getDelegate().addFocusHandler(handler);
@@ -174,37 +144,9 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  public final boolean isFocused() {
-
-    return getDelegate().isFocused();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected UiWidgetField<?> getFirstField() {
 
     return getDelegate();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ChangeEventSender<VALUE> createChangeEventSender() {
-
-    final ChangeEventSender<VALUE> changeEventSender = super.createChangeEventSender();
-    // TODO hohwille this may cause dulicated events: one from delegate and one directly... needs redesign
-    getDelegate().addChangeHandler(new UiHandlerEventValueChange<DELEGATE_VALUE>() {
-
-      @Override
-      public void onValueChange(AttributeReadValue<DELEGATE_VALUE> source, boolean programmatic) {
-
-        changeEventSender.onValueChange(UiWidgetCustomFieldAtomic.this, programmatic);
-      }
-    });
-    return changeEventSender;
   }
 
 }

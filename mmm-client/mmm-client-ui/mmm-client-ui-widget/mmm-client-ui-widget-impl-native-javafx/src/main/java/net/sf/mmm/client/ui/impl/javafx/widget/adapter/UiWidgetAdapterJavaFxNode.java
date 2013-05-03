@@ -2,8 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.javafx.widget.adapter;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFocused;
+import net.sf.mmm.client.ui.impl.javafx.handler.event.EventAdapterJavaFx;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} using JavaFx
@@ -67,17 +70,71 @@ public abstract class UiWidgetAdapterJavaFxNode<WIDGET extends Node> extends UiW
   @Override
   public void setStyles(String styles) {
 
-    // TODO hohwille
-    getToplevelWidget().getStyleClass().add(styles);
+    String[] styleArray = styles.split(" ");
+    ObservableList<String> styleList = getToplevelWidget().getStyleClass();
+    styleList.clear();
+    styleList.addAll(styleArray);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void dispose() {
+  public boolean addStyle(String style) {
 
-    // do nothing...
+    getToplevelWidget().getStyleClass().add(style);
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeStyle(String style) {
+
+    getToplevelWidget().getStyleClass().remove(style);
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPrimaryStyle(String primaryStyle) {
+
+    ObservableList<String> styles = getToplevelWidget().getStyleClass();
+    if (styles.isEmpty()) {
+      styles.add(primaryStyle);
+    } else {
+      styles.set(0, primaryStyle);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isStyleDeltaSupported() {
+
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void applyEventAdapterForClick(EventAdapterJavaFx adapter) {
+
+    getToplevelWidget().addEventHandler(ActionEvent.ACTION, getEventAdapter());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void applyEventAdapterForFocus(EventAdapterJavaFx adapter) {
+
+    getActiveWidget().focusedProperty().addListener(getEventAdapter());
   }
 
   /**

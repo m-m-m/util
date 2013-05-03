@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
-import net.sf.mmm.client.ui.base.dynamic.VisibleFunctionMode;
+import net.sf.mmm.client.ui.base.dynamic.UiHandlerEventModeVisibility;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
@@ -78,8 +78,7 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
     }
     Boolean showIfEditable = getShowIfEditable();
     if (showIfEditable != null) {
-      boolean autoAdd = true;
-      new VisibleFunctionMode(button, autoAdd, showIfEditable.booleanValue());
+      UiHandlerEventModeVisibility.createAndAdd(button, showIfEditable.booleanValue());
     }
     return button;
   }

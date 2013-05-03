@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
+import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
 
@@ -22,5 +23,16 @@ public interface UiWidgetCollapsableSection extends UiWidgetRegularAtomic, Attri
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Section";
+
+  /**
+   * {@link #addCollapseHandler(net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse) Adds} a
+   * {@link net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse collapse handler} that triggers the
+   * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteVisibleAdvanced#getVisibleFlag()} visibility} of
+   * the given {@link UiWidget}. On collapse the {@link UiWidget} will be hidden, on expand it will be shown
+   * (or more precisely its visible state will be restored).
+   * 
+   * @param widget is the widget to add.
+   */
+  void addCollapseWidget(UiWidget widget);
 
 }

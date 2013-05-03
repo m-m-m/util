@@ -2,18 +2,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadHandlerObserver;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadEventObserver;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
+import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
-import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
+import net.sf.mmm.client.ui.api.common.UiEvent;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.handler.UiEventObserver;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValue;
-import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
 import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
 
@@ -36,6 +45,9 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   /** @see #getContext() */
   private final UiContext context;
 
+  /** @see #fireEvent(UiEvent, boolean) */
+  private EventSender eventSender;
+
   /**
    * The constructor.
    * 
@@ -57,13 +69,12 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   }
 
   /**
-   * @return die Instanz von {@link AttributeReadHandlerObserver} oder <code>null</code> falls nicht
-   *         verfügbar.
+   * @return die Instanz von {@link AttributeReadEventObserver} oder <code>null</code> falls nicht verfügbar.
    */
-  protected final AttributeReadHandlerObserver getObserverSource() {
+  protected final AttributeReadEventObserver getObserverSource() {
 
-    if (this.context instanceof AttributeReadHandlerObserver) {
-      return (AttributeReadHandlerObserver) this.context;
+    if (this.context instanceof AttributeReadEventObserver) {
+      return (AttributeReadEventObserver) this.context;
     }
     return null;
   }
@@ -106,16 +117,6 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
   public static final UiWidgetAdapter getWidgetAdapter(UiWidget widget) {
 
     return ((AbstractUiWidget<?>) widget).getWidgetAdapter();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ChangeEventSender<VALUE> createChangeEventSender() {
-
-    ChangeEventSender<VALUE> changeEventSender = new ChangeEventSender<VALUE>(this, getObserverSource());
-    return changeEventSender;
   }
 
   /**
@@ -230,9 +231,149 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValue<VAL
    * {@inheritDoc}
    */
   @Override
-  public void onCollapseOrExpand(UiFeatureCollapse source, boolean collapse, boolean programmatic) {
+  public final void addEventHandler(UiHandlerEvent handler) {
 
-    setVisible(!collapse);
+    NlsNullPointerException.checkNotNull(UiHandlerEvent.class, handler);
+    getEventSender().eventHandlers.add(handler);
+  }
+
+  /**
+   * @return <code>true</code> if the {@link EventSender} has already been {@link #getEventSender() created}.
+   *         Otherwise <code>false</code> (if {@link #getEventSender()} has never been called yet).
+   */
+  protected final boolean hasEventSender() {
+
+    return (this.eventSender != null);
+  }
+
+  /**
+   * This method gets the {@link EventSender}. It will be created on the first call.
+   * 
+   * @return the {@link EventSender}.
+   */
+  protected final EventSender getEventSender() {
+
+    if (this.eventSender == null) {
+      this.eventSender = new EventSender();
+      if (hasWidgetAdapter()) {
+        // TODO hohwille might be called twice for custom widget
+        getWidgetAdapter().setEventSender(this, this.eventSender);
+      }
+    }
+    return this.eventSender;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final boolean removeEventHandler(UiHandlerEvent handler) {
+
+    if (this.eventSender == null) {
+      return false;
+    }
+    return this.eventSender.eventHandlers.remove(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
+
+    addEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
+
+    return removeEventHandler(handler);
+  }
+
+  /**
+   * Fires an event with the given parameters.
+   * 
+   * @param event is the {@link UiEvent}.
+   * @param programmatic - see
+   *        {@link UiHandlerEvent#onEvent(net.sf.mmm.client.ui.api.feature.UiFeatureEvent, UiEvent, boolean)}.
+   */
+  protected final void fireEvent(UiEvent event, boolean programmatic) {
+
+    if (this.eventSender != null) {
+      this.eventSender.onEvent(this, event, programmatic);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void fireValueChange() {
+
+    fireEvent(EventType.VALUE_CHANGE, true);
+  }
+
+  /**
+   * This inner class is an adapter for the events.
+   */
+  protected class EventSender implements UiHandlerEvent, AttributeReadFocused {
+
+    /** @see #addEventHandler(UiHandlerEvent) */
+    private final List<UiHandlerEvent> eventHandlers;
+
+    /** @see #isFocused() */
+    private boolean focused;
+
+    /**
+     * The constructor.
+     */
+    public EventSender() {
+
+      super();
+      this.eventHandlers = new LinkedList<UiHandlerEvent>();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isFocused() {
+
+      return this.focused;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+
+      if (event.getType() == EventType.FOCUS_GAIN) {
+        this.focused = true;
+      } else if (event.getType() == EventType.FOCUS_LOSS) {
+        this.focused = false;
+      }
+      UiEventObserver eventObserver = null;
+      AttributeReadEventObserver observerSource = getObserverSource();
+      if (observerSource != null) {
+        eventObserver = observerSource.getEventObserver();
+      }
+      if (eventObserver != null) {
+        eventObserver.beforeHandler(event);
+      }
+      for (UiHandlerEvent handler : this.eventHandlers) {
+        // TODO hohwille if a handler will remove itself in onEvent we might get
+        // ConcurrentModificationException
+        handler.onEvent(AbstractUiWidget.this, event, programmatic);
+      }
+      if (eventObserver != null) {
+        eventObserver.afterHandler(event);
+      }
+    }
+
   }
 
 }

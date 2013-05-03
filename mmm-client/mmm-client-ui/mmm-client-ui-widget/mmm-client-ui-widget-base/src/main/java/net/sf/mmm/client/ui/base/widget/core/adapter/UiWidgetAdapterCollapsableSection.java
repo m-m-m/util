@@ -3,8 +3,6 @@
 package net.sf.mmm.client.ui.base.widget.core.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed;
-import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterClickable;
 
 /**
@@ -16,15 +14,6 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterClickable;
  */
 public interface UiWidgetAdapterCollapsableSection extends UiWidgetAdapterClickable, AttributeWriteCollapsed {
 
-  /**
-   * This method registers the given {@link UiHandlerEventCollapse collapse handler} in the adapted widget.
-   * This method will be called only once.
-   * 
-   * @param eventSource is the
-   *        {@link UiHandlerEventCollapse#onCollapseOrExpand(UiFeatureCollapse, boolean, boolean) event
-   *        source}.
-   * @param eventSender is the {@link UiHandlerEventCollapse}.
-   */
-  void setCollapseEventSender(UiFeatureCollapse eventSource, UiHandlerEventCollapse eventSender);
+  // nothing to add...
 
 }

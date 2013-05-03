@@ -187,7 +187,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
   /**
    * This inner class implements the handler-interfaces.
    */
-  private class Handler implements UiHandlerEventSelection<SELECTION> {
+  private class Handler extends UiHandlerEventSelection<SELECTION> {
 
     /**
      * {@inheritDoc}

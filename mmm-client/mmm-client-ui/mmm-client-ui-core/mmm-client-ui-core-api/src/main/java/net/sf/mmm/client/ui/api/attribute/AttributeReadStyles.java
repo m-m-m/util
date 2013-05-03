@@ -11,7 +11,7 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeReadStyles {
 
   /** The regular expression pattern for a single style. */
-  String STYLE_PATTERN_SINGLE = "[a-z][_a-z0-9-]*";
+  String STYLE_PATTERN_SINGLE = "[a-zA-Z][_a-zA-Z0-9-]*";
 
   /** The regular expression pattern for any number of {@link #getStyles() styles}. */
   String STYLE_PATTERN_MULTIPLE = "(" + STYLE_PATTERN_SINGLE + ")?([ ]" + STYLE_PATTERN_SINGLE + ")*";

@@ -3,9 +3,9 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
-import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
 /**
@@ -21,9 +21,6 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActive, VALUE> extends
     AbstractUiWidgetNative<ADAPTER, VALUE> implements UiWidgetActive {
 
-  /** @see #addFocusHandler(UiHandlerEventFocus) */
-  private FocusEventSender focusEventSender;
-
   /** @see #getAccessKey() */
   private char accessKey;
 
@@ -36,6 +33,8 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
 
     super(context);
     this.accessKey = ACCESS_KEY_NONE;
+    // ensure EventSender gets created and will be attached to focus events...
+    getEventSender();
   }
 
   /**
@@ -45,20 +44,9 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    if (this.focusEventSender != null) {
-      adapter.setFocusEventSender(this, this.focusEventSender);
-    }
     if (this.accessKey != ACCESS_KEY_NONE) {
       adapter.setAccessKey(this.accessKey);
     }
-  }
-
-  /**
-   * @return the {@link FocusEventSender} or <code>null</code> if NOT yet created.
-   */
-  protected final FocusEventSender getFocusEventSender() {
-
-    return this.focusEventSender;
   }
 
   /**
@@ -68,12 +56,9 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   public void setFocused() {
 
     if (hasWidgetAdapter()) {
-      // if (this.focusEventSender != null) {
-      // this.focusEventSender.setProgrammatic();
-      // }
       getWidgetAdapter().setFocused();
-    } else if (this.focusEventSender != null) {
-      this.focusEventSender.onFocusChange(this, true, false);
+    } else {
+      fireEvent(EventType.FOCUS_GAIN, true);
     }
   }
 
@@ -83,10 +68,7 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   @Override
   public boolean isFocused() {
 
-    if (this.focusEventSender != null) {
-      return this.focusEventSender.isFocused();
-    }
-    return false;
+    return getEventSender().isFocused();
   }
 
   /**
@@ -95,13 +77,7 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   @Override
   public void addFocusHandler(UiHandlerEventFocus handler) {
 
-    if (this.focusEventSender == null) {
-      this.focusEventSender = new FocusEventSender(this, getObserverSource());
-      if (hasWidgetAdapter()) {
-        getWidgetAdapter().setFocusEventSender(this, this.focusEventSender);
-      }
-    }
-    this.focusEventSender.addHandler(handler);
+    addEventHandler(handler);
   }
 
   /**
@@ -110,10 +86,7 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   @Override
   public boolean removeFocusHandler(UiHandlerEventFocus handler) {
 
-    if (this.focusEventSender != null) {
-      return this.focusEventSender.removeHandler(handler);
-    }
-    return false;
+    return removeEventHandler(handler);
   }
 
   /**

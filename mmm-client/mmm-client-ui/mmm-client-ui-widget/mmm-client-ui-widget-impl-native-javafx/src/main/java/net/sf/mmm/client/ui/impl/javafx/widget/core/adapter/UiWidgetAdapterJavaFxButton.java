@@ -4,13 +4,9 @@ package net.sf.mmm.client.ui.impl.javafx.widget.core.adapter;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
-import net.sf.mmm.client.ui.impl.javafx.handler.event.FocusEventAdapterJavaFx;
 import net.sf.mmm.client.ui.impl.javafx.widget.adapter.UiWidgetAdapterJavaFxLabeled;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 /**
@@ -20,9 +16,6 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  * @since 1.0.0
  */
 public class UiWidgetAdapterJavaFxButton extends UiWidgetAdapterJavaFxLabeled<Button> implements UiWidgetAdapterButton {
-
-  /** @see #setFocusEventSender(UiFeatureFocus, UiHandlerEventFocus) */
-  private FocusEventAdapterJavaFx focusEventAdapter;
 
   /**
    * The constructor.
@@ -84,19 +77,6 @@ public class UiWidgetAdapterJavaFxButton extends UiWidgetAdapterJavaFxLabeled<Bu
 
     // getActiveWidget().setAccelerator()
     // getActiveWidget().setAcccessKey
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFocusEventSender(UiFeatureFocus source, UiHandlerEventFocus sender) {
-
-    if (this.focusEventAdapter != null) {
-      throw new NlsIllegalStateException();
-    }
-    this.focusEventAdapter = new FocusEventAdapterJavaFx(source, sender);
-    getActiveWidget().focusedProperty().addListener(this.focusEventAdapter);
   }
 
 }

@@ -108,7 +108,8 @@ public class KeyboardFilterAdapter implements KeyPressHandler, AttributeWriteKey
   }
 
   /**
-   * @return <code>true</code> if never {@link #add(HasKeyPressHandlers) added} or {@link #remove() removed}.
+   * @return <code>true</code> if never {@link #add(HasKeyPressHandlers) added} or if {@link #remove()
+   *         removed}, <code>false</code> otherwise.
    */
   public boolean isRemoved() {
 

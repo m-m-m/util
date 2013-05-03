@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.feature;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteHandlerObserver;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEventObserver;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectedValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 
@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
  * @param <VALUE> is the generic type of the selectable {@link #getSelectedValues() values}.
  */
 public interface UiFeatureSelectedValue<VALUE> extends AttributeWriteSelectedValue<VALUE>,
-    AttributeWriteHandlerObserver {
+    AttributeWriteEventObserver {
 
   /**
    * This method adds the given {@link UiHandlerEventSelection} to this object.

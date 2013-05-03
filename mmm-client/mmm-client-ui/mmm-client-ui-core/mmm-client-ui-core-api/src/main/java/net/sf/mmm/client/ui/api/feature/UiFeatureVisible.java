@@ -19,7 +19,9 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteVisibleAdvanced} instead.
  */
+@Deprecated
 public interface UiFeatureVisible extends UiFeatureVisibleFunctions, AttributeWriteVisible,
     AttributeReadVisibleRecursive {
 

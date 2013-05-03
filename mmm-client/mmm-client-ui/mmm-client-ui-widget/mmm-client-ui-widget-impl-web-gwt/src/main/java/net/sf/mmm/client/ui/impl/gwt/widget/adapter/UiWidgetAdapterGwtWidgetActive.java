@@ -3,15 +3,13 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
+import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
-import net.sf.mmm.client.ui.impl.gwt.handler.event.FocusEventAdapterGwt;
+import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.KeyboardFilterAdapter;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -34,9 +32,6 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
 
   /** @see #getKeyboardFilter() */
   private KeyboardFilterAdapter keyboardFilterAdapter;
-
-  /** The {@link FocusEventAdapterGwt} */
-  private FocusEventAdapterGwt focusEventAdapter;
 
   /**
    * The constructor.
@@ -65,23 +60,6 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
   protected abstract HasAllFocusHandlers getWidgetAsHasAllFocusHandlers();
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setClickEventSender(final UiFeatureClick source, final UiHandlerEventClick clickEventSender) {
-
-    ClickHandler handler = new ClickHandler() {
-
-      @Override
-      public void onClick(ClickEvent event) {
-
-        clickEventSender.onClick(source, false);
-      }
-    };
-    setClickEventSender(handler, getToplevelWidget());
-  }
-
-  /**
    * @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick)
    * 
    * @param handler is the {@link ClickHandler} to register.
@@ -102,8 +80,9 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
 
     Focusable focusWidget = getWidgetAsFocusable();
     if (focusWidget != null) {
-      if (this.focusEventAdapter != null) {
-        this.focusEventAdapter.setProgrammatic();
+      EventAdapterGwt eventAdapter = getEventAdapter();
+      if (eventAdapter != null) {
+        eventAdapter.setProgrammaticEventType(EventType.FOCUS_GAIN);
       }
       focusWidget.setFocus(true);
     }
@@ -113,25 +92,21 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
    * {@inheritDoc}
    */
   @Override
-  public void setFocusEventSender(final UiFeatureFocus source, final UiHandlerEventFocus sender) {
+  protected void applyEventAdapterForClick(EventAdapterGwt adapter) {
 
-    if (this.focusEventAdapter != null) {
-      throw new NlsIllegalStateException();
-    }
-    this.focusEventAdapter = new FocusEventAdapterGwt(source, sender);
-    applyFocusEventAdapter();
+    getToplevelWidget().addDomHandler(adapter, ClickEvent.getType());
   }
 
   /**
-   * @see #setFocusEventSender(UiFeatureFocus, UiHandlerEventFocus)
-   * @see #getFocusEventAdapter()
+   * {@inheritDoc}
    */
-  protected void applyFocusEventAdapter() {
+  @Override
+  protected void applyEventAdapterForFocus(EventAdapterGwt adapter) {
 
     HasAllFocusHandlers focusWidget = getWidgetAsHasAllFocusHandlers();
     if (focusWidget != null) {
-      focusWidget.addFocusHandler(this.focusEventAdapter);
-      focusWidget.addBlurHandler(this.focusEventAdapter);
+      focusWidget.addFocusHandler(adapter);
+      focusWidget.addBlurHandler(adapter);
     }
   }
 
@@ -181,11 +156,4 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
     getWidgetAsFocusable().setAccessKey(accessKey);
   }
 
-  /**
-   * @return the {@link FocusEventAdapterGwt} or <code>null</code> if NOT (yet) set.
-   */
-  protected FocusEventAdapterGwt getFocusEventAdapter() {
-
-    return this.focusEventAdapter;
-  }
 }

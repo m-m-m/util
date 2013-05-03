@@ -7,8 +7,6 @@ import java.util.List;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
@@ -33,9 +31,6 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   /** @see #addValidator(ValueValidator) */
   private final List<ValueValidator<? super VALUE>> validatorList;
 
-  /** @see #addChangeHandler(UiHandlerEventValueChange) */
-  private ChangeEventSender<VALUE> changeEventSender;
-
   /** @see #getOriginalValue() */
   private VALUE originalValue;
 
@@ -57,7 +52,6 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
     this.validatorList = new LinkedList<ValueValidator<? super VALUE>>();
     this.modified = false;
     this.originalValue = null;
-    this.changeEventSender = null;
   }
 
   /**
@@ -94,10 +88,14 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
       v = createNewValue();
     }
     doSetValue(v, forUser);
-    if (this.changeEventSender != null) {
-      this.changeEventSender.onValueChange(this, true);
-    }
+    fireValueChange();
   }
+
+  /**
+   * Called if the value has changed programmatically. Implementation has to fire a
+   * {@link net.sf.mmm.client.ui.api.common.EventType#VALUE_CHANGE value change} event.
+   */
+  protected abstract void fireValueChange();
 
   /**
    * This method is called from {@link #setValue(Object, boolean)}. It has to be implemented with the custom
@@ -337,53 +335,6 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   public void setModified(boolean modified) {
 
     this.modified = modified;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void addChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
-
-    requireChangeEventSender().addHandler(handler);
-  }
-
-  /**
-   * @return the {@link ChangeEventSender}. Will be {@link #createChangeEventSender() created} on the first
-   *         call.
-   */
-  protected final ChangeEventSender<VALUE> requireChangeEventSender() {
-
-    if (this.changeEventSender == null) {
-      this.changeEventSender = createChangeEventSender();
-    }
-    return this.changeEventSender;
-  }
-
-  /**
-   * @return a new instance of {@link ChangeEventSender}. Should be connected with the underlying native
-   *         widget where applicable.
-   */
-  protected abstract ChangeEventSender<VALUE> createChangeEventSender();
-
-  /**
-   * @return the {@link ChangeEventSender} or <code>null</code> if NOT yet created.
-   */
-  protected final ChangeEventSender<VALUE> getChangeEventSender() {
-
-    return this.changeEventSender;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final boolean removeChangeHandler(UiHandlerEventValueChange<VALUE> handler) {
-
-    if (this.changeEventSender != null) {
-      return this.changeEventSender.removeHandler(handler);
-    }
-    return false;
   }
 
   /**

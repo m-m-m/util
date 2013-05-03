@@ -46,7 +46,7 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     section.setLabel("Optionals");
     // section = getFactory().createSection("Optionals");
     getDelegate().addChildSpanned(section);
-    section.addCollapseHandler(this.widgetBirthday);
+    section.addCollapseWidget(this.widgetBirthday);
     getDelegate().addChildren(this.widgetBirthday);
   }
 

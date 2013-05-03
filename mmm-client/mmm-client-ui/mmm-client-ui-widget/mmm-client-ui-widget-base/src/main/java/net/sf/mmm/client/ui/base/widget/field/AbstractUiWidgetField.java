@@ -5,7 +5,6 @@ package net.sf.mmm.client.ui.base.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
@@ -52,10 +51,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    ChangeEventSender<VALUE> changeEventSender = getChangeEventSender();
-    if (changeEventSender != null) {
-      adapter.setChangeEventSender(this, changeEventSender);
-    }
     VALUE value = getValue();
     if (value != null) {
       adapter.setValue(convertFromValue(value));
@@ -219,7 +214,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public void setId(String newId) {
 
     super.setId(newId);
-    if (this.fieldLabelWidget == null) {
+    if (this.fieldLabelWidget != null) {
       this.fieldLabelWidget.setLabelledWidget(this);
     }
   }
@@ -240,19 +235,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       return this.fieldLabel;
     }
     return super.getSource();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ChangeEventSender<VALUE> createChangeEventSender() {
-
-    ChangeEventSender<VALUE> changeEventSender = super.createChangeEventSender();
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setChangeEventSender(this, changeEventSender);
-    }
-    return changeEventSender;
   }
 
   /**

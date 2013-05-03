@@ -2,9 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
-import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
+import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 
@@ -41,9 +39,6 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
 
   /** @see #setEnabled(boolean) */
   private boolean collapsed;
-
-  /** @see #setCollapseEventSender(UiFeatureCollapse, UiHandlerEventCollapse) */
-  private UiHandlerEventCollapse collapseEventSender;
 
   /**
    * The constructor.
@@ -106,32 +101,29 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
    * 
    * @param newCollapsed - see {@link #setCollapsed(boolean)}.
    * @param programmatic - see
-   *        {@link UiHandlerEventCollapse#onCollapseOrExpand(UiFeatureCollapse, boolean, boolean)}.
+   *        {@link net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse#onCollapseOrExpand(net.sf.mmm.client.ui.api.feature.UiFeatureCollapse, boolean, boolean)}
+   *        .
    */
   public void setCollapsed(boolean newCollapsed, boolean programmatic) {
 
     // if (this.collapsed == collapsed) {
     // return;
     // }
-
+    EventType eventType;
     if (newCollapsed) {
+      eventType = EventType.COLLAPSE;
       this.toggleButton.setText(LABEL_EXPAND);
       this.toggleButton.setTitle(getBundle().tooltipExpand().getLocalizedMessage());
     } else {
+      eventType = EventType.EXPAND;
       this.toggleButton.setText(LABEL_COLLAPSE);
       this.toggleButton.setTitle(getBundle().tooltipCollapse().getLocalizedMessage());
     }
-    this.collapseEventSender.onCollapseOrExpand((UiWidgetCollapsableSection) getUiWidget(), newCollapsed, programmatic);
     this.collapsed = newCollapsed;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setCollapseEventSender(UiFeatureCollapse eventSource, UiHandlerEventCollapse eventSender) {
-
-    this.collapseEventSender = eventSender;
+    if (programmatic) {
+      getEventAdapter().setProgrammaticEventType(eventType);
+    }
+    getEventAdapter().fireEvent(eventType);
   }
 
   /**

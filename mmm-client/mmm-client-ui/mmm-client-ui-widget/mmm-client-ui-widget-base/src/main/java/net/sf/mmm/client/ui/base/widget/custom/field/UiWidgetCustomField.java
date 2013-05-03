@@ -3,9 +3,13 @@
 package net.sf.mmm.client.ui.base.widget.custom.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.UiEvent;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
 
@@ -27,6 +31,12 @@ import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
 public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetComposite<?>> extends
     UiWidgetCustom<VALUE, DELEGATE> implements UiWidgetField<VALUE> {
 
+  /** @see #getEventHandlerAdapter() */
+  private final EventHandlerAdapter eventHandlerAdapter;
+
+  /** The sub-field that currently has the focus or <code>null</code>. */
+  private UiFeatureEvent focusField;
+
   /**
    * The constructor.
    * 
@@ -36,6 +46,15 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   public UiWidgetCustomField(UiContext context, DELEGATE delegate) {
 
     super(context, delegate);
+    this.eventHandlerAdapter = new EventHandlerAdapter();
+  }
+
+  /**
+   * @return the {@link EventHandlerAdapter}.
+   */
+  EventHandlerAdapter getEventHandlerAdapter() {
+
+    return this.eventHandlerAdapter;
   }
 
   /**
@@ -70,7 +89,42 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
    * 
    * @return the {@link #getDelegate()}
    */
-  protected abstract UiWidgetField<?> getFirstField();
+  abstract UiWidgetField<?> getFirstField();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getFieldLabel() {
+
+    UiWidgetField<?> firstField = getFirstField();
+    if (firstField == null) {
+      return null;
+    }
+    return firstField.getFieldLabel();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFieldLabel(String label) {
+
+    getFirstField().setFieldLabel(label);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetLabel getFieldLabelWidget() {
+
+    UiWidgetField<?> firstField = getFirstField();
+    if (firstField == null) {
+      return null;
+    }
+    return firstField.getFieldLabelWidget();
+  }
 
   /**
    * {@inheritDoc}
@@ -114,7 +168,20 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   @Override
   public void setFocused() {
 
-    getFirstField().setFocused();
+    if (this.focusField != null) {
+      ((UiWidgetField<?>) this.focusField).setFocused();
+    } else {
+      getFirstField().setFocused();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isFocused() {
+
+    return (this.focusField != null);
   }
 
   /**
@@ -123,7 +190,8 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   @Override
   public void addFocusHandler(UiHandlerEventFocus handler) {
 
-    getFirstField().addFocusHandler(handler);
+    addEventHandler(handler);
+    // getFirstField().addFocusHandler(handler);
   }
 
   /**
@@ -132,7 +200,8 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   @Override
   public boolean removeFocusHandler(UiHandlerEventFocus handler) {
 
-    return getFirstField().removeFocusHandler(handler);
+    return removeEventHandler(handler);
+    // return getFirstField().removeFocusHandler(handler);
   }
 
   /**
@@ -151,6 +220,48 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   public char getAccessKey() {
 
     return getFirstField().getAccessKey();
+  }
+
+  /**
+   * This inner class is an {@link UiHandlerEvent event handler} that adapts from the internal fields to this
+   * composite custom widget.
+   */
+  public class EventHandlerAdapter implements UiHandlerEvent {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+
+      boolean fireEvent;
+      switch (event.getType()) {
+        case FOCUS_GAIN:
+          fireEvent = (UiWidgetCustomField.this.focusField == null);
+          UiWidgetCustomField.this.focusField = source;
+          break;
+        case FOCUS_LOSS:
+          // TODO hohwille revisit this code... Might be buggy...
+          if (source == UiWidgetCustomField.this.focusField) {
+            UiWidgetCustomField.this.focusField = null;
+            fireEvent = true;
+          } else {
+            fireEvent = false;
+          }
+          break;
+        case VALUE_CHANGE:
+          // we ignore programmatic events from the adapted widget(s) to prevent event duplication
+          // TODO hohwille if value of adapted widget is set internally, no event will be send then - buggy?
+          fireEvent = !programmatic;
+          break;
+        default :
+          fireEvent = true;
+          break;
+      }
+      if (fireEvent) {
+        fireEvent(event, programmatic);
+      }
+    }
   }
 
 }

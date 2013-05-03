@@ -6,16 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
-import net.sf.mmm.client.ui.base.handler.event.ChangeEventSender;
-import net.sf.mmm.client.ui.base.handler.event.FocusEventSender;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
  * This is the abstract base class for a {@link UiWidgetCustomField custom field widget} that is composed out
@@ -38,12 +31,6 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
   /** The {@link List} of children that are field widgets. */
   private final List<UiWidgetField<?>> fieldList;
 
-  /** @see #addFocusHandler(UiHandlerEventFocus) */
-  private final FocusEventSender focusEventSender;
-
-  /** The sub-field that currently has the focus or <code>null</code>. */
-  private AttributeReadFocused focusField;
-
   /**
    * The constructor.
    * 
@@ -54,7 +41,6 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
 
     super(context, delegate);
     this.fieldList = new LinkedList<UiWidgetField<?>>();
-    this.focusEventSender = new FocusEventSender(this, getObserverSource());
   }
 
   /**
@@ -73,33 +59,10 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
   /**
    * @param field is the {@link UiWidgetField} to register.
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
   private void registerField(UiWidgetField<?> field) {
 
     this.fieldList.add(field);
-    field.addChangeHandler(new UiHandlerEventValueChange() {
-
-      @Override
-      public void onValueChange(AttributeReadValue source, boolean programmatic) {
-
-        requireChangeEventSender().onValueChange(UiWidgetCustomFieldComposite.this, programmatic);
-      }
-    });
-    field.addFocusHandler(new UiHandlerEventFocus() {
-
-      @Override
-      public void onFocusChange(AttributeReadFocused source, boolean programmatic, boolean lost) {
-
-        if (lost) {
-          if (source == UiWidgetCustomFieldComposite.this.focusField) {
-            UiWidgetCustomFieldComposite.this.focusField = null;
-          }
-        } else {
-          UiWidgetCustomFieldComposite.this.focusField = source;
-        }
-        UiWidgetCustomFieldComposite.this.focusEventSender.onFocusChange(source, programmatic, lost);
-      }
-    });
+    field.addEventHandler(getEventHandlerAdapter());
   }
 
   /**
@@ -109,82 +72,6 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
   protected UiWidgetField<?> getFirstField() {
 
     return this.fieldList.get(0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getFieldLabel() {
-
-    return getFirstField().getFieldLabel();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFieldLabel(String label) {
-
-    getFirstField().setFieldLabel(label);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetLabel getFieldLabelWidget() {
-
-    return this.fieldList.get(0).getFieldLabelWidget();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addFocusHandler(UiHandlerEventFocus handler) {
-
-    this.focusEventSender.addHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean removeFocusHandler(UiHandlerEventFocus handler) {
-
-    return this.focusEventSender.removeHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFocused() {
-
-    if (this.focusField != null) {
-      ((UiWidgetField<?>) this.focusField).setFocused();
-    } else {
-      this.fieldList.get(0).setFocused();
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isFocused() {
-
-    return (this.focusField != null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ChangeEventSender<VALUE> createChangeEventSender() {
-
-    return new ChangeEventSender<VALUE>(this, getObserverSource());
   }
 
 }

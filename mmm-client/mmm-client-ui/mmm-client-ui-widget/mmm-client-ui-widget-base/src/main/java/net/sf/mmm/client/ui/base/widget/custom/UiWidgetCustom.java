@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.custom;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -184,27 +184,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public void addVisibleFunction(AttributeReadVisible function) {
+  public AttributeWriteFlagAdvanced getVisibleFlag() {
 
-    this.delegate.addVisibleFunction(function);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean removeVisibleFunction(AttributeReadVisible function) {
-
-    return this.delegate.removeVisibleFunction(function);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isVisibleAggregated() {
-
-    return this.delegate.isVisibleAggregated();
+    return this.delegate.getVisibleFlag();
   }
 
   /**
@@ -214,24 +196,6 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   public final boolean isVisibleRecursive() {
 
     return this.delegate.isVisibleRecursive();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void updateVisibility() {
-
-    this.delegate.updateVisibility();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void updateVisibilityLocal() {
-
-    this.delegate.updateVisibilityLocal();
   }
 
   /**
@@ -418,9 +382,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final void addStyle(String style) {
+  public final boolean addStyle(String style) {
 
-    this.delegate.addStyle(style);
+    return this.delegate.addStyle(style);
   }
 
   /**
