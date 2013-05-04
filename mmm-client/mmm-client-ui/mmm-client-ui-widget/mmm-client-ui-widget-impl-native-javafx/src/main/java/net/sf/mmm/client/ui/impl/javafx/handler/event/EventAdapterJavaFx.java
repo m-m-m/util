@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
+import net.sf.mmm.client.ui.base.handler.event.AbstractEventAdapter;
 
 /**
  * This class is the JavaFx specific adapter for {@link UiHandlerEvent}.
@@ -16,16 +17,8 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class EventAdapterJavaFx implements ChangeListener<Boolean>, EventHandler<ActionEvent> {
-
-  /** The source of the events (UiWidget). */
-  private final UiFeatureEvent source;
-
-  /** The event sender. */
-  private final UiHandlerEvent sender;
-
-  /** @see #setProgrammaticEventType(EventType) */
-  private EventType programmaticEventType;
+public class EventAdapterJavaFx extends AbstractEventAdapter implements ChangeListener<Boolean>,
+    EventHandler<ActionEvent> {
 
   /**
    * The constructor.
@@ -35,23 +28,7 @@ public class EventAdapterJavaFx implements ChangeListener<Boolean>, EventHandler
    */
   public EventAdapterJavaFx(UiFeatureEvent source, UiHandlerEvent sender) {
 
-    super();
-    this.source = source;
-    this.sender = sender;
-  }
-
-  /**
-   * Fires an event of the given {@link EventType}.
-   * 
-   * @param type is the {@link EventType} to fire.
-   */
-  public void fireEvent(EventType type) {
-
-    boolean programmtic = (this.programmaticEventType == type);
-    this.sender.onEvent(this.source, type, programmtic);
-    if (programmtic) {
-      this.programmaticEventType = null;
-    }
+    super(source, sender);
   }
 
   /**
@@ -74,18 +51,6 @@ public class EventAdapterJavaFx implements ChangeListener<Boolean>, EventHandler
   public void handle(ActionEvent event) {
 
     fireEvent(EventType.CLICK);
-  }
-
-  /**
-   * We can NOT prevent JavaFx from firing some events. So we set the {@link EventType} before we
-   * programmatically invoke the action that will cause the JavaFx event.
-   * 
-   * @param type is the expected {@link EventType} used for detection to prevent concurrent user-events to
-   *        interfere.
-   */
-  public void setProgrammaticEventType(EventType type) {
-
-    this.programmaticEventType = type;
   }
 
 }

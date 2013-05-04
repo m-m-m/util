@@ -9,10 +9,9 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
-import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
+import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapterWithEvents;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.core.client.GWT;
@@ -29,11 +28,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
-public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends AbstractUiWidgetAdapter<WIDGET> implements
-    AttributeWriteImage<UiWidgetImage> {
-
-  /** @see #setEventSender(UiFeatureEvent, UiHandlerEvent) */
-  private EventAdapterGwt eventAdapter;
+public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
+    AbstractUiWidgetAdapterWithEvents<WIDGET, EventAdapterGwt> implements AttributeWriteImage<UiWidgetImage> {
 
   /** @see #setImage(UiWidgetImage) */
   private Image image;
@@ -223,82 +219,9 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends Abstra
    * {@inheritDoc}
    */
   @Override
-  public void setEventSender(UiFeatureEvent source, UiHandlerEvent sender) {
-
-    if (this.eventAdapter != null) {
-      throw new NlsIllegalStateException();
-    }
-    this.eventAdapter = createEventAdapter(source, sender);
-    applyEventAdapter(this.eventAdapter);
-  }
-
-  /**
-   * This method creates the {@link #getEventAdapter()} instance. It may be overridden to use a sub-class
-   * instead.
-   * 
-   * @param source is the source of the events (typically {@link net.sf.mmm.client.ui.api.widget.UiWidget}).
-   * @param sender is the sender of events (an adapter that delegates to the individual handlers/listeners).
-   * @return the new {@link EventAdapterGwt}.
-   */
   protected EventAdapterGwt createEventAdapter(UiFeatureEvent source, UiHandlerEvent sender) {
 
     return new EventAdapterGwt(source, sender);
-  }
-
-  /**
-   * @return the {@link EventAdapterGwt}. May be <code>null</code>.
-   */
-  public EventAdapterGwt getEventAdapter() {
-
-    return this.eventAdapter;
-  }
-
-  /**
-   * This method applies the given {@link EventAdapterGwt} to the widget(s) to receive GWT events. It will be
-   * called only once. Override to add specific event registrations.
-   * 
-   * @param adapter is the {@link EventAdapterGwt}.
-   */
-  protected void applyEventAdapter(EventAdapterGwt adapter) {
-
-    // Click-Events...
-    applyEventAdapterForClick(adapter);
-
-    // Focus-Events...
-    applyEventAdapterForFocus(adapter);
-
-    // Change-Events...
-    applyEventAdapterForChange(adapter);
-  }
-
-  /**
-   * Applies for click events.
-   * 
-   * @param adapter is the {@link EventAdapterGwt}.
-   */
-  protected void applyEventAdapterForClick(EventAdapterGwt adapter) {
-
-    // nothing by default...
-  }
-
-  /**
-   * Applies for focus (and blur) events.
-   * 
-   * @param adapter is the {@link EventAdapterGwt}.
-   */
-  protected void applyEventAdapterForFocus(EventAdapterGwt adapter) {
-
-    // nothing by default...
-  }
-
-  /**
-   * Applies for (value) change events.
-   * 
-   * @param adapter is the {@link EventAdapterGwt}.
-   */
-  protected void applyEventAdapterForChange(EventAdapterGwt adapter) {
-
-    // nothing by default...
   }
 
   /**

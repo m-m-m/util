@@ -1,7 +1,8 @@
 /* Variables */
 @normal-color: #E0E0E0;
 @focus-color: #A0C0E0;
-@selected-color: lighten(@focus-color, 10%);
+/*@selected-color: lighten(@focus-color, 10%);*/
+@selected-color: #C0F0F0;
 @border-color: #A0A0A0;
 @background-color: #FFFFFF;
 @background-em-color: darken(@background-color, 10%);
@@ -74,6 +75,7 @@ button {
 input {
   &:hover, &:focus, &:active {
     border-color: @focus-color;
+    background-color: lighten(@focus-color, 20%);
   }
 }
 

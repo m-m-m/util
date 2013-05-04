@@ -1,4 +1,5 @@
 /* Variables */
+/*@selected-color: lighten(@focus-color, 10%);*/
 /* Mixins */
 /* Main styles */
 body {
@@ -45,6 +46,7 @@ input:hover,
 input:focus,
 input:active {
   border-color: #a0c0e0;
+  background-color: #edf3f9;
 }
 .ButtonPanel {
   /* background: @background-em-color; */
@@ -224,7 +226,7 @@ input:active {
 }
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected {
   cursor: default;
-  background-image: linear-gradient(to bottom, #ffffff, #c6d9ed);
+  background-image: linear-gradient(to bottom, #ffffff, #c0f0f0);
   border-bottom-style: none;
 }
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:hover,

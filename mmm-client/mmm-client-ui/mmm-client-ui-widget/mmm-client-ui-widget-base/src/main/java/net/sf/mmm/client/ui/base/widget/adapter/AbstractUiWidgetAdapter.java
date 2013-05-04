@@ -25,9 +25,10 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 /**
  * This is the abstract base implementation of {@link UiWidgetAdapter}.
  * 
+ * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter, AttributeReadAltText,
     AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage>,
