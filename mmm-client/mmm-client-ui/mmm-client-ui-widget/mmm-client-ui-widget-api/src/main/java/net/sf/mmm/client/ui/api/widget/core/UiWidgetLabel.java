@@ -4,16 +4,16 @@ package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
- * This is the interface for a {@link UiWidgetRegularAtomic regular atomic widget} that represents a label. A
- * label is a very simple widget that displays some static text.
+ * This is the interface for a {@link UiWidgetRegular regular widget} that represents a label. A label is a
+ * very simple widget that displays some static text.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetLabel extends UiWidgetRegularAtomic, AttributeWriteLabel, UiWidgetNative {
+public interface UiWidgetLabel extends UiWidgetRegular, AttributeWriteLabel, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Label";

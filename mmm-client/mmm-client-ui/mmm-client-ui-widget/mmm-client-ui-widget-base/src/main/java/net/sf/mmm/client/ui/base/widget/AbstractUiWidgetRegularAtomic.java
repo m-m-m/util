@@ -3,11 +3,12 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetRegularAtomic}.
+ * This is the abstract base implementation of {@link UiWidgetRegular} for atomic widgets (widgets that are
+ * not composite and therefore never have children).
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * 
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetRegularAtomic<ADAPTER extends UiWidgetAdapter> extends
-    AbstractUiWidgetNative<ADAPTER, Void> implements UiWidgetRegularAtomic {
+    AbstractUiWidgetNative<ADAPTER, Void> implements UiWidgetRegular {
 
   /**
    * The constructor.

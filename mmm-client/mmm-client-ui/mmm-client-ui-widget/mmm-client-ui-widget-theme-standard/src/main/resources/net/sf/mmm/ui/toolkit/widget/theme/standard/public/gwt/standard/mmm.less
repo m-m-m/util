@@ -1,27 +1,27 @@
 /* Variables */
-@normal-color: #E0E0E0;
-@focus-color: #A0C0E0;
-/*@selected-color: lighten(@focus-color, 10%);*/
-@selected-color: #C0F0F0;
-@border-color: #A0A0A0;
-@background-color: #FFFFFF;
-@background-em-color: darken(@background-color, 10%);
+@color-normal: #E0E0E0;
+@color-focus: #A0C0E0;
+/*@color-select: lighten(@color-focus, 10%);*/
+@color-select: #C0F0F0;
+@color-border: #A0A0A0;
+@color-background: #FFFFFF;
+@background-em-color: darken(@color-background, 10%);
+@color-invalid: #FF2222;
 
 @font-size: 14pt;
 @border-size: 0.3em;
-@radius: 0.4em;
-@padding: 0.3em;
+@radius: 0.5em;
+@padding: 0.2em;
 @margin: @padding;
 
 /* Mixins */
 .bordered() {
-  border-color: @border-color;
+  border-color: @color-border;
   border-width: 1px;
 }
 .gradient() {
   .bordered;
-  background-image: linear-gradient(to bottom, #FFFFFF, @normal-color);
-  -background: @normal-color;
+  background-image: linear-gradient(to bottom, #FFFFFF, @color-normal);
 }
 .highlight() {
   .gradient;
@@ -29,8 +29,13 @@
 }
 .highlighted() {
   .highlight;
-  /* box-shadow: 2px 2px 2px white inset; */
-  box-shadow: 2px 2px 5px 0px darken(@normal-color, 10%);
+  box-shadow: 2px 2px 5px 0px darken(@color-normal, 10%);
+}
+.fancyButton() {
+  border-style: solid;
+  border-radius: @radius;
+  padding: @padding;
+  font-size: 16pt;
 }
 
 /* Main styles */
@@ -49,33 +54,66 @@ input {
 *::-moz-focus-inner {
   border: none;
 }
-*:invalid {
-  border-color: red;
+input:invalid {
+  border-color: @color-invalid;
+  background-color: lighten(@color-invalid, 20%);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  background-position: 98% 50%;
 }
-
-.Search {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sLDBECFLwjt10AAAETSURBVBjTdY8tS0MBGEbPs7sNxsAiY8WwIibTxC/QbhCLYwbXRLlJxzAoDgUnJl1Q/Biy4ke5GkT0B2hwiE0YFjEYDP4A4brttXgRlJ14eDjwCMCdX+mRw5qJMUxNsOsvn9Wj3dIrP8gtFNMyuwMwOJEIGcqBfbb85vDhzmYdIAS2bJLTMA3sb5dm97ZKM9ZqjYBiTiS8GBRDGBOYVSvl9adAHpQ3HoQdA5OBCwNIRPiDGVHA/y2KS0M5t1BMB3JuYWkIKQt28e+MSY6MM8McpKwgiuF9vD1Pe57nO4/3t+99/aPnEkkT44JeiVNML4hMvKOzO9WVvBJtyOTzsYTiVaQpzCpOu2G9VmukBtM3cSIJgG9WX2G0CjSDnQAAAABJRU5ErkJggg==');
+button {
+  .bordered;
+  cursor: pointer;
+  background-color: @color-normal;
+  &:hover, &:focus, &:active {
+    background-color: @color-focus;
+  }
 }
-
 .Button {
   .highlighted;
+  .fancyButton;
   border-style: solid;
   border-radius: @radius;
   padding: @padding;
-  cursor: pointer;
+  margin: 0.1em;
   font-size: 16pt;
-}
-
-button {
   &:hover, &:focus, &:active {
-    background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+    background-image: linear-gradient(to bottom, #FFFFFF, @color-focus);
   }
+}
+.SearchField {
+  display: inline;
+  input {
+    .bordered;
+    border-style: solid;
+    border-top-left-radius: @radius;
+    border-bottom-left-radius: @radius;
+    padding: @padding 0 @padding 0.4em;
+    margin: 0 0 0 0.1em;
+  }
+  .Button {
+    border-style: solid;
+    border-top-right-radius: @radius;
+    border-bottom-right-radius: @radius;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin: 0;
+  }
+}
+.SearchIcon {
+  display:inline-block;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em'><path d='m 1 6 a 4 4 0 1 1 0 0.1 m 7 3 l 6 6 z' style='fill:none;stroke:%230060C0;stroke-width:2'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 0.25em;
+  height: 1em;
+  width: 1em;
 }
 
 input {
   &:hover, &:focus, &:active {
-    border-color: @focus-color;
-    background-color: lighten(@focus-color, 20%);
+    border-color: @color-focus;
+    background-color: lighten(@color-focus, 20%);
   }
 }
 
@@ -88,7 +126,6 @@ input {
 }
 
 .MiniButton {
-  .highlighted;
   font-family: monospaced;
   padding: 0;
   margin: 0;
@@ -111,7 +148,7 @@ input {
     padding: 0 0.5em;
     position: relative;
     top: 0.5em;
-    background: @background-color;
+    background: @color-background;
   }
   button {
     padding: 0 0.2em;
@@ -158,11 +195,11 @@ input {
     cursor: e-resize;
   }
   .dialogMiddle {
-    background: @normal-color;
+    background: @color-normal;
   }
   .dialogMiddleLeft {
     .bordered;
-    background: @normal-color;
+    background: @color-normal;
     border-left-style: solid;
     cursor: w-resize;
   }
@@ -177,13 +214,13 @@ input {
   }
   .dialogMiddleRight {
     .bordered;
-    background: @normal-color;
+    background: @color-normal;
     border-right-style: solid;
     cursor: e-resize;
   }
   .dialogBottomLeft {
     .bordered;
-    background: @normal-color;
+    background: @color-normal;
     border-left-style: solid;
     border-bottom-style: solid;
     border-bottom-left-radius: @radius;
@@ -191,13 +228,13 @@ input {
   }
   .dialogBottomCenter {
     .bordered;
-    background: @normal-color;
+    background: @color-normal;
     border-bottom-style: solid;
     cursor: s-resize;
   }
   .dialogBottomRight {
     .bordered;
-    background: @normal-color;
+    background: @color-normal;
     border-right-style: solid;
     border-bottom-style: solid;
     border-bottom-right-radius: @radius;
@@ -230,15 +267,15 @@ input {
     border-top-right-radius: @radius;
     cursor: pointer;
     &:hover, &:focus, &:active {
-      background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+      background-image: linear-gradient(to bottom, #FFFFFF, @color-focus);
     }
   }
   .gwt-TabBarItem.gwt-TabBarItem-selected {
     cursor: default;
-    background-image: linear-gradient(to bottom, #FFFFFF, @selected-color);
+    background-image: linear-gradient(to bottom, #FFFFFF, @color-select);
     border-bottom-style: none;
     &:hover, &:focus, &:active {
-      background-image: linear-gradient(to bottom, #FFFFFF, @focus-color);
+      background-image: linear-gradient(to bottom, #FFFFFF, @color-focus);
     }
   }
   .gwt-TabBarItem {
@@ -293,7 +330,7 @@ input {
   .gwt-MenuItem {
   }
   .gwt-MenuItem-selected {
-    background: @focus-color;
+    background: @color-focus;
   }
   .gwt-MenuItem-disabled {
     color: #c0c0c0;
@@ -342,14 +379,14 @@ input {
     height: 1px;
     padding: 0px;
     border-top-style: solid;
-    background: @normal-color;
+    background: @color-normal;
     overflow: hidden;
   }
   .subMenuIcon {
     padding-right: 4px;
   }
   .subMenuIcon-selected {
-    background: @focus-color;
+    background: @color-focus;
   }
 }
 .gwt-MenuBarPopup {

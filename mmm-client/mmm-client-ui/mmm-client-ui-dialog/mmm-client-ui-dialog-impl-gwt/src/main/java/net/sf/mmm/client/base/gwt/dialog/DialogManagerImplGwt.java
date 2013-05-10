@@ -18,12 +18,12 @@ import com.google.gwt.user.client.Window.Location;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class DialogManagerImpl extends AbstractDialogManager {
+public class DialogManagerImplGwt extends AbstractDialogManager {
 
   /**
    * The constructor.
    */
-  public DialogManagerImpl() {
+  public DialogManagerImplGwt() {
 
     super();
     History.addValueChangeHandler(new HistoryListener());
@@ -53,7 +53,8 @@ public class DialogManagerImpl extends AbstractDialogManager {
   @Override
   public void navigateTo(DialogPlace place) {
 
-    History.newItem(place.toString(), true);
+    History.newItem(place.toString(), false);
+    show(place);
   }
 
   /**
@@ -63,6 +64,9 @@ public class DialogManagerImpl extends AbstractDialogManager {
   protected DialogPlace getStartPlace() {
 
     String startToken = History.getToken();
+    if ((startToken == null) || startToken.isEmpty()) {
+      return null;
+    }
     return DialogPlace.fromString(startToken);
   }
 

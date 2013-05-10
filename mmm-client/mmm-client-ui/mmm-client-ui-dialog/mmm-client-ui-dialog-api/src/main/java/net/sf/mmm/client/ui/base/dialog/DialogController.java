@@ -22,7 +22,7 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
  * {@link DialogController} exists for each {@link Dialog} holding its state.
  * 
  * <pre>
- * public class PageDialogController extends {@link net.sf.mmm.client.ui.base.dialog.DialogController} {
+ * public class PageDialogController extends {@link net.sf.mmm.client.ui.base.dialog.DialogController}&lt;PageView&gt; {
  *
  *   public static final {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} SLOT_MAIN = new {@link net.sf.mmm.client.ui.base.dialog.DialogSlot}({@link #DIALOG_ID_PAGE}, {@link #TYPE_PAGE});
  *
@@ -48,7 +48,6 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
    *
    * }
    * </pre>
- * 
  * 
  * @param <VIEW> is the generic type of the {@link #getView() view}.
  * 
@@ -85,6 +84,15 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   }
 
   /**
+   * @return the parent {@link DialogController} or <code>null</code> if NOT {@link #isVisible() visible} or
+   *         {@link #TYPE_ROOT root}.
+   */
+  DialogController<?> getParent() {
+
+    return this.parent;
+  }
+
+  /**
    * This method sets the parent {@link DialogController} when embedding.
    * 
    * @param parent is the parent {@link DialogController} or <code>null</code> to reset.
@@ -114,7 +122,12 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   void setVisible(boolean visible) {
 
     super.setVisible(visible);
-    this.dialogManager.onShowDialog(this);
+    if (visible) {
+      this.dialogManager.onShowDialog(this);
+    } else {
+      this.dialogManager.onHideDialog(this);
+      setParent(null);
+    }
   }
 
   /**
@@ -164,6 +177,10 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   private DialogSlot showInternal(DialogPlace dialogPlace) {
 
     DialogSlot slot = doShow(dialogPlace);
+    if (TYPE_ROOT.equals(getType())) {
+      assert (slot == null);
+      return null;
+    }
     NlsNullPointerException.checkNotNull(DialogSlot.class, slot);
     DialogController<?> parentDialog = this.dialogManager.getDialog(slot.getDialogId());
     // TODO prevent infinity loop...
@@ -237,8 +254,8 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    * <pre>
    * protected void embed({@link DialogController} subDialog, {@link DialogSlot} slot) {
    *   if (slot == SLOT_MAIN) {
-   *     {@link #getView()}.getMainSlot().{@link net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite#setChild(UiWidget)
-   *     setChild}(subDialog.{@link #getView()});
+   *     {@link #getView()}.getMainSlot().{@link net.sf.mmm.client.ui.api.widget.core.UiWidgetSlot#setChild(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
+   *     setChild}(({@link net.sf.mmm.client.ui.api.widget.UiWidgetRegular}) subDialog.{@link #getView()});
    *   } else if (slot == SLOT_NAVIGATION) {
    *     ...
    *   } else {
@@ -246,6 +263,9 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    *   }
    * }
    * </pre>
+   * 
+   * The cast to {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegular} is legal here if you are not doing
+   * odd things. See {@link #getView()} for details.
    * 
    * @param subDialog is the {@link DialogController} of the sub-dialog to embed.
    * @param slot is the {@link DialogSlot} identifying the location in the {@link #getView() view} where the

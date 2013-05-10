@@ -6,10 +6,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
- * This is the interface for a {@link UiWidgetRegularAtomic regular atomic widget} that represents a
+ * This is the interface for a {@link UiWidgetRegular regular widget} that represents a
  * <em>collapsable section</em>. It is like {@link UiWidgetSection} but allows to be
  * {@link #setCollapsed(boolean) collapsed and expanded}.<br/>
  * <b>ATTENTION:</b><br/>
@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetCollapsableSection extends UiWidgetRegularAtomic, AttributeWriteLabel, UiFeatureCollapse,
+public interface UiWidgetCollapsableSection extends UiWidgetRegular, AttributeWriteLabel, UiFeatureCollapse,
     UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */

@@ -8,17 +8,17 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWritePaused;
 import net.sf.mmm.client.ui.api.attribute.AttributeWritePositionInSeconds;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteVolume;
-import net.sf.mmm.client.ui.api.widget.UiWidgetAtomic;
+import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the abstract interface for a {@link UiWidgetAtomic atomic widget} that represents media player. For
+ * This is the abstract interface for a {@link UiWidget atomic widget} that represents media player. For
  * simple usage see {@link UiWidgetMediaPlayer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetMedia extends UiWidgetAtomic, AttributeWriteUrl, AttributeWritePaused,
+public abstract interface UiWidgetMedia extends UiWidget, AttributeWriteUrl, AttributeWritePaused,
     AttributeWriteVolume, AttributeWritePositionInSeconds {
 
   /**

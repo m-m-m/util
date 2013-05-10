@@ -1,5 +1,5 @@
 /* Variables */
-/*@selected-color: lighten(@focus-color, 10%);*/
+/*@color-select: lighten(@color-focus, 10%);*/
 /* Mixins */
 /* Main styles */
 body {
@@ -16,31 +16,70 @@ input {
 *::-moz-focus-inner {
   border: none;
 }
-*:invalid {
-  border-color: red;
+input:invalid {
+  border-color: #ff2222;
+  background-color: #ff8888;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+
+  background-position: 98% 50%;
 }
-.Search {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sLDBECFLwjt10AAAETSURBVBjTdY8tS0MBGEbPs7sNxsAiY8WwIibTxC/QbhCLYwbXRLlJxzAoDgUnJl1Q/Biy4ke5GkT0B2hwiE0YFjEYDP4A4brttXgRlJ14eDjwCMCdX+mRw5qJMUxNsOsvn9Wj3dIrP8gtFNMyuwMwOJEIGcqBfbb85vDhzmYdIAS2bJLTMA3sb5dm97ZKM9ZqjYBiTiS8GBRDGBOYVSvl9adAHpQ3HoQdA5OBCwNIRPiDGVHA/y2KS0M5t1BMB3JuYWkIKQt28e+MSY6MM8McpKwgiuF9vD1Pe57nO4/3t+99/aPnEkkT44JeiVNML4hMvKOzO9WVvBJtyOTzsYTiVaQpzCpOu2G9VmukBtM3cSIJgG9WX2G0CjSDnQAAAABJRU5ErkJggg==');
+button {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+button:hover,
+button:focus,
+button:active {
+  background-color: #a0c0e0;
 }
 .Button {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  /* box-shadow: 2px 2px 2px white inset; */
-
   box-shadow: 2px 2px 5px 0px #c7c7c7;
   border-style: solid;
-  border-radius: 0.4em;
-  padding: 0.3em;
-  cursor: pointer;
+  border-radius: 0.5em;
+  padding: 0.2em;
+  margin: 0.1em;
   font-size: 16pt;
 }
-button:hover,
-button:focus,
-button:active {
+.Button:hover,
+.Button:focus,
+.Button:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+}
+.SearchField {
+  display: inline;
+}
+.SearchField input {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  border-style: solid;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  padding: 0.2em 0 0.2em 0.4em;
+  margin: 0 0 0 0.1em;
+}
+.SearchField .Button {
+  border-style: solid;
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0;
+}
+.SearchIcon {
+  display: inline-block;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em'><path d='m 1 6 a 4 4 0 1 1 0 0.1 m 7 3 l 6 6 z' style='fill:none;stroke:%230060C0;stroke-width:2'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 0.25em;
+  height: 1em;
+  width: 1em;
 }
 input:hover,
 input:focus,
@@ -53,18 +92,10 @@ input:active {
 
 }
 .ButtonPanel .Button {
-  margin: 0.3em;
+  margin: 0.2em;
   min-width: 6em;
 }
 .MiniButton {
-  border-color: #a0a0a0;
-  border-width: 1px;
-  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  /* box-shadow: 2px 2px 2px white inset; */
-
-  box-shadow: 2px 2px 5px 0px #c7c7c7;
   font-family: monospaced;
   padding: 0;
   margin: 0;
@@ -105,36 +136,33 @@ input:active {
 }
 .Popup {
   box-shadow: 4px 4px 5px 0px black;
-  border-radius: 0.4em;
+  border-radius: 0.5em;
 }
 .Popup .dialogTopLeft {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
   border-top-style: solid;
   border-left-style: solid;
   cursor: w-resize;
-  border-top-left-radius: 0.4em;
+  border-top-left-radius: 0.5em;
 }
 .Popup .Caption {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   border-top-style: solid;
-  padding: 0.3em;
+  padding: 0.2em;
   cursor: move;
 }
 .Popup .dialogTopRight {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
   border-top-style: solid;
   border-right-style: solid;
-  border-top-right-radius: 0.4em;
+  border-top-right-radius: 0.5em;
   cursor: e-resize;
 }
 .Popup .dialogMiddle {
@@ -151,7 +179,7 @@ input:active {
   border-color: #a0a0a0;
   border-width: 1px;
   border-style: solid;
-  border-radius: 0.4em;
+  border-radius: 0.5em;
   padding: 3px;
   background: white;
 }
@@ -168,7 +196,7 @@ input:active {
   background: #e0e0e0;
   border-left-style: solid;
   border-bottom-style: solid;
-  border-bottom-left-radius: 0.4em;
+  border-bottom-left-radius: 0.5em;
   cursor: sw-resize;
 }
 .Popup .dialogBottomCenter {
@@ -184,7 +212,7 @@ input:active {
   background: #e0e0e0;
   border-right-style: solid;
   border-bottom-style: solid;
-  border-bottom-right-radius: 0.4em;
+  border-bottom-right-radius: 0.5em;
   cursor: se-resize;
 }
 .Popup .dialogTopLeftInner {
@@ -209,14 +237,11 @@ input:active {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  /* box-shadow: 2px 2px 2px white inset; */
-
   box-shadow: 2px 2px 5px 0px #c7c7c7;
   border-style: solid;
-  border-top-left-radius: 0.4em;
-  border-top-right-radius: 0.4em;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
   cursor: pointer;
 }
 .TabPanel .gwt-TabBarItem:hover,
@@ -292,7 +317,6 @@ input:active {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  -background: #e0e0e0;
   border-style: solid;
 }
 .gwt-MenuBar-horizontal .gwt-MenuItem {

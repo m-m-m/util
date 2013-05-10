@@ -4,11 +4,10 @@ package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetClickable;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
- * This is the interface for an {@link UiWidgetRegularAtomic regular atomic widget} that represents a
- * <em>hyperlink</em>.<br/>
+ * This is the interface for an {@link UiWidgetRegular regular widget} that represents a <em>hyperlink</em>.<br/>
  * Here you can see an example (with {@link #setLabel(String) label} "Click me"):
  * 
  * <pre>
@@ -18,7 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularAtomic;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetLink extends UiWidgetRegularAtomic, UiWidgetClickable, UiWidgetNative {
+public interface UiWidgetLink extends UiWidgetRegular, UiWidgetClickable, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Link";

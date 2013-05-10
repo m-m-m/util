@@ -8,11 +8,14 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.dialog.AbstractDialog;
 import net.sf.mmm.client.ui.api.dialog.Dialog;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.dialog.PopupDialog;
+import net.sf.mmm.util.component.api.AlreadyInitializedException;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -35,6 +38,9 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
 
   /** @see #setDialogControllerFactory(DialogControllerFactory) */
   private DialogControllerFactory dialogControllerFactory;
+
+  /** @see #setUiContext(UiContext) */
+  private UiContext uiContext;
 
   /** @see #initialize(DialogPlace) */
   private DialogPlace defaultPlace;
@@ -59,7 +65,41 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   @Inject
   public void setDialogControllerFactory(DialogControllerFactory dialogControllerFactory) {
 
+    getInitializationState().requireNotInitilized();
     this.dialogControllerFactory = dialogControllerFactory;
+  }
+
+  /**
+   * @return the {@link UiContext} instance.
+   */
+  protected UiContext getUiContext() {
+
+    return this.uiContext;
+  }
+
+  /**
+   * @param uiContext is the {@link UiContext} to {@link Inject}.
+   */
+  @Inject
+  public void setUiContext(UiContext uiContext) {
+
+    getInitializationState().requireNotInitilized();
+    this.uiContext = uiContext;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.uiContext == null) {
+      throw new ResourceMissingException(UiContext.class.getSimpleName());
+    }
+    if (this.dialogControllerFactory == null) {
+      throw new ResourceMissingException(DialogControllerFactory.class.getSimpleName());
+    }
     List<DialogController<?>> dialogControllers = this.dialogControllerFactory.createDialogControllers();
     for (DialogController<?> controller : dialogControllers) {
       String dialogId = controller.getId();
@@ -68,6 +108,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
         throw new ObjectMismatchException(dialogId, AbstractDialog.PATTERN_DIALOG_ID, controller);
       }
       controller.setDialogManager(this);
+      controller.setUiContext(this.uiContext);
       this.id2DialogMap.put(dialogId, controller);
     }
   }
@@ -78,6 +119,12 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   @Override
   public void initialize(DialogPlace defaultDialogPlace) {
 
+    if (!getInitializationState().isInitialized()) {
+      initialize();
+    }
+    if (this.defaultPlace != null) {
+      throw new AlreadyInitializedException();
+    }
     this.defaultPlace = defaultDialogPlace;
     DialogPlace startPlace = getStartPlace();
     if (startPlace == null) {
@@ -155,20 +202,31 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
    */
   void onShowDialog(Dialog dialog) {
 
+    assert dialog.isVisible();
     String type = dialog.getType();
-    if (dialog.isVisible()) {
-      Dialog previousDialog = this.type2currentDialogMap.put(type, dialog);
-      if (previousDialog != null) {
-        if (previousDialog.isVisible() && (previousDialog != this)) {
-          // there should never be two dialogs visible of the same type...
-          throw new DuplicateObjectException(this, type, previousDialog);
-        }
+    // show
+    Dialog previousDialog = this.type2currentDialogMap.put(type, dialog);
+    if (previousDialog != null) {
+      if (previousDialog.isVisible() && (previousDialog != this)) {
+        // there should never be two dialogs visible of the same type...
+        throw new DuplicateObjectException(this, type, previousDialog);
       }
-    } else {
-      Dialog previousDialog = this.type2currentDialogMap.remove(type);
-      if (previousDialog != this) {
-        throw new ObjectMismatchException(previousDialog, this, type);
-      }
+    }
+  }
+
+  /**
+   * This method should be called whenever a {@link Dialog} is hidden.
+   * 
+   * @param dialog the {@link Dialog} to hide.
+   */
+  void onHideDialog(Dialog dialog) {
+
+    assert (!dialog.isVisible());
+    String type = dialog.getType();
+    // hide
+    Dialog previousDialog = this.type2currentDialogMap.remove(type);
+    if (previousDialog != dialog) {
+      throw new ObjectMismatchException(previousDialog, dialog, type);
     }
   }
 
@@ -191,7 +249,27 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
     String dialogId = dialogPlace.getDialogId();
     DialogController<?> dialogController = getDialog(dialogId);
     dialogController.show(dialogPlace);
-
     this.currentPlace = dialogPlace;
+
+  }
+
+  /**
+   * This method determines the title for the given {@link DialogController}.
+   * 
+   * @param dialogController is the {@link DialogController}.
+   * @return the calculated title.
+   */
+  protected String getTitle(DialogController<?> dialogController) {
+
+    StringBuilder buffer = new StringBuilder(dialogController.getTitle());
+    DialogController<?> parentController = dialogController.getParent();
+    while (parentController != null) {
+      String title = parentController.getTitle();
+      if (title != null) {
+        buffer.insert(0, " - ");
+        buffer.insert(0, title);
+      }
+    }
+    return buffer.toString();
   }
 }

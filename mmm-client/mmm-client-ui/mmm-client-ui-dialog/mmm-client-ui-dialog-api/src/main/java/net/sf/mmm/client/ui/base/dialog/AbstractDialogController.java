@@ -73,6 +73,10 @@ public abstract class AbstractDialogController<VIEW extends UiWidget> extends Ab
    */
   protected final void reset() {
 
+    if (this.view != null) {
+      // this.view.removeFromParent();
+      this.view.dispose();
+    }
     this.view = null;
   }
 
@@ -113,12 +117,18 @@ public abstract class AbstractDialogController<VIEW extends UiWidget> extends Ab
   protected abstract VIEW createView();
 
   /**
-   * This method gets the view of this {@link AbstractDialogController}. TODO
+   * This method gets the view of this {@link AbstractDialogController}. The view is the actual UI represented
+   * by a {@link UiWidget}.<br/>
+   * In most cases this will be a {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegular}. However, for
+   * specific controllers such as {@link DialogController#TYPE_ROOT} it may not be a regular widget.
    * 
    * @return the view.
    */
   public VIEW getView() {
 
+    if (this.view == null) {
+      this.view = createView();
+    }
     return this.view;
   }
 

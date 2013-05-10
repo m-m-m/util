@@ -4,7 +4,9 @@ package net.sf.mmm.app.client;
 
 import java.util.Locale;
 
+import net.sf.mmm.app.client.dialog.DialogControllerFactoryImpl;
 import net.sf.mmm.app.shared.GreetingService;
+import net.sf.mmm.client.base.gwt.dialog.DialogManagerImplGwt;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
@@ -28,6 +30,7 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
+import net.sf.mmm.client.ui.base.dialog.DialogControllerFactory;
 import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
@@ -90,6 +93,18 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     Log.debug("Loaded");
     UiContextGwt context = new UiContextGwt();
     context.initialize();
+
+    DialogManagerImplGwt dialogManager = new DialogManagerImplGwt();
+    DialogControllerFactory dialogControllerFactory = new DialogControllerFactoryImpl();
+    dialogManager.setDialogControllerFactory(dialogControllerFactory);
+    dialogManager.setUiContext(context);
+    dialogManager.initialize(DialogConstants.PLACE_HOME);
+  }
+
+  protected void doSomethingElse() {
+
+    UiContextGwt context = new UiContextGwt();
+
     final UiWidgetFactory factory = context.getWidgetFactory();
 
     final UiWidgetMainWindow mainWindow = factory.getMainWindow();

@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.dialog;
 
-import net.sf.mmm.client.ui.base.dialog.DialogController;
-
 /**
  * This is the interface for a dialog of the client application. It displays itself in the page of the main
  * application window. It is a singleton instance that is addressed via a {@link DialogPlace}. A
@@ -73,7 +71,8 @@ public interface Dialog extends AbstractDialog {
    * The {@link #getType() type} of the <em>page</em> dialog. This is the first custom dialog that defines the
    * structure of the application page (main window). It is supposed to embed itself into the
    * {@link #TYPE_ROOT root} page and provide {@link net.sf.mmm.client.ui.base.dialog.DialogSlot slots} for
-   * child dialogs, at least a {@link #TYPE_MAIN main} slot. For an example see {@link DialogController}.
+   * child dialogs, at least a {@link #TYPE_MAIN main} slot. For an example see
+   * {@link net.sf.mmm.client.ui.base.dialog.DialogController}.
    * 
    * @see net.sf.mmm.client.ui.base.dialog.root.RootDialogController
    */
