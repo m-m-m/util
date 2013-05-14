@@ -7,10 +7,21 @@ import java.util.function.Consumer;
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
+// CHECKSTYLE:OFF (javadoc)
 /**
  * This is the interface for the key component to invoke one or multiple
- * {@link net.sf.mmm.service.api.RemoteInvocationService}s from the client-side. It should be used as
- * illustrated in the following example:
+ * {@link net.sf.mmm.service.api.RemoteInvocationService}s from the client-side. The most simple usage is
+ * given in the following example:
+ * 
+ * <pre>
+ * {@link RemoteInvocationServiceCaller} caller = getServiceCaller();
+ * MyService myService = caller.{@link RemoteInvocationServiceCaller#getServiceClient(Class, Class, java.util.function.Consumer, java.util.function.Consumer)
+ * getServiceClient}(MyService.class, MyResult.class, this::onSuccess, failure -> failure.printStackTrace());
+ * myService.myMethod(myArgument1, myArgument2);
+ * </pre>
+ * 
+ * However, there are advanced features such as queuing service calls and send them in a single technical
+ * request. Therefore you should use {@link RemoteInvocationServiceQueue} as illustrated by this example:
  * 
  * <pre>
  * {@link RemoteInvocationServiceCaller} caller = getServiceCaller();
@@ -18,6 +29,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * MyService myService = queue.{@link RemoteInvocationServiceQueue#getServiceClient(Class, Class, java.util.function.Consumer, java.util.function.Consumer)
  * getServiceClient}(MyService.class, MyResult.class, this::onSuccess, this::onFailure);
  * myService.myMethod(myArgument1, myArgument2);
+ * ...
  * queue.{@link RemoteInvocationServiceQueue#commit() commit()};
  * </pre>
  * 
@@ -29,11 +41,16 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * non-primitive return types) that you should ignore. Instead the method invocation including its arguments
  * is recorded by the {@link RemoteInvocationServiceQueue}. It will be send to the server when the top-level
  * queue is {@link RemoteInvocationServiceQueue#commit() committed}. When the result is received from the
- * server, it will be {@link Consumer#accept(Object) passed to a callback function}.
+ * server, it will be {@link Consumer#accept(Object) passed to a callback function}. <br/>
+ * <b>NOTE:</b><br/>
+ * If you are a java version less than 1.8, you can NOT use lambdas. However, we have created a backport for
+ * {@link java.util.function} in <code>mmm-util-backport-java.util.function</code> that allows you to use this
+ * code by providing {@link Consumer} instances via anonymous classes.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+// CHECKSTYLE:ON
 @ComponentSpecification
 public interface RemoteInvocationServiceCaller extends AbstractRemoteInvocationServiceCaller {
 
