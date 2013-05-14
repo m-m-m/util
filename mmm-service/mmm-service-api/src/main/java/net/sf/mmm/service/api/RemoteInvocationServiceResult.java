@@ -8,8 +8,6 @@ import java.io.Serializable;
  * This is the generic transfer-object for the result of a method-call to a
  * {@link net.sf.mmm.service.api.RemoteInvocationService}.
  * 
- * @see net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <RESULT> is the generic type of the actual {@link #getResult() result}.
@@ -56,7 +54,9 @@ public class RemoteInvocationServiceResult<RESULT extends Serializable> implemen
   }
 
   /**
-   * @return the failure
+   * @return the {@link Throwable failure} that occurred on the server when the service method has been
+   *         invoked or <code>null</code> if the invocation was successful and the {@link #getResult() result}
+   *         is valid.
    */
   public Throwable getFailure() {
 
@@ -64,7 +64,9 @@ public class RemoteInvocationServiceResult<RESULT extends Serializable> implemen
   }
 
   /**
-   * @return the result
+   * @return the result received as response to the service method invocation from the server. May be
+   *         <code>null</code> if valid according to the service method. Will always be <code>null</code> if
+   *         {@link #getFailure()} is NOT <code>null</code>.
    */
   public RESULT getResult() {
 

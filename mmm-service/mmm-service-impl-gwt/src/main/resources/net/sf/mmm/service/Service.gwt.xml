@@ -6,6 +6,6 @@
   <source path="impl" excludes="**/server/**,**/rebind/**"/>
 
   <generate-with class="net.sf.mmm.service.impl.gwt.client.rebind.RemoteInvocationServiceCallerGenerator">
-    <when-type-assignable class="net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt"/>
+    <when-type-assignable class="net.sf.mmm.service.api.client.RemoteInvocationServiceCaller"/>
   </generate-with>
 </module>

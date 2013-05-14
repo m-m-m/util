@@ -32,7 +32,7 @@ import com.google.web.bindery.event.shared.EventBus;
 /**
  * This is the GWT-{@link Generator} for generating the {@link RemoteInvocationServiceCaller} and according
  * service-client stubs.
- *
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -73,13 +73,11 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
       sourceWriter.print(simpleName);
       sourceWriter.print("(");
       // sourceWriter.print(RemoteInvocationGenericServiceGwtAsync.class.getSimpleName());
-      // sourceWriter.print(" genericService, ");
-      // sourceWriter.print(EventBus.class.getSimpleName());
-      // sourceWriter.println(" eventBus) {");
+      // sourceWriter.print(" genericService");
       sourceWriter.println(") {");
       sourceWriter.indent();
       sourceWriter.println("super();");
-      // sourceWriter.println("super(genericService, eventBus);");
+      // sourceWriter.println("super(genericService);");
 
       // generate service clients and register in constructor...
       TypeOracle typeOracle = context.getTypeOracle();
@@ -103,7 +101,7 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
   /**
    * This method generates a service-client implementation of a {@link RemoteInvocationService}-interface
    * given by <code>serviceInterface</code>.
-   *
+   * 
    * @param serviceInterface is the {@link RemoteInvocationService}-interface.
    * @param packageName is the {@link Package#getName() package name}.
    * @param logger is the {@link TreeLogger}.
@@ -150,7 +148,7 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
 
   /**
    * This method generates the implementation of a method for a service-client.
-   *
+   * 
    * @param serviceInterface is the {@link RemoteInvocationService}-interface.
    * @param sourceWriter is the {@link SourceWriter}.
    * @param method is the {@link JMethod} to generate.

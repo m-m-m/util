@@ -3,12 +3,13 @@
 package net.sf.mmm.service.base.client;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.function.Consumer;
 
 import net.sf.mmm.service.TestService;
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCallerTest.RemoteInvocationServiceCallerTestImpl;
@@ -25,6 +26,44 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     RemoteInvocationServiceCallerBaseTest<RemoteInvocationServiceCallerTestImpl> {
 
   /**
+   * This method tests
+   * {@link RemoteInvocationServiceCaller#getServiceClient(Class, Class, Consumer, Consumer)}.
+   */
+  @Test
+  public void testAutoCommit() {
+
+    RemoteInvocationServiceCallerTestImpl caller = getServiceCaller();
+    assertNull(caller.getCurrentQueue());
+    final GenericBean<String> resultBean = new GenericBean<String>();
+    Consumer<String> successCallback = new Consumer<String>() {
+
+      @Override
+      public void accept(String result) {
+
+        resultBean.setValue(result);
+      }
+    };
+    Consumer<Throwable> failureCallback = new Consumer<Throwable>() {
+
+      @Override
+      public void accept(Throwable failure) {
+
+        failure.printStackTrace();
+        System.err.flush();
+        fail(failure.getMessage());
+      }
+    };
+
+    TestService serviceClient = caller.getServiceClient(TestService.class, String.class, successCallback,
+        failureCallback);
+    assertNotNull(serviceClient);
+    assertNull(resultBean.getValue());
+    String magicValue = serviceClient.getMagicValue();
+    assertNull(magicValue);
+    assertSame(TestService.MAGIC_VALUE, resultBean.getValue());
+  }
+
+  /**
    * This method tests {@link RemoteInvocationServiceQueue#commit()} for a simple queue with a single
    * invocation.
    */
@@ -33,31 +72,29 @@ public class AbstractRemoteInvocationServiceCallerTest extends
 
     RemoteInvocationServiceCallerTestImpl caller = getServiceCaller();
     assertNull(caller.getCurrentQueue());
-    RemoteInvocationServiceQueue queue = newQueue(caller);
     final GenericBean<String> resultBean = new GenericBean<String>();
-    RemoteInvocationServiceCallback<String> callback = new RemoteInvocationServiceCallback<String>() {
+    Consumer<String> successCallback = new Consumer<String>() {
 
-      /**
-       * {@inheritDoc}
-       */
       @Override
-      public void onSuccess(String result, boolean complete) {
+      public void accept(String result) {
 
         resultBean.setValue(result);
       }
+    };
+    Consumer<Throwable> failureCallback = new Consumer<Throwable>() {
 
-      /**
-       * {@inheritDoc}
-       */
       @Override
-      public void onFailure(Throwable failure, boolean complete) {
+      public void accept(Throwable failure) {
 
         failure.printStackTrace();
         System.err.flush();
         fail(failure.getMessage());
       }
     };
-    TestService serviceClient = queue.getServiceClient(TestService.class, String.class, callback);
+
+    RemoteInvocationServiceQueue queue = newQueue(caller);
+    TestService serviceClient = queue.getServiceClient(TestService.class, String.class, successCallback,
+        failureCallback);
     assertNotNull(serviceClient);
     String magicValue = serviceClient.getMagicValue();
     assertNull(magicValue);
@@ -85,15 +122,6 @@ public class AbstractRemoteInvocationServiceCallerTest extends
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected RemoteInvocationServiceResultCallback<?>[] getCurrentCallbacks(RemoteInvocationServiceCallerTestImpl caller) {
-
-    return caller.currentCallbacks;
-  }
-
-  /**
    * This inner class extends {@link AbstractRemoteInvocationServiceCaller} so it can be tested.
    */
   public static class RemoteInvocationServiceCallerTestImpl extends AbstractRemoteInvocationServiceCallerWithClientMap {
@@ -102,7 +130,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     private RemoteInvocationGenericServiceRequest currentRequest;
 
     /** @see AbstractRemoteInvocationServiceCallerTest#getCurrentCallbacks(RemoteInvocationServiceCallerTestImpl) */
-    private RemoteInvocationServiceResultCallback<?>[] currentCallbacks;
+    private List<ServiceCallData<?>> currentCalls;
 
     /**
      * The constructor.
@@ -119,22 +147,25 @@ public class AbstractRemoteInvocationServiceCallerTest extends
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    protected void performRequest(RemoteInvocationGenericServiceRequest request,
-        RemoteInvocationServiceResultCallback<?>[] callbacks) {
+    protected void performRequest(RemoteInvocationGenericServiceRequest request, List<ServiceCallData<?>> serviceCalls) {
 
       verifyNoRequest();
       assertNotNull(request);
-      assertNotNull(callbacks);
+      assertNotNull(serviceCalls);
       this.currentRequest = request;
-      this.currentCallbacks = callbacks;
+      this.currentCalls = serviceCalls;
       RemoteInvocationServiceCall[] calls = request.getCalls();
-      for (int i = 0; i < calls.length; i++) {
-        if (TestService.class.getName().equals(calls[i].getServiceInterfaceName())) {
-          if ("getMagicValue".equals(calls[i].getMethodName())) {
-            assertEquals(0, calls[i].getArguments().length);
+      int i = 0;
+      for (ServiceCallData<?> callData : serviceCalls) {
+        // for (int i = 0; i < calls.length; i++) {
+        RemoteInvocationServiceCall currentCall = calls[i++];
+        if (TestService.class.getName().equals(currentCall.getServiceInterfaceName())) {
+          if ("getMagicValue".equals(currentCall.getMethodName())) {
+            assertEquals(0, currentCall.getArguments().length);
             RemoteInvocationServiceResult result = new RemoteInvocationServiceResult<String>(TestService.MAGIC_VALUE);
             boolean complete = i == (calls.length - 1);
-            callbacks[i].onResult(result, complete);
+            Consumer successCallback = callData.getSuccessCallback();
+            handleResult(currentCall, result, successCallback, callData.getFailureCallback(), complete);
           } else {
             fail("unknown service method: " + calls[i].getServiceInterfaceName() + "." + calls[i].getMethodName());
           }
@@ -150,7 +181,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     public void verifyNoRequest() {
 
       assertNull(this.currentRequest);
-      assertNull(this.currentCallbacks);
+      assertNull(this.currentCalls);
     }
 
     /**
@@ -159,7 +190,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     public void reset() {
 
       this.currentRequest = null;
-      this.currentCallbacks = null;
+      this.currentCalls = null;
     }
 
   }

@@ -4,7 +4,6 @@ package net.sf.mmm.service.base.client;
 
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 
 import org.junit.Assert;
@@ -35,7 +34,6 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
   protected void verifyNoRequest(CALLER caller) {
 
     assertNull(getCurrentRequest(caller));
-    assertNull(getCurrentCallbacks(caller));
   }
 
   /**
@@ -44,14 +42,6 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
    *         or <code>null</code> if no request has been performed.
    */
   protected abstract RemoteInvocationGenericServiceRequest getCurrentRequest(CALLER caller);
-
-  /**
-   * @param caller is the {@link RemoteInvocationServiceCaller}.
-   * @return the current array of {@link RemoteInvocationServiceResultCallback}s that has been collected for
-   *         the {@link #getCurrentRequest(RemoteInvocationServiceCaller) request} by the caller or
-   *         <code>null</code> if no request has been performed.
-   */
-  protected abstract RemoteInvocationServiceResultCallback<?>[] getCurrentCallbacks(CALLER caller);
 
   /**
    * Cancels the given {@link RemoteInvocationServiceQueue} and performs verifications.

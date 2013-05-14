@@ -3,7 +3,7 @@
 package net.sf.mmm.client.impl.gwt.gin;
 
 import net.sf.mmm.client.api.ClientComponents;
-import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
@@ -19,9 +19,9 @@ import com.google.gwt.inject.client.Ginjector;
 public interface ClientGinjector extends ClientComponents, Ginjector {
 
   /**
-   * @return the instance of {@link RemoteInvocationServiceCallerGwt}.
+   * @return the instance of {@link RemoteInvocationServiceCaller}.
    */
   @Override
-  RemoteInvocationServiceCallerGwt getServiceCaller();
+  RemoteInvocationServiceCaller getServiceCaller();
 
 }

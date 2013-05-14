@@ -3,10 +3,12 @@
 package net.sf.mmm.app.client;
 
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import net.sf.mmm.app.client.dialog.DialogControllerFactoryImpl;
 import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImplGwt;
+import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
@@ -32,9 +34,8 @@ import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.client.ui.base.dialog.DialogControllerFactory;
 import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
-import net.sf.mmm.service.api.gwt.client.RemoteInvocationServiceCallerGwt;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -99,11 +100,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     dialogManager.setDialogControllerFactory(dialogControllerFactory);
     dialogManager.setUiContext(context);
     dialogManager.initialize(DialogConstants.PLACE_HOME);
+    doSomethingElse(context);
   }
 
-  protected void doSomethingElse() {
-
-    UiContextGwt context = new UiContextGwt();
+  private void doSomethingElse(UiContext context) {
 
     final UiWidgetFactory factory = context.getWidgetFactory();
 
@@ -347,27 +347,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         button.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
-        RemoteInvocationServiceCallback<String> callback = new RemoteInvocationServiceCallback<String>() {
+        Consumer<String> successCallback = new Consumer<String>() {
 
-          /**
-           * {@inheritDoc}
-           */
           @Override
-          public void onFailure(Throwable failure, boolean complete) {
-
-            // Show the RPC error message to the user
-            dialogBox.setText("Remote Procedure Call - Failure");
-            serverResponseLabel.addStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(SERVER_ERROR);
-            dialogBox.center();
-            closeButton.setFocus(true);
-          }
-
-          /**
-           * {@inheritDoc}
-           */
-          @Override
-          public void onSuccess(String result, boolean complete) {
+          public void accept(String result) {
 
             dialogBox.setText("Remote Procedure Call");
             serverResponseLabel.removeStyleName("serverResponseLabelError");
@@ -376,11 +359,25 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
             closeButton.setFocus(true);
           }
         };
-        RemoteInvocationServiceCallerGwt serviceCaller;
-        serviceCaller = GWT.create(RemoteInvocationServiceCallerGwt.class);
+        Consumer<Throwable> failureCallback = new Consumer<Throwable>() {
+
+          @Override
+          public void accept(Throwable failure) {
+
+            // Show the RPC error message to the user
+            dialogBox.setText("Remote Procedure Call - Failure");
+            serverResponseLabel.addStyleName("serverResponseLabelError");
+            serverResponseLabel.setHTML(SERVER_ERROR);
+            dialogBox.center();
+            closeButton.setFocus(true);
+          }
+        };
+        RemoteInvocationServiceCaller serviceCaller;
+        serviceCaller = GWT.create(RemoteInvocationServiceCaller.class);
         // serviceCaller = getGinjector().getServiceCaller();
         RemoteInvocationServiceQueue queue = serviceCaller.newQueue();
-        queue.getServiceClient(GreetingService.class, String.class, callback).greeting(textToServer);
+        queue.getServiceClient(GreetingService.class, String.class, successCallback, failureCallback).greeting(
+            textToServer);
         queue.commit();
       }
     }

@@ -5,18 +5,19 @@ package net.sf.mmm.service.base.client;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.RemoteInvocationServiceResult;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCallback;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceCallFailedException;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceResultCallback;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
@@ -58,7 +59,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    * {@inheritDoc}
    */
   @Override
-  public RemoteInvocationServiceQueue newQueue(String id) {
+  public RemoteInvocationServiceQueueImpl newQueue(String id) {
 
     return newQueue(new RemoteInvocationServiceQueueSettings(id));
   }
@@ -83,7 +84,11 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    */
   protected RemoteInvocationServiceQueueImpl createQueue(RemoteInvocationServiceQueueSettings settings) {
 
-    return new RemoteInvocationServiceQueueImpl(settings, getCurrentQueue());
+    RemoteInvocationServiceQueueImpl queue = getCurrentQueue();
+    if ((queue != null) && queue.autoCommit) {
+      throw new NlsIllegalStateException();
+    }
+    return new RemoteInvocationServiceQueueImpl(settings, queue);
   }
 
   /**
@@ -134,25 +139,34 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   protected void performRequest(RemoteInvocationServiceQueueImpl queue) {
 
     assert (queue == this.currentQueue);
-    List<RemoteInvocationServiceCall> callQueue = queue.getCallQueue();
+    List<ServiceCallData<?>> callQueue = queue.callQueue;
     if (callQueue.isEmpty()) {
       return;
     }
-    RemoteInvocationServiceCall[] calls = callQueue.toArray(new RemoteInvocationServiceCall[callQueue.size()]);
-    RemoteInvocationGenericServiceRequest request = new RemoteInvocationGenericServiceRequest(nextRequestId(), calls);
-    List<RemoteInvocationServiceResultCallback<?>> callbackQueue = queue.getCallbackQueue();
-    int size = callbackQueue.size();
-    if (size != calls.length) {
-      throw new IllegalStateException("Length of service calls and callbacks does NOT match!");
+    RemoteInvocationServiceCall[] calls = new RemoteInvocationServiceCall[callQueue.size()];
+    int i = 0;
+    for (ServiceCallData<?> callData : callQueue) {
+      calls[i++] = callData.call;
     }
-    RemoteInvocationServiceResultCallback<?>[] callbacks = callbackQueue
-        .toArray(new RemoteInvocationServiceResultCallback<?>[callbackQueue.size()]);
-    performRequest(request, callbacks);
+    RemoteInvocationGenericServiceRequest request = new RemoteInvocationGenericServiceRequest(nextRequestId(), calls);
+    performRequest(request, callQueue);
   }
 
   /**
-   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceQueue#getServiceClient(Class, Class,
-   *      net.sf.mmm.service.api.client.RemoteInvocationServiceCallback)
+   * {@inheritDoc}
+   */
+  @Override
+  public <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,
+      Class<RESULT> returnType, Consumer<? extends RESULT> successCallback, Consumer<Throwable> failureCallback) {
+
+    RemoteInvocationServiceQueueImpl queue = newQueue("auto-commit");
+    queue.autoCommit = true;
+    return queue.getServiceClient(serviceInterface, returnType, successCallback, failureCallback);
+  }
+
+  /**
+   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceQueue#getServiceClient(Class, Class, Consumer,
+   *      Consumer)
    * 
    * @param <SERVICE> is the generic type of <code>serviceInterface</code>.
    * @param serviceInterface is the interface of the {@link RemoteInvocationService}.
@@ -164,67 +178,93 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    * This method finally performs the given <code>request</code>.
    * 
    * @param request is the {@link RemoteInvocationGenericServiceRequest} to perform.
-   * @param callbacks is the array of {@link RemoteInvocationServiceCallback}s according to
+   * @param serviceCalls is the {@link List} of {@link ServiceCallData} corresponding to
    *        {@link RemoteInvocationGenericServiceRequest#getCalls()}.
    */
   protected abstract void performRequest(RemoteInvocationGenericServiceRequest request,
-      RemoteInvocationServiceResultCallback<?>[] callbacks);
+      List<ServiceCallData<?>> serviceCalls);
 
   /**
    * This method is called from
-   * {@link #handleResponse(RemoteInvocationGenericServiceRequest, RemoteInvocationServiceResultCallback[], RemoteInvocationGenericServiceResponse)}
-   * for each {@link RemoteInvocationServiceResult} to handle.
+   * {@link #handleResponse(RemoteInvocationGenericServiceRequest, List, RemoteInvocationGenericServiceResponse)}
+   * to handle an individual result.
+   * 
+   * @param <RESULT> is the generic type of the received result.
    * 
    * @param call is the corresponding {@link RemoteInvocationServiceCall}.
    * @param result is the received {@link RemoteInvocationServiceResult} to handle.
-   * @param callback is the {@link RemoteInvocationServiceResultCallback} to
-   *        {@link RemoteInvocationServiceResultCallback#onResult(RemoteInvocationServiceResult, boolean)
-   *        delegate} to.
-   * @param complete - see
-   *        {@link RemoteInvocationServiceResultCallback#onResult(RemoteInvocationServiceResult, boolean)}.
+   * @param successCallback is the {@link Consumer} that will {@link Consumer#accept(Object) receive} the
+   *        <code>result</code>.
+   * @param failureCallback is the {@link Consumer} that will {@link Consumer#accept(Object) receive} a
+   *        potential {@link RemoteInvocationServiceResult#getFailure() failure}.
+   * @param complete - <code>true</code> if this is the last result for a request, <code>false</code>
+   *        otherwise.
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
-  protected void handleResult(RemoteInvocationServiceCall call, RemoteInvocationServiceResult result,
-      RemoteInvocationServiceResultCallback<?> callback, boolean complete) {
+  protected <RESULT extends Serializable> void handleResult(RemoteInvocationServiceCall call,
+      RemoteInvocationServiceResult<RESULT> result, Consumer<RESULT> successCallback,
+      Consumer<Throwable> failureCallback, boolean complete) {
 
-    callback.onResult(result, complete);
-
+    Throwable failure = result.getFailure();
+    if (failure != null) {
+      failureCallback.accept(failure);
+    } else {
+      successCallback.accept(result.getResult());
+    }
   }
 
   /**
-   * This method should be called from
-   * {@link #performRequest(RemoteInvocationGenericServiceRequest, RemoteInvocationServiceResultCallback[])}
-   * if a {@link RemoteInvocationGenericServiceResponse} has been received.
+   * This method should be called from {@link #performRequest(RemoteInvocationGenericServiceRequest, List)} if
+   * a {@link RemoteInvocationGenericServiceResponse} has been received.
    * 
    * @param request is the {@link RemoteInvocationGenericServiceRequest} that has been
-   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, RemoteInvocationServiceResultCallback[])
-   *        performed}.
-   * @param callbacks is the array of {@link RemoteInvocationServiceCallback}s according to
-   *        {@link RemoteInvocationGenericServiceRequest#getCalls()}.
+   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, List) performed}.
+   * @param serviceCalls is the list of {@link ServiceCallData} with the callbacks.
    * @param response is the {@link RemoteInvocationGenericServiceResponse} to handle.
    */
-  protected void handleResponse(RemoteInvocationGenericServiceRequest request,
-      RemoteInvocationServiceResultCallback<?>[] callbacks, RemoteInvocationGenericServiceResponse response) {
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  protected void handleResponse(RemoteInvocationGenericServiceRequest request, List<ServiceCallData<?>> serviceCalls,
+      RemoteInvocationGenericServiceResponse response) {
 
     if (request.getRequestId() != response.getRequestId()) {
       String source = "request-ID";
       throw new ObjectMismatchException(Integer.valueOf(response.getRequestId()), Integer.valueOf(request
           .getRequestId()), source);
     }
-    @SuppressWarnings("rawtypes")
     RemoteInvocationServiceResult[] results = response.getResults();
-    if (results.length != request.getCalls().length) {
+    RemoteInvocationServiceCall[] calls = request.getCalls();
+    if ((results.length != calls.length) || (serviceCalls.size() != calls.length)) {
       String source = "#calls/results";
-      throw new ObjectMismatchException(Integer.valueOf(results.length), Integer.valueOf(request.getCalls().length),
-          source);
+      throw new ObjectMismatchException(Integer.valueOf(results.length), Integer.valueOf(calls.length), source);
     }
-    for (int i = 0; i < results.length; i++) {
-      RemoteInvocationServiceCall call = request.getCalls()[i];
-      @SuppressWarnings("rawtypes")
+    int i = 0;
+    for (ServiceCallData<?> callData : serviceCalls) {
+      RemoteInvocationServiceCall call = calls[i];
       RemoteInvocationServiceResult result = results[i];
-
+      Consumer successCallback = callData.successCallback;
       boolean complete = (i == (results.length - 1));
-      handleResult(call, result, callbacks[i], complete);
+      handleResult(call, result, successCallback, callData.failureCallback, complete);
+      i++;
+    }
+  }
+
+  /**
+   * This method should be called from {@link #performRequest(RemoteInvocationGenericServiceRequest, List)} if
+   * a general {@link Throwable failure} occurred on the client side (in case of a network error or the like).
+   * 
+   * @param request is the {@link RemoteInvocationGenericServiceRequest} that has been
+   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, List) performed}.
+   * @param serviceCalls is the list of {@link ServiceCallData} with the callbacks.
+   * @param failure is the {@link Throwable} that has been catched on the client.
+   */
+  protected void handleFailure(RemoteInvocationGenericServiceRequest request, List<ServiceCallData<?>> serviceCalls,
+      Throwable failure) {
+
+    RemoteInvocationServiceCall[] calls = request.getCalls();
+    int i = 0;
+    for (ServiceCallData<?> callData : serviceCalls) {
+      RemoteInvocationServiceCall call = calls[i++];
+      callData.failureCallback.accept(new RemoteInvocationServiceCallFailedException(failure, call
+          .getServiceInterfaceName(), call.getMethodName() + call.getArguments()));
     }
   }
 
@@ -233,17 +273,17 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    */
   protected class RemoteInvocationServiceQueueImpl implements RemoteInvocationServiceQueue {
 
-    /** @see #getParentQueue() */
-    private final RemoteInvocationServiceQueueImpl parentQueue;
-
     /** @see #getSettings() */
     private final RemoteInvocationServiceQueueSettings settings;
 
-    /** @see #getCallQueue() */
-    private final List<RemoteInvocationServiceCall> callQueue;
+    /** @see #getParentQueue() */
+    private RemoteInvocationServiceQueueImpl parentQueue;
 
-    /** @see #getCallbackQueue() */
-    private final List<RemoteInvocationServiceResultCallback<?>> callbackQueue;
+    /** @see #getCallQueue() */
+    private List<ServiceCallData<?>> callQueue;
+
+    /** @see #getDefaultFailureCallback() */
+    private Consumer<Throwable> defaultFailureCallback;
 
     /** The current {@link AbstractRemoteInvocationServiceCaller.ServiceCallData} or <code>null</code>. */
     private ServiceCallData<?> currentCall;
@@ -253,6 +293,9 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
 
     /** @see #getParentQueue() */
     private RemoteInvocationServiceQueueImpl childQueue;
+
+    /** @see #addCall(RemoteInvocationServiceCall, Class) */
+    private boolean autoCommit;
 
     /**
      * The constructor.
@@ -280,9 +323,36 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
       if (parentQueue != null) {
         parentQueue.childQueue = this;
       }
-      this.callQueue = new ArrayList<RemoteInvocationServiceCall>();
-      this.callbackQueue = new ArrayList<RemoteInvocationServiceResultCallback<?>>();
+      this.callQueue = new ArrayList<AbstractRemoteInvocationServiceCaller.ServiceCallData<?>>();
       this.open = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultFailureCallback(Consumer<Throwable> failureCallback) {
+
+      this.defaultFailureCallback = failureCallback;
+    }
+
+    /**
+     * @return the {@link #setDefaultFailureCallback(Consumer) default failure-callback}.
+     */
+    public Consumer<Throwable> getDefaultFailureCallback() {
+
+      if ((this.defaultFailureCallback == null) && (this.parentQueue != null)) {
+        return this.parentQueue.getDefaultFailureCallback();
+      }
+      return this.defaultFailureCallback;
+    }
+
+    /**
+     * @return the callQueue
+     */
+    public List<ServiceCallData<?>> getCallQueue() {
+
+      return this.callQueue;
     }
 
     /**
@@ -309,9 +379,13 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
         throw new ObjectMismatchException(call.getServiceInterfaceName(), this.currentCall.serviceInterface, null,
             "service-interface");
       }
-      this.callQueue.add(call);
-      this.callbackQueue.add(this.currentCall.callback);
+      ServiceCallData<?> callData = this.currentCall;
       this.currentCall = null;
+      callData.call = call;
+      this.callQueue.add(callData);
+      if (this.autoCommit) {
+        commit();
+      }
     }
 
     /**
@@ -374,45 +448,25 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     }
 
     /**
-     * @return the queue
-     */
-    public List<RemoteInvocationServiceCall> getCallQueue() {
-
-      return this.callQueue;
-    }
-
-    /**
-     * @return the callbackQueue
-     */
-    public List<RemoteInvocationServiceResultCallback<?>> getCallbackQueue() {
-
-      return this.callbackQueue;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,
-        Class<RESULT> returnType, RemoteInvocationServiceCallback<? extends RESULT> callback) {
-
-      @SuppressWarnings({ "rawtypes", "unchecked" })
-      RemoteInvocationServiceResultCallback<? extends RESULT> resultCallback = new RemoteInvocationServiceCallbackAdapter(
-          callback);
-      return getServiceClient(serviceInterface, returnType, resultCallback);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <SERVICE extends RemoteInvocationService, RESULT> SERVICE getServiceClient(Class<SERVICE> serviceInterface,
-        Class<RESULT> returnType, RemoteInvocationServiceResultCallback<? extends RESULT> callback) {
+        Class<RESULT> returnType, Consumer<? extends RESULT> successCallback, Consumer<Throwable> failureCallback) {
 
       requireOpen();
       requireNoCurrentCall();
+      Consumer<Throwable> actualFailureCallback = failureCallback;
+      if (actualFailureCallback == null) {
+        actualFailureCallback = getDefaultFailureCallback();
+        if (actualFailureCallback == null) {
+          throw new NlsNullPointerException("failureCallback");
+        }
+      }
+
       SERVICE serviceClient = AbstractRemoteInvocationServiceCaller.this.getServiceClient(serviceInterface);
-      this.currentCall = new ServiceCallData<RESULT>(serviceInterface, returnType, callback);
+      this.currentCall = new ServiceCallData<RESULT>(serviceInterface, returnType, successCallback,
+          actualFailureCallback);
       return serviceClient;
     }
 
@@ -464,14 +518,22 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
      */
     private void close() {
 
-      this.callQueue.clear();
       this.open = false;
+
+      // disconnect from parent
       if (this.parentQueue != null) {
         assert (this.parentQueue.childQueue == this);
         this.parentQueue.childQueue = null;
       }
+
       assert (AbstractRemoteInvocationServiceCaller.this.currentQueue == this);
       AbstractRemoteInvocationServiceCaller.this.currentQueue = this.parentQueue;
+
+      // free resources
+      this.callQueue = null;
+      this.defaultFailureCallback = null;
+      this.childQueue = null;
+      this.parentQueue = null;
     }
 
     /**
@@ -501,10 +563,13 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    * 
    * @param <RESULT> is the generic type of the method return-type;
    */
-  private static class ServiceCallData<RESULT> {
+  protected static class ServiceCallData<RESULT> {
 
-    /** The current {@link RemoteInvocationServiceResultCallback}. */
-    private final RemoteInvocationServiceResultCallback<? extends RESULT> callback;
+    /** The callback to receive the service result on sucess. */
+    private final Consumer<? extends RESULT> successCallback;
+
+    /** The callback to receive a potential service failure. */
+    private final Consumer<Throwable> failureCallback;
 
     /** The current return-type. */
     private final Class<RESULT> returnType;
@@ -512,60 +577,55 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     /** The current {@link RemoteInvocationService} interface. */
     private final Class<?> serviceInterface;
 
+    /** The {@link RemoteInvocationServiceCall}. */
+    private RemoteInvocationServiceCall call;
+
     /**
      * The constructor.
      * 
      * @param serviceInterface is the {@link RemoteInvocationService} interface.
      * @param returnType is the return type.
-     * @param callback is the {@link RemoteInvocationServiceCallback}.
+     * @param successCallback is the
+     *        {@link RemoteInvocationServiceCaller#getServiceClient(Class, Class, Consumer, Consumer) success
+     *        callback}.
+     * @param failureCallback is the
+     *        {@link RemoteInvocationServiceCaller#getServiceClient(Class, Class, Consumer, Consumer) failure
+     *        callback}.
      */
     public ServiceCallData(Class<?> serviceInterface, Class<RESULT> returnType,
-        RemoteInvocationServiceResultCallback<? extends RESULT> callback) {
+        Consumer<? extends RESULT> successCallback, Consumer<Throwable> failureCallback) {
 
       super();
-      this.callback = callback;
+      this.successCallback = successCallback;
+      this.failureCallback = failureCallback;
       this.returnType = returnType;
       this.serviceInterface = serviceInterface;
     }
 
-  }
-
-  /**
-   * This inner class adapts from {@link RemoteInvocationServiceResultCallback} to
-   * {@link RemoteInvocationServiceCallback}.
-   * 
-   * @param <RESULT> is the generic type of the {@link #onResult(RemoteInvocationServiceResult, boolean)
-   *        result to receive}.
-   */
-  private static class RemoteInvocationServiceCallbackAdapter<RESULT extends Serializable> implements
-      RemoteInvocationServiceResultCallback<RESULT> {
-
-    /** @see #onResult(RemoteInvocationServiceResult, boolean) */
-    private final RemoteInvocationServiceCallback<RESULT> delegate;
-
     /**
-     * The constructor.
-     * 
-     * @param delegate is the {@link RemoteInvocationServiceCallback} to adapt.
+     * @return the successCallback. See
+     *         {@link RemoteInvocationServiceQueue#getServiceClient(Class, Class, Consumer, Consumer)}.
      */
-    public RemoteInvocationServiceCallbackAdapter(RemoteInvocationServiceCallback<RESULT> delegate) {
+    public Consumer<? extends RESULT> getSuccessCallback() {
 
-      super();
-      this.delegate = delegate;
+      return this.successCallback;
     }
 
     /**
-     * {@inheritDoc}
+     * @return the failureCallback. See
+     *         {@link RemoteInvocationServiceQueue#getServiceClient(Class, Class, Consumer, Consumer)}.
      */
-    @Override
-    public void onResult(RemoteInvocationServiceResult<RESULT> result, boolean complete) {
+    public Consumer<Throwable> getFailureCallback() {
 
-      Throwable failure = result.getFailure();
-      if (failure == null) {
-        this.delegate.onSuccess(result.getResult(), complete);
-      } else {
-        this.delegate.onFailure(failure, complete);
-      }
+      return this.failureCallback;
+    }
+
+    /**
+     * @return the {@link RemoteInvocationServiceCall}.
+     */
+    protected RemoteInvocationServiceCall getCall() {
+
+      return this.call;
     }
 
   }

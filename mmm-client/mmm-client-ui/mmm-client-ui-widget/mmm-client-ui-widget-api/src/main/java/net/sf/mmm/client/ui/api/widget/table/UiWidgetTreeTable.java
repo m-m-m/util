@@ -7,8 +7,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
- * @author hohwille
  * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public interface UiWidgetTreeTable extends UiWidgetComposite<UiWidgetRegular>, UiWidgetNative {
 
