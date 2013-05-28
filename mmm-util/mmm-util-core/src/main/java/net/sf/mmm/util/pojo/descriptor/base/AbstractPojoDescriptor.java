@@ -4,7 +4,11 @@ package net.sf.mmm.util.pojo.descriptor.base;
 
 import java.util.Collection;
 
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
@@ -13,7 +17,9 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This is the abstract base implementation of the {@link PojoDescriptor} interface.
@@ -25,6 +31,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJO> {
 
+  /** @see #getPojoDescriptorBuilder() */
+  private final PojoDescriptorBuilder pojoDescriptorBuilder;
+
   /** @see #getPojoType() */
   private final GenericType<POJO> pojoType;
 
@@ -32,15 +41,19 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    * The constructor.
    * 
    * @param pojoType is the {@link #getPojoType() pojo-type}.
+   * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder}.
    */
-  public AbstractPojoDescriptor(GenericType<POJO> pojoType) {
+  public AbstractPojoDescriptor(GenericType<POJO> pojoType, PojoDescriptorBuilder pojoDescriptorBuilder) {
 
+    super();
     this.pojoType = pojoType;
+    this.pojoDescriptorBuilder = pojoDescriptorBuilder;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<POJO> getPojoClass() {
 
     return this.pojoType.getRetrievalClass();
@@ -49,14 +62,24 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
+  @Override
   public GenericType<POJO> getPojoType() {
 
     return this.pojoType;
   }
 
   /**
+   * @return the {@link PojoDescriptorBuilder} instance.
+   */
+  protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
+
+    return this.pojoDescriptorBuilder;
+  }
+
+  /**
    * {@inheritDoc}
    */
+  @Override
   public abstract Collection<? extends AbstractPojoPropertyDescriptor> getPropertyDescriptors();
 
   /**
@@ -71,6 +94,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
+  @Override
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode) {
 
@@ -80,66 +104,141 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object getProperty(POJO pojoInstance, String property) {
+  @Override
+  public Object getProperty(POJO pojo, String property) {
 
     PojoProperty pojoProperty = new PojoProperty(property);
     if (pojoProperty.getIndex() != null) {
-      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, true).invoke(
-          pojoInstance, pojoProperty.getIndex().intValue());
+      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, true).invoke(pojo,
+          pojoProperty.getIndex().intValue());
     } else if (pojoProperty.getKey() != null) {
-      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorOneArgMode.GET_MAPPED, true).invoke(pojoInstance,
+      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorOneArgMode.GET_MAPPED, true).invoke(pojo,
           pojoProperty.getKey());
     } else {
-      return getAccessor(property, PojoPropertyAccessorNonArgMode.GET, true).invoke(pojoInstance);
+      return getAccessor(property, PojoPropertyAccessorNonArgMode.GET, true).invoke(pojo);
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public Object setProperty(POJO pojoInstance, String propertyName, Object value) {
+  @SuppressWarnings("unchecked")
+  @Override
+  public <V> V getProperty(POJO pojo, TypedProperty<V> property) throws PojoPropertyNotFoundException,
+      ReflectionException {
+
+    if (property.getParentPath() != null) {
+      return (V) getProperty(pojo, property.getPojoPath(), false);
+    } else {
+      return (V) getProperty(pojo, property.getSegment());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Object setProperty(POJO pojo, String propertyName, Object value) {
 
     PojoProperty property = new PojoProperty(propertyName);
     if (property.getIndex() != null) {
-      return getAccessor(property.getName(), PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, true).invoke(
-          pojoInstance, property.getIndex().intValue(), value);
+      return getAccessor(property.getName(), PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, true).invoke(pojo,
+          property.getIndex().intValue(), value);
     } else if (property.getKey() != null) {
-      return getAccessor(property.getName(), PojoPropertyAccessorTwoArgMode.SET_MAPPED, true).invoke(pojoInstance,
+      return getAccessor(property.getName(), PojoPropertyAccessorTwoArgMode.SET_MAPPED, true).invoke(pojo,
           property.getKey(), value);
     } else {
-      return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.SET, true).invoke(pojoInstance, value);
+      return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.SET, true).invoke(pojo, value);
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public int getPropertySize(POJO pojoInstance, String propertyName) {
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @Override
+  public <V> void setProperty(POJO pojo, TypedProperty<V> property, V value) throws PojoPropertyNotFoundException,
+      ReflectionException {
 
-    Object result = getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET_SIZE, true).invoke(pojoInstance);
+    NlsNullPointerException.checkNotNull("pojo", pojo);
+    String parentPath = property.getParentPath();
+    if (parentPath != null) {
+      Object currentPojo = getProperty(pojo, parentPath, true);
+      PojoDescriptor descriptor = this.pojoDescriptorBuilder.getDescriptor(currentPojo.getClass());
+      descriptor.setProperty(currentPojo, property.getSegment(), value);
+    } else {
+      setProperty(pojo, property.getSegment(), value);
+    }
+  }
+
+  /**
+   * 
+   * @param pojo is the {@link #getPojoClass() POJO} instance where to access the property.
+   * @param propertyPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPropertyPath#getPojoPath() POJO
+   *        property path}.
+   * @param required - <code>true</code> if the result is required, <code>false</code> if any intermediate or
+   *        the end result may be <code>null</code> resulting in <code>null</code> being returned.
+   * @return the requested property value.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  private Object getProperty(POJO pojo, String propertyPath, boolean required) {
+
+    String[] segments = propertyPath.split("\\.");
+    Object currentPojo = getProperty(pojo, segments[0]);
+    if (required && (currentPojo == null)) {
+      throw new ObjectNotFoundException(pojo, segments[0]);
+    }
+    for (int i = 1; i < segments.length; i++) {
+      if (currentPojo == null) {
+        return null;
+      }
+      PojoDescriptor descriptor = this.pojoDescriptorBuilder.getDescriptor(currentPojo.getClass());
+      Object nextPojo = descriptor.getProperty(currentPojo, segments[i]);
+      if (required && (nextPojo == null)) {
+        StringBuilder currentPath = new StringBuilder(segments[0]);
+        for (int j = 1; j < i; j++) {
+          currentPath.append('.');
+          currentPath.append(segments[j]);
+        }
+        throw new ObjectNotFoundException(currentPojo, currentPath.toString());
+      }
+      currentPojo = nextPojo;
+    }
+    return currentPojo;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getPropertySize(POJO pojo, String propertyName) {
+
+    Object result = getAccessor(propertyName, PojoPropertyAccessorNonArgMode.GET_SIZE, true).invoke(pojo);
     try {
       Number size = (Number) result;
       return size.intValue();
     } catch (ClassCastException e) {
-      throw new IllegalStateException("Size of property '" + propertyName + "' in pojo '" + pojoInstance
-          + "' is no number: " + result);
+      throw new IllegalStateException("Size of property '" + propertyName + "' in pojo '" + pojo + "' is no number: "
+          + result);
     }
   }
 
   /**
    * {@inheritDoc}
    */
-  public Object addPropertyItem(POJO pojoInstance, String propertyName, Object item) {
+  @Override
+  public Object addPropertyItem(POJO pojo, String propertyName, Object item) {
 
-    return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.ADD, true).invoke(pojoInstance, item);
+    return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.ADD, true).invoke(pojo, item);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Boolean removePropertyItem(POJO pojoInstance, String propertyName, Object item) {
+  @Override
+  public Boolean removePropertyItem(POJO pojo, String propertyName, Object item) {
 
-    Object result = getAccessor(propertyName, PojoPropertyAccessorOneArgMode.REMOVE, true).invoke(pojoInstance, item);
+    Object result = getAccessor(propertyName, PojoPropertyAccessorOneArgMode.REMOVE, true).invoke(pojo, item);
     if (result instanceof Boolean) {
       return (Boolean) result;
     }
@@ -149,18 +248,19 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    * {@inheritDoc}
    */
-  public Object getPropertyItem(POJO pojoInstance, String propertyName, int index) {
+  @Override
+  public Object getPropertyItem(POJO pojo, String propertyName, int index) {
 
-    return getAccessor(propertyName, PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED).invoke(pojoInstance, index);
+    return getAccessor(propertyName, PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED).invoke(pojo, index);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Object setPropertyItem(POJO pojoInstance, String propertyName, int index, Object item) {
+  @Override
+  public Object setPropertyItem(POJO pojo, String propertyName, int index, Object item) {
 
-    return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(pojoInstance, index,
-        item);
+    return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(pojo, index, item);
   }
 
   /**

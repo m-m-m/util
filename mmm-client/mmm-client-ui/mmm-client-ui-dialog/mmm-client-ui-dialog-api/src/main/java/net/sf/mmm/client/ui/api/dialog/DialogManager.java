@@ -45,8 +45,8 @@ public interface DialogManager {
   PopupDialog getCurrentPopupDialog();
 
   /**
-   * This method gets the current {@link Dialog} of the {@link Dialog#getType() type} {@link Dialog#TYPE_MAIN
-   * main}.
+   * This method gets the current {@link Dialog} of the {@link Dialog#getType() type}
+   * {@link DialogConstants#TYPE_MAIN main}.
    * 
    * @return the current {@link Dialog}.
    */

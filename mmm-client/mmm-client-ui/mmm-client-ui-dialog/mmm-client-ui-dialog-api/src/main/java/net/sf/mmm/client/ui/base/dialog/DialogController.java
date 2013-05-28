@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.dialog.Dialog;
+import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -22,32 +23,30 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
  * {@link DialogController} exists for each {@link Dialog} holding its state.
  * 
  * <pre>
- * public class PageDialogController extends {@link net.sf.mmm.client.ui.base.dialog.DialogController}&lt;PageView&gt; {
- *
- *   public static final {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} SLOT_MAIN = new {@link net.sf.mmm.client.ui.base.dialog.DialogSlot}({@link #DIALOG_ID_PAGE}, {@link #TYPE_PAGE});
+ * public class PageDialogController extends {@link net.sf.mmm.client.ui.base.dialog.DialogController}&lt;MyPageView&gt; {
  *
  *   ...
  *
-   *   public String {@link #getId()} {
-   *     return {@link #DIALOG_ID_PAGE};
-   *   }
-   *
-   *   protected {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} doShow({@link net.sf.mmm.client.ui.api.dialog.DialogPlace} place) {
-   *     return {@link net.sf.mmm.client.ui.base.dialog.root.RootDialogController#SLOT_PAGE};
-   *   }
-   *
-   *   protected void embed({@link net.sf.mmm.client.ui.base.dialog.DialogController}<?> subDialog, {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} slot) {
-   *     if (slot == SLOT_MAIN) {
-   *       this.widgetMainSlot.setChild(subDialog.getView());
-   *     } else if (slot == SLOT_...) {
-   *       ...
-   *     } else {
-   *       super.embed(subDialog, slot);
-   *     }
-   *   }
-   *
-   * }
-   * </pre>
+ *   public String {@link #getId()} {
+ *     return {@link DialogConstants#DIALOG_ID_PAGE};
+ *   }
+ *
+ *   protected {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} doShow({@link net.sf.mmm.client.ui.api.dialog.DialogPlace} place) {
+ *     return {@link DialogConstants#SLOT_ROOT_PAGE};
+ *   }
+ *
+ *   protected void embed({@link net.sf.mmm.client.ui.base.dialog.DialogController}<?> subDialog, {@link net.sf.mmm.client.ui.base.dialog.DialogSlot} slot) {
+ *     if (slot == SLOT_MAIN) {
+ *       this.widgetMainSlot.setChild(subDialog.getView());
+ *     } else if (slot == SLOT_...) {
+ *       ...
+ *     } else {
+ *       super.embed(subDialog, slot);
+ *     }
+ *   }
+ *
+ * }
+ * </pre>
  * 
  * @param <VIEW> is the generic type of the {@link #getView() view}.
  * 
@@ -85,7 +84,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
 
   /**
    * @return the parent {@link DialogController} or <code>null</code> if NOT {@link #isVisible() visible} or
-   *         {@link #TYPE_ROOT root}.
+   *         {@link DialogConstants#TYPE_ROOT root}.
    */
   DialogController<?> getParent() {
 
@@ -177,7 +176,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   private DialogSlot showInternal(DialogPlace dialogPlace) {
 
     DialogSlot slot = doShow(dialogPlace);
-    if (TYPE_ROOT.equals(getType())) {
+    if (DialogConstants.TYPE_ROOT.equals(getType())) {
       assert (slot == null);
       return null;
     }
@@ -202,7 +201,8 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    * Because of a direct request to {@link #doShow(DialogPlace) show} a dialog, its parent (and ancestors)
    * will be shown that will embed their child dialog in the {@link DialogSlot} returned by this method.</li>
    * </ul>
-   * If this is the {@link #TYPE_ROOT root} {@link DialogController} this method will never be called.
+   * If this is the {@link DialogConstants#TYPE_ROOT root} {@link DialogController} this method will never be
+   * called.
    * 
    * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() pointing} to the
    *        <em>direct</em> dialog to open and containing potential {@link DialogPlace#getParameter(String)

@@ -22,7 +22,7 @@ public enum PojoPathMode {
    * <li>For an &#171;Index&#187; this is done via the
    * {@link net.sf.mmm.util.reflect.api.GenericType#getComponentType() component-type} of the according
    * getter.<br>
-   * Therfore {@link java.util.List}s need to be declared using generics. If the &#171;Index&#187; is greater
+   * Therefore {@link java.util.List}s need to be declared using generics. If the &#171;Index&#187; is greater
    * or equal to the {@link net.sf.mmm.util.reflect.api.CollectionReflectionUtil#getSize(Object) size} of the
    * ordered container, its size is increased as necessary. For {@link java.util.List}s this is done by
    * {@link java.util.List#add(Object) adding} <code>null</code>-values. For arrays a compliant setter has to

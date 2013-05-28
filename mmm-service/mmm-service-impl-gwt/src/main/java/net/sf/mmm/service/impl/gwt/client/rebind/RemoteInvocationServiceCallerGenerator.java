@@ -5,20 +5,17 @@ package net.sf.mmm.service.impl.gwt.client.rebind;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
-import javax.inject.Inject;
-
 import net.sf.mmm.service.api.RemoteInvocationService;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceClient;
 import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwtAsync;
 import net.sf.mmm.service.impl.gwt.client.AbstractRemoteInvocationServiceCallerGwt;
+import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
-import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
@@ -27,16 +24,15 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.google.web.bindery.event.shared.EventBus;
 
 /**
- * This is the GWT-{@link Generator} for generating the {@link RemoteInvocationServiceCaller} and according
- * service-client stubs.
+ * This is the {@link AbstractIncrementalGenerator incremental GWT-generator} for generating the
+ * {@link RemoteInvocationServiceCaller} and according service-client stubs.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class RemoteInvocationServiceCallerGenerator extends Generator {
+public class RemoteInvocationServiceCallerGenerator extends AbstractIncrementalGenerator {
 
   /**
    * The constructor.
@@ -50,52 +46,68 @@ public class RemoteInvocationServiceCallerGenerator extends Generator {
    * {@inheritDoc}
    */
   @Override
-  public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
+  public long getVersionId() {
 
-    String simpleName = RemoteInvocationServiceCaller.class.getSimpleName() + "Impl";
-    String packageName = AbstractRemoteInvocationServiceCallerGwt.class.getPackage().getName();
-    logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
-    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
+    return 1;
+  }
 
-    // imports
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void generateImportStatements(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
+
     sourceComposerFactory.addImport(RemoteInvocationService.class.getName());
     sourceComposerFactory.addImport(RemoteInvocationGenericServiceGwtAsync.class.getName());
-    sourceComposerFactory.addImport(EventBus.class.getName());
-    sourceComposerFactory.addImport(Inject.class.getName());
-    sourceComposerFactory.setSuperclass(AbstractRemoteInvocationServiceCallerGwt.class.getSimpleName());
-    PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
-    if (writer != null) {
-      SourceWriter sourceWriter = sourceComposerFactory.createSourceWriter(context, writer);
-      // generate constructor
-      sourceWriter.print("@");
-      sourceWriter.println(Inject.class.getSimpleName());
-      sourceWriter.print("public ");
-      sourceWriter.print(simpleName);
-      sourceWriter.print("(");
-      // sourceWriter.print(RemoteInvocationGenericServiceGwtAsync.class.getSimpleName());
-      // sourceWriter.print(" genericService");
-      sourceWriter.println(") {");
-      sourceWriter.indent();
-      sourceWriter.println("super();");
-      // sourceWriter.println("super(genericService);");
+    sourceComposerFactory.addImport(AbstractRemoteInvocationServiceCallerGwt.class.getName());
+    // sourceComposerFactory.addImport(Inject.class.getName());
+  }
 
-      // generate service clients and register in constructor...
-      TypeOracle typeOracle = context.getTypeOracle();
-      JClassType dabayServiceType = typeOracle.findType(RemoteInvocationService.class.getName());
-      for (JClassType type : typeOracle.getTypes()) {
-        if ((type.isAssignableTo(dabayServiceType)) && (!type.equals(dabayServiceType)) && (type.isInterface() != null)) {
-          sourceWriter.print("registerService(");
-          sourceWriter.print(type.getQualifiedSourceName());
-          sourceWriter.print(".class, new ");
-          sourceWriter.print(generateServiceClient(type, packageName, logger, context));
-          sourceWriter.println("());");
-        }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
+
+    sourceComposerFactory.setSuperclass(AbstractRemoteInvocationServiceCallerGwt.class.getSimpleName());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
+      String simpleName, GeneratorContext context) {
+
+    generateSourcePublicMethodBlock(sourceWriter, simpleName);
+
+    // generate CDI constructor
+    // sourceWriter.print("@");
+    // sourceWriter.println(Inject.class.getSimpleName());
+    // sourceWriter.print("public ");
+    // sourceWriter.print(simpleName);
+    // sourceWriter.print("(");
+    // sourceWriter.print(RemoteInvocationGenericServiceGwtAsync.class.getSimpleName());
+    // sourceWriter.print(" genericService");
+    // sourceWriter.println(") {");
+    // sourceWriter.indent();
+    // sourceWriter.println("super(genericService);");
+
+    // generate service clients and register in constructor...
+    TypeOracle typeOracle = context.getTypeOracle();
+    JClassType dabayServiceType = typeOracle.findType(RemoteInvocationService.class.getName());
+    for (JClassType type : typeOracle.getTypes()) {
+      if ((type.isAssignableTo(dabayServiceType)) && (!type.equals(dabayServiceType)) && (type.isInterface() != null)) {
+        sourceWriter.print("registerService(");
+        sourceWriter.print(type.getQualifiedSourceName());
+        sourceWriter.print(".class, new ");
+        sourceWriter.print(generateServiceClient(type, inputType.getPackage().getName(), logger, context));
+        sourceWriter.println("());");
       }
-      sourceWriter.outdent();
-      sourceWriter.println("}");
-      sourceWriter.commit(logger);
     }
-    return sourceComposerFactory.getCreatedClassName();
+    generateSourceCloseBlock(sourceWriter);
   }
 
   /**

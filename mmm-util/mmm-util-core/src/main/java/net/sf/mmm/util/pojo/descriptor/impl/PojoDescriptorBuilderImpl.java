@@ -27,6 +27,7 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
@@ -164,10 +165,18 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * 
    * @return the {@link ExtendedPojoDescriptorDependenciesImpl}.
    */
-  @Override
   protected ExtendedPojoDescriptorDependenciesImpl getDependencies() {
 
     return this.configuration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ReflectionUtilLimited getReflectionUtil() {
+
+    return this.configuration.getReflectionUtil();
   }
 
   /**
@@ -226,7 +235,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
     getInitializationState().requireInitilized();
     Class<P> pojoClass = pojoType.getRetrievalClass();
-    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType);
+    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType, this);
     // process methods...
     List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();
     if (getMethodIntrospector() != null) {

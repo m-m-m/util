@@ -25,7 +25,7 @@ import net.sf.mmm.util.resource.api.DataResource;
  * @since 1.0.2
  */
 @ComponentSpecification
-public interface ReflectionUtil extends GenericTypeFactory, ReflectionUtilLimited {
+public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
   String CDI_NAME = "net.sf.mmm.util.reflect.api.ReflectionUtil";

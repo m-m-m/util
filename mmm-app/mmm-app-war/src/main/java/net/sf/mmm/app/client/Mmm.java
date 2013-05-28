@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
+import java.util.Collection;
 import java.util.Locale;
 import java.util.function.Consumer;
 
@@ -11,6 +12,7 @@ import net.sf.mmm.client.base.gwt.dialog.DialogManagerImplGwt;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
@@ -38,6 +40,10 @@ import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorBuilderFactoryLimited;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
@@ -100,6 +106,15 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     dialogManager.setDialogControllerFactory(dialogControllerFactory);
     dialogManager.setUiContext(context);
     dialogManager.initialize(DialogConstants.PLACE_HOME);
+
+    PojoDescriptorBuilderFactoryLimited descriptorBuilderFactory = new PojoDescriptorBuilderFactoryLimited();
+    descriptorBuilderFactory.initialize();
+    PojoDescriptorBuilder descriptorBuilder = descriptorBuilderFactory.createPublicMethodDescriptorBuilder();
+    PojoDescriptor<ContactBean> descriptor = descriptorBuilder.getDescriptor(ContactBean.class);
+    Collection<? extends PojoPropertyDescriptor> propertyDescriptors = descriptor.getPropertyDescriptors();
+    for (PojoPropertyDescriptor propertyDescriptor : propertyDescriptors) {
+      Log.info(propertyDescriptor.getName());
+    }
     doSomethingElse(context);
   }
 

@@ -30,6 +30,10 @@ public abstract interface AbstractDialog extends AttributeReadId<String>, Attrib
    * 
    * The ID of a dialog should only contain ASCII letters, Latin digits, hyphens or underscores. It must NOT
    * contain ':', ';', '&', '?', '=', '/', '\\' or ' '.
+   * 
+   * @see DialogConstants#DIALOG_ID_ROOT
+   * @see DialogConstants#DIALOG_ID_PAGE
+   * @see DialogConstants#DIALOG_ID_HOME
    */
   @Override
   String getId();

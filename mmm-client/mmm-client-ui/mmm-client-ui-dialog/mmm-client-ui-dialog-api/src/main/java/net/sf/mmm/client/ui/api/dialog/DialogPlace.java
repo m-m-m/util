@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.SimpleGenericValueConverter;
 import net.sf.mmm.util.value.base.SimpleGenericValueConverterImpl;
 
@@ -15,32 +17,32 @@ import net.sf.mmm.util.value.base.SimpleGenericValueConverterImpl;
  * This is the interface for an object that identifies a {@link #getDialogId() dialog} in combination with its
  * {@link #getParameters()}. It allows to represent a specific state of the client that can be bookmarked and
  * reopened at a later point in time.<br/>
- * 
+ * <b>HINT:</b><br/>
  * For each of your {@link Dialog} you need to define a {@link #getDialogId() dialog-id}. To decouple your
  * navigation from the actual dialogs and their implementation, it is recommended to define them in a central
- * interface of class (you can also have multiple such classes for large modular systems). As {@link Dialog}s
- * may have mandatory or optional parameters it is further recommended to define a "factory" for your
- * {@link DialogPlace}s that takes the parameter values as properly typed parameters. This will make
- * refactoring easier if parameters need to be changed. Here is a simple example to illustrate the idea:
+ * interface (you can also have multiple such interfaces or classes for large modular systems). See
+ * {@link DialogConstants} to get started. For {@link Dialog}s may have mandatory or optional
+ * {@link #getParameter(String, Class) parameters} it is further recommended to create sub-classes for
+ * {@link DialogPlace} or to define a <em>factory</em> for your {@link DialogPlace}s that takes the parameter
+ * values as properly typed arguments. This will make refactoring easier if parameters need to be changed. If
+ * you are sub-classing {@link DialogPlace} please be <b>aware</b> that your
+ * {@link net.sf.mmm.client.ui.base.dialog.DialogController}s are NOT permitted to cast {@link DialogPlace} to
+ * your sub-class as the {@link DialogManager#navigateTo(DialogPlace) navigation} can also take place via URL
+ * typing or from a bookmark and the framework will NOT know your subclasses. For generic access to your
+ * parameters please also define <code>PARAMETER_*</code> constants in your {@link DialogConstants}.
  * 
  * <pre>
- * public class Places {
- *   public static final String PLACE_HOME = "home";
- *   public static final String PLACE_DOCUMENT = "document";
- *   public static final String PLACE_PROFILE = "profile";
- *   ...
+ * public class MyScreenDialogPlace extends {@link DialogPlace} {
  *
- *   public static final String PARAM_DOCUMENT_ID = "documentId";
- *   ...
- *
- *   public static DialogPlace createHome() {
- *     return new DialogPlace(PLACE_HOME);
+ *   public MyScreenDialogPlace(Type mandatoryParameterFoo) {
+ *     this(mandatoryParameterFoo, null);
  *   }
  *
- *   public static DialogPlace createDocument(long documentId) {
- *     return new DialogPlace(PLACE_DOCUMENT, createParameters(PARAM_DOCUMENT_ID, Long.toString(documentId));
+ *   public MyScreenDialogPlace(Type mandatoryParameterFoo, OtherType optionalParameterBar) {
+ *     super(MyDialogConstants.DIALOG_ID_MY_SCREEN, {@link #addParameter(Map, String, Object, boolean) addParameter}(
+ *      {@link #newParameter(String, Object) newParameter}(MyDialogConstants.PARAMETER_MY_SCREEN_FOO, mandatoryParameterFoo),
+ *      MyDialogConstants.PARAMETER_MY_SCREEN_BAR, optionalParameterBar, false));
  *   }
- *   ...
  * }
  * </pre>
  * 
@@ -84,6 +86,9 @@ public class DialogPlace {
   /** @see #getParameters() */
   private Map<String, String> parameters;
 
+  /** @see #getValueConverter() */
+  private static SimpleGenericValueConverter valueConverter;
+
   /**
    * The constructor.
    * 
@@ -100,7 +105,7 @@ public class DialogPlace {
    * @param dialogId - see {@link #getDialogId()}.
    * @param parameters - see {@link #getParameters()}.
    */
-  public DialogPlace(String dialogId, Map<String, String> parameters) {
+  protected DialogPlace(String dialogId, Map<String, String> parameters) {
 
     super();
     if (!dialogId.matches(PATTERN_DIALOG_ID)) {
@@ -112,6 +117,77 @@ public class DialogPlace {
     } else {
       this.parameters = Collections.unmodifiableMap(parameters);
     }
+  }
+
+  /**
+   * Creates a {@link Map} with the given parameter.
+   * 
+   * @param key is the {@link #getParameter(String, Class) name of the parameter}.
+   * @param value is the {@link #getParameter(String, Class) value of the parameter}.
+   * @return a new {@link Map} with the given parameter.
+   */
+  protected static Map<String, String> newParameter(String key, Object value) {
+
+    return newParameter(key, value, true);
+  }
+
+  /**
+   * Creates a {@link Map} with the given parameter.
+   * 
+   * @param key is the {@link #getParameter(String, Class) name of the parameter}.
+   * @param value is the {@link #getParameter(String, Class) value of the parameter}. May be <code>null</code>
+   *        if <code>required</code> is <code>false</code>. Then an empty {@link Map} is returned. Use the
+   *        empty {@link String} instead of <code>null</code> to prevent this.
+   * @param required - if <code>false</code> the given <code>value</code> may be <code>null</code>,
+   *        <code>true</code> if the parameter is required and an exception shall be thrown if
+   *        <code>value</code> is <code>null</code>.
+   * @return a new {@link Map} with the given parameter.
+   */
+  protected static Map<String, String> newParameter(String key, Object value, boolean required) {
+
+    Map<String, String> parameters = new HashMap<String, String>();
+    return addParameter(parameters, key, value, required);
+  }
+
+  /**
+   * Adds the given parameter to the given {@link Map}.
+   * 
+   * @param parameters is the map with the current parameters.
+   * @param key is the {@link #getParameter(String, Class) name of the parameter}.
+   * @param value is the {@link #getParameter(String, Class) value of the parameter}.
+   * @return the given <code>parameters</code> {@link Map}.
+   */
+  protected static Map<String, String> addParameter(Map<String, String> parameters, String key, Object value) {
+
+    return addParameter(parameters, key, value, true);
+  }
+
+  /**
+   * Adds the given parameter to the given {@link Map}.
+   * 
+   * @param parameters is the map with the current parameters.
+   * @param key is the {@link #getParameter(String, Class) name of the parameter}.
+   * @param value is the {@link #getParameter(String, Class) value of the parameter}. May be <code>null</code>
+   *        for generic usage with optional parameter. Then the given {@link Map} is returned unchanged. Use
+   *        the empty {@link String} instead of <code>null</code> to prevent this.
+   * @param required - if <code>false</code> the given <code>value</code> may be <code>null</code>,
+   *        <code>true</code> if the parameter is required and an exception shall be thrown if
+   *        <code>value</code> is <code>null</code>.
+   * @return the given <code>parameters</code> {@link Map}.
+   */
+  protected static Map<String, String> addParameter(Map<String, String> parameters, String key, Object value,
+      boolean required) {
+
+    NlsNullPointerException.checkNotNull("key", key);
+    if (parameters.containsKey(key)) {
+      throw new DuplicateObjectException(value, key, parameters.get(key));
+    }
+    if (value != null) {
+      parameters.put(key, value.toString());
+    } else if (required) {
+      throw new NlsNullPointerException("value[key=" + key + "]");
+    }
+    return parameters;
   }
 
   /**
@@ -173,7 +249,13 @@ public class DialogPlace {
    */
   public <T> T getParameter(String key, Class<T> type) {
 
-    Object value = getParameter(key);
+    String value = getParameter(key);
+    if (value == null) {
+      return null;
+    }
+    if ((type != String.class) && (value.isEmpty())) {
+      return null;
+    }
     return getValueConverter().convert(value, this.dialogId + "@" + key, type);
   }
 
@@ -183,8 +265,12 @@ public class DialogPlace {
    */
   protected SimpleGenericValueConverter getValueConverter() {
 
-    // TODO: Use ClientContext to retrieve singleton instance
-    return new SimpleGenericValueConverterImpl();
+    if (valueConverter == null) {
+      SimpleGenericValueConverterImpl impl = new SimpleGenericValueConverterImpl();
+      impl.initialize();
+      valueConverter = impl;
+    }
+    return valueConverter;
   }
 
   /**

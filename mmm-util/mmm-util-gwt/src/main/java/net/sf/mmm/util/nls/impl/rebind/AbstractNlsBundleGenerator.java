@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.rebind;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Named;
 
+import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -16,12 +16,10 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -32,10 +30,7 @@ import com.google.gwt.user.rebind.SourceWriter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsBundleGenerator extends Generator {
-
-  /** The suffix for the generated resource-bundle class. */
-  private static final String SUFFIX_CLASS = "_GwtImpl";
+public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGenerator {
 
   /** @see #generateMethodMessageBlock(SourceWriter, TreeLogger, GeneratorContext, JMethod) */
   protected static final String VARIABLE_MESSAGE = "nlsL10nMessage";
@@ -55,39 +50,46 @@ public abstract class AbstractNlsBundleGenerator extends Generator {
    * {@inheritDoc}
    */
   @Override
-  public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
+  protected void generateImportStatements(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
-    TypeOracle typeOracle = context.getTypeOracle();
-    JClassType bundleClass = typeOracle.findType(typeName);
+    sourceComposerFactory.addImport(Map.class.getName());
+    sourceComposerFactory.addImport(HashMap.class.getName());
+    sourceComposerFactory.addImport(NlsBundle.class.getName());
+    sourceComposerFactory.addImport(NlsMessage.class.getName());
+    sourceComposerFactory.addImport(NlsAccess.class.getName());
+  }
 
-    String packageName = bundleClass.getPackage().getName();
-    String simpleName = bundleClass.getName() + SUFFIX_CLASS;
-    logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
-    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
-    sourceComposerFactory.addImplementedInterface(bundleClass.getQualifiedSourceName());
+    sourceComposerFactory.addImplementedInterface(inputType.getQualifiedSourceName());
+  }
 
-    generateImports(sourceComposerFactory);
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
+      String simpleName, GeneratorContext context) {
 
-    PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
-    if (writer != null) {
-      SourceWriter sourceWriter = sourceComposerFactory.createSourceWriter(context, writer);
+    // inputType is the NlsBundle-class
+    generateFields(sourceWriter, logger, context, inputType);
 
-      generateFields(sourceWriter, logger, context, bundleClass);
-
-      // generate methods of bundle
-      for (JMethod method : bundleClass.getOverridableMethods()) {
-        JType returnType = method.getReturnType();
-        if (NlsMessage.class.getName().equals(returnType.getQualifiedSourceName())) {
-          generateMethod(sourceWriter, logger, context, method);
-        } else {
-          throw new ObjectMismatchException(returnType.getSimpleSourceName(), NlsMessage.class,
-              bundleClass.getQualifiedSourceName(), method.getName());
-        }
+    // generate methods of bundle
+    for (JMethod method : inputType.getOverridableMethods()) {
+      JType returnType = method.getReturnType();
+      if (NlsMessage.class.getName().equals(returnType.getQualifiedSourceName())) {
+        generateMethod(sourceWriter, logger, context, method);
+      } else {
+        throw new ObjectMismatchException(returnType.getSimpleSourceName(), NlsMessage.class,
+            inputType.getQualifiedSourceName(), method.getName());
       }
-      sourceWriter.commit(logger);
     }
-    return sourceComposerFactory.getCreatedClassName();
   }
 
   /**
@@ -200,17 +202,4 @@ public abstract class AbstractNlsBundleGenerator extends Generator {
 
   }
 
-  /**
-   * Generates the import statements.
-   * 
-   * @param sourceComposerFactory is the {@link ClassSourceFileComposerFactory}.
-   */
-  protected void generateImports(ClassSourceFileComposerFactory sourceComposerFactory) {
-
-    sourceComposerFactory.addImport(Map.class.getName());
-    sourceComposerFactory.addImport(HashMap.class.getName());
-    sourceComposerFactory.addImport(NlsBundle.class.getName());
-    sourceComposerFactory.addImport(NlsMessage.class.getName());
-    sourceComposerFactory.addImport(NlsAccess.class.getName());
-  }
 }

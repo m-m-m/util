@@ -2,12 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client.dialog.page;
 
-import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.dialog.DialogController;
-import net.sf.mmm.client.ui.base.dialog.DialogSlot;
 import net.sf.mmm.client.ui.base.dialog.page.AbstractPageDialogController;
-import net.sf.mmm.client.ui.base.dialog.root.RootDialogController;
 
 /**
  * This is the implementation of {@link AbstractPageDialogController}.
@@ -29,36 +26,9 @@ public class PageDialogController extends AbstractPageDialogController<PageViewW
    * {@inheritDoc}
    */
   @Override
-  public String getType() {
-
-    return TYPE_PAGE;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String getTitle() {
 
     return "Multi-Media-Manager";
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getId() {
-
-    return DIALOG_ID_PAGE;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected DialogSlot doShow(DialogPlace dialogPlace) {
-
-    return RootDialogController.SLOT_PAGE;
   }
 
   /**

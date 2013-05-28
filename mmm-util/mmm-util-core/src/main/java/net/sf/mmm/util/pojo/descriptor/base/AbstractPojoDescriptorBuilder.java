@@ -11,6 +11,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the abstract base-implementation of the {@link PojoDescriptorBuilder} interface.
@@ -44,33 +45,36 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   }
 
   /**
-   * This method gets the required dependencies.
+   * This method gets the instance of {@link ReflectionUtilLimited}.
    * 
-   * @return the {@link PojoDescriptorDependencies}.
+   * @return the {@link ReflectionUtilLimited}.
    */
-  protected abstract PojoDescriptorDependencies getDependencies();
+  protected abstract ReflectionUtilLimited getReflectionUtil();
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
-    GenericType<POJO> genericType = getDependencies().getReflectionUtil().createGenericType(pojoClass);
+    GenericType<POJO> genericType = getReflectionUtil().createGenericType(pojoClass);
     return getDescriptor(genericType);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public PojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
-    GenericType<?> genericType = getDependencies().getReflectionUtil().createGenericType(pojoType);
+    GenericType<?> genericType = getReflectionUtil().createGenericType(pojoType);
     return getDescriptor(genericType);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
     PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoType);
@@ -97,6 +101,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
+  @Override
   public Map<String, Object> pojo2Map(Object pojo) {
 
     return new PojoMap(this, pojo);

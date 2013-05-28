@@ -2,13 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-import java.lang.reflect.Modifier;
-
 /**
  * This enum contains the possible modifiers for the visibility of a java element (type, field, method or
  * constructor).
  * 
- * @see Modifier
+ * @see java.lang.reflect.Modifier
  * @see javax.lang.model.element.Modifier
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -17,11 +15,11 @@ import java.lang.reflect.Modifier;
 public enum VisibilityModifier {
 
   /**
-   * The modifier for {@link Modifier#isPrivate(int) private} visibility.
+   * The modifier for {@link java.lang.reflect.Modifier#isPrivate(int) private} visibility.
    * 
-   * @see javax.lang.model.element.Modifier#PRIVATE
+   * @see java.lang.reflect.Modifier#PRIVATE
    */
-  PRIVATE(Modifier.PRIVATE),
+  PRIVATE(2),
 
   /**
    * The modifier for "friendly" visibility. This is the visibility of elements, that have no explicit
@@ -30,18 +28,18 @@ public enum VisibilityModifier {
   FRIENDLY(0),
 
   /**
-   * The modifier for {@link Modifier#isProtected(int) protected} visibility.
+   * The modifier for {@link java.lang.reflect.Modifier#isProtected(int) protected} visibility.
    * 
-   * @see javax.lang.model.element.Modifier#PROTECTED
+   * @see java.lang.reflect.Modifier#PROTECTED
    */
-  PROTECTED(Modifier.PROTECTED),
+  PROTECTED(4),
 
   /**
-   * The modifier for {@link Modifier#isPublic(int) public} visibility.
+   * The modifier for {@link java.lang.reflect.Modifier#isPublic(int) public} visibility.
    * 
-   * @see javax.lang.model.element.Modifier#PUBLIC
+   * @see java.lang.reflect.Modifier#PUBLIC
    */
-  PUBLIC(Modifier.PUBLIC);
+  PUBLIC(1);
 
   /** @see #getBits() */
   private final int bits;
@@ -57,7 +55,8 @@ public enum VisibilityModifier {
   }
 
   /**
-   * This method gets the <code>{@link Modifier bit-mask}</code> of this visibility-modifier.
+   * This method gets the <code>{@link java.lang.reflect.Modifier bit-mask}</code> of this
+   * visibility-modifier.
    * 
    * @return the bit-mask.
    */
@@ -83,7 +82,8 @@ public enum VisibilityModifier {
   }
 
   /**
-   * This method gets the {@link VisibilityModifier} for the given <code>{@link Modifier modifiers}</code>.
+   * This method gets the {@link VisibilityModifier} for the given
+   * <code>{@link java.lang.reflect.Modifier modifiers}</code>.
    * 
    * @see java.lang.Class#getModifiers()
    * @see java.lang.reflect.Method#getModifiers()
@@ -94,11 +94,11 @@ public enum VisibilityModifier {
    */
   public static VisibilityModifier valueOf(int modifiers) {
 
-    if (Modifier.isPublic(modifiers)) {
+    if ((modifiers & PUBLIC.bits) != 0) {
       return PUBLIC;
-    } else if (Modifier.isPrivate(modifiers)) {
+    } else if ((modifiers & PRIVATE.bits) != 0) {
       return PRIVATE;
-    } else if (Modifier.isProtected(modifiers)) {
+    } else if ((modifiers & PROTECTED.bits) != 0) {
       return PROTECTED;
     } else {
       return FRIENDLY;

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client.dialog.test;
 
-import net.sf.mmm.app.client.DialogConstants;
+import net.sf.mmm.app.client.dialog.MmmDialogConstants;
 import net.sf.mmm.client.ui.base.dialog.main.AbstractMainDialogController;
 
 /**
@@ -36,7 +36,7 @@ public class TestDialogController extends AbstractMainDialogController<TestViewW
   @Override
   public String getId() {
 
-    return DialogConstants.DIALOG_ID_TEST;
+    return MmmDialogConstants.DIALOG_ID_TEST;
   }
 
   /**

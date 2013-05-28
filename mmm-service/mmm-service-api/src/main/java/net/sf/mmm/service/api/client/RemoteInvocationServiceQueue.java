@@ -77,7 +77,12 @@ public interface RemoteInvocationServiceQueue extends AttributeReadId<String>, A
    * this is a sub-queue (a queue
    * {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) created} while
    * another queue was {@link RemoteInvocationServiceCaller#getCurrentQueue() already open}), the collected
-   * invocations will be appended to the parent queue.
+   * invocations will be appended to the parent queue.<br/>
+   * <b>NOTE:</b><br/>
+   * Committing an empty queue is cheap and will have no effect but {@link #isOpen() closing} the queue.
+   * Therefore it is totally legal to open a queue in your generic infrastructure by default then perform some
+   * sort of initialization that may or may not cause service invocations on that queue and finally commit the
+   * queue.
    */
   void commit();
 

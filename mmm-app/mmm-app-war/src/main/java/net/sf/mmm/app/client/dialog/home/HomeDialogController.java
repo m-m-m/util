@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client.dialog.home;
 
-import net.sf.mmm.app.client.DialogConstants;
+import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.base.dialog.main.AbstractMainDialogController;
 
 /**

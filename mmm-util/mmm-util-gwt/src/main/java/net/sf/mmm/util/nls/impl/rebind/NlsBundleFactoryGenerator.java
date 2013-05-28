@@ -2,8 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.rebind;
 
-import java.io.PrintWriter;
-
+import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.impl.AbstractNlsBundleFactoryGwt;
 
@@ -12,7 +11,6 @@ import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
-import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
@@ -26,7 +24,7 @@ import com.google.gwt.user.rebind.SourceWriter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsBundleFactoryGenerator extends Generator {
+public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
 
   /**
    * The constructor.
@@ -40,47 +38,34 @@ public class NlsBundleFactoryGenerator extends Generator {
    * {@inheritDoc}
    */
   @Override
-  public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
+  protected void generateImportStatements(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
-    String packageName = AbstractNlsBundleFactoryGwt.class.getPackage().getName();
-    String simpleName = "NlsBundleFactoryGwtImpl";
-    logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
-    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
-    // import statements
     sourceComposerFactory.addImport(AbstractNlsBundleFactoryGwt.class.getName());
     sourceComposerFactory.addImport(GWT.class.getName());
     sourceComposerFactory.addImport(NlsBundle.class.getName());
-
-    sourceComposerFactory.setSuperclass(AbstractNlsBundleFactoryGwt.class.getSimpleName());
-    PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
-    if (writer != null) {
-      SourceWriter sourceWriter = sourceComposerFactory.createSourceWriter(context, writer);
-
-      generateConstructor(sourceWriter, simpleName);
-
-      generateMethodCreateBundle(sourceWriter, logger, context);
-
-      sourceWriter.commit(logger);
-    }
-    return sourceComposerFactory.getCreatedClassName();
   }
 
   /**
-   * Generates the constructor.
-   * 
-   * @param sourceWriter is the {@link SourceWriter}.
-   * @param simpleName is the {@link Class#getSimpleName() simple name}.
+   * {@inheritDoc}
    */
-  protected void generateConstructor(SourceWriter sourceWriter, String simpleName) {
+  @Override
+  protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
-    sourceWriter.print("public ");
-    sourceWriter.print(simpleName);
-    sourceWriter.println("() {");
-    sourceWriter.indent();
-    sourceWriter.println("super();");
-    sourceWriter.outdent();
-    sourceWriter.println("}");
-    sourceWriter.println();
+    sourceComposerFactory.setSuperclass(AbstractNlsBundleFactoryGwt.class.getSimpleName());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
+      String simpleName, GeneratorContext context) {
+
+    generateDefaultConstructor(sourceWriter, simpleName);
+
+    generateMethodCreateBundle(sourceWriter, logger, context);
   }
 
   /**
@@ -162,6 +147,15 @@ public class NlsBundleFactoryGenerator extends Generator {
     sourceWriter.println("}");
 
     logger.log(Type.INFO, "Found " + bundleCount + " NlsBundle interface(s).");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersionId() {
+
+    return 1;
   }
 
 }

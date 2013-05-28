@@ -7,7 +7,8 @@
   <source path="math" excludes="base/MathUtilImpl.java"/>
   <source path="gwt"/>
   <source path="concurrent/api"/>
-  <source path="collection/base" includes="AbstractIterator.java,SingleElementIterator.java,NodeCycle.java,NodeCycleException.java"/>
+  <source path="collection/base"/>
+  <!-- includes="AbstractIterator.java,SingleElementIterator.java,NodeCycle.java,NodeCycleException.java"/> -->
   <source path="date" includes="**/*Limited*,**/*Exception.java"/>
   <source path="reflect" includes="**/*Limited*"/>
   <source path="component" excludes="impl/**"/>
@@ -20,8 +21,15 @@
   <source path="validation"/>
   <source path="transferobject" excludes="base/TransferObjectUtilImpl.java"/>
   <source path="entity"/>
-  <source path="reflect/api" includes="GenericType.java,ReflectionUtilLimited.java"/>
-  <source path="reflect/base" includes="ReflectionUtilLimitedImpl.java"/>
+  <source path="reflect/api" includes="GenericType.java,ReflectionUtilLimited.java,VisibilityModifier.java,ReflectionException.java"/>
+  <source path="reflect/base" includes="ReflectionUtilLimitedImpl.java,SimpleGenericTypeLimited.java"/>
+  <source path="pojo/api"/>
+  <source path="pojo/path/api" includes="PojoPropertyPath.java,TypedProperty.java"/>
+  <source path="pojo/descriptor/api"/>
+  <source path="pojo/descriptor/base" includes="AbstractPojoDescriptor.java,AbstractPojoPropertyDescriptor.java,AbstractPojoDescriptorBuilderLimited.java,AbstractPojoDescriptorBuilderFactory.java,PojoDescriptorBuilderFactoryLimited.java,PojoProperty.java,PojoMap.java,accessor/AbstractPojoPropertyAccessor.java"/>
+  <source path="pojo/descriptor/impl" includes="PojoDescriptorImpl.java,PojoPropertyDescriptorImpl.java,accessor/AbstractPojoPropertyAccessorGetMethod.java,accessor/AbstractPojoPropertyAccessorMethodLimited.java,accessor/AbstractPojoPropertyAccessorSetMethod.java,accessor/PojoPropertyAccessorProxy*By*.java"/>
+  <source path="pojo" excludes="path/base/**/*,path/impl/**/*"/>
   <source path="value/api"/>
   <source path="value/base" includes="SimpleGenericValueConverterImpl.java,ValueConverterIdentity.java,AbstractSimpleValueConverter.java"/>
+
 </module>

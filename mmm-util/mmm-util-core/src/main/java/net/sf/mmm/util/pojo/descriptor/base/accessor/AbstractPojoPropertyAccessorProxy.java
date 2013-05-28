@@ -35,6 +35,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public AccessibleObject getAccessibleObject() {
 
     return getDelegate().getAccessibleObject();
@@ -43,6 +44,16 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
+  public String getAccessibleObjectName() {
+
+    return getDelegate().getAccessibleObjectName();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public Class<?> getDeclaringClass() {
 
     return getDelegate().getDeclaringClass();
@@ -51,6 +62,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public int getModifiers() {
 
     return getDelegate().getModifiers();
@@ -59,6 +71,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?> getReturnClass() {
 
     return getDelegate().getReturnClass();
@@ -67,6 +80,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public GenericType<?> getReturnType() {
 
     return getDelegate().getReturnType();
@@ -84,6 +98,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public GenericType<?> getPropertyType() {
 
     return getDelegate().getPropertyType();
@@ -92,6 +107,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
 
     return getDelegate().getName();
@@ -100,6 +116,7 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
   /**
    * {@inheritDoc}
    */
+  @Override
   public PojoPropertyAccessorMode<? extends PojoPropertyAccessor> getMode() {
 
     return getDelegate().getMode();

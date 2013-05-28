@@ -64,9 +64,10 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
    * {@inheritDoc}
    */
   @Override
-  protected void generateImports(ClassSourceFileComposerFactory sourceComposerFactory) {
+  protected void generateImportStatements(JClassType inputType, TreeLogger logger,
+      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
-    super.generateImports(sourceComposerFactory);
+    super.generateImportStatements(inputType, logger, sourceComposerFactory, context);
     sourceComposerFactory.addImport(Constants.class.getName());
     sourceComposerFactory.addImport(GWT.class.getName());
   }
@@ -195,6 +196,15 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
       sourceWriter.commit(logger);
     }
     return sourceComposerFactory.getCreatedClassName();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersionId() {
+
+    return 1;
   }
 
 }

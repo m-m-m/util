@@ -30,7 +30,6 @@ import java.util.jar.JarFile;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
@@ -66,7 +65,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 @Singleton
 @Named(ReflectionUtil.CDI_NAME)
-public class ReflectionUtilImpl extends AbstractLoggableComponent implements ReflectionUtil {
+public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements ReflectionUtil {
 
   /** The prefix of resources in WAR-files. */
   private static final String WEB_INF_CLASSES = "WEB-INF/classes/";
@@ -515,15 +514,6 @@ public class ReflectionUtilImpl extends AbstractLoggableComponent implements Ref
       return true;
     }
     return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Class<?> getNonPrimitiveType(Class<?> type) {
-
-    return ReflectionUtilLimitedImpl.getInstance().getNonPrimitiveType(type);
   }
 
   /**

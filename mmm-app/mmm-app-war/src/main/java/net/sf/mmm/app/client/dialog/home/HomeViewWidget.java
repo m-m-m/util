@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client.dialog.home;
 
-import net.sf.mmm.app.client.DialogConstants;
+import net.sf.mmm.app.client.dialog.MmmDialogConstants;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
@@ -19,12 +19,14 @@ import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomVerticalPanel;
  */
 public class HomeViewWidget extends UiWidgetCustomVerticalPanel {
 
+  /** The instance of {@link DialogManager}. */
   private final DialogManager dialogManager;
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param dialogManager is the instance of {@link DialogManager}.
    */
   public HomeViewWidget(UiContext context, DialogManager dialogManager) {
 
@@ -39,7 +41,7 @@ public class HomeViewWidget extends UiWidgetCustomVerticalPanel {
       @Override
       public void onClick(UiFeatureClick source, boolean programmatic) {
 
-        HomeViewWidget.this.dialogManager.navigateTo(DialogConstants.DIALOG_ID_TEST);
+        HomeViewWidget.this.dialogManager.navigateTo(MmmDialogConstants.DIALOG_ID_TEST);
       }
     };
     UiWidgetButton button = context.getWidgetFactory().createButton("Test", clickHandler);

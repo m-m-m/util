@@ -206,6 +206,15 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   @Override
   public String getMessage() {
 
+    return getNlsMessage().getMessage();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLocalizedMessage() {
+
     return getNlsMessage().getLocalizedMessage();
   }
 

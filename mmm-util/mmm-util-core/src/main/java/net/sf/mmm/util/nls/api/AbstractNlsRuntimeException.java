@@ -117,6 +117,15 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   @Override
   public String getMessage() {
 
+    return getNlsMessage().getMessage();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLocalizedMessage() {
+
     return getNlsMessage().getLocalizedMessage();
   }
 

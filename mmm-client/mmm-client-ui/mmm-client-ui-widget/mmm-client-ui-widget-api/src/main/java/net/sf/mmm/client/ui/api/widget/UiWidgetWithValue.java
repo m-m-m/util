@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
+
 /**
  * This is the interface for a {@link UiWidgetRegular regular widget} that has a {@link #getValue() value}.
  * 
@@ -10,7 +12,8 @@ package net.sf.mmm.client.ui.api.widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetWithValue<VALUE> extends AbstractUiWidgetWithValue<VALUE>, UiWidgetRegular {
+public interface UiWidgetWithValue<VALUE> extends AbstractUiWidgetWithValue<VALUE>, UiFeatureValueAndValidation<VALUE>,
+    UiWidgetRegular {
 
   // nothing to add...
 

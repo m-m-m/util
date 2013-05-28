@@ -8,7 +8,7 @@ package net.sf.mmm.util.reflect.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface ReflectionUtilLimited {
+public interface ReflectionUtilLimited extends GenericTypeFactory {
 
   /** an empty class array */
   Class<?>[] NO_PARAMETERS = new Class[0];

@@ -34,9 +34,21 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
    * @see java.lang.reflect.Constructor
    * @see java.lang.reflect.Field
    * 
-   * @return the method to read this property or <code>null</code> if this property is NOT readable.
+   * @return the {@link AccessibleObject accessible object} used to access this property.
    */
   AccessibleObject getAccessibleObject();
+
+  /**
+   * This method gets the name of the {@link #getAccessibleObject() accessible object}.
+   * 
+   * @see java.lang.reflect.Method#getName()
+   * @see java.lang.reflect.Constructor#getName()
+   * @see java.lang.reflect.Field#getName()
+   * 
+   * @since 3.1.0
+   * @return the name of the {@link #getAccessibleObject() accessible object}.
+   */
+  String getAccessibleObjectName();
 
   /**
    * This method gets the {@link java.lang.reflect.Modifier modifiers} of the {@link #getAccessibleObject()

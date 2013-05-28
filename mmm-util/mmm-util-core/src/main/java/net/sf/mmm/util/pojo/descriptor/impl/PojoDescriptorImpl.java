@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArg;
@@ -48,10 +49,11 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
    * The constructor.
    * 
    * @param pojoType is the {@link #getPojoType() pojo-type}.
+   * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder}.
    */
-  public PojoDescriptorImpl(GenericType<POJO> pojoType) {
+  public PojoDescriptorImpl(GenericType<POJO> pojoType, PojoDescriptorBuilder pojoDescriptorBuilder) {
 
-    super(pojoType);
+    super(pojoType, pojoDescriptorBuilder);
     // we do NOT want MapFactory here: no need for cache or to be thread-safe
     this.propertyMap = new HashMap<String, PojoPropertyDescriptorImpl>();
     this.properties = Collections.unmodifiableCollection(this.propertyMap.values());
@@ -60,6 +62,7 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public PojoPropertyDescriptorImpl getPropertyDescriptor(String propertyName) {
 
     return this.propertyMap.get(propertyName);
@@ -80,6 +83,7 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("unchecked")
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode, boolean required) {

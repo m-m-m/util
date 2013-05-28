@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.dialog.AbstractDialog;
 import net.sf.mmm.client.ui.api.dialog.Dialog;
+import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.dialog.PopupDialog;
@@ -182,7 +183,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   @Override
   public Dialog getCurrentMainDialog() {
 
-    return getCurrentDialog(Dialog.TYPE_MAIN);
+    return getCurrentDialog(DialogConstants.TYPE_MAIN);
   }
 
   /**

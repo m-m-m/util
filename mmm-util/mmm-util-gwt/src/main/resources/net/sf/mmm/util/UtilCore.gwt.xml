@@ -2,6 +2,14 @@
 <module>
   <inherits name="net.sf.mmm.util.UtilCoreBaseNls"/>
 
+  <generate-with class="net.sf.mmm.util.pojo.descriptor.impl.rebind.PojoDescriptorBuilderGenerator">
+    <when-type-assignable class="net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder"/>
+  </generate-with>
+  <generate-with class="net.sf.mmm.util.pojo.descriptor.impl.rebind.PojoDescriptorGenerator">
+    <when-type-assignable class="net.sf.mmm.util.transferobject.api.TransferObject"/>
+  </generate-with>
+
+
   <generate-with class="net.sf.mmm.util.nls.impl.rebind.NlsBundleGeneratorGwtI18n">
     <when-type-assignable class="net.sf.mmm.util.nls.api.NlsBundle"/>
   </generate-with>

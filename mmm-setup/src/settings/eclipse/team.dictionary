@@ -264,3 +264,6 @@ sourced
 ioc
 cdi
 collapsable
+cloneable
+rebind
+introspects

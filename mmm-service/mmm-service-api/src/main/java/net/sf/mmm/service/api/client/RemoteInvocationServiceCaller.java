@@ -26,8 +26,9 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * <pre>
  * {@link RemoteInvocationServiceCaller} caller = getServiceCaller();
  * {@link RemoteInvocationServiceQueue} queue = caller.{@link #newQueue()};
+ * queue.{@link RemoteInvocationServiceQueue#setDefaultFailureCallback(Consumer) setDefaultFailureCallback}(this::onFailure);
  * MyService myService = queue.{@link RemoteInvocationServiceQueue#getServiceClient(Class, Class, java.util.function.Consumer, java.util.function.Consumer)
- * getServiceClient}(MyService.class, MyResult.class, this::onSuccess, this::onFailure);
+ * getServiceClient}(MyService.class, MyResult.class, this::onSuccess, null);
  * myService.myMethod(myArgument1, myArgument2);
  * ...
  * queue.{@link RemoteInvocationServiceQueue#commit() commit()};

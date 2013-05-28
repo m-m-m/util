@@ -2,6 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
+import java.lang.reflect.Type;
+
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
@@ -10,7 +16,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class ReflectionUtilLimitedImpl implements ReflectionUtilLimited {
+public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent implements ReflectionUtilLimited {
 
   /** @see #getInstance() */
   private static final ReflectionUtilLimited INSTANCE = new ReflectionUtilLimitedImpl();
@@ -62,6 +68,50 @@ public class ReflectionUtilLimitedImpl implements ReflectionUtilLimited {
       }
     }
     return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T> GenericType<T> createGenericType(Class<T> type) {
+
+    return new SimpleGenericTypeLimited<T>(type);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @Override
+  public GenericType<?> createGenericType(Type type) {
+
+    NlsNullPointerException.checkNotNull(Type.class, type);
+    if (type instanceof Class) {
+      return new SimpleGenericTypeLimited((Class) type);
+    } else if (type instanceof GenericType) {
+      return (GenericType<?>) type;
+    } else {
+      throw new IllegalCaseException(type.toString());
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public GenericType<?> createGenericType(Type type, GenericType<?> definingType) {
+
+    return createGenericType(type);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public GenericType<?> createGenericType(Type type, Class<?> definingType) {
+
+    return createGenericType(type);
   }
 
 }

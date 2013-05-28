@@ -11,7 +11,8 @@ package net.sf.mmm.service.api;
  * invokes the method on the service implementation. Then the server sends a response with the result of the
  * method back to the client.<br/>
  * This API aims to be a simplification for the RPC (Remote Procedure Call) mechanism of GWT (Google Web
- * Toolkit). However, it may also be used for other scenarios.
+ * Toolkit) and as an abstraction from different technologies to make your code portable. However, it may also
+ * be used for other scenarios.
  * 
  * @see net.sf.mmm.service.api.client.RemoteInvocationServiceCaller
  * 

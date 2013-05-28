@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.impl;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedType;
+import java.lang.reflect.Array;
 import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
@@ -45,6 +48,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
    * 
    * {@inheritDoc}
    */
+  @Override
   public Type[] getBounds() {
 
     return this.bounds;
@@ -53,6 +57,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public DECLARATION getGenericDeclaration() {
 
     return this.genericDeclaration;
@@ -61,9 +66,75 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
 
     return this.name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
+
+    return (T[]) Array.newInstance(annotationClass, 0);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Annotation[] getAnnotations() {
+
+    // return ReflectionUtil.NO_ANNOTATIONS;
+    return new Annotation[0];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends Annotation> T[] getDeclaredAnnotationsByType(Class<T> annotationClass) {
+
+    return (T[]) Array.newInstance(annotationClass, 0);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Annotation[] getDeclaredAnnotations() {
+
+    return getAnnotations();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public AnnotatedType[] getAnnotatedBounds() {
+
+    // TODO hohwille actually incorrect...
+    return new AnnotatedType[0];
   }
 
   /**

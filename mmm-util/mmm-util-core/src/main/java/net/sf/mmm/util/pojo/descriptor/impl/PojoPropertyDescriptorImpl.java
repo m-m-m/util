@@ -10,6 +10,8 @@ import java.util.Map;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
+import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.ValidatorNone;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor}
@@ -41,6 +43,7 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(PojoPropertyAccessorMode<ACCESSOR> mode) {
 
     return (ACCESSOR) this.accessorMap.get(mode);
@@ -49,6 +52,7 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Collection<? extends PojoPropertyAccessor> getAccessors() {
 
     return this.accessors;
@@ -62,6 +66,15 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
 
     PojoPropertyAccessorMode<?> mode = accessor.getMode();
     return this.accessorMap.put(mode, accessor);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ValueValidator<?> getValidator() {
+
+    return ValidatorNone.getInstance();
   }
 
 }

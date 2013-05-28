@@ -4,12 +4,14 @@ package net.sf.mmm.app.client;
 
 import java.util.Date;
 
+import net.sf.mmm.util.transferobject.api.TransferObject;
+
 /**
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContactBean {
+public class ContactBean implements TransferObject {
 
   private String firstName;
 
