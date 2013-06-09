@@ -36,9 +36,10 @@ public class UiWidgetCustomMasterDetail<ROW> extends AbstractUiWidgetCustomMaste
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   protected UiWidgetCustomMasterDetail(UiContext context, UiWidgetDynamicPanel<UiWidgetRegular> delegate) {
 
-    super(context, delegate);
+    super(context, delegate, (Class) List.class);
   }
 
   /**
@@ -54,7 +55,7 @@ public class UiWidgetCustomMasterDetail<ROW> extends AbstractUiWidgetCustomMaste
       UiWidgetCustom<List<ROW>, ?> masterPanel, UiFeatureSelectedValue<ROW> masterList,
       UiWidgetCustom<ROW, ?> detailPanel) {
 
-    super(context, delegate);
+    super(context, delegate, masterPanel.getValueClass());
     this.masterPanel = masterPanel;
     this.masterList = masterList;
     this.detailPanel = detailPanel;

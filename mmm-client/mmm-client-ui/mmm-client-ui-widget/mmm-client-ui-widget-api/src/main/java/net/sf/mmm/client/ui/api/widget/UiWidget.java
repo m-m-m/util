@@ -21,10 +21,9 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 /**
  * This is the interface for an adapter to a physical <em>widget</em> (or potentially a composition of such
  * widgets) of the underlying native widget toolkit.<br/>
- * A widget is any object of the UI (user interface) including both {@link UiWidgetAtomic atomic widgets} as
- * well a {@link UiWidgetComposite composite widgets}. <br/>
- * Real {@link UiWidget}s can be {@link UiWidgetFactory#create(Class) created} via {@link UiWidgetFactory}
- * that has implementations for all supported toolkits (technically via
+ * A widget is any object of the UI (user interface) it may be atomic or {@link UiWidgetComposite composite}. <br/>
+ * {@link UiWidgetNative Native widgets} can be {@link UiWidgetFactory#create(Class) created} via
+ * {@link UiWidgetFactory} that has implementations for all supported toolkits (technically via
  * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative}). This way you can decide which
  * native toolkit you like to use just by configuration and classpath (See
  * {@link net.sf.mmm.util.component.api.Cdi CDI}).<br/>

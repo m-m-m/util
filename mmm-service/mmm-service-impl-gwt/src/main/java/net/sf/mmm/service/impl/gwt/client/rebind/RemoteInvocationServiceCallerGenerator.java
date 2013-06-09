@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
 import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceClient;
 import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwtAsync;
@@ -27,11 +26,12 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 /**
  * This is the {@link AbstractIncrementalGenerator incremental GWT-generator} for generating the
- * {@link RemoteInvocationServiceCaller} and according service-client stubs.
+ * {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCaller} and according service-client stubs.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+// TODO hohwille Split off separate Generator for Service-Stub!
 public class RemoteInvocationServiceCallerGenerator extends AbstractIncrementalGenerator {
 
   /**
@@ -81,7 +81,7 @@ public class RemoteInvocationServiceCallerGenerator extends AbstractIncrementalG
   protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
       String simpleName, GeneratorContext context) {
 
-    generateSourcePublicMethodBlock(sourceWriter, simpleName);
+    generateSourcePublicConstructorDeclaration(sourceWriter, simpleName);
 
     // generate CDI constructor
     // sourceWriter.print("@");

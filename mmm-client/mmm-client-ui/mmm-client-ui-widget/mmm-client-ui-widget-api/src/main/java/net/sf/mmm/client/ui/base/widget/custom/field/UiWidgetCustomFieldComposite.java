@@ -36,10 +36,11 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustomFieldComposite(UiContext context, DELEGATE delegate) {
+  public UiWidgetCustomFieldComposite(UiContext context, DELEGATE delegate, Class<VALUE> valueClass) {
 
-    super(context, delegate);
+    super(context, delegate, valueClass);
     this.fieldList = new LinkedList<UiWidgetField<?>>();
   }
 

@@ -17,7 +17,7 @@ public interface AbstractValidatableObject {
    *        case of recursive validations. May also be <code>null</code> and will then be created internally
    *        (in case you do not need more feedback than a boolean result).
    * @return <code>true</code> if the validation of this object has been successful, <code>false</code>
-   *         otherwise.
+   *         otherwise (if there are validation failures).
    */
   boolean validate(ValidationState state);
 

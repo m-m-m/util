@@ -98,6 +98,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     // public void onModuleLoadDeferred() {
     // super.onModuleLoadDeferred();
     Log.debug("Loaded");
+
+    // temporary workaround without IoC/GIN
+    new PojoDescriptorBuilderFactoryLimited();
+
     UiContextGwt context = new UiContextGwt();
     context.initialize();
 

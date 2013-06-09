@@ -29,4 +29,13 @@ public abstract class AbstractUiWidgetDateBasedField<ADAPTER extends UiWidgetAda
     super(context);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Class<Date> getValueClass() {
+
+    return Date.class;
+  }
+
 }

@@ -9,11 +9,12 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInpu
 /**
  * This is the abstract base implementation of {@link UiWidgetTextualInputField}.
  * 
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getWidgetAdapter() adapter} value.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public abstract class AbstractUiWidgetTextualInputField<ADAPTER extends UiWidgetAdapterTextualInputField<VALUE, ADAPTER_VALUE>, VALUE, ADAPTER_VALUE>
     extends AbstractUiWidgetField<ADAPTER, VALUE, ADAPTER_VALUE> implements UiWidgetTextualInputField<VALUE> {

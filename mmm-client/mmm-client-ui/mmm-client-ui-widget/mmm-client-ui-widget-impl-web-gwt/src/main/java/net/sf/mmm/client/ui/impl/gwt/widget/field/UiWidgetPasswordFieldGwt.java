@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetPasswordField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetPasswordField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPasswordTextBox;
 
 /**
@@ -15,9 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPass
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetPasswordFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtPasswordTextBox<String>, String, String> implements
-    UiWidgetPasswordField {
+public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWidgetAdapterGwtPasswordTextBox> {
 
   /**
    * The constructor.
@@ -33,9 +31,9 @@ public class UiWidgetPasswordFieldGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtPasswordTextBox<String> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtPasswordTextBox createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtPasswordTextBox<String>();
+    return new UiWidgetAdapterGwtPasswordTextBox();
   }
 
   /**

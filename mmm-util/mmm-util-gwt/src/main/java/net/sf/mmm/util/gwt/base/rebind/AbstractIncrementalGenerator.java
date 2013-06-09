@@ -169,7 +169,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
    */
   protected void generateDefaultConstructor(SourceWriter sourceWriter, String simpleName) {
 
-    generateSourcePublicMethodBlock(sourceWriter, simpleName);
+    generateSourcePublicConstructorDeclaration(sourceWriter, simpleName);
     sourceWriter.println("super();");
     generateSourceCloseBlock(sourceWriter);
   }
@@ -182,9 +182,9 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
    * @param methodName is the name of the method (or the {@link Class#getSimpleName() simple class name} for a
    *        constructor}.
    */
-  protected final void generateSourcePublicMethodBlock(SourceWriter sourceWriter, String methodName) {
+  protected final void generateSourcePublicConstructorDeclaration(SourceWriter sourceWriter, String methodName) {
 
-    generateSourcePublicMethodBlock(sourceWriter, methodName, "", false);
+    generateSourcePublicMethodDeclaration(sourceWriter, "", methodName, "", false);
   }
 
   /**
@@ -192,18 +192,23 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
    * indentation.
    * 
    * @param sourceWriter is the {@link SourceWriter}.
+   * @param returnType TODO
    * @param methodName is the name of the method (or the {@link Class#getSimpleName() simple class name} for a
    *        constructor}.
    * @param arguments is the source line with the arguments to the method or constructor.
    * @param override - <code>true</code> if an {@link Override} annotation shall be added.
    */
-  protected final void generateSourcePublicMethodBlock(SourceWriter sourceWriter, String methodName, String arguments,
-      boolean override) {
+  protected final void generateSourcePublicMethodDeclaration(SourceWriter sourceWriter, String returnType, String methodName,
+      String arguments, boolean override) {
 
     if (override) {
       sourceWriter.println("@Override");
     }
     sourceWriter.print("public ");
+    if (returnType != null) {
+      sourceWriter.print(returnType);
+      sourceWriter.print(" ");
+    }
     sourceWriter.print(methodName);
     sourceWriter.print("(");
     sourceWriter.print(arguments);

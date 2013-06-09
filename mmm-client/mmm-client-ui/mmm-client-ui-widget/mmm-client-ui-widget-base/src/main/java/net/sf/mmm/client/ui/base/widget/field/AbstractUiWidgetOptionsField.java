@@ -11,6 +11,7 @@ import java.util.Map;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetOptionsField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
+import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -58,6 +59,16 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
     this.options = Collections.unmodifiableList(this.mutableOptions);
     this.title2OptionMap = new HashMap<String, VALUE>();
     this.formatter = FormatterToString.getInstance();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Class<VALUE> getValueClass() {
+
+    // TODO hohwille This is a really bad hack that has to be removed!!!
+    return (Class) Datatype.class;
   }
 
   /**

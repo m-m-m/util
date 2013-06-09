@@ -34,7 +34,7 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
   private Number revision;
 
   /**
-   * @see #copyFrom(Object, boolean)
+   * @see #copyFrom(Object)
    * @see #getModificationCounter()
    */
   private transient GenericEntity<ID> persistentEntity;
@@ -137,37 +137,24 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
    * {@inheritDoc}
    */
   @Override
-  protected void copyFrom(Object source, boolean overwrite) {
+  protected void copyFrom(Object source) {
 
-    super.copyFrom(source, overwrite);
+    super.copyFrom(source);
     @SuppressWarnings("unchecked")
     RevisionedEntity<ID> sourceRevisionedEntity = (RevisionedEntity<ID>) source;
     // Update persistentEntity, see getModificationCounter() for details...
-    if ((this.persistentEntity == null) || overwrite) {
-      this.persistentEntity = sourceRevisionedEntity;
-    } else {
-      if (this.persistentEntity != sourceRevisionedEntity) {
-        handleDuplicatePersistentEntity(sourceRevisionedEntity);
-      }
-    }
-    if ((this.id == null) || (overwrite)) {
-      this.id = sourceRevisionedEntity.getId();
-    }
-    if ((this.modificationCounter == 0) || (overwrite)) {
-      this.modificationCounter = sourceRevisionedEntity.getModificationCounter();
-    }
-    if ((this.revision == null) || (overwrite)) {
-      this.revision = sourceRevisionedEntity.getRevision();
-    }
+    this.persistentEntity = sourceRevisionedEntity;
+    this.id = sourceRevisionedEntity.getId();
+    this.modificationCounter = sourceRevisionedEntity.getModificationCounter();
+    this.revision = sourceRevisionedEntity.getRevision();
   }
 
   /**
-   * This method is called if {@link #copyFrom(Object, boolean)} has been called with <code>overwrite</code>
-   * set to false but the method has already been called before. It will throw an exception as this is not
-   * expected and might cause problems. You may override this method to allow this.
+   * This method is called if {@link #copyFrom(Object)} has been called with <code>overwrite</code> set to
+   * false but the method has already been called before. It will throw an exception as this is not expected
+   * and might cause problems. You may override this method to allow this.
    * 
-   * @param sourceRevisionedEntity is the {@link RevisionedEntity} to {@link #copyFrom(Object, boolean) copy
-   *        from}.
+   * @param sourceRevisionedEntity is the {@link RevisionedEntity} to {@link #copyFrom(Object) copy from}.
    */
   protected void handleDuplicatePersistentEntity(RevisionedEntity<ID> sourceRevisionedEntity) {
 

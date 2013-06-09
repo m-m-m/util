@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom.pattern;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
@@ -30,9 +29,10 @@ public abstract class AbstractUiWidgetCustomTwoListSelection<ROW> extends
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   protected AbstractUiWidgetCustomTwoListSelection(UiContext context, UiWidgetDynamicPanel<UiWidgetRegular> delegate) {
 
-    super(context, delegate);
+    super(context, delegate, (Class) List.class);
   }
 
   /**
@@ -51,17 +51,7 @@ public abstract class AbstractUiWidgetCustomTwoListSelection<ROW> extends
   @Override
   protected List<ROW> doGetValue(List<ROW> template, ValidationState state) throws RuntimeException {
 
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected List<ROW> createNewValue() {
-
-    return new ArrayList<ROW>();
+    return getTargetList().getValueDirect(template, state);
   }
 
   /**
@@ -70,8 +60,7 @@ public abstract class AbstractUiWidgetCustomTwoListSelection<ROW> extends
   @Override
   protected void doSetValue(List<ROW> value, boolean forUser) {
 
-    // TODO Auto-generated method stub
-
+    getTargetList().setValue(value, forUser);
   }
 
 }

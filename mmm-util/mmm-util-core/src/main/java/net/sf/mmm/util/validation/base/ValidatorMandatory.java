@@ -18,12 +18,23 @@ import net.sf.mmm.util.nls.api.NlsAccess;
  */
 public class ValidatorMandatory extends AbstractValueValidator<Object> {
 
+  /** @see #getInstance() */
+  private static final ValidatorMandatory INSTANCE = new ValidatorMandatory();
+
   /**
    * The constructor.
    */
   public ValidatorMandatory() {
 
     super();
+  }
+
+  /**
+   * @return the singleton instance of this class.
+   */
+  public static ValidatorMandatory getInstance() {
+
+    return INSTANCE;
   }
 
   /**

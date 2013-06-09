@@ -16,6 +16,9 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent implements
     PojoDescriptorBuilderFactory {
 
+  /** @see #getInstance() */
+  private static AbstractPojoDescriptorBuilderFactory instance;
+
   /**
    * The constructor.
    */
@@ -25,8 +28,32 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
   }
 
   /**
+   * @param instance is the instance to set
+   */
+  protected static void setInstance(AbstractPojoDescriptorBuilderFactory instance) {
+
+    if (AbstractPojoDescriptorBuilderFactory.instance != null) {
+      instance.getLogger().warn("Duplicate instantiation of PojoDescriptorBuilderFactory.");
+    }
+    AbstractPojoDescriptorBuilderFactory.instance = instance;
+  }
+
+  /**
+   * This method gets the singleton instance of {@link PojoDescriptorBuilderFactory}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * 
+   * @return the static instance of this class. May be <code>null</code> if not initialized.
+   */
+  public static PojoDescriptorBuilderFactory getInstance() {
+
+    return instance;
+  }
+
+  /**
    * {@inheritDoc}
    */
+  @Override
   public PojoDescriptorBuilder createPrivateFieldDescriptorBuilder() {
 
     return createDescriptorBuilder(null, VisibilityModifier.PRIVATE);
@@ -35,6 +62,7 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
   /**
    * {@inheritDoc}
    */
+  @Override
   public PojoDescriptorBuilder createPublicMethodDescriptorBuilder() {
 
     return createDescriptorBuilder(VisibilityModifier.PUBLIC, null);

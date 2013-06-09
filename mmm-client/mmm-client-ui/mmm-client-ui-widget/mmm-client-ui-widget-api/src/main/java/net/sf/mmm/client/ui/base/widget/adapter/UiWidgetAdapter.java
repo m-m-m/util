@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
@@ -80,14 +80,14 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
   /**
    * This method creates the label for this widget. Depending on the underlying toolkit implementation the
    * native widget may already contain the label (applies e.g. for <code>FormItem</code> in SmartGWT). In such
-   * case this method will wrap it as {@link AbstractUiWidgetLabel}. Otherwise this method should
+   * case this method will wrap it as {@link UiWidgetLabel}. Otherwise this method should
    * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class) create} a new
-   * {@link AbstractUiWidgetLabel} and return it.
+   * {@link UiWidgetLabel} and return it.
    * 
    * @param context is the {@link UiContext} that may be used to create the label.
    * @return the label.
    */
-  AbstractUiWidgetLabel<?> createLabel(UiContext context);
+  UiWidgetLabel createLabel(UiContext context);
 
   /**
    * This method determines if the style delta operations {@link #addStyle(String)},

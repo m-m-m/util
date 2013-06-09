@@ -887,15 +887,15 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * 
    * <br/>
    * It performs the {@link #validate(ValidationState) validation} of this widget by delegating to
-   * {@link #validateLocal(ValidationState, Object)} and {@link #validateRecursive(ValidationState)}. It may
-   * be overridden to collect potential validation failures and attach them to this widget. You should not
-   * forget the super-call in such case.
+   * {@link #validateRecursive(ValidationState)}. It may be overridden to collect potential validation
+   * failures and attach them to this widget. You should not forget the super-call in such case.
    */
   @Override
-  protected void doValidate(ValidationState state, VALUE value) {
+  protected boolean doValidate(ValidationState state, VALUE value) {
 
-    super.doValidate(state, value);
-    validateRecursive(state);
+    boolean success = super.doValidate(state, value);
+    boolean recursiveSuccess = validateRecursive(state);
+    return (success && recursiveSuccess);
   }
 
   /**
@@ -904,16 +904,24 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@link #validate(ValidationState)} on all child widgets.
    * 
    * @param state is the {@link ValidationState}.
+   * @return <code>true</code> if the recursive validation of this object has been successful,
+   *         <code>false</code> otherwise (if there are validation failures).
    */
-  void validateRecursive(ValidationState state) {
+  boolean validateRecursive(ValidationState state) {
 
+    boolean success = true;
     int size = getChildCount();
     for (int i = 0; i < size; i++) {
       AbstractUiWidget<?> child = (AbstractUiWidget<?>) getChild(i);
-      if (!child.isValidated()) {
-        child.validate(state);
+      Boolean valid = child.getDataBinding().getValid();
+      if (valid == null) {
+        boolean childValid = child.validate(state);
+        if (!childValid) {
+          success = false;
+        }
       }
     }
+    return success;
   }
 
   /**

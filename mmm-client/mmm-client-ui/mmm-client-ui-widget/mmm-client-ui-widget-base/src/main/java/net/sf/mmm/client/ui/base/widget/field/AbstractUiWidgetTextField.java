@@ -26,4 +26,13 @@ public abstract class AbstractUiWidgetTextField<ADAPTER extends UiWidgetAdapterT
     super(context);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Class<String> getValueClass() {
+
+    return String.class;
+  }
+
 }

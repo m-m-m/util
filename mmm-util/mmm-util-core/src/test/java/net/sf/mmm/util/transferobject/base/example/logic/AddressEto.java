@@ -57,29 +57,16 @@ public class AddressEto extends EntityTo<Long> implements Address {
    * {@inheritDoc}
    */
   @Override
-  protected void copyFrom(Object source, boolean overwrite) {
+  protected void copyFrom(Object source) {
 
-    super.copyFrom(source, overwrite);
+    super.copyFrom(source);
     Address sourceAddress = (Address) source;
-    if ((this.city == null) || (overwrite)) {
-      this.city = sourceAddress.getCity();
-    }
-    if ((this.country == null) || (overwrite)) {
-      this.country = sourceAddress.getCountry();
-    }
-    if ((this.houseNumber == null) || (overwrite)) {
-      this.houseNumber = sourceAddress.getHouseNumber();
-    }
-    if ((this.state == null) || (overwrite)) {
-      this.state = sourceAddress.getState();
-    }
-    if ((this.street == null) || (overwrite)) {
-      this.street = sourceAddress.getStreet();
-    }
-    if ((this.zip == null) || (overwrite)) {
-      this.zip = sourceAddress.getZip();
-    }
-
+    this.city = sourceAddress.getCity();
+    this.country = sourceAddress.getCountry();
+    this.houseNumber = sourceAddress.getHouseNumber();
+    this.state = sourceAddress.getState();
+    this.street = sourceAddress.getStreet();
+    this.zip = sourceAddress.getZip();
   }
 
   /**

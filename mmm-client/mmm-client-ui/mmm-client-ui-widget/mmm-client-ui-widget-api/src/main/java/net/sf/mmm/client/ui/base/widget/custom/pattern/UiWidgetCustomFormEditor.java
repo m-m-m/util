@@ -33,7 +33,7 @@ public class UiWidgetCustomFormEditor<VALUE> extends UiWidgetCustomEditor<VALUE>
   public UiWidgetCustomFormEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject,
       UiWidgetCustomComposite<VALUE, ?, ?> formPanel) {
 
-    super(context, handlerSaveObject);
+    super(context, handlerSaveObject, formPanel.getValueClass());
     this.formPanel = formPanel;
     addChild(formPanel);
   }
@@ -45,16 +45,6 @@ public class UiWidgetCustomFormEditor<VALUE> extends UiWidgetCustomEditor<VALUE>
   protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     return this.formPanel.getValueDirect(template, state);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected VALUE createNewValue() {
-
-    // will be created by formPanel...
-    return null;
   }
 
   /**

@@ -15,6 +15,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
+import net.sf.mmm.client.ui.base.binding.UiDataBindingFactory;
+import net.sf.mmm.client.ui.base.binding.UiDataBindingFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.UiModeChangerImpl;
@@ -33,7 +35,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
     AttributeWriteEventObserver {
 
   /** @see #getEventObserver() */
-  private UiEventObserver handlerObserver;
+  private UiEventObserver eventObserver;
 
   /** @see #getModeChanger() */
   private UiModeChanger modeChanger;
@@ -61,6 +63,9 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
   /** @see #setWidgetFactoryNative(UiWidgetFactoryNative) */
   private UiWidgetFactoryNative widgetFactoryNative;
+
+  /** @see #getDataBindingFactory() */
+  private UiDataBindingFactory dataBindingFactory;
 
   /**
    * The constructor.
@@ -100,6 +105,18 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
       impl.initialize();
       this.widgetFactory = impl;
     }
+
+    if (this.dataBindingFactory == null) {
+      UiDataBindingFactoryImpl impl = new UiDataBindingFactoryImpl();
+      impl.initialize();
+      this.dataBindingFactory = impl;
+    }
+
+    if (this.container == null) {
+      ComponentContainerContextFallback impl = new ComponentContainerContextFallback(this);
+      impl.initialize();
+      this.container = impl;
+    }
   }
 
   /**
@@ -108,16 +125,16 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   @Override
   public UiEventObserver getEventObserver() {
 
-    return this.handlerObserver;
+    return this.eventObserver;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setEventObserver(UiEventObserver handlerObserver) {
+  public void setEventObserver(UiEventObserver eventObserver) {
 
-    this.handlerObserver = handlerObserver;
+    this.eventObserver = eventObserver;
   }
 
   /**
@@ -134,6 +151,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   @Inject
   public void setModeChanger(UiModeChanger modeChanger) {
 
+    getInitializationState().requireNotInitilized();
     if (this.modeChanger != null) {
       getLogger().warn("Replacing mode changer {} with {}", new Object[] { this.modeChanger, modeChanger });
     }
@@ -155,6 +173,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   @Inject
   public void setConfiguration(UiConfiguration configuration) {
 
+    getInitializationState().requireNotInitilized();
     this.configuration = configuration;
   }
 
@@ -173,6 +192,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   @Inject
   public void setDispatcher(UiDispatcher dispatcher) {
 
+    getInitializationState().requireNotInitilized();
     this.dispatcher = dispatcher;
   }
 
@@ -191,6 +211,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   @Inject
   public void setDisplay(UiDisplay display) {
 
+    getInitializationState().requireNotInitilized();
     this.display = display;
   }
 
@@ -209,6 +230,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   @Inject
   public void setRoleFactory(RoleFactory roleFactory) {
 
+    getInitializationState().requireNotInitilized();
     this.roleFactory = roleFactory;
   }
 
@@ -242,7 +264,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   /**
    * @param widgetFactoryNative is the {@link UiWidgetFactoryNative} to set.
    */
-  protected void setWidgetFactoryNative(UiWidgetFactoryNative widgetFactoryNative) {
+  public void setWidgetFactoryNative(UiWidgetFactoryNative widgetFactoryNative) {
 
     // see doInitialize()
     getInitializationState().requireNotInitilized();
@@ -262,7 +284,7 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * @param popupHelper is the popupHelper to set
    */
   @Inject
-  protected void setPopupHelper(UiPopupHelper popupHelper) {
+  public void setPopupHelper(UiPopupHelper popupHelper) {
 
     getInitializationState().requireNotInitilized();
     this.popupHelper = popupHelper;
@@ -281,9 +303,29 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
    * @param container is the {@link ComponentContainer} to set.
    */
   @Inject
-  protected void setContainer(ComponentContainer container) {
+  public void setContainer(ComponentContainer container) {
 
+    getInitializationState().requireNotInitilized();
     this.container = container;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiDataBindingFactory getDataBindingFactory() {
+
+    return this.dataBindingFactory;
+  }
+
+  /**
+   * @param dataBindingFactory is the dataBindingFactory to set
+   */
+  @Inject
+  public void setDataBindingFactory(UiDataBindingFactory dataBindingFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.dataBindingFactory = dataBindingFactory;
   }
 
 }

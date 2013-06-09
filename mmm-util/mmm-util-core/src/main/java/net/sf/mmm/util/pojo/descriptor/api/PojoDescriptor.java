@@ -130,8 +130,8 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * <b>ATTENTION:</b><br>
  * When using this interface without generic parameterization you can NOT properly call the
  * {@link #getAccessor(String, PojoPropertyAccessorMode, boolean) getAccessor} methods. If the type of your
- * {@link net.sf.mmm.util.pojo.api.Pojo} is unknown at compile-time, you need to parameterize with the unbound
- * wildcard as <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not call the
+ * {@link net.sf.mmm.util.pojo.api.Pojo POJO} is unknown at compile-time, you need to parameterize with the
+ * unbound wildcard as <code>{@link PojoDescriptor}&lt;?&gt;</code>. In that case you can not call the
  * <code>get</code> or <code>set</code> methods.
  * 
  * @param <POJO> is the templated type of the {@link #getPojoClass() pojo}.
@@ -142,6 +142,14 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * @since 1.1.0
  */
 public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
+
+  /**
+   * Creates a new instance. Only possible if a (public) default constructor is available.
+   * 
+   * @return a {@link Class#newInstance() new instance} of the {@link net.sf.mmm.util.pojo.api.Pojo POJO}.
+   * @since 3.1.0
+   */
+  POJO newInstance();
 
   /**
    * This method gets the {@link PojoPropertyDescriptor descriptor} for the property identified by the given

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
+import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
@@ -16,17 +17,11 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * <pre>
  * public interface MyObject {
  *
- *   String PROPERTY_NAME = "name";
+ *   {@link TypedProperty}&lt;String> PROPERTY_NAME = new {@link TypedProperty}&lt;>(String.class, "name");
  *
- *   String PROPERTY_AGE = "age";
+ *   {@link TypedProperty}&lt;Integer> PROPERTY_AGE = new {@link TypedProperty}&lt;>(Integer.class, "age");
  *
- *   String PROPERTY_ADDRESS = "address";
- *
- *   {@link TypedProperty}&lt;String> TYPED_PROPERTY_NAME = new {@link TypedProperty}&lt;>(PROPERTY_NAME);
- *
- *   {@link TypedProperty}&lt;Integer> TYPED_PROPERTY_AGE = new {@link TypedProperty}&lt;>(PROPERTY_AGE);
- *
- *   {@link TypedProperty}&lt;String> TYPED_PROPERTY_ADDRESS_CITY = new {@link TypedProperty}&lt;>(PROPERTY_ADDRESS, MyAddress.TYPED_PROPERTY_CITY);
+ *   {@link TypedProperty}&lt;String> PROPERTY_ADDRESS_CITY = new {@link TypedProperty}&lt;>(String.class, "address", MyAddress.TYPED_PROPERTY_CITY);
  *
  *   String getName();
  *
@@ -64,7 +59,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class TypedProperty<T> implements PojoPropertyPath {
+public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<String> {
 
   /** @see #getSegment() */
   private final String segment;
@@ -77,6 +72,9 @@ public class TypedProperty<T> implements PojoPropertyPath {
 
   /** @see #getParentPath() */
   private final String parentPath;
+
+  /** @see #getTitle() */
+  private final String title;
 
   /**
    * The constructor.
@@ -107,8 +105,20 @@ public class TypedProperty<T> implements PojoPropertyPath {
    */
   public TypedProperty(Class<T> propertyType, String segment) {
 
-    super();
+    this(segment, propertyType, segment);
+  }
 
+  /**
+   * The constructor.
+   * 
+   * @param title - see {@link #getTitle()}.
+   * @param propertyType - see {@link #getPropertyType()}.
+   * @param segment is the {@link #getSegment() segment} and also the entire {@link #getPojoPath() pojo path}.
+   */
+  public TypedProperty(String title, Class<T> propertyType, String segment) {
+
+    super();
+    this.title = title;
     this.propertyType = propertyType;
     this.pojoPath = segment;
     this.segment = segment;
@@ -135,6 +145,7 @@ public class TypedProperty<T> implements PojoPropertyPath {
       this.parentPath = path + SEPARATOR + propertyParentPath;
     }
     this.pojoPath = this.parentPath + SEPARATOR + this.segment;
+    this.title = property.title;
   }
 
   /**
@@ -146,7 +157,21 @@ public class TypedProperty<T> implements PojoPropertyPath {
    */
   public TypedProperty(Class<T> propertyType, String segment, String parentPath) {
 
+    this(segment, propertyType, segment, parentPath);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param title - see {@link #getTitle()}.
+   * @param propertyType - see {@link #getPropertyType()}.
+   * @param segment - see {@link #getSegment()}.
+   * @param parentPath - see {@link #getParentPath()} and {@link #createPath(String...)}.
+   */
+  public TypedProperty(String title, Class<T> propertyType, String segment, String parentPath) {
+
     super();
+    this.title = title;
     this.propertyType = propertyType;
     this.segment = segment;
     this.parentPath = parentPath;
@@ -158,6 +183,20 @@ public class TypedProperty<T> implements PojoPropertyPath {
    */
   @Override
   public String getSegment() {
+
+    return this.segment;
+  }
+
+  /**
+   * This title is used to display the property name to end-users. If not explicitly specified, it will be the
+   * same as the {@link #getSegment() segment}. For {@link net.sf.mmm.util.nls.api.NlsMessage NLS} the title
+   * will be used as key for resource bundles (outside of this class) and should therefore be stable and not
+   * contain special characters.
+   * 
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTitle() {
 
     return this.segment;
   }

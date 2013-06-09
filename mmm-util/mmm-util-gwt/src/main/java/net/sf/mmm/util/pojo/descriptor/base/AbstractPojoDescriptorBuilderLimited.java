@@ -9,7 +9,7 @@ import java.util.Map;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
+import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
@@ -29,7 +29,7 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
   private static final PojoDescriptorBuilder INSTANCE = GWT.create(PojoDescriptorBuilder.class);
 
   /** @see #getDescriptor(Class) */
-  private final Map<Class<?>, PojoDescriptorImpl<?>> pojoMap;
+  private final Map<Class<?>, AbstractPojoDescriptorImpl<?>> pojoMap;
 
   /**
    * The constructor.
@@ -37,7 +37,7 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
   public AbstractPojoDescriptorBuilderLimited() {
 
     super();
-    this.pojoMap = new HashMap<Class<?>, PojoDescriptorImpl<?>>();
+    this.pojoMap = new HashMap<Class<?>, AbstractPojoDescriptorImpl<?>>();
   }
 
   /**
@@ -62,9 +62,9 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
    * {@inheritDoc}
    */
   @Override
-  public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
+  public <POJO> AbstractPojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
-    PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoClass);
+    AbstractPojoDescriptorImpl<POJO> descriptor = (AbstractPojoDescriptorImpl<POJO>) this.pojoMap.get(pojoClass);
     if (descriptor == null) {
       descriptor = createDescriptor(pojoClass);
       this.pojoMap.put(pojoClass, descriptor);
@@ -76,7 +76,7 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
    * {@inheritDoc}
    */
   @Override
-  public PojoDescriptorImpl<?> getDescriptor(Type pojoType) {
+  public AbstractPojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
     GenericType<?> genericType = getReflectionUtil().createGenericType(pojoType);
     return getDescriptor(genericType);
@@ -86,7 +86,7 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
    * {@inheritDoc}
    */
   @Override
-  public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
+  public <POJO> AbstractPojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
     return getDescriptor(pojoType.getRetrievalClass());
   }
@@ -102,7 +102,7 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
    * @return the descriptor used to get information about the properties of the according
    *         {@link net.sf.mmm.util.pojo.api.Pojo}.
    */
-  public <POJO> PojoDescriptorImpl<POJO> createDescriptor(Class<POJO> pojoType) {
+  public <POJO> AbstractPojoDescriptorImpl<POJO> createDescriptor(Class<POJO> pojoType) {
 
     throw new NlsUnsupportedOperationException("createDescriptor(" + pojoType.getName() + ")");
   }

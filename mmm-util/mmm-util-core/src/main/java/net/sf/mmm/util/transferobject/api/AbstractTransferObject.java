@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.api;
 
-import java.lang.reflect.Type;
-
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.entity.api.Entity;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
@@ -40,34 +38,21 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
     super();
     if (template != null) {
-      copyFromInternal(template, true);
+      copyFromInternal(template);
     }
   }
 
   /**
-   * @see #copyFrom(Object, boolean)
+   * @see #copyFrom(Object)
    * 
    * @param source is the source object where to copy the properties from.
-   * @param overwrite - <code>true</code> if all properties shall be copied, <code>false</code> if only the
-   *        properties shall be copied that are <code>null</code> in this object.
    */
-  final void copyFromInternal(Object source, boolean overwrite) {
+  final void copyFromInternal(Object source) {
 
     try {
-      copyFrom(source, overwrite);
+      copyFrom(source);
     } catch (ClassCastException e) {
-      Type type = new Type() {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public String toString() {
-
-          return "Interface for " + AbstractTransferObject.this.getClass().getSimpleName();
-        }
-      };
-      throw new NlsClassCastException(source, type);
+      throw new NlsClassCastException(source, AbstractTransferObject.this.getClass());
     }
   }
 
@@ -77,13 +62,27 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
    * has to be copied/cloned.
    * 
    * @param source is the source object where to copy the properties from.
-   * @param overwrite - <code>true</code> if all properties shall be copied, <code>false</code> if only the
-   *        properties shall be copied that are <code>null</code> in this object.
    */
-  protected void copyFrom(Object source, boolean overwrite) {
+  protected void copyFrom(Object source) {
 
     // has to be overridden by every sub-class...
     NlsNullPointerException.checkNotNull("source", source);
+  }
+
+  /**
+   * {@inheritDoc}
+   * 
+   * <b>ATTENTION:</b><br/>
+   * For being type-safe please use {@link TransferObjectUtil#clone(AbstractTransferObject)} instead.
+   */
+  @Override
+  public AbstractTransferObject clone() {
+
+    try {
+      return (AbstractTransferObject) super.clone();
+    } catch (CloneNotSupportedException e) {
+      throw new NlsIllegalStateException(e);
+    }
   }
 
   /**
@@ -110,22 +109,6 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
     // has to be overridden by every sub-class (use Eclipse "Generate equals() and hashCode()")...
     return 1;
-  }
-
-  /**
-   * {@inheritDoc}
-   * 
-   * <b>ATTENTION:</b><br/>
-   * For being type-safe please use {@link TransferObjectUtil#clone(AbstractTransferObject)} instead.
-   */
-  @Override
-  public AbstractTransferObject clone() {
-
-    try {
-      return (AbstractTransferObject) super.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new NlsIllegalStateException(e);
-    }
   }
 
   /**
@@ -157,10 +140,9 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
      * {@inheritDoc}
      */
     @Override
-    public <ENTITY extends Entity, TO extends AbstractTransferObject> void copyProperties(ENTITY source, TO target,
-        boolean overwrite) {
+    public <ENTITY extends Entity, TO extends AbstractTransferObject> void copyProperties(ENTITY source, TO target) {
 
-      target.copyFromInternal(source, overwrite);
+      target.copyFromInternal(source);
     }
 
     /**
@@ -181,7 +163,6 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
       }
       return newInstance;
     }
-
   }
 
 }

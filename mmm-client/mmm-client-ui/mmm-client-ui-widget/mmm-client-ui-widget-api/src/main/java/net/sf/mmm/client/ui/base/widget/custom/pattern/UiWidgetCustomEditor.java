@@ -61,10 +61,11 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
    * @param handlerSaveObject is the {@link UiHandlerObjectSave}
    *        {@link UiHandlerObjectSave#onSave(Object, Object) invoked} if the end-user clicked "save" and the
    *        {@link #getValue() value} has been validated successfully.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustomEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject) {
+  public UiWidgetCustomEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject, Class<VALUE> valueClass) {
 
-    super(context, context.getWidgetFactory().create(UiWidgetVerticalPanel.class));
+    super(context, context.getWidgetFactory().create(UiWidgetVerticalPanel.class), valueClass);
     setPrimaryStyle(PRIMARY_STYLE);
     this.handler = new UiHandler();
     this.handlerSaveObject = handlerSaveObject;

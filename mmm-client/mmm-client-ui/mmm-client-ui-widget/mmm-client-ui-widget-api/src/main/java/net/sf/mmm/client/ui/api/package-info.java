@@ -52,8 +52,8 @@
  * framework. GWT itself is quite low-level so this framework speeds you up with all the infrastructure you
  * need. Besides GWT being a great technology it has a major drawback: Development cycles are quite slow for
  * large and complex clients as starting and refreshing takes very long. This layer allows to test parts of
- * your dialogs e.g. in Swing in order to improve the layout and find initial bugs. Later you can start
- * testing with GWT in order to find web related problems. This approach can save a lot of time.</li>
+ * your dialogs with JUnit or manually via JavaFx in order to improve the layout and find initial bugs.
+ * Later you can start testing with GWT in order to find web related problems. This approach can save a lot of time.</li>
  * <li><b>Good Performance</b><br/>
  * You think that an abstraction layer for UI toolkits that wraps all widgets is causing a large performance
  * overhead? Nope! Of course you can create widgets a lot faster if you directly write JavaScript but the
@@ -71,6 +71,10 @@
  * </ol>
  * To be honest a web client build with this framework based on GWT is still heavy load for a mobile device.
  * But on powerful smartphones the performance is fine.
+ * <li><b>Advanced Data-Binding</b><br/>
+ * This framework offers advanced and comfortable {@link net.sf.mmm.client.ui.base.binding.UiDataBinding data-binding}.
+ * Even in GWT-Environments where no reflection is available you can simply bind java bean properties to widgets
+ * including annotation based validation.
  * <li><b>Clean API</b><br/>
  * Simple, clear, well documented, and easy to use API. Native UI toolkits typically use java classes as API.
  * Due to lack of multi-inheritance and due to implementation specific decisions the API often sucks. There
@@ -108,7 +112,7 @@
  * the higher level stuff.</li>
  * <li><b>Dialogs not pages</b><br/>
  * Most client frameworks have a programming model that is page-oriented (e.g. you produce a web-page). However, for
- * a rich internet application you need to think in dialogs and not in pages. So if you open a particular (main-)dialog
+ * a Rich Internet Application you need to think in dialogs and not in pages. So if you open a particular (main-)dialog
  * the result is a page that contains that dialog typically together with other things like header, footer, navigation,
  * etc. In this API all of these parts are dialogs that are composed and embedded to build a page. However, each of these
  * dialogs have a state and lifecycle rather than the page itself.</li>

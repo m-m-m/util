@@ -23,10 +23,11 @@ public abstract class UiWidgetCustomGridPanel<VALUE> extends
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustomGridPanel(UiContext context) {
+  public UiWidgetCustomGridPanel(UiContext context, Class<VALUE> valueClass) {
 
-    super(context, context.getWidgetFactory().create(UiWidgetGridPanel.class));
+    super(context, context.getWidgetFactory().create(UiWidgetGridPanel.class), valueClass);
   }
 
 }

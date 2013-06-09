@@ -30,7 +30,7 @@ public interface UiWidgetFactoryDatatype extends AbstractUiWidgetFactoryDatatype
    * {@link UiWidgetField field widget}. The end-user will thank you for a consistent UI (where the
    * <em>CustomerNumber</em> is viewed and edited in exactly the same way in each dialog). Also you can stay
    * (a lot more) relaxed in case a change request comes up that <em>CustomerNumber</em> has to change its
-   * format and validation rules in the entire data-model and UI.
+   * format and validation rules in the entire application (with data-model and UI).
    * 
    * @param <VALUE> is the generic type of the {@link net.sf.mmm.util.lang.api.Datatype}.
    * @param datatype is the {@link net.sf.mmm.util.lang.api.Datatype}.
@@ -39,5 +39,14 @@ public interface UiWidgetFactoryDatatype extends AbstractUiWidgetFactoryDatatype
    */
   @Override
   <VALUE> UiWidgetField<VALUE> createForDatatype(Class<VALUE> datatype);
+
+  /**
+   * This method determines if the given {@link Class} is supported by {@link #createForDatatype(Class)}.
+   * 
+   * @param type is the {@link Class} potentially reflecting a supported
+   *        {@link net.sf.mmm.util.lang.api.Datatype}.
+   * @return <code>true</code> if the given {@link Class} is supported, <code>false</code> otherwise.
+   */
+  boolean isDatatypeSupported(Class<?> type);
 
 }

@@ -28,10 +28,11 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustomComposite(UiContext context, DELEGATE delegate) {
+  public UiWidgetCustomComposite(UiContext context, DELEGATE delegate, Class<VALUE> valueClass) {
 
-    super(context, delegate);
+    super(context, delegate, valueClass);
   }
 
   /**
@@ -74,13 +75,14 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * {@inheritDoc}
    * 
    * <br/>
-   * An implementation should get the values from the {@link #getChild(int) child-widgets} and compose the
-   * requested value out of these attributes.<br/>
-   * Here is an example implementation showing all relevant variants:
+   * <br/>
+   * If you do not want to use the advanced {@link #getDataBinding() data-binding} you could override this
+   * method and manually implement the binding like in the following example:<br/>
    * 
    * <pre>
    * protected Person doGetValue(Person template, {@link ValidationState} state) {
    *
+   *   Person result = super.doGetValue(template, state);
    *   // if the attribute is a datatype we can supply null (instead of result.getFirstName())
    *   result.setFirstName(this.widgetFirstName.{@link #getValueDirect(Object, ValidationState) getValueDirect}(null, state));
    *   result.setLastName(this.widgetLastName.{@link #getValueDirect(Object, ValidationState) getValueDirect}(null, state));
@@ -93,39 +95,22 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    *   return result;
    * }
    * </pre>
+   * 
+   * You may also mix the advanced data-binding with custom logic implemented in this method.
    */
   @Override
-  protected abstract VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException;
+  protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
-  /**
-   * {@inheritDoc}
-   * 
-   * Here is an flexible example implementation.
-   * 
-   * <pre>
-   * Person result;
-   * Person original = {@link #getOriginalValue()};
-   * if (original == null) {
-   *   result = new Person();
-   * } else {
-   *   result = new Person(original);
-   *   // result = new Person();
-   *   // // result.copyValues(original);
-   *   // result.setId(original.getId());
-   *   // please note that attributes from GenericEntity/RevisionedEntity are automatically copied
-   * }
-   * </pre>
-   */
-  @Override
-  protected abstract VALUE createNewValue();
+    return super.doGetValue(template, state);
+  }
 
   /**
    * {@inheritDoc}
    * 
    * <br/>
-   * An implementation should set the attributes of the given <code>value</code> in the {@link #getChild(int)
-   * child-widgets}.<br/>
-   * An example implementation may look like this:
+   * <br/>
+   * If you do not want to use the advanced {@link #getDataBinding() data-binding} you could override this
+   * method and manually implement the binding like in the following example:<br/>
    * 
    * <pre>
    * protected void doSetValue(Person value) {
@@ -136,6 +121,8 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    * </pre>
    */
   @Override
-  protected abstract void doSetValue(VALUE value, boolean forUser);
+  protected void doSetValue(VALUE value, boolean forUser) {
 
+    super.doSetValue(value, forUser);
+  }
 }

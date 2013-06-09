@@ -94,6 +94,15 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isDatatypeSupported(Class<?> type) {
+
+    return this.datatype2subFactoryMap.containsKey(type);
+  }
+
+  /**
    * @return the {@link UiContext} instance.
    */
   protected UiContext getContext() {

@@ -58,7 +58,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final void setValue(VALUE value) {
+  public void setValue(VALUE value) {
 
     setValue(value, false);
   }
@@ -67,7 +67,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final void setValueForUser(VALUE value) {
+  public void setValueForUser(VALUE value) {
 
     setValue(value, true);
   }
@@ -76,7 +76,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final void setValue(VALUE newValue, boolean forUser) {
+  public void setValue(VALUE newValue, boolean forUser) {
 
     setModified(forUser);
     if (!forUser) {
@@ -105,7 +105,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * @see #doGetValue(Object, ValidationState)
    * 
    * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
-   *        to {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField atomic fields}.
+   *        to fields (see <code>UiWidgetField</code>).
    * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
    *        set from {@link #setValue(Object)}.
    */
@@ -115,7 +115,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValue() {
+  public VALUE getValue() {
 
     try {
       return getValueOrException(null);
@@ -149,7 +149,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValueOrException(VALUE template) throws RuntimeException {
+  public VALUE getValueOrException(VALUE template) throws RuntimeException {
 
     return getValueDirect(template, null);
   }
@@ -158,7 +158,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValueAndValidate(ValidationState state) {
+  public VALUE getValueAndValidate(ValidationState state) {
 
     clearMessages();
     ValidationState validationState = state;
@@ -179,7 +179,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
+  public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
     try {
       VALUE value = template;
@@ -266,7 +266,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getOriginalValue() {
+  public VALUE getOriginalValue() {
 
     return this.originalValue;
   }
@@ -335,6 +335,9 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
   public void setModified(boolean modified) {
 
     this.modified = modified;
+    if (!modified) {
+      // setModifiedRecursive(modified);
+    }
   }
 
   /**
@@ -350,7 +353,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final void addValidator(ValueValidator<? super VALUE> validator) {
+  public void addValidator(ValueValidator<? super VALUE> validator) {
 
     NlsNullPointerException.checkNotNull(ValueValidator.class, validator);
     this.validatorList.add(validator);
@@ -388,7 +391,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final boolean removeValidator(ValueValidator<? super VALUE> validator) {
+  public boolean removeValidator(ValueValidator<? super VALUE> validator) {
 
     NlsNullPointerException.checkNotNull(ValueValidator.class, validator);
     boolean removed = this.validatorList.remove(validator);
@@ -413,7 +416,7 @@ public abstract class AbstractUiFeatureValue<VALUE> extends AbstractLoggableObje
    * {@inheritDoc}
    */
   @Override
-  public final boolean validate(ValidationState state) {
+  public boolean validate(ValidationState state) {
 
     clearMessages();
     ValidationState validationState = state;

@@ -4,18 +4,14 @@ package net.sf.mmm.app.client;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
-import net.sf.mmm.client.ui.base.widget.custom.pattern.UiWidgetCustomEditor;
-import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.client.ui.base.widget.custom.pattern.UiWidgetCustomFormEditor;
 
 /**
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContactEditor extends UiWidgetCustomEditor<ContactBean> {
-
-  /** The form to edit {@link ContactBean}. */
-  private final ContactForm contactForm;
+public class ContactEditor extends UiWidgetCustomFormEditor<ContactBean> {
 
   /**
    * The constructor.
@@ -25,35 +21,6 @@ public class ContactEditor extends UiWidgetCustomEditor<ContactBean> {
    */
   public ContactEditor(UiContext context, UiHandlerObjectSave<ContactBean> handlerObjectSave) {
 
-    super(context, handlerObjectSave);
-    this.contactForm = new ContactForm(getContext());
-    addChild(this.contactForm);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ContactBean createNewValue() {
-
-    return new ContactBean();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ContactBean doGetValue(ContactBean template, ValidationState state) throws RuntimeException {
-
-    return this.contactForm.getValueDirect(template, state);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doSetValue(ContactBean value, boolean forUser) {
-
-    this.contactForm.setValue(value);
+    super(context, handlerObjectSave, new ContactForm(context));
   }
 }

@@ -7,16 +7,17 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
+import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomAtomicNoValue;
 
 /**
- * This is the abstract base class for a {@link UiWidgetCustom custom widget} that adapts a
- * {@link UiWidgetButton}.
+ * This is the abstract base class for a {@link UiWidgetCustomAtomicNoValue atomic custom widget} that adapts
+ * a {@link UiWidgetButton}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiWidgetCustomButton extends UiWidgetCustom<Void, UiWidgetButton> implements UiWidgetButton {
+public abstract class UiWidgetCustomButton extends UiWidgetCustomAtomicNoValue<UiWidgetButton> implements
+    UiWidgetButton {
 
   /**
    * The constructor.

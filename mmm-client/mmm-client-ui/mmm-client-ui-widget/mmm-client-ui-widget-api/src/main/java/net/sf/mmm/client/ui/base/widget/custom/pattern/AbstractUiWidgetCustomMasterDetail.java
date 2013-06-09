@@ -41,10 +41,12 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public AbstractUiWidgetCustomMasterDetail(UiContext context, UiWidgetDynamicPanel<UiWidgetRegular> delegate) {
+  public AbstractUiWidgetCustomMasterDetail(UiContext context, UiWidgetDynamicPanel<UiWidgetRegular> delegate,
+      Class<VALUE> valueClass) {
 
-    this(context, delegate, null);
+    this(context, delegate, valueClass, null);
   }
 
   /**
@@ -52,13 +54,14 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    * @param handlerDetailsForSelection is the {@link UiHandlerDetailsForSelection} to use by
    *        {@link #getDetailsForSelection(Object)}.
    */
   public AbstractUiWidgetCustomMasterDetail(UiContext context, UiWidgetDynamicPanel<UiWidgetRegular> delegate,
-      UiHandlerDetailsForSelection<SELECTION, DETAIL> handlerDetailsForSelection) {
+      Class<VALUE> valueClass, UiHandlerDetailsForSelection<SELECTION, DETAIL> handlerDetailsForSelection) {
 
-    super(context, delegate);
+    super(context, delegate, valueClass);
     this.handlerDetailsForSelection = handlerDetailsForSelection;
   }
 
@@ -121,15 +124,6 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
     if (!mode.isEditable()) {
       getDetailPanel().setMode(mode);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected VALUE createNewValue() {
-
-    return null;
   }
 
   /**

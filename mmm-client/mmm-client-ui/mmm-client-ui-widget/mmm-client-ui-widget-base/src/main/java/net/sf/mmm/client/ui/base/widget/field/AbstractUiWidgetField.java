@@ -64,6 +64,12 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
+  protected abstract Class<VALUE> getValueClass();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
     // here we ignore template, as we assume that field widgets only use Datatypes for <VALUE>...
@@ -197,7 +203,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public final UiWidgetLabel getFieldLabelWidget() {
 
     if (this.fieldLabelWidget == null) {
-      this.fieldLabelWidget = getWidgetAdapter().createLabel(getContext());
+      this.fieldLabelWidget = (AbstractUiWidgetLabel<?>) getWidgetAdapter().createLabel(getContext());
       this.fieldLabelWidget.setPrimaryStyle(PRIMARY_STYLE_LABEL);
       this.fieldLabelWidget.setLabelledWidget(this);
       if (this.fieldLabel != null) {
@@ -223,30 +229,30 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  protected String getSource() {
+  public String toString() {
 
+    String label = this.fieldLabel;
     if (this.fieldLabelWidget != null) {
-      String label = this.fieldLabelWidget.getLabel();
-      if (label != null) {
-        return label;
-      }
+      label = this.fieldLabelWidget.getLabel();
     }
-    if (this.fieldLabel != null) {
-      return this.fieldLabel;
+    if (label != null) {
+      return super.toString() + ":" + label;
+    } else {
+      return super.toString();
     }
-    return super.getSource();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void doValidate(ValidationState state, VALUE value) {
+  protected boolean doValidate(ValidationState state, VALUE value) {
 
     ValidationStateMessageCollector messageCollector = new ValidationStateMessageCollector(state);
-    super.doValidate(messageCollector, value);
+    boolean success = super.doValidate(messageCollector, value);
     String failureMessages = messageCollector.getFailureMessages();
     setValidationFailure(failureMessages);
+    return success;
   }
 
   /**

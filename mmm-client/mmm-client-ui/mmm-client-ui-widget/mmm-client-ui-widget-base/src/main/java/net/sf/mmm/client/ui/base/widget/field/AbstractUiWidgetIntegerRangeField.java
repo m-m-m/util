@@ -27,4 +27,13 @@ public abstract class AbstractUiWidgetIntegerRangeField<ADAPTER extends UiWidget
     super(context);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Class<Integer> getValueClass() {
+
+    return Integer.class;
+  }
+
 }

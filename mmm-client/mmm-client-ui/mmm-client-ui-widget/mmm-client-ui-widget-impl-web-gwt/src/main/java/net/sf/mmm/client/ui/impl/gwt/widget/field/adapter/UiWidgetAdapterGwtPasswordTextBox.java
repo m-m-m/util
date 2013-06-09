@@ -10,9 +10,8 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
-public class UiWidgetAdapterGwtPasswordTextBox<VALUE> extends UiWidgetAdapterGwtTextBoxBase<PasswordTextBox, VALUE> {
+public class UiWidgetAdapterGwtPasswordTextBox extends UiWidgetAdapterGwtTextBoxBase<PasswordTextBox, String> {
 
   /**
    * The constructor.

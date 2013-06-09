@@ -65,10 +65,7 @@ public interface TransferObjectUtilLimited {
    *        NOT be <code>null</code>.
    * @param target is the {@link AbstractTransferObject} to copy the attributes to. Must NOT be
    *        <code>null</code>.
-   * @param overwrite - <code>true</code> if all properties shall be copied, <code>false</code> if only the
-   *        properties shall be copied that are <code>null</code> in this object.
    */
-  <ENTITY extends Entity, TO extends AbstractTransferObject> void copyProperties(ENTITY source, TO target,
-      boolean overwrite);
+  <ENTITY extends Entity, TO extends AbstractTransferObject> void copyProperties(ENTITY source, TO target);
 
 }

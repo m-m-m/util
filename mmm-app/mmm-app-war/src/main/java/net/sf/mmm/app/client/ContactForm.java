@@ -32,7 +32,7 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
    */
   public ContactForm(UiContext context) {
 
-    super(context);
+    super(context, ContactBean.class);
     this.widgetFirstName = getFactory().createTextField("First name");
     this.widgetFirstName.addValidatorMandatory();
     this.widgetLastName = getFactory().createTextField("Last name");
@@ -48,15 +48,6 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     getDelegate().addChildSpanned(section);
     section.addCollapseWidget(this.widgetBirthday);
     getDelegate().addChildren(this.widgetBirthday);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected ContactBean createNewValue() {
-
-    return new ContactBean();
   }
 
   /**

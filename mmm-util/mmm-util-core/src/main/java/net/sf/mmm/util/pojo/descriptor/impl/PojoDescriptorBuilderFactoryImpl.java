@@ -23,9 +23,6 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 @Named(PojoDescriptorBuilderFactory.CDI_NAME)
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
-  /** @see #getInstance() */
-  private static PojoDescriptorBuilderFactory instance;
-
   /** @see #getDependencies() */
   private ExtendedPojoDescriptorDependenciesImpl dependencies;
 
@@ -46,12 +43,14 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
    */
   public static PojoDescriptorBuilderFactory getInstance() {
 
+    PojoDescriptorBuilderFactory instance = AbstractPojoDescriptorBuilderFactory.getInstance();
     if (instance == null) {
       synchronized (PojoDescriptorBuilderFactoryImpl.class) {
         if (instance == null) {
           PojoDescriptorBuilderFactoryImpl impl = new PojoDescriptorBuilderFactoryImpl();
           impl.initialize();
           instance = impl;
+          setInstance(impl);
         }
       }
     }

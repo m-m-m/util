@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.descriptor.impl.rebind;
 import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderLimited;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
+import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
 import net.sf.mmm.util.transferobject.api.TransferObject;
 
 import com.google.gwt.core.client.GWT;
@@ -54,8 +54,7 @@ public class PojoDescriptorBuilderGenerator extends AbstractIncrementalGenerator
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
     sourceComposerFactory.addImport(GWT.class.getName());
-    sourceComposerFactory.addImport(PojoDescriptorImpl.class.getName());
-
+    sourceComposerFactory.addImport(AbstractPojoDescriptorImpl.class.getName());
     sourceComposerFactory.addImport(AbstractPojoDescriptorBuilderLimited.class.getName());
   }
 
@@ -98,7 +97,7 @@ public class PojoDescriptorBuilderGenerator extends AbstractIncrementalGenerator
       JClassType inputType, GeneratorContext context) {
 
     sourceWriter.print("public <POJO> ");
-    sourceWriter.print(PojoDescriptorImpl.class.getSimpleName());
+    sourceWriter.print(AbstractPojoDescriptorImpl.class.getSimpleName());
     sourceWriter.println("<POJO> createDescriptor(Class<POJO> pojoType) {");
     sourceWriter.indent();
 

@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetDoubleField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoubleField;
 
 /**
@@ -15,8 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoub
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetDoubleFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtDoubleField, Double, Double> implements UiWidgetDoubleField {
+public class UiWidgetDoubleFieldGwt extends AbstractUiWidgetDoubleField<UiWidgetAdapterGwtDoubleField> {
 
   /**
    * The constructor.

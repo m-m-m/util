@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextualInputField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetIntegerField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtIntegerField;
 
 /**
@@ -15,8 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtInte
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetIntegerFieldGwt extends
-    AbstractUiWidgetTextualInputField<UiWidgetAdapterGwtIntegerField, Integer, Integer> implements UiWidgetIntegerField {
+public class UiWidgetIntegerFieldGwt extends AbstractUiWidgetIntegerField<UiWidgetAdapterGwtIntegerField> {
 
   /**
    * The constructor.

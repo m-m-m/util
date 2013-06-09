@@ -30,7 +30,7 @@ public class TransferObjectUtilLimitedImpl extends AbstractTransferObjectUtilLim
 
     NlsNullPointerException.checkNotNull(AbstractTransferObject.class.getSimpleName(), template);
     TO copy = newInstance(template);
-    copyProperties(template, copy, true);
+    copyProperties(template, copy);
     return copy;
   }
 

@@ -28,10 +28,11 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustomFieldAtomic(UiContext context, DELEGATE delegate) {
+  public UiWidgetCustomFieldAtomic(UiContext context, DELEGATE delegate, Class<VALUE> valueClass) {
 
-    super(context, delegate);
+    super(context, delegate, valueClass);
     delegate.addEventHandler(getEventHandlerAdapter());
   }
 

@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-
 /**
  * This interface only exists for documentation purpose!<br/>
  * <em>API</em> is a shortcut for <em>Application Programming Interface</em> and identifies all types required
@@ -59,10 +58,11 @@ public interface Api {
    * project, we provide abstract base implementations in the <code>base</code> packages that are located as
    * siblings of the <code>api</code> packages. Typically that {@link Class} is named like the interface with
    * the prefix <code>Abstract</code>. You are strongly encouraged to extend these base implementations rather
-   * than directly implementing the interface to gain compatibility if case of an extension. The latter is
+   * than directly implementing the interface to gain compatibility in case of an extension. The latter is
    * still allowed but you have to be aware of the consequences that you may have to fix compile errors after
    * upgrading and your code may NOT work across different releases.<br/>
    * <b>NOTE:</b><br/>
+   * With Java8 default methods can be added to interfaces. This reduces the problem but may not eliminate it.
    * This constant is only for documentation purpose. Please never use it in your code.
    */
   String EXTENDABLE_INTERFACE = null;

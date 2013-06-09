@@ -35,6 +35,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   /** @see #getDelegate() */
   private final DELEGATE delegate;
 
+  /** @see #getValueClass() */
+  private final Class<VALUE> valueClass;
+
   /** @see #initialize() */
   private boolean initialized;
 
@@ -43,24 +46,22 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustom(UiContext context, DELEGATE delegate) {
+  public UiWidgetCustom(UiContext context, DELEGATE delegate, Class<VALUE> valueClass) {
 
     super(context);
     this.delegate = delegate;
+    this.valueClass = valueClass;
   }
 
   /**
-   * {@inheritDoc}
+   * @return the valueClass
    */
   @Override
-  @SuppressWarnings("unchecked")
-  protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
+  public Class<VALUE> getValueClass() {
 
-    // TODO: this may be totally wrong and could lead to ClassCastException, even though it is a good default
-    // implementation for most cases
-    VALUE value = ((AbstractUiWidget<VALUE>) this.delegate).getValueDirect(template, state);
-    return value;
+    return this.valueClass;
   }
 
   /**
@@ -72,12 +73,6 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
     super.clearMessages();
     this.delegate.clearMessages();
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected abstract void doSetValue(VALUE value, boolean forUser);
 
   /**
    * This method gets the underlying {@link net.sf.mmm.client.ui.api.widget.UiWidget widget} that is adapted
@@ -474,19 +469,11 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  protected void doValidate(ValidationState state, VALUE value) {
+  protected boolean doValidate(ValidationState state, VALUE value) {
 
-    super.doValidate(state, value);
-    this.delegate.validate(state);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected String getSource() {
-
-    return getId();
+    boolean success = super.doValidate(state, value);
+    boolean delegateSuccess = this.delegate.validate(state);
+    return (success && delegateSuccess);
   }
 
 }

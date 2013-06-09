@@ -14,8 +14,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderLimited;
+import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.AbstractPojoPropertyAccessorGetMethod;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.AbstractPojoPropertyAccessorSetMethod;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
@@ -63,7 +63,7 @@ public class PojoDescriptorGenerator extends AbstractIncrementalGenerator {
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
     sourceComposerFactory.addImport(TypedProperty.class.getName());
-    sourceComposerFactory.addImport(PojoDescriptorImpl.class.getName());
+    sourceComposerFactory.addImport(AbstractPojoDescriptorImpl.class.getName());
     sourceComposerFactory.addImport(SimpleGenericTypeLimited.class.getName());
     sourceComposerFactory.addImport(AbstractPojoDescriptorBuilderLimited.class.getName());
     sourceComposerFactory.addImport(AbstractPojoPropertyAccessorGetMethod.class.getName());
@@ -77,7 +77,7 @@ public class PojoDescriptorGenerator extends AbstractIncrementalGenerator {
   protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
 
-    sourceComposerFactory.setSuperclass(PojoDescriptorImpl.class.getSimpleName());
+    sourceComposerFactory.setSuperclass(AbstractPojoDescriptorImpl.class.getSimpleName());
   }
 
   /**
@@ -93,9 +93,30 @@ public class PojoDescriptorGenerator extends AbstractIncrementalGenerator {
     // generate Constructor
     generateConstructor(sourceWriter, simpleName, inputType, propertyDescriptors);
 
-    // generate "getPropertyValidator" method
-    // generateMethodGetPropertyValidator(inputType, sourceWriter, propertyDescriptors);
+    // generate "newInstance" method
+    generateMethodNewInstance(inputType, sourceWriter, propertyDescriptors);
 
+  }
+
+  /**
+   * Generates the method {@link AbstractPojoDescriptorImpl#newInstance()}.
+   * 
+   * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
+   *        {@link GWT#create(Class)}.
+   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
+   *        source code to.
+   * @param propertyDescriptors is the {@link Collection} with the {@link PojoPropertyDescriptor}s.
+   */
+  private void generateMethodNewInstance(JClassType inputType, SourceWriter sourceWriter,
+      Collection<? extends PojoPropertyDescriptor> propertyDescriptors) {
+
+    generateSourcePublicMethodDeclaration(sourceWriter, inputType.getQualifiedSourceName(), "newInstance", "", false);
+
+    sourceWriter.print("return new ");
+    sourceWriter.print(inputType.getQualifiedSourceName());
+    sourceWriter.println("();");
+
+    generateSourceCloseBlock(sourceWriter);
   }
 
   /**
@@ -111,7 +132,7 @@ public class PojoDescriptorGenerator extends AbstractIncrementalGenerator {
   private void generateConstructor(SourceWriter sourceWriter, String simpleName, JClassType inputType,
       Collection<? extends PojoPropertyDescriptor> propertyDescriptors) {
 
-    generateSourcePublicMethodBlock(sourceWriter, simpleName);
+    generateSourcePublicConstructorDeclaration(sourceWriter, simpleName);
     sourceWriter.print("super(new ");
     sourceWriter.print(SimpleGenericTypeLimited.class.getSimpleName());
     sourceWriter.print("(");

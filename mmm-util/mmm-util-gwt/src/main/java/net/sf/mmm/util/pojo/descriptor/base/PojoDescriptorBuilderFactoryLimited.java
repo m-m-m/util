@@ -21,6 +21,7 @@ public class PojoDescriptorBuilderFactoryLimited extends AbstractPojoDescriptorB
   public PojoDescriptorBuilderFactoryLimited() {
 
     super();
+    setInstance(this);
   }
 
   /**

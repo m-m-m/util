@@ -35,6 +35,15 @@ public abstract class AbstractUiWidgetTextAreaBase<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
+  protected Class<String> getValueClass() {
+
+    return String.class;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);

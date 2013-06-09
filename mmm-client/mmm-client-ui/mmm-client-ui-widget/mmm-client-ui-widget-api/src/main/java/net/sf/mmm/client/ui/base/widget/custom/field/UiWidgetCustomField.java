@@ -42,10 +42,11 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
    * 
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
+   * @param valueClass is the {@link #getValueClass() value class}.
    */
-  public UiWidgetCustomField(UiContext context, DELEGATE delegate) {
+  public UiWidgetCustomField(UiContext context, DELEGATE delegate, Class<VALUE> valueClass) {
 
-    super(context, delegate);
+    super(context, delegate, valueClass);
     this.eventHandlerAdapter = new EventHandlerAdapter();
   }
 
@@ -72,14 +73,14 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
    * {@inheritDoc}
    */
   @Override
-  protected String getSource() {
+  public String toString() {
 
-    String source = getFieldLabel();
-    if (source == null) {
-      source = super.getSource();
-      // source may still be null but no useful fallback available...
+    String fieldLabel = getFieldLabel();
+    if (fieldLabel == null) {
+      return super.toString();
+    } else {
+      return super.toString() + ":" + fieldLabel;
     }
-    return source;
   }
 
   /**
