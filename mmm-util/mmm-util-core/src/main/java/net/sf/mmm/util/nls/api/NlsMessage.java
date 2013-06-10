@@ -301,7 +301,7 @@ public interface NlsMessage extends NlsObject {
    * This method gets the language independent argument for the given <code>key</code>.
    * 
    * @param key is the name of the requested argument.
-   * @return the argument for the given key.
+   * @return the argument for the given key or <code>null</code> if NOT defined.
    */
   Object getArgument(String key);
 

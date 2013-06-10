@@ -58,6 +58,17 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
    * {@inheritDoc}
    */
   @Override
+  public NlsMessage createDirect(String bundleName, String key, Map<String, Object> messageArguments) {
+
+    NlsTemplate template = null;
+    // template = new NlsTemplateImplWithMessage(bundleName, key, key);
+    return create(template, messageArguments);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void doInitialize() {
 
     super.doInitialize();

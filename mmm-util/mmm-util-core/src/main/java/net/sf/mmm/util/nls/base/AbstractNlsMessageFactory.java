@@ -31,6 +31,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(String internationalizedMessage, Object... messageArguments) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
@@ -44,6 +45,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(NlsTemplate template, Object... messageArguments) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
@@ -58,6 +60,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
    * {@inheritDoc}
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
+  @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
       String key3, Object argument3, String key4, Object argument4) {
 
@@ -74,6 +77,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
       String key3, Object argument3) {
 
@@ -87,6 +91,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
@@ -98,6 +103,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
@@ -109,6 +115,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
    * {@inheritDoc}
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
+  @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
       Object argument2, String key3, Object argument3, String key4, Object argument4) {
 
@@ -125,6 +132,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
       Object argument2, String key3, Object argument3) {
 
@@ -138,6 +146,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2, Object argument2) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
@@ -149,6 +158,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1) {
 
     Map<String, Object> arguments = new HashMap<String, Object>();
@@ -159,6 +169,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(NlsTemplate template) {
 
     return create(template, ReflectionUtilLimited.NO_ARGUMENTS);
@@ -167,9 +178,19 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   /**
    * {@inheritDoc}
    */
+  @Override
   public NlsMessage create(String internationalizedMessage) {
 
     return create(internationalizedMessage, Collections.<String, Object> emptyMap());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public NlsMessage createDirect(String bundleName, String key) {
+
+    return createDirect(bundleName, key, Collections.<String, Object> emptyMap());
   }
 
 }

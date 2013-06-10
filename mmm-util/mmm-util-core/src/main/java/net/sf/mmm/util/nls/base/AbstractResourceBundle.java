@@ -15,7 +15,7 @@ import java.util.Set;
  * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. <br/>
  * <b>ATTENTION:</b><br/>
  * The preferred approach to define messages for the root locale is via
- * {@link net.sf.mmm.util.nls.api.NlsAccess} instead of using this class.<br/>
+ * {@link net.sf.mmm.util.nls.api.NlsBundle} instead of using this class.<br/>
  * <br/>
  * Create your {@link ResourceBundle}s by sub-classing this class and simply define some public static final
  * fields that will be automatically added to the bundle using reflection (only from constructor).<br/>

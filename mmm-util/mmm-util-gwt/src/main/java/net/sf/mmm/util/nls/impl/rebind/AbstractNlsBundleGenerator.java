@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.nls.base.NlsMessagePlain;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -57,6 +58,7 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
     sourceComposerFactory.addImport(HashMap.class.getName());
     sourceComposerFactory.addImport(NlsBundle.class.getName());
     sourceComposerFactory.addImport(NlsMessage.class.getName());
+    sourceComposerFactory.addImport(NlsMessagePlain.class.getName());
     sourceComposerFactory.addImport(NlsAccess.class.getName());
   }
 
@@ -142,37 +144,49 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
   protected void generateMethodBody(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
       JMethod method) {
 
-    sourceWriter.print("Map<String, Object> ");
-    sourceWriter.print(VARIABLE_ARGUMENTS);
-    sourceWriter.println(" = new HashMap<String, Object>();");
+    JParameter[] methodParameters = method.getParameters();
+    if (methodParameters.length > 0) {
 
-    // loop over parameters and generate code that puts the parameters into the arguments map
-    for (JParameter parameter : method.getParameters()) {
-      String name;
-      Named namedAnnotation = parameter.getAnnotation(Named.class);
-      if (namedAnnotation == null) {
-        name = parameter.getName();
-      } else {
-        name = namedAnnotation.value();
-      }
+      sourceWriter.print("Map<String, Object> ");
       sourceWriter.print(VARIABLE_ARGUMENTS);
-      sourceWriter.print(".put(\"");
-      sourceWriter.print(escape(name));
-      sourceWriter.print("\", ");
-      sourceWriter.print(parameter.getName());
-      sourceWriter.println(");");
+      sourceWriter.println(" = new HashMap<String, Object>();");
+
+      // loop over parameters and generate code that puts the parameters into the arguments map
+      for (JParameter parameter : methodParameters) {
+        String name;
+        Named namedAnnotation = parameter.getAnnotation(Named.class);
+        if (namedAnnotation == null) {
+          name = parameter.getName();
+        } else {
+          name = namedAnnotation.value();
+        }
+        sourceWriter.print(VARIABLE_ARGUMENTS);
+        sourceWriter.print(".put(\"");
+        sourceWriter.print(escape(name));
+        sourceWriter.print("\", ");
+        sourceWriter.print(parameter.getName());
+        sourceWriter.println(");");
+      }
     }
 
     generateMethodMessageBlock(sourceWriter, logger, context, method);
 
     // return NlsAccess.getFactory().create(message, arguments);
-    sourceWriter.print("return ");
-    sourceWriter.print(NlsAccess.class.getSimpleName());
-    sourceWriter.print(".getFactory().create(");
-    sourceWriter.print(VARIABLE_MESSAGE);
-    sourceWriter.print(", ");
-    sourceWriter.print(VARIABLE_ARGUMENTS);
-    sourceWriter.println(");");
+    if (methodParameters.length > 0) {
+      sourceWriter.print("return ");
+      sourceWriter.print(NlsAccess.class.getSimpleName());
+      sourceWriter.print(".getFactory().create(");
+      sourceWriter.print(VARIABLE_MESSAGE);
+      sourceWriter.print(", ");
+      sourceWriter.print(VARIABLE_ARGUMENTS);
+      sourceWriter.println(");");
+    } else {
+      sourceWriter.print("return new ");
+      sourceWriter.print(NlsMessagePlain.class.getSimpleName());
+      sourceWriter.print("(");
+      sourceWriter.print(VARIABLE_MESSAGE);
+      sourceWriter.println(");");
+    }
   }
 
   /**

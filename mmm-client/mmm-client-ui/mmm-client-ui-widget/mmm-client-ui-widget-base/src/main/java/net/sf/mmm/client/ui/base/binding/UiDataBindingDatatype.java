@@ -43,14 +43,4 @@ public class UiDataBindingDatatype<VALUE> extends AbstractUiDataBinding<VALUE> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isModified() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
 }

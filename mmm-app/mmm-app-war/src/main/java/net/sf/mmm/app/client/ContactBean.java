@@ -4,6 +4,7 @@ package net.sf.mmm.app.client;
 
 import java.util.Date;
 
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.transferobject.api.TransferObject;
 
 /**
@@ -13,10 +14,26 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
  */
 public class ContactBean implements TransferObject {
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 985011128511803342L;
+
+  /** {@link TypedProperty} for {@link #getFirstName()}. */
+  public static final TypedProperty<String> PROPERTY_FIRST_NAME = new TypedProperty<String>("First Name", String.class,
+      "firstName");
+
+  /** {@link TypedProperty} for {@link #getLastName()}. */
+  public static final TypedProperty<String> PROPERTY_LAST_NAME = new TypedProperty<String>("lastName");
+
+  /** {@link TypedProperty} for {@link #getBirthday()}. */
+  public static final TypedProperty<String> PROPERTY_BIRTHDAY = new TypedProperty<String>("birthday");
+
+  /** @see #getFirstName() */
   private String firstName;
 
+  /** @see #getLastName() */
   private String lastName;
 
+  /** @see #getBirthday() */
   private Date birthday;
 
   /**

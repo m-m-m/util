@@ -3,9 +3,6 @@
 package net.sf.mmm.client.ui.base.binding;
 
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for any
@@ -18,27 +15,27 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
  */
 public class UiDataBindingPojo<VALUE> extends AbstractUiDataBinding<VALUE> {
 
-  private final PojoDescriptor<VALUE> descriptor;
+  /** @see #getAdapter() */
+  private final UiDataBindingAdapter<VALUE> adapter;
 
   /**
    * The constructor.
    * 
-   * @param widget
+   * @param widget is the {@link #getWidget() widget} to bind.
+   * @param adapter is the {@link UiDataBindingAdapter}.
    */
-  public UiDataBindingPojo(AbstractUiWidget<VALUE> widget) {
+  public UiDataBindingPojo(AbstractUiWidget<VALUE> widget, UiDataBindingAdapter<VALUE> adapter) {
 
     super(widget);
-    PojoDescriptorBuilderFactory factory = widget.getContext().getContainer().get(PojoDescriptorBuilderFactory.class);
-    PojoDescriptorBuilder descriptorBuilder = factory.createPublicMethodDescriptorBuilder();
-    this.descriptor = descriptorBuilder.getDescriptor(AbstractUiWidget.AccessHelper.getValueClass(widget));
+    this.adapter = adapter;
   }
 
   /**
-   * @return the descriptor
+   * @return the {@link UiDataBindingAdapter}.
    */
-  public PojoDescriptor<VALUE> getDescriptor() {
+  public UiDataBindingAdapter<VALUE> getAdapter() {
 
-    return this.descriptor;
+    return this.adapter;
   }
 
   /**
@@ -47,9 +44,7 @@ public class UiDataBindingPojo<VALUE> extends AbstractUiDataBinding<VALUE> {
   @Override
   protected VALUE createNewValue() {
 
-    // TODO
-    // return this.valueDescriptor.newInstance();
-    return null;
+    return this.adapter.createNewValue();
   }
 
   /**
@@ -58,22 +53,7 @@ public class UiDataBindingPojo<VALUE> extends AbstractUiDataBinding<VALUE> {
   @Override
   protected VALUE createCopyOfValue(VALUE value) {
 
-    return null;
+    return this.adapter.copy(value);
   }
-
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // protected VALUE createCopyOfValue(VALUE value) {
-  //
-  // if (value instanceof AbstractTransferObject) {
-  // AbstractTransferObject to = (AbstractTransferObject) value;
-  // TransferObjectUtilLimited transferObjectUtil =
-  // this.context.getContainer().get(TransferObjectUtilLimited.class);
-  // return (VALUE) transferObjectUtil.copy(to);
-  // }
-  // return super.createCopyOfValue(value);
-  // }
 
 }

@@ -59,6 +59,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String translate(Locale locale) {
 
     try {

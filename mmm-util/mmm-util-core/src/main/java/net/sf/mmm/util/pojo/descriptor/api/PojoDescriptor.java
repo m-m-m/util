@@ -9,6 +9,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeType;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.ReflectionException;
+import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
@@ -160,6 +161,26 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    *         <code>null</code> if no such property exists for the according {@link #getPojoClass() pojo}.
    */
   PojoPropertyDescriptor getPropertyDescriptor(String propertyName);
+
+  /**
+   * This method gets the {@link PojoPropertyDescriptor descriptor} for the given <code>property</code>.
+   * 
+   * @param property is the {@link TypedProperty}.
+   * @return the descriptor for the property identified by the given <code>property</code>.
+   * @throws PojoPropertyNotFoundException if the specified <code>property</code> was NOT found.
+   */
+  PojoPropertyDescriptor getPropertyDescriptor(TypedProperty<?> property) throws PojoPropertyNotFoundException;
+
+  /**
+   * Determines the {@link PojoPropertyDescriptor#getValidator() validator} for the given
+   * <code>property</code>.
+   * 
+   * @param <V> is the generic {@link TypedProperty#getPropertyType() property type}.
+   * 
+   * @param property is the {@link TypedProperty}.
+   * @return the {@link PojoPropertyDescriptor#getValidator() validator} for the given <code>property</code>.
+   */
+  <V> ValueValidator<V> getPropertyValidator(TypedProperty<V> property);
 
   /**
    * This method gets the {@link PojoPropertyDescriptor descriptor}s of all properties of the according

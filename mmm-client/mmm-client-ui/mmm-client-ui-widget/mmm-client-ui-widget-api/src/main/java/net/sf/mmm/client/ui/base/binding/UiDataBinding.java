@@ -43,6 +43,27 @@ import net.sf.mmm.util.validation.api.ValidationState;
 public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>, AttributeWriteModified {
 
   /**
+   * This is the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} of the bundle
+   * holding the localized labels for the {@link TypedProperty#getTitle() property titles}.<br/>
+   * For your application in the classpath at <code>net/sf/mmm/client/ui/</code> you need to define
+   * <code>PropertyLabels.properties</code> and according localized variants (e.g.
+   * <code>PropertyLabels_de.properties</code> for German labels). Now if you have a business object defining
+   * e.g.
+   * 
+   * <pre>public static final {@link TypedProperty}{@literal <FooType>} PROPERTY_FOO = new {@link TypedProperty}{@literal <>}("foo");</pre>
+   * 
+   * you can map the label by adding <code>foo=Label of Foo</code> to the properties file.<br/>
+   * Now if you refactor your code so the property <code>foo</code> gets renamed to <code>bar</code> and you
+   * want to keep your NLS/I18N properties stable, you can change your declaration to
+   * 
+   * <pre>public static final {@link TypedProperty}{@literal <FooType>} PROPERTY_FOO = new {@link TypedProperty
+   * }{@literal <>}("foo", FooType.class, "bar");</pre>
+   * 
+   * And maybe also rename it to <code>PROPERTY_BAR</code> instead.
+   */
+  String BUNDLE_PROPERTY_LABELS = "net.sf.mmm.client.ui.PropertyLabels";
+
+  /**
    * This method binds the given widget to the given property. This will have to following effects:
    * <ul>
    * <li>{@link #getValueDirect(Object, net.sf.mmm.util.validation.api.ValidationState)} and therefore all
@@ -71,7 +92,7 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * <ul>
    * <li>A new widget is created according to the {@link TypedProperty#getPropertyType() property type}.</li>
    * <li>The label is automatically derived from the property including localization. Therefore you need to
-   * define resource bundles (net/sf/mmm/client/ui/NlsBundleProperties.properties) mapping the
+   * define resource bundles (see {@link #BUNDLE_PROPERTY_LABELS}) mapping the
    * {@link TypedProperty#getTitle() title} of the property to the localized display label.</li>
    * <li>A {@link net.sf.mmm.util.validation.api.ValueValidator} is
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getValidator() automatically created

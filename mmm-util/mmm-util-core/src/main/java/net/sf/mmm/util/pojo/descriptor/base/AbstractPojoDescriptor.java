@@ -8,11 +8,13 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
@@ -20,6 +22,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionException;
+import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is the abstract base implementation of the {@link PojoDescriptor} interface.
@@ -161,6 +164,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
       ReflectionException {
 
     NlsNullPointerException.checkNotNull("pojo", pojo);
+    NlsNullPointerException.checkNotNull(TypedProperty.class, property);
     String parentPath = property.getParentPath();
     if (parentPath != null) {
       Object currentPojo = getProperty(pojo, parentPath, true);
@@ -261,6 +265,48 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   public Object setPropertyItem(POJO pojo, String propertyName, int index, Object item) {
 
     return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(pojo, index, item);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public PojoPropertyDescriptor getPropertyDescriptor(TypedProperty<?> property) {
+
+    NlsNullPointerException.checkNotNull(TypedProperty.class, property);
+    PojoDescriptor<?> descriptor = this;
+    String parentPath = property.getParentPath();
+    if (parentPath != null) {
+      String[] segments = parentPath.split("\\.");
+      for (int i = 0; i < segments.length; i++) {
+        PojoPropertyDescriptor propertyDescriptor = descriptor.getPropertyDescriptor(segments[i]);
+        PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
+        if (getter == null) {
+          StringBuilder currentPath = new StringBuilder(segments[0]);
+          for (int j = 1; j <= i; j++) {
+            currentPath.append('.');
+            currentPath.append(segments[j]);
+          }
+          throw new PojoPropertyNotFoundException(getPojoClass(), currentPath.toString());
+        }
+        descriptor = this.pojoDescriptorBuilder.getDescriptor(getter.getPropertyType());
+      }
+    }
+    PojoPropertyDescriptor propertyDescriptor = descriptor.getPropertyDescriptor(property.getSegment());
+    if (propertyDescriptor == null) {
+      throw new PojoPropertyNotFoundException(getPojoClass(), property.getPojoPath());
+    }
+    return propertyDescriptor;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <V> ValueValidator<V> getPropertyValidator(TypedProperty<V> property) {
+
+    PojoPropertyDescriptor propertyDescriptor = getPropertyDescriptor(property);
+    return (ValueValidator<V>) propertyDescriptor.getValidator();
   }
 
   /**

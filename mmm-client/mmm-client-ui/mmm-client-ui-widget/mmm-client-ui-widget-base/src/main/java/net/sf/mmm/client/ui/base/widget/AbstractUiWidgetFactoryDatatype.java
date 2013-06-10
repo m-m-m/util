@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
@@ -75,6 +77,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     register(new UiSingleWidgetFactoryDatatypeLong());
     register(new UiSingleWidgetFactoryDatatypeDouble());
     register(new UiSingleWidgetFactoryDatatypeBoolean());
+    register(new UiSingleWidgetFactoryDatatypeDate());
   }
 
   /**
@@ -214,6 +217,31 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
       radioButtons.setFormatter(BooleanFormatter.getInstance());
       radioButtons.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
       return radioButtons;
+    }
+  }
+
+  /**
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link Long}.
+   */
+  public static class UiSingleWidgetFactoryDatatypeDate extends AbstractUiSingleWidgetFactoryDatatype<Date> {
+
+    /**
+     * The constructor.
+     */
+    public UiSingleWidgetFactoryDatatypeDate() {
+
+      super(Date.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiWidgetField<Date> create(UiContext context) {
+
+      UiWidgetDateField widget = context.getWidgetFactory().create(UiWidgetDateField.class);
+      return widget;
     }
   }
 

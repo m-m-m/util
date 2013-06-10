@@ -6,6 +6,7 @@ import java.util.Date;
 
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 
 /**
  * This is the (default) implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBindingFactory}.
@@ -13,7 +14,7 @@ import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
+public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory implements DatatypeDetector {
 
   /**
    * The constructor.
@@ -23,7 +24,11 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
     super();
   }
 
-  protected boolean isDatatype(Class<?> type) {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isDatatype(Class<?> type) {
 
     if (type == String.class) {
       return true;
@@ -75,10 +80,13 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
     if (isDatatype(valueType)) {
       return new UiDataBindingDatatype<VALUE>(widget);
     }
+    PojoDescriptorBuilderFactory descriptorBuilderFactory = widget.getContext().getContainer()
+        .get(PojoDescriptorBuilderFactory.class);
+    UiDataBindingAdapter<VALUE> adapter = new UiDataBindingAdapterImpl<VALUE>(valueType, descriptorBuilderFactory, this);
     if (widget instanceof UiWidgetCustomComposite) {
-      return new UiDataBindingPojoComposite<VALUE>(widget);
+      return new UiDataBindingPojoComposite<VALUE>(widget, adapter);
     } else {
-      return new UiDataBindingPojo<VALUE>(widget);
+      return new UiDataBindingPojo<VALUE>(widget, adapter);
     }
   }
 
