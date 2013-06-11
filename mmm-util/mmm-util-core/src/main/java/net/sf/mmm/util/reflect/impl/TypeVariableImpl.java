@@ -3,7 +3,6 @@
 package net.sf.mmm.util.reflect.impl;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Type;
@@ -75,7 +74,8 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @Override
+  @SuppressWarnings("javadoc")
+  // Java8 support
   public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
 
     return null;
@@ -84,7 +84,8 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @Override
+  @SuppressWarnings("javadoc")
+  // Java8 support
   public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
 
     return (T[]) Array.newInstance(annotationClass, 0);
@@ -93,7 +94,8 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @Override
+  @SuppressWarnings("javadoc")
+  // Java8 support
   public Annotation[] getAnnotations() {
 
     // return ReflectionUtil.NO_ANNOTATIONS;
@@ -103,7 +105,8 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @Override
+  @SuppressWarnings("javadoc")
+  // Java8 support
   public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
 
     return null;
@@ -112,7 +115,8 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @Override
+  @SuppressWarnings("javadoc")
+  // Java8 support
   public <T extends Annotation> T[] getDeclaredAnnotationsByType(Class<T> annotationClass) {
 
     return (T[]) Array.newInstance(annotationClass, 0);
@@ -121,21 +125,23 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @Override
+  @SuppressWarnings("javadoc")
+  // Java8 support
   public Annotation[] getDeclaredAnnotations() {
 
     return getAnnotations();
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public AnnotatedType[] getAnnotatedBounds() {
-
-    // TODO hohwille actually incorrect...
-    return new AnnotatedType[0];
-  }
+  // TODO: Java8 support
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public AnnotatedType[] getAnnotatedBounds() {
+  //
+  // // TODO hohwille actually incorrect...
+  // return new AnnotatedType[0];
+  // }
 
   /**
    * {@inheritDoc}

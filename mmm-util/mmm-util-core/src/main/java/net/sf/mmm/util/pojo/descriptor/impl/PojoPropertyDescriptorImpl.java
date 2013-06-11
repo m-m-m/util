@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
 import net.sf.mmm.util.validation.api.ValueValidator;
-import net.sf.mmm.util.validation.base.ValidatorNone;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor}
@@ -27,6 +27,9 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
 
   /** @see #getAccessors() */
   private final Collection<? extends PojoPropertyAccessor> accessors;
+
+  /** @see #getValidator() */
+  private ValueValidator<?> validator;
 
   /**
    * The constructor.
@@ -74,7 +77,19 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
   @Override
   public ValueValidator<?> getValidator() {
 
-    return ValidatorNone.getInstance();
+    return this.validator;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValidator(ValueValidator<?> validator) {
+
+    if ((this.validator != null) && (this.validator != validator)) {
+      throw new DuplicateObjectException(validator, "validator", this.validator);
+    }
+    this.validator = validator;
   }
 
 }

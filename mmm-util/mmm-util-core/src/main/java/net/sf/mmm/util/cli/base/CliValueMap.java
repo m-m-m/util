@@ -105,13 +105,13 @@ public class CliValueMap {
    * @param state is the {@link AbstractCliParser#getState() state-object} where to apply the values of this
    *        {@link CliValueMap}.
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public void assign(Object state) {
 
     for (CliParameterContainer parameter : this.map.keySet()) {
       CliValueContainer valueContainer = this.map.get(parameter);
       Object value = valueContainer.getValue();
-      ValueValidator<Object> validator = ((AbstractCliValueContainer) valueContainer).getParameterContainer()
-          .getValidator();
+      ValueValidator validator = ((AbstractCliValueContainer) valueContainer).getParameterContainer().getValidator();
       if (validator != null) {
         validator.validate(value);
       }

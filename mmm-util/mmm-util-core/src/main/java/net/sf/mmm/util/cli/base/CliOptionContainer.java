@@ -31,7 +31,7 @@ public class CliOptionContainer extends CliParameterContainer {
    * @param validator is the {@link #getValidator() validator}.
    */
   public CliOptionContainer(CliOption option, PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter,
-      ValueValidator<Object> validator) {
+      ValueValidator<?> validator) {
 
     super(setter, getter, validator);
     this.option = option;

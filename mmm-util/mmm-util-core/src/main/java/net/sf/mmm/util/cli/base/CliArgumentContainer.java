@@ -35,7 +35,7 @@ public class CliArgumentContainer extends CliParameterContainer {
    * @param validator is the {@link #getValidator() validator}.
    */
   public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter, ValueValidator<Object> validator) {
+      PojoPropertyAccessorNonArg getter, ValueValidator<?> validator) {
 
     super(setter, getter, validator);
     this.argument = argument;

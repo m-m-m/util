@@ -268,7 +268,7 @@ public class CliState extends CliClassContainer {
           PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
           // Annotation constraint = findConstraintAnnotation(setter);
           // JSR 303 ?
-          ValueValidator<Object> validator = null;
+          ValueValidator<?> validator = propertyDescriptor.getValidator();
           if (option != null) {
             CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter, validator);
             addOption(optionContainer);

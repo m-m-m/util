@@ -17,6 +17,7 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependenciesImpl;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
+import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorValidatorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorAddBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorGetBuilder;
@@ -43,6 +44,9 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
 
   /** @see #getDescriptorEnhancer() */
   private PojoDescriptorEnhancer descriptorEnhancer;
+
+  /** @see #getDescriptorEnhancer() */
+  private PojoDescriptorValidatorBuilder descriptorValidatorBuilder;
 
   /**
    * The constructor.
@@ -73,10 +77,15 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
       this.accessorBuilders = Collections.unmodifiableCollection(this.accessorBuilders);
     }
     if (this.descriptorEnhancer == null) {
-      DefaultPojoDescriptorEnhancer enhancer = new DefaultPojoDescriptorEnhancer();
-      enhancer.setDependencies(this);
-      enhancer.initialize();
-      this.descriptorEnhancer = enhancer;
+      DefaultPojoDescriptorEnhancer impl = new DefaultPojoDescriptorEnhancer();
+      impl.setDependencies(this);
+      impl.initialize();
+      this.descriptorEnhancer = impl;
+    }
+    if (this.descriptorValidatorBuilder == null) {
+      PojoDescriptorValidatorBuilderImpl impl = new PojoDescriptorValidatorBuilderImpl();
+      impl.initialize();
+      this.descriptorValidatorBuilder = impl;
     }
   }
 
@@ -117,9 +126,7 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
   }
 
   /**
-   * This method gets the {@link PojoDescriptorEnhancer} to use.
-   * 
-   * @return the {@link PojoDescriptorEnhancer}.
+   * @return the {@link PojoDescriptorEnhancer} instance to use.
    */
   public PojoDescriptorEnhancer getDescriptorEnhancer() {
 
@@ -127,15 +134,31 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
   }
 
   /**
-   * This method sets the {@link #getDescriptorEnhancer() descriptor-enhancer}.
-   * 
-   * @param descriptorEnhancer is the {@link PojoDescriptorEnhancer} to set.
+   * @param descriptorEnhancer is the {@link PojoDescriptorEnhancer} to {@link Inject inject}.
    */
   @Inject
   public void setDescriptorEnhancer(PojoDescriptorEnhancer descriptorEnhancer) {
 
     getInitializationState().requireNotInitilized();
     this.descriptorEnhancer = descriptorEnhancer;
+  }
+
+  /**
+   * @return the {@link PojoDescriptorValidatorBuilder} instance to use.
+   */
+  public PojoDescriptorValidatorBuilder getDescriptorValidatorBuilder() {
+
+    return this.descriptorValidatorBuilder;
+  }
+
+  /**
+   * @param descriptorValidatorBuilder is the {@link PojoDescriptorValidatorBuilder} to {@link Inject inject}.
+   */
+  @Inject
+  public void setDescriptorValidatorBuilder(PojoDescriptorValidatorBuilder descriptorValidatorBuilder) {
+
+    getInitializationState().requireNotInitilized();
+    this.descriptorValidatorBuilder = descriptorValidatorBuilder;
   }
 
 }

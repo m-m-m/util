@@ -35,7 +35,7 @@ public abstract class CliParameterContainer {
   private final PojoPropertyAccessorNonArg getter;
 
   /** @see #getValidator() */
-  private final ValueValidator<Object> validator;
+  private final ValueValidator<?> validator;
 
   /**
    * The constructor.
@@ -45,7 +45,7 @@ public abstract class CliParameterContainer {
    * @param validator is the {@link #getValidator() validator}.
    */
   public CliParameterContainer(PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter,
-      ValueValidator<Object> validator) {
+      ValueValidator<?> validator) {
 
     super();
     assert (setter.getMode() == PojoPropertyAccessorOneArgMode.SET);
@@ -98,7 +98,7 @@ public abstract class CliParameterContainer {
    * 
    * @return the validator.
    */
-  public ValueValidator<Object> getValidator() {
+  public ValueValidator<?> getValidator() {
 
     return this.validator;
   }

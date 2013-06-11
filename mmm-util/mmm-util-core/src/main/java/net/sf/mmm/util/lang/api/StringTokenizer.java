@@ -3,7 +3,6 @@
 package net.sf.mmm.util.lang.api;
 
 import java.util.Iterator;
-import java.util.function.Consumer;
 
 import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
@@ -305,15 +304,15 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
     return next();
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void forEach(Consumer<? super String> action) {
-
-    // TODO hohwille temporary workaround for bug in Eclipse/Kepler...
-    super.forEach(action);
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public void forEach(Consumer<? super String> action) {
+  //
+  // // TODO hohwille temporary workaround for bug in Eclipse/Kepler...
+  // super.forEach(action);
+  // }
 
   /**
    * {@inheritDoc}

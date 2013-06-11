@@ -15,14 +15,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoFieldIntrospector;
-import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder;
@@ -37,7 +35,6 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@Singleton
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /** @see #getDependencies() */
@@ -131,7 +128,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * 
    * @param introspector the introspector to set.
    */
-  @Inject
   public void setFieldIntrospector(PojoFieldIntrospector introspector) {
 
     getInitializationState().requireNotInitilized();
@@ -148,16 +144,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   protected Collection<PojoPropertyAccessorBuilder<?>> getAccessorBuilders() {
 
     return this.configuration.getAccessorBuilders();
-  }
-
-  /**
-   * This method gets the {@link PojoDescriptorEnhancer} to use.
-   * 
-   * @return the {@link PojoDescriptorEnhancer}.
-   */
-  public PojoDescriptorEnhancer getDescriptorEnhancer() {
-
-    return this.configuration.getDescriptorEnhancer();
   }
 
   /**
@@ -294,7 +280,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         }
       });
     }
-    getDescriptorEnhancer().enhanceDescriptor(descriptor);
+    this.configuration.getDescriptorEnhancer().enhanceDescriptor(descriptor);
+    // TODO hohwille lazy initialize validator...?!?
+    this.configuration.getDescriptorValidatorBuilder().buildValidator(descriptor);
     return descriptor;
   }
 

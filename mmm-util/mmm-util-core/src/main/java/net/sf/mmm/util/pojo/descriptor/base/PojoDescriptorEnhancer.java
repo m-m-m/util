@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
+import net.sf.mmm.util.component.api.ComponentSpecification;
+
 /**
  * This is the interface for a generic enhancer of a
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
@@ -11,6 +13,7 @@ package net.sf.mmm.util.pojo.descriptor.base;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
+@ComponentSpecification
 public interface PojoDescriptorEnhancer {
 
   /**

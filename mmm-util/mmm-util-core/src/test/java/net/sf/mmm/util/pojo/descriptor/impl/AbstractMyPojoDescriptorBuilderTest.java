@@ -15,6 +15,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
+import net.sf.mmm.util.pojo.descriptor.impl.dummy.AbstractPojo;
+import net.sf.mmm.util.pojo.descriptor.impl.dummy.GenericPojo;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.GenericType;
 
@@ -67,13 +69,19 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     pojoDescriptor.setProperty(pojoInstance, "name", name);
     String retrievedName = (String) pojoDescriptor.getProperty(pojoInstance, "name");
     assertEquals(name, retrievedName);
+
     // test property "port"
-    // checkProperty(pojoDescriptor, "port", Integer.class, int.class);
     Integer port = Integer.valueOf(4242);
     assertNull(pojoDescriptor.getProperty(pojoInstance, "port"));
     pojoDescriptor.setProperty(pojoInstance, "port", port);
     Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, "port");
     assertEquals(port, retrievedPort);
+    // test using TypedProperty
+    port = Integer.valueOf(42);
+    pojoDescriptor.setProperty(pojoInstance, MyPojo.PROPERTY_PORT, port);
+    retrievedPort = pojoDescriptor.getProperty(pojoInstance, MyPojo.PROPERTY_PORT);
+    assertEquals(port, retrievedPort);
+
     // test property "flag"
     boolean flag = true;
     assertNull(pojoDescriptor.getProperty(pojoInstance, "flag"));
@@ -127,6 +135,15 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
         assertSame(secret, pojoDescriptor.getProperty(pojoInstance, "renamedProperty"));
       }
     }
+
+    // test indirect property access
+    Long genericPojoValue = Long.valueOf(1234);
+    Long genericPojoResult = pojoDescriptor.getProperty(pojoInstance, MyPojo.PROPERTY_GENERICPOJO_ELEMENT);
+    assertNull(genericPojoResult);
+    pojoInstance.setGenericPojo(new GenericPojo<Long>());
+    pojoDescriptor.setProperty(pojoInstance, MyPojo.PROPERTY_GENERICPOJO_ELEMENT, genericPojoValue);
+    genericPojoResult = pojoDescriptor.getProperty(pojoInstance, MyPojo.PROPERTY_GENERICPOJO_ELEMENT);
+    assertEquals(genericPojoValue, genericPojoResult);
 
     // check non-existent property
     try {
@@ -231,11 +248,7 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     }
     checkPojo(pojoDescriptor, pojoInstance, builder);
     // test property "port"
-    if (isFieldIntrostection() && !isMethodIntrostection()) {
-      checkProperty(pojoDescriptor, "port", Integer.class, Integer.class);
-    } else {
-      checkProperty(pojoDescriptor, "port", Integer.class, int.class);
-    }
+    checkPropertyPort(pojoDescriptor);
     // test property "flag"
     if (isFieldIntrostection() && !isMethodIntrostection()) {
       checkProperty(pojoDescriptor, "flag", Boolean.class, Boolean.class);
@@ -249,7 +262,33 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
 
     checkValues(pojoDescriptor, pojoInstance, isMethodIntrostection());
 
+    // test property "genericPojo"
+    checkProperty(pojoDescriptor, "genericPojo", GenericPojo.class, GenericPojo.class);
+
+    // test polymorphism
+    // TODO hohwille fix implementation and remove false...
+    if (isMethodIntrostection() && false) {
+      PojoDescriptor<AbstractPojo> abstractPojoDescriptor = builder.getDescriptor(AbstractPojo.class);
+      checkPropertyPort(abstractPojoDescriptor);
+
+      Integer port = Integer.valueOf(4242);
+      assertNull(pojoDescriptor.getProperty(pojoInstance, "port"));
+      pojoDescriptor.setProperty(pojoInstance, "port", port);
+      Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, "port");
+      assertEquals(port, retrievedPort);
+    }
+
     return pojoDescriptor;
+  }
+
+  private void checkPropertyPort(PojoDescriptor<?> pojoDescriptor) {
+
+    String property = MyPojo.PROPERTY_PORT.getSegment();
+    if (isFieldIntrostection() && !isMethodIntrostection()) {
+      checkProperty(pojoDescriptor, property, Integer.class, Integer.class);
+    } else {
+      checkProperty(pojoDescriptor, property, Integer.class, int.class);
+    }
   }
 
   static class TestPojo extends MyPojo {

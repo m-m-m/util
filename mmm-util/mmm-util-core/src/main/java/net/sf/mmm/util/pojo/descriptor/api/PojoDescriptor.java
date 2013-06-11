@@ -168,6 +168,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @param property is the {@link TypedProperty}.
    * @return the descriptor for the property identified by the given <code>property</code>.
    * @throws PojoPropertyNotFoundException if the specified <code>property</code> was NOT found.
+   * @since 3.1.0
    */
   PojoPropertyDescriptor getPropertyDescriptor(TypedProperty<?> property) throws PojoPropertyNotFoundException;
 
@@ -179,6 +180,7 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * 
    * @param property is the {@link TypedProperty}.
    * @return the {@link PojoPropertyDescriptor#getValidator() validator} for the given <code>property</code>.
+   * @since 3.1.0
    */
   <V> ValueValidator<V> getPropertyValidator(TypedProperty<V> property);
 

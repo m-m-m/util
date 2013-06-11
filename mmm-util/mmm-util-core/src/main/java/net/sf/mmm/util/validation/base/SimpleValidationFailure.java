@@ -17,7 +17,15 @@ public class SimpleValidationFailure extends AbstractValidationFailure {
   private static final long serialVersionUID = -6721660142697209055L;
 
   /** @see #getMessage() */
-  private final String message;
+  private String message;
+
+  /**
+   * The constructor for de-serialization.
+   */
+  protected SimpleValidationFailure() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -35,6 +43,7 @@ public class SimpleValidationFailure extends AbstractValidationFailure {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getMessage() {
 
     return this.message;
@@ -43,6 +52,7 @@ public class SimpleValidationFailure extends AbstractValidationFailure {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getMessage(Locale locale) {
 
     return this.message;

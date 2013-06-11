@@ -4,7 +4,6 @@ package net.sf.mmm.util.collection.base;
 
 import java.util.AbstractList;
 import java.util.List;
-import java.util.Spliterator;
 
 /**
  * This is an implementation of the {@link List} interface that gives a read-only view on other lists that
@@ -64,14 +63,14 @@ public class AppendingList<E> extends AbstractList<E> {
     return size;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Spliterator<E> spliterator() {
-
-    // TODO hohwille temporary workaround due to Bug in Eclipse/Kepler...
-    return super.spliterator();
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public Spliterator<E> spliterator() {
+  //
+  // // TODO hohwille temporary workaround due to Bug in Eclipse/Kepler...
+  // return super.spliterator();
+  // }
 
 }

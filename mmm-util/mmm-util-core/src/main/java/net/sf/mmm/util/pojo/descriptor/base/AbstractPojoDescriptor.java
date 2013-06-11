@@ -5,7 +5,6 @@ package net.sf.mmm.util.pojo.descriptor.base;
 import java.util.Collection;
 
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -190,7 +189,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     String[] segments = propertyPath.split("\\.");
     Object currentPojo = getProperty(pojo, segments[0]);
     if (required && (currentPojo == null)) {
-      throw new ObjectNotFoundException(pojo, segments[0]);
+      throw new NlsNullPointerException(pojo.getClass().getSimpleName() + "." + segments[0]);
     }
     for (int i = 1; i < segments.length; i++) {
       if (currentPojo == null) {
@@ -204,7 +203,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
           currentPath.append('.');
           currentPath.append(segments[j]);
         }
-        throw new ObjectNotFoundException(currentPojo, currentPath.toString());
+        throw new NlsNullPointerException(pojo.getClass().getSimpleName() + "." + currentPath.toString());
       }
       currentPojo = nextPojo;
     }

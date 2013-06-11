@@ -8,7 +8,7 @@ package net.sf.mmm.util.pojo.descriptor.impl.dummy;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public abstract class AbstractPojo {
+public abstract class AbstractPojo implements PojoInterface {
 
   private String name;
 

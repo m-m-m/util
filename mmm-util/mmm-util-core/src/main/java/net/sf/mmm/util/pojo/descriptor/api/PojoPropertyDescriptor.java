@@ -51,6 +51,7 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
    * <code>javax.validation.Validator.validateProperty(Object, String, Class)</code>.
    * 
    * @return the {@link ValueValidator} for the associated property.
+   * @since 3.1.0
    */
   ValueValidator<?> getValidator();
 

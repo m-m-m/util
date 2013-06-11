@@ -20,7 +20,15 @@ public class ValidationFailureImpl extends AbstractValidationFailure {
   private static final long serialVersionUID = -7710863486871741334L;
 
   /** @see #getMessage() */
-  private final NlsMessage message;
+  private NlsMessage message;
+
+  /**
+   * The constructor for de-serialization.
+   */
+  protected ValidationFailureImpl() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -38,6 +46,7 @@ public class ValidationFailureImpl extends AbstractValidationFailure {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getMessage() {
 
     return this.message.getLocalizedMessage();
@@ -46,6 +55,7 @@ public class ValidationFailureImpl extends AbstractValidationFailure {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getMessage(Locale locale) {
 
     return this.message.getLocalizedMessage(locale);
