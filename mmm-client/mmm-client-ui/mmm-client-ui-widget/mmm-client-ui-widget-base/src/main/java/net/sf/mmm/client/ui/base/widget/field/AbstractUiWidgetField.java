@@ -190,10 +190,31 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public void setFieldLabel(String label) {
 
-    this.fieldLabel = label;
-    if (this.fieldLabelWidget != null) {
-      this.fieldLabelWidget.setLabel(label);
+    if (label.equals(this.fieldLabel)) {
+      return;
     }
+    this.fieldLabel = label;
+    updateFieldLabel();
+  }
+
+  /**
+   * Updates the {@link #getFieldLabel() field label} in {@link #getFieldLabelWidget() field label widget}.
+   */
+  private void updateFieldLabel() {
+
+    if (this.fieldLabelWidget != null) {
+      this.fieldLabelWidget.setLabel(getContext().getConfiguration().buildLabel(this.fieldLabel, this));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void setMandatory(boolean mandatory) {
+
+    super.setMandatory(mandatory);
+    updateFieldLabel();
   }
 
   /**
@@ -206,9 +227,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       this.fieldLabelWidget = (AbstractUiWidgetLabel<?>) getWidgetAdapter().createLabel(getContext());
       this.fieldLabelWidget.setPrimaryStyle(PRIMARY_STYLE_LABEL);
       this.fieldLabelWidget.setLabelledWidget(this);
-      if (this.fieldLabel != null) {
-        this.fieldLabelWidget.setLabel(this.fieldLabel);
-      }
+      updateFieldLabel();
     }
     return this.fieldLabelWidget;
   }
@@ -231,12 +250,8 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   public String toString() {
 
-    String label = this.fieldLabel;
-    if (this.fieldLabelWidget != null) {
-      label = this.fieldLabelWidget.getLabel();
-    }
-    if (label != null) {
-      return super.toString() + ":" + label;
+    if (this.fieldLabel != null) {
+      return super.toString() + ":" + this.fieldLabel;
     } else {
       return super.toString();
     }

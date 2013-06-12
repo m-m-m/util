@@ -20,6 +20,7 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorValidatorBuilder;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
 import net.sf.mmm.util.validation.base.ValidatorNone;
 
@@ -145,7 +146,7 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
 
     Annotation[] annotations = accessibleObject.getAnnotations();
     for (Annotation annotation : annotations) {
-      ValueValidator<?> validator = createValidator(annotation);
+      AbstractValidator<?> validator = createValidator(annotation);
       if (validator != null) {
         validatorCollector.register(annotation, validator);
       }
@@ -159,7 +160,7 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
    * @return the {@link ValueValidator} for the given <code>annotation</code> or <code>null</code> if no
    *         constraint.
    */
-  protected abstract ValueValidator<?> createValidator(Annotation annotation);
+  protected abstract AbstractValidator<?> createValidator(Annotation annotation);
 
   /**
    * This inner class represents a container to collect the individual {@link ValueValidator}s to
@@ -167,8 +168,8 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
    */
   protected class ValidatorCollector {
 
-    /** @see #register(Annotation, ValueValidator) */
-    private Map<Class<? extends Annotation>, ValueValidator<?>> annotationType2validatorMap;
+    /** @see #register(Annotation, AbstractValidator) */
+    private Map<Class<? extends Annotation>, AbstractValidator<?>> annotationType2validatorMap;
 
     /**
      * The constructor.
@@ -184,13 +185,13 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
      * @param annotation is the {@link Annotation}.
      * @param validator is the {@link ValueValidator}.
      */
-    public void register(Annotation annotation, ValueValidator<?> validator) {
+    public void register(Annotation annotation, AbstractValidator<?> validator) {
 
       if (this.annotationType2validatorMap == null) {
-        this.annotationType2validatorMap = new HashMap<Class<? extends Annotation>, ValueValidator<?>>();
+        this.annotationType2validatorMap = new HashMap<Class<? extends Annotation>, AbstractValidator<?>>();
       }
       Class<? extends Annotation> annotationClass = annotation.getClass();
-      ValueValidator<?> existing = this.annotationType2validatorMap.get(annotationClass);
+      AbstractValidator<?> existing = this.annotationType2validatorMap.get(annotationClass);
       if (existing != null) {
         getLogger().debug("Validation annotation " + annotation + " ignored hence overridden by " + existing);
       } else {
@@ -199,7 +200,7 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
     }
 
     /**
-     * @return the {@link ValueValidator} for the {@link #register(Annotation, ValueValidator) registered}
+     * @return the {@link ValueValidator} for the {@link #register(Annotation, AbstractValidator) registered}
      *         validators.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -208,11 +209,11 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
       if (this.annotationType2validatorMap == null) {
         return ValidatorNone.getInstance();
       } else {
-        Collection<ValueValidator<?>> values = this.annotationType2validatorMap.values();
+        Collection<AbstractValidator<?>> values = this.annotationType2validatorMap.values();
         if (this.annotationType2validatorMap.size() == 1) {
           return values.iterator().next();
         } else {
-          return new ComposedValidator(values.toArray(new ValueValidator[values.size()]));
+          return new ComposedValidator(values.toArray(new AbstractValidator[values.size()]));
         }
       }
     }

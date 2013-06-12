@@ -80,4 +80,14 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
     return null;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void appendSourceCodeCreationStatement(StringBuilder buffer) {
+
+    buffer.append(ValidatorMandatory.class.getName());
+    buffer.append(".getInstance()");
+  }
+
 }

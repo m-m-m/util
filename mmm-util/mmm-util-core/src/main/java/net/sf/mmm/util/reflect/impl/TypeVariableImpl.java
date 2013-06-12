@@ -43,8 +43,6 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   }
 
   /**
-   * TODO: unclear how we build the bounds!
-   * 
    * {@inheritDoc}
    */
   @Override

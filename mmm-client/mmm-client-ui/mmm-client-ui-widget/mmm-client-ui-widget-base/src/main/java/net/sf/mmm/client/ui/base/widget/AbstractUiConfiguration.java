@@ -12,33 +12,12 @@ import net.sf.mmm.client.ui.api.UiConfiguration;
  */
 public abstract class AbstractUiConfiguration implements UiConfiguration {
 
-  /** @see #getTheme() */
-  private String theme;
-
   /**
    * The constructor.
    */
   public AbstractUiConfiguration() {
 
     super();
-    this.theme = DEFAULT_THEME;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTheme() {
-
-    return this.theme;
-  }
-
-  /**
-   * @param theme is the new {@link #getTheme() theme}.
-   */
-  protected void setTheme(String theme) {
-
-    this.theme = theme;
   }
 
 }

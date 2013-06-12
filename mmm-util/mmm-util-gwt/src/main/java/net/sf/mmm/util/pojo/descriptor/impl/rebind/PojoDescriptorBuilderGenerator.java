@@ -6,7 +6,6 @@ import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderLimited;
 import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
-import net.sf.mmm.util.transferobject.api.TransferObject;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.CachedGeneratorResult;
@@ -25,7 +24,7 @@ import com.google.gwt.user.rebind.SourceWriter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PojoDescriptorBuilderGenerator extends AbstractIncrementalGenerator {
+public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenerator {
 
   /**
    * The constructor.
@@ -101,53 +100,41 @@ public class PojoDescriptorBuilderGenerator extends AbstractIncrementalGenerator
     sourceWriter.println("<POJO> createDescriptor(Class<POJO> pojoType) {");
     sourceWriter.indent();
 
+    PojoDescriptorGeneratorConfiguration configuration = getConfiguration();
     TypeOracle typeOracle = context.getTypeOracle();
-    JClassType markerType = typeOracle.findType(getMarkerClass().getName());
-    boolean typeFound = false;
+    int typeCount = 0;
     JClassType[] types = typeOracle.getTypes();
     for (JClassType type : types) {
-      if (type.getQualifiedSourceName().startsWith("net.sf.mmm.app")) {
-        logger.log(Type.INFO, type.getQualifiedSourceName());
-      }
-      if (type.isAssignableTo(markerType)) {
-        if ((!type.equals(markerType)) && (type.isInterface() == null) && (!type.isAbstract())) {
-          typeFound = true;
-          sourceWriter.print("if (pojoType == ");
-          sourceWriter.print(type.getQualifiedSourceName());
-          sourceWriter.println(".class) {");
-          sourceWriter.indent();
-          sourceWriter.print("return GWT.create(");
-          sourceWriter.print(type.getQualifiedSourceName());
-          sourceWriter.println(".class);");
-          sourceWriter.outdent();
-          sourceWriter.print("} else ");
-        }
+      if (configuration.isPojoTypeSupported(type, typeOracle)) {
+        typeCount++;
+        sourceWriter.print("if (pojoType == ");
+        sourceWriter.print(type.getQualifiedSourceName());
+        sourceWriter.println(".class) {");
+        sourceWriter.indent();
+        sourceWriter.print("return GWT.create(");
+        sourceWriter.print(type.getQualifiedSourceName());
+        sourceWriter.println(".class);");
+        sourceWriter.outdent();
+        sourceWriter.print("} else ");
       }
     }
-    if (typeFound) {
+    if (typeCount > 0) {
       sourceWriter.println("{");
       sourceWriter.indent();
+      if (typeCount <= 3) {
+        logger.log(Type.WARN, "Found only " + typeCount + " supported type(s)");
+      } else {
+        logger.log(Type.INFO, "Found " + typeCount + " supported types.");
+      }
     } else {
-      logger.log(Type.ERROR, "No type found for " + getMarkerClass());
+      logger.log(Type.ERROR, "No type found for criteria: " + configuration.getPojoTypeDescription());
     }
     sourceWriter.println("return super.createDescriptor(pojoType);");
-    if (typeFound) {
+    if (typeCount > 0) {
       sourceWriter.outdent();
       sourceWriter.println("}");
     }
     generateSourceCloseBlock(sourceWriter);
-  }
-
-  /**
-   * This method gets the {@link Class} reflecting the class or interface used as markers for objects for
-   * {@link net.sf.mmm.util.pojo.api.Pojo POJOs} where reflection should be supported via
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
-   * 
-   * @return the marker {@link Class}.
-   */
-  protected Class<?> getMarkerClass() {
-
-    return TransferObject.class;
   }
 
   /**

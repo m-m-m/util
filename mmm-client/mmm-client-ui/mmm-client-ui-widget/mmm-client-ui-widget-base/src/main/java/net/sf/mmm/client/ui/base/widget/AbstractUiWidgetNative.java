@@ -503,9 +503,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     if (!this.enabled) {
       return false;
     }
-    if ((this.parent == null) || !this.parent.isEnabled()) {
-      return false;
-    }
+    // if ((this.parent == null) || !this.parent.isEnabled()) {
+    // return false;
+    // }
     return true;
   }
 

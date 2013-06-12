@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
@@ -147,6 +148,19 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
       this.propertyMap.put(propertyName, descriptor);
     }
     return descriptor;
+  }
+
+  /**
+   * This method adds the given {@link PojoPropertyDescriptorImpl}.
+   * 
+   * @param descriptor is the {@link PojoPropertyDescriptorImpl} to add.
+   */
+  protected void addPropertyDescriptor(PojoPropertyDescriptorImpl descriptor) {
+
+    PojoPropertyDescriptorImpl old = this.propertyMap.put(descriptor.getName(), descriptor);
+    if (old != null) {
+      throw new DuplicateObjectException(descriptor, descriptor.getName(), old);
+    }
   }
 
 }

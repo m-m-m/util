@@ -49,6 +49,9 @@ public abstract class AbstractUiWidgetWithLabel<ADAPTER extends UiWidgetAdapterW
   @Override
   public void setLabel(String label) {
 
+    if (label.equals(this.label)) {
+      return;
+    }
     this.label = label;
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setLabel(label);

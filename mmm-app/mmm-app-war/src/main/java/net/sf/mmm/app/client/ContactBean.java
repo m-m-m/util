@@ -4,6 +4,8 @@ package net.sf.mmm.app.client;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.transferobject.api.TransferObject;
 
@@ -47,6 +49,7 @@ public class ContactBean implements TransferObject {
   /**
    * @return the firstName
    */
+  @NotNull
   public String getFirstName() {
 
     return this.firstName;
@@ -63,6 +66,7 @@ public class ContactBean implements TransferObject {
   /**
    * @return the lastName
    */
+  @NotNull
   public String getLastName() {
 
     return this.lastName;

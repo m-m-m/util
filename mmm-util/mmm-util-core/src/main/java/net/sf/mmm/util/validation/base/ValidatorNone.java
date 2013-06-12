@@ -3,15 +3,15 @@
 package net.sf.mmm.util.validation.base;
 
 import net.sf.mmm.util.validation.api.ValidationFailure;
-import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
- * This is an implementation of {@link ValueValidator} that always validates successfully.
+ * This is an implementation of {@link net.sf.mmm.util.validation.api.ValueValidator} that always validates
+ * successfully.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ValidatorNone implements ValueValidator<Object> {
+public class ValidatorNone extends AbstractValidator<Object> {
 
   /** @see #getInstance() */
   private static final ValidatorNone INSTANCE = new ValidatorNone();
@@ -29,18 +29,9 @@ public class ValidatorNone implements ValueValidator<Object> {
    * @return the instance of this validator that always validates successfully.
    */
   @SuppressWarnings({ "unchecked" })
-  public static <VALUE> ValueValidator<VALUE> getInstance() {
+  public static <VALUE> AbstractValidator<VALUE> getInstance() {
 
-    return (ValueValidator<VALUE>) INSTANCE;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ValidationFailure validate(Object value) {
-
-    return null;
+    return (AbstractValidator<VALUE>) INSTANCE;
   }
 
   /**
@@ -50,6 +41,16 @@ public class ValidatorNone implements ValueValidator<Object> {
   public ValidationFailure validate(Object value, Object valueSource) {
 
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void appendSourceCodeCreationStatement(StringBuilder buffer) {
+
+    buffer.append(ValidatorNone.class.getName());
+    buffer.append(".getInstance()");
   }
 
 }

@@ -27,6 +27,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.ValidatorNone;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this
@@ -359,6 +360,9 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public final void addValidator(ValueValidator<? super VALUE> validator) {
 
+    if (validator instanceof ValidatorNone) {
+      return;
+    }
     getDataBinding().addValidator(validator);
   }
 

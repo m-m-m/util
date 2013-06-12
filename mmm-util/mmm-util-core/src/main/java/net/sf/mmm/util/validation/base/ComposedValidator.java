@@ -10,8 +10,8 @@ import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is an implementation of {@link ValueValidator} that is composed out of a set of individual
- * {@link #getValidator(int) validators} given at {@link #ComposedValidator(ValueValidator...) construction}.
- * It will always invoke <em>all</em> {@link #getValidator(int) contained validators} when a
+ * {@link #getValidator(int) validators} given at {@link #ComposedValidator(AbstractValidator...)
+ * construction}. It will always invoke <em>all</em> {@link #getValidator(int) contained validators} when a
  * {@link #validate(Object, Object) validation} is performed.
  * 
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
@@ -19,40 +19,32 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ComposedValidator<V> implements ValueValidator<V> {
+public class ComposedValidator<V> extends AbstractValidator<V> {
 
   /** @see #getCode() */
   private static final String CODE = "ComposedValidator";
 
   /** */
-  private final ValueValidator<? super V>[] validators;
+  private final AbstractValidator<? super V>[] validators;
 
   /**
    * The constructor.
    * 
    * @param validators are the {@link #getValidator(int) validators} to compose.
    */
-  public ComposedValidator(ValueValidator<? super V>... validators) {
+  public ComposedValidator(AbstractValidator<? super V>... validators) {
 
     super();
     this.validators = validators;
   }
 
   /**
-   * @return the {@link ValidationFailure#getCode() code}.
-   */
-  protected String getCode() {
-
-    return CODE;
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
-  public ValidationFailure validate(V value) {
+  protected String getCode() {
 
-    return validate(value, null);
+    return CODE;
   }
 
   /**
@@ -109,5 +101,24 @@ public class ComposedValidator<V> implements ValueValidator<V> {
   public ValueValidator<? super V> getValidator(int index) {
 
     return this.validators[index];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void appendSourceCodeConstructorArguments(StringBuilder buffer) {
+
+    boolean addSeparator = false;
+    for (AbstractValidator<?> validator : this.validators) {
+      if (!validator.isDynamic()) {
+        if (addSeparator) {
+          buffer.append(", ");
+        } else {
+          addSeparator = true;
+        }
+        validator.appendSourceCodeCreationStatement(buffer);
+      }
+    }
   }
 }

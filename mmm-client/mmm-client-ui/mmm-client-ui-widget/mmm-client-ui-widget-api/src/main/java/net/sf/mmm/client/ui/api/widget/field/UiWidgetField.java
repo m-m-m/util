@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite;
@@ -35,7 +34,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * @since 1.0.0
  */
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
-    UiWidgetActive, UiFeatureValueAndValidation<VALUE>, AttributeWriteValidationFailure {
+    AttributeWriteValidationFailure, UiWidgetActive {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Field";
