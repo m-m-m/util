@@ -372,10 +372,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * TODO: javadoc
+   * This method merges the <code>superPropertyDescriptor</code> into the <code>propertyDescriptor</code>.
    * 
-   * @param propertyDescriptor
-   * @param superPropertyDescriptor
+   * @param propertyDescriptor is the {@link PojoPropertyDescriptorImpl} to build for the
+   *        {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * @param superPropertyDescriptor is the super {@link PojoPropertyDescriptorImpl} to "inherit" from.
    */
   private void mergePropertyDescriptorWithSuperClass(PojoPropertyDescriptorImpl propertyDescriptor,
       PojoPropertyDescriptorImpl superPropertyDescriptor) {
