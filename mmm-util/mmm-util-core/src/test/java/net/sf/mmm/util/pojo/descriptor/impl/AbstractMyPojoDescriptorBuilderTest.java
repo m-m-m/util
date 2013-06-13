@@ -266,13 +266,11 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     checkProperty(pojoDescriptor, "genericPojo", GenericPojo.class, GenericPojo.class);
 
     // test polymorphism
-    // TODO hohwille fix implementation and remove false...
-    if (isMethodIntrostection() && false) {
+    if (isMethodIntrostection()) {
       PojoDescriptor<AbstractPojo> abstractPojoDescriptor = builder.getDescriptor(AbstractPojo.class);
       checkPropertyPort(abstractPojoDescriptor);
 
-      Integer port = Integer.valueOf(4242);
-      assertNull(pojoDescriptor.getProperty(pojoInstance, "port"));
+      Integer port = Integer.valueOf(99);
       pojoDescriptor.setProperty(pojoInstance, "port", port);
       Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, "port");
       assertEquals(port, retrievedPort);

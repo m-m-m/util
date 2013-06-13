@@ -22,7 +22,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
-  private final Map<GenericType<?>, PojoDescriptorImpl<?>> pojoMap;
+  private final Map<Class<?>, PojoDescriptorImpl<?>> pojoMap;
 
   /**
    * The constructor.
@@ -77,10 +77,18 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
-    PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoType);
+    Class<?> pojoClass = pojoType.getAssignmentClass();
+    PojoDescriptorImpl<POJO> descriptor = null;
+    // is simple class type with no additional generic information?
+    boolean isClassType = (pojoType.getType() == pojoClass);
+    if (isClassType) {
+      descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoClass);
+    }
     if (descriptor == null) {
       descriptor = createDescriptor(pojoType);
-      this.pojoMap.put(pojoType, descriptor);
+      if (isClassType) {
+        this.pojoMap.put(pojoClass, descriptor);
+      }
     }
     return descriptor;
   }

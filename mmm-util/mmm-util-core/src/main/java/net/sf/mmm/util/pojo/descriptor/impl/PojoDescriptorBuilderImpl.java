@@ -18,6 +18,7 @@ import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoFieldIntrospector;
@@ -221,30 +222,70 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
     getInitializationState().requireInitilized();
     Class<P> pojoClass = pojoType.getRetrievalClass();
-    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType, this);
-    // process methods...
-    List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();
-    if (getMethodIntrospector() != null) {
-      Iterator<Method> methodIterator = getMethodIntrospector().findMethods(pojoClass);
-      while (methodIterator.hasNext()) {
-        Method method = methodIterator.next();
-        boolean methodUsed = false;
-        for (PojoPropertyAccessorBuilder<?> builder : getAccessorBuilders()) {
-          PojoPropertyAccessor accessor = builder.create(method, descriptor, getDependencies());
-          if (accessor != null) {
-            boolean registered = registerAccessor(descriptor, accessor);
-            if (registered) {
-              methodUsed = true;
-            }
-          }
-        }
-        if (methodUsed && !isPublicAccessible(method)) {
-          // reflective access that violates visibility
-          nonPublicAccessibleObjects.add(method);
-        }
-      }
+    if (pojoClass.isArray()) {
+      throw new NlsIllegalArgumentException(pojoClass.getName());
     }
+
+    PojoDescriptorImpl<P> descriptor = new PojoDescriptorImpl<P>(pojoType, this);
+
+    List<AccessibleObject> nonPublicAccessibleObjects = new ArrayList<AccessibleObject>();
+    // process methods...
+    introspectMethods(pojoClass, descriptor, nonPublicAccessibleObjects);
     // process fields...
+    introspectFields(pojoClass, descriptor, nonPublicAccessibleObjects);
+
+    // make non-public fields/methods accessible for us...
+    makeAccessible(nonPublicAccessibleObjects);
+
+    this.configuration.getDescriptorEnhancer().enhanceDescriptor(descriptor);
+
+    mergeDescriptorWithSuperClass(pojoClass, descriptor);
+
+    // TODO hohwille lazy initialize validator...?!?
+    // TODO hohwille merge with super-property-descriptor !?!
+    this.configuration.getDescriptorValidatorBuilder().buildValidator(descriptor);
+    return descriptor;
+  }
+
+  /**
+   * Makes all {@link AccessibleObject}s in the given {@link List}
+   * {@link AccessibleObject#setAccessible(boolean) accessible}.
+   * 
+   * @param nonPublicAccessibleObjects is the {@link List} where the non-public {@link AccessibleObject}s have
+   *        been collected.
+   */
+  private void makeAccessible(List<AccessibleObject> nonPublicAccessibleObjects) {
+
+    if (nonPublicAccessibleObjects.size() > 0) {
+      final AccessibleObject[] nonPublicAccessibles = new AccessibleObject[nonPublicAccessibleObjects.size()];
+      nonPublicAccessibleObjects.toArray(nonPublicAccessibles);
+      // enable reflective access that violates visibility - this will
+      // fail if disallowed by security-manager.
+      AccessController.doPrivileged(new PrivilegedAction<Object>() {
+
+        @Override
+        public Object run() {
+
+          AccessibleObject.setAccessible(nonPublicAccessibles, true);
+          return null;
+        }
+      });
+    }
+  }
+
+  /**
+   * Introspects the {@link Field}s of the given {@link Class} and adds them to the given
+   * {@link PojoDescriptorImpl}.
+   * 
+   * @param <P> is the generic type of <code>pojoClass</code>.
+   * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
+   * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for
+   *        detected properties.
+   * @param nonPublicAccessibleObjects is the {@link List} where to add non-public {@link AccessibleObject}s.
+   */
+  private <P> void introspectFields(Class<P> pojoClass, PojoDescriptorImpl<P> descriptor,
+      List<AccessibleObject> nonPublicAccessibleObjects) {
+
     if (getFieldIntrospector() != null) {
       Iterator<Field> fieldIterator = getFieldIntrospector().findFields(pojoClass);
       while (fieldIterator.hasNext()) {
@@ -265,25 +306,87 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         }
       }
     }
-    if (nonPublicAccessibleObjects.size() > 0) {
-      final AccessibleObject[] nonPublicAccessibles = new AccessibleObject[nonPublicAccessibleObjects.size()];
-      nonPublicAccessibleObjects.toArray(nonPublicAccessibles);
-      // enable reflective access that violates visibility - this will
-      // fail if disallowed by security-manager.
-      AccessController.doPrivileged(new PrivilegedAction<Object>() {
+  }
 
-        @Override
-        public Object run() {
+  /**
+   * Introspects the {@link Method}s of the given {@link Class} and adds them to the given
+   * {@link PojoDescriptorImpl}.
+   * 
+   * @param <P> is the generic type of <code>pojoClass</code>.
+   * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
+   * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for
+   *        detected properties.
+   * @param nonPublicAccessibleObjects is the {@link List} where to add non-public {@link AccessibleObject}s.
+   */
+  private <P> void introspectMethods(Class<P> pojoClass, PojoDescriptorImpl<P> descriptor,
+      List<AccessibleObject> nonPublicAccessibleObjects) {
 
-          AccessibleObject.setAccessible(nonPublicAccessibles, true);
-          return null;
+    if (getMethodIntrospector() != null) {
+      Iterator<Method> methodIterator = getMethodIntrospector().findMethods(pojoClass);
+      while (methodIterator.hasNext()) {
+        Method method = methodIterator.next();
+        boolean methodUsed = false;
+        for (PojoPropertyAccessorBuilder<?> builder : getAccessorBuilders()) {
+          PojoPropertyAccessor accessor = builder.create(method, descriptor, getDependencies());
+          if (accessor != null) {
+            boolean registered = registerAccessor(descriptor, accessor);
+            if (registered) {
+              methodUsed = true;
+            }
+          }
         }
-      });
+        if (methodUsed && !isPublicAccessible(method)) {
+          // reflective access that violates visibility
+          nonPublicAccessibleObjects.add(method);
+        }
+      }
     }
-    this.configuration.getDescriptorEnhancer().enhanceDescriptor(descriptor);
-    // TODO hohwille lazy initialize validator...?!?
-    this.configuration.getDescriptorValidatorBuilder().buildValidator(descriptor);
-    return descriptor;
+  }
+
+  /**
+   * This method creates the {@link PojoDescriptorImpl} for the {@link Class#getSuperclass() superclass} of
+   * <code>pojoClass</code> and merges {@link PojoPropertyDescriptorImpl} from inherited properties.
+   * 
+   * @param <P> is the generic type of <code>pojoClass</code>.
+   * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
+   * @param descriptor is the {@link PojoDescriptorImpl} to merge.
+   */
+  private <P> void mergeDescriptorWithSuperClass(Class<P> pojoClass, PojoDescriptorImpl<P> descriptor) {
+
+    // create descriptor for super-class to reuse information (#55)
+    Class<? super P> superClass = pojoClass.getSuperclass();
+    PojoDescriptorImpl<? super P> superDescriptor = null;
+    if (superClass != null) {
+      GenericType<? super P> superType = getReflectionUtil().createGenericType(superClass);
+      superDescriptor = createDescriptor(superType);
+      for (PojoPropertyDescriptorImpl superPropertyDescriptor : superDescriptor.getPropertyDescriptors()) {
+        PojoPropertyDescriptorImpl propertyDescriptor = descriptor.getPropertyDescriptor(superPropertyDescriptor
+            .getName());
+        if (propertyDescriptor == null) {
+          descriptor.addPropertyDescriptor(superPropertyDescriptor);
+        } else {
+          mergePropertyDescriptorWithSuperClass(propertyDescriptor, superPropertyDescriptor);
+        }
+      }
+    }
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @param propertyDescriptor
+   * @param superPropertyDescriptor
+   */
+  private void mergePropertyDescriptorWithSuperClass(PojoPropertyDescriptorImpl propertyDescriptor,
+      PojoPropertyDescriptorImpl superPropertyDescriptor) {
+
+    for (PojoPropertyAccessor superPropertyAccessor : superPropertyDescriptor.getAccessors()) {
+
+      PojoPropertyAccessor propertyAccessor = propertyDescriptor.getAccessor(superPropertyAccessor.getMode());
+      if (propertyAccessor == null) {
+        propertyDescriptor.putAccessor(superPropertyAccessor);
+      }
+    }
   }
 
   /**

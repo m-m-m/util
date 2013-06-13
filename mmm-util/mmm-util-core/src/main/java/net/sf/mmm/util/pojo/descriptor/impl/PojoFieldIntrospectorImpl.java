@@ -43,6 +43,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<Field> findFields(Class<?> pojoType) {
 
     getInitializationState().requireInitilized();
@@ -54,9 +55,6 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
    * {@link PojoFieldIntrospectorImpl#getVisibility() visibility}.
    */
   public class PojoFieldIterator extends AbstractIterator<Field> {
-
-    /** the current class */
-    private Class<?> currentClass;
 
     /** the fields. */
     private Field[] fields;
@@ -73,13 +71,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
 
       super();
       this.index = 0;
-      if (getVisibility() == VisibilityModifier.PUBLIC) {
-        this.currentClass = null;
-        this.fields = pojoClass.getFields();
-      } else {
-        this.currentClass = pojoClass;
-        this.fields = pojoClass.getDeclaredFields();
-      }
+      this.fields = pojoClass.getDeclaredFields();
       findFirst();
     }
 
@@ -97,14 +89,6 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
           if (getVisibility().getOrder() <= fieldVisibility.getOrder()) {
             return field;
           }
-        }
-      }
-      if (this.currentClass != null) {
-        this.currentClass = this.currentClass.getSuperclass();
-        if (this.currentClass != null) {
-          this.fields = this.currentClass.getDeclaredFields();
-          this.index = 0;
-          return findNext();
         }
       }
       return null;

@@ -6,10 +6,15 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 
 /**
- * This is the interface used to find {@link Method methods} that can (potentially)
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor access} a
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property} of a given
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+ * This is the interface used to find {@link Method methods} of a given {@link net.sf.mmm.util.pojo.api.Pojo}.
+ * <b>ATTENTION:</b><br/>
+ * Since version 3.1.0 of mmm-util-core no {@link Method methods} inherited from {@link Class#getSuperclass()
+ * superclass} are iterated by default implementations (see issue # 55).
+ * 
+ * @see #findMethods(Class)
+ * 
+ * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+ * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

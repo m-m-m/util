@@ -6,10 +6,15 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 
 /**
- * This is the interface used to find {@link Field fields} that can (potentially)
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor access} a
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor property} of a given
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+ * This is the interface used to find {@link Field fields} of a given {@link net.sf.mmm.util.pojo.api.Pojo}.<br/>
+ * <b>ATTENTION:</b><br/>
+ * Since version 3.1.0 of mmm-util-core no inherited {@link Field fields} are iterated by default
+ * implementations (see issue # 55).
+ * 
+ * @see #findFields(Class)
+ * 
+ * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
+ * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

@@ -4,7 +4,9 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector;
@@ -40,10 +42,32 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<Method> findMethods(Class<?> pojoType) {
 
     getInitializationState().requireInitilized();
     return new PojoMethodIterator(pojoType);
+  }
+
+  /**
+   * Recursively collects all {@link Class#getInterfaces() interfaces} starting from the given
+   * <code>type</code>.
+   * 
+   * @param type is the {@link Class} for which all {@link Class#getInterfaces() interfaces} shall be
+   *        collected.
+   * @param interfaceSet is the {@link Set} where the {@link Class#getInterfaces() interfaces} will be
+   *        {@link Set#add(Object) added}.
+   * @param excludeSet is a {@link Set} with {@link Class}es (interfaces) to omit. May be <code>null</code>
+   *        for none.
+   */
+  private static void collectInterfaces(Class<?> type, Set<Class<?>> interfaceSet, Set<Class<?>> excludeSet) {
+
+    for (Class<?> interfaceClass : type.getInterfaces()) {
+      if ((excludeSet == null) || (!excludeSet.contains(interfaceClass))) {
+        interfaceSet.add(interfaceClass);
+      }
+      collectInterfaces(interfaceClass, interfaceSet, excludeSet);
+    }
   }
 
   /**
@@ -53,7 +77,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
   public class PojoMethodIterator extends AbstractIterator<Method> {
 
     /** the current class */
-    private Class<?> currentClass;
+    private Iterator<Class<?>> interfaces;
 
     /** the methods */
     private Method[] methods;
@@ -70,12 +94,19 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
 
       super();
       this.index = 0;
-      if (getVisibility() == VisibilityModifier.PUBLIC) {
-        this.currentClass = null;
-        this.methods = pojoClass.getMethods();
+      this.methods = pojoClass.getDeclaredMethods();
+      if (Modifier.isAbstract(pojoClass.getModifiers())) {
+        Set<Class<?>> superInterfaceSet = null;
+        Class<?> superClass = pojoClass.getSuperclass();
+        if (superClass != null) {
+          superInterfaceSet = new HashSet<Class<?>>();
+          collectInterfaces(superClass, superInterfaceSet, null);
+        }
+        Set<Class<?>> interfaceSet = new HashSet<Class<?>>();
+        collectInterfaces(pojoClass, interfaceSet, superInterfaceSet);
+        this.interfaces = interfaceSet.iterator();
       } else {
-        this.currentClass = pojoClass;
-        this.methods = pojoClass.getDeclaredMethods();
+        this.interfaces = null;
       }
       findFirst();
     }
@@ -98,10 +129,9 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
           }
         }
       }
-      if ((next == null) && (this.currentClass != null)) {
-        this.currentClass = this.currentClass.getSuperclass();
-        if (this.currentClass != null) {
-          this.methods = this.currentClass.getDeclaredMethods();
+      if ((next == null) && (this.interfaces != null)) {
+        if (this.interfaces.hasNext()) {
+          this.methods = this.interfaces.next().getDeclaredMethods();
           this.index = 0;
           next = findNext();
         }
