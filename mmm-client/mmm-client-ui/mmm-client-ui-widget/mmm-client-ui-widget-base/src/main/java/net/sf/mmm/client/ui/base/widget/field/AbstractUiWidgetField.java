@@ -92,6 +92,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   protected void doSetValue(VALUE newValue, boolean forUser) {
 
+    setValidationFailure(null);
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue;
       if (newValue == null) {
