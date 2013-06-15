@@ -36,15 +36,8 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
    */
   public BasicNlsMessage(NlsTemplate template, Map<String, Object> messageArguments) {
 
-    super();
+    this(template, null, messageArguments);
     assert (template != null);
-    this.template = template;
-    this.message = null;
-    if (messageArguments == null) {
-      this.arguments = Collections.emptyMap();
-    } else {
-      this.arguments = messageArguments;
-    }
   }
 
   /**
@@ -56,16 +49,34 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
    */
   public BasicNlsMessage(String internationalizedMessage, Map<String, Object> messageArguments) {
 
-    super();
+    this(null, internationalizedMessage, messageArguments);
     assert (internationalizedMessage != null);
-    this.template = null;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param template is the {@link NlsTemplate} for the {@link #getInternationalizedMessage() raw message}.
+   * @param internationalizedMessage is the {@link #getInternationalizedMessage() internationalized message}.
+   * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
+   *        nationalization.
+   */
+  private BasicNlsMessage(NlsTemplate template, String internationalizedMessage, Map<String, Object> messageArguments) {
+
+    super();
+    this.template = template;
     this.message = internationalizedMessage;
-    this.arguments = messageArguments;
+    if (messageArguments == null) {
+      this.arguments = Collections.emptyMap();
+    } else {
+      this.arguments = messageArguments;
+    }
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public Object getArgument(String key) {
 
     return this.arguments.get(key);
@@ -74,6 +85,7 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getInternationalizedMessage() {
 
     if (this.message == null) {
@@ -87,7 +99,7 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
    * 
    * @return the {@link Map} with the arguments.
    */
-  protected Map<String, Object> getArguments() {
+  protected final Map<String, Object> getArguments() {
 
     return this.arguments;
   }

@@ -13,6 +13,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
 
@@ -96,9 +97,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
    */
   protected String getLabel(TypedProperty<?> property) {
 
-    // return NlsAccess.getFactory().createDirect(BUNDLE_PROPERTY_LABELS,
-    // property.getTitle()).getLocalizedMessage();
-    return property.getTitle();
+    return NlsAccess.getFactory().createDirect(BUNDLE_PROPERTY_LABELS, property.getTitle()).getLocalizedMessage();
   }
 
   /**

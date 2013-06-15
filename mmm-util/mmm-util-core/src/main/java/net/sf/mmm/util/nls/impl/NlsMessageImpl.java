@@ -66,6 +66,7 @@ public class NlsMessageImpl extends BasicNlsMessage {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     try {
@@ -77,7 +78,7 @@ public class NlsMessageImpl extends BasicNlsMessage {
       }
       String message = getInternationalizedMessage();
       Map<String, Object> arguments = getArguments();
-      if (arguments.isEmpty()) {
+      if ((arguments == null) || arguments.isEmpty()) {
         String text = null;
         if (nlsTemplate != null) {
           text = nlsTemplate.translate(locale);

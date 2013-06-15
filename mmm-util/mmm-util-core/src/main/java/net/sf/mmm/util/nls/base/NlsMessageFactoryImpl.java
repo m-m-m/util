@@ -60,8 +60,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
   @Override
   public NlsMessage createDirect(String bundleName, String key, Map<String, Object> messageArguments) {
 
-    NlsTemplate template = null;
-    // template = new NlsTemplateImplWithMessage(bundleName, key, key);
+    NlsTemplate template = new NlsTemplateImplWithMessage(bundleName, key, key);
     return create(template, messageArguments);
   }
 
