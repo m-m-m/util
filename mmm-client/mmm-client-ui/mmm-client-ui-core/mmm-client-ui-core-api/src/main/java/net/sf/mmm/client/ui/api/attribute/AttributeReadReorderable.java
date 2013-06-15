@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 /**
- * This interface gives read access to the {@link #isReorderable() reorderable} attribute of an object.
+ * This interface gives read access to the {@link #isReorderable() reorder-able} attribute of an object.
  * 
  * @see AttributeWriteReorderable
  * 

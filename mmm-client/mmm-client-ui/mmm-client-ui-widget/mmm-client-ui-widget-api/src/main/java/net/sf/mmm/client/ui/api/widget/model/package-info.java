@@ -7,5 +7,5 @@
  * {@link net.sf.mmm.client.ui.api.widget.table.UiWidgetListTable}.
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
  */
-package net.sf.mmm.client.ui.api.widget.table.model;
+package net.sf.mmm.client.ui.api.widget.model;
 

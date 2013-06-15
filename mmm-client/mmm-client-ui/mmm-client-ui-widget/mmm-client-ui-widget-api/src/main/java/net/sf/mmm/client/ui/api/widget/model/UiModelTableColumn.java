@@ -1,22 +1,15 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.widget.table.model;
+package net.sf.mmm.client.ui.api.widget.model;
 
 import java.util.Comparator;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeReadEditable;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadHtmlId;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadReorderable;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadStringTitle;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadTooltip;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadVisible;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
- * This is the interface for a descriptor that specifies a {@link AbstractUiModelTable#getColumns() column} of
- * a table-widget such as {@link net.sf.mmm.client.ui.api.widget.table.UiWidgetListTable}.<br/>
+ * This is the interface for a descriptor that specifies a {@link AbstractUiTableModel#getColumn(int) column}
+ * of a table-widget such as {@link net.sf.mmm.client.ui.api.widget.table.UiWidgetListTable}.<br/>
  * <b>ATTENTION:</b><br/>
  * This is an {@link net.sf.mmm.util.component.api.Api#EXTENDABLE_INTERFACE extendable interface}. Use
  * {@link AbstractUiModelTableColumn} to implement.
@@ -28,9 +21,10 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated will be removed
  */
-public interface UiModelTableColumn<ROW, CELL> extends AttributeReadHtmlId, AttributeReadStringTitle,
-    AttributeReadTooltip, AttributeReadEditable, AttributeReadVisible, AttributeReadResizable, AttributeReadReorderable {
+@Deprecated
+public interface UiModelTableColumn<ROW, CELL> {
 
   /**
    * This method gets the {@link PropertyAccessor} used to {@link PropertyAccessor#getValue(Object) get} and

@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.widget.table.model;
+package net.sf.mmm.client.ui.api.widget.model;
 
 /**
  * This is the model for a {@link net.sf.mmm.client.ui.api.widget.table.UiWidgetListTable}.
@@ -14,7 +14,7 @@ package net.sf.mmm.client.ui.api.widget.table.model;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiModelListTable<ROW> extends AbstractUiModelTable<ROW> {
+public interface UiModelListTable<ROW> extends AbstractUiTableModel<ROW> {
 
   // nothing to add...
 
