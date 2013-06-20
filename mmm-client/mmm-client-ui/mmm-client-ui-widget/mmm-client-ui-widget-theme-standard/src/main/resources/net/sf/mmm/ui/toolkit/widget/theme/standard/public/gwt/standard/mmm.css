@@ -1,5 +1,4 @@
 /* Variables */
-/*@color-select: lighten(@color-focus, 10%);*/
 /* Mixins */
 /* Main styles */
 body {
@@ -17,8 +16,8 @@ input {
   border: none;
 }
 input:invalid {
-  border-color: #ff2222;
-  background-color: #ff8888;
+  border-color: #ff8888;
+  background-color: #ffbbbb;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
   background-repeat: no-repeat;
   /* background-size: cover; */
@@ -31,10 +30,12 @@ button {
   cursor: pointer;
   background-color: #e0e0e0;
 }
-button:hover,
 button:focus,
 button:active {
-  background-color: #a0c0e0;
+  background-color: #a0c0f0;
+}
+button:hover {
+  background-color: #ccddf7;
 }
 .Button {
   border-color: #a0a0a0;
@@ -48,10 +49,21 @@ button:active {
   margin: 0.1em;
   font-size: 16pt;
 }
-.Button:hover,
 .Button:focus,
 .Button:active {
-  background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.Button:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
+input:focus,
+input:active {
+  border-color: #4886e2;
+  background-color: #a0c0f0;
+}
+input:hover {
+  border-color: #ffffff;
+  background-color: #ccddf7;
 }
 .SearchField {
   display: inline;
@@ -80,12 +92,6 @@ button:active {
   background-position: 0 0.25em;
   height: 1em;
   width: 1em;
-}
-input:hover,
-input:focus,
-input:active {
-  border-color: #a0c0e0;
-  background-color: #edf3f9;
 }
 .ButtonPanel {
   /* background: @background-em-color; */
@@ -147,6 +153,13 @@ input:active {
   cursor: w-resize;
   border-top-left-radius: 0.5em;
 }
+.Popup .dialogTopLeft:focus,
+.Popup .dialogTopLeft:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.Popup .dialogTopLeft:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .Popup .Caption {
   border-color: #a0a0a0;
   border-width: 1px;
@@ -156,6 +169,13 @@ input:active {
   padding: 0.2em;
   cursor: move;
 }
+.Popup .Caption:focus,
+.Popup .Caption:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.Popup .Caption:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .Popup .dialogTopRight {
   border-color: #a0a0a0;
   border-width: 1px;
@@ -164,6 +184,13 @@ input:active {
   border-right-style: solid;
   border-top-right-radius: 0.5em;
   cursor: e-resize;
+}
+.Popup .dialogTopRight:focus,
+.Popup .dialogTopRight:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.Popup .dialogTopRight:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .Popup .dialogMiddle {
   background: #e0e0e0;
@@ -244,20 +271,29 @@ input:active {
   border-top-right-radius: 0.5em;
   cursor: pointer;
 }
-.TabPanel .gwt-TabBarItem:hover,
 .TabPanel .gwt-TabBarItem:focus,
 .TabPanel .gwt-TabBarItem:active {
-  background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.TabPanel .gwt-TabBarItem:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected {
+  border-color: #a0a0a0;
+  border-width: 1px;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px 0px #c7c7c7;
   cursor: default;
   background-image: linear-gradient(to bottom, #ffffff, #c0f0f0);
   border-bottom-style: none;
 }
-.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:hover,
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:focus,
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:active {
-  background-image: linear-gradient(to bottom, #ffffff, #a0c0e0);
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .TabPanel .gwt-TabBarItem {
   padding: 0.4em;
@@ -308,7 +344,7 @@ input:active {
   cursor: default;
 }
 .gwt-MenuBar .gwt-MenuItem-selected {
-  background: #a0c0e0;
+  background: #a0c0f0;
 }
 .gwt-MenuBar .gwt-MenuItem-disabled {
   color: #c0c0c0;
@@ -318,6 +354,13 @@ input:active {
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
   border-style: solid;
+}
+.gwt-MenuBar-horizontal:focus,
+.gwt-MenuBar-horizontal:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
+.gwt-MenuBar-horizontal:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .gwt-MenuBar-horizontal .gwt-MenuItem {
   padding: 0px 10px;
@@ -365,7 +408,7 @@ input:active {
   padding-right: 4px;
 }
 .gwt-MenuBar-vertical .subMenuIcon-selected {
-  background: #a0c0e0;
+  background: #a0c0f0;
 }
 .gwt-MenuBarPopup {
   margin: 0px 0px 0px 3px;
