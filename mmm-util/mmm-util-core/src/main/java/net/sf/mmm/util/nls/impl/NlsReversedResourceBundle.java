@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
+import net.sf.mmm.util.nls.api.NlsResourceBundle;
+
 /**
  * This is the interface for a reversed {@link java.util.ResourceBundle}. It allows to {@link #getKey(String)
  * get the key for a message}.
@@ -9,16 +11,7 @@ package net.sf.mmm.util.nls.impl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface NlsReversedResourceBundle {
-
-  /**
-   * This method gets the {@link java.util.ResourceBundle#getBundle(String) bundle-name}. This is the
-   * {@link Class#getName() class-name} of the {@link java.util.ResourceBundle} for the
-   * {@link java.util.Locale#ROOT root locale}.
-   * 
-   * @return the bundle-name.
-   */
-  String getName();
+public interface NlsReversedResourceBundle extends NlsResourceBundle {
 
   /**
    * This method gets the key for the given message. It is the inverse operation of

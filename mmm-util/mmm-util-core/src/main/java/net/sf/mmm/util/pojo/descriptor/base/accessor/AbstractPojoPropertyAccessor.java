@@ -24,6 +24,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?> getPropertyClass() {
 
     GenericType<?> propertyType = getPropertyType();
@@ -41,7 +42,7 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
   public String toString() {
 
     return getMode() + "-accessor of property '" + getDeclaringClass().getSimpleName() + "." + getName()
-        + "' with type " + getPropertyType() + "(" + getClass().getSimpleName() + ")";
+        + "' with type " + getPropertyType();
   }
 
 }

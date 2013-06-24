@@ -5,8 +5,8 @@ package net.sf.mmm.util.nls.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the callback interface for translating a text-message to a {@link java.util.Locale}-specific
- * language.<br>
+ * This is the interface for {@link #resolveTemplate(String) resolving} {@link NlsTemplate} for translating a
+ * text-message to a {@link java.util.Locale}-specific language.<br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

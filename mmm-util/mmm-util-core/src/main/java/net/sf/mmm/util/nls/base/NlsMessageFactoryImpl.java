@@ -4,16 +4,12 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.nls.impl.NlsMessageImpl;
-import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
 /**
  * This is the implementation of {@link NlsMessageFactory}.
@@ -23,10 +19,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
  */
 @Named(NlsMessageFactory.CDI_NAME)
 @Singleton
-public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
-
-  /** @see #getNlsDependencies() */
-  private NlsDependencies nlsDependencies;
+public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl {
 
   /**
    * The constructor.
@@ -40,70 +33,10 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactory {
    * {@inheritDoc}
    */
   @Override
-  public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
-
-    return new NlsMessageImpl(template, messageArguments, this.nlsDependencies);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
-
-    return new NlsMessageImpl(internationalizedMessage, messageArguments, this.nlsDependencies);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public NlsMessage createDirect(String bundleName, String key, Map<String, Object> messageArguments) {
 
     NlsTemplate template = new NlsTemplateImplWithMessage(bundleName, key, key);
     return create(template, messageArguments);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-    if (this.nlsDependencies == null) {
-      NlsFormatterManagerImpl formatterManager = new NlsFormatterManagerImpl();
-      formatterManager.initialize();
-      this.nlsDependencies = formatterManager.getNlsDependencies();
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doInitialized() {
-
-    super.doInitialized();
-    NlsAccess.setFactory(this);
-  }
-
-  /**
-   * @return the {@link NlsDependencies}.
-   */
-  public NlsDependencies getNlsDependencies() {
-
-    return this.nlsDependencies;
-  }
-
-  /**
-   * @param nlsDependencies are the {@link NlsDependencies} to set.
-   */
-  @Inject
-  public void setNlsDependencies(NlsDependencies nlsDependencies) {
-
-    getInitializationState().requireNotInitilized();
-    this.nlsDependencies = nlsDependencies;
   }
 
 }

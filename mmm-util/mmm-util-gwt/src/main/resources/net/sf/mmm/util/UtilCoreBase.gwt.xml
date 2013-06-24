@@ -16,6 +16,7 @@
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
   <source path="lang" excludes="**/System*,**/BasicUtil*"/>
   <source path="uuid"/>
+  <source path="logging"/>
   <source path="text" includes="**/*Justification*"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java"/>
   <source path="validation"/>

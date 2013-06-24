@@ -6,7 +6,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 /**
@@ -16,7 +15,6 @@ import javax.inject.Singleton;
  * @since 1.0.0
  */
 @Singleton
-@Named
 public class SimpleExecutor implements Executor {
 
   /**
@@ -50,6 +48,7 @@ public class SimpleExecutor implements Executor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void execute(Runnable command) {
 
     Thread thread;

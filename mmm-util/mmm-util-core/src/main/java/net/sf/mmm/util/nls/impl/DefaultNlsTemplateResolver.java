@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,8 +12,10 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsResourceBundle;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.base.NlsResourceBundleProvider;
 
 /**
  * This is the default implementation of the {@link NlsTemplateResolver}. It locates all
@@ -25,7 +29,8 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 @Named(NlsTemplateResolver.CDI_NAME)
 @Singleton
-public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver {
+public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver implements
+    NlsResourceBundleProvider {
 
   /** @see #getResourceBundleFinder() */
   private NlsResourceBundleLocator resourceBundleFinder;
@@ -90,6 +95,19 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
     return resolveTemplate(internationalizedMessage, this.nlsBundles);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<NlsResourceBundle> getBundles() {
+
+    List<NlsResourceBundle> result = new ArrayList<NlsResourceBundle>(this.nlsBundles.length);
+    for (NlsResourceBundle bundle : this.nlsBundles) {
+      result.add(bundle);
+    }
+    return result;
   }
 
 }

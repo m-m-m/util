@@ -3,7 +3,7 @@
 // CHECKSTYLE:OFF (GWT compatible copy)
 package org.slf4j;
 
-import net.sf.mmm.util.nls.impl.GwtLogger;
+import net.sf.mmm.util.logging.impl.GwtLogger;
 
 /**
  * This is the GWT compatible implementation of {@link org.slf4j.LoggerFactory}.

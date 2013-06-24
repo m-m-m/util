@@ -4,6 +4,7 @@ package net.sf.mmm.util.nls.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -21,6 +22,9 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
   /** @see #getKey(String) */
   private final Map<String, String> message2KeyMap;
 
+  /** @see #getString(String) */
+  private final ResourceBundle resourceBundle;
+
   /**
    * The constructor.
    * 
@@ -29,6 +33,7 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
   public NlsReversedResourceBundleImpl(ResourceBundle resourceBundle) {
 
     super();
+    this.resourceBundle = resourceBundle;
     this.name = resourceBundle.getClass().getName();
     this.message2KeyMap = new HashMap<String, String>();
     for (String key : resourceBundle.keySet()) {
@@ -42,6 +47,7 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
 
     return this.name;
@@ -54,8 +60,18 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
    * @return the key for the given <code>message</code> or <code>null</code> if no such message is contained
    *         in the associated {@link ResourceBundle}.
    */
+  @Override
   public String getKey(String message) {
 
     return this.message2KeyMap.get(message);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getString(String key) throws MissingResourceException {
+
+    return this.resourceBundle.getString(key);
   }
 }

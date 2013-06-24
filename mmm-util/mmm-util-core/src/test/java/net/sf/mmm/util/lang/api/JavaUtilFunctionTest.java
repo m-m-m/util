@@ -5,6 +5,7 @@ package net.sf.mmm.util.lang.api;
 import java.util.function.Function;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -13,6 +14,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Ignore
 public class JavaUtilFunctionTest extends Assert {
 
   /**

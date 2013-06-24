@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -21,6 +20,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -124,7 +124,7 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
               }
               noEntryInBundleResource = false;
               try {
-                ResourceBundle bundleInstance = ResourceBundle.getBundle(line, Locale.ROOT);
+                ResourceBundle bundleInstance = ResourceBundle.getBundle(line, AbstractNlsMessage.LOCALE_ROOT);
                 this.nlsBundles.add(bundleInstance);
               } catch (Exception e) {
                 logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line
@@ -153,6 +153,7 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<ResourceBundle> findBundles() {
 
     return this.nlsBundles;
