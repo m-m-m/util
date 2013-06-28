@@ -37,25 +37,25 @@ public class Range<V extends Comparable<V>> implements Serializable {
   /**
    * The constructor.
    * 
-   * @param from - see {@link #getMin()}. To create an open range use the minimum value.
-   * @param to - see {@link #getMax()}. To create an open range use the maximum value.
+   * @param min - see {@link #getMin()}. To create an open range use the minimum value.
+   * @param max - see {@link #getMax()}. To create an open range use the maximum value.
    */
-  public Range(V from, V to) {
+  public Range(V min, V max) {
 
     super();
-    NlsNullPointerException.checkNotNull("from", from);
-    NlsNullPointerException.checkNotNull("to", to);
-    int delta = from.compareTo(to);
+    NlsNullPointerException.checkNotNull("from", min);
+    NlsNullPointerException.checkNotNull("to", max);
+    int delta = min.compareTo(max);
     if (delta > 0) {
-      throw new ValueOutOfRangeException(null, from, from, to);
+      throw new ValueOutOfRangeException(null, min, min, max);
     }
-    this.min = from;
-    this.max = to;
+    this.min = min;
+    this.max = max;
   }
 
   /**
    * @return the lower bound of this range. Must NOT be <code>null</code> and NOT be less than
-   *         {@link #getMax() to}.
+   *         {@link #getMax() max}.
    */
   public V getMin() {
 
@@ -64,7 +64,7 @@ public class Range<V extends Comparable<V>> implements Serializable {
 
   /**
    * @return the upper bound of this range. Must NOT be <code>null</code> and NOT be greater than
-   *         {@link #getMin() from}.
+   *         {@link #getMin() min}.
    */
   public V getMax() {
 

@@ -3,6 +3,9 @@
 package net.sf.mmm.util.lang.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsObject;
 
 /**
  * A {@link Comparator} represents a function that compares two given values.
@@ -10,7 +13,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public enum Comparator implements Datatype<String> {
+public enum Comparator implements Datatype<String>, NlsObject {
 
   /** {@link Comparator} to check if some value is greater than another. */
   GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN, false, Boolean.FALSE) {
@@ -22,6 +25,15 @@ public enum Comparator implements Datatype<String> {
     public boolean eval(double arg1, double arg2) {
 
       return arg1 > arg2;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().infoGreaterThan();
     }
   },
 
@@ -36,6 +48,15 @@ public enum Comparator implements Datatype<String> {
 
       return arg1 >= arg2;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().infoGreaterOrEqual();
+    }
   },
 
   /** {@link Comparator} to check if some value is less than another. */
@@ -49,6 +70,15 @@ public enum Comparator implements Datatype<String> {
 
       return arg1 < arg2;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().infoLessThan();
+    }
   },
 
   /** {@link Comparator} to check if some value is less or equal than another. */
@@ -61,6 +91,15 @@ public enum Comparator implements Datatype<String> {
     public boolean eval(double arg1, double arg2) {
 
       return arg1 <= arg2;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().infoLessOrEqual();
     }
   },
 
@@ -77,6 +116,15 @@ public enum Comparator implements Datatype<String> {
 
       return arg1 == arg2;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().infoEqual();
+    }
   },
 
   /**
@@ -91,6 +139,15 @@ public enum Comparator implements Datatype<String> {
     public boolean eval(double arg1, double arg2) {
 
       return arg1 != arg2;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().infoNotEqual();
     }
   };
 
@@ -160,6 +217,7 @@ public enum Comparator implements Datatype<String> {
    * 
    * @return the comparator symbol.
    */
+  @Override
   public String getValue() {
 
     return this.value;
@@ -168,9 +226,18 @@ public enum Comparator implements Datatype<String> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return this.title;
+  }
+
+  /**
+   * @return the instance of {@link NlsBundleUtilCoreRoot}.
+   */
+  private static NlsBundleUtilCoreRoot getBundle() {
+
+    return NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
   }
 
   /**
@@ -230,10 +297,10 @@ public enum Comparator implements Datatype<String> {
         v1 = convert(v1, type2);
         v2 = convert(v2, type1);
       }
-      if ((v1 instanceof Number) && (v2 instanceof Number)) {
-        return eval(((Number) v1).doubleValue(), ((Number) v2).doubleValue());
-      } else if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
+      if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
         return evalComparable((Comparable) v1, (Comparable) v2);
+      } else if ((v1 instanceof Number) && (v2 instanceof Number)) {
+        return eval(((Number) v1).doubleValue(), ((Number) v2).doubleValue());
       } else if (v1.equals(v2)) {
         return isTrueIfEquals();
       } else {
@@ -249,7 +316,7 @@ public enum Comparator implements Datatype<String> {
   @Override
   public String toString() {
 
-    return getValue();
+    return getTitle();
   }
 
   /**

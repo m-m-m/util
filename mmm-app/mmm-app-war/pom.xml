@@ -14,12 +14,19 @@
   <name>app-war</name>
   <description>The actual multimedia-manager main application</description>
   <dependencies>
+    <!-- 
+    <dependency>
+      <groupId>de.csenk</groupId>
+      <artifactId>gwt-jetty</artifactId>
+      <version>7.1.6.v20100715</version>
+      <scope>provided</scope>
+    </dependency>
+     -->
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-servlet_3.0_spec</artifactId>
       <version>1.0</version>
     </dependency>
-    <!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> <version>3.0</version> </dependency> -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-app-main-client</artifactId>
@@ -58,6 +65,8 @@
       <version>2.5.1</version>
       <scope>provided</scope>
     </dependency>
+    <!-- <dependency> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty</artifactId> <version>7.0.0.pre5</version> <scope>provided</scope> 
+      </dependency> -->
   </dependencies>
   <build>
     <plugins>

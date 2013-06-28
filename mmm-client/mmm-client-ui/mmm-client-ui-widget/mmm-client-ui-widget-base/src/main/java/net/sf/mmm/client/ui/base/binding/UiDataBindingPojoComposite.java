@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.binding;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -97,7 +96,9 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
    */
   protected String getLabel(TypedProperty<?> property) {
 
-    return NlsAccess.getFactory().createDirect(BUNDLE_PROPERTY_LABELS, property.getTitle()).getLocalizedMessage();
+    return NlsAccess.getFactory()
+        .createDirect(AbstractUiWidget.AccessHelper.getLabelResourceBundleName(getWidget()), property.getTitle())
+        .getLocalizedMessage();
   }
 
   /**
@@ -121,9 +122,6 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
     Class<P> propertyType = getAdapter().getPropertyType(property);
     UiWidgetFactory widgetFactory = widget.getContext().getWidgetFactory();
 
-    if ((propertyType == List.class) || (propertyType == Collection.class)) {
-      throw new IllegalStateException("TODO: cannot ...");
-    }
     UiWidgetField<P> childWidget = widgetFactory.createForDatatype(propertyType);
     childWidget.setFieldLabel(labelText);
     childWidget.addValidator(getAdapter().getPropertyValidator(property));

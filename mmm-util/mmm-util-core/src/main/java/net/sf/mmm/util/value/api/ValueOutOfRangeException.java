@@ -45,7 +45,7 @@ public class ValueOutOfRangeException extends ValueException {
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class)
-        .errorValueOutOfRangeWithSource(value, minimum, maximum, valueSource));
+        .errorValueOutOfRange(value, minimum, maximum, valueSource));
     assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
   }
 
@@ -66,7 +66,7 @@ public class ValueOutOfRangeException extends ValueException {
   public <V extends Comparable<V>> ValueOutOfRangeException(Object valueSource, V value, V minimum, V maximum) {
 
     super(createBundle(NlsBundleUtilCoreRoot.class)
-        .errorValueOutOfRangeWithSource(value, minimum, maximum, valueSource));
+        .errorValueOutOfRange(value, minimum, maximum, valueSource));
     assert ((value.compareTo(minimum) < 0) || (value.compareTo(maximum) > 0));
   }
 

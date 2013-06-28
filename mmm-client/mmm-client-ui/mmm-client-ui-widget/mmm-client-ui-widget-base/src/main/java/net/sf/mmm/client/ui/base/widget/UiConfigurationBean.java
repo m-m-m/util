@@ -19,6 +19,9 @@ public class UiConfigurationBean extends UiConfigurationDefault {
   /** @see #getLabelSuffixMandatory() */
   private String labelSuffixMandatory;
 
+  /** @see #getLabelResourceBundleName() */
+  private String labelResourceBundleName;
+
   /**
    * The constructor.
    */
@@ -79,6 +82,23 @@ public class UiConfigurationBean extends UiConfigurationDefault {
   public void setLabelSuffixMandatory(String labelSuffixMandatory) {
 
     this.labelSuffixMandatory = labelSuffixMandatory;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLabelResourceBundleName() {
+
+    return this.labelResourceBundleName;
+  }
+
+  /**
+   * @param labelResourceBundleName is the new value of {@link #getLabelResourceBundleName()}.
+   */
+  public void setLabelResourceBundleName(String labelResourceBundleName) {
+
+    this.labelResourceBundleName = labelResourceBundleName;
   }
 
 }

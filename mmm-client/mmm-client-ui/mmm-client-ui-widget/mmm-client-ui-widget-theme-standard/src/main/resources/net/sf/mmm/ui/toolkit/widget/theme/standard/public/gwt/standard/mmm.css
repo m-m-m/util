@@ -30,12 +30,12 @@ button {
   cursor: pointer;
   background-color: #e0e0e0;
 }
+button:hover {
+  background-color: #ccddf7;
+}
 button:focus,
 button:active {
   background-color: #a0c0f0;
-}
-button:hover {
-  background-color: #ccddf7;
 }
 .Button {
   border-color: #a0a0a0;
@@ -49,21 +49,21 @@ button:hover {
   margin: 0.1em;
   font-size: 16pt;
 }
+.Button:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .Button:focus,
 .Button:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
 }
-.Button:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+input:hover {
+  border-color: #ffffff;
+  background-color: #ccddf7;
 }
 input:focus,
 input:active {
   border-color: #4886e2;
   background-color: #a0c0f0;
-}
-input:hover {
-  border-color: #ffffff;
-  background-color: #ccddf7;
 }
 .SearchField {
   display: inline;
@@ -153,12 +153,12 @@ input:hover {
   cursor: w-resize;
   border-top-left-radius: 0.5em;
 }
+.Popup .dialogTopLeft:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .Popup .dialogTopLeft:focus,
 .Popup .dialogTopLeft:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
-}
-.Popup .dialogTopLeft:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .Popup .Caption {
   border-color: #a0a0a0;
@@ -169,12 +169,12 @@ input:hover {
   padding: 0.2em;
   cursor: move;
 }
+.Popup .Caption:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .Popup .Caption:focus,
 .Popup .Caption:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
-}
-.Popup .Caption:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .Popup .dialogTopRight {
   border-color: #a0a0a0;
@@ -185,12 +185,12 @@ input:hover {
   border-top-right-radius: 0.5em;
   cursor: e-resize;
 }
+.Popup .dialogTopRight:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .Popup .dialogTopRight:focus,
 .Popup .dialogTopRight:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
-}
-.Popup .dialogTopRight:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .Popup .dialogMiddle {
   background: #e0e0e0;
@@ -271,12 +271,12 @@ input:hover {
   border-top-right-radius: 0.5em;
   cursor: pointer;
 }
+.TabPanel .gwt-TabBarItem:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .TabPanel .gwt-TabBarItem:focus,
 .TabPanel .gwt-TabBarItem:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
-}
-.TabPanel .gwt-TabBarItem:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected {
   border-color: #a0a0a0;
@@ -288,12 +288,12 @@ input:hover {
   background-image: linear-gradient(to bottom, #ffffff, #c0f0f0);
   border-bottom-style: none;
 }
+.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:focus,
 .TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
-}
-.TabPanel .gwt-TabBarItem.gwt-TabBarItem-selected:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .TabPanel .gwt-TabBarItem {
   padding: 0.4em;
@@ -355,12 +355,12 @@ input:hover {
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
   border-style: solid;
 }
+.gwt-MenuBar-horizontal:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
 .gwt-MenuBar-horizontal:focus,
 .gwt-MenuBar-horizontal:active {
   background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
-}
-.gwt-MenuBar-horizontal:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
 }
 .gwt-MenuBar-horizontal .gwt-MenuItem {
   padding: 0px 10px;

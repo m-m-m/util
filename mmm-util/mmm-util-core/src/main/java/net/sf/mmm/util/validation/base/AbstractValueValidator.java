@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
@@ -28,7 +31,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
   @Override
   public ValidationFailure validate(V value, Object valueSource) {
 
-    String failureMessage;
+    NlsMessage failureMessage;
     if (value == null) {
       failureMessage = validateNull();
     } else {
@@ -40,7 +43,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
       if (valueSource != null) {
         source = valueSource.toString();
       }
-      result = new SimpleValidationFailure(getCode(), source, failureMessage);
+      result = new ValidationFailureImpl(getCode(), source, failureMessage);
     }
     return result;
   }
@@ -53,7 +56,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
    * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the
    *         <code>null</code>-value is valid.
    */
-  protected String validateNull() {
+  protected NlsMessage validateNull() {
 
     return null;
   }
@@ -70,6 +73,21 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
    * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the the given
    *         <code>value</code> is valid.
    */
-  protected abstract String validateNotNull(V value);
+  protected abstract NlsMessage validateNotNull(V value);
+
+  /**
+   * This is a convenience method delegating to
+   * {@link net.sf.mmm.util.nls.api.NlsBundleFactory#createBundle(Class)}.
+   * 
+   * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
+   * @param bundleInterface the interface of the requested {@link NlsBundle}. Has to be a sub-interface of
+   *        {@link NlsBundle} with according methods.
+   * @return an instance of the requested {@link NlsBundle} interface.
+   * @since 3.1.0
+   */
+  protected <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
+
+    return NlsAccess.getBundleFactory().createBundle(bundleInterface);
+  }
 
 }

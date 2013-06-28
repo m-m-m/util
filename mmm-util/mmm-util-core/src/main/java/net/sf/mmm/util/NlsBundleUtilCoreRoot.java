@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 
 import javax.inject.Named;
 
+import net.sf.mmm.util.lang.api.Comparator;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
@@ -34,19 +35,19 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   String INF_TOP = "top";
 
   /** @see #infoTopLeft() */
-  String INF_TOP_LEFT = "top-left";
+  String INF_TOP_LEFT = "top left";
 
   /** @see #infoTopRight() */
-  String INF_TOP_RIGHT = "top-right";
+  String INF_TOP_RIGHT = "top right";
 
   /** @see #infoBottom() */
   String INF_BOTTOM = "bottom";
 
   /** @see #infoBottomLeft() */
-  String INF_BOTTOM_LEFT = "bottom-left";
+  String INF_BOTTOM_LEFT = "bottom left";
 
   /** @see #infoBottomRight() */
-  String INF_BOTTOM_RIGHT = "bottom-right";
+  String INF_BOTTOM_RIGHT = "bottom right";
 
   /** @see #infoHorizontal() */
   String INF_HORIZONTAL = "horizontal";
@@ -67,22 +68,22 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   String INF_NOR = "nor";
 
   /** @see #infoGreaterThan() */
-  String INF_GREATER_THAN = "greater-than";
+  String INF_GREATER_THAN = "greater than";
 
   /** @see #infoGreaterOrEqual() */
-  String INF_GREATER_OR_EQUAL = "greater-or-equal";
+  String INF_GREATER_OR_EQUAL = "greater or equal to";
 
   /** @see #infoEqual() */
-  String INF_EQUAL = "equal";
+  String INF_EQUAL = "equal to";
 
   /** @see #infoNotEqual() */
-  String INF_NOT_EQUAL = "not-equal";
+  String INF_NOT_EQUAL = "not equal to";
 
   /** @see #infoLessThan() */
-  String INF_LESS_THAN = "less-than";
+  String INF_LESS_THAN = "less than";
 
   /** @see #infoLessOrEqual() */
-  String INF_LESS_OR_EQUAL = "less-or-equal";
+  String INF_LESS_OR_EQUAL = "less or equal";
 
   /** @see net.sf.mmm.util.cli.api.AbstractMain */
   String INF_MAIN_MODE_HELP = "help";
@@ -460,11 +461,41 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @param source is the source of the value or <code>null</code> if NOT available.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} is not in the expected range of \"[{min} - {max}]\"!")
-  NlsMessage errorValueOutOfRangeWithSource(@Named("value")
+  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range of \"[{min} - {max}]\"!")
+  NlsMessage errorValueOutOfRange(@Named("value")
   Object value, @Named("min")
   Object min, @Named("max")
   Object max, @Named("source")
+  Object source);
+
+  /**
+   * @see net.sf.mmm.util.validation.base.ValidatorCompare
+   * 
+   * @param value is the invalid value.
+   * @param comparator is the {@link Comparator}.
+   * @param value2 is the value to compare to (second argument).
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value ({value}) needs to be {comparator} \"{value2}\"!")
+  NlsMessage errorValueComparison(@Named("value")
+  Object value, @Named("comparator")
+  Comparator comparator, @Named("value2")
+  Object value2);
+
+  /**
+   * @see net.sf.mmm.util.validation.base.ValidatorCompare
+   * 
+   * @param value is the invalid value.
+   * @param comparator is the {@link Comparator}.
+   * @param value2 is the value to compare to (second argument).
+   * @param source is the source of the value or <code>null</code> if NOT available.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value ({value}) needs to be {comparator} the value from \"{source}\" ({value2})!")
+  NlsMessage errorValueComparisonWithSource(@Named("value")
+  Object value, @Named("comparator")
+  Comparator comparator, @Named("value2")
+  Object value2, @Named("source")
   Object source);
 
   /**
@@ -1449,8 +1480,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   /**
    * @return the {@link NlsMessage}.
    */
-  @NlsBundleMessage("Value has to be filled.")
-  NlsMessage failureMandatory();
+  @NlsBundleMessage("The value has to be filled.")
+  NlsMessage errorMandatory();
 
   /**
    * @see net.sf.mmm.util.search.api.SearchTimeoutException

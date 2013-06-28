@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.api;
 
+
 /**
  * A {@link ValueValidator} allows to {@link #validate(Object) validate} according values.<br/>
  * There can be arbitrary implementations of this interface. A regular implementation shall be stateless and

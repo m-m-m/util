@@ -24,12 +24,12 @@
 .gradient() {
   .bordered;
   background-image: linear-gradient(to bottom, #FFFFFF, @color-normal);
-  &:focus, &:active {
-    background-image: linear-gradient(to bottom, #FFFFFF, @color-focus-gradient);
-  }
   &:hover {
     background-image: linear-gradient(to bottom, #FFFFFF, @color-hover-gradient);
   }  
+  &:focus, &:active {
+    background-image: linear-gradient(to bottom, #FFFFFF, @color-focus-gradient);
+  }
 }
 .highlight() {
   .gradient;
@@ -74,11 +74,11 @@ button {
   .bordered;
   cursor: pointer;
   background-color: @color-normal;
-  &:focus, &:active {
-    background-color: @color-focus;
-  }
   &:hover {
     background-color: @color-hover;
+  }
+  &:focus, &:active {
+    background-color: @color-focus;
   }
 }
 .Button {
@@ -92,13 +92,13 @@ button {
 }
 
 input {
-  &:focus, &:active {
-    border-color: darken(@color-focus, 20%);
-    background-color: @color-focus;
-  }
   &:hover {
     border-color: lighten(@color-hover, 20%);
     background-color: @color-hover;
+  }
+  &:focus, &:active {
+    border-color: darken(@color-focus, 20%);
+    background-color: @color-focus;
   }
 }
 

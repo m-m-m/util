@@ -660,6 +660,22 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   }
 
   /**
+   * This method by default returns
+   * {@link net.sf.mmm.client.ui.api.UiConfiguration#getLabelResourceBundleName()}. You may override this in
+   * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom custom widgets} to change the default and
+   * modularize your bundles.
+   * 
+   * @see net.sf.mmm.client.ui.api.UiConfiguration#getLabelResourceBundleName()
+   * 
+   * @return the {@link java.util.ResourceBundle#getBundle(String) base name} of the
+   *         {@link java.util.ResourceBundle} for the property labels.
+   */
+  protected String getLabelResourceBundleName() {
+
+    return getContext().getConfiguration().getLabelResourceBundleName();
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -745,12 +761,22 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
      * @param widget is the {@link AbstractUiWidget}.
      * @param state - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
      * @param value - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
-     * @return <code>true</code> if the validation was successful, <code>false</code> otherwise (if there are
-     *         validation failures).
+     * @return - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
      */
     public static <VALUE> boolean doValidate(AbstractUiWidget<VALUE> widget, ValidationState state, VALUE value) {
 
       return widget.doValidate(state, value);
+    }
+
+    /**
+     * @see AbstractUiWidget#getLabelResourceBundleName()
+     * 
+     * @param widget is the {@link AbstractUiWidget}.
+     * @return - see {@link AbstractUiWidget#getLabelResourceBundleName()}.
+     */
+    public static String getLabelResourceBundleName(AbstractUiWidget<?> widget) {
+
+      return widget.getLabelResourceBundleName();
     }
   }
 

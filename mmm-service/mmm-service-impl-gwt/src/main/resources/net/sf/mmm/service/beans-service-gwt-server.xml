@@ -6,11 +6,16 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-  <import resource="classpath:net/sf/mmm/service/beans-service-gwt-server-core.xml" />
+  <import resource="classpath:net/sf/mmm/service/beans-service-gwt-server-core.xml"/>
 
   <bean id="RemoteInvocationGenericServiceUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
     <property name="mappings">
-      <value>/**/RemoteInvocationGenericServiceGwt=RemoteInvocationGenericServiceServlet</value>
+
+      <!-- TODO "js" is just a temporary hack for testing, we need Servlet 3.0 -->
+      <value>
+        /**/RemoteInvocationGenericServiceGwt=RemoteInvocationGenericServiceServlet
+        /**/js/mmm-nls-bundle.js=NlsResourceBundleJavaScriptServlet
+      </value>
     </property>
   </bean>
 </beans>

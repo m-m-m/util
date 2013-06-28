@@ -370,7 +370,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     String date = sdf.format(new Date());
     String propertyPath = this.path + File.separatorChar + bundle.getName().replace('.', File.separatorChar);
     new File(propertyPath).getParentFile().mkdirs();
-    synchronize(bundle, "", propertyPath, date);
+    // synchronize(bundle, "", propertyPath, date);
     for (String locale : this.locales) {
       synchronize(bundle, locale, propertyPath, date);
     }

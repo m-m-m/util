@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.sql.Date;
+
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
 
@@ -111,6 +113,45 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   protected void appendSourceCodeConstructorArguments(StringBuilder buffer) {
 
     // nothing by default...
+  }
+
+  /**
+   * Appends the given constructor <code>argument</code> to the given <code>buffer</code>.
+   * 
+   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(String) append}.
+   * @param argument is the argument to append.
+   */
+  @SuppressWarnings("deprecation")
+  protected void appendSourceCodeConstructorArgument(StringBuilder buffer, Object argument) {
+
+    Class<?> argumentClass = argument.getClass();
+    if (argumentClass.isEnum()) {
+      buffer.append(argumentClass.getName());
+      buffer.append('.');
+      buffer.append(((Enum<?>) argument).name());
+      return;
+    }
+    buffer.append("new ");
+    buffer.append(argumentClass.getName());
+    buffer.append('(');
+    if (argumentClass == Date.class) {
+      // new java.util.Date(year, month, date, hrs, min, sec);
+      Date date = (Date) argument;
+      buffer.append(date.getYear());
+      buffer.append(',');
+      buffer.append(date.getMonth());
+      buffer.append(',');
+      buffer.append(date.getDate());
+      buffer.append(',');
+      buffer.append(date.getHours());
+      buffer.append(',');
+      buffer.append(date.getMinutes());
+      buffer.append(',');
+      buffer.append(date.getSeconds());
+    } else {
+      buffer.append(argument.toString());
+    }
+    buffer.append(')');
   }
 
 }

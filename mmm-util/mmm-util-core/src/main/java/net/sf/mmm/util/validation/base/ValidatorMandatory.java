@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a mandatory value is
@@ -41,7 +41,7 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
    * {@inheritDoc}
    */
   @Override
-  protected String validateNull() {
+  protected NlsMessage validateNull() {
 
     return getFailureMessage();
   }
@@ -49,17 +49,16 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
   /**
    * @return the failure message.
    */
-  private String getFailureMessage() {
+  private NlsMessage getFailureMessage() {
 
-    return NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class).failureMandatory()
-        .getLocalizedMessage();
+    return createBundle(NlsBundleUtilCoreRoot.class).errorMandatory();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected String validateNotNull(Object value) {
+  protected NlsMessage validateNotNull(Object value) {
 
     if (value instanceof Collection) {
       Collection<?> collection = (Collection<?>) value;

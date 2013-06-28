@@ -20,7 +20,12 @@
     <servlet-name>beans-service</servlet-name>
     <url-pattern>/mmm/service/*</url-pattern>
   </servlet-mapping>
-
+  
+  <servlet-mapping>
+    <servlet-name>beans-service</servlet-name>
+    <url-pattern>/mmm/js/mmm-nls-bundle.js</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Mmm.html</welcome-file>

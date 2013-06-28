@@ -20,6 +20,8 @@
   <extend-property name="locale" values="de"/>
   <set-property-fallback name="locale" value="de"/>
   <set-property name="locale" value="de"/>
-
+  
+  <script src="js/mmm-nls-bundle.js?name=net.sf.mmm.client.ui.PropertyLabels"/>
+  
   <!-- <collapse-all-properties />  -->
 </module>

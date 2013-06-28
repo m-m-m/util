@@ -259,6 +259,7 @@ import java.util.Locale;
  * For the term <em>internationalization</em> usually the shortcut <em>i18n</em> is used.
  * 
  * @see NlsMessageFactory
+ * @see net.sf.mmm.util.nls.api
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -317,7 +318,9 @@ public interface NlsMessage extends NlsObject {
   Object getArgument(int index);
 
   /**
-   * This method gets the untranslated message (default language should be English) with arguments filled in.
+   * This method gets the untranslated message (default language should be English) with arguments filled in.<br/>
+   * <b>ATTENTION:</b><br/>
+   * In most cases you wand to use {@link #getLocalizedMessage(Locale)} instead of this method.
    * 
    * @see #getLocalizedMessage(Locale, NlsTemplateResolver)
    * 
@@ -326,14 +329,10 @@ public interface NlsMessage extends NlsObject {
   String getMessage();
 
   /**
-   * This method tries to get the localized message as string. Since no {@link NlsTemplateResolver translator}
-   * is specified, the implementation may try its best to do the translation on its own according to the
-   * callers {@link java.util.Locale locale}. Therefore this method has to do some magic behind the scenes.
-   * This may only work if you follow specific rules of the implementation of this interface. If this fails or
-   * is NOT supported, the {@link #getMessage() untranslated} message should be used.<br>
+   * This method tries to get the localized message as string using the {@link Locale#getDefault() default}
+   * {@link Locale}.<br>
    * <b>ATTENTION:</b><br>
-   * If possible try to avoid using this method and use
-   * {@link #getLocalizedMessage(Locale, NlsTemplateResolver)} instead.
+   * If possible try to avoid using this method and use {@link #getLocalizedMessage(Locale)} instead.
    * 
    * @return the localized message.
    */
@@ -341,13 +340,10 @@ public interface NlsMessage extends NlsObject {
 
   /**
    * This method tries to get the localized message as string. Since no {@link NlsTemplateResolver translator}
-   * is specified, the implementation may try its best to do the translation on its own according to the
-   * callers {@link java.util.Locale locale}. Therefore this method has to do some magic behind the scenes.
-   * This may only work if you follow specific rules of the implementation of this interface. If this fails or
-   * is NOT supported, the {@link #getMessage() untranslated} message should be used.<br>
-   * <b>ATTENTION:</b><br>
-   * If possible try to avoid using this method and use
-   * {@link #getLocalizedMessage(Locale, NlsTemplateResolver)} instead.
+   * is specified, the implementation will try its best to do the translation on its own according to given
+   * {@link Locale}. This will only work if you follow specific rules as described in the
+   * {@link net.sf.mmm.util.nls.api package javadoc}. If this fails or is NOT supported, the
+   * {@link #getMessage() untranslated} message will be returned.
    * 
    * @param locale is the locale to translate to.
    * @return the localized message.

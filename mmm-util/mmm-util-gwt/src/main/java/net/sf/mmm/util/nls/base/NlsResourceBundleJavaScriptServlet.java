@@ -2,16 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import javax.inject.Inject;
+import javax.inject.Named;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import net.sf.mmm.util.nls.api.NlsResourceBundle;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
 /**
  * This is a {@link HttpServlet} that dynamically generates some JavaScript containing the content of
@@ -20,13 +18,14 @@ import net.sf.mmm.util.nls.api.NlsResourceBundle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundleJavaScriptServlet {
+// @Named(AbstractNlsResourceBundleJavaScriptServlet.URL_PATH)
+@Named("NlsResourceBundleJavaScriptServlet")
+@WebServlet(AbstractNlsResourceBundleJavaScriptServlet.URL_PATH)
+public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundleJavaScriptServlet implements
+    Controller {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 2060146216723588926L;
-
-  /** @see #writeBundles(PrintWriter, Locale) */
-  private NlsResourceBundleProvider bundleProvider;
 
   /**
    * The constructor.
@@ -37,26 +36,13 @@ public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundl
   }
 
   /**
-   * @param bundleProvider is the bundleProvider to set
-   */
-  @Inject
-  public void setBundleProvider(NlsResourceBundleProvider bundleProvider) {
-
-    this.bundleProvider = bundleProvider;
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
-  protected void writeBundles(PrintWriter writer, Locale locale) throws IOException {
+  public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-    Collection<NlsResourceBundle> bundleList = this.bundleProvider.getBundles();
-    for (NlsResourceBundle bundle : bundleList) {
-      String name = bundle.getName();
-      ResourceBundle rb = ResourceBundle.getBundle(name, locale);
-      writeBundle(writer, name, rb);
-    }
+    super.service(request, response);
+    return null;
   }
 
 }

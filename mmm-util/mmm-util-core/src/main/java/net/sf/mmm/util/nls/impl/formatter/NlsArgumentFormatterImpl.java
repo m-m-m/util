@@ -52,6 +52,8 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
       if (value == null) {
         if (arguments.containsKey(argument.getKey())) {
           hasValue = true;
+          // } else if (argument.getFormatter() instanceof NlsFormatterChoice) {
+          // hasValue = true;
         }
       } else {
         hasValue = true;

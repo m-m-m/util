@@ -210,7 +210,11 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   public void setValidationFailure(String validationFailure) {
 
-    boolean success = JavaScriptUtil.getInstance().setCustomValidity(getInputElement(), validationFailure);
+    String failure = validationFailure;
+    if (failure == null) {
+      failure = "";
+    }
+    boolean success = JavaScriptUtil.getInstance().setCustomValidity(getInputElement(), failure);
     if (!success) {
       // IE6-9 and other crap
 

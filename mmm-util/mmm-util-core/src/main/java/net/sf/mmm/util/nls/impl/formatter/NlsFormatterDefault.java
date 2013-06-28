@@ -38,6 +38,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {
 
@@ -46,7 +47,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
       if (object instanceof Number) {
         result = NumberFormat.getInstance(locale).format(object);
       } else if (object instanceof Date) {
-        DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
+        DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG, locale);
         result = format.format(object);
       } else if (object instanceof NlsObject) {
         NlsMessage message = ((NlsObject) object).toNlsMessage();
@@ -69,6 +70,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getStyle() {
 
     return null;
@@ -77,6 +79,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getType() {
 
     return null;

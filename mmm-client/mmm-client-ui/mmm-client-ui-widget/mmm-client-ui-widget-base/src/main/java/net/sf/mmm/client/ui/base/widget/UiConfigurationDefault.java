@@ -65,4 +65,13 @@ public class UiConfigurationDefault extends AbstractUiConfiguration {
     return buffer.toString();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLabelResourceBundleName() {
+
+    return DEFAULT_LABEL_RESOURCE_BUNDLE_NAME;
+  }
+
 }

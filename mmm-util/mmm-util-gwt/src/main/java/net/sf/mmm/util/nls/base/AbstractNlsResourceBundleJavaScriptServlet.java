@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.mmm.util.component.base.AbstractLoggableHttpServlet;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+
 /**
  * This is a {@link HttpServlet} that dynamically generates some JavaScript containing the content of
  * {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users locale.
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsResourceBundleJavaScriptServlet extends HttpServlet {
+public abstract class AbstractNlsResourceBundleJavaScriptServlet extends AbstractLoggableHttpServlet {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2997745885840819492L;
@@ -29,7 +32,10 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends HttpSer
   public static final String URL_PATH = "js/mmm-nls-bundle.js";
 
   /** The query string for {@link #URL_PATH} to query the bundle name as GET-parameter. */
-  public static final String URL_PARAM_NAME_QUERY = "?name=";
+  public static final String URL_PARAM_NAME = "name";
+
+  /** The query string for {@link #URL_PATH} to query the bundle name as GET-parameter. */
+  public static final String URL_PARAM_NAME_QUERY = "?" + URL_PARAM_NAME + "=";
 
   /**
    * The constructor.
@@ -45,20 +51,28 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends HttpSer
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    super.doGet(req, resp);
-    Locale locale = req.getLocale();
-    writeBundles(resp.getWriter(), locale);
+    String name = req.getParameter(URL_PARAM_NAME);
+    try {
+      if ((name == null) || (name.isEmpty())) {
+        throw new ObjectNotFoundException("HTTP-Parameter", URL_PARAM_NAME);
+      }
+      Locale locale = req.getLocale();
+      ResourceBundle bundle = ResourceBundle.getBundle(name, locale);
+      writeBundle(resp.getWriter(), name, bundle);
+    } catch (RuntimeException e) {
+      getLogger().warn("Failed to provide bundle: " + name, e);
+      throw e;
+    }
   }
 
   /**
-   * This method has to be implemented to detect the {@link ResourceBundle}s required on the client and to
-   * {@link #writeBundle(PrintWriter, String, ResourceBundle) write} them to the given <code>writer</code>.
-   * 
-   * @param writer is the {@link PrintWriter} to write the output to.
-   * @param locale is the {@link Locale} of the user.
-   * @throws IOException if writing fails.
+   * {@inheritDoc}
    */
-  protected abstract void writeBundles(PrintWriter writer, Locale locale) throws IOException;
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    doGet(req, resp);
+  }
 
   /**
    * This method writes the given {@link ResourceBundle} to the <code>writer</code>.
