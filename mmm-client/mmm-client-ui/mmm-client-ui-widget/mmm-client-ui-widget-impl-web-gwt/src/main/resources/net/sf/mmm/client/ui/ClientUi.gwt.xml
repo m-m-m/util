@@ -2,6 +2,8 @@
 <module>
   <inherits name="net.sf.mmm.util.UtilCore"/>
 
+  <script src="js/mmm-client-ui.js"/>
+  
   <source path="" includes="NlsBundleClientUiRoot.java"/>
   <source path="api"/>
   <source path="base"/>

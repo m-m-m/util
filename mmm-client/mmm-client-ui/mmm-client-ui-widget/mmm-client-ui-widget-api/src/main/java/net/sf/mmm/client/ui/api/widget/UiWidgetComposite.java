@@ -9,7 +9,7 @@ package net.sf.mmm.client.ui.api.widget;
  * @since 1.0.0
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  */
-public abstract interface UiWidgetComposite<CHILD extends UiWidget> extends AbstractUiWidgetComposite {
+public abstract interface UiWidgetComposite<CHILD extends UiWidget> extends UiWidgetAbstractComposite {
 
   /**
    * This method gets the child at the given index.

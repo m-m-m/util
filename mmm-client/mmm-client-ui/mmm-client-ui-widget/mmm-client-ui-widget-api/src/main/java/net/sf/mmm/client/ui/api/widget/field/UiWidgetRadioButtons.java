@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * <em>radio buttons</em>.<br/>
  * <b>ATTENTION:</b><br/>
  * You should only use this type of {@link UiWidgetOptionsField options field widgets} if you have a very
- * limited number of {@link #getOptions() options} (less than seven). Otherwise use {@link UiWidgetComboBox}
+ * limited number of {@link #getOptions() options} (less than seven). Otherwise use {@link UiWidgetComboBoxField}
  * instead.<br/>
  * Here you can see an example (with the {@link #setOptions(java.util.List) options} set to {"single",
  * "married", "divorced"}):

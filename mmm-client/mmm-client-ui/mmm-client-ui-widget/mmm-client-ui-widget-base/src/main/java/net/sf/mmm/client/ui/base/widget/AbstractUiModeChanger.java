@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.base.UiModeChanger;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 
 /**
@@ -27,17 +29,18 @@ public abstract class AbstractUiModeChanger implements UiModeChanger {
    * {@inheritDoc}
    */
   @Override
-  public void changeMode(AbstractUiWidgetNative<?, ?> widget, UiMode newMode) {
+  public void changeMode(UiWidget widget, UiMode newMode) {
 
-    if (widget.hasWidgetAdapter()) {
-      UiWidgetAdapter widgetAdapter = widget.getWidgetAdapter();
-      changeMode(widget, newMode, widgetAdapter);
+    AbstractUiWidgetNative<?, ?> nativeWidget = (AbstractUiWidgetNative<?, ?>) widget;
+    if (nativeWidget.hasWidgetAdapter()) {
+      UiWidgetAdapter widgetAdapter = nativeWidget.getWidgetAdapter();
+      changeMode(nativeWidget, newMode, widgetAdapter);
     }
   }
 
   /**
-   * This method is called from {@link #changeMode(AbstractUiWidgetNative, UiMode)} if the
-   * {@link UiWidgetAdapter} has {@link AbstractUiWidgetNative#hasWidgetAdapter() already been created}.
+   * This method is called from {@link #changeMode(UiWidget, UiMode)} if the {@link UiWidgetAdapter} has
+   * {@link AbstractUiWidgetNative#hasWidgetAdapter() already been created}.
    * 
    * @param widget is the {@link net.sf.mmm.client.ui.api.widget.UiWidget} where to change the {@link UiMode}
    *        to <code>newMode</code>.

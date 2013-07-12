@@ -129,6 +129,15 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
    * {@inheritDoc}
    */
   @Override
+  public void onAccessKeyPressed(boolean programmatic) {
+
+    fireEvent(EventType.CLICK, programmatic);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public String toString() {
 
     if (this.label == null) {

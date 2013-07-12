@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.base;
 
 import net.sf.mmm.client.ui.api.UiConfiguration;
-import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
@@ -19,22 +18,22 @@ import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory
 
 /**
  * This is a fake implementation of {@link ComponentContainer} used as fallback for
- * {@link UiContext#getContainer()} if no real {@link net.sf.mmm.util.component.api.Ioc} is available.
+ * {@link AbstractUiContext#getContainer()} if no real {@link net.sf.mmm.util.component.api.Ioc} is available.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class ComponentContainerContextFallback extends AbstractLoggableComponent implements ComponentContainer {
 
-  /** The {@link UiContext} instance. */
-  private final UiContext context;
+  /** The {@link AbstractUiContext} instance. */
+  private final AbstractUiContext context;
 
   /**
    * The constructor.
    * 
-   * @param context is the {@link UiContext}.
+   * @param context is the {@link AbstractUiContext}.
    */
-  public ComponentContainerContextFallback(UiContext context) {
+  public ComponentContainerContextFallback(AbstractUiContext context) {
 
     this.context = context;
   }

@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSwitchComposite;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSwitchComposite;
+import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetSwitchComposite}.
@@ -40,7 +41,7 @@ public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAd
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    if (this.showChildIndex > 0) {
+    if (getChildCount() > 0) {
       adapter.showChild(this.showChildIndex);
     }
   }
@@ -51,6 +52,10 @@ public abstract class AbstractUiWidgetSwitchComposite<ADAPTER extends UiWidgetAd
   @Override
   public void showChild(int index) {
 
+    if ((index < 0) && (index > getChildCount())) {
+      throw new ValueOutOfRangeException(Integer.valueOf(index), Integer.valueOf(0), Integer.valueOf(getChildCount()),
+          this + ".showChild(index)");
+    }
     this.showChildIndex = index;
     if (hasWidgetAdapter()) {
       getWidgetAdapter().showChild(index);

@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtText
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdapterGwtTextBox<String>> {
+public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdapterGwtTextBox> {
 
   /**
    * The constructor.
@@ -31,9 +31,9 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtTextBox<String> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtTextBox createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtTextBox<String>();
+    return new UiWidgetAdapterGwtTextBox();
   }
 
   /**

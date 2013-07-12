@@ -11,9 +11,10 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCell
 /**
  * This is the implementation of {@link UiWidgetRadioButtonsVertical} using GWT.
  * 
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
 public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
     AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>, VALUE> implements

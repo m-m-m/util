@@ -18,10 +18,11 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.UiWidgetAbstractWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -41,11 +42,11 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithValue<VALUE>,
+public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithValue<VALUE>,
     UiFeatureValueAndValidation<VALUE>, AttributeWriteModified {
 
   /** @see #getContext() */
-  private final UiContext context;
+  private final AbstractUiContext context;
 
   /** @see #fireEvent(UiEvent, boolean) */
   private EventSender eventSender;
@@ -61,7 +62,7 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   public AbstractUiWidget(UiContext context) {
 
     super();
-    this.context = context;
+    this.context = (AbstractUiContext) context;
   }
 
   /**
@@ -91,6 +92,9 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public final VALUE getValue() {
 
+    if (this.dataBinding == null) {
+      return null;
+    }
     return getDataBinding().getValue();
   }
 
@@ -100,6 +104,9 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public final VALUE getValueOrException(VALUE template) throws RuntimeException {
 
+    if (this.dataBinding == null) {
+      return null;
+    }
     return getDataBinding().getValueOrException(template);
   }
 
@@ -109,6 +116,9 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public VALUE getOriginalValue() {
 
+    if (this.dataBinding == null) {
+      return null;
+    }
     return getDataBinding().getOriginalValue();
   }
 
@@ -118,6 +128,9 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public VALUE getValueAndValidate(ValidationState state) {
 
+    if (this.dataBinding == null) {
+      return null;
+    }
     return getDataBinding().getValueAndValidate(state);
   }
 
@@ -127,6 +140,9 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
+    if (this.dataBinding == null) {
+      return template;
+    }
     return getDataBinding().getValueDirect(template, state);
   }
 
@@ -199,6 +215,11 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
   @Override
   public final void setValue(VALUE value) {
 
+    if ((this.dataBinding == null) && (value != null)) {
+      if (getValueClass() == null) {
+        throw new IllegalStateException("valueClass is null!");
+      }
+    }
     getDataBinding().setValue(value);
   }
 
@@ -370,7 +391,7 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
    * {@inheritDoc}
    */
   @Override
-  public final UiContext getContext() {
+  public final AbstractUiContext getContext() {
 
     return this.context;
   }
@@ -380,10 +401,7 @@ public abstract class AbstractUiWidget<VALUE> implements AbstractUiWidgetWithVal
    */
   protected final AttributeReadEventObserver getObserverSource() {
 
-    if (this.context instanceof AttributeReadEventObserver) {
-      return (AttributeReadEventObserver) this.context;
-    }
-    return null;
+    return this.context;
   }
 
   /**

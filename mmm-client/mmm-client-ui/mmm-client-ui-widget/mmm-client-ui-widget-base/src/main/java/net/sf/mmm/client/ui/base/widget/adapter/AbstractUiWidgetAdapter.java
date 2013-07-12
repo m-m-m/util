@@ -6,9 +6,13 @@ import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAccessKey;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAltText;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadColumnSpan;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadHeightInRows;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadLabel;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadMaximumTextLength;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
 import net.sf.mmm.client.ui.api.common.Length;
@@ -32,7 +36,8 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  */
 public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter, AttributeReadAltText,
     AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage>,
-    AttributeReadValidationFailure, AttributeReadAccessKey, AttributeReadFocused {
+    AttributeReadValidationFailure, AttributeReadAccessKey, AttributeReadFocused, AttributeReadMaximumTextLength,
+    AttributeReadHeightInRows, AttributeReadColumnSpan, AttributeReadResizable {
 
   /** @see #getToplevelWidget() */
   private final WIDGET toplevelWidget;
@@ -259,6 +264,42 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    */
   @Override
   public char getAccessKey() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getMaximumTextLength() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getHeightInRows() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isResizable() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getColumnSpan() {
 
     throw new NlsUnsupportedOperationException();
   }

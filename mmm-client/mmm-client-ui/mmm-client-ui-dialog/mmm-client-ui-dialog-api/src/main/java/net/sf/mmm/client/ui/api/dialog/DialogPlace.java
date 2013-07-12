@@ -46,7 +46,7 @@ import net.sf.mmm.util.value.base.SimpleGenericValueConverterImpl;
  * }
  * </pre>
  * 
- * If you do not need to {@link DialogManager#openWindow(DialogPlace) open} {@link DialogPlace places} in a
+ * If you do not need to {@link DialogManager#openInNewWindow(DialogPlace) open} {@link DialogPlace places} in a
  * new window, you can also combine your places with the {@link DialogManager} and instead of providing create
  * methods you define methods like:
  * 

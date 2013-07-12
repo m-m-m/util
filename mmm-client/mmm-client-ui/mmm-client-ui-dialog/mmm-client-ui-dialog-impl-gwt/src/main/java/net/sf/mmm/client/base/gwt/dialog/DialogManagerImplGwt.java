@@ -74,7 +74,7 @@ public class DialogManagerImplGwt extends AbstractDialogManager {
    * {@inheritDoc}
    */
   @Override
-  public ApplicationWindow openWindow(DialogPlace place) {
+  public ApplicationWindow openInNewWindow(DialogPlace place) {
 
     String url = Location.getHref();
     String hash = Location.getHash();

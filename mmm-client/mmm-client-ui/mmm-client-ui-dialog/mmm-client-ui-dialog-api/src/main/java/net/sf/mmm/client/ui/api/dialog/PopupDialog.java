@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.api.dialog;
 
 /**
  * This is the interface for a {@link PopupDialog} that displays itself on top of a {@link Dialog}. It can be
- * closed and typically be moved around by the end-user.
+ * closed and typically be moved around or resized by the end-user.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

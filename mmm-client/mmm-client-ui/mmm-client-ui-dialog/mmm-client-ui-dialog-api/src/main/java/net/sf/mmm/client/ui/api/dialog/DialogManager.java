@@ -111,14 +111,6 @@ public interface DialogManager {
    * @param place is the {@link DialogPlace} to open in the new window.
    * @return the handle for the new window.
    */
-  ApplicationWindow openWindow(DialogPlace place);
-
-  // /**
-  // * This method gets the {@link Dialog} with the given <code>id</code>.
-  // *
-  // * @param id is the {@link Dialog#getId() ID} of the requested {@link Dialog}.
-  // * @return the requested {@link Dialog} or <code>null</code> if NOT available.
-  // */
-  // Dialog getDialog(String id);
+  ApplicationWindow openInNewWindow(DialogPlace place);
 
 }

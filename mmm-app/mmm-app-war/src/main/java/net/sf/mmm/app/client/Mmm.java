@@ -17,13 +17,14 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextArea;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
@@ -108,7 +109,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     DialogManagerImplGwt dialogManager = new DialogManagerImplGwt();
     DialogControllerFactory dialogControllerFactory = new DialogControllerFactoryImpl();
     dialogManager.setDialogControllerFactory(dialogControllerFactory);
-    dialogManager.setUiContext(context);
+    dialogManager.setContext(context);
     dialogManager.initialize(DialogConstants.PLACE_HOME);
 
     PojoDescriptorBuilderFactoryLimited descriptorBuilderFactory = new PojoDescriptorBuilderFactoryLimited();
@@ -234,6 +235,12 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         mainWindow.setSize(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1, SizeUnit.PIXEL);
       }
     });
+
+    UiWidgetTree<String> tree = factory.create(UiWidgetTree.class);
+    UiTreeModelDummy model = new UiTreeModelDummy();
+    tree.setTreeModel(model);
+    tree.setValue(model.getRootNode());
+    verticalPanel2.addChild(tree);
     mainWindow.addChild(tabPanel);
 
     UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
@@ -241,7 +248,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     verticalPanel3.addChild(dateField);
     UiWidgetTextField textBoxField = factory.create(UiWidgetTextField.class);
     verticalPanel3.addChild(textBoxField);
-    UiWidgetRichTextArea richTextArea = factory.create(UiWidgetRichTextArea.class);
+    UiWidgetRichTextField richTextArea = factory.create(UiWidgetRichTextField.class);
     verticalPanel3.addChild(richTextArea);
     // mainWindow.addChild(verticalPanel3);
 

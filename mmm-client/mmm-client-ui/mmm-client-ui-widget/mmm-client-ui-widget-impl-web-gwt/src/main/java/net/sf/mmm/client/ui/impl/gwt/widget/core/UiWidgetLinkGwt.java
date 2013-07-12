@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLink;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLink;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
@@ -17,9 +16,6 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtLink;
  */
 public class UiWidgetLinkGwt extends AbstractUiWidgetLink<UiWidgetAdapterGwtLink> {
 
-  /** @see #getImage() */
-  private UiWidgetImageGwt image;
-
   /**
    * The constructor.
    * 
@@ -28,7 +24,6 @@ public class UiWidgetLinkGwt extends AbstractUiWidgetLink<UiWidgetAdapterGwtLink
   public UiWidgetLinkGwt(UiContext context) {
 
     super(context);
-    this.image = null;
   }
 
   /**
@@ -38,15 +33,6 @@ public class UiWidgetLinkGwt extends AbstractUiWidgetLink<UiWidgetAdapterGwtLink
   protected UiWidgetAdapterGwtLink createWidgetAdapter() {
 
     return new UiWidgetAdapterGwtLink();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetImage getImage() {
-
-    return this.image;
   }
 
   /**

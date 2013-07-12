@@ -4,8 +4,6 @@ package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.client.ui.api.common.EventType;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.KeyboardFilterAdapter;
@@ -14,6 +12,8 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
+import com.google.gwt.event.dom.client.HasBlurHandlers;
+import com.google.gwt.event.dom.client.HasFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Focusable;
@@ -60,7 +60,25 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
   protected abstract HasAllFocusHandlers getWidgetAsHasAllFocusHandlers();
 
   /**
-   * @see #setClickEventSender(UiFeatureClick, UiHandlerEventClick)
+   * @return the {@link #getToplevelWidget() widget} as {@link HasFocusHandlers} or <code>null</code> if NOT
+   *         supported.
+   */
+  protected HasFocusHandlers getWidgetAsHasFocusHandlers() {
+
+    return getWidgetAsHasAllFocusHandlers();
+  }
+
+  /**
+   * @return the {@link #getToplevelWidget() widget} as {@link HasBlurHandlers} or <code>null</code> if NOT
+   *         supported.
+   */
+  protected HasBlurHandlers getWidgetAsHasBlurHandlers() {
+
+    return getWidgetAsHasAllFocusHandlers();
+  }
+
+  /**
+   * Registers the given <code>handler</code> for click events.
    * 
    * @param handler is the {@link ClickHandler} to register.
    * @param widget is the {@link Widget} where to register the {@link ClickHandler}.
@@ -103,10 +121,13 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
   @Override
   protected void applyEventAdapterForFocus(EventAdapterGwt adapter) {
 
-    HasAllFocusHandlers focusWidget = getWidgetAsHasAllFocusHandlers();
-    if (focusWidget != null) {
-      focusWidget.addFocusHandler(adapter);
-      focusWidget.addBlurHandler(adapter);
+    HasFocusHandlers focusHandlers = getWidgetAsHasFocusHandlers();
+    if (focusHandlers != null) {
+      focusHandlers.addFocusHandler(adapter);
+    }
+    HasBlurHandlers blurHandlers = getWidgetAsHasBlurHandlers();
+    if (blurHandlers != null) {
+      blurHandlers.addBlurHandler(adapter);
     }
   }
 

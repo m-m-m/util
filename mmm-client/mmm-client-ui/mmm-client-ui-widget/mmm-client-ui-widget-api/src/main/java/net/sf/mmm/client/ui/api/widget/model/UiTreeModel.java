@@ -1,0 +1,41 @@
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.client.ui.api.widget.model;
+
+import java.util.List;
+import java.util.function.Consumer;
+
+/**
+ * This is the interface for the model for a {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree}.
+ * 
+ * @param <NODE> is the generic type of the tree-nodes of this model.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
+ */
+public interface UiTreeModel<NODE> extends UiModel {
+
+  /**
+   * @return the root-node of the tree. Must not be <code>null</code>.
+   */
+  NODE getRootNode();
+
+  /**
+   * This method gets the children of the given tree-node.
+   * 
+   * @param node the tree-node for which the children are requested.
+   * @return the {@link List} of child-nodes or <code>null</code> if NOT available and
+   *         {@link #getChildrenAsync(Object, Consumer) asynchronous loading} is required.
+   */
+  List<NODE> getChildren(NODE node);
+
+  /**
+   * This method gets the children of the given tree-node asynchronously.
+   * 
+   * @param node the tree-node for which the children are requested.
+   * @param callback is the {@link Consumer} that will be {@link Consumer#accept(Object) called} when the
+   *        children are available. Maybe <code>null</code> if only loading shall be triggered.
+   */
+  void getChildrenAsync(NODE node, Consumer<List<NODE>> callback);
+
+}

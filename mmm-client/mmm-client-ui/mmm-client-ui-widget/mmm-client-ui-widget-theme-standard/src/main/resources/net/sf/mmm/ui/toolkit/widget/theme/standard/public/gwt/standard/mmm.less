@@ -54,6 +54,7 @@ body {
 }
 input {
   font-size: @font-size;
+  padding-right: 1em;
 }
 
 *:focus {
@@ -63,12 +64,13 @@ input {
   border: none;
 }
 input:invalid {
+  box-shadow:none;
   border-color: darken(@color-invalid, 10%);
   background-color: @color-invalid;
+  /* background-size: cover; */
+  background-position: right; /*98% 50%;*/
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
   background-repeat: no-repeat;
-  /* background-size: cover; */
-  background-position: 98% 50%;
 }
 button {
   .bordered;

@@ -105,13 +105,4 @@ public class UiWidgetAdapterGwtDateBox extends UiWidgetAdapterGwtField<DateBox, 
     getActiveWidget().getTextBox().setMaxLength(length);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getMaximumTextLength() {
-
-    return getActiveWidget().getTextBox().getMaxLength();
-  }
-
 }

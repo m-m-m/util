@@ -2,14 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base;
 
-
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.api.UiContext}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiContextImpl extends AbstractUiContext {
+public class UiContextImpl extends AbstractUiContextImpl {
 
   /**
    * The constructor.

@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel}.
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetDynamicPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

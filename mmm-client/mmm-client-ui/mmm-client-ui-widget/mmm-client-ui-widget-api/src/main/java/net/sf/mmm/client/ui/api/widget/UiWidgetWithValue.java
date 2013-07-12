@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetWithValue<VALUE> extends AbstractUiWidgetWithValue<VALUE>, UiFeatureValueAndValidation<VALUE>,
+public interface UiWidgetWithValue<VALUE> extends UiWidgetAbstractWithValue<VALUE>, UiFeatureValueAndValidation<VALUE>,
     UiWidgetRegular {
 
   // nothing to add...

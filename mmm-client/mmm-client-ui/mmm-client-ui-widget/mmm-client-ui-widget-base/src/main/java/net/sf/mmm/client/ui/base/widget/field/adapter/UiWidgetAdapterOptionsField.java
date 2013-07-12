@@ -8,9 +8,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteOptions;
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
  * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetOptionsField}.
  * 
+ * @param <VALUE> is the generic type of the changed value.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed value.
  */
 public interface UiWidgetAdapterOptionsField<VALUE> extends UiWidgetAdapterField<VALUE, String>,
     AttributeWriteOptions<String> {

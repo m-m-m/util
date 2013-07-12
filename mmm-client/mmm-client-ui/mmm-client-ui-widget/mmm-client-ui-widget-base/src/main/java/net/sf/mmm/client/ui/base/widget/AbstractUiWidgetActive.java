@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
+import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
 /**
@@ -104,11 +105,31 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   @Override
   public void setAccessKey(char accessKey) {
 
-    // TODO hohwille add AccessKeyManager to check for duplicate bindings and to implement easily for toolkits
-    // no supporting this feature natively.
+    UiAccessKeyBinding accessKeyBinding = getContext().getAccessKeyBinding();
+    if ((accessKeyBinding != null) && (this.accessKey != ACCESS_KEY_NONE)) {
+      accessKeyBinding.unbindAccessKey(this.accessKey, this);
+    }
     this.accessKey = accessKey;
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setAccessKey(accessKey);
+    }
+    if ((accessKeyBinding != null) && (this.accessKey != ACCESS_KEY_NONE)) {
+      accessKeyBinding.bindAccessKey(this.accessKey, this);
+    }
+  }
+
+  /**
+   * 
+   * @param programmatic - <code>true</code> if the access key was "pressed" by the program,
+   *        <code>false</code> if performed by the end-user.
+   */
+  public void onAccessKeyPressed(boolean programmatic) {
+
+    // the default implementation...
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setFocused();
+    } else {
+      fireEvent(EventType.FOCUS_GAIN, programmatic);
     }
   }
 

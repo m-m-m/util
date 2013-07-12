@@ -32,7 +32,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     AttributeReadMinimumValue<ADAPTER_VALUE>, AttributeReadMaximumValue<ADAPTER_VALUE> {
 
   /** @see #getWidgetViewMode() */
-  private Label widgetViewMode;
+  private Widget widgetViewMode;
 
   /** @see #getActiveWidget() */
   private WIDGET activeWidget;
@@ -88,7 +88,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     ADAPTER_VALUE value = getValue();
     String valueAsString = convertValueToString(value);
-    getWidgetViewMode().setText(valueAsString);
+    ((Label) getWidgetViewMode()).setText(valueAsString);
   }
 
   /**
@@ -147,7 +147,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   /**
    * @return the widget for the {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view-mode}.
    */
-  protected final Label getWidgetViewMode() {
+  protected final Widget getWidgetViewMode() {
 
     if (this.widgetViewMode == null) {
       this.widgetViewMode = createViewWidget();
@@ -158,10 +158,13 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   }
 
   /**
-   * @return a new {@link Widget} that is used to display the field value in
-   *         {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view-mode}.
+   * Creates the {@link Widget} that is used to display the field value in
+   * {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view-mode}. If you override this method and change the
+   * widget type you will also need to override {@link #updateWidgetViewMode()}.
+   * 
+   * @return a new view {@link Widget}.
    */
-  protected Label createViewWidget() {
+  protected Widget createViewWidget() {
 
     Label view = new Label();
     return view;
@@ -175,7 +178,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     if (this.activeWidget == null) {
       this.activeWidget = createActiveWidget();
-      getInputElement().setAttribute("oninput", "mmmClearValidation(this)");
+      getInputElement().setAttribute("oninput", "net.sf.mmm.client.Ui.clearValidation(this)");
       attachActiveWidget();
     }
     return this.activeWidget;

@@ -3,20 +3,21 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBoxField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBox;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBoxField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComboBox;
 
 /**
- * This is a simple implementation of {@link UiWidgetComboBox} using GWT based on
+ * This is a simple implementation of {@link UiWidgetComboBoxField} using GWT based on
  * {@link UiWidgetAdapterGwtComboBox}.
+ * 
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidgetAdapterGwtComboBox<VALUE>, VALUE> {
+public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBoxField<UiWidgetAdapterGwtComboBox<VALUE>, VALUE> {
 
   /**
    * The constructor.
@@ -41,21 +42,21 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBox<UiWidge
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetComboBox> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetComboBoxField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetComboBox.class);
+      super(UiWidgetComboBoxField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetComboBox create(UiContext context) {
+    public UiWidgetComboBoxField create(UiContext context) {
 
       return new UiWidgetComboBoxGwt(context);
     }

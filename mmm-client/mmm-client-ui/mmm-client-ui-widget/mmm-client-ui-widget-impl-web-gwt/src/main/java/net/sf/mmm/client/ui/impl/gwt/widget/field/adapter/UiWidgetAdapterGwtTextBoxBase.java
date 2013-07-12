@@ -36,13 +36,4 @@ public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALU
     getActiveWidget().setMaxLength(length);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getMaximumTextLength() {
-
-    return getActiveWidget().getMaxLength();
-  }
-
 }

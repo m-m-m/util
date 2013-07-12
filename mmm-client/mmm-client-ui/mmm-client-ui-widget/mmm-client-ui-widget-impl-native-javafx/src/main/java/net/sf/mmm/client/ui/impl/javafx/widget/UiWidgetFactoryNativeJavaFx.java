@@ -25,9 +25,6 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 @Named(UiWidgetFactoryNative.CDI_NAME)
 public class UiWidgetFactoryNativeJavaFx extends AbstractUiWidgetFactoryNative {
 
-  /** @see #getMainWindow() */
-  private UiWidgetMainWindow mainWindow;
-
   /**
    * The constructor.
    */
@@ -68,21 +65,10 @@ public class UiWidgetFactoryNativeJavaFx extends AbstractUiWidgetFactoryNative {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetMainWindow getMainWindow() {
-
-    if (this.mainWindow == null) {
-      this.mainWindow = createMainWindow();
-    }
-    return this.mainWindow;
-  }
-
-  /**
    * @return a new instance of {@link UiWidgetMainWindow}.
    */
-  private UiWidgetMainWindow createMainWindow() {
+  @Override
+  protected UiWidgetMainWindow createMainWindow() {
 
     UiContext context = getContext();
     NlsNullPointerException.checkNotNull(UiContext.class, context);

@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox}.
+ * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a text
  * field. Such field allows to enter arbitrary text in a single line. If you want to allow the user to enter
- * text with line breaks (new lines) use {@link UiWidgetTextArea} instead.<br/>
+ * text with line breaks (new lines) use {@link UiWidgetTextAreaField} instead.<br/>
  * Here you can see an example (with {@link #setFieldLabel(String) field label} "Name"):
  * 
  * <pre>

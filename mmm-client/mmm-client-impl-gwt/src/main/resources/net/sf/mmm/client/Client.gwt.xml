@@ -4,8 +4,6 @@
   <inherits name="net.sf.mmm.service.Service"/>
   <inherits name="com.google.gwt.inject.Inject"/>
 
-  <script src="js/mmm-client-ui.js"/>
-
   <!-- <source path=""/> -->
   <source path="api"/>
   <source path="base"/>

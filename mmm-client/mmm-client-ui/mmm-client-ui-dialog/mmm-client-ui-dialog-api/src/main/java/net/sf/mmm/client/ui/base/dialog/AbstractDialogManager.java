@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.dialog;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.dialog.PopupDialog;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
+import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -37,11 +40,14 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   /** @see #getCurrentDialog(String) */
   private final Map<String, Dialog> type2currentDialogMap;
 
+  /** @see #getCurrentPopupDialog() */
+  private final LinkedList<PopupDialog> popupStack;
+
   /** @see #setDialogControllerFactory(DialogControllerFactory) */
   private DialogControllerFactory dialogControllerFactory;
 
-  /** @see #setUiContext(UiContext) */
-  private UiContext uiContext;
+  /** @see #setContext(UiContext) */
+  private UiContext context;
 
   /** @see #initialize(DialogPlace) */
   private DialogPlace defaultPlace;
@@ -57,6 +63,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
     super();
     this.id2DialogMap = new HashMap<String, DialogController<?>>();
     this.type2currentDialogMap = new HashMap<String, Dialog>();
+    this.popupStack = new LinkedList<PopupDialog>();
   }
 
   /**
@@ -73,19 +80,19 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   /**
    * @return the {@link UiContext} instance.
    */
-  protected UiContext getUiContext() {
+  protected UiContext getContext() {
 
-    return this.uiContext;
+    return this.context;
   }
 
   /**
    * @param uiContext is the {@link UiContext} to {@link Inject}.
    */
   @Inject
-  public void setUiContext(UiContext uiContext) {
+  public void setContext(UiContext uiContext) {
 
     getInitializationState().requireNotInitilized();
-    this.uiContext = uiContext;
+    this.context = uiContext;
   }
 
   /**
@@ -95,7 +102,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.uiContext == null) {
+    if (this.context == null) {
       throw new ResourceMissingException(UiContext.class.getSimpleName());
     }
     if (this.dialogControllerFactory == null) {
@@ -109,7 +116,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
         throw new ObjectMismatchException(dialogId, AbstractDialog.PATTERN_DIALOG_ID, controller);
       }
       controller.setDialogManager(this);
-      controller.setUiContext(this.uiContext);
+      controller.setUiContext(this.context);
       this.id2DialogMap.put(dialogId, controller);
     }
   }
@@ -192,8 +199,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   @Override
   public PopupDialog getCurrentPopupDialog() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return this.popupStack.peekLast();
   }
 
   /**
@@ -251,7 +257,22 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
     DialogController<?> dialogController = getDialog(dialogId);
     dialogController.show(dialogPlace);
     this.currentPlace = dialogPlace;
+    assert verifyUniqueAccessKeys();
+  }
 
+  /**
+   * @see UiAccessKeyBinding#verifyUniqueAccessKeys()
+   * @return always <code>true</code>.
+   */
+  private boolean verifyUniqueAccessKeys() {
+
+    if (this.context instanceof AbstractUiContext) {
+      UiAccessKeyBinding accessKeyBinding = ((AbstractUiContext) this.context).getAccessKeyBinding();
+      if (accessKeyBinding != null) {
+        accessKeyBinding.verifyUniqueAccessKeys();
+      }
+    }
+    return true;
   }
 
   /**

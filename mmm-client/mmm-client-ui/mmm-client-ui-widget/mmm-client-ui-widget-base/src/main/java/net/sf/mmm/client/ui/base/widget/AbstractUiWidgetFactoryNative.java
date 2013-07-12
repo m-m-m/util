@@ -13,6 +13,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
+import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
@@ -35,6 +36,9 @@ public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent im
 
   /** @see #getContext() */
   private UiContext context;
+
+  /** @see #getMainWindow() */
+  private UiWidgetMainWindow mainWindow;
 
   /**
    * The constructor.
@@ -109,5 +113,22 @@ public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent im
     Object nativeWidget = abstractWidget.getWidgetAdapter().getToplevelWidget();
     return nativeWidget;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetMainWindow getMainWindow() {
+
+    if (this.mainWindow == null) {
+      this.mainWindow = createMainWindow();
+    }
+    return this.mainWindow;
+  }
+
+  /**
+   * @return a new instance of {@link UiWidgetMainWindow} for {@link #getMainWindow()}.
+   */
+  protected abstract UiWidgetMainWindow createMainWindow();
 
 }

@@ -10,9 +10,8 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed value.
  */
-public abstract interface UiWidgetAdapterTextFieldBase<VALUE> extends UiWidgetAdapterTextualInputField<VALUE, String>,
+public abstract interface UiWidgetAdapterTextFieldBase extends UiWidgetAdapterTextualInputField<String, String>,
     AttributeWriteKeyboardFilter {
 
   // nothing to add

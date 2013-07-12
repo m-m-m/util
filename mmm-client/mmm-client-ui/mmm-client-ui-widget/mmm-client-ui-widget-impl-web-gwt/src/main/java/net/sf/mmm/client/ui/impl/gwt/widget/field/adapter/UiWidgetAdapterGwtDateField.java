@@ -143,15 +143,6 @@ public class UiWidgetAdapterGwtDateField extends UiWidgetAdapterGwtDateBasedStri
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getMaximumTextLength() {
-
-    return getActiveWidget().getMaximumTextLength();
-  }
-
-  /**
    * HTML5 based date field based on {@link TextBoxBase}.
    */
   public static class Html5DateField extends TextBoxBase implements AttributeWriteMaximumTextLength {

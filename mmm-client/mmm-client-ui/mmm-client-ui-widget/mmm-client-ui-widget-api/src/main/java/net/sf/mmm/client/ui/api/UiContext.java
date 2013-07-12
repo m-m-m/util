@@ -4,7 +4,6 @@ package net.sf.mmm.client.ui.api;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
-import net.sf.mmm.client.ui.base.binding.UiDataBindingFactory;
 import net.sf.mmm.util.component.api.ComponentContainer;
 
 /**
@@ -63,9 +62,9 @@ public interface UiContext {
    */
   RoleFactory getRoleFactory();
 
-  /**
-   * @return the instance of {@link UiDataBindingFactory}.
-   */
-  UiDataBindingFactory getDataBindingFactory();
+  // /**
+  // * @return the instance of {@link UiDataBindingFactory}.
+  // */
+  // UiDataBindingFactory getDataBindingFactory();
 
 }

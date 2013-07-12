@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
+
 import com.google.gwt.user.client.ui.PasswordTextBox;
 
 /**
@@ -11,7 +13,8 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtPasswordTextBox extends UiWidgetAdapterGwtTextBoxBase<PasswordTextBox, String> {
+public class UiWidgetAdapterGwtPasswordTextBox extends UiWidgetAdapterGwtTextBoxBase<PasswordTextBox, String> implements
+    UiWidgetAdapterPasswordField {
 
   /**
    * The constructor.

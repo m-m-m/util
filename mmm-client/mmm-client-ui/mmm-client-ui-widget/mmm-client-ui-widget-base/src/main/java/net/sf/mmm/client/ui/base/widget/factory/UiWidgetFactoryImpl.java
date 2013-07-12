@@ -19,7 +19,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetSection;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBoxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -292,9 +292,9 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
-  public <VALUE> UiWidgetComboBox<VALUE> createComboBox(String label, final EnumDefinition<VALUE, ?> enumDefinition) {
+  public <VALUE> UiWidgetComboBoxField<VALUE> createComboBox(String label, final EnumDefinition<VALUE, ?> enumDefinition) {
 
-    final UiWidgetComboBox<VALUE> widget = create(UiWidgetComboBox.class);
+    final UiWidgetComboBoxField<VALUE> widget = create(UiWidgetComboBoxField.class);
     widget.setFieldLabel(label);
     widget.setFormatter(enumDefinition.getFormatter());
     Runnable callback = new Runnable() {

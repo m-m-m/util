@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetPasswordField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInputField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetPasswordField}.
@@ -14,8 +14,8 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInpu
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetPasswordField<ADAPTER extends UiWidgetAdapterTextualInputField<String, String>>
-    extends AbstractUiWidgetTextualInputField<ADAPTER, String, String> implements UiWidgetPasswordField {
+public abstract class AbstractUiWidgetPasswordField<ADAPTER extends UiWidgetAdapterPasswordField> extends
+    AbstractUiWidgetTextualInputField<ADAPTER, String, String> implements UiWidgetPasswordField {
 
   /**
    * The constructor.

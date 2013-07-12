@@ -8,9 +8,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
  * This is the interface for a {@link UiWidgetMenuItem menu item widget} that has a {@link #getLabel() label}
- * and additionally a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox checkbox}.
+ * and additionally a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField checkbox}.
  * 
- * @see net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox
+ * @see net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

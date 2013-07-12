@@ -8,9 +8,8 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed value.
  */
-public interface UiWidgetAdapterTextField<VALUE> extends UiWidgetAdapterTextFieldBase<VALUE> {
+public interface UiWidgetAdapterTextField extends UiWidgetAdapterTextFieldBase {
 
   // nothing to add
 

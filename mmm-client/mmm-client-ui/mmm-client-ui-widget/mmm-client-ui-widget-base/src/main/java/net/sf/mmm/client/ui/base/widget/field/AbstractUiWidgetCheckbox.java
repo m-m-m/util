@@ -3,11 +3,11 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckbox;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetCheckbox}.
+ * This is the abstract base implementation of {@link UiWidgetCheckboxField}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * 
@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCheckbox> extends
-    AbstractUiWidgetField<ADAPTER, Boolean, Boolean> implements UiWidgetCheckbox {
+    AbstractUiWidgetField<ADAPTER, Boolean, Boolean> implements UiWidgetCheckboxField {
 
   /** @see #getLabel() */
   private String label;

@@ -11,10 +11,9 @@ import net.sf.mmm.client.ui.api.common.FlagModifier;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
-import net.sf.mmm.client.ui.api.widget.AbstractUiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.UiWidgetAbstractComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.aria.role.AbstractRole;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.attribute.AbstractFlagAdvanced;
@@ -41,7 +40,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VALUE> extends AbstractUiWidget<VALUE>
-    implements AbstractUiWidgetComposite, AttributeWriteAriaRole {
+    implements UiWidgetAbstractComposite, AttributeWriteAriaRole {
 
   /** @see #setIdPrefix(String) */
   private static String idPrefix = "mmm";
@@ -317,7 +316,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       return;
     }
     doSetMode(mode);
-    ((AbstractUiContext) getContext()).getModeChanger().changeMode(this, mode);
+    getContext().getModeChanger().changeMode(this, mode);
     this.mode = mode;
     // TODO hohwille add programmatic attribute to internal method?
     boolean programmatic = true;

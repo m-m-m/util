@@ -7,8 +7,8 @@ package net.sf.mmm.util.collection.api;
  * its only {@link TreeNode node} in the tree that has no {@link #getParent() parent}.
  * 
  * @param <NODE> is the generic type for self-references. Each sub-type of this interface should specialize
- *        this type to itself. End-users should simply use an unbound wildcard (
- *        <code>{@link TreeNode}&lt;?&gt;</code> ).
+ *        this type to itself. End-users should use implementations where the generic is finally bound. For
+ *        generic usage simply use an unbound wildcard ( <code>{@link TreeNode}&lt;?&gt;</code> ).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

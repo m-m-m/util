@@ -10,6 +10,7 @@ import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomButtonPanel;
+import net.sf.mmm.client.ui.impl.gwt.widget.complex.UiWidgetTreeGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetCollapsableSectionGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetImageGwt;
@@ -27,8 +28,8 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLongFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetPasswordFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsVerticalGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRichTextAreaGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextAreaGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRichTextFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextAreaFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuBarGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuGwt;
@@ -57,9 +58,6 @@ import com.google.gwt.user.client.ui.UIObject;
 @Named(UiWidgetFactoryNative.CDI_NAME)
 public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
 
-  /** @see #getMainWindow() */
-  private UiWidgetMainWindow mainWindow;
-
   /**
    * The constructor.
    */
@@ -77,8 +75,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     // field
     register(new UiWidgetTextFieldGwt.Factory());
     register(new UiWidgetPasswordFieldGwt.Factory());
-    register(new UiWidgetTextAreaGwt.Factory());
-    register(new UiWidgetRichTextAreaGwt.Factory());
+    register(new UiWidgetTextAreaFieldGwt.Factory());
+    register(new UiWidgetRichTextFieldGwt.Factory());
     register(new UiWidgetLongFieldGwt.Factory());
     register(new UiWidgetIntegerFieldGwt.Factory());
     register(new UiWidgetIntegerRangeFieldGwt.Factory());
@@ -102,6 +100,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetMenuGwt.Factory());
     register(new UiWidgetMenuItemClickableGwt.Factory());
     register(new UiWidgetMenuItemSeparatorGwt.Factory());
+    // complex
+    register(new UiWidgetTreeGwt.Factory());
     // window
     register(new UiWidgetPopupGwt.Factory());
   }
@@ -110,18 +110,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetMainWindow getMainWindow() {
-
-    if (this.mainWindow == null) {
-      this.mainWindow = createMainWindow();
-    }
-    return this.mainWindow;
-  }
-
-  /**
-   * @return a new instance of {@link UiWidgetMainWindow}.
-   */
-  private UiWidgetMainWindow createMainWindow() {
+  protected UiWidgetMainWindow createMainWindow() {
 
     UiContext context = getContext();
     NlsNullPointerException.checkNotNull(UiContext.class, context);

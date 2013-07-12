@@ -37,18 +37,6 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void initializeWidgetAdapter(UiWidgetAdapterGwtTabLayoutPanel adapter) {
-
-    super.initializeWidgetAdapter(adapter);
-    if ((getShowChildIndex() == 0) && (getChildCount() > 0)) {
-      adapter.showChild(0);
-    }
-  }
-
-  /**
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetTabPanel> {

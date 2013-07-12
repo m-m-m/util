@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
+import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterHorizontalPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -14,7 +15,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtHorizontalPanel extends UiWidgetAdapterGwtPanel<HorizontalPanel> {
+public class UiWidgetAdapterGwtHorizontalPanel extends UiWidgetAdapterGwtPanel<HorizontalPanel> implements
+    UiWidgetAdapterHorizontalPanel {
 
   /**
    * The constructor.

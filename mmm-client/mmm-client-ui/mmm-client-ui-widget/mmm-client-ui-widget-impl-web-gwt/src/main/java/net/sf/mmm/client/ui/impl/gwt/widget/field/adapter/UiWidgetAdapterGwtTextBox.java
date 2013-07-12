@@ -12,10 +12,9 @@ import com.google.gwt.user.client.ui.TextBox;
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed value - typically {@link String}.
  */
-public class UiWidgetAdapterGwtTextBox<VALUE> extends UiWidgetAdapterGwtTextBoxBase<TextBox, VALUE> implements
-    UiWidgetAdapterTextField<VALUE> {
+public class UiWidgetAdapterGwtTextBox extends UiWidgetAdapterGwtTextBoxBase<TextBox, String> implements
+    UiWidgetAdapterTextField {
 
   /**
    * The constructor.

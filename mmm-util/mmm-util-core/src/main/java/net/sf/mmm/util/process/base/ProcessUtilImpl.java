@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.concurrent.api.Stoppable;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
@@ -116,9 +115,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   @Inject
   public void setExecutor(Executor executor) {
 
-    if (this.executor != null) {
-      throw new AlreadyInitializedException();
-    }
+    getInitializationState().requireNotInitilized();
     this.executor = executor;
   }
 

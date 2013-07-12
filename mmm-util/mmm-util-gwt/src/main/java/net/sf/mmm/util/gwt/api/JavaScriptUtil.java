@@ -5,6 +5,8 @@ package net.sf.mmm.util.gwt.api;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
  * This class holds a collection of utility functions for GWT (Google Web Toolkit) using JSNI (JavaScript
@@ -200,6 +202,67 @@ public class JavaScriptUtil {
       }
     }
     return clone;
+  }-*/;
+
+  /**
+   * This method gets the response of the given {@link XMLHttpRequest} as {@link JavaScriptBlob}.
+   *
+   * @param xhr is the {@link XMLHttpRequest} that {@link XMLHttpRequest#getStatus() has already been} loaded.
+   * @return the response as a {@link JavaScriptBlob}.
+   */
+  public native JavaScriptBlob getResponseAsBlob(XMLHttpRequest xhr) /*-{
+    BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+    var bb = new BlobBuilder();
+    bb.append(xhr.response);
+    return bb.getBlob();
+  }-*/;
+
+  /**
+   * This method gets the {@link JavaScriptFileList} for a given {@link Event}. E.g. if files are dragged onto some
+   * element in the browser or in case of an {@link Event} (e.g. of {@value Event#ONCHANGE}) of a file input you can
+   * receive the {@link JavaScriptFileList} here.
+   *
+   * @param event is the {@link Event}.
+   * @return the {@link JavaScriptFileList} or <code>null</code> if no files are available.
+   */
+  public native JavaScriptFileList getFileList(Event event) /*-{
+    if (event.dataTransfer && event.dataTransfer.files) {
+      // drag and drop suppoer
+      return event.dataTransfer.files;
+    } else if (event.target && event.target.files) {
+      // file upload item <input type="file">
+      return event.target.files;
+    } else {
+      return null;
+    }
+  }-*/;
+
+
+  /**
+   * This method creates the URL pointing to a {@link JavaScriptBlob}. Such URL is starting with the "blob:" scheme and
+   * is only valid within the current JS context.
+   *
+   * @param blob is the {@link JavaScriptBlob}.
+   * @return the new instance.
+   */
+  public native String getBlobUrl(JavaScriptBlob blob) /*-{
+    var getBlobURL: (window.URL && URL.createObjectURL.bind(URL)) ||
+      (window.webkitURL && webkitURL.createObjectURL.bind(webkitURL)) ||
+      window.createObjectURL;
+    return getBlobUrl(blob);
+  }-*/;
+
+  /**
+   * This method opens a given {@link JavaScriptBlob}. The browser will show a regular popup to open the file or save it
+   * to the local disc. Depending on its mimetype the browser might already open the file immediately in a new window.
+   *
+   * @param blob is the {@link JavaScriptBlob}.
+   */
+  public native void openBlob(JavaScriptBlob blob) /*-{
+    var getBlobURL: (window.URL && URL.createObjectURL.bind(URL)) ||
+      (window.webkitURL && webkitURL.createObjectURL.bind(webkitURL)) ||
+      window.createObjectURL;
+    window.open(getBlobUrl(blob), '_blank');
   }-*/;
 
   //formatter:on

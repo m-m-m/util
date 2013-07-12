@@ -4,7 +4,6 @@ package net.sf.mmm.client.ui.impl.gwt.widget.core;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetButton;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtButton;
@@ -17,9 +16,6 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.adapter.UiWidgetAdapterGwtButto
  */
 public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwtButton> {
 
-  /** @see #getImage() */
-  private UiWidgetImageGwt image;
-
   /**
    * The constructor.
    * 
@@ -28,7 +24,6 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
   public UiWidgetButtonGwt(UiContext context) {
 
     super(context);
-    this.image = null;
   }
 
   /**
@@ -38,15 +33,6 @@ public class UiWidgetButtonGwt extends AbstractUiWidgetButton<UiWidgetAdapterGwt
   protected UiWidgetAdapterGwtButton createWidgetAdapter() {
 
     return new UiWidgetAdapterGwtButton();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetImage getImage() {
-
-    return this.image;
   }
 
   /**

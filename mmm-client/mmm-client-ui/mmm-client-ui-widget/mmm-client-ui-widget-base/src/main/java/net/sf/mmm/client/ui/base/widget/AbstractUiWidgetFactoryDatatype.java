@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBox;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBoxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
@@ -285,7 +285,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     @Override
     public UiWidgetField<E> create(UiContext context) {
 
-      UiWidgetComboBox<E> radioButtons = context.getWidgetFactory().create(UiWidgetComboBox.class);
+      UiWidgetComboBoxField<E> radioButtons = context.getWidgetFactory().create(UiWidgetComboBoxField.class);
       radioButtons.setFormatter(this.formatter);
       radioButtons.setOptions(getOptionList());
       return radioButtons;
