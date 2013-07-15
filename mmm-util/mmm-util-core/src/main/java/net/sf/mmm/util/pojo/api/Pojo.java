@@ -19,9 +19,6 @@ package net.sf.mmm.util.pojo.api;
  * {@link PojoFactory} in order to create instances of that {@link Pojo} with the utilities offered here.</li>
  * </ul>
  * 
- * <b>ATTENTION:</b><br>
- * Do NOT use this interface in your code. Its only purpose is to document the meaning of the term POJO.
- * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

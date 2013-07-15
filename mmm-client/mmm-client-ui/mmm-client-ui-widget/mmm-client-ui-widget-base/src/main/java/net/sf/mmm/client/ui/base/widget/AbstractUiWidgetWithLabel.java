@@ -79,4 +79,16 @@ public abstract class AbstractUiWidgetWithLabel<ADAPTER extends UiWidgetAdapterW
     return super.toString() + "[" + this.label + "]";
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    if (this.label != null) {
+      return this.label;
+    }
+    return super.getSource();
+  }
+
 }

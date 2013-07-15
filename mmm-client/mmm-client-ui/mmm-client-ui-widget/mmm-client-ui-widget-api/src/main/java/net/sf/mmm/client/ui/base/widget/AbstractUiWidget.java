@@ -123,6 +123,17 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
   }
 
   /**
+   * @return the {@link UiDataBinding#getRecentValue() recent value}.
+   */
+  protected VALUE getRecentValue() {
+
+    if (this.dataBinding == null) {
+      return null;
+    }
+    return getDataBinding().getRecentValue();
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -691,6 +702,15 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
   protected String getLabelResourceBundleName() {
 
     return getContext().getConfiguration().getLabelResourceBundleName();
+  }
+
+  /**
+   * @return a {@link String} representation of this object that qualifies as source description that might be
+   *         displayed to end-users (unlike {@link #toString()} what is for debugging only).
+   */
+  public String getSource() {
+
+    return getId();
   }
 
   /**

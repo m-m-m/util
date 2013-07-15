@@ -55,7 +55,9 @@ public abstract class UiWidgetAdapterGwtSingleMutableComposite<WIDGET extends Wi
       if (this.childWidget != null) {
         remove(this.childWidget);
       }
-      add(child);
+      if (child != null) {
+        add(child);
+      }
     }
 
     /**

@@ -17,6 +17,15 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 public interface UiWidgetGridCell extends UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteColumnSpan,
     UiWidgetNative {
 
-  // nothing to add...
+  /**
+   * This method creates a {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel} adds the
+   * given <code>children</code> to it and {@link #setChild(UiWidgetRegular) sets} it it as child of this
+   * cell.<br/>
+   * 
+   * @see #setChild(UiWidgetRegular)
+   * 
+   * @param children are the children to add.
+   */
+  void setChildren(UiWidgetRegular... children);
 
 }

@@ -87,4 +87,16 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu> 
     return submenu;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    if (this.label != null) {
+      return this.label;
+    }
+    return super.getSource();
+  }
+
 }

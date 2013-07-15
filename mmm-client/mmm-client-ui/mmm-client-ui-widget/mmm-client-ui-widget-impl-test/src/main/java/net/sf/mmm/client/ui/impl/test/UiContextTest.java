@@ -7,6 +7,8 @@ import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.base.UiContextImpl;
 import net.sf.mmm.client.ui.impl.test.widget.UiWidgetFactoryNativeTest;
+import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory;
+import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.api.UiContext} for testing without any native
@@ -58,6 +60,10 @@ public class UiContextTest extends UiContextImpl {
       UiPopupHelperTest impl = new UiPopupHelperTest();
       impl.initialize();
       setPopupHelper(impl);
+    }
+
+    if (AbstractPojoDescriptorBuilderFactory.getInstance() == null) {
+      PojoDescriptorBuilderFactoryImpl.getInstance();
     }
   }
 

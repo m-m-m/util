@@ -97,4 +97,16 @@ public abstract class AbstractUiWidgetTab<ADAPTER extends UiWidgetAdapterTab> ex
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    if (this.label != null) {
+      return this.label;
+    }
+    return super.getSource();
+  }
+
 }

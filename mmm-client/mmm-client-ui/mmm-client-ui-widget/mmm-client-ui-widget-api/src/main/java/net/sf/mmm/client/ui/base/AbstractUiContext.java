@@ -12,7 +12,6 @@ import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEventObserver;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
-import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactoryImpl;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
@@ -55,9 +54,6 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
   /** @see #getContainer() */
   private ComponentContainer container;
-
-  /** @see #setWidgetFactoryNative(UiWidgetFactoryNative) */
-  private UiWidgetFactoryNative widgetFactoryNative;
 
   /** @see #getDataBindingFactory() */
   private UiDataBindingFactory dataBindingFactory;
@@ -218,24 +214,6 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
     getInitializationState().requireNotInitilized();
     this.widgetFactory = widgetFactory;
-  }
-
-  /**
-   * @return the instance of {@link UiWidgetFactoryNative}.
-   */
-  public UiWidgetFactoryNative getWidgetFactoryNative() {
-
-    return this.widgetFactoryNative;
-  }
-
-  /**
-   * @param widgetFactoryNative is the {@link UiWidgetFactoryNative} to {@link Inject}.
-   */
-  public void setWidgetFactoryNative(UiWidgetFactoryNative widgetFactoryNative) {
-
-    // see doInitialize()
-    getInitializationState().requireNotInitilized();
-    this.widgetFactoryNative = widgetFactoryNative;
   }
 
   /**

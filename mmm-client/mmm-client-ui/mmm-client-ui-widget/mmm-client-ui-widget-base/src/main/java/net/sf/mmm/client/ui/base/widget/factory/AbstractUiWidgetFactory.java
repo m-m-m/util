@@ -13,6 +13,7 @@ import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
+import net.sf.mmm.client.ui.base.AbstractUiContextImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
@@ -52,7 +53,7 @@ public abstract class AbstractUiWidgetFactory extends AbstractLoggableComponent 
       throw new ResourceMissingException(UiContext.class.getSimpleName());
     }
     if (this.widgetFactoryNative == null) {
-      this.widgetFactoryNative = this.context.getWidgetFactoryNative();
+      this.widgetFactoryNative = ((AbstractUiContextImpl) this.context).getWidgetFactoryNative();
       if (this.widgetFactoryNative == null) {
         throw new ResourceMissingException(UiWidgetFactoryNative.class.getSimpleName());
       }

@@ -265,4 +265,23 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValidationFailure(String validationFailure) {
+
+    getFirstField().setValidationFailure(validationFailure);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getValidationFailure() {
+
+    // actually we need to append the validation failure from all fields...
+    return getFirstField().getValidationFailure();
+  }
+
 }

@@ -18,6 +18,9 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public class ValidatorMandatory extends AbstractValueValidator<Object> {
 
+  /** @see #getCode() */
+  public static final String CODE = "ValdiatorMandatory";
+
   /** @see #getInstance() */
   private static final ValidatorMandatory INSTANCE = new ValidatorMandatory();
 
@@ -27,6 +30,15 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
   public ValidatorMandatory() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getCode() {
+
+    return CODE;
   }
 
   /**

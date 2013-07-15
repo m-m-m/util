@@ -103,6 +103,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
     VALUE v = newValue;
     if (v == null) {
       // Prevent NPE and simplify clearing fields...
+      // if (getWidget().getContext().getContainer().get(DatatypeDetector.class).isDatatype(getWidget().getV))
       v = createNewValue();
     }
     doSetValue(v, forUser);
@@ -285,11 +286,10 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
   }
 
   /**
-   * @return the {@link #getOriginalValue() original value} or the {@link #setValueForUser(Object) value that
-   *         has been set for the user} after the {@link #getOriginalValue() original value} was set for the
-   *         last time.
+   * {@inheritDoc}
    */
-  protected VALUE getRecentValue() {
+  @Override
+  public VALUE getRecentValue() {
 
     return this.recentValue;
   }
@@ -508,7 +508,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
    */
   protected String getSource() {
 
-    return this.widget.toString();
+    return this.widget.getSource();
   }
 
   /**

@@ -476,4 +476,13 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
     return (success && delegateSuccess);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    return ((AbstractUiWidget<?>) getDelegate()).getSource();
+  }
+
 }

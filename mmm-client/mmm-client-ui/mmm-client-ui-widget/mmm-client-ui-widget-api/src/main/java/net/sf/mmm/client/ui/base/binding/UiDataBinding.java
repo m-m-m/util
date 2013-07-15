@@ -134,4 +134,12 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    */
   boolean doValidate(ValidationState state, VALUE value);
 
+  /**
+   * @return the last value that has been set via {@link #setValue(Object, boolean)}. This is the
+   *         {@link #getOriginalValue() original value} or the {@link #setValueForUser(Object) value that has
+   *         been set for the user} after the {@link #getOriginalValue() original value} was set for the last
+   *         time.
+   */
+  VALUE getRecentValue();
+
 }

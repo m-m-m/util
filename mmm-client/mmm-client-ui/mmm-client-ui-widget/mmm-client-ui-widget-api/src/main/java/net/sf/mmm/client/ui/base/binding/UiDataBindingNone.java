@@ -142,6 +142,15 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
    * {@inheritDoc}
    */
   @Override
+  public Void getRecentValue() {
+
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void addValidatorMandatory() {
 
     throw new IllegalStateException();

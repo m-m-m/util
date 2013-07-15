@@ -64,7 +64,10 @@ public class UiWidgetAdapterGwtBorderPanel extends
   @Override
   public void setChild(UiWidgetRegular child) {
 
-    Widget childWidget = getToplevelWidget(child);
+    Widget childWidget = null;
+    if (child != null) {
+      childWidget = getToplevelWidget(child);
+    }
     getToplevelWidget().setChild(childWidget);
   }
 

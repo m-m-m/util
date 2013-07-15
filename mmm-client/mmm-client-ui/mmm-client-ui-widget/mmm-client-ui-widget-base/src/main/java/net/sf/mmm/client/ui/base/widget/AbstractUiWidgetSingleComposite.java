@@ -94,7 +94,9 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
     }
     doSetChild(this.child, child);
     this.child = child;
-    setParent(child, this);
+    if (child != null) {
+      setParent(child, this);
+    }
   }
 
   /**

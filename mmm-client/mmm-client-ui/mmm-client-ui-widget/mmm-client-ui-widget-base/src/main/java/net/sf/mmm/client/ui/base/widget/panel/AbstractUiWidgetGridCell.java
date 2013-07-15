@@ -5,8 +5,10 @@ package net.sf.mmm.client.ui.base.widget.panel;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridCell;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetGridCell}.
@@ -64,6 +66,26 @@ public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterGr
     this.columnSpan = columnSpan;
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setColumnSpan(columnSpan);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setChildren(UiWidgetRegular... children) {
+
+    NlsNullPointerException.checkNotNull("children", children);
+    if (children.length == 0) {
+      setChild(null);
+    } else if (children.length == 1) {
+      setChild(children[0]);
+    } else {
+      UiWidgetHorizontalPanel panel = getContext().getWidgetFactory().create(UiWidgetHorizontalPanel.class);
+      for (UiWidgetRegular child : children) {
+        panel.addChild(child);
+      }
+      setChild(panel);
     }
   }
 

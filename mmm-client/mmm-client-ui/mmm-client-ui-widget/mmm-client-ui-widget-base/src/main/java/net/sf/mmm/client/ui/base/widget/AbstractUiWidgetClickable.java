@@ -146,4 +146,16 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
     return super.toString() + "[" + this.label + "]";
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    if (this.label != null) {
+      return this.label;
+    }
+    return super.getSource();
+  }
+
 }

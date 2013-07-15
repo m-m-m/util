@@ -82,6 +82,18 @@ public abstract class AbstractUiWidgetGridRow<ADAPTER extends UiWidgetAdapterGri
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetGridCell addChildren(UiWidgetRegular... children) {
+
+    UiWidgetGridCell cell = getContext().getWidgetFactory().create(UiWidgetGridCell.class);
+    cell.setChildren(children);
+    addChild(cell);
+    return cell;
+  }
+
+  /**
    * Verifies that the column count is not exceeded after addChild operation.
    * 
    * @param child is the child to add.

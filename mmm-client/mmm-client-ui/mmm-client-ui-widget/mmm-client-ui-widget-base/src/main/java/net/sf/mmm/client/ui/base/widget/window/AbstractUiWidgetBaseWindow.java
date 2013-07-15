@@ -285,4 +285,16 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
     super.setVisible(visible);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    if (this.title != null) {
+      return this.title;
+    }
+    return super.getSource();
+  }
+
 }

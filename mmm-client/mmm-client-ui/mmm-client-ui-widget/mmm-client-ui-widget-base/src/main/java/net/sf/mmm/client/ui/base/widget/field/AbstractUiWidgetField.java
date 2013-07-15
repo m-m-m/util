@@ -81,7 +81,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       }
       value = convertToValue(adapterValue);
     } else {
-      value = getOriginalValue();
+      value = getRecentValue();
     }
     return value;
   }
@@ -282,6 +282,18 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (this.fieldLabelWidget != null) {
       this.fieldLabelWidget.setVisible(visible);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSource() {
+
+    if (this.fieldLabel != null) {
+      return this.fieldLabel;
+    }
+    return super.getSource();
   }
 
 }
