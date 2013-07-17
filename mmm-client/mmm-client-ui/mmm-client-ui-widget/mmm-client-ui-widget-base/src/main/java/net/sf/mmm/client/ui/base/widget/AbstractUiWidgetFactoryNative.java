@@ -122,6 +122,7 @@ public abstract class AbstractUiWidgetFactoryNative extends AbstractComponent im
 
     if (this.mainWindow == null) {
       this.mainWindow = createMainWindow();
+      this.mainWindow.setVisible(true);
     }
     return this.mainWindow;
   }

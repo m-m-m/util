@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDoubleField;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link UiWidgetAdapterDoubleField} for testing without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

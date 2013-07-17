@@ -3,11 +3,15 @@
 package net.sf.mmm.client.ui.impl.test.widget.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComposite;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSwitchComposite;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterComposite} and
+ * various sub-interfaces for testing without a native toolkit.
+ * 
+ * @param <CHILD>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -30,6 +34,7 @@ public class UiWidgetAdapterTestComposite<CHILD extends UiWidget> extends UiWidg
   public void setChild(CHILD child) {
 
     verifyNotDisposed();
+    AbstractUiWidget.getWidgetAdapter(child);
   }
 
   /**
@@ -48,6 +53,7 @@ public class UiWidgetAdapterTestComposite<CHILD extends UiWidget> extends UiWidg
   public void addChild(CHILD child, int index) {
 
     verifyNotDisposed();
+    AbstractUiWidget.getWidgetAdapter(child);
   }
 
   /**

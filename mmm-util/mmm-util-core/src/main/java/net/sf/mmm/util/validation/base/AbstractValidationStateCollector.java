@@ -51,6 +51,15 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
 
   /**
    * {@inheritDoc}
+   */
+  @Override
+  public int getFailureCount() {
+
+    return this.delegate.getFailureCount();
+  }
+
+  /**
+   * {@inheritDoc}
    * 
    * <br/>
    * <b>ATTENTION:</b><br/>

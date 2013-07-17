@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link UiWidgetAdapterField} for testing without a native toolkit.
  * 
  * @param <VALUE>
  * @param <ADAPTER_VALUE>

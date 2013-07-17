@@ -15,7 +15,8 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterComposite} and
+ * various sub-interfaces bound to {@link UiWidgetRegular} for testing without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

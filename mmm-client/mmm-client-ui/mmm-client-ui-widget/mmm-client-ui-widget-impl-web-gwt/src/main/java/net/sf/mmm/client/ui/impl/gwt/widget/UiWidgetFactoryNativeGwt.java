@@ -115,7 +115,6 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     UiContext context = getContext();
     NlsNullPointerException.checkNotNull(UiContext.class, context);
     UiWidgetMainWindowGwt window = new UiWidgetMainWindowGwt(context);
-    window.setVisible(true);
     return window;
   }
 

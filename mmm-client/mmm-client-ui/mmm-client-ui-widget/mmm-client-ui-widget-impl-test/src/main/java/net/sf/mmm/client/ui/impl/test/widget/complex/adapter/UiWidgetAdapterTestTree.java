@@ -7,7 +7,9 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link UiWidgetAdapterTree} for testing without a native toolkit.
+ * 
+ * @param <NODE>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

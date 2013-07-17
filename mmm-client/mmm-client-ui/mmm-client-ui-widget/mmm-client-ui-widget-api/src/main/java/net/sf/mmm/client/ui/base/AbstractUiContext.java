@@ -19,6 +19,8 @@ import net.sf.mmm.client.ui.base.binding.UiDataBindingFactory;
 import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
+import org.slf4j.Logger;
+
 /**
  * This is the abstract base implementation of {@link UiContext}.
  * 
@@ -288,6 +290,15 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
     getInitializationState().requireNotInitilized();
     this.accessKeyBinding = accessKeyBinding;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Logger getLogger() {
+
+    return super.getLogger();
   }
 
 }

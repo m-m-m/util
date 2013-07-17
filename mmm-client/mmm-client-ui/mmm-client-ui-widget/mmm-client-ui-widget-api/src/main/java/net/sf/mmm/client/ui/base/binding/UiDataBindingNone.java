@@ -99,7 +99,9 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
   @Override
   public void setValue(Void value, boolean forUser) {
 
-    // nothing to do...
+    if (value != null) {
+      throw new IllegalStateException();
+    }
   }
 
   /**
@@ -189,6 +191,7 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
   @Override
   public boolean validate(ValidationState state) {
 
+    // TODO hohwille bug if composite widget with <Void>
     return true;
   }
 
@@ -199,15 +202,6 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
   public boolean doValidate(ValidationState state, Void value) {
 
     return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void clearMessages() {
-
-    // nothing to do...
   }
 
   /**
@@ -261,16 +255,16 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
    * {@inheritDoc}
    */
   @Override
-  public Boolean getValid() {
+  public Boolean getValidity() {
 
-    return Boolean.TRUE;
+    return null;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setValid(Boolean valid) {
+  public void setValidity(Boolean valid) {
 
     if (Boolean.FALSE.equals(valid)) {
       throw new NlsIllegalStateException();

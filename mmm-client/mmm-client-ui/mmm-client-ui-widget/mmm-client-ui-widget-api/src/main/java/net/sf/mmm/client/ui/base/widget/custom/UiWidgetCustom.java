@@ -75,6 +75,16 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void clearValidity() {
+
+    super.clearValidity();
+    AbstractUiWidget.AccessHelper.clearValidity((AbstractUiWidget<?>) this.delegate);
+  }
+
+  /**
    * This method gets the underlying {@link net.sf.mmm.client.ui.api.widget.UiWidget widget} that is adapted
    * by this widget.
    * 
@@ -469,11 +479,15 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  protected boolean doValidate(ValidationState state, VALUE value) {
+  protected void doValidate(ValidationState state, VALUE value) {
 
-    boolean success = super.doValidate(state, value);
-    boolean delegateSuccess = this.delegate.validate(state);
-    return (success && delegateSuccess);
+    // boolean success =
+    super.doValidate(state, value);
+    // TODO hohwille bug? should delegate to doValidate?
+    // boolean delegateSuccess =
+    // this.delegate.validate(state);
+    ((AbstractUiWidget<?>) this.delegate).getValueDirect(null, state);
+    // return (success && delegateSuccess);
   }
 
   /**

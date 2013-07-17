@@ -65,4 +65,13 @@ public class ValidationStateImpl implements ValidationState {
     return this.failureView;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getFailureCount() {
+
+    return this.failureList.size();
+  }
+
 }

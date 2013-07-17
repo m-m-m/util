@@ -2,22 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.binding;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
+import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValueAndValidationWithValidators;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
-import net.sf.mmm.util.component.base.AbstractLoggableObject;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
-import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.validation.base.SimpleValidationFailure;
-import net.sf.mmm.util.validation.base.ValidationStateImpl;
-import net.sf.mmm.util.validation.base.ValidatorMandatory;
+
+import org.slf4j.Logger;
 
 /**
  * This is a base implementation of {@link UiDataBinding}.
@@ -27,13 +22,11 @@ import net.sf.mmm.util.validation.base.ValidatorMandatory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObject implements UiDataBinding<VALUE> {
+public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValueAndValidationWithValidators<VALUE>
+    implements UiDataBinding<VALUE> {
 
   /** @see #getWidget() */
   private final AbstractUiWidget<VALUE> widget;
-
-  /** @see #addValidator(ValueValidator) */
-  private final List<ValueValidator<? super VALUE>> validatorList;
 
   /** @see #getOriginalValue() */
   private VALUE originalValue;
@@ -41,14 +34,11 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
   /** @see #getRecentValue() */
   private VALUE recentValue;
 
-  /** @see #isMandatory() */
-  private boolean mandatory;
-
   /** @see #isModified() */
   private boolean modified;
 
-  /** @see #getValid() */
-  private Boolean valid;
+  /** @see #getValidity() */
+  private Boolean validity;
 
   /**
    * The constructor.
@@ -59,8 +49,8 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
 
     super();
     this.widget = widget;
-    this.validatorList = new LinkedList<ValueValidator<? super VALUE>>();
     this.originalValue = null;
+    this.recentValue = null;
   }
 
   /**
@@ -72,21 +62,12 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
   }
 
   /**
-   * {@inheritDoc}
+   * @return a {@link Logger} instance.
    */
   @Override
-  public final void setValue(VALUE value) {
+  protected final Logger getLogger() {
 
-    setValue(value, false);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setValueForUser(VALUE value) {
-
-    setValue(value, true);
+    return this.widget.getContext().getLogger();
   }
 
   /**
@@ -106,6 +87,9 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
       // if (getWidget().getContext().getContainer().get(DatatypeDetector.class).isDatatype(getWidget().getV))
       v = createNewValue();
     }
+    // even if no validation is performed:
+    // whenever a value is set, previous validation failures will be cleared
+    AbstractUiWidget.AccessHelper.clearValidationFailure(this.widget);
     doSetValue(v, forUser);
     AbstractUiWidget.AccessHelper.fireValueChange(this.widget);
   }
@@ -130,71 +114,6 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
   /**
    * {@inheritDoc}
    */
-  @Override
-  public final VALUE getValue() {
-
-    try {
-      return getValueOrException(null);
-    } catch (RuntimeException e) {
-      handleGetValueError(e, null);
-      return null;
-    }
-  }
-
-  /**
-   * This method handles a {@link RuntimeException} that occurred in
-   * {@link #getValueDirect(Object, ValidationState)}.
-   * 
-   * @param e is the {@link RuntimeException} to handle.
-   * @param state is the {@link ValidationState} or <code>null</code> if no validation is performed.
-   */
-  private void handleGetValueError(RuntimeException e, ValidationState state) {
-
-    if (state == null) {
-      // ATTENTION: This is one of the very rare cases where we intentionally consume an exception.
-      getLogger().debug("Error in getValue() at " + toString(), e);
-    } else {
-      ValidationFailure failure = createValidationFailure(e);
-      if (failure != null) {
-        state.onFailure(failure);
-      }
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final VALUE getValueOrException(VALUE template) throws RuntimeException {
-
-    return getValueDirect(template, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  // @Override
-  @Override
-  public final VALUE getValueAndValidate(ValidationState state) {
-
-    this.widget.clearMessages();
-    ValidationState validationState = state;
-    if (validationState == null) {
-      validationState = new ValidationStateImpl();
-    }
-    VALUE result = getValueDirect(null, validationState);
-    if (validationState.isValid()) {
-      if ((result == null) && (state == null)) {
-        getLogger().error("null has been returned as valid value at " + toString());
-      }
-      return result;
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   // @Override
   @Override
   public final VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
@@ -210,10 +129,10 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
         }
       }
       value = doGetValue(value, state);
-      if (state != null) {
-        boolean success = AbstractUiWidget.AccessHelper.doValidate(this.widget, state, value);
-        this.valid = Boolean.valueOf(success);
-      }
+      // if (state != null) {
+      // boolean success = AbstractUiWidget.AccessHelper.doValidate(this.widget, state, value);
+      // this.validity = Boolean.valueOf(success);
+      // }
       return value;
     } catch (RuntimeException e) {
       if (state == null) {
@@ -316,125 +235,30 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
    * {@inheritDoc}
    */
   @Override
-  public Boolean getValid() {
+  public Boolean getValidity() {
 
-    return this.valid;
+    getLogger().debug("getValidity:" + this.widget);
+    return this.validity;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setValid(Boolean valid) {
+  public void setValidity(Boolean validity) {
 
-    this.valid = valid;
+    getLogger().debug("setValidity(" + validity + ") :" + this.widget);
+    this.validity = validity;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public final void resetValue() {
+  protected void setMandatory(boolean mandatory) {
 
-    setValue(this.originalValue);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void addValidator(ValueValidator<? super VALUE> validator) {
-
-    NlsNullPointerException.checkNotNull(ValueValidator.class, validator);
-    if (validator instanceof ValidatorMandatory) {
-      if (this.mandatory) {
-        getLogger().warn("Duplicate validator: " + validator);
-        return;
-      }
-      this.mandatory = true;
-      AbstractUiWidget.AccessHelper.setMandatory(this.widget, true);
-    }
-    this.validatorList.add(validator);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final boolean removeValidator(ValueValidator<? super VALUE> validator) {
-
-    NlsNullPointerException.checkNotNull(ValueValidator.class, validator);
-    boolean removed = this.validatorList.remove(validator);
-    if (removed && (validator instanceof ValidatorMandatory)) {
-      if (this.mandatory) {
-        this.mandatory = false;
-        AbstractUiWidget.AccessHelper.setMandatory(this.widget, false);
-      } else {
-        getLogger().warn("Internal error: removed ValidatorManadatory but mandatory flag was not set.");
-      }
-    }
-    return removed;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addValidatorMandatory() {
-
-    if (isMandatory()) {
-      return;
-    }
-    addValidator(ValidatorMandatory.getInstance());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isMandatory() {
-
-    return this.mandatory;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final boolean validate(ValidationState state) {
-
-    this.widget.clearMessages();
-    ValidationState validationState = state;
-    if (validationState == null) {
-      validationState = new ValidationStateImpl();
-    }
-    getValueDirect(null, state);
-    return validationState.isValid();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final boolean doValidate(ValidationState state, VALUE value) {
-
-    boolean success = true;
-    if (this.validatorList != null) {
-      for (ValueValidator<? super VALUE> validator : this.validatorList) {
-        try {
-          ValidationFailure failure = validator.validate(value, getSource());
-          if (failure != null) {
-            success = false;
-            state.onFailure(failure);
-          }
-        } catch (RuntimeException e) {
-          success = false;
-          getLogger().error("Error in validator '" + validator + "' at " + toString(), e);
-          handleGetValueError(e, state);
-        }
-      }
-    }
-    return success;
+    super.setMandatory(mandatory);
+    AbstractUiWidget.AccessHelper.setMandatory(this.widget, mandatory);
   }
 
   /**
@@ -444,18 +268,10 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
    * @param error is the exception.
    * @return the {@link ValidationFailure}.
    */
+  @Override
   protected ValidationFailure createValidationFailure(Throwable error) {
 
     return new SimpleValidationFailure(error.getClass().getSimpleName(), getSource(), error.getLocalizedMessage());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void clearMessages() {
-
-    this.widget.clearMessages();
   }
 
   /**
@@ -506,6 +322,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractLoggableObjec
   /**
    * @return the source for validation failures.
    */
+  @Override
   protected String getSource() {
 
     return this.widget.getSource();

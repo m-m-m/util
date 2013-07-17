@@ -12,8 +12,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiFeatureValueAndValidation<VALUE> extends UiFeatureValue<VALUE>, UiFeatureValidation<VALUE>,
-    UiFeatureMessages {
+public interface UiFeatureValueAndValidation<VALUE> extends UiFeatureValue<VALUE>, UiFeatureValidation<VALUE> {
 
   /**
    * This method is a combination of {@link #getValue()} and {@link #validate(ValidationState)}. It is

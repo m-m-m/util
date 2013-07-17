@@ -18,4 +18,11 @@ public interface ValidationCollector {
    */
   void onFailure(ValidationFailure failure);
 
+  /**
+   * @return the number of {@link ValidationFailure}s that have been {@link #onFailure(ValidationFailure)
+   *         collected}.
+   * @since 3.1.0
+   */
+  int getFailureCount();
+
 }

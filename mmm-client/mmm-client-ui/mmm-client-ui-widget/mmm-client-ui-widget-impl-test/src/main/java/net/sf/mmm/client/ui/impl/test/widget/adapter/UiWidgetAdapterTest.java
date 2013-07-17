@@ -46,6 +46,9 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
   /** @see #getValidationFailure() */
   private String validationFailure;
 
+  /** @see #getValidationFailureSetCount() */
+  private int validationFailureSetCount;
+
   /**
    * The constructor.
    */
@@ -296,6 +299,24 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
 
     verifyNotDisposed();
     this.validationFailure = validationFailure;
+    this.validationFailureSetCount++;
+  }
+
+  /**
+   * @return the number of invocations to {@link #setValidationFailure(String)} since
+   *         {@link #clearValidationFailureSetCount()}.
+   */
+  public int getValidationFailureSetCount() {
+
+    return this.validationFailureSetCount;
+  }
+
+  /**
+   * Sets the value of {@link #getValidationFailureSetCount()} to <code>0</code>.
+   */
+  public void clearValidationFailureSetCount() {
+
+    this.validationFailureSetCount = 0;
   }
 
   /**

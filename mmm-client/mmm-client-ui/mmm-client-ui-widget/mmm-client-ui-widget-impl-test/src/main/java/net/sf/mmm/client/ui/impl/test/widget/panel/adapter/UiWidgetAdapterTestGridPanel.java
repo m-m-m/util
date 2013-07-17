@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridPanel;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTestComposite;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link UiWidgetAdapterGridPanel} for testing without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

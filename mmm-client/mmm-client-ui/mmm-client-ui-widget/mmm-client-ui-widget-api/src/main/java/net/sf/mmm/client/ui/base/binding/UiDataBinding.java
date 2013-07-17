@@ -107,19 +107,21 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
 
   /**
    * @return {@link Boolean#TRUE} if validation was successful, {@link Boolean#FALSE} if validation failed,
-   *         <code>null</code> if NOT validated (since {@link #clearMessages()} has been called).
+   *         <code>null</code> if NOT validated (since
+   *         {@link net.sf.mmm.client.ui.api.widget.UiWidget#clearMessages()} or something similar has been
+   *         called).
    */
-  Boolean getValid();
+  Boolean getValidity();
 
   /**
-   * This method sets the value of {@link #getValid()}.<br/>
+   * This method sets the value of {@link #getValidity()}.<br/>
    * <b>ATTENTION:</b><br/>
    * This is an internal method and should NOT be used by external users. Usage has to be compliant with
-   * {@link #getValid()}.
+   * {@link #getValidity()}.
    * 
-   * @param valid is the new value for {@link #getValid()}. May be <code>null</code>.
+   * @param validity is the new value for {@link #getValidity()}. May be <code>null</code>.
    */
-  void setValid(Boolean valid);
+  void setValidity(Boolean validity);
 
   /**
    * This method performs the actual validation using the

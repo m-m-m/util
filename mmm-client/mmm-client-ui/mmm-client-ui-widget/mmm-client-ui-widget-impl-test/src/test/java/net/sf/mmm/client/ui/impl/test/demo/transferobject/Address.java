@@ -32,7 +32,7 @@ public class Address implements TransferObject, Pojo {
 
   /** {@link TypedProperty} for {@link #getPostalCode()}. */
   public static final TypedProperty<PostalCode> PROPERTY_POSTAL_CODE = new TypedProperty<PostalCode>(PostalCode.class,
-      "houseNumber");
+      "postalCode");
 
   /** {@link TypedProperty} for {@link #getState()}. */
   public static final TypedProperty<String> PROPERTY_STATE = new TypedProperty<String>(String.class, "state");

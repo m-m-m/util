@@ -863,7 +863,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   @Override
   public final void clearMessages() {
 
-    clearMessagesLocal();
+    super.clearMessages();
     int childCount = getChildCount();
     for (int i = 0; i < childCount; i++) {
       UiWidget child = getChild(i);
@@ -874,11 +874,17 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * This method clears the messages locally (the non-recursive part of {@link #clearMessages()}).
+   * {@inheritDoc}
    */
-  public void clearMessagesLocal() {
+  @Override
+  protected final void clearValidity() {
 
-    // nothing to do by default.
+    super.clearValidity();
+    int childCount = getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      AbstractUiWidget<?> child = (AbstractUiWidget<?>) getChild(i);
+      child.clearValidity();
+    }
   }
 
   /**
@@ -890,11 +896,10 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * failures and attach them to this widget. You should not forget the super-call in such case.
    */
   @Override
-  protected boolean doValidate(ValidationState state, VALUE value) {
+  protected void doValidate(ValidationState state, VALUE value) {
 
-    boolean success = super.doValidate(state, value);
-    boolean recursiveSuccess = validateRecursive(state);
-    return (success && recursiveSuccess);
+    super.doValidate(state, value);
+    validateRecursive(state);
   }
 
   /**
@@ -903,24 +908,18 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@link #validate(ValidationState)} on all child widgets.
    * 
    * @param state is the {@link ValidationState}.
-   * @return <code>true</code> if the recursive validation of this object has been successful,
-   *         <code>false</code> otherwise (if there are validation failures).
    */
-  boolean validateRecursive(ValidationState state) {
+  void validateRecursive(ValidationState state) {
 
-    boolean success = true;
     int size = getChildCount();
     for (int i = 0; i < size; i++) {
       AbstractUiWidget<?> child = (AbstractUiWidget<?>) getChild(i);
-      Boolean valid = child.getDataBinding().getValid();
+      Boolean valid = child.getDataBinding().getValidity();
       if (valid == null) {
-        boolean childValid = child.validate(state);
-        if (!childValid) {
-          success = false;
-        }
+        // boolean childValid = child.validate(state);
+        child.getValueDirect(null, state);
       }
     }
-    return success;
   }
 
   /**

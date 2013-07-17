@@ -14,7 +14,6 @@ import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiEvent;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
-import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
@@ -24,11 +23,14 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
+import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValueAndValidation;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.validation.base.ValidatorNone;
+
+import org.slf4j.Logger;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this
@@ -42,8 +44,8 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithValue<VALUE>,
-    UiFeatureValueAndValidation<VALUE>, AttributeWriteModified {
+public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndValidation<VALUE> implements
+    UiWidgetAbstractWithValue<VALUE>, AttributeWriteModified {
 
   /** @see #getContext() */
   private final AbstractUiContext context;
@@ -63,6 +65,15 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
 
     super();
     this.context = (AbstractUiContext) context;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Logger getLogger() {
+
+    return this.context.getLogger();
   }
 
   /**
@@ -90,24 +101,10 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
    * {@inheritDoc}
    */
   @Override
-  public final VALUE getValue() {
-
-    if (this.dataBinding == null) {
-      return null;
-    }
-    return getDataBinding().getValue();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public final VALUE getValueOrException(VALUE template) throws RuntimeException {
 
-    if (this.dataBinding == null) {
-      return null;
-    }
-    return getDataBinding().getValueOrException(template);
+    // clearValidity();
+    return super.getValueOrException(template);
   }
 
   /**
@@ -137,24 +134,17 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
    * {@inheritDoc}
    */
   @Override
-  public VALUE getValueAndValidate(ValidationState state) {
-
-    if (this.dataBinding == null) {
-      return null;
-    }
-    return getDataBinding().getValueAndValidate(state);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
-    if (this.dataBinding == null) {
-      return template;
+    VALUE value = getDataBinding().getValueDirect(template, state);
+    if (state != null) {
+      int failureCount = state.getFailureCount();
+      doValidate(state, value);
+      assert (state.getFailureCount() >= failureCount) : "failure count must not decrease.";
+      boolean success = (state.getFailureCount() == failureCount);
+      getDataBinding().setValidity(Boolean.valueOf(success));
     }
-    return getDataBinding().getValueDirect(template, state);
+    return value;
   }
 
   /**
@@ -224,41 +214,14 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
    * {@inheritDoc}
    */
   @Override
-  public final void setValue(VALUE value) {
+  public final void setValue(VALUE newValue, boolean forUser) {
 
-    if ((this.dataBinding == null) && (value != null)) {
+    if ((this.dataBinding == null) && (newValue != null)) {
       if (getValueClass() == null) {
         throw new IllegalStateException("valueClass is null!");
       }
     }
-    getDataBinding().setValue(value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setValueForUser(VALUE value) {
-
-    getDataBinding().setValueForUser(value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setValue(VALUE newValue, boolean forUser) {
-
     getDataBinding().setValue(newValue, forUser);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void resetValue() {
-
-    getDataBinding().resetValue();
   }
 
   /**
@@ -267,6 +230,7 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
   @Override
   public void addValidatorMandatory() {
 
+    // allow overriding implementation...
     getDataBinding().addValidatorMandatory();
   }
 
@@ -338,17 +302,34 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
   @Override
   public void clearMessages() {
 
-    getDataBinding().setValid(null);
+    clearMessagesLocal();
+  }
+
+  /**
+   * This method clears the messages locally (the non-recursive part of {@link #clearMessages()}).
+   */
+  protected void clearMessagesLocal() {
+
+    clearValidationFailure();
+  }
+
+  /**
+   * This method clears the messages locally (the non-recursive part of {@link #clearMessages()}).
+   */
+  protected void clearValidationFailure() {
+
+    getDataBinding().setValidity(null);
   }
 
   /**
    * {@inheritDoc}
+   * 
+   * It clears the {@link UiDataBinding#getValidity() validity} recursively.
    */
   @Override
-  public final boolean validate(ValidationState state) {
+  protected void clearValidity() {
 
-    boolean success = getDataBinding().validate(state);
-    return success;
+    getDataBinding().setValidity(null);
   }
 
   /**
@@ -359,32 +340,34 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
    * 
    * @param state is the {@link ValidationState}. Never <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
-   * @return <code>true</code> if the additional (!) validation was successful, <code>false</code> otherwise
-   *         (if there are validation failures).
    */
-  protected boolean doValidate(ValidationState state, VALUE value) {
+  private void validateInteral(ValidationState state, VALUE value) {
 
     if (!isVisible()) {
-      return true;
+      // return true;
+      return;
     }
     if (!isEnabled()) {
-      return true;
+      // return true;
+      return;
     }
-    return getDataBinding().doValidate(state, value);
+    // return
+    doValidate(state, value);
   }
 
-  //
-  // /**
-  // * This method performs the recursive validation of potential children of this widget excluding the
-  // * validation of this widget itself. A legal implementation of a composite widget needs to call
-  // * {@link #validate(ValidationState)} on all child widgets.
-  // *
-  // * @param state is the {@link ValidationState}.
-  // */
-  // protected void validateWidget(ValidationState state) {
-  //
-  // // nothing to do...
-  // }
+  /**
+   * This method is called from {@link #validate(ValidationState)} and performs the actual validation of this
+   * object. This method performs the recursive validation of potential children of this widget excluding the
+   * validation of this widget itself. A legal implementation of a composite widget needs to call
+   * {@link #validate(ValidationState)} on all child widgets.
+   * 
+   * @param state is the {@link ValidationState}. Never <code>null</code>.
+   * @param value is the {@link #getValue() current value} of this object that has already be determined.
+   */
+  protected void doValidate(ValidationState state, VALUE value) {
+
+    getDataBinding().doValidate(state, value);
+  }
 
   /**
    * {@inheritDoc}
@@ -708,6 +691,7 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
    * @return a {@link String} representation of this object that qualifies as source description that might be
    *         displayed to end-users (unlike {@link #toString()} what is for debugging only).
    */
+  @Override
   public String getSource() {
 
     return getId();
@@ -799,11 +783,30 @@ public abstract class AbstractUiWidget<VALUE> implements UiWidgetAbstractWithVal
      * @param widget is the {@link AbstractUiWidget}.
      * @param state - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
      * @param value - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
-     * @return - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
      */
-    public static <VALUE> boolean doValidate(AbstractUiWidget<VALUE> widget, ValidationState state, VALUE value) {
+    public static <VALUE> void doValidate(AbstractUiWidget<VALUE> widget, ValidationState state, VALUE value) {
 
-      return widget.doValidate(state, value);
+      widget.validateInteral(state, value);
+    }
+
+    /**
+     * @see AbstractUiWidget#clearValidationFailure()
+     * 
+     * @param widget is the {@link AbstractUiWidget}.
+     */
+    public static void clearValidationFailure(AbstractUiWidget<?> widget) {
+
+      widget.clearValidationFailure();
+    }
+
+    /**
+     * @see AbstractUiWidget#clearValidity()
+     * 
+     * @param widget is the {@link AbstractUiWidget}.
+     */
+    public static void clearValidity(AbstractUiWidget<?> widget) {
+
+      widget.clearValidity();
     }
 
     /**

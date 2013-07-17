@@ -92,7 +92,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   @Override
   protected void doSetValue(VALUE newValue, boolean forUser) {
 
-    setValidationFailure(null);
     if (hasWidgetAdapter()) {
       ADAPTER_VALUE adapterValue;
       if (newValue == null) {
@@ -170,10 +169,10 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public void clearMessagesLocal() {
+  protected void clearValidationFailure() {
 
-    super.clearMessagesLocal();
-    setValidationFailure("");
+    super.clearValidationFailure();
+    setValidationFailure(null);
   }
 
   /**
@@ -262,13 +261,12 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  protected boolean doValidate(ValidationState state, VALUE value) {
+  protected void doValidate(ValidationState state, VALUE value) {
 
     ValidationStateMessageCollector messageCollector = new ValidationStateMessageCollector(state);
-    boolean success = super.doValidate(messageCollector, value);
+    super.doValidate(messageCollector, value);
     String failureMessages = messageCollector.getFailureMessages();
     setValidationFailure(failureMessages);
-    return success;
   }
 
   /**

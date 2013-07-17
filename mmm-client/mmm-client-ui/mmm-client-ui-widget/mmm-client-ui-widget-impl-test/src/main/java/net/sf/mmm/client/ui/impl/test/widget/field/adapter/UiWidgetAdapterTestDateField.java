@@ -7,7 +7,7 @@ import java.util.Date;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link UiWidgetAdapterDateField} for testing without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
