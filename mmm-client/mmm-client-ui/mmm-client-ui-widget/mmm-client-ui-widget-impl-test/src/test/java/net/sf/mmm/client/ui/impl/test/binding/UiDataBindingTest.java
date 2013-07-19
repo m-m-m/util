@@ -32,6 +32,16 @@ import org.junit.Test;
 public class UiDataBindingTest extends AbstractUiTest {
 
   /**
+   * The constructor.
+   * 
+   * @param springConfig
+   */
+  public UiDataBindingTest(String springConfig) {
+
+    super(springConfig);
+  }
+
+  /**
    * Tests {@link net.sf.mmm.client.ui.base.binding.UiDataBindingPojo}.
    */
   @Test

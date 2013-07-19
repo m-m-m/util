@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
@@ -114,10 +116,12 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * @param context is the {@link UiContext} to inject.
+   * @param context is the {@link UiContext} to {@link Inject}.
    */
+  @Inject
   public void setContext(UiContext context) {
 
+    getInitializationState().requireNotInitilized();
     this.context = context;
   }
 

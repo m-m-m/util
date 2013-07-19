@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test;
 
+import javax.inject.Named;
+
 import net.sf.mmm.client.ui.base.binding.DatatypeDetectorImpl;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 
@@ -11,6 +13,7 @@ import net.sf.mmm.util.datatype.api.address.PostalCode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Named
 public class DatatypeDetectorTest extends DatatypeDetectorImpl {
 
   /**

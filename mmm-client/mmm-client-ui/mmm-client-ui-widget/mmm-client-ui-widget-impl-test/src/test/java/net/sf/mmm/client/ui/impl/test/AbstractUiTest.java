@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
@@ -11,32 +14,68 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import org.junit.Assert;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
- * TODO: this class ...
+ * This is the abstract base class for Tests of the {@link UiWidget}-framework based on the test
+ * implementation. It provides the {@link #getContext() context} to start your tests with.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@RunWith(Parameterized.class)
 public class AbstractUiTest extends Assert {
+
+  /** @see #parameters() */
+  public static final String SPRING_CONFIG = "/net/sf/mmm/client/ui/impl/test/beans-client-ui-widget-test.xml";
+
+  /** @see #getContext() */
+  private final String springConfig;
+
+  /**
+   * The constructor.
+   * 
+   * @param springConfig is the Spring XML config location or <code>null</code> to test without spring.
+   */
+  public AbstractUiTest(String springConfig) {
+
+    super();
+    this.springConfig = springConfig;
+  }
+
+  /**
+   * @return the different {@link Parameters} to run this test with.
+   */
+  @Parameters
+  public static Collection<Object[]> parameters() {
+
+    return Arrays.asList(new Object[] { null }, new Object[] { SPRING_CONFIG });
+  }
 
   /**
    * @return the {@link UiContext}.
    */
   protected UiContext getContext() {
 
-    UiContextTest context = new UiContextTest();
-    UiWidgetFactoryDatatypeTest impl = new UiWidgetFactoryDatatypeTest();
-    impl.setContext(context);
-    impl.initialize();
-    context.setWidgetFactoryDatatype(impl);
-    context.setDatatypeDetector(new DatatypeDetectorTest());
-    context.initialize();
-    return context;
+    if (this.springConfig == null) {
+      UiContextTest context = new UiContextTest();
+      UiWidgetFactoryDatatypeTest impl = new UiWidgetFactoryDatatypeTest();
+      impl.setContext(context);
+      impl.initialize();
+      context.setWidgetFactoryDatatype(impl);
+      context.setDatatypeDetector(new DatatypeDetectorTest());
+      context.initialize();
+      return context;
+    } else {
+      return SpringContainerPool.getInstance(this.springConfig).get(UiContext.class);
+    }
   }
 
   /**

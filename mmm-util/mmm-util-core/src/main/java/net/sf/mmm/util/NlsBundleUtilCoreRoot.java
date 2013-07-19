@@ -461,7 +461,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @param source is the source of the value or <code>null</code> if NOT available.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range of \"[{min} - {max}]\"!")
+  @NlsBundleMessage("The value {value}{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range from {min} to {max}.")
   NlsMessage errorValueOutOfRange(@Named("value")
   Object value, @Named("min")
   Object min, @Named("max")

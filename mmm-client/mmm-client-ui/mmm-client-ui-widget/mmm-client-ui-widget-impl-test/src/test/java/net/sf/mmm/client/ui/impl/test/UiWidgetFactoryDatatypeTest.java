@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test;
 
+import javax.inject.Named;
+
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
@@ -10,11 +12,13 @@ import net.sf.mmm.client.ui.impl.test.widget.custom.UiWidgetCustomFieldPostalCod
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 
 /**
- * TODO: this class ...
+ * This is an implementation of {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype} for
+ * testing.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Named
 public class UiWidgetFactoryDatatypeTest extends UiWidgetFactoryDatatypeSimple {
 
   /**

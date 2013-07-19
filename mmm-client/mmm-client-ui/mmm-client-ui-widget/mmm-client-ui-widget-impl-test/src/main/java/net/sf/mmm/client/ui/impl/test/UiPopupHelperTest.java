@@ -5,6 +5,8 @@ package net.sf.mmm.client.ui.impl.test;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import javax.inject.Named;
+
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.client.ui.base.AbstractUiPopupHelper;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
@@ -15,6 +17,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Named
 public class UiPopupHelperTest extends AbstractUiPopupHelper {
 
   /**

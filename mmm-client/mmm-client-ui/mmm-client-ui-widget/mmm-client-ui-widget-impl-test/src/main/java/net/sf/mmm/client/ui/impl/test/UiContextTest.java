@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test;
 
+import javax.inject.Named;
+
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
@@ -17,6 +19,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Named
 public class UiContextTest extends UiContextImpl {
 
   /**

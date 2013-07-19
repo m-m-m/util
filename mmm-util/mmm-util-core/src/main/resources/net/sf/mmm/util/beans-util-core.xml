@@ -13,10 +13,11 @@
 
   <beans profile="default">
     <bean id="java.util.concurrent.Executor" class="net.sf.mmm.util.concurrent.base.SimpleExecutor"/>
+    <bean id="net.sf.mmm.util.lang.api.EnumProvider" class="net.sf.mmm.util.lang.base.SimpleEnumProvider"/>
   </beans>
-  
+
   <beans profile="server">
     <bean id="java.util.concurrent.Executor" class="net.sf.mmm.util.concurrent.base.CachedThreadPoolExecutor"/>
   </beans>
-  
+
 </beans>

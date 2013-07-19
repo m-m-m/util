@@ -11,7 +11,6 @@ import net.sf.mmm.client.ui.base.binding.DatatypeDetector;
 import net.sf.mmm.client.ui.base.binding.DatatypeDetectorImpl;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.binding.UiDataBindingFactoryImpl;
-import net.sf.mmm.client.ui.base.widget.UiConfigurationDefault;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryDatatypeSimple;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
@@ -145,6 +144,7 @@ public abstract class AbstractUiContextImpl extends AbstractUiContext {
   /**
    * @param datatypeDetector is the datatypeDetector to set
    */
+  @Inject
   public void setDatatypeDetector(DatatypeDetector datatypeDetector) {
 
     getInitializationState().requireNotInitilized();

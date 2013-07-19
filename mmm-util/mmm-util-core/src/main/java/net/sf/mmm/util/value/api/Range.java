@@ -82,11 +82,13 @@ public class Range<V extends Comparable<V>> implements Serializable {
   public boolean isContained(V value) {
 
     NlsNullPointerException.checkNotNull("value", value);
-    if (value.compareTo(this.min) < 0) {
+    int delta = value.compareTo(this.min);
+    if (delta < 0) {
       // value < min
       return false;
     }
-    if (value.compareTo(this.max) < 0) {
+    delta = value.compareTo(this.max);
+    if (delta > 0) {
       // value > max
       return false;
     }
