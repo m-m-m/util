@@ -317,11 +317,11 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     }
     doSetMode(mode);
     getContext().getModeChanger().changeMode(this, mode);
-    this.mode = mode;
     // TODO hohwille add programmatic attribute to internal method?
+    setModeRecursive(mode);
+    this.mode = mode;
     boolean programmatic = true;
     fireEvent(EventType.MODE, programmatic);
-    setModeRecursive(mode);
   }
 
   /**

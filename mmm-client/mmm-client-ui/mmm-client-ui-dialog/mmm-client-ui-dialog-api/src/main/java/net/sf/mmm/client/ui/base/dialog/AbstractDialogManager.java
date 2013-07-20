@@ -199,7 +199,10 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   @Override
   public PopupDialog getCurrentPopupDialog() {
 
-    return this.popupStack.peekLast();
+    if (this.popupStack.isEmpty()) {
+      return null;
+    }
+    return this.popupStack.getLast();
   }
 
   /**

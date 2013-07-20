@@ -261,12 +261,16 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  protected void doValidate(ValidationState state, VALUE value) {
+  public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
+    if (state == null) {
+      return super.getValueDirect(template, state);
+    }
     ValidationStateMessageCollector messageCollector = new ValidationStateMessageCollector(state);
-    super.doValidate(messageCollector, value);
+    VALUE result = super.getValueDirect(template, messageCollector);
     String failureMessages = messageCollector.getFailureMessages();
     setValidationFailure(failureMessages);
+    return result;
   }
 
   /**

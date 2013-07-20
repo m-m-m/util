@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.rebind;
 
-import net.sf.mmm.util.transferobject.api.TransferObject;
+import net.sf.mmm.util.pojo.api.Pojo;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -110,7 +110,7 @@ public class PojoDescriptorGeneratorConfigurationImpl implements PojoDescriptorG
    */
   protected Class<?> getMarkerType() {
 
-    return TransferObject.class;
+    return Pojo.class;
   }
 
 }

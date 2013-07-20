@@ -3,6 +3,7 @@
 package net.sf.mmm.util;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 
 import javax.inject.Named;
 
@@ -1490,5 +1491,21 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   @NlsBundleMessage("Your search query was canceled because it exceeded a given timeout! Please try to simplify, "
       + "specialize to match less hits, or try again later.")
   NlsMessage errorSearchTimeout();
+
+  /**
+   * @param value is the invalid value.
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("The value has to be in the past.")
+  NlsMessage errorValueNotInPast(@Named("value")
+  Date value);
+
+  /**
+   * @param value is the invalid value.
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("The value has to be in the future.")
+  NlsMessage errorValueNotInFuture(@Named("value")
+  Date value);
 
 }

@@ -136,9 +136,12 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   @Override
   public VALUE getValueDirect(VALUE template, ValidationState state) throws RuntimeException {
 
+    int failureCount = 0;
+    if (state != null) {
+      failureCount = state.getFailureCount();
+    }
     VALUE value = getDataBinding().getValueDirect(template, state);
     if (state != null) {
-      int failureCount = state.getFailureCount();
       doValidate(state, value);
       assert (state.getFailureCount() >= failureCount) : "failure count must not decrease.";
       boolean success = (state.getFailureCount() == failureCount);

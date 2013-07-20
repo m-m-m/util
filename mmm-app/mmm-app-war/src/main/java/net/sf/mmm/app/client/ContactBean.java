@@ -4,30 +4,15 @@ package net.sf.mmm.app.client;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
-import net.sf.mmm.util.transferobject.api.TransferObject;
-
 /**
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ContactBean implements TransferObject {
+public class ContactBean implements Contact {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 985011128511803342L;
-
-  /** {@link TypedProperty} for {@link #getFirstName()}. */
-  public static final TypedProperty<String> PROPERTY_FIRST_NAME = new TypedProperty<String>("First Name", String.class,
-      "firstName");
-
-  /** {@link TypedProperty} for {@link #getLastName()}. */
-  public static final TypedProperty<String> PROPERTY_LAST_NAME = new TypedProperty<String>("lastName");
-
-  /** {@link TypedProperty} for {@link #getBirthday()}. */
-  public static final TypedProperty<String> PROPERTY_BIRTHDAY = new TypedProperty<String>("birthday");
 
   /** @see #getFirstName() */
   private String firstName;
@@ -47,50 +32,54 @@ public class ContactBean implements TransferObject {
   }
 
   /**
-   * @return the firstName
+   * {@inheritDoc}
    */
-  @NotNull
+  @Override
   public String getFirstName() {
 
     return this.firstName;
   }
 
   /**
-   * @param firstName is the firstName to set
+   * {@inheritDoc}
    */
+  @Override
   public void setFirstName(String firstName) {
 
     this.firstName = firstName;
   }
 
   /**
-   * @return the lastName
+   * {@inheritDoc}
    */
-  @NotNull
+  @Override
   public String getLastName() {
 
     return this.lastName;
   }
 
   /**
-   * @param lastName is the lastName to set
+   * {@inheritDoc}
    */
+  @Override
   public void setLastName(String lastName) {
 
     this.lastName = lastName;
   }
 
   /**
-   * @return the birthday
+   * {@inheritDoc}
    */
+  @Override
   public Date getBirthday() {
 
     return this.birthday;
   }
 
   /**
-   * @param birthday is the birthday to set
+   * {@inheritDoc}
    */
+  @Override
   public void setBirthday(Date birthday) {
 
     this.birthday = birthday;

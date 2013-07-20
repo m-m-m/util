@@ -234,7 +234,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public void setMode(UiMode mode) {
+  public final void setMode(UiMode mode) {
 
     if (this.delegate.getMode() == mode) {
       // mode not changed, nothing to do...

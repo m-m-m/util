@@ -6,7 +6,7 @@
     <when-type-assignable class="net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder"/>
   </generate-with>
   <generate-with class="net.sf.mmm.util.pojo.descriptor.impl.rebind.PojoDescriptorGenerator">
-    <when-type-assignable class="net.sf.mmm.util.transferobject.api.TransferObject"/>
+    <when-type-assignable class="net.sf.mmm.util.pojo.api.Pojo"/>
   </generate-with>
 
 

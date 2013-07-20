@@ -63,7 +63,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   public String translate(Locale locale) {
 
     try {
-      return ResourceBundle.getBundle(this.name, locale).getString(this.key);
+      return ResourceBundle.getBundle(this.name, locale, ResourceBundleControlUtf8.INSTANCE).getString(this.key);
     } catch (MissingResourceException e) {
       return translateFallback(e);
     }

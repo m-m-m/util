@@ -10,7 +10,6 @@ import java.util.Map;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
-import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
@@ -31,17 +30,6 @@ public class UiAccessKeyBindingImpl implements UiAccessKeyBinding {
 
     super();
     this.accessKey2WidgetsMap = new HashMap<Character, Collection<AbstractUiWidgetActive<?, ?>>>();
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param mapFactory is the {@link MapFactory} used to create {@link Map}s (e.g. for concurrent access).
-   */
-  public UiAccessKeyBindingImpl(MapFactory<?> mapFactory) {
-
-    super();
-    this.accessKey2WidgetsMap = mapFactory.create();
   }
 
   /**

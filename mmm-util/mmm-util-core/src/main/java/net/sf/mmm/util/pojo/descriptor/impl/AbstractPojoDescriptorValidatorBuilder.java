@@ -17,6 +17,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorValidatorBuilder;
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -110,11 +111,12 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
 
     ValidatorCollector validatorCollector = new ValidatorCollector();
     if (getter != null) {
+      GenericType<?> type = getter.getPropertyType();
       AccessibleObject accessibleObject = getter.getAccessibleObject();
       if (accessibleObject instanceof Method) {
-        createValidatorsForMethod(validatorCollector, (Method) accessibleObject);
+        createValidatorsForMethod(validatorCollector, (Method) accessibleObject, type);
       } else {
-        createValidatorsForAccessible(validatorCollector, accessibleObject);
+        createValidatorsForAccessible(validatorCollector, accessibleObject, type);
       }
     }
     return validatorCollector.createValidator();
@@ -125,12 +127,14 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
    * 
    * @param validatorCollector is the {@link ValidatorCollector}.
    * @param method is the {@link Method} to scan.
+   * @param propertyType is the {@link GenericType} of the annotated property.
    */
-  protected void createValidatorsForMethod(ValidatorCollector validatorCollector, Method method) {
+  protected void createValidatorsForMethod(ValidatorCollector validatorCollector, Method method,
+      GenericType<?> propertyType) {
 
     Method method2scan = method;
     while (method2scan != null) {
-      createValidatorsForAccessible(validatorCollector, method2scan);
+      createValidatorsForAccessible(validatorCollector, method2scan, propertyType);
       // TODO hohwille what is the sepc. saying here? inherit all or only if none definied?
       method2scan = getReflectionUtil().getParentMethod(method2scan);
     }
@@ -141,12 +145,14 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
    * 
    * @param validatorCollector is the {@link ValidatorCollector}.
    * @param accessibleObject is the {@link AccessibleObject} to scan.
+   * @param propertyType is the {@link GenericType} of the annotated property.
    */
-  protected void createValidatorsForAccessible(ValidatorCollector validatorCollector, AccessibleObject accessibleObject) {
+  protected void createValidatorsForAccessible(ValidatorCollector validatorCollector,
+      AccessibleObject accessibleObject, GenericType<?> propertyType) {
 
     Annotation[] annotations = accessibleObject.getAnnotations();
     for (Annotation annotation : annotations) {
-      AbstractValidator<?> validator = createValidator(annotation);
+      AbstractValidator<?> validator = createValidator(annotation, propertyType);
       if (validator != null) {
         validatorCollector.register(annotation, validator);
       }
@@ -157,10 +163,11 @@ public abstract class AbstractPojoDescriptorValidatorBuilder extends AbstractLog
    * Creates the {@link ValueValidator} for the given <code>annotation</code>.
    * 
    * @param annotation is the {@link Annotation} potentially representing a validation constraint.
+   * @param propertyType is the {@link GenericType} of the annotated property.
    * @return the {@link ValueValidator} for the given <code>annotation</code> or <code>null</code> if no
    *         constraint.
    */
-  protected abstract AbstractValidator<?> createValidator(Annotation annotation);
+  protected abstract AbstractValidator<?> createValidator(Annotation annotation, GenericType<?> propertyType);
 
   /**
    * This inner class represents a container to collect the individual {@link ValueValidator}s to

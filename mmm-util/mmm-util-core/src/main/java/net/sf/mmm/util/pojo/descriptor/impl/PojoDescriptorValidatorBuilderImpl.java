@@ -3,10 +3,14 @@
 package net.sf.mmm.util.pojo.descriptor.impl;
 
 import java.lang.annotation.Annotation;
+import java.util.Date;
 
 import javax.inject.Named;
 
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
+import net.sf.mmm.util.validation.base.ValidatorDateFuture;
+import net.sf.mmm.util.validation.base.ValidatorDatePast;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;
 
 /**
@@ -31,15 +35,22 @@ public class PojoDescriptorValidatorBuilderImpl extends AbstractPojoDescriptorVa
    * {@inheritDoc}
    */
   @Override
-  protected AbstractValidator<?> createValidator(Annotation annotation) {
+  protected AbstractValidator<?> createValidator(Annotation annotation, GenericType<?> propertyType) {
 
     String simpleName = annotation.annotationType().getSimpleName();
     if ("NotNull".equals(simpleName) || "NonNull".equals(simpleName)) {
       return ValidatorMandatory.getInstance();
-    } else {
-      // TODO hohwille add reasonable support for JSR 303, etc.
-      return null;
+    } else if ("Past".equals(simpleName)) {
+      if (Date.class == propertyType.getRetrievalClass()) {
+        return new ValidatorDatePast();
+      }
+    } else if ("Future".equals(simpleName)) {
+      if (Date.class == propertyType.getRetrievalClass()) {
+        return new ValidatorDateFuture();
+      }
     }
+    // TODO hohwille add reasonable support for JSR 303, etc.
+    return null;
   }
 
 }

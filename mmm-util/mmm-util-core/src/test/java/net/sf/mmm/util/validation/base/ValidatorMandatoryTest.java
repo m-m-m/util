@@ -18,7 +18,7 @@ import org.junit.Test;
 public class ValidatorMandatoryTest extends AbstractValidatorTest {
 
   /** I18n failure message. */
-  private static final String FAILURE_MESSAGE = "Value has to be filled.";
+  private static final String FAILURE_MESSAGE = "The value has to be filled.";
 
   /**
    * Tests {@link ValidatorMandatory} fails for <code>null</code>.

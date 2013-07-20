@@ -87,7 +87,7 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
     buffer.append(getClass().getName());
     buffer.append("(");
     appendSourceCodeConstructorArguments(buffer);
-    buffer.append(");");
+    buffer.append(")");
   }
 
   /**

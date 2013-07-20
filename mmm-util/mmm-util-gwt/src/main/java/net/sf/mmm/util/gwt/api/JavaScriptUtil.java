@@ -246,10 +246,7 @@ public class JavaScriptUtil {
    * @return the new instance.
    */
   public native String getBlobUrl(JavaScriptBlob blob) /*-{
-    var getBlobURL: (window.URL && URL.createObjectURL.bind(URL)) ||
-      (window.webkitURL && webkitURL.createObjectURL.bind(webkitURL)) ||
-      window.createObjectURL;
-    return getBlobUrl(blob);
+    return $wnd.URL.createObjectURL(blob);
   }-*/;
 
   /**
@@ -259,10 +256,7 @@ public class JavaScriptUtil {
    * @param blob is the {@link JavaScriptBlob}.
    */
   public native void openBlob(JavaScriptBlob blob) /*-{
-    var getBlobURL: (window.URL && URL.createObjectURL.bind(URL)) ||
-      (window.webkitURL && webkitURL.createObjectURL.bind(webkitURL)) ||
-      window.createObjectURL;
-    window.open(getBlobUrl(blob), '_blank');
+    window.open($wnd.URL.createObjectURL(blob), '_blank');
   }-*/;
 
   //formatter:on

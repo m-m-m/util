@@ -86,9 +86,13 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    */
   protected void updateWidgetViewMode() {
 
-    ADAPTER_VALUE value = getValue();
-    String valueAsString = convertValueToString(value);
-    ((Label) getWidgetViewMode()).setText(valueAsString);
+    try {
+      ADAPTER_VALUE value = getValue();
+      String valueAsString = convertValueToString(value);
+      ((Label) getWidgetViewMode()).setText(valueAsString);
+    } catch (Exception e) {
+      getUiWidget().getContext().getLogger().error("Error while updating value for view mode.", e);
+    }
   }
 
   /**
