@@ -12,6 +12,18 @@ import net.sf.mmm.client.ui.api.aria.role.RoleRange;
  */
 public abstract class AbstractRoleRange extends AbstractRoleWithCommonAttributes implements RoleRange {
 
+  /** @see #getValueMin() */
+  private double valueMin;
+
+  /** @see #getValueMax() */
+  private double valueMax;
+
+  /** @see #getValueNow() */
+  private Double valueNow;
+
+  /** @see #getValueText() */
+  private String valueText;
+
   /**
    * The constructor.
    */
@@ -24,30 +36,19 @@ public abstract class AbstractRoleRange extends AbstractRoleWithCommonAttributes
    * {@inheritDoc}
    */
   @Override
-  public void setValueMax(double max) {
-
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public double getValueMax() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return this.valueMax;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setValueMin(double min) {
+  public void setValueMax(double max) {
 
-    // TODO Auto-generated method stub
-
+    this.valueMax = max;
+    setAttribute(HTML_ATTRIBUTE_ARIA_VALUE_MAX, Double.valueOf(max));
   }
 
   /**
@@ -56,18 +57,17 @@ public abstract class AbstractRoleRange extends AbstractRoleWithCommonAttributes
   @Override
   public double getValueMin() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return this.valueMin;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setValueNow(Double now) {
+  public void setValueMin(double min) {
 
-    // TODO Auto-generated method stub
-
+    this.valueMin = min;
+    setAttribute(HTML_ATTRIBUTE_ARIA_VALUE_MIN, Double.valueOf(min));
   }
 
   /**
@@ -76,18 +76,17 @@ public abstract class AbstractRoleRange extends AbstractRoleWithCommonAttributes
   @Override
   public Double getValueNow() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return this.valueNow;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setValueText(String value) {
+  public void setValueNow(Double now) {
 
-    // TODO Auto-generated method stub
-
+    this.valueNow = now;
+    setAttribute(HTML_ATTRIBUTE_ARIA_VALUE_NOW, now);
   }
 
   /**
@@ -96,8 +95,17 @@ public abstract class AbstractRoleRange extends AbstractRoleWithCommonAttributes
   @Override
   public String getValueText() {
 
-    // TODO Auto-generated method stub
-    return null;
+    return this.valueText;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValueText(String value) {
+
+    this.valueText = value;
+    setAttribute(HTML_ATTRIBUTE_ARIA_VALUE_TEXT, value);
   }
 
 }
