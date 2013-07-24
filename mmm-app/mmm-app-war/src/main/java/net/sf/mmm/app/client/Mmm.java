@@ -4,7 +4,12 @@ package net.sf.mmm.app.client;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Set;
 import java.util.function.Consumer;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.groups.Default;
 
 import net.sf.mmm.app.client.dialog.DialogControllerFactoryImpl;
 import net.sf.mmm.app.shared.GreetingService;
@@ -13,7 +18,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
@@ -96,6 +101,12 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
   @Override
   public void onModuleLoad() {
 
+    ContactBean contact = new ContactBean();
+    Set<ConstraintViolation<ContactBean>> violations = Validation.buildDefaultValidatorFactory().getValidator()
+        .validateProperty(contact, Contact.PROPERTY_LAST_NAME.getSegment(), Default.class);
+    for (ConstraintViolation<ContactBean> v : violations) {
+      Log.info(v.getMessage());
+    }
     // public void onModuleLoadDeferred() {
     // super.onModuleLoadDeferred();
     Log.debug("Loaded");
@@ -196,7 +207,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     button1.addClickHandler(new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         final UiWidgetPopup popup = factory.create(UiWidgetPopup.class);
         popup.setTitle("Popup Test");
@@ -209,7 +220,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         UiHandlerEventClick handler = new UiHandlerEventClick() {
 
           @Override
-          public void onClick(UiFeatureClick source, boolean programmatic) {
+          public void onClick(UiEventClick event) {
 
             popup.setVisible(false);
           }
@@ -228,7 +239,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     button2.addClickHandler(new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         label2.setLabel(mainWindow.getWidthInPixel() + "x" + mainWindow.getHeightInPixel());
         mainWindow.setPosition(mainWindow.getPositionX() - 5, mainWindow.getPositionY() - 5);
@@ -344,7 +355,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
        * {@inheritDoc}
        */
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         sendNameToServer();
       }

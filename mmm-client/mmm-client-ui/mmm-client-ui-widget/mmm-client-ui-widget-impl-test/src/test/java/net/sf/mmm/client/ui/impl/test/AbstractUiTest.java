@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
+import net.sf.mmm.client.ui.api.event.UiEventValueChange;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -15,7 +16,6 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import org.junit.Assert;
@@ -179,10 +179,10 @@ public class AbstractUiTest extends Assert {
      * {@inheritDoc}
      */
     @Override
-    public void onValueChange(AttributeReadValue<VALUE> source, boolean programmatic) {
+    public void onValueChange(UiEventValueChange<VALUE> event) {
 
-      assertSame("Event source does NOT match", this.widget, source);
-      assertEquals("Events in test can only be programmatic!", Boolean.TRUE, Boolean.valueOf(programmatic));
+      assertSame("Event source does NOT match", this.widget, event.getSource());
+      assertEquals("Events in test can only be programmatic!", Boolean.TRUE, Boolean.valueOf(event.isProgrammatic()));
       this.eventCount++;
     }
 

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
-import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 
@@ -100,9 +100,7 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
    * @see #setCollapsed(boolean)
    * 
    * @param newCollapsed - see {@link #setCollapsed(boolean)}.
-   * @param programmatic - see
-   *        {@link net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse#onCollapseOrExpand(net.sf.mmm.client.ui.api.feature.UiFeatureCollapse, boolean, boolean)}
-   *        .
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()} .
    */
   public void setCollapsed(boolean newCollapsed, boolean programmatic) {
 

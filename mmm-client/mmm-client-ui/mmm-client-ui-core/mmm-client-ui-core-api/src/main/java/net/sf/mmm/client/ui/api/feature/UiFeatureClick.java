@@ -31,7 +31,8 @@ public interface UiFeatureClick extends UiFeature {
   boolean removeClickHandler(UiHandlerEventClick handler);
 
   /**
-   * This method programmatically {@link UiHandlerEventClick#onClick(UiFeatureClick, boolean) notifies} all
+   * This method programmatically
+   * {@link UiHandlerEventClick#onClick(net.sf.mmm.client.ui.api.event.UiEventClick) notifies} all
    * {@link #addClickHandler(UiHandlerEventClick) registered} {@link UiHandlerEventClick listeners}.
    */
   void click();

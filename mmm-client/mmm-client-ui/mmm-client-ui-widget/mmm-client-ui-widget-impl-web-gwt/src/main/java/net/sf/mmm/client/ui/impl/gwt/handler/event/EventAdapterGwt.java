@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.handler.event;
 
-import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.base.handler.event.AbstractEventAdapter;

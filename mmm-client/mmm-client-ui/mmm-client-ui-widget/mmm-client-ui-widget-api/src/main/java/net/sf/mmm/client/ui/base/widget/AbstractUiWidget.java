@@ -9,11 +9,12 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadEventObserver;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
-import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
-import net.sf.mmm.client.ui.api.common.UiEvent;
-import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.event.EventType;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.event.UiEventValueChange;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
@@ -50,7 +51,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /** @see #getContext() */
   private final AbstractUiContext context;
 
-  /** @see #fireEvent(UiEvent, boolean) */
+  /** @see #fireEvent(UiEvent) */
   private EventSender eventSender;
 
   /** @see #getDataBinding() */
@@ -225,16 +226,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
       }
     }
     getDataBinding().setValue(newValue, forUser);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addValidatorMandatory() {
-
-    // allow overriding implementation...
-    getDataBinding().addValidatorMandatory();
+    fireValueChange(true);
   }
 
   /**
@@ -298,6 +290,23 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
       // setModifiedRecursive(false);
     }
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final void setMode(UiMode mode) {
+
+    setMode(mode, true);
+  }
+
+  /**
+   * @see #setMode(UiMode)
+   * 
+   * @param mode is the new {@link UiMode} to set.
+   * @param programmatic - see {@link UiEvent#isProgrammatic()}.
+   */
+  protected abstract void setMode(UiMode mode, boolean programmatic);
 
   /**
    * {@inheritDoc}
@@ -596,23 +605,23 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * Fires an event with the given parameters.
    * 
    * @param event is the {@link UiEvent}.
-   * @param programmatic - see
-   *        {@link UiHandlerEvent#onEvent(net.sf.mmm.client.ui.api.feature.UiFeatureEvent, UiEvent, boolean)}.
    */
-  protected final void fireEvent(UiEvent event, boolean programmatic) {
+  protected final void fireEvent(UiEvent event) {
 
     if (this.eventSender != null) {
-      this.eventSender.onEvent(this, event, programmatic);
+      this.eventSender.onEvent(event);
     }
   }
 
   /**
-   * Called if the value has changed programmatically. Implementation has to fire a
-   * {@link net.sf.mmm.client.ui.api.common.EventType#VALUE_CHANGE value change} event.
+   * Called if the value has changed internally. Implementation has to fire a
+   * {@link net.sf.mmm.client.ui.api.event.EventType#VALUE_CHANGE value change} event.
+   * 
+   * @param programmatic - see {@link UiEvent#isProgrammatic()}, should typically be <code>true</code> here.
    */
-  protected void fireValueChange() {
+  protected void fireValueChange(boolean programmatic) {
 
-    fireEvent(EventType.VALUE_CHANGE, true);
+    fireEvent(new UiEventValueChange<VALUE>(this, programmatic));
   }
 
   /**
@@ -648,7 +657,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
      * {@inheritDoc}
      */
     @Override
-    public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+    public void onEvent(UiEvent event) {
 
       if (event.getType() == EventType.FOCUS_GAIN) {
         this.focused = true;
@@ -666,7 +675,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
       for (UiHandlerEvent handler : this.eventHandlers) {
         // TODO hohwille if a handler will remove itself in onEvent we might get
         // ConcurrentModificationException
-        handler.onEvent(AbstractUiWidget.this, event, programmatic);
+        handler.onEvent(event);
       }
       if (eventObserver != null) {
         eventObserver.afterHandler(event);
@@ -726,16 +735,6 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     public static void setMandatory(AbstractUiWidget<?> widget, boolean mandatory) {
 
       widget.setMandatory(mandatory);
-    }
-
-    /**
-     * @see AbstractUiWidget#fireValueChange()
-     * 
-     * @param widget is the {@link AbstractUiWidget}.
-     */
-    public static void fireValueChange(AbstractUiWidget<?> widget) {
-
-      widget.fireValueChange();
     }
 
     /**

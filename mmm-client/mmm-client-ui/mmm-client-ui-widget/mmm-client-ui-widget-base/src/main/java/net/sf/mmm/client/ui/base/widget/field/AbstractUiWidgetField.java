@@ -79,11 +79,30 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       if (adapterValue == null) {
         return null;
       }
+      if (adapterValue instanceof String) {
+        String string = (String) adapterValue;
+        if (isTrimValue()) {
+          string = string.trim();
+        }
+        if (string.isEmpty()) {
+          return null;
+        }
+      }
       value = convertToValue(adapterValue);
     } else {
       value = getRecentValue();
     }
     return value;
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @return
+   */
+  private boolean isTrimValue() {
+
+    return true;
   }
 
   /**

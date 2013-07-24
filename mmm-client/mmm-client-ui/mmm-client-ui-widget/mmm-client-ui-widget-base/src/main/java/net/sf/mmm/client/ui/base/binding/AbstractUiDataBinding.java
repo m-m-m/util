@@ -91,7 +91,6 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
     // whenever a value is set, previous validation failures will be cleared
     AbstractUiWidget.AccessHelper.clearValidationFailure(this.widget);
     doSetValue(v, forUser);
-    AbstractUiWidget.AccessHelper.fireValueChange(this.widget);
   }
 
   /**

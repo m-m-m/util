@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.base.widget.custom.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.UiEvent;
-import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.feature.UiFeature;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -35,7 +35,7 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   private final EventHandlerAdapter eventHandlerAdapter;
 
   /** The sub-field that currently has the focus or <code>null</code>. */
-  private UiFeatureEvent focusField;
+  private UiFeature focusField;
 
   /**
    * The constructor.
@@ -233,17 +233,17 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
      * {@inheritDoc}
      */
     @Override
-    public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+    public void onEvent(UiEvent event) {
 
       boolean fireEvent;
       switch (event.getType()) {
         case FOCUS_GAIN:
           fireEvent = (UiWidgetCustomField.this.focusField == null);
-          UiWidgetCustomField.this.focusField = source;
+          UiWidgetCustomField.this.focusField = event.getSource();
           break;
         case FOCUS_LOSS:
           // TODO hohwille revisit this code... Might be buggy...
-          if (source == UiWidgetCustomField.this.focusField) {
+          if (event.getSource() == UiWidgetCustomField.this.focusField) {
             UiWidgetCustomField.this.focusField = null;
             fireEvent = true;
           } else {
@@ -253,6 +253,7 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
         case VALUE_CHANGE:
           // we ignore programmatic events from the adapted widget(s) to prevent event duplication
           // TODO hohwille if value of adapted widget is set internally, no event will be send then - buggy?
+          boolean programmatic = event.isProgrammatic();
           fireEvent = !programmatic;
           break;
         default :
@@ -260,7 +261,7 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
           break;
       }
       if (fireEvent) {
-        fireEvent(event, programmatic);
+        fireEvent(event);
       }
     }
   }

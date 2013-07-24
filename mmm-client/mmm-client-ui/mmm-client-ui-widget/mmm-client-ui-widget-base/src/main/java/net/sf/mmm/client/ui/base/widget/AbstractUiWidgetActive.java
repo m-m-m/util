@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.event.UiEventFocusGain;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
@@ -56,10 +56,20 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
   @Override
   public void setFocused() {
 
+    setFocused(true);
+  }
+
+  /**
+   * @see #setFocused()
+   * 
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   */
+  protected void setFocused(boolean programmatic) {
+
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setFocused();
     } else {
-      fireEvent(EventType.FOCUS_GAIN, true);
+      fireEvent(new UiEventFocusGain(this, programmatic));
     }
   }
 
@@ -125,12 +135,7 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
    */
   public void onAccessKeyPressed(boolean programmatic) {
 
-    // the default implementation...
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setFocused();
-    } else {
-      fireEvent(EventType.FOCUS_GAIN, programmatic);
-    }
+    setFocused(programmatic);
   }
 
 }

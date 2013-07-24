@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
@@ -63,7 +63,7 @@ public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidget
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         handler.onStartEditMode(variant);
       }

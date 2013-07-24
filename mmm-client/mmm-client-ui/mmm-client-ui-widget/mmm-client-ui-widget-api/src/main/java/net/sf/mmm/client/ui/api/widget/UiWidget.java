@@ -7,14 +7,13 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadModified;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteMode;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteModeFixed;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisibleAdvanced;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.feature.UiFeatureMessages;
+import net.sf.mmm.client.ui.api.feature.UiFeatureMode;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 import net.sf.mmm.util.validation.api.AbstractValidatableObject;
 
@@ -44,10 +43,10 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidget extends UiFeatureMessages, UiFeatureEvent, AttributeWriteHtmlId,
+public abstract interface UiWidget extends UiFeatureMessages, UiFeatureEvent, UiFeatureMode, AttributeWriteHtmlId,
     AttributeWriteTooltip, AttributeWriteVisibleAdvanced, AttributeWriteEnabled, AttributeWriteStylesAdvanced,
-    AttributeWriteDisposed, AttributeWriteSizeAdvanced, AttributeReadModified, AttributeWriteMode,
-    AttributeWriteModeFixed, AttributeReadAriaRole, AbstractValidatableObject {
+    AttributeWriteDisposed, AttributeWriteSizeAdvanced, AttributeReadModified, AttributeReadAriaRole,
+    AbstractValidatableObject {
 
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root

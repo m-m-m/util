@@ -2,20 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.handler.event;
 
-import net.sf.mmm.client.ui.api.common.EventType;
-import net.sf.mmm.client.ui.api.common.UiEvent;
-import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+import net.sf.mmm.client.ui.api.event.EventType;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.event.UiEventValueChange;
 
 /**
- * This is the {@link UiHandlerEvent} for the action {@link #onValueChange(AttributeReadValue, boolean)}.
+ * This is the {@link UiHandlerEvent} for the action {@link #onValueChange(UiEventValueChange)}.
+ * 
+ * @param <VALUE> is the generic type of the changed
+ *        {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the changed {@link AttributeReadValue#getValue() value}.
  */
-// TODO hohwille We need Java8 support for GWT!
-// public interface UiHandlerEventValueChange<VALUE> extends UiHandlerEvent {
 public abstract class UiHandlerEventValueChange<VALUE> implements UiHandlerEvent {
 
   /**
@@ -23,22 +22,19 @@ public abstract class UiHandlerEventValueChange<VALUE> implements UiHandlerEvent
    */
   @Override
   @SuppressWarnings("unchecked")
-  public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+  public void onEvent(UiEvent event) {
 
     if (event.getType() == EventType.VALUE_CHANGE) {
-      onValueChange((AttributeReadValue<VALUE>) source, programmatic);
+      onValueChange((UiEventValueChange<VALUE>) event);
     }
   }
 
   /**
-   * This method is invoked if an UI object has changed its {@link AttributeReadValue#getValue() value}.
+   * This method is invoked if an UI object has changed its
+   * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value}.
    * 
-   * @param source is the object that has changed its {@link AttributeReadValue#getValue() value}.
-   * @param programmatic - <code>true</code> if the
-   *        {@link net.sf.mmm.util.lang.api.attribute.AttributeWriteValue#setValue(Object) change was
-   *        triggered by the program}, <code>false</code> if the change was performed by the end-user (e.g by
-   *        typing into an input field).
+   * @param event is the {@link UiEventValueChange value change event}.
    */
-  public abstract void onValueChange(AttributeReadValue<VALUE> source, boolean programmatic);
+  public abstract void onValueChange(UiEventValueChange<VALUE> event);
 
 }

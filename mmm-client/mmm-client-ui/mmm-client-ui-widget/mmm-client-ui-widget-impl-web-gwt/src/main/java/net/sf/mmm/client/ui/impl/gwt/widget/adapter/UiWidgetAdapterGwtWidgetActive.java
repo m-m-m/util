@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
-import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.KeyboardFilterAdapter;

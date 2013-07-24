@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.handler;
 
-import net.sf.mmm.client.ui.api.common.UiEvent;
+import net.sf.mmm.client.ui.api.event.UiEvent;
 
 /**
  * This is the interface for an observer, that gets notified {@link #beforeHandler(UiEvent) before} and

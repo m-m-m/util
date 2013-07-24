@@ -6,10 +6,10 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
-import net.sf.mmm.client.ui.api.common.EventType;
 import net.sf.mmm.client.ui.api.common.FlagModifier;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.event.UiEventMode;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetAbstractComposite;
@@ -305,9 +305,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
-  public final void setMode(UiMode mode) {
+  protected void setMode(UiMode newMode, boolean programmatic) {
 
-    if (this.mode == mode) {
+    if (this.mode == newMode) {
       // mode not changed, nothing to do...
       return;
     }
@@ -315,13 +315,11 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       // fixed mode prevents changing the mode...
       return;
     }
-    doSetMode(mode);
-    getContext().getModeChanger().changeMode(this, mode);
-    // TODO hohwille add programmatic attribute to internal method?
-    setModeRecursive(mode);
-    this.mode = mode;
-    boolean programmatic = true;
-    fireEvent(EventType.MODE, programmatic);
+    doSetMode(newMode);
+    getContext().getModeChanger().changeMode(this, newMode);
+    setModeRecursive(newMode);
+    this.mode = newMode;
+    fireEvent(new UiEventMode(this, programmatic));
   }
 
   /**
@@ -344,7 +342,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     int childCount = getChildCount();
     for (int i = 0; i < childCount; i++) {
       UiWidget child = getChild(i);
-      child.setMode(this.mode);
+      child.setMode(newMode);
     }
   }
 

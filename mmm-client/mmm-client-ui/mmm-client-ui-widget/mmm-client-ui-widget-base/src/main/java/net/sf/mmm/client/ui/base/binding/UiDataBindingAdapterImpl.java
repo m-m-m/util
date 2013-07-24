@@ -4,6 +4,8 @@ package net.sf.mmm.client.ui.base.binding;
 
 import java.util.Collection;
 
+import javax.validation.Validator;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
@@ -35,20 +37,25 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
   /** The {@link DatatypeDetector} instance. */
   private final DatatypeDetector datatypeDetector;
 
+  /** The {@link Validator} instance. */
+  private final Validator validator;
+
   /**
    * The constructor.
    * 
    * @param type is the {@link Class} reflecting the value to adapt.
    * @param descriptorBuilderFactory is the {@link PojoDescriptorBuilderFactory} instance.
    * @param datatypeDetector is the {@link DatatypeDetector} instance.
+   * @param validator is the {@link Validator} instance.
    */
   public UiDataBindingAdapterImpl(Class<VALUE> type, PojoDescriptorBuilderFactory descriptorBuilderFactory,
-      DatatypeDetector datatypeDetector) {
+      DatatypeDetector datatypeDetector, Validator validator) {
 
     super();
     this.descriptorBuilder = descriptorBuilderFactory.createPublicMethodDescriptorBuilder();
     this.descriptor = this.descriptorBuilder.getDescriptor(type);
     this.datatypeDetector = datatypeDetector;
+    this.validator = validator;
   }
 
   /**
@@ -118,7 +125,7 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
   @Override
   public <T> ValueValidator<T> getPropertyValidator(TypedProperty<T> property) {
 
-    return this.descriptor.getPropertyValidator(property);
+    return new ValidatorJsr303<T>(this.validator, this.descriptor, property.getSegment());
   }
 
   /**

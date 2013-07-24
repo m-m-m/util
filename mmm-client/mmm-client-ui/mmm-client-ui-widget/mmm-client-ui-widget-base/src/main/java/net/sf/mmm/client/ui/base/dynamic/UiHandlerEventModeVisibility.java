@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.dynamic;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeReadMode;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.event.UiEventMode;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 
@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
  */
 public class UiHandlerEventModeVisibility extends UiHandlerEventMode {
 
-  /** @see #onModeChange(AttributeReadMode, UiMode, boolean) */
+  /** @see #onModeChange(UiEventMode, UiMode) */
   private final boolean showIfEditable;
 
   /**
@@ -43,9 +43,9 @@ public class UiHandlerEventModeVisibility extends UiHandlerEventMode {
    * {@inheritDoc}
    */
   @Override
-  public void onModeChange(AttributeReadMode source, UiMode newMode, boolean programmatic) {
+  public void onModeChange(UiEventMode event, UiMode newMode) {
 
-    UiWidget widget = (UiWidget) source;
+    UiWidget widget = (UiWidget) event.getSource();
     widget.getVisibleFlag()
         .setFlag((newMode.isEditable() == this.showIfEditable), VisibilityFlagModifier.MODIFIER_MODE);
   }

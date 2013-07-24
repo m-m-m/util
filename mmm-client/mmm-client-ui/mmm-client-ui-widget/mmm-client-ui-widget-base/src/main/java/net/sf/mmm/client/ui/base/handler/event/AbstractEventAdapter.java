@@ -2,9 +2,25 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.handler.event;
 
-import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.event.EventType;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.event.UiEventCollapse;
+import net.sf.mmm.client.ui.api.event.UiEventExpand;
+import net.sf.mmm.client.ui.api.event.UiEventFocusGain;
+import net.sf.mmm.client.ui.api.event.UiEventFocusLoss;
+import net.sf.mmm.client.ui.api.event.UiEventMode;
+import net.sf.mmm.client.ui.api.event.UiEventSelectionChange;
+import net.sf.mmm.client.ui.api.event.UiEventValueChange;
+import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
+import net.sf.mmm.client.ui.api.feature.UiFeatureMode;
+import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
+import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is the abstract base class for a toolkit specific adapter of {@link UiHandlerEvent}. It will adapt
@@ -44,11 +60,41 @@ public abstract class AbstractEventAdapter {
    * 
    * @param type is the {@link EventType} to fire.
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public void fireEvent(EventType type) {
 
-    boolean programmtic = (this.programmaticEventType == type);
-    this.sender.onEvent(this.source, type, programmtic);
-    if (programmtic) {
+    boolean programmatic = (this.programmaticEventType == type);
+    UiEvent event;
+    switch (type) {
+      case CLICK:
+        event = new UiEventClick((UiFeatureClick) this.source, programmatic);
+        break;
+      case COLLAPSE:
+        event = new UiEventCollapse((UiFeatureCollapse) this.source, programmatic);
+        break;
+      case EXPAND:
+        event = new UiEventExpand((UiFeatureCollapse) this.source, programmatic);
+        break;
+      case FOCUS_GAIN:
+        event = new UiEventFocusGain((UiFeatureFocus) this.source, programmatic);
+        break;
+      case FOCUS_LOSS:
+        event = new UiEventFocusLoss((UiFeatureFocus) this.source, programmatic);
+        break;
+      case MODE:
+        event = new UiEventMode((UiFeatureMode) this.source, programmatic);
+        break;
+      case SELECTION_CHANGE:
+        event = new UiEventSelectionChange((UiFeatureSelectedValue) this.source, programmatic);
+        break;
+      case VALUE_CHANGE:
+        event = new UiEventValueChange((UiFeatureValue) this.source, programmatic);
+        break;
+      default :
+        throw new IllegalCaseException(EventType.class, type);
+    }
+    this.sender.onEvent(event);
+    if (programmatic) {
       this.programmaticEventType = null;
     }
   }

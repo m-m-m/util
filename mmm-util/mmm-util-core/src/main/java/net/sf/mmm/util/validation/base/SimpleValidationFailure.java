@@ -34,7 +34,7 @@ public class SimpleValidationFailure extends AbstractValidationFailure {
    * @param source is the {@link #getSource() source}.
    * @param message is the {@link #getMessage() message}.
    */
-  public SimpleValidationFailure(String code, String source, String message) {
+  public SimpleValidationFailure(String code, Object source, String message) {
 
     super(code, source);
     this.message = message;

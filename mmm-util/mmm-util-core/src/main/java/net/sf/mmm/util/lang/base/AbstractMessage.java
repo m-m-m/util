@@ -35,11 +35,15 @@ public abstract class AbstractMessage implements Message {
    * @param code is the {@link #getCode() code}.
    * @param source is the {@link #getSource() source}.
    */
-  public AbstractMessage(String code, String source) {
+  public AbstractMessage(String code, Object source) {
 
     super();
     this.code = code;
-    this.source = source;
+    if (source == null) {
+      this.source = null;
+    } else {
+      this.source = source.toString();
+    }
   }
 
   /**

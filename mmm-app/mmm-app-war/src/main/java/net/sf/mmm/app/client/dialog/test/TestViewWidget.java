@@ -5,7 +5,7 @@ package net.sf.mmm.app.client.dialog.test;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -39,7 +39,7 @@ public class TestViewWidget extends UiWidgetCustomVerticalPanel {
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         TestViewWidget.this.dialogManager.navigateTo(DialogConstants.DIALOG_ID_HOME);
       }

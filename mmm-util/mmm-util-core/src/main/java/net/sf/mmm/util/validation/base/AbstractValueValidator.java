@@ -39,11 +39,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
     }
     ValidationFailure result = null;
     if (failureMessage != null) {
-      String source = null;
-      if (valueSource != null) {
-        source = valueSource.toString();
-      }
-      result = new ValidationFailureImpl(getCode(), source, failureMessage);
+      result = new ValidationFailureImpl(getCode(), valueSource, failureMessage);
     }
     return result;
   }

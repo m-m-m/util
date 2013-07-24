@@ -14,7 +14,7 @@
   <name>app-war</name>
   <description>The actual multimedia-manager main application</description>
   <dependencies>
-    <!-- 
+    <!--
     <dependency>
       <groupId>de.csenk</groupId>
       <artifactId>gwt-jetty</artifactId>
@@ -22,6 +22,32 @@
       <scope>provided</scope>
     </dependency>
      -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <!-- <version>5.0.1.Final</version> -->
+      <!-- <version>4.3.1.Final</version> -->
+      <!-- <version>4.0.2.GA</version> -->
+      <version>4.1.0.Final</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>4.1.0.Final</version>
+      <classifier>sources</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-servlet_3.0_spec</artifactId>
@@ -65,7 +91,7 @@
       <version>2.5.1</version>
       <scope>provided</scope>
     </dependency>
-    <!-- <dependency> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty</artifactId> <version>7.0.0.pre5</version> <scope>provided</scope> 
+    <!-- <dependency> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty</artifactId> <version>7.0.0.pre5</version> <scope>provided</scope>
       </dependency> -->
   </dependencies>
   <build>

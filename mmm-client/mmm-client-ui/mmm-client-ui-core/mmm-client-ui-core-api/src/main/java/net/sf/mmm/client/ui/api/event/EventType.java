@@ -1,17 +1,14 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.common;
+package net.sf.mmm.client.ui.api.event;
 
 /**
  * This enum contains the available types of a {@link UiEvent}.<br/>
- * <b>NOTE:</b><br/>
- * We designed the event mechanism for optimal performance without unnecessary overhead such as creating event
- * objects.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum EventType implements UiEvent {
+public enum EventType {
 
   /** The widget (button, menu item, etc.) has been clicked. */
   CLICK,
@@ -48,14 +45,5 @@ public enum EventType implements UiEvent {
    * changed.
    */
   MODE;
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public EventType getType() {
-
-    return this;
-  }
 
 }

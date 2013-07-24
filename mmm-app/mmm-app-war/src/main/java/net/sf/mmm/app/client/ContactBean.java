@@ -91,7 +91,8 @@ public class ContactBean implements Contact {
   @Override
   public String toString() {
 
-    StringBuilder result = new StringBuilder(this.lastName);
+    StringBuilder result = new StringBuilder();
+    result.append(this.lastName);
     result.append(", ");
     result.append(this.firstName);
     if (this.birthday != null) {

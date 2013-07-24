@@ -6,9 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.EventType;
-import net.sf.mmm.client.ui.api.common.UiEvent;
-import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.event.UiEventCollapse;
+import net.sf.mmm.client.ui.api.event.UiEventCollapseOrExpand;
+import net.sf.mmm.client.ui.api.event.UiEventExpand;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
@@ -76,19 +77,32 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
   @Override
   public void setCollapsed(boolean collapsed) {
 
+    setCollapsed(collapsed, true);
+  }
+
+  /**
+   * @see #setCollapsed(boolean)
+   * 
+   * @param collapsedFlag - see {@link #setCollapsed(boolean)}.
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   */
+  protected void setCollapsed(boolean collapsedFlag, boolean programmatic) {
+
     if (hasWidgetAdapter()) {
-      getWidgetAdapter().setCollapsed(collapsed);
+      getWidgetAdapter().setCollapsed(collapsedFlag);
     } else {
-      if (this.collapsed == collapsed) {
+      if (this.collapsed == collapsedFlag) {
         return;
       }
-      UiEvent event = EventType.EXPAND;
-      if (collapsed) {
-        event = EventType.COLLAPSE;
+      UiEvent event;
+      if (collapsedFlag) {
+        event = new UiEventCollapse(this, programmatic);
+      } else {
+        event = new UiEventExpand(this, programmatic);
       }
-      fireEvent(event, true);
+      fireEvent(event);
     }
-    this.collapsed = collapsed;
+    this.collapsed = collapsedFlag;
   }
 
   /**
@@ -143,7 +157,28 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
      * {@inheritDoc}
      */
     @Override
-    public void onCollapseOrExpand(UiFeatureCollapse source, boolean collapse, boolean programmatic) {
+    public void onCollapse(UiEventCollapse event) {
+
+      onCollapseOrExpand(event, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onExpand(UiEventExpand event) {
+
+      onCollapseOrExpand(event, false);
+    }
+
+    /**
+     * @see #onCollapse(UiEventCollapse)
+     * @see #onExpand(UiEventExpand)
+     * 
+     * @param event is the {@link UiEventCollapseOrExpand}.
+     * @param collapse <code>true</code> for collapse, <code>false</code> for expand.
+     */
+    private void onCollapseOrExpand(UiEventCollapseOrExpand event, boolean collapse) {
 
       for (UiWidget widget : this.widgets) {
         widget.getVisibleFlag().setFlag(!collapse, VisibilityFlagModifier.MODIFIER_COLLAPSE);

@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete;
@@ -72,7 +72,7 @@ public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetBut
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         if (preventConfirmationPopup) {
           handler.onDelete(variant);

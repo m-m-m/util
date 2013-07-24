@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the interface that adapts to the native {@link #getToplevelWidget() widget} of the underlying
- * toolkit implementation for a {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative}.<br/>
+ * toolkit implementation for a {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative native widget}.<br/>
  * It is a design trade-off as java does not have multi-inheritance (we would need scala traits here). This
  * way it is possible to implement an abstract base-implementation for the types of the
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}-hierarchy and inherit different implementations (Swing,
@@ -57,7 +57,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
   void setParent(UiWidgetComposite<?> parent);
 
   /**
-   * This method is called from {@link net.sf.mmm.client.ui.base.widget.UiModeChanger} for
+   * This method is called from {@link net.sf.mmm.client.ui.base.UiModeChanger} for
    * {@link net.sf.mmm.client.ui.api.widget.UiWidget#setMode(net.sf.mmm.client.ui.api.common.UiMode)}. It only
    * handles the predefined {@link net.sf.mmm.client.ui.api.common.UiMode}s.
    * 

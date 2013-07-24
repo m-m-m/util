@@ -5,7 +5,7 @@ package net.sf.mmm.app.client.dialog.home;
 import net.sf.mmm.app.client.dialog.MmmDialogConstants;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
-import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -39,7 +39,7 @@ public class HomeViewWidget extends UiWidgetCustomVerticalPanel {
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiFeatureClick source, boolean programmatic) {
+      public void onClick(UiEventClick event) {
 
         HomeViewWidget.this.dialogManager.navigateTo(MmmDialogConstants.DIALOG_ID_TEST);
       }

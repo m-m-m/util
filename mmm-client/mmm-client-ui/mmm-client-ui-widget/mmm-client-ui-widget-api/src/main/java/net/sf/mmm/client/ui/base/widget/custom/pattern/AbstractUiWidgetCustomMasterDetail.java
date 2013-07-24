@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.base.widget.custom.pattern;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadSelectedValue;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.event.UiEventSelectionChange;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
@@ -148,10 +148,9 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * This method is called if the selection of the {@link #getMasterList() master list} has changed.
    * 
    * @param selectedValues are the currently selected values.
-   * @param programmatic - see
-   *        {@link UiHandlerEventSelection#onSelection(AttributeReadSelectedValue, boolean)}.
+   * @param event is the {@link UiEventSelectionChange selection change event}.
    */
-  protected void onMasterListSelection(List<SELECTION> selectedValues, boolean programmatic) {
+  protected void onMasterListSelection(List<SELECTION> selectedValues, UiEventSelectionChange<SELECTION> event) {
 
     if (selectedValues.size() == 1) {
       SELECTION selection = selectedValues.get(0);
@@ -187,10 +186,10 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
      * {@inheritDoc}
      */
     @Override
-    public void onSelection(AttributeReadSelectedValue<SELECTION> source, boolean programmatic) {
+    public void onSelectionChange(UiEventSelectionChange<SELECTION> event) {
 
-      List<SELECTION> selectedValues = source.getSelectedValues();
-      onMasterListSelection(selectedValues, programmatic);
+      List<SELECTION> selectedValues = event.getSource().getSelectedValues();
+      onMasterListSelection(selectedValues, event);
     }
 
   }

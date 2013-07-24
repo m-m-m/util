@@ -47,7 +47,7 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    * @param uuid - see {@link #getUuid()}.
    * @param details - see {@link #getDetails()}.
    */
-  public AbstractErrorMessage(String code, String source, String message, UUID uuid, String details) {
+  public AbstractErrorMessage(String code, Object source, String message, UUID uuid, String details) {
 
     super(code, source);
     this.message = message;

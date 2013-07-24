@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.EventType;
+import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidgetClickable;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -101,7 +101,17 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
   @Override
   public void click() {
 
-    fireEvent(EventType.CLICK, true);
+    click(true);
+  }
+
+  /**
+   * @see #click()
+   * 
+   * @param programmatic - see {@link UiEventClick#isProgrammatic()}.
+   */
+  protected void click(boolean programmatic) {
+
+    fireEvent(new UiEventClick(this, programmatic));
   }
 
   /**
@@ -131,7 +141,7 @@ public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterC
   @Override
   public void onAccessKeyPressed(boolean programmatic) {
 
-    fireEvent(EventType.CLICK, programmatic);
+    click(programmatic);
   }
 
   /**

@@ -2,15 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.handler.event;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeReadMode;
-import net.sf.mmm.client.ui.api.common.EventType;
-import net.sf.mmm.client.ui.api.common.UiEvent;
 import net.sf.mmm.client.ui.api.common.UiMode;
-import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.event.EventType;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.event.UiEventMode;
 
 /**
- * This is the {@link UiHandlerEvent} for the action {@link #onModeChange(AttributeReadMode, UiMode, boolean)
- * onModeChange}.
+ * This is the {@link UiHandlerEvent} for the action {@link #onModeChange(UiEventMode, UiMode)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -23,24 +21,21 @@ public abstract class UiHandlerEventMode implements UiHandlerEvent {
    * {@inheritDoc}
    */
   @Override
-  public void onEvent(UiFeatureEvent source, UiEvent event, boolean programmatic) {
+  public void onEvent(UiEvent event) {
 
     if (event.getType() == EventType.MODE) {
-      AttributeReadMode modeSource = (AttributeReadMode) source;
-      onModeChange(modeSource, modeSource.getMode(), programmatic);
+      UiEventMode modeEvent = (UiEventMode) event;
+      onModeChange(modeEvent, modeEvent.getSource().getMode());
     }
   }
 
   /**
-   * This method is invoked if an {@link AttributeReadMode object} has
+   * This method is invoked if an {@link net.sf.mmm.client.ui.api.feature.UiFeatureMode object} has
    * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteMode#setMode(UiMode) changed} its {@link UiMode}.
    * 
-   * @param source is the object that triggered the change.
+   * @param event is the {@link UiEventMode mode change event}.
    * @param newMode is the new {@link UiMode}.
-   * @param programmatic - <code>true</code> if the
-   *        {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteMode#setMode(UiMode) change was triggered
-   *        by the program}, <code>false</code> if performed by the end-user.
    */
-  public abstract void onModeChange(AttributeReadMode source, UiMode newMode, boolean programmatic);
+  public abstract void onModeChange(UiEventMode event, UiMode newMode);
 
 }

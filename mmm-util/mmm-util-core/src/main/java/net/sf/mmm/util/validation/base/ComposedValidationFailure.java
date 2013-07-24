@@ -36,7 +36,7 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
    * @param source is the {@link #getSource() source}.
    * @param failures are the individual {@link ValidationFailure}s.
    */
-  public ComposedValidationFailure(String code, String source, ValidationFailure[] failures) {
+  public ComposedValidationFailure(String code, Object source, ValidationFailure[] failures) {
 
     super(code, source);
     this.failures = failures;

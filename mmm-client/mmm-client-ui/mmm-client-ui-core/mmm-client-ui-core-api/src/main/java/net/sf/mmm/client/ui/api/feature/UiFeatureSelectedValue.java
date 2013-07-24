@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the selectable {@link #getSelectedValues() values}.
  */
-public interface UiFeatureSelectedValue<VALUE> extends AttributeWriteSelectedValue<VALUE> {
+public interface UiFeatureSelectedValue<VALUE> extends UiFeature, AttributeWriteSelectedValue<VALUE> {
 
   /**
    * This method adds the given {@link UiHandlerEventSelection} to this object.

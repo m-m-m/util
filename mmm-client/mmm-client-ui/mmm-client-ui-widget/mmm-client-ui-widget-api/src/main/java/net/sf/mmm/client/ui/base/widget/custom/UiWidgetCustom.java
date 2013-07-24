@@ -234,8 +234,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final void setMode(UiMode mode) {
+  protected void setMode(UiMode mode, boolean programmatic) {
 
+    // only call doSetMode if mode will actually change...
     if (this.delegate.getMode() == mode) {
       // mode not changed, nothing to do...
       return;
@@ -471,8 +472,7 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    */
   protected void doInitialize() {
 
-    // TODO Auto-generated method stub
-
+    // nothing by default...
   }
 
   /**
@@ -481,13 +481,8 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   @Override
   protected void doValidate(ValidationState state, VALUE value) {
 
-    // boolean success =
     super.doValidate(state, value);
-    // TODO hohwille bug? should delegate to doValidate?
-    // boolean delegateSuccess =
-    // this.delegate.validate(state);
     ((AbstractUiWidget<?>) this.delegate).getValueDirect(null, state);
-    // return (success && delegateSuccess);
   }
 
   /**

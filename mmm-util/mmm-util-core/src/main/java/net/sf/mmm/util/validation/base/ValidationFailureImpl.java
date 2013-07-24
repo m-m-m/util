@@ -37,7 +37,7 @@ public class ValidationFailureImpl extends AbstractValidationFailure {
    * @param source is the {@link #getSource() source}.
    * @param message is the {@link NlsMessage} for {@link #getMessage(Locale)}.
    */
-  public ValidationFailureImpl(String code, String source, NlsMessage message) {
+  public ValidationFailureImpl(String code, Object source, NlsMessage message) {
 
     super(code, source);
     this.message = message;

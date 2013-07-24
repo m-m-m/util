@@ -32,7 +32,7 @@ public abstract class AbstractValidationFailure extends AbstractMessage implemen
    * @param code is the {@link #getCode() code}.
    * @param source is the {@link #getSource() source}.
    */
-  public AbstractValidationFailure(String code, String source) {
+  public AbstractValidationFailure(String code, Object source) {
 
     super(code, source);
   }

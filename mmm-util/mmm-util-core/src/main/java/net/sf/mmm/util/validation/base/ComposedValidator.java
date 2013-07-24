@@ -68,12 +68,8 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
       if (failureList.size() == 1) {
         result = failureList.get(0);
       } else {
-        String source = null;
-        if (valueSource != null) {
-          source = valueSource.toString();
-        }
-        result = new ComposedValidationFailure(getCode(), source, failureList.toArray(new ValidationFailure[failureList
-            .size()]));
+        result = new ComposedValidationFailure(getCode(), valueSource,
+            failureList.toArray(new ValidationFailure[failureList.size()]));
       }
     }
     return result;

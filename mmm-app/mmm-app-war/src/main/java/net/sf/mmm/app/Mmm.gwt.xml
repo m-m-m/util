@@ -20,8 +20,13 @@
   <extend-property name="locale" values="de"/>
   <set-property-fallback name="locale" value="de"/>
   <set-property name="locale" value="de"/>
-  
+
   <script src="js/mmm-nls-bundle.js?name=net.sf.mmm.client.ui.PropertyLabels"/>
-  
+
+  <inherits name="org.hibernate.validator.HibernateValidator" />
+  <replace-with class="net.sf.mmm.app.client.SampleValidatorFactory">
+    <when-type-is class="javax.validation.ValidatorFactory" />
+  </replace-with>
+
   <!-- <collapse-all-properties />  -->
 </module>
