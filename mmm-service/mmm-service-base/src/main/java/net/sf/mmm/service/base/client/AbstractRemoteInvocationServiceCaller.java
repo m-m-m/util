@@ -3,20 +3,24 @@
 package net.sf.mmm.service.base.client;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
-import net.sf.mmm.service.api.RemoteInvocationServiceResult;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCallFailedException;
+import net.sf.mmm.service.api.RemoteInvocationServiceCallFailedException;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceQueueSettings;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.AttributeTransactionMode;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.Settings;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.TransactionMode;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalCalls;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalResults;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
@@ -30,7 +34,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
  * @since 1.0.0
  */
 public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLoggableComponent implements
-    RemoteInvocationServiceCaller {
+    RemoteInvocationServiceCaller, AttributeTransactionMode {
 
   /** @see #nextRequestId() */
   private int requestCount;
@@ -38,12 +42,34 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   /** The current {@link RemoteInvocationServiceQueueImpl queue} or <code>null</code> for none. */
   private RemoteInvocationServiceQueueImpl currentQueue;
 
+  /** @see #getTransactionMode() */
+  private TransactionMode transactionMode;
+
   /**
    * The constructor.
    */
   public AbstractRemoteInvocationServiceCaller() {
 
     super();
+    this.transactionMode = TransactionMode.ALL_INVOCATIONS;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public TransactionMode getTransactionMode() {
+
+    return this.transactionMode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTransactionMode(TransactionMode transactionMode) {
+
+    this.transactionMode = transactionMode;
   }
 
   /**
@@ -52,7 +78,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   @Override
   public RemoteInvocationServiceQueueImpl newQueue() {
 
-    return newQueue(new RemoteInvocationServiceQueueSettings());
+    return newQueue(new Settings());
   }
 
   /**
@@ -61,14 +87,14 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   @Override
   public RemoteInvocationServiceQueueImpl newQueue(String id) {
 
-    return newQueue(new RemoteInvocationServiceQueueSettings(id));
+    return newQueue(new Settings(id));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public RemoteInvocationServiceQueueImpl newQueue(RemoteInvocationServiceQueueSettings settings) {
+  public RemoteInvocationServiceQueueImpl newQueue(Settings settings) {
 
     this.currentQueue = createQueue(settings);
     return this.currentQueue;
@@ -79,16 +105,29 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    * current queue} is present, the new queue has to use it as
    * {@link RemoteInvocationServiceQueueImpl#getParentQueue() parent}.
    * 
-   * @param settings are the {@link RemoteInvocationServiceQueueSettings}.
+   * @param settings are the {@link Settings} for the new queue.
    * @return the new {@link RemoteInvocationServiceQueueImpl}.
    */
-  protected RemoteInvocationServiceQueueImpl createQueue(RemoteInvocationServiceQueueSettings settings) {
+  protected RemoteInvocationServiceQueueImpl createQueue(Settings settings) {
 
     RemoteInvocationServiceQueueImpl queue = getCurrentQueue();
-    if ((queue != null) && queue.autoCommit) {
-      throw new NlsIllegalStateException();
+    if (queue != null) {
+      if ((queue.autoCommit) || queue.settings.isRejectSubQueue()) {
+        throw new NlsIllegalStateException();
+      }
     }
-    return new RemoteInvocationServiceQueueImpl(settings, queue);
+    Settings newSettings = new Settings(settings);
+    TransactionMode mode = newSettings.getTransactionMode();
+    if (mode == null) {
+      if (queue == null) {
+        mode = getTransactionMode();
+      } else {
+        mode = queue.getSettings().getTransactionMode();
+      }
+      assert (mode != null);
+      newSettings.setTransactionMode(mode);
+    }
+    return new RemoteInvocationServiceQueueImpl(newSettings, queue);
   }
 
   /**
@@ -139,17 +178,13 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   protected void performRequest(RemoteInvocationServiceQueueImpl queue) {
 
     assert (queue == this.currentQueue);
-    List<ServiceCallData<?>> callQueue = queue.callQueue;
-    if (callQueue.isEmpty()) {
+    RequestBuilder builder = new RequestBuilder();
+    queue.collectCalls(builder, false);
+    if (builder.txCallList.isEmpty()) {
       return;
     }
-    RemoteInvocationServiceCall[] calls = new RemoteInvocationServiceCall[callQueue.size()];
-    int i = 0;
-    for (ServiceCallData<?> callData : callQueue) {
-      calls[i++] = callData.call;
-    }
-    RemoteInvocationGenericServiceRequest request = new RemoteInvocationGenericServiceRequest(nextRequestId(), calls);
-    performRequest(request, callQueue);
+    RemoteInvocationGenericServiceRequest request = builder.build(nextRequestId());
+    performRequest(request, builder);
   }
 
   /**
@@ -178,51 +213,21 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
    * This method finally performs the given <code>request</code>.
    * 
    * @param request is the {@link RemoteInvocationGenericServiceRequest} to perform.
-   * @param serviceCalls is the {@link List} of {@link ServiceCallData} corresponding to
-   *        {@link RemoteInvocationGenericServiceRequest#getCalls()}.
+   * @param builder is the {@link RequestBuilder} corresponding to the given <code>request</code>.
    */
-  protected abstract void performRequest(RemoteInvocationGenericServiceRequest request,
-      List<ServiceCallData<?>> serviceCalls);
+  protected abstract void performRequest(RemoteInvocationGenericServiceRequest request, RequestBuilder builder);
 
   /**
-   * This method is called from
-   * {@link #handleResponse(RemoteInvocationGenericServiceRequest, List, RemoteInvocationGenericServiceResponse)}
-   * to handle an individual result.
-   * 
-   * @param <RESULT> is the generic type of the received result.
-   * 
-   * @param call is the corresponding {@link RemoteInvocationServiceCall}.
-   * @param result is the received {@link RemoteInvocationServiceResult} to handle.
-   * @param successCallback is the {@link Consumer} that will {@link Consumer#accept(Object) receive} the
-   *        <code>result</code>.
-   * @param failureCallback is the {@link Consumer} that will {@link Consumer#accept(Object) receive} a
-   *        potential {@link RemoteInvocationServiceResult#getFailure() failure}.
-   * @param complete - <code>true</code> if this is the last result for a request, <code>false</code>
-   *        otherwise.
-   */
-  protected <RESULT extends Serializable> void handleResult(RemoteInvocationServiceCall call,
-      RemoteInvocationServiceResult<RESULT> result, Consumer<RESULT> successCallback,
-      Consumer<Throwable> failureCallback, boolean complete) {
-
-    Throwable failure = result.getFailure();
-    if (failure != null) {
-      failureCallback.accept(failure);
-    } else {
-      successCallback.accept(result.getResult());
-    }
-  }
-
-  /**
-   * This method should be called from {@link #performRequest(RemoteInvocationGenericServiceRequest, List)} if
-   * a {@link RemoteInvocationGenericServiceResponse} has been received.
+   * This method should be called from
+   * {@link #performRequest(RemoteInvocationGenericServiceRequest, RequestBuilder)} if a
+   * {@link RemoteInvocationGenericServiceResponse} has been received.
    * 
    * @param request is the {@link RemoteInvocationGenericServiceRequest} that has been
-   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, List) performed}.
-   * @param serviceCalls is the list of {@link ServiceCallData} with the callbacks.
+   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, RequestBuilder) performed}.
+   * @param builder is the {@link RequestBuilder} corresponding to the given <code>request</code>.
    * @param response is the {@link RemoteInvocationGenericServiceResponse} to handle.
    */
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-  protected void handleResponse(RemoteInvocationGenericServiceRequest request, List<ServiceCallData<?>> serviceCalls,
+  protected void handleResponse(RemoteInvocationGenericServiceRequest request, RequestBuilder builder,
       RemoteInvocationGenericServiceResponse response) {
 
     if (request.getRequestId() != response.getRequestId()) {
@@ -230,42 +235,29 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
       throw new ObjectMismatchException(Integer.valueOf(response.getRequestId()), Integer.valueOf(request
           .getRequestId()), source);
     }
-    RemoteInvocationServiceResult[] results = response.getResults();
-    RemoteInvocationServiceCall[] calls = request.getCalls();
-    if ((results.length != calls.length) || (serviceCalls.size() != calls.length)) {
+    RemoteInvocationServiceTransactionalCalls[] transactionalCalls = request.getTransactionalCalls();
+    RemoteInvocationServiceTransactionalResults[] transactionalResults = response.getTransactionalResults();
+    if (transactionalResults.length != transactionalCalls.length) {
       String source = "#calls/results";
-      throw new ObjectMismatchException(Integer.valueOf(results.length), Integer.valueOf(calls.length), source);
+      throw new ObjectMismatchException(Integer.valueOf(transactionalResults.length),
+          Integer.valueOf(transactionalCalls.length), source);
     }
-    int i = 0;
-    for (ServiceCallData<?> callData : serviceCalls) {
-      RemoteInvocationServiceCall call = calls[i];
-      RemoteInvocationServiceResult result = results[i];
-      Consumer successCallback = callData.successCallback;
-      boolean complete = (i == (results.length - 1));
-      handleResult(call, result, successCallback, callData.failureCallback, complete);
-      i++;
-    }
+    builder.handleResponse(response);
   }
 
   /**
-   * This method should be called from {@link #performRequest(RemoteInvocationGenericServiceRequest, List)} if
-   * a general {@link Throwable failure} occurred on the client side (in case of a network error or the like).
+   * This method should be called from
+   * {@link #performRequest(RemoteInvocationGenericServiceRequest, RequestBuilder)} if a general
+   * {@link Throwable failure} occurred on the client side (in case of a network error or the like).
    * 
    * @param request is the {@link RemoteInvocationGenericServiceRequest} that has been
-   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, List) performed}.
-   * @param serviceCalls is the list of {@link ServiceCallData} with the callbacks.
+   *        {@link #performRequest(RemoteInvocationGenericServiceRequest, RequestBuilder) performed}.
+   * @param builder is the {@link RequestBuilder} corresponding to the given <code>request</code>.
    * @param failure is the {@link Throwable} that has been catched on the client.
    */
-  protected void handleFailure(RemoteInvocationGenericServiceRequest request, List<ServiceCallData<?>> serviceCalls,
-      Throwable failure) {
+  protected void handleFailure(RemoteInvocationGenericServiceRequest request, RequestBuilder builder, Throwable failure) {
 
-    RemoteInvocationServiceCall[] calls = request.getCalls();
-    int i = 0;
-    for (ServiceCallData<?> callData : serviceCalls) {
-      RemoteInvocationServiceCall call = calls[i++];
-      callData.failureCallback.accept(new RemoteInvocationServiceCallFailedException(failure, call
-          .getServiceInterfaceName(), call.getMethodName() + call.getArguments()));
-    }
+    builder.handleFailure(failure);
   }
 
   /**
@@ -274,10 +266,13 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
   protected class RemoteInvocationServiceQueueImpl implements RemoteInvocationServiceQueue {
 
     /** @see #getSettings() */
-    private final RemoteInvocationServiceQueueSettings settings;
+    private final Settings settings;
 
     /** @see #getParentQueue() */
     private RemoteInvocationServiceQueueImpl parentQueue;
+
+    /** @see #getCallQueue() */
+    private List<RemoteInvocationServiceQueueImpl> subQueues;
 
     /** @see #getCallQueue() */
     private List<ServiceCallData<?>> callQueue;
@@ -288,8 +283,8 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     /** The current {@link AbstractRemoteInvocationServiceCaller.ServiceCallData} or <code>null</code>. */
     private ServiceCallData<?> currentCall;
 
-    /** @see #isOpen() */
-    private boolean open;
+    /** @see #getState() */
+    private State state;
 
     /** @see #getParentQueue() */
     private RemoteInvocationServiceQueueImpl childQueue;
@@ -302,7 +297,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
      * 
      * @param settings - see {@link #getSettings()}.
      */
-    public RemoteInvocationServiceQueueImpl(RemoteInvocationServiceQueueSettings settings) {
+    public RemoteInvocationServiceQueueImpl(Settings settings) {
 
       this(settings, null);
     }
@@ -313,18 +308,77 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
      * @param settings - see {@link #getSettings()}.
      * @param parentQueue - see {@link #getParentQueue()}.
      */
-    public RemoteInvocationServiceQueueImpl(RemoteInvocationServiceQueueSettings settings,
-        RemoteInvocationServiceQueueImpl parentQueue) {
+    public RemoteInvocationServiceQueueImpl(Settings settings, RemoteInvocationServiceQueueImpl parentQueue) {
 
       super();
-      NlsNullPointerException.checkNotNull(RemoteInvocationServiceQueueSettings.class, settings);
+      NlsNullPointerException.checkNotNull(Settings.class, settings);
       this.settings = settings;
       this.parentQueue = parentQueue;
       if (parentQueue != null) {
         parentQueue.childQueue = this;
       }
-      this.callQueue = new ArrayList<AbstractRemoteInvocationServiceCaller.ServiceCallData<?>>();
-      this.open = true;
+      this.callQueue = new LinkedList<ServiceCallData<?>>();
+      this.subQueues = new LinkedList<RemoteInvocationServiceQueueImpl>();
+      this.state = State.OPEN;
+    }
+
+    /**
+     * This method collects the {@link RemoteInvocationServiceTransactionalCalls} for this queue recursively.
+     * 
+     * @param requestBuilder is the {@link RequestBuilder}.
+     * @param hasOpenTransaction - <code>true</code> if a {@link RequestBuilder#beginTx() transaction has
+     *        already been opened}, <code>false</code> otherwise.
+     * @return <code>true</code> if a {@link RequestBuilder#beginTx() transaction is currently open},
+     *         <code>false</code> otherwise.
+     */
+    boolean collectCalls(RequestBuilder requestBuilder, boolean hasOpenTransaction) {
+
+      boolean openTransaction = hasOpenTransaction;
+      TransactionMode mode = this.settings.getTransactionMode();
+      if (!this.callQueue.isEmpty()) {
+        switch (mode) {
+          case ALL_INVOCATIONS:
+            if (!openTransaction) {
+              requestBuilder.beginTx();
+              openTransaction = true;
+            }
+            for (ServiceCallData<?> callData : this.callQueue) {
+              requestBuilder.addToCurrentTx(callData);
+            }
+            break;
+          case PER_INVOCATION:
+            if (openTransaction) {
+              requestBuilder.endTx();
+              openTransaction = false;
+            }
+            for (ServiceCallData<?> callData : this.callQueue) {
+              requestBuilder.addInSingleTx(callData);
+            }
+            break;
+          case PER_QUEUE:
+            if (openTransaction) {
+              requestBuilder.endTx();
+              openTransaction = false;
+            }
+            requestBuilder.beginTx();
+            for (ServiceCallData<?> callData : this.callQueue) {
+              requestBuilder.addToCurrentTx(callData);
+            }
+            requestBuilder.endTx();
+            break;
+          default :
+            throw new IllegalCaseException(TransactionMode.class, mode);
+        }
+      }
+      for (RemoteInvocationServiceQueueImpl child : this.subQueues) {
+        assert (child.getState() == State.COMITTED);
+        openTransaction = child.collectCalls(requestBuilder, openTransaction);
+      }
+      if ((mode == TransactionMode.ALL_INVOCATIONS) && !hasOpenTransaction) {
+        requestBuilder.endTx();
+        openTransaction = false;
+      }
+      return openTransaction;
     }
 
     /**
@@ -389,10 +443,10 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     }
 
     /**
-     * @return the {@link RemoteInvocationServiceQueueSettings} given when this queue has been
-     *         {@link RemoteInvocationServiceCaller#newQueue(RemoteInvocationServiceQueueSettings) created}.
+     * @return the {@link Settings} given when this queue has been
+     *         {@link RemoteInvocationServiceCaller#newQueue(Settings) created}.
      */
-    public RemoteInvocationServiceQueueSettings getSettings() {
+    public Settings getSettings() {
 
       return this.settings;
     }
@@ -407,8 +461,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     }
 
     /**
-     * @return an info string with the {@link RemoteInvocationServiceQueueSettings#getId() ID} or the empty
-     *         string if not present.
+     * @return an info string with the {@link Settings#getId() ID} or the empty string if not present.
      */
     protected String getIdInfo() {
 
@@ -432,17 +485,17 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
      * {@inheritDoc}
      */
     @Override
-    public boolean isOpen() {
+    public State getState() {
 
-      return this.open;
+      return this.state;
     }
 
     /**
-     * Internal method to ensure this queue is still {@link #isOpen() open}.
+     * Internal method to ensure this queue is still {@link State#OPEN open}.
      */
     protected void requireOpen() {
 
-      if (!this.open) {
+      if (this.state != State.OPEN) {
         throw new IllegalStateException("Queue not open!");
       }
     }
@@ -505,11 +558,14 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
       try {
         if (this.parentQueue == null) {
           performRequest(this);
-        } else {
-          this.parentQueue.callQueue.addAll(this.callQueue);
+          // } else {
+          // this.parentQueue.callQueue.addAll(this.callQueue);
         }
+        this.state = State.COMITTED;
       } finally {
-        close();
+        if (this.state != State.COMITTED) {
+          this.state = State.FAILED;
+        }
       }
     }
 
@@ -518,7 +574,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
      */
     private void close() {
 
-      this.open = false;
+      // this.open = false;
 
       // disconnect from parent
       if (this.parentQueue != null) {
@@ -626,6 +682,201 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     protected RemoteInvocationServiceCall getCall() {
 
       return this.call;
+    }
+
+  }
+
+  /**
+   * This inner calls is a builder for {@link RemoteInvocationServiceTransactionalCalls}.
+   */
+  protected class TransactionalCallBuilder {
+
+    /** @see #add(ServiceCallData) */
+    private final List<ServiceCallData<?>> callDataList;
+
+    /**
+     * The constructor.
+     */
+    public TransactionalCallBuilder() {
+
+      super();
+      this.callDataList = new LinkedList<ServiceCallData<?>>();
+    }
+
+    /**
+     * @param data is the {@link ServiceCallData} to add.
+     */
+    public void add(ServiceCallData<?> data) {
+
+      this.callDataList.add(data);
+    }
+
+    /**
+     * @return the new {@link RemoteInvocationServiceTransactionalCalls} instance for this builder.
+     */
+    public RemoteInvocationServiceTransactionalCalls build() {
+
+      RemoteInvocationServiceCall[] calls = new RemoteInvocationServiceCall[this.callDataList.size()];
+      int i = 0;
+      for (ServiceCallData<?> data : this.callDataList) {
+        calls[i++] = data.call;
+      }
+      return new RemoteInvocationServiceTransactionalCalls(calls);
+    }
+
+    /**
+     * Processes the given <code>results</code>.
+     * 
+     * @param results are the {@link RemoteInvocationServiceTransactionalResults} to handle.
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    void handleResults(RemoteInvocationServiceTransactionalResults results) {
+
+      Throwable failure = results.getFailure();
+      if (failure != null) {
+        for (ServiceCallData<?> callData : this.callDataList) {
+          callData.failureCallback.accept(failure);
+        }
+      } else {
+        Serializable[] resultValues = results.getResults();
+        if (resultValues.length != this.callDataList.size()) {
+          throw new ObjectMismatchException(Integer.valueOf(resultValues.length), Integer.valueOf(this.callDataList
+              .size()), "response.transactionalResults.results.length");
+        }
+        int i = 0;
+        for (ServiceCallData callData : this.callDataList) {
+          try {
+            callData.successCallback.accept(resultValues[i++]);
+          } catch (RuntimeException e) {
+            getLogger().error("Error processing call: " + callData.call.getTitle(), e);
+            throw e;
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * This inner class is a builder for {@link RemoteInvocationGenericServiceRequest}.
+   */
+  protected class RequestBuilder {
+
+    /** @see #build(int) */
+    private final List<TransactionalCallBuilder> txCallList;
+
+    /** @see #addToCurrentTx(ServiceCallData) */
+    private TransactionalCallBuilder currentTx;
+
+    /**
+     * The constructor.
+     */
+    public RequestBuilder() {
+
+      super();
+      this.txCallList = new LinkedList<TransactionalCallBuilder>();
+    }
+
+    /**
+     * Processes the given <code>failure</code>.
+     * 
+     * @param failure is the failure that occurred.
+     */
+    void handleFailure(Throwable failure) {
+
+      for (TransactionalCallBuilder txCall : this.txCallList) {
+        for (ServiceCallData<?> callData : txCall.callDataList) {
+          RemoteInvocationServiceCall call = callData.getCall();
+          callData.failureCallback.accept(new RemoteInvocationServiceCallFailedException(failure, call
+              .getServiceInterfaceName(), call.getMethodName() + call.getArguments()));
+        }
+      }
+    }
+
+    /**
+     * Processes the given <code>response</code>.
+     * 
+     * @param response is the {@link RemoteInvocationGenericServiceResponse} to handle.
+     */
+    void handleResponse(RemoteInvocationGenericServiceResponse response) {
+
+      RemoteInvocationServiceTransactionalResults[] transactionalResults = response.getTransactionalResults();
+      if (transactionalResults.length != this.txCallList.size()) {
+        throw new ObjectMismatchException(Integer.valueOf(transactionalResults.length), Integer.valueOf(this.txCallList
+            .size()), "response.transactionalResults.length");
+      }
+      int i = 0;
+      for (TransactionalCallBuilder txCall : this.txCallList) {
+        RemoteInvocationServiceTransactionalResults results = transactionalResults[i++];
+        txCall.handleResults(results);
+      }
+    }
+
+    /**
+     * Begins a new {@link RemoteInvocationServiceTransactionalCalls "transaction"}.
+     */
+    public void beginTx() {
+
+      if (this.currentTx != null) {
+        throw new IllegalStateException();
+      }
+      this.currentTx = new TransactionalCallBuilder();
+    }
+
+    /**
+     * @param data is the {@link ServiceCallData} to {@link TransactionalCallBuilder#add(ServiceCallData) add}
+     *        to the {@link #beginTx() current transaction}.
+     */
+    public void addToCurrentTx(ServiceCallData<?> data) {
+
+      if (this.currentTx == null) {
+        throw new IllegalStateException();
+      }
+      this.currentTx.add(data);
+    }
+
+    /**
+     * @param data is the {@link ServiceCallData} to {@link TransactionalCallBuilder#add(ServiceCallData) add}
+     *        as a new {@link RemoteInvocationServiceTransactionalCalls "transaction"}.
+     */
+    public void addInSingleTx(ServiceCallData<?> data) {
+
+      if (this.currentTx != null) {
+        throw new IllegalStateException();
+      }
+      TransactionalCallBuilder txCallBuilder = new TransactionalCallBuilder();
+      txCallBuilder.add(data);
+      this.txCallList.add(txCallBuilder);
+    }
+
+    /**
+     * Ends the current {@link RemoteInvocationServiceTransactionalCalls "transaction"}.
+     */
+    public void endTx() {
+
+      if (this.currentTx == null) {
+        throw new IllegalStateException();
+      }
+      if (!this.currentTx.callDataList.isEmpty()) {
+        this.txCallList.add(this.currentTx);
+      }
+      this.currentTx = null;
+    }
+
+    /**
+     * Builds the {@link RemoteInvocationGenericServiceRequest} instance.
+     * 
+     * @param requestId is the {@link RemoteInvocationGenericServiceRequest#getRequestId() request ID}.
+     * @return the new {@link RemoteInvocationGenericServiceRequest} instance for this builder.
+     */
+    public RemoteInvocationGenericServiceRequest build(int requestId) {
+
+      RemoteInvocationServiceTransactionalCalls[] transactionalCalls = new RemoteInvocationServiceTransactionalCalls[this.txCallList
+          .size()];
+      int i = 0;
+      for (TransactionalCallBuilder txCall : this.txCallList) {
+        transactionalCalls[i++] = txCall.build();
+      }
+      return new RemoteInvocationGenericServiceRequest(requestId, transactionalCalls);
     }
 
   }

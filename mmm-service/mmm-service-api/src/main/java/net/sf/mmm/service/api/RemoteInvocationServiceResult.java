@@ -8,10 +8,12 @@ import java.io.Serializable;
  * This is the generic transfer-object for the result of a method-call to a
  * {@link net.sf.mmm.service.api.RemoteInvocationService}.
  * 
+ * @deprecated will be removed...
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <RESULT> is the generic type of the actual {@link #getResult() result}.
  */
+@Deprecated
 public class RemoteInvocationServiceResult<RESULT extends Serializable> implements Serializable {
 
   /** UID for serialization. */

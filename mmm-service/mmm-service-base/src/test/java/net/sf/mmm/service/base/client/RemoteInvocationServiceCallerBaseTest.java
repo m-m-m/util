@@ -4,6 +4,7 @@ package net.sf.mmm.service.base.client;
 
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.State;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 
 import org.junit.Assert;
@@ -52,7 +53,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
   protected void cancel(CALLER caller, RemoteInvocationServiceQueue queue) {
 
     queue.cancel();
-    assertFalse(queue.isOpen());
+    assertFalse(queue.getState() == State.CANCELLED);
     verifyNoRequest(caller);
   }
 
@@ -66,7 +67,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
 
     RemoteInvocationServiceQueue queue = caller.newQueue();
     assertNotNull(queue);
-    assertTrue(queue.isOpen());
+    assertTrue(queue.getState() == State.OPEN);
     assertSame(queue, caller.getCurrentQueue());
     return queue;
   }

@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.impl.gwt.client;
 
-import java.util.List;
-
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCallerWithClientMap;
@@ -53,8 +51,7 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends
    * {@inheritDoc}
    */
   @Override
-  protected void performRequest(final RemoteInvocationGenericServiceRequest request,
-      final List<ServiceCallData<?>> serviceCalls) {
+  protected void performRequest(final RemoteInvocationGenericServiceRequest request, final RequestBuilder builder) {
 
     AsyncCallback<RemoteInvocationGenericServiceResponse> callback = new AsyncCallback<RemoteInvocationGenericServiceResponse>() {
 
@@ -64,7 +61,7 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends
       @Override
       public void onFailure(Throwable caught) {
 
-        handleFailure(request, serviceCalls, caught);
+        handleFailure(request, builder, caught);
       }
 
       /**
@@ -73,7 +70,7 @@ public abstract class AbstractRemoteInvocationServiceCallerGwt extends
       @Override
       public void onSuccess(RemoteInvocationGenericServiceResponse response) {
 
-        handleResponse(request, serviceCalls, response);
+        handleResponse(request, builder, response);
       }
     };
 

@@ -8,6 +8,8 @@
 
   <import resource="classpath:net/sf/mmm/util/beans-util-core.xml"/>
 
+  <bean class="net.sf.mmm.transaction.base.NoTransactionExecutor"/>
+
   <bean class="net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceImpl"/>
   <bean class="net.sf.mmm.service.impl.server.TestServiceImpl"/>
 </beans>

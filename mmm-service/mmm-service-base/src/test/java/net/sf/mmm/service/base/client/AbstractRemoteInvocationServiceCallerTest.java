@@ -3,15 +3,16 @@
 package net.sf.mmm.service.base.client;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.function.Consumer;
 
 import net.sf.mmm.service.TestService;
-import net.sf.mmm.service.api.RemoteInvocationServiceResult;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
+import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalCalls;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalResults;
 import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCallerTest.RemoteInvocationServiceCallerTestImpl;
 import net.sf.mmm.util.lang.api.GenericBean;
 
@@ -129,9 +130,6 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     /** @see AbstractRemoteInvocationServiceCallerTest#getCurrentRequest(RemoteInvocationServiceCallerTestImpl) */
     private RemoteInvocationGenericServiceRequest currentRequest;
 
-    /** @see AbstractRemoteInvocationServiceCallerTest#getCurrentCallbacks(RemoteInvocationServiceCallerTestImpl) */
-    private List<ServiceCallData<?>> currentCalls;
-
     /**
      * The constructor.
      */
@@ -145,34 +143,46 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    protected void performRequest(RemoteInvocationGenericServiceRequest request, List<ServiceCallData<?>> serviceCalls) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    protected void performRequest(RemoteInvocationGenericServiceRequest request, RequestBuilder builder) {
 
       verifyNoRequest();
       assertNotNull(request);
-      assertNotNull(serviceCalls);
+      assertNotNull(builder);
       this.currentRequest = request;
-      this.currentCalls = serviceCalls;
-      RemoteInvocationServiceCall[] calls = request.getCalls();
-      int i = 0;
-      for (ServiceCallData<?> callData : serviceCalls) {
-        // for (int i = 0; i < calls.length; i++) {
-        RemoteInvocationServiceCall currentCall = calls[i++];
-        if (TestService.class.getName().equals(currentCall.getServiceInterfaceName())) {
-          if ("getMagicValue".equals(currentCall.getMethodName())) {
-            assertEquals(0, currentCall.getArguments().length);
-            RemoteInvocationServiceResult result = new RemoteInvocationServiceResult<String>(TestService.MAGIC_VALUE);
-            boolean complete = i == (calls.length - 1);
-            Consumer successCallback = callData.getSuccessCallback();
-            handleResult(currentCall, result, successCallback, callData.getFailureCallback(), complete);
-          } else {
-            fail("unknown service method: " + calls[i].getServiceInterfaceName() + "." + calls[i].getMethodName());
-          }
-        } else {
-          fail("unknown service: " + calls[i].getServiceInterfaceName());
+      RemoteInvocationServiceTransactionalCalls[] txCalls = request.getTransactionalCalls();
+      RemoteInvocationServiceTransactionalResults[] txResults = new RemoteInvocationServiceTransactionalResults[txCalls.length];
+
+      for (int txIndex = 0; txIndex < txCalls.length; txIndex++) {
+
+        RemoteInvocationServiceCall[] calls = txCalls[txIndex].getCalls();
+        Serializable[] results = new Serializable[calls.length];
+        for (int callIndex = 0; callIndex < calls.length; callIndex++) {
+          results[callIndex] = processCall(calls[callIndex]);
         }
+        txResults[txIndex] = new RemoteInvocationServiceTransactionalResults(results);
       }
+
+      RemoteInvocationGenericServiceResponse response = new RemoteInvocationGenericServiceResponse(
+          request.getRequestId(), txResults);
+
+      handleResponse(request, builder, response);
+    }
+
+    private Serializable processCall(RemoteInvocationServiceCall currentCall) {
+
+      if (TestService.class.getName().equals(currentCall.getServiceInterfaceName())) {
+        if ("getMagicValue".equals(currentCall.getMethodName())) {
+          assertEquals(0, currentCall.getArguments().length);
+          return TestService.MAGIC_VALUE;
+        } else {
+          fail("unknown service method: " + currentCall.getServiceInterfaceName() + "." + currentCall.getMethodName());
+        }
+      } else {
+        fail("unknown service: " + currentCall.getServiceInterfaceName());
+      }
+      throw new IllegalStateException();
     }
 
     /**
@@ -181,7 +191,6 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     public void verifyNoRequest() {
 
       assertNull(this.currentRequest);
-      assertNull(this.currentCalls);
     }
 
     /**
@@ -190,7 +199,6 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     public void reset() {
 
       this.currentRequest = null;
-      this.currentCalls = null;
     }
 
   }

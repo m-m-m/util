@@ -8,6 +8,9 @@
 
   <import resource="classpath:net/sf/mmm/service/beans-service-gwt-server.xml" />
 
+  <!-- temporary for simple testing... -->
+  <bean class="net.sf.mmm.transaction.base.NoTransactionExecutor"/>
+
   <context:component-scan base-package="net.sf.mmm.app"/>
 
 </beans>

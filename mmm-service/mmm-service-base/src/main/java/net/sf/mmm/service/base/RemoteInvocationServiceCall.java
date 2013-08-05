@@ -4,6 +4,8 @@ package net.sf.mmm.service.base;
 
 import java.io.Serializable;
 
+import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
+
 /**
  * This is the generic transfer-object for an invocation of a
  * {@link net.sf.mmm.service.api.RemoteInvocationService}. It contains the data for a single method call.
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class RemoteInvocationServiceCall implements Serializable {
+public class RemoteInvocationServiceCall implements Serializable, AttributeReadTitle<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 595577849271182509L;
@@ -134,6 +136,15 @@ public class RemoteInvocationServiceCall implements Serializable {
   public String toString() {
 
     return toString(false);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTitle() {
+
+    return toString(true);
   }
 
   /**

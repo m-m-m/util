@@ -5,6 +5,7 @@ package net.sf.mmm.service.api.client;
 import java.util.function.Consumer;
 
 import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.Settings;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 // CHECKSTYLE:OFF (javadoc)
@@ -73,7 +74,7 @@ public interface RemoteInvocationServiceCaller extends AbstractRemoteInvocationS
 
   /**
    * This method gets the current {@link RemoteInvocationServiceQueue}. This is the last queue that has been
-   * {@link #newQueue() created} and is still {@link RemoteInvocationServiceQueue#isOpen() open}.<br/>
+   * {@link #newQueue() created} and is still {@link RemoteInvocationServiceQueue.State#OPEN open}.<br/>
    * <b>NOTE:</b><br/>
    * This method is only for specific scenarios. You should typically use {@link #newQueue()} instead, to
    * retrieve a queue and perform service invocations.
@@ -86,7 +87,7 @@ public interface RemoteInvocationServiceCaller extends AbstractRemoteInvocationS
    * This method opens a {@link RemoteInvocationServiceQueue} that collects method-invocations on a
    * {@link net.sf.mmm.service.api.RemoteInvocationService}.
    * 
-   * @see #newQueue(RemoteInvocationServiceQueueSettings)
+   * @see #newQueue(Settings)
    * 
    * @return the new {@link RemoteInvocationServiceQueue}.
    */
@@ -96,7 +97,7 @@ public interface RemoteInvocationServiceCaller extends AbstractRemoteInvocationS
    * This method opens a {@link RemoteInvocationServiceQueue} that collects method-invocations on a
    * {@link net.sf.mmm.service.api.RemoteInvocationService}.
    * 
-   * @see #newQueue(RemoteInvocationServiceQueueSettings)
+   * @see #newQueue(Settings)
    * 
    * @param id is the {@link RemoteInvocationServiceQueue#getId() identifier} of the new
    *        {@link RemoteInvocationServiceQueue queue}.
@@ -107,12 +108,12 @@ public interface RemoteInvocationServiceCaller extends AbstractRemoteInvocationS
   /**
    * This method opens a {@link RemoteInvocationServiceQueue} that collects method-invocations on a
    * {@link net.sf.mmm.service.api.RemoteInvocationService}. If a {@link RemoteInvocationServiceQueue} is
-   * {@link #getCurrentQueue() currently} {@link RemoteInvocationServiceQueue#isOpen() open} this method will
-   * create a child-queue of that queue.
+   * {@link #getCurrentQueue() currently} {@link RemoteInvocationServiceQueue.State#OPEN open} this method
+   * will create a child-queue of that queue.
    * 
-   * @param settings are the {@link RemoteInvocationServiceQueueSettings}.
+   * @param settings are the {@link Settings}.
    * @return the new {@link RemoteInvocationServiceQueue}.
    */
-  RemoteInvocationServiceQueue newQueue(RemoteInvocationServiceQueueSettings settings);
+  RemoteInvocationServiceQueue newQueue(Settings settings);
 
 }

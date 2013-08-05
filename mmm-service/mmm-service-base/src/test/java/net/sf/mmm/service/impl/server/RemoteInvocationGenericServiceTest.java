@@ -7,18 +7,19 @@ import java.io.Serializable;
 import javax.inject.Inject;
 
 import net.sf.mmm.service.TestService;
-import net.sf.mmm.service.api.RemoteInvocationServiceResult;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
 import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
 import net.sf.mmm.service.base.RemoteInvocationServiceCall;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalCalls;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalResults;
 import net.sf.mmm.test.AbstractSpringTest;
 
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * This is the test-case of {@link RemoteInvocationGenericServiceImpl}.
+ * This is the test-case of {@link AbstractRemoteInvocationGenericServiceImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -35,17 +36,28 @@ public class RemoteInvocationGenericServiceTest extends AbstractSpringTest {
   @Test
   public void testCallServices() {
 
+    // given
     int requestId = 42;
     RemoteInvocationServiceCall call = new RemoteInvocationServiceCall(TestService.class.getName(), "getMagicValue",
         RemoteInvocationServiceCall.getSignature(new String[0]), new Serializable[0]);
-    RemoteInvocationServiceCall[] calls = new RemoteInvocationServiceCall[] { call };
-    RemoteInvocationGenericServiceRequest request = new RemoteInvocationGenericServiceRequest(requestId, calls);
+    RemoteInvocationServiceTransactionalCalls txCalls = new RemoteInvocationServiceTransactionalCalls(call);
+    RemoteInvocationGenericServiceRequest request = new RemoteInvocationGenericServiceRequest(requestId, txCalls);
+
+    // when
     RemoteInvocationGenericServiceResponse response = this.genericService.callServices(request);
+
+    // then
     assertNotNull(response);
     assertEquals(requestId, response.getRequestId());
-    RemoteInvocationServiceResult<?>[] results = response.getResults();
-    assertEquals(calls.length, results.length);
-    assertSame(TestService.MAGIC_VALUE, results[0].getResult());
+    RemoteInvocationServiceTransactionalResults[] txResults = response.getTransactionalResults();
+    assertEquals(1, txResults.length);
+    RemoteInvocationServiceTransactionalResults txResult = txResults[0];
+    assertNotNull(txResult);
+    Serializable[] results = txResult.getResults();
+    assertEquals(1, results.length);
+    Serializable result = results[0];
+    assertNotNull(result);
+    assertSame(TestService.MAGIC_VALUE, result);
   }
 
 }

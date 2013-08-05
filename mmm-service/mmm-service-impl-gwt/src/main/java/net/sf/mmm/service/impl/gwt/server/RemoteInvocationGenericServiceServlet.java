@@ -24,8 +24,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * using <code>spring-webmvc</code> in order to allow context and dependency-injection (CDI). The actual
  * implementation for {@link #callServices(RemoteInvocationGenericServiceRequest)} is delegated to an
  * {@link #setGenericService(RemoteInvocationGenericService) injected} implementation - by default
- * {@link RemoteInvocationGenericServiceImplGwt} but can be changed by overriding the spring XML
- * configuration.
+ * {@link net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceImpl} but can be changed by overriding
+ * the spring XML configuration.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

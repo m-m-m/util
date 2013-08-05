@@ -3,8 +3,7 @@
 package net.sf.mmm.service.base;
 
 import java.io.Serializable;
-
-import net.sf.mmm.service.api.RemoteInvocationServiceResult;
+import java.util.Collection;
 
 /**
  * This is the generic transfer-object for the response to a {@link RemoteInvocationGenericServiceRequest}.
@@ -17,8 +16,8 @@ public class RemoteInvocationGenericServiceResponse implements Serializable {
   /** UID for serialization. */
   private static final long serialVersionUID = -3659003282415103857L;
 
-  /** @see #getResults() */
-  private RemoteInvocationServiceResult<?>[] results;
+  /** @see #getTransactionalResults() */
+  private RemoteInvocationServiceTransactionalResults[] transactionalResults;
 
   /** @see #getRequestId() */
   private int requestId;
@@ -35,13 +34,27 @@ public class RemoteInvocationGenericServiceResponse implements Serializable {
    * The constructor.
    * 
    * @param requestId - see {@link #getRequestId()}.
-   * @param results - see {@link #getResults()}.
+   * @param transactionalResults - see {@link #getTransactionalResults()}.
    */
-  public RemoteInvocationGenericServiceResponse(int requestId, RemoteInvocationServiceResult<?>[] results) {
+  public RemoteInvocationGenericServiceResponse(int requestId,
+      RemoteInvocationServiceTransactionalResults[] transactionalResults) {
 
     super();
-    this.results = results;
     this.requestId = requestId;
+    this.transactionalResults = transactionalResults;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param requestId - see {@link #getRequestId()}.
+   * @param transactionalResults - see {@link #getTransactionalResults()}.
+   */
+  public RemoteInvocationGenericServiceResponse(int requestId,
+      Collection<RemoteInvocationServiceTransactionalResults> transactionalResults) {
+
+    this(requestId, transactionalResults.toArray(new RemoteInvocationServiceTransactionalResults[transactionalResults
+        .size()]));
   }
 
   /**
@@ -54,11 +67,11 @@ public class RemoteInvocationGenericServiceResponse implements Serializable {
   }
 
   /**
-   * @return an array with the {@link RemoteInvocationServiceResult}s.
+   * @return an array with the {@link RemoteInvocationServiceTransactionalResults}s.
    */
-  public RemoteInvocationServiceResult<?>[] getResults() {
+  public RemoteInvocationServiceTransactionalResults[] getTransactionalResults() {
 
-    return this.results;
+    return this.transactionalResults;
   }
 
 }

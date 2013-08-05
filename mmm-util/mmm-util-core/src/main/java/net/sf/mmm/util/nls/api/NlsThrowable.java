@@ -51,7 +51,6 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    * {@link net.sf.mmm.util.lang.api.Message} to end-users and has to be easy to understand.</li>
    * </ul>
    * 
-   * 
    * @return <code>true</code> if this is a technical exception, <code>false</code> if this is a user error.
    */
   boolean isTechnical();

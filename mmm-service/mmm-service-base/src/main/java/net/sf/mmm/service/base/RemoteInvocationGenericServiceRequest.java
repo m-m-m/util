@@ -3,10 +3,12 @@
 package net.sf.mmm.service.base;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * This is the generic transfer-object for a request sent from client to server for any number of
- * {@link #getCalls() invocations} to a {@link net.sf.mmm.service.api.RemoteInvocationService}.
+ * {@link #getTransactionalCalls() transactional calls} to a
+ * {@link net.sf.mmm.service.api.RemoteInvocationService}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -16,14 +18,14 @@ public class RemoteInvocationGenericServiceRequest implements Serializable {
   /** UID for serialization. */
   private static final long serialVersionUID = -3858810181904299545L;
 
-  /** @see #getCalls() */
-  private RemoteInvocationServiceCall[] calls;
+  /** @see #getTransactionalCalls() */
+  private RemoteInvocationServiceTransactionalCalls[] transactionalCalls;
 
   /** @see #getRequestId() */
   private int requestId;
 
   /**
-   * The constructor.
+   * The constructor for (de)serialization.
    */
   protected RemoteInvocationGenericServiceRequest() {
 
@@ -34,13 +36,27 @@ public class RemoteInvocationGenericServiceRequest implements Serializable {
    * The constructor.
    * 
    * @param requestId - see {@link #getRequestId()}.
-   * @param calls - see {@link #getCalls()}.
+   * @param transactionalCalls - see {@link #getTransactionalCalls()}.
    */
-  public RemoteInvocationGenericServiceRequest(int requestId, RemoteInvocationServiceCall... calls) {
+  public RemoteInvocationGenericServiceRequest(int requestId,
+      RemoteInvocationServiceTransactionalCalls... transactionalCalls) {
 
     super();
     this.requestId = requestId;
-    this.calls = calls;
+    this.transactionalCalls = transactionalCalls;
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param requestId - see {@link #getRequestId()}.
+   * @param transactionalCalls - see {@link #getTransactionalCalls()}.
+   */
+  public RemoteInvocationGenericServiceRequest(int requestId,
+      Collection<RemoteInvocationServiceTransactionalCalls> transactionalCalls) {
+
+    this(requestId, transactionalCalls
+        .toArray(new RemoteInvocationServiceTransactionalCalls[transactionalCalls.size()]));
   }
 
   /**
@@ -53,11 +69,11 @@ public class RemoteInvocationGenericServiceRequest implements Serializable {
   }
 
   /**
-   * @return an array with the {@link RemoteInvocationServiceCall}s (invocations).
+   * @return an array with the {@link RemoteInvocationServiceTransactionalCalls}s.
    */
-  public RemoteInvocationServiceCall[] getCalls() {
+  public RemoteInvocationServiceTransactionalCalls[] getTransactionalCalls() {
 
-    return this.calls;
+    return this.transactionalCalls;
   }
 
 }

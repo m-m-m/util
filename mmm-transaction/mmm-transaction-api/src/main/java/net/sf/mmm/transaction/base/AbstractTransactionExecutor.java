@@ -16,8 +16,7 @@ import net.sf.mmm.util.event.base.AbstractEventSource;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
- * This is the abstract base implementation of the {@link TransactionExecutor}
- * interface.
+ * This is the abstract base implementation of the {@link TransactionExecutor} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -36,8 +35,8 @@ public abstract class AbstractTransactionExecutor extends
   }
 
   /**
-   * This method gets the default used if no {@link TransactionSettings} are
-   * specified explicitly on a call of <code>doInTransaction</code>.
+   * This method gets the default used if no {@link TransactionSettings} are specified explicitly on a call of
+   * <code>doInTransaction</code>.
    * 
    * @return the default settings.
    */
@@ -76,12 +75,10 @@ public abstract class AbstractTransactionExecutor extends
    * 
    * @return the new {@link TransactionAdapter}.
    */
-  protected abstract AbstractTransactionAdapter<?> openTransactionAdapter(
-      TransactionSettings settings);
+  protected abstract AbstractTransactionAdapter<?> openTransactionAdapter(TransactionSettings settings);
 
   /**
-   * This method create the {@link TransactionContext} instances. Override to
-   * change fabrication.
+   * This method create the {@link TransactionContext} instances. Override to change fabrication.
    * 
    * @return a new {@link TransactionContext} instance.
    */
@@ -93,6 +90,7 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public <RESULT> RESULT doInTransaction(Callable<RESULT> callable) throws Exception {
 
     return doInTransaction(callable, getDefaultSettings());
@@ -101,11 +99,13 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
-  public <RESULT> RESULT doInTransaction(final Callable<RESULT> callable,
-      TransactionSettings settings) throws Exception {
+  @Override
+  public <RESULT> RESULT doInTransaction(final Callable<RESULT> callable, TransactionSettings settings)
+      throws Exception {
 
     TransactionCallable<RESULT> transactionCallable = new TransactionCallable<RESULT>() {
 
+      @Override
       public RESULT call(TransactionAdapter transactionContext) {
 
         try {
@@ -122,6 +122,7 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
+  @Override
   public <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable) {
 
     return doInTransaction(callable, getDefaultSettings());
@@ -130,8 +131,8 @@ public abstract class AbstractTransactionExecutor extends
   /**
    * {@inheritDoc}
    */
-  public <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable,
-      TransactionSettings settings) {
+  @Override
+  public <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable, TransactionSettings settings) {
 
     AbstractTransactionAdapter<?> transactionAdapter = openTransactionAdapter(settings);
     transactionAdapter.start();
@@ -146,25 +147,23 @@ public abstract class AbstractTransactionExecutor extends
       try {
         transactionAdapter.stop();
       } catch (Exception e2) {
-        getLogger().error("Error whilst stop/rollback of transaction in exceptional state.", e2);
+        e.addSuppressed(e2);
       }
       throw e;
     } catch (Error e) {
       try {
         transactionAdapter.stop();
       } catch (Exception e2) {
-        getLogger().error("Error whilst stop/rollback of transaction in exceptional state.", e2);
+        e.addSuppressed(e2);
       }
       throw e;
     }
   }
 
   /**
-   * This is the abstract base implementation of the {@link TransactionAdapter}
-   * interface.
+   * This is the abstract base implementation of the {@link TransactionAdapter} interface.
    * 
-   * @param <TRANSACTION> is the generic type of the underlying native
-   *        transaction.
+   * @param <TRANSACTION> is the generic type of the underlying native transaction.
    */
   protected abstract class AbstractTransactionAdapter<TRANSACTION> implements TransactionAdapter {
 
@@ -184,8 +183,7 @@ public abstract class AbstractTransactionExecutor extends
     }
 
     /**
-     * This method has to be called after construction in order to start the
-     * transaction.
+     * This method has to be called after construction in order to start the transaction.
      */
     protected void start() {
 
@@ -194,8 +192,7 @@ public abstract class AbstractTransactionExecutor extends
     }
 
     /**
-     * This method has to be called at the end of the transactional execution to
-     * end transaction.
+     * This method has to be called at the end of the transactional execution to end transaction.
      */
     protected void stop() {
 
@@ -213,12 +210,10 @@ public abstract class AbstractTransactionExecutor extends
     protected abstract TRANSACTION createNewTransaction();
 
     /**
-     * This method gets the underlying native transaction that is currently
-     * {@link #isActive() active}.
+     * This method gets the underlying native transaction that is currently {@link #isActive() active}.
      * 
      * @return the active transaction.
-     * @throws TransactionNotActiveException if there is no {@link #isActive()
-     *         active} transaction.
+     * @throws TransactionNotActiveException if there is no {@link #isActive() active} transaction.
      */
     protected TRANSACTION getActiveTransaction() throws TransactionNotActiveException {
 
@@ -231,6 +226,7 @@ public abstract class AbstractTransactionExecutor extends
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isActive() {
 
       return (this.activeTransaction != null);
@@ -239,6 +235,7 @@ public abstract class AbstractTransactionExecutor extends
     /**
      * {@inheritDoc}
      */
+    @Override
     public TransactionContext getContext() {
 
       return this.context;
@@ -247,6 +244,7 @@ public abstract class AbstractTransactionExecutor extends
     /**
      * {@inheritDoc}
      */
+    @Override
     public void commit() {
 
       doCommit();
@@ -257,6 +255,7 @@ public abstract class AbstractTransactionExecutor extends
     /**
      * {@inheritDoc}
      */
+    @Override
     public void interCommit() {
 
       commit();
@@ -265,14 +264,15 @@ public abstract class AbstractTransactionExecutor extends
     }
 
     /**
-     * This method performs the actual {@link #commit()} on the
-     * {@link #getActiveTransaction() active transaction}.
+     * This method performs the actual {@link #commit()} on the {@link #getActiveTransaction() active
+     * transaction}.
      */
     protected abstract void doCommit();
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void rollback() {
 
       doRollback();
@@ -281,8 +281,8 @@ public abstract class AbstractTransactionExecutor extends
     }
 
     /**
-     * This method performs the actual {@link #rollback()} on the
-     * {@link #getActiveTransaction() active transaction}.
+     * This method performs the actual {@link #rollback()} on the {@link #getActiveTransaction() active
+     * transaction}.
      */
     protected abstract void doRollback();
 

@@ -2,43 +2,29 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.impl.server;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import net.sf.mmm.service.api.RemoteInvocationService;
-import net.sf.mmm.service.api.RemoteInvocationServiceResult;
 import net.sf.mmm.service.base.RemoteInvocationGenericService;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
-import net.sf.mmm.service.base.RemoteInvocationServiceCall;
-import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalCalls;
+import net.sf.mmm.service.base.RemoteInvocationServiceTransactionalResults;
+import net.sf.mmm.transaction.api.TransactionAdapter;
+import net.sf.mmm.transaction.api.TransactionCallable;
+import net.sf.mmm.transaction.api.TransactionExecutor;
+import net.sf.mmm.util.component.api.ResourceMissingException;
 
 /**
- * This is the server-side default implementation of the {@link RemoteInvocationGenericService} interface. You
- * can extend this class to add custom logic. E.g. you could add
- * {@link #doSecurityCheck(RemoteInvocationGenericServiceRequest) custom security checks} or override
- * {@link #createResultOnSuccess(Serializable)} and {@link #createResultOnFailure(Throwable)} in order to add
- * context information to the result (e.g. request or session scoped) - see
- * {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCallback}.
+ * This class extends {@link AbstractRemoteInvocationGenericServiceImpl} with transaction support via
+ * {@link TransactionExecutor}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponent implements
-    RemoteInvocationGenericService {
+@Named(RemoteInvocationGenericService.CDI_NAME)
+public class RemoteInvocationGenericServiceImpl extends AbstractRemoteInvocationGenericServiceImpl {
 
-  /** @see #registerService(RemoteInvocationService) */
-  private final Map<String, RemoteInvocationServiceMethod<?>> serviceMap;
+  /** @see #getTransactionExecutor() */
+  private TransactionExecutor transactionExecutor;
 
   /**
    * The constructor.
@@ -46,140 +32,58 @@ public class RemoteInvocationGenericServiceImpl extends AbstractLoggableComponen
   public RemoteInvocationGenericServiceImpl() {
 
     super();
-    this.serviceMap = new HashMap<String, RemoteInvocationServiceMethod<?>>();
+  }
+
+  /**
+   * @return the {@link TransactionExecutor}.
+   */
+  protected TransactionExecutor getTransactionExecutor() {
+
+    return this.transactionExecutor;
+  }
+
+  /**
+   * @param transactionExecutor is the {@link TransactionExecutor} to {@link Inject}.
+   */
+  @Inject
+  public void setTransactionExecutor(TransactionExecutor transactionExecutor) {
+
+    getInitializationState().requireNotInitilized();
+    this.transactionExecutor = transactionExecutor;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public RemoteInvocationGenericServiceResponse callServices(RemoteInvocationGenericServiceRequest request) {
+  protected RemoteInvocationServiceTransactionalResults callServicesInTransaction(
+      final RemoteInvocationServiceTransactionalCalls transactionalCalls) {
 
-    NlsNullPointerException.checkNotNull(RemoteInvocationGenericServiceRequest.class, request);
-    getLogger().debug("start processing request {}.", request);
-    doSecurityCheck(request);
+    TransactionCallable<RemoteInvocationServiceTransactionalResults> callable = new TransactionCallable<RemoteInvocationServiceTransactionalResults>() {
 
-    RemoteInvocationServiceCall[] calls = request.getCalls();
-    RemoteInvocationServiceResult<?>[] results = new RemoteInvocationServiceResult<?>[calls.length];
-    RemoteInvocationGenericServiceResponse response = new RemoteInvocationGenericServiceResponse(
-        request.getRequestId(), results);
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public RemoteInvocationServiceTransactionalResults call(TransactionAdapter transactionContext) {
 
-    for (int i = 0; i < calls.length; i++) {
-      RemoteInvocationServiceCall call = calls[i];
-      getLogger().debug("start processing call {}.", call.toString(true));
-      String id = RemoteInvocationServiceMethod.getId(call);
-      RemoteInvocationServiceMethod<?> serviceMethod = this.serviceMap.get(id);
-      if (serviceMethod == null) {
-        throw new ObjectNotFoundException(RemoteInvocationServiceMethod.class.getSimpleName(), id);
+        RemoteInvocationServiceTransactionalResults results = callServicesTransactionalCalls(transactionalCalls);
+        return results;
       }
-      // method found, invoke it and add result to response...
-      RemoteInvocationServiceResult<?> serviceResult;
-      try {
-        Serializable result = serviceMethod.invoke(call.getArguments());
-        serviceResult = createResultOnSuccess(result);
-      } catch (Throwable e) {
-        serviceResult = createResultOnFailure(e);
-      }
-      results[i] = serviceResult;
-      getLogger().debug("end processing call {}.", call.toString(true));
-    }
-    getLogger().debug("end processing request {}.", request);
-    return response;
+    };
+    return this.transactionExecutor.doInTransaction(callable);
   }
 
   /**
-   * This method creates the {@link RemoteInvocationServiceResult} in case the service-method successfully
-   * returned a result.
-   * 
-   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceCallback#onSuccess(Serializable, boolean)
-   * 
-   * @param <RESULT> is the generic type of the {@link RemoteInvocationServiceResult#getResult() result}.
-   * @param result is the {@link RemoteInvocationServiceResult#getResult() result} of the service-method.
-   * @return the {@link RemoteInvocationServiceResult} with the result.
+   * {@inheritDoc}
    */
-  protected <RESULT extends Serializable> RemoteInvocationServiceResult<RESULT> createResultOnSuccess(RESULT result) {
+  @Override
+  protected void doInitialize() {
 
-    return new RemoteInvocationServiceResult<RESULT>(result);
-  }
-
-  /**
-   * This method creates the {@link RemoteInvocationServiceResult} in case the service-method threw an
-   * exception.
-   * 
-   * @see net.sf.mmm.service.api.client.RemoteInvocationServiceCallback#onFailure(Throwable, boolean)
-   * 
-   * @param failure is the {@link RemoteInvocationServiceResult#getFailure() failure} that occurred when
-   *        invoking the service-method.
-   * @return the {@link RemoteInvocationServiceResult} with the failure.
-   */
-  protected RemoteInvocationServiceResult<Serializable> createResultOnFailure(Throwable failure) {
-
-    return new RemoteInvocationServiceResult<Serializable>(failure);
-  }
-
-  /**
-   * This method performs a security check for the given request.
-   * 
-   * @param request is the {@link RemoteInvocationGenericServiceRequest} to check.
-   */
-  protected void doSecurityCheck(RemoteInvocationGenericServiceRequest request) {
-
-    // nothing to do...
-  }
-
-  /**
-   * This method sets the {@link List} with all available {@link RemoteInvocationService} implementations. It
-   * is supposed to be invoked automatically for {@link Inject dependency-injection}.
-   * 
-   * @param services is the {@link List} with all available {@link RemoteInvocationService} implementations.
-   */
-  @Inject
-  public void setServices(List<RemoteInvocationService> services) {
-
-    if (!this.serviceMap.isEmpty()) {
-      throw new AlreadyInitializedException();
-    }
-    for (RemoteInvocationService service : services) {
-      registerService(service);
+    super.doInitialize();
+    if (this.transactionExecutor == null) {
+      throw new ResourceMissingException(TransactionExecutor.class.getSimpleName());
     }
   }
 
-  /**
-   * This method registers the given {@link RemoteInvocationService}.
-   * 
-   * @param service is the {@link RemoteInvocationService} to register.
-   */
-  protected void registerService(RemoteInvocationService service) {
-
-    boolean registered = false;
-    Class<?> serviceClass = service.getClass();
-    Class<?> currentServiceClass = serviceClass;
-    while (RemoteInvocationService.class.isAssignableFrom(currentServiceClass)) {
-      for (Class<?> serviceInterface : currentServiceClass.getInterfaces()) {
-        if ((RemoteInvocationService.class.isAssignableFrom(serviceInterface))
-            && (serviceInterface != RemoteInvocationService.class)) {
-          boolean empty = true;
-          for (Method method : serviceInterface.getMethods()) {
-            @SuppressWarnings({ "rawtypes", "unchecked" })
-            RemoteInvocationServiceMethod<?> serviceMethod = new RemoteInvocationServiceMethod(serviceInterface,
-                service, method);
-            RemoteInvocationServiceMethod<?> old = this.serviceMap.put(serviceMethod.getId(), serviceMethod);
-            if (old != null) {
-              throw new DuplicateObjectException(serviceMethod, serviceMethod.getId(), old);
-            }
-            registered = true;
-            empty = false;
-          }
-          if (!empty) {
-            getLogger().debug(
-                "Bound service interface '" + serviceInterface.getName() + "' to '" + serviceClass.getName() + "'");
-          }
-        }
-      }
-      currentServiceClass = currentServiceClass.getSuperclass();
-    }
-    if (!registered) {
-      throw new ObjectMismatchException(service, RemoteInvocationService.class);
-    }
-  }
 }
