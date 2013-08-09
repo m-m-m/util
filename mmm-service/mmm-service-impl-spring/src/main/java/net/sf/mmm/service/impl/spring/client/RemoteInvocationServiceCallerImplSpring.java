@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -48,11 +47,10 @@ public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvoc
    * {@inheritDoc}
    */
   @Override
-  protected void performRequest(RemoteInvocationGenericServiceRequest request,
-      List<ServiceCallData<?>> serviceCalls) {
+  protected void performRequest(RemoteInvocationGenericServiceRequest request, RequestBuilder builder) {
 
     RemoteInvocationGenericServiceResponse response = this.serviceClient.callServices(request);
-    handleResponse(request, serviceCalls, response);
+    handleResponse(request, builder, response);
   }
 
   /**
