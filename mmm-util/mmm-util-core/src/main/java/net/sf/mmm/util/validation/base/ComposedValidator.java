@@ -24,7 +24,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
   /** @see #getCode() */
   private static final String CODE = "ComposedValidator";
 
-  /** */
+  /** The child validators. */
   private final AbstractValidator<? super V>[] validators;
 
   /**
@@ -36,6 +36,20 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
 
     super();
     this.validators = validators;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMandatory() {
+
+    for (AbstractValidator<? super V> validator : this.validators) {
+      if (validator.isMandatory()) {
+        return true;
+      }
+    }
+    return super.isMandatory();
   }
 
   /**

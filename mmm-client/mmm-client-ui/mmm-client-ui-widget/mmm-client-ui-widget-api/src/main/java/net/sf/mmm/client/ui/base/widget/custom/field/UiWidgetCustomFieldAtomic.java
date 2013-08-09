@@ -118,6 +118,24 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
+  public boolean isTrimValue() {
+
+    return getDelegate().isTrimValue();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTrimValue(boolean trimValue) {
+
+    getDelegate().setTrimValue(trimValue);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final void addFocusHandler(UiHandlerEventFocus handler) {
 
     getDelegate().addFocusHandler(handler);

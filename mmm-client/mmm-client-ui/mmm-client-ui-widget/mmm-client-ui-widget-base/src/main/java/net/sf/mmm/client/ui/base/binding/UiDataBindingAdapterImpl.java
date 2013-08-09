@@ -125,7 +125,7 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
   @Override
   public <T> ValueValidator<T> getPropertyValidator(TypedProperty<T> property) {
 
-    return new ValidatorJsr303<T>(this.validator, this.descriptor, property.getSegment());
+    return new ValidatorJsr303<T>(this.validator, this.descriptor.getPojoClass(), property.getSegment());
   }
 
   /**

@@ -70,6 +70,26 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
    * {@inheritDoc}
    */
   @Override
+  public boolean isTrimValue() {
+
+    return getFirstField().isTrimValue();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTrimValue(boolean trimValue) {
+
+    for (UiWidgetField<?> field : this.fieldList) {
+      field.setTrimValue(trimValue);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected UiWidgetField<?> getFirstField() {
 
     return this.fieldList.get(0);

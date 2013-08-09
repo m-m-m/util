@@ -154,4 +154,13 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
     buffer.append(')');
   }
 
+  /**
+   * @return <code>true</code> if this is a validator for mandatory fields (that will not accept
+   *         <code>null</code> or empty values), <code>false</code> otherwise.
+   */
+  public boolean isMandatory() {
+
+    return false;
+  }
+
 }

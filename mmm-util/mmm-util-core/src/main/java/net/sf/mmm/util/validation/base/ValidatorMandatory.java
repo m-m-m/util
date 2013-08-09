@@ -36,6 +36,15 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
    * {@inheritDoc}
    */
   @Override
+  public boolean isMandatory() {
+
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected String getCode() {
 
     return CODE;

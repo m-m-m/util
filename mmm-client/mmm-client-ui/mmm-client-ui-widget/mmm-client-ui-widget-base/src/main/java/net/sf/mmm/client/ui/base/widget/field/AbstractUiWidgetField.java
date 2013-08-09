@@ -33,6 +33,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #getFieldLabelWidget() */
   private AbstractUiWidgetLabel<?> fieldLabelWidget;
 
+  /** @see #isTrimValue() */
+  private boolean trimValue;
+
   /**
    * The constructor.
    * 
@@ -42,6 +45,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
 
     super(context);
     setPrimaryStyle(PRIMARY_STYLE);
+    this.trimValue = true;
   }
 
   /**
@@ -69,6 +73,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   protected VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
@@ -81,8 +86,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
       }
       if (adapterValue instanceof String) {
         String string = (String) adapterValue;
-        if (isTrimValue()) {
+        if (this.trimValue) {
           string = string.trim();
+          adapterValue = (ADAPTER_VALUE) string;
         }
         if (string.isEmpty()) {
           return null;
@@ -96,13 +102,21 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   }
 
   /**
-   * TODO: javadoc
-   * 
-   * @return
+   * {@inheritDoc}
    */
-  private boolean isTrimValue() {
+  @Override
+  public final boolean isTrimValue() {
 
-    return true;
+    return this.trimValue;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final void setTrimValue(boolean trimValue) {
+
+    this.trimValue = trimValue;
   }
 
   /**

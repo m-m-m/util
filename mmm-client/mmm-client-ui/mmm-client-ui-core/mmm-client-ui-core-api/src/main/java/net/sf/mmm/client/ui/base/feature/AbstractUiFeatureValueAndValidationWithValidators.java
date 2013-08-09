@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
-import net.sf.mmm.util.validation.base.ValidatorMandatory;
+import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
  * This class extends {@link AbstractUiFeatureValueAndValidation} with the validators.
@@ -60,15 +60,24 @@ public abstract class AbstractUiFeatureValueAndValidationWithValidators<VALUE> e
   public final void addValidator(ValueValidator<? super VALUE> validator) {
 
     NlsNullPointerException.checkNotNull(ValueValidator.class, validator);
-    if (validator instanceof ValidatorMandatory) {
-      if (this.mandatory) {
-        getLogger().warn("Duplicate validator: " + validator);
-        return;
-      }
+    if (isMandatory(validator)) {
       setMandatory(true);
     }
     ensureValidatorList();
     this.validatorList.add(validator);
+  }
+
+  /**
+   * Determines the given <code>validator</code> is mandatory.
+   * 
+   * @param validator the given {@link ValueValidator}.
+   * @return <code>true</code> if the given <code>validator</code> is {@link AbstractValidator#isMandatory()
+   *         mandatory}.
+   */
+  protected boolean isMandatory(ValueValidator<?> validator) {
+
+    AbstractValidator<?> abstractValidator = (AbstractValidator<?>) validator;
+    return abstractValidator.isMandatory();
   }
 
   /**
@@ -92,11 +101,11 @@ public abstract class AbstractUiFeatureValueAndValidationWithValidators<VALUE> e
     if (this.validatorList != null) {
       removed = this.validatorList.remove(validator);
     }
-    if (removed && (validator instanceof ValidatorMandatory)) {
+    if (removed && isMandatory(validator)) {
       if (this.mandatory) {
         setMandatory(false);
       } else {
-        getLogger().warn("Internal error: removed ValidatorManadatory but mandatory flag was not set.");
+        getLogger().warn("Internal error: removed manadatory validator but mandatory flag was not set.");
       }
     }
     return removed;
