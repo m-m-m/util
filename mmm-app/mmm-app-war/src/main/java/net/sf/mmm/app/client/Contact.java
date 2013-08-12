@@ -4,12 +4,12 @@ package net.sf.mmm.app.client;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import net.sf.mmm.util.pojo.api.Pojo;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.transferobject.api.TransferObject;
+import net.sf.mmm.util.validation.base.Mandatory;
 
 /**
  * This is the interface for a contact person.
@@ -31,7 +31,7 @@ public interface Contact extends TransferObject, Pojo {
   /**
    * @return the firstName
    */
-  @NotNull
+  @Mandatory
   String getFirstName();
 
   /**
@@ -42,7 +42,7 @@ public interface Contact extends TransferObject, Pojo {
   /**
    * @return the lastName
    */
-  @NotNull
+  @Mandatory
   String getLastName();
 
   /**

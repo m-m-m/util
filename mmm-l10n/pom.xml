@@ -48,14 +48,9 @@
     <module>mmm-l10n-zh</module>
     <module>mmm-l10n-zh-HK</module>
     <module>mmm-l10n-zh-TW</module>-->
+    <module>mmm-l10n-ALL</module>
   </modules>
   
   <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-test</artifactId>
-      <version>0-SNAPSHOT</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

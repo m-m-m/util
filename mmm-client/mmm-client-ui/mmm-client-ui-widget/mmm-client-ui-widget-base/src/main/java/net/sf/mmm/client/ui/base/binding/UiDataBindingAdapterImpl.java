@@ -17,6 +17,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.ValidatorJsr303;
 
 /**
  * This is the default implementation of {@link UiDataBindingAdapter} based on {@link PojoDescriptor}.

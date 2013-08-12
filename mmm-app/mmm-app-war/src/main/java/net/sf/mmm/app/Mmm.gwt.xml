@@ -23,10 +23,13 @@
 
   <script src="js/mmm-nls-bundle.js?name=net.sf.mmm.client.ui.PropertyLabels"/>
 
-  <inherits name="org.hibernate.validator.HibernateValidator" />
+  <inherits name="org.hibernate.validator.HibernateValidator"/>
   <replace-with class="net.sf.mmm.app.client.SampleValidatorFactory">
-    <when-type-is class="javax.validation.ValidatorFactory" />
+    <when-type-is class="javax.validation.ValidatorFactory"/>
   </replace-with>
 
-  <!-- <collapse-all-properties />  -->
+  <replace-with class="net.sf.mmm.util.validation.base.ValidationMessagesResolver">
+    <when-type-is class="com.google.gwt.validation.client.UserValidationMessagesResolver"/>
+  </replace-with>
+  <!-- <collapse-all-properties /> -->
 </module>

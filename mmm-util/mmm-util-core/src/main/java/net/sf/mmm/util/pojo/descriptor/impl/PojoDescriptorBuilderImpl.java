@@ -241,9 +241,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
     mergeDescriptorWithSuperClass(pojoClass, descriptor);
 
-    // TODO hohwille lazy initialize validator...?!?
-    // TODO hohwille merge with super-property-descriptor !?!
-    this.configuration.getDescriptorValidatorBuilder().buildValidator(descriptor);
     return descriptor;
   }
 

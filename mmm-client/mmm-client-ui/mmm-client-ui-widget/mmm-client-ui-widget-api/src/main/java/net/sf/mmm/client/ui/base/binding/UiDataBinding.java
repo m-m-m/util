@@ -74,9 +74,8 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * define a {@link java.util.ResourceBundle} (see
    * {@link net.sf.mmm.client.ui.api.UiConfiguration#getLabelResourceBundleName()}) mapping the
    * {@link TypedProperty#getTitle() title} with the properties to the localized display labels.</li>
-   * <li>A {@link net.sf.mmm.util.validation.api.ValueValidator} is
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getValidator() automatically created
-   * for the property} and will be
+   * <li>A {@link net.sf.mmm.util.validation.api.ValueValidator} is automatically created for the property
+   * based on JSR 303 and will be
    * {@link UiWidgetWithValue#addValidator(net.sf.mmm.util.validation.api.ValueValidator) added} to the new
    * widget.</li>
    * <li>The new widget is automatically {@link #bind(TypedProperty, UiWidgetWithValue) bound} to the given

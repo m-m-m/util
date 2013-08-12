@@ -9,7 +9,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeType;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.ReflectionException;
-import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
@@ -171,18 +170,6 @@ public interface PojoDescriptor<POJO> extends PojoAttributeType<POJO> {
    * @since 3.1.0
    */
   PojoPropertyDescriptor getPropertyDescriptor(TypedProperty<?> property) throws PojoPropertyNotFoundException;
-
-  /**
-   * Determines the {@link PojoPropertyDescriptor#getValidator() validator} for the given
-   * <code>property</code>.
-   * 
-   * @param <V> is the generic {@link TypedProperty#getPropertyType() property type}.
-   * 
-   * @param property is the {@link TypedProperty}.
-   * @return the {@link PojoPropertyDescriptor#getValidator() validator} for the given <code>property</code>.
-   * @since 3.1.0
-   */
-  <V> ValueValidator<V> getPropertyValidator(TypedProperty<V> property);
 
   /**
    * This method gets the {@link PojoPropertyDescriptor descriptor}s of all properties of the according

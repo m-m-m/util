@@ -97,14 +97,4 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void appendSourceCodeConstructorArguments(StringBuilder buffer) {
-
-    appendSourceCodeConstructorArgument(buffer, this.comparator);
-    buffer.append(", ");
-    appendSourceCodeConstructorArgument(buffer, this.valueSource.getValue());
-  }
 }

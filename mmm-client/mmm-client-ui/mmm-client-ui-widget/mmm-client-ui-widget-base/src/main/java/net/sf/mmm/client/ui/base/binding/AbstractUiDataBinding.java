@@ -246,7 +246,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
   @Override
   public void setValidity(Boolean validity) {
 
-    getLogger().debug("setValidity(" + validity + ") :" + this.widget);
+    // getLogger().debug("setValidity(" + validity + ") :" + this.widget);
     this.validity = validity;
   }
 

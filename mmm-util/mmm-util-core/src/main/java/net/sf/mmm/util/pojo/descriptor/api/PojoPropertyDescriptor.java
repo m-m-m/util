@@ -7,7 +7,6 @@ import java.util.Collection;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
-import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This interface represents a property of a {@link net.sf.mmm.util.pojo.api.Pojo}. A property is some
@@ -38,21 +37,5 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
    * @return a collection with all {@link PojoPropertyDescriptor property descriptor}s
    */
   Collection<? extends PojoPropertyAccessor> getAccessors();
-
-  /**
-   * This method gets or creates the {@link ValueValidator} for the associated property derived from
-   * annotations (e.g. JSR 303 or JSR 308).<br/>
-   * <b>ATTENTION:</b><br/>
-   * This is NOT an implementation of JSR 303 (<code>javax.validation</code>) nor is it strictly compatible to
-   * it. Instead this is an abstraction that may be implemented using JSR 303 or maybe not. However, we want
-   * to be GWT compatible and we want to directly bind the validation to the UI widgets (see
-   * <code>UiWidgetWithValue#addValidator(ValueValidator)</code>). The API of JSR 303 is unfortunately biased.
-   * A simple bridge to JSR 303 can be achieved via
-   * <code>javax.validation.Validator.validateProperty(Object, String, Class)</code>.
-   * 
-   * @return the {@link ValueValidator} for the associated property.
-   * @since 3.1.0
-   */
-  ValueValidator<?> getValidator();
 
 }

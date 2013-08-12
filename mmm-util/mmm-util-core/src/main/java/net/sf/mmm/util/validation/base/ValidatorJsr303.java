@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.binding;
+package net.sf.mmm.util.validation.base;
 
 import java.util.Set;
 
@@ -8,10 +8,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
-import net.sf.mmm.util.validation.base.AbstractValidator;
-import net.sf.mmm.util.validation.base.ComposedValidationFailure;
-import net.sf.mmm.util.validation.base.SimpleValidationFailure;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.validation.api.ValueValidator} that adapts to
@@ -20,7 +18,7 @@ import net.sf.mmm.util.validation.base.SimpleValidationFailure;
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 3.1.0
  */
 public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
@@ -85,6 +83,9 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   public ValidatorJsr303(Validator validator, Class<?> pojoType, String property, Class<?>... groups) {
 
     super();
+    NlsNullPointerException.checkNotNull(Validator.class, validator);
+    NlsNullPointerException.checkNotNull("pojoType", pojoType);
+    NlsNullPointerException.checkNotNull("groups", groups);
     this.validator = validator;
     this.pojoType = pojoType;
     this.property = property;
@@ -171,8 +172,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    */
   protected ValidationFailure createValidationFailure(ConstraintViolation<?> violation, Object valueSource) {
 
-    return new SimpleValidationFailure(violation.getConstraintDescriptor().toString(), valueSource,
-        violation.getMessage());
+    return new SimpleValidationFailure(getCode(), valueSource, violation.getMessage());
   }
 
   /**
@@ -181,6 +181,12 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   @Override
   protected String getCode() {
 
-    return "Jsr303";
+    StringBuilder buffer = new StringBuilder("JSR303@");
+    buffer.append(this.pojoType.getSimpleName());
+    if (this.property != null) {
+      buffer.append('.');
+      buffer.append(this.property);
+    }
+    return buffer.toString();
   }
 }

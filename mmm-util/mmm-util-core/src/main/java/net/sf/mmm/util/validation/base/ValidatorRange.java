@@ -57,15 +57,4 @@ public class ValidatorRange<V extends Comparable<V>> extends AbstractValueValida
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void appendSourceCodeConstructorArguments(StringBuilder buffer) {
-
-    appendSourceCodeConstructorArgument(buffer, this.range.getMin());
-    buffer.append(", ");
-    appendSourceCodeConstructorArgument(buffer, this.range.getMax());
-  }
-
 }

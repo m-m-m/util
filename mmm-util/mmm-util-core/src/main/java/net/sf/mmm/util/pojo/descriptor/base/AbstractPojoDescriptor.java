@@ -21,7 +21,6 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionException;
-import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is the abstract base implementation of the {@link PojoDescriptor} interface.
@@ -296,16 +295,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
       throw new PojoPropertyNotFoundException(getPojoClass(), property.getPojoPath());
     }
     return propertyDescriptor;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public <V> ValueValidator<V> getPropertyValidator(TypedProperty<V> property) {
-
-    PojoPropertyDescriptor propertyDescriptor = getPropertyDescriptor(property);
-    return (ValueValidator<V>) propertyDescriptor.getValidator();
   }
 
   /**

@@ -4,7 +4,6 @@ package net.sf.mmm.util.pojo.descriptor.base;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
-import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is the abstract base implementation of the {@link PojoPropertyDescriptor} interface.
@@ -51,17 +50,6 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
    *         if none has been replaced.
    */
   public abstract PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor);
-
-  /**
-   * This method sets the {@link #getValidator() validator}.<br>
-   * <b>ATTENTION:</b><br>
-   * This method may only be used during creation and initialization of this object. It shall only be called
-   * once.
-   * 
-   * @param validator is the {@link #getValidator() validator}.
-   * @since 3.1.0
-   */
-  public abstract void setValidator(ValueValidator<?> validator);
 
   /**
    * {@inheritDoc}

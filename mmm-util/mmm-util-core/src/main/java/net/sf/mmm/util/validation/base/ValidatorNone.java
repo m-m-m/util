@@ -43,14 +43,4 @@ public class ValidatorNone extends AbstractValidator<Object> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void appendSourceCodeCreationStatement(StringBuilder buffer) {
-
-    buffer.append(ValidatorNone.class.getName());
-    buffer.append(".getInstance()");
-  }
-
 }

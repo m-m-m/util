@@ -112,23 +112,4 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
 
     return this.validators[index];
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void appendSourceCodeConstructorArguments(StringBuilder buffer) {
-
-    boolean addSeparator = false;
-    for (AbstractValidator<?> validator : this.validators) {
-      if (!validator.isDynamic()) {
-        if (addSeparator) {
-          buffer.append(", ");
-        } else {
-          addSeparator = true;
-        }
-        validator.appendSourceCodeCreationStatement(buffer);
-      }
-    }
-  }
 }

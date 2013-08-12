@@ -2,14 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
-import java.util.Collection;
 import java.util.Locale;
-import java.util.Set;
 import java.util.function.Consumer;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.groups.Default;
 
 import net.sf.mmm.app.client.dialog.DialogControllerFactoryImpl;
 import net.sf.mmm.app.shared.GreetingService;
@@ -46,9 +40,6 @@ import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorBuilderFactoryLimited;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -101,12 +92,6 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
   @Override
   public void onModuleLoad() {
 
-    ContactBean contact = new ContactBean();
-    Set<ConstraintViolation<ContactBean>> violations = Validation.buildDefaultValidatorFactory().getValidator()
-        .validateProperty(contact, Contact.PROPERTY_LAST_NAME.getSegment(), Default.class);
-    for (ConstraintViolation<ContactBean> v : violations) {
-      Log.info(v.getMessage());
-    }
     // public void onModuleLoadDeferred() {
     // super.onModuleLoadDeferred();
     Log.debug("Loaded");
@@ -123,14 +108,6 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     dialogManager.setContext(context);
     dialogManager.initialize(DialogConstants.PLACE_HOME);
 
-    PojoDescriptorBuilderFactoryLimited descriptorBuilderFactory = new PojoDescriptorBuilderFactoryLimited();
-    descriptorBuilderFactory.initialize();
-    PojoDescriptorBuilder descriptorBuilder = descriptorBuilderFactory.createPublicMethodDescriptorBuilder();
-    PojoDescriptor<ContactBean> descriptor = descriptorBuilder.getDescriptor(ContactBean.class);
-    Collection<? extends PojoPropertyDescriptor> propertyDescriptors = descriptor.getPropertyDescriptors();
-    for (PojoPropertyDescriptor propertyDescriptor : propertyDescriptors) {
-      Log.info(propertyDescriptor.getName());
-    }
     doSomethingElse(context);
   }
 

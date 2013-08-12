@@ -19,9 +19,6 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 import net.sf.mmm.util.reflect.base.SimpleGenericTypeLimited;
-import net.sf.mmm.util.validation.api.ValueValidator;
-import net.sf.mmm.util.validation.base.AbstractValidator;
-import net.sf.mmm.util.validation.base.ValidatorNone;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -301,45 +298,6 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
       // generate setter support
       generateAccessorStatement(propertyDescriptor, PojoPropertyAccessorOneArgMode.SET, superPropertyDescriptor);
-
-      // generate validator support
-      generateValidatorStatement(propertyDescriptor, superPropertyDescriptor);
-    }
-
-    /**
-     * Generates the source-code of the statement to register the {@link ValueValidator}.
-     * 
-     * @param propertyDescriptor is the {@link PojoPropertyDescriptor} to generate in the source.
-     * @param superPropertyDescriptor is the {@link PojoPropertyDescriptor} of the super-type or
-     *        <code>null</code> if NOT available.
-     */
-    private void generateValidatorStatement(PojoPropertyDescriptor propertyDescriptor,
-        PojoPropertyDescriptor superPropertyDescriptor) {
-
-      AbstractValidator<?> validator = (AbstractValidator<?>) propertyDescriptor.getValidator();
-      if (superPropertyDescriptor != null) {
-        ValueValidator<?> superValidator = superPropertyDescriptor.getValidator();
-        if (superValidator == validator) {
-          generateSuperPropertyDescriptorBlockIfNotAlreadyDone(propertyDescriptor);
-          this.sourceWriter.print("propertyDescriptor.setValidator(superDescriptor.getPropertyDescriptor(\"");
-          this.sourceWriter.print(propertyDescriptor.getName());
-          this.sourceWriter.println("\")).getValidator());");
-          return;
-        }
-      }
-      if (validator == null) {
-        // actually an illegal state...
-        return;
-      }
-      this.sourceWriter.print("propertyDescriptor.setValidator(");
-      StringBuilder buffer = new StringBuilder();
-      if (validator.isDynamic()) {
-        // should actually never happen...
-        validator = ValidatorNone.getInstance();
-      }
-      validator.appendSourceCodeCreationStatement(buffer);
-      this.sourceWriter.print(buffer.toString());
-      this.sourceWriter.println(");");
     }
 
     /**

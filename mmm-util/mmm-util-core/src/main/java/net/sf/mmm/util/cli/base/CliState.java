@@ -36,6 +36,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.ValidatorBuilder;
+import net.sf.mmm.util.validation.base.ValidatorBuilderNone;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 
@@ -66,6 +68,9 @@ public class CliState extends CliClassContainer {
   /** @see #getArguments() */
   private final List<CliArgumentContainer> arguments;
 
+  /** @see #findPropertyAnnotations(PojoDescriptorBuilder) */
+  private final ValidatorBuilder validatorBuilder;
+
   /**
    * The constructor.
    * 
@@ -85,6 +90,7 @@ public class CliState extends CliClassContainer {
     this.arguments = new ArrayList<CliArgumentContainer>();
     this.reflectionUtil = reflectionUtil;
     this.annotationUtil = annotationUtil;
+    this.validatorBuilder = createValidatorBuilder();
     boolean fieldAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
         .createPrivateFieldDescriptorBuilder());
     boolean methodAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
@@ -94,6 +100,21 @@ public class CliState extends CliClassContainer {
       throw new CliClassNoPropertyException(stateClass);
     }
     initializeArguments();
+  }
+
+  /**
+   * @return the {@link ValidatorBuilder} instance.
+   */
+  private ValidatorBuilder createValidatorBuilder() {
+
+    ValidatorBuilder builder;
+    try {
+      builder = new net.sf.mmm.util.validation.base.ValidatorBuilderJsr303();
+    } catch (RuntimeException e) {
+      getLogger().error("Failed to setup javax.validation - validation disabled", e);
+      builder = new ValidatorBuilderNone();
+    }
+    return builder;
   }
 
   /**
@@ -266,9 +287,8 @@ public class CliState extends CliClassContainer {
         } else if ((option != null) || (argument != null)) {
           annotationFound = true;
           PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
-          // Annotation constraint = findConstraintAnnotation(setter);
-          // JSR 303 ?
-          ValueValidator<?> validator = propertyDescriptor.getValidator();
+          ValueValidator<?> validator = this.validatorBuilder.newValidator(getStateClass(),
+              propertyDescriptor.getName());
           if (option != null) {
             CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter, validator);
             addOption(optionContainer);
@@ -472,6 +492,7 @@ public class CliState extends CliClassContainer {
     /**
      * {@inheritDoc}
      */
+    @Override
     @SuppressWarnings("all")
     public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass)
         throws ValueException {
