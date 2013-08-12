@@ -8,4 +8,4 @@ Multi-Media-Manager (mmm)
 The Multi-Media-Manager (MMM) is a generic application plattform with custom modules for multi-media management build on top.
 
 * [Homepage](http://m-m-m.sourceforge.net/index.html)
-* [Wiki](wiki)
+* [Wiki](../../wiki)
