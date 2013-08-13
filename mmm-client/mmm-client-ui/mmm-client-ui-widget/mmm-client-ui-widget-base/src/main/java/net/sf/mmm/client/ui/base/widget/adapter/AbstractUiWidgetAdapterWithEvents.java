@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.adapter;
 
+import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.base.handler.event.AbstractEventAdapter;
@@ -74,7 +75,9 @@ public abstract class AbstractUiWidgetAdapterWithEvents<WIDGET, EVENT_ADAPTER ex
   protected void applyEventAdapter(EVENT_ADAPTER adapter) {
 
     // Click-Events...
-    applyEventAdapterForClick(adapter);
+    if (getUiWidget() instanceof UiFeatureClick) {
+      applyEventAdapterForClick(adapter);
+    }
 
     // Focus-Events...
     applyEventAdapterForFocus(adapter);
