@@ -7,13 +7,15 @@
  * It abstracts from underlying native UI toolkits and allows to build a portable cross-technology
  * client application.<br/>
  * The major part of this API is provided by {@link net.sf.mmm.client.ui.api.widget}.<br/>
- * <h3>Why?</h3> There are various features and advantages of this layer:
+ * <h3>Why?</h3>
+ * There are various features and advantages of this layer:
  * <ul>
  * <li><b>Designed for testability</b><br/>
  * This framework is an abstraction layer to actual UI frameworks. Your client code will be written against
  * this API. The common part of the implementation is java bean like and works even without an underlying
- * native widget. By providing a test implementation of the API, we offer the ability for you to test your
- * dialogs and client logic easily with unit-tests.</li>
+ * native widget. By providing a test implementation of the API via <code>mmm-client-ui-wdiget-impl-test</code>, we offer
+ * the ability for you to test your dialogs and client logic easily with unit-tests. Within the test you can easily
+ * enter values and click on a button and assert the expected changes of the UI and underlying logic.</li>
  * <li><b>Cross-plattform and mutli-channel</b><br/>
  * Same client-code can run with all supported toolkits.
  * <ul>
@@ -53,15 +55,15 @@
  * need. Besides GWT being a great technology it has a major drawback: Development cycles are quite slow for
  * large and complex clients as starting and refreshing takes very long. This layer allows to test parts of
  * your dialogs with JUnit or manually via JavaFx in order to improve the layout and find initial bugs.
- * Later you can start testing with GWT in order to find web related problems. This approach can save a lot of time.</li>
+ * Later you can start testing with GWT in order to find web related problems. This approach saves a lot of time.</li>
  * <li><b>Good Performance</b><br/>
  * You think that an abstraction layer for UI toolkits that wraps all widgets is causing a large performance
- * overhead? Nope! Of course you can create widgets a lot faster if you directly write JavaScript but the
- * overall performance of an application is NOT dominated by the speed of creating widgets. Instead you should
- * consider:
+ * overhead? Nope! Of course you can create widgets a lot faster if you directly create them with native code (e.g. write
+ * JavaScript or JavaFx code) but the overall performance of an application is NOT dominated by the speed of creating
+ * widgets. Instead you should consider:
  * <ol>
  * <li>This framework has a smart concept of late binding. This way widgets are created as late as possible.
- * E. g. hidden parts of a dialog are not created unless they get visible. For complex dialogs this can even
+ * E. g. hidden parts of a dialog are not created unless they get visible. For complex dialogs this will even
  * boost your performance.</li>
  * <li>The user interacts directly with the native widgets and NOT with the wrapper of this framework.</li>
  * <li>Within the last years clients (especially browsers and mobile devices) have become extraordinary fast.</li>
@@ -71,10 +73,15 @@
  * </ol>
  * To be honest a web client build with this framework based on GWT is still heavy load for a mobile device.
  * But on powerful smartphones the performance is fine.
- * <li><b>Advanced Data-Binding</b><br/>
+ * <li><b>Integrated validation support</b><br/>
+ * Each {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue value based widget} has build in support for
+ * {@link net.sf.mmm.client.ui.api.feature.UiFeatureValidation validation}. Validation failures are automatically
+ * visualized inside the according widgets supporting the user to fix all problems easily.
+ * <li><b>Advanced data-binding</b><br/>
  * This framework offers advanced and comfortable {@link net.sf.mmm.client.ui.base.binding.UiDataBinding data-binding}.
  * Even in GWT-Environments where no reflection is available you can simply bind java bean properties to widgets
- * including annotation based validation.
+ * including JSR 303 annotation based validation. This massively increases your productivity as you save a lot of stupid
+ * work that is done for you by the framework and makes maintenance of your code easier.
  * <li><b>Clean API</b><br/>
  * Simple, clear, well documented, and easy to use API. Native UI toolkits typically use java classes as API.
  * Due to lack of multi-inheritance and due to implementation specific decisions the API often sucks. There
@@ -97,7 +104,6 @@
  * While the adoption of native UI toolkits takes place on a quite low level, there are many high level
  * features like
  * <ul>
- * <li>{@link net.sf.mmm.client.ui.api.feature.UiFeatureValidation validation}</li>
  * <li>{@link net.sf.mmm.client.ui.api.attribute.AttributeReadModified#isModified() dirty handling}</li>
  * <li>
  * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteMode#setMode(net.sf.mmm.client.ui.api.common.UiMode)
@@ -112,7 +118,7 @@
  * the higher level stuff.</li>
  * <li><b>Dialogs not pages</b><br/>
  * Most client frameworks have a programming model that is page-oriented (e.g. you produce a web-page). However, for
- * a Rich Internet Application you need to think in dialogs and not in pages. So if you open a particular (main-)dialog
+ * a Rich (Internet) Application you need to think in dialogs and not in pages. So if you open a particular (main-)dialog
  * the result is a page that contains that dialog typically together with other things like header, footer, navigation,
  * etc. In this API all of these parts are dialogs that are composed and embedded to build a page. However, each of these
  * dialogs have a state and lifecycle rather than the page itself.</li>
@@ -133,19 +139,21 @@
  * <ul>
  * <li><b>No gimmicks</b><br/>
  * This approach is focusing on functionality and is limited to a common sense of features that are offered by
- * all supported native UI toolkits. You will have a less flexibility if you are using this layer. If you want
+ * all supported native UI toolkits. You will have less flexibility if you are using this layer. If you want
  * to offer a very fancy or extraordinary UI you should consider using a single UI technology directly and
  * stick to it. On the other hand you should also consider this as a feature as it helps you to build client
- * applications using common UI patterns that have good usability and accessibility.</li>
+ * applications using common UI patterns that have good usability and accessibility. You can still style your UI with
+ * CSS and give it some fancy look.</li>
  * <li><b>No magic</b><br/>
- * You should NOT expect that switching from a web-application to Swing or SWT/EclipseRCP can be done by a
- * single line of code and the UI behaves and looks the same. However, this abstraction layer allows to switch
- * from one toolkit to another or to support multiple native toolkits with a single codebase with reasonable
- * effort.</li>
+ * You should NOT expect that switching from a web-application to e.g. JavaFx can be done by a single line of code and
+ * the UI behaves and looks the same. However, this abstraction layer allows to switch from one supported toolkit to
+ * another or to support multiple native toolkits on a single codebase with reasonable effort.</li>
  * <li><b>Not small</b><br/>
  * This framework is designed for medium to large sized client applications. If you want a small client with
  * few screens, the overhead of setting up and learning this technology might be too high. However, we have a
- * strong focus on making your live easy. So also many things are much faster to implement.</li>
+ * strong focus on making your live easy. So also many things are much faster to implement. The choice is up to you:
+ * either you swear at the beginning of your project while setting everything up (when using this framework) or your
+ * swear at the end while you loose control over the maintenance of your code-base (when using JavaScript).</li>
  * </ul>
  */
 package net.sf.mmm.client.ui.api;
