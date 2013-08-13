@@ -21,12 +21,12 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.nls.api.NlsClassCastException;
 
 /**
  * This is the abstract base class for a toolkit specific adapter of {@link UiHandlerEvent}. It will adapt
- * from the native events to
- * {@link UiHandlerEvent#onEvent(UiFeatureEvent, net.sf.mmm.client.ui.api.common.UiEvent, boolean)} in the
- * {@link UiHandlerEvent event handler} given at construction.
+ * from the native events to {@link UiHandlerEvent#onEvent(UiEvent)} in the {@link UiHandlerEvent event
+ * handler} given at construction.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -67,7 +67,11 @@ public abstract class AbstractEventAdapter {
     UiEvent event;
     switch (type) {
       case CLICK:
-        event = new UiEventClick((UiFeatureClick) this.source, programmatic);
+        try {
+          event = new UiEventClick((UiFeatureClick) this.source, programmatic);
+        } catch (ClassCastException e) {
+          throw new NlsClassCastException(e, this.source, UiFeatureClick.class);
+        }
         break;
       case COLLAPSE:
         event = new UiEventCollapse((UiFeatureCollapse) this.source, programmatic);

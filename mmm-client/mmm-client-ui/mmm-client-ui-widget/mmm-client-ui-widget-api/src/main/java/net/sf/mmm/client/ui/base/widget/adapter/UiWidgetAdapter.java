@@ -103,9 +103,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * This method registers the given {@link UiHandlerEvent event handler} in the {@link #getToplevelWidget()
    * widget}. This method will be called only once.
    * 
-   * @param source is the
-   *        {@link UiHandlerEvent#onEvent(UiFeatureEvent, net.sf.mmm.client.ui.api.common.UiEvent, boolean)
-   *        event source}.
+   * @param source is the {@link net.sf.mmm.client.ui.api.event.UiEvent#getSource() event source}.
    * @param sender is the {@link UiHandlerEvent} where the events are send to. This is actually an adapter
    *        that dispatches the events to the individual listeners registered in the widget.
    */
