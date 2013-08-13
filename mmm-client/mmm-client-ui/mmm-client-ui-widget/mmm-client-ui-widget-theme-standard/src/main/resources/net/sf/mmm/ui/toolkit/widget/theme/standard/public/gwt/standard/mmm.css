@@ -117,6 +117,12 @@ input:active {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
 }
+.FieldLabel:after {
+  content: ":";
+}
+.FieldLabel.Mandatory:after {
+  content: "*:";
+}
 .Section {
   border-color: #a0a0a0;
   border-width: 1px;

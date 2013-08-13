@@ -153,6 +153,12 @@ input {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
 }
+.FieldLabel:after {
+  content: ":";
+}
+.FieldLabel.Mandatory:after {
+  content: "*:";
+}
 
 .Section {
   .bordered;
@@ -172,7 +178,6 @@ input {
     float: left;
   }
 }
-
 
 .GridPanel {
   width: 100%;

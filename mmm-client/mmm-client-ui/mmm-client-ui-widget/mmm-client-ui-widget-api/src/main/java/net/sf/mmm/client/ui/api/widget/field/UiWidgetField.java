@@ -50,6 +50,12 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
   String PRIMARY_STYLE_LABEL = "FieldLabel";
 
   /**
+   * The {@link #addStyle(String) additional style} of the {@link #getFieldLabelWidget() field label widget}
+   * if {@link #isMandatory() mandatory}.
+   */
+  String ADDITIONAL_STYLE_LABEL_MANDATORY = "Mandatory";
+
+  /**
    * This method is like
    * <code>{@link #getFieldLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> without actually
    * creating the {@link #getFieldLabelWidget() field label widget} if it does NOT yet exist. Further it will
