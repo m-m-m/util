@@ -21,22 +21,37 @@
   border-color: @color-border;
   border-width: 1px;
 }
+.bordered3d() {
+	border-top: 1px solid lighten(@color-border, 30%);
+	border-left: 1px solid lighten(@color-border, 20%);
+	border-right: 1px solid @color-border;
+	border-bottom: 1px solid @color-border;
+}
 .gradient() {
-  .bordered;
+  background-image: linear-gradient(to bottom, #FFFFFF, @color-normal);
+}
+.gradientActive() {
   background-image: linear-gradient(to bottom, #FFFFFF, @color-normal);
   &:hover {
     background-image: linear-gradient(to bottom, #FFFFFF, @color-hover-gradient);
-  }  
+  }
   &:focus, &:active {
     background-image: linear-gradient(to bottom, #FFFFFF, @color-focus-gradient);
   }
 }
-.highlight() {
-  .gradient;
+.gradiented() {
+  .bordered;
+  .gradientActive;
+}
+.highlightText() {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
+.highlightBox() {
+	box-shadow: 2px 2px 5px 0px darken(@color-normal, 10%);
+}
 .highlighted() {
-  .highlight;
+  .gradiented;
+  .highlightBox;
   box-shadow: 2px 2px 5px 0px darken(@color-normal, 10%);
 }
 .fancyButton() {
@@ -66,7 +81,7 @@ input {
 input:invalid {
   box-shadow:none;
   border-color: darken(@color-invalid, 10%);
-  background-color: @color-invalid;
+  background: @color-invalid;
   /* background-size: cover; */
   background-position: right; /*98% 50%;*/
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
@@ -75,12 +90,12 @@ input:invalid {
 button {
   .bordered;
   cursor: pointer;
-  background-color: @color-normal;
+  background: @color-normal;
   &:hover {
-    background-color: @color-hover;
+    background: @color-hover;
   }
   &:focus, &:active {
-    background-color: @color-focus;
+    background: @color-focus;
   }
 }
 .Button {
@@ -96,11 +111,11 @@ button {
 input {
   &:hover {
     border-color: lighten(@color-hover, 20%);
-    background-color: @color-hover;
+    background: @color-hover;
   }
   &:focus, &:active {
     border-color: darken(@color-focus, 20%);
-    background-color: @color-focus;
+    background: @color-focus;
   }
 }
 
@@ -160,6 +175,30 @@ input {
   content: "*:";
 }
 
+.Tree {
+  .bordered3d;
+  border-style: solid;
+  /* border-radius: @radius; */
+}
+.gwt-Tree .gwt-TreeItem {
+  cursor: pointer;
+  margin: 0;
+  padding: 1px 0;
+  white-space: nowrap;
+}
+.gwt-Tree .gwt-TreeItem-selected, .gwt-Tree .gwt-TreeItem-selected * {
+  background: @color-select;
+}
+.gwt-TreeItem .gwt-RadioButton input, .gwt-TreeItem .gwt-CheckBox input {
+  margin-left: 0;
+}
+.Header {
+	.bordered3d;
+	.gradientActive;
+  display: block;
+  padding: 0 0.5em;
+}
+
 .Section {
   .bordered;
   border-bottom-style: solid;
@@ -185,7 +224,7 @@ input {
 
 /* Popup */
 .gwt-PopupPanelGlass {
-    background-color: black;
+    background: black;
     opacity: 0.3;
 }
 .Popup {
@@ -193,7 +232,7 @@ input {
   border-radius: @radius;
 
   .dialogTopLeft {
-    .gradient;
+    .gradiented;
     border-top-style: solid;
     border-left-style: solid;
     cursor: w-resize;
@@ -202,13 +241,14 @@ input {
   .dialogTopCenter {
   }
   .Caption {
-    .highlight;
+  	.gradiented;
+    .highlightText;
     border-top-style: solid;
     padding: @padding;
     cursor: move;
   }
   .dialogTopRight {
-    .gradient;
+    .gradiented;
     border-top-style: solid;
     border-right-style: solid;
     border-top-right-radius: @radius;
@@ -352,7 +392,7 @@ input {
   }
 }
 .gwt-MenuBar-horizontal {
-  .gradient;
+  .gradiented;
   border-style: solid;
 
   .gwt-MenuItem {

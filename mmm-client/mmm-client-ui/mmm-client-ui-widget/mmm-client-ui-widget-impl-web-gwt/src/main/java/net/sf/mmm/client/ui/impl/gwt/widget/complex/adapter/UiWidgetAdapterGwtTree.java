@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
@@ -22,6 +23,7 @@ import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
@@ -48,6 +50,9 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
   /** Maps from {@literal <NODE>} to {@link TreeNodeAdapter}. */
   private Map<NODE, TreeNodeAdapter> nodeMap;
+
+  /** @see #setTitle(String) */
+  private InlineLabel titleHeader;
 
   /** @see #getGwtTree() */
   private Tree tree;
@@ -180,6 +185,10 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     getGwtTree().addItem(rootNodeAdapter);
   }
 
+  /**
+   * @param node is the {@literal <NODE>} to wrap.
+   * @return the {@link TreeNodeAdapter} for the given <code>node</code>.
+   */
   private TreeNodeAdapter createTreeNodeAdapter(NODE node) {
 
     UiWidget widget = this.treeNodeRenderer.create(getUiWidget().getContext());
@@ -218,6 +227,15 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    * {@inheritDoc}
    */
   @Override
+  public void setTitle(String title) {
+
+    getTitleHeader().setText(title);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setEnabled(boolean enabled) {
 
     if (enabled) {
@@ -227,12 +245,13 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     }
   }
 
+  /**
+   * @param event is the {@link OpenEvent}.
+   */
   private void onOpenEvent(OpenEvent<TreeItem> event) {
 
     TreeNodeAdapter treeNodeAdapter = (TreeNodeAdapter) event.getTarget();
-    if (treeNodeAdapter.getChildCount() == 0) {
-      treeNodeAdapter.loadChildren();
-    }
+    treeNodeAdapter.loadChildren();
   }
 
   /**
@@ -265,10 +284,38 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     if (this.scrollPanel == null) {
       this.scrollPanel = new ScrollPanel(getGwtTree());
-      // temporary hack for testing...
-      this.scrollPanel.setSize("300px", "300px");
     }
     return this.scrollPanel;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeight(Length height) {
+
+    getScrollPanel().setHeight(height.toString());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidth(Length width) {
+
+    getScrollPanel().setWidth(width.toString());
+  }
+
+  /**
+   * @return the titleHeader
+   */
+  public InlineLabel getTitleHeader() {
+
+    if (this.titleHeader == null) {
+      this.titleHeader = new InlineLabel();
+      this.titleHeader.setStylePrimaryName("Header");
+    }
+    return this.titleHeader;
   }
 
   /**
@@ -278,6 +325,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   protected FlowPanel createToplevelWidget() {
 
     FlowPanel toplevelWidget = new FlowPanel();
+    toplevelWidget.add(getTitleHeader());
     toplevelWidget.add(getScrollPanel());
     toplevelWidget.setStylePrimaryName(UiWidgetTree.PRIMARY_STYLE);
     return toplevelWidget;
@@ -294,6 +342,20 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     /** @see #getWidget() */
     private final UiWidget widget;
 
+    /** @see #loadChildren() */
+    private boolean loaded;
+
+    /**
+     * The dummy constructor.
+     */
+    private TreeNodeAdapter() {
+
+      super();
+      this.loaded = true;
+      this.node = null;
+      this.widget = null;
+    }
+
     /**
      * The constructor.
      * 
@@ -306,6 +368,9 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.widget = widget;
       this.node = node;
       updateNode();
+      this.loaded = false;
+      // add a dummy child so the node can be expanded for lazy loading...
+      addItem(new TreeNodeAdapter());
     }
 
     /**
@@ -330,7 +395,11 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      */
     protected void loadChildren() {
 
+      if (this.loaded) {
+        return;
+      }
       UiWidgetAdapterGwtTree.this.treeModel.getChildrenAsync(this.node, this);
+      this.loaded = true;
     }
 
     /**
@@ -347,13 +416,18 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       }
     }
 
+    /**
+     * Clears all existing children.
+     */
     private void clearChildren() {
 
-      int childCount = getChildCount();
-      for (int i = 0; i < childCount; i++) {
-        TreeNodeAdapter child = (TreeNodeAdapter) getChild(i);
-        TreeNodeAdapter oldNode = UiWidgetAdapterGwtTree.this.nodeMap.remove(child.node);
-        assert (oldNode == child);
+      if (this.loaded) {
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+          TreeNodeAdapter child = (TreeNodeAdapter) getChild(i);
+          TreeNodeAdapter oldNode = UiWidgetAdapterGwtTree.this.nodeMap.remove(child.node);
+          assert (oldNode == child);
+        }
       }
       removeItems();
     }

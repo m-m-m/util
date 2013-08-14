@@ -3,8 +3,11 @@
 package net.sf.mmm.client.ui.impl.test.widget.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumTextLength;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -29,7 +32,7 @@ import net.sf.mmm.util.nls.api.ObjectDisposedException;
 public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implements AttributeWriteMaximumTextLength,
     AttributeWriteValidationFailure, UiWidgetAdapterButton, UiWidgetAdapterCollapsableSection, UiWidgetAdapterImage,
     UiWidgetAdapterLabel, UiWidgetAdapterLink, UiWidgetAdapterSection, UiWidgetAdapterMenuItemClickable,
-    UiWidgetAdapterMenuItemSeparator {
+    UiWidgetAdapterMenuItemSeparator, AttributeWriteSelectionMode, AttributeWriteStringTitle {
 
   /** @see #getWidth() */
   private Length width;
@@ -324,6 +327,24 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
    */
   @Override
   public void setMaximumTextLength(int length) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSelectionMode(SelectionMode selectionMode) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTitle(String title) {
 
     verifyNotDisposed();
   }

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.complex;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 
@@ -15,7 +16,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTree<NODE> extends UiWidgetAbstractTree<NODE>, UiWidgetWithValue<NODE>, UiWidgetNative {
+public interface UiWidgetTree<NODE> extends UiWidgetAbstractTree<NODE>, UiWidgetWithValue<NODE>,
+    AttributeWriteStringTitle, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String PRIMARY_STYLE = "Tree";

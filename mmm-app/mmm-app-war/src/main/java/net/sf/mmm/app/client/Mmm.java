@@ -225,6 +225,8 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     });
 
     UiWidgetTree<String> tree = factory.create(UiWidgetTree.class);
+    tree.setTitle("Tree");
+    tree.setSize(300, 300, SizeUnit.PIXEL);
     UiTreeModelDummy model = new UiTreeModelDummy();
     tree.setTreeModel(model);
     tree.setValue(model.getRootNode());

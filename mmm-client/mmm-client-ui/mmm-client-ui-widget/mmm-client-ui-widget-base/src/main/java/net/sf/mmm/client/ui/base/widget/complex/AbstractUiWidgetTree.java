@@ -42,6 +42,9 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
   /** @see #getSelectionMode() */
   private SelectionMode selectionMode;
 
+  /** @see #getTitle() */
+  private String title;
+
   /**
    * The constructor.
    * 
@@ -61,6 +64,9 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
+    if (this.title != null) {
+      adapter.setTitle(this.title);
+    }
     if (this.treeModel != null) {
       adapter.setTreeModel(this.treeModel);
     }
@@ -126,6 +132,27 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
   public UiTreeModel<NODE> getTreeModel() {
 
     return this.treeModel;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getTitle() {
+
+    return this.title;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTitle(String title) {
+
+    this.title = title;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setTitle(title);
+    }
   }
 
   /**

@@ -19,7 +19,7 @@ input {
 input:invalid {
   box-shadow: none;
   border-color: #ff8888;
-  background-color: #ffbbbb;
+  background: #ffbbbb;
   /* background-size: cover; */
 
   background-position: right;
@@ -32,20 +32,19 @@ button {
   border-color: #a0a0a0;
   border-width: 1px;
   cursor: pointer;
-  background-color: #e0e0e0;
+  background: #e0e0e0;
 }
 button:hover {
-  background-color: #ccddf7;
+  background: #ccddf7;
 }
 button:focus,
 button:active {
-  background-color: #a0c0f0;
+  background: #a0c0f0;
 }
 .Button {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 2px 2px 5px 0px #c7c7c7;
   border-style: solid;
   border-radius: 0.5em;
@@ -62,12 +61,12 @@ button:active {
 }
 input:hover {
   border-color: #ffffff;
-  background-color: #ccddf7;
+  background: #ccddf7;
 }
 input:focus,
 input:active {
   border-color: #4886e2;
-  background-color: #a0c0f0;
+  background: #a0c0f0;
 }
 .SearchField {
   display: inline;
@@ -123,6 +122,45 @@ input:active {
 .FieldLabel.Mandatory:after {
   content: "*:";
 }
+.Tree {
+  border-top: 1px solid #ededed;
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #a0a0a0;
+  border-bottom: 1px solid #a0a0a0;
+  border-style: solid;
+  /* border-radius: @radius; */
+
+}
+.gwt-Tree .gwt-TreeItem {
+  cursor: pointer;
+  margin: 0;
+  padding: 1px 0;
+  white-space: nowrap;
+}
+.gwt-Tree .gwt-TreeItem-selected,
+.gwt-Tree .gwt-TreeItem-selected * {
+  background: #c0f0f0;
+}
+.gwt-TreeItem .gwt-RadioButton input,
+.gwt-TreeItem .gwt-CheckBox input {
+  margin-left: 0;
+}
+.Header {
+  border-top: 1px solid #ededed;
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #a0a0a0;
+  border-bottom: 1px solid #a0a0a0;
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  display: block;
+  padding: 0 0.5em;
+}
+.Header:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #ccddf7);
+}
+.Header:focus,
+.Header:active {
+  background-image: linear-gradient(to bottom, #ffffff, #a0c0f0);
+}
 .Section {
   border-color: #a0a0a0;
   border-width: 1px;
@@ -147,7 +185,7 @@ input:active {
 }
 /* Popup */
 .gwt-PopupPanelGlass {
-  background-color: black;
+  background: black;
   opacity: 0.3;
 }
 .Popup {
@@ -274,7 +312,6 @@ input:active {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 2px 2px 5px 0px #c7c7c7;
   border-style: solid;
   border-top-left-radius: 0.5em;
@@ -292,7 +329,6 @@ input:active {
   border-color: #a0a0a0;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 2px 2px 5px 0px #c7c7c7;
   cursor: default;
   background-image: linear-gradient(to bottom, #ffffff, #c0f0f0);

@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget.complex.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectedValue;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
@@ -18,7 +19,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
  * @since 1.0.0
  */
 public interface UiWidgetAdapterTree<NODE> extends UiWidgetAdapterActive, AttributeWriteSelectedValue<NODE>,
-    AttributeWriteSelectionMode {
+    AttributeWriteSelectionMode, AttributeWriteStringTitle {
 
   /**
    * @param node is the root node.

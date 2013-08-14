@@ -48,6 +48,9 @@ public abstract interface UiWidget extends UiFeatureMessages, UiFeatureEvent, Ui
     AttributeWriteDisposed, AttributeWriteSizeAdvanced, AttributeReadModified, AttributeReadAriaRole,
     AbstractValidatableObject {
 
+  /** The {@link #addStyle(String) style} for a header element. */
+  String STYLE_HEADER = "Header";
+
   /**
    * @return the parent of this widget or <code>null</code> if NOT attached to the UI or if this is a root
    *         widget (e.g. {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow}).

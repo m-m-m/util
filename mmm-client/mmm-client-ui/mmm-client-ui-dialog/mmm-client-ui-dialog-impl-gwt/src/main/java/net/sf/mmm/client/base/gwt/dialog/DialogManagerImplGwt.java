@@ -112,7 +112,10 @@ public class DialogManagerImplGwt extends AbstractDialogManager {
     @Override
     public void onValueChange(ValueChangeEvent<String> event) {
 
-      onNavigate(event.getValue());
+      String placeId = event.getValue();
+      if ((placeId != null) && (!placeId.isEmpty())) {
+        onNavigate(placeId);
+      }
     }
   }
 
