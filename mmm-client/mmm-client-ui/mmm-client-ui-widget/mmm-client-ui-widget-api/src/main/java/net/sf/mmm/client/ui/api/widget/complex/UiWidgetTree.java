@@ -8,11 +8,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegular regular widget} that
  * represents a <em>tree</em>. Such widget represents a tree-structure showing tree-nodes that can be
- * collapsed and expanded. It has the following features:
- * <ul>
- * <li>Configured via {@link #setTreeModel(net.sf.mmm.client.ui.api.widget.model.UiTreeModel)}.</li>
- * <li>...Drag+Drop...</li>
- * </ul>
+ * collapsed and expanded. For additional details see {@link UiWidgetAbstractTree}.
  * 
  * @param <NODE> is the generic type of the tree-nodes. E.g. {@link net.sf.mmm.util.collection.api.TreeNode}.
  * 
@@ -21,6 +17,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
  */
 public interface UiWidgetTree<NODE> extends UiWidgetAbstractTree<NODE>, UiWidgetWithValue<NODE>, UiWidgetNative {
 
-  // nothing to add...
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String PRIMARY_STYLE = "Tree";
 
 }

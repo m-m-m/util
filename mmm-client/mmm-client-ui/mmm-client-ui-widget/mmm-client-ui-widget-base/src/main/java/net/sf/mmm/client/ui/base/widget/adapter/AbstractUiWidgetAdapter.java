@@ -13,9 +13,11 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadLabel;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadMaximumTextLength;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSelectionMode;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -37,7 +39,7 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter, AttributeReadAltText,
     AttributeReadUrl, AttributeReadLabel, AttributeReadTitle<String>, AttributeReadImage<UiWidgetImage>,
     AttributeReadValidationFailure, AttributeReadAccessKey, AttributeReadFocused, AttributeReadMaximumTextLength,
-    AttributeReadHeightInRows, AttributeReadColumnSpan, AttributeReadResizable {
+    AttributeReadHeightInRows, AttributeReadColumnSpan, AttributeReadResizable, AttributeReadSelectionMode {
 
   /** @see #getToplevelWidget() */
   private final WIDGET toplevelWidget;
@@ -120,6 +122,15 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    */
   @Override
   public String getId() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public SelectionMode getSelectionMode() {
 
     throw new NlsUnsupportedOperationException();
   }
