@@ -9,6 +9,7 @@ import net.sf.mmm.app.client.dialog.DialogControllerFactoryImpl;
 import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImplGwt;
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
@@ -227,6 +228,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetTree<String> tree = factory.create(UiWidgetTree.class);
     tree.setTitle("Tree");
     tree.setSize(300, 300, SizeUnit.PIXEL);
+    tree.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
     UiTreeModelDummy model = new UiTreeModelDummy();
     tree.setTreeModel(model);
     tree.setValue(model.getRootNode());

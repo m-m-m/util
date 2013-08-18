@@ -131,6 +131,9 @@ input:active {
   /* border-radius: @radius; */
 
 }
+.TreeItemContainer div {
+  display: inline;
+}
 .gwt-Tree .gwt-TreeItem {
   cursor: pointer;
   margin: 0;

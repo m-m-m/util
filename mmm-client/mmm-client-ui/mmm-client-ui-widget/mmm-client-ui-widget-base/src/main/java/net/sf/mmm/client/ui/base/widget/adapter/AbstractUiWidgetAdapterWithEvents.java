@@ -84,10 +84,13 @@ public abstract class AbstractUiWidgetAdapterWithEvents<WIDGET, EVENT_ADAPTER ex
 
     // Change-Events...
     applyEventAdapterForChange(adapter);
+
+    // Selection-Events...
+    applyEventAdapterForSelection(adapter);
   }
 
   /**
-   * Applies for click events.
+   * Applies for {@link net.sf.mmm.client.ui.api.event.EventType#CLICK} events.
    * 
    * @param adapter is the {@link AbstractEventAdapter event adapter}.
    */
@@ -97,7 +100,8 @@ public abstract class AbstractUiWidgetAdapterWithEvents<WIDGET, EVENT_ADAPTER ex
   }
 
   /**
-   * Applies for focus (and blur) events.
+   * Applies for {@link net.sf.mmm.client.ui.api.event.EventType#FOCUS_GAIN} and
+   * {@link net.sf.mmm.client.ui.api.event.EventType#FOCUS_LOSS} events.
    * 
    * @param adapter is the {@link AbstractEventAdapter event adapter}.
    */
@@ -107,11 +111,21 @@ public abstract class AbstractUiWidgetAdapterWithEvents<WIDGET, EVENT_ADAPTER ex
   }
 
   /**
-   * Applies for (value) change events.
+   * Applies for {@link net.sf.mmm.client.ui.api.event.EventType#VALUE_CHANGE} events.
    * 
    * @param adapter is the {@link AbstractEventAdapter event adapter}.
    */
   protected void applyEventAdapterForChange(EVENT_ADAPTER adapter) {
+
+    // nothing by default...
+  }
+
+  /**
+   * Applies for {@link net.sf.mmm.client.ui.api.event.EventType#SELECTION_CHANGE} events.
+   * 
+   * @param adapter is the {@link AbstractEventAdapter event adapter}.
+   */
+  protected void applyEventAdapterForSelection(EVENT_ADAPTER adapter) {
 
     // nothing by default...
   }

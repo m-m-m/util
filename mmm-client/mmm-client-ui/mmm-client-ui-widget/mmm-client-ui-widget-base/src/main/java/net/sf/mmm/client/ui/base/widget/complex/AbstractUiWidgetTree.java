@@ -55,6 +55,7 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
 
     super(context);
     this.treeNodeRenderer = (UiTreeNodeRenderer) DEFAULT_RENDERER;
+    this.selectionMode = SelectionMode.SINGLE_SELECTION;
   }
 
   /**
@@ -72,6 +73,9 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
     }
     if (this.treeNodeRenderer != null) {
       adapter.setTreeNodeRenderer(this.treeNodeRenderer);
+    }
+    if (this.selectionMode != null) {
+      adapter.setSelectionMode(this.selectionMode);
     }
     if (getOriginalValue() != null) {
       adapter.setRootNode(getOriginalValue());

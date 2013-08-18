@@ -2,25 +2,39 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
-import java.util.Collections;
+import java.awt.Checkbox;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.event.EventType;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
+import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.adapter.MultiSelectionCheckbox;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -60,6 +74,12 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   /** @see #getScrollPanel() */
   private ScrollPanel scrollPanel;
 
+  /** @see #setSelectionMode(SelectionMode) */
+  private SelectionMode selectionMode;
+
+  /** The {@link TreeNodeAdapter} for {@link #rootNode}. */
+  private TreeNodeAdapter rootNodeAdapter;
+
   /**
    * The constructor.
    */
@@ -93,7 +113,13 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   public void setSelectionMode(SelectionMode selectionMode) {
 
-    // not directly supported... emulate or switch to CellTree?
+    if (this.selectionMode == selectionMode) {
+      return;
+    }
+    this.selectionMode = selectionMode;
+    if (this.rootNodeAdapter != null) {
+      this.rootNodeAdapter.updateSelectionMode();
+    }
   }
 
   /**
@@ -104,10 +130,25 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(selectedValue);
     if (treeNodeAdapter != null) {
-      getGwtTree().setSelectedItem(treeNodeAdapter);
+      if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
+        getGwtTree().setSelectedItem(treeNodeAdapter);
+      } else {
+        clearMultiSelection();
+        treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
+      }
       return true;
     }
     return false;
+  }
+
+  /**
+   * Clear {@link Checkbox}es of {@link SelectionMode#MULTIPLE_SELECTION}.
+   */
+  private void clearMultiSelection() {
+
+    for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+      adapter.multiSelectionCheckbox.setValue(Boolean.FALSE);
+    }
   }
 
   /**
@@ -116,8 +157,20 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   public boolean setSelectedValues(List<NODE> selectedValues) {
 
-    // TODO Auto-generated method stub
-    return false;
+    boolean success = false;
+    if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
+      success = true;
+      clearMultiSelection();
+      for (NODE node : selectedValues) {
+        TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(node);
+        if (treeNodeAdapter != null) {
+          treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
+        } else {
+          success = false;
+        }
+      }
+    }
+    return success;
   }
 
   /**
@@ -126,7 +179,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   public boolean hasSelectedValue() {
 
-    return (getGwtTree().getSelectedItem() != null);
+    return (getSelectedValue() != null);
   }
 
   /**
@@ -135,9 +188,17 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   public NODE getSelectedValue() {
 
-    TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
-    if (selectedItem != null) {
-      return selectedItem.node;
+    if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
+      TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
+      if (selectedItem != null) {
+        return selectedItem.node;
+      }
+    } else if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
+      for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+        if (adapter.multiSelectionCheckbox.getValue().booleanValue()) {
+          return adapter.node;
+        }
+      }
     }
     return null;
   }
@@ -148,8 +209,20 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   public List<NODE> getSelectedValues() {
 
-    // TODO Auto-generated method stub
-    return Collections.EMPTY_LIST;
+    List<NODE> selectedValues = new LinkedList<NODE>();
+    if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
+      TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
+      if (selectedItem != null) {
+        selectedValues.add(selectedItem.node);
+      }
+    } else if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
+      for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+        if (adapter.multiSelectionCheckbox.getValue().booleanValue()) {
+          selectedValues.add(adapter.node);
+        }
+      }
+    }
+    return selectedValues;
   }
 
   /**
@@ -179,10 +252,10 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.nodeMap.clear();
     }
     this.rootNode = node;
-    TreeNodeAdapter rootNodeAdapter = createTreeNodeAdapter(this.rootNode);
-    this.nodeMap.put(this.rootNode, rootNodeAdapter);
-    rootNodeAdapter.loadChildren();
-    getGwtTree().addItem(rootNodeAdapter);
+    this.rootNodeAdapter = createTreeNodeAdapter(this.rootNode);
+    this.nodeMap.put(this.rootNode, this.rootNodeAdapter);
+    this.rootNodeAdapter.loadChildren();
+    getGwtTree().addItem(this.rootNodeAdapter);
   }
 
   /**
@@ -192,8 +265,28 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   private TreeNodeAdapter createTreeNodeAdapter(NODE node) {
 
     UiWidget widget = this.treeNodeRenderer.create(getUiWidget().getContext());
-    TreeNodeAdapter rootNodeAdapter = new TreeNodeAdapter(node, widget);
-    return rootNodeAdapter;
+    TreeNodeAdapter treeNodeAdapter = new TreeNodeAdapter(node, widget);
+    return treeNodeAdapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected EventAdapterGwt createEventAdapter(UiFeatureEvent source, UiHandlerEvent sender) {
+
+    EventAdapterGwtTree adapter = new EventAdapterGwtTree(source, sender);
+    return adapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void applyEventAdapterForSelection(EventAdapterGwt adapter) {
+
+    getGwtTree().addSelectionHandler((EventAdapterGwtTree) adapter);
   }
 
   /**
@@ -334,7 +427,8 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   /**
    * This inner class adapts from {@literal <NODE>} to {@link TreeItem}.
    */
-  protected class TreeNodeAdapter extends TreeItem implements Consumer<List<NODE>> {
+  protected class TreeNodeAdapter extends TreeItem implements Consumer<List<NODE>>, ValueChangeHandler<Boolean>,
+      ClickHandler {
 
     /** @see #getNode() */
     private final NODE node;
@@ -345,6 +439,12 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     /** @see #loadChildren() */
     private boolean loaded;
 
+    /** @see #getWidgetPanel() */
+    private FlowPanel widgetPanel;
+
+    /** The {@link CheckBox} for {@link SelectionMode#MULTIPLE_SELECTION}. */
+    private MultiSelectionCheckbox multiSelectionCheckbox;
+
     /**
      * The dummy constructor.
      */
@@ -354,6 +454,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.loaded = true;
       this.node = null;
       this.widget = null;
+      this.widgetPanel = null;
     }
 
     /**
@@ -364,9 +465,19 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      */
     public TreeNodeAdapter(NODE node, UiWidget widget) {
 
-      super(getToplevelWidget(widget));
+      super();
       this.widget = widget;
       this.node = node;
+      switch (UiWidgetAdapterGwtTree.this.selectionMode) {
+        case SINGLE_SELECTION:
+          setWidget(getToplevelWidget(widget));
+          break;
+        case MULTIPLE_SELECTION:
+          initializeMultiSelection();
+          break;
+        default :
+          throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
+      }
       updateNode();
       this.loaded = false;
       // add a dummy child so the node can be expanded for lazy loading...
@@ -431,5 +542,95 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       }
       removeItems();
     }
+
+    /**
+     * Recursively updates the {@link SelectionMode}.
+     */
+    private void updateSelectionMode() {
+
+      switch (UiWidgetAdapterGwtTree.this.selectionMode) {
+        case SINGLE_SELECTION:
+          if (this.widgetPanel != null) {
+            this.multiSelectionCheckbox.setVisible(false);
+            // TODO: deselect
+          }
+          break;
+        case MULTIPLE_SELECTION:
+          if (this.widgetPanel != null) {
+            initializeMultiSelection();
+          }
+          break;
+        default :
+          throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
+      }
+
+    }
+
+    private void initializeMultiSelection() {
+
+      this.widgetPanel = new FlowPanel();
+      this.widgetPanel.setStylePrimaryName("TreeItemContainer");
+      this.multiSelectionCheckbox = new MultiSelectionCheckbox();
+      this.multiSelectionCheckbox.addClickHandler(this);
+      this.widgetPanel.add(this.multiSelectionCheckbox);
+      this.widgetPanel.add(getToplevelWidget(this.widget));
+      setWidget(this.widgetPanel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onClick(ClickEvent event) {
+
+      setCheckboxSelected(this.multiSelectionCheckbox.getValue().booleanValue());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onValueChange(ValueChangeEvent<Boolean> event) {
+
+      boolean selected = event.getValue().booleanValue();
+      setCheckboxSelected(selected);
+    }
+
+    private void setCheckboxSelected(boolean selected) {
+
+      String style = "Selected";
+      if (selected) {
+        this.widgetPanel.addStyleName(style);
+      } else {
+        this.widgetPanel.removeStyleName(style);
+      }
+    }
+  }
+
+  /**
+   * @see UiWidgetAdapterGwtTree#createEventAdapter(UiFeatureEvent, UiHandlerEvent)
+   */
+  private static class EventAdapterGwtTree extends EventAdapterGwt implements SelectionHandler<TreeItem> {
+
+    /**
+     * The constructor.
+     * 
+     * @param source is the source of the events (typically {@link net.sf.mmm.client.ui.api.widget.UiWidget}).
+     * @param sender is the sender of events (an adapter that delegates to the individual handlers/listeners).
+     */
+    public EventAdapterGwtTree(UiFeatureEvent source, UiHandlerEvent sender) {
+
+      super(source, sender);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onSelection(SelectionEvent<TreeItem> event) {
+
+      fireEvent(EventType.SELECTION_CHANGE);
+    }
+
   }
 }
