@@ -19,6 +19,8 @@ import com.google.gwt.core.ext.RebindResult;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
@@ -188,18 +190,40 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
   }
 
   /**
+   * This method generates the source code for a public method declaration including the opening brace and
+   * indentation.
+   * 
+   * @param sourceWriter is the {@link SourceWriter}.
+   * @param method is the {@link JMethod} to implement.
+   */
+  protected final void generateSourcePublicMethodDeclaration(SourceWriter sourceWriter, JMethod method) {
+
+    StringBuilder arguments = new StringBuilder();
+    for (JParameter parameter : method.getParameters()) {
+      if (arguments.length() > 0) {
+        arguments.append(", ");
+      }
+      arguments.append(parameter.getType().getQualifiedSourceName());
+      arguments.append(" ");
+      arguments.append(parameter.getName());
+    }
+    generateSourcePublicMethodDeclaration(sourceWriter, method.getReturnType().getQualifiedSourceName(),
+        method.getName(), arguments.toString(), false);
+  }
+
+  /**
    * This method generates the source code for a public method or constructor including the opening brace and
    * indentation.
    * 
    * @param sourceWriter is the {@link SourceWriter}.
-   * @param returnType TODO
+   * @param returnType is the return type of the method.
    * @param methodName is the name of the method (or the {@link Class#getSimpleName() simple class name} for a
    *        constructor}.
    * @param arguments is the source line with the arguments to the method or constructor.
    * @param override - <code>true</code> if an {@link Override} annotation shall be added.
    */
-  protected final void generateSourcePublicMethodDeclaration(SourceWriter sourceWriter, String returnType, String methodName,
-      String arguments, boolean override) {
+  protected final void generateSourcePublicMethodDeclaration(SourceWriter sourceWriter, String returnType,
+      String methodName, String arguments, boolean override) {
 
     if (override) {
       sourceWriter.println("@Override");

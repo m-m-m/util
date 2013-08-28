@@ -4,6 +4,7 @@ package net.sf.mmm.util.nls.impl.rebind;
 
 import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.impl.AbstractNlsBundleFactoryGwt;
 
 import com.google.gwt.core.client.GWT;
@@ -112,11 +113,12 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
     // find all subclasses of NlsBundle
     TypeOracle typeOracle = context.getTypeOracle();
     JClassType bundleClass = typeOracle.findType(NlsBundle.class.getName());
+    JClassType bundleWithLookupClass = typeOracle.findType(NlsBundleWithLookup.class.getName());
     JClassType[] types = typeOracle.getTypes();
     int bundleCount = 0;
     logger.log(Type.INFO, "Checking " + types.length + " types...");
     for (JClassType type : types) {
-      if ((type.isAssignableTo(bundleClass)) && (!type.equals(bundleClass))) {
+      if ((type.isAssignableTo(bundleClass)) && (!type.equals(bundleClass) && (!type.equals(bundleWithLookupClass)))) {
         logger.log(Type.INFO, "Found NlsBundle interface: " + type);
 
         sourceWriter.print("if (");

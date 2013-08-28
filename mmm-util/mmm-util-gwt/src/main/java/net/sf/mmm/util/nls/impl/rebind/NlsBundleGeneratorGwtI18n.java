@@ -98,14 +98,13 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
    */
   @Override
   protected void generateMethodMessageBlock(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
-      JMethod method) {
+      String methodName) {
 
-    sourceWriter.print("String ");
     sourceWriter.print(VARIABLE_MESSAGE);
     sourceWriter.print(" = ");
     sourceWriter.print(VARIABLE_GWT_I18N);
     sourceWriter.print(".");
-    sourceWriter.print(method.getName());
+    sourceWriter.print(methodName);
     sourceWriter.println("();");
   }
 
@@ -157,7 +156,7 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     annotationBuffer.append("\")");
 
     sourceComposerFactory.addAnnotationDeclaration("@" + Generate.class.getSimpleName() + "(format = \""
-        + PropertiesFormat.class.getName() + "\", fileName = \"" + "BasisDialogMessages" + "\")");
+        + PropertiesFormat.class.getName() + "\")");
 
     PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
     if (writer != null) {
@@ -166,31 +165,33 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
       // generate methods for fields of bundle
       for (JMethod method : bundleClass.getOverridableMethods()) {
         JType returnType = method.getReturnType();
-        if (!NlsMessage.class.getName().equals(returnType.getQualifiedSourceName())) {
-          throw new IllegalCaseException(returnType.getQualifiedSourceName());
-        }
-        NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
-        if (messageAnnotation != null) {
-          String message = messageAnnotation.value();
-          // generate message annotation
-          sourceWriter.print("@DefaultStringValue(\"");
-          sourceWriter.print(escape(message));
-          sourceWriter.println("\")");
-        }
+        if (!isLookupMethod(method)) {
+          if (!NlsMessage.class.getName().equals(returnType.getQualifiedSourceName())) {
+            throw new IllegalCaseException(returnType.getQualifiedSourceName());
+          }
+          NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
+          if (messageAnnotation != null) {
+            String message = messageAnnotation.value();
+            // generate message annotation
+            sourceWriter.print("@DefaultStringValue(\"");
+            sourceWriter.print(escape(message));
+            sourceWriter.println("\")");
+          }
 
-        NlsBundleKey keyAnnotation = method.getAnnotation(NlsBundleKey.class);
-        if (keyAnnotation != null) {
-          // generate key annotation
-          sourceWriter.print("@Key(\"");
-          sourceWriter.print(escape(keyAnnotation.value()));
-          sourceWriter.println("\")");
-        }
-        // generate method
-        sourceWriter.print("String ");
-        sourceWriter.print(method.getName());
-        sourceWriter.println("();");
+          NlsBundleKey keyAnnotation = method.getAnnotation(NlsBundleKey.class);
+          if (keyAnnotation != null) {
+            // generate key annotation
+            sourceWriter.print("@Key(\"");
+            sourceWriter.print(escape(keyAnnotation.value()));
+            sourceWriter.println("\")");
+          }
+          // generate method
+          sourceWriter.print("String ");
+          sourceWriter.print(method.getName());
+          sourceWriter.println("();");
 
-        sourceWriter.println();
+          sourceWriter.println();
+        }
 
       }
       sourceWriter.commit(logger);

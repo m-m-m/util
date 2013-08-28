@@ -22,6 +22,7 @@ import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsBundleOptions;
+import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -35,6 +36,9 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  */
 @NlsBundleOptions
 public abstract class AbstractNlsBundleFactory extends AbstractComponent implements NlsBundleFactory {
+
+  /** The name of the method {@link net.sf.mmm.util.nls.api.NlsBundleWithLookup#getMessage(String, Map)}. */
+  public static final String METHOD_NAME_LOOKUP = "getMessage";
 
   /** @see #createBundle(Class) */
   private final ClassLoader classLoader;
@@ -163,7 +167,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     private final NlsBundleOptions options;
 
     /** The cache for the {@link NlsBundleMethodInfo}s. */
-    private final Map<Method, NlsBundleMethodInfo> method2BundleInfoMap;
+    private final Map<String, NlsBundleMethodInfo> method2BundleInfoMap;
 
     /**
      * The constructor.
@@ -176,7 +180,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       super();
       this.bundleName = bundleName;
       this.options = options;
-      this.method2BundleInfoMap = new ConcurrentHashMap<Method, NlsBundleMethodInfo>();
+      this.method2BundleInfoMap = new ConcurrentHashMap<String, NlsBundleMethodInfo>();
     }
 
     /**
@@ -206,14 +210,12 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * {@link Method}.
      * 
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
-     * @param arguments are the arguments for the call of the {@link Method}. Can actually be ignored but may
-     *        be used instead of {@link Method#getParameterTypes()} to determine the length.
      * @return an array with the {@link NlsMessage#getArgument(String) argument-names}.
      */
-    protected String[] getArgumentNames(Method method, Object[] arguments) {
+    protected String[] getArgumentNames(Method method) {
 
-      String[] names = new String[arguments.length];
       Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+      String[] names = new String[parameterAnnotations.length];
       for (int i = 0; i < names.length; i++) {
         Named namedAnnotation = null;
         for (Annotation currentAnnotation : parameterAnnotations[i]) {
@@ -233,34 +235,97 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
       Object result;
       if (NlsMessage.class.equals(method.getReturnType())) {
-        NlsBundleMethodInfo methodInfo = this.method2BundleInfoMap.get(method);
-        if (methodInfo == null) {
-          NlsTemplate template = createTemplate(method);
-          String[] argumentNames;
-          if ((args == null) || (args.length == 0)) {
-            argumentNames = StringUtil.EMPTY_STRING_ARRAY;
-          } else {
-            argumentNames = getArgumentNames(method, args);
+        String methodName = method.getName();
+        NlsBundleMethodInfo methodInfo;
+        if (methodName.equals(METHOD_NAME_LOOKUP)) {
+          assert (method.getDeclaringClass() == NlsBundleWithLookup.class);
+          String actualMethodName;
+          Map<String, Object> parameters;
+          try {
+            actualMethodName = (String) args[0];
+            parameters = (Map<String, Object>) args[1];
+          } catch (RuntimeException e) {
+            throw new IllegalArgumentException(method.toGenericString(), e);
           }
-          methodInfo = new NlsBundleMethodInfo(template, argumentNames);
-          this.method2BundleInfoMap.put(method, methodInfo);
-        }
-        if ((args == null) || (args.length == 0)) {
-          result = getMessageFactory().create(methodInfo.template);
+          methodInfo = getOrCreateMethodInfo(null, null, actualMethodName, proxy);
+          if (methodInfo == null) {
+            // undefined method name
+            result = null;
+          } else {
+            if ((parameters == null) || (parameters.isEmpty())) {
+              result = getMessageFactory().create(methodInfo.template);
+            } else {
+              result = getMessageFactory().create(methodInfo.template, parameters);
+            }
+          }
         } else {
-          Map<String, Object> messageArguments = createArgumentMap(method, methodInfo, args);
-          result = getMessageFactory().create(methodInfo.template, messageArguments);
+          methodInfo = getOrCreateMethodInfo(method, args, methodName, null);
+          if ((args == null) || (args.length == 0)) {
+            result = getMessageFactory().create(methodInfo.template);
+          } else {
+            Map<String, Object> messageArguments = createArgumentMap(method, methodInfo, args);
+            result = getMessageFactory().create(methodInfo.template, messageArguments);
+          }
         }
       } else {
         // equals, hashCode, etc.
         result = method.invoke(proxy, args);
       }
       return result;
+    }
+
+    /**
+     * Gets {@link NlsBundleMethodInfo} for <code>methodName</code> from cache or creates it and puts it into
+     * the cache.
+     * 
+     * @param method is the {@link Method} or <code>null</code> for generic invocation (lookup).
+     * @param args are the method arguments or <code>null</code> for generic invocation (lookup).
+     * @param methodName is the {@link Method#getName() name} of the {@link Method}.
+     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by
+     *        <code>methodName</code> if not given.
+     * @return the {@link NlsBundleMethodInfo}. May be <code>null</code> for generic invocation if method for
+     *         <code>methodName</code> was not found (does not exist).
+     */
+    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
+
+      NlsBundleMethodInfo methodInfo;
+      methodInfo = this.method2BundleInfoMap.get(methodName);
+      if (methodInfo == null) {
+        Method identifiedMethod = method;
+        if (identifiedMethod == null) {
+          Class<?>[] interfaces = proxy.getClass().getInterfaces();
+          if (interfaces.length != 1) {
+            throw new IllegalArgumentException(proxy.getClass().toString());
+          }
+          Method[] methods = interfaces[0].getMethods();
+          for (Method currentMethod : methods) {
+            if (currentMethod.getName().equals(methodName)) {
+              identifiedMethod = currentMethod;
+              break;
+            }
+          }
+          if (identifiedMethod == null) {
+            // Method not found / does not exist...
+            return null;
+          }
+        }
+        NlsTemplate template = createTemplate(identifiedMethod);
+        String[] argumentNames;
+        if ((args != null) && (args.length == 0)) {
+          argumentNames = StringUtil.EMPTY_STRING_ARRAY;
+        } else {
+          argumentNames = getArgumentNames(identifiedMethod);
+        }
+        methodInfo = new NlsBundleMethodInfo(template, argumentNames);
+        this.method2BundleInfoMap.put(methodName, methodInfo);
+      }
+      return methodInfo;
     }
 
     /**
