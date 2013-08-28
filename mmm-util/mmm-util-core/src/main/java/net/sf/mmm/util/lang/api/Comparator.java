@@ -297,10 +297,10 @@ public enum Comparator implements Datatype<String>, NlsObject {
         v1 = convert(v1, type2);
         v2 = convert(v2, type1);
       }
-      if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
-        return evalComparable((Comparable) v1, (Comparable) v2);
-      } else if ((v1 instanceof Number) && (v2 instanceof Number)) {
+      if ((v1 instanceof Number) && (v2 instanceof Number)) {
         return eval(((Number) v1).doubleValue(), ((Number) v2).doubleValue());
+      } else if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
+        return evalComparable((Comparable) v1, (Comparable) v2);
       } else if (v1.equals(v2)) {
         return isTrueIfEquals();
       } else {

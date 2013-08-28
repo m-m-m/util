@@ -83,7 +83,7 @@ public class ResourceBundleSynchronizerTest {
     MyResourceBundle bundle = new MyResourceBundle();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
 
-    checkBundle(bundle, resultFileBase, null);
+    // checkBundle(bundle, resultFileBase, null);
     checkBundle(bundle, resultFileBase, locale1);
   }
 
@@ -113,7 +113,7 @@ public class ResourceBundleSynchronizerTest {
     String resultFileBase = targetPath + "/"
         + bundleHelper.getQualifiedLocation(bundleClass).getName().replace('.', '/');
 
-    checkBundle(bundle, resultFileBase, null);
+    // checkBundle(bundle, resultFileBase, null);
     checkBundle(bundle, resultFileBase, locale1);
   }
 

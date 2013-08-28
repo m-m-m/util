@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,8 +31,12 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ProcessUtilTest {
 
-  /** TODO: javadoc. */
+  /** The platform specific line separator. */
   private static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
+
+  /** The classpath for java execution. */
+  private static final String CLASSPATH = "target/test-classes" + File.pathSeparatorChar
+      + "eclipse-target/test-classes";
 
   public ProcessUtil getProcessUtil() {
 
@@ -69,7 +74,7 @@ public class ProcessUtilTest {
   public void testExecuteAsyncTimeout() throws Exception {
 
     ProcessContext context = new ProcessContext();
-    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes", SleepApp.class.getName());
+    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", CLASSPATH, SleepApp.class.getName());
     long start = System.currentTimeMillis();
     try {
       int exitCode = getProcessUtil().execute(context, 100, TimeUnit.MILLISECONDS, builder);
@@ -93,7 +98,7 @@ public class ProcessUtilTest {
     context.setInStream(inStream);
     context.setErrStream(errStream);
     context.setOutStream(outStream);
-    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes", SleepApp.class.getName());
+    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", CLASSPATH, SleepApp.class.getName());
     assertFalse(inStream.isClosed());
     AsyncProcessExecutor executor = getProcessUtil().executeAsync(context, builder);
     Thread.sleep(10);
@@ -112,7 +117,7 @@ public class ProcessUtilTest {
   public void testExecuteAsyncStopChildProcess() throws Exception {
 
     ProcessContext context = new ProcessContext();
-    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", "target/test-classes", SwingApp.class.getName());
+    ProcessBuilder builder = new ProcessBuilder("java", "-classpath", CLASSPATH, SwingApp.class.getName());
     AsyncProcessExecutor executor = getProcessUtil().executeAsync(context, builder);
     Thread.sleep(2000);
     boolean stopped = executor.cancel(true);
@@ -127,10 +132,8 @@ public class ProcessUtilTest {
     context.setOutStream(outStream);
     ByteArrayOutputStream errStream = new ByteArrayOutputStream();
     context.setErrStream(errStream);
-    ProcessBuilder app1Builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
-        PipeApp1.class.getName());
-    ProcessBuilder app2Builder = new ProcessBuilder("java", "-classpath", "target/test-classes",
-        PipeApp2.class.getName());
+    ProcessBuilder app1Builder = new ProcessBuilder("java", "-classpath", CLASSPATH, PipeApp1.class.getName());
+    ProcessBuilder app2Builder = new ProcessBuilder("java", "-classpath", CLASSPATH, PipeApp2.class.getName());
     int exitCode = getProcessUtil().execute(context, app1Builder, app2Builder);
     assertEquals(0, exitCode);
     // test output of stdout

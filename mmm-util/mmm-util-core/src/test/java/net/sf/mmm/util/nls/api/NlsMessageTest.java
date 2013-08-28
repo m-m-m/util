@@ -16,6 +16,7 @@ import java.util.TimeZone;
 
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractResourceBundle;
@@ -68,6 +69,7 @@ public class NlsMessageTest {
     Assert.assertEquals(hello + arg + suffix, testMessage.getMessage());
     AbstractNlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
+      @Override
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
         if (internationalizedMessage.equals(msg)) {
@@ -102,6 +104,7 @@ public class NlsMessageTest {
     NlsMessage cascadedMessage = factory.create(err, keyExpected, simpleMessageInteger, keyActual, simpleMessageReal);
     AbstractNlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
+      @Override
       public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
         if (internationalizedMessage.equals(integer)) {
@@ -147,19 +150,19 @@ public class NlsMessageTest {
 
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
-    Date date = Iso8601UtilImpl.getInstance().parseDate("1999-12-31T23:59:59+01:00");
+    String iso8601String = "1999-12-31T23:59:59+01:00";
+    Date date = Iso8601UtilImpl.getInstance().parseDate(iso8601String);
     NlsMessageFactory factory = getMessageFactory();
     NlsMessage msg = factory.create(MyResourceBundle.MSG_TEST_DATE, "date", date);
     // Make os/locale independent...
     TimeZone.setDefault(TimeZone.getTimeZone("GMT+01:00"));
-    Assert
-        .assertEquals(
-            "Date formatted by locale: 12/31/99 11:59 PM, by ISO-8601: 1999-12-31T23:59:59+01:00 and by custom pattern: 1999.12.31-23:59:59+0100!",
-            msg.getMessage());
-    Assert
-        .assertEquals(
-            "Datum formatiert nach Locale: 31.12.99 23:59, nach ISO-8601: 1999-12-31T23:59:59+01:00 und nach individueller Vorlage: 1999.12.31-23:59:59+0100!",
-            msg.getLocalizedMessage(Locale.GERMAN, resolver));
+    String dateString = formatDate(date, AbstractNlsMessage.LOCALE_ROOT);
+    Assert.assertEquals("Date formatted by locale: " + dateString + ", by ISO-8601: " + iso8601String
+        + " and by custom pattern: 1999.12.31-23:59:59+0100!", msg.getMessage());
+    Locale german = Locale.GERMAN;
+    String dateStringDe = formatDate(date, german);
+    Assert.assertEquals("Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: " + iso8601String
+        + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!", msg.getLocalizedMessage(german, resolver));
     // test custom format
     String customFormat = "yyyyMMdd";
     msg = factory.create("{date,date," + customFormat + "}", "date", date);
@@ -204,6 +207,11 @@ public class NlsMessageTest {
         }
       }
     }
+  }
+
+  private String formatDate(Date date, Locale locale) {
+
+    return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG, locale).format(date);
   }
 
   /**
@@ -377,6 +385,7 @@ public class NlsMessageTest {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String translate(Locale locale) {
 
       if ("de".equals(locale.getLanguage())) {

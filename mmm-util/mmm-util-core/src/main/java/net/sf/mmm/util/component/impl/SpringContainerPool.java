@@ -17,8 +17,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public final class SpringContainerPool {
 
-  /** @see #getInstance() */
-  private static SpringContainer instance;
+  /** The Spring XML configuration of <code>mmm-util-core</code>. */
+  public static final String SPRING_XML_UTIL_CORE = "/net/sf/mmm/util/beans-util-core.xml";
 
   /** @see #getInstance(String) */
   private static Map<String, SpringContainer> xml2containerMap;
@@ -38,10 +38,7 @@ public final class SpringContainerPool {
    */
   public static IocContainer getInstance() {
 
-    if (instance == null) {
-      instance = new SpringContainer();
-    }
-    return instance;
+    return getInstance(SPRING_XML_UTIL_CORE);
   }
 
   /**
@@ -49,9 +46,11 @@ public final class SpringContainerPool {
    */
   public static void dispose() {
 
-    if (instance != null) {
-      instance.dispose();
-      instance = null;
+    if (xml2containerMap != null) {
+      for (SpringContainer container : xml2containerMap.values()) {
+        container.dispose();
+      }
+      xml2containerMap.clear();
     }
   }
 

@@ -128,7 +128,7 @@ public class StreamUtilTest {
     InputStreamReader reader = new InputStreamReader(DevZero.INSTANCE);
     StringWriter writer = new StringWriter();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(reader, writer, true);
-    Thread.sleep(10);
+    Thread.sleep(200);
     long size = writer.getBuffer().length();
     transferrer.cancel(true);
     assertTrue(size > 0);
@@ -144,7 +144,7 @@ public class StreamUtilTest {
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     Callback callback = new Callback();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(DevZero.INSTANCE, outStream, true, callback);
-    Thread.sleep(10);
+    Thread.sleep(200);
     long size = outStream.size();
     transferrer.cancel(true);
     assertTrue(size > 0);
@@ -159,6 +159,7 @@ public class StreamUtilTest {
     final IOException error = new IOException("This is a test!");
     InputStream inStream = new InputStream() {
 
+      @Override
       public int read() throws IOException {
 
         throw error;
@@ -211,6 +212,7 @@ public class StreamUtilTest {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void transferCompleted(long bytesTransferred) {
 
       expectEmpty();
@@ -220,6 +222,7 @@ public class StreamUtilTest {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void transferFailed(Exception e) {
 
       expectEmpty();
@@ -229,6 +232,7 @@ public class StreamUtilTest {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void transferStopped(long bytesTransferred) {
 
       expectEmpty();
