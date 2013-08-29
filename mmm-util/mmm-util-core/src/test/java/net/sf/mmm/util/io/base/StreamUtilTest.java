@@ -2,10 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.base;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,7 +11,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.concurrent.ExecutionException;
 
-import junit.framework.Assert;
 import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.logging.TestLogger.LogEvent;
 import net.sf.mmm.logging.TestLogger.LogLevel;
@@ -26,6 +21,7 @@ import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 
@@ -35,7 +31,7 @@ import org.slf4j.Logger;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StreamUtilTest {
+public class StreamUtilTest extends Assert {
 
   protected StreamUtil getStreamUtil() {
 
@@ -150,7 +146,9 @@ public class StreamUtilTest {
     assertTrue(size > 0);
     Thread.sleep(10);
     size = outStream.size();
-    assertEquals(size, callback.bytesStopped.longValue());
+    Long bytesStopped = callback.bytesStopped;
+    assertNotNull(bytesStopped);
+    assertEquals(size, bytesStopped.longValue());
   }
 
   @Test
@@ -191,7 +189,7 @@ public class StreamUtilTest {
         }
       }
     }
-    Assert.assertTrue(errorWasLogged);
+    assertTrue(errorWasLogged);
   }
 
   private static class Callback implements TransferCallback {

@@ -62,7 +62,9 @@ public class ResourceBundleSynchronizerTest {
       checkValue(bundle, properties, (String) key, locale);
     }
 
-    for (String key : bundle.keySet()) {
+    Enumeration<String> keyEnum = bundle.getKeys();
+    while (keyEnum.hasMoreElements()) {
+      String key = keyEnum.nextElement();
       checkValue(bundle, properties, key, locale);
     }
   }

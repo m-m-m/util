@@ -2,12 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import java.util.Locale;
-
 import javax.validation.MessageInterpolator;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
@@ -46,7 +45,7 @@ public class ValidatorJsr303Test extends Assert {
       @Override
       public String interpolate(String messageTemplate, Context context) {
 
-        return interpolate(messageTemplate, context, Locale.ROOT);
+        return interpolate(messageTemplate, context, AbstractNlsMessage.LOCALE_ROOT);
       }
 
     };

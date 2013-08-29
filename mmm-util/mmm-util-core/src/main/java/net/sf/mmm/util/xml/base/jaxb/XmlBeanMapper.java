@@ -12,7 +12,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.MarshalException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
@@ -34,8 +33,6 @@ import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
 import net.sf.mmm.util.xml.api.StaxUtil;
 import net.sf.mmm.util.xml.base.StaxUtilImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
-
-import com.sun.xml.internal.bind.IDResolver;
 
 /**
  * This class is a little helper for the simple but common use of JAXB where you simply want to
@@ -188,10 +185,12 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
       Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
       unmarshaller.setEventHandler(this);
       try {
-        unmarshaller.setProperty(IDResolver.class.getName(), new InternalValidatingIdResolver());
-      } catch (PropertyException e) {
+        unmarshaller.setProperty(com.sun.xml.internal.bind.IDResolver.class.getName(),
+            new InternalValidatingIdResolver());
+      } catch (Throwable e) {
         try {
-          getLogger().debug("No default JAXB implementation found - trying jaxb-impl (com.sun.xml.bind).");
+          getLogger().debug("No default JAXB implementation found ({0})- trying jaxb-impl (com.sun.xml.bind).",
+              e.toString());
           unmarshaller.setProperty("com.sun.xml.bind.IDResolver", new ExternalValidatingIdResolver());
         } catch (Exception e2) {
           getLogger().error("ID-validation will not work! Please check your JAXB implementation!", e2);

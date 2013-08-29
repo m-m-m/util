@@ -8,41 +8,12 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-core</artifactId>
-  <version>3.1.0</version>
+  <version>3.1.1</version>
   <packaging>jar</packaging>
   <name>util-core</name>
   <description>provides core utilities that fill gaps in the jdk.</description>
   <!-- the suggested java version for this project is java6, at least java5 is required -->
-  <properties>
-    <backport-version>1.0.0-SNAPSHOT</backport-version>
-  </properties>
   <profiles>
-    <profile>
-      <id>backport</id>
-      <activation>
-        <jdk>[1.5,1.7]</jdk>
-      </activation>
-      <dependencies>
-        <!-- backport for java less than 1.8 -->
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>mmm-util-backport-java.util.function</artifactId>
-          <version>${backport-version}</version>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.14.1</version>
-            <configuration>
-              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-version}/mmm-util-backport-java.util.function-${backport-version}.jar</argLine>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
     <profile>
       <id>java5</id>
       <activation>

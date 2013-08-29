@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 
@@ -70,7 +71,7 @@ public class NlsExceptionTest {
     String source = "bad boy";
     NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
     String message = "NullPointerException caused by \"" + source + "\"!";
-    Assert.assertEquals(message, e.getLocalizedMessage(Locale.ROOT));
+    Assert.assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
     NlsTemplateResolverImpl resolver = new NlsTemplateResolverImpl(new MyResourceBundle());
     resolver.initialize();
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";
@@ -80,7 +81,7 @@ public class NlsExceptionTest {
     checkException(e.getLocalizedMessage(), e, null, null);
 
     // test ROOT locale stacktrace
-    checkException(message, e, Locale.ROOT, resolver);
+    checkException(message, e, AbstractNlsMessage.LOCALE_ROOT, resolver);
 
     // test German stacktrace
     checkException(messageDe, e, Locale.GERMAN, resolver);

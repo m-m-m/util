@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -36,7 +37,9 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
     this.resourceBundle = resourceBundle;
     this.name = resourceBundle.getClass().getName();
     this.message2KeyMap = new HashMap<String, String>();
-    for (String key : resourceBundle.keySet()) {
+    Enumeration<String> keyEnum = resourceBundle.getKeys();
+    while (keyEnum.hasMoreElements()) {
+      String key = keyEnum.nextElement();
       Object message = resourceBundle.getObject(key);
       if (message instanceof String) {
         this.message2KeyMap.put((String) message, key);

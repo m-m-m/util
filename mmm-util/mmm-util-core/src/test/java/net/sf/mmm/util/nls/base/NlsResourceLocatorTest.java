@@ -60,9 +60,9 @@ public class NlsResourceLocatorTest {
     checkLocaleForInfix(resourceLocator, "_myLanguage_myCountry_myVariant", new Locale("myLanguage", "myCountry",
         "myVariant"));
     checkLocaleForInfix(resourceLocator, "___", new Locale("", "", ""));
-    checkLocaleForInfix(resourceLocator, null, Locale.ROOT);
-    checkLocaleForInfix(resourceLocator, "", Locale.ROOT);
-    checkLocaleForInfix(resourceLocator, "myInfo", Locale.ROOT);
+    checkLocaleForInfix(resourceLocator, null, AbstractNlsMessage.LOCALE_ROOT);
+    checkLocaleForInfix(resourceLocator, "", AbstractNlsMessage.LOCALE_ROOT);
+    checkLocaleForInfix(resourceLocator, "myInfo", AbstractNlsMessage.LOCALE_ROOT);
   }
 
 }

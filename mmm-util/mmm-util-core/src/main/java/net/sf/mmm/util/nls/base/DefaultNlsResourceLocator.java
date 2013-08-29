@@ -35,6 +35,7 @@ public class DefaultNlsResourceLocator extends AbstractComponent implements NlsR
   /**
    * {@inheritDoc}
    */
+  @Override
   public Locale getLocaleForInfix(String localeInfix) {
 
     if ((localeInfix != null) && (localeInfix.startsWith(Character.toString(SEPARATOR)))) {
@@ -62,12 +63,13 @@ public class DefaultNlsResourceLocator extends AbstractComponent implements NlsR
       }
       return new Locale(language, country, variant);
     }
-    return Locale.ROOT;
+    return AbstractNlsMessage.LOCALE_ROOT;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String[] getLocaleInfixes(Locale locale) {
 
     String[] infixes;
@@ -118,6 +120,7 @@ public class DefaultNlsResourceLocator extends AbstractComponent implements NlsR
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataResource findResource(Class<?> type, String extension, Locale locale) {
 
     DataResource resource = null;
@@ -142,6 +145,7 @@ public class DefaultNlsResourceLocator extends AbstractComponent implements NlsR
   /**
    * {@inheritDoc}
    */
+  @Override
   public DataResource findResource(String pathAndBasicName, String extension, Locale locale) {
 
     String[] infixes = getLocaleInfixes(locale);

@@ -140,14 +140,14 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       bundlePackage = bundleLocation.bundlePackage();
       bundleName = bundleLocation.bundleName();
     }
-    if (bundlePackage.isEmpty()) {
+    if (bundlePackage.length() == 0) {
       bundlePackage = bundleInterface.getPackage().getName();
     }
-    if (bundleName.isEmpty()) {
+    if (bundleName.length() == 0) {
       bundleName = bundleInterface.getSimpleName();
     }
     String bundleFqn;
-    if (bundlePackage.isEmpty()) {
+    if (bundlePackage.length() == 0) {
       bundleFqn = bundleName;
     } else {
       bundleFqn = bundlePackage + "." + bundleName;

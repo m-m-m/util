@@ -5,6 +5,7 @@ package net.sf.mmm.util.text.base;
 import java.util.Locale;
 
 import junit.framework.Assert;
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
 
@@ -71,7 +72,7 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
   public void testEnUs() {
 
     Hyphenator hyphenator = getHyphenator(Locale.US);
-    Assert.assertEquals(Locale.ROOT, hyphenator.getLocale());
+    Assert.assertEquals(AbstractNlsMessage.LOCALE_ROOT, hyphenator.getLocale());
 
     checkHyphenations(hyphenator, "word", "this", "a",
         "con-struc-tion",

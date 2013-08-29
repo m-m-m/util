@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 import org.junit.Test;
@@ -67,7 +68,7 @@ public class ValidatorRangeTest extends AbstractValidatorTest {
    */
   protected <V extends Comparable<V>> void verifyOutOfRange(V min, V max, ValidatorRange<V> validator, V valueOutOfRange) {
 
-    Locale locale = Locale.ROOT;
+    Locale locale = AbstractNlsMessage.LOCALE_ROOT;
     ValidationFailure failure = verifyNegativeValidation(validator, valueOutOfRange,
         "The value " + toString(valueOutOfRange, locale) + " needs to be in the range from " + toString(min, locale)
             + " to " + toString(max, locale) + ".");

@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated;
+import net.sf.mmm.util.nls.api.NlsAccess;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -49,10 +51,10 @@ public class SimpleEnumProviderTest extends Assert {
     assertEquals(Boolean.class.getName(), booleanDefinition.getValue());
     Formatter<Boolean> formatter = booleanDefinition.getFormatter();
     assertNotNull(formatter);
-    // might break with different locale if l10n stuff is in classpath
-    // in that case we would need to use the NlsBundleUtilCoreRoot
-    assertEquals("Yes", formatter.format(Boolean.TRUE));
-    assertEquals("No", formatter.format(Boolean.FALSE));
+    // we do not know the default locale for sure...
+    NlsBundleUtilCoreRoot bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
+    assertEquals(bundle.infoYes().getLocalizedMessage(), formatter.format(Boolean.TRUE));
+    assertEquals(bundle.infoNo().getLocalizedMessage(), formatter.format(Boolean.FALSE));
     List<Boolean> enumValues = provider.getEnumValues(booleanDefinition);
     assertNotNull(enumValues);
     assertEquals(2, enumValues.size());

@@ -56,6 +56,12 @@ public class CollectionReflectionUtilTest {
     BlockingQueue<String> blockingQueue = util.create(BlockingQueue.class);
     Assert.assertNotNull(blockingQueue);
     Assert.assertTrue(blockingQueue.isEmpty());
+  }
+
+  @Test
+  public void testCreateDeque() {
+
+    CollectionReflectionUtil util = getCollectionReflectionUtil();
     Deque<String> deque = util.create(Deque.class);
     Assert.assertNotNull(deque);
     Assert.assertTrue(deque.isEmpty());
@@ -85,7 +91,7 @@ public class CollectionReflectionUtilTest {
     }
     String[] arrayCopy;
     GenericBean<String[]> arrayBean = new GenericBean<String[]>();
-    GenericBean arrayReceiver = (GenericBean) arrayBean;
+    GenericBean arrayReceiver = arrayBean;
     result = util.set(array, 3, one, arrayReceiver, 1);
     Assert.assertNull(result);
     arrayCopy = arrayBean.getValue();

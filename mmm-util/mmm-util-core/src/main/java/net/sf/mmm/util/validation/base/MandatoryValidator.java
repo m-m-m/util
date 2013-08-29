@@ -43,7 +43,7 @@ public class MandatoryValidator implements ConstraintValidator<Mandatory, Object
       return false;
     }
     if (value instanceof String) {
-      return !((String) value).isEmpty();
+      return (((String) value).length() > 0);
     }
     if (value instanceof Collection) {
       return !((Collection<?>) value).isEmpty();
