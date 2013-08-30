@@ -15,7 +15,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.MapFactory;
-import net.sf.mmm.util.collection.base.AdvancedClassHierarchieMap;
+import net.sf.mmm.util.collection.base.AdvancedClassHierarchyMap;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -492,9 +492,9 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This inner class is an {@link AdvancedClassHierarchieMap} for {@link ComposedTargetTypeConverter}s.
+   * This inner class is an {@link AdvancedClassHierarchyMap} for {@link ComposedTargetTypeConverter}s.
    */
-  protected class TargetClass2ConverterMap extends AdvancedClassHierarchieMap<ComposedTargetTypeConverter<?>> {
+  protected class TargetClass2ConverterMap extends AdvancedClassHierarchyMap<ComposedTargetTypeConverter<?>> {
 
     /**
      * The constructor.

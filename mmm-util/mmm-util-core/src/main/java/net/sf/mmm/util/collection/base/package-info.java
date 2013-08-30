@@ -10,7 +10,7 @@
  * {@link net.sf.mmm.util.collection.base.HashKey}, 
  * {@link net.sf.mmm.util.collection.base.EmptyIterator},
  * {@link net.sf.mmm.util.collection.base.RankMap},
- * {@link net.sf.mmm.util.collection.base.AbstractClassHierarchieMap},
+ * {@link net.sf.mmm.util.collection.base.AbstractClassHierarchyMap},
  * and {@link net.sf.mmm.util.collection.base.AbstractIterator}.
  */
 package net.sf.mmm.util.collection.base;
