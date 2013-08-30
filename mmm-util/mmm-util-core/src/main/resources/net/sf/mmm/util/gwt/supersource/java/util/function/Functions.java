@@ -2,13 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package java.util.function;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Map;
 
 /**
  * This is the back-port for the according class of Java 1.8+.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -39,7 +37,7 @@ public final class Functions {
 
   /**
    * Returns a function which performs the first function followed by the second function.
-   * 
+   *
    * @param <T> is the generic type for inputs to the first function.
    * @param <U> is the generic type for results from first function and inputs to the second function. May be
    *        the same type as {@code <T>}.
@@ -67,10 +65,10 @@ public final class Functions {
 
   /**
    * Returns a constant output regardless of input.
-   * 
+   *
    * @param <T> is the generic type of the (ignored) input to the function.
    * @param <R> is the generic type of the result.
-   * 
+   *
    * @param constant The value to be returned by the {@link Function#apply(Object) apply} method.
    * @return a {@link Function} whose {@link Function#apply(Object) apply} method provides a constant result.
    */
@@ -89,7 +87,7 @@ public final class Functions {
   /**
    * A function that substitutes a single input value with a specified replacement. Input values are compared
    * using {@code equals()}.
-   * 
+   *
    * @param <T> The type of values.
    * @param subOut The input value to be substituted out.
    * @param subIn The replacement value for matching inputs.
@@ -112,52 +110,11 @@ public final class Functions {
   }
 
   /**
-   * Returns a new instance of {@code <R>} constructed with provided {@code <T>}.
-   * 
-   * @param <R> Type of output values from mapping
-   * @param <T> Type of input values to mapping
-   * @param clazzT The {@code Class} which defines objects of type {@code <T>}
-   * @param clazzR The {@code Class} which defines objects of type {@code <U>}
-   * @return a {@link Function} which creates instances of {@code <R>} using {@code <T>} as the constructor
-   *         parameter.
-   */
-  public static <T, R> Function<T, R> instantiate(Class<? extends T> clazzT, Class<? extends R> clazzR) {
-
-    if ((clazzT == null) || (clazzR == null)) {
-      throw new NullPointerException();
-    }
-
-    final Constructor<? extends R> constructor;
-    try {
-      constructor = clazzR.getConstructor(clazzT);
-    } catch (NoSuchMethodException noConstructor) {
-      throw new IllegalArgumentException("no constructor for " + clazzR.getSimpleName() + "(" + clazzT.getSimpleName()
-          + ")", noConstructor);
-    }
-
-    return new Function<T, R>() {
-
-      /**
-       * {@inheritDoc}
-       */
-      @Override
-      public R apply(T t) {
-
-        try {
-          return constructor.newInstance(t);
-        } catch (Exception ex) {
-          throw new UndeclaredThrowableException(ex);
-        }
-      }
-    };
-  }
-
-  /**
    * Returns a function which maps inputs according to the provided mapping. Attempting to apply a value not
    * from the given map will cause an {@code IllegalArgumentException} to be thrown. A copy is
    * <strong>not</strong> made of the map. Care should be taken to avoid changes to the map during operation
    * may produce results which violate the {@code apply} method contract.
-   * 
+   *
    * @param <R> output type from mapping operation
    * @param <T> input type to mapping operation
    * @param map provides the mappings from {@code <T>} to {@code <U>}
@@ -188,7 +145,7 @@ public final class Functions {
    * returned for all {@code <T>} keys not found in the map. A copy is <strong>not</strong> made of the apply
    * and care should be taken to avoid changes to the apply during operation may produce results which violate
    * the {@code apply} method contract.
-   * 
+   *
    * @param <T> input type to mapping function
    * @param <R> output type from mapping function
    * @param <RR> output type from mapping function
@@ -224,7 +181,7 @@ public final class Functions {
   /**
    * Map according to the provided predicate. Two output values are provided {@code forTrue} is returned if
    * the predicate returns {@code true} otherwise the {@code forFalse} value is returned.
-   * 
+   *
    * @param <T> input type to mapping function
    * @param <R> output type from mapping function
    * @param predicate decides which value {@code apply} method should return
