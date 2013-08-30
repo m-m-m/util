@@ -2,10 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.gwt.api;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
@@ -18,7 +24,10 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
 public class JavaScriptUtil {
 
   /** @see #getInstance() */
-  private static JavaScriptUtil instance = new JavaScriptUtil();
+  private static JavaScriptUtil instance = GWT.create(JavaScriptUtil.class);
+
+  /** @see #getFonts() */
+  private String[] fonts;
 
   /**
    * The constructor.
@@ -44,6 +53,21 @@ public class JavaScriptUtil {
   protected static void setInstance(JavaScriptUtil customInstance) {
 
     instance = customInstance;
+  }
+
+  /**
+   * @return the {@link List} of fonts available in the browser.
+   */
+  public List<String> getAvailableFonts() {
+
+    if (this.fonts == null) {
+      JsArrayString jsArray = getFonts();
+      this.fonts = new String[jsArray.length()];
+      for (int i = 0; i < this.fonts.length; i++) {
+        this.fonts[i] = jsArray.get(i);
+      }
+    }
+    return Arrays.asList(this.fonts);
   }
 
   //formatter:off
@@ -257,6 +281,127 @@ public class JavaScriptUtil {
    */
   public native void openBlob(JavaScriptBlob blob) /*-{
     window.open($wnd.URL.createObjectURL(blob), '_blank');
+  }-*/;
+
+  /**
+   * This method gets the {@link JavaScriptSelection} of the browser {@link Window}.
+   *
+   * @return the corresponding {@link JavaScriptSelection}.
+   */
+  public native JavaScriptSelection getSelection() /*-{
+    if ($wnd.getSelection) {
+      return $wnd.getSelection();
+    } else if ($wnd.document.getSelection) {
+      return $wnd.document.getSelection();
+     } else {
+      return $wnd.document.selection.createRange().text;
+    }
+  }-*/;
+
+  /**
+   * This method gets the {@link JavaScriptSelection} of the given <code>&lt;iframe&gt;</code> {@link Element}.
+   * The given <code>iframe</code> needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
+   * to ensure.
+   *
+   * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
+   * @return the corresponding {@link JavaScriptSelection}.
+   */
+  public native JavaScriptSelection getSelection(Element iframe) /*-{
+    if (iframe.contentWindow) {
+      if (iframe.contentWindow.getSelection) {
+        return iframe.contentWindow.getSelection();
+      } else if (iframe.contentWindow.document.getSelection) {
+        return iframe.contentWindow.document.getSelection();
+      } else {
+        return iframe.contentWindow.document.selection;
+      }
+    }
+
+if (window.getSelection) {  // all browsers, except IE before version 9
+                var selRange = window.getSelection ();
+                alert (selRange.toString ());
+            }
+            else {
+                if (document.selection) {        // Internet Explorer
+                    var textRange = document.selection.createRange ();
+                    alert (textRange.text);
+                }
+            }
+  }-*/;
+
+
+  /**
+   * This method gets the {@link Document} of a given <code>&lt;iframe&gt;</code> {@link Element}.
+   * The given <code>iframe</code> needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
+   * to ensure.
+   *
+   * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
+   * @return the corresponding {@link Document}.
+   */
+  public native Document getFrameDocument(Element iframe) /*-{
+    if (iframe.contentDocument) {
+      return iframe.contentDocument;
+    }
+    return iframe.contentWindow.document;
+  }-*/;
+
+  /**
+   * This method {@link Runnable#run() executes} the given <code>callback</code> when the given <code>iframe</code> is
+   * loaded.
+   *
+   * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
+   * @param callback is the callback to {@link Runnable#run() execute}.
+   */
+  public native void onLoadFrame(Element iframe, Runnable callback) /*-{
+    var onloadFunction = function(e) {
+      callback.@java.lang.Runnable::run()();
+    };
+    if ((iframe.contentDocument) || (iframe.contentWindow)) {
+      onloadFunction();
+      return;
+    }
+    if (iframe.addEventListener) {
+      iframe.addEventListener('load', onloadFunction, false);
+    } else if (iframe.attachEvent) {
+      iframe.attachEvent('onload', onloadFunction);
+    } else {
+      iframe.onload = onloadFunction;
+    }
+  }-*/;
+
+  /**
+   * @return an array with the sorted names of the fonts installed.
+   */
+  private native JsArrayString getFonts() /*-{
+    var fontSize = "80px ";
+    var fontStyles = ['monospace', 'serif'];
+    var defaultWidths = [];
+    //var fontStyle = "sans-serif";
+    var canvas = document.createElement("canvas");
+    var context2d = canvas.getContext("2d");
+    var text = "abcdefghijkllmnopqrstuvwxyz0123456789";
+    for (var styleIndex = 0; styleIndex < fontStyles.length; styleIndex++) {
+      context2d.font = fontSize + fontStyles[styleIndex];
+      defaultWidths[styleIndex] = context2d.measureText(text).width;
+    }
+
+    var fontList = [];
+    // fonts shall be in alphabetic order
+    var allFontNames = ['Arial', 'Baskerville', 'Calibri', 'Charter', 'Clean', 'Comic Sans MS', 'Copperplate', 'Courier',
+         'Fixed', 'Futura', 'Gadget', 'Georgia', 'Helvetica', 'Herculanum', 'Impact', 'Lucida', 'Lucida Console', 'Marlett',
+         'Osaka', 'Palatino', 'Papyrus', 'Sand', 'Symbol', 'Tahoma', 'Times', 'Trebuchet', 'Utopia', 'Verdana'];
+    for (var fontIndex = 0; fontIndex < allFontNames.length; fontIndex++) {
+      var font = allFontNames[fontIndex];
+      for (var styleIndex = 0; styleIndex < fontStyles.length; styleIndex++) {
+        context2d.font = fontSize + "'" + font + "'," + fontStyles[styleIndex];
+        if (context2d.measureText(text).width != defaultWidths[styleIndex]) {
+          fontList[fontList.length] = font;
+          break;
+        }
+      }
+    }
+    delete canvas;
+    return fontList;
   }-*/;
 
   //formatter:on

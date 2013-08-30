@@ -28,7 +28,7 @@ public class JavaScriptFile extends JavaScriptBlob implements FileItem {
    * {@inheritDoc}
    */
   @Override
-  public Object getId() {
+  public final Object getId() {
 
     return null;
   }

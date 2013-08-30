@@ -21,6 +21,9 @@ import org.junit.Test;
  */
 public class ValidatorJsr303Test extends Assert {
 
+  /**
+   * Test {@link ValidatorJsr303#validate(Object)} for mandatory field.
+   */
   @Test
   public void testValidatorJsr303() {
 
@@ -53,6 +56,7 @@ public class ValidatorJsr303Test extends Assert {
         .getValidator();
   }
 
+  @SuppressWarnings("javadoc")
   public class TestBean {
 
     @Mandatory

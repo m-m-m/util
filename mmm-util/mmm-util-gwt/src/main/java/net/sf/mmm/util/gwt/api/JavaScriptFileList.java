@@ -45,7 +45,7 @@ public class JavaScriptFileList extends JavaScriptObject {
   /**
    * @return this list as regular Java array.
    */
-  public JavaScriptFile[] toFileArray() {
+  public final JavaScriptFile[] toFileArray() {
 
     JavaScriptFile[] result = new JavaScriptFile[length()];
     for (int i = 0; i < result.length; i++) {

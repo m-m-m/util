@@ -3,6 +3,7 @@
 package net.sf.mmm.util.gwt.api;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.UnsafeNativeLong;
 
 /**
  * This is the {@link JavaScriptObject} representing a BLOB.
@@ -25,6 +26,7 @@ public class JavaScriptBlob extends JavaScriptObject {
   /**
    * @return the size of this BLOB in bytes.
    */
+  @UnsafeNativeLong
   public final native long getSize() /*-{
     return this.size;
   }-*/;
