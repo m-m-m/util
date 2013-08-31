@@ -5,13 +5,13 @@
 
   <source path="" includes="NlsBundleUtilCoreRoot.java"/>
   <source path="math" excludes="base/MathUtilImpl.java"/>
-  <source path="gwt"/>
-  <source path="concurrent/api" excludes="DequeFactory.java,BlockingQueueFactory.java,Concurrent*.java"/>
-  <source path="collection/base" excludes="Concurrent*.java,*Deque*.java"/>
+  <source path="gwt" excludes="base/rebind/*"/>
+  <source path="concurrent/api"/>
+  <source path="collection" excludes="**/*Concurrent*,**/*Deque*,**/*BlockingQueue*,base/*Hierarchy*,base/AbstractGenericTreeNode.java,base/AdvancedClassHierarchyMap.java,impl/CollectionFactoryManagerImpl.java"/>
   <!-- includes="AbstractIterator.java,SingleElementIterator.java,NodeCycle.java,NodeCycleException.java"/> -->
   <source path="date" includes="**/*Limited*,**/*Exception.java"/>
   <source path="reflect" includes="**/*Limited*"/>
-  <source path="component" excludes="impl/**"/>
+  <source path="component" excludes="impl/**,base/*Servlet*"/>
   <source path="scanner"/>
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
   <source path="lang" excludes="**/System*,**/BasicUtil*"/>
@@ -22,14 +22,13 @@
   <source path="validation"/>
   <source path="transferobject" excludes="base/TransferObjectUtilImpl.java"/>
   <source path="entity"/>
-  <source path="reflect/api" includes="GenericType.java,ReflectionUtilLimited.java,VisibilityModifier.java,ReflectionException.java"/>
+  <source path="reflect/api" includes="GenericType.java,GenericTypeFactory.java,ReflectionUtilLimited.java,VisibilityModifier.java,ReflectionException.java,InstantiationFailedException.java"/>
   <source path="reflect/base" includes="ReflectionUtilLimitedImpl.java,SimpleGenericTypeLimited.java"/>
   <source path="pojo/api"/>
   <source path="pojo/path/api" includes="PojoPropertyPath.java,TypedProperty.java"/>
   <source path="pojo/descriptor/api"/>
-  <source path="pojo/descriptor/base" includes="AbstractPojoDescriptor.java,AbstractPojoPropertyDescriptor.java,AbstractPojoDescriptorBuilderLimited.java,AbstractPojoDescriptorBuilderFactory.java,PojoDescriptorBuilderFactoryLimited.java,PojoProperty.java,PojoMap.java,accessor/AbstractPojoPropertyAccessor.java"/>
+  <source path="pojo/descriptor/base" includes="AbstractPojoDescriptor.java,AbstractPojoPropertyDescriptor.java,AbstractPojoDescriptorBuilderLimited.java,AbstractPojoDescriptorBuilderFactory.java,PojoDescriptorBuilderFactoryLimited.java,PojoProperty.java,PojoMap.java,accessor/AbstractPojoPropertyAccessor.java,accessor/AbstractPojoPropertyAccessorProxy.java"/>
   <source path="pojo/descriptor/impl" includes="AbstractPojoDescriptorImpl.java,PojoPropertyDescriptorImpl.java,accessor/AbstractPojoPropertyAccessorGetMethod.java,accessor/AbstractPojoPropertyAccessorMethodLimited.java,accessor/AbstractPojoPropertyAccessorSetMethod.java,accessor/PojoPropertyAccessorProxy*By*.java"/>
-  <source path="pojo" excludes="path/base/**/*,path/impl/**/*"/>
   <source path="value/api"/>
   <source path="value/base" includes="SimpleGenericValueConverterImpl.java,ValueConverterIdentity.java,AbstractSimpleValueConverter.java"/>
 

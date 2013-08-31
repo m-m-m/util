@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
+import java.lang.reflect.AccessibleObject;
+
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -27,6 +29,15 @@ public abstract class AbstractPojoPropertyAccessorSetMethod extends AbstractPojo
   public AbstractPojoPropertyAccessorSetMethod(String propertyName, GenericType<?> propertyType, Class<?> declaringClass) {
 
     super(propertyName, propertyType, declaringClass);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public AccessibleObject getAccessibleObject() {
+
+    return null;
   }
 
   /**

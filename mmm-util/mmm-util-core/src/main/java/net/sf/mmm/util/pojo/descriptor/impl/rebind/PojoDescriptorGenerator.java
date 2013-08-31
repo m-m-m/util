@@ -17,6 +17,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.AbstractPojoPropertyAccessorGetMethod;
 import net.sf.mmm.util.pojo.descriptor.impl.accessor.AbstractPojoPropertyAccessorSetMethod;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 import net.sf.mmm.util.reflect.base.SimpleGenericTypeLimited;
 
@@ -113,9 +114,15 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     generateSourcePublicMethodDeclaration(sourceWriter, inputType.getQualifiedSourceName(), "newInstance", "", false);
 
-    sourceWriter.print("return new ");
-    sourceWriter.print(inputType.getQualifiedSourceName());
-    sourceWriter.println("();");
+    if (inputType.isInterface() != null) {
+      sourceWriter.print("throw new ");
+      sourceWriter.println(InstantiationFailedException.class.getName());
+      sourceWriter.println("(getPojoClass());");
+    } else {
+      sourceWriter.print("return new ");
+      sourceWriter.print(inputType.getQualifiedSourceName());
+      sourceWriter.println("();");
+    }
 
     generateSourceCloseBlock(sourceWriter);
   }
@@ -264,7 +271,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
         this.sourceWriter.print("<?> ");
         this.superPropertyVariableDeclated = true;
       }
-      this.sourceWriter.print("superPropertyDescriptor = superDescriptor..getPropertyDescriptor(\"");
+      this.sourceWriter.print("superPropertyDescriptor = superDescriptor.getPropertyDescriptor(\"");
       this.sourceWriter.print(propertyDescriptor.getName());
       this.sourceWriter.println("\");");
       this.superPropertyDescriptorBlockGenerated = true;
