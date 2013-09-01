@@ -4,7 +4,7 @@ package net.sf.mmm.util.nls.impl;
 
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
-import net.sf.mmm.util.nls.base.NlsTemplateImpl;
+import net.sf.mmm.util.nls.base.NlsTemplateImplWithMessage;
 
 /**
  * This is an abstract base implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}
@@ -51,7 +51,7 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
     // ResourceBundleReverse reverseBundle = getReverseBundle(resourceBundle);
     String key = reversedBundle.getKey(internationalizedMessage);
     if (key != null) {
-      return new NlsTemplateImpl(reversedBundle.getName(), key);
+      return new NlsTemplateImplWithMessage(reversedBundle.getName(), key, internationalizedMessage);
     }
     return null;
   }
