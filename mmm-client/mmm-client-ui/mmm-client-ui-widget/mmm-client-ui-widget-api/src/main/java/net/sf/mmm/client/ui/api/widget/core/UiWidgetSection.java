@@ -19,7 +19,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public interface UiWidgetSection extends UiWidgetRegular, AttributeWriteLabel, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Section";
+  String STYLE_PRIMARY = "Section";
 
   /**
    * {@inheritDoc}

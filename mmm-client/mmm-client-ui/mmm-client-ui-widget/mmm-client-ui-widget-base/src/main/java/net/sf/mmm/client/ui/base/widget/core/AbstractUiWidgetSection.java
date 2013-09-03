@@ -28,7 +28,7 @@ public abstract class AbstractUiWidgetSection<ADAPTER extends UiWidgetAdapterSec
   public AbstractUiWidgetSection(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**

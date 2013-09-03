@@ -1,13 +1,18 @@
 /* Variables */
 @color-normal: #E0E0E0;
 @color-focus: #A0C0F0;
-@color-focus-gradient: lighten(@color-focus, 0%);
-@color-hover: lighten(@color-focus, 10%);
-@color-hover-gradient: lighten(@color-hover, 0%);
+@color-focus-gradient: darken(@color-focus, 10%);
+@color-hover: lighten(@color-focus, 15%);
+@color-hover-gradient: darken(@color-hover, 10%);
 @color-select: #C0F0F0;
-@color-border: #A0A0A0;
+@color-border: #808080;
+@color-border-top: lighten(@color-border, 40%);
+@color-border-left: lighten(@color-border, 30%);
+@color-border-bottom: darken(@color-border, 10%);
+@color-border-right: @color-border;
 @color-background: #FFFFFF;
-@background-em-color: darken(@color-background, 10%);
+@color-background-fieldview: #DDDDDD;
+@color-background-em: darken(@color-background, 10%);
 @color-invalid: #FFBBBB;
 
 @font-size: 14pt;
@@ -16,22 +21,48 @@
 @padding: 0.2em;
 @margin: @padding;
 
+/* Fonts */
+@font-face {
+  font-family: FontAwesome;
+  src: url('fontawesome-webfont.eot');
+  src: url('fontawesome-webfont.iefix.eot') format('embedded-opentype'), url('fontawesome-webfont.woff') format('woff'), url('fontawesome-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Animations */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+.Rotate {
+  animation: rotate 2s infinite linear;
+}
+
+
 /* Mixins */
 .bordered() {
-  border-color: @color-border;
+	border-top-color: @color-border-top;
+	border-left-color: @color-border-left;
+	border-right-color: @color-border-right;
+	border-bottom-color: @color-border-bottom;
   border-width: 1px;
 }
-.bordered3d() {
-	border-top: 1px solid lighten(@color-border, 30%);
-	border-left: 1px solid lighten(@color-border, 20%);
-	border-right: 1px solid @color-border;
-	border-bottom: 1px solid @color-border;
+.borderedInvers() {
+	border-top-color: @color-border-bottom;
+	border-left-color: @color-border-right;
+	border-right-color: @color-border-left;
+	border-bottom-color: @color-border-top;
+  border-width: 1px;
 }
 .gradient() {
   background-image: linear-gradient(to bottom, #FFFFFF, @color-normal);
 }
 .gradientActive() {
-  background-image: linear-gradient(to bottom, #FFFFFF, @color-normal);
+	.gradient;
   &:hover {
     background-image: linear-gradient(to bottom, #FFFFFF, @color-hover-gradient);
   }
@@ -52,13 +83,16 @@
 .highlighted() {
   .gradiented;
   .highlightBox;
-  box-shadow: 2px 2px 5px 0px darken(@color-normal, 10%);
 }
 .fancyButton() {
   border-style: solid;
   border-radius: @radius;
-  padding: @padding;
   font-size: 16pt;
+  margin: @margin;
+}
+.fontAwesome() {
+	font-family: FontAwesome;
+	font-size: 10pt;
 }
 
 /* Main styles */
@@ -67,16 +101,23 @@ body {
   margin: 0;
   padding: 0;
 }
-input {
-  font-size: @font-size;
-  padding-right: 1em;
-}
 
 *:focus {
   outline: none;
 }
 *::-moz-focus-inner {
   border: none;
+}
+input {
+  font-size: @font-size;
+  &:hover {
+    border-color: lighten(@color-hover, 20%);
+    background: @color-hover;
+  }
+  &:focus, &:active {
+    border-color: darken(@color-focus, 20%);
+    background: @color-focus;
+  }
 }
 input:invalid {
   box-shadow:none;
@@ -98,25 +139,144 @@ button {
     background: @color-focus;
   }
 }
+.Toolbar {
+	.bordered();
+  border-style: solid;
+	background: @color-background-em;
+}
+.ButtonGroup {
+  display: inline-block;
+  font-size: 0;
+}
+.ButtonGroup>.Button {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  &:first-child {
+    border-top-left-radius: @radius;
+    border-bottom-left-radius: @radius;
+    margin-left: 4px;
+  }
+  &:last-child {
+    border-top-right-radius: @radius;
+    border-bottom-right-radius: @radius;
+    margin-right: 4px;
+  }
+}
 .Button {
   .highlighted;
   .fancyButton;
-  border-style: solid;
-  border-radius: @radius;
   padding: @padding;
-  margin: 0.1em;
-  font-size: 16pt;
+}
+.ToggleButton.Pressed {
+	.borderedInvers;
+	background-image: linear-gradient(to bottom, darken(@color-normal, 30%), #FFFFFF);
+  &:hover {
+    background-image: linear-gradient(to bottom, @color-hover-gradient, #FFFFFF);
+  }
+  &:focus, &:active {
+    background-image: linear-gradient(to bottom, @color-focus-gradient, #FFFFFF);
+  }
 }
 
-input {
+.RichTextArea {
+  width: 100%;
   &:hover {
     border-color: lighten(@color-hover, 20%);
     background: @color-hover;
   }
-  &:focus, &:active {
+  &.Focused {
     border-color: darken(@color-focus, 20%);
     background: @color-focus;
   }
+}
+.Toolbar .Button {
+	.fontAwesome();
+	min-height: 1.8em;
+}
+.Bold:before {
+	content: '\F032';
+}
+.Italic:before {
+	content: '\F033';
+}
+.Underline:before {
+	content: '\F0CD';
+}
+.Strikethrough:before {
+	content: '\F0CC';
+}
+.Superscript:before {
+	content: '\F12B';
+}
+.Subscript:before {
+	content: '\F12C';
+}
+.AlignLeft:before {
+	content: '\F036';
+}
+.AlignCenter:before {
+	content: '\F037';
+}
+.AlignRight:before {
+	content: '\F038';
+}
+.AlignJustify:before {
+	content: '\F039';
+}
+.UnorderedList:before {
+	content: '\F0CA';
+}
+.OrderedList:before {
+	content: '\F0CB';
+}
+.InsertLink:before {
+	content: '\F0C1';
+}
+.InsertImage:before {
+	content: '\FFFF';
+}
+.FontFamily:before {
+	content: '\F031';
+}
+.FontSize:before {
+	content: '\F034';
+}
+.Indent:before {
+	content: '\F03C';
+}
+.Outdent:before {
+	content: '\F03B';
+}
+.TextColor:before {
+	content: 'T';
+}
+.TextColor {
+	color: red;
+}
+.BackgroundColor:before {
+	content: 'T';
+}
+.BackgroundColor {
+	background: cyan;
+}
+.InsertImage:before {
+	content: '\F03E';
+}
+.RemoveFormat:before {
+	content: 'T';
+	text-decoration: underline;
+}
+.RemoveFormat:after {
+	content: 'x';
+	font-size: .83em;
+	vertical-align: sub;
+}
+.Undo:before {
+	content: '\F0E2';
+}
+.Redo:before {
+	content: '\F01E';
 }
 
 .SearchField {
@@ -148,25 +308,35 @@ input {
 }
 
 .ButtonPanel {
-  /* background: @background-em-color; */
+  /* background: @color-background-em; */
   .Button {
     margin: @margin;
     min-width: 6em;
   }
 }
 
-.MiniButton {
-  font-family: monospaced;
+.CollapseButton {
+	.fontAwesome();
   padding: 0;
   margin: 0;
+}
+.CollapseButton>span:before {
+	content: '\F150';
+}
+.CollapseButton.Collapsed>span:before {
+	content: '\F152';
 }
 
 .Field {
   margin-left: 0.5em;
+  >input {
+	  width: 100%;
+  }
 }
 .FieldView {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
+  background: @color-background-fieldview;
 }
 .FieldLabel:after {
   content: ":";
@@ -176,7 +346,7 @@ input {
 }
 
 .Tree {
-  .bordered3d;
+  .bordered;
   border-style: solid;
   /* border-radius: @radius; */
 }
@@ -196,7 +366,7 @@ input {
   margin-left: 0;
 }
 .Header {
-	.bordered3d;
+	.bordered;
 	.gradientActive;
   display: block;
   padding: 0 0.5em;
@@ -207,13 +377,13 @@ input {
   border-bottom-style: solid;
   text-align: center;
   margin-bottom: 1em;
-  span {
+  >span {
     padding: 0 0.5em;
     position: relative;
     top: 0.5em;
     background: @color-background;
   }
-  button {
+  >button {
     padding: 0 0.2em;
     position: relative;
     top: 0.9em;

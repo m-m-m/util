@@ -35,7 +35,7 @@ public abstract class AbstractUiWidgetGridPanel<ADAPTER extends UiWidgetAdapterG
   public AbstractUiWidgetGridPanel(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**

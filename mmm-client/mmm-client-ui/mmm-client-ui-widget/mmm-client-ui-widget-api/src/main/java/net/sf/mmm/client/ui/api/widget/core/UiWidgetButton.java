@@ -2,12 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.core;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetClickable;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
- * This is the interface for an {@link UiWidgetRegular regular widget} that represents a <em>button</em>.<br/>
+ * This is the interface for an regular {@link UiWidgetAbstractButton button}.<br/>
  * Here you can see an example (with {@link #setLabel(String) label} "Click me"):
  * 
  * <pre>
@@ -17,9 +15,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetButton extends UiWidgetRegular, UiWidgetClickable, UiWidgetNative {
+public interface UiWidgetButton extends UiWidgetAbstractButton, UiWidgetNative {
 
-  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Button";
+  // nothing to add...
 
 }

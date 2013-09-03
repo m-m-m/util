@@ -31,6 +31,12 @@ import com.google.gwt.user.client.ui.Widget;
 public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
     AbstractUiWidgetAdapterWithEvents<WIDGET, EventAdapterGwt> implements AttributeWriteImage<UiWidgetImage> {
 
+  /**
+   * The tab index to remove from tab-order. Should actually be <code>-1</code>. See <a
+   * href="http://code.google.com/p/google-web-toolkit/issues/detail?id=8323">GWT bug 8323</a>.
+   */
+  protected static final int TAB_INDEX_NONE = -2;
+
   /** @see #setImage(UiWidgetImage) */
   private Image image;
 

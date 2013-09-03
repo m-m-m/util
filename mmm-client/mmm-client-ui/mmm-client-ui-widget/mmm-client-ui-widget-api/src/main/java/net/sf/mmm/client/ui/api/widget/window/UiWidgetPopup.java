@@ -18,6 +18,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 public interface UiWidgetPopup extends UiWidgetBaseWindow, AttributeWriteResizable, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Popup";
+  String STYLE_PRIMARY = "Popup";
 
 }

@@ -38,22 +38,22 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
     AttributeWriteValidationFailure, AttributeWriteTrimValue, UiWidgetActive {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Field";
+  String STYLE_PRIMARY = "Field";
 
   /**
    * The {@link #getPrimaryStyle() primary style} of the internal widget to display the {@link #getValue()
    * value} in {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view-mode}.
    */
-  String PRIMARY_STYLE_VIEW = "FieldView";
+  String STYLE_VIEW = "FieldView";
 
   /** The {@link #getPrimaryStyle() primary style} of the {@link #getFieldLabelWidget() field label widget}. */
-  String PRIMARY_STYLE_LABEL = "FieldLabel";
+  String STYLE_LABEL = "FieldLabel";
 
   /**
    * The {@link #addStyle(String) additional style} of the {@link #getFieldLabelWidget() field label widget}
    * if {@link #isMandatory() mandatory}.
    */
-  String ADDITIONAL_STYLE_LABEL_MANDATORY = "Mandatory";
+  String STYLE_MANDATORY = "Mandatory";
 
   /**
    * This method is like

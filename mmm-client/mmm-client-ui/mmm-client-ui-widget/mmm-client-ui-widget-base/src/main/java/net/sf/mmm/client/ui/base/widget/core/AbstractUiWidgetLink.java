@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLink;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetLink<ADAPTER extends UiWidgetAdapterLink> extends
-    AbstractUiWidgetClickable<ADAPTER> implements UiWidgetLink {
+    AbstractUiWidgetClickable<ADAPTER, Void> implements UiWidgetLink {
 
   /**
    * The constructor.
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetLink<ADAPTER extends UiWidgetAdapterLink> 
   public AbstractUiWidgetLink(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
 }

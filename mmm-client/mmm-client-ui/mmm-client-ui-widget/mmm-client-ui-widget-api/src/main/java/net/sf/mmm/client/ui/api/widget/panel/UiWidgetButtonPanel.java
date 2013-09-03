@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
  */
 public interface UiWidgetButtonPanel extends UiWidgetDynamicPanel<UiWidgetButton>, UiWidgetNative {
 
-  // nothing to add...
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String STYLE_PRIMARY = "ButtonPanel";
 
 }

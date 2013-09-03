@@ -1,10 +1,14 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
+package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
@@ -19,10 +23,13 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class MultiSelectionCheckbox extends Widget implements HasValue<Boolean> {
+public class MultiSelectionCheckbox extends Widget implements HasValue<Boolean>, HasChangeHandlers {
 
   /** The HTML input element. */
   private final InputElement inputElement;
+
+  /** @see #addValueChangeHandler(ValueChangeHandler) */
+  private HandlerRegistration changeHandlerRegistration;
 
   /**
    * The constructor.
@@ -39,10 +46,36 @@ public class MultiSelectionCheckbox extends Widget implements HasValue<Boolean> 
    * {@inheritDoc}
    */
   @Override
+  public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+
+    return addDomHandler(handler, ChangeEvent.getType());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Boolean> handler) {
 
-    // TODO Auto-generated method stub
-    return null;
+    if (this.changeHandlerRegistration == null) {
+      addClickHandler(new ClickHandler() {
+
+        @Override
+        public void onClick(ClickEvent event) {
+
+          ValueChangeEvent.fire(MultiSelectionCheckbox.this, getValue());
+        }
+      });
+      this.changeHandlerRegistration = addChangeHandler(new ChangeHandler() {
+
+        @Override
+        public void onChange(ChangeEvent event) {
+
+          ValueChangeEvent.fire(MultiSelectionCheckbox.this, getValue());
+        }
+      });
+    }
+    return addHandler(handler, ValueChangeEvent.getType());
   }
 
   /**
@@ -80,8 +113,11 @@ public class MultiSelectionCheckbox extends Widget implements HasValue<Boolean> 
   @Override
   public void setValue(Boolean checked, boolean fireEvents) {
 
+    boolean fire = fireEvents && (checked.booleanValue() != this.inputElement.isChecked());
     this.inputElement.setChecked(checked.booleanValue());
     // this.inputElement.setDefaultChecked(checked.booleanValue());
+    if (fire) {
+      ValueChangeEvent.fire(this, checked);
+    }
   }
-
 }

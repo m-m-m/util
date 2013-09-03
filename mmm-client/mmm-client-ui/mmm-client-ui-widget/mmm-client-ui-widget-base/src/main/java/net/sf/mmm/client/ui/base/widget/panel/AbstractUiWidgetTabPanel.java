@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetTabPanel<ADAPTER extends UiWidgetAdapterTa
   public AbstractUiWidgetTabPanel(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**

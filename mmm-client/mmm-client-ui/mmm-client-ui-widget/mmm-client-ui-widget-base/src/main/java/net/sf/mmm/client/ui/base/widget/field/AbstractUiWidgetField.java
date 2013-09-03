@@ -44,7 +44,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public AbstractUiWidgetField(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
     this.trimValue = true;
   }
 
@@ -237,9 +237,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
 
     if (this.fieldLabelWidget != null) {
       if (isMandatory()) {
-        this.fieldLabelWidget.addStyle(ADDITIONAL_STYLE_LABEL_MANDATORY);
+        this.fieldLabelWidget.addStyle(STYLE_MANDATORY);
       } else {
-        this.fieldLabelWidget.removeStyle(ADDITIONAL_STYLE_LABEL_MANDATORY);
+        this.fieldLabelWidget.removeStyle(STYLE_MANDATORY);
       }
     }
   }
@@ -262,8 +262,10 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
 
     if (this.fieldLabelWidget == null) {
       this.fieldLabelWidget = (AbstractUiWidgetLabel<?>) getWidgetAdapter().createLabel(getContext());
-      this.fieldLabelWidget.setLabel(this.fieldLabel);
-      this.fieldLabelWidget.setPrimaryStyle(PRIMARY_STYLE_LABEL);
+      if (this.fieldLabel != null) {
+        this.fieldLabelWidget.setLabel(this.fieldLabel);
+      }
+      this.fieldLabelWidget.setPrimaryStyle(STYLE_LABEL);
       this.fieldLabelWidget.setLabelledWidget(this);
       updateFieldLabel();
     }

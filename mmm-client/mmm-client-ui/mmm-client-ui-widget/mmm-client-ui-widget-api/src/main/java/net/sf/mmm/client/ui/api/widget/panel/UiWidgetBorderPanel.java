@@ -29,6 +29,6 @@ public interface UiWidgetBorderPanel extends UiWidgetPanel<UiWidgetRegular>,
     UiWidgetSingleMutableComposite<UiWidgetRegular>, AttributeWriteLabel, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "BorderPanel";
+  String STYLE_PRIMARY = "BorderPanel";
 
 }

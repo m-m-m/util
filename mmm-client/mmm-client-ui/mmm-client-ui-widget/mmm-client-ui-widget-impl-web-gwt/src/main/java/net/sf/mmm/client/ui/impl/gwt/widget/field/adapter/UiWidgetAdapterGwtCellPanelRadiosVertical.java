@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
-import com.google.gwt.user.client.ui.CellPanel;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -28,7 +28,7 @@ public class UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE> extends UiWidgetAd
    * {@inheritDoc}
    */
   @Override
-  protected CellPanel createActiveWidget() {
+  protected ComplexPanel doCreateActiveWidget() {
 
     return new VerticalPanel();
   }

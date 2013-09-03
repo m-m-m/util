@@ -30,7 +30,7 @@ public abstract class AbstractUiWidgetBorderPanel<ADAPTER extends UiWidgetAdapte
   public AbstractUiWidgetBorderPanel(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**

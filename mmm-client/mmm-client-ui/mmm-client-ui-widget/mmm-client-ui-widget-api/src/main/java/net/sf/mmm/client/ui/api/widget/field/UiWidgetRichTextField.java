@@ -7,17 +7,20 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteKeyboardFilter;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
- * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a rich text area
- * field. Such field is like {@link UiWidgetTextAreaField} but allows to enter rich text with markup. It should
- * support the user with a nice toolbar that allows to apply styles to the selected text (e.g. bold, italic,
- * blockquote, etc.). It should also support unordered and ordered lists as well as headings (at least four
- * levels). Also insertion of hyperlinks and images should be possible.
+ * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a rich
+ * text area field. Such field is like {@link UiWidgetTextAreaField} but allows to enter rich text with
+ * markup. It should support the user with a nice toolbar that allows to apply styles to the selected text
+ * (e.g. bold, italic, blockquote, etc.). It should also support unordered and ordered lists as well as
+ * headings (at least four levels). Also insertion of hyperlinks and images should be possible.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface UiWidgetRichTextField extends UiWidgetTextualInputField<String>, AttributeWriteKeyboardFilter,
     AttributeWriteHeightInRows, UiWidgetNative {
+
+  /** The {@link #getPrimaryStyle() primary style} of the internal widget with the rich text area. */
+  String STYLE_RICH_TEXT_AREA = "RichTextArea";
 
   /**
    * {@inheritDoc}
@@ -39,4 +42,14 @@ public interface UiWidgetRichTextField extends UiWidgetTextualInputField<String>
    */
   @Override
   void setValue(String value);
+
+  /**
+   * This method sets the {@link RichTextFeature} that should be available for the end-user. By default all
+   * {@link RichTextFeature}s are active. This method allows to reduce the offered features to those
+   * explicitly specified to this method. Then only these features are visible in the toolbar of this
+   * rich-text field and accessibly via keyboard shortcuts.
+   * 
+   * @param features are the {@link RichTextFeature}s that shall be available.
+   */
+  void setAvailableFeatures(RichTextFeature... features);
 }

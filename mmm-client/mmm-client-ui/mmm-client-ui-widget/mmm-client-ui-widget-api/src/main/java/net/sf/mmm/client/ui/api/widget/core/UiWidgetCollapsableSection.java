@@ -22,7 +22,13 @@ public interface UiWidgetCollapsableSection extends UiWidgetRegular, AttributeWr
     UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Section";
+  String STYLE_PRIMARY = "Section";
+
+  /** The {@link #hasStyle(String) style} for the button to collapse/expand. */
+  String STYLE_COLLAPSE_BUTTON = "CollapseButton";
+
+  /** The {@link #addStyle(String) additional style} for the button in case the section is collapsed. */
+  String STYLE_COLLAPSED = "Collapsed";
 
   /**
    * {@link #addCollapseHandler(net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse) Adds} a

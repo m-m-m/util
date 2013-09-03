@@ -4,7 +4,6 @@ package net.sf.mmm.client.ui.base.widget.core;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetClickable;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 
 /**
@@ -16,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButton> extends
-    AbstractUiWidgetClickable<ADAPTER> implements UiWidgetButton {
+    AbstractUiWidgetAbstractButton<ADAPTER, Void> implements UiWidgetButton {
 
   /**
    * The constructor.
@@ -26,7 +25,6 @@ public abstract class AbstractUiWidgetButton<ADAPTER extends UiWidgetAdapterButt
   public AbstractUiWidgetButton(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
   }
 
 }

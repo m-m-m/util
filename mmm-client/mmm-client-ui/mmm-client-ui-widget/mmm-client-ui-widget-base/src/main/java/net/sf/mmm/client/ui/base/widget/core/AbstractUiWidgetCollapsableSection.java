@@ -27,7 +27,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableS
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidgetAdapterCollapsableSection> extends
-    AbstractUiWidgetClickable<ADAPTER> implements UiWidgetCollapsableSection {
+    AbstractUiWidgetClickable<ADAPTER, Void> implements UiWidgetCollapsableSection {
 
   /** @see #isCollapsed() */
   private boolean collapsed;
@@ -43,7 +43,7 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
   public AbstractUiWidgetCollapsableSection(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
     this.collapsed = false;
   }
 

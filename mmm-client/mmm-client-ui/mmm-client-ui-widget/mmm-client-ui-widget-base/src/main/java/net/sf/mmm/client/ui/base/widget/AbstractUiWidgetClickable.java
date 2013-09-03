@@ -14,12 +14,13 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterClickable;
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
+ * @param <VALUE> is the generic type of the {@link #getValue() value}. Use {@link Void} for no value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterClickable> extends
-    AbstractUiWidgetActive<ADAPTER, Void> implements UiWidgetClickable {
+public abstract class AbstractUiWidgetClickable<ADAPTER extends UiWidgetAdapterClickable, VALUE> extends
+    AbstractUiWidgetActive<ADAPTER, VALUE> implements UiWidgetClickable {
 
   /** @see #getLabel() */
   private String label;

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
+import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
@@ -54,6 +55,15 @@ public class UiWidgetAdapterTestStringField extends UiWidgetAdapterTestField<Str
    */
   @Override
   public void setHeightInRows(int rows) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAvailableFeatures(RichTextFeature... features) {
 
     verifyNotDisposed();
   }

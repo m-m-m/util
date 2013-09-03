@@ -20,6 +20,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public interface UiWidgetLink extends UiWidgetRegular, UiWidgetClickable, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Link";
+  String STYLE_PRIMARY = "Link";
 
 }

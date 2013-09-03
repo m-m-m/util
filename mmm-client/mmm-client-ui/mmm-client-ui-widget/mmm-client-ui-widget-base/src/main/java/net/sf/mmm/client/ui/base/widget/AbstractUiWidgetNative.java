@@ -763,23 +763,36 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    */
   private int getIndexOfStyle(String style) {
 
+    return getIndexOfStyle(this.styles, style);
+  }
+
+  /**
+   * @see #getIndexOfStyle(String)
+   * 
+   * @param allStyles is the {@link String} with all current styles separated with whitespaces.
+   * @param style is the single style to check.
+   * @return the start-index of the given <code>style</code> in <code>allStyles</code> or <code>-1</code> if
+   *         NOT present.
+   */
+  public static int getIndexOfStyle(String allStyles, String style) {
+
     int length = style.length();
-    int index = this.styles.indexOf(style);
+    int index = allStyles.indexOf(style);
     while (index >= 0) {
       boolean validStart = true;
       int end = index + length;
       if (index > 0) {
-        char c = this.styles.charAt(index - 1);
+        char c = allStyles.charAt(index - 1);
         if (c != ' ') {
           validStart = false;
         }
       }
       if (validStart) {
-        if ((end == this.styles.length()) || (this.styles.charAt(end) == ' ')) {
+        if ((end == allStyles.length()) || (allStyles.charAt(end) == ' ')) {
           return index;
         }
       }
-      index = this.styles.indexOf(style, end);
+      index = allStyles.indexOf(style, end);
     }
     return -1;
   }

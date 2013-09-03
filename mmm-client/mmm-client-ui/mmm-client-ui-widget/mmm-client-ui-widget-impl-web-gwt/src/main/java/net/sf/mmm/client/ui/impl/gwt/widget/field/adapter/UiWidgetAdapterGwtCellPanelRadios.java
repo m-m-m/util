@@ -12,24 +12,26 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsFiel
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwtClickToChange;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.TakesValue;
-import com.google.gwt.user.client.ui.CellPanel;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.RadioButton;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterOptionsField} using GWT based on {@link CellPanel} and
- * {@link RadioButton}s.
+ * This is the implementation of {@link UiWidgetAdapterOptionsField} using GWT based on a {@link ComplexPanel}
+ * and {@link RadioButton}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value.
  */
 public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
-    UiWidgetAdapterGwtField<CellPanel, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE> {
+    UiWidgetAdapterGwtField<ComplexPanel, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE>, ClickHandler {
 
   /** @see #setOptions(List) */
   private final List<RadioButton> radioButtons;
@@ -115,6 +117,25 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
    * {@inheritDoc}
    */
   @Override
+  protected final ComplexPanel createActiveWidget() {
+
+    ComplexPanel panel = doCreateActiveWidget();
+    // Element element = panel.getElement();
+    // element.setAttribute("tabindex", "0");
+    // Roles.getRadiogroupRole().set(element);
+    return panel;
+  }
+
+  /**
+   * @see #createActiveWidget()
+   * @return the new {@link #getActiveWidget() active widget}.
+   */
+  protected abstract ComplexPanel doCreateActiveWidget();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setOptions(List<String> options) {
 
     for (RadioButton rb : this.radioButtons) {
@@ -126,13 +147,17 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
     for (String title : options) {
       RadioButton rb = new RadioButton(this.groupId, title);
       if (first) {
+        rb.setTabIndex(0);
         if (this.accessKey != ACCESS_KEY_NONE) {
           rb.setAccessKey(this.accessKey);
         }
         first = false;
+      } else {
+        rb.setTabIndex(-2);
       }
-      getToplevelWidget().add(rb);
+      getActiveWidget().add(rb);
       this.radioButtons.add(rb);
+      rb.addClickHandler(this);
     }
     applyEventAdapter(getEventAdapter());
     // registerChangeEventAdapter();
@@ -230,6 +255,21 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
     this.accessKey = accessKey;
     if (this.radioButtons.size() > 0) {
       this.radioButtons.get(0).setAccessKey(accessKey);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void onClick(ClickEvent event) {
+
+    for (RadioButton rb : this.radioButtons) {
+      int tabIndex = -1;
+      if (rb.getValue().booleanValue()) {
+        tabIndex = 0;
+      }
+      rb.setTabIndex(tabIndex);
     }
   }
 

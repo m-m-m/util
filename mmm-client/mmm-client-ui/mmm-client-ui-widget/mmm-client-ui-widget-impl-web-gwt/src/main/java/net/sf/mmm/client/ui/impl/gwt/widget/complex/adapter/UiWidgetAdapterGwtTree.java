@@ -9,20 +9,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.aria.role.Role;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
-import net.sf.mmm.client.ui.api.widget.UiWidget;
+import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTreeNode;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.MultiSelectionCheckbox;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.adapter.MultiSelectionCheckbox;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -229,13 +238,32 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    * {@inheritDoc}
    */
   @Override
-  public UiWidget getTreeNodeWidget(NODE node) {
+  public UiWidgetTreeNode<NODE> getTreeNodeWidget(NODE node) {
 
     TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(node);
-    if (treeNodeAdapter != null) {
-      return treeNodeAdapter.widget;
+    return treeNodeAdapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void collapseAllNodes() {
+
+    for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+      adapter.setState(false);
     }
-    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void expandNodes() {
+
+    for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+      adapter.setState(true);
+    }
   }
 
   /**
@@ -264,7 +292,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    */
   private TreeNodeAdapter createTreeNodeAdapter(NODE node) {
 
-    UiWidget widget = this.treeNodeRenderer.create(getUiWidget().getContext());
+    UiWidgetRegular widget = this.treeNodeRenderer.create(getUiWidget().getContext());
     TreeNodeAdapter treeNodeAdapter = new TreeNodeAdapter(node, widget);
     return treeNodeAdapter;
   }
@@ -354,6 +382,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     if (this.tree == null) {
       this.tree = new Tree();
+      this.tree.setTabIndex(-2);
       OpenHandler<TreeItem> openHandler = new OpenHandler<TreeItem>() {
 
         /**
@@ -427,14 +456,17 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   /**
    * This inner class adapts from {@literal <NODE>} to {@link TreeItem}.
    */
+  // ATTENTION: This is actually a little dangerous if GWT TreeItem changes on GWT update as it might clash
+  // with our own methods. But adding a full-fledged widget and move this into another adapter abstraction per
+  // node would be too much overhead and cause bad performance...
   protected class TreeNodeAdapter extends TreeItem implements Consumer<List<NODE>>, ValueChangeHandler<Boolean>,
-      ClickHandler {
+      ClickHandler, UiWidgetTreeNode<NODE> {
 
     /** @see #getNode() */
     private final NODE node;
 
     /** @see #getWidget() */
-    private final UiWidget widget;
+    private final UiWidgetRegular nodeWidget;
 
     /** @see #loadChildren() */
     private boolean loaded;
@@ -453,7 +485,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       super();
       this.loaded = true;
       this.node = null;
-      this.widget = null;
+      this.nodeWidget = null;
       this.widgetPanel = null;
     }
 
@@ -461,12 +493,12 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * The constructor.
      * 
      * @param node is the unwrapped node (business object).
-     * @param widget is the {@link UiWidget} rendering this node.
+     * @param widget is the {@link UiWidgetRegular} rendering this node.
      */
-    public TreeNodeAdapter(NODE node, UiWidget widget) {
+    public TreeNodeAdapter(NODE node, UiWidgetRegular widget) {
 
       super();
-      this.widget = widget;
+      this.nodeWidget = widget;
       this.node = node;
       switch (UiWidgetAdapterGwtTree.this.selectionMode) {
         case SINGLE_SELECTION:
@@ -490,15 +522,8 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @SuppressWarnings({ "unchecked", "rawtypes" })
     protected void updateNode() {
 
-      ((UiTreeNodeRenderer) UiWidgetAdapterGwtTree.this.treeNodeRenderer).assignNodeToWidget(this.node, this.widget);
-    }
-
-    /**
-     * @return the node
-     */
-    public NODE getNode() {
-
-      return this.node;
+      ((UiTreeNodeRenderer) UiWidgetAdapterGwtTree.this.treeNodeRenderer)
+          .assignNodeToWidget(this.node, this.nodeWidget);
     }
 
     /**
@@ -573,7 +598,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.multiSelectionCheckbox = new MultiSelectionCheckbox();
       this.multiSelectionCheckbox.addClickHandler(this);
       this.widgetPanel.add(this.multiSelectionCheckbox);
-      this.widgetPanel.add(getToplevelWidget(this.widget));
+      this.widgetPanel.add(getToplevelWidget(this.nodeWidget));
       setWidget(this.widgetPanel);
     }
 
@@ -605,6 +630,404 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
         this.widgetPanel.removeStyleName(style);
       }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiWidgetRegular getNodeWidget() {
+
+      return this.nodeWidget;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCollapsed() {
+
+      return !getState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCollapsed(boolean collapsed) {
+
+      setState(!collapsed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTooltip(String tooltip) {
+
+      setTitle(tooltip);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTooltip() {
+
+      return getTitle();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setId(String id) {
+
+      getElement().setId(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+
+      return getElement().getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiMode getMode() {
+
+      return this.nodeWidget.getMode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMode(UiMode mode) {
+
+      this.nodeWidget.setMode(mode);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setModeFixed(UiMode mode) {
+
+      this.nodeWidget.setModeFixed(mode);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiMode getModeFixed() {
+
+      return this.nodeWidget.getModeFixed();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiWidgetComposite<?> getParent() {
+
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NODE getValue() {
+
+      return this.node;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEnabled(boolean enabled) {
+
+      // TODO hohwille
+      this.nodeWidget.setEnabled(enabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEnabled() {
+
+      return this.nodeWidget.isEnabled();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dispose() {
+
+      this.nodeWidget.dispose();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDisposed() {
+
+      return this.nodeWidget.isDisposed();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isVisibleRecursive() {
+
+      if (!getUiWidget().isVisibleRecursive()) {
+        return false;
+      }
+      return isVisible();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrimaryStyle(String primaryStyle) {
+
+      setStylePrimaryName(primaryStyle);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStyles(String styles) {
+
+      super.setStyleName(styles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiContext getContext() {
+
+      return getUiWidget().getContext();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean validate(ValidationState state) {
+
+      return this.nodeWidget.validate(state);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addEventHandler(UiHandlerEvent handler) {
+
+      this.nodeWidget.addEventHandler(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean removeEventHandler(UiHandlerEvent handler) {
+
+      return this.nodeWidget.removeEventHandler(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStyles() {
+
+      return getStyleName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean addStyle(String style) {
+
+      super.addStyleName(style);
+      return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean removeStyle(String style) {
+
+      removeStyleName(style);
+      return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPrimaryStyle() {
+
+      return getStylePrimaryName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasStyle(String style) {
+
+      return (AbstractUiWidgetNative.getIndexOfStyle(getStyles(), style) >= 0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Role getAriaRole() {
+
+      return this.nodeWidget.getAriaRole();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Length getWidth() {
+
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Length getHeight() {
+
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isModified() {
+
+      return this.nodeWidget.isModified();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWidth(Length width) {
+
+      setWidth(width.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setHeight(Length height) {
+
+      setHeight(height.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSize(Length width, Length height) {
+
+      setWidth(width);
+      setHeight(height);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AttributeWriteFlagAdvanced getVisibleFlag() {
+
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clearMessages() {
+
+      this.nodeWidget.clearMessages();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setHeightInPercent(double heightInPercent) {
+
+      setHeight(Length.valueOfPercent(heightInPercent));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setHeightInPixel(double heightInPixel) {
+
+      setHeight(Length.valueOfPixel(heightInPixel));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWidthInPercent(double widthInPercent) {
+
+      setWidth(Length.valueOfPercent(widthInPercent));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWidthInPixel(double widthInPixel) {
+
+      setWidth(Length.valueOfPixel(widthInPixel));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSize(double width, double height, SizeUnit unit) {
+
+      setSize(new Length(width, unit), new Length(height, unit));
+    }
+
   }
 
   /**

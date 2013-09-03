@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemClic
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  */
 public abstract class AbstractUiWidgetMenuItemClickable<ADAPTER extends UiWidgetAdapterMenuItemClickable> extends
-    AbstractUiWidgetClickable<ADAPTER> implements UiWidgetMenuItemClickable {
+    AbstractUiWidgetClickable<ADAPTER, Void> implements UiWidgetMenuItemClickable {
 
   /**
    * The constructor.

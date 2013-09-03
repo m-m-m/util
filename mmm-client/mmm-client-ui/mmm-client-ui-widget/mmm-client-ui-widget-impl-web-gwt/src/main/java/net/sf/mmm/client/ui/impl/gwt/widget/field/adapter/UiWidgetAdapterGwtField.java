@@ -155,7 +155,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     if (this.widgetViewMode == null) {
       this.widgetViewMode = createViewWidget();
-      this.widgetViewMode.setStylePrimaryName(UiWidgetField.PRIMARY_STYLE_VIEW);
+      this.widgetViewMode.setStylePrimaryName(UiWidgetField.STYLE_VIEW);
       getToplevelWidget().add(this.widgetViewMode);
     }
     return this.widgetViewMode;

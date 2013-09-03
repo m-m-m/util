@@ -19,9 +19,6 @@ import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNat
 public class UiWidgetCustomButtonPanel extends UiWidgetCustomCompositeNoValue<UiWidgetButton, UiWidgetHorizontalPanel>
     implements UiWidgetButtonPanel {
 
-  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  public static final String PRIMARY_STYLE = "ButtonPanel";
-
   /**
    * The constructor.
    * 
@@ -30,7 +27,7 @@ public class UiWidgetCustomButtonPanel extends UiWidgetCustomCompositeNoValue<Ui
   public UiWidgetCustomButtonPanel(UiContext context) {
 
     super(context, context.getWidgetFactory().create(UiWidgetHorizontalPanel.class));
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**

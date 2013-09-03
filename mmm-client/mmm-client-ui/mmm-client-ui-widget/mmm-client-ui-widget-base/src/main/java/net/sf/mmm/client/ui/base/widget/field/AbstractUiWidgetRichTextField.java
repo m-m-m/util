@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 
@@ -17,6 +18,9 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextFie
 public abstract class AbstractUiWidgetRichTextField<ADAPTER extends UiWidgetAdapterRichTextField> extends
     AbstractUiWidgetTextAreaFieldBase<ADAPTER> implements UiWidgetRichTextField {
 
+  /** @see #setAvailableFeatures(RichTextFeature...) */
+  private RichTextFeature[] availableFeatures;
+
   /**
    * The constructor.
    * 
@@ -25,6 +29,30 @@ public abstract class AbstractUiWidgetRichTextField<ADAPTER extends UiWidgetAdap
   public AbstractUiWidgetRichTextField(UiContext context) {
 
     super(context);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    if (this.availableFeatures != null) {
+      adapter.setAvailableFeatures(this.availableFeatures);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAvailableFeatures(RichTextFeature... features) {
+
+    this.availableFeatures = features;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setAvailableFeatures(features);
+    }
   }
 
 }

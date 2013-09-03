@@ -19,6 +19,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetLinkGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetSectionGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetSlotGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetTabGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetToggleButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboBoxGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
@@ -67,6 +68,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     // core
     register(new UiWidgetImageGwt.Factory());
     register(new UiWidgetButtonGwt.Factory());
+    register(new UiWidgetToggleButtonGwt.Factory());
     register(new UiWidgetLabelGwt.Factory());
     register(new UiWidgetLinkGwt.Factory());
     register(new UiWidgetSectionGwt.Factory());

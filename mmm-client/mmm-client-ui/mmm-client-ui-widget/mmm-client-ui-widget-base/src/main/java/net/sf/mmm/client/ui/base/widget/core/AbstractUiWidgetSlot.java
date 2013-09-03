@@ -27,7 +27,7 @@ public abstract class AbstractUiWidgetSlot<ADAPTER extends UiWidgetAdapterSlot> 
   public AbstractUiWidgetSlot(UiContext context) {
 
     super(context);
-    setPrimaryStyle(PRIMARY_STYLE);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
 }

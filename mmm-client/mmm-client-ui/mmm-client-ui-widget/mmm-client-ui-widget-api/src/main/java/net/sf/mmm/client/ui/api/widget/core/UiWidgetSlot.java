@@ -18,6 +18,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 public interface UiWidgetSlot extends UiWidgetSingleMutableComposite<UiWidgetRegular>, UiWidgetRegular, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Slot";
+  String STYLE_PRIMARY = "Slot";
 
 }

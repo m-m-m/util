@@ -24,7 +24,7 @@ public interface UiWidgetTabPanel extends UiWidgetDynamicPanel<UiWidgetTab>, UiW
     UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "TabPanel";
+  String STYLE_PRIMARY = "TabPanel";
 
   /**
    * This method adds the given {@link UiWidgetRegular} as new tab on the right of all existing tabs. This is

@@ -64,6 +64,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   protected Class<VALUE> getValueClass() {
 

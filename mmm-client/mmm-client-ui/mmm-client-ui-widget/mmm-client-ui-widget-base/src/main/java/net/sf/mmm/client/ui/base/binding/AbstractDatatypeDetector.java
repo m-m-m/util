@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.sf.mmm.util.lang.api.Datatype;
+
 /**
  * This is the abstract base implementation of {@link DatatypeDetector}.
  * 
@@ -59,6 +61,7 @@ public abstract class AbstractDatatypeDetector implements DatatypeDetector {
     registerDatatype(Number.class);
     registerDatatype(Date.class);
     // registerDatatype(Calendar.class);
+    registerDatatype(Datatype.class);
   }
 
   /**

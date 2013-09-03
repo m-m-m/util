@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
+import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
+
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
  * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField}.
@@ -11,6 +13,11 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
  */
 public interface UiWidgetAdapterRichTextField extends UiWidgetAdapterTextAreaFieldBase {
 
-  // nothing to add
+  /**
+   * @see net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField
+   * 
+   * @param features are the available {@link RichTextFeature}s.
+   */
+  void setAvailableFeatures(RichTextFeature... features);
 
 }

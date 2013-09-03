@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.api.event.EventType;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetAbstractButton;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 
@@ -24,12 +26,6 @@ import com.google.gwt.user.client.ui.InlineLabel;
  */
 public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidgetActive<FlowPanel> implements
     UiWidgetAdapterCollapsableSection {
-
-  /** The Label-Text to collapse. */
-  private static final String LABEL_COLLAPSE = "\u2212";
-
-  /** The Label-Text to collapse. */
-  private static final String LABEL_EXPAND = "+";
 
   /** The hyperlink with the expand/collapse icon. */
   private Button toggleButton;
@@ -56,8 +52,9 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
 
     FlowPanel flowPanel = new FlowPanel();
     this.collapsed = false;
-    this.toggleButton = new Button(LABEL_COLLAPSE);
-    this.toggleButton.setStylePrimaryName("MiniButton");
+    this.toggleButton = new Button("<span></span>");
+    this.toggleButton.setStylePrimaryName(UiWidgetAbstractButton.STYLE_PRIMARY);
+    this.toggleButton.addStyleName(UiWidgetCollapsableSection.STYLE_COLLAPSE_BUTTON);
     this.toggleButton.setTitle(getBundle().tooltipCollapse().getLocalizedMessage());
     ClickHandler handler;
     handler = new ClickHandler() {
@@ -110,11 +107,11 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
     EventType eventType;
     if (newCollapsed) {
       eventType = EventType.COLLAPSE;
-      this.toggleButton.setText(LABEL_EXPAND);
+      this.toggleButton.addStyleName(UiWidgetCollapsableSection.STYLE_COLLAPSED);
       this.toggleButton.setTitle(getBundle().tooltipExpand().getLocalizedMessage());
     } else {
       eventType = EventType.EXPAND;
-      this.toggleButton.setText(LABEL_COLLAPSE);
+      this.toggleButton.removeStyleName(UiWidgetCollapsableSection.STYLE_COLLAPSED);
       this.toggleButton.setTitle(getBundle().tooltipCollapse().getLocalizedMessage());
     }
     this.collapsed = newCollapsed;

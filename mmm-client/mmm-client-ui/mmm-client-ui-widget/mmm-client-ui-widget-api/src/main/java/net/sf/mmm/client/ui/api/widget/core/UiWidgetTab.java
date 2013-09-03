@@ -27,6 +27,6 @@ public interface UiWidgetTab extends UiWidgetSingleMutableComposite<UiWidgetRegu
     AttributeWriteImage<UiWidgetImage>, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Tab";
+  String STYLE_PRIMARY = "Tab";
 
 }
