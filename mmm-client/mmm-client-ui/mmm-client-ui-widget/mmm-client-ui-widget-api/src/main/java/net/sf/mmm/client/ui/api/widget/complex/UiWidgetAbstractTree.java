@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
  * This is the interface for a {@link UiWidgetRegular regular widget} that represents a <em>tree</em>. Such
@@ -44,24 +46,36 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, Ui
   void setTreeModel(UiTreeModel<NODE> model);
 
   /**
-   * This method sets the {@link UiTreeNodeRenderer} used to render the {@link UiWidget}s for an individual
-   * {@literal <NODE>}.
+   * This method sets the {@link UiTreeNodeRenderer} used to render the {@link UiWidgetRegular widgets} for an
+   * individual {@literal <NODE>}.
    * 
    * @param renderer is the {@link UiTreeNodeRenderer}.
    */
   void setTreeNodeRenderer(UiTreeNodeRenderer<NODE, ?> renderer);
 
   /**
-   * This method gets the {@link UiWidget} for the given {@literal <NODE>}. Please note that you may need to
-   * cast to the {@link UiWidget}-type according to your {@link UiTreeNodeRenderer}.
+   * This method gets the {@link UiWidgetTreeNode} for the given {@literal <NODE>}. It contains a
+   * {@link UiWidgetTreeNode#getNodeWidget() node widget} that was created by the {@link UiTreeNodeRenderer}.
+   * Further you can {@link UiWidgetTreeNode#setCollapsed(boolean) collapse or expand} the node.
    * 
    * @see #setTreeNodeRenderer(UiTreeNodeRenderer)
    * 
    * @param node is the {@literal <NODE>}.
-   * @return the according {@link UiWidget} or <code>null</code> if the given <code>node</code> is NOT in this
-   *         tree.
+   * @return the according {@link UiWidgetTreeNode} or <code>null</code> if the given <code>node</code> is NOT
+   *         in this tree.
    */
-  UiWidget getTreeNodeWidget(NODE node);
+  UiWidgetTreeNode<NODE> getTreeNodeWidget(NODE node);
+
+  /**
+   * This method collapses all nodes.
+   */
+  void collapseAllNodes();
+
+  /**
+   * This method expands all nodes that have already been
+   * {@link UiTreeModel#getChildrenAsync(Object, Consumer) loaded}.
+   */
+  void expandNodes();
 
   /**
    * This is the interface for the model for a {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree}.
@@ -96,25 +110,45 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, Ui
   }
 
   /**
-   * The renderer responsible to {@link #create(net.sf.mmm.client.ui.api.UiContext) create} widgets and
-   * {@link #assignNodeToWidget(Object, UiWidget) assign} a {@literal <NODE>} to them.
+   * This is the interface for the main widget representing a node of the tree.
    * 
-   * @param <NODE> is the generic type of the tree-nodes.
-   * @param <WIDGET> is the {@link UiWidget} used to render a {@literal <NODE>}.
+   * @param <NODE> is the generic type of the {@link #getValue() node data}.
    */
-  interface UiTreeNodeRenderer<NODE, WIDGET extends UiWidget> extends UiSingleWidgetFactory<WIDGET> {
+  interface UiWidgetTreeNode<NODE> extends UiWidget, AttributeWriteCollapsed, AttributeReadValue<NODE> {
 
     /**
-     * This method assigns the given {@literal <NODE>} to the given {@link UiWidget}.<br/>
+     * Please note that you may need to cast to the {@link UiWidgetRegular}-type according to your
+     * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer}.
+     * 
+     * @see UiWidgetAbstractTree#setTreeNodeRenderer(UiTreeNodeRenderer)
+     * 
+     * @return the {@link UiWidgetRegular regular widget} used to render the node data.
+     */
+    UiWidgetRegular getNodeWidget();
+
+  }
+
+  /**
+   * The renderer responsible to {@link #create(net.sf.mmm.client.ui.api.UiContext) create} widgets and
+   * {@link #assignNodeToWidget(Object, UiWidgetRegular) assign} a {@literal <NODE>} to them.
+   * 
+   * @param <NODE> is the generic type of the tree-nodes.
+   * @param <WIDGET> is the generic type of the {@link UiWidgetRegular} used to render a {@literal <NODE>}.
+   */
+  interface UiTreeNodeRenderer<NODE, WIDGET extends UiWidgetRegular> extends UiSingleWidgetFactory<WIDGET> {
+
+    /**
+     * This method assigns the given {@literal <NODE>} to the given {@link UiWidgetRegular widget}.<br/>
      * As a simple example {@literal <WIDGET>} may be
      * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel} and {@literal <NODE>} may be {@link String}.
      * Then this method would simply do <code>widget.setLabel(node)</code>.<br/>
      * <b>ATTENTION:</b><br/>
-     * The {@link UiWidget} may be reused for optimal performance if the {@literal <NODE>} has changed or been
-     * removed. Therefore this method needs to reset and update the entire state of the {@link UiWidget}.
+     * The {@link UiWidgetRegular} may be reused for optimal performance if the {@literal <NODE>} has changed
+     * or been removed. Therefore this method needs to reset and update the entire state of the
+     * {@link UiWidgetRegular}.
      * 
      * @param node is the {@literal <NODE>} to assign.
-     * @param widget is the {@link UiWidget} that is to be assigned. It has initially been created via
+     * @param widget is the {@link UiWidgetRegular} that is to be assigned. It has initially been created via
      *        {@link #create(net.sf.mmm.client.ui.api.UiContext)}.
      */
     void assignNodeToWidget(NODE node, WIDGET widget);
@@ -152,7 +186,6 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, Ui
       }
       widget.setLabel(label);
     }
-
   }
 
 }

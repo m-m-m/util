@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test.widget.complex.adapter;
 
-import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTreeNode;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTestSelectedValue;
 
@@ -33,8 +33,7 @@ public class UiWidgetAdapterTestTree<NODE> extends UiWidgetAdapterTestSelectedVa
   @Override
   public void setRootNode(NODE node) {
 
-    // TODO Auto-generated method stub
-
+    verifyNotDisposed();
   }
 
   /**
@@ -43,8 +42,7 @@ public class UiWidgetAdapterTestTree<NODE> extends UiWidgetAdapterTestSelectedVa
   @Override
   public void setTreeModel(UiTreeModel<NODE> model) {
 
-    // TODO Auto-generated method stub
-
+    verifyNotDisposed();
   }
 
   /**
@@ -53,17 +51,35 @@ public class UiWidgetAdapterTestTree<NODE> extends UiWidgetAdapterTestSelectedVa
   @Override
   public void setTreeNodeRenderer(UiTreeNodeRenderer<NODE, ?> renderer) {
 
-    // TODO Auto-generated method stub
+    verifyNotDisposed();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidget getTreeNodeWidget(NODE node) {
+  public UiWidgetTreeNode<NODE> getTreeNodeWidget(NODE node) {
 
-    // TODO Auto-generated method stub
+    verifyNotDisposed();
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void collapseAllNodes() {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void expandNodes() {
+
+    verifyNotDisposed();
   }
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
-import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
@@ -110,12 +109,34 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
    * {@inheritDoc}
    */
   @Override
-  public UiWidget getTreeNodeWidget(NODE node) {
+  public UiWidgetTreeNode<NODE> getTreeNodeWidget(NODE node) {
 
     if (hasWidgetAdapter()) {
       return getWidgetAdapter().getTreeNodeWidget(node);
     }
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void collapseAllNodes() {
+
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().collapseAllNodes();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void expandNodes() {
+
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().expandNodes();
+    }
   }
 
   /**
