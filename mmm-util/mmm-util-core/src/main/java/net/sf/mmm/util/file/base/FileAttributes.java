@@ -123,7 +123,7 @@ public class FileAttributes implements Cloneable {
     if (obj == this) {
       return true;
     }
-    if (FileAttributes.class != obj.getClass()) {
+    if (getClass() != obj.getClass()) {
       return false;
     }
     FileAttributes otherAttributes = (FileAttributes) obj;

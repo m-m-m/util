@@ -607,7 +607,7 @@ public class FileAccessPermissions implements Cloneable {
     if (obj == this) {
       return true;
     }
-    if (obj.getClass() != FileAccessPermissions.class) {
+    if (obj.getClass() != getClass()) {
       return false;
     }
     FileAccessPermissions otherMask = (FileAccessPermissions) obj;

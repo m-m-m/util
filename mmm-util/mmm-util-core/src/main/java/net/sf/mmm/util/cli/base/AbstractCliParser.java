@@ -221,6 +221,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   /**
    * {@inheritDoc}
    */
+  @Override
   public CliModeObject parseParameters(String... parameters) throws CliException {
 
     // if ((parameters == null) || (parameters.length == 0)) {
@@ -349,6 +350,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   /**
    * {@inheritDoc}
    */
+  @Override
   public void printHelp(Appendable target) {
 
     printHelp(target, new CliOutputSettings());
@@ -357,6 +359,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   /**
    * {@inheritDoc}
    */
+  @Override
   public void printHelp(Appendable appendable, CliOutputSettings settings) {
 
     NlsMessageFactory nlsMessageFactory = this.dependencies.getNlsMessageFactory();
@@ -628,18 +631,19 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       this.lineLength = syntaxBuilder.length();
       // this.lineIndex = this.lineLength;
       String[] aliases = cliOption.aliases();
+      StringBuilder alias = new StringBuilder();
       for (int i = 0; i < aliases.length; i++) {
-        String prefix;
+        alias.setLength(0);
         if (i == 0) {
-          prefix = " (";
+          alias.append(" (");
         } else {
-          prefix = " ";
+          alias.append(" ");
         }
-        String alias = prefix + aliases[i];
+        alias.append(aliases[i]);
         if (i == (aliases.length - 1)) {
-          alias = alias + ")";
+          alias.append(")");
         }
-        append(syntaxBuilder, alias, maxLength, settings);
+        append(syntaxBuilder, alias.toString(), maxLength, settings);
       }
       if (!option.isTrigger()) {
         append(syntaxBuilder, " " + this.operand, maxLength, settings);

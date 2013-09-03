@@ -108,7 +108,7 @@ public class StreamUtilTest extends Assert {
 
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(DevZero.INSTANCE, outStream, true);
-    Thread.sleep(100);
+    Thread.sleep(200);
     long size = outStream.size();
     transferrer.cancel(true);
     assertTrue(size > 0);

@@ -26,7 +26,7 @@ public class FileDeletionFailedException extends RuntimeIoException {
    */
   public FileDeletionFailedException(File file) {
 
-    this(file.getAbsolutePath());
+    this(file.getAbsolutePath(), file.isDirectory());
   }
 
   /**

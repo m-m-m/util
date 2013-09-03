@@ -22,6 +22,7 @@ import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.file.api.FileAccessClass;
 import net.sf.mmm.util.file.api.FileAlreadyExistsException;
+import net.sf.mmm.util.file.api.FileAttributeModificationFailedException;
 import net.sf.mmm.util.file.api.FileCreationFailedException;
 import net.sf.mmm.util.file.api.FileDeletionFailedException;
 import net.sf.mmm.util.file.api.FileType;
@@ -512,11 +513,15 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
       if (source.canExecute()) {
         destination.setExecutable(true, false);
       }
+      boolean success = true;
       if (!source.canWrite()) {
-        destination.setReadOnly();
+        success = destination.setReadOnly();
       }
       long lastModified = source.lastModified();
-      destination.setLastModified(lastModified);
+      success = success && destination.setLastModified(lastModified);
+      if (!success) {
+        throw new FileAttributeModificationFailedException(destination);
+      }
     }
   }
 
@@ -613,14 +618,18 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   @Override
   public void setPermissions(File file, FileAccessPermissions permissions) {
 
+    boolean success = true;
     // global permissions
-    file.setExecutable(permissions.isExecutable(FileAccessClass.OTHERS));
-    file.setWritable(permissions.isWritable(FileAccessClass.OTHERS));
-    file.setReadable(permissions.isReadable(FileAccessClass.OTHERS));
+    success = success & file.setExecutable(permissions.isExecutable(FileAccessClass.OTHERS));
+    success = success & file.setWritable(permissions.isWritable(FileAccessClass.OTHERS));
+    success = success & file.setReadable(permissions.isReadable(FileAccessClass.OTHERS));
     // user permissions
-    file.setExecutable(permissions.isExecutable(FileAccessClass.USER), true);
-    file.setWritable(permissions.isWritable(FileAccessClass.USER), true);
-    file.setReadable(permissions.isReadable(FileAccessClass.USER), true);
+    success = success & file.setExecutable(permissions.isExecutable(FileAccessClass.USER), true);
+    success = success & file.setWritable(permissions.isWritable(FileAccessClass.USER), true);
+    success = success & file.setReadable(permissions.isReadable(FileAccessClass.USER), true);
+    if (!success) {
+      throw new FileAttributeModificationFailedException(file);
+    }
   }
 
   /**

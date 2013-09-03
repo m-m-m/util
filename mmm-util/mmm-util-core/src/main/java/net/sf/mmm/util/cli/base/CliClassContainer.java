@@ -288,11 +288,12 @@ public class CliClassContainer {
   protected static final class CliModeFormatter implements SimpleValueConverter<CliModeContainer, String> {
 
     /** The singleton instance. */
-    protected static final CliModeFormatter INSTANCE = new CliModeFormatter();
+    private static final CliModeFormatter INSTANCE = new CliModeFormatter();
 
     /**
      * {@inheritDoc}
      */
+    @Override
     @SuppressWarnings("all")
     public <T extends String> T convert(CliModeContainer value, Object valueSource, Class<T> targetClass)
         throws ValueException {

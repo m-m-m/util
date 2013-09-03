@@ -487,7 +487,7 @@ public class CliState extends CliClassContainer {
   protected static final class CliArgumentFormatter implements SimpleValueConverter<CliArgumentContainer, String> {
 
     /** The singleton instance. */
-    protected static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
+    private static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
 
     /**
      * {@inheritDoc}

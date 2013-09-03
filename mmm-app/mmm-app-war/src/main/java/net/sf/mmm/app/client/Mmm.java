@@ -17,12 +17,14 @@ import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetToggleButton;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -182,6 +184,9 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetButton button1 = factory.create(UiWidgetButton.class);
     button1.setLabel("Button1");
     verticalPanel2.addChild(button1);
+    UiWidgetToggleButton buttonToggle = factory.create(UiWidgetToggleButton.class);
+    buttonToggle.setLabel("Test");
+    verticalPanel2.addChild(buttonToggle);
     button1.addClickHandler(new UiHandlerEventClick() {
 
       @Override
@@ -231,6 +236,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     tree.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
     UiTreeModelDummy model = new UiTreeModelDummy();
     tree.setTreeModel(model);
+    // setRichTextRenderer(tree);
     tree.setValue(model.getRootNode());
     verticalPanel2.addChild(tree);
     mainWindow.addChild(tabPanel);
@@ -405,6 +411,31 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     button.addClickHandler(handler);
     // TODO textField.addSubmitHandler();
     // textField.setKeyboardFilter(handler);
+  }
+
+  private void setRichTextRenderer(UiWidgetTree<String> tree) {
+
+    UiTreeNodeRenderer<String, UiWidgetRichTextField> renderer = new UiTreeNodeRenderer<String, UiWidgetRichTextField>() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public UiWidgetRichTextField create(UiContext context) {
+
+        return context.getWidgetFactory().create(UiWidgetRichTextField.class);
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void assignNodeToWidget(String node, UiWidgetRichTextField widget) {
+
+        widget.setValue(node);
+      }
+    };
+    tree.setTreeNodeRenderer(renderer);
   }
 
   /**

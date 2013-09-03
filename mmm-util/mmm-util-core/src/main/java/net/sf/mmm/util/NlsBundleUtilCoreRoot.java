@@ -701,6 +701,19 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   boolean directory);
 
   /**
+   * @see net.sf.mmm.util.file.api.FileAttributeModificationFailedException
+   * 
+   * @param file is the name or path of the file.
+   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
+   *        otherwise or if unknown.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The attributes of the {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be modified!")
+  NlsMessage errorFileAttributeModificationFailed(@Named("file")
+  String file, @Named("directory")
+  boolean directory);
+
+  /**
    * @see net.sf.mmm.util.file.api.FileDeletionFailedException
    * 
    * @param file is the name or path of the file.
