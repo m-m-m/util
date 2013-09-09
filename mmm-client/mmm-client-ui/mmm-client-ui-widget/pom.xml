@@ -23,6 +23,5 @@
     <module>mmm-client-ui-widget-impl-native-swing</module>
     <module>mmm-client-ui-widget-impl-native-swt</module>
     <module>mmm-client-ui-widget-impl-native-android</module>
-    <module>mmm-client-ui-widget-theme-standard</module>
   </modules>
 </project>
