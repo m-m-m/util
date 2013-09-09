@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to="mmm">
   <inherits name="com.google.gwt.user.User"/>
-  <inherits name="net.sf.mmm.ui.toolkit.widget.theme.standard.Standard"/>
+  <inherits name="net.sf.mmm.ui.theme.standard.Standard"/>
 
   <!-- Set loglevel for gwt-log -->
   <define-property name="log_level" values="TRACE"/>
