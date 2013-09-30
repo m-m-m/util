@@ -3,11 +3,9 @@
 package net.sf.mmm.util.text.base;
 
 import static org.junit.Assert.assertEquals;
+import net.sf.mmm.util.text.api.Singularizer;
 
 import org.junit.Test;
-
-import net.sf.mmm.util.text.api.Singularizer;
-import net.sf.mmm.util.text.base.EnglishSingularizer;
 
 /**
  * This is the test-case for {@link EnglishSingularizer}.
@@ -70,12 +68,15 @@ public class EnglishSingularizerTest {
     check("bikini", "bikinis");
     check("kid", "kids");
     check("teddy", "teddies");
+    check("utility", "utilities");
     check("house", "houses");
     check("garden", "gardens");
     check("mass", "masses");
     check("class", "classes");
     check("interface", "interfaces");
     check("type", "types");
+    check("employee", "employees");
+    check("knee", "knees");
   }
 
   @Test
@@ -84,6 +85,8 @@ public class EnglishSingularizerTest {
     check("darkness", "darkness");
     check("mass", "mass");
     check("tennis", "tennis");
+    check("series", "series");
+    check("species", "species");
   }
 
 }
