@@ -429,6 +429,7 @@ button:active {
   opacity: 0.3;
 }
 .Window {
+  background: #ffffff;
   box-shadow: 4px 4px 5px 0px black;
   border-radius: 0.5em;
 }
@@ -443,6 +444,8 @@ button:active {
   cursor: move;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
 }
 .Window .WindowTitleBar:hover {
   background-image: linear-gradient(to bottom, #ffffff, #b6cff3);
@@ -464,90 +467,52 @@ button:active {
 .Window .WindowContent {
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 .Window .WindowRight {
-  border: 1px solid red;
-  width: 0.3em;
+  position: absolute;
+  right: -0.3em;
+  top: 0;
+  width: 0.6em;
+  height: 100%;
   cursor: e-resize;
+  border: 1px solid red;
 }
 .Window .WindowLeft {
+  position: absolute;
+  left: -0.3em;
+  top: 0;
+  width: 0.6em;
+  height: 100%;
+  cursor: w-resize;
   border: 1px solid yellow;
-  width: 0.3em;
 }
 .Window .WindowBottom {
-  border: 1px solid blue;
+  position: absolute;
+  left: 0;
+  bottom: -0.3em;
   width: 100%;
-  height: 0.3em;
-  cursor: n-resize;
+  height: 0.6em;
+  cursor: s-resize;
+  border: 1px solid blue;
 }
 .Window .WindowBottomLeft {
+  position: absolute;
+  left: -0.3em;
+  bottom: -0.3em;
+  height: 0.6em;
+  width: 0.6em;
+  cursor: sw-resize;
   border: 1px solid blue;
-  height: 0.3em;
-  width: 0.3em;
 }
 .Window .WindowBottomRight {
-  border: 1px solid green;
-  height: 0.3em;
-  width: 0.3em;
-  cursor: nw-resize;
-}
-.Window .dialogMiddleRight {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background: #e0e0e0;
-  border-right-style: solid;
-  cursor: e-resize;
-}
-.Window .dialogBottomLeft {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background: #e0e0e0;
-  border-left-style: solid;
-  border-bottom-style: solid;
-  border-bottom-left-radius: 0.5em;
-  cursor: sw-resize;
-}
-.Window .dialogBottomCenter {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background: #e0e0e0;
-  border-bottom-style: solid;
-  cursor: s-resize;
-}
-.Window .dialogBottomRight {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background: #e0e0e0;
-  border-right-style: solid;
-  border-bottom-style: solid;
-  border-bottom-right-radius: 0.5em;
+  position: absolute;
+  right: -0.3em;
+  bottom: -0.3em;
+  height: 0.6em;
+  width: 0.6em;
   cursor: se-resize;
-}
-.Window .dialogTopLeftInner {
-  width: 0.3em;
-}
-.Window .dialogTopRightInner {
-  width: 0.3em;
-}
-.Window .dialogBottomLeftInner {
-  width: 0.3em;
-  height: 0.3em;
-}
-.Window .dialogBottomRightInner {
-  width: 0.3em;
-  height: 0.3em;
+  border: 1px solid green;
 }
 /* Tabs */
 .TabPanel .gwt-TabBarFirst {

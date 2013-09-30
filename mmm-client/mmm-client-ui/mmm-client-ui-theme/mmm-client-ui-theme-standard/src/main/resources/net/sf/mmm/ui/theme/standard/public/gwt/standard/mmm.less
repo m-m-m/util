@@ -454,6 +454,7 @@ button {
     opacity: 0.3;
 }
 .Window {
+  background: @color-background;
   box-shadow: 4px 4px 5px 0px black;
   border-radius: @radius;
   .WindowTitleBar {
@@ -462,6 +463,8 @@ button {
     cursor: move;
     border-top-left-radius: @radius;
     border-top-right-radius: @radius;
+    padding-left: @border-size;
+    padding-right: @border-size;
     .WindowTitle {
       .highlightText;
       -moz-user-select: none;
@@ -476,76 +479,54 @@ button {
   .WindowContent {
     width: 100%;
     height: 100%;
+    overflow: auto;
   }
   .WindowRight {
-    border: 1px solid red;
-  	width: @border-size;
+    position: absolute;
+    right: -@border-size;
+    top: 0;
+  	width: 2 * @border-size;
+    height: 100%;
     cursor: e-resize;
+    border: 1px solid red;
   }
   .WindowLeft {
+    position: absolute;
+    left: -@border-size;
+    top: 0;
+    width: 2 * @border-size;
+    height: 100%;
+    cursor: w-resize;
     border: 1px solid yellow;
-  	width: @border-size;
   }
   .WindowBottom {
-    border: 1px solid blue;
+    position: absolute;
+    left: 0;
+    bottom: -@border-size;
     width: 100%;
-  	height: @border-size;
-    cursor: n-resize;
+  	height: 2 * @border-size;
+    cursor: s-resize;
+    border: 1px solid blue;
   }
   .WindowBottomLeft {
+    position: absolute;
+    left: -@border-size;
+    bottom: -@border-size;
+    height: 2 * @border-size;
+    width: 2 * @border-size;
+    cursor: sw-resize;
     border: 1px solid blue;
-    height: @border-size;
-    width: @border-size;
   }
   .WindowBottomRight {
+    position: absolute;
+    right: -@border-size;
+    bottom: -@border-size;
+    height: 2 * @border-size;
+    width: 2 * @border-size;
+    cursor: se-resize;
     border: 1px solid green;
-    height: @border-size;
-    width: @border-size;
-    cursor: nw-resize;
   }
   .dialogContent {
-  }
-  .dialogMiddleRight {
-    .bordered;
-    background: @color-normal;
-    border-right-style: solid;
-    cursor: e-resize;
-  }
-  .dialogBottomLeft {
-    .bordered;
-    background: @color-normal;
-    border-left-style: solid;
-    border-bottom-style: solid;
-    border-bottom-left-radius: @radius;
-    cursor: sw-resize;
-  }
-  .dialogBottomCenter {
-    .bordered;
-    background: @color-normal;
-    border-bottom-style: solid;
-    cursor: s-resize;
-  }
-  .dialogBottomRight {
-    .bordered;
-    background: @color-normal;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-bottom-right-radius: @radius;
-    cursor: se-resize;
-  }
-  .dialogTopLeftInner {
-    width: @border-size;
-  }
-  .dialogTopRightInner {
-    width: @border-size;
-  }
-  .dialogBottomLeftInner {
-    width: @border-size;
-    height: @border-size;
-  }
-  .dialogBottomRightInner {
-    width: @border-size;
-    height: @border-size;
   }
 }
 /* Tabs */

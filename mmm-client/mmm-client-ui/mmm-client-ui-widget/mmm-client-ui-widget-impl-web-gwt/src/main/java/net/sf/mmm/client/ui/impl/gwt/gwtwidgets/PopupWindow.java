@@ -2,12 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
-import java.awt.Event;
-
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.IconConstants;
 
-import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseDownEvent;
@@ -16,9 +14,10 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -52,9 +51,6 @@ public class PopupWindow extends PopupPanel {
   /** The button to close the window. */
   private final Button closeButton;
 
-  /** The center panel. */
-  private final HorizontalFlowPanel centerPanel;
-
   /** The top left border in the titlebar of the window */
   private FlowPanel topLeft;
 
@@ -67,9 +63,6 @@ public class PopupWindow extends PopupPanel {
   /** The right border of the window */
   private FlowPanel right;
 
-  /** The center panel. */
-  private final HorizontalFlowPanel bottomPanel;
-
   /** The bottom border of the window */
   private final FlowPanel bottom;
 
@@ -78,12 +71,6 @@ public class PopupWindow extends PopupPanel {
 
   /** The bottom right corner of the window */
   private final FlowPanel bottomRight;
-
-  /** The left offset of the document body. */
-  private int clientLeftOffset;
-
-  /** The top offset of the document body. */
-  private int clientTopOffset;
 
   /** The total width of the browser window. */
   private int windowWidth;
@@ -139,44 +126,37 @@ public class PopupWindow extends PopupPanel {
     this.topRight.setStyleName(CssStyles.WINDOW_RIGHT);
     this.titleBar = new HorizontalFlowPanel();
     this.titleBar.addStyleName(CssStyles.WINDOW_TITLE_BAR);
-    this.titleBar.add(this.topLeft);
     this.titleBar.add(this.title);
     this.titleBar.add(this.closeButton);
-    this.titleBar.add(this.topRight);
 
     this.contentPanel = new VerticalFlowPanel();
     this.contentPanel.addStyleName(CssStyles.WINDOW_CONTENT);
 
+    // borders for resizing...
     this.left = new FlowPanel();
     this.left.setStyleName(CssStyles.WINDOW_LEFT);
     this.right = new FlowPanel();
     this.right.setStyleName(CssStyles.WINDOW_RIGHT);
-
-    this.centerPanel = new HorizontalFlowPanel();
-    this.centerPanel.add(this.left);
-    this.centerPanel.add(this.contentPanel);
-    this.centerPanel.add(this.right);
-
     this.bottom = new FlowPanel();
     this.bottom.setStyleName(CssStyles.WINDOW_BOTTOM);
     this.bottomLeft = new FlowPanel();
     this.bottomLeft.setStyleName(CssStyles.WINDOW_BOTTOM_LEFT);
     this.bottomRight = new FlowPanel();
     this.bottomRight.setStyleName(CssStyles.WINDOW_BOTTOM_RIGHT);
-    this.bottomPanel = new HorizontalFlowPanel();
-    this.bottomPanel.add(this.bottomLeft);
-    this.bottomPanel.add(this.bottom);
-    this.bottomPanel.add(this.bottomRight);
 
     this.mainPanel = new VerticalFlowPanel();
     this.mainPanel.add(this.titleBar);
-    this.mainPanel.add(this.centerPanel);
-    this.mainPanel.add(this.bottomPanel);
+    this.mainPanel.add(this.contentPanel);
+    this.mainPanel.add(this.left);
+    this.mainPanel.add(this.right);
+    this.mainPanel.add(this.bottomLeft);
+    this.mainPanel.add(this.bottom);
+    this.mainPanel.add(this.bottomRight);
     super.add(this.mainPanel);
 
     // setStyleName(getContainerElement(), "popupContent");
-    this.clientLeftOffset = Document.get().getBodyOffsetLeft();
-    this.clientTopOffset = Document.get().getBodyOffsetTop();
+    // this.clientLeftOffset = Document.get().getBodyOffsetLeft();
+    // this.clientTopOffset = Document.get().getBodyOffsetTop();
 
     this.windowWidth = Window.getClientWidth();
 
@@ -195,11 +175,11 @@ public class PopupWindow extends PopupPanel {
    */
   private void addMouseHandler(Widget widget, MouseAction action) {
 
-    MouseHandler handler = new MouseHandler(action, widget.getElement());
-    widget.sinkEvents(Event.MOUSE_DOWN | Event.MOUSE_UP | Event.MOUSE_MOVE);
+    MouseHandler handler = new MouseHandler(action);
+    widget.sinkEvents(Event.ONMOUSEDOWN);
     widget.addDomHandler(handler, MouseDownEvent.getType());
-    widget.addDomHandler(handler, MouseUpEvent.getType());
-    widget.addDomHandler(handler, MouseMoveEvent.getType());
+    // widget.addDomHandler(handler, MouseUpEvent.getType());
+    // widget.addDomHandler(handler, MouseMoveEvent.getType());
   }
 
   /**
@@ -257,94 +237,117 @@ public class PopupWindow extends PopupPanel {
   /**
    * This inner class is the handler for mouse events to move an resize the window.
    */
-  private class MouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler {
+  private class MouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler, Event.NativePreviewHandler {
 
     /** The current {@link MouseAction} while dragging or <code>null</code>. */
     private final MouseAction mouseAction;
 
-    /** The {@link Element} to capture and where this handler is attached. */
-    private final Element element;
-
-    /** <code>true</code> while dragging the mouse, <code>false</code> otherwise. */
-    private boolean dragging;
-
     /** The initial x position while dragging the mouse. */
-    private int startX;
+    private int mouseX;
 
     /** The initial y position while dragging the mouse. */
-    private int startY;
+    private int mouseY;
 
-    private int width;
+    private int popupX;
 
-    private int height;
+    private int popupY;
+
+    private int popupWidth;
+
+    private int popupHeight;
+
+    private HandlerRegistration registration;
 
     /**
      * The constructor.
      * 
      * @param mouseAction is the {@link MouseAction} to handle.
-     * @param element is the {@link Element} to capture.
      */
-    public MouseHandler(MouseAction mouseAction, Element element) {
+    public MouseHandler(MouseAction mouseAction) {
 
       super();
       this.mouseAction = mouseAction;
-      this.element = element;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onPreviewNativeEvent(NativePreviewEvent event) {
+
+      switch (event.getTypeInt()) {
+        case Event.ONMOUSEMOVE:
+          NativeEvent nativeEvent = event.getNativeEvent();
+          onMouseMove(nativeEvent.getClientX(), nativeEvent.getClientY());
+          break;
+        case Event.ONMOUSEUP:
+          onMouseUp(null);
+          break;
+      }// end switch
+
     }
 
     @Override
     public void onMouseDown(MouseDownEvent event) {
 
-      if (DOM.getCaptureElement() == null) {
-        DOM.setCapture(this.element);
-        this.startX = event.getX();
-        this.startY = event.getY();
-        this.width = getOffsetWidth();
-        this.height = getOffsetHeight();
-        this.dragging = true;
-      }
+      // if (DOM.getCaptureElement() == null) {
+      // DOM.setCapture(this.element);
+
+      this.mouseX = event.getClientX();
+      this.mouseY = event.getClientY();
+      this.popupX = getAbsoluteLeft();
+      this.popupY = getAbsoluteTop();
+      this.popupWidth = getOffsetWidth();
+      this.popupHeight = getOffsetHeight();
+
+      assert (this.registration == null);
+      this.registration = Event.addNativePreviewHandler(this);
     }
 
     @Override
     public void onMouseMove(MouseMoveEvent event) {
 
-      if (this.dragging) {
-        int x = event.getX();
-        int y = event.getY();
-        int deltaX = x - this.startX;
-        int deltaY = y - this.startY;
+      onMouseMove(event.getClientX(), event.getClientY());
+    }
 
-        if (this.mouseAction == MouseAction.MOVE) {
-          int absoluteLeft = getAbsoluteLeft();
-          int absoluteTop = getAbsoluteTop();
-          int newX = absoluteLeft + deltaX;
-          int newY = absoluteTop + deltaY;
+    private void onMouseMove(int x, int y) {
 
-          // if the mouse is off the screen to the left, right, or top, don't
-          // move the dialog box. This would let users lose dialog boxes, which
-          // would be bad for modal popups.
-          if (newX < 0 || newX >= PopupWindow.this.windowWidth || newY < 0) {
-            return;
-          }
-          setPopupPosition(newX, newY);
-        } else {
-          if (this.mouseAction == MouseAction.RESIZE_HORIZONTAL) {
-            deltaY = 0;
-          } else if (this.mouseAction == MouseAction.RESIZE_VERTICAL) {
-            deltaX = 0;
-          }
-          setPixelSize(this.width + deltaX, this.height + deltaY);
+      int deltaX = x - this.mouseX;
+      int deltaY = y - this.mouseY;
+
+      if (this.mouseAction == MouseAction.MOVE) {
+        int newX = this.popupX + deltaX;
+        int newY = this.popupY + deltaY;
+
+        // if the mouse is off the screen to the left, right, or top, don't
+        // move the dialog box. This would let users lose dialog boxes, which
+        // would be bad for modal popups.
+        if (newX < 0 || newX >= PopupWindow.this.windowWidth || newY < 0) {
+          return;
         }
+        setPopupPosition(newX, newY);
+      } else {
+        if (this.mouseAction == MouseAction.RESIZE_HORIZONTAL) {
+          deltaY = 0;
+        } else if (this.mouseAction == MouseAction.RESIZE_VERTICAL) {
+          deltaX = 0;
+        }
+        setPixelSize(this.popupWidth + deltaX, this.popupHeight + deltaY);
       }
     }
 
     @Override
     public void onMouseUp(MouseUpEvent event) {
 
-      this.dragging = false;
-      DOM.releaseCapture(((Widget) event.getSource()).getElement());
+      // DOM.releaseCapture(((Widget) event.getSource()).getElement());
+      this.registration.removeHandler();
+      this.registration = null;
     }
   }
 
+  /**
+   * Enum with the available actions of mouse dragging on a {@link PopupWindow}.
+   */
   public enum MouseAction {
 
     MOVE,

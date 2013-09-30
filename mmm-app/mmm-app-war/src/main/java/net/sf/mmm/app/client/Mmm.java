@@ -187,7 +187,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetToggleButton buttonToggle = factory.create(UiWidgetToggleButton.class);
     buttonToggle.setLabel("Test");
     verticalPanel2.addChild(buttonToggle);
-    button1.addClickHandler(new UiHandlerEventClick() {
+    UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
@@ -215,7 +215,9 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         popup.centerWindow();
         popup.setVisible(true);
       }
-    });
+    };
+    button1.addClickHandler(clickHandler);
+    clickHandler.onClick(null);
     UiWidgetButton button2 = factory.create(UiWidgetButton.class);
     button2.setLabel("button2:" + Locale.getDefault());
     verticalPanel2.addChild(button2);
