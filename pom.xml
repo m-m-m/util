@@ -487,7 +487,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
             <configuration>
-            	<keyname>Jörg Hohwiller</keyname>
+            	<keyname>joerg@j-hohwiller.de</keyname>
             </configuration>
             <executions>
               <execution>
