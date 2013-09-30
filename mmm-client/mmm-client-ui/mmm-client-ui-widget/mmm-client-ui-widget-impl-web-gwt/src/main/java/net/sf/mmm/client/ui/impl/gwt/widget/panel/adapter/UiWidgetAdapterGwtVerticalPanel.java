@@ -3,19 +3,18 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterVerticalPanel;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
-
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * This is the implementation of
  * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
- * {@link VerticalPanel}.
+ * {@link VerticalFlowPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtVerticalPanel extends UiWidgetAdapterGwtPanel<VerticalPanel> implements
+public class UiWidgetAdapterGwtVerticalPanel extends UiWidgetAdapterGwtPanel<VerticalFlowPanel> implements
     UiWidgetAdapterVerticalPanel {
 
   /**
@@ -30,10 +29,9 @@ public class UiWidgetAdapterGwtVerticalPanel extends UiWidgetAdapterGwtPanel<Ver
    * {@inheritDoc}
    */
   @Override
-  protected VerticalPanel createToplevelWidget() {
+  protected VerticalFlowPanel createToplevelWidget() {
 
-    VerticalPanel verticalPanel = new VerticalPanel();
-    verticalPanel.setWidth("100%");
+    VerticalFlowPanel verticalPanel = new VerticalFlowPanel();
     return verticalPanel;
   }
 

@@ -2,24 +2,43 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
-import com.google.gwt.user.client.ui.DialogBox;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
 
 /**
  * This is the implementation of
- * {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow} using GWT based on
- * {@link DialogBox}.
+ * {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWindow} using GWT based on
+ * {@link PopupWindow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdapterGwtBaseWindow<DialogBox> {
+public abstract class UiWidgetAdapterGwtAbstractPopupWindow extends UiWidgetAdapterGwtAbstractWindow<PopupWindow> {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtBaseWindowDialogBox() {
+  public UiWidgetAdapterGwtAbstractPopupWindow() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected VerticalFlowPanel getContentPanel() {
+
+    return getToplevelWidget().getContentPanel();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTitle(String title) {
+
+    getToplevelWidget().setTitleText(title);
   }
 
   /**
@@ -38,15 +57,6 @@ public abstract class UiWidgetAdapterGwtBaseWindowDialogBox extends UiWidgetAdap
   public double getHeightInPixel() {
 
     return getToplevelWidget().getOffsetHeight();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setTitle(String title) {
-
-    getToplevelWidget().setText(title);
   }
 
   /**

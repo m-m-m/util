@@ -7,7 +7,6 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
 import net.sf.mmm.client.ui.base.dynamic.UiHandlerEventModeVisibility;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -43,9 +42,9 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
 
   /**
    * @return <code>true</code> if the
-   *         {@link #createButton(UiContext, NlsMessage, UiHandlerEventClick, NlsMessage, UiWidgetImage)
-   *         button} shall only be visible if {@link net.sf.mmm.client.ui.api.common.UiMode#isEditable()
-   *         editable mode}, <code>false</code> for inverse and <code>null</code> for always visible.
+   *         {@link #createButton(UiContext, NlsMessage, UiHandlerEventClick, NlsMessage, String) button}
+   *         shall only be visible if {@link net.sf.mmm.client.ui.api.common.UiMode#isEditable() editable
+   *         mode}, <code>false</code> for inverse and <code>null</code> for always visible.
    */
   protected Boolean getShowIfEditable() {
 
@@ -59,11 +58,11 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
    * @param label is the optional label.
    * @param handler is the required click handler.
    * @param tooltip is the optional tooltip.
-   * @param icon is the optional icon.
+   * @param style is an additional style for the button or <code>null</code>.
    * @return the new widget.
    */
   protected UiWidgetButton createButton(UiContext context, NlsMessage label, UiHandlerEventClick handler,
-      NlsMessage tooltip, UiWidgetImage icon) {
+      NlsMessage tooltip, String style) {
 
     String labelText = "";
     if (label != null) {
@@ -73,8 +72,8 @@ public abstract class AbstractUiSingleWidgetButtonFactory<HANDLER extends UiHand
     if (tooltip != null) {
       button.setTooltip(tooltip.getLocalizedMessage());
     }
-    if (icon != null) {
-      button.setImage(icon);
+    if (style != null) {
+      button.addStyle(style);
     }
     Boolean showIfEditable = getShowIfEditable();
     if (showIfEditable != null) {

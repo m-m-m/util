@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteImage;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
@@ -27,6 +28,6 @@ public interface UiWidgetTab extends UiWidgetSingleMutableComposite<UiWidgetRegu
     AttributeWriteImage<UiWidgetImage>, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "Tab";
+  String STYLE_PRIMARY = CssStyles.TAB;
 
 }

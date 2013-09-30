@@ -26,6 +26,7 @@ public abstract class AbstractUiWidgetHorizontalPanel<ADAPTER extends UiWidgetAd
   public AbstractUiWidgetHorizontalPanel(UiContext context) {
 
     super(context);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
 }

@@ -6,11 +6,11 @@ import javafx.stage.Window;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
+import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWindow;
 import net.sf.mmm.client.ui.impl.javafx.widget.adapter.UiWidgetAdapterJavaFx;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterBaseWindow} using JavaFx based on {@link Window}.
+ * This is the implementation of {@link UiWidgetAdapterAbstractWindow} using JavaFx based on {@link Window}.
  * 
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * 
@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.impl.javafx.widget.adapter.UiWidgetAdapterJavaFx;
  * @since 1.0.0
  */
 public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> extends UiWidgetAdapterJavaFx<WIDGET>
-    implements UiWidgetAdapterBaseWindow {
+    implements UiWidgetAdapterAbstractWindow {
 
   /**
    * The constructor.

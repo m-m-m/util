@@ -246,6 +246,13 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
 
   /**
    * @return the {@link NlsMessage} for the label of
+   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#HORIZONTAL_LINE}.
+   */
+  @NlsBundleMessage("Horizontal line")
+  NlsMessage labelRichTextHorizontalLine();
+
+  /**
+   * @return the {@link NlsMessage} for the label of
    *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#INSERT_LINK}.
    */
   @NlsBundleMessage("Insert hyperlink")

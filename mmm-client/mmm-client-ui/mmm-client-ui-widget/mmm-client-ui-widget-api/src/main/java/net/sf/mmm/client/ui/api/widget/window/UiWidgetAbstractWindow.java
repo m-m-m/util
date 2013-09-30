@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWritePosition;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
@@ -19,8 +20,11 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetBaseWindow extends UiWidgetDynamicComposite<UiWidgetRegular>,
+public abstract interface UiWidgetAbstractWindow extends UiWidgetDynamicComposite<UiWidgetRegular>,
     AttributeWriteStringTitle, AttributeReadSizeInPixel, AttributeReadResizable, AttributeWritePosition {
+
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String STYLE_PRIMARY = CssStyles.WINDOW;
 
   /**
    * This method sets the position of the window, so that it is in the center of the screen. You should set

@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
@@ -22,13 +23,13 @@ public interface UiWidgetCollapsableSection extends UiWidgetRegular, AttributeWr
     UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "Section";
+  String STYLE_PRIMARY = CssStyles.SECTION;
 
   /** The {@link #hasStyle(String) style} for the button to collapse/expand. */
-  String STYLE_COLLAPSE_BUTTON = "CollapseButton";
+  String STYLE_COLLAPSE_BUTTON = CssStyles.COLLAPSE_BUTTON;
 
   /** The {@link #addStyle(String) additional style} for the button in case the section is collapsed. */
-  String STYLE_COLLAPSED = "Collapsed";
+  String STYLE_COLLAPSED = CssStyles.COLLAPSED;
 
   /**
    * {@link #addCollapseHandler(net.sf.mmm.client.ui.api.handler.event.UiHandlerEventCollapse) Adds} a

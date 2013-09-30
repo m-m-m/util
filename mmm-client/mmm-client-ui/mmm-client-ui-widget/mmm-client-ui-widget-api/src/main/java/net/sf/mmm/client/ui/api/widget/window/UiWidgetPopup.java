@@ -3,11 +3,12 @@
 package net.sf.mmm.client.ui.api.widget.window;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
- * This is the interface for a {@link UiWidgetBaseWindow base window widget} that represents a <em>popup</em>
- * window. A popup is a modal window that blocks the client application until it is closed.<br/>
+ * This is the interface for a {@link UiWidgetAbstractWindow base window widget} that represents a
+ * <em>popup</em> window. A popup is a modal window that blocks the client application until it is closed.<br/>
  * <b>ATTENTION:</b><br/>
  * The {@link #setResizable(boolean)} feature may NOT be supported by all implementations. In that case the
  * method will have no effect.
@@ -15,9 +16,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetPopup extends UiWidgetBaseWindow, AttributeWriteResizable, UiWidgetNative {
+public interface UiWidgetPopup extends UiWidgetAbstractWindow, AttributeWriteResizable, UiWidgetNative {
 
-  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "Popup";
+  /** The default {@link #addStyle(String) additional style} of this widget. */
+  String STYLE_POPUP = CssStyles.POPUP;
 
 }

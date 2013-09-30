@@ -17,6 +17,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
@@ -75,7 +76,7 @@ public class RichTextToolbar extends Toolbar {
         RichTextFeature.REMOVE_FORMAT);
     createButtonGroup(RichTextFeature.ALIGN_LEFT, RichTextFeature.ALIGN_CENTER, RichTextFeature.ALIGN_RIGHT);
     createButtonGroup(RichTextFeature.UNORDERED_LIST, RichTextFeature.ORDERED_LIST, RichTextFeature.INDENT,
-        RichTextFeature.OUTDENT);
+        RichTextFeature.OUTDENT, RichTextFeature.HORIZONTAL_LINE);
     createButtonGroup(RichTextFeature.FONT_FAMILY, RichTextFeature.FONT_SIZE, RichTextFeature.TEXT_COLOR,
         RichTextFeature.BACKGROUND_COLOR);
     createButtonGroup(RichTextFeature.INSERT_IMAGE, RichTextFeature.INSERT_LINK);
@@ -104,7 +105,7 @@ public class RichTextToolbar extends Toolbar {
   /**
    * @param feature is the {@link RichTextFeature} to invoke (e.g. if according button has been clicked).
    */
-  private void invokeFeature(RichTextFeature feature) {
+  protected void invokeFeature(RichTextFeature feature) {
 
     switch (feature) {
       case BOLD:
@@ -139,6 +140,9 @@ public class RichTextToolbar extends Toolbar {
         break;
       case ORDERED_LIST:
         RichTextToolbar.this.formatter.insertOrderedList();
+        break;
+      case HORIZONTAL_LINE:
+        RichTextToolbar.this.formatter.insertHorizontalRule();
         break;
       case INSERT_IMAGE:
         String url = Window.prompt(this.bundle.labelEnterImageUrl().getLocalizedMessage(), "http://");
@@ -229,10 +233,8 @@ public class RichTextToolbar extends Toolbar {
   private ButtonBase createButton(final RichTextFeature feature) {
 
     ButtonBase button;
-    String style = feature.getStyle();
     String tooltip = feature.toNlsMessage().getLocalizedMessage();
-    // TODO: prevent injection...
-    String html = "<span class='" + style + "'></span>";
+    SafeHtml html = HtmlTemplates.INSTANCE.iconMarkup(feature.getIcon());
     if (isToggleFeature(feature)) {
       button = createToggleButton(html, tooltip);
     } else {
@@ -293,7 +295,7 @@ public class RichTextToolbar extends Toolbar {
    * @param tooltip is the tooltip for the button.
    * @return the new {@link SimpleToggleButton}.
    */
-  private Button createPushButton(String html, String tooltip) {
+  private Button createPushButton(SafeHtml html, String tooltip) {
 
     Button button = new Button(html);
     button.setStylePrimaryName(UiWidgetAbstractButton.STYLE_PRIMARY);
@@ -308,7 +310,7 @@ public class RichTextToolbar extends Toolbar {
    * @param tooltip is the tooltip for the button.
    * @return the new {@link SimpleToggleButton}.
    */
-  private SimpleToggleButton createToggleButton(String html, String tooltip) {
+  private SimpleToggleButton createToggleButton(SafeHtml html, String tooltip) {
 
     SimpleToggleButton tb = new SimpleToggleButton();
     tb.setHTML(html);

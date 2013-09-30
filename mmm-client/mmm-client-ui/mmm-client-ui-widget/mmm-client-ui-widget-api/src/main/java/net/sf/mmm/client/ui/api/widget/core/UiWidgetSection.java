@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.api.widget.core;
 
 import net.sf.mmm.client.ui.api.aria.role.RoleHeading;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
@@ -19,7 +20,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public interface UiWidgetSection extends UiWidgetRegular, AttributeWriteLabel, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "Section";
+  String STYLE_PRIMARY = CssStyles.SECTION;
 
   /**
    * {@inheritDoc}

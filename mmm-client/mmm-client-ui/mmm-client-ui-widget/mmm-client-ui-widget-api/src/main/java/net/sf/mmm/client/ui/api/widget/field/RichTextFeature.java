@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
+import net.sf.mmm.client.ui.api.common.IconConstants;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsObject;
@@ -11,8 +12,6 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * The {@link Enum} with the available features of rich-text formatting options.
  */
 public enum RichTextFeature implements NlsObject {
-
-  // TODO: Horizontal Rule
 
   /** The {@link RichTextFeature} to toggle <b>bold</b> text. */
   BOLD("Bold") {
@@ -148,6 +147,23 @@ public enum RichTextFeature implements NlsObject {
     }
   },
 
+  /**
+   * The {@link RichTextFeature} to insert a
+   * <hr/>
+   * horizontal line.
+   */
+  HORIZONTAL_LINE("HorizontalLine") {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NlsMessage toNlsMessage() {
+
+      return getBundle().labelRichTextHorizontalLine();
+    }
+  },
+
   /** The {@link RichTextFeature} to insert <img src="broken">images</img>. */
   INSERT_IMAGE("InsertImage") {
 
@@ -248,7 +264,7 @@ public enum RichTextFeature implements NlsObject {
   },
 
   /** The {@link RichTextFeature} to undo the last change. */
-  UNDO("Undo") {
+  UNDO(IconConstants.UNDO) {
 
     @Override
     public NlsMessage toNlsMessage() {
@@ -258,7 +274,7 @@ public enum RichTextFeature implements NlsObject {
   },
 
   /** The {@link RichTextFeature} to undo the re-do a change after an {@link #UNDO undo}. */
-  REDO("Redo") {
+  REDO(IconConstants.REDO) {
 
     @Override
     public NlsMessage toNlsMessage() {
@@ -270,25 +286,25 @@ public enum RichTextFeature implements NlsObject {
   /** @see #getBundle() */
   private static NlsBundleClientUiRoot bundle;
 
-  /** @see #getStyle() */
-  private final String style;
+  /** @see #getIcon() */
+  private final String icon;
 
   /**
    * The constructor.
    * 
-   * @param style is the {@link #getStyle() style}.
+   * @param icon is the {@link #getIcon() icon}.
    */
-  private RichTextFeature(String style) {
+  private RichTextFeature(String icon) {
 
-    this.style = style;
+    this.icon = icon;
   }
 
   /**
-   * @return the CSS style name of the button for this feature.
+   * @return the name of the icon for this feature.
    */
-  public String getStyle() {
+  public String getIcon() {
 
-    return this.style;
+    return this.icon;
   }
 
   /**

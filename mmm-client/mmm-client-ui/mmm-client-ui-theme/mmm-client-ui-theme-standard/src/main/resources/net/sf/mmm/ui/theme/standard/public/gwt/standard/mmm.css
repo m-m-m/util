@@ -72,14 +72,15 @@ button:focus,
 button:active {
   background: #a0c0f0;
 }
-.Toolbar {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  border-style: solid;
-  background: #e6e6e6;
+.VerticalPanel > * {
+  display: block;
+}
+.HorizontalPanel {
+  overflow: hidden;
+  /* overflow-x: auto; */
+
+  white-space: nowrap;
+  display: flex;
 }
 .ButtonGroup {
   display: inline-block;
@@ -136,6 +137,19 @@ button:active {
 .ToggleButton.Pressed:active {
   background-image: linear-gradient(to bottom, #74a3e9, #ffffff);
 }
+.Toolbar {
+  border-top-color: #e6e6e6;
+  border-left-color: #cdcdcd;
+  border-right-color: #808080;
+  border-bottom-color: #676767;
+  border-width: 1px;
+  border-style: solid;
+  background: #e6e6e6;
+}
+.Toolbar .Button {
+  font-size: 10pt;
+  min-height: 1.8em;
+}
 .RichTextArea {
   width: 100%;
 }
@@ -147,64 +161,81 @@ button:active {
   border-color: #4886e2;
   background: #a0c0f0;
 }
-.Toolbar .Button {
-  font-family: FontAwesome;
-  font-size: 10pt;
-  min-height: 1.8em;
-}
 .Bold:before {
+  font-family: FontAwesome;
   content: '\F032';
 }
 .Italic:before {
+  font-family: FontAwesome;
   content: '\F033';
 }
 .Underline:before {
+  font-family: FontAwesome;
   content: '\F0CD';
 }
 .Strikethrough:before {
+  font-family: FontAwesome;
   content: '\F0CC';
 }
 .Superscript:before {
+  font-family: FontAwesome;
   content: '\F12B';
 }
 .Subscript:before {
+  font-family: FontAwesome;
   content: '\F12C';
 }
 .AlignLeft:before {
+  font-family: FontAwesome;
   content: '\F036';
 }
 .AlignCenter:before {
+  font-family: FontAwesome;
   content: '\F037';
 }
 .AlignRight:before {
+  font-family: FontAwesome;
   content: '\F038';
 }
 .AlignJustify:before {
+  font-family: FontAwesome;
   content: '\F039';
 }
 .UnorderedList:before {
+  font-family: FontAwesome;
   content: '\F0CA';
 }
 .OrderedList:before {
+  font-family: FontAwesome;
   content: '\F0CB';
 }
 .InsertLink:before {
+  font-family: FontAwesome;
   content: '\F0C1';
 }
 .InsertImage:before {
+  font-family: FontAwesome;
   content: '\FFFF';
 }
 .FontFamily:before {
+  font-family: FontAwesome;
   content: '\F031';
 }
 .FontSize:before {
+  font-family: FontAwesome;
   content: '\F034';
 }
 .Indent:before {
+  font-family: FontAwesome;
   content: '\F03C';
 }
 .Outdent:before {
+  font-family: FontAwesome;
   content: '\F03B';
+}
+.HorizontalLine:before {
+  font-family: FontAwesome;
+  content: '\F068';
 }
 .TextColor:before {
   content: 'T';
@@ -219,6 +250,7 @@ button:active {
   background: cyan;
 }
 .InsertImage:before {
+  font-family: FontAwesome;
   content: '\F03E';
 }
 .RemoveFormat:before {
@@ -227,14 +259,32 @@ button:active {
 }
 .RemoveFormat:after {
   content: 'x';
-  font-size: .83em;
+  font-size: .8em;
   vertical-align: sub;
 }
 .Undo:before {
+  font-family: FontAwesome;
   content: '\F0E2';
 }
 .Redo:before {
+  font-family: FontAwesome;
   content: '\F01E';
+}
+.MoveUp:before {
+  font-family: FontAwesome;
+  content: '\F062';
+}
+.MoveDown:before {
+  font-family: FontAwesome;
+  content: '\F063';
+}
+.Close:before {
+  font-family: FontAwesome;
+  content: '\F00D';
+}
+.Fullscreen:before {
+  font-family: FontAwesome;
+  content: '\F0B2';
 }
 .SearchField {
   display: inline;
@@ -282,10 +332,10 @@ button:active {
   margin: 0;
 }
 .CollapseButton > span:before {
-  content: '\F150';
+  content: '\F117';
 }
 .CollapseButton.Collapsed > span:before {
-  content: '\F152';
+  content: '\F116';
 }
 .Field {
   margin-left: 0.5em;
@@ -378,92 +428,70 @@ button:active {
   background: black;
   opacity: 0.3;
 }
-.Popup {
+.Window {
   box-shadow: 4px 4px 5px 0px black;
   border-radius: 0.5em;
 }
-.Popup .dialogTopLeft {
+.Window .WindowTitleBar {
   border-top-color: #e6e6e6;
   border-left-color: #cdcdcd;
   border-right-color: #808080;
   border-bottom-color: #676767;
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  border-top-style: solid;
-  border-left-style: solid;
-  cursor: w-resize;
-  border-top-left-radius: 0.5em;
-}
-.Popup .dialogTopLeft:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #b6cff3);
-}
-.Popup .dialogTopLeft:focus,
-.Popup .dialogTopLeft:active {
-  background-image: linear-gradient(to bottom, #ffffff, #74a3e9);
-}
-.Popup .Caption {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  border-top-style: solid;
-  padding: 0.2em;
-  cursor: move;
-}
-.Popup .Caption:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #b6cff3);
-}
-.Popup .Caption:focus,
-.Popup .Caption:active {
-  background-image: linear-gradient(to bottom, #ffffff, #74a3e9);
-}
-.Popup .dialogTopRight {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
-  border-top-style: solid;
-  border-right-style: solid;
-  border-top-right-radius: 0.5em;
-  cursor: e-resize;
-}
-.Popup .dialogTopRight:hover {
-  background-image: linear-gradient(to bottom, #ffffff, #b6cff3);
-}
-.Popup .dialogTopRight:focus,
-.Popup .dialogTopRight:active {
-  background-image: linear-gradient(to bottom, #ffffff, #74a3e9);
-}
-.Popup .dialogMiddle {
-  background: #e0e0e0;
-}
-.Popup .dialogMiddleLeft {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
-  background: #e0e0e0;
-  border-left-style: solid;
-  cursor: w-resize;
-}
-.Popup .dialogMiddleCenter {
-  border-top-color: #e6e6e6;
-  border-left-color: #cdcdcd;
-  border-right-color: #808080;
-  border-bottom-color: #676767;
-  border-width: 1px;
   border-style: solid;
-  border-radius: 0.5em;
-  padding: 3px;
-  background: white;
+  cursor: move;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
 }
-.Popup .dialogMiddleRight {
+.Window .WindowTitleBar:hover {
+  background-image: linear-gradient(to bottom, #ffffff, #b6cff3);
+}
+.Window .WindowTitleBar:focus,
+.Window .WindowTitleBar:active {
+  background-image: linear-gradient(to bottom, #ffffff, #74a3e9);
+}
+.Window .WindowTitleBar .WindowTitle {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  -moz-user-select: none;
+  user-select: none;
+  width: 100%;
+  padding: 0.2em;
+}
+.Window .WindowTitleBar .Button {
+  font-size: 10pt;
+}
+.Window .WindowContent {
+  width: 100%;
+  height: 100%;
+}
+.Window .WindowRight {
+  border: 1px solid red;
+  width: 0.3em;
+  cursor: e-resize;
+}
+.Window .WindowLeft {
+  border: 1px solid yellow;
+  width: 0.3em;
+}
+.Window .WindowBottom {
+  border: 1px solid blue;
+  width: 100%;
+  height: 0.3em;
+  cursor: n-resize;
+}
+.Window .WindowBottomLeft {
+  border: 1px solid blue;
+  height: 0.3em;
+  width: 0.3em;
+}
+.Window .WindowBottomRight {
+  border: 1px solid green;
+  height: 0.3em;
+  width: 0.3em;
+  cursor: nw-resize;
+}
+.Window .dialogMiddleRight {
   border-top-color: #e6e6e6;
   border-left-color: #cdcdcd;
   border-right-color: #808080;
@@ -473,7 +501,7 @@ button:active {
   border-right-style: solid;
   cursor: e-resize;
 }
-.Popup .dialogBottomLeft {
+.Window .dialogBottomLeft {
   border-top-color: #e6e6e6;
   border-left-color: #cdcdcd;
   border-right-color: #808080;
@@ -485,7 +513,7 @@ button:active {
   border-bottom-left-radius: 0.5em;
   cursor: sw-resize;
 }
-.Popup .dialogBottomCenter {
+.Window .dialogBottomCenter {
   border-top-color: #e6e6e6;
   border-left-color: #cdcdcd;
   border-right-color: #808080;
@@ -495,7 +523,7 @@ button:active {
   border-bottom-style: solid;
   cursor: s-resize;
 }
-.Popup .dialogBottomRight {
+.Window .dialogBottomRight {
   border-top-color: #e6e6e6;
   border-left-color: #cdcdcd;
   border-right-color: #808080;
@@ -507,17 +535,17 @@ button:active {
   border-bottom-right-radius: 0.5em;
   cursor: se-resize;
 }
-.Popup .dialogTopLeftInner {
+.Window .dialogTopLeftInner {
   width: 0.3em;
 }
-.Popup .dialogTopRightInner {
+.Window .dialogTopRightInner {
   width: 0.3em;
 }
-.Popup .dialogBottomLeftInner {
+.Window .dialogBottomLeftInner {
   width: 0.3em;
   height: 0.3em;
 }
-.Popup .dialogBottomRightInner {
+.Window .dialogBottomRightInner {
   width: 0.3em;
   height: 0.3em;
 }

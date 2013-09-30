@@ -9,7 +9,7 @@ package net.sf.mmm.client.ui.base.widget.window.adapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterWindow extends UiWidgetAdapterBaseWindow {
+public interface UiWidgetAdapterWindow extends UiWidgetAdapterAbstractWindow {
 
   // nothing to add
 

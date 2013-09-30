@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
@@ -17,6 +18,6 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 public interface UiWidgetButtonGroup extends UiWidgetDynamicPanel<UiWidgetButton>, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "ButtonGroup";
+  String STYLE_PRIMARY = CssStyles.BUTTON_GROUP;
 
 }

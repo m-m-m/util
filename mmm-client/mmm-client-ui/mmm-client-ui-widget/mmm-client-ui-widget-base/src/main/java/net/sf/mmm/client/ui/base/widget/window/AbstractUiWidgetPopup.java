@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup> extends
-    AbstractUiWidgetBaseWindow<ADAPTER> implements UiWidgetPopup {
+    AbstractUiWidgetAbstractWindow<ADAPTER> implements UiWidgetPopup {
 
   /**
    * The constructor.
@@ -25,7 +25,7 @@ public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup
   public AbstractUiWidgetPopup(UiContext context) {
 
     super(context);
-    setPrimaryStyle(STYLE_PRIMARY);
+    addStyle(STYLE_POPUP);
   }
 
 }

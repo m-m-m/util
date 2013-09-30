@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.core;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 
@@ -19,9 +20,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 public interface UiWidgetToggleButton extends UiWidgetWithValue<Boolean>, UiWidgetAbstractButton, UiWidgetNative {
 
   /** The {@link #addStyle(String) additional style} of this widget. */
-  String STYLE_TOGGLE_BUTTON = "ToggleButton";
+  String STYLE_TOGGLE_BUTTON = CssStyles.TOGGLE_BUTTON;
 
   /** The {@link #addStyle(String) additional style} in case this toggle button is pressed down. */
-  String STYLE_PRESSED = "Pressed";
+  String STYLE_PRESSED = CssStyles.PRESSED;
 
 }

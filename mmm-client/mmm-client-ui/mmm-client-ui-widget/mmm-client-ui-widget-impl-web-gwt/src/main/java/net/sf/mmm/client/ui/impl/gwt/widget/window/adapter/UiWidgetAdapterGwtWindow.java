@@ -3,17 +3,16 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow;
-
-import com.google.gwt.user.client.ui.DialogBox;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow}
- * using GWT based on {@link DialogBox}.
+ * using GWT based on {@link PopupWindow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtBaseWindowDialogBox implements UiWidgetAdapterWindow {
+public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtAbstractPopupWindow implements UiWidgetAdapterWindow {
 
   /**
    * The constructor.
@@ -27,9 +26,9 @@ public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtBaseWindowDialog
    * {@inheritDoc}
    */
   @Override
-  protected DialogBox createToplevelWidget() {
+  protected PopupWindow createToplevelWidget() {
 
-    return new DialogBox(false, false);
+    return new PopupWindow(false, false);
   }
 
 }

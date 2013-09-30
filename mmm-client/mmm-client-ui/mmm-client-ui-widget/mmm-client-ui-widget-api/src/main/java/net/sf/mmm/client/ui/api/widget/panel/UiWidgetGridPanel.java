@@ -56,7 +56,7 @@ public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>
 
   /**
    * Adds an empty {@link UiWidgetGridRow row} that acts as a spacer to group blocks of rows with widgets.
-   * This row will have the {@link #setStyles(String) style}
+   * This row will {@link #hasStyle(String) have the style}
    * {@link net.sf.mmm.client.ui.api.common.CssStyles#GRID_ROW_SEPARATOR}.
    */
   void addSeparatorRow();

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
@@ -14,6 +15,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  */
 public interface UiWidgetVerticalPanel extends UiWidgetDynamicPanel<UiWidgetRegular>, UiWidgetNative {
 
-  // nothing to add
+  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
+  String STYLE_PRIMARY = CssStyles.VERTICAL_PANEL;
 
 }

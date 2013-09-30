@@ -26,6 +26,7 @@ public abstract class AbstractUiWidgetVerticalPanel<ADAPTER extends UiWidgetAdap
   public AbstractUiWidgetVerticalPanel(UiContext context) {
 
     super(context);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
 }

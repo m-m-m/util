@@ -3,19 +3,18 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterHorizontalPanel;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HorizontalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
-
-import com.google.gwt.user.client.ui.HorizontalPanel;
 
 /**
  * This is the implementation of
  * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
- * {@link HorizontalPanel}.
+ * {@link HorizontalFlowPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtHorizontalPanel extends UiWidgetAdapterGwtPanel<HorizontalPanel> implements
+public class UiWidgetAdapterGwtHorizontalPanel extends UiWidgetAdapterGwtPanel<HorizontalFlowPanel> implements
     UiWidgetAdapterHorizontalPanel {
 
   /**
@@ -30,9 +29,9 @@ public class UiWidgetAdapterGwtHorizontalPanel extends UiWidgetAdapterGwtPanel<H
    * {@inheritDoc}
    */
   @Override
-  protected HorizontalPanel createToplevelWidget() {
+  protected HorizontalFlowPanel createToplevelWidget() {
 
-    return new HorizontalPanel();
+    return new HorizontalFlowPanel();
   }
 
 }

@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.user.client.Window;
@@ -18,8 +19,11 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<RootPanel> implements
+public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWindow<RootPanel> implements
     UiWidgetAdapterMainWindow {
+
+  /** @see #getContentPanel() */
+  private final VerticalFlowPanel contentPanel;
 
   /**
    * The constructor.
@@ -27,6 +31,17 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
   public UiWidgetAdapterGwtMainWindow() {
 
     super();
+    this.contentPanel = new VerticalFlowPanel();
+    getToplevelWidget().add(this.contentPanel);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected VerticalFlowPanel getContentPanel() {
+
+    return this.contentPanel;
   }
 
   /**
@@ -76,7 +91,7 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtBaseWindow<R
 
   /**
    * Converts the width to pixels. Actual conversion has already been done by the
-   * {@link net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetBaseWindow}.
+   * {@link net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetAbstractWindow}.
    * 
    * @param length is the {@link Length}.
    * @return the {@link Length#getAmount() amount} of pixels.

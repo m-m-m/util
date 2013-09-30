@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterMainWindow extends UiWidgetAdapterBaseWindow {
+public interface UiWidgetAdapterMainWindow extends UiWidgetAdapterAbstractWindow {
 
   /**
    * This method sets the {@link UiWidgetMenuBar}. It will be called just once.

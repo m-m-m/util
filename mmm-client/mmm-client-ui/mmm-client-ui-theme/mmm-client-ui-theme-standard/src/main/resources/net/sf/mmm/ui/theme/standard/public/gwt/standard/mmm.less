@@ -92,7 +92,6 @@
 }
 .fontAwesome() {
 	font-family: FontAwesome;
-	font-size: 10pt;
 }
 
 /* Main styles */
@@ -139,10 +138,17 @@ button {
     background: @color-focus;
   }
 }
-.Toolbar {
-	.bordered();
-  border-style: solid;
-	background: @color-background-em;
+.VerticalPanel {
+
+}
+.VerticalPanel > * {
+  display: block;
+}
+.HorizontalPanel {
+  overflow: hidden;
+  /* overflow-x: auto; */
+  white-space: nowrap;
+  display: flex;
 }
 .ButtonGroup {
   display: inline-block;
@@ -178,6 +184,15 @@ button {
     background-image: linear-gradient(to bottom, @color-focus-gradient, #FFFFFF);
   }
 }
+.Toolbar {
+	.bordered();
+  border-style: solid;
+	background: @color-background-em;
+}
+.Toolbar .Button {
+	font-size: 10pt;
+	min-height: 1.8em;
+}
 
 .RichTextArea {
   width: 100%;
@@ -190,63 +205,81 @@ button {
     background: @color-focus;
   }
 }
-.Toolbar .Button {
-	.fontAwesome();
-	min-height: 1.8em;
-}
 .Bold:before {
+  .fontAwesome();
 	content: '\F032';
 }
 .Italic:before {
+  .fontAwesome();
 	content: '\F033';
 }
 .Underline:before {
+  .fontAwesome();
 	content: '\F0CD';
 }
 .Strikethrough:before {
+  .fontAwesome();
 	content: '\F0CC';
 }
 .Superscript:before {
+  .fontAwesome();
 	content: '\F12B';
 }
 .Subscript:before {
+  .fontAwesome();
 	content: '\F12C';
 }
 .AlignLeft:before {
+  .fontAwesome();
 	content: '\F036';
 }
 .AlignCenter:before {
+  .fontAwesome();
 	content: '\F037';
 }
 .AlignRight:before {
+  .fontAwesome();
 	content: '\F038';
 }
 .AlignJustify:before {
+  .fontAwesome();
 	content: '\F039';
 }
 .UnorderedList:before {
+  .fontAwesome();
 	content: '\F0CA';
 }
 .OrderedList:before {
+  .fontAwesome();
 	content: '\F0CB';
 }
 .InsertLink:before {
+  .fontAwesome();
 	content: '\F0C1';
 }
 .InsertImage:before {
+  .fontAwesome();
 	content: '\FFFF';
 }
 .FontFamily:before {
+  .fontAwesome();
 	content: '\F031';
 }
 .FontSize:before {
+  .fontAwesome();
 	content: '\F034';
 }
 .Indent:before {
+  .fontAwesome();
 	content: '\F03C';
 }
 .Outdent:before {
+  .fontAwesome();
 	content: '\F03B';
+}
+.HorizontalLine:before {
+  .fontAwesome();
+	content: '\F068';
 }
 .TextColor:before {
 	content: 'T';
@@ -261,6 +294,7 @@ button {
 	background: cyan;
 }
 .InsertImage:before {
+  .fontAwesome();
 	content: '\F03E';
 }
 .RemoveFormat:before {
@@ -269,14 +303,32 @@ button {
 }
 .RemoveFormat:after {
 	content: 'x';
-	font-size: .83em;
+	font-size: .8em;
 	vertical-align: sub;
 }
 .Undo:before {
+  .fontAwesome();
 	content: '\F0E2';
 }
 .Redo:before {
+  .fontAwesome();
 	content: '\F01E';
+}
+.MoveUp:before {
+	.fontAwesome();
+	content: '\F062';
+}
+.MoveDown:before {
+	.fontAwesome();
+	content: '\F063';
+}
+.Close:before {
+	.fontAwesome();
+	content: '\F00D';
+}
+.Fullscreen:before {
+	.fontAwesome();
+	content: '\F0B2';
 }
 
 .SearchField {
@@ -317,14 +369,15 @@ button {
 
 .CollapseButton {
 	.fontAwesome();
+	font-size: 10pt;
   padding: 0;
   margin: 0;
 }
 .CollapseButton>span:before {
-	content: '\F150';
+	content: '\F117';
 }
 .CollapseButton.Collapsed>span:before {
-	content: '\F152';
+	content: '\F116';
 }
 
 .Field {
@@ -400,48 +453,55 @@ button {
     background: black;
     opacity: 0.3;
 }
-.Popup {
+.Window {
   box-shadow: 4px 4px 5px 0px black;
   border-radius: @radius;
-
-  .dialogTopLeft {
+  .WindowTitleBar {
     .gradiented;
-    border-top-style: solid;
-    border-left-style: solid;
-    cursor: w-resize;
-    border-top-left-radius: @radius;
-  }
-  .dialogTopCenter {
-  }
-  .Caption {
-  	.gradiented;
-    .highlightText;
-    border-top-style: solid;
-    padding: @padding;
+    border-style: solid;
     cursor: move;
-  }
-  .dialogTopRight {
-    .gradiented;
-    border-top-style: solid;
-    border-right-style: solid;
+    border-top-left-radius: @radius;
     border-top-right-radius: @radius;
+    .WindowTitle {
+      .highlightText;
+      -moz-user-select: none;
+      user-select: none;
+      width: 100%;
+      padding: @padding;
+    }
+    .Button {
+      font-size: 10pt;
+    }
+  }
+  .WindowContent {
+    width: 100%;
+    height: 100%;
+  }
+  .WindowRight {
+    border: 1px solid red;
+  	width: @border-size;
     cursor: e-resize;
   }
-  .dialogMiddle {
-    background: @color-normal;
+  .WindowLeft {
+    border: 1px solid yellow;
+  	width: @border-size;
   }
-  .dialogMiddleLeft {
-    .bordered;
-    background: @color-normal;
-    border-left-style: solid;
-    cursor: w-resize;
+  .WindowBottom {
+    border: 1px solid blue;
+    width: 100%;
+  	height: @border-size;
+    cursor: n-resize;
   }
-  .dialogMiddleCenter {
-    .bordered;
-    border-style: solid;
-    border-radius: @radius;
-    padding: 3px;
-    background: white;
+  .WindowBottomLeft {
+    border: 1px solid blue;
+    height: @border-size;
+    width: @border-size;
+  }
+  .WindowBottomRight {
+    border: 1px solid green;
+    height: @border-size;
+    width: @border-size;
+    cursor: nw-resize;
   }
   .dialogContent {
   }

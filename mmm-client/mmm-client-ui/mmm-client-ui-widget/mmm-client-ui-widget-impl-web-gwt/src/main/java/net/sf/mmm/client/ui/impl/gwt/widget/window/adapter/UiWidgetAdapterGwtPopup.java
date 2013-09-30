@@ -3,16 +3,15 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
-
-import com.google.gwt.user.client.ui.DialogBox;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterPopup} using GWT based on {@link DialogBox}.
+ * This is the implementation of {@link UiWidgetAdapterPopup} using GWT based on {@link PopupWindow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtBaseWindowDialogBox implements UiWidgetAdapterPopup {
+public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtAbstractPopupWindow implements UiWidgetAdapterPopup {
 
   /**
    * The constructor.
@@ -39,11 +38,11 @@ public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtBaseWindowDialogB
    * {@inheritDoc}
    */
   @Override
-  protected DialogBox createToplevelWidget() {
+  protected PopupWindow createToplevelWidget() {
 
-    DialogBox dialogBox = new DialogBox(false, true);
-    dialogBox.setGlassEnabled(true);
-    return dialogBox;
+    PopupWindow popup = new PopupWindow(false, true);
+    popup.setGlassEnabled(true);
+    return popup;
   }
 
 }

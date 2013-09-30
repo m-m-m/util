@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.core;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
@@ -18,6 +19,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 public interface UiWidgetSlot extends UiWidgetSingleMutableComposite<UiWidgetRegular>, UiWidgetRegular, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "Slot";
+  String STYLE_PRIMARY = CssStyles.SLOT;
 
 }

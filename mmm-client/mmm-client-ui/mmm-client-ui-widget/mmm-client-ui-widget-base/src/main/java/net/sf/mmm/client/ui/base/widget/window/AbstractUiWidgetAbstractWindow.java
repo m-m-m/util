@@ -8,22 +8,23 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.api.widget.window.UiWidgetBaseWindow;
+import net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
-import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterBaseWindow;
+import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWindow;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetBaseWindow}.
+ * This is the abstract base implementation of {@link UiWidgetAbstractWindow}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapterBaseWindow> extends
-    AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetBaseWindow, AttributeWriteResizable {
+public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAdapterAbstractWindow> extends
+    AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetAbstractWindow,
+    AttributeWriteResizable {
 
   /** @see #getTitle() */
   private String title;
@@ -42,9 +43,10 @@ public abstract class AbstractUiWidgetBaseWindow<ADAPTER extends UiWidgetAdapter
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetBaseWindow(UiContext context) {
+  public AbstractUiWidgetAbstractWindow(UiContext context) {
 
     super(context);
+    setPrimaryStyle(STYLE_PRIMARY);
     this.resizable = true;
   }
 

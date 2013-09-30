@@ -11,12 +11,12 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetBaseWindow}.
+ * {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractWindow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterBaseWindow extends UiWidgetAdapterDynamicComposite<UiWidgetRegular>,
+public interface UiWidgetAdapterAbstractWindow extends UiWidgetAdapterDynamicComposite<UiWidgetRegular>,
     AttributeReadSizeInPixel, AttributeWritePosition, AttributeWriteStringTitle, AttributeWriteResizable {
 
   // nothing to add

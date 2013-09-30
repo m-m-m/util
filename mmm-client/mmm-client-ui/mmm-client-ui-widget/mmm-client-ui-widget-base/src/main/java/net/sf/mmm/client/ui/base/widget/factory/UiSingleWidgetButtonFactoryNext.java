@@ -3,13 +3,12 @@
 package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.IconConstants;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainNext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
@@ -63,9 +62,7 @@ public class UiSingleWidgetButtonFactoryNext extends AbstractUiSingleWidgetButto
       }
     };
     NlsMessage tooltipNext = getBundle().tooltipNext();
-    UiWidgetImage icon = context.getWidgetFactory().createImage(IconConstants.ICON_BUTTON_NEXT,
-        tooltipNext.getLocalizedMessage());
-    return createButton(context, null, clickHandler, tooltipNext, icon);
+    return createButton(context, null, clickHandler, tooltipNext, CssStyles.ICON_STEP_NEXT);
   }
 
 }
