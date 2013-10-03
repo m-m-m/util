@@ -23,6 +23,30 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 @NlsBundleLocation(bundleName = "NlsBundleUtilCore")
 public interface NlsBundleUtilCoreRoot extends NlsBundle {
 
+  /** @see #infoSouth() */
+  String INF_SOUTH = "south";
+
+  /** @see #infoEast() */
+  String INF_EAST = "east";
+
+  /** @see #infoWest() */
+  String INF_WEST = "west";
+
+  /** @see #infoNorth() */
+  String INF_NORTH = "north";
+
+  /** @see #infoSouthEast() */
+  String INF_SOUTH_EAST = "south-east";
+
+  /** @see #infoSouthWest() */
+  String INF_SOUTH_WEST = "south-west";
+
+  /** @see #infoNorthEast() */
+  String INF_NORTH_EAST = "north-east";
+
+  /** @see #infoNorthWest() */
+  String INF_NORTH_WEST = "north-west";
+
   /** @see #infoLeft() */
   String INF_LEFT = "left";
 
@@ -108,7 +132,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   String MSG_MAIN_MODE_VERSION_USAGE = "Print the version of this program.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
-  String MSG_SYNCHRONIZER_USAGE = "Create and/or update " + "resource-bundle property-files.";
+  String MSG_SYNCHRONIZER_USAGE = "Create and/or update resource-bundle property-files.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   String MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT = "Create and/or "
@@ -249,6 +273,70 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    */
   @NlsBundleMessage(INF_VERTICAL)
   NlsMessage infoVertical();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#SOUTH
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_SOUTH)
+  NlsMessage infoSouth();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#EAST
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_EAST)
+  NlsMessage infoEast();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#WEST
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_WEST)
+  NlsMessage infoWest();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#NORTH
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_NORTH)
+  NlsMessage infoNorth();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#SOUTH_EAST
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_SOUTH_EAST)
+  NlsMessage infoSouthEast();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#SOUTH_WEST
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_SOUTH_WEST)
+  NlsMessage infoSouthWest();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#NORTH_EAST
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_NORTH_EAST)
+  NlsMessage infoNorthEast();
+
+  /**
+   * @see net.sf.mmm.util.lang.api.Direction#NORTH_WEST
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(INF_NORTH_WEST)
+  NlsMessage infoNorthWest();
 
   /**
    * @see net.sf.mmm.util.lang.api.Conjunction#AND

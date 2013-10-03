@@ -55,19 +55,28 @@ public interface CssStyles {
   String WINDOW_TOP = "WindowTop";
 
   /** The name of the CSS style for a the left border of a {@link #WINDOW}. */
-  String WINDOW_LEFT = "WindowLeft";
+  String BORDER_WEST = "BorderW";
 
   /** The name of the CSS style for a the right border of a {@link #WINDOW}. */
-  String WINDOW_RIGHT = "WindowRight";
+  String BORDER_EAST = "BorderE";
 
   /** The name of the CSS style for a the bottom border of a {@link #WINDOW}. */
-  String WINDOW_BOTTOM = "WindowBottom";
+  String BORDER_SOUTH = "BorderS";
 
   /** The name of the CSS style for a the bottom left corner of a {@link #WINDOW}. */
-  String WINDOW_BOTTOM_LEFT = "WindowBottomLeft";
+  String BORDER_SOUTH_WEST = "BorderSW";
 
   /** The name of the CSS style for a the bottom right corner of a {@link #WINDOW}. */
-  String WINDOW_BOTTOM_RIGHT = "WindowBottomRight";
+  String BORDER_SOUTH_EAST = "BorderSE";
+
+  /** The name of the CSS style for a the top border of a {@link #WINDOW}. */
+  String BORDER_NORTH = "BorderN";
+
+  /** The name of the CSS style for a the top left corner of a {@link #WINDOW}. */
+  String BORDER_NORTH_WEST = "BorderNW";
+
+  /** The name of the CSS style for a the top right corner of a {@link #WINDOW}. */
+  String BORDER_NORTH_EAST = "BorderNE";
 
   /** The name of the CSS style for a button. */
   String BUTTON = "Button";

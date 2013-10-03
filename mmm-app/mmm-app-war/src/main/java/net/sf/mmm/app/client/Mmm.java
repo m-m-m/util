@@ -198,6 +198,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
         UiWidgetLabel label3 = factory.create(UiWidgetLabel.class);
         label3.setLabel("Hello World!");
+        UiWidgetLabel label4 = factory.create(UiWidgetLabel.class);
+        label4
+            .setLabel("This is some extra long text to test scrollbar facitlities and resizing. We spent various extra "
+                + "effort for these features that are unfortunately not offered by GWT itself out of the box.");
         UiWidgetButton button = factory.create(UiWidgetButton.class);
         button.setLabel("Close");
         UiHandlerEventClick handler = new UiHandlerEventClick() {
@@ -210,6 +214,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         };
         button.addClickHandler(handler);
         verticalPanel3.addChild(label3);
+        verticalPanel3.addChild(label4);
         verticalPanel3.addChild(button);
         popup.addChild(verticalPanel3);
         popup.centerWindow();

@@ -2,8 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.IconConstants;
+import net.sf.mmm.client.ui.api.common.Rectangle;
+import net.sf.mmm.util.lang.api.Direction;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -34,7 +37,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PopupWindow extends PopupPanel {
+public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
 
   /** The main panel. */
   private final VerticalFlowPanel mainPanel;
@@ -51,29 +54,31 @@ public class PopupWindow extends PopupPanel {
   /** The button to close the window. */
   private final Button closeButton;
 
-  /** The top left border in the titlebar of the window */
-  private FlowPanel topLeft;
-
-  /** The top right border in the titlebar of the window */
-  private FlowPanel topRight;
-
   /** The left border of the window */
-  private FlowPanel left;
+  private FlowPanel borderWest;
 
   /** The right border of the window */
-  private FlowPanel right;
+  private FlowPanel borderEast;
 
   /** The bottom border of the window */
-  private final FlowPanel bottom;
+  private final FlowPanel borderSouth;
 
   /** The bottom left corner of the window */
-  private final FlowPanel bottomLeft;
+  private final FlowPanel borderSouthWest;
 
   /** The bottom right corner of the window */
-  private final FlowPanel bottomRight;
+  private final FlowPanel borderSouthEast;
 
-  /** The total width of the browser window. */
-  private int windowWidth;
+  /** The top border of the window */
+  private final FlowPanel borderNorth;
+
+  /** The top left corner of the window */
+  private final FlowPanel borderNorthWest;
+
+  /** The top right corner of the window */
+  private final FlowPanel borderNorthEast;
+
+  private boolean resizable;
 
   /**
    * The constructor.
@@ -102,6 +107,7 @@ public class PopupWindow extends PopupPanel {
   public PopupWindow(boolean autoHide, boolean modal) {
 
     super(autoHide, modal);
+    this.resizable = true;
     setStyleName(CssStyles.WINDOW);
 
     this.title = new InlineLabel();
@@ -120,10 +126,6 @@ public class PopupWindow extends PopupPanel {
     };
     this.closeButton.addClickHandler(closeHandler);
 
-    this.topLeft = new FlowPanel();
-    this.topLeft.setStyleName(CssStyles.WINDOW_LEFT);
-    this.topRight = new FlowPanel();
-    this.topRight.setStyleName(CssStyles.WINDOW_RIGHT);
     this.titleBar = new HorizontalFlowPanel();
     this.titleBar.addStyleName(CssStyles.WINDOW_TITLE_BAR);
     this.titleBar.add(this.title);
@@ -133,53 +135,89 @@ public class PopupWindow extends PopupPanel {
     this.contentPanel.addStyleName(CssStyles.WINDOW_CONTENT);
 
     // borders for resizing...
-    this.left = new FlowPanel();
-    this.left.setStyleName(CssStyles.WINDOW_LEFT);
-    this.right = new FlowPanel();
-    this.right.setStyleName(CssStyles.WINDOW_RIGHT);
-    this.bottom = new FlowPanel();
-    this.bottom.setStyleName(CssStyles.WINDOW_BOTTOM);
-    this.bottomLeft = new FlowPanel();
-    this.bottomLeft.setStyleName(CssStyles.WINDOW_BOTTOM_LEFT);
-    this.bottomRight = new FlowPanel();
-    this.bottomRight.setStyleName(CssStyles.WINDOW_BOTTOM_RIGHT);
+    this.borderWest = new FlowPanel();
+    this.borderWest.setStyleName(CssStyles.BORDER_WEST);
+    this.borderEast = new FlowPanel();
+    this.borderEast.setStyleName(CssStyles.BORDER_EAST);
+    this.borderSouth = new FlowPanel();
+    this.borderSouth.setStyleName(CssStyles.BORDER_SOUTH);
+    this.borderSouthWest = new FlowPanel();
+    this.borderSouthWest.setStyleName(CssStyles.BORDER_SOUTH_WEST);
+    this.borderSouthEast = new FlowPanel();
+    this.borderSouthEast.setStyleName(CssStyles.BORDER_SOUTH_EAST);
+    this.borderNorth = new FlowPanel();
+    this.borderNorth.setStyleName(CssStyles.BORDER_NORTH);
+    this.borderNorthWest = new FlowPanel();
+    this.borderNorthWest.setStyleName(CssStyles.BORDER_NORTH_WEST);
+    this.borderNorthEast = new FlowPanel();
+    this.borderNorthEast.setStyleName(CssStyles.BORDER_NORTH_EAST);
 
     this.mainPanel = new VerticalFlowPanel();
     this.mainPanel.add(this.titleBar);
     this.mainPanel.add(this.contentPanel);
-    this.mainPanel.add(this.left);
-    this.mainPanel.add(this.right);
-    this.mainPanel.add(this.bottomLeft);
-    this.mainPanel.add(this.bottom);
-    this.mainPanel.add(this.bottomRight);
+    this.mainPanel.add(this.borderWest);
+    this.mainPanel.add(this.borderEast);
+    this.mainPanel.add(this.borderSouth);
+    this.mainPanel.add(this.borderSouthWest);
+    this.mainPanel.add(this.borderSouthEast);
+    this.mainPanel.add(this.borderNorth);
+    this.mainPanel.add(this.borderNorthWest);
+    this.mainPanel.add(this.borderNorthEast);
     super.add(this.mainPanel);
 
     // setStyleName(getContainerElement(), "popupContent");
-    // this.clientLeftOffset = Document.get().getBodyOffsetLeft();
-    // this.clientTopOffset = Document.get().getBodyOffsetTop();
 
-    this.windowWidth = Window.getClientWidth();
+    addMouseHandler(this.title, null);
+    addMouseHandler(this.borderEast, Direction.EAST);
+    addMouseHandler(this.borderSouth, Direction.SOUTH);
+    addMouseHandler(this.borderSouthEast, Direction.SOUTH_EAST);
+    addMouseHandler(this.borderSouthWest, Direction.SOUTH_WEST);
+    addMouseHandler(this.borderWest, Direction.WEST);
+    addMouseHandler(this.borderNorth, Direction.NORTH);
+    addMouseHandler(this.borderNorthEast, Direction.NORTH_EAST);
+    addMouseHandler(this.borderNorthWest, Direction.NORTH_WEST);
+  }
 
-    addMouseHandler(this.title, MouseAction.MOVE);
-    addMouseHandler(this.topRight, MouseAction.RESIZE_HORIZONTAL);
-    addMouseHandler(this.right, MouseAction.RESIZE_HORIZONTAL);
-    addMouseHandler(this.bottom, MouseAction.RESIZE_VERTICAL);
-    addMouseHandler(this.bottomRight, MouseAction.RESIZE_BOTH);
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isResizable() {
+
+    return this.resizable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setResizable(boolean resizable) {
+
+    if (this.resizable == resizable) {
+      return;
+    }
+    this.borderEast.setVisible(resizable);
+    this.borderNorth.setVisible(resizable);
+    this.borderNorthEast.setVisible(resizable);
+    this.borderNorthWest.setVisible(resizable);
+    this.borderSouth.setVisible(resizable);
+    this.borderSouthEast.setVisible(resizable);
+    this.borderSouthWest.setVisible(resizable);
+    this.borderWest.setVisible(resizable);
+    this.resizable = resizable;
   }
 
   /**
    * Adds a {@link MouseHandler} to the given {@link Widget} based on the given {@link MouseAction}.
    * 
    * @param widget is the {@link Widget} where to add the {@link MouseHandler} to.
-   * @param action is the {@link MouseAction} to handle.
+   * @param resizeDirection is the resize {@link Direction} or <code>null</code> for move.
    */
-  private void addMouseHandler(Widget widget, MouseAction action) {
+  private void addMouseHandler(Widget widget, Direction resizeDirection) {
 
-    MouseHandler handler = new MouseHandler(action);
+    MouseHandler handler = new MouseHandler(resizeDirection);
     widget.sinkEvents(Event.ONMOUSEDOWN);
     widget.addDomHandler(handler, MouseDownEvent.getType());
-    // widget.addDomHandler(handler, MouseUpEvent.getType());
-    // widget.addDomHandler(handler, MouseMoveEvent.getType());
   }
 
   /**
@@ -239,8 +277,8 @@ public class PopupWindow extends PopupPanel {
    */
   private class MouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler, Event.NativePreviewHandler {
 
-    /** The current {@link MouseAction} while dragging or <code>null</code>. */
-    private final MouseAction mouseAction;
+    /** The resize {@link Direction} or <code>null</code> for move. */
+    private final Direction resizeDirection;
 
     /** The initial x position while dragging the mouse. */
     private int mouseX;
@@ -248,25 +286,33 @@ public class PopupWindow extends PopupPanel {
     /** The initial y position while dragging the mouse. */
     private int mouseY;
 
-    private int popupX;
+    /** The current {@link Rectangle} of the {@link PopupWindow}. */
+    private Rectangle popupRectangle;
 
-    private int popupY;
+    /** The current {@link Rectangle} of the browser. */
+    private Rectangle browserRectangle;
 
-    private int popupWidth;
+    /** The minimum width of the {@link PopupWindow}. */
+    private int minWidth;
 
-    private int popupHeight;
+    /** The minimum height of the {@link PopupWindow}. */
+    private int minHeight;
 
+    /**
+     * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or
+     * <code>null</code>.
+     */
     private HandlerRegistration registration;
 
     /**
      * The constructor.
      * 
-     * @param mouseAction is the {@link MouseAction} to handle.
+     * @param resizeDirection is the resize {@link Direction} or <code>null</code> for move.
      */
-    public MouseHandler(MouseAction mouseAction) {
+    public MouseHandler(Direction resizeDirection) {
 
       super();
-      this.mouseAction = mouseAction;
+      this.resizeDirection = resizeDirection;
     }
 
     /**
@@ -275,65 +321,67 @@ public class PopupWindow extends PopupPanel {
     @Override
     public void onPreviewNativeEvent(NativePreviewEvent event) {
 
-      switch (event.getTypeInt()) {
-        case Event.ONMOUSEMOVE:
-          NativeEvent nativeEvent = event.getNativeEvent();
-          onMouseMove(nativeEvent.getClientX(), nativeEvent.getClientY());
-          break;
-        case Event.ONMOUSEUP:
-          onMouseUp(null);
-          break;
-      }// end switch
-
+      int eventType = event.getTypeInt();
+      if (eventType == Event.ONMOUSEMOVE) {
+        NativeEvent nativeEvent = event.getNativeEvent();
+        onMouseMove(nativeEvent.getClientX(), nativeEvent.getClientY());
+      } else if (eventType == Event.ONMOUSEUP) {
+        onMouseUp(null);
+      }
     }
 
     @Override
     public void onMouseDown(MouseDownEvent event) {
 
-      // if (DOM.getCaptureElement() == null) {
-      // DOM.setCapture(this.element);
-
+      if (!PopupWindow.this.resizable) {
+        return;
+      }
       this.mouseX = event.getClientX();
       this.mouseY = event.getClientY();
-      this.popupX = getAbsoluteLeft();
-      this.popupY = getAbsoluteTop();
-      this.popupWidth = getOffsetWidth();
-      this.popupHeight = getOffsetHeight();
+      this.popupRectangle = new Rectangle(getAbsoluteLeft(), getAbsoluteTop(), getOffsetWidth(), getOffsetHeight());
+
+      // TODO: calculate from CSS values
+      this.minWidth = 200;
+      this.minHeight = 100;
+
+      this.browserRectangle = new Rectangle(0, 0, Window.getClientWidth(), Window.getClientHeight());
 
       assert (this.registration == null);
       this.registration = Event.addNativePreviewHandler(this);
+      // prevent other things such as text selection while dragging...
+      event.preventDefault();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onMouseMove(MouseMoveEvent event) {
 
       onMouseMove(event.getClientX(), event.getClientY());
     }
 
+    /**
+     * @see #onMouseMove(MouseMoveEvent)
+     * 
+     * @param x is the mouse X position.
+     * @param y is the mouse Y position.
+     */
     private void onMouseMove(int x, int y) {
 
       int deltaX = x - this.mouseX;
       int deltaY = y - this.mouseY;
 
-      if (this.mouseAction == MouseAction.MOVE) {
-        int newX = this.popupX + deltaX;
-        int newY = this.popupY + deltaY;
+      Rectangle newRectangle;
 
-        // if the mouse is off the screen to the left, right, or top, don't
-        // move the dialog box. This would let users lose dialog boxes, which
-        // would be bad for modal popups.
-        if (newX < 0 || newX >= PopupWindow.this.windowWidth || newY < 0) {
-          return;
-        }
-        setPopupPosition(newX, newY);
+      if (this.resizeDirection == null) {
+        // move...
+        newRectangle = this.popupRectangle.moveBy(deltaX, deltaY).clipTo(this.browserRectangle, true);
       } else {
-        if (this.mouseAction == MouseAction.RESIZE_HORIZONTAL) {
-          deltaY = 0;
-        } else if (this.mouseAction == MouseAction.RESIZE_VERTICAL) {
-          deltaX = 0;
-        }
-        setPixelSize(this.popupWidth + deltaX, this.popupHeight + deltaY);
+        newRectangle = this.popupRectangle.resize(deltaX, deltaY, this.resizeDirection, this.minWidth, this.minHeight);
       }
+      setPixelSize(newRectangle.getWidth(), newRectangle.getHeight());
+      setPopupPosition(newRectangle.getX(), newRectangle.getY());
     }
 
     @Override
@@ -343,20 +391,6 @@ public class PopupWindow extends PopupPanel {
       this.registration.removeHandler();
       this.registration = null;
     }
-  }
-
-  /**
-   * Enum with the available actions of mouse dragging on a {@link PopupWindow}.
-   */
-  public enum MouseAction {
-
-    MOVE,
-
-    RESIZE_HORIZONTAL,
-
-    RESIZE_VERTICAL,
-
-    RESIZE_BOTH,
   }
 
 }

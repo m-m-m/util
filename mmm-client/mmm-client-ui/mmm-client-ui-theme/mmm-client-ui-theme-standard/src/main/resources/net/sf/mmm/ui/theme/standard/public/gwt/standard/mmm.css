@@ -444,8 +444,8 @@ button:active {
   cursor: move;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
 }
 .Window .WindowTitleBar:hover {
   background-image: linear-gradient(to bottom, #ffffff, #b6cff3);
@@ -465,54 +465,76 @@ button:active {
   font-size: 10pt;
 }
 .Window .WindowContent {
-  width: 100%;
-  height: 100%;
   overflow: auto;
 }
-.Window .WindowRight {
+.Window .BorderE {
   position: absolute;
-  right: -0.3em;
+  right: -0.2em;
   top: 0;
-  width: 0.6em;
+  width: 0.4em;
   height: 100%;
   cursor: e-resize;
   border: 1px solid red;
 }
-.Window .WindowLeft {
+.Window .BorderW {
   position: absolute;
-  left: -0.3em;
+  left: -0.2em;
   top: 0;
-  width: 0.6em;
+  width: 0.4em;
   height: 100%;
   cursor: w-resize;
   border: 1px solid yellow;
 }
-.Window .WindowBottom {
+.Window .BorderS {
   position: absolute;
   left: 0;
-  bottom: -0.3em;
+  bottom: -0.2em;
   width: 100%;
-  height: 0.6em;
+  height: 0.4em;
   cursor: s-resize;
   border: 1px solid blue;
 }
-.Window .WindowBottomLeft {
+.Window .BorderSW {
   position: absolute;
-  left: -0.3em;
-  bottom: -0.3em;
-  height: 0.6em;
-  width: 0.6em;
+  left: -0.2em;
+  bottom: -0.2em;
+  height: 0.4em;
+  width: 0.4em;
   cursor: sw-resize;
   border: 1px solid blue;
 }
-.Window .WindowBottomRight {
+.Window .BorderSE {
   position: absolute;
-  right: -0.3em;
-  bottom: -0.3em;
-  height: 0.6em;
-  width: 0.6em;
+  right: -0.2em;
+  bottom: -0.2em;
+  height: 0.4em;
+  width: 0.4em;
   cursor: se-resize;
   border: 1px solid green;
+}
+.Window .BorderN {
+  position: absolute;
+  left: 0;
+  top: -0.2em;
+  width: 100%;
+  height: 0.4em;
+  cursor: n-resize;
+}
+.Window .BorderNW {
+  position: absolute;
+  left: -0.2em;
+  top: -0.2em;
+  height: 0.4em;
+  width: 0.4em;
+  cursor: nw-resize;
+}
+.Window .BorderNE {
+  position: absolute;
+  right: -0.2em;
+  top: -0.2em;
+  height: 0.4em;
+  width: 0.4em;
+  cursor: ne-resize;
 }
 /* Tabs */
 .TabPanel .gwt-TabBarFirst {

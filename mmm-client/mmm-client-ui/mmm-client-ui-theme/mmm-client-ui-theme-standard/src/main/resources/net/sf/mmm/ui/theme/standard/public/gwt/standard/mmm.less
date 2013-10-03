@@ -16,7 +16,7 @@
 @color-invalid: #FFBBBB;
 
 @font-size: 14pt;
-@border-size: 0.3em;
+@border-size: 0.2em;
 @radius: 0.5em;
 @padding: 0.2em;
 @margin: @padding;
@@ -477,11 +477,9 @@ button {
     }
   }
   .WindowContent {
-    width: 100%;
-    height: 100%;
     overflow: auto;
   }
-  .WindowRight {
+  .BorderE {
     position: absolute;
     right: -@border-size;
     top: 0;
@@ -490,7 +488,7 @@ button {
     cursor: e-resize;
     border: 1px solid red;
   }
-  .WindowLeft {
+  .BorderW {
     position: absolute;
     left: -@border-size;
     top: 0;
@@ -499,7 +497,7 @@ button {
     cursor: w-resize;
     border: 1px solid yellow;
   }
-  .WindowBottom {
+  .BorderS {
     position: absolute;
     left: 0;
     bottom: -@border-size;
@@ -508,7 +506,7 @@ button {
     cursor: s-resize;
     border: 1px solid blue;
   }
-  .WindowBottomLeft {
+  .BorderSW {
     position: absolute;
     left: -@border-size;
     bottom: -@border-size;
@@ -517,7 +515,7 @@ button {
     cursor: sw-resize;
     border: 1px solid blue;
   }
-  .WindowBottomRight {
+  .BorderSE {
     position: absolute;
     right: -@border-size;
     bottom: -@border-size;
@@ -525,6 +523,30 @@ button {
     width: 2 * @border-size;
     cursor: se-resize;
     border: 1px solid green;
+  }
+  .BorderN {
+    position: absolute;
+    left: 0;
+    top: -@border-size;
+    width: 100%;
+    height: 2 * @border-size;
+    cursor: n-resize;
+  }
+  .BorderNW {
+    position: absolute;
+    left: -@border-size;
+    top: -@border-size;
+    height: 2 * @border-size;
+    width: 2 * @border-size;
+    cursor: nw-resize;
+  }
+  .BorderNE {
+    position: absolute;
+    right: -@border-size;
+    top: -@border-size;
+    height: 2 * @border-size;
+    width: 2 * @border-size;
+    cursor: ne-resize;
   }
   .dialogContent {
   }

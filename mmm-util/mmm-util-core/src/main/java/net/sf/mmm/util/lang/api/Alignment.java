@@ -3,6 +3,7 @@
 package net.sf.mmm.util.lang.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This enum contains the available values for the alignment of an object.
@@ -319,5 +320,69 @@ public enum Alignment implements Datatype<String> {
    *         {@link #CENTER}.
    */
   public abstract Alignment getMirrored();
+
+  /**
+   * @return the corresponding {@link Direction} or <code>null</code> for {@link #CENTER}.
+   * @since 4.0.0
+   */
+  public Direction toDirection() {
+
+    switch (this) {
+      case BOTTOM:
+        return Direction.SOUTH;
+      case BOTTOM_LEFT:
+        return Direction.SOUTH_WEST;
+      case BOTTOM_RIGHT:
+        return Direction.SOUTH_EAST;
+      case CENTER:
+        return null;
+      case LEFT:
+        return Direction.WEST;
+      case RIGHT:
+        return Direction.EAST;
+      case TOP:
+        return Direction.NORTH;
+      case TOP_LEFT:
+        return Direction.NORTH_WEST;
+      case TOP_RIGHT:
+        return Direction.NORTH_EAST;
+      default :
+        throw new IllegalCaseException(Alignment.class, this);
+    }
+  }
+
+  /**
+   * This is the inverse operation for {@link #toDirection()}.
+   * 
+   * @param direction is the {@link Direction}. May be <code>null</code> for {@link #CENTER}.
+   * @return the corresponding {@link Alignment}.
+   * @since 4.0.0
+   */
+  public static Alignment fromDirection(Direction direction) {
+
+    if (direction == null) {
+      return CENTER;
+    }
+    switch (direction) {
+      case EAST:
+        return RIGHT;
+      case WEST:
+        return LEFT;
+      case NORTH:
+        return BOTTOM;
+      case SOUTH:
+        return TOP;
+      case SOUTH_EAST:
+        return BOTTOM_RIGHT;
+      case SOUTH_WEST:
+        return BOTTOM_LEFT;
+      case NORTH_EAST:
+        return TOP_RIGHT;
+      case NORTH_WEST:
+        return TOP_LEFT;
+      default :
+        throw new IllegalCaseException(Direction.class, direction);
+    }
+  }
 
 }
