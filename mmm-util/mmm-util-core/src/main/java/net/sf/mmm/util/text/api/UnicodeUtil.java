@@ -36,9 +36,7 @@ public interface UnicodeUtil {
    */
   char LINE_FEED = 0x0000A;
 
-  /**
-   * The character indicating a move to the next page.
-   */
+  /** The character indicating a move to the next page. */
   char FORM_FEED = 0x0000C;
 
   /**
@@ -66,9 +64,7 @@ public interface UnicodeUtil {
    */
   char DOLLAR_SIGN = 0x0024;
 
-  /**
-   * The percent sign indicating the 1/100 part of the preceding number. Looks like this: {@value}
-   */
+  /** The percent sign indicating the 1/100 part of the preceding number. Looks like this: {@value} */
   char PERCENT_SIGN = 0x0025;
 
   /** The ampersand sign used for the term "and". Looks like this: {@value} */
@@ -168,6 +164,7 @@ public interface UnicodeUtil {
   char GREATER_THAN_SIGN = 0x0003E;
 
   // char GREATER_THAN_SIGN_WITH_VERTICAL_LINE=0x0003E-020D2;
+
   /** The question mark sign used to terminate a question. Looks like this: {@value} */
   char QUESTION_MARK = 0x0003F;
 
@@ -255,11 +252,15 @@ public interface UnicodeUtil {
   /** The Latin letter {@value} . */
   char LATIN_CAPITAL_LETTER_Z = 0x005A;
 
+  /** The left/opening square bracket. Looks like this: {@value} */
   char LEFT_SQUARE_BRACKET = 0x0005B;
 
+  /** The reverse solidus or backslash sign. Looks like this: {@value} */
   char REVERSE_SOLIDUS = 0x0005C;
 
   // char REVERSE_SOLIDUS_SUBSET_OF=0x0005C-02282;
+
+  /** The right/closing square bracket. Looks like this: {@value} */
   char RIGHT_SQUARE_BRACKET = 0x0005D;
 
   /**
@@ -269,6 +270,7 @@ public interface UnicodeUtil {
    */
   char CIRCUMFLEX_ACCENT = 0x0005E;
 
+  /** The low line or underscore sign. Looks like this: {@value} */
   char LOW_LINE = 0x0005F;
 
   /**
@@ -278,91 +280,91 @@ public interface UnicodeUtil {
    */
   char GRAVE_ACCENT = 0x00060;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_A = 0x0061;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_B = 0x0062;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_C = 0x0063;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_D = 0x0064;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_E = 0x0065;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_F = 0x0066;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_G = 0x0067;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_H = 0x0068;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_I = 0x0069;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_J = 0x006A;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_K = 0x006B;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_L = 0x006C;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_M = 0x006D;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_N = 0x006E;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_O = 0x006F;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_P = 0x0070;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_Q = 0x0071;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_R = 0x0072;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_S = 0x0073;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_T = 0x0074;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_U = 0x0075;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_V = 0x0076;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_W = 0x0077;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_X = 0x0078;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_Y = 0x0079;
 
-  /** The Latin letter {@value} . */
+  /** The small Latin letter {@value} . */
   char LATIN_SMALL_LETTER_Z = 0x007A;
 
+  /** The left/opening curly brace. Looks like this: {@value} */
   char LEFT_CURLY_BRACKET = 0x0007B;
 
+  /** The vertical line/bar symbol. Looks like this: {@value} */
   char VERTICAL_LINE = 0x0007C;
 
-  /**
-   * The closing curly bracket. Looks like this: {@value}
-   */
+  /** The right/closing curly brace. Looks like this: {@value} */
   char RIGHT_CURLY_BRACKET = 0x0007D;
 
   /**
@@ -371,6 +373,7 @@ public interface UnicodeUtil {
    */
   char TILDE = 0x007E;
 
+  /** The delete character is a control character for the function of the delete/backspace key. */
   char DELETE = 0x0007F;
 
   // ** C1 controls (80-9F) **
@@ -403,8 +406,10 @@ public interface UnicodeUtil {
   /** The sign for the Chinese currency yen. Looks like a dobule striketrough letter Y: {@value} */
   char YEN_SIGN = 0x00A5;
 
+  /** The broken vertical bar symbol. Looks like this: {@value} */
   char BROKEN_BAR = 0x000A6;
 
+  /** The section or paragraph sign. Looks like this: {@value} */
   char SECTION_SIGN = 0x000A7;
 
   /**
@@ -418,13 +423,13 @@ public interface UnicodeUtil {
   /** Copyright sign (c) as correct glyph: {@value} . */
   char COPYRIGHT_SIGN = 0x000A9;
 
+  /** The feminine ordinal indicator. Looks like this: {@value} */
   char FEMININE_ORDINAL_INDICATOR = 0x000AA;
 
+  /** The left/opening double angle quotation mark. Looks like this: {@value} */
   char LEFT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK = 0x000AB;
 
-  /**
-   * The sign for a negation in boolean algebra. Looks like this: {@value}
-   */
+  /** The sign for a negation in boolean algebra. Looks like this: {@value} */
   char NOT_SIGN = 0x000AC;
 
   /**
@@ -433,9 +438,7 @@ public interface UnicodeUtil {
    */
   char SOFT_HYPHEN = 0x000AD;
 
-  /**
-   * The symbol for a registered trademark. Looks like the letter <code>R</code> in a circle: {@value}
-   */
+  /** The symbol for a registered trademark. Looks like the letter <code>R</code> in a circle: {@value} */
   char REGISTERED_SIGN = 0x000AE;
 
   /**
@@ -445,62 +448,86 @@ public interface UnicodeUtil {
   char MACRON = 0x000AF;
 
   /**
-   * The symbol indicating degrees for angles or temperature. It looks like a small superscript circle: * * *
-   * * {@value}
+   * The symbol indicating degrees for angles or temperature. It looks like a small superscript circle as you
+   * can see here: {@value}
    */
   char DEGREE_SIGN = 0x000B0;
 
-  /**
-   * The symbol indicating both plus (+) and minus (-). Looks like this: {@value}
-   */
+  /** The symbol indicating plus (+) and/or minus (-). Looks like this: {@value} */
   char PLUS_MINUS_SIGN = 0x000B1;
 
-  /**
-   * A small superscript variant of 2 e.g for the square. Looks like this: {@value}
-   */
+  /** A small superscript variant of 2 e.g for the square. Looks like this: {@value} */
   char SUPERSCRIPT_TWO = 0x000B2;
 
-  /**
-   * A small superscript variant of 3 e.g for cubic. Looks like this: {@value}
-   */
+  /** A small superscript variant of 3 e.g for cubic. Looks like this: {@value} */
   char SUPERSCRIPT_THREE = 0x000B3;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#ACUTE}.
+   */
   char ACUTE_ACCENT = 0x000B4;
 
+  /** The micro sign for 10<sup>-6</sup>. Looks like this: {@value} */
   char MICRO_SIGN = 0x000B5;
 
+  /** The pilcrow or paragraph sign. Looks like this: {@value} */
   char PILCROW_SIGN = 0x000B6;
 
+  /** A small centered dot. Looks like this: {@value} */
   char MIDDLE_DOT = 0x000B7;
 
+  /**
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
+   * {@link DiacriticalMark#CEDILLA}.
+   */
   char CEDILLA = 0x000B8;
 
+  /** A small superscript variant of 1. Looks like this: {@value} */
   char SUPERSCRIPT_ONE = 0x000B9;
 
+  /** The masculine ordinal indicator. Looks like this: {@value} */
   char MASCULINE_ORDINAL_INDICATOR = 0x000BA;
 
+  /** The right/closing double angle quotation mark. Looks like this: {@value} */
   char RIGHT_POINTING_DOUBLE_ANGLE_QUOTATION_MARK = 0x000BB;
 
+  /** The glyph for the fraction 1/4. Looks like this: {@value} */
   char VULGAR_FRACTION_ONE_QUARTER = 0x000BC;
 
+  /** The glyph for the fraction 1/2. Looks like this: {@value} */
   char VULGAR_FRACTION_ONE_HALF = 0x000BD;
 
+  /** The glyph for the fraction 3/4. Looks like this: {@value} */
   char VULGAR_FRACTION_THREE_QUARTERS = 0x000BE;
 
+  /**
+   * An inverted (upside-down) {@link #QUESTION_MARK question mark} (?) used at the beginning of a question in
+   * Spanish. Looks like this: {@value}
+   */
   char INVERTED_QUESTION_MARK = 0x000BF;
 
+  /** The capital Latin letter A with a {@link #GRAVE_ACCENT grave accent}. Looks like this: {@value} */
   char LATIN_CAPITAL_LETTER_A_WITH_GRAVE = 0x000C0;
 
+  /** The capital Latin letter A with a {@link #ACUTE_ACCENT acute accent}. Looks like this: {@value} */
   char LATIN_CAPITAL_LETTER_A_WITH_ACUTE = 0x000C1;
 
+  /**
+   * The capital Latin letter A with a {@link #CIRCUMFLEX_ACCENT circumflex accent}. Looks like this: {@value}
+   */
   char LATIN_CAPITAL_LETTER_A_WITH_CIRCUMFLEX = 0x000C2;
 
+  /** The capital Latin letter A with a {@link #TILDE tilde}. Looks like this: {@value} */
   char LATIN_CAPITAL_LETTER_A_WITH_TILDE = 0x000C3;
 
+  /** The capital Latin letter A with a {@link #DIAERESIS diaeresis}. Looks like this: {@value} */
   char LATIN_CAPITAL_LETTER_A_WITH_DIAERESIS = 0x000C4;
 
+  /** The capital Latin letter A with a {@link #RING_ABOVE ring above}. Looks like this: {@value} */
   char LATIN_CAPITAL_LETTER_A_WITH_RING_ABOVE = 0x000C5;
 
+  /** The combination of the capital Latin letters A and E. Looks like this: {@value} */
   char LATIN_CAPITAL_LETTER_AE = 0x000C6;
 
   char LATIN_CAPITAL_LETTER_C_WITH_CEDILLA = 0x000C7;
