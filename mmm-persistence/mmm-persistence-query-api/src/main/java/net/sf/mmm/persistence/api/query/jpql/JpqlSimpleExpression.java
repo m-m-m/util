@@ -6,30 +6,32 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the interface for a property used to build a single condition or comparison of a
- * {@link JpqlConditionalExpression}. You can call {@link #not()} and may only call a single
- * {@link #isCondition(JpqlCondition) condition} , {@link #isCompare(JpqlOperator, String, String) comparison}
- * or {@link #isBetween(Object, Object) between expression} method.
+ * This is the interface used to build a simple condition or comparison of a {@link JpqlConditionalExpression}
+ * typically for a {@link JpqlConditionalExpression#property(String) property}. You can call {@link #not()}
+ * and may only call a single {@link #isCondition(JpqlCondition) condition},
+ * {@link #isCompare(JpqlOperator, String, String) comparison} or {@link #isBetween(Object, Object) between
+ * expression} method.
  * 
- * @see JpqlConditionalExpression
+ * @see JpqlConditionalExpression#property(String)
+ * @see JpqlConditionalExpression#subQuery(net.sf.mmm.persistence.api.query.SimpleQuery)
  * 
  * @param <T> is the generic type of the property. May be {@link Object} for untyped access.
  * @param <EXPRESSION> is the generic type of the {@link JpqlConditionalExpression} that created this
- *        {@link JpqlPropertyExpression}.
+ *        {@link JpqlSimpleExpression}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 0.9.0
+ * @since 1.0.0
  */
-public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExpression<?, ?>> extends JpqlCore {
+public interface JpqlSimpleExpression<T, EXPRESSION extends JpqlConditionalExpression<?, ?>> extends JpqlCore {
 
   /**
    * This method negates the following {@link #isCompare(JpqlOperator, Object) comparison},
    * {@link #isCondition(JpqlCondition) condition} or {@link #isBetween(Object, Object) between expression}.
-   * It may be called only once per instance of {@link JpqlPropertyExpression}.
+   * It may be called only once per instance of {@link JpqlSimpleExpression}.
    * 
    * @return this instance itself.
    */
-  JpqlPropertyExpression<T, EXPRESSION> not();
+  JpqlSimpleExpression<T, EXPRESSION> not();
 
   /**
    * This method adds the specified comparison expression to the {@link JpqlFragment}. It will compare this
@@ -38,7 +40,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @param operator is the {@link JpqlOperator} used for the comparison.
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isCompare(JpqlOperator operator, String basePath, String property);
 
@@ -49,7 +51,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @param operator is the {@link JpqlOperator} used for the comparison.
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isCompare(JpqlOperator operator, String basePath, TypedProperty<T> property);
 
@@ -63,7 +65,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * 
    * @param operator is the {@link JpqlOperator} used for the comparison.
    * @param value is the value to compare to (used as second argument).
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isCompare(JpqlOperator operator, T value);
 
@@ -76,7 +78,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * 
    * @param operator is the {@link JpqlOperator} used for the comparison.
    * @param value is the value to be compared (used as first argument).
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isCompareInverse(JpqlOperator operator, T value);
 
@@ -85,7 +87,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * {@link JpqlOperator#EQUAL}.
    * 
    * @param value is the value to compare to (used as second argument).
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isEqual(T value);
 
@@ -95,7 +97,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * 
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isEqual(String basePath, String property);
 
@@ -105,7 +107,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * 
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isEqual(String basePath, TypedProperty<T> property);
 
@@ -158,7 +160,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @param convertGlob - <code>true</code> if the given <code>value</code> should be
    *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
    *        otherwise (if the value should be used as is).
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isLike(String pattern, boolean convertGlob);
 
@@ -175,7 +177,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @param convertGlob - <code>true</code> if the given <code>value</code> should be
    *        {@link #convertGlobPattern(String) converted from GLOB to SQL syntax}, <code>false</code>
    *        otherwise (if the value should be used as is).
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isLikeInverse(String pattern, boolean convertGlob);
 
@@ -186,21 +188,21 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @see #isEmpty()
    * 
    * @param condition is the {@link JpqlCondition} to add.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isCondition(JpqlCondition condition);
 
   /**
    * This method calls {@link #isCondition(JpqlCondition)} using {@link JpqlCondition#IS_NULL}.
    * 
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isNull();
 
   /**
    * This method calls {@link #isCondition(JpqlCondition)} using {@link JpqlCondition#IS_EMPTY}.
    * 
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isEmpty();
 
@@ -209,7 +211,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * 
    * @param min is the minimum value.
    * @param max is the maximum value.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isBetween(T min, T max);
 
@@ -217,7 +219,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * This method adds a (not) between expression to the query (property + " [NOT ]BETWEEN :min AND :max").
    * 
    * @param range is the {@link Range}.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isBetween(Range<? extends T> range);
 
@@ -229,7 +231,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @param minProperty is the {@link JpqlCore#PROPERTY property} with the minimum value.
    * @param maxBasePath is the {@link JpqlCore#PROPERTY_BASE_PATH base path} for <code>maxProperty</code>.
    * @param maxProperty is the {@link JpqlCore#PROPERTY property} with the maximum value.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isBetween(String minBasePath, TypedProperty<T> minProperty, String maxBasePath,
       TypedProperty<T> maxProperty);
@@ -242,7 +244,7 @@ public interface JpqlPropertyExpression<T, EXPRESSION extends JpqlConditionalExp
    * @param minProperty is the {@link JpqlCore#PROPERTY property} with the minimum value.
    * @param maxBasePath is the {@link JpqlCore#PROPERTY_BASE_PATH base path} for <code>maxProperty</code>.
    * @param maxProperty is the {@link JpqlCore#PROPERTY property} with the maximum value.
-   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlPropertyExpression}.
+   * @return the {@link JpqlConditionalExpression} that created this {@link JpqlSimpleExpression}.
    */
   EXPRESSION isBetween(String minBasePath, String minProperty, String maxBasePath, String maxProperty);
 }

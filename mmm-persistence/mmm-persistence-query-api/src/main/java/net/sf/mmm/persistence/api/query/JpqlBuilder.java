@@ -21,7 +21,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * builder.{@link #from(Class) from}(MyEntity.class).{@link JpqlFromClause#where()
  * where()}.{@link net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause#property(net.sf.mmm.util.pojo.path.api.TypedProperty)
  * property}(MyEntity.TYPED_PROPERTY_AGE).{@link
- * net.sf.mmm.persistence.api.query.jpql.JpqlPropertyExpression#isCompare(net.sf.mmm.persistence.api.query.jpql.JpqlOperator, Object)
+ * net.sf.mmm.persistence.api.query.jpql.JpqlSimpleExpression#isCompare(net.sf.mmm.persistence.api.query.jpql.JpqlOperator, Object)
  * isCompare}({@link net.sf.mmm.persistence.api.query.jpql.JpqlOperator#GREATER_THAN}, minAge){@literal
  * .}{@link net.sf.mmm.persistence.api.query.jpql.JpqlWhereClause#select() select()};
  * </pre>

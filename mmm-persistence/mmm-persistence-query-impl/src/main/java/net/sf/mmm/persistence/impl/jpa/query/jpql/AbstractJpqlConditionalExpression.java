@@ -6,7 +6,7 @@ import net.sf.mmm.persistence.api.query.SimpleQuery;
 import net.sf.mmm.persistence.api.query.jpql.JpqlConditionalExpression;
 import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlFromClause;
-import net.sf.mmm.persistence.api.query.jpql.JpqlPropertyExpression;
+import net.sf.mmm.persistence.api.query.jpql.JpqlSimpleExpression;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
@@ -91,7 +91,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public JpqlPropertyExpression<Object, SELF> property(String basePath, String property) {
+  public JpqlSimpleExpression<Object, SELF> property(String basePath, String property) {
 
     return property(basePath, property, Object.class);
   }
@@ -100,7 +100,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public <T> JpqlPropertyExpression<T, SELF> property(String basePath, TypedProperty<T> property) {
+  public <T> JpqlSimpleExpression<T, SELF> property(String basePath, TypedProperty<T> property) {
 
     return property(basePath, property.getPojoPath(), property.getPropertyType());
   }
@@ -109,7 +109,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public <T> JpqlPropertyExpression<T, SELF> property(String basePath, String property, Class<T> propertyType) {
+  public <T> JpqlSimpleExpression<T, SELF> property(String basePath, String property, Class<T> propertyType) {
 
     return new JpqlPropertyExpressionImpl<T, SELF>((SELF) this, basePath, property);
   }
@@ -118,7 +118,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public JpqlPropertyExpression<Object, SELF> property(String property) {
+  public JpqlSimpleExpression<Object, SELF> property(String property) {
 
     return property(null, property);
   }
@@ -127,7 +127,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public <T> JpqlPropertyExpression<T, SELF> property(TypedProperty<T> property) {
+  public <T> JpqlSimpleExpression<T, SELF> property(TypedProperty<T> property) {
 
     return property(null, property);
   }
@@ -136,7 +136,7 @@ public abstract class AbstractJpqlConditionalExpression<E, SELF extends JpqlCond
    * {@inheritDoc}
    */
   @Override
-  public <T> JpqlPropertyExpression<T, SELF> subQuery(SimpleQuery<T> subQuery) {
+  public <T> JpqlSimpleExpression<T, SELF> subQuery(SimpleQuery<T> subQuery) {
 
     return property("", subQuery.getJpqlStatement(), null);
   }

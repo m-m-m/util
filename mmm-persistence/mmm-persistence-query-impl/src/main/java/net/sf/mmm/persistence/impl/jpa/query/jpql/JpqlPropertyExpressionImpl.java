@@ -6,26 +6,26 @@ import net.sf.mmm.persistence.api.query.jpql.JpqlCondition;
 import net.sf.mmm.persistence.api.query.jpql.JpqlConditionalExpression;
 import net.sf.mmm.persistence.api.query.jpql.JpqlCore;
 import net.sf.mmm.persistence.api.query.jpql.JpqlOperator;
-import net.sf.mmm.persistence.api.query.jpql.JpqlPropertyExpression;
+import net.sf.mmm.persistence.api.query.jpql.JpqlSimpleExpression;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the implementation of {@link JpqlPropertyExpression}.
+ * This is the implementation of {@link JpqlSimpleExpression}.
  * 
  * @param <T> is the generic type of the property. May be {@link Object} for untyped access.
  * @param <EXPRESSION> is the generic type of the {@link AbstractJpqlConditionalExpression} that created this
- *        {@link JpqlPropertyExpression}.
+ *        {@link JpqlSimpleExpression}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
 public class JpqlPropertyExpressionImpl<T, EXPRESSION extends JpqlConditionalExpression<?, ?>> extends
-    AbstractJpqlPropertySupport implements JpqlPropertyExpression<T, EXPRESSION> {
+    AbstractJpqlPropertySupport implements JpqlSimpleExpression<T, EXPRESSION> {
 
-  /** The {@link AbstractJpqlConditionalExpression} that created this {@link JpqlPropertyExpression}. */
+  /** The {@link AbstractJpqlConditionalExpression} that created this {@link JpqlSimpleExpression}. */
   private final EXPRESSION expression;
 
   /** The actual property represented by this object. */
@@ -38,7 +38,7 @@ public class JpqlPropertyExpressionImpl<T, EXPRESSION extends JpqlConditionalExp
    * The constructor.
    * 
    * @param expression is the {@link AbstractJpqlConditionalExpression} that created this
-   *        {@link JpqlPropertyExpression}.
+   *        {@link JpqlSimpleExpression}.
    * @param path is the {@link JpqlCore#PROPERTY_BASE_PATH base path} for the <code>property</code>.
    * @param property is the actual {@link JpqlCore#PROPERTY property} for this expression.
    */
@@ -84,7 +84,7 @@ public class JpqlPropertyExpressionImpl<T, EXPRESSION extends JpqlConditionalExp
    * {@inheritDoc}
    */
   @Override
-  public JpqlPropertyExpression<T, EXPRESSION> not() {
+  public JpqlSimpleExpression<T, EXPRESSION> not() {
 
     this.not = !this.not;
     return this;

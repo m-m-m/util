@@ -66,57 +66,57 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
   <T> JpqlFromClause<T> newSubQuery(Class<T> entityType, String alias);
 
   /**
-   * This method create a new {@link JpqlPropertyExpression} for this conditional expression.
+   * This method create a new {@link JpqlSimpleExpression} for this conditional expression.
    * 
    * @param <T> is the generic type of the property.
    * 
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the new {@link JpqlPropertyExpression}.
+   * @return the new {@link JpqlSimpleExpression}.
    */
-  <T> JpqlPropertyExpression<T, SELF> property(String basePath, TypedProperty<T> property);
+  <T> JpqlSimpleExpression<T, SELF> property(String basePath, TypedProperty<T> property);
 
   /**
-   * This method create a new {@link JpqlPropertyExpression} for this conditional expression.
+   * This method create a new {@link JpqlSimpleExpression} for this conditional expression.
    * 
    * @param <T> is the generic type of the property.
    * 
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
    * @param propertyType is the {@link Class} reflecting the type of the property.
-   * @return the new {@link JpqlPropertyExpression}.
+   * @return the new {@link JpqlSimpleExpression}.
    */
-  <T> JpqlPropertyExpression<T, SELF> property(String basePath, String property, Class<T> propertyType);
+  <T> JpqlSimpleExpression<T, SELF> property(String basePath, String property, Class<T> propertyType);
 
   /**
-   * This method create a new {@link JpqlPropertyExpression} for this conditional expression.
+   * This method create a new {@link JpqlSimpleExpression} for this conditional expression.
    * 
    * @param basePath - see {@link JpqlCore#PROPERTY_BASE_PATH}.
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the new {@link JpqlPropertyExpression}.
+   * @return the new {@link JpqlSimpleExpression}.
    */
-  JpqlPropertyExpression<Object, SELF> property(String basePath, String property);
+  JpqlSimpleExpression<Object, SELF> property(String basePath, String property);
 
   /**
-   * This method create a new {@link JpqlPropertyExpression} for this conditional expression.
+   * This method create a new {@link JpqlSimpleExpression} for this conditional expression.
    * 
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the new {@link JpqlPropertyExpression}.
+   * @return the new {@link JpqlSimpleExpression}.
    */
-  JpqlPropertyExpression<Object, SELF> property(String property);
+  JpqlSimpleExpression<Object, SELF> property(String property);
 
   /**
-   * This method create a new {@link JpqlPropertyExpression} for this conditional expression.
+   * This method create a new {@link JpqlSimpleExpression} for this conditional expression.
    * 
    * @param <T> is the generic type of the property.
    * 
    * @param property - see {@link JpqlCore#PROPERTY}.
-   * @return the new {@link JpqlPropertyExpression}.
+   * @return the new {@link JpqlSimpleExpression}.
    */
-  <T> JpqlPropertyExpression<T, SELF> property(TypedProperty<T> property);
+  <T> JpqlSimpleExpression<T, SELF> property(TypedProperty<T> property);
 
   /**
-   * This method create a new {@link JpqlPropertyExpression} for the given <code>subQuery</code>.
+   * This method create a new {@link JpqlSimpleExpression} for the given <code>subQuery</code>.
    * 
    * @see #newSubQuery(Class, String)
    * @see #newSubQuery(String, String, String)
@@ -125,9 +125,9 @@ public abstract interface JpqlConditionalExpression<E, SELF extends JpqlConditio
    * @param <T> is the generic type of result of the sub-query.
    * 
    * @param subQuery is the {@link SimpleQuery} representing a sub-query.
-   * @return the new {@link JpqlPropertyExpression}.
+   * @return the new {@link JpqlSimpleExpression}.
    */
-  <T> JpqlPropertyExpression<T, SELF> subQuery(SimpleQuery<T> subQuery);
+  <T> JpqlSimpleExpression<T, SELF> subQuery(SimpleQuery<T> subQuery);
 
   /**
    * Adds an AND conjunction to this query. Will fail if called without previously adding a comparison.
