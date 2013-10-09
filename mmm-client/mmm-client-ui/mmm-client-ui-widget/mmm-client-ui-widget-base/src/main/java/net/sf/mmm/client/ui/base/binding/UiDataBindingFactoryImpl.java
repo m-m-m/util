@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.binding;
 
+import java.util.List;
+
 import javax.validation.Validation;
 import javax.validation.Validator;
 
@@ -52,12 +54,16 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<VALUE> widget) {
 
     Class<VALUE> valueType = AbstractUiWidget.AccessHelper.getValueClass(widget);
     if ((valueType == null) || (valueType == Void.class)) {
       return (UiDataBinding<VALUE>) UiDataBindingNone.getInstance();
+    }
+    if (valueType == List.class) {
+      return (UiDataBinding<VALUE>) new UiDataBindingList(widget);
     }
     AbstractUiContextImpl context = (AbstractUiContextImpl) widget.getContext();
     DatatypeDetector datatypeDetector = context.getDatatypeDetector();

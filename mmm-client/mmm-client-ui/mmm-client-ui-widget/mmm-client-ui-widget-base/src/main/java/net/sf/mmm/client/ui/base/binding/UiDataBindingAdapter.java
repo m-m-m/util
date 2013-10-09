@@ -42,8 +42,6 @@ public interface UiDataBindingAdapter<VALUE> {
   /**
    * This method gets or creates the {@link ValueValidator} for the specified property.
    * 
-   * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getValidator()
-   * 
    * @param <T> is the generic {@link TypedProperty#getPropertyType() property type}.
    * 
    * @param property is the {@link TypedProperty}.

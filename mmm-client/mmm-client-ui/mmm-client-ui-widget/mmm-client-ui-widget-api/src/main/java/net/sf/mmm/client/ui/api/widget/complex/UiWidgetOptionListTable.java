@@ -10,7 +10,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for an {@link #setOptions(List) option}-based {@link UiWidgetAbstractListTable list
  * table widget}. Its {@link #getValue() value} is the actual {@link #getSelectedValues() selection} the
- * end-user can select from the available {@link #getOptions() options}.
+ * end-user can select from the available {@link #getOptions() options}. For a general feature list see
+ * {@link UiWidgetAbstractDataTable}.
  * 
  * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
  * 

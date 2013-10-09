@@ -31,12 +31,11 @@ public interface UiWidgetAdapterTree<NODE> extends UiWidgetAdapterActive, Attrib
    */
   void setTreeModel(UiTreeModel<NODE> model);
 
-  /*-?|TestReview|Joerg Hohwiller (hohwille at users.sourceforge.net)|c0|*/
   /**
    * @see UiWidgetAdapterTree#setTreeNodeRenderer(UiTreeNodeRenderer)
    * @param renderer is the {@link UiTreeNodeRenderer}.
    */
-  void setTreeNodeRenderer(UiTreeNodeRenderer<NODE, ?> renderer);/*-|TestReview|Joerg Hohwiller (hohwille at users.sourceforge.net)|c0|?*//*-?|TestReview|Joerg Hohwiller (hohwille at users.sourceforge.net)|c1|?*/
+  void setTreeNodeRenderer(UiTreeNodeRenderer<NODE, ?> renderer);
 
   /**
    * @see UiWidgetAdapterTree#getTreeNodeWidget(Object)

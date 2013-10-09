@@ -7,7 +7,7 @@ import java.util.Comparator;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
+import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.PropertyAccessor;
@@ -24,11 +24,11 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapter, ROW, CELL> extends
+public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapterTableColumn, ROW, CELL> extends
     AbstractUiWidgetNative<ADAPTER, CELL> implements UiWidgetTableColumn<ROW, CELL> {
 
-  /** @see #setListTable(AbstractUiWidgetAbstractListTable) */
-  private AbstractUiWidgetAbstractListTable<?, ROW> listTable;
+  /** @see #getListTable() */
+  private final AbstractUiWidgetAbstractListTable<?, ROW> listTable;
 
   /** @see #setPropertyAccessor(PropertyAccessor) */
   private PropertyAccessor<ROW, CELL> propertyAccessor;
@@ -52,17 +52,11 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param listTable is the {@link AbstractUiWidgetAbstractListTable list table} this column is connected to.
    */
-  public AbstractUiWidgetTableColumn(UiContext context) {
+  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractListTable<?, ROW> listTable) {
 
     super(context);
-  }
-
-  /**
-   * @param listTable is the listTable to set
-   */
-  void setListTable(AbstractUiWidgetAbstractListTable<?, ROW> listTable) {
-
     this.listTable = listTable;
   }
 
@@ -99,7 +93,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
 
     this.title = title;
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().setTitle(title);
+      getWidgetAdapter().setTitle(title);
     }
   }
 
@@ -120,7 +114,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
 
     this.reorderable = reorderable;
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().setReorderable(reorderable);
+      getWidgetAdapter().setReorderable(reorderable);
     }
   }
 
@@ -162,7 +156,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
 
     this.resizable = resizable;
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().setResizable(resizable);
+      getWidgetAdapter().setResizable(resizable);
     }
   }
 
@@ -192,6 +186,14 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   public void sort(SortOrder order) {
 
     this.listTable.sort(this);
+  }
+
+  /**
+   * @return the {@link AbstractUiWidgetAbstractListTable list table} owning this column.
+   */
+  public AbstractUiWidgetAbstractListTable<?, ROW> getListTable() {
+
+    return this.listTable;
   }
 
 }

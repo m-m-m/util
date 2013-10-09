@@ -4,28 +4,54 @@ package net.sf.mmm.client.ui.api.widget.complex;
 
 import java.util.Comparator;
 
-import net.sf.mmm.client.ui.api.widget.UiWidgetListBase;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
+import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
- * This is the abstract interface for a {@link UiWidgetAbstractDataTable data table widget} that represents a
- * <em>list table</em>.<br/>
+ * This is the abstract interface for a {@link UiWidgetRegular regular widget} that represents a
+ * <em>data table</em>. That is a table showing rows of data with their attributes in columns. It has the
+ * following features:
+ * <ul>
+ * <li>Configured via its {@link #setColumns(UiWidgetTableColumn...) columns}.</li>
+ * <li>Each column defines attributes like {@link UiWidgetTableColumn#getId() ID},
+ * {@link UiWidgetTableColumn#getTitle() title}, and {@link UiWidgetTableColumn#getTooltip() tooltip} that
+ * will be used for the header of the column.</li>
+ * <li>Scrolling of the table rows as needed while header (and potential footer) remains steady.</li>
+ * <li>{@link UiWidgetTableColumn columns} can be
+ * {@link UiWidgetTableColumn#sort(net.sf.mmm.util.lang.api.SortOrder) sorted} using
+ * {@link UiWidgetTableColumn#setSortComparator(Comparator) custom comparators} by clicking the column header.
+ * Clicking again will swap between ascending and descending order what is also visualized by an arrow icon.</li>
+ * <li>{@link UiWidgetTableColumn columns} can be {@link UiWidgetTableColumn#isResizable() resized} by
+ * clicking to the right of the column header and moving the right column border horizontally.</li>
+ * <li>{@link UiWidgetTableColumn columns} can be {@link UiWidgetTableColumn#isReorderable() reordered} by
+ * dragging them around.</li>
+ * <li>{@link UiWidgetTableColumn columns} can be {@link UiWidgetTableColumn#isEditable() edited} by
+ * double-clicking on cells or programmatically.</li>
+ * <li>...</li>
+ * </ul>
+ * <br/>
  * <b>Note:</b><br/>
  * There are the following variants of this abstract list table widget:
  * <ul>
  * <li>{@link UiWidgetListTable}</li>
  * <li>{@link UiWidgetOptionListTable}</li>
+ * <li>{@link UiWidgetTreeTable}</li>
  * </ul>
  * 
- * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
+ * @param <ROW> is the generic type of a row in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTable<ROW>, UiWidgetListBase<ROW> {
+public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatureSelectedValue<ROW>,
+    AttributeWriteSelectionMode, AttributeWriteHeightInRows, AttributeWriteEditable {
 
   /**
    * This method creates a new {@link UiWidgetTableColumn column} for this table.
@@ -45,7 +71,6 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    *        set}.
    * @return a new {@link UiWidgetTableColumn}.
    */
-  @Override
   <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(TypedProperty<CELL> rowProperty,
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator);
 
@@ -67,7 +92,6 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    *        set}.
    * @return a new {@link UiWidgetTableColumn}.
    */
-  @Override
   <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(PropertyAccessor<ROW, CELL> rowAccessor,
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator);
 
@@ -81,7 +105,6 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    * 
    * @param columns are the {@link UiWidgetTableColumn columns} to set.
    */
-  @Override
   void setColumns(UiWidgetTableColumn<ROW, ?>... columns);
 
   /**
@@ -90,7 +113,6 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    * @return the number of {@link #getColumn(int) columns} that are currently
    *         {@link #setColumns(UiWidgetTableColumn...) set}.
    */
-  @Override
   int getColumnCount();
 
   /**
@@ -104,7 +126,6 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    *        <code>0</code> to <code>{@link #getColumnCount()} - 1</code>.
    * @return the requested {@link UiWidgetTableColumn column}.
    */
-  @Override
   UiWidgetTableColumn<ROW, ?> getColumn(int index);
 
 }

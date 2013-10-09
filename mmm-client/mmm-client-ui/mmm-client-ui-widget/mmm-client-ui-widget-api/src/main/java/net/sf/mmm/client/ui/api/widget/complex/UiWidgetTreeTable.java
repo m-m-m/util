@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetTreeTable<NODE> extends UiWidgetAbstractListTable<NODE>, UiWidgetAbstractTree<NODE>,
+public interface UiWidgetTreeTable<NODE> extends UiWidgetAbstractDataTable<NODE>, UiWidgetAbstractTree<NODE>,
     UiWidgetNative {
 
   // nothing to add...
