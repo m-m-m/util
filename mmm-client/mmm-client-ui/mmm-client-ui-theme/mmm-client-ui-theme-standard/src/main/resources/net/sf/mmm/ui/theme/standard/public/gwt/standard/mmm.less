@@ -126,6 +126,11 @@ input:invalid {
   background-position: right; /*98% 50%;*/
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
   background-repeat: no-repeat;
+  &:after {
+    .fontAwesome();
+    text-color: red;
+    content: '\F00D';
+  }
 }
 button {
   .bordered;
@@ -450,8 +455,9 @@ button {
 
 /* Popup */
 .gwt-PopupPanelGlass {
-    background: black;
-    opacity: 0.3;
+  background: black;
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 .Window {
   background: @color-background;
@@ -579,42 +585,6 @@ button {
     padding: 6px;
   }
 }
-/*
-.Tab {
-}
-.gwt-TabBar {
-}
-.gwt-TabBar .gwt-TabBarRest {
-}
-.gwt-TabBar .gwt-TabBarItem {
-  margin-left: 6px;
-  padding: 3px 6px 3px 6px;
-  cursor: pointer;
-  cursor: hand;
-  color: black;
-  font-weight: bold;
-  text-align: center;
-  background: #d0e4f6;
-}
-.gwt-TabBar .gwt-TabBarItem-selected {
-  cursor: default;
-  background: #92c1f0;
-}
-.gwt-TabBar .gwt-TabBarItem-disabled {
-  cursor: default;
-  color: #999999;
-}
-.TabPanel {
-}
-.gwt-TabPanelBottom {
-  border-color: #92c1f0;
-  border-style: solid;
-  border-width: 3px 2px 2px;
-  overflow: hidden;
-  padding: 6px;
-}
-*/
-
 /* Menu stuff */
 .gwt-MenuBar {
   cursor: default;

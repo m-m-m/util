@@ -5,23 +5,21 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.IconConstants;
-import net.sf.mmm.client.ui.api.common.Rectangle;
+import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.lang.api.Direction;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseUpEvent;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -78,6 +76,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
   /** The top right corner of the window */
   private final FlowPanel borderNorthEast;
 
+  /** @see #isResizable() */
   private boolean resizable;
 
   /**
@@ -91,7 +90,8 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
   /**
    * The constructor.
    * 
-   * @param autoHide - see {@link #setAutoHideEnabled(boolean)}.
+   * @param autoHide - see {@link #setAutoHideEnabled(boolean)}. sddgfds gdsds gdsg dsg dsgds dsg dsg dsg
+   *        dsvgdsg dsg dsgds gdsg dsg dsg dsg dsg dsg dsg dsg dsg dsg
    */
   public PopupWindow(boolean autoHide) {
 
@@ -208,14 +208,14 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
   }
 
   /**
-   * Adds a {@link MouseHandler} to the given {@link Widget} based on the given {@link MouseAction}.
+   * Adds a {@link PopupMouseHandler} to the given {@link Widget} based on the given {@link Direction}.
    * 
-   * @param widget is the {@link Widget} where to add the {@link MouseHandler} to.
+   * @param widget is the {@link Widget} where to add the {@link PopupMouseHandler} to.
    * @param resizeDirection is the resize {@link Direction} or <code>null</code> for move.
    */
   private void addMouseHandler(Widget widget, Direction resizeDirection) {
 
-    MouseHandler handler = new MouseHandler(resizeDirection);
+    PopupMouseHandler handler = new PopupMouseHandler(this, resizeDirection);
     widget.sinkEvents(Event.ONMOUSEDOWN);
     widget.addDomHandler(handler, MouseDownEvent.getType());
   }
@@ -265,6 +265,59 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void onPreviewNativeEvent(NativePreviewEvent event) {
+
+    int eventType = event.getTypeInt();
+    if (eventType == Event.ONKEYPRESS) {
+      NativeEvent nativeEvent = event.getNativeEvent();
+      int keyCode = nativeEvent.getKeyCode();
+      if (keyCode == KeyCodes.KEY_ESCAPE) {
+        hide();
+      }
+      if (keyCode == KeyCodes.KEY_TAB) {
+        if (nativeEvent.getShiftKey()) {
+          EventTarget target = nativeEvent.getEventTarget();
+          if (Element.is(target)) {
+            Element targetElement = Element.as(target);
+            if ((targetElement == getFirstFocusElement()) || !getElement().isOrHasChild(targetElement)) {
+              event.cancel();
+              getLastFocusElement().focus();
+            }
+          }
+        } else {
+          EventTarget target = nativeEvent.getEventTarget();
+          if (Element.is(target)) {
+            Element targetElement = Element.as(target);
+            if ((targetElement == getLastFocusElement()) || !getElement().isOrHasChild(targetElement)) {
+              event.cancel();
+              getFirstFocusElement().focus();
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @return the first {@link Element} of this popup that is tab-able to get the focus.
+   */
+  private Element getFirstFocusElement() {
+
+    return JavaScriptUtil.getInstance().getFocusable(getElement(), true, false);
+  }
+
+  /**
+   * @return the last {@link Element} of this popup that is tab-able to get the focus.
+   */
+  private Element getLastFocusElement() {
+
+    return JavaScriptUtil.getInstance().getFocusable(this.contentPanel.getElement(), true, true);
+  }
+
+  /**
    * @return the content panel where the content of the popup window should be added to.
    */
   public VerticalFlowPanel getContentPanel() {
@@ -273,124 +326,20 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
   }
 
   /**
-   * This inner class is the handler for mouse events to move an resize the window.
+   * {@inheritDoc}
    */
-  private class MouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler, Event.NativePreviewHandler {
+  @Override
+  public void show() {
 
-    /** The resize {@link Direction} or <code>null</code> for move. */
-    private final Direction resizeDirection;
+    super.show();
+    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
-    /** The initial x position while dragging the mouse. */
-    private int mouseX;
+      @Override
+      public void execute() {
 
-    /** The initial y position while dragging the mouse. */
-    private int mouseY;
-
-    /** The current {@link Rectangle} of the {@link PopupWindow}. */
-    private Rectangle popupRectangle;
-
-    /** The current {@link Rectangle} of the browser. */
-    private Rectangle browserRectangle;
-
-    /** The minimum width of the {@link PopupWindow}. */
-    private int minWidth;
-
-    /** The minimum height of the {@link PopupWindow}. */
-    private int minHeight;
-
-    /**
-     * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or
-     * <code>null</code>.
-     */
-    private HandlerRegistration registration;
-
-    /**
-     * The constructor.
-     * 
-     * @param resizeDirection is the resize {@link Direction} or <code>null</code> for move.
-     */
-    public MouseHandler(Direction resizeDirection) {
-
-      super();
-      this.resizeDirection = resizeDirection;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onPreviewNativeEvent(NativePreviewEvent event) {
-
-      int eventType = event.getTypeInt();
-      if (eventType == Event.ONMOUSEMOVE) {
-        NativeEvent nativeEvent = event.getNativeEvent();
-        onMouseMove(nativeEvent.getClientX(), nativeEvent.getClientY());
-      } else if (eventType == Event.ONMOUSEUP) {
-        onMouseUp(null);
+        getFirstFocusElement().focus();
       }
-    }
-
-    @Override
-    public void onMouseDown(MouseDownEvent event) {
-
-      if (!PopupWindow.this.resizable) {
-        return;
-      }
-      this.mouseX = event.getClientX();
-      this.mouseY = event.getClientY();
-      this.popupRectangle = new Rectangle(getAbsoluteLeft(), getAbsoluteTop(), getOffsetWidth(), getOffsetHeight());
-
-      // TODO: calculate from CSS values
-      this.minWidth = 200;
-      this.minHeight = 100;
-
-      this.browserRectangle = new Rectangle(0, 0, Window.getClientWidth(), Window.getClientHeight());
-
-      assert (this.registration == null);
-      this.registration = Event.addNativePreviewHandler(this);
-      // prevent other things such as text selection while dragging...
-      event.preventDefault();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onMouseMove(MouseMoveEvent event) {
-
-      onMouseMove(event.getClientX(), event.getClientY());
-    }
-
-    /**
-     * @see #onMouseMove(MouseMoveEvent)
-     * 
-     * @param x is the mouse X position.
-     * @param y is the mouse Y position.
-     */
-    private void onMouseMove(int x, int y) {
-
-      int deltaX = x - this.mouseX;
-      int deltaY = y - this.mouseY;
-
-      Rectangle newRectangle;
-
-      if (this.resizeDirection == null) {
-        // move...
-        newRectangle = this.popupRectangle.moveBy(deltaX, deltaY).clipTo(this.browserRectangle, true);
-      } else {
-        newRectangle = this.popupRectangle.resize(deltaX, deltaY, this.resizeDirection, this.minWidth, this.minHeight);
-      }
-      setPixelSize(newRectangle.getWidth(), newRectangle.getHeight());
-      setPopupPosition(newRectangle.getX(), newRectangle.getY());
-    }
-
-    @Override
-    public void onMouseUp(MouseUpEvent event) {
-
-      // DOM.releaseCapture(((Widget) event.getSource()).getElement());
-      this.registration.removeHandler();
-      this.registration = null;
-    }
+    });
   }
 
 }

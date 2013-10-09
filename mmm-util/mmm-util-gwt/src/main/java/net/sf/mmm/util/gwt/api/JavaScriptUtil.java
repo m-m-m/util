@@ -316,19 +316,84 @@ public class JavaScriptUtil {
         return iframe.contentWindow.document.selection;
       }
     }
-
-if (window.getSelection) {  // all browsers, except IE before version 9
-                var selRange = window.getSelection ();
-                alert (selRange.toString ());
-            }
-            else {
-                if (document.selection) {        // Internet Explorer
-                    var textRange = document.selection.createRange ();
-                    alert (textRange.text);
-                }
-            }
+    if (window.getSelection) {
+      return window.getSelection();
+    } else if (document.selection) {
+      return document.selection.createRange();
+    }
+    return null;
   }-*/;
 
+  /**
+   * Determines if the given {@link Element} is focusable or tab-able.
+   *
+   * @param element is the {@link Element} to check.
+   * @param tabable - <code>true</code> if the check should only consider tab-able {@link Element}s (so if tabindex is
+   *        negative, the result is <code>false</code>), <code>false</code> otherwise.
+   * @return <code>true</code> if focusable/tab-able, <code>false</code> otherwise.
+   */
+  public native boolean isFocusable(Element element, boolean tabable) /*-{
+    if (element.style.display == 'none') {
+      return false;
+    }
+    var tabindex = element.getAttribute('tabindex');
+    if (tabable && /^-[1-9]\d*$/.test(tabindex)) {
+      return false;
+    }
+    var tag = element.nodeName.toLowerCase();
+    if (/input|select|textarea|button|object/.test(tag)) {
+      if (element.disabled) {
+        return false;
+      }
+      return true;
+    } else if (tag == 'a') {
+      return true;
+    }
+    return false;
+  }-*/;
+
+  /**
+   * Get the first/last focusable or tab-able (child) {@link Element}.
+   *
+   * @param element is the {@link Element} to scan recursively.
+   * @param tabable - <code>true</code> if the check should only consider tab-able {@link Element}s (so if tabindex is
+   *        negative, the result is <code>false</code>), <code>false</code> otherwise.
+   * @param last - <code>true</code> if the last focusable/tab-able element shall be returned, <code>false</code> for the last focusable/tab-able element.
+   * @return the first/last focusable or tab-able {@link Element} or <code>null</code> if none exists.
+   */
+  public native Element getFocusable(Element element, boolean tabable, boolean last) /*-{
+
+    if (element.style.display == 'none') {
+      return null;
+    }
+    if (this.@net.sf.mmm.util.gwt.api.JavaScriptUtil::isFocusable(Lcom/google/gwt/dom/client/Element;Z)(element, tabable)) {
+      return element;
+    }
+    if (last) {
+      var child = element.lastChild;
+      while (child) {
+        if (child.nodeType == 1) {
+          var result = this.@net.sf.mmm.util.gwt.api.JavaScriptUtil::getFocusable(Lcom/google/gwt/dom/client/Element;ZZ)(child, tabable, last);
+          if (result) {
+            return result;
+          }
+        }
+        child = child.previousSibling;
+      }
+    } else {
+      var child = element.firstChild;
+      while (child) {
+        if (child.nodeType == 1) {
+          var result = this.@net.sf.mmm.util.gwt.api.JavaScriptUtil::getFocusable(Lcom/google/gwt/dom/client/Element;ZZ)(child, tabable, last);
+          if (result) {
+            return result;
+          }
+        }
+        child = child.nextSibling;
+      }
+    }
+    return null;
+  }-*/;
 
   /**
    * This method gets the {@link Document} of a given <code>&lt;iframe&gt;</code> {@link Element}.
