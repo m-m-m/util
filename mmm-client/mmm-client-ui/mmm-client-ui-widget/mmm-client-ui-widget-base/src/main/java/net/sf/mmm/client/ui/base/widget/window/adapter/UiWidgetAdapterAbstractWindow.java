@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.window.adapter;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWritePosition;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
  * @since 1.0.0
  */
 public interface UiWidgetAdapterAbstractWindow extends UiWidgetAdapterDynamicComposite<UiWidgetRegular>,
-    AttributeReadSizeInPixel, AttributeWritePosition, AttributeWriteStringTitle, AttributeWriteResizable {
+    AttributeReadSizeInPixel, AttributeWritePosition, AttributeWriteStringTitle, AttributeReadResizable {
 
   // nothing to add
 

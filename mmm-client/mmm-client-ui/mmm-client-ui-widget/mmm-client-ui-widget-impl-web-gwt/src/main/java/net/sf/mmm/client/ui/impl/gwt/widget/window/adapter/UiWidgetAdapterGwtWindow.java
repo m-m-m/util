@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtAbstractPopupWindow implements UiWidgetAdapterWindow {
+public class UiWidgetAdapterGwtWindow extends UiWidgetAdapterGwtAbstractDialogWindow implements UiWidgetAdapterWindow {
 
   /**
    * The constructor.

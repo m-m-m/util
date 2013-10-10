@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
@@ -11,7 +11,8 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterCheckbox extends UiWidgetAdapterField<Boolean, Boolean>, AttributeWriteLabel {
+public interface UiWidgetAdapterCheckboxField extends UiWidgetAdapterField<Boolean, Boolean>,
+    AttributeWriteTitle<String> {
 
   // nothing to add
 

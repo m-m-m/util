@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckboxField;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetCheckboxField}.
@@ -14,20 +14,29 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckbox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCheckbox> extends
+public abstract class AbstractUiWidgetCheckboxField<ADAPTER extends UiWidgetAdapterCheckboxField> extends
     AbstractUiWidgetField<ADAPTER, Boolean, Boolean> implements UiWidgetCheckboxField {
 
   /** @see #getLabel() */
-  private String label;
+  private String title;
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetCheckbox(UiContext context) {
+  public AbstractUiWidgetCheckboxField(UiContext context) {
 
     super(context);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Class<Boolean> getValueClass() {
+
+    return Boolean.class;
   }
 
   /**
@@ -37,8 +46,8 @@ public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCh
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    if (this.label != null) {
-      adapter.setLabel(this.label);
+    if (this.title != null) {
+      adapter.setTitle(this.title);
     }
   }
 
@@ -48,9 +57,9 @@ public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCh
   @Override
   public void setLabel(String label) {
 
-    this.label = label;
+    this.title = label;
     if (hasWidgetAdapter()) {
-      getWidgetAdapter().setLabel(label);
+      getWidgetAdapter().setTitle(label);
     }
   }
 
@@ -60,7 +69,7 @@ public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCh
   @Override
   public String getLabel() {
 
-    return this.label;
+    return this.title;
   }
 
   /**
@@ -69,10 +78,10 @@ public abstract class AbstractUiWidgetCheckbox<ADAPTER extends UiWidgetAdapterCh
   @Override
   public String toString() {
 
-    if (this.label == null) {
+    if (this.title == null) {
       return super.toString();
     }
-    return super.toString() + "[" + this.label + "]";
+    return super.toString() + "[" + this.title + "]";
   }
 
 }

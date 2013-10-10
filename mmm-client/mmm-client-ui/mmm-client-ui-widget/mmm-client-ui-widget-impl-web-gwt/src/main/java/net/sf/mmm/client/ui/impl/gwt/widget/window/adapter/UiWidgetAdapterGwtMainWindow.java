@@ -151,17 +151,6 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWind
    * {@inheritDoc}
    */
   @Override
-  public void setResizable(boolean resizable) {
-
-    // not supported - browser window can be resized by default. Only if a new window is opened via
-    // JavaScript, the resize feature can be specified but NOT modified at a later point in time...
-    // we simply ignore this
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public void setEnabled(boolean enabled) {
 
     // TODO Auto-generated method stub

@@ -20,7 +20,8 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetSectionGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetSlotGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetTabGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetToggleButtonGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboBoxGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetCheckboxFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboboxFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
@@ -45,6 +46,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetMainWindowGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetPopupGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetWindowGwt;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import com.google.gwt.user.client.ui.UIObject;
@@ -86,7 +88,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetDateFieldGwt.Factory());
     register(new UiWidgetRadioButtonsGwt.Factory());
     register(new UiWidgetRadioButtonsVerticalGwt.Factory());
-    register(new UiWidgetComboBoxGwt.Factory());
+    register(new UiWidgetComboboxFieldGwt.Factory());
+    register(new UiWidgetCheckboxFieldGwt.Factory());
     // panels
     register(new UiWidgetTabGwt.Factory());
     register(new UiWidgetTabPanelGwt.Factory());
@@ -106,6 +109,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetTreeGwt.Factory());
     // window
     register(new UiWidgetPopupGwt.Factory());
+    register(new UiWidgetWindowGwt.Factory());
   }
 
   /**

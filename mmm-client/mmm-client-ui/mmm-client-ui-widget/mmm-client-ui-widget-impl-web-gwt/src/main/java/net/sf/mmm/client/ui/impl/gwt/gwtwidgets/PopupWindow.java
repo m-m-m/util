@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.IconConstants;
@@ -35,7 +36,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
+public class PopupWindow extends PopupPanel implements AttributeWriteResizable, AttributeWriteMovable {
 
   /** The main panel. */
   private final VerticalFlowPanel mainPanel;
@@ -78,6 +79,15 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
 
   /** @see #isResizable() */
   private boolean resizable;
+
+  /** @see #isMovable() */
+  private boolean movable;
+
+  /**
+   * The {@link Element} outside the {@link PopupWindow} that had the focus before the {@link PopupWindow} was
+   * {@link #show() shown}.
+   */
+  private Element focusedElement;
 
   /**
    * The constructor.
@@ -128,6 +138,8 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
 
     this.titleBar = new HorizontalFlowPanel();
     this.titleBar.addStyleName(CssStyles.WINDOW_TITLE_BAR);
+    this.titleBar.addStyleName(CssStyles.MOVABLE);
+    this.movable = true;
     this.titleBar.add(this.title);
     this.titleBar.add(this.closeButton);
 
@@ -205,6 +217,32 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
     this.borderSouthWest.setVisible(resizable);
     this.borderWest.setVisible(resizable);
     this.resizable = resizable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMovable() {
+
+    return this.movable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMovable(boolean movable) {
+
+    if (this.movable == movable) {
+      return;
+    }
+    if (movable) {
+      this.titleBar.addStyleName(CssStyles.MOVABLE);
+    } else {
+      this.titleBar.removeStyleName(CssStyles.MOVABLE);
+    }
+    this.movable = movable;
   }
 
   /**
@@ -332,6 +370,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
   public void show() {
 
     super.show();
+    this.focusedElement = JavaScriptUtil.getInstance().getFocusedElement();
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
       @Override
@@ -340,6 +379,19 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable {
         getFirstFocusElement().focus();
       }
     });
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void hide() {
+
+    super.hide();
+    if (this.focusedElement != null) {
+      this.focusedElement.focus();
+      this.focusedElement = null;
+    }
   }
 
 }

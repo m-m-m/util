@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetOptionsField options field widget} that represents a
- * <em>combo box</em>. Such widget is like a drop-down where the user can open a menu with the available
+ * <em>combobox</em>. Such widget is like a drop-down where the user can open a menu with the available
  * {@link #getOptions() options} to choose from. If supported by the underlying native toolkit it also allows
  * typing text and offering completions in order to allow better keyboard control.<br/>
  * Here you can see an example (with {@link #setFieldLabel(String) field label} "Title"):
@@ -20,7 +20,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public interface UiWidgetComboBoxField<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetNative {
+public interface UiWidgetComboboxField<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetNative {
 
   /**
    * {@inheritDoc}

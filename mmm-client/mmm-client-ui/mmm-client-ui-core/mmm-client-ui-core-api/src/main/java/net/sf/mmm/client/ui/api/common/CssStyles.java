@@ -123,4 +123,7 @@ public interface CssStyles {
   /** The name of the CSS style for a vertical panel. */
   String VERTICAL_PANEL = "VerticalPanel";
 
+  /** The name of the CSS style for an object that can be moved around by dragging. */
+  String MOVABLE = "Movable";
+
 }

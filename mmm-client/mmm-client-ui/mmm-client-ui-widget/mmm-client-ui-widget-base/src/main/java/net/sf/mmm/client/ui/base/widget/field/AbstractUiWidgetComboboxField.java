@@ -5,11 +5,11 @@ package net.sf.mmm.client.ui.base.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.aria.role.RoleCombobox;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBoxField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboBoxField;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetComboBoxField}.
+ * This is the abstract base implementation of {@link UiWidgetComboboxField}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
@@ -17,15 +17,15 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboBoxFie
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetComboBoxField<ADAPTER extends UiWidgetAdapterComboBoxField<VALUE>, VALUE> extends
-    AbstractUiWidgetOptionsField<ADAPTER, VALUE> implements UiWidgetComboBoxField<VALUE> {
+public abstract class AbstractUiWidgetComboboxField<ADAPTER extends UiWidgetAdapterComboBoxField<VALUE>, VALUE> extends
+    AbstractUiWidgetOptionsField<ADAPTER, VALUE> implements UiWidgetComboboxField<VALUE> {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetComboBoxField(UiContext context) {
+  public AbstractUiWidgetComboboxField(UiContext context) {
 
     super(context);
   }

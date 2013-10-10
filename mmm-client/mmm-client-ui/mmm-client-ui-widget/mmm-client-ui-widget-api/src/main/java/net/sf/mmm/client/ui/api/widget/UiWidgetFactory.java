@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetSection;
 import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryNative;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBoxField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -208,17 +208,17 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
   UiWidgetLongField createLongField(String label);
 
   /**
-   * This method creates a new {@link UiWidgetComboBoxField}.
+   * This method creates a new {@link UiWidgetComboboxField}.
    * 
    * @param <VALUE> is the generic type of the available selection options.
    * 
    * @param label is the {@link UiWidgetLongField#getFieldLabel() label}.
    * @param enumDefinition is the {@link EnumDefinition} identifying the available
-   *        {@link UiWidgetComboBoxField#getOptions() options}. These may be loaded asynchronous via
+   *        {@link UiWidgetComboboxField#getOptions() options}. These may be loaded asynchronous via
    *        {@link net.sf.mmm.util.lang.api.EnumProvider}.
    * @return the new widget instance.
    */
-  <VALUE> UiWidgetComboBoxField<VALUE> createComboBox(String label, EnumDefinition<VALUE, ?> enumDefinition);
+  <VALUE> UiWidgetComboboxField<VALUE> createComboBox(String label, EnumDefinition<VALUE, ?> enumDefinition);
 
   /**
    * This method creates a new {@link UiWidgetSplitPanel}.

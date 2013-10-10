@@ -14,7 +14,9 @@ import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.event.UiEventValueChange;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
@@ -25,6 +27,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetToggleButton;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -202,6 +205,36 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         label4
             .setLabel("This is some extra long text to test scrollbar facitlities and resizing. We spent various extra "
                 + "effort for these features that are unfortunately not offered by GWT itself out of the box.");
+        final UiWidgetCheckboxField checkboxResizsable = factory.create(UiWidgetCheckboxField.class);
+        checkboxResizsable.setLabel("resizable");
+        checkboxResizsable.setValue(Boolean.TRUE);
+        UiHandlerEventValueChange<Boolean> changeHandler = new UiHandlerEventValueChange<Boolean>() {
+
+          /**
+           * {@inheritDoc}
+           */
+          @Override
+          public void onValueChange(UiEventValueChange<Boolean> changeEvent) {
+
+            popup.setResizable(checkboxResizsable.getValue().booleanValue());
+          }
+        };
+        checkboxResizsable.addChangeHandler(changeHandler);
+        final UiWidgetCheckboxField checkboxMovable = factory.create(UiWidgetCheckboxField.class);
+        checkboxMovable.setLabel("movable");
+        checkboxMovable.setValue(Boolean.TRUE);
+        UiHandlerEventValueChange<Boolean> changeHandlerMove = new UiHandlerEventValueChange<Boolean>() {
+
+          /**
+           * {@inheritDoc}
+           */
+          @Override
+          public void onValueChange(UiEventValueChange<Boolean> changeEvent) {
+
+            popup.setMovable(checkboxMovable.getValue().booleanValue());
+          }
+        };
+        checkboxMovable.addChangeHandler(changeHandlerMove);
         UiWidgetButton button = factory.create(UiWidgetButton.class);
         button.setLabel("Close");
         UiHandlerEventClick handler = new UiHandlerEventClick() {
@@ -215,6 +248,8 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         button.addClickHandler(handler);
         verticalPanel3.addChild(label3);
         verticalPanel3.addChild(label4);
+        verticalPanel3.addChild(checkboxResizsable);
+        verticalPanel3.addChild(checkboxMovable);
         verticalPanel3.addChild(button);
         popup.addChild(verticalPanel3);
         popup.centerWindow();

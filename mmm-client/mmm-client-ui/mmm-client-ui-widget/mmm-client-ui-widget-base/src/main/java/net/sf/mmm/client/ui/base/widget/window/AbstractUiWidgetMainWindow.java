@@ -58,4 +58,13 @@ public abstract class AbstractUiWidgetMainWindow<ADAPTER extends UiWidgetAdapter
     return this.menuBar;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isResizable() {
+
+    return true;
+  }
+
 }

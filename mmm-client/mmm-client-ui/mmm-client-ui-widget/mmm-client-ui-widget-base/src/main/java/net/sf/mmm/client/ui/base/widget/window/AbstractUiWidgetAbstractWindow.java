@@ -4,7 +4,6 @@ package net.sf.mmm.client.ui.base.widget.window;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
@@ -23,8 +22,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAdapterAbstractWindow> extends
-    AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetAbstractWindow,
-    AttributeWriteResizable {
+    AbstractUiWidgetDynamicComposite<ADAPTER, UiWidgetRegular> implements UiWidgetAbstractWindow {
 
   /** @see #getTitle() */
   private String title;
@@ -35,9 +33,6 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
   /** @see #getPositionY() */
   private double y;
 
-  /** @see #isResizable() */
-  private boolean resizable;
-
   /**
    * The constructor.
    * 
@@ -47,7 +42,6 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
 
     super(context);
     setPrimaryStyle(STYLE_PRIMARY);
-    this.resizable = true;
   }
 
   /**
@@ -62,28 +56,6 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
     }
     if ((this.x != 0) || (this.y != 0)) {
       adapter.setPosition(this.x, this.y);
-    }
-    adapter.setResizable(this.resizable);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isResizable() {
-
-    return this.resizable;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setResizable(boolean resizable) {
-
-    this.resizable = resizable;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setResizable(resizable);
     }
   }
 

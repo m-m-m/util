@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.window;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
@@ -13,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetWindow extends UiWidgetAbstractWindow, AttributeWriteResizable, UiWidgetNative {
+public interface UiWidgetWindow extends UiWidgetAbstractDialogWindow, UiWidgetNative {
 
   // nothing to add
 

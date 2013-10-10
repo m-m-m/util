@@ -86,7 +86,10 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
   @Override
   public void onMouseDown(MouseDownEvent event) {
 
-    if (!this.popupWindow.isResizable()) {
+    if (!this.popupWindow.isResizable() && (this.resizeDirection != null)) {
+      return;
+    }
+    if (!this.popupWindow.isMovable() && (this.resizeDirection == null)) {
       return;
     }
     this.mouseX = event.getClientX();

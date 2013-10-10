@@ -353,6 +353,13 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
+   * @return the {@link Element} that is currently focused or <code>null</code> if focus is outside the current document.
+   */
+  public native Element getFocusedElement() /*-{
+    return $doc.activeElement;
+  }-*/;
+
+  /**
    * Get the first/last focusable or tab-able (child) {@link Element}.
    *
    * @param element is the {@link Element} to scan recursively.

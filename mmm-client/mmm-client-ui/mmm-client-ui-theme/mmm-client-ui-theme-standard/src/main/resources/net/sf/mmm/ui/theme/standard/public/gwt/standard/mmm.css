@@ -87,6 +87,9 @@ button:active {
   white-space: nowrap;
   display: flex;
 }
+.Movable {
+  cursor: move;
+}
 .ButtonGroup {
   display: inline-block;
   font-size: 0;
@@ -447,7 +450,6 @@ button:active {
   border-width: 1px;
   background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
   border-style: solid;
-  cursor: move;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   padding-left: 0.2em;

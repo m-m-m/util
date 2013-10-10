@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * (radios) are aligned vertically from top to the bottom.<br/>
  * <b>ATTENTION:</b><br/>
  * You should only use this type of {@link UiWidgetOptionsField options field widgets} if you have a very
- * limited number of {@link #getOptions() options} (less than ten). Otherwise use {@link UiWidgetComboBoxField}
+ * limited number of {@link #getOptions() options} (less than ten). Otherwise use {@link UiWidgetComboboxField}
  * instead.<br/>
  * Here you can see an example (with the {@link #setOptions(java.util.List) options} set to {"single",
  * "married", "divorced"}):

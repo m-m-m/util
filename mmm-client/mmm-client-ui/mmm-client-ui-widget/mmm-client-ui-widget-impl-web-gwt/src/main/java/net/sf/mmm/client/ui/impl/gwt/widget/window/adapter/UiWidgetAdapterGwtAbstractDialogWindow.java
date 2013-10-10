@@ -2,23 +2,25 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
+import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
 
 /**
  * This is the implementation of
- * {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWindow} using GWT based on
- * {@link PopupWindow}.
+ * {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow} using GWT based
+ * on {@link PopupWindow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiWidgetAdapterGwtAbstractPopupWindow extends UiWidgetAdapterGwtAbstractWindow<PopupWindow> {
+public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAdapterGwtAbstractWindow<PopupWindow>
+    implements UiWidgetAdapterAbstractDialogWindow {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtAbstractPopupWindow() {
+  public UiWidgetAdapterGwtAbstractDialogWindow() {
 
     super();
   }
@@ -72,20 +74,36 @@ public abstract class UiWidgetAdapterGwtAbstractPopupWindow extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public void setResizable(boolean resizable) {
+  public boolean isResizable() {
 
-    // getToplevelWidget().set
-    // getWidget().set
+    return getToplevelWidget().isResizable();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isResizable() {
+  public void setResizable(boolean resizable) {
 
-    // TODO Auto-generated method stub
-    return false;
+    getToplevelWidget().setResizable(resizable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMovable() {
+
+    return getToplevelWidget().isMovable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMovable(boolean movable) {
+
+    getToplevelWidget().setMovable(movable);
   }
 
   /**

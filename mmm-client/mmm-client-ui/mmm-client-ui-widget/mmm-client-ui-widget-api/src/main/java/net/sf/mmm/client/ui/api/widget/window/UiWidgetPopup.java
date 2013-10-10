@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.window;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
@@ -16,7 +15,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetPopup extends UiWidgetAbstractWindow, AttributeWriteResizable, UiWidgetNative {
+public interface UiWidgetPopup extends UiWidgetAbstractDialogWindow, UiWidgetNative {
 
   /** The default {@link #addStyle(String) additional style} of this widget. */
   String STYLE_POPUP = CssStyles.POPUP;

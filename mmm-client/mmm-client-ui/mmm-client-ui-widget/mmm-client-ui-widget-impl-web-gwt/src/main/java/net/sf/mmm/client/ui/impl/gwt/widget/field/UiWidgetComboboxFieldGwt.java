@@ -3,13 +3,13 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboBoxField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboBoxField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboboxField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComboBox;
 
 /**
- * This is a simple implementation of {@link UiWidgetComboBoxField} using GWT based on
+ * This is a simple implementation of {@link UiWidgetComboboxField} using GWT based on
  * {@link UiWidgetAdapterGwtComboBox}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
@@ -17,14 +17,15 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComb
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBoxField<UiWidgetAdapterGwtComboBox<VALUE>, VALUE> {
+public class UiWidgetComboboxFieldGwt<VALUE> extends
+    AbstractUiWidgetComboboxField<UiWidgetAdapterGwtComboBox<VALUE>, VALUE> {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetComboBoxGwt(UiContext context) {
+  public UiWidgetComboboxFieldGwt(UiContext context) {
 
     super(context);
   }
@@ -42,23 +43,23 @@ public class UiWidgetComboBoxGwt<VALUE> extends AbstractUiWidgetComboBoxField<Ui
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetComboBoxField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetComboboxField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetComboBoxField.class);
+      super(UiWidgetComboboxField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetComboBoxField create(UiContext context) {
+    public UiWidgetComboboxField create(UiContext context) {
 
-      return new UiWidgetComboBoxGwt(context);
+      return new UiWidgetComboboxFieldGwt(context);
     }
 
   }
