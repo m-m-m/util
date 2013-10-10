@@ -55,7 +55,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    VALUE value = getValue();
+    VALUE value = getDataBinding().getRecentValue();
     if (value != null) {
       adapter.setValue(convertFromValue(value));
     }
