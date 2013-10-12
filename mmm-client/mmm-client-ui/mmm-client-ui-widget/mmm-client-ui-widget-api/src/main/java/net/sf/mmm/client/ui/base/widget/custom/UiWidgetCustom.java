@@ -243,6 +243,15 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
+  public final void setMode(UiMode mode) {
+
+    super.setMode(mode);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void setMode(UiMode mode, boolean programmatic) {
 
     // only call doSetMode if mode will actually change...

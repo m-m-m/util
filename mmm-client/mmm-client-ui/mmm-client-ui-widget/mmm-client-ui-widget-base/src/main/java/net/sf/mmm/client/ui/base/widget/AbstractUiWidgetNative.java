@@ -323,6 +323,19 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
+  public final void setMode(UiMode mode) {
+
+    super.setMode(mode);
+    // #78: set focus into first editable field/widget when switching to edit mode
+    if (mode.isEditable()) {
+      setFocused();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void setMode(UiMode newMode, boolean programmatic) {
 
     if (this.mode == newMode) {
@@ -335,7 +348,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     }
     doSetMode(newMode);
     getContext().getModeChanger().changeMode(this, newMode);
-    setModeRecursive(newMode);
+    setModeRecursive(newMode, programmatic);
     this.mode = newMode;
     fireEvent(new UiEventMode(this, programmatic));
   }
@@ -354,13 +367,14 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * This method is called from {@link #setMode(UiMode)} to recursively change the {@link UiMode}.
    * 
    * @param newMode is the new {@link UiMode}.
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
    */
-  void setModeRecursive(UiMode newMode) {
+  void setModeRecursive(UiMode newMode, boolean programmatic) {
 
     int childCount = getChildCount();
     for (int i = 0; i < childCount; i++) {
       UiWidget child = getChild(i);
-      child.setMode(newMode);
+      ((AbstractUiWidget<?>) child).setMode(newMode, programmatic);
     }
   }
 

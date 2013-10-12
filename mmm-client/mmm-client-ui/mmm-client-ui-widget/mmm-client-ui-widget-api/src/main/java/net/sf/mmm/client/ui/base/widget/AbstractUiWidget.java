@@ -300,7 +300,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * {@inheritDoc}
    */
   @Override
-  public final void setMode(UiMode mode) {
+  public void setMode(UiMode mode) {
 
     setMode(mode, true);
   }
