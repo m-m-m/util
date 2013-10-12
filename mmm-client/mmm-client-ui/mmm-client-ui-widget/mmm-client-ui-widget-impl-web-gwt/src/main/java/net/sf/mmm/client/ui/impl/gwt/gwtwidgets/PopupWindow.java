@@ -376,7 +376,14 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       @Override
       public void execute() {
 
-        getFirstFocusElement().focus();
+        Element focusable = JavaScriptUtil.getInstance().getFocusable(PopupWindow.this.contentPanel.getElement(), true,
+            false);
+        if (focusable == null) {
+          focusable = getFirstFocusElement();
+        }
+        if (focusable != null) {
+          focusable.focus();
+        }
       }
     });
   }
