@@ -172,7 +172,8 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    */
   protected ValidationFailure createValidationFailure(ConstraintViolation<?> violation, Object valueSource) {
 
-    return new SimpleValidationFailure(getCode(), valueSource, violation.getMessage());
+    String code = violation.getConstraintDescriptor().getAnnotation().annotationType().getSimpleName();
+    return new SimpleValidationFailure(code, valueSource, violation.getMessage());
   }
 
   /**
