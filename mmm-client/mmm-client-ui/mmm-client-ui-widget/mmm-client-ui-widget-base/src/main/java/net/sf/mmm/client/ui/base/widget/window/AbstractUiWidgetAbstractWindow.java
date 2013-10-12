@@ -41,7 +41,6 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
   public AbstractUiWidgetAbstractWindow(UiContext context) {
 
     super(context);
-    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**

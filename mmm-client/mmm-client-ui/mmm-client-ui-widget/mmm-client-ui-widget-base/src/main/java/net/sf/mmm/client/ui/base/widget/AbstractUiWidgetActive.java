@@ -54,9 +54,10 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
    * {@inheritDoc}
    */
   @Override
-  public void setFocused() {
+  public boolean setFocused() {
 
     setFocused(true);
+    return true;
   }
 
   /**

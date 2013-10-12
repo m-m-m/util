@@ -42,6 +42,19 @@ public abstract class AbstractUiWidgetToggleButton<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    Boolean value = getRecentValue();
+    if (value != null) {
+      adapter.setValue(value);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected Boolean doGetValue(Boolean template, ValidationState state) throws RuntimeException {
 
     if (hasWidgetAdapter()) {

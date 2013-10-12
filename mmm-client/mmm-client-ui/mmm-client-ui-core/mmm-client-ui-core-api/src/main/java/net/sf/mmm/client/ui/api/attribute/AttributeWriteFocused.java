@@ -8,14 +8,8 @@ package net.sf.mmm.client.ui.api.attribute;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface AttributeWriteFocused extends AttributeReadFocused {
+public abstract interface AttributeWriteFocused extends AttributeReadFocused, AttributeWriteOnlyFocused {
 
-  /**
-   * This method sets the {@link #isFocused() focus} of this object.<br/>
-   * <b>NOTE:</b><br/>
-   * You can only set the {@link #isFocused() focus}. To actually remove it, you need to set it in a different
-   * widget.
-   */
-  void setFocused();
+  // nothing to add...
 
 }

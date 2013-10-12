@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterListTable
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetListTable<ADAPTER extends UiWidgetAdapterListTable, ROW> extends
+public abstract class AbstractUiWidgetListTable<ADAPTER extends UiWidgetAdapterListTable<ROW>, ROW> extends
     AbstractUiWidgetAbstractListTable<ADAPTER, ROW> implements UiWidgetListTable<ROW> {
 
   /**

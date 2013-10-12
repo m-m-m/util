@@ -5,6 +5,8 @@ package net.sf.mmm.client.ui.impl.test.binding;
 import java.util.List;
 import java.util.Locale;
 
+import javax.validation.constraints.NotNull;
+
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
@@ -17,7 +19,6 @@ import net.sf.mmm.client.ui.impl.test.demo.widget.AddressForm;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.ValidationStateImpl;
-import net.sf.mmm.util.validation.base.ValidatorMandatory;
 
 import org.junit.Test;
 
@@ -71,6 +72,11 @@ public class UiDataBindingTest extends AbstractUiTest {
     assertEquals(value, textField.getValue());
     assertNull(textField.getValidationFailure());
     handler.assertOneEvent();
+    assertFalse(hasWidgetAdapter(textField));
+
+    forceWidgetAdapter(textField);
+    assertEquals(value, textField.getValue());
+    assertTrue(hasWidgetAdapter(textField));
   }
 
   /**
@@ -125,8 +131,9 @@ public class UiDataBindingTest extends AbstractUiTest {
     assertEquals(1, failureList.size());
     ValidationFailure failure = failureList.get(0);
     assertNotNull(failure);
-    assertEquals(ValidatorMandatory.CODE, failure.getCode());
-    String failureMessage = "The value has to be filled.";
+    assertEquals(NotNull.class.getSimpleName(), failure.getCode());
+    // String failureMessage = "The value has to be filled.";
+    String failureMessage = "may not be null";
     assertEquals(failureMessage, failure.getMessage(Locale.ROOT));
     assertEquals(failureMessage, fieldCity.getValidationFailure());
     assertEquals("city", failure.getSource());

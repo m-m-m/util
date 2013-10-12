@@ -13,6 +13,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterHorizontalP
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterVerticalPanel;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
+import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterComposite} and
@@ -73,6 +74,24 @@ public class UiWidgetAdapterTestCompositeRegular extends UiWidgetAdapterTestComp
    */
   @Override
   public void setResizable(boolean resizable) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMovable() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMovable(boolean movable) {
 
     verifyNotDisposed();
   }

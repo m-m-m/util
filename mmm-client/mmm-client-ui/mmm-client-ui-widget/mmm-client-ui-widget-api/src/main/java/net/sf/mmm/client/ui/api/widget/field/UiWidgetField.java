@@ -37,8 +37,8 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
     AttributeWriteValidationFailure, AttributeWriteTrimValue, UiWidgetActive {
 
-  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "Field";
+  /** The default top-level {@link #hasStyle(String) style} of this widget. */
+  String STYLE_FIELD = "Field";
 
   /**
    * The {@link #getPrimaryStyle() primary style} of the internal widget to display the {@link #getValue()

@@ -17,8 +17,8 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractL
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidgetAdapterAbstractListTable, ROW> extends
-    AbstractUiWidgetAbstractDataTable<ADAPTER, ROW> implements UiWidgetAbstractListTable<ROW> {
+public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidgetAdapterAbstractListTable<ROW>, ROW>
+    extends AbstractUiWidgetAbstractDataTable<ADAPTER, ROW> implements UiWidgetAbstractListTable<ROW> {
 
   /**
    * The constructor.
@@ -38,6 +38,19 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   protected Class<List<ROW>> getValueClass() {
 
     return (Class) List.class;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    List<ROW> value = getRecentValue();
+    if (value != null) {
+      adapter.setValue(value);
+    }
   }
 
 }

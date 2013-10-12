@@ -31,6 +31,7 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
   public AbstractUiWidgetAbstractDialogWindow(UiContext context) {
 
     super(context);
+    setPrimaryStyle(STYLE_PRIMARY);
     this.movable = true;
     this.resizable = true;
   }

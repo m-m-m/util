@@ -14,6 +14,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
@@ -79,14 +80,26 @@ public class AbstractUiTest extends Assert {
   }
 
   /**
+   * This method enforces that the {@link UiWidgetAdapter} for the given <code>widget</code> is created.
+   * 
+   * @param widget is the {@link UiWidget}.
+   */
+  protected void forceWidgetAdapter(UiWidget widget) {
+
+    AbstractUiWidget<?> w = (AbstractUiWidget<?>) widget;
+    AbstractUiWidget.getWidgetAdapter(w);
+  }
+
+  /**
    * @param widget is the {@link AbstractUiWidget}.
    * @return the result of {@link AbstractUiWidget#hasWidgetAdapter()} (while a recursive verification for
    *         consistency is performed).
    */
-  protected boolean hasWidgetAdapter(AbstractUiWidget<?> widget) {
+  protected boolean hasWidgetAdapter(UiWidget widget) {
 
-    boolean hasWidgetAdapter = widget.hasWidgetAdapter();
-    verifyHasWidgetAdapterRecursive(widget, hasWidgetAdapter);
+    AbstractUiWidget<?> w = (AbstractUiWidget<?>) widget;
+    boolean hasWidgetAdapter = w.hasWidgetAdapter();
+    verifyHasWidgetAdapterRecursive(w, hasWidgetAdapter);
     return hasWidgetAdapter;
   }
 

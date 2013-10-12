@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadMaximumValue;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadMinimumValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HorizontalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
@@ -14,6 +15,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,6 +38,12 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
   /** @see #getActiveWidget() */
   private WIDGET activeWidget;
+
+  /**
+   * A marker displayed after the {@link #activeWidget} in {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT
+   * edit mode}. Empty by default. May be used to show error markers.
+   */
+  private InlineLabel widgetMarkerEditMode;
 
   /**
    * The constructor.
@@ -71,6 +79,9 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     }
     if (this.activeWidget != null) {
       this.activeWidget.setVisible(editMode);
+    }
+    if (this.widgetMarkerEditMode != null) {
+      this.widgetMarkerEditMode.setVisible(editMode);
     }
     if (this.widgetViewMode != null) {
       if (!editMode) {
@@ -145,7 +156,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   protected final FlowPanel createToplevelWidget() {
 
-    return new FlowPanel();
+    return new HorizontalFlowPanel();
   }
 
   /**
@@ -182,8 +193,10 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     if (this.activeWidget == null) {
       this.activeWidget = createActiveWidget();
-      getInputElement().setAttribute("oninput", "net.sf.mmm.client.Ui.clearValidation(this)");
+      getInputElement().setAttribute("oninput", "this.setCustomValidity('');");
       attachActiveWidget();
+      this.widgetMarkerEditMode = new InlineLabel();
+      getToplevelWidget().add(this.widgetMarkerEditMode);
     }
     return this.activeWidget;
   }

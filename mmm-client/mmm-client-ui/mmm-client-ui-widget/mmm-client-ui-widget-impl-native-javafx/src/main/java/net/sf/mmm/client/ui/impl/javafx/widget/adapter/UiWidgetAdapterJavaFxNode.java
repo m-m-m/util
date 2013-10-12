@@ -141,9 +141,10 @@ public abstract class UiWidgetAdapterJavaFxNode<WIDGET extends Node> extends UiW
    * {@inheritDoc}
    */
   @Override
-  public void setFocused() {
+  public boolean setFocused() {
 
     getToplevelWidget().requestFocus();
+    return true;
   }
 
 }

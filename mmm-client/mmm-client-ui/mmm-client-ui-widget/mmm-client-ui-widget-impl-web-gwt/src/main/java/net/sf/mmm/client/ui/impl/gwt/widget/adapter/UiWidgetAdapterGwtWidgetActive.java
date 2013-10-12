@@ -94,7 +94,7 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
    * {@inheritDoc}
    */
   @Override
-  public final void setFocused() {
+  public final boolean setFocused() {
 
     Focusable focusWidget = getWidgetAsFocusable();
     if (focusWidget != null) {
@@ -103,7 +103,9 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
         eventAdapter.setProgrammaticEventType(EventType.FOCUS_GAIN);
       }
       focusWidget.setFocus(true);
+      return true;
     }
+    return false;
   }
 
   /**

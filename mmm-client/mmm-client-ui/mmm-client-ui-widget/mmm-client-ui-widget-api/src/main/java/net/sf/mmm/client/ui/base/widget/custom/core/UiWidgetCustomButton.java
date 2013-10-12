@@ -78,15 +78,6 @@ public abstract class UiWidgetCustomButton extends UiWidgetCustomAtomicNoValue<U
    * {@inheritDoc}
    */
   @Override
-  public void setFocused() {
-
-    getDelegate().setFocused();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public void setAccessKey(char accessKey) {
 
     getDelegate().setAccessKey(accessKey);

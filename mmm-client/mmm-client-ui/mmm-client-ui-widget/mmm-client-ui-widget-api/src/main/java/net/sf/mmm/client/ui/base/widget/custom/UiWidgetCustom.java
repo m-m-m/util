@@ -78,6 +78,15 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
+  public boolean setFocused() {
+
+    return ((AbstractUiWidget<?>) getDelegate()).setFocused();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void clearValidity() {
 
     super.clearValidity();

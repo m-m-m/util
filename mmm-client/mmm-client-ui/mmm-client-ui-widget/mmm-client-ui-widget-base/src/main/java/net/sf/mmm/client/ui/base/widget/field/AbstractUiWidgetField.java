@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
@@ -44,7 +45,11 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   public AbstractUiWidgetField(UiContext context) {
 
     super(context);
-    setPrimaryStyle(STYLE_PRIMARY);
+    // TODO: This is currently a GWT driven decision. Maybe we need some sort of sync of the styles when the
+    // WidgetAdapter is created... Otherwise we have to use a more complex structure in the GWT
+    // implementation.
+    setPrimaryStyle(UiWidgetHorizontalPanel.STYLE_PRIMARY);
+    addStyle(STYLE_FIELD);
     this.trimValue = true;
   }
 
@@ -55,7 +60,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    VALUE value = getDataBinding().getRecentValue();
+    VALUE value = getRecentValue();
     if (value != null) {
       adapter.setValue(convertFromValue(value));
     }

@@ -154,15 +154,6 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * {@inheritDoc}
    */
   @Override
-  public final void setFocused() {
-
-    getDelegate().setFocused();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected UiWidgetField<?> getFirstField() {
 
     return getDelegate();

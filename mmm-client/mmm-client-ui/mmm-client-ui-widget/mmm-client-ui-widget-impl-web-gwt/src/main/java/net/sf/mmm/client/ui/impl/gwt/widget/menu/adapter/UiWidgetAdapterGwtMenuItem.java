@@ -65,8 +65,9 @@ public class UiWidgetAdapterGwtMenuItem extends UiWidgetAdapterGwtMenuItemBase i
    * {@inheritDoc}
    */
   @Override
-  public void setFocused() {
+  public boolean setFocused() {
 
     // Not supported by GWT...
+    return false;
   }
 }

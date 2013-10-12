@@ -9,6 +9,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadEventObserver;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteOnlyFocused;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
@@ -46,7 +47,7 @@ import org.slf4j.Logger;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndValidation<VALUE> implements
-    UiWidgetAbstractWithValue<VALUE>, AttributeWriteModified {
+    UiWidgetAbstractWithValue<VALUE>, AttributeWriteModified, AttributeWriteOnlyFocused {
 
   /** @see #getContext() */
   private final AbstractUiContext context;
@@ -147,6 +148,10 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
       assert (state.getFailureCount() >= failureCount) : "failure count must not decrease.";
       boolean success = (state.getFailureCount() == failureCount);
       getDataBinding().setValidity(Boolean.valueOf(success));
+      if (!success && (failureCount == 0)) {
+        // on the first validation failure, set the focus into the according field/widget...
+        setFocused();
+      }
     }
     return value;
   }

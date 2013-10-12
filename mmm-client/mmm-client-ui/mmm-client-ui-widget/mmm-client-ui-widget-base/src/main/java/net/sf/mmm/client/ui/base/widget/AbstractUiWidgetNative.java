@@ -242,6 +242,24 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
+  public boolean setFocused() {
+
+    int childCount = getChildCount();
+    // set focus to the first focusable field/widget...
+    for (int childIndex = 0; childIndex < childCount; childIndex++) {
+      AbstractUiWidget<?> child = (AbstractUiWidget<?>) getChild(childIndex);
+      if (child.setFocused()) {
+        return true;
+      }
+    }
+    // not supported by default...
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetComposite<?> getParent() {
 
     return this.parent;

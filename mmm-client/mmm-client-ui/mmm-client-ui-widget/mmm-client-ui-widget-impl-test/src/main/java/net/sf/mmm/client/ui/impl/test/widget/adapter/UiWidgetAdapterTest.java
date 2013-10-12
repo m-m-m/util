@@ -242,9 +242,10 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
    * {@inheritDoc}
    */
   @Override
-  public void setFocused() {
+  public boolean setFocused() {
 
     verifyNotDisposed();
+    return false;
   }
 
   /**

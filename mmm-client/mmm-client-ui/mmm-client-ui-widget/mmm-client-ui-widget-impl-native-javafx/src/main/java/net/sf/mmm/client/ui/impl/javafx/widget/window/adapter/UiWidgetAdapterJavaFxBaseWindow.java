@@ -136,16 +136,6 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public void setResizable(boolean resizable) {
-
-    // getToplevelWidget().set
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public void addChild(UiWidgetRegular child, int index) {
 
     // getToplevelWidget().get

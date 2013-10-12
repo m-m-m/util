@@ -13,7 +13,9 @@
 @color-background: #FFFFFF;
 @color-background-fieldview: #DDDDDD;
 @color-background-em: darken(@color-background, 10%);
-@color-invalid: #FFBBBB;
+@color-invalid: #FF0000;
+@color-background-invalid: lighten(@color-invalid, 30%);
+@color-border-invalid: lighten(@color-invalid, 20%);
 
 @font-size: 14pt;
 @border-size: 0.2em;
@@ -120,17 +122,16 @@ input {
 }
 input:invalid {
   box-shadow:none;
-  border-color: darken(@color-invalid, 10%);
-  background: @color-invalid;
-  /* background-size: cover; */
-  background-position: right; /*98% 50%;*/
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij48Zz48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iOCIgZmlsbD0iI2ZmMDAwMCIgc3Ryb2tlPSJub25lIiAvPjx0ZXh0IHg9IjYiIHk9IjEzIiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogU2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IHN0cm9rZTogbm9uZTsgZmlsbDogI2ZmZmZmZjsiPiE8L3RleHQ+PC9nPjwvc3ZnPg==");
-  background-repeat: no-repeat;
-  &:after {
-    .fontAwesome();
-    text-color: red;
-    content: '\F00D';
-  }
+  border-color: @color-border-invalid;
+  background: @color-background-invalid;
+}
+input:invalid + span:before {
+  .fontAwesome();
+  color: @color-invalid;
+  content: '\F00D';
+}
+input:focus + label {
+  background: @color-focus;
 }
 button {
   .bordered;
@@ -154,6 +155,7 @@ button {
   /* overflow-x: auto; */
   white-space: nowrap;
   display: flex;
+  align-items: baseline;
 }
 .Movable {
   cursor: move;

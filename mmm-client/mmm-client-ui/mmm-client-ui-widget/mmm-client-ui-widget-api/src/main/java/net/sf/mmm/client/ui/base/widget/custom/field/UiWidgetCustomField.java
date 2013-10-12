@@ -167,12 +167,12 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
    * {@inheritDoc}
    */
   @Override
-  public void setFocused() {
+  public boolean setFocused() {
 
     if (this.focusField != null) {
-      ((UiWidgetField<?>) this.focusField).setFocused();
+      return ((UiWidgetField<?>) this.focusField).setFocused();
     } else {
-      getFirstField().setFocused();
+      return getFirstField().setFocused();
     }
   }
 

@@ -6,10 +6,12 @@ package net.sf.mmm.client.ui.base.widget.complex.adapter;
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
  * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable}.
  * 
+ * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterListTable extends UiWidgetAdapterAbstractListTable {
+public interface UiWidgetAdapterListTable<ROW> extends UiWidgetAdapterAbstractListTable<ROW> {
 
   // nothing to add...
 
