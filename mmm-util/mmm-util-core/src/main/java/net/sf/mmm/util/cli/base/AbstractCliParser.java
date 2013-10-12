@@ -339,7 +339,6 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       List<CliArgumentContainer> argumentList = this.cliState.getArguments(parserState.currentMode);
       int argumentIndex = parserState.getArgumentIndex();
       if (argumentIndex >= argumentList.size()) {
-        // TODO: illegal argument, defined exception
         throw new NlsIllegalArgumentException(argument);
       } else {
         parseArgument(parserState, argument, argumentList.get(argumentIndex), parameterConsumer);
@@ -604,12 +603,6 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     /** The maximum length of all syntax lines of this info. */
     private final int length;
 
-    /** The current index in the buffer for {@link #syntax}. */
-    private int lineIndex;
-
-    /** The current maximum line index. */
-    private int lineLength;
-
     /**
      * The constructor.
      * 
@@ -628,8 +621,6 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       NlsMessage operandMessage = dependencies.getNlsMessageFactory().create(cliOption.operand());
       this.operand = operandMessage.getLocalizedMessage(locale, dependencies.getNlsTemplateResolver());
       syntaxBuilder.append(cliOption.name());
-      this.lineLength = syntaxBuilder.length();
-      // this.lineIndex = this.lineLength;
       String[] aliases = cliOption.aliases();
       StringBuilder alias = new StringBuilder();
       for (int i = 0; i < aliases.length; i++) {
@@ -648,18 +639,13 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       if (!option.isTrigger()) {
         append(syntaxBuilder, " " + this.operand, maxLength, settings);
       }
-      // length of last line...
-      int len = syntaxBuilder.length() - this.lineIndex;
-      if (len > this.lineLength) {
-        this.lineLength = len;
-      }
-      this.length = this.lineLength;
+      // length of line...
+      this.length = syntaxBuilder.length();
       this.syntax = syntaxBuilder.toString();
     }
 
     /**
-     * This method appends a single option to the syntax. It automatically wraps and updates
-     * {@link #lineLength} and {@link #lineIndex}.
+     * This method appends a single option to the syntax.
      * 
      * @param syntaxBuilder is the {@link StringBuilder buffer} used to build the {@link #getSyntax() syntax}.
      * @param text is the text to append.
@@ -669,20 +655,6 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     private void append(StringBuilder syntaxBuilder, String text, int maxLength, CliOutputSettings settings) {
 
       syntaxBuilder.append(text);
-
-      // int len = syntaxBuilder.length() - this.lineIndex;
-      // int newLen = len + text.length();
-      // if (newLen < maxLength) {
-      // syntaxBuilder.append(text);
-      // } else {
-      // if (len > this.lineLength) {
-      // this.lineLength = len;
-      // }
-      // syntaxBuilder.append(settings.getLineSeparator());
-      // this.lineIndex = syntaxBuilder.length();
-      // syntaxBuilder.append("  ");
-      // syntaxBuilder.append(text);
-      // }
     }
 
     /**
