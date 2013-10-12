@@ -110,6 +110,24 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
+  public boolean isClosable() {
+
+    return getToplevelWidget().isClosable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setClosable(boolean closable) {
+
+    getToplevelWidget().setClosable(closable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public double getPositionX() {
 
     return getToplevelWidget().getAbsoluteLeft();

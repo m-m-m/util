@@ -235,6 +235,21 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
           }
         };
         checkboxMovable.addChangeHandler(changeHandlerMove);
+        final UiWidgetCheckboxField checkboxClosable = factory.create(UiWidgetCheckboxField.class);
+        checkboxClosable.setLabel("closable");
+        checkboxClosable.setValue(Boolean.TRUE);
+        UiHandlerEventValueChange<Boolean> changeHandlerClose = new UiHandlerEventValueChange<Boolean>() {
+
+          /**
+           * {@inheritDoc}
+           */
+          @Override
+          public void onValueChange(UiEventValueChange<Boolean> changeEvent) {
+
+            popup.setClosable(checkboxClosable.getValue().booleanValue());
+          }
+        };
+        checkboxClosable.addChangeHandler(changeHandlerClose);
         UiWidgetButton button = factory.create(UiWidgetButton.class);
         button.setLabel("Close");
         UiHandlerEventClick handler = new UiHandlerEventClick() {
@@ -250,6 +265,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         verticalPanel3.addChild(label4);
         verticalPanel3.addChild(checkboxResizsable);
         verticalPanel3.addChild(checkboxMovable);
+        verticalPanel3.addChild(checkboxClosable);
         verticalPanel3.addChild(button);
         popup.addChild(verticalPanel3);
         popup.centerWindow();

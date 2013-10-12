@@ -23,6 +23,9 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
   /** @see #isMovable() */
   private boolean movable;
 
+  /** @see #isClosable */
+  private boolean closable;
+
   /**
    * The constructor.
    * 
@@ -34,6 +37,7 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
     setPrimaryStyle(STYLE_PRIMARY);
     this.movable = true;
     this.resizable = true;
+    this.closable = true;
   }
 
   /**
@@ -45,6 +49,7 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
     super.initializeWidgetAdapter(adapter);
     adapter.setResizable(this.resizable);
     adapter.setMovable(this.movable);
+    adapter.setClosable(this.closable);
   }
 
   /**
@@ -62,6 +67,9 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
   @Override
   public void setResizable(boolean resizable) {
 
+    if (this.resizable == resizable) {
+      return;
+    }
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setResizable(resizable);
     }
@@ -83,10 +91,37 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
   @Override
   public void setMovable(boolean movable) {
 
+    if (this.movable == movable) {
+      return;
+    }
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setMovable(movable);
     }
     this.movable = movable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isClosable() {
+
+    return this.closable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setClosable(boolean closable) {
+
+    if (this.closable == closable) {
+      return;
+    }
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setClosable(closable);
+    }
+    this.closable = closable;
   }
 
 }

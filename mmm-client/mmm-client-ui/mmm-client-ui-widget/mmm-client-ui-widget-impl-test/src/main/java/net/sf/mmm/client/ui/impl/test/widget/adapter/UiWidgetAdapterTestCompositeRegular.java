@@ -100,6 +100,24 @@ public class UiWidgetAdapterTestCompositeRegular extends UiWidgetAdapterTestComp
    * {@inheritDoc}
    */
   @Override
+  public boolean isClosable() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setClosable(boolean closable) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setPosition(double x, double y) {
 
     verifyNotDisposed();

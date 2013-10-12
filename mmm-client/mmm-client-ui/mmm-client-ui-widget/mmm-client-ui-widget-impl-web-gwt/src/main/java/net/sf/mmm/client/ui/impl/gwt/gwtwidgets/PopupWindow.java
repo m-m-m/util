@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
@@ -36,7 +37,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PopupWindow extends PopupPanel implements AttributeWriteResizable, AttributeWriteMovable {
+public class PopupWindow extends PopupPanel implements AttributeWriteResizable, AttributeWriteMovable,
+    AttributeWriteClosable {
 
   /** The main panel. */
   private final VerticalFlowPanel mainPanel;
@@ -82,6 +84,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
 
   /** @see #isMovable() */
   private boolean movable;
+
+  /** @see #isClosable() */
+  private boolean closable;
 
   /**
    * The {@link Element} outside the {@link PopupWindow} that had the focus before the {@link PopupWindow} was
@@ -246,6 +251,28 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isClosable() {
+
+    return this.closable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setClosable(boolean closable) {
+
+    if (this.closable == closable) {
+      return;
+    }
+    this.closable = closable;
+    this.closeButton.setVisible(closable);
+  }
+
+  /**
    * Adds a {@link PopupMouseHandler} to the given {@link Widget} based on the given {@link Direction}.
    * 
    * @param widget is the {@link Widget} where to add the {@link PopupMouseHandler} to.
@@ -312,7 +339,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     if (eventType == Event.ONKEYPRESS) {
       NativeEvent nativeEvent = event.getNativeEvent();
       int keyCode = nativeEvent.getKeyCode();
-      if (keyCode == KeyCodes.KEY_ESCAPE) {
+      if ((keyCode == KeyCodes.KEY_ESCAPE) && (this.closable)) {
         hide();
       }
       if (keyCode == KeyCodes.KEY_TAB) {

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.window.adapter;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 
@@ -13,7 +14,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
  * @since 1.0.0
  */
 public interface UiWidgetAdapterAbstractDialogWindow extends UiWidgetAdapterAbstractWindow, AttributeWriteResizable,
-    AttributeWriteMovable {
+    AttributeWriteMovable, AttributeWriteClosable {
 
   // nothing to add
 

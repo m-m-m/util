@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.window;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.api.common.CssStyles;
  * @since 1.0.0
  */
 public abstract interface UiWidgetAbstractDialogWindow extends UiWidgetAbstractWindow, AttributeWriteResizable,
-    AttributeWriteMovable {
+    AttributeWriteMovable, AttributeWriteClosable {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String STYLE_PRIMARY = CssStyles.WINDOW;
@@ -27,5 +28,14 @@ public abstract interface UiWidgetAbstractDialogWindow extends UiWidgetAbstractW
    */
   @Override
   void centerWindow();
+
+  /**
+   * {@inheritDoc}
+   * 
+   * By default a dialog window is closable. If you set closable to <code>false</code> there is no icon-button
+   * displayed in the title-bar and hitting the escape key will not close the window.
+   */
+  @Override
+  void setClosable(boolean closable);
 
 }
