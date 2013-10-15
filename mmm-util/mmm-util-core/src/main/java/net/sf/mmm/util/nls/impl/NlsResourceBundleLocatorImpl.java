@@ -110,32 +110,30 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
         if (logger.isTraceEnabled()) {
           logger.trace("Loading " + dataResource.getUri());
         }
-        try (InputStream inStream = dataResource.openStream()) {
-          try (InputStreamReader isr = new InputStreamReader(inStream)) {
-            try (BufferedReader reader = new BufferedReader(isr)) {
-              boolean noEntryInBundleResource = true;
-              String line = reader.readLine();
-              while (line != null) {
-                line = line.trim();
-                if (line.length() > 0) {
-                  if (logger.isTraceEnabled()) {
-                    logger.trace("Loading resource bundle " + line);
-                  }
-                  noEntryInBundleResource = false;
-                  try {
-                    ResourceBundle bundleInstance = ResourceBundle.getBundle(line, AbstractNlsMessage.LOCALE_ROOT);
-                    this.nlsBundles.add(bundleInstance);
-                  } catch (Exception e) {
-                    logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line
-                        + "' is invalid!", e);
-                  }
-                }
-                line = reader.readLine();
+        try (InputStream inStream = dataResource.openStream();
+            InputStreamReader isr = new InputStreamReader(inStream);
+            BufferedReader reader = new BufferedReader(isr)) {
+          boolean noEntryInBundleResource = true;
+          String line = reader.readLine();
+          while (line != null) {
+            line = line.trim();
+            if (line.length() > 0) {
+              if (logger.isTraceEnabled()) {
+                logger.trace("Loading resource bundle " + line);
               }
-              if (noEntryInBundleResource) {
-                logger.error("Illegal bundle declaration " + dataResource.getUri() + ": no entry!");
+              noEntryInBundleResource = false;
+              try {
+                ResourceBundle bundleInstance = ResourceBundle.getBundle(line, AbstractNlsMessage.LOCALE_ROOT);
+                this.nlsBundles.add(bundleInstance);
+              } catch (Exception e) {
+                logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line
+                    + "' is invalid!", e);
               }
             }
+            line = reader.readLine();
+          }
+          if (noEntryInBundleResource) {
+            logger.error("Illegal bundle declaration " + dataResource.getUri() + ": no entry!");
           }
         } catch (IOException e) {
           throw new RuntimeIoException(e, IoMode.READ);

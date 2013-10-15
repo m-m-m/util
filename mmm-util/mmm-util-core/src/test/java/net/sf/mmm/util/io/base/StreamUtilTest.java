@@ -64,7 +64,7 @@ public class StreamUtilTest extends Assert {
     }
     ByteArrayInputStream inStream = new ByteArrayInputStream(data);
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-    long bytes = getStreamUtil().transfer(inStream, outStream, true);
+    long bytes = getStreamUtil().transfer(inStream, outStream, false);
     assertEquals(len, bytes);
     assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
   }

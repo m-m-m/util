@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -32,9 +30,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** UID for serialization. */
   private static final long serialVersionUID = -9077132842682462106L;
 
-  /** @see #getSuppressedExceptions() */
-  protected static final Throwable[] EMPTY_THROWABLE_ARRAY = new Throwable[0];
-
   /**
    * The line separator used by
    * {@link #printStackTrace(NlsThrowable, Locale, NlsTemplateResolver, Appendable)}.
@@ -46,9 +41,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
   /** @see #getUuid() */
   private final UUID uuid;
-
-  /** @see #getSuppressedExceptions() */
-  private List<Throwable> suppressedList;
 
   /**
    * The constructor.
@@ -133,7 +125,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * @param resolver translates the original message.
    * @param buffer is where to write the stack trace to.
    */
-  @SuppressWarnings("deprecation")
   static void printStackTrace(NlsThrowable throwable, Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     try {
@@ -153,7 +144,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           buffer.append(trace[i].toString());
           buffer.append(LINE_SEPARATOR);
         }
-        for (Throwable suppressed : throwable.getSuppressedExceptions()) {
+        for (Throwable suppressed : throwable.getSuppressed()) {
           buffer.append("Suppressed: ");
           buffer.append(LINE_SEPARATOR);
           printStackTraceNested(suppressed, locale, resolver, buffer);
@@ -254,39 +245,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addSuppressedException(Throwable suppressed) {
-
-    // only available since Java 1.7
-    // super.addSuppressed(suppressed);
-    if ((suppressed == null) || (suppressed == this)) {
-      // prevent non-sense...
-      return;
-    }
-    if (this.suppressedList == null) {
-      this.suppressedList = new ArrayList<Throwable>();
-    }
-    this.suppressedList.add(suppressed);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Throwable[] getSuppressedExceptions() {
-
-    // only available since Java 1.7
-    // return super.getSuppressed();
-    if (this.suppressedList == null) {
-      return EMPTY_THROWABLE_ARRAY;
-    } else {
-      return this.suppressedList.toArray(new Throwable[this.suppressedList.size()]);
-    }
   }
 
   /**

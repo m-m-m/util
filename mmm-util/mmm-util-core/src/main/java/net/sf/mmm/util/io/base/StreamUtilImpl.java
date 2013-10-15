@@ -212,41 +212,24 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   public long transfer(FileInputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws RuntimeIoException {
 
-    FileChannel inChannel = inStream.getChannel();
-    WritableByteChannel outChannel = Channels.newChannel(outStream);
     RuntimeIoException t = null;
-    try {
+    try (FileInputStream is = inStream; FileChannel inChannel = is.getChannel()) {
+      WritableByteChannel outChannel = Channels.newChannel(outStream);
       return inChannel.transferTo(0, inChannel.size(), outChannel);
     } catch (Exception e) {
       t = new RuntimeIoException(e, IoMode.COPY);
       throw t;
     } finally {
-      boolean doThrow = (t == null);
-      try {
-        inChannel.close();
-      } catch (Exception e) {
-        RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
-        if (t != null) {
-          t.addSuppressedException(ex);
-        } else {
-          t = ex;
-        }
-      }
       if (!keepOutStreamOpen) {
-        // close(outStream);
         try {
-          outChannel.close();
-        } catch (Exception e) {
-          RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+          outStream.close();
+        } catch (IOException e) {
           if (t != null) {
-            t.addSuppressedException(ex);
+            t.addSuppressed(e);
           } else {
-            t = ex;
+            throw new RuntimeIoException(e, IoMode.CLOSE);
           }
         }
-      }
-      if ((t != null) && doThrow) {
-        throw t;
       }
     }
   }
@@ -258,41 +241,26 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen, long size)
       throws RuntimeIoException {
 
-    ReadableByteChannel inChannel = Channels.newChannel(inStream);
-    FileChannel outChannel = outStream.getChannel();
     RuntimeIoException t = null;
-    try {
+    try (InputStream is = inStream; ReadableByteChannel inChannel = Channels.newChannel(is)) {
+
+      FileChannel outChannel = outStream.getChannel();
       return outChannel.transferFrom(inChannel, 0, size);
+
     } catch (Exception e) {
       t = new RuntimeIoException(e, IoMode.COPY);
       throw t;
     } finally {
-      boolean doThrow = (t == null);
-      try {
-        inChannel.close();
-      } catch (Exception e) {
-        RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
-        if (t != null) {
-          t.addSuppressedException(ex);
-        } else {
-          t = ex;
-        }
-      }
       if (!keepOutStreamOpen) {
-        // close(outStream);
         try {
-          outChannel.close();
-        } catch (Exception e) {
-          RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
+          outStream.close();
+        } catch (IOException e) {
           if (t != null) {
-            t.addSuppressedException(ex);
+            t.addSuppressed(e);
           } else {
-            t = ex;
+            throw new RuntimeIoException(e, IoMode.CLOSE);
           }
         }
-      }
-      if ((t != null) && doThrow) {
-        throw t;
       }
     }
   }
@@ -358,25 +326,12 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   @Override
   public Properties loadProperties(InputStream inStream) throws RuntimeIoException {
 
-    RuntimeIoException t = null;
-    try {
+    try (InputStream is = inStream) {
       Properties properties = new Properties();
-      properties.load(inStream);
+      properties.load(is);
       return properties;
-    } catch (Exception e) {
-      t = new RuntimeIoException(e, IoMode.READ);
-      throw t;
-    } finally {
-      try {
-        inStream.close();
-      } catch (Exception suppressed) {
-        RuntimeIoException ex = new RuntimeIoException(suppressed, IoMode.CLOSE);
-        if (t != null) {
-          t.addSuppressedException(ex);
-        } else {
-          throw ex;
-        }
-      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 
@@ -386,25 +341,12 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   @Override
   public Properties loadProperties(Reader reader) throws RuntimeIoException {
 
-    RuntimeIoException t = null;
-    try {
+    try (Reader r = reader) {
       Properties properties = new Properties();
-      properties.load(reader);
+      properties.load(r);
       return properties;
-    } catch (Exception e) {
-      t = new RuntimeIoException(e, IoMode.READ);
-      throw t;
-    } finally {
-      try {
-        reader.close();
-      } catch (Exception suppressed) {
-        RuntimeIoException ex = new RuntimeIoException(suppressed, IoMode.CLOSE);
-        if (t != null) {
-          t.addSuppressedException(ex);
-        } else {
-          throw ex;
-        }
-      }
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.READ);
     }
   }
 
@@ -669,7 +611,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
         } catch (Exception e) {
           RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
           if (t != null) {
-            t.addSuppressedException(ex);
+            t.addSuppressed(ex);
           } else {
             t = ex;
           }
@@ -680,7 +622,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
           } catch (Exception e) {
             RuntimeIoException ex = new RuntimeIoException(e, IoMode.CLOSE);
             if (t != null) {
-              t.addSuppressedException(ex);
+              t.addSuppressed(ex);
             } else {
               t = ex;
             }
@@ -696,7 +638,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
             if (t == null) {
               throw rte;
             } else {
-              t.addSuppressedException(rte);
+              t.addSuppressed(rte);
             }
           }
           if ((t != null) && doThrow) {
