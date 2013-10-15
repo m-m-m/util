@@ -102,7 +102,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>2.4</version>
+          <version>2.7</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -200,6 +200,11 @@
             </dependency>
           </dependencies>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -213,14 +218,14 @@
         </configuration>
       </plugin>
 
-      <!-- activate java 5 language -->
+      <!-- configure java compiler -->
       <plugin>
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-compiler-plugin</artifactId>
          <configuration>
            <encoding>${project.build.sourceEncoding}</encoding>
-           <source>1.5</source>
-           <target>1.5</target>
+           <source>1.7</source>
+           <target>1.7</target>
            <!-- we need to extend a class from "com.sun.internal" -->
            <compilerArgument>-XDignore.symbol.file=true</compilerArgument>
            <fork>true</fork>
@@ -534,14 +539,16 @@
       <build>
         <directory>eclipse-target</directory>
         <plugins>
+          <!--
           <plugin>
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-compiler-plugin</artifactId>
              <configuration>
-               <source>1.6</source>
-               <target>1.6</target>
+               <source>1.7</source>
+               <target>1.7</target>
              </configuration>
           </plugin>
+          -->
         </plugins>
       </build>
     </profile>
