@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.api.widget.window;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximizable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximized;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
@@ -16,7 +18,7 @@ import net.sf.mmm.client.ui.api.common.CssStyles;
  * @since 1.0.0
  */
 public abstract interface UiWidgetAbstractDialogWindow extends UiWidgetAbstractWindow, AttributeWriteResizable,
-    AttributeWriteMovable, AttributeWriteClosable {
+    AttributeWriteMovable, AttributeWriteClosable, AttributeWriteMaximized, AttributeWriteMaximizable {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String STYLE_PRIMARY = CssStyles.WINDOW;

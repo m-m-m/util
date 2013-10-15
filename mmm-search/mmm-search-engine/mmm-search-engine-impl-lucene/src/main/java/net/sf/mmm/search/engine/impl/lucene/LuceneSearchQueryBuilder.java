@@ -98,9 +98,9 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
           getLogger().warn(message);
         }
         ignore = false;
-        this.ignoreLeadingWildcard = result;
       }
       result = Boolean.valueOf(ignore);
+      this.ignoreLeadingWildcard = result;
     }
     return result.booleanValue();
   }

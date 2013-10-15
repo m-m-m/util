@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -410,9 +411,10 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     }
     StringBuffer buffer = new StringBuffer();
     Map<String, String> bundleProperties = bundle.getProperties();
-    for (String key : bundleProperties.keySet()) {
+    for (Entry<String, String> entry : bundleProperties.entrySet()) {
+      String key = entry.getKey();
       if (!existingBundle.containsKey(key)) {
-        String value = bundleProperties.get(key);
+        String value = entry.getValue();
         buffer.append(key);
         buffer.append(" = ");
         if (locale.length() > 0) {

@@ -62,11 +62,12 @@ public class ResourceUriImpl implements ResourceUri {
   public ResourceUriImpl(String schemePrefix, String path) {
 
     super();
-    this.schemePrefix = schemePrefix.toLowerCase(Locale.US);
     this.path = path;
-    if (this.schemePrefix == null) {
+    if (schemePrefix == null) {
+      this.schemePrefix = null;
       this.uri = this.path;
     } else {
+      this.schemePrefix = schemePrefix.toLowerCase(Locale.US);
       this.uri = this.schemePrefix + this.path;
     }
   }
@@ -74,6 +75,7 @@ public class ResourceUriImpl implements ResourceUri {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getUri() {
 
     return this.uri;
@@ -82,6 +84,7 @@ public class ResourceUriImpl implements ResourceUri {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getSchemePrefix() {
 
     return this.schemePrefix;
@@ -90,6 +93,7 @@ public class ResourceUriImpl implements ResourceUri {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getPath() {
 
     return this.path;

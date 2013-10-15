@@ -9,7 +9,6 @@ import java.util.Map;
 
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.text.base.UnicodeUtilImpl;
 
 /**
  * This enum contains the most important diacritical marks.<br>
@@ -783,6 +782,7 @@ public enum DiacriticalMark implements Datatype<Character> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     return this.title;
@@ -791,6 +791,7 @@ public enum DiacriticalMark implements Datatype<Character> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Character getValue() {
 
     return Character.valueOf(this.separateCharacter);
@@ -820,28 +821,6 @@ public enum DiacriticalMark implements Datatype<Character> {
   public Character decompose(char character) {
 
     return this.decomposeMap.get(Character.valueOf(character));
-  }
-
-  /**
-   * This method gets the ASCII-representation of the given <code>character</code> {@link #compose(char)
-   * composed} with this {@link DiacriticalMark}. This is similar to {@link #decompose(char)} but e.g. for
-   * {@value #DIAERESIS} the character 'e' is appended for some characters.
-   * 
-   * @see UnicodeUtil#normalize2Ascii(char)
-   * @deprecated Use {@link UnicodeUtil#normalize2Ascii(char)} instead.
-   * 
-   * @param character is the character to normalize to ASCII (e.g. '&Auml;' or '&aacute;').
-   * @return the de-composed character (e.g. 'Ae' or 'a') or <code>null</code> if the given
-   *         <code>character</code> is not {@link #compose(char) composed} with this {@link DiacriticalMark}.
-   */
-  @Deprecated
-  public String normalizeToAscii(char character) {
-
-    Character decomposed = this.decomposeMap.get(Character.valueOf(character));
-    if (decomposed == null) {
-      return null;
-    }
-    return UnicodeUtilImpl.getInstance().normalize2Ascii(character);
   }
 
   /**

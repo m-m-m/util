@@ -205,7 +205,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
       end = start;
       int escapeDeepth = 1;
       while (this.index < this.string.length) {
-        if ((this.escapeStart != null) && containsSubstring(this.escapeStart, this.index)) {
+        if (containsSubstring(this.escapeStart, this.index)) {
           escapeDeepth++;
           this.index = this.index + this.escapeStart.length;
         } else if ((this.escapeEnd != null) && containsSubstring(this.escapeEnd, this.index)) {

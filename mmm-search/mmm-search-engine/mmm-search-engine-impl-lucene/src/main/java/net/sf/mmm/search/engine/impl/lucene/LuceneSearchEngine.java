@@ -34,9 +34,8 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.highlight.Formatter;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.search.engine.api.SearchEngine} interface using lucene as
- * underlying search-engine.
+ * This is the implementation of the {@link net.sf.mmm.search.engine.api.SearchEngine} interface using lucene
+ * as underlying search-engine.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -74,9 +73,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * @param searchDependencies are the {@link SearchDependencies}.
    * @param periodicRefresher is the {@link PeriodicRefresher}.
    */
-  public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
-      SearchQueryBuilder queryBuilder, Formatter highlightFormatter,
-      LuceneFieldManager fieldManager, SearchDependencies searchDependencies,
+  public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer, SearchQueryBuilder queryBuilder,
+      Formatter highlightFormatter, LuceneFieldManager fieldManager, SearchDependencies searchDependencies,
       PeriodicRefresher periodicRefresher) {
 
     super(periodicRefresher);
@@ -106,12 +104,10 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
    * @param fieldManager is the {@link LuceneFieldManager}.
    * @param searchDependencies are the {@link SearchDependencies}.
    */
-  public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer,
-      SearchQueryBuilder queryBuilder, Formatter highlightFormatter,
-      LuceneFieldManager fieldManager, SearchDependencies searchDependencies) {
+  public LuceneSearchEngine(IndexReader indexReader, Analyzer analyzer, SearchQueryBuilder queryBuilder,
+      Formatter highlightFormatter, LuceneFieldManager fieldManager, SearchDependencies searchDependencies) {
 
-    this(indexReader, analyzer, queryBuilder, highlightFormatter, fieldManager, searchDependencies,
-        null);
+    this(indexReader, analyzer, queryBuilder, highlightFormatter, fieldManager, searchDependencies, null);
   }
 
   /**
@@ -137,6 +133,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchQueryBuilder getQueryBuilder() {
 
     return this.queryBuilder;
@@ -168,8 +165,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
-   * This method creates a new instance of the {@link SearchHighlighter} for a
-   * {@link SearchResultPage}.
+   * This method creates a new instance of the {@link SearchHighlighter} for a {@link SearchResultPage}.
    * 
    * @param luceneQuery is the lucene {@link Query} used for highlighting.
    * @return the {@link SearchHighlighter}.
@@ -180,18 +176,14 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   }
 
   /**
-   * This method creates an {@link SearchHit} for the given
-   * <code>documentId</code> and <code>score</code>.
+   * This method creates an {@link SearchHit} for the given <code>documentId</code> and <code>score</code>.
    * 
-   * @param documentId is the technical ID of the lucene {@link Document}
-   *        representing the hit.
+   * @param documentId is the technical ID of the lucene {@link Document} representing the hit.
    * @param score is the {@link SearchHit#getScore() score} of the hit.
-   * @param searchHighlighter is used to create the
-   *        {@link SearchHit#getHighlightedText() highlighted text}.
+   * @param searchHighlighter is used to create the {@link SearchHit#getHighlightedText() highlighted text}.
    * @return the {@link SearchHit}.
    */
-  protected SearchHit createSearchHit(int documentId, double score,
-      SearchHighlighter searchHighlighter) {
+  protected SearchHit createSearchHit(int documentId, double score, SearchHighlighter searchHighlighter) {
 
     SearchEntry searchEntry = getEntry(documentId);
     return new SearchHitImpl(searchEntry, Integer.toString(documentId), score, searchHighlighter);
@@ -200,6 +192,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchResultPage search(SearchQuery query, int hitsPerPage) {
 
     return search(query, hitsPerPage, 0, -1);
@@ -208,8 +201,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
-  public SearchResultPage search(SearchQuery query, int hitsPerPage, int pageIndex,
-      int totalHitCount) {
+  @Override
+  public SearchResultPage search(SearchQuery query, int hitsPerPage, int pageIndex, int totalHitCount) {
 
     try {
       Query luceneQuery = getLuceneQuery(query);
@@ -219,7 +212,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       TopDocs topDocs = this.searcher.search(luceneQuery, requiredHitCount);
       int pageHitCount = topDocs.scoreDocs.length - start;
       float maxScore = topDocs.getMaxScore();
-      if ((maxScore == Float.NaN) || (maxScore <= 0)) {
+      if (Float.isNaN(maxScore) || (maxScore <= 0)) {
         maxScore = 1;
       }
       SearchHit[] hits;
@@ -233,8 +226,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       } else {
         hits = SearchHit.NO_HITS;
       }
-      SearchResultPage page = new SearchResultPageImpl(query.toString(), topDocs.totalHits,
-          hitsPerPage, pageIndex, hits);
+      SearchResultPage page = new SearchResultPageImpl(query.toString(), topDocs.totalHits, hitsPerPage, pageIndex,
+          hits);
       return page;
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
@@ -244,6 +237,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  @Override
   public long count(String field, String value) {
 
     try {
@@ -257,6 +251,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  @Override
   public long getTotalEntryCount() {
 
     try {
@@ -269,6 +264,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchEntry getEntry(String entryId) {
 
     try {
@@ -281,8 +277,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * @see #getEntry(String)
    * 
-   * @param documentId is the technical ID of the lucene {@link Document}
-   *        representing the hit.
+   * @param documentId is the technical ID of the lucene {@link Document} representing the hit.
    * @return the document as {@link SearchEntry}.
    */
   public SearchEntry getEntry(int documentId) {
@@ -292,8 +287,8 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
       if (doc == null) {
         throw new SearchEntryIdMissingException(Integer.toString(documentId));
       }
-      return new LuceneSearchEntry(doc, this.fieldManager.getConfigurationHolder().getBean()
-          .getFields(), this.searchDependencies);
+      return new LuceneSearchEntry(doc, this.fieldManager.getConfigurationHolder().getBean().getFields(),
+          this.searchDependencies);
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.READ);
     }
@@ -302,6 +297,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
   /**
    * {@inheritDoc}
    */
+  @Override
   public synchronized boolean refresh() {
 
     try {

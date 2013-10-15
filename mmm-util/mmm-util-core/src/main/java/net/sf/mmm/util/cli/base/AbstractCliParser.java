@@ -386,49 +386,13 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
         writer.printText(NlsBundleUtilCoreRoot.MSG_CLI_MODE_USAGE);
         StringBuilder parameters = new StringBuilder();
         Collection<CliOptionContainer> modeOptions = this.cliState.getOptions(mode);
-        int maxOptionColumnWidth = 0;
-        for (CliOptionContainer option : modeOptions) {
-          CliOption cliOption = option.getOption();
-          if (parameters.length() > 0) {
-            parameters.append(" ");
-          }
-          if (!cliOption.required()) {
-            parameters.append("[");
-          }
-          parameters.append(cliOption.name());
-          if (!option.getSetter().getPropertyClass().equals(boolean.class)) {
-            parameters.append(" ");
-            parameters.append(cliOption.operand());
-            if (option.isArrayMapOrCollection()) {
-              CliContainerStyle containerStyle = option.getContainerStyle(this.cliState.getCliStyle());
-              switch (containerStyle) {
-                case COMMA_SEPARATED:
-                  parameters.append(",...");
-                  break;
-                case MULTIPLE_OCCURRENCE:
-                  parameters.append("*");
-                  break;
-                default :
-                  throw new IllegalCaseException(CliContainerStyle.class, containerStyle);
-              }
-            }
-          }
-          if (!cliOption.required()) {
-            parameters.append("]");
-          }
-          CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
-          if (helpInfo == null) {
-            helpInfo = new CliOptionHelpInfo(option, this.dependencies, settings);
-            option2HelpMap.put(cliOption, helpInfo);
-          }
-          if (helpInfo.length > maxOptionColumnWidth) {
-            maxOptionColumnWidth = helpInfo.length;
-          }
-        }
+        int maxOptionColumnWidth = printHelpOptions(settings, option2HelpMap, parameters, modeOptions);
         List<CliArgumentContainer> argumentList = this.cliState.getArguments(mode);
         int maxArgumentColumnWidth = 0;
         List<CliArgumentHelpInfo> argumentHelpList;
-        if (!argumentList.isEmpty()) {
+        if (argumentList.isEmpty()) {
+          argumentHelpList = Collections.emptyList();
+        } else {
           argumentHelpList = new ArrayList<AbstractCliParser.CliArgumentHelpInfo>(argumentList.size());
           boolean requiredArgument = true;
           CliArgument cliArgument = null;
@@ -456,8 +420,6 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
           if ((cliArgument != null) && !cliArgument.required()) {
             parameters.append("]");
           }
-        } else {
-          argumentHelpList = Collections.emptyList();
         }
 
         nlsArguments.put(NlsObject.KEY_OPTION, parameters);
@@ -482,6 +444,61 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       }
     }
     nlsArguments.remove(NlsObject.KEY_MODE);
+  }
+
+  /**
+   * Prints the options for the help usage output.
+   * 
+   * @param settings are the {@link CliOutputSettings}.
+   * @param option2HelpMap is the {@link Map} with the {@link CliOptionHelpInfo}.
+   * @param parameters is the {@link StringBuilder} where to {@link StringBuilder#append(String) append} the
+   *        options help output.
+   * @param modeOptions the {@link Collection} with the options to print for the current mode.
+   * @return the maximum width in characters of the option column in the text output.
+   */
+  private int printHelpOptions(CliOutputSettings settings, Map<CliOption, CliOptionHelpInfo> option2HelpMap,
+      StringBuilder parameters, Collection<CliOptionContainer> modeOptions) {
+
+    int maxOptionColumnWidth = 0;
+    for (CliOptionContainer option : modeOptions) {
+      CliOption cliOption = option.getOption();
+      if (parameters.length() > 0) {
+        parameters.append(" ");
+      }
+      if (!cliOption.required()) {
+        parameters.append("[");
+      }
+      parameters.append(cliOption.name());
+      if (!option.getSetter().getPropertyClass().equals(boolean.class)) {
+        parameters.append(" ");
+        parameters.append(cliOption.operand());
+        if (option.isArrayMapOrCollection()) {
+          CliContainerStyle containerStyle = option.getContainerStyle(this.cliState.getCliStyle());
+          switch (containerStyle) {
+            case COMMA_SEPARATED:
+              parameters.append(",...");
+              break;
+            case MULTIPLE_OCCURRENCE:
+              parameters.append("*");
+              break;
+            default :
+              throw new IllegalCaseException(CliContainerStyle.class, containerStyle);
+          }
+        }
+      }
+      if (!cliOption.required()) {
+        parameters.append("]");
+      }
+      CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
+      if (helpInfo == null) {
+        helpInfo = new CliOptionHelpInfo(option, this.dependencies, settings);
+        option2HelpMap.put(cliOption, helpInfo);
+      }
+      if (helpInfo.length > maxOptionColumnWidth) {
+        maxOptionColumnWidth = helpInfo.length;
+      }
+    }
+    return maxOptionColumnWidth;
   }
 
   /**
@@ -637,7 +654,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
         append(syntaxBuilder, alias.toString(), maxLength, settings);
       }
       if (!option.isTrigger()) {
-        append(syntaxBuilder, " " + this.operand, maxLength, settings);
+        syntaxBuilder.append(" ");
+        append(syntaxBuilder, this.operand, maxLength, settings);
       }
       // length of line...
       this.length = syntaxBuilder.length();

@@ -113,9 +113,7 @@ public class DataFolderImpl extends AbstractDataEntityResource implements DataFo
 
     DataFolderImpl parent = getParent();
     if (parent == null) {
-      return false;
-    } else if (this == null) {
-      return true;
+      return (this == node);
     } else {
       return parent.isDescendant(node);
     }
