@@ -4,18 +4,18 @@ package net.sf.mmm.client.ui.api.widget.panel;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
  * This is the interface for a lightweight {@link UiWidgetDynamicPanel dynamic panel} that groups a number of
- * {@link UiWidgetButton buttons} that have a related functionality (e.g. "Undo", "Redo"). These buttons
- * appear with less (or inside {@link UiWidgetToolbar} without) horizontal margin between each other (more
- * narrow).
+ * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton buttons} that have a related functionality (e.g.
+ * "Undo", "Redo"). These buttons appear with less (or inside {@link UiWidgetToolbar} without) horizontal
+ * margin between each other (more narrow).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetButtonGroup extends UiWidgetDynamicPanel<UiWidgetButton>, UiWidgetNative {
+public interface UiWidgetButtonGroup extends UiWidgetDynamicPanel<UiWidgetRegular>, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String STYLE_PRIMARY = CssStyles.BUTTON_GROUP;

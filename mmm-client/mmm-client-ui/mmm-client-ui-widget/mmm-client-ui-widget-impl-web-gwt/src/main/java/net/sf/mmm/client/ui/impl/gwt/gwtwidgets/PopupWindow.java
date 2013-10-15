@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximizable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximized;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
@@ -22,6 +24,7 @@ import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -38,7 +41,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  */
 public class PopupWindow extends PopupPanel implements AttributeWriteResizable, AttributeWriteMovable,
-    AttributeWriteClosable {
+    AttributeWriteClosable, AttributeWriteMaximized, AttributeWriteMaximizable {
 
   /** The main panel. */
   private final VerticalFlowPanel mainPanel;
@@ -54,6 +57,12 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
 
   /** The button to close the window. */
   private final Button closeButton;
+
+  /** The button to {@link #setMaximized(boolean) (un)maximize} the window. */
+  private final Button maximizeButton;
+
+  /** The footer panel. */
+  private final HorizontalFlowPanel footerBar;
 
   /** The left border of the window */
   private FlowPanel borderWest;
@@ -88,6 +97,30 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   /** @see #isClosable() */
   private boolean closable;
 
+  /** @see #isMaximizable() */
+  private boolean maximizable;
+
+  /** @see #isMaximized() */
+  private boolean maximized;
+
+  /**
+   * The saved X-{@link #setPopupPosition(int, int) position} to restore after e.g.
+   * {@link #setMaximized(boolean)}.
+   */
+  private int savedX;
+
+  /**
+   * The saved Y-{@link #setPopupPosition(int, int) position} to restore after e.g.
+   * {@link #setMaximized(boolean)}.
+   */
+  private int savedY;
+
+  /** The saved {@link #getOffsetWidth() width} to restore after e.g. {@link #setMaximized(boolean)}. */
+  private int savedWidth;
+
+  /** The saved {@link #getOffsetHeight() height} to restore after e.g. {@link #setMaximized(boolean)}. */
+  private int savedHeight;
+
   /**
    * The {@link Element} outside the {@link PopupWindow} that had the focus before the {@link PopupWindow} was
    * {@link #show() shown}.
@@ -105,8 +138,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   /**
    * The constructor.
    * 
-   * @param autoHide - see {@link #setAutoHideEnabled(boolean)}. sddgfds gdsds gdsg dsg dsgds dsg dsg dsg
-   *        dsvgdsg dsg dsgds gdsg dsg dsg dsg dsg dsg dsg dsg dsg dsg
+   * @param autoHide - see {@link #setAutoHideEnabled(boolean)}.
    */
   public PopupWindow(boolean autoHide) {
 
@@ -123,6 +155,8 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
 
     super(autoHide, modal);
     this.resizable = true;
+    this.maximized = false;
+    this.maximizable = true;
     setStyleName(CssStyles.WINDOW);
 
     this.title = new InlineLabel();
@@ -140,12 +174,25 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       }
     };
     this.closeButton.addClickHandler(closeHandler);
+    iconMarkup = HtmlTemplates.INSTANCE.iconMarkup(IconConstants.MAXIMIZE);
+    this.maximizeButton = new Button(iconMarkup);
+    this.maximizeButton.setStyleName(CssStyles.BUTTON);
+    ClickHandler maximizeHandler = new ClickHandler() {
+
+      @Override
+      public void onClick(ClickEvent event) {
+
+        setMaximized(!PopupWindow.this.maximized);
+      }
+    };
+    this.maximizeButton.addClickHandler(maximizeHandler);
 
     this.titleBar = new HorizontalFlowPanel();
     this.titleBar.addStyleName(CssStyles.WINDOW_TITLE_BAR);
     this.titleBar.addStyleName(CssStyles.MOVABLE);
     this.movable = true;
     this.titleBar.add(this.title);
+    this.titleBar.add(this.maximizeButton);
     this.titleBar.add(this.closeButton);
 
     this.contentPanel = new VerticalFlowPanel();
@@ -172,6 +219,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     this.mainPanel = new VerticalFlowPanel();
     this.mainPanel.add(this.titleBar);
     this.mainPanel.add(this.contentPanel);
+    this.footerBar = new HorizontalFlowPanel();
+    this.footerBar.addStyleName(CssStyles.WINDOW_FOOTER_BAR);
+    this.mainPanel.add(this.footerBar);
     this.mainPanel.add(this.borderWest);
     this.mainPanel.add(this.borderEast);
     this.mainPanel.add(this.borderSouth);
@@ -270,6 +320,60 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     }
     this.closable = closable;
     this.closeButton.setVisible(closable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximized() {
+
+    return this.maximized;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximized(boolean maximized) {
+
+    if (this.maximized == maximized) {
+      return;
+    }
+    if (maximized) {
+      this.savedX = getAbsoluteLeft();
+      this.savedY = getAbsoluteTop();
+      this.savedWidth = getOffsetWidth();
+      this.savedHeight = getOffsetHeight();
+      setPopupPosition(Window.getScrollLeft(), Window.getScrollTop());
+      setPixelSize(Window.getClientWidth(), Window.getClientHeight());
+    } else {
+      setPopupPosition(this.savedX, this.savedY);
+      setPixelSize(this.savedWidth, this.savedHeight);
+    }
+    this.maximized = maximized;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximizable() {
+
+    return this.maximizable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximizable(boolean maximizable) {
+
+    if (this.maximizable == maximizable) {
+      return;
+    }
+    this.maximizeButton.setVisible(maximizable);
+    this.maximizable = maximizable;
   }
 
   /**

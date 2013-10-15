@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.impl.test.widget.core;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLink;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLink;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
@@ -17,9 +16,6 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
  */
 public class UiWidgetLinkTest extends AbstractUiWidgetLink<UiWidgetAdapterTest> {
 
-  /** @see #getImage() */
-  private UiWidgetImageTest image;
-
   /**
    * The constructor.
    * 
@@ -28,7 +24,6 @@ public class UiWidgetLinkTest extends AbstractUiWidgetLink<UiWidgetAdapterTest> 
   public UiWidgetLinkTest(UiContext context) {
 
     super(context);
-    this.image = null;
   }
 
   /**
@@ -38,15 +33,6 @@ public class UiWidgetLinkTest extends AbstractUiWidgetLink<UiWidgetAdapterTest> 
   protected UiWidgetAdapterTest createWidgetAdapter() {
 
     return new UiWidgetAdapterTest();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UiWidgetImage getImage() {
-
-    return this.image;
   }
 
   /**

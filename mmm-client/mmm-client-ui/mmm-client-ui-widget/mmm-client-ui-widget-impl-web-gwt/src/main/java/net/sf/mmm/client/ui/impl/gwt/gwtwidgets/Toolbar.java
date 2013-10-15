@@ -5,6 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.client.ui.api.common.ButtonContainer;
+
 import com.google.gwt.aria.client.Roles;
 import com.google.gwt.aria.client.ToolbarRole;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -29,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Toolbar extends FlowPanel implements HasAllFocusHandlers, FocusHandler, KeyUpHandler {
+public class Toolbar extends FlowPanel implements ButtonContainer, HasAllFocusHandlers, FocusHandler, KeyUpHandler {
 
   /** @see #add(Widget) */
   private final List<ButtonBase> buttonList;
@@ -177,27 +179,11 @@ public class Toolbar extends FlowPanel implements HasAllFocusHandlers, FocusHand
   }
 
   /**
-   * This method ends a {@link #startGroup() previously started group}.
+   * {@inheritDoc}
    * 
-   * @return <code>true</code> if the current {@link ButtonGroup} has successfully been ended,
-   *         <code>false</code> otherwise (if there was no such {@link ButtonGroup}).
+   * A button-group is realized by {@link ButtonGroup}.
    */
-  public boolean endGroup() {
-
-    boolean result = (this.currentButtonGroup != null);
-    this.currentButtonGroup = null;
-    return result;
-  }
-
-  /**
-   * This method starts a new {@link ButtonGroup} and {@link #add(com.google.gwt.user.client.ui.Widget) adds}
-   * it to this {@link Toolbar}. All {@link Widget}s {@link #add(Widget) added} next will be added to the new
-   * {@link ButtonGroup} instead.
-   * 
-   * @throws IllegalStateException if the previous {@link ButtonGroup} has NOT been {@link #endGroup() ended}.
-   * 
-   * @see #endGroup()
-   */
+  @Override
   public void startGroup() throws IllegalStateException {
 
     if (this.currentButtonGroup != null) {
@@ -205,6 +191,17 @@ public class Toolbar extends FlowPanel implements HasAllFocusHandlers, FocusHand
     }
     this.currentButtonGroup = new ButtonGroup();
     super.add(this.currentButtonGroup);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean endGroup() {
+
+    boolean result = (this.currentButtonGroup != null);
+    this.currentButtonGroup = null;
+    return result;
   }
 
 }

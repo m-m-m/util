@@ -2,20 +2,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.panel;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
- * This is the interface for a {@link UiWidgetDynamicPanel dynamic panel} that shows a number of
- * {@link UiWidgetButton buttons} horizontally (e.g. "Save", "Reset", "Cancel"). It shall be used instead of a
- * {@link UiWidgetHorizontalPanel} to get control of the layout (margins) for button panels.
+ * This is the interface for a {@link UiWidgetAbstractButtonContainer button container} that shows a number of
+ * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton buttons} horizontally (e.g. "Save", "Reset",
+ * "Cancel"). It shall be used instead of a {@link UiWidgetHorizontalPanel} to get control of the layout
+ * (margins) for button panels. For additional features please see {@link UiWidgetAbstractButtonContainer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetButtonPanel extends UiWidgetDynamicPanel<UiWidgetButton>, UiWidgetNative {
+public interface UiWidgetButtonPanel extends UiWidgetAbstractButtonContainer, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "ButtonPanel";
+  String STYLE_PRIMARY = CssStyles.BUTTON_PANEL;
 
 }

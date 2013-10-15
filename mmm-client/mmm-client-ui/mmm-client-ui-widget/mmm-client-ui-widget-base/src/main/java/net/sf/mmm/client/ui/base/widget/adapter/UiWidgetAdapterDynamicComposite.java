@@ -8,9 +8,10 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
  * This is the interface for a {@link UiWidgetAdapter} adapting
  * {@link net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite}.
  * 
+ * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
  */
 public abstract interface UiWidgetAdapterDynamicComposite<CHILD extends UiWidget> extends
     UiWidgetAdapterComposite<CHILD> {

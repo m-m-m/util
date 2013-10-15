@@ -13,6 +13,9 @@ public interface IconConstants {
   /** The name of the icon to close something (e.g. a window). */
   String CLOSE = "Close";
 
+  /** The name of the icon to maximize something (e.g. a window). */
+  String MAXIMIZE = "Fullscreen";
+
   /** The name of the icon to undo the last change. */
   String UNDO = "Undo";
 

@@ -32,6 +32,9 @@ public class UiWidgetAdapterTestCompositeRegular extends UiWidgetAdapterTestComp
   /** @see #getPositionY() */
   private double positionY;
 
+  /** @see #isMaximized() */
+  private boolean maximized;
+
   /**
    * The constructor.
    */
@@ -112,6 +115,45 @@ public class UiWidgetAdapterTestCompositeRegular extends UiWidgetAdapterTestComp
   public void setClosable(boolean closable) {
 
     verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximizable() {
+
+    throw new NlsUnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximizable(boolean maximizable) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximized() {
+
+    verifyNotDisposed();
+    return this.maximized;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximized(boolean maximized) {
+
+    verifyNotDisposed();
+    // change size?
+    this.maximized = maximized;
   }
 
   /**

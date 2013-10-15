@@ -128,6 +128,42 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
+  public boolean isMaximizable() {
+
+    return getToplevelWidget().isMaximizable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximizable(boolean maximizable) {
+
+    getToplevelWidget().setMaximizable(maximizable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximized() {
+
+    return getToplevelWidget().isMaximized();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximized(boolean maximized) {
+
+    getToplevelWidget().setMaximized(maximized);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public double getPositionX() {
 
     return getToplevelWidget().getAbsoluteLeft();

@@ -8,7 +8,6 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomButtonPanel;
 import net.sf.mmm.client.ui.impl.test.widget.complex.UiWidgetTreeTest;
 import net.sf.mmm.client.ui.impl.test.widget.core.UiWidgetButtonTest;
 import net.sf.mmm.client.ui.impl.test.widget.core.UiWidgetCollapsableSectionTest;
@@ -91,7 +90,7 @@ public class UiWidgetFactoryNativeTest extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetGridRowTest.Factory());
     register(new UiWidgetGridCellTest.Factory());
     register(new UiWidgetBorderPanelTest.Factory());
-    register(new UiWidgetCustomButtonPanel.Factory());
+    // TODO: ButtonPanel, Toolbar, ButtonGroup
     // menu
     register(new UiWidgetMenuBarTest.Factory());
     register(new UiWidgetMenuTest.Factory());

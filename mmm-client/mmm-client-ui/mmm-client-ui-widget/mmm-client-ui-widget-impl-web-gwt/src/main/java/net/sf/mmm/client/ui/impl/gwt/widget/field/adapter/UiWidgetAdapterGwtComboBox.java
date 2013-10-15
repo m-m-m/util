@@ -148,6 +148,7 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFo
       Element childElement = element.getFirstChildElement();
       while (childElement != null) {
         childElement.removeFromParent();
+        childElement = element.getFirstChildElement();
       }
 
       // create new options

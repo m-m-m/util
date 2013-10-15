@@ -26,6 +26,12 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
   /** @see #isClosable */
   private boolean closable;
 
+  /** @see #isMaximizable() */
+  private boolean maximizable;
+
+  /** @see #isMaximized() */
+  private boolean maximized;
+
   /**
    * The constructor.
    * 
@@ -38,6 +44,8 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
     this.movable = true;
     this.resizable = true;
     this.closable = true;
+    this.maximized = false;
+    this.maximizable = true;
   }
 
   /**
@@ -122,6 +130,54 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
       getWidgetAdapter().setClosable(closable);
     }
     this.closable = closable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximizable() {
+
+    return this.maximizable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximizable(boolean maximizable) {
+
+    if (this.maximizable != maximizable) {
+      return;
+    }
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setMaximizable(maximizable);
+    }
+    this.maximizable = maximizable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isMaximized() {
+
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().isMaximized();
+    }
+    return this.maximized;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximized(boolean maximized) {
+
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setMaximized(maximized);
+    }
+    this.maximized = maximized;
   }
 
 }

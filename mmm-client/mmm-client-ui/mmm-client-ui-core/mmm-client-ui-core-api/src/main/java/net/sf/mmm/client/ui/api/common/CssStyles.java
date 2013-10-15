@@ -51,8 +51,8 @@ public interface CssStyles {
   /** The name of the CSS style for the title inside a {@link #WINDOW_TITLE_BAR}. */
   String WINDOW_TITLE = "WindowTitle";
 
-  /** The name of the CSS style for a the top border of a {@link #WINDOW}. */
-  String WINDOW_TOP = "WindowTop";
+  /** The name of the CSS style for the footer-bar of a {@link #WINDOW} (inside {@link #WINDOW_CONTENT}). */
+  String WINDOW_FOOTER_BAR = "WindowFooterBar";
 
   /** The name of the CSS style for a the left border of a {@link #WINDOW}. */
   String BORDER_WEST = "BorderW";
@@ -92,6 +92,9 @@ public interface CssStyles {
 
   /** The name of the CSS style for a button group. */
   String BUTTON_GROUP = "ButtonGroup";
+
+  /** The name of the CSS style for a button panel. */
+  String BUTTON_PANEL = "ButtonPanel";
 
   /** The name of the CSS style for a tab (in a tab-panel). */
   String TAB = "Tab";

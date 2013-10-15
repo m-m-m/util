@@ -95,6 +95,30 @@
 .fontAwesome() {
 	font-family: FontAwesome;
 }
+.boxLayout() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+}
+.horizontalLayout() {
+  .boxLayout;
+
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+}
+.verticalLayout() {
+  .boxLayout;
+
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+}
+.boxFlex(@weight) {
+  -webkit-box-flex: @weight;
+  -moz-box-flex: @weight;
+  box-flex: @weight;
+}
 
 /* Main styles */
 body {
@@ -145,16 +169,23 @@ button {
   }
 }
 .VerticalPanel {
-
+  .verticalLayout;
+  .boxFlex(1);
 }
+/*
 .VerticalPanel > * {
   display: block;
 }
+*/
 .HorizontalPanel {
+  /*
   overflow: hidden;
-  /* overflow-x: auto; */
   white-space: nowrap;
   display: flex;
+  */
+  .horizontalLayout;
+  .boxFlex(1);
+
   align-items: baseline;
 }
 .Movable {
@@ -476,6 +507,9 @@ button {
     border-top-right-radius: @radius;
     padding-left: @border-size;
     padding-right: @border-size;
+
+    .boxFlex(0);
+
     .WindowTitle {
       .highlightText;
       -moz-user-select: none;
@@ -488,7 +522,11 @@ button {
     }
   }
   .WindowContent {
-    overflow: auto;
+    /* overflow: auto; */
+  }
+  .WindowFooterBar {
+    .boxFlex(0);
+    heigth: 0.5em;
   }
   .BorderE {
     position: absolute;

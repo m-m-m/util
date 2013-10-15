@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.base.widget.window.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximizable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximized;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 
@@ -14,7 +16,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
  * @since 1.0.0
  */
 public interface UiWidgetAdapterAbstractDialogWindow extends UiWidgetAdapterAbstractWindow, AttributeWriteResizable,
-    AttributeWriteMovable, AttributeWriteClosable {
+    AttributeWriteMovable, AttributeWriteClosable, AttributeWriteMaximized, AttributeWriteMaximizable {
 
   // nothing to add
 

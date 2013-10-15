@@ -17,8 +17,8 @@ public abstract interface AttributeWriteMaximized extends AttributeReadMaximized
    * 
    * @see #isMaximized()
    * 
-   * @param maximize - <code>true</code> to maximize, <code>false</code> to un-maximize.
+   * @param maximized - <code>true</code> to maximize, <code>false</code> to un-maximize.
    */
-  void setMaximized(boolean maximize);
+  void setMaximized(boolean maximized);
 
 }
