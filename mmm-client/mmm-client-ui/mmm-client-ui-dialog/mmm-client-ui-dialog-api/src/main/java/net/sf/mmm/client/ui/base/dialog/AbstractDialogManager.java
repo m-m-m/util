@@ -294,6 +294,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
         buffer.insert(0, " - ");
         buffer.insert(0, title);
       }
+      parentController = parentController.getParent();
     }
     return buffer.toString();
   }

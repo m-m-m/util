@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.api.dialog;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -46,9 +47,9 @@ import net.sf.mmm.util.value.base.SimpleGenericValueConverterImpl;
  * }
  * </pre>
  * 
- * If you do not need to {@link DialogManager#openInNewWindow(DialogPlace) open} {@link DialogPlace places} in a
- * new window, you can also combine your places with the {@link DialogManager} and instead of providing create
- * methods you define methods like:
+ * If you do not need to {@link DialogManager#openInNewWindow(DialogPlace) open} {@link DialogPlace places} in
+ * a new window, you can also combine your places with the {@link DialogManager} and instead of providing
+ * create methods you define methods like:
  * 
  * <pre>
  *   public void navigateDocument(long documentId) {
@@ -69,7 +70,7 @@ public class DialogPlace {
   public static final char SEPARATOR_PARAMETER = ';';
 
   /** The separator for key and value of a {@link #getParameter(String) parameter}. */
-  public static final char SEPARATOR_VALUE = ';';
+  public static final char SEPARATOR_VALUE = '=';
 
   /** The regex pattern used to assert {@link #getParameter(String) parameter keys}. */
   public static final String PATTERN_KEY = "[^;:=&/]+";
@@ -289,19 +290,19 @@ public class DialogPlace {
       // myDialogId:key1=value1;key2=;key3;key4=value4
       // value2 and value3 are both the empty string.
       String dialogId = place.substring(0, stateIndex);
-      Map<String, String> parameters = new HashMap<String, String>();
+      Map<String, String> parameters = new LinkedHashMap<String, String>();
       int start = stateIndex + 1;
-      boolean todo = false;
-      while (todo) {
-        int end = place.indexOf(SEPARATOR_PARAMETER);
+      int length = place.length();
+      while (start < length) {
+        int end = place.indexOf(SEPARATOR_PARAMETER, start);
         if (end < 0) {
-          end = place.length();
+          end = length;
         }
 
         // key=value
         String key;
         String value;
-        int equalsIndex = place.indexOf(SEPARATOR_VALUE);
+        int equalsIndex = place.indexOf(SEPARATOR_VALUE, start);
         if ((equalsIndex < 0) || (equalsIndex > end)) {
           key = place.substring(start, end);
           value = "";
@@ -372,17 +373,15 @@ public class DialogPlace {
       return this.dialogId;
     } else {
       StringBuilder buffer = new StringBuilder(this.dialogId);
+      char separator = SEPARATOR_STATE;
       for (Entry<String, String> entry : this.parameters.entrySet()) {
         String key = entry.getKey();
         assert (key.matches(PATTERN_KEY));
         String value = entry.getValue();
-        assert (value.matches(PATTERN_VALUE));
         if (value != null) {
-          if (buffer.length() == 0) {
-            buffer.append(SEPARATOR_STATE);
-          } else {
-            buffer.append(SEPARATOR_PARAMETER);
-          }
+          assert (value.matches(PATTERN_VALUE));
+          buffer.append(separator);
+          separator = SEPARATOR_PARAMETER;
           buffer.append(key);
           buffer.append(SEPARATOR_VALUE);
           buffer.append(value);
