@@ -18,10 +18,12 @@
     <module>mmm-client-ui-widget-base</module>
     <module>mmm-client-ui-widget-impl-test</module>
     <module>mmm-client-ui-widget-impl-web-gwt</module>
+    <!--
     <module>mmm-client-ui-widget-impl-web-javafx</module>
     <module>mmm-client-ui-widget-impl-native-javafx</module>
     <module>mmm-client-ui-widget-impl-native-swing</module>
     <module>mmm-client-ui-widget-impl-native-swt</module>
     <module>mmm-client-ui-widget-impl-native-android</module>
+    -->
   </modules>
 </project>
