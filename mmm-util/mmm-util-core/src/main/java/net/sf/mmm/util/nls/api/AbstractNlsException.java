@@ -144,7 +144,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           buffer.append(trace[i].toString());
           buffer.append(LINE_SEPARATOR);
         }
-        for (Throwable suppressed : throwable.getSuppressed()) {
+        for (Throwable suppressed : ((Throwable) throwable).getSuppressed()) {
           buffer.append("Suppressed: ");
           buffer.append(LINE_SEPARATOR);
           printStackTraceNested(suppressed, locale, resolver, buffer);

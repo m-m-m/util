@@ -121,40 +121,4 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    */
   StackTraceElement[] getStackTrace();
 
-  /**
-   * This method appends the specified exception (<code>suppressed</code>) to this exception. This is used for
-   * exceptions that have been suppressed in order to deliver this exception.<br/>
-   * Here an example:
-   * 
-   * <pre>
-   * InputStream inStream = openStream();
-   * try {
-   *   readData(inStream);
-   * } catch (RuntimeIoException e) {
-   *   try {
-   *     inStream.close();
-   *   } catch (Exception suppressed) {
-   *     e.addSuppressed(suppressed);
-   *   }
-   *   throw e;
-   * }
-   * </pre>
-   * 
-   * @param suppressed is the {@link Throwable} to add.
-   * @since 4.0.0
-   */
-  void addSuppressed(Throwable suppressed);
-
-  /**
-   * Returns an array containing all of the exceptions that were {@link #addSuppressed(Throwable) suppressed},
-   * typically by the {@code try} -with-resources statement, in order to deliver this exception.<br/>
-   * 
-   * See <code>Throwable.getSuppressed()</code>.
-   * 
-   * @return an array containing all of the exceptions that have been added via
-   *         {@link #addSuppressed(Throwable)}.
-   * @since 4.0.0
-   */
-  Throwable[] getSuppressed();
-
 }

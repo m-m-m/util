@@ -11,9 +11,9 @@ import javax.xml.namespace.NamespaceContext;
 import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
- * This is a public implementation of the {@link NamespaceContext} interface. It
- * can store {@link #setNamespace(String, String) own namespace declarations}
- * and also inherit declarations from a parent {@link NamespaceContext}.
+ * This is a public implementation of the {@link NamespaceContext} interface. It can store
+ * {@link #setNamespace(String, String) own namespace declarations} and also inherit declarations from a
+ * parent {@link NamespaceContext}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -52,6 +52,7 @@ public class NamespaceContextImpl implements NamespaceContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getNamespaceURI(String prefix) {
 
     String uri = this.prefix2namespace.get(prefix);
@@ -64,6 +65,7 @@ public class NamespaceContextImpl implements NamespaceContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getPrefix(String namespaceURI) {
 
     String prefix = this.namespace2prefix.get(namespaceURI);
@@ -76,10 +78,11 @@ public class NamespaceContextImpl implements NamespaceContext {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator getPrefixes(String namespaceURI) {
 
     String prefix = this.namespace2prefix.get(namespaceURI);
-    Iterator parentIterator = null;
+    Iterator<String> parentIterator = null;
     if (this.parentContext != null) {
       parentIterator = this.parentContext.getPrefixes(namespaceURI);
     }
@@ -104,7 +107,7 @@ public class NamespaceContextImpl implements NamespaceContext {
   protected static class PrefixIterator extends AbstractIterator<String> {
 
     /** @see #next() */
-    private final Iterator parentIterator;
+    private final Iterator<String> parentIterator;
 
     /** @see #next() */
     private final String prefix;
@@ -115,7 +118,7 @@ public class NamespaceContextImpl implements NamespaceContext {
      * @param parentIterator
      * @param prefix
      */
-    public PrefixIterator(final Iterator parentIterator, String prefix) {
+    public PrefixIterator(final Iterator<String> parentIterator, String prefix) {
 
       super();
       this.parentIterator = parentIterator;
@@ -130,7 +133,7 @@ public class NamespaceContextImpl implements NamespaceContext {
     protected String findNext() {
 
       if ((this.parentIterator != null) && (this.parentIterator.hasNext())) {
-        return (String) this.parentIterator.next();
+        return this.parentIterator.next();
       }
       return this.prefix;
     }
