@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import java.util.Set;
 
 /**
  * This is a container for a {@link CliMode} together with additional associated information.
@@ -46,11 +45,25 @@ public interface CliModeObject {
   Class<?> getAnnotatedClass();
 
   /**
-   * This method gets the {@link Set} of {@link CliModeObject modes} that are {@link CliMode#parentIds()
-   * extended} by this {@link #getMode() mode} including this {@link CliModeObject mode} itself.
+   * Determines if this {@link CliModeObject} is an ancestor of the given <code>childMode</code>. So if the
+   * given <code>childMode</code> extends this {@link CliModeObject} directly or indirect, this method will
+   * return <code>true</code>.
    * 
-   * @return the extended {@link CliModeObject modes} including this {@link CliModeObject mode} itself.
+   * @param childMode is the {@link CliModeObject} to relate to.
+   * @return <code>true</code> this {@link CliModeObject} is an ancestor of the given <code>childMode</code>,
+   *         <code>false</code> otherwise.
    */
-  Set<? extends CliModeObject> getExtendedModes();
+  boolean isAncestorOf(CliModeObject childMode);
+
+  /**
+   * Determines if this {@link CliModeObject} is a descendant of the given <code>parentMode</code>. So if this
+   * {@link CliModeObject} extends the given <code>childMode</code> directly or indirect, this method will
+   * return <code>true</code>.
+   * 
+   * @param parentMode is the {@link CliModeObject} to relate to.
+   * @return <code>true</code> this {@link CliModeObject} is a descendant of the given <code>parentMode</code>
+   *         , <code>false</code> otherwise.
+   */
+  boolean isDescendantOf(CliModeObject parentMode);
 
 }

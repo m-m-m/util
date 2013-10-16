@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.rebind;
 
-import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -21,7 +20,6 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 import net.sf.mmm.util.reflect.base.SimpleGenericTypeLimited;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -29,8 +27,9 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
- * This is the {@link AbstractIncrementalGenerator incremental GWT generator} to generate implementations of
- * {@link PojoDescriptor} for a particular {@link net.sf.mmm.util.pojo.api.Pojo POJO}.
+ * This is the {@link net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator incremental GWT generator}
+ * to generate implementations of {@link PojoDescriptor} for a particular
+ * {@link net.sf.mmm.util.pojo.api.Pojo POJO}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -104,7 +103,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
    * Generates the method {@link AbstractPojoDescriptorImpl#newInstance()}.
    * 
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
-   *        {@link GWT#create(Class)}.
+   *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
    *        source code to.
    * @param pojoDescriptor is the {@link PojoDescriptor}.
@@ -134,7 +133,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
    *        source code to.
    * @param simpleName is the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
-   *        {@link GWT#create(Class)}.
+   *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @param pojoDescriptor is the {@link PojoDescriptor}.
    * @param context is the {@link GeneratorContext}.
    */
@@ -168,7 +167,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
    * by <code>inputType</code>.
    * 
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
-   *        {@link GWT#create(Class)}.
+   *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @return the {@link PojoDescriptor} for the given <code>inputType</code>.
    */
   private static PojoDescriptor<?> getPojoDescriptor(JClassType inputType) {

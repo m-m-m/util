@@ -57,10 +57,108 @@ public class AbstractVersionedMainTest {
     Assert.assertEquals("", errorBuffer.toString());
   }
 
+  /**
+   * Test the default mode with argument.
+   */
+  @Test
+  public void testDefaultWithEndOptions() {
+
+    AbstractVersionedMain main = new TestMain();
+
+    StringBuilder buffer = new StringBuilder();
+    main.setStandardError(buffer);
+    main.setStandardOutput(buffer);
+    String argumentValue = "-argument-";
+    int exitCode = main.run(new String[] { "--", argumentValue });
+    String output = buffer.toString();
+    Assert.assertEquals(output, 0, exitCode);
+    Assert.assertEquals(argumentValue, output);
+  }
+
+  /**
+   * Test the default mode with argument.
+   */
+  @Test
+  public void testDefault() {
+
+    AbstractVersionedMain main = new TestMain();
+
+    StringBuilder buffer = new StringBuilder();
+    main.setStandardError(buffer);
+    main.setStandardOutput(buffer);
+    String argumentValue = "42argument42";
+    int exitCode = main.run(new String[] { argumentValue });
+    String output = buffer.toString();
+    Assert.assertEquals(output, 0, exitCode);
+    Assert.assertEquals(argumentValue, output);
+  }
+
+  /**
+   * Test the default mode with argument and combined options (-fb).
+   */
+  @Test
+  public void testDefaultWithCombinedOptions() {
+
+    AbstractVersionedMain main = new TestMain();
+
+    StringBuilder buffer = new StringBuilder();
+    main.setStandardError(buffer);
+    main.setStandardOutput(buffer);
+    String argumentValue = "-argument-";
+    int exitCode = main.run(new String[] { "-fb", "--", argumentValue });
+    String output = buffer.toString();
+    Assert.assertEquals(output, 0, exitCode);
+    Assert.assertEquals("foo bar " + argumentValue, output);
+  }
+
+  /**
+   * Test the default mode with argument and combined options (-fb).
+   */
+  @Test
+  public void testDefaultWithLongOption() {
+
+    AbstractVersionedMain main = new TestMain();
+
+    StringBuilder buffer = new StringBuilder();
+    main.setStandardError(buffer);
+    main.setStandardOutput(buffer);
+    String argumentValue = "-argument-";
+    int exitCode = main.run(new String[] { "--bar", "--", argumentValue });
+    String output = buffer.toString();
+    Assert.assertEquals(output, 0, exitCode);
+    Assert.assertEquals("bar " + argumentValue, output);
+  }
+
   @CliClass(usage = TestMain.USAGE)
+  @CliMode(id = CliMode.ID_DEFAULT)
   private static class TestMain extends AbstractVersionedMain {
 
     public static final String USAGE = "This program is used for tests only";
+
+    @CliOption(name = "--foo", aliases = { "-f" }, usage = "Option to print out 'foo ' for testing.")
+    private boolean foo;
+
+    @CliOption(name = "--bar", aliases = { "-b" }, usage = "Option to print out 'bar ' for testing.")
+    private boolean bar;
+
+    @CliArgument(name = "Argument", usage = "Some argument for testing.")
+    private String argument;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected int runDefaultMode() throws Exception {
+
+      if (this.foo) {
+        getStandardOutput().print("foo ");
+      }
+      if (this.bar) {
+        getStandardOutput().print("bar ");
+      }
+      getStandardOutput().print(this.argument);
+      return EXIT_CODE_OK;
+    }
 
   }
 }

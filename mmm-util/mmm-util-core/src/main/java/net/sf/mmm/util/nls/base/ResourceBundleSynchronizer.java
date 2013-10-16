@@ -30,7 +30,6 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
-import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.filter.api.Filter;
@@ -456,41 +455,37 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * {@inheritDoc}
    */
   @Override
-  protected int run(CliModeObject mode) throws Exception {
+  protected int runDefaultMode() throws Exception {
 
-    if (CliMode.ID_DEFAULT.equals(mode.getId())) {
-      if (this.bundleClasses == null) {
-        List<ResourceBundle> bundleList = getResourceBundleFinder().findBundles();
-        for (ResourceBundle resourceBundle : bundleList) {
-          synchronize(new NlsBundleContainer(resourceBundle));
-        }
-        Set<String> allClasses = getReflectionUtil().findClassNames("", true);
-        Filter<? super Class<?>> filter = new AssignableFromFilter(NlsBundle.class, true);
-        @SuppressWarnings({ "unchecked", "rawtypes" })
-        Set<Class<? extends NlsBundle>> nlsBundleClasses = (Set) getReflectionUtil().loadClasses(allClasses, filter);
-        for (Class<? extends NlsBundle> bundleClass : nlsBundleClasses) {
-          synchronize(new NlsBundleContainer(bundleClass));
-        }
-      } else {
-        for (Class<?> bundleClass : this.bundleClasses) {
-          NlsBundleContainer bundle;
-          if (ResourceBundle.class.isAssignableFrom(bundleClass)) {
-            ResourceBundle resourceBundle = (ResourceBundle) bundleClass.newInstance();
-            bundle = new NlsBundleContainer(resourceBundle);
-          } else if (NlsBundle.class.isAssignableFrom(bundleClass)) {
-            @SuppressWarnings("unchecked")
-            Class<? extends NlsBundle> bundleInterface = (Class<? extends NlsBundle>) bundleClass;
-            bundle = new NlsBundleContainer(bundleInterface);
-          } else {
-            throw new IllegalArgumentException(bundleClass.getName());
-          }
-          synchronize(bundle);
-        }
+    if (this.bundleClasses == null) {
+      List<ResourceBundle> bundleList = getResourceBundleFinder().findBundles();
+      for (ResourceBundle resourceBundle : bundleList) {
+        synchronize(new NlsBundleContainer(resourceBundle));
       }
-      return EXIT_CODE_OK;
+      Set<String> allClasses = getReflectionUtil().findClassNames("", true);
+      Filter<? super Class<?>> filter = new AssignableFromFilter(NlsBundle.class, true);
+      @SuppressWarnings({ "unchecked", "rawtypes" })
+      Set<Class<? extends NlsBundle>> nlsBundleClasses = (Set) getReflectionUtil().loadClasses(allClasses, filter);
+      for (Class<? extends NlsBundle> bundleClass : nlsBundleClasses) {
+        synchronize(new NlsBundleContainer(bundleClass));
+      }
     } else {
-      return super.run(mode);
+      for (Class<?> bundleClass : this.bundleClasses) {
+        NlsBundleContainer bundle;
+        if (ResourceBundle.class.isAssignableFrom(bundleClass)) {
+          ResourceBundle resourceBundle = (ResourceBundle) bundleClass.newInstance();
+          bundle = new NlsBundleContainer(resourceBundle);
+        } else if (NlsBundle.class.isAssignableFrom(bundleClass)) {
+          @SuppressWarnings("unchecked")
+          Class<? extends NlsBundle> bundleInterface = (Class<? extends NlsBundle>) bundleClass;
+          bundle = new NlsBundleContainer(bundleInterface);
+        } else {
+          throw new IllegalArgumentException(bundleClass.getName());
+        }
+        synchronize(bundle);
+      }
     }
+    return EXIT_CODE_OK;
   }
 
   /**

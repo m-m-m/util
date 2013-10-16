@@ -169,7 +169,7 @@ public class CliStateTest {
     PojoDescriptorBuilderFactory descriptorBuilder = getPojoDescriptorBuilderFactory();
     CliState state;
     state = createState(ArgumentTest1.class);
-    CliModeObject modeObject = state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
+    CliModeContainer modeObject = (CliModeContainer) state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
     Assert.assertNotNull(modeObject);
     Assert.assertEquals(MODE_Z_EXTENDS_X_Y_HELP, modeObject.getId());
     Set<? extends CliModeObject> extendedModes = modeObject.getExtendedModes();

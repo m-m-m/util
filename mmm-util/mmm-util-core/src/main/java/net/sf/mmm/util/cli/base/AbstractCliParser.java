@@ -56,7 +56,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   /**
    * The {@link Pattern} for a mix of multiple short-options. E.g. "-vpa" instead of "-v", "-p" and "-a".
    */
-  private static final Pattern PATTERN_MIXED_SHORT_OPTIONS = Pattern.compile("-([a-zA-Z0-9]+)");
+  private static final Pattern PATTERN_MIXED_SHORT_OPTIONS = Pattern.compile("-([a-zA-Z0-9]{2,})");
 
   /** @see #getCliState() */
   private final CliState cliState;
@@ -233,13 +233,6 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       String arg = parameterConsumer.getNext();
       parseParameter(arg, parserState, parameterConsumer);
     }
-    if (parserState.currentMode == null) {
-      // just in case no argument was given at all...
-      parserState.currentMode = this.cliState.getMode(CliMode.ID_DEFAULT);
-      if (parserState.currentMode == null) {
-        parserState.currentMode = new CliModeContainer(CliMode.ID_DEFAULT);
-      }
-    }
     checkRequiredParameters(parserState);
     this.valueMap.assign(getState());
     return parserState.currentMode;
@@ -253,7 +246,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   protected void checkRequiredParameters(CliParserState parserState) {
 
-    CliModeObject mode = parserState.currentMode;
+    CliModeObject mode = parserState.requireCurrentMode(this.cliState);
     // check all required options if active of not for current mode...
     for (CliOptionContainer option : this.cliState.getOptions(mode)) {
       CliOption cliOption = option.getOption();
@@ -273,15 +266,28 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   /**
    * This method parses a single command-line argument.
    * 
-   * @param argument is the command-line argument.
+   * @param parameter is the command-line argument.
    * @param parserState is the {@link CliParserState}.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
-  protected void parseParameter(String argument, CliParserState parserState, CliParameterConsumer parameterConsumer) {
+  protected void parseParameter(String parameter, CliParserState parserState, CliParameterConsumer parameterConsumer) {
 
-    if (!parserState.isOptionsComplete()) {
-      CliOptionContainer optionContainer = this.cliState.getOption(argument);
-      if (optionContainer != null) {
+    if (parserState.isOptionsComplete()) {
+      // no more options (e.g. --foo), only arguments from here
+      List<CliArgumentContainer> argumentList = this.cliState.getArguments(parserState
+          .requireCurrentMode(this.cliState));
+      int argumentIndex = parserState.getArgumentIndex();
+      if (argumentIndex >= argumentList.size()) {
+        throw new NlsIllegalArgumentException(parameter);
+      } else {
+        parseArgument(parserState, parameter, argumentList.get(argumentIndex), parameterConsumer);
+      }
+    } else {
+      CliOptionContainer optionContainer = this.cliState.getOption(parameter);
+      if (optionContainer == null) {
+        // no option found for argument...
+        parseParameterUndefinedOption(parameter, parserState, parameterConsumer);
+      } else {
         // mode handling...
         String modeId = optionContainer.getOption().mode();
         CliModeObject newMode = this.cliState.getMode(modeId);
@@ -290,59 +296,61 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
           newMode = new CliModeContainer(modeId);
         }
         if (parserState.currentMode == null) {
-          parserState.setCurrentMode(argument, newMode);
+          parserState.setCurrentMode(parameter, newMode);
         } else if (!modeId.equals(parserState.currentMode.getId())) {
           // mode already detected, but mode of current option differs...
-          if (newMode.getExtendedModes().contains(parserState.currentMode)) {
+          if (newMode.isDescendantOf(parserState.currentMode)) {
             // new mode extends current mode
-            parserState.setCurrentMode(argument, newMode);
-          } else if (!parserState.currentMode.getExtendedModes().contains(newMode)) {
+            parserState.setCurrentMode(parameter, newMode);
+          } else if (!newMode.isAncestorOf(parserState.currentMode)) {
             // current mode does NOT extend new mode and vice versa
             // --> incompatible modes
-            throw new CliOptionIncompatibleModesException(parserState.modeOption, argument);
+            throw new CliOptionIncompatibleModesException(parserState.modeOption, parameter);
           }
         }
 
-        parseOption(parserState, argument, optionContainer, parameterConsumer);
-      } else {
-        // no option found for argument...
-        if (END_OPTIONS.equals(argument)) {
-          parserState.setOptionsComplete();
-        } else {
-          CliStyleHandling handling = this.cliState.getCliStyle().optionMixedShortForm();
-          if (handling != CliStyleHandling.EXCEPTION) {
-            Matcher matcher = PATTERN_MIXED_SHORT_OPTIONS.matcher(argument);
-            if (matcher.matches()) {
-              // "-vlp" --> "-v", "-l", "-p"
-              if (handling == CliStyleHandling.WARNING) {
-                getLogger().warn("Mixed options (" + argument + ") should be avoided.");
-              } else {
-                assert (handling == CliStyleHandling.OK);
-              }
-              String multiOptions = matcher.group(1);
-              for (int i = 0; i < multiOptions.length(); i++) {
-                String subArgument = PREFIX_SHORT_OPTION + multiOptions.charAt(i);
-                parseParameter(subArgument, parserState, CliParameterConsumer.EMPTY_INSTANCE);
-              }
-              return;
-            }
-          }
-          if (argument.startsWith(PREFIX_SHORT_OPTION)) {
-            throw new CliOptionUndefinedException(argument);
-          }
-          // seems to be the start of arguments
-          parserState.setOptionsComplete();
-        }
+        parseOption(parserState, parameter, optionContainer, parameterConsumer);
       }
     }
-    if (parserState.isOptionsComplete()) {
-      List<CliArgumentContainer> argumentList = this.cliState.getArguments(parserState.currentMode);
-      int argumentIndex = parserState.getArgumentIndex();
-      if (argumentIndex >= argumentList.size()) {
-        throw new NlsIllegalArgumentException(argument);
-      } else {
-        parseArgument(parserState, argument, argumentList.get(argumentIndex), parameterConsumer);
+  }
+
+  /**
+   * Parses the given commandline <code>parameter</code> that is no defined {@link CliOption}.
+   * 
+   * @param parameter is the commandline argument.
+   * @param parserState is the current {@link CliParserState}.
+   * @param parameterConsumer is the {@link CliParameterConsumer}.
+   */
+  private void parseParameterUndefinedOption(String parameter, CliParserState parserState,
+      CliParameterConsumer parameterConsumer) {
+
+    if (END_OPTIONS.equals(parameter)) {
+      parserState.setOptionsComplete();
+      return;
+    }
+
+    CliStyleHandling handling = this.cliState.getCliStyle().optionMixedShortForm();
+    Matcher matcher = PATTERN_MIXED_SHORT_OPTIONS.matcher(parameter);
+    if (matcher.matches()) {
+      // "-vlp" --> "-v", "-l", "-p"
+      RuntimeException mixedOptions = null;
+      if (handling != CliStyleHandling.OK) {
+        // TODO: declare proper exception for this purpose...
+        mixedOptions = new NlsIllegalArgumentException("Mixed options (" + parameter + ") should be avoided.");
       }
+      handling.handle(getLogger(), mixedOptions);
+
+      String multiOptions = matcher.group(1);
+      for (int i = 0; i < multiOptions.length(); i++) {
+        String subArgument = PREFIX_SHORT_OPTION + multiOptions.charAt(i);
+        parseParameter(subArgument, parserState, CliParameterConsumer.EMPTY_INSTANCE);
+      }
+    } else if (parameter.startsWith(PREFIX_SHORT_OPTION)) {
+      throw new CliOptionUndefinedException(parameter);
+    } else {
+      // so it seems the options are completed and this is a regular argument
+      parserState.setOptionsComplete();
+      parseParameter(parameter, parserState, parameterConsumer);
     }
   }
 
@@ -542,6 +550,25 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      */
     public CliModeObject getCurrentMode() {
 
+      return this.currentMode;
+    }
+
+    /**
+     * Like {@link #getCurrentMode()} but initializes to {@link CliMode#ID_DEFAULT default} if
+     * <code>null</code>.
+     * 
+     * @param cliState is the {@link CliState}.
+     * @return the current {@link CliModeObject}.
+     */
+    protected CliModeObject requireCurrentMode(CliState cliState) {
+
+      if (this.currentMode == null) {
+        // just in case no argument was given at all...
+        this.currentMode = cliState.getMode(CliMode.ID_DEFAULT);
+        if (this.currentMode == null) {
+          this.currentMode = new CliModeContainer(CliMode.ID_DEFAULT);
+        }
+      }
       return this.currentMode;
     }
 

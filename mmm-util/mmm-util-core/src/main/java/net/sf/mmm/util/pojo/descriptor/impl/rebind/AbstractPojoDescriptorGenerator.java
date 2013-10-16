@@ -3,11 +3,10 @@
 package net.sf.mmm.util.pojo.descriptor.impl.rebind;
 
 import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 
 /**
  * This is the {@link AbstractIncrementalGenerator incremental GWT generator} to generate the implementation
- * of {@link PojoDescriptorBuilder}.
+ * of {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

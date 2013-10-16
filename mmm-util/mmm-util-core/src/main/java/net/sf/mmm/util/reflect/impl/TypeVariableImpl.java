@@ -8,6 +8,8 @@ import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+
 /**
  * This is an implementation of the {@link TypeVariable} interface.
  * 
@@ -96,8 +98,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   // Java8 support
   public Annotation[] getAnnotations() {
 
-    // return ReflectionUtil.NO_ANNOTATIONS;
-    return new Annotation[0];
+    return ReflectionUtil.NO_ANNOTATIONS;
   }
 
   /**
@@ -130,7 +131,6 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     return getAnnotations();
   }
 
-  // TODO: Java8 support
   // /**
   // * {@inheritDoc}
   // */

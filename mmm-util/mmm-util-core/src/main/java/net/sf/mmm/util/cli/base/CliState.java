@@ -420,7 +420,7 @@ public class CliState extends CliClassContainer {
     for (CliArgumentContainer argumentContainer : this.arguments) {
       String argumentModeId = argumentContainer.getArgument().mode();
       CliModeObject argumentMode = getMode(argumentModeId);
-      if (argumentMode.getExtendedModes().contains(mode)) {
+      if ((argumentMode == mode) || argumentMode.isAncestorOf(mode)) {
         result.add(argumentContainer);
       }
     }
@@ -469,7 +469,8 @@ public class CliState extends CliClassContainer {
     // create set of active modes...
     Set<String> modeIdSet = new HashSet<String>();
     modeIdSet.add(modeId);
-    for (CliModeObject childMode : mode.getExtendedModes()) {
+    Collection<CliModeContainer> extendedModes = ((CliModeContainer) mode).getExtendedModes();
+    for (CliModeObject childMode : extendedModes) {
       modeIdSet.add(childMode.getId());
     }
     List<CliOptionContainer> result = new ArrayList<CliOptionContainer>();

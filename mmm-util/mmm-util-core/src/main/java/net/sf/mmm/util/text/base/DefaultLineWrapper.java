@@ -394,7 +394,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
             // hyphenation point available that fits?
             if (hyphenationOffset <= 0) {
               // determine ratio of filled text length to space left
-              double fillRatio;
+              int fillRatio;
               if (bufferRest > 6) {
                 // accept no rest longer than 6 spaces...
                 fillRatio = 0;
@@ -402,7 +402,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
                 // avoid wrapping word at a single character e.g. break "is" as:
                 // i-
                 // s
-                fillRatio = Double.MAX_VALUE;
+                fillRatio = Integer.MAX_VALUE;
               } else {
                 fillRatio = buffer.length() / bufferRest;
               }
@@ -1191,7 +1191,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     @Override
     public int compareTo(AutoAdjustInfo other) {
 
-      NlsNullPointerException.checkNotNull(AutoAdjustInfo.class, other);
+      if (other == null) {
+        throw new NlsNullPointerException(AutoAdjustInfo.class.getSimpleName());
+      }
       return this.columnState.width - other.columnState.width;
     }
 

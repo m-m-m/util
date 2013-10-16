@@ -74,6 +74,7 @@ public class CliModeContainer implements CliModeObject {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getId() {
 
     return this.id;
@@ -82,6 +83,7 @@ public class CliModeContainer implements CliModeObject {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getTitle() {
 
     if (this.mode != null) {
@@ -96,6 +98,7 @@ public class CliModeContainer implements CliModeObject {
   /**
    * {@inheritDoc}
    */
+  @Override
   public CliMode getMode() {
 
     return this.mode;
@@ -104,17 +107,42 @@ public class CliModeContainer implements CliModeObject {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Class<?> getAnnotatedClass() {
 
     return this.annotatedClass;
   }
 
   /**
-   * {@inheritDoc}
+   * This method gets the {@link Set} of {@link CliModeObject modes} that are {@link CliMode#parentIds()
+   * extended} by this {@link #getMode() mode}.
+   * 
+   * @return the extended {@link CliModeObject modes} including this {@link CliModeObject mode} itself.
    */
   public Set<CliModeContainer> getExtendedModes() {
 
     return this.extendedModes;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isAncestorOf(CliModeObject childMode) {
+
+    if (childMode != this) {
+      return this.extendedModes.contains(childMode);
+    }
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isDescendantOf(CliModeObject parentMode) {
+
+    return parentMode.isAncestorOf(this);
   }
 
   /**

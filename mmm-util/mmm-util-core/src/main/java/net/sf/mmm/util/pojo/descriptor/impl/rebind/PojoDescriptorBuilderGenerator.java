@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.rebind;
 
-import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderLimited;
 import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
 
@@ -18,8 +16,8 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
- * This is the {@link AbstractIncrementalGenerator incremental GWT generator} to generate the implementation
- * of {@link PojoDescriptorBuilder}.
+ * This is the {@link net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator incremental GWT generator}
+ * to generate the implementation of {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

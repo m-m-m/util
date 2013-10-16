@@ -57,8 +57,19 @@ public abstract class AbstractVersionedMain extends AbstractMain {
       assert (CliMode.ID_VERSION.equals(mode.getId()));
       getStandardOutput().println(getVersion());
       return 0;
+    } else if (CliMode.ID_DEFAULT.equals(mode.getId())) {
+      return runDefaultMode();
     }
     return EXIT_CODE_ILLEGAL_SYNTAX;
   }
+
+  /**
+   * This method is called from {@link #run(CliModeObject)} if the program is executed in
+   * {@link CliMode#ID_DEFAULT default} {@link CliModeObject mode}.
+   * 
+   * @return the error-code or {@link #EXIT_CODE_OK} on success.
+   * @throws Exception in case of an unexpected error.
+   */
+  protected abstract int runDefaultMode() throws Exception;
 
 }

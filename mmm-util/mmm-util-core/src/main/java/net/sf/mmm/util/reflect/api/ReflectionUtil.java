@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -32,6 +33,13 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /** an empty {@link Type}-array */
   Type[] NO_TYPES = new Type[0];
+
+  /**
+   * An empty {@link Annotation}-array.
+   * 
+   * @since 4.0.0
+   */
+  Annotation[] NO_ANNOTATIONS = new Annotation[0];
 
   /**
    * This method gets the {@link Object#getClass() classes} of the given objects.
