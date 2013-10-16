@@ -18,8 +18,7 @@ import net.sf.mmm.search.indexer.api.state.SearchIndexerSourceState;
 import net.sf.mmm.search.indexer.api.state.SearchIndexerState;
 
 /**
- * This is the implementation of {@link SearchIndexerState} as JAXB-ready
- * Java-Bean.
+ * This is the implementation of {@link SearchIndexerState} as JAXB-ready Java-Bean.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -85,12 +84,12 @@ public class SearchIndexerStateBean implements SearchIndexerState {
   public void setSources(List<SearchIndexerSourceStateBean> sources) {
 
     this.sources = sources;
-    this.sources = null;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public SearchIndexerSourceState getSourceState(String source) {
 
     return getSourceStateMap().get(source);
@@ -100,8 +99,8 @@ public class SearchIndexerStateBean implements SearchIndexerState {
    * @see #getSourceState(String)
    * 
    * @param source is the source-ID for which the state is requested.
-   * @return the requested {@link SearchIndexerSourceState}. If it does not
-   *         exist, it is created and associated.
+   * @return the requested {@link SearchIndexerSourceState}. If it does not exist, it is created and
+   *         associated.
    */
   public SearchIndexerSourceStateBean getOrCreateSourceState(String source) {
 
@@ -121,6 +120,7 @@ public class SearchIndexerStateBean implements SearchIndexerState {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Date getIndexingDate() {
 
     return this.indexingDate;

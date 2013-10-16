@@ -19,8 +19,7 @@ import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the basic implementation of the
- * {@link net.sf.mmm.upnp.ssdp.api.SsdpReceiver} interface.
+ * This is the basic implementation of the {@link net.sf.mmm.upnp.ssdp.api.SsdpReceiver} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -64,8 +63,7 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
   }
 
   /**
-   * This method determines if this receiver is currently {@link #connect()
-   * connected}.
+   * This method determines if this receiver is currently {@link #connect() connected}.
    * 
    * @return <code>true</code> if connected, <code>false</code> otherwise.
    */
@@ -142,14 +140,31 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     }
 
     /**
+     * Stops listening by resetting the <code>listening</code> flag.
+     * 
+     * @return <code>true</code> if stopped, <code>false</code> if it has already been stopped.
+     */
+    private synchronized boolean stopListening() {
+
+      if (this.listening) {
+        this.listening = false;
+        return true;
+      }
+      return false;
+    }
+
+    /**
      * This method disconnects the multicast-socket.
      * 
      * @throws IOException if the operation failed.
      */
-    protected synchronized void disconnect() throws IOException {
+    protected void disconnect() throws IOException {
 
+      boolean stoppedListening = stopListening();
+      if (!stoppedListening) {
+        return;
+      }
       try {
-        this.listening = false;
         this.socket.leaveGroup(this.address);
         // receive blocks with synchronization lock so disconnect stalls for
         // ever if nothing is received...
@@ -175,13 +190,14 @@ public abstract class BasicSsdpReceiver extends AbstractSsdpReceiver {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void run() {
 
       byte[] buffer = new byte[1024];
       DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
       while (this.listening) {
         try {
-          // TODO: this API sucks! The method blocks until datagram us received,
+          // TODO: this API sucks! The method blocks until datagram was received,
           // if nothing is received and the socket is closed, an IO-Exception is
           // thrown.
           this.socket.receive(packet);

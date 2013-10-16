@@ -4,10 +4,8 @@ package net.sf.mmm.util.gwt.api;
 
 import net.sf.mmm.util.io.api.FileItem;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
- * This is the {@link JavaScriptObject} representing a {@link FileItem}.
+ * This is the {@link com.google.gwt.core.client.JavaScriptObject} representing a {@link FileItem}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

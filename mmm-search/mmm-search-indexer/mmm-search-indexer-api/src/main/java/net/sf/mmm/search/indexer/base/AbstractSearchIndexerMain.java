@@ -10,17 +10,14 @@ import net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer;
 import net.sf.mmm.search.indexer.base.config.ConfiguredSearchIndexerOptionsBean;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
 import net.sf.mmm.util.cli.api.CliMode;
-import net.sf.mmm.util.cli.api.CliModeObject;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
 
 /**
- * This is the abstract base-class for a fully integrated main program that
- * triggers the {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer
- * search-indexer} according to a given
- * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration
- * configuration}. It allows to do complex indexing of files from arbitrary
- * sources.
+ * This is the abstract base-class for a fully integrated main program that triggers the
+ * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer search-indexer} according to a given
+ * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration configuration}. It allows to do
+ * complex indexing of files from arbitrary sources.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -46,8 +43,8 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
   private Boolean optimize;
 
   /**
-   * The option defining an optional {@link List} of source-IDs that should be
-   * updated in index rather than all sources.
+   * The option defining an optional {@link List} of source-IDs that should be updated in index rather than
+   * all sources.
    */
   @CliOption(name = "--source", required = false, operand = "SOURCE", usage = "Only update the specified source-ID(s) in the index.")
   private List<String> sources;
@@ -74,12 +71,11 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
    * {@inheritDoc}
    */
   @Override
-  protected int run(CliModeObject mode) throws Exception {
+  protected int runDefaultMode() {
 
     IocContainer container = getIocContainer();
     try {
-      ConfiguredSearchIndexer configuredSearchIndexer = container
-          .get(ConfiguredSearchIndexer.class);
+      ConfiguredSearchIndexer configuredSearchIndexer = container.get(ConfiguredSearchIndexer.class);
       ConfiguredSearchIndexerOptionsBean options = new ConfiguredSearchIndexerOptionsBean();
       options.setOptimize(Boolean.TRUE.equals(this.optimize));
       options.setOverwriteEntries(this.overwrite);
@@ -88,6 +84,6 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
     } finally {
       container.dispose();
     }
-    return 0;
+    return EXIT_CODE_OK;
   }
 }

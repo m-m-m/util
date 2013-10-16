@@ -27,7 +27,6 @@ import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTree
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.MultiSelectionCheckbox;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
@@ -48,6 +47,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 
@@ -475,7 +475,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     private FlowPanel widgetPanel;
 
     /** The {@link CheckBox} for {@link SelectionMode#MULTIPLE_SELECTION}. */
-    private MultiSelectionCheckbox multiSelectionCheckbox;
+    private SimpleCheckBox multiSelectionCheckbox;
 
     /**
      * The dummy constructor.
@@ -514,6 +514,22 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.loaded = false;
       // add a dummy child so the node can be expanded for lazy loading...
       addItem(new TreeNodeAdapter());
+    }
+
+    /**
+     * @return the node
+     */
+    public NODE getNode() {
+
+      return this.node;
+    }
+
+    /**
+     * @return the widgetPanel
+     */
+    public FlowPanel getWidgetPanel() {
+
+      return this.widgetPanel;
     }
 
     /**
@@ -588,14 +604,16 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
         default :
           throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
       }
-
     }
 
+    /**
+     * Initializes checkboxes for {@link SelectionMode#MULTIPLE_SELECTION multi-selection}.
+     */
     private void initializeMultiSelection() {
 
       this.widgetPanel = new FlowPanel();
       this.widgetPanel.setStylePrimaryName("TreeItemContainer");
-      this.multiSelectionCheckbox = new MultiSelectionCheckbox();
+      this.multiSelectionCheckbox = new SimpleCheckBox();
       this.multiSelectionCheckbox.addClickHandler(this);
       this.widgetPanel.add(this.multiSelectionCheckbox);
       this.widgetPanel.add(getToplevelWidget(this.nodeWidget));
@@ -608,7 +626,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @Override
     public void onClick(ClickEvent event) {
 
-      setCheckboxSelected(this.multiSelectionCheckbox.getValue().booleanValue());
+      setNodeSelected(this.multiSelectionCheckbox.getValue().booleanValue());
     }
 
     /**
@@ -618,10 +636,15 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     public void onValueChange(ValueChangeEvent<Boolean> event) {
 
       boolean selected = event.getValue().booleanValue();
-      setCheckboxSelected(selected);
+      setNodeSelected(selected);
     }
 
-    private void setCheckboxSelected(boolean selected) {
+    /**
+     * Sets the selection state.
+     * 
+     * @param selected - <code>true</code> for selected, <code>false</code> for not selected.
+     */
+    private void setNodeSelected(boolean selected) {
 
       String style = "Selected";
       if (selected) {

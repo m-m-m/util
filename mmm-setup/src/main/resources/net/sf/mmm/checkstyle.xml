@@ -100,10 +100,6 @@
     </module>
     <module name="SuperClone"/>
     <module name="SuperFinalize"/>
-    <module name="TodoComment">
-      <property name="severity" value="ignore"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-    </module>
     <module name="EmptyBlock">
       <property name="option" value="text"/>
     </module>
@@ -146,6 +142,10 @@
       <metadata name="net.sf.eclipsecs.core.comment" value="System.gc()"/>
       <property name="format" value="System.gc\(\)"/>
       <property name="message" value="Never invoke gc() explicitly!"/>
+    </module>
+    <module name="TodoComment">
+      <property name="severity" value="info"/>
+      <property name="format" value="(TODO|FIXME|REVIEW|CHECKSTYLE:OFF|NOSONAR|NOPMD)"/>
     </module>
   </module>
   <module name="FileLength">

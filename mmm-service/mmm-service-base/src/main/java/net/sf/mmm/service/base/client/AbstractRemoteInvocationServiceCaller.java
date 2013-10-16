@@ -491,7 +491,8 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
     }
 
     /**
-     * Internal method to ensure this queue is still {@link State#OPEN open}.
+     * Internal method to ensure this queue is still
+     * {@link net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.State#OPEN open}.
      */
     protected void requireOpen() {
 
@@ -787,7 +788,7 @@ public abstract class AbstractRemoteInvocationServiceCaller extends AbstractLogg
         for (ServiceCallData<?> callData : txCall.callDataList) {
           RemoteInvocationServiceCall call = callData.getCall();
           callData.failureCallback.accept(new RemoteInvocationServiceCallFailedException(failure, call
-              .getServiceInterfaceName(), call.getMethodName() + call.getArguments()));
+              .getServiceInterfaceName(), call.getMethodName() + "@" + call.getSignature()));
         }
       }
     }

@@ -11,7 +11,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
@@ -284,7 +283,7 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the {@link JavaScriptSelection} of the browser {@link Window}.
+   * This method gets the {@link JavaScriptSelection} of the browser {@link com.google.gwt.user.client.Window}.
    *
    * @return the corresponding {@link JavaScriptSelection}.
    */

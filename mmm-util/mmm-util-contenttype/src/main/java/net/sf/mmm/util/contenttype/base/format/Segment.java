@@ -138,6 +138,15 @@ public abstract class Segment {
     }
   }
 
+  /**
+   * 
+   * @param state
+   * @param stateList
+   * @param buffer
+   * @param metadata
+   * @param eos
+   * @return
+   */
   // public abstract boolean detect(DecisionState state, List<DecisionState> stateList,
   public boolean detect(DecisionState state, List<DecisionState> stateList, DetectorStreamBuffer buffer,
       Map<String, Object> metadata, boolean eos) {

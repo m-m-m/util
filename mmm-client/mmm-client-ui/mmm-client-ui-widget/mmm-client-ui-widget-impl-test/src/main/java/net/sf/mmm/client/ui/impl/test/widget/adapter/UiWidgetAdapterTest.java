@@ -12,7 +12,6 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
-import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterImage;
@@ -24,7 +23,8 @@ import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemSepa
 import net.sf.mmm.util.nls.api.ObjectDisposedException;
 
 /**
- * This is the implementation of {@link UiWidgetAdapter} for testing without a native toolkit.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} for testing
+ * without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

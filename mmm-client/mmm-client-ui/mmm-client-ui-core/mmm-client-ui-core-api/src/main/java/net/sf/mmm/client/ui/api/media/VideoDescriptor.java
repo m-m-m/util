@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.media;
 
+
 /**
  * This is the interface for a {@link MediaDescriptor} of a video stream.
  * 
@@ -10,8 +11,10 @@ package net.sf.mmm.client.ui.api.media;
  */
 public interface VideoDescriptor extends MediaDescriptor {
 
-  // nothing to add...
-
+  /**
+   * @return the {@link java.net.URL} of the subtitles as {@link String} or <code>null</code> for no
+   *         subtitles.
+   */
   String getSubtitleUrl();
 
 }

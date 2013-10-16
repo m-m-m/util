@@ -4,7 +4,6 @@ package net.sf.mmm.util.nls.base;
 
 import javax.inject.Named;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,8 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 /**
- * This is a {@link HttpServlet} that dynamically generates some JavaScript containing the content of
- * {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users locale.
+ * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the
+ * content of {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users
+ * locale.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

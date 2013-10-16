@@ -13,11 +13,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * This is the main program that triggers the
- * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer search-indexer}
- * according to a given
- * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration
- * configuration}. It uses springframework as {@link IocContainer}.
+ * This is the main program that triggers the {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer
+ * search-indexer} according to a given
+ * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration configuration}. It uses
+ * springframework as {@link IocContainer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -78,7 +77,7 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
 
     int exitCode = new SearchIndexerMain().run(args);
     // CHECKSTYLE:OFF (main method)
-    System.exit(exitCode);
+    System.exit(exitCode); // NOSONAR
     // CHECKSTYLE:ON
   }
 

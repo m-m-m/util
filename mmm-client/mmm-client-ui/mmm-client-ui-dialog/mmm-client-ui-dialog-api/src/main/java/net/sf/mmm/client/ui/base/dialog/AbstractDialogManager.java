@@ -206,7 +206,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
   }
 
   /**
-   * This method should be called whenever a {@link Dialog} is opened or brought to the front.
+   * This method has to be called whenever a {@link Dialog} is opened or brought to the front.
    * 
    * @param dialog the current {@link Dialog}.
    */
@@ -217,7 +217,7 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
     // show
     Dialog previousDialog = this.type2currentDialogMap.put(type, dialog);
     if (previousDialog != null) {
-      if (previousDialog.isVisible() && (previousDialog != this)) {
+      if (previousDialog.isVisible() && (previousDialog != dialog)) {
         // there should never be two dialogs visible of the same type...
         throw new DuplicateObjectException(this, type, previousDialog);
       }

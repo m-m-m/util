@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import java.util.Objects;
+
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
@@ -199,12 +201,13 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   @Override
   public void setId(String newId) {
 
-    if (((this.id == null) && (newId != null)) || (!this.id.equals(newId))) {
-      if (this.widgetAdapter != null) {
-        this.widgetAdapter.setId(newId);
-      }
-      this.id = newId;
+    if (Objects.equals(this.id, newId)) {
+      return;
     }
+    if (this.widgetAdapter != null) {
+      this.widgetAdapter.setId(newId);
+    }
+    this.id = newId;
   }
 
   /**
@@ -492,10 +495,11 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   @Override
   public void setTooltip(String tooltip) {
 
-    if (hasWidgetAdapter()) {
-      if (((this.tooltip == null) && (tooltip != null)) || (!this.tooltip.equals(tooltip))) {
-        getWidgetAdapter().setTooltip(tooltip);
-      }
+    if (Objects.equals(this.tooltip, tooltip)) {
+      return;
+    }
+    if (this.widgetAdapter != null) {
+      this.widgetAdapter.setTooltip(tooltip);
     }
     this.tooltip = tooltip;
   }

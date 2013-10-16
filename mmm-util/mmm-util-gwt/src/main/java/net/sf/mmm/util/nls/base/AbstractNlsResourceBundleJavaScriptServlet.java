@@ -9,7 +9,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +16,9 @@ import net.sf.mmm.util.component.base.AbstractLoggableHttpServlet;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
- * This is a {@link HttpServlet} that dynamically generates some JavaScript containing the content of
- * {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users locale.
+ * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the
+ * content of {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users
+ * locale.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
