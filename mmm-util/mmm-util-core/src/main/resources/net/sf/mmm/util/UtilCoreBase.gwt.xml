@@ -14,7 +14,7 @@
   <source path="component" excludes="impl/**,base/*Servlet*"/>
   <source path="scanner"/>
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
-  <source path="lang" excludes="**/System*,**/BasicUtil*"/>
+  <source path="lang" excludes="**/System*"/>
   <source path="uuid"/>
   <source path="logging"/>
   <source path="text" includes="**/*Justification*"/>

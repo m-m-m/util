@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import javax.inject.Named;
@@ -116,26 +115,62 @@ public class BasicUtilImpl implements BasicUtil {
           // primitive array
           Class<?> class2 = o2.getClass();
           if ((class2.isArray()) && (class1.equals(class2))) {
-            int len1 = Array.getLength(o1);
-            int len2 = Array.getLength(o2);
-            if (len1 == len2) {
-              if (o1 instanceof byte[]) {
-                return Arrays.equals((byte[]) o1, (byte[]) o2);
-              } else if (o1 instanceof int[]) {
-                return Arrays.equals((int[]) o1, (int[]) o2);
-              } else if (o1 instanceof long[]) {
-                return Arrays.equals((long[]) o1, (long[]) o2);
-              } else if (o1 instanceof boolean[]) {
-                return Arrays.equals((boolean[]) o1, (boolean[]) o2);
-              } else if (o1 instanceof double[]) {
-                return Arrays.equals((double[]) o1, (double[]) o2);
-              } else if (o1 instanceof float[]) {
-                return Arrays.equals((float[]) o1, (float[]) o2);
-              } else if (o1 instanceof short[]) {
-                return Arrays.equals((short[]) o1, (short[]) o2);
-              } else if (o1 instanceof char[]) {
-                return Arrays.equals((char[]) o1, (char[]) o2);
+            if (o1 instanceof byte[]) {
+              byte[] bytes1 = (byte[]) o1;
+              byte[] bytes2 = (byte[]) o2;
+              if (bytes1.length != bytes2.length) {
+                return false;
               }
+              return Arrays.equals(bytes1, bytes2);
+            } else if (o1 instanceof int[]) {
+              int[] ints1 = (int[]) o1;
+              int[] ints2 = (int[]) o2;
+              if (ints1.length != ints2.length) {
+                return false;
+              }
+              return Arrays.equals(ints1, ints2);
+            } else if (o1 instanceof long[]) {
+              long[] longs1 = (long[]) o1;
+              long[] longs2 = (long[]) o2;
+              if (longs1.length != longs2.length) {
+                return false;
+              }
+              return Arrays.equals(longs1, longs2);
+            } else if (o1 instanceof boolean[]) {
+              boolean[] booleans1 = (boolean[]) o1;
+              boolean[] booleans2 = (boolean[]) o2;
+              if (booleans1.length != booleans2.length) {
+                return false;
+              }
+              return Arrays.equals(booleans1, booleans2);
+            } else if (o1 instanceof double[]) {
+              double[] doubles1 = (double[]) o1;
+              double[] doubles2 = (double[]) o2;
+              if (doubles1.length != doubles2.length) {
+                return false;
+              }
+              return Arrays.equals(doubles1, doubles2);
+            } else if (o1 instanceof float[]) {
+              float[] floats1 = (float[]) o1;
+              float[] floats2 = (float[]) o2;
+              if (floats1.length != floats2.length) {
+                return false;
+              }
+              return Arrays.equals(floats1, floats2);
+            } else if (o1 instanceof short[]) {
+              short[] shorts1 = (short[]) o1;
+              short[] shorts2 = (short[]) o2;
+              if (shorts1.length != shorts2.length) {
+                return false;
+              }
+              return Arrays.equals(shorts1, shorts2);
+            } else if (o1 instanceof char[]) {
+              char[] chars1 = (char[]) o1;
+              char[] chars2 = (char[]) o2;
+              if (chars1.length != chars2.length) {
+                return false;
+              }
+              return Arrays.equals(chars1, chars2);
             }
           }
         }
