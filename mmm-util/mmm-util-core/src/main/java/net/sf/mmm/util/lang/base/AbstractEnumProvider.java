@@ -98,8 +98,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
+  @SuppressWarnings("unchecked")
   public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> EnumDefinition<ENUM, CATEGORY> getEnumDefinitionWithCategory(
       Class<? extends ENUM> enumType) throws ObjectNotFoundException {
 
@@ -109,8 +109,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
+  @SuppressWarnings("unchecked")
   public <TYPE> EnumDefinition<TYPE, ?> getEnumDefinition(Class<TYPE> enumType) throws ObjectNotFoundException {
 
     NlsNullPointerException.checkNotNull("enumType", enumType);
@@ -127,8 +127,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   /**
-   * @return <code>true</code> to automatically {@link #registerEnum(Class)} requested {@link Enum} types
-   *         (default), <code>false</code> otherwise (override to disable).
+   * @return <code>true</code> to automatically {@link #registerEnum(Class)} requested {@link Enum} types (default),
+   *         <code>false</code> otherwise (override to disable).
    */
   protected boolean isSupportEnumAutoRegistration() {
 
@@ -165,8 +165,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
+  @SuppressWarnings("unchecked")
   public <ENUM> List<ENUM> getEnumValues(EnumDefinition<ENUM, ?> enumDefinition) {
 
     NlsNullPointerException.checkNotNull(EnumDefinition.class, enumDefinition);
@@ -179,16 +179,16 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   /**
-   * @param container is the {@link EnumContainer} for which the {@link #getEnumValues(EnumDefinition)} should
-   *        be loaded.
+   * @param container is the {@link EnumContainer} for which the {@link #getEnumValues(EnumDefinition)} should be
+   *        loaded.
    */
   protected abstract void loadEnumValues(EnumContainer container);
 
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
+  @SuppressWarnings("unchecked")
   public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> List<ENUM> getEnumValues(
       EnumDefinition<ENUM, CATEGORY> enumDefinition, CATEGORY... categories) {
 
@@ -273,7 +273,9 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     public void setAllValues(List<?> values) {
 
       this.allValues = values;
-      if (values != null) {
+      if (values == null) {
+        this.activeValues = null;
+      } else {
         List<Object> nonDeprecatedValues = new ArrayList<Object>(this.allValues.size());
         Boolean implementsDeprecated = null;
         for (Object value : this.allValues) {
@@ -289,14 +291,12 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
           }
         }
         this.activeValues = Collections.unmodifiableList(nonDeprecatedValues);
-      } else {
-        this.activeValues = null;
       }
     }
 
     /**
-     * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or <code>null</code> if NOT
-     *         the {@link EnumProvider#isAvailable(EnumDefinition) available}.
+     * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or <code>null</code> if NOT the
+     *         {@link EnumProvider#isAvailable(EnumDefinition) available}.
      */
     public List<?> getValues() {
 

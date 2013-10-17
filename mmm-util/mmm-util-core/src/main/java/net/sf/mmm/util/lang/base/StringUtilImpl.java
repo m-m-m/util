@@ -200,18 +200,15 @@ public class StringUtilImpl implements StringUtil {
     }
     if (suffixLength > 0) {
       char c = string.charAt(replaceIndex);
-      // all lower case?
+      // is lower case?
       if (c == Character.toLowerCase(c)) {
         result.append(newSuffixLowerCase);
       } else {
         // first replaced char is upper case!
         if (suffixLength > 1) {
           c = string.charAt(replaceIndex + 1);
-          // Capitalized or upper case?
-          if (c != Character.toLowerCase(c)) {
-            // all upper case
-            result.append(GwtHelper.toUpperCase(newSuffixLowerCase, locale));
-          } else {
+          // is lower case?
+          if (c == Character.toLowerCase(c)) {
             // capitalize
             String first = newSuffixLowerCase.substring(0, 1);
             String capital = GwtHelper.toUpperCase(first, locale);
@@ -222,6 +219,9 @@ public class StringUtilImpl implements StringUtil {
               result.append(capital);
               result.append(newSuffixLowerCase.substring(1));
             }
+          } else {
+            // all upper case
+            result.append(GwtHelper.toUpperCase(newSuffixLowerCase, locale));
           }
         }
       }

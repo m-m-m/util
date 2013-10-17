@@ -226,7 +226,8 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
 
     int pos = scanner.getCurrentIndex();
     Integer offset = parseTimezoneOffset(scanner);
-    if (offset != null) {
+    boolean hasOffset = offset != null;
+    if (hasOffset) {
       int offsetMs = offset.intValue();
       String tzName = "GMT";
       if (offsetMs != 0) {

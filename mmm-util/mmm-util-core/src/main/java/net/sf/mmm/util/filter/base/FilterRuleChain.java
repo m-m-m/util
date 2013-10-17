@@ -55,9 +55,10 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * The constructor.
    * 
-   * @param rules is the chain of rules.
    * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
+   * @param rules is the chain of rules.
    */
+  @SafeVarargs
   public FilterRuleChain(boolean defaultResult, FilterRule<V>... rules) {
 
     super();
@@ -74,6 +75,7 @@ public class FilterRuleChain<V> implements Filter<V> {
    * @param rules is the chain of rules.
    * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
    */
+  @SafeVarargs
   public FilterRuleChain(String id, FilterRuleChain<V> parent, boolean defaultResult, FilterRule<V>... rules) {
 
     super();
@@ -99,13 +101,14 @@ public class FilterRuleChain<V> implements Filter<V> {
    * This method checks all rules in the chain and returns the result of the first matching rule. If no rule
    * matches, <code>{@link #getDefaultResult()}</code> is returned.
    */
+  @Override
   public boolean accept(V value) {
 
     Boolean result = acceptRecursive(value);
-    if (result != null) {
-      return result.booleanValue();
-    } else {
+    if (result == null) {
       return this.defaultResult;
+    } else {
+      return result.booleanValue();
     }
   }
 

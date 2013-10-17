@@ -26,8 +26,7 @@ import org.slf4j.Logger;
 public class AbstractEventSourceTest {
 
   /**
-   * Tests {@link AbstractEventSource#addListener(EventListener)},
-   * {@link AbstractEventSource#fireEvent(Event)} and
+   * Tests {@link AbstractEventSource#addListener(EventListener)}, {@link AbstractEventSource#fireEvent(Event)} and
    * {@link AbstractEventSource#removeListener(EventListener)}.
    */
   @Test
@@ -90,7 +89,7 @@ public class AbstractEventSourceTest {
 
     public void handleEvent(MyEvent event) {
 
-      throw this.error;
+      throw EvilEventListener.error;
     }
 
     /**

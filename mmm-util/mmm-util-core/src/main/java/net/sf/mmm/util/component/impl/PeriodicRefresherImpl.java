@@ -87,16 +87,19 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
    * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so the startup only happens if
    * explicitly required and not accidently because this component if found and managed by some container.
    */
-  public synchronized void startup() {
+  public void startup() {
 
     if (this.shutdown) {
       throw new NlsIllegalStateException();
     }
-    if (!this.active) {
+    synchronized (this) {
+      if (this.active) {
+        return;
+      }
       getLogger().info("starting " + getThreadName() + "...");
       Thread thread = new Thread(this);
       thread.setName(getThreadName());
-      this.executor.execute(thread);
+      this.executor.execute(thread); // NOSONAR
       this.active = true;
     }
   }
@@ -104,6 +107,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void addRefreshable(Refreshable refreshable) {
 
     this.refreshableSet.add(refreshable);
@@ -113,6 +117,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void removeRefreshable(Refreshable refreshable) {
 
     this.refreshableSet.remove(refreshable);
@@ -121,6 +126,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   @PreDestroy
   public void close() {
 
@@ -143,6 +149,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void run() {
 
     this.refreshThread = Thread.currentThread();

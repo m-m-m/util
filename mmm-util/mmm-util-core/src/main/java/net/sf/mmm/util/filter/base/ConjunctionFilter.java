@@ -29,6 +29,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
    * @param conjunction is the {@link Conjunction} used to combine the <code>filters</code>.
    * @param filters are the filters to combine.
    */
+  @SafeVarargs
   public ConjunctionFilter(Conjunction conjunction, Filter<V>... filters) {
 
     super();
@@ -40,6 +41,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean accept(V value) {
 
     for (Filter<V> filter : this.filterList) {

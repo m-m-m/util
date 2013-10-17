@@ -384,6 +384,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       writer.printText(mainUsage);
     }
     Map<CliOption, CliOptionHelpInfo> option2HelpMap = new HashMap<CliOption, AbstractCliParser.CliOptionHelpInfo>();
+    StringBuilder parameters = new StringBuilder();
     for (String modeId : this.cliState.getModeIds()) {
       writer.println();
       CliModeObject mode = this.cliState.getMode(modeId);
@@ -392,7 +393,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
         NlsMessage modeMessage = nlsMessageFactory.create(mode.getTitle());
         nlsArguments.put(NlsObject.KEY_MODE, modeMessage);
         writer.printText(NlsBundleUtilCoreRoot.MSG_CLI_MODE_USAGE);
-        StringBuilder parameters = new StringBuilder();
+        parameters.setLength(0);
         Collection<CliOptionContainer> modeOptions = this.cliState.getOptions(mode);
         int maxOptionColumnWidth = printHelpOptions(settings, option2HelpMap, parameters, modeOptions);
         List<CliArgumentContainer> argumentList = this.cliState.getArguments(mode);

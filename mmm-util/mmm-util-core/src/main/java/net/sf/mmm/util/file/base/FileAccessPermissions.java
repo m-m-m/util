@@ -565,19 +565,20 @@ public class FileAccessPermissions implements Cloneable {
     int mask = this.maskBits;
     try {
       int octal = parseOctalMode(parse);
-      if (octal != -1) {
-        mask = octal;
-        char c = parse.forceNext();
-        if (c != 0) {
-          throw new IllegalArgumentException("'" + c + "'");
-        }
-      } else {
+      if (octal == -1) {
+        // no digits are available in parse...
         while (parse.hasNext()) {
           mask = parseSymbolicMode(parse, mask);
           char c = parse.forceNext();
           if ((c != ',') && (c != 0)) {
             throw new IllegalArgumentException("'" + c + "'");
           }
+        }
+      } else {
+        mask = octal;
+        char c = parse.forceNext();
+        if (c != 0) {
+          throw new IllegalArgumentException("'" + c + "'");
         }
       }
     } catch (IllegalArgumentException e) {

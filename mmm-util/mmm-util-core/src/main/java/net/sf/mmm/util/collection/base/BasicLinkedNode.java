@@ -12,6 +12,12 @@ package net.sf.mmm.util.collection.base;
  */
 public class BasicLinkedNode<V> extends AbstractLinkedNode<V, BasicLinkedNode<V>> {
 
-  // nothing to add, just bound generic
+  /**
+   * The constructor.
+   */
+  public BasicLinkedNode() {
+
+    super();
+  }
 
 }

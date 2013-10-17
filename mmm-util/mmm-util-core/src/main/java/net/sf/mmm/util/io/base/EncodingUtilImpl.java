@@ -306,8 +306,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
 
       int len = offset + length;
       for (int i = offset; i < len; i++) {
-        int modulo4 = (int) (this.bytePosition & 3);
-        this.surrogates[modulo4] = null;
         byte b = buffer[i];
         if (b < 0) {
           // non ASCII character detected
@@ -317,111 +315,146 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
             this.encodingRankMap.setUnacceptable(ENCODING_US_ASCII);
           }
           if (this.bytePosition == 0) {
-            // first read - try to detect encoding by BOM...
-            this.bom = ByteOrderMark.detect(buffer, offset);
-            if (this.bom != null) {
-              String encoding = this.bom.getEncoding();
-              // if (getLogger().isTraceEnabled()) {
-              // getLogger().trace("BOM detected for '" + encoding + "'.");
-              // }
-              this.encodingRankMap.addRank(encoding, RANK_BOM);
-              switch (this.bom) {
-                case UTF_8:
-                  this.maybeUtf16 = false;
-                  break;
-                case UTF_16_BE:
-                  this.maybeUtf8 = false;
-                  this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_LE);
-                  break;
-                case UTF_16_LE:
-                  this.maybeUtf8 = false;
-                  this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_BE);
-                  break;
-                case UTF_32_BE:
-                  this.maybeUtf8 = false;
-                  this.maybeUtf16 = false;
-                  this.encodingRankMap.setUnacceptable(ENCODING_UTF_32_LE);
-                  break;
-                case UTF_32_LE:
-                  this.maybeUtf8 = false;
-                  this.maybeUtf16 = false;
-                  this.encodingRankMap.setUnacceptable(ENCODING_UTF_32_BE);
-                  break;
-                default :
-                  // nothing to do...
-              }
-              int add = this.bom.getLength() - 1;
-              i = i + add;
-              this.bytePosition = add;
-            }
-            // no BOM available...
+            i = processBom(buffer, offset, i);
           }
           if (this.maybeUtf8) {
-            // start smart UTF-8 detection...
-            if (this.utf8ContinuationByteCount > 0) {
-              if ((b >= UTF_8_CONTINUATION_BYTE_MIN) && (b <= UTF_8_CONTINUATION_BYTE_MAX)) {
-                this.utf8ContinuationByteCount--;
-                if (this.utf8ContinuationByteCount == 0) {
-                  this.encodingRankMap.addRank(ENCODING_UTF_8, RANK_UTF8_SEQUNCE);
-                }
-              } else {
-                this.utf8ContinuationByteCount = 0;
-                this.maybeUtf8 = false;
-                this.encodingRankMap.setUnacceptable(ENCODING_UTF_8);
-              }
-            } else {
-              if ((b >= UTF_8_TWO_BYTE_MIN) && (b <= UTF_8_TWO_BYTE_MAX)) {
-                // 110xxxxx --> UTF-8 two-byte sequence?
-                this.utf8ContinuationByteCount = 1;
-              } else if ((b >= UTF_8_THREE_BYTE_MIN) && (b <= UTF_8_THREE_BYTE_MAX)) {
-                // 1110xxxx --> UTF-8 three-byte sequence?
-                this.utf8ContinuationByteCount = 2;
-              } else if ((b >= UTF_8_FOUR_BYTE_MIN) && (b <= UTF_8_FOUR_BYTE_MAX)) {
-                // 1110xxxx --> UTF-8 three-byte sequence?
-                this.utf8ContinuationByteCount = 3;
-              } else {
-                this.maybeUtf8 = false;
-                this.encodingRankMap.setUnacceptable(ENCODING_UTF_8);
-              }
-            }
+            processUtf8Detection(b);
           }
           if (this.maybeUtf16) {
-            if ((b >= UTF_16_FIRST_SURROGATE_MIN) && (b <= UTF_16_SECOND_SURROGATE_MAX)) {
-              if (b <= UTF_16_FIRST_SURROGATE_MAX) {
-                this.surrogates[modulo4] = Surrogate.FIRST;
-              } else {
-                this.surrogates[modulo4] = Surrogate.SECOND;
-              }
-              int last = (modulo4 - 2) & 3;
-              if (this.surrogates[last] != null) {
-                if (this.surrogates[last] == this.surrogates[modulo4]) {
-                  // duplicate surrogate high-byte --> can NOT be any UTF-16*
-                  this.maybeUtf16 = false;
-                  this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_LE);
-                  this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_BE);
-                } else {
-                  if ((modulo4 & 1) == 0) {
-                    this.encodingRankMap.addRank(ENCODING_UTF_16_BE, RANK_UTF16_SURROGATE);
-                  } else {
-                    this.encodingRankMap.addRank(ENCODING_UTF_16_LE, RANK_UTF16_SURROGATE);
-                  }
-                }
-              }
-            }
+            processUtf16Detection(b);
           }
         } else {
+          // potential ASCII character
           if (this.utf8ContinuationByteCount > 0) {
             this.utf8ContinuationByteCount = 0;
             this.maybeUtf8 = false;
             this.encodingRankMap.setUnacceptable(ENCODING_UTF_8);
           }
           if (b == 0) {
+            int modulo4 = (int) (this.bytePosition & 3);
             this.zeroByteCounts[modulo4]++;
           }
         }
         this.bytePosition++;
       }
       return length;
+    }
+
+    /**
+     * Heuristic analysis to detect UTF-16 indications.
+     * 
+     * @param b is the single byte to process.
+     */
+    private void processUtf16Detection(byte b) {
+
+      int modulo4 = (int) (this.bytePosition & 3);
+      this.surrogates[modulo4] = null;
+      if ((b >= UTF_16_FIRST_SURROGATE_MIN) && (b <= UTF_16_SECOND_SURROGATE_MAX)) {
+        if (b <= UTF_16_FIRST_SURROGATE_MAX) {
+          this.surrogates[modulo4] = Surrogate.FIRST;
+        } else {
+          this.surrogates[modulo4] = Surrogate.SECOND;
+        }
+        int last = (modulo4 - 2) & 3;
+        if (this.surrogates[last] != null) {
+          if (this.surrogates[last] == this.surrogates[modulo4]) {
+            // duplicate surrogate high-byte --> can NOT be any UTF-16*
+            this.maybeUtf16 = false;
+            this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_LE);
+            this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_BE);
+          } else {
+            if ((modulo4 & 1) == 0) {
+              this.encodingRankMap.addRank(ENCODING_UTF_16_BE, RANK_UTF16_SURROGATE);
+            } else {
+              this.encodingRankMap.addRank(ENCODING_UTF_16_LE, RANK_UTF16_SURROGATE);
+            }
+          }
+        }
+      }
+    }
+
+    /**
+     * Heuristic analysis to detect UTF-8 indications.
+     * 
+     * @param b is the single byte to process.
+     */
+    private void processUtf8Detection(byte b) {
+
+      if (this.utf8ContinuationByteCount > 0) {
+        if ((b >= UTF_8_CONTINUATION_BYTE_MIN) && (b <= UTF_8_CONTINUATION_BYTE_MAX)) {
+          this.utf8ContinuationByteCount--;
+          if (this.utf8ContinuationByteCount == 0) {
+            this.encodingRankMap.addRank(ENCODING_UTF_8, RANK_UTF8_SEQUNCE);
+          }
+        } else {
+          this.utf8ContinuationByteCount = 0;
+          this.maybeUtf8 = false;
+          this.encodingRankMap.setUnacceptable(ENCODING_UTF_8);
+        }
+      } else {
+        if ((b >= UTF_8_TWO_BYTE_MIN) && (b <= UTF_8_TWO_BYTE_MAX)) {
+          // 110xxxxx --> UTF-8 two-byte sequence?
+          this.utf8ContinuationByteCount = 1;
+        } else if ((b >= UTF_8_THREE_BYTE_MIN) && (b <= UTF_8_THREE_BYTE_MAX)) {
+          // 1110xxxx --> UTF-8 three-byte sequence?
+          this.utf8ContinuationByteCount = 2;
+        } else if ((b >= UTF_8_FOUR_BYTE_MIN) && (b <= UTF_8_FOUR_BYTE_MAX)) {
+          // 1110xxxx --> UTF-8 three-byte sequence?
+          this.utf8ContinuationByteCount = 3;
+        } else {
+          this.maybeUtf8 = false;
+          this.encodingRankMap.setUnacceptable(ENCODING_UTF_8);
+        }
+      }
+    }
+
+    /**
+     * Detects if a {@link ByteOrderMark} (BOM) is available as hint for the encoding.
+     * 
+     * @param buffer is the buffer of the raw data.
+     * @param offset is the current offset
+     * @param i is the current index.
+     * @return the new index. Will be the same as <code>i</code> or greater if bytes (for detected BOM) have
+     *         been consumed.
+     */
+    private int processBom(byte[] buffer, int offset, int i) {
+
+      // first read - try to detect encoding by BOM...
+      int resultIndex = i;
+      this.bom = ByteOrderMark.detect(buffer, offset);
+      if (this.bom != null) {
+        String encoding = this.bom.getEncoding();
+        this.encodingRankMap.addRank(encoding, RANK_BOM);
+        switch (this.bom) {
+          case UTF_8:
+            this.maybeUtf16 = false;
+            break;
+          case UTF_16_BE:
+            this.maybeUtf8 = false;
+            this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_LE);
+            break;
+          case UTF_16_LE:
+            this.maybeUtf8 = false;
+            this.encodingRankMap.setUnacceptable(ENCODING_UTF_16_BE);
+            break;
+          case UTF_32_BE:
+            this.maybeUtf8 = false;
+            this.maybeUtf16 = false;
+            this.encodingRankMap.setUnacceptable(ENCODING_UTF_32_LE);
+            break;
+          case UTF_32_LE:
+            this.maybeUtf8 = false;
+            this.maybeUtf16 = false;
+            this.encodingRankMap.setUnacceptable(ENCODING_UTF_32_BE);
+            break;
+          default :
+            // nothing to do...
+        }
+        int add = this.bom.getLength() - 1;
+        resultIndex = resultIndex + add;
+        this.bytePosition = add;
+      }
+      return resultIndex;
     }
 
     /**
@@ -571,9 +604,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
         return 0;
       }
       int bytesRead;
-      if (this.reader != null) {
-        bytesRead = this.reader.read(buffer, offset, length);
-      } else {
+      if (this.reader == null) {
         // prevent modifying parameters
         int off = offset;
         int lengthRest = length;
@@ -639,6 +670,8 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
           assert (this.eos);
           return -1;
         }
+      } else {
+        bytesRead = this.reader.read(buffer, offset, length);
       }
       return bytesRead;
     }
