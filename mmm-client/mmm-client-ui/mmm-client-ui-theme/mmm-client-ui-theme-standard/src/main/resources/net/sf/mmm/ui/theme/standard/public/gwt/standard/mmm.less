@@ -95,30 +95,6 @@
 .fontAwesome() {
 	font-family: FontAwesome;
 }
-.boxLayout() {
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-}
-.horizontalLayout() {
-  .boxLayout;
-
-  -moz-box-orient: horizontal;
-  box-orient: horizontal;
-  -webkit-box-orient: horizontal;
-}
-.verticalLayout() {
-  .boxLayout;
-
-  -moz-box-orient: vertical;
-  box-orient: vertical;
-  -webkit-box-orient: vertical;
-}
-.boxFlex(@weight) {
-  -webkit-box-flex: @weight;
-  -moz-box-flex: @weight;
-  box-flex: @weight;
-}
 
 /* Main styles */
 body {
@@ -168,25 +144,19 @@ button {
     background: @color-focus;
   }
 }
+* {
+  flex-grow: 0;
+}
 .VerticalPanel {
-  .verticalLayout;
-  .boxFlex(1);
-}
-/*
-.VerticalPanel > * {
-  display: block;
-}
-*/
-.HorizontalPanel {
-  /*
-  overflow: hidden;
-  white-space: nowrap;
   display: flex;
-  */
-  .horizontalLayout;
-  .boxFlex(1);
-
+  flex-direction: column;
+  flex-grow: 1;
+}
+.HorizontalPanel {
+  display: inline-flex;
+  flex-direction: row;
   align-items: baseline;
+  flex-grow: 1;
 }
 .Movable {
   cursor: move;
@@ -507,8 +477,7 @@ button {
     border-top-right-radius: @radius;
     padding-left: @border-size;
     padding-right: @border-size;
-
-    .boxFlex(0);
+    flex-grow: 0;
 
     .WindowTitle {
       .highlightText;
@@ -525,8 +494,8 @@ button {
     /* overflow: auto; */
   }
   .WindowFooterBar {
-    .boxFlex(0);
     heigth: 0.5em;
+    flex-grow: 0;
   }
   .BorderE {
     position: absolute;
