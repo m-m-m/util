@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextAreaField;
@@ -11,13 +10,14 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextField;
 import net.sf.mmm.util.filter.api.CharFilter;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterIntegerField} for testing without a native toolkit.
+ * This is the implementation of {@link UiWidgetAdapterTextField} for testing without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetAdapterTestStringField extends UiWidgetAdapterTestField<String, String> implements
-    UiWidgetAdapterTextField, UiWidgetAdapterPasswordField, UiWidgetAdapterTextAreaField, UiWidgetAdapterRichTextField {
+    UiWidgetAdapterTextField, UiWidgetAdapterPasswordField, UiWidgetAdapterTextAreaField,
+    UiWidgetAdapterRichTextField {
 
   /** @see #getKeyboardFilter() */
   private CharFilter keyboardFilter;

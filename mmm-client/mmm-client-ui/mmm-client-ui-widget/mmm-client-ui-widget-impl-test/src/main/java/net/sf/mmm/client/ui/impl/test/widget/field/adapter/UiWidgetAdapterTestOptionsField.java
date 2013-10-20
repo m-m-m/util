@@ -5,10 +5,9 @@ package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboBoxField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterOptionsField} for testing without a native toolkit.
+ * This is the implementation of {@link UiWidgetAdapterComboBoxField} for testing without a native toolkit.
  * 
  * @param <VALUE> is the generic type of the widget value.
  * 

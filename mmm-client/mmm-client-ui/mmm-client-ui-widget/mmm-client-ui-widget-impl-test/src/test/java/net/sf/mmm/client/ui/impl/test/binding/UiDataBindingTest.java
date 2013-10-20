@@ -24,8 +24,8 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link UiDataBinding} and {@link UiWidgetField#getValue() value} and
- * {@link UiWidgetField#validate(net.sf.mmm.util.validation.api.ValidationState) validation} in realistic
- * scenarios using the {@link UiWidget} framework.
+ * {@link UiWidgetField#validate(net.sf.mmm.util.validation.api.ValidationState) validation} in realistic scenarios
+ * using the {@link UiWidget} framework.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -35,7 +35,7 @@ public class UiDataBindingTest extends AbstractUiTest {
   /**
    * The constructor.
    * 
-   * @param springConfig
+   * @param springConfig is the path to the spring configuration.
    */
   public UiDataBindingTest(String springConfig) {
 

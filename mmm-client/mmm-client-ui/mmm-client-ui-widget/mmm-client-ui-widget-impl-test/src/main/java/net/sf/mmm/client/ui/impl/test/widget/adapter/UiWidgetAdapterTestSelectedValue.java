@@ -82,11 +82,11 @@ public class UiWidgetAdapterTestSelectedValue<VALUE> extends UiWidgetAdapterTest
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValues(List<VALUE> selectedValues) {
+  public boolean setSelectedValues(List<VALUE> selection) {
 
     verifyNotDisposed();
     boolean contained = true;
-    this.selectedValues = selectedValues;
+    this.selectedValues = selection;
     return contained;
   }
 

@@ -25,8 +25,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * This is the abstract base class for Tests of the {@link UiWidget}-framework based on the test
- * implementation. It provides the {@link #getContext() context} to start your tests with.
+ * This is the abstract base class for Tests of the {@link UiWidget}-framework based on the test implementation. It
+ * provides the {@link #getContext() context} to start your tests with.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -92,8 +92,8 @@ public class AbstractUiTest extends Assert {
 
   /**
    * @param widget is the {@link AbstractUiWidget}.
-   * @return the result of {@link AbstractUiWidget#hasWidgetAdapter()} (while a recursive verification for
-   *         consistency is performed).
+   * @return the result of {@link AbstractUiWidget#hasWidgetAdapter()} (while a recursive verification for consistency
+   *         is performed).
    */
   protected boolean hasWidgetAdapter(UiWidget widget) {
 
@@ -105,8 +105,8 @@ public class AbstractUiTest extends Assert {
 
   /**
    * @param widget is the {@link AbstractUiWidget}.
-   * @param hasWidgetAdapter - the status of {@link AbstractUiWidget#hasWidgetAdapter()} to check recursively
-   *        for consistency.
+   * @param hasWidgetAdapter - the status of {@link AbstractUiWidget#hasWidgetAdapter()} to check recursively for
+   *        consistency.
    */
   protected void verifyHasWidgetAdapterRecursive(AbstractUiWidget<?> widget, boolean hasWidgetAdapter) {
 
@@ -145,8 +145,7 @@ public class AbstractUiTest extends Assert {
 
   /**
    * @param widget is the widget to verify.
-   * @param expectedValidationCount is the expected {@link UiWidgetAdapterTest#getValidationFailureSetCount()}
-   *        value.
+   * @param expectedValidationCount is the expected {@link UiWidgetAdapterTest#getValidationFailureSetCount()} value.
    */
   protected void assertValidationFailureSetCount(UiWidget widget, int expectedValidationCount) {
 
@@ -166,7 +165,8 @@ public class AbstractUiTest extends Assert {
   /**
    * This class is a {@link UiHandlerEventValueChange} implementation that counts the change-events.
    * 
-   * @param <VALUE>
+   * @param <VALUE> is the generic type of the changed
+   *        {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value}.
    */
   public static class ValueChangeHandler<VALUE> extends UiHandlerEventValueChange<VALUE> {
 
@@ -195,7 +195,8 @@ public class AbstractUiTest extends Assert {
     public void onValueChange(UiEventValueChange<VALUE> event) {
 
       assertSame("Event source does NOT match", this.widget, event.getSource());
-      assertEquals("Events in test can only be programmatic!", Boolean.TRUE, Boolean.valueOf(event.isProgrammatic()));
+      assertEquals("Events in test can only be programmatic!", Boolean.TRUE,
+          Boolean.valueOf(event.isProgrammatic()));
       this.eventCount++;
     }
 

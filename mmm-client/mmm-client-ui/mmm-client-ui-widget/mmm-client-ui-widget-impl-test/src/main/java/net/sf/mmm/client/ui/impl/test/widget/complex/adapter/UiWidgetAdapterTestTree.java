@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTestSelected
 /**
  * This is the implementation of {@link UiWidgetAdapterTree} for testing without a native toolkit.
  * 
- * @param <NODE>
+ * @param <NODE> is the generic type of the nodes of the tree.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

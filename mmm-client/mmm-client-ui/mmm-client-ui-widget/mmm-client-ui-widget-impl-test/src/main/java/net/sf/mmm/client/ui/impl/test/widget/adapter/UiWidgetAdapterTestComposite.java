@@ -8,10 +8,10 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSingleMutableComp
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSwitchComposite;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterComposite} and
- * various sub-interfaces for testing without a native toolkit.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterComposite} and various
+ * sub-interfaces for testing without a native toolkit.
  * 
- * @param <CHILD>
+ * @param <CHILD> is the generic type of the {@link #addChild(UiWidget, int) children}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

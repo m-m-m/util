@@ -96,14 +96,14 @@ public class UiDispatcherTest extends AbstractUiDispatcher {
                 todo = false;
               }
             } catch (Exception e) {
-              e.printStackTrace();
+              getLogger().error("Timer failed.", e);
               todo = false;
             }
           }
           try {
             Thread.sleep(100);
           } catch (InterruptedException e) {
-            e.printStackTrace();
+            getLogger().error("Timer thread was interrupted.", e);
           }
         }
       }

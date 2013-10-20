@@ -4,13 +4,13 @@ package net.sf.mmm.client.ui.impl.test.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetFileField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetFileField;
 import net.sf.mmm.client.ui.impl.test.widget.field.adapter.UiWidgetAdapterTestFileField;
 
 /**
- * This is the implementation of {@link UiWidgetIntegerField} for testing without a native toolkit.
+ * This is the implementation of {@link net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetFileFieldTest} for testing
+ * without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
