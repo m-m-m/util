@@ -6,8 +6,7 @@ import net.sf.mmm.data.api.link.Link;
 import net.sf.mmm.data.impl.entity.AbstractDataEntity;
 
 /**
- * This class contains helper methods for
- * {@link net.sf.mmm.data.api.link.LinkList}.
+ * This class contains helper methods for {@link net.sf.mmm.data.api.link.LinkList}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -22,11 +21,12 @@ public final class LinkListHelper {
   }
 
   /**
-   * This method adds the given <code>link</code> to the given
-   * <code>linkList</code>
+   * This method adds the given <code>link</code> to the given <code>linkList</code>.
    * 
-   * @param linkList
-   * @param link
+   * @param <TARGET> is the generic type the {@link Link} is pointing to.
+   * 
+   * @param linkList is the {@link MutableLinkListImpl}.
+   * @param link is the {@link Link} to add.
    */
   public static <TARGET extends AbstractDataEntity> void add(MutableLinkListImpl<TARGET> linkList,
       Link<TARGET> link) {

@@ -10,8 +10,8 @@ import net.sf.mmm.util.component.api.IocContainer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * This is just an ugly static pool used to simplify testing. It might cause memory holes and should never be
- * used in productive code.
+ * This is just an ugly static pool used to simplify testing. It might cause memory holes and should never be used in
+ * productive code.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -19,6 +19,9 @@ public final class SpringContainerPool {
 
   /** The Spring XML configuration of <code>mmm-util-core</code>. */
   public static final String SPRING_XML_UTIL_CORE = "/net/sf/mmm/util/beans-util-core.xml";
+
+  /** The Spring XML configuration of <code>mmm-search</code>. */
+  public static final String SPRING_XML_SEARCH = "/net/sf/mmm/search/beans-search.xml";
 
   /** @see #getInstance(String) */
   private static Map<String, SpringContainer> xml2containerMap;
@@ -74,8 +77,8 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method disposes the {@link #getInstance(String) instance} identified by the given
-   * <code>xmlClasspath</code> (if it exists).
+   * This method disposes the {@link #getInstance(String) instance} identified by the given <code>xmlClasspath</code>
+   * (if it exists).
    * 
    * @param xmlClasspath is the classpath to the XML configuration.
    */

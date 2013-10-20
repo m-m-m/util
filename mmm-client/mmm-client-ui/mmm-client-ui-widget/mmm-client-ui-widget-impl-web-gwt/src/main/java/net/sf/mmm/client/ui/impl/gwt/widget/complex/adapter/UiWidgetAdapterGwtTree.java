@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
-import java.awt.Checkbox;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +41,6 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -151,7 +149,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   }
 
   /**
-   * Clear {@link Checkbox}es of {@link SelectionMode#MULTIPLE_SELECTION}.
+   * Clear {@link SimpleCheckBox}es of {@link SelectionMode#MULTIPLE_SELECTION}.
    */
   private void clearMultiSelection() {
 
@@ -310,7 +308,6 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   protected void applyEventAdapterForSelection(EventAdapterGwt adapter) {
 
@@ -474,7 +471,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     /** @see #getWidgetPanel() */
     private FlowPanel widgetPanel;
 
-    /** The {@link CheckBox} for {@link SelectionMode#MULTIPLE_SELECTION}. */
+    /** The {@link SimpleCheckBox} for {@link SelectionMode#MULTIPLE_SELECTION}. */
     private SimpleCheckBox multiSelectionCheckbox;
 
     /**
@@ -507,7 +504,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
         case MULTIPLE_SELECTION:
           initializeMultiSelection();
           break;
-        default :
+        default:
           throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
       }
       updateNode();
@@ -538,8 +535,8 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @SuppressWarnings({ "unchecked", "rawtypes" })
     protected void updateNode() {
 
-      ((UiTreeNodeRenderer) UiWidgetAdapterGwtTree.this.treeNodeRenderer)
-          .assignNodeToWidget(this.node, this.nodeWidget);
+      ((UiTreeNodeRenderer) UiWidgetAdapterGwtTree.this.treeNodeRenderer).assignNodeToWidget(this.node,
+          this.nodeWidget);
     }
 
     /**
@@ -601,7 +598,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
             initializeMultiSelection();
           }
           break;
-        default :
+        default:
           throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
       }
     }

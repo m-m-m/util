@@ -32,6 +32,7 @@ import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.file.api.FileCreationFailedException;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
@@ -42,8 +43,8 @@ import net.sf.mmm.util.reflect.base.AssignableFromFilter;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This class can be used to create and update the localized bundles (properties) from an
- * {@link AbstractResourceBundle}.<br>
+ * This class can be used to create and update the localized bundles (properties) from an {@link AbstractResourceBundle}
+ * .<br>
  * It is a main-program. Simply call it with the parameter "--help" to get help. <b>ATTENTION:</b><br>
  * This class only works with java 6 or above.
  * 
@@ -152,8 +153,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer)
-   * synchronized}. Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
+   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer) synchronized}.
+   * Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
    * 
    * @return the locales to create/update.
    */
@@ -186,8 +187,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the base-path where the bundles are written to. They will appear there under their
-   * appropriate classpath. The default is {@link #DEFAULT_BASE_PATH}.
+   * This method gets the base-path where the bundles are written to. They will appear there under their appropriate
+   * classpath. The default is {@link #DEFAULT_BASE_PATH}.
    * 
    * @return the basePath is the base path where the resource bundles are written to.
    */
@@ -353,9 +354,9 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method synchronizes (creates or updates) the localized bundles (properties). If a bundle already
-   * exists, it will NOT just be overwritten but the missing keys are appended to the end of the file. If no
-   * keys are missing, the existing file remains untouched.
+   * This method synchronizes (creates or updates) the localized bundles (properties). If a bundle already exists, it
+   * will NOT just be overwritten but the missing keys are appended to the end of the file. If no keys are missing, the
+   * existing file remains untouched.
    * 
    * @param bundle is the bundle instance as java object.
    * @throws IOException if the operation failed with an input/output error.
@@ -370,7 +371,11 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
     String date = sdf.format(new Date());
     String propertyPath = this.path + File.separatorChar + bundle.getName().replace('.', File.separatorChar);
-    new File(propertyPath).getParentFile().mkdirs();
+    File directory = new File(propertyPath).getParentFile();
+    boolean success = directory.mkdirs();
+    if (!success) {
+      throw new FileCreationFailedException(directory);
+    }
     // synchronize(bundle, "", propertyPath, date);
     for (String locale : this.locales) {
       synchronize(bundle, locale, propertyPath, date);

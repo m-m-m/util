@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
  * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable}.
  * 
  * @param <NODE> is the generic type of the nodes of the tree.
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

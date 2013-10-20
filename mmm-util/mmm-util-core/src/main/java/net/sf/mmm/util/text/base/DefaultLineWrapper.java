@@ -88,8 +88,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    * {@link TextColumnInfo#WIDTH_AUTO_ADJUST auto-adjust}.
    * 
    * @param columnStates are the {@link ColumnState}s.
-   * @param tableInfo is the {@link TextTableInfo} containing the available {@link TextTableInfo#getWidth()
-   *        width}.
+   * @param tableInfo is the {@link TextTableInfo} containing the available {@link TextTableInfo#getWidth() width}.
    */
   @SuppressWarnings("null")
   protected void autoAdjustWidthOfColumns(ColumnState[] columnStates, TextTableInfo tableInfo) {
@@ -301,8 +300,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    * 
    * @param c is the character to check.
    * @param chars is the array with the matching characters.
-   * @return <code>true</code> if <code>c</code> is contained in <code>chars</code>, <code>false</code>
-   *         otherwise.
+   * @return <code>true</code> if <code>c</code> is contained in <code>chars</code>, <code>false</code> otherwise.
    */
   private static boolean isIn(char c, char[] chars) {
 
@@ -347,7 +345,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
           case INDENT_AFTER_NEWLINE:
             state.indent = true;
             break;
-          default :
+          default:
             throw new IllegalCaseException(IndentationMode.class, state.getColumnInfo().getIndentationMode());
         }
         state.proceedTextSegment();
@@ -487,8 +485,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    * 
    * @param appendable is where to append to.
    * @param state is the current {@link ColumnState}.
-   * @param doIndentThisLine - <code>true</code> if the current cell should be
-   *        {@link TextColumnInfo#getIndent() indented}, <code>false</code> otherwise.
+   * @param doIndentThisLine - <code>true</code> if the current cell should be {@link TextColumnInfo#getIndent()
+   *        indented}, <code>false</code> otherwise.
    * @param cellBuffer is the text to align and append.
    * @throws IOException if throw by the {@link Appendable}.
    */
@@ -532,14 +530,13 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
         }
         fill(appendable, columnInfo.getFiller(), rightSpace);
         break;
-      default :
+      default:
         throw new IllegalCaseException(HorizontalAlignment.class, columnInfo.getAlignment());
     }
   }
 
   /**
-   * This method fills the {@link Appendable} with the given <code>count</code> of <code>filler</code>
-   * characters.
+   * This method fills the {@link Appendable} with the given <code>count</code> of <code>filler</code> characters.
    * 
    * @param appendable is the {@link Appendable} to fill.
    * @param filler is the {@link TextColumnInfo#getFiller() fill-character}.
@@ -569,16 +566,15 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     NEWLINE,
 
     /**
-     * Indicates a non-breaking character (e.g. '&amp;nbsp;'). Line wrapping should be avoided before and
-     * after this character.
+     * Indicates a non-breaking character (e.g. '&amp;nbsp;'). Line wrapping should be avoided before and after this
+     * character.
      */
     NON_BREAKING_CHARACTER,
 
     /**
-     * Indicates a punctuation character (e.g. '.' or '!'). Line wrapping should be avoided before this
-     * character.<br>
-     * Please note that "punctuation character" is a local definition and does NOT match with other
-     * definitions as from unicode.
+     * Indicates a punctuation character (e.g. '.' or '!'). Line wrapping should be avoided before this character.<br>
+     * Please note that "punctuation character" is a local definition and does NOT match with other definitions as from
+     * unicode.
      */
     PUNCTUATION_CHARACTER,
 
@@ -590,8 +586,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
 
   /**
    * This class represents a segment of some {@link #getText() text}. It acts as an event when
-   * {@link ColumnState#getCurrentSegment() iterating} the text. It is classified by a {@link #getType() type}
-   * and caches a potential {@link #getHyphenatedWord() hyphenation} for performance reasons.
+   * {@link ColumnState#getCurrentSegment() iterating} the text. It is classified by a {@link #getType() type} and
+   * caches a potential {@link #getHyphenatedWord() hyphenation} for performance reasons.
    */
   protected static class TextSegment {
 
@@ -637,8 +633,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method resets and initializes this object. This is NOT done at construction in order to reuse the
-     * object and save performance.
+     * This method resets and initializes this object. This is NOT done at construction in order to reuse the object and
+     * save performance.
      * 
      * @param start is the {@link #getStartIndex() start-index}.
      * @param end is the {@link #getEndIndex() end-index}.
@@ -696,8 +692,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
 
     /**
      * This method gets the {@link Hyphenation} if this {@link TextSegment} has the {@link #getType() type}
-     * {@link TextSegmentType#WORD}. The {@link Hyphenation} will be build lazy on the first call of this
-     * method.
+     * {@link TextSegmentType#WORD}. The {@link Hyphenation} will be build lazy on the first call of this method.
      * 
      * @return the {@link Hyphenation} or <code>null</code> if this is no word.
      */
@@ -721,11 +716,10 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   }
 
   /**
-   * This class represents the state of a text-column. It contains the {@link ColumnState#getText() text} of
-   * the column and its {@link ColumnState#getColumnInfo() metadata}. Further it holds the
-   * {@link ColumnState#getTextIndex() current text-index} and acts as some sort of
-   * {@link ColumnState#proceedTextSegment() iterator} of {@link ColumnState#getCurrentSegment()
-   * text-segments}.
+   * This class represents the state of a text-column. It contains the {@link ColumnState#getText() text} of the column
+   * and its {@link ColumnState#getColumnInfo() metadata}. Further it holds the {@link ColumnState#getTextIndex()
+   * current text-index} and acts as some sort of {@link ColumnState#proceedTextSegment() iterator} of
+   * {@link ColumnState#getCurrentSegment() text-segments}.
    */
   protected static class ColumnState extends TextColumn {
 
@@ -789,8 +783,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method gets the current {@link TextSegment}. Initially this is the first {@link TextSegment}
-     * available.
+     * This method gets the current {@link TextSegment}. Initially this is the first {@link TextSegment} available.
      * 
      * @see #proceedTextSegment()
      * 
@@ -802,11 +795,11 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method gets the next {@link TextSegment} after the {@link #getCurrentSegment() current}. This
-     * method exists for lookahead decisions.
+     * This method gets the next {@link TextSegment} after the {@link #getCurrentSegment() current}. This method exists
+     * for lookahead decisions.
      * 
-     * @return the next {@link TextSegment} or <code>null</code> if NOT available (
-     *         {@link #getCurrentSegment() current segment} is the last segment or also <code>null</code>).
+     * @return the next {@link TextSegment} or <code>null</code> if NOT available ( {@link #getCurrentSegment() current
+     *         segment} is the last segment or also <code>null</code>).
      */
     public TextSegment getNextSegment() {
 
@@ -814,14 +807,14 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method gets the current number of subsequent newlines. If {@link #getCurrentSegment() current
-     * segment} is a {@link TextSegmentType#NEWLINE}, this method will return the number of
-     * {@link TextSegmentType#NEWLINE} segments (including the current) that occurred since the last other
-     * segment. Otherwise it will always return <code>0</code>.
+     * This method gets the current number of subsequent newlines. If {@link #getCurrentSegment() current segment} is a
+     * {@link TextSegmentType#NEWLINE}, this method will return the number of {@link TextSegmentType#NEWLINE} segments
+     * (including the current) that occurred since the last other segment. Otherwise it will always return
+     * <code>0</code>.
      * 
-     * @return the subsequentNewlineCount the number of subsequent {@link TextSegmentType#NEWLINE} segments
-     *         including the {@link #getCurrentSegment() current segment} or <code>0</code> if the
-     *         {@link #getCurrentSegment() current segment} is no {@link TextSegmentType#NEWLINE}.
+     * @return the subsequentNewlineCount the number of subsequent {@link TextSegmentType#NEWLINE} segments including
+     *         the {@link #getCurrentSegment() current segment} or <code>0</code> if the {@link #getCurrentSegment()
+     *         current segment} is no {@link TextSegmentType#NEWLINE}.
      */
     public int getSubsequentNewlineCount() {
 
@@ -829,12 +822,12 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method steps on to the next {@link TextSegment}. The {@link #getCurrentSegment() current segment}
-     * is set to the {@link #getNextSegment() next segment} and the {@link #getNextSegment() next segment} is
-     * set to the {@link #next(TextSegment) next determined segment}.
+     * This method steps on to the next {@link TextSegment}. The {@link #getCurrentSegment() current segment} is set to
+     * the {@link #getNextSegment() next segment} and the {@link #getNextSegment() next segment} is set to the
+     * {@link #next(TextSegment) next determined segment}.
      * 
-     * @return <code>true</code> if a new {@link #getCurrentSegment() current segment} is available,
-     *         <code>false</code> if the entire text has been proceeded.
+     * @return <code>true</code> if a new {@link #getCurrentSegment() current segment} is available, <code>false</code>
+     *         if the entire text has been proceeded.
      */
     public boolean proceedTextSegment() {
 
@@ -857,12 +850,12 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method {@link TextSegment#initialize(int, int, TextSegmentType) initializes} the given
-     * {@link TextSegment} with the next segment-data from the {@link #getText() text}.
+     * This method {@link TextSegment#initialize(int, int, TextSegmentType) initializes} the given {@link TextSegment}
+     * with the next segment-data from the {@link #getText() text}.
      * 
      * @param textSegment a previous {@link TextSegment} that can be reused.
-     * @return the {@link TextSegment} with the next segment-data or <code>null</code> if the
-     *         {@link #getText() text} is completed.
+     * @return the {@link TextSegment} with the next segment-data or <code>null</code> if the {@link #getText() text} is
+     *         completed.
      */
     private TextSegment next(TextSegment textSegment) {
 
@@ -909,7 +902,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
             newIndex++;
           }
           break;
-        default :
+        default:
           throw new IllegalCaseException(TextSegmentType.class, type);
       }
       textSegment.initialize(this.segmentIndex, newIndex, type);
@@ -1030,9 +1023,9 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /**
      * This method clears this buffer. It has to be called at the beginning of each new cell.
      * 
-     * @param maximumLength is the maximum length this buffer should reach. It should therefore be set to the
-     *        space available for the current cell ({@link TextColumnInfo#getWidth() column-width} potentially
-     *        reduced by indent, etc.).
+     * @param maximumLength is the maximum length this buffer should reach. It should therefore be set to the space
+     *        available for the current cell ({@link TextColumnInfo#getWidth() column-width} potentially reduced by
+     *        indent, etc.).
      */
     protected void reset(int maximumLength) {
 
@@ -1042,8 +1035,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method gets the maximum length of this buffer and the according cell. It is set when this buffer
-     * is {@link #reset(int) reseted}.
+     * This method gets the maximum length of this buffer and the according cell. It is set when this buffer is
+     * {@link #reset(int) reseted}.
      * 
      * @return the maximum length.
      */
@@ -1053,8 +1046,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method gets the <em>rest</em>, which is the number of characters available until the buffer has
-     * reached its end.
+     * This method gets the <em>rest</em>, which is the number of characters available until the buffer has reached its
+     * end.
      * 
      * @see #append(CharSequence)
      * 
@@ -1082,8 +1075,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /**
      * @see Appendable#append(CharSequence, int, int)
      * 
-     * @param text is the {@link CharSequence} from which a {@link CharSequence#subSequence(int, int)
-     *        subsequence} will be appended.
+     * @param text is the {@link CharSequence} from which a {@link CharSequence#subSequence(int, int) subsequence} will
+     *        be appended.
      * @param start is the index of the first character in the subsequence.
      * @param end is the index of the character following the last character in the subsequence.
      * @return the current {@link #getRest() rest}.
@@ -1198,9 +1191,55 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.columnState == null) ? 0 : this.columnState.hashCode());
+      result = prime * result + this.lineCount;
+      result = prime * result + this.lineLengthMax;
+      return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+      if (this == obj) {
+        return true;
+      }
+      if (obj == null) {
+        return false;
+      }
+      if (getClass() != obj.getClass()) {
+        return false;
+      }
+      AutoAdjustInfo other = (AutoAdjustInfo) obj;
+      if (this.columnState == null) {
+        if (other.columnState != null) {
+          return false;
+        }
+      } else if (!this.columnState.equals(other.columnState)) {
+        return false;
+      }
+      if (this.lineCount != other.lineCount) {
+        return false;
+      }
+      if (this.lineLengthMax != other.lineLengthMax) {
+        return false;
+      }
+      return true;
+    }
+
+    /**
      * 
-     * @param totalTextLength is the total {@link String#length() length} of the {@link TextColumn#getText()
-     *        text} of all auto-adjust columns.
+     * @param totalTextLength is the total {@link String#length() length} of the {@link TextColumn#getText() text} of
+     *        all auto-adjust columns.
      * @return the ratio of the text-length of this column according to the total text length.
      */
     public double getTextLengthRation(double totalTextLength) {

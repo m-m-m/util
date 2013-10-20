@@ -56,15 +56,13 @@ public class LuceneSearchQueryBuilderFactoryTest {
 
     SearchQueryBuilderFactory factory = getQueryBuilderFactory();
     SearchEngineConfigurationBean configuration = new SearchEngineConfigurationBean();
-    configuration.getProperties().setProperty(
-        LuceneSearchQueryBuilder.PROPERTY_IGNORE_LEADING_WILDCARDS, "false");
+    configuration.getProperties().setProperty(LuceneSearchQueryBuilder.PROPERTY_IGNORE_LEADING_WILDCARDS, "false");
     SearchEngineConfigurationHolder holder = new SearchEngineConfigurationHolderImpl(configuration);
     return factory.createQueryBuilder(holder);
   }
 
   /**
-   * This method gets the underlying lucene {@link Query} from the given
-   * <code>query</code>.
+   * This method gets the underlying lucene {@link Query} from the given <code>query</code>.
    * 
    * @param query is the {@link SearchQuery}.
    * @return the wrapped {@link Query}.
@@ -75,42 +73,39 @@ public class LuceneSearchQueryBuilderFactoryTest {
   }
 
   /**
-   * This method gets the underlying lucene {@link Query} from the given
-   * <code>query</code>.
+   * This method gets the underlying lucene {@link Query} from the given <code>query</code>.
    * 
    * @param <Q> is the generic type of the <code>queryClass</code>.
    * 
    * @param query is the {@link SearchQuery}.
-   * @param queryClass is the {@link Class} reflecting the expected type of the
-   *        {@link Query}.
+   * @param queryClass is the {@link Class} reflecting the expected type of the {@link Query}.
    * @return the wrapped {@link Query}.
    */
   protected <Q extends Query> Q getLuceneQuery(SearchQuery query, Class<Q> queryClass) {
 
     Assert.assertNotNull(SearchQuery.class.getSimpleName() + " is null!", query);
-    Assert.assertTrue(SearchQuery.class.getSimpleName() + " is no instance of "
-        + AbstractLuceneSearchQuery.class.getSimpleName() + "!",
-        query instanceof AbstractLuceneSearchQuery);
+    Assert.assertTrue(
+        SearchQuery.class.getSimpleName() + " is no instance of "
+            + AbstractLuceneSearchQuery.class.getSimpleName() + "!", query instanceof AbstractLuceneSearchQuery);
     Query luceneQuery = ((AbstractLuceneSearchQuery) query).getLuceneQuery();
     return getLuceneQuery(luceneQuery, queryClass);
   }
 
   /**
-   * This method performs a checked cast of the given lucene <code>query</code>
-   * to the type specified by <code>queryClass</code>.
+   * This method performs a checked cast of the given lucene <code>query</code> to the type specified by
+   * <code>queryClass</code>.
    * 
    * @param <Q> is the generic type of the <code>queryClass</code>.
    * 
    * @param query is the {@link Query}.
-   * @param queryClass is the {@link Class} reflecting the expected type of the
-   *        {@link Query}.
+   * @param queryClass is the {@link Class} reflecting the expected type of the {@link Query}.
    * @return the casted {@link Query}.
    */
   protected <Q extends Query> Q getLuceneQuery(Query query, Class<Q> queryClass) {
 
     Assert.assertNotNull("lucene query is null!", query);
-    Assert.assertTrue("Query (" + query + ") has type " + query.getClass().getSimpleName()
-        + " - expected " + queryClass.getSimpleName(), queryClass.isAssignableFrom(queryClass));
+    Assert.assertTrue("Query (" + query + ") has type " + query.getClass().getSimpleName() + " - expected "
+        + queryClass.getSimpleName(), queryClass.isAssignableFrom(queryClass));
     if (!queryClass.isAssignableFrom(query.getClass())) {
       throw new NlsClassCastException(query, queryClass);
     }
@@ -145,8 +140,7 @@ public class LuceneSearchQueryBuilderFactoryTest {
   }
 
   /**
-   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for
-   * wildcard query.
+   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for wildcard query.
    */
   @Test
   public void testCreateTermQueryWildcardPrefix() {
@@ -162,8 +156,7 @@ public class LuceneSearchQueryBuilderFactoryTest {
   }
 
   /**
-   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for
-   * wildcard query.
+   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for wildcard query.
    */
   @Test
   public void testCreateTermQueryWildcardMixed() {
@@ -179,8 +172,7 @@ public class LuceneSearchQueryBuilderFactoryTest {
   }
 
   /**
-   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for
-   * prefix query.
+   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for prefix query.
    */
   @Test
   public void testCreateTermQueryPrefix() {
@@ -195,8 +187,7 @@ public class LuceneSearchQueryBuilderFactoryTest {
   }
 
   /**
-   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for term
-   * query.
+   * Test of {@link SearchQueryBuilder#createWordQuery(String, String)} for term query.
    */
   @Test
   public void testCreateTermQueryTerm() {
@@ -259,25 +250,21 @@ public class LuceneSearchQueryBuilderFactoryTest {
     List<BooleanClause> clauses = booleanQuery.clauses();
     Assert.assertNotNull(clauses);
     Assert.assertEquals(4, clauses.size());
-    Assert.assertEquals("foo", getLuceneQuery(clauses.get(0).getQuery(), TermQuery.class).getTerm()
-        .text());
+    Assert.assertEquals("foo", getLuceneQuery(clauses.get(0).getQuery(), TermQuery.class).getTerm().text());
     Assert.assertSame(Occur.SHOULD, clauses.get(0).getOccur());
-    Assert.assertEquals("*bar*", getLuceneQuery(clauses.get(1).getQuery(), WildcardQuery.class)
-        .getTerm().text());
+    Assert.assertEquals("*bar*", getLuceneQuery(clauses.get(1).getQuery(), WildcardQuery.class).getTerm().text());
     Assert.assertSame(Occur.SHOULD, clauses.get(1).getOccur());
-    Assert.assertEquals("exclude", getLuceneQuery(clauses.get(3).getQuery(), TermQuery.class)
-        .getTerm().text());
+    Assert.assertEquals("exclude", getLuceneQuery(clauses.get(3).getQuery(), TermQuery.class).getTerm().text());
     Assert.assertSame(Occur.MUST_NOT, clauses.get(3).getOccur());
     BooleanQuery subQuery = getLuceneQuery(clauses.get(2).getQuery(), BooleanQuery.class);
     Assert.assertSame(Occur.MUST, clauses.get(2).getOccur());
     List<BooleanClause> subClauses = subQuery.clauses();
     Assert.assertNotNull(subClauses);
     Assert.assertEquals(2, subClauses.size());
-    Assert.assertEquals("some", getLuceneQuery(subClauses.get(0).getQuery(), PrefixQuery.class)
-        .getPrefix().text());
+    Assert
+        .assertEquals("some", getLuceneQuery(subClauses.get(0).getQuery(), PrefixQuery.class).getPrefix().text());
     Assert.assertSame(Occur.SHOULD, subClauses.get(0).getOccur());
-    Assert.assertEquals("thing", getLuceneQuery(subClauses.get(1).getQuery(), TermQuery.class)
-        .getTerm().text());
+    Assert.assertEquals("thing", getLuceneQuery(subClauses.get(1).getQuery(), TermQuery.class).getTerm().text());
     Assert.assertSame(Occur.SHOULD, subClauses.get(1).getOccur());
 
     query = queryBuilder.parseStandardQuery("()");

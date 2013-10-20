@@ -31,14 +31,14 @@ import com.google.gwt.user.client.ui.RichTextArea.Formatter;
 import com.google.gwt.user.client.ui.RichTextArea.Justification;
 
 /**
- * This class is a {@link com.google.gwt.user.client.ui.Widget} that represents the toolbar for a
- * {@link RichTextArea}. The toolbar allows to format the selected text or insert images, hyperlinks, etc.
+ * This class is a {@link com.google.gwt.user.client.ui.Widget} that represents the toolbar for a {@link RichTextArea}.
+ * The toolbar allows to format the selected text or insert images, hyperlinks, etc.
  */
 public class RichTextToolbar extends Toolbar {
 
   /** The available font sizes. */
-  private static final FontSize[] FONT_SIZES = new FontSize[] { FontSize.XX_SMALL, FontSize.X_SMALL, FontSize.SMALL,
-      FontSize.MEDIUM, FontSize.LARGE, FontSize.X_LARGE, FontSize.XX_LARGE };
+  private static final FontSize[] FONT_SIZES = new FontSize[] { FontSize.XX_SMALL, FontSize.X_SMALL,
+  FontSize.SMALL, FontSize.MEDIUM, FontSize.LARGE, FontSize.X_LARGE, FontSize.XX_LARGE };
 
   /** The associated {@link RichTextArea} to modify via this toolbar. */
   private final RichTextArea richTextArea;
@@ -219,7 +219,7 @@ public class RichTextToolbar extends Toolbar {
       case REDO:
         RichTextToolbar.this.formatter.redo();
         break;
-      default :
+      default:
         break;
     }
   }
@@ -255,8 +255,7 @@ public class RichTextToolbar extends Toolbar {
 
   /**
    * @param feature is the {@link RichTextFeature}.
-   * @return <code>true</code> if the {@link RichTextFeature feature} is toggled, <code>false</code>
-   *         otherwise.
+   * @return <code>true</code> if the {@link RichTextFeature feature} is toggled, <code>false</code> otherwise.
    */
   private boolean isToggleFeature(RichTextFeature feature) {
 
@@ -268,7 +267,7 @@ public class RichTextToolbar extends Toolbar {
       case SUPERSCRIPT:
       case STRIKETHROUGH:
         return true;
-      default :
+      default:
         return false;
     }
   }
@@ -277,8 +276,8 @@ public class RichTextToolbar extends Toolbar {
    * Sets the given {@link RichTextFeature} to the given availability.
    * 
    * @param feature is the {@link RichTextFeature}.
-   * @param available - <code>true</code> if the given <code>feature</code> should be available (button
-   *        visible), <code>false</code> otherwise.
+   * @param available - <code>true</code> if the given <code>feature</code> should be available (button visible),
+   *        <code>false</code> otherwise.
    */
   public void setFeatureAvailable(RichTextFeature feature, boolean available) {
 
@@ -372,12 +371,18 @@ public class RichTextToolbar extends Toolbar {
    */
   private class UpdateHandler implements ClickHandler, KeyUpHandler {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(ClickEvent event) {
 
       updateStatus();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onKeyUp(KeyUpEvent event) {
 

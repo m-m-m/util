@@ -50,8 +50,7 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
   private int minHeight;
 
   /**
-   * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or
-   * <code>null</code>.
+   * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or <code>null</code>.
    */
   private HandlerRegistration registration;
 
@@ -83,6 +82,9 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void onMouseDown(MouseDownEvent event) {
 
@@ -135,12 +137,16 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
       // move...
       newRectangle = this.popupRectangle.moveBy(deltaX, deltaY).clipTo(this.browserRectangle, true);
     } else {
-      newRectangle = this.popupRectangle.resize(deltaX, deltaY, this.resizeDirection, this.minWidth, this.minHeight);
+      newRectangle = this.popupRectangle.resize(deltaX, deltaY, this.resizeDirection, this.minWidth,
+          this.minHeight);
     }
     this.popupWindow.setPixelSize(newRectangle.getWidth(), newRectangle.getHeight());
     this.popupWindow.setPopupPosition(newRectangle.getX(), newRectangle.getY());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void onMouseUp(MouseUpEvent event) {
 

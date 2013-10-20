@@ -46,7 +46,7 @@ public class AddressEto extends EntityTo<Long> implements Address {
   /**
    * The constructor.
    * 
-   * @param template
+   * @param template is the object to create a deep-copy from.
    */
   public AddressEto(RevisionedEntity<Long> template) {
 

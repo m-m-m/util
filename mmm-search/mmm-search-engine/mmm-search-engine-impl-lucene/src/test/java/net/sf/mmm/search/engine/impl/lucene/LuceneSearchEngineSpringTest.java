@@ -20,7 +20,8 @@ public class LuceneSearchEngineSpringTest extends LuceneSearchEngineTest {
   @Override
   protected SearchEngineBuilder getSearchEngineBuilder() {
 
-    return SpringContainerPool.getInstance().get(LuceneSearchEngineBuilder.class);
+    return SpringContainerPool.getInstance(SpringContainerPool.SPRING_XML_SEARCH).get(
+        LuceneSearchEngineBuilder.class);
   }
 
   /**
@@ -29,7 +30,8 @@ public class LuceneSearchEngineSpringTest extends LuceneSearchEngineTest {
   @Override
   protected SearchEngineConfigurationLoader getSearchEngineConfigurationLoader() {
 
-    return SpringContainerPool.getInstance().get(SearchEngineConfigurationLoader.class);
+    return SpringContainerPool.getInstance(SpringContainerPool.SPRING_XML_SEARCH).get(
+        SearchEngineConfigurationLoader.class);
   }
 
 }
