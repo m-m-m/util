@@ -147,6 +147,11 @@
       <property name="severity" value="info"/>
       <property name="format" value="(TODO|FIXME|REVIEW|CHECKSTYLE:OFF|NOSONAR|NOPMD)"/>
     </module>
+    <module name="AbstractClassName">
+      <property name="severity" value="warning"/>
+      <property name="format" value="^Abstract.*$"/>
+      <property name="ignoreName" value="true"/>
+    </module>
   </module>
   <module name="FileLength">
     <property name="severity" value="info"/>
