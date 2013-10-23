@@ -23,6 +23,12 @@ public class ContactBean implements Contact {
   /** @see #getBirthday() */
   private Date birthday;
 
+  /** @see #getShoeSize() */
+  private int shoeSize;
+
+  /** @see #getIncome() */
+  private double income;
+
   /**
    * The constructor.
    */
@@ -83,6 +89,38 @@ public class ContactBean implements Contact {
   public void setBirthday(Date birthday) {
 
     this.birthday = birthday;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public int getShoeSize() {
+
+    return this.shoeSize;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setShoeSize(int shoeSize) {
+
+    this.shoeSize = shoeSize;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public double getIncome() {
+
+    return this.income;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setIncome(double income) {
+
+    this.income = income;
   }
 
   /**

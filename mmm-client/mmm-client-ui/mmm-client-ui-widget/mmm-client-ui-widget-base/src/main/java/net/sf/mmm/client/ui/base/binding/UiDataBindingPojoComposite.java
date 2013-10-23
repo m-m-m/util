@@ -10,16 +10,17 @@ import java.util.Map;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for composite custom
- * widgets.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for composite custom widgets.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -59,8 +60,8 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   }
 
   /**
-   * Verifies that the given <code>widget</code> is NOT already {@link List#contains(Object) contained} in the
-   * given <code>list</code>.
+   * Verifies that the given <code>widget</code> is NOT already {@link List#contains(Object) contained} in the given
+   * <code>list</code>.
    * 
    * @param list is the {@link List} to check.
    * @param widget is the {@link UiWidgetWithValue} to check.
@@ -98,7 +99,8 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   protected String getLabel(TypedProperty<?> property) {
 
     String title = property.getTitle();
-    NlsMessage message = NlsAccess.getBundleFactory().createBundle(NlsBundleLabelsRoot.class).getMessage(title, null);
+    NlsMessage message = NlsAccess.getBundleFactory().createBundle(NlsBundleLabelsRoot.class)
+        .getMessage(title, null);
     if (message == null) {
       return title;
     }
@@ -110,8 +112,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   }
 
   /**
-   * Creates the {@link UiWidgetWithValue} for the given <code>property</code> using the given
-   * <code>label</code>.
+   * Creates the {@link UiWidgetWithValue} for the given <code>property</code> using the given <code>label</code>.
    * 
    * @param <P> is the generic {@link TypedProperty#getPropertyType() property type}.
    * 
@@ -119,6 +120,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
    * @param label is the label for the widget or <code>null</code> to determine automatically.
    * @return the new {@link UiWidgetWithValue} for the given input.
    */
+  @SuppressWarnings("unchecked")
   protected <P> UiWidgetWithValue<P> createWidget(TypedProperty<P> property, String label) {
 
     String labelText = label;
@@ -132,7 +134,19 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
 
     UiWidgetField<P> childWidget = widgetFactory.createForDatatype(propertyType);
     childWidget.setFieldLabel(labelText);
-    childWidget.addValidator(getAdapter().getPropertyValidator(property));
+    childWidget.addValidator(getAdapter().getPropertyValidator(property, propertyType));
+    if (childWidget instanceof UiWidgetRangeField) {
+      Range<?> range = getAdapter().getRangeConstraints(property, propertyType);
+      UiWidgetRangeField<P> field = (UiWidgetRangeField<P>) childWidget;
+      Object minimumValue = range.getMinimumValue();
+      if (minimumValue != null) {
+        field.setMinimumValue((P) minimumValue);
+      }
+      Object maximumValue = range.getMaximumValue();
+      if (maximumValue != null) {
+        field.setMaximumValue((P) maximumValue);
+      }
+    }
     return childWidget;
   }
 
@@ -147,10 +161,12 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
       List<UiWidgetWithValue<?>> widgetList = this.property2widgetMap.get(property);
       if (!widgetList.isEmpty()) {
         Object propertyValue;
-        if (property != null) {
-          propertyValue = getAdapter().getPropertyValue(template, property);
-        } else {
+        if (property == null) {
+          // if property is null this indicates that the widget handles the POJO itself rather than one of its property.
+          // rare and special case but needs to be covered...
           propertyValue = template;
+        } else {
+          propertyValue = getAdapter().getPropertyValue(template, property);
         }
         for (UiWidgetWithValue widget : widgetList) {
           propertyValue = widget.getValueDirect(propertyValue, state);
@@ -174,10 +190,12 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
       List<UiWidgetWithValue<?>> widgetList = this.property2widgetMap.get(property);
       if (!widgetList.isEmpty()) {
         Object propertyValue;
-        if (property != null) {
-          propertyValue = getAdapter().getPropertyValue(value, property);
-        } else {
+        if (property == null) {
+          // if property is null this indicates that the widget handles the POJO itself rather than one of its property.
+          // rare and special case but needs to be covered...
           propertyValue = value;
+        } else {
+          propertyValue = getAdapter().getPropertyValue(value, property);
         }
         for (UiWidgetWithValue widget : widgetList) {
           widget.setValue(propertyValue, forUser);

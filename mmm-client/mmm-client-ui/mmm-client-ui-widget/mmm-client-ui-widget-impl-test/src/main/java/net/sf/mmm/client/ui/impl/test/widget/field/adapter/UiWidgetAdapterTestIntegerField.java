@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerSliderField;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterIntegerField} for testing without a native toolkit.
@@ -11,7 +12,13 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerFiel
  * @since 1.0.0
  */
 public class UiWidgetAdapterTestIntegerField extends UiWidgetAdapterTestField<Integer, Integer> implements
-    UiWidgetAdapterIntegerField {
+    UiWidgetAdapterIntegerField, UiWidgetAdapterIntegerSliderField {
+
+  /** @see #getMinimumValue() */
+  private Integer min;
+
+  /** @see #getMaximumValue() */
+  private Integer max;
 
   /**
    * The constructor.
@@ -19,6 +26,42 @@ public class UiWidgetAdapterTestIntegerField extends UiWidgetAdapterTestField<In
   public UiWidgetAdapterTestIntegerField() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Integer getMinimumValue() {
+
+    return this.min;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumValue(Integer minimum) {
+
+    this.min = minimum;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Integer getMaximumValue() {
+
+    return this.max;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMaximumValue(Integer maximum) {
+
+    this.max = maximum;
   }
 
 }

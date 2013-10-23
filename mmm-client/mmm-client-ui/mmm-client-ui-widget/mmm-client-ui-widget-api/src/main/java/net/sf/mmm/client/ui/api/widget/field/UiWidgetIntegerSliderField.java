@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.api.widget.field;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
- * This is the interface for a {@link UiWidgetField field widget} that represents an integer range field. Such
+ * This is the interface for a {@link UiWidgetField field widget} that represents an {@link Integer} slider field. Such
  * field allows to enter a value of the type {@link Integer} using a slider that can be moved.<br/>
  * Here you can see an example (with {@link #setFieldLabel(String) field label} "Ranking"):
  * 
@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetIntegerRangeField extends UiWidgetRangeField<Integer>, UiWidgetNative {
+public interface UiWidgetIntegerSliderField extends UiWidgetRangeField<Integer>, UiWidgetNative {
 
   // nothing to add...
 

@@ -25,10 +25,10 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetToggleButton;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerSliderField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
@@ -146,7 +146,8 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetLabel label1 = factory.create(UiWidgetLabel.class);
     label1.setLabel("label1");
     verticalPanel1.addChild(label1);
-    final UiWidgetTab tab1 = tabPanel.addChild(verticalPanel1, "Tab1");
+    // final UiWidgetTab tab1 =
+    tabPanel.addChild(verticalPanel1, "Tab1");
 
     // UiWidgetGridPanel gridPanel = factory.create(UiWidgetGridPanel.class);
     // final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
@@ -181,7 +182,8 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);
     final UiWidgetLabel label2 = factory.create(UiWidgetLabel.class);
-    final UiWidgetTab tab2 = tabPanel.addChild(verticalPanel2, "Tab2");
+    // final UiWidgetTab tab2 =
+    tabPanel.addChild(verticalPanel2, "Tab2");
     label2.setLabel("label2");
     verticalPanel2.addChild(label2);
     UiWidgetButton button1 = factory.create(UiWidgetButton.class);
@@ -255,7 +257,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         UiHandlerEventClick handler = new UiHandlerEventClick() {
 
           @Override
-          public void onClick(UiEventClick event) {
+          public void onClick(UiEventClick evt) {
 
             popup.setVisible(false);
           }
@@ -299,14 +301,15 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     verticalPanel2.addChild(tree);
     mainWindow.addChild(tabPanel);
 
-    UiWidgetVerticalPanel verticalPanel3 = factory.create(UiWidgetVerticalPanel.class);
     UiWidgetDateField dateField = factory.create(UiWidgetDateField.class);
-    verticalPanel3.addChild(dateField);
+    verticalPanel2.addChild(dateField);
     UiWidgetTextField textBoxField = factory.create(UiWidgetTextField.class);
-    verticalPanel3.addChild(textBoxField);
+    verticalPanel2.addChild(textBoxField);
     UiWidgetRichTextField richTextArea = factory.create(UiWidgetRichTextField.class);
-    verticalPanel3.addChild(richTextArea);
-    // mainWindow.addChild(verticalPanel3);
+    verticalPanel2.addChild(richTextArea);
+    UiWidgetIntegerSliderField rangeField = factory.create(UiWidgetIntegerSliderField.class);
+    rangeField.setMaximumValue(Integer.valueOf(100));
+    verticalPanel2.addChild(rangeField);
 
     UiWidgetImage image = factory.create(UiWidgetImage.class);
     image.setUrl("http://m-m-m.sourceforge.net/maven/images/logo.png");
@@ -388,7 +391,6 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
         dialogBox.hide();
         button.setEnabled(true);
-        // TODO: Support Focus for button...
         // button.setFocus(true);
       }
     });

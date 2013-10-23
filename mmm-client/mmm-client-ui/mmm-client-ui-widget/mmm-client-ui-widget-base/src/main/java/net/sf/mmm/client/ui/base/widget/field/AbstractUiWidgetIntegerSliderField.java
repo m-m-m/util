@@ -3,26 +3,26 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerRangeField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerRangeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerSliderField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerSliderField;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetIntegerRangeField}.
+ * This is the abstract base implementation of {@link UiWidgetIntegerSliderField}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetIntegerRangeField<ADAPTER extends UiWidgetAdapterIntegerRangeField> extends
-    AbstractUiWidgetRangeField<ADAPTER, Integer> implements UiWidgetIntegerRangeField {
+public abstract class AbstractUiWidgetIntegerSliderField<ADAPTER extends UiWidgetAdapterIntegerSliderField> extends
+    AbstractUiWidgetRangeField<ADAPTER, Integer> implements UiWidgetIntegerSliderField {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public AbstractUiWidgetIntegerRangeField(UiContext context) {
+  public AbstractUiWidgetIntegerSliderField(UiContext context) {
 
     super(context);
   }

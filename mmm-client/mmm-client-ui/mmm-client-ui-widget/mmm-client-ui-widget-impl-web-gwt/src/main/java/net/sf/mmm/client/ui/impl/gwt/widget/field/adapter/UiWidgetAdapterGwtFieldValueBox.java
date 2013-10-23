@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInpu
 import com.google.gwt.user.client.ui.ValueBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
- * using GWT based on {@link ValueBox}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT
+ * based on {@link ValueBox}.
  * 
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the changed value.

@@ -3,6 +3,7 @@
 package net.sf.mmm.util.value.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
@@ -19,6 +20,12 @@ public class ValueOutOfRangeException extends ValueException {
 
   /** @see #getCode() */
   public static final String MESSAGE_CODE = "ValueOutOfRange";
+
+  /** The unbound minimum. */
+  private static final String MIN_UNBOUND = "\u2212\u221E";
+
+  /** The unbound maximum. */
+  private static final String MAX_UNBOUND = "+\u221E";
 
   /**
    * The constructor.
@@ -38,15 +45,21 @@ public class ValueOutOfRangeException extends ValueException {
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class)
-        .errorValueOutOfRange(value, minimum, maximum, valueSource));
-    assert ((value.doubleValue() > minimum.doubleValue()) || (value.doubleValue() < minimum.doubleValue()));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(value,
+        (minimum == null) ? MIN_UNBOUND : minimum, (maximum == null) ? MAX_UNBOUND : maximum, valueSource));
+    if (value instanceof Comparable) {
+      // Comparable is preferred as verifyNumber is incorrect for BigInteger or BigDecimal
+      verifyComparable((Comparable) value, (Comparable) minimum, (Comparable) maximum);
+    } else {
+      verifyNumber(value, minimum, maximum);
+    }
   }
 
   /**
@@ -54,10 +67,9 @@ public class ValueOutOfRangeException extends ValueException {
    * 
    * @param <V> is the generic type of the values.
    * 
-   * @param valueSource describes the source of the value or <code>null</code> if NOT available. This may be
-   *        the filename where the value was read from, an XPath where the value was located in an XML
-   *        document, etc. It is used in exceptions thrown if something goes wrong. This will help to find the
-   *        problem easier.
+   * @param valueSource describes the source of the value or <code>null</code> if NOT available. This may be the
+   *        filename where the value was read from, an XPath where the value was located in an XML document, etc. It is
+   *        used in exceptions thrown if something goes wrong. This will help to find the problem easier.
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
@@ -65,24 +77,69 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public <V extends Comparable<V>> ValueOutOfRangeException(Object valueSource, V value, V minimum, V maximum) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class)
-        .errorValueOutOfRange(value, minimum, maximum, valueSource));
-    assert ((value.compareTo(minimum) < 0) || (value.compareTo(maximum) > 0));
+    super(createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(value,
+        (minimum == null) ? MIN_UNBOUND : minimum, (maximum == null) ? MAX_UNBOUND : maximum, valueSource));
+    verifyComparable(value, minimum, maximum);
   }
 
   /**
-   * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code>
-   * to <code>maximum</code>.
+   * Verifies that the <code>value</code> is actually out of range.
+   * 
+   * @param <V> is the generic type of the values.
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
+   */
+  private <V extends Comparable<V>> void verifyComparable(V value, V minimum, V maximum) {
+
+    if (minimum != null) {
+      if (maximum != null) {
+        assert ((value.compareTo(minimum) < 0) || (value.compareTo(maximum) > 0));
+      } else {
+        assert (value.compareTo(minimum) < 0);
+      }
+    } else if (maximum != null) {
+      assert (value.compareTo(maximum) > 0);
+    } else {
+      throw new NlsNullPointerException("minimum & maximum");
+    }
+  }
+
+  /**
+   * Verifies that the <code>value</code> is actually out of range.
+   * 
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
+   */
+  private void verifyNumber(Number value, Number minimum, Number maximum) {
+
+    if (minimum != null) {
+      if (maximum != null) {
+        assert ((value.doubleValue() >= minimum.doubleValue()) || (value.doubleValue() <= maximum.doubleValue()));
+      } else {
+        assert (value.doubleValue() >= minimum.doubleValue());
+      }
+    } else if (maximum != null) {
+      assert (value.doubleValue() <= maximum.doubleValue());
+    } else {
+      throw new NlsNullPointerException("minimum & maximum");
+    }
+  }
+
+  /**
+   * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code> to
+   * <code>maximum</code>.
    * 
    * @param value is the value to check.
    * @param minimum is the minimum number allowed.
    * @param maximum is the maximum number allowed.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier. It may be
-   *        <code>null</code> if there is no helpful source available.
-   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from
-   *         <code>minimum</code> to <code>maximum</code>.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier. It may be <code>null</code> if there is no helpful source
+   *        available.
+   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from <code>minimum</code> to
+   *         <code>maximum</code>.
    */
   public static void checkRange(Number value, Number minimum, Number maximum, Object valueSource)
       throws ValueOutOfRangeException {

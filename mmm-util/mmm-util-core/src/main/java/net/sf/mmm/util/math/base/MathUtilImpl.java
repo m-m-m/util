@@ -69,7 +69,7 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
   }
 
   /** The {@link NumberTypeImpl} for {@link AtomicLong}. */
-  public static final NumberTypeImpl<AtomicLong> ATOMIC_LONG = new NumberTypeImpl<AtomicLong>(4) {
+  public static final NumberTypeImpl<AtomicLong> ATOMIC_LONG = new NumberTypeImpl<AtomicLong>(4, null, null) {
 
     /**
      * {@inheritDoc}
@@ -107,10 +107,29 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
       return new AtomicLong(Long.parseLong(number));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AtomicLong getMinimumValue() {
+
+      return new AtomicLong(Long.MIN_VALUE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AtomicLong getMaximumValue() {
+
+      return new AtomicLong(Long.MAX_VALUE);
+    }
+
   };
 
   /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
-  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3) {
+  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null,
+      null) {
 
     /**
      * {@inheritDoc}
@@ -146,6 +165,24 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
     protected AtomicInteger parse(String number) throws NumberFormatException {
 
       return new AtomicInteger(Integer.parseInt(number));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AtomicInteger getMinimumValue() {
+
+      return new AtomicInteger(Integer.MIN_VALUE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AtomicInteger getMaximumValue() {
+
+      return new AtomicInteger(Integer.MAX_VALUE);
     }
 
   };

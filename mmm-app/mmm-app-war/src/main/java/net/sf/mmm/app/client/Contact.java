@@ -4,6 +4,9 @@ package net.sf.mmm.app.client;
 
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 
 import net.sf.mmm.util.pojo.api.Pojo;
@@ -27,6 +30,12 @@ public interface Contact extends TransferObject, Pojo {
 
   /** {@link TypedProperty} for {@link #getBirthday()}. */
   TypedProperty<String> PROPERTY_BIRTHDAY = new TypedProperty<String>("birthday");
+
+  /** {@link TypedProperty} for {@link #getShoeSize()}. */
+  TypedProperty<Integer> PROPERTY_SHOE_SIZE = new TypedProperty<Integer>("shoeSize");
+
+  /** {@link TypedProperty} for {@link #getIncome()}. */
+  TypedProperty<Double> PROPERTY_INCOME = new TypedProperty<Double>("income");
 
   /**
    * @return the firstName
@@ -60,5 +69,28 @@ public interface Contact extends TransferObject, Pojo {
    * @param birthday is the birthday to set
    */
   void setBirthday(Date birthday);
+
+  /**
+   * @return the shoe size.
+   */
+  @Min(value = 19)
+  @Max(value = 52)
+  int getShoeSize();
+
+  /**
+   * @param size is the new shoe size.
+   */
+  void setShoeSize(int size);
+
+  /**
+   * @return the income in EUR.
+   */
+  @DecimalMin(value = "0")
+  double getIncome();
+
+  /**
+   * @param income is the new income.
+   */
+  void setIncome(double income);
 
 }

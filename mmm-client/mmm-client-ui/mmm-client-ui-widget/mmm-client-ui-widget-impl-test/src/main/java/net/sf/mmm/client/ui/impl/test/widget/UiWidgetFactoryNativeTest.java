@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetComboBoxTest;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetDateFieldTest;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetDoubleFieldTest;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerFieldTest;
-import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerRangeFieldTest;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerSliderFieldTest;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLongFieldTest;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetPasswordFieldTest;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRadioButtonsTest;
@@ -76,7 +76,7 @@ public class UiWidgetFactoryNativeTest extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetRichTextFieldTest.Factory());
     register(new UiWidgetLongFieldTest.Factory());
     register(new UiWidgetIntegerFieldTest.Factory());
-    register(new UiWidgetIntegerRangeFieldTest.Factory());
+    register(new UiWidgetIntegerSliderFieldTest.Factory());
     register(new UiWidgetDoubleFieldTest.Factory());
     register(new UiWidgetDateFieldTest.Factory());
     register(new UiWidgetRadioButtonsTest.Factory());

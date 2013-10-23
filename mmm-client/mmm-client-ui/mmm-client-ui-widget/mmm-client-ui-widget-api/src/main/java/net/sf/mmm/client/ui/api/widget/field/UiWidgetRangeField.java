@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.field;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumValue;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteMinimumValue;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteMaximumValue;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteMinimumValue;
 
 /**
  * This is the abstract interface for a {@link UiWidgetField field widget} that represents a range field. Such

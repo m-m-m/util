@@ -2,23 +2,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLongField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LongSpinBox;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerSliderField;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.IntegerRangeBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT
- * based on {@link LongSpinBox}.
+ * based on {@link IntegerRangeBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtLongField extends UiWidgetAdapterGwtNumberField<LongSpinBox, Long> implements
-    UiWidgetAdapterLongField {
+public class UiWidgetAdapterGwtIntegerSliderField extends UiWidgetAdapterGwtNumberField<IntegerRangeBox, Integer>
+    implements UiWidgetAdapterIntegerSliderField {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtLongField() {
+  public UiWidgetAdapterGwtIntegerSliderField() {
 
     super();
   }
@@ -27,9 +27,9 @@ public class UiWidgetAdapterGwtLongField extends UiWidgetAdapterGwtNumberField<L
    * {@inheritDoc}
    */
   @Override
-  protected LongSpinBox createActiveWidget() {
+  protected IntegerRangeBox createActiveWidget() {
 
-    return new LongSpinBox();
+    return new IntegerRangeBox();
   }
 
 }

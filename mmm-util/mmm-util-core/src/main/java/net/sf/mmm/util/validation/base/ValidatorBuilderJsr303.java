@@ -14,7 +14,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ValidatorBuilderJsr303 implements ValidatorBuilder {
+public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
 
   /** @see #newValidator(Class, String) */
   private final Validator validator;
@@ -80,17 +80,17 @@ public class ValidatorBuilderJsr303 implements ValidatorBuilder {
    */
   @Override
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public AbstractValidator<?> newValidator(Class<?> pojoType, String property) {
+  public AbstractValidator<?> newValidator(Class<?> pojoType, String property, Class<?> propertyType) {
 
-    return new ValidatorJsr303(this.validator, pojoType, property, this.groups);
+    return new ValidatorJsr303(this.validator, pojoType, property, propertyType, this.groups);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property) {
+  public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property, Class<T> propertyType) {
 
-    return new ValidatorJsr303<T>(this.validator, pojoType, property.getPojoPath(), this.groups);
+    return new ValidatorJsr303<T>(this.validator, pojoType, property.getPojoPath(), propertyType, this.groups);
   }
 }

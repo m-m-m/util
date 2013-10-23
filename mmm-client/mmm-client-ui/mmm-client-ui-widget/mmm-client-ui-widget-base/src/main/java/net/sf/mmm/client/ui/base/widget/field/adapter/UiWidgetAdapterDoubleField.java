@@ -9,7 +9,7 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterDoubleField extends UiWidgetAdapterTextualInputField<Double, Double> {
+public interface UiWidgetAdapterDoubleField extends UiWidgetAdapterNumberField<Double> {
 
   // nothing to add
 

@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
@@ -45,12 +43,12 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
   }
 
   /**
-   * This method performs the validation in case <code>null</code> was provided as value. By default
-   * <code>null</code> should be considered as a legal value. Only for validators such as
-   * {@link ValidatorMandatory} this method should be overridden.
+   * This method performs the validation in case <code>null</code> was provided as value. By default <code>null</code>
+   * should be considered as a legal value. Only for validators such as {@link ValidatorMandatory} this method should be
+   * overridden.
    * 
-   * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the
-   *         <code>null</code>-value is valid.
+   * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the <code>null</code>
+   *         -value is valid.
    */
   protected NlsMessage validateNull() {
 
@@ -58,9 +56,9 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
   }
 
   /**
-   * This method performs the validation in case <code>value</code> is NOT <code>null</code>. This method
-   * contains the actual custom logic for the validation. It is therefore designed in a way that makes it most
-   * simple to implement custom validators.<br/>
+   * This method performs the validation in case <code>value</code> is NOT <code>null</code>. This method contains the
+   * actual custom logic for the validation. It is therefore designed in a way that makes it most simple to implement
+   * custom validators.<br/>
    * <b>ATTENTION:</b><br/>
    * For internationalization you should not directly return string literals but use
    * {@link net.sf.mmm.util.nls.api.NlsMessage} instead.
@@ -70,20 +68,5 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
    *         <code>value</code> is valid.
    */
   protected abstract NlsMessage validateNotNull(V value);
-
-  /**
-   * This is a convenience method delegating to
-   * {@link net.sf.mmm.util.nls.api.NlsBundleFactory#createBundle(Class)}.
-   * 
-   * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
-   * @param bundleInterface the interface of the requested {@link NlsBundle}. Has to be a sub-interface of
-   *        {@link NlsBundle} with according methods.
-   * @return an instance of the requested {@link NlsBundle} interface.
-   * @since 3.1.0
-   */
-  protected <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
-
-    return NlsAccess.getBundleFactory().createBundle(bundleInterface);
-  }
 
 }

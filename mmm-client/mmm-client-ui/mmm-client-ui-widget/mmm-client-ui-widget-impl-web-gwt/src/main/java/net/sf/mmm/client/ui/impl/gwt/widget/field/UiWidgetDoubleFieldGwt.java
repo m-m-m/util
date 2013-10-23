@@ -9,8 +9,7 @@ import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetDoubleField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoubleField;
 
 /**
- * This is the implementation of {@link UiWidgetDoubleField} using GWT based on
- * {@link UiWidgetAdapterGwtDoubleField}.
+ * This is the implementation of {@link UiWidgetDoubleField} using GWT based on {@link UiWidgetAdapterGwtDoubleField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

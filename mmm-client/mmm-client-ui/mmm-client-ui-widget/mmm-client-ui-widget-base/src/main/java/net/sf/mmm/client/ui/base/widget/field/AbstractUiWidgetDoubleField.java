@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDoubleField
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetDoubleField<ADAPTER extends UiWidgetAdapterDoubleField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, Double, Double> implements UiWidgetDoubleField {
+    AbstractUiWidgetNumberField<ADAPTER, Double> implements UiWidgetDoubleField {
 
   /**
    * The constructor.

@@ -9,6 +9,7 @@
  * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class) create} arbitrary
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}s. Use {@link net.sf.mmm.client.ui.api.UiContext}
  * to get access.<br/>
+ * <img src="{@docRoot}/doc-files/widgets.png"/>
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
  */
 package net.sf.mmm.client.ui.api.widget;

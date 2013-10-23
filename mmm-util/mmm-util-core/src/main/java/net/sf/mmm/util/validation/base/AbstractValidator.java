@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
 
@@ -28,9 +30,9 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
    * {@link ValueValidator}.<br/>
    * <b>ATTENTION:</b><br/>
    * This default implementation returns the {@link Class#getSimpleName() classname} of the actual
-   * {@link ValueValidator} implementation. This strategy is chosen for simplicity when implementing a new
-   * validator. To ensure stable codes override this method and return a string constant. This shall at least
-   * be done when the name of the class is changed.
+   * {@link ValueValidator} implementation. This strategy is chosen for simplicity when implementing a new validator. To
+   * ensure stable codes override this method and return a string constant. This shall at least be done when the name of
+   * the class is changed.
    * 
    * @return the {@link ValidationFailure#getCode() code}.
    */
@@ -49,9 +51,9 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   }
 
   /**
-   * This method determines if this {@link ValueValidator} is <em>dynamic</em>. Here dynamic means that the
-   * validation of the same input may not always return the same validation result (e.g. it holds references
-   * to instances that have dynamic impact on the validation).
+   * This method determines if this {@link ValueValidator} is <em>dynamic</em>. Here dynamic means that the validation
+   * of the same input may not always return the same validation result (e.g. it holds references to instances that have
+   * dynamic impact on the validation).
    * 
    * @return <code>true</code> if this {@link ValueValidator} is dynamic, <code>false</code> otherwise.
    */
@@ -61,12 +63,26 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   }
 
   /**
-   * @return <code>true</code> if this is a validator for mandatory fields (that will not accept
-   *         <code>null</code> or empty values), <code>false</code> otherwise.
+   * @return <code>true</code> if this is a validator for mandatory fields (that will not accept <code>null</code> or
+   *         empty values), <code>false</code> otherwise.
    */
   public boolean isMandatory() {
 
     return false;
+  }
+
+  /**
+   * This is a convenience method delegating to {@link net.sf.mmm.util.nls.api.NlsBundleFactory#createBundle(Class)}.
+   * 
+   * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
+   * @param bundleInterface the interface of the requested {@link NlsBundle}. Has to be a sub-interface of
+   *        {@link NlsBundle} with according methods.
+   * @return an instance of the requested {@link NlsBundle} interface.
+   * @since 3.1.0
+   */
+  protected <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
+
+    return NlsAccess.getBundleFactory().createBundle(bundleInterface);
   }
 
 }

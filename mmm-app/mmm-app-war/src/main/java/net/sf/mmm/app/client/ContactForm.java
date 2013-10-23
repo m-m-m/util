@@ -30,15 +30,22 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     super(context, ContactBean.class);
     UiDataBinding<ContactBean> dataBinding = getDataBinding();
     getDelegate().setColumnCount(2);
-    UiWidgetWithValue<String> createAndBind = dataBinding.createAndBind(ContactBean.PROPERTY_FIRST_NAME);
+    UiWidgetWithValue<String> createAndBind = dataBinding.createAndBind(Contact.PROPERTY_FIRST_NAME);
     getDelegate().addChildren(createAndBind);
-    getDelegate().addChildren(dataBinding.createAndBind(ContactBean.PROPERTY_LAST_NAME));
+    getDelegate().addChildren(dataBinding.createAndBind(Contact.PROPERTY_LAST_NAME));
     UiWidgetCollapsableSection section = getFactory().create(UiWidgetCollapsableSection.class);
     section.setLabel("Optionals");
     // section = getFactory().createSection("Optionals");
     getDelegate().addChildSpanned(section);
+
     UiWidgetWithValue<String> widgetBirthday = dataBinding.createAndBind(Contact.PROPERTY_BIRTHDAY);
     getDelegate().addChildren(widgetBirthday);
+
+    UiWidgetWithValue<Integer> widgetShoeSize = dataBinding.createAndBind(Contact.PROPERTY_SHOE_SIZE);
+    getDelegate().addChildren(widgetShoeSize);
+
+    UiWidgetWithValue<Double> widgetIncome = dataBinding.createAndBind(Contact.PROPERTY_INCOME);
+    getDelegate().addChildren(widgetIncome);
 
     UiWidgetRichTextField richTextField = context.getWidgetFactory().create(UiWidgetRichTextField.class);
     richTextField.setFieldLabel("RichText");

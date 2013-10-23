@@ -2,14 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeReadMaximumValue;
-import net.sf.mmm.client.ui.api.attribute.AttributeReadMinimumValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HorizontalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadMaximumValue;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasChangeHandlers;

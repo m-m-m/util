@@ -684,7 +684,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @Override
     public void setTooltip(String tooltip) {
 
-      setTitle(tooltip);
+      super.setTitle(tooltip);
     }
 
     /**

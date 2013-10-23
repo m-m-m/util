@@ -3,17 +3,16 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDoubleField;
-
-import com.google.gwt.user.client.ui.DoubleBox;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DoubleSpinBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
- * using GWT based on {@link DoubleBox}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT
+ * based on {@link DoubleSpinBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtDoubleField extends UiWidgetAdapterGwtFieldValueBox<DoubleBox, Double, Double> implements
+public class UiWidgetAdapterGwtDoubleField extends UiWidgetAdapterGwtNumberField<DoubleSpinBox, Double> implements
     UiWidgetAdapterDoubleField {
 
   /**
@@ -28,9 +27,9 @@ public class UiWidgetAdapterGwtDoubleField extends UiWidgetAdapterGwtFieldValueB
    * {@inheritDoc}
    */
   @Override
-  protected DoubleBox createActiveWidget() {
+  protected DoubleSpinBox createActiveWidget() {
 
-    return new DoubleBox();
+    return new DoubleSpinBox();
   }
 
 }

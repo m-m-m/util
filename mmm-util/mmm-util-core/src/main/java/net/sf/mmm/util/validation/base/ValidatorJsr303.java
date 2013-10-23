@@ -2,12 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
+import javax.validation.metadata.BeanDescriptor;
+import javax.validation.metadata.ConstraintDescriptor;
+import javax.validation.metadata.PropertyDescriptor;
 
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
@@ -30,6 +37,9 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /** @see #validate(Object, Object) */
   private final String property;
+
+  /** @see #validate(Object, Object) */
+  private final Class<?> propertyType;
 
   /** @see #validate(Object, Object) */
   private final Class<?>[] groups;
@@ -57,7 +67,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    */
   public ValidatorJsr303(Validator validator, Class<V> pojoType, Class<?>... groups) {
 
-    this(validator, pojoType, null, groups);
+    this(validator, pojoType, null, null, groups);
   }
 
   /**
@@ -69,7 +79,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    */
   public ValidatorJsr303(Validator validator, Class<?> pojoType, String property) {
 
-    this(validator, pojoType, property, Default.class);
+    this(validator, pojoType, property, null);
   }
 
   /**
@@ -78,17 +88,36 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    * @param validator is the {@link Validator} instance.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param property is the property to validate or <code>null</code> to validate the entire object.
+   * @param propertyType is the {@link #getPropertyType() property type}.
+   */
+  public ValidatorJsr303(Validator validator, Class<?> pojoType, String property, Class<?> propertyType) {
+
+    this(validator, pojoType, property, propertyType, Default.class);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param validator is the {@link Validator} instance.
+   * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
+   * @param property is the property to validate or <code>null</code> to validate the entire object.
+   * @param propertyType is the {@link #getPropertyType() property type}.
    * @param groups are the {@link Validator#validate(Object, Class...) groups to use for validation}.
    */
-  public ValidatorJsr303(Validator validator, Class<?> pojoType, String property, Class<?>... groups) {
+  public ValidatorJsr303(Validator validator, Class<?> pojoType, String property, Class<?> propertyType,
+      Class<?>... groups) {
 
     super();
     NlsNullPointerException.checkNotNull(Validator.class, validator);
     NlsNullPointerException.checkNotNull("pojoType", pojoType);
     NlsNullPointerException.checkNotNull("groups", groups);
+    if ((property == null) && (propertyType != null)) {
+      throw new NlsIllegalArgumentException(propertyType, "propertyType (property=null)");
+    }
     this.validator = validator;
     this.pojoType = pojoType;
     this.property = property;
+    this.propertyType = propertyType;
     this.groups = groups;
     this.mandatory = calculateMandatoryFlag();
   }
@@ -109,10 +138,24 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
     // This is quite a stupid way to figure this out...
     if (this.property != null) {
-      Set<ConstraintViolation<?>> violationSet = validateJsr303(null);
-      if (!violationSet.isEmpty()) {
+      if ((this.propertyType != null) && this.propertyType.isPrimitive()) {
         return true;
       }
+      BeanDescriptor beanDescriptor = this.validator.getConstraintsForClass(this.pojoType);
+      PropertyDescriptor propertyDescriptor = beanDescriptor.getConstraintsForProperty(this.property);
+      Set<ConstraintDescriptor<?>> constraintDescriptors = propertyDescriptor.getConstraintDescriptors();
+      for (ConstraintDescriptor<?> descriptor : constraintDescriptors) {
+        Class<? extends Annotation> annotationType = descriptor.getAnnotation().annotationType();
+        if (Mandatory.class == annotationType) {
+          return true;
+        } else if (NotNull.class == annotationType) {
+          return true;
+        }
+      }
+      // Set<ConstraintViolation<?>> violationSet = validateJsr303(null);
+      // if (!violationSet.isEmpty()) {
+      // return true;
+      // }
     }
     return false;
   }
@@ -123,6 +166,10 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   @Override
   public ValidationFailure validate(V value, Object valueSource) {
 
+    if ((value == null) && (this.propertyType != null) && this.propertyType.isPrimitive()) {
+      return new ValidationFailureImpl(Mandatory.class.getSimpleName(), valueSource, createBundle(
+          NlsBundleUtilCoreRoot.class).errorMandatory());
+    }
     Set<ConstraintViolation<?>> violationSet = validateJsr303(value);
     int size = violationSet.size();
     if (size == 1) {
@@ -143,8 +190,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    * Validates the given <code>value</code>.
    * 
    * @param value is the value to validate.
-   * @return the {@link Set} of {@link ConstraintViolation}s. Will be empty if the given <code>value</code> is
-   *         valid.
+   * @return the {@link Set} of {@link ConstraintViolation}s. Will be empty if the given <code>value</code> is valid.
    */
   private Set<ConstraintViolation<?>> validateJsr303(V value) {
 
@@ -189,5 +235,33 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
       buffer.append(this.property);
     }
     return buffer.toString();
+  }
+
+  /**
+   * @return the {@link Class} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
+   */
+  public Class<?> getPojoType() {
+
+    return this.pojoType;
+  }
+
+  /**
+   * @return the name of the property to validate or <code>null</code> to validate the entire {@link #getPojoType()
+   *         POJO}.
+   */
+  public String getProperty() {
+
+    return this.property;
+  }
+
+  /**
+   * @return the {@link Class} reflecting the type of the {@link #getProperty() property} to validate or
+   *         <code>null</code> if undefined. May be used for additional support currently missing in JSR 303 such as
+   *         primitive types that are implicitly mandatory but implementations of JSR 303 cause
+   *         {@link NullPointerException} or similar effects on property validation.
+   */
+  public Class<?> getPropertyType() {
+
+    return this.propertyType;
   }
 }

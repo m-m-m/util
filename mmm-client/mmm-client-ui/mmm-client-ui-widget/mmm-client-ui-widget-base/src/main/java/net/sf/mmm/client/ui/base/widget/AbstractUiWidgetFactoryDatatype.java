@@ -18,6 +18,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
@@ -29,10 +30,12 @@ import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
+import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetFactoryDatatype}. It already contains the
- * implementations for the {@link #registerStandardDatatypes() standard datatypes}.
+ * This is the abstract base implementation of {@link UiWidgetFactoryDatatype}. It already contains the implementations
+ * for the {@link #registerStandardDatatypes() standard datatypes}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -46,6 +49,9 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   /** @see #getContext() */
   private UiContext context;
 
+  /** @see #getReflectionUtil() */
+  private ReflectionUtilLimited reflectionUtil;
+
   /**
    * The constructor.
    */
@@ -56,26 +62,58 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
+   * @return the instance of {@link ReflectionUtilLimited}.
+   */
+  protected ReflectionUtilLimited getReflectionUtil() {
+
+    return this.reflectionUtil;
+  }
+
+  /**
+   * @param reflectionUtil is the instance of {@link ReflectionUtilLimited} to {@link Inject}.
+   */
+  @Inject
+  public void setReflectionUtil(ReflectionUtilLimited reflectionUtil) {
+
+    this.reflectionUtil = reflectionUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.reflectionUtil == null) {
+      ReflectionUtilLimitedImpl impl = new ReflectionUtilLimitedImpl();
+      impl.initialize();
+      this.reflectionUtil = impl;
+    }
+  }
+
+  /**
    * This method registers the given {@link UiSingleWidgetFactoryDatatype} as sub-context of this context.
    * 
    * @param subFactory is the {@link UiSingleWidgetFactoryDatatype} to register.
    */
   protected void register(UiSingleWidgetFactoryDatatype<?> subFactory) {
 
-    UiSingleWidgetFactoryDatatype<?> oldFactory = this.datatype2subFactoryMap.put(subFactory.getDatatype(), subFactory);
+    UiSingleWidgetFactoryDatatype<?> oldFactory = this.datatype2subFactoryMap.put(subFactory.getDatatype(),
+        subFactory);
     if (oldFactory != null) {
       throw new DuplicateObjectException(subFactory, subFactory.getDatatype(), oldFactory);
     }
   }
 
   /**
-   * This method {@link #register(UiSingleWidgetFactoryDatatype) registers} the
-   * {@link UiWidgetFactoryDatatype} instances for the java standard datatypes ({@link String}, {@link Long},
-   * etc.).
+   * This method {@link #register(UiSingleWidgetFactoryDatatype) registers} the {@link UiWidgetFactoryDatatype}
+   * instances for the java standard datatypes ({@link String}, {@link Long}, etc.).
    */
   protected void registerStandardDatatypes() {
 
     register(new UiSingleWidgetFactoryDatatypeString());
+    register(new UiSingleWidgetFactoryDatatypeInteger());
     register(new UiSingleWidgetFactoryDatatypeLong());
     register(new UiSingleWidgetFactoryDatatypeDouble());
     register(new UiSingleWidgetFactoryDatatypeBoolean());
@@ -88,10 +126,16 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   @Override
   public <VALUE> UiWidgetField<VALUE> createForDatatype(Class<VALUE> datatype) {
 
+    Class<?> type;
+    if (datatype.isPrimitive()) {
+      type = this.reflectionUtil.getNonPrimitiveType(datatype);
+    } else {
+      type = datatype;
+    }
     UiSingleWidgetFactoryDatatype<VALUE> subFactory = (UiSingleWidgetFactoryDatatype<VALUE>) this.datatype2subFactoryMap
-        .get(datatype);
+        .get(type);
     if (subFactory == null) {
-      throw new ObjectNotFoundException(UiSingleWidgetFactoryDatatype.class, datatype);
+      throw new ObjectNotFoundException(UiSingleWidgetFactoryDatatype.class, type);
     }
     UiWidgetField<VALUE> widget = subFactory.create(this.context);
     NlsNullPointerException.checkNotNull(UiWidget.class, widget);
@@ -126,8 +170,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
-   * {@link String}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link String}.
    */
   public static class UiSingleWidgetFactoryDatatypeString extends AbstractUiSingleWidgetFactoryDatatype<String> {
 
@@ -150,8 +193,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
-   * {@link Long}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeLong extends AbstractUiSingleWidgetFactoryDatatype<Long> {
 
@@ -174,8 +216,30 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
-   * {@link Double}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Integer}.
+   */
+  public static class UiSingleWidgetFactoryDatatypeInteger extends AbstractUiSingleWidgetFactoryDatatype<Integer> {
+
+    /**
+     * The constructor.
+     */
+    public UiSingleWidgetFactoryDatatypeInteger() {
+
+      super(Integer.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiWidgetField<Integer> create(UiContext context) {
+
+      return context.getWidgetFactory().create(UiWidgetIntegerField.class);
+    }
+  }
+
+  /**
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Double}.
    */
   public static class UiSingleWidgetFactoryDatatypeDouble extends AbstractUiSingleWidgetFactoryDatatype<Double> {
 
@@ -198,8 +262,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
-   * {@link Long}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeBoolean extends AbstractUiSingleWidgetFactoryDatatype<Boolean> {
 
@@ -225,8 +288,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
-   * {@link Long}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeDate extends AbstractUiSingleWidgetFactoryDatatype<Date> {
 
@@ -250,8 +312,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype context} for {@link Enum}
-   * datatypes.
+   * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype context} for {@link Enum} datatypes.
    * 
    * @param <E> is the generic type of the {@link Enum}.
    */

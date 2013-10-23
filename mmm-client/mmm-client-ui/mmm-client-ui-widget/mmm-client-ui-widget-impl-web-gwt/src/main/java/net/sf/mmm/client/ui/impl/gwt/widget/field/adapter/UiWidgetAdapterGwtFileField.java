@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterFileField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 import net.sf.mmm.util.io.api.FileItem;
 
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -23,7 +22,7 @@ import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterRichTextField} using GWT based on {@link RichTextArea}.
+ * This is the implementation of {@link UiWidgetAdapterFileField} using GWT based on {@link FileUpload}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -85,8 +84,8 @@ public class UiWidgetAdapterGwtFileField extends UiWidgetAdapterGwtField<FileUpl
   @Override
   public FileItem getValue() {
 
-    String filename = getActiveWidget().getFilename();
-
+    // String filename = getActiveWidget().getFilename();
+    // JavaScriptUtil.getInstance().getBlobUrl(getActiveWidget().getElement());
     return null;
   }
 

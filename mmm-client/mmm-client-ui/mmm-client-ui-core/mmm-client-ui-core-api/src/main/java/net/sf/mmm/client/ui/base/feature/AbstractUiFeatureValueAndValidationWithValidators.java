@@ -71,8 +71,7 @@ public abstract class AbstractUiFeatureValueAndValidationWithValidators<VALUE> e
    * Determines the given <code>validator</code> is mandatory.
    * 
    * @param validator the given {@link ValueValidator}.
-   * @return <code>true</code> if the given <code>validator</code> is {@link AbstractValidator#isMandatory()
-   *         mandatory}.
+   * @return <code>true</code> if the given <code>validator</code> is {@link AbstractValidator#isMandatory() mandatory}.
    */
   protected boolean isMandatory(ValueValidator<?> validator) {
 
@@ -113,13 +112,13 @@ public abstract class AbstractUiFeatureValueAndValidationWithValidators<VALUE> e
 
   /**
    * This method performs the actual validation using the
-   * {@link #addValidator(net.sf.mmm.util.validation.api.ValueValidator) registered} validators. It is
-   * (indirectly) called from {@link #validate(ValidationState)}.
+   * {@link #addValidator(net.sf.mmm.util.validation.api.ValueValidator) registered} validators. It is (indirectly)
+   * called from {@link #validate(ValidationState)}.
    * 
    * @param state is the {@link ValidationState}. Must NOT be <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
-   * @return <code>true</code> if the validation was successful, <code>false</code> otherwise (if there are
-   *         validation failures).
+   * @return <code>true</code> if the validation was successful, <code>false</code> otherwise (if there are validation
+   *         failures).
    */
   public final boolean doValidate(ValidationState state, VALUE value) {
 

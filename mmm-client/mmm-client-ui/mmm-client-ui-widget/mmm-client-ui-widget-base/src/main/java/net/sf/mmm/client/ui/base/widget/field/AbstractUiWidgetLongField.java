@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLongField;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetLongField<ADAPTER extends UiWidgetAdapterLongField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, Long, Long> implements UiWidgetLongField {
+    AbstractUiWidgetNumberField<ADAPTER, Long> implements UiWidgetLongField {
 
   /**
    * The constructor.

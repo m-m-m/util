@@ -2,10 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.binding;
 
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 import javax.validation.Validator;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.metadata.ConstraintDescriptor;
+import javax.validation.metadata.PropertyDescriptor;
 
+import net.sf.mmm.util.math.api.MathUtilLimited;
+import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
@@ -18,6 +27,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.validation.base.ValidatorJsr303;
+import net.sf.mmm.util.value.api.Range;
 
 /**
  * This is the default implementation of {@link UiDataBindingAdapter} based on {@link PojoDescriptor}.
@@ -41,6 +51,9 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
   /** The {@link Validator} instance. */
   private final Validator validator;
 
+  /** @see #getMathUtil() */
+  private final MathUtilLimited mathUtil;
+
   /**
    * The constructor.
    * 
@@ -48,15 +61,25 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
    * @param descriptorBuilderFactory is the {@link PojoDescriptorBuilderFactory} instance.
    * @param datatypeDetector is the {@link DatatypeDetector} instance.
    * @param validator is the {@link Validator} instance.
+   * @param mathUtil is the {@link MathUtilLimited} instance.
    */
   public UiDataBindingAdapterImpl(Class<VALUE> type, PojoDescriptorBuilderFactory descriptorBuilderFactory,
-      DatatypeDetector datatypeDetector, Validator validator) {
+      DatatypeDetector datatypeDetector, Validator validator, MathUtilLimited mathUtil) {
 
     super();
     this.descriptorBuilder = descriptorBuilderFactory.createPublicMethodDescriptorBuilder();
     this.descriptor = this.descriptorBuilder.getDescriptor(type);
     this.datatypeDetector = datatypeDetector;
     this.validator = validator;
+    this.mathUtil = mathUtil;
+  }
+
+  /**
+   * @return the mathUtil
+   */
+  protected MathUtilLimited getMathUtil() {
+
+    return this.mathUtil;
   }
 
   /**
@@ -124,9 +147,59 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
    * {@inheritDoc}
    */
   @Override
-  public <T> ValueValidator<T> getPropertyValidator(TypedProperty<T> property) {
+  public <T> ValueValidator<T> getPropertyValidator(TypedProperty<T> property, Class<T> propertyType) {
 
-    return new ValidatorJsr303<T>(this.validator, this.descriptor.getPojoClass(), property.getSegment());
+    return new ValidatorJsr303<T>(this.validator, this.descriptor.getPojoClass(), property.getSegment(),
+        propertyType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public <T> Range<?> getRangeConstraints(TypedProperty<T> property, Class<T> propertyType) {
+
+    PropertyDescriptor propertyDescriptor = this.validator.getConstraintsForClass(this.descriptor.getPojoClass())
+        .getConstraintsForProperty(property.getSegment());
+
+    NumberType<?> numberType = this.mathUtil.getNumberType(propertyType);
+    Object minimum = null;
+    Object maximum = null;
+    for (ConstraintDescriptor<?> constraint : propertyDescriptor.getConstraintDescriptors()) {
+      Annotation annotation = constraint.getAnnotation();
+      Class<? extends Annotation> annotationType = annotation.annotationType();
+      if (Min.class == annotationType) {
+        Min min = (Min) annotation;
+        if (propertyType == Long.class) {
+          minimum = numberType.valueOf(Long.valueOf(min.value()), false);
+          // if (maximum == null) {
+          // maximum = numberType.getMaximumValue();
+          // }
+        }
+      } else if (Max.class == annotationType) {
+        Max max = (Max) annotation;
+        maximum = numberType.valueOf(Long.valueOf(max.value()), false);
+        // if (minimum == null) {
+        // minimum = numberType.getMinimumValue();
+        // }
+      } else if (DecimalMin.class == annotationType) {
+        DecimalMin min = (DecimalMin) annotation;
+        minimum = numberType.valueOf(min.value());
+        // if (maximum == null) {
+        // maximum = numberType.getMaximumValue();
+        // }
+      } else if (DecimalMax.class == annotationType) {
+        DecimalMin max = (DecimalMin) annotation;
+        maximum = numberType.valueOf(max.value());
+        // if (minimum == null) {
+        // minimum = numberType.getMinimumValue();
+        // }
+      }
+    }
+    if ((minimum != null) || (maximum != null)) {
+      return new Range((Comparable) minimum, (Comparable) maximum);
+    }
+    return null;
   }
 
   /**
@@ -164,6 +237,10 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
   @Override
   public <T> void setPropertyValue(VALUE pojo, TypedProperty<T> property, T propertyValue) {
 
+    if ((propertyValue == null) && getPropertyType(property).isPrimitive()) {
+      // TODO hohwille Doing nothing is also wrong null might actually mean 0 or what to do here?
+      return;
+    }
     this.descriptor.setProperty(pojo, property, propertyValue);
   }
 

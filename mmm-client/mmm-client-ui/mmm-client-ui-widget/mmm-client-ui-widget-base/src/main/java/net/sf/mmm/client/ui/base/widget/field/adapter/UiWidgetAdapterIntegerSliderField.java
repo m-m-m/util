@@ -4,12 +4,12 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerRangeField}.
+ * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerSliderField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterIntegerRangeField extends UiWidgetAdapterRangeField<Integer> {
+public interface UiWidgetAdapterIntegerSliderField extends UiWidgetAdapterRangeField<Integer> {
 
   // nothing to add
 

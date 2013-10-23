@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerFiel
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetIntegerField<ADAPTER extends UiWidgetAdapterIntegerField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, Integer, Integer> implements UiWidgetIntegerField {
+    AbstractUiWidgetNumberField<ADAPTER, Integer> implements UiWidgetIntegerField {
 
   /**
    * The constructor.

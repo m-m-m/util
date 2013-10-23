@@ -4,12 +4,15 @@ package net.sf.mmm.client.ui.base.binding;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
 import net.sf.mmm.client.ui.base.AbstractUiContextImpl;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
+import net.sf.mmm.util.math.api.MathUtilLimited;
+import net.sf.mmm.util.math.base.MathUtilLimitedImpl;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 
 /**
@@ -22,6 +25,9 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
 
   /** @see #getValidator() */
   private Validator validator;
+
+  /** @see #getMathUtil() */
+  private MathUtilLimited mathUtil;
 
   /**
    * The constructor.
@@ -52,6 +58,38 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
   }
 
   /**
+   * @return the instance of {@link MathUtilLimited}.
+   */
+  protected MathUtilLimited getMathUtil() {
+
+    return this.mathUtil;
+  }
+
+  /**
+   * @param mathUtil is the instance of {@link MathUtilLimited} to {@link Inject}.
+   */
+  @Inject
+  public void setMathUtil(MathUtilLimited mathUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.mathUtil = mathUtil;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.mathUtil == null) {
+      MathUtilLimitedImpl impl = new MathUtilLimitedImpl();
+      impl.initialize();
+      this.mathUtil = impl;
+    }
+  }
+
+  /**
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
@@ -73,12 +111,11 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
     PojoDescriptorBuilderFactory descriptorBuilderFactory = context.getContainer().get(
         PojoDescriptorBuilderFactory.class);
     UiDataBindingAdapter<VALUE> adapter = new UiDataBindingAdapterImpl<VALUE>(valueType, descriptorBuilderFactory,
-        datatypeDetector, getValidator());
+        datatypeDetector, getValidator(), this.mathUtil);
     if (widget instanceof UiWidgetCustomComposite) {
       return new UiDataBindingPojoComposite<VALUE>(widget, adapter);
     } else {
       return new UiDataBindingPojo<VALUE>(widget, adapter);
     }
   }
-
 }

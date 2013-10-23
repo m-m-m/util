@@ -3,16 +3,15 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerField;
-
-import com.google.gwt.user.client.ui.IntegerBox;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.IntegerSpinBox;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterIntegerField} using GWT based on {@link IntegerBox}.
+ * This is the implementation of {@link UiWidgetAdapterIntegerField} using GWT based on {@link IntegerSpinBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtIntegerField extends UiWidgetAdapterGwtFieldValueBox<IntegerBox, Integer, Integer>
+public class UiWidgetAdapterGwtIntegerField extends UiWidgetAdapterGwtNumberField<IntegerSpinBox, Integer>
     implements UiWidgetAdapterIntegerField {
 
   /**
@@ -27,9 +26,9 @@ public class UiWidgetAdapterGwtIntegerField extends UiWidgetAdapterGwtFieldValue
    * {@inheritDoc}
    */
   @Override
-  protected IntegerBox createActiveWidget() {
+  protected IntegerSpinBox createActiveWidget() {
 
-    return new IntegerBox();
+    return new IntegerSpinBox();
   }
 
 }
