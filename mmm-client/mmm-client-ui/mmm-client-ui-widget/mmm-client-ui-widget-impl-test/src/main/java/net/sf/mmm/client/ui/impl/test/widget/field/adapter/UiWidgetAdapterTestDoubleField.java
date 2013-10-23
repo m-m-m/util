@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDoubleField
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterTestDoubleField extends UiWidgetAdapterTestField<Double, Double> implements
+public class UiWidgetAdapterTestDoubleField extends UiWidgetAdapterTestNumberField<Double> implements
     UiWidgetAdapterDoubleField {
 
   /**

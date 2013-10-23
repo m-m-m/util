@@ -143,6 +143,10 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
       }
       BeanDescriptor beanDescriptor = this.validator.getConstraintsForClass(this.pojoType);
       PropertyDescriptor propertyDescriptor = beanDescriptor.getConstraintsForProperty(this.property);
+      if (propertyDescriptor == null) {
+        // not annotated
+        return false;
+      }
       Set<ConstraintDescriptor<?>> constraintDescriptors = propertyDescriptor.getConstraintDescriptors();
       for (ConstraintDescriptor<?> descriptor : constraintDescriptors) {
         Class<? extends Annotation> annotationType = descriptor.getAnnotation().annotationType();

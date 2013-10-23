@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 /**
  * This is the implementation of {@link UiWidgetAdapterField} for testing without a native toolkit.
  * 
- * @param <VALUE> is the generic type of the changed value.
+ * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <ADAPTER_VALUE> is the generic type of the {@link #getValue() value} of the adapted
  *        {@link #getToplevelWidget() widget}.
  * 

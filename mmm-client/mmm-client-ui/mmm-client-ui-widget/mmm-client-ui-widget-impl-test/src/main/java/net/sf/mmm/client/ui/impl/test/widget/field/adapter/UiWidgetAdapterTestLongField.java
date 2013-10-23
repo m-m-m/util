@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLongField;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterTestLongField extends UiWidgetAdapterTestField<Long, Long> implements
+public class UiWidgetAdapterTestLongField extends UiWidgetAdapterTestNumberField<Long> implements
     UiWidgetAdapterLongField {
 
   /**
