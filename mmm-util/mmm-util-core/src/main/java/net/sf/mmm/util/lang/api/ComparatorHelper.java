@@ -7,8 +7,8 @@ import java.util.Calendar;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * This class contains the implementation of {@link Comparator#eval(Object, Object)} for {@link Comparable}
- * arguments. This allows the implementation to be replaced with a GWT compatible one.
+ * This class contains the implementation of {@link Comparator#eval(Object, Object)} for {@link Comparable} arguments.
+ * This allows the implementation to be replaced with a GWT compatible one.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -29,8 +29,7 @@ final class ComparatorHelper {
    * 
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
-   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type
-   *         is known.
+   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type is known.
    */
   static Object convert(Object object, Class<?> otherType) {
 
@@ -60,7 +59,12 @@ final class ComparatorHelper {
     if (type1.equals(type2) || type1.isAssignableFrom(type2)) {
       delta = arg1.compareTo(arg2);
     } else if (type2.isAssignableFrom(type1)) {
-      delta = -arg2.compareTo(arg1);
+      int compareTo = arg2.compareTo(arg1);
+      if (compareTo == Integer.MIN_VALUE) {
+        delta = Integer.MAX_VALUE;
+      } else {
+        delta = -compareTo;
+      }
     } else {
       // incompatible comparables
       return (arg1.equals(arg2) == comparator.isTrueIfEquals());

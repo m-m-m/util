@@ -25,9 +25,8 @@ import org.apache.poi.hssf.record.TextObjectRecord;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary
- * MS-Excel documents.
+ * This is the implementation of the {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary MS-Excel
+ * documents.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -90,7 +89,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
     // the only possibility would be to create the string buffer in the listener
     // from the size of the SSTRecord. In this case stable code is better than
     // saving a tiny percent of performance...
-    StringBuffer textBuffer = new StringBuffer(1024);
+    StringBuilder textBuffer = new StringBuilder(1024);
     try {
       HSSFRequest req = new HSSFRequest();
       req.addListenerForAllRecords(new ExcelListener(textBuffer, maxCharSize));
@@ -103,13 +102,12 @@ public class ContentParserXls extends AbstractContentParserPoi {
   }
 
   /**
-   * This inner class acts as listener for HSSF events and appends the received
-   * text to a string-buffer.
+   * This inner class acts as listener for HSSF events and appends the received text to a string-buffer.
    */
   protected static class ExcelListener implements HSSFListener {
 
     /** the buffer where to append the text */
-    private final StringBuffer buffer;
+    private final StringBuilder buffer;
 
     /** the maximum capacity */
     private final int bufferLimit;
@@ -130,10 +128,9 @@ public class ContentParserXls extends AbstractContentParserPoi {
      * The constructor.
      * 
      * @param textBuffer is the buffer where to append the text to.
-     * @param maximumBufferSize is the maximum allowed size of the
-     *        <code>textBuffer</code>.
+     * @param maximumBufferSize is the maximum allowed size of the <code>textBuffer</code>.
      */
-    public ExcelListener(StringBuffer textBuffer, int maximumBufferSize) {
+    public ExcelListener(StringBuilder textBuffer, int maximumBufferSize) {
 
       super();
       this.buffer = textBuffer;
@@ -205,7 +202,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
             TextObjectRecord txo = (TextObjectRecord) record;
             append(txo.getStr().getString());
             break;
-          default :
+          default:
             break;
         }
       }

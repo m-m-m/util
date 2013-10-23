@@ -8,8 +8,7 @@ import net.sf.mmm.util.http.HttpRequest;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This class represents an SSDP request. It is a specific HTTP-Request that is
- * transmitted via an multicast over UDP.
+ * This class represents an SSDP request. It is a specific HTTP-Request that is transmitted via an multicast over UDP.
  * 
  * @see HttpRequest#METHOD_NOTIFY
  * @see HttpRequest#METHOD_M_SEARCH
@@ -22,7 +21,7 @@ public class SsdpRequest extends HttpRequest {
   public static final String SSDP_URI = "*";
 
   /** the SSDP multicast address */
-  public static final String MULTICAST_ADDRESS = "239.255.255.250";
+  public static final String MULTICAST_ADDRESS = "239.255.255.250"; // NOSONAR This IP is specified by SSDP
 
   /** the SSDP multicast port */
   public static final int MULTICAST_PORT = 1900;
@@ -40,8 +39,7 @@ public class SsdpRequest extends HttpRequest {
   public static final String ST_SSDP_ALL = "ssdp:all";
 
   /**
-   * the default value for {@link #setCacheControlMaxAge(int) max-age}: 1800
-   * seconds (30 minutes).
+   * the default value for {@link #setCacheControlMaxAge(int) max-age}: 1800 seconds (30 minutes).
    */
   public static final int MAX_AGE_DEFAULT = 30 * 60;
 
@@ -62,8 +60,7 @@ public class SsdpRequest extends HttpRequest {
   public static final String PREFIX_UUID = "uuid:";
 
   /**
-   * The prefix for the device followed by <code>deviceType</code>:
-   * <code>version</code>.
+   * The prefix for the device followed by <code>deviceType</code>: <code>version</code>.
    * 
    * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
    * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
@@ -71,8 +68,7 @@ public class SsdpRequest extends HttpRequest {
   public static final String PREFIX_DEVICE = "urn:schemas-upnp-org:device:";
 
   /**
-   * The prefix for the service followed by <code>serviceType</code>:
-   * <code>version</code>.
+   * The prefix for the service followed by <code>serviceType</code>: <code>version</code>.
    * 
    * @see #HEADER_PROPERTY_NOTIFICATION_TYPE
    * @see #HEADER_PROPERTY_UNIQUE_SERVICE_NAME
@@ -90,23 +86,20 @@ public class SsdpRequest extends HttpRequest {
   public static final String HEADER_PROPERTY_NOTIFICATION_TYPE = "NT";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>NTS</code>.
-   * Yes, it is NOT <code>NST</code> - this is correct.
+   * The {@link #getHeaderProperty(String) header-property} <code>NTS</code>. Yes, it is NOT <code>NST</code> - this is
+   * correct.
    */
   public static final String HEADER_PROPERTY_NOTIFICATION_SUB_TYPE = "NTS";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>USN</code>.
-   * The value must be in the following form:<br>
+   * The {@link #getHeaderProperty(String) header-property} <code>USN</code>. The value must be in the following form:<br>
    * 
    * <pre>
    * {@link #PREFIX_UUID uuid:}<i>UUID</i>[{@link #USN_SEPARATOR ::}<i>suffix</i>]
    * </pre>
    * 
-   * where <code>UUID</code> is {@link java.util.UUID UUID} of the offered
-   * device or service and the <code>suffix</code> is one of
-   * {@link #UPNP_ROOT_DEVICE}, {@link #PREFIX_DEVICE}, or
-   * {@link #PREFIX_SERVICE}.
+   * where <code>UUID</code> is {@link java.util.UUID UUID} of the offered device or service and the <code>suffix</code>
+   * is one of {@link #UPNP_ROOT_DEVICE}, {@link #PREFIX_DEVICE}, or {@link #PREFIX_SERVICE}.
    */
   public static final String HEADER_PROPERTY_UNIQUE_SERVICE_NAME = "USN";
 
@@ -248,12 +241,10 @@ public class SsdpRequest extends HttpRequest {
   }
 
   /**
-   * This method sets the product for the {@link #HEADER_PROPERTY_SERVER SERVER}
-   * property.
+   * This method sets the product for the {@link #HEADER_PROPERTY_SERVER SERVER} property.
    * 
    * @param productName is the name of the product specified by the vendor.
-   * @param productVersion is the version of the product specified by the
-   *        vendor.
+   * @param productVersion is the version of the product specified by the vendor.
    */
   public void setServerProduct(String productName, String productVersion) {
 
@@ -293,8 +284,7 @@ public class SsdpRequest extends HttpRequest {
   }
 
   /**
-   * This method gets the product-version from the
-   * {@link #HEADER_PROPERTY_SERVER}.
+   * This method gets the product-version from the {@link #HEADER_PROPERTY_SERVER}.
    * 
    * @return the product-version or <code>null</code> if NOT set/available.
    */
