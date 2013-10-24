@@ -554,7 +554,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-version}/mmm-util-backport-java.util.function-${backport-version}.jar</argLine>
+              <argLine>-XX:-UseSplitVerifier -Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-version}/mmm-util-backport-java.util.function-${backport-version}.jar</argLine>
             </configuration>
           </plugin>
         </plugins>
