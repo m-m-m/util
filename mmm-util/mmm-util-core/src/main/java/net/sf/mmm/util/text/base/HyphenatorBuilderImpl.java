@@ -47,22 +47,22 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /** @see #createHyphenator(String) */
   public static final String HYPHENATION_XML_CONFIG_SUFFIX = ".xml";
 
-  /** The XML root tag: {@value} . */
+  /** The XML root tag (<code>hyphenation</code>). */
   private static final QName XML_TAG_HYPHENATION = new QName("hyphenation");
 
-  /** The XML attribute: {@value} . */
+  /** The XML attribute for the hyphen character (<code>hyphen</code>). */
   private static final QName XML_ATR_HYPHEN = new QName("hyphen");
 
-  /** The XML tag: {@value} . */
+  /** The XML tag for the list of exceptions to hyphenation rules (<code>exceptions</code>). */
   private static final QName XML_TAG_EXCEPTION_LIST = new QName("exceptions");
 
-  /** The XML tag: {@value} . */
+  /** The XML tag for the list of patterns (<code>patterns</code>). */
   private static final QName XML_TAG_PATTERN_LIST = new QName("patterns");
 
-  /** The XML tag: {@value} . */
+  /** The XML tag for an exception (<code>e</code>). */
   private static final QName XML_TAG_EXCEPTION = new QName("e");
 
-  /** The XML tag: {@value} . */
+  /** The XML tag for a pattern (<code>p</code>). */
   private static final QName XML_TAG_PATTERN = new QName("p");
 
   /** @see #getInstance() */
@@ -221,8 +221,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   }
 
   /**
-   * This method parses a list of strings enclosed by elements with the given <code>elementName</code> until
-   * the current element ends. E.g. if you have this XML:
+   * This method parses a list of strings enclosed by elements with the given <code>elementName</code> until the current
+   * element ends. E.g. if you have this XML:
    * 
    * <pre>
    * &lt;foo>
@@ -232,8 +232,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
    * &lt;/foo>
    * </pre>
    * 
-   * And your XML-reader is pointing after the opening &lt;foo> and you call this method, you will get a list
-   * with "text1", "text2", and "text3".
+   * And your XML-reader is pointing after the opening &lt;foo> and you call this method, you will get a list with
+   * "text1", "text2", and "text3".
    * 
    * @param reader is the XMLEventReader pointing after the {@link StartElement} of the surrounding element.
    * @param elementName is the name of the element containing a single string.
