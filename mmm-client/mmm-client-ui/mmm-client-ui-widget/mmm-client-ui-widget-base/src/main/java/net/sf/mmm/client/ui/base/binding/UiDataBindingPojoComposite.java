@@ -13,8 +13,8 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsMessageLookup;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.value.api.Range;
@@ -99,16 +99,12 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   protected String getLabel(TypedProperty<?> property) {
 
     String title = property.getTitle();
-    NlsMessage message = NlsAccess.getBundleFactory().createBundle(NlsBundleLabelsRoot.class)
-        .getMessage(title, null);
+    NlsMessageLookup labelLookup = getWidget().getContext().getConfiguration().getLabelLookup();
+    NlsMessage message = labelLookup.getMessage(title, null);
     if (message == null) {
       return title;
     }
     return message.getLocalizedMessage();
-    // return NlsAccess.getFactory()
-    // .createDirect(AbstractUiWidget.AccessHelper.getLabelResourceBundleName(getWidget()),
-    // property.getTitle())
-    // .getLocalizedMessage();
   }
 
   /**

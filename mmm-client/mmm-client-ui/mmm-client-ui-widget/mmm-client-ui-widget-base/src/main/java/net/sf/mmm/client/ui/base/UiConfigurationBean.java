@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base;
 
+import net.sf.mmm.util.nls.api.NlsMessageLookup;
+import net.sf.mmm.util.nls.base.NlsMessageLookupNone;
+
 /**
  * This is an implementation of {@link net.sf.mmm.client.ui.api.UiConfiguration} as Java bean.
  * 
@@ -13,8 +16,8 @@ public class UiConfigurationBean extends UiConfigurationDefault {
   /** @see #getTheme() */
   private String theme;
 
-  /** @see #getLabelResourceBundleName() */
-  private String labelResourceBundleName;
+  /** @see #getLabelLookup() */
+  private NlsMessageLookup labelLookup;
 
   /**
    * The constructor.
@@ -23,6 +26,7 @@ public class UiConfigurationBean extends UiConfigurationDefault {
 
     super();
     this.theme = DEFAULT_THEME;
+    this.labelLookup = NlsMessageLookupNone.INSTANCE;
   }
 
   /**
@@ -46,17 +50,17 @@ public class UiConfigurationBean extends UiConfigurationDefault {
    * {@inheritDoc}
    */
   @Override
-  public String getLabelResourceBundleName() {
+  public NlsMessageLookup getLabelLookup() {
 
-    return this.labelResourceBundleName;
+    return this.labelLookup;
   }
 
   /**
-   * @param labelResourceBundleName is the new value of {@link #getLabelResourceBundleName()}.
+   * @param labelLookup is the labelLookup to set
    */
-  public void setLabelResourceBundleName(String labelResourceBundleName) {
+  public void setLabelLookup(NlsMessageLookup labelLookup) {
 
-    this.labelResourceBundleName = labelResourceBundleName;
+    this.labelLookup = labelLookup;
   }
 
 }

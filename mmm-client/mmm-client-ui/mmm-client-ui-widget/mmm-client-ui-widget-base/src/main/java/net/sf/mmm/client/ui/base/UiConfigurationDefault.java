@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base;
 
+import net.sf.mmm.util.nls.api.NlsMessageLookup;
+import net.sf.mmm.util.nls.base.NlsMessageLookupNone;
+
 /**
  * This is the default implementation of {@link net.sf.mmm.client.ui.api.UiConfiguration}.
  * 
@@ -31,9 +34,9 @@ public class UiConfigurationDefault extends AbstractUiConfiguration {
    * {@inheritDoc}
    */
   @Override
-  public String getLabelResourceBundleName() {
+  public NlsMessageLookup getLabelLookup() {
 
-    return DEFAULT_LABEL_RESOURCE_BUNDLE_NAME;
+    return NlsMessageLookupNone.INSTANCE;
   }
 
 }

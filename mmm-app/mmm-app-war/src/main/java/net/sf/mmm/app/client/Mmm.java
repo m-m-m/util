@@ -40,12 +40,14 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
+import net.sf.mmm.client.ui.base.UiConfigurationBean;
 import net.sf.mmm.client.ui.base.dialog.DialogControllerFactory;
 import net.sf.mmm.client.ui.impl.gwt.UiContextGwt;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.base.NlsMessageLookupProxy;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorBuilderFactoryLimited;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -106,6 +108,9 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     new PojoDescriptorBuilderFactoryLimited();
 
     UiContextGwt context = new UiContextGwt();
+    UiConfigurationBean configuration = new UiConfigurationBean();
+    configuration.setLabelLookup(new NlsMessageLookupProxy(NlsBundleLabelsRoot.class));
+    context.setConfiguration(configuration);
     context.initialize();
 
     DialogManagerImplGwt dialogManager = new DialogManagerImplGwt();

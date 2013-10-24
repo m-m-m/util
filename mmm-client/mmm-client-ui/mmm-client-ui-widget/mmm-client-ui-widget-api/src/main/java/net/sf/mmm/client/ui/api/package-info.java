@@ -20,7 +20,7 @@
  * Same client-code can run with all supported toolkits.
  * <ul>
  * <li>Web (via GWT) supporting HTML, Touch and Mobile</li>
- * <li>Native client (Swing and SWT)</li>
+ * <li>Native client (JavaFx and SWT)</li>
  * <li>Native android app</li>
  * <li>Apps for all mobile devices via web-client using <a
  * href="http://incubator.apache.org/cordova/">cordova</a></li>

@@ -176,12 +176,11 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * <li>For {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative native}
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField fields} this method has to get the actual value from the
    * underlying native widget (text-box, password-field, etc.).</li>
-   * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom custom}
-   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField fields} this method will be responsible to convert from
-   * the {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom#getDelegate() delegates} value to the proper
-   * value type. E.g. if you want to create a custom widget to edit your own datatype such as
-   * <code>CustomerNumber</code> based on a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField} you need to
-   * convert from {@link String} to <code>CustomerNumber</code>.</li>
+   * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.field.UiWidgetCustomField custom fields} this method will be
+   * responsible to convert from the delegates value (see <code>UiWidgetCustom.getDelegate()</code>) to the proper value
+   * type. E.g. if you want to create a custom widget to edit your own datatype such as <code>CustomerNumber</code>
+   * based on a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField} you need to convert from {@link String}
+   * to <code>CustomerNumber</code>.</li>
    * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite custom composite widgets} you should
    * use {@link #getDataBinding()}.
    * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding#createAndBind(net.sf.mmm.util.pojo.path.api.TypedProperty)}
@@ -696,21 +695,6 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * This method by default returns {@link net.sf.mmm.client.ui.api.UiConfiguration#getLabelResourceBundleName()}. You
-   * may override this in {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom custom widgets} to change the
-   * default and modularize your bundles.
-   * 
-   * @see net.sf.mmm.client.ui.api.UiConfiguration#getLabelResourceBundleName()
-   * 
-   * @return the {@link java.util.ResourceBundle#getBundle(String) base name} of the {@link java.util.ResourceBundle}
-   *         for the property labels.
-   */
-  protected String getLabelResourceBundleName() {
-
-    return getContext().getConfiguration().getLabelResourceBundleName();
-  }
-
-  /**
    * @return a {@link String} representation of this object that qualifies as source description that might be displayed
    *         to end-users (unlike {@link #toString()} what is for debugging only).
    */
@@ -820,17 +804,6 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     public static void clearValidity(AbstractUiWidget<?> widget) {
 
       widget.clearValidity();
-    }
-
-    /**
-     * @see AbstractUiWidget#getLabelResourceBundleName()
-     * 
-     * @param widget is the {@link AbstractUiWidget}.
-     * @return - see {@link AbstractUiWidget#getLabelResourceBundleName()}.
-     */
-    public static String getLabelResourceBundleName(AbstractUiWidget<?> widget) {
-
-      return widget.getLabelResourceBundleName();
     }
   }
 

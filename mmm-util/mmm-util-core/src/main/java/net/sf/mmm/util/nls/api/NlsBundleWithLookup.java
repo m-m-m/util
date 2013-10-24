@@ -5,44 +5,38 @@ package net.sf.mmm.util.nls.api;
 import java.util.Map;
 
 /**
- * This is the interface for {@link NlsBundle}s that require {@link #getMessage(String, Map) generic lookup}
- * of a {@link NlsMessage}.<br/>
+ * This is the interface for {@link NlsBundle}s that require {@link #getMessage(String, Map) generic lookup} of a
+ * {@link NlsMessage}.<br/>
  * <b>Note:</b><br/>
- * Please only use this interface when the {@link #getMessage(String, Map)} is really required. Otherwise only
- * extend {@link NlsBundle}.
+ * Please only use this interface when the {@link #getMessage(String, Map)} is really required. Otherwise only extend
+ * {@link NlsBundle}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public abstract interface NlsBundleWithLookup extends NlsBundle {
+public abstract interface NlsBundleWithLookup extends NlsBundle, NlsMessageLookup {
 
   /**
-   * This method gets the {@link NlsMessage} with the un-interpolated message for the given
-   * <code>methodName</code>. This allows generic access invoke a specific method of your bundle. E.g. assume
-   * you have an interface <code>NlsBundleMyExampleRoot</code> extending {@link NlsBundleWithLookup} that
-   * declares the following method:
+   * {@inheritDoc}
+   * 
+   * This allows generic access to invoke a specific method of your bundle. E.g. assume you have an interface
+   * <code>NlsBundleMyExampleRoot</code> extending {@link NlsMessageLookup} that declares the following method:
    * 
    * <pre>
-   *   @NlsBundleMessage("The object \"{object}\" is null!")
-   *   NlsMessage errorArgumentNull(@Named("object") Object object);
+   * &#064;NlsBundleMessage(&quot;The object \&quot;{object}\&quot; is null!&quot;)
+   * NlsMessage errorArgumentNull(@Named(&quot;object&quot;) Object object);
    * </pre>
    * 
    * Then you could do:
    * 
    * <pre>
    * NlsBundleMyExampleRoot myBundle = {@link NlsAccess}.getBundleFactory().createBundle(NlsBundleMyExampleRoot.class);
-   * Map<String, Object> parameters = new HashMap<>();
+   * Map&lt;String, Object&gt; parameters = new HashMap&lt;&gt;();
    * parameters.put("object", myObject);
    * {@link NlsMessage} message = myBundle.getMessage("errorArgumentNull", parameters);
    * </pre>
    * 
    * This would have the same result as <code>myBundle.errorArgumentNull(myObject)</code>.
-   * 
-   * @param methodName is the {@link java.lang.reflect.Method#getName() method name}.
-   * @param nlsArguments are the {@link NlsMessage#getArgument(String) arguments}. May be <code>null</code>
-   *        for no arguments.
-   * @return the {@link NlsMessage} or <code>null</code> if no message exists for the given
-   *         <code>methodName</code> (no such method exists).
    */
   // ATTENTION: parameter names must NOT be changed!
   NlsMessage getMessage(String methodName, Map<String, Object> nlsArguments);

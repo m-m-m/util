@@ -73,8 +73,8 @@ public interface Contact extends TransferObject, Pojo {
   /**
    * @return the shoe size.
    */
-  @Min(value = 19)
-  @Max(value = 52)
+  @Min(19)
+  @Max(52)
   int getShoeSize();
 
   /**
