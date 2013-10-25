@@ -32,7 +32,7 @@ import org.junit.runners.Parameterized.Parameters;
  * @since 1.0.0
  */
 @RunWith(Parameterized.class)
-public class AbstractUiTest extends Assert {
+public abstract class AbstractUiTest extends Assert {
 
   /** @see #parameters() */
   public static final String SPRING_CONFIG = "/net/sf/mmm/client/ui/impl/test/beans-client-ui-widget-test.xml";
