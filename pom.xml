@@ -344,7 +344,18 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
+        <configuration>
+          <notree>true</notree>
+          <show>private</show>
+          <encoding>UTF-8</encoding>
+          <charset>UTF-8</charset>
+          <links>
+            <link>http://docs.oracle.com/javase/7/docs/api/</link>
+            <link>http://m-m-m.sourceforge.net/apidocs/</link>
+          </links>
+          <doctitle>JavaDocs for ${project.name} ${project.version}</doctitle>
+          <windowtitle>JavaDocs for ${project.name} ${project.version}</windowtitle>
+        </configuration>
         <reportSets>
           <reportSet>
             <id>mmm.javadoc</id>
