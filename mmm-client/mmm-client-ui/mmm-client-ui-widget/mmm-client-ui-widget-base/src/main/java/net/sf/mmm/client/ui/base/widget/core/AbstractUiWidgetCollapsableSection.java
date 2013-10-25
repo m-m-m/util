@@ -184,7 +184,7 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
         widget.getVisibleFlag().setFlag(!collapse, VisibilityFlagModifier.MODIFIER_COLLAPSE);
         if (widget instanceof UiWidgetField) {
           UiWidgetField<?> field = (UiWidgetField<?>) widget;
-          field.getFieldLabelWidget().getVisibleFlag().setFlag(!collapse, VisibilityFlagModifier.MODIFIER_COLLAPSE);
+          field.getLabelWidget().getVisibleFlag().setFlag(!collapse, VisibilityFlagModifier.MODIFIER_COLLAPSE);
         }
       }
     }

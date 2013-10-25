@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * All {@link UiWidgetMenuItemRadioButton radio menu items} within the same {@link UiWidgetMenu menu} will
  * automatically belong to the same group (so only one of them can be selected at a time).
  * 
- * @see net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons
+ * @see net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

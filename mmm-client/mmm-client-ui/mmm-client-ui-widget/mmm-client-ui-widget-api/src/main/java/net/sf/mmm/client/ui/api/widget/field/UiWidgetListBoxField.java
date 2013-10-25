@@ -18,7 +18,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public interface UiWidgetListBox<VALUE> extends UiWidgetListBase<VALUE>, UiWidgetField<List<VALUE>>, UiWidgetNative,
+public interface UiWidgetListBoxField<VALUE> extends UiWidgetListBase<VALUE>, UiWidgetField<List<VALUE>>, UiWidgetNative,
     AttributeWriteOptions<VALUE> {
 
   /**

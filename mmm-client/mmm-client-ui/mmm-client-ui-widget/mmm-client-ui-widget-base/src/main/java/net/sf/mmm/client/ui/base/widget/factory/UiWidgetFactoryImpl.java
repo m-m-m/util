@@ -262,7 +262,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   public UiWidgetTextField createTextField(String label) {
 
     UiWidgetTextField widget = create(UiWidgetTextField.class);
-    widget.setFieldLabel(label);
+    widget.setLabel(label);
     return widget;
   }
 
@@ -273,7 +273,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   public UiWidgetIntegerField createIntegerField(String label) {
 
     UiWidgetIntegerField widget = create(UiWidgetIntegerField.class);
-    widget.setFieldLabel(label);
+    widget.setLabel(label);
     return widget;
   }
 
@@ -284,7 +284,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   public UiWidgetLongField createLongField(String label) {
 
     UiWidgetLongField widget = create(UiWidgetLongField.class);
-    widget.setFieldLabel(label);
+    widget.setLabel(label);
     return widget;
   }
 
@@ -295,7 +295,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   public <VALUE> UiWidgetComboboxField<VALUE> createComboBox(String label, final EnumDefinition<VALUE, ?> enumDefinition) {
 
     final UiWidgetComboboxField<VALUE> widget = create(UiWidgetComboboxField.class);
-    widget.setFieldLabel(label);
+    widget.setLabel(label);
     widget.setFormatter(enumDefinition.getFormatter());
     Runnable callback = new Runnable() {
 

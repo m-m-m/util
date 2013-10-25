@@ -8,11 +8,10 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * This is the interface for a {@link UiWidgetOptionsField options field widget} that represents a a set of
  * <em>radio buttons</em>.<br/>
  * <b>ATTENTION:</b><br/>
- * You should only use this type of {@link UiWidgetOptionsField options field widgets} if you have a very
- * limited number of {@link #getOptions() options} (less than seven). Otherwise use {@link UiWidgetComboboxField}
- * instead.<br/>
- * Here you can see an example (with the {@link #setOptions(java.util.List) options} set to {"single",
- * "married", "divorced"}):
+ * You should only use this type of {@link UiWidgetOptionsField options field widgets} if you have a very limited number
+ * of {@link #getOptions() options} (less than seven). Otherwise use {@link UiWidgetComboboxField} instead.<br/>
+ * Here you can see an example (with the {@link #setOptions(java.util.List) options} set to {"single", "married",
+ * "divorced"}):
  * 
  * <pre>
  * <span>
@@ -24,7 +23,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public interface UiWidgetRadioButtons<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetNative {
+public interface UiWidgetRadioButtonsField<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetNative {
 
   // nothing to add
 

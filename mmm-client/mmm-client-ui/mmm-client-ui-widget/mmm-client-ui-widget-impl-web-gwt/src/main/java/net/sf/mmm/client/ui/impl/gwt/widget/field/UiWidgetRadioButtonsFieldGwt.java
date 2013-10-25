@@ -3,29 +3,29 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsVertical;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosVertical;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosHorizontal;
 
 /**
- * This is the implementation of {@link UiWidgetRadioButtonsVertical} using GWT.
+ * This is the implementation of {@link UiWidgetRadioButtonsField} using GWT.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
-    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>, VALUE> implements
-    UiWidgetRadioButtonsVertical<VALUE> {
+public class UiWidgetRadioButtonsFieldGwt<VALUE> extends
+    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE>, VALUE> implements
+    UiWidgetRadioButtonsField<VALUE> {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetRadioButtonsVerticalGwt(UiContext context) {
+  public UiWidgetRadioButtonsFieldGwt(UiContext context) {
 
     super(context);
   }
@@ -34,32 +34,32 @@ public class UiWidgetRadioButtonsVerticalGwt<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>();
+    return new UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE>();
   }
 
   /**
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtonsVertical> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtonsField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetRadioButtonsVertical.class);
+      super(UiWidgetRadioButtonsField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetRadioButtonsVertical create(UiContext context) {
+    public UiWidgetRadioButtonsField create(UiContext context) {
 
-      return new UiWidgetRadioButtonsVerticalGwt(context);
+      return new UiWidgetRadioButtonsFieldGwt(context);
     }
 
   }

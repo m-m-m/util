@@ -55,11 +55,11 @@ public abstract class AbstractUiWidgetCheckboxField<ADAPTER extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public void setLabel(String label) {
+  public void setTitle(String title) {
 
-    this.title = label;
+    this.title = title;
     if (hasWidgetAdapter()) {
-      getWidgetAdapter().setTitle(label);
+      getWidgetAdapter().setTitle(title);
     }
   }
 
@@ -67,7 +67,7 @@ public abstract class AbstractUiWidgetCheckboxField<ADAPTER extends UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  public String getLabel() {
+  public String getTitle() {
 
     return this.title;
   }

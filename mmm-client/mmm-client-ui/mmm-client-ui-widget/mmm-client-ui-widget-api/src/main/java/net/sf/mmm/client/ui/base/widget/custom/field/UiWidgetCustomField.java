@@ -75,7 +75,7 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
   @Override
   public String toString() {
 
-    String fieldLabel = getFieldLabel();
+    String fieldLabel = getLabel();
     if (fieldLabel == null) {
       return super.toString();
     } else {
@@ -96,35 +96,35 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
    * {@inheritDoc}
    */
   @Override
-  public String getFieldLabel() {
+  public String getLabel() {
 
     UiWidgetField<?> firstField = getFirstField();
     if (firstField == null) {
       return null;
     }
-    return firstField.getFieldLabel();
+    return firstField.getLabel();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setFieldLabel(String label) {
+  public void setLabel(String label) {
 
-    getFirstField().setFieldLabel(label);
+    getFirstField().setLabel(label);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetLabel getFieldLabelWidget() {
+  public UiWidgetLabel getLabelWidget() {
 
     UiWidgetField<?> firstField = getFirstField();
     if (firstField == null) {
       return null;
     }
-    return firstField.getFieldLabelWidget();
+    return firstField.getLabelWidget();
   }
 
   /**

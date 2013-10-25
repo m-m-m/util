@@ -129,7 +129,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
     UiWidgetFactory widgetFactory = widget.getContext().getWidgetFactory();
 
     UiWidgetField<P> childWidget = widgetFactory.createForDatatype(propertyType);
-    childWidget.setFieldLabel(labelText);
+    childWidget.setLabel(labelText);
     childWidget.addValidator(getAdapter().getPropertyValidator(property, propertyType));
     if (childWidget instanceof UiWidgetRangeField) {
       Range<?> range = getAdapter().getRangeConstraints(property, propertyType);

@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 /**
  * This is the abstract interface for a {@link UiWidgetRegularComposite regular composite widget} that
  * represents a (potentially) editable field (text field, combobox, text area, radio-buttons, checkbox, etc.).
- * Such a field is associated with a {@link #getFieldLabel() label}. To build a form with multiple fields a
+ * Such a field is associated with a {@link #getLabel() label}. To build a form with multiple fields a
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel} should be used (typically indirectly via a
  * custom widget). Such form can be used to display the fields with their values in
  * {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view mode} (read-only) or in
@@ -46,39 +46,39 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
    */
   String STYLE_VIEW = "FieldView";
 
-  /** The {@link #getPrimaryStyle() primary style} of the {@link #getFieldLabelWidget() field label widget}. */
+  /** The {@link #getPrimaryStyle() primary style} of the {@link #getLabelWidget() field label widget}. */
   String STYLE_LABEL = "FieldLabel";
 
   /**
-   * The {@link #addStyle(String) additional style} of the {@link #getFieldLabelWidget() field label widget}
+   * The {@link #addStyle(String) additional style} of the {@link #getLabelWidget() field label widget}
    * if {@link #isMandatory() mandatory}.
    */
   String STYLE_MANDATORY = "Mandatory";
 
   /**
    * This method is like
-   * <code>{@link #getFieldLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> without actually
-   * creating the {@link #getFieldLabelWidget() field label widget} if it does NOT yet exist. Further it will
-   * only return what has been set via {@link #setFieldLabel(String)} and NOT what has potentially been set
-   * via {@link #getFieldLabelWidget()}.{@link UiWidgetLabel#setLabel(String) setLabel} (what should be
+   * <code>{@link #getLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> without actually
+   * creating the {@link #getLabelWidget() field label widget} if it does NOT yet exist. Further it will
+   * only return what has been set via {@link #setLabel(String)} and NOT what has potentially been set
+   * via {@link #getLabelWidget()}.{@link UiWidgetLabel#setLabel(String) setLabel} (what should be
    * avoided).
    * 
-   * @return the {@link UiWidgetLabel#getLabel() label} of the {@link #getFieldLabelWidget() field label
+   * @return the {@link UiWidgetLabel#getLabel() label} of the {@link #getLabelWidget() field label
    *         widget} widget} or <code>null</code> if NOT set.
    */
-  String getFieldLabel();
+  String getLabel();
 
   /**
    * This method is logically equivalent to
-   * <code>{@link #getFieldLabelWidget()}.{@link UiWidgetLabel#setLabel(String) setLabel(String)}</code>
-   * without actually creating the {@link #getFieldLabelWidget() field label widget} if it does NOT yet exist.
+   * <code>{@link #getLabelWidget()}.{@link UiWidgetLabel#setLabel(String) setLabel(String)}</code>
+   * without actually creating the {@link #getLabelWidget() field label widget} if it does NOT yet exist.
    * In the latter case the given label is stored and will automatically be assigned if
-   * {@link #getFieldLabelWidget()} will create the label widget.
+   * {@link #getLabelWidget()} will create the label widget.
    * 
-   * @param label is the new {@link UiWidgetLabel#getLabel() label} for the {@link #getFieldLabelWidget()
+   * @param label is the new {@link UiWidgetLabel#getLabel() label} for the {@link #getLabelWidget()
    *        field label widget} widget}.
    */
-  void setFieldLabel(String label);
+  void setLabel(String label);
 
   /**
    * This method gets the {@link UiWidgetLabel label widget} associated with this field.<br/>
@@ -86,13 +86,13 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
    * Depending on the underlying toolkit the label widget is lazily created on the first call of this method.
    * Additionally users of this API (unlike implementors of the API) may only use this for very specific cases
    * (e.g. setting the style of the label). Therefore you should avoid calling this method unless you are
-   * aware of what you are doing. To access the label-text simply use {@link #getFieldLabel()} and
-   * {@link #setFieldLabel(String)}. Be aware that some native toolkits (e.g. SmartGWT) already implement
+   * aware of what you are doing. To access the label-text simply use {@link #getLabel()} and
+   * {@link #setLabel(String)}. Be aware that some native toolkits (e.g. SmartGWT) already implement
    * field widgets including the label. In this case this method will return a different view on the same
    * native widget.
    * 
    * @return the associated label widget.
    */
-  UiWidgetLabel getFieldLabelWidget();
+  UiWidgetLabel getLabelWidget();
 
 }

@@ -41,7 +41,7 @@ public abstract class AbstractUiWidgetGridRow<ADAPTER extends UiWidgetAdapterGri
   public UiWidgetGridCell addChild(UiWidgetRegular child) {
 
     if (child instanceof UiWidgetField) {
-      UiWidgetLabel label = ((UiWidgetField<?>) child).getFieldLabelWidget();
+      UiWidgetLabel label = ((UiWidgetField<?>) child).getLabelWidget();
       addChildInternal(label);
     }
     return addChildInternal(child);

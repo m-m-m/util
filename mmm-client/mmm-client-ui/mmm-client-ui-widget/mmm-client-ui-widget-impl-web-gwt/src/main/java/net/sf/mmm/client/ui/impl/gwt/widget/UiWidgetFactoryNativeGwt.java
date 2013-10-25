@@ -27,8 +27,8 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerRangeFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLongFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetPasswordFieldGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsVerticalGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsVerticalFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRichTextFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextAreaFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextFieldGwt;
@@ -88,8 +88,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetIntegerRangeFieldGwt.Factory());
     register(new UiWidgetDoubleFieldGwt.Factory());
     register(new UiWidgetDateFieldGwt.Factory());
-    register(new UiWidgetRadioButtonsGwt.Factory());
-    register(new UiWidgetRadioButtonsVerticalGwt.Factory());
+    register(new UiWidgetRadioButtonsFieldGwt.Factory());
+    register(new UiWidgetRadioButtonsVerticalFieldGwt.Factory());
     register(new UiWidgetComboboxFieldGwt.Factory());
     register(new UiWidgetCheckboxFieldGwt.Factory());
     // panels

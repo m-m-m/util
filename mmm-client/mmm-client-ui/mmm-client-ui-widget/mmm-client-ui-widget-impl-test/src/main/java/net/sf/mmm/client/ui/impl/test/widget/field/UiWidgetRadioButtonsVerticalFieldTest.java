@@ -3,29 +3,29 @@
 package net.sf.mmm.client.ui.impl.test.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsVertical;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsVerticalField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.client.ui.impl.test.widget.field.adapter.UiWidgetAdapterTestOptionsField;
 
 /**
- * This is the implementation of {@link UiWidgetRadioButtonsVertical} for testing without a native toolkit.
+ * This is the implementation of {@link UiWidgetRadioButtonsVerticalField} for testing without a native toolkit.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetRadioButtonsVerticalTest<VALUE> extends
+public class UiWidgetRadioButtonsVerticalFieldTest<VALUE> extends
     AbstractUiWidgetOptionsField<UiWidgetAdapterTestOptionsField<VALUE>, VALUE> implements
-    UiWidgetRadioButtonsVertical<VALUE> {
+    UiWidgetRadioButtonsVerticalField<VALUE> {
 
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    */
-  public UiWidgetRadioButtonsVerticalTest(UiContext context) {
+  public UiWidgetRadioButtonsVerticalFieldTest(UiContext context) {
 
     super(context);
   }
@@ -43,23 +43,23 @@ public class UiWidgetRadioButtonsVerticalTest<VALUE> extends
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtonsVertical> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtonsVerticalField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetRadioButtonsVertical.class);
+      super(UiWidgetRadioButtonsVerticalField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetRadioButtonsVertical create(UiContext context) {
+    public UiWidgetRadioButtonsVerticalField create(UiContext context) {
 
-      return new UiWidgetRadioButtonsVerticalTest(context);
+      return new UiWidgetRadioButtonsVerticalFieldTest(context);
     }
 
   }

@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.aria.role.RoleCombobox;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboBoxField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxField;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetComboboxField}.
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboBoxFie
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetComboboxField<ADAPTER extends UiWidgetAdapterComboBoxField<VALUE>, VALUE> extends
+public abstract class AbstractUiWidgetComboboxField<ADAPTER extends UiWidgetAdapterComboboxField<VALUE>, VALUE> extends
     AbstractUiWidgetOptionsField<ADAPTER, VALUE> implements UiWidgetComboboxField<VALUE> {
 
   /**

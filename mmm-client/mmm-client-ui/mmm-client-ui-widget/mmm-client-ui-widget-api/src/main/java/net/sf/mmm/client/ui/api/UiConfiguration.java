@@ -29,7 +29,7 @@ public interface UiConfiguration {
   /**
    * This method gets the instance of {@link NlsMessageLookup} used to
    * {@link NlsMessageLookup#getMessage(String, java.util.Map) lookup}
-   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getFieldLabel() labels} automatically by
+   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getLabel() labels} automatically by
    * {@link net.sf.mmm.util.pojo.path.api.TypedProperty#getTitle() property titles} via
    * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding}. So you can highly customize your labels for your custom
    * defined properties and have full I18N/l10n support with little effort. For rapid development you can also ignore

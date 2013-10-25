@@ -38,7 +38,7 @@ public class ContactFormNoDataBinding extends UiWidgetCustomGridPanel<ContactBea
     this.widgetLastName = getFactory().createTextField("Last name");
     this.widgetLastName.addValidatorMandatory();
     this.widgetBirthday = getFactory().create(UiWidgetDateField.class);
-    this.widgetBirthday.setFieldLabel("Birthday");
+    this.widgetBirthday.setLabel("Birthday");
     getDelegate().setColumnCount(2);
     getDelegate().addChildren(this.widgetFirstName);
     getDelegate().addChildren(this.widgetLastName);

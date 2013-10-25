@@ -20,7 +20,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -280,7 +280,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     @Override
     public UiWidgetField<Boolean> create(UiContext context) {
 
-      UiWidgetRadioButtons<Boolean> radioButtons = context.getWidgetFactory().create(UiWidgetRadioButtons.class);
+      UiWidgetRadioButtonsField<Boolean> radioButtons = context.getWidgetFactory().create(UiWidgetRadioButtonsField.class);
       radioButtons.setFormatter(BooleanFormatter.getInstance());
       radioButtons.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
       return radioButtons;

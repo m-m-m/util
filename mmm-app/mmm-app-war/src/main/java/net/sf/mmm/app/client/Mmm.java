@@ -213,7 +213,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
             .setLabel("This is some extra long text to test scrollbar facitlities and resizing. We spent various extra "
                 + "effort for these features that are unfortunately not offered by GWT itself out of the box.");
         final UiWidgetCheckboxField checkboxResizsable = factory.create(UiWidgetCheckboxField.class);
-        checkboxResizsable.setLabel("resizable");
+        checkboxResizsable.setTitle("resizable");
         checkboxResizsable.setValue(Boolean.TRUE);
         UiHandlerEventValueChange<Boolean> changeHandler = new UiHandlerEventValueChange<Boolean>() {
 
@@ -228,7 +228,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         };
         checkboxResizsable.addChangeHandler(changeHandler);
         final UiWidgetCheckboxField checkboxMovable = factory.create(UiWidgetCheckboxField.class);
-        checkboxMovable.setLabel("movable");
+        checkboxMovable.setTitle("movable");
         checkboxMovable.setValue(Boolean.TRUE);
         UiHandlerEventValueChange<Boolean> changeHandlerMove = new UiHandlerEventValueChange<Boolean>() {
 
@@ -243,7 +243,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         };
         checkboxMovable.addChangeHandler(changeHandlerMove);
         final UiWidgetCheckboxField checkboxClosable = factory.create(UiWidgetCheckboxField.class);
-        checkboxClosable.setLabel("closable");
+        checkboxClosable.setTitle("closable");
         checkboxClosable.setValue(Boolean.TRUE);
         UiHandlerEventValueChange<Boolean> changeHandlerClose = new UiHandlerEventValueChange<Boolean>() {
 

@@ -20,7 +20,7 @@ public interface UiWidgetGridRow extends UiWidgetDynamicPanel<UiWidgetGridCell>,
    * <b>ATTENTION:</b><br/>
    * If the given <code>child</code> is a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField}, this
    * method will also attach the
-   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getFieldLabelWidget() label} before. This is
+   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getLabelWidget() label} before. This is
    * done on purpose for convenience. If you want to prevent this,
    * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class) create} a
    * {@link UiWidgetGridCell} directly and {@link UiWidgetGridCell#setChild(UiWidgetRegular) set} the

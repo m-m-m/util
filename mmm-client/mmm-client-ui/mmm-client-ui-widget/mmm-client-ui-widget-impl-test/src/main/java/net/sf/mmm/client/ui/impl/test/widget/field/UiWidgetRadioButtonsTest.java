@@ -3,13 +3,13 @@
 package net.sf.mmm.client.ui.impl.test.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.client.ui.impl.test.widget.field.adapter.UiWidgetAdapterTestOptionsField;
 
 /**
- * This is the implementation of {@link UiWidgetRadioButtons} for testing without a native toolkit.
+ * This is the implementation of {@link UiWidgetRadioButtonsField} for testing without a native toolkit.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -17,7 +17,8 @@ import net.sf.mmm.client.ui.impl.test.widget.field.adapter.UiWidgetAdapterTestOp
  * @since 1.0.0
  */
 public class UiWidgetRadioButtonsTest<VALUE> extends
-    AbstractUiWidgetOptionsField<UiWidgetAdapterTestOptionsField<VALUE>, VALUE> implements UiWidgetRadioButtons<VALUE> {
+    AbstractUiWidgetOptionsField<UiWidgetAdapterTestOptionsField<VALUE>, VALUE> implements
+    UiWidgetRadioButtonsField<VALUE> {
 
   /**
    * The constructor.
@@ -42,21 +43,21 @@ public class UiWidgetRadioButtonsTest<VALUE> extends
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
   @SuppressWarnings("rawtypes")
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtons> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetRadioButtonsField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetRadioButtons.class);
+      super(UiWidgetRadioButtonsField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetRadioButtons create(UiContext context) {
+    public UiWidgetRadioButtonsField create(UiContext context) {
 
       return new UiWidgetRadioButtonsTest(context);
     }

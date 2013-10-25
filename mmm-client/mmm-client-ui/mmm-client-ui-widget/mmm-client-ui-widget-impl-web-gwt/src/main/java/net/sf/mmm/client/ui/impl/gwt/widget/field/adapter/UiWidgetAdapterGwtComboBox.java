@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import java.util.List;
 
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboBoxField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxField;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 import com.google.gwt.dom.client.Document;
@@ -15,15 +15,15 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterComboBoxField} using GWT based on a {@link TextBox} and
- * a {@link Datalist}.
+ * This is the implementation of {@link UiWidgetAdapterComboboxField} using GWT based on a {@link TextBox} and a
+ * {@link Datalist}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value.
  */
-public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFocusWidgetBase<TextBox, VALUE, String>
-    implements UiWidgetAdapterComboBoxField<VALUE> {
+public class UiWidgetAdapterGwtComboBox<VALUE> extends
+    UiWidgetAdapterGwtFieldFocusWidgetBase<TextBox, VALUE, String> implements UiWidgetAdapterComboboxField<VALUE> {
 
   /** @see #createActiveWidget() */
   private static int idCounter = 1;

@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * information. It should both support a textual input field as well as a (icon-)button that opens a calendar
  * popup to pick the date from. If this widget is not available by the underlying native toolkit, an
  * implementation shall be provided that is based on {@link UiWidgetTextField}.<br/>
- * Here you can see an example (with {@link #setFieldLabel(String) field label} "Date of birth"):
+ * Here you can see an example (with {@link #setLabel(String) field label} "Date of birth"):
  * 
  * <pre>
  * Date of birth: <input type="date" />

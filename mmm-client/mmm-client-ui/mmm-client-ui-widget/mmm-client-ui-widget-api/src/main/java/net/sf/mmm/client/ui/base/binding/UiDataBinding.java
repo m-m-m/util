@@ -197,7 +197,7 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * @param property is the {@link TypedProperty} representing the property to bind. It has to be a property of
    *        &lt;VALUE&gt; and contain its {@link TypedProperty#getPropertyType() property type}.
    * @param label is the label to use for the widget. See
-   *        {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getFieldLabel()}.
+   *        {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getLabel()}.
    * @return a new widget to view and edit the given property. It will already been
    *         {@link #bind(TypedProperty, UiWidgetWithValue) bound}.
    */

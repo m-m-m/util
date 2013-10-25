@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtons;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel;
@@ -48,12 +48,12 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     getDelegate().addChildren(widgetIncome);
 
     UiWidgetRichTextField richTextField = context.getWidgetFactory().create(UiWidgetRichTextField.class);
-    richTextField.setFieldLabel("RichText");
+    richTextField.setLabel("RichText");
     getDelegate().addChildren(richTextField);
 
-    UiWidgetRadioButtons<SizeUnit> radios = context.getWidgetFactory().create(UiWidgetRadioButtons.class);
+    UiWidgetRadioButtonsField<SizeUnit> radios = context.getWidgetFactory().create(UiWidgetRadioButtonsField.class);
     radios.setOptions(Arrays.asList(SizeUnit.values()));
-    radios.setFieldLabel("Unit");
+    radios.setLabel("Unit");
     getDelegate().addChildren(radios);
 
     section.addCollapseWidget(widgetBirthday);

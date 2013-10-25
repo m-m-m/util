@@ -28,10 +28,10 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #getValidationFailure() */
   private String validationFailure;
 
-  /** @see #getFieldLabel() */
+  /** @see #getLabel() */
   private String fieldLabel;
 
-  /** @see #getFieldLabelWidget() */
+  /** @see #getLabelWidget() */
   private AbstractUiWidgetLabel<?> fieldLabelWidget;
 
   /** @see #isTrimValue() */
@@ -217,7 +217,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public String getFieldLabel() {
+  public String getLabel() {
 
     return this.fieldLabel;
   }
@@ -226,7 +226,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public void setFieldLabel(String label) {
+  public void setLabel(String label) {
 
     if (label.equals(this.fieldLabel)) {
       return;
@@ -236,7 +236,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   }
 
   /**
-   * Updates the {@link #getFieldLabel() field label} in {@link #getFieldLabelWidget() field label widget}.
+   * Updates the {@link #getLabel() field label} in {@link #getLabelWidget() field label widget}.
    */
   private void updateFieldLabel() {
 
@@ -263,7 +263,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public final UiWidgetLabel getFieldLabelWidget() {
+  public final UiWidgetLabel getLabelWidget() {
 
     if (this.fieldLabelWidget == null) {
       this.fieldLabelWidget = (AbstractUiWidgetLabel<?>) getWidgetAdapter().createLabel(getContext());

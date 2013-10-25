@@ -186,7 +186,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
   /**
    * This method creates a new {@link UiWidgetTextField}.
    * 
-   * @param label is the {@link UiWidgetTextField#getFieldLabel() label}.
+   * @param label is the {@link UiWidgetTextField#getLabel() label}.
    * @return the new widget instance.
    */
   UiWidgetTextField createTextField(String label);
@@ -194,7 +194,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
   /**
    * This method creates a new {@link UiWidgetIntegerField}.
    * 
-   * @param label is the {@link UiWidgetIntegerField#getFieldLabel() label}.
+   * @param label is the {@link UiWidgetIntegerField#getLabel() label}.
    * @return the new widget instance.
    */
   UiWidgetIntegerField createIntegerField(String label);
@@ -202,7 +202,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
   /**
    * This method creates a new {@link UiWidgetLongField}.
    * 
-   * @param label is the {@link UiWidgetLongField#getFieldLabel() label}.
+   * @param label is the {@link UiWidgetLongField#getLabel() label}.
    * @return the new widget instance.
    */
   UiWidgetLongField createLongField(String label);
@@ -212,7 +212,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    * 
    * @param <VALUE> is the generic type of the available selection options.
    * 
-   * @param label is the {@link UiWidgetLongField#getFieldLabel() label}.
+   * @param label is the {@link UiWidgetLongField#getLabel() label}.
    * @param enumDefinition is the {@link EnumDefinition} identifying the available
    *        {@link UiWidgetComboboxField#getOptions() options}. These may be loaded asynchronous via
    *        {@link net.sf.mmm.util.lang.api.EnumProvider}.

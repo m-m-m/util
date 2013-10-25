@@ -53,7 +53,7 @@ public class UiDataBindingTest extends AbstractUiTest {
     UiWidgetTextField textField = context.getWidgetFactory().createTextField(label);
     ValueChangeHandler<String> handler = new ValueChangeHandler<String>(textField);
     assertNotNull(textField);
-    assertEquals(label, textField.getFieldLabel());
+    assertEquals(label, textField.getLabel());
 
     assertNull(textField.getOriginalValue());
     assertNull(textField.getValue());

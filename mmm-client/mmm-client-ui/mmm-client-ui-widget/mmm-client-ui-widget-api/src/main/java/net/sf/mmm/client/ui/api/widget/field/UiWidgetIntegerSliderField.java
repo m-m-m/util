@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for a {@link UiWidgetField field widget} that represents an {@link Integer} slider field. Such
  * field allows to enter a value of the type {@link Integer} using a slider that can be moved.<br/>
- * Here you can see an example (with {@link #setFieldLabel(String) field label} "Ranking"):
+ * Here you can see an example (with {@link #setLabel(String) field label} "Ranking"):
  * 
  * <pre>
  * Ranking: <input type="range" min="0" max="100"/>
