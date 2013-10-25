@@ -14,7 +14,9 @@
   <module name="TreeWalker">
     <module name="FileContentsHolder"/>
     <module name="JavadocMethod"/>
-    <module name="JavadocType"/>
+    <module name="JavadocType">
+      <property name="authorFormat" value="[a-zA-Z].+"/>
+    </module>
     <module name="JavadocVariable"/>
     <module name="JavadocStyle">
       <property name="checkHtml" value="false"/>
