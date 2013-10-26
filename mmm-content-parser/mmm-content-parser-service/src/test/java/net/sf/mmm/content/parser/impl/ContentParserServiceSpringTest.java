@@ -6,8 +6,7 @@ import net.sf.mmm.content.parser.api.ContentParserService;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
- * This is the test-case for {@link ContentParserService} configured using
- * spring.
+ * This is the test-case for {@link ContentParserService} configured using spring.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -19,7 +18,8 @@ public class ContentParserServiceSpringTest extends ContentParserServiceImplTest
   @Override
   protected ContentParserService getContentParserService() {
 
-    return SpringContainerPool.getInstance().get(ContentParserService.class);
+    return SpringContainerPool.getInstance(SpringContainerPool.SPRING_XML_CONTENT_PARSER).get(
+        ContentParserService.class);
   }
 
 }
