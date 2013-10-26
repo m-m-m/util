@@ -8,8 +8,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPropertyPath;
 
 /**
- * This class represents a {@link PojoPath}. It contains the internal logic to validate and parse a
- * {@link PojoPath}.
+ * This class represents a {@link PojoPath}. It contains the internal logic to validate and parse a {@link PojoPath}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -40,7 +39,7 @@ public class BasicPojoPath implements PojoPath {
 
     super();
     if (pojoPath == null) {
-      throw new IllegalPojoPathException(pojoPath);
+      throw new IllegalPojoPathException(null);
     }
     this.pojoPath = pojoPath;
     String pParentPath = null;

@@ -12,7 +12,7 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.test.TestResourceHelper;
 import net.sf.mmm.util.filter.api.Filter;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -44,8 +44,7 @@ public class SearchIndexerConfigurationLoaderTest {
 
     SearchIndexerConfigurationLoader reader = getConfigurationReader();
 
-    String resourceUri = TestResourceHelper.getTestPath(SearchIndexerConfigurationLoaderTest.class,
-        ".xml");
+    String resourceUri = TestResourceHelper.getTestPath(SearchIndexerConfigurationLoaderTest.class, ".xml");
     SearchIndexerConfigurationHolder configurationHolder = reader.loadConfiguration(resourceUri);
     SearchIndexerConfiguration configuration = configurationHolder.getBean();
     Assert.assertNotNull(configuration);
@@ -90,8 +89,8 @@ public class SearchIndexerConfigurationLoaderTest {
       SearchIndexerConfigurationHolder configurationHolder = reader.loadConfiguration(resourceUri);
       configurationHolder.getBean();
       ExceptionHelper.failExceptionExpected();
-    } catch (NlsRuntimeException e) {
-      String message = e.getMessage();
+    } catch (XmlInvalidException e) {
+      String message = e.getCause().getMessage();
       Assert.assertTrue(message.contains("my-filter"));
       Assert.assertTrue(message.contains("my-missing-filter"));
       Assert.assertTrue(message.contains("wrong-parent-id"));
