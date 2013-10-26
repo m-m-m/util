@@ -10,6 +10,9 @@ import net.sf.mmm.util.nls.api.NlsObject;
 
 /**
  * The {@link Enum} with the available features of rich-text formatting options.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public enum RichTextFeature implements NlsObject {
 

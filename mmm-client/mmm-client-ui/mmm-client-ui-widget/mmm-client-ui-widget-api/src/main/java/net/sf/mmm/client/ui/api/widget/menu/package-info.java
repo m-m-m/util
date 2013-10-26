@@ -8,6 +8,8 @@
  * {@link net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu menu} or
  * {@link net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItem}.
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
+ * <br/>
+ * <img src="doc-files/MenuWidgets.png"/>
  */
 package net.sf.mmm.client.ui.api.widget.menu;
 

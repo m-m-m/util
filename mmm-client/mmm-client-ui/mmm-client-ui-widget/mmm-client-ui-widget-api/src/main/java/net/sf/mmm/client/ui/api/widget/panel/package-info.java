@@ -5,6 +5,8 @@
  * <a name="documentation"/><h2>Client UI API Widget Panel</h2>
  * This package contains the API for {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel panel widgets}.
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
+ * <br/>
+ * <img src="doc-files/PanelWidgets.png"/>
  */
 package net.sf.mmm.client.ui.api.widget.panel;
 

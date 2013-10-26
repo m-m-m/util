@@ -5,6 +5,8 @@
  * <a name="documentation"/><h2>Client UI API Widget Window</h2>
  * This package contains the API for {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractWindow window widgets}.
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
+ * <br/>
+ * <img src="doc-files/WindowWidgets.png"/>
  */
 package net.sf.mmm.client.ui.api.widget.window;
 

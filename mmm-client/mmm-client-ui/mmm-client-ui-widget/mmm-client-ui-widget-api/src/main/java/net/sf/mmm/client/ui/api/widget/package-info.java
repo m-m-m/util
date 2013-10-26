@@ -10,6 +10,7 @@
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}s. Use {@link net.sf.mmm.client.ui.api.UiContext}
  * to get access.<br/>
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
+ * <br/>
  * <img src="doc-files/Widgets.png"/>
  */
 package net.sf.mmm.client.ui.api.widget;
