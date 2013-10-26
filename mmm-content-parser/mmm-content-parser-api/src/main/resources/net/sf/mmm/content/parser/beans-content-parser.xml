@@ -7,6 +7,6 @@
                       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
   <import resource="classpath:net/sf/mmm/util/beans-util-core.xml" />
-  <context:component-scan base-package="net.sf.mmm.search"/>
+  <context:component-scan base-package="net.sf.mmm.content.parser"/>
 
 </beans>

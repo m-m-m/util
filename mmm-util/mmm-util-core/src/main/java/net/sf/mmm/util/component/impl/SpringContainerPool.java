@@ -23,6 +23,9 @@ public final class SpringContainerPool {
   /** The Spring XML configuration of <code>mmm-search</code>. */
   public static final String SPRING_XML_SEARCH = "/net/sf/mmm/search/beans-search.xml";
 
+  /** The Spring XML configuration of <code>mmm-content-parser</code>. */
+  public static final String SPRING_XML_CONTENT_PARSER = "/net/sf/mmm/content/parser/beans-content-parser.xml";
+
   /** @see #getInstance(String) */
   private static Map<String, SpringContainer> xml2containerMap;
 

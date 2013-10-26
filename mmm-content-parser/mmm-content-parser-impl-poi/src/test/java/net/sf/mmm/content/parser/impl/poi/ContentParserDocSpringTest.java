@@ -3,7 +3,6 @@
 package net.sf.mmm.content.parser.impl.poi;
 
 import net.sf.mmm.content.parser.api.ContentParser;
-import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
  * This is the test-case for {@link ContentParserDoc} configured using spring.
@@ -18,7 +17,7 @@ public class ContentParserDocSpringTest extends ContentParserDocTest {
   @Override
   protected ContentParser getContentParser() {
 
-    return SpringContainerPool.getInstance().get(ContentParserDoc.class);
+    return getContainer().get(ContentParserDoc.class);
   }
 
 }
