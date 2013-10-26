@@ -18,7 +18,8 @@
  * To solve this problem there are the following options:
  * <ul>
  *   <li>Use the JVM option <code>-Xbootclasspath/p:/path/to/mmm-util-backport-java.util.function-1.0.0.jar</code> (recommended)</li>
- *   <li>Use the JVM option <code>-Djava.endorsed.dirs=/path/to/directory</code> with a directory containing <code>mmm-util-backport-java.util.function-1.0.0.jar</code>.</li>
+ *   <li>Use the JVM option <code>-Djava.endorsed.dirs=/path/to/directory</code> with a directory containing
+ *     <code>mmm-util-backport-java.util.function-1.0.0.jar</code>.</li>
  *   <li>Add <code>mmm-util-backport-java.util.function-1.0.0.jar</code> to the <code>$JAVA_HOME/lib/endorsed</code> (not recommended).</li>
  * </ul>
  */
