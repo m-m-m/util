@@ -122,6 +122,7 @@
             <show>private</show>
             <encoding>UTF-8</encoding>
             <charset>UTF-8</charset>
+            <docfilessubdirs>true</docfilessubdirs>
             <!--<debug>true</debug>-->
             <links>
               <link>http://docs.oracle.com/javase/7/docs/api/</link>
@@ -349,6 +350,7 @@
           <show>private</show>
           <encoding>UTF-8</encoding>
           <charset>UTF-8</charset>
+          <docfilessubdirs>true</docfilessubdirs>
           <links>
             <link>http://docs.oracle.com/javase/7/docs/api/</link>
             <link>http://m-m-m.sourceforge.net/apidocs/</link>
