@@ -162,161 +162,161 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#BOLD}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#BOLD}.
    */
   @NlsBundleMessage("Bold")
   NlsMessage labelRichTextBold();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#ITALIC}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#ITALIC}.
    */
   @NlsBundleMessage("Italic")
   NlsMessage labelRichTextItalic();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#UNDERLINE}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#UNDERLINE}.
    */
   @NlsBundleMessage("Underline")
   NlsMessage labelRichTextUnderline();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#SUBSCRIPT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#SUBSCRIPT}.
    */
   @NlsBundleMessage("Subscript")
   NlsMessage labelRichTextSubscript();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#SUPERSCRIPT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#SUPERSCRIPT}.
    */
   @NlsBundleMessage("Superscript")
   NlsMessage labelRichTextSuperscript();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#STRIKETHROUGH}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#STRIKETHROUGH}.
    */
   @NlsBundleMessage("Strikethrough")
   NlsMessage labelRichTextStrikethrough();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#ALIGN_LEFT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#ALIGN_LEFT}.
    */
   @NlsBundleMessage("Align left")
   NlsMessage labelRichTextJustifyLeft();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#ALIGN_CENTER}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#ALIGN_CENTER}.
    */
   @NlsBundleMessage("Align center")
   NlsMessage labelRichTextJustifyCenter();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#ALIGN_RIGHT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#ALIGN_RIGHT}.
    */
   @NlsBundleMessage("Align Right")
   NlsMessage labelRichTextJustifyRight();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#ORDERED_LIST}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#ORDERED_LIST}.
    */
   @NlsBundleMessage("Insert ordered list")
   NlsMessage labelRichTextOrderedList();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#UNORDERED_LIST}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#UNORDERED_LIST}.
    */
   @NlsBundleMessage("Insert unordered list")
   NlsMessage labelRichTextUnorderedList();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#INSERT_IMAGE}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#INSERT_IMAGE}.
    */
   @NlsBundleMessage("Insert image")
   NlsMessage labelRichTextInsertImage();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#HORIZONTAL_LINE}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#HORIZONTAL_LINE}.
    */
   @NlsBundleMessage("Horizontal line")
   NlsMessage labelRichTextHorizontalLine();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#INSERT_LINK}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#INSERT_LINK}.
    */
   @NlsBundleMessage("Insert hyperlink")
   NlsMessage labelRichTextInsertLink();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#FONT_FAMILY}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#FONT_FAMILY}.
    */
   @NlsBundleMessage("Font family")
   NlsMessage labelRichTextFontFamily();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#FONT_SIZE}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#FONT_SIZE}.
    */
   @NlsBundleMessage("Font size")
   NlsMessage labelRichTextFontSize();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#TEXT_COLOR}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#TEXT_COLOR}.
    */
   @NlsBundleMessage("Text color")
   NlsMessage labelRichTextFontColor();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#BACKGROUND_COLOR}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#BACKGROUND_COLOR}.
    */
   @NlsBundleMessage("Background color")
   NlsMessage labelRichTextBackgroundColor();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#INDENT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#INDENT}.
    */
   @NlsBundleMessage("Indent")
   NlsMessage labelRichTextIndent();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#OUTDENT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#OUTDENT}.
    */
   @NlsBundleMessage("Outdent")
   NlsMessage labelRichTextOutdent();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#REMOVE_FORMAT}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#REMOVE_FORMAT}.
    */
   @NlsBundleMessage("Remove format")
   NlsMessage labelRichTextRemoveFormat();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#UNDO}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#UNDO}.
    */
   @NlsBundleMessage("Undo last change")
   NlsMessage labelRichTextUndo();
 
   /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.widget.field.RichTextFeature#REDO}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#REDO}.
    */
   @NlsBundleMessage("Redo change")
   NlsMessage labelRichTextRedo();

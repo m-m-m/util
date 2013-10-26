@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
+import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.RichTextToolbar;

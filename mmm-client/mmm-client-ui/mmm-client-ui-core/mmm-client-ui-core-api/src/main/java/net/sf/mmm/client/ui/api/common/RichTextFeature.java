@@ -1,9 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.widget.field;
+package net.sf.mmm.client.ui.api.common;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
-import net.sf.mmm.client.ui.api.common.IconConstants;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsObject;

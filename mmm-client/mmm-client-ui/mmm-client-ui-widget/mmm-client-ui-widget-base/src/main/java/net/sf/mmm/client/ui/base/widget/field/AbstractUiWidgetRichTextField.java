@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
+import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 

@@ -11,7 +11,7 @@
  * to get access.<br/>
  * Please consult {@link net.sf.mmm.client.ui.api Client UI API} for an introduction.
  * <br/>
- * <img src="doc-files/Widgets.png"/>
+ * <object data="doc-files/Widgets.svg" type="image/svg+xml"/>
  */
 package net.sf.mmm.client.ui.api.widget;
 

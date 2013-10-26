@@ -110,7 +110,7 @@
  * switching} between {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view} and
  * {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT edit} {@link net.sf.mmm.client.ui.api.common.UiMode
  * mode}</li>
- * <li>Higher level widgets such as {@link net.sf.mmm.client.ui.api.widget.table table widgets},
+ * <li>Higher level widgets such as {@link net.sf.mmm.client.ui.api.widget.complex complex widgets},
  * {@link net.sf.mmm.client.ui.api.widget.panel panels}, {@link net.sf.mmm.client.ui.api.widget.window windows}, etc.</li>
  * <li>High level widgets to support {@link net.sf.mmm.client.ui.base.widget.custom.pattern UI patterns}</li>
  * </ul>

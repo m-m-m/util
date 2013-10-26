@@ -26,6 +26,7 @@ import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTree
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.GwtConstants;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
@@ -379,7 +380,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     if (this.tree == null) {
       this.tree = new Tree();
-      this.tree.setTabIndex(-2);
+      this.tree.setTabIndex(GwtConstants.TAB_INDEX_DISABLE);
       OpenHandler<TreeItem> openHandler = new OpenHandler<TreeItem>() {
 
         /**

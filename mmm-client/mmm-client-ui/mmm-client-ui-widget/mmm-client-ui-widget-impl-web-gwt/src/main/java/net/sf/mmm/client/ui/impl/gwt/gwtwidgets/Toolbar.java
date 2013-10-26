@@ -23,10 +23,10 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is a {@link com.google.gwt.user.client.ui.Widget} representing a <em>toolbar</em>. It renders a
- * horizontal bar that is supposed to contain buttons with icons. You can directly
- * {@link #add(com.google.gwt.user.client.ui.Widget) add} buttons. To put buttons into a {@link ButtonGroup}
- * you may also use {@link #startGroup()} and {@link #endGroup()}.
+ * This is a {@link com.google.gwt.user.client.ui.Widget} representing a <em>toolbar</em>. It renders a horizontal bar
+ * that is supposed to contain buttons with icons. You can directly {@link #add(com.google.gwt.user.client.ui.Widget)
+ * add} buttons. To put buttons into a {@link ButtonGroup} you may also use {@link #startGroup()} and
+ * {@link #endGroup()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -152,7 +152,7 @@ public class Toolbar extends FlowPanel implements ButtonContainer, HasAllFocusHa
       if (this.focusButton == null) {
         setFocusButton(button);
       } else {
-        button.setTabIndex(-2);
+        button.setTabIndex(GwtConstants.TAB_INDEX_DISABLE);
       }
       button.addFocusHandler(this);
       button.addKeyUpHandler(this);
@@ -167,8 +167,7 @@ public class Toolbar extends FlowPanel implements ButtonContainer, HasAllFocusHa
 
   /**
    * 
-   * @param button is the {@link ButtonBase button} to set a active descendant and receiver of the focus (via
-   *        tab).
+   * @param button is the {@link ButtonBase button} to set a active descendant and receiver of the focus (via tab).
    */
   private void setFocusButton(ButtonBase button) {
 

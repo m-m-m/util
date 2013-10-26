@@ -31,18 +31,15 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    * This method creates a new {@link UiWidgetTableColumn column} for this table.
    * 
    * @param <CELL> is the generic type of the {@link TypedProperty#getPropertyType() property type}.
-   * @param rowProperty is the {@link TypedProperty} identifying which {@link TypedProperty#getPojoPath()
-   *        property} of {@literal <ROW>} to show in the column.
-   * @param widgetFactory is the factory to
-   *        {@link UiSingleWidgetFactory#create(net.sf.mmm.client.ui.api.UiContext) create} widgets for this
-   *        column. <b>ATTENTION:</b> These widgets might be reused for performance-reasons for a different
-   *        row just by {@link UiWidgetWithValue#setValue(Object) setting its value}. They should NOT contain
-   *        additional state information (what is generally a bad idea). This parameter may be
-   *        <code>null</code> to fall back to
-   *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class) datatype based
-   *        creation}.
-   * @param sortComparator is the {@link UiWidgetTableColumn#setSortComparator(Comparator) sort-comparator to
-   *        set}.
+   * @param rowProperty is the {@link TypedProperty} identifying which {@link TypedProperty#getPojoPath() property} of
+   *        {@literal <ROW>} to show in the column.
+   * @param widgetFactory is the factory to {@link UiSingleWidgetFactory#create(net.sf.mmm.client.ui.api.UiContext)
+   *        create} widgets for this column. <b>ATTENTION:</b> These widgets might be reused for performance-reasons for
+   *        a different row just by {@link UiWidgetWithValue#setValue(Object) setting its value}. They should NOT
+   *        contain additional state information (what is generally a bad idea). This parameter may be <code>null</code>
+   *        to fall back to {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class) datatype
+   *        based creation}.
+   * @param sortComparator is the {@link UiWidgetTableColumn#setSortComparator(Comparator) sort-comparator to set}.
    * @return a new {@link UiWidgetTableColumn}.
    */
   @Override
@@ -53,18 +50,15 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    * This method creates a new {@link UiWidgetTableColumn column} for this table.
    * 
    * @param <CELL> is the generic type of the {@link PropertyAccessor#getValue(Object) property value}.
-   * @param rowAccessor is the {@link PropertyAccessor} to {@link PropertyAccessor#getValue(Object) access}
-   *        the property of {@literal <ROW>} to show in the column.
-   * @param widgetFactory is the factory to
-   *        {@link UiSingleWidgetFactory#create(net.sf.mmm.client.ui.api.UiContext) create} widgets for this
-   *        column. <b>ATTENTION:</b> These widgets might be reused for performance-reasons for a different
-   *        row just by {@link UiWidgetWithValue#setValue(Object) setting its value}. They should NOT contain
-   *        additional state information (what is generally a bad idea). This parameter may be
-   *        <code>null</code> to fall back to
-   *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class) datatype based
-   *        creation}.
-   * @param sortComparator is the {@link UiWidgetTableColumn#setSortComparator(Comparator) sort-comparator to
-   *        set}.
+   * @param rowAccessor is the {@link PropertyAccessor} to {@link PropertyAccessor#getValue(Object) access} the property
+   *        of {@literal <ROW>} to show in the column.
+   * @param widgetFactory is the factory to {@link UiSingleWidgetFactory#create(net.sf.mmm.client.ui.api.UiContext)
+   *        create} widgets for this column. <b>ATTENTION:</b> These widgets might be reused for performance-reasons for
+   *        a different row just by {@link UiWidgetWithValue#setValue(Object) setting its value}. They should NOT
+   *        contain additional state information (what is generally a bad idea). This parameter may be <code>null</code>
+   *        to fall back to {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class) datatype
+   *        based creation}.
+   * @param sortComparator is the {@link UiWidgetTableColumn#setSortComparator(Comparator) sort-comparator to set}.
    * @return a new {@link UiWidgetTableColumn}.
    */
   @Override
@@ -74,13 +68,13 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
   /**
    * This method sets the {@link #getColumn(int) columns} for the table of this model.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method should typically be called only once during initialization of this model. Multiple calls of
-   * this method for dynamic changes of the UI may NOT be completely supported by all underlying
-   * implementations. We recommend to test your code with all relevant implementations before investing in
-   * multiple dynamic changes.
+   * This method should typically be called only once during initialization of this model. Multiple calls of this method
+   * for dynamic changes of the UI may NOT be completely supported by all underlying implementations. We recommend to
+   * test your code with all relevant implementations before investing in multiple dynamic changes.
    * 
    * @param columns are the {@link UiWidgetTableColumn columns} to set.
    */
+  @SuppressWarnings("unchecked")
   @Override
   void setColumns(UiWidgetTableColumn<ROW, ?>... columns);
 
@@ -98,10 +92,10 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
    * 
    * @see java.util.List#get(int)
    * 
-   * @param index is the index of the requested {@link UiWidgetTableColumn column}. The index corresponds to
-   *        the index when the columns have been {@link #setColumns(UiWidgetTableColumn...) set}. Reordering
-   *        or hiding columns in the UI has no effect on the index. The value has to be in the range from
-   *        <code>0</code> to <code>{@link #getColumnCount()} - 1</code>.
+   * @param index is the index of the requested {@link UiWidgetTableColumn column}. The index corresponds to the index
+   *        when the columns have been {@link #setColumns(UiWidgetTableColumn...) set}. Reordering or hiding columns in
+   *        the UI has no effect on the index. The value has to be in the range from <code>0</code> to
+   *        <code>{@link #getColumnCount()} - 1</code>.
    * @return the requested {@link UiWidgetTableColumn column}.
    */
   @Override

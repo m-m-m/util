@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
-import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
+import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting

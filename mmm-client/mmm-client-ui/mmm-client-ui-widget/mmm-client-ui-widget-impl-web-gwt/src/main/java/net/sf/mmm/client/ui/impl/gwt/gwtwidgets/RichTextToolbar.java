@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
+import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetAbstractButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetToggleButton;
-import net.sf.mmm.client.ui.api.widget.field.RichTextFeature;
 import net.sf.mmm.util.gwt.api.JavaScriptSelection;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -33,6 +33,9 @@ import com.google.gwt.user.client.ui.RichTextArea.Justification;
 /**
  * This class is a {@link com.google.gwt.user.client.ui.Widget} that represents the toolbar for a {@link RichTextArea}.
  * The toolbar allows to format the selected text or insert images, hyperlinks, etc.
+ * 
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.0
  */
 public class RichTextToolbar extends Toolbar {
 
