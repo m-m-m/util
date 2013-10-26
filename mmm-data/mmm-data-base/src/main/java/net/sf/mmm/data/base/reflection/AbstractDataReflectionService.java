@@ -37,7 +37,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDataReflectionService extends AbstractLoggableComponent implements DataReflectionService {
+public abstract class AbstractDataReflectionService extends AbstractLoggableComponent implements
+    DataReflectionService {
 
   /** @see #getDataClass(String) */
   private final Map<String, AbstractDataClass<? extends DataObject>> name2class;
@@ -275,14 +276,15 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   }
 
   /**
-   * This method {@link #addClass(AbstractDataClass) registers} the given <code>contentClass</code> recursive.
-   * Here recursive means that all {@link net.sf.mmm.data.api.reflection.DataClass#getSubClasses()
-   * sub-classes} are also {@link #addClassRecursive(AbstractDataClass) registered} recursively.
+   * This method {@link #addClass(AbstractDataClass) registers} the given <code>contentClass</code> recursive. Here
+   * recursive means that all {@link net.sf.mmm.data.api.reflection.DataClass#getSubClasses() sub-classes} are also
+   * {@link #addClassRecursive(AbstractDataClass) registered} recursively.
    * 
    * @param dataClass is the class to add.
    * @throws DataReflectionException if the class or one of its sub-classes could NOT be registered.
    */
-  protected void addClassRecursive(AbstractDataClass<? extends DataObject> dataClass) throws DataReflectionException {
+  protected void addClassRecursive(AbstractDataClass<? extends DataObject> dataClass)
+      throws DataReflectionException {
 
     addClass(dataClass);
     for (AbstractDataClass<? extends DataObject> subClass : dataClass.getSubClasses()) {
@@ -300,7 +302,7 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
 
     Long id = contentField.getId();
     AbstractDataField<? extends DataObject, ?> duplicate = this.id2field.get(id);
-    if (duplicate == null) {
+    if (duplicate != null) {
       throw new DuplicateObjectException(contentField, id, duplicate);
     }
     this.id2field.put(id, contentField);
@@ -339,7 +341,8 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param contentField is the field to remove.
    * @throws DataReflectionException if the operation fails (e.g. the field is required by the system).
    */
-  protected void removeField(AbstractDataField<? extends DataObject, ?> contentField) throws DataReflectionException {
+  protected void removeField(AbstractDataField<? extends DataObject, ?> contentField)
+      throws DataReflectionException {
 
     if (contentField.getModifiers().isSystem()) {
       throw new DataSystemModifyException(contentField);
@@ -380,10 +383,8 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
   /**
    * This method synchronizes the given class that has been added or modified.
    * 
-   * @param <SUPERCLASS> is the generic type of {@link DataClass#getJavaClass()} for the given
-   *        <code>superClass</code>.
-   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()} for the given
-   *        <code>dataClass</code>.
+   * @param <SUPERCLASS> is the generic type of {@link DataClass#getJavaClass()} for the given <code>superClass</code>.
+   * @param <CLASS> is the generic type of {@link DataClass#getJavaClass()} for the given <code>dataClass</code>.
    * @param dataClass is the {@link DataClass} that has changed.
    * @param superClass is the {@link DataClass#getSuperClass() super class}.
    */
@@ -417,7 +418,8 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
           throw new DataReflectionException("Changing modifiers of system class is NOT permitted!");
         }
         // TODO I18N
-        throw new UnsupportedOperationException("Changing the modifiers of a content-class is currently NOT supported!");
+        throw new UnsupportedOperationException(
+            "Changing the modifiers of a content-class is currently NOT supported!");
       }
       for (AbstractDataField<CLASS, ?> field : dataClass.getDeclaredFields()) {
         syncField(dataClass, field);
@@ -481,15 +483,15 @@ public abstract class AbstractDataReflectionService extends AbstractLoggableComp
    * @param <FIELD> is the generic type of {@link DataField#getFieldType()}.
    * @param id is the unique {@link DataField#getId() ID} of the new field. May be <code>null</code>.
    * @param title is the {@link DataField#getTitle() title} of the new field.
-   * @param declaringClass is the {@link DataClass} {@link DataField#getDeclaringClass() declaring} the new
-   *        field.
+   * @param declaringClass is the {@link DataClass} {@link DataField#getDeclaringClass() declaring} the new field.
    * @param fieldType is the {@link DataField#getFieldType()} of the new field.
    * @param modifiers are the {@link DataField#getModifiers() modifiers} of the new field.
    * @param isDeleted is the {@link DataField#getDeletedFlag() deleted flag}.
    * @return the new {@link DataField}.
    */
   public <CLASS extends DataObject, FIELD> AbstractDataField<CLASS, FIELD> createDataField(Long id, String title,
-      DataClass<CLASS> declaringClass, GenericType<FIELD> fieldType, DataFieldModifiers modifiers, boolean isDeleted) {
+      DataClass<CLASS> declaringClass, GenericType<FIELD> fieldType, DataFieldModifiers modifiers,
+      boolean isDeleted) {
 
     AbstractDataField<CLASS, FIELD> newField = createDataField();
     if (id != null) {
