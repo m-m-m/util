@@ -169,13 +169,11 @@ public class JavaScriptUtil {
    * @param type is the requested {@link InputElement#getType() type} (e.g. "range", "date", etc.).
    * @return the requested {@link InputElement} of the given <code>type</code>.
    */
-  public InputElement createInputElement(String type) {
-
-    // return DOMImpl.impl.createInputElement(Document.get(), type);
-    InputElement inputElement = Document.get().createTextInputElement();
-    setInputElementType(inputElement, type);
-    return inputElement;
-  }
+  public native InputElement createInputElement(String type) /*-{
+    var result = $doc.createElement("INPUT");
+    result.type = type;
+    return result;
+  }-*/;
 
   /**
    * This method sets the {@link InputElement#getType() type} of an {@link InputElement}.
