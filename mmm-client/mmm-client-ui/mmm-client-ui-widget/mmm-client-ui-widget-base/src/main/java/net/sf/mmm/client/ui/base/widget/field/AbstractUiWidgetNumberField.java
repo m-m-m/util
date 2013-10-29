@@ -38,6 +38,21 @@ public abstract class AbstractUiWidgetNumberField<ADAPTER extends UiWidgetAdapte
    * {@inheritDoc}
    */
   @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    if (this.minimumValue != null) {
+      adapter.setMinimumValue(this.minimumValue);
+    }
+    if (this.maximumValue != null) {
+      adapter.setMaximumValue(this.maximumValue);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public VALUE getMinimumValue() {
 
     return this.minimumValue;

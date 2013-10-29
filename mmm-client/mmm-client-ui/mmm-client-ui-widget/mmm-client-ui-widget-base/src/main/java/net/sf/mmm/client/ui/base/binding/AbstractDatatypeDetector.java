@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.sf.mmm.client.ui.api.common.Color;
 import net.sf.mmm.util.lang.api.Datatype;
 
 /**
@@ -62,6 +63,7 @@ public abstract class AbstractDatatypeDetector implements DatatypeDetector {
     registerDatatype(Date.class);
     // registerDatatype(Calendar.class);
     registerDatatype(Datatype.class);
+    registerDatatype(Color.class);
   }
 
   /**

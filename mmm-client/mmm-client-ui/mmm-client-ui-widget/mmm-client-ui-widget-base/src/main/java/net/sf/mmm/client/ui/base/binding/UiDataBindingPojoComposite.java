@@ -20,7 +20,8 @@ import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for composite custom widgets.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for composite custom
+ * widgets.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -60,8 +61,8 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   }
 
   /**
-   * Verifies that the given <code>widget</code> is NOT already {@link List#contains(Object) contained} in the given
-   * <code>list</code>.
+   * Verifies that the given <code>widget</code> is NOT already {@link List#contains(Object) contained} in the
+   * given <code>list</code>.
    * 
    * @param list is the {@link List} to check.
    * @param widget is the {@link UiWidgetWithValue} to check.
@@ -108,7 +109,8 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   }
 
   /**
-   * Creates the {@link UiWidgetWithValue} for the given <code>property</code> using the given <code>label</code>.
+   * Creates the {@link UiWidgetWithValue} for the given <code>property</code> using the given
+   * <code>label</code>.
    * 
    * @param <P> is the generic {@link TypedProperty#getPropertyType() property type}.
    * 
@@ -133,14 +135,16 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
     childWidget.addValidator(getAdapter().getPropertyValidator(property, propertyType));
     if (childWidget instanceof UiWidgetRangeField) {
       Range<?> range = getAdapter().getRangeConstraints(property, propertyType);
-      UiWidgetRangeField<P> field = (UiWidgetRangeField<P>) childWidget;
-      Object minimumValue = range.getMinimumValue();
-      if (minimumValue != null) {
-        field.setMinimumValue((P) minimumValue);
-      }
-      Object maximumValue = range.getMaximumValue();
-      if (maximumValue != null) {
-        field.setMaximumValue((P) maximumValue);
+      if (range != null) {
+        UiWidgetRangeField<P> field = (UiWidgetRangeField<P>) childWidget;
+        Object minimumValue = range.getMinimumValue();
+        if (minimumValue != null) {
+          field.setMinimumValue((P) minimumValue);
+        }
+        Object maximumValue = range.getMaximumValue();
+        if (maximumValue != null) {
+          field.setMaximumValue((P) maximumValue);
+        }
       }
     }
     return childWidget;
@@ -158,7 +162,8 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
       if (!widgetList.isEmpty()) {
         Object propertyValue;
         if (property == null) {
-          // if property is null this indicates that the widget handles the POJO itself rather than one of its property.
+          // if property is null this indicates that the widget handles the POJO itself rather than one of its
+          // property.
           // rare and special case but needs to be covered...
           propertyValue = template;
         } else {
@@ -187,7 +192,8 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
       if (!widgetList.isEmpty()) {
         Object propertyValue;
         if (property == null) {
-          // if property is null this indicates that the widget handles the POJO itself rather than one of its property.
+          // if property is null this indicates that the widget handles the POJO itself rather than one of its
+          // property.
           // rare and special case but needs to be covered...
           propertyValue = value;
         } else {

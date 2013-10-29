@@ -23,8 +23,8 @@ import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
 /**
  * This is the default implementation of the {@link net.sf.mmm.persistence.api.PersistenceManager} interface.<br/>
  * <b>ATTENTION:</b><br/>
- * This class assumes that you have at least one custom implementation of {@link GenericDao} that gets
- * injected to {@link #setManagers(List)}.
+ * This class assumes that you have at least one custom implementation of {@link GenericDao} that gets injected to
+ * {@link #setManagers(List)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -67,7 +67,9 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
     getLogger().info("EntityManager registered with " + entities.size() + " entities.");
     for (EntityType<?> entityType : entities) {
       Class<?> entityClass = entityType.getJavaType();
-      if (GenericEntity.class.isAssignableFrom(entityClass)) {
+      if (entityClass == null) {
+        // ignore entities that have no java type such as audit/jornal tables from envers.
+      } else if (GenericEntity.class.isAssignableFrom(entityClass)) {
         if (!hasManager((Class<? extends GenericEntity<?>>) entityClass)) {
           JpaGenericDao manager = new JpaGenericDao(entityClass);
           manager.setEntityManager(this.entityManager);
@@ -79,14 +81,15 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
           getLogger().debug("Found registered manager for entity " + entityClass.getName());
         }
       } else {
-        getLogger().warn("Entity " + entityClass.getName() + " does NOT implement " + GenericEntity.class.getName());
+        getLogger().warn(
+            "Entity " + entityClass.getName() + " does NOT implement " + GenericEntity.class.getName());
       }
     }
   }
 
   /**
-   * This method gets a thread-safe {@link EntityManager}. It acts as proxy to an {@link EntityManager}
-   * associated with the current thread (created when the transaction is opened e.g. via
+   * This method gets a thread-safe {@link EntityManager}. It acts as proxy to an {@link EntityManager} associated with
+   * the current thread (created when the transaction is opened e.g. via
    * {@link net.sf.mmm.transaction.api.TransactionExecutor}).
    * 
    * @return the according {@link EntityManager}.
@@ -97,8 +100,8 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
   }
 
   /**
-   * This method injects a thread-safe {@link EntityManager} instance that acts as proxy to an
-   * {@link EntityManager} associated with the current thread (created when the transaction is opened).
+   * This method injects a thread-safe {@link EntityManager} instance that acts as proxy to an {@link EntityManager}
+   * associated with the current thread (created when the transaction is opened).
    * 
    * @param entityManager is the entityManager to set
    */
@@ -132,8 +135,8 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
    * 
    * @param managerList is the {@link List} of all {@link GenericDao} to register.
    * @throws DuplicateObjectException if two managers use the same entity-class (
-   *         {@link GenericDao#getEntityClassImplementation()}, {@link GenericDao#getEntityClassReadWrite()},
-   *         or {@link GenericDao#getEntityClassReadOnly()}).
+   *         {@link GenericDao#getEntityClassImplementation()}, {@link GenericDao#getEntityClassReadWrite()}, or
+   *         {@link GenericDao#getEntityClassReadOnly()}).
    */
   @Inject
   public void setManagers(List<GenericDao<?, ?>> managerList) throws DuplicateObjectException {
