@@ -17,6 +17,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public class Color extends AbstractSimpleDatatype<Integer> {
 
+  /** A factor value for {@link #hsbToRgb(float, float, float)}. */
+  private static final float HSV2RGB_FACTOR = 0.5f;
+
   /** Number of bits to shift for {@link #getGreen() green} value. */
   private static final int SHIFT_GREEN = 8;
 
@@ -52,6 +55,33 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 4307511006443832245L;
+
+  /** The {@link Color} black. */
+  public static final Color BLACK = new Color(0);
+
+  /** The {@link Color} white. */
+  public static final Color WHITE = new Color(0x0FFFFFF);
+
+  /** The {@link Color} red. */
+  public static final Color RED = new Color(0x0FF0000);
+
+  /** The {@link Color} green. */
+  public static final Color GREEN = new Color(0x000FF00);
+
+  /** The {@link Color} blue. */
+  public static final Color BLUE = new Color(0x00000FF);
+
+  /** The {@link Color} magenta. */
+  public static final Color MAGENTA = new Color(0x0FF00FF);
+
+  /** The {@link Color} cyjan. */
+  public static final Color CYJAN = new Color(0x000FFFF);
+
+  /** The {@link Color} yellow. */
+  public static final Color YELLOW = new Color(0x0FFFF00);
+
+  /** The {@link Color} grey. */
+  public static final Color GREY = new Color(0x0888888);
 
   /**
    * The constructor for de-serialization.
@@ -348,9 +378,9 @@ public class Color extends AbstractSimpleDatatype<Integer> {
           throw new IllegalCaseException("h=" + h);
       }
     }
-    int red = (int) (rf * MASK_FLOAT + 0.5f);
-    int green = (int) (gf * MASK_FLOAT + 0.5f);
-    int blue = (int) (bf * MASK_FLOAT + 0.5f);
+    int red = (int) (rf * MASK_FLOAT + HSV2RGB_FACTOR);
+    int green = (int) (gf * MASK_FLOAT + HSV2RGB_FACTOR);
+    int blue = (int) (bf * MASK_FLOAT + HSV2RGB_FACTOR);
     return (red << SHIFT_RED) | (green << SHIFT_GREEN) | blue;
   }
 

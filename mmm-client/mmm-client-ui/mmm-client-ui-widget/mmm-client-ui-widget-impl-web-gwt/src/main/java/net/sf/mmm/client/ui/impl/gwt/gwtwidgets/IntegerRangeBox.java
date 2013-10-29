@@ -20,7 +20,7 @@ public class IntegerRangeBox extends NumberBox<Integer> {
    */
   public IntegerRangeBox() {
 
-    super(JavaScriptUtil.getInstance().createInputElement(INPUT_TYPE_RANGE), IntegerRenderer.instance(),
+    super(JavaScriptUtil.getInstance().createInputElement(HtmlConstants.INPUT_TYPE_RANGE), IntegerRenderer.instance(),
         IntegerParser.instance());
   }
 

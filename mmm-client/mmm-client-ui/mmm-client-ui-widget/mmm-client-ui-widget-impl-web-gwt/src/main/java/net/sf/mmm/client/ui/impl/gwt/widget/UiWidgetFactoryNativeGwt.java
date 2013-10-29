@@ -20,6 +20,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetSlotGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetTabGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetToggleButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetCheckboxFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetColorFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboboxFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
@@ -92,6 +93,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetRadioButtonsVerticalFieldGwt.Factory());
     register(new UiWidgetComboboxFieldGwt.Factory());
     register(new UiWidgetCheckboxFieldGwt.Factory());
+    register(new UiWidgetColorFieldGwt.Factory());
     // panels
     register(new UiWidgetTabGwt.Factory());
     register(new UiWidgetTabPanelGwt.Factory());

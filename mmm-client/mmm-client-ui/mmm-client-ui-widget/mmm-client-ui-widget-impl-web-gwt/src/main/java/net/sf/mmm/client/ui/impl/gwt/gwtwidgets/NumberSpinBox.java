@@ -25,7 +25,7 @@ public abstract class NumberSpinBox<VALUE extends Number> extends NumberBox<VALU
    */
   public NumberSpinBox(Renderer<VALUE> renderer, Parser<VALUE> parser) {
 
-    super(JavaScriptUtil.getInstance().createInputElement(INPUT_TYPE_NUMBER), renderer, parser);
+    super(JavaScriptUtil.getInstance().createInputElement(HtmlConstants.INPUT_TYPE_NUMBER), renderer, parser);
   }
 
   /**

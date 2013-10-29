@@ -2,12 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.Color;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
@@ -55,6 +59,20 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     radios.setOptions(Arrays.asList(SizeUnit.values()));
     radios.setLabel("Unit");
     getDelegate().addChildren(radios);
+
+    UiWidgetColorField colors = context.getWidgetFactory().create(UiWidgetColorField.class);
+    List<Color> colorOptions = new ArrayList<Color>();
+    colorOptions.add(Color.BLACK);
+    colorOptions.add(Color.RED);
+    colorOptions.add(Color.GREEN);
+    colorOptions.add(Color.BLUE);
+    colorOptions.add(Color.WHITE);
+    colorOptions.add(Color.CYJAN);
+    colorOptions.add(Color.YELLOW);
+    colorOptions.add(Color.MAGENTA);
+    colorOptions.add(Color.GREY);
+    colors.setOptions(colorOptions);
+    getDelegate().addChildren(colors);
 
     section.addCollapseWidget(widgetBirthday);
     section.addCollapseWidget(richTextField);

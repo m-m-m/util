@@ -152,7 +152,7 @@ public class Toolbar extends FlowPanel implements ButtonContainer, HasAllFocusHa
       if (this.focusButton == null) {
         setFocusButton(button);
       } else {
-        button.setTabIndex(GwtConstants.TAB_INDEX_DISABLE);
+        button.setTabIndex(HtmlConstants.TAB_INDEX_DISABLE);
       }
       button.addFocusHandler(this);
       button.addKeyUpHandler(this);

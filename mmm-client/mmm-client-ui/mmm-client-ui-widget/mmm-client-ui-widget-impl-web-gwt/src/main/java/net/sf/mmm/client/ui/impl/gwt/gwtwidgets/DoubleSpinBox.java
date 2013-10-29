@@ -20,7 +20,7 @@ public class DoubleSpinBox extends NumberBox<Double> {
    */
   public DoubleSpinBox() {
 
-    super(JavaScriptUtil.getInstance().createInputElement(INPUT_TYPE_NUMBER), DoubleRenderer.instance(),
+    super(JavaScriptUtil.getInstance().createInputElement(HtmlConstants.INPUT_TYPE_NUMBER), DoubleRenderer.instance(),
         DoubleParser.instance());
     getElement().setAttribute("step", "any");
   }

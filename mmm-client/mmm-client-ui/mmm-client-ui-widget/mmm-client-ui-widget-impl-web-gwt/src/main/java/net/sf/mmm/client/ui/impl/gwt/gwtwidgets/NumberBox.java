@@ -24,18 +24,6 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
 public abstract class NumberBox<VALUE extends Number> extends ValueBoxBase<VALUE> implements
     AttributeWriteMinimumValue<VALUE>, AttributeWriteMaximumValue<VALUE> {
 
-  /**
-   * The {@link com.google.gwt.dom.client.InputElement#getType() type} of the
-   * {@link com.google.gwt.dom.client.InputElement} for a range slider.
-   */
-  protected static final String INPUT_TYPE_RANGE = "range";
-
-  /**
-   * The {@link com.google.gwt.dom.client.InputElement#getType() type} of the
-   * {@link com.google.gwt.dom.client.InputElement} for a number spin-box.
-   */
-  protected static final String INPUT_TYPE_NUMBER = "number";
-
   /** @see #getMinimumValue() */
   private VALUE min;
 
