@@ -825,6 +825,14 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   Object object);
 
   /**
+   * @see net.sf.mmm.util.nls.api.TechnicalErrorUserException
+   * 
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("An unexpected error has occurred! We appologize any inconvenience. Please try again later.")
+  NlsMessage errorTechnical();
+
+  /**
    * @see net.sf.mmm.util.nls.api.DuplicateObjectException
    * 
    * @param object is the duplicate object.

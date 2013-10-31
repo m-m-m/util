@@ -262,6 +262,15 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * {@inheritDoc}
    */
   @Override
+  public boolean isForUser() {
+
+    return !isTechnical();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public String toString() {
 
     String result = super.toString();

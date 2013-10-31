@@ -45,7 +45,7 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    * analyzed by the operators or software developers of the system. Further in such case the end-user can
    * typically do nothing about the problem (except to retry his operation) and will typically not understand
    * the problem. Therefore a generic message should be displayed as {@link net.sf.mmm.util.lang.api.Message}
-   * for the end-user in such case.</li>
+   * for the end-user in such case. See {@link net.sf.mmm.util.nls.api.TechnicalErrorUserException}.</li>
    * <li>A user failure is an undesired but NOT abnormal situation. It should be logged on a level less than
    * error (typically info). The {@link #getMessage() message} will directly be displayed as
    * {@link net.sf.mmm.util.lang.api.Message} to end-users and has to be easy to understand.</li>
@@ -54,6 +54,12 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    * @return <code>true</code> if this is a technical exception, <code>false</code> if this is a user error.
    */
   boolean isTechnical();
+
+  /**
+   * @return <code>true</code> if the {@link #getMessage() message} of this exception is for end-users (or
+   *         clients), <code>false</code> otherwise (for internal {@link #isTechnical() technical} errors).
+   */
+  boolean isForUser();
 
   /**
    * This method gets the {@link NlsMessage} describing the problem.
