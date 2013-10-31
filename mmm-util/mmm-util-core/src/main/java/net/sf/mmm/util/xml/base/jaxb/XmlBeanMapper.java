@@ -140,6 +140,16 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
+   * @return <code>true</code> if undefined tags and attributes should be ignored (may be useful for
+   *         compatibility), <code>false</code> if they shall cause an exception (default is
+   *         <code>false</code>).
+   */
+  protected boolean isIgnoreUndefinedNodes() {
+
+    return false;
+  }
+
+  /**
    * @return <code>true</code> if {@link #loadXml(DataResource)} should support XIncludes when reading the
    *         XML, <code>false</code> otherwise.
    */
@@ -385,7 +395,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
       case ValidationEvent.ERROR:
         if (message.startsWith("Undefined ID")) {
           // ignore as this is handled by our ID resolver...
-        } else {
+        } else if (!isIgnoreUndefinedNodes() || !message.startsWith("unexpected ")) {
           throw new XmlInvalidException(exception, message);
         }
         break;

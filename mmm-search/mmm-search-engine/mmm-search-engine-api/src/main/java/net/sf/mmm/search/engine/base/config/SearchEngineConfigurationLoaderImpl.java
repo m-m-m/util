@@ -34,6 +34,15 @@ public class SearchEngineConfigurationLoaderImpl extends XmlBeanMapper<SearchEng
    * {@inheritDoc}
    */
   @Override
+  protected boolean isIgnoreUndefinedNodes() {
+
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public SearchEngineConfigurationHolder loadConfiguration() {
 
     return loadConfiguration(SearchConfiguration.DEFAULT_CONFIGURATION_URL);
