@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.field;
 
 import net.sf.mmm.client.ui.api.aria.role.RoleCombobox;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteAllowCustomInput;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
@@ -20,7 +21,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public interface UiWidgetComboboxField<VALUE> extends UiWidgetOptionsField<VALUE>, UiWidgetNative {
+public interface UiWidgetComboboxField<VALUE> extends UiWidgetOptionsField<VALUE>, AttributeWriteAllowCustomInput,
+    UiWidgetNative {
 
   /**
    * {@inheritDoc}

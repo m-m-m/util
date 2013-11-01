@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCodeAreaField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextAreaField;
@@ -16,8 +17,8 @@ import net.sf.mmm.util.filter.api.CharFilter;
  * @since 1.0.0
  */
 public class UiWidgetAdapterTestStringField extends UiWidgetAdapterTestField<String, String> implements
-    UiWidgetAdapterTextField, UiWidgetAdapterPasswordField, UiWidgetAdapterTextAreaField,
-    UiWidgetAdapterRichTextField {
+    UiWidgetAdapterTextField, UiWidgetAdapterPasswordField, UiWidgetAdapterTextAreaField, UiWidgetAdapterRichTextField,
+    UiWidgetAdapterCodeAreaField {
 
   /** @see #getKeyboardFilter() */
   private CharFilter keyboardFilter;

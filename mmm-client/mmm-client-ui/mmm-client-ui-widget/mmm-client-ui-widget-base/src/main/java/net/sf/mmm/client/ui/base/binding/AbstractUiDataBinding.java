@@ -128,10 +128,6 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
         }
       }
       value = doGetValue(value, state);
-      // if (state != null) {
-      // boolean success = AbstractUiWidget.AccessHelper.doValidate(this.widget, state, value);
-      // this.validity = Boolean.valueOf(success);
-      // }
       return value;
     } catch (RuntimeException e) {
       if (state == null) {

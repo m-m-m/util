@@ -3,6 +3,7 @@
 package net.sf.mmm.search.engine.impl.lucene;
 
 import net.sf.mmm.search.engine.api.SearchQueryBuilderFactory;
+import net.sf.mmm.util.component.base.SpringConfigs;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
@@ -19,7 +20,7 @@ public class LuceneSearchQueryBuilderFactorySpringTest extends LuceneSearchQuery
   @Override
   protected SearchQueryBuilderFactory getQueryBuilderFactory() {
 
-    return SpringContainerPool.getInstance(SpringContainerPool.SPRING_XML_SEARCH).get(
+    return SpringContainerPool.getInstance(SpringConfigs.SPRING_XML_SEARCH).get(
         LuceneSearchQueryBuilderFactory.class);
   }
 

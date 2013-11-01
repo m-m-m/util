@@ -53,6 +53,7 @@ public abstract class AbstractDatatypeDetector implements DatatypeDetector {
     registerDatatype(Boolean.class);
     registerDatatype(Character.class);
     registerDatatype(Integer.class);
+    registerDatatype(Long.class);
     registerDatatype(Double.class);
     registerDatatype(Float.class);
     registerDatatype(Byte.class);

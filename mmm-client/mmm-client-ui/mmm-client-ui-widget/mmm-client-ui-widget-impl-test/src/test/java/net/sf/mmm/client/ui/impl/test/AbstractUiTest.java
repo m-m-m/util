@@ -17,6 +17,8 @@ import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import org.junit.Assert;
@@ -25,8 +27,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
- * This is the abstract base class for Tests of the {@link UiWidget}-framework based on the test implementation. It
- * provides the {@link #getContext() context} to start your tests with.
+ * This is the abstract base class for Tests of the {@link UiWidget}-framework based on the test
+ * implementation. It provides the {@link #getContext() context} to start your tests with.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -66,7 +68,7 @@ public abstract class AbstractUiTest extends Assert {
   protected UiContext getContext() {
 
     if (this.springConfig == null) {
-      UiContextTest context = new UiContextTest();
+      UiContextTestImpl context = new UiContextTestImpl();
       UiWidgetFactoryDatatypeTest impl = new UiWidgetFactoryDatatypeTest();
       impl.setContext(context);
       impl.initialize();
@@ -92,8 +94,8 @@ public abstract class AbstractUiTest extends Assert {
 
   /**
    * @param widget is the {@link AbstractUiWidget}.
-   * @return the result of {@link AbstractUiWidget#hasWidgetAdapter()} (while a recursive verification for consistency
-   *         is performed).
+   * @return the result of {@link AbstractUiWidget#hasWidgetAdapter()} (while a recursive verification for
+   *         consistency is performed).
    */
   protected boolean hasWidgetAdapter(UiWidget widget) {
 
@@ -104,9 +106,47 @@ public abstract class AbstractUiTest extends Assert {
   }
 
   /**
+   * This method gets the {@link AttributeReadValue#getValue() value} in the
+   * {@link AbstractUiWidget#getWidgetAdapter(UiWidget) widget adapter} of the given <code>widget</code>. This
+   * can be used to verify that the value is actually set in the adapter and will appear in the real UI.
+   * However, this is a matter of the actual native {@link UiWidgetAdapter} implementation that cannot be
+   * tested here.
+   * 
+   * @param <VALUE> is the generic type of the <code>value</code>.
+   * @param widget is the {@link UiWidgetWithValue}.
+   * @return the adapter value.
+   */
+  @SuppressWarnings("unchecked")
+  protected <VALUE> VALUE getAdapterValue(UiWidgetWithValue<VALUE> widget) {
+
+    UiWidgetAdapter widgetAdapter = AbstractUiWidget.getWidgetAdapter(widget);
+    Assert.assertTrue("Illegal WidgetAdapter", widgetAdapter instanceof AttributeWriteValue);
+    AttributeReadValue<VALUE> adapterWriteValue = (AttributeReadValue<VALUE>) widgetAdapter;
+    return adapterWriteValue.getValue();
+  }
+
+  /**
+   * This method sets the given <code>value</code> in the {@link AbstractUiWidget#getWidgetAdapter(UiWidget)
+   * widget adapter} of the given <code>widget</code>. This may be used to simulate that the end-user has
+   * entered the value.
+   * 
+   * @param <VALUE> is the generic type of the <code>value</code>.
+   * @param widget is the {@link UiWidgetWithValue}.
+   * @param value is the value to set.
+   */
+  @SuppressWarnings("unchecked")
+  protected <VALUE> void setAdapterValue(UiWidgetWithValue<VALUE> widget, VALUE value) {
+
+    UiWidgetAdapter widgetAdapter = AbstractUiWidget.getWidgetAdapter(widget);
+    Assert.assertTrue("Illegal WidgetAdapter", widgetAdapter instanceof AttributeWriteValue);
+    AttributeWriteValue<VALUE> adapterWriteValue = (AttributeWriteValue<VALUE>) widgetAdapter;
+    adapterWriteValue.setValue(value);
+  }
+
+  /**
    * @param widget is the {@link AbstractUiWidget}.
-   * @param hasWidgetAdapter - the status of {@link AbstractUiWidget#hasWidgetAdapter()} to check recursively for
-   *        consistency.
+   * @param hasWidgetAdapter - the status of {@link AbstractUiWidget#hasWidgetAdapter()} to check recursively
+   *        for consistency.
    */
   protected void verifyHasWidgetAdapterRecursive(AbstractUiWidget<?> widget, boolean hasWidgetAdapter) {
 
@@ -145,7 +185,8 @@ public abstract class AbstractUiTest extends Assert {
 
   /**
    * @param widget is the widget to verify.
-   * @param expectedValidationCount is the expected {@link UiWidgetAdapterTest#getValidationFailureSetCount()} value.
+   * @param expectedValidationCount is the expected {@link UiWidgetAdapterTest#getValidationFailureSetCount()}
+   *        value.
    */
   protected void assertValidationFailureSetCount(UiWidget widget, int expectedValidationCount) {
 
@@ -195,8 +236,7 @@ public abstract class AbstractUiTest extends Assert {
     public void onValueChange(UiEventValueChange<VALUE> event) {
 
       assertSame("Event source does NOT match", this.widget, event.getSource());
-      assertEquals("Events in test can only be programmatic!", Boolean.TRUE,
-          Boolean.valueOf(event.isProgrammatic()));
+      assertEquals("Events in test can only be programmatic!", Boolean.TRUE, Boolean.valueOf(event.isProgrammatic()));
       this.eventCount++;
     }
 
@@ -206,6 +246,14 @@ public abstract class AbstractUiTest extends Assert {
     public int getEventCount() {
 
       return this.eventCount;
+    }
+
+    /**
+     * Asserts that {@link #getEventCount() exactly one event} occurred.
+     */
+    public void assertNoEvent() {
+
+      assertEquals("Expected no value-change event!", 0, this.eventCount);
     }
 
     /**

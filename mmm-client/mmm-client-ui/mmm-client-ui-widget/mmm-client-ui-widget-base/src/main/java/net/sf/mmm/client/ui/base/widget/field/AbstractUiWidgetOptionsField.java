@@ -8,14 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteAllowCustomInput;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetOptionsField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationState;
+import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetOptionsField}.
@@ -27,7 +31,11 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapterOptionsField<VALUE>, VALUE> extends
-    AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE> {
+    AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE>,
+    AttributeWriteAllowCustomInput {
+
+  /** TODO: javadoc. */
+  private static final String CODE_UNDEFINED_OPTION = "UndefinedOption";
 
   /** @see #getOptions() */
   private final List<VALUE> mutableOptions;
@@ -47,6 +55,9 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
   /** @see #getNullValue() */
   private String nullValue;
 
+  /** @see #isAllowCustomInput() */
+  private boolean allowCustomInput;
+
   /**
    * The constructor.
    * 
@@ -59,6 +70,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
     this.options = Collections.unmodifiableList(this.mutableOptions);
     this.title2OptionMap = new HashMap<String, VALUE>();
     this.formatter = FormatterToString.getInstance();
+    this.allowCustomInput = false;
   }
 
   /**
@@ -100,13 +112,19 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
     } else {
       this.optionTitleList.clear();
     }
+    StringBuilder titleBuffer = null;
     for (VALUE option : options) {
       String title = this.formatter.format(option);
       if (title == null) {
         title = "<>";
       }
       if (this.title2OptionMap.containsKey(title)) {
-        StringBuilder titleBuffer = new StringBuilder(title);
+        if (titleBuffer == null) {
+          titleBuffer = new StringBuilder(title);
+        } else {
+          titleBuffer.setLength(0);
+          titleBuffer.append(title);
+        }
         int length = title.length();
         int duplicateIndex = 2;
         do {
@@ -166,9 +184,34 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * {@inheritDoc}
    */
   @Override
-  protected VALUE convertToValue(String adapterValue) {
+  protected VALUE convertToValue(String adapterValue, ValidationState state) {
 
-    return this.title2OptionMap.get(adapterValue);
+    VALUE value = this.title2OptionMap.get(adapterValue);
+    if ((value == null) && (adapterValue != null) && (adapterValue.length() > 0)) {
+      // user entered a value that is not available as option...
+      if (this.allowCustomInput) {
+        return convertCustomInputToValue(adapterValue);
+      } else if (state != null) {
+        state.onFailure(new ValidationFailureImpl(CODE_UNDEFINED_OPTION, getSource(), NlsAccess.getBundleFactory()
+            .createBundle(NlsBundleClientUiRoot.class).failureUndefinedOption()));
+      }
+    }
+    return value;
+  }
+
+  /**
+   * Converts the given <code>customInput</code> to {@literal <VALUE>}.
+   * 
+   * @see #isAllowCustomInput()
+   * 
+   * @param customInput is the custom input.
+   * @return the converted value.
+   */
+  @SuppressWarnings("unchecked")
+  protected VALUE convertCustomInputToValue(String customInput) {
+
+    return (VALUE) customInput;
+    // return getDataBinding().getValueFromString(customInput);
   }
 
   /**
@@ -206,6 +249,24 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
   public Formatter<VALUE> getFormatter() {
 
     return this.formatter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isAllowCustomInput() {
+
+    return this.allowCustomInput;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAllowCustomInput(boolean allowCustomInput) {
+
+    this.allowCustomInput = allowCustomInput;
   }
 
 }

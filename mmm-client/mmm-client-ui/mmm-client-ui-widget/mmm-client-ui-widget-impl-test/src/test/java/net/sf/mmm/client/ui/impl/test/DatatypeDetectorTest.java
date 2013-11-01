@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.base.binding.DatatypeDetectorImpl;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 
 /**
- * TODO: this class ...
+ * This is the test implementation of {@link DatatypeDetectorImpl}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

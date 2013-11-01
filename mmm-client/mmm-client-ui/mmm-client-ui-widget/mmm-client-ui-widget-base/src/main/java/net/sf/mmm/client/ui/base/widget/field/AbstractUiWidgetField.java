@@ -99,7 +99,16 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
           return null;
         }
       }
-      value = convertToValue(adapterValue);
+      try {
+        value = convertToValue(adapterValue, state);
+      } catch (RuntimeException e) {
+        if (state != null) {
+          state.onFailure(createValidationFailure(e));
+        } else {
+          getLogger().info("Validation failed in {}", getSource(), e);
+        }
+        return null;
+      }
     } else {
       value = getRecentValue();
     }
@@ -143,23 +152,24 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   }
 
   /**
-   * This method converts the given <code>adapterValue</code> from the {@link #getWidgetAdapter() widget adapter} to the
-   * type of this {@link #getValue() value}. The default implementation simply performs a cast. You have to override
-   * this method if {@literal <VALUE>} and {@literal <WIDGET_VALUE>} differ.
+   * This method converts the given <code>adapterValue</code> from the {@link #getWidgetAdapter() widget
+   * adapter} to the type of this {@link #getValue() value}. The default implementation simply performs a
+   * cast. You have to override this method if {@literal <VALUE>} and {@literal <WIDGET_VALUE>} differ.
    * 
    * @param adapterValue is the value to convert. Will NOT be null.
+   * @param state is the {@link ValidationState} or <code>null</code> if not called without validation.
    * @return the converted value.
    */
   @SuppressWarnings("unchecked")
-  protected VALUE convertToValue(ADAPTER_VALUE adapterValue) {
+  protected VALUE convertToValue(ADAPTER_VALUE adapterValue, ValidationState state) {
 
     return (VALUE) adapterValue;
   }
 
   /**
-   * This method gets the result of {@link #convertFromValue(Object)} for the value <code>null</code>. It is called for
-   * <code>null</code> values instead of {@link #convertFromValue(Object)} to prevent {@link NullPointerException}s. The
-   * default is <code>null</code> - override to change.
+   * This method gets the result of {@link #convertFromValue(Object)} for the value <code>null</code>. It is
+   * called for <code>null</code> values instead of {@link #convertFromValue(Object)} to prevent
+   * {@link NullPointerException}s. The default is <code>null</code> - override to change.
    * 
    * @return the value representation of <code>null</code> for the {@link #getWidgetAdapter() widget adapter}.
    */
@@ -169,9 +179,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   }
 
   /**
-   * This method converts the given <code>widgetValue</code> to the type used by the {@link #getWidgetAdapter() widget
-   * adapter}. The default implementation simply performs a cast. You have to override this method if {@literal <VALUE>}
-   * and {@literal <WIDGET_VALUE>} differ.
+   * This method converts the given <code>widgetValue</code> to the type used by the
+   * {@link #getWidgetAdapter() widget adapter}. The default implementation simply performs a cast. You have
+   * to override this method if {@literal <VALUE>} and {@literal <WIDGET_VALUE>} differ.
    * 
    * @param widgetValue is the value to convert. Will NOT be <code>null</code> (See {@link #getNullValue()}).
    * @return the converted value.

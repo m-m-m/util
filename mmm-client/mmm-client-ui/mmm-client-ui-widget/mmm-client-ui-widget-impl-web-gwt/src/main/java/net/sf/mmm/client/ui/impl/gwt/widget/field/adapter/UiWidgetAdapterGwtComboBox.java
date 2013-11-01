@@ -5,31 +5,26 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxField;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ComboBox;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterComboboxField} using GWT based on a {@link TextBox} and a
- * {@link Datalist}.
+ * This is the implementation of {@link UiWidgetAdapterComboboxField} using GWT based on a {@link TextBox} and
+ * a {@link Datalist}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value.
  */
-public class UiWidgetAdapterGwtComboBox<VALUE> extends
-    UiWidgetAdapterGwtFieldFocusWidgetBase<TextBox, VALUE, String> implements UiWidgetAdapterComboboxField<VALUE> {
+public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFocusWidgetBase<ComboBox, VALUE, String>
+    implements UiWidgetAdapterComboboxField<VALUE> {
 
   /** @see #createActiveWidget() */
-  private static int idCounter = 1;
-
-  /** @see #createActiveWidget() */
-  private Datalist datalist;
+  private DataList datalist;
 
   /** @see #setOptions(List) */
   private List<String> options;
@@ -46,16 +41,14 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected TextBox createActiveWidget() {
+  protected ComboBox createActiveWidget() {
 
-    TextBox combo = new TextBox();
-    String datalistId = "combo" + idCounter++;
-    this.datalist = new Datalist();
-    this.datalist.getElement().setId(datalistId);
+    ComboBox combo = new ComboBox();
+    this.datalist = new DataList();
     if (this.options != null) {
       this.datalist.setOptions(this.options);
     }
-    combo.getElement().setAttribute("list", datalistId);
+    combo.setDataList(this.datalist);
     return combo;
   }
 
@@ -122,42 +115,5 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends
   protected HasValue<String> getWidgetAsTakesValue() {
 
     throw new NlsIllegalStateException();
-  }
-
-  /**
-   * This inner class is a {@link Widget} that represents a <code>datalist</code> for an HTML5 combobox.
-   */
-  protected static class Datalist extends Widget {
-
-    /**
-     * The constructor.
-     */
-    public Datalist() {
-
-      super();
-      setElement(Document.get().createElement("datalist"));
-    }
-
-    /**
-     * @param options the textual options.
-     */
-    public void setOptions(List<String> options) {
-
-      // clear potential previous options
-      com.google.gwt.user.client.Element element = getElement();
-      Element childElement = element.getFirstChildElement();
-      while (childElement != null) {
-        childElement.removeFromParent();
-        childElement = element.getFirstChildElement();
-      }
-
-      // create new options
-      for (String opt : options) {
-        OptionElement option = Document.get().createOptionElement();
-        // TODO use DirectionEstimator...
-        option.setText(opt);
-        element.appendChild(option);
-      }
-    }
   }
 }

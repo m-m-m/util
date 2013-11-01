@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryDatatypeSimple;
-import net.sf.mmm.client.ui.impl.test.widget.custom.UiWidgetCustomFieldPostalCode;
+import net.sf.mmm.client.ui.impl.test.demo.widget.UiWidgetCustomFieldPostalCode;
 import net.sf.mmm.util.datatype.api.address.PostalCode;
 
 /**

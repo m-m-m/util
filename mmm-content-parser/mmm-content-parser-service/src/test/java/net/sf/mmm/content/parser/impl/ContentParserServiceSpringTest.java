@@ -3,6 +3,7 @@
 package net.sf.mmm.content.parser.impl;
 
 import net.sf.mmm.content.parser.api.ContentParserService;
+import net.sf.mmm.util.component.base.SpringConfigs;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 /**
@@ -18,7 +19,7 @@ public class ContentParserServiceSpringTest extends ContentParserServiceImplTest
   @Override
   protected ContentParserService getContentParserService() {
 
-    return SpringContainerPool.getInstance(SpringContainerPool.SPRING_XML_CONTENT_PARSER).get(
+    return SpringContainerPool.getInstance(SpringConfigs.SPRING_XML_CONTENT_PARSER).get(
         ContentParserService.class);
   }
 

@@ -6,6 +6,7 @@ import net.sf.mmm.search.indexer.NlsBundleSearchIndexerApi;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.component.base.SpringConfigs;
 import net.sf.mmm.util.component.impl.SpringContainer;
 
 import org.springframework.context.ConfigurableApplicationContext;
@@ -45,7 +46,7 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
     super();
     this.container = null;
     this.springConfig = null;
-    this.springPackages = new String[] { "net.sf.mmm" };
+    this.springPackages = null;
   }
 
   /**
@@ -57,10 +58,14 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
     if (this.container == null) {
       getLogger().info("Starting spring context...");
       ConfigurableApplicationContext springContext;
-      if (this.springConfig == null) {
-        springContext = new AnnotationConfigApplicationContext(this.springPackages);
+      if (this.springPackages == null) {
+        String config = this.springConfig;
+        if (config == null) {
+          config = SpringConfigs.SPRING_XML_SEARCH_INDEXER;
+        }
+        springContext = new ClassPathXmlApplicationContext(config);
       } else {
-        springContext = new ClassPathXmlApplicationContext(this.springConfig);
+        springContext = new AnnotationConfigApplicationContext(this.springPackages);
       }
       this.container = new SpringContainer(springContext);
       getLogger().info("Spring context started...");
@@ -75,10 +80,7 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
    */
   public static void main(String[] args) {
 
-    int exitCode = new SearchIndexerMain().run(args);
-    // CHECKSTYLE:OFF (main method)
-    System.exit(exitCode); // NOSONAR
-    // CHECKSTYLE:ON
+    new SearchIndexerMain().runAndExit(args);
   }
 
 }

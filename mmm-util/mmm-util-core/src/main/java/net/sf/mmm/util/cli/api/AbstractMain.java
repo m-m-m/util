@@ -13,7 +13,30 @@ import net.sf.mmm.util.io.base.AppendableWriter;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
 
 /**
- * This is the abstract base class for a main-program.
+ * This is the abstract base class for a main-program.<br>
+ * You simple need to derive from this class or more likely from {@link AbstractVersionedMain} like this:
+ * 
+ * <pre>
+ * {@literal @}{@link CliMode}(id = {@link CliMode#ID_DEFAULT}, usage = NlsBundleMyBundleRoot.MSG_MAIN_MODE_USAGE_DEFAULT)
+ * public class MyCoolMain extends {@link AbstractVersionedMain} {
+ *
+ *   {@literal @}{@link CliOption}(name = "--flag", aliases = "-f", usage = NlsBundleMyBundleRoot.MSG_MAIN_OPTION_FLAG)
+ *   private boolean flag;
+ *
+ *   {@literal @}{@link Override}
+ *   public int {@link AbstractVersionedMain#runDefaultMode() runDefaultMode()} {
+ *     if (this.flag) {
+ *       // ... do this ...
+ *     } else {
+ *       // ... do that ...
+ *     }
+ *   }
+ *
+ *   public static void main(String[] args) {
+ *     new MyCoolMain().{@link #runAndExit(String...) runAndExit}(args);
+ *   }
+ * }
+ * </pre>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -272,6 +295,21 @@ public abstract class AbstractMain extends AbstractLoggableObject {
       return handleError(e, parser);
     }
 
+  }
+
+  /**
+   * This method delegates to {@link #run(String...)} and then calls {@link System#exit(int)} with the
+   * returned exit code. You can easily call this additional statement from your regular <code>main</code>
+   * method, but this allows us to concentrate the "evil" {@link System#out} statement at a single place.
+   * 
+   * @param args are the commandline arguments.
+   */
+  protected void runAndExit(String... args) {
+
+    int exitCode = run(args);
+    // CHECKSTYLE:OFF (main method)
+    System.exit(exitCode); // NOSONAR
+    // CHECKSTYLE:ON
   }
 
 }

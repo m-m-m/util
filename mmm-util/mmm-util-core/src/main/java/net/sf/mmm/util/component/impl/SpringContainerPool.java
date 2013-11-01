@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.component.base.SpringConfigs;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -16,15 +17,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public final class SpringContainerPool {
-
-  /** The Spring XML configuration of <code>mmm-util-core</code>. */
-  public static final String SPRING_XML_UTIL_CORE = "/net/sf/mmm/util/beans-util-core.xml";
-
-  /** The Spring XML configuration of <code>mmm-search</code>. */
-  public static final String SPRING_XML_SEARCH = "/net/sf/mmm/search/beans-search.xml";
-
-  /** The Spring XML configuration of <code>mmm-content-parser</code>. */
-  public static final String SPRING_XML_CONTENT_PARSER = "/net/sf/mmm/content/parser/beans-content-parser.xml";
 
   /** @see #getInstance(String) */
   private static Map<String, SpringContainer> xml2containerMap;
@@ -44,7 +36,7 @@ public final class SpringContainerPool {
    */
   public static IocContainer getInstance() {
 
-    return getInstance(SPRING_XML_UTIL_CORE);
+    return getInstance(SpringConfigs.SPRING_XML_UTIL_CORE);
   }
 
   /**

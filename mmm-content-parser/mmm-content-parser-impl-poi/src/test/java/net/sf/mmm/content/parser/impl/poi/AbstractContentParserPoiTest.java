@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.component.base.SpringConfigs;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -24,7 +25,7 @@ public abstract class AbstractContentParserPoiTest {
    */
   protected IocContainer getContainer() {
 
-    return SpringContainerPool.getInstance(SpringContainerPool.SPRING_XML_CONTENT_PARSER);
+    return SpringContainerPool.getInstance(SpringConfigs.SPRING_XML_CONTENT_PARSER);
   }
 
   /**

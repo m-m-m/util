@@ -321,4 +321,12 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
   @NlsBundleMessage("Redo change")
   NlsMessage labelRichTextRedo();
 
+  /**
+   * @return the {@link NlsMessage} for the
+   *         {@link net.sf.mmm.util.validation.api.ValidationFailure#getMessage() validation failure message}
+   *         if an option is undefined.
+   */
+  @NlsBundleMessage("Undefined option")
+  NlsMessage failureUndefinedOption();
+
 }

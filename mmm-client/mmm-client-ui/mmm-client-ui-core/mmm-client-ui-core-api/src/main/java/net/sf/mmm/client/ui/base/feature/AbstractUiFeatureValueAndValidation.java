@@ -3,9 +3,12 @@
 package net.sf.mmm.client.ui.base.feature;
 
 import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
+import net.sf.mmm.util.nls.api.NlsThrowable;
+import net.sf.mmm.util.nls.api.TechnicalErrorUserException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.SimpleValidationFailure;
+import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 import net.sf.mmm.util.validation.base.ValidationStateImpl;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;
 
@@ -171,7 +174,14 @@ public abstract class AbstractUiFeatureValueAndValidation<VALUE> implements UiFe
    */
   protected ValidationFailure createValidationFailure(Throwable error) {
 
-    return new SimpleValidationFailure(error.getClass().getSimpleName(), getSource(), error.getLocalizedMessage());
+    ValidationFailure failure;
+    if (error instanceof NlsThrowable) {
+      NlsThrowable nlsThrowable = (NlsThrowable) error;
+      failure = new ValidationFailureImpl(nlsThrowable.getCode(), getSource(), ((NlsThrowable) error).getNlsMessage());
+    } else {
+      failure = new SimpleValidationFailure(TechnicalErrorUserException.CODE, getSource(), error.getMessage());
+    }
+    return failure;
   }
 
   /**
