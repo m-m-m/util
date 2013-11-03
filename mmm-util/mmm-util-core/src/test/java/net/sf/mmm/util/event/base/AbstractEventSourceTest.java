@@ -90,7 +90,7 @@ public class AbstractEventSourceTest {
 
     public void handleEvent(MyEvent event) {
 
-      throw this.error;
+      throw error;
     }
 
     /**
