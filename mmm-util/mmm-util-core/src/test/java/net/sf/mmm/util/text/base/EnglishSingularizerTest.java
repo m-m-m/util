@@ -77,6 +77,8 @@ public class EnglishSingularizerTest {
     check("type", "types");
     check("employee", "employees");
     check("knee", "knees");
+    check("page", "pages");
+    check("judge", "judges");
   }
 
   @Test
