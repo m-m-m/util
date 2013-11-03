@@ -121,6 +121,8 @@ public class EnglishSingularizer extends AbstractTextTransformer implements Sing
     rules.add(new SuffixTransformerRule("ies", "y"));
     rules.add(new SuffixTransformerRule("ues", "ue"));
     rules.add(new SuffixTransformerRule("ees", "ee"));
+    // pages -> page (and not pag, see following rule)
+    rules.add(new SuffixTransformerRule("ges", "ge"));
     // bunchES --> bunch
     // classES --> class
     // EXCUSE: canOES --> canOE, *UES->*UE
