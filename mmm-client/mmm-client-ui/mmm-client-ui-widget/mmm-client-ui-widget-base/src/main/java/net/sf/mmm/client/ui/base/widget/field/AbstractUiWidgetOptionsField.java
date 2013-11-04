@@ -18,6 +18,7 @@ import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 
@@ -34,8 +35,8 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
     AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE>,
     AttributeWriteAllowCustomInput {
 
-  /** TODO: javadoc. */
-  private static final String CODE_UNDEFINED_OPTION = "UndefinedOption";
+  /** The {@link ValidationFailure#getCode() validation failure code} for an undefined option. */
+  public static final String CODE_UNDEFINED_OPTION = "UndefinedOption";
 
   /** @see #getOptions() */
   private final List<VALUE> mutableOptions;

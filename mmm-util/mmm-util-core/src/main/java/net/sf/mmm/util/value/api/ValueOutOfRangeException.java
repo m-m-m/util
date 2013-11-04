@@ -22,12 +22,6 @@ public class ValueOutOfRangeException extends ValueException {
   /** @see #getCode() */
   public static final String MESSAGE_CODE = "ValueOutOfRange";
 
-  /** The unbound minimum. */
-  private static final String MIN_UNBOUND = "\u2212\u221E";
-
-  /** The unbound maximum. */
-  private static final String MAX_UNBOUND = "+\u221E";
-
   /**
    * The constructor.
    * 
@@ -169,7 +163,7 @@ public class ValueOutOfRangeException extends ValueException {
   public static <V> NlsMessage createMessage(V value, V minimum, V maximum, Object valueSource) {
 
     return createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(value,
-        (minimum == null) ? MIN_UNBOUND : minimum, (maximum == null) ? MAX_UNBOUND : maximum, valueSource);
+        (minimum == null) ? Range.MIN_UNBOUND : minimum, (maximum == null) ? Range.MAX_UNBOUND : maximum, valueSource);
   }
 
   /**

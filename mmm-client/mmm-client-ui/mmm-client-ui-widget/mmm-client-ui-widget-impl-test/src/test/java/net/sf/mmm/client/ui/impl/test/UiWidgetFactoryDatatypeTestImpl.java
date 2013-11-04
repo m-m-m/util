@@ -19,12 +19,12 @@ import net.sf.mmm.util.datatype.api.address.PostalCode;
  * @since 1.0.0
  */
 @Named
-public class UiWidgetFactoryDatatypeTest extends UiWidgetFactoryDatatypeSimple {
+public class UiWidgetFactoryDatatypeTestImpl extends UiWidgetFactoryDatatypeSimple {
 
   /**
    * The constructor.
    */
-  public UiWidgetFactoryDatatypeTest() {
+  public UiWidgetFactoryDatatypeTestImpl() {
 
     super();
     register(new UiSingleWidgetFactoryDatatypePostalCode());

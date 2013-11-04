@@ -14,12 +14,12 @@ import net.sf.mmm.util.datatype.api.address.PostalCode;
  * @since 1.0.0
  */
 @Named
-public class DatatypeDetectorTest extends DatatypeDetectorImpl {
+public class DatatypeDetectorTestImpl extends DatatypeDetectorImpl {
 
   /**
    * The constructor.
    */
-  public DatatypeDetectorTest() {
+  public DatatypeDetectorTestImpl() {
 
     super();
     registerDatatype(PostalCode.class);

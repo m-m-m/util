@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerSlid
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetIntegerSliderField<ADAPTER extends UiWidgetAdapterIntegerSliderField> extends
-    AbstractUiWidgetRangeField<ADAPTER, Integer> implements UiWidgetIntegerSliderField {
+    AbstractUiWidgetNumberField<ADAPTER, Integer> implements UiWidgetIntegerSliderField {
 
   /**
    * The constructor.

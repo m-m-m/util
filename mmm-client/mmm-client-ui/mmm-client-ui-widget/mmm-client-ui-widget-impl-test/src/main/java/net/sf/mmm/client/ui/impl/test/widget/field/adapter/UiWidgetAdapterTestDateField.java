@@ -23,4 +23,19 @@ public class UiWidgetAdapterTestDateField extends UiWidgetAdapterTestField<Date,
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValue(Date value) {
+
+    if (value == null) {
+      super.setValue(null);
+    } else {
+      @SuppressWarnings("deprecation")
+      Date date = new Date(value.getYear(), value.getMonth(), value.getDate());
+      super.setValue(date);
+    }
+  }
+
 }

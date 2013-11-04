@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField}.
+ * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 

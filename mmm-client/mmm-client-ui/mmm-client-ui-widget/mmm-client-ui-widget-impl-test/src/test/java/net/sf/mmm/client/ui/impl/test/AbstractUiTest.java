@@ -69,11 +69,11 @@ public abstract class AbstractUiTest extends Assert {
 
     if (this.springConfig == null) {
       UiContextTestImpl context = new UiContextTestImpl();
-      UiWidgetFactoryDatatypeTest impl = new UiWidgetFactoryDatatypeTest();
+      UiWidgetFactoryDatatypeTestImpl impl = new UiWidgetFactoryDatatypeTestImpl();
       impl.setContext(context);
       impl.initialize();
       context.setWidgetFactoryDatatype(impl);
-      context.setDatatypeDetector(new DatatypeDetectorTest());
+      context.setDatatypeDetector(new DatatypeDetectorTestImpl());
       context.initialize();
       return context;
     } else {
@@ -112,16 +112,14 @@ public abstract class AbstractUiTest extends Assert {
    * However, this is a matter of the actual native {@link UiWidgetAdapter} implementation that cannot be
    * tested here.
    * 
-   * @param <VALUE> is the generic type of the <code>value</code>.
    * @param widget is the {@link UiWidgetWithValue}.
    * @return the adapter value.
    */
-  @SuppressWarnings("unchecked")
-  protected <VALUE> VALUE getAdapterValue(UiWidgetWithValue<VALUE> widget) {
+  protected Object getAdapterValue(UiWidgetWithValue<?> widget) {
 
     UiWidgetAdapter widgetAdapter = AbstractUiWidget.getWidgetAdapter(widget);
     Assert.assertTrue("Illegal WidgetAdapter", widgetAdapter instanceof AttributeWriteValue);
-    AttributeReadValue<VALUE> adapterWriteValue = (AttributeReadValue<VALUE>) widgetAdapter;
+    AttributeReadValue<?> adapterWriteValue = (AttributeReadValue<?>) widgetAdapter;
     return adapterWriteValue.getValue();
   }
 
@@ -130,16 +128,15 @@ public abstract class AbstractUiTest extends Assert {
    * widget adapter} of the given <code>widget</code>. This may be used to simulate that the end-user has
    * entered the value.
    * 
-   * @param <VALUE> is the generic type of the <code>value</code>.
    * @param widget is the {@link UiWidgetWithValue}.
    * @param value is the value to set.
    */
-  @SuppressWarnings("unchecked")
-  protected <VALUE> void setAdapterValue(UiWidgetWithValue<VALUE> widget, VALUE value) {
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  protected void setAdapterValue(UiWidgetWithValue<?> widget, Object value) {
 
     UiWidgetAdapter widgetAdapter = AbstractUiWidget.getWidgetAdapter(widget);
     Assert.assertTrue("Illegal WidgetAdapter", widgetAdapter instanceof AttributeWriteValue);
-    AttributeWriteValue<VALUE> adapterWriteValue = (AttributeWriteValue<VALUE>) widgetAdapter;
+    AttributeWriteValue adapterWriteValue = (AttributeWriteValue) widgetAdapter;
     adapterWriteValue.setValue(value);
   }
 

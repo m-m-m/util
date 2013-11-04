@@ -17,6 +17,7 @@ import net.sf.mmm.client.ui.impl.test.widget.core.UiWidgetLinkTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.core.UiWidgetSectionTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.core.UiWidgetSlotTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.core.UiWidgetTabTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetCheckboxFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetCodeAreaFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetColorFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetComboboxFieldTestImpl;
@@ -76,6 +77,7 @@ public class UiWidgetFactoryNativeTestImpl extends AbstractUiWidgetFactoryNative
     register(new UiWidgetPasswordFieldTestImpl.Factory());
     register(new UiWidgetTextAreaFieldTestImpl.Factory());
     register(new UiWidgetCodeAreaFieldTestImpl.Factory());
+    register(new UiWidgetCheckboxFieldTestImpl.Factory());
     register(new UiWidgetRichTextFieldTestImpl.Factory());
     register(new UiWidgetLongFieldTestImpl.Factory());
     register(new UiWidgetIntegerFieldTestImpl.Factory());
