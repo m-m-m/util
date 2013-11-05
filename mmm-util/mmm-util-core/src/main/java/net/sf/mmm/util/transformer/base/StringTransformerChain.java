@@ -149,6 +149,11 @@ public class StringTransformerChain implements Transformer<String> {
   protected static class State {
 
     /**
+     * <code>true</code> if the chain should be stopped, <code>false</code> otherwise.
+     */
+    private boolean stop;
+
+    /**
      * The constructor.
      */
     protected State() {
@@ -156,11 +161,6 @@ public class StringTransformerChain implements Transformer<String> {
       super();
       this.stop = false;
     }
-
-    /**
-     * <code>true</code> if the chain should be stopped, <code>false</code> otherwise.
-     */
-    private boolean stop;
   }
 
 }

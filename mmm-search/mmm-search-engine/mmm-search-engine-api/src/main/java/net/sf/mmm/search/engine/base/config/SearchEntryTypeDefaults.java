@@ -17,13 +17,6 @@ import net.sf.mmm.search.engine.api.config.SearchEntryType;
  */
 public final class SearchEntryTypeDefaults {
 
-  /**
-   * Construction forbidden.
-   */
-  private SearchEntryTypeDefaults() {
-
-  }
-
   /** @see #getEntryTypeAny() */
   private static final SearchEntryType ENTRY_TYPE_ANY = new SearchEntryTypeBean(SearchEntryType.ID_ANY, "Any",
       "file.png");
@@ -62,6 +55,13 @@ public final class SearchEntryTypeDefaults {
     list.add(new SearchEntryTypeBean("zip", "ZIP", "zip.png"));
     list.add(new SearchEntryTypeBean("iso", "ISO", "cd.png"));
     DEFAULT_TYPES = Collections.unmodifiableCollection(list);
+  }
+
+  /**
+   * Construction forbidden.
+   */
+  private SearchEntryTypeDefaults() {
+
   }
 
   /**

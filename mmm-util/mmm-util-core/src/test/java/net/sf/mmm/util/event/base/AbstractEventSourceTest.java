@@ -26,7 +26,8 @@ import org.slf4j.Logger;
 public class AbstractEventSourceTest {
 
   /**
-   * Tests {@link AbstractEventSource#addListener(EventListener)}, {@link AbstractEventSource#fireEvent(Event)} and
+   * Tests {@link AbstractEventSource#addListener(EventListener)},
+   * {@link AbstractEventSource#fireEvent(Event)} and
    * {@link AbstractEventSource#removeListener(EventListener)}.
    */
   @Test
@@ -76,7 +77,7 @@ public class AbstractEventSourceTest {
     testLogger.getEventList().clear();
     source.fireEvent(event5);
     TestLogger.LogEvent logEntry = testLogger.getEventList().get(0);
-    Assert.assertSame(EvilEventListener.error, logEntry.throwable);
+    Assert.assertSame(EvilEventListener.error, logEntry.getThrowable());
   }
 
   protected static class MyEvent implements Event {

@@ -51,6 +51,14 @@ public class SearchFieldsBean implements SearchFields {
   private transient Map<String, SearchFieldConfigurationBean> fieldMap;
 
   /**
+   * The constructor.
+   */
+  public SearchFieldsBean() {
+
+    super();
+  }
+
+  /**
    * This method adds the given <code>fieldConfiguration</code> to the given <code>map</code>.
    * 
    * @param map is the {@link Map}.
@@ -63,14 +71,6 @@ public class SearchFieldsBean implements SearchFields {
       throw new DuplicateObjectException(fieldConfiguration, key);
     }
     map.put(key, fieldConfiguration);
-  }
-
-  /**
-   * The constructor.
-   */
-  public SearchFieldsBean() {
-
-    super();
   }
 
   /**

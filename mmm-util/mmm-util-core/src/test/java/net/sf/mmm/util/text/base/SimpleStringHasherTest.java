@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import net.sf.mmm.test.TestStrings;
+import net.sf.mmm.test.TestValues;
 import net.sf.mmm.util.text.api.StringHasher;
 
 import org.junit.Assert;
@@ -37,7 +37,7 @@ public class SimpleStringHasherTest extends AbstractStringHasherTest {
     Assert.assertEquals(s.hashCode(), hasher.getHashCode(s));
     s = "Hello World";
     Assert.assertEquals(s.hashCode(), hasher.getHashCode(s));
-    s = TestStrings.THAI_SENTENCE;
+    s = TestValues.THAI_SENTENCE;
     Assert.assertEquals(s.hashCode(), hasher.getHashCode(s));
   }
 

@@ -182,9 +182,9 @@ public class StreamUtilTest extends Assert {
     ExceptionHelper.assertCause(callback.exception, error);
     boolean errorWasLogged = false;
     for (LogEvent logEvent : logger.getEventList()) {
-      if (logEvent.throwable != null) {
-        if (ExceptionHelper.isCause(logEvent.throwable, error)) {
-          assertEquals(LogLevel.ERROR, logEvent.level);
+      if (logEvent.getThrowable() != null) {
+        if (ExceptionHelper.isCause(logEvent.getThrowable(), error)) {
+          assertEquals(LogLevel.ERROR, logEvent.getLevel());
           errorWasLogged = true;
         }
       }

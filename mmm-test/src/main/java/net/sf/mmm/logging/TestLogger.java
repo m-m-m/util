@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.logging;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -302,7 +303,22 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * An event that tracks the log-entry.
    */
-  public static class LogEvent {
+  public static class LogEvent implements Serializable {
+
+    /** UID for serialization. */
+    private static final long serialVersionUID = 6499934887162891533L;
+
+    /** The {@link LogLevel}. */
+    private final LogLevel level;
+
+    /** The logged message. */
+    private final String message;
+
+    /** The optional arguments. */
+    private final Object[] arguments;
+
+    /** The optional {@link Throwable}. */
+    private final Throwable throwable;
 
     /**
      * The constructor.
@@ -322,19 +338,37 @@ public class TestLogger extends MarkerIgnoringBase {
       this.arguments = arguments;
     }
 
-    // CHECKSTYLE:OFF (nuts)
-    /** The {@link LogLevel}. */
-    public final LogLevel level;
+    /**
+     * @return the {@link LogLevel}.
+     */
+    public LogLevel getLevel() {
 
-    /** The logged message. */
-    public final String message;
+      return this.level;
+    }
 
-    /** The optional arguments. */
-    public final Object[] arguments;
+    /**
+     * @return the log message.
+     */
+    public String getMessage() {
 
-    /** The optional {@link Throwable}. */
-    public final Throwable throwable;
-    // CHECKSTYLE:ON
+      return this.message;
+    }
+
+    /**
+     * @return the {@link Throwable} or <code>null</code>.
+     */
+    public Throwable getThrowable() {
+
+      return this.throwable;
+    }
+
+    /**
+     * @return the arguments.
+     */
+    public Object[] getArguments() {
+
+      return this.arguments;
+    }
   }
 
 }

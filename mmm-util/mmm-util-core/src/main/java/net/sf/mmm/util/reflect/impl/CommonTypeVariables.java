@@ -18,14 +18,6 @@ import org.slf4j.LoggerFactory;
 public final class CommonTypeVariables {
 
   /**
-   * The forbidden constructor.
-   */
-  private CommonTypeVariables() {
-
-    super();
-  }
-
-  /**
    * The {@link TypeVariable} <code>E</code> of <code>Collection&lt;E&gt;</code> .
    */
   public static final TypeVariable<Class<Collection>> TYPE_VARIABLE_COLLECTION_ELEMENT;
@@ -56,6 +48,14 @@ public final class CommonTypeVariables {
     }
     TYPE_VARIABLE_MAP_KEY = mapKey;
     TYPE_VARIABLE_MAP_VALUE = mapValue;
+  }
+
+  /**
+   * The forbidden constructor.
+   */
+  private CommonTypeVariables() {
+
+    super();
   }
 
 }

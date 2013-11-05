@@ -21,53 +21,6 @@ import net.sf.mmm.util.math.api.NumberType;
 @Named(MathUtil.CDI_NAME)
 public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
 
-  /** @see #getInstance() */
-  private static MathUtil instance;
-
-  /**
-   * The constructor.
-   */
-  public MathUtilImpl() {
-
-    super();
-  }
-
-  /**
-   * This method gets the singleton instance of {@link MathUtil}.<br/>
-   * <b>ATTENTION:</b><br/>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
-   * @return the singleton instance.
-   */
-  public static MathUtil getInstance() {
-
-    if (instance == null) {
-      synchronized (MathUtilImpl.class) {
-        if (instance == null) {
-          MathUtilImpl impl = new MathUtilImpl();
-          impl.initialize();
-          instance = impl;
-        }
-      }
-    }
-    return instance;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public NumberType<? extends Number> getNumberType(Class<?> numericType) {
-
-    if ((AtomicInteger.class.isAssignableFrom(numericType))) {
-      return ATOMIC_INTEGER;
-    } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
-      return ATOMIC_LONG;
-    } else {
-      return super.getNumberType(numericType);
-    }
-  }
-
   /** The {@link NumberTypeImpl} for {@link AtomicLong}. */
   public static final NumberTypeImpl<AtomicLong> ATOMIC_LONG = new NumberTypeImpl<AtomicLong>(4, null, null) {
 
@@ -128,8 +81,7 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
   };
 
   /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
-  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null,
-      null) {
+  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null, null) {
 
     /**
      * {@inheritDoc}
@@ -186,5 +138,52 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
     }
 
   };
+
+  /** @see #getInstance() */
+  private static MathUtil instance;
+
+  /**
+   * The constructor.
+   */
+  public MathUtilImpl() {
+
+    super();
+  }
+
+  /**
+   * This method gets the singleton instance of {@link MathUtil}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * 
+   * @return the singleton instance.
+   */
+  public static MathUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (MathUtilImpl.class) {
+        if (instance == null) {
+          MathUtilImpl impl = new MathUtilImpl();
+          impl.initialize();
+          instance = impl;
+        }
+      }
+    }
+    return instance;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public NumberType<? extends Number> getNumberType(Class<?> numericType) {
+
+    if ((AtomicInteger.class.isAssignableFrom(numericType))) {
+      return ATOMIC_INTEGER;
+    } else if ((AtomicLong.class.isAssignableFrom(numericType))) {
+      return ATOMIC_LONG;
+    } else {
+      return super.getNumberType(numericType);
+    }
+  }
 
 }

@@ -84,6 +84,17 @@ public class FileAccessPermissions implements Cloneable {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param mask is the {@link #getMaskBits() mask}.
+   */
+  public FileAccessPermissions(int mask) {
+
+    super();
+    setMaskBits(mask);
+  }
+
+  /**
    * This method create a new {@link FileAccessPermissions} instance according to the given
    * <code><a href="http://en.wikipedia.org/wiki/Umask">umask</a></code> (user file creation mode mask).
    * 
@@ -102,17 +113,6 @@ public class FileAccessPermissions implements Cloneable {
     }
     int mask = fullAccessMask & ~umask;
     return new FileAccessPermissions(mask);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param mask is the {@link #getMaskBits() mask}.
-   */
-  public FileAccessPermissions(int mask) {
-
-    super();
-    setMaskBits(mask);
   }
 
   /**

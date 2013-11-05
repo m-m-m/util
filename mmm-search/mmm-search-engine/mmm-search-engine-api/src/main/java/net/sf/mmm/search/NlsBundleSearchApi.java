@@ -14,14 +14,6 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 public class NlsBundleSearchApi extends AbstractResourceBundle {
 
   /**
-   * The constructor.
-   */
-  public NlsBundleSearchApi() {
-
-    super();
-  }
-
-  /**
    * @see net.sf.mmm.search.base.SearchEntryIdInvalidException
    */
   public static final String ERR_ID_INVALID = "Invalid entry ID \"{id}\"!";
@@ -150,5 +142,13 @@ public class NlsBundleSearchApi extends AbstractResourceBundle {
   /** Markup text for the details of a hit. */
   public static final String MSG_ERROR_NO_RESULT = "The parameter for the search-result "
       + "is missing. Maybe this page was not called from the <a href=\"{uri}\">search-page</a>.";
+
+  /**
+   * The constructor.
+   */
+  public NlsBundleSearchApi() {
+
+    super();
+  }
 
 }

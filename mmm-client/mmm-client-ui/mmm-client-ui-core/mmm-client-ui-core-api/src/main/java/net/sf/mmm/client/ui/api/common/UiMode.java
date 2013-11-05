@@ -55,14 +55,6 @@ public interface UiMode {
   };
 
   /**
-   * This method determines if this mode allows the end-user to modify values.
-   * 
-   * @return <code>true</code> if this {@link UiMode} allows editing, <code>false</code> otherwise (if the
-   *         end-user can not modify values in this mode).
-   */
-  boolean isEditable();
-
-  /**
    * The {@link Set} containing only {@link #VIEW}.
    */
   Set<UiMode> SET_VIEW = Collections.unmodifiableSet(new HashSet<UiMode>(Arrays.asList(UiMode.VIEW)));
@@ -77,4 +69,13 @@ public interface UiMode {
    */
   Set<UiMode> SET_VIEW_AND_EDIT = Collections.unmodifiableSet(new HashSet<UiMode>(Arrays.asList(UiMode.VIEW,
       UiMode.EDIT)));
+
+  /**
+   * This method determines if this mode allows the end-user to modify values.
+   * 
+   * @return <code>true</code> if this {@link UiMode} allows editing, <code>false</code> otherwise (if the
+   *         end-user can not modify values in this mode).
+   */
+  boolean isEditable();
+
 }

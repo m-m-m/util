@@ -14,19 +14,6 @@ package net.sf.mmm.util.reflect.api;
 public interface ClassResolver {
 
   /**
-   * This method resolves the class with the given <code>name</code>. In addition to a {@link ClassLoader}
-   * this method may also find types via a logical alias name.<br>
-   * The <code>name</code> can be the physical (fully qualified) classname (e.g. <code>org.foo.BlobImpl</code>
-   * ) but this may also be a logical name depending on the implementation of this interface (e.g.
-   * <code>Blob</code> may point to the same type).
-   * 
-   * @param name is the logical or physical name of the requested type.
-   * @return the class reflecting the type with the given <code>name</code>.
-   * @throws TypeNotFoundException if the requested type was NOT found.
-   */
-  Class<?> resolveClass(String name) throws TypeNotFoundException;
-
-  /**
    * This is a singleton implementation of the {@link ClassResolver} interface that simply delegates to
    * {@link Class#forName(String)}.
    */
@@ -41,5 +28,18 @@ public interface ClassResolver {
       }
     }
   };
+
+  /**
+   * This method resolves the class with the given <code>name</code>. In addition to a {@link ClassLoader}
+   * this method may also find types via a logical alias name.<br>
+   * The <code>name</code> can be the physical (fully qualified) classname (e.g. <code>org.foo.BlobImpl</code>
+   * ) but this may also be a logical name depending on the implementation of this interface (e.g.
+   * <code>Blob</code> may point to the same type).
+   * 
+   * @param name is the logical or physical name of the requested type.
+   * @return the class reflecting the type with the given <code>name</code>.
+   * @throws TypeNotFoundException if the requested type was NOT found.
+   */
+  Class<?> resolveClass(String name) throws TypeNotFoundException;
 
 }

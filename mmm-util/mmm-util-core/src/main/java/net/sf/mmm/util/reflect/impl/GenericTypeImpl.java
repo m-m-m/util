@@ -60,15 +60,6 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected GenericType<?> create(Type genericType) {
-
-    return new GenericTypeImpl<Object>(genericType);
-  }
-
-  /**
    * The constructor.
    * 
    * @param valueType is the {@link #getType() value-type}.
@@ -131,6 +122,15 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     } else {
       this.keyType = create(genericKeyType, definingType);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected GenericType<?> create(Type genericType) {
+
+    return new GenericTypeImpl<Object>(genericType);
   }
 
   /**

@@ -8,7 +8,8 @@ import net.sf.mmm.util.http.HttpRequest;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This class represents an SSDP request. It is a specific HTTP-Request that is transmitted via an multicast over UDP.
+ * This class represents an SSDP request. It is a specific HTTP-Request that is transmitted via an multicast
+ * over UDP.
  * 
  * @see HttpRequest#METHOD_NOTIFY
  * @see HttpRequest#METHOD_M_SEARCH
@@ -86,20 +87,22 @@ public class SsdpRequest extends HttpRequest {
   public static final String HEADER_PROPERTY_NOTIFICATION_TYPE = "NT";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>NTS</code>. Yes, it is NOT <code>NST</code> - this is
-   * correct.
+   * The {@link #getHeaderProperty(String) header-property} <code>NTS</code>. Yes, it is NOT <code>NST</code>
+   * - this is correct.
    */
   public static final String HEADER_PROPERTY_NOTIFICATION_SUB_TYPE = "NTS";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>USN</code>. The value must be in the following form:<br>
+   * The {@link #getHeaderProperty(String) header-property} <code>USN</code>. The value must be in the
+   * following form:<br>
    * 
    * <pre>
    * {@link #PREFIX_UUID uuid:}<i>UUID</i>[{@link #USN_SEPARATOR ::}<i>suffix</i>]
    * </pre>
    * 
-   * where <code>UUID</code> is {@link java.util.UUID UUID} of the offered device or service and the <code>suffix</code>
-   * is one of {@link #UPNP_ROOT_DEVICE}, {@link #PREFIX_DEVICE}, or {@link #PREFIX_SERVICE}.
+   * where <code>UUID</code> is {@link java.util.UUID UUID} of the offered device or service and the
+   * <code>suffix</code> is one of {@link #UPNP_ROOT_DEVICE}, {@link #PREFIX_DEVICE}, or
+   * {@link #PREFIX_SERVICE}.
    */
   public static final String HEADER_PROPERTY_UNIQUE_SERVICE_NAME = "USN";
 
@@ -124,6 +127,16 @@ public class SsdpRequest extends HttpRequest {
   public static final String HEADER_PROPERTY_SEARCH_TARGET = "ST";
 
   /**
+   * The constructor.
+   * 
+   * @see #initializeDefaults()
+   */
+  public SsdpRequest() {
+
+    super();
+  }
+
+  /**
    * This method sets the {@link #HEADER_PROPERTY_SEARCH_TARGET search-target}.
    * 
    * @param st is the search-target to set.
@@ -141,16 +154,6 @@ public class SsdpRequest extends HttpRequest {
   public String getSearchTarget() {
 
     return getHeaderProperty(HEADER_PROPERTY_SEARCH_TARGET);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @see #initializeDefaults()
-   */
-  public SsdpRequest() {
-
-    super();
   }
 
   /**

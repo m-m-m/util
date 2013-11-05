@@ -15,15 +15,6 @@ package net.sf.mmm.util.filter.api;
 public interface CharFilter {
 
   /**
-   * This method determines if the given character <code>c</code> should be accepted.
-   * 
-   * @param c is the character to check.
-   * @return <code>true</code> if the given character <code>c</code> is acceptable, <code>false</code> if it
-   *         should be filtered.
-   */
-  boolean accept(char c);
-
-  /**
    * A filter that only {@link #accept(char) accepts} characters valid for a technical identifier-string (e.g.
    * literal oder variable-name). This means accepted characters are Latin digits, ASCII letters or one of
    * '.', '_' or '-'.
@@ -125,5 +116,14 @@ public interface CharFilter {
       return true;
     }
   };
+
+  /**
+   * This method determines if the given character <code>c</code> should be accepted.
+   * 
+   * @param c is the character to check.
+   * @return <code>true</code> if the given character <code>c</code> is acceptable, <code>false</code> if it
+   *         should be filtered.
+   */
+  boolean accept(char c);
 
 }

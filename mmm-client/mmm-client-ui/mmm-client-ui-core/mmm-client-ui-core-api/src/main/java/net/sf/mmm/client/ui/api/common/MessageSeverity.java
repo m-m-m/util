@@ -20,12 +20,6 @@ package net.sf.mmm.client.ui.api.common;
  */
 public interface MessageSeverity {
 
-  /**
-   * @return the name identifying this icon. Depending on the implementation it may be mapped to an actual
-   *         image URL or just concatenated with prefix and suffix.
-   */
-  String getName();
-
   /** {@link MessageSeverity} indicating an general purpose information. */
   MessageSeverity INFORMATION = new MessageSeverity() {
 
@@ -61,5 +55,11 @@ public interface MessageSeverity {
       return "question";
     }
   };
+
+  /**
+   * @return the name identifying this icon. Depending on the implementation it may be mapped to an actual
+   *         image URL or just concatenated with prefix and suffix.
+   */
+  String getName();
 
 }

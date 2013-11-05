@@ -13,14 +13,6 @@ import net.sf.mmm.util.nls.base.AbstractResourceBundle;
 public class NlsBundleXml extends AbstractResourceBundle {
 
   /**
-   * The constructor.
-   */
-  public NlsBundleXml() {
-
-    super();
-  }
-
-  /**
    * exception message if element was closed with wrong tagname.
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String)
@@ -35,8 +27,7 @@ public class NlsBundleXml extends AbstractResourceBundle {
   // public static final String ERR_CLOSE_NAMESPACE_PREFIX = "Current element
   // has namespace prefix {'0} and not {'1}!";
   /**
-   * exception message if a namespace prefix was used that has not been declared
-   * before.
+   * exception message if a namespace prefix was used that has not been declared before.
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String)
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeAttribute(String, String)
@@ -44,27 +35,23 @@ public class NlsBundleXml extends AbstractResourceBundle {
   public static final String ERR_NAMESPACE_NOT_DECLARED = "Namespace prefix \"{0}\" has not been declared yet!";
 
   /**
-   * exception message if closeElement was called after top-level element is
-   * already closed.
+   * exception message if closeElement was called after top-level element is already closed.
    * 
    * @see net.sf.mmm.util.xml.api.XmlWriter#writeEndElement(String, String)
    */
   public static final String ERR_CLOSE_TOPLEVEL = "Root element is already closed!";
 
   /**
-   * exception message if no element is open (and element was closed or
-   * attribut/content was written).
+   * exception message if no element is open (and element was closed or attribut/content was written).
    * 
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String,
-   *      String)
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String, String)
    */
   public static final String ERR_NOT_OPEN = "No XML Element is open!";
 
   /**
    * exception message if a second root element was opened.
    * 
-   * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String,
-   *      String)
+   * @see net.sf.mmm.util.xml.api.XmlWriter#writeStartElement(String, String, String)
    */
   public static final String ERR_SECOND_ROOT = "Can not open more than one root tag!";
 
@@ -81,5 +68,13 @@ public class NlsBundleXml extends AbstractResourceBundle {
    * @see net.sf.mmm.util.xml.api.XmlWriter
    */
   public static final String ERR_IO = "Input/Output error while streaming XML!";
+
+  /**
+   * The constructor.
+   */
+  public NlsBundleXml() {
+
+    super();
+  }
 
 }

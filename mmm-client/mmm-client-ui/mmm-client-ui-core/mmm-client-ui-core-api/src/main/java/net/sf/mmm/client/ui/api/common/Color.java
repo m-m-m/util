@@ -128,6 +128,16 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
+   * The constructor.
+   * 
+   * @param title is the {@link #getTitle() string representation} of the {@link Color} to create.
+   */
+  public Color(String title) {
+
+    super(parseString(title));
+  }
+
+  /**
    * Verifies that the given segment is in the valid range from {@link #MIN_VALUE} to {@link #MAX_SEGMENT}.
    * 
    * @param segment is the segment to check.
@@ -138,16 +148,6 @@ public class Color extends AbstractSimpleDatatype<Integer> {
     if ((segment < 0) || (segment > MASK)) {
       throw new ValueOutOfRangeException(Integer.valueOf(segment), MIN_VALUE, MAX_SEGMENT, source);
     }
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param title is the {@link #getTitle() string representation} of the {@link Color} to create.
-   */
-  public Color(String title) {
-
-    super(parseString(title));
   }
 
   /**
