@@ -34,242 +34,280 @@ package java.time;
 import java.time.format.DateTimeParseException;
 
 /**
- * A period parser that creates an instance of {@code Period} from a string.
- * This parses the ISO-8601 period format {@code PnYnMnDTnHnMn.nS}.
+ * A period parser that creates an instance of {@code Period} from a string. This parses the ISO-8601 period
+ * format {@code PnYnMnDTnHnMn.nS}.
  * <p>
  * This class is mutable and intended for use by a single thread.
  */
 final class PeriodParser {
 
-    /**
-     * Used to validate the correct sequence of tokens.
-     */
-    private static final String TOKEN_SEQUENCE = "PYMDTHMS";
-    /**
-     * The standard string representing a zero period.
-     */
-    private static final String ZERO = "PT0S";
+  /**
+   * Used to validate the correct sequence of tokens.
+   */
+  private static final String TOKEN_SEQUENCE = "PYMDTHMS";
 
-    /**
-     * The number of years.
-     */
-    private int years;
-    /**
-     * The number of months.
-     */
-    private int months;
-    /**
-     * The number of days.
-     */
-    private int days;
-    /**
-     * The number of hours.
-     */
-    private int hours;
-    /**
-     * The number of minutes.
-     */
-    private int minutes;
-    /**
-     * The number of seconds.
-     */
-    private int seconds;
-    /**
-     * The number of nanoseconds.
-     */
-    private long nanos;
-    /**
-     * Whether the seconds were negative.
-     */
-    private boolean negativeSecs;
-    /**
-     * Parser position index.
-     */
-    private int index;
-    /**
-     * Original text.
-     */
-    private CharSequence text;
+  /**
+   * The standard string representing a zero period.
+   */
+  private static final String ZERO = "PT0S";
 
-    /**
-     * Constructor.
-     *
-     * @param text  the text to parse, not null
-     */
-    PeriodParser(CharSequence text) {
-        this.text = text;
+  /**
+   * The number of years.
+   */
+  private int years;
+
+  /**
+   * The number of months.
+   */
+  private int months;
+
+  /**
+   * The number of days.
+   */
+  private int days;
+
+  /**
+   * The number of hours.
+   */
+  private int hours;
+
+  /**
+   * The number of minutes.
+   */
+  private int minutes;
+
+  /**
+   * The number of seconds.
+   */
+  private int seconds;
+
+  /**
+   * The number of nanoseconds.
+   */
+  private long nanos;
+
+  /**
+   * Whether the seconds were negative.
+   */
+  private boolean negativeSecs;
+
+  /**
+   * Parser position index.
+   */
+  private int index;
+
+  /**
+   * Original text.
+   */
+  private CharSequence text;
+
+  /**
+   * Constructor.
+   * 
+   * @param text the text to parse, not null
+   */
+  PeriodParser(CharSequence text) {
+
+    this.text = text;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Performs the parse.
+   * <p>
+   * This parses the text set in the constructor in the format PnYnMnDTnHnMn.nS.
+   * 
+   * @return the created Period, not null
+   * @throws DateTimeParseException if the text cannot be parsed to a Period
+   */
+  Period parse() {
+
+    // force to upper case and coerce the comma to dot
+
+    String s = this.text.toString().toUpperCase().replace(',', '.');
+    // check for zero and skip parse
+    if (ZERO.equals(s)) {
+      return Period.ZERO;
     }
-
-    //-----------------------------------------------------------------------
-    /**
-     * Performs the parse.
-     * <p>
-     * This parses the text set in the constructor in the format PnYnMnDTnHnMn.nS.
-     *
-     * @return the created Period, not null
-     * @throws DateTimeParseException if the text cannot be parsed to a Period
-     */
-    Period parse() {
-        // force to upper case and coerce the comma to dot
-
-        String s = text.toString().toUpperCase().replace(',', '.');
-        // check for zero and skip parse
-        if (ZERO.equals(s)) {
-            return Period.ZERO;
-        }
-        if (s.length() < 3 || s.charAt(0) != 'P') {
-            throw new DateTimeParseException("Period could not be parsed: " + text, text, 0);
-        }
-        validateCharactersAndOrdering(s, text);
-
-        // strip off the leading P
-        String[] datetime = s.substring(1).split("T");
-        switch (datetime.length) {
-            case 2:
-                parseDate(datetime[0], 1);
-                parseTime(datetime[1], datetime[0].length() + 2);
-                break;
-            case 1:
-                parseDate(datetime[0], 1);
-                break;
-        }
-        return toPeriod();
+    if (s.length() < 3 || s.charAt(0) != 'P') {
+      throw new DateTimeParseException("Period could not be parsed: " + this.text, this.text, 0);
     }
+    validateCharactersAndOrdering(s, this.text);
 
-    private void parseDate(String s, int baseIndex) {
-        index = 0;
-        while (index < s.length()) {
-            String value = parseNumber(s);
-            if (index < s.length()) {
-                char c = s.charAt(index);
-                switch(c) {
-                    case 'Y': years = parseInt(value, baseIndex) ; break;
-                    case 'M': months = parseInt(value, baseIndex) ; break;
-                    case 'D': days = parseInt(value, baseIndex) ; break;
-                    default:
-                        throw new DateTimeParseException("Period could not be parsed, unrecognized letter '" +
-                                c + ": " + text, text, baseIndex + index);
-                }
-                index++;
-            }
-        }
+    // strip off the leading P
+    String[] datetime = s.substring(1).split("T");
+    switch (datetime.length) {
+      case 2:
+        parseDate(datetime[0], 1);
+        parseTime(datetime[1], datetime[0].length() + 2);
+        break;
+      case 1:
+        parseDate(datetime[0], 1);
+        break;
     }
+    return toPeriod();
+  }
 
-    private void parseTime(String s, int baseIndex) {
-        index = 0;
-        s = prepareTime(s, baseIndex);
-        while (index < s.length()) {
-            String value = parseNumber(s);
-            if (index < s.length()) {
-                char c = s.charAt(index);
-                switch(c) {
-                    case 'H': hours = parseInt(value, baseIndex) ; break;
-                    case 'M': minutes = parseInt(value, baseIndex) ; break;
-                    case 'S': seconds = parseInt(value, baseIndex) ; break;
-                    case 'N': nanos = parseNanos(value, baseIndex); break;
-                    default:
-                        throw new DateTimeParseException("Period could not be parsed, unrecognized letter '" +
-                                c + "': " + text, text, baseIndex + index);
-                }
-                index++;
-            }
+  private void parseDate(String s, int baseIndex) {
+
+    this.index = 0;
+    while (this.index < s.length()) {
+      String value = parseNumber(s);
+      if (this.index < s.length()) {
+        char c = s.charAt(this.index);
+        switch (c) {
+          case 'Y':
+            this.years = parseInt(value, baseIndex);
+            break;
+          case 'M':
+            this.months = parseInt(value, baseIndex);
+            break;
+          case 'D':
+            this.days = parseInt(value, baseIndex);
+            break;
+          default :
+            throw new DateTimeParseException(
+                "Period could not be parsed, unrecognized letter '" + c + ": " + this.text, this.text, baseIndex
+                    + this.index);
         }
+        this.index++;
+      }
     }
+  }
 
-    private long parseNanos(String s, int baseIndex) {
-        if (s.length() > 9) {
-            throw new DateTimeParseException("Period could not be parsed, nanosecond range exceeded: " +
-                    text, text, baseIndex + index - s.length());
+  private void parseTime(String s, int baseIndex) {
+
+    this.index = 0;
+    s = prepareTime(s, baseIndex);
+    while (this.index < s.length()) {
+      String value = parseNumber(s);
+      if (this.index < s.length()) {
+        char c = s.charAt(this.index);
+        switch (c) {
+          case 'H':
+            this.hours = parseInt(value, baseIndex);
+            break;
+          case 'M':
+            this.minutes = parseInt(value, baseIndex);
+            break;
+          case 'S':
+            this.seconds = parseInt(value, baseIndex);
+            break;
+          case 'N':
+            this.nanos = parseNanos(value, baseIndex);
+            break;
+          default :
+            throw new DateTimeParseException("Period could not be parsed, unrecognized letter '" + c + "': "
+                + this.text, this.text, baseIndex + this.index);
         }
-        // pad to the right to create 10**9, then trim
-        return Long.parseLong((s + "000000000").substring(0, 9));
+        this.index++;
+      }
     }
+  }
 
-    private String prepareTime(String s, int baseIndex) {
-        if (s.contains(".")) {
-            int i = s.indexOf(".") + 1;
+  private long parseNanos(String s, int baseIndex) {
 
-            // verify that the first character after the dot is a digit
-            if (Character.isDigit(s.charAt(i))) {
-                i++;
-            } else {
-                throw new DateTimeParseException("Period could not be parsed, invalid decimal number: " +
-                        text, text, baseIndex + index);
-            }
+    if (s.length() > 9) {
+      throw new DateTimeParseException("Period could not be parsed, nanosecond range exceeded: " + this.text,
+          this.text, baseIndex + this.index - s.length());
+    }
+    // pad to the right to create 10**9, then trim
+    return Long.parseLong((s + "000000000").substring(0, 9));
+  }
 
-            // verify that only digits follow the decimal point followed by an S
-            while (i < s.length()) {
-                // || !Character.isDigit(s.charAt(i))
-                char c = s.charAt(i);
-                if (Character.isDigit(c) || c == 'S') {
-                    i++;
-                } else {
-                    throw new DateTimeParseException("Period could not be parsed, invalid decimal number: " +
-                            text, text, baseIndex + index);
-                }
-            }
-            s = s.replace('S', 'N').replace('.', 'S');
-            if (s.contains("-0S")) {
-                negativeSecs = true;
-                s = s.replace("-0S", "0S");
-            }
+  private String prepareTime(String s, int baseIndex) {
+
+    if (s.contains(".")) {
+      int i = s.indexOf(".") + 1;
+
+      // verify that the first character after the dot is a digit
+      if (Character.isDigit(s.charAt(i))) {
+        i++;
+      } else {
+        throw new DateTimeParseException("Period could not be parsed, invalid decimal number: " + this.text, this.text,
+            baseIndex + this.index);
+      }
+
+      // verify that only digits follow the decimal point followed by an S
+      while (i < s.length()) {
+        // || !Character.isDigit(s.charAt(i))
+        char c = s.charAt(i);
+        if (Character.isDigit(c) || c == 'S') {
+          i++;
+        } else {
+          throw new DateTimeParseException("Period could not be parsed, invalid decimal number: " + this.text,
+              this.text, baseIndex + this.index);
         }
-        return s;
+      }
+      s = s.replace('S', 'N').replace('.', 'S');
+      if (s.contains("-0S")) {
+        this.negativeSecs = true;
+        s = s.replace("-0S", "0S");
+      }
     }
+    return s;
+  }
 
-    private int parseInt(String s, int baseIndex) {
-        try {
-            int value = Integer.parseInt(s);
-            if (s.charAt(0) == '-' && value == 0) {
-                throw new DateTimeParseException("Period could not be parsed, invalid number '" +
-                        s + "': " + text, text, baseIndex + index - s.length());
-            }
-            return value;
-        } catch (NumberFormatException ex) {
-            throw new DateTimeParseException("Period could not be parsed, invalid number '" +
-                    s + "': " + text, text, baseIndex + index - s.length());
-        }
-    }
+  private int parseInt(String s, int baseIndex) {
 
-    private String parseNumber(String s) {
-        int start = index;
-        while (index < s.length()) {
-            char c = s.charAt(index);
-            if ((c < '0' || c > '9') && c != '-') {
-                break;
-            }
-            index++;
-        }
-        return s.substring(start, index);
+    try {
+      int value = Integer.parseInt(s);
+      if (s.charAt(0) == '-' && value == 0) {
+        throw new DateTimeParseException("Period could not be parsed, invalid number '" + s + "': " + this.text,
+            this.text, baseIndex + this.index - s.length());
+      }
+      return value;
+    } catch (NumberFormatException ex) {
+      throw new DateTimeParseException("Period could not be parsed, invalid number '" + s + "': " + this.text,
+          this.text, baseIndex + this.index - s.length());
     }
+  }
 
-    private void validateCharactersAndOrdering(String s, CharSequence text) {
-        char[] chars = s.toCharArray();
-        int tokenPos = 0;
-        boolean lastLetter = false;
-        for (int i = 0; i < chars.length; i++) {
-            if (tokenPos >= TOKEN_SEQUENCE.length()) {
-                throw new DateTimeParseException("Period could not be parsed, characters after last 'S': " + text, text, i);
-            }
-            char c = chars[i];
-            if ((c < '0' || c > '9') && c != '-' && c != '.') {
-                tokenPos = TOKEN_SEQUENCE.indexOf(c, tokenPos);
-                if (tokenPos < 0) {
-                    throw new DateTimeParseException("Period could not be parsed, invalid character '" + c + "': " + text, text, i);
-                }
-                tokenPos++;
-                lastLetter = true;
-            } else {
-                lastLetter = false;
-            }
-        }
-        if (lastLetter == false) {
-            throw new DateTimeParseException("Period could not be parsed, invalid last character: " + text, text, s.length() - 1);
-        }
-    }
+  private String parseNumber(String s) {
 
-    private Period toPeriod() {
-        return Period.of(years, months, days, hours, minutes, seconds, negativeSecs || seconds < 0 ? -nanos : nanos);
+    int start = this.index;
+    while (this.index < s.length()) {
+      char c = s.charAt(this.index);
+      if ((c < '0' || c > '9') && c != '-') {
+        break;
+      }
+      this.index++;
     }
+    return s.substring(start, this.index);
+  }
+
+  private void validateCharactersAndOrdering(String s, CharSequence text) {
+
+    char[] chars = s.toCharArray();
+    int tokenPos = 0;
+    boolean lastLetter = false;
+    for (int i = 0; i < chars.length; i++) {
+      if (tokenPos >= TOKEN_SEQUENCE.length()) {
+        throw new DateTimeParseException("Period could not be parsed, characters after last 'S': " + text, text, i);
+      }
+      char c = chars[i];
+      if ((c < '0' || c > '9') && c != '-' && c != '.') {
+        tokenPos = TOKEN_SEQUENCE.indexOf(c, tokenPos);
+        if (tokenPos < 0) {
+          throw new DateTimeParseException("Period could not be parsed, invalid character '" + c + "': " + text, text,
+              i);
+        }
+        tokenPos++;
+        lastLetter = true;
+      } else {
+        lastLetter = false;
+      }
+    }
+    if (lastLetter == false) {
+      throw new DateTimeParseException("Period could not be parsed, invalid last character: " + text, text,
+          s.length() - 1);
+    }
+  }
+
+  private Period toPeriod() {
+
+    return Period.of(this.years, this.months, this.days, this.hours, this.minutes, this.seconds, this.negativeSecs
+        || this.seconds < 0 ? -this.nanos : this.nanos);
+  }
 
 }

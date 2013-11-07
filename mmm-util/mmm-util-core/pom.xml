@@ -30,11 +30,6 @@
           <artifactId>mmm-util-backport-java.time</artifactId>
           <version>${backport-time-version}</version>
         </dependency>
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>mmm-util-backport-java.time-tzdb</artifactId>
-          <version>1.0.0</version>
-        </dependency>
       </dependencies>
     </profile>
     <profile>

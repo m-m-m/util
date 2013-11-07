@@ -38,44 +38,45 @@ import java.time.DateTimeException;
  * An exception thrown when an error occurs during printing.
  * <p>
  * This will be triggered by violations specific to printing or an IO exception.
- *
- * <h4>Implementation notes</h4>
- * This class is intended for use in a single thread.
+ * 
+ * <h4>Implementation notes</h4> This class is intended for use in a single thread.
  */
 public class DateTimePrintException extends DateTimeException {
 
-    /**
-     * Serialization version.
-     */
-    private static final long serialVersionUID = 2263939197574006408L;
+  /**
+   * Serialization version.
+   */
+  private static final long serialVersionUID = 2263939197574006408L;
 
-    /**
-     * Constructs a new exception with the specified message.
-     *
-     * @param message  the message to use for this exception, may be null
-     */
-    public DateTimePrintException(String message) {
-        super(message, null);
-    }
+  /**
+   * Constructs a new exception with the specified message.
+   * 
+   * @param message the message to use for this exception, may be null
+   */
+  public DateTimePrintException(String message) {
 
-    /**
-     * Constructs a new exception with the specified message and cause.
-     *
-     * @param message  the message to use for this exception, may be null
-     * @param cause  the cause of the exception, may be null
-     */
-    public DateTimePrintException(String message, Throwable cause) {
-        super(message, cause);
-    }
+    super(message, null);
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Checks if the cause of this exception was an IOException, and if so
-     * re-throws it
-     * <p>
-     * This method is useful if you call a printer with an open stream or
-     * writer and want to ensure that IOExceptions are not lost.
-     * <pre>
+  /**
+   * Constructs a new exception with the specified message and cause.
+   * 
+   * @param message the message to use for this exception, may be null
+   * @param cause the cause of the exception, may be null
+   */
+  public DateTimePrintException(String message, Throwable cause) {
+
+    super(message, cause);
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Checks if the cause of this exception was an IOException, and if so re-throws it
+   * <p>
+   * This method is useful if you call a printer with an open stream or writer and want to ensure that
+   * IOExceptions are not lost.
+   * 
+   * <pre>
      * try {
      *   printer.print(writer, dateTime);
      * } catch (DateTimePrintException ex) {
@@ -83,15 +84,16 @@ public class DateTimePrintException extends DateTimeException {
      *   // if code reaches here exception was caused by date-time issues
      * }
      * </pre>
-     * Note that calling this method will re-throw the original IOException,
-     * causing this DateTimePrintException to be lost.
-     *
-     * @throws IOException if the cause of this exception is an IOException
-     */
-    public void rethrowIOException() throws IOException {
-        if (getCause() instanceof IOException) {
-            throw (IOException) getCause();
-        }
+   * Note that calling this method will re-throw the original IOException, causing this DateTimePrintException
+   * to be lost.
+   * 
+   * @throws IOException if the cause of this exception is an IOException
+   */
+  public void rethrowIOException() throws IOException {
+
+    if (getCause() instanceof IOException) {
+      throw (IOException) getCause();
     }
+  }
 
 }

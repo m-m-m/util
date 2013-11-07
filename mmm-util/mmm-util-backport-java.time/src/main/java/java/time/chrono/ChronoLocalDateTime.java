@@ -47,262 +47,250 @@ import java.time.zone.ZoneRules;
 import java.util.Comparator;
 
 /**
- * A date-time without a time-zone in an arbitrary chronology, intended
- * for advanced globalization use cases.
+ * A date-time without a time-zone in an arbitrary chronology, intended for advanced globalization use cases.
  * <p>
- * <b>Most applications should declare method signatures, fields and variables
- * as {@link LocalDateTime}, not this interface.</b>
+ * <b>Most applications should declare method signatures, fields and variables as {@link LocalDateTime}, not
+ * this interface.</b>
  * <p>
- * A {@code ChronoLocalDateTime} is the abstract representation of a local date-time
- * where the {@code Chrono chronology}, or calendar system, is pluggable.
- * The date-time is defined in terms of fields expressed by {@link DateTimeField},
- * where most common implementations are defined in {@link ChronoField}.
- * The chronology defines how the calendar system operates and the meaning of
- * the standard fields.
- *
+ * A {@code ChronoLocalDateTime} is the abstract representation of a local date-time where the
+ * {@code Chrono chronology}, or calendar system, is pluggable. The date-time is defined in terms of fields
+ * expressed by {@link DateTimeField}, where most common implementations are defined in {@link ChronoField}.
+ * The chronology defines how the calendar system operates and the meaning of the standard fields.
+ * 
  * <h4>When to use this interface</h4>
- * The design of the API encourages the use of {@code LocalDateTime} rather than this
- * interface, even in the case where the application needs to deal with multiple
- * calendar systems. The rationale for this is explored in detail in {@link ChronoLocalDate}.
+ * The design of the API encourages the use of {@code LocalDateTime} rather than this interface, even in the
+ * case where the application needs to deal with multiple calendar systems. The rationale for this is explored
+ * in detail in {@link ChronoLocalDate}.
  * <p>
- * Ensure that the discussion in {@code ChronoLocalDate} has been read and understood
- * before using this interface.
- *
+ * Ensure that the discussion in {@code ChronoLocalDate} has been read and understood before using this
+ * interface.
+ * 
  * <h4>Implementation notes</h4>
- * This interface must be implemented with care to ensure other classes operate correctly.
- * All implementations that can be instantiated must be final, immutable and thread-safe.
- * Subclasses should be Serializable wherever possible.
- *
+ * This interface must be implemented with care to ensure other classes operate correctly. All implementations
+ * that can be instantiated must be final, immutable and thread-safe. Subclasses should be Serializable
+ * wherever possible.
+ * 
  * @param <C> the chronology of this date-time
  */
-public interface ChronoLocalDateTime<C extends Chrono<C>>
-        extends  DateTime, WithAdjuster, Comparable<ChronoLocalDateTime<?>> {
+public interface ChronoLocalDateTime<C extends Chrono<C>> extends DateTime, WithAdjuster,
+    Comparable<ChronoLocalDateTime<?>> {
 
-   /**
-     * Comparator for two {@code ChronoLocalDateTime} instances ignoring the chronology.
-     * <p>
-     * This method differs from the comparison in {@link #compareTo} in that it
-     * only compares the underlying date and not the chronology.
-     * This allows dates in different calendar systems to be compared based
-     * on the time-line position.
-     *
-     * @see #isAfter
-     * @see #isBefore
-     * @see #isEqual
-     */
-    Comparator<ChronoLocalDateTime<?>> DATE_TIME_COMPARATOR =
-            new Comparator<ChronoLocalDateTime<?>>() {
-        @Override
-        public int compare(ChronoLocalDateTime<?> datetime1, ChronoLocalDateTime<?> datetime2) {
-            int cmp = Long.compare(datetime1.getDate().toEpochDay(), datetime2.getDate().toEpochDay());
-            if (cmp == 0) {
-                cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
-            }
-            return cmp;
-        }
-    };
-
-    /**
-     * Gets the local date part of this date-time.
-     * <p>
-     * This returns a local date with the same year, month and day
-     * as this date-time.
-     *
-     * @return the date part of this date-time, not null
-     */
-    ChronoLocalDate<C> getDate() ;
-
-    /**
-     * Gets the local time part of this date-time.
-     * <p>
-     * This returns a local time with the same hour, minute, second and
-     * nanosecond as this date-time.
-     *
-     * @return the time part of this date-time, not null
-     */
-    LocalTime getTime();
-
-    //-------------------------------------------------------------------------
-    // override for covariant return type
-    @Override
-    ChronoLocalDateTime<C> with(WithAdjuster adjuster);
+  /**
+   * Comparator for two {@code ChronoLocalDateTime} instances ignoring the chronology.
+   * <p>
+   * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
+   * date and not the chronology. This allows dates in different calendar systems to be compared based on the
+   * time-line position.
+   * 
+   * @see #isAfter
+   * @see #isBefore
+   * @see #isEqual
+   */
+  Comparator<ChronoLocalDateTime<?>> DATE_TIME_COMPARATOR = new Comparator<ChronoLocalDateTime<?>>() {
 
     @Override
-    ChronoLocalDateTime<C> with(DateTimeField field, long newValue);
+    public int compare(ChronoLocalDateTime<?> datetime1, ChronoLocalDateTime<?> datetime2) {
 
-    @Override
-    ChronoLocalDateTime<C> plus(PlusAdjuster adjuster);
+      int cmp = Long.compare(datetime1.getDate().toEpochDay(), datetime2.getDate().toEpochDay());
+      if (cmp == 0) {
+        cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+      }
+      return cmp;
+    }
+  };
 
-    @Override
-    ChronoLocalDateTime<C> plus(long amountToAdd, PeriodUnit unit);
+  /**
+   * Gets the local date part of this date-time.
+   * <p>
+   * This returns a local date with the same year, month and day as this date-time.
+   * 
+   * @return the date part of this date-time, not null
+   */
+  ChronoLocalDate<C> getDate();
 
-    @Override
-    ChronoLocalDateTime<C> minus(MinusAdjuster adjuster);
+  /**
+   * Gets the local time part of this date-time.
+   * <p>
+   * This returns a local time with the same hour, minute, second and nanosecond as this date-time.
+   * 
+   * @return the time part of this date-time, not null
+   */
+  LocalTime getTime();
 
-    @Override
-    ChronoLocalDateTime<C> minus(long amountToSubtract, PeriodUnit unit);
+  // -------------------------------------------------------------------------
+  // override for covariant return type
+  @Override
+  ChronoLocalDateTime<C> with(WithAdjuster adjuster);
 
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a zoned date-time formed from this date-time and the specified time-zone.
-     * <p>
-     * This creates a zoned date-time matching the input date-time as closely as possible.
-     * Time-zone rules, such as daylight savings, mean that not every local date-time
-     * is valid for the specified zone, thus the local date-time may be adjusted.
-     * <p>
-     * The local date-time is resolved to a single instant on the time-line.
-     * This is achieved by finding a valid offset from UTC/Greenwich for the local
-     * date-time as defined by the {@link ZoneRules rules} of the zone ID.
-     *<p>
-     * In most cases, there is only one valid offset for a local date-time.
-     * In the case of an overlap, where clocks are set back, there are two valid offsets.
-     * This method uses the earlier offset typically corresponding to "summer".
-     * <p>
-     * In the case of a gap, where clocks jump forward, there is no valid offset.
-     * Instead, the local date-time is adjusted to be later by the length of the gap.
-     * For a typical one hour daylight savings change, the local date-time will be
-     * moved one hour later into the offset typically corresponding to "summer".
-     * <p>
-     * To obtain the later offset during an overlap, call
-     * {@link ChronoZonedDateTime#withLaterOffsetAtOverlap()} on the result of this method.
-     * <p>
-     * This instance is immutable and unaffected by this method call.
-     *
-     * @param zone  the time-zone to use, not null
-     * @return the zoned date-time formed from this date-time, not null
-     */
-    ChronoZonedDateTime<C> atZone(ZoneId zone);
+  @Override
+  ChronoLocalDateTime<C> with(DateTimeField field, long newValue);
 
-    //-----------------------------------------------------------------------
-    /**
-     * Converts this date-time to an {@code Instant}.
-     * <p>
-     * This combines this local date-time and the specified offset to form
-     * an {@code Instant}.
-     *
-     * @param offset  the offset to use for the conversion, not null
-     * @return an {@code Instant} representing the same instant, not null
-     */
-    Instant toInstant(ZoneOffset offset);
+  @Override
+  ChronoLocalDateTime<C> plus(PlusAdjuster adjuster);
 
-    /**
-     * Converts this date-time to the number of seconds from the epoch
-     * of 1970-01-01T00:00:00Z.
-     * <p>
-     * This combines this local date-time and the specified offset to calculate the
-     * epoch-second value, which is the number of elapsed seconds from 1970-01-01T00:00:00Z.
-     * Instants on the time-line after the epoch are positive, earlier are negative.
-     *
-     * @param offset  the offset to use for the conversion, not null
-     * @return the number of seconds from the epoch of 1970-01-01T00:00:00Z
-     */
-    long toEpochSecond(ZoneOffset offset);
+  @Override
+  ChronoLocalDateTime<C> plus(long amountToAdd, PeriodUnit unit);
 
-    //-----------------------------------------------------------------------
-    /**
-     * Compares this date-time to another date-time, including the chronology.
-     * <p>
-     * The comparison is based first on the underlying time-line date-time, then
-     * on the chronology.
-     * It is "consistent with equals", as defined by {@link Comparable}.
-     * <p>
-     * For example, the following is the comparator order:
-     * <ol>
-     * <li>{@code 2012-12-03T12:00 (ISO)}</li>
-     * <li>{@code 2012-12-04T12:00 (ISO)}</li>
-     * <li>{@code 2555-12-04T12:00 (ThaiBuddhist)}</li>
-     * <li>{@code 2012-12-05T12:00 (ISO)}</li>
-     * </ol>
-     * Values #2 and #3 represent the same date-time on the time-line.
-     * When two values represent the same date-time, the chronology ID is compared to distinguish them.
-     * This step is needed to make the ordering "consistent with equals".
-     * <p>
-     * If all the date-time objects being compared are in the same chronology, then the
-     * additional chronology stage is not required and only the local date-time is used.
-     *
-     * @param other  the other date-time to compare to, not null
-     * @return the comparator value, negative if less, positive if greater
-     */
-    @Override
-    int compareTo(ChronoLocalDateTime<?> other);
+  @Override
+  ChronoLocalDateTime<C> minus(MinusAdjuster adjuster);
 
-    /**
-     * Checks if this date-time is after the specified date-time ignoring the chronology.
-     * <p>
-     * This method differs from the comparison in {@link #compareTo} in that it
-     * only compares the underlying date-time and not the chronology.
-     * This allows dates in different calendar systems to be compared based
-     * on the time-line position.
-     *
-     * @param other  the other date-time to compare to, not null
-     * @return true if this is after the specified date-time
-     */
-    boolean isAfter(ChronoLocalDateTime<?> other);
+  @Override
+  ChronoLocalDateTime<C> minus(long amountToSubtract, PeriodUnit unit);
 
-    /**
-     * Checks if this date-time is before the specified date-time ignoring the chronology.
-     * <p>
-     * This method differs from the comparison in {@link #compareTo} in that it
-     * only compares the underlying date-time and not the chronology.
-     * This allows dates in different calendar systems to be compared based
-     * on the time-line position.
-     *
-     * @param other  the other date-time to compare to, not null
-     * @return true if this is before the specified date-time
-     */
-    boolean isBefore(ChronoLocalDateTime<?> other);
+  // -----------------------------------------------------------------------
+  /**
+   * Returns a zoned date-time formed from this date-time and the specified time-zone.
+   * <p>
+   * This creates a zoned date-time matching the input date-time as closely as possible. Time-zone rules, such
+   * as daylight savings, mean that not every local date-time is valid for the specified zone, thus the local
+   * date-time may be adjusted.
+   * <p>
+   * The local date-time is resolved to a single instant on the time-line. This is achieved by finding a valid
+   * offset from UTC/Greenwich for the local date-time as defined by the {@link ZoneRules rules} of the zone
+   * ID.
+   * <p>
+   * In most cases, there is only one valid offset for a local date-time. In the case of an overlap, where
+   * clocks are set back, there are two valid offsets. This method uses the earlier offset typically
+   * corresponding to "summer".
+   * <p>
+   * In the case of a gap, where clocks jump forward, there is no valid offset. Instead, the local date-time
+   * is adjusted to be later by the length of the gap. For a typical one hour daylight savings change, the
+   * local date-time will be moved one hour later into the offset typically corresponding to "summer".
+   * <p>
+   * To obtain the later offset during an overlap, call {@link ChronoZonedDateTime#withLaterOffsetAtOverlap()}
+   * on the result of this method.
+   * <p>
+   * This instance is immutable and unaffected by this method call.
+   * 
+   * @param zone the time-zone to use, not null
+   * @return the zoned date-time formed from this date-time, not null
+   */
+  ChronoZonedDateTime<C> atZone(ZoneId zone);
 
-    /**
-     * Checks if this date-time is equal to the specified date-time ignoring the chronology.
-     * <p>
-     * This method differs from the comparison in {@link #compareTo} in that it
-     * only compares the underlying date and time and not the chronology.
-     * This allows date-times in different calendar systems to be compared based
-     * on the time-line position.
-     *
-     * @param other  the other date-time to compare to, not null
-     * @return true if the underlying date-time is equal to the specified date-time on the timeline
-     */
-    boolean isEqual(ChronoLocalDateTime<?> other);
+  // -----------------------------------------------------------------------
+  /**
+   * Converts this date-time to an {@code Instant}.
+   * <p>
+   * This combines this local date-time and the specified offset to form an {@code Instant}.
+   * 
+   * @param offset the offset to use for the conversion, not null
+   * @return an {@code Instant} representing the same instant, not null
+   */
+  Instant toInstant(ZoneOffset offset);
 
-    //-----------------------------------------------------------------------
-    /**
-     * Checks if this date-time is equal to another date-time, including the chronology.
-     * <p>
-     * Compares this date-time with another ensuring that the date-time and chronology are the same.
-     *
-     * @param obj  the object to check, null returns false
-     * @return true if this is equal to the other date
-     */
-    @Override
-    boolean equals(Object obj);
+  /**
+   * Converts this date-time to the number of seconds from the epoch of 1970-01-01T00:00:00Z.
+   * <p>
+   * This combines this local date-time and the specified offset to calculate the epoch-second value, which is
+   * the number of elapsed seconds from 1970-01-01T00:00:00Z. Instants on the time-line after the epoch are
+   * positive, earlier are negative.
+   * 
+   * @param offset the offset to use for the conversion, not null
+   * @return the number of seconds from the epoch of 1970-01-01T00:00:00Z
+   */
+  long toEpochSecond(ZoneOffset offset);
 
-    /**
-     * A hash code for this date-time.
-     *
-     * @return a suitable hash code
-     */
-    @Override
-    int hashCode();
+  // -----------------------------------------------------------------------
+  /**
+   * Compares this date-time to another date-time, including the chronology.
+   * <p>
+   * The comparison is based first on the underlying time-line date-time, then on the chronology. It is
+   * "consistent with equals", as defined by {@link Comparable}.
+   * <p>
+   * For example, the following is the comparator order:
+   * <ol>
+   * <li>{@code 2012-12-03T12:00 (ISO)}</li>
+   * <li>{@code 2012-12-04T12:00 (ISO)}</li>
+   * <li>{@code 2555-12-04T12:00 (ThaiBuddhist)}</li>
+   * <li>{@code 2012-12-05T12:00 (ISO)}</li>
+   * </ol>
+   * Values #2 and #3 represent the same date-time on the time-line. When two values represent the same
+   * date-time, the chronology ID is compared to distinguish them. This step is needed to make the ordering
+   * "consistent with equals".
+   * <p>
+   * If all the date-time objects being compared are in the same chronology, then the additional chronology
+   * stage is not required and only the local date-time is used.
+   * 
+   * @param other the other date-time to compare to, not null
+   * @return the comparator value, negative if less, positive if greater
+   */
+  @Override
+  int compareTo(ChronoLocalDateTime<?> other);
 
-    //-----------------------------------------------------------------------
-    /**
-     * Outputs this date-time as a {@code String}.
-     * <p>
-     * The output will include the full local date-time and the chronology ID.
-     *
-     * @return a string representation of this date-time, not null
-     */
-    @Override
-    String toString();
+  /**
+   * Checks if this date-time is after the specified date-time ignoring the chronology.
+   * <p>
+   * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
+   * date-time and not the chronology. This allows dates in different calendar systems to be compared based on
+   * the time-line position.
+   * 
+   * @param other the other date-time to compare to, not null
+   * @return true if this is after the specified date-time
+   */
+  boolean isAfter(ChronoLocalDateTime<?> other);
 
-    /**
-     * Outputs this date-time as a {@code String} using the formatter.
-     *
-     * @param formatter  the formatter to use, not null
-     * @return the formatted date-time string, not null
-     * @throws DateTimeException if an error occurs during printing
-     */
-    String toString(DateTimeFormatter formatter);
+  /**
+   * Checks if this date-time is before the specified date-time ignoring the chronology.
+   * <p>
+   * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
+   * date-time and not the chronology. This allows dates in different calendar systems to be compared based on
+   * the time-line position.
+   * 
+   * @param other the other date-time to compare to, not null
+   * @return true if this is before the specified date-time
+   */
+  boolean isBefore(ChronoLocalDateTime<?> other);
+
+  /**
+   * Checks if this date-time is equal to the specified date-time ignoring the chronology.
+   * <p>
+   * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
+   * date and time and not the chronology. This allows date-times in different calendar systems to be compared
+   * based on the time-line position.
+   * 
+   * @param other the other date-time to compare to, not null
+   * @return true if the underlying date-time is equal to the specified date-time on the timeline
+   */
+  boolean isEqual(ChronoLocalDateTime<?> other);
+
+  // -----------------------------------------------------------------------
+  /**
+   * Checks if this date-time is equal to another date-time, including the chronology.
+   * <p>
+   * Compares this date-time with another ensuring that the date-time and chronology are the same.
+   * 
+   * @param obj the object to check, null returns false
+   * @return true if this is equal to the other date
+   */
+  @Override
+  boolean equals(Object obj);
+
+  /**
+   * A hash code for this date-time.
+   * 
+   * @return a suitable hash code
+   */
+  @Override
+  int hashCode();
+
+  // -----------------------------------------------------------------------
+  /**
+   * Outputs this date-time as a {@code String}.
+   * <p>
+   * The output will include the full local date-time and the chronology ID.
+   * 
+   * @return a string representation of this date-time, not null
+   */
+  @Override
+  String toString();
+
+  /**
+   * Outputs this date-time as a {@code String} using the formatter.
+   * 
+   * @param formatter the formatter to use, not null
+   * @return the formatted date-time string, not null
+   * @throws DateTimeException if an error occurs during printing
+   */
+  String toString(DateTimeFormatter formatter);
 
 }

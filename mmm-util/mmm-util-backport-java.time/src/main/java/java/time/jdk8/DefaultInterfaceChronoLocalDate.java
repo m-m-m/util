@@ -51,148 +51,162 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * A temporary class providing implementations that will become default interface
- * methods once integrated into JDK 8.
- *
+ * A temporary class providing implementations that will become default interface methods once integrated into
+ * JDK 8.
+ * 
  * @param <C> the chronology of this date-time
  */
-public abstract class DefaultInterfaceChronoLocalDate<C extends Chrono<C>>
-        extends DefaultInterfaceDateTime
-        implements ChronoLocalDate<C> {
+public abstract class DefaultInterfaceChronoLocalDate<C extends Chrono<C>> extends DefaultInterfaceDateTime implements
+    ChronoLocalDate<C> {
 
-    @Override
-    public Era<C> getEra() {
-        return getChrono().eraOf(get(ERA));
-    }
+  @Override
+  public Era<C> getEra() {
 
-    @Override
-    public boolean isLeapYear() {
-        return getChrono().isLeapYear(getLong(YEAR));
-    }
+    return getChrono().eraOf(get(ERA));
+  }
 
-    @Override
-    public int lengthOfYear() {
-        return (isLeapYear() ? 366 : 365);
-    }
+  @Override
+  public boolean isLeapYear() {
 
-    @Override
-    public boolean isSupported(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            return ((ChronoField) field).isDateField();
-        }
-        return field != null && field.doIsSupported(this);
-    }
+    return getChrono().isLeapYear(getLong(YEAR));
+  }
 
-    //-------------------------------------------------------------------------
-    @Override
-    public ChronoLocalDate<C> with(WithAdjuster adjuster) {
-        return getChrono().ensureChronoLocalDate(super.with(adjuster));
-    }
+  @Override
+  public int lengthOfYear() {
 
-    @Override
-    public ChronoLocalDate<C> plus(PlusAdjuster adjuster) {
-        return getChrono().ensureChronoLocalDate(super.plus(adjuster));
-    }
+    return (isLeapYear() ? 366 : 365);
+  }
 
-    @Override
-    public ChronoLocalDate<C> minus(MinusAdjuster adjuster) {
-        return getChrono().ensureChronoLocalDate(super.minus(adjuster));
-    }
+  @Override
+  public boolean isSupported(DateTimeField field) {
 
-    @Override
-    public ChronoLocalDate<C> minus(long amountToSubtract, PeriodUnit unit) {
-        return getChrono().ensureChronoLocalDate(super.minus(amountToSubtract, unit));
+    if (field instanceof ChronoField) {
+      return ((ChronoField) field).isDateField();
     }
+    return field != null && field.doIsSupported(this);
+  }
 
-    //-------------------------------------------------------------------------
-    @Override
-    public DateTime doWithAdjustment(DateTime dateTime) {
-        return dateTime.with(EPOCH_DAY, toEpochDay());
-    }
+  // -------------------------------------------------------------------------
+  @Override
+  public ChronoLocalDate<C> with(WithAdjuster adjuster) {
 
-    @Override
-    public ChronoLocalDateTime<C> atTime(LocalTime localTime) {
-        return Chrono.dateTime(this, localTime);
-    }
+    return getChrono().ensureChronoLocalDate(super.with(adjuster));
+  }
 
-    @Override
-    public <R> R query(Query<R> query) {
-        if (query == Query.CHRONO) {
-            return (R) getChrono();
-        }
-        return super.query(query);
-    }
+  @Override
+  public ChronoLocalDate<C> plus(PlusAdjuster adjuster) {
 
-    @Override
-    public long toEpochDay() {
-        return getLong(EPOCH_DAY);
-    }
+    return getChrono().ensureChronoLocalDate(super.plus(adjuster));
+  }
 
-    //-------------------------------------------------------------------------
-    @Override
-    public int compareTo(ChronoLocalDate<?> other) {
-        int cmp = Long.compare(toEpochDay(), other.toEpochDay());
-        if (cmp == 0) {
-            cmp = getChrono().compareTo(other.getChrono());
-        }
-        return cmp;
-    }
+  @Override
+  public ChronoLocalDate<C> minus(MinusAdjuster adjuster) {
 
-    @Override
-    public boolean isAfter(ChronoLocalDate<?> other) {
-        return this.toEpochDay() > other.toEpochDay();
-    }
+    return getChrono().ensureChronoLocalDate(super.minus(adjuster));
+  }
 
-    @Override
-    public boolean isBefore(ChronoLocalDate<?> other) {
-        return this.toEpochDay() < other.toEpochDay();
-    }
+  @Override
+  public ChronoLocalDate<C> minus(long amountToSubtract, PeriodUnit unit) {
 
-    @Override
-    public boolean isEqual(ChronoLocalDate<?> other) {
-        return this.toEpochDay() == other.toEpochDay();
-    }
+    return getChrono().ensureChronoLocalDate(super.minus(amountToSubtract, unit));
+  }
 
-    //-------------------------------------------------------------------------
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj instanceof ChronoLocalDate) {
-            return compareTo((ChronoLocalDate<?>) obj) == 0;
-        }
-        return false;
-    }
+  // -------------------------------------------------------------------------
+  @Override
+  public DateTime doWithAdjustment(DateTime dateTime) {
 
-    @Override
-    public int hashCode() {
-        long epDay = toEpochDay();
-        return getChrono().hashCode() ^ ((int) (epDay ^ (epDay >>> 32)));
-    }
+    return dateTime.with(EPOCH_DAY, toEpochDay());
+  }
 
-    //-------------------------------------------------------------------------
-    @Override
-    public String toString() {
-        // getLong() reduces chances of exceptions in toString()
-        long yoe = getLong(YEAR_OF_ERA);
-        long moy = getLong(MONTH_OF_YEAR);
-        long dom = getLong(DAY_OF_MONTH);
-        StringBuilder buf = new StringBuilder(30);
-        buf.append(getChrono().toString())
-                .append(" ")
-                .append(getEra())
-                .append(" ")
-                .append(yoe)
-                .append(moy < 10 ? "-0" : "-").append(moy)
-                .append(dom < 10 ? "-0" : "-").append(dom);
-        return buf.toString();
-    }
+  @Override
+  public ChronoLocalDateTime<C> atTime(LocalTime localTime) {
 
-    @Override
-    public String toString(DateTimeFormatter formatter) {
-        Objects.requireNonNull(formatter, "formatter");
-        return formatter.print(this);
+    return Chrono.dateTime(this, localTime);
+  }
+
+  @Override
+  public <R> R query(Query<R> query) {
+
+    if (query == Query.CHRONO) {
+      return (R) getChrono();
     }
+    return super.query(query);
+  }
+
+  @Override
+  public long toEpochDay() {
+
+    return getLong(EPOCH_DAY);
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public int compareTo(ChronoLocalDate<?> other) {
+
+    int cmp = Long.compare(toEpochDay(), other.toEpochDay());
+    if (cmp == 0) {
+      cmp = getChrono().compareTo(other.getChrono());
+    }
+    return cmp;
+  }
+
+  @Override
+  public boolean isAfter(ChronoLocalDate<?> other) {
+
+    return this.toEpochDay() > other.toEpochDay();
+  }
+
+  @Override
+  public boolean isBefore(ChronoLocalDate<?> other) {
+
+    return this.toEpochDay() < other.toEpochDay();
+  }
+
+  @Override
+  public boolean isEqual(ChronoLocalDate<?> other) {
+
+    return this.toEpochDay() == other.toEpochDay();
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof ChronoLocalDate) {
+      return compareTo((ChronoLocalDate<?>) obj) == 0;
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+
+    long epDay = toEpochDay();
+    return getChrono().hashCode() ^ ((int) (epDay ^ (epDay >>> 32)));
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public String toString() {
+
+    // getLong() reduces chances of exceptions in toString()
+    long yoe = getLong(YEAR_OF_ERA);
+    long moy = getLong(MONTH_OF_YEAR);
+    long dom = getLong(DAY_OF_MONTH);
+    StringBuilder buf = new StringBuilder(30);
+    buf.append(getChrono().toString()).append(" ").append(getEra()).append(" ").append(yoe)
+        .append(moy < 10 ? "-0" : "-").append(moy).append(dom < 10 ? "-0" : "-").append(dom);
+    return buf.toString();
+  }
+
+  @Override
+  public String toString(DateTimeFormatter formatter) {
+
+    Objects.requireNonNull(formatter, "formatter");
+    return formatter.print(this);
+  }
 
 }

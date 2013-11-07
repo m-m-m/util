@@ -40,293 +40,315 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Localized symbols used in date and time formatting.
  * <p>
- * A significant part of dealing with dates and times is the localization.
- * This class acts as a central point for accessing the information.
- *
- * <h4>Implementation notes</h4>
- * This class is immutable and thread-safe.
+ * A significant part of dealing with dates and times is the localization. This class acts as a central point
+ * for accessing the information.
+ * 
+ * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 public final class DateTimeFormatSymbols {
 
-    /**
-     * The standard set of non-localized symbols.
-     * <p>
-     * This uses standard ASCII characters for zero, positive, negative and a dot for the decimal point.
-     */
-    public static final DateTimeFormatSymbols STANDARD = new DateTimeFormatSymbols('0', '+', '-', '.');
-    /**
-     * The cache of symbols instances.
-     */
-    private static final ConcurrentMap<Locale, DateTimeFormatSymbols> CACHE = new ConcurrentHashMap<Locale, DateTimeFormatSymbols>(16, 0.75f, 2);
+  /**
+   * The standard set of non-localized symbols.
+   * <p>
+   * This uses standard ASCII characters for zero, positive, negative and a dot for the decimal point.
+   */
+  public static final DateTimeFormatSymbols STANDARD = new DateTimeFormatSymbols('0', '+', '-', '.');
 
-    /**
-     * The zero digit.
-     */
-    private final char zeroDigit;
-    /**
-     * The positive sign.
-     */
-    private final char positiveSign;
-    /**
-     * The negative sign.
-     */
-    private final char negativeSign;
-    /**
-     * The decimal separator.
-     */
-    private final char decimalSeparator;
+  /**
+   * The cache of symbols instances.
+   */
+  private static final ConcurrentMap<Locale, DateTimeFormatSymbols> CACHE = new ConcurrentHashMap<Locale, DateTimeFormatSymbols>(
+      16, 0.75f, 2);
 
-    //-----------------------------------------------------------------------
-    /**
-     * Lists all the locales that are supported.
-     * <p>
-     * The locale 'en_US' will always be present.
-     *
-     * @return an array of locales for which localization is supported
-     */
-    public static Locale[] getAvailableLocales() {
-        return DecimalFormatSymbols.getAvailableLocales();
+  /**
+   * The zero digit.
+   */
+  private final char zeroDigit;
+
+  /**
+   * The positive sign.
+   */
+  private final char positiveSign;
+
+  /**
+   * The negative sign.
+   */
+  private final char negativeSign;
+
+  /**
+   * The decimal separator.
+   */
+  private final char decimalSeparator;
+
+  // -----------------------------------------------------------------------
+  /**
+   * Lists all the locales that are supported.
+   * <p>
+   * The locale 'en_US' will always be present.
+   * 
+   * @return an array of locales for which localization is supported
+   */
+  public static Locale[] getAvailableLocales() {
+
+    return DecimalFormatSymbols.getAvailableLocales();
+  }
+
+  /**
+   * Obtains symbols for the default locale.
+   * <p>
+   * This method provides access to locale sensitive symbols.
+   * 
+   * @return the info, not null
+   */
+  public static DateTimeFormatSymbols ofDefaultLocale() {
+
+    return of(Locale.getDefault());
+  }
+
+  /**
+   * Obtains symbols for the specified locale.
+   * <p>
+   * This method provides access to locale sensitive symbols.
+   * 
+   * @param locale the locale, not null
+   * @return the info, not null
+   */
+  public static DateTimeFormatSymbols of(Locale locale) {
+
+    Objects.requireNonNull(locale, "locale");
+    DateTimeFormatSymbols info = CACHE.get(locale);
+    if (info == null) {
+      info = create(locale);
+      CACHE.putIfAbsent(locale, info);
+      info = CACHE.get(locale);
     }
+    return info;
+  }
 
-    /**
-     * Obtains symbols for the default locale.
-     * <p>
-     * This method provides access to locale sensitive symbols.
-     *
-     * @return the info, not null
-     */
-    public static DateTimeFormatSymbols ofDefaultLocale() {
-        return of(Locale.getDefault());
-    }
+  private static DateTimeFormatSymbols create(Locale locale) {
 
-    /**
-     * Obtains symbols for the specified locale.
-     * <p>
-     * This method provides access to locale sensitive symbols.
-     *
-     * @param locale  the locale, not null
-     * @return the info, not null
-     */
-    public static DateTimeFormatSymbols of(Locale locale) {
-        Objects.requireNonNull(locale, "locale");
-        DateTimeFormatSymbols info = CACHE.get(locale);
-        if (info == null) {
-            info = create(locale);
-            CACHE.putIfAbsent(locale, info);
-            info = CACHE.get(locale);
-        }
-        return info;
+    DecimalFormatSymbols oldSymbols = DecimalFormatSymbols.getInstance(locale);
+    char zeroDigit = oldSymbols.getZeroDigit();
+    char positiveSign = '+';
+    char negativeSign = oldSymbols.getMinusSign();
+    char decimalSeparator = oldSymbols.getDecimalSeparator();
+    if (zeroDigit == '0' && negativeSign == '-' && decimalSeparator == '.') {
+      return STANDARD;
     }
+    return new DateTimeFormatSymbols(zeroDigit, positiveSign, negativeSign, decimalSeparator);
+  }
 
-    private static DateTimeFormatSymbols create(Locale locale) {
-        DecimalFormatSymbols oldSymbols = DecimalFormatSymbols.getInstance(locale);
-        char zeroDigit = oldSymbols.getZeroDigit();
-        char positiveSign = '+';
-        char negativeSign = oldSymbols.getMinusSign();
-        char decimalSeparator = oldSymbols.getDecimalSeparator();
-        if (zeroDigit == '0' && negativeSign == '-' && decimalSeparator == '.') {
-            return STANDARD;
-        }
-        return new DateTimeFormatSymbols(zeroDigit, positiveSign, negativeSign, decimalSeparator);
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Restricted constructor.
+   * 
+   * @param zeroChar the character to use for the digit of zero
+   * @param positiveSignChar the character to use for the positive sign
+   * @param negativeSignChar the character to use for the negative sign
+   * @param decimalPointChar the character to use for the decimal point
+   */
+  private DateTimeFormatSymbols(char zeroChar, char positiveSignChar, char negativeSignChar, char decimalPointChar) {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Restricted constructor.
-     *
-     * @param zeroChar  the character to use for the digit of zero
-     * @param positiveSignChar  the character to use for the positive sign
-     * @param negativeSignChar  the character to use for the negative sign
-     * @param decimalPointChar  the character to use for the decimal point
-     */
-    private DateTimeFormatSymbols(char zeroChar, char positiveSignChar, char negativeSignChar, char decimalPointChar) {
-        this.zeroDigit = zeroChar;
-        this.positiveSign = positiveSignChar;
-        this.negativeSign = negativeSignChar;
-        this.decimalSeparator = decimalPointChar;
-    }
+    this.zeroDigit = zeroChar;
+    this.positiveSign = positiveSignChar;
+    this.negativeSign = negativeSignChar;
+    this.decimalSeparator = decimalPointChar;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the character that represents zero.
-     * <p>
-     * The character used to represent digits may vary by culture.
-     * This method specifies the zero character to use, which implies the characters for one to nine.
-     *
-     * @return the character for zero
-     */
-    public char getZeroDigit() {
-        return zeroDigit;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the character that represents zero.
+   * <p>
+   * The character used to represent digits may vary by culture. This method specifies the zero character to
+   * use, which implies the characters for one to nine.
+   * 
+   * @return the character for zero
+   */
+  public char getZeroDigit() {
 
-    /**
-     * Returns a copy of the info with a new character that represents zero.
-     * <p>
-     * The character used to represent digits may vary by culture.
-     * This method specifies the zero character to use, which implies the characters for one to nine.
-     *
-     * @param zeroDigit  the character for zero
-     */
-    public DateTimeFormatSymbols withZeroDigit(char zeroDigit) {
-        if (zeroDigit == this.zeroDigit) {
-            return this;
-        }
-        return new DateTimeFormatSymbols(zeroDigit, positiveSign, negativeSign, decimalSeparator);
-    }
+    return this.zeroDigit;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the character that represents the positive sign.
-     * <p>
-     * The character used to represent a positive number may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @return the character for the positive sign
-     */
-    public char getPositiveSign() {
-        return positiveSign;
-    }
+  /**
+   * Returns a copy of the info with a new character that represents zero.
+   * <p>
+   * The character used to represent digits may vary by culture. This method specifies the zero character to
+   * use, which implies the characters for one to nine.
+   * 
+   * @param zeroDigit the character for zero
+   */
+  public DateTimeFormatSymbols withZeroDigit(char zeroDigit) {
 
-    /**
-     * Returns a copy of the info with a new character that represents the positive sign.
-     * <p>
-     * The character used to represent a positive number may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @param positiveSign  the character for the positive sign
-     */
-    public DateTimeFormatSymbols withPositiveSign(char positiveSign) {
-        if (positiveSign == this.positiveSign) {
-            return this;
-        }
-        return new DateTimeFormatSymbols(zeroDigit, positiveSign, negativeSign, decimalSeparator);
+    if (zeroDigit == this.zeroDigit) {
+      return this;
     }
+    return new DateTimeFormatSymbols(zeroDigit, this.positiveSign, this.negativeSign, this.decimalSeparator);
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the character that represents the negative sign.
-     * <p>
-     * The character used to represent a negative number may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @return the character for the negative sign
-     */
-    public char getNegativeSign() {
-        return negativeSign;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the character that represents the positive sign.
+   * <p>
+   * The character used to represent a positive number may vary by culture. This method specifies the
+   * character to use.
+   * 
+   * @return the character for the positive sign
+   */
+  public char getPositiveSign() {
 
-    /**
-     * Returns a copy of the info with a new character that represents the negative sign.
-     * <p>
-     * The character used to represent a negative number may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @param negativeSign  the character for the negative sign
-     */
-    public DateTimeFormatSymbols withNegativeSign(char negativeSign) {
-        if (negativeSign == this.negativeSign) {
-            return this;
-        }
-        return new DateTimeFormatSymbols(zeroDigit, positiveSign, negativeSign, decimalSeparator);
-    }
+    return this.positiveSign;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the character that represents the decimal point.
-     * <p>
-     * The character used to represent a decimal point may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @return the character for the decimal point
-     */
-    public char getDecimalSeparator() {
-        return decimalSeparator;
-    }
+  /**
+   * Returns a copy of the info with a new character that represents the positive sign.
+   * <p>
+   * The character used to represent a positive number may vary by culture. This method specifies the
+   * character to use.
+   * 
+   * @param positiveSign the character for the positive sign
+   */
+  public DateTimeFormatSymbols withPositiveSign(char positiveSign) {
 
-    /**
-     * Returns a copy of the info with a new character that represents the decimal point.
-     * <p>
-     * The character used to represent a decimal point may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @param decimalSeparator  the character for the decimal point
-     */
-    public DateTimeFormatSymbols withDecimalSeparator(char decimalSeparator) {
-        if (decimalSeparator == this.decimalSeparator) {
-            return this;
-        }
-        return new DateTimeFormatSymbols(zeroDigit, positiveSign, negativeSign, decimalSeparator);
+    if (positiveSign == this.positiveSign) {
+      return this;
     }
+    return new DateTimeFormatSymbols(this.zeroDigit, positiveSign, this.negativeSign, this.decimalSeparator);
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Checks whether the character is a digit, based on the currently set zero character.
-     *
-     * @param ch  the character to check
-     * @return the value, 0 to 9, of the character, or -1 if not a digit
-     */
-    int convertToDigit(char ch) {
-        int val = ch - zeroDigit;
-        return (val >= 0 && val <= 9) ? val : -1;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the character that represents the negative sign.
+   * <p>
+   * The character used to represent a negative number may vary by culture. This method specifies the
+   * character to use.
+   * 
+   * @return the character for the negative sign
+   */
+  public char getNegativeSign() {
 
-    /**
-     * Converts the input numeric text to the internationalized form using the zero character.
-     *
-     * @param numericText  the text, consisting of digits 0 to 9, to convert, not null
-     * @return the internationalized text, not null
-     */
-    String convertNumberToI18N(String numericText) {
-        if (zeroDigit == '0') {
-            return numericText;
-        }
-        int diff = zeroDigit - '0';
-        char[] array = numericText.toCharArray();
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (char) (array[i] + diff);
-        }
-        return new String(array);
-    }
+    return this.negativeSign;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Checks if these symbols equal another set of symbols.
-     *
-     * @param obj  the object to check, null returns false
-     * @return true if this is equal to the other date
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj instanceof DateTimeFormatSymbols) {
-            DateTimeFormatSymbols other = (DateTimeFormatSymbols) obj;
-            return (zeroDigit == other.zeroDigit && positiveSign == other.positiveSign &&
-                    negativeSign == other.negativeSign && decimalSeparator == other.decimalSeparator);
-        }
-        return false;
-    }
+  /**
+   * Returns a copy of the info with a new character that represents the negative sign.
+   * <p>
+   * The character used to represent a negative number may vary by culture. This method specifies the
+   * character to use.
+   * 
+   * @param negativeSign the character for the negative sign
+   */
+  public DateTimeFormatSymbols withNegativeSign(char negativeSign) {
 
-    /**
-     * A hash code for these symbols.
-     *
-     * @return a suitable hash code
-     */
-    @Override
-    public int hashCode() {
-        return zeroDigit + positiveSign + negativeSign + decimalSeparator;
+    if (negativeSign == this.negativeSign) {
+      return this;
     }
+    return new DateTimeFormatSymbols(this.zeroDigit, this.positiveSign, negativeSign, this.decimalSeparator);
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a string describing these symbols.
-     *
-     * @return a string description, not null
-     */
-    @Override
-    public String toString() {
-        return "Symbols[" + zeroDigit + positiveSign + negativeSign + decimalSeparator + "]";
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the character that represents the decimal point.
+   * <p>
+   * The character used to represent a decimal point may vary by culture. This method specifies the character
+   * to use.
+   * 
+   * @return the character for the decimal point
+   */
+  public char getDecimalSeparator() {
+
+    return this.decimalSeparator;
+  }
+
+  /**
+   * Returns a copy of the info with a new character that represents the decimal point.
+   * <p>
+   * The character used to represent a decimal point may vary by culture. This method specifies the character
+   * to use.
+   * 
+   * @param decimalSeparator the character for the decimal point
+   */
+  public DateTimeFormatSymbols withDecimalSeparator(char decimalSeparator) {
+
+    if (decimalSeparator == this.decimalSeparator) {
+      return this;
     }
+    return new DateTimeFormatSymbols(this.zeroDigit, this.positiveSign, this.negativeSign, decimalSeparator);
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Checks whether the character is a digit, based on the currently set zero character.
+   * 
+   * @param ch the character to check
+   * @return the value, 0 to 9, of the character, or -1 if not a digit
+   */
+  int convertToDigit(char ch) {
+
+    int val = ch - this.zeroDigit;
+    return (val >= 0 && val <= 9) ? val : -1;
+  }
+
+  /**
+   * Converts the input numeric text to the internationalized form using the zero character.
+   * 
+   * @param numericText the text, consisting of digits 0 to 9, to convert, not null
+   * @return the internationalized text, not null
+   */
+  String convertNumberToI18N(String numericText) {
+
+    if (this.zeroDigit == '0') {
+      return numericText;
+    }
+    int diff = this.zeroDigit - '0';
+    char[] array = numericText.toCharArray();
+    for (int i = 0; i < array.length; i++) {
+      array[i] = (char) (array[i] + diff);
+    }
+    return new String(array);
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Checks if these symbols equal another set of symbols.
+   * 
+   * @param obj the object to check, null returns false
+   * @return true if this is equal to the other date
+   */
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof DateTimeFormatSymbols) {
+      DateTimeFormatSymbols other = (DateTimeFormatSymbols) obj;
+      return (this.zeroDigit == other.zeroDigit && this.positiveSign == other.positiveSign
+          && this.negativeSign == other.negativeSign && this.decimalSeparator == other.decimalSeparator);
+    }
+    return false;
+  }
+
+  /**
+   * A hash code for these symbols.
+   * 
+   * @return a suitable hash code
+   */
+  @Override
+  public int hashCode() {
+
+    return this.zeroDigit + this.positiveSign + this.negativeSign + this.decimalSeparator;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Returns a string describing these symbols.
+   * 
+   * @return a string description, not null
+   */
+  @Override
+  public String toString() {
+
+    return "Symbols[" + this.zeroDigit + this.positiveSign + this.negativeSign + this.decimalSeparator + "]";
+  }
 
 }

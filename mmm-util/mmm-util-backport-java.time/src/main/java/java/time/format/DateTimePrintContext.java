@@ -42,176 +42,191 @@ import java.util.Objects;
  * Context object used during date and time printing.
  * <p>
  * This class provides a single wrapper to items used in the print.
- *
+ * 
  * <h4>Implementation notes</h4>
- * This class is a mutable context intended for use from a single thread.
- * Usage of the class is thread-safe within standard printing as the framework creates
- * a new instance of the class for each print and printing is single-threaded.
+ * This class is a mutable context intended for use from a single thread. Usage of the class is thread-safe
+ * within standard printing as the framework creates a new instance of the class for each print and printing
+ * is single-threaded.
  */
 final class DateTimePrintContext {
 
-    /**
-     * The date-time being output.
-     */
-    private DateTimeAccessor dateTime;
-    /**
-     * The locale, not null.
-     */
-    private Locale locale;
-    /**
-     * The date time format symbols, not null.
-     */
-    private DateTimeFormatSymbols symbols;
-    /**
-     * Whether the current formatter is optional.
-     */
-    private int optional;
+  /**
+   * The date-time being output.
+   */
+  private DateTimeAccessor dateTime;
 
-    /**
-     * Creates a new instance of the context.
-     * <p>
-     * This should normally only be created by the printer.
-     *
-     * @param dateTime  the date-time being output, not null
-     * @param locale  the locale to use, not null
-     * @param symbols  the symbols to use during parsing, not null
-     */
-    DateTimePrintContext(DateTimeAccessor dateTime, Locale locale, DateTimeFormatSymbols symbols) {
-        super();
-        setDateTime(dateTime);
-        setLocale(locale);
-        setSymbols(symbols);
-    }
+  /**
+   * The locale, not null.
+   */
+  private Locale locale;
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the date-time being output.
-     *
-     * @return the date-time, not null
-     */
-    DateTimeAccessor getDateTime() {
-        return dateTime;
-    }
+  /**
+   * The date time format symbols, not null.
+   */
+  private DateTimeFormatSymbols symbols;
 
-    /**
-     * Sets the date-time being output.
-     *
-     * @param dateTime  the date-time object, not null
-     */
-    void setDateTime(DateTimeAccessor dateTime) {
-        Objects.requireNonNull(dateTime, "dateTime");
-        this.dateTime = dateTime;
-    }
+  /**
+   * Whether the current formatter is optional.
+   */
+  private int optional;
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the locale.
-     * <p>
-     * This locale is used to control localization in the print output except
-     * where localization is controlled by the symbols.
-     *
-     * @return the locale, not null
-     */
-    Locale getLocale() {
-        return locale;
-    }
+  /**
+   * Creates a new instance of the context.
+   * <p>
+   * This should normally only be created by the printer.
+   * 
+   * @param dateTime the date-time being output, not null
+   * @param locale the locale to use, not null
+   * @param symbols the symbols to use during parsing, not null
+   */
+  DateTimePrintContext(DateTimeAccessor dateTime, Locale locale, DateTimeFormatSymbols symbols) {
 
-    /**
-     * Sets the locale.
-     * <p>
-     * This locale is used to control localization in the print output except
-     * where localization is controlled by the symbols.
-     *
-     * @param locale  the locale, not null
-     */
-    void setLocale(Locale locale) {
-        Objects.requireNonNull(locale, "locale");
-        this.locale = locale;
-    }
+    super();
+    setDateTime(dateTime);
+    setLocale(locale);
+    setSymbols(symbols);
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the formatting symbols.
-     * <p>
-     * The symbols control the localization of numeric output.
-     *
-     * @return the formatting symbols, not null
-     */
-    DateTimeFormatSymbols getSymbols() {
-        return symbols;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the date-time being output.
+   * 
+   * @return the date-time, not null
+   */
+  DateTimeAccessor getDateTime() {
 
-    /**
-     * Sets the formatting symbols.
-     * <p>
-     * The symbols control the localization of numeric output.
-     *
-     * @param symbols  the formatting symbols, not null
-     */
-    void setSymbols(DateTimeFormatSymbols symbols) {
-        Objects.requireNonNull(symbols, "symbols");
-        this.symbols = symbols;
-    }
+    return this.dateTime;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Starts the printing of an optional segment of the input.
-     */
-    void startOptional() {
-        this.optional++;
-    }
+  /**
+   * Sets the date-time being output.
+   * 
+   * @param dateTime the date-time object, not null
+   */
+  void setDateTime(DateTimeAccessor dateTime) {
 
-    /**
-     * Ends the printing of an optional segment of the input.
-     */
-    void endOptional() {
-        this.optional--;
-    }
+    Objects.requireNonNull(dateTime, "dateTime");
+    this.dateTime = dateTime;
+  }
 
-    /**
-     * Gets a value using a query.
-     *
-     * @param query  the query to use, not null
-     * @return the result, null if not found and optional is true
-     * @throws DateTimeException if the type is not available and the section is not optional
-     */
-    <R> R getValue(Query<R> query) {
-        R result = dateTime.query(query);
-        if (result == null && optional == 0) {
-            throw new DateTimeException("Unable to extract value: " + dateTime.getClass());
-        }
-        return result;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the locale.
+   * <p>
+   * This locale is used to control localization in the print output except where localization is controlled
+   * by the symbols.
+   * 
+   * @return the locale, not null
+   */
+  Locale getLocale() {
 
-    /**
-     * Gets the value of the specified field.
-     * <p>
-     * This will return the value for the specified field.
-     *
-     * @param field  the field to find, not null
-     * @return the value, null if not found and optional is true
-     * @throws DateTimeException if the field is not available and the section is not optional
-     */
-    Long getValue(DateTimeField field) {
-        try {
-            return dateTime.getLong(field);
-        } catch (DateTimeException ex) {
-            if (optional > 0) {
-                return null;
-            }
-            throw ex;
-        }
-    }
+    return this.locale;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a string version of the context for debugging.
-     *
-     * @return a string representation of the context, not null
-     */
-    @Override
-    public String toString() {
-        return dateTime.toString();
+  /**
+   * Sets the locale.
+   * <p>
+   * This locale is used to control localization in the print output except where localization is controlled
+   * by the symbols.
+   * 
+   * @param locale the locale, not null
+   */
+  void setLocale(Locale locale) {
+
+    Objects.requireNonNull(locale, "locale");
+    this.locale = locale;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the formatting symbols.
+   * <p>
+   * The symbols control the localization of numeric output.
+   * 
+   * @return the formatting symbols, not null
+   */
+  DateTimeFormatSymbols getSymbols() {
+
+    return this.symbols;
+  }
+
+  /**
+   * Sets the formatting symbols.
+   * <p>
+   * The symbols control the localization of numeric output.
+   * 
+   * @param symbols the formatting symbols, not null
+   */
+  void setSymbols(DateTimeFormatSymbols symbols) {
+
+    Objects.requireNonNull(symbols, "symbols");
+    this.symbols = symbols;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Starts the printing of an optional segment of the input.
+   */
+  void startOptional() {
+
+    this.optional++;
+  }
+
+  /**
+   * Ends the printing of an optional segment of the input.
+   */
+  void endOptional() {
+
+    this.optional--;
+  }
+
+  /**
+   * Gets a value using a query.
+   * 
+   * @param query the query to use, not null
+   * @return the result, null if not found and optional is true
+   * @throws DateTimeException if the type is not available and the section is not optional
+   */
+  <R> R getValue(Query<R> query) {
+
+    R result = this.dateTime.query(query);
+    if (result == null && this.optional == 0) {
+      throw new DateTimeException("Unable to extract value: " + this.dateTime.getClass());
     }
+    return result;
+  }
+
+  /**
+   * Gets the value of the specified field.
+   * <p>
+   * This will return the value for the specified field.
+   * 
+   * @param field the field to find, not null
+   * @return the value, null if not found and optional is true
+   * @throws DateTimeException if the field is not available and the section is not optional
+   */
+  Long getValue(DateTimeField field) {
+
+    try {
+      return this.dateTime.getLong(field);
+    } catch (DateTimeException ex) {
+      if (this.optional > 0) {
+        return null;
+      }
+      throw ex;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Returns a string version of the context for debugging.
+   * 
+   * @return a string representation of the context, not null
+   */
+  @Override
+  public String toString() {
+
+    return this.dateTime.toString();
+  }
 
 }

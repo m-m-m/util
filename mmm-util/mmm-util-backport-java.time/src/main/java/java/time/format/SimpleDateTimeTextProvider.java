@@ -55,242 +55,254 @@ import java.util.concurrent.ConcurrentMap;
  * The Service Provider Implementation to obtain date-time text for a field.
  * <p>
  * This implementation is based on extraction of data from a {@link DateFormatSymbols}.
- *
- * <h4>Implementation notes</h4>
- * This class is immutable and thread-safe.
+ * 
+ * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
-     // TODO: Better implementation based on CLDR
 
-    /** Cache. */
-    private static final ConcurrentMap<Entry<DateTimeField, Locale>, Object> CACHE =
-        new ConcurrentHashMap<Entry<DateTimeField, Locale>, Object>(16, 0.75f, 2);
-    /** Comparator. */
-    private static final Comparator<Entry<String, Long>> COMPARATOR = new Comparator<Entry<String, Long>>() {
-        @Override
-        public int compare(Entry<String, Long> obj1, Entry<String, Long> obj2) {
-            return obj2.getKey().length() - obj1.getKey().length();  // longest to shortest
-        }
-    };
+  // TODO: Better implementation based on CLDR
 
-    //-----------------------------------------------------------------------
-    /** {@inheritDoc} */
-    @Override
-    public Locale[] getAvailableLocales() {
-        return DateFormatSymbols.getAvailableLocales();
-    }
+  /** Cache. */
+  private static final ConcurrentMap<Entry<DateTimeField, Locale>, Object> CACHE = new ConcurrentHashMap<Entry<DateTimeField, Locale>, Object>(
+      16, 0.75f, 2);
 
-    //-----------------------------------------------------------------------
-    @Override
-    public String getText(DateTimeField field, long value, TextStyle style, Locale locale) {
-        Object store = findStore(field, locale);
-        if (store instanceof LocaleStore) {
-            return ((LocaleStore) store).getText(value, style);
-        }
-        return null;
-    }
+  /** Comparator. */
+  private static final Comparator<Entry<String, Long>> COMPARATOR = new Comparator<Entry<String, Long>>() {
 
     @Override
-    public Iterator<Entry<String, Long>> getTextIterator(DateTimeField field, TextStyle style, Locale locale) {
-        Object store = findStore(field, locale);
-        if (store instanceof LocaleStore) {
-            return ((LocaleStore) store).getTextIterator(style);
-        }
-        return null;
-    }
+    public int compare(Entry<String, Long> obj1, Entry<String, Long> obj2) {
 
-    //-----------------------------------------------------------------------
-    private Object findStore(DateTimeField field, Locale locale) {
-        Entry<DateTimeField, Locale> key = createEntry(field, locale);
-        Object store = CACHE.get(key);
-        if (store == null) {
-            store = createStore(field, locale);
-            CACHE.putIfAbsent(key, store);
-            store = CACHE.get(key);
-        }
-        return store;
+      return obj2.getKey().length() - obj1.getKey().length(); // longest to shortest
     }
+  };
 
-    private Object createStore(DateTimeField field, Locale locale) {
-        if (field == MONTH_OF_YEAR) {
-            DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
-            Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
-            Long f1 = 1L;
-            Long f2 = 2L;
-            Long f3 = 3L;
-            Long f4 = 4L;
-            Long f5 = 5L;
-            Long f6 = 6L;
-            Long f7 = 7L;
-            Long f8 = 8L;
-            Long f9 = 9L;
-            Long f10 = 10L;
-            Long f11 = 11L;
-            Long f12 = 12L;
-            String[] array = oldSymbols.getMonths();
-            Map<Long, String> map = new HashMap<>();
-            map.put(f1, array[Calendar.JANUARY]);
-            map.put(f2, array[Calendar.FEBRUARY]);
-            map.put(f3, array[Calendar.MARCH]);
-            map.put(f4, array[Calendar.APRIL]);
-            map.put(f5, array[Calendar.MAY]);
-            map.put(f6, array[Calendar.JUNE]);
-            map.put(f7, array[Calendar.JULY]);
-            map.put(f8, array[Calendar.AUGUST]);
-            map.put(f9, array[Calendar.SEPTEMBER]);
-            map.put(f10, array[Calendar.OCTOBER]);
-            map.put(f11, array[Calendar.NOVEMBER]);
-            map.put(f12, array[Calendar.DECEMBER]);
-            styleMap.put(TextStyle.FULL, map);
-            array = oldSymbols.getShortMonths();
-            map = new HashMap<>();
-            map.put(f1, array[Calendar.JANUARY]);
-            map.put(f2, array[Calendar.FEBRUARY]);
-            map.put(f3, array[Calendar.MARCH]);
-            map.put(f4, array[Calendar.APRIL]);
-            map.put(f5, array[Calendar.MAY]);
-            map.put(f6, array[Calendar.JUNE]);
-            map.put(f7, array[Calendar.JULY]);
-            map.put(f8, array[Calendar.AUGUST]);
-            map.put(f9, array[Calendar.SEPTEMBER]);
-            map.put(f10, array[Calendar.OCTOBER]);
-            map.put(f11, array[Calendar.NOVEMBER]);
-            map.put(f12, array[Calendar.DECEMBER]);
-            styleMap.put(TextStyle.SHORT, map);
-            return new LocaleStore(styleMap);
-        }
-        if (field == DAY_OF_WEEK) {
-            DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
-            Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
-            Long f1 = 1L;
-            Long f2 = 2L;
-            Long f3 = 3L;
-            Long f4 = 4L;
-            Long f5 = 5L;
-            Long f6 = 6L;
-            Long f7 = 7L;
-            String[] array = oldSymbols.getWeekdays();
-            Map<Long, String> map = new HashMap<>();
-            map.put(f1, array[Calendar.MONDAY]);
-            map.put(f2, array[Calendar.TUESDAY]);
-            map.put(f3, array[Calendar.WEDNESDAY]);
-            map.put(f4, array[Calendar.THURSDAY]);
-            map.put(f5, array[Calendar.FRIDAY]);
-            map.put(f6, array[Calendar.SATURDAY]);
-            map.put(f7, array[Calendar.SUNDAY]);
-            styleMap.put(TextStyle.FULL, map);
-            array = oldSymbols.getShortWeekdays();
-            map = new HashMap<>();
-            map.put(f1, array[Calendar.MONDAY]);
-            map.put(f2, array[Calendar.TUESDAY]);
-            map.put(f3, array[Calendar.WEDNESDAY]);
-            map.put(f4, array[Calendar.THURSDAY]);
-            map.put(f5, array[Calendar.FRIDAY]);
-            map.put(f6, array[Calendar.SATURDAY]);
-            map.put(f7, array[Calendar.SUNDAY]);
-            styleMap.put(TextStyle.SHORT, map);
-            return new LocaleStore(styleMap);
-        }
-        if (field == AMPM_OF_DAY) {
-            DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
-            Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
-            String[] array = oldSymbols.getAmPmStrings();
-            Map<Long, String> map = new HashMap<>();
-            map.put(0L, array[Calendar.AM]);
-            map.put(1L, array[Calendar.PM]);
-            styleMap.put(TextStyle.FULL, map);
-            styleMap.put(TextStyle.SHORT, map);  // re-use, as we don't have different data
-            return new LocaleStore(styleMap);
-        }
-        return "";  // null marker for map
+  // -----------------------------------------------------------------------
+  /** {@inheritDoc} */
+  @Override
+  public Locale[] getAvailableLocales() {
+
+    return DateFormatSymbols.getAvailableLocales();
+  }
+
+  // -----------------------------------------------------------------------
+  @Override
+  public String getText(DateTimeField field, long value, TextStyle style, Locale locale) {
+
+    Object store = findStore(field, locale);
+    if (store instanceof LocaleStore) {
+      return ((LocaleStore) store).getText(value, style);
     }
+    return null;
+  }
 
-    //-----------------------------------------------------------------------
+  @Override
+  public Iterator<Entry<String, Long>> getTextIterator(DateTimeField field, TextStyle style, Locale locale) {
+
+    Object store = findStore(field, locale);
+    if (store instanceof LocaleStore) {
+      return ((LocaleStore) store).getTextIterator(style);
+    }
+    return null;
+  }
+
+  // -----------------------------------------------------------------------
+  private Object findStore(DateTimeField field, Locale locale) {
+
+    Entry<DateTimeField, Locale> key = createEntry(field, locale);
+    Object store = CACHE.get(key);
+    if (store == null) {
+      store = createStore(field, locale);
+      CACHE.putIfAbsent(key, store);
+      store = CACHE.get(key);
+    }
+    return store;
+  }
+
+  private Object createStore(DateTimeField field, Locale locale) {
+
+    if (field == MONTH_OF_YEAR) {
+      DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
+      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
+      Long f1 = 1L;
+      Long f2 = 2L;
+      Long f3 = 3L;
+      Long f4 = 4L;
+      Long f5 = 5L;
+      Long f6 = 6L;
+      Long f7 = 7L;
+      Long f8 = 8L;
+      Long f9 = 9L;
+      Long f10 = 10L;
+      Long f11 = 11L;
+      Long f12 = 12L;
+      String[] array = oldSymbols.getMonths();
+      Map<Long, String> map = new HashMap<>();
+      map.put(f1, array[Calendar.JANUARY]);
+      map.put(f2, array[Calendar.FEBRUARY]);
+      map.put(f3, array[Calendar.MARCH]);
+      map.put(f4, array[Calendar.APRIL]);
+      map.put(f5, array[Calendar.MAY]);
+      map.put(f6, array[Calendar.JUNE]);
+      map.put(f7, array[Calendar.JULY]);
+      map.put(f8, array[Calendar.AUGUST]);
+      map.put(f9, array[Calendar.SEPTEMBER]);
+      map.put(f10, array[Calendar.OCTOBER]);
+      map.put(f11, array[Calendar.NOVEMBER]);
+      map.put(f12, array[Calendar.DECEMBER]);
+      styleMap.put(TextStyle.FULL, map);
+      array = oldSymbols.getShortMonths();
+      map = new HashMap<>();
+      map.put(f1, array[Calendar.JANUARY]);
+      map.put(f2, array[Calendar.FEBRUARY]);
+      map.put(f3, array[Calendar.MARCH]);
+      map.put(f4, array[Calendar.APRIL]);
+      map.put(f5, array[Calendar.MAY]);
+      map.put(f6, array[Calendar.JUNE]);
+      map.put(f7, array[Calendar.JULY]);
+      map.put(f8, array[Calendar.AUGUST]);
+      map.put(f9, array[Calendar.SEPTEMBER]);
+      map.put(f10, array[Calendar.OCTOBER]);
+      map.put(f11, array[Calendar.NOVEMBER]);
+      map.put(f12, array[Calendar.DECEMBER]);
+      styleMap.put(TextStyle.SHORT, map);
+      return new LocaleStore(styleMap);
+    }
+    if (field == DAY_OF_WEEK) {
+      DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
+      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
+      Long f1 = 1L;
+      Long f2 = 2L;
+      Long f3 = 3L;
+      Long f4 = 4L;
+      Long f5 = 5L;
+      Long f6 = 6L;
+      Long f7 = 7L;
+      String[] array = oldSymbols.getWeekdays();
+      Map<Long, String> map = new HashMap<>();
+      map.put(f1, array[Calendar.MONDAY]);
+      map.put(f2, array[Calendar.TUESDAY]);
+      map.put(f3, array[Calendar.WEDNESDAY]);
+      map.put(f4, array[Calendar.THURSDAY]);
+      map.put(f5, array[Calendar.FRIDAY]);
+      map.put(f6, array[Calendar.SATURDAY]);
+      map.put(f7, array[Calendar.SUNDAY]);
+      styleMap.put(TextStyle.FULL, map);
+      array = oldSymbols.getShortWeekdays();
+      map = new HashMap<>();
+      map.put(f1, array[Calendar.MONDAY]);
+      map.put(f2, array[Calendar.TUESDAY]);
+      map.put(f3, array[Calendar.WEDNESDAY]);
+      map.put(f4, array[Calendar.THURSDAY]);
+      map.put(f5, array[Calendar.FRIDAY]);
+      map.put(f6, array[Calendar.SATURDAY]);
+      map.put(f7, array[Calendar.SUNDAY]);
+      styleMap.put(TextStyle.SHORT, map);
+      return new LocaleStore(styleMap);
+    }
+    if (field == AMPM_OF_DAY) {
+      DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
+      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
+      String[] array = oldSymbols.getAmPmStrings();
+      Map<Long, String> map = new HashMap<>();
+      map.put(0L, array[Calendar.AM]);
+      map.put(1L, array[Calendar.PM]);
+      styleMap.put(TextStyle.FULL, map);
+      styleMap.put(TextStyle.SHORT, map); // re-use, as we don't have different data
+      return new LocaleStore(styleMap);
+    }
+    return ""; // null marker for map
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Helper method to create an immutable entry.
+   * 
+   * @param text the text, not null
+   * @param field the field, not null
+   * @return the entry, not null
+   */
+  private static <A, B> Entry<A, B> createEntry(A text, B field) {
+
+    return new SimpleImmutableEntry<A, B>(text, field);
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Stores the text for a single locale.
+   * <p>
+   * Some fields have a textual representation, such as day-of-week or month-of-year. These textual
+   * representations can be captured in this class for printing and parsing.
+   * <p>
+   * This class is immutable and thread-safe.
+   */
+  static final class LocaleStore {
+
     /**
-     * Helper method to create an immutable entry.
-     *
-     * @param text  the text, not null
-     * @param field  the field, not null
-     * @return the entry, not null
+     * Map of value to text.
      */
-    private static <A, B> Entry<A, B> createEntry(A text, B field) {
-        return new SimpleImmutableEntry<A, B>(text, field);
-    }
+    private final Map<TextStyle, Map<Long, String>> valueTextMap;
 
-    //-----------------------------------------------------------------------
     /**
-     * Stores the text for a single locale.
-     * <p>
-     * Some fields have a textual representation, such as day-of-week or month-of-year.
-     * These textual representations can be captured in this class for printing
-     * and parsing.
-     * <p>
-     * This class is immutable and thread-safe.
+     * Parsable data.
      */
-    static final class LocaleStore {
-        /**
-         * Map of value to text.
-         */
-        private final Map<TextStyle, Map<Long, String>> valueTextMap;
-        /**
-         * Parsable data.
-         */
-        private final Map<TextStyle, List<Entry<String, Long>>> parsable;
+    private final Map<TextStyle, List<Entry<String, Long>>> parsable;
 
-        //-----------------------------------------------------------------------
-        /**
-         * Constructor.
-         *
-         * @param valueTextMap  the map of values to text to store, assigned and not altered, not null
-         */
-        LocaleStore(Map<TextStyle, Map<Long, String>> valueTextMap) {
-            this.valueTextMap = valueTextMap;
-            Map<TextStyle, List<Entry<String, Long>>> map = new HashMap<>();
-            List<Entry<String, Long>> allList = new ArrayList<>();
-            for (TextStyle style : valueTextMap.keySet()) {
-                Map<String, Entry<String, Long>> reverse = new HashMap<>();
-                for (Map.Entry<Long, String> entry : valueTextMap.get(style).entrySet()) {
-                    if (reverse.put(entry.getValue(), createEntry(entry.getValue(), entry.getKey())) != null) {
-                        continue;  // not parsable, try next style
-                    }
-                }
-                List<Entry<String, Long>> list = new ArrayList<>(reverse.values());
-                Collections.sort(list, COMPARATOR);
-                map.put(style, list);
-                allList.addAll(list);
-                map.put(null, allList);
-            }
-            Collections.sort(allList, COMPARATOR);
-            this.parsable = map;
-        }
+    // -----------------------------------------------------------------------
+    /**
+     * Constructor.
+     * 
+     * @param valueTextMap the map of values to text to store, assigned and not altered, not null
+     */
+    LocaleStore(Map<TextStyle, Map<Long, String>> valueTextMap) {
 
-        //-----------------------------------------------------------------------
-        /**
-         * Gets the text for the specified field value, locale and style
-         * for the purpose of printing.
-         *
-         * @param value  the value to get text for, not null
-         * @param style  the style to get text for, not null
-         * @return the text for the field value, null if no text found
-         */
-        String getText(long value, TextStyle style) {
-            Map<Long, String> map = valueTextMap.get(style);
-            return map != null ? map.get(value) : null;
+      this.valueTextMap = valueTextMap;
+      Map<TextStyle, List<Entry<String, Long>>> map = new HashMap<>();
+      List<Entry<String, Long>> allList = new ArrayList<>();
+      for (TextStyle style : valueTextMap.keySet()) {
+        Map<String, Entry<String, Long>> reverse = new HashMap<>();
+        for (Map.Entry<Long, String> entry : valueTextMap.get(style).entrySet()) {
+          if (reverse.put(entry.getValue(), createEntry(entry.getValue(), entry.getKey())) != null) {
+            continue; // not parsable, try next style
+          }
         }
-
-        /**
-         * Gets an iterator of text to field for the specified style for the purpose of parsing.
-         * <p>
-         * The iterator must be returned in order from the longest text to the shortest.
-         *
-         * @param style  the style to get text for, null for all parsable text
-         * @return the iterator of text to field pairs, in order from longest text to shortest text,
-         *  null if the style is not parsable
-         */
-        Iterator<Entry<String, Long>> getTextIterator(TextStyle style) {
-            List<Entry<String, Long>> list = parsable.get(style);
-            return list != null ? list.iterator() : null;
-        }
+        List<Entry<String, Long>> list = new ArrayList<>(reverse.values());
+        Collections.sort(list, COMPARATOR);
+        map.put(style, list);
+        allList.addAll(list);
+        map.put(null, allList);
+      }
+      Collections.sort(allList, COMPARATOR);
+      this.parsable = map;
     }
+
+    // -----------------------------------------------------------------------
+    /**
+     * Gets the text for the specified field value, locale and style for the purpose of printing.
+     * 
+     * @param value the value to get text for, not null
+     * @param style the style to get text for, not null
+     * @return the text for the field value, null if no text found
+     */
+    String getText(long value, TextStyle style) {
+
+      Map<Long, String> map = this.valueTextMap.get(style);
+      return map != null ? map.get(value) : null;
+    }
+
+    /**
+     * Gets an iterator of text to field for the specified style for the purpose of parsing.
+     * <p>
+     * The iterator must be returned in order from the longest text to the shortest.
+     * 
+     * @param style the style to get text for, null for all parsable text
+     * @return the iterator of text to field pairs, in order from longest text to shortest text, null if the
+     *         style is not parsable
+     */
+    Iterator<Entry<String, Long>> getTextIterator(TextStyle style) {
+
+      List<Entry<String, Long>> list = this.parsable.get(style);
+      return list != null ? list.iterator() : null;
+    }
+  }
 
 }

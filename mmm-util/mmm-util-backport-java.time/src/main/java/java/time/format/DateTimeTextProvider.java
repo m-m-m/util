@@ -38,48 +38,43 @@ import java.util.Map.Entry;
 import java.util.spi.LocaleServiceProvider;
 
 /**
- * The Service Provider Interface (SPI) to be implemented by classes providing
- * the textual form of a date-time field.
- *
- * <h4>Implementation notes</h4>
- * This interface is a service provider that can be called by multiple threads.
- * Implementations must be thread-safe.
- * Implementations should cache the textual information.
+ * The Service Provider Interface (SPI) to be implemented by classes providing the textual form of a date-time
+ * field.
+ * 
+ * <h4>Implementation notes</h4> This interface is a service provider that can be called by multiple threads.
+ * Implementations must be thread-safe. Implementations should cache the textual information.
  */
 public abstract class DateTimeTextProvider extends LocaleServiceProvider {
 
-    /**
-     * Gets the text for the specified field, locale and style
-     * for the purpose of printing.
-     * <p>
-     * The text associated with the value is returned.
-     * The null return value should be used if there is no applicable text, or
-     * if the text would be a numeric representation of the value.
-     *
-     * @param field  the field to get text for, not null
-     * @param value  the field value to get text for, not null
-     * @param style  the style to get text for, not null
-     * @param locale  the locale to get text for, not null
-     * @return the text for the field value, null if no text found
-     */
-    public abstract String getText(DateTimeField field, long value, TextStyle style, Locale locale);
+  /**
+   * Gets the text for the specified field, locale and style for the purpose of printing.
+   * <p>
+   * The text associated with the value is returned. The null return value should be used if there is no
+   * applicable text, or if the text would be a numeric representation of the value.
+   * 
+   * @param field the field to get text for, not null
+   * @param value the field value to get text for, not null
+   * @param style the style to get text for, not null
+   * @param locale the locale to get text for, not null
+   * @return the text for the field value, null if no text found
+   */
+  public abstract String getText(DateTimeField field, long value, TextStyle style, Locale locale);
 
-    /**
-     * Gets an iterator of text to field for the specified field, locale and style
-     * for the purpose of parsing.
-     * <p>
-     * The iterator must be returned in order from the longest text to the shortest.
-     * <p>
-     * The null return value should be used if there is no applicable parsable text, or
-     * if the text would be a numeric representation of the value.
-     * Text can only be parsed if all the values for that field-style-locale combination are unique.
-     *
-     * @param field  the field to get text for, not null
-     * @param style  the style to get text for, null for all parsable text
-     * @param locale  the locale to get text for, not null
-     * @return the iterator of text to field pairs, in order from longest text to shortest text,
-     *  null if the field or style is not parsable
-     */
-    public abstract Iterator<Entry<String, Long>> getTextIterator(DateTimeField field, TextStyle style, Locale locale);
+  /**
+   * Gets an iterator of text to field for the specified field, locale and style for the purpose of parsing.
+   * <p>
+   * The iterator must be returned in order from the longest text to the shortest.
+   * <p>
+   * The null return value should be used if there is no applicable parsable text, or if the text would be a
+   * numeric representation of the value. Text can only be parsed if all the values for that
+   * field-style-locale combination are unique.
+   * 
+   * @param field the field to get text for, not null
+   * @param style the style to get text for, null for all parsable text
+   * @param locale the locale to get text for, not null
+   * @return the iterator of text to field pairs, in order from longest text to shortest text, null if the
+   *         field or style is not parsable
+   */
+  public abstract Iterator<Entry<String, Long>> getTextIterator(DateTimeField field, TextStyle style, Locale locale);
 
 }

@@ -50,160 +50,171 @@ import java.util.Locale;
 /**
  * An era in the Hijrah calendar system.
  * <p>
- * The Hijrah calendar system has two eras.
- * The date {@code 0001-01-01 (Hijrah)} is {@code 622-06-19 (ISO)}.
+ * The Hijrah calendar system has two eras. The date {@code 0001-01-01 (Hijrah)} is {@code 622-06-19 (ISO)}.
  * <p>
- * <b>Do not use {@code ordinal()} to obtain the numeric representation of {@code HijrahEra}.
- * Use {@code getValue()} instead.</b>
- *
- * <h4>Implementation notes</h4>
- * This is an immutable and thread-safe enum.
+ * <b>Do not use {@code ordinal()} to obtain the numeric representation of {@code HijrahEra}. Use
+ * {@code getValue()} instead.</b>
+ * 
+ * <h4>Implementation notes</h4> This is an immutable and thread-safe enum.
  */
 enum HijrahEra implements Era<HijrahChrono> {
 
-    /**
-     * The singleton instance for the era before the current one, 'Before Anno Hegirae',
-     * which has the value 0.
-     */
-    BEFORE_AH,
-    /**
-     * The singleton instance for the current era, 'Anno Hegirae', which has the value 1.
-     */
-    AH;
+  /**
+   * The singleton instance for the era before the current one, 'Before Anno Hegirae', which has the value 0.
+   */
+  BEFORE_AH,
+  /**
+   * The singleton instance for the current era, 'Anno Hegirae', which has the value 1.
+   */
+  AH;
 
-    //-----------------------------------------------------------------------
-    /**
-     * Obtains an instance of {@code HijrahEra} from a value.
-     * <p>
-     * The current era (from ISO date 622-06-19 onwards) has the value 1
-     * The previous era has the value 0.
-     *
-     * @param hijrahEra  the era to represent, from 0 to 1
-     * @return the HijrahEra singleton, never null
-     * @throws DateTimeException if the era is invalid
-     */
-    public static HijrahEra of(int hijrahEra) {
-        switch (hijrahEra) {
-            case 0:
-                return BEFORE_AH;
-            case 1:
-                return AH;
-            default:
-                throw new DateTimeException("HijrahEra not valid");
-        }
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Obtains an instance of {@code HijrahEra} from a value.
+   * <p>
+   * The current era (from ISO date 622-06-19 onwards) has the value 1 The previous era has the value 0.
+   * 
+   * @param hijrahEra the era to represent, from 0 to 1
+   * @return the HijrahEra singleton, never null
+   * @throws DateTimeException if the era is invalid
+   */
+  public static HijrahEra of(int hijrahEra) {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the era numeric value.
-     * <p>
-     * The current era (from ISO date 622-06-19 onwards) has the value 1.
-     * The previous era has the value 0.
-     *
-     * @return the era value, from 0 (BEFORE_AH) to 1 (AH)
-     */
-    @Override
-    public int getValue() {
-        return ordinal();
+    switch (hijrahEra) {
+      case 0:
+        return BEFORE_AH;
+      case 1:
+        return AH;
+      default :
+        throw new DateTimeException("HijrahEra not valid");
     }
+  }
 
-    @Override
-    public HijrahChrono getChrono() {
-        return HijrahChrono.INSTANCE;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the era numeric value.
+   * <p>
+   * The current era (from ISO date 622-06-19 onwards) has the value 1. The previous era has the value 0.
+   * 
+   * @return the era value, from 0 (BEFORE_AH) to 1 (AH)
+   */
+  @Override
+  public int getValue() {
 
-    // JDK8 default methods:
-    //-----------------------------------------------------------------------
-    @Override
-    public ChronoLocalDate<HijrahChrono> date(int year, int month, int day) {
-        return getChrono().date(this, year, month, day);
-    }
+    return ordinal();
+  }
 
-    @Override
-    public ChronoLocalDate<HijrahChrono> dateYearDay(int year, int dayOfYear) {
-        return getChrono().dateYearDay(this, year, dayOfYear);
-    }
+  @Override
+  public HijrahChrono getChrono() {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public boolean isSupported(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            return field == ERA;
-        }
-        return field != null && field.doIsSupported(this);
-    }
+    return HijrahChrono.INSTANCE;
+  }
 
-    @Override
-    public DateTimeValueRange range(DateTimeField field) {
-        if (field == ERA) {
-            return field.range();
-        } else if (field instanceof ChronoField) {
-            throw new DateTimeException("Unsupported field: " + field.getName());
-        }
-        return field.doRange(this);
-    }
+  // JDK8 default methods:
+  // -----------------------------------------------------------------------
+  @Override
+  public ChronoLocalDate<HijrahChrono> date(int year, int month, int day) {
 
-    @Override
-    public int get(DateTimeField field) {
-        if (field == ERA) {
-            return getValue();
-        }
-        return range(field).checkValidIntValue(getLong(field), field);
-    }
+    return getChrono().date(this, year, month, day);
+  }
 
-    @Override
-    public long getLong(DateTimeField field) {
-        if (field == ERA) {
-            return getValue();
-        } else if (field instanceof ChronoField) {
-            throw new DateTimeException("Unsupported field: " + field.getName());
-        }
-        return field.doGet(this);
-    }
+  @Override
+  public ChronoLocalDate<HijrahChrono> dateYearDay(int year, int dayOfYear) {
 
-    //-------------------------------------------------------------------------
-    @Override
-    public DateTime doWithAdjustment(DateTime dateTime) {
-        return dateTime.with(ERA, getValue());
-    }
+    return getChrono().dateYearDay(this, year, dayOfYear);
+  }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public <R> R query(Query<R> query) {
-        if (query == Query.CHRONO) {
-            return (R) getChrono();
-        }
-        return query.doQuery(this);
-    }
+  // -----------------------------------------------------------------------
+  @Override
+  public boolean isSupported(DateTimeField field) {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public String getText(TextStyle style, Locale locale) {
-        return new DateTimeFormatterBuilder().appendText(ERA, style).toFormatter(locale).print(this);
+    if (field instanceof ChronoField) {
+      return field == ERA;
     }
+    return field != null && field.doIsSupported(this);
+  }
 
-    /**
-     * Returns the proleptic year from this era and year of era.
-     *
-     * @param yearOfEra the year of Era
-     * @return the computed prolepticYear
-     */
-    int prolepticYear(int yearOfEra) {
-        return (this == HijrahEra.AH ? yearOfEra : 1 - yearOfEra);
-    }
+  @Override
+  public DateTimeValueRange range(DateTimeField field) {
 
-    //-----------------------------------------------------------------------
-    private Object writeReplace() {
-        return new Ser(Ser.HIJRAH_ERA_TYPE, this);
+    if (field == ERA) {
+      return field.range();
+    } else if (field instanceof ChronoField) {
+      throw new DateTimeException("Unsupported field: " + field.getName());
     }
+    return field.doRange(this);
+  }
 
-    void writeExternal(DataOutput out) throws IOException {
-        out.writeByte(this.getValue());
-    }
+  @Override
+  public int get(DateTimeField field) {
 
-    static HijrahEra readExternal(DataInput in) throws IOException {
-        byte eraValue = in.readByte();
-        return HijrahEra.of(eraValue);
+    if (field == ERA) {
+      return getValue();
     }
+    return range(field).checkValidIntValue(getLong(field), field);
+  }
+
+  @Override
+  public long getLong(DateTimeField field) {
+
+    if (field == ERA) {
+      return getValue();
+    } else if (field instanceof ChronoField) {
+      throw new DateTimeException("Unsupported field: " + field.getName());
+    }
+    return field.doGet(this);
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public DateTime doWithAdjustment(DateTime dateTime) {
+
+    return dateTime.with(ERA, getValue());
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <R> R query(Query<R> query) {
+
+    if (query == Query.CHRONO) {
+      return (R) getChrono();
+    }
+    return query.doQuery(this);
+  }
+
+  // -----------------------------------------------------------------------
+  @Override
+  public String getText(TextStyle style, Locale locale) {
+
+    return new DateTimeFormatterBuilder().appendText(ERA, style).toFormatter(locale).print(this);
+  }
+
+  /**
+   * Returns the proleptic year from this era and year of era.
+   * 
+   * @param yearOfEra the year of Era
+   * @return the computed prolepticYear
+   */
+  int prolepticYear(int yearOfEra) {
+
+    return (this == HijrahEra.AH ? yearOfEra : 1 - yearOfEra);
+  }
+
+  // -----------------------------------------------------------------------
+  private Object writeReplace() {
+
+    return new Ser(Ser.HIJRAH_ERA_TYPE, this);
+  }
+
+  void writeExternal(DataOutput out) throws IOException {
+
+    out.writeByte(getValue());
+  }
+
+  static HijrahEra readExternal(DataInput in) throws IOException {
+
+    byte eraValue = in.readByte();
+    return HijrahEra.of(eraValue);
+  }
 
 }

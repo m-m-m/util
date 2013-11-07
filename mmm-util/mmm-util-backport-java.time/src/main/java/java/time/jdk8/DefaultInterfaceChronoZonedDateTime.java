@@ -49,184 +49,206 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * A temporary class providing implementations that will become default interface
- * methods once integrated into JDK 8.
- *
+ * A temporary class providing implementations that will become default interface methods once integrated into
+ * JDK 8.
+ * 
  * @param <C> the chronology of this date-time
  */
-public abstract class DefaultInterfaceChronoZonedDateTime<C extends Chrono<C>>
-        extends DefaultInterfaceDateTime
-        implements ChronoZonedDateTime<C> {
+public abstract class DefaultInterfaceChronoZonedDateTime<C extends Chrono<C>> extends DefaultInterfaceDateTime
+    implements ChronoZonedDateTime<C> {
 
-    @Override
-    public DateTimeValueRange range(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            if (field == INSTANT_SECONDS || field == OFFSET_SECONDS) {
-                return field.range();
-            }
-            return getDateTime().range(field);
-        }
-        return field.doRange(this);
+  @Override
+  public DateTimeValueRange range(DateTimeField field) {
+
+    if (field instanceof ChronoField) {
+      if (field == INSTANT_SECONDS || field == OFFSET_SECONDS) {
+        return field.range();
+      }
+      return getDateTime().range(field);
     }
+    return field.doRange(this);
+  }
 
-    @Override
-    public int get(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            switch ((ChronoField) field) {
-                case INSTANT_SECONDS: throw new DateTimeException("Field too large for an int: " + field);
-                case OFFSET_SECONDS: return getOffset().getTotalSeconds();
-            }
-            return getDateTime().get(field);
-        }
-        return super.get(field);
+  @Override
+  public int get(DateTimeField field) {
+
+    if (field instanceof ChronoField) {
+      switch ((ChronoField) field) {
+        case INSTANT_SECONDS:
+          throw new DateTimeException("Field too large for an int: " + field);
+        case OFFSET_SECONDS:
+          return getOffset().getTotalSeconds();
+      }
+      return getDateTime().get(field);
     }
+    return super.get(field);
+  }
 
-    @Override
-    public long getLong(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            switch ((ChronoField) field) {
-                case INSTANT_SECONDS: return toEpochSecond();
-                case OFFSET_SECONDS: return getOffset().getTotalSeconds();
-            }
-            return getDateTime().getLong(field);
-        }
-        return field.doGet(this);
+  @Override
+  public long getLong(DateTimeField field) {
+
+    if (field instanceof ChronoField) {
+      switch ((ChronoField) field) {
+        case INSTANT_SECONDS:
+          return toEpochSecond();
+        case OFFSET_SECONDS:
+          return getOffset().getTotalSeconds();
+      }
+      return getDateTime().getLong(field);
     }
+    return field.doGet(this);
+  }
 
-    //-----------------------------------------------------------------------
-    @Override
-    public ChronoLocalDate<C> getDate() {
-        return getDateTime().getDate();
+  // -----------------------------------------------------------------------
+  @Override
+  public ChronoLocalDate<C> getDate() {
+
+    return getDateTime().getDate();
+  }
+
+  @Override
+  public LocalTime getTime() {
+
+    return getDateTime().getTime();
+  }
+
+  // -----------------------------------------------------------------------
+  @Override
+  public ChronoZonedDateTime<C> with(WithAdjuster adjuster) {
+
+    return getDate().getChrono().ensureChronoZonedDateTime(super.with(adjuster));
+  }
+
+  @Override
+  public ChronoZonedDateTime<C> plus(PlusAdjuster adjuster) {
+
+    return getDate().getChrono().ensureChronoZonedDateTime(super.plus(adjuster));
+  }
+
+  @Override
+  public ChronoZonedDateTime<C> minus(MinusAdjuster adjuster) {
+
+    return getDate().getChrono().ensureChronoZonedDateTime(super.minus(adjuster));
+  }
+
+  @Override
+  public ChronoZonedDateTime<C> minus(long amountToSubtract, PeriodUnit unit) {
+
+    return getDate().getChrono().ensureChronoZonedDateTime(super.minus(amountToSubtract, unit));
+  }
+
+  // -------------------------------------------------------------------------
+  @SuppressWarnings("unchecked")
+  @Override
+  public <R> R query(Query<R> query) {
+
+    if (query == Query.ZONE_ID) {
+      return (R) getZone();
+    } else if (query == Query.CHRONO) {
+      return (R) getDate().getChrono();
+    } else if (query == Query.TIME_PRECISION) {
+      return (R) NANOS;
+    } else if (query == Query.OFFSET) {
+      return (R) getOffset();
     }
+    return super.query(query);
+  }
 
-    @Override
-    public LocalTime getTime() {
-        return getDateTime().getTime();
-    }
+  // -------------------------------------------------------------------------
+  @Override
+  public Instant toInstant() {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public ChronoZonedDateTime<C> with(WithAdjuster adjuster) {
-        return getDate().getChrono().ensureChronoZonedDateTime(super.with(adjuster));
-    }
+    return Instant.ofEpochSecond(toEpochSecond(), getTime().getNano());
+  }
 
-    @Override
-    public ChronoZonedDateTime<C> plus(PlusAdjuster adjuster) {
-        return getDate().getChrono().ensureChronoZonedDateTime(super.plus(adjuster));
-    }
+  @Override
+  public long toEpochSecond() {
 
-    @Override
-    public ChronoZonedDateTime<C> minus(MinusAdjuster adjuster) {
-        return getDate().getChrono().ensureChronoZonedDateTime(super.minus(adjuster));
-    }
+    long epochDay = getDate().toEpochDay();
+    long secs = epochDay * 86400 + getTime().toSecondOfDay();
+    secs -= getOffset().getTotalSeconds();
+    return secs;
+  }
 
-    @Override
-    public ChronoZonedDateTime<C> minus(long amountToSubtract, PeriodUnit unit) {
-        return getDate().getChrono().ensureChronoZonedDateTime(super.minus(amountToSubtract, unit));
-    }
+  // -------------------------------------------------------------------------
+  @Override
+  public int compareTo(ChronoZonedDateTime<?> other) {
 
-    //-------------------------------------------------------------------------
-    @SuppressWarnings("unchecked")
-    @Override
-    public <R> R query(Query<R> query) {
-        if (query == Query.ZONE_ID) {
-            return (R) getZone();
-        } else if (query == Query.CHRONO) {
-            return (R) getDate().getChrono();
-        } else if (query == Query.TIME_PRECISION) {
-            return (R) NANOS;
-        } else if (query == Query.OFFSET) {
-            return (R) getOffset();
-        }
-        return super.query(query);
-    }
-
-    //-------------------------------------------------------------------------
-    @Override
-    public Instant toInstant() {
-        return Instant.ofEpochSecond(toEpochSecond(), getTime().getNano());
-    }
-
-    @Override
-    public long toEpochSecond() {
-        long epochDay = getDate().toEpochDay();
-        long secs = epochDay * 86400 + getTime().toSecondOfDay();
-        secs -= getOffset().getTotalSeconds();
-        return secs;
-    }
-
-    //-------------------------------------------------------------------------
-    @Override
-    public int compareTo(ChronoZonedDateTime<?> other) {
-        int cmp = Long.compare(toEpochSecond(), other.toEpochSecond());
+    int cmp = Long.compare(toEpochSecond(), other.toEpochSecond());
+    if (cmp == 0) {
+      cmp = getTime().getNano() - other.getTime().getNano();
+      if (cmp == 0) {
+        cmp = getDateTime().compareTo(other.getDateTime());
         if (cmp == 0) {
-            cmp = getTime().getNano() - other.getTime().getNano();
-            if (cmp == 0) {
-                cmp = getDateTime().compareTo(other.getDateTime());
-                if (cmp == 0) {
-                    cmp = getZone().getId().compareTo(other.getZone().getId());
-                    if (cmp == 0) {
-                        cmp = getDate().getChrono().compareTo(other.getDate().getChrono());
-                    }
-                }
-            }
+          cmp = getZone().getId().compareTo(other.getZone().getId());
+          if (cmp == 0) {
+            cmp = getDate().getChrono().compareTo(other.getDate().getChrono());
+          }
         }
-        return cmp;
+      }
     }
+    return cmp;
+  }
 
-    @Override
-    public boolean isAfter(ChronoZonedDateTime<?> other) {
-        long thisEpochSec = toEpochSecond();
-        long otherEpochSec = other.toEpochSecond();
-        return thisEpochSec > otherEpochSec ||
-            (thisEpochSec == otherEpochSec && getTime().getNano() > other.getTime().getNano());
-    }
+  @Override
+  public boolean isAfter(ChronoZonedDateTime<?> other) {
 
-    @Override
-    public boolean isBefore(ChronoZonedDateTime<?> other) {
-        long thisEpochSec = toEpochSecond();
-        long otherEpochSec = other.toEpochSecond();
-        return thisEpochSec < otherEpochSec ||
-            (thisEpochSec == otherEpochSec && getTime().getNano() < other.getTime().getNano());
-    }
+    long thisEpochSec = toEpochSecond();
+    long otherEpochSec = other.toEpochSecond();
+    return thisEpochSec > otherEpochSec
+        || (thisEpochSec == otherEpochSec && getTime().getNano() > other.getTime().getNano());
+  }
 
-    @Override
-    public boolean isEqual(ChronoZonedDateTime<?> other) {
-        return toEpochSecond() == other.toEpochSecond() &&
-                getTime().getNano() == other.getTime().getNano();
-    }
+  @Override
+  public boolean isBefore(ChronoZonedDateTime<?> other) {
 
-    //-------------------------------------------------------------------------
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj instanceof ChronoZonedDateTime) {
-            return compareTo((ChronoZonedDateTime<?>) obj) == 0;
-        }
-        return false;
-    }
+    long thisEpochSec = toEpochSecond();
+    long otherEpochSec = other.toEpochSecond();
+    return thisEpochSec < otherEpochSec
+        || (thisEpochSec == otherEpochSec && getTime().getNano() < other.getTime().getNano());
+  }
 
-    @Override
-    public int hashCode() {
-        return getDateTime().hashCode() ^ getOffset().hashCode() ^ Integer.rotateLeft(getZone().hashCode(), 3);
-    }
+  @Override
+  public boolean isEqual(ChronoZonedDateTime<?> other) {
 
-    //-------------------------------------------------------------------------
-    @Override
-    public String toString() {
-        String str = getDateTime().toString() + getOffset().toString();
-        if (getOffset() != getZone()) {
-            str += '[' + getZone().toString() + ']';
-        }
-        return str;
-    }
+    return toEpochSecond() == other.toEpochSecond() && getTime().getNano() == other.getTime().getNano();
+  }
 
-    @Override
-    public String toString(DateTimeFormatter formatter) {
-        Objects.requireNonNull(formatter, "formatter");
-        return formatter.print(this);
+  // -------------------------------------------------------------------------
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
     }
+    if (obj instanceof ChronoZonedDateTime) {
+      return compareTo((ChronoZonedDateTime<?>) obj) == 0;
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+
+    return getDateTime().hashCode() ^ getOffset().hashCode() ^ Integer.rotateLeft(getZone().hashCode(), 3);
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public String toString() {
+
+    String str = getDateTime().toString() + getOffset().toString();
+    if (getOffset() != getZone()) {
+      str += '[' + getZone().toString() + ']';
+    }
+    return str;
+  }
+
+  @Override
+  public String toString(DateTimeFormatter formatter) {
+
+    Objects.requireNonNull(formatter, "formatter");
+    return formatter.print(this);
+  }
 
 }

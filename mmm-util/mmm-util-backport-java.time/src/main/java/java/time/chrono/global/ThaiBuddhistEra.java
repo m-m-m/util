@@ -52,147 +52,158 @@ import java.util.Locale;
  * <p>
  * The Thai Buddhist calendar system has two eras.
  * <p>
- * <b>Do not use ordinal() to obtain the numeric representation of a ThaiBuddhistEra
- * instance. Use getValue() instead.</b>
- *
- * <h4>Implementation notes</h4>
- * This is an immutable and thread-safe enum.
+ * <b>Do not use ordinal() to obtain the numeric representation of a ThaiBuddhistEra instance. Use getValue()
+ * instead.</b>
+ * 
+ * <h4>Implementation notes</h4> This is an immutable and thread-safe enum.
  */
 enum ThaiBuddhistEra implements Era<ThaiBuddhistChrono> {
 
-    /**
-     * The singleton instance for the era before the current one, 'Before Buddhist Era',
-     * which has the value 0.
-     */
-    BEFORE_BE,
-    /**
-     * The singleton instance for the current era, 'Buddhist Era', which has the value 1.
-     */
-    BE;
+  /**
+   * The singleton instance for the era before the current one, 'Before Buddhist Era', which has the value 0.
+   */
+  BEFORE_BE,
+  /**
+   * The singleton instance for the current era, 'Buddhist Era', which has the value 1.
+   */
+  BE;
 
-    //-----------------------------------------------------------------------
-    /**
-     * Obtains an instance of {@code ThaiBuddhistEra} from a value.
-     * <p>
-     * The current era (from ISO year -543 onwards) has the value 1
-     * The previous era has the value 0.
-     *
-     * @param thaiBuddhistEra  the era to represent, from 0 to 1
-     * @return the BuddhistEra singleton, never null
-     * @throws IllegalCalendarFieldValueException if the era is invalid
-     */
-    public static ThaiBuddhistEra of(int thaiBuddhistEra) {
-        switch (thaiBuddhistEra) {
-            case 0:
-                return BEFORE_BE;
-            case 1:
-                return BE;
-            default:
-                throw new DateTimeException("Era is not valid for ThaiBuddhistEra");
-        }
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Obtains an instance of {@code ThaiBuddhistEra} from a value.
+   * <p>
+   * The current era (from ISO year -543 onwards) has the value 1 The previous era has the value 0.
+   * 
+   * @param thaiBuddhistEra the era to represent, from 0 to 1
+   * @return the BuddhistEra singleton, never null
+   * @throws IllegalCalendarFieldValueException if the era is invalid
+   */
+  public static ThaiBuddhistEra of(int thaiBuddhistEra) {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the era numeric value.
-     * <p>
-     * The current era (from ISO year -543 onwards) has the value 1
-     * The previous era has the value 0.
-     *
-     * @return the era value, from 0 (BEFORE_BE) to 1 (BE)
-     */
-    @Override
-    public int getValue() {
-        return ordinal();
+    switch (thaiBuddhistEra) {
+      case 0:
+        return BEFORE_BE;
+      case 1:
+        return BE;
+      default :
+        throw new DateTimeException("Era is not valid for ThaiBuddhistEra");
     }
+  }
 
-    @Override
-    public ThaiBuddhistChrono getChrono() {
-        return ThaiBuddhistChrono.INSTANCE;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the era numeric value.
+   * <p>
+   * The current era (from ISO year -543 onwards) has the value 1 The previous era has the value 0.
+   * 
+   * @return the era value, from 0 (BEFORE_BE) to 1 (BE)
+   */
+  @Override
+  public int getValue() {
 
-    // JDK8 default methods:
-    //-----------------------------------------------------------------------
-    @Override
-    public ChronoLocalDate<ThaiBuddhistChrono> date(int year, int month, int day) {
-        return getChrono().date(this, year, month, day);
-    }
+    return ordinal();
+  }
 
-    @Override
-    public ChronoLocalDate<ThaiBuddhistChrono> dateYearDay(int year, int dayOfYear) {
-        return getChrono().dateYearDay(this, year, dayOfYear);
-    }
+  @Override
+  public ThaiBuddhistChrono getChrono() {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public boolean isSupported(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            return field == ERA;
-        }
-        return field != null && field.doIsSupported(this);
-    }
+    return ThaiBuddhistChrono.INSTANCE;
+  }
 
-    @Override
-    public DateTimeValueRange range(DateTimeField field) {
-        if (field == ERA) {
-            return field.range();
-        } else if (field instanceof ChronoField) {
-            throw new DateTimeException("Unsupported field: " + field.getName());
-        }
-        return field.doRange(this);
-    }
+  // JDK8 default methods:
+  // -----------------------------------------------------------------------
+  @Override
+  public ChronoLocalDate<ThaiBuddhistChrono> date(int year, int month, int day) {
 
-    @Override
-    public int get(DateTimeField field) {
-        if (field == ERA) {
-            return getValue();
-        }
-        return range(field).checkValidIntValue(getLong(field), field);
-    }
+    return getChrono().date(this, year, month, day);
+  }
 
-    @Override
-    public long getLong(DateTimeField field) {
-        if (field == ERA) {
-            return getValue();
-        } else if (field instanceof ChronoField) {
-            throw new DateTimeException("Unsupported field: " + field.getName());
-        }
-        return field.doGet(this);
-    }
+  @Override
+  public ChronoLocalDate<ThaiBuddhistChrono> dateYearDay(int year, int dayOfYear) {
 
-    //-------------------------------------------------------------------------
-    @Override
-    public DateTime doWithAdjustment(DateTime dateTime) {
-        return dateTime.with(ERA, getValue());
-    }
+    return getChrono().dateYearDay(this, year, dayOfYear);
+  }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public <R> R query(Query<R> query) {
-        if (query == Query.CHRONO) {
-            return (R) getChrono();
-        }
-        return query.doQuery(this);
-    }
+  // -----------------------------------------------------------------------
+  @Override
+  public boolean isSupported(DateTimeField field) {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public String getText(TextStyle style, Locale locale) {
-        return new DateTimeFormatterBuilder().appendText(ERA, style).toFormatter(locale).print(this);
+    if (field instanceof ChronoField) {
+      return field == ERA;
     }
+    return field != null && field.doIsSupported(this);
+  }
 
-    //-----------------------------------------------------------------------
-    private Object writeReplace() {
-        return new Ser(Ser.THAIBUDDHIST_ERA_TYPE, this);
-    }
+  @Override
+  public DateTimeValueRange range(DateTimeField field) {
 
-    void writeExternal(DataOutput out) throws IOException {
-        out.writeByte(this.getValue());
+    if (field == ERA) {
+      return field.range();
+    } else if (field instanceof ChronoField) {
+      throw new DateTimeException("Unsupported field: " + field.getName());
     }
+    return field.doRange(this);
+  }
 
-    static ThaiBuddhistEra readExternal(DataInput in) throws IOException {
-        byte eraValue = in.readByte();
-        return ThaiBuddhistEra.of(eraValue);
+  @Override
+  public int get(DateTimeField field) {
+
+    if (field == ERA) {
+      return getValue();
     }
+    return range(field).checkValidIntValue(getLong(field), field);
+  }
+
+  @Override
+  public long getLong(DateTimeField field) {
+
+    if (field == ERA) {
+      return getValue();
+    } else if (field instanceof ChronoField) {
+      throw new DateTimeException("Unsupported field: " + field.getName());
+    }
+    return field.doGet(this);
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public DateTime doWithAdjustment(DateTime dateTime) {
+
+    return dateTime.with(ERA, getValue());
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <R> R query(Query<R> query) {
+
+    if (query == Query.CHRONO) {
+      return (R) getChrono();
+    }
+    return query.doQuery(this);
+  }
+
+  // -----------------------------------------------------------------------
+  @Override
+  public String getText(TextStyle style, Locale locale) {
+
+    return new DateTimeFormatterBuilder().appendText(ERA, style).toFormatter(locale).print(this);
+  }
+
+  // -----------------------------------------------------------------------
+  private Object writeReplace() {
+
+    return new Ser(Ser.THAIBUDDHIST_ERA_TYPE, this);
+  }
+
+  void writeExternal(DataOutput out) throws IOException {
+
+    out.writeByte(getValue());
+  }
+
+  static ThaiBuddhistEra readExternal(DataInput in) throws IOException {
+
+    byte eraValue = in.readByte();
+    return ThaiBuddhistEra.of(eraValue);
+  }
 
 }

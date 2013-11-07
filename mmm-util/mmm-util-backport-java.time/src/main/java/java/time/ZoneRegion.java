@@ -44,131 +44,138 @@ import java.util.regex.Pattern;
 /**
  * A geographical region where the same time-zone rules apply.
  * <p>
- * Time-zone information is categorized as a set of rules defining when and
- * how the offset from UTC/Greenwich changes. These rules are accessed using
- * identifiers based on geographical regions, such as countries or states.
- * The most common region classification is the Time Zone Database (TZDB),
- * which defines regions such as 'Europe/Paris' and 'Asia/Tokyo'.
+ * Time-zone information is categorized as a set of rules defining when and how the offset from UTC/Greenwich
+ * changes. These rules are accessed using identifiers based on geographical regions, such as countries or
+ * states. The most common region classification is the Time Zone Database (TZDB), which defines regions such
+ * as 'Europe/Paris' and 'Asia/Tokyo'.
  * <p>
- * The region identifier, modeled by this class, is distinct from the
- * underlying rules, modeled by {@link ZoneRules}.
- * The rules are defined by governments and change frequently.
- * By contrast, the region identifier is well-defined and long-lived.
- * This separation also allows rules to be shared between regions if appropriate.
- *
- * <h4>Implementation notes</h4>
- * This class is immutable and thread-safe.
+ * The region identifier, modeled by this class, is distinct from the underlying rules, modeled by
+ * {@link ZoneRules}. The rules are defined by governments and change frequently. By contrast, the region
+ * identifier is well-defined and long-lived. This separation also allows rules to be shared between regions
+ * if appropriate.
+ * 
+ * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 final class ZoneRegion extends ZoneId implements Serializable {
 
-    /**
-     * Serialization version.
-     */
-    private static final long serialVersionUID = 8386373296231747096L;
-    /**
-     * The regex pattern for region IDs.
-     */
-    private static final Pattern PATTERN = Pattern.compile("[A-Za-z][A-Za-z0-9~/._+-]+");
+  /**
+   * Serialization version.
+   */
+  private static final long serialVersionUID = 8386373296231747096L;
 
-    /**
-     * The time-zone ID, not null.
-     */
-    private final String id;
-    /**
-     * The time-zone rules, null if zone ID was loaded leniently.
-     */
-    private final transient ZoneRules rules;
+  /**
+   * The regex pattern for region IDs.
+   */
+  private static final Pattern PATTERN = Pattern.compile("[A-Za-z][A-Za-z0-9~/._+-]+");
 
-    /**
-     * Obtains an instance of {@code ZoneRegion} from an identifier without checking
-     * if the time-zone has available rules.
-     * <p>
-     * This method parses the ID and applies any appropriate normalization.
-     * It does not validate the ID against the known set of IDsfor which rules are available.
-     * <p>
-     * This method is intended for advanced use cases.
-     * For example, consider a system that always retrieves time-zone rules from a remote server.
-     * Using this factory would allow a {@code ZoneRegion}, and thus a {@code ZonedDateTime},
-     * to be created without loading the rules from the remote server.
-     *
-     * @param zoneId  the time-zone ID, not null
-     * @return the zone ID, not null
-     * @throws DateTimeException if the ID format is invalid
-     */
-    private static ZoneRegion ofLenient(String zoneId) {
-        return ofId(zoneId, false);
+  /**
+   * The time-zone ID, not null.
+   */
+  private final String id;
+
+  /**
+   * The time-zone rules, null if zone ID was loaded leniently.
+   */
+  private final transient ZoneRules rules;
+
+  /**
+   * Obtains an instance of {@code ZoneRegion} from an identifier without checking if the time-zone has
+   * available rules.
+   * <p>
+   * This method parses the ID and applies any appropriate normalization. It does not validate the ID against
+   * the known set of IDsfor which rules are available.
+   * <p>
+   * This method is intended for advanced use cases. For example, consider a system that always retrieves
+   * time-zone rules from a remote server. Using this factory would allow a {@code ZoneRegion}, and thus a
+   * {@code ZonedDateTime}, to be created without loading the rules from the remote server.
+   * 
+   * @param zoneId the time-zone ID, not null
+   * @return the zone ID, not null
+   * @throws DateTimeException if the ID format is invalid
+   */
+  private static ZoneRegion ofLenient(String zoneId) {
+
+    return ofId(zoneId, false);
+  }
+
+  /**
+   * Obtains an instance of {@code ZoneId} from an identifier.
+   * 
+   * @param zoneId the time-zone ID, not null
+   * @param checkAvailable whether to check if the zone ID is available
+   * @return the zone ID, not null
+   * @throws DateTimeException if the ID format is invalid
+   * @throws DateTimeException if checking availability and the ID cannot be found
+   */
+  static ZoneRegion ofId(String zoneId, boolean checkAvailable) {
+
+    Objects.requireNonNull(zoneId, "zoneId");
+    if (zoneId.length() < 2 || zoneId.startsWith("UTC") || zoneId.startsWith("GMT")
+        || (PATTERN.matcher(zoneId).matches() == false)) {
+      throw new DateTimeException("ZoneId format is not a valid region format");
     }
-
-    /**
-     * Obtains an instance of {@code ZoneId} from an identifier.
-     *
-     * @param zoneId  the time-zone ID, not null
-     * @param checkAvailable  whether to check if the zone ID is available
-     * @return the zone ID, not null
-     * @throws DateTimeException if the ID format is invalid
-     * @throws DateTimeException if checking availability and the ID cannot be found
-     */
-    static ZoneRegion ofId(String zoneId, boolean checkAvailable) {
-        Objects.requireNonNull(zoneId, "zoneId");
-        if (zoneId.length() < 2 || zoneId.startsWith("UTC") ||
-                zoneId.startsWith("GMT") || (PATTERN.matcher(zoneId).matches() == false)) {
-            throw new DateTimeException("ZoneId format is not a valid region format");
-        }
-        ZoneRules rules = null;
-        try {
-            // always attempt load for better behavior after deserialization
-            rules = ZoneRulesProvider.getRules(zoneId);
-        } catch (ZoneRulesException ex) {
-            if (checkAvailable) {
-                throw ex;
-            }
-        }
-        return new ZoneRegion(zoneId, rules);
+    ZoneRules rules = null;
+    try {
+      // always attempt load for better behavior after deserialization
+      rules = ZoneRulesProvider.getRules(zoneId);
+    } catch (ZoneRulesException ex) {
+      if (checkAvailable) {
+        throw ex;
+      }
     }
+    return new ZoneRegion(zoneId, rules);
+  }
 
-    //-------------------------------------------------------------------------
-    /**
-     * Constructor.
-     *
-     * @param id  the time-zone ID, not null
-     * @param rules  the rules, null for lazy lookup
-     */
-    ZoneRegion(String id, ZoneRules rules) {
-        this.id = id;
-        this.rules = rules;
-    }
+  // -------------------------------------------------------------------------
+  /**
+   * Constructor.
+   * 
+   * @param id the time-zone ID, not null
+   * @param rules the rules, null for lazy lookup
+   */
+  ZoneRegion(String id, ZoneRules rules) {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public String getId() {
-        return id;
-    }
+    this.id = id;
+    this.rules = rules;
+  }
 
-    @Override
-    public ZoneRules getRules() {
-        // additional query for group provider when null allows for possibility
-        // that the provider was added after the ZoneId was created
-        return (rules != null ? rules : ZoneRulesProvider.getRules(id));
-    }
+  // -----------------------------------------------------------------------
+  @Override
+  public String getId() {
 
-    //-----------------------------------------------------------------------
-    private Object writeReplace() {
-        return new Ser(Ser.ZONE_REGION_TYPE, this);
-    }
+    return this.id;
+  }
 
-    @Override
-    void write(DataOutput out) throws IOException {
-        out.writeByte(Ser.ZONE_REGION_TYPE);
-        writeExternal(out);
-    }
+  @Override
+  public ZoneRules getRules() {
 
-    void writeExternal(DataOutput out) throws IOException {
-        out.writeUTF(id);
-    }
+    // additional query for group provider when null allows for possibility
+    // that the provider was added after the ZoneId was created
+    return (this.rules != null ? this.rules : ZoneRulesProvider.getRules(this.id));
+  }
 
-    static ZoneId readExternal(DataInput in) throws IOException {
-        String id = in.readUTF();
-        return ofLenient(id);
-    }
+  // -----------------------------------------------------------------------
+  private Object writeReplace() {
+
+    return new Ser(Ser.ZONE_REGION_TYPE, this);
+  }
+
+  @Override
+  void write(DataOutput out) throws IOException {
+
+    out.writeByte(Ser.ZONE_REGION_TYPE);
+    writeExternal(out);
+  }
+
+  void writeExternal(DataOutput out) throws IOException {
+
+    out.writeUTF(this.id);
+  }
+
+  static ZoneId readExternal(DataInput in) throws IOException {
+
+    String id = in.readUTF();
+    return ofLenient(id);
+  }
 
 }

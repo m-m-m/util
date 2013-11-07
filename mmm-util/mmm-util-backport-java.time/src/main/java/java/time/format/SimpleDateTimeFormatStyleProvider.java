@@ -42,63 +42,66 @@ import java.util.concurrent.ConcurrentMap;
  * The Service Provider Implementation to obtain date-time formatters for a style.
  * <p>
  * This implementation is based on extraction of data from a {@link SimpleDateFormat}.
- *
- * <h4>Implementation notes</h4>
- * This class is immutable and thread-safe.
+ * 
+ * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 final class SimpleDateTimeFormatStyleProvider extends DateTimeFormatStyleProvider {
-    // TODO: Better implementation based on CLDR
 
-    /** Cache of formatters. */
-    private static final ConcurrentMap<String, Object> FORMATTER_CACHE =
-                        new ConcurrentHashMap<String, Object>(16, 0.75f, 2);
+  // TODO: Better implementation based on CLDR
 
-    @Override
-    public Locale[] getAvailableLocales() {
-        return DateFormat.getAvailableLocales();
+  /** Cache of formatters. */
+  private static final ConcurrentMap<String, Object> FORMATTER_CACHE = new ConcurrentHashMap<String, Object>(16, 0.75f,
+      2);
+
+  @Override
+  public Locale[] getAvailableLocales() {
+
+    return DateFormat.getAvailableLocales();
+  }
+
+  @Override
+  public DateTimeFormatter getFormatter(FormatStyle dateStyle, FormatStyle timeStyle, Chrono<?> chrono, Locale locale) {
+
+    if (dateStyle == null && timeStyle == null) {
+      throw new IllegalArgumentException("Date and Time style must not both be null");
     }
-
-    @Override
-    public DateTimeFormatter getFormatter(
-            FormatStyle dateStyle, FormatStyle timeStyle, Chrono<?> chrono, Locale locale) {
-        if (dateStyle == null && timeStyle == null) {
-            throw new IllegalArgumentException("Date and Time style must not both be null");
-        }
-        String key = chrono.getId() + '|' + locale.toString() + '|' + dateStyle + timeStyle;
-        Object cached = FORMATTER_CACHE.get(key);
-        if (cached != null) {
-            if (cached.equals("")) {
-                throw new IllegalArgumentException("Unable to convert DateFormat to DateTimeFormatter");
-            }
-            return (DateTimeFormatter) cached;
-        }
-        DateFormat dateFormat;
-        if (dateStyle != null) {
-            if (timeStyle != null) {
-                dateFormat = DateFormat.getDateTimeInstance(convertStyle(dateStyle), convertStyle(timeStyle), locale);
-            } else {
-                dateFormat = DateFormat.getDateInstance(convertStyle(dateStyle), locale);
-            }
-        } else {
-            dateFormat = DateFormat.getTimeInstance(convertStyle(timeStyle), locale);
-        }
-        if (dateFormat instanceof SimpleDateFormat) {
-            String pattern = ((SimpleDateFormat) dateFormat).toPattern();
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern(pattern).toFormatter(locale);
-            FORMATTER_CACHE.putIfAbsent(key, formatter);
-            return formatter;
-        }
-        FORMATTER_CACHE.putIfAbsent(key, "");
+    String key = chrono.getId() + '|' + locale.toString() + '|' + dateStyle + timeStyle;
+    Object cached = FORMATTER_CACHE.get(key);
+    if (cached != null) {
+      if (cached.equals("")) {
         throw new IllegalArgumentException("Unable to convert DateFormat to DateTimeFormatter");
+      }
+      return (DateTimeFormatter) cached;
     }
+    DateFormat dateFormat;
+    if (dateStyle != null) {
+      if (timeStyle != null) {
+        dateFormat = DateFormat.getDateTimeInstance(convertStyle(dateStyle), convertStyle(timeStyle), locale);
+      } else {
+        dateFormat = DateFormat.getDateInstance(convertStyle(dateStyle), locale);
+      }
+    } else {
+      dateFormat = DateFormat.getTimeInstance(convertStyle(timeStyle), locale);
+    }
+    if (dateFormat instanceof SimpleDateFormat) {
+      String pattern = ((SimpleDateFormat) dateFormat).toPattern();
+      DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern(pattern).toFormatter(locale);
+      FORMATTER_CACHE.putIfAbsent(key, formatter);
+      return formatter;
+    }
+    FORMATTER_CACHE.putIfAbsent(key, "");
+    throw new IllegalArgumentException("Unable to convert DateFormat to DateTimeFormatter");
+  }
 
-    /**
-     * Converts the enum style to the old format style.
-     * @param style  the enum style, not null
-     * @return the int style
-     */
-    private int convertStyle(FormatStyle style) {
-        return style.ordinal();  // indices happen to align
-    }
+  /**
+   * Converts the enum style to the old format style.
+   * 
+   * @param style the enum style, not null
+   * @return the int style
+   */
+  private int convertStyle(FormatStyle style) {
+
+    return style.ordinal(); // indices happen to align
+  }
 
 }

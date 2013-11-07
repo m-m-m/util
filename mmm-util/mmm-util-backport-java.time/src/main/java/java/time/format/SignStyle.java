@@ -34,45 +34,38 @@ package java.time.format;
 /**
  * Enumeration of ways to handle the positive/negative sign.
  * <p>
- * The formatting engine allows the positive and negative signs of numbers
- * to be controlled using this enum.
+ * The formatting engine allows the positive and negative signs of numbers to be controlled using this enum.
  * See {@link DateTimeFormatterBuilder} for usage.
- *
- * <h4>Implementation notes</h4>
- * This is an immutable and thread-safe enum.
+ * 
+ * <h4>Implementation notes</h4> This is an immutable and thread-safe enum.
  */
 public enum SignStyle {
 
-    /**
-     * Style to output the sign only if the value is negative.
-     * In strict parsing, the negative sign will be accepted and the positive sign rejected.
-     * In lenient parsing, any sign will be accepted.
-     */
-    NORMAL,
-    /**
-     * Style to always output the sign, where zero will output '+'.
-     * In strict parsing, the absence of a sign will be rejected.
-     * In lenient parsing, the absence of a sign will be treated as a positive number.
-     */
-    ALWAYS,
-    /**
-     * Style to never output sign, only outputting the absolute value.
-     * In strict parsing, any sign will be rejected.
-     * In lenient parsing, any sign will be accepted unless the width is fixed.
-     */
-    NEVER,
-    /**
-     * Style to block negative values, throwing an exception on printing.
-     * In strict parsing, any sign will be rejected.
-     * In lenient parsing, any sign will be accepted unless the width is fixed.
-     */
-    NOT_NEGATIVE,
-    /**
-     * Style to always output the sign if the value exceeds the pad width.
-     * A negative value will always output the '-' sign.
-     * In strict parsing, the sign will be rejected unless the pad width is exceeded.
-     * In lenient parsing, any sign will be accepted.
-     */
-    EXCEEDS_PAD;
+  /**
+   * Style to output the sign only if the value is negative. In strict parsing, the negative sign will be
+   * accepted and the positive sign rejected. In lenient parsing, any sign will be accepted.
+   */
+  NORMAL,
+  /**
+   * Style to always output the sign, where zero will output '+'. In strict parsing, the absence of a sign
+   * will be rejected. In lenient parsing, the absence of a sign will be treated as a positive number.
+   */
+  ALWAYS,
+  /**
+   * Style to never output sign, only outputting the absolute value. In strict parsing, any sign will be
+   * rejected. In lenient parsing, any sign will be accepted unless the width is fixed.
+   */
+  NEVER,
+  /**
+   * Style to block negative values, throwing an exception on printing. In strict parsing, any sign will be
+   * rejected. In lenient parsing, any sign will be accepted unless the width is fixed.
+   */
+  NOT_NEGATIVE,
+  /**
+   * Style to always output the sign if the value exceeds the pad width. A negative value will always output
+   * the '-' sign. In strict parsing, the sign will be rejected unless the pad width is exceeded. In lenient
+   * parsing, any sign will be accepted.
+   */
+  EXCEEDS_PAD;
 
 }

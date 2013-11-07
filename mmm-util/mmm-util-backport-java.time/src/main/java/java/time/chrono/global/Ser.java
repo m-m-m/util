@@ -44,147 +44,170 @@ import java.time.LocalDateTime;
 
 /**
  * The shared serialization delegate for this package.
- *
- * <h4>Implementation notes</h4>
- * This class wraps the object being serialized, and takes a byte representing the type of the class to
- * be serialized.  This byte can also be used for versioning the serialization format.  In this case another
- * byte flag would be used in order to specify an alternative version of the type format.
+ * 
+ * <h4>Implementation notes</h4> This class wraps the object being serialized, and takes a byte representing
+ * the type of the class to be serialized. This byte can also be used for versioning the serialization format.
+ * In this case another byte flag would be used in order to specify an alternative version of the type format.
  * For example {@code JAPANESE_DATE_TYPE_VERSION_2 = 21}.
  * <p>
- * In order to serialise the object it writes its byte and then calls back to the appropriate class where
- * the serialisation is performed.  In order to deserialise the object it read in the type byte, switching
- * in order to select which class to call back into.
+ * In order to serialise the object it writes its byte and then calls back to the appropriate class where the
+ * serialisation is performed. In order to deserialise the object it read in the type byte, switching in order
+ * to select which class to call back into.
  * <p>
- * The serialisation format is determined on a per class basis.  In the case of field based classes each
- * of the fields is written out with an appropriate size format in descending order of the field's size.  For
- * example in the case of {@link LocalDate} year is written before month.  Composite classes, such as
- * {@link LocalDateTime} are serialised as one object.  Enum classes are serialised using the index of their
+ * The serialisation format is determined on a per class basis. In the case of field based classes each of the
+ * fields is written out with an appropriate size format in descending order of the field's size. For example
+ * in the case of {@link LocalDate} year is written before month. Composite classes, such as
+ * {@link LocalDateTime} are serialised as one object. Enum classes are serialised using the index of their
  * element in the index, an ordering which is defined by JSR-310.
  * <p>
  * This class is mutable and should be created once per serialization.
- *
+ * 
  * @serial include
  */
 final class Ser implements Externalizable {
 
-    /**
-     * Serialization version.
-     */
-    private static final long serialVersionUID = 7857518227608961174L;
+  /**
+   * Serialization version.
+   */
+  private static final long serialVersionUID = 7857518227608961174L;
 
-    static final byte JAPANESE_DATE_TYPE = 1;
-    static final byte JAPANESE_ERA_TYPE = 2;
-    static final byte HIJRAH_DATE_TYPE = 3;
-    static final byte HIJRAH_ERA_TYPE = 4;
-    static final byte MINGUO_DATE_TYPE = 5;
-    static final byte MINGUO_ERA_TYPE = 6;
-    static final byte THAIBUDDHIST_DATE_TYPE = 7;
-    static final byte THAIBUDDHIST_ERA_TYPE = 8;
+  static final byte JAPANESE_DATE_TYPE = 1;
 
-    /** The type being serialized. */
-    private byte type;
-    /** The object being serialized. */
-    private Object object;
+  static final byte JAPANESE_ERA_TYPE = 2;
 
-    /**
-     * Constructor for deserialization.
-     */
-    public Ser() {
+  static final byte HIJRAH_DATE_TYPE = 3;
+
+  static final byte HIJRAH_ERA_TYPE = 4;
+
+  static final byte MINGUO_DATE_TYPE = 5;
+
+  static final byte MINGUO_ERA_TYPE = 6;
+
+  static final byte THAIBUDDHIST_DATE_TYPE = 7;
+
+  static final byte THAIBUDDHIST_ERA_TYPE = 8;
+
+  /** The type being serialized. */
+  private byte type;
+
+  /** The object being serialized. */
+  private Object object;
+
+  /**
+   * Constructor for deserialization.
+   */
+  public Ser() {
+
+  }
+
+  /**
+   * Creates an instance for serialization.
+   * 
+   * @param type the type
+   * @param object the object
+   */
+  Ser(byte type, Object object) {
+
+    this.type = type;
+    this.object = object;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Implements the {@code Externalizable} interface to write the object.
+   * 
+   * @param out the data stream to write to, not null
+   */
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
+
+    writeInternal(this.type, this.object, out);
+  }
+
+  private static void writeInternal(byte type, Object object, DataOutput out) throws IOException {
+
+    out.writeByte(type);
+    switch (type) {
+      case JAPANESE_DATE_TYPE:
+        ((JapaneseDate) object).writeExternal(out);
+        break;
+      case JAPANESE_ERA_TYPE:
+        ((JapaneseEra) object).writeExternal(out);
+        break;
+      case HIJRAH_DATE_TYPE:
+        ((HijrahDate) object).writeExternal(out);
+        break;
+      case HIJRAH_ERA_TYPE:
+        ((HijrahEra) object).writeExternal(out);
+        break;
+      case MINGUO_DATE_TYPE:
+        ((MinguoDate) object).writeExternal(out);
+        break;
+      case MINGUO_ERA_TYPE:
+        ((MinguoEra) object).writeExternal(out);
+        break;
+      case THAIBUDDHIST_DATE_TYPE:
+        ((ThaiBuddhistDate) object).writeExternal(out);
+        break;
+      case THAIBUDDHIST_ERA_TYPE:
+        ((ThaiBuddhistEra) object).writeExternal(out);
+        break;
+      default :
+        throw new InvalidClassException("Unknown serialized type");
     }
+  }
 
-    /**
-     * Creates an instance for serialization.
-     *
-     * @param type  the type
-     * @param object  the object
-     */
-    Ser(byte type, Object object) {
-        this.type = type;
-        this.object = object;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Implements the {@code Externalizable} interface to read the object.
+   * 
+   * @param in the data to read, not null
+   */
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Implements the {@code Externalizable} interface to write the object.
-     *
-     * @param out  the data stream to write to, not null
-     */
-    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        writeInternal(type, object, out);
-    }
+    this.type = in.readByte();
+    this.object = readInternal(this.type, in);
+  }
 
-    private static void writeInternal(byte type, Object object, DataOutput out) throws IOException {
-        out.writeByte(type);
-        switch (type) {
-            case JAPANESE_DATE_TYPE:
-                ((JapaneseDate) object).writeExternal(out);
-                break;
-            case JAPANESE_ERA_TYPE:
-                ((JapaneseEra) object).writeExternal(out);
-                break;
-            case HIJRAH_DATE_TYPE:
-                ((HijrahDate) object).writeExternal(out);
-                break;
-            case HIJRAH_ERA_TYPE:
-                ((HijrahEra) object).writeExternal(out);
-                break;
-            case MINGUO_DATE_TYPE:
-                ((MinguoDate) object).writeExternal(out);
-                break;
-            case MINGUO_ERA_TYPE:
-                ((MinguoEra) object).writeExternal(out);
-                break;
-            case THAIBUDDHIST_DATE_TYPE:
-                ((ThaiBuddhistDate) object).writeExternal(out);
-                break;
-            case THAIBUDDHIST_ERA_TYPE:
-                ((ThaiBuddhistEra) object).writeExternal(out);
-                break;
-            default:
-                throw new InvalidClassException("Unknown serialized type");
-        }
-    }
+  static Object read(DataInput in) throws IOException, ClassNotFoundException {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Implements the {@code Externalizable} interface to read the object.
-     *
-     * @param in  the data to read, not null
-     */
-    @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        type = in.readByte();
-        object = readInternal(type, in);
-    }
+    byte type = in.readByte();
+    return readInternal(type, in);
+  }
 
-    static Object read(DataInput in) throws IOException, ClassNotFoundException {
-        byte type = in.readByte();
-        return readInternal(type, in);
-    }
+  private static Object readInternal(byte type, DataInput in) throws IOException, ClassNotFoundException {
 
-    private static Object readInternal(byte type, DataInput in) throws IOException, ClassNotFoundException {
-        switch (type) {
-            case JAPANESE_DATE_TYPE:  return JapaneseDate.readExternal(in);
-            case JAPANESE_ERA_TYPE: return JapaneseEra.readExternal(in);
-            case HIJRAH_DATE_TYPE: return HijrahDate.readExternal(in);
-            case HIJRAH_ERA_TYPE: return HijrahEra.readExternal(in);
-            case MINGUO_DATE_TYPE: return MinguoDate.readExternal(in);
-            case MINGUO_ERA_TYPE: return MinguoEra.readExternal(in);
-            case THAIBUDDHIST_DATE_TYPE: return ThaiBuddhistDate.readExternal(in);
-            case THAIBUDDHIST_ERA_TYPE: return ThaiBuddhistEra.readExternal(in);
-            default:
-                throw new StreamCorruptedException("Unknown serialized type");
-        }
+    switch (type) {
+      case JAPANESE_DATE_TYPE:
+        return JapaneseDate.readExternal(in);
+      case JAPANESE_ERA_TYPE:
+        return JapaneseEra.readExternal(in);
+      case HIJRAH_DATE_TYPE:
+        return HijrahDate.readExternal(in);
+      case HIJRAH_ERA_TYPE:
+        return HijrahEra.readExternal(in);
+      case MINGUO_DATE_TYPE:
+        return MinguoDate.readExternal(in);
+      case MINGUO_ERA_TYPE:
+        return MinguoEra.readExternal(in);
+      case THAIBUDDHIST_DATE_TYPE:
+        return ThaiBuddhistDate.readExternal(in);
+      case THAIBUDDHIST_ERA_TYPE:
+        return ThaiBuddhistEra.readExternal(in);
+      default :
+        throw new StreamCorruptedException("Unknown serialized type");
     }
+  }
 
-    /**
-     * Returns the object that will replace this one.
-     *
-     * @return the read object, should never be null
-     */
-    private Object readResolve() {
-         return object;
-    }
+  /**
+   * Returns the object that will replace this one.
+   * 
+   * @return the read object, should never be null
+   */
+  private Object readResolve() {
+
+    return this.object;
+  }
 
 }

@@ -14,5 +14,31 @@
   <name>util-backport-java.time</name>
   <description>A backport for java.time to be used in java versions older than 1.8.
   ATTENTION: This only works with -Xbootclasspath. Also it is inofficial and invalid according to JCP/JSR. However, we need a working update-path to 1.8.</description>
+  <dependencies>
+    <!-- Has to be externalized to prevent class loader duplications with Xbootclasspath -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-backport-java.time-tzdb</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.8</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!--<argLine>-Xbootclasspath/p:${project.build.outputDirectory}</argLine>-->
+          <argLine>-Xbootclasspath/p:${project.build.outputDirectory}${path.separator}${project.build.testOutputDirectory}</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   
 </project>

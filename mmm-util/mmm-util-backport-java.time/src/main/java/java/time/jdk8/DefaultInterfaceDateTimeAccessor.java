@@ -38,30 +38,33 @@ import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 
 /**
- * A temporary class providing implementations that will become default interface
- * methods once integrated into JDK 8.
+ * A temporary class providing implementations that will become default interface methods once integrated into
+ * JDK 8.
  */
 public abstract class DefaultInterfaceDateTimeAccessor implements DateTimeAccessor {
 
-    @Override
-    public DateTimeValueRange range(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            if (isSupported(field)) {
-                return field.range();
-            }
-            throw new DateTimeException("Unsupported field: " + field.getName());
-        }
-        return field.doRange(this);
-    }
+  @Override
+  public DateTimeValueRange range(DateTimeField field) {
 
-    @Override
-    public int get(DateTimeField field) {
-        return range(field).checkValidIntValue(getLong(field), field);
+    if (field instanceof ChronoField) {
+      if (isSupported(field)) {
+        return field.range();
+      }
+      throw new DateTimeException("Unsupported field: " + field.getName());
     }
+    return field.doRange(this);
+  }
 
-    @Override
-    public <R> R query(Query<R> query) {
-        return query.doQuery(this);
-    }
+  @Override
+  public int get(DateTimeField field) {
+
+    return range(field).checkValidIntValue(getLong(field), field);
+  }
+
+  @Override
+  public <R> R query(Query<R> query) {
+
+    return query.doQuery(this);
+  }
 
 }

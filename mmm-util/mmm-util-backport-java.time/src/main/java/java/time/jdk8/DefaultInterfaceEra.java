@@ -45,70 +45,77 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 /**
- * A temporary class providing implementations that will become default interface
- * methods once integrated into JDK 8.
- *
+ * A temporary class providing implementations that will become default interface methods once integrated into
+ * JDK 8.
+ * 
  * @param <C> the chronology of this era
  */
-public abstract class DefaultInterfaceEra<C extends Chrono<C>>
-        extends DefaultInterfaceDateTimeAccessor
-        implements Era<C> {
+public abstract class DefaultInterfaceEra<C extends Chrono<C>> extends DefaultInterfaceDateTimeAccessor implements
+    Era<C> {
 
-    @Override
-    public ChronoLocalDate<C> date(int year, int month, int day) {
-        return getChrono().date(this, year, month, day);
-    }
+  @Override
+  public ChronoLocalDate<C> date(int year, int month, int day) {
 
-    @Override
-    public ChronoLocalDate<C> dateYearDay(int year, int dayOfYear) {
-        return getChrono().dateYearDay(this, year, dayOfYear);
-    }
+    return getChrono().date(this, year, month, day);
+  }
 
-    //-----------------------------------------------------------------------
-    @Override
-    public boolean isSupported(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            return field == ERA;
-        }
-        return field != null && field.doIsSupported(this);
-    }
+  @Override
+  public ChronoLocalDate<C> dateYearDay(int year, int dayOfYear) {
 
-    @Override
-    public int get(DateTimeField field) {
-        if (field == ERA) {
-            return getValue();
-        }
-        return range(field).checkValidIntValue(getLong(field), field);
-    }
+    return getChrono().dateYearDay(this, year, dayOfYear);
+  }
 
-    @Override
-    public long getLong(DateTimeField field) {
-        if (field == ERA) {
-            return getValue();
-        } else if (field instanceof ChronoField) {
-            throw new DateTimeException("Unsupported field: " + field.getName());
-        }
-        return field.doGet(this);
-    }
+  // -----------------------------------------------------------------------
+  @Override
+  public boolean isSupported(DateTimeField field) {
 
-    //-------------------------------------------------------------------------
-    @Override
-    public DateTime doWithAdjustment(DateTime dateTime) {
-        return dateTime.with(ERA, getValue());
+    if (field instanceof ChronoField) {
+      return field == ERA;
     }
+    return field != null && field.doIsSupported(this);
+  }
 
-    @Override
-    public <R> R query(Query<R> query) {
-        if (query == Query.CHRONO) {
-            return (R) getChrono();
-        }
-        return super.query(query);
-    }
+  @Override
+  public int get(DateTimeField field) {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public String getText(TextStyle style, Locale locale) {
-        return new DateTimeFormatterBuilder().appendText(ERA, style).toFormatter(locale).print(this);
+    if (field == ERA) {
+      return getValue();
     }
+    return range(field).checkValidIntValue(getLong(field), field);
+  }
+
+  @Override
+  public long getLong(DateTimeField field) {
+
+    if (field == ERA) {
+      return getValue();
+    } else if (field instanceof ChronoField) {
+      throw new DateTimeException("Unsupported field: " + field.getName());
+    }
+    return field.doGet(this);
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  public DateTime doWithAdjustment(DateTime dateTime) {
+
+    return dateTime.with(ERA, getValue());
+  }
+
+  @Override
+  public <R> R query(Query<R> query) {
+
+    if (query == Query.CHRONO) {
+      return (R) getChrono();
+    }
+    return super.query(query);
+  }
+
+  // -----------------------------------------------------------------------
+  @Override
+  public String getText(TextStyle style, Locale locale) {
+
+    return new DateTimeFormatterBuilder().appendText(ERA, style).toFormatter(locale).print(this);
+  }
 
 }

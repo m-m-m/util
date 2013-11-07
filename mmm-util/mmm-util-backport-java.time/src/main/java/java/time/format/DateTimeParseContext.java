@@ -41,366 +41,398 @@ import java.util.Objects;
 /**
  * Context object used during date and time parsing.
  * <p>
- * This class represents the current state of the parse.
- * It has the ability to store and retrieve the parsed values and manage optional segments.
- * It also provides key information to the parsing methods.
+ * This class represents the current state of the parse. It has the ability to store and retrieve the parsed
+ * values and manage optional segments. It also provides key information to the parsing methods.
  * <p>
- * Once parsing is complete, the {@link #toBuilder()} is typically used
- * to obtain a builder that can combine the separate parsed fields into meaningful values.
- *
+ * Once parsing is complete, the {@link #toBuilder()} is typically used to obtain a builder that can combine
+ * the separate parsed fields into meaningful values.
+ * 
  * <h4>Implementation notes</h4>
- * This class is a mutable context intended for use from a single thread.
- * Usage of the class is thread-safe within standard parsing as a new instance of this class
- * is automatically created for each parse and parsing is single-threaded
+ * This class is a mutable context intended for use from a single thread. Usage of the class is thread-safe
+ * within standard parsing as a new instance of this class is automatically created for each parse and parsing
+ * is single-threaded
  */
 final class DateTimeParseContext {
 
-    /**
-     * The locale, not null.
-     */
-    private Locale locale;
-    /**
-     * The date time format symbols, not null.
-     */
-    private DateTimeFormatSymbols symbols;
-    /**
-     * Whether to parse using case sensitively.
-     */
-    private boolean caseSensitive = true;
-    /**
-     * Whether to parse using strict rules.
-     */
-    private boolean strict = true;
-    /**
-     * The list of parsed data.
-     */
-    private final ArrayList<Parsed> parsed = new ArrayList<>();
+  /**
+   * The locale, not null.
+   */
+  private Locale locale;
 
-    /**
-     * Creates a new instance of the context.
-     * <p>
-     * This should normally only be created by the parser.
-     *
-     * @param locale  the locale to use, not null
-     * @param symbols  the symbols to use during parsing, not null
-     */
-    DateTimeParseContext(Locale locale, DateTimeFormatSymbols symbols) {
-        super();
-        setLocale(locale);
-        setSymbols(symbols);
-        parsed.add(new Parsed());
+  /**
+   * The date time format symbols, not null.
+   */
+  private DateTimeFormatSymbols symbols;
+
+  /**
+   * Whether to parse using case sensitively.
+   */
+  private boolean caseSensitive = true;
+
+  /**
+   * Whether to parse using strict rules.
+   */
+  private boolean strict = true;
+
+  /**
+   * The list of parsed data.
+   */
+  private final ArrayList<Parsed> parsed = new ArrayList<>();
+
+  /**
+   * Creates a new instance of the context.
+   * <p>
+   * This should normally only be created by the parser.
+   * 
+   * @param locale the locale to use, not null
+   * @param symbols the symbols to use during parsing, not null
+   */
+  DateTimeParseContext(Locale locale, DateTimeFormatSymbols symbols) {
+
+    super();
+    setLocale(locale);
+    setSymbols(symbols);
+    this.parsed.add(new Parsed());
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the locale.
+   * <p>
+   * This locale is used to control localization in the parse except where localization is controlled by the
+   * symbols.
+   * 
+   * @return the locale, not null
+   */
+  public Locale getLocale() {
+
+    return this.locale;
+  }
+
+  /**
+   * Sets the locale.
+   * <p>
+   * This locale is used to control localization in the parse except where localization is controlled by the
+   * symbols.
+   * 
+   * @param locale the locale, not null
+   */
+  public void setLocale(Locale locale) {
+
+    Objects.requireNonNull(locale, "locale");
+    this.locale = locale;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the formatting symbols.
+   * <p>
+   * The symbols control the localization of numeric parsing.
+   * 
+   * @return the formatting symbols, not null
+   */
+  public DateTimeFormatSymbols getSymbols() {
+
+    return this.symbols;
+  }
+
+  /**
+   * Sets the formatting symbols.
+   * <p>
+   * The symbols control the localization of numeric parsing.
+   * 
+   * @param symbols the formatting symbols, not null
+   */
+  public void setSymbols(DateTimeFormatSymbols symbols) {
+
+    Objects.requireNonNull(symbols, "symbols");
+    this.symbols = symbols;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Checks if parsing is case sensitive.
+   * 
+   * @return true if parsing is case sensitive, false if case insensitive
+   */
+  public boolean isCaseSensitive() {
+
+    return this.caseSensitive;
+  }
+
+  /**
+   * Sets whether the parsing is case sensitive or not.
+   * 
+   * @param caseSensitive changes the parsing to be case sensitive or not from now on
+   */
+  public void setCaseSensitive(boolean caseSensitive) {
+
+    this.caseSensitive = caseSensitive;
+  }
+
+  /**
+   * Helper to compare two {@code CharSequence} instances. This uses {@link #isCaseSensitive()}.
+   * 
+   * @param cs1 the first character sequence, not null
+   * @param offset1 the offset into the first sequence, valid
+   * @param cs2 the second character sequence, not null
+   * @param offset2 the offset into the second sequence, valid
+   * @param length the length to check, valid
+   * @return true if equal
+   */
+  public boolean subSequenceEquals(CharSequence cs1, int offset1, CharSequence cs2, int offset2, int length) {
+
+    if (offset1 + length > cs1.length() || offset2 + length > cs2.length()) {
+      return false;
     }
-
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the locale.
-     * <p>
-     * This locale is used to control localization in the parse except
-     * where localization is controlled by the symbols.
-     *
-     * @return the locale, not null
-     */
-    public Locale getLocale() {
-        return locale;
-    }
-
-    /**
-     * Sets the locale.
-     * <p>
-     * This locale is used to control localization in the parse except
-     * where localization is controlled by the symbols.
-     *
-     * @param locale  the locale, not null
-     */
-    public void setLocale(Locale locale) {
-        Objects.requireNonNull(locale, "locale");
-        this.locale = locale;
-    }
-
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the formatting symbols.
-     * <p>
-     * The symbols control the localization of numeric parsing.
-     *
-     * @return the formatting symbols, not null
-     */
-    public DateTimeFormatSymbols getSymbols() {
-        return symbols;
-    }
-
-    /**
-     * Sets the formatting symbols.
-     * <p>
-     * The symbols control the localization of numeric parsing.
-     *
-     * @param symbols  the formatting symbols, not null
-     */
-    public void setSymbols(DateTimeFormatSymbols symbols) {
-        Objects.requireNonNull(symbols, "symbols");
-        this.symbols = symbols;
-    }
-
-    //-----------------------------------------------------------------------
-    /**
-     * Checks if parsing is case sensitive.
-     *
-     * @return true if parsing is case sensitive, false if case insensitive
-     */
-    public boolean isCaseSensitive() {
-        return caseSensitive;
-    }
-
-    /**
-     * Sets whether the parsing is case sensitive or not.
-     *
-     * @param caseSensitive  changes the parsing to be case sensitive or not from now on
-     */
-    public void setCaseSensitive(boolean caseSensitive) {
-        this.caseSensitive = caseSensitive;
-    }
-
-    /**
-     * Helper to compare two {@code CharSequence} instances.
-     * This uses {@link #isCaseSensitive()}.
-     *
-     * @param cs1  the first character sequence, not null
-     * @param offset1  the offset into the first sequence, valid
-     * @param cs2  the second character sequence, not null
-     * @param offset2  the offset into the second sequence, valid
-     * @param length  the length to check, valid
-     * @return true if equal
-     */
-    public boolean subSequenceEquals(CharSequence cs1, int offset1, CharSequence cs2, int offset2, int length) {
-        if (offset1 + length > cs1.length() || offset2 + length > cs2.length()) {
-            return false;
+    if (isCaseSensitive()) {
+      for (int i = 0; i < length; i++) {
+        char ch1 = cs1.charAt(offset1 + i);
+        char ch2 = cs2.charAt(offset2 + i);
+        if (ch1 != ch2) {
+          return false;
         }
-        if (isCaseSensitive()) {
-            for (int i = 0; i < length; i++) {
-                char ch1 = cs1.charAt(offset1 + i);
-                char ch2 = cs2.charAt(offset2 + i);
-                if (ch1 != ch2) {
-                    return false;
-                }
-            }
-        } else {
-            for (int i = 0; i < length; i++) {
-                char ch1 = cs1.charAt(offset1 + i);
-                char ch2 = cs2.charAt(offset2 + i);
-                if (ch1 != ch2 && Character.toUpperCase(ch1) != Character.toUpperCase(ch2) &&
-                        Character.toLowerCase(ch1) != Character.toLowerCase(ch2)) {
-                    return false;
-                }
-            }
+      }
+    } else {
+      for (int i = 0; i < length; i++) {
+        char ch1 = cs1.charAt(offset1 + i);
+        char ch2 = cs2.charAt(offset2 + i);
+        if (ch1 != ch2 && Character.toUpperCase(ch1) != Character.toUpperCase(ch2)
+            && Character.toLowerCase(ch1) != Character.toLowerCase(ch2)) {
+          return false;
         }
-        return true;
+      }
     }
+    return true;
+  }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Checks if parsing is strict.
-     * <p>
-     * Strict parsing requires exact matching of the text and sign styles.
-     *
-     * @return true if parsing is strict, false if lenient
-     */
-    public boolean isStrict() {
-        return strict;
+  // -----------------------------------------------------------------------
+  /**
+   * Checks if parsing is strict.
+   * <p>
+   * Strict parsing requires exact matching of the text and sign styles.
+   * 
+   * @return true if parsing is strict, false if lenient
+   */
+  public boolean isStrict() {
+
+    return this.strict;
+  }
+
+  /**
+   * Sets whether parsing is strict or lenient.
+   * 
+   * @param strict changes the parsing to be strict or lenient from now on
+   */
+  public void setStrict(boolean strict) {
+
+    this.strict = strict;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Starts the parsing of an optional segment of the input.
+   */
+  void startOptional() {
+
+    this.parsed.add(currentParsed().clone());
+  }
+
+  /**
+   * Ends the parsing of an optional segment of the input.
+   * 
+   * @param successful whether the optional segment was successfully parsed
+   */
+  void endOptional(boolean successful) {
+
+    if (successful) {
+      this.parsed.remove(this.parsed.size() - 2);
+    } else {
+      this.parsed.remove(this.parsed.size() - 1);
     }
+  }
 
-    /**
-     * Sets whether parsing is strict or lenient.
-     *
-     * @param strict  changes the parsing to be strict or lenient from now on
-     */
-    public void setStrict(boolean strict) {
-        this.strict = strict;
-    }
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the currently active date-time objects.
+   * 
+   * @return the current date-time objects, not null
+   */
+  private Parsed currentParsed() {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Starts the parsing of an optional segment of the input.
-     */
-    void startOptional() {
-        parsed.add(currentParsed().clone());
-    }
+    return this.parsed.get(this.parsed.size() - 1);
+  }
 
-    /**
-     * Ends the parsing of an optional segment of the input.
-     *
-     * @param successful  whether the optional segment was successfully parsed
-     */
-    void endOptional(boolean successful) {
-        if (successful) {
-            parsed.remove(parsed.size() - 2);
-        } else {
-            parsed.remove(parsed.size() - 1);
+  // -----------------------------------------------------------------------
+  /**
+   * Gets the first value that was parsed for the specified field.
+   * <p>
+   * This searches the results of the parse, returning the first value found for the specified field. No
+   * attempt is made to derive a value. The field may have an out of range value. For example, the
+   * day-of-month might be set to 50, or the hour to 1000.
+   * 
+   * @param field the field to query from the map, null returns null
+   * @return the value mapped to the specified field, null if field was not parsed
+   */
+  public Long getParsed(DateTimeField field) {
+
+    for (Object obj : currentParsed().parsed) {
+      if (obj instanceof FieldValue) {
+        FieldValue fv = (FieldValue) obj;
+        if (fv.field.equals(field)) {
+          return fv.value;
         }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Gets the first value that was parsed for the specified type.
+   * <p>
+   * This searches the results of the parse, returning the first date-time found of the specified type. No
+   * attempt is made to derive a value.
+   * 
+   * @param clazz the type to query from the map, not null
+   * @return the date-time object, null if it was not parsed
+   */
+  @SuppressWarnings("unchecked")
+  public <T> T getParsed(Class<T> clazz) {
+
+    for (Object obj : currentParsed().parsed) {
+      if (clazz.isInstance(obj)) {
+        return (T) obj;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Gets the list of parsed date-time information.
+   * 
+   * @return the list of parsed date-time objects, not null, no nulls
+   */
+  List<Object> getParsed() {
+
+    // package scoped for testing
+    return currentParsed().parsed;
+  }
+
+  /**
+   * Stores the parsed field.
+   * <p>
+   * This stores a field-value pair that has been parsed. The value stored may be out of range for the field -
+   * no checks are performed.
+   * 
+   * @param field the field to set in the field-value map, not null
+   * @param value the value to set in the field-value map
+   */
+  public void setParsedField(DateTimeField field, long value) {
+
+    Objects.requireNonNull(field, "field");
+    currentParsed().parsed.add(new FieldValue(field, value));
+  }
+
+  /**
+   * Stores the parsed complete object.
+   * <p>
+   * This stores a complete object that has been parsed. No validation is performed on the date-time other
+   * than ensuring it is not null.
+   * 
+   * @param object the parsed object, not null
+   */
+  public <T> void setParsed(Object object) {
+
+    Objects.requireNonNull(object, "object");
+    currentParsed().parsed.add(object);
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Returns a {@code DateTimeBuilder} that can be used to interpret the results of the parse.
+   * <p>
+   * This method is typically used once parsing is complete to obtain the parsed data. Parsing will typically
+   * result in separate fields, such as year, month and day. The returned builder can be used to combine the
+   * parsed data into meaningful objects such as {@code LocalDate}, potentially applying complex processing to
+   * handle invalid parsed data.
+   * 
+   * @return a new builder with the results of the parse, not null
+   */
+  public DateTimeBuilder toBuilder() {
+
+    List<Object> cals = currentParsed().parsed;
+    DateTimeBuilder builder = new DateTimeBuilder();
+    for (Object obj : cals) {
+      if (obj instanceof FieldValue) {
+        FieldValue fv = (FieldValue) obj;
+        builder.addFieldValue(fv.field, fv.value);
+      } else {
+        builder.addCalendrical(obj);
+      }
+    }
+    return builder;
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Returns a string version of the context for debugging.
+   * 
+   * @return a string representation of the context data, not null
+   */
+  @Override
+  public String toString() {
+
+    return currentParsed().toString();
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Temporary store of parsed data.
+   */
+  private static final class Parsed {
+
+    final List<Object> parsed = new ArrayList<>();
+
+    private Parsed() {
+
     }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the currently active date-time objects.
-     *
-     * @return the current date-time objects, not null
-     */
-    private Parsed currentParsed() {
-        return parsed.get(parsed.size() - 1);
+    @Override
+    protected Parsed clone() {
+
+      Parsed cloned = new Parsed();
+      cloned.parsed.addAll(this.parsed);
+      return cloned;
     }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Gets the first value that was parsed for the specified field.
-     * <p>
-     * This searches the results of the parse, returning the first value found
-     * for the specified field. No attempt is made to derive a value.
-     * The field may have an out of range value.
-     * For example, the day-of-month might be set to 50, or the hour to 1000.
-     *
-     * @param field  the field to query from the map, null returns null
-     * @return the value mapped to the specified field, null if field was not parsed
-     */
-    public Long getParsed(DateTimeField field) {
-        for (Object obj : currentParsed().parsed) {
-            if (obj instanceof FieldValue) {
-                FieldValue fv = (FieldValue) obj;
-                if (fv.field.equals(field)) {
-                    return fv.value;
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets the first value that was parsed for the specified type.
-     * <p>
-     * This searches the results of the parse, returning the first date-time found
-     * of the specified type. No attempt is made to derive a value.
-     *
-     * @param clazz  the type to query from the map, not null
-     * @return the date-time object, null if it was not parsed
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T getParsed(Class<T> clazz) {
-        for (Object obj : currentParsed().parsed) {
-            if (clazz.isInstance(obj)) {
-                return (T) obj;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets the list of parsed date-time information.
-     *
-     * @return the list of parsed date-time objects, not null, no nulls
-     */
-    List<Object> getParsed() {
-        // package scoped for testing
-        return currentParsed().parsed;
-    }
-
-    /**
-     * Stores the parsed field.
-     * <p>
-     * This stores a field-value pair that has been parsed.
-     * The value stored may be out of range for the field - no checks are performed.
-     *
-     * @param field  the field to set in the field-value map, not null
-     * @param value  the value to set in the field-value map
-     */
-    public void setParsedField(DateTimeField field, long value) {
-        Objects.requireNonNull(field, "field");
-        currentParsed().parsed.add(new FieldValue(field, value));
-    }
-
-    /**
-     * Stores the parsed complete object.
-     * <p>
-     * This stores a complete object that has been parsed.
-     * No validation is performed on the date-time other than ensuring it is not null.
-     *
-     * @param object  the parsed object, not null
-     */
-    public <T> void setParsed(Object object) {
-        Objects.requireNonNull(object, "object");
-        currentParsed().parsed.add(object);
-    }
-
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a {@code DateTimeBuilder} that can be used to interpret
-     * the results of the parse.
-     * <p>
-     * This method is typically used once parsing is complete to obtain the parsed data.
-     * Parsing will typically result in separate fields, such as year, month and day.
-     * The returned builder can be used to combine the parsed data into meaningful
-     * objects such as {@code LocalDate}, potentially applying complex processing
-     * to handle invalid parsed data.
-     *
-     * @return a new builder with the results of the parse, not null
-     */
-    public DateTimeBuilder toBuilder() {
-        List<Object> cals = currentParsed().parsed;
-        DateTimeBuilder builder = new DateTimeBuilder();
-        for (Object obj : cals) {
-            if (obj instanceof FieldValue) {
-                FieldValue fv = (FieldValue) obj;
-                builder.addFieldValue(fv.field, fv.value);
-            } else {
-                builder.addCalendrical(obj);
-            }
-        }
-        return builder;
-    }
-
-    //-----------------------------------------------------------------------
-    /**
-     * Returns a string version of the context for debugging.
-     *
-     * @return a string representation of the context data, not null
-     */
     @Override
     public String toString() {
-        return currentParsed().toString();
+
+      return this.parsed.toString();
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  /**
+   * Temporary store of a field-value pair.
+   */
+  private static final class FieldValue {
+
+    final DateTimeField field;
+
+    final long value;
+
+    private FieldValue(DateTimeField field, long value) {
+
+      this.field = field;
+      this.value = value;
     }
 
-    //-----------------------------------------------------------------------
-    /**
-     * Temporary store of parsed data.
-     */
-    private static final class Parsed {
-        final List<Object> parsed = new ArrayList<>();
-        private Parsed() {
-        }
-        @Override
-        protected Parsed clone() {
-            Parsed cloned = new Parsed();
-            cloned.parsed.addAll(this.parsed);
-            return cloned;
-        }
-        @Override
-        public String toString() {
-            return parsed.toString();
-        }
-    }
+    @Override
+    public String toString() {
 
-    //-----------------------------------------------------------------------
-    /**
-     * Temporary store of a field-value pair.
-     */
-    private static final class FieldValue {
-        final DateTimeField field;
-        final long value;
-        private FieldValue(DateTimeField field, long value) {
-            this.field = field;
-            this.value = value;
-        }
-        @Override
-        public String toString() {
-            return field.getName() + ' ' + value;
-        }
+      return this.field.getName() + ' ' + this.value;
     }
+  }
 
 }

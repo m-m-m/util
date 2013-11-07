@@ -52,181 +52,200 @@ import java.util.Objects;
  * A date in the Thai Buddhist calendar system.
  * <p>
  * This implements {@code ChronoLocalDate} for the {@link ThaiBuddhistChrono Thai Buddhist calendar}.
- *
- * <h4>Implementation notes</h4>
- * This class is immutable and thread-safe.
+ * 
+ * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
-final class ThaiBuddhistDate
-        extends ChronoDateImpl<ThaiBuddhistChrono>
-        implements Serializable {
-    // this class is package-scoped so that future conversion to public
-    // would not change serialization
+final class ThaiBuddhistDate extends ChronoDateImpl<ThaiBuddhistChrono> implements Serializable {
 
-    /**
-     * Serialization version.
-     */
-    private static final long serialVersionUID = -8722293800195731463L;
+  // this class is package-scoped so that future conversion to public
+  // would not change serialization
 
-    /**
-     * The underlying date.
-     */
-    private final LocalDate isoDate;
+  /**
+   * Serialization version.
+   */
+  private static final long serialVersionUID = -8722293800195731463L;
 
-    /**
-     * Creates an instance from an ISO date.
-     *
-     * @param isoDate  the standard local date, validated not null
-     */
-    ThaiBuddhistDate(LocalDate date) {
-        Objects.requireNonNull(date, "date");
-        this.isoDate = date;
-    }
+  /**
+   * The underlying date.
+   */
+  private final LocalDate isoDate;
 
-    //-----------------------------------------------------------------------
-    @Override
-    public ThaiBuddhistChrono getChrono() {
-        return ThaiBuddhistChrono.INSTANCE;
-    }
+  /**
+   * Creates an instance from an ISO date.
+   * 
+   * @param isoDate the standard local date, validated not null
+   */
+  ThaiBuddhistDate(LocalDate date) {
 
-    @Override
-    public int lengthOfMonth() {
-        return isoDate.lengthOfMonth();
-    }
+    Objects.requireNonNull(date, "date");
+    this.isoDate = date;
+  }
 
-    @Override
-    public DateTimeValueRange range(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            if (isSupported(field)) {
-                ChronoField f = (ChronoField) field;
-                switch (f) {
-                    case DAY_OF_MONTH:
-                    case DAY_OF_YEAR:
-                    case ALIGNED_WEEK_OF_MONTH:
-                        return isoDate.range(field);
-                    case YEAR_OF_ERA: {
-                        DateTimeValueRange range = YEAR.range();
-                        long max = (getProlepticYear() <= 0 ? -(range.getMinimum() + YEARS_DIFFERENCE) + 1 : range.getMaximum() + YEARS_DIFFERENCE);
-                        return DateTimeValueRange.of(1, max);
-                    }
-                }
-                return getChrono().range(f);
-            }
-            throw new DateTimeException("Unsupported field: " + field.getName());
+  // -----------------------------------------------------------------------
+  @Override
+  public ThaiBuddhistChrono getChrono() {
+
+    return ThaiBuddhistChrono.INSTANCE;
+  }
+
+  @Override
+  public int lengthOfMonth() {
+
+    return this.isoDate.lengthOfMonth();
+  }
+
+  @Override
+  public DateTimeValueRange range(DateTimeField field) {
+
+    if (field instanceof ChronoField) {
+      if (isSupported(field)) {
+        ChronoField f = (ChronoField) field;
+        switch (f) {
+          case DAY_OF_MONTH:
+          case DAY_OF_YEAR:
+          case ALIGNED_WEEK_OF_MONTH:
+            return this.isoDate.range(field);
+          case YEAR_OF_ERA: {
+            DateTimeValueRange range = YEAR.range();
+            long max = (getProlepticYear() <= 0 ? -(range.getMinimum() + YEARS_DIFFERENCE) + 1 : range.getMaximum()
+                + YEARS_DIFFERENCE);
+            return DateTimeValueRange.of(1, max);
+          }
         }
-        return field.doRange(this);
+        return getChrono().range(f);
+      }
+      throw new DateTimeException("Unsupported field: " + field.getName());
     }
+    return field.doRange(this);
+  }
 
-    @Override
-    public long getLong(DateTimeField field) {
-        if (field instanceof ChronoField) {
-            switch ((ChronoField) field) {
-                case YEAR_OF_ERA: {
-                    int prolepticYear = getProlepticYear();
-                    return (prolepticYear >= 1 ? prolepticYear : 1 - prolepticYear);
-                }
-                case YEAR:
-                    return getProlepticYear();
-                case ERA:
-                    return (getProlepticYear() >= 1 ? 1 : 0);
-            }
-            return isoDate.getLong(field);
+  @Override
+  public long getLong(DateTimeField field) {
+
+    if (field instanceof ChronoField) {
+      switch ((ChronoField) field) {
+        case YEAR_OF_ERA: {
+          int prolepticYear = getProlepticYear();
+          return (prolepticYear >= 1 ? prolepticYear : 1 - prolepticYear);
         }
-        return field.doGet(this);
+        case YEAR:
+          return getProlepticYear();
+        case ERA:
+          return (getProlepticYear() >= 1 ? 1 : 0);
+      }
+      return this.isoDate.getLong(field);
     }
+    return field.doGet(this);
+  }
 
-    private int getProlepticYear() {
-        return isoDate.getYear() + YEARS_DIFFERENCE;
-    }
+  private int getProlepticYear() {
 
-    //-----------------------------------------------------------------------
-    @Override
-    public ThaiBuddhistDate with(DateTimeField field, long newValue) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
-            if (getLong(f) == newValue) {
-                return this;
-            }
-            switch (f) {
-                case YEAR_OF_ERA:
-                case YEAR:
-                case ERA: {
-                    f.checkValidValue(newValue);
-                    int nvalue = (int) newValue;
-                    switch (f) {
-                        case YEAR_OF_ERA:
-                            return with(isoDate.withYear((getProlepticYear() >= 1 ? nvalue : 1 - nvalue)  - YEARS_DIFFERENCE));
-                        case YEAR:
-                            return with(isoDate.withYear(nvalue - YEARS_DIFFERENCE));
-                        case ERA:
-                            return with(isoDate.withYear((1 - getProlepticYear()) - YEARS_DIFFERENCE));
-                    }
-                }
-            }
-            return with(isoDate.with(field, newValue));
+    return this.isoDate.getYear() + YEARS_DIFFERENCE;
+  }
+
+  // -----------------------------------------------------------------------
+  @Override
+  public ThaiBuddhistDate with(DateTimeField field, long newValue) {
+
+    if (field instanceof ChronoField) {
+      ChronoField f = (ChronoField) field;
+      if (getLong(f) == newValue) {
+        return this;
+      }
+      switch (f) {
+        case YEAR_OF_ERA:
+        case YEAR:
+        case ERA: {
+          f.checkValidValue(newValue);
+          int nvalue = (int) newValue;
+          switch (f) {
+            case YEAR_OF_ERA:
+              return with(this.isoDate.withYear((getProlepticYear() >= 1 ? nvalue : 1 - nvalue) - YEARS_DIFFERENCE));
+            case YEAR:
+              return with(this.isoDate.withYear(nvalue - YEARS_DIFFERENCE));
+            case ERA:
+              return with(this.isoDate.withYear((1 - getProlepticYear()) - YEARS_DIFFERENCE));
+          }
         }
-        return field.doWith(this, newValue);
+      }
+      return with(this.isoDate.with(field, newValue));
     }
+    return field.doWith(this, newValue);
+  }
 
-    //-----------------------------------------------------------------------
-    @Override
-    ThaiBuddhistDate plusYears(long years) {
-        return with(isoDate.plusYears(years));
-    }
+  // -----------------------------------------------------------------------
+  @Override
+  ThaiBuddhistDate plusYears(long years) {
 
-    @Override
-    ThaiBuddhistDate plusMonths(long months) {
-        return with(isoDate.plusMonths(months));
-    }
+    return with(this.isoDate.plusYears(years));
+  }
 
-    @Override
-    ThaiBuddhistDate plusDays(long days) {
-        return with(isoDate.plusDays(days));
-    }
+  @Override
+  ThaiBuddhistDate plusMonths(long months) {
 
-    private ThaiBuddhistDate with(LocalDate newDate) {
-        return (newDate.equals(isoDate) ? this : new ThaiBuddhistDate(newDate));
-    }
+    return with(this.isoDate.plusMonths(months));
+  }
 
-    @Override  // override for performance
-    public long toEpochDay() {
-        return isoDate.toEpochDay();
-    }
+  @Override
+  ThaiBuddhistDate plusDays(long days) {
 
-    //-------------------------------------------------------------------------
-    @Override  // override for performance
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj instanceof ThaiBuddhistDate) {
-            ThaiBuddhistDate otherDate = (ThaiBuddhistDate) obj;
-            return this.isoDate.equals(otherDate.isoDate);
-        }
-        return false;
-    }
+    return with(this.isoDate.plusDays(days));
+  }
 
-    @Override  // override for performance
-    public int hashCode() {
-        return getChrono().getId().hashCode() ^ isoDate.hashCode();
-    }
+  private ThaiBuddhistDate with(LocalDate newDate) {
 
-    //-----------------------------------------------------------------------
-    private Object writeReplace() {
-        return new Ser(Ser.THAIBUDDHIST_DATE_TYPE, this);
-    }
+    return (newDate.equals(this.isoDate) ? this : new ThaiBuddhistDate(newDate));
+  }
 
-    void writeExternal(DataOutput out) throws IOException {
-        // MinguoChrono is implicit in the THAIBUDDHIST_DATE_TYPE
-        out.writeInt(this.get(YEAR));
-        out.writeByte(this.get(MONTH_OF_YEAR));
-        out.writeByte(this.get(DAY_OF_MONTH));
-    }
+  @Override
+  // override for performance
+  public long toEpochDay() {
 
-    static ChronoLocalDate<ThaiBuddhistChrono> readExternal(DataInput in) throws IOException {
-        int year = in.readInt();
-        int month = in.readByte();
-        int dayOfMonth = in.readByte();
-        return ThaiBuddhistChrono.INSTANCE.date(year, month, dayOfMonth);
+    return this.isoDate.toEpochDay();
+  }
+
+  // -------------------------------------------------------------------------
+  @Override
+  // override for performance
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
     }
+    if (obj instanceof ThaiBuddhistDate) {
+      ThaiBuddhistDate otherDate = (ThaiBuddhistDate) obj;
+      return this.isoDate.equals(otherDate.isoDate);
+    }
+    return false;
+  }
+
+  @Override
+  // override for performance
+  public int hashCode() {
+
+    return getChrono().getId().hashCode() ^ this.isoDate.hashCode();
+  }
+
+  // -----------------------------------------------------------------------
+  private Object writeReplace() {
+
+    return new Ser(Ser.THAIBUDDHIST_DATE_TYPE, this);
+  }
+
+  void writeExternal(DataOutput out) throws IOException {
+
+    // MinguoChrono is implicit in the THAIBUDDHIST_DATE_TYPE
+    out.writeInt(get(YEAR));
+    out.writeByte(get(MONTH_OF_YEAR));
+    out.writeByte(get(DAY_OF_MONTH));
+  }
+
+  static ChronoLocalDate<ThaiBuddhistChrono> readExternal(DataInput in) throws IOException {
+
+    int year = in.readInt();
+    int month = in.readByte();
+    int dayOfMonth = in.readByte();
+    return ThaiBuddhistChrono.INSTANCE.date(year, month, dayOfMonth);
+  }
 
 }
