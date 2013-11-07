@@ -36,10 +36,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
@@ -72,8 +72,8 @@ import java.util.Comparator;
  * As such, it should be considered an application-wide architectural decision to choose to use this interface
  * as opposed to {@code LocalDate}.
  * 
- * <h4>Architectural issues to consider</h4>
- * These are some of the points that must be considered before using this interface throughout an application.
+ * <h4>Architectural issues to consider</h4> These are some of the points that must be considered before using
+ * this interface throughout an application.
  * <p>
  * 1) Applications using this interface, as opposed to using just {@code LocalDate}, face a significantly
  * higher probability of bugs. This is because the calendar system in use is not known at development time. A

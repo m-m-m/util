@@ -1322,24 +1322,24 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
   }
 
   // -----------------------------------------------------------------------
-  /**
-   * Writes the object using a <a href="../../serialized-form.html#javax.time.Ser">dedicated serialized
-   * form</a>.
-   *
-   * <pre>
-     *  out.writeByte(5);  // identifies this as a LocalTime
-     *  out.writeByte(hour);
-     *  out.writeByte(minute);
-     *  out.writeByte(second);
-     *  out.writeInt(nano);
-     * </pre>
-   *
-   * @return the instance of {@code Ser}, not null
-   */
-  private Object writeReplace() {
-
-    return new Ser(Ser.LOCAL_TIME_TYPE, this);
-  }
+//  /**
+//   * Writes the object using a <a href="../../serialized-form.html#javax.time.Ser">dedicated serialized
+//   * form</a>.
+//   *
+//   * <pre>
+//     *  out.writeByte(5);  // identifies this as a LocalTime
+//     *  out.writeByte(hour);
+//     *  out.writeByte(minute);
+//     *  out.writeByte(second);
+//     *  out.writeInt(nano);
+//     * </pre>
+//   *
+//   * @return the instance of {@code Ser}, not null
+//   */
+//  private Object writeReplace() {
+//
+//    return new Ser(Ser.LOCAL_TIME_TYPE, this);
+//  }
 
   // void writeExternal(DataOutput out) throws IOException {
   // out.writeByte(hour);
