@@ -31,7 +31,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <backport-version>1.0.0</backport-version>
+    <backport-time-version>1.0.0</backport-time-version>
+    <backport-function-version>1.0.0</backport-function-version>
   </properties>
 
   <build>
@@ -557,7 +558,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-version}/mmm-util-backport-java.util.function-${backport-version}.jar</argLine>
+              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-function-version}/mmm-util-backport-java.util.function-${backport-function-version}.jar${path.separator}${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</argLine>
             </configuration>
           </plugin>
         </plugins>

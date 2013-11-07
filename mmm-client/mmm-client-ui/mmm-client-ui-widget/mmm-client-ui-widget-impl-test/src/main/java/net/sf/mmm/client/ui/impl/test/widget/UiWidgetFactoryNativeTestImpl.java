@@ -32,6 +32,7 @@ import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRadioButtonsVerticalF
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRichTextFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTextAreaFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTextFieldTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTimeFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuBarTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuItemClickableTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuItemSeparatorTestImpl;
@@ -84,6 +85,7 @@ public class UiWidgetFactoryNativeTestImpl extends AbstractUiWidgetFactoryNative
     register(new UiWidgetIntegerSliderFieldTestImpl.Factory());
     register(new UiWidgetDoubleFieldTestImpl.Factory());
     register(new UiWidgetDateFieldTestImpl.Factory());
+    register(new UiWidgetTimeFieldTestImpl.Factory());
     register(new UiWidgetRadioButtonsTestImpl.Factory());
     register(new UiWidgetRadioButtonsVerticalFieldTestImpl.Factory());
     register(new UiWidgetComboboxFieldTestImpl.Factory());

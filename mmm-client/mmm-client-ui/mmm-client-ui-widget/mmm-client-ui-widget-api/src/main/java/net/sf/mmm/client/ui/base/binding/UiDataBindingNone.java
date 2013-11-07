@@ -4,7 +4,6 @@ package net.sf.mmm.client.ui.base.binding;
 
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
@@ -266,9 +265,10 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
   @Override
   public void setValidity(Boolean valid) {
 
-    if (Boolean.FALSE.equals(valid)) {
-      throw new NlsIllegalStateException();
-    }
+    // validity is also set to FALSE if child widgets are invalid...
+    // if (Boolean.FALSE.equals(valid)) {
+    // throw new NlsIllegalStateException();
+    // }
   }
 
 }

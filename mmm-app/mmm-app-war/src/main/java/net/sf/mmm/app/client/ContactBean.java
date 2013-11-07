@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
-import java.util.Date;
-
 /**
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -20,8 +18,8 @@ public class ContactBean implements Contact {
   /** @see #getLastName() */
   private String lastName;
 
-  /** @see #getBirthday() */
-  private Date birthday;
+  // /** @see #getBirthday() */
+  // private LocalDate birthday;
 
   /** @see #getShoeSize() */
   private int shoeSize;
@@ -73,23 +71,24 @@ public class ContactBean implements Contact {
     this.lastName = lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Date getBirthday() {
-
-    return this.birthday;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setBirthday(Date birthday) {
-
-    this.birthday = birthday;
-  }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public LocalDate getBirthday() {
+  //
+  // return this.birthday;
+  // }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public void setBirthday(LocalDate birthday) {
+  //
+  // this.birthday = birthday;
+  // }
 
   /**
    * {@inheritDoc}
@@ -133,11 +132,11 @@ public class ContactBean implements Contact {
     result.append(this.lastName);
     result.append(", ");
     result.append(this.firstName);
-    if (this.birthday != null) {
-      result.append(" (*");
-      result.append(this.birthday);
-      result.append(")");
-    }
+    // if (this.birthday != null) {
+    // result.append(" (*");
+    // result.append(this.birthday);
+    // result.append(")");
+    // }
     return result.toString();
   }
 

@@ -10,11 +10,10 @@ import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.TextBox;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterComboboxField} using GWT based on a {@link TextBox} and
- * a {@link Datalist}.
+ * This is the implementation of {@link UiWidgetAdapterComboboxField} using GWT based on a {@link ComboBox}
+ * and a {@link DataList}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

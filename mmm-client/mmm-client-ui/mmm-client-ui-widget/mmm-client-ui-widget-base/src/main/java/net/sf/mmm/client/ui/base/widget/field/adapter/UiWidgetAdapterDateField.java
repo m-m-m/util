@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
+import java.time.LocalDate;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
@@ -10,7 +11,7 @@ package net.sf.mmm.client.ui.base.widget.field.adapter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterDateField extends UiWidgetAdapterDateBasedField {
+public interface UiWidgetAdapterDateField extends UiWidgetAdapterTextualInputField<LocalDate, LocalDate> {
 
   // nothing to add
 

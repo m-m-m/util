@@ -62,7 +62,7 @@ public class ContactFormNoDataBinding extends UiWidgetCustomGridPanel<ContactBea
     }
     result.setFirstName(this.widgetFirstName.getValueDirect(null, state));
     result.setLastName(this.widgetLastName.getValueDirect(null, state));
-    result.setBirthday(this.widgetBirthday.getValueDirect(null, state));
+    // result.setBirthday(this.widgetBirthday.getValueDirect(null, state));
     return result;
   }
 
@@ -78,7 +78,7 @@ public class ContactFormNoDataBinding extends UiWidgetCustomGridPanel<ContactBea
     }
     this.widgetFirstName.setValue(contact.getFirstName(), forUser);
     this.widgetLastName.setValue(contact.getLastName(), forUser);
-    this.widgetBirthday.setValue(contact.getBirthday(), forUser);
+    // this.widgetBirthday.setValue(contact.getBirthday(), forUser);
   }
 
 }

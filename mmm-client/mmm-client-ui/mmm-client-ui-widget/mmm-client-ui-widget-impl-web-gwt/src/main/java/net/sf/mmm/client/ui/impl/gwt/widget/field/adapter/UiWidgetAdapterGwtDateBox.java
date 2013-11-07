@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import java.util.Date;
 
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInputField;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -23,7 +23,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
  */
 @Deprecated
 public class UiWidgetAdapterGwtDateBox extends UiWidgetAdapterGwtField<DateBox, Date, Date> implements
-    UiWidgetAdapterDateField {
+    UiWidgetAdapterTextualInputField<Date, Date> {
 
   /**
    * The constructor.

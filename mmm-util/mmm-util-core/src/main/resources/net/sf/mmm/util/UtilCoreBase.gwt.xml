@@ -2,6 +2,7 @@
 <module>
   <inherits name="net.sf.mmm.util.gwt.SuperSource"/>
   <inherits name="org.slf4j.Slf4j"/>
+  <inherits name="java.time.Time"/>
 
   <source path="" includes="NlsBundleUtilCoreRoot.java"/>
   <source path="math" excludes="base/MathUtilImpl.java"/>

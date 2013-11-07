@@ -12,8 +12,10 @@ import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel;
 
@@ -42,7 +44,8 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     // section = getFactory().createSection("Optionals");
     getDelegate().addChildSpanned(section);
 
-    UiWidgetWithValue<String> widgetBirthday = dataBinding.createAndBind(Contact.PROPERTY_BIRTHDAY);
+    UiWidgetDateField widgetBirthday = getFactory().create(UiWidgetDateField.class);// dataBinding.createAndBind(Contact.PROPERTY_BIRTHDAY);
+    widgetBirthday.setLabel("Birthday");
     getDelegate().addChildren(widgetBirthday);
 
     UiWidgetWithValue<Integer> widgetShoeSize = dataBinding.createAndBind(Contact.PROPERTY_SHOE_SIZE);
@@ -61,6 +64,7 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     getDelegate().addChildren(radios);
 
     UiWidgetColorField colors = context.getWidgetFactory().create(UiWidgetColorField.class);
+    colors.setLabel("Color");
     List<Color> colorOptions = new ArrayList<Color>();
     colorOptions.add(Color.BLACK);
     colorOptions.add(Color.RED);
@@ -73,6 +77,10 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     colorOptions.add(Color.GREY);
     colors.setOptions(colorOptions);
     getDelegate().addChildren(colors);
+
+    UiWidgetTimeField time = context.getWidgetFactory().create(UiWidgetTimeField.class);
+    time.setLabel("Departuretime");
+    getDelegate().addChildren(time);
 
     section.addCollapseWidget(widgetBirthday);
     section.addCollapseWidget(richTextField);

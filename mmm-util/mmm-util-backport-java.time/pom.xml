@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='Cp1252'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-util-backport-java.time</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  <name>util-backport-java.time</name>
+  <description>A backport for java.time to be used in java versions older than 1.8.
+  ATTENTION: This only works with -Xbootclasspath. Also it is inofficial and invalid according to JCP/JSR. However, we need a working update-path to 1.8.</description>
+  
+</project>

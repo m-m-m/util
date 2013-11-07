@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
 
@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterTestDateField extends UiWidgetAdapterTestField<Date, Date> implements
+public class UiWidgetAdapterTestDateField extends UiWidgetAdapterTestField<LocalDate, LocalDate> implements
     UiWidgetAdapterDateField {
 
   /**
@@ -21,21 +21,6 @@ public class UiWidgetAdapterTestDateField extends UiWidgetAdapterTestField<Date,
   public UiWidgetAdapterTestDateField() {
 
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setValue(Date value) {
-
-    if (value == null) {
-      super.setValue(null);
-    } else {
-      @SuppressWarnings("deprecation")
-      Date date = new Date(value.getYear(), value.getMonth(), value.getDate());
-      super.setValue(date);
-    }
   }
 
 }

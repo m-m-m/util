@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRangeField;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.NumberBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT
- * based on {@link NumberBox}.
+ * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
+ * using GWT based on {@link NumberBox}.
  * 
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
@@ -52,7 +52,7 @@ public abstract class UiWidgetAdapterGwtNumberField<WIDGET extends NumberBox<VAL
   @Override
   public void setMaximumTextLength(int length) {
 
-    getActiveWidget().setMaxLength(length);
+    getActiveWidget().setMaximumTextLength(length);
   }
 
 }

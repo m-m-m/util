@@ -2,12 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
-import java.util.Date;
-
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Past;
 
 import net.sf.mmm.util.pojo.api.Pojo;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
@@ -28,8 +25,8 @@ public interface Contact extends TransferObject, Pojo {
   /** {@link TypedProperty} for {@link #getLastName()}. */
   TypedProperty<String> PROPERTY_LAST_NAME = new TypedProperty<String>("lastName");
 
-  /** {@link TypedProperty} for {@link #getBirthday()}. */
-  TypedProperty<String> PROPERTY_BIRTHDAY = new TypedProperty<String>("birthday");
+  // /** {@link TypedProperty} for {@link #getBirthday()}. */
+  // TypedProperty<LocalDate> PROPERTY_BIRTHDAY = new TypedProperty<LocalDate>("birthday");
 
   /** {@link TypedProperty} for {@link #getShoeSize()}. */
   TypedProperty<Integer> PROPERTY_SHOE_SIZE = new TypedProperty<Integer>("shoeSize");
@@ -59,16 +56,17 @@ public interface Contact extends TransferObject, Pojo {
    */
   void setLastName(String lastName);
 
-  /**
-   * @return the birthday
-   */
-  @Past
-  Date getBirthday();
-
-  /**
-   * @param birthday is the birthday to set
-   */
-  void setBirthday(Date birthday);
+  //
+  // /**
+  // * @return the birthday
+  // */
+  // @Past
+  // LocalDate getBirthday();
+  //
+  // /**
+  // * @param birthday is the birthday to set
+  // */
+  // void setBirthday(LocalDate birthday);
 
   /**
    * @return the shoe size.

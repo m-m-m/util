@@ -26,6 +26,12 @@
       <classifier>sources</classifier>
     </dependency>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-backport-java.time</artifactId>
+      <version>${backport-time-version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
       <version>2.5.1</version>

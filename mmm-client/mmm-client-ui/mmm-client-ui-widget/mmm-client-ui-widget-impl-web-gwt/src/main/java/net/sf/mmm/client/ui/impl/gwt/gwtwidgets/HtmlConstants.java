@@ -36,6 +36,24 @@ public abstract interface HtmlConstants {
   String INPUT_TYPE_COLOR = "color";
 
   /**
+   * The {@link com.google.gwt.dom.client.InputElement#getType() type} of the
+   * {@link com.google.gwt.dom.client.InputElement} for a date.
+   */
+  String INPUT_TYPE_DATE = "date";
+
+  /**
+   * The {@link com.google.gwt.dom.client.InputElement#getType() type} of the
+   * {@link com.google.gwt.dom.client.InputElement} for a time.
+   */
+  String INPUT_TYPE_TIME = "time";
+
+  /**
+   * The {@link com.google.gwt.dom.client.InputElement#getType() type} of the
+   * {@link com.google.gwt.dom.client.InputElement} for a date with time.
+   */
+  String INPUT_TYPE_DATETIME = "datetime";
+
+  /**
    * The {@link com.google.gwt.dom.client.Document#createElement(String) tag name} of a {@link DataList}.
    */
   String TAG_DATALIST = "datalist";

@@ -2,8 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +18,14 @@ import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.Formatter;
@@ -34,8 +38,8 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetFactoryDatatype}. It already contains the implementations
- * for the {@link #registerStandardDatatypes() standard datatypes}.
+ * This is the abstract base implementation of {@link UiWidgetFactoryDatatype}. It already contains the
+ * implementations for the {@link #registerStandardDatatypes() standard datatypes}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -99,16 +103,16 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
    */
   protected void register(UiSingleWidgetFactoryDatatype<?> subFactory) {
 
-    UiSingleWidgetFactoryDatatype<?> oldFactory = this.datatype2subFactoryMap.put(subFactory.getDatatype(),
-        subFactory);
+    UiSingleWidgetFactoryDatatype<?> oldFactory = this.datatype2subFactoryMap.put(subFactory.getDatatype(), subFactory);
     if (oldFactory != null) {
       throw new DuplicateObjectException(subFactory, subFactory.getDatatype(), oldFactory);
     }
   }
 
   /**
-   * This method {@link #register(UiSingleWidgetFactoryDatatype) registers} the {@link UiWidgetFactoryDatatype}
-   * instances for the java standard datatypes ({@link String}, {@link Long}, etc.).
+   * This method {@link #register(UiSingleWidgetFactoryDatatype) registers} the
+   * {@link UiWidgetFactoryDatatype} instances for the java standard datatypes ({@link String}, {@link Long},
+   * etc.).
    */
   protected void registerStandardDatatypes() {
 
@@ -117,7 +121,9 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     register(new UiSingleWidgetFactoryDatatypeLong());
     register(new UiSingleWidgetFactoryDatatypeDouble());
     register(new UiSingleWidgetFactoryDatatypeBoolean());
-    register(new UiSingleWidgetFactoryDatatypeDate());
+    register(new UiSingleWidgetFactoryDatatypeLocalDate());
+    register(new UiSingleWidgetFactoryDatatypeLocalTime());
+    register(new UiSingleWidgetFactoryDatatypeInstant());
   }
 
   /**
@@ -170,7 +176,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link String}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link String}.
    */
   public static class UiSingleWidgetFactoryDatatypeString extends AbstractUiSingleWidgetFactoryDatatype<String> {
 
@@ -193,7 +200,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Long}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeLong extends AbstractUiSingleWidgetFactoryDatatype<Long> {
 
@@ -216,7 +224,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Integer}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link Integer}.
    */
   public static class UiSingleWidgetFactoryDatatypeInteger extends AbstractUiSingleWidgetFactoryDatatype<Integer> {
 
@@ -239,7 +248,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Double}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link Double}.
    */
   public static class UiSingleWidgetFactoryDatatypeDouble extends AbstractUiSingleWidgetFactoryDatatype<Double> {
 
@@ -262,7 +272,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Long}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link Long}.
    */
   public static class UiSingleWidgetFactoryDatatypeBoolean extends AbstractUiSingleWidgetFactoryDatatype<Boolean> {
 
@@ -280,7 +291,8 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     @Override
     public UiWidgetField<Boolean> create(UiContext context) {
 
-      UiWidgetRadioButtonsField<Boolean> radioButtons = context.getWidgetFactory().create(UiWidgetRadioButtonsField.class);
+      UiWidgetRadioButtonsField<Boolean> radioButtons = context.getWidgetFactory().create(
+          UiWidgetRadioButtonsField.class);
       radioButtons.setFormatter(BooleanFormatter.getInstance());
       radioButtons.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
       return radioButtons;
@@ -288,23 +300,24 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype {@link Long}.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link LocalDate}.
    */
-  public static class UiSingleWidgetFactoryDatatypeDate extends AbstractUiSingleWidgetFactoryDatatype<Date> {
+  public static class UiSingleWidgetFactoryDatatypeLocalDate extends AbstractUiSingleWidgetFactoryDatatype<LocalDate> {
 
     /**
      * The constructor.
      */
-    public UiSingleWidgetFactoryDatatypeDate() {
+    public UiSingleWidgetFactoryDatatypeLocalDate() {
 
-      super(Date.class);
+      super(LocalDate.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetField<Date> create(UiContext context) {
+    public UiWidgetField<LocalDate> create(UiContext context) {
 
       UiWidgetDateField widget = context.getWidgetFactory().create(UiWidgetDateField.class);
       return widget;
@@ -312,7 +325,58 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   }
 
   /**
-   * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype context} for {@link Enum} datatypes.
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link LocalDate}.
+   */
+  public static class UiSingleWidgetFactoryDatatypeLocalTime extends AbstractUiSingleWidgetFactoryDatatype<LocalTime> {
+
+    /**
+     * The constructor.
+     */
+    public UiSingleWidgetFactoryDatatypeLocalTime() {
+
+      super(LocalTime.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiWidgetField<LocalTime> create(UiContext context) {
+
+      UiWidgetTimeField widget = context.getWidgetFactory().create(UiWidgetTimeField.class);
+      return widget;
+    }
+  }
+
+  /**
+   * This inner class is the {@link AbstractUiSingleWidgetFactoryDatatype context} for the datatype
+   * {@link LocalDate}.
+   */
+  public static class UiSingleWidgetFactoryDatatypeInstant extends AbstractUiSingleWidgetFactoryDatatype<Instant> {
+
+    /**
+     * The constructor.
+     */
+    public UiSingleWidgetFactoryDatatypeInstant() {
+
+      super(Instant.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiWidgetField<Instant> create(UiContext context) {
+
+      UiWidgetDateTimeField widget = context.getWidgetFactory().create(UiWidgetDateTimeField.class);
+      return widget;
+    }
+  }
+
+  /**
+   * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype context} for {@link Enum}
+   * datatypes.
    * 
    * @param <E> is the generic type of the {@link Enum}.
    */

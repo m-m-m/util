@@ -2,8 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test.widget.field;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.SizeUnit;
@@ -13,6 +14,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCodeAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerSliderField;
@@ -25,6 +27,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.client.ui.impl.test.AbstractUiTest;
@@ -43,12 +46,6 @@ import org.junit.Test;
  * @since 1.0.0
  */
 public class UiWidgetFieldTest extends AbstractUiTest {
-
-  /** The date 2000-01-01 in milliseconds. */
-  private static final long DATE_2000_01_01 = 946681200000L;
-
-  /** The time 23:59:59 in milliseconds. */
-  private static final long TIME_23_59_59 = ((23 * 60) + 59) * 60 + 59 * 1000L;
 
   /**
    * The constructor.
@@ -323,21 +320,19 @@ public class UiWidgetFieldTest extends AbstractUiTest {
   @Test
   public void testDateField() {
 
-    Date now = new Date();
-    @SuppressWarnings("deprecation")
-    Date today = new Date(now.getYear(), now.getMonth(), now.getDate());
-    Date old = new Date(DATE_2000_01_01);
-    checkWidget(UiWidgetDateField.class, today, old);
+    LocalDate now = LocalDate.now();
+    LocalDate old = LocalDate.of(2000, 12, 31);
+    checkWidget(UiWidgetDateField.class, now, old);
   }
 
-  // /**
-  // * Test of {@link UiWidgetDateTimeField}.
-  // */
-  // @Test
-  // public void testDateTimeField() {
-  //
-  // checkWidget(UiWidgetTimeField.class, LocalTime.now(), LocalTime.MAX);
-  // }
+  /**
+   * Test of {@link UiWidgetDateTimeField}.
+   */
+  @Test
+  public void testDateTimeField() {
+
+    checkWidget(UiWidgetTimeField.class, LocalTime.now(), LocalTime.of(23, 59, 59));
+  }
 
   /**
    * Test of {@link UiWidgetTextAreaField}.

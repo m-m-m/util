@@ -19,11 +19,21 @@
         <jdk>1.7</jdk>
       </activation>
       <dependencies>
-        <!-- backport for java less than 1.8 -->
+        <!-- backport for java.util.function (in java < 1.8) -->
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>mmm-util-backport-java.util.function</artifactId>
-          <version>${backport-version}</version>
+          <version>${backport-function-version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>mmm-util-backport-java.time</artifactId>
+          <version>${backport-time-version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>mmm-util-backport-java.time-tzdb</artifactId>
+          <version>1.0.0</version>
         </dependency>
       </dependencies>
     </profile>
@@ -122,7 +132,14 @@
       <version>3.1.7</version>
       <optional>true</optional>
     </dependency>
-
+    <!--
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.8</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+     -->
   </dependencies>
 
   <reporting>

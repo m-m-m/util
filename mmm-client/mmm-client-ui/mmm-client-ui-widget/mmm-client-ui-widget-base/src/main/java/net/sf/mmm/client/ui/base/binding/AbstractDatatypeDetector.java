@@ -4,6 +4,10 @@ package net.sf.mmm.client.ui.base.binding;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +65,12 @@ public abstract class AbstractDatatypeDetector implements DatatypeDetector {
     registerDatatype(BigInteger.class);
     registerDatatype(BigDecimal.class);
     registerDatatype(Number.class);
+    registerDatatype(LocalTime.class);
+    registerDatatype(LocalDate.class);
+    registerDatatype(LocalDateTime.class);
+    registerDatatype(Instant.class);
     registerDatatype(Date.class);
+    // Calendar is not GWT compatible and as obsolete as java.util.Date
     // registerDatatype(Calendar.class);
     registerDatatype(Datatype.class);
     registerDatatype(Color.class);

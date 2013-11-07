@@ -5,23 +5,21 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteMaximumValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteMinimumValue;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.text.shared.Parser;
 import com.google.gwt.text.shared.Renderer;
-import com.google.gwt.user.client.ui.ValueBoxBase;
 
 /**
- * This is the abstract base class for a {@link com.google.gwt.user.client.ui.ValueBoxBase} that represents a number or
- * range input.
+ * This is the abstract base class for a {@link com.google.gwt.user.client.ui.ValueBoxBase} that represents a
+ * number or range input.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class NumberBox<VALUE extends Number> extends ValueBoxBase<VALUE> implements
+public abstract class NumberBox<VALUE extends Number> extends InputBox<VALUE> implements
     AttributeWriteMinimumValue<VALUE>, AttributeWriteMaximumValue<VALUE> {
 
   /** @see #getMinimumValue() */
@@ -33,11 +31,11 @@ public abstract class NumberBox<VALUE extends Number> extends ValueBoxBase<VALUE
   /**
    * The constructor.
    * 
-   * @param element is the input {@link Element} to wrap.
+   * @param element is the {@link InputElement} to wrap.
    * @param renderer is the {@link Renderer} used to format the value.
    * @param parser is the {@link Parser} used to parse the input as value.
    */
-  public NumberBox(Element element, Renderer<VALUE> renderer, Parser<VALUE> parser) {
+  public NumberBox(InputElement element, Renderer<VALUE> renderer, Parser<VALUE> parser) {
 
     super(element, renderer, parser);
     setDirectionEstimator(false);
@@ -82,24 +80,6 @@ public abstract class NumberBox<VALUE extends Number> extends ValueBoxBase<VALUE
 
     this.max = maximum;
     getElement().setAttribute("max", maximum.toString());
-  }
-
-  /**
-   * @return the {@link #getElement() element} as {@link InputElement}.
-   */
-  protected InputElement getInputElement() {
-
-    return getElement().cast();
-  }
-
-  /**
-   * Sets the maximum allowable length.
-   * 
-   * @param length the maximum length, in characters
-   */
-  public void setMaxLength(int length) {
-
-    getInputElement().setMaxLength(length);
   }
 
 }
