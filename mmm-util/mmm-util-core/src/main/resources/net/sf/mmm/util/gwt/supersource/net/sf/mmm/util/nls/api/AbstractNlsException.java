@@ -12,9 +12,9 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * A GWT compatible copy of {@link net.sf.mmm.util.nls.api.AbstractNlsException}.
- * 
+ *
  * @see NlsThrowable
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -38,12 +38,9 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   /** @see #getUuid() */
   private final UUID uuid;
 
-  /** @see #getSuppressedExceptions() */
-  private List<Throwable> suppressedList;
-
   /**
    * The constructor.
-   * 
+   *
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public AbstractNlsException(NlsMessage message) {
@@ -55,7 +52,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
@@ -72,7 +69,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
   /**
    * This method creates a new {@link UUID}.
-   * 
+   *
    * @return the new {@link UUID} or <code>null</code> to turn this feature off.
    */
   protected UUID createUuid() {
@@ -114,7 +111,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
   /**
    * @see NlsThrowable#printStackTrace(Locale, NlsTemplateResolver, Appendable)
-   * 
+   *
    * @param throwable is the throwable to print.
    * @param locale is the locale to translate to.
    * @param resolver translates the original message.
@@ -139,11 +136,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
           buffer.append(trace[i].toString());
           buffer.append(LINE_SEPARATOR);
         }
-        for (Throwable suppressed : throwable.getSuppressedExceptions()) {
-          buffer.append("Suppressed: ");
-          buffer.append(LINE_SEPARATOR);
-          printStackTraceNested(suppressed, locale, resolver, buffer);
-        }
 
         Throwable nested = throwable.getCause();
         if (nested != null) {
@@ -159,7 +151,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
 
   /**
    * @see NlsThrowable#printStackTrace(Locale, NlsTemplateResolver, Appendable)
-   * 
+   *
    * @param nested is the throwable to print.
    * @param locale is the locale to translate to.
    * @param resolver translates the original message.
@@ -226,37 +218,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void addSuppressedException(Throwable suppressed) {
-
-    // only available since Java 1.7
-    // super.addSuppressed(suppressed);
-    if ((suppressed == null) || (suppressed == this)) {
-      // prevent non-sense...
-      return;
-    }
-    if (this.suppressedList == null) {
-      this.suppressedList = new ArrayList<Throwable>();
-    }
-    this.suppressedList.add(suppressed);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Throwable[] getSuppressedExceptions() {
-
-    // only available since Java 1.7
-    // return super.getSuppressed();
-    if (this.suppressedList == null) {
-      return EMPTY_THROWABLE_ARRAY;
-    } else {
-      return this.suppressedList.toArray(new Throwable[this.suppressedList.size()]);
-    }
   }
 
   /**

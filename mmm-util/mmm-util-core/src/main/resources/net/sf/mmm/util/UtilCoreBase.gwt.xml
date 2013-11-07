@@ -8,7 +8,7 @@
   <source path="math" excludes="base/MathUtilImpl.java"/>
   <source path="gwt" excludes="base/rebind/*"/>
   <source path="concurrent/api"/>
-  <source path="collection" excludes="**/*Concurrent*,**/*Deque*,**/*BlockingQueue*,base/*Hierarchy*,base/AbstractGenericTreeNode.java,base/AdvancedClassHierarchyMap.java,impl/CollectionFactoryManagerImpl.java"/>
+  <source path="collection" excludes="**/*Concurrent*,**/*Deque*,**/*BlockingQueue*,base/*Hierarchy*,base/SortedProperties.java,base/AdvancedClassHierarchyMap.java,impl/CollectionFactoryManagerImpl.java"/>
   <!-- includes="AbstractIterator.java,SingleElementIterator.java,NodeCycle.java,NodeCycleException.java"/> -->
   <source path="date" includes="**/*Limited*,**/*Exception.java"/>
   <source path="reflect" includes="**/*Limited*"/>
