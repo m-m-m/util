@@ -47,10 +47,10 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
@@ -154,7 +154,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Constant for the maximum supported instant. This could be used by an application as a "far future"
    * instant.
    */
-  public static final Instant MAX_INSTANT = Instant.ofEpochSecond(Long.MAX_VALUE, 999_999_999);
+  public static final Instant MAX_INSTANT = Instant.ofEpochSecond(Long.MAX_VALUE, 999999999);
 
   /**
    * Serialization version.
@@ -164,7 +164,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
   /**
    * Constant for nanos per second.
    */
-  private static final int NANOS_PER_SECOND = 1000_000_000;
+  private static final int NANOS_PER_SECOND = 1000000000;
 
   /**
    * The number of seconds from the epoch of 1970-01-01T00:00:00Z.
@@ -234,8 +234,8 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * 
    * <pre>
      *  Instant.ofSeconds(3, 1);
-     *  Instant.ofSeconds(4, -999_999_999);
-     *  Instant.ofSeconds(2, 1000_000_001);
+     *  Instant.ofSeconds(4, -999999999);
+     *  Instant.ofSeconds(2, 1000000001);
      * </pre>
    * 
    * @param epochSecond the number of seconds from 1970-01-01T00:00:00Z
@@ -262,7 +262,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
 
     long secs = Jdk8Methods.floorDiv(epochMilli, 1000);
     int mos = Jdk8Methods.floorMod(epochMilli, 1000);
-    return create(secs, mos * 1000_000);
+    return create(secs, mos * 1000000);
   }
 
   // -----------------------------------------------------------------------
@@ -349,7 +349,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
         case MICRO_OF_SECOND:
           return this.nanos / 1000;
         case MILLI_OF_SECOND:
-          return this.nanos / 1000_000;
+          return this.nanos / 1000000;
         case INSTANT_SECONDS:
           return this.seconds;
       }
@@ -400,7 +400,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
       f.checkValidValue(newValue);
       switch (f) {
         case MILLI_OF_SECOND: {
-          int nval = (int) newValue * 1000_000;
+          int nval = (int) newValue * 1000000;
           return (nval != this.nanos ? create(this.seconds, nval) : this);
         }
         case MICRO_OF_SECOND: {
@@ -432,7 +432,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
         case NANOS:
           return plusNanos(amountToAdd);
         case MICROS:
-          return plus(amountToAdd / 1000_000, (amountToAdd % 1000_000) * 1000);
+          return plus(amountToAdd / 1000000, (amountToAdd % 1000000) * 1000);
         case MILLIS:
           return plusMillis(amountToAdd);
         case SECONDS:
@@ -477,7 +477,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    */
   public Instant plusMillis(long millisToAdd) {
 
-    return plus(millisToAdd / 1000, (millisToAdd % 1000) * 1000_000);
+    return plus(millisToAdd / 1000, (millisToAdd % 1000) * 1000000);
   }
 
   /**
@@ -658,7 +658,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
   public long toEpochMilli() {
 
     long millis = Jdk8Methods.safeMultiply(this.seconds, 1000);
-    return millis + this.nanos / 1000_000;
+    return millis + this.nanos / 1000000;
   }
 
   // -----------------------------------------------------------------------

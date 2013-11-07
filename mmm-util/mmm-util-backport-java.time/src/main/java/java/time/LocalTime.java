@@ -47,12 +47,12 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeBuilder;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -106,7 +106,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     MIDNIGHT = HOURS[0];
     NOON = HOURS[12];
     MIN_TIME = HOURS[0];
-    MAX_TIME = new LocalTime(23, 59, 59, 999_999_999);
+    MAX_TIME = new LocalTime(23, 59, 59, 999999999);
   }
 
   /**
@@ -147,12 +147,12 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
   /**
    * Microseconds per day.
    */
-  static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000_000L;
+  static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000000L;
 
   /**
    * Nanos per second.
    */
-  static final long NANOS_PER_SECOND = 1000_000_000L;
+  static final long NANOS_PER_SECOND = 1000000000L;
 
   /**
    * Nanos per minute.
@@ -540,9 +540,9 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
       case MICRO_OF_DAY:
         throw new DateTimeException("Field too large for an int: " + field);
       case MILLI_OF_SECOND:
-        return this.nano / 1000_000;
+        return this.nano / 1000000;
       case MILLI_OF_DAY:
-        return (int) (toNanoOfDay() / 1000_000);
+        return (int) (toNanoOfDay() / 1000000);
       case SECOND_OF_MINUTE:
         return this.second;
       case SECOND_OF_DAY:
@@ -663,9 +663,9 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
         case MICRO_OF_DAY:
           return plusNanos((newValue - toNanoOfDay() / 1000) * 1000);
         case MILLI_OF_SECOND:
-          return withNano((int) newValue * 1000_000);
+          return withNano((int) newValue * 1000000);
         case MILLI_OF_DAY:
-          return plusNanos((newValue - toNanoOfDay() / 1000_000) * 1000_000);
+          return plusNanos((newValue - toNanoOfDay() / 1000000) * 1000000);
         case SECOND_OF_MINUTE:
           return withSecond((int) newValue);
         case SECOND_OF_DAY:
@@ -846,7 +846,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
         case MICROS:
           return plusNanos((amountToAdd % MICROS_PER_DAY) * 1000);
         case MILLIS:
-          return plusNanos((amountToAdd % MILLIS_PER_DAY) * 1000_000);
+          return plusNanos((amountToAdd % MILLIS_PER_DAY) * 1000000);
         case SECONDS:
           return plusSeconds(amountToAdd);
         case MINUTES:
@@ -1113,7 +1113,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
         case MICROS:
           return nanosUntil / 1000;
         case MILLIS:
-          return nanosUntil / 1000_000;
+          return nanosUntil / 1000000;
         case SECONDS:
           return nanosUntil / NANOS_PER_SECOND;
         case MINUTES:
@@ -1291,12 +1291,12 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
       buf.append(secondValue < 10 ? ":0" : ":").append(secondValue);
       if (nanoValue > 0) {
         buf.append('.');
-        if (nanoValue % 1000_000 == 0) {
-          buf.append(Integer.toString((nanoValue / 1000_000) + 1000).substring(1));
+        if (nanoValue % 1000000 == 0) {
+          buf.append(Integer.toString((nanoValue / 1000000) + 1000).substring(1));
         } else if (nanoValue % 1000 == 0) {
-          buf.append(Integer.toString((nanoValue / 1000) + 1000_000).substring(1));
+          buf.append(Integer.toString((nanoValue / 1000) + 1000000).substring(1));
         } else {
-          buf.append(Integer.toString((nanoValue) + 1000_000_000).substring(1));
+          buf.append(Integer.toString((nanoValue) + 1000000000).substring(1));
         }
       }
     }

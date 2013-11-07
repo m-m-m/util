@@ -46,11 +46,11 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
@@ -870,7 +870,7 @@ public final class OffsetTime extends DefaultInterfaceDateTimeAccessor implement
         case MICROS:
           return nanosUntil / 1000;
         case MILLIS:
-          return nanosUntil / 1000_000;
+          return nanosUntil / 1000000;
         case SECONDS:
           return nanosUntil / NANOS_PER_SECOND;
         case MINUTES:

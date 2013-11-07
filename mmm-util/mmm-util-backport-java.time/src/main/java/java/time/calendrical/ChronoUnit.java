@@ -63,7 +63,7 @@ public enum ChronoUnit implements PeriodUnit {
    * Unit that represents the concept of a millisecond. For the ISO calendar system, it is equal to the 1000th
    * part of the second unit.
    */
-  MILLIS("Millis", Duration.ofNanos(1000_000)),
+  MILLIS("Millis", Duration.ofNanos(1000000)),
   /**
    * Unit that represents the concept of a second. For the ISO calendar system, it is equal to the second in
    * the SI system of units, except around a leap-second.
@@ -156,13 +156,13 @@ public enum ChronoUnit implements PeriodUnit {
    * <p>
    * When used with other calendar systems there are no restrictions on the unit.
    */
-  ERAS("Eras", Duration.ofSeconds(31556952L * 1000_000_000L)),
+  ERAS("Eras", Duration.ofSeconds(31556952L * 1000000000L)),
   /**
    * Artificial unit that represents the concept of forever. This is primarily used with {@link DateTimeField}
    * to represent unbounded fields such as the year or era. The estimated duration of the era is artificially
    * defined as the largest duration supported by {@code Duration}.
    */
-  FOREVER("Forever", Duration.ofSeconds(Long.MAX_VALUE, 999_999_999));
+  FOREVER("Forever", Duration.ofSeconds(Long.MAX_VALUE, 999999999));
 
   private final String name;
 

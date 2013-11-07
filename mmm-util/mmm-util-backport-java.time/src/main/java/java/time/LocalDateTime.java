@@ -48,12 +48,12 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeAdjusters;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.chrono.ISOChrono;
 import java.time.format.DateTimeFormatter;
@@ -907,7 +907,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
         case MICROS:
           return plusDays(amountToAdd / MICROS_PER_DAY).plusNanos((amountToAdd % MICROS_PER_DAY) * 1000);
         case MILLIS:
-          return plusDays(amountToAdd / MILLIS_PER_DAY).plusNanos((amountToAdd % MILLIS_PER_DAY) * 1000_000);
+          return plusDays(amountToAdd / MILLIS_PER_DAY).plusNanos((amountToAdd % MILLIS_PER_DAY) * 1000000);
         case SECONDS:
           return plusSeconds(amountToAdd);
         case MINUTES:

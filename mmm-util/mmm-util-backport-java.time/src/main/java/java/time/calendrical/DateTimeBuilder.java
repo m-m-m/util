@@ -95,8 +95,8 @@ import java.util.Set;
  * </ul>
  * <p>
  * 
- * <h4>Implementation notes</h4>
- * This class is mutable and not thread-safe. It should only be used from a single thread.
+ * <h4>Implementation notes</h4> This class is mutable and not thread-safe. It should only be used from a
+ * single thread.
  */
 public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor implements DateTimeAccessor, Cloneable {
 
@@ -526,13 +526,13 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
     // }
     if (this.standardFields.containsKey(NANO_OF_DAY)) {
       long nod = this.standardFields.remove(NANO_OF_DAY);
-      addFieldValue(SECOND_OF_DAY, nod / 1000_000_000L);
-      addFieldValue(NANO_OF_SECOND, nod % 1000_000_000L);
+      addFieldValue(SECOND_OF_DAY, nod / 1000000000L);
+      addFieldValue(NANO_OF_SECOND, nod % 1000000000L);
     }
     if (this.standardFields.containsKey(MICRO_OF_DAY)) {
       long cod = this.standardFields.remove(MICRO_OF_DAY);
-      addFieldValue(SECOND_OF_DAY, cod / 1000_000L);
-      addFieldValue(MICRO_OF_SECOND, cod % 1000_000L);
+      addFieldValue(SECOND_OF_DAY, cod / 1000000L);
+      addFieldValue(MICRO_OF_SECOND, cod % 1000000L);
     }
     if (this.standardFields.containsKey(MILLI_OF_DAY)) {
       long lod = this.standardFields.remove(MILLI_OF_DAY);
@@ -551,11 +551,11 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
       addFieldValue(MINUTE_OF_HOUR, mod % 60);
     }
 
-    // long sod = nod / 1000_000_000L;
+    // long sod = nod / 1000000000L;
     // addFieldValue(HOUR_OF_DAY, sod / 3600);
     // addFieldValue(MINUTE_OF_HOUR, (sod / 60) % 60);
     // addFieldValue(SECOND_OF_MINUTE, sod % 60);
-    // addFieldValue(NANO_OF_SECOND, nod % 1000_000_000L);
+    // addFieldValue(NANO_OF_SECOND, nod % 1000000000L);
     if (this.standardFields.containsKey(MILLI_OF_SECOND) && this.standardFields.containsKey(MICRO_OF_SECOND)) {
       long los = this.standardFields.remove(MILLI_OF_SECOND);
       long cos = this.standardFields.get(MICRO_OF_SECOND);

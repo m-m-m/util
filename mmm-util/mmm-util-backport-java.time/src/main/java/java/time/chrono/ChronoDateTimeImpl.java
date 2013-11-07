@@ -43,10 +43,10 @@ import java.time.ZoneId;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.jdk8.DefaultInterfaceChronoLocalDateTime;
 import java.time.jdk8.Jdk8Methods;
 import java.util.Objects;
@@ -112,12 +112,12 @@ final class ChronoDateTimeImpl<C extends Chrono<C>> extends DefaultInterfaceChro
   /**
    * Microseconds per day.
    */
-  private static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000_000L;
+  private static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000000L;
 
   /**
    * Nanos per second.
    */
-  private static final long NANOS_PER_SECOND = 1000_000_000L;
+  private static final long NANOS_PER_SECOND = 1000000000L;
 
   /**
    * Nanos per minute.

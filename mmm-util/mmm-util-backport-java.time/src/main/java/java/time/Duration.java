@@ -46,10 +46,10 @@ import java.math.RoundingMode;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
-import java.time.calendrical.DateTimeAccessor;
-import java.time.calendrical.PeriodUnit;
 import java.time.calendrical.DateTime.MinusAdjuster;
 import java.time.calendrical.DateTime.PlusAdjuster;
+import java.time.calendrical.DateTimeAccessor;
+import java.time.calendrical.PeriodUnit;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.Jdk8Methods;
 import java.util.Objects;
@@ -90,7 +90,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
   /**
    * Constant for nanos per second.
    */
-  private static final int NANOS_PER_SECOND = 1000_000_000;
+  private static final int NANOS_PER_SECOND = 1000000000;
 
   /**
    * Constant for nanos per second.
@@ -131,8 +131,8 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * 
    * <pre>
      *  Duration.ofSeconds(3, 1);
-     *  Duration.ofSeconds(4, -999_999_999);
-     *  Duration.ofSeconds(2, 1000_000_001);
+     *  Duration.ofSeconds(4, -999999999);
+     *  Duration.ofSeconds(2, 1000000001);
      * </pre>
    * 
    * @param seconds the number of seconds, positive or negative
@@ -165,7 +165,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
       mos += 1000;
       secs--;
     }
-    return create(secs, mos * 1000_000);
+    return create(secs, mos * 1000000);
   }
 
   // -----------------------------------------------------------------------
@@ -515,8 +515,8 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
         case NANOS:
           return plusNanos(amountToAdd);
         case MICROS:
-          return plusSeconds((amountToAdd / (1000_000L * 1000)) * 1000).plusNanos(
-              (amountToAdd % (1000_000L * 1000)) * 1000);
+          return plusSeconds((amountToAdd / (1000000L * 1000)) * 1000).plusNanos(
+              (amountToAdd % (1000000L * 1000)) * 1000);
         case MILLIS:
           return plusMillis(amountToAdd);
         case SECONDS:
@@ -554,7 +554,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    */
   public Duration plusMillis(long millisToAdd) {
 
-    return plus(millisToAdd / 1000, (millisToAdd % 1000) * 1000_000);
+    return plus(millisToAdd / 1000, (millisToAdd % 1000) * 1000000);
   }
 
   /**
@@ -851,7 +851,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
   public long toMillis() {
 
     long millis = Jdk8Methods.safeMultiply(this.seconds, 1000);
-    millis = Jdk8Methods.safeAdd(millis, this.nanos / 1000_000);
+    millis = Jdk8Methods.safeAdd(millis, this.nanos / 1000000);
     return millis;
   }
 
@@ -865,7 +865,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    */
   public long toNanos() {
 
-    long millis = Jdk8Methods.safeMultiply(this.seconds, 1000_000_000);
+    long millis = Jdk8Methods.safeMultiply(this.seconds, 1000000000);
     millis = Jdk8Methods.safeAdd(millis, this.nanos);
     return millis;
   }

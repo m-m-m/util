@@ -49,11 +49,11 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.MinusAdjuster;
+import java.time.calendrical.DateTime.PlusAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.MinusAdjuster;
-import java.time.calendrical.DateTime.PlusAdjuster;
 import java.time.chrono.Chrono;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.Jdk8Methods;
@@ -156,7 +156,7 @@ public final class Period implements PlusAdjuster, MinusAdjuster, Serializable {
       return ZERO;
     }
     long totSecs = Jdk8Methods.safeAdd(hours * 3600L, minutes * 60L) + seconds;
-    long totNanos = Jdk8Methods.safeAdd(Jdk8Methods.safeMultiply(totSecs, 1_000_000_000L), nanos);
+    long totNanos = Jdk8Methods.safeAdd(Jdk8Methods.safeMultiply(totSecs, 1000000000L), nanos);
     return create(years, months, days, totNanos);
   }
 
@@ -687,7 +687,7 @@ public final class Period implements PlusAdjuster, MinusAdjuster, Serializable {
           case MICROS:
             return plusNanos(Jdk8Methods.safeMultiply(amount, 1000L));
           case MILLIS:
-            return plusNanos(Jdk8Methods.safeMultiply(amount, 1000_000L));
+            return plusNanos(Jdk8Methods.safeMultiply(amount, 1000000L));
           case SECONDS:
             return plusSeconds(amount);
           case MINUTES:
@@ -1160,7 +1160,7 @@ public final class Period implements PlusAdjuster, MinusAdjuster, Serializable {
           buf.append(secondPart);
           if (nanoPart != 0) {
             int dotPos = buf.length();
-            nanoPart += 1000_000_000;
+            nanoPart += 1000000000;
             while (nanoPart % 10 == 0) {
               nanoPart /= 10;
             }
