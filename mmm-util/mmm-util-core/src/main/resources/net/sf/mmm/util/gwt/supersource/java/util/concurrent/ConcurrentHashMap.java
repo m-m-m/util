@@ -38,17 +38,17 @@ public class ConcurrentHashMap<K, V> extends HashMap<K, V> implements Concurrent
   }
 
   public V putIfAbsent(K key, V value) {
-    if (!map.containsKey(key)) {
-      return map.put(key, value);
+    if (!containsKey(key)) {
+      return put(key, value);
     } else {
-      return map.get(key);
+      return get(key);
     }
   }
 
   public boolean remove(Object key, Object value) {
 
-    if (map.containsKey(key) && map.get(key).equals(value)) {
-      map.remove(key);
+    if (containsKey(key) && get(key).equals(value)) {
+      remove(key);
       return true;
     }
     return false;
@@ -56,8 +56,8 @@ public class ConcurrentHashMap<K, V> extends HashMap<K, V> implements Concurrent
 
   public boolean replace(K key, V oldValue, V newValue) {
 
-    if (map.containsKey(key) && map.get(key).equals(oldValue)) {
-      map.put(key, newValue);
+    if (containsKey(key) && get(key).equals(oldValue)) {
+      put(key, newValue);
       return true;
     }
     return false;
@@ -65,7 +65,7 @@ public class ConcurrentHashMap<K, V> extends HashMap<K, V> implements Concurrent
 
   public V replace(K key, V value) {
     if (containsKey(key)) {
-      return map.put(key, value);
+      return put(key, value);
     }
     return null;
   }
