@@ -33,7 +33,7 @@ public class ConcurrentHashMap<K, V> extends HashMap<K, V> implements Concurrent
   }
 
   public ConcurrentHashMap(Map<? extends K, ? extends V> m) {
-      this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1));
+      this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1), DEFAULT_INITIAL_CAPACITY);
       putAll(m);
   }
 

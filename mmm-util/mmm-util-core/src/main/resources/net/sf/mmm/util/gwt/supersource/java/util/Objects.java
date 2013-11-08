@@ -75,12 +75,14 @@ public final class Objects {
     * @see Objects#equals(Object, Object)
     */
     public static boolean deepEquals(Object a, Object b) {
-        if (a == b)
-            return true;
-        else if (a == null || b == null)
-            return false;
-        else
-            return Arrays.deepEquals0(a, b);
+
+      return net.sf.mmm.util.lang.base.BasicUtilImpl.getInstance().isDeepEqual(a, b);
+//        if (a == b)
+//            return true;
+//        else if (a == null || b == null)
+//            return false;
+//        else
+//            return Arrays.deepEquals0(a, b);
     }
 
     /**
