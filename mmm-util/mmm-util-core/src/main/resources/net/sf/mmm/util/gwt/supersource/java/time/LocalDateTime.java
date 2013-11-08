@@ -41,9 +41,6 @@ import static java.time.LocalTime.NANOS_PER_MINUTE;
 import static java.time.LocalTime.NANOS_PER_SECOND;
 import static java.time.LocalTime.SECONDS_PER_DAY;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
@@ -73,7 +70,7 @@ import java.time.zone.ZoneRules;
  * This class stores all date and time fields, to a precision of nanoseconds. It does not store or represent a
  * time-zone. For example, the value "2nd October 2007 at 13:45.30.123456789" can be stored in an
  * {@code LocalDateTime}.
- * 
+ *
  * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISOChrono> implements
@@ -117,7 +114,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * Using this method will prevent the ability to use an alternate clock for testing because the clock is
    * hard-coded.
-   * 
+   *
    * @return the current date-time using the system clock and default time-zone, not null
    */
   public static LocalDateTime now() {
@@ -133,7 +130,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * Using this method will prevent the ability to use an alternate clock for testing because the clock is
    * hard-coded.
-   * 
+   *
    * @return the current date-time using the system clock, not null
    */
   public static LocalDateTime now(ZoneId zone) {
@@ -147,7 +144,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * This will query the specified clock to obtain the current date-time. Using this method allows the use of
    * an alternate clock for testing. The alternate clock may be introduced using {@link Clock dependency
    * injection}.
-   * 
+   *
    * @param clock the clock to use, not null
    * @return the current date-time, not null
    */
@@ -169,7 +166,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown. The second and
    * nanosecond fields will be set to zero.
-   * 
+   *
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, not null
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -192,7 +189,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown. The nanosecond field
    * will be set to zero.
-   * 
+   *
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, not null
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -214,7 +211,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Obtains an instance of {@code LocalDateTime} from year, month, day, hour, minute, second and nanosecond.
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown.
-   * 
+   *
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, not null
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -241,7 +238,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown. The second and
    * nanosecond fields will be set to zero.
-   * 
+   *
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, from 1 (January) to 12 (December)
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -264,7 +261,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown. The nanosecond field
    * will be set to zero.
-   * 
+   *
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, from 1 (January) to 12 (December)
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -286,7 +283,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Obtains an instance of {@code LocalDateTime} from year, month, day, hour, minute, second and nanosecond.
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown.
-   * 
+   *
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, from 1 (January) to 12 (December)
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -307,7 +304,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
 
   /**
    * Obtains an instance of {@code LocalDateTime} from a date and time.
-   * 
+   *
    * @param date the local date, not null
    * @param time the local time, not null
    * @return the local date-time, not null
@@ -332,7 +329,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * This creates a local date-time based on the specified instant. First, the offset from UTC/Greenwich is
    * obtained using the zone ID and instant, which is simple as there is only one valid offset for each
    * instant. Then, the instant and offset are used to calculate the local date-time.
-   * 
+   *
    * @param instant the instant to create the date-time from, not null
    * @param zone the time-zone, which may be an offset, not null
    * @return the local date-time, not null
@@ -358,7 +355,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * This allows the {@link ChronoField#INSTANT_SECONDS epoch-second} field to be converted to a local
    * date-time. This is primarily intended for low-level conversions rather than general application usage.
-   * 
+   *
    * @param epochSecond the number of seconds from the epoch of 1970-01-01T00:00:00Z
    * @param nanoOfSecond the nanosecond within the second, from 0 to 999,999,999
    * @param offset the zone offset, not null
@@ -387,7 +384,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * arbitrary date-time object to an instance of {@code LocalDateTime}.
    * <p>
    * The conversion extracts and combines the {@code LocalDate} and {@code LocalTime}.
-   * 
+   *
    * @param dateTime the date-time object to convert, not null
    * @return the local date-time, not null
    * @throws DateTimeException if unable to convert to a {@code LocalDateTime}
@@ -410,7 +407,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The string must represent a valid date-time and is parsed using
    * {@link java.time.format.DateTimeFormatters#isoLocalDateTime()}.
-   * 
+   *
    * @param text the text to parse such as "2007-12-03T10:15:30", not null
    * @return the parsed local date-time, not null
    * @throws DateTimeParseException if the text cannot be parsed
@@ -424,7 +421,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Obtains an instance of {@code LocalDateTime} from a text string using a specific formatter.
    * <p>
    * The text is parsed using the formatter, returning a date-time.
-   * 
+   *
    * @param text the text to parse, not null
    * @param formatter the formatter to use, not null
    * @return the parsed local date-time, not null
@@ -442,7 +439,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
   // -----------------------------------------------------------------------
   /**
    * Constructor.
-   * 
+   *
    * @param date the date part of the date-time, validated not null
    * @param time the time part of the date-time, validated not null
    */
@@ -455,7 +452,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
   /**
    * Returns a copy of this date-time with the new date and time, checking to see if a new object is in fact
    * required.
-   * 
+   *
    * @param newDate the date of the new date-time, not null
    * @param newTime the time of the new date-time, not null
    * @return the date-time, not null
@@ -514,7 +511,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Gets the {@code LocalDate} part of this date-time.
    * <p>
    * This returns a {@code LocalDate} with the same year, month and day as this date-time.
-   * 
+   *
    * @return the date part of this date-time, not null
    */
   @Override
@@ -530,7 +527,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The year returned by this method is proleptic as per {@code get(YEAR)}. To obtain the year-of-era, use
    * {@code get(YEAR_OF_ERA}.
-   * 
+   *
    * @return the year, from MIN_YEAR to MAX_YEAR
    */
   public int getYear() {
@@ -543,7 +540,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * This method returns the month as an {@code int} from 1 to 12. Application code is frequently clearer if
    * the enum {@link Month} is used by calling {@link #getMonth()}.
-   * 
+   *
    * @return the month-of-year, from 1 to 12
    * @see #getMonth()
    */
@@ -558,7 +555,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * This method returns the enum {@link Month} for the month. This avoids confusion as to what {@code int}
    * values mean. If you need access to the primitive {@code int} value then the enum provides the
    * {@link Month#getValue() int value}.
-   * 
+   *
    * @return the month-of-year, not null
    * @see #getMonthValue()
    */
@@ -571,7 +568,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Gets the day-of-month field.
    * <p>
    * This method returns the primitive {@code int} value for the day-of-month.
-   * 
+   *
    * @return the day-of-month, from 1 to 31
    */
   public int getDayOfMonth() {
@@ -583,7 +580,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Gets the day-of-year field.
    * <p>
    * This method returns the primitive {@code int} value for the day-of-year.
-   * 
+   *
    * @return the day-of-year, from 1 to 365, or 366 in a leap year
    */
   public int getDayOfYear() {
@@ -600,7 +597,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * Additional information can be obtained from the {@code DayOfWeek}. This includes textual names of the
    * values.
-   * 
+   *
    * @return the day-of-week, not null
    */
   public DayOfWeek getDayOfWeek() {
@@ -613,7 +610,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Gets the {@code LocalTime} part of this date-time.
    * <p>
    * This returns a {@code LocalTime} with the same hour, minute, second and nanosecond as this date-time.
-   * 
+   *
    * @return the time part of this date-time, not null
    */
   @Override
@@ -624,7 +621,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
 
   /**
    * Gets the hour-of-day field.
-   * 
+   *
    * @return the hour-of-day, from 0 to 23
    */
   public int getHour() {
@@ -634,7 +631,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
 
   /**
    * Gets the minute-of-hour field.
-   * 
+   *
    * @return the minute-of-hour, from 0 to 59
    */
   public int getMinute() {
@@ -644,7 +641,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
 
   /**
    * Gets the second-of-minute field.
-   * 
+   *
    * @return the second-of-minute, from 0 to 59
    */
   public int getSecond() {
@@ -654,7 +651,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
 
   /**
    * Gets the nano-of-second field.
-   * 
+   *
    * @return the nano-of-second, from 0 to 999,999,999
    */
   public int getNano() {
@@ -674,13 +671,13 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * In addition, all principal classes implement the {@link WithAdjuster} interface, including this one. For
    * example, {@link LocalDate} implements the adjuster interface. As such, this code will compile and run:
-   * 
+   *
    * <pre>
      *  dateTime.with(date);
      * </pre>
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalDateTime} based on this date-time with the adjustment made, not null
    * @throws DateTimeException if the adjustment cannot be made
@@ -710,7 +707,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * would be the last valid day of February in this example.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param field the field to set in the result, not null
    * @param newValue the new value of the field in the result
    * @return a {@code LocalDateTime} based on this date-time with the specified field set, not null
@@ -737,7 +734,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * changed to the last valid day of the month.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param year the year to set in the result, from MIN_YEAR to MAX_YEAR
    * @return a {@code LocalDateTime} based on this date-time with the requested year, not null
    * @throws DateTimeException if the year value is invalid
@@ -753,7 +750,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * changed to the last valid day of the month.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param month the month-of-year to set in the result, from 1 (January) to 12 (December)
    * @return a {@code LocalDateTime} based on this date-time with the requested month, not null
    * @throws DateTimeException if the month-of-year value is invalid
@@ -769,7 +766,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * will be the same in the result.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param dayOfMonth the day-of-month to set in the result, from 1 to 28-31
    * @return a {@code LocalDateTime} based on this date-time with the requested day, not null
    * @throws DateTimeException if the day-of-month value is invalid
@@ -785,7 +782,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * {@code LocalDateTime} is invalid, an exception is thrown.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param dayOfYear the day-of-year to set in the result, from 1 to 365-366
    * @return a {@code LocalDateTime} based on this date with the requested day, not null
    * @throws DateTimeException if the day-of-year value is invalid
@@ -801,7 +798,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the hour-of-day value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param hour the hour-of-day to set in the result, from 0 to 23
    * @return a {@code LocalDateTime} based on this date-time with the requested hour, not null
    * @throws DateTimeException if the hour value is invalid
@@ -816,7 +813,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the minute-of-hour value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param minute the minute-of-hour to set in the result, from 0 to 59
    * @return a {@code LocalDateTime} based on this date-time with the requested minute, not null
    * @throws DateTimeException if the minute value is invalid
@@ -831,7 +828,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the second-of-minute value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param second the second-of-minute to set in the result, from 0 to 59
    * @return a {@code LocalDateTime} based on this date-time with the requested second, not null
    * @throws DateTimeException if the second value is invalid
@@ -846,7 +843,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the nano-of-second value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param nanoOfSecond the nano-of-second to set in the result, from 0 to 999,999,999
    * @return a {@code LocalDateTime} based on this date-time with the requested nanosecond, not null
    * @throws DateTimeException if the nano value is invalid
@@ -869,7 +866,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * can be used, other units throw an exception.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param unit the unit to truncate to, not null
    * @return a {@code LocalDateTime} based on this date-time with the time truncated, not null
    * @throws DateTimeException if unable to truncate
@@ -889,7 +886,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * specified adjuster, which typically calls back to {@link #plus(long, PeriodUnit)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalDateTime} based on this date-time with the addition made, not null
    * @throws DateTimeException if the addition cannot be made
@@ -910,7 +907,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * calculation.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param amountToAdd the amount of the unit to add to the result, may be negative
    * @param unit the unit of the period to add, not null
    * @return a {@code LocalDateTime} based on this date-time with the specified period added, not null
@@ -959,7 +956,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param years the years to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the years added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -984,7 +981,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * an invalid result, the last valid day of the month, 2007-04-30, is selected instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param months the months to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the months added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1005,7 +1002,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * For example, 2008-12-31 plus one week would result in 2009-01-07.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param weeks the weeks to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the weeks added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1026,7 +1023,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * For example, 2008-12-31 plus one day would result in 2009-01-01.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param days the days to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the days added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1042,7 +1039,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in hours added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param hours the hours to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the hours added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1056,7 +1053,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in minutes added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param minutes the minutes to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the minutes added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1070,7 +1067,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in seconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param seconds the seconds to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the seconds added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1084,7 +1081,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in nanoseconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param nanos the nanos to add, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the nanoseconds added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1104,7 +1101,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * specified adjuster, which typically calls back to {@link #minus(long, PeriodUnit)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalDateTime} based on this date-time with the subtraction made, not null
    * @throws DateTimeException if the subtraction cannot be made
@@ -1125,7 +1122,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * cases in the calculation.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param amountToSubtract the amount of the unit to subtract from the result, may be negative
    * @param unit the unit of the period to subtract, not null
    * @return a {@code LocalDateTime} based on this date-time with the specified period subtracted, not null
@@ -1154,7 +1151,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param years the years to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the years subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1178,7 +1175,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * an invalid result, the last valid day of the month, 2007-04-30, is selected instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param months the months to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the months subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1198,7 +1195,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * For example, 2009-01-07 minus one week would result in 2008-12-31.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param weeks the weeks to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the weeks subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1218,7 +1215,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * For example, 2009-01-01 minus one day would result in 2008-12-31.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param days the days to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the days subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1233,7 +1230,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in hours subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param hours the hours to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the hours subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1247,7 +1244,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in minutes subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param minutes the minutes to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the minutes subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1261,7 +1258,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in seconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param seconds the seconds to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the seconds subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1275,7 +1272,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period in nanoseconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param nanos the nanos to subtract, may be negative
    * @return a {@code LocalDateTime} based on this date-time with the nanoseconds subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1290,7 +1287,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * Returns a copy of this {@code LocalDateTime} with the specified period added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param newDate the new date to base the calculation on, not null
    * @param hours the hours to add, may be negative
    * @param minutes the minutes to add, may be negative
@@ -1347,7 +1344,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * {@link ZonedDateTime#ofStrict(LocalDateTime, ZoneOffset, ZoneId)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param zone the time-zone to use, not null
    * @return the zoned date-time formed from this date-time, not null
    */
@@ -1413,7 +1410,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * If all the date-times being compared are instances of {@code LocalDateTime}, then the comparison will be
    * entirely based on the date-time. If some dates being compared are in different chronologies, then the
    * chronology is also considered, see {@link ChronoLocalDateTime#compareTo}.
-   * 
+   *
    * @param other the other date-time to compare to, not null
    * @return the comparator value, negative if less, positive if greater
    */
@@ -1442,7 +1439,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
    * date-time and not the chronology. This allows dates in different calendar systems to be compared based on
    * the time-line position.
-   * 
+   *
    * @param other the other date-time to compare to, not null
    * @return true if this is after the specified date-time
    */
@@ -1462,7 +1459,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
    * date-time and not the chronology. This allows dates in different calendar systems to be compared based on
    * the time-line position.
-   * 
+   *
    * @param other the other date-time to compare to, not null
    * @return true if this is before the specified date-time
    */
@@ -1482,7 +1479,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * Compares this {@code LocalDateTime} with another ensuring that the date-time is the same. Only objects of
    * type {@code LocalDateTime} are compared, other types return false.
-   * 
+   *
    * @param obj the object to check, null returns false
    * @return true if this is equal to the other date-time
    */
@@ -1501,7 +1498,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
 
   /**
    * A hash code for this date-time.
-   * 
+   *
    * @return a suitable hash code
    */
   @Override
@@ -1526,49 +1523,13 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    * <p>
    * The format used will be the shortest that outputs the full value of the time where the omitted parts are
    * implied to be zero.
-   * 
+   *
    * @return a string representation of this date-time, not null
    */
   @Override
   public String toString() {
 
     return this.date.toString() + 'T' + this.time.toString();
-  }
-
-  // -----------------------------------------------------------------------
-  /**
-   * Writes the object using a <a href="../../serialized-form.html#javax.time.Ser">dedicated serialized
-   * form</a>.
-   * 
-   * <pre>
-     *  out.writeByte(4);  // identifies this as a LocalDateTime
-     *  out.writeInt(year);
-     *  out.writeByte(month);
-     *  out.writeByte(day);
-     *  out.writeByte(hour);
-     *  out.writeByte(minute);
-     *  out.writeByte(second);
-     *  out.writeInt(nano);
-     * </pre>
-   * 
-   * @return the instance of {@code Ser}, not null
-   */
-  private Object writeReplace() {
-
-    return new Ser(Ser.LOCAL_DATE_TIME_TYPE, this);
-  }
-
-  void writeExternal(DataOutput out) throws IOException {
-
-    this.date.writeExternal(out);
-    this.time.writeExternal(out);
-  }
-
-  static LocalDateTime readExternal(DataInput in) throws IOException {
-
-    LocalDate date = LocalDate.readExternal(in);
-    LocalTime time = LocalTime.readExternal(in);
-    return LocalDateTime.of(date, time);
   }
 
 }

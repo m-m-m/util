@@ -40,9 +40,6 @@ import static java.time.calendrical.ChronoField.MILLI_OF_SECOND;
 import static java.time.calendrical.ChronoField.NANO_OF_SECOND;
 import static java.time.calendrical.ChronoUnit.NANOS;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
@@ -73,7 +70,7 @@ import java.util.Objects;
  * the standard Java epoch of {@code 1970-01-01T00:00:00Z} where instants after the epoch have positive
  * values, and earlier instants have negative values. For both the epoch-second and nanosecond parts, a larger
  * value is always later on the time-line than a smaller value.
- * 
+ *
  * <h4>Time-scale</h4>
  * <p>
  * The length of the solar day is the standard way that humans measure time. This has traditionally been
@@ -134,7 +131,7 @@ import java.util.Objects;
  * <p>
  * The Java time-scale is used for all date-time classes supplied by JSR-310. This includes {@code Instant},
  * {@code LocalDate}, {@code LocalTime}, {@code OffsetDateTime}, {@code ZonedDateTime} and {@code Duration}.
- * 
+ *
  * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 public final class Instant extends DefaultInterfaceDateTimeAccessor implements DateTime, WithAdjuster,
@@ -185,7 +182,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * Using this method will prevent the ability to use an alternate time-source for testing because the clock
    * is effectively hard-coded.
-   * 
+   *
    * @return the current instant using the system clock, not null
    */
   public static Instant now() {
@@ -200,7 +197,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * Using this method allows the use of an alternate clock for testing. The alternate clock may be introduced
    * using {@link Clock dependency injection}.
-   * 
+   *
    * @param clock the clock to use, not null
    * @return the current instant, not null
    */
@@ -215,7 +212,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Obtains an instance of {@code Instant} using seconds from the epoch of 1970-01-01T00:00:00Z.
    * <p>
    * The nanosecond field is set to zero.
-   * 
+   *
    * @param epochSecond the number of seconds from 1970-01-01T00:00:00Z
    * @return an instant, not null
    */
@@ -231,13 +228,13 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * This method allows an arbitrary number of nanoseconds to be passed in. The factory will alter the values
    * of the second and nanosecond in order to ensure that the stored nanosecond is in the range 0 to
    * 999,999,999. For example, the following will result in the exactly the same instant:
-   * 
+   *
    * <pre>
      *  Instant.ofSeconds(3, 1);
      *  Instant.ofSeconds(4, -999999999);
      *  Instant.ofSeconds(2, 1000000001);
      * </pre>
-   * 
+   *
    * @param epochSecond the number of seconds from 1970-01-01T00:00:00Z
    * @param nanoAdjustment the nanosecond adjustment to the number of seconds, positive or negative
    * @return an instant, not null
@@ -254,7 +251,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Obtains an instance of {@code Instant} using milliseconds from the epoch of 1970-01-01T00:00:00Z.
    * <p>
    * The seconds and nanoseconds are extracted from the specified milliseconds.
-   * 
+   *
    * @param epochMilli the number of milliseconds from 1970-01-01T00:00:00Z
    * @return an instant, not null
    */
@@ -271,7 +268,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * A {@code DateTimeAccessor} represents some form of date and time information. This factory converts the
    * arbitrary date-time object to an instance of {@code Instant}.
-   * 
+   *
    * @param dateTime the date-time object to convert, not null
    * @return the instant, not null
    * @throws DateTimeException if unable to convert to an {@code Instant}
@@ -289,7 +286,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * The string must represent a valid instant in UTC and is parsed using
    * {@link DateTimeFormatters#isoInstant()}.
-   * 
+   *
    * @param text the text to parse, not null
    * @return the parsed instant, not null
    * @throws DateTimeParseException if the text cannot be parsed
@@ -302,7 +299,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
   // -----------------------------------------------------------------------
   /**
    * Obtains an instance of {@code Instant} using seconds and nanoseconds.
-   * 
+   *
    * @param seconds the length of the duration in seconds
    * @param nanoOfSecond the nano-of-second, from 0 to 999,999,999
    */
@@ -317,7 +314,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
   /**
    * Constructs an instance of {@code Instant} using seconds from the epoch of 1970-01-01T00:00:00Z and
    * nanosecond fraction of second.
-   * 
+   *
    * @param epochSecond the number of seconds from 1970-01-01T00:00:00Z
    * @param nanos the nanoseconds within the second, must be positive
    */
@@ -364,7 +361,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * The epoch second count is a simple incrementing count of seconds where second 0 is 1970-01-01T00:00:00Z.
    * The nanosecond part of the day is returned by {@code getNanosOfSecond}.
-   * 
+   *
    * @return the seconds from the epoch of 1970-01-01T00:00:00Z
    */
   public long getEpochSecond() {
@@ -377,7 +374,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * The nanosecond-of-second value measures the total number of nanoseconds from the second returned by
    * {@code getEpochSecond}.
-   * 
+   *
    * @return the nanoseconds within the second, always positive, never exceeds 999,999,999
    */
   public int getNano() {
@@ -456,7 +453,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration in seconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param secondsToAdd the seconds to add, positive or negative
    * @return an {@code Instant} based on this instant with the specified seconds added, not null
    * @throws ArithmeticException if the calculation exceeds the supported range
@@ -470,7 +467,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration in milliseconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param millisToAdd the milliseconds to add, positive or negative
    * @return an {@code Instant} based on this instant with the specified milliseconds added, not null
    * @throws ArithmeticException if the calculation exceeds the supported range
@@ -484,7 +481,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration in nanoseconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param nanosToAdd the nanoseconds to add, positive or negative
    * @return an {@code Instant} based on this instant with the specified nanoseconds added, not null
    * @throws ArithmeticException if the calculation exceeds the supported range
@@ -498,7 +495,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param secondsToAdd the seconds to add, positive or negative
    * @param nanosToAdd the nanos to add, positive or negative
    * @return an {@code Instant} based on this instant with the specified seconds added, not null
@@ -535,7 +532,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration in seconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param secondsToSubtract the seconds to subtract, positive or negative
    * @return an {@code Instant} based on this instant with the specified seconds subtracted, not null
    * @throws ArithmeticException if the calculation exceeds the supported range
@@ -552,7 +549,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration in milliseconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param millisToSubtract the milliseconds to subtract, positive or negative
    * @return an {@code Instant} based on this instant with the specified milliseconds subtracted, not null
    * @throws ArithmeticException if the calculation exceeds the supported range
@@ -569,7 +566,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Returns a copy of this instant with the specified duration in nanoseconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   * 
+   *
    * @param nanosToSubtract the nanoseconds to subtract, positive or negative
    * @return an {@code Instant} based on this instant with the specified nanoseconds subtracted, not null
    * @throws ArithmeticException if the calculation exceeds the supported range
@@ -651,7 +648,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * If this instant has greater than millisecond precision, then the conversion will drop any excess
    * precision information as though the amount in nanoseconds was subject to integer division by one million.
-   * 
+   *
    * @return the number of milliseconds since the epoch of 1970-01-01T00:00:00Z
    * @throws ArithmeticException if the calculation exceeds the supported range
    */
@@ -667,7 +664,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * <p>
    * The comparison is based on the time-line position of the instants. It is "consistent with equals", as
    * defined by {@link Comparable}.
-   * 
+   *
    * @param otherInstant the other instant to compare to, not null
    * @return the comparator value, negative if less, positive if greater
    * @throws NullPointerException if otherInstant is null
@@ -687,7 +684,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Checks if this instant is after the specified instant.
    * <p>
    * The comparison is based on the time-line position of the instants.
-   * 
+   *
    * @param otherInstant the other instant to compare to, not null
    * @return true if this instant is after the specified instant
    * @throws NullPointerException if otherInstant is null
@@ -701,7 +698,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Checks if this instant is before the specified instant.
    * <p>
    * The comparison is based on the time-line position of the instants.
-   * 
+   *
    * @param otherInstant the other instant to compare to, not null
    * @return true if this instant is before the specified instant
    * @throws NullPointerException if otherInstant is null
@@ -716,7 +713,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * Checks if this instant is equal to the specified instant.
    * <p>
    * The comparison is based on the time-line position of the instants.
-   * 
+   *
    * @param otherInstant the other instant, null returns false
    * @return true if the other instant is equal to this one
    */
@@ -735,7 +732,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
 
   /**
    * Returns a hash code for this instant.
-   * 
+   *
    * @return a suitable hash code
    */
   @Override
@@ -749,44 +746,13 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    * A string representation of this instant using ISO-8601 representation.
    * <p>
    * The format used is the same as {@link DateTimeFormatters#isoInstant()}.
-   * 
+   *
    * @return an ISO-8601 representation of this instant, not null
    */
   @Override
   public String toString() {
 
     return DateTimeFormatters.isoInstant().print(this);
-  }
-
-  // -----------------------------------------------------------------------
-  /**
-   * Writes the object using a <a href="../../serialized-form.html#javax.time.Ser">dedicated serialized
-   * form</a>.
-   * 
-   * <pre>
-     *  out.writeByte(2);  // identifies this as an Instant
-     *  out.writeLong(seconds);
-     *  out.writeInt(nanos);
-     * </pre>
-   * 
-   * @return the instance of {@code Ser}, not null
-   */
-  private Object writeReplace() {
-
-    return new Ser(Ser.INSTANT_TYPE, this);
-  }
-
-  void writeExternal(DataOutput out) throws IOException {
-
-    out.writeLong(this.seconds);
-    out.writeInt(this.nanos);
-  }
-
-  static Instant readExternal(DataInput in) throws IOException {
-
-    long seconds = in.readLong();
-    int nanos = in.readInt();
-    return Instant.ofEpochSecond(seconds, nanos);
   }
 
 }
