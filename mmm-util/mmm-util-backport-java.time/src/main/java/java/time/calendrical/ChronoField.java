@@ -532,7 +532,10 @@ public enum ChronoField implements DateTimeField {
   @Override
   public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
 
-    return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+    // return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+    long x = dateTime1.getLong(this);
+    long y = dateTime2.getLong(this);
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
   }
 
   // -----------------------------------------------------------------------

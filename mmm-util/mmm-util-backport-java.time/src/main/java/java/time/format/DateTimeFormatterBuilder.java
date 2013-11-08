@@ -44,16 +44,15 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.calendrical.ChronoField;
+import java.time.calendrical.DateTimeAccessor.Query;
 import java.time.calendrical.DateTimeBuilder;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
-import java.time.calendrical.DateTimeAccessor.Query;
 import java.time.chrono.Chrono;
 import java.time.chrono.ISOChrono;
 import java.time.format.SimpleDateTimeTextProvider.LocaleStore;
 import java.time.jdk8.Jdk8Methods;
 import java.time.zone.ZoneRulesProvider;
-import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -111,7 +110,7 @@ public final class DateTimeFormatterBuilder {
   /**
    * The list of printers that will be used.
    */
-  private final List<DateTimePrinterParser> printerParsers = new ArrayList<>();
+  private final List<DateTimePrinterParser> printerParsers = new ArrayList<DateTimePrinterParser>();
 
   /**
    * Whether this builder produces an optional formatter.
@@ -1102,7 +1101,7 @@ public final class DateTimeFormatterBuilder {
   }
 
   /** Map of letters to fields. */
-  private static final Map<Character, DateTimeField> FIELD_MAP = new HashMap<>();
+  private static final Map<Character, DateTimeField> FIELD_MAP = new HashMap<Character, DateTimeField>();
   static {
     FIELD_MAP.put('G', ChronoField.ERA); // Java, CLDR (different to both for 1/2 chars)
     FIELD_MAP.put('y', ChronoField.YEAR); // CLDR
@@ -2620,7 +2619,10 @@ public final class DateTimeFormatterBuilder {
         synchronized (this) {
           cached = cachedSubstringTree;
           if (cached == null || cached.getKey() != regionIdsSize) {
-            cachedSubstringTree = cached = new SimpleImmutableEntry<>(regionIdsSize, prepareParser(regionIds));
+            // cachedSubstringTree = cached = new SimpleImmutableEntry<>(regionIdsSize,
+            // prepareParser(regionIds));
+            cachedSubstringTree = cached = new SimpleImmutableEntry<Integer, SubstringTree>(regionIdsSize,
+                prepareParser(regionIds));
           }
         }
       }
@@ -2675,7 +2677,7 @@ public final class DateTimeFormatterBuilder {
       /**
        * Map of a substring to a set of substrings that contain the key.
        */
-      private final Map<CharSequence, SubstringTree> substringMap = new HashMap<>();
+      private final Map<CharSequence, SubstringTree> substringMap = new HashMap<CharSequence, SubstringTree>();
 
       /**
        * Constructor.
@@ -2724,7 +2726,7 @@ public final class DateTimeFormatterBuilder {
     private static SubstringTree prepareParser(Set<String> availableIDs) {
 
       // sort by length
-      List<String> ids = new ArrayList<>(availableIDs);
+      List<String> ids = new ArrayList<String>(availableIDs);
       Collections.sort(ids, LENGTH_SORT);
 
       // build the tree
@@ -2852,5 +2854,64 @@ public final class DateTimeFormatterBuilder {
       return str1.length() == str2.length() ? str1.compareTo(str2) : str1.length() - str2.length();
     }
   };
+
+  public static class SimpleImmutableEntry<K, V> implements Entry<K, V>, java.io.Serializable {
+
+    private static final long serialVersionUID = 7138329143949025153L;
+
+    private final K key;
+
+    private final V value;
+
+    public SimpleImmutableEntry(K key, V value) {
+
+      this.key = key;
+      this.value = value;
+    }
+
+    public SimpleImmutableEntry(Entry<? extends K, ? extends V> entry) {
+
+      this.key = entry.getKey();
+      this.value = entry.getValue();
+    }
+
+    public K getKey() {
+
+      return this.key;
+    }
+
+    public V getValue() {
+
+      return this.value;
+    }
+
+    public V setValue(V value) {
+
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+      if (!(o instanceof Map.Entry)) {
+        return false;
+      }
+      Map.Entry e = (Map.Entry) o;
+      return Objects.equals(this.key, e.getKey()) && Objects.equals(this.value, e.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+
+      return (this.key == null ? 0 : this.key.hashCode()) ^ (this.value == null ? 0 : this.value.hashCode());
+    }
+
+    @Override
+    public String toString() {
+
+      return this.key + "=" + this.value;
+    }
+
+  }
 
 }
