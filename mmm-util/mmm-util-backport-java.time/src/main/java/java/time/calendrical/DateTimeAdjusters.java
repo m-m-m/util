@@ -40,7 +40,7 @@ import static java.time.calendrical.ChronoUnit.YEARS;
 
 import java.time.DayOfWeek;
 import java.time.calendrical.DateTime.WithAdjuster;
-import java.util.Objects;
+import java.time.jdk8.Jdk7Methods;
 
 /**
  * Common implementations of {@code DateTime.WithAdjuster}.
@@ -64,8 +64,8 @@ import java.util.Objects;
  *  date.with(lastDayOfMonth());
  * </pre>
  * 
- * <h4>Implementation notes</h4>
- * This is a thread-safe utility class. All returned adjusters are immutable and thread-safe.
+ * <h4>Implementation notes</h4> This is a thread-safe utility class. All returned adjusters are immutable and
+ * thread-safe.
  */
 public final class DateTimeAdjusters {
 
@@ -222,7 +222,7 @@ public final class DateTimeAdjusters {
    */
   public static WithAdjuster firstInMonth(DayOfWeek dayOfWeek) {
 
-    Objects.requireNonNull(dayOfWeek, "dayOfWeek");
+    Jdk7Methods.Objects_requireNonNull(dayOfWeek, "dayOfWeek");
     return new DayOfWeekInMonth(1, dayOfWeek);
   }
 
@@ -239,7 +239,7 @@ public final class DateTimeAdjusters {
    */
   public static WithAdjuster lastInMonth(DayOfWeek dayOfWeek) {
 
-    Objects.requireNonNull(dayOfWeek, "dayOfWeek");
+    Jdk7Methods.Objects_requireNonNull(dayOfWeek, "dayOfWeek");
     return new DayOfWeekInMonth(-1, dayOfWeek);
   }
 
@@ -272,7 +272,7 @@ public final class DateTimeAdjusters {
    */
   public static WithAdjuster dayOfWeekInMonth(int ordinal, DayOfWeek dayOfWeek) {
 
-    Objects.requireNonNull(dayOfWeek, "dayOfWeek");
+    Jdk7Methods.Objects_requireNonNull(dayOfWeek, "dayOfWeek");
     return new DayOfWeekInMonth(ordinal, dayOfWeek);
   }
 
@@ -398,7 +398,7 @@ public final class DateTimeAdjusters {
 
     private RelativeDayOfWeek(int relative, DayOfWeek dayOfWeek) {
 
-      Objects.requireNonNull(dayOfWeek, "dayOfWeek");
+      Jdk7Methods.Objects_requireNonNull(dayOfWeek, "dayOfWeek");
       this.relative = relative;
       this.dowValue = dayOfWeek.getValue();
     }

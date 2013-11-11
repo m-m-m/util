@@ -24,8 +24,12 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
+      <version>6.8</version>
+      <!--
       <version>5.8</version>
       <classifier>jdk15</classifier>
+      -->
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -33,10 +37,35 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <!--<argLine>-Xbootclasspath/p:${project.build.outputDirectory}</argLine>-->
-          <argLine>-Xbootclasspath/p:${project.build.outputDirectory}${path.separator}${project.build.testOutputDirectory}</argLine>
-        </configuration>
+        <version>2.13</version>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+              <!--<goal>test</goal>-->
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/None</include>
+              </includes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>integration-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <argLine>-Xbootclasspath/p:${project.build.directory}/${project.build.finalName}.jar</argLine>
+              <includes>
+                <include>**/Test*.java</include>
+                <include>**/TCK*.java</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>        
       </plugin>
     </plugins>
   </build>

@@ -40,9 +40,9 @@ import java.time.DateTimeException;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeBuilder;
 import java.time.format.DateTimeFormatterBuilder.CompositePrinterParser;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Formatter for printing and parsing date-time objects.
@@ -82,8 +82,10 @@ public final class DateTimeFormatter {
    * @param printerParser the printer/parser to use, not null
    * @param locale the locale to use, not null
    * @param symbols the symbols to use, not null
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  DateTimeFormatter(CompositePrinterParser printerParser, Locale locale, DateTimeFormatSymbols symbols) {
+  @Deprecated
+  public DateTimeFormatter(CompositePrinterParser printerParser, Locale locale, DateTimeFormatSymbols symbols) {
 
     this.locale = locale;
     this.symbols = symbols;
@@ -111,7 +113,7 @@ public final class DateTimeFormatter {
    */
   public DateTimeFormatter withLocale(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     if (locale.equals(this.locale)) {
       return this;
     }
@@ -139,7 +141,7 @@ public final class DateTimeFormatter {
    */
   public DateTimeFormatter withSymbols(DateTimeFormatSymbols symbols) {
 
-    Objects.requireNonNull(symbols, "symbols");
+    Jdk7Methods.Objects_requireNonNull(symbols, "symbols");
     if (symbols.equals(this.symbols)) {
       return this;
     }
@@ -181,8 +183,8 @@ public final class DateTimeFormatter {
    */
   public void printTo(DateTimeAccessor dateTime, Appendable appendable) {
 
-    Objects.requireNonNull(dateTime, "dateTime");
-    Objects.requireNonNull(appendable, "appendable");
+    Jdk7Methods.Objects_requireNonNull(dateTime, "dateTime");
+    Jdk7Methods.Objects_requireNonNull(appendable, "appendable");
     try {
       DateTimePrintContext context = new DateTimePrintContext(dateTime, this.locale, this.symbols);
       if (appendable instanceof StringBuilder) {
@@ -219,8 +221,8 @@ public final class DateTimeFormatter {
    */
   public <T> T parse(CharSequence text, Class<T> type) {
 
-    Objects.requireNonNull(text, "text");
-    Objects.requireNonNull(type, "type");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(type, "type");
     String str = text.toString(); // parsing whole String, so this makes sense
     try {
       DateTimeBuilder builder = parseToBuilder(str).resolve();
@@ -262,8 +264,8 @@ public final class DateTimeFormatter {
    */
   public DateTimeAccessor parseBest(CharSequence text, Class<?>... types) {
 
-    Objects.requireNonNull(text, "text");
-    Objects.requireNonNull(types, "types");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(types, "types");
     if (types.length < 2) {
       throw new IllegalArgumentException("At least two types must be specified");
     }
@@ -309,7 +311,7 @@ public final class DateTimeFormatter {
    */
   public DateTimeBuilder parseToBuilder(CharSequence text) {
 
-    Objects.requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
     String str = text.toString(); // parsing whole String, so this makes sense
     ParsePosition pos = new ParsePosition(0);
     DateTimeBuilder result = parseToBuilder(str, pos);
@@ -349,8 +351,8 @@ public final class DateTimeFormatter {
    */
   public DateTimeBuilder parseToBuilder(CharSequence text, ParsePosition position) {
 
-    Objects.requireNonNull(text, "text");
-    Objects.requireNonNull(position, "position");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(position, "position");
     DateTimeParseContext context = new DateTimeParseContext(this.locale, this.symbols);
     int pos = position.getIndex();
     pos = this.printerParser.parse(context, text, pos);
@@ -405,7 +407,7 @@ public final class DateTimeFormatter {
    */
   public Format toFormat(Class<?> parseType) {
 
-    Objects.requireNonNull(parseType, "parseType");
+    Jdk7Methods.Objects_requireNonNull(parseType, "parseType");
     return new ClassicFormat(this, parseType);
   }
 
@@ -448,9 +450,9 @@ public final class DateTimeFormatter {
     @Override
     public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) {
 
-      Objects.requireNonNull(obj, "obj");
-      Objects.requireNonNull(toAppendTo, "toAppendTo");
-      Objects.requireNonNull(pos, "pos");
+      Jdk7Methods.Objects_requireNonNull(obj, "obj");
+      Jdk7Methods.Objects_requireNonNull(toAppendTo, "toAppendTo");
+      Jdk7Methods.Objects_requireNonNull(pos, "pos");
       if (obj instanceof DateTimeAccessor == false) {
         throw new IllegalArgumentException("Format target must implement DateTimeAccessor");
       }
@@ -467,7 +469,7 @@ public final class DateTimeFormatter {
     @Override
     public Object parseObject(String text) throws ParseException {
 
-      Objects.requireNonNull(text, "text");
+      Jdk7Methods.Objects_requireNonNull(text, "text");
       try {
         if (this.parseType != null) {
           return this.formatter.parse(text, this.parseType);
@@ -483,7 +485,7 @@ public final class DateTimeFormatter {
     @Override
     public Object parseObject(String text, ParsePosition pos) {
 
-      Objects.requireNonNull(text, "text");
+      Jdk7Methods.Objects_requireNonNull(text, "text");
       DateTimeBuilder builder;
       try {
         builder = this.formatter.parseToBuilder(text, pos);

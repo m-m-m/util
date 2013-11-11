@@ -42,6 +42,7 @@ import java.time.calendrical.DateTime;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.PeriodUnit;
 import java.time.format.DateTimeFormatter;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Comparator;
 
 /**
@@ -88,9 +89,9 @@ public interface ChronoZonedDateTime<C extends Chrono<C>> extends DateTime, Comp
     @Override
     public int compare(ChronoZonedDateTime<?> datetime1, ChronoZonedDateTime<?> datetime2) {
 
-      int cmp = Long.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
+      int cmp = Jdk7Methods.Long_compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
       if (cmp == 0) {
-        cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+        cmp = Jdk7Methods.Long_compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
       }
       return cmp;
     }

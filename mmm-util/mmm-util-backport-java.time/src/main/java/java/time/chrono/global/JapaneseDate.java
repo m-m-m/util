@@ -46,8 +46,8 @@ import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.chrono.ChronoLocalDate;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Calendar;
-import java.util.Objects;
 
 import sun.util.calendar.LocalGregorianCalendar;
 
@@ -98,7 +98,7 @@ final class JapaneseDate extends ChronoDateImpl<JapaneseChrono> implements Seria
    */
   static JapaneseDate of(JapaneseEra era, int yearOfEra, int month, int dayOfMonth) {
 
-    Objects.requireNonNull(era, "era");
+    Jdk7Methods.Objects_requireNonNull(era, "era");
     LocalGregorianCalendar.Date jdate = JapaneseChrono.JCAL.newCalendarDate(null);
     jdate.setEra(era.getPrivateEra()).setDate(yearOfEra, month, dayOfMonth);
     if (!JapaneseChrono.JCAL.validate(jdate)) {

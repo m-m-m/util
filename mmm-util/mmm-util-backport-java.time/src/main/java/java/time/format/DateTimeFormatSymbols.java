@@ -32,8 +32,8 @@
 package java.time.format;
 
 import java.text.DecimalFormatSymbols;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -115,7 +115,7 @@ public final class DateTimeFormatSymbols {
    */
   public static DateTimeFormatSymbols of(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     DateTimeFormatSymbols info = CACHE.get(locale);
     if (info == null) {
       info = create(locale);
@@ -281,8 +281,10 @@ public final class DateTimeFormatSymbols {
    * 
    * @param ch the character to check
    * @return the value, 0 to 9, of the character, or -1 if not a digit
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  int convertToDigit(char ch) {
+  @Deprecated
+  public int convertToDigit(char ch) {
 
     int val = ch - this.zeroDigit;
     return (val >= 0 && val <= 9) ? val : -1;
@@ -293,8 +295,10 @@ public final class DateTimeFormatSymbols {
    * 
    * @param numericText the text, consisting of digits 0 to 9, to convert, not null
    * @return the internationalized text, not null
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  String convertNumberToI18N(String numericText) {
+  @Deprecated
+  public String convertNumberToI18N(String numericText) {
 
     if (this.zeroDigit == '0') {
       return numericText;

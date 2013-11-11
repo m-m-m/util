@@ -37,11 +37,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StreamCorruptedException;
 import java.net.URL;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.NavigableMap;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentNavigableMap;
@@ -64,17 +64,17 @@ public final class TzdbZoneRulesProvider extends ZoneRulesProvider {
   /**
    * All the regions that are available.
    */
-  private final Set<String> regionIds = new CopyOnWriteArraySet<>();
+  private final Set<String> regionIds = new CopyOnWriteArraySet<String>();
 
   /**
    * All the versions that are available.
    */
-  private final ConcurrentNavigableMap<String, Version> versions = new ConcurrentSkipListMap<>();
+  private final ConcurrentNavigableMap<String, Version> versions = new ConcurrentSkipListMap<String, Version>();
 
   /**
    * All the URLs that have been loaded. Uses String to avoid equals() on URL.
    */
-  private Set<String> loadedUrls = new CopyOnWriteArraySet<>();
+  private Set<String> loadedUrls = new CopyOnWriteArraySet<String>();
 
   /**
    * Creates an instance. Created by the {@code ServiceLoader}.
@@ -93,13 +93,13 @@ public final class TzdbZoneRulesProvider extends ZoneRulesProvider {
   @Override
   protected Set<String> provideZoneIds() {
 
-    return new HashSet<>(this.regionIds);
+    return new HashSet<String>(this.regionIds);
   }
 
   @Override
   protected ZoneRules provideRules(String zoneId) {
 
-    Objects.requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
     ZoneRules rules = this.versions.lastEntry().getValue().getRules(zoneId);
     if (rules == null) {
       throw new ZoneRulesException("Unknown time-zone ID: " + zoneId);
@@ -110,7 +110,7 @@ public final class TzdbZoneRulesProvider extends ZoneRulesProvider {
   @Override
   protected NavigableMap<String, ZoneRules> provideVersions(String zoneId) {
 
-    TreeMap<String, ZoneRules> map = new TreeMap<>();
+    TreeMap<String, ZoneRules> map = new TreeMap<String, ZoneRules>();
     for (Version version : this.versions.values()) {
       ZoneRules rules = version.getRules(zoneId);
       if (rules != null) {
@@ -161,7 +161,9 @@ public final class TzdbZoneRulesProvider extends ZoneRulesProvider {
    */
   private Iterable<Version> load(URL url) throws ClassNotFoundException, IOException {
 
-    try (InputStream in = url.openStream()) {
+    // try (InputStream in = url.openStream()) {
+    InputStream in = url.openStream();
+    try {
       DataInputStream dis = new DataInputStream(in);
       if (dis.readByte() != 1) {
         throw new StreamCorruptedException("File format not recognised");
@@ -192,7 +194,7 @@ public final class TzdbZoneRulesProvider extends ZoneRulesProvider {
         dis.readFully(bytes);
         ruleArray[i] = bytes;
       }
-      AtomicReferenceArray<Object> ruleData = new AtomicReferenceArray<>(ruleArray);
+      AtomicReferenceArray<Object> ruleData = new AtomicReferenceArray<Object>(ruleArray);
       // link version-region-rules
       Set<Version> versionSet = new HashSet<Version>(versionCount);
       for (int i = 0; i < versionCount; i++) {
@@ -206,6 +208,12 @@ public final class TzdbZoneRulesProvider extends ZoneRulesProvider {
         versionSet.add(new Version(versionArray[i], versionRegionArray, versionRulesArray, ruleData));
       }
       return versionSet;
+    } finally {
+      try {
+        in.close();
+      } catch (IOException e) {
+        // prevent suppressing potential important exception
+      }
     }
   }
 

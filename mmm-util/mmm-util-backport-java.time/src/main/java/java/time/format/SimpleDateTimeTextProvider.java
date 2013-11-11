@@ -122,7 +122,7 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
 
     if (field == MONTH_OF_YEAR) {
       DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
-      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
+      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<TextStyle, Map<Long, String>>();
       Long f1 = 1L;
       Long f2 = 2L;
       Long f3 = 3L;
@@ -136,7 +136,7 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
       Long f11 = 11L;
       Long f12 = 12L;
       String[] array = oldSymbols.getMonths();
-      Map<Long, String> map = new HashMap<>();
+      Map<Long, String> map = new HashMap<Long, String>();
       map.put(f1, array[Calendar.JANUARY]);
       map.put(f2, array[Calendar.FEBRUARY]);
       map.put(f3, array[Calendar.MARCH]);
@@ -151,7 +151,7 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
       map.put(f12, array[Calendar.DECEMBER]);
       styleMap.put(TextStyle.FULL, map);
       array = oldSymbols.getShortMonths();
-      map = new HashMap<>();
+      map = new HashMap<Long, String>();
       map.put(f1, array[Calendar.JANUARY]);
       map.put(f2, array[Calendar.FEBRUARY]);
       map.put(f3, array[Calendar.MARCH]);
@@ -169,7 +169,7 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
     }
     if (field == DAY_OF_WEEK) {
       DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
-      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
+      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<TextStyle, Map<Long, String>>();
       Long f1 = 1L;
       Long f2 = 2L;
       Long f3 = 3L;
@@ -178,7 +178,7 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
       Long f6 = 6L;
       Long f7 = 7L;
       String[] array = oldSymbols.getWeekdays();
-      Map<Long, String> map = new HashMap<>();
+      Map<Long, String> map = new HashMap<Long, String>();
       map.put(f1, array[Calendar.MONDAY]);
       map.put(f2, array[Calendar.TUESDAY]);
       map.put(f3, array[Calendar.WEDNESDAY]);
@@ -188,7 +188,7 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
       map.put(f7, array[Calendar.SUNDAY]);
       styleMap.put(TextStyle.FULL, map);
       array = oldSymbols.getShortWeekdays();
-      map = new HashMap<>();
+      map = new HashMap<Long, String>();
       map.put(f1, array[Calendar.MONDAY]);
       map.put(f2, array[Calendar.TUESDAY]);
       map.put(f3, array[Calendar.WEDNESDAY]);
@@ -201,9 +201,9 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
     }
     if (field == AMPM_OF_DAY) {
       DateFormatSymbols oldSymbols = DateFormatSymbols.getInstance(locale);
-      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<>();
+      Map<TextStyle, Map<Long, String>> styleMap = new HashMap<TextStyle, Map<Long, String>>();
       String[] array = oldSymbols.getAmPmStrings();
-      Map<Long, String> map = new HashMap<>();
+      Map<Long, String> map = new HashMap<Long, String>();
       map.put(0L, array[Calendar.AM]);
       map.put(1L, array[Calendar.PM]);
       styleMap.put(TextStyle.FULL, map);
@@ -256,16 +256,16 @@ final class SimpleDateTimeTextProvider extends DateTimeTextProvider {
     LocaleStore(Map<TextStyle, Map<Long, String>> valueTextMap) {
 
       this.valueTextMap = valueTextMap;
-      Map<TextStyle, List<Entry<String, Long>>> map = new HashMap<>();
-      List<Entry<String, Long>> allList = new ArrayList<>();
+      Map<TextStyle, List<Entry<String, Long>>> map = new HashMap<TextStyle, List<Entry<String, Long>>>();
+      List<Entry<String, Long>> allList = new ArrayList<Entry<String, Long>>();
       for (TextStyle style : valueTextMap.keySet()) {
-        Map<String, Entry<String, Long>> reverse = new HashMap<>();
+        Map<String, Entry<String, Long>> reverse = new HashMap<String, Entry<String, Long>>();
         for (Map.Entry<Long, String> entry : valueTextMap.get(style).entrySet()) {
           if (reverse.put(entry.getValue(), createEntry(entry.getValue(), entry.getKey())) != null) {
             continue; // not parsable, try next style
           }
         }
-        List<Entry<String, Long>> list = new ArrayList<>(reverse.values());
+        List<Entry<String, Long>> list = new ArrayList<Entry<String, Long>>(reverse.values());
         Collections.sort(list, COMPARATOR);
         map.put(style, list);
         allList.addAll(list);

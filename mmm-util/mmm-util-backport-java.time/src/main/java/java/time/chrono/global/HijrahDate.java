@@ -56,9 +56,9 @@ import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.chrono.ChronoLocalDate;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -208,19 +208,19 @@ final class HijrahDate extends ChronoDateImpl<HijrahChrono> implements Serializa
    * Holding the adjusted month days in year. The key is a year (Integer) and the value is the all the month
    * days in year (Integer[]).
    */
-  private static final HashMap<Integer, Integer[]> ADJUSTED_MONTH_DAYS = new HashMap<>();
+  private static final HashMap<Integer, Integer[]> ADJUSTED_MONTH_DAYS = new HashMap<Integer, Integer[]>();
 
   /**
    * Holding the adjusted month length in year. The key is a year (Integer) and the value is the all the month
    * length in year (Integer[]).
    */
-  private static final HashMap<Integer, Integer[]> ADJUSTED_MONTH_LENGTHS = new HashMap<>();
+  private static final HashMap<Integer, Integer[]> ADJUSTED_MONTH_LENGTHS = new HashMap<Integer, Integer[]>();
 
   /**
    * Holding the adjusted days in the 30 year cycle. The key is a cycle number (Integer) and the value is the
    * all the starting days of the year in the cycle (Integer[]).
    */
-  private static final HashMap<Integer, Integer[]> ADJUSTED_CYCLE_YEARS = new HashMap<>();
+  private static final HashMap<Integer, Integer[]> ADJUSTED_CYCLE_YEARS = new HashMap<Integer, Integer[]>();
 
   /**
    * Holding the adjusted cycle in the 1 - 30000 year. The key is the cycle number (Integer) and the value is
@@ -319,7 +319,9 @@ final class HijrahDate extends ChronoDateImpl<HijrahChrono> implements Serializa
     }
     try {
       readDeviationConfig();
-    } catch (IOException | ParseException e) {
+    } catch (IOException e) {
+      // do nothing. Ignore deviation config.
+    } catch (ParseException e) {
       // do nothing. Ignore deviation config.
       // e.printStackTrace();
     }
@@ -402,7 +404,7 @@ final class HijrahDate extends ChronoDateImpl<HijrahChrono> implements Serializa
    */
   static HijrahDate of(HijrahEra era, int yearOfEra, int monthOfYear, int dayOfMonth) {
 
-    Objects.requireNonNull(era, "era");
+    Jdk7Methods.Objects_requireNonNull(era, "era");
     checkValidYearOfEra(yearOfEra);
     checkValidMonth(monthOfYear);
     checkValidDayOfMonth(dayOfMonth);
@@ -1392,13 +1394,21 @@ final class HijrahDate extends ChronoDateImpl<HijrahChrono> implements Serializa
 
     InputStream is = getConfigFileInputStream();
     if (is != null) {
-      try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+      // try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+      BufferedReader br = new BufferedReader(new InputStreamReader(is));
+      try {
         String line = "";
         int num = 0;
         while ((line = br.readLine()) != null) {
           num++;
           line = line.trim();
           parseLine(line, num);
+        }
+      } finally {
+        try {
+          br.close();
+        } catch (Exception e) {
+          // prevent suppressing exception while streaming...
         }
       }
     }

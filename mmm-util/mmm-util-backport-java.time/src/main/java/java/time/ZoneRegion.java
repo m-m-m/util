@@ -35,10 +35,10 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneRules;
 import java.time.zone.ZoneRulesException;
 import java.time.zone.ZoneRulesProvider;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -109,7 +109,7 @@ final class ZoneRegion extends ZoneId implements Serializable {
    */
   static ZoneRegion ofId(String zoneId, boolean checkAvailable) {
 
-    Objects.requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
     if (zoneId.length() < 2 || zoneId.startsWith("UTC") || zoneId.startsWith("GMT")
         || (PATTERN.matcher(zoneId).matches() == false)) {
       throw new DateTimeException("ZoneId format is not a valid region format");

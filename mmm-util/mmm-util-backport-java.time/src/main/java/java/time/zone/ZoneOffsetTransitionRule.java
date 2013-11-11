@@ -45,7 +45,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneOffset;
 import java.time.chrono.ISOChrono;
-import java.util.Objects;
+import java.time.jdk8.Jdk7Methods;
 
 /**
  * A rule expressing how to create a transition.
@@ -144,12 +144,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
       boolean timeEndOfDay, TimeDefinition timeDefnition, ZoneOffset standardOffset, ZoneOffset offsetBefore,
       ZoneOffset offsetAfter) {
 
-    Objects.requireNonNull(month, "month");
-    Objects.requireNonNull(time, "time");
-    Objects.requireNonNull(timeDefnition, "timeDefnition");
-    Objects.requireNonNull(standardOffset, "standardOffset");
-    Objects.requireNonNull(offsetBefore, "offsetBefore");
-    Objects.requireNonNull(offsetAfter, "offsetAfter");
+    Jdk7Methods.Objects_requireNonNull(month, "month");
+    Jdk7Methods.Objects_requireNonNull(time, "time");
+    Jdk7Methods.Objects_requireNonNull(timeDefnition, "timeDefnition");
+    Jdk7Methods.Objects_requireNonNull(standardOffset, "standardOffset");
+    Jdk7Methods.Objects_requireNonNull(offsetBefore, "offsetBefore");
+    Jdk7Methods.Objects_requireNonNull(offsetAfter, "offsetAfter");
     if (dayOfMonthIndicator < -28 || dayOfMonthIndicator > 31 || dayOfMonthIndicator == 0) {
       throw new IllegalArgumentException("Day of month indicator must be between -28 and 31 inclusive excluding zero");
     }

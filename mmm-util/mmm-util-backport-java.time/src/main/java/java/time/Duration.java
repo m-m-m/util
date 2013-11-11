@@ -51,8 +51,8 @@ import java.time.calendrical.DateTime.PlusAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.PeriodUnit;
 import java.time.format.DateTimeParseException;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 
 /**
  * A duration between two instants on the time-line.
@@ -299,7 +299,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    */
   public static Duration parse(final CharSequence text) {
 
-    Objects.requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
     int len = text.length();
     if (len < 4 || (text.charAt(0) != 'P' && text.charAt(0) != 'p') || (text.charAt(1) != 'T' && text.charAt(1) != 't')
         || (text.charAt(len - 1) != 'S' && text.charAt(len - 1) != 's')
@@ -502,7 +502,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    */
   public Duration plus(long amountToAdd, PeriodUnit unit) {
 
-    Objects.requireNonNull(unit, "unit");
+    Jdk7Methods.Objects_requireNonNull(unit, "unit");
     if (unit == DAYS) {
       return plus(Jdk8Methods.safeMultiply(amountToAdd, SECONDS_PER_DAY), 0);
     }
@@ -885,8 +885,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
   @Override
   public int compareTo(Duration otherDuration) {
 
-    // int cmp = Long.compare(this.seconds, otherDuration.seconds);
-    int cmp = (this.seconds < otherDuration.seconds) ? -1 : ((this.seconds == otherDuration.seconds) ? 0 : 1);
+    int cmp = Jdk7Methods.Long_compare(this.seconds, otherDuration.seconds);
     if (cmp != 0) {
       return cmp;
     }

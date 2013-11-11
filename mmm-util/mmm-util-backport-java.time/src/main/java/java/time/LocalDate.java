@@ -65,10 +65,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceChronoLocalDate;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.time.zone.ZoneOffsetTransition;
 import java.time.zone.ZoneRules;
-import java.util.Objects;
 
 /**
  * A date without a time-zone in the ISO-8601 calendar system, such as {@code 2007-12-03}.
@@ -190,7 +190,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    */
   public static LocalDate now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     // inline OffsetDate factory to avoid creating object and InstantProvider checks
     final Instant now = clock.instant(); // called once
     ZoneOffset offset = clock.getZone().getRules().getOffset(now);
@@ -215,7 +215,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
   public static LocalDate of(int year, Month month, int dayOfMonth) {
 
     YEAR.checkValidValue(year);
-    Objects.requireNonNull(month, "month");
+    Jdk7Methods.Objects_requireNonNull(month, "month");
     DAY_OF_MONTH.checkValidValue(dayOfMonth);
     return create(year, month, dayOfMonth);
   }
@@ -374,7 +374,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    */
   public static LocalDate parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, LocalDate.class);
   }
 
@@ -1285,7 +1285,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    */
   public ZonedDateTime atStartOfDay(ZoneId zoneId) {
 
-    Objects.requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
     // need to handle case where there is a gap from 11:30 to 00:30
     // standard ZDT factory would result in 01:00 rather than 00:30
     LocalDateTime ldt = atTime(LocalTime.MIDNIGHT);

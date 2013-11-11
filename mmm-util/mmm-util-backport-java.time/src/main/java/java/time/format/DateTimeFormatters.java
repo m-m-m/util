@@ -46,10 +46,10 @@ import java.time.ZoneOffset;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.ISOWeeks;
+import java.time.jdk8.Jdk7Methods;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Provides common implementations of {@code DateTimeFormatter}.
@@ -63,8 +63,8 @@ import java.util.Objects;
  * </ul>
  * <p>
  * 
- * <h4>Implementation notes</h4>
- * This is a thread-safe utility class. All returned formatters are immutable and thread-safe.
+ * <h4>Implementation notes</h4> This is a thread-safe utility class. All returned formatters are immutable
+ * and thread-safe.
  */
 public final class DateTimeFormatters {
 
@@ -242,7 +242,7 @@ public final class DateTimeFormatters {
    */
   public static DateTimeFormatter localizedDate(FormatStyle dateStyle) {
 
-    Objects.requireNonNull(dateStyle, "dateStyle");
+    Jdk7Methods.Objects_requireNonNull(dateStyle, "dateStyle");
     return new DateTimeFormatterBuilder().appendLocalized(dateStyle, null).toFormatter();
   }
 
@@ -263,7 +263,7 @@ public final class DateTimeFormatters {
    */
   public static DateTimeFormatter localizedTime(FormatStyle timeStyle) {
 
-    Objects.requireNonNull(timeStyle, "timeStyle");
+    Jdk7Methods.Objects_requireNonNull(timeStyle, "timeStyle");
     return new DateTimeFormatterBuilder().appendLocalized(null, timeStyle).toFormatter();
   }
 
@@ -285,7 +285,7 @@ public final class DateTimeFormatters {
    */
   public static DateTimeFormatter localizedDateTime(FormatStyle dateTimeStyle) {
 
-    Objects.requireNonNull(dateTimeStyle, "dateTimeStyle");
+    Jdk7Methods.Objects_requireNonNull(dateTimeStyle, "dateTimeStyle");
     return new DateTimeFormatterBuilder().appendLocalized(dateTimeStyle, dateTimeStyle).toFormatter();
   }
 
@@ -308,8 +308,8 @@ public final class DateTimeFormatters {
    */
   public static DateTimeFormatter localizedDateTime(FormatStyle dateStyle, FormatStyle timeStyle) {
 
-    Objects.requireNonNull(dateStyle, "dateStyle");
-    Objects.requireNonNull(timeStyle, "timeStyle");
+    Jdk7Methods.Objects_requireNonNull(dateStyle, "dateStyle");
+    Jdk7Methods.Objects_requireNonNull(timeStyle, "timeStyle");
     return new DateTimeFormatterBuilder().appendLocalized(dateStyle, timeStyle).toFormatter();
   }
 

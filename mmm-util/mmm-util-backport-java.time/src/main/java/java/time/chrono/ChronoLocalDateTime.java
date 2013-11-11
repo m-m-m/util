@@ -39,10 +39,11 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.format.DateTimeFormatter;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneRules;
 import java.util.Comparator;
 
@@ -91,9 +92,9 @@ public interface ChronoLocalDateTime<C extends Chrono<C>> extends DateTime, With
     @Override
     public int compare(ChronoLocalDateTime<?> datetime1, ChronoLocalDateTime<?> datetime2) {
 
-      int cmp = Long.compare(datetime1.getDate().toEpochDay(), datetime2.getDate().toEpochDay());
+      int cmp = Jdk7Methods.Long_compare(datetime1.getDate().toEpochDay(), datetime2.getDate().toEpochDay());
       if (cmp == 0) {
-        cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+        cmp = Jdk7Methods.Long_compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
       }
       return cmp;
     }

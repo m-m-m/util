@@ -45,17 +45,17 @@ import java.time.ZoneOffset;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTime;
 import java.time.calendrical.DateTimeAccessor;
+import java.time.calendrical.DateTimeAccessor.Query;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
-import java.time.calendrical.DateTimeAccessor.Query;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.TextStyle;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneRules;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -140,8 +140,8 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
   private static final ConcurrentHashMap<String, Chrono<?>> CHRONOS_BY_TYPE;
   static {
     // TODO: defer initialization?
-    ConcurrentHashMap<String, Chrono<?>> ids = new ConcurrentHashMap<>();
-    ConcurrentHashMap<String, Chrono<?>> types = new ConcurrentHashMap<>();
+    ConcurrentHashMap<String, Chrono<?>> ids = new ConcurrentHashMap<String, Chrono<?>>();
+    ConcurrentHashMap<String, Chrono<?>> types = new ConcurrentHashMap<String, Chrono<?>>();
     @SuppressWarnings("rawtypes")
     ServiceLoader<Chrono> loader = ServiceLoader.load(Chrono.class);
     for (Chrono<?> chrono : loader) {
@@ -169,7 +169,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
    */
   public static Chrono<?> from(DateTimeAccessor dateTime) {
 
-    Objects.requireNonNull(dateTime, "dateTime");
+    Jdk7Methods.Objects_requireNonNull(dateTime, "dateTime");
     Chrono<?> obj = dateTime.query(Query.CHRONO);
     return (obj != null ? obj : ISOChrono.INSTANCE);
   }
@@ -189,7 +189,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
    */
   public static Chrono<?> ofLocale(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     String type = locale.getUnicodeLocaleType("ca");
     if (type == null) {
       return ISOChrono.INSTANCE;
@@ -242,7 +242,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
    */
   public static Set<Chrono<?>> getAvailableChronologies() {
 
-    return new HashSet<>(CHRONOS_BY_ID.values());
+    return new HashSet<Chrono<?>>(CHRONOS_BY_ID.values());
   }
 
   // -----------------------------------------------------------------------
@@ -306,7 +306,8 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
    *         equal this Chrono
    */
   public/* package-scoped */ChronoDateTimeImpl<C> ensureChronoLocalDateTime(DateTime dateTime) { // TODO:
-                                                                                                 // non-public
+
+    // non-public
 
     @SuppressWarnings("unchecked")
     ChronoDateTimeImpl<C> other = (ChronoDateTimeImpl<C>) dateTime;
@@ -326,7 +327,8 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
    *         is not equal this Chrono
    */
   public/* package-scoped */ChronoZonedDateTimeImpl<C> ensureChronoZonedDateTime(DateTime dateTime) { // TODO:
-                                                                                                      // non-public
+
+    // non-public
 
     @SuppressWarnings("unchecked")
     ChronoZonedDateTimeImpl<C> other = (ChronoZonedDateTimeImpl<C>) dateTime;
@@ -476,7 +478,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
    */
   public ChronoLocalDate<C> dateNow(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     return date(LocalDate.now(clock));
   }
 

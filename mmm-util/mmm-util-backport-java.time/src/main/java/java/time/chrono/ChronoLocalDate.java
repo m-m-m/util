@@ -41,6 +41,7 @@ import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.PeriodUnit;
 import java.time.format.DateTimeFormatter;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Comparator;
 
 /**
@@ -202,7 +203,7 @@ public interface ChronoLocalDate<C extends Chrono<C>> extends DateTime, WithAdju
    * This comparator differs from the comparison in {@link #compareTo} in that it only compares the underlying
    * date and not the chronology. This allows dates in different calendar systems to be compared based on the
    * time-line position. This is equivalent to using
-   * {@code Long.compare(date1.toEpochDay(),  date2.toEpochDay())}.
+   * {@code Jdk7Methods.Long_compare(date1.toEpochDay(),  date2.toEpochDay())}.
    * 
    * @see #isAfter
    * @see #isBefore
@@ -213,7 +214,7 @@ public interface ChronoLocalDate<C extends Chrono<C>> extends DateTime, WithAdju
     @Override
     public int compare(ChronoLocalDate<?> date1, ChronoLocalDate<?> date2) {
 
-      return Long.compare(date1.toEpochDay(), date2.toEpochDay());
+      return Jdk7Methods.Long_compare(date1.toEpochDay(), date2.toEpochDay());
     }
   };
 

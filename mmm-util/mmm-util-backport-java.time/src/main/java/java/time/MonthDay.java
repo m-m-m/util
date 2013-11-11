@@ -40,17 +40,17 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.chrono.Chrono;
 import java.time.chrono.ISOChrono;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
-import java.util.Objects;
+import java.time.jdk8.Jdk7Methods;
 
 /**
  * A month-day in the ISO-8601 calendar system, such as {@code --12-03}.
@@ -165,7 +165,7 @@ public final class MonthDay extends DefaultInterfaceDateTimeAccessor implements 
    */
   public static MonthDay of(Month month, int dayOfMonth) {
 
-    Objects.requireNonNull(month, "month");
+    Jdk7Methods.Objects_requireNonNull(month, "month");
     DAY_OF_MONTH.checkValidValue(dayOfMonth);
     if (dayOfMonth > month.maxLength()) {
       throw new DateTimeException("Illegal value for DayOfMonth field, value " + dayOfMonth
@@ -248,7 +248,7 @@ public final class MonthDay extends DefaultInterfaceDateTimeAccessor implements 
    */
   public static MonthDay parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, MonthDay.class);
   }
 
@@ -360,7 +360,7 @@ public final class MonthDay extends DefaultInterfaceDateTimeAccessor implements 
    */
   public MonthDay with(Month month) {
 
-    Objects.requireNonNull(month, "month");
+    Jdk7Methods.Objects_requireNonNull(month, "month");
     if (month.getValue() == this.month) {
       return this;
     }
@@ -565,7 +565,7 @@ public final class MonthDay extends DefaultInterfaceDateTimeAccessor implements 
    */
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

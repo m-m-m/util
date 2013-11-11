@@ -46,7 +46,7 @@ import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.chrono.ChronoLocalDate;
-import java.util.Objects;
+import java.time.jdk8.Jdk7Methods;
 
 /**
  * A date in the Minguo calendar system.
@@ -77,7 +77,7 @@ final class MinguoDate extends ChronoDateImpl<MinguoChrono> implements Serializa
    */
   MinguoDate(LocalDate date) {
 
-    Objects.requireNonNull(date, "date");
+    Jdk7Methods.Objects_requireNonNull(date, "date");
     this.isoDate = date;
   }
 

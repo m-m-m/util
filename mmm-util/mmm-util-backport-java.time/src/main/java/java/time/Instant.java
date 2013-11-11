@@ -54,8 +54,8 @@ import java.time.calendrical.PeriodUnit;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 
 /**
  * An instantaneous point on the time-line.
@@ -206,7 +206,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
    */
   public static Instant now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     return clock.instant();
   }
 
@@ -675,8 +675,7 @@ public final class Instant extends DefaultInterfaceDateTimeAccessor implements D
   @Override
   public int compareTo(Instant otherInstant) {
 
-    // int cmp = Long.compare(this.seconds, otherInstant.seconds);
-    int cmp = (this.seconds < otherInstant.seconds) ? -1 : ((this.seconds == otherInstant.seconds) ? 0 : 1);
+    int cmp = Jdk7Methods.Long_compare(this.seconds, otherInstant.seconds);
     if (cmp != 0) {
       return cmp;
     }

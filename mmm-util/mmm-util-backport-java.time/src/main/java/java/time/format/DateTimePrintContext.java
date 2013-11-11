@@ -33,10 +33,10 @@ package java.time.format;
 
 import java.time.DateTimeException;
 import java.time.calendrical.DateTimeAccessor;
-import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeAccessor.Query;
+import java.time.calendrical.DateTimeField;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Context object used during date and time printing.
@@ -47,8 +47,11 @@ import java.util.Objects;
  * This class is a mutable context intended for use from a single thread. Usage of the class is thread-safe
  * within standard printing as the framework creates a new instance of the class for each print and printing
  * is single-threaded.
+ * 
+ * @deprecated originally in JSR310 only default (package) visible
  */
-final class DateTimePrintContext {
+@Deprecated
+public final class DateTimePrintContext {
 
   /**
    * The date-time being output.
@@ -79,7 +82,7 @@ final class DateTimePrintContext {
    * @param locale the locale to use, not null
    * @param symbols the symbols to use during parsing, not null
    */
-  DateTimePrintContext(DateTimeAccessor dateTime, Locale locale, DateTimeFormatSymbols symbols) {
+  public DateTimePrintContext(DateTimeAccessor dateTime, Locale locale, DateTimeFormatSymbols symbols) {
 
     super();
     setDateTime(dateTime);
@@ -102,10 +105,12 @@ final class DateTimePrintContext {
    * Sets the date-time being output.
    * 
    * @param dateTime the date-time object, not null
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  void setDateTime(DateTimeAccessor dateTime) {
+  @Deprecated
+  public void setDateTime(DateTimeAccessor dateTime) {
 
-    Objects.requireNonNull(dateTime, "dateTime");
+    Jdk7Methods.Objects_requireNonNull(dateTime, "dateTime");
     this.dateTime = dateTime;
   }
 
@@ -130,10 +135,12 @@ final class DateTimePrintContext {
    * by the symbols.
    * 
    * @param locale the locale, not null
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  void setLocale(Locale locale) {
+  @Deprecated
+  public void setLocale(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     this.locale = locale;
   }
 
@@ -159,7 +166,7 @@ final class DateTimePrintContext {
    */
   void setSymbols(DateTimeFormatSymbols symbols) {
 
-    Objects.requireNonNull(symbols, "symbols");
+    Jdk7Methods.Objects_requireNonNull(symbols, "symbols");
     this.symbols = symbols;
   }
 

@@ -35,8 +35,8 @@ import static java.time.LocalTime.NANOS_PER_MINUTE;
 import static java.time.LocalTime.NANOS_PER_SECOND;
 
 import java.io.Serializable;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 import java.util.TimeZone;
 
 /**
@@ -125,7 +125,7 @@ public abstract class Clock {
    */
   public static Clock system(ZoneId zone) {
 
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     return new SystemClock(zone);
   }
 
@@ -205,8 +205,8 @@ public abstract class Clock {
    */
   public static Clock tick(Clock baseClock, Duration tickDuration) {
 
-    Objects.requireNonNull(baseClock, "baseClock");
-    Objects.requireNonNull(tickDuration, "tickDuration");
+    Jdk7Methods.Objects_requireNonNull(baseClock, "baseClock");
+    Jdk7Methods.Objects_requireNonNull(tickDuration, "tickDuration");
     if (tickDuration.isNegative()) {
       throw new IllegalArgumentException("Duration must not be negative");
     }
@@ -233,8 +233,8 @@ public abstract class Clock {
    */
   public static Clock fixed(Instant fixedInstant, ZoneId zone) {
 
-    Objects.requireNonNull(fixedInstant, "fixedInstant");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(fixedInstant, "fixedInstant");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     return new FixedClock(fixedInstant, zone);
   }
 
@@ -254,8 +254,8 @@ public abstract class Clock {
    */
   public static Clock offset(Clock baseClock, Duration offset) {
 
-    Objects.requireNonNull(baseClock, "baseClock");
-    Objects.requireNonNull(offset, "offset");
+    Jdk7Methods.Objects_requireNonNull(baseClock, "baseClock");
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
     if (offset.equals(Duration.ZERO)) {
       return baseClock;
     }

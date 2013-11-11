@@ -43,19 +43,19 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeAdjusters;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTime;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneRules;
 import java.util.Comparator;
-import java.util.Objects;
 
 /**
  * A date-time with an offset from UTC/Greenwich in the ISO-8601 calendar system, such as
@@ -94,9 +94,17 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
     @Override
     public int compare(OffsetDateTime datetime1, OffsetDateTime datetime2) {
 
-      int cmp = Long.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
+      // int cmp = Jdk7Methods.Long_compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
+      long x = datetime1.toEpochSecond();
+      long y = datetime2.toEpochSecond();
+      int cmp = (x < y) ? -1 : ((x == y) ? 0 : 1);
+
       if (cmp == 0) {
-        cmp = Long.compare(datetime1.getTime().toNanoOfDay(), datetime2.getTime().toNanoOfDay());
+        // cmp = Jdk7Methods.Long_compare(datetime1.getTime().toNanoOfDay(),
+        // datetime2.getTime().toNanoOfDay());
+        long x2 = datetime1.getTime().toNanoOfDay();
+        long y2 = datetime2.getTime().toNanoOfDay();
+        cmp = (x2 < y2) ? -1 : ((x2 == y2) ? 0 : 1);
       }
       return cmp;
     }
@@ -165,7 +173,7 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
    */
   public static OffsetDateTime now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     final Instant now = clock.instant(); // called once
     return ofInstant(now, clock.getZone().getRules().getOffset(now));
   }
@@ -359,7 +367,7 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
    */
   public static OffsetDateTime of(ZonedDateTime zonedDateTime) {
 
-    Objects.requireNonNull(zonedDateTime, "zonedDateTime");
+    Jdk7Methods.Objects_requireNonNull(zonedDateTime, "zonedDateTime");
     return new OffsetDateTime(zonedDateTime.getDateTime(), zonedDateTime.getOffset());
   }
 
@@ -377,8 +385,8 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
    */
   public static OffsetDateTime ofInstant(Instant instant, ZoneId zone) {
 
-    Objects.requireNonNull(instant, "instant");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(instant, "instant");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     ZoneRules rules = zone.getRules();
     ZoneOffset offset = rules.getOffset(instant);
     LocalDateTime ldt = LocalDateTime.ofEpochSecond(instant.getEpochSecond(), instant.getNano(), offset);
@@ -444,7 +452,7 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
    */
   public static OffsetDateTime parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, OffsetDateTime.class);
   }
 
@@ -457,8 +465,8 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
    */
   private OffsetDateTime(LocalDateTime dateTime, ZoneOffset offset) {
 
-    this.dateTime = Objects.requireNonNull(dateTime, "dateTime");
-    this.offset = Objects.requireNonNull(offset, "offset");
+    this.dateTime = Jdk7Methods.Objects_requireNonNull(dateTime, "dateTime");
+    this.offset = Jdk7Methods.Objects_requireNonNull(offset, "offset");
   }
 
   /**
@@ -1534,7 +1542,7 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
     if (getOffset().equals(other.getOffset())) {
       return getDateTime().compareTo(other.getDateTime());
     }
-    int cmp = Long.compare(toEpochSecond(), other.toEpochSecond());
+    int cmp = Jdk7Methods.Long_compare(toEpochSecond(), other.toEpochSecond());
     if (cmp == 0) {
       cmp = getTime().getNano() - other.getTime().getNano();
       if (cmp == 0) {
@@ -1664,7 +1672,7 @@ public final class OffsetDateTime extends DefaultInterfaceDateTime implements Da
    */
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

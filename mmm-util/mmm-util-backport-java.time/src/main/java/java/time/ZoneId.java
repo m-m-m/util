@@ -34,11 +34,12 @@ package java.time;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.time.calendrical.DateTimeAccessor;
-import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeAccessor.Query;
+import java.time.calendrical.DateTimeField;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.TextStyle;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneRules;
 import java.time.zone.ZoneRulesException;
 import java.time.zone.ZoneRulesProvider;
@@ -46,7 +47,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.TimeZone;
 
 /**
@@ -75,8 +75,7 @@ import java.util.TimeZone;
  * The code supports loading a {@code ZoneId} on a JVM which does not have available rules for that ID. This
  * allows the date-time object, such as {@link ZonedDateTime}, to still be queried.
  * 
- * <h4>Time-zone IDs</h4>
- * The ID is unique within the system. The formats for offset and region IDs differ.
+ * <h4>Time-zone IDs</h4> The ID is unique within the system. The formats for offset and region IDs differ.
  * <p>
  * An ID is parsed as an offset ID if it starts with 'UTC', 'GMT', '+' or '-', or is a single letter. For
  * example, 'Z', '+02:00', '-05:00', 'UTC+05' and 'GMT-6' are all valid offset IDs. Note that some IDs, such
@@ -184,7 +183,7 @@ public abstract class ZoneId {
    */
   public static final Map<String, String> OLD_IDS_POST_2005;
   static {
-    Map<String, String> base = new HashMap<>();
+    Map<String, String> base = new HashMap<String, String>();
     base.put("ACT", "Australia/Darwin");
     base.put("AET", "Australia/Sydney");
     base.put("AGT", "America/Argentina/Buenos_Aires");
@@ -210,12 +209,12 @@ public abstract class ZoneId {
     base.put("PST", "America/Los_Angeles");
     base.put("SST", "Pacific/Guadalcanal");
     base.put("VST", "Asia/Ho_Chi_Minh");
-    Map<String, String> pre = new HashMap<>(base);
+    Map<String, String> pre = new HashMap<String, String>(base);
     pre.put("EST", "America/Indianapolis");
     pre.put("MST", "America/Phoenix");
     pre.put("HST", "Pacific/Honolulu");
     OLD_IDS_PRE_2005 = Collections.unmodifiableMap(pre);
-    Map<String, String> post = new HashMap<>(base);
+    Map<String, String> post = new HashMap<String, String>(base);
     post.put("EST", "-05:00");
     post.put("MST", "-07:00");
     post.put("HST", "-10:00");
@@ -256,8 +255,8 @@ public abstract class ZoneId {
    */
   public static ZoneId of(String zoneId, Map<String, String> aliasMap) {
 
-    Objects.requireNonNull(zoneId, "zoneId");
-    Objects.requireNonNull(aliasMap, "aliasMap");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(aliasMap, "aliasMap");
     String id = aliasMap.get(zoneId);
     id = (id != null ? id : zoneId);
     return of(id);
@@ -299,7 +298,7 @@ public abstract class ZoneId {
    */
   public static ZoneId of(String zoneId) {
 
-    Objects.requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
     if (zoneId.length() <= 1 || zoneId.startsWith("+") || zoneId.startsWith("-")) {
       return ZoneOffset.of(zoneId);
     } else if (zoneId.startsWith("UTC") || zoneId.startsWith("GMT")) {

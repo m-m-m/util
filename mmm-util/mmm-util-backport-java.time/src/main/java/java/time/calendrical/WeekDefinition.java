@@ -35,10 +35,10 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.chrono.Chrono;
 import java.time.chrono.ChronoLocalDate;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -146,7 +146,8 @@ public final class WeekDefinition implements Serializable {
   /**
    * The cache of rules by locale.
    */
-  private static final ConcurrentMap<String, WeekDefinition> CACHE = new ConcurrentHashMap<>(4, 0.75f, 2);
+  private static final ConcurrentMap<String, WeekDefinition> CACHE = new ConcurrentHashMap<String, WeekDefinition>(4,
+      0.75f, 2);
 
   /**
    * The first day-of-week.
@@ -183,7 +184,7 @@ public final class WeekDefinition implements Serializable {
    */
   public static WeekDefinition of(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     locale = new Locale(locale.getLanguage(), locale.getCountry()); // elminate variants
 
     // obtain these from GregorianCalendar for now
@@ -233,7 +234,7 @@ public final class WeekDefinition implements Serializable {
    */
   private WeekDefinition(DayOfWeek firstDayOfWeek, int minimalDaysInFirstWeek) {
 
-    Objects.requireNonNull(firstDayOfWeek, "firstDayOfWeek");
+    Jdk7Methods.Objects_requireNonNull(firstDayOfWeek, "firstDayOfWeek");
     if (minimalDaysInFirstWeek < 1 || minimalDaysInFirstWeek > 7) {
       throw new IllegalArgumentException("Minimal number of days is invalid");
     }
@@ -323,7 +324,7 @@ public final class WeekDefinition implements Serializable {
    * - if the 2nd day of the year is a Monday, week one starts on the 2nd and the 1st is in week zero<br />
    * - if the 4th day of the year is a Monday, week one starts on the 4th and the 1st to 3rd is in week zero<br />
    * - if the 5th day of the year is a Monday, week two starts on the 5th and the 1st to 4th is in week one<br
-   * />
+   * * * * />
    * <p>
    * This field can be used with any calendar system.
    */
@@ -568,7 +569,7 @@ public final class WeekDefinition implements Serializable {
     @Override
     public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
 
-      return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+      return Jdk7Methods.Long_compare(dateTime1.getLong(this), dateTime2.getLong(this));
     }
 
     // -----------------------------------------------------------------------

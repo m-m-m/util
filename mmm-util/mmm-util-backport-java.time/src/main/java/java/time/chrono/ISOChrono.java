@@ -41,10 +41,10 @@ import java.time.ZonedDateTime;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeValueRange;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * The ISO calendar system.
@@ -318,7 +318,7 @@ public final class ISOChrono extends Chrono<ISOChrono> implements Serializable {
   // override with covariant return type
   public LocalDate dateNow(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     return date(LocalDate.now(clock));
   }
 

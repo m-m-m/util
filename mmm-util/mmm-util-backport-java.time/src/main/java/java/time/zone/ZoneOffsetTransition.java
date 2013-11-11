@@ -39,10 +39,10 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.jdk8.Jdk7Methods;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A transition between two offsets caused by a discontinuity in the local time-line.
@@ -97,9 +97,9 @@ public final class ZoneOffsetTransition implements Comparable<ZoneOffsetTransiti
    */
   public static ZoneOffsetTransition of(LocalDateTime transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
 
-    Objects.requireNonNull(transition, "transition");
-    Objects.requireNonNull(offsetBefore, "offsetBefore");
-    Objects.requireNonNull(offsetAfter, "offsetAfter");
+    Jdk7Methods.Objects_requireNonNull(transition, "transition");
+    Jdk7Methods.Objects_requireNonNull(offsetBefore, "offsetBefore");
+    Jdk7Methods.Objects_requireNonNull(offsetAfter, "offsetAfter");
     if (offsetBefore.equals(offsetAfter)) {
       throw new IllegalArgumentException("Offsets must not be equal");
     }
@@ -115,8 +115,10 @@ public final class ZoneOffsetTransition implements Comparable<ZoneOffsetTransiti
    * @param transition the transition date-time with the offset before the transition, not null
    * @param offsetBefore the offset before the transition, not null
    * @param offsetAfter the offset at and after the transition, not null
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  ZoneOffsetTransition(LocalDateTime transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
+  @Deprecated
+  public ZoneOffsetTransition(LocalDateTime transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
 
     this.transition = transition;
     this.offsetBefore = offsetBefore;

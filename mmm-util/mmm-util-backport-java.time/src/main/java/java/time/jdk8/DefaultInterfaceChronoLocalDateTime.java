@@ -42,7 +42,6 @@ import java.time.calendrical.PeriodUnit;
 import java.time.chrono.Chrono;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 /**
  * A temporary class providing implementations that will become default interface methods once integrated into
@@ -106,7 +105,7 @@ public abstract class DefaultInterfaceChronoLocalDateTime<C extends Chrono<C>> e
   @Override
   public long toEpochSecond(ZoneOffset offset) {
 
-    Objects.requireNonNull(offset, "offset");
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
     long epochDay = getDate().toEpochDay();
     long secs = epochDay * 86400 + getTime().toSecondOfDay();
     secs -= offset.getTotalSeconds();
@@ -182,7 +181,7 @@ public abstract class DefaultInterfaceChronoLocalDateTime<C extends Chrono<C>> e
   @Override
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

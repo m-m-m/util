@@ -52,10 +52,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceChronoZonedDateTime;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneOffsetTransition;
 import java.time.zone.ZoneRules;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A date-time with a time-zone in the ISO-8601 calendar system, such as
@@ -169,7 +169,7 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   public static ZonedDateTime now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     final Instant now = clock.instant(); // called once
     return ofInstant(now, clock.getZone());
   }
@@ -226,8 +226,8 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   public static ZonedDateTime ofLocal(LocalDateTime localDateTime, ZoneId zone, ZoneOffset preferredOffset) {
 
-    Objects.requireNonNull(localDateTime, "localDateTime");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(localDateTime, "localDateTime");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     if (zone instanceof ZoneOffset) {
       return new ZonedDateTime(localDateTime, (ZoneOffset) zone, zone);
     }
@@ -244,7 +244,8 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
       if (preferredOffset != null && validOffsets.contains(preferredOffset)) {
         offset = preferredOffset;
       } else {
-        offset = Objects.requireNonNull(validOffsets.get(0), "offset"); // protect against bad ZoneRules
+        offset = Jdk7Methods.Objects_requireNonNull(validOffsets.get(0), "offset"); // protect against bad
+                                                                                    // ZoneRules
       }
     }
     return new ZonedDateTime(localDateTime, offset, zone);
@@ -266,8 +267,8 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   public static ZonedDateTime ofInstant(Instant instant, ZoneId zone) {
 
-    Objects.requireNonNull(instant, "instant");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(instant, "instant");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     return create(instant.getEpochSecond(), instant.getNano(), zone);
   }
 
@@ -293,9 +294,9 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   public static ZonedDateTime ofInstant(LocalDateTime localDateTime, ZoneOffset offset, ZoneId zone) {
 
-    Objects.requireNonNull(localDateTime, "localDateTime");
-    Objects.requireNonNull(offset, "offset");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(localDateTime, "localDateTime");
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     return create(localDateTime.toEpochSecond(offset), localDateTime.getNano(), zone);
   }
 
@@ -333,9 +334,9 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   public static ZonedDateTime ofStrict(LocalDateTime localDateTime, ZoneOffset offset, ZoneId zone) {
 
-    Objects.requireNonNull(localDateTime, "localDateTime");
-    Objects.requireNonNull(offset, "offset");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(localDateTime, "localDateTime");
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     ZoneRules rules = zone.getRules();
     if (rules.isValidOffset(localDateTime, offset) == false) {
       ZoneOffsetTransition trans = rules.getTransition(localDateTime);
@@ -371,9 +372,9 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   private static ZonedDateTime ofLenient(LocalDateTime localDateTime, ZoneOffset offset, ZoneId zone) {
 
-    Objects.requireNonNull(localDateTime, "localDateTime");
-    Objects.requireNonNull(offset, "offset");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(localDateTime, "localDateTime");
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     if (zone instanceof ZoneOffset && offset.equals(zone) == false) {
       throw new IllegalArgumentException("ZoneId must match ZoneOffset");
     }
@@ -443,7 +444,7 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
    */
   public static ZonedDateTime parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, ZonedDateTime.class);
   }
 
@@ -649,7 +650,7 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
   @Override
   public ZonedDateTime withZoneSameLocal(ZoneId zone) {
 
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     return this.zone.equals(zone) ? this : ofLocal(this.dateTime, zone, this.offset);
   }
 
@@ -671,7 +672,7 @@ public final class ZonedDateTime extends DefaultInterfaceChronoZonedDateTime<ISO
   @Override
   public ZonedDateTime withZoneSameInstant(ZoneId zone) {
 
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     return this.zone.equals(zone) ? this : create(this.dateTime.toEpochSecond(this.offset), this.dateTime.getNano(),
         zone);
   }

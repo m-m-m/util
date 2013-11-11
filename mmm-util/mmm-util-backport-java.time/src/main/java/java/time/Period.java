@@ -56,8 +56,8 @@ import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
 import java.time.chrono.Chrono;
 import java.time.format.DateTimeParseException;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 
 /**
  * An immutable period consisting of the most common units, such as '3 Months, 4 Days and 7 Hours'.
@@ -250,7 +250,7 @@ public final class Period implements PlusAdjuster, MinusAdjuster, Serializable {
    */
   public static Period of(Duration duration) {
 
-    Objects.requireNonNull(duration, "duration");
+    Jdk7Methods.Objects_requireNonNull(duration, "duration");
     if (duration.isZero()) {
       return ZERO;
     }
@@ -402,7 +402,7 @@ public final class Period implements PlusAdjuster, MinusAdjuster, Serializable {
    */
   public static Period parse(final CharSequence text) {
 
-    Objects.requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
     return new PeriodParser(text).parse();
   }
 
@@ -675,7 +675,7 @@ public final class Period implements PlusAdjuster, MinusAdjuster, Serializable {
    */
   public Period plus(long amount, PeriodUnit unit) {
 
-    Objects.requireNonNull(unit, "unit");
+    Jdk7Methods.Objects_requireNonNull(unit, "unit");
     if (unit instanceof ChronoUnit) {
       if (unit == YEARS || unit == MONTHS || unit == DAYS || unit.isDurationEstimated() == false) {
         if (amount == 0) {

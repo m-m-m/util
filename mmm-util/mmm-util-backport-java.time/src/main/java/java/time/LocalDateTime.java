@@ -60,6 +60,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceChronoLocalDateTime;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.time.zone.ZoneRules;
 
@@ -153,10 +154,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    */
   public static LocalDateTime now(Clock clock) {
 
-    // Objects.requireNonNull(clock, "clock");
-    if (clock == null) {
-      throw new NullPointerException("clock");
-    }
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     final Instant now = clock.instant(); // called once
     ZoneOffset offset = clock.getZone().getRules().getOffset(now);
     return ofEpochSecond(now.getEpochSecond(), now.getNano(), offset);
@@ -314,14 +312,8 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    */
   public static LocalDateTime of(LocalDate date, LocalTime time) {
 
-    // Objects.requireNonNull(date, "date");
-    if (date == null) {
-      throw new NullPointerException("date");
-    }
-    // Objects.requireNonNull(time, "time");
-    if (time == null) {
-      throw new NullPointerException("time");
-    }
+    Jdk7Methods.Objects_requireNonNull(date, "date");
+    Jdk7Methods.Objects_requireNonNull(time, "time");
     return new LocalDateTime(date, time);
   }
 
@@ -340,14 +332,8 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    */
   public static LocalDateTime ofInstant(Instant instant, ZoneId zone) {
 
-    // Objects.requireNonNull(instant, "instant");
-    if (instant == null) {
-      throw new NullPointerException("instant");
-    }
-    // Objects.requireNonNull(zone, "zone");
-    if (zone == null) {
-      throw new NullPointerException("zone");
-    }
+    Jdk7Methods.Objects_requireNonNull(instant, "instant");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     ZoneRules rules = zone.getRules();
     ZoneOffset offset = rules.getOffset(instant);
     return ofEpochSecond(instant.getEpochSecond(), instant.getNano(), offset);
@@ -367,10 +353,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    */
   public static LocalDateTime ofEpochSecond(long epochSecond, int nanoOfSecond, ZoneOffset offset) {
 
-    // Objects.requireNonNull(offset, "offset");
-    if (offset == null) {
-      throw new NullPointerException("offset");
-    }
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
     long localSecond = epochSecond + offset.getTotalSeconds(); // overflow caught later
     long localEpochDay = Jdk8Methods.floorDiv(localSecond, SECONDS_PER_DAY);
     int secsOfDay = Jdk8Methods.floorMod(localSecond, SECONDS_PER_DAY);
@@ -432,10 +415,7 @@ public final class LocalDateTime extends DefaultInterfaceChronoLocalDateTime<ISO
    */
   public static LocalDateTime parse(CharSequence text, DateTimeFormatter formatter) {
 
-    // Objects.requireNonNull(formatter, "formatter");
-    if (formatter == null) {
-      throw new NullPointerException("formatter");
-    }
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, LocalDateTime.class);
   }
 

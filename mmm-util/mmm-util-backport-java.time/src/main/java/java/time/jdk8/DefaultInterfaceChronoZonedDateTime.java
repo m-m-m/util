@@ -46,7 +46,6 @@ import java.time.chrono.Chrono;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 /**
  * A temporary class providing implementations that will become default interface methods once integrated into
@@ -174,7 +173,7 @@ public abstract class DefaultInterfaceChronoZonedDateTime<C extends Chrono<C>> e
   @Override
   public int compareTo(ChronoZonedDateTime<?> other) {
 
-    int cmp = Long.compare(toEpochSecond(), other.toEpochSecond());
+    int cmp = Jdk7Methods.Long_compare(toEpochSecond(), other.toEpochSecond());
     if (cmp == 0) {
       cmp = getTime().getNano() - other.getTime().getNano();
       if (cmp == 0) {
@@ -247,7 +246,7 @@ public abstract class DefaultInterfaceChronoZonedDateTime<C extends Chrono<C>> e
   @Override
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

@@ -42,20 +42,20 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeAdjusters;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.chrono.ISOChrono;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.time.zone.ZoneRules;
-import java.util.Objects;
 
 /**
  * A date with an offset from UTC/Greenwich in the ISO-8601 calendar system, such as {@code 2007-12-03+01:00}.
@@ -135,7 +135,7 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
    */
   public static OffsetDate now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     final Instant now = clock.instant(); // called once
     return ofInstant(now, clock.getZone().getRules().getOffset(now));
   }
@@ -206,8 +206,8 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
    */
   public static OffsetDate ofInstant(Instant instant, ZoneId zone) {
 
-    Objects.requireNonNull(instant, "instant");
-    Objects.requireNonNull(zone, "zone");
+    Jdk7Methods.Objects_requireNonNull(instant, "instant");
+    Jdk7Methods.Objects_requireNonNull(zone, "zone");
     ZoneRules rules = zone.getRules();
     ZoneOffset offset = rules.getOffset(instant);
     long epochSec = instant.getEpochSecond() + offset.getTotalSeconds(); // overflow caught later
@@ -265,7 +265,7 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
    */
   public static OffsetDate parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, OffsetDate.class);
   }
 
@@ -278,8 +278,8 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
    */
   private OffsetDate(LocalDate date, ZoneOffset offset) {
 
-    this.date = Objects.requireNonNull(date, "date");
-    this.offset = Objects.requireNonNull(offset, "offset");
+    this.date = Jdk7Methods.Objects_requireNonNull(date, "date");
+    this.offset = Jdk7Methods.Objects_requireNonNull(offset, "offset");
   }
 
   /**
@@ -357,7 +357,7 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
    */
   public OffsetDate withOffset(ZoneOffset offset) {
 
-    Objects.requireNonNull(offset, "offset");
+    Jdk7Methods.Objects_requireNonNull(offset, "offset");
     return with(this.date, offset);
   }
 
@@ -960,7 +960,10 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
     if (this.offset.equals(other.offset)) {
       return this.date.compareTo(other.date);
     }
-    int compare = Long.compare(toEpochSecond(), other.toEpochSecond());
+    // int compare = Long.compare(toEpochSecond(), other.toEpochSecond());
+    long x = toEpochSecond();
+    long y = other.toEpochSecond();
+    int compare = (x < y) ? -1 : ((x == y) ? 0 : 1);
     if (compare == 0) {
       compare = this.date.compareTo(other.date);
     }
@@ -1074,7 +1077,7 @@ public final class OffsetDate extends DefaultInterfaceDateTimeAccessor implement
    */
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

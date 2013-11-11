@@ -37,6 +37,7 @@ import static java.time.calendrical.ChronoUnit.FOREVER;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 
 /**
@@ -185,7 +186,7 @@ public enum JulianDayField implements DateTimeField {
   @Override
   public int compare(DateTimeAccessor dateTime1, DateTimeAccessor dateTime2) {
 
-    return Long.compare(dateTime1.getLong(this), dateTime2.getLong(this));
+    return Jdk7Methods.Long_compare(dateTime1.getLong(this), dateTime2.getLong(this));
   }
 
   // -----------------------------------------------------------------------

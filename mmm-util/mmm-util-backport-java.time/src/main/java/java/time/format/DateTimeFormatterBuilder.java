@@ -51,6 +51,7 @@ import java.time.calendrical.DateTimeValueRange;
 import java.time.chrono.Chrono;
 import java.time.chrono.ISOChrono;
 import java.time.format.SimpleDateTimeTextProvider.LocaleStore;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.time.zone.ZoneRulesProvider;
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -252,7 +252,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendValue(DateTimeField field) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     this.active.valueParserIndex = appendInternal(new NumberPrinterParser(field, 1, 19, SignStyle.NORMAL));
     return this;
   }
@@ -300,7 +300,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendValue(DateTimeField field, int width) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     if (width < 1 || width > 19) {
       throw new IllegalArgumentException("The width must be from 1 to 19 inclusive but was " + width);
     }
@@ -333,8 +333,8 @@ public final class DateTimeFormatterBuilder {
     if (minWidth == maxWidth && signStyle == SignStyle.NOT_NEGATIVE) {
       return appendValue(field, maxWidth);
     }
-    Objects.requireNonNull(field, "field");
-    Objects.requireNonNull(signStyle, "signStyle");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(signStyle, "signStyle");
     if (minWidth < 1 || minWidth > 19) {
       throw new IllegalArgumentException("The minimum width must be from 1 to 19 inclusive but was " + minWidth);
     }
@@ -383,7 +383,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendValueReduced(DateTimeField field, int width, int baseValue) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     ReducedPrinterParser pp = new ReducedPrinterParser(field, width, baseValue);
     appendFixedWidth(width, pp);
     return this;
@@ -480,8 +480,8 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendText(DateTimeField field, TextStyle textStyle) {
 
-    Objects.requireNonNull(field, "field");
-    Objects.requireNonNull(textStyle, "textStyle");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(textStyle, "textStyle");
     appendInternal(new TextPrinterParser(field, textStyle, DateTimeFormatters.getTextProvider()));
     return this;
   }
@@ -519,8 +519,8 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendText(DateTimeField field, Map<Long, String> textLookup) {
 
-    Objects.requireNonNull(field, "field");
-    Objects.requireNonNull(textLookup, "textLookup");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(textLookup, "textLookup");
     Map<Long, String> copy = new LinkedHashMap<Long, String>(textLookup);
     Map<TextStyle, Map<Long, String>> map = Collections.singletonMap(TextStyle.FULL, copy);
     final LocaleStore store = new LocaleStore(map);
@@ -696,7 +696,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendChronoText(TextStyle textStyle) {
 
-    Objects.requireNonNull(textStyle, "textStyle");
+    Jdk7Methods.Objects_requireNonNull(textStyle, "textStyle");
     appendInternal(new ChronoPrinterParser(textStyle));
     return this;
   }
@@ -736,7 +736,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendLocalized(FormatStyle dateStyle, FormatStyle timeStyle, Chrono<?> chrono) {
 
-    Objects.requireNonNull(chrono, "chrono");
+    Jdk7Methods.Objects_requireNonNull(chrono, "chrono");
     if (dateStyle != null || timeStyle != null) {
       appendInternal(new LocalizedPrinterParser(dateStyle, timeStyle, chrono));
     }
@@ -770,7 +770,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendLiteral(String literal) {
 
-    Objects.requireNonNull(literal, "literal");
+    Jdk7Methods.Objects_requireNonNull(literal, "literal");
     if (literal.length() > 0) {
       if (literal.length() == 1) {
         appendInternal(new CharLiteralPrinterParser(literal.charAt(0)));
@@ -793,7 +793,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder append(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     appendInternal(formatter.toPrinterParser(false));
     return this;
   }
@@ -812,7 +812,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendOptional(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     appendInternal(formatter.toPrinterParser(true));
     return this;
   }
@@ -931,7 +931,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatterBuilder appendPattern(String pattern) {
 
-    Objects.requireNonNull(pattern, "pattern");
+    Jdk7Methods.Objects_requireNonNull(pattern, "pattern");
     parsePattern(pattern);
     return this;
   }
@@ -1260,7 +1260,7 @@ public final class DateTimeFormatterBuilder {
    */
   private int appendInternal(DateTimePrinterParser pp) {
 
-    Objects.requireNonNull(pp, "pp");
+    Jdk7Methods.Objects_requireNonNull(pp, "pp");
     if (this.active.padNextWidth > 0) {
       if (pp != null) {
         pp = new PadPrinterParserDecorator(pp, this.active.padNextWidth, this.active.padNextChar);
@@ -1310,7 +1310,7 @@ public final class DateTimeFormatterBuilder {
    */
   public DateTimeFormatter toFormatter(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     while (this.active.parent != null) {
       optionalEnd();
     }
@@ -1340,8 +1340,11 @@ public final class DateTimeFormatterBuilder {
    * <p>
    * The context is not a thread-safe object and a new instance will be created for each print that occurs.
    * The context must not be stored in an instance variable or shared with any other threads.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  interface DateTimePrinterParser {
+  @Deprecated
+  public interface DateTimePrinterParser {
 
     /**
      * Prints the date-time object to the buffer.
@@ -1378,14 +1381,17 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Composite printer and parser.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class CompositePrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static final class CompositePrinterParser implements DateTimePrinterParser {
 
     private final DateTimePrinterParser[] printerParsers;
 
     private final boolean optional;
 
-    CompositePrinterParser(List<DateTimePrinterParser> printerParsers, boolean optional) {
+    public CompositePrinterParser(List<DateTimePrinterParser> printerParsers, boolean optional) {
 
       this(printerParsers.toArray(new DateTimePrinterParser[printerParsers.size()]), optional);
     }
@@ -1476,8 +1482,11 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Pads the output to a fixed width.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class PadPrinterParserDecorator implements DateTimePrinterParser {
+  @Deprecated
+  public static final class PadPrinterParserDecorator implements DateTimePrinterParser {
 
     private final DateTimePrinterParser printerParser;
 
@@ -1492,7 +1501,7 @@ public final class DateTimeFormatterBuilder {
      * @param padWidth the width to pad to, 1 or greater
      * @param padChar the pad character
      */
-    PadPrinterParserDecorator(DateTimePrinterParser printerParser, int padWidth, char padChar) {
+    public PadPrinterParserDecorator(DateTimePrinterParser printerParser, int padWidth, char padChar) {
 
       // input checked by DateTimeFormatterBuilder
       this.printerParser = printerParser;
@@ -1565,8 +1574,10 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Enumeration to apply simple parse settings.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static enum SettingsParser implements DateTimePrinterParser {
+  public static enum SettingsParser implements DateTimePrinterParser {
     SENSITIVE, INSENSITIVE, STRICT, LENIENT;
 
     @Override
@@ -1615,12 +1626,15 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses a character literal.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class CharLiteralPrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static final class CharLiteralPrinterParser implements DateTimePrinterParser {
 
     private final char literal;
 
-    CharLiteralPrinterParser(char literal) {
+    public CharLiteralPrinterParser(char literal) {
 
       this.literal = literal;
     }
@@ -1663,12 +1677,15 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses a string literal.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class StringLiteralPrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static final class StringLiteralPrinterParser implements DateTimePrinterParser {
 
     private final String literal;
 
-    StringLiteralPrinterParser(String literal) {
+    public StringLiteralPrinterParser(String literal) {
 
       this.literal = literal; // validated by caller
     }
@@ -1704,8 +1721,11 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints and parses a numeric date-time field with optional padding.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static class NumberPrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static class NumberPrinterParser implements DateTimePrinterParser {
 
     /**
      * Array of 10 to the power of n.
@@ -1731,7 +1751,7 @@ public final class DateTimeFormatterBuilder {
      * @param maxWidth the maximum field width, from minWidth to 19
      * @param signStyle the positive/negative sign style, not null
      */
-    NumberPrinterParser(DateTimeField field, int minWidth, int maxWidth, SignStyle signStyle) {
+    public NumberPrinterParser(DateTimeField field, int minWidth, int maxWidth, SignStyle signStyle) {
 
       // validated by caller
       this.field = field;
@@ -1766,8 +1786,10 @@ public final class DateTimeFormatterBuilder {
      * 
      * @param subsequentWidth the width of subsequent non-negative numbers, 0 or greater
      * @return a new updated printer-parser, not null
+     * @deprecated originally in JSR310 only default (package) visible
      */
-    NumberPrinterParser withSubsequentWidth(int subsequentWidth) {
+    @Deprecated
+    public NumberPrinterParser withSubsequentWidth(int subsequentWidth) {
 
       return new NumberPrinterParser(this.field, this.minWidth, this.maxWidth, this.signStyle, this.subsequentWidth
           + subsequentWidth);
@@ -1978,8 +2000,11 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints and parses a reduced numeric date-time field.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class ReducedPrinterParser extends NumberPrinterParser {
+  @Deprecated
+  public static final class ReducedPrinterParser extends NumberPrinterParser {
 
     private final int baseValue;
 
@@ -1992,7 +2017,7 @@ public final class DateTimeFormatterBuilder {
      * @param width the field width, from 1 to 18
      * @param baseValue the base value
      */
-    ReducedPrinterParser(DateTimeField field, int width, int baseValue) {
+    public ReducedPrinterParser(DateTimeField field, int width, int baseValue) {
 
       super(field, width, width, SignStyle.NOT_NEGATIVE);
       if (width < 1 || width > 18) {
@@ -2039,8 +2064,11 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints and parses a numeric date-time field with optional padding.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class FractionPrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static final class FractionPrinterParser implements DateTimePrinterParser {
 
     private final DateTimeField field;
 
@@ -2058,9 +2086,9 @@ public final class DateTimeFormatterBuilder {
      * @param maxWidth the maximum width to output, from 0 to 9
      * @param decimalPoint whether to output the localized decimal point symbol
      */
-    FractionPrinterParser(DateTimeField field, int minWidth, int maxWidth, boolean decimalPoint) {
+    public FractionPrinterParser(DateTimeField field, int minWidth, int maxWidth, boolean decimalPoint) {
 
-      Objects.requireNonNull(field, "field");
+      Jdk7Methods.Objects_requireNonNull(field, "field");
       if (field.range().isFixed() == false) {
         throw new IllegalArgumentException("Field must have a fixed set of values: " + field.getName());
       }
@@ -2223,8 +2251,11 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses field text.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class TextPrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static final class TextPrinterParser implements DateTimePrinterParser {
 
     private final DateTimeField field;
 
@@ -2244,7 +2275,7 @@ public final class DateTimeFormatterBuilder {
      * @param textStyle the text style, not null
      * @param provider the text provider, not null
      */
-    TextPrinterParser(DateTimeField field, TextStyle textStyle, DateTimeTextProvider provider) {
+    public TextPrinterParser(DateTimeField field, TextStyle textStyle, DateTimeTextProvider provider) {
 
       // validated by caller
       this.field = field;
@@ -2356,8 +2387,11 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses a zone offset.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  static final class ZoneOffsetPrinterParser implements DateTimePrinterParser {
+  @Deprecated
+  public static final class ZoneOffsetPrinterParser implements DateTimePrinterParser {
 
     static final String[] PATTERNS = new String[] { "+HH", "+HHMM", "+HH:MM", "+HHMMss", "+HH:MM:ss", "+HHMMSS",
         "+HH:MM:SS", }; // order used in pattern builder
@@ -2372,10 +2406,10 @@ public final class DateTimeFormatterBuilder {
      * @param noOffsetText the text to use for UTC, not null
      * @param pattern the pattern
      */
-    ZoneOffsetPrinterParser(String noOffsetText, String pattern) {
+    public ZoneOffsetPrinterParser(String noOffsetText, String pattern) {
 
-      Objects.requireNonNull(noOffsetText, "noOffsetText");
-      Objects.requireNonNull(pattern, "pattern");
+      Jdk7Methods.Objects_requireNonNull(noOffsetText, "noOffsetText");
+      Jdk7Methods.Objects_requireNonNull(pattern, "pattern");
       this.noOffsetText = noOffsetText;
       this.type = checkPattern(pattern);
     }
@@ -2516,7 +2550,7 @@ public final class DateTimeFormatterBuilder {
 
     ZoneTextPrinterParser(TextStyle textStyle) {
 
-      this.textStyle = Objects.requireNonNull(textStyle, "textStyle");
+      this.textStyle = Jdk7Methods.Objects_requireNonNull(textStyle, "textStyle");
     }
 
     // -----------------------------------------------------------------------
@@ -2897,7 +2931,7 @@ public final class DateTimeFormatterBuilder {
         return false;
       }
       Map.Entry e = (Map.Entry) o;
-      return Objects.equals(this.key, e.getKey()) && Objects.equals(this.value, e.getValue());
+      return Jdk7Methods.Objects_equals(this.key, e.getKey()) && Jdk7Methods.Objects_equals(this.value, e.getValue());
     }
 
     @Override

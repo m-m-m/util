@@ -39,16 +39,16 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
-import java.time.calendrical.DateTime.WithAdjuster;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneOffsetTransition;
 import java.time.zone.ZoneOffsetTransitionRule;
 import java.time.zone.ZoneRules;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -173,7 +173,7 @@ public final class ZoneOffset extends ZoneId implements DateTimeAccessor, WithAd
    */
   public static ZoneOffset of(String offsetId) {
 
-    Objects.requireNonNull(offsetId, "offsetId");
+    Jdk7Methods.Objects_requireNonNull(offsetId, "offsetId");
     // "Z" is always in the cache
     ZoneOffset offset = ID_CACHE.get(offsetId);
     if (offset != null) {

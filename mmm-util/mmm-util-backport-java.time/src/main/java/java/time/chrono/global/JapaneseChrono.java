@@ -70,7 +70,7 @@ public final class JapaneseChrono extends Chrono<JapaneseChrono> implements Seri
   static final LocalGregorianCalendar JCAL = (LocalGregorianCalendar) CalendarSystem.forName("japanese");
 
   // Locale for creating a JapaneseImpericalCalendar.
-  static final Locale LOCALE = Locale.forLanguageTag("ja-JP-u-ca-japanese");
+  static final Locale LOCALE = new Locale("ja", "JP", "JP"); // Locale.forLanguageTag("ja-JP-u-ca-japanese");
 
   /**
    * Singleton instance for Japanese chronology.
@@ -110,17 +110,17 @@ public final class JapaneseChrono extends Chrono<JapaneseChrono> implements Seri
   /**
    * Narrow names for eras.
    */
-  private static final Map<String, String[]> ERA_NARROW_NAMES = new HashMap<>();
+  private static final Map<String, String[]> ERA_NARROW_NAMES = new HashMap<String, String[]>();
 
   /**
    * Short names for eras.
    */
-  private static final Map<String, String[]> ERA_SHORT_NAMES = new HashMap<>();
+  private static final Map<String, String[]> ERA_SHORT_NAMES = new HashMap<String, String[]>();
 
   /**
    * Full names for eras.
    */
-  private static final Map<String, String[]> ERA_FULL_NAMES = new HashMap<>();
+  private static final Map<String, String[]> ERA_FULL_NAMES = new HashMap<String, String[]>();
 
   /**
    * Fallback language for the era names.

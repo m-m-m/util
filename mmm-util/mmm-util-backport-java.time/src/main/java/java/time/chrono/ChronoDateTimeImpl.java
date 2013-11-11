@@ -48,8 +48,8 @@ import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
 import java.time.jdk8.DefaultInterfaceChronoLocalDateTime;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 
 /**
  * A date-time without a time-zone for the calendar neutral API.
@@ -154,7 +154,7 @@ final class ChronoDateTimeImpl<C extends Chrono<C>> extends DefaultInterfaceChro
    */
   static <R extends Chrono<R>> ChronoDateTimeImpl<R> of(ChronoLocalDate<R> date, LocalTime time) {
 
-    return new ChronoDateTimeImpl<>(date, time);
+    return new ChronoDateTimeImpl<R>(date, time);
   }
 
   /**
@@ -165,8 +165,8 @@ final class ChronoDateTimeImpl<C extends Chrono<C>> extends DefaultInterfaceChro
    */
   private ChronoDateTimeImpl(ChronoLocalDate<C> date, LocalTime time) {
 
-    Objects.requireNonNull(date, "date");
-    Objects.requireNonNull(time, "time");
+    Jdk7Methods.Objects_requireNonNull(date, "date");
+    Jdk7Methods.Objects_requireNonNull(time, "time");
     this.date = date;
     this.time = time;
   }
@@ -186,7 +186,7 @@ final class ChronoDateTimeImpl<C extends Chrono<C>> extends DefaultInterfaceChro
     }
     // Validate that the new DateTime is a ChronoLocalDate (and not something else)
     ChronoLocalDate<C> cd = this.date.getChrono().ensureChronoLocalDate(newDate);
-    return new ChronoDateTimeImpl<>(cd, newTime);
+    return new ChronoDateTimeImpl<C>(cd, newTime);
   }
 
   // -----------------------------------------------------------------------

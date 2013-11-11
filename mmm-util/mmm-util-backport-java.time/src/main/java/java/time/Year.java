@@ -42,11 +42,11 @@ import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
+import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
-import java.time.calendrical.DateTime.WithAdjuster;
 import java.time.chrono.Chrono;
 import java.time.chrono.ISOChrono;
 import java.time.format.DateTimeFormatter;
@@ -54,8 +54,8 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.SignStyle;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 
 /**
  * A year in the ISO-8601 calendar system, such as {@code 2007}.
@@ -233,7 +233,7 @@ public final class Year extends DefaultInterfaceDateTimeAccessor implements Date
    */
   public static Year parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, Year.class);
   }
 
@@ -744,7 +744,7 @@ public final class Year extends DefaultInterfaceDateTimeAccessor implements Date
    */
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

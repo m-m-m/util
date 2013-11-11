@@ -48,10 +48,10 @@ import java.time.calendrical.DateTime;
 import java.time.calendrical.DateTimeField;
 import java.time.calendrical.PeriodUnit;
 import java.time.jdk8.DefaultInterfaceChronoZonedDateTime;
+import java.time.jdk8.Jdk7Methods;
 import java.time.zone.ZoneOffsetTransition;
 import java.time.zone.ZoneRules;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A date-time with a time-zone in the calendar neutral API.
@@ -103,8 +103,8 @@ final class ChronoZonedDateTimeImpl<C extends Chrono<C>> extends DefaultInterfac
   static <R extends Chrono<R>> ChronoZonedDateTime<R> ofBest(ChronoDateTimeImpl<R> localDateTime, ZoneId zoneId,
       ZoneOffset preferredOffset) {
 
-    Objects.requireNonNull(localDateTime, "localDateTime");
-    Objects.requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(localDateTime, "localDateTime");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
     if (zoneId instanceof ZoneOffset) {
       return new ChronoZonedDateTimeImpl<R>(localDateTime, (ZoneOffset) zoneId, zoneId);
     }
@@ -125,7 +125,7 @@ final class ChronoZonedDateTimeImpl<C extends Chrono<C>> extends DefaultInterfac
         offset = validOffsets.get(0);
       }
     }
-    Objects.requireNonNull(offset, "offset"); // protect against bad ZoneRules
+    Jdk7Methods.Objects_requireNonNull(offset, "offset"); // protect against bad ZoneRules
     return new ChronoZonedDateTimeImpl<R>(localDateTime, offset, zoneId);
   }
 
@@ -152,9 +152,9 @@ final class ChronoZonedDateTimeImpl<C extends Chrono<C>> extends DefaultInterfac
    */
   private ChronoZonedDateTimeImpl(ChronoDateTimeImpl<C> dateTime, ZoneOffset offset, ZoneId zoneId) {
 
-    this.dateTime = Objects.requireNonNull(dateTime, "dateTime");
-    this.offset = Objects.requireNonNull(offset, "offset");
-    this.zoneId = Objects.requireNonNull(zoneId, "zoneId");
+    this.dateTime = Jdk7Methods.Objects_requireNonNull(dateTime, "dateTime");
+    this.offset = Jdk7Methods.Objects_requireNonNull(offset, "offset");
+    this.zoneId = Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
   }
 
   // -----------------------------------------------------------------------
@@ -212,7 +212,7 @@ final class ChronoZonedDateTimeImpl<C extends Chrono<C>> extends DefaultInterfac
   @Override
   public ChronoZonedDateTime<C> withZoneSameInstant(ZoneId zoneId) {
 
-    Objects.requireNonNull(zoneId, "zoneId");
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
     return this.zoneId.equals(zoneId) ? this : create(this.dateTime.toInstant(this.offset), zoneId);
   }
 

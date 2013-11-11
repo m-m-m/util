@@ -59,7 +59,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
-import java.util.Objects;
+import java.time.jdk8.Jdk7Methods;
 
 /**
  * A time without time-zone in the ISO-8601 calendar system, such as {@code 10:15:30}.
@@ -239,7 +239,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    */
   public static LocalTime now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     // inline OffsetTime factory to avoid creating object and InstantProvider checks
     final Instant now = clock.instant(); // called once
     ZoneOffset offset = clock.getZone().getRules().getOffset(now);
@@ -442,7 +442,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    */
   public static LocalTime parse(CharSequence text, DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.parse(text, LocalTime.class);
   }
 
@@ -1180,13 +1180,13 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
   @Override
   public int compareTo(LocalTime other) {
 
-    int cmp = Integer.compare(this.hour, other.hour);
+    int cmp = Jdk7Methods.Integer_compare(this.hour, other.hour);
     if (cmp == 0) {
-      cmp = Integer.compare(this.minute, other.minute);
+      cmp = Jdk7Methods.Integer_compare(this.minute, other.minute);
       if (cmp == 0) {
-        cmp = Integer.compare(this.second, other.second);
+        cmp = Jdk7Methods.Integer_compare(this.second, other.second);
         if (cmp == 0) {
-          cmp = Integer.compare(this.nano, other.nano);
+          cmp = Jdk7Methods.Integer_compare(this.nano, other.nano);
         }
       }
     }
@@ -1312,7 +1312,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    */
   public String toString(DateTimeFormatter formatter) {
 
-    Objects.requireNonNull(formatter, "formatter");
+    Jdk7Methods.Objects_requireNonNull(formatter, "formatter");
     return formatter.print(this);
   }
 

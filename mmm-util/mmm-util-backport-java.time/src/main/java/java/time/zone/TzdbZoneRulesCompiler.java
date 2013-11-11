@@ -41,6 +41,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParsePosition;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -75,8 +76,11 @@ import java.util.zip.ZipEntry;
  * 
  * <h4>Implementation notes</h4> This class is a mutable builder. A new instance must be created for each
  * compile.
+ * 
+ * @deprecated originally in JSR310 only default (package) visible
  */
-final class TzdbZoneRulesCompiler {
+@Deprecated
+public final class TzdbZoneRulesCompiler {
 
   /**
    * Time parser.
@@ -166,7 +170,7 @@ final class TzdbZoneRulesCompiler {
     }
 
     // find source directories to process
-    List<File> srcDirs = new ArrayList<>();
+    List<File> srcDirs = new ArrayList<File>();
     if (version != null) {
       File srcDir = new File(baseSrcDir, version);
       if (srcDir.isDirectory() == false) {
@@ -226,15 +230,15 @@ final class TzdbZoneRulesCompiler {
   private static void process(List<File> srcDirs, List<String> srcFileNames, File dstDir, boolean verbose) {
 
     // build actual jar files
-    Map<Object, Object> deduplicateMap = new HashMap<>();
-    Map<String, SortedMap<String, ZoneRules>> allBuiltZones = new TreeMap<>();
+    Map<Object, Object> deduplicateMap = new HashMap<Object, Object>();
+    Map<String, SortedMap<String, ZoneRules>> allBuiltZones = new TreeMap<String, SortedMap<String, ZoneRules>>();
     Set<String> allRegionIds = new TreeSet<String>();
     Set<ZoneRules> allRules = new HashSet<ZoneRules>();
     SortedMap<LocalDate, Byte> bestLeapSeconds = null;
 
     for (File srcDir : srcDirs) {
       // source files in this directory
-      List<File> srcFiles = new ArrayList<>();
+      List<File> srcFiles = new ArrayList<File>();
       for (String srcFileName : srcFileNames) {
         File file = new File(srcDir, srcFileName);
         if (file.exists()) {
@@ -301,7 +305,7 @@ final class TzdbZoneRulesCompiler {
   private static void outputFile(File dstFile, String version, SortedMap<String, ZoneRules> builtZones,
       SortedMap<LocalDate, Byte> leapSeconds) {
 
-    Map<String, SortedMap<String, ZoneRules>> loopAllBuiltZones = new TreeMap<>();
+    Map<String, SortedMap<String, ZoneRules>> loopAllBuiltZones = new TreeMap<String, SortedMap<String, ZoneRules>>();
     loopAllBuiltZones.put(version, builtZones);
     Set<String> loopAllRegionIds = new TreeSet<String>(builtZones.keySet());
     Set<ZoneRules> loopAllRules = new HashSet<ZoneRules>(builtZones.values());
@@ -314,13 +318,24 @@ final class TzdbZoneRulesCompiler {
   private static void outputFile(File dstFile, Map<String, SortedMap<String, ZoneRules>> allBuiltZones,
       Set<String> allRegionIds, Set<ZoneRules> allRules, SortedMap<LocalDate, Byte> leapSeconds) {
 
-    try (JarOutputStream jos = new JarOutputStream(new FileOutputStream(dstFile))) {
+    // try (JarOutputStream jos = new JarOutputStream(new FileOutputStream(dstFile))) {
+    JarOutputStream jos = null;
+    try {
+      jos = new JarOutputStream(new FileOutputStream(dstFile));
       outputTZEntry(jos, allBuiltZones, allRegionIds, allRules);
       outputLeapSecondEntry(jos, leapSeconds);
     } catch (Exception ex) {
       System.out.println("Failed: " + ex.toString());
       ex.printStackTrace();
       System.exit(1);
+    } finally {
+      if (jos != null) {
+        try {
+          jos.close();
+        } catch (IOException e) {
+          // ignore to prevent supression of potential important exception
+        }
+      }
     }
   }
 
@@ -352,7 +367,7 @@ final class TzdbZoneRulesCompiler {
         out.writeUTF(regionId);
       }
       // rules
-      List<ZoneRules> rulesList = new ArrayList<>(allRules);
+      List<ZoneRules> rulesList = new ArrayList<ZoneRules>(allRules);
       out.writeShort(rulesList.size());
       ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
       for (ZoneRules rules : rulesList) {
@@ -421,22 +436,22 @@ final class TzdbZoneRulesCompiler {
 
   // -----------------------------------------------------------------------
   /** The TZDB rules. */
-  private final Map<String, List<TZDBRule>> rules = new HashMap<>();
+  private final Map<String, List<TZDBRule>> rules = new HashMap<String, List<TZDBRule>>();
 
   /** The TZDB zones. */
-  private final Map<String, List<TZDBZone>> zones = new HashMap<>();
+  private final Map<String, List<TZDBZone>> zones = new HashMap<String, List<TZDBZone>>();
 
   /** The TZDB links. */
-  private final Map<String, String> links = new HashMap<>();
+  private final Map<String, String> links = new HashMap<String, String>();
 
   /** The built zones. */
-  private final SortedMap<String, ZoneRules> builtZones = new TreeMap<>();
+  private final SortedMap<String, ZoneRules> builtZones = new TreeMap<String, ZoneRules>();
 
   /** A map to deduplicate object instances. */
-  private Map<Object, Object> deduplicateMap = new HashMap<>();
+  private Map<Object, Object> deduplicateMap = new HashMap<Object, Object>();
 
   /** Sorted collection of LeapSecondRules. */
-  private final SortedMap<LocalDate, Byte> leapSeconds = new TreeMap<>();
+  private final SortedMap<LocalDate, Byte> leapSeconds = new TreeMap<LocalDate, Byte>();
 
   /** The version to produce. */
   private final String version;
@@ -666,7 +681,7 @@ final class TzdbZoneRulesCompiler {
                 printVerbose("Invalid Zone line in file: " + file + ", line: " + line);
                 throw new IllegalArgumentException("Invalid Zone line");
               }
-              openZone = new ArrayList<>();
+              openZone = new ArrayList<TZDBZone>();
               this.zones.put(st.nextToken(), openZone);
               if (parseZoneLine(st, openZone)) {
                 openZone = null;
@@ -997,8 +1012,11 @@ final class TzdbZoneRulesCompiler {
   // -----------------------------------------------------------------------
   /**
    * Class representing a month-day-time in the TZDB file.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  abstract class TZDBMonthDayTime {
+  @Deprecated
+  public abstract class TZDBMonthDayTime {
 
     /** The month of the cutover. */
     Month month = Month.JANUARY;
@@ -1030,13 +1048,87 @@ final class TzdbZoneRulesCompiler {
         this.adjustForwards = true;
       }
     }
+
+    /**
+     * @return the month
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public Month getMonth() {
+
+      return this.month;
+    }
+
+    /**
+     * @return the dayOfMonth
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public int getDayOfMonth() {
+
+      return this.dayOfMonth;
+    }
+
+    /**
+     * @return the adjustForwards
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public boolean isAdjustForwards() {
+
+      return this.adjustForwards;
+    }
+
+    /**
+     * @return the dayOfWeek
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public DayOfWeek getDayOfWeek() {
+
+      return this.dayOfWeek;
+    }
+
+    /**
+     * @return the time
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public LocalTime getTime() {
+
+      return this.time;
+    }
+
+    /**
+     * @return the endOfDay
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public boolean isEndOfDay() {
+
+      return this.endOfDay;
+    }
+
+    /**
+     * @return the timeDefinition
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public TimeDefinition getTimeDefinition() {
+
+      return this.timeDefinition;
+    }
+
   }
 
   // -----------------------------------------------------------------------
   /**
    * Class representing a rule line in the TZDB file.
+   * 
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  final class TZDBRule extends TZDBMonthDayTime {
+  @Deprecated
+  public final class TZDBRule extends TZDBMonthDayTime {
 
     /** The start year. */
     int startYear;
@@ -1131,7 +1223,7 @@ final class TzdbZoneRulesCompiler {
   /**
    * Class representing a rule line in the TZDB file.
    */
-  static final class LeapSecondRule {
+  public static final class LeapSecondRule {
 
     /**
      * Constructs a rule using fields.
@@ -1152,6 +1244,26 @@ final class TzdbZoneRulesCompiler {
      * The adjustment (in seconds), +1 means a second is inserted, -1 means a second is dropped.
      */
     byte secondAdjustment;
+
+    /**
+     * @return the leapDate
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public LocalDate getLeapDate() {
+
+      return this.leapDate;
+    }
+
+    /**
+     * @return the secondAdjustment
+     * @deprecated originally in JSR310 not available
+     */
+    @Deprecated
+    public byte getSecondAdjustment() {
+
+      return this.secondAdjustment;
+    }
   }
 
 }

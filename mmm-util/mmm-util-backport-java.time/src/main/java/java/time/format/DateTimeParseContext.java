@@ -33,10 +33,10 @@ package java.time.format;
 
 import java.time.calendrical.DateTimeBuilder;
 import java.time.calendrical.DateTimeField;
+import java.time.jdk8.Jdk7Methods;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Context object used during date and time parsing.
@@ -51,8 +51,11 @@ import java.util.Objects;
  * This class is a mutable context intended for use from a single thread. Usage of the class is thread-safe
  * within standard parsing as a new instance of this class is automatically created for each parse and parsing
  * is single-threaded
+ * 
+ * @deprecated originally in JSR310 only default (package) visible
  */
-final class DateTimeParseContext {
+@Deprecated
+public final class DateTimeParseContext {
 
   /**
    * The locale, not null.
@@ -77,7 +80,7 @@ final class DateTimeParseContext {
   /**
    * The list of parsed data.
    */
-  private final ArrayList<Parsed> parsed = new ArrayList<>();
+  private final ArrayList<Parsed> parsed = new ArrayList<Parsed>();
 
   /**
    * Creates a new instance of the context.
@@ -87,7 +90,7 @@ final class DateTimeParseContext {
    * @param locale the locale to use, not null
    * @param symbols the symbols to use during parsing, not null
    */
-  DateTimeParseContext(Locale locale, DateTimeFormatSymbols symbols) {
+  public DateTimeParseContext(Locale locale, DateTimeFormatSymbols symbols) {
 
     super();
     setLocale(locale);
@@ -119,7 +122,7 @@ final class DateTimeParseContext {
    */
   public void setLocale(Locale locale) {
 
-    Objects.requireNonNull(locale, "locale");
+    Jdk7Methods.Objects_requireNonNull(locale, "locale");
     this.locale = locale;
   }
 
@@ -145,7 +148,7 @@ final class DateTimeParseContext {
    */
   public void setSymbols(DateTimeFormatSymbols symbols) {
 
-    Objects.requireNonNull(symbols, "symbols");
+    Jdk7Methods.Objects_requireNonNull(symbols, "symbols");
     this.symbols = symbols;
   }
 
@@ -311,8 +314,10 @@ final class DateTimeParseContext {
    * Gets the list of parsed date-time information.
    * 
    * @return the list of parsed date-time objects, not null, no nulls
+   * @deprecated originally in JSR310 only default (package) visible
    */
-  List<Object> getParsed() {
+  @Deprecated
+  public List<Object> getParsed() {
 
     // package scoped for testing
     return currentParsed().parsed;
@@ -329,7 +334,7 @@ final class DateTimeParseContext {
    */
   public void setParsedField(DateTimeField field, long value) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     currentParsed().parsed.add(new FieldValue(field, value));
   }
 
@@ -343,7 +348,7 @@ final class DateTimeParseContext {
    */
   public <T> void setParsed(Object object) {
 
-    Objects.requireNonNull(object, "object");
+    Jdk7Methods.Objects_requireNonNull(object, "object");
     currentParsed().parsed.add(object);
   }
 
@@ -391,7 +396,7 @@ final class DateTimeParseContext {
    */
   private static final class Parsed {
 
-    final List<Object> parsed = new ArrayList<>();
+    final List<Object> parsed = new ArrayList<Object>();
 
     private Parsed() {
 

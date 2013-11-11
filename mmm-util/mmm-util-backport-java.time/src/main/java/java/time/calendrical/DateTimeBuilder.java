@@ -61,6 +61,7 @@ import static java.time.calendrical.ChronoField.SECOND_OF_MINUTE;
 import static java.time.calendrical.ChronoField.YEAR;
 import static java.time.calendrical.DateTimeAdjusters.nextOrSame;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
@@ -71,6 +72,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.chrono.Chrono;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -80,7 +82,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -113,7 +114,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
   /**
    * The list of complete date-time objects.
    */
-  private final List<Object> objects = new ArrayList<>(2);
+  private final List<Object> objects = new ArrayList<Object>(2);
 
   // -----------------------------------------------------------------------
   /**
@@ -175,7 +176,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
    */
   public boolean containsFieldValue(DateTimeField field) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     return this.standardFields.containsKey(field) || (this.otherFields != null && this.otherFields.containsKey(field));
   }
 
@@ -188,7 +189,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
    */
   public long getFieldValue(DateTimeField field) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     Long value = getFieldValue0(field);
     if (value == null) {
       throw new DateTimeException("Field not found: " + field);
@@ -234,7 +235,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
    */
   public DateTimeBuilder addFieldValue(DateTimeField field, long value) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     Long old = getFieldValue0(field); // check first for better error message
     if (old != null && old.longValue() != value) {
       throw new DateTimeException("Conflict found: " + field + " " + old + " differs from " + field + " " + value
@@ -268,7 +269,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
    */
   public long removeFieldValue(DateTimeField field) {
 
-    Objects.requireNonNull(field, "field");
+    Jdk7Methods.Objects_requireNonNull(field, "field");
     Long value = null;
     if (field instanceof ChronoField) {
       value = this.standardFields.remove(field);
@@ -347,7 +348,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
    */
   public DateTimeBuilder addCalendrical(Object object) {
 
-    Objects.requireNonNull(object, "object");
+    Jdk7Methods.Objects_requireNonNull(object, "object");
     // special case
     if (object instanceof DateTimeBuilder) {
       DateTimeBuilder dtb = (DateTimeBuilder) object;
@@ -395,7 +396,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
     // handle unusual fields
     if (this.otherFields != null) {
       outer: while (true) {
-        Set<Entry<DateTimeField, Long>> entrySet = new HashSet<>(this.otherFields.entrySet());
+        Set<Entry<DateTimeField, Long>> entrySet = new HashSet<Entry<DateTimeField, Long>>(this.otherFields.entrySet());
         for (Entry<DateTimeField, Long> entry : entrySet) {
           if (entry.getKey().resolve(this, entry.getValue())) {
             continue outer;
@@ -589,7 +590,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
 
   private void splitObjects() {
 
-    List<Object> objectsToAdd = new ArrayList<>();
+    List<Object> objectsToAdd = new ArrayList<Object>();
     for (Object object : this.objects) {
       if (object instanceof LocalDate || object instanceof LocalTime || object instanceof ZoneId
           || object instanceof Chrono) {
@@ -685,7 +686,17 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
     try {
       Method m = type.getDeclaredMethod("from", DateTimeAccessor.class);
       return type.cast(m.invoke(null, dateTime));
-    } catch (ReflectiveOperationException ex) {
+    } catch (IllegalAccessException ex) {
+      if (ex.getCause() instanceof DateTimeException == false) {
+        throw new DateTimeException("Unable to invoke method from(DateTime)", ex);
+      }
+      throw (DateTimeException) ex.getCause();
+    } catch (InvocationTargetException ex) {
+      if (ex.getCause() instanceof DateTimeException == false) {
+        throw new DateTimeException("Unable to invoke method from(DateTime)", ex);
+      }
+      throw (DateTimeException) ex.getCause();
+    } catch (NoSuchMethodException ex) {
       if (ex.getCause() instanceof DateTimeException == false) {
         throw new DateTimeException("Unable to invoke method from(DateTime)", ex);
       }
