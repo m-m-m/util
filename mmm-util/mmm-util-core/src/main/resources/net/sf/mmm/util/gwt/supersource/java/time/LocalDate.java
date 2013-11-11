@@ -163,22 +163,6 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
   }
 
   /**
-   * Obtains the current date from the system clock in the specified time-zone.
-   * <p>
-   * This will query the {@link Clock#system(ZoneId) system clock} to obtain the current date. Specifying the
-   * time-zone avoids dependence on the default time-zone.
-   * <p>
-   * Using this method will prevent the ability to use an alternate clock for testing because the clock is
-   * hard-coded.
-   *
-   * @return the current date using the system clock, not null
-   */
-  public static LocalDate now(ZoneId zone) {
-
-    return now(Clock.system(zone));
-  }
-
-  /**
    * Obtains the current date from the specified clock.
    * <p>
    * This will query the specified clock to obtain the current date - today. Using this method allows the use
@@ -1260,43 +1244,6 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
   public LocalDateTime atTime(int hour, int minute, int second, int nanoOfSecond) {
 
     return atTime(LocalTime.of(hour, minute, second, nanoOfSecond));
-  }
-
-  /**
-   * Returns a zoned date-time from this date at the earliest valid time according to the rules in the
-   * time-zone.
-   * <p>
-   * Time-zone rules, such as daylight savings, mean that not every local date-time is valid for the specified
-   * zone, thus the local date-time may not be midnight.
-   * <p>
-   * In most cases, there is only one valid offset for a local date-time. In the case of an overlap, there are
-   * two valid offsets, and the earlier one is used, corresponding to the first occurrence of midnight on the
-   * date. In the case of a gap, the zoned date-time will represent the instant just after the gap.
-   * <p>
-   * If the zone ID is a {@link ZoneOffset}, then the result always has a time of midnight.
-   * <p>
-   * To convert to a specific time in a given time-zone call {@link #atTime(LocalTime)} followed by
-   * {@link LocalDateTime#atZone(ZoneId)}.
-   * <p>
-   * This instance is immutable and unaffected by this method call.
-   *
-   * @param zoneId the zone ID to use, not null
-   * @return the zoned date-time formed from this date and the earliest valid time for the zone, not null
-   */
-  public ZonedDateTime atStartOfDay(ZoneId zoneId) {
-
-    Objects.requireNonNull(zoneId, "zoneId");
-    // need to handle case where there is a gap from 11:30 to 00:30
-    // standard ZDT factory would result in 01:00 rather than 00:30
-    LocalDateTime ldt = atTime(LocalTime.MIDNIGHT);
-    if (zoneId instanceof ZoneOffset == false) {
-      ZoneRules rules = zoneId.getRules();
-      ZoneOffsetTransition trans = rules.getTransition(ldt);
-      if (trans != null && trans.isGap()) {
-        ldt = trans.getDateTimeAfter();
-      }
-    }
-    return ZonedDateTime.of(ldt, zoneId);
   }
 
   // -----------------------------------------------------------------------
