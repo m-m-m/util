@@ -204,6 +204,9 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>2.1</version>
+          <configuration>
+            <sonar.skippedModules>mmm-util-backport-java.util.function,mmm-util-backport-java.time</sonar.skippedModules>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
