@@ -44,9 +44,6 @@ import static java.time.calendrical.ChronoField.ERA;
 import static java.time.calendrical.ChronoField.MONTH_OF_YEAR;
 import static java.time.calendrical.ChronoField.YEAR;
 
-//import java.io.DataInput;
-//import java.io.DataOutput;
-//import java.io.IOException;
 import java.io.Serializable;
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
@@ -61,14 +58,10 @@ import java.time.calendrical.PeriodUnit;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Era;
 import java.time.chrono.ISOChrono;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceChronoLocalDate;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.time.zone.ZoneOffsetTransition;
-import java.time.zone.ZoneRules;
-import java.util.Objects;
 
 /**
  * A date without a time-zone in the ISO-8601 calendar system, such as {@code 2007-12-03}.
@@ -86,7 +79,7 @@ import java.util.Objects;
  * However, any application that makes use of historical dates and requires them to be accurate will find the
  * ISO-8601 rules unsuitable. In this case, the application code should use {@code HistoricDate} and define an
  * explicit cutover date between the Julian and Gregorian calendar systems.
- *
+ * 
  * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> implements ChronoLocalDate<ISOChrono>,
@@ -154,7 +147,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * Using this method will prevent the ability to use an alternate clock for testing because the clock is
    * hard-coded.
-   *
+   * 
    * @return the current date using the system clock and default time-zone, not null
    */
   public static LocalDate now() {
@@ -163,18 +156,34 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
   }
 
   /**
+   * Obtains the current date from the system clock in the specified time-zone.
+   * <p>
+   * This will query the {@link Clock#system(ZoneId) system clock} to obtain the current date. Specifying the
+   * time-zone avoids dependence on the default time-zone.
+   * <p>
+   * Using this method will prevent the ability to use an alternate clock for testing because the clock is
+   * hard-coded.
+   * 
+   * @return the current date using the system clock, not null
+   */
+  public static LocalDate now(ZoneId zone) {
+
+    return now(Clock.system(zone));
+  }
+
+  /**
    * Obtains the current date from the specified clock.
    * <p>
    * This will query the specified clock to obtain the current date - today. Using this method allows the use
    * of an alternate clock for testing. The alternate clock may be introduced using {@link Clock dependency
    * injection}.
-   *
+   * 
    * @param clock the clock to use, not null
    * @return the current date, not null
    */
   public static LocalDate now(Clock clock) {
 
-    Objects.requireNonNull(clock, "clock");
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     // inline OffsetDate factory to avoid creating object and InstantProvider checks
     final Instant now = clock.instant(); // called once
     ZoneOffset offset = clock.getZone().getRules().getOffset(now);
@@ -188,7 +197,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Obtains an instance of {@code LocalDate} from a year, month and day.
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown.
-   *
+   * 
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, not null
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -199,7 +208,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
   public static LocalDate of(int year, Month month, int dayOfMonth) {
 
     YEAR.checkValidValue(year);
-    Objects.requireNonNull(month, "month");
+    Jdk7Methods.Objects_requireNonNull(month, "month");
     DAY_OF_MONTH.checkValidValue(dayOfMonth);
     return create(year, month, dayOfMonth);
   }
@@ -208,7 +217,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Obtains an instance of {@code LocalDate} from a year, month and day.
    * <p>
    * The day must be valid for the year and month, otherwise an exception will be thrown.
-   *
+   * 
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, from 1 (January) to 12 (December)
    * @param dayOfMonth the day-of-month to represent, from 1 to 31
@@ -229,7 +238,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Obtains an instance of {@code LocalDate} from a year and day-of-year.
    * <p>
    * The day-of-year must be valid for the year, otherwise an exception will be thrown.
-   *
+   * 
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param dayOfYear the day-of-year to represent, from 1 to 366
    * @return the local date, not null
@@ -259,7 +268,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * The Epoch Day count is a simple incrementing count of days where day 0 is 1970-01-01. Negative numbers
    * represent earlier days.
-   *
+   * 
    * @param epochDay the Epoch Day to convert, based on the epoch 1970-01-01
    * @return the local date, not null
    * @throws DateTimeException if the epoch days exceeds the supported date range
@@ -305,7 +314,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * arbitrary date-time object to an instance of {@code LocalDate}.
    * <p>
    * The conversion extracts the {@link ChronoField#EPOCH_DAY epoch-day} field.
-   *
+   * 
    * @param dateTime the date-time object to convert, not null
    * @return the local date, not null
    * @throws DateTimeException if unable to convert to a {@code LocalDate}
@@ -336,36 +345,61 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * The string must represent a valid date and is parsed using
    * {@link java.time.format.DateTimeFormatters#isoLocalDate()}.
-   *
+   * 
    * @param text the text to parse such as "2007-12-03", not null
    * @return the parsed local date, not null
    * @throws DateTimeParseException if the text cannot be parsed
    */
   public static LocalDate parse(CharSequence text) {
 
-    return parse(text, DateTimeFormatters.isoLocalDate());
+    int length = text.length();
+    // "yyyy-MM-dd".length() == 10
+    int firstDash = length - 6;
+    int secondDash = length - 3;
+    int index = 0;
+    Throwable cause = null;
+    try {
+      if ((length >= 10) && (text.charAt(firstDash) == '-') && (text.charAt(secondDash) == '-')) {
+        String yearString = text.subSequence(0, firstDash).toString();
+        int year = Integer.parseInt(yearString);
+        index = firstDash + 1;
+        String monthString = text.subSequence(index, secondDash).toString();
+        int month = Integer.parseInt(monthString);
+        index = secondDash + 1;
+        String dayString = text.subSequence(index, length).toString();
+        int day = Integer.parseInt(dayString);
+        return create(year, Month.of(month), day);
+      }
+    } catch (RuntimeException e) {
+      cause = e;
+    }
+    throw new DateTimeParseException("Expected format yyyy-MM-dd", text, index, cause);
   }
 
   /**
-   * Obtains an instance of {@code LocalDate} from a text string using a specific formatter.
-   * <p>
-   * The text is parsed using the formatter, returning a date.
-   *
-   * @param text the text to parse, not null
-   * @param formatter the formatter to use, not null
-   * @return the parsed local date, not null
-   * @throws DateTimeParseException if the text cannot be parsed
+   * @see String#indexOf(int, int)
+   * 
+   * @param text is the text to search in.
+   * @param startIndex is the index of the first character to look at.
+   * @param c is the character to find.
+   * @return the index of the first occurrence of character <code>c</code> from <code>startIndex</code>, or
+   *         <code>-1</code> if no such character exists.
    */
-  public static LocalDate parse(CharSequence text, DateTimeFormatter formatter) {
+  private static int indexOf(CharSequence text, int startIndex, char c) {
 
-    Objects.requireNonNull(formatter, "formatter");
-    return formatter.parse(text, LocalDate.class);
+    int length = text.length();
+    for (int i = startIndex; i < length; i++) {
+      if (text.charAt(i) == c) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   // -----------------------------------------------------------------------
   /**
    * Creates a local date from the year, month and day fields.
-   *
+   * 
    * @param year the year to represent, validated from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, validated not null
    * @param dayOfMonth the day-of-month to represent, validated from 1 to 31
@@ -386,7 +420,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
 
   /**
    * Resolves the date, resolving days past the end of month.
-   *
+   * 
    * @param year the year to represent, validated from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, validated from 1 to 12
    * @param dayOfMonth the day-of-month to represent, validated from 1 to 31
@@ -410,7 +444,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
 
   /**
    * Constructor, previously validated.
-   *
+   * 
    * @param year the year to represent, from MIN_YEAR to MAX_YEAR
    * @param month the month-of-year to represent, not null
    * @param dayOfMonth the day-of-month to represent, valid for year-month, from 1 to 31
@@ -515,7 +549,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * The {@code Chrono} represents the calendar system in use. The ISO-8601 calendar system is the modern
    * civil calendar system used today in most of the world. It is equivalent to the proleptic Gregorian
    * calendar system, in which todays's rules for leap years are applied for all time.
-   *
+   * 
    * @return the ISO chronology, not null
    */
   @Override
@@ -537,7 +571,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * The returned era will be a singleton capable of being compared with the constants in {@link ISOChrono}
    * using the {@code ==} operator.
-   *
+   * 
    * @return the {@code ISOChrono} era constant applicable at this date, not null
    */
   @Override
@@ -554,7 +588,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * The year returned by this method is proleptic as per {@code get(YEAR)}. To obtain the year-of-era, use
    * {@code get(YEAR_OF_ERA}.
-   *
+   * 
    * @return the year, from MIN_YEAR to MAX_YEAR
    */
   public int getYear() {
@@ -567,7 +601,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * This method returns the month as an {@code int} from 1 to 12. Application code is frequently clearer if
    * the enum {@link Month} is used by calling {@link #getMonth()}.
-   *
+   * 
    * @return the month-of-year, from 1 to 12
    * @see #getMonth()
    */
@@ -582,7 +616,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * This method returns the enum {@link Month} for the month. This avoids confusion as to what {@code int}
    * values mean. If you need access to the primitive {@code int} value then the enum provides the
    * {@link Month#getValue() int value}.
-   *
+   * 
    * @return the month-of-year, not null
    * @see #getMonthValue()
    */
@@ -595,7 +629,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Gets the day-of-month field.
    * <p>
    * This method returns the primitive {@code int} value for the day-of-month.
-   *
+   * 
    * @return the day-of-month, from 1 to 31
    */
   public int getDayOfMonth() {
@@ -607,7 +641,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Gets the day-of-year field.
    * <p>
    * This method returns the primitive {@code int} value for the day-of-year.
-   *
+   * 
    * @return the day-of-year, from 1 to 365, or 366 in a leap year
    */
   public int getDayOfYear() {
@@ -624,7 +658,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * Additional information can be obtained from the {@code DayOfWeek}. This includes textual names of the
    * values.
-   *
+   * 
    * @return the day-of-week, not null
    */
   public DayOfWeek getDayOfWeek() {
@@ -646,7 +680,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * The calculation is proleptic - applying the same rules into the far future and far past. This is
    * historically inaccurate, but is correct for the ISO-8601 standard.
-   *
+   * 
    * @return true if the year is leap, false otherwise
    */
   @Override
@@ -660,7 +694,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Returns the length of the month represented by this date.
    * <p>
    * This returns the length of the month in days. For example, a date in January would return 31.
-   *
+   * 
    * @return the length of the month in days
    */
   @Override
@@ -683,7 +717,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Returns the length of the year represented by this date.
    * <p>
    * This returns the length of the year in days, either 365 or 366.
-   *
+   * 
    * @return 366 if the year is leap, 365 otherwise
    */
   @Override
@@ -705,13 +739,13 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * <p>
    * In addition, all principal classes implement the {@link WithAdjuster} interface, including this one. For
    * example, {@link Month} implements the adjuster interface. As such, this code will compile and run:
-   *
+   * 
    * <pre>
      *  date.with(Month.JULY);
      * </pre>
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalDate} based on this date with the adjustment made, not null
    * @throws DateTimeException if the adjustment cannot be made
@@ -737,7 +771,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * would be the last valid day of February in this example.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param field the field to set in the result, not null
    * @param newValue the new value of the field in the result
    * @return a {@code LocalDate} based on this date with the specified field set, not null
@@ -788,7 +822,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * year, it will be changed to the last valid day of the month.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param year the year to set in the result, from MIN_YEAR to MAX_YEAR
    * @return a {@code LocalDate} based on this date with the requested year, not null
    * @throws DateTimeException if the year value is invalid
@@ -807,7 +841,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * for the year, it will be changed to the last valid day of the month.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param month the month-of-year to set in the result, from 1 (January) to 12 (December)
    * @return a {@code LocalDate} based on this date with the requested month, not null
    * @throws DateTimeException if the month-of-year value is invalid
@@ -826,7 +860,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * an exception is thrown.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param dayOfMonth the day-of-month to set in the result, from 1 to 28-31
    * @return a {@code LocalDate} based on this date with the requested day, not null
    * @throws DateTimeException if the day-of-month value is invalid
@@ -845,7 +879,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * an exception is thrown.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param dayOfYear the day-of-year to set in the result, from 1 to 365-366
    * @return a {@code LocalDate} based on this date with the requested day, not null
    * @throws DateTimeException if the day-of-year value is invalid
@@ -869,7 +903,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * specified adjuster, which typically calls back to {@link #plus(long, PeriodUnit)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalDate} based on this date with the addition made, not null
    * @throws DateTimeException if the addition cannot be made
@@ -890,7 +924,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * calculation.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param amountToAdd the amount of the unit to add to the result, may be negative
    * @param unit the unit of the period to add, not null
    * @return a {@code LocalDate} based on this date with the specified period added, not null
@@ -946,7 +980,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param yearsToAdd the years to add, may be negative
    * @return a {@code LocalDate} based on this date with the years added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -974,7 +1008,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * an invalid result, the last valid day of the month, 2007-04-30, is selected instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param monthsToAdd the months to add, may be negative
    * @return a {@code LocalDate} based on this date with the months added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1001,7 +1035,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * For example, 2008-12-31 plus one week would result in 2009-01-07.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param weeksToAdd the weeks to add, may be negative
    * @return a {@code LocalDate} based on this date with the weeks added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1021,7 +1055,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * For example, 2008-12-31 plus one day would result in 2009-01-01.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param daysToAdd the days to add, may be negative
    * @return a {@code LocalDate} based on this date with the days added, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1045,7 +1079,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * specified adjuster, which typically calls back to {@link #minus(long, PeriodUnit)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalDate} based on this date with the subtraction made, not null
    * @throws DateTimeException if the subtraction cannot be made
@@ -1066,7 +1100,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * calculation.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param amountToSubtract the amount of the unit to subtract from the result, may be negative
    * @param unit the unit of the period to subtract, not null
    * @return a {@code LocalDate} based on this date with the specified period subtracted, not null
@@ -1095,7 +1129,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param yearsToSubtract the years to subtract, may be negative
    * @return a {@code LocalDate} based on this date with the years subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1119,7 +1153,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * an invalid result, the last valid day of the month, 2007-02-28, is selected instead.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param monthsToSubtract the months to subtract, may be negative
    * @return a {@code LocalDate} based on this date with the months subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1141,7 +1175,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * For example, 2009-01-07 minus one week would result in 2008-12-31.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param weeksToSubtract the weeks to subtract, may be negative
    * @return a {@code LocalDate} based on this date with the weeks subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1161,7 +1195,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * For example, 2009-01-01 minus one day would result in 2008-12-31.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param daysToSubtract the days to subtract, may be negative
    * @return a {@code LocalDate} based on this date with the days subtracted, not null
    * @throws DateTimeException if the result exceeds the supported date range
@@ -1179,7 +1213,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * {@code LocalDateTime}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param time the time to combine with, not null
    * @return the local date-time formed from this date and the specified time, not null
    */
@@ -1196,7 +1230,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * {@code LocalDateTime}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param hour the hour-of-day to use, from 0 to 23
    * @param minute the minute-of-hour to use, from 0 to 59
    * @return the local date-time formed from this date and the specified time, not null
@@ -1214,7 +1248,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * {@code LocalDateTime}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param hour the hour-of-day to use, from 0 to 23
    * @param minute the minute-of-hour to use, from 0 to 59
    * @param second the second-of-minute to represent, from 0 to 59
@@ -1233,7 +1267,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * {@code LocalDateTime}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param hour the hour-of-day to use, from 0 to 23
    * @param minute the minute-of-hour to use, from 0 to 59
    * @param second the second-of-minute to represent, from 0 to 59
@@ -1244,6 +1278,43 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
   public LocalDateTime atTime(int hour, int minute, int second, int nanoOfSecond) {
 
     return atTime(LocalTime.of(hour, minute, second, nanoOfSecond));
+  }
+
+  /**
+   * Returns a zoned date-time from this date at the earliest valid time according to the rules in the
+   * time-zone.
+   * <p>
+   * Time-zone rules, such as daylight savings, mean that not every local date-time is valid for the specified
+   * zone, thus the local date-time may not be midnight.
+   * <p>
+   * In most cases, there is only one valid offset for a local date-time. In the case of an overlap, there are
+   * two valid offsets, and the earlier one is used, corresponding to the first occurrence of midnight on the
+   * date. In the case of a gap, the zoned date-time will represent the instant just after the gap.
+   * <p>
+   * If the zone ID is a {@link ZoneOffset}, then the result always has a time of midnight.
+   * <p>
+   * To convert to a specific time in a given time-zone call {@link #atTime(LocalTime)} followed by
+   * {@link LocalDateTime#atZone(ZoneId)}.
+   * <p>
+   * This instance is immutable and unaffected by this method call.
+   * 
+   * @param zoneId the zone ID to use, not null
+   * @return the zoned date-time formed from this date and the earliest valid time for the zone, not null
+   */
+  public ZonedDateTime atStartOfDay(ZoneId zoneId) {
+
+    Jdk7Methods.Objects_requireNonNull(zoneId, "zoneId");
+    // need to handle case where there is a gap from 11:30 to 00:30
+    // standard ZDT factory would result in 01:00 rather than 00:30
+    LocalDateTime ldt = atTime(LocalTime.MIDNIGHT);
+    // if (zoneId instanceof ZoneOffset == false) {
+    // ZoneRules rules = zoneId.getRules();
+    // ZoneOffsetTransition trans = rules.getTransition(ldt);
+    // if (trans != null && trans.isGap()) {
+    // ldt = trans.getDateTimeAfter();
+    // }
+    // }
+    return ZonedDateTime.of(ldt, zoneId);
   }
 
   // -----------------------------------------------------------------------
@@ -1328,7 +1399,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * If all the dates being compared are instances of {@code LocalDate}, then the comparison will be entirely
    * based on the date. If some dates being compared are in different chronologies, then the chronology is
    * also considered, see {@link ChronoLocalDate#compareTo}.
-   *
+   * 
    * @param other the other date to compare to, not null
    * @return the comparator value, negative if less, positive if greater
    */
@@ -1360,7 +1431,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
    * date and not the chronology. This allows dates in different calendar systems to be compared based on the
    * time-line position.
-   *
+   * 
    * @param other the other date to compare to, not null
    * @return true if this is after the specified date
    */
@@ -1380,7 +1451,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
    * date and not the chronology. This allows dates in different calendar systems to be compared based on the
    * time-line position.
-   *
+   * 
    * @param other the other date to compare to, not null
    * @return true if this is before the specified date
    */
@@ -1400,7 +1471,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * This method differs from the comparison in {@link #compareTo} in that it only compares the underlying
    * date and not the chronology. This allows dates in different calendar systems to be compared based on the
    * time-line position.
-   *
+   * 
    * @param other the other date to compare to, not null
    * @return true if the underlying date is equal to the specified date
    */
@@ -1423,7 +1494,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Only objects of type {@code LocalDate} are compared, other types return false. To compare the dates of
    * two {@code DateTimeAccessor} instances, including dates in two different chronologies, use
    * {@link ChronoField#EPOCH_DAY} as a comparator.
-   *
+   * 
    * @param obj the object to check, null returns false
    * @return true if this is equal to the other date
    */
@@ -1441,7 +1512,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
 
   /**
    * A hash code for this date.
-   *
+   * 
    * @return a suitable hash code
    */
   @Override
@@ -1458,7 +1529,7 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
    * Outputs this date as a {@code String}, such as {@code 2007-12-03}.
    * <p>
    * The output will be in the ISO-8601 format {@code yyyy-MM-dd}.
-   *
+   * 
    * @return a string representation of this date, not null
    */
   @Override
@@ -1484,39 +1555,5 @@ public final class LocalDate extends DefaultInterfaceChronoLocalDate<ISOChrono> 
     return buf.append(monthValue < 10 ? "-0" : "-").append(monthValue).append(dayValue < 10 ? "-0" : "-")
         .append(dayValue).toString();
   }
-
-  // -----------------------------------------------------------------------
-//  /**
-//   * Writes the object using a <a href="../../serialized-form.html#javax.time.Ser">dedicated serialized
-//   * form</a>.
-//   *
-//   * <pre>
-//     *  out.writeByte(3);  // identifies this as a LocalDate
-//     *  out.writeInt(year);
-//     *  out.writeByte(month);
-//     *  out.writeByte(day);
-//     * </pre>
-//   *
-//   * @return the instance of {@code Ser}, not null
-//   */
-//  private Object writeReplace() {
-//
-//    return new Ser(Ser.LOCAL_DATE_TYPE, this);
-//  }
-
-//  void writeExternal(DataOutput out) throws IOException {
-//
-//    out.writeInt(this.year);
-//    out.writeByte(this.month);
-//    out.writeByte(this.day);
-//  }
-//
-//  static LocalDate readExternal(DataInput in) throws IOException {
-//
-//    int year = in.readInt();
-//    int month = in.readByte();
-//    int dayOfMonth = in.readByte();
-//    return LocalDate.of(year, month, dayOfMonth);
-//  }
 
 }

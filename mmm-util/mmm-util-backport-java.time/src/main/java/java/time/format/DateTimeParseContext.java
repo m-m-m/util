@@ -51,11 +51,8 @@ import java.util.Locale;
  * This class is a mutable context intended for use from a single thread. Usage of the class is thread-safe
  * within standard parsing as a new instance of this class is automatically created for each parse and parsing
  * is single-threaded
- * 
- * @deprecated originally in JSR310 only default (package) visible
  */
-@Deprecated
-public final class DateTimeParseContext {
+final class DateTimeParseContext {
 
   /**
    * The locale, not null.
@@ -314,10 +311,8 @@ public final class DateTimeParseContext {
    * Gets the list of parsed date-time information.
    * 
    * @return the list of parsed date-time objects, not null, no nulls
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public List<Object> getParsed() {
+  List<Object> getParsed() {
 
     // package scoped for testing
     return currentParsed().parsed;

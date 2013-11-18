@@ -82,10 +82,8 @@ public final class DateTimeFormatter {
    * @param printerParser the printer/parser to use, not null
    * @param locale the locale to use, not null
    * @param symbols the symbols to use, not null
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public DateTimeFormatter(CompositePrinterParser printerParser, Locale locale, DateTimeFormatSymbols symbols) {
+  DateTimeFormatter(CompositePrinterParser printerParser, Locale locale, DateTimeFormatSymbols symbols) {
 
     this.locale = locale;
     this.symbols = symbols;

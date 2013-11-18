@@ -115,10 +115,8 @@ public final class ZoneOffsetTransition implements Comparable<ZoneOffsetTransiti
    * @param transition the transition date-time with the offset before the transition, not null
    * @param offsetBefore the offset before the transition, not null
    * @param offsetAfter the offset at and after the transition, not null
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public ZoneOffsetTransition(LocalDateTime transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
+  ZoneOffsetTransition(LocalDateTime transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
 
     this.transition = transition;
     this.offsetBefore = offsetBefore;

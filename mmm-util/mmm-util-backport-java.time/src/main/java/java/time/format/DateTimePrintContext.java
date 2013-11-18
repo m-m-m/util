@@ -47,11 +47,8 @@ import java.util.Locale;
  * This class is a mutable context intended for use from a single thread. Usage of the class is thread-safe
  * within standard printing as the framework creates a new instance of the class for each print and printing
  * is single-threaded.
- * 
- * @deprecated originally in JSR310 only default (package) visible
  */
-@Deprecated
-public final class DateTimePrintContext {
+final class DateTimePrintContext {
 
   /**
    * The date-time being output.
@@ -105,10 +102,8 @@ public final class DateTimePrintContext {
    * Sets the date-time being output.
    * 
    * @param dateTime the date-time object, not null
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public void setDateTime(DateTimeAccessor dateTime) {
+  void setDateTime(DateTimeAccessor dateTime) {
 
     Jdk7Methods.Objects_requireNonNull(dateTime, "dateTime");
     this.dateTime = dateTime;
@@ -135,10 +130,8 @@ public final class DateTimePrintContext {
    * by the symbols.
    * 
    * @param locale the locale, not null
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public void setLocale(Locale locale) {
+  void setLocale(Locale locale) {
 
     Jdk7Methods.Objects_requireNonNull(locale, "locale");
     this.locale = locale;

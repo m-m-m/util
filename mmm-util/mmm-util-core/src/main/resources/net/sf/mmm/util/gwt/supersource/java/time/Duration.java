@@ -48,8 +48,8 @@ import java.time.calendrical.DateTime.PlusAdjuster;
 import java.time.calendrical.DateTimeAccessor;
 import java.time.calendrical.PeriodUnit;
 import java.time.format.DateTimeParseException;
+import java.time.jdk8.Jdk7Methods;
 import java.time.jdk8.Jdk8Methods;
-import java.util.Objects;
 
 /**
  * A duration between two instants on the time-line.
@@ -69,7 +69,7 @@ import java.util.Objects;
  * "SI second" definition based on atomic clocks. This difference only impacts durations measured near a
  * leap-second and should not affect most applications. See {@link Instant} for a discussion as to the meaning
  * of the second and time-scales.
- *
+ * 
  * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<Duration>, Serializable {
@@ -110,7 +110,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Obtains an instance of {@code Duration} from a number of seconds.
    * <p>
    * The nanosecond in second field is set to zero.
-   *
+   * 
    * @param seconds the number of seconds, positive or negative
    * @return a {@code Duration}, not null
    */
@@ -125,13 +125,13 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * This method allows an arbitrary number of nanoseconds to be passed in. The factory will alter the values
    * of the second and nanosecond in order to ensure that the stored nanosecond is in the range 0 to
    * 999,999,999. For example, the following will result in the exactly the same duration:
-   *
+   * 
    * <pre>
      *  Duration.ofSeconds(3, 1);
      *  Duration.ofSeconds(4, -999999999);
      *  Duration.ofSeconds(2, 1000000001);
      * </pre>
-   *
+   * 
    * @param seconds the number of seconds, positive or negative
    * @param nanoAdjustment the nanosecond adjustment to the number of seconds, positive or negative
    * @return a {@code Duration}, not null
@@ -150,7 +150,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Obtains an instance of {@code Duration} from a number of milliseconds.
    * <p>
    * The seconds and nanoseconds are extracted from the specified milliseconds.
-   *
+   * 
    * @param millis the number of milliseconds, positive or negative
    * @return a {@code Duration}, not null
    */
@@ -170,7 +170,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Obtains an instance of {@code Duration} from a number of nanoseconds.
    * <p>
    * The seconds and nanoseconds are extracted from the specified nanoseconds.
-   *
+   * 
    * @param nanos the number of nanoseconds, positive or negative
    * @return a {@code Duration}, not null
    */
@@ -191,7 +191,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * The seconds are calculated based on the standard definition of a minute, where each minute is 60 seconds.
    * The nanosecond in second field is set to zero.
-   *
+   * 
    * @param minutes the number of minutes, positive or negative
    * @return a {@code Duration}, not null
    * @throws ArithmeticException if the input minutes exceeds the capacity of {@code Duration}
@@ -206,7 +206,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * The seconds are calculated based on the standard definition of an hour, where each hour is 3600 seconds.
    * The nanosecond in second field is set to zero.
-   *
+   * 
    * @param hours the number of hours, positive or negative
    * @return a {@code Duration}, not null
    * @throws ArithmeticException if the input hours exceeds the capacity of {@code Duration}
@@ -221,7 +221,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * The seconds are calculated based on the standard definition of a day, where each day is 86400 seconds
    * which implies a 24 hour day. The nanosecond in second field is set to zero.
-   *
+   * 
    * @param days the number of days, positive or negative
    * @return a {@code Duration}, not null
    * @throws ArithmeticException if the input days exceeds the capacity of {@code Duration}
@@ -236,7 +236,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Obtains an instance of {@code Duration} from a duration in the specified unit.
    * <p>
    * The parameters represent the two parts of a phrase like '6 Hours'. For example:
-   *
+   * 
    * <pre>
      *  Duration.of(3, SECONDS);
      *  Duration.of(465, HOURS);
@@ -244,7 +244,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Only a subset of units are accepted by this method. The unit must either have an
    * {@link PeriodUnit#isDurationEstimated() exact duration} or be {@link ChronoUnit#DAYS} which is treated as
    * 24 hours. Other units throw an exception.
-   *
+   * 
    * @param amount the amount of the duration, measured in terms of the unit, positive or negative
    * @param unit the unit that the duration is measured in, must have an exact duration, not null
    * @return a {@code Duration}, not null
@@ -263,7 +263,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * A {@code Duration} represents a directed distance between two points on the time-line. As such, this
    * method will return a negative duration if the end is before the start. To guarantee to obtain a positive
    * duration call {@link #abs()} on the result of this factory.
-   *
+   * 
    * @param startInclusive the start instant, inclusive, not null
    * @param endExclusive the end instant, exclusive, not null
    * @return a {@code Duration}, not null
@@ -289,14 +289,14 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * value is less than zero. There must be at least one digit before any decimal point. There must be between
    * 1 and 9 inclusive digits after any decimal point. The letters (P, T and S) will be accepted in upper or
    * lower case. The decimal point may be either a dot or a comma.
-   *
+   * 
    * @param text the text to parse, not null
    * @return a {@code Duration}, not null
    * @throws DateTimeParseException if the text cannot be parsed to a {@code Duration}
    */
   public static Duration parse(final CharSequence text) {
 
-    Objects.requireNonNull(text, "text");
+    Jdk7Methods.Objects_requireNonNull(text, "text");
     int len = text.length();
     if (len < 4 || (text.charAt(0) != 'P' && text.charAt(0) != 'p') || (text.charAt(1) != 'T' && text.charAt(1) != 't')
         || (text.charAt(len - 1) != 'S' && text.charAt(len - 1) != 's')
@@ -366,7 +366,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
   // -----------------------------------------------------------------------
   /**
    * Obtains an instance of {@code Duration} using seconds and nanoseconds.
-   *
+   * 
    * @param seconds the length of the duration in seconds, positive or negative
    * @param nanoAdjustment the nanosecond adjustment within the second, from 0 to 999,999,999
    */
@@ -380,7 +380,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
 
   /**
    * Constructs an instance of {@code Duration} using seconds and nanoseconds.
-   *
+   * 
    * @param seconds the length of the duration in seconds, positive or negative
    * @param nanos the nanoseconds within the second, from 0 to 999,999,999
    */
@@ -397,7 +397,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * A {@code Duration} represents a directed distance between two points on the time-line and can therefore
    * be positive, zero or negative. This method checks whether the length is zero.
-   *
+   * 
    * @return true if this duration has a total length equal to zero
    */
   public boolean isZero() {
@@ -410,7 +410,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * A {@code Duration} represents a directed distance between two points on the time-line and can therefore
    * be positive, zero or negative. This method checks whether the length is greater than zero.
-   *
+   * 
    * @return true if this duration has a total length greater than zero
    */
   public boolean isPositive() {
@@ -423,7 +423,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * A {@code Duration} represents a directed distance between two points on the time-line and can therefore
    * be positive, zero or negative. This method checks whether the length is less than zero.
-   *
+   * 
    * @return true if this duration has a total length less than zero
    */
   public boolean isNegative() {
@@ -442,7 +442,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * A {@code Duration} represents a directed distance between two points on the time-line. A negative
    * duration is expressed by the negative sign of the seconds part. A duration of -1 nanosecond is stored as
    * -1 seconds plus 999,999,999 nanoseconds.
-   *
+   * 
    * @return the whole seconds part of the length of the duration, positive or negative
    */
   public long getSeconds() {
@@ -460,7 +460,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * A {@code Duration} represents a directed distance between two points on the time-line. A negative
    * duration is expressed by the negative sign of the seconds part. A duration of -1 nanosecond is stored as
    * -1 seconds plus 999,999,999 nanoseconds.
-   *
+   * 
    * @return the nanoseconds within the second part of the length of the duration, from 0 to 999,999,999
    */
   public int getNano() {
@@ -473,7 +473,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param duration the duration to add, positive or negative, not null
    * @return a {@code Duration} based on this duration with the specified duration added, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -491,7 +491,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * {@link ChronoUnit#DAYS} which is treated as 24 hours. Other units throw an exception.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param amountToAdd the amount of the period, measured in terms of the unit, positive or negative
    * @param unit the unit that the period is measured in, must have an exact duration, not null
    * @return a {@code Duration} based on this duration with the specified duration added, not null
@@ -499,7 +499,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    */
   public Duration plus(long amountToAdd, PeriodUnit unit) {
 
-    Objects.requireNonNull(unit, "unit");
+    Jdk7Methods.Objects_requireNonNull(unit, "unit");
     if (unit == DAYS) {
       return plus(Jdk8Methods.safeMultiply(amountToAdd, SECONDS_PER_DAY), 0);
     }
@@ -532,7 +532,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration in seconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param secondsToAdd the seconds to add, positive or negative
    * @return a {@code Duration} based on this duration with the specified seconds added, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -546,7 +546,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration in milliseconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param millisToAdd the milliseconds to add, positive or negative
    * @return a {@code Duration} based on this duration with the specified milliseconds added, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -560,7 +560,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration in nanoseconds added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param nanosToAdd the nanoseconds to add, positive or negative
    * @return a {@code Duration} based on this duration with the specified nanoseconds added, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -574,7 +574,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration added.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param secondsToAdd the seconds to add, positive or negative
    * @param nanosToAdd the nanos to add, positive or negative
    * @return a {@code Duration} based on this duration with the specified seconds added, not null
@@ -597,7 +597,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param duration the duration to subtract, positive or negative, not null
    * @return a {@code Duration} based on this duration with the specified duration subtracted, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -620,7 +620,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * {@link ChronoUnit#DAYS} which is treated as 24 hours. Other units throw an exception.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param amountToSubtract the amount of the period, measured in terms of the unit, positive or negative
    * @param unit the unit that the period is measured in, must have an exact duration, not null
    * @return a {@code Duration} based on this duration with the specified duration subtracted, not null
@@ -637,7 +637,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration in seconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param secondsToSubtract the seconds to subtract, positive or negative
    * @return a {@code Duration} based on this duration with the specified seconds subtracted, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -653,7 +653,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration in milliseconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param millisToSubtract the milliseconds to subtract, positive or negative
    * @return a {@code Duration} based on this duration with the specified milliseconds subtracted, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -669,7 +669,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration with the specified duration in nanoseconds subtracted.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param nanosToSubtract the nanoseconds to subtract, positive or negative
    * @return a {@code Duration} based on this duration with the specified nanoseconds subtracted, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -684,7 +684,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration multiplied by the scalar.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param multiplicand the value to multiply the duration by, positive or negative
    * @return a {@code Duration} based on this duration multiplied by the specified scalar, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -704,7 +704,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Returns a copy of this duration divided by the specified value.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param divisor the value to divide the duration by, positive or negative, not zero
    * @return a {@code Duration} based on this duration divided by the specified divisor, not null
    * @throws ArithmeticException if the divisor is zero
@@ -724,7 +724,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
   /**
    * Converts this duration to the total length in seconds and fractional nanoseconds expressed as a
    * {@code BigDecimal}.
-   *
+   * 
    * @return the total length of the duration in seconds, with a scale of 9, not null
    */
   private BigDecimal toSeconds() {
@@ -734,7 +734,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
 
   /**
    * Creates an instance of {@code Duration} from a number of seconds.
-   *
+   * 
    * @param seconds the number of seconds, up to scale 9, positive or negative
    * @return a {@code Duration}, not null
    * @throws ArithmeticException if numeric overflow occurs
@@ -757,7 +757,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * returned as {@code PT-1.3S}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @return a {@code Duration} based on this duration with the amount negated, not null
    * @throws ArithmeticException if numeric overflow occurs
    */
@@ -773,7 +773,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * For example, {@code PT-1.3S} will be returned as {@code PT1.3S}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @return a {@code Duration} based on this duration with an absolute length, not null
    * @throws ArithmeticException if numeric overflow occurs
    */
@@ -791,7 +791,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * A {@code Duration} can only be added to a {@code DateTime} that represents an instant and can supply
    * {@link ChronoField#INSTANT_SECONDS}.
-   *
+   * 
    * @param dateTime the date-time object to adjust, not null
    * @return an object of the same type with the adjustment made, not null
    * @throws DateTimeException if unable to add
@@ -817,7 +817,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * A {@code Duration} can only be subtracted from a {@code DateTime} that represents an instant and can
    * supply {@link ChronoField#INSTANT_SECONDS}.
-   *
+   * 
    * @param dateTime the date-time object to adjust, not null
    * @return an object of the same type with the adjustment made, not null
    * @throws DateTimeException if unable to subtract
@@ -843,7 +843,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * If this duration has greater than millisecond precision, then the conversion will drop any excess
    * precision information as though the amount in nanoseconds was subject to integer division by one million.
-   *
+   * 
    * @return the total length of the duration in milliseconds
    * @throws ArithmeticException if numeric overflow occurs
    */
@@ -858,7 +858,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Converts this duration to the total length in nanoseconds expressed as a {@code long}.
    * <p>
    * If this duration is too large to fit in a {@code long} nanoseconds, then an exception is thrown.
-   *
+   * 
    * @return the total length of the duration in nanoseconds
    * @throws ArithmeticException if numeric overflow occurs
    */
@@ -875,15 +875,14 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * The comparison is based on the total length of the durations. It is "consistent with equals", as defined
    * by {@link Comparable}.
-   *
+   * 
    * @param otherDuration the other duration to compare to, not null
    * @return the comparator value, negative if less, positive if greater
    */
   @Override
   public int compareTo(Duration otherDuration) {
 
-    // int cmp = Long.compare(this.seconds, otherDuration.seconds);
-    int cmp = (this.seconds < otherDuration.seconds) ? -1 : ((this.seconds == otherDuration.seconds) ? 0 : 1);
+    int cmp = Jdk7Methods.Long_compare(this.seconds, otherDuration.seconds);
     if (cmp != 0) {
       return cmp;
     }
@@ -894,7 +893,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Checks if this duration is greater than the specified {@code Duration}.
    * <p>
    * The comparison is based on the total length of the durations.
-   *
+   * 
    * @param otherDuration the other duration to compare to, not null
    * @return true if this duration is greater than the specified duration
    */
@@ -907,7 +906,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Checks if this duration is less than the specified {@code Duration}.
    * <p>
    * The comparison is based on the total length of the durations.
-   *
+   * 
    * @param otherDuration the other duration to compare to, not null
    * @return true if this duration is less than the specified duration
    */
@@ -921,7 +920,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * Checks if this duration is equal to the specified {@code Duration}.
    * <p>
    * The comparison is based on the total length of the durations.
-   *
+   * 
    * @param otherDuration the other duration, null returns false
    * @return true if the other duration is equal to this one
    */
@@ -940,7 +939,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
 
   /**
    * A hash code for this duration.
-   *
+   * 
    * @return a suitable hash code
    */
   @Override
@@ -956,7 +955,7 @@ public final class Duration implements PlusAdjuster, MinusAdjuster, Comparable<D
    * <p>
    * The format of the returned string will be {@code PTnS} where n is the seconds and fractional seconds of
    * the duration.
-   *
+   * 
    * @return an ISO-8601 representation of this duration, not null
    */
   @Override

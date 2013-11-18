@@ -33,10 +33,13 @@ package javax.time.format;
 
 import static org.testng.Assert.assertEquals;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.format.DateTimeFormatSymbols;
 import java.util.Arrays;
 import java.util.Locale;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -44,6 +47,10 @@ import org.testng.annotations.Test;
  */
 @Test
 public class TCKDateTimeFormatSymbols {
+
+  private Method methodConvertToDigit;
+
+  private Method methodConvertNumberToI18N;
 
   @Test(groups = { "tck" })
   public void test_getAvailableLocales() {
@@ -109,22 +116,43 @@ public class TCKDateTimeFormatSymbols {
   public void test_convertToDigit_base() {
 
     DateTimeFormatSymbols base = DateTimeFormatSymbols.STANDARD;
-    assertEquals(base.convertToDigit('0'), 0);
-    assertEquals(base.convertToDigit('1'), 1);
-    assertEquals(base.convertToDigit('9'), 9);
-    assertEquals(base.convertToDigit(' '), -1);
-    assertEquals(base.convertToDigit('A'), -1);
+    assertEquals(convertToDigit(base, '0'), 0);
+    assertEquals(convertToDigit(base, '1'), 1);
+    assertEquals(convertToDigit(base, '9'), 9);
+    assertEquals(convertToDigit(base, ' '), -1);
+    assertEquals(convertToDigit(base, 'A'), -1);
+  }
+
+  private int convertToDigit(DateTimeFormatSymbols base, char c) {
+
+    try {
+      if (this.methodConvertToDigit == null) {
+        for (Method m : DateTimeFormatSymbols.class.getDeclaredMethods()) {
+          if ("convertToDigit".equals(m.getName())) {
+            this.methodConvertToDigit = m;
+          }
+        }
+        this.methodConvertToDigit.setAccessible(true);
+      }
+      Object result = this.methodConvertToDigit.invoke(base, new Object[] { Character.valueOf(c) });
+      return ((Integer) result).intValue();
+    } catch (IllegalAccessException e) {
+      Assert.fail(e.getMessage(), e);
+    } catch (InvocationTargetException e) {
+      Assert.fail(e.getMessage(), e);
+    }
+    throw new IllegalStateException();
   }
 
   @Test(groups = { "tck" })
   public void test_convertToDigit_altered() {
 
     DateTimeFormatSymbols base = DateTimeFormatSymbols.STANDARD.withZeroDigit('A');
-    assertEquals(base.convertToDigit('A'), 0);
-    assertEquals(base.convertToDigit('B'), 1);
-    assertEquals(base.convertToDigit('J'), 9);
-    assertEquals(base.convertToDigit(' '), -1);
-    assertEquals(base.convertToDigit('0'), -1);
+    assertEquals(convertToDigit(base, 'A'), 0);
+    assertEquals(convertToDigit(base, 'B'), 1);
+    assertEquals(convertToDigit(base, 'J'), 9);
+    assertEquals(convertToDigit(base, ' '), -1);
+    assertEquals(convertToDigit(base, '0'), -1);
   }
 
   // -----------------------------------------------------------------------
@@ -132,14 +160,36 @@ public class TCKDateTimeFormatSymbols {
   public void test_convertNumberToI18N_base() {
 
     DateTimeFormatSymbols base = DateTimeFormatSymbols.STANDARD;
-    assertEquals(base.convertNumberToI18N("134"), "134");
+    assertEquals(convertNumberToI18N(base, "134"), "134");
   }
 
   @Test(groups = { "tck" })
   public void test_convertNumberToI18N_altered() {
 
     DateTimeFormatSymbols base = DateTimeFormatSymbols.STANDARD.withZeroDigit('A');
-    assertEquals(base.convertNumberToI18N("134"), "BDE");
+    assertEquals(convertNumberToI18N(base, "134"), "BDE");
+  }
+
+  private String convertNumberToI18N(DateTimeFormatSymbols base, String number) {
+
+    try {
+      if (this.methodConvertNumberToI18N == null) {
+        for (Method m : DateTimeFormatSymbols.class.getDeclaredMethods()) {
+          if ("convertNumberToI18N".equals(m.getName())) {
+            this.methodConvertNumberToI18N = m;
+            break;
+          }
+        }
+        this.methodConvertNumberToI18N.setAccessible(true);
+      }
+      Object result = this.methodConvertNumberToI18N.invoke(base, new Object[] { number });
+      return (String) result;
+    } catch (IllegalAccessException e) {
+      Assert.fail(e.getMessage(), e);
+    } catch (InvocationTargetException e) {
+      Assert.fail(e.getMessage(), e);
+    }
+    throw new IllegalStateException();
   }
 
   // -----------------------------------------------------------------------

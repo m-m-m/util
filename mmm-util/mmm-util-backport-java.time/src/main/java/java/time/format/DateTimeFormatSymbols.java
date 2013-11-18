@@ -281,10 +281,8 @@ public final class DateTimeFormatSymbols {
    * 
    * @param ch the character to check
    * @return the value, 0 to 9, of the character, or -1 if not a digit
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public int convertToDigit(char ch) {
+  int convertToDigit(char ch) {
 
     int val = ch - this.zeroDigit;
     return (val >= 0 && val <= 9) ? val : -1;
@@ -295,10 +293,8 @@ public final class DateTimeFormatSymbols {
    * 
    * @param numericText the text, consisting of digits 0 to 9, to convert, not null
    * @return the internationalized text, not null
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public String convertNumberToI18N(String numericText) {
+  String convertNumberToI18N(String numericText) {
 
     if (this.zeroDigit == '0') {
       return numericText;

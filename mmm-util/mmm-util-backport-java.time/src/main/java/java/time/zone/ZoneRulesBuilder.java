@@ -66,11 +66,8 @@ import java.util.Map;
  * <h4>Implementation notes</h4>
  * This class is a mutable builder used to create zone instances. It must only be used from a single thread.
  * The created instances are immutable and thread-safe.
- * 
- * @deprecated originally in JSR310 only default (package) visible
  */
-@Deprecated
-public class ZoneRulesBuilder {
+class ZoneRulesBuilder {
 
   /**
    * The list of windows.

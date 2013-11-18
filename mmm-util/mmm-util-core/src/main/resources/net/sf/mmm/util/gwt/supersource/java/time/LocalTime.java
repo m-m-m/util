@@ -31,21 +31,16 @@
  */
 package java.time;
 
-import static javax.time.calendrical.ChronoField.HOUR_OF_DAY;
-import static javax.time.calendrical.ChronoField.MICRO_OF_DAY;
-import static javax.time.calendrical.ChronoField.MINUTE_OF_HOUR;
-import static javax.time.calendrical.ChronoField.NANO_OF_DAY;
-import static javax.time.calendrical.ChronoField.NANO_OF_SECOND;
-import static javax.time.calendrical.ChronoField.SECOND_OF_DAY;
-import static javax.time.calendrical.ChronoField.SECOND_OF_MINUTE;
-import static javax.time.calendrical.ChronoUnit.NANOS;
+import static java.time.calendrical.ChronoField.HOUR_OF_DAY;
+import static java.time.calendrical.ChronoField.MICRO_OF_DAY;
+import static java.time.calendrical.ChronoField.MINUTE_OF_HOUR;
+import static java.time.calendrical.ChronoField.NANO_OF_DAY;
+import static java.time.calendrical.ChronoField.NANO_OF_SECOND;
+import static java.time.calendrical.ChronoField.SECOND_OF_DAY;
+import static java.time.calendrical.ChronoField.SECOND_OF_MINUTE;
+import static java.time.calendrical.ChronoUnit.NANOS;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Objects;
-
 import java.time.calendrical.ChronoField;
 import java.time.calendrical.ChronoUnit;
 import java.time.calendrical.DateTime;
@@ -57,10 +52,9 @@ import java.time.calendrical.DateTimeValueRange;
 import java.time.calendrical.PeriodUnit;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.chrono.ChronoZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatters;
 import java.time.format.DateTimeParseException;
 import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
+import java.time.jdk8.Jdk7Methods;
 
 /**
  * A time without time-zone in the ISO-8601 calendar system, such as {@code 10:15:30}.
@@ -70,11 +64,14 @@ import java.time.jdk8.DefaultInterfaceDateTimeAccessor;
  * <p>
  * This class stores all time fields, to a precision of nanoseconds. It does not store or represent a date or
  * time-zone. For example, the value "13:45.30.123456789" can be stored in a {@code LocalTime}.
- *
+ * 
  * <h4>Implementation notes</h4> This class is immutable and thread-safe.
  */
 public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements DateTime, WithAdjuster,
     Comparable<LocalTime>, Serializable {
+
+  private static final int[] NANO_FACTORS = new int[] { 1000000000, 100000000, 10000000, 1000000, 100000, 10000, 1000,
+      100, 10, 1 };
 
   /**
    * Constant for the local time of midnight, 00:00.
@@ -204,7 +201,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * <p>
    * Using this method will prevent the ability to use an alternate clock for testing because the clock is
    * hard-coded.
-   *
+   * 
    * @return the current time using the system clock and default time-zone, not null
    */
   public static LocalTime now() {
@@ -220,7 +217,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * <p>
    * Using this method will prevent the ability to use an alternate clock for testing because the clock is
    * hard-coded.
-   *
+   * 
    * @return the current time using the system clock, not null
    */
   public static LocalTime now(ZoneId zone) {
@@ -234,15 +231,13 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * This will query the specified clock to obtain the current time. Using this method allows the use of an
    * alternate clock for testing. The alternate clock may be introduced using {@link Clock dependency
    * injection}.
-   *
+   * 
    * @param clock the clock to use, not null
    * @return the current time, not null
    */
   public static LocalTime now(Clock clock) {
 
-    if (clock == null) {
-      throw new NullPointerException("clock");
-    }
+    Jdk7Methods.Objects_requireNonNull(clock, "clock");
     // inline OffsetTime factory to avoid creating object and InstantProvider checks
     final Instant now = clock.instant(); // called once
     ZoneOffset offset = clock.getZone().getRules().getOffset(now);
@@ -261,7 +256,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * The second and nanosecond fields will be set to zero by this factory method.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param hour the hour-of-day to represent, from 0 to 23
    * @param minute the minute-of-hour to represent, from 0 to 59
    * @return the local time, not null
@@ -283,7 +278,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * The nanosecond field will be set to zero by this factory method.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param hour the hour-of-day to represent, from 0 to 23
    * @param minute the minute-of-hour to represent, from 0 to 59
    * @param second the second-of-minute to represent, from 0 to 59
@@ -305,7 +300,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Obtains an instance of {@code LocalTime} from an hour, minute, second and nanosecond.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param hour the hour-of-day to represent, from 0 to 23
    * @param minute the minute-of-hour to represent, from 0 to 59
    * @param second the second-of-minute to represent, from 0 to 59
@@ -327,7 +322,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Obtains an instance of {@code LocalTime} from a second-of-day value.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param secondOfDay the second-of-day, from {@code 0} to {@code 24 * 60 * 60 - 1}
    * @return the local time, not null
    * @throws DateTimeException if the second-of-day value is invalid
@@ -346,7 +341,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Obtains an instance of {@code LocalTime} from a second-of-day value, with associated nanos of second.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param secondOfDay the second-of-day, from {@code 0} to {@code 24 * 60 * 60 - 1}
    * @param nanoOfSecond the nano-of-second, from 0 to 999,999,999
    * @return the local time, not null
@@ -367,7 +362,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Obtains an instance of {@code LocalTime} from a nanos-of-day value.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param nanoOfDay the nano of day, from {@code 0} to {@code 24 * 60 * 60 * 1,000,000,000 - 1}
    * @return the local time, not null
    * @throws DateTimeException if the nanos of day value is invalid
@@ -392,7 +387,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * arbitrary date-time object to an instance of {@code LocalTime}.
    * <p>
    * The conversion extracts the {@link ChronoField#NANO_OF_DAY nano-of-day} field.
-   *
+   * 
    * @param dateTime the date-time object to convert, not null
    * @return the local time, not null
    * @throws DateTimeException if unable to convert to a {@code LocalTime}
@@ -422,33 +417,56 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Obtains an instance of {@code LocalTime} from a text string such as {@code 10:15}.
    * <p>
    * The string must represent a valid time and is parsed using
-   * {@link javax.time.format.DateTimeFormatters#isoLocalTime()}.
-   *
+   * {@link java.time.format.DateTimeFormatters#isoLocalTime()}.
+   * 
    * @param text the text to parse such as "10:15:30", not null
    * @return the parsed local time, not null
    * @throws DateTimeParseException if the text cannot be parsed
    */
   public static LocalTime parse(CharSequence text) {
 
-    return parse(text, DateTimeFormatters.isoLocalTime());
-  }
-
-  /**
-   * Obtains an instance of {@code LocalTime} from a text string using a specific formatter.
-   * <p>
-   * The text is parsed using the formatter, returning a time.
-   *
-   * @param text the text to parse, not null
-   * @param formatter the formatter to use, not null
-   * @return the parsed local time, not null
-   * @throws DateTimeParseException if the text cannot be parsed
-   */
-  public static LocalTime parse(CharSequence text, DateTimeFormatter formatter) {
-
-    if (formatter == null) {
-      throw new NullPointerException("formatter");
+    int length = text.length();
+    int errorIndex = 0;
+    Throwable cause = null;
+    try {
+      // "HH:mm".length() == 5, "HH:mm:ss".length() == 8, "HH:mm:ss.SSS".length() == 12,
+      // "HH:mm:ss.SSSSSS".length() == 15, "HH:mm:ss.SSSSSSSSS".length()==18
+      if (((length == 5) || ((length >= 8) && (length <= 18))) && (text.charAt(2) == ':')) {
+        String hourString = text.subSequence(0, 2).toString();
+        int hour = Integer.parseInt(hourString);
+        errorIndex = 3;
+        String minuteString = text.subSequence(3, 5).toString();
+        int minute = Integer.parseInt(minuteString);
+        int second = 0;
+        int nano = 0;
+        // "HH:mm:ss".length() == 8
+        if (length >= 8) {
+          if (text.charAt(5) != ':') {
+            errorIndex = 5;
+            throw new IllegalArgumentException(text.toString());
+          }
+          errorIndex = 6;
+          String secondString = text.subSequence(6, 8).toString();
+          second = Integer.parseInt(secondString);
+          // "HH:mm:ss.SSS".length() == 12, "HH:mm:ss.SSSSSSSSS".length()==18
+          if (length >= 10) {
+            if (text.charAt(8) != '.') {
+              errorIndex = 8;
+              throw new IllegalArgumentException(text.toString());
+            }
+            errorIndex = 9;
+            String nanoString = text.subSequence(9, length).toString();
+            nano = Integer.parseInt(nanoString);
+            int factor = NANO_FACTORS[nanoString.length()];
+            nano = nano * factor;
+          }
+        }
+        return of(hour, minute, second, nano);
+      }
+    } catch (RuntimeException e) {
+      cause = e;
     }
-    return formatter.parse(text, LocalTime.class);
+    throw new DateTimeParseException("Expected format HH:mm:ss.SSSSSSSSS", text, errorIndex, cause);
   }
 
   // -----------------------------------------------------------------------
@@ -456,7 +474,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Creates a local time from the hour, minute, second and nanosecond fields.
    * <p>
    * This factory may return a cached value, but applications must not rely on this.
-   *
+   * 
    * @param hour the hour-of-day to represent, validated from 0 to 23
    * @param minute the minute-of-hour to represent, validated from 0 to 59
    * @param second the second-of-minute to represent, validated from 0 to 59
@@ -473,7 +491,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
 
   /**
    * Constructor, previously validated.
-   *
+   * 
    * @param hour the hour-of-day to represent, validated from 0 to 23
    * @param minute the minute-of-hour to represent, validated from 0 to 59
    * @param second the second-of-minute to represent, validated from 0 to 59
@@ -537,36 +555,36 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
 
     switch ((ChronoField) field) {
       case NANO_OF_SECOND:
-        return nano;
+        return this.nano;
       case NANO_OF_DAY:
         throw new DateTimeException("Field too large for an int: " + field);
       case MICRO_OF_SECOND:
-        return nano / 1000;
+        return this.nano / 1000;
       case MICRO_OF_DAY:
         throw new DateTimeException("Field too large for an int: " + field);
       case MILLI_OF_SECOND:
-        return nano / 1000000;
+        return this.nano / 1000000;
       case MILLI_OF_DAY:
         return (int) (toNanoOfDay() / 1000000);
       case SECOND_OF_MINUTE:
-        return second;
+        return this.second;
       case SECOND_OF_DAY:
         return toSecondOfDay();
       case MINUTE_OF_HOUR:
-        return minute;
+        return this.minute;
       case MINUTE_OF_DAY:
-        return hour * 60 + minute;
+        return this.hour * 60 + this.minute;
       case HOUR_OF_AMPM:
-        return hour % 12;
+        return this.hour % 12;
       case CLOCK_HOUR_OF_AMPM:
-        int ham = hour % 12;
+        int ham = this.hour % 12;
         return (ham % 12 == 0 ? 12 : ham);
       case HOUR_OF_DAY:
-        return hour;
+        return this.hour;
       case CLOCK_HOUR_OF_DAY:
-        return (hour == 0 ? 24 : hour);
+        return (this.hour == 0 ? 24 : this.hour);
       case AMPM_OF_DAY:
-        return hour / 12;
+        return this.hour / 12;
     }
     throw new DateTimeException("Unsupported field: " + field.getName());
   }
@@ -574,42 +592,42 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
   // -----------------------------------------------------------------------
   /**
    * Gets the hour-of-day field.
-   *
+   * 
    * @return the hour-of-day, from 0 to 23
    */
   public int getHour() {
 
-    return hour;
+    return this.hour;
   }
 
   /**
    * Gets the minute-of-hour field.
-   *
+   * 
    * @return the minute-of-hour, from 0 to 59
    */
   public int getMinute() {
 
-    return minute;
+    return this.minute;
   }
 
   /**
    * Gets the second-of-minute field.
-   *
+   * 
    * @return the second-of-minute, from 0 to 59
    */
   public int getSecond() {
 
-    return second;
+    return this.second;
   }
 
   /**
    * Gets the nano-of-second field.
-   *
+   * 
    * @return the nano-of-second, from 0 to 999,999,999
    */
   public int getNano() {
 
-    return nano;
+    return this.nano;
   }
 
   // -----------------------------------------------------------------------
@@ -625,11 +643,12 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * could be used to change the AM/PM value.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalTime} based on this time with the adjustment made, not null
    * @throws DateTimeException if the adjustment cannot be made
    */
+  @Override
   public LocalTime with(WithAdjuster adjuster) {
 
     if (adjuster instanceof LocalTime) {
@@ -645,12 +664,13 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * used to change any field, for example to set the hour-of-day.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param field the field to set in the result, not null
    * @param newValue the new value of the field in the result
    * @return a {@code LocalTime} based on this time with the specified field set, not null
    * @throws DateTimeException if the value is invalid
    */
+  @Override
   public LocalTime with(DateTimeField field, long newValue) {
 
     if (field instanceof ChronoField) {
@@ -676,17 +696,17 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
         case MINUTE_OF_HOUR:
           return withMinute((int) newValue);
         case MINUTE_OF_DAY:
-          return plusMinutes(newValue - (hour * 60 + minute));
+          return plusMinutes(newValue - (this.hour * 60 + this.minute));
         case HOUR_OF_AMPM:
-          return plusHours(newValue - (hour % 12));
+          return plusHours(newValue - (this.hour % 12));
         case CLOCK_HOUR_OF_AMPM:
-          return plusHours((newValue == 12 ? 0 : newValue) - (hour % 12));
+          return plusHours((newValue == 12 ? 0 : newValue) - (this.hour % 12));
         case HOUR_OF_DAY:
           return withHour((int) newValue);
         case CLOCK_HOUR_OF_DAY:
           return withHour((int) (newValue == 24 ? 0 : newValue));
         case AMPM_OF_DAY:
-          return plusHours((newValue - (hour / 12)) * 12);
+          return plusHours((newValue - (this.hour / 12)) * 12);
       }
       throw new DateTimeException("Unsupported field: " + field.getName());
     }
@@ -698,7 +718,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Returns a copy of this {@code LocalTime} with the hour-of-day value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param hour the hour-of-day to set in the result, from 0 to 23
    * @return a {@code LocalTime} based on this time with the requested hour, not null
    * @throws DateTimeException if the hour value is invalid
@@ -709,14 +729,14 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
       return this;
     }
     HOUR_OF_DAY.checkValidValue(hour);
-    return create(hour, minute, second, nano);
+    return create(hour, this.minute, this.second, this.nano);
   }
 
   /**
    * Returns a copy of this {@code LocalTime} with the minute-of-hour value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param minute the minute-of-hour to set in the result, from 0 to 59
    * @return a {@code LocalTime} based on this time with the requested minute, not null
    * @throws DateTimeException if the minute value is invalid
@@ -727,14 +747,14 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
       return this;
     }
     MINUTE_OF_HOUR.checkValidValue(minute);
-    return create(hour, minute, second, nano);
+    return create(this.hour, minute, this.second, this.nano);
   }
 
   /**
    * Returns a copy of this {@code LocalTime} with the second-of-minute value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param second the second-of-minute to set in the result, from 0 to 59
    * @return a {@code LocalTime} based on this time with the requested second, not null
    * @throws DateTimeException if the second value is invalid
@@ -745,14 +765,14 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
       return this;
     }
     SECOND_OF_MINUTE.checkValidValue(second);
-    return create(hour, minute, second, nano);
+    return create(this.hour, this.minute, second, this.nano);
   }
 
   /**
    * Returns a copy of this {@code LocalTime} with the nano-of-second value altered.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param nanoOfSecond the nano-of-second to set in the result, from 0 to 999,999,999
    * @return a {@code LocalTime} based on this time with the requested nanosecond, not null
    * @throws DateTimeException if the nanos value is invalid
@@ -763,7 +783,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
       return this;
     }
     NANO_OF_SECOND.checkValidValue(nanoOfSecond);
-    return create(hour, minute, second, nanoOfSecond);
+    return create(this.hour, this.minute, this.second, nanoOfSecond);
   }
 
   // -----------------------------------------------------------------------
@@ -778,7 +798,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * can be used, other units throw an exception.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param unit the unit to truncate to, not null
    * @return a {@code LocalTime} based on this time with the time truncated, not null
    * @throws DateTimeException if unable to truncate
@@ -807,16 +827,17 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * <p>
    * This method returns a new time based on this time with the specified period added. The adjuster is
    * typically {@link Period} but may be any other type implementing the
-   * {@link javax.time.calendrical.DateTime.PlusAdjuster} interface. The calculation is delegated to the
+   * {@link java.time.calendrical.DateTime.PlusAdjuster} interface. The calculation is delegated to the
    * specified adjuster, which typically calls back to {@link #plus(long, PeriodUnit)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalTime} based on this time with the addition made, not null
    * @throws DateTimeException if the addition cannot be made
    * @throws ArithmeticException if numeric overflow occurs
    */
+  @Override
   public LocalTime plus(PlusAdjuster adjuster) {
 
     return (LocalTime) adjuster.doPlusAdjustment(this);
@@ -831,12 +852,13 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * calculation.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param amountToAdd the amount of the unit to add to the result, may be negative
    * @param unit the unit of the period to add, not null
    * @return a {@code LocalTime} based on this time with the specified period added, not null
    * @throws DateTimeException if the unit cannot be added to this type
    */
+  @Override
   public LocalTime plus(long amountToAdd, PeriodUnit unit) {
 
     if (unit instanceof ChronoUnit) {
@@ -872,7 +894,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param hoursToAdd the hours to add, may be negative
    * @return a {@code LocalTime} based on this time with the hours added, not null
    */
@@ -881,8 +903,8 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     if (hoursToAdd == 0) {
       return this;
     }
-    int newHour = ((int) (hoursToAdd % HOURS_PER_DAY) + hour + HOURS_PER_DAY) % HOURS_PER_DAY;
-    return create(newHour, minute, second, nano);
+    int newHour = ((int) (hoursToAdd % HOURS_PER_DAY) + this.hour + HOURS_PER_DAY) % HOURS_PER_DAY;
+    return create(newHour, this.minute, this.second, this.nano);
   }
 
   /**
@@ -892,7 +914,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param minutesToAdd the minutes to add, may be negative
    * @return a {@code LocalTime} based on this time with the minutes added, not null
    */
@@ -901,14 +923,14 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     if (minutesToAdd == 0) {
       return this;
     }
-    int mofd = hour * MINUTES_PER_HOUR + minute;
+    int mofd = this.hour * MINUTES_PER_HOUR + this.minute;
     int newMofd = ((int) (minutesToAdd % MINUTES_PER_DAY) + mofd + MINUTES_PER_DAY) % MINUTES_PER_DAY;
     if (mofd == newMofd) {
       return this;
     }
     int newHour = newMofd / MINUTES_PER_HOUR;
     int newMinute = newMofd % MINUTES_PER_HOUR;
-    return create(newHour, newMinute, second, nano);
+    return create(newHour, newMinute, this.second, this.nano);
   }
 
   /**
@@ -918,7 +940,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param secondstoAdd the seconds to add, may be negative
    * @return a {@code LocalTime} based on this time with the seconds added, not null
    */
@@ -927,7 +949,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     if (secondstoAdd == 0) {
       return this;
     }
-    int sofd = hour * SECONDS_PER_HOUR + minute * SECONDS_PER_MINUTE + second;
+    int sofd = this.hour * SECONDS_PER_HOUR + this.minute * SECONDS_PER_MINUTE + this.second;
     int newSofd = ((int) (secondstoAdd % SECONDS_PER_DAY) + sofd + SECONDS_PER_DAY) % SECONDS_PER_DAY;
     if (sofd == newSofd) {
       return this;
@@ -935,7 +957,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     int newHour = newSofd / SECONDS_PER_HOUR;
     int newMinute = (newSofd / SECONDS_PER_MINUTE) % MINUTES_PER_HOUR;
     int newSecond = newSofd % SECONDS_PER_MINUTE;
-    return create(newHour, newMinute, newSecond, nano);
+    return create(newHour, newMinute, newSecond, this.nano);
   }
 
   /**
@@ -945,7 +967,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param nanosToAdd the nanos to add, may be negative
    * @return a {@code LocalTime} based on this time with the nanoseconds added, not null
    */
@@ -972,16 +994,17 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * <p>
    * This method returns a new time based on this time with the specified period subtracted. The adjuster is
    * typically {@link Period} but may be any other type implementing the
-   * {@link javax.time.calendrical.DateTime.MinusAdjuster} interface. The calculation is delegated to the
+   * {@link java.time.calendrical.DateTime.MinusAdjuster} interface. The calculation is delegated to the
    * specified adjuster, which typically calls back to {@link #minus(long, PeriodUnit)}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param adjuster the adjuster to use, not null
    * @return a {@code LocalTime} based on this time with the subtraction made, not null
    * @throws DateTimeException if the subtraction cannot be made
    * @throws ArithmeticException if numeric overflow occurs
    */
+  @Override
   public LocalTime minus(MinusAdjuster adjuster) {
 
     return (LocalTime) adjuster.doMinusAdjustment(this);
@@ -996,12 +1019,13 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * calculation.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param amountToSubtract the amount of the unit to subtract from the result, may be negative
    * @param unit the unit of the period to subtract, not null
    * @return a {@code LocalTime} based on this time with the specified period subtracted, not null
    * @throws DateTimeException if the unit cannot be added to this type
    */
+  @Override
   public LocalTime minus(long amountToSubtract, PeriodUnit unit) {
 
     return (amountToSubtract == Long.MIN_VALUE ? plus(Long.MAX_VALUE, unit).plus(1, unit) : plus(-amountToSubtract,
@@ -1016,7 +1040,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param hoursToSubtract the hours to subtract, may be negative
    * @return a {@code LocalTime} based on this time with the hours subtracted, not null
    */
@@ -1032,7 +1056,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * wraps around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param minutesToSubtract the minutes to subtract, may be negative
    * @return a {@code LocalTime} based on this time with the minutes subtracted, not null
    */
@@ -1048,7 +1072,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * wraps around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param secondsToSubtract the seconds to subtract, may be negative
    * @return a {@code LocalTime} based on this time with the seconds subtracted, not null
    */
@@ -1064,7 +1088,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * wraps around midnight.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param nanosToSubtract the nanos to subtract, may be negative
    * @return a {@code LocalTime} based on this time with the nanoseconds subtracted, not null
    */
@@ -1081,7 +1105,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * {@code LocalDateTime}.
    * <p>
    * This instance is immutable and unaffected by this method call.
-   *
+   * 
    * @param date the date to combine with, not null
    * @return the local date-time formed from this time and the specified date, not null
    */
@@ -1140,57 +1164,52 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
   // -----------------------------------------------------------------------
   /**
    * Extracts the time as seconds of day, from {@code 0} to {@code 24 * 60 * 60 - 1}.
-   *
+   * 
    * @return the second-of-day equivalent to this time
    */
   public int toSecondOfDay() {
 
-    int total = hour * SECONDS_PER_HOUR;
-    total += minute * SECONDS_PER_MINUTE;
-    total += second;
+    int total = this.hour * SECONDS_PER_HOUR;
+    total += this.minute * SECONDS_PER_MINUTE;
+    total += this.second;
     return total;
   }
 
   /**
    * Extracts the time as nanos of day, from {@code 0} to {@code 24 * 60 * 60 * 1,000,000,000 - 1}.
-   *
+   * 
    * @return the nano of day equivalent to this time
    */
   public long toNanoOfDay() {
 
-    long total = hour * NANOS_PER_HOUR;
-    total += minute * NANOS_PER_MINUTE;
-    total += second * NANOS_PER_SECOND;
-    total += nano;
+    long total = this.hour * NANOS_PER_HOUR;
+    total += this.minute * NANOS_PER_MINUTE;
+    total += this.second * NANOS_PER_SECOND;
+    total += this.nano;
     return total;
   }
 
   // -----------------------------------------------------------------------
-
-  private static int compareInteger(int x, int y) {
-
-    return (x < y) ? -1 : ((x == y) ? 0 : 1);
-  }
-
   /**
    * Compares this {@code LocalTime} to another time.
    * <p>
    * The comparison is based on the time-line position of the local times within a day. It is
    * "consistent with equals", as defined by {@link Comparable}.
-   *
+   * 
    * @param other the other time to compare to, not null
    * @return the comparator value, negative if less, positive if greater
    * @throws NullPointerException if {@code other} is null
    */
+  @Override
   public int compareTo(LocalTime other) {
 
-    int cmp = compareInteger(hour, other.hour);
+    int cmp = Jdk7Methods.Integer_compare(this.hour, other.hour);
     if (cmp == 0) {
-      cmp = compareInteger(minute, other.minute);
+      cmp = Jdk7Methods.Integer_compare(this.minute, other.minute);
       if (cmp == 0) {
-        cmp = compareInteger(second, other.second);
+        cmp = Jdk7Methods.Integer_compare(this.second, other.second);
         if (cmp == 0) {
-          cmp = compareInteger(nano, other.nano);
+          cmp = Jdk7Methods.Integer_compare(this.nano, other.nano);
         }
       }
     }
@@ -1201,7 +1220,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Checks if this {@code LocalTime} is after the specified time.
    * <p>
    * The comparison is based on the time-line position of the time within a day.
-   *
+   * 
    * @param other the other time to compare to, not null
    * @return true if this is after the specified time
    * @throws NullPointerException if {@code other} is null
@@ -1215,7 +1234,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * Checks if this {@code LocalTime} is before the specified time.
    * <p>
    * The comparison is based on the time-line position of the time within a day.
-   *
+   * 
    * @param other the other time to compare to, not null
    * @return true if this point is before the specified time
    * @throws NullPointerException if {@code other} is null
@@ -1233,7 +1252,7 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * <p>
    * Only objects of type {@code LocalTime} are compared, other types return false. To compare the date of two
    * {@code DateTimeAccessor} instances, use {@link ChronoField#NANO_OF_DAY} as a comparator.
-   *
+   * 
    * @param obj the object to check, null returns false
    * @return true if this is equal to the other time
    */
@@ -1245,14 +1264,15 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     }
     if (obj instanceof LocalTime) {
       LocalTime other = (LocalTime) obj;
-      return hour == other.hour && minute == other.minute && second == other.second && nano == other.nano;
+      return this.hour == other.hour && this.minute == other.minute && this.second == other.second
+          && this.nano == other.nano;
     }
     return false;
   }
 
   /**
    * A hash code for this time.
-   *
+   * 
    * @return a suitable hash code
    */
   @Override
@@ -1278,17 +1298,17 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
    * <p>
    * The format used will be the shortest that outputs the full value of the time where the omitted parts are
    * implied to be zero.
-   *
+   * 
    * @return a string representation of this time, not null
    */
   @Override
   public String toString() {
 
     StringBuilder buf = new StringBuilder(18);
-    int hourValue = hour;
-    int minuteValue = minute;
-    int secondValue = second;
-    int nanoValue = nano;
+    int hourValue = this.hour;
+    int minuteValue = this.minute;
+    int secondValue = this.second;
+    int nanoValue = this.nano;
     buf.append(hourValue < 10 ? "0" : "").append(hourValue).append(minuteValue < 10 ? ":0" : ":").append(minuteValue);
     if (secondValue > 0 || nanoValue > 0) {
       buf.append(secondValue < 10 ? ":0" : ":").append(secondValue);
@@ -1305,55 +1325,5 @@ public final class LocalTime extends DefaultInterfaceDateTimeAccessor implements
     }
     return buf.toString();
   }
-
-  /**
-   * Outputs this time as a {@code String} using the formatter.
-   *
-   * @param formatter the formatter to use, not null
-   * @return the formatted time string, not null
-   * @throws DateTimeException if an error occurs during printing
-   */
-  public String toString(DateTimeFormatter formatter) {
-
-    if (formatter == null) {
-      throw new NullPointerException("formatter");
-    }
-    return formatter.print(this);
-  }
-
-  // -----------------------------------------------------------------------
-//  /**
-//   * Writes the object using a <a href="../../serialized-form.html#javax.time.Ser">dedicated serialized
-//   * form</a>.
-//   *
-//   * <pre>
-//     *  out.writeByte(5);  // identifies this as a LocalTime
-//     *  out.writeByte(hour);
-//     *  out.writeByte(minute);
-//     *  out.writeByte(second);
-//     *  out.writeInt(nano);
-//     * </pre>
-//   *
-//   * @return the instance of {@code Ser}, not null
-//   */
-//  private Object writeReplace() {
-//
-//    return new Ser(Ser.LOCAL_TIME_TYPE, this);
-//  }
-
-  // void writeExternal(DataOutput out) throws IOException {
-  // out.writeByte(hour);
-  // out.writeByte(minute);
-  // out.writeByte(second);
-  // out.writeInt(nano);
-  // }
-  //
-  // static LocalTime readExternal(DataInput in) throws IOException {
-  // byte hour = in.readByte();
-  // byte minute = in.readByte();
-  // byte second = in.readByte();
-  // int nano = in.readInt();
-  // return LocalTime.of(hour, minute, second, nano);
-  // }
 
 }

@@ -60,8 +60,8 @@
             <configuration>
               <argLine>-Xbootclasspath/p:${project.build.directory}/${project.build.finalName}.jar</argLine>
               <includes>
-                <include>**/Test*.java</include>
-                <include>**/TCK*.java</include>
+                <include>**/javax/**/Test*.java</include>
+                <include>**/javax/**/TCK*.java</include>
               </includes>
             </configuration>
           </execution>

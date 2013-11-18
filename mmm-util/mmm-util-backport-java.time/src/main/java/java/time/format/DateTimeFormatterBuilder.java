@@ -1340,11 +1340,8 @@ public final class DateTimeFormatterBuilder {
    * <p>
    * The context is not a thread-safe object and a new instance will be created for each print that occurs.
    * The context must not be stored in an instance variable or shared with any other threads.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public interface DateTimePrinterParser {
+  interface DateTimePrinterParser {
 
     /**
      * Prints the date-time object to the buffer.
@@ -1381,11 +1378,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Composite printer and parser.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class CompositePrinterParser implements DateTimePrinterParser {
+  static final class CompositePrinterParser implements DateTimePrinterParser {
 
     private final DateTimePrinterParser[] printerParsers;
 
@@ -1482,11 +1476,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Pads the output to a fixed width.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class PadPrinterParserDecorator implements DateTimePrinterParser {
+  static final class PadPrinterParserDecorator implements DateTimePrinterParser {
 
     private final DateTimePrinterParser printerParser;
 
@@ -1574,10 +1565,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Enumeration to apply simple parse settings.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  public static enum SettingsParser implements DateTimePrinterParser {
+  static enum SettingsParser implements DateTimePrinterParser {
     SENSITIVE, INSENSITIVE, STRICT, LENIENT;
 
     @Override
@@ -1626,11 +1615,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses a character literal.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class CharLiteralPrinterParser implements DateTimePrinterParser {
+  static final class CharLiteralPrinterParser implements DateTimePrinterParser {
 
     private final char literal;
 
@@ -1677,11 +1663,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses a string literal.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class StringLiteralPrinterParser implements DateTimePrinterParser {
+  static final class StringLiteralPrinterParser implements DateTimePrinterParser {
 
     private final String literal;
 
@@ -1721,11 +1704,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints and parses a numeric date-time field with optional padding.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static class NumberPrinterParser implements DateTimePrinterParser {
+  static class NumberPrinterParser implements DateTimePrinterParser {
 
     /**
      * Array of 10 to the power of n.
@@ -1786,10 +1766,8 @@ public final class DateTimeFormatterBuilder {
      * 
      * @param subsequentWidth the width of subsequent non-negative numbers, 0 or greater
      * @return a new updated printer-parser, not null
-     * @deprecated originally in JSR310 only default (package) visible
      */
-    @Deprecated
-    public NumberPrinterParser withSubsequentWidth(int subsequentWidth) {
+    NumberPrinterParser withSubsequentWidth(int subsequentWidth) {
 
       return new NumberPrinterParser(this.field, this.minWidth, this.maxWidth, this.signStyle, this.subsequentWidth
           + subsequentWidth);
@@ -2000,11 +1978,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints and parses a reduced numeric date-time field.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class ReducedPrinterParser extends NumberPrinterParser {
+  static final class ReducedPrinterParser extends NumberPrinterParser {
 
     private final int baseValue;
 
@@ -2064,11 +2039,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints and parses a numeric date-time field with optional padding.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class FractionPrinterParser implements DateTimePrinterParser {
+  static final class FractionPrinterParser implements DateTimePrinterParser {
 
     private final DateTimeField field;
 
@@ -2251,11 +2223,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses field text.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class TextPrinterParser implements DateTimePrinterParser {
+  static final class TextPrinterParser implements DateTimePrinterParser {
 
     private final DateTimeField field;
 
@@ -2387,11 +2356,8 @@ public final class DateTimeFormatterBuilder {
   // -----------------------------------------------------------------------
   /**
    * Prints or parses a zone offset.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public static final class ZoneOffsetPrinterParser implements DateTimePrinterParser {
+  static final class ZoneOffsetPrinterParser implements DateTimePrinterParser {
 
     static final String[] PATTERNS = new String[] { "+HH", "+HHMM", "+HH:MM", "+HHMMss", "+HH:MM:ss", "+HHMMSS",
         "+HH:MM:SS", }; // order used in pattern builder

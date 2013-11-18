@@ -76,11 +76,8 @@ import java.util.zip.ZipEntry;
  * 
  * <h4>Implementation notes</h4> This class is a mutable builder. A new instance must be created for each
  * compile.
- * 
- * @deprecated originally in JSR310 only default (package) visible
  */
-@Deprecated
-public final class TzdbZoneRulesCompiler {
+final class TzdbZoneRulesCompiler {
 
   /**
    * Time parser.
@@ -1012,11 +1009,8 @@ public final class TzdbZoneRulesCompiler {
   // -----------------------------------------------------------------------
   /**
    * Class representing a month-day-time in the TZDB file.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public abstract class TZDBMonthDayTime {
+  abstract class TZDBMonthDayTime {
 
     /** The month of the cutover. */
     Month month = Month.JANUARY;
@@ -1048,87 +1042,13 @@ public final class TzdbZoneRulesCompiler {
         this.adjustForwards = true;
       }
     }
-
-    /**
-     * @return the month
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public Month getMonth() {
-
-      return this.month;
-    }
-
-    /**
-     * @return the dayOfMonth
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public int getDayOfMonth() {
-
-      return this.dayOfMonth;
-    }
-
-    /**
-     * @return the adjustForwards
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public boolean isAdjustForwards() {
-
-      return this.adjustForwards;
-    }
-
-    /**
-     * @return the dayOfWeek
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public DayOfWeek getDayOfWeek() {
-
-      return this.dayOfWeek;
-    }
-
-    /**
-     * @return the time
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public LocalTime getTime() {
-
-      return this.time;
-    }
-
-    /**
-     * @return the endOfDay
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public boolean isEndOfDay() {
-
-      return this.endOfDay;
-    }
-
-    /**
-     * @return the timeDefinition
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public TimeDefinition getTimeDefinition() {
-
-      return this.timeDefinition;
-    }
-
   }
 
   // -----------------------------------------------------------------------
   /**
    * Class representing a rule line in the TZDB file.
-   * 
-   * @deprecated originally in JSR310 only default (package) visible
    */
-  @Deprecated
-  public final class TZDBRule extends TZDBMonthDayTime {
+  final class TZDBRule extends TZDBMonthDayTime {
 
     /** The start year. */
     int startYear;
@@ -1244,26 +1164,6 @@ public final class TzdbZoneRulesCompiler {
      * The adjustment (in seconds), +1 means a second is inserted, -1 means a second is dropped.
      */
     byte secondAdjustment;
-
-    /**
-     * @return the leapDate
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public LocalDate getLeapDate() {
-
-      return this.leapDate;
-    }
-
-    /**
-     * @return the secondAdjustment
-     * @deprecated originally in JSR310 not available
-     */
-    @Deprecated
-    public byte getSecondAdjustment() {
-
-      return this.secondAdjustment;
-    }
   }
 
 }
