@@ -174,18 +174,7 @@ public abstract class Chrono<C extends Chrono<C>> implements Comparable<Chrono<?
   public static Chrono<?> ofLocale(Locale locale) {
 
     Jdk7Methods.Objects_requireNonNull(locale, "locale");
-    String type = locale.getUnicodeLocaleType("ca");
-    if (type == null) {
-      return ISOChrono.INSTANCE;
-    } else if ("iso".equals(type) || "iso8601".equals(type)) {
-      return ISOChrono.INSTANCE;
-    } else {
-      Chrono<?> chrono = CHRONOS_BY_TYPE.get(type);
-      if (chrono == null) {
-        throw new DateTimeException("Unknown calendar system: " + type);
-      }
-      return chrono;
-    }
+    return ISOChrono.INSTANCE;
   }
 
   // -----------------------------------------------------------------------

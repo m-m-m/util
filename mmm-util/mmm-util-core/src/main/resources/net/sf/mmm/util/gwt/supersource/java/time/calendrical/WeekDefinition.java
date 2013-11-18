@@ -321,7 +321,7 @@ public final class WeekDefinition implements Serializable {
    * - if the 2nd day of the year is a Monday, week one starts on the 2nd and the 1st is in week zero<br />
    * - if the 4th day of the year is a Monday, week one starts on the 4th and the 1st to 3rd is in week zero<br />
    * - if the 5th day of the year is a Monday, week two starts on the 5th and the 1st to 4th is in week one<br
-   * * * * * * * * * * />
+   * * * * * * * * * * * * />
    * <p>
    * This field can be used with any calendar system.
    */
@@ -619,7 +619,11 @@ public final class WeekDefinition implements Serializable {
     @Override
     public String toString() {
 
-      return String.format("%s[%s]", getName(), this.weekDef);
+      StringBuilder sb = new StringBuilder(getName());
+      sb.append('[');
+      sb.append(this.weekDef);
+      sb.append(']');
+      return sb.toString();
     }
   }
 }

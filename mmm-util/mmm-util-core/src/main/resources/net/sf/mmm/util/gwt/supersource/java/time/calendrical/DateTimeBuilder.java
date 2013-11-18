@@ -61,8 +61,6 @@ import static java.time.calendrical.ChronoField.SECOND_OF_MINUTE;
 import static java.time.calendrical.ChronoField.YEAR;
 import static java.time.calendrical.DateTimeAdjusters.nextOrSame;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -641,7 +639,7 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
 
     R result = null;
     for (Object obj : this.objects) {
-      if (type.isInstance(obj)) {
+      if (type == obj.getClass()) {
         if (result != null && result.equals(obj) == false) {
           throw new DateTimeException("Conflict found: " + type.getSimpleName() + " differs " + result + " vs " + obj
               + ": " + this);
@@ -650,58 +648,6 @@ public final class DateTimeBuilder extends DefaultInterfaceDateTimeAccessor impl
       }
     }
     return result;
-  }
-
-  // -----------------------------------------------------------------------
-  /**
-   * Builds the specified type from the values in this builder.
-   * <p>
-   * This attempts to build the specified type from this builder. If the builder cannot return the type, an
-   * exception is thrown.
-   * 
-   * @param <R> the type to return
-   * @param type the type to invoke {@code from} on, not null
-   * @return the extracted value, not null
-   * @throws DateTimeException if an error occurs
-   */
-  public <R> R build(Class<R> type) {
-
-    return invokeFrom(type, this);
-  }
-
-  /**
-   * Invokes the {@code from(DateTime)} method of a class.
-   * <p>
-   * This calls the {@code from} method with the specified date-time object. The from method will extract an
-   * object of the specified type if it can,
-   * 
-   * @param <R> the type to return
-   * @param type the type to invoke {@code from} on, not null
-   * @param dateTime the date-time to pass as the argument, not null
-   * @return the value returned from the {@code from} method, not null
-   * @throws DateTimeException if an error occurs
-   */
-  private static <R> R invokeFrom(Class<R> type, DateTimeAccessor dateTime) {
-
-    try {
-      Method m = type.getDeclaredMethod("from", DateTimeAccessor.class);
-      return type.cast(m.invoke(null, dateTime));
-    } catch (IllegalAccessException ex) {
-      if (ex.getCause() instanceof DateTimeException == false) {
-        throw new DateTimeException("Unable to invoke method from(DateTime)", ex);
-      }
-      throw (DateTimeException) ex.getCause();
-    } catch (InvocationTargetException ex) {
-      if (ex.getCause() instanceof DateTimeException == false) {
-        throw new DateTimeException("Unable to invoke method from(DateTime)", ex);
-      }
-      throw (DateTimeException) ex.getCause();
-    } catch (NoSuchMethodException ex) {
-      if (ex.getCause() instanceof DateTimeException == false) {
-        throw new DateTimeException("Unable to invoke method from(DateTime)", ex);
-      }
-      throw (DateTimeException) ex.getCause();
-    }
   }
 
   // -----------------------------------------------------------------------
