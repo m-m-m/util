@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
+
 import com.google.gwt.user.client.ui.TextBox;
 
 /**
@@ -11,7 +13,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ComboBox extends TextBox implements AttributeWriteDataList {
+public class ComboBox extends TextBox implements AttributeWriteDataList, AttributeWriteHtmlId {
 
   /**
    * The constructor.
@@ -28,6 +30,24 @@ public class ComboBox extends TextBox implements AttributeWriteDataList {
 
     getElement().setAttribute(HtmlConstants.ATTRIBUTE_LIST, dataList.getId());
     dataList.setOwner(this);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getId() {
+
+    return getElement().getId();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setId(String id) {
+
+    getElement().setId(id);
   }
 
 }

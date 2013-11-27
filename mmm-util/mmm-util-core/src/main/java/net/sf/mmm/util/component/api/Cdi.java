@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-
 /**
  * This interface only exists for documentation purpose!<br/>
  * <em>CDI</em> is a shortcut for <em>Context and Dependency Injection</em> and is a java standard supporting
@@ -91,22 +90,32 @@ public interface Cdi {
   String CDI_NAME = null;
 
   /**
-   * We strongly believe in the {@link Ioc} pattern and try to avoid the keyword <em>static</em> without
-   * <em>final</em>. Books like <em>Design Patterns. Elements of Reusable Object-Oriented Software.</em>
-   * introduced various patterns like <em>Singleton</em> (or maybe <em>AbstractFactory</em>) that make use of
-   * <em>static</em> access and lead to inflexible and bad design. Instead {@link Ioc} is the pattern of
-   * choice to get access to singletons or factories. However, the problem is that Java does NOT support
-   * {@link Ioc} in its core. So for a small and simple application it might be over-complicated to use it.<br/>
+   * We strongly believe in the {@link Ioc} pattern and try to avoid the keyword <em>static</em> except for
+   * constants (in combination with <em>final</em>). Books like
+   * <em>Design Patterns. Elements of Reusable Object-Oriented Software.</em> introduced various patterns like
+   * <em>Singleton</em> (or maybe <em>AbstractFactory</em>) that make use of <em>static</em> access and lead
+   * to inflexible and bad design. Instead {@link Ioc} is the pattern of choice to get access to singletons or
+   * factories. However, the problem is that Java does NOT support {@link Ioc} in its core. So for a small and
+   * simple application it might be over-complicated to use it.<br/>
    * <br/>
    * Therefore we picked a design that is the best compromise between easy access and flexibility:
    * <ul>
    * <li>We strictly follow the {@link Ioc} design which allows extension and customization.</li>
-   * <li>Additionally we providing static <code>getInstance()</code> for convenience.</li>
+   * <li>Additionally we provide static <code>getInstance()</code> methods for convenience.</li>
    * </ul>
    * You have the choice. If you just want to use {@link net.sf.mmm.util.lang.api.StringUtil} it is fine to
    * use {@link net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()}. However if you want to make use of
-   * many components of this project and decide for {@link Ioc} you can get all utils and other components
-   * injected. This gives you the final freedom to replace or extend components without patching our code.<br/>
+   * many components of this project and decide for {@link Ioc} you can get all utilities and other components
+   * {@link javax.inject.Inject injected}. This gives you the final freedom to replace or extend components
+   * without patching our code.<br/>
+   * A special case are GWT (Google Web Toolkit) specific utilities, because GWT allows rebinding that we are
+   * using to create the singleton instance. You can configure your <code>*.gwt.xml</code> to replace the
+   * default implementation with a derived custom class extending the default and overriding methods to add
+   * changed behavior. <br/>
+   * <b>ATTENTION:</b><br/>
+   * You always have to be aware of what you are actually doing when you are replacing central components.
+   * Changing behavior will NOT only have impact on your code using the component but on everybody else in
+   * your JVM what is the actual idea of the approach.<br/>
    * <b>NOTE:</b><br/>
    * This constant is only for documentation purpose. Please never use it in your code.
    */

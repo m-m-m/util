@@ -20,10 +20,12 @@ public class UiWidgetTabGwt extends AbstractUiWidgetTab<UiWidgetAdapterGwtTab> {
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTabGwt(UiContext context) {
+  public UiWidgetTabGwt(UiContext context, UiWidgetAdapterGwtTab widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetTabGwt extends AbstractUiWidgetTab<UiWidgetAdapterGwtTab> {
     @Override
     public UiWidgetTab create(UiContext context) {
 
-      return new UiWidgetTabGwt(context);
+      return new UiWidgetTabGwt(context, null);
     }
 
   }

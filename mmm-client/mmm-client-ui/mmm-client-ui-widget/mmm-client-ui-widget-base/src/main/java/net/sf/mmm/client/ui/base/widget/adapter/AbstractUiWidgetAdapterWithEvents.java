@@ -32,6 +32,16 @@ public abstract class AbstractUiWidgetAdapterWithEvents<WIDGET, EVENT_ADAPTER ex
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public AbstractUiWidgetAdapterWithEvents(WIDGET toplevelWidget) {
+
+    super(toplevelWidget);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

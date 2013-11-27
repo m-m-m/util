@@ -23,7 +23,7 @@ public class UiWidgetVerticalPanelTestImpl extends AbstractUiWidgetVerticalPanel
    */
   public UiWidgetVerticalPanelTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

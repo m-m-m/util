@@ -21,10 +21,12 @@ public class UiWidgetRichTextFieldGwt extends AbstractUiWidgetRichTextField<UiWi
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetRichTextFieldGwt(UiContext context) {
+  public UiWidgetRichTextFieldGwt(UiContext context, UiWidgetAdapterGwtRichTextField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetRichTextFieldGwt extends AbstractUiWidgetRichTextField<UiWi
     @Override
     public UiWidgetRichTextField create(UiContext context) {
 
-      return new UiWidgetRichTextFieldGwt(context);
+      return new UiWidgetRichTextFieldGwt(context, null);
     }
 
   }

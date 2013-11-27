@@ -216,7 +216,7 @@ public enum RichTextFeature implements NlsObject {
   },
 
   /** The {@link RichTextFeature} to change the <span style="color: red">text color</span>. */
-  TEXT_COLOR("TextColor") {
+  FONT_COLOR("TextColor") {
 
     @Override
     public NlsMessage toNlsMessage() {

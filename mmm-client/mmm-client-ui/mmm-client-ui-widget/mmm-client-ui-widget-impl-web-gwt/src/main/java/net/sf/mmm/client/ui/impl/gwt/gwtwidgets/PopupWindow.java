@@ -61,8 +61,14 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   /** The button to {@link #setMaximized(boolean) (un)maximize} the window. */
   private final Button maximizeButton;
 
-  /** The footer panel. */
-  private final HorizontalFlowPanel footerBar;
+  /** @see #getButtonPanel() */
+  private final ButtonPanel buttonPanel;
+
+  /** @see #getCancelButton() */
+  private ButtonWidget cancelButton;
+
+  // /** The footer panel. */
+  // private final HorizontalFlowPanel footerBar;
 
   /** The left border of the window */
   private FlowPanel borderWest;
@@ -219,9 +225,11 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     this.mainPanel = new VerticalFlowPanel();
     this.mainPanel.add(this.titleBar);
     this.mainPanel.add(this.contentPanel);
-    this.footerBar = new HorizontalFlowPanel();
-    this.footerBar.addStyleName(CssStyles.WINDOW_FOOTER_BAR);
-    this.mainPanel.add(this.footerBar);
+    this.buttonPanel = new ButtonPanel();
+    this.mainPanel.add(this.buttonPanel);
+    // this.footerBar = new HorizontalFlowPanel();
+    // this.footerBar.addStyleName(CssStyles.WINDOW_FOOTER_BAR);
+    // this.mainPanel.add(this.footerBar);
     this.mainPanel.add(this.borderWest);
     this.mainPanel.add(this.borderEast);
     this.mainPanel.add(this.borderSouth);
@@ -484,6 +492,24 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   private Element getLastFocusElement() {
 
     return JavaScriptUtil.getInstance().getFocusable(this.contentPanel.getElement(), true, true);
+  }
+
+  /**
+   * @return the main panel of this {@link PopupWindow}. This panel contains the borders, the title-bar and
+   *         the {@link #getContentPanel() content-panel}.
+   */
+  VerticalFlowPanel getMainPanel() {
+
+    return this.mainPanel;
+  }
+
+  /**
+   * @return the {@link ButtonPanel} located at the bottom of the {@link PopupWindow} where buttons shall be
+   *         added.
+   */
+  public ButtonPanel getButtonPanel() {
+
+    return this.buttonPanel;
   }
 
   /**

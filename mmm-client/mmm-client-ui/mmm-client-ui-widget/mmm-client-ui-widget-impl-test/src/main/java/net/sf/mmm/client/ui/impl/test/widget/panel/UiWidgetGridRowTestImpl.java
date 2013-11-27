@@ -23,7 +23,7 @@ public class UiWidgetGridRowTestImpl extends AbstractUiWidgetGridRow<UiWidgetAda
    */
   public UiWidgetGridRowTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

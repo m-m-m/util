@@ -17,13 +17,15 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
  * This class holds a collection of utility functions for GWT (Google Web Toolkit) using JSNI (JavaScript
  * Native Interface).
  * 
+ * @see #getInstance()
+ * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class JavaScriptUtil {
 
   /** @see #getInstance() */
-  private static JavaScriptUtil instance = GWT.create(JavaScriptUtil.class);
+  private static final JavaScriptUtil INSTANCE = GWT.create(JavaScriptUtil.class);
 
   /** @see #getFonts() */
   private String[] fonts;
@@ -37,21 +39,13 @@ public class JavaScriptUtil {
   }
 
   /**
+   * @see net.sf.mmm.util.component.api.Cdi#GET_INSTANCE
+   * 
    * @return the singleton instance of {@link JavaScriptUtil}.
    */
   public static JavaScriptUtil getInstance() {
 
-    return instance;
-  }
-
-  /**
-   * This method allows to replace the default implementation returned by {@link #getInstance()}.
-   * 
-   * @param customInstance is the new {@link JavaScriptUtil} instance.
-   */
-  protected static void setInstance(JavaScriptUtil customInstance) {
-
-    instance = customInstance;
+    return INSTANCE;
   }
 
   /**

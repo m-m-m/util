@@ -21,10 +21,12 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetLongField<UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetLongFieldGwt(UiContext context) {
+  public UiWidgetLongFieldGwt(UiContext context, UiWidgetAdapterGwtLongField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetLongFieldGwt extends AbstractUiWidgetLongField<UiWidgetAdap
     @Override
     public UiWidgetLongField create(UiContext context) {
 
-      return new UiWidgetLongFieldGwt(context);
+      return new UiWidgetLongFieldGwt(context, null);
     }
 
   }

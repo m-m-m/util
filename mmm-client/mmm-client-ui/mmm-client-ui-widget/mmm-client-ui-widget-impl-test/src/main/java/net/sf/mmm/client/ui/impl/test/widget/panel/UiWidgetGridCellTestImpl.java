@@ -23,7 +23,7 @@ public class UiWidgetGridCellTestImpl extends AbstractUiWidgetGridCell<UiWidgetA
    */
   public UiWidgetGridCellTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

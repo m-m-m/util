@@ -23,7 +23,7 @@ public class UiWidgetTextAreaFieldTestImpl extends AbstractUiWidgetTextAreaField
    */
   public UiWidgetTextAreaFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

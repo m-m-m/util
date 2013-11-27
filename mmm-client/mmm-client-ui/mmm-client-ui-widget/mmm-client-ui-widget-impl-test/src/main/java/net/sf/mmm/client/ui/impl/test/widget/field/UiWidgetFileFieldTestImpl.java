@@ -23,7 +23,7 @@ public class UiWidgetFileFieldTestImpl extends AbstractUiWidgetFileField<UiWidge
    */
   public UiWidgetFileFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

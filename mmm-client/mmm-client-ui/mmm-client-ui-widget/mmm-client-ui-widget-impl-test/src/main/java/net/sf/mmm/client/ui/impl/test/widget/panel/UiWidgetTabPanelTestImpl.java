@@ -23,7 +23,7 @@ public class UiWidgetTabPanelTestImpl extends AbstractUiWidgetTabPanel<UiWidgetA
    */
   public UiWidgetTabPanelTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

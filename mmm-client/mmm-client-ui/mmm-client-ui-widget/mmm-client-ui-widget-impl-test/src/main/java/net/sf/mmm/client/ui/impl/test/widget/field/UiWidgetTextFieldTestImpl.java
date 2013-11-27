@@ -23,7 +23,7 @@ public class UiWidgetTextFieldTestImpl extends AbstractUiWidgetTextField<UiWidge
    */
   public UiWidgetTextFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

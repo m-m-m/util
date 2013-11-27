@@ -23,7 +23,7 @@ public class UiWidgetImageTestImpl extends AbstractUiWidgetImage<UiWidgetAdapter
    */
   public UiWidgetImageTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

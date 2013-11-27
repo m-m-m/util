@@ -1,14 +1,18 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
+package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetAbstractButton;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetToggleButton;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ButtonGroup;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ButtonWidget;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.Toolbar;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
 import net.sf.mmm.util.gwt.api.JavaScriptSelection;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -17,10 +21,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -31,8 +33,8 @@ import com.google.gwt.user.client.ui.RichTextArea.Formatter;
 import com.google.gwt.user.client.ui.RichTextArea.Justification;
 
 /**
- * This class is a {@link com.google.gwt.user.client.ui.Widget} that represents the toolbar for a {@link RichTextArea}.
- * The toolbar allows to format the selected text or insert images, hyperlinks, etc.
+ * This class is a {@link com.google.gwt.user.client.ui.Widget} that represents the toolbar for a
+ * {@link RichTextArea}. The toolbar allows to format the selected text or insert images, hyperlinks, etc.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -40,8 +42,8 @@ import com.google.gwt.user.client.ui.RichTextArea.Justification;
 public class RichTextToolbar extends Toolbar {
 
   /** The available font sizes. */
-  private static final FontSize[] FONT_SIZES = new FontSize[] { FontSize.XX_SMALL, FontSize.X_SMALL,
-  FontSize.SMALL, FontSize.MEDIUM, FontSize.LARGE, FontSize.X_LARGE, FontSize.XX_LARGE };
+  private static final FontSize[] FONT_SIZES = new FontSize[] { FontSize.XX_SMALL, FontSize.X_SMALL, FontSize.SMALL,
+      FontSize.MEDIUM, FontSize.LARGE, FontSize.X_LARGE, FontSize.XX_LARGE };
 
   /** The associated {@link RichTextArea} to modify via this toolbar. */
   private final RichTextArea richTextArea;
@@ -49,14 +51,16 @@ public class RichTextToolbar extends Toolbar {
   /** The {@link Formatter} for the {@link RichTextArea}. */
   private final Formatter formatter;
 
-  /** @see #createButton(RichTextFeature) */
-  private final Map<RichTextFeature, ButtonBase> buttonMap;
+  /** @see #getBehavior(RichTextFeature) */
+  private final Map<RichTextFeature, FeatureBehavior> behaviorMap;
+
+  // private final Map<RichTextFeature, ButtonBase> buttonMap;
 
   /** The {@link NlsBundleClientUiRoot} for NLS. */
   private final NlsBundleClientUiRoot bundle;
 
-  /** <code>true</code> if {@link RichTextFeature#INSERT_LINK} is currently active. */
-  private boolean linkMode;
+  /** @see #getFontSettingsPopup() */
+  private FontSettingsPopup fontSettingsPopup;
 
   /**
    * Creates a new toolbar that drives the given rich text area.
@@ -72,21 +76,102 @@ public class RichTextToolbar extends Toolbar {
     setWidth("100%");
     addStyleName("RichTextToolbar");
 
-    this.buttonMap = new HashMap<RichTextFeature, ButtonBase>();
-
+    this.behaviorMap = new HashMap<RichTextFeature, FeatureBehavior>();
+    addFeatureBehaviors();
     createButtonGroup(RichTextFeature.BOLD, RichTextFeature.ITALIC, RichTextFeature.UNDERLINE,
         RichTextFeature.STRIKETHROUGH, RichTextFeature.SUBSCRIPT, RichTextFeature.SUPERSCRIPT,
         RichTextFeature.REMOVE_FORMAT);
     createButtonGroup(RichTextFeature.ALIGN_LEFT, RichTextFeature.ALIGN_CENTER, RichTextFeature.ALIGN_RIGHT);
     createButtonGroup(RichTextFeature.UNORDERED_LIST, RichTextFeature.ORDERED_LIST, RichTextFeature.INDENT,
         RichTextFeature.OUTDENT, RichTextFeature.HORIZONTAL_LINE);
-    createButtonGroup(RichTextFeature.FONT_FAMILY, RichTextFeature.FONT_SIZE, RichTextFeature.TEXT_COLOR,
+    createButtonGroup(RichTextFeature.FONT_FAMILY, RichTextFeature.FONT_SIZE, RichTextFeature.FONT_COLOR,
         RichTextFeature.BACKGROUND_COLOR);
     createButtonGroup(RichTextFeature.INSERT_IMAGE, RichTextFeature.INSERT_LINK);
     createButtonGroup(RichTextFeature.UNDO, RichTextFeature.REDO);
     UpdateHandler handler = new UpdateHandler();
     richTextArea.addKeyUpHandler(handler);
     richTextArea.addClickHandler(handler);
+  }
+
+  /**
+   * {@link #addBehavior(FeatureBehavior) Adds} all available {@link FeatureBehavior}s at construction time.
+   */
+  protected void addFeatureBehaviors() {
+
+    addBehavior(new FeatureBehaviorBold(this));
+    addBehavior(new FeatureBehaviorItalic(this));
+    addBehavior(new FeatureBehaviorUnderline(this));
+    addBehavior(new FeatureBehaviorStrikethrough(this));
+    addBehavior(new FeatureBehaviorSubscript(this));
+    addBehavior(new FeatureBehaviorSuperscript(this));
+    addBehavior(new FeatureBehaviorRemoveFormat(this));
+    addBehavior(new FeatureBehaviorAlignLeft(this));
+    addBehavior(new FeatureBehaviorAlignCenter(this));
+    addBehavior(new FeatureBehaviorAlignRight(this));
+    addBehavior(new FeatureBehaviorIndent(this));
+    addBehavior(new FeatureBehaviorOutdent(this));
+    addBehavior(new FeatureBehaviorHorizontalLine(this));
+    addBehavior(new FeatureBehaviorOrderedList(this));
+    addBehavior(new FeatureBehaviorUnorderedList(this));
+    addBehavior(new FeatureBehaviorFontFamily(this));
+    addBehavior(new FeatureBehaviorFontSize(this));
+    addBehavior(new FeatureBehaviorFontColor(this));
+    addBehavior(new FeatureBehaviorBackgroundColor(this));
+    addBehavior(new FeatureBehaviorInsertLink(this));
+    addBehavior(new FeatureBehaviorInsertImage(this));
+    addBehavior(new FeatureBehaviorUndo(this));
+    addBehavior(new FeatureBehaviorRedo(this));
+  }
+
+  /**
+   * @param behavior the {@link FeatureBehavior} to register in the internal {@link Map}.
+   */
+  private void addBehavior(FeatureBehavior behavior) {
+
+    FeatureBehavior old = this.behaviorMap.put(behavior.getFeature(), behavior);
+    assert (old == null);
+  }
+
+  /**
+   * @param feature is the {@link RichTextFeature}.
+   * @return the {@link FeatureBehavior} for the given {@link RichTextFeature}. Invoking
+   *         {@link FeatureBehavior#getFeature() getFeature()} on the result has to return the given
+   *         {@link RichTextFeature}.
+   */
+  private FeatureBehavior getBehavior(RichTextFeature feature) {
+
+    FeatureBehavior featureBehavior = this.behaviorMap.get(feature);
+    assert (featureBehavior != null);
+    return featureBehavior;
+  }
+
+  /**
+   * @return the {@link Formatter} instance of the {@link RichTextArea}.
+   */
+  Formatter getFormatter() {
+
+    return this.formatter;
+  }
+
+  /**
+   * @return the {@link FontSettingsPopup}. Lazily created on the first call.
+   */
+  private FontSettingsPopup getFontSettingsPopup() {
+
+    if (this.fontSettingsPopup == null) {
+      this.fontSettingsPopup = new FontSettingsPopup();
+    }
+    return this.fontSettingsPopup;
+  }
+
+  /**
+   * Opens a popup with the font related {@link RichTextFeature feature settings}.
+   */
+  void openFontSettingsPopup() {
+
+    getFontSettingsPopup().center();
+    updateFontSettings();
+    getFontSettingsPopup().setVisible(true);
   }
 
   /**
@@ -98,9 +183,8 @@ public class RichTextToolbar extends Toolbar {
 
     startGroup();
     for (RichTextFeature feature : features) {
-      ButtonBase button = createButton(feature);
-      add(button);
-      this.buttonMap.put(feature, button);
+      FeatureBehavior behavior = getBehavior(feature);
+      add(behavior.getToolbarWidget());
     }
     endGroup();
   }
@@ -157,7 +241,7 @@ public class RichTextToolbar extends Toolbar {
         url = Window.prompt(this.bundle.labelEnterLinkUrl().getLocalizedMessage(), "http://");
         if (url != null) {
           RichTextToolbar.this.formatter.createLink(url);
-          this.linkMode = true;
+          // this.linkMode = true;
         }
         break;
       case REMOVE_FORMAT:
@@ -209,6 +293,7 @@ public class RichTextToolbar extends Toolbar {
         JavaScriptSelection selection = JavaScriptUtil.getInstance().getSelection(
             RichTextToolbar.this.richTextArea.getElement());
         Window.alert(selection.getText() + "\n" + selection.getHtml());
+        // RichTextToolbar.this.formatter.setFontSize(fontSize);
         break;
       case INDENT:
         RichTextToolbar.this.formatter.rightIndent();
@@ -222,140 +307,70 @@ public class RichTextToolbar extends Toolbar {
       case REDO:
         RichTextToolbar.this.formatter.redo();
         break;
-      default:
+      default :
         break;
     }
   }
 
-  /**
-   * Creates a button for the given {@link RichTextFeature}.
-   * 
-   * @param feature is the {@link RichTextFeature}.
-   * @return the according button.
-   */
-  private ButtonBase createButton(final RichTextFeature feature) {
-
-    ButtonBase button;
-    String tooltip = feature.toNlsMessage().getLocalizedMessage();
-    SafeHtml html = HtmlTemplates.INSTANCE.iconMarkup(feature.getIcon());
-    if (isToggleFeature(feature)) {
-      button = createToggleButton(html, tooltip);
-    } else {
-      button = createPushButton(html, tooltip);
-    }
-    ClickHandler clickHandler = new ClickHandler() {
-
-      @Override
-      public void onClick(ClickEvent event) {
-
-        invokeFeature(feature);
-      }
-
-    };
-    button.addClickHandler(clickHandler);
-    return button;
-  }
-
-  /**
-   * @param feature is the {@link RichTextFeature}.
-   * @return <code>true</code> if the {@link RichTextFeature feature} is toggled, <code>false</code> otherwise.
-   */
-  private boolean isToggleFeature(RichTextFeature feature) {
-
-    switch (feature) {
-      case BOLD:
-      case ITALIC:
-      case UNDERLINE:
-      case SUBSCRIPT:
-      case SUPERSCRIPT:
-      case STRIKETHROUGH:
-        return true;
-      default:
-        return false;
-    }
-  }
+  //
+  // /**
+  // * Creates a button for the given {@link RichTextFeature}.
+  // *
+  // * @param feature is the {@link RichTextFeature}.
+  // * @return the according button.
+  // */
+  // private ButtonBase createButton(final RichTextFeature feature) {
+  //
+  // ButtonBase button;
+  // String tooltip = feature.toNlsMessage().getLocalizedMessage();
+  // SafeHtml html = HtmlTemplates.INSTANCE.iconMarkup(feature.getIcon());
+  // if (isToggleFeature(feature)) {
+  // button = createToggleButton(html, tooltip);
+  // } else {
+  // button = createPushButton(html, tooltip);
+  // }
+  // ClickHandler clickHandler = new ClickHandler() {
+  //
+  // @Override
+  // public void onClick(ClickEvent event) {
+  //
+  // invokeFeature(feature);
+  // }
+  //
+  // };
+  // button.addClickHandler(clickHandler);
+  // return button;
+  // }
 
   /**
    * Sets the given {@link RichTextFeature} to the given availability.
    * 
    * @param feature is the {@link RichTextFeature}.
-   * @param available - <code>true</code> if the given <code>feature</code> should be available (button visible),
-   *        <code>false</code> otherwise.
+   * @param available - <code>true</code> if the given <code>feature</code> should be available (button
+   *        visible), <code>false</code> otherwise.
    */
   public void setFeatureAvailable(RichTextFeature feature, boolean available) {
 
-    ButtonBase button = this.buttonMap.get(feature);
-    if (button != null) {
-      button.setVisible(available);
+    getBehavior(feature).setVisible(available);
+  }
+
+  /**
+   * Updates the status of the toolbar (with all the toggle buttons).
+   */
+  private void updateToolbar() {
+
+    for (FeatureBehavior behavior : this.behaviorMap.values()) {
+      behavior.updateToolbar();
     }
   }
 
   /**
-   * Creates a new {@link Button}.
-   * 
-   * @param html is the markup for the button content.
-   * @param tooltip is the tooltip for the button.
-   * @return the new {@link SimpleToggleButton}.
+   * Updates the status of the {@link FontSettingsPopup}.
    */
-  private Button createPushButton(SafeHtml html, String tooltip) {
+  private void updateFontSettings() {
 
-    Button button = new Button(html);
-    button.setStylePrimaryName(UiWidgetAbstractButton.STYLE_PRIMARY);
-    button.setTitle(tooltip);
-    return button;
-  }
-
-  /**
-   * Creates a new {@link SimpleToggleButton}.
-   * 
-   * @param html is the markup for the button content.
-   * @param tooltip is the tooltip for the button.
-   * @return the new {@link SimpleToggleButton}.
-   */
-  private SimpleToggleButton createToggleButton(SafeHtml html, String tooltip) {
-
-    SimpleToggleButton tb = new SimpleToggleButton();
-    tb.setHTML(html);
-    tb.setStylePrimaryName(UiWidgetAbstractButton.STYLE_PRIMARY);
-    tb.addStyleName(UiWidgetToggleButton.STYLE_TOGGLE_BUTTON);
-    tb.setTitle(tooltip);
-    return tb;
-  }
-
-  /**
-   * Updates the status of a toggle button for the given <code>feature</code>.
-   * 
-   * @param feature is the {@link RichTextFeature} to update.
-   * @param active is the new toggle button status.
-   */
-  private void setToggleFeatureStatus(RichTextFeature feature, boolean active) {
-
-    assert (isToggleFeature(feature));
-    ButtonBase button = this.buttonMap.get(feature);
-    if (button instanceof SimpleToggleButton) {
-      SimpleToggleButton toggleButton = (SimpleToggleButton) button;
-      toggleButton.setValue(Boolean.valueOf(active));
-    }
-  }
-
-  /**
-   * Updates the status of all the toggle buttons.
-   */
-  private void updateStatus() {
-
-    if (this.formatter != null) {
-      setToggleFeatureStatus(RichTextFeature.BOLD, this.formatter.isBold());
-      setToggleFeatureStatus(RichTextFeature.ITALIC, this.formatter.isItalic());
-      setToggleFeatureStatus(RichTextFeature.UNDERLINE, this.formatter.isUnderlined());
-      setToggleFeatureStatus(RichTextFeature.SUBSCRIPT, this.formatter.isSubscript());
-      setToggleFeatureStatus(RichTextFeature.SUPERSCRIPT, this.formatter.isSuperscript());
-      setToggleFeatureStatus(RichTextFeature.STRIKETHROUGH, this.formatter.isStrikethrough());
-      // this.formatter.removeLink();
-      if (this.linkMode) {
-        // this.formatter.selectNone();;
-        this.formatter.removeLink();
-        this.linkMode = false;
-      }
+    for (FeatureBehavior behavior : this.behaviorMap.values()) {
+      behavior.updateFontSettings();
     }
   }
 
@@ -364,8 +379,8 @@ public class RichTextToolbar extends Toolbar {
    */
   public void setEnabled(boolean enabled) {
 
-    for (ButtonBase button : this.buttonMap.values()) {
-      button.setEnabled(enabled);
+    for (FeatureBehavior behavior : this.behaviorMap.values()) {
+      behavior.setEnabled(enabled);
     }
   }
 
@@ -380,7 +395,7 @@ public class RichTextToolbar extends Toolbar {
     @Override
     public void onClick(ClickEvent event) {
 
-      updateStatus();
+      updateToolbar();
     }
 
     /**
@@ -389,7 +404,64 @@ public class RichTextToolbar extends Toolbar {
     @Override
     public void onKeyUp(KeyUpEvent event) {
 
-      updateStatus();
+      updateToolbar();
+    }
+  }
+
+  class FontSettingsPopup extends PopupWindow {
+
+    private FontSize fontSize;
+
+    private final Grid gridLayout;
+
+    private final VerticalFlowPanel contentPanel;
+
+    /**
+     * The constructor.
+     */
+    public FontSettingsPopup() {
+
+      super(false, true);
+      addStyleName(CssStyles.POPUP);
+      String title = NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class).titleFontSettings()
+          .getLocalizedMessage();
+      setTitleText(title);
+
+      this.contentPanel = new VerticalFlowPanel();
+      this.gridLayout = new Grid(4, 2);
+
+      int rowIndex = 0;
+      addSelectionFeature(RichTextFeature.FONT_FAMILY, rowIndex++);
+      addSelectionFeature(RichTextFeature.FONT_SIZE, rowIndex++);
+      addSelectionFeature(RichTextFeature.FONT_COLOR, rowIndex++);
+      addSelectionFeature(RichTextFeature.BACKGROUND_COLOR, rowIndex++);
+      this.contentPanel.add(this.gridLayout);
+
+      for (FeatureBehavior behavior : RichTextToolbar.this.behaviorMap.values()) {
+        if (behavior instanceof AbstractToggleFeatureBehavior) {
+          this.contentPanel.add(behavior.getFontSettingsWidget());
+        }
+      }
+      // getButtonPanel().add(applyButton);
+      ButtonWidget cancelButton = new ButtonWidget(NlsAccess.getBundleFactory()
+          .createBundle(NlsBundleClientUiRoot.class).labelCancel().getLocalizedMessage());
+      cancelButton.addClickHandler(new ClickHandler() {
+
+        @Override
+        public void onClick(ClickEvent event) {
+
+          setVisible(false);
+        }
+      });
+      getButtonPanel().add(cancelButton);
+      add(this.contentPanel);
+    }
+
+    private void addSelectionFeature(RichTextFeature feature, int rowIndex) {
+
+      FeatureBehavior behavior = getBehavior(feature);
+      this.gridLayout.setWidget(rowIndex, 0, behavior.getFontSettingsLabel());
+      this.gridLayout.setWidget(rowIndex, 1, behavior.getFontSettingsWidget());
     }
   }
 }

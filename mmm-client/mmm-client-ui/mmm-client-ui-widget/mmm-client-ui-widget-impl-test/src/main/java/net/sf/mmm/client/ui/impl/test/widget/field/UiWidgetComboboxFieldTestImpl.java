@@ -26,7 +26,7 @@ public class UiWidgetComboboxFieldTestImpl<VALUE> extends
    */
   public UiWidgetComboboxFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

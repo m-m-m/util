@@ -21,10 +21,12 @@ public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWi
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetPasswordFieldGwt(UiContext context) {
+  public UiWidgetPasswordFieldGwt(UiContext context, UiWidgetAdapterGwtPasswordTextBox widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWi
     @Override
     public UiWidgetPasswordField create(UiContext context) {
 
-      return new UiWidgetPasswordFieldGwt(context);
+      return new UiWidgetPasswordFieldGwt(context, null);
     }
 
   }

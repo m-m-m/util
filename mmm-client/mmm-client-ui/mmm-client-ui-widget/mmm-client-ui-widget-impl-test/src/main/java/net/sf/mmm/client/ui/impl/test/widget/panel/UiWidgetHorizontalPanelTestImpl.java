@@ -14,7 +14,8 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTestComposit
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetHorizontalPanelTestImpl extends AbstractUiWidgetHorizontalPanel<UiWidgetAdapterTestCompositeRegular> {
+public class UiWidgetHorizontalPanelTestImpl extends
+    AbstractUiWidgetHorizontalPanel<UiWidgetAdapterTestCompositeRegular> {
 
   /**
    * The constructor.
@@ -23,7 +24,7 @@ public class UiWidgetHorizontalPanelTestImpl extends AbstractUiWidgetHorizontalP
    */
   public UiWidgetHorizontalPanelTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

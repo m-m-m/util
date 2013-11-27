@@ -20,10 +20,12 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetMenuGwt(UiContext context) {
+  public UiWidgetMenuGwt(UiContext context, UiWidgetAdapterGwtMenu widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetMenuGwt extends AbstractUiWidgetMenu<UiWidgetAdapterGwtMenu
     @Override
     public UiWidgetMenu create(UiContext context) {
 
-      return new UiWidgetMenuGwt(context);
+      return new UiWidgetMenuGwt(context, null);
     }
 
   }

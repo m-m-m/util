@@ -21,7 +21,7 @@ public class UiWidgetMainWindowTestImpl extends AbstractUiWidgetMainWindow<UiWid
    */
   public UiWidgetMainWindowTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

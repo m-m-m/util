@@ -20,10 +20,12 @@ public class UiWidgetButtonPanelGwt extends AbstractUiWidgetButtonPanel<UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetButtonPanelGwt(UiContext context) {
+  public UiWidgetButtonPanelGwt(UiContext context, UiWidgetAdapterGwtButtonPanel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetButtonPanelGwt extends AbstractUiWidgetButtonPanel<UiWidget
     @Override
     public UiWidgetButtonPanel create(UiContext context) {
 
-      return new UiWidgetButtonPanelGwt(context);
+      return new UiWidgetButtonPanelGwt(context, null);
     }
   }
 

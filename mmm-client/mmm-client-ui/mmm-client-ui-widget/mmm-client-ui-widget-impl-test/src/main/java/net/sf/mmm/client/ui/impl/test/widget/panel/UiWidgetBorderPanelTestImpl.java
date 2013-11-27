@@ -23,7 +23,7 @@ public class UiWidgetBorderPanelTestImpl extends AbstractUiWidgetBorderPanel<UiW
    */
   public UiWidgetBorderPanelTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

@@ -2,10 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
+import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
@@ -28,6 +30,12 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /** The prefix for the {@link #getTitle() title}. */
   private static final String PREFIX = "#";
+
+  /** The prefix for the rgb(r,g,b) syntax. */
+  private static final String PREFIX_RGB = "rgb(";
+
+  /** The prefix for the rgb(r,g,b) syntax. */
+  private static final String SUFFIX_RGB = ")";
 
   /** @see #Color(Integer) */
   private static final Integer MIN_VALUE = Integer.valueOf(0);
@@ -100,10 +108,21 @@ public class Color extends AbstractSimpleDatatype<Integer> {
    */
   public Color(int red, int green, int blue) {
 
-    this((red << SHIFT_RED) + (green << SHIFT_GREEN) + blue);
+    this(createRgb(red, green, blue));
     verifySegment(red, "red");
     verifySegment(green, "green");
     verifySegment(blue, "blue");
+  }
+
+  /**
+   * @param red - see {@link #getRed()}.
+   * @param green - see {@link #getGreen()}.
+   * @param blue - see {@link #getBlue()}.
+   * @return the combined RGB value.
+   */
+  private static int createRgb(int red, int green, int blue) {
+
+    return (red << SHIFT_RED) + (green << SHIFT_GREEN) + blue;
   }
 
   /**
@@ -143,7 +162,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
    * @param segment is the segment to check.
    * @param source is the source of the <code>segment</code>.
    */
-  private void verifySegment(int segment, String source) {
+  private static void verifySegment(int segment, String source) {
 
     if ((segment < 0) || (segment > MASK)) {
       throw new ValueOutOfRangeException(Integer.valueOf(segment), MIN_VALUE, MAX_SEGMENT, source);
@@ -159,6 +178,21 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   private static Integer parseString(String title) {
 
     NlsNullPointerException.checkNotNull("color", title);
+    if (title.startsWith(PREFIX_RGB)) {
+      CharSequenceScanner scanner = new CharSequenceScanner(title.substring(PREFIX_RGB.length()));
+      int red = (int) scanner.readLong(3);
+      scanner.require(',');
+      scanner.readWhile(CharFilter.WHITESPACE_FILTER);
+      int green = (int) scanner.readLong(3);
+      scanner.require(',');
+      scanner.readWhile(CharFilter.WHITESPACE_FILTER);
+      int blue = (int) scanner.readLong(3);
+      scanner.require(SUFFIX_RGB, false);
+      verifySegment(red, "red");
+      verifySegment(green, "green");
+      verifySegment(blue, "blue");
+      return Integer.valueOf(createRgb(red, green, blue));
+    }
     if ((title.length() < MIN_STRING_LENGTH) || (title.length() > MAX_STRING_LENGTH) || (!title.startsWith(PREFIX))) {
       throw new NlsParseException(title, PATTERN, Color.class);
     }

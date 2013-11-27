@@ -27,7 +27,7 @@ public class UiWidgetRadioButtonsTestImpl<VALUE> extends
    */
   public UiWidgetRadioButtonsTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

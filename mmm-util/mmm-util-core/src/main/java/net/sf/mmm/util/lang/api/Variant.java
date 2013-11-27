@@ -17,8 +17,8 @@ package net.sf.mmm.util.lang.api;
  * <li>take a specific type (e.g. {@link Enum} or {@link net.sf.mmm.util.pojo.api.Pojo}) as input that may
  * implement this interface for documentation purpose (but is not required to do so).</li>
  * </ul>
- * In any case you should avoid casing a given {@link Variant}. Instead, whenever possible use a primitive
- * type for Variant such as an {@link Enum} or {@link String} (from a constant). Then you can do something
+ * In any case you should avoid casting a given {@link Variant}. Instead, whenever possible use a simple type
+ * for {@link Variant} such as an {@link Enum} or {@link String} (from a constant). Then you can do something
  * like <code>if (MyVariantEnum.SPECIAL == variant) { doSomethingSpecial(); } ...</code>.<br/>
  * <b>ATTENTION:</b><br/>
  * If not documented otherwise a {@link Variant} may always be <code>null</code> what is typically the

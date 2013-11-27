@@ -20,10 +20,12 @@ public class UiWidgetImageJavaFx extends AbstractUiWidgetImage<UiWidgetAdapterJa
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetImageJavaFx(UiContext context) {
+  public UiWidgetImageJavaFx(UiContext context, UiWidgetAdapterJavaFxImage widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetImageJavaFx extends AbstractUiWidgetImage<UiWidgetAdapterJa
     @Override
     public UiWidgetImage create(UiContext context) {
 
-      return new UiWidgetImageJavaFx(context);
+      return new UiWidgetImageJavaFx(context, null);
     }
 
   }

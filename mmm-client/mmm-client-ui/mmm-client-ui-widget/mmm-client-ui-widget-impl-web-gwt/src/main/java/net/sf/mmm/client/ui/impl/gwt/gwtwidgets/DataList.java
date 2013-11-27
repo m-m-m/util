@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteOptions;
+import net.sf.mmm.util.gwt.api.GwtUtil;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -19,9 +20,6 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  */
 public class DataList extends Widget implements AttributeWriteOptions<String> {
-
-  /** @see #createUniqueId() */
-  private static int datalistIdCounter = 1;
 
   /** The owner of this {@link DataList}. */
   private AttributeWriteDataList owner;
@@ -55,12 +53,7 @@ public class DataList extends Widget implements AttributeWriteOptions<String> {
    */
   public String getId() {
 
-    String id = getElement().getId();
-    if ((id == null) || (id.length() == 0)) {
-      id = createUniqueId();
-      getElement().setId(id);
-    }
-    return id;
+    return GwtUtil.getInstance().getId(this);
   }
 
   /**
@@ -69,14 +62,6 @@ public class DataList extends Widget implements AttributeWriteOptions<String> {
   public void setOwner(AttributeWriteDataList owner) {
 
     this.owner = owner;
-  }
-
-  /**
-   * @return a unique ID for a {@link DataList}.
-   */
-  private static String createUniqueId() {
-
-    return "dl" + datalistIdCounter++;
   }
 
   /**
@@ -97,6 +82,7 @@ public class DataList extends Widget implements AttributeWriteOptions<String> {
   public void setOptions(List<String> options) {
 
     // clear potential previous options
+    @SuppressWarnings("deprecation")
     com.google.gwt.user.client.Element element = getElement();
     Element childElement = element.getFirstChildElement();
     while (childElement != null) {

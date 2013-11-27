@@ -31,6 +31,16 @@ public abstract class UiWidgetAdapterGwtPanel<WIDGET extends Panel & InsertPanel
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public UiWidgetAdapterGwtPanel(WIDGET toplevelWidget) {
+
+    super(toplevelWidget);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

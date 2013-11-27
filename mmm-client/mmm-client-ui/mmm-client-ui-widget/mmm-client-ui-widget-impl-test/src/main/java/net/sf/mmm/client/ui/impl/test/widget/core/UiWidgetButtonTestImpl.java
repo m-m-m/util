@@ -23,7 +23,7 @@ public class UiWidgetButtonTestImpl extends AbstractUiWidgetButton<UiWidgetAdapt
    */
   public UiWidgetButtonTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

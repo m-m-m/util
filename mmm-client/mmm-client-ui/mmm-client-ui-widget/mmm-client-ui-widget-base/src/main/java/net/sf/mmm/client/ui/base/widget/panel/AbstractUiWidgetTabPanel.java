@@ -23,10 +23,12 @@ public abstract class AbstractUiWidgetTabPanel<ADAPTER extends UiWidgetAdapterTa
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetTabPanel(UiContext context) {
+  public AbstractUiWidgetTabPanel(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     setPrimaryStyle(STYLE_PRIMARY);
   }
 

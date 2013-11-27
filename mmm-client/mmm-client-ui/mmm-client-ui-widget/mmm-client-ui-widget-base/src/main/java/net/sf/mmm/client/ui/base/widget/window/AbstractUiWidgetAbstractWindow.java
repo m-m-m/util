@@ -37,10 +37,12 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetAbstractWindow(UiContext context) {
+  public AbstractUiWidgetAbstractWindow(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

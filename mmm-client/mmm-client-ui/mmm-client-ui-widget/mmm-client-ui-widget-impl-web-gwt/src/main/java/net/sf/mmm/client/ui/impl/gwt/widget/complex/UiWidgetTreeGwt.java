@@ -22,10 +22,12 @@ public class UiWidgetTreeGwt<NODE> extends AbstractUiWidgetTree<UiWidgetAdapterG
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTreeGwt(UiContext context) {
+  public UiWidgetTreeGwt(UiContext context, UiWidgetAdapterGwtTree<NODE> widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,10 +56,11 @@ public class UiWidgetTreeGwt<NODE> extends AbstractUiWidgetTree<UiWidgetAdapterG
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public UiWidgetTree create(UiContext context) {
 
-      return new UiWidgetTreeGwt(context);
+      return new UiWidgetTreeGwt(context, null);
     }
 
   }

@@ -4,6 +4,8 @@ package net.sf.mmm.client.ui.api.widget.window;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
+import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 
 /**
  * This is the interface for a {@link UiWidgetAbstractWindow base window widget} that represents a
@@ -19,5 +21,19 @@ public interface UiWidgetPopup extends UiWidgetAbstractDialogWindow, UiWidgetNat
 
   /** The default {@link #addStyle(String) additional style} of this widget. */
   String STYLE_POPUP = CssStyles.POPUP;
+
+  /**
+   * @return the {@link UiWidgetButtonPanel} located at the bottom of this popup where
+   *         {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton buttons} shall be added.
+   */
+  UiWidgetButtonPanel getButtonPanel();
+
+  /**
+   * This method creates a {@link UiWidgetButton button} to close this popup and adds it to the
+   * {@link #getButtonPanel() button panel}.
+   * 
+   * @return the close button.
+   */
+  UiWidgetButton createAndAddCloseButton();
 
 }

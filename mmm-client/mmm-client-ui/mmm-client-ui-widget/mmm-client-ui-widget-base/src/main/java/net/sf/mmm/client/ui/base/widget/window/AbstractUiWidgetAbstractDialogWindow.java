@@ -36,10 +36,12 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetAbstractDialogWindow(UiContext context) {
+  public AbstractUiWidgetAbstractDialogWindow(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     setPrimaryStyle(STYLE_PRIMARY);
     this.movable = true;
     this.resizable = true;

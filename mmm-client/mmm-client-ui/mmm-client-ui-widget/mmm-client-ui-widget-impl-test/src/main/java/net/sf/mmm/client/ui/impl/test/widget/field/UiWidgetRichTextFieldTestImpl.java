@@ -23,7 +23,7 @@ public class UiWidgetRichTextFieldTestImpl extends AbstractUiWidgetRichTextField
    */
   public UiWidgetRichTextFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

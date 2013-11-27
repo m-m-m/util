@@ -18,6 +18,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public interface UiWidgetButtonGroup extends UiWidgetDynamicPanel<UiWidgetRegular>, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = CssStyles.BUTTON_GROUP;
+  String STYLE_BUTTON_GROUP = CssStyles.BUTTON_GROUP;
 
 }

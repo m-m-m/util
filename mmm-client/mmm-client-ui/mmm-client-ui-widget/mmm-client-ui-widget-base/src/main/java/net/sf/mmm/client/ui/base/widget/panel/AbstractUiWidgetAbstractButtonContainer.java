@@ -26,10 +26,12 @@ public abstract class AbstractUiWidgetAbstractButtonContainer<ADAPTER extends Ui
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetAbstractButtonContainer(UiContext context) {
+  public AbstractUiWidgetAbstractButtonContainer(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

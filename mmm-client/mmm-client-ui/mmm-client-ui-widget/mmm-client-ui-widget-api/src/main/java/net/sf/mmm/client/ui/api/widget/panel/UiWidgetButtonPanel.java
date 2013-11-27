@@ -17,6 +17,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 public interface UiWidgetButtonPanel extends UiWidgetAbstractButtonContainer, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = CssStyles.BUTTON_PANEL;
+  String STYLE_BUTTON_PANEL = CssStyles.BUTTON_PANEL;
 
 }

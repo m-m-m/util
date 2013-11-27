@@ -20,10 +20,12 @@ public class UiWidgetBorderPanelGwt extends AbstractUiWidgetBorderPanel<UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetBorderPanelGwt(UiContext context) {
+  public UiWidgetBorderPanelGwt(UiContext context, UiWidgetAdapterGwtBorderPanel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetBorderPanelGwt extends AbstractUiWidgetBorderPanel<UiWidget
     @Override
     public UiWidgetBorderPanel create(UiContext context) {
 
-      return new UiWidgetBorderPanelGwt(context);
+      return new UiWidgetBorderPanelGwt(context, null);
     }
   }
 

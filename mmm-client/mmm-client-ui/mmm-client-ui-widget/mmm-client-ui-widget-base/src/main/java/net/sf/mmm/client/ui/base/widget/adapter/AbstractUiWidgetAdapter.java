@@ -57,6 +57,17 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public AbstractUiWidgetAdapter(WIDGET toplevelWidget) {
+
+    super();
+    this.toplevelWidget = toplevelWidget;
+  }
+
+  /**
    * This method creates the {@link #getToplevelWidget() underlying widget}.<br/>
    * <b>ATTENTION:</b><br/>
    * This method is called from the constructor but implemented in sub-classes. You should NOT access or even

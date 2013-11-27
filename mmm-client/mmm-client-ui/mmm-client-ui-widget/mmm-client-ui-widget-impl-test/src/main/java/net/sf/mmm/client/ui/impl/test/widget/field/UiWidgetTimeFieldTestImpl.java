@@ -23,7 +23,7 @@ public class UiWidgetTimeFieldTestImpl extends AbstractUiWidgetTimeField<UiWidge
    */
   public UiWidgetTimeFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

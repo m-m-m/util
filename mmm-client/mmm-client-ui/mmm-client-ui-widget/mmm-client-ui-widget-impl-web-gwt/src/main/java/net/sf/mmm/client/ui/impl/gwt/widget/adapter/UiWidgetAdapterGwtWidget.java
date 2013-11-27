@@ -23,6 +23,16 @@ public abstract class UiWidgetAdapterGwtWidget<WIDGET extends Widget> extends Ui
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public UiWidgetAdapterGwtWidget(WIDGET toplevelWidget) {
+
+    super(toplevelWidget);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

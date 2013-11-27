@@ -48,11 +48,13 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public AbstractUiWidgetTree(UiContext context) {
+  public AbstractUiWidgetTree(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.treeNodeRenderer = (UiTreeNodeRenderer) DEFAULT_RENDERER;
     this.selectionMode = SelectionMode.SINGLE_SELECTION;
   }
@@ -183,7 +185,6 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   public boolean setSelectedValue(NODE selectedValue) {
 

@@ -8,7 +8,7 @@ import java.util.Set;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.RichTextToolbar;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext.RichTextToolbar;
 
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;

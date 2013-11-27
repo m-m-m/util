@@ -27,10 +27,12 @@ public abstract class AbstractUiWidgetLabel<ADAPTER extends UiWidgetAdapterLabel
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetLabel(UiContext context) {
+  public AbstractUiWidgetLabel(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     setPrimaryStyle(STYLE_PRIMARY);
   }
 

@@ -28,10 +28,12 @@ public abstract class AbstractUiWidgetGridCell<ADAPTER extends UiWidgetAdapterGr
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetGridCell(UiContext context) {
+  public AbstractUiWidgetGridCell(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.columnSpan = 1;
   }
 

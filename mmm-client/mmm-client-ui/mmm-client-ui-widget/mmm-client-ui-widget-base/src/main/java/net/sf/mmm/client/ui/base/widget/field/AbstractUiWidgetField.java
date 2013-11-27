@@ -41,14 +41,16 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetField(UiContext context) {
+  public AbstractUiWidgetField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     // TODO: This is currently a GWT driven decision. Maybe we need some sort of sync of the styles when the
     // WidgetAdapter is created... Otherwise we have to use a more complex structure in the GWT
     // implementation.
-    setPrimaryStyle(UiWidgetHorizontalPanel.STYLE_PRIMARY);
+    setPrimaryStyle(UiWidgetHorizontalPanel.STYLE_HORIZONTAL_PANEL);
     addStyle(STYLE_FIELD);
     this.trimValue = true;
   }

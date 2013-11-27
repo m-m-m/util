@@ -433,6 +433,7 @@ body > * {
 }
 
 .ButtonPanel {
+  flex-grow: 0;
   .Button {
     margin: @margin;
     min-width: 6em;
@@ -543,11 +544,8 @@ body > * {
   .WindowTitleBar {
     .gradientActive;
     height: 1.7em;
-    border-style: solid;
     border-top-left-radius: @radius;
     border-top-right-radius: @radius;
-    margin-left: @border-size;
-    margin-right: @border-size;
     flex-grow: 0;
     .WindowTitle {
       .highlightText;

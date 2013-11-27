@@ -31,15 +31,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
-      <version>3.2.0.RELEASE</version>
-      <!-- <scope>test</scope> -->
     </dependency>
 
     <!-- Test dependencies -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>4.2.7.SP1</version>
       <scope>test</scope>
     </dependency>
 

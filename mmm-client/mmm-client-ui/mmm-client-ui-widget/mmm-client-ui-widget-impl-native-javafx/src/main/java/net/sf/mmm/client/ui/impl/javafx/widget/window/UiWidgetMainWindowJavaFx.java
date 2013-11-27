@@ -21,7 +21,19 @@ public class UiWidgetMainWindowJavaFx extends AbstractUiWidgetMainWindow<UiWidge
    */
   public UiWidgetMainWindowJavaFx(UiContext context) {
 
-    super(context);
+    this(context, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
+   */
+  public UiWidgetMainWindowJavaFx(UiContext context, UiWidgetAdapterJavaFxMainWindow widgetAdapter) {
+
+    super(context, widgetAdapter);
   }
 
   /**

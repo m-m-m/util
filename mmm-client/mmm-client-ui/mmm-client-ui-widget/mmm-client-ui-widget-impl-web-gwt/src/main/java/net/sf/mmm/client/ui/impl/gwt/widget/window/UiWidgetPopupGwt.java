@@ -3,9 +3,12 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.window;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetPopup;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetButtonPanelGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtButtonPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.adapter.UiWidgetAdapterGwtPopup;
 
 /**
@@ -16,14 +19,34 @@ import net.sf.mmm.client.ui.impl.gwt.widget.window.adapter.UiWidgetAdapterGwtPop
  */
 public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPopup> {
 
+  /** @see #getButtonPanel() */
+  private UiWidgetButtonPanel buttonPanel;
+
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetPopupGwt(UiContext context) {
+  public UiWidgetPopupGwt(UiContext context, UiWidgetAdapterGwtPopup widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetButtonPanel getButtonPanel() {
+
+    if (this.buttonPanel == null) {
+      UiWidgetAdapterGwtButtonPanel buttonPanelAdapter = new UiWidgetAdapterGwtButtonPanel(getWidgetAdapter()
+          .getToplevelWidget().getButtonPanel());
+      this.buttonPanel = new UiWidgetButtonPanelGwt(getContext(), buttonPanelAdapter);
+      setParent(this.buttonPanel, this);
+    }
+    return this.buttonPanel;
   }
 
   /**
@@ -54,7 +77,7 @@ public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPo
     @Override
     public UiWidgetPopup create(UiContext context) {
 
-      return new UiWidgetPopupGwt(context);
+      return new UiWidgetPopupGwt(context, null);
     }
   }
 

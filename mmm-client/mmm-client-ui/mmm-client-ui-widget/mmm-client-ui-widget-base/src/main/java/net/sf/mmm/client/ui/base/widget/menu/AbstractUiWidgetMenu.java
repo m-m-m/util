@@ -26,10 +26,12 @@ public abstract class AbstractUiWidgetMenu<ADAPTER extends UiWidgetAdapterMenu> 
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetMenu(UiContext context) {
+  public AbstractUiWidgetMenu(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

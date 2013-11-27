@@ -50,7 +50,8 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
   private int minHeight;
 
   /**
-   * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or <code>null</code>.
+   * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or
+   * <code>null</code>.
    */
   private HandlerRegistration registration;
 
@@ -58,7 +59,7 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
    * The constructor.
    * 
    * @param resizeDirection is the resize {@link Direction} or <code>null</code> for move.
-   * @param popupWindow TODO
+   * @param popupWindow is the {@link PopupWindow}.
    */
   public PopupMouseHandler(PopupWindow popupWindow, Direction resizeDirection) {
 
@@ -135,10 +136,11 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
 
     if (this.resizeDirection == null) {
       // move...
-      newRectangle = this.popupRectangle.moveBy(deltaX, deltaY).clipTo(this.browserRectangle, true);
+      Rectangle clippingArea = new Rectangle(0, 0, Window.getClientWidth() + this.popupRectangle.getWidth() - 32,
+          Window.getClientHeight() + this.popupRectangle.getHeight() - 32);
+      newRectangle = this.popupRectangle.moveBy(deltaX, deltaY).clipTo(clippingArea, true);
     } else {
-      newRectangle = this.popupRectangle.resize(deltaX, deltaY, this.resizeDirection, this.minWidth,
-          this.minHeight);
+      newRectangle = this.popupRectangle.resize(deltaX, deltaY, this.resizeDirection, this.minWidth, this.minHeight);
     }
     this.popupWindow.setPixelSize(newRectangle.getWidth(), newRectangle.getHeight());
     this.popupWindow.setPopupPosition(newRectangle.getX(), newRectangle.getY());

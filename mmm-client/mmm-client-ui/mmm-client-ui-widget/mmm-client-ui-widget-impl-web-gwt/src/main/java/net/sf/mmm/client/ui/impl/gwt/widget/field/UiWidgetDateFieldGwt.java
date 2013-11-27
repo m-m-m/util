@@ -21,10 +21,12 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetDateField<UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetDateFieldGwt(UiContext context) {
+  public UiWidgetDateFieldGwt(UiContext context, UiWidgetAdapterGwtDateField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetDateField<UiWidgetAdap
     @Override
     public UiWidgetDateField create(UiContext context) {
 
-      return new UiWidgetDateFieldGwt(context);
+      return new UiWidgetDateFieldGwt(context, null);
     }
 
   }

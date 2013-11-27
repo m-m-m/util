@@ -88,7 +88,9 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   protected void registerButtonFactories() {
 
     registerButtonFactory(new UiSingleWidgetButtonFactoryApprove());
+    registerButtonFactory(new UiSingleWidgetButtonFactoryApply());
     registerButtonFactory(new UiSingleWidgetButtonFactoryCancel());
+    registerButtonFactory(new UiSingleWidgetButtonFactoryClose());
     registerButtonFactory(new UiSingleWidgetButtonFactoryConfirm());
     registerButtonFactory(new UiSingleWidgetButtonFactoryDelete());
     registerButtonFactory(new UiSingleWidgetButtonFactoryDown());
@@ -194,9 +196,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
       final boolean preventConfirmationPopup, Object variant) {
 
     UiSingleWidgetButtonFactory<?> buttonFactory;
-    if (handlerType != null) {
-      buttonFactory = this.handlerType2ButtonFactoryMap.get(handlerType);
-    } else {
+    if (handlerType == null) {
       buttonFactory = null;
       for (UiSingleWidgetButtonFactory<?> factory : this.handlerType2ButtonFactoryMap.values()) {
         if (factory.isInstance(handler)) {
@@ -207,13 +207,15 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
           buttonFactory = factory;
         }
       }
+    } else {
+      buttonFactory = this.handlerType2ButtonFactoryMap.get(handlerType);
     }
     if (buttonFactory == null) {
       String illegalCase;
-      if (handlerType != null) {
-        illegalCase = handlerType.toString();
-      } else {
+      if (handlerType == null) {
         illegalCase = handler.getClass().getName();
+      } else {
+        illegalCase = handlerType.toString();
       }
       throw new IllegalCaseException(illegalCase);
     }

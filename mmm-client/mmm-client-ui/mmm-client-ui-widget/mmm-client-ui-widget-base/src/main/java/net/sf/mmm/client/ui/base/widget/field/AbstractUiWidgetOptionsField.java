@@ -18,7 +18,6 @@ import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 
@@ -35,7 +34,10 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
     AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE>,
     AttributeWriteAllowCustomInput {
 
-  /** The {@link ValidationFailure#getCode() validation failure code} for an undefined option. */
+  /**
+   * The {@link net.sf.mmm.util.validation.api.ValidationFailure#getCode() validation failure code} for an
+   * undefined option.
+   */
   public static final String CODE_UNDEFINED_OPTION = "UndefinedOption";
 
   /** @see #getOptions() */
@@ -63,10 +65,12 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetOptionsField(UiContext context) {
+  public AbstractUiWidgetOptionsField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.mutableOptions = new ArrayList<VALUE>();
     this.options = Collections.unmodifiableList(this.mutableOptions);
     this.title2OptionMap = new HashMap<String, VALUE>();

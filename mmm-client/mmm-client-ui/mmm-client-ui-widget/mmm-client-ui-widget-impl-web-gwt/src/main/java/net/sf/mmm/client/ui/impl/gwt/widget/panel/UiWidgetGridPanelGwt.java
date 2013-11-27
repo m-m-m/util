@@ -20,10 +20,12 @@ public class UiWidgetGridPanelGwt extends AbstractUiWidgetGridPanel<UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetGridPanelGwt(UiContext context) {
+  public UiWidgetGridPanelGwt(UiContext context, UiWidgetAdapterGwtGridPanel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetGridPanelGwt extends AbstractUiWidgetGridPanel<UiWidgetAdap
     @Override
     public UiWidgetGridPanel create(UiContext context) {
 
-      return new UiWidgetGridPanelGwt(context);
+      return new UiWidgetGridPanelGwt(context, null);
     }
   }
 

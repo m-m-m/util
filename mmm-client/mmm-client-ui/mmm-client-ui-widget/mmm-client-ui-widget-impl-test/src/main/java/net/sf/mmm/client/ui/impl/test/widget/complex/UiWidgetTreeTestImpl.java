@@ -22,10 +22,12 @@ public class UiWidgetTreeTestImpl<NODE> extends AbstractUiWidgetTree<UiWidgetAda
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTreeTestImpl(UiContext context) {
+  public UiWidgetTreeTestImpl(UiContext context, UiWidgetAdapterTestTree widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -57,7 +59,7 @@ public class UiWidgetTreeTestImpl<NODE> extends AbstractUiWidgetTree<UiWidgetAda
     @Override
     public UiWidgetTree create(UiContext context) {
 
-      return new UiWidgetTreeTestImpl(context);
+      return new UiWidgetTreeTestImpl(context, null);
     }
 
   }

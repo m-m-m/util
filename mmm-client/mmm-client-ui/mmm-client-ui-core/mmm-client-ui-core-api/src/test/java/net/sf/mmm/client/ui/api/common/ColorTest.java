@@ -21,7 +21,10 @@ public class ColorTest extends Assert {
   @Test
   public void testColor() {
 
-    for (int i = 0; i < 0xFFFFFF; i++) {
+    // int step = 1;
+    // for speed and performance increase step...
+    int step = 7;
+    for (int i = 0; i <= 0xFFFFFF; i = i + step) {
       Color color = new Color(i);
       Integer integer = Integer.valueOf(i);
       assertEquals(integer, color.getValue());
@@ -39,7 +42,9 @@ public class ColorTest extends Assert {
       Color copy = new Color(color.getRed(), color.getGreen(), color.getBlue());
       assertEquals(integer, copy.getValue());
       assertEquals(color, copy);
-
+      String rgbString = "rgb(" + color.getRed() + "," + color.getGreen() + ", " + color.getBlue() + ")";
+      Color rgbCopy = new Color(rgbString);
+      assertEquals(color, rgbCopy);
       // test HSB
       float[] hsb = java.awt.Color.RGBtoHSB(awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue(), null);
       double delta = 0.0000000001;

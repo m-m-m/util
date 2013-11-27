@@ -21,10 +21,12 @@ public class UiWidgetIntegerFieldGwt extends AbstractUiWidgetIntegerField<UiWidg
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetIntegerFieldGwt(UiContext context) {
+  public UiWidgetIntegerFieldGwt(UiContext context, UiWidgetAdapterGwtIntegerField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetIntegerFieldGwt extends AbstractUiWidgetIntegerField<UiWidg
     @Override
     public UiWidgetIntegerField create(UiContext context) {
 
-      return new UiWidgetIntegerFieldGwt(context);
+      return new UiWidgetIntegerFieldGwt(context, null);
     }
 
   }

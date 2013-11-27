@@ -24,10 +24,12 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetAbstractListTable(UiContext context) {
+  public AbstractUiWidgetAbstractListTable(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

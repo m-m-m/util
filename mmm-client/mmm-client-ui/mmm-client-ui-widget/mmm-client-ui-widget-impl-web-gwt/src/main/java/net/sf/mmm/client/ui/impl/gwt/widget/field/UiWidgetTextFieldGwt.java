@@ -21,10 +21,12 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTextFieldGwt(UiContext context) {
+  public UiWidgetTextFieldGwt(UiContext context, UiWidgetAdapterGwtTextBox widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
     @Override
     public UiWidgetTextField create(UiContext context) {
 
-      return new UiWidgetTextFieldGwt(context);
+      return new UiWidgetTextFieldGwt(context, null);
     }
 
   }

@@ -26,10 +26,12 @@ public abstract class AbstractUiWidgetTextAreaFieldBase<ADAPTER extends UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetTextAreaFieldBase(UiContext context) {
+  public AbstractUiWidgetTextAreaFieldBase(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.heightInTextLines = 0;
   }
 

@@ -9,7 +9,8 @@ import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.client.ui.impl.test.widget.field.adapter.UiWidgetAdapterTestOptionsField;
 
 /**
- * This is the implementation of {@link UiWidgetRadioButtonsVerticalField} for testing without a native toolkit.
+ * This is the implementation of {@link UiWidgetRadioButtonsVerticalField} for testing without a native
+ * toolkit.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -27,7 +28,7 @@ public class UiWidgetRadioButtonsVerticalFieldTestImpl<VALUE> extends
    */
   public UiWidgetRadioButtonsVerticalFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

@@ -23,7 +23,7 @@ public class UiWidgetMenuBarTestImpl extends AbstractUiWidgetMenuBar<UiWidgetAda
    */
   public UiWidgetMenuBarTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

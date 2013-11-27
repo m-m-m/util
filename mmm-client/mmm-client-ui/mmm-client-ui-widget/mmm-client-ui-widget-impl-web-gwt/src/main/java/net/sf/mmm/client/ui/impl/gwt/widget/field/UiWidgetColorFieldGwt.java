@@ -21,10 +21,12 @@ public class UiWidgetColorFieldGwt extends AbstractUiWidgetColorField<UiWidgetAd
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetColorFieldGwt(UiContext context) {
+  public UiWidgetColorFieldGwt(UiContext context, UiWidgetAdapterGwtColorField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetColorFieldGwt extends AbstractUiWidgetColorField<UiWidgetAd
     @Override
     public UiWidgetColorField create(UiContext context) {
 
-      return new UiWidgetColorFieldGwt(context);
+      return new UiWidgetColorFieldGwt(context, null);
     }
 
   }

@@ -20,10 +20,12 @@ public class UiWidgetVerticalPanelGwt extends AbstractUiWidgetVerticalPanel<UiWi
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetVerticalPanelGwt(UiContext context) {
+  public UiWidgetVerticalPanelGwt(UiContext context, UiWidgetAdapterGwtVerticalPanel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetVerticalPanelGwt extends AbstractUiWidgetVerticalPanel<UiWi
     @Override
     public UiWidgetVerticalPanel create(UiContext context) {
 
-      return new UiWidgetVerticalPanelGwt(context);
+      return new UiWidgetVerticalPanelGwt(context, null);
     }
   }
 

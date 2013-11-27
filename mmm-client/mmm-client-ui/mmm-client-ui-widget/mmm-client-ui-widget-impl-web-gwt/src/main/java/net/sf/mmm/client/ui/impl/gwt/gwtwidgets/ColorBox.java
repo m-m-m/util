@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
 import java.text.ParseException;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.common.Color;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
@@ -19,7 +20,7 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ColorBox extends ValueBoxBase<Color> implements AttributeWriteDataList {
+public class ColorBox extends ValueBoxBase<Color> implements AttributeWriteDataList, AttributeWriteHtmlId {
 
   /**
    * The constructor.
@@ -59,6 +60,24 @@ public class ColorBox extends ValueBoxBase<Color> implements AttributeWriteDataL
   public void setMaxLength(int length) {
 
     getInputElement().setMaxLength(length);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getId() {
+
+    return getElement().getId();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setId(String id) {
+
+    getElement().setId(id);
   }
 
   /**

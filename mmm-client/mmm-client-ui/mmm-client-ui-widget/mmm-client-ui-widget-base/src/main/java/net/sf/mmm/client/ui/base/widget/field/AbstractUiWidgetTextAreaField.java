@@ -21,10 +21,12 @@ public abstract class AbstractUiWidgetTextAreaField<ADAPTER extends UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetTextAreaField(UiContext context) {
+  public AbstractUiWidgetTextAreaField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
 }

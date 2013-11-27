@@ -23,7 +23,7 @@ public class UiWidgetMenuItemSeparatorTestImpl extends AbstractUiWidgetMenuItemS
    */
   public UiWidgetMenuItemSeparatorTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

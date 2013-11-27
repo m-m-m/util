@@ -21,7 +21,7 @@ public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>
     UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = "GridPanel";
+  String STYLE_GRID_PANEL = "GridPanel";
 
   /**
    * {@inheritDoc}

@@ -16,6 +16,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public interface UiWidgetHorizontalPanel extends UiWidgetDynamicPanel<UiWidgetRegular>, UiWidgetNative {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = CssStyles.HORIZONTAL_PANEL;
+  String STYLE_HORIZONTAL_PANEL = CssStyles.HORIZONTAL_PANEL;
 
 }

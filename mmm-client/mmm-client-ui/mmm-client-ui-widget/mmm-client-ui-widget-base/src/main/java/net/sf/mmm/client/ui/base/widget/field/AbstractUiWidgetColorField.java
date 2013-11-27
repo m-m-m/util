@@ -32,10 +32,12 @@ public abstract class AbstractUiWidgetColorField<ADAPTER extends UiWidgetAdapter
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetColorField(UiContext context) {
+  public AbstractUiWidgetColorField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.mutableOptions = new ArrayList<Color>();
     this.options = Collections.unmodifiableList(this.mutableOptions);
   }

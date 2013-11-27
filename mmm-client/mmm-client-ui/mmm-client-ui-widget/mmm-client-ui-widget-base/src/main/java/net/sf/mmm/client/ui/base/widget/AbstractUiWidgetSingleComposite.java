@@ -26,10 +26,12 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetSingleComposite(UiContext context) {
+  public AbstractUiWidgetSingleComposite(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

@@ -23,7 +23,7 @@ public class UiWidgetTabTestImpl extends AbstractUiWidgetTab<UiWidgetAdapterTest
    */
   public UiWidgetTabTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

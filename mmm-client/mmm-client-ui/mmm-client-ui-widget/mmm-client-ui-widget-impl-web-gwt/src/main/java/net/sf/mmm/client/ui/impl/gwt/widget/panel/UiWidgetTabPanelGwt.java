@@ -21,10 +21,12 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTabPanelGwt(UiContext context) {
+  public UiWidgetTabPanelGwt(UiContext context, UiWidgetAdapterGwtTabLayoutPanel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetTabPanelGwt extends AbstractUiWidgetTabPanel<UiWidgetAdapte
     @Override
     public UiWidgetTabPanel create(UiContext context) {
 
-      return new UiWidgetTabPanelGwt(context);
+      return new UiWidgetTabPanelGwt(context, null);
     }
 
   }

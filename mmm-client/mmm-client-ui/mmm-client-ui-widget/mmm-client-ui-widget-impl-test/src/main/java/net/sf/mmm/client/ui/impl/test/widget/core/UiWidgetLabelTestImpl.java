@@ -23,7 +23,7 @@ public class UiWidgetLabelTestImpl extends AbstractUiWidgetLabel<UiWidgetAdapter
    */
   public UiWidgetLabelTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

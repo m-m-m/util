@@ -20,10 +20,12 @@ public class UiWidgetLabelGwt extends AbstractUiWidgetLabel<UiWidgetAdapterGwtLa
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetLabelGwt(UiContext context) {
+  public UiWidgetLabelGwt(UiContext context, UiWidgetAdapterGwtLabel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetLabelGwt extends AbstractUiWidgetLabel<UiWidgetAdapterGwtLa
     @Override
     public UiWidgetLabel create(UiContext context) {
 
-      return new UiWidgetLabelGwt(context);
+      return new UiWidgetLabelGwt(context, null);
     }
 
   }

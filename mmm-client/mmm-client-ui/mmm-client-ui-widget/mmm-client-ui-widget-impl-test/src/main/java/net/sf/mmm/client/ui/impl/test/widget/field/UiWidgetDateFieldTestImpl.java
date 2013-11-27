@@ -23,7 +23,7 @@ public class UiWidgetDateFieldTestImpl extends AbstractUiWidgetDateField<UiWidge
    */
   public UiWidgetDateFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

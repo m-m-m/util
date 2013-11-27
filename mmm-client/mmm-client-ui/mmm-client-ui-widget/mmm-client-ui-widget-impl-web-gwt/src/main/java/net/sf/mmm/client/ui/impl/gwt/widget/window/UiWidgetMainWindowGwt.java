@@ -21,7 +21,19 @@ public class UiWidgetMainWindowGwt extends AbstractUiWidgetMainWindow<UiWidgetAd
    */
   public UiWidgetMainWindowGwt(UiContext context) {
 
-    super(context);
+    this(context, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
+   */
+  public UiWidgetMainWindowGwt(UiContext context, UiWidgetAdapterGwtMainWindow widgetAdapter) {
+
+    super(context, widgetAdapter);
   }
 
   /**

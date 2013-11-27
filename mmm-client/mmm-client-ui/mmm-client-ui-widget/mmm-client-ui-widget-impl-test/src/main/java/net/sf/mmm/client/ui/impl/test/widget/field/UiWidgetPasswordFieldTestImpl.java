@@ -23,7 +23,7 @@ public class UiWidgetPasswordFieldTestImpl extends AbstractUiWidgetPasswordField
    */
   public UiWidgetPasswordFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

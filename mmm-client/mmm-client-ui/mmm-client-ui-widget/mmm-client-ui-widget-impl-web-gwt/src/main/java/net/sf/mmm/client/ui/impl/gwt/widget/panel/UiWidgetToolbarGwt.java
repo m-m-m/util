@@ -20,10 +20,12 @@ public class UiWidgetToolbarGwt extends AbstractUiWidgetToolbar<UiWidgetAdapterG
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetToolbarGwt(UiContext context) {
+  public UiWidgetToolbarGwt(UiContext context, UiWidgetAdapterGwtToolbar widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetToolbarGwt extends AbstractUiWidgetToolbar<UiWidgetAdapterG
     @Override
     public UiWidgetToolbar create(UiContext context) {
 
-      return new UiWidgetToolbarGwt(context);
+      return new UiWidgetToolbarGwt(context, null);
     }
   }
 

@@ -20,10 +20,12 @@ public class UiWidgetTimeFieldGwt extends AbstractUiWidgetTimeField<UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTimeFieldGwt(UiContext context) {
+  public UiWidgetTimeFieldGwt(UiContext context, UiWidgetAdapterGwtTimeField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetTimeFieldGwt extends AbstractUiWidgetTimeField<UiWidgetAdap
     @Override
     public UiWidgetTimeField create(UiContext context) {
 
-      return new UiWidgetTimeFieldGwt(context);
+      return new UiWidgetTimeFieldGwt(context, null);
     }
 
   }

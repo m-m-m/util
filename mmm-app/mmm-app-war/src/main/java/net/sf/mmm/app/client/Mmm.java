@@ -258,7 +258,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         };
         checkboxClosable.addChangeHandler(changeHandlerClose);
         UiWidgetButton button = factory.create(UiWidgetButton.class);
-        button.setLabel("Close");
+        button.setLabel("Close2");
         UiHandlerEventClick handler = new UiHandlerEventClick() {
 
           @Override
@@ -273,8 +273,9 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         verticalPanel3.addChild(checkboxResizsable);
         verticalPanel3.addChild(checkboxMovable);
         verticalPanel3.addChild(checkboxClosable);
-        verticalPanel3.addChild(button);
         popup.addChild(verticalPanel3);
+        popup.createAndAddCloseButton();
+        popup.getButtonPanel().addChild(button);
         popup.centerWindow();
         popup.setVisible(true);
       }

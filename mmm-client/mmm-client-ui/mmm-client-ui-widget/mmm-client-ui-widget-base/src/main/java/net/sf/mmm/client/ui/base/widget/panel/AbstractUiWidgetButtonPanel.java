@@ -21,11 +21,13 @@ public abstract class AbstractUiWidgetButtonPanel<ADAPTER extends UiWidgetAdapte
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetButtonPanel(UiContext context) {
+  public AbstractUiWidgetButtonPanel(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
-    addStyle(STYLE_PRIMARY);
+    super(context, widgetAdapter);
+    addStyle(STYLE_BUTTON_PANEL);
   }
 
 }

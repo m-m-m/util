@@ -23,7 +23,7 @@ public class UiWidgetSectionTestImpl extends AbstractUiWidgetSection<UiWidgetAda
    */
   public UiWidgetSectionTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

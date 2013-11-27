@@ -23,7 +23,7 @@ public class UiWidgetGridPanelTestImpl extends AbstractUiWidgetGridPanel<UiWidge
    */
   public UiWidgetGridPanelTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

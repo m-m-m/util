@@ -23,7 +23,7 @@ public class UiWidgetIntegerFieldTestImpl extends AbstractUiWidgetIntegerField<U
    */
   public UiWidgetIntegerFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

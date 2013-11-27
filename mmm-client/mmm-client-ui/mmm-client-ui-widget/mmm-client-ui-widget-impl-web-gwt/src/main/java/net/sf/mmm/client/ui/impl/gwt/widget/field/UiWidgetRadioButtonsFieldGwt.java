@@ -24,10 +24,13 @@ public class UiWidgetRadioButtonsFieldGwt<VALUE> extends
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetRadioButtonsFieldGwt(UiContext context) {
+  public UiWidgetRadioButtonsFieldGwt(UiContext context,
+      UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE> widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -56,10 +59,11 @@ public class UiWidgetRadioButtonsFieldGwt<VALUE> extends
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public UiWidgetRadioButtonsField create(UiContext context) {
 
-      return new UiWidgetRadioButtonsFieldGwt(context);
+      return new UiWidgetRadioButtonsFieldGwt(context, null);
     }
 
   }

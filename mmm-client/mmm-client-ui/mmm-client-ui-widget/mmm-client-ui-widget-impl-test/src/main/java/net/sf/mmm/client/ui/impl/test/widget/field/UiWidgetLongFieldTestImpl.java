@@ -23,7 +23,7 @@ public class UiWidgetLongFieldTestImpl extends AbstractUiWidgetLongField<UiWidge
    */
   public UiWidgetLongFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

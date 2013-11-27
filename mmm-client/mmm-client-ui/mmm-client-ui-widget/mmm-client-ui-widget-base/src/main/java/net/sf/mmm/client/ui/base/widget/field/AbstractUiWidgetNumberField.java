@@ -33,10 +33,12 @@ public abstract class AbstractUiWidgetNumberField<ADAPTER extends UiWidgetAdapte
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetNumberField(UiContext context) {
+  public AbstractUiWidgetNumberField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

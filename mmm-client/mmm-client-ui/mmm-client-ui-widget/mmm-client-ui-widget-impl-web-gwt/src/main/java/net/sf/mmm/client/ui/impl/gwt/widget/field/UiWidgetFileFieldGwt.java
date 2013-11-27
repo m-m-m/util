@@ -21,10 +21,12 @@ public class UiWidgetFileFieldGwt extends AbstractUiWidgetFileField<UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetFileFieldGwt(UiContext context) {
+  public UiWidgetFileFieldGwt(UiContext context, UiWidgetAdapterGwtFileField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetFileFieldGwt extends AbstractUiWidgetFileField<UiWidgetAdap
     @Override
     public UiWidgetFileField create(UiContext context) {
 
-      return new UiWidgetFileFieldGwt(context);
+      return new UiWidgetFileFieldGwt(context, null);
     }
 
   }

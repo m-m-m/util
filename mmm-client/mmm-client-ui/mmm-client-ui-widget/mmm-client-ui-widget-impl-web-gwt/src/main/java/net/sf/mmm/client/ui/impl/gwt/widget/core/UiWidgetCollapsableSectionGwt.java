@@ -21,10 +21,12 @@ public class UiWidgetCollapsableSectionGwt extends
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetCollapsableSectionGwt(UiContext context) {
+  public UiWidgetCollapsableSectionGwt(UiContext context, UiWidgetAdapterGwtCollapsableSection widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetCollapsableSectionGwt extends
     @Override
     public UiWidgetCollapsableSection create(UiContext context) {
 
-      return new UiWidgetCollapsableSectionGwt(context);
+      return new UiWidgetCollapsableSectionGwt(context, null);
     }
 
   }

@@ -20,10 +20,12 @@ public class UiWidgetHorizontalPanelGwt extends AbstractUiWidgetHorizontalPanel<
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetHorizontalPanelGwt(UiContext context) {
+  public UiWidgetHorizontalPanelGwt(UiContext context, UiWidgetAdapterGwtHorizontalPanel widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetHorizontalPanelGwt extends AbstractUiWidgetHorizontalPanel<
     @Override
     public UiWidgetHorizontalPanel create(UiContext context) {
 
-      return new UiWidgetHorizontalPanelGwt(context);
+      return new UiWidgetHorizontalPanelGwt(context, null);
     }
   }
 

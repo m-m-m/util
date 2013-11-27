@@ -23,7 +23,7 @@ public class UiWidgetDoubleFieldTestImpl extends AbstractUiWidgetDoubleField<UiW
    */
   public UiWidgetDoubleFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

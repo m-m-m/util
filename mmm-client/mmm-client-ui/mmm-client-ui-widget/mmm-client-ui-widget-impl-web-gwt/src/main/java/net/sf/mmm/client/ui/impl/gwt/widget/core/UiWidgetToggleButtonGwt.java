@@ -20,10 +20,12 @@ public class UiWidgetToggleButtonGwt extends AbstractUiWidgetToggleButton<UiWidg
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetToggleButtonGwt(UiContext context) {
+  public UiWidgetToggleButtonGwt(UiContext context, UiWidgetAdapterGwtToggleButton widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetToggleButtonGwt extends AbstractUiWidgetToggleButton<UiWidg
     @Override
     public UiWidgetToggleButton create(UiContext context) {
 
-      return new UiWidgetToggleButtonGwt(context);
+      return new UiWidgetToggleButtonGwt(context, null);
     }
 
   }

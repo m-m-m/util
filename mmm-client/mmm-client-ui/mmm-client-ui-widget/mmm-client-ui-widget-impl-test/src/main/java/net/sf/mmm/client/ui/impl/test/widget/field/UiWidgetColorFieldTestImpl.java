@@ -23,7 +23,7 @@ public class UiWidgetColorFieldTestImpl extends AbstractUiWidgetColorField<UiWid
    */
   public UiWidgetColorFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

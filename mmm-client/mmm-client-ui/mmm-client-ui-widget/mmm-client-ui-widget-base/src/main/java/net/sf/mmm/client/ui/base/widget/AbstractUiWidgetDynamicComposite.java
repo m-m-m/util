@@ -31,10 +31,12 @@ public abstract class AbstractUiWidgetDynamicComposite<ADAPTER extends UiWidgetA
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetDynamicComposite(UiContext context) {
+  public AbstractUiWidgetDynamicComposite(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.children = new ArrayList<CHILD>();
   }
 

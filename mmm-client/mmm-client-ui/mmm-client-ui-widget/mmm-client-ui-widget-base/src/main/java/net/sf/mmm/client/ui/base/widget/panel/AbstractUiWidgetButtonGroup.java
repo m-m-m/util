@@ -22,11 +22,13 @@ public abstract class AbstractUiWidgetButtonGroup<ADAPTER extends UiWidgetAdapte
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetButtonGroup(UiContext context) {
+  public AbstractUiWidgetButtonGroup(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
-    addStyle(STYLE_PRIMARY);
+    super(context, widgetAdapter);
+    addStyle(STYLE_BUTTON_GROUP);
   }
 
 }

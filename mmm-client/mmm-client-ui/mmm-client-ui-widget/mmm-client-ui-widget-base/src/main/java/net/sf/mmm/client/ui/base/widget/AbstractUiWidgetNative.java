@@ -29,8 +29,9 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * This is the abstract base implementation of {@link UiWidget} or more precisely
  * {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative}. It is independent of any native toolkit via
  * {@link UiWidgetAdapter} that is {@link #getWidgetAdapter() lazily created}.<br/>
- * If you want to create an implementation of all the {@link UiWidget}s for a native UI toolkit, you are strongly
- * encouraged to extend from this class and its subclasses (all classes named <code>AbstractUiWidget*</code>).
+ * If you want to create an implementation of all the {@link UiWidget}s for a native UI toolkit, you are
+ * strongly encouraged to extend from this class and its subclasses (all classes named
+ * <code>AbstractUiWidget*</code>).
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Use {@link Void} for no value.
@@ -38,8 +39,8 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VALUE> extends
-    AbstractUiWidget<VALUE> implements UiWidgetAbstractComposite, AttributeWriteAriaRole {
+public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VALUE> extends AbstractUiWidget<VALUE>
+    implements UiWidgetAbstractComposite, AttributeWriteAriaRole {
 
   /** @see #setIdPrefix(String) */
   private static String idPrefix = "mmm";
@@ -93,10 +94,13 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetNative(UiContext context) {
+  public AbstractUiWidgetNative(UiContext context, ADAPTER widgetAdapter) {
 
     super(context);
+    this.widgetAdapter = widgetAdapter;
     this.visible = true;
     this.enabled = true;
     this.styles = "";
@@ -134,8 +138,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /**
    * This method gives access to {@link #getWidgetAdapter()}.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by regular
-   * users (what also applies for all classes in this <code>base</code> packages).
+   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
+   * regular users (what also applies for all classes in this <code>base</code> packages).
    * 
    * @param <A> is the generic type of {@link #getWidgetAdapter()}.
    * @param widget is the widget.
@@ -147,8 +151,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * This method is called from {@link #getWidgetAdapter()} to initialize the {@link UiWidgetAdapter}. All attributes of
-   * this widget need to be set in the {@link UiWidgetAdapter}.
+   * This method is called from {@link #getWidgetAdapter()} to initialize the {@link UiWidgetAdapter}. All
+   * attributes of this widget need to be set in the {@link UiWidgetAdapter}.
    * 
    * @param adapter is the {@link UiWidgetAdapter} to initialize.
    */
@@ -185,7 +189,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * This method creates the {@link #getWidgetAdapter() widget adapter}.<br/>
-   * This design is done to give more flexibility by overriding and also for lazy initialization of the widget.
+   * This design is done to give more flexibility by overriding and also for lazy initialization of the
+   * widget.
    * 
    * @return a new instance of the {@link #getWidgetAdapter() underlying widget}.
    */
@@ -279,8 +284,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * This method removes this widget from its {@link #getParent() parent}. The {@link #getParent() parent} is set to
-   * <code>null</code> and the native widget is removed from its parent.
+   * This method removes this widget from its {@link #getParent() parent}. The {@link #getParent() parent} is
+   * set to <code>null</code> and the native widget is removed from its parent.
    */
   @Override
   protected void removeFromParent() {
@@ -649,8 +654,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * @return the {@link Class} reflecting the {@link Role} that is fixed for this widget or <code>null</code> if the
-   *         role can be changed dynamically.
+   * @return the {@link Class} reflecting the {@link Role} that is fixed for this widget or <code>null</code>
+   *         if the role can be changed dynamically.
    */
   protected Class<? extends Role> getAriaRoleFixedType() {
 
@@ -790,8 +795,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * @see #hasStyle(String)
    * 
    * @param style is the {@link #hasStyle(String) style to check}.
-   * @return the start-index of the given <code>style</code> in {@link #getStyles() styles} or <code>-1</code> if NOT
-   *         present.
+   * @return the start-index of the given <code>style</code> in {@link #getStyles() styles} or <code>-1</code>
+   *         if NOT present.
    */
   private int getIndexOfStyle(String style) {
 
@@ -803,8 +808,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * 
    * @param allStyles is the {@link String} with all current styles separated with whitespaces.
    * @param style is the single style to check.
-   * @return the start-index of the given <code>style</code> in <code>allStyles</code> or <code>-1</code> if NOT
-   *         present.
+   * @return the start-index of the given <code>style</code> in <code>allStyles</code> or <code>-1</code> if
+   *         NOT present.
    */
   public static int getIndexOfStyle(String allStyles, String style) {
 
@@ -935,8 +940,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * 
    * <br/>
    * It performs the {@link #validate(ValidationState) validation} of this widget by delegating to
-   * {@link #validateRecursive(ValidationState)}. It may be overridden to collect potential validation failures and
-   * attach them to this widget. You should not forget the super-call in such case.
+   * {@link #validateRecursive(ValidationState)}. It may be overridden to collect potential validation
+   * failures and attach them to this widget. You should not forget the super-call in such case.
    */
   @Override
   protected void doValidate(ValidationState state, VALUE value) {
@@ -946,9 +951,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * This method performs the recursive validation of potential children of this widget excluding the validation of this
-   * widget itself. A legal implementation of a composite widget needs to call {@link #validate(ValidationState)} on all
-   * child widgets.
+   * This method performs the recursive validation of potential children of this widget excluding the
+   * validation of this widget itself. A legal implementation of a composite widget needs to call
+   * {@link #validate(ValidationState)} on all child widgets.
    * 
    * @param state is the {@link ValidationState}.
    */

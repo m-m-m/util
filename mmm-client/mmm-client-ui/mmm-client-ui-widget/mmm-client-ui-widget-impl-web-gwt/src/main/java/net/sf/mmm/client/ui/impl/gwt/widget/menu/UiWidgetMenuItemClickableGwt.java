@@ -20,10 +20,12 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItemClicka
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetMenuItemClickableGwt(UiContext context) {
+  public UiWidgetMenuItemClickableGwt(UiContext context, UiWidgetAdapterGwtMenuItem widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetMenuItemClickableGwt extends AbstractUiWidgetMenuItemClicka
     @Override
     public UiWidgetMenuItemClickable create(UiContext context) {
 
-      return new UiWidgetMenuItemClickableGwt(context);
+      return new UiWidgetMenuItemClickableGwt(context, null);
     }
 
   }

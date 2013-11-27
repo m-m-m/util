@@ -23,7 +23,7 @@ public class UiWidgetMenuItemClickableTestImpl extends AbstractUiWidgetMenuItemC
    */
   public UiWidgetMenuItemClickableTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

@@ -23,10 +23,12 @@ public abstract class AbstractUiWidgetDateTimeField<ADAPTER extends UiWidgetAdap
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetDateTimeField(UiContext context) {
+  public AbstractUiWidgetDateTimeField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

@@ -53,10 +53,12 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetAbstractDataTable(UiContext context) {
+  public AbstractUiWidgetAbstractDataTable(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.editable = false;
     this.value = new ArrayList<ROW>();
     this.columnComparator = new ColumnComparator<ROW>();
@@ -114,7 +116,6 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   public boolean setSelectedValue(ROW selectedValue) {
 

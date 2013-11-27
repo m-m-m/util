@@ -20,10 +20,12 @@ public class UiWidgetGridRowGwt extends AbstractUiWidgetGridRow<UiWidgetAdapterG
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetGridRowGwt(UiContext context) {
+  public UiWidgetGridRowGwt(UiContext context, UiWidgetAdapterGwtGridRow widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetGridRowGwt extends AbstractUiWidgetGridRow<UiWidgetAdapterG
     @Override
     public UiWidgetGridRow create(UiContext context) {
 
-      return new UiWidgetGridRowGwt(context);
+      return new UiWidgetGridRowGwt(context, null);
     }
   }
 

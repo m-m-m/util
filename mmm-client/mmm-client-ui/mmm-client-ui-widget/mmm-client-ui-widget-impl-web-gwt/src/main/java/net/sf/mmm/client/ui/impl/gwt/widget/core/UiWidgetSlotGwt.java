@@ -20,10 +20,12 @@ public class UiWidgetSlotGwt extends AbstractUiWidgetSlot<UiWidgetAdapterGwtSlot
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetSlotGwt(UiContext context) {
+  public UiWidgetSlotGwt(UiContext context, UiWidgetAdapterGwtSlot widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetSlotGwt extends AbstractUiWidgetSlot<UiWidgetAdapterGwtSlot
     @Override
     public UiWidgetSlot create(UiContext context) {
 
-      return new UiWidgetSlotGwt(context);
+      return new UiWidgetSlotGwt(context, null);
     }
 
   }

@@ -23,7 +23,7 @@ public class UiWidgetCheckboxFieldTestImpl extends AbstractUiWidgetCheckboxField
    */
   public UiWidgetCheckboxFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

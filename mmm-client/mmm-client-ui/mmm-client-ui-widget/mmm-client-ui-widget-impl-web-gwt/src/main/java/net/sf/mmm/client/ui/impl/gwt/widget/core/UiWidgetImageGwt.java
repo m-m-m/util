@@ -20,10 +20,12 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetImageGwt(UiContext context) {
+  public UiWidgetImageGwt(UiContext context, UiWidgetAdapterGwtImage widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetImageGwt extends AbstractUiWidgetImage<UiWidgetAdapterGwtIm
     @Override
     public UiWidgetImage create(UiContext context) {
 
-      return new UiWidgetImageGwt(context);
+      return new UiWidgetImageGwt(context, null);
     }
 
   }

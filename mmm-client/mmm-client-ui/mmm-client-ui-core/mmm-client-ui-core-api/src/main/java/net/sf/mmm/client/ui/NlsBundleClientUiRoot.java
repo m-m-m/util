@@ -29,6 +29,12 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
   NlsMessage labelCancel();
 
   /**
+   * @return the {@link NlsMessage} for the label "Close".
+   */
+  @NlsBundleMessage("Close")
+  NlsMessage labelClose();
+
+  /**
    * @return the {@link NlsMessage} for the label "Delete".
    */
   @NlsBundleMessage("Delete")
@@ -45,6 +51,12 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
    */
   @NlsBundleMessage("Approve")
   NlsMessage labelApprove();
+
+  /**
+   * @return the {@link NlsMessage} for the label "Apply".
+   */
+  @NlsBundleMessage("Apply")
+  NlsMessage labelApply();
 
   /**
    * @return the {@link NlsMessage} for the label "Confirm".
@@ -273,8 +285,15 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
   NlsMessage labelRichTextFontSize();
 
   /**
+   * @return the {@link NlsMessage} for the title of the popup for the font related
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature}s.
+   */
+  @NlsBundleMessage("Font settings")
+  NlsMessage titleFontSettings();
+
+  /**
    * @return the {@link NlsMessage} for the label of
-   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#TEXT_COLOR}.
+   *         {@link net.sf.mmm.client.ui.api.common.RichTextFeature#FONT_COLOR}.
    */
   @NlsBundleMessage("Text color")
   NlsMessage labelRichTextFontColor();

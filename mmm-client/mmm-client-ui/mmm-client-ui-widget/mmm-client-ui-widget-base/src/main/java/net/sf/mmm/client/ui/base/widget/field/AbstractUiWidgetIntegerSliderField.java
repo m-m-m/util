@@ -21,10 +21,12 @@ public abstract class AbstractUiWidgetIntegerSliderField<ADAPTER extends UiWidge
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetIntegerSliderField(UiContext context) {
+  public AbstractUiWidgetIntegerSliderField(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

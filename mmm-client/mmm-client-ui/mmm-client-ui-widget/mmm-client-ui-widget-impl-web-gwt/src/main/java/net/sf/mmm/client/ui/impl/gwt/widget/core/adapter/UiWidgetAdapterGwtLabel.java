@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 
 import com.google.gwt.user.client.ui.Label;
@@ -13,7 +14,7 @@ import com.google.gwt.user.client.ui.Label;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> implements UiWidgetAdapterLabel {
+public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<LabelWidget> implements UiWidgetAdapterLabel {
 
   /**
    * The constructor.
@@ -27,9 +28,9 @@ public class UiWidgetAdapterGwtLabel extends UiWidgetAdapterGwtWidget<Label> imp
    * {@inheritDoc}
    */
   @Override
-  protected Label createToplevelWidget() {
+  protected LabelWidget createToplevelWidget() {
 
-    return new Label();
+    return new LabelWidget();
   }
 
   /**

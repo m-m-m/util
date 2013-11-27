@@ -25,6 +25,7 @@
       <version>4.0.0-SNAPSHOT</version>
       <classifier>sources</classifier>
     </dependency>
+    <!-- TODO: only in profile with java less than 1.8 -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-backport-java.time</artifactId>
@@ -34,29 +35,23 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>2.6.0-rc1</version>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-dev</artifactId>
-      <version>2.6.0-rc1</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>com.allen-sauer.gwt.log</groupId>
       <artifactId>gwt-log</artifactId>
-      <version>3.1.7</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>3.2.0.RELEASE</version>
     </dependency>
 
     <!-- servlet 3.0 in progress, depends on GWT support -->

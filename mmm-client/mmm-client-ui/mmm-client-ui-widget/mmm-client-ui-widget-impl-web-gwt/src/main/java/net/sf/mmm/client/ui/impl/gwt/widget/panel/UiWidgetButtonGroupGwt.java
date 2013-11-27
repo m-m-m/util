@@ -20,10 +20,12 @@ public class UiWidgetButtonGroupGwt extends AbstractUiWidgetButtonGroup<UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetButtonGroupGwt(UiContext context) {
+  public UiWidgetButtonGroupGwt(UiContext context, UiWidgetAdapterGwtButtonGroup widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetButtonGroupGwt extends AbstractUiWidgetButtonGroup<UiWidget
     @Override
     public UiWidgetButtonGroup create(UiContext context) {
 
-      return new UiWidgetButtonGroupGwt(context);
+      return new UiWidgetButtonGroupGwt(context, null);
     }
   }
 

@@ -21,10 +21,13 @@ public class UiWidgetTableColumn<ROW, CELL> extends AbstractUiWidgetTableColumn<
    * 
    * @param context is the {@link #getContext() context}.
    * @param listTable is the {@link AbstractUiWidgetAbstractListTable list table} this column is connected to.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractListTable<?, ROW> listTable) {
+  public UiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractListTable<?, ROW> listTable,
+      UiWidgetAdapterTableColumn widgetAdapter) {
 
-    super(context, listTable);
+    super(context, listTable, widgetAdapter);
   }
 
   /**

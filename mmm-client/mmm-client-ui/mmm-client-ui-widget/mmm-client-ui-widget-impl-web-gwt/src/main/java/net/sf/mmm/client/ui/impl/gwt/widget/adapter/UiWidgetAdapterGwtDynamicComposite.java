@@ -31,6 +31,16 @@ public abstract class UiWidgetAdapterGwtDynamicComposite<WIDGET extends Widget, 
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public UiWidgetAdapterGwtDynamicComposite(WIDGET toplevelWidget) {
+
+    super(toplevelWidget);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

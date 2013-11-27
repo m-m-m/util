@@ -22,10 +22,12 @@ public class UiWidgetIntegerRangeFieldGwt extends
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetIntegerRangeFieldGwt(UiContext context) {
+  public UiWidgetIntegerRangeFieldGwt(UiContext context, UiWidgetAdapterGwtIntegerSliderField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -56,7 +58,7 @@ public class UiWidgetIntegerRangeFieldGwt extends
     @Override
     public UiWidgetIntegerSliderField create(UiContext context) {
 
-      return new UiWidgetIntegerRangeFieldGwt(context);
+      return new UiWidgetIntegerRangeFieldGwt(context, null);
     }
 
   }

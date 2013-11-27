@@ -20,10 +20,12 @@ public class UiWidgetButtonJavaFx extends AbstractUiWidgetButton<UiWidgetAdapter
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetButtonJavaFx(UiContext context) {
+  public UiWidgetButtonJavaFx(UiContext context, UiWidgetAdapterJavaFxButton widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetButtonJavaFx extends AbstractUiWidgetButton<UiWidgetAdapter
     @Override
     public UiWidgetButton create(UiContext context) {
 
-      return new UiWidgetButtonJavaFx(context);
+      return new UiWidgetButtonJavaFx(context, null);
     }
 
   }

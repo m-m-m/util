@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumTextLength;
 
 import com.google.gwt.dom.client.InputElement;
@@ -17,7 +18,7 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
  * @since 1.0.0
  */
 public abstract class InputBox<VALUE> extends ValueBoxBase<VALUE> implements AttributeWriteDataList,
-    AttributeWriteMaximumTextLength {
+    AttributeWriteMaximumTextLength, AttributeWriteHtmlId {
 
   /**
    * The constructor.
@@ -64,6 +65,24 @@ public abstract class InputBox<VALUE> extends ValueBoxBase<VALUE> implements Att
   public void setMaximumTextLength(int length) {
 
     getInputElement().setMaxLength(length);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getId() {
+
+    return getElement().getId();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setId(String id) {
+
+    getElement().setId(id);
   }
 
 }

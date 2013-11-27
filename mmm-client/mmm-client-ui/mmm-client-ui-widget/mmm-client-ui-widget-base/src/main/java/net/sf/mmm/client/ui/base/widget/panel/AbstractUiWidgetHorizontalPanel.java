@@ -22,11 +22,13 @@ public abstract class AbstractUiWidgetHorizontalPanel<ADAPTER extends UiWidgetAd
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetHorizontalPanel(UiContext context) {
+  public AbstractUiWidgetHorizontalPanel(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
-    setPrimaryStyle(STYLE_PRIMARY);
+    super(context, widgetAdapter);
+    setPrimaryStyle(STYLE_HORIZONTAL_PANEL);
   }
 
 }

@@ -20,10 +20,12 @@ public class UiWidgetLinkGwt extends AbstractUiWidgetLink<UiWidgetAdapterGwtLink
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetLinkGwt(UiContext context) {
+  public UiWidgetLinkGwt(UiContext context, UiWidgetAdapterGwtLink widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetLinkGwt extends AbstractUiWidgetLink<UiWidgetAdapterGwtLink
     @Override
     public UiWidgetLink create(UiContext context) {
 
-      return new UiWidgetLinkGwt(context);
+      return new UiWidgetLinkGwt(context, null);
     }
 
   }

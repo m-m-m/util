@@ -21,10 +21,12 @@ public class UiWidgetMenuItemSeparatorGwt extends
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetMenuItemSeparatorGwt(UiContext context) {
+  public UiWidgetMenuItemSeparatorGwt(UiContext context, UiWidgetAdapterGwtMenuItemSeparator widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -55,7 +57,7 @@ public class UiWidgetMenuItemSeparatorGwt extends
     @Override
     public UiWidgetMenuItemSeparator create(UiContext context) {
 
-      return new UiWidgetMenuItemSeparatorGwt(context);
+      return new UiWidgetMenuItemSeparatorGwt(context, null);
     }
 
   }

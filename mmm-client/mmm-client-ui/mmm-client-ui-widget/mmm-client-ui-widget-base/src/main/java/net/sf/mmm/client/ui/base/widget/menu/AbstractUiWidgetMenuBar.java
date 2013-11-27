@@ -22,10 +22,11 @@ public abstract class AbstractUiWidgetMenuBar<ADAPTER extends UiWidgetAdapterMen
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter TODO
    */
-  public AbstractUiWidgetMenuBar(UiContext context) {
+  public AbstractUiWidgetMenuBar(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**

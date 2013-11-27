@@ -23,7 +23,7 @@ public class UiWidgetLinkTestImpl extends AbstractUiWidgetLink<UiWidgetAdapterTe
    */
   public UiWidgetLinkTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

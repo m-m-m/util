@@ -20,10 +20,12 @@ public class UiWidgetSectionGwt extends AbstractUiWidgetSection<UiWidgetAdapterG
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetSectionGwt(UiContext context) {
+  public UiWidgetSectionGwt(UiContext context, UiWidgetAdapterGwtSection widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +56,7 @@ public class UiWidgetSectionGwt extends AbstractUiWidgetSection<UiWidgetAdapterG
     @Override
     public UiWidgetSection create(UiContext context) {
 
-      return new UiWidgetSectionGwt(context);
+      return new UiWidgetSectionGwt(context, null);
     }
 
   }

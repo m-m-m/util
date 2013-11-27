@@ -23,7 +23,7 @@ public class UiWidgetMenuTestImpl extends AbstractUiWidgetMenu<UiWidgetAdapterTe
    */
   public UiWidgetMenuTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

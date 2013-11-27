@@ -23,7 +23,7 @@ public class UiWidgetCollapsableSectionTestImpl extends AbstractUiWidgetCollapsa
    */
   public UiWidgetCollapsableSectionTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

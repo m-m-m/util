@@ -23,7 +23,7 @@ public class UiWidgetSlotTestImpl extends AbstractUiWidgetSlot<UiWidgetAdapterTe
    */
   public UiWidgetSlotTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

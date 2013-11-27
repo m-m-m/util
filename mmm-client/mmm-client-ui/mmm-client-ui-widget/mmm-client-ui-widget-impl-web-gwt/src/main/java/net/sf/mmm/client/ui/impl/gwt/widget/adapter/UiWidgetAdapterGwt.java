@@ -49,6 +49,16 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public UiWidgetAdapterGwt(WIDGET toplevelWidget) {
+
+    super(toplevelWidget);
+  }
+
+  /**
    * This method is a simplified variant of {@link #getToplevelWidget(UiWidget, Class)}.
    * 
    * @param widget is the {@link UiWidget} to "unwrap".

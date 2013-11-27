@@ -9,7 +9,8 @@ import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetDoubleField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDoubleField;
 
 /**
- * This is the implementation of {@link UiWidgetDoubleField} using GWT based on {@link UiWidgetAdapterGwtDoubleField}.
+ * This is the implementation of {@link UiWidgetDoubleField} using GWT based on
+ * {@link UiWidgetAdapterGwtDoubleField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -20,10 +21,12 @@ public class UiWidgetDoubleFieldGwt extends AbstractUiWidgetDoubleField<UiWidget
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public UiWidgetDoubleFieldGwt(UiContext context) {
+  public UiWidgetDoubleFieldGwt(UiContext context, UiWidgetAdapterGwtDoubleField widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
   }
 
   /**
@@ -54,7 +57,7 @@ public class UiWidgetDoubleFieldGwt extends AbstractUiWidgetDoubleField<UiWidget
     @Override
     public UiWidgetDoubleField create(UiContext context) {
 
-      return new UiWidgetDoubleFieldGwt(context);
+      return new UiWidgetDoubleFieldGwt(context, null);
     }
 
   }

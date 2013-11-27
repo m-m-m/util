@@ -3,18 +3,18 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterButtonPanel;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HorizontalFlowPanel;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ButtonPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
 
 /**
  * This is the implementation of
  * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterButtonPanel} using GWT based on
- * {@link HorizontalFlowPanel}.
+ * {@link ButtonPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtButtonPanel extends UiWidgetAdapterGwtPanel<HorizontalFlowPanel> implements
+public class UiWidgetAdapterGwtButtonPanel extends UiWidgetAdapterGwtPanel<ButtonPanel> implements
     UiWidgetAdapterButtonPanel {
 
   /**
@@ -26,12 +26,22 @@ public class UiWidgetAdapterGwtButtonPanel extends UiWidgetAdapterGwtPanel<Horiz
   }
 
   /**
+   * The constructor.
+   * 
+   * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
+   */
+  public UiWidgetAdapterGwtButtonPanel(ButtonPanel toplevelWidget) {
+
+    super(toplevelWidget);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
-  protected HorizontalFlowPanel createToplevelWidget() {
+  protected ButtonPanel createToplevelWidget() {
 
-    return new HorizontalFlowPanel();
+    return new ButtonPanel();
   }
 
 }

@@ -23,7 +23,7 @@ public class UiWidgetPopupTestImpl extends AbstractUiWidgetPopup<UiWidgetAdapter
    */
   public UiWidgetPopupTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**

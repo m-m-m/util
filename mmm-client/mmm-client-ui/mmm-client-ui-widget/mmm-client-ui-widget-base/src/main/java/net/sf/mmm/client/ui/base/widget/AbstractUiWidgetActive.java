@@ -29,10 +29,12 @@ public abstract class AbstractUiWidgetActive<ADAPTER extends UiWidgetAdapterActi
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
+   * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
+   *        lazy initialization.
    */
-  public AbstractUiWidgetActive(UiContext context) {
+  public AbstractUiWidgetActive(UiContext context, ADAPTER widgetAdapter) {
 
-    super(context);
+    super(context, widgetAdapter);
     this.accessKey = ACCESS_KEY_NONE;
     // ensure EventSender gets created and will be attached to focus events...
     getEventSender();

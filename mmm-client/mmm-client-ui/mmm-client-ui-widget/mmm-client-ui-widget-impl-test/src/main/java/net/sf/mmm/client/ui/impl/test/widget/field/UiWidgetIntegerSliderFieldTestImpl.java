@@ -24,7 +24,7 @@ public class UiWidgetIntegerSliderFieldTestImpl extends
    */
   public UiWidgetIntegerSliderFieldTestImpl(UiContext context) {
 
-    super(context);
+    super(context, null);
   }
 
   /**
